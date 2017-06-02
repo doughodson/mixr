@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_models.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_models.a
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 

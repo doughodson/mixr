@@ -2,7 +2,7 @@
 #ifndef __oe_interop_rprfom_Nib_H__
 #define __oe_interop_rprfom_Nib_H__
 
-#include "openeaagles/interop/hla/Nib.hpp"
+#include "mxrp/interop/hla/Nib.hpp"
 
 namespace oe {
 namespace models { class Player; }

@@ -1,6 +1,6 @@
 
-#include "openeaagles/interop/rprfom/factory.hpp"
-#include "openeaagles/interop/rprfom/NetIO.hpp"
+#include "mxrp/interop/rprfom/factory.hpp"
+#include "mxrp/interop/rprfom/NetIO.hpp"
 
 #include <string>
 

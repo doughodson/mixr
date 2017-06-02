@@ -13,8 +13,8 @@
 #include <linux/joystick.h>
 
 #include "UsbJoystick_linux.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 
 namespace oe {
 namespace iodevice {

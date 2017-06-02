@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_interop.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_interop.a
 
 OBJS =  \
 	NetIO.o \

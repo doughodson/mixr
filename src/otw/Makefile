@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_otw.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_otw.a
 
 OBJS =  \
 	cigi/CigiCl.o \

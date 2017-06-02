@@ -1,15 +1,15 @@
 
-#include "openeaagles/interop/rprfom/NetIO.hpp"
-#include "openeaagles/interop/rprfom/RprFom.hpp"
-#include "openeaagles/interop/rprfom/Nib.hpp"
-#include "openeaagles/interop/hla/Ambassador.hpp"
+#include "mxrp/interop/rprfom/NetIO.hpp"
+#include "mxrp/interop/rprfom/RprFom.hpp"
+#include "mxrp/interop/rprfom/Nib.hpp"
+#include "mxrp/interop/hla/Ambassador.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/base/network/NetHandler.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <iostream>
 #include <cstring>

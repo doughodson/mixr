@@ -69,12 +69,12 @@ $(PROJECTS):
 	$(MAKE) -C $@
 
 install: uninstall
-	-cp -r ../include/openeaagles /usr/local/include/openeaagles
-	-cp -r ../lib/linux /usr/local/lib/openeaagles
+	-cp -r ../include/mxrp /usr/local/include/mxrp
+	-cp -r ../lib /usr/local/lib/mxrp
 
 uninstall:
-	-rm -rf /usr/local/include/openeaagles
-	-rm -rf /usr/local/lib/openeaagles
+	-rm -rf /usr/local/include/mxrp
+	-rm -rf /usr/local/lib/mxrp
 
 clean:
 	-for d in $(PROJECTS); do (cd $$d; $(MAKE) clean ); done

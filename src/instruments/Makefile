@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_instruments.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_instruments.a
 
 OBJS =  \
 	adi/Adi.o \

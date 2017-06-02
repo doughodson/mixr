@@ -1,11 +1,11 @@
 
-#include "openeaagles/interop/hla/Nib.hpp"
-#include "openeaagles/interop/hla/NetIO.hpp"
-#include "openeaagles/interop/hla/Ambassador.hpp"
+#include "mxrp/interop/hla/Nib.hpp"
+#include "mxrp/interop/hla/NetIO.hpp"
+#include "mxrp/interop/hla/Ambassador.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
 
 #include <cstdio>
 

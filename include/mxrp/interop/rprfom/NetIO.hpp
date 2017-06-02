@@ -2,7 +2,7 @@
 #ifndef __oe_interop_rprfom_NetIO_H__
 #define __oe_interop_rprfom_NetIO_H__
 
-#include "openeaagles/interop/hla/NetIO.hpp"
+#include "mxrp/interop/hla/NetIO.hpp"
 
 namespace oe {
 namespace models { class Player; }

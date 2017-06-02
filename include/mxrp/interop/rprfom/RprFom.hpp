@@ -3,7 +3,7 @@
 #define __oe_interop_rprfom_H__
 
 #include <RTI.hh>
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
 namespace oe {
 namespace rprfom {

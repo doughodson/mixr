@@ -1,7 +1,7 @@
 
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_iodevice.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_iodevice.a
 
 OBJS =  \
 	Ai2DiSwitch.o \

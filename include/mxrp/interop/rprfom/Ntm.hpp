@@ -2,8 +2,8 @@
 #ifndef __oe_interop_rprfom_Ntm_H__
 #define __oe_interop_rprfom_Ntm_H__
 
-#include "openeaagles/interop/common/Ntm.hpp"
-#include "openeaagles/interop/rprfom/NetIO.hpp"
+#include "mxrp/interop/common/Ntm.hpp"
+#include "mxrp/interop/rprfom/NetIO.hpp"
 
 namespace oe {
 namespace base { class List; }

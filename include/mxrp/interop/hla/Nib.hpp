@@ -2,8 +2,8 @@
 #ifndef __oe_interop_hla_Nib_H__
 #define __oe_interop_hla_Nib_H__
 
-#include "openeaagles/interop/common/Nib.hpp"
-#include "openeaagles/interop/hla/NetIO.hpp"
+#include "mxrp/interop/common/Nib.hpp"
+#include "mxrp/interop/hla/NetIO.hpp"
 #include <array>
 
 #include <RTI.hh>

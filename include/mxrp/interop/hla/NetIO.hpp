@@ -2,9 +2,9 @@
 #ifndef __oe_interop_hla_NetIO_H__
 #define __oe_interop_hla_NetIO_H__
 
-#include "openeaagles/interop/common/NetIO.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/safe_ptr.hpp"
+#include "mxrp/interop/common/NetIO.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/safe_ptr.hpp"
 #include <array>
 
 #include <RTI.hh>

@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_interop_rprfom.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_interop_rprfom.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM

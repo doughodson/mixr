@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_interop_dis.a
+LIB = $(MXRP_LIB_DIR)/libmxrp_interop_dis.a
 
 OBJS =  \
 	EmissionPduHandler.o \

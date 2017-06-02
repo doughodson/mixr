@@ -4,24 +4,24 @@
 # -----------------------------------------------------------------------------
 
 # ---
-# OpenEaagles root directory
-#   Use the environment variable OE_ROOT to locate OpenEaagles
+# MXRP root directory
+#   Use the environment variable MXRP_ROOT to locate MXRP
 #   -- No default
-#   -- see $(OE_ROOT)/setenv
+#   -- see $(MXRP_ROOT)/setenv
 # ---
 
 # ---
-# OpenEaagles 3rd party root directory
-#   Use the environment variable OE_3RD_PARTY_ROOT to locate the include and
+# MXRP 3rd party root directory
+#   Use the environment variable MXRP_3RD_PARTY_ROOT to locate the include and
 #   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
 #   -- No default
-#   -- see $(OE_ROOT)/setenv
+#   -- see $(MXRP_ROOT)/setenv
 # ---
 
 # ---
 # library directories
 # ---
-OPENEAAGLES_LIB_DIR = $(OE_ROOT)/lib
+MXRP_LIB_DIR = $(MXRP_ROOT)/lib
 
 # ---
 # Uncomment if using FTGL version 2.1.2 or earlier
@@ -46,12 +46,12 @@ JOYSTICKDEVICE = 1
 # ---
 # JSBSim include directory
 # ---
-JSBSIM_INC_DIR = $(OE_3RD_PARTY_ROOT)/include/JSBSim
+JSBSIM_INC_DIR = $(MXRP_3RD_PARTY_ROOT)/include/JSBSim
 
 # ---
 # HLA RTI include directory
 # ---
-HLA_INC_DIR = $(OE_3RD_PARTY_ROOT)/include/RTI13
+HLA_INC_DIR = $(MXRP_3RD_PARTY_ROOT)/include/RTI13
 
 # ---
 # Optimize?
@@ -62,7 +62,7 @@ CPPFLAGS += -g -O2
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
+CPPFLAGS += -I$(MXRP_ROOT)/include -I$(MXRP_3RD_PARTY_ROOT)/include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -pedantic
