@@ -31,7 +31,7 @@ Nib::Nib(const NetIO::IoType t) : ioType(t)
 
 void Nib::initData()
 {
-   base::utStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
+   base::utStrcpy(pname, PNAME_BUF_SIZE, "MXRP");
    side = models::Player::BLUE;
    mode = models::Player::INACTIVE;
 
@@ -627,7 +627,7 @@ void Nib::playerState2Nib()
       const base::String* sname = player->getName();
       if (sname != nullptr) cname = *sname;
       if (cname != nullptr) setPlayerName(cname);
-      else setPlayerName("OPENEAAGLES");
+      else setPlayerName("MXRP");
 
       freeze( player->isFrozen() );
       if (!isMode(models::Player::DELETE_REQUEST)) setMode( player->getMode() );

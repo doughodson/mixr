@@ -141,7 +141,7 @@ class AbstractPlayer;
 //       'month' and 'year' to override the computer system's time and/or
 //       date with your own simulated time and/or date.
 //
-//    4) See "openeaagles/base/util/system.hpp" for additional time related functions.
+//    4) See "mxrp/base/util/system.hpp" for additional time related functions.
 //
 //
 // Event IDs:

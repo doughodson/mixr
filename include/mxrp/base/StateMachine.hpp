@@ -194,7 +194,7 @@ class PairStream;
 //    )
 //
 //
-// Examples of state machines can be found in the OpenEaagles
+// Examples of state machines can be found in the MXRP
 // example application 'testStateMach'.
 //------------------------------------------------------------------------------
 class StateMachine : public Component

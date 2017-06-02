@@ -493,7 +493,7 @@ class Matrixf
             return *this;
         }            
 
-        /** OpenEaagles: Binary matrix subtract. */
+        /** MXRP: Binary matrix subtract. */
         inline Matrixf operator - (const Matrixf& m) const
         {
            return Matrixf(
@@ -504,7 +504,7 @@ class Matrixf
            );
         }
 
-        /** OpenEaagles: Unary matrix subtract. */
+        /** MXRP: Unary matrix subtract. */
         inline Matrixf& operator -= (const Matrixf& m)
         {
            _mat[0][0] -= m._mat[0][0]; _mat[0][1] -= m._mat[0][1]; _mat[0][2] -= m._mat[0][2]; _mat[0][3] -= m._mat[0][3];
@@ -514,7 +514,7 @@ class Matrixf
            return *this;
        }
 
-       /* OpenEaagles: Transpose this matrix */
+       /* MXRP: Transpose this matrix */
        inline Matrixf& transpose()
        {
            { value_type tmp = _mat[1][0]; _mat[1][0] = _mat[0][1];  _mat[0][1] = tmp; }

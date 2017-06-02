@@ -381,7 +381,7 @@ class Matrixd
             return  r;
         }
 
-        /** OpenEaagles: Binary scalar multiply */
+        /** MXRP: Binary scalar multiply */
         inline Matrixd operator * (const value_type s) const
         {
            return Matrixd(
@@ -392,7 +392,7 @@ class Matrixd
            );
         }
 
-        /** OpenEaagles: Unary scalar multiply. */
+        /** MXRP: Unary scalar multiply. */
         inline Matrixd& operator *= (const value_type s)
         {
            _mat[0][0] *= s; _mat[0][1] *= s; _mat[0][2] *= s; _mat[0][3] *= s;
@@ -402,7 +402,7 @@ class Matrixd
            return *this;
         }
 
-        /** OpenEaagles: Binary matrix add. */
+        /** MXRP: Binary matrix add. */
         inline Matrixd operator + (const Matrixd& m) const
         {
            return Matrixd(
@@ -413,7 +413,7 @@ class Matrixd
            );
         }
 
-        /** OpenEaagles: Unary matrix add. */
+        /** MXRP: Unary matrix add. */
         inline Matrixd& operator += (const Matrixd& m)
         {
            _mat[0][0] += m._mat[0][0]; _mat[0][1] += m._mat[0][1]; _mat[0][2] += m._mat[0][2]; _mat[0][3] += m._mat[0][3];
@@ -423,7 +423,7 @@ class Matrixd
            return *this;
         }
 
-        /** OpenEaagles: Binary matrix subtract. */
+        /** MXRP: Binary matrix subtract. */
         inline Matrixd operator - (const Matrixd& m) const
         {
            return Matrixd(
@@ -434,7 +434,7 @@ class Matrixd
            );
         }
 
-        /** OpenEaagles: Unary matrix subtract. */
+        /** MXRP: Unary matrix subtract. */
         inline Matrixd& operator -= (const Matrixd& m)
         {
            _mat[0][0] -= m._mat[0][0]; _mat[0][1] -= m._mat[0][1]; _mat[0][2] -= m._mat[0][2]; _mat[0][3] -= m._mat[0][3];
@@ -444,7 +444,7 @@ class Matrixd
            return *this;
        }
 
-       /* OpenEaagles: Transpose this matrix */
+       /* MXRP: Transpose this matrix */
        inline Matrixd& transpose()
        {
            { value_type tmp = _mat[1][0]; _mat[1][0] = _mat[0][1];  _mat[0][1] = tmp; }

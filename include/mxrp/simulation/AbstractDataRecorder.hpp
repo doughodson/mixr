@@ -17,10 +17,10 @@ class Station;
 //       for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//       oe::recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.hpp")
+//       oe::recorder::DataRecorder (see "mxrp/recorder/DataRecorder.hpp")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
-//       (see openeaagles/simulation/dataRecorderTokens.hpp)
+//       (see mxrp/simulation/dataRecorderTokens.hpp)
 //------------------------------------------------------------------------------
 class AbstractDataRecorder : public AbstractRecorderComponent
 {

@@ -29,7 +29,7 @@ public:
 
 protected:
     // ---
-    // MFD button event functions (see "openeaagles/base/eventTokens.h")
+    // MFD button event functions (see "mxrp/base/eventTokens.hpp")
     //  -- These are virtual and do not get a unique name because
     //     they may need to be overridden by subclass pages.
     //  -- Supports up to a 10x10 MFD

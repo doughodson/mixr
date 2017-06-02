@@ -29,7 +29,7 @@ class Nib;
 //    player types to network entity codes.  These lists are provided as inputs
 //    to the NetIO object using the 'inputEntityTypes' and 'outputEntityTypes'
 //    slots.  For examples of these lists, see  the files 'DisIncomingEntityTypes.epp'
-//    and 'DisOutgoingEntityTypes.epp' in the directory "OpenEaaglesExamples/shared/data".
+//    and 'DisOutgoingEntityTypes.epp' in the directory "mxrp-examples/shared/data".
 //
 //
 // Slots:

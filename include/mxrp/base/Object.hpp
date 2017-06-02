@@ -169,7 +169,7 @@ namespace base {
 //          Static function that returns the factory name of class Foo.
 //
 //    (For examples of factory functions, see base/factory.cpp, graphics/factory.cpp,
-//     simulation/factory.cpp, as well as the various OpenEaagles examples)
+//     simulation/factory.cpp, as well as the various MXRP examples)
 //
 //
 // Slots and the Slot table:

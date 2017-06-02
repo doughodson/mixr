@@ -14,7 +14,7 @@ namespace dis {
 //
 // Description: DIS Network Type Mapper
 //
-//    This class, which is derived from the simulation::Ntm, maps OpenEaagles
+//    This class, which is derived from the simulation::Ntm, maps MXRP
 //    player types to/from DIS entity type codes.
 //
 //

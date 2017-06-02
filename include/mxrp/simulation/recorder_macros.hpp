@@ -11,7 +11,7 @@
 //       BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)
 //          Starts a record data sample section
 //          'pRecorder' is a pointer to the data recorder
-//          'token' is the recorder event token (see openeaagles/simulation/recorderTokens.h)
+//          'token' is the recorder event token (see mxrp/simulation/dataRecorderTokens.hpp)
 //
 //       END_RECORD_DATA_SAMPLE()
 //          Completes the record data sample section
@@ -56,7 +56,7 @@
 //    BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)
 //       Starts a record data sample section
 //       'pRecorder' is a pointer to the data recorder
-//       'token' is the recorder event token (see openeaagles/simulation/recorderTokens.h)
+//       'token' is the recorder event token (see mxrp/simulation/dataRecorderTokens.hpp)
 //
 //    SAMPLE_1_OBJECT(  P0 )
 //    SAMPLE_2_OBJECTS( P0, P1 )
