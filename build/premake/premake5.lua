@@ -14,13 +14,13 @@ end
 --
 -- directory location for 3rd party dependencies
 --
-OE_3RD_PARTY_ROOT = "../../../OpenEaagles3rdParty"
+MXRP_3RD_PARTY_ROOT = "../../../mxrp-3rdparty"
 
 --
 -- set include and library paths
 --
-OEIncPath         = "../../include"
-OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
+MXRP_IncPath         = "../../include"
+MXRP_3rdPartyIncPath = MXRP_3RD_PARTY_ROOT.."/include"
 
 --
 -- directory location for HLA include and library paths
@@ -30,9 +30,9 @@ HLAIncPath = HLA_ROOT.."/include/RTI13"
 HLALibPath = HLA_ROOT.."/lib"
 print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
---print ("  Libraries : "..OELibPath)
+--print ("  Libraries : "..MXRP_LibPath)
 
-workspace "oe"
+workspace "mxrp"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
@@ -47,10 +47,10 @@ workspace "oe"
    language "C++"
 
    -- common include directories (all configurations/all projects)
-   includedirs { OEIncPath, OE3rdPartyIncPath }
+   includedirs { MXRP_IncPath, MXRP_3rdPartyIncPath }
 
    -- target suffix (all configurations/all projects)
-   targetprefix "oe_"
+   targetprefix "mxrp_"
 
    --
    -- Build (solution) configuration options:
@@ -111,7 +111,7 @@ workspace "oe"
          "../../src/graphics/**.cpp",
          "../../src/graphics/**.l"
       }
-      includedirs { OE3rdPartyIncPath.."/freetype2" }
+      includedirs { MXRP_3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
       targetname "graphics"
 
@@ -164,7 +164,7 @@ workspace "oe"
          "../../include/openeaagles/models/**.inl",
          "../../src/models/**.cpp"
       }
-      includedirs { OE3rdPartyIncPath.."/JSBSim" }
+      includedirs { MXRP_3rdPartyIncPath.."/JSBSim" }
       targetname "models"
 
    -- otw library

@@ -1,9 +1,8 @@
 
-OpenEaagles
-===========
+Mixed Reality Simulation Platform
+=================================
 
-The most current version of OpenEaagles can be found at [www.OpenEaagles.org][1].
-
+The most current version of the mixed reality simulation platform can be found at [www.mxrp.org][mxrp].
 
 Directories
 -----------
@@ -32,5 +31,5 @@ To Build
 3. Review the makedefs file to ensure paths and prerequisites are met.
 4. Enter src directory and run "make"
 
-[1]: http://www.OpenEaagles.org
+[mxrp]: http://www.mxrp.org
 

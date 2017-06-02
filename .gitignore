@@ -44,9 +44,6 @@ build/qt/*/*Makefile*
 build/qt/*/*/*Makefile*
 *.pro.user
 
-# executables
-*.exe
-
 # compiled object files
 *.[oa]
 
