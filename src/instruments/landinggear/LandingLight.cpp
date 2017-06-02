@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/landinggear/LandingLight.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/landinggear/LandingLight.hpp"
+#include "mxrp/base/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 

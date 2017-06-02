@@ -1,10 +1,10 @@
 
-#include "openeaagles/iodevice/DiscreteInput.hpp"
+#include "mxrp/iodevice/DiscreteInput.hpp"
 
-#include "openeaagles/base/io/IoData.hpp"
-#include "openeaagles/base/io/IoDevice.hpp"
-#include "openeaagles/base/io/IoHandler.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/io/IoData.hpp"
+#include "mxrp/base/io/IoDevice.hpp"
+#include "mxrp/base/io/IoHandler.hpp"
+#include "mxrp/base/Number.hpp"
 
 #include <iostream>
 

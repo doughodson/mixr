@@ -1,16 +1,16 @@
 
-#include "openeaagles/models/environment/IrAtmosphere1.hpp"
+#include "mxrp/models/environment/IrAtmosphere1.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/IrSensor.hpp"
-#include "openeaagles/models/system/Gimbal.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/IrSensor.hpp"
+#include "mxrp/models/system/Gimbal.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/functors/Tables.hpp"
+#include "mxrp/base/Number.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cmath>
 

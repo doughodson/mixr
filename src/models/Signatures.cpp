@@ -1,18 +1,18 @@
 
-#include "openeaagles/models/Signatures.hpp"
+#include "mxrp/models/Signatures.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/base/Decibel.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/Decibel.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 
-#include "openeaagles/base/units/Areas.hpp"
+#include "mxrp/base/units/Areas.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cmath>
 

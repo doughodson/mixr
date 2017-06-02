@@ -6,7 +6,7 @@
    -- Common interoperability code
    project "interop"
       files {
-         "../../include/openeaagles/interop/common/**.h*",
+         "../../include/mxrp/interop/common/**.h*",
          "../../src/interop/common/**.cpp"
       }
       targetname "interop"
@@ -14,7 +14,7 @@
    -- IEEE DIS interface library
    project "interop_dis"
       files {
-         "../../include/openeaagles/interop/dis/**.h*",
+         "../../include/mxrp/interop/dis/**.h*",
          "../../src/interop/dis/**.cpp"
       }
       targetname "interop_dis"
@@ -23,7 +23,7 @@
    -- IEEE HLA interface library (common code)
    project "interop_hla"
       files {
-         "../../include/openeaagles/interop/hla/**.h*",
+         "../../include/mxrp/interop/hla/**.h*",
          "../../src/interop/hla/**.cpp"
       }
       includedirs { HLAIncPath }
@@ -33,7 +33,7 @@
    -- IEEE HLA interface library for RPR FOM
    project "interop_rprfom"
       files {
-         "../../include/openeaagles/interop/rprfom/**.h*",
+         "../../include/mxrp/interop/rprfom/**.h*",
          "../../src/interop/rprfom/**.cpp"
       }
       includedirs { HLAIncPath }

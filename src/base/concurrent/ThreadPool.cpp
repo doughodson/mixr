@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/concurrent/ThreadPool.hpp"
+#include "mxrp/base/concurrent/ThreadPool.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/concurrent/ThreadPoolManager.hpp"
-#include "openeaagles/base/concurrent/ThreadPoolThread.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/concurrent/ThreadPoolManager.hpp"
+#include "mxrp/base/concurrent/ThreadPoolThread.hpp"
 
 namespace oe {
 namespace base {

@@ -1,12 +1,12 @@
 
-#include "openeaagles/otw/OtwModel.hpp"
+#include "mxrp/otw/OtwModel.hpp"
 
-#include "openeaagles/otw/Otm.hpp"
+#include "mxrp/otw/Otm.hpp"
 
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/simulation/AbstractNib.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/simulation/AbstractNib.hpp"
 
 namespace oe {
 namespace otw {

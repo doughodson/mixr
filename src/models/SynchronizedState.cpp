@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/SynchronizedState.hpp"
+#include "mxrp/models/SynchronizedState.hpp"
 #include <iostream>
 
 namespace oe {

@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/maps/BearingPointer.hpp"
+#include "mxrp/instruments/maps/BearingPointer.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace instruments {

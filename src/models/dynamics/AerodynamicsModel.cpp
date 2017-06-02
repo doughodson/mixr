@@ -1,7 +1,7 @@
 
-#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
+#include "mxrp/models/dynamics/AerodynamicsModel.hpp"
 
-#include "openeaagles/base/units/angle_utils.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
 
 namespace oe {
 namespace models {

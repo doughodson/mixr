@@ -1,10 +1,10 @@
 
-#include "openeaagles/simulation/factory.hpp"
+#include "mxrp/simulation/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/Simulation.hpp"
+#include "mxrp/simulation/Station.hpp"
 
 #include <string>
 

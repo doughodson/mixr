@@ -1,5 +1,5 @@
 
-#include "openeaagles/linearsystem/DiffEquation.hpp"
+#include "mxrp/linearsystem/DiffEquation.hpp"
 #include <iostream>
 
 namespace oe {

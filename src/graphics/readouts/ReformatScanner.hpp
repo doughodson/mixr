@@ -5,11 +5,11 @@
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
 #define yyFlexLexer rfFlexLexer
-#include "openeaagles/base/util/FlexLexer.h"
+#include "mxrp/base/util/FlexLexer.h"
 #endif
 
-#include "openeaagles/graphics/readouts/TimeReadout.hpp"
-#include "openeaagles/graphics/readouts/DirectionReadout.hpp"
+#include "mxrp/graphics/readouts/TimeReadout.hpp"
+#include "mxrp/graphics/readouts/DirectionReadout.hpp"
 #include <sstream>
 
 namespace oe {

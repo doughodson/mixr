@@ -22,7 +22,7 @@
 //    static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/network/NetHandler.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
 
 #include <iostream>
 

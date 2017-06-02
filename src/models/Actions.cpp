@@ -1,20 +1,20 @@
 
-#include "openeaagles/models/Actions.hpp"
+#include "mxrp/models/Actions.hpp"
 
-#include "openeaagles/models/player/Bomb.hpp"
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/system/Sar.hpp"
-#include "openeaagles/models/system/StoresMgr.hpp"
-#include "openeaagles/models/navigation/Steerpoint.hpp"
+#include "mxrp/models/player/Bomb.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/system/Sar.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
+#include "mxrp/models/navigation/Steerpoint.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/LatLon.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 namespace oe {
 namespace models {

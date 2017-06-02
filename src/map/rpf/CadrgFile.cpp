@@ -1,9 +1,9 @@
 
-#include "openeaagles/map/rpf/CadrgFile.hpp"
-#include "openeaagles/map/rpf/CadrgTocEntry.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/map/rpf/map_utils.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/map/rpf/CadrgFile.hpp"
+#include "mxrp/map/rpf/CadrgTocEntry.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/map/rpf/map_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstring>
 

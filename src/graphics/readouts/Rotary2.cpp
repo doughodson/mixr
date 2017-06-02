@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/Rotary2.hpp"
+#include "mxrp/graphics/readouts/Rotary2.hpp"
 
-#include "openeaagles/base/Integer.hpp"
+#include "mxrp/base/Integer.hpp"
 
 namespace oe {
 namespace graphics {

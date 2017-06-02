@@ -1,14 +1,14 @@
 
-#include "openeaagles/models/system/ScanGimbal.hpp"
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/system/ScanGimbal.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 #include <cmath>
 

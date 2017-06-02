@@ -1,18 +1,18 @@
 
-#include "openeaagles/models/Tdb.hpp"
+#include "mxrp/models/Tdb.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Gimbal.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Gimbal.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/terrain/Terrain.hpp"
+#include "mxrp/terrain/Terrain.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/osg_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
+#include "mxrp/base/util/osg_utils.hpp"
 
 #include <cmath>
 

@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
 #include <cstdlib>
 

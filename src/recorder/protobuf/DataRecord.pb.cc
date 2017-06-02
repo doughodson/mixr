@@ -2,7 +2,7 @@
 // source: openeaagles/recorder/protobuf/DataRecord.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
 
 #include <algorithm>
 

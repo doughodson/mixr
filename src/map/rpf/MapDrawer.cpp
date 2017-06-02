@@ -1,13 +1,13 @@
 
-#include "openeaagles/map/rpf/MapDrawer.hpp"
-#include "openeaagles/map/rpf/CadrgMap.hpp"
-#include "openeaagles/map/rpf/TexturePager.hpp"
-#include "openeaagles/map/rpf/CadrgTocEntry.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/graphics/Texture.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/map/rpf/MapDrawer.hpp"
+#include "mxrp/map/rpf/CadrgMap.hpp"
+#include "mxrp/map/rpf/TexturePager.hpp"
+#include "mxrp/map/rpf/CadrgTocEntry.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/graphics/Texture.hpp"
+#include "mxrp/base/Number.hpp"
 
 #include <cmath>
 

@@ -1,6 +1,6 @@
 
-#include "openeaagles/models/player/Agm.hpp"
-#include "openeaagles/models/Track.hpp"
+#include "mxrp/models/player/Agm.hpp"
+#include "mxrp/models/Track.hpp"
 
 namespace oe {
 namespace models {

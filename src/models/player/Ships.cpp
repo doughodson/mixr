@@ -1,9 +1,9 @@
 
-#include "openeaagles/models/player/Ships.hpp"
+#include "mxrp/models/player/Ships.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/osg/Matrixd"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/osg/Matrixd"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace models {

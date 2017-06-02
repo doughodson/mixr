@@ -1,5 +1,5 @@
 
-#include "openeaagles/instruments/gauges/GaugeSlider.hpp"
+#include "mxrp/instruments/gauges/GaugeSlider.hpp"
 #include <iostream>
 
 namespace oe {

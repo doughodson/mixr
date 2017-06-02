@@ -1,12 +1,12 @@
 
-#include "openeaagles/iodevice/SignalGen.hpp"
+#include "mxrp/iodevice/SignalGen.hpp"
 
-#include "openeaagles/base/io/IoData.hpp"
-#include "openeaagles/base/io/IoDevice.hpp"
+#include "mxrp/base/io/IoData.hpp"
+#include "mxrp/base/io/IoDevice.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
 
 #include <cmath>
 

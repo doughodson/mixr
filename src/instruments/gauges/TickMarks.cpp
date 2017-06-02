@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/gauges/TickMarks.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/gauges/TickMarks.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

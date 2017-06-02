@@ -1,22 +1,22 @@
 
-#include "openeaagles/otw/pc/OtwPC.hpp"
+#include "mxrp/otw/pc/OtwPC.hpp"
 
-#include "openeaagles/otw/OtwModel.hpp"
+#include "mxrp/otw/OtwModel.hpp"
 
 #include "dsFlightModelData.hpp"
 
-#include "openeaagles/models/player/AirVehicle.hpp"
-#include "openeaagles/models/player/GroundVehicle.hpp"
-#include "openeaagles/models/player/Missile.hpp"
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
+#include "mxrp/models/player/GroundVehicle.hpp"
+#include "mxrp/models/player/Missile.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/SlotTable.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/osg/Vec3d"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/SlotTable.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/osg/Vec3d"
 
 namespace oe {
 namespace otw {

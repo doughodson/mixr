@@ -1,11 +1,11 @@
 
-#include "openeaagles/interop/dis/factory.hpp"
+#include "mxrp/interop/dis/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/interop/dis/NetIO.hpp"
-#include "openeaagles/interop/dis/Ntm.hpp"
-#include "openeaagles/interop/dis/EmissionPduHandler.hpp"
+#include "mxrp/interop/dis/NetIO.hpp"
+#include "mxrp/interop/dis/Ntm.hpp"
+#include "mxrp/interop/dis/EmissionPduHandler.hpp"
 
 #include <string>
 

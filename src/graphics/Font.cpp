@@ -1,9 +1,9 @@
 
-#include "openeaagles/graphics/Font.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/graphics/Font.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstring>
 

@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/concurrent/SyncTask.hpp"
+#include "mxrp/base/concurrent/SyncTask.hpp"
 
-#include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/base/Component.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 
 /* ----------------------------------------------------------------- */
 /* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */

@@ -3,18 +3,18 @@
 // Description: Portions of class defined to support weapon fire PDUs
 //------------------------------------------------------------------------------
 
-#include "openeaagles/interop/dis/NetIO.hpp"
-#include "openeaagles/interop/dis/Nib.hpp"
-#include "openeaagles/interop/dis/pdu.hpp"
+#include "mxrp/interop/dis/NetIO.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/player/AirVehicle.hpp"
-#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 

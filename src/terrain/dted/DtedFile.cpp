@@ -33,8 +33,8 @@
 //  -1.  For positive numbers, only the bytes are switched.
 //==============================================================================
 
-#include "openeaagles/terrain/dted/DtedFile.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/terrain/dted/DtedFile.hpp"
+#include "mxrp/base/Number.hpp"
 #include <fstream>
 #include <cstdio>
 #include <cstring>

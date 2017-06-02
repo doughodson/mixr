@@ -1,15 +1,15 @@
 
-#include "openeaagles/models/dynamics/LaeroModel.hpp"
+#include "mxrp/models/dynamics/LaeroModel.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Number.hpp"
 
-#include "openeaagles/base/units/time_utils.hpp"
+#include "mxrp/base/units/time_utils.hpp"
 
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Quat"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Quat"
 
 #include <iostream>
 #include <iomanip>

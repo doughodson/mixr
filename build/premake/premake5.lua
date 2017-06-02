@@ -88,10 +88,10 @@ workspace "mxrp"
    -- base library
    project "base"
       files {
-         "../../include/openeaagles/base/**.h*",
-         "../../include/openeaagles/base/**.inl",
-         "../../include/openeaagles/base/**.epp",
-         "../../include/openeaagles/base/osg/*",
+         "../../include/mxrp/base/**.h*",
+         "../../include/mxrp/base/**.inl",
+         "../../include/mxrp/base/**.epp",
+         "../../include/mxrp/base/osg/*",
          "../../src/base/**.cpp",
          "../../src/base/**.y",
          "../../src/base/**.l"
@@ -107,7 +107,7 @@ workspace "mxrp"
    -- OpenGL-based graphics library
    project "graphics"
       files {
-         "../../include/openeaagles/graphics/**.h*",
+         "../../include/mxrp/graphics/**.h*",
          "../../src/graphics/**.cpp",
          "../../src/graphics/**.l"
       }
@@ -118,7 +118,7 @@ workspace "mxrp"
    -- OpenGL GLUT interface library
    project "gui_glut"
       files {
-         "../../include/openeaagles/gui/glut/**.h*",
+         "../../include/mxrp/gui/glut/**.h*",
          "../../src/gui/glut/**.cpp"
       }
       targetname "gui_glut"
@@ -126,7 +126,7 @@ workspace "mxrp"
    -- DAFIF airport loader library
    project "dafif"
       files {
-         "../../include/openeaagles/dafif/**.h*",
+         "../../include/mxrp/dafif/**.h*",
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
@@ -134,8 +134,8 @@ workspace "mxrp"
    -- graphical instruments library
    project "instruments"
       files {
-         "../../include/openeaagles/instruments/**.h*",
-         "../../include/openeaagles/instruments/**.epp",
+         "../../include/mxrp/instruments/**.h*",
+         "../../include/mxrp/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
       targetname "instruments"
@@ -143,7 +143,7 @@ workspace "mxrp"
    -- i/o device library
    project "iodevice"
       files {
-         "../../include/openeaagles/iodevice/**.h*",
+         "../../include/mxrp/iodevice/**.h*",
          "../../src/iodevice/**.*"
       }
       excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
@@ -152,7 +152,7 @@ workspace "mxrp"
    -- linear systems library
    project "linearsystem"
       files {
-         "../../include/openeaagles/linearsystem/**.h*",
+         "../../include/mxrp/linearsystem/**.h*",
          "../../src/linearsystem/**.cpp"
       }
       targetname "linearsystem"
@@ -160,8 +160,8 @@ workspace "mxrp"
    -- models library
    project "models"
       files {
-         "../../include/openeaagles/models/**.h*",
-         "../../include/openeaagles/models/**.inl",
+         "../../include/mxrp/models/**.h*",
+         "../../include/mxrp/models/**.inl",
          "../../src/models/**.cpp"
       }
       includedirs { MXRP_3rdPartyIncPath.."/JSBSim" }
@@ -170,7 +170,7 @@ workspace "mxrp"
    -- otw library
    project "otw"
       files {
-         "../../include/openeaagles/otw/**.h*",
+         "../../include/mxrp/otw/**.h*",
          "../../src/otw/**.h*",
          "../../src/otw/**.cpp"
       }
@@ -178,9 +178,9 @@ workspace "mxrp"
 
    project "recorder"
       files {
-         "../../include/openeaagles/recorder/**.h*",
-         "../../include/openeaagles/recorder/*.inl",
-         "../../include/openeaagles/recorder/**.proto",
+         "../../include/mxrp/recorder/**.h*",
+         "../../include/mxrp/recorder/*.inl",
+         "../../include/mxrp/recorder/**.proto",
          "../../src/recorder/**.cpp",
          "../../src/recorder/**.cc"
       }
@@ -190,7 +190,7 @@ workspace "mxrp"
    -- raster product format map library
    project "map_rpf"
       files {
-         "../../include/openeaagles/map/rpf/**.h*",
+         "../../include/mxrp/map/rpf/**.h*",
          "../../src/map/rpf/**.cpp"
       }
       targetname "map_rpf"
@@ -198,8 +198,8 @@ workspace "mxrp"
    -- simulation library
    project "simulation"
       files {
-         "../../include/openeaagles/simulation/**.h*",
-         "../../include/openeaagles/simulation/**.inl",
+         "../../include/mxrp/simulation/**.h*",
+         "../../include/mxrp/simulation/**.inl",
          "../../src/simulation/**.cpp"
       }
       targetname "simulation"
@@ -207,7 +207,7 @@ workspace "mxrp"
    -- terrain library
    project "terrain"
       files {
-         "../../include/openeaagles/terrain/**.h*",
+         "../../include/mxrp/terrain/**.h*",
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Time, Seconds, MilliSeconds, Minutes, Hours, Days
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/units/Times.hpp"
 #include <iostream>
 
 namespace oe {

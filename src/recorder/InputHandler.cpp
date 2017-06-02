@@ -1,7 +1,7 @@
 
-#include "openeaagles/recorder/InputHandler.hpp"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/InputHandler.hpp"
+#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
 
 namespace oe {
 namespace recorder {

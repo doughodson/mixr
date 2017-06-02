@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/dials/GMeterDial.hpp"
+#include "mxrp/instruments/dials/GMeterDial.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace instruments {

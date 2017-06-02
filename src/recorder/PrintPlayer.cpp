@@ -1,10 +1,10 @@
 
-#include "openeaagles/recorder/PrintPlayer.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
+#include "mxrp/recorder/PrintPlayer.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/DataRecordHandle.hpp"
 
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/units/Times.hpp"
+#include "mxrp/base/String.hpp"
 
 #include <iomanip>
 

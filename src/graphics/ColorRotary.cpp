@@ -1,11 +1,11 @@
 
-#include "openeaagles/graphics/ColorRotary.hpp"
+#include "mxrp/graphics/ColorRotary.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/osg/Vec4d"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/osg/Vec4d"
 
 namespace oe {
 namespace graphics {

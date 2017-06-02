@@ -1,8 +1,8 @@
 
-#include "openeaagles/models/system/ExternalStore.hpp"
+#include "mxrp/models/system/ExternalStore.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/String.hpp"
 
 namespace oe {
 namespace models {

@@ -1,10 +1,10 @@
 
-#include "openeaagles/gui/glut/factory.hpp"
+#include "mxrp/gui/glut/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/gui/glut/GlutDisplay.hpp"
-#include "openeaagles/gui/glut/Shapes3D.hpp"
+#include "mxrp/gui/glut/GlutDisplay.hpp"
+#include "mxrp/gui/glut/Shapes3D.hpp"
 
 #include <string>
 

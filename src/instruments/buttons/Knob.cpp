@@ -1,11 +1,11 @@
 
-#include "openeaagles/instruments/buttons/Knob.hpp"
-#include "openeaagles/graphics/Display.hpp"
+#include "mxrp/instruments/buttons/Knob.hpp"
+#include "mxrp/graphics/Display.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 
-#include "openeaagles/base/units/angle_utils.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 
 #include <GL/glu.h>
 #include <cmath>

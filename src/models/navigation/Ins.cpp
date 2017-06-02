@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/navigation/Ins.hpp"
+#include "mxrp/models/navigation/Ins.hpp"
 #include <iostream>
 
 namespace oe {

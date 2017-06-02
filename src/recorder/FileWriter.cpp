@@ -1,10 +1,10 @@
 
-#include "openeaagles/recorder/FileWriter.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/recorder/FileWriter.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/util/str_utils.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 
 #include <fstream>
 #include <cstring>

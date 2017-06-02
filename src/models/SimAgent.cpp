@@ -1,13 +1,13 @@
 
-#include "openeaagles/models/SimAgent.hpp"
+#include "mxrp/models/SimAgent.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/Station.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/String.hpp"
 
 namespace oe {
 namespace models {

@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/LatitudeReadout.hpp"
+#include "mxrp/graphics/readouts/LatitudeReadout.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 namespace oe {
 namespace graphics {

@@ -1,10 +1,10 @@
 
-#include "openeaagles/otw/Otm.hpp"
+#include "mxrp/otw/Otm.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Number.hpp"
 
 namespace oe {
 namespace otw {

@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/util/osg_utils.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
+#include "mxrp/base/util/osg_utils.hpp"
+#include "mxrp/base/util/math_utils.hpp"
 
 #include <cmath>
 

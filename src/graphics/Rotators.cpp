@@ -1,8 +1,8 @@
 
-#include "openeaagles/graphics/Rotators.hpp"
+#include "mxrp/graphics/Rotators.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace graphics {

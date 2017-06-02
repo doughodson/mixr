@@ -1,12 +1,12 @@
 
-#include "openeaagles/models/system/System.hpp"
+#include "mxrp/models/system/System.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace models {

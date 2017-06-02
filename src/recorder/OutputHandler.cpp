@@ -1,10 +1,10 @@
 
-#include "openeaagles/recorder/OutputHandler.hpp"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/OutputHandler.hpp"
+#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace recorder {

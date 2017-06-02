@@ -1,9 +1,9 @@
 
-#include "openeaagles/recorder/NetOutput.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/recorder/NetOutput.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

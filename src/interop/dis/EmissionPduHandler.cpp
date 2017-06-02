@@ -2,23 +2,23 @@
 // Electromagnetic Emission PDU (Portions of NetIO and Nib)
 //------------------------------------------------------------------------------
 
-#include "openeaagles/interop/dis/EmissionPduHandler.hpp"
-#include "openeaagles/interop/dis/Nib.hpp"
-#include "openeaagles/interop/dis/pdu.hpp"
+#include "mxrp/interop/dis/EmissionPduHandler.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/system/Jammer.hpp"
-#include "openeaagles/models/system/Radar.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/Track.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/system/Jammer.hpp"
+#include "mxrp/models/system/Radar.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/functors/Functions.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/Decibel.hpp"
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/functors/Functions.hpp"
+#include "mxrp/base/functors/Tables.hpp"
+#include "mxrp/base/Decibel.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/Number.hpp"
 
 #include <cmath>
 #include <cstring>

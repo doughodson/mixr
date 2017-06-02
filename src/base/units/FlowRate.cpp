@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/units/FlowRate.hpp"
-#include "openeaagles/base/SlotTable.hpp"
+#include "mxrp/base/units/FlowRate.hpp"
+#include "mxrp/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

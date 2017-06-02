@@ -1,28 +1,28 @@
 
-#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/models/dynamics/DynamicsModel.hpp"
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/Designator.hpp"
-#include "openeaagles/models/system/Guns.hpp"
-#include "openeaagles/models/system/Stores.hpp"
-#include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/dynamics/DynamicsModel.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/Designator.hpp"
+#include "mxrp/models/system/Guns.hpp"
+#include "mxrp/models/system/Stores.hpp"
+#include "mxrp/models/Track.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "mxrp/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/osg/Matrixd"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/osg/Matrixd"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
+#include "mxrp/base/units/Times.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
 namespace oe {
 namespace models {

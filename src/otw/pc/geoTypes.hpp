@@ -18,7 +18,7 @@
 #ifndef __oe_otw_geoTypes_H__
 #define __oe_otw_geoTypes_H__
 
-#include "openeaagles/base/util/platform_api.hpp"
+#include "mxrp/base/util/platform_api.hpp"
 
 #include "math.h"
 #include <memory.h>

@@ -1,24 +1,24 @@
 
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/Station.hpp"
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "mxrp/simulation/AbstractPlayer.hpp"
 
-#include "openeaagles/simulation/AbstractDataRecorder.hpp"
-#include "openeaagles/simulation/AbstractNetIO.hpp"
-#include "openeaagles/simulation/AbstractOtw.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
+#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mxrp/simulation/AbstractNetIO.hpp"
+#include "mxrp/simulation/AbstractOtw.hpp"
+#include "mxrp/simulation/Simulation.hpp"
 
-#include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/io/IoHandler.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Timers.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/Color.hpp"
+#include "mxrp/base/io/IoHandler.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Timers.hpp"
+#include "mxrp/base/units/Times.hpp"
 
-#include "openeaagles/simulation/StationTcThread.hpp"
-#include "openeaagles/simulation/StationBgThread.hpp"
-#include "openeaagles/simulation/StationNetThread.hpp"
+#include "mxrp/simulation/StationTcThread.hpp"
+#include "mxrp/simulation/StationBgThread.hpp"
+#include "mxrp/simulation/StationNetThread.hpp"
 
 #include <ctime>
 

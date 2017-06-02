@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/Designator.hpp"
+#include "mxrp/models/Designator.hpp"
 #include <iostream>
 
 namespace oe {

@@ -1,6 +1,6 @@
 
-#include "openeaagles/linearsystem/Sz2.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/linearsystem/Sz2.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

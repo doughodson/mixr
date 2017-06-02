@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/concurrent/SingleTask.hpp"
+#include "mxrp/base/concurrent/SingleTask.hpp"
 
-#include "openeaagles/base/Component.hpp"
+#include "mxrp/base/Component.hpp"
 #include <iostream>
 
 namespace oe {

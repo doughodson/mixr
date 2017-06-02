@@ -10,16 +10,16 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/Boolean.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/Object.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/Boolean.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 #include "EdlScanner.hpp"
 #include "EdlParser.hpp"
 

@@ -4,19 +4,19 @@
 //        the left or right wing.
 //------------------------------------------------------------------------------
 
-#include "openeaagles/models/system/StabilizingGimbal.hpp"
+#include "mxrp/models/system/StabilizingGimbal.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Decibel.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Powers.hpp"
-#include "openeaagles/base/osg/Vec3d"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/functors/Tables.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Decibel.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Powers.hpp"
+#include "mxrp/base/osg/Vec3d"
 
 namespace oe {
 namespace models {

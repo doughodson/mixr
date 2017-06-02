@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/maps/CompassRose.hpp"
+#include "mxrp/instruments/maps/CompassRose.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

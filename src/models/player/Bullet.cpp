@@ -1,9 +1,9 @@
 
-#include "openeaagles/models/player/Bullet.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/Bullet.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 #include <cmath>
 

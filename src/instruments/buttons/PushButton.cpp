@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/buttons/PushButton.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/buttons/PushButton.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

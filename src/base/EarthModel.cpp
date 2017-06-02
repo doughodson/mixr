@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/EarthModel.hpp"
+#include "mxrp/base/EarthModel.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cstring>
 

@@ -1,19 +1,19 @@
 
-#include "openeaagles/interop/common/Nib.hpp"
-#include "openeaagles/interop/common/Ntm.hpp"
+#include "mxrp/interop/common/Nib.hpp"
+#include "mxrp/interop/common/Ntm.hpp"
 
-#include "openeaagles/models/player/AirVehicle.hpp"
-#include "openeaagles/models/player/GroundVehicle.hpp"
-#include "openeaagles/models/player/Missile.hpp"
-#include "openeaagles/models/player/SamVehicles.hpp"
-#include "openeaagles/models/system/StoresMgr.hpp"
-#include "openeaagles/models/SynchronizedState.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
+#include "mxrp/models/player/GroundVehicle.hpp"
+#include "mxrp/models/player/Missile.hpp"
+#include "mxrp/models/player/SamVehicles.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
+#include "mxrp/models/SynchronizedState.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cmath>
 

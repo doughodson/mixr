@@ -1,10 +1,10 @@
 
-#include "openeaagles/models/sensor/Stt.hpp"
+#include "mxrp/models/sensor/Stt.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/Track.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/Track.hpp"
 
 namespace oe {
 namespace models {

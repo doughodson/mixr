@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/dials/DialPointer.hpp"
+#include "mxrp/instruments/dials/DialPointer.hpp"
 
-#include "openeaagles/base/units/angle_utils.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
 
 namespace oe {
 namespace instruments {

@@ -11,9 +11,9 @@
  * OpenSceneGraph Public License for more details.
 */
 //#include <stdio.h>
-#include "openeaagles/base/osg/Quat"
-#include "openeaagles/base/osg/Matrixd"
-#include "openeaagles/base/osg/Matrixf"
+#include "mxrp/base/osg/Quat"
+#include "mxrp/base/osg/Matrixd"
+#include "mxrp/base/osg/Matrixf"
 
 #include <math.h>
 

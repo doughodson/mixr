@@ -1,13 +1,13 @@
 
-#include "openeaagles/terrain/QuadMap.hpp"
+#include "mxrp/terrain/QuadMap.hpp"
 
-#include "openeaagles/terrain/Terrain.hpp"
+#include "mxrp/terrain/Terrain.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 namespace oe {
 namespace terrain {

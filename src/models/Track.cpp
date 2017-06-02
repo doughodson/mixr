@@ -1,13 +1,13 @@
 
-#include "openeaagles/models/Track.hpp"
+#include "mxrp/models/Track.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/Emission.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
-#include "openeaagles/models/SensorMsg.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/Emission.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
+#include "mxrp/models/SensorMsg.hpp"
 
-#include "openeaagles/base/units/angle_utils.hpp"
-#include "openeaagles/base/units/distance_utils.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
+#include "mxrp/base/units/distance_utils.hpp"
 
 #include <cmath>
 

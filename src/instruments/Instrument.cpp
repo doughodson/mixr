@@ -1,10 +1,10 @@
 
-#include "openeaagles/instruments/Instrument.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/graphics/ColorRotary.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/instruments/Instrument.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/graphics/ColorRotary.hpp"
+#include "mxrp/base/functors/Tables.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
 namespace oe {
 namespace instruments {

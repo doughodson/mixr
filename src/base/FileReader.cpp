@@ -2,13 +2,13 @@
 #include <fstream>
 #include <cstring>
 
-#include "openeaagles/base/FileReader.hpp"
+#include "mxrp/base/FileReader.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 namespace oe {
 namespace base {

@@ -1,14 +1,14 @@
 
-#include "openeaagles/base/Hsv.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Vec4d"
+#include "mxrp/base/Hsv.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/util/math_utils.hpp"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Vec4d"
 
 #include <cmath>
 
-#include "openeaagles/base/util/platform_api.hpp"
+#include "mxrp/base/util/platform_api.hpp"
 
 namespace oe {
 namespace base {

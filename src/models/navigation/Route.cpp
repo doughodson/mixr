@@ -1,20 +1,20 @@
 
-#include "openeaagles/models/navigation/Route.hpp"
+#include "mxrp/models/navigation/Route.hpp"
 
-#include "openeaagles/models/navigation/Steerpoint.hpp"
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/navigation/Navigation.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/Actions.hpp"
+#include "mxrp/models/navigation/Steerpoint.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/navigation/Navigation.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/Actions.hpp"
 
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/LatLon.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cstdio>
 

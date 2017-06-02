@@ -1,5 +1,5 @@
 
-#include "openeaagles/graphics/Clip3D.hpp"
+#include "mxrp/graphics/Clip3D.hpp"
 
 #include <limits>
 #include <iostream>

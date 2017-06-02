@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/dials/DialTickMarks.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/dials/DialTickMarks.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

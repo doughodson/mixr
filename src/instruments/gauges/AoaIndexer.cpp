@@ -1,7 +1,7 @@
-#include "openeaagles/instruments/gauges/AoaIndexer.hpp"
+#include "mxrp/instruments/gauges/AoaIndexer.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/units/Angles.hpp"
 #include <GL/glu.h>
 
 namespace oe {

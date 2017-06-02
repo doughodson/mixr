@@ -1,25 +1,25 @@
 //------------------------------------------------------------------------------
 // Classes: RfSensor, SensorMgr
 //------------------------------------------------------------------------------
-#include "openeaagles/models/system/RfSensor.hpp"
+#include "mxrp/models/system/RfSensor.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
-#include "openeaagles/base/units/Powers.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
+#include "mxrp/base/units/Powers.hpp"
+#include "mxrp/base/units/Times.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 namespace oe {
 namespace models {

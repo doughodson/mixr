@@ -1,13 +1,13 @@
 
-#include "openeaagles/models/system/OnboardComputer.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/Actions.hpp"
-#include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/Actions.hpp"
+#include "mxrp/models/Track.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
 namespace oe {
 namespace models {

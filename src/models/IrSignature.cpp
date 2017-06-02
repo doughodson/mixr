@@ -1,16 +1,16 @@
 
-#include "openeaagles/models/IrSignature.hpp"
+#include "mxrp/models/IrSignature.hpp"
 
-#include "openeaagles/models/environment/IrAtmosphere.hpp"
+#include "mxrp/models/environment/IrAtmosphere.hpp"
 
-#include "openeaagles/models/IrShapes.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
-#include "openeaagles/models/system/IrSensor.hpp"
+#include "mxrp/models/IrShapes.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
+#include "mxrp/models/system/IrSensor.hpp"
 
-#include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/Areas.hpp"
+#include "mxrp/base/functors/Tables.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/units/Areas.hpp"
 
 namespace oe {
 namespace models {

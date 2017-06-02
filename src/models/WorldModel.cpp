@@ -1,17 +1,17 @@
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/EarthModel.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/LatLon.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
 // environment models
-#include "openeaagles/models/environment/AbstractAtmosphere.hpp"
-#include "openeaagles/terrain/Terrain.hpp"
+#include "mxrp/models/environment/AbstractAtmosphere.hpp"
+#include "mxrp/terrain/Terrain.hpp"
 
 #include <cmath>
 

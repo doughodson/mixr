@@ -1,8 +1,8 @@
 
-#include "openeaagles/graphics/Texture.hpp"
+#include "mxrp/graphics/Texture.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Identifier.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Identifier.hpp"
 
 namespace oe {
 namespace graphics {

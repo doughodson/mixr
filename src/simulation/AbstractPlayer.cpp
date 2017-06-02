@@ -1,11 +1,11 @@
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "mxrp/simulation/AbstractPlayer.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/simulation/AbstractNetIO.hpp"
-#include "openeaagles/simulation/AbstractNib.hpp"
+#include "mxrp/simulation/AbstractNetIO.hpp"
+#include "mxrp/simulation/AbstractNib.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,15 +1,15 @@
 
-#include "openeaagles/models/player/SamVehicles.hpp"
+#include "mxrp/models/player/SamVehicles.hpp"
 
-#include "openeaagles/models/player/Sam.hpp"
-#include "openeaagles/models/system/StoresMgr.hpp"
+#include "mxrp/models/player/Sam.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/osg/Matrixd"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/osg/Matrixd"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
+#include "mxrp/base/units/Times.hpp"
 
 namespace oe {
 namespace models {

@@ -2,21 +2,21 @@
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
 
-#include "openeaagles/models/system/IrSeeker.hpp"
+#include "mxrp/models/system/IrSeeker.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/IrSensor.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/IrSensor.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
 
-#include "openeaagles/models/environment/IrAtmosphere.hpp"
+#include "mxrp/models/environment/IrAtmosphere.hpp"
 
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
 #include <cmath>
 

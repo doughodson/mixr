@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/Translator.hpp"
+#include "mxrp/graphics/Translator.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

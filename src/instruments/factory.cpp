@@ -1,53 +1,53 @@
 
-#include "openeaagles/instruments/factory.hpp"
+#include "mxrp/instruments/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
 // Top Level objects
-#include "openeaagles/instruments/Instrument.hpp"
+#include "mxrp/instruments/Instrument.hpp"
 
 // Analog Dial components
-#include "openeaagles/instruments/dials/AnalogDial.hpp"
-#include "openeaagles/instruments/dials/DialArcSegment.hpp"
-#include "openeaagles/instruments/dials/DialTickMarks.hpp"
-#include "openeaagles/instruments/dials/DialPointer.hpp"
-#include "openeaagles/instruments/dials/AltitudeDial.hpp"
-#include "openeaagles/instruments/dials/GMeterDial.hpp"
+#include "mxrp/instruments/dials/AnalogDial.hpp"
+#include "mxrp/instruments/dials/DialArcSegment.hpp"
+#include "mxrp/instruments/dials/DialTickMarks.hpp"
+#include "mxrp/instruments/dials/DialPointer.hpp"
+#include "mxrp/instruments/dials/AltitudeDial.hpp"
+#include "mxrp/instruments/dials/GMeterDial.hpp"
 
 // Analog Gauge components
-#include "openeaagles/instruments/gauges/AnalogGauge.hpp"
-#include "openeaagles/instruments/gauges/GaugeSlider.hpp"
-#include "openeaagles/instruments/gauges/AoaIndexer.hpp"
-#include "openeaagles/instruments/gauges/TickMarks.hpp"
-#include "openeaagles/instruments/gauges/Tape.hpp"
+#include "mxrp/instruments/gauges/AnalogGauge.hpp"
+#include "mxrp/instruments/gauges/GaugeSlider.hpp"
+#include "mxrp/instruments/gauges/AoaIndexer.hpp"
+#include "mxrp/instruments/gauges/TickMarks.hpp"
+#include "mxrp/instruments/gauges/Tape.hpp"
 
 // Generic compass rose and bearing pointer, and dynamic maps
-#include "openeaagles/instruments/maps/CompassRose.hpp"
-#include "openeaagles/instruments/maps/BearingPointer.hpp"
+#include "mxrp/instruments/maps/CompassRose.hpp"
+#include "mxrp/instruments/maps/BearingPointer.hpp"
 
 // Generic Landing gear
-#include "openeaagles/instruments/landinggear/LandingGear.hpp"
-#include "openeaagles/instruments/landinggear/LandingLight.hpp"
+#include "mxrp/instruments/landinggear/LandingGear.hpp"
+#include "mxrp/instruments/landinggear/LandingLight.hpp"
 
 // Generic engine page
-#include "openeaagles/instruments/engines/EngPage.hpp"
+#include "mxrp/instruments/engines/EngPage.hpp"
 
 // Buttons
-#include "openeaagles/instruments/buttons/Button.hpp"
-#include "openeaagles/instruments/buttons/PushButton.hpp"
-#include "openeaagles/instruments/buttons/RotarySwitch.hpp"
-#include "openeaagles/instruments/buttons/Knob.hpp"
-#include "openeaagles/instruments/buttons/Switch.hpp"
-#include "openeaagles/instruments/buttons/SolenoidSwitch.hpp"
+#include "mxrp/instruments/buttons/Button.hpp"
+#include "mxrp/instruments/buttons/PushButton.hpp"
+#include "mxrp/instruments/buttons/RotarySwitch.hpp"
+#include "mxrp/instruments/buttons/Knob.hpp"
+#include "mxrp/instruments/buttons/Switch.hpp"
+#include "mxrp/instruments/buttons/SolenoidSwitch.hpp"
 
 // Adi
-#include "openeaagles/instruments/adi/Adi.hpp"
+#include "mxrp/instruments/adi/Adi.hpp"
  
 // Ghost Horizon
-#include "openeaagles/instruments/adi/GhostHorizon.hpp"
+#include "mxrp/instruments/adi/GhostHorizon.hpp"
 
 // Eadi3D
-#include "openeaagles/instruments/eadi3d/Eadi3DPage.hpp"
+#include "mxrp/instruments/eadi3d/Eadi3DPage.hpp"
 
 #include <string>
 

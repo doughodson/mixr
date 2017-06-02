@@ -6,10 +6,10 @@
 //    Function storage:                   FStorage
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/functors/Functions.hpp"
+#include "mxrp/base/functors/Functions.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 #include <iostream>
 
 namespace oe {

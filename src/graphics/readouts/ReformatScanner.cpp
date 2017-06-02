@@ -312,7 +312,7 @@ typedef char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include "openeaagles/base/util/FlexLexer.h"
+#include "mxrp/base/util/FlexLexer.h"
 
 int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()

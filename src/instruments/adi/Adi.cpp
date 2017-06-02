@@ -1,9 +1,9 @@
 
-#include "openeaagles/instruments/adi/Adi.hpp"
+#include "mxrp/instruments/adi/Adi.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
-#include "openeaagles/base/util/math_utils.hpp"
+#include "mxrp/base/util/math_utils.hpp"
 
 namespace oe {
 namespace instruments {

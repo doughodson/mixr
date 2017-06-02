@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/gauges/Tape.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
+#include "mxrp/instruments/gauges/Tape.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/util/math_utils.hpp"
 #include <iostream>
 
 namespace oe {

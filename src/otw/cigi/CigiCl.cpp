@@ -1,5 +1,5 @@
 
-#include "openeaagles/otw/cigi/CigiCl.hpp"
+#include "mxrp/otw/cigi/CigiCl.hpp"
 
 #include "cigicl/CigiHostSession.h"
 

@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/Locus.hpp"
+#include "mxrp/base/Locus.hpp"
 #include <iostream>
 
 namespace oe {

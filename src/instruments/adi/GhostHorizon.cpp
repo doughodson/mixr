@@ -1,13 +1,13 @@
 
-#include "openeaagles/instruments/adi/GhostHorizon.hpp"
+#include "mxrp/instruments/adi/GhostHorizon.hpp"
 
-#include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Rgba.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/Color.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Rgba.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 
-#include "openeaagles/graphics/Display.hpp"
+#include "mxrp/graphics/Display.hpp"
 
 namespace oe {
 namespace instruments {

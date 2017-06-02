@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/sensor/Tws.hpp"
+#include "mxrp/models/sensor/Tws.hpp"
 #include <iostream>
 
 namespace oe {

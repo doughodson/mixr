@@ -1,9 +1,9 @@
 
-#include "openeaagles/dafif/Navaid.hpp"
+#include "mxrp/dafif/Navaid.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Angles.hpp"
 #include <iostream>
 
 namespace oe {

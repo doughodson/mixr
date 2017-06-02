@@ -1,10 +1,10 @@
 
-#include "openeaagles/base/Hls.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
+#include "mxrp/base/Hls.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/util/math_utils.hpp"
 #include <cmath>
 
-#include "openeaagles/base/util/platform_api.hpp"
+#include "mxrp/base/util/platform_api.hpp"
 
 namespace oe {
 namespace base {

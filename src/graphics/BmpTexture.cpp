@@ -1,10 +1,10 @@
 
-#include "openeaagles/graphics/BmpTexture.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/graphics/BmpTexture.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstdio>
 

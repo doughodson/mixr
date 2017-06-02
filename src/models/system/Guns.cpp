@@ -1,17 +1,17 @@
 
-#include "openeaagles/models/system/Guns.hpp"
+#include "mxrp/models/system/Guns.hpp"
 
-#include "openeaagles/models/player/Bullet.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/Bullet.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Number.hpp"
 
-#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "mxrp/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 #include <cmath>
 

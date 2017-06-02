@@ -1,8 +1,8 @@
 
-#include "openeaagles/map/rpf/CadrgClut.hpp"
-#include "openeaagles/map/rpf/CadrgFrameEntry.hpp"
-#include "openeaagles/map/rpf/map_utils.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/map/rpf/CadrgClut.hpp"
+#include "mxrp/map/rpf/CadrgFrameEntry.hpp"
+#include "mxrp/map/rpf/map_utils.hpp"
+#include "mxrp/base/String.hpp"
 
 #include <cstring>
 

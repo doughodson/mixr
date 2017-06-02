@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/dials/AnalogDial.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/dials/AnalogDial.hpp"
+#include "mxrp/base/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 

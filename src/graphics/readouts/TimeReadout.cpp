@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/TimeReadout.hpp"
+#include "mxrp/graphics/readouts/TimeReadout.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include "ReformatScanner.hpp"
 

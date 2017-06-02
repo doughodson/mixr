@@ -3,26 +3,26 @@
 // Description: Portions of class defined to support entity state PDUs
 //------------------------------------------------------------------------------
 
-#include "openeaagles/interop/dis/NetIO.hpp"
-#include "openeaagles/interop/dis/Nib.hpp"
-#include "openeaagles/interop/dis/Ntm.hpp"
-#include "openeaagles/interop/dis/pdu.hpp"
+#include "mxrp/interop/dis/NetIO.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/Ntm.hpp"
+#include "mxrp/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/player/AirVehicle.hpp"
-#include "openeaagles/models/player/GroundVehicle.hpp"
-#include "openeaagles/models/player/LifeForms.hpp"
-#include "openeaagles/models/player/Missile.hpp"
-#include "openeaagles/models/player/AbstractWeapon.hpp"
-#include "openeaagles/models/system/StoresMgr.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
+#include "mxrp/models/player/GroundVehicle.hpp"
+#include "mxrp/models/player/LifeForms.hpp"
+#include "mxrp/models/player/Missile.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/Simulation.hpp"
+#include "mxrp/simulation/Station.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 #include <cstdio>
 #include <cmath>

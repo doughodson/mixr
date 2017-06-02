@@ -1,13 +1,13 @@
 
-#include "openeaagles/base/io/IoHandler.hpp"
-#include "openeaagles/base/io/IoData.hpp"
-#include "openeaagles/base/io/IoDevice.hpp"
+#include "mxrp/base/io/IoHandler.hpp"
+#include "mxrp/base/io/IoData.hpp"
+#include "mxrp/base/io/IoDevice.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/concurrent/PeriodicTask.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/concurrent/PeriodicTask.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
 
 namespace oe {
 namespace base {

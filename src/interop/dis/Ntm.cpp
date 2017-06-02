@@ -1,9 +1,9 @@
 
-#include "openeaagles/interop/dis/Ntm.hpp"
-#include "openeaagles/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/Ntm.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 

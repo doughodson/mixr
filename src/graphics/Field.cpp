@@ -1,13 +1,13 @@
 
-#include "openeaagles/graphics/Field.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/graphics/Page.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Rgb.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/graphics/Field.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/graphics/Page.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Rgb.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace graphics {

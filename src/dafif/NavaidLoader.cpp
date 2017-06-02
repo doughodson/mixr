@@ -1,6 +1,6 @@
 
-#include "openeaagles/dafif/NavaidLoader.hpp"
-#include "openeaagles/base/FileReader.hpp"
+#include "mxrp/dafif/NavaidLoader.hpp"
+#include "mxrp/base/FileReader.hpp"
 #include <cstring>
 #include <cstdlib>
 #include <limits>

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Numeric Operators:  Add, Subtract, Multiply, Divide
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Operators.hpp"
+#include "mxrp/base/Operators.hpp"
 
 #include <iostream>
 

@@ -1,10 +1,10 @@
 
-#include "openeaagles/dafif/Ils.hpp"
+#include "mxrp/dafif/Ils.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <iostream>
 

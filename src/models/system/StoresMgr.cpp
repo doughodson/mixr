@@ -1,24 +1,24 @@
 //------------------------------------------------------------------------------
 // Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#include "openeaagles/models/system/StoresMgr.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
 
-#include "openeaagles/models/player/Bomb.hpp"
-#include "openeaagles/models/player/Effects.hpp"
+#include "mxrp/models/player/Bomb.hpp"
+#include "mxrp/models/player/Effects.hpp"
 
-#include "openeaagles/models/system/ExternalStore.hpp"
-#include "openeaagles/models/system/FuelTank.hpp"
-#include "openeaagles/models/system/Guns.hpp"
-#include "openeaagles/models/player/Missile.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/system/RfSensor.hpp"
-#include "openeaagles/models/player/Sam.hpp"
-#include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
+#include "mxrp/models/system/ExternalStore.hpp"
+#include "mxrp/models/system/FuelTank.hpp"
+#include "mxrp/models/system/Guns.hpp"
+#include "mxrp/models/player/Missile.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/system/RfSensor.hpp"
+#include "mxrp/models/player/Sam.hpp"
+#include "mxrp/models/Track.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
 
-#include "openeaagles/base/Boolean.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Boolean.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 #include <cstring>
 
 namespace oe {

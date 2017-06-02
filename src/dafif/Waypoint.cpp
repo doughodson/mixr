@@ -1,4 +1,4 @@
-#include "openeaagles/dafif/Waypoint.hpp"
+#include "mxrp/dafif/Waypoint.hpp"
 #include <iostream>
 
 namespace oe {

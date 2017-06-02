@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/map/rpf/factory.hpp"
-#include "openeaagles/map/rpf/MapDrawer.hpp"
-#include "openeaagles/map/rpf/CadrgMap.hpp"
+#include "mxrp/map/rpf/factory.hpp"
+#include "mxrp/map/rpf/MapDrawer.hpp"
+#include "mxrp/map/rpf/CadrgMap.hpp"
 
 #include <string>
 

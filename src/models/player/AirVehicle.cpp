@@ -1,9 +1,9 @@
 
-#include "openeaagles/models/player/AirVehicle.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
 
-#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/models/dynamics/AerodynamicsModel.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Number.hpp"
 
 namespace oe {
 namespace models {

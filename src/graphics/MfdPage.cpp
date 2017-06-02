@@ -1,4 +1,4 @@
-#include "openeaagles/graphics/MfdPage.hpp"
+#include "mxrp/graphics/MfdPage.hpp"
 
 namespace oe {
 namespace graphics {

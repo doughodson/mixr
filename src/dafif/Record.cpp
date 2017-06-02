@@ -1,10 +1,10 @@
 
-#include "openeaagles/dafif/Record.hpp"
+#include "mxrp/dafif/Record.hpp"
 
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <iostream>
 #include <cstring>

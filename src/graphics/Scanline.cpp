@@ -1,10 +1,10 @@
 
-#include "openeaagles/graphics/Scanline.hpp"
+#include "mxrp/graphics/Scanline.hpp"
 
-#include "openeaagles/graphics/Clip3D.hpp"
-#include "openeaagles/graphics/Polygon.hpp"
+#include "mxrp/graphics/Clip3D.hpp"
+#include "mxrp/graphics/Polygon.hpp"
 
-#include "openeaagles/base/units/angle_utils.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
 
 namespace oe {
 namespace graphics {

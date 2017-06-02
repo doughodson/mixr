@@ -1,16 +1,16 @@
 
-#include "openeaagles/models/dynamics/JSBSimModel.hpp"
+#include "mxrp/models/dynamics/JSBSimModel.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 
-#include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Integer.hpp"
+#include "mxrp/base/Statistic.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Integer.hpp"
 
 // JSBSim model headers
 #include <JSBSim/FGFDMExec.h>

@@ -1,11 +1,11 @@
 
-#include "openeaagles/instruments/buttons/SolenoidSwitch.hpp"
+#include "mxrp/instruments/buttons/SolenoidSwitch.hpp"
 
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Timers.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Timers.hpp"
 
 namespace oe {
 namespace instruments {

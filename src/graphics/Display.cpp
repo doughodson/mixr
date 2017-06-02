@@ -1,17 +1,17 @@
 
-#include "openeaagles/graphics/Display.hpp"
+#include "mxrp/graphics/Display.hpp"
 
-#include "openeaagles/graphics/Font.hpp"
-#include "openeaagles/graphics/Image.hpp"
-#include "openeaagles/graphics/Texture.hpp"
-#include "openeaagles/graphics/Material.hpp"
-#include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/Rgba.hpp"
-#include "openeaagles/base/Hsva.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/graphics/Font.hpp"
+#include "mxrp/graphics/Image.hpp"
+#include "mxrp/graphics/Texture.hpp"
+#include "mxrp/graphics/Material.hpp"
+#include "mxrp/base/Color.hpp"
+#include "mxrp/base/Rgba.hpp"
+#include "mxrp/base/Hsva.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 #include <string>
 #include <cstdio>

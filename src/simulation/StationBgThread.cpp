@@ -1,7 +1,7 @@
 
-#include "openeaagles/simulation/StationBgThread.hpp"
+#include "mxrp/simulation/StationBgThread.hpp"
 
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/Station.hpp"
 
 namespace oe {
 namespace simulation {

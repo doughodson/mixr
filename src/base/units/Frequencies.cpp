@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Frequencies, Hertz
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Frequencies.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
 
 #include <iostream>
 

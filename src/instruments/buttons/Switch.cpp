@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/buttons/Switch.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/buttons/Switch.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

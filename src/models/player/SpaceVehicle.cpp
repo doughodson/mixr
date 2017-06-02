@@ -1,8 +1,8 @@
 
-#include "openeaagles/models/player/SpaceVehicle.hpp"
-#include "openeaagles/models/dynamics/SpaceDynamicsModel.hpp"
+#include "mxrp/models/player/SpaceVehicle.hpp"
+#include "mxrp/models/dynamics/SpaceDynamicsModel.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 namespace oe {
 namespace models {

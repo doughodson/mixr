@@ -1,15 +1,15 @@
 
-#include "openeaagles/iodevice/factory.hpp"
+#include "mxrp/iodevice/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/iodevice/Ai2DiSwitch.hpp"
-#include "openeaagles/iodevice/AnalogInput.hpp"
-#include "openeaagles/iodevice/AnalogOutput.hpp"
-#include "openeaagles/iodevice/DiscreteInput.hpp"
-#include "openeaagles/iodevice/DiscreteOutput.hpp"
-#include "openeaagles/iodevice/IoData.hpp"
-#include "openeaagles/iodevice/SignalGen.hpp"
+#include "mxrp/iodevice/Ai2DiSwitch.hpp"
+#include "mxrp/iodevice/AnalogInput.hpp"
+#include "mxrp/iodevice/AnalogOutput.hpp"
+#include "mxrp/iodevice/DiscreteInput.hpp"
+#include "mxrp/iodevice/DiscreteOutput.hpp"
+#include "mxrp/iodevice/IoData.hpp"
+#include "mxrp/iodevice/SignalGen.hpp"
 
 #include <string>
 

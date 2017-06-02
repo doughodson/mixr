@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/Rgb.hpp"
-#include "openeaagles/base/Float.hpp"
+#include "mxrp/base/Rgb.hpp"
+#include "mxrp/base/Float.hpp"
 
 namespace oe {
 namespace base {

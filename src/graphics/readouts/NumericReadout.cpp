@@ -1,13 +1,13 @@
 
-#include "openeaagles/graphics/readouts/NumericReadout.hpp"
+#include "mxrp/graphics/readouts/NumericReadout.hpp"
 
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Integer.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Integer.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/constants.hpp"
+#include "mxrp/base/util/str_utils.hpp"
+#include "mxrp/base/util/constants.hpp"
 
 #include "ReformatScanner.hpp"
 

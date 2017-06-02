@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/dials/DialArcSegment.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/dials/DialArcSegment.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 #include <GL/glu.h>

@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/functors/Function.hpp"
+#include "mxrp/base/functors/Function.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/functors/Tables.hpp"
 #include <iostream>
 
 namespace oe {

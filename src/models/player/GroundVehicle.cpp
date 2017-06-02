@@ -1,11 +1,11 @@
 
-#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "mxrp/models/player/GroundVehicle.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Times.hpp"
 
 #include <cmath>
 

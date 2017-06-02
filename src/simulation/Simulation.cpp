@@ -1,20 +1,20 @@
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "mxrp/simulation/Simulation.hpp"
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "mxrp/simulation/AbstractPlayer.hpp"
 
-#include "openeaagles/simulation/SimTcThread.hpp"
-#include "openeaagles/simulation/SimBgThread.hpp"
+#include "mxrp/simulation/SimTcThread.hpp"
+#include "mxrp/simulation/SimBgThread.hpp"
 
-#include "openeaagles/simulation/AbstractDataRecorder.hpp"
-#include "openeaagles/simulation/AbstractNib.hpp"
-#include "openeaagles/simulation/Station.hpp"
+#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mxrp/simulation/AbstractNib.hpp"
+#include "mxrp/simulation/Station.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/units/Times.hpp"
+#include "mxrp/base/Statistic.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 
 #include <cstring>
 #include <cmath>

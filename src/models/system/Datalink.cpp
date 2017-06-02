@@ -1,19 +1,19 @@
 
-#include "openeaagles/models/system/Datalink.hpp"
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Radio.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/Message.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/system/Datalink.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Radio.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/Message.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 
 namespace oe {
 namespace models {

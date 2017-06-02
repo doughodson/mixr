@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/units/LinearVelocity.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/SlotTable.hpp"
+#include "mxrp/base/units/LinearVelocity.hpp"
+#include "mxrp/base/units/Distances.hpp"
+#include "mxrp/base/units/Times.hpp"
+#include "mxrp/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

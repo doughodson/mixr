@@ -1,21 +1,21 @@
 
-#include "openeaagles/models/system/AngleOnlyTrackManager.hpp"
+#include "mxrp/models/system/AngleOnlyTrackManager.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/player/AbstractWeapon.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
-#include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
+#include "mxrp/models/Track.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "mxrp/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/units/Times.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 #include <cmath>
 

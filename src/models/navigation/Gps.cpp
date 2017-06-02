@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/navigation/Gps.hpp"
+#include "mxrp/models/navigation/Gps.hpp"
 #include <iostream>
 
 namespace oe {

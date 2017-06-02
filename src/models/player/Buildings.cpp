@@ -1,8 +1,8 @@
 
-#include "openeaagles/models/player/Buildings.hpp"
+#include "mxrp/models/player/Buildings.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace models {

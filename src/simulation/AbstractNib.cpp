@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/AbstractNib.hpp"
+#include "mxrp/simulation/AbstractNib.hpp"
 
 namespace oe {
 namespace simulation {

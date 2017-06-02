@@ -1,8 +1,8 @@
 
-#include "openeaagles/graphics/BitmapFont.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/graphics/BitmapFont.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cmath>

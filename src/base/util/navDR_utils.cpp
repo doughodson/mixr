@@ -1,11 +1,11 @@
 
-#include "openeaagles/base/util/navDR_utils.hpp"
+#include "mxrp/base/util/navDR_utils.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Vec4d"
-#include "openeaagles/base/osg/Matrixd"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Vec4d"
+#include "mxrp/base/osg/Matrixd"
 #include <cmath>
 
 namespace oe {

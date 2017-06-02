@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/concurrent/PeriodicTask.hpp"
+#include "mxrp/base/concurrent/PeriodicTask.hpp"
 
-#include "openeaagles/base/Component.hpp"
+#include "mxrp/base/Component.hpp"
 #include <iostream>
 
 namespace oe {

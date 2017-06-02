@@ -1,8 +1,8 @@
 
-#include "openeaagles/linearsystem/LowpassFilter.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
-#include "openeaagles/base/util/constants.hpp"
+#include "mxrp/linearsystem/LowpassFilter.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
+#include "mxrp/base/util/constants.hpp"
 
 namespace oe {
 namespace linearsystem {

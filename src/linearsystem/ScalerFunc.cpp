@@ -1,7 +1,7 @@
 
-#include "openeaagles/linearsystem/ScalerFunc.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
+#include "mxrp/linearsystem/ScalerFunc.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
 
 namespace oe {
 namespace linearsystem {

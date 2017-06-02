@@ -1,15 +1,15 @@
 
-#include "openeaagles/models/system/IrSystem.hpp"
+#include "mxrp/models/system/IrSystem.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/IrSeeker.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/Tdb.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/IrSeeker.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/Tdb.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace models {

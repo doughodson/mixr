@@ -1,7 +1,7 @@
 
-#include "openeaagles/models/player/Bomb.hpp"
+#include "mxrp/models/player/Bomb.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 
 #include <cmath>
 

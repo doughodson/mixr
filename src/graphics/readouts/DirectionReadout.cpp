@@ -1,5 +1,5 @@
 
-#include "openeaagles/graphics/readouts/DirectionReadout.hpp"
+#include "mxrp/graphics/readouts/DirectionReadout.hpp"
 
 #include "ReformatScanner.hpp"
 

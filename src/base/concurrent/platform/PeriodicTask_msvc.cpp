@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/concurrent/PeriodicTask.hpp"
+#include "mxrp/base/concurrent/PeriodicTask.hpp"
 
-#include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
+#include "mxrp/base/Component.hpp"
+#include "mxrp/base/util/math_utils.hpp"
+#include "mxrp/base/util/system_utils.hpp"
 #include <iostream>
 
 /* ----------------------------------------------------------------- */

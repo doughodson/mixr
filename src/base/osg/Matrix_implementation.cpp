@@ -11,7 +11,7 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "openeaagles/base/osg/Quat"
+#include "mxrp/base/osg/Quat"
 
 #include <limits>
 #include <stdlib.h>

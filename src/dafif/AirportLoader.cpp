@@ -1,7 +1,7 @@
 
-#include "openeaagles/dafif/AirportLoader.hpp"
-#include "openeaagles/base/FileReader.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/dafif/AirportLoader.hpp"
+#include "mxrp/base/FileReader.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cstdlib>

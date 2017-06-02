@@ -1,17 +1,17 @@
 
-#include "openeaagles/models/system/Sar.hpp"
+#include "mxrp/models/system/Sar.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/Image.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/Image.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "mxrp/base/util/nav_utils.hpp"
 
 #include <cmath>
 

@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/navigation/Bullseye.hpp"
+#include "mxrp/models/navigation/Bullseye.hpp"
 #include <iostream>
 
 namespace oe {

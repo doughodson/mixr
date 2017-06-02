@@ -1,16 +1,16 @@
 
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/graphics/ColorRotary.hpp"
-#include "openeaagles/graphics/Material.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Transforms.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/Rgb.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Float.hpp"
+#include "mxrp/graphics/Graphic.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/graphics/ColorRotary.hpp"
+#include "mxrp/graphics/Material.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Transforms.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/Rgb.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Float.hpp"
 
 namespace oe {
 namespace graphics {

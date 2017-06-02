@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "openeaagles/base/distributions/Pareto.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/distributions/Pareto.hpp"
+#include "mxrp/base/Number.hpp"
 
 namespace oe {
 namespace base {

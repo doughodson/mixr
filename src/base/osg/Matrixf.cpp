@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "openeaagles/base/osg/Matrixf"
-#include "openeaagles/base/osg/Matrixd"
+#include "mxrp/base/osg/Matrixf"
+#include "mxrp/base/osg/Matrixd"
 
 // specialized Matrix_implementation to be Matrixf
 #define  Matrix_implementation Matrixf

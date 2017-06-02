@@ -1,12 +1,12 @@
 
-#include "openeaagles/recorder/PrintSelected.hpp"
-#include "openeaagles/recorder/protobuf/DataRecord.pb.h"
-#include "openeaagles/recorder/DataRecordHandle.hpp"
+#include "mxrp/recorder/PrintSelected.hpp"
+#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mxrp/recorder/DataRecordHandle.hpp"
 
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/Integer.hpp"
+#include "mxrp/base/units/Times.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/Integer.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

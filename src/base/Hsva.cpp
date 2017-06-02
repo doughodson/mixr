@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/Hsva.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/Hsva.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace base {

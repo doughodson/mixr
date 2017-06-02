@@ -2,26 +2,26 @@
 // Classes: dis::NetIO and dis::NtmInputNode
 //==============================================================================
 
-#include "openeaagles/interop/dis/NetIO.hpp"
-#include "openeaagles/interop/dis/Nib.hpp"
-#include "openeaagles/interop/dis/Ntm.hpp"
-#include "openeaagles/interop/dis/EmissionPduHandler.hpp"
-#include "openeaagles/interop/dis/pdu.hpp"
+#include "mxrp/interop/dis/NetIO.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/Ntm.hpp"
+#include "mxrp/interop/dis/EmissionPduHandler.hpp"
+#include "mxrp/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/system/Radar.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/system/Radar.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/String.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
+#include "mxrp/base/units/Times.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstdlib>
 #include <cstring>

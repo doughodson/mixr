@@ -1,16 +1,16 @@
 
-#include "openeaagles/interop/dis/Nib.hpp"
-#include "openeaagles/interop/dis/Ntm.hpp"
-#include "openeaagles/interop/dis/EmissionPduHandler.hpp"
-#include "openeaagles/interop/dis/pdu.hpp"
+#include "mxrp/interop/dis/Nib.hpp"
+#include "mxrp/interop/dis/Ntm.hpp"
+#include "mxrp/interop/dis/EmissionPduHandler.hpp"
+#include "mxrp/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/player/AirVehicle.hpp"
-#include "openeaagles/models/system/Jammer.hpp"
-#include "openeaagles/models/system/Radar.hpp"
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/player/AirVehicle.hpp"
+#include "mxrp/models/system/Jammer.hpp"
+#include "mxrp/models/system/Radar.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace dis {

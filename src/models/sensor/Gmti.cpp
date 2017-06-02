@@ -1,14 +1,14 @@
 
-#include "openeaagles/models/sensor/Gmti.hpp"
+#include "mxrp/models/sensor/Gmti.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 #include <cmath>
 

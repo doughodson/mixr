@@ -1,8 +1,8 @@
 
-#include "openeaagles/graphics/Polygon.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/graphics/ColorGradient.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/graphics/Polygon.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/graphics/ColorGradient.hpp"
+#include "mxrp/base/PairStream.hpp"
 #include <GL/glu.h>
 
 namespace oe {

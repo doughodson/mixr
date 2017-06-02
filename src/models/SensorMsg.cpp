@@ -1,7 +1,7 @@
 
-#include "openeaagles/models/SensorMsg.hpp"
+#include "mxrp/models/SensorMsg.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
 namespace oe {
 namespace models {

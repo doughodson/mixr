@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/Rgba.hpp"
-#include "openeaagles/base/Float.hpp"
+#include "mxrp/base/Rgba.hpp"
+#include "mxrp/base/Float.hpp"
 
 namespace oe {
 namespace base {

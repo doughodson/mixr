@@ -1,14 +1,14 @@
 
-#include "openeaagles/otw/factory.hpp"
+#include "mxrp/otw/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/otw/Otm.hpp"
+#include "mxrp/otw/Otm.hpp"
 
-#include "openeaagles/otw/cigi/OtwCigiCl.hpp"
-#include "openeaagles/otw/cigi/CigiClNetwork.hpp"
+#include "mxrp/otw/cigi/OtwCigiCl.hpp"
+#include "mxrp/otw/cigi/CigiClNetwork.hpp"
 
-#include "openeaagles/otw/pc/OtwPC.hpp"
+#include "mxrp/otw/pc/OtwPC.hpp"
 
 #include <string>
 

@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/String.hpp"
+#include "mxrp/base/LatLon.hpp"
+#include "mxrp/base/String.hpp"
 
 #include <cmath>
 

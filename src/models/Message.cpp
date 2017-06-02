@@ -1,8 +1,8 @@
 
-#include "openeaagles/models/Message.hpp"
+#include "mxrp/models/Message.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/List.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/List.hpp"
 
 namespace oe {
 namespace models {

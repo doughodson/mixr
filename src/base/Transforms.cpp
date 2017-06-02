@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/Transforms.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "mxrp/base/Transforms.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/units/Angles.hpp"
 
 namespace oe {
 namespace base {

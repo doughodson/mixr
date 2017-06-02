@@ -1,10 +1,10 @@
 
-#include "openeaagles/base/io/IoDevice.hpp"
-#include "openeaagles/base/io/IoAdapter.hpp"
-#include "openeaagles/base/io/IoHandler.hpp"
+#include "mxrp/base/io/IoDevice.hpp"
+#include "mxrp/base/io/IoAdapter.hpp"
+#include "mxrp/base/io/IoHandler.hpp"
 
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace base {

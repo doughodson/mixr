@@ -1,21 +1,21 @@
 
-#include "openeaagles/otw/Otw.hpp"
+#include "mxrp/otw/Otw.hpp"
 
-#include "openeaagles/otw/Otm.hpp"
-#include "openeaagles/otw/OtwModel.hpp"
+#include "mxrp/otw/Otm.hpp"
+#include "mxrp/otw/OtwModel.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "mxrp/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/simulation/AbstractNib.hpp"
+#include "mxrp/simulation/AbstractNib.hpp"
 
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cstring>
 #include <cmath>

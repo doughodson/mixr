@@ -1,8 +1,8 @@
 
-#include "openeaagles/otw/cigi/OtwModelCigiCl.hpp"
-#include "openeaagles/otw/cigi/OtwCigiCl.hpp"
+#include "mxrp/otw/cigi/OtwModelCigiCl.hpp"
+#include "mxrp/otw/cigi/OtwCigiCl.hpp"
 
-#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "mxrp/models/player/GroundVehicle.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"

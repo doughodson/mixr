@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/OctalReadout.hpp"
+#include "mxrp/graphics/readouts/OctalReadout.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include "ReformatScanner.hpp"
 

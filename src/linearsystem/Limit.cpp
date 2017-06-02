@@ -1,6 +1,6 @@
 
-#include "openeaagles/linearsystem/Limit.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/linearsystem/Limit.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/dynamics/DynamicsModel.hpp"
+#include "mxrp/models/dynamics/DynamicsModel.hpp"
 #include <iostream>
 
 namespace oe {

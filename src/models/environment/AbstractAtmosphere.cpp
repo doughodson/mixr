@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/environment/AbstractAtmosphere.hpp"
+#include "mxrp/models/environment/AbstractAtmosphere.hpp"
 
 namespace oe {
 namespace models {

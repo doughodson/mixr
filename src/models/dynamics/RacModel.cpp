@@ -1,16 +1,16 @@
 
-#include "openeaagles/models/dynamics/RacModel.hpp"
+#include "mxrp/models/dynamics/RacModel.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
+#include "mxrp/models/player/Player.hpp"
 
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Number.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Quat"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Quat"
 
 #include <cmath>
 

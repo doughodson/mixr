@@ -1,12 +1,12 @@
 
-#include "openeaagles/base/util/osg_utils.hpp"
+#include "mxrp/base/util/osg_utils.hpp"
 
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Vec3f"
-#include "openeaagles/base/osg/Vec4d"
-#include "openeaagles/base/osg/Vec4f"
-#include "openeaagles/base/osg/Matrixf"
-#include "openeaagles/base/osg/Matrixd"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Vec3f"
+#include "mxrp/base/osg/Vec4d"
+#include "mxrp/base/osg/Vec4f"
+#include "mxrp/base/osg/Matrixf"
+#include "mxrp/base/osg/Matrixd"
 
 namespace oe {
 namespace base {

@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/MetaObject.hpp"
+#include "mxrp/base/MetaObject.hpp"
 
-#include "openeaagles/base/SlotTable.hpp"
+#include "mxrp/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

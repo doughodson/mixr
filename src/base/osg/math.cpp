@@ -11,7 +11,7 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "openeaagles/base/osg/osg_math.hpp"
+#include "mxrp/base/osg/osg_math.hpp"
 
 #include <cstring>
 

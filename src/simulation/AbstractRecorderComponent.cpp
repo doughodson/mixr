@@ -1,7 +1,7 @@
 
-#include "openeaagles/simulation/AbstractRecorderComponent.hpp"
+#include "mxrp/simulation/AbstractRecorderComponent.hpp"
 
-#include "openeaagles/base/List.hpp"
+#include "mxrp/base/List.hpp"
 #include <iostream>
 
 namespace oe {

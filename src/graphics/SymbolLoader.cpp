@@ -1,15 +1,15 @@
 
-#include "openeaagles/graphics/SymbolLoader.hpp"
+#include "mxrp/graphics/SymbolLoader.hpp"
 
-#include "openeaagles/graphics/Readouts.hpp"
-#include "openeaagles/graphics/Polygon.hpp"
-#include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/graphics/Readouts.hpp"
+#include "mxrp/graphics/Polygon.hpp"
+#include "mxrp/graphics/Display.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/units/Angles.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstring>
 

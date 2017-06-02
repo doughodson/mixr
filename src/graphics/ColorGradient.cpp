@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/ColorGradient.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/graphics/ColorGradient.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
 namespace oe {
 namespace graphics {

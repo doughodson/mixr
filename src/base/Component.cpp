@@ -1,16 +1,16 @@
 
-#include "openeaagles/base/Component.hpp"
+#include "mxrp/base/Component.hpp"
 
-#include "openeaagles/base/Boolean.hpp"
-#include "openeaagles/base/Float.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/util/system_utils.hpp"
-#include "openeaagles/base/util/platform_api.hpp"
+#include "mxrp/base/Boolean.hpp"
+#include "mxrp/base/Float.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Statistic.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/util/system_utils.hpp"
+#include "mxrp/base/util/platform_api.hpp"
 
 namespace oe {
 namespace base {

@@ -1,12 +1,12 @@
 
-#include "openeaagles/terrain/factory.hpp"
+#include "mxrp/terrain/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/terrain/QuadMap.hpp"
-#include "openeaagles/terrain/ded/DedFile.hpp"
-#include "openeaagles/terrain/dted/DtedFile.hpp"
-#include "openeaagles/terrain/srtm/SrtmHgtFile.hpp"
+#include "mxrp/terrain/QuadMap.hpp"
+#include "mxrp/terrain/ded/DedFile.hpp"
+#include "mxrp/terrain/dted/DtedFile.hpp"
+#include "mxrp/terrain/srtm/SrtmHgtFile.hpp"
 
 #include <string>
 

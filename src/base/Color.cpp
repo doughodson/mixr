@@ -1,10 +1,10 @@
 
-#include "openeaagles/base/Color.hpp"
+#include "mxrp/base/Color.hpp"
 
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/osg/Vec4d"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/osg/Vec4d"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

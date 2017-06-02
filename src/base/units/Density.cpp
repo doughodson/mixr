@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/units/Density.hpp"
-#include "openeaagles/base/SlotTable.hpp"
+#include "mxrp/base/units/Density.hpp"
+#include "mxrp/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

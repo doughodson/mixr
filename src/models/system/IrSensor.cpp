@@ -8,20 +8,20 @@
 // afterwards, it will complete its process after the sensor, and will accept inputs
 // in the same frame in which they were generated.
 
-#include "openeaagles/models/system/IrSensor.hpp"
+#include "mxrp/models/system/IrSensor.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/IrSeeker.hpp"
-#include "openeaagles/models/system/AngleOnlyTrackManager.hpp"
-#include "openeaagles/models/system/OnboardComputer.hpp"
-#include "openeaagles/models/environment/IrAtmosphere.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/IrSeeker.hpp"
+#include "mxrp/models/system/AngleOnlyTrackManager.hpp"
+#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mxrp/models/environment/IrAtmosphere.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Integer.hpp"
+#include "mxrp/base/Integer.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cmath>
 

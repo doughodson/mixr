@@ -2,17 +2,17 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#include "openeaagles/models/IrShapes.hpp"
+#include "mxrp/models/IrShapes.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/IrSensor.hpp"
-#include "openeaagles/models/IrSignature.hpp"
-#include "openeaagles/models/IrQueryMsg.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/IrSensor.hpp"
+#include "mxrp/models/IrSignature.hpp"
+#include "mxrp/models/IrQueryMsg.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/units/Areas.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/units/Areas.hpp"
+#include "mxrp/base/units/Distances.hpp"
 
 #include <cmath>
 

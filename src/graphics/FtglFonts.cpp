@@ -1,9 +1,9 @@
-#include "openeaagles/graphics/FtglFonts.hpp"
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/graphics/FtglFonts.hpp"
+#include "mxrp/graphics/Graphic.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/String.hpp"
+#include "mxrp/base/Color.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstdlib>
 

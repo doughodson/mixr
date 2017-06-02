@@ -1,7 +1,7 @@
 
-#include "openeaagles/models/system/FuelTank.hpp"
+#include "mxrp/models/system/FuelTank.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

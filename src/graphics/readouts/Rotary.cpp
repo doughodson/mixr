@@ -1,9 +1,9 @@
 
-#include "openeaagles/graphics/readouts/Rotary.hpp"
+#include "mxrp/graphics/readouts/Rotary.hpp"
 
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/graphics/Graphic.hpp"
+#include "mxrp/base/Integer.hpp"
+#include "mxrp/base/Pair.hpp"
 
 namespace oe {
 namespace graphics {

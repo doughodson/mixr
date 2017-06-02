@@ -1,6 +1,6 @@
 
-#include "openeaagles/map/rpf/CadrgTocEntry.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/map/rpf/CadrgTocEntry.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>

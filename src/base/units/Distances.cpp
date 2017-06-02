@@ -2,7 +2,7 @@
 // Distance, Meters, CentiMeters, KiloMeters, Inches, Feet, NauticalMiles,
 // StatuteMiles 
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Distances.hpp"
+#include "mxrp/base/units/Distances.hpp"
 #include <iostream>
 
 namespace oe {

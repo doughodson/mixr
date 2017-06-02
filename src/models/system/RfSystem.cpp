@@ -1,17 +1,17 @@
 
-#include "openeaagles/models/system/RfSystem.hpp"
+#include "mxrp/models/system/RfSystem.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Decibel.hpp"
-#include "openeaagles/base/units/Powers.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Decibel.hpp"
+#include "mxrp/base/units/Powers.hpp"
+#include "mxrp/base/units/Frequencies.hpp"
 
 namespace oe {
 namespace models {

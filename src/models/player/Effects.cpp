@@ -1,10 +1,10 @@
 
-#include "openeaagles/models/player/Effects.hpp"
+#include "mxrp/models/player/Effects.hpp"
 
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/Identifier.hpp"
+#include "mxrp/base/osg/Vec3d"
+#include "mxrp/base/Number.hpp"
 
 #include <cmath>
 

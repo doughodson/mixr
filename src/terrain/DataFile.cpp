@@ -1,9 +1,9 @@
 
-#include "openeaagles/terrain/DataFile.hpp"
+#include "mxrp/terrain/DataFile.hpp"
 
-#include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/units/angle_utils.hpp"
-#include "openeaagles/base/units/distance_utils.hpp"
+#include "mxrp/base/network/NetHandler.hpp"
+#include "mxrp/base/units/angle_utils.hpp"
+#include "mxrp/base/units/distance_utils.hpp"
 
 namespace oe {
 namespace terrain {

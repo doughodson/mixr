@@ -1,6 +1,6 @@
 
-#include "openeaagles/graphics/Image.hpp"
-#include "openeaagles/base/util/str_utils.hpp"
+#include "mxrp/graphics/Image.hpp"
+#include "mxrp/base/util/str_utils.hpp"
 
 #include <fstream>
 #include <cstring>

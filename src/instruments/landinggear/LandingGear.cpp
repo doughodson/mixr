@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/landinggear/LandingGear.hpp"
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/instruments/landinggear/LandingGear.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

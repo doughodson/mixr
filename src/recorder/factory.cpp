@@ -1,17 +1,17 @@
 
-#include "openeaagles/recorder/factory.hpp"
+#include "mxrp/recorder/factory.hpp"
 
-#include "openeaagles/base/Object.hpp"
+#include "mxrp/base/Object.hpp"
 
-#include "openeaagles/recorder/DataRecorder.hpp"
-#include "openeaagles/recorder/FileWriter.hpp"
-#include "openeaagles/recorder/FileReader.hpp"
-#include "openeaagles/recorder/OutputHandler.hpp"
-#include "openeaagles/recorder/NetInput.hpp"
-#include "openeaagles/recorder/NetOutput.hpp"
-#include "openeaagles/recorder/TabPrinter.hpp"
-#include "openeaagles/recorder/PrintPlayer.hpp"
-#include "openeaagles/recorder/PrintSelected.hpp"
+#include "mxrp/recorder/DataRecorder.hpp"
+#include "mxrp/recorder/FileWriter.hpp"
+#include "mxrp/recorder/FileReader.hpp"
+#include "mxrp/recorder/OutputHandler.hpp"
+#include "mxrp/recorder/NetInput.hpp"
+#include "mxrp/recorder/NetOutput.hpp"
+#include "mxrp/recorder/TabPrinter.hpp"
+#include "mxrp/recorder/PrintPlayer.hpp"
+#include "mxrp/recorder/PrintSelected.hpp"
 
 #include <string>
 

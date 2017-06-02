@@ -1,15 +1,15 @@
 
-#include "openeaagles/models/system/Rwr.hpp"
+#include "mxrp/models/system/Rwr.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/system/Antenna.hpp"
-#include "openeaagles/models/system/TrackManager.hpp"
-#include "openeaagles/models/Emission.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/system/Antenna.hpp"
+#include "mxrp/models/system/TrackManager.hpp"
+#include "mxrp/models/Emission.hpp"
 
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/Pair.hpp"
 
-#include "openeaagles/base/util/math_utils.hpp"
+#include "mxrp/base/util/math_utils.hpp"
 
 #include <cmath>
 

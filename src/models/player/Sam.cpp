@@ -1,5 +1,5 @@
 
-#include "openeaagles/models/player/Sam.hpp"
+#include "mxrp/models/player/Sam.hpp"
 
 namespace oe {
 namespace models {

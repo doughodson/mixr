@@ -1,7 +1,7 @@
 
-#include "openeaagles/iodevice/Controller.hpp"
+#include "mxrp/iodevice/Controller.hpp"
 
-#include "openeaagles/base/Number.hpp"
+#include "mxrp/base/Number.hpp"
 #include <iostream>
 
 namespace oe {

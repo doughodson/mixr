@@ -1,5 +1,5 @@
 
-#include "openeaagles/instruments/dials/AltitudeDial.hpp"
+#include "mxrp/instruments/dials/AltitudeDial.hpp"
 #include <iostream>
 
 namespace oe {

@@ -1,6 +1,6 @@
 
-#include "openeaagles/map/rpf/TextureTable.hpp"
-#include "openeaagles/graphics/Texture.hpp"
+#include "mxrp/map/rpf/TextureTable.hpp"
+#include "mxrp/graphics/Texture.hpp"
 #include <iostream>
 
 namespace oe {

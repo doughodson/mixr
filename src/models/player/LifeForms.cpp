@@ -1,18 +1,18 @@
 
-#include "openeaagles/models/player/LifeForms.hpp"
+#include "mxrp/models/player/LifeForms.hpp"
 
-#include "openeaagles/models/player/Player.hpp"
-#include "openeaagles/models/player/Missile.hpp"
+#include "mxrp/models/player/Player.hpp"
+#include "mxrp/models/player/Missile.hpp"
 
-#include "openeaagles/models/system/StoresMgr.hpp"
-#include "openeaagles/models/system/Guns.hpp"
+#include "mxrp/models/system/StoresMgr.hpp"
+#include "mxrp/models/system/Guns.hpp"
 
-#include "openeaagles/models/WorldModel.hpp"
+#include "mxrp/models/WorldModel.hpp"
 
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/List.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/osg/Matrixd"
+#include "mxrp/base/Number.hpp"
+#include "mxrp/base/List.hpp"
+#include "mxrp/base/PairStream.hpp"
+#include "mxrp/base/osg/Matrixd"
 
 #include <cmath>
 

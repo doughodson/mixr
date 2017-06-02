@@ -1,10 +1,10 @@
 
-#include "openeaagles/simulation/SimTcThread.hpp"
+#include "mxrp/simulation/SimTcThread.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "mxrp/simulation/Simulation.hpp"
 
-#include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/PairStream.hpp"
+#include "mxrp/base/Component.hpp"
+#include "mxrp/base/PairStream.hpp"
 
 namespace oe {
 namespace simulation {
