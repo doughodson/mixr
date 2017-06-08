@@ -930,7 +930,7 @@ inline Vec4d Matrixf::operator* (const Vec4d& v) const
 }
 
 
-/** OpenEaagles: Binary scalar multiply */
+/** MXRP: Binary scalar multiply */
 inline Matrixf operator * (const float s, const Matrixf& m)
 {
   return (m * s);
