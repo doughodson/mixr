@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Object; }
 namespace dis {
 base::Object* factory(const std::string&);

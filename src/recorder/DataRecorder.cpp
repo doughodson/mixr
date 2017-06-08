@@ -21,7 +21,7 @@
 
 #include <cstdio>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")

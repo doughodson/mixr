@@ -4,7 +4,7 @@
 #include "mxrp/base/units/Angles.hpp"
 #include <GL/glu.h>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")

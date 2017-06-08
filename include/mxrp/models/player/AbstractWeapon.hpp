@@ -4,7 +4,7 @@
 
 #include "mxrp/models/player/Player.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class String; class Time; }
 namespace models {
 class Designator;

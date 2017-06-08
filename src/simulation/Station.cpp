@@ -22,7 +22,7 @@
 
 #include <ctime>
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(Station, "Station")

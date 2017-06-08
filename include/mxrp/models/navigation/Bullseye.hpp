@@ -4,7 +4,7 @@
 
 #include "mxrp/models/navigation/Steerpoint.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

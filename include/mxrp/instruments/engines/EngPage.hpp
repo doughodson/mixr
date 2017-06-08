@@ -5,7 +5,7 @@
 #include "mxrp/graphics/Page.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

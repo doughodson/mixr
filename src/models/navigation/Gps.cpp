@@ -2,7 +2,7 @@
 #include "mxrp/models/navigation/Gps.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Gps, "Gps")

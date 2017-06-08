@@ -8,7 +8,7 @@
 #include "mxrp/base/functors/Functions.hpp"
 #include "mxrp/base/functors/Table.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class List;
 class Number;

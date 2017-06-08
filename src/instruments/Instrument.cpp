@@ -6,7 +6,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Instrument, "Instrument")

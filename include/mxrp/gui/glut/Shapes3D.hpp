@@ -8,7 +8,7 @@
 
 #include "mxrp/graphics/Shapes.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace glut {
 

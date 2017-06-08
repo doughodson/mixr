@@ -7,7 +7,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/String.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace ubf {
 

@@ -5,7 +5,7 @@
 #include <cctype>
 #include <cstddef>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------

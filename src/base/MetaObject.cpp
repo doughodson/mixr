@@ -3,7 +3,7 @@
 
 #include "mxrp/base/SlotTable.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 MetaObject::MetaObject(

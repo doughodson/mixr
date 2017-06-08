@@ -2,7 +2,7 @@
 #include "mxrp/base/ubf/AbstractAction.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace ubf {
 

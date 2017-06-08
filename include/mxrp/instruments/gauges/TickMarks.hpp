@@ -4,7 +4,7 @@
 
 #include "mxrp/instruments/gauges/AnalogGauge.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
 #include "mxrp/models/system/System.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class String; }
 namespace models {
 

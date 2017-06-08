@@ -2,7 +2,7 @@
 #include "mxrp/base/units/FlowRate.hpp"
 #include "mxrp/base/SlotTable.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(FlowRate, "FlowRate")

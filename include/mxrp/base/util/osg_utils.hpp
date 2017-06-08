@@ -6,7 +6,7 @@
 // General purpose functions for OSG classes
 //------------------------------------------------------------------------------
 
-namespace oe {
+namespace mxrp {
 
 namespace base {
 class Vec3d; class Vec3f;

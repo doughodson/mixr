@@ -5,7 +5,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Page,"Page")

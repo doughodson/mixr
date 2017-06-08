@@ -4,7 +4,7 @@
 
 #include "Rotary.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Object; class Number; }
 namespace graphics {
 

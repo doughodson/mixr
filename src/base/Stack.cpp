@@ -2,7 +2,7 @@
 #include "mxrp/base/Stack.hpp"
 #include <stdlib.h>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack, "Stack")

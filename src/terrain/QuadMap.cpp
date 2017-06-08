@@ -9,7 +9,7 @@
 #include "mxrp/base/units/Angles.hpp"
 #include "mxrp/base/units/Distances.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap, "QuadMap")

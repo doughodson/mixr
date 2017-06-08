@@ -5,7 +5,7 @@
 #include "mxrp/simulation/AbstractDataRecorder.hpp"
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace models { class Player; class Track; class Emission; }
 namespace base { class String; }
 namespace recorder {

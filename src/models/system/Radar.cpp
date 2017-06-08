@@ -12,7 +12,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Radar, "Radar")

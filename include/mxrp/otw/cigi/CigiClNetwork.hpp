@@ -17,7 +17,7 @@ class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS
 class CigiIncomingMsg;
 class CigiOutgoingMsg;
 
-namespace oe {
+namespace mxrp {
 namespace base { class NetHandler; class Thread; }
 namespace otw {
 class OtwCigiCl;

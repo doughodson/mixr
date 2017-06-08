@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class List; class Table1; }
 namespace models {
 class IrQueryMsg;

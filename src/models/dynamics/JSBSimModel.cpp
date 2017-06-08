@@ -41,7 +41,7 @@
 #include <JSBSim/models/propulsion/FGPropeller.h>
 #include <JSBSim/models/propulsion/FGTank.h>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")

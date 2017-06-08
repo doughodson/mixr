@@ -12,7 +12,7 @@
 #include "mxrp/base/Integer.hpp"
 #include "mxrp/base/Float.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")

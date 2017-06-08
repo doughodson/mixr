@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Object.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 // Main (protocol buffer) data record
 namespace pb { class DataRecord; }

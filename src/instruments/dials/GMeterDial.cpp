@@ -3,7 +3,7 @@
 
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")

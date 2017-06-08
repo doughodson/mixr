@@ -4,7 +4,7 @@
 #include "mxrp/base/String.hpp"
 #include "mxrp/base/List.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Message, "Message")

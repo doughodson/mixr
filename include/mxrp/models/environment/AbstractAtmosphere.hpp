@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 class AbstractAtmosphere : public base::Component

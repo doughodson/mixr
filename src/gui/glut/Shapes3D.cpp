@@ -9,7 +9,7 @@
 #include <GL/glu.h>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace glut {
 
 IMPLEMENT_SUBCLASS(Sphere, "Sphere")

@@ -2,7 +2,7 @@
 #include "mxrp/base/Identifier.hpp"
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Identifier, "Identifier")

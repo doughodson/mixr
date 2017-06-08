@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Graphic.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
 #include "mxrp/models/system/RfSystem.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class PairStream; }
 namespace models {
 class Datalink;

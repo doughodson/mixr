@@ -4,7 +4,7 @@
 
 #include "mxrp/models/system/IrSensor.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Integer; class Number; class String; }
 namespace models {
 class IrSeeker;

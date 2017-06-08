@@ -85,10 +85,10 @@
 
 #define BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)                                 \
 {                                                                                  \
-   ::oe::simulation::AbstractDataRecorder* _p = pRecorder;                         \
+   ::mxrp::simulation::AbstractDataRecorder* _p = pRecorder;                         \
    if (pRecorder != nullptr)  {                                                    \
       unsigned int _token = token;                                                 \
-      const ::oe::base::Object* _obj[4] = { nullptr, nullptr, nullptr, nullptr };  \
+      const ::mxrp::base::Object* _obj[4] = { nullptr, nullptr, nullptr, nullptr };  \
       double _val[4] = { 0.0, 0.0, 0.0, 0.0 };
 
 #define SAMPLE_1_OBJECT(P1)               _obj[0] = P1;

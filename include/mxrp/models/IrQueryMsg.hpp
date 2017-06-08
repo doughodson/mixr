@@ -4,7 +4,7 @@
 
 #include "mxrp/models/SensorMsg.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; }
 namespace models {
 class IrSensor;

@@ -1,7 +1,7 @@
 
 #include "mxrp/models/player/Sam.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Sam, "Sam")

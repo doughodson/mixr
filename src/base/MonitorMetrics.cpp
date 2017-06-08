@@ -7,7 +7,7 @@
 #include "mxrp/base/functors/Tables.hpp"
 #include <cstdio>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(MonitorMetrics,"monitorMetrics")

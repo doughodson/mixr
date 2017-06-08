@@ -7,7 +7,7 @@
 #include "mxrp/base/Number.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(Ai2DiSwitch, "Ai2DiSwitch")

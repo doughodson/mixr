@@ -4,7 +4,7 @@
 #include "mxrp/base/units/Times.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //==============================================================================

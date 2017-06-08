@@ -5,7 +5,7 @@
 #include "mxrp/models/system/RfSensor.hpp"
 #include "mxrp/base/safe_queue.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

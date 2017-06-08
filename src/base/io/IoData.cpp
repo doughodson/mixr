@@ -2,7 +2,7 @@
 #include "mxrp/base/io/IoData.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(IoData, "GenericIoData")

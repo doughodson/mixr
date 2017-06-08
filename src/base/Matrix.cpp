@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iomanip>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Matrix, "Matrix")

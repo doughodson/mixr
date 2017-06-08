@@ -8,7 +8,7 @@
 #include "mxrp/models/player/Player.hpp"
 #include "mxrp/simulation/AbstractNib.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModel, "OtwModel")

@@ -14,7 +14,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/String.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(MultiActorAgent, "MultiActorAgent")

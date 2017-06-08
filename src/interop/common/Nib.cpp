@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace interop {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")

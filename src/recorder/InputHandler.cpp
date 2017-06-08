@@ -3,7 +3,7 @@
 #include "mxrp/recorder/DataRecordHandle.hpp"
 #include "mxrp/recorder/protobuf/DataRecord.pb.h"
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(InputHandler, "RecorderInputHandler")

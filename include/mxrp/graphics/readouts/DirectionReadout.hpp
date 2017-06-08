@@ -4,7 +4,7 @@
 
 #include "NumericReadout.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

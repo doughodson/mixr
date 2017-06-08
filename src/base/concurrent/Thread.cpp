@@ -4,7 +4,7 @@
 #include "mxrp/base/Component.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")

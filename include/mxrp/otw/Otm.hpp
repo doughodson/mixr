@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/safe_ptr.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Identifier; class Number; class String; }
 namespace models { class Player; }
 namespace otw {

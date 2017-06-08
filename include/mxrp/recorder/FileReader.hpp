@@ -4,7 +4,7 @@
 
 #include "mxrp/recorder/InputHandler.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class String; }
 namespace recorder {
 

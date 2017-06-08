@@ -12,7 +12,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace dis {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")

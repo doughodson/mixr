@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace ubf {
 

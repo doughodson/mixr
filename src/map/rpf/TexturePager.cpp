@@ -6,7 +6,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/List.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")

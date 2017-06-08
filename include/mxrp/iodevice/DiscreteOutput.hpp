@@ -4,7 +4,7 @@
 
 #include "mxrp/base/io/IoAdapter.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class NetHandler; class Number; }
 namespace iodevice {
 class IoDevice;

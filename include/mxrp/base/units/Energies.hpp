@@ -16,7 +16,7 @@
 #include "mxrp/base/units/energy_utils.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

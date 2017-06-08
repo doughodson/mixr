@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Matrixd"
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace navDR {
 

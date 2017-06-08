@@ -5,7 +5,7 @@
 #include "mxrp/terrain/Terrain.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 class DataFile;
 

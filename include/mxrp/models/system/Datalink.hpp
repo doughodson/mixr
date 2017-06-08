@@ -6,7 +6,7 @@
 
 #include "mxrp/base/safe_queue.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Distance; class Number; class String; }
 namespace models {
 class CommRadio;

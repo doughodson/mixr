@@ -2,7 +2,7 @@
 #include "mxrp/linearsystem/Limit11.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit11, "Limit11")

@@ -3,7 +3,7 @@
 
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")

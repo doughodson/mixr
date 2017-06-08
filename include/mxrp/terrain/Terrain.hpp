@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Vec2d"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Hsva; class String; }
 namespace terrain {
 

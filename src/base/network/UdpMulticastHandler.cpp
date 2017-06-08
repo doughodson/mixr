@@ -36,7 +36,7 @@
 #include <cstdio>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(UdpMulticastHandler, "UdpMulticastHandler")

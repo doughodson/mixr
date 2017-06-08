@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class CVector; // Column vector
 class RVector; // Row vector

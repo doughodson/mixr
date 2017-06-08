@@ -8,7 +8,7 @@
 #include <sstream>
 #include <fstream>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 namespace pb {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;

@@ -26,7 +26,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 //class CigiIncomingMsg;
 //class CigiOutgoingMsg;
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class NetHandler; class Thread; }
 namespace models {
 class AirVehicle; class Building; class Effects; class GroundVehicle; class LifeForm;

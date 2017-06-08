@@ -28,7 +28,7 @@ class CigiArtPartCtrlV3;
 //class CigiIncomingMsg;
 //class CigiOutgoingMsg;
 
-namespace oe {
+namespace mxrp {
 namespace models { class Player; }
 namespace otw {
 

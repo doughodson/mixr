@@ -6,7 +6,7 @@
 #include "mxrp/base/safe_ptr.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Vec4d;
 class MonitorMetrics;

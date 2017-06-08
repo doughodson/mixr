@@ -15,7 +15,7 @@
 
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace osg {
 

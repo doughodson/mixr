@@ -4,7 +4,7 @@
 
 #include "mxrp/linearsystem/ScalerFunc.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 //------------------------------------------------------------------------------

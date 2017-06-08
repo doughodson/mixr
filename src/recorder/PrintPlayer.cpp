@@ -8,7 +8,7 @@
 
 #include <iomanip>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintPlayer,"PrintPlayer")

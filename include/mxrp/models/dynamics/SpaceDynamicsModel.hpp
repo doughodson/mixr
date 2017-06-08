@@ -4,7 +4,7 @@
 
 #include "mxrp/models/dynamics/DynamicsModel.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

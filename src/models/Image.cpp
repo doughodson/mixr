@@ -2,7 +2,7 @@
 #include "mxrp/models/Image.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Image, "SarImage")

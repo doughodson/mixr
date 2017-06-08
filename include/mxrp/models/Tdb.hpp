@@ -5,7 +5,7 @@
 #include "mxrp/models/system/System.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class Gimbal;
 class Player;

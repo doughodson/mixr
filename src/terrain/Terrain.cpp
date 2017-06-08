@@ -15,7 +15,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Terrain, "AbstractTerrain")

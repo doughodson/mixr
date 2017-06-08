@@ -3,7 +3,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorGradient,"ColorGradient")

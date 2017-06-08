@@ -5,7 +5,7 @@
 #include "mxrp/models/navigation/Navigation.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

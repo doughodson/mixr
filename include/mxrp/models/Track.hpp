@@ -13,7 +13,7 @@
 
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class Emission;
 class IrQueryMsg;

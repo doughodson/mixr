@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "TextureTable.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; }
 namespace rpf {
 class CadrgMap;

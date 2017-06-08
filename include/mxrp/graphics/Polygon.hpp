@@ -4,7 +4,7 @@
 
 #include "Graphic.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

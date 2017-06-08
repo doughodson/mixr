@@ -26,7 +26,7 @@
 #include <GL/glext.h>
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Display, "Display")

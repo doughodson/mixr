@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <limits>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")

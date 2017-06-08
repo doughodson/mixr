@@ -4,7 +4,7 @@
 #include "mxrp/base/units/Frequencies.hpp"
 #include "mxrp/base/util/constants.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LowpassFilter,"LowpassFilter")

@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Display.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace glut {
 
 //------------------------------------------------------------------------------

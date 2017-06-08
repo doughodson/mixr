@@ -5,7 +5,7 @@
 #include "mxrp/graphics/Page.hpp"
 #include "mxrp/instruments/eadi3d/Eadi3DObjects.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

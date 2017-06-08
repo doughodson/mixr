@@ -4,7 +4,7 @@
 #include "mxrp/base/distributions/Pareto.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Pareto,"Pareto")

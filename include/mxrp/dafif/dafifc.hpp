@@ -4,7 +4,7 @@
 #ifndef __mxrp_dafif_dafifc_H__
 #define __mxrp_dafif_dafifc_H__
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 // Convert MHz to KHz and HHz/

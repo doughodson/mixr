@@ -6,7 +6,7 @@
 // Linear Function Interpolators
 //------------------------------------------------------------------------------
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // ---

@@ -6,7 +6,7 @@
 #include "mxrp/base/osg/Vec3d"
 #include "mxrp/base/osg/Vec4d"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

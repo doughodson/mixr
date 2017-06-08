@@ -6,7 +6,7 @@
 #include "mxrp/config.hpp"
 #include "mxrp/base/units/distance_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Number; class PairStream; }
 namespace models {
 class Player;

@@ -6,7 +6,7 @@
 #include "mxrp/base/units/distance_utils.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

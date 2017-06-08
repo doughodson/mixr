@@ -321,7 +321,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int oe::base::EdlScanner::yylex()
+#define YY_DECL int mxrp::base::EdlScanner::yylex()
 
 static yyconst flex_int16_t yy_nxt[][128] =
     {
@@ -2022,7 +2022,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "edlFlexLexer" */
-/* derived 'oe::base::EdlScanner' is a subclass of edlFlexLexer */
+/* derived 'mxrp::base::EdlScanner' is a subclass of edlFlexLexer */
 #line 2027 "EdlScanner.cpp"
 
 #define INITIAL 0

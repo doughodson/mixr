@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace glut {
 
 base::Object* factory(const std::string& name)

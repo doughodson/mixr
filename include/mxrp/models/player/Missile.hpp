@@ -4,7 +4,7 @@
 
 #include "mxrp/models/player/AbstractWeapon.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace models {
 class Player;

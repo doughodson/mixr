@@ -4,7 +4,7 @@
 
 #include "mxrp/base/concurrent/Thread.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Component;
 

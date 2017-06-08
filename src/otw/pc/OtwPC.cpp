@@ -18,7 +18,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwPC, "OtwPC")

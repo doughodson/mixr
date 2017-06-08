@@ -8,7 +8,7 @@
 #include "mxrp/base/safe_stack.hpp"
 #include "mxrp/base/util/constants.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Function; class Power; }
 namespace models {
 class Player;

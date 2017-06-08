@@ -6,7 +6,7 @@
 // General purpose OS system functions
 //------------------------------------------------------------------------------
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // sleep for 'msec' milliseconds

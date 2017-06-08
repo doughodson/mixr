@@ -17,7 +17,7 @@
 #include "mxrp/base/osg/Vec3"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 template<typename VT>

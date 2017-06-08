@@ -5,7 +5,7 @@
 #include "mxrp/models/player/AbstractWeapon.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 #include "mxrp/base/units/Powers.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(StabilizingGimbal, "StabilizingGimbal")

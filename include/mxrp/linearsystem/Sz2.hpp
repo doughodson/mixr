@@ -4,7 +4,7 @@
 
 #include "mxrp/linearsystem/SecondOrderTf.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 //------------------------------------------------------------------------------

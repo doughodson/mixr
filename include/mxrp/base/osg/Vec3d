@@ -17,7 +17,7 @@
 #include "mxrp/base/osg/Vec2d"
 #include "mxrp/base/osg/Vec3f"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose double triple for use as vertices, vectors and normals.

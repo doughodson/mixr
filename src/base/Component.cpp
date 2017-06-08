@@ -12,7 +12,7 @@
 #include "mxrp/base/util/system_utils.hpp"
 #include "mxrp/base/util/platform_api.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Component, "Component")
@@ -41,7 +41,7 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 7, setSlotDisableMsgType, Number)
 END_SLOT_MAP()
 
-bool Component::event(const int _event, ::oe::base::Object* const _obj)
+bool Component::event(const int _event, ::mxrp::base::Object* const _obj)
 {
     bool _used {};
 

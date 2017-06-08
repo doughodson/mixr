@@ -7,7 +7,7 @@
 #include "mxrp/base/util/platform_api.hpp"
 #include <GL/gl.h>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class List; class String; }
 namespace graphics {
 

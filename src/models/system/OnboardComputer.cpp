@@ -9,7 +9,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer, "OnboardComputer")

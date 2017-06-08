@@ -4,7 +4,7 @@
 
 #include "mxrp/base/concurrent/PeriodicTask.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 // ---

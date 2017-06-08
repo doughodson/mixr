@@ -11,7 +11,7 @@
 
 //#define USE_TDBIR
 
-namespace oe {
+namespace mxrp {
 namespace base { class PairStream; }
 namespace models {
 class Player;

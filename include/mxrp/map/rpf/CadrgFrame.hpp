@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/map/rpf/map_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 class CadrgFrameEntry;

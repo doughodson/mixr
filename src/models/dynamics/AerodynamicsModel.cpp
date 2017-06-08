@@ -3,7 +3,7 @@
 
 #include "mxrp/base/units/angle_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")

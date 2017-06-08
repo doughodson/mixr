@@ -4,7 +4,7 @@
 
 #include "mxrp/linearsystem/DiffEquation.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 //------------------------------------------------------------------------------

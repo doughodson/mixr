@@ -5,7 +5,7 @@
 #include "mxrp/base/Number.hpp"
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Number;
 

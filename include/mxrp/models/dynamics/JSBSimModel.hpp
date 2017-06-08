@@ -6,7 +6,7 @@
 
 namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
-namespace oe {
+namespace mxrp {
 namespace base { class String; class Integer; }
 namespace models {
 

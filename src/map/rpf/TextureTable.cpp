@@ -3,7 +3,7 @@
 #include "mxrp/graphics/Texture.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")

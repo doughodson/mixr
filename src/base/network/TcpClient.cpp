@@ -34,7 +34,7 @@
 #include "mxrp/base/String.hpp"
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(TcpClient, "TcpClient")

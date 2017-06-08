@@ -15,7 +15,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(NumericReadout, "NumericReadout")

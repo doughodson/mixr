@@ -18,7 +18,7 @@
 
 #include <iosfwd>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

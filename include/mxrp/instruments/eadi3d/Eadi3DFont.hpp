@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Font.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

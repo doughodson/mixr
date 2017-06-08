@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Vec3d"
 #include "mxrp/base/osg/Matrixd"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; class Number; }
 namespace models {
 class Bullet;

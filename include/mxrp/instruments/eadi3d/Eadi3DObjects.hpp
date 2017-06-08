@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/instruments/eadi3d/IrisGLCompat.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

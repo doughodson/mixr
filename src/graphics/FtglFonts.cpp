@@ -18,7 +18,7 @@
 #include <FTGL/FTGLTextureFont.h>
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

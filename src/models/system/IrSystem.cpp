@@ -11,7 +11,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSystem, "IrSystem")

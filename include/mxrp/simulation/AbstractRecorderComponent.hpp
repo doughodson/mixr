@@ -5,7 +5,7 @@
 #include "mxrp/base/Component.hpp"
 #include "mxrp/simulation/dataRecorderTokens.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; }
 namespace simulation {
 

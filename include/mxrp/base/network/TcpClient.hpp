@@ -4,7 +4,7 @@
 
 #include "mxrp/base/network/TcpHandler.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

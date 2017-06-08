@@ -10,7 +10,7 @@
 #include <cmath>
 #include <cstdlib>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Database, "Database")

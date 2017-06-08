@@ -4,7 +4,7 @@
 
 #include "mxrp/models/dynamics/AerodynamicsModel.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

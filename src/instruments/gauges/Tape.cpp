@@ -4,7 +4,7 @@
 #include "mxrp/base/util/math_utils.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Tape, "Tape")

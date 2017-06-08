@@ -2,7 +2,7 @@
 #include "mxrp/linearsystem/SecondOrderTf.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(SecondOrderTf, "SecondOrderTf")

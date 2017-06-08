@@ -7,7 +7,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/osg/Vec4d"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")

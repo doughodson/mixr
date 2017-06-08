@@ -9,7 +9,7 @@
 #include "mxrp/base/concurrent/PeriodicTask.hpp"
 #include "mxrp/base/units/Frequencies.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //=============================================================================

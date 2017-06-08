@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Color.hpp"
 
-namespace oe {
+namespace mxrp {
 
 namespace base { class PairStream; }
 

@@ -3,7 +3,7 @@
 #include "mxrp/base/util/platform_api.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")

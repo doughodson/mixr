@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/functors/Functions.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class List;
 class Number;

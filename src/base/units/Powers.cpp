@@ -2,7 +2,7 @@
 #include "mxrp/base/units/Powers.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //==============================================================================

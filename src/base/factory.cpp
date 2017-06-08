@@ -74,7 +74,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 Object* factory(const std::string& name)

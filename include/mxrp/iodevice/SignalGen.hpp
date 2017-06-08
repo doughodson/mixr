@@ -4,7 +4,7 @@
 
 #include "mxrp/base/io/IoAdapter.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Frequency; class String; }
 namespace iodevice {
 class IoDevice;

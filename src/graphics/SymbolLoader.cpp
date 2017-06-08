@@ -13,7 +13,7 @@
 
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")

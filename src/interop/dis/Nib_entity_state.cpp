@@ -28,7 +28,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace dis {
 
 static const unsigned int CAMOUFLAGE_BIT  = 0x00000001;   // Paint scheme (camouflage) bit (0 - Uniform color; 1 - Camouflaged)

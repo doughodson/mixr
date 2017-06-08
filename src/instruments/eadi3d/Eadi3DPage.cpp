@@ -10,7 +10,7 @@
 #define RADIUS_140  1.729                   /* 140 in view */
 #define RADIUS_120  1.877                   /* 120 in view */
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 static double GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };

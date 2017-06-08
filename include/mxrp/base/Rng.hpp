@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // C++ include file for MT19937, with initialization improved 2002/1/26.

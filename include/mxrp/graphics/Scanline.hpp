@@ -10,7 +10,7 @@
 
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 class Clip3D;
 class Polygon;

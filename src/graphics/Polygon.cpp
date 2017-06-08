@@ -5,7 +5,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include <GL/glu.h>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")

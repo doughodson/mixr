@@ -91,7 +91,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 base::Object* factory(const std::string& name)

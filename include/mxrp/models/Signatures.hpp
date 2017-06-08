@@ -5,7 +5,7 @@
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/util/constants.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class Table2; }
 namespace models {
 class Emission;

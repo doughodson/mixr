@@ -16,7 +16,7 @@
 
 #include "mxrp/base/osg/Vec3f"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose float quad. Uses include representation

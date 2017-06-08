@@ -4,7 +4,7 @@
 
 #include "Font.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace graphics {
 

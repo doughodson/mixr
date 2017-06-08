@@ -27,7 +27,7 @@
 #include <cstring>
 #include <cctype>
 
-namespace oe {
+namespace mxrp {
 
 namespace dis {
 
@@ -497,7 +497,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 //------------------------------------------------------------------------------
 // processStartPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStartPDU(const oe::dis::StartPDU* const)
+bool NetIO::processStartPDU(const mxrp::dis::StartPDU* const)
 {
     return true;
 }
@@ -505,7 +505,7 @@ bool NetIO::processStartPDU(const oe::dis::StartPDU* const)
 //------------------------------------------------------------------------------
 // processStopPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStopPDU(const oe::dis::StopPDU* const)
+bool NetIO::processStopPDU(const mxrp::dis::StopPDU* const)
 {
      return true;
 }
@@ -513,7 +513,7 @@ bool NetIO::processStopPDU(const oe::dis::StopPDU* const)
 //------------------------------------------------------------------------------
 // processAcknowledgePDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processAcknowledgePDU(const oe::dis::AcknowledgePDU* const)
+bool NetIO::processAcknowledgePDU(const mxrp::dis::AcknowledgePDU* const)
 {
     return true;
 }
@@ -521,7 +521,7 @@ bool NetIO::processAcknowledgePDU(const oe::dis::AcknowledgePDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU(const oe::dis::ActionRequestPDU* const)
+bool NetIO::processActionRequestPDU(const mxrp::dis::ActionRequestPDU* const)
 {
     return true;
 }
@@ -529,7 +529,7 @@ bool NetIO::processActionRequestPDU(const oe::dis::ActionRequestPDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU_R(const oe::dis::ActionRequestPDU_R* const)
+bool NetIO::processActionRequestPDU_R(const mxrp::dis::ActionRequestPDU_R* const)
 {
     return true;
 }
@@ -537,7 +537,7 @@ bool NetIO::processActionRequestPDU_R(const oe::dis::ActionRequestPDU_R* const)
 //------------------------------------------------------------------------------
 // processActionResponsePDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionResponsePDU_R(const oe::dis::ActionResponsePDU_R* const)
+bool NetIO::processActionResponsePDU_R(const mxrp::dis::ActionResponsePDU_R* const)
 {
     return true;
 }

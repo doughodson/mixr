@@ -11,7 +11,7 @@
 #include "AIParser.h"
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 //------------------------------------------------------------------------------

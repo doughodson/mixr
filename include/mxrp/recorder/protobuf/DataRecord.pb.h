@@ -27,7 +27,7 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 namespace pb {
 
@@ -168,10 +168,10 @@ class DataRecord : public ::google::protobuf::Message {
   inline bool has_time() const;
   inline void clear_time();
   static const int kTimeFieldNumber = 1;
-  inline const ::oe::recorder::pb::Time& time() const;
-  inline ::oe::recorder::pb::Time* mutable_time();
-  inline ::oe::recorder::pb::Time* release_time();
-  inline void set_allocated_time(::oe::recorder::pb::Time* time);
+  inline const ::mxrp::recorder::pb::Time& time() const;
+  inline ::mxrp::recorder::pb::Time* mutable_time();
+  inline ::mxrp::recorder::pb::Time* release_time();
+  inline void set_allocated_time(::mxrp::recorder::pb::Time* time);
 
   // required uint32 id = 2;
   inline bool has_id() const;
@@ -184,163 +184,163 @@ class DataRecord : public ::google::protobuf::Message {
   inline bool has_file_id_msg() const;
   inline void clear_file_id_msg();
   static const int kFileIdMsgFieldNumber = 11;
-  inline const ::oe::recorder::pb::FileIdMsg& file_id_msg() const;
-  inline ::oe::recorder::pb::FileIdMsg* mutable_file_id_msg();
-  inline ::oe::recorder::pb::FileIdMsg* release_file_id_msg();
-  inline void set_allocated_file_id_msg(::oe::recorder::pb::FileIdMsg* file_id_msg);
+  inline const ::mxrp::recorder::pb::FileIdMsg& file_id_msg() const;
+  inline ::mxrp::recorder::pb::FileIdMsg* mutable_file_id_msg();
+  inline ::mxrp::recorder::pb::FileIdMsg* release_file_id_msg();
+  inline void set_allocated_file_id_msg(::mxrp::recorder::pb::FileIdMsg* file_id_msg);
 
   // optional .oe.recorder.pb.UnknownIdMsg unknown_id_msg = 13;
   inline bool has_unknown_id_msg() const;
   inline void clear_unknown_id_msg();
   static const int kUnknownIdMsgFieldNumber = 13;
-  inline const ::oe::recorder::pb::UnknownIdMsg& unknown_id_msg() const;
-  inline ::oe::recorder::pb::UnknownIdMsg* mutable_unknown_id_msg();
-  inline ::oe::recorder::pb::UnknownIdMsg* release_unknown_id_msg();
-  inline void set_allocated_unknown_id_msg(::oe::recorder::pb::UnknownIdMsg* unknown_id_msg);
+  inline const ::mxrp::recorder::pb::UnknownIdMsg& unknown_id_msg() const;
+  inline ::mxrp::recorder::pb::UnknownIdMsg* mutable_unknown_id_msg();
+  inline ::mxrp::recorder::pb::UnknownIdMsg* release_unknown_id_msg();
+  inline void set_allocated_unknown_id_msg(::mxrp::recorder::pb::UnknownIdMsg* unknown_id_msg);
 
   // optional .oe.recorder.pb.MarkerMsg marker_msg = 14;
   inline bool has_marker_msg() const;
   inline void clear_marker_msg();
   static const int kMarkerMsgFieldNumber = 14;
-  inline const ::oe::recorder::pb::MarkerMsg& marker_msg() const;
-  inline ::oe::recorder::pb::MarkerMsg* mutable_marker_msg();
-  inline ::oe::recorder::pb::MarkerMsg* release_marker_msg();
-  inline void set_allocated_marker_msg(::oe::recorder::pb::MarkerMsg* marker_msg);
+  inline const ::mxrp::recorder::pb::MarkerMsg& marker_msg() const;
+  inline ::mxrp::recorder::pb::MarkerMsg* mutable_marker_msg();
+  inline ::mxrp::recorder::pb::MarkerMsg* release_marker_msg();
+  inline void set_allocated_marker_msg(::mxrp::recorder::pb::MarkerMsg* marker_msg);
 
   // optional .oe.recorder.pb.InputDeviceMsg input_device_msg = 15;
   inline bool has_input_device_msg() const;
   inline void clear_input_device_msg();
   static const int kInputDeviceMsgFieldNumber = 15;
-  inline const ::oe::recorder::pb::InputDeviceMsg& input_device_msg() const;
-  inline ::oe::recorder::pb::InputDeviceMsg* mutable_input_device_msg();
-  inline ::oe::recorder::pb::InputDeviceMsg* release_input_device_msg();
-  inline void set_allocated_input_device_msg(::oe::recorder::pb::InputDeviceMsg* input_device_msg);
+  inline const ::mxrp::recorder::pb::InputDeviceMsg& input_device_msg() const;
+  inline ::mxrp::recorder::pb::InputDeviceMsg* mutable_input_device_msg();
+  inline ::mxrp::recorder::pb::InputDeviceMsg* release_input_device_msg();
+  inline void set_allocated_input_device_msg(::mxrp::recorder::pb::InputDeviceMsg* input_device_msg);
 
   // optional .oe.recorder.pb.NewPlayerEventMsg new_player_event_msg = 31;
   inline bool has_new_player_event_msg() const;
   inline void clear_new_player_event_msg();
   static const int kNewPlayerEventMsgFieldNumber = 31;
-  inline const ::oe::recorder::pb::NewPlayerEventMsg& new_player_event_msg() const;
-  inline ::oe::recorder::pb::NewPlayerEventMsg* mutable_new_player_event_msg();
-  inline ::oe::recorder::pb::NewPlayerEventMsg* release_new_player_event_msg();
-  inline void set_allocated_new_player_event_msg(::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg);
+  inline const ::mxrp::recorder::pb::NewPlayerEventMsg& new_player_event_msg() const;
+  inline ::mxrp::recorder::pb::NewPlayerEventMsg* mutable_new_player_event_msg();
+  inline ::mxrp::recorder::pb::NewPlayerEventMsg* release_new_player_event_msg();
+  inline void set_allocated_new_player_event_msg(::mxrp::recorder::pb::NewPlayerEventMsg* new_player_event_msg);
 
   // optional .oe.recorder.pb.PlayerRemovedEventMsg player_removed_event_msg = 32;
   inline bool has_player_removed_event_msg() const;
   inline void clear_player_removed_event_msg();
   static const int kPlayerRemovedEventMsgFieldNumber = 32;
-  inline const ::oe::recorder::pb::PlayerRemovedEventMsg& player_removed_event_msg() const;
-  inline ::oe::recorder::pb::PlayerRemovedEventMsg* mutable_player_removed_event_msg();
-  inline ::oe::recorder::pb::PlayerRemovedEventMsg* release_player_removed_event_msg();
-  inline void set_allocated_player_removed_event_msg(::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg);
+  inline const ::mxrp::recorder::pb::PlayerRemovedEventMsg& player_removed_event_msg() const;
+  inline ::mxrp::recorder::pb::PlayerRemovedEventMsg* mutable_player_removed_event_msg();
+  inline ::mxrp::recorder::pb::PlayerRemovedEventMsg* release_player_removed_event_msg();
+  inline void set_allocated_player_removed_event_msg(::mxrp::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg);
 
   // optional .oe.recorder.pb.PlayerDataMsg player_data_msg = 33;
   inline bool has_player_data_msg() const;
   inline void clear_player_data_msg();
   static const int kPlayerDataMsgFieldNumber = 33;
-  inline const ::oe::recorder::pb::PlayerDataMsg& player_data_msg() const;
-  inline ::oe::recorder::pb::PlayerDataMsg* mutable_player_data_msg();
-  inline ::oe::recorder::pb::PlayerDataMsg* release_player_data_msg();
-  inline void set_allocated_player_data_msg(::oe::recorder::pb::PlayerDataMsg* player_data_msg);
+  inline const ::mxrp::recorder::pb::PlayerDataMsg& player_data_msg() const;
+  inline ::mxrp::recorder::pb::PlayerDataMsg* mutable_player_data_msg();
+  inline ::mxrp::recorder::pb::PlayerDataMsg* release_player_data_msg();
+  inline void set_allocated_player_data_msg(::mxrp::recorder::pb::PlayerDataMsg* player_data_msg);
 
   // optional .oe.recorder.pb.PlayerDamagedEventMsg player_damaged_event_msg = 34;
   inline bool has_player_damaged_event_msg() const;
   inline void clear_player_damaged_event_msg();
   static const int kPlayerDamagedEventMsgFieldNumber = 34;
-  inline const ::oe::recorder::pb::PlayerDamagedEventMsg& player_damaged_event_msg() const;
-  inline ::oe::recorder::pb::PlayerDamagedEventMsg* mutable_player_damaged_event_msg();
-  inline ::oe::recorder::pb::PlayerDamagedEventMsg* release_player_damaged_event_msg();
-  inline void set_allocated_player_damaged_event_msg(::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg);
+  inline const ::mxrp::recorder::pb::PlayerDamagedEventMsg& player_damaged_event_msg() const;
+  inline ::mxrp::recorder::pb::PlayerDamagedEventMsg* mutable_player_damaged_event_msg();
+  inline ::mxrp::recorder::pb::PlayerDamagedEventMsg* release_player_damaged_event_msg();
+  inline void set_allocated_player_damaged_event_msg(::mxrp::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg);
 
   // optional .oe.recorder.pb.PlayerCollisionEventMsg player_collision_event_msg = 35;
   inline bool has_player_collision_event_msg() const;
   inline void clear_player_collision_event_msg();
   static const int kPlayerCollisionEventMsgFieldNumber = 35;
-  inline const ::oe::recorder::pb::PlayerCollisionEventMsg& player_collision_event_msg() const;
-  inline ::oe::recorder::pb::PlayerCollisionEventMsg* mutable_player_collision_event_msg();
-  inline ::oe::recorder::pb::PlayerCollisionEventMsg* release_player_collision_event_msg();
-  inline void set_allocated_player_collision_event_msg(::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg);
+  inline const ::mxrp::recorder::pb::PlayerCollisionEventMsg& player_collision_event_msg() const;
+  inline ::mxrp::recorder::pb::PlayerCollisionEventMsg* mutable_player_collision_event_msg();
+  inline ::mxrp::recorder::pb::PlayerCollisionEventMsg* release_player_collision_event_msg();
+  inline void set_allocated_player_collision_event_msg(::mxrp::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg);
 
   // optional .oe.recorder.pb.PlayerCrashEventMsg player_crash_event_msg = 36;
   inline bool has_player_crash_event_msg() const;
   inline void clear_player_crash_event_msg();
   static const int kPlayerCrashEventMsgFieldNumber = 36;
-  inline const ::oe::recorder::pb::PlayerCrashEventMsg& player_crash_event_msg() const;
-  inline ::oe::recorder::pb::PlayerCrashEventMsg* mutable_player_crash_event_msg();
-  inline ::oe::recorder::pb::PlayerCrashEventMsg* release_player_crash_event_msg();
-  inline void set_allocated_player_crash_event_msg(::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg);
+  inline const ::mxrp::recorder::pb::PlayerCrashEventMsg& player_crash_event_msg() const;
+  inline ::mxrp::recorder::pb::PlayerCrashEventMsg* mutable_player_crash_event_msg();
+  inline ::mxrp::recorder::pb::PlayerCrashEventMsg* release_player_crash_event_msg();
+  inline void set_allocated_player_crash_event_msg(::mxrp::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg);
 
   // optional .oe.recorder.pb.PlayerKilledEventMsg player_killed_event_msg = 37;
   inline bool has_player_killed_event_msg() const;
   inline void clear_player_killed_event_msg();
   static const int kPlayerKilledEventMsgFieldNumber = 37;
-  inline const ::oe::recorder::pb::PlayerKilledEventMsg& player_killed_event_msg() const;
-  inline ::oe::recorder::pb::PlayerKilledEventMsg* mutable_player_killed_event_msg();
-  inline ::oe::recorder::pb::PlayerKilledEventMsg* release_player_killed_event_msg();
-  inline void set_allocated_player_killed_event_msg(::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg);
+  inline const ::mxrp::recorder::pb::PlayerKilledEventMsg& player_killed_event_msg() const;
+  inline ::mxrp::recorder::pb::PlayerKilledEventMsg* mutable_player_killed_event_msg();
+  inline ::mxrp::recorder::pb::PlayerKilledEventMsg* release_player_killed_event_msg();
+  inline void set_allocated_player_killed_event_msg(::mxrp::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg);
 
   // optional .oe.recorder.pb.WeaponReleaseEventMsg weapon_release_event_msg = 51;
   inline bool has_weapon_release_event_msg() const;
   inline void clear_weapon_release_event_msg();
   static const int kWeaponReleaseEventMsgFieldNumber = 51;
-  inline const ::oe::recorder::pb::WeaponReleaseEventMsg& weapon_release_event_msg() const;
-  inline ::oe::recorder::pb::WeaponReleaseEventMsg* mutable_weapon_release_event_msg();
-  inline ::oe::recorder::pb::WeaponReleaseEventMsg* release_weapon_release_event_msg();
-  inline void set_allocated_weapon_release_event_msg(::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg);
+  inline const ::mxrp::recorder::pb::WeaponReleaseEventMsg& weapon_release_event_msg() const;
+  inline ::mxrp::recorder::pb::WeaponReleaseEventMsg* mutable_weapon_release_event_msg();
+  inline ::mxrp::recorder::pb::WeaponReleaseEventMsg* release_weapon_release_event_msg();
+  inline void set_allocated_weapon_release_event_msg(::mxrp::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg);
 
   // optional .oe.recorder.pb.WeaponHungEventMsg weapon_hung_event_msg = 52;
   inline bool has_weapon_hung_event_msg() const;
   inline void clear_weapon_hung_event_msg();
   static const int kWeaponHungEventMsgFieldNumber = 52;
-  inline const ::oe::recorder::pb::WeaponHungEventMsg& weapon_hung_event_msg() const;
-  inline ::oe::recorder::pb::WeaponHungEventMsg* mutable_weapon_hung_event_msg();
-  inline ::oe::recorder::pb::WeaponHungEventMsg* release_weapon_hung_event_msg();
-  inline void set_allocated_weapon_hung_event_msg(::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg);
+  inline const ::mxrp::recorder::pb::WeaponHungEventMsg& weapon_hung_event_msg() const;
+  inline ::mxrp::recorder::pb::WeaponHungEventMsg* mutable_weapon_hung_event_msg();
+  inline ::mxrp::recorder::pb::WeaponHungEventMsg* release_weapon_hung_event_msg();
+  inline void set_allocated_weapon_hung_event_msg(::mxrp::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg);
 
   // optional .oe.recorder.pb.WeaponDetonationEventMsg weapon_detonation_event_msg = 53;
   inline bool has_weapon_detonation_event_msg() const;
   inline void clear_weapon_detonation_event_msg();
   static const int kWeaponDetonationEventMsgFieldNumber = 53;
-  inline const ::oe::recorder::pb::WeaponDetonationEventMsg& weapon_detonation_event_msg() const;
-  inline ::oe::recorder::pb::WeaponDetonationEventMsg* mutable_weapon_detonation_event_msg();
-  inline ::oe::recorder::pb::WeaponDetonationEventMsg* release_weapon_detonation_event_msg();
-  inline void set_allocated_weapon_detonation_event_msg(::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg);
+  inline const ::mxrp::recorder::pb::WeaponDetonationEventMsg& weapon_detonation_event_msg() const;
+  inline ::mxrp::recorder::pb::WeaponDetonationEventMsg* mutable_weapon_detonation_event_msg();
+  inline ::mxrp::recorder::pb::WeaponDetonationEventMsg* release_weapon_detonation_event_msg();
+  inline void set_allocated_weapon_detonation_event_msg(::mxrp::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg);
 
   // optional .oe.recorder.pb.GunFiredEventMsg gun_fired_event_msg = 54;
   inline bool has_gun_fired_event_msg() const;
   inline void clear_gun_fired_event_msg();
   static const int kGunFiredEventMsgFieldNumber = 54;
-  inline const ::oe::recorder::pb::GunFiredEventMsg& gun_fired_event_msg() const;
-  inline ::oe::recorder::pb::GunFiredEventMsg* mutable_gun_fired_event_msg();
-  inline ::oe::recorder::pb::GunFiredEventMsg* release_gun_fired_event_msg();
-  inline void set_allocated_gun_fired_event_msg(::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg);
+  inline const ::mxrp::recorder::pb::GunFiredEventMsg& gun_fired_event_msg() const;
+  inline ::mxrp::recorder::pb::GunFiredEventMsg* mutable_gun_fired_event_msg();
+  inline ::mxrp::recorder::pb::GunFiredEventMsg* release_gun_fired_event_msg();
+  inline void set_allocated_gun_fired_event_msg(::mxrp::recorder::pb::GunFiredEventMsg* gun_fired_event_msg);
 
   // optional .oe.recorder.pb.NewTrackEventMsg new_track_event_msg = 71;
   inline bool has_new_track_event_msg() const;
   inline void clear_new_track_event_msg();
   static const int kNewTrackEventMsgFieldNumber = 71;
-  inline const ::oe::recorder::pb::NewTrackEventMsg& new_track_event_msg() const;
-  inline ::oe::recorder::pb::NewTrackEventMsg* mutable_new_track_event_msg();
-  inline ::oe::recorder::pb::NewTrackEventMsg* release_new_track_event_msg();
-  inline void set_allocated_new_track_event_msg(::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg);
+  inline const ::mxrp::recorder::pb::NewTrackEventMsg& new_track_event_msg() const;
+  inline ::mxrp::recorder::pb::NewTrackEventMsg* mutable_new_track_event_msg();
+  inline ::mxrp::recorder::pb::NewTrackEventMsg* release_new_track_event_msg();
+  inline void set_allocated_new_track_event_msg(::mxrp::recorder::pb::NewTrackEventMsg* new_track_event_msg);
 
   // optional .oe.recorder.pb.TrackRemovedEventMsg track_removed_event_msg = 72;
   inline bool has_track_removed_event_msg() const;
   inline void clear_track_removed_event_msg();
   static const int kTrackRemovedEventMsgFieldNumber = 72;
-  inline const ::oe::recorder::pb::TrackRemovedEventMsg& track_removed_event_msg() const;
-  inline ::oe::recorder::pb::TrackRemovedEventMsg* mutable_track_removed_event_msg();
-  inline ::oe::recorder::pb::TrackRemovedEventMsg* release_track_removed_event_msg();
-  inline void set_allocated_track_removed_event_msg(::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg);
+  inline const ::mxrp::recorder::pb::TrackRemovedEventMsg& track_removed_event_msg() const;
+  inline ::mxrp::recorder::pb::TrackRemovedEventMsg* mutable_track_removed_event_msg();
+  inline ::mxrp::recorder::pb::TrackRemovedEventMsg* release_track_removed_event_msg();
+  inline void set_allocated_track_removed_event_msg(::mxrp::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg);
 
   // optional .oe.recorder.pb.TrackDataMsg track_data_msg = 73;
   inline bool has_track_data_msg() const;
   inline void clear_track_data_msg();
   static const int kTrackDataMsgFieldNumber = 73;
-  inline const ::oe::recorder::pb::TrackDataMsg& track_data_msg() const;
-  inline ::oe::recorder::pb::TrackDataMsg* mutable_track_data_msg();
-  inline ::oe::recorder::pb::TrackDataMsg* release_track_data_msg();
-  inline void set_allocated_track_data_msg(::oe::recorder::pb::TrackDataMsg* track_data_msg);
+  inline const ::mxrp::recorder::pb::TrackDataMsg& track_data_msg() const;
+  inline ::mxrp::recorder::pb::TrackDataMsg* mutable_track_data_msg();
+  inline ::mxrp::recorder::pb::TrackDataMsg* release_track_data_msg();
+  inline void set_allocated_track_data_msg(::mxrp::recorder::pb::TrackDataMsg* track_data_msg);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(DataRecord)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.DataRecord)
@@ -392,25 +392,25 @@ class DataRecord : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::Time* time_;
-  ::oe::recorder::pb::FileIdMsg* file_id_msg_;
-  ::oe::recorder::pb::UnknownIdMsg* unknown_id_msg_;
-  ::oe::recorder::pb::MarkerMsg* marker_msg_;
-  ::oe::recorder::pb::InputDeviceMsg* input_device_msg_;
-  ::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg_;
-  ::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg_;
-  ::oe::recorder::pb::PlayerDataMsg* player_data_msg_;
-  ::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg_;
-  ::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg_;
-  ::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg_;
-  ::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg_;
-  ::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg_;
-  ::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg_;
-  ::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg_;
-  ::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg_;
-  ::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg_;
-  ::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg_;
-  ::oe::recorder::pb::TrackDataMsg* track_data_msg_;
+  ::mxrp::recorder::pb::Time* time_;
+  ::mxrp::recorder::pb::FileIdMsg* file_id_msg_;
+  ::mxrp::recorder::pb::UnknownIdMsg* unknown_id_msg_;
+  ::mxrp::recorder::pb::MarkerMsg* marker_msg_;
+  ::mxrp::recorder::pb::InputDeviceMsg* input_device_msg_;
+  ::mxrp::recorder::pb::NewPlayerEventMsg* new_player_event_msg_;
+  ::mxrp::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg_;
+  ::mxrp::recorder::pb::PlayerDataMsg* player_data_msg_;
+  ::mxrp::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg_;
+  ::mxrp::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg_;
+  ::mxrp::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg_;
+  ::mxrp::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg_;
+  ::mxrp::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg_;
+  ::mxrp::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg_;
+  ::mxrp::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg_;
+  ::mxrp::recorder::pb::GunFiredEventMsg* gun_fired_event_msg_;
+  ::mxrp::recorder::pb::NewTrackEventMsg* new_track_event_msg_;
+  ::mxrp::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg_;
+  ::mxrp::recorder::pb::TrackDataMsg* track_data_msg_;
   ::google::protobuf::uint32 id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -923,19 +923,19 @@ class NewPlayerEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // required .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(NewPlayerEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.NewPlayerEventMsg)
@@ -951,8 +951,8 @@ class NewPlayerEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1019,19 +1019,19 @@ class PlayerRemovedEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // optional .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerRemovedEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.PlayerRemovedEventMsg)
@@ -1047,8 +1047,8 @@ class PlayerRemovedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1115,19 +1115,19 @@ class PlayerDataMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // required .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   // optional double alpha = 3;
   inline bool has_alpha() const;
@@ -1170,8 +1170,8 @@ class PlayerDataMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
   double alpha_;
   double beta_;
   double cas_;
@@ -1241,19 +1241,19 @@ class PlayerDamagedEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // optional .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerDamagedEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.PlayerDamagedEventMsg)
@@ -1269,8 +1269,8 @@ class PlayerDamagedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1337,28 +1337,28 @@ class PlayerCollisionEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // optional .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   // optional .oe.recorder.pb.PlayerId other_player_id = 3;
   inline bool has_other_player_id() const;
   inline void clear_other_player_id();
   static const int kOtherPlayerIdFieldNumber = 3;
-  inline const ::oe::recorder::pb::PlayerId& other_player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_other_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_other_player_id();
-  inline void set_allocated_other_player_id(::oe::recorder::pb::PlayerId* other_player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& other_player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_other_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_other_player_id();
+  inline void set_allocated_other_player_id(::mxrp::recorder::pb::PlayerId* other_player_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerCollisionEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.PlayerCollisionEventMsg)
@@ -1376,9 +1376,9 @@ class PlayerCollisionEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
-  ::oe::recorder::pb::PlayerId* other_player_id_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* other_player_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1445,19 +1445,19 @@ class PlayerCrashEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // optional .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerCrashEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.PlayerCrashEventMsg)
@@ -1473,8 +1473,8 @@ class PlayerCrashEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1541,28 +1541,28 @@ class PlayerKilledEventMsg : public ::google::protobuf::Message {
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_id();
-  inline ::oe::recorder::pb::PlayerId* release_id();
-  inline void set_allocated_id(::oe::recorder::pb::PlayerId* id);
+  inline const ::mxrp::recorder::pb::PlayerId& id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_id();
+  inline void set_allocated_id(::mxrp::recorder::pb::PlayerId* id);
 
   // optional .oe.recorder.pb.PlayerState state = 2;
   inline bool has_state() const;
   inline void clear_state();
   static const int kStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_state();
-  inline ::oe::recorder::pb::PlayerState* release_state();
-  inline void set_allocated_state(::oe::recorder::pb::PlayerState* state);
+  inline const ::mxrp::recorder::pb::PlayerState& state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_state();
+  inline void set_allocated_state(::mxrp::recorder::pb::PlayerState* state);
 
   // optional .oe.recorder.pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
-  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
+  inline const ::mxrp::recorder::pb::PlayerId& shooter_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(PlayerKilledEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.PlayerKilledEventMsg)
@@ -1580,9 +1580,9 @@ class PlayerKilledEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* id_;
-  ::oe::recorder::pb::PlayerState* state_;
-  ::oe::recorder::pb::PlayerId* shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* id_;
+  ::mxrp::recorder::pb::PlayerState* state_;
+  ::mxrp::recorder::pb::PlayerId* shooter_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1649,37 +1649,37 @@ class WeaponReleaseEventMsg : public ::google::protobuf::Message {
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
-  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
+  inline const ::mxrp::recorder::pb::PlayerId& wpn_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id);
 
   // optional .oe.recorder.pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
-  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
+  inline const ::mxrp::recorder::pb::PlayerState& wpn_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state);
 
   // optional .oe.recorder.pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
-  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
+  inline const ::mxrp::recorder::pb::PlayerId& shooter_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id);
 
   // optional .oe.recorder.pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
-  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
+  inline const ::mxrp::recorder::pb::PlayerId& tgt_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(WeaponReleaseEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.WeaponReleaseEventMsg)
@@ -1699,10 +1699,10 @@ class WeaponReleaseEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* wpn_id_;
-  ::oe::recorder::pb::PlayerState* wpn_state_;
-  ::oe::recorder::pb::PlayerId* shooter_id_;
-  ::oe::recorder::pb::PlayerId* tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* wpn_id_;
+  ::mxrp::recorder::pb::PlayerState* wpn_state_;
+  ::mxrp::recorder::pb::PlayerId* shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* tgt_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1769,37 +1769,37 @@ class WeaponHungEventMsg : public ::google::protobuf::Message {
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
-  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
+  inline const ::mxrp::recorder::pb::PlayerId& wpn_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id);
 
   // optional .oe.recorder.pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
-  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
+  inline const ::mxrp::recorder::pb::PlayerState& wpn_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state);
 
   // optional .oe.recorder.pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
-  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
+  inline const ::mxrp::recorder::pb::PlayerId& shooter_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id);
 
   // optional .oe.recorder.pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
-  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
+  inline const ::mxrp::recorder::pb::PlayerId& tgt_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(WeaponHungEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.WeaponHungEventMsg)
@@ -1819,10 +1819,10 @@ class WeaponHungEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* wpn_id_;
-  ::oe::recorder::pb::PlayerState* wpn_state_;
-  ::oe::recorder::pb::PlayerId* shooter_id_;
-  ::oe::recorder::pb::PlayerId* tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* wpn_id_;
+  ::mxrp::recorder::pb::PlayerState* wpn_state_;
+  ::mxrp::recorder::pb::PlayerId* shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* tgt_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -1918,44 +1918,44 @@ class WeaponDetonationEventMsg : public ::google::protobuf::Message {
   inline bool has_wpn_id() const;
   inline void clear_wpn_id();
   static const int kWpnIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& wpn_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_wpn_id();
-  inline ::oe::recorder::pb::PlayerId* release_wpn_id();
-  inline void set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id);
+  inline const ::mxrp::recorder::pb::PlayerId& wpn_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_wpn_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_wpn_id();
+  inline void set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id);
 
   // optional .oe.recorder.pb.PlayerState wpn_state = 2;
   inline bool has_wpn_state() const;
   inline void clear_wpn_state();
   static const int kWpnStateFieldNumber = 2;
-  inline const ::oe::recorder::pb::PlayerState& wpn_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_wpn_state();
-  inline ::oe::recorder::pb::PlayerState* release_wpn_state();
-  inline void set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state);
+  inline const ::mxrp::recorder::pb::PlayerState& wpn_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_wpn_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_wpn_state();
+  inline void set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state);
 
   // optional .oe.recorder.pb.PlayerId shooter_id = 3;
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 3;
-  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
-  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
+  inline const ::mxrp::recorder::pb::PlayerId& shooter_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id);
 
   // optional .oe.recorder.pb.PlayerId tgt_id = 4;
   inline bool has_tgt_id() const;
   inline void clear_tgt_id();
   static const int kTgtIdFieldNumber = 4;
-  inline const ::oe::recorder::pb::PlayerId& tgt_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_tgt_id();
-  inline ::oe::recorder::pb::PlayerId* release_tgt_id();
-  inline void set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id);
+  inline const ::mxrp::recorder::pb::PlayerId& tgt_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_tgt_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_tgt_id();
+  inline void set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id);
 
   // optional .oe.recorder.pb.WeaponDetonationEventMsg.DetonationType det_type = 5;
   inline bool has_det_type() const;
   inline void clear_det_type();
   static const int kDetTypeFieldNumber = 5;
-  inline ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType det_type() const;
-  inline void set_det_type(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType value);
+  inline ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType det_type() const;
+  inline void set_det_type(::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType value);
 
   // optional double miss_dist = 6;
   inline bool has_miss_dist() const;
@@ -1986,10 +1986,10 @@ class WeaponDetonationEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* wpn_id_;
-  ::oe::recorder::pb::PlayerState* wpn_state_;
-  ::oe::recorder::pb::PlayerId* shooter_id_;
-  ::oe::recorder::pb::PlayerId* tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* wpn_id_;
+  ::mxrp::recorder::pb::PlayerState* wpn_state_;
+  ::mxrp::recorder::pb::PlayerId* shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* tgt_id_;
   double miss_dist_;
   int det_type_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2058,10 +2058,10 @@ class GunFiredEventMsg : public ::google::protobuf::Message {
   inline bool has_shooter_id() const;
   inline void clear_shooter_id();
   static const int kShooterIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& shooter_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_shooter_id();
-  inline ::oe::recorder::pb::PlayerId* release_shooter_id();
-  inline void set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id);
+  inline const ::mxrp::recorder::pb::PlayerId& shooter_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_shooter_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_shooter_id();
+  inline void set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id);
 
   // optional uint32 rounds = 2;
   inline bool has_rounds() const;
@@ -2084,7 +2084,7 @@ class GunFiredEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* shooter_id_;
   ::google::protobuf::uint32 rounds_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2152,10 +2152,10 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2173,46 +2173,46 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
   inline bool has_track_data() const;
   inline void clear_track_data();
   static const int kTrackDataFieldNumber = 3;
-  inline const ::oe::recorder::pb::TrackData& track_data() const;
-  inline ::oe::recorder::pb::TrackData* mutable_track_data();
-  inline ::oe::recorder::pb::TrackData* release_track_data();
-  inline void set_allocated_track_data(::oe::recorder::pb::TrackData* track_data);
+  inline const ::mxrp::recorder::pb::TrackData& track_data() const;
+  inline ::mxrp::recorder::pb::TrackData* mutable_track_data();
+  inline ::mxrp::recorder::pb::TrackData* release_track_data();
+  inline void set_allocated_track_data(::mxrp::recorder::pb::TrackData* track_data);
 
   // optional .oe.recorder.pb.PlayerState player_state = 4;
   inline bool has_player_state() const;
   inline void clear_player_state();
   static const int kPlayerStateFieldNumber = 4;
-  inline const ::oe::recorder::pb::PlayerState& player_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_player_state();
-  inline ::oe::recorder::pb::PlayerState* release_player_state();
-  inline void set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state);
+  inline const ::mxrp::recorder::pb::PlayerState& player_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_player_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_player_state();
+  inline void set_allocated_player_state(::mxrp::recorder::pb::PlayerState* player_state);
 
   // optional .oe.recorder.pb.PlayerId trk_player_id = 5;
   inline bool has_trk_player_id() const;
   inline void clear_trk_player_id();
   static const int kTrkPlayerIdFieldNumber = 5;
-  inline const ::oe::recorder::pb::PlayerId& trk_player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_trk_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_trk_player_id();
-  inline void set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& trk_player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_trk_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_trk_player_id();
+  inline void set_allocated_trk_player_id(::mxrp::recorder::pb::PlayerId* trk_player_id);
 
   // optional .oe.recorder.pb.PlayerState trk_player_state = 6;
   inline bool has_trk_player_state() const;
   inline void clear_trk_player_state();
   static const int kTrkPlayerStateFieldNumber = 6;
-  inline const ::oe::recorder::pb::PlayerState& trk_player_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_trk_player_state();
-  inline ::oe::recorder::pb::PlayerState* release_trk_player_state();
-  inline void set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state);
+  inline const ::mxrp::recorder::pb::PlayerState& trk_player_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_trk_player_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_trk_player_state();
+  inline void set_allocated_trk_player_state(::mxrp::recorder::pb::PlayerState* trk_player_state);
 
   // optional .oe.recorder.pb.EmissionData emission_data = 7;
   inline bool has_emission_data() const;
   inline void clear_emission_data();
   static const int kEmissionDataFieldNumber = 7;
-  inline const ::oe::recorder::pb::EmissionData& emission_data() const;
-  inline ::oe::recorder::pb::EmissionData* mutable_emission_data();
-  inline ::oe::recorder::pb::EmissionData* release_emission_data();
-  inline void set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data);
+  inline const ::mxrp::recorder::pb::EmissionData& emission_data() const;
+  inline ::mxrp::recorder::pb::EmissionData* mutable_emission_data();
+  inline ::mxrp::recorder::pb::EmissionData* release_emission_data();
+  inline void set_allocated_emission_data(::mxrp::recorder::pb::EmissionData* emission_data);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(NewTrackEventMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.NewTrackEventMsg)
@@ -2238,13 +2238,13 @@ class NewTrackEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* player_id_;
+  ::mxrp::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
-  ::oe::recorder::pb::TrackData* track_data_;
-  ::oe::recorder::pb::PlayerState* player_state_;
-  ::oe::recorder::pb::PlayerId* trk_player_id_;
-  ::oe::recorder::pb::PlayerState* trk_player_state_;
-  ::oe::recorder::pb::EmissionData* emission_data_;
+  ::mxrp::recorder::pb::TrackData* track_data_;
+  ::mxrp::recorder::pb::PlayerState* player_state_;
+  ::mxrp::recorder::pb::PlayerId* trk_player_id_;
+  ::mxrp::recorder::pb::PlayerState* trk_player_state_;
+  ::mxrp::recorder::pb::EmissionData* emission_data_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2311,10 +2311,10 @@ class TrackRemovedEventMsg : public ::google::protobuf::Message {
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2342,7 +2342,7 @@ class TrackRemovedEventMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* player_id_;
+  ::mxrp::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2410,10 +2410,10 @@ class TrackDataMsg : public ::google::protobuf::Message {
   inline bool has_player_id() const;
   inline void clear_player_id();
   static const int kPlayerIdFieldNumber = 1;
-  inline const ::oe::recorder::pb::PlayerId& player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_player_id();
-  inline void set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_player_id();
+  inline void set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id);
 
   // required string track_id = 2;
   inline bool has_track_id() const;
@@ -2431,46 +2431,46 @@ class TrackDataMsg : public ::google::protobuf::Message {
   inline bool has_track_data() const;
   inline void clear_track_data();
   static const int kTrackDataFieldNumber = 3;
-  inline const ::oe::recorder::pb::TrackData& track_data() const;
-  inline ::oe::recorder::pb::TrackData* mutable_track_data();
-  inline ::oe::recorder::pb::TrackData* release_track_data();
-  inline void set_allocated_track_data(::oe::recorder::pb::TrackData* track_data);
+  inline const ::mxrp::recorder::pb::TrackData& track_data() const;
+  inline ::mxrp::recorder::pb::TrackData* mutable_track_data();
+  inline ::mxrp::recorder::pb::TrackData* release_track_data();
+  inline void set_allocated_track_data(::mxrp::recorder::pb::TrackData* track_data);
 
   // optional .oe.recorder.pb.PlayerState player_state = 4;
   inline bool has_player_state() const;
   inline void clear_player_state();
   static const int kPlayerStateFieldNumber = 4;
-  inline const ::oe::recorder::pb::PlayerState& player_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_player_state();
-  inline ::oe::recorder::pb::PlayerState* release_player_state();
-  inline void set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state);
+  inline const ::mxrp::recorder::pb::PlayerState& player_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_player_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_player_state();
+  inline void set_allocated_player_state(::mxrp::recorder::pb::PlayerState* player_state);
 
   // optional .oe.recorder.pb.PlayerId trk_player_id = 5;
   inline bool has_trk_player_id() const;
   inline void clear_trk_player_id();
   static const int kTrkPlayerIdFieldNumber = 5;
-  inline const ::oe::recorder::pb::PlayerId& trk_player_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_trk_player_id();
-  inline ::oe::recorder::pb::PlayerId* release_trk_player_id();
-  inline void set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id);
+  inline const ::mxrp::recorder::pb::PlayerId& trk_player_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_trk_player_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_trk_player_id();
+  inline void set_allocated_trk_player_id(::mxrp::recorder::pb::PlayerId* trk_player_id);
 
   // optional .oe.recorder.pb.PlayerState trk_player_state = 6;
   inline bool has_trk_player_state() const;
   inline void clear_trk_player_state();
   static const int kTrkPlayerStateFieldNumber = 6;
-  inline const ::oe::recorder::pb::PlayerState& trk_player_state() const;
-  inline ::oe::recorder::pb::PlayerState* mutable_trk_player_state();
-  inline ::oe::recorder::pb::PlayerState* release_trk_player_state();
-  inline void set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state);
+  inline const ::mxrp::recorder::pb::PlayerState& trk_player_state() const;
+  inline ::mxrp::recorder::pb::PlayerState* mutable_trk_player_state();
+  inline ::mxrp::recorder::pb::PlayerState* release_trk_player_state();
+  inline void set_allocated_trk_player_state(::mxrp::recorder::pb::PlayerState* trk_player_state);
 
   // optional .oe.recorder.pb.EmissionData emission_data = 7;
   inline bool has_emission_data() const;
   inline void clear_emission_data();
   static const int kEmissionDataFieldNumber = 7;
-  inline const ::oe::recorder::pb::EmissionData& emission_data() const;
-  inline ::oe::recorder::pb::EmissionData* mutable_emission_data();
-  inline ::oe::recorder::pb::EmissionData* release_emission_data();
-  inline void set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data);
+  inline const ::mxrp::recorder::pb::EmissionData& emission_data() const;
+  inline ::mxrp::recorder::pb::EmissionData* mutable_emission_data();
+  inline ::mxrp::recorder::pb::EmissionData* release_emission_data();
+  inline void set_allocated_emission_data(::mxrp::recorder::pb::EmissionData* emission_data);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(TrackDataMsg)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.TrackDataMsg)
@@ -2496,13 +2496,13 @@ class TrackDataMsg : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::PlayerId* player_id_;
+  ::mxrp::recorder::pb::PlayerId* player_id_;
   ::std::string* track_id_;
-  ::oe::recorder::pb::TrackData* track_data_;
-  ::oe::recorder::pb::PlayerState* player_state_;
-  ::oe::recorder::pb::PlayerId* trk_player_id_;
-  ::oe::recorder::pb::PlayerState* trk_player_state_;
-  ::oe::recorder::pb::EmissionData* emission_data_;
+  ::mxrp::recorder::pb::TrackData* track_data_;
+  ::mxrp::recorder::pb::PlayerState* player_state_;
+  ::mxrp::recorder::pb::PlayerId* trk_player_id_;
+  ::mxrp::recorder::pb::PlayerState* trk_player_state_;
+  ::mxrp::recorder::pb::EmissionData* emission_data_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_ShutdownFile_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -2927,28 +2927,28 @@ class PlayerState : public ::google::protobuf::Message {
   inline bool has_pos() const;
   inline void clear_pos();
   static const int kPosFieldNumber = 1;
-  inline const ::oe::recorder::pb::Vector& pos() const;
-  inline ::oe::recorder::pb::Vector* mutable_pos();
-  inline ::oe::recorder::pb::Vector* release_pos();
-  inline void set_allocated_pos(::oe::recorder::pb::Vector* pos);
+  inline const ::mxrp::recorder::pb::Vector& pos() const;
+  inline ::mxrp::recorder::pb::Vector* mutable_pos();
+  inline ::mxrp::recorder::pb::Vector* release_pos();
+  inline void set_allocated_pos(::mxrp::recorder::pb::Vector* pos);
 
   // required .oe.recorder.pb.Vector angles = 2;
   inline bool has_angles() const;
   inline void clear_angles();
   static const int kAnglesFieldNumber = 2;
-  inline const ::oe::recorder::pb::Vector& angles() const;
-  inline ::oe::recorder::pb::Vector* mutable_angles();
-  inline ::oe::recorder::pb::Vector* release_angles();
-  inline void set_allocated_angles(::oe::recorder::pb::Vector* angles);
+  inline const ::mxrp::recorder::pb::Vector& angles() const;
+  inline ::mxrp::recorder::pb::Vector* mutable_angles();
+  inline ::mxrp::recorder::pb::Vector* release_angles();
+  inline void set_allocated_angles(::mxrp::recorder::pb::Vector* angles);
 
   // optional .oe.recorder.pb.Vector vel = 3;
   inline bool has_vel() const;
   inline void clear_vel();
   static const int kVelFieldNumber = 3;
-  inline const ::oe::recorder::pb::Vector& vel() const;
-  inline ::oe::recorder::pb::Vector* mutable_vel();
-  inline ::oe::recorder::pb::Vector* release_vel();
-  inline void set_allocated_vel(::oe::recorder::pb::Vector* vel);
+  inline const ::mxrp::recorder::pb::Vector& vel() const;
+  inline ::mxrp::recorder::pb::Vector* mutable_vel();
+  inline ::mxrp::recorder::pb::Vector* release_vel();
+  inline void set_allocated_vel(::mxrp::recorder::pb::Vector* vel);
 
   // optional double damage = 4;
   inline bool has_damage() const;
@@ -2975,9 +2975,9 @@ class PlayerState : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::oe::recorder::pb::Vector* pos_;
-  ::oe::recorder::pb::Vector* angles_;
-  ::oe::recorder::pb::Vector* vel_;
+  ::mxrp::recorder::pb::Vector* pos_;
+  ::mxrp::recorder::pb::Vector* angles_;
+  ::mxrp::recorder::pb::Vector* vel_;
   double damage_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3108,19 +3108,19 @@ class TrackData : public ::google::protobuf::Message {
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 10;
-  inline const ::oe::recorder::pb::Vector& position() const;
-  inline ::oe::recorder::pb::Vector* mutable_position();
-  inline ::oe::recorder::pb::Vector* release_position();
-  inline void set_allocated_position(::oe::recorder::pb::Vector* position);
+  inline const ::mxrp::recorder::pb::Vector& position() const;
+  inline ::mxrp::recorder::pb::Vector* mutable_position();
+  inline ::mxrp::recorder::pb::Vector* release_position();
+  inline void set_allocated_position(::mxrp::recorder::pb::Vector* position);
 
   // optional .oe.recorder.pb.Vector velocity = 11;
   inline bool has_velocity() const;
   inline void clear_velocity();
   static const int kVelocityFieldNumber = 11;
-  inline const ::oe::recorder::pb::Vector& velocity() const;
-  inline ::oe::recorder::pb::Vector* mutable_velocity();
-  inline ::oe::recorder::pb::Vector* release_velocity();
-  inline void set_allocated_velocity(::oe::recorder::pb::Vector* velocity);
+  inline const ::mxrp::recorder::pb::Vector& velocity() const;
+  inline ::mxrp::recorder::pb::Vector* mutable_velocity();
+  inline ::mxrp::recorder::pb::Vector* release_velocity();
+  inline void set_allocated_velocity(::mxrp::recorder::pb::Vector* velocity);
 
   // optional double avg_signal = 12;
   inline bool has_avg_signal() const;
@@ -3191,8 +3191,8 @@ class TrackData : public ::google::protobuf::Message {
   ::google::protobuf::uint32 sl_index_;
   double longitude_;
   double altitude_;
-  ::oe::recorder::pb::Vector* position_;
-  ::oe::recorder::pb::Vector* velocity_;
+  ::mxrp::recorder::pb::Vector* position_;
+  ::mxrp::recorder::pb::Vector* velocity_;
   double avg_signal_;
   bool wpn_rel_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3331,8 +3331,8 @@ class EmissionData : public ::google::protobuf::Message {
   inline bool has_polarization() const;
   inline void clear_polarization();
   static const int kPolarizationFieldNumber = 7;
-  inline ::oe::recorder::pb::EmissionData_Polarization polarization() const;
-  inline void set_polarization(::oe::recorder::pb::EmissionData_Polarization value);
+  inline ::mxrp::recorder::pb::EmissionData_Polarization polarization() const;
+  inline void set_polarization(::mxrp::recorder::pb::EmissionData_Polarization value);
 
   // optional double azimuth_aoi = 8;
   inline bool has_azimuth_aoi() const;
@@ -3352,19 +3352,19 @@ class EmissionData : public ::google::protobuf::Message {
   inline bool has_origin_id() const;
   inline void clear_origin_id();
   static const int kOriginIdFieldNumber = 10;
-  inline const ::oe::recorder::pb::PlayerId& origin_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_origin_id();
-  inline ::oe::recorder::pb::PlayerId* release_origin_id();
-  inline void set_allocated_origin_id(::oe::recorder::pb::PlayerId* origin_id);
+  inline const ::mxrp::recorder::pb::PlayerId& origin_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_origin_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_origin_id();
+  inline void set_allocated_origin_id(::mxrp::recorder::pb::PlayerId* origin_id);
 
   // optional .oe.recorder.pb.PlayerId target_id = 11;
   inline bool has_target_id() const;
   inline void clear_target_id();
   static const int kTargetIdFieldNumber = 11;
-  inline const ::oe::recorder::pb::PlayerId& target_id() const;
-  inline ::oe::recorder::pb::PlayerId* mutable_target_id();
-  inline ::oe::recorder::pb::PlayerId* release_target_id();
-  inline void set_allocated_target_id(::oe::recorder::pb::PlayerId* target_id);
+  inline const ::mxrp::recorder::pb::PlayerId& target_id() const;
+  inline ::mxrp::recorder::pb::PlayerId* mutable_target_id();
+  inline ::mxrp::recorder::pb::PlayerId* release_target_id();
+  inline void set_allocated_target_id(::mxrp::recorder::pb::PlayerId* target_id);
 
   GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(EmissionData)
   // @@protoc_insertion_point(class_scope:oe.recorder.pb.EmissionData)
@@ -3406,8 +3406,8 @@ class EmissionData : public ::google::protobuf::Message {
   double power_;
   double azimuth_aoi_;
   double elevation_aoi_;
-  ::oe::recorder::pb::PlayerId* origin_id_;
-  ::oe::recorder::pb::PlayerId* target_id_;
+  ::mxrp::recorder::pb::PlayerId* origin_id_;
+  ::mxrp::recorder::pb::PlayerId* target_id_;
   int polarization_;
   friend void  protobuf_AddDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
   friend void protobuf_AssignDesc_openeaagles_2frecorder_2fprotobuf_2fDataRecord_2eproto();
@@ -3434,26 +3434,26 @@ inline void DataRecord::clear_has_time() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void DataRecord::clear_time() {
-  if (time_ != NULL) time_->::oe::recorder::pb::Time::Clear();
+  if (time_ != NULL) time_->::mxrp::recorder::pb::Time::Clear();
   clear_has_time();
 }
-inline const ::oe::recorder::pb::Time& DataRecord::time() const {
+inline const ::mxrp::recorder::pb::Time& DataRecord::time() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.time)
   return time_ != NULL ? *time_ : *default_instance_->time_;
 }
-inline ::oe::recorder::pb::Time* DataRecord::mutable_time() {
+inline ::mxrp::recorder::pb::Time* DataRecord::mutable_time() {
   set_has_time();
-  if (time_ == NULL) time_ = new ::oe::recorder::pb::Time;
+  if (time_ == NULL) time_ = new ::mxrp::recorder::pb::Time;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.time)
   return time_;
 }
-inline ::oe::recorder::pb::Time* DataRecord::release_time() {
+inline ::mxrp::recorder::pb::Time* DataRecord::release_time() {
   clear_has_time();
-  ::oe::recorder::pb::Time* temp = time_;
+  ::mxrp::recorder::pb::Time* temp = time_;
   time_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_time(::oe::recorder::pb::Time* time) {
+inline void DataRecord::set_allocated_time(::mxrp::recorder::pb::Time* time) {
   delete time_;
   time_ = time;
   if (time) {
@@ -3499,26 +3499,26 @@ inline void DataRecord::clear_has_file_id_msg() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void DataRecord::clear_file_id_msg() {
-  if (file_id_msg_ != NULL) file_id_msg_->::oe::recorder::pb::FileIdMsg::Clear();
+  if (file_id_msg_ != NULL) file_id_msg_->::mxrp::recorder::pb::FileIdMsg::Clear();
   clear_has_file_id_msg();
 }
-inline const ::oe::recorder::pb::FileIdMsg& DataRecord::file_id_msg() const {
+inline const ::mxrp::recorder::pb::FileIdMsg& DataRecord::file_id_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.file_id_msg)
   return file_id_msg_ != NULL ? *file_id_msg_ : *default_instance_->file_id_msg_;
 }
-inline ::oe::recorder::pb::FileIdMsg* DataRecord::mutable_file_id_msg() {
+inline ::mxrp::recorder::pb::FileIdMsg* DataRecord::mutable_file_id_msg() {
   set_has_file_id_msg();
-  if (file_id_msg_ == NULL) file_id_msg_ = new ::oe::recorder::pb::FileIdMsg;
+  if (file_id_msg_ == NULL) file_id_msg_ = new ::mxrp::recorder::pb::FileIdMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.file_id_msg)
   return file_id_msg_;
 }
-inline ::oe::recorder::pb::FileIdMsg* DataRecord::release_file_id_msg() {
+inline ::mxrp::recorder::pb::FileIdMsg* DataRecord::release_file_id_msg() {
   clear_has_file_id_msg();
-  ::oe::recorder::pb::FileIdMsg* temp = file_id_msg_;
+  ::mxrp::recorder::pb::FileIdMsg* temp = file_id_msg_;
   file_id_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_file_id_msg(::oe::recorder::pb::FileIdMsg* file_id_msg) {
+inline void DataRecord::set_allocated_file_id_msg(::mxrp::recorder::pb::FileIdMsg* file_id_msg) {
   delete file_id_msg_;
   file_id_msg_ = file_id_msg;
   if (file_id_msg) {
@@ -3540,26 +3540,26 @@ inline void DataRecord::clear_has_unknown_id_msg() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void DataRecord::clear_unknown_id_msg() {
-  if (unknown_id_msg_ != NULL) unknown_id_msg_->::oe::recorder::pb::UnknownIdMsg::Clear();
+  if (unknown_id_msg_ != NULL) unknown_id_msg_->::mxrp::recorder::pb::UnknownIdMsg::Clear();
   clear_has_unknown_id_msg();
 }
-inline const ::oe::recorder::pb::UnknownIdMsg& DataRecord::unknown_id_msg() const {
+inline const ::mxrp::recorder::pb::UnknownIdMsg& DataRecord::unknown_id_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.unknown_id_msg)
   return unknown_id_msg_ != NULL ? *unknown_id_msg_ : *default_instance_->unknown_id_msg_;
 }
-inline ::oe::recorder::pb::UnknownIdMsg* DataRecord::mutable_unknown_id_msg() {
+inline ::mxrp::recorder::pb::UnknownIdMsg* DataRecord::mutable_unknown_id_msg() {
   set_has_unknown_id_msg();
-  if (unknown_id_msg_ == NULL) unknown_id_msg_ = new ::oe::recorder::pb::UnknownIdMsg;
+  if (unknown_id_msg_ == NULL) unknown_id_msg_ = new ::mxrp::recorder::pb::UnknownIdMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.unknown_id_msg)
   return unknown_id_msg_;
 }
-inline ::oe::recorder::pb::UnknownIdMsg* DataRecord::release_unknown_id_msg() {
+inline ::mxrp::recorder::pb::UnknownIdMsg* DataRecord::release_unknown_id_msg() {
   clear_has_unknown_id_msg();
-  ::oe::recorder::pb::UnknownIdMsg* temp = unknown_id_msg_;
+  ::mxrp::recorder::pb::UnknownIdMsg* temp = unknown_id_msg_;
   unknown_id_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_unknown_id_msg(::oe::recorder::pb::UnknownIdMsg* unknown_id_msg) {
+inline void DataRecord::set_allocated_unknown_id_msg(::mxrp::recorder::pb::UnknownIdMsg* unknown_id_msg) {
   delete unknown_id_msg_;
   unknown_id_msg_ = unknown_id_msg;
   if (unknown_id_msg) {
@@ -3581,26 +3581,26 @@ inline void DataRecord::clear_has_marker_msg() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void DataRecord::clear_marker_msg() {
-  if (marker_msg_ != NULL) marker_msg_->::oe::recorder::pb::MarkerMsg::Clear();
+  if (marker_msg_ != NULL) marker_msg_->::mxrp::recorder::pb::MarkerMsg::Clear();
   clear_has_marker_msg();
 }
-inline const ::oe::recorder::pb::MarkerMsg& DataRecord::marker_msg() const {
+inline const ::mxrp::recorder::pb::MarkerMsg& DataRecord::marker_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.marker_msg)
   return marker_msg_ != NULL ? *marker_msg_ : *default_instance_->marker_msg_;
 }
-inline ::oe::recorder::pb::MarkerMsg* DataRecord::mutable_marker_msg() {
+inline ::mxrp::recorder::pb::MarkerMsg* DataRecord::mutable_marker_msg() {
   set_has_marker_msg();
-  if (marker_msg_ == NULL) marker_msg_ = new ::oe::recorder::pb::MarkerMsg;
+  if (marker_msg_ == NULL) marker_msg_ = new ::mxrp::recorder::pb::MarkerMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.marker_msg)
   return marker_msg_;
 }
-inline ::oe::recorder::pb::MarkerMsg* DataRecord::release_marker_msg() {
+inline ::mxrp::recorder::pb::MarkerMsg* DataRecord::release_marker_msg() {
   clear_has_marker_msg();
-  ::oe::recorder::pb::MarkerMsg* temp = marker_msg_;
+  ::mxrp::recorder::pb::MarkerMsg* temp = marker_msg_;
   marker_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_marker_msg(::oe::recorder::pb::MarkerMsg* marker_msg) {
+inline void DataRecord::set_allocated_marker_msg(::mxrp::recorder::pb::MarkerMsg* marker_msg) {
   delete marker_msg_;
   marker_msg_ = marker_msg;
   if (marker_msg) {
@@ -3622,26 +3622,26 @@ inline void DataRecord::clear_has_input_device_msg() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void DataRecord::clear_input_device_msg() {
-  if (input_device_msg_ != NULL) input_device_msg_->::oe::recorder::pb::InputDeviceMsg::Clear();
+  if (input_device_msg_ != NULL) input_device_msg_->::mxrp::recorder::pb::InputDeviceMsg::Clear();
   clear_has_input_device_msg();
 }
-inline const ::oe::recorder::pb::InputDeviceMsg& DataRecord::input_device_msg() const {
+inline const ::mxrp::recorder::pb::InputDeviceMsg& DataRecord::input_device_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.input_device_msg)
   return input_device_msg_ != NULL ? *input_device_msg_ : *default_instance_->input_device_msg_;
 }
-inline ::oe::recorder::pb::InputDeviceMsg* DataRecord::mutable_input_device_msg() {
+inline ::mxrp::recorder::pb::InputDeviceMsg* DataRecord::mutable_input_device_msg() {
   set_has_input_device_msg();
-  if (input_device_msg_ == NULL) input_device_msg_ = new ::oe::recorder::pb::InputDeviceMsg;
+  if (input_device_msg_ == NULL) input_device_msg_ = new ::mxrp::recorder::pb::InputDeviceMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.input_device_msg)
   return input_device_msg_;
 }
-inline ::oe::recorder::pb::InputDeviceMsg* DataRecord::release_input_device_msg() {
+inline ::mxrp::recorder::pb::InputDeviceMsg* DataRecord::release_input_device_msg() {
   clear_has_input_device_msg();
-  ::oe::recorder::pb::InputDeviceMsg* temp = input_device_msg_;
+  ::mxrp::recorder::pb::InputDeviceMsg* temp = input_device_msg_;
   input_device_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_input_device_msg(::oe::recorder::pb::InputDeviceMsg* input_device_msg) {
+inline void DataRecord::set_allocated_input_device_msg(::mxrp::recorder::pb::InputDeviceMsg* input_device_msg) {
   delete input_device_msg_;
   input_device_msg_ = input_device_msg;
   if (input_device_msg) {
@@ -3663,26 +3663,26 @@ inline void DataRecord::clear_has_new_player_event_msg() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void DataRecord::clear_new_player_event_msg() {
-  if (new_player_event_msg_ != NULL) new_player_event_msg_->::oe::recorder::pb::NewPlayerEventMsg::Clear();
+  if (new_player_event_msg_ != NULL) new_player_event_msg_->::mxrp::recorder::pb::NewPlayerEventMsg::Clear();
   clear_has_new_player_event_msg();
 }
-inline const ::oe::recorder::pb::NewPlayerEventMsg& DataRecord::new_player_event_msg() const {
+inline const ::mxrp::recorder::pb::NewPlayerEventMsg& DataRecord::new_player_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.new_player_event_msg)
   return new_player_event_msg_ != NULL ? *new_player_event_msg_ : *default_instance_->new_player_event_msg_;
 }
-inline ::oe::recorder::pb::NewPlayerEventMsg* DataRecord::mutable_new_player_event_msg() {
+inline ::mxrp::recorder::pb::NewPlayerEventMsg* DataRecord::mutable_new_player_event_msg() {
   set_has_new_player_event_msg();
-  if (new_player_event_msg_ == NULL) new_player_event_msg_ = new ::oe::recorder::pb::NewPlayerEventMsg;
+  if (new_player_event_msg_ == NULL) new_player_event_msg_ = new ::mxrp::recorder::pb::NewPlayerEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.new_player_event_msg)
   return new_player_event_msg_;
 }
-inline ::oe::recorder::pb::NewPlayerEventMsg* DataRecord::release_new_player_event_msg() {
+inline ::mxrp::recorder::pb::NewPlayerEventMsg* DataRecord::release_new_player_event_msg() {
   clear_has_new_player_event_msg();
-  ::oe::recorder::pb::NewPlayerEventMsg* temp = new_player_event_msg_;
+  ::mxrp::recorder::pb::NewPlayerEventMsg* temp = new_player_event_msg_;
   new_player_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_new_player_event_msg(::oe::recorder::pb::NewPlayerEventMsg* new_player_event_msg) {
+inline void DataRecord::set_allocated_new_player_event_msg(::mxrp::recorder::pb::NewPlayerEventMsg* new_player_event_msg) {
   delete new_player_event_msg_;
   new_player_event_msg_ = new_player_event_msg;
   if (new_player_event_msg) {
@@ -3704,26 +3704,26 @@ inline void DataRecord::clear_has_player_removed_event_msg() {
   _has_bits_[0] &= ~0x00000080u;
 }
 inline void DataRecord::clear_player_removed_event_msg() {
-  if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::oe::recorder::pb::PlayerRemovedEventMsg::Clear();
+  if (player_removed_event_msg_ != NULL) player_removed_event_msg_->::mxrp::recorder::pb::PlayerRemovedEventMsg::Clear();
   clear_has_player_removed_event_msg();
 }
-inline const ::oe::recorder::pb::PlayerRemovedEventMsg& DataRecord::player_removed_event_msg() const {
+inline const ::mxrp::recorder::pb::PlayerRemovedEventMsg& DataRecord::player_removed_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_removed_event_msg)
   return player_removed_event_msg_ != NULL ? *player_removed_event_msg_ : *default_instance_->player_removed_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerRemovedEventMsg* DataRecord::mutable_player_removed_event_msg() {
+inline ::mxrp::recorder::pb::PlayerRemovedEventMsg* DataRecord::mutable_player_removed_event_msg() {
   set_has_player_removed_event_msg();
-  if (player_removed_event_msg_ == NULL) player_removed_event_msg_ = new ::oe::recorder::pb::PlayerRemovedEventMsg;
+  if (player_removed_event_msg_ == NULL) player_removed_event_msg_ = new ::mxrp::recorder::pb::PlayerRemovedEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_removed_event_msg)
   return player_removed_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerRemovedEventMsg* DataRecord::release_player_removed_event_msg() {
+inline ::mxrp::recorder::pb::PlayerRemovedEventMsg* DataRecord::release_player_removed_event_msg() {
   clear_has_player_removed_event_msg();
-  ::oe::recorder::pb::PlayerRemovedEventMsg* temp = player_removed_event_msg_;
+  ::mxrp::recorder::pb::PlayerRemovedEventMsg* temp = player_removed_event_msg_;
   player_removed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_removed_event_msg(::oe::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg) {
+inline void DataRecord::set_allocated_player_removed_event_msg(::mxrp::recorder::pb::PlayerRemovedEventMsg* player_removed_event_msg) {
   delete player_removed_event_msg_;
   player_removed_event_msg_ = player_removed_event_msg;
   if (player_removed_event_msg) {
@@ -3745,26 +3745,26 @@ inline void DataRecord::clear_has_player_data_msg() {
   _has_bits_[0] &= ~0x00000100u;
 }
 inline void DataRecord::clear_player_data_msg() {
-  if (player_data_msg_ != NULL) player_data_msg_->::oe::recorder::pb::PlayerDataMsg::Clear();
+  if (player_data_msg_ != NULL) player_data_msg_->::mxrp::recorder::pb::PlayerDataMsg::Clear();
   clear_has_player_data_msg();
 }
-inline const ::oe::recorder::pb::PlayerDataMsg& DataRecord::player_data_msg() const {
+inline const ::mxrp::recorder::pb::PlayerDataMsg& DataRecord::player_data_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_data_msg)
   return player_data_msg_ != NULL ? *player_data_msg_ : *default_instance_->player_data_msg_;
 }
-inline ::oe::recorder::pb::PlayerDataMsg* DataRecord::mutable_player_data_msg() {
+inline ::mxrp::recorder::pb::PlayerDataMsg* DataRecord::mutable_player_data_msg() {
   set_has_player_data_msg();
-  if (player_data_msg_ == NULL) player_data_msg_ = new ::oe::recorder::pb::PlayerDataMsg;
+  if (player_data_msg_ == NULL) player_data_msg_ = new ::mxrp::recorder::pb::PlayerDataMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_data_msg)
   return player_data_msg_;
 }
-inline ::oe::recorder::pb::PlayerDataMsg* DataRecord::release_player_data_msg() {
+inline ::mxrp::recorder::pb::PlayerDataMsg* DataRecord::release_player_data_msg() {
   clear_has_player_data_msg();
-  ::oe::recorder::pb::PlayerDataMsg* temp = player_data_msg_;
+  ::mxrp::recorder::pb::PlayerDataMsg* temp = player_data_msg_;
   player_data_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_data_msg(::oe::recorder::pb::PlayerDataMsg* player_data_msg) {
+inline void DataRecord::set_allocated_player_data_msg(::mxrp::recorder::pb::PlayerDataMsg* player_data_msg) {
   delete player_data_msg_;
   player_data_msg_ = player_data_msg;
   if (player_data_msg) {
@@ -3786,26 +3786,26 @@ inline void DataRecord::clear_has_player_damaged_event_msg() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void DataRecord::clear_player_damaged_event_msg() {
-  if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::oe::recorder::pb::PlayerDamagedEventMsg::Clear();
+  if (player_damaged_event_msg_ != NULL) player_damaged_event_msg_->::mxrp::recorder::pb::PlayerDamagedEventMsg::Clear();
   clear_has_player_damaged_event_msg();
 }
-inline const ::oe::recorder::pb::PlayerDamagedEventMsg& DataRecord::player_damaged_event_msg() const {
+inline const ::mxrp::recorder::pb::PlayerDamagedEventMsg& DataRecord::player_damaged_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_damaged_event_msg)
   return player_damaged_event_msg_ != NULL ? *player_damaged_event_msg_ : *default_instance_->player_damaged_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerDamagedEventMsg* DataRecord::mutable_player_damaged_event_msg() {
+inline ::mxrp::recorder::pb::PlayerDamagedEventMsg* DataRecord::mutable_player_damaged_event_msg() {
   set_has_player_damaged_event_msg();
-  if (player_damaged_event_msg_ == NULL) player_damaged_event_msg_ = new ::oe::recorder::pb::PlayerDamagedEventMsg;
+  if (player_damaged_event_msg_ == NULL) player_damaged_event_msg_ = new ::mxrp::recorder::pb::PlayerDamagedEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_damaged_event_msg)
   return player_damaged_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerDamagedEventMsg* DataRecord::release_player_damaged_event_msg() {
+inline ::mxrp::recorder::pb::PlayerDamagedEventMsg* DataRecord::release_player_damaged_event_msg() {
   clear_has_player_damaged_event_msg();
-  ::oe::recorder::pb::PlayerDamagedEventMsg* temp = player_damaged_event_msg_;
+  ::mxrp::recorder::pb::PlayerDamagedEventMsg* temp = player_damaged_event_msg_;
   player_damaged_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_damaged_event_msg(::oe::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg) {
+inline void DataRecord::set_allocated_player_damaged_event_msg(::mxrp::recorder::pb::PlayerDamagedEventMsg* player_damaged_event_msg) {
   delete player_damaged_event_msg_;
   player_damaged_event_msg_ = player_damaged_event_msg;
   if (player_damaged_event_msg) {
@@ -3827,26 +3827,26 @@ inline void DataRecord::clear_has_player_collision_event_msg() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void DataRecord::clear_player_collision_event_msg() {
-  if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::oe::recorder::pb::PlayerCollisionEventMsg::Clear();
+  if (player_collision_event_msg_ != NULL) player_collision_event_msg_->::mxrp::recorder::pb::PlayerCollisionEventMsg::Clear();
   clear_has_player_collision_event_msg();
 }
-inline const ::oe::recorder::pb::PlayerCollisionEventMsg& DataRecord::player_collision_event_msg() const {
+inline const ::mxrp::recorder::pb::PlayerCollisionEventMsg& DataRecord::player_collision_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_collision_event_msg)
   return player_collision_event_msg_ != NULL ? *player_collision_event_msg_ : *default_instance_->player_collision_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerCollisionEventMsg* DataRecord::mutable_player_collision_event_msg() {
+inline ::mxrp::recorder::pb::PlayerCollisionEventMsg* DataRecord::mutable_player_collision_event_msg() {
   set_has_player_collision_event_msg();
-  if (player_collision_event_msg_ == NULL) player_collision_event_msg_ = new ::oe::recorder::pb::PlayerCollisionEventMsg;
+  if (player_collision_event_msg_ == NULL) player_collision_event_msg_ = new ::mxrp::recorder::pb::PlayerCollisionEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_collision_event_msg)
   return player_collision_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerCollisionEventMsg* DataRecord::release_player_collision_event_msg() {
+inline ::mxrp::recorder::pb::PlayerCollisionEventMsg* DataRecord::release_player_collision_event_msg() {
   clear_has_player_collision_event_msg();
-  ::oe::recorder::pb::PlayerCollisionEventMsg* temp = player_collision_event_msg_;
+  ::mxrp::recorder::pb::PlayerCollisionEventMsg* temp = player_collision_event_msg_;
   player_collision_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_collision_event_msg(::oe::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg) {
+inline void DataRecord::set_allocated_player_collision_event_msg(::mxrp::recorder::pb::PlayerCollisionEventMsg* player_collision_event_msg) {
   delete player_collision_event_msg_;
   player_collision_event_msg_ = player_collision_event_msg;
   if (player_collision_event_msg) {
@@ -3868,26 +3868,26 @@ inline void DataRecord::clear_has_player_crash_event_msg() {
   _has_bits_[0] &= ~0x00000800u;
 }
 inline void DataRecord::clear_player_crash_event_msg() {
-  if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::oe::recorder::pb::PlayerCrashEventMsg::Clear();
+  if (player_crash_event_msg_ != NULL) player_crash_event_msg_->::mxrp::recorder::pb::PlayerCrashEventMsg::Clear();
   clear_has_player_crash_event_msg();
 }
-inline const ::oe::recorder::pb::PlayerCrashEventMsg& DataRecord::player_crash_event_msg() const {
+inline const ::mxrp::recorder::pb::PlayerCrashEventMsg& DataRecord::player_crash_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_crash_event_msg)
   return player_crash_event_msg_ != NULL ? *player_crash_event_msg_ : *default_instance_->player_crash_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerCrashEventMsg* DataRecord::mutable_player_crash_event_msg() {
+inline ::mxrp::recorder::pb::PlayerCrashEventMsg* DataRecord::mutable_player_crash_event_msg() {
   set_has_player_crash_event_msg();
-  if (player_crash_event_msg_ == NULL) player_crash_event_msg_ = new ::oe::recorder::pb::PlayerCrashEventMsg;
+  if (player_crash_event_msg_ == NULL) player_crash_event_msg_ = new ::mxrp::recorder::pb::PlayerCrashEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_crash_event_msg)
   return player_crash_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerCrashEventMsg* DataRecord::release_player_crash_event_msg() {
+inline ::mxrp::recorder::pb::PlayerCrashEventMsg* DataRecord::release_player_crash_event_msg() {
   clear_has_player_crash_event_msg();
-  ::oe::recorder::pb::PlayerCrashEventMsg* temp = player_crash_event_msg_;
+  ::mxrp::recorder::pb::PlayerCrashEventMsg* temp = player_crash_event_msg_;
   player_crash_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_crash_event_msg(::oe::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg) {
+inline void DataRecord::set_allocated_player_crash_event_msg(::mxrp::recorder::pb::PlayerCrashEventMsg* player_crash_event_msg) {
   delete player_crash_event_msg_;
   player_crash_event_msg_ = player_crash_event_msg;
   if (player_crash_event_msg) {
@@ -3909,26 +3909,26 @@ inline void DataRecord::clear_has_player_killed_event_msg() {
   _has_bits_[0] &= ~0x00001000u;
 }
 inline void DataRecord::clear_player_killed_event_msg() {
-  if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::oe::recorder::pb::PlayerKilledEventMsg::Clear();
+  if (player_killed_event_msg_ != NULL) player_killed_event_msg_->::mxrp::recorder::pb::PlayerKilledEventMsg::Clear();
   clear_has_player_killed_event_msg();
 }
-inline const ::oe::recorder::pb::PlayerKilledEventMsg& DataRecord::player_killed_event_msg() const {
+inline const ::mxrp::recorder::pb::PlayerKilledEventMsg& DataRecord::player_killed_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.player_killed_event_msg)
   return player_killed_event_msg_ != NULL ? *player_killed_event_msg_ : *default_instance_->player_killed_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerKilledEventMsg* DataRecord::mutable_player_killed_event_msg() {
+inline ::mxrp::recorder::pb::PlayerKilledEventMsg* DataRecord::mutable_player_killed_event_msg() {
   set_has_player_killed_event_msg();
-  if (player_killed_event_msg_ == NULL) player_killed_event_msg_ = new ::oe::recorder::pb::PlayerKilledEventMsg;
+  if (player_killed_event_msg_ == NULL) player_killed_event_msg_ = new ::mxrp::recorder::pb::PlayerKilledEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.player_killed_event_msg)
   return player_killed_event_msg_;
 }
-inline ::oe::recorder::pb::PlayerKilledEventMsg* DataRecord::release_player_killed_event_msg() {
+inline ::mxrp::recorder::pb::PlayerKilledEventMsg* DataRecord::release_player_killed_event_msg() {
   clear_has_player_killed_event_msg();
-  ::oe::recorder::pb::PlayerKilledEventMsg* temp = player_killed_event_msg_;
+  ::mxrp::recorder::pb::PlayerKilledEventMsg* temp = player_killed_event_msg_;
   player_killed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_player_killed_event_msg(::oe::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg) {
+inline void DataRecord::set_allocated_player_killed_event_msg(::mxrp::recorder::pb::PlayerKilledEventMsg* player_killed_event_msg) {
   delete player_killed_event_msg_;
   player_killed_event_msg_ = player_killed_event_msg;
   if (player_killed_event_msg) {
@@ -3950,26 +3950,26 @@ inline void DataRecord::clear_has_weapon_release_event_msg() {
   _has_bits_[0] &= ~0x00002000u;
 }
 inline void DataRecord::clear_weapon_release_event_msg() {
-  if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::oe::recorder::pb::WeaponReleaseEventMsg::Clear();
+  if (weapon_release_event_msg_ != NULL) weapon_release_event_msg_->::mxrp::recorder::pb::WeaponReleaseEventMsg::Clear();
   clear_has_weapon_release_event_msg();
 }
-inline const ::oe::recorder::pb::WeaponReleaseEventMsg& DataRecord::weapon_release_event_msg() const {
+inline const ::mxrp::recorder::pb::WeaponReleaseEventMsg& DataRecord::weapon_release_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.weapon_release_event_msg)
   return weapon_release_event_msg_ != NULL ? *weapon_release_event_msg_ : *default_instance_->weapon_release_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponReleaseEventMsg* DataRecord::mutable_weapon_release_event_msg() {
+inline ::mxrp::recorder::pb::WeaponReleaseEventMsg* DataRecord::mutable_weapon_release_event_msg() {
   set_has_weapon_release_event_msg();
-  if (weapon_release_event_msg_ == NULL) weapon_release_event_msg_ = new ::oe::recorder::pb::WeaponReleaseEventMsg;
+  if (weapon_release_event_msg_ == NULL) weapon_release_event_msg_ = new ::mxrp::recorder::pb::WeaponReleaseEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.weapon_release_event_msg)
   return weapon_release_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponReleaseEventMsg* DataRecord::release_weapon_release_event_msg() {
+inline ::mxrp::recorder::pb::WeaponReleaseEventMsg* DataRecord::release_weapon_release_event_msg() {
   clear_has_weapon_release_event_msg();
-  ::oe::recorder::pb::WeaponReleaseEventMsg* temp = weapon_release_event_msg_;
+  ::mxrp::recorder::pb::WeaponReleaseEventMsg* temp = weapon_release_event_msg_;
   weapon_release_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_release_event_msg(::oe::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg) {
+inline void DataRecord::set_allocated_weapon_release_event_msg(::mxrp::recorder::pb::WeaponReleaseEventMsg* weapon_release_event_msg) {
   delete weapon_release_event_msg_;
   weapon_release_event_msg_ = weapon_release_event_msg;
   if (weapon_release_event_msg) {
@@ -3991,26 +3991,26 @@ inline void DataRecord::clear_has_weapon_hung_event_msg() {
   _has_bits_[0] &= ~0x00004000u;
 }
 inline void DataRecord::clear_weapon_hung_event_msg() {
-  if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::oe::recorder::pb::WeaponHungEventMsg::Clear();
+  if (weapon_hung_event_msg_ != NULL) weapon_hung_event_msg_->::mxrp::recorder::pb::WeaponHungEventMsg::Clear();
   clear_has_weapon_hung_event_msg();
 }
-inline const ::oe::recorder::pb::WeaponHungEventMsg& DataRecord::weapon_hung_event_msg() const {
+inline const ::mxrp::recorder::pb::WeaponHungEventMsg& DataRecord::weapon_hung_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.weapon_hung_event_msg)
   return weapon_hung_event_msg_ != NULL ? *weapon_hung_event_msg_ : *default_instance_->weapon_hung_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponHungEventMsg* DataRecord::mutable_weapon_hung_event_msg() {
+inline ::mxrp::recorder::pb::WeaponHungEventMsg* DataRecord::mutable_weapon_hung_event_msg() {
   set_has_weapon_hung_event_msg();
-  if (weapon_hung_event_msg_ == NULL) weapon_hung_event_msg_ = new ::oe::recorder::pb::WeaponHungEventMsg;
+  if (weapon_hung_event_msg_ == NULL) weapon_hung_event_msg_ = new ::mxrp::recorder::pb::WeaponHungEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.weapon_hung_event_msg)
   return weapon_hung_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponHungEventMsg* DataRecord::release_weapon_hung_event_msg() {
+inline ::mxrp::recorder::pb::WeaponHungEventMsg* DataRecord::release_weapon_hung_event_msg() {
   clear_has_weapon_hung_event_msg();
-  ::oe::recorder::pb::WeaponHungEventMsg* temp = weapon_hung_event_msg_;
+  ::mxrp::recorder::pb::WeaponHungEventMsg* temp = weapon_hung_event_msg_;
   weapon_hung_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_hung_event_msg(::oe::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg) {
+inline void DataRecord::set_allocated_weapon_hung_event_msg(::mxrp::recorder::pb::WeaponHungEventMsg* weapon_hung_event_msg) {
   delete weapon_hung_event_msg_;
   weapon_hung_event_msg_ = weapon_hung_event_msg;
   if (weapon_hung_event_msg) {
@@ -4032,26 +4032,26 @@ inline void DataRecord::clear_has_weapon_detonation_event_msg() {
   _has_bits_[0] &= ~0x00008000u;
 }
 inline void DataRecord::clear_weapon_detonation_event_msg() {
-  if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::oe::recorder::pb::WeaponDetonationEventMsg::Clear();
+  if (weapon_detonation_event_msg_ != NULL) weapon_detonation_event_msg_->::mxrp::recorder::pb::WeaponDetonationEventMsg::Clear();
   clear_has_weapon_detonation_event_msg();
 }
-inline const ::oe::recorder::pb::WeaponDetonationEventMsg& DataRecord::weapon_detonation_event_msg() const {
+inline const ::mxrp::recorder::pb::WeaponDetonationEventMsg& DataRecord::weapon_detonation_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.weapon_detonation_event_msg)
   return weapon_detonation_event_msg_ != NULL ? *weapon_detonation_event_msg_ : *default_instance_->weapon_detonation_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponDetonationEventMsg* DataRecord::mutable_weapon_detonation_event_msg() {
+inline ::mxrp::recorder::pb::WeaponDetonationEventMsg* DataRecord::mutable_weapon_detonation_event_msg() {
   set_has_weapon_detonation_event_msg();
-  if (weapon_detonation_event_msg_ == NULL) weapon_detonation_event_msg_ = new ::oe::recorder::pb::WeaponDetonationEventMsg;
+  if (weapon_detonation_event_msg_ == NULL) weapon_detonation_event_msg_ = new ::mxrp::recorder::pb::WeaponDetonationEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.weapon_detonation_event_msg)
   return weapon_detonation_event_msg_;
 }
-inline ::oe::recorder::pb::WeaponDetonationEventMsg* DataRecord::release_weapon_detonation_event_msg() {
+inline ::mxrp::recorder::pb::WeaponDetonationEventMsg* DataRecord::release_weapon_detonation_event_msg() {
   clear_has_weapon_detonation_event_msg();
-  ::oe::recorder::pb::WeaponDetonationEventMsg* temp = weapon_detonation_event_msg_;
+  ::mxrp::recorder::pb::WeaponDetonationEventMsg* temp = weapon_detonation_event_msg_;
   weapon_detonation_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_weapon_detonation_event_msg(::oe::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg) {
+inline void DataRecord::set_allocated_weapon_detonation_event_msg(::mxrp::recorder::pb::WeaponDetonationEventMsg* weapon_detonation_event_msg) {
   delete weapon_detonation_event_msg_;
   weapon_detonation_event_msg_ = weapon_detonation_event_msg;
   if (weapon_detonation_event_msg) {
@@ -4073,26 +4073,26 @@ inline void DataRecord::clear_has_gun_fired_event_msg() {
   _has_bits_[0] &= ~0x00010000u;
 }
 inline void DataRecord::clear_gun_fired_event_msg() {
-  if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::oe::recorder::pb::GunFiredEventMsg::Clear();
+  if (gun_fired_event_msg_ != NULL) gun_fired_event_msg_->::mxrp::recorder::pb::GunFiredEventMsg::Clear();
   clear_has_gun_fired_event_msg();
 }
-inline const ::oe::recorder::pb::GunFiredEventMsg& DataRecord::gun_fired_event_msg() const {
+inline const ::mxrp::recorder::pb::GunFiredEventMsg& DataRecord::gun_fired_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.gun_fired_event_msg)
   return gun_fired_event_msg_ != NULL ? *gun_fired_event_msg_ : *default_instance_->gun_fired_event_msg_;
 }
-inline ::oe::recorder::pb::GunFiredEventMsg* DataRecord::mutable_gun_fired_event_msg() {
+inline ::mxrp::recorder::pb::GunFiredEventMsg* DataRecord::mutable_gun_fired_event_msg() {
   set_has_gun_fired_event_msg();
-  if (gun_fired_event_msg_ == NULL) gun_fired_event_msg_ = new ::oe::recorder::pb::GunFiredEventMsg;
+  if (gun_fired_event_msg_ == NULL) gun_fired_event_msg_ = new ::mxrp::recorder::pb::GunFiredEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.gun_fired_event_msg)
   return gun_fired_event_msg_;
 }
-inline ::oe::recorder::pb::GunFiredEventMsg* DataRecord::release_gun_fired_event_msg() {
+inline ::mxrp::recorder::pb::GunFiredEventMsg* DataRecord::release_gun_fired_event_msg() {
   clear_has_gun_fired_event_msg();
-  ::oe::recorder::pb::GunFiredEventMsg* temp = gun_fired_event_msg_;
+  ::mxrp::recorder::pb::GunFiredEventMsg* temp = gun_fired_event_msg_;
   gun_fired_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_gun_fired_event_msg(::oe::recorder::pb::GunFiredEventMsg* gun_fired_event_msg) {
+inline void DataRecord::set_allocated_gun_fired_event_msg(::mxrp::recorder::pb::GunFiredEventMsg* gun_fired_event_msg) {
   delete gun_fired_event_msg_;
   gun_fired_event_msg_ = gun_fired_event_msg;
   if (gun_fired_event_msg) {
@@ -4114,26 +4114,26 @@ inline void DataRecord::clear_has_new_track_event_msg() {
   _has_bits_[0] &= ~0x00020000u;
 }
 inline void DataRecord::clear_new_track_event_msg() {
-  if (new_track_event_msg_ != NULL) new_track_event_msg_->::oe::recorder::pb::NewTrackEventMsg::Clear();
+  if (new_track_event_msg_ != NULL) new_track_event_msg_->::mxrp::recorder::pb::NewTrackEventMsg::Clear();
   clear_has_new_track_event_msg();
 }
-inline const ::oe::recorder::pb::NewTrackEventMsg& DataRecord::new_track_event_msg() const {
+inline const ::mxrp::recorder::pb::NewTrackEventMsg& DataRecord::new_track_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.new_track_event_msg)
   return new_track_event_msg_ != NULL ? *new_track_event_msg_ : *default_instance_->new_track_event_msg_;
 }
-inline ::oe::recorder::pb::NewTrackEventMsg* DataRecord::mutable_new_track_event_msg() {
+inline ::mxrp::recorder::pb::NewTrackEventMsg* DataRecord::mutable_new_track_event_msg() {
   set_has_new_track_event_msg();
-  if (new_track_event_msg_ == NULL) new_track_event_msg_ = new ::oe::recorder::pb::NewTrackEventMsg;
+  if (new_track_event_msg_ == NULL) new_track_event_msg_ = new ::mxrp::recorder::pb::NewTrackEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.new_track_event_msg)
   return new_track_event_msg_;
 }
-inline ::oe::recorder::pb::NewTrackEventMsg* DataRecord::release_new_track_event_msg() {
+inline ::mxrp::recorder::pb::NewTrackEventMsg* DataRecord::release_new_track_event_msg() {
   clear_has_new_track_event_msg();
-  ::oe::recorder::pb::NewTrackEventMsg* temp = new_track_event_msg_;
+  ::mxrp::recorder::pb::NewTrackEventMsg* temp = new_track_event_msg_;
   new_track_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_new_track_event_msg(::oe::recorder::pb::NewTrackEventMsg* new_track_event_msg) {
+inline void DataRecord::set_allocated_new_track_event_msg(::mxrp::recorder::pb::NewTrackEventMsg* new_track_event_msg) {
   delete new_track_event_msg_;
   new_track_event_msg_ = new_track_event_msg;
   if (new_track_event_msg) {
@@ -4155,26 +4155,26 @@ inline void DataRecord::clear_has_track_removed_event_msg() {
   _has_bits_[0] &= ~0x00040000u;
 }
 inline void DataRecord::clear_track_removed_event_msg() {
-  if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::oe::recorder::pb::TrackRemovedEventMsg::Clear();
+  if (track_removed_event_msg_ != NULL) track_removed_event_msg_->::mxrp::recorder::pb::TrackRemovedEventMsg::Clear();
   clear_has_track_removed_event_msg();
 }
-inline const ::oe::recorder::pb::TrackRemovedEventMsg& DataRecord::track_removed_event_msg() const {
+inline const ::mxrp::recorder::pb::TrackRemovedEventMsg& DataRecord::track_removed_event_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.track_removed_event_msg)
   return track_removed_event_msg_ != NULL ? *track_removed_event_msg_ : *default_instance_->track_removed_event_msg_;
 }
-inline ::oe::recorder::pb::TrackRemovedEventMsg* DataRecord::mutable_track_removed_event_msg() {
+inline ::mxrp::recorder::pb::TrackRemovedEventMsg* DataRecord::mutable_track_removed_event_msg() {
   set_has_track_removed_event_msg();
-  if (track_removed_event_msg_ == NULL) track_removed_event_msg_ = new ::oe::recorder::pb::TrackRemovedEventMsg;
+  if (track_removed_event_msg_ == NULL) track_removed_event_msg_ = new ::mxrp::recorder::pb::TrackRemovedEventMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.track_removed_event_msg)
   return track_removed_event_msg_;
 }
-inline ::oe::recorder::pb::TrackRemovedEventMsg* DataRecord::release_track_removed_event_msg() {
+inline ::mxrp::recorder::pb::TrackRemovedEventMsg* DataRecord::release_track_removed_event_msg() {
   clear_has_track_removed_event_msg();
-  ::oe::recorder::pb::TrackRemovedEventMsg* temp = track_removed_event_msg_;
+  ::mxrp::recorder::pb::TrackRemovedEventMsg* temp = track_removed_event_msg_;
   track_removed_event_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_track_removed_event_msg(::oe::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg) {
+inline void DataRecord::set_allocated_track_removed_event_msg(::mxrp::recorder::pb::TrackRemovedEventMsg* track_removed_event_msg) {
   delete track_removed_event_msg_;
   track_removed_event_msg_ = track_removed_event_msg;
   if (track_removed_event_msg) {
@@ -4196,26 +4196,26 @@ inline void DataRecord::clear_has_track_data_msg() {
   _has_bits_[0] &= ~0x00080000u;
 }
 inline void DataRecord::clear_track_data_msg() {
-  if (track_data_msg_ != NULL) track_data_msg_->::oe::recorder::pb::TrackDataMsg::Clear();
+  if (track_data_msg_ != NULL) track_data_msg_->::mxrp::recorder::pb::TrackDataMsg::Clear();
   clear_has_track_data_msg();
 }
-inline const ::oe::recorder::pb::TrackDataMsg& DataRecord::track_data_msg() const {
+inline const ::mxrp::recorder::pb::TrackDataMsg& DataRecord::track_data_msg() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.DataRecord.track_data_msg)
   return track_data_msg_ != NULL ? *track_data_msg_ : *default_instance_->track_data_msg_;
 }
-inline ::oe::recorder::pb::TrackDataMsg* DataRecord::mutable_track_data_msg() {
+inline ::mxrp::recorder::pb::TrackDataMsg* DataRecord::mutable_track_data_msg() {
   set_has_track_data_msg();
-  if (track_data_msg_ == NULL) track_data_msg_ = new ::oe::recorder::pb::TrackDataMsg;
+  if (track_data_msg_ == NULL) track_data_msg_ = new ::mxrp::recorder::pb::TrackDataMsg;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.DataRecord.track_data_msg)
   return track_data_msg_;
 }
-inline ::oe::recorder::pb::TrackDataMsg* DataRecord::release_track_data_msg() {
+inline ::mxrp::recorder::pb::TrackDataMsg* DataRecord::release_track_data_msg() {
   clear_has_track_data_msg();
-  ::oe::recorder::pb::TrackDataMsg* temp = track_data_msg_;
+  ::mxrp::recorder::pb::TrackDataMsg* temp = track_data_msg_;
   track_data_msg_ = NULL;
   return temp;
 }
-inline void DataRecord::set_allocated_track_data_msg(::oe::recorder::pb::TrackDataMsg* track_data_msg) {
+inline void DataRecord::set_allocated_track_data_msg(::mxrp::recorder::pb::TrackDataMsg* track_data_msg) {
   delete track_data_msg_;
   track_data_msg_ = track_data_msg;
   if (track_data_msg) {
@@ -4721,26 +4721,26 @@ inline void NewPlayerEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void NewPlayerEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& NewPlayerEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& NewPlayerEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewPlayerEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewPlayerEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewPlayerEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewPlayerEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewPlayerEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewPlayerEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void NewPlayerEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void NewPlayerEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4762,26 +4762,26 @@ inline void NewPlayerEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void NewPlayerEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& NewPlayerEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& NewPlayerEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewPlayerEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewPlayerEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewPlayerEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewPlayerEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewPlayerEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewPlayerEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void NewPlayerEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void NewPlayerEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -4807,26 +4807,26 @@ inline void PlayerRemovedEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerRemovedEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerRemovedEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerRemovedEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerRemovedEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerRemovedEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerRemovedEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerRemovedEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerRemovedEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerRemovedEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerRemovedEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerRemovedEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4848,26 +4848,26 @@ inline void PlayerRemovedEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerRemovedEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerRemovedEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerRemovedEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerRemovedEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerRemovedEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerRemovedEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerRemovedEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerRemovedEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerRemovedEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerRemovedEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerRemovedEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -4893,26 +4893,26 @@ inline void PlayerDataMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerDataMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerDataMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerDataMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerDataMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerDataMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerDataMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerDataMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerDataMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerDataMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerDataMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerDataMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -4934,26 +4934,26 @@ inline void PlayerDataMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerDataMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerDataMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerDataMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerDataMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerDataMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerDataMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerDataMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerDataMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerDataMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerDataMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerDataMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5051,26 +5051,26 @@ inline void PlayerDamagedEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerDamagedEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerDamagedEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerDamagedEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerDamagedEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerDamagedEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerDamagedEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerDamagedEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerDamagedEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerDamagedEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerDamagedEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerDamagedEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5092,26 +5092,26 @@ inline void PlayerDamagedEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerDamagedEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerDamagedEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerDamagedEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerDamagedEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerDamagedEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerDamagedEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerDamagedEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerDamagedEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerDamagedEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerDamagedEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerDamagedEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5137,26 +5137,26 @@ inline void PlayerCollisionEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerCollisionEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerCollisionEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerCollisionEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerCollisionEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerCollisionEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerCollisionEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5178,26 +5178,26 @@ inline void PlayerCollisionEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerCollisionEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerCollisionEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerCollisionEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerCollisionEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerCollisionEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerCollisionEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerCollisionEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerCollisionEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerCollisionEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerCollisionEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5219,26 +5219,26 @@ inline void PlayerCollisionEventMsg::clear_has_other_player_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerCollisionEventMsg::clear_other_player_id() {
-  if (other_player_id_ != NULL) other_player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (other_player_id_ != NULL) other_player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_other_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerCollisionEventMsg::other_player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerCollisionEventMsg::other_player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerCollisionEventMsg.other_player_id)
   return other_player_id_ != NULL ? *other_player_id_ : *default_instance_->other_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_other_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCollisionEventMsg::mutable_other_player_id() {
   set_has_other_player_id();
-  if (other_player_id_ == NULL) other_player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (other_player_id_ == NULL) other_player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerCollisionEventMsg.other_player_id)
   return other_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_other_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCollisionEventMsg::release_other_player_id() {
   clear_has_other_player_id();
-  ::oe::recorder::pb::PlayerId* temp = other_player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = other_player_id_;
   other_player_id_ = NULL;
   return temp;
 }
-inline void PlayerCollisionEventMsg::set_allocated_other_player_id(::oe::recorder::pb::PlayerId* other_player_id) {
+inline void PlayerCollisionEventMsg::set_allocated_other_player_id(::mxrp::recorder::pb::PlayerId* other_player_id) {
   delete other_player_id_;
   other_player_id_ = other_player_id;
   if (other_player_id) {
@@ -5264,26 +5264,26 @@ inline void PlayerCrashEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerCrashEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerCrashEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerCrashEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerCrashEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCrashEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCrashEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerCrashEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerCrashEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerCrashEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerCrashEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerCrashEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5305,26 +5305,26 @@ inline void PlayerCrashEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerCrashEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerCrashEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerCrashEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerCrashEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerCrashEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerCrashEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerCrashEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerCrashEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerCrashEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerCrashEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerCrashEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5350,26 +5350,26 @@ inline void PlayerKilledEventMsg::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerKilledEventMsg::clear_id() {
-  if (id_ != NULL) id_->::oe::recorder::pb::PlayerId::Clear();
+  if (id_ != NULL) id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerKilledEventMsg::id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerKilledEventMsg::id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerKilledEventMsg.id)
   return id_ != NULL ? *id_ : *default_instance_->id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_id() {
   set_has_id();
-  if (id_ == NULL) id_ = new ::oe::recorder::pb::PlayerId;
+  if (id_ == NULL) id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerKilledEventMsg.id)
   return id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::release_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerKilledEventMsg::release_id() {
   clear_has_id();
-  ::oe::recorder::pb::PlayerId* temp = id_;
+  ::mxrp::recorder::pb::PlayerId* temp = id_;
   id_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_id(::oe::recorder::pb::PlayerId* id) {
+inline void PlayerKilledEventMsg::set_allocated_id(::mxrp::recorder::pb::PlayerId* id) {
   delete id_;
   id_ = id;
   if (id) {
@@ -5391,26 +5391,26 @@ inline void PlayerKilledEventMsg::clear_has_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerKilledEventMsg::clear_state() {
-  if (state_ != NULL) state_->::oe::recorder::pb::PlayerState::Clear();
+  if (state_ != NULL) state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_state();
 }
-inline const ::oe::recorder::pb::PlayerState& PlayerKilledEventMsg::state() const {
+inline const ::mxrp::recorder::pb::PlayerState& PlayerKilledEventMsg::state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerKilledEventMsg.state)
   return state_ != NULL ? *state_ : *default_instance_->state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerKilledEventMsg::mutable_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerKilledEventMsg::mutable_state() {
   set_has_state();
-  if (state_ == NULL) state_ = new ::oe::recorder::pb::PlayerState;
+  if (state_ == NULL) state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerKilledEventMsg.state)
   return state_;
 }
-inline ::oe::recorder::pb::PlayerState* PlayerKilledEventMsg::release_state() {
+inline ::mxrp::recorder::pb::PlayerState* PlayerKilledEventMsg::release_state() {
   clear_has_state();
-  ::oe::recorder::pb::PlayerState* temp = state_;
+  ::mxrp::recorder::pb::PlayerState* temp = state_;
   state_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_state(::oe::recorder::pb::PlayerState* state) {
+inline void PlayerKilledEventMsg::set_allocated_state(::mxrp::recorder::pb::PlayerState* state) {
   delete state_;
   state_ = state;
   if (state) {
@@ -5432,26 +5432,26 @@ inline void PlayerKilledEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerKilledEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::oe::recorder::pb::PlayerId& PlayerKilledEventMsg::shooter_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& PlayerKilledEventMsg::shooter_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerKilledEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerKilledEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  if (shooter_id_ == NULL) shooter_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerKilledEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* PlayerKilledEventMsg::release_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* PlayerKilledEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void PlayerKilledEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
+inline void PlayerKilledEventMsg::set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5477,26 +5477,26 @@ inline void WeaponReleaseEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponReleaseEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::wpn_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponReleaseEventMsg::wpn_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponReleaseEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  if (wpn_id_ == NULL) wpn_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponReleaseEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
+inline void WeaponReleaseEventMsg::set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5518,26 +5518,26 @@ inline void WeaponReleaseEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponReleaseEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::oe::recorder::pb::PlayerState& WeaponReleaseEventMsg::wpn_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& WeaponReleaseEventMsg::wpn_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponReleaseEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponReleaseEventMsg::mutable_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponReleaseEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  if (wpn_state_ == NULL) wpn_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponReleaseEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponReleaseEventMsg::release_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponReleaseEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
+inline void WeaponReleaseEventMsg::set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5559,26 +5559,26 @@ inline void WeaponReleaseEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponReleaseEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::shooter_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponReleaseEventMsg::shooter_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponReleaseEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  if (shooter_id_ == NULL) shooter_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponReleaseEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
+inline void WeaponReleaseEventMsg::set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5600,26 +5600,26 @@ inline void WeaponReleaseEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponReleaseEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponReleaseEventMsg::tgt_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponReleaseEventMsg::tgt_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponReleaseEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  if (tgt_id_ == NULL) tgt_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponReleaseEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponReleaseEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponReleaseEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
+inline void WeaponReleaseEventMsg::set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5645,26 +5645,26 @@ inline void WeaponHungEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponHungEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::wpn_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponHungEventMsg::wpn_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponHungEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  if (wpn_id_ == NULL) wpn_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponHungEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
+inline void WeaponHungEventMsg::set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5686,26 +5686,26 @@ inline void WeaponHungEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponHungEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::oe::recorder::pb::PlayerState& WeaponHungEventMsg::wpn_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& WeaponHungEventMsg::wpn_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponHungEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponHungEventMsg::mutable_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponHungEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  if (wpn_state_ == NULL) wpn_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponHungEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponHungEventMsg::release_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponHungEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
+inline void WeaponHungEventMsg::set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5727,26 +5727,26 @@ inline void WeaponHungEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponHungEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::shooter_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponHungEventMsg::shooter_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponHungEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  if (shooter_id_ == NULL) shooter_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponHungEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
+inline void WeaponHungEventMsg::set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5768,26 +5768,26 @@ inline void WeaponHungEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponHungEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponHungEventMsg::tgt_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponHungEventMsg::tgt_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponHungEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  if (tgt_id_ == NULL) tgt_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponHungEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponHungEventMsg::release_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponHungEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponHungEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
+inline void WeaponHungEventMsg::set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5813,26 +5813,26 @@ inline void WeaponDetonationEventMsg::clear_has_wpn_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void WeaponDetonationEventMsg::clear_wpn_id() {
-  if (wpn_id_ != NULL) wpn_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (wpn_id_ != NULL) wpn_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_wpn_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::wpn_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponDetonationEventMsg::wpn_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponDetonationEventMsg.wpn_id)
   return wpn_id_ != NULL ? *wpn_id_ : *default_instance_->wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_wpn_id() {
   set_has_wpn_id();
-  if (wpn_id_ == NULL) wpn_id_ = new ::oe::recorder::pb::PlayerId;
+  if (wpn_id_ == NULL) wpn_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponDetonationEventMsg.wpn_id)
   return wpn_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_wpn_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_wpn_id() {
   clear_has_wpn_id();
-  ::oe::recorder::pb::PlayerId* temp = wpn_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = wpn_id_;
   wpn_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_wpn_id(::oe::recorder::pb::PlayerId* wpn_id) {
+inline void WeaponDetonationEventMsg::set_allocated_wpn_id(::mxrp::recorder::pb::PlayerId* wpn_id) {
   delete wpn_id_;
   wpn_id_ = wpn_id;
   if (wpn_id) {
@@ -5854,26 +5854,26 @@ inline void WeaponDetonationEventMsg::clear_has_wpn_state() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void WeaponDetonationEventMsg::clear_wpn_state() {
-  if (wpn_state_ != NULL) wpn_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (wpn_state_ != NULL) wpn_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_wpn_state();
 }
-inline const ::oe::recorder::pb::PlayerState& WeaponDetonationEventMsg::wpn_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& WeaponDetonationEventMsg::wpn_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponDetonationEventMsg.wpn_state)
   return wpn_state_ != NULL ? *wpn_state_ : *default_instance_->wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponDetonationEventMsg::mutable_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponDetonationEventMsg::mutable_wpn_state() {
   set_has_wpn_state();
-  if (wpn_state_ == NULL) wpn_state_ = new ::oe::recorder::pb::PlayerState;
+  if (wpn_state_ == NULL) wpn_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponDetonationEventMsg.wpn_state)
   return wpn_state_;
 }
-inline ::oe::recorder::pb::PlayerState* WeaponDetonationEventMsg::release_wpn_state() {
+inline ::mxrp::recorder::pb::PlayerState* WeaponDetonationEventMsg::release_wpn_state() {
   clear_has_wpn_state();
-  ::oe::recorder::pb::PlayerState* temp = wpn_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = wpn_state_;
   wpn_state_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_wpn_state(::oe::recorder::pb::PlayerState* wpn_state) {
+inline void WeaponDetonationEventMsg::set_allocated_wpn_state(::mxrp::recorder::pb::PlayerState* wpn_state) {
   delete wpn_state_;
   wpn_state_ = wpn_state;
   if (wpn_state) {
@@ -5895,26 +5895,26 @@ inline void WeaponDetonationEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void WeaponDetonationEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::shooter_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponDetonationEventMsg::shooter_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponDetonationEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  if (shooter_id_ == NULL) shooter_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponDetonationEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
+inline void WeaponDetonationEventMsg::set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -5936,26 +5936,26 @@ inline void WeaponDetonationEventMsg::clear_has_tgt_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void WeaponDetonationEventMsg::clear_tgt_id() {
-  if (tgt_id_ != NULL) tgt_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (tgt_id_ != NULL) tgt_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_tgt_id();
 }
-inline const ::oe::recorder::pb::PlayerId& WeaponDetonationEventMsg::tgt_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& WeaponDetonationEventMsg::tgt_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponDetonationEventMsg.tgt_id)
   return tgt_id_ != NULL ? *tgt_id_ : *default_instance_->tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::mutable_tgt_id() {
   set_has_tgt_id();
-  if (tgt_id_ == NULL) tgt_id_ = new ::oe::recorder::pb::PlayerId;
+  if (tgt_id_ == NULL) tgt_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.WeaponDetonationEventMsg.tgt_id)
   return tgt_id_;
 }
-inline ::oe::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_tgt_id() {
+inline ::mxrp::recorder::pb::PlayerId* WeaponDetonationEventMsg::release_tgt_id() {
   clear_has_tgt_id();
-  ::oe::recorder::pb::PlayerId* temp = tgt_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = tgt_id_;
   tgt_id_ = NULL;
   return temp;
 }
-inline void WeaponDetonationEventMsg::set_allocated_tgt_id(::oe::recorder::pb::PlayerId* tgt_id) {
+inline void WeaponDetonationEventMsg::set_allocated_tgt_id(::mxrp::recorder::pb::PlayerId* tgt_id) {
   delete tgt_id_;
   tgt_id_ = tgt_id;
   if (tgt_id) {
@@ -5980,12 +5980,12 @@ inline void WeaponDetonationEventMsg::clear_det_type() {
   det_type_ = 0;
   clear_has_det_type();
 }
-inline ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType WeaponDetonationEventMsg::det_type() const {
+inline ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType WeaponDetonationEventMsg::det_type() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.WeaponDetonationEventMsg.det_type)
-  return static_cast< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType >(det_type_);
+  return static_cast< ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType >(det_type_);
 }
-inline void WeaponDetonationEventMsg::set_det_type(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType value) {
-  assert(::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_IsValid(value));
+inline void WeaponDetonationEventMsg::set_det_type(::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType value) {
+  assert(::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType_IsValid(value));
   set_has_det_type();
   det_type_ = value;
   // @@protoc_insertion_point(field_set:oe.recorder.pb.WeaponDetonationEventMsg.det_type)
@@ -6030,26 +6030,26 @@ inline void GunFiredEventMsg::clear_has_shooter_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void GunFiredEventMsg::clear_shooter_id() {
-  if (shooter_id_ != NULL) shooter_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (shooter_id_ != NULL) shooter_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_shooter_id();
 }
-inline const ::oe::recorder::pb::PlayerId& GunFiredEventMsg::shooter_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& GunFiredEventMsg::shooter_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.GunFiredEventMsg.shooter_id)
   return shooter_id_ != NULL ? *shooter_id_ : *default_instance_->shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* GunFiredEventMsg::mutable_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* GunFiredEventMsg::mutable_shooter_id() {
   set_has_shooter_id();
-  if (shooter_id_ == NULL) shooter_id_ = new ::oe::recorder::pb::PlayerId;
+  if (shooter_id_ == NULL) shooter_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.GunFiredEventMsg.shooter_id)
   return shooter_id_;
 }
-inline ::oe::recorder::pb::PlayerId* GunFiredEventMsg::release_shooter_id() {
+inline ::mxrp::recorder::pb::PlayerId* GunFiredEventMsg::release_shooter_id() {
   clear_has_shooter_id();
-  ::oe::recorder::pb::PlayerId* temp = shooter_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = shooter_id_;
   shooter_id_ = NULL;
   return temp;
 }
-inline void GunFiredEventMsg::set_allocated_shooter_id(::oe::recorder::pb::PlayerId* shooter_id) {
+inline void GunFiredEventMsg::set_allocated_shooter_id(::mxrp::recorder::pb::PlayerId* shooter_id) {
   delete shooter_id_;
   shooter_id_ = shooter_id;
   if (shooter_id) {
@@ -6099,26 +6099,26 @@ inline void NewTrackEventMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void NewTrackEventMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& NewTrackEventMsg::player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& NewTrackEventMsg::player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::mutable_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewTrackEventMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (player_id_ == NULL) player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.player_id)
   return player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::release_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewTrackEventMsg::release_player_id() {
   clear_has_player_id();
-  ::oe::recorder::pb::PlayerId* temp = player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
+inline void NewTrackEventMsg::set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6216,26 +6216,26 @@ inline void NewTrackEventMsg::clear_has_track_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void NewTrackEventMsg::clear_track_data() {
-  if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
+  if (track_data_ != NULL) track_data_->::mxrp::recorder::pb::TrackData::Clear();
   clear_has_track_data();
 }
-inline const ::oe::recorder::pb::TrackData& NewTrackEventMsg::track_data() const {
+inline const ::mxrp::recorder::pb::TrackData& NewTrackEventMsg::track_data() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.track_data)
   return track_data_ != NULL ? *track_data_ : *default_instance_->track_data_;
 }
-inline ::oe::recorder::pb::TrackData* NewTrackEventMsg::mutable_track_data() {
+inline ::mxrp::recorder::pb::TrackData* NewTrackEventMsg::mutable_track_data() {
   set_has_track_data();
-  if (track_data_ == NULL) track_data_ = new ::oe::recorder::pb::TrackData;
+  if (track_data_ == NULL) track_data_ = new ::mxrp::recorder::pb::TrackData;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.track_data)
   return track_data_;
 }
-inline ::oe::recorder::pb::TrackData* NewTrackEventMsg::release_track_data() {
+inline ::mxrp::recorder::pb::TrackData* NewTrackEventMsg::release_track_data() {
   clear_has_track_data();
-  ::oe::recorder::pb::TrackData* temp = track_data_;
+  ::mxrp::recorder::pb::TrackData* temp = track_data_;
   track_data_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_track_data(::oe::recorder::pb::TrackData* track_data) {
+inline void NewTrackEventMsg::set_allocated_track_data(::mxrp::recorder::pb::TrackData* track_data) {
   delete track_data_;
   track_data_ = track_data;
   if (track_data) {
@@ -6257,26 +6257,26 @@ inline void NewTrackEventMsg::clear_has_player_state() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void NewTrackEventMsg::clear_player_state() {
-  if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (player_state_ != NULL) player_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_player_state();
 }
-inline const ::oe::recorder::pb::PlayerState& NewTrackEventMsg::player_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& NewTrackEventMsg::player_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.player_state)
   return player_state_ != NULL ? *player_state_ : *default_instance_->player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::mutable_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewTrackEventMsg::mutable_player_state() {
   set_has_player_state();
-  if (player_state_ == NULL) player_state_ = new ::oe::recorder::pb::PlayerState;
+  if (player_state_ == NULL) player_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.player_state)
   return player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::release_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewTrackEventMsg::release_player_state() {
   clear_has_player_state();
-  ::oe::recorder::pb::PlayerState* temp = player_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = player_state_;
   player_state_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state) {
+inline void NewTrackEventMsg::set_allocated_player_state(::mxrp::recorder::pb::PlayerState* player_state) {
   delete player_state_;
   player_state_ = player_state;
   if (player_state) {
@@ -6298,26 +6298,26 @@ inline void NewTrackEventMsg::clear_has_trk_player_id() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void NewTrackEventMsg::clear_trk_player_id() {
-  if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (trk_player_id_ != NULL) trk_player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_trk_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& NewTrackEventMsg::trk_player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& NewTrackEventMsg::trk_player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.trk_player_id)
   return trk_player_id_ != NULL ? *trk_player_id_ : *default_instance_->trk_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::mutable_trk_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewTrackEventMsg::mutable_trk_player_id() {
   set_has_trk_player_id();
-  if (trk_player_id_ == NULL) trk_player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (trk_player_id_ == NULL) trk_player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.trk_player_id)
   return trk_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* NewTrackEventMsg::release_trk_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* NewTrackEventMsg::release_trk_player_id() {
   clear_has_trk_player_id();
-  ::oe::recorder::pb::PlayerId* temp = trk_player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = trk_player_id_;
   trk_player_id_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id) {
+inline void NewTrackEventMsg::set_allocated_trk_player_id(::mxrp::recorder::pb::PlayerId* trk_player_id) {
   delete trk_player_id_;
   trk_player_id_ = trk_player_id;
   if (trk_player_id) {
@@ -6339,26 +6339,26 @@ inline void NewTrackEventMsg::clear_has_trk_player_state() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void NewTrackEventMsg::clear_trk_player_state() {
-  if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (trk_player_state_ != NULL) trk_player_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_trk_player_state();
 }
-inline const ::oe::recorder::pb::PlayerState& NewTrackEventMsg::trk_player_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& NewTrackEventMsg::trk_player_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.trk_player_state)
   return trk_player_state_ != NULL ? *trk_player_state_ : *default_instance_->trk_player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::mutable_trk_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewTrackEventMsg::mutable_trk_player_state() {
   set_has_trk_player_state();
-  if (trk_player_state_ == NULL) trk_player_state_ = new ::oe::recorder::pb::PlayerState;
+  if (trk_player_state_ == NULL) trk_player_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.trk_player_state)
   return trk_player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* NewTrackEventMsg::release_trk_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* NewTrackEventMsg::release_trk_player_state() {
   clear_has_trk_player_state();
-  ::oe::recorder::pb::PlayerState* temp = trk_player_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = trk_player_state_;
   trk_player_state_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state) {
+inline void NewTrackEventMsg::set_allocated_trk_player_state(::mxrp::recorder::pb::PlayerState* trk_player_state) {
   delete trk_player_state_;
   trk_player_state_ = trk_player_state;
   if (trk_player_state) {
@@ -6380,26 +6380,26 @@ inline void NewTrackEventMsg::clear_has_emission_data() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void NewTrackEventMsg::clear_emission_data() {
-  if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
+  if (emission_data_ != NULL) emission_data_->::mxrp::recorder::pb::EmissionData::Clear();
   clear_has_emission_data();
 }
-inline const ::oe::recorder::pb::EmissionData& NewTrackEventMsg::emission_data() const {
+inline const ::mxrp::recorder::pb::EmissionData& NewTrackEventMsg::emission_data() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.NewTrackEventMsg.emission_data)
   return emission_data_ != NULL ? *emission_data_ : *default_instance_->emission_data_;
 }
-inline ::oe::recorder::pb::EmissionData* NewTrackEventMsg::mutable_emission_data() {
+inline ::mxrp::recorder::pb::EmissionData* NewTrackEventMsg::mutable_emission_data() {
   set_has_emission_data();
-  if (emission_data_ == NULL) emission_data_ = new ::oe::recorder::pb::EmissionData;
+  if (emission_data_ == NULL) emission_data_ = new ::mxrp::recorder::pb::EmissionData;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.NewTrackEventMsg.emission_data)
   return emission_data_;
 }
-inline ::oe::recorder::pb::EmissionData* NewTrackEventMsg::release_emission_data() {
+inline ::mxrp::recorder::pb::EmissionData* NewTrackEventMsg::release_emission_data() {
   clear_has_emission_data();
-  ::oe::recorder::pb::EmissionData* temp = emission_data_;
+  ::mxrp::recorder::pb::EmissionData* temp = emission_data_;
   emission_data_ = NULL;
   return temp;
 }
-inline void NewTrackEventMsg::set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data) {
+inline void NewTrackEventMsg::set_allocated_emission_data(::mxrp::recorder::pb::EmissionData* emission_data) {
   delete emission_data_;
   emission_data_ = emission_data;
   if (emission_data) {
@@ -6425,26 +6425,26 @@ inline void TrackRemovedEventMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void TrackRemovedEventMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& TrackRemovedEventMsg::player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& TrackRemovedEventMsg::player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackRemovedEventMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackRemovedEventMsg::mutable_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackRemovedEventMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (player_id_ == NULL) player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackRemovedEventMsg.player_id)
   return player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackRemovedEventMsg::release_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackRemovedEventMsg::release_player_id() {
   clear_has_player_id();
-  ::oe::recorder::pb::PlayerId* temp = player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void TrackRemovedEventMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
+inline void TrackRemovedEventMsg::set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6546,26 +6546,26 @@ inline void TrackDataMsg::clear_has_player_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void TrackDataMsg::clear_player_id() {
-  if (player_id_ != NULL) player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (player_id_ != NULL) player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& TrackDataMsg::player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& TrackDataMsg::player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.player_id)
   return player_id_ != NULL ? *player_id_ : *default_instance_->player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackDataMsg::mutable_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackDataMsg::mutable_player_id() {
   set_has_player_id();
-  if (player_id_ == NULL) player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (player_id_ == NULL) player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.player_id)
   return player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackDataMsg::release_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackDataMsg::release_player_id() {
   clear_has_player_id();
-  ::oe::recorder::pb::PlayerId* temp = player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = player_id_;
   player_id_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_player_id(::oe::recorder::pb::PlayerId* player_id) {
+inline void TrackDataMsg::set_allocated_player_id(::mxrp::recorder::pb::PlayerId* player_id) {
   delete player_id_;
   player_id_ = player_id;
   if (player_id) {
@@ -6663,26 +6663,26 @@ inline void TrackDataMsg::clear_has_track_data() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void TrackDataMsg::clear_track_data() {
-  if (track_data_ != NULL) track_data_->::oe::recorder::pb::TrackData::Clear();
+  if (track_data_ != NULL) track_data_->::mxrp::recorder::pb::TrackData::Clear();
   clear_has_track_data();
 }
-inline const ::oe::recorder::pb::TrackData& TrackDataMsg::track_data() const {
+inline const ::mxrp::recorder::pb::TrackData& TrackDataMsg::track_data() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.track_data)
   return track_data_ != NULL ? *track_data_ : *default_instance_->track_data_;
 }
-inline ::oe::recorder::pb::TrackData* TrackDataMsg::mutable_track_data() {
+inline ::mxrp::recorder::pb::TrackData* TrackDataMsg::mutable_track_data() {
   set_has_track_data();
-  if (track_data_ == NULL) track_data_ = new ::oe::recorder::pb::TrackData;
+  if (track_data_ == NULL) track_data_ = new ::mxrp::recorder::pb::TrackData;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.track_data)
   return track_data_;
 }
-inline ::oe::recorder::pb::TrackData* TrackDataMsg::release_track_data() {
+inline ::mxrp::recorder::pb::TrackData* TrackDataMsg::release_track_data() {
   clear_has_track_data();
-  ::oe::recorder::pb::TrackData* temp = track_data_;
+  ::mxrp::recorder::pb::TrackData* temp = track_data_;
   track_data_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_track_data(::oe::recorder::pb::TrackData* track_data) {
+inline void TrackDataMsg::set_allocated_track_data(::mxrp::recorder::pb::TrackData* track_data) {
   delete track_data_;
   track_data_ = track_data;
   if (track_data) {
@@ -6704,26 +6704,26 @@ inline void TrackDataMsg::clear_has_player_state() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void TrackDataMsg::clear_player_state() {
-  if (player_state_ != NULL) player_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (player_state_ != NULL) player_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_player_state();
 }
-inline const ::oe::recorder::pb::PlayerState& TrackDataMsg::player_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& TrackDataMsg::player_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.player_state)
   return player_state_ != NULL ? *player_state_ : *default_instance_->player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* TrackDataMsg::mutable_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* TrackDataMsg::mutable_player_state() {
   set_has_player_state();
-  if (player_state_ == NULL) player_state_ = new ::oe::recorder::pb::PlayerState;
+  if (player_state_ == NULL) player_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.player_state)
   return player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* TrackDataMsg::release_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* TrackDataMsg::release_player_state() {
   clear_has_player_state();
-  ::oe::recorder::pb::PlayerState* temp = player_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = player_state_;
   player_state_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_player_state(::oe::recorder::pb::PlayerState* player_state) {
+inline void TrackDataMsg::set_allocated_player_state(::mxrp::recorder::pb::PlayerState* player_state) {
   delete player_state_;
   player_state_ = player_state;
   if (player_state) {
@@ -6745,26 +6745,26 @@ inline void TrackDataMsg::clear_has_trk_player_id() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void TrackDataMsg::clear_trk_player_id() {
-  if (trk_player_id_ != NULL) trk_player_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (trk_player_id_ != NULL) trk_player_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_trk_player_id();
 }
-inline const ::oe::recorder::pb::PlayerId& TrackDataMsg::trk_player_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& TrackDataMsg::trk_player_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.trk_player_id)
   return trk_player_id_ != NULL ? *trk_player_id_ : *default_instance_->trk_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackDataMsg::mutable_trk_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackDataMsg::mutable_trk_player_id() {
   set_has_trk_player_id();
-  if (trk_player_id_ == NULL) trk_player_id_ = new ::oe::recorder::pb::PlayerId;
+  if (trk_player_id_ == NULL) trk_player_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.trk_player_id)
   return trk_player_id_;
 }
-inline ::oe::recorder::pb::PlayerId* TrackDataMsg::release_trk_player_id() {
+inline ::mxrp::recorder::pb::PlayerId* TrackDataMsg::release_trk_player_id() {
   clear_has_trk_player_id();
-  ::oe::recorder::pb::PlayerId* temp = trk_player_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = trk_player_id_;
   trk_player_id_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_trk_player_id(::oe::recorder::pb::PlayerId* trk_player_id) {
+inline void TrackDataMsg::set_allocated_trk_player_id(::mxrp::recorder::pb::PlayerId* trk_player_id) {
   delete trk_player_id_;
   trk_player_id_ = trk_player_id;
   if (trk_player_id) {
@@ -6786,26 +6786,26 @@ inline void TrackDataMsg::clear_has_trk_player_state() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void TrackDataMsg::clear_trk_player_state() {
-  if (trk_player_state_ != NULL) trk_player_state_->::oe::recorder::pb::PlayerState::Clear();
+  if (trk_player_state_ != NULL) trk_player_state_->::mxrp::recorder::pb::PlayerState::Clear();
   clear_has_trk_player_state();
 }
-inline const ::oe::recorder::pb::PlayerState& TrackDataMsg::trk_player_state() const {
+inline const ::mxrp::recorder::pb::PlayerState& TrackDataMsg::trk_player_state() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.trk_player_state)
   return trk_player_state_ != NULL ? *trk_player_state_ : *default_instance_->trk_player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* TrackDataMsg::mutable_trk_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* TrackDataMsg::mutable_trk_player_state() {
   set_has_trk_player_state();
-  if (trk_player_state_ == NULL) trk_player_state_ = new ::oe::recorder::pb::PlayerState;
+  if (trk_player_state_ == NULL) trk_player_state_ = new ::mxrp::recorder::pb::PlayerState;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.trk_player_state)
   return trk_player_state_;
 }
-inline ::oe::recorder::pb::PlayerState* TrackDataMsg::release_trk_player_state() {
+inline ::mxrp::recorder::pb::PlayerState* TrackDataMsg::release_trk_player_state() {
   clear_has_trk_player_state();
-  ::oe::recorder::pb::PlayerState* temp = trk_player_state_;
+  ::mxrp::recorder::pb::PlayerState* temp = trk_player_state_;
   trk_player_state_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_trk_player_state(::oe::recorder::pb::PlayerState* trk_player_state) {
+inline void TrackDataMsg::set_allocated_trk_player_state(::mxrp::recorder::pb::PlayerState* trk_player_state) {
   delete trk_player_state_;
   trk_player_state_ = trk_player_state;
   if (trk_player_state) {
@@ -6827,26 +6827,26 @@ inline void TrackDataMsg::clear_has_emission_data() {
   _has_bits_[0] &= ~0x00000040u;
 }
 inline void TrackDataMsg::clear_emission_data() {
-  if (emission_data_ != NULL) emission_data_->::oe::recorder::pb::EmissionData::Clear();
+  if (emission_data_ != NULL) emission_data_->::mxrp::recorder::pb::EmissionData::Clear();
   clear_has_emission_data();
 }
-inline const ::oe::recorder::pb::EmissionData& TrackDataMsg::emission_data() const {
+inline const ::mxrp::recorder::pb::EmissionData& TrackDataMsg::emission_data() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackDataMsg.emission_data)
   return emission_data_ != NULL ? *emission_data_ : *default_instance_->emission_data_;
 }
-inline ::oe::recorder::pb::EmissionData* TrackDataMsg::mutable_emission_data() {
+inline ::mxrp::recorder::pb::EmissionData* TrackDataMsg::mutable_emission_data() {
   set_has_emission_data();
-  if (emission_data_ == NULL) emission_data_ = new ::oe::recorder::pb::EmissionData;
+  if (emission_data_ == NULL) emission_data_ = new ::mxrp::recorder::pb::EmissionData;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackDataMsg.emission_data)
   return emission_data_;
 }
-inline ::oe::recorder::pb::EmissionData* TrackDataMsg::release_emission_data() {
+inline ::mxrp::recorder::pb::EmissionData* TrackDataMsg::release_emission_data() {
   clear_has_emission_data();
-  ::oe::recorder::pb::EmissionData* temp = emission_data_;
+  ::mxrp::recorder::pb::EmissionData* temp = emission_data_;
   emission_data_ = NULL;
   return temp;
 }
-inline void TrackDataMsg::set_allocated_emission_data(::oe::recorder::pb::EmissionData* emission_data) {
+inline void TrackDataMsg::set_allocated_emission_data(::mxrp::recorder::pb::EmissionData* emission_data) {
   delete emission_data_;
   emission_data_ = emission_data;
   if (emission_data) {
@@ -7352,26 +7352,26 @@ inline void PlayerState::clear_has_pos() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PlayerState::clear_pos() {
-  if (pos_ != NULL) pos_->::oe::recorder::pb::Vector::Clear();
+  if (pos_ != NULL) pos_->::mxrp::recorder::pb::Vector::Clear();
   clear_has_pos();
 }
-inline const ::oe::recorder::pb::Vector& PlayerState::pos() const {
+inline const ::mxrp::recorder::pb::Vector& PlayerState::pos() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerState.pos)
   return pos_ != NULL ? *pos_ : *default_instance_->pos_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::mutable_pos() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::mutable_pos() {
   set_has_pos();
-  if (pos_ == NULL) pos_ = new ::oe::recorder::pb::Vector;
+  if (pos_ == NULL) pos_ = new ::mxrp::recorder::pb::Vector;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerState.pos)
   return pos_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::release_pos() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::release_pos() {
   clear_has_pos();
-  ::oe::recorder::pb::Vector* temp = pos_;
+  ::mxrp::recorder::pb::Vector* temp = pos_;
   pos_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_pos(::oe::recorder::pb::Vector* pos) {
+inline void PlayerState::set_allocated_pos(::mxrp::recorder::pb::Vector* pos) {
   delete pos_;
   pos_ = pos;
   if (pos) {
@@ -7393,26 +7393,26 @@ inline void PlayerState::clear_has_angles() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void PlayerState::clear_angles() {
-  if (angles_ != NULL) angles_->::oe::recorder::pb::Vector::Clear();
+  if (angles_ != NULL) angles_->::mxrp::recorder::pb::Vector::Clear();
   clear_has_angles();
 }
-inline const ::oe::recorder::pb::Vector& PlayerState::angles() const {
+inline const ::mxrp::recorder::pb::Vector& PlayerState::angles() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerState.angles)
   return angles_ != NULL ? *angles_ : *default_instance_->angles_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::mutable_angles() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::mutable_angles() {
   set_has_angles();
-  if (angles_ == NULL) angles_ = new ::oe::recorder::pb::Vector;
+  if (angles_ == NULL) angles_ = new ::mxrp::recorder::pb::Vector;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerState.angles)
   return angles_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::release_angles() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::release_angles() {
   clear_has_angles();
-  ::oe::recorder::pb::Vector* temp = angles_;
+  ::mxrp::recorder::pb::Vector* temp = angles_;
   angles_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_angles(::oe::recorder::pb::Vector* angles) {
+inline void PlayerState::set_allocated_angles(::mxrp::recorder::pb::Vector* angles) {
   delete angles_;
   angles_ = angles;
   if (angles) {
@@ -7434,26 +7434,26 @@ inline void PlayerState::clear_has_vel() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void PlayerState::clear_vel() {
-  if (vel_ != NULL) vel_->::oe::recorder::pb::Vector::Clear();
+  if (vel_ != NULL) vel_->::mxrp::recorder::pb::Vector::Clear();
   clear_has_vel();
 }
-inline const ::oe::recorder::pb::Vector& PlayerState::vel() const {
+inline const ::mxrp::recorder::pb::Vector& PlayerState::vel() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.PlayerState.vel)
   return vel_ != NULL ? *vel_ : *default_instance_->vel_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::mutable_vel() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::mutable_vel() {
   set_has_vel();
-  if (vel_ == NULL) vel_ = new ::oe::recorder::pb::Vector;
+  if (vel_ == NULL) vel_ = new ::mxrp::recorder::pb::Vector;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.PlayerState.vel)
   return vel_;
 }
-inline ::oe::recorder::pb::Vector* PlayerState::release_vel() {
+inline ::mxrp::recorder::pb::Vector* PlayerState::release_vel() {
   clear_has_vel();
-  ::oe::recorder::pb::Vector* temp = vel_;
+  ::mxrp::recorder::pb::Vector* temp = vel_;
   vel_ = NULL;
   return temp;
 }
-inline void PlayerState::set_allocated_vel(::oe::recorder::pb::Vector* vel) {
+inline void PlayerState::set_allocated_vel(::mxrp::recorder::pb::Vector* vel) {
   delete vel_;
   vel_ = vel;
   if (vel) {
@@ -7719,26 +7719,26 @@ inline void TrackData::clear_has_position() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void TrackData::clear_position() {
-  if (position_ != NULL) position_->::oe::recorder::pb::Vector::Clear();
+  if (position_ != NULL) position_->::mxrp::recorder::pb::Vector::Clear();
   clear_has_position();
 }
-inline const ::oe::recorder::pb::Vector& TrackData::position() const {
+inline const ::mxrp::recorder::pb::Vector& TrackData::position() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackData.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::oe::recorder::pb::Vector* TrackData::mutable_position() {
+inline ::mxrp::recorder::pb::Vector* TrackData::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::oe::recorder::pb::Vector;
+  if (position_ == NULL) position_ = new ::mxrp::recorder::pb::Vector;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackData.position)
   return position_;
 }
-inline ::oe::recorder::pb::Vector* TrackData::release_position() {
+inline ::mxrp::recorder::pb::Vector* TrackData::release_position() {
   clear_has_position();
-  ::oe::recorder::pb::Vector* temp = position_;
+  ::mxrp::recorder::pb::Vector* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void TrackData::set_allocated_position(::oe::recorder::pb::Vector* position) {
+inline void TrackData::set_allocated_position(::mxrp::recorder::pb::Vector* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -7760,26 +7760,26 @@ inline void TrackData::clear_has_velocity() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void TrackData::clear_velocity() {
-  if (velocity_ != NULL) velocity_->::oe::recorder::pb::Vector::Clear();
+  if (velocity_ != NULL) velocity_->::mxrp::recorder::pb::Vector::Clear();
   clear_has_velocity();
 }
-inline const ::oe::recorder::pb::Vector& TrackData::velocity() const {
+inline const ::mxrp::recorder::pb::Vector& TrackData::velocity() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.TrackData.velocity)
   return velocity_ != NULL ? *velocity_ : *default_instance_->velocity_;
 }
-inline ::oe::recorder::pb::Vector* TrackData::mutable_velocity() {
+inline ::mxrp::recorder::pb::Vector* TrackData::mutable_velocity() {
   set_has_velocity();
-  if (velocity_ == NULL) velocity_ = new ::oe::recorder::pb::Vector;
+  if (velocity_ == NULL) velocity_ = new ::mxrp::recorder::pb::Vector;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.TrackData.velocity)
   return velocity_;
 }
-inline ::oe::recorder::pb::Vector* TrackData::release_velocity() {
+inline ::mxrp::recorder::pb::Vector* TrackData::release_velocity() {
   clear_has_velocity();
-  ::oe::recorder::pb::Vector* temp = velocity_;
+  ::mxrp::recorder::pb::Vector* temp = velocity_;
   velocity_ = NULL;
   return temp;
 }
-inline void TrackData::set_allocated_velocity(::oe::recorder::pb::Vector* velocity) {
+inline void TrackData::set_allocated_velocity(::mxrp::recorder::pb::Vector* velocity) {
   delete velocity_;
   velocity_ = velocity;
   if (velocity) {
@@ -8024,12 +8024,12 @@ inline void EmissionData::clear_polarization() {
   polarization_ = 0;
   clear_has_polarization();
 }
-inline ::oe::recorder::pb::EmissionData_Polarization EmissionData::polarization() const {
+inline ::mxrp::recorder::pb::EmissionData_Polarization EmissionData::polarization() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.EmissionData.polarization)
-  return static_cast< ::oe::recorder::pb::EmissionData_Polarization >(polarization_);
+  return static_cast< ::mxrp::recorder::pb::EmissionData_Polarization >(polarization_);
 }
-inline void EmissionData::set_polarization(::oe::recorder::pb::EmissionData_Polarization value) {
-  assert(::oe::recorder::pb::EmissionData_Polarization_IsValid(value));
+inline void EmissionData::set_polarization(::mxrp::recorder::pb::EmissionData_Polarization value) {
+  assert(::mxrp::recorder::pb::EmissionData_Polarization_IsValid(value));
   set_has_polarization();
   polarization_ = value;
   // @@protoc_insertion_point(field_set:oe.recorder.pb.EmissionData.polarization)
@@ -8094,26 +8094,26 @@ inline void EmissionData::clear_has_origin_id() {
   _has_bits_[0] &= ~0x00000200u;
 }
 inline void EmissionData::clear_origin_id() {
-  if (origin_id_ != NULL) origin_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (origin_id_ != NULL) origin_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_origin_id();
 }
-inline const ::oe::recorder::pb::PlayerId& EmissionData::origin_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& EmissionData::origin_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.EmissionData.origin_id)
   return origin_id_ != NULL ? *origin_id_ : *default_instance_->origin_id_;
 }
-inline ::oe::recorder::pb::PlayerId* EmissionData::mutable_origin_id() {
+inline ::mxrp::recorder::pb::PlayerId* EmissionData::mutable_origin_id() {
   set_has_origin_id();
-  if (origin_id_ == NULL) origin_id_ = new ::oe::recorder::pb::PlayerId;
+  if (origin_id_ == NULL) origin_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.EmissionData.origin_id)
   return origin_id_;
 }
-inline ::oe::recorder::pb::PlayerId* EmissionData::release_origin_id() {
+inline ::mxrp::recorder::pb::PlayerId* EmissionData::release_origin_id() {
   clear_has_origin_id();
-  ::oe::recorder::pb::PlayerId* temp = origin_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = origin_id_;
   origin_id_ = NULL;
   return temp;
 }
-inline void EmissionData::set_allocated_origin_id(::oe::recorder::pb::PlayerId* origin_id) {
+inline void EmissionData::set_allocated_origin_id(::mxrp::recorder::pb::PlayerId* origin_id) {
   delete origin_id_;
   origin_id_ = origin_id;
   if (origin_id) {
@@ -8135,26 +8135,26 @@ inline void EmissionData::clear_has_target_id() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void EmissionData::clear_target_id() {
-  if (target_id_ != NULL) target_id_->::oe::recorder::pb::PlayerId::Clear();
+  if (target_id_ != NULL) target_id_->::mxrp::recorder::pb::PlayerId::Clear();
   clear_has_target_id();
 }
-inline const ::oe::recorder::pb::PlayerId& EmissionData::target_id() const {
+inline const ::mxrp::recorder::pb::PlayerId& EmissionData::target_id() const {
   // @@protoc_insertion_point(field_get:oe.recorder.pb.EmissionData.target_id)
   return target_id_ != NULL ? *target_id_ : *default_instance_->target_id_;
 }
-inline ::oe::recorder::pb::PlayerId* EmissionData::mutable_target_id() {
+inline ::mxrp::recorder::pb::PlayerId* EmissionData::mutable_target_id() {
   set_has_target_id();
-  if (target_id_ == NULL) target_id_ = new ::oe::recorder::pb::PlayerId;
+  if (target_id_ == NULL) target_id_ = new ::mxrp::recorder::pb::PlayerId;
   // @@protoc_insertion_point(field_mutable:oe.recorder.pb.EmissionData.target_id)
   return target_id_;
 }
-inline ::oe::recorder::pb::PlayerId* EmissionData::release_target_id() {
+inline ::mxrp::recorder::pb::PlayerId* EmissionData::release_target_id() {
   clear_has_target_id();
-  ::oe::recorder::pb::PlayerId* temp = target_id_;
+  ::mxrp::recorder::pb::PlayerId* temp = target_id_;
   target_id_ = NULL;
   return temp;
 }
-inline void EmissionData::set_allocated_target_id(::oe::recorder::pb::PlayerId* target_id) {
+inline void EmissionData::set_allocated_target_id(::mxrp::recorder::pb::PlayerId* target_id) {
   delete target_id_;
   target_id_ = target_id;
   if (target_id) {
@@ -8170,21 +8170,21 @@ inline void EmissionData::set_allocated_target_id(::oe::recorder::pb::PlayerId* 
 
 }  // namespace pb
 }  // namespace recorder
-}  // namespace oe
+}  // namespace mxrp
 
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType>() {
-  return ::oe::recorder::pb::WeaponDetonationEventMsg_DetonationType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType>() {
+  return ::mxrp::recorder::pb::WeaponDetonationEventMsg_DetonationType_descriptor();
 }
-template <> struct is_proto_enum< ::oe::recorder::pb::EmissionData_Polarization> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::mxrp::recorder::pb::EmissionData_Polarization> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::oe::recorder::pb::EmissionData_Polarization>() {
-  return ::oe::recorder::pb::EmissionData_Polarization_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::mxrp::recorder::pb::EmissionData_Polarization>() {
+  return ::mxrp::recorder::pb::EmissionData_Polarization_descriptor();
 }
 
 }  // namespace google

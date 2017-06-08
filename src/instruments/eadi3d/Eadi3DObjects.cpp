@@ -10,7 +10,7 @@
 
 #define MR2IN 0.026785714      // font was scaled by this
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 float WHITE[3] = { 1.0, 1.0, 1.0 };

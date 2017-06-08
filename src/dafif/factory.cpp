@@ -9,7 +9,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 base::Object* factory(const std::string& name)

@@ -6,7 +6,7 @@
 
 #include "mxrp/base/units/angle_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; }
 namespace graphics {
 

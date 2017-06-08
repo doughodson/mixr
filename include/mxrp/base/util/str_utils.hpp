@@ -8,7 +8,7 @@
 
 #include <cstddef>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // Converts the integer number, 'num', to a 'width' character ascii string

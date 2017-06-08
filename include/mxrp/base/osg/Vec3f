@@ -17,7 +17,7 @@
 #include "mxrp/base/osg/Vec2f"
 #include "mxrp/base/osg/osg_math.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose float triple for use as vertices, vectors and normals.

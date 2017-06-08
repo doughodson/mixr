@@ -4,7 +4,7 @@
 #include "mxrp/models/system/Radar.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; }
 namespace models {
 

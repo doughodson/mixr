@@ -28,7 +28,7 @@
 #include "cigicl/CigiHostSession.h"
 #include "cigicl/CigiSensorCtrlV3.h"
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 
 //------------------------------------------------------------------------------

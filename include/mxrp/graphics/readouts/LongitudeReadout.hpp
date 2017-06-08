@@ -4,7 +4,7 @@
 
 #include "DirectionReadout.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

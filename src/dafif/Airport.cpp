@@ -2,7 +2,7 @@
 #include "mxrp/dafif/Airport.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport, "Airport")

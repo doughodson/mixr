@@ -12,7 +12,7 @@ class FTGLOutlineFont;
 #include <FTGL/ftgl.h>
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace base { class Color; }
 namespace graphics {
 

@@ -4,7 +4,7 @@
 #include "mxrp/base/units/Times.hpp"
 #include "mxrp/base/SlotTable.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")

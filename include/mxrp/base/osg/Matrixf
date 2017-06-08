@@ -18,7 +18,7 @@
 #include "mxrp/base/osg/Vec4d"
 #include "mxrp/base/osg/Quat"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 class Matrixf;

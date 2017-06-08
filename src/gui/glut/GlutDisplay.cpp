@@ -17,7 +17,7 @@
 #include <sys/time.h>
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
@@ -111,7 +111,7 @@ bool GlutDisplay::onEscKey()
    if (isMainDisplay()) {
       shutdownNotification();
       if (isMessageEnabled(MSG_INFO)) {
-         std::cout<<"oe::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
+         std::cout<<"mxrp::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
 #ifdef __FREEGLUT_EXT_H__     /* freeglut only */
       glutLeaveMainLoop();

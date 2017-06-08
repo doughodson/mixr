@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Identifier; class Distance; class NauticalMiles;
                  class Number; class Pair; class PairStream; }
 namespace models {

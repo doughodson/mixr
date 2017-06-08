@@ -5,7 +5,7 @@
 #include "mxrp/instruments/buttons/Button.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

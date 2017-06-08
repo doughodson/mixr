@@ -4,7 +4,7 @@
 
 #include "mxrp/models/environment/AbstractAtmosphere.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class Table1; class Table2; class Table3;
                  class Table4; class Number; }
 namespace models {

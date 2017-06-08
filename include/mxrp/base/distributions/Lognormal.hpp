@@ -12,7 +12,7 @@
 //     gamma : continuous location parameter (gamma = 0 for 2 parameter lognormal)
 //------------------------------------------------------------------------------
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 class Number;

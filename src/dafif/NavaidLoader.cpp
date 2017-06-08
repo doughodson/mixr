@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <limits>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")

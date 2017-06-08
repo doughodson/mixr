@@ -1,7 +1,7 @@
 
 #include "mxrp/base/concurrent/SyncTask.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class ThreadPool;
 class ThreadPoolManager;

@@ -10,7 +10,7 @@
 
 #include "mxrp/base/util/platform_api.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Hsv, "hsv")

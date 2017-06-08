@@ -5,7 +5,7 @@
 #include "mxrp/base/ubf/AbstractAction.hpp"
 #include "mxrp/base/safe_ptr.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Distance; class LatLon; class Number; }
 namespace models {
 class OnboardComputer;

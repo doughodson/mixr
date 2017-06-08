@@ -2,7 +2,7 @@
 #include "mxrp/models/navigation/Bullseye.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullseye, "Bullseye")

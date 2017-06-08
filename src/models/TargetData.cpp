@@ -9,7 +9,7 @@
 #include "mxrp/base/units/Distances.hpp"
 #include "mxrp/base/units/Times.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(TargetData, "TargetData")

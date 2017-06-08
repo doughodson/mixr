@@ -6,7 +6,7 @@
 #include "mxrp/interop/dis/NetIO.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace dis {
 class Ntm;
 

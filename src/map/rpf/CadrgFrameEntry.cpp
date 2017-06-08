@@ -3,7 +3,7 @@
 #include "mxrp/map/rpf/CadrgFrame.hpp"
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")

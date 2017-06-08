@@ -3,7 +3,7 @@
 
 #include "cigicl/CigiHostSession.h"
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(CigiCl, "CigiClAbstract")

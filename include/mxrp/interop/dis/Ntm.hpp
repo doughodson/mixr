@@ -5,7 +5,7 @@
 #include "mxrp/interop/common/Ntm.hpp"
 #include "mxrp/interop/dis/NetIO.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class List; }
 namespace dis {
 

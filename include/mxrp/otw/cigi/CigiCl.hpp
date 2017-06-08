@@ -15,7 +15,7 @@ class CigiArtPartCtrlV3;
 class CigiHatHotReqV3;
 class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 class OtwCigiCl;
 

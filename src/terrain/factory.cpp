@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 base::Object* factory(const std::string& name)

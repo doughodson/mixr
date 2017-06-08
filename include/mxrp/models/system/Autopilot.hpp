@@ -5,7 +5,7 @@
 #include "mxrp/models/system/Pilot.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }
 namespace models {
 

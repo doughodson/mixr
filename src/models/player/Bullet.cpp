@@ -7,7 +7,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet, "Bullet")

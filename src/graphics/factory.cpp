@@ -39,7 +39,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 base::Object* factory(const std::string& name)

@@ -4,7 +4,7 @@
 
 #include "mxrp/models/IrSignature.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class List; class Table1; class Table2;
                  class Table3; class Table4; class Table5; }
 namespace models {

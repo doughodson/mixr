@@ -15,7 +15,7 @@
 
 #include "mxrp/base/util/system_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Datalink, "Datalink")
@@ -264,11 +264,11 @@ void Datalink::reset()
 void Datalink::dynamics(const double)
 {
     //age queues
-    oe::base::Object* tempInQueue[MAX_MESSAGES];
+    mxrp::base::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
     Message* msg = nullptr;
     while ((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
-        oe::base::Object* tempObj = inQueue->get();
+        mxrp::base::Object* tempObj = inQueue->get();
         msg = dynamic_cast<Message*>(tempObj);
         if (msg != nullptr) {
             if (base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -289,11 +289,11 @@ void Datalink::dynamics(const double)
         }
     }
 
-    oe::base::Object* tempOutQueue[MAX_MESSAGES];
+    mxrp::base::Object* tempOutQueue[MAX_MESSAGES];
     int numOut = 0;
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
-        oe::base::Object* tempObj = outQueue->get();
+        mxrp::base::Object* tempObj = outQueue->get();
         msg = dynamic_cast<Message*>(tempObj);
         if(msg != nullptr) {
             if(base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {

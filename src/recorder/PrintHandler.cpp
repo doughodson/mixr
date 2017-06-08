@@ -7,7 +7,7 @@
 
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")

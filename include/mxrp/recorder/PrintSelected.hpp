@@ -12,7 +12,7 @@
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Float; class Integer; }
 namespace recorder {
 namespace pb {

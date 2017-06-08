@@ -10,7 +10,7 @@
 
 #define MAX_POINTS 64
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")

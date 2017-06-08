@@ -14,7 +14,7 @@
 
 #include "mxrp/base/Matrix.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

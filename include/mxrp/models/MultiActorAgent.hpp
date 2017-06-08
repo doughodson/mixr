@@ -5,7 +5,7 @@
 #include "mxrp/base/Component.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace ubf { class AbstractBehavior; class AbstractState; }
 }

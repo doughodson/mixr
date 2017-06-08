@@ -5,7 +5,7 @@
 #include "mxrp/graphics/Texture.hpp"
 #include <GL/gl.h>
 
-namespace oe {
+namespace mxrp {
     namespace base { class String; }
 
 namespace graphics {

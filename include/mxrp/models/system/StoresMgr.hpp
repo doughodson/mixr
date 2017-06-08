@@ -4,7 +4,7 @@
 
 #include "mxrp/models/system/Stores.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Boolean; class PairStream; }
 namespace models {
 class Bomb;

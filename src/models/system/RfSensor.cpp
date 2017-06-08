@@ -21,7 +21,7 @@
 
 #include "mxrp/base/util/str_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //==============================================================================

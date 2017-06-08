@@ -20,7 +20,7 @@ inline const OutputHandler* DataRecorder::getOutputHandler() const    { return o
 #define BEGIN_RECORDER_HANDLER_TABLE(ThisType)                 \
 bool ThisType::recordDataImp(                                  \
       const unsigned int _id,                                  \
-      const oe::base::Object* _obj[4],                   \
+      const mxrp::base::Object* _obj[4],                   \
       const double _val[4] )                                   \
 {                                                              \
    bool _recorded = false;                                     \

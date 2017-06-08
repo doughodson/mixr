@@ -19,7 +19,7 @@
    #include "./platform/UsbJoystick_linux.hpp"
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 base::Object* factory(const std::string& name)

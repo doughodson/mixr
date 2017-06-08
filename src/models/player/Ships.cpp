@@ -5,7 +5,7 @@
 #include "mxrp/base/osg/Matrixd"
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ship,"Ship")

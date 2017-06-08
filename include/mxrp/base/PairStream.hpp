@@ -5,7 +5,7 @@
 #include "mxrp/base/List.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 class Identifier;

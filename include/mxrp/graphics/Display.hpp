@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Color; class PairStream; class Identifier; class String; }
 namespace graphics {
 class Font;

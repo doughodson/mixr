@@ -17,7 +17,7 @@
 #include "mxrp/base/units/frequency_utils.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

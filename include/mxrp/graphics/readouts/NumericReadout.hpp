@@ -6,7 +6,7 @@
 
 #include "mxrp/base/util/constants.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Object; class Float; class Integer; class Number; }
 namespace graphics {
 class ReformatScanner;

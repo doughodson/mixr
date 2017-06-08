@@ -3,7 +3,7 @@
 #include "mxrp/base/Float.hpp"
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Hsva, "hsva")

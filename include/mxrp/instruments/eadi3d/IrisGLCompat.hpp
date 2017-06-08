@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Object.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

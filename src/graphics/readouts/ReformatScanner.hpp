@@ -12,7 +12,7 @@
 #include "mxrp/graphics/readouts/DirectionReadout.hpp"
 #include <sstream>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //---------------------------------------------

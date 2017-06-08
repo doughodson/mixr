@@ -2,7 +2,7 @@
 #include "mxrp/models/player/Agm.hpp"
 #include "mxrp/models/Track.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Agm, "AgmMissile")

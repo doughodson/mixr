@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel, "dB")

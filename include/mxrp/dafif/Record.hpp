@@ -5,7 +5,7 @@
 #include "mxrp/base/String.hpp"
 #include "dafifc.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 //------------------------------------------------------------------------------

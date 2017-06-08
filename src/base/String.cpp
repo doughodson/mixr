@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(String, "String")

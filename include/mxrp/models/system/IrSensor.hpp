@@ -5,7 +5,7 @@
 #include "mxrp/models/system/IrSystem.hpp"
 #include "mxrp/base/safe_queue.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Integer; class Number; class String; }
 namespace models {
 class IrSeeker;

@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace rpf  {
 
 base::Object* factory(const std::string& name)

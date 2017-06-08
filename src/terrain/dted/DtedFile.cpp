@@ -40,7 +40,7 @@
 #include <cstring>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 //==============================================================================

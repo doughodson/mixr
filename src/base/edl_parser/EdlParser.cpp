@@ -81,9 +81,9 @@
 #include "mxrp/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static oe::base::Object* result;               // result of all our work (i.e., an Object)
-static oe::base::EdlScanner* scanner;          // edl scanner
-static oe::base::factory_func factory;         // factory function 
+static mxrp::base::Object* result;               // result of all our work (i.e., an Object)
+static mxrp::base::EdlScanner* scanner;          // edl scanner
+static mxrp::base::factory_func factory;         // factory function 
 static unsigned int err_count;                 // error count
 
 //------------------------------------------------------------------------------
@@ -114,9 +114,9 @@ inline void yyerror(const char* s)
 // parse() -- returns an object with factory 'name' with its slots set to
 //            values in 'arg_list'
 //------------------------------------------------------------------------------
-static oe::base::Object* parse(const std::string& name, oe::base::PairStream* arg_list)
+static mxrp::base::Object* parse(const std::string& name, mxrp::base::PairStream* arg_list)
 {
-    oe::base::Object* obj {nullptr};
+    mxrp::base::Object* obj {nullptr};
 
     if (factory != nullptr) {
 
@@ -125,9 +125,9 @@ static oe::base::Object* parse(const std::string& name, oe::base::PairStream* ar
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            oe::base::List::Item* item = arg_list->getFirstItem();
+            mxrp::base::List::Item* item = arg_list->getFirstItem();
             while (item != nullptr) {
-                oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
+                mxrp::base::Pair* p = static_cast<mxrp::base::Pair*>(item->getValue());
                 bool ok = obj->setSlotByName(*p->slot(), p->object());
                 if (!ok) {
                     std::string msg = "error while setting slot name: " + std::string(*p->slot());
@@ -205,11 +205,11 @@ union YYSTYPE
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   oe::base::Object*          ovalp;
-   oe::base::Pair*            pvalp;
-   oe::base::PairStream*      svalp;
-   oe::base::List*            lvalp;
-   oe::base::Number*          nvalp;
+   mxrp::base::Object*          ovalp;
+   mxrp::base::Pair*            pvalp;
+   mxrp::base::PairStream*      svalp;
+   mxrp::base::List*            lvalp;
+   mxrp::base::Number*          nvalp;
 
 #line 215 "EdlParser.cpp" /* yacc.c:355  */
 };
@@ -1322,13 +1322,13 @@ yyreduce:
 
   case 3:
 #line 140 "edl_parser.y" /* yacc.c:1646  */
-    { if ((yyvsp[0].ovalp) != 0) { result = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
+    { if ((yyvsp[0].ovalp) != 0) { result = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
 #line 1327 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 143 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.svalp) = new oe::base::PairStream(); }
+    { (yyval.svalp) = new mxrp::base::PairStream(); }
 #line 1333 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1338,7 +1338,7 @@ yyreduce:
                                         int i = (yyvsp[-1].svalp)->entries();
                                         char cbuf[20];
                                         std::sprintf(cbuf, "%i", i+1);
-                                        oe::base::Pair* p = new oe::base::Pair(cbuf, (yyvsp[0].ovalp));
+                                        mxrp::base::Pair* p = new mxrp::base::Pair(cbuf, (yyvsp[0].ovalp));
                                         (yyvsp[0].ovalp)->unref();
                                         (yyvsp[-1].svalp)->put(p);
                                         p->unref();
@@ -1354,7 +1354,7 @@ yyreduce:
                                     int i = (yyvsp[-1].svalp)->entries();
                                     char cbuf[20];
                                     std::sprintf(cbuf,"%i", i+1);
-                                    oe::base::Pair* p = new oe::base::Pair(cbuf, (yyvsp[0].ovalp));
+                                    mxrp::base::Pair* p = new mxrp::base::Pair(cbuf, (yyvsp[0].ovalp));
                                     (yyvsp[0].ovalp)->unref();
                                     (yyvsp[-1].svalp)->put(p);
                                     p->unref();
@@ -1377,37 +1377,37 @@ yyreduce:
 
   case 9:
 #line 174 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = (oe::base::Object*) (yyvsp[-1].svalp); }
+    { (yyval.ovalp) = (mxrp::base::Object*) (yyvsp[-1].svalp); }
 #line 1382 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 178 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.pvalp) = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
+    { (yyval.pvalp) = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
 #line 1388 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 179 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.pvalp) = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
+    { (yyval.pvalp) = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
 #line 1394 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 182 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new oe::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
+    { (yyval.ovalp) = new mxrp::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
 #line 1400 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 183 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new oe::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
+    { (yyval.ovalp) = new mxrp::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
 #line 1406 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 184 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new oe::base::Boolean((yyvsp[0].bval)); }
+    { (yyval.ovalp) = new mxrp::base::Boolean((yyvsp[0].bval)); }
 #line 1412 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1425,7 +1425,7 @@ yyreduce:
 
   case 17:
 #line 189 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.lvalp) = new oe::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
+    { (yyval.lvalp) = new mxrp::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
 #line 1430 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1437,13 +1437,13 @@ yyreduce:
 
   case 19:
 #line 193 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.nvalp) = new oe::base::Integer((yyvsp[0].lval)); }
+    { (yyval.nvalp) = new mxrp::base::Integer((yyvsp[0].lval)); }
 #line 1442 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 194 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.nvalp) = new oe::base::Float((yyvsp[0].dval)); }
+    { (yyval.nvalp) = new mxrp::base::Float((yyvsp[0].dval)); }
 #line 1448 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1679,7 +1679,7 @@ yyreturn:
 #line 196 "edl_parser.y" /* yacc.c:1906  */
 
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

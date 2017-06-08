@@ -8,7 +8,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 // -------------------------------------------------------------------------------

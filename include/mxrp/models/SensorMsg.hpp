@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Vec4d"
 #include "mxrp/base/safe_ptr.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class Player;
 class Gimbal;

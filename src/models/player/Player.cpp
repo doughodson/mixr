@@ -46,7 +46,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Player, "Player")
@@ -3850,7 +3850,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      initVp = (msg->getReal() * oe::base::distance::NM2M) / 3600.0f;
+      initVp = (msg->getReal() * mxrp::base::distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;

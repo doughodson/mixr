@@ -5,7 +5,7 @@
 #include "mxrp/base/Boolean.hpp"
 #include "mxrp/base/String.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Pair, "Pair")

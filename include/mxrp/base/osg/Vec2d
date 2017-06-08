@@ -16,7 +16,7 @@
 
 #include "mxrp/base/osg/Vec2f"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose double pair, uses include representation of

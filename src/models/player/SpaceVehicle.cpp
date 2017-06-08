@@ -4,7 +4,7 @@
 
 #include "mxrp/base/units/Distances.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SpaceVehicle,"SpaceVehicle")

@@ -6,7 +6,7 @@
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(SimTcThread, "SimTcThread")

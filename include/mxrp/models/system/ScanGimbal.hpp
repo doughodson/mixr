@@ -5,7 +5,7 @@
 #include "mxrp/models/system/Gimbal.hpp"
 #include "mxrp/base/units/angle_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Integer; }
 namespace models {
 

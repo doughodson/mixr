@@ -2,7 +2,7 @@
 #include "mxrp/graphics/StrokeFont.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")

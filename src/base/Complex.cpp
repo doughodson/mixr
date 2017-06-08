@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Complex, "Complex")

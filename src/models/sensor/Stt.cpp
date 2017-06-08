@@ -6,7 +6,7 @@
 #include "mxrp/models/system/TrackManager.hpp"
 #include "mxrp/models/Track.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt, "Stt")

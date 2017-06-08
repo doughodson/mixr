@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(HexReadout, "HexReadout")

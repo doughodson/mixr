@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(BitmapFont, "BitmapFont")

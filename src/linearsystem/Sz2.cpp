@@ -3,7 +3,7 @@
 #include "mxrp/base/Number.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Sz2, "Sz2")

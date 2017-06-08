@@ -51,7 +51,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 base::Object* factory(const std::string& name)

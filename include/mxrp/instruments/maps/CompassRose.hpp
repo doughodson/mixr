@@ -5,7 +5,7 @@
 #include "mxrp/graphics/Graphic.hpp"
 #include "mxrp/base/units/angle_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace instruments {
 

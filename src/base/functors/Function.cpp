@@ -5,7 +5,7 @@
 #include "mxrp/base/functors/Tables.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //==============================================================================

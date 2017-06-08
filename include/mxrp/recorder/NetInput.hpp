@@ -4,7 +4,7 @@
 
 #include "mxrp/recorder/InputHandler.hpp"
 
-namespace oe {
+namespace mxrp {
    namespace base { class NetHandler; class Number; }
 
 namespace recorder {
@@ -43,7 +43,7 @@ protected:
 private:
    void initData();
 
-    base::safe_ptr<oe::base::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    base::safe_ptr<mxrp::base::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool networkInitialized {};        // Network has been initialized
     bool networkInitFailed {};         // Network initialization has failed
     bool noWaitFlag {};                // No wait (unblocked) I/O flag

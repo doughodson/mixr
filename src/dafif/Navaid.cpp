@@ -6,7 +6,7 @@
 #include "mxrp/base/units/Angles.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")

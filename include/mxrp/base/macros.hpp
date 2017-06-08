@@ -83,7 +83,7 @@
 //       "on event" function will return a true if the event is processed or
 //       false if not.  Events that are not mapped or processed are passed
 //       to the base class; up to and including the Component class, and 'Key'
-//       events (see eventTokens.h) that are not mapped or processed by the
+//       events (see eventTokens.hpp) that are not mapped or processed by the
 //       Component class are passed to the container class.
 //
 //    ON_EVENT(token,onEvent)  (see eventTokens.hpp)
@@ -138,13 +138,13 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::MetaObject metaObject;                                                                          \
-    public: static const ::oe::base::MetaObject* getMetaObject();                                                               \
+    private: static ::mxrp::base::MetaObject metaObject;                                                                        \
+    public: static const ::mxrp::base::MetaObject* getMetaObject();                                                             \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
-    protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
-    public: static const ::oe::base::SlotTable& getSlotTable();                                                                 \
-    protected: static const ::oe::base::SlotTable slottable;                                                                    \
+    protected: virtual bool setSlotByIndex(const int slotindex, ::mxrp::base::Object* const obj) override;                      \
+    public: static const ::mxrp::base::SlotTable& getSlotTable();                                                               \
+    protected: static const ::mxrp::base::SlotTable slottable;                                                                  \
     private: static const char* slotnames[];                                                                                    \
     private: static const int nslots;                                                                                           \
     public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const override;  \
@@ -152,11 +152,11 @@
 
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ::oe::base::MetaObject ThisType::metaObject(                                       \
+    ::mxrp::base::MetaObject ThisType::metaObject(                                     \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const ::mxrp::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
     const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -164,7 +164,7 @@
         if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const ::oe::base::SlotTable& ThisType::getSlotTable()  { return slottable; }       \
+    const ::mxrp::base::SlotTable& ThisType::getSlotTable()  { return slottable; }     \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -190,11 +190,11 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ::oe::base::MetaObject ThisType::metaObject(                                       \
+    ::mxrp::base::MetaObject ThisType::metaObject(                                     \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const ::mxrp::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
     const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -202,7 +202,7 @@
         if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
+    const ::mxrp::base::SlotTable& ThisType::getSlotTable() { return slottable; }      \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -211,11 +211,11 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ::oe::base::MetaObject ThisType::metaObject(                                       \
+    ::mxrp::base::MetaObject ThisType::metaObject(                                     \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const ::mxrp::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
     const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -223,7 +223,7 @@
         if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
-    const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
+    const ::mxrp::base::SlotTable& ThisType::getSlotTable() { return slottable; }      \
     bool ThisType::isClassType(const std::type_info& type) const                       \
     {                                                                                  \
         if ( type == typeid(ThisType) ) return true;                                   \
@@ -261,8 +261,8 @@
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
     const int ThisType::nslots = 0;                                                        \
-    const ::oe::base::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());      \
-    bool ThisType::setSlotByIndex(const int si, ::oe::base::Object* const obj)             \
+    const ::mxrp::base::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());    \
+    bool ThisType::setSlotByIndex(const int si, ::mxrp::base::Object* const obj)           \
     {                                                                                      \
         return BaseClass::setSlotByIndex(si,obj);                                          \
     }
@@ -318,13 +318,13 @@
 #define END_SLOTTABLE(ThisType)                                                                \
     };                                                                                         \
     const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                            \
-    const ::oe::base::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots,     \
+    const ::mxrp::base::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots,   \
                                                ThisType::BaseClass::getSlotTable());
 
 
 
 #define BEGIN_SLOT_MAP(ThisType)                                                           \
-    bool ThisType::setSlotByIndex(const int slotindex, ::oe::base::Object* const obj)      \
+    bool ThisType::setSlotByIndex(const int slotindex, ::mxrp::base::Object* const obj)    \
     {                                                                                      \
         const int _n = BaseClass::getSlotTable().n();                                      \
         if (slotindex <= _n) {                                                             \
@@ -349,7 +349,7 @@
 
 
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
-    bool ThisType::event(const int _event, ::oe::base::Object* const _obj)             \
+    bool ThisType::event(const int _event, ::mxrp::base::Object* const _obj)           \
     {                                                                                  \
         bool _used {};
 

@@ -4,7 +4,7 @@
 
 #include "mxrp/models/dynamics/AerodynamicsModel.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Number; }
 namespace models {
 

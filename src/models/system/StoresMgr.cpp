@@ -21,7 +21,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(StoresMgr, "BaseStoresMgr")

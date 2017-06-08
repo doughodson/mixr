@@ -5,7 +5,7 @@
 #include "mxrp/simulation/AbstractOtw.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Distance; class Identifier; class Number; class PairStream; class String; }
 namespace models { class Player; }
 namespace otw {

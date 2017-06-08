@@ -5,7 +5,7 @@
 #include "mxrp/models/SensorMsg.hpp"
 #include "mxrp/models/system/Antenna.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class RfSystem;
 

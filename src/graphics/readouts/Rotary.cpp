@@ -5,7 +5,7 @@
 #include "mxrp/base/Integer.hpp"
 #include "mxrp/base/Pair.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary, "Rotary")

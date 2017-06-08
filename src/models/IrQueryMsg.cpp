@@ -6,7 +6,7 @@
 #include "mxrp/base/List.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrQueryMsg, "IrQueryMsg")

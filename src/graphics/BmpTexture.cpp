@@ -13,7 +13,7 @@
 #endif
 
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")

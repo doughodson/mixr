@@ -9,7 +9,7 @@
 #include <fstream>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(FileWriter, "RecorderFileWriter")

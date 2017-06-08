@@ -9,7 +9,7 @@
 
 #include "mxrp/base/util/nav_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
@@ -1325,7 +1325,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            oe::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            mxrp::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }

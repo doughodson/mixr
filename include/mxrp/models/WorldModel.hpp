@@ -4,7 +4,7 @@
 
 #include "mxrp/simulation/Simulation.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace terrain { class Terrain; }
 namespace models {
 class AbstractAtmosphere;

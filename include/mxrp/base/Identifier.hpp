@@ -4,7 +4,7 @@
 
 #include "mxrp/base/String.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

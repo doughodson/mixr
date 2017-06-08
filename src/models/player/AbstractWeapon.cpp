@@ -24,7 +24,7 @@
 
 #include "mxrp/base/util/nav_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractWeapon, "AbstractWeapon")

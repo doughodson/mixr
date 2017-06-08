@@ -7,7 +7,7 @@
 #include "mxrp/base/List.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractDataRecorder, "AbstractDataRecorder")

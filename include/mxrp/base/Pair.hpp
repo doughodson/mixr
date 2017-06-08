@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/Identifier.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

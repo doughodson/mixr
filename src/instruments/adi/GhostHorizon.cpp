@@ -9,7 +9,7 @@
 
 #include "mxrp/graphics/Display.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")

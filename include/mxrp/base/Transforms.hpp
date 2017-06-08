@@ -7,7 +7,7 @@
 
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Angle;
 class Number;

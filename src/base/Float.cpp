@@ -1,7 +1,7 @@
 
 #include "mxrp/base/Float.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Float, "float")

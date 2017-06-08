@@ -4,7 +4,7 @@
 
 #include "mxrp/base/List.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

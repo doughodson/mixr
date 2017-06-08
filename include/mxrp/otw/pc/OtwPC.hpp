@@ -4,7 +4,7 @@
 
 #include "mxrp/otw/Otw.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class NetHandler; }
 namespace otw {
 class OtwModel;

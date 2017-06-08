@@ -29,7 +29,7 @@
     +((a)._mat[r][2] * (b)._mat[2][c]) \
     +((a)._mat[r][3] * (b)._mat[3][c])
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 Matrix_implementation::Matrix_implementation( value_type a00, value_type a01, value_type a02, value_type a03,

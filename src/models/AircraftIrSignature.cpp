@@ -13,7 +13,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/Areas.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AircraftIrSignature, "AircraftIrSignature")

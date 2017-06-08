@@ -2,7 +2,7 @@
 #include "mxrp/models/sensor/Tws.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws, "Tws")

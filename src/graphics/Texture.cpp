@@ -4,7 +4,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/Identifier.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Texture, "Texture")

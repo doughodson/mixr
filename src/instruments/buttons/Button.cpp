@@ -2,7 +2,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/graphics/Display.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Button, "Button")

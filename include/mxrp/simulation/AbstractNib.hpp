@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Vec3d; }
 namespace simulation {
 class AbstractNetIO;

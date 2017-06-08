@@ -23,7 +23,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 
 namespace dis {
 
@@ -101,13 +101,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != nullptr) { sensor->event(oe::base::Component::SHUTDOWN_EVENT); }
+   if (sensor != nullptr) { sensor->event(mxrp::base::Component::SHUTDOWN_EVENT); }
    setSensor(nullptr);
 
-   if (sensorModel != nullptr) { sensorModel->event(oe::base::Component::SHUTDOWN_EVENT); }
+   if (sensorModel != nullptr) { sensorModel->event(mxrp::base::Component::SHUTDOWN_EVENT); }
    setSensorModel(nullptr);
 
-   if (antennaModel != nullptr) { antennaModel->event(oe::base::Component::SHUTDOWN_EVENT); }
+   if (antennaModel != nullptr) { antennaModel->event(mxrp::base::Component::SHUTDOWN_EVENT); }
    setAntennaModel(nullptr);
 }
 

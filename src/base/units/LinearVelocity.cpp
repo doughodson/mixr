@@ -4,7 +4,7 @@
 #include "mxrp/base/units/Times.hpp"
 #include "mxrp/base/SlotTable.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 const double LinearVelocity::FPS2KTSCC = 0.59248384864341771016513018598233;

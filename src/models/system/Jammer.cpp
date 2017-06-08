@@ -13,7 +13,7 @@
 #include "mxrp/base/units/Frequencies.hpp"
 #include "mxrp/base/units/Powers.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer, "Jammer")

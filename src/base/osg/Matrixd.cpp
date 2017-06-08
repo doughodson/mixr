@@ -17,7 +17,7 @@
 // specialized Matrix_implementation to be Matrixd
 #define  Matrix_implementation Matrixd
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 Matrixd::Matrixd( const Matrixf& mat )

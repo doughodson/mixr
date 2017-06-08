@@ -14,7 +14,7 @@
 #ifndef __mxrp_base_osg_Vec4s_H__
 #define __mxrp_base_osg_Vec4s_H__
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose float quad. Uses include representation

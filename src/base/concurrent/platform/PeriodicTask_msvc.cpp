@@ -12,7 +12,7 @@
 /* ----------------------------------------------------------------- */
 //#define USE_REALTIME_PRI_CLASS
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // max number of processors we'll allow

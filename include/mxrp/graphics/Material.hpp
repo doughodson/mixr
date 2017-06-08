@@ -8,7 +8,7 @@
 #include "mxrp/base/util/platform_api.hpp"
 #include <GL/glu.h>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

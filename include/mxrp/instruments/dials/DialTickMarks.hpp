@@ -4,7 +4,7 @@
 
 #include "mxrp/instruments/dials/AnalogDial.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

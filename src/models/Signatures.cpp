@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //==============================================================================

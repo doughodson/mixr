@@ -4,7 +4,7 @@
 
 #include "mxrp/base/util/system_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------

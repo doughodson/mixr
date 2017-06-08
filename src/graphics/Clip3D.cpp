@@ -4,7 +4,7 @@
 #include <limits>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Clip3D, "Clip3D")

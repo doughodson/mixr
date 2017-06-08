@@ -5,7 +5,7 @@
 #include "mxrp/models/system/System.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Decibel; }
 namespace models {
 class Antenna;

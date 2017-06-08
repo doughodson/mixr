@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //==============================================================================

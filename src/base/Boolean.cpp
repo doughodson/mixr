@@ -2,7 +2,7 @@
 #include "mxrp/base/Boolean.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Boolean, "boolean")

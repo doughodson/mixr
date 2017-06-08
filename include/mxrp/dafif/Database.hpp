@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "dafifc.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class FileReader; class String; }
 namespace dafif {
 

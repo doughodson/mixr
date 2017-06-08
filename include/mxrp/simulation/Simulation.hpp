@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Matrixd"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
 namespace simulation {
 class AbstractDataRecorder;

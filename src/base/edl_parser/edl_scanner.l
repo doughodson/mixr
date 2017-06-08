@@ -41,8 +41,8 @@
 /* change the name of the scanner class - results in "edlFlexLexer" */
 %option prefix="edl"
 
-/* derived 'oe::base::EdlScanner' is a subclass of edlFlexLexer */
-%option yyclass="oe::base::EdlScanner"
+/* derived 'mxrp::base::EdlScanner' is a subclass of edlFlexLexer */
+%option yyclass="mxrp::base::EdlScanner"
 
 D           [0-9]
 L           [a-zA-Z0-9~!@#$%^&*\-_+=<>?/]

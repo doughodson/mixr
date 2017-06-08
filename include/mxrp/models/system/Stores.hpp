@@ -5,7 +5,7 @@
 #include "mxrp/models/system/ExternalStore.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class PairStream; }
 namespace models {
 class AbstractWeapon;

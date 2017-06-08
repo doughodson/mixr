@@ -16,7 +16,7 @@
 
 #include "mxrp/base/osg/osg_math.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose float pair. Uses include representation of

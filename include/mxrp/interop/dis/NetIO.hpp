@@ -5,7 +5,7 @@
 #include "mxrp/interop/common/NetIO.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class NetHandler; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }

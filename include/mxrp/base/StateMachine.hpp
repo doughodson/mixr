@@ -6,7 +6,7 @@
 
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class PairStream;
 

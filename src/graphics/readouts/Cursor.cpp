@@ -3,7 +3,7 @@
 
 #include "mxrp/graphics/Display.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cursor, "Cursor")

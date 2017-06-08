@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Image.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class Identifier; }
 namespace graphics {
 

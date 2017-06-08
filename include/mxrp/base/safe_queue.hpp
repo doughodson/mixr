@@ -4,7 +4,7 @@
 #ifndef __mxrp_base_safe_queue_H__
 #define __mxrp_base_safe_queue_H__
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

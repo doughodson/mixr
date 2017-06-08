@@ -6,7 +6,7 @@
 #ifndef __mxrp_interop_dis_Enum_H__
 #define __mxrp_interop_dis_Enum_H__
 
-namespace oe {
+namespace mxrp {
 namespace dis {
 
 //--------------------------------------------------------------

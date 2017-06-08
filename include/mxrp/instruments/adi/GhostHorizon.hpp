@@ -4,7 +4,7 @@
 
 #include "mxrp/instruments/adi/Adi.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Color; class String; class Number; }
 namespace instruments {
 

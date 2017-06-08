@@ -6,7 +6,7 @@
 #include "mxrp/graphics/ColorGradient.hpp"
 #include <GL/glu.h>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //==============================================================================

@@ -8,7 +8,7 @@
 #include "cigicl/CigiCompCtrlV3.h"
 #include "cigicl/CigiArtPartCtrlV3.h"
 
-namespace oe {
+namespace mxrp {
 namespace otw {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")

@@ -5,7 +5,7 @@
 #include "mxrp/base/List.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AirVehicle, "AirVehicle")

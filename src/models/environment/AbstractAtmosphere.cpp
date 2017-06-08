@@ -1,7 +1,7 @@
 
 #include "mxrp/models/environment/AbstractAtmosphere.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractAtmosphere, "AbstractAtmosphere")

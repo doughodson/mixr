@@ -6,7 +6,7 @@
 #include "mxrp/base/util/platform_api.hpp"
 #include <cstdint>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

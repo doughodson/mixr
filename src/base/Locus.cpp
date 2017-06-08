@@ -2,7 +2,7 @@
 #include "mxrp/base/Locus.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Locus, "Locus")

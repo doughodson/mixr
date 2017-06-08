@@ -43,7 +43,7 @@
 #include <arpa/inet.h>
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")

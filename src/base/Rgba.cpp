@@ -2,7 +2,7 @@
 #include "mxrp/base/Rgba.hpp"
 #include "mxrp/base/Float.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Rgba, "rgba")

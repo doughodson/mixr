@@ -4,7 +4,7 @@
 
 #include "mxrp/interop/common/NetIO.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models { class Player; }
 namespace interop {
 class Nib;

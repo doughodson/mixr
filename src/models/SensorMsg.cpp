@@ -3,7 +3,7 @@
 
 #include "mxrp/models/player/Player.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SensorMsg, "SensorMsg")

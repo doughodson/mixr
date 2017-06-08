@@ -5,7 +5,7 @@
 #include "Database.hpp"
 #include "Waypoint.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace dafif {
 
 //------------------------------------------------------------------------------

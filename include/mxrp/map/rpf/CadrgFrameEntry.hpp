@@ -5,7 +5,7 @@
 #include "mxrp/map/rpf/CadrgClut.hpp"
 #include "mxrp/base/Object.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 class CadrgFrame;

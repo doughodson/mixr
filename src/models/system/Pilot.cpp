@@ -2,7 +2,7 @@
 #include "mxrp/models/system/Pilot.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Pilot, "Pilot")

@@ -7,7 +7,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/Timers.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(SolenoidSwitch, "SolenoidSwitch")

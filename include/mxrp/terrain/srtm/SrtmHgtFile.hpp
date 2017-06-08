@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace terrain {
 

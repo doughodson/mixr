@@ -4,7 +4,7 @@
 
 #include "mxrp/models/player/Player.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class AerodynamicsModel;
 

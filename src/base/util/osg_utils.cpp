@@ -8,7 +8,7 @@
 #include "mxrp/base/osg/Matrixf"
 #include "mxrp/base/osg/Matrixd"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------

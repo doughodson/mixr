@@ -3,7 +3,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/Frequencies.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc,"ScalerFunc")

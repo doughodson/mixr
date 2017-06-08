@@ -10,7 +10,7 @@
 #include <cstring>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 IMPLEMENT_SUBCLASS(DedFile, "DedFile")

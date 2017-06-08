@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Hsv.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

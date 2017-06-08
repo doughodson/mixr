@@ -7,7 +7,7 @@
 #include <cmath>
 #include <limits>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

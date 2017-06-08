@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include <cstdint>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

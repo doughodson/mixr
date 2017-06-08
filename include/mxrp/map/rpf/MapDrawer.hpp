@@ -5,7 +5,7 @@
 #include "mxrp/graphics/MapPage.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; class String; }
 namespace rpf {
 class TexturePager;

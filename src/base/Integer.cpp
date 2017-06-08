@@ -1,7 +1,7 @@
 
 #include "mxrp/base/Integer.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Integer, "int")

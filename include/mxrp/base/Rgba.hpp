@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Rgb.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

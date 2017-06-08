@@ -3,7 +3,7 @@
 
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(BearingPointer, "BearingPointer")

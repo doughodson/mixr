@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")

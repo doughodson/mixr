@@ -20,7 +20,7 @@
 #include "mxrp/simulation/AbstractDataRecorder.hpp"
 #include "mxrp/models/WorldModel.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(TrackManager, "TrackManager")

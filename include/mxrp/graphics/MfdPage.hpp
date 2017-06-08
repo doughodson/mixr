@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Page.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 // -------------------------------------------------------------------------------

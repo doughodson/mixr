@@ -2,7 +2,7 @@
 #ifndef __mxrp_base_util_power_H__
 #define __mxrp_base_util_power_H__
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace power {
 

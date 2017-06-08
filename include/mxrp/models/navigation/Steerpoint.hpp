@@ -5,7 +5,7 @@
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/osg/Vec3d"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Identifier; class LatLon;
                  class List; class String; class Time; }
 namespace terrain { class Terrain; }

@@ -5,7 +5,7 @@
 
 #include "mxrp/base/util/math_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Adi, "Adi")

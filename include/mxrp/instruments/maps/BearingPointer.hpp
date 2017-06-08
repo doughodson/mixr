@@ -4,7 +4,7 @@
 
 #include "mxrp/instruments/maps/CompassRose.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Number; }
 namespace instruments {
 

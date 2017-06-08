@@ -36,7 +36,7 @@
 
 #include <cstdio>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(TcpServerSingle, "TcpServerSingle")

@@ -4,7 +4,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(RotarySwitch, "RotarySwitch")

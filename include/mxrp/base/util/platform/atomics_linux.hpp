@@ -12,7 +12,7 @@
 // Linux version
 // ---
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 inline void lock(long int& semaphore)

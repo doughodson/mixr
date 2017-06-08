@@ -4,7 +4,7 @@
 
 #include "mxrp/models/player/GroundVehicle.hpp"
 
-namespace oe {
+namespace mxrp {
 
 namespace base { class Distance; class Identifier; class Time; }
 

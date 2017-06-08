@@ -6,7 +6,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Emission, "Emission")

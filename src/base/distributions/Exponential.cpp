@@ -4,7 +4,7 @@
 #include "mxrp/base/distributions/Exponential.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Exponential,"Exponential")

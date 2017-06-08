@@ -4,7 +4,7 @@
 #include "mxrp/base/distributions/Lognormal.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Lognormal,"Lognormal")

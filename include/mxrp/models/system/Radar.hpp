@@ -8,7 +8,7 @@
 #include <cmath>
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

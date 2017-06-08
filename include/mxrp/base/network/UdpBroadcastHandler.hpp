@@ -4,7 +4,7 @@
 
 #include "mxrp/base/network/PosixHandler.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 class String;

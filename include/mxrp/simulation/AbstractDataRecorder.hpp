@@ -5,7 +5,7 @@
 #include "mxrp/simulation/AbstractRecorderComponent.hpp"
 #include "mxrp/simulation/recorder_macros.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 class Simulation;
 class Station;
@@ -17,7 +17,7 @@ class Station;
 //       for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//       oe::recorder::DataRecorder (see "mxrp/recorder/DataRecorder.hpp")
+//       mxrp::recorder::DataRecorder (see "mxrp/recorder/DataRecorder.hpp")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see mxrp/simulation/dataRecorderTokens.hpp)

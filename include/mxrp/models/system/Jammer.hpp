@@ -4,7 +4,7 @@
 
 #include "mxrp/models/system/RfSensor.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

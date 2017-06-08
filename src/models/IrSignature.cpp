@@ -12,7 +12,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/Areas.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSignature, "IrSignature")
@@ -138,7 +138,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(oe::base::Number* const num)
+bool IrSignature::setSlotEmissivity(mxrp::base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -156,7 +156,7 @@ bool IrSignature::setSlotEmissivity(oe::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(oe::base::Number* const num)
+bool IrSignature::setSlotEffectiveArea(mxrp::base::Number* const num)
 {
    bool ok = false;
    double value = 0.0;

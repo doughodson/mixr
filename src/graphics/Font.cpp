@@ -7,7 +7,7 @@
 
 #include <cstring>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Font, "Font")

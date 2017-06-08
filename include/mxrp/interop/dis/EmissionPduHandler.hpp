@@ -5,7 +5,7 @@
 #include "mxrp/interop/dis/NetIO.hpp"
 #include "mxrp/interop/dis/structs.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models { class Antenna; class RfSensor; }
 namespace dis {
 

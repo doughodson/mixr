@@ -21,7 +21,7 @@
 /// http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
 /// http://mathworld.wolfram.com/Quaternion.html
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 void Quat::set(const Matrixf& matrix)

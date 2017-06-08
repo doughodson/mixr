@@ -8,7 +8,7 @@
 #include "mxrp/models/player/Player.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace models { class Missile; }
 namespace interop {
 

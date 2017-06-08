@@ -13,7 +13,7 @@
 #include "mxrp/base/units/Powers.hpp"
 #include "mxrp/base/units/Frequencies.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(RfSystem, "RfSystem")

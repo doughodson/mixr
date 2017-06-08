@@ -10,7 +10,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/util/str_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(FileReader, "FileReader")

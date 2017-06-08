@@ -17,7 +17,7 @@
 #include "mxrp/base/osg/Vec3d"
 #include "mxrp/base/osg/Vec4f"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 /** General purpose double quad. Uses include representation

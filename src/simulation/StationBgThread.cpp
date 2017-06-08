@@ -3,7 +3,7 @@
 
 #include "mxrp/simulation/Station.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(BgThread,"BgThread")

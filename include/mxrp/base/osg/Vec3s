@@ -14,7 +14,7 @@
 #ifndef __mxrp_base_osg_Vec3s_H__
 #define __mxrp_base_osg_Vec3s_H__
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 class Vec3s

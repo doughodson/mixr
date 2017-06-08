@@ -6,7 +6,7 @@
 
 #include "mxrp/base/Identifier.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 class AbstractNib;
 

@@ -6,7 +6,7 @@
 #include "mxrp/instruments/buttons/Button.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class UpTimer; }
 namespace instruments {
 

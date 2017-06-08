@@ -4,7 +4,7 @@
 #include <GL/glu.h>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogDial, "AnalogDial")

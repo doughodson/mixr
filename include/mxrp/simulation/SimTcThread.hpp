@@ -4,7 +4,7 @@
 
 #include "mxrp/base/concurrent/SyncTask.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Component; class PairStream; }
 namespace simulation {
 

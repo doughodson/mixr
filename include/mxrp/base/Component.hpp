@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/safe_ptr.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Identifier;
 class Number;
@@ -175,7 +175,7 @@ class String;
 //    event tokens must be processed quickly, similar to interrupt handlers.
 //
 //    Standard event tokens are defined in the file, eventTokens.h, which is included
-//    by this Component class and are therefore within the oe::base::Component
+//    by this Component class and are therefore within the mxrp::base::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
 //    as part of the oe Description Language (EDL) input files.
 //

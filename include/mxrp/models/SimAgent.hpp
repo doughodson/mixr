@@ -4,7 +4,7 @@
 
 #include "mxrp/base/ubf/Agent.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation { class Station; }
 namespace models {
 class WorldModel;

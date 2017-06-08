@@ -19,7 +19,7 @@
 #include <cstring>
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")

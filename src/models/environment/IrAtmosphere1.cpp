@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1, "IrAtmosphere1")

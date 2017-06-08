@@ -7,7 +7,7 @@
 #include "mxrp/base/osg/Vec2d"
 #include "mxrp/base/osg/Matrixd"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Time; }
 namespace models {
 class Player;

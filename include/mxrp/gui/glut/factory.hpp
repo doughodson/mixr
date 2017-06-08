@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Object; }
 namespace glut {
 base::Object* factory(const std::string&);

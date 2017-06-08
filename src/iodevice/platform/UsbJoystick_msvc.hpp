@@ -4,7 +4,7 @@
 
 #include "mxrp/iodevice/Controller.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 //------------------------------------------------------------------------------

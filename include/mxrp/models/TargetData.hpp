@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Object.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Identifier; class Number; class String; class Time; }
 namespace models {
 

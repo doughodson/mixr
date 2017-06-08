@@ -40,7 +40,7 @@
     C[i][j] gets (A[i][j]);}
 
 
-namespace oe {
+namespace mxrp {
 namespace base {
 namespace MatrixDecomposition {
 

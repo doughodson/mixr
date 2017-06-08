@@ -7,7 +7,7 @@
 #include "mxrp/base/units/Masses.hpp"
 #include "mxrp/base/units/Volumes.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

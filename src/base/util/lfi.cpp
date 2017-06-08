@@ -1,7 +1,7 @@
 
 #include "mxrp/base/util/lfi.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

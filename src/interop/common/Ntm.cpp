@@ -3,7 +3,7 @@
 
 #include "mxrp/models/player/Player.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Ntm, "Ntm")

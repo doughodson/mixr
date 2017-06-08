@@ -22,7 +22,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 // default flight control attributes associated with flying a pattern

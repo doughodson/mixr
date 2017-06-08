@@ -2,7 +2,7 @@
 #include "mxrp/instruments/gauges/GaugeSlider.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")

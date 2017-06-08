@@ -4,7 +4,7 @@
 
 // enum utilities
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //

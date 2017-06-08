@@ -2,7 +2,7 @@
 #include "mxrp/models/Designator.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Designator, "Designator")

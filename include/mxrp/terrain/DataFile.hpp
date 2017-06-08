@@ -4,7 +4,7 @@
 
 #include "mxrp/terrain/Terrain.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace terrain {
 
 //------------------------------------------------------------------------------

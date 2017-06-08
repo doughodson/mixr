@@ -4,7 +4,7 @@
 #include "mxrp/base/PairStream.hpp"
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Transform, "Transform")

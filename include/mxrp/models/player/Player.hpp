@@ -16,7 +16,7 @@
 
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Vec2d;    class Vec3d;  class Angle; class Boolean;
                  class Distance; class LatLon; class List;  class Time; }
 namespace simulation { class AbstractNib; }

@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class String; }
 namespace rpf {
 class CadrgTocEntry;

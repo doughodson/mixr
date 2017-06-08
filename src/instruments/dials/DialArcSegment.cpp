@@ -6,7 +6,7 @@
 #include <GL/glu.h>
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")

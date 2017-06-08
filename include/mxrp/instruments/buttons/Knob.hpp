@@ -4,7 +4,7 @@
 
 #include "mxrp/instruments/buttons/Button.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Table1; }
 namespace instruments {
 

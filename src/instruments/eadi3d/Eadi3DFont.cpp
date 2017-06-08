@@ -2,7 +2,7 @@
 #include "mxrp/instruments/eadi3d/Eadi3DFont.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont, "Eadi3DFont")

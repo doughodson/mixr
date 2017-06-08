@@ -4,7 +4,7 @@
 
 #include "mxrp/models/player/Missile.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //------------------------------------------------------------------------------

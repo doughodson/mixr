@@ -4,7 +4,7 @@
 #include "mxrp/base/concurrent/ThreadPool.hpp"
 #include "mxrp/base/concurrent/ThreadPoolManager.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_SUBCLASS(ThreadPoolThread, "ThreadPoolThread")

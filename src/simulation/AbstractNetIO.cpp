@@ -1,7 +1,7 @@
 
 #include "mxrp/simulation/AbstractNetIO.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractNetIO, "AbstractNetIO")

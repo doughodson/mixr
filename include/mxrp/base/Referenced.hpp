@@ -7,7 +7,7 @@
 // lock/unlock, etc - reference system needs it
 #include "mxrp/base/util/atomics.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 
 #include "mxrp/base/Component.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class IoHandler; class Number; class Thread; class Time; }
 namespace simulation {
 class AbstractDataRecorder;

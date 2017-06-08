@@ -4,7 +4,7 @@
 
 #include "mxrp/simulation/AbstractRecorderComponent.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 class DataRecordHandle;
 

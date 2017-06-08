@@ -7,7 +7,7 @@
 #include "mxrp/base/String.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace base { class Angle; class Distance; class Identifier; class String; class Time; }
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }

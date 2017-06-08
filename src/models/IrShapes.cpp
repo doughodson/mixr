@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 //==============================================================================
@@ -46,7 +46,7 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
+bool IrShape::setSlotIrShapeArea(const mxrp::base::Number* const num)
 {
    double value = 0.0;
    const auto a = dynamic_cast<const base::Area*>(num);
@@ -104,7 +104,7 @@ void IrSphere::copyData(const IrSphere& org, const bool)
    radius = org.radius;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const mxrp::base::Number* const s)
 {
    double value = 0.0;
 
@@ -164,7 +164,7 @@ void IrBox::deleteData()
 {
 }
 
-bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
+bool IrBox::setSlotIrBoxX(const mxrp::base::Number* const s)
 {
    double value = 0.0;
 
@@ -180,7 +180,7 @@ bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
+bool IrBox::setSlotIrBoxY(const mxrp::base::Number* const s)
 {
    double value = 0.0;
 
@@ -196,7 +196,7 @@ bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
+bool IrBox::setSlotIrBoxZ(const mxrp::base::Number* const s)
 {
    double value = 0.0;
 

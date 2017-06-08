@@ -4,7 +4,7 @@
 #include "mxrp/base/List.hpp"
 #include "mxrp/base/String.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(AsciiText, "AsciiText")

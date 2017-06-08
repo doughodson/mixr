@@ -5,7 +5,7 @@
 #include "mxrp/instruments/Instrument.hpp"
 #include <array>
 
-namespace oe {
+namespace mxrp {
 namespace instruments {
 
 //------------------------------------------------------------------------------

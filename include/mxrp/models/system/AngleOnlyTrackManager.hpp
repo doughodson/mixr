@@ -6,7 +6,7 @@
 #include "mxrp/base/safe_queue.hpp"
 #include "mxrp/base/util/constants.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class IrQueryMsg;
 class Track;

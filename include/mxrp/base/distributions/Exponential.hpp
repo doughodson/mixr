@@ -4,7 +4,7 @@
 
 #include "../Rng.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 //------------------------------------------------------------------------------

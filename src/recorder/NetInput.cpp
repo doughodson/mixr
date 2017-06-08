@@ -6,7 +6,7 @@
 #include "mxrp/base/Number.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(NetInput, "RecorderNetInput")
@@ -19,8 +19,8 @@ END_SLOTTABLE(NetInput)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
-    ON_SLOT(1, setSlotNetwork,   oe::base::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    oe::base::Number)
+    ON_SLOT(1, setSlotNetwork,   mxrp::base::NetHandler)
+    ON_SLOT(2, setSlotNoWait,    mxrp::base::Number)
 END_SLOT_MAP()
 
 NetInput::NetInput()
@@ -145,14 +145,14 @@ const DataRecordHandle* NetInput::readRecordImp()
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetInput::setSlotNetwork(oe::base::NetHandler* const msg)
+bool NetInput::setSlotNetwork(mxrp::base::NetHandler* const msg)
 {
    netHandler = msg;
    return true;
 }
 
 // No wait (unblocked) I/O flag
-bool NetInput::setSlotNoWait(oe::base::Number* const msg)
+bool NetInput::setSlotNoWait(mxrp::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

@@ -6,7 +6,7 @@
 #include "mxrp/base/safe_queue.hpp"
 #include "mxrp/base/units/distance_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 class Emission;
 class Player;

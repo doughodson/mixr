@@ -12,7 +12,7 @@
 #include "mxrp/base/units/Distances.hpp"
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(MergingIrSensor, "MergingIrSensor")

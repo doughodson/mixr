@@ -4,7 +4,7 @@
 
 #include "mxrp/recorder/OutputHandler.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class NetHandler; class Number; }
 namespace recorder {
 

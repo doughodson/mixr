@@ -2,7 +2,7 @@
 #ifndef __mxrp_base_MetaObject_H__
 #define __mxrp_base_MetaObject_H__
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class SlotTable;
 

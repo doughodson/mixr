@@ -4,7 +4,7 @@
 
 #include "mxrp/linearsystem/LimitFunc.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 //------------------------------------------------------------------------------

@@ -11,7 +11,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")

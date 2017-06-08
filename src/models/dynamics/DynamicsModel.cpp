@@ -2,7 +2,7 @@
 #include "mxrp/models/dynamics/DynamicsModel.hpp"
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DynamicsModel, "DynamicsModel")

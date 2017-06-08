@@ -6,7 +6,7 @@
 #include "Polygon.hpp"
 #include <limits>
 
-namespace oe {
+namespace mxrp {
 namespace graphics {
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/osg/Vec4d"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 class Vec3d;
 class Number;

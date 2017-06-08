@@ -4,7 +4,7 @@
 
 #include "mxrp/graphics/Field.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Object; class List; class String; }
 namespace graphics {
 

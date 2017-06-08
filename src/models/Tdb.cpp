@@ -16,7 +16,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Gimbal_Tdb")

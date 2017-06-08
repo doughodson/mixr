@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere, "IrAtmosphere")
@@ -78,7 +78,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(oe::base::Number* const num)
+bool IrAtmosphere::setSlotSkyRadiance(mxrp::base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -91,7 +91,7 @@ bool IrAtmosphere::setSlotSkyRadiance(oe::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(oe::base::Number* const num)
+bool IrAtmosphere::setSlotEarthRadiance(mxrp::base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {

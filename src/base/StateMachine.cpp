@@ -5,7 +5,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine, "AbstractStateMachine")

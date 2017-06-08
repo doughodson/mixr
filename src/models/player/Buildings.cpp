@@ -4,7 +4,7 @@
 #include "mxrp/base/List.hpp"
 #include "mxrp/base/units/Angles.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Building, "Building")

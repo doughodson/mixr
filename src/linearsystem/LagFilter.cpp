@@ -3,7 +3,7 @@
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/Times.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LagFilter,"LagFilter")

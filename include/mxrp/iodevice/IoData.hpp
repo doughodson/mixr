@@ -4,7 +4,7 @@
 
 #include "mxrp/base/io/IoData.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace base { class Number; }
 namespace iodevice {
 
