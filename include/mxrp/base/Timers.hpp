@@ -28,7 +28,7 @@ class Timer : public Object
 public:
     enum Type { UP, DOWN };        // Timer type/direction
 
-    static  const unsigned int MAX_TIMERS = OE_CONFIG_MAX_INTERVAL_TIMERS;
+    static  const unsigned int MAX_TIMERS = MXRP_CONFIG_MAX_INTERVAL_TIMERS;
 
 public:
     Timer();

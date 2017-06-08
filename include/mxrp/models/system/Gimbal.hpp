@@ -141,7 +141,7 @@ public:
    };
 
    // Max number of players of interest
-   enum { MAX_PLAYERS = OE_CONFIG_MAX_PLAYERS_OF_INTEREST };
+   enum { MAX_PLAYERS = MXRP_CONFIG_MAX_PLAYERS_OF_INTEREST };
 
 public:  // Public section
    Gimbal();

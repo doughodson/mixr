@@ -139,7 +139,7 @@ public:
 
 protected:
    // Max size of emission queues (per frame)
-   static const unsigned int MAX_EMISSIONS = OE_CONFIG_RF_MAX_EMISSIONS;
+   static const unsigned int MAX_EMISSIONS = MXRP_CONFIG_RF_MAX_EMISSIONS;
 
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();
