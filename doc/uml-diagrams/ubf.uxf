@@ -22,7 +22,7 @@
       <w>160</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>Behavior
+    <panel_attributes>ubf::AbstractBehavior
 --
 genAction()
 getVote()
@@ -76,7 +76,7 @@ getBehaviors()
       <w>160</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>Action
+    <panel_attributes>ubf::AbstractAction
 --
 getVote()
 setVote()
@@ -116,7 +116,7 @@ execute()
       <w>160</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>State
+    <panel_attributes>ubf::AbstractState
 --
 </panel_attributes>
     <additional_attributes/>
@@ -195,7 +195,7 @@ getState()
       <w>160</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>State
+    <panel_attributes>ubf::AbstractState
 --
 </panel_attributes>
     <additional_attributes/>
@@ -208,7 +208,7 @@ getState()
       <w>160</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Behavior
+    <panel_attributes>ubf::AbstractBehavior
 --
 </panel_attributes>
     <additional_attributes/>
@@ -240,7 +240,7 @@ getState()
     <coordinates>
       <x>770</x>
       <y>90</y>
-      <w>120</w>
+      <w>150</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>Object
@@ -253,10 +253,10 @@ getState()
     <coordinates>
       <x>770</x>
       <y>180</y>
-      <w>120</w>
+      <w>150</w>
       <h>60</h>
     </coordinates>
-    <panel_attributes>ubf::Action
+    <panel_attributes>ubf::AbstractAction
 --
 
 </panel_attributes>
@@ -265,7 +265,7 @@ getState()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
+      <x>840</x>
       <y>130</y>
       <w>30</w>
       <h>70</h>
@@ -278,7 +278,7 @@ getState()
     <coordinates>
       <x>770</x>
       <y>280</y>
-      <w>120</w>
+      <w>150</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>Action
@@ -290,7 +290,7 @@ getState()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
+      <x>840</x>
       <y>230</y>
       <w>30</w>
       <h>70</h>

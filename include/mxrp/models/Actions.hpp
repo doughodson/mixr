@@ -29,7 +29,7 @@ class Steerpoint;
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
 //
-//  5) Derived from an UBF action (see "openeaagles/base/ubf/Action.hpp").
+//  5) Derived from an UBF action (see "mxrp/base/ubf/AbstractAction.hpp").
 //  The execute() function's 'actor' must be our OnboardComputer or our
 //  ownship, which can be  used to find our OnboardComputer.  The execute()
 //  function will find the OnboardComputer and 'trigger()' the action.
