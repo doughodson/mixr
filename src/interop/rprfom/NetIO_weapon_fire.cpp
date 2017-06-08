@@ -9,7 +9,7 @@
 
 #include "mxrp/base/network/NetHandler.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 //------------------------------------------------------------------------------

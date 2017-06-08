@@ -18,7 +18,7 @@
 #include "mxrp/base/network/NetHandler.hpp"
 #include "mxrp/base/Number.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")

@@ -1,10 +1,10 @@
 
-#ifndef __oe_interop_rprfom_NetIO_H__
-#define __oe_interop_rprfom_NetIO_H__
+#ifndef __mxrp_interop_rprfom_NetIO_H__
+#define __mxrp_interop_rprfom_NetIO_H__
 
 #include "mxrp/interop/hla/NetIO.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models { class Player; }
 namespace hla { class Ambassador; }
 namespace interop { class NetIO; class Nib; }

@@ -1,11 +1,11 @@
 
-#ifndef __oe_interop_hla_Ambassador_H__
-#define __oe_interop_hla_Ambassador_H__
+#ifndef __mxrp_interop_hla_Ambassador_H__
+#define __mxrp_interop_hla_Ambassador_H__
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
-namespace oe {
+namespace mxrp {
 namespace hla {
 
 class NetIO;

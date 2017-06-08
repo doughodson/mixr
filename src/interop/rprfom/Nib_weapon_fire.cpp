@@ -12,7 +12,7 @@
 #include "mxrp/base/util/nav_utils.hpp"
 #include "mxrp/base/util/str_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 //------------------------------------------------------------------------------

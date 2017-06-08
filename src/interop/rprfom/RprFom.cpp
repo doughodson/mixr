@@ -1,7 +1,7 @@
 
 #include "mxrp/interop/rprfom/RprFom.hpp"
  
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 //==============================================================================

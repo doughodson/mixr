@@ -5,7 +5,7 @@
 #include "mxrp/base/Pair.hpp"
 #include "mxrp/base/PairStream.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 IMPLEMENT_SUBCLASS(Ntm, "HlaNtm")

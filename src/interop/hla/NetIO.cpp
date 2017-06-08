@@ -15,7 +15,7 @@
 #include "unistd.h"
 #endif
 
-namespace oe {
+namespace mxrp {
 namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO, "HlaNetIO")

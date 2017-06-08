@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_hla_Nib_H__
-#define __oe_interop_hla_Nib_H__
+#ifndef __mxrp_interop_hla_Nib_H__
+#define __mxrp_interop_hla_Nib_H__
 
 #include "mxrp/interop/common/Nib.hpp"
 #include "mxrp/interop/hla/NetIO.hpp"
@@ -9,7 +9,7 @@
 #include <RTI.hh>
 #include <fedtime.hh>
 
-namespace oe {
+namespace mxrp {
 namespace hla {
 class Ambassador;
 

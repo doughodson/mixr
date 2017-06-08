@@ -1,10 +1,10 @@
 
-#ifndef __oe_interop_rprfom_Nib_H__
-#define __oe_interop_rprfom_Nib_H__
+#ifndef __mxrp_interop_rprfom_Nib_H__
+#define __mxrp_interop_rprfom_Nib_H__
 
 #include "mxrp/interop/hla/Nib.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace models { class Player; }
 namespace interop { class NetIO; }
 namespace rprfom {

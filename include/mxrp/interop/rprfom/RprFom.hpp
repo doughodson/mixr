@@ -1,11 +1,11 @@
 
-#ifndef __oe_interop_rprfom_H__
-#define __oe_interop_rprfom_H__
+#ifndef __mxrp_interop_rprfom_H__
+#define __mxrp_interop_rprfom_H__
 
 #include <RTI.hh>
 #include "mxrp/base/Object.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace rprfom {
 
 //------------------------------------------------------------------------------

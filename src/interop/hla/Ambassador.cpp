@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace hla {
 
 Ambassador::Ambassador(NetIO* netIO): hlaIo(netIO)
