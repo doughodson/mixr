@@ -34,10 +34,10 @@ class Ntm;
 //    timeline             (base::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
 //    inputEntityTypes     (base::PairSteam)   ! Incoming entity type mappers (default: 0)
-//                                             !   (Ntm objects that map incoming entity types to oe player types)
+//                                             !   (Ntm objects that map incoming entity types to mxrp player types)
 //
 //    outputEntityTypes    (base::PairSteam)   ! Outgoing entity type mappers (default: 0)
-//                                             !   (Ntm objects that map oe player types to outgoing entity types)
+//                                             !   (Ntm objects that map mxrp player types to outgoing entity types)
 //
 //    maxTimeDR            (base::Time)        ! Max DR time (default: 5 seconds)
 //    maxPositionError     (base::Distance)    ! Max DR position error (default: 3 meters)
@@ -50,7 +50,7 @@ class Ntm;
 //
 // NetIO class objects:
 //
-//    An oe application, which is typically controlled by a Station class
+//    An mxrp application, which is typically controlled by a Station class
 //    object, can have multiple (i.e., MAX_NETWORD_ID) NetIO objects.  Each NetIO
 //    object handles a different interoperabiltiy network
 //
@@ -68,7 +68,7 @@ class Ntm;
 //    on the interoperability network.
 //
 //    As incoming entities are discovered, their entity type codes are mapped
-//    to oe player types using Network Type Mapping (Ntm) objects.  These
+//    to mxrp player types using Network Type Mapping (Ntm) objects.  These
 //    Ntm objects are listed in the "incoming entity type mapper" list, which
 //    is set using the 'inputEntityTypes' slot.  An entity is ignored if its
 //    entity type does not match any of the Ntm objects on the incoming list.
@@ -80,7 +80,7 @@ class Ntm;
 //
 //    A network specific Network Interface Block (Nib) is created, using the
 //    nibFactory() function, to manage the flow of data from the network entity
-//    to the oe player.  The incoming Nib objects are managed using the
+//    to the mxrp player.  The incoming Nib objects are managed using the
 //    "input Nib" list.
 //
 //    The incoming surrogate players contain the ID of the NetIO object that
@@ -105,13 +105,13 @@ class Ntm;
 //    to the network)
 //
 //    A network specific Nib is created, using the nibFactory() function, to
-//    manage the flow of data from the oe player to the network entity.
+//    manage the flow of data from the mxrp player to the network entity.
 //    The outgoing Nib objects are managed using the "output Nib" list.
 //
-//    The oe player objects do not contain any state data related to the
+//    The mxrp player objects do not contain any state data related to the
 //    interoperability networks that their being sent to.  As a result, an
-//    oe player can be sent to more than one interoperability network,
-//    and the 'enableRelay' slot can be used to enable the relaying of MXRP
+//    mxrp player can be sent to more than one interoperability network,
+//    and the 'enableRelay' slot can be used to enable the relaying of mxrp
 //    players that were discovered from other interoperability networks.
 //
 //

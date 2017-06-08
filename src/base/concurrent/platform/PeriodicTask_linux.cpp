@@ -8,7 +8,7 @@
 #include <signal.h>
 #include <iostream>
 
-namespace oe {
+namespace mxrp {
 namespace base {
 
 // max number of processors we'll allow

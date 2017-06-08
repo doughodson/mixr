@@ -16,7 +16,7 @@
 #include "mxrp/base/util/str_utils.hpp"
 #include "mxrp/base/util/system_utils.hpp"
 
-namespace oe {
+namespace mxrp {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")
