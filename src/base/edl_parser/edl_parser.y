@@ -34,9 +34,9 @@
 #include "mxrp/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mxrp::base::Object* result;               // result of all our work (i.e., an Object)
-static mxrp::base::EdlScanner* scanner;          // edl scanner
-static mxrp::base::factory_func factory;         // factory function 
+static mxrp::base::Object* result;             // result of all our work (i.e., an Object)
+static mxrp::base::EdlScanner* scanner;        // edl scanner
+static mxrp::base::factory_func factory;       // factory function 
 static unsigned int err_count;                 // error count
 
 //------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ inline void yyerror(const char* s)
 //------------------------------------------------------------------------------
 static mxrp::base::Object* parse(const std::string& name, mxrp::base::PairStream* arg_list)
 {
-    mxrp::base::Object* obj {nullptr};
+    mxrp::base::Object* obj {};
 
     if (factory != nullptr) {
 
@@ -110,11 +110,11 @@ static mxrp::base::Object* parse(const std::string& name, mxrp::base::PairStream
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   mxrp::base::Object*          ovalp;
-   mxrp::base::Pair*            pvalp;
-   mxrp::base::PairStream*      svalp;
-   mxrp::base::List*            lvalp;
-   mxrp::base::Number*          nvalp;
+   mxrp::base::Object*        ovalp;
+   mxrp::base::Pair*          pvalp;
+   mxrp::base::PairStream*    svalp;
+   mxrp::base::List*          lvalp;
+   mxrp::base::Number*        nvalp;
 }
 
 // Add types to some for our tokens and rules
@@ -215,7 +215,7 @@ Object* edl_parser(const std::string& filename, factory_func f, unsigned int* nu
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
-    Object* obj {nullptr};
+    Object* obj {};
     if (yyparse() == 0) {    // returns 0 on success
         obj = result;
     }

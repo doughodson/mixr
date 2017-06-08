@@ -116,13 +116,13 @@ int ReformatScanner::processInteger(const char* text, const int len)
       return formatError(text);
    }
 
-// ---
-// Scan the example string
-// ---
+   // ---
+   // Scan the example string
+   // ---
 
    // Check for the sign
-   int i = 0;
-   int s = 0;
+   int i {};
+   int s {};
 
    if (text[i] == '+') {
       s = 1;
@@ -151,16 +151,16 @@ int ReformatScanner::processInteger(const char* text, const int len)
    }
 
 
-// ---
-// Build the format statement
-// ---
+   // ---
+   // Build the format statement
+   // ---
 
    // Computer total number of characters in numberic field:
    //    sign, leading zeros, and leading numbers.
    int fw = s + lz + ln;
 
    // Create the sprintf() format string
-   int j = 0;
+   int j {};
 
    format[j++] = '%';				// Start with %
 
@@ -196,9 +196,9 @@ int ReformatScanner::processFloat(const char* text, const int len)
    if (dataType != number)
       return formatError(text);
 
-// ---
-// Scan the example string
-// ---
+   // ---
+   // Scan the example string
+   // ---
 
    // Check for the sign
    int i = 0;
@@ -241,9 +241,9 @@ int ReformatScanner::processFloat(const char* text, const int len)
    }
 
 
-// ---
-// Build the format statement
-// ---
+   // ---
+   // Build the format statement
+   // ---
 
    // Computer total number of characters in numberic field:
    //    sign, leading zeros, leading numbers, decimal point, and
@@ -251,7 +251,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
    int fw = s + lz + ln + 1 + nr;
 
    // Create the sprintf() format string
-   int j = 0;
+   int j {};
 
    format[j++] = '%';                           // Start with %
 
@@ -282,8 +282,8 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
       return formatError(text);
 
    // Check sign
-   int i = 0;
-   int s = 0;
+   int i {};
+   int s {};
 
    if (text[i] == '+') {
       s = 1;
@@ -304,9 +304,9 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
       i++;
    }
 
-   int hc = 0;
-   int hd = 0;
-   int hr = 0;
+   int hc {};
+   int hd {};
+   int hr {};
 
    // A colon or a decimal point is optional after hours
    if (text[i] == ':') {
@@ -330,9 +330,9 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
       i++;
    }
 
-   int mc = 0;
-   int md = 0;
-   int mr = 0;
+   int mc {};
+   int md {};
+   int mr {};
 
    // A colon or a decimal point is optional after minutes
    if (text[i] == ':') {
@@ -417,11 +417,11 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
          j+= std::sprintf(&format[j], "%dd", mm);
 
       if (mc)
-	 format[j++] = ':';
+         format[j++] = ':';
 
       if (ss > 0) {
-	 format[j++] = '%';
-	 format[j++] = '0';
+         format[j++] = '%';
+         format[j++] = '0';
       }
    }
 
@@ -475,8 +475,8 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
    }
 
    char dc  = '\0';
-   int  ddc = 0;
-   int  dr  = 0;
+   int  ddc {};
+   int  dr  {};
 
    if (text[i] == '.' && i < len) {
       ddc = 1;
@@ -498,37 +498,37 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
    }
 
    char mc = '\0';
-   int  md = 0;
-   int  mr = 0;
+   int  md {};
+   int  mr {};
 
    if (text[i] == '.' && i < len) {
       md = 1;
       i++;
 
       while (text[i] == 'M' && i < len) {
-	 mr++;
-	 i++;
+         mr++;
+         i++;
       }
    }
    if (text[i] != 'S' && text[i] != '+' && i < len)
       mc = text[i++];
 
    // Handle seconds
-   int ss = 0;
+   int ss {};
    while (text[i] == 'S' && i < len) {
       ss++;
       i++;
    }
 
    char sc = '\0';
-   int  sr = 0;
+   int  sr {};
 
    if (text[i] == '.' && i < len) {
       i++;
 
       while (text[i] == 'S' && i < len) {
-	 sr++;
-	 i++;
+         sr++;
+         i++;
       }
    }
    if (i < len && text[i] != '+')
@@ -542,7 +542,7 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
    }
 
    // Build format string
-   int j = 0;
+   int j {};
 
    format[j++] = '%';
 
@@ -605,9 +605,7 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
    format[j] = '\0';
 
    return static_cast<int>(dm);
-
 }
-
 
 //------------------------------------------------------------------------------
 // formatError() -- process an error
