@@ -1,6 +1,6 @@
 
-#ifndef __oe_otw_CigiClNetwork_H__
-#define __oe_otw_CigiClNetwork_H__
+#ifndef __mxrp_otw_CigiClNetwork_H__
+#define __mxrp_otw_CigiClNetwork_H__
 
 #include "mxrp/otw/cigi/CigiCl.hpp"
 

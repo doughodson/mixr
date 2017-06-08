@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_StabilizingGimbal_H__
-#define __oe_models_StabilizingGimbal_H__
+#ifndef __mxrp_models_StabilizingGimbal_H__
+#define __mxrp_models_StabilizingGimbal_H__
 
 #include "mxrp/models/system/Gimbal.hpp"
 

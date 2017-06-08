@@ -1,6 +1,6 @@
 
-#ifndef __oe_otw_Otw_H__
-#define __oe_otw_Otw_H__
+#ifndef __mxrp_otw_Otw_H__
+#define __mxrp_otw_Otw_H__
 
 #include "mxrp/simulation/AbstractOtw.hpp"
 #include <array>

@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_AbstractDataRecorder_H__
-#define __oe_simulation_AbstractDataRecorder_H__
+#ifndef __mxrp_simulation_AbstractDataRecorder_H__
+#define __mxrp_simulation_AbstractDataRecorder_H__
 
 #include "mxrp/simulation/AbstractRecorderComponent.hpp"
 #include "mxrp/simulation/recorder_macros.hpp"

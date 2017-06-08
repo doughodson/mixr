@@ -15,8 +15,8 @@
  *
  *****************************************************************************/
 
-#ifndef __oe_otw_geoTypes_H__
-#define __oe_otw_geoTypes_H__
+#ifndef __mxrp_otw_geoTypes_H__
+#define __mxrp_otw_geoTypes_H__
 
 #include "mxrp/base/util/platform_api.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_PrintHandler_H__
-#define __oe_recorder_PrintHandler_H__
+#ifndef __mxrp_recorder_PrintHandler_H__
+#define __mxrp_recorder_PrintHandler_H__
 
 #include "mxrp/recorder/OutputHandler.hpp"
 #include <string>

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Referenced_H__
-#define __oe_base_Referenced_H__
+#ifndef __mxrp_base_Referenced_H__
+#define __mxrp_base_Referenced_H__
 
 // framework configuration file
 #include "mxrp/config.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_ubf_Arbiter_H__
-#define __oe_base_ubf_Arbiter_H__
+#ifndef __mxrp_base_ubf_Arbiter_H__
+#define __mxrp_base_ubf_Arbiter_H__
 
 #include "AbstractBehavior.hpp"
 

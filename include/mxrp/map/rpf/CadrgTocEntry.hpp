@@ -1,6 +1,6 @@
 
-#ifndef __oe_map_rpf_CadrgTocEntry_H__
-#define __oe_map_rpf_CadrgTocEntry_H__
+#ifndef __mxrp_map_rpf_CadrgTocEntry_H__
+#define __mxrp_map_rpf_CadrgTocEntry_H__
 
 #include "mxrp/map/rpf/CadrgFrameEntry.hpp"
 #include "mxrp/base/Object.hpp"

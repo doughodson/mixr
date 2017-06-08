@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_dis_EmissionPduHandler_H__
-#define __oe_interop_dis_EmissionPduHandler_H__
+#ifndef __mxrp_interop_dis_EmissionPduHandler_H__
+#define __mxrp_interop_dis_EmissionPduHandler_H__
 
 #include "mxrp/interop/dis/NetIO.hpp"
 #include "mxrp/interop/dis/structs.hpp"

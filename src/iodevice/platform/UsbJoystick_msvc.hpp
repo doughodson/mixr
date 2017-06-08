@@ -1,6 +1,6 @@
 
-#ifndef __oe_iodevice_windows_UsbJoystick_msvc_H__
-#define __oe_iodevice_windows_UsbJoystick_msvc_H__
+#ifndef __mxrp_iodevice_windows_UsbJoystick_msvc_H__
+#define __mxrp_iodevice_windows_UsbJoystick_msvc_H__
 
 #include "mxrp/iodevice/Controller.hpp"
 

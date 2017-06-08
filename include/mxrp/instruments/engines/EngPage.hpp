@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_EngPage_H__
-#define __oe_instruments_EngPage_H__
+#ifndef __mxrp_instruments_EngPage_H__
+#define __mxrp_instruments_EngPage_H__
 
 #include "mxrp/graphics/Page.hpp"
 #include <array>

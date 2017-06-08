@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_AnalogDial_H__
-#define __oe_instruments_AnalogDial_H__
+#ifndef __mxrp_instruments_AnalogDial_H__
+#define __mxrp_instruments_AnalogDial_H__
 
 #include "mxrp/instruments/Instrument.hpp"
 

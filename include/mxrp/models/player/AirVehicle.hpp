@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_AirVehicle_H__
-#define __oe_models_AirVehicle_H__
+#ifndef __mxrp_models_AirVehicle_H__
+#define __mxrp_models_AirVehicle_H__
 
 #include "mxrp/models/player/Player.hpp"
 

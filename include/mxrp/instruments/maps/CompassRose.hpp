@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_CompassRose_H__
-#define __oe_instruments_CompassRose_H__
+#ifndef __mxrp_instruments_CompassRose_H__
+#define __mxrp_instruments_CompassRose_H__
 
 #include "mxrp/graphics/Graphic.hpp"
 #include "mxrp/base/units/angle_utils.hpp"

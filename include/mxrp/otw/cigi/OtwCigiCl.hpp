@@ -1,6 +1,6 @@
 
-#ifndef __oe_otw_OtwCigiCl_H__
-#define __oe_otw_OtwCigiCl_H__
+#ifndef __mxrp_otw_OtwCigiCl_H__
+#define __mxrp_otw_OtwCigiCl_H__
 
 #include "mxrp/otw/Otw.hpp"
 #include <array>

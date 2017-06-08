@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_DataRecorder_Inline__
-#define __oe_recorder_DataRecorder_Inline__
+#ifndef __mxrp_recorder_DataRecorder_Inline__
+#define __mxrp_recorder_DataRecorder_Inline__
 
 inline OutputHandler* DataRecorder::getOutputHandler()                { return outputHandler; }
 inline const OutputHandler* DataRecorder::getOutputHandler() const    { return outputHandler; }

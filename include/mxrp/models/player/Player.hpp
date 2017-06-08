@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Player_H__
-#define __oe_models_Player_H__
+#ifndef __mxrp_models_Player_H__
+#define __mxrp_models_Player_H__
 
 #include "mxrp/simulation/AbstractPlayer.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Identifier_H__
-#define __oe_base_Identifier_H__
+#ifndef __mxrp_base_Identifier_H__
+#define __mxrp_base_Identifier_H__
 
 #include "mxrp/base/String.hpp"
 

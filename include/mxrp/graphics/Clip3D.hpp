@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Clip3D_H__
-#define __oe_graphics_Clip3D_H__
+#ifndef __mxrp_graphics_Clip3D_H__
+#define __mxrp_graphics_Clip3D_H__
 
 #include "mxrp/base/Object.hpp"
 #include "Polygon.hpp"

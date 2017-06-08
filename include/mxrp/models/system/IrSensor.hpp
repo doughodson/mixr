@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_IrSensor_H__
-#define __oe_models_IrSensor_H__
+#ifndef __mxrp_models_IrSensor_H__
+#define __mxrp_models_IrSensor_H__
 
 #include "mxrp/models/system/IrSystem.hpp"
 #include "mxrp/base/safe_queue.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_RotarySwitch_H__
-#define __oe_instruments_RotarySwitch_H__
+#ifndef __mxrp_instruments_RotarySwitch_H__
+#define __mxrp_instruments_RotarySwitch_H__
 
 #include "mxrp/instruments/buttons/Button.hpp"
 #include <array>

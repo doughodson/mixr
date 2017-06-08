@@ -10,8 +10,8 @@
 //              Object -> Number -> Frequency -> GigaHertz
 //              Object -> Number -> Frequency -> TeraHertz
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Frequencies_H__
-#define __oe_base_Frequencies_H__
+#ifndef __mxrp_base_Frequencies_H__
+#define __mxrp_base_Frequencies_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/frequency_utils.hpp"

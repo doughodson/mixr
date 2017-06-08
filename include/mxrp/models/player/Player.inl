@@ -2,8 +2,8 @@
 // Class: Player
 // Description: inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_models_Player_Inline__
-#define __oe_models_Player_Inline__
+#ifndef __mxrp_models_Player_Inline__
+#define __mxrp_models_Player_Inline__
 
 // The player's type string (.e.g, "F-16C")
 inline const base::String* Player::getType() const

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_area_H__
-#define __oe_base_util_area_H__
+#ifndef __mxrp_base_util_area_H__
+#define __mxrp_base_util_area_H__
 
 #include <cmath>
 

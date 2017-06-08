@@ -1,6 +1,6 @@
 
-#ifndef __oe_map_rpf_TextureTable_H__
-#define __oe_map_rpf_TextureTable_H__
+#ifndef __mxrp_map_rpf_TextureTable_H__
+#define __mxrp_map_rpf_TextureTable_H__
 
 #include "mxrp/base/Object.hpp"
 

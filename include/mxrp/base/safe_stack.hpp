@@ -1,8 +1,8 @@
 
 #include "mxrp/base/util/atomics.hpp"
 
-#ifndef __oe_base_safe_stack_H__
-#define __oe_base_safe_stack_H__
+#ifndef __mxrp_base_safe_stack_H__
+#define __mxrp_base_safe_stack_H__
 
 namespace oe {
 namespace base {

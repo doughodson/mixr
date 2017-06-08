@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_InputHandler_H__
-#define __oe_recorder_InputHandler_H__
+#ifndef __mxrp_recorder_InputHandler_H__
+#define __mxrp_recorder_InputHandler_H__
 
 #include "mxrp/simulation/AbstractRecorderComponent.hpp"
 

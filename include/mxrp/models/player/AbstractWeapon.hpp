@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_AbstractWeapon_H__
-#define __oe_models_AbstractWeapon_H__
+#ifndef __mxrp_models_AbstractWeapon_H__
+#define __mxrp_models_AbstractWeapon_H__
 
 #include "mxrp/models/player/Player.hpp"
 

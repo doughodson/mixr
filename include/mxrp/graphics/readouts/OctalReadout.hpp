@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_OctalReadout_H__
-#define __oe_graphics_OctalReadout_H__
+#ifndef __mxrp_graphics_OctalReadout_H__
+#define __mxrp_graphics_OctalReadout_H__
 
 #include "NumericReadout.hpp"
 

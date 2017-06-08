@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_FileReader_H__
-#define __oe_recorder_FileReader_H__
+#ifndef __mxrp_recorder_FileReader_H__
+#define __mxrp_recorder_FileReader_H__
 
 #include "mxrp/recorder/InputHandler.hpp"
 

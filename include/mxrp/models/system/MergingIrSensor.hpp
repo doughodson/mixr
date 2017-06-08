@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_MergingIrSensor_H__
-#define __oe_models_MergingIrSensor_H__
+#ifndef __mxrp_models_MergingIrSensor_H__
+#define __mxrp_models_MergingIrSensor_H__
 
 #include "mxrp/models/system/IrSensor.hpp"
 

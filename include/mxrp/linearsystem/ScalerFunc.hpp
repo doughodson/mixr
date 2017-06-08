@@ -1,6 +1,6 @@
 
-#ifndef __oe_linearsystem_ScalerFunc_H__
-#define __oe_linearsystem_ScalerFunc_H__
+#ifndef __mxrp_linearsystem_ScalerFunc_H__
+#define __mxrp_linearsystem_ScalerFunc_H__
 
 #include "mxrp/base/Object.hpp"
 

@@ -3,8 +3,8 @@
 // Description: inline functions
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_util_nav_utils_inline__
-#define __oe_base_util_nav_utils_inline__
+#ifndef __mxrp_base_util_nav_utils_inline__
+#define __mxrp_base_util_nav_utils_inline__
 
 //------------------------------------------------------------------------------
 // Flat-Earth: Computes the destination (target) lat/lon from starting (ref)

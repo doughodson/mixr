@@ -1,6 +1,6 @@
 
-#ifndef __oe_dafif_NavaidLoader_H__
-#define __oe_dafif_NavaidLoader_H__
+#ifndef __mxrp_dafif_NavaidLoader_H__
+#define __mxrp_dafif_NavaidLoader_H__
 
 #include "Database.hpp"
 #include "Navaid.hpp"

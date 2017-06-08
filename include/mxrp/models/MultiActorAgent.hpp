@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_MultiActorAgent_H__
-#define __oe_models_MultiActorAgent_H__
+#ifndef __mxrp_models_MultiActorAgent_H__
+#define __mxrp_models_MultiActorAgent_H__
 
 #include "mxrp/base/Component.hpp"
 #include <array>

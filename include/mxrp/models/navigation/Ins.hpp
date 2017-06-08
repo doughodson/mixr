@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Ins_H__
-#define __oe_models_Ins_H__
+#ifndef __mxrp_models_Ins_H__
+#define __mxrp_models_Ins_H__
 
 #include "mxrp/models/navigation/Navigation.hpp"
 #include "mxrp/base/osg/Vec3d"

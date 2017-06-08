@@ -6,8 +6,8 @@
 //              Object -> Number -> Mass -> KiloGrams
 //              Object -> Number -> Mass -> Slugs
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Masses_H__
-#define __oe_base_Masses_H__
+#ifndef __mxrp_base_Masses_H__
+#define __mxrp_base_Masses_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/mass_utils.hpp"

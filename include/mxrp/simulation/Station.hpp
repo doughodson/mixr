@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_Station_H__
-#define __oe_simulation_Station_H__
+#ifndef __mxrp_simulation_Station_H__
+#define __mxrp_simulation_Station_H__
 
 #include "mxrp/base/Component.hpp"
 

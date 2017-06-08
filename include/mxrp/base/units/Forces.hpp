@@ -8,8 +8,8 @@
 //              Object -> Number -> Force -> PoundForces
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_Forces_H__
-#define __oe_base_Forces_H__
+#ifndef __mxrp_base_Forces_H__
+#define __mxrp_base_Forces_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/force_utils.hpp"

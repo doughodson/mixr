@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_MetaObject_H__
-#define __oe_base_MetaObject_H__
+#ifndef __mxrp_base_MetaObject_H__
+#define __mxrp_base_MetaObject_H__
 
 namespace oe {
 namespace base {

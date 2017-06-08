@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Signature_H__
-#define __oe_models_Signature_H__
+#ifndef __mxrp_models_Signature_H__
+#define __mxrp_models_Signature_H__
 
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/util/constants.hpp"

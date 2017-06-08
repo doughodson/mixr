@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Radar_H__
-#define __oe_models_Radar_H__
+#ifndef __mxrp_models_Radar_H__
+#define __mxrp_models_Radar_H__
 
 #include "mxrp/models/system/RfSensor.hpp"
 #include "mxrp/base/safe_queue.hpp"

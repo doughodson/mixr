@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_DialArcSegment_H__
-#define __oe_instruments_DialArcSegment_H__
+#ifndef __mxrp_instruments_DialArcSegment_H__
+#define __mxrp_instruments_DialArcSegment_H__
 
 #include "mxrp/instruments/dials/AnalogDial.hpp"
 

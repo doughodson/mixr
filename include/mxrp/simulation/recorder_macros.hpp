@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_recorder_macros__
-#define __oe_simulation_recorder_macros__
+#ifndef __mxrp_simulation_recorder_macros__
+#define __mxrp_simulation_recorder_macros__
 
 //------------------------------------------------------------------------------
 // Recorder macros

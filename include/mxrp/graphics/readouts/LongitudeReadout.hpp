@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_LongitudeReadout_H__
-#define __oe_graphics_LongitudeReadout_H__
+#ifndef __mxrp_graphics_LongitudeReadout_H__
+#define __mxrp_graphics_LongitudeReadout_H__
 
 #include "DirectionReadout.hpp"
 

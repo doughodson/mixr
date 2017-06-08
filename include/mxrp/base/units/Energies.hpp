@@ -9,8 +9,8 @@
 //              Object -> Number -> Energy -> Joules
 //------------------------------------------------------------------------------
 
-#ifndef __oe_Energies_H__
-#define __oe_Energies_H__
+#ifndef __mxrp_Energies_H__
+#define __mxrp_Energies_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/energy_utils.hpp"

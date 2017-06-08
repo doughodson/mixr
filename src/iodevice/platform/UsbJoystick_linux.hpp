@@ -1,6 +1,6 @@
 
-#ifndef __oe_iodevice_platform_UsbJoystick_linux_H__
-#define __oe_iodevice_platform_UsbJoystick_linux_H__
+#ifndef __mxrp_iodevice_platform_UsbJoystick_linux_H__
+#define __mxrp_iodevice_platform_UsbJoystick_linux_H__
 
 #include "mxrp/iodevice/Controller.hpp"
 

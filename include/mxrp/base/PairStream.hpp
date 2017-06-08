@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_PairStream_H__
-#define __oe_base_PairStream_H__
+#ifndef __mxrp_base_PairStream_H__
+#define __mxrp_base_PairStream_H__
 
 #include "mxrp/base/List.hpp"
 #include "mxrp/base/Pair.hpp"

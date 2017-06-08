@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Shapes_H__
-#define __oe_graphics_Shapes_H__
+#ifndef __mxrp_graphics_Shapes_H__
+#define __mxrp_graphics_Shapes_H__
 
 #include "Graphic.hpp"
 

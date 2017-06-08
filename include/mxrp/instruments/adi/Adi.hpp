@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_Adi_H__
-#define __oe_instruments_Adi_H__
+#ifndef __mxrp_instruments_Adi_H__
+#define __mxrp_instruments_Adi_H__
 
 #include "mxrp/instruments/Instrument.hpp"
 

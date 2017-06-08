@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_MfdPage_H__
-#define __oe_graphics_MfdPage_H__
+#ifndef __mxrp_graphics_MfdPage_H__
+#define __mxrp_graphics_MfdPage_H__
 
 #include "mxrp/graphics/Page.hpp"
 

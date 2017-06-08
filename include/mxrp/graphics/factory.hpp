@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_factory_H__
-#define __oe_graphics_factory_H__
+#ifndef __mxrp_graphics_factory_H__
+#define __mxrp_graphics_factory_H__
 
 #include <string>
 

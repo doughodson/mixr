@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Action_H__
-#define __oe_models_Action_H__
+#ifndef __mxrp_models_Action_H__
+#define __mxrp_models_Action_H__
 
 #include "mxrp/base/ubf/AbstractAction.hpp"
 #include "mxrp/base/safe_ptr.hpp"

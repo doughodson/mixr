@@ -1,6 +1,6 @@
 
-#ifndef __oe_iodevice_factory_H__
-#define __oe_iodevice_factory_H__
+#ifndef __mxrp_iodevice_factory_H__
+#define __mxrp_iodevice_factory_H__
 
 #include <string>
 

@@ -3,8 +3,8 @@
 //    Polynomial function:                Polynomial
 //    Generic multi-variable functions:   Func1, Func2, Func3, Func4 and Func5
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Functions_H__
-#define __oe_base_Functions_H__
+#ifndef __mxrp_base_Functions_H__
+#define __mxrp_base_Functions_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/functors/Function.hpp"

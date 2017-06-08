@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_Instrument_H__
-#define __oe_instruments_Instrument_H__
+#ifndef __mxrp_instruments_Instrument_H__
+#define __mxrp_instruments_Instrument_H__
 
 #include "mxrp/graphics/Graphic.hpp"
 

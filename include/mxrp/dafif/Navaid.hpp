@@ -1,6 +1,6 @@
 
-#ifndef __oe_dafif_Navaid_H__
-#define __oe_dafif_Navaid_H__
+#ifndef __mxrp_dafif_Navaid_H__
+#define __mxrp_dafif_Navaid_H__
 
 #include "Record.hpp"
 

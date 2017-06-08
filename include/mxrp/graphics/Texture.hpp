@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Texture_H__
-#define __oe_graphics_Texture_H__
+#ifndef __mxrp_graphics_Texture_H__
+#define __mxrp_graphics_Texture_H__
 
 #include "mxrp/graphics/Image.hpp"
 

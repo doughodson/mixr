@@ -14,8 +14,8 @@
 //              Object -> Number -> Area -> SquareKiloMeters
 //              Object -> Number -> Area -> DecibelSquareMeters
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Areas_H__
-#define __oe_base_Areas_H__
+#ifndef __mxrp_base_Areas_H__
+#define __mxrp_base_Areas_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/area_utils.hpp"

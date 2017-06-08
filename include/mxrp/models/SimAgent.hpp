@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_SimAgent_H__
-#define __oe_models_SimAgent_H__
+#ifndef __mxrp_models_SimAgent_H__
+#define __mxrp_models_SimAgent_H__
 
 #include "mxrp/base/ubf/Agent.hpp"
 

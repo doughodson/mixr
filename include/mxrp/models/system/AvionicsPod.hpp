@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_AvionicsPod_H__
-#define __oe_models_AvionicsPod_H__
+#ifndef __mxrp_models_AvionicsPod_H__
+#define __mxrp_models_AvionicsPod_H__
 
 #include "mxrp/models/system/ExternalStore.hpp"
 

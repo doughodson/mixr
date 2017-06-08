@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_LandingLight_H__
-#define __oe_instruments_LandingLight_H__
+#ifndef __mxrp_instruments_LandingLight_H__
+#define __mxrp_instruments_LandingLight_H__
 
 #include "LandingGear.hpp"
 

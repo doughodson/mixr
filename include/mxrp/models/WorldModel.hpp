@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_WorldModel_H__
-#define __oe_models_WorldModel_H__
+#ifndef __mxrp_models_WorldModel_H__
+#define __mxrp_models_WorldModel_H__
 
 #include "mxrp/simulation/Simulation.hpp"
 

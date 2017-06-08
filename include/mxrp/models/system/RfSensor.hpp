@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_RfSensor_H__
-#define __oe_models_RfSensor_H__
+#ifndef __mxrp_models_RfSensor_H__
+#define __mxrp_models_RfSensor_H__
 
 #include "mxrp/models/system/RfSystem.hpp"
 #include "mxrp/base/units/angle_utils.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_Eadi3DObjects_H__
-#define __oe_instruments_Eadi3DObjects_H__
+#ifndef __mxrp_instruments_Eadi3DObjects_H__
+#define __mxrp_instruments_Eadi3DObjects_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/instruments/eadi3d/IrisGLCompat.hpp"

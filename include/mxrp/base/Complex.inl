@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Complex_Inline__
-#define __oe_base_Complex_Inline__
+#ifndef __mxrp_base_Complex_Inline__
+#define __mxrp_base_Complex_Inline__
 
 //------------------------------------------------------------------------------
 // Unary Arithmetic Functions and Overloaded Operators

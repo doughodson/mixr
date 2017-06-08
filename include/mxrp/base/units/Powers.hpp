@@ -9,8 +9,8 @@
 //              Object -> Number -> Power -> DecibelWatts
 //              Object -> Number -> Power -> DecibelMilliWatts
 //----------------------------------------------------------------------------
-#ifndef __oe_base_Powers_H__
-#define __oe_base_Powers_H__
+#ifndef __mxrp_base_Powers_H__
+#define __mxrp_base_Powers_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/power_utils.hpp"

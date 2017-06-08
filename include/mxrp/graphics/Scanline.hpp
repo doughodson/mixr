@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Scanline_H__
-#define __oe_graphics_Scanline_H__
+#ifndef __mxrp_graphics_Scanline_H__
+#define __mxrp_graphics_Scanline_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/osg/Vec2d"

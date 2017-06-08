@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_safe_ptr_H__
-#define __oe_base_safe_ptr_H__
+#ifndef __mxrp_base_safe_ptr_H__
+#define __mxrp_base_safe_ptr_H__
 
 #include "mxrp/base/util/atomics.hpp"
 

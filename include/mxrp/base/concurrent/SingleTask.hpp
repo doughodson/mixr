@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_SingleTask_H__
-#define __oe_base_SingleTask_H__
+#ifndef __mxrp_base_SingleTask_H__
+#define __mxrp_base_SingleTask_H__
 
 #include "mxrp/base/concurrent/Thread.hpp"
 

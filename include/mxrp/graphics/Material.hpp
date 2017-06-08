@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Material_H__
-#define __oe_graphics_Material_H__
+#ifndef __mxrp_graphics_Material_H__
+#define __mxrp_graphics_Material_H__
 
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/osg/Vec4d"

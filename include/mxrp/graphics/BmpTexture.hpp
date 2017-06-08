@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_BmpTexture_H__
-#define __oe_graphics_BmpTexture_H__
+#ifndef __mxrp_graphics_BmpTexture_H__
+#define __mxrp_graphics_BmpTexture_H__
 
 #include "mxrp/graphics/Texture.hpp"
 #include <GL/gl.h>

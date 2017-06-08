@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Missile_H__
-#define __oe_models_Missile_H__
+#ifndef __mxrp_models_Missile_H__
+#define __mxrp_models_Missile_H__
 
 #include "mxrp/models/player/AbstractWeapon.hpp"
 

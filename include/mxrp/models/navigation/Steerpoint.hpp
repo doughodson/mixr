@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Steerpoint_H__
-#define __oe_models_Steerpoint_H__
+#ifndef __mxrp_models_Steerpoint_H__
+#define __mxrp_models_Steerpoint_H__
 
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/osg/Vec3d"

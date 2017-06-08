@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_platform_api_msvc_H__
-#define __oe_base_util_platform_api_msvc_H__
+#ifndef __mxrp_base_util_platform_api_msvc_H__
+#define __mxrp_base_util_platform_api_msvc_H__
 
 //------------------------------------------------------------------------------
 // Visual Studio

@@ -17,8 +17,8 @@
  *
  *****************************************************************************/
 
-#ifndef __oe_otw_doFlightModelData_H__
-#define __oe_otw_doFlightModelDataC_H__
+#ifndef __mxrp_otw_doFlightModelData_H__
+#define __mxrp_otw_doFlightModelDataC_H__
 
 #include "geoTypes.hpp"
 

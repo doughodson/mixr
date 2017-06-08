@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_Id_Tokens_H__
-#define __oe_simulation_Id_Tokens_H__
+#ifndef __mxrp_simulation_Id_Tokens_H__
+#define __mxrp_simulation_Id_Tokens_H__
 
 //------------------------------------------------------------------------------
 // Recorder Event ID (REID) Tokens

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_angle_H__
-#define __oe_base_util_angle_H__
+#ifndef __mxrp_base_util_angle_H__
+#define __mxrp_base_util_angle_H__
 
 #include "mxrp/base/util/constants.hpp"
 

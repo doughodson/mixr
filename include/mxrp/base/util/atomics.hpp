@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_atomics_H__
-#define __oe_base_util_atomics_H__
+#ifndef __mxrp_base_util_atomics_H__
+#define __mxrp_base_util_atomics_H__
 
 #if defined(WIN32)
   #if defined(__MINGW32__)

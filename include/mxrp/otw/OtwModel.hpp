@@ -1,6 +1,6 @@
 
-#ifndef __oe_otw_OtwModel_H__
-#define __oe_otw_OtwModel_H__
+#ifndef __mxrp_otw_OtwModel_H__
+#define __mxrp_otw_OtwModel_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/safe_ptr.hpp"

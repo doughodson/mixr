@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_NetInput_H__
-#define __oe_recorder_NetInput_H__
+#ifndef __mxrp_recorder_NetInput_H__
+#define __mxrp_recorder_NetInput_H__
 
 #include "mxrp/recorder/InputHandler.hpp"
 

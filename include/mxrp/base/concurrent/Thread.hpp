@@ -15,8 +15,8 @@
 //
 //    ### All of these classes are abstract. ###
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Thread_H__
-#define __oe_base_Thread_H__
+#ifndef __mxrp_base_Thread_H__
+#define __mxrp_base_Thread_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/util/platform_api.hpp"

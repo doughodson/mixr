@@ -1,6 +1,6 @@
 
-#ifndef __oe_otw_CigiCl_H__
-#define __oe_otw_CigiCl_H__
+#ifndef __mxrp_otw_CigiCl_H__
+#define __mxrp_otw_CigiCl_H__
 
 #include "mxrp/base/Component.hpp"
 

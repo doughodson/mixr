@@ -23,8 +23,8 @@
 //    7.11.8   ActionResponsePDU_R
 //
 //--------------------------------------------------------------
-#ifndef __oe_interop_dis_Pdu_H__
-#define __oe_interop_dis_Pdu_H__
+#ifndef __mxrp_interop_dis_Pdu_H__
+#define __mxrp_interop_dis_Pdu_H__
 
 #include "mxrp/interop/dis/structs.hpp"
 #include "mxrp/interop/dis/enums.hpp"

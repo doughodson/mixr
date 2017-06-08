@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_StationTcThread_H__
-#define __oe_simulation_StationTcThread_H__
+#ifndef __mxrp_simulation_StationTcThread_H__
+#define __mxrp_simulation_StationTcThread_H__
 
 #include "mxrp/base/concurrent/PeriodicTask.hpp"
 

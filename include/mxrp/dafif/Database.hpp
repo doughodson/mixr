@@ -1,6 +1,6 @@
 
-#ifndef __oe_dafif_Database_H__
-#define __oe_dafif_Database_H__
+#ifndef __mxrp_dafif_Database_H__
+#define __mxrp_dafif_Database_H__
 
 #include "mxrp/base/Object.hpp"
 #include "dafifc.hpp"

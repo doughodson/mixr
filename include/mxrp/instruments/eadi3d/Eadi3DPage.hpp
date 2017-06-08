@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_Eadi3DPage_H__
-#define __oe_instruments_Eadi3DPage_H__
+#ifndef __mxrp_instruments_Eadi3DPage_H__
+#define __mxrp_instruments_Eadi3DPage_H__
 
 #include "mxrp/graphics/Page.hpp"
 #include "mxrp/instruments/eadi3d/Eadi3DObjects.hpp"

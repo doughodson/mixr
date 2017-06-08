@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Readouts_H__
-#define __oe_graphics_Readouts_H__
+#ifndef __mxrp_graphics_Readouts_H__
+#define __mxrp_graphics_Readouts_H__
 
 // fields
 #include "./readouts/AsciiText.hpp"

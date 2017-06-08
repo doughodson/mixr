@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Bullseye_H__
-#define __oe_models_Bullseye_H__
+#ifndef __mxrp_models_Bullseye_H__
+#define __mxrp_models_Bullseye_H__
 
 #include "mxrp/models/navigation/Steerpoint.hpp"
 

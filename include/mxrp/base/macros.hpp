@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_macros__
-#define __oe_base_macros__
+#ifndef __mxrp_base_macros__
+#define __mxrp_base_macros__
 
 //------------------------------------------------------------------------------
 // Object class macros:

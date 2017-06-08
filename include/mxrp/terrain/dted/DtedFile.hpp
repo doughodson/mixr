@@ -1,6 +1,6 @@
 
-#ifndef __oe_terrain_DtedFile_H__
-#define __oe_terrain_DtedFile_H__
+#ifndef __mxrp_terrain_DtedFile_H__
+#define __mxrp_terrain_DtedFile_H__
 
 #include "../DataFile.hpp"
 

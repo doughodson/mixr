@@ -2,8 +2,8 @@
 // Classes:  Angle, Degrees, Radians, Semicircles
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_Angles_H__
-#define __oe_base_Angles_H__
+#ifndef __mxrp_base_Angles_H__
+#define __mxrp_base_Angles_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/util/constants.hpp"

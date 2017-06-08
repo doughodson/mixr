@@ -1,6 +1,6 @@
 
-#ifndef __oe_terrain_SrtmHgtFile_H__
-#define __oe_terrain_SrtmHgtFile_H__
+#ifndef __mxrp_terrain_SrtmHgtFile_H__
+#define __mxrp_terrain_SrtmHgtFile_H__
 
 #include "mxrp/terrain/DataFile.hpp"
 
@@ -17,7 +17,7 @@ namespace terrain {
 //
 // Adapted from terrain::DtedFile
 //
-// OpenEaagles version by Christopher Buell
+// MXRP version by Christopher Buell
 //
 // obtain SRTM data files from ftp://e0srp01u.ecs.nasa.gov/srtm/version2
 //

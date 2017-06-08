@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_UdpBroadcastHandler_H__
-#define __oe_base_UdpBroadcastHandler_H__
+#ifndef __mxrp_base_UdpBroadcastHandler_H__
+#define __mxrp_base_UdpBroadcastHandler_H__
 
 #include "mxrp/base/network/PosixHandler.hpp"
 

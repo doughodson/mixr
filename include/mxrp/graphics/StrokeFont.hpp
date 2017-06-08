@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_StrokeFont_H__
-#define __oe_graphics_StrokeFont_H__
+#ifndef __mxrp_graphics_StrokeFont_H__
+#define __mxrp_graphics_StrokeFont_H__
 
 #include "Font.hpp"
 

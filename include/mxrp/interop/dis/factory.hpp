@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_dis_factory_H__
-#define __oe_interop_dis_factory_H__
+#ifndef __mxrp_interop_dis_factory_H__
+#define __mxrp_interop_dis_factory_H__
 
 #include <string>
 

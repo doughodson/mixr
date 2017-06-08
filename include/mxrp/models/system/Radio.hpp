@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Radio_H__
-#define __oe_models_Radio_H__
+#ifndef __mxrp_models_Radio_H__
+#define __mxrp_models_Radio_H__
 
 #include "mxrp/models/system/RfSystem.hpp"
 

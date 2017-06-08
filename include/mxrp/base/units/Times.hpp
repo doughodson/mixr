@@ -10,8 +10,8 @@
 //              Object -> Number -> Time -> Days
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_Times_H__
-#define __oe_base_Times_H__
+#ifndef __mxrp_base_Times_H__
+#define __mxrp_base_Times_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/util/math_utils.hpp"

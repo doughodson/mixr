@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_TabPrinter_H__
-#define __oe_recorder_TabPrinter_H__
+#ifndef __mxrp_recorder_TabPrinter_H__
+#define __mxrp_recorder_TabPrinter_H__
 
 #include "mxrp/recorder/OutputHandler.hpp"
 #include "mxrp/recorder/PrintHandler.hpp"

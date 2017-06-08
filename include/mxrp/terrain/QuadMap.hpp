@@ -1,6 +1,6 @@
 
-#ifndef __oe_terrain_QuadMap_H__
-#define __oe_terrain_QuadMap_H__
+#ifndef __mxrp_terrain_QuadMap_H__
+#define __mxrp_terrain_QuadMap_H__
 
 #include "mxrp/terrain/Terrain.hpp"
 #include <array>

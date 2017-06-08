@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Object_H__
-#define __oe_base_Object_H__
+#ifndef __mxrp_base_Object_H__
+#define __mxrp_base_Object_H__
 
 #include "mxrp/base/Referenced.hpp"
 

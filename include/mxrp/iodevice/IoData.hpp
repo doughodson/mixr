@@ -1,6 +1,6 @@
 
-#ifndef __oe_iodevice_IoData_H__
-#define __oe_iodevice_IoData_H__
+#ifndef __mxrp_iodevice_IoData_H__
+#define __mxrp_iodevice_IoData_H__
 
 #include "mxrp/base/io/IoData.hpp"
 

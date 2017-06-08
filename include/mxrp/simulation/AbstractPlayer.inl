@@ -2,8 +2,8 @@
 // Class: AbstractPlayer
 // Description: inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_models_AbstractPlayer_Inline__
-#define __oe_models_AbstractPlayer_Inline__
+#ifndef __mxrp_models_AbstractPlayer_Inline__
+#define __mxrp_models_AbstractPlayer_Inline__
 
 // True if player's ID matches
 inline bool AbstractPlayer::isID(const unsigned short tst) const

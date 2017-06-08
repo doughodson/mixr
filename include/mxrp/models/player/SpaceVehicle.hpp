@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_SpaceVehicle_H__
-#define __oe_models_SpaceVehicle_H__
+#ifndef __mxrp_models_SpaceVehicle_H__
+#define __mxrp_models_SpaceVehicle_H__
 
 #include "mxrp/models/player/Player.hpp"
 

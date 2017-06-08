@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_dis_Nib_H__
-#define __oe_interop_dis_Nib_H__
+#ifndef __mxrp_interop_dis_Nib_H__
+#define __mxrp_interop_dis_Nib_H__
 
 #include "mxrp/interop/common/Nib.hpp"
 #include "mxrp/interop/dis/NetIO.hpp"

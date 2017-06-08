@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_MapPage_H__
-#define __oe_graphics_MapPage_H__
+#ifndef __mxrp_graphics_MapPage_H__
+#define __mxrp_graphics_MapPage_H__
 
 #include "mxrp/graphics/MfdPage.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_dafif_Record_H__
-#define __oe_dafif_Record_H__
+#ifndef __mxrp_dafif_Record_H__
+#define __mxrp_dafif_Record_H__
 
 #include "mxrp/base/String.hpp"
 #include "dafifc.hpp"

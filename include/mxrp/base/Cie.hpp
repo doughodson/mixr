@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Cie_H__
-#define __oe_base_Cie_H__
+#ifndef __mxrp_base_Cie_H__
+#define __mxrp_base_Cie_H__
 
 #include "mxrp/base/Color.hpp"
 #include "mxrp/base/safe_ptr.hpp"

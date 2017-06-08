@@ -1,6 +1,6 @@
 
-#ifndef __oe_linearsystem_Limit_H__
-#define __oe_linearsystem_Limit_H__
+#ifndef __mxrp_linearsystem_Limit_H__
+#define __mxrp_linearsystem_Limit_H__
 
 #include "mxrp/linearsystem/LimitFunc.hpp"
 

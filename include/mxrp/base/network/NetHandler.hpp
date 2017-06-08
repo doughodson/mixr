@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_NetHandler_H__
-#define __oe_base_NetHandler_H__
+#ifndef __mxrp_base_NetHandler_H__
+#define __mxrp_base_NetHandler_H__
 
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/util/platform_api.hpp"

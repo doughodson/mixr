@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // DAFIF Support Utilities and Data 
 //------------------------------------------------------------------------------
-#ifndef __oe_dafif_dafifc_H__
-#define __oe_dafif_dafifc_H__
+#ifndef __mxrp_dafif_dafifc_H__
+#define __mxrp_dafif_dafifc_H__
 
 namespace oe {
 namespace dafif {

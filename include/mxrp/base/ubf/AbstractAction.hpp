@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_ubf_AbstractAction_H__
-#define __oe_base_ubf_AbstractAction_H__
+#ifndef __mxrp_base_ubf_AbstractAction_H__
+#define __mxrp_base_ubf_AbstractAction_H__
 
 #include "mxrp/base/Object.hpp"
 

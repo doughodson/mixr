@@ -1,6 +1,6 @@
 
-#ifndef __oe_graphics_Cursor_H__
-#define __oe_graphics_Cursor_H__
+#ifndef __mxrp_graphics_Cursor_H__
+#define __mxrp_graphics_Cursor_H__
 
 #include "mxrp/graphics/Field.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_SolenoidSwitch_H__
-#define __oe_instruments_SolenoidSwitch_H__
+#ifndef __mxrp_instruments_SolenoidSwitch_H__
+#define __mxrp_instruments_SolenoidSwitch_H__
 
 #include "mxrp/graphics/Graphic.hpp"
 #include "mxrp/instruments/buttons/Button.hpp"

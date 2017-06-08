@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_NetOutput_H__
-#define __oe_recorder_NetOutput_H__
+#ifndef __mxrp_recorder_NetOutput_H__
+#define __mxrp_recorder_NetOutput_H__
 
 #include "mxrp/recorder/OutputHandler.hpp"
 

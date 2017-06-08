@@ -1,6 +1,6 @@
 
-#ifndef __oe_recorder_DataRecordHandle_H__
-#define __oe_recorder_DataRecordHandle_H__
+#ifndef __mxrp_recorder_DataRecordHandle_H__
+#define __mxrp_recorder_DataRecordHandle_H__
 
 #include "mxrp/base/Object.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Yiq_H__
-#define __oe_base_Yiq_H__
+#ifndef __mxrp_base_Yiq_H__
+#define __mxrp_base_Yiq_H__
 
 #include "mxrp/base/Color.hpp"
 

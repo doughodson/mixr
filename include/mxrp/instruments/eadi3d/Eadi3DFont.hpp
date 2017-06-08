@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_Eadi3DFont_H__
-#define __oe_instruments_Eadi3DFont_H__
+#ifndef __mxrp_instruments_Eadi3DFont_H__
+#define __mxrp_instruments_Eadi3DFont_H__
 
 #include "mxrp/graphics/Font.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Distance_H__
-#define __oe_base_Distance_H__
+#ifndef __mxrp_base_Distance_H__
+#define __mxrp_base_Distance_H__
 
 #include "mxrp/base/Number.hpp"
 #include "mxrp/base/units/distance_utils.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __oe_gui_glut_factory_H__
-#define __oe_gui_glut_factory_H__
+#ifndef __mxrp_gui_glut_factory_H__
+#define __mxrp_gui_glut_factory_H__
 
 #include <string>
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Tdb_H__
-#define __oe_models_Tdb_H__
+#ifndef __mxrp_models_Tdb_H__
+#define __mxrp_models_Tdb_H__
 
 #include "mxrp/models/system/System.hpp"
 #include "mxrp/base/osg/Vec3d"

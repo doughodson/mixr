@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Sar_H__
-#define __oe_models_Sar_H__
+#ifndef __mxrp_models_Sar_H__
+#define __mxrp_models_Sar_H__
 
 #include "mxrp/models/system/Radar.hpp"
 #include "mxrp/base/osg/Vec3d"

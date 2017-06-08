@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_navDR_utils_H__
-#define __oe_base_util_navDR_utils_H__
+#ifndef __mxrp_base_util_navDR_utils_H__
+#define __mxrp_base_util_navDR_utils_H__
 
 #include "mxrp/base/osg/Vec3d"
 #include "mxrp/base/osg/Vec4d"

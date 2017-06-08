@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_Simulation_H__
-#define __oe_simulation_Simulation_H__
+#ifndef __mxrp_simulation_Simulation_H__
+#define __mxrp_simulation_Simulation_H__
 
 #include "mxrp/base/Component.hpp"
 #include "mxrp/base/safe_queue.hpp"

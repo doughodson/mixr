@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Tables_H__
-#define __oe_base_Tables_H__
+#ifndef __mxrp_base_Tables_H__
+#define __mxrp_base_Tables_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/functors/Functions.hpp"

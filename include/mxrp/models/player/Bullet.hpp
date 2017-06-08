@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Bullet_H__
-#define __oe_models_Bullet_H__
+#ifndef __mxrp_models_Bullet_H__
+#define __mxrp_models_Bullet_H__
 
 #include "mxrp/models/player/AbstractWeapon.hpp"
 #include <array>

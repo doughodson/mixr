@@ -7,12 +7,12 @@
 //    2) Execute this command to generate protobuf files
 //
 //       Windows:
-//          protoc.exe -I%OE_ROOT%\include --cpp_out=%OE_ROOT%\include %OE_ROOT%\include\openeaagles\recorder\protobuf\DataRecord.proto
+//          protoc.exe -I%MXRP_ROOT%\include --cpp_out=%MXRP_ROOT%\include %MXRP_ROOT%\include\mxrp\recorder\protobuf\DataRecord.proto
 //
 //       Linux:
-//          protoc -I$OE_ROOT/include --cpp_out=$OE_ROOT/include $OE_ROOT/include/openeaagles/recorder/protobuf/DataRecord.proto
+//          protoc -I$MXRP_ROOT/include --cpp_out=$MXRP_ROOT/include $MXRP_ROOT/include/mxrp/recorder/protobuf/DataRecord.proto
 //
-//    3) Move the generated DataRecord.pb.cc file to $OE_ROOT/src/recorder/protobuf directory
+//    3) Move the generated DataRecord.pb.cc file to $MXRP_ROOT/src/recorder/protobuf directory
 //
 //    -- The DataRecord.pb.h and DataRecord.pb.cc files were generated using 'protoc' version 2.6.1
 //
@@ -29,7 +29,7 @@ package oe.recorder.pb;
 //    Use the recorder event 'id' and the hasXxxx() functions to determine the
 //    data that is available.
 //
-//    See "openeaagles/simulation/dataRecorderTokens.h" for the recorder event IDs.
+//    See "mxrp/simulation/dataRecorderTokens.hpp" for the recorder event IDs.
 //
 //    Applications specific data recorders and readers will use the extensions
 //    to add their own unique data messages, and add their own recorder event
@@ -39,7 +39,7 @@ package oe.recorder.pb;
 message DataRecord {
    required Time time   = 1;  // Sample time
 
-   required uint32 id   = 2;  // Recorder Event ID (see "openeaagles/simulation/dataRecorderTokens.h")
+   required uint32 id   = 2;  // Recorder Event ID (see "mxrp/simulation/dataRecorderTokens.hpp")
 
    // Recorder and simulation messages
    optional FileIdMsg                  file_id_msg                   = 11;

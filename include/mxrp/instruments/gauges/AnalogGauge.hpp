@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_AnalogGuage_H__
-#define __oe_instruments_AnalogGuage_H__
+#ifndef __mxrp_instruments_AnalogGuage_H__
+#define __mxrp_instruments_AnalogGuage_H__
 
 #include "mxrp/instruments/Instrument.hpp"
 

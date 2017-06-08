@@ -1,6 +1,6 @@
 
-#ifndef __oe_instruments_IrisGLCompat_H__
-#define __oe_instruments_IrisGLCompat_H__
+#ifndef __mxrp_instruments_IrisGLCompat_H__
+#define __mxrp_instruments_IrisGLCompat_H__
 
 #include "mxrp/base/Object.hpp"
 

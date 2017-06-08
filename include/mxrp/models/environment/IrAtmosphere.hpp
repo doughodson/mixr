@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_IrAtmosphere_H__
-#define __oe_models_IrAtmosphere_H__
+#ifndef __mxrp_models_IrAtmosphere_H__
+#define __mxrp_models_IrAtmosphere_H__
 
 #include "mxrp/models/environment/AbstractAtmosphere.hpp"
 

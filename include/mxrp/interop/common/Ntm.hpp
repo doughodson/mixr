@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_common_Ntm_H__
-#define __oe_interop_common_Ntm_H__
+#ifndef __mxrp_interop_common_Ntm_H__
+#define __mxrp_interop_common_Ntm_H__
 
 #include "mxrp/interop/common/NetIO.hpp"
 

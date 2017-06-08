@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Color_H__
-#define __oe_base_Color_H__
+#ifndef __mxrp_base_Color_H__
+#define __mxrp_base_Color_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/osg/Vec4d"

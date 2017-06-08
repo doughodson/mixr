@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_base_osg_BoundingBox_H__
-#define __oe_base_osg_BoundingBox_H__
+#ifndef __mxrp_base_osg_BoundingBox_H__
+#define __mxrp_base_osg_BoundingBox_H__
 
 #include "mxrp/base/osg/Vec3"
 #include "mxrp/base/osg/Vec3d"

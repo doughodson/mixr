@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_EarthModel_H__
-#define __oe_base_EarthModel_H__
+#ifndef __mxrp_base_EarthModel_H__
+#define __mxrp_base_EarthModel_H__
 
 #include "mxrp/base/Object.hpp"
 

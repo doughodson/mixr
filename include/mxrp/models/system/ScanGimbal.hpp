@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_ScanGimbal_H__
-#define __oe_models_ScanGimbal_H__
+#ifndef __mxrp_models_ScanGimbal_H__
+#define __mxrp_models_ScanGimbal_H__
 
 #include "mxrp/models/system/Gimbal.hpp"
 #include "mxrp/base/units/angle_utils.hpp"

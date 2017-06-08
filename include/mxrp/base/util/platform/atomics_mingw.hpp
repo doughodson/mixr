@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_atomics_mingw_H__
-#define __oe_base_util_atomics_mingw_H__
+#ifndef __mxrp_base_util_atomics_mingw_H__
+#define __mxrp_base_util_atomics_mingw_H__
 
 // ---
 // Simple semaphore spinlock and unlock functions: 

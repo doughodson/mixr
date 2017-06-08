@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Rgba_H__
-#define __oe_base_Rgba_H__
+#ifndef __mxrp_base_Rgba_H__
+#define __mxrp_base_Rgba_H__
 
 #include "mxrp/base/Rgb.hpp"
 

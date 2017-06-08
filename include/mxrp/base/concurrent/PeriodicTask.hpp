@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_PeriodicTask_H__
-#define __oe_base_PeriodicTask_H__
+#ifndef __mxrp_base_PeriodicTask_H__
+#define __mxrp_base_PeriodicTask_H__
 
 #include "mxrp/base/concurrent/Thread.hpp"
 #include "mxrp/base/Statistic.hpp"

@@ -7,8 +7,8 @@
 // Important: only define C pre-processor directives in this file
 //
 // =============================================================================
-#ifndef __oe_config_H__
-#define __oe_config_H__
+#ifndef __mxrp_config_H__
+#define __mxrp_config_H__
 
 // OpenEaagles release version number
 #ifndef OE_VERSION

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_time_H__
-#define __oe_base_util_time_H__
+#ifndef __mxrp_base_util_time_H__
+#define __mxrp_base_util_time_H__
 
 #include "mxrp/base/util/math_utils.hpp"
 

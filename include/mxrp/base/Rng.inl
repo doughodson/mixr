@@ -2,8 +2,8 @@
 // Class: Rng
 // Description: inline functions
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Rng_Inline__
-#define __oe_base_Rng_Inline__
+#ifndef __mxrp_base_Rng_Inline__
+#define __mxrp_base_Rng_Inline__
 
 //-----------------------------------------------------------------
 // drawClosed() -- generates double floating point numbers in the 

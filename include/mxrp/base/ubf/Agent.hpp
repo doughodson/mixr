@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_ubf_Agent_H__
-#define __oe_base_ubf_Agent_H__
+#ifndef __mxrp_base_ubf_Agent_H__
+#define __mxrp_base_ubf_Agent_H__
 
 #include "mxrp/base/Component.hpp"
 

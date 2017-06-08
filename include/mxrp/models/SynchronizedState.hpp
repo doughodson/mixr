@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_SynchronizedState_H__
-#define __oe_models_SynchronizedState_H__
+#ifndef __mxrp_models_SynchronizedState_H__
+#define __mxrp_models_SynchronizedState_H__
 
 #include "mxrp/base/Object.hpp"
 #include "mxrp/base/osg/Vec3d"

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_power_H__
-#define __oe_base_util_power_H__
+#ifndef __mxrp_base_util_power_H__
+#define __mxrp_base_util_power_H__
 
 namespace oe {
 namespace base {

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_Operators_H__
-#define __oe_base_Operators_H__
+#ifndef __mxrp_base_Operators_H__
+#define __mxrp_base_Operators_H__
 
 #include "mxrp/base/Number.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Aam_H__
-#define __oe_models_Aam_H__
+#ifndef __mxrp_models_Aam_H__
+#define __mxrp_models_Aam_H__
 
 #include "mxrp/models/player/Missile.hpp"
 
