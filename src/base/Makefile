@@ -11,7 +11,7 @@
 # search for "FlexLexer.h" in EdlScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "openeaagles/base/util/FlexLexer.h"
+#   #include "mxrp/base/util/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs

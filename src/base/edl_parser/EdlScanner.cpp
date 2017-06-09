@@ -2338,7 +2338,7 @@ YY_RULE_SETUP
            //-----------------------------------------------------------------------------
            // decode hex into integer: 0Xnnn
            //-----------------------------------------------------------------------------
-           bool nflg = false;
+           bool nflg {};
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
            if (std::strlen(cbuf) == 10) {
@@ -2364,7 +2364,7 @@ YY_RULE_SETUP
            //-----------------------------------------------------------------------------
            // decode octal into integer: 0nnn
            //-----------------------------------------------------------------------------
-           bool nflg = false;
+           bool nflg {};
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
            if (std::strlen(cbuf) == 12) {
