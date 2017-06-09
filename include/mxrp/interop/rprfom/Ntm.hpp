@@ -13,7 +13,7 @@ namespace rprfom {
 // Class: Ntm
 // Description: HLA Network Type Mapper
 //
-//    This class, which is derived from the simulation::Ntm, maps OpenEaagles
+//    This class, which is derived from the simulation::Ntm, maps MXRP
 //    player types to/from RPR FOM entity type codes.
 //
 // Factory name: HlaNtm

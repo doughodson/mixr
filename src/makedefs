@@ -13,7 +13,7 @@
 # ---
 # MXRP 3rd party root directory
 #   Use the environment variable MXRP_3RD_PARTY_ROOT to locate the include and
-#   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
+#   lib directories for the MXRP 3rd party software(e.g., cigi, JSBSim)
 #   -- No default
 #   -- see $(MXRP_ROOT)/setenv
 # ---
