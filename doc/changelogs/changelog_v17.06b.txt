@@ -25,7 +25,7 @@ Rationale for name change:
 -- This project provides lots of support for building highly interactive (real-time)
    simulation applications, often with graphics and interoperability interfaces.
    Given it is not oriented at 'gaming,' meaning, the creation of applications for
-   entertainment, but oriented at more serious concerns, we felt it approprate
+   entertainment, but oriented at more serious concerns, we felt it appropriate
    to align project name with the domain for which it offers strong support
    (i.e., 'mixed reality').
 
