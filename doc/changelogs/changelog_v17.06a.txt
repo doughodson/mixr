@@ -1,0 +1,15 @@
+================================================================================
+Changes since v17.04
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes/improvements
+
+No major structural changes to the framework -- all changes within
+this release center on improving documentation and code clean up.
+
+The 'a' version indicates that a fix to the mainCockpit example
+program was done concerning the decoding of I/O switch states being read from
+a controller - specifically, as the code was written, a 2 variables
+were uninitialized.
+

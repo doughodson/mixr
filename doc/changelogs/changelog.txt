@@ -1,11 +1,8 @@
 ================================================================================
-Changes since v17.04
+Changes since v17.06b
 ================================================================================
 
 --------------------------------------------------------------------------------
 General framework-wide changes/improvements
-
-No major structural changes to the framework -- all changes within this release
-center on improving documentation and code clean up.
 
 

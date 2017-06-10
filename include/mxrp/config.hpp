@@ -12,7 +12,7 @@
 
 // MXRP release version number
 #ifndef MXRP_VERSION
-#define MXRP_VERSION                         170X
+#define MXRP_VERSION                         1706
 #endif
 
 // Max number of interval timers (see Timers.hpp)
