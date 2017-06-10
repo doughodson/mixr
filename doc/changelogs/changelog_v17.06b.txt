@@ -23,8 +23,8 @@ adjustment to changes can mostly be made with simple search and replace commands
 Rationale for name change:
 -- From OpenEaagles to Mixed Reality Simulation Platform
 -- This project provides lots of support for building highly interactive (real-time)
-   simulation applications, often with graphics and interoperability interfaces.
-   Given it is not oriented at 'gaming,' meaning, the creation of applications for
+   simulation applications, that often include graphics and interoperability interfaces.
+   Given it is not oriented at gaming, meaning, the creation of applications for
    entertainment, but oriented at more serious concerns, we felt it appropriate
    to align project name with the domain for which it offers strong support
    (i.e., mixed reality applications).
