@@ -137,7 +137,8 @@ clean:
 	-rm -f distributions/*.o
 	-rm -f edl_parser/*.o
 	-rm -f functors/*.o
-	-rm -f nethandlers/*.o
+	-rm -f io/*.o
+	-rm -f network/*.o
 	-rm -f osg/*.o
 	-rm -f ubf/*.o
 	-rm -f units/*.o
