@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_interop.a
+LIB = $(MIXR_LIB_DIR)/libmixr_interop.a
 
 OBJS =  \
 	NetIO.o \

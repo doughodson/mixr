@@ -1,8 +1,8 @@
 
-#include "mxrp/base/units/FlowRate.hpp"
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/units/FlowRate.hpp"
+#include "mixr/base/SlotTable.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(FlowRate, "FlowRate")

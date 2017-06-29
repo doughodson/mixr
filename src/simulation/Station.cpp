@@ -1,28 +1,28 @@
 
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/AbstractPlayer.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
-#include "mxrp/simulation/AbstractNetIO.hpp"
-#include "mxrp/simulation/AbstractOtw.hpp"
-#include "mxrp/simulation/Simulation.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractNetIO.hpp"
+#include "mixr/simulation/AbstractOtw.hpp"
+#include "mixr/simulation/Simulation.hpp"
 
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/io/IoHandler.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Timers.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/io/IoHandler.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Timers.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/simulation/StationTcThread.hpp"
-#include "mxrp/simulation/StationBgThread.hpp"
-#include "mxrp/simulation/StationNetThread.hpp"
+#include "mixr/simulation/StationTcThread.hpp"
+#include "mixr/simulation/StationBgThread.hpp"
+#include "mixr/simulation/StationNetThread.hpp"
 
 #include <ctime>
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(Station, "Station")

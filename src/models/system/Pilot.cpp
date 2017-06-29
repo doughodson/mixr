@@ -1,8 +1,8 @@
 
-#include "mxrp/models/system/Pilot.hpp"
+#include "mixr/models/system/Pilot.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Pilot, "Pilot")

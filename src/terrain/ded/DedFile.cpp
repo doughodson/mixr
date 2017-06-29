@@ -1,7 +1,7 @@
 
-#include "mxrp/terrain/ded/DedFile.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/terrain/ded/DedFile.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <fstream>
 #include <string>
@@ -10,7 +10,7 @@
 #include <cstring>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 IMPLEMENT_SUBCLASS(DedFile, "DedFile")

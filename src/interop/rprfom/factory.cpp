@@ -1,10 +1,10 @@
 
-#include "mxrp/interop/rprfom/factory.hpp"
-#include "mxrp/interop/rprfom/NetIO.hpp"
+#include "mixr/interop/rprfom/factory.hpp"
+#include "mixr/interop/rprfom/NetIO.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace rprfom {
 
 base::Object* formFunc(const std::string& name)

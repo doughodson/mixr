@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Rgb.hpp"
-#include "mxrp/base/Float.hpp"
+#include "mixr/base/Rgb.hpp"
+#include "mixr/base/Float.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Rgb, "rgb")

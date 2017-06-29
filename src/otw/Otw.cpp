@@ -1,26 +1,26 @@
 
-#include "mxrp/otw/Otw.hpp"
+#include "mixr/otw/Otw.hpp"
 
-#include "mxrp/otw/Otm.hpp"
-#include "mxrp/otw/OtwModel.hpp"
+#include "mixr/otw/Otm.hpp"
+#include "mixr/otw/OtwModel.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
 
-#include "mxrp/simulation/AbstractNib.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cstring>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Otw, "AbstractOtw")

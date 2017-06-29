@@ -1,21 +1,21 @@
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/EarthModel.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/EarthModel.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 // environment models
-#include "mxrp/models/environment/AbstractAtmosphere.hpp"
-#include "mxrp/terrain/Terrain.hpp"
+#include "mixr/models/environment/AbstractAtmosphere.hpp"
+#include "mixr/terrain/Terrain.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(WorldModel, "WorldModel")

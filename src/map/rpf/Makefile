@@ -1,7 +1,7 @@
 
 include ../../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_map_rpf.a
+LIB = $(MIXR_LIB_DIR)/libmixr_map_rpf.a
 
 OBJS = \
 	CadrgClut.o \

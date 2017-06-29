@@ -1,8 +1,8 @@
 
-#include "mxrp/linearsystem/DiffEquation.hpp"
+#include "mixr/linearsystem/DiffEquation.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation, "DiffEquation")

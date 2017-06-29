@@ -1,7 +1,7 @@
 
-#include "mxrp/models/player/Aam.hpp"
+#include "mixr/models/player/Aam.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Aam, "AamMissile")

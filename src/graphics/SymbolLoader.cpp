@@ -1,19 +1,19 @@
 
-#include "mxrp/graphics/SymbolLoader.hpp"
+#include "mixr/graphics/SymbolLoader.hpp"
 
-#include "mxrp/graphics/Readouts.hpp"
-#include "mxrp/graphics/Polygon.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/graphics/Readouts.hpp"
+#include "mixr/graphics/Polygon.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")

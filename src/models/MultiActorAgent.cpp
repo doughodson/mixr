@@ -1,20 +1,20 @@
 
-#include "mxrp/models/MultiActorAgent.hpp"
+#include "mixr/models/MultiActorAgent.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/ubf/AbstractAction.hpp"
-#include "mxrp/base/ubf/AbstractBehavior.hpp"
-#include "mxrp/base/ubf/AbstractState.hpp"
+#include "mixr/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/AbstractBehavior.hpp"
+#include "mixr/base/ubf/AbstractState.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(MultiActorAgent, "MultiActorAgent")

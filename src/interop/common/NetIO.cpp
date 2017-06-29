@@ -1,40 +1,40 @@
 
-#include "mxrp/interop/common/NetIO.hpp"
-#include "mxrp/interop/common/Nib.hpp"
-#include "mxrp/interop/common/Ntm.hpp"
+#include "mixr/interop/common/NetIO.hpp"
+#include "mixr/interop/common/Nib.hpp"
+#include "mixr/interop/common/Ntm.hpp"
 
-#include "mxrp/models/system/Guns.hpp"
+#include "mixr/models/system/Guns.hpp"
 
 // players
-#include "mxrp/models/player/Aam.hpp"
-#include "mxrp/models/player/Agm.hpp"
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/Bomb.hpp"
-#include "mxrp/models/player/Effects.hpp"
-#include "mxrp/models/player/GroundVehicle.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/player/Sam.hpp"
-#include "mxrp/models/player/SamVehicles.hpp"
-#include "mxrp/models/player/Ships.hpp"
-#include "mxrp/models/Signatures.hpp"
+#include "mixr/models/player/Aam.hpp"
+#include "mixr/models/player/Agm.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/Bomb.hpp"
+#include "mixr/models/player/Effects.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/Sam.hpp"
+#include "mixr/models/player/SamVehicles.hpp"
+#include "mixr/models/player/Ships.hpp"
+#include "mixr/models/Signatures.hpp"
 
-#include "mxrp/simulation/Simulation.hpp"
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cmath>
@@ -43,7 +43,7 @@
 #include <arpa/inet.h>
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")

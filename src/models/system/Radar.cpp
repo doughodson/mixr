@@ -1,18 +1,18 @@
 
-#include "mxrp/models/system/Radar.hpp"
+#include "mixr/models/system/Radar.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Radar, "Radar")

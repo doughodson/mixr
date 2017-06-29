@@ -1,10 +1,10 @@
 
-#include "mxrp/models/player/Buildings.hpp"
+#include "mixr/models/player/Buildings.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Building, "Building")

@@ -1,9 +1,9 @@
 
-#include "mxrp/base/MetaObject.hpp"
+#include "mixr/base/MetaObject.hpp"
 
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/SlotTable.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 MetaObject::MetaObject(

@@ -1,16 +1,16 @@
 
-#include "mxrp/terrain/factory.hpp"
+#include "mixr/terrain/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/terrain/QuadMap.hpp"
-#include "mxrp/terrain/ded/DedFile.hpp"
-#include "mxrp/terrain/dted/DtedFile.hpp"
-#include "mxrp/terrain/srtm/SrtmHgtFile.hpp"
+#include "mixr/terrain/QuadMap.hpp"
+#include "mixr/terrain/ded/DedFile.hpp"
+#include "mixr/terrain/dted/DtedFile.hpp"
+#include "mixr/terrain/srtm/SrtmHgtFile.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 base::Object* factory(const std::string& name)

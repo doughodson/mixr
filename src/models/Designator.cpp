@@ -1,8 +1,8 @@
 
-#include "mxrp/models/Designator.hpp"
+#include "mixr/models/Designator.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Designator, "Designator")

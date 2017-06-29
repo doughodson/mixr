@@ -1,10 +1,10 @@
 
-#include "mxrp/base/units/LinearVelocity.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/units/LinearVelocity.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/SlotTable.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 const double LinearVelocity::FPS2KTSCC = 0.59248384864341771016513018598233;

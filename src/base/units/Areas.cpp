@@ -3,11 +3,11 @@
 // DecibelMeters, Feet
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "mxrp/base/units/Areas.hpp"
+#include "mixr/base/units/Areas.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

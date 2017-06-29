@@ -1,11 +1,11 @@
 
-#include "mxrp/graphics/readouts/Rotary.hpp"
+#include "mixr/graphics/readouts/Rotary.hpp"
 
-#include "mxrp/graphics/Graphic.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/graphics/Graphic.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Pair.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary, "Rotary")

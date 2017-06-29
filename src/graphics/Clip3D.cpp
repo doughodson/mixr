@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/Clip3D.hpp"
+#include "mixr/graphics/Clip3D.hpp"
 
 #include <limits>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Clip3D, "Clip3D")

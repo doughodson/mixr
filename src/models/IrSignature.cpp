@@ -1,18 +1,18 @@
 
-#include "mxrp/models/IrSignature.hpp"
+#include "mixr/models/IrSignature.hpp"
 
-#include "mxrp/models/environment/IrAtmosphere.hpp"
+#include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mxrp/models/IrShapes.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
-#include "mxrp/models/system/IrSensor.hpp"
+#include "mixr/models/IrShapes.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
+#include "mixr/models/system/IrSensor.hpp"
 
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Areas.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Areas.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSignature, "IrSignature")
@@ -138,7 +138,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(mxrp::base::Number* const num)
+bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -156,7 +156,7 @@ bool IrSignature::setSlotEmissivity(mxrp::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(mxrp::base::Number* const num)
+bool IrSignature::setSlotEffectiveArea(mixr::base::Number* const num)
 {
    bool ok = false;
    double value = 0.0;

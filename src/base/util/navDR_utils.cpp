@@ -1,14 +1,14 @@
 
-#include "mxrp/base/util/navDR_utils.hpp"
+#include "mixr/base/util/navDR_utils.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Vec4d"
-#include "mxrp/base/osg/Matrixd"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Vec4d"
+#include "mixr/base/osg/Matrixd"
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace navDR {
 

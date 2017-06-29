@@ -3,19 +3,19 @@
 // Description: Portions of class defined to support weapon fire PDUs
 //------------------------------------------------------------------------------
 
-#include "mxrp/interop/dis/NetIO.hpp"
-#include "mxrp/interop/dis/Nib.hpp"
-#include "mxrp/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/NetIO.hpp"
+#include "mixr/interop/dis/Nib.hpp"
+#include "mixr/interop/dis/pdu.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 
 namespace dis {
 

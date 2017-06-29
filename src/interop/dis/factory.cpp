@@ -1,15 +1,15 @@
 
-#include "mxrp/interop/dis/factory.hpp"
+#include "mixr/interop/dis/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/interop/dis/NetIO.hpp"
-#include "mxrp/interop/dis/Ntm.hpp"
-#include "mxrp/interop/dis/EmissionPduHandler.hpp"
+#include "mixr/interop/dis/NetIO.hpp"
+#include "mixr/interop/dis/Ntm.hpp"
+#include "mixr/interop/dis/EmissionPduHandler.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 
 namespace dis {
 

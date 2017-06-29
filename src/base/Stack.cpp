@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Stack.hpp"
+#include "mixr/base/Stack.hpp"
 #include <stdlib.h>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack, "Stack")

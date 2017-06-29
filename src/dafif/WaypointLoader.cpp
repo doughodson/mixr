@@ -1,13 +1,13 @@
 
-#include "mxrp/dafif/WaypointLoader.hpp"
-#include "mxrp/base/FileReader.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/dafif/WaypointLoader.hpp"
+#include "mixr/base/FileReader.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cstdlib>
 #include <limits>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")

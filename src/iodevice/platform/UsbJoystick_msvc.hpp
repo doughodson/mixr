@@ -1,10 +1,10 @@
 
-#ifndef __mxrp_iodevice_windows_UsbJoystick_msvc_H__
-#define __mxrp_iodevice_windows_UsbJoystick_msvc_H__
+#ifndef __mixr_iodevice_windows_UsbJoystick_msvc_H__
+#define __mixr_iodevice_windows_UsbJoystick_msvc_H__
 
-#include "mxrp/iodevice/Controller.hpp"
+#include "mixr/iodevice/Controller.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 //------------------------------------------------------------------------------

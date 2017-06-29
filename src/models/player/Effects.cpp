@@ -1,14 +1,14 @@
 
-#include "mxrp/models/player/Effects.hpp"
+#include "mixr/models/player/Effects.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/Number.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Effects,"Effects")

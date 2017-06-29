@@ -1,9 +1,9 @@
 
-#include "mxrp/map/rpf/TextureTable.hpp"
-#include "mxrp/graphics/Texture.hpp"
+#include "mixr/map/rpf/TextureTable.hpp"
+#include "mixr/graphics/Texture.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")

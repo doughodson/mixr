@@ -1,21 +1,21 @@
 
-#include "mxrp/models/system/Sar.hpp"
+#include "mixr/models/system/Sar.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/Image.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Image.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Sar, "Sar")

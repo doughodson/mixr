@@ -1,21 +1,21 @@
 
-#include "mxrp/terrain/Terrain.hpp"
+#include "mixr/terrain/Terrain.hpp"
 
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/Hsva.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/Rgba.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/Hsva.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/Rgba.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/osg/Vec2d"
-#include "mxrp/base/osg/Vec3d"
+#include "mixr/base/osg/Vec2d"
+#include "mixr/base/osg/Vec3d"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Terrain, "AbstractTerrain")

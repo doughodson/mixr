@@ -1,9 +1,9 @@
 
-#include "mxrp/models/SensorMsg.hpp"
+#include "mixr/models/SensorMsg.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SensorMsg, "SensorMsg")

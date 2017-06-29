@@ -1,10 +1,10 @@
 
-#include "mxrp/map/rpf/map_utils.hpp"
+#include "mixr/map/rpf/map_utils.hpp"
 #include <ctype.h>
 #include <cctype>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 // -----------------------------------------------------------

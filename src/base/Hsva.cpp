@@ -1,9 +1,9 @@
 
-#include "mxrp/base/Hsva.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/Hsva.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Hsva, "hsva")

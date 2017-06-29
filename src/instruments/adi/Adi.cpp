@@ -1,11 +1,11 @@
 
-#include "mxrp/instruments/adi/Adi.hpp"
+#include "mixr/instruments/adi/Adi.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Adi, "Adi")

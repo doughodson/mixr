@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Yiq.hpp"
-#include "mxrp/base/Float.hpp"
+#include "mixr/base/Yiq.hpp"
+#include "mixr/base/Float.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Yiq, "yiq")

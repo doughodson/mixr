@@ -1,8 +1,8 @@
 
-#include "mxrp/instruments/eadi3d/Eadi3DFont.hpp"
+#include "mixr/instruments/eadi3d/Eadi3DFont.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont, "Eadi3DFont")

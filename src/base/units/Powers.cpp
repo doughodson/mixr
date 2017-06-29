@@ -1,8 +1,8 @@
 
-#include "mxrp/base/units/Powers.hpp"
+#include "mixr/base/units/Powers.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

@@ -1,32 +1,32 @@
 
-#include "mxrp/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/otw/cigi/OtwCigiCl.hpp"
 
-#include "mxrp/otw/cigi/CigiCl.hpp"
-#include "mxrp/otw/cigi/OtwModelCigiCl.hpp"
+#include "mixr/otw/cigi/CigiCl.hpp"
+#include "mixr/otw/cigi/OtwModelCigiCl.hpp"
 
-#include "mxrp/otw/Otm.hpp"
+#include "mixr/otw/Otm.hpp"
 
-#include "mxrp/models/navigation/Navigation.hpp"
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/Bomb.hpp"
-#include "mxrp/models/player/Buildings.hpp"
-#include "mxrp/models/player/Effects.hpp"
-#include "mxrp/models/player/GroundVehicle.hpp"
-#include "mxrp/models/player/LifeForms.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/player/SamVehicles.hpp"
-#include "mxrp/models/player/Ships.hpp"
-#include "mxrp/models/player/SpaceVehicle.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
+#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/Bomb.hpp"
+#include "mixr/models/player/Buildings.hpp"
+#include "mixr/models/player/Effects.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/LifeForms.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/SamVehicles.hpp"
+#include "mixr/models/player/Ships.hpp"
+#include "mixr/models/player/SpaceVehicle.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/SlotTable.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"
@@ -51,7 +51,7 @@
 
 #include <cstdio>
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwCigiCl, "OtwCigiCl")

@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_models.a
+LIB = $(MIXR_LIB_DIR)/libmixr_models.a
 
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 

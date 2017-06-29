@@ -1,8 +1,8 @@
 
-#include "mxrp/linearsystem/FirstOrderTf.hpp"
+#include "mixr/linearsystem/FirstOrderTf.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(FirstOrderTf, "FirstOrderTf")

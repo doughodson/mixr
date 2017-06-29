@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Number, "Number")

@@ -1,11 +1,11 @@
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Pair, "Pair")

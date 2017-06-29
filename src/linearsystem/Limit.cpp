@@ -1,9 +1,9 @@
 
-#include "mxrp/linearsystem/Limit.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/linearsystem/Limit.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit, "Limit")

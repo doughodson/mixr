@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // Time, Seconds, MilliSeconds, Minutes, Hours, Days
 //------------------------------------------------------------------------------
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Times.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

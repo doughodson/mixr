@@ -1,22 +1,22 @@
 
-#include "mxrp/models/player/LifeForms.hpp"
+#include "mixr/models/player/LifeForms.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/player/Missile.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/Missile.hpp"
 
-#include "mxrp/models/system/StoresMgr.hpp"
-#include "mxrp/models/system/Guns.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/Guns.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/osg/Matrixd"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/osg/Matrixd"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LifeForm, "LifeForm")

@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Identifier.hpp"
+#include "mixr/base/Identifier.hpp"
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Identifier, "Identifier")

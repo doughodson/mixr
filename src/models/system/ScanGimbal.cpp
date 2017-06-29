@@ -1,18 +1,18 @@
 
-#include "mxrp/models/system/ScanGimbal.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/system/ScanGimbal.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Angles.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(ScanGimbal, "ScanGimbal")

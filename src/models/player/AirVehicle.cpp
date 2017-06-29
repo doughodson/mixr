@@ -1,11 +1,11 @@
 
-#include "mxrp/models/player/AirVehicle.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
 
-#include "mxrp/models/dynamics/AerodynamicsModel.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/models/dynamics/AerodynamicsModel.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AirVehicle, "AirVehicle")

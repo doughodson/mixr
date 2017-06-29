@@ -1,14 +1,14 @@
 
-#include "mxrp/base/concurrent/Thread.hpp"
+#include "mixr/base/concurrent/Thread.hpp"
 
-#include "mxrp/base/Component.hpp"
-#include "mxrp/base/util/math_utils.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/Component.hpp"
+#include "mixr/base/util/math_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <signal.h>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 // max number of processors we'll allow

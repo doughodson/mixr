@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/BmpTexture.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/graphics/BmpTexture.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
 
@@ -13,7 +13,7 @@
 #endif
 
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")

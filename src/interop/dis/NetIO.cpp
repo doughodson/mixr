@@ -2,32 +2,32 @@
 // Classes: dis::NetIO and dis::NtmInputNode
 //==============================================================================
 
-#include "mxrp/interop/dis/NetIO.hpp"
-#include "mxrp/interop/dis/Nib.hpp"
-#include "mxrp/interop/dis/Ntm.hpp"
-#include "mxrp/interop/dis/EmissionPduHandler.hpp"
-#include "mxrp/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/NetIO.hpp"
+#include "mixr/interop/dis/Nib.hpp"
+#include "mixr/interop/dis/Ntm.hpp"
+#include "mixr/interop/dis/EmissionPduHandler.hpp"
+#include "mixr/interop/dis/pdu.hpp"
 
-#include "mxrp/models/system/Radar.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
 
-namespace mxrp {
+namespace mixr {
 
 namespace dis {
 
@@ -497,7 +497,7 @@ bool NetIO::processCommentPDU(const CommentPDU* const)
 //------------------------------------------------------------------------------
 // processStartPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStartPDU(const mxrp::dis::StartPDU* const)
+bool NetIO::processStartPDU(const mixr::dis::StartPDU* const)
 {
     return true;
 }
@@ -505,7 +505,7 @@ bool NetIO::processStartPDU(const mxrp::dis::StartPDU* const)
 //------------------------------------------------------------------------------
 // processStopPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processStopPDU(const mxrp::dis::StopPDU* const)
+bool NetIO::processStopPDU(const mixr::dis::StopPDU* const)
 {
      return true;
 }
@@ -513,7 +513,7 @@ bool NetIO::processStopPDU(const mxrp::dis::StopPDU* const)
 //------------------------------------------------------------------------------
 // processAcknowledgePDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processAcknowledgePDU(const mxrp::dis::AcknowledgePDU* const)
+bool NetIO::processAcknowledgePDU(const mixr::dis::AcknowledgePDU* const)
 {
     return true;
 }
@@ -521,7 +521,7 @@ bool NetIO::processAcknowledgePDU(const mxrp::dis::AcknowledgePDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU(const mxrp::dis::ActionRequestPDU* const)
+bool NetIO::processActionRequestPDU(const mixr::dis::ActionRequestPDU* const)
 {
     return true;
 }
@@ -529,7 +529,7 @@ bool NetIO::processActionRequestPDU(const mxrp::dis::ActionRequestPDU* const)
 //------------------------------------------------------------------------------
 // processActionRequestPDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionRequestPDU_R(const mxrp::dis::ActionRequestPDU_R* const)
+bool NetIO::processActionRequestPDU_R(const mixr::dis::ActionRequestPDU_R* const)
 {
     return true;
 }
@@ -537,7 +537,7 @@ bool NetIO::processActionRequestPDU_R(const mxrp::dis::ActionRequestPDU_R* const
 //------------------------------------------------------------------------------
 // processActionResponsePDU_R() callback --
 //------------------------------------------------------------------------------
-bool NetIO::processActionResponsePDU_R(const mxrp::dis::ActionResponsePDU_R* const)
+bool NetIO::processActionResponsePDU_R(const mixr::dis::ActionResponsePDU_R* const)
 {
     return true;
 }

@@ -1,12 +1,12 @@
 
-#include "mxrp/otw/Otm.hpp"
+#include "mixr/otw/Otm.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(Otm, "Otm")

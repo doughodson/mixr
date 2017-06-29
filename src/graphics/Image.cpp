@@ -1,6 +1,6 @@
 
-#include "mxrp/graphics/Image.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/graphics/Image.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <fstream>
 #include <cstring>
@@ -13,7 +13,7 @@
 #include <GL/glext.h>
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------

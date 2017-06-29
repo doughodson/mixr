@@ -1,9 +1,9 @@
-#include "mxrp/graphics/FtglFonts.hpp"
-#include "mxrp/graphics/Graphic.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/graphics/FtglFonts.hpp"
+#include "mixr/graphics/Graphic.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdlib>
 
@@ -18,7 +18,7 @@
 #include <FTGL/FTGLTextureFont.h>
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------

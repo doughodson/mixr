@@ -6,7 +6,7 @@
 #include <ctime>
 #include <winsock2.h>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

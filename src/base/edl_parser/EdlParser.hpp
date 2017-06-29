@@ -65,11 +65,11 @@ union YYSTYPE
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   mxrp::base::Object*        ovalp;
-   mxrp::base::Pair*          pvalp;
-   mxrp::base::PairStream*    svalp;
-   mxrp::base::List*          lvalp;
-   mxrp::base::Number*        nvalp;
+   mixr::base::Object*        ovalp;
+   mixr::base::Pair*          pvalp;
+   mixr::base::PairStream*    svalp;
+   mixr::base::List*          lvalp;
+   mixr::base::Number*        nvalp;
 
 #line 75 "EdlParser.hpp" /* yacc.c:1909  */
 };

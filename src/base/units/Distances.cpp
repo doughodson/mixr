@@ -2,10 +2,10 @@
 // Distance, Meters, CentiMeters, KiloMeters, Inches, Feet, NauticalMiles,
 // StatuteMiles 
 //------------------------------------------------------------------------------
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

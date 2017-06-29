@@ -1,27 +1,27 @@
 
-#include "mxrp/recorder/DataRecorder.hpp"
+#include "mixr/recorder/DataRecorder.hpp"
 
-#include "mxrp/recorder/OutputHandler.hpp"
-#include "mxrp/recorder/DataRecordHandle.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/OutputHandler.hpp"
+#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/simulation/AbstractNib.hpp"
-#include "mxrp/simulation/Simulation.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/Simulation.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 #include <cstdio>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")

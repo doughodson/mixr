@@ -1,21 +1,21 @@
 
-#include "mxrp/models/system/Guns.hpp"
+#include "mixr/models/system/Guns.hpp"
 
-#include "mxrp/models/player/Bullet.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Bullet.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Angles.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Gun, "Gun")

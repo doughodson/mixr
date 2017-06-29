@@ -1,8 +1,8 @@
 
-#include "mxrp/models/navigation/Gps.hpp"
+#include "mixr/models/navigation/Gps.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Gps, "Gps")

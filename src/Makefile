@@ -69,12 +69,12 @@ $(PROJECTS):
 	$(MAKE) -C $@
 
 install: uninstall
-	-cp -r ../include/mxrp /usr/local/include/mxrp
-	-cp -r ../lib /usr/local/lib/mxrp
+	-cp -r ../include/mixr /usr/local/include/mixr
+	-cp -r ../lib /usr/local/lib/mixr
 
 uninstall:
-	-rm -rf /usr/local/include/mxrp
-	-rm -rf /usr/local/lib/mxrp
+	-rm -rf /usr/local/include/mixr
+	-rm -rf /usr/local/lib/mixr
 
 clean:
 	-for d in $(PROJECTS); do (cd $$d; $(MAKE) clean ); done

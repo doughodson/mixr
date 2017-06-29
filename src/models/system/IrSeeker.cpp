@@ -2,21 +2,21 @@
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
 
-#include "mxrp/models/system/IrSeeker.hpp"
+#include "mixr/models/system/IrSeeker.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSensor.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSensor.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/models/environment/IrAtmosphere.hpp"
+#include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
@@ -27,7 +27,7 @@
 //
 // Owning player must have an OnboardComputer,which contains a TrackManager.
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //==============================================================================

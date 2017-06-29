@@ -2,9 +2,9 @@
 #include <cstring>
 #include <fstream>
 
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

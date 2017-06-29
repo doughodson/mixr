@@ -2,21 +2,21 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#include "mxrp/models/IrShapes.hpp"
+#include "mixr/models/IrShapes.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSensor.hpp"
-#include "mxrp/models/IrSignature.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSensor.hpp"
+#include "mixr/models/IrSignature.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/units/Areas.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/units/Areas.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //==============================================================================
@@ -46,7 +46,7 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-bool IrShape::setSlotIrShapeArea(const mxrp::base::Number* const num)
+bool IrShape::setSlotIrShapeArea(const mixr::base::Number* const num)
 {
    double value = 0.0;
    const auto a = dynamic_cast<const base::Area*>(num);
@@ -104,7 +104,7 @@ void IrSphere::copyData(const IrSphere& org, const bool)
    radius = org.radius;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mxrp::base::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
 {
    double value = 0.0;
 
@@ -164,7 +164,7 @@ void IrBox::deleteData()
 {
 }
 
-bool IrBox::setSlotIrBoxX(const mxrp::base::Number* const s)
+bool IrBox::setSlotIrBoxX(const mixr::base::Number* const s)
 {
    double value = 0.0;
 
@@ -180,7 +180,7 @@ bool IrBox::setSlotIrBoxX(const mxrp::base::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const mxrp::base::Number* const s)
+bool IrBox::setSlotIrBoxY(const mixr::base::Number* const s)
 {
    double value = 0.0;
 
@@ -196,7 +196,7 @@ bool IrBox::setSlotIrBoxY(const mxrp::base::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const mxrp::base::Number* const s)
+bool IrBox::setSlotIrBoxZ(const mixr::base::Number* const s)
 {
    double value = 0.0;
 

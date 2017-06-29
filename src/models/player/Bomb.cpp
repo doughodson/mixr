@@ -1,11 +1,11 @@
 
-#include "mxrp/models/player/Bomb.hpp"
+#include "mixr/models/player/Bomb.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Bomb,"Bomb")

@@ -1,10 +1,10 @@
 
-#include "mxrp/models/player/SpaceVehicle.hpp"
-#include "mxrp/models/dynamics/SpaceDynamicsModel.hpp"
+#include "mixr/models/player/SpaceVehicle.hpp"
+#include "mixr/models/dynamics/SpaceDynamicsModel.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SpaceVehicle,"SpaceVehicle")

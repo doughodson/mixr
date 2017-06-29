@@ -1,16 +1,16 @@
 
-#include "mxrp/instruments/buttons/Knob.hpp"
-#include "mxrp/graphics/Display.hpp"
+#include "mixr/instruments/buttons/Knob.hpp"
+#include "mixr/graphics/Display.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 
-#include "mxrp/base/units/angle_utils.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/functors/Tables.hpp"
 
 #include <GL/glu.h>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Knob, "Knob")

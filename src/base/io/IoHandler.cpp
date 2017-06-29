@@ -1,15 +1,15 @@
 
-#include "mxrp/base/io/IoHandler.hpp"
-#include "mxrp/base/io/IoData.hpp"
-#include "mxrp/base/io/IoDevice.hpp"
+#include "mixr/base/io/IoHandler.hpp"
+#include "mixr/base/io/IoData.hpp"
+#include "mixr/base/io/IoDevice.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/concurrent/PeriodicTask.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/concurrent/PeriodicTask.hpp"
+#include "mixr/base/units/Frequencies.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //=============================================================================

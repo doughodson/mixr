@@ -1,13 +1,13 @@
 
-#include "mxrp/iodevice/DiscreteOutput.hpp"
+#include "mixr/iodevice/DiscreteOutput.hpp"
 
-#include "mxrp/base/io/IoData.hpp"
-#include "mxrp/base/io/IoDevice.hpp"
-#include "mxrp/base/io/IoHandler.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/io/IoData.hpp"
+#include "mixr/base/io/IoDevice.hpp"
+#include "mixr/base/io/IoHandler.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(DiscreteOutput, "DiscreteOutput")

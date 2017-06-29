@@ -1,8 +1,8 @@
 
-#include "mxrp/models/SynchronizedState.hpp"
+#include "mixr/models/SynchronizedState.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SynchronizedState, "SynchronizedState")

@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_instruments.a
+LIB = $(MIXR_LIB_DIR)/libmixr_instruments.a
 
 OBJS =  \
 	adi/Adi.o \

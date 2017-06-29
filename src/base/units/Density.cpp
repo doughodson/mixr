@@ -1,8 +1,8 @@
 
-#include "mxrp/base/units/Density.hpp"
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/units/Density.hpp"
+#include "mixr/base/SlotTable.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

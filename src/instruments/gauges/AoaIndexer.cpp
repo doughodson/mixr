@@ -1,10 +1,10 @@
-#include "mxrp/instruments/gauges/AoaIndexer.hpp"
+#include "mixr/instruments/gauges/AoaIndexer.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/units/Angles.hpp"
 #include <GL/glu.h>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")

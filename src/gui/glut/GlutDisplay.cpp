@@ -1,12 +1,12 @@
 
-#include "mxrp/gui/glut/GlutDisplay.hpp"
+#include "mixr/gui/glut/GlutDisplay.hpp"
 
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <cstdlib>
 
@@ -17,7 +17,7 @@
 #include <sys/time.h>
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
@@ -111,7 +111,7 @@ bool GlutDisplay::onEscKey()
    if (isMainDisplay()) {
       shutdownNotification();
       if (isMessageEnabled(MSG_INFO)) {
-         std::cout<<"mxrp::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
+         std::cout<<"mixr::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
 #ifdef __FREEGLUT_EXT_H__     /* freeglut only */
       glutLeaveMainLoop();

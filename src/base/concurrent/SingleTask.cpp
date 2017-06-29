@@ -1,10 +1,10 @@
 
-#include "mxrp/base/concurrent/SingleTask.hpp"
+#include "mixr/base/concurrent/SingleTask.hpp"
 
-#include "mxrp/base/Component.hpp"
+#include "mixr/base/Component.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(SingleTask, "AbstractSingleTask")

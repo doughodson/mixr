@@ -1,11 +1,11 @@
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cctype>
 #include <cstddef>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

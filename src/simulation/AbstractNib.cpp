@@ -1,7 +1,7 @@
 
-#include "mxrp/simulation/AbstractNib.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractNib, "AbstractNib")

@@ -1,12 +1,12 @@
 
-#include "mxrp/recorder/OutputHandler.hpp"
-#include "mxrp/recorder/DataRecordHandle.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/OutputHandler.hpp"
+#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(OutputHandler, "RecorderOutputHandler")

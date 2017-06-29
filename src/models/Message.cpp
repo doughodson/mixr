@@ -1,10 +1,10 @@
 
-#include "mxrp/models/Message.hpp"
+#include "mixr/models/Message.hpp"
 
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/List.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/List.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Message, "Message")

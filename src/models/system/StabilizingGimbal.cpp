@@ -4,21 +4,21 @@
 //        the left or right wing.
 //------------------------------------------------------------------------------
 
-#include "mxrp/models/system/StabilizingGimbal.hpp"
+#include "mixr/models/system/StabilizingGimbal.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Powers.hpp"
-#include "mxrp/base/osg/Vec3d"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Powers.hpp"
+#include "mixr/base/osg/Vec3d"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(StabilizingGimbal, "StabilizingGimbal")

@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/Translator.hpp"
+#include "mixr/graphics/Translator.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")

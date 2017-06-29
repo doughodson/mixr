@@ -1,8 +1,8 @@
 
-#include "mxrp/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/dynamics/DynamicsModel.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DynamicsModel, "DynamicsModel")

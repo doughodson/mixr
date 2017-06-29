@@ -6,7 +6,7 @@
 #include <ctime>
 #include <unistd.h>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

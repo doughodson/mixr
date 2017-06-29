@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Locus.hpp"
+#include "mixr/base/Locus.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Locus, "Locus")

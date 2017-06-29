@@ -1,22 +1,22 @@
 
-#include "mxrp/models/system/Radio.hpp"
+#include "mixr/models/system/Radio.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/system/Datalink.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/system/Datalink.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
-#include "mxrp/base/units/Powers.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/Powers.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Radio, "Radio")

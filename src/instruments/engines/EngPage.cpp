@@ -1,7 +1,7 @@
 
-#include "mxrp/instruments/engines/EngPage.hpp"
+#include "mixr/instruments/engines/EngPage.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage, "EngPage")

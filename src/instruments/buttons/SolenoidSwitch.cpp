@@ -1,13 +1,13 @@
 
-#include "mxrp/instruments/buttons/SolenoidSwitch.hpp"
+#include "mixr/instruments/buttons/SolenoidSwitch.hpp"
 
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Timers.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Timers.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(SolenoidSwitch, "SolenoidSwitch")

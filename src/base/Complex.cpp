@@ -1,12 +1,12 @@
 
-#include "mxrp/base/Complex.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Complex.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Complex, "Complex")

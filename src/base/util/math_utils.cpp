@@ -1,7 +1,7 @@
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

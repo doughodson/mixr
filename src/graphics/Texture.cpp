@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/Texture.hpp"
+#include "mixr/graphics/Texture.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Identifier.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Identifier.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Texture, "Texture")

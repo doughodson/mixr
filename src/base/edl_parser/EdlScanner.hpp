@@ -1,16 +1,16 @@
 
-#ifndef __mxrp_base_EdlScanner_H_
-#define __mxrp_base_EdlScanner_H_
+#ifndef __mixr_base_EdlScanner_H_
+#define __mixp_base_EdlScanner_H_
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer edlFlexLexer
-#include "mxrp/base/util/FlexLexer.h"
+#include "mixr/base/util/FlexLexer.h"
 #undef yyFlexLexer
 #endif
 
 #include <fstream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------

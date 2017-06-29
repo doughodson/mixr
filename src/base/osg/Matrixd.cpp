@@ -11,13 +11,13 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "mxrp/base/osg/Matrixd"
-#include "mxrp/base/osg/Matrixf"
+#include "mixr/base/osg/Matrixd"
+#include "mixr/base/osg/Matrixf"
 
 // specialized Matrix_implementation to be Matrixd
 #define  Matrix_implementation Matrixd
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 Matrixd::Matrixd( const Matrixf& mat )

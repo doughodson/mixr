@@ -1,10 +1,10 @@
 
-#include "mxrp/simulation/AbstractRecorderComponent.hpp"
+#include "mixr/simulation/AbstractRecorderComponent.hpp"
 
-#include "mxrp/base/List.hpp"
+#include "mixr/base/List.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractRecorderComponent, "AbstractRecorderComponent")

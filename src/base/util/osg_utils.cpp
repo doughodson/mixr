@@ -1,14 +1,14 @@
 
-#include "mxrp/base/util/osg_utils.hpp"
+#include "mixr/base/util/osg_utils.hpp"
 
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Vec3f"
-#include "mxrp/base/osg/Vec4d"
-#include "mxrp/base/osg/Vec4f"
-#include "mxrp/base/osg/Matrixf"
-#include "mxrp/base/osg/Matrixd"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Vec3f"
+#include "mixr/base/osg/Vec4d"
+#include "mixr/base/osg/Vec4f"
+#include "mixr/base/osg/Matrixf"
+#include "mixr/base/osg/Matrixd"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------

@@ -1,8 +1,8 @@
 
-#include "mxrp/graphics/StrokeFont.hpp"
+#include "mixr/graphics/StrokeFont.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")

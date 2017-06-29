@@ -11,11 +11,11 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "mxrp/base/osg/osg_math.hpp"
+#include "mixr/base/osg/osg_math.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace osg {
 

@@ -1,12 +1,12 @@
 
-#include "mxrp/map/rpf/CadrgTocEntry.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/map/rpf/CadrgTocEntry.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgTocEntry, "CadrgTocEntry")

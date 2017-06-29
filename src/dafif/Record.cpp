@@ -1,16 +1,16 @@
 
-#include "mxrp/dafif/Record.hpp"
+#include "mixr/dafif/Record.hpp"
 
-#include "mxrp/base/String.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")

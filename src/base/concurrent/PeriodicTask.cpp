@@ -1,10 +1,10 @@
 
-#include "mxrp/base/concurrent/PeriodicTask.hpp"
+#include "mixr/base/concurrent/PeriodicTask.hpp"
 
-#include "mxrp/base/Component.hpp"
+#include "mixr/base/Component.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(PeriodicTask, "AbstractPeriodicTask")

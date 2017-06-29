@@ -1,11 +1,11 @@
 
-#include "mxrp/graphics/Polygon.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/graphics/ColorGradient.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/graphics/Polygon.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/graphics/ColorGradient.hpp"
+#include "mixr/base/PairStream.hpp"
 #include <GL/glu.h>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")

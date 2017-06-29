@@ -1,13 +1,13 @@
 
-#include "mxrp/base/MonitorMetrics.hpp"
+#include "mixr/base/MonitorMetrics.hpp"
 
-#include "mxrp/base/Cie.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/Cie.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
 #include <cstdio>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(MonitorMetrics,"monitorMetrics")

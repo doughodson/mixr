@@ -1,9 +1,9 @@
 
-#include "mxrp/graphics/readouts/Rotary2.hpp"
+#include "mixr/graphics/readouts/Rotary2.hpp"
 
-#include "mxrp/base/Integer.hpp"
+#include "mixr/base/Integer.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary2, "Rotary2")

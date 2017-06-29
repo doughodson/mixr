@@ -1,10 +1,10 @@
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
 #include <cstdlib>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PairStream, "PairStream")

@@ -1,12 +1,12 @@
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/util/osg_utils.hpp"
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/base/util/osg_utils.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace nav {
 

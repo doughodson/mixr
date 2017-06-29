@@ -1,9 +1,9 @@
 
-#include "mxrp/linearsystem/Sz2.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/linearsystem/Sz2.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Sz2, "Sz2")

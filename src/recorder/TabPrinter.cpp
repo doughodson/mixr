@@ -1,15 +1,15 @@
 
-#include "mxrp/recorder/TabPrinter.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
-#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/TabPrinter.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
 
-#include "mxrp/base/String.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
@@ -1325,7 +1325,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            mxrp::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            mixr::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }

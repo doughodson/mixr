@@ -1,10 +1,10 @@
 
-#include "mxrp/otw/cigi/CigiClNetwork.hpp"
+#include "mixr/otw/cigi/CigiClNetwork.hpp"
 
-#include "mxrp/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/otw/cigi/OtwCigiCl.hpp"
 
-#include "mxrp/base/concurrent/SingleTask.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
+#include "mixr/base/concurrent/SingleTask.hpp"
+#include "mixr/base/network/NetHandler.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"
 
@@ -28,7 +28,7 @@
 #include "cigicl/CigiHostSession.h"
 #include "cigicl/CigiSensorCtrlV3.h"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 //------------------------------------------------------------------------------

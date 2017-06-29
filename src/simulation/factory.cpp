@@ -1,14 +1,14 @@
 
-#include "mxrp/simulation/factory.hpp"
+#include "mixr/simulation/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/simulation/Simulation.hpp"
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/Station.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 base::Object* factory(const std::string& name)

@@ -1,19 +1,19 @@
 
-#include "mxrp/models/AircraftIrSignature.hpp"
+#include "mixr/models/AircraftIrSignature.hpp"
 
-#include "mxrp/models/environment/IrAtmosphere.hpp"
-#include "mxrp/models/IrShapes.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
-#include "mxrp/models/player/AirVehicle.hpp"
+#include "mixr/models/environment/IrAtmosphere.hpp"
+#include "mixr/models/IrShapes.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Areas.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Areas.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AircraftIrSignature, "AircraftIrSignature")

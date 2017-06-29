@@ -1,57 +1,57 @@
 
-#include "mxrp/instruments/factory.hpp"
+#include "mixr/instruments/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
 // Top Level objects
-#include "mxrp/instruments/Instrument.hpp"
+#include "mixr/instruments/Instrument.hpp"
 
 // Analog Dial components
-#include "mxrp/instruments/dials/AnalogDial.hpp"
-#include "mxrp/instruments/dials/DialArcSegment.hpp"
-#include "mxrp/instruments/dials/DialTickMarks.hpp"
-#include "mxrp/instruments/dials/DialPointer.hpp"
-#include "mxrp/instruments/dials/AltitudeDial.hpp"
-#include "mxrp/instruments/dials/GMeterDial.hpp"
+#include "mixr/instruments/dials/AnalogDial.hpp"
+#include "mixr/instruments/dials/DialArcSegment.hpp"
+#include "mixr/instruments/dials/DialTickMarks.hpp"
+#include "mixr/instruments/dials/DialPointer.hpp"
+#include "mixr/instruments/dials/AltitudeDial.hpp"
+#include "mixr/instruments/dials/GMeterDial.hpp"
 
 // Analog Gauge components
-#include "mxrp/instruments/gauges/AnalogGauge.hpp"
-#include "mxrp/instruments/gauges/GaugeSlider.hpp"
-#include "mxrp/instruments/gauges/AoaIndexer.hpp"
-#include "mxrp/instruments/gauges/TickMarks.hpp"
-#include "mxrp/instruments/gauges/Tape.hpp"
+#include "mixr/instruments/gauges/AnalogGauge.hpp"
+#include "mixr/instruments/gauges/GaugeSlider.hpp"
+#include "mixr/instruments/gauges/AoaIndexer.hpp"
+#include "mixr/instruments/gauges/TickMarks.hpp"
+#include "mixr/instruments/gauges/Tape.hpp"
 
 // Generic compass rose and bearing pointer, and dynamic maps
-#include "mxrp/instruments/maps/CompassRose.hpp"
-#include "mxrp/instruments/maps/BearingPointer.hpp"
+#include "mixr/instruments/maps/CompassRose.hpp"
+#include "mixr/instruments/maps/BearingPointer.hpp"
 
 // Generic Landing gear
-#include "mxrp/instruments/landinggear/LandingGear.hpp"
-#include "mxrp/instruments/landinggear/LandingLight.hpp"
+#include "mixr/instruments/landinggear/LandingGear.hpp"
+#include "mixr/instruments/landinggear/LandingLight.hpp"
 
 // Generic engine page
-#include "mxrp/instruments/engines/EngPage.hpp"
+#include "mixr/instruments/engines/EngPage.hpp"
 
 // Buttons
-#include "mxrp/instruments/buttons/Button.hpp"
-#include "mxrp/instruments/buttons/PushButton.hpp"
-#include "mxrp/instruments/buttons/RotarySwitch.hpp"
-#include "mxrp/instruments/buttons/Knob.hpp"
-#include "mxrp/instruments/buttons/Switch.hpp"
-#include "mxrp/instruments/buttons/SolenoidSwitch.hpp"
+#include "mixr/instruments/buttons/Button.hpp"
+#include "mixr/instruments/buttons/PushButton.hpp"
+#include "mixr/instruments/buttons/RotarySwitch.hpp"
+#include "mixr/instruments/buttons/Knob.hpp"
+#include "mixr/instruments/buttons/Switch.hpp"
+#include "mixr/instruments/buttons/SolenoidSwitch.hpp"
 
 // Adi
-#include "mxrp/instruments/adi/Adi.hpp"
+#include "mixr/instruments/adi/Adi.hpp"
  
 // Ghost Horizon
-#include "mxrp/instruments/adi/GhostHorizon.hpp"
+#include "mixr/instruments/adi/GhostHorizon.hpp"
 
 // Eadi3D
-#include "mxrp/instruments/eadi3d/Eadi3DPage.hpp"
+#include "mixr/instruments/eadi3d/Eadi3DPage.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 base::Object* factory(const std::string& name)

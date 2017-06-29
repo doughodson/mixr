@@ -1,14 +1,14 @@
 
-#include "mxrp/recorder/PrintPlayer.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
-#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/PrintPlayer.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
 
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/String.hpp"
 
 #include <iomanip>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintPlayer,"PrintPlayer")

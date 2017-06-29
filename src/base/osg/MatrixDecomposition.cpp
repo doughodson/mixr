@@ -16,8 +16,8 @@
 // http://www.acm.org/pubs/tog/GraphicsGems/gemsiv/polar_decomp
 // Copyright (C) 1993 Ken Shoemake <shoemake@graphics.cis.upenn.edu>
 
-#include "mxrp/base/osg/Matrixf"
-#include "mxrp/base/osg/Matrixd"
+#include "mixr/base/osg/Matrixf"
+#include "mixr/base/osg/Matrixd"
 
 /** Copy nxn matrix A to C using "gets" for assignment **/
 #define matrixCopy(C, gets, A, n) {int i, j; for (i=0;i<n;i++) for (j=0;j<n;j++)\
@@ -40,7 +40,7 @@
     C[i][j] gets (A[i][j]);}
 
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace MatrixDecomposition {
 

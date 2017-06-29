@@ -1,22 +1,22 @@
 
-#include "mxrp/models/Signatures.hpp"
+#include "mixr/models/Signatures.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/functors/Tables.hpp"
 
-#include "mxrp/base/units/Areas.hpp"
+#include "mixr/base/units/Areas.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //==============================================================================

@@ -1,45 +1,45 @@
 
-#include "mxrp/graphics/factory.hpp"
+#include "mixr/graphics/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/graphics/Graphic.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/graphics/Shapes.hpp"
-#include "mxrp/graphics/Polygon.hpp"
-#include "mxrp/graphics/ColorRotary.hpp"
-#include "mxrp/graphics/ColorGradient.hpp"
-#include "mxrp/graphics/FtglFonts.hpp"
-#include "mxrp/graphics/BitmapFont.hpp"
-#include "mxrp/graphics/StrokeFont.hpp"
-#include "mxrp/graphics/BmpTexture.hpp"
-#include "mxrp/graphics/Rotators.hpp"
-#include "mxrp/graphics/Translator.hpp"
-#include "mxrp/graphics/Material.hpp"
+#include "mixr/graphics/Graphic.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/graphics/Shapes.hpp"
+#include "mixr/graphics/Polygon.hpp"
+#include "mixr/graphics/ColorRotary.hpp"
+#include "mixr/graphics/ColorGradient.hpp"
+#include "mixr/graphics/FtglFonts.hpp"
+#include "mixr/graphics/BitmapFont.hpp"
+#include "mixr/graphics/StrokeFont.hpp"
+#include "mixr/graphics/BmpTexture.hpp"
+#include "mixr/graphics/Rotators.hpp"
+#include "mixr/graphics/Translator.hpp"
+#include "mixr/graphics/Material.hpp"
 
 // fields and readouts
-#include "mxrp/graphics/readouts/AsciiText.hpp"
-#include "mxrp/graphics/readouts/Cursor.hpp"
-#include "mxrp/graphics/readouts/Rotary.hpp"
-#include "mxrp/graphics/readouts/Rotary2.hpp"
-#include "mxrp/graphics/readouts/DirectionReadout.hpp"
-#include "mxrp/graphics/readouts/HexReadout.hpp"
-#include "mxrp/graphics/readouts/LatitudeReadout.hpp"
-#include "mxrp/graphics/readouts/LongitudeReadout.hpp"
-#include "mxrp/graphics/readouts/NumericReadout.hpp"
-#include "mxrp/graphics/readouts/OctalReadout.hpp"
-#include "mxrp/graphics/readouts/TimeReadout.hpp"
+#include "mixr/graphics/readouts/AsciiText.hpp"
+#include "mixr/graphics/readouts/Cursor.hpp"
+#include "mixr/graphics/readouts/Rotary.hpp"
+#include "mixr/graphics/readouts/Rotary2.hpp"
+#include "mixr/graphics/readouts/DirectionReadout.hpp"
+#include "mixr/graphics/readouts/HexReadout.hpp"
+#include "mixr/graphics/readouts/LatitudeReadout.hpp"
+#include "mixr/graphics/readouts/LongitudeReadout.hpp"
+#include "mixr/graphics/readouts/NumericReadout.hpp"
+#include "mixr/graphics/readouts/OctalReadout.hpp"
+#include "mixr/graphics/readouts/TimeReadout.hpp"
 
 // pages and maps
-#include "mxrp/graphics/MfdPage.hpp"
-#include "mxrp/graphics/MapPage.hpp"
-#include "mxrp/graphics/SymbolLoader.hpp"
+#include "mixr/graphics/MfdPage.hpp"
+#include "mixr/graphics/MapPage.hpp"
+#include "mixr/graphics/SymbolLoader.hpp"
 
 
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 base::Object* factory(const std::string& name)

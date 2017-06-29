@@ -1,15 +1,15 @@
 
-#include "mxrp/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/Actions.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/Actions.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/system/TrackManager.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer, "OnboardComputer")

@@ -17,17 +17,17 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "mxrp/base/network/PosixHandler.hpp"
+#include "mixr/base/network/PosixHandler.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")

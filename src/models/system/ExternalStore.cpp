@@ -1,10 +1,10 @@
 
-#include "mxrp/models/system/ExternalStore.hpp"
+#include "mixr/models/system/ExternalStore.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //------------------------------------------------------------

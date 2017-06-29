@@ -1,15 +1,15 @@
 
-#include "mxrp/terrain/QuadMap.hpp"
+#include "mixr/terrain/QuadMap.hpp"
 
-#include "mxrp/terrain/Terrain.hpp"
+#include "mixr/terrain/Terrain.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap, "QuadMap")

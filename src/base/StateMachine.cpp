@@ -1,11 +1,11 @@
 
-#include "mxrp/base/StateMachine.hpp"
+#include "mixr/base/StateMachine.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine, "AbstractStateMachine")

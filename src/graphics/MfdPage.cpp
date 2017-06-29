@@ -1,6 +1,6 @@
-#include "mxrp/graphics/MfdPage.hpp"
+#include "mixr/graphics/MfdPage.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MfdPage,"MfdPage")

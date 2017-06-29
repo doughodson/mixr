@@ -1,16 +1,16 @@
 
 
-#include "mxrp/instruments/eadi3d/Eadi3DObjects.hpp"
+#include "mixr/instruments/eadi3d/Eadi3DObjects.hpp"
 
-#include "mxrp/base/util/platform_api.hpp"
-#include "mxrp/base/units/angle_utils.hpp"
+#include "mixr/base/util/platform_api.hpp"
+#include "mixr/base/units/angle_utils.hpp"
 
 #include <GL/gl.h>
 #include <cmath>
 
 #define MR2IN 0.026785714      // font was scaled by this
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 float WHITE[3] = { 1.0, 1.0, 1.0 };

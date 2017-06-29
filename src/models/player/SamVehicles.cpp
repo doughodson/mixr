@@ -1,17 +1,17 @@
 
-#include "mxrp/models/player/SamVehicles.hpp"
+#include "mixr/models/player/SamVehicles.hpp"
 
-#include "mxrp/models/player/Sam.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
+#include "mixr/models/player/Sam.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/osg/Matrixd"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/osg/Matrixd"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SamVehicle, "SamVehicle")

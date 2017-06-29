@@ -1,13 +1,13 @@
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
 
-#include "mxrp/simulation/Simulation.hpp"
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/List.hpp"
+#include "mixr/base/List.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractDataRecorder, "AbstractDataRecorder")

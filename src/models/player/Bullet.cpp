@@ -1,13 +1,13 @@
 
-#include "mxrp/models/player/Bullet.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Bullet.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet, "Bullet")

@@ -1,12 +1,12 @@
 
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/models/system/IrSensor.hpp"
+#include "mixr/models/system/IrSensor.hpp"
 
-#include "mxrp/base/List.hpp"
+#include "mixr/base/List.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrQueryMsg, "IrQueryMsg")

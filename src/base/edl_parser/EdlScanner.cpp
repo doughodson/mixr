@@ -312,7 +312,7 @@ typedef char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include "mxrp/base/util/FlexLexer.h"
+#include "mixr/base/util/FlexLexer.h"
 
 int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()
@@ -321,7 +321,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int mxrp::base::EdlScanner::yylex()
+#define YY_DECL int mixr::base::EdlScanner::yylex()
 
 static yyconst flex_int16_t yy_nxt[][128] =
     {
@@ -2001,16 +2001,16 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "mxrp/base/Object.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/Object.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/util/str_utils.hpp"
 #include "EdlScanner.hpp"
 #include "EdlParser.hpp"
 
@@ -2022,7 +2022,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "edlFlexLexer" */
-/* derived 'mxrp::base::EdlScanner' is a subclass of edlFlexLexer */
+/* derived 'mixr::base::EdlScanner' is a subclass of edlFlexLexer */
 #line 2027 "EdlScanner.cpp"
 
 #define INITIAL 0

@@ -1,9 +1,9 @@
 
-#include "mxrp/linearsystem/ScalerFunc.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
+#include "mixr/linearsystem/ScalerFunc.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Frequencies.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc,"ScalerFunc")

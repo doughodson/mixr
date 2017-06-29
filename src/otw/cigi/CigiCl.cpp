@@ -1,9 +1,9 @@
 
-#include "mxrp/otw/cigi/CigiCl.hpp"
+#include "mixr/otw/cigi/CigiCl.hpp"
 
 #include "cigicl/CigiHostSession.h"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(CigiCl, "CigiClAbstract")

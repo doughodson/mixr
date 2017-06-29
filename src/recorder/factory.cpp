@@ -1,21 +1,21 @@
 
-#include "mxrp/recorder/factory.hpp"
+#include "mixr/recorder/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/recorder/DataRecorder.hpp"
-#include "mxrp/recorder/FileWriter.hpp"
-#include "mxrp/recorder/FileReader.hpp"
-#include "mxrp/recorder/OutputHandler.hpp"
-#include "mxrp/recorder/NetInput.hpp"
-#include "mxrp/recorder/NetOutput.hpp"
-#include "mxrp/recorder/TabPrinter.hpp"
-#include "mxrp/recorder/PrintPlayer.hpp"
-#include "mxrp/recorder/PrintSelected.hpp"
+#include "mixr/recorder/DataRecorder.hpp"
+#include "mixr/recorder/FileWriter.hpp"
+#include "mixr/recorder/FileReader.hpp"
+#include "mixr/recorder/OutputHandler.hpp"
+#include "mixr/recorder/NetInput.hpp"
+#include "mixr/recorder/NetOutput.hpp"
+#include "mixr/recorder/TabPrinter.hpp"
+#include "mixr/recorder/PrintPlayer.hpp"
+#include "mixr/recorder/PrintSelected.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 base::Object* factory(const std::string& name)

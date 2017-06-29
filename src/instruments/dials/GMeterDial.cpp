@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/dials/GMeterDial.hpp"
+#include "mixr/instruments/dials/GMeterDial.hpp"
 
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")

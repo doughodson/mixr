@@ -1,14 +1,14 @@
 
-#include "mxrp/models/system/Stores.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
+#include "mixr/models/system/Stores.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Stores, "Stores")

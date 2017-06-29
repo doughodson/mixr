@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/landinggear/LandingGear.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/landinggear/LandingGear.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingGear, "LandingGear")

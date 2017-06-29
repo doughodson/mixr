@@ -1,9 +1,9 @@
 
-#include "mxrp/base/units/Forces.hpp"
+#include "mixr/base/units/Forces.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

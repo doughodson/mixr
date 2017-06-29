@@ -1,10 +1,10 @@
 
-#include "mxrp/base/Decibel.hpp"
+#include "mixr/base/Decibel.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel, "dB")

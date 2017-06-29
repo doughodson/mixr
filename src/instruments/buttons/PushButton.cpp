@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/buttons/PushButton.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/buttons/PushButton.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(PushButton, "PushButton")

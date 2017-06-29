@@ -4,24 +4,24 @@
 # -----------------------------------------------------------------------------
 
 # ---
-# MXRP root directory
-#   Use the environment variable MXRP_ROOT to locate MXRP
+# MIXR root directory
+#   Use the environment variable MIXR_ROOT to locate MIXR
 #   -- No default
-#   -- see $(MXRP_ROOT)/setenv
+#   -- see $(MXIR_ROOT)/setenv
 # ---
 
 # ---
-# MXRP 3rd party root directory
-#   Use the environment variable MXRP_3RD_PARTY_ROOT to locate the include and
-#   lib directories for the MXRP 3rd party software(e.g., cigi, JSBSim)
+# MIXR 3rd party root directory
+#   Use the environment variable MIXR_3RD_PARTY_ROOT to locate the include and
+#   lib directories for the MIXR 3rd party software(e.g., cigi, JSBSim)
 #   -- No default
-#   -- see $(MXRP_ROOT)/setenv
+#   -- see $(MIXR_ROOT)/setenv
 # ---
 
 # ---
 # library directories
 # ---
-MXRP_LIB_DIR = $(MXRP_ROOT)/lib
+MIXR_LIB_DIR = $(MIXR_ROOT)/lib
 
 # ---
 # Uncomment if using FTGL version 2.1.2 or earlier
@@ -46,12 +46,12 @@ JOYSTICKDEVICE = 1
 # ---
 # JSBSim include directory
 # ---
-JSBSIM_INC_DIR = $(MXRP_3RD_PARTY_ROOT)/include/JSBSim
+JSBSIM_INC_DIR = $(MIXR_3RD_PARTY_ROOT)/include/JSBSim
 
 # ---
 # HLA RTI include directory
 # ---
-HLA_INC_DIR = $(MXRP_3RD_PARTY_ROOT)/include/RTI13
+HLA_INC_DIR = $(MIXR_3RD_PARTY_ROOT)/include/RTI13
 
 # ---
 # Optimize?
@@ -62,7 +62,7 @@ CPPFLAGS += -g -O2
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I$(MXRP_ROOT)/include -I$(MXRP_3RD_PARTY_ROOT)/include
+CPPFLAGS += -I$(MIXR_ROOT)/include -I$(MIXR_3RD_PARTY_ROOT)/include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -pedantic

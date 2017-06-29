@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/dials/DialTickMarks.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/dials/DialTickMarks.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialTickMarks, "DialTickMarks")

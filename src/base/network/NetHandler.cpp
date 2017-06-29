@@ -22,11 +22,11 @@
 //    static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "mxrp/base/network/NetHandler.hpp"
+#include "mixr/base/network/NetHandler.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "NetHandler")

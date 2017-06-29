@@ -1,10 +1,10 @@
 
-#include "mxrp/base/ubf/AbstractBehavior.hpp"
+#include "mixr/base/ubf/AbstractBehavior.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace ubf {
 

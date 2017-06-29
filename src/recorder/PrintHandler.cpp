@@ -1,13 +1,13 @@
 
-#include "mxrp/recorder/PrintHandler.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/util/str_utils.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/recorder/PrintHandler.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")

@@ -1,9 +1,9 @@
 
-#include "mxrp/linearsystem/LagFilter.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/linearsystem/LagFilter.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Times.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LagFilter,"LagFilter")

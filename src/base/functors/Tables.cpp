@@ -2,14 +2,14 @@
 // Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
 
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/util/lfi.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/util/lfi.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Pair.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

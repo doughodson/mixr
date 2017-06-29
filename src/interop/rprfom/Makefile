@@ -1,11 +1,10 @@
 #
 include ../../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_interop_rprfom.a
+LIB = $(MIXR_LIB_DIR)/libmixr_interop_rprfom.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM
-#CPPFLAGS += -DEAAGLES_WITH_HLA -DRTI_USES_STD_FSTREAM -I$(RTI_HOME)/$(RTI_BUILD_TYPE)/include
 
 OBJS =  \
 	factory.o \

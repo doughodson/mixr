@@ -32,63 +32,63 @@
 /* change the name of the scanner class - results in "rfFlexLexer" */
 %option prefix="rf"
 
-/* derived 'mxrp::graphics::ReformatScanner' is a subclass of rfFlexLexer */
-%option yyclass="mxrp::graphics::ReformatScanner"
+/* derived 'mixr::graphics::ReformatScanner' is a subclass of rfFlexLexer */
+%option yyclass="mixr::graphics::ReformatScanner"
 
 %%
 
 \+?0*#+\+?              {   // "+0#" (Integer w/sign and leading zeros)
-                            return mxrp::graphics::ReformatScanner::processInteger(yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processInteger(yytext, yyleng);
                         }
 
 \+?0*#+\.#+\+?          {   // "+0#.#" (Floating w/sign and leading zeros)
-                            return mxrp::graphics::ReformatScanner::processFloat(yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processFloat(yytext, yyleng);
                         }
 
 \+?(0|H)H+:?MM:?SS(\.S+)?\+?  {   // HH:MM:SS (Hours, minutes and seconds)
-                                  return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::hhmmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hhmmss, yytext, yyleng);
                               }
 
 \+?(0|H)H+:?MM(\.M+)?\+?      {   // HH:MM (Hours and minutes)
-                                  return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::hhmm, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hhmm, yytext, yyleng);
                               }
 
 \+?(0|H)H+(\.H+)?\+?    {   // HH (Hours)
-                            return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::hh, yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 
 \+?(0|M)M+:?SS(\.S+)?\+?      {   // MM:SS (Minutes and seconds)
-                                  return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::mmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::mmss, yytext, yyleng);
                               }
 
 \+?(0|M)M+(\.M+)?\+?    {   // MM (Minutes)
-                            return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::mm, yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::mm, yytext, yyleng);
                         }
 
 \+?(0|S)S+(\.S+)?\+?    {  // SS (Seconds)
-                           return mxrp::graphics::ReformatScanner::processTime(mxrp::graphics::TimeReadout::ss, yytext, yyleng);
+                           return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::ss, yytext, yyleng);
                         }
 
 \+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?    {   // +DDMMSS (Degrees, minutes and seconds)
-                                            return mxrp::graphics::ReformatScanner::processDirection(mxrp::graphics::DirectionReadout::ddmmss, yytext, yyleng);
+                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::ddmmss, yytext, yyleng);
                                         }
 
 \+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?    {   // +DDMM (Degrees and minutes)
-                                       return mxrp::graphics::ReformatScanner::processDirection(mxrp::graphics::DirectionReadout::ddmm, yytext, yyleng);
+                                       return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::ddmm, yytext, yyleng);
                                    }
 
 \+?(0|D)D{1,2}(\.D+)?@?\+?    {   // +DD (Degrees)
-                                  return mxrp::graphics::ReformatScanner::processDirection(mxrp::graphics::DirectionReadout::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::dd, yytext, yyleng);
                               }
 
 \+?D(\.D+)?@?\+?              {   // +DD (Degrees)
-                                  return mxrp::graphics::ReformatScanner::processDirection(mxrp::graphics::DirectionReadout::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::dd, yytext, yyleng);
                               }
 
 %%
 
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------

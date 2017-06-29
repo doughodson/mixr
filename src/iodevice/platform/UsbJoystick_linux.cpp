@@ -13,10 +13,10 @@
 #include <linux/joystick.h>
 
 #include "UsbJoystick_linux.hpp"
-#include "mxrp/base/util/str_utils.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")

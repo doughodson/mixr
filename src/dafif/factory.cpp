@@ -1,15 +1,15 @@
 
-#include "mxrp/dafif/factory.hpp"
+#include "mixr/dafif/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/dafif/AirportLoader.hpp"
-#include "mxrp/dafif/NavaidLoader.hpp"
-#include "mxrp/dafif/WaypointLoader.hpp"
+#include "mixr/dafif/AirportLoader.hpp"
+#include "mixr/dafif/NavaidLoader.hpp"
+#include "mixr/dafif/WaypointLoader.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 base::Object* factory(const std::string& name)

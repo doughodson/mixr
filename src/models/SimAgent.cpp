@@ -1,15 +1,15 @@
 
-#include "mxrp/models/SimAgent.hpp"
+#include "mixr/models/SimAgent.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SimAgent, "SimAgent")

@@ -1,15 +1,15 @@
 
-#include "mxrp/iodevice/factory.hpp"
+#include "mixr/iodevice/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/iodevice/Ai2DiSwitch.hpp"
-#include "mxrp/iodevice/AnalogInput.hpp"
-#include "mxrp/iodevice/AnalogOutput.hpp"
-#include "mxrp/iodevice/DiscreteInput.hpp"
-#include "mxrp/iodevice/DiscreteOutput.hpp"
-#include "mxrp/iodevice/IoData.hpp"
-#include "mxrp/iodevice/SignalGen.hpp"
+#include "mixr/iodevice/Ai2DiSwitch.hpp"
+#include "mixr/iodevice/AnalogInput.hpp"
+#include "mixr/iodevice/AnalogOutput.hpp"
+#include "mixr/iodevice/DiscreteInput.hpp"
+#include "mixr/iodevice/DiscreteOutput.hpp"
+#include "mixr/iodevice/IoData.hpp"
+#include "mixr/iodevice/SignalGen.hpp"
 
 #include <string>
 
@@ -19,7 +19,7 @@
    #include "./platform/UsbJoystick_linux.hpp"
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 base::Object* factory(const std::string& name)

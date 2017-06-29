@@ -1,8 +1,8 @@
 
-#include "mxrp/models/player/Agm.hpp"
-#include "mxrp/models/Track.hpp"
+#include "mixr/models/player/Agm.hpp"
+#include "mixr/models/Track.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Agm, "AgmMissile")

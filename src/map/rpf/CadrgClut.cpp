@@ -1,12 +1,12 @@
 
-#include "mxrp/map/rpf/CadrgClut.hpp"
-#include "mxrp/map/rpf/CadrgFrameEntry.hpp"
-#include "mxrp/map/rpf/map_utils.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/map/rpf/CadrgClut.hpp"
+#include "mixr/map/rpf/CadrgFrameEntry.hpp"
+#include "mixr/map/rpf/map_utils.hpp"
+#include "mixr/base/String.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgClut, "CadrgClut")

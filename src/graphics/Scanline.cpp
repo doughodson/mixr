@@ -1,12 +1,12 @@
 
-#include "mxrp/graphics/Scanline.hpp"
+#include "mixr/graphics/Scanline.hpp"
 
-#include "mxrp/graphics/Clip3D.hpp"
-#include "mxrp/graphics/Polygon.hpp"
+#include "mixr/graphics/Clip3D.hpp"
+#include "mixr/graphics/Polygon.hpp"
 
-#include "mxrp/base/units/angle_utils.hpp"
+#include "mixr/base/units/angle_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Scanline, "Scanline")

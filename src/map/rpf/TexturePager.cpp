@@ -1,12 +1,12 @@
 
-#include "mxrp/map/rpf/TexturePager.hpp"
-#include "mxrp/map/rpf/CadrgTocEntry.hpp"
-#include "mxrp/graphics/Texture.hpp"
-#include "mxrp/map/rpf/CadrgMap.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/List.hpp"
+#include "mixr/map/rpf/TexturePager.hpp"
+#include "mixr/map/rpf/CadrgTocEntry.hpp"
+#include "mixr/graphics/Texture.hpp"
+#include "mixr/map/rpf/CadrgMap.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/List.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")

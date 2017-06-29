@@ -1,7 +1,7 @@
 
-#include "mxrp/base/concurrent/ThreadPoolManager.hpp"
+#include "mixr/base/concurrent/ThreadPoolManager.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(ThreadPoolManager, "ThreadPoolManager")

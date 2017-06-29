@@ -1,27 +1,27 @@
 //------------------------------------------------------------------------------
 // Classes: RfSensor, SensorMgr
 //------------------------------------------------------------------------------
-#include "mxrp/models/system/RfSensor.hpp"
+#include "mixr/models/system/RfSensor.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
-#include "mxrp/base/units/Powers.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/Powers.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //==============================================================================

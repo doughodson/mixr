@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Boolean.hpp"
+#include "mixr/base/Boolean.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Boolean, "boolean")

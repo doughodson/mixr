@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/maps/BearingPointer.hpp"
+#include "mixr/instruments/maps/BearingPointer.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(BearingPointer, "BearingPointer")

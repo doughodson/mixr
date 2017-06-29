@@ -1,22 +1,22 @@
 
-#include "mxrp/models/Actions.hpp"
+#include "mixr/models/Actions.hpp"
 
-#include "mxrp/models/player/Bomb.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/system/Sar.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
-#include "mxrp/models/navigation/Steerpoint.hpp"
+#include "mixr/models/player/Bomb.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/Sar.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/navigation/Steerpoint.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Action, "Action")

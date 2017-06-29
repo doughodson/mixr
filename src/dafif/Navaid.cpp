@@ -1,12 +1,12 @@
 
-#include "mxrp/dafif/Navaid.hpp"
+#include "mixr/dafif/Navaid.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Angles.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")

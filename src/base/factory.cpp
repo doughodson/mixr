@@ -1,80 +1,80 @@
 
-#include "mxrp/base/factory.hpp"
+#include "mixr/base/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/base/FileReader.hpp"
-#include "mxrp/base/Statistic.hpp"
-#include "mxrp/base/Transforms.hpp"
-#include "mxrp/base/Timers.hpp"
+#include "mixr/base/FileReader.hpp"
+#include "mixr/base/Statistic.hpp"
+#include "mixr/base/Transforms.hpp"
+#include "mixr/base/Timers.hpp"
 
 // Functors
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/functors/Functions.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Functions.hpp"
 
 // Numbers
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Complex.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/Operators.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Complex.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/Operators.hpp"
 
 // IO
-#include "mxrp/base/io/IoData.hpp"
-#include "mxrp/base/io/IoHandler.hpp"
+#include "mixr/base/io/IoData.hpp"
+#include "mixr/base/io/IoHandler.hpp"
 
 // Network handlers
-#include "mxrp/base/network/TcpHandler.hpp"
-#include "mxrp/base/network/TcpClient.hpp"
-#include "mxrp/base/network/TcpServerMultiple.hpp"
-#include "mxrp/base/network/TcpServerSingle.hpp"
-#include "mxrp/base/network/UdpBroadcastHandler.hpp"
-#include "mxrp/base/network/UdpMulticastHandler.hpp"
-#include "mxrp/base/network/UdpUnicastHandler.hpp"
+#include "mixr/base/network/TcpHandler.hpp"
+#include "mixr/base/network/TcpClient.hpp"
+#include "mixr/base/network/TcpServerMultiple.hpp"
+#include "mixr/base/network/TcpServerSingle.hpp"
+#include "mixr/base/network/UdpBroadcastHandler.hpp"
+#include "mixr/base/network/UdpMulticastHandler.hpp"
+#include "mixr/base/network/UdpUnicastHandler.hpp"
 
 // Colors
-#include "mxrp/base/Cie.hpp"
-#include "mxrp/base/Cmy.hpp"
-#include "mxrp/base/Hls.hpp"
-#include "mxrp/base/Hsv.hpp"
-#include "mxrp/base/Hsva.hpp"
-#include "mxrp/base/Rgb.hpp"
-#include "mxrp/base/Rgba.hpp"
-#include "mxrp/base/Yiq.hpp"
+#include "mixr/base/Cie.hpp"
+#include "mixr/base/Cmy.hpp"
+#include "mixr/base/Hls.hpp"
+#include "mixr/base/Hsv.hpp"
+#include "mixr/base/Hsva.hpp"
+#include "mixr/base/Rgb.hpp"
+#include "mixr/base/Rgba.hpp"
+#include "mixr/base/Yiq.hpp"
 
 // Units
-#include "mxrp/base/units/AngularVelocity.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Areas.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Energies.hpp"
-#include "mxrp/base/units/Forces.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
-#include "mxrp/base/units/LinearVelocity.hpp"
-#include "mxrp/base/units/Masses.hpp"
-#include "mxrp/base/units/Powers.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/AngularVelocity.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Areas.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Energies.hpp"
+#include "mixr/base/units/Forces.hpp"
+#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/LinearVelocity.hpp"
+#include "mixr/base/units/Masses.hpp"
+#include "mixr/base/units/Powers.hpp"
+#include "mixr/base/units/Times.hpp"
 
 // Random number generator and distributions
-#include "mxrp/base/Rng.hpp"
-#include "mxrp/base/distributions/Exponential.hpp"
-#include "mxrp/base/distributions/Lognormal.hpp"
-#include "mxrp/base/distributions/Pareto.hpp"
-#include "mxrp/base/distributions/Uniform.hpp"
+#include "mixr/base/Rng.hpp"
+#include "mixr/base/distributions/Exponential.hpp"
+#include "mixr/base/distributions/Lognormal.hpp"
+#include "mixr/base/distributions/Pareto.hpp"
+#include "mixr/base/distributions/Uniform.hpp"
 
 // Others
-#include "mxrp/base/EarthModel.hpp"
-#include "mxrp/base/concurrent/ThreadPool.hpp"
+#include "mixr/base/EarthModel.hpp"
+#include "mixr/base/concurrent/ThreadPool.hpp"
 
 // Ubf
-#include "mxrp/base/ubf/Agent.hpp"
-#include "mxrp/base/ubf/Arbiter.hpp"
+#include "mixr/base/ubf/Agent.hpp"
+#include "mixr/base/ubf/Arbiter.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 Object* factory(const std::string& name)

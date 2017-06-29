@@ -1,9 +1,9 @@
 
-#include "mxrp/base/units/Masses.hpp"
+#include "mixr/base/units/Masses.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

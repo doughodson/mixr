@@ -1,10 +1,10 @@
 
-#include "mxrp/iodevice/IoData.hpp"
+#include "mixr/iodevice/IoData.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(IoData, "IoData")

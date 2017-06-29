@@ -1,13 +1,13 @@
 
-#include "mxrp/graphics/BitmapFont.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/graphics/BitmapFont.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(BitmapFont, "BitmapFont")

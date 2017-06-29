@@ -1,15 +1,15 @@
 
-#include "mxrp/map/rpf/CadrgFile.hpp"
-#include "mxrp/map/rpf/CadrgTocEntry.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/map/rpf/map_utils.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/map/rpf/CadrgFile.hpp"
+#include "mixr/map/rpf/CadrgTocEntry.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/map/rpf/map_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 
 //#define PRINT_MAP_LOCATIONS
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgFile, "CadrgFile")

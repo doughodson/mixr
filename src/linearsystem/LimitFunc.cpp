@@ -1,8 +1,8 @@
 
-#include "mxrp/linearsystem/LimitFunc.hpp"
+#include "mixr/linearsystem/LimitFunc.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LimitFunc, "LimitFunc")

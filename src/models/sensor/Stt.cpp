@@ -1,12 +1,12 @@
 
-#include "mxrp/models/sensor/Stt.hpp"
+#include "mixr/models/sensor/Stt.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/Track.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/Track.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt, "Stt")

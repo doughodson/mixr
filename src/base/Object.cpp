@@ -1,12 +1,12 @@
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 // ---

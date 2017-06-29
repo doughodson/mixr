@@ -1,8 +1,8 @@
 
-#include "mxrp/base/Rgba.hpp"
-#include "mxrp/base/Float.hpp"
+#include "mixr/base/Rgba.hpp"
+#include "mixr/base/Float.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Rgba, "rgba")

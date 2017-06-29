@@ -1,10 +1,10 @@
 
 #include <iostream>
 
-#include "mxrp/base/distributions/Uniform.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/distributions/Uniform.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Uniform,"Uniform")

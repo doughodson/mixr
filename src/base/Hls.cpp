@@ -1,12 +1,12 @@
 
-#include "mxrp/base/Hls.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/base/Hls.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/util/math_utils.hpp"
 #include <cmath>
 
-#include "mxrp/base/util/platform_api.hpp"
+#include "mixr/base/util/platform_api.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Hls, "hls")

@@ -1,16 +1,16 @@
 
-#include "mxrp/models/dynamics/JSBSimModel.hpp"
+#include "mixr/models/dynamics/JSBSimModel.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/functors/Tables.hpp"
 
-#include "mxrp/base/Statistic.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Integer.hpp"
+#include "mixr/base/Statistic.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Integer.hpp"
 
 // JSBSim model headers
 #include <JSBSim/FGFDMExec.h>
@@ -41,7 +41,7 @@
 #include <JSBSim/models/propulsion/FGPropeller.h>
 #include <JSBSim/models/propulsion/FGTank.h>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")

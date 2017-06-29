@@ -1,10 +1,10 @@
 
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/String.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(LatLon,"LatLon")

@@ -1,18 +1,18 @@
 
-#ifndef __mxrp_graphics_ReformatScanner_H__
-#define __mxrp_graphics_ReformatScanner_H__
+#ifndef __mixr_graphics_ReformatScanner_H__
+#define __mixr_graphics_ReformatScanner_H__
 
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
 #define yyFlexLexer rfFlexLexer
-#include "mxrp/base/util/FlexLexer.h"
+#include "mixr/base/util/FlexLexer.h"
 #endif
 
-#include "mxrp/graphics/readouts/TimeReadout.hpp"
-#include "mxrp/graphics/readouts/DirectionReadout.hpp"
+#include "mixr/graphics/readouts/TimeReadout.hpp"
+#include "mixr/graphics/readouts/DirectionReadout.hpp"
 #include <sstream>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 //---------------------------------------------

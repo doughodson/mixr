@@ -1,13 +1,13 @@
 
-#include "mxrp/base/List.hpp"
+#include "mixr/base/List.hpp"
 
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Pair.hpp"
 
 #include <cstdlib>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List, "List")

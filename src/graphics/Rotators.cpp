@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/Rotators.hpp"
+#include "mixr/graphics/Rotators.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")

@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_terrain.a
+LIB = $(MIXR_LIB_DIR)/libmixr_terrain.a
 
 OBJS =  \
 	ded/DedFile.o \

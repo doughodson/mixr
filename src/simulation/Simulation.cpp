@@ -1,25 +1,25 @@
 
-#include "mxrp/simulation/Simulation.hpp"
+#include "mixr/simulation/Simulation.hpp"
 
-#include "mxrp/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/AbstractPlayer.hpp"
 
-#include "mxrp/simulation/SimTcThread.hpp"
-#include "mxrp/simulation/SimBgThread.hpp"
+#include "mixr/simulation/SimTcThread.hpp"
+#include "mixr/simulation/SimBgThread.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
-#include "mxrp/simulation/AbstractNib.hpp"
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/Statistic.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/Statistic.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <cstring>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")

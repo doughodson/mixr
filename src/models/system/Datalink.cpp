@@ -1,21 +1,21 @@
 
-#include "mxrp/models/system/Datalink.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Radio.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/Message.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/system/Datalink.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/Message.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Datalink, "Datalink")
@@ -264,11 +264,11 @@ void Datalink::reset()
 void Datalink::dynamics(const double)
 {
     //age queues
-    mxrp::base::Object* tempInQueue[MAX_MESSAGES];
+    mixr::base::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
     Message* msg = nullptr;
     while ((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
-        mxrp::base::Object* tempObj = inQueue->get();
+        mixr::base::Object* tempObj = inQueue->get();
         msg = dynamic_cast<Message*>(tempObj);
         if (msg != nullptr) {
             if (base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -289,11 +289,11 @@ void Datalink::dynamics(const double)
         }
     }
 
-    mxrp::base::Object* tempOutQueue[MAX_MESSAGES];
+    mixr::base::Object* tempOutQueue[MAX_MESSAGES];
     int numOut = 0;
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
-        mxrp::base::Object* tempObj = outQueue->get();
+        mixr::base::Object* tempObj = outQueue->get();
         msg = dynamic_cast<Message*>(tempObj);
         if(msg != nullptr) {
             if(base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {

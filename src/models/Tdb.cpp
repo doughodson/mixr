@@ -1,22 +1,22 @@
 
-#include "mxrp/models/Tdb.hpp"
+#include "mixr/models/Tdb.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Gimbal.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/terrain/Terrain.hpp"
+#include "mixr/terrain/Terrain.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
-#include "mxrp/base/util/osg_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/osg_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Gimbal_Tdb")

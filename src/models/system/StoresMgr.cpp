@@ -1,27 +1,27 @@
 //------------------------------------------------------------------------------
 // Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#include "mxrp/models/system/StoresMgr.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
 
-#include "mxrp/models/player/Bomb.hpp"
-#include "mxrp/models/player/Effects.hpp"
+#include "mixr/models/player/Bomb.hpp"
+#include "mixr/models/player/Effects.hpp"
 
-#include "mxrp/models/system/ExternalStore.hpp"
-#include "mxrp/models/system/FuelTank.hpp"
-#include "mxrp/models/system/Guns.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/system/RfSensor.hpp"
-#include "mxrp/models/player/Sam.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
+#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/FuelTank.hpp"
+#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/player/Sam.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/system/TrackManager.hpp"
 
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(StoresMgr, "BaseStoresMgr")

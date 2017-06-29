@@ -1,9 +1,9 @@
 
-#include "mxrp/base/units/Energies.hpp"
+#include "mixr/base/units/Energies.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

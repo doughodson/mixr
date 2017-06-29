@@ -1,11 +1,11 @@
 
-#include "mxrp/graphics/MapPage.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/graphics/MapPage.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(MapPage, "MapPage")

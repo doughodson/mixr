@@ -1,23 +1,23 @@
 
-#include "mxrp/interop/common/Nib.hpp"
-#include "mxrp/interop/common/Ntm.hpp"
+#include "mixr/interop/common/Nib.hpp"
+#include "mixr/interop/common/Ntm.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/GroundVehicle.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/SamVehicles.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
-#include "mxrp/models/SynchronizedState.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/SamVehicles.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/SynchronizedState.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace interop {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
@@ -31,7 +31,7 @@ Nib::Nib(const NetIO::IoType t) : ioType(t)
 
 void Nib::initData()
 {
-   base::utStrcpy(pname, PNAME_BUF_SIZE, "MXRP");
+   base::utStrcpy(pname, PNAME_BUF_SIZE, "MIXR");
    side = models::Player::BLUE;
    mode = models::Player::INACTIVE;
 
@@ -627,7 +627,7 @@ void Nib::playerState2Nib()
       const base::String* sname = player->getName();
       if (sname != nullptr) cname = *sname;
       if (cname != nullptr) setPlayerName(cname);
-      else setPlayerName("MXRP");
+      else setPlayerName("MIXR");
 
       freeze( player->isFrozen() );
       if (!isMode(models::Player::DELETE_REQUEST)) setMode( player->getMode() );

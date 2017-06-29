@@ -1,10 +1,10 @@
 
 #include <iostream>
 
-#include "mxrp/base/distributions/Lognormal.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/distributions/Lognormal.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Lognormal,"Lognormal")

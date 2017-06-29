@@ -1,11 +1,11 @@
 
-#include "mxrp/graphics/Page.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/graphics/Page.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Page,"Page")

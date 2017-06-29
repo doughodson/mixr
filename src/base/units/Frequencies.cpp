@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // Frequencies, Hertz
 //------------------------------------------------------------------------------
-#include "mxrp/base/units/Frequencies.hpp"
+#include "mixr/base/units/Frequencies.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

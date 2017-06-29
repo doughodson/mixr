@@ -1,17 +1,17 @@
 
-#include "mxrp/graphics/Display.hpp"
+#include "mixr/graphics/Display.hpp"
 
-#include "mxrp/graphics/Font.hpp"
-#include "mxrp/graphics/Image.hpp"
-#include "mxrp/graphics/Texture.hpp"
-#include "mxrp/graphics/Material.hpp"
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/Rgba.hpp"
-#include "mxrp/base/Hsva.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/graphics/Font.hpp"
+#include "mixr/graphics/Image.hpp"
+#include "mixr/graphics/Texture.hpp"
+#include "mixr/graphics/Material.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/Rgba.hpp"
+#include "mixr/base/Hsva.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/PairStream.hpp"
 
 #include <string>
 #include <cstdio>
@@ -26,7 +26,7 @@
 #include <GL/glext.h>
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Display, "Display")

@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_interop_dis.a
+LIB = $(MIXR_LIB_DIR)/libmixr_interop_dis.a
 
 OBJS =  \
 	EmissionPduHandler.o \

@@ -1,24 +1,24 @@
 
-#include "mxrp/models/navigation/Route.hpp"
+#include "mixr/models/navigation/Route.hpp"
 
-#include "mxrp/models/navigation/Steerpoint.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/navigation/Navigation.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/Actions.hpp"
+#include "mixr/models/navigation/Steerpoint.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/Actions.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cstdio>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Route,"Route")

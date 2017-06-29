@@ -1,10 +1,10 @@
 
 #include <iostream>
 
-#include "mxrp/base/distributions/Exponential.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/distributions/Exponential.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Exponential,"Exponential")

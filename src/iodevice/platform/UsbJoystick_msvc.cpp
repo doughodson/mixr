@@ -1,9 +1,9 @@
 
 #include "UsbJoystick_msvc.hpp"
-#include "mxrp/base/util/platform_api.hpp"
+#include "mixr/base/util/platform_api.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")

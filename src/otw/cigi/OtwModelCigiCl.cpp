@@ -1,14 +1,14 @@
 
-#include "mxrp/otw/cigi/OtwModelCigiCl.hpp"
-#include "mxrp/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/otw/cigi/OtwModelCigiCl.hpp"
+#include "mixr/otw/cigi/OtwCigiCl.hpp"
 
-#include "mxrp/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"
 #include "cigicl/CigiArtPartCtrlV3.h"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")

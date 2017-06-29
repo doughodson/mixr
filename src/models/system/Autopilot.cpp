@@ -1,28 +1,28 @@
 
-#include "mxrp/models/system/Autopilot.hpp"
-#include "mxrp/models/dynamics/DynamicsModel.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/navigation/Navigation.hpp"
-#include "mxrp/models/navigation/Route.hpp"
-#include "mxrp/models/navigation/Steerpoint.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/system/Autopilot.hpp"
+#include "mixr/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/Route.hpp"
+#include "mixr/models/navigation/Steerpoint.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 // default flight control attributes associated with flying a pattern

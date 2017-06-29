@@ -6,13 +6,13 @@
 //    Function storage:                   FStorage
 //------------------------------------------------------------------------------
 
-#include "mxrp/base/functors/Functions.hpp"
+#include "mixr/base/functors/Functions.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

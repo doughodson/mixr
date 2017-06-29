@@ -1,8 +1,8 @@
 
-#include "mxrp/instruments/eadi3d/Eadi3DPage.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/eadi3d/Eadi3DPage.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/Number.hpp"
 
 // setup local variables and static variables
 #define RADIUS_180  1.625                   /* 180 in view */
@@ -10,7 +10,7 @@
 #define RADIUS_140  1.729                   /* 140 in view */
 #define RADIUS_120  1.877                   /* 120 in view */
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 static double GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };

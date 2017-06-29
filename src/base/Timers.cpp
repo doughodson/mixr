@@ -1,10 +1,10 @@
 
-#include "mxrp/base/Timers.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/util/atomics.hpp"
+#include "mixr/base/Timers.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/util/atomics.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Timer, "Timer")

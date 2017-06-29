@@ -2,15 +2,15 @@
 #include <fstream>
 #include <cstring>
 
-#include "mxrp/base/FileReader.hpp"
+#include "mixr/base/FileReader.hpp"
 
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(FileReader, "FileReader")

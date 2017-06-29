@@ -26,16 +26,16 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "mxrp/base/network/UdpBroadcastHandler.hpp"
+#include "mixr/base/network/UdpBroadcastHandler.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 
 #include <cstdio>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

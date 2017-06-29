@@ -10,16 +10,16 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "mxrp/base/Object.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/Object.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/util/str_utils.hpp"
 #include "EdlScanner.hpp"
 #include "EdlParser.hpp"
 
@@ -41,8 +41,8 @@
 /* change the name of the scanner class - results in "edlFlexLexer" */
 %option prefix="edl"
 
-/* derived 'mxrp::base::EdlScanner' is a subclass of edlFlexLexer */
-%option yyclass="mxrp::base::EdlScanner"
+/* derived 'mixr::base::EdlScanner' is a subclass of edlFlexLexer */
+%option yyclass="mixr::base::EdlScanner"
 
 D           [0-9]
 L           [a-zA-Z0-9~!@#$%^&*\-_+=<>?/]

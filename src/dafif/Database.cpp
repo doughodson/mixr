@@ -1,16 +1,16 @@
 
-#include "mxrp/dafif/Database.hpp"
-#include "mxrp/dafif/Record.hpp"
-#include "mxrp/base/FileReader.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/units/angle_utils.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/dafif/Database.hpp"
+#include "mixr/dafif/Record.hpp"
+#include "mixr/base/FileReader.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cstring>
 #include <cmath>
 #include <cstdlib>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Database, "Database")

@@ -1,20 +1,20 @@
 
-#include "mxrp/models/player/Missile.hpp"
+#include "mixr/models/player/Missile.hpp"
 
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/osg/Matrixd"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/osg/Matrixd"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Missile, "Missile")

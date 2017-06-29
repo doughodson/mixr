@@ -1,16 +1,16 @@
 
-#include "mxrp/base/Hsv.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/util/math_utils.hpp"
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Vec4d"
+#include "mixr/base/Hsv.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/util/math_utils.hpp"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Vec4d"
 
 #include <cmath>
 
-#include "mxrp/base/util/platform_api.hpp"
+#include "mixr/base/util/platform_api.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Hsv, "hsv")

@@ -1,10 +1,10 @@
 
-#include "mxrp/base/String.hpp"
+#include "mixr/base/String.hpp"
 
 #include <cstdlib>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(String, "String")

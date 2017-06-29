@@ -1,14 +1,14 @@
 
-#include "mxrp/gui/glut/factory.hpp"
+#include "mixr/gui/glut/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/gui/glut/GlutDisplay.hpp"
-#include "mxrp/gui/glut/Shapes3D.hpp"
+#include "mixr/gui/glut/GlutDisplay.hpp"
+#include "mixr/gui/glut/Shapes3D.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace glut {
 
 base::Object* factory(const std::string& name)

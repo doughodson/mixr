@@ -1,16 +1,16 @@
 
-#include "mxrp/iodevice/SignalGen.hpp"
+#include "mixr/iodevice/SignalGen.hpp"
 
-#include "mxrp/base/io/IoData.hpp"
-#include "mxrp/base/io/IoDevice.hpp"
+#include "mixr/base/io/IoData.hpp"
+#include "mixr/base/io/IoDevice.hpp"
 
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Frequencies.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 

@@ -1,9 +1,9 @@
 
-#include "mxrp/simulation/StationTcThread.hpp"
+#include "mixr/simulation/StationTcThread.hpp"
 
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Station.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(TcThread, "TcThread")

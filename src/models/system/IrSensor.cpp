@@ -8,24 +8,24 @@
 // afterwards, it will complete its process after the sensor, and will accept inputs
 // in the same frame in which they were generated.
 
-#include "mxrp/models/system/IrSensor.hpp"
+#include "mixr/models/system/IrSensor.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSeeker.hpp"
-#include "mxrp/models/system/AngleOnlyTrackManager.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/environment/IrAtmosphere.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSeeker.hpp"
+#include "mixr/models/system/AngleOnlyTrackManager.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/environment/IrAtmosphere.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Integer.hpp"
+#include "mixr/base/Integer.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 //IMPLEMENT_SUBCLASS(IrSensor,"IrSensor")

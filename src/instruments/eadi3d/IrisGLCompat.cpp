@@ -1,16 +1,16 @@
 
-#include "mxrp/instruments/eadi3d/IrisGLCompat.hpp"
+#include "mixr/instruments/eadi3d/IrisGLCompat.hpp"
 
-#include "mxrp/base/util/constants.hpp"
-#include "mxrp/base/util/platform_api.hpp"
-#include "mxrp/base/units/angle_utils.hpp"
+#include "mixr/base/util/constants.hpp"
+#include "mixr/base/util/platform_api.hpp"
+#include "mixr/base/units/angle_utils.hpp"
 
 #include <GL/gl.h>
 #include <cmath>
 
 #define MAX_POINTS 64
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")

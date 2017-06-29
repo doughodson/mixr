@@ -1,24 +1,24 @@
 
-#include "mxrp/interop/rprfom/Nib.hpp"
+#include "mixr/interop/rprfom/Nib.hpp"
 
-#include "mxrp/interop/rprfom/NetIO.hpp"
-#include "mxrp/interop/rprfom/RprFom.hpp"
-#include "mxrp/interop/hla/Ambassador.hpp"
+#include "mixr/interop/rprfom/NetIO.hpp"
+#include "mixr/interop/rprfom/RprFom.hpp"
+#include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mxrp/interop/dis/Ntm.hpp"
+#include "mixr/interop/dis/Ntm.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/Signatures.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/Signatures.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace rprfom {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")

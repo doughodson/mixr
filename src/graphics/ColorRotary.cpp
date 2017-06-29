@@ -1,13 +1,13 @@
 
-#include "mxrp/graphics/ColorRotary.hpp"
+#include "mixr/graphics/ColorRotary.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/osg/Vec4d"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/osg/Vec4d"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")

@@ -1,8 +1,8 @@
 
-#include "mxrp/base/io/IoData.hpp"
+#include "mixr/base/io/IoData.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(IoData, "GenericIoData")

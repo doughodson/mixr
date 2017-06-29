@@ -1,15 +1,15 @@
 
-#include "mxrp/recorder/FileWriter.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
-#include "mxrp/recorder/DataRecordHandle.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/util/str_utils.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/recorder/FileWriter.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <fstream>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(FileWriter, "RecorderFileWriter")

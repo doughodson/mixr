@@ -1,11 +1,11 @@
 
-#include "mxrp/base/concurrent/ThreadPool.hpp"
+#include "mixr/base/concurrent/ThreadPool.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/concurrent/ThreadPoolManager.hpp"
-#include "mxrp/base/concurrent/ThreadPoolThread.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/concurrent/ThreadPoolManager.hpp"
+#include "mixr/base/concurrent/ThreadPoolThread.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(ThreadPool, "ThreadPool")

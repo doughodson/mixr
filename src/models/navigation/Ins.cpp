@@ -1,8 +1,8 @@
 
-#include "mxrp/models/navigation/Ins.hpp"
+#include "mixr/models/navigation/Ins.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Ins, "Ins")

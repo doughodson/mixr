@@ -1,9 +1,9 @@
 
-#include "mxrp/map/rpf/CadrgFrameEntry.hpp"
-#include "mxrp/map/rpf/CadrgFrame.hpp"
+#include "mixr/map/rpf/CadrgFrameEntry.hpp"
+#include "mixr/map/rpf/CadrgFrame.hpp"
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")

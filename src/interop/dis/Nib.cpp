@@ -1,18 +1,18 @@
 
-#include "mxrp/interop/dis/Nib.hpp"
-#include "mxrp/interop/dis/Ntm.hpp"
-#include "mxrp/interop/dis/EmissionPduHandler.hpp"
-#include "mxrp/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/Nib.hpp"
+#include "mixr/interop/dis/Ntm.hpp"
+#include "mixr/interop/dis/EmissionPduHandler.hpp"
+#include "mixr/interop/dis/pdu.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/system/Jammer.hpp"
-#include "mxrp/models/system/Radar.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/system/Jammer.hpp"
+#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace dis {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")

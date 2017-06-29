@@ -1,13 +1,13 @@
 
-#include "mxrp/graphics/readouts/NumericReadout.hpp"
+#include "mixr/graphics/readouts/NumericReadout.hpp"
 
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Integer.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
-#include "mxrp/base/util/constants.hpp"
+#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/constants.hpp"
 
 #include "ReformatScanner.hpp"
 
@@ -15,7 +15,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(NumericReadout, "NumericReadout")

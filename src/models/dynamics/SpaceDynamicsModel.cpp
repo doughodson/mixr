@@ -1,8 +1,8 @@
 
-#include "mxrp/models/dynamics/SpaceDynamicsModel.hpp"
+#include "mixr/models/dynamics/SpaceDynamicsModel.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SpaceDynamicsModel, "SpaceDynamicsModel")

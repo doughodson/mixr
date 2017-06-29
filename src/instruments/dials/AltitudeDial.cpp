@@ -1,8 +1,8 @@
 
-#include "mxrp/instruments/dials/AltitudeDial.hpp"
+#include "mixr/instruments/dials/AltitudeDial.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial, "AltitudeDial")

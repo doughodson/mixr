@@ -55,15 +55,15 @@
 //
 //==============================================================================
 
-#include "mxrp/terrain/srtm/SrtmHgtFile.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/terrain/srtm/SrtmHgtFile.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <string>
 #include <fstream>
 #include <cstdlib>
 #include <cctype>
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 //===========================================================================================

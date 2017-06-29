@@ -3,32 +3,32 @@
 // Description: Portions of class defined to support entity state PDUs
 //------------------------------------------------------------------------------
 
-#include "mxrp/interop/dis/NetIO.hpp"
-#include "mxrp/interop/dis/Nib.hpp"
-#include "mxrp/interop/dis/Ntm.hpp"
-#include "mxrp/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/NetIO.hpp"
+#include "mixr/interop/dis/Nib.hpp"
+#include "mixr/interop/dis/Ntm.hpp"
+#include "mixr/interop/dis/pdu.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/GroundVehicle.hpp"
-#include "mxrp/models/player/LifeForms.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/LifeForms.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
 
-#include "mxrp/simulation/Simulation.hpp"
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/Station.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
 #include <cstdio>
 #include <cmath>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace dis {
 
 static const unsigned int CAMOUFLAGE_BIT  = 0x00000001;   // Paint scheme (camouflage) bit (0 - Uniform color; 1 - Camouflaged)

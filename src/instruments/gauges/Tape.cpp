@@ -1,10 +1,10 @@
 
-#include "mxrp/instruments/gauges/Tape.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/instruments/gauges/Tape.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/util/math_utils.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Tape, "Tape")

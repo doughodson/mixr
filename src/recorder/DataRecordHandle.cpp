@@ -1,8 +1,8 @@
 
-#include "mxrp/recorder/DataRecordHandle.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecordHandle,"DataRecordHandle")

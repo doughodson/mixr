@@ -1,11 +1,11 @@
 
-#include "mxrp/terrain/DataFile.hpp"
+#include "mixr/terrain/DataFile.hpp"
 
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/units/angle_utils.hpp"
-#include "mxrp/base/units/distance_utils.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/distance_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DataFile, "DataFile")

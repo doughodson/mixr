@@ -1,7 +1,7 @@
 
-#include "mxrp/simulation/AbstractOtw.hpp"
+#include "mixr/simulation/AbstractOtw.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractOtw, "AbstractOtw")

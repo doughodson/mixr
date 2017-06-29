@@ -1,10 +1,10 @@
 
 #include <iostream>
 
-#include "mxrp/base/distributions/Pareto.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/distributions/Pareto.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Pareto,"Pareto")

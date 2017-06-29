@@ -1,20 +1,20 @@
 
-#include "mxrp/models/environment/IrAtmosphere.hpp"
+#include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSensor.hpp"
-#include "mxrp/models/system/Gimbal.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSensor.hpp"
+#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/Number.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere, "IrAtmosphere")
@@ -78,7 +78,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(mxrp::base::Number* const num)
+bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
@@ -91,7 +91,7 @@ bool IrAtmosphere::setSlotSkyRadiance(mxrp::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(mxrp::base::Number* const num)
+bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {

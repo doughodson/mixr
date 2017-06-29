@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/buttons/Switch.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/buttons/Switch.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Switch, "Switch")

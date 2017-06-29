@@ -1,17 +1,17 @@
 
-#include "mxrp/map/rpf/MapDrawer.hpp"
-#include "mxrp/map/rpf/CadrgMap.hpp"
-#include "mxrp/map/rpf/TexturePager.hpp"
-#include "mxrp/map/rpf/CadrgTocEntry.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/graphics/Texture.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/map/rpf/MapDrawer.hpp"
+#include "mixr/map/rpf/CadrgMap.hpp"
+#include "mixr/map/rpf/TexturePager.hpp"
+#include "mixr/map/rpf/CadrgTocEntry.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/graphics/Texture.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")

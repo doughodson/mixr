@@ -1,15 +1,15 @@
 
-#include "mxrp/models/TargetData.hpp"
+#include "mixr/models/TargetData.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/Times.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(TargetData, "TargetData")

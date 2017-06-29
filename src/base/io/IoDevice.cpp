@@ -1,12 +1,12 @@
 
-#include "mxrp/base/io/IoDevice.hpp"
-#include "mxrp/base/io/IoAdapter.hpp"
-#include "mxrp/base/io/IoHandler.hpp"
+#include "mixr/base/io/IoDevice.hpp"
+#include "mixr/base/io/IoAdapter.hpp"
+#include "mixr/base/io/IoHandler.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(IoDevice, "IoDevice")

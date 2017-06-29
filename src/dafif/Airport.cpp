@@ -1,8 +1,8 @@
 
-#include "mxrp/dafif/Airport.hpp"
+#include "mixr/dafif/Airport.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport, "Airport")

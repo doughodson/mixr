@@ -1,9 +1,9 @@
 
-#include "mxrp/base/Cmy.hpp"
+#include "mixr/base/Cmy.hpp"
 
-#include "mxrp/base/Float.hpp"
+#include "mixr/base/Float.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Cmy,"cmy")

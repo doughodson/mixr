@@ -1,9 +1,9 @@
 
-#include "mxrp/linearsystem/SaH.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
+#include "mixr/linearsystem/SaH.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Frequencies.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(SaH, "SaH")

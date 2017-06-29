@@ -1,13 +1,13 @@
 
-#include "mxrp/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/AbstractPlayer.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/simulation/AbstractNetIO.hpp"
-#include "mxrp/simulation/AbstractNib.hpp"
+#include "mixr/simulation/AbstractNetIO.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractPlayer, "AbstractPlayer")

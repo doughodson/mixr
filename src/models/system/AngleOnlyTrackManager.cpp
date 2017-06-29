@@ -1,25 +1,25 @@
 
-#include "mxrp/models/system/AngleOnlyTrackManager.hpp"
+#include "mixr/models/system/AngleOnlyTrackManager.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(AngleOnlyTrackManager, "AngleOnlyTrackManager")

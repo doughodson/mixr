@@ -1,13 +1,13 @@
 
-#include "mxrp/base/Color.hpp"
+#include "mixr/base/Color.hpp"
 
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Vec4d"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Vec4d"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")

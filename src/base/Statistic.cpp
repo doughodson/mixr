@@ -1,10 +1,10 @@
 
-#include "mxrp/base/Statistic.hpp"
+#include "mixr/base/Statistic.hpp"
 
 #include <limits>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic, "Statistic")

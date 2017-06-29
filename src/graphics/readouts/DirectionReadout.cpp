@@ -1,5 +1,5 @@
 
-#include "mxrp/graphics/readouts/DirectionReadout.hpp"
+#include "mixr/graphics/readouts/DirectionReadout.hpp"
 
 #include "ReformatScanner.hpp"
 
@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout, "DirectionReadout")

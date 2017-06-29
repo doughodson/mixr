@@ -1,12 +1,12 @@
 
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/Emission.hpp"
 
-#include "mxrp/models/system/RfSystem.hpp"
+#include "mixr/models/system/RfSystem.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Emission, "Emission")

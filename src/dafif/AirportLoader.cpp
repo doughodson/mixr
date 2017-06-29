@@ -1,14 +1,14 @@
 
-#include "mxrp/dafif/AirportLoader.hpp"
-#include "mxrp/base/FileReader.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/dafif/AirportLoader.hpp"
+#include "mixr/base/FileReader.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
 #include <limits>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_SUBCLASS(AirportLoader, "AirportLoader")

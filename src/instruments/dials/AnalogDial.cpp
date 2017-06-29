@@ -1,10 +1,10 @@
 
-#include "mxrp/instruments/dials/AnalogDial.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/dials/AnalogDial.hpp"
+#include "mixr/base/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogDial, "AnalogDial")

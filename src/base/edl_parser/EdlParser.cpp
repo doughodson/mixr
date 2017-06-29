@@ -69,21 +69,21 @@
 #include <string>
 #include <fstream>
 
-#include "mxrp/base/edl_parser.hpp"
-#include "mxrp/base/Object.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/List.hpp"
+#include "mixr/base/edl_parser.hpp"
+#include "mixr/base/Object.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mxrp::base::Object* result;             // result of all our work (i.e., an Object)
-static mxrp::base::EdlScanner* scanner;        // edl scanner
-static mxrp::base::factory_func factory;       // factory function 
+static mixr::base::Object* result;             // result of all our work (i.e., an Object)
+static mixr::base::EdlScanner* scanner;        // edl scanner
+static mixr::base::factory_func factory;       // factory function 
 static unsigned int err_count;                 // error count
 
 //------------------------------------------------------------------------------
@@ -114,9 +114,9 @@ inline void yyerror(const char* s)
 // parse() -- returns an object with factory 'name' with its slots set to
 //            values in 'arg_list'
 //------------------------------------------------------------------------------
-static mxrp::base::Object* parse(const std::string& name, mxrp::base::PairStream* arg_list)
+static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream* arg_list)
 {
-    mxrp::base::Object* obj {};
+    mixr::base::Object* obj {};
 
     if (factory != nullptr) {
 
@@ -125,9 +125,9 @@ static mxrp::base::Object* parse(const std::string& name, mxrp::base::PairStream
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            mxrp::base::List::Item* item = arg_list->getFirstItem();
+            mixr::base::List::Item* item = arg_list->getFirstItem();
             while (item != nullptr) {
-                mxrp::base::Pair* p = static_cast<mxrp::base::Pair*>(item->getValue());
+                mixr::base::Pair* p = static_cast<mixr::base::Pair*>(item->getValue());
                 bool ok = obj->setSlotByName(*p->slot(), p->object());
                 if (!ok) {
                     std::string msg = "error while setting slot name: " + std::string(*p->slot());
@@ -205,11 +205,11 @@ union YYSTYPE
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   mxrp::base::Object*        ovalp;
-   mxrp::base::Pair*          pvalp;
-   mxrp::base::PairStream*    svalp;
-   mxrp::base::List*          lvalp;
-   mxrp::base::Number*        nvalp;
+   mixr::base::Object*        ovalp;
+   mixr::base::Pair*          pvalp;
+   mixr::base::PairStream*    svalp;
+   mixr::base::List*          lvalp;
+   mixr::base::Number*        nvalp;
 
 #line 215 "EdlParser.cpp" /* yacc.c:355  */
 };
@@ -1322,13 +1322,13 @@ yyreduce:
 
   case 3:
 #line 140 "edl_parser.y" /* yacc.c:1646  */
-    { if ((yyvsp[0].ovalp) != 0) { result = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
+    { if ((yyvsp[0].ovalp) != 0) { result = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
 #line 1327 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
 #line 143 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.svalp) = new mxrp::base::PairStream(); }
+    { (yyval.svalp) = new mixr::base::PairStream(); }
 #line 1333 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1338,7 +1338,7 @@ yyreduce:
                                         int i = (yyvsp[-1].svalp)->entries();
                                         char cbuf[20];
                                         std::sprintf(cbuf, "%i", i+1);
-                                        mxrp::base::Pair* p = new mxrp::base::Pair(cbuf, (yyvsp[0].ovalp));
+                                        mixr::base::Pair* p = new mixr::base::Pair(cbuf, (yyvsp[0].ovalp));
                                         (yyvsp[0].ovalp)->unref();
                                         (yyvsp[-1].svalp)->put(p);
                                         p->unref();
@@ -1354,7 +1354,7 @@ yyreduce:
                                     int i = (yyvsp[-1].svalp)->entries();
                                     char cbuf[20];
                                     std::sprintf(cbuf,"%i", i+1);
-                                    mxrp::base::Pair* p = new mxrp::base::Pair(cbuf, (yyvsp[0].ovalp));
+                                    mixr::base::Pair* p = new mixr::base::Pair(cbuf, (yyvsp[0].ovalp));
                                     (yyvsp[0].ovalp)->unref();
                                     (yyvsp[-1].svalp)->put(p);
                                     p->unref();
@@ -1377,37 +1377,37 @@ yyreduce:
 
   case 9:
 #line 174 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = (mxrp::base::Object*) (yyvsp[-1].svalp); }
+    { (yyval.ovalp) = (mixr::base::Object*) (yyvsp[-1].svalp); }
 #line 1382 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 178 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.pvalp) = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
+    { (yyval.pvalp) = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
 #line 1388 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 179 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.pvalp) = new mxrp::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
+    { (yyval.pvalp) = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
 #line 1394 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 182 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new mxrp::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
+    { (yyval.ovalp) = new mixr::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
 #line 1400 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 183 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new mxrp::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
+    { (yyval.ovalp) = new mixr::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
 #line 1406 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
 #line 184 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.ovalp) = new mxrp::base::Boolean((yyvsp[0].bval)); }
+    { (yyval.ovalp) = new mixr::base::Boolean((yyvsp[0].bval)); }
 #line 1412 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1425,7 +1425,7 @@ yyreduce:
 
   case 17:
 #line 189 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.lvalp) = new mxrp::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
+    { (yyval.lvalp) = new mixr::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
 #line 1430 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1437,13 +1437,13 @@ yyreduce:
 
   case 19:
 #line 193 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.nvalp) = new mxrp::base::Integer((yyvsp[0].lval)); }
+    { (yyval.nvalp) = new mixr::base::Integer((yyvsp[0].lval)); }
 #line 1442 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 194 "edl_parser.y" /* yacc.c:1646  */
-    { (yyval.nvalp) = new mxrp::base::Float((yyvsp[0].dval)); }
+    { (yyval.nvalp) = new mixr::base::Float((yyvsp[0].dval)); }
 #line 1448 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
@@ -1679,7 +1679,7 @@ yyreturn:
 #line 196 "edl_parser.y" /* yacc.c:1906  */
 
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------

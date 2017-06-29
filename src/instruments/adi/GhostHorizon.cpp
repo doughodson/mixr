@@ -1,15 +1,15 @@
 
-#include "mxrp/instruments/adi/GhostHorizon.hpp"
+#include "mixr/instruments/adi/GhostHorizon.hpp"
 
-#include "mxrp/base/Color.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Rgba.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/Color.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Rgba.hpp"
+#include "mixr/base/functors/Tables.hpp"
 
-#include "mxrp/graphics/Display.hpp"
+#include "mixr/graphics/Display.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")

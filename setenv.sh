@@ -5,26 +5,26 @@
 # ---------------------------------------------------------------------
 
 # ---
-# MXPR root
+# MIXR root
 # ---
-MXRP_ROOT=$PWD
-export MXRP_ROOT
+MIXR_ROOT=$PWD
+export MIXR_ROOT
 
 # ---
-# MXRP 3rd party (e.g. cigi, JSBSim) root
+# MIXR 3rd party (e.g. cigi, JSBSim) root
 # ---
-MXRP_3RD_PARTY_ROOT=$PWD/../mxrp_3rdparty
-export MXRP_3RD_PARTY_ROOT
+MIXR_3RD_PARTY_ROOT=$PWD/../mixr_3rdparty
+export MIXR_3RD_PARTY_ROOT
 
 # ---
 # Update the loader library path with our 3rd party library path
 # ---
-LD_LIBRARY_PATH=$MXRP_3RD_PARTY_ROOT/lib:${LD_LIBRARY_PATH}
+LD_LIBRARY_PATH=$MIXR_3RD_PARTY_ROOT/lib:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH
 
 # ---
 # Update path to search for binaries in our 3rd party library path
 # ---
-PATH=$MXRP_3RD_PARTY_ROOT/bin:$PATH
+PATH=$MIXR_3RD_PARTY_ROOT/bin:$PATH
 export PATH
 

@@ -1,8 +1,8 @@
 
-#include "mxrp/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/AbstractAction.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace ubf {
 

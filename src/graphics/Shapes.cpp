@@ -1,12 +1,12 @@
 
-#include "mxrp/graphics/Shapes.hpp"
+#include "mixr/graphics/Shapes.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/graphics/ColorGradient.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/graphics/ColorGradient.hpp"
 #include <GL/glu.h>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 //==============================================================================

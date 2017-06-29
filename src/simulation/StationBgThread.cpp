@@ -1,9 +1,9 @@
 
-#include "mxrp/simulation/StationBgThread.hpp"
+#include "mixr/simulation/StationBgThread.hpp"
 
-#include "mxrp/simulation/Station.hpp"
+#include "mixr/simulation/Station.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(BgThread,"BgThread")

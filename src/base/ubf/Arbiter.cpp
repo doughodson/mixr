@@ -1,11 +1,11 @@
 
-#include "mxrp/base/ubf/Arbiter.hpp"
-#include "mxrp/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/Arbiter.hpp"
+#include "mixr/base/ubf/AbstractAction.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace ubf {
 

@@ -1,10 +1,10 @@
 
-#include "mxrp/linearsystem/LowpassFilter.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
-#include "mxrp/base/util/constants.hpp"
+#include "mixr/linearsystem/LowpassFilter.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/util/constants.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LowpassFilter,"LowpassFilter")

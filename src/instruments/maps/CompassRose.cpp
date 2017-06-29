@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/maps/CompassRose.hpp"
+#include "mixr/instruments/maps/CompassRose.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")

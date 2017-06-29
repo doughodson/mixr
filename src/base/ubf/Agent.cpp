@@ -1,13 +1,13 @@
 
-#include "mxrp/base/ubf/Agent.hpp"
-#include "mxrp/base/ubf/AbstractAction.hpp"
-#include "mxrp/base/ubf/AbstractBehavior.hpp"
-#include "mxrp/base/ubf/AbstractState.hpp"
+#include "mixr/base/ubf/Agent.hpp"
+#include "mixr/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/AbstractBehavior.hpp"
+#include "mixr/base/ubf/AbstractState.hpp"
 
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 namespace ubf {
 

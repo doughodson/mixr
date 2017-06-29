@@ -1,8 +1,8 @@
 
-#include "mxrp/models/Image.hpp"
+#include "mixr/models/Image.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Image, "SarImage")

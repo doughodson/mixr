@@ -1,15 +1,15 @@
 
-#include "mxrp/graphics/Field.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/graphics/Page.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Rgb.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/graphics/Field.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/graphics/Page.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Rgb.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Field, "Field")

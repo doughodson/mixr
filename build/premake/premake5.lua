@@ -14,13 +14,13 @@ end
 --
 -- directory location for 3rd party dependencies
 --
-MXRP_3RD_PARTY_ROOT = "../../../mxrp-3rdparty"
+MIXR_3RD_PARTY_ROOT = "../../../mixr-3rdparty"
 
 --
 -- set include and library paths
 --
-MXRP_IncPath         = "../../include"
-MXRP_3rdPartyIncPath = MXRP_3RD_PARTY_ROOT.."/include"
+MIXR_IncPath         = "../../include"
+MIXR_3rdPartyIncPath = MIXR_3RD_PARTY_ROOT.."/include"
 
 --
 -- directory location for HLA include and library paths
@@ -30,9 +30,9 @@ HLAIncPath = HLA_ROOT.."/include/RTI13"
 HLALibPath = HLA_ROOT.."/lib"
 print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
---print ("  Libraries : "..MXRP_LibPath)
+--print ("  Libraries : "..MIXR_LibPath)
 
-workspace "mxrp"
+workspace "mixr"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
@@ -47,10 +47,10 @@ workspace "mxrp"
    language "C++"
 
    -- common include directories (all configurations/all projects)
-   includedirs { MXRP_IncPath, MXRP_3rdPartyIncPath }
+   includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
 
    -- target suffix (all configurations/all projects)
-   targetprefix "mxrp_"
+   targetprefix "mixr_"
 
    --
    -- Build (solution) configuration options:
@@ -88,10 +88,11 @@ workspace "mxrp"
    -- base library
    project "base"
       files {
-         "../../include/mxrp/base/**.h*",
-         "../../include/mxrp/base/**.inl",
-         "../../include/mxrp/base/**.epp",
-         "../../include/mxrp/base/osg/*",
+         "../../include/mixr/base/**.h*",
+         "../../include/mixr/base/**.inl",
+         "../../include/mixr/base/**.epp",
+         "../../include/mixr/base/osg/*",
+         "../../src/base/**.h*",
          "../../src/base/**.cpp",
          "../../src/base/**.y",
          "../../src/base/**.l"
@@ -107,18 +108,19 @@ workspace "mxrp"
    -- OpenGL-based graphics library
    project "graphics"
       files {
-         "../../include/mxrp/graphics/**.h*",
+         "../../include/mixr/graphics/**.h*",
+         "../../src/graphics/**.h*",
          "../../src/graphics/**.cpp",
          "../../src/graphics/**.l"
       }
-      includedirs { MXRP_3rdPartyIncPath.."/freetype2" }
+      includedirs { MIXR_3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
       targetname "graphics"
 
    -- OpenGL GLUT interface library
    project "gui_glut"
       files {
-         "../../include/mxrp/gui/glut/**.h*",
+         "../../include/mixr/gui/glut/**.h*",
          "../../src/gui/glut/**.cpp"
       }
       targetname "gui_glut"
@@ -126,7 +128,7 @@ workspace "mxrp"
    -- DAFIF airport loader library
    project "dafif"
       files {
-         "../../include/mxrp/dafif/**.h*",
+         "../../include/mixr/dafif/**.h*",
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
@@ -134,8 +136,8 @@ workspace "mxrp"
    -- graphical instruments library
    project "instruments"
       files {
-         "../../include/mxrp/instruments/**.h*",
-         "../../include/mxrp/instruments/**.epp",
+         "../../include/mixr/instruments/**.h*",
+         "../../include/mixr/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
       targetname "instruments"
@@ -143,7 +145,7 @@ workspace "mxrp"
    -- i/o device library
    project "iodevice"
       files {
-         "../../include/mxrp/iodevice/**.h*",
+         "../../include/mixr/iodevice/**.h*",
          "../../src/iodevice/**.*"
       }
       excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
@@ -152,7 +154,7 @@ workspace "mxrp"
    -- linear systems library
    project "linearsystem"
       files {
-         "../../include/mxrp/linearsystem/**.h*",
+         "../../include/mixr/linearsystem/**.h*",
          "../../src/linearsystem/**.cpp"
       }
       targetname "linearsystem"
@@ -160,17 +162,17 @@ workspace "mxrp"
    -- models library
    project "models"
       files {
-         "../../include/mxrp/models/**.h*",
-         "../../include/mxrp/models/**.inl",
+         "../../include/mixr/models/**.h*",
+         "../../include/mixr/models/**.inl",
          "../../src/models/**.cpp"
       }
-      includedirs { MXRP_3rdPartyIncPath.."/JSBSim" }
+      includedirs { MIXR_3rdPartyIncPath.."/JSBSim" }
       targetname "models"
 
    -- otw library
    project "otw"
       files {
-         "../../include/mxrp/otw/**.h*",
+         "../../include/mixr/otw/**.h*",
          "../../src/otw/**.h*",
          "../../src/otw/**.cpp"
       }
@@ -178,9 +180,9 @@ workspace "mxrp"
 
    project "recorder"
       files {
-         "../../include/mxrp/recorder/**.h*",
-         "../../include/mxrp/recorder/*.inl",
-         "../../include/mxrp/recorder/**.proto",
+         "../../include/mixr/recorder/**.h*",
+         "../../include/mixr/recorder/*.inl",
+         "../../include/mixr/recorder/**.proto",
          "../../src/recorder/**.cpp",
          "../../src/recorder/**.cc"
       }
@@ -190,7 +192,7 @@ workspace "mxrp"
    -- raster product format map library
    project "map_rpf"
       files {
-         "../../include/mxrp/map/rpf/**.h*",
+         "../../include/mixr/map/rpf/**.h*",
          "../../src/map/rpf/**.cpp"
       }
       targetname "map_rpf"
@@ -198,8 +200,8 @@ workspace "mxrp"
    -- simulation library
    project "simulation"
       files {
-         "../../include/mxrp/simulation/**.h*",
-         "../../include/mxrp/simulation/**.inl",
+         "../../include/mixr/simulation/**.h*",
+         "../../include/mixr/simulation/**.inl",
          "../../src/simulation/**.cpp"
       }
       targetname "simulation"
@@ -207,7 +209,7 @@ workspace "mxrp"
    -- terrain library
    project "terrain"
       files {
-         "../../include/mxrp/terrain/**.h*",
+         "../../include/mixr/terrain/**.h*",
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"

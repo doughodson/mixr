@@ -11,7 +11,7 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "mxrp/base/osg/Quat"
+#include "mixr/base/osg/Quat"
 
 #include <limits>
 #include <stdlib.h>
@@ -29,7 +29,7 @@
     +((a)._mat[r][2] * (b)._mat[2][c]) \
     +((a)._mat[r][3] * (b)._mat[3][c])
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 Matrix_implementation::Matrix_implementation( value_type a00, value_type a01, value_type a02, value_type a03,

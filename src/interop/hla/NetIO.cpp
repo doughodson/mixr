@@ -1,13 +1,13 @@
 
-#include "mxrp/interop/hla/NetIO.hpp"
-#include "mxrp/interop/hla/Nib.hpp"
-#include "mxrp/interop/hla/Ambassador.hpp"
+#include "mixr/interop/hla/NetIO.hpp"
+#include "mixr/interop/hla/Nib.hpp"
+#include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
 
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 #include <cstring>
 
@@ -15,7 +15,7 @@
 #include "unistd.h"
 #endif
 
-namespace mxrp {
+namespace mixr {
 namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO, "HlaNetIO")

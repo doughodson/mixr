@@ -1,7 +1,7 @@
 
-#include "mxrp/base/util/lfi.hpp"
+#include "mixr/base/util/lfi.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------

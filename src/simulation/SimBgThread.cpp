@@ -1,12 +1,12 @@
 
-#include "mxrp/simulation/SimBgThread.hpp"
+#include "mixr/simulation/SimBgThread.hpp"
 
-#include "mxrp/simulation/Simulation.hpp"
+#include "mixr/simulation/Simulation.hpp"
 
-#include "mxrp/base/Component.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Component.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace simulation {
 
 IMPLEMENT_SUBCLASS(SimBgThread, "SimBgThread")

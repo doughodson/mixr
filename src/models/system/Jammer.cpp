@@ -1,19 +1,19 @@
 
-#include "mxrp/models/system/Jammer.hpp"
+#include "mixr/models/system/Jammer.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/Emission.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Emission.hpp"
 
-//#include "mxrp/models/WorldModel.hpp"
+//#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Frequencies.hpp"
-#include "mxrp/base/units/Powers.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/Powers.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer, "Jammer")

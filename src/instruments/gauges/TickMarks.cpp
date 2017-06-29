@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/gauges/TickMarks.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/gauges/TickMarks.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(TickMarks, "TickMarks")

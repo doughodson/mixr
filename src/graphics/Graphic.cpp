@@ -1,18 +1,18 @@
 
-#include "mxrp/graphics/Graphic.hpp"
-#include "mxrp/graphics/Display.hpp"
-#include "mxrp/graphics/ColorRotary.hpp"
-#include "mxrp/graphics/Material.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Transforms.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/Rgb.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
+#include "mixr/graphics/Graphic.hpp"
+#include "mixr/graphics/Display.hpp"
+#include "mixr/graphics/ColorRotary.hpp"
+#include "mixr/graphics/Material.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Transforms.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/Rgb.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")

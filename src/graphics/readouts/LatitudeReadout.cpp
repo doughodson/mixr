@@ -1,9 +1,9 @@
 
-#include "mxrp/graphics/readouts/LatitudeReadout.hpp"
+#include "mixr/graphics/readouts/LatitudeReadout.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LatitudeReadout, "LatitudeReadout")

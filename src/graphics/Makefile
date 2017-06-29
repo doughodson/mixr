@@ -10,12 +10,12 @@
 # search for "FlexLexer.h" in ReformatScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "mxrp/base/util/FlexLexer.h"
+#   #include "mixr/base/util/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_graphics.a
+LIB = $(MIXR_LIB_DIR)/libmixr_graphics.a
 
 OBJS =  \
 	readouts/AsciiText.o \

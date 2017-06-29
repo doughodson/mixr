@@ -1,18 +1,18 @@
 
-#include "mxrp/otw/factory.hpp"
+#include "mixr/otw/factory.hpp"
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/otw/Otm.hpp"
+#include "mixr/otw/Otm.hpp"
 
-#include "mxrp/otw/cigi/OtwCigiCl.hpp"
-#include "mxrp/otw/cigi/CigiClNetwork.hpp"
+#include "mixr/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/otw/cigi/CigiClNetwork.hpp"
 
-#include "mxrp/otw/pc/OtwPC.hpp"
+#include "mixr/otw/pc/OtwPC.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 base::Object* factory(const std::string& name)

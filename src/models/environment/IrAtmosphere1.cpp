@@ -1,20 +1,20 @@
 
-#include "mxrp/models/environment/IrAtmosphere1.hpp"
+#include "mixr/models/environment/IrAtmosphere1.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSensor.hpp"
-#include "mxrp/models/system/Gimbal.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSensor.hpp"
+#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/Number.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1, "IrAtmosphere1")

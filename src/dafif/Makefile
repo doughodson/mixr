@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(MXRP_LIB_DIR)/libmxrp_dafif.a
+LIB = $(MIXR_LIB_DIR)/libmixr_dafif.a
 
 OBJS =  \
 	Airport.o \

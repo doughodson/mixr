@@ -1,17 +1,17 @@
 
-#include "mxrp/models/system/IrSystem.hpp"
+#include "mixr/models/system/IrSystem.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/system/IrSeeker.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/Tdb.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/system/IrSeeker.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/Tdb.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/PairStream.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSystem, "IrSystem")

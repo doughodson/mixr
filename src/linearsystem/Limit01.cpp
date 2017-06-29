@@ -1,8 +1,8 @@
 
-#include "mxrp/linearsystem/Limit01.hpp"
+#include "mixr/linearsystem/Limit01.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit01, "Limit01")

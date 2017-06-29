@@ -1,14 +1,14 @@
 
-#include "mxrp/interop/rprfom/NetIO.hpp"
-#include "mxrp/interop/rprfom/RprFom.hpp"
-#include "mxrp/interop/rprfom/Nib.hpp"
-#include "mxrp/interop/hla/Ambassador.hpp"
+#include "mixr/interop/rprfom/NetIO.hpp"
+#include "mixr/interop/rprfom/RprFom.hpp"
+#include "mixr/interop/rprfom/Nib.hpp"
+#include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/network/NetHandler.hpp"
+#include "mixr/base/network/NetHandler.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace rprfom {
 
 //------------------------------------------------------------------------------

@@ -1,13 +1,13 @@
 
-#include "mxrp/base/EarthModel.hpp"
+#include "mixr/base/EarthModel.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Distances.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------

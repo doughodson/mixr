@@ -1,11 +1,11 @@
 
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/Pair.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

@@ -1,52 +1,52 @@
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/AbstractWeapon.hpp"
-#include "mxrp/models/dynamics/DynamicsModel.hpp"
-#include "mxrp/models/navigation/Navigation.hpp"
-#include "mxrp/models/system/Datalink.hpp"
-#include "mxrp/models/system/Gimbal.hpp"
-#include "mxrp/models/system/IrSystem.hpp"
-#include "mxrp/models/system/OnboardComputer.hpp"
-#include "mxrp/models/system/Pilot.hpp"
-#include "mxrp/models/system/Radio.hpp"
-#include "mxrp/models/system/RfSensor.hpp"
-#include "mxrp/models/system/StoresMgr.hpp"
-#include "mxrp/models/SynchronizedState.hpp"
+#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/system/Datalink.hpp"
+#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IrSystem.hpp"
+#include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/Pilot.hpp"
+#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/SynchronizedState.hpp"
 
-#include "mxrp/models/Signatures.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/Emission.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
-#include "mxrp/models/IrSignature.hpp"
+#include "mixr/models/Signatures.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/Emission.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
+#include "mixr/models/IrSignature.hpp"
 
-#include "mxrp/terrain/Terrain.hpp"
+#include "mixr/terrain/Terrain.hpp"
 
-#include "mxrp/simulation/AbstractDataRecorder.hpp"
-#include "mxrp/simulation/AbstractNetIO.hpp"
-#include "mxrp/simulation/AbstractNib.hpp"
+#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/AbstractNetIO.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
 
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/LatLon.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Statistic.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/LatLon.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Statistic.hpp"
 
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Vec4d"
-#include "mxrp/base/osg/Matrixd"
-#include "mxrp/base/osg/Quat"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Vec4d"
+#include "mixr/base/osg/Matrixd"
+#include "mixr/base/osg/Quat"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Times.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Player, "Player")
@@ -3850,7 +3850,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      initVp = (msg->getReal() * mxrp::base::distance::NM2M) / 3600.0f;
+      initVp = (msg->getReal() * mixr::base::distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;

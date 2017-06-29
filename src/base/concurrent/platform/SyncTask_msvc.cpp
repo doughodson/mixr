@@ -1,8 +1,8 @@
 
-#include "mxrp/base/concurrent/SyncTask.hpp"
+#include "mixr/base/concurrent/SyncTask.hpp"
 
-#include "mxrp/base/Component.hpp"
-#include "mxrp/base/util/system_utils.hpp"
+#include "mixr/base/Component.hpp"
+#include "mixr/base/util/system_utils.hpp"
 
 /* ----------------------------------------------------------------- */
 /* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
@@ -10,7 +10,7 @@
 /* ----------------------------------------------------------------- */
 //#define USE_REALTIME_PRI_CLASS
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 // max number of processors we'll allow

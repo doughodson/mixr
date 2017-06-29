@@ -1,13 +1,13 @@
 
-#include "mxrp/base/Object.hpp"
+#include "mixr/base/Object.hpp"
 
-#include "mxrp/map/rpf/factory.hpp"
-#include "mxrp/map/rpf/MapDrawer.hpp"
-#include "mxrp/map/rpf/CadrgMap.hpp"
+#include "mixr/map/rpf/factory.hpp"
+#include "mixr/map/rpf/MapDrawer.hpp"
+#include "mixr/map/rpf/CadrgMap.hpp"
 
 #include <string>
 
-namespace mxrp {
+namespace mixr {
 namespace rpf  {
 
 base::Object* factory(const std::string& name)

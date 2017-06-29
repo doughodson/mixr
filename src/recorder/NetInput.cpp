@@ -1,12 +1,12 @@
 
-#include "mxrp/recorder/NetInput.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
-#include "mxrp/recorder/DataRecordHandle.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/recorder/NetInput.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(NetInput, "RecorderNetInput")
@@ -19,8 +19,8 @@ END_SLOTTABLE(NetInput)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
-    ON_SLOT(1, setSlotNetwork,   mxrp::base::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    mxrp::base::Number)
+    ON_SLOT(1, setSlotNetwork,   mixr::base::NetHandler)
+    ON_SLOT(2, setSlotNoWait,    mixr::base::Number)
 END_SLOT_MAP()
 
 NetInput::NetInput()
@@ -145,14 +145,14 @@ const DataRecordHandle* NetInput::readRecordImp()
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetInput::setSlotNetwork(mxrp::base::NetHandler* const msg)
+bool NetInput::setSlotNetwork(mixr::base::NetHandler* const msg)
 {
    netHandler = msg;
    return true;
 }
 
 // No wait (unblocked) I/O flag
-bool NetInput::setSlotNoWait(mxrp::base::Number* const msg)
+bool NetInput::setSlotNoWait(mixr::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

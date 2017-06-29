@@ -1,19 +1,19 @@
 
-#include "mxrp/recorder/PrintSelected.hpp"
-#include "mxrp/recorder/protobuf/DataRecord.pb.h"
-#include "mxrp/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/PrintSelected.hpp"
+#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/DataRecordHandle.hpp"
 
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Integer.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Integer.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 
 #include <iomanip>
 
-namespace mxrp {
+namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")

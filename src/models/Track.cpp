@@ -1,17 +1,17 @@
 
-#include "mxrp/models/Track.hpp"
+#include "mixr/models/Track.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/Emission.hpp"
-#include "mxrp/models/IrQueryMsg.hpp"
-#include "mxrp/models/SensorMsg.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/Emission.hpp"
+#include "mixr/models/IrQueryMsg.hpp"
+#include "mixr/models/SensorMsg.hpp"
 
-#include "mxrp/base/units/angle_utils.hpp"
-#include "mxrp/base/units/distance_utils.hpp"
+#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/distance_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Track, "Track")

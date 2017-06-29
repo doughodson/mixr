@@ -1,8 +1,8 @@
 
-#include "mxrp/instruments/gauges/GaugeSlider.hpp"
+#include "mixr/instruments/gauges/GaugeSlider.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")

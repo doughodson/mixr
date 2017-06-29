@@ -1,10 +1,10 @@
 
-#include "mxrp/base/units/AngularVelocity.hpp"
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Times.hpp"
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/units/AngularVelocity.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Times.hpp"
+#include "mixr/base/SlotTable.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")

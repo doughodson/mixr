@@ -1,8 +1,8 @@
-#include "mxrp/instruments/buttons/Button.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/graphics/Display.hpp"
+#include "mixr/instruments/buttons/Button.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/graphics/Display.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Button, "Button")

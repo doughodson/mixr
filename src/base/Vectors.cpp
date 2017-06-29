@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // CVector and RVector
 //------------------------------------------------------------------------------
-#include "mxrp/base/Vectors.hpp"
+#include "mixr/base/Vectors.hpp"
 #include <iostream>
 #include <iomanip>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

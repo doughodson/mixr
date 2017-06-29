@@ -1,9 +1,9 @@
 
-#include "mxrp/interop/common/Ntm.hpp"
+#include "mixr/interop/common/Ntm.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Ntm, "Ntm")

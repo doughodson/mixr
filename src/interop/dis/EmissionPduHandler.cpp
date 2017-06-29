@@ -2,28 +2,28 @@
 // Electromagnetic Emission PDU (Portions of NetIO and Nib)
 //------------------------------------------------------------------------------
 
-#include "mxrp/interop/dis/EmissionPduHandler.hpp"
-#include "mxrp/interop/dis/Nib.hpp"
-#include "mxrp/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/EmissionPduHandler.hpp"
+#include "mixr/interop/dis/Nib.hpp"
+#include "mixr/interop/dis/pdu.hpp"
 
-#include "mxrp/models/system/Antenna.hpp"
-#include "mxrp/models/Track.hpp"
-#include "mxrp/models/system/TrackManager.hpp"
-#include "mxrp/models/system/Jammer.hpp"
-#include "mxrp/models/system/Radar.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/Jammer.hpp"
+#include "mixr/models/system/Radar.hpp"
 
-#include "mxrp/models/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
-#include "mxrp/base/functors/Functions.hpp"
-#include "mxrp/base/functors/Tables.hpp"
-#include "mxrp/base/Decibel.hpp"
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/functors/Functions.hpp"
+#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/Decibel.hpp"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <cmath>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 
 namespace dis {
 
@@ -101,13 +101,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != nullptr) { sensor->event(mxrp::base::Component::SHUTDOWN_EVENT); }
+   if (sensor != nullptr) { sensor->event(mixr::base::Component::SHUTDOWN_EVENT); }
    setSensor(nullptr);
 
-   if (sensorModel != nullptr) { sensorModel->event(mxrp::base::Component::SHUTDOWN_EVENT); }
+   if (sensorModel != nullptr) { sensorModel->event(mixr::base::Component::SHUTDOWN_EVENT); }
    setSensorModel(nullptr);
 
-   if (antennaModel != nullptr) { antennaModel->event(mxrp::base::Component::SHUTDOWN_EVENT); }
+   if (antennaModel != nullptr) { antennaModel->event(mixr::base::Component::SHUTDOWN_EVENT); }
    setAntennaModel(nullptr);
 }
 

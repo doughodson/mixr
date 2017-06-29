@@ -1,7 +1,7 @@
-#include "mxrp/dafif/Waypoint.hpp"
+#include "mixr/dafif/Waypoint.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint, "Waypoint")

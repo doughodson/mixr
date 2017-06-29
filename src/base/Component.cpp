@@ -1,18 +1,18 @@
 
-#include "mxrp/base/Component.hpp"
+#include "mixr/base/Component.hpp"
 
-#include "mxrp/base/Boolean.hpp"
-#include "mxrp/base/Float.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Statistic.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/util/system_utils.hpp"
-#include "mxrp/base/util/platform_api.hpp"
+#include "mixr/base/Boolean.hpp"
+#include "mixr/base/Float.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Statistic.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/util/system_utils.hpp"
+#include "mixr/base/util/platform_api.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Component, "Component")
@@ -41,7 +41,7 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 7, setSlotDisableMsgType, Number)
 END_SLOT_MAP()
 
-bool Component::event(const int _event, ::mxrp::base::Object* const _obj)
+bool Component::event(const int _event, ::mixr::base::Object* const _obj)
 {
     bool _used {};
 

@@ -1,10 +1,10 @@
 
-#include "mxrp/models/system/FuelTank.hpp"
+#include "mixr/models/system/FuelTank.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(FuelTank, "FuelTank")

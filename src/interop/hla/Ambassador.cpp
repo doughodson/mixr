@@ -1,13 +1,13 @@
 
-#include "mxrp/interop/hla/Ambassador.hpp"
-#include "mxrp/interop/hla/NetIO.hpp"
-#include "mxrp/interop/hla/Nib.hpp"
+#include "mixr/interop/hla/Ambassador.hpp"
+#include "mixr/interop/hla/NetIO.hpp"
+#include "mixr/interop/hla/Nib.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace hla {
 
 Ambassador::Ambassador(NetIO* netIO): hlaIo(netIO)

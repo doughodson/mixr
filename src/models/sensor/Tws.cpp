@@ -1,8 +1,8 @@
 
-#include "mxrp/models/sensor/Tws.hpp"
+#include "mixr/models/sensor/Tws.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws, "Tws")

@@ -1,15 +1,15 @@
 
-#include "mxrp/iodevice/AnalogOutput.hpp"
+#include "mixr/iodevice/AnalogOutput.hpp"
 
-#include "mxrp/base/io/IoData.hpp"
-#include "mxrp/base/io/IoDevice.hpp"
-#include "mxrp/base/io/IoHandler.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/io/IoData.hpp"
+#include "mixr/base/io/IoDevice.hpp"
+#include "mixr/base/io/IoHandler.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/functors/Tables.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(AnalogOutput, "AnalogOutput")

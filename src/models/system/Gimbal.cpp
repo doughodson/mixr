@@ -1,23 +1,23 @@
 
-#include "mxrp/models/system/Gimbal.hpp"
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/models/Emission.hpp"
-#include "mxrp/models/Tdb.hpp"
+#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/Emission.hpp"
+#include "mixr/models/Tdb.hpp"
 
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Integer.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Pair.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Integer.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Pair.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Distances.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Distances.hpp"
 
-#include "mxrp/base/util/nav_utils.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Gimbal, "Gimbal")

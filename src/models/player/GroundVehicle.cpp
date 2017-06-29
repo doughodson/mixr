@@ -1,15 +1,15 @@
 
-#include "mxrp/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/PairStream.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/PairStream.hpp"
 
-#include "mxrp/base/units/Angles.hpp"
-#include "mxrp/base/units/Times.hpp"
+#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Times.hpp"
 
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")

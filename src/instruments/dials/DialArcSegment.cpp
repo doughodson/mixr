@@ -1,12 +1,12 @@
 
-#include "mxrp/instruments/dials/DialArcSegment.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/dials/DialArcSegment.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
 #include <GL/glu.h>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")

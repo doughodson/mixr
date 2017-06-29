@@ -33,14 +33,14 @@
 //  -1.  For positive numbers, only the bytes are switched.
 //==============================================================================
 
-#include "mxrp/terrain/dted/DtedFile.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/terrain/dted/DtedFile.hpp"
+#include "mixr/base/Number.hpp"
 #include <fstream>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace terrain {
 
 //==============================================================================

@@ -1,7 +1,7 @@
 
-#include "mxrp/graphics/readouts/OctalReadout.hpp"
+#include "mixr/graphics/readouts/OctalReadout.hpp"
 
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include "ReformatScanner.hpp"
 
@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OctalReadout, "OctalReadout")

@@ -15,10 +15,10 @@
  *
  *****************************************************************************/
 
-#ifndef __mxrp_otw_geoTypes_H__
-#define __mxrp_otw_geoTypes_H__
+#ifndef __mixr_otw_geoTypes_H__
+#define __mixr_otw_geoTypes_H__
 
-#include "mxrp/base/util/platform_api.hpp"
+#include "mixr/base/util/platform_api.hpp"
 
 #include "math.h"
 #include <memory.h>

@@ -1,11 +1,11 @@
 
-#include "mxrp/dafif/NavaidLoader.hpp"
-#include "mxrp/base/FileReader.hpp"
+#include "mixr/dafif/NavaidLoader.hpp"
+#include "mixr/base/FileReader.hpp"
 #include <cstring>
 #include <cstdlib>
 #include <limits>
 
-namespace mxrp {
+namespace mixr {
 namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")

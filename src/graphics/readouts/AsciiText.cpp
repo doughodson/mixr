@@ -1,10 +1,10 @@
 
-#include "mxrp/graphics/readouts/AsciiText.hpp"
+#include "mixr/graphics/readouts/AsciiText.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/String.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/String.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(AsciiText, "AsciiText")

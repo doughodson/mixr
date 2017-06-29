@@ -1,24 +1,24 @@
 
-#include "mxrp/otw/pc/OtwPC.hpp"
+#include "mixr/otw/pc/OtwPC.hpp"
 
-#include "mxrp/otw/OtwModel.hpp"
+#include "mixr/otw/OtwModel.hpp"
 
 #include "dsFlightModelData.hpp"
 
-#include "mxrp/models/player/AirVehicle.hpp"
-#include "mxrp/models/player/GroundVehicle.hpp"
-#include "mxrp/models/player/Missile.hpp"
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/network/NetHandler.hpp"
-#include "mxrp/base/SlotTable.hpp"
-#include "mxrp/base/Identifier.hpp"
-#include "mxrp/base/Pair.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/osg/Vec3d"
+#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/SlotTable.hpp"
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/osg/Vec3d"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwPC, "OtwPC")

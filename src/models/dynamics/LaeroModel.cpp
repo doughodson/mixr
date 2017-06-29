@@ -1,21 +1,21 @@
 
-#include "mxrp/models/dynamics/LaeroModel.hpp"
+#include "mixr/models/dynamics/LaeroModel.hpp"
 
-#include "mxrp/models/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/Number.hpp"
 
-#include "mxrp/base/units/time_utils.hpp"
+#include "mixr/base/units/time_utils.hpp"
 
-#include "mxrp/base/osg/Vec3d"
-#include "mxrp/base/osg/Quat"
+#include "mixr/base/osg/Vec3d"
+#include "mixr/base/osg/Quat"
 
 #include <iostream>
 #include <iomanip>
 #include <cmath>
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel, "LaeroModel")

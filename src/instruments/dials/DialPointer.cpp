@@ -1,9 +1,9 @@
 
-#include "mxrp/instruments/dials/DialPointer.hpp"
+#include "mixr/instruments/dials/DialPointer.hpp"
 
-#include "mxrp/base/units/angle_utils.hpp"
+#include "mixr/base/units/angle_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DialPointer, "DialPointer")

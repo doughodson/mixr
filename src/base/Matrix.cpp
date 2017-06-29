@@ -1,13 +1,13 @@
 
-#include "mxrp/base/Matrix.hpp"
-#include "mxrp/base/Vectors.hpp"
-#include "mxrp/base/util/str_utils.hpp"
-#include "mxrp/base/util/math_utils.hpp"
+#include "mixr/base/Matrix.hpp"
+#include "mixr/base/Vectors.hpp"
+#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 #include <iostream>
 #include <iomanip>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Matrix, "Matrix")

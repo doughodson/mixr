@@ -1,11 +1,11 @@
 
-#include "mxrp/base/functors/Function.hpp"
+#include "mixr/base/functors/Function.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/functors/Tables.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/functors/Tables.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

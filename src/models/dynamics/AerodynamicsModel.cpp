@@ -1,9 +1,9 @@
 
-#include "mxrp/models/dynamics/AerodynamicsModel.hpp"
+#include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
-#include "mxrp/base/units/angle_utils.hpp"
+#include "mixr/base/units/angle_utils.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")

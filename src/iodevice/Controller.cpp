@@ -1,10 +1,10 @@
 
-#include "mxrp/iodevice/Controller.hpp"
+#include "mixr/iodevice/Controller.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(Controller, "Controller")
@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(Controller)
 END_SLOTTABLE(Controller)
 
 BEGIN_SLOT_MAP(Controller)
-    ON_SLOT( 1, setSlotDeviceIndex,  mxrp::base::Number)
+    ON_SLOT( 1, setSlotDeviceIndex,  mixr::base::Number)
 END_SLOT_MAP()
 
 Controller::Controller()
@@ -102,7 +102,7 @@ bool Controller::setDeviceIndex(const int v)
 //------------------------------------------------------------------------------
 
 // deviceIndex: device index
-bool Controller::setSlotDeviceIndex(const mxrp::base::Number* const msg)
+bool Controller::setSlotDeviceIndex(const mixr::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

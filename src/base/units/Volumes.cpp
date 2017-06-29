@@ -1,8 +1,8 @@
 
-#include "mxrp/base/units/Volumes.hpp"
+#include "mixr/base/units/Volumes.hpp"
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 //==============================================================================

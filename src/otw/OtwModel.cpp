@@ -1,14 +1,14 @@
 
-#include "mxrp/otw/OtwModel.hpp"
+#include "mixr/otw/OtwModel.hpp"
 
-#include "mxrp/otw/Otm.hpp"
+#include "mixr/otw/Otm.hpp"
 
-#include "mxrp/base/String.hpp"
+#include "mixr/base/String.hpp"
 
-#include "mxrp/models/player/Player.hpp"
-#include "mxrp/simulation/AbstractNib.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/simulation/AbstractNib.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace otw {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModel, "OtwModel")

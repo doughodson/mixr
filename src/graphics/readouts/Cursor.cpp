@@ -1,9 +1,9 @@
 
-#include "mxrp/graphics/readouts/Cursor.hpp"
+#include "mixr/graphics/readouts/Cursor.hpp"
 
-#include "mxrp/graphics/Display.hpp"
+#include "mixr/graphics/Display.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cursor, "Cursor")

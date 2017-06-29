@@ -11,9 +11,9 @@
  * OpenSceneGraph Public License for more details.
 */
 //#include <stdio.h>
-#include "mxrp/base/osg/Quat"
-#include "mxrp/base/osg/Matrixd"
-#include "mxrp/base/osg/Matrixf"
+#include "mixr/base/osg/Quat"
+#include "mixr/base/osg/Matrixd"
+#include "mixr/base/osg/Matrixf"
 
 #include <math.h>
 
@@ -21,7 +21,7 @@
 /// http://www.gamasutra.com/features/programming/19980703/quaternions_01.htm
 /// http://mathworld.wolfram.com/Quaternion.html
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 void Quat::set(const Matrixf& matrix)

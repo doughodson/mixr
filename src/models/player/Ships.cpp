@@ -1,11 +1,11 @@
 
-#include "mxrp/models/player/Ships.hpp"
+#include "mixr/models/player/Ships.hpp"
 
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/osg/Matrixd"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/osg/Matrixd"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ship,"Ship")

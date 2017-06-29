@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Shapes3D - shapes in 3D (mostly GLU shapes)
 //------------------------------------------------------------------------------
-#include "mxrp/gui/glut/Shapes3D.hpp"
+#include "mixr/gui/glut/Shapes3D.hpp"
 
-#include "mxrp/base/Number.hpp"
+#include "mixr/base/Number.hpp"
 
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace glut {
 
 IMPLEMENT_SUBCLASS(Sphere, "Sphere")

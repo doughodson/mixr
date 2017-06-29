@@ -1,13 +1,13 @@
 
-#include "mxrp/graphics/Font.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/List.hpp"
-#include "mxrp/base/String.hpp"
-#include "mxrp/base/util/str_utils.hpp"
+#include "mixr/graphics/Font.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/List.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace graphics {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Font, "Font")

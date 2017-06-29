@@ -1,10 +1,10 @@
 
-#include "mxrp/base/Transforms.hpp"
-#include "mxrp/base/Number.hpp"
-#include "mxrp/base/PairStream.hpp"
-#include "mxrp/base/units/Angles.hpp"
+#include "mixr/base/Transforms.hpp"
+#include "mixr/base/Number.hpp"
+#include "mixr/base/PairStream.hpp"
+#include "mixr/base/units/Angles.hpp"
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Transform, "Transform")

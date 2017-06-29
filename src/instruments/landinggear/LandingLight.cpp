@@ -1,10 +1,10 @@
 
-#include "mxrp/instruments/landinggear/LandingLight.hpp"
-#include "mxrp/base/Number.hpp"
+#include "mixr/instruments/landinggear/LandingLight.hpp"
+#include "mixr/base/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingLight, "LandingLight")

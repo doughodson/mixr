@@ -1,8 +1,8 @@
 
-#include "mxrp/base/SlotTable.hpp"
+#include "mixr/base/SlotTable.hpp"
 #include <cstring>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 SlotTable::SlotTable(const char* s[], const unsigned int ns, const SlotTable& base)

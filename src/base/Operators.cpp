@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // Numeric Operators:  Add, Subtract, Multiply, Divide
 //------------------------------------------------------------------------------
-#include "mxrp/base/Operators.hpp"
+#include "mixr/base/Operators.hpp"
 
 #include <iostream>
 
-namespace mxrp {
+namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Add,"+")
