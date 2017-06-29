@@ -12,7 +12,7 @@
 
 // MIXR release version number
 #ifndef MIXR_VERSION
-#define MIXR_VERSION                         170X
+#define MIXR_VERSION                         1706c
 #endif
 
 // Max number of interval timers (see Timers.hpp)
