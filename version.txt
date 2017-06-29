@@ -1,2 +1,2 @@
-Stable release version v17.06c
+Developmental version based on v17.06c
 

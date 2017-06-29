@@ -1,0 +1,34 @@
+================================================================================
+Changes since v17.06a
+(Please ignore the v17.06b version!!)
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes/improvements
+
+This release reflects a transition point for renaming of the project from OpenEaagles
+to MIXR; the Mixed Reality Simulation Platform (or the Mixer Platform). The use of
+the specific term 'platform' vs 'framework' is intentional, as it's an indicator
+that this project is oriented at supporting the development of a wider range of
+applications then the term 'framework' implies.
+
+No API changes have been made during this renaming effort.  The only
+changes made concern the naming of include file paths (e.g., 
+#include "mixr/base/Object.hpp' as opposed to #include "openeaagles/base/Object.hpp"),
+namespace (i.e., 'namespace mixr' as opposed to 'namespace oe'), and compiled libraries
+(e.g., 'libmixr_base' as opposed to 'liboe_base').
+
+The move from OpenEaagles v17.06a to MIXR v17.06c should be relatively painless, as
+adjustment to changes can mostly be made with simple search and replace commands.
+
+Rationale for name change:
+-- From OpenEaagles to Mixed Reality Simulation Platform
+-- This project provides lots of support for building highly interactive (real-time)
+   simulation applications, that often include graphics and interoperability interfaces.
+   Given it is not oriented at gaming, meaning, the creation of applications for
+   entertainment, but oriented at more serious concerns, we felt it appropriate
+   to align project name with the domain for which it offers strong support
+   (i.e., mixed reality applications).
+
+Note concerning examples:
+There have been a few fixes made to examples that decode I/O switches.
