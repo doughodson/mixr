@@ -1,6 +1,8 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
+#include "mixr/base/EarthModel.hpp"
+
 #include "mixr/base/util/osg_utils.hpp"
 #include "mixr/base/util/math_utils.hpp"
 

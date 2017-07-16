@@ -12,7 +12,7 @@ class Number;
 //------------------------------------------------------------------------------
 // Class: EarthModel
 // Description: Contains the major axis, minor axis and flattening terms used to
-//              describe an ellipsoidal or a spherical earth model. (See Nav.h)
+//              describe an ellipsoidal or a spherical earth model.
 //
 // Factory name: EarthModel
 // Slots:
