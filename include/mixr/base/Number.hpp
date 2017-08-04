@@ -13,7 +13,7 @@ namespace base {
 //
 // Description:  Base class for number objects (Float, Integer, Boolean, 
 //               Decibel and LatLon), numerical operators (Add, Subtract,
-//               Multiply and Divide), and various units (see base/units/*.h)
+//               Multiply and Divide), and various units (see base/units/*.hpp)
 //
 // Slots:
 //     value  <Number>  ! Sets the value of this number. (default: 0)
