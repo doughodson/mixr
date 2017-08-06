@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Color_H__
-#define __mixr_base_Color_H__
+#ifndef __mixr_base_colors_Color_H__
+#define __mixr_base_colors_Color_H__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Vec4d"

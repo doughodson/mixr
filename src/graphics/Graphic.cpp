@@ -6,7 +6,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/Transforms.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/Rgb.hpp"
+#include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/PairStream.hpp"
 
 #include "mixr/base/numbers/Number.hpp"

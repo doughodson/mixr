@@ -1,5 +1,6 @@
 
-#include "mixr/base/Rgba.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+
 #include "mixr/base/numbers/Float.hpp"
 
 namespace mixr {

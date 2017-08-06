@@ -1,11 +1,12 @@
 
 #include "mixr/terrain/Terrain.hpp"
 
-#include "mixr/base/Color.hpp"
-#include "mixr/base/Hsva.hpp"
+#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/Hsva.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/Rgba.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"

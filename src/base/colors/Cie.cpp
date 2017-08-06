@@ -1,5 +1,5 @@
 
-#include "mixr/base/Cie.hpp"
+#include "mixr/base/colors/Cie.hpp"
 
 #include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/List.hpp"

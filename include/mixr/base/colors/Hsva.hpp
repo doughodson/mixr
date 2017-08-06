@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Hsva_H__
-#define __mixr_base_Hsva_H__
+#ifndef __mixr_base_colors_Hsva_H__
+#define __mixr_base_colors_Hsva_H__
 
-#include "mixr/base/Hsv.hpp"
+#include "mixr/base/colors/Hsv.hpp"
 
 namespace mixr {
 namespace base {

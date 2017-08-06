@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Rgba_H__
 #define __mixr_base_Rgba_H__
 
-#include "mixr/base/Rgb.hpp"
+#include "mixr/base/colors/Rgb.hpp"
 
 namespace mixr {
 namespace base {

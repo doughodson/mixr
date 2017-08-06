@@ -1,5 +1,5 @@
 
-#include "mixr/base/Cmy.hpp"
+#include "mixr/base/colors/Cmy.hpp"
 
 #include "mixr/base/numbers/Float.hpp"
 

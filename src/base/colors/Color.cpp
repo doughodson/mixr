@@ -1,5 +1,5 @@
 
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"

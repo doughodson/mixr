@@ -1,5 +1,6 @@
 
-#include "mixr/base/Yiq.hpp"
+#include "mixr/base/colors/Yiq.hpp"
+
 #include "mixr/base/numbers/Float.hpp"
 
 namespace mixr {

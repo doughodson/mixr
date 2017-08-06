@@ -1,5 +1,6 @@
 
-#include "mixr/base/Hsva.hpp"
+#include "mixr/base/colors/Hsva.hpp"
+
 #include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/units/Angles.hpp"
 

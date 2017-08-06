@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_ColorRotary_H__
 #define __mixr_graphics_ColorRotary_H__
 
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
 
 #include <array>
 

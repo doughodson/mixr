@@ -8,7 +8,6 @@
 #include "mixr/simulation/AbstractOtw.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/base/Color.hpp"
 #include "mixr/base/io/IoHandler.hpp"
 #include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/Pair.hpp"

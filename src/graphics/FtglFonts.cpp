@@ -8,7 +8,7 @@
 #include "mixr/base/util/str_utils.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
 
 #include <cstdlib>
 

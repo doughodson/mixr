@@ -5,9 +5,10 @@
 
 #include "mixr/base/functors/Tables.hpp"
 
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+
 #include "mixr/base/String.hpp"
-#include "mixr/base/Rgba.hpp"
 
 #include "mixr/graphics/Display.hpp"
 

@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Cie_H__
-#define __mixr_base_Cie_H__
+#ifndef __mixr_base_colors_Cie_H__
+#define __mixr_base_colors_Cie_H__
 
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
 #include "mixr/base/safe_ptr.hpp"
 #include "mixr/base/osg/Vec3d"
 

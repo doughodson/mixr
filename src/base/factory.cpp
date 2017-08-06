@@ -34,14 +34,14 @@
 #include "mixr/base/network/UdpUnicastHandler.hpp"
 
 // Colors
-#include "mixr/base/Cie.hpp"
-#include "mixr/base/Cmy.hpp"
-#include "mixr/base/Hls.hpp"
-#include "mixr/base/Hsv.hpp"
-#include "mixr/base/Hsva.hpp"
-#include "mixr/base/Rgb.hpp"
-#include "mixr/base/Rgba.hpp"
-#include "mixr/base/Yiq.hpp"
+#include "mixr/base/colors/Cie.hpp"
+#include "mixr/base/colors/Cmy.hpp"
+#include "mixr/base/colors/Hls.hpp"
+#include "mixr/base/colors/Hsv.hpp"
+#include "mixr/base/colors/Hsva.hpp"
+#include "mixr/base/colors/Rgb.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+#include "mixr/base/colors/Yiq.hpp"
 
 // Units
 #include "mixr/base/units/AngularVelocity.hpp"

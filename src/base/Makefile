@@ -19,6 +19,15 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_base.a
 
 OBJS =  \
+	colors/Cie.o \
+	colors/Cmy.o \
+	colors/Color.o \
+	colors/Hls.o \
+	colors/Hsva.o \
+	colors/Hsv.o \
+	colors/Rgb.o \
+	colors/Rgba.o \
+	colors/Yiq.o \
 	concurrent/platform/PeriodicTask_linux.o \
 	concurrent/platform/SyncTask_linux.o \
 	concurrent/platform/Thread_linux.o \
@@ -91,16 +100,10 @@ OBJS =  \
 	util/osg_utils.o \
 	util/str_utils.o \
 	util/system_utils.o \
-	Cie.o \
-	Cmy.o \
-	Color.o \
 	Component.o \
 	EarthModel.o \
 	factory.o \
 	FileReader.o \
-	Hls.o \
-	Hsva.o \
-	Hsv.o \
 	Identifier.o \
 	LatLon.o \
 	List.o \
@@ -111,8 +114,6 @@ OBJS =  \
 	Object.o \
 	Pair.o \
 	PairStream.o \
-	Rgba.o \
-	Rgb.o \
 	Rng.o \
 	SlotTable.o \
 	Stack.o \
@@ -121,8 +122,7 @@ OBJS =  \
 	String.o \
 	Timers.o \
 	Transforms.o \
-	Vectors.o \
-	Yiq.o
+	Vectors.o
 
 .PHONY: all clean
 
@@ -132,6 +132,7 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f colors/*.o
 	-rm -f concurrent/platform/*.o
 	-rm -f concurrent/*.o
 	-rm -f distributions/*.o
@@ -139,6 +140,7 @@ clean:
 	-rm -f functors/*.o
 	-rm -f io/*.o
 	-rm -f network/*.o
+	-rm -f numbers/*.o
 	-rm -f osg/*.o
 	-rm -f ubf/*.o
 	-rm -f units/*.o

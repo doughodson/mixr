@@ -8,9 +8,10 @@
 
 #include "mixr/base/numbers/Number.hpp"
 
-#include "mixr/base/Color.hpp"
-#include "mixr/base/Rgba.hpp"
-#include "mixr/base/Hsva.hpp"
+#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+#include "mixr/base/colors/Hsva.hpp"
+
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"

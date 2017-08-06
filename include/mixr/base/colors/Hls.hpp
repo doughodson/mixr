@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Hls_H__
-#define __mixr_base_Hls_H__
+#ifndef __mixr_base_colors_Hls_H__
+#define __mixr_base_colors_Hls_H__
 
-#include "mixr/base/Color.hpp"
+#include "mixr/base/colors/Color.hpp"
 
 namespace mixr {
 namespace base {

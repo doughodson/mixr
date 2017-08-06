@@ -9,6 +9,9 @@ General framework-wide changes/improvements
 
 - Moved base/Decibel class into 'units' directory.
 
-- Moved all classes representing numbers (i.e., a number hierarchy) into 'base/numbers'
-  This includes Boolean, Complex, Float, Integer, Number and Operators.
+- Moved all number representation classes (i.e., a number hierarchy) into 'base/numbers'
+  This included Boolean, Complex, Float, Integer, Number and Operators.
+
+- Moved all color classes into 'base/colors'
+  This included Cie, Cmy, Color, Hls, Hsv, Hsva, Rgb, Rgba and Yiq.
 
