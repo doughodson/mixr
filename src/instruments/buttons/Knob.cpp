@@ -2,7 +2,7 @@
 #include "mixr/instruments/buttons/Knob.hpp"
 #include "mixr/graphics/Display.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include "mixr/base/units/angle_utils.hpp"
 #include "mixr/base/functors/Tables.hpp"

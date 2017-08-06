@@ -9,7 +9,7 @@
 #include "mixr/models/IrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/units/Areas.hpp"
 #include "mixr/base/units/Distances.hpp"

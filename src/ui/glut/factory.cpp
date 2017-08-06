@@ -1,10 +1,10 @@
 
-#include "mixr/gui/glut/factory.hpp"
+#include "mixr/ui/glut/factory.hpp"
 
 #include "mixr/base/Object.hpp"
 
-#include "mixr/gui/glut/GlutDisplay.hpp"
-#include "mixr/gui/glut/Shapes3D.hpp"
+#include "mixr/ui/glut/GlutDisplay.hpp"
+#include "mixr/ui/glut/Shapes3D.hpp"
 
 #include <string>
 

@@ -10,7 +10,7 @@
 
 #include "mixr/base/Color.hpp"
 #include "mixr/base/io/IoHandler.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Timers.hpp"

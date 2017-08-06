@@ -1,10 +1,11 @@
 
 #include "mixr/graphics/readouts/NumericReadout.hpp"
 
-#include "mixr/base/Float.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+
 #include "mixr/base/String.hpp"
-#include "mixr/base/Integer.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/util/constants.hpp"

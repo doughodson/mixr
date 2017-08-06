@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Rotators.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 namespace mixr {

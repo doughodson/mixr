@@ -5,3 +5,10 @@ Changes since v17.06c
 --------------------------------------------------------------------------------
 General framework-wide changes/improvements
 
+- Renamed user interface directory 'gui' to 'ui' to be slightly more general.
+
+- Moved base/Decibel class into 'units' directory.
+
+- Moved all classes representing numbers (i.e., a number hierarchy) into 'base/numbers'
+  This includes Boolean, Complex, Float, Integer, Number and Operators.
+

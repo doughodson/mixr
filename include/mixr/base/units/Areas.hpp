@@ -17,7 +17,7 @@
 #ifndef __mixr_base_Areas_H__
 #define __mixr_base_Areas_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/area_utils.hpp"
 
 #include <cmath>

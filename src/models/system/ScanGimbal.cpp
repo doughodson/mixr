@@ -3,7 +3,7 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"

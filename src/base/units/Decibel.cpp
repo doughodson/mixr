@@ -1,5 +1,5 @@
 
-#include "mixr/base/Decibel.hpp"
+#include "mixr/base/units/Decibel.hpp"
 
 #include <cmath>
 #include <iostream>

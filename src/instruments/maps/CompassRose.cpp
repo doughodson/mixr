@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/maps/CompassRose.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace instruments {

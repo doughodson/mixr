@@ -2,7 +2,7 @@
 #include "mixr/instruments/buttons/SolenoidSwitch.hpp"
 
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Timers.hpp"

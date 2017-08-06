@@ -2,12 +2,12 @@
 #include <iostream>
 
 #include "mixr/base/distributions/Pareto.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Pareto,"Pareto")
+IMPLEMENT_SUBCLASS(Pareto, "Pareto")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(Pareto)

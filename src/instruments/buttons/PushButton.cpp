@@ -1,6 +1,8 @@
 
 #include "mixr/instruments/buttons/PushButton.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+
 #include <iostream>
 
 namespace mixr {

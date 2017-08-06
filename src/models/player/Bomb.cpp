@@ -1,7 +1,7 @@
 
 #include "mixr/models/player/Bomb.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include <cmath>
 

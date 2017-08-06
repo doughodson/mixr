@@ -1,8 +1,9 @@
 
 #include "mixr/models/TargetData.hpp"
 
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/Number.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/units/Angles.hpp"

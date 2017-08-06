@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Complex_H__
-#define __mixr_base_Complex_H__
+#ifndef __mixr_base_numbers_Complex_H__
+#define __mixr_base_numbers_Complex_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include <cmath>
 
 namespace mixr {
@@ -124,7 +124,7 @@ private:
    double imag {};   // imaginary component
 };
 
-#include "mixr/base/Complex.inl"
+#include "mixr/base/numbers/Complex.inl"
 
 }
 }

@@ -1,9 +1,12 @@
 
 #include "mixr/graphics/Field.hpp"
+
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Page.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/List.hpp"
 #include "mixr/base/Rgb.hpp"
 #include "mixr/base/Pair.hpp"

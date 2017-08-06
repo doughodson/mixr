@@ -8,9 +8,10 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/Rgb.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/Number.hpp"
-#include "mixr/base/Integer.hpp"
-#include "mixr/base/Float.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numbers/Float.hpp"
 
 namespace mixr {
 namespace graphics {

@@ -1,5 +1,5 @@
 
-#include "mixr/base/Boolean.hpp"
+#include "mixr/base/numbers/Boolean.hpp"
 #include <iostream>
 
 namespace mixr {

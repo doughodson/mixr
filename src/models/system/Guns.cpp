@@ -5,7 +5,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/List.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
 

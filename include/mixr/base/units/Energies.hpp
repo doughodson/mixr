@@ -12,7 +12,7 @@
 #ifndef __mixr_Energies_H__
 #define __mixr_Energies_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/energy_utils.hpp"
 #include <iostream>
 

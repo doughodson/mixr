@@ -3,8 +3,8 @@
 // all use GLUT or GLU, so you have to call the factory to serialize them
 // from the input, and you also have to link to glut or freeglut to draw them.
 //------------------------------------------------------------------------------
-#ifndef __mixr_gui_glut_Shapes3D_H__
-#define __mixr_gui_glut_Shapes3D_H__
+#ifndef __mixr_ui_glut_Shapes3D_H__
+#define __mixr_ui_glut_Shapes3D_H__
 
 #include "mixr/graphics/Shapes.hpp"
 

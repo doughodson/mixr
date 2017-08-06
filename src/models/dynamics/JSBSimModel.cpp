@@ -3,14 +3,15 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+
 #include "mixr/base/functors/Tables.hpp"
 
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Integer.hpp"
 
 // JSBSim model headers
 #include <JSBSim/FGFDMExec.h>

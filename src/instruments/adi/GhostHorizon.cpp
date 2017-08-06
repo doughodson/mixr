@@ -1,11 +1,13 @@
 
 #include "mixr/instruments/adi/GhostHorizon.hpp"
 
+#include "mixr/base/numbers/Number.hpp"
+
+#include "mixr/base/functors/Tables.hpp"
+
 #include "mixr/base/Color.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Number.hpp"
 #include "mixr/base/Rgba.hpp"
-#include "mixr/base/functors/Tables.hpp"
 
 #include "mixr/graphics/Display.hpp"
 

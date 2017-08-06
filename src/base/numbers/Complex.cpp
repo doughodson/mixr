@@ -1,6 +1,6 @@
 
-#include "mixr/base/Complex.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Complex.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include <iostream>
 #include <iomanip>

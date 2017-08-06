@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/dials/AnalogDial.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 

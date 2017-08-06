@@ -52,6 +52,12 @@ OBJS =  \
 	network/UdpBroadcastHandler.o \
 	network/UdpMulticastHandler.o \
 	network/UdpUnicastHandler.o \
+	numbers/Boolean.o \
+	numbers/Complex.o \
+	numbers/Float.o \
+	numbers/Integer.o \
+	numbers/Number.o \
+	numbers/Operators.o \
 	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \
@@ -65,6 +71,7 @@ OBJS =  \
 	units/Angles.o \
 	units/AngularVelocity.o \
 	units/Areas.o \
+	units/Decibel.o \
 	units/Density.o \
 	units/Distances.o \
 	units/Energies.o \
@@ -84,31 +91,24 @@ OBJS =  \
 	util/osg_utils.o \
 	util/str_utils.o \
 	util/system_utils.o \
-	Boolean.o \
 	Cie.o \
 	Cmy.o \
 	Color.o \
-	Complex.o \
 	Component.o \
-	Decibel.o \
 	EarthModel.o \
 	factory.o \
 	FileReader.o \
-	Float.o \
 	Hls.o \
 	Hsva.o \
 	Hsv.o \
 	Identifier.o \
-	Integer.o \
 	LatLon.o \
 	List.o \
 	Locus.o \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \
-	Number.o \
 	Object.o \
-	Operators.o \
 	Pair.o \
 	PairStream.o \
 	Rgba.o \

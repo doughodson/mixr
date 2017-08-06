@@ -1,17 +1,15 @@
-//------------------------------------------------------------------------------
-// Numeric Operators:  Add, Subtract, Multiply, Divide
-//------------------------------------------------------------------------------
-#include "mixr/base/Operators.hpp"
+
+#include "mixr/base/numbers/Operators.hpp"
 
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Add,"+")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Subtract,"-")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Multiply,"*")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Divide,"/")
+IMPLEMENT_SUBCLASS(Add, "+")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Subtract, "-")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Multiply, "*")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Divide, "/")
 
 //------------------------------------------------------------------------------
 // slot table for this class type

@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace otw {

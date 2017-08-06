@@ -1,6 +1,6 @@
 
 #include "mixr/base/Hls.hpp"
-#include "mixr/base/Float.hpp"
+#include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <cmath>
 

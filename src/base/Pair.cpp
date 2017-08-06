@@ -1,8 +1,8 @@
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/Integer.hpp"
-#include "mixr/base/Float.hpp"
-#include "mixr/base/Boolean.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numbers/Boolean.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {

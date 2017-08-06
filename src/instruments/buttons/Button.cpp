@@ -1,5 +1,5 @@
 #include "mixr/instruments/buttons/Button.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/graphics/Display.hpp"
 
 namespace mixr {

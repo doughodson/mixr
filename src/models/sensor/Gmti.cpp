@@ -6,7 +6,7 @@
 #include "mixr/models/system/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 

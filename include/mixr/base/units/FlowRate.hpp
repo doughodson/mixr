@@ -2,7 +2,7 @@
 #ifndef __mixr_base_FlowRate_H__
 #define __mixr_base_FlowRate_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/Volumes.hpp"
 #include "mixr/base/units/Times.hpp"
 

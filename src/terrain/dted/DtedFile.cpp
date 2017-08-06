@@ -34,7 +34,7 @@
 //==============================================================================
 
 #include "mixr/terrain/dted/DtedFile.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include <fstream>
 #include <cstdio>
 #include <cstring>

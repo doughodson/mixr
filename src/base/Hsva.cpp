@@ -1,6 +1,6 @@
 
 #include "mixr/base/Hsva.hpp"
-#include "mixr/base/Float.hpp"
+#include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 namespace mixr {

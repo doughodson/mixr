@@ -3,7 +3,7 @@
 #define __mixr_base_ThreadPoolManager_H__
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace base {

@@ -16,9 +16,9 @@
 
 #include "mixr/base/functors/Functions.hpp"
 #include "mixr/base/functors/Tables.hpp"
-#include "mixr/base/Decibel.hpp"
+#include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/network/NetHandler.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include <cmath>
 #include <cstring>

@@ -5,13 +5,12 @@
 
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/Decibel.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/functors/Tables.hpp"
 
 #include "mixr/base/units/Areas.hpp"
-
+#include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Distances.hpp"
 
 #include <cmath>

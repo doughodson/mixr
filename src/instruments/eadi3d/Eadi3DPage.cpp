@@ -2,7 +2,7 @@
 #include "mixr/instruments/eadi3d/Eadi3DPage.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 // setup local variables and static variables
 #define RADIUS_180  1.625                   /* 180 in view */

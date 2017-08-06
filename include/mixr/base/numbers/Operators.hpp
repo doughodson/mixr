@@ -1,11 +1,15 @@
 
-#ifndef __mixr_base_Operators_H__
-#define __mixr_base_Operators_H__
+#ifndef __mixr_base_numbers_Operators_H__
+#define __mixr_base_numbers_Operators_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace base {
+
+//------------------------------------------------------------------------------
+// Numeric Operators:  Add, Subtract, Multiply, Divide
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Class:  Add

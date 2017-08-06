@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Texture.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 
 namespace mixr {

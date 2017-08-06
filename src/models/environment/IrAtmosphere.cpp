@@ -8,7 +8,7 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/functors/Tables.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

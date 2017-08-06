@@ -3,7 +3,7 @@
 
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace models {

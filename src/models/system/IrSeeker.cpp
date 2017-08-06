@@ -12,7 +12,7 @@
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 

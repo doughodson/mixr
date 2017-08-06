@@ -1,6 +1,6 @@
 
 #include "mixr/linearsystem/ScalerFunc.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/Frequencies.hpp"
 
 namespace mixr {

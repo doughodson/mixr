@@ -5,10 +5,12 @@
 #include "mixr/graphics/Image.hpp"
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/graphics/Material.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/Color.hpp"
 #include "mixr/base/Rgba.hpp"
 #include "mixr/base/Hsva.hpp"
-#include "mixr/base/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"

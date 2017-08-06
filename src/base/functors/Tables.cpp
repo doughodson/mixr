@@ -4,8 +4,8 @@
 
 #include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/Integer.hpp"
-#include "mixr/base/Float.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 

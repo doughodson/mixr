@@ -1,9 +1,14 @@
+
 #include "mixr/graphics/FtglFonts.hpp"
+
 #include "mixr/graphics/Graphic.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+
+#include "mixr/base/util/str_utils.hpp"
+
 #include "mixr/base/String.hpp"
 #include "mixr/base/Color.hpp"
-#include "mixr/base/util/str_utils.hpp"
 
 #include <cstdlib>
 

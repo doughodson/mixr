@@ -7,19 +7,18 @@
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/Transforms.hpp"
 #include "mixr/base/Timers.hpp"
+#include "mixr/base/LatLon.hpp"
 
 // Functors
 #include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/functors/Functions.hpp"
 
 // Numbers
-#include "mixr/base/Boolean.hpp"
-#include "mixr/base/Complex.hpp"
-#include "mixr/base/Integer.hpp"
-#include "mixr/base/Float.hpp"
-#include "mixr/base/Decibel.hpp"
-#include "mixr/base/LatLon.hpp"
-#include "mixr/base/Operators.hpp"
+#include "mixr/base/numbers/Boolean.hpp"
+#include "mixr/base/numbers/Complex.hpp"
+#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numbers/Operators.hpp"
 
 // IO
 #include "mixr/base/io/IoData.hpp"
@@ -48,6 +47,7 @@
 #include "mixr/base/units/AngularVelocity.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Areas.hpp"
+#include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Energies.hpp"
 #include "mixr/base/units/Forces.hpp"

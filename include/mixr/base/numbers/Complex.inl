@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Complex_Inline__
-#define __mixr_base_Complex_Inline__
+#ifndef __mixr_base_numbers_Complex_Inline__
+#define __mixr_base_numbers_Complex_Inline__
 
 //------------------------------------------------------------------------------
 // Unary Arithmetic Functions and Overloaded Operators

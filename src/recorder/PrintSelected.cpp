@@ -5,8 +5,8 @@
 
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Float.hpp"
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

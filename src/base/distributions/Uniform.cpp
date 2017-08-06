@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "mixr/base/distributions/Uniform.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace base {

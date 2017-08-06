@@ -2,7 +2,7 @@
 #include "mixr/instruments/buttons/RotarySwitch.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 namespace mixr {
 namespace instruments {

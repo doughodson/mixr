@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/landinggear/LandingLight.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
 

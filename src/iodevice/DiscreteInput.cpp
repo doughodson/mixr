@@ -4,7 +4,8 @@
 #include "mixr/base/io/IoData.hpp"
 #include "mixr/base/io/IoDevice.hpp"
 #include "mixr/base/io/IoHandler.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
 
 #include <iostream>
 

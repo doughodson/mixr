@@ -1,6 +1,6 @@
 
 #include "mixr/base/Hsv.hpp"
-#include "mixr/base/Float.hpp"
+#include "mixr/base/numbers/Float.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/osg/Vec3d"

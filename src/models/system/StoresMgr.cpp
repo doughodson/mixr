@@ -16,7 +16,7 @@
 #include "mixr/models/Track.hpp"
 #include "mixr/models/system/TrackManager.hpp"
 
-#include "mixr/base/Boolean.hpp"
+#include "mixr/base/numbers/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include <cstring>

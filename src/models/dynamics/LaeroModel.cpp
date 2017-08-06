@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include "mixr/base/units/time_utils.hpp"
 

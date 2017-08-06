@@ -1,6 +1,6 @@
 
 #include "mixr/base/Timers.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/util/atomics.hpp"
 

@@ -8,9 +8,9 @@
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Decibel.hpp"
+#include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Frequencies.hpp"
 #include "mixr/base/units/Powers.hpp"
 

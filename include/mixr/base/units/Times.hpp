@@ -13,7 +13,7 @@
 #ifndef __mixr_base_Times_H__
 #define __mixr_base_Times_H__
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/units/time_utils.hpp"
 #include <iostream>

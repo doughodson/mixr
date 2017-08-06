@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Shapes3D - shapes in 3D (mostly GLU shapes)
 //------------------------------------------------------------------------------
-#include "mixr/gui/glut/Shapes3D.hpp"
+#include "mixr/ui/glut/Shapes3D.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 
 #include <GL/glut.h>
 #include <GL/glu.h>

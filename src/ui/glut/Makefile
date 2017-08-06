@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(MIXR_LIB_DIR)/libmixr_gui_glut.a
+LIB = $(MIXR_LIB_DIR)/libmixr_ui_glut.a
 
 OBJS =  \
 	factory.o \

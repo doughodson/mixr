@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/readouts/Rotary2.hpp"
 
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 
 namespace mixr {
 namespace graphics {

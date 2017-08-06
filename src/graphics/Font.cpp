@@ -1,8 +1,11 @@
 
 #include "mixr/graphics/Font.hpp"
-#include "mixr/base/Number.hpp"
+
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/List.hpp"
 #include "mixr/base/String.hpp"
+
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>

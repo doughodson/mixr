@@ -8,7 +8,7 @@
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Angles.hpp"
 

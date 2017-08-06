@@ -117,14 +117,6 @@ workspace "mixr"
       defines { "FTGL_LIBRARY_STATIC" }
       targetname "graphics"
 
-   -- OpenGL GLUT interface library
-   project "gui_glut"
-      files {
-         "../../include/mixr/gui/glut/**.h*",
-         "../../src/gui/glut/**.cpp"
-      }
-      targetname "gui_glut"
-
    -- DAFIF airport loader library
    project "dafif"
       files {
@@ -214,5 +206,15 @@ workspace "mixr"
       }
       targetname "terrain"
 
+   -- OpenGL GLUT interface library
+   project "ui_glut"
+      files {
+         "../../include/mixr/ui/glut/**.h*",
+         "../../src/ui/glut/**.cpp"
+      }
+      targetname "ui_glut"
+
    -- interoperability libraries
    dofile "interop.lua"
+
+	

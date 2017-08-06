@@ -1,6 +1,6 @@
 
 #include "mixr/base/Transforms.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/units/Angles.hpp"
 

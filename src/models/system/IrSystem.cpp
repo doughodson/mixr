@@ -8,7 +8,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {

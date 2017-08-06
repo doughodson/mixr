@@ -2,7 +2,7 @@
 #include "mixr/graphics/readouts/Rotary.hpp"
 
 #include "mixr/graphics/Graphic.hpp"
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {

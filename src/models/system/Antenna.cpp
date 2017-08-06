@@ -5,14 +5,14 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
 
-#include "mixr/base/Decibel.hpp"
 #include "mixr/base/functors/Functions.hpp"
-#include "mixr/base/Integer.hpp"
+#include "mixr/base/numbers/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Powers.hpp"
 

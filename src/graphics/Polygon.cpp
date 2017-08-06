@@ -1,6 +1,6 @@
 
 #include "mixr/graphics/Polygon.hpp"
-#include "mixr/base/Number.hpp"
+#include "mixr/base/numbers/Number.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
 #include "mixr/base/PairStream.hpp"
 #include <GL/glu.h>

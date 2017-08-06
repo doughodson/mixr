@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_EdlScanner_H_
-#define __mixp_base_EdlScanner_H_
+#ifndef __mixr_base_edl_parser_EdlScanner_H_
+#define __mixp_base_edl_parser_EdlScanner_H_
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer edlFlexLexer
