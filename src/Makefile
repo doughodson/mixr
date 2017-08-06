@@ -36,9 +36,9 @@ PROJECTS += graphics
 PROJECTS += instruments
 
 #
-# GUI interface libraries
+# User interface libraries
 #
-PROJECTS += "gui/glut"
+PROJECTS += "ui/glut"
 
 #
 # Interoperability interfaces

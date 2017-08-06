@@ -3,8 +3,9 @@
 #include "mixr/interop/hla/NetIO.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/String.hpp"
-#include "mixr/base/Number.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include <cstdio>

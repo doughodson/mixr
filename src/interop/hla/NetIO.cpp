@@ -3,8 +3,9 @@
 #include "mixr/interop/hla/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/base/numbers/Number.hpp"
+
 #include "mixr/base/String.hpp"
-#include "mixr/base/Number.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include "mixr/base/util/system_utils.hpp"
