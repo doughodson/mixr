@@ -5,11 +5,11 @@ Changes since v17.06c
 --------------------------------------------------------------------------------
 General framework-wide changes/improvements
 
-- Renamed user interface directory 'gui' to 'ui' to be slightly more general.
+- Renamed user interface directory 'gui' to 'ui' as it's more general.
 
 - Moved base/Decibel class into 'units' directory.
 
-- Moved all number representation classes (i.e., a number hierarchy) into 'base/numbers'
+- Moved all classes that represent numbers (i.e., a number hierarchy) into 'base/numbers'
   This included Boolean, Complex, Float, Integer, Number and Operators.
 
 - Moved all color classes into 'base/colors'
@@ -18,8 +18,8 @@ General framework-wide changes/improvements
 --------------------------------------------------------------------------------
 base library
 
-   -- Removed all random number generation-oriented classes which includes the
+   -- Removed all random number generation-oriented classes which included the
       Mersenne Twister algorithm and distibution classes.  C++11 includes
-	  all of this capability and more.
+      all of this capability and more.
 
 --------------------------------------------------------------------------------
