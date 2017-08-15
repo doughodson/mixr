@@ -57,18 +57,11 @@
 #include "mixr/base/units/Powers.hpp"
 #include "mixr/base/units/Times.hpp"
 
-// Random number generator and distributions
-#include "mixr/base/Rng.hpp"
-#include "mixr/base/distributions/Exponential.hpp"
-#include "mixr/base/distributions/Lognormal.hpp"
-#include "mixr/base/distributions/Pareto.hpp"
-#include "mixr/base/distributions/Uniform.hpp"
-
 // Others
 #include "mixr/base/EarthModel.hpp"
 #include "mixr/base/concurrent/ThreadPool.hpp"
 
-// Ubf
+// ubf
 #include "mixr/base/ubf/Agent.hpp"
 #include "mixr/base/ubf/Arbiter.hpp"
 
@@ -404,23 +397,6 @@ Object* factory(const std::string& name)
     }
     else if ( name == UdpUnicastHandler::getFactoryName() ) {
         obj = new UdpUnicastHandler();
-    }
-
-    // Random number generator and distributions
-    else if ( name == Rng::getFactoryName() ) {
-        obj = new Rng();
-    }
-    else if ( name == Exponential::getFactoryName() ) {
-        obj = new Exponential();
-    }
-    else if ( name == Lognormal::getFactoryName() ) {
-        obj = new Lognormal();
-    }
-    else if ( name == Pareto::getFactoryName() ) {
-        obj = new Pareto();
-    }
-    else if ( name == Uniform::getFactoryName() ) {
-        obj = new Uniform();
     }
 
     // General I/O Devices
