@@ -38,10 +38,6 @@ OBJS =  \
 	concurrent/ThreadPool.o \
 	concurrent/ThreadPoolManager.o \
 	concurrent/ThreadPoolThread.o \
-	distributions/Exponential.o \
-	distributions/Lognormal.o \
-	distributions/Pareto.o \
-	distributions/Uniform.o \
 	edl_parser/EdlParser.o \
 	edl_parser/EdlScanner.o \
 	functors/Function.o \
@@ -114,7 +110,6 @@ OBJS =  \
 	Object.o \
 	Pair.o \
 	PairStream.o \
-	Rng.o \
 	SlotTable.o \
 	Stack.o \
 	Statistic.o \
@@ -135,7 +130,6 @@ clean:
 	-rm -f colors/*.o
 	-rm -f concurrent/platform/*.o
 	-rm -f concurrent/*.o
-	-rm -f distributions/*.o
 	-rm -f edl_parser/*.o
 	-rm -f functors/*.o
 	-rm -f io/*.o

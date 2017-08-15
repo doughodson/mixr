@@ -15,3 +15,11 @@ General framework-wide changes/improvements
 - Moved all color classes into 'base/colors'
   This included Cie, Cmy, Color, Hls, Hsv, Hsva, Rgb, Rgba and Yiq.
 
+--------------------------------------------------------------------------------
+base library
+
+   -- Removed all random number generation-oriented classes which includes the
+      Mersenne Twister algorithm and distibution classes.  C++11 includes
+	  all of this capability and more.
+
+--------------------------------------------------------------------------------
