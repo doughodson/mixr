@@ -16,7 +16,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(MergingIrSensor, "MergingIrSensor")
-EMPTY_SERIALIZER(MergingIrSensor)
 EMPTY_DELETEDATA(MergingIrSensor)
 
 BEGIN_SLOTTABLE(MergingIrSensor)

@@ -15,7 +15,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OctalReadout, "OctalReadout")
 EMPTY_COPYDATA(OctalReadout)
 EMPTY_DELETEDATA(OctalReadout)
-EMPTY_SERIALIZER(OctalReadout)
 
 OctalReadout::OctalReadout()
 {

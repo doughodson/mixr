@@ -12,7 +12,6 @@ namespace simulation {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractDataRecorder, "AbstractDataRecorder")
 EMPTY_SLOTTABLE(AbstractDataRecorder)
-EMPTY_SERIALIZER(AbstractDataRecorder)
 
 AbstractDataRecorder::AbstractDataRecorder()
 {

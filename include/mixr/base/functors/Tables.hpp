@@ -52,7 +52,6 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) override;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* xtable {};    // X Breakpoint Table
@@ -101,7 +100,6 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) override;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* ytable {};    // Y Breakpoint Table
@@ -152,7 +150,6 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) override;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* ztable {};    // Z Breakpoint Table
@@ -205,7 +202,6 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) override;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* wtable {};    // W Breakpoint Table
@@ -259,7 +255,6 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) override;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* vtable {};     // V Breakpoint Table

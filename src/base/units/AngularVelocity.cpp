@@ -8,7 +8,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")
-EMPTY_SERIALIZER(AngularVelocity)
 EMPTY_DELETEDATA(AngularVelocity)
 
 BEGIN_SLOTTABLE(AngularVelocity)

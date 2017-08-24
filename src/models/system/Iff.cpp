@@ -10,7 +10,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Iff, "Iff")
-EMPTY_SERIALIZER(Iff)
 EMPTY_DELETEDATA(Iff)
 
 BEGIN_SLOTTABLE(Iff)

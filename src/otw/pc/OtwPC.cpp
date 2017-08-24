@@ -22,7 +22,6 @@ namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwPC, "OtwPC")
-EMPTY_SERIALIZER(OtwPC)
 
 BEGIN_SLOTTABLE(OtwPC)
     "netOutput",        // 1) Network output handler

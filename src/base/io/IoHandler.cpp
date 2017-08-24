@@ -363,61 +363,6 @@ bool IoHandler::setSlotPriority(const Number* const num)
     return ok;
 }
 
-std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (inData != nullptr || outData != nullptr) {
-
-      // combined data
-      if (inData == outData) {
-         indent(sout,i+j);
-         sout << "ioData: ";
-         inData->serialize(sout,(i+j+4));
-      }
-
-      // individual data
-      else {
-         if (inData != nullptr) {
-            indent(sout,i+j);
-            sout << "inputData: ";
-            inData->serialize(sout,(i+j+4));
-         }
-         if (outData != nullptr) {
-            indent(sout,i+j);
-            sout << "outputData: ";
-            outData->serialize(sout,(i+j+4));
-         }
-      }
-
-   }
-
-   if (devices != nullptr) {
-      indent(sout,i+j);
-      sout << "devices: ";
-      devices->serialize(sout,(i+j+4));
-   }
-
-   indent(sout,i+j);
-   sout << "frequency: ( Hertz " << rate << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "priority: " << pri << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 //=============================================================================
 // IoThread: Data I/O thread
 //=============================================================================
@@ -425,7 +370,6 @@ IMPLEMENT_SUBCLASS(IoThread, "IoThread")
 EMPTY_SLOTTABLE(IoThread)
 EMPTY_COPYDATA(IoThread)
 EMPTY_DELETEDATA(IoThread)
-EMPTY_SERIALIZER(IoThread)
 
 IoThread::IoThread(Component* const parent, const double priority, const double rate): PeriodicTask(parent, priority, rate)
 {

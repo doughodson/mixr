@@ -382,43 +382,5 @@ bool IoData::setSlotNumDO(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (numAI > 0) {
-      indent(sout,i+j);
-      sout << "numAI: " << numAI << std::endl;
-   }
-
-   if (numAO > 0) {
-      indent(sout,i+j);
-      sout << "numAO: " << numAO << std::endl;
-   }
-
-   if (numDI > 0) {
-      indent(sout,i+j);
-      sout << "numDI: " << numDI << std::endl;
-   }
-
-   if (numDO > 0) {
-      indent(sout,i+j);
-      sout << "numDO: " << numDO << std::endl;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

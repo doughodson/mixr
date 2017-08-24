@@ -6,7 +6,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Number, "Number")
-EMPTY_SERIALIZER(Number)
 EMPTY_DELETEDATA(Number)
 
 BEGIN_SLOTTABLE(Number)

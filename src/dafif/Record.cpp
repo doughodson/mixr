@@ -14,7 +14,6 @@ namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
-EMPTY_SERIALIZER(Record)
 
 Record::Record()
 {
@@ -512,8 +511,6 @@ float Record::dsFrequency(const char* const p)
 
    return static_cast<float>(freq)/1000000.0f;
 }
-
-
 
 //------------------------------------------------------------------------------
 // serialize true bearing and range to system

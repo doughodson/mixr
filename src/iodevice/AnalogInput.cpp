@@ -299,47 +299,5 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& AnalogInput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "ai: " << getLocation() << std::endl;
-
-   indent(sout,i+j);
-   sout << "channel: " << getChannel() << std::endl;
-
-   indent(sout,i+j);
-   sout << "value: " << getValue() << std::endl;
-
-   indent(sout,i+j);
-   sout << "deadband: " << getDeadband() << std::endl;
-
-   indent(sout,i+j);
-   sout << "offset: " << getOffset() << std::endl;
-
-   indent(sout,i+j);
-   sout << "gain: " << getGain() << std::endl;
-
-   if (table != nullptr) {
-      indent(sout,i+j);
-      sout << "table: ";
-      table->serialize(sout,(i+j+4));
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

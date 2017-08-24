@@ -508,64 +508,11 @@ bool TrackManager::setLogTrackUpdates (const bool b)
    return true;
 }
 
-std::ostream& TrackManager::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   // Max number of tracks
-   indent(sout,i+j);
-   sout << "maxTracks: ";
-   sout << maxTrks;
-   sout << std::endl;
-
-   // Max track age (seconds)
-   indent(sout,i+j);
-   sout << "maxTrackAge: ";
-   sout << maxTrackAge;
-   sout << std::endl;
-
-   // First track id
-   indent(sout,i+j);
-   sout << "firstTrackId: ";
-   sout << firstTrkId;
-   sout << std::endl;
-
-   indent(sout,i+j);
-   sout << "alpha: " << alpha << std::endl;
-
-   indent(sout,i+j);
-   sout << "beta: " << beta << std::endl;
-
-   indent(sout,i+j);
-   sout << "gamma: " << gamma << std::endl;
-
-   indent(sout,i+j);
-   sout << "logTrackUpdates: " ;
-   if (logTrackUpdates)
-      sout << "true" << std::endl;
-   else
-      sout << "false" << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 
 //==============================================================================
 // Class: AirTrkMgr
 //==============================================================================
-IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
+IMPLEMENT_SUBCLASS(AirTrkMgr, "AirTrkMgr")
 
 BEGIN_SLOTTABLE(AirTrkMgr)
    "positionGate",     // 1: Position Gate (meters)
@@ -983,41 +930,12 @@ bool AirTrkMgr::setVelocityGate(const base::Number* const num)
    return ok;
 }
 
-std::ostream& AirTrkMgr::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "positionGate: " << posGate << std::endl;
-
-   indent(sout,i+j);
-   sout << "rangeGate: " << rngGate << std::endl;
-
-   indent(sout,i+j);
-   sout << "velocityGate: " << velGate << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 
 //==============================================================================
 // Class: GmtiTrkMgr
 //==============================================================================
 IMPLEMENT_SUBCLASS(GmtiTrkMgr, "GmtiTrkMgr")
 EMPTY_SLOTTABLE(GmtiTrkMgr)
-EMPTY_SERIALIZER(GmtiTrkMgr)
 
 GmtiTrkMgr::GmtiTrkMgr()
 {
@@ -1320,7 +1238,6 @@ void GmtiTrkMgr::processTrackList(const double dt)
 //==============================================================================
 IMPLEMENT_SUBCLASS(RwrTrkMgr, "RwrTrkMgr")
 EMPTY_SLOTTABLE(RwrTrkMgr)
-EMPTY_SERIALIZER(RwrTrkMgr)
 
 RwrTrkMgr::RwrTrkMgr()
 {

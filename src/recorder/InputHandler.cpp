@@ -8,7 +8,6 @@ namespace recorder {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(InputHandler, "RecorderInputHandler")
 EMPTY_SLOTTABLE(InputHandler)
-EMPTY_SERIALIZER(InputHandler)
 EMPTY_CONSTRUCTOR(InputHandler)
 EMPTY_COPYDATA(InputHandler)
 EMPTY_DELETEDATA(InputHandler)

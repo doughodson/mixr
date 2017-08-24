@@ -15,7 +15,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SamVehicle, "SamVehicle")
-EMPTY_SERIALIZER(SamVehicle)
 EMPTY_DELETEDATA(SamVehicle)
 
 //------------------------------------------------------------------------------

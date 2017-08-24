@@ -13,7 +13,6 @@ IMPLEMENT_SUBCLASS(SimBgThread, "SimBgThread")
 EMPTY_SLOTTABLE(SimBgThread)
 EMPTY_COPYDATA(SimBgThread)
 EMPTY_DELETEDATA(SimBgThread)
-EMPTY_SERIALIZER(SimBgThread)
 
 SimBgThread::SimBgThread(base::Component* const parent, const double priority): base::SyncTask(parent, priority)
 {

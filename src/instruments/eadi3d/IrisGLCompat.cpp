@@ -15,7 +15,6 @@ namespace instruments {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")
 EMPTY_SLOTTABLE(IrisGLCompat)
-EMPTY_SERIALIZER(IrisGLCompat)
 EMPTY_DELETEDATA(IrisGLCompat)
 
 IrisGLCompat::IrisGLCompat()

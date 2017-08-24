@@ -255,46 +255,5 @@ bool SignalGen::setSlotChannel(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "signal: ";
-   switch ( getSignalType() ) {
-      case SINE : sout << "SINE"; break;
-      case COSINE : sout << "COSINE"; break;
-      case SQUARE : sout << "SQUARE"; break;
-      case SAW : sout << "SAW"; break;
-      default : sout << "XXXX"; break;
-   }
-   sout << std::endl;
-
-   indent(sout,i+j);
-   sout << "frequency: ( Hertz " << getFrequency() << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "phase: ( Radians " << getPhase() << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "ai: " << getLocation() << std::endl;
-
-   indent(sout,i+j);
-   sout << "channel: " << getChannel() << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

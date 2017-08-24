@@ -339,52 +339,6 @@ bool WorldModel::setSlotGamingAreaEarthModel(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& WorldModel::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-   // ref lat/lon position
-   {
-      double v = getRefLatitude();
-      indent(sout,i+j);
-      sout << "latitude: ( LatLon";
-
-      sout << " direction: ";
-      if (v >= 0) { sout << "n"; }
-      else { sout << "s"; v = -v; }
-
-      sout << " degrees: " << v;
-      sout << " )" << std::endl;
-   }
-   {
-      double v = getRefLongitude();
-
-      indent(sout,i+j);
-      sout << "longitude: ( LatLon";
-
-      sout << " direction: ";
-      if (v >= 0) { sout << "e"; }
-      else { sout << "w"; v = -v; }
-
-      sout << " degrees: " << v;
-      sout << " )" << std::endl;
-   }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 // returns the terrain elevation database
 const terrain::Terrain* WorldModel::getTerrain() const
 {

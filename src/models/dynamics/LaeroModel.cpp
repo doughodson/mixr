@@ -19,7 +19,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel, "LaeroModel")
-EMPTY_SERIALIZER(LaeroModel)
 EMPTY_DELETEDATA(LaeroModel)
 
 //----------------------------------------------------------

@@ -580,48 +580,5 @@ bool Missile::setMaxAccel(const double v)
    return true;
 }
 
-std::ostream& Missile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "minSpeed: " << vpMin << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxSpeed: " << vpMax << std::endl;
-
-   indent(sout,i+j);
-   sout << "speedMaxG: " << vpMaxG << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxg: " << maxG << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxAccel: " << maxAccel << std::endl;
-
-   indent(sout,i+j);
-   sout << "cmdPitch: " << cmdPitch << std::endl;
-
-   indent(sout,i+j);
-   sout << "cmdHeading: " << cmdHeading << std::endl;
-
-   indent(sout,i+j);
-   sout << "cmdSpeed: " << cmdVelocity << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

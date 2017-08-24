@@ -74,27 +74,5 @@ bool Pair::isValid() const
     return slotname->isValid() && obj->isValid();
 }
 
-std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) const
-{
-   if (slot() != nullptr && !slot()->isEmpty()) {
-      sout << slot()->getString();
-   }
-   else {
-      sout << "<null>";
-   }
-   sout << ": ";
-
-   //sout << endl;
-
-   const Object* obj = object();
-   if (obj != nullptr) {
-      obj->serialize(sout,indent);
-   }
-   else sout << "<null>";
-   sout << std::endl;
-
-   return sout;
-}
-
 }
 }

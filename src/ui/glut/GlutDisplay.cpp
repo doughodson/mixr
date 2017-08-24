@@ -1012,44 +1012,5 @@ bool GlutDisplay::setSlotStencilBuff(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "fullScreen: " << (isFullScreen() ? "true" : "false") << std::endl;
-
-   indent(sout,i+j);
-   sout << "resizeSubwindows: " << (okToResize ? "true" : "false") << std::endl;
-
-   indent(sout,i+j);
-   sout << "idleSleepTime: " << idleSleepTimeMS << std::endl;
-
-   indent(sout,i+j);
-   sout << "pickWidth: " << getPickWidth() << std::endl;
-
-   indent(sout,i+j);
-   sout << "pickHeight: " << getPickHeight() << std::endl;
-
-   indent(sout,i+j);
-   sout << "accumBuff: " << (isAccumBuff() ? "true" : "false") << std::endl;
-
-   indent(sout,i+j);
-   sout << "stencilBuff: " << (isStencilBuff() ? "true" : "false") << std::endl;
-
-   BaseClass::serialize(sout,i+j, true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

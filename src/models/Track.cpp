@@ -16,7 +16,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Track, "Track")
 EMPTY_SLOTTABLE(Track)
-EMPTY_SERIALIZER(Track)
 
 Track::Track()
 {
@@ -375,7 +374,6 @@ bool Track::setTarget(Player* const p)
 
 IMPLEMENT_SUBCLASS(RfTrack, "RfTrack")
 EMPTY_SLOTTABLE(RfTrack)
-EMPTY_SERIALIZER(RfTrack)
 
 RfTrack::RfTrack() : lastEM(nullptr)
 {
@@ -480,7 +478,6 @@ void RfTrack::clear()
 
 IMPLEMENT_SUBCLASS(IrTrack,"IrTrack")
 EMPTY_SLOTTABLE(IrTrack)
-EMPTY_SERIALIZER(IrTrack)
 
 IrTrack::IrTrack() : lastQuery(nullptr)
 {

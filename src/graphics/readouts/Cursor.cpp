@@ -9,7 +9,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cursor, "Cursor")
 EMPTY_COPYDATA(Cursor)
 EMPTY_DELETEDATA(Cursor)
-EMPTY_SERIALIZER(Cursor)
 
 Cursor::Cursor()
 {

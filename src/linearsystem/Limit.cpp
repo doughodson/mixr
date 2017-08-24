@@ -8,15 +8,11 @@ namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit, "Limit")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Limit)
     "lower",   //  1: Lower boundary (default: -1) (must be less than the upper)
     "upper",   //  2: Upper boundary (default:  1) (must be greater than the lower)
 END_SLOTTABLE(Limit)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Limit)
    ON_SLOT( 1, setSlotLowerLimit, base::Number)
    ON_SLOT( 2, setSlotUpperLimit, base::Number)
@@ -57,30 +53,6 @@ bool Limit::setSlotUpperLimit(const base::Number* const msg)
       ok = true;
    }
    return ok;
-}
-
-std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    indent(sout,i+j);
-    sout << "lower:   " << getLowerLimit() << std::endl;
-
-    indent(sout,i+j);
-    sout << "upper:   " << getUpperLimit() << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
 }
 
 }

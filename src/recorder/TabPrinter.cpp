@@ -13,7 +13,6 @@ namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
-EMPTY_SERIALIZER(TabPrinter)
 EMPTY_DELETEDATA(TabPrinter)
 
 BEGIN_SLOTTABLE(TabPrinter)

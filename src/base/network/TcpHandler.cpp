@@ -39,12 +39,8 @@
 namespace mixr {
 namespace base {
 
-//==============================================================================
-// Class: TcpHandler
-//==============================================================================
-IMPLEMENT_SUBCLASS(TcpHandler,"TcpHandler")
+IMPLEMENT_SUBCLASS(TcpHandler, "TcpHandler")
 EMPTY_SLOTTABLE(TcpHandler)
-EMPTY_SERIALIZER(TcpHandler)
 EMPTY_DELETEDATA(TcpHandler)
 
 //------------------------------------------------------------------------------

@@ -16,7 +16,6 @@ EMPTY_SLOTTABLE(FStorage)
 EMPTY_CONSTRUCTOR(FStorage)
 EMPTY_COPYDATA(FStorage)
 EMPTY_DELETEDATA(FStorage)
-EMPTY_SERIALIZER(FStorage)
 
 //==============================================================================
 // Class: Function
@@ -81,30 +80,6 @@ bool Function::setSlotLfiTable(const Table* const msg)
 {
    table = msg;
    return true;
-}
-
-std::ostream& Function::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if (!slotsOnly) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (table != nullptr) {
-      indent(sout, i + j);
-      sout << "table: ";
-      table->serialize(sout,(i+j+4));
-   }
-
-   BaseClass::serialize(sout, i + j, true);
-
-   if (!slotsOnly) {
-      indent(sout, i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
 }
 
 }

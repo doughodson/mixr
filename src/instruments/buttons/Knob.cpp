@@ -14,7 +14,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Knob, "Knob")
-EMPTY_SERIALIZER(Knob)
 
 BEGIN_SLOTTABLE(Knob)
     "valueTable",        // 1) table with rotation and values, else we do 1 to 1

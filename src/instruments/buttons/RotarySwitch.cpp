@@ -8,7 +8,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(RotarySwitch, "RotarySwitch")
-EMPTY_SERIALIZER(RotarySwitch)
 EMPTY_DELETEDATA(RotarySwitch)
 
 BEGIN_SLOTTABLE(RotarySwitch)

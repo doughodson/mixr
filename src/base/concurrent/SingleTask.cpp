@@ -9,7 +9,6 @@ namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(SingleTask, "AbstractSingleTask")
 EMPTY_SLOTTABLE(SingleTask)
-EMPTY_SERIALIZER(SingleTask)
 EMPTY_DELETEDATA(SingleTask)
 
 SingleTask::SingleTask(Component* const p, const double pri) : Thread(p, pri)

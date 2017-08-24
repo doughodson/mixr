@@ -29,32 +29,10 @@ void Mass::copyData(const Mass& org, const bool)
     val = fromMass(org.toMass());;
 }
 
-std::ostream& Mass::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
 //==============================================================================
 // KiloGrams() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloGrams, "KiloGrams")
-EMPTY_SERIALIZER(KiloGrams)
 EMPTY_COPYDATA(KiloGrams)
 EMPTY_DELETEDATA(KiloGrams)
 
@@ -78,7 +56,6 @@ KiloGrams::KiloGrams(const Mass& value) : Mass()
 // Grams() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Grams, "Grams")
-EMPTY_SERIALIZER(Grams)
 EMPTY_COPYDATA(Grams)
 EMPTY_DELETEDATA(Grams)
 
@@ -102,7 +79,6 @@ Grams::Grams(const Mass& value) : Mass()
 // Slugs() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Slugs, "Slugs")
-EMPTY_SERIALIZER(Slugs)
 EMPTY_COPYDATA(Slugs)
 EMPTY_DELETEDATA(Slugs)
 

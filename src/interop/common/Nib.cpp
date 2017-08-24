@@ -21,7 +21,6 @@ namespace mixr {
 namespace interop {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
-EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const NetIO::IoType t) : ioType(t)
 {

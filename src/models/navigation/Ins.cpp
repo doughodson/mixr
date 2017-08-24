@@ -7,7 +7,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Ins, "Ins")
 EMPTY_SLOTTABLE(Ins)
-EMPTY_SERIALIZER(Ins)
 EMPTY_DELETEDATA(Ins)
 
 Ins::Ins() : gyroBias(), accelBias()

@@ -159,38 +159,5 @@ bool AbstractRecorderComponent::setSlotDisabledList(const base::List* const list
    return true;
 }
 
-std::ostream& AbstractRecorderComponent::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   // Enabled list -- printing as numeric values only
-   if (numEnabled > 0 && enabledList != nullptr) {
-      indent(sout, i + j);
-      sout << "enabledList: " << "[";
-      for (unsigned int i = 0; i < numEnabled; i++) sout << " " << enabledList[i];
-      sout << " ]" << std::endl;
-   }
-
-   // Disabled list -- printing as numeric values only
-   if (numDisabled > 0 && disabledList != nullptr) {
-      indent(sout, i + j);
-      sout << "disabledList: " << "[";
-      for (unsigned int i = 0; i < numDisabled; i++) sout << " " << disabledList[i];
-      sout << " ]" << std::endl;
-   }
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

@@ -15,7 +15,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSystem, "IrSystem")
-EMPTY_SERIALIZER(IrSystem)
 
 BEGIN_SLOTTABLE(IrSystem)
    "seekerName",        //  1: Name of the requested Seeker  (base::String)

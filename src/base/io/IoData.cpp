@@ -10,7 +10,6 @@ EMPTY_SLOTTABLE(IoData)
 EMPTY_CONSTRUCTOR(IoData)
 EMPTY_COPYDATA(IoData)
 EMPTY_DELETEDATA(IoData)
-EMPTY_SERIALIZER(IoData)
 
 // -----------------------------------------------------------------------------
 // Default quantity functions

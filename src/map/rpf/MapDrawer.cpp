@@ -15,7 +15,6 @@ namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")
-EMPTY_SERIALIZER(MapDrawer)
 
 BEGIN_SLOTTABLE(MapDrawer)
     "mapIntensity",     // 1) Map intensity

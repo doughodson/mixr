@@ -8,7 +8,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")
 EMPTY_SLOTTABLE(CadrgFrameEntry)
-EMPTY_SERIALIZER(CadrgFrameEntry)
 
 CadrgFrameEntry::CadrgFrameEntry()
 {

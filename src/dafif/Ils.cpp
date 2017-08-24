@@ -12,7 +12,6 @@ namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils, "Ils")
-EMPTY_SERIALIZER(Ils)
 EMPTY_COPYDATA(Ils)
 EMPTY_DELETEDATA(Ils)
 

@@ -10,7 +10,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")
-EMPTY_SERIALIZER(DialArcSegment)
 EMPTY_DELETEDATA(DialArcSegment)
 
 BEGIN_SLOTTABLE(DialArcSegment)

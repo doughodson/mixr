@@ -33,7 +33,6 @@ BEGIN_SLOT_MAP(IrShape)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
-EMPTY_SERIALIZER(IrShape)
 
 IrShape::IrShape()
 {
@@ -82,7 +81,6 @@ double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 // Class: IrSphere
 //==============================================================================
 IMPLEMENT_SUBCLASS(IrSphere, "IrSphere")
-EMPTY_SERIALIZER(IrSphere)
 EMPTY_DELETEDATA(IrSphere)
 
 BEGIN_SLOTTABLE(IrSphere)
@@ -131,9 +129,7 @@ double IrSphere::getArea()
 //==============================================================================
 // Class: IrBox
 //==============================================================================
-
 IMPLEMENT_SUBCLASS(IrBox, "IrBox")
-EMPTY_SERIALIZER(IrBox)
 
 BEGIN_SLOTTABLE(IrBox)
    "x",

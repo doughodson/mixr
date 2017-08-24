@@ -8,7 +8,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")
-EMPTY_SERIALIZER(Rotators)
 EMPTY_DELETEDATA(Rotators)
 
 BEGIN_EVENT_HANDLER(Rotators)

@@ -699,32 +699,5 @@ bool Terrain::getElevationColor(
    return true;
 }
 
-std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-    }
-
-    if (path != nullptr) {
-      indent(sout,i+j);
-      sout << "path:  " << path << std::endl;
-    }
-
-    if (file != nullptr) {
-      indent(sout,i+j);
-      sout << "file:  " << file << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

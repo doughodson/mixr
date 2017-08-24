@@ -9,7 +9,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
-EMPTY_SERIALIZER(Polygon)
 EMPTY_DELETEDATA(Polygon)
 
 Polygon::Polygon()

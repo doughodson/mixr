@@ -9,7 +9,6 @@ namespace ubf {
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractAction, "AbstractAction")
 EMPTY_SLOTTABLE(AbstractAction)
 EMPTY_DELETEDATA(AbstractAction)
-EMPTY_SERIALIZER(AbstractAction)
 
 AbstractAction::AbstractAction()
 {

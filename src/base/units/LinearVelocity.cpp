@@ -10,7 +10,6 @@ namespace base {
 const double LinearVelocity::FPS2KTSCC = 0.59248384864341771016513018598233;
 
 IMPLEMENT_SUBCLASS(LinearVelocity, "LinearVelocity")
-EMPTY_SERIALIZER(LinearVelocity)
 EMPTY_DELETEDATA(LinearVelocity)
 
 BEGIN_SLOTTABLE(LinearVelocity)

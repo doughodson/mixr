@@ -10,7 +10,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Instrument, "Instrument")
-EMPTY_SERIALIZER(Instrument)
 
 BEGIN_SLOTTABLE(Instrument)
     "scalingTable",         // 1) table for figuring linear interpolation (if not a linear scale)

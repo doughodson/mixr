@@ -20,7 +20,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LifeForm, "LifeForm")
-EMPTY_SERIALIZER(LifeForm)
 
 LifeForm::LifeForm()
 {
@@ -269,7 +268,6 @@ void LifeForm::look(const double up, const double sdws)
 // class InfantryMan - default grunt
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(InfantryMan,"InfantryMan")
-EMPTY_SERIALIZER(InfantryMan)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -297,7 +295,6 @@ void InfantryMan::deleteData()
 // class Parachutist - grunt who jumps out of planes!
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Parachutist,"Parachutist")
-EMPTY_SERIALIZER(Parachutist)
 
 //------------------------------------------------------------------------------
 // Constructor(s)

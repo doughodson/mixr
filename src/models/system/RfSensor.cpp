@@ -713,83 +713,10 @@ bool RfSensor::decRange()
     return ok;
 }
 
-std::ostream& RfSensor::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    //"trackManagerName", // Name of the requested Track Manager (base::String)
-    if (tmName != nullptr) {
-        indent(sout,i+j);
-        sout << "trackManagerName: " << tmName->getString() << std::endl;
-    }
-
-    //"modes",            // Submodes
-    if (modes != nullptr) {
-        indent(sout,i+j);
-        sout << "modes: {" << std::endl;
-        modes->serialize(sout,i+j+4,slotsOnly);
-        indent(sout,i+j);
-        sout << "}" << std::endl;
-    }
-
-    //"ranges",           // Sensor ranges (nm) [vector]
-    if (nRanges > 0) {
-        indent(sout,i+j);
-        sout << "ranges:    [ ";
-        for (int ii = 0; ii < nRanges; ii++) {
-            sout << ranges[ii] << " ";
-        }
-        sout << " ] " << std::endl;
-    }
-
-    //"initRangeIdx",     // initial range index [ 1 ... nRanges ]
-    indent(sout,i+j);
-    sout << "initRangeIdx: " << initRngIdx << std::endl;
-
-    //"PRF",              // Radar Pulse Repetition  (Frequency) or (Number: hertz)
-    indent(sout,i+j);
-    sout << "PRF: ( Hertz " << prf << " ) " << std::endl;
-
-    //"pulseWidth",       // Pulse Width             (Time) or (Number: Seconds)
-    indent(sout,i+j);
-    sout << "pulseWidth: ( Seconds " << pulseWidth << " ) " << std::endl;
-
-    //"beamWidth",        // Beam Width              (Angle) or (Number: Radian)
-    indent(sout,i+j);
-    sout << "beamWidth: ( Degrees " << beamWidth*base::angle::R2DCC << " ) " << std::endl;
-
-    //"syncXmitWithScan", // Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
-    indent(sout,i+j);
-    if (syncXmitWithScan) {
-        sout << "syncXmitWithScan: TRUE " << std::endl;
-    }
-    else {
-        sout << "syncXmitWithScan: FALSE " << std::endl;
-    }
-
-    indent(sout,i+j);
-    sout << "//--- inherits RfSystem ------ "  << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 //==============================================================================
 // Class: SensorMgr
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SensorMgr,"SensorMgr")
-EMPTY_SERIALIZER(SensorMgr)
 
 //------------------------------------------------------------------------------
 // Constructors, destructor, copy operator and clone()

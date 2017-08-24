@@ -8,7 +8,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(SensorMsg, "SensorMsg")
 EMPTY_SLOTTABLE(SensorMsg)
-EMPTY_SERIALIZER(SensorMsg)
 
 SensorMsg::SensorMsg()
 {

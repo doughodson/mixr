@@ -9,7 +9,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LatitudeReadout, "LatitudeReadout")
 EMPTY_COPYDATA(LatitudeReadout)
 EMPTY_DELETEDATA(LatitudeReadout)
-EMPTY_SERIALIZER(LatitudeReadout)
 
 LatitudeReadout::LatitudeReadout()
 {

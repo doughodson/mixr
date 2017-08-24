@@ -105,9 +105,7 @@ public:
 
 protected:
    virtual bool loadData(const List& list, double* const table) = 0;
-   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const = 0;
    static bool loadVector(const List& list, double** table, unsigned int* n);
-   static void printVector(std::ostream& sout, const double* table, const unsigned int n);
 
    bool valid {};        // Table is valid
 

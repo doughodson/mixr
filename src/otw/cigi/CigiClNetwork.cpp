@@ -150,7 +150,6 @@ IMPLEMENT_SUBCLASS(NetThread, "NetThread")
 EMPTY_SLOTTABLE(NetThread)
 EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
-EMPTY_SERIALIZER(NetThread)
 
 NetThread::NetThread(base::Component* const parent, const double priority): base::SingleTask(parent, priority)
 {
@@ -174,7 +173,6 @@ unsigned long NetThread::userFunc()
 //==============================================================================
 
 IMPLEMENT_SUBCLASS(CigiClNetwork, "CigiClNetwork")
-EMPTY_SERIALIZER(CigiClNetwork)
 
 //------------------------------------------------------------------------------
 // slot table for this class type

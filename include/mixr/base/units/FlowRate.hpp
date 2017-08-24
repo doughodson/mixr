@@ -32,9 +32,6 @@ namespace base {
 // convert() -- converts from one volume/time ratio to another
 //     double FlowRate::convert(Volume* newVolume, Time* newTime)
 //
-// serialize() -- print the value of this object to the output stream sout.
-//     std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-//
 //------------------------------------------------------------------------------
 class FlowRate : public Number
 {

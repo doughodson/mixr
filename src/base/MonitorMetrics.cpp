@@ -11,7 +11,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(MonitorMetrics,"monitorMetrics")
-EMPTY_SERIALIZER(MonitorMetrics)
 
 BEGIN_SLOTTABLE(MonitorMetrics)
     "red",       // 1: ... Red Luminance vs RGB level

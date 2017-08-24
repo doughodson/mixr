@@ -11,7 +11,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary, "Rotary")
 EMPTY_COPYDATA(Rotary)
 EMPTY_DELETEDATA(Rotary)
-EMPTY_SERIALIZER(Rotary)
 
 Rotary::Rotary()
 {

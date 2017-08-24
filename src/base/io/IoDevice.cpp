@@ -315,35 +315,5 @@ bool IoDevice::setSlotDevices(PairStream* const list)
    return ok;
 }
 
-std::ostream& IoDevice::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (adapters != nullptr) {
-      indent(sout,i+j);
-      sout << "adapters: ";
-      adapters->serialize(sout,(i+j+4));
-   }
-
-   if (devices != nullptr) {
-      indent(sout,i+j);
-      sout << "devices: ";
-      devices->serialize(sout,(i+j+4));
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

@@ -1407,33 +1407,6 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (players != nullptr) {
-        indent(sout,i+j);
-        sout << "players: {" << std::endl;
-        players->serialize(sout,i+j+4,slotsOnly);
-        indent(sout,i+j);
-        sout << "}" << std::endl;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }
 

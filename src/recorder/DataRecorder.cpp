@@ -25,7 +25,6 @@ namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")
-EMPTY_SERIALIZER(DataRecorder)
 
 BEGIN_SLOTTABLE(DataRecorder)
    "outputHandler",     // 1) Output handler

@@ -9,7 +9,6 @@ EMPTY_SLOTTABLE(ThreadPoolManager)
 EMPTY_CONSTRUCTOR(ThreadPoolManager)
 EMPTY_COPYDATA(ThreadPoolManager)
 EMPTY_DELETEDATA(ThreadPoolManager)
-EMPTY_SERIALIZER(ThreadPoolManager)
 
 //------------------------------------------------------------------------------
 // Default callback implementations (do nothing)

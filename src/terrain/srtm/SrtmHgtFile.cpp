@@ -289,23 +289,5 @@ short SrtmHgtFile::readValue(const unsigned char hbyte, const unsigned char lbyt
     return height;
 }
 
-//------------------------------------------------------------------------------
-// serialize() --
-//------------------------------------------------------------------------------
-std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

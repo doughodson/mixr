@@ -364,7 +364,6 @@ public:
       NtmInputNode();
       virtual const Ntm* findNetworkTypeMapper(const Nib* const p) const =0;
       virtual bool add2OurLists(Ntm* const ntm) =0;
-      virtual void print(std::ostream& sout, const int icnt=0) const =0;
    };
 
    // NTM output node
@@ -375,7 +374,6 @@ public:
       NtmOutputNode();
       virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const =0;
       virtual bool add2OurLists(Ntm* const ntm) =0;
-      virtual void print(std::ostream& sout, const int icnt=0) const =0;
    };
 
 protected:

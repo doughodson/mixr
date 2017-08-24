@@ -376,34 +376,5 @@ bool FileWriter::setPathName(const base::String* const msg)
    return true;
 }
 
-std::ostream& FileWriter::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        //indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    // File name
-    if (filename != nullptr && filename->len() > 0) {
-        indent(sout,i+j);
-        sout << "filename: \"" << *filename << "\""<< std::endl;
-    }
-
-    // Path name
-    if (pathname != nullptr && pathname->len() > 0) {
-        indent(sout,i+j);
-        sout << "pathname: \"" << *pathname << "\"" << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

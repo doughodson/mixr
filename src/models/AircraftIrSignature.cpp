@@ -17,7 +17,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AircraftIrSignature, "AircraftIrSignature")
-EMPTY_SERIALIZER(AircraftIrSignature)
 
 BEGIN_SLOTTABLE(AircraftIrSignature)
    "airframeSignatureTable",  // mapping of

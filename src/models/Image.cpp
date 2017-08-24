@@ -7,7 +7,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Image, "SarImage")
 EMPTY_SLOTTABLE(Image)
-EMPTY_SERIALIZER(Image)
 
 Image::Image()
 {

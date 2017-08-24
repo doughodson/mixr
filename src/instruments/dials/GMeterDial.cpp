@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")
-EMPTY_SERIALIZER(GMeterDial)
 EMPTY_DELETEDATA(GMeterDial)
 
 GMeterDial::GMeterDial()

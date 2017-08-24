@@ -12,7 +12,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Effects,"Effects")
-EMPTY_SERIALIZER(Effects)
 EMPTY_DELETEDATA(Effects)
 
 BEGIN_SLOTTABLE(Effects)
@@ -158,7 +157,6 @@ bool Effects::setSlotDragIndex(base::Number* const p)
 //==============================================================================
 IMPLEMENT_SUBCLASS(Chaff,"Chaff")
 EMPTY_SLOTTABLE(Chaff)
-EMPTY_SERIALIZER(Chaff)
 
 // Weapon data for general bomb
 int Chaff::getCategory() const                { return GRAVITY; }
@@ -194,7 +192,6 @@ void Chaff::deleteData()
 //==============================================================================
 IMPLEMENT_SUBCLASS(Flare,"Flare")
 EMPTY_SLOTTABLE(Flare)
-EMPTY_SERIALIZER(Flare)
 
 // Weapon data for general bomb
 int Flare::getCategory() const                { return GRAVITY; }
@@ -229,7 +226,6 @@ void Flare::deleteData()
 //==============================================================================
 IMPLEMENT_SUBCLASS(Decoy,"Decoy")
 EMPTY_SLOTTABLE(Decoy)
-EMPTY_SERIALIZER(Decoy)
 
 // Weapon data for general bomb
 int Decoy::getCategory() const                { return GRAVITY; }

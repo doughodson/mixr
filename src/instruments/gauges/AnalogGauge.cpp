@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogGauge, "AnalogGauge")
-EMPTY_SERIALIZER(AnalogGauge)
 EMPTY_DELETEDATA(AnalogGauge)
 
 BEGIN_SLOTTABLE(AnalogGauge)

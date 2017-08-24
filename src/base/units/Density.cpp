@@ -140,35 +140,6 @@ bool Density::setSlotVolume(const Volume* newVolume)
     else return false;
 }
 
-std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        // tab here
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << "value: " << val << std::endl;
-
-    if (myMass != nullptr) {
-        indent(sout, i+j);
-        sout << "mass: " << *myMass << std::endl;
-    }
-    if (myVolume != nullptr) {
-        indent(sout, i+j);
-        sout << "volume: " << *myVolume << std::endl;
-    }
-
-    if (!slotsOnly) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }
 

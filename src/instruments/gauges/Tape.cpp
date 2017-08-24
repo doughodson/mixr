@@ -8,7 +8,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Tape, "Tape")
-EMPTY_SERIALIZER(Tape)
 EMPTY_DELETEDATA(Tape)
 
 BEGIN_SLOTTABLE(Tape)

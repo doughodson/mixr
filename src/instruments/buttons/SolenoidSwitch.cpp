@@ -11,7 +11,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(SolenoidSwitch, "SolenoidSwitch")
-EMPTY_SERIALIZER(SolenoidSwitch)
 
 BEGIN_SLOTTABLE(SolenoidSwitch)
     "holdTimeSec",      // how long to hold the button before the timer goes off
@@ -248,7 +247,6 @@ void SolenoidSwitch::updateData(const double dt)
 
 // Hold Button -------------------------------------------------------------------------------------
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SolenoidButton, "SolenoidButton")
-EMPTY_SERIALIZER(SolenoidButton)
 
 BEGIN_EVENT_HANDLER(SolenoidButton)
    ON_EVENT(INPUT_LEFT_EDGE, onMouseDown)

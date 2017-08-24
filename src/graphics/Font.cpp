@@ -187,86 +187,6 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
    return static_cast<int>(std::strlen(outp));
 }
 
-std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (getFontWidth() > 0) {
-        indent(sout,i+j);
-        sout << "fontWidth: " << getFontWidth() << std::endl;
-    }
-
-    if (getFontHeight() > 0) {
-        indent(sout,i+j);
-        sout << "fontHeight: " << getFontHeight() << std::endl;
-    }
-
-    if (leftSide != 0 || topSide != 0) {
-        indent(sout,i+j);
-        sout << "fontPosition: [ " << leftSide << " " << topSide << " ]" << std::endl;
-    }
-
-    if (getBitmapWidth() > 0) {
-        indent(sout,i+j);
-        sout << "bitmapWidth: " << getBitmapWidth() << std::endl;
-    }
-
-    if (getBitmapHeight() > 0) {
-        indent(sout,i+j);
-        sout << "bitmapHeight: " << getBitmapHeight() << std::endl;
-    }
-
-    if (fontDirectory() != nullptr) {
-        indent(sout,i+j);
-        sout << "path: " << fontDirectory() << std::endl;
-    }
-
-    if (filename() != nullptr) {
-        indent(sout,i+j);
-        sout << "file: " << filename() << std::endl;
-    }
-
-    if (lut() != nullptr) {
-        indent(sout,i+j);
-        sout << "lut: [" << std::endl;
-        indent(sout,i+j+10);
-        int iiCount = 0;
-        for (int ii = 0; ii < LUT_SIZE; ii++) {
-            int vLUT = 0x000000FF & static_cast<int>(pLUT[ii]);
-            sout << std::hex << "0x" << vLUT << std::dec;
-            iiCount++;
-            if (iiCount == 256 && LUT_SIZE == 256) break;    // last one
-            else if (iiCount % 64 == 0) {
-                sout << std::endl << std::endl;
-                indent(sout,i+j+10);
-            }
-            else if (iiCount % 16 == 0) {
-                sout << std::endl;
-                indent(sout,i+j+10);
-            }
-            else if (iiCount % 4 == 0) sout << "  ";
-            else sout << " ";
-        }
-        sout << std::endl;
-        indent(sout,i+j+5);
-        sout << "]" << std::endl;
-    }
-
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 //------------------------------------------------------------------------------
 // setSlotFontWidth () -- sets the font width
 //------------------------------------------------------------------------------
@@ -327,14 +247,14 @@ bool Font::setSlotBitmapHeight(const base::Number* const sbhobj)
 //------------------------------------------------------------------------------
 //  setSlotFontPath() - sets the path to the font directory
 //------------------------------------------------------------------------------
-bool Font::setSlotFontPath(const base::String* const sfpobj)
+bool Font::setSlotFontPath(const base::String* const str)
 {
     bool ok = true;
-    if (sfpobj != nullptr) {
-        size_t j = sfpobj->len();
+    if (str != nullptr) {
+        size_t j = str->len();
         if (j > 0) {
             fontPath = new char[j+1];
-            utStrcpy(fontPath,j+1,*sfpobj);
+            utStrcpy(fontPath, j+1, *str);
         }
         else {
               if (isMessageEnabled(MSG_ERROR)) {
@@ -349,14 +269,14 @@ bool Font::setSlotFontPath(const base::String* const sfpobj)
 //------------------------------------------------------------------------------
 //  setSlotFTGLFontFileName() - sets the FTGL Font File Name
 //------------------------------------------------------------------------------
-bool Font::setSlotFTGLFontFileName(const base::String* const sgffnobj)
+bool Font::setSlotFTGLFontFileName(const base::String* const str)
 {
     bool ok = true;
-    if (sgffnobj != nullptr) {
-        size_t j = sgffnobj->len();
+    if (str != nullptr) {
+        size_t j = str->len();
         if (j > 0) {
             fontFile = new char[j+1];
-            utStrcpy(fontFile,j+1,*sgffnobj);
+            utStrcpy(fontFile, j+1, *str);
         }
         else {
            if (isMessageEnabled(MSG_ERROR)) {

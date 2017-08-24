@@ -8,7 +8,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
-EMPTY_SERIALIZER(Translator)
 EMPTY_DELETEDATA(Translator)
 
 BEGIN_EVENT_HANDLER(Translator)

@@ -10,7 +10,6 @@ namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(Otm, "Otm")
-EMPTY_SERIALIZER(Otm)
 
 BEGIN_SLOTTABLE(Otm)
    "factoryName",       // 1) Reference factory name

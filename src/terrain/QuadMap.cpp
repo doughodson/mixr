@@ -14,7 +14,6 @@ namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap, "QuadMap")
 EMPTY_SLOTTABLE(QuadMap)
-EMPTY_SERIALIZER(QuadMap)
 
 QuadMap::QuadMap()
 {

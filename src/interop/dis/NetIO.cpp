@@ -60,7 +60,6 @@ public:
    // NetIO::NtmOutputNode class functions
    virtual const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
    virtual bool add2OurLists(interop::Ntm* const ntm) override;
-   virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
    unsigned int level;        // Level
@@ -1760,40 +1759,6 @@ bool NetIO::setSlotExerciseID(const base::Number* const num)
     return ok;
 }
 
-std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-
-    // Network Input Handler
-    if (netInput != nullptr) {
-        indent(sout,i+j);
-        sout << "netInput: ";
-        netInput->serialize(sout,(i+j+4),true);
-    }
-
-    // Network Output Handler
-    if (netOutput != nullptr) {
-        indent(sout,i+j);
-        sout << "netOutput: ";
-        netOutput->serialize(sout,(i+j+4),true);
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 //------------------------------------------------------------------------------
 // Test quick lookup of incoming entity types
 //------------------------------------------------------------------------------
@@ -1929,7 +1894,6 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
 
 IMPLEMENT_SUBCLASS(NtmInputNode,"NtmInputNode")
 EMPTY_SLOTTABLE(NtmInputNode)
-EMPTY_SERIALIZER(NtmInputNode)
 
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
@@ -2235,35 +2199,6 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
    }
 
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// print our data and our subnodes
-//------------------------------------------------------------------------------
-void NtmInputNode::print(std::ostream& sout, const int icnt) const
-{
-   // Print our node's factory name
-   indent(sout,icnt);
-   sout << "( NtmInputNode: level=" << level << ", code=" << code;
-   sout << std::endl;
-
-   // Print our Ntm object
-   if (ourNtm != nullptr) {
-      ourNtm->serialize(sout, icnt+4);
-   }
-
-   // Print our subnodes
-   {
-      const base::List::Item* item = subnodeList->getFirstItem();
-      while (item != nullptr) {
-         const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
-         subnode->print(sout,icnt+4);
-         item = item->getNext();
-      }
-   }
-
-   indent(sout,icnt);
-   sout << ")" << std::endl;
 }
 
 }

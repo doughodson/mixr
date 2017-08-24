@@ -8,7 +8,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Material, "Material")
-EMPTY_SERIALIZER(Material)
 EMPTY_DELETEDATA(Material)
 
 BEGIN_SLOTTABLE(Material)

@@ -9,7 +9,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LongitudeReadout, "LongitudeReadout")
 EMPTY_COPYDATA(LongitudeReadout)
 EMPTY_DELETEDATA(LongitudeReadout)
-EMPTY_SERIALIZER(LongitudeReadout)
 
 LongitudeReadout::LongitudeReadout()
 {

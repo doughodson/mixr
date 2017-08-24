@@ -26,7 +26,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(StoresMgr, "BaseStoresMgr")
 EMPTY_SLOTTABLE(StoresMgr)
-EMPTY_SERIALIZER(StoresMgr)
 
 BEGIN_EVENT_HANDLER(StoresMgr)
    ON_EVENT_OBJ(WPN_REL_EVENT,onWpnRelEvent,base::Boolean)
@@ -406,7 +405,6 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
 //==============================================================================
 IMPLEMENT_SUBCLASS(SimpleStoresMgr,"StoresMgr")
 EMPTY_SLOTTABLE(SimpleStoresMgr)
-EMPTY_SERIALIZER(SimpleStoresMgr)
 
 SimpleStoresMgr::SimpleStoresMgr()
 {

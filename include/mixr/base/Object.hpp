@@ -217,24 +217,6 @@ namespace base {
 //    used by the ON_SLOT() macro.
 //
 //
-// Object Serializer:
-//
-//    A serializer must be written for each derived class, or use EMPTY_SERIALIZER().
-//
-//    Serializes the object to 'sout' in the standard oe Description
-//    Language (EDL) format, which includes the object's factory name and slots.
-//
-//       serialize(ostream& sout)
-//       serialize(ostream& sout, int indent)
-//       serialize(ostream& sout, int indent, bool slotsOnly)
-//          Serialize the contents of an object, as EDL, to the output stream, sout.
-//          Each output line can be indented by 'indent' spaces.  If slotsOnly is true,
-//          then only the slots are printed.
-//
-//       void indent(std::ostream& sout, const int ident)
-//          Indents the output stream, 'sout, by 'ident' spaces.
-//
-//
 // Standard message types (see definitions below):
 //
 //    By default, error and warning messages are enabled.
@@ -301,8 +283,6 @@ class Object : public Referenced
    protected: void copyData(const Object& org, const bool cc = false);
    protected: void deleteData();
 
-   public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
-
    // helper methods
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
@@ -345,9 +325,6 @@ public:
 protected:
    // slot table for this object (set to the object's class slot table)
    const SlotTable* slotTable {};
-
-   // indents the output steam by 'ident' spaces. (used with serialize())
-   void indent(std::ostream& sout, const int ident) const;
 
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }

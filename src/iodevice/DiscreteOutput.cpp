@@ -234,39 +234,5 @@ bool DiscreteOutput::setSlotNum(const base::Number* const msg)
    return ok;
 }
 
-
-std::ostream& DiscreteOutput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "do: " << getLocation() << std::endl;
-
-   indent(sout,i+j);
-   sout << "port: " << getPort() << std::endl;
-
-   indent(sout,i+j);
-   sout << "channel: " << getChannel() << std::endl;
-
-   indent(sout,i+j);
-   sout << "value: " << getValue() << std::endl;
-
-   indent(sout,i+j);
-   sout << "inverted: " << getInvertFlag() << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

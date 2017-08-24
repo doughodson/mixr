@@ -75,32 +75,5 @@ bool Rgb::setSlotAlpha(Number* const msg)
     return ok;
 }
 
-std::ostream& Rgb::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    indent(sout,i+j);
-    sout << "red:   " << red() << std::endl;
-
-    indent(sout,i+j);
-    sout << "green: " << green() << std::endl;
-
-    indent(sout,i+j);
-    sout << "blue:  " << blue() << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

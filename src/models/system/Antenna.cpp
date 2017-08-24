@@ -739,44 +739,5 @@ double Antenna::getPolarizationGain(const Polarization p1) const
     return table[polar][p1];
 }
 
-std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-    }
-
-    // Gain pattern
-    if (gainPattern != nullptr) {
-        indent(sout,i+j);
-        sout << "gainPattern: " ;
-        gainPattern->serialize(sout,(i+j+4));
-    }
-
-    // polarization: Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
-    indent(sout,i+j);
-    if (polar == NONE) sout << "none";
-    else if (polar == VERTICAL) sout << "vertical";
-    else if (polar == HORIZONTAL) sout << "horizontal";
-    else if (polar == SLANT) sout << "slant";
-    else if (polar == RHC) sout << "RHC";
-    else if (polar == LHC) sout << "LHC";
-    sout << std::endl;
-
-    indent(sout,i+j);
-    sout << "recycle: " << (isEmissionRecycleEnabled() ? "true" : "false") << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

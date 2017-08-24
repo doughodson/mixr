@@ -115,7 +115,6 @@ static uint16_t convertUInt16(const uint16_t v)
 // Class: Image
 //==============================================================================
 IMPLEMENT_SUBCLASS(Image, "Image")
-EMPTY_SERIALIZER(Image)
 EMPTY_SLOTTABLE(Image)
 
 // Constructors

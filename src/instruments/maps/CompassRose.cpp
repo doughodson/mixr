@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")
-EMPTY_SERIALIZER(CompassRose)
 EMPTY_DELETEDATA(CompassRose)
 
 BEGIN_EVENT_HANDLER(CompassRose)

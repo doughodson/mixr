@@ -31,32 +31,10 @@ void Distance::copyData(const Distance& org, const bool)
    val = fromDistance(org.toDistance());;
 }
 
-std::ostream& Distance::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
 //==============================================================================
 // Meters --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Meters, "Meters")
-EMPTY_SERIALIZER(Meters)
 EMPTY_COPYDATA(Meters)
 EMPTY_DELETEDATA(Meters)
 
@@ -80,7 +58,6 @@ Meters::Meters(const Distance& value) : Distance()
 // CentiMeters --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CentiMeters, "CentiMeters")
-EMPTY_SERIALIZER(CentiMeters)
 EMPTY_COPYDATA(CentiMeters)
 EMPTY_DELETEDATA(CentiMeters)
 
@@ -104,7 +81,6 @@ CentiMeters::CentiMeters(const Distance& value) : Distance()
 // MicroMeters --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MicroMeters, "MicroMeters")
-EMPTY_SERIALIZER(MicroMeters)
 EMPTY_COPYDATA(MicroMeters)
 EMPTY_DELETEDATA(MicroMeters)
 
@@ -128,7 +104,6 @@ MicroMeters::MicroMeters(const Distance& value) : Distance()
 // Microns -- Same as Micrometers
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Microns, "Microns")
-EMPTY_SERIALIZER(Microns)
 EMPTY_COPYDATA(Microns)
 EMPTY_DELETEDATA(Microns)
 
@@ -152,7 +127,6 @@ Microns::Microns(const Distance& value) : Distance()
 // KiloMeters --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloMeters, "KiloMeters")
-EMPTY_SERIALIZER(KiloMeters)
 EMPTY_COPYDATA(KiloMeters)
 EMPTY_DELETEDATA(KiloMeters)
 
@@ -176,7 +150,6 @@ KiloMeters::KiloMeters(const Distance& value) : Distance()
 // Inches --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Inches, "Inches")
-EMPTY_SERIALIZER(Inches)
 EMPTY_COPYDATA(Inches)
 EMPTY_DELETEDATA(Inches)
 
@@ -200,7 +173,6 @@ Inches::Inches(const Distance& value) : Distance()
 // Feet --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Feet, "Feet")
-EMPTY_SERIALIZER(Feet)
 EMPTY_COPYDATA(Feet)
 EMPTY_DELETEDATA(Feet)
 
@@ -224,7 +196,6 @@ Feet::Feet(const Distance& value) : Distance()
 // NauticalMiles --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NauticalMiles, "NauticalMiles")
-EMPTY_SERIALIZER(NauticalMiles)
 EMPTY_COPYDATA(NauticalMiles)
 EMPTY_DELETEDATA(NauticalMiles)
 
@@ -248,7 +219,6 @@ NauticalMiles::NauticalMiles(const Distance& value) : Distance()
 // StatuteMiles --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StatuteMiles, "StatuteMiles")
-EMPTY_SERIALIZER(StatuteMiles)
 EMPTY_COPYDATA(StatuteMiles)
 EMPTY_DELETEDATA(StatuteMiles)
 

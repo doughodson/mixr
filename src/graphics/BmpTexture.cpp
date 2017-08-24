@@ -17,7 +17,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")
-EMPTY_SERIALIZER(BmpTexture)
 EMPTY_DELETEDATA(BmpTexture)
 
 BEGIN_SLOTTABLE(BmpTexture)

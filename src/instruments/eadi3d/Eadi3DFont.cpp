@@ -7,7 +7,6 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont, "Eadi3DFont")
 EMPTY_SLOTTABLE(Eadi3DFont)
-EMPTY_SERIALIZER(Eadi3DFont)
 
 // font scaled so six stroke font points (units used below) is 1 screen unit
 #define XSCALE (1.0/6.0)

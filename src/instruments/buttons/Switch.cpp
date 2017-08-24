@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Switch, "Switch")
-EMPTY_SERIALIZER(Switch)
 EMPTY_DELETEDATA(Switch)
 
 BEGIN_SLOTTABLE(Switch)

@@ -11,7 +11,6 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Scanline, "Scanline")
 EMPTY_SLOTTABLE(Scanline)
-EMPTY_SERIALIZER(Scanline)
 
 Scanline::Scanline()
 {
@@ -552,7 +551,6 @@ void Scanline::toggleActivePolygon()
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Scanline::PolyData, "ScanlinePolyData")
 EMPTY_SLOTTABLE(Scanline::PolyData)
-EMPTY_SERIALIZER(Scanline::PolyData)
 EMPTY_DELETEDATA(Scanline::PolyData)
 
 Scanline::PolyData::PolyData() : polygon(nullptr), orig(nullptr)
@@ -622,7 +620,6 @@ void Scanline::PolyData::getNorm(base::Vec3d& cnorm, const double x) const
 //==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Scanline::Edge, "ScanlineEdge")
 EMPTY_SLOTTABLE(Scanline::Edge)
-EMPTY_SERIALIZER(Scanline::Edge)
 
 Scanline::Edge::Edge()
 {

@@ -7,7 +7,6 @@ namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(LimitFunc, "LimitFunc")
 EMPTY_SLOTTABLE(LimitFunc)
-EMPTY_SERIALIZER(LimitFunc)
 EMPTY_DELETEDATA(LimitFunc)
 
 LimitFunc::LimitFunc()

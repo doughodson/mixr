@@ -426,25 +426,5 @@ long DtedFile::readValue(const unsigned char hbyte, const unsigned char byte1, c
     return height;
 }
 
-std::ostream& DtedFile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "verifyChecksum:  " << verifyChecksum << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

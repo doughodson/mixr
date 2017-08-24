@@ -7,7 +7,6 @@ namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit11, "Limit11")
 EMPTY_SLOTTABLE(Limit11)
-EMPTY_SERIALIZER(Limit11)
 
 Limit11::Limit11() : LimitFunc(1,1)
 {

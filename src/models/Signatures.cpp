@@ -23,7 +23,6 @@ namespace models {
 //==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(RfSignature, "Signature")
 EMPTY_SLOTTABLE(RfSignature)
-EMPTY_SERIALIZER(RfSignature)
 
 RfSignature::RfSignature()
 {
@@ -44,7 +43,6 @@ void RfSignature::deleteData()
 // Class: SigConstant
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigConstant,"SigConstant")
-EMPTY_SERIALIZER(SigConstant)
 
 BEGIN_SLOTTABLE(SigConstant)
     "rcs",          // 1 Constant Radar Cross Section value
@@ -118,7 +116,6 @@ bool SigConstant::setRCS(const base::Number* const num)
 // Class: SigSphere
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigSphere,"SigSphere")
-EMPTY_SERIALIZER(SigSphere)
 
 BEGIN_SLOTTABLE(SigSphere)
     "radius",       // 1 Radius of the sphere
@@ -186,7 +183,6 @@ bool SigSphere::setRadiusFromSlot(base::Number* const num)
 // Class: SigPlate
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigPlate,"SigPlate")
-EMPTY_SERIALIZER(SigPlate)
 
 BEGIN_SLOTTABLE(SigPlate)
     "a",        // 1 length of the plate
@@ -290,7 +286,6 @@ bool SigPlate::setB(base::Number* const num)
 // Class: SigDihedralCR
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigDihedralCR,"SigDihedralCR")
-EMPTY_SERIALIZER(SigDihedralCR)
 
 SigDihedralCR::SigDihedralCR()
 {
@@ -335,7 +330,6 @@ double SigDihedralCR::getRCS(const Emission* const em)
 // Class: SigTrihedralCR
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigTrihedralCR,"SigTrihedralCR")
-EMPTY_SERIALIZER(SigTrihedralCR)
 
 SigTrihedralCR::SigTrihedralCR()
 {
@@ -377,7 +371,6 @@ double SigTrihedralCR::getRCS(const Emission* const em)
 // Class: SigSwitch
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigSwitch,"SigSwitch")
-EMPTY_SERIALIZER(SigSwitch)
 
 SigSwitch::SigSwitch()
 {
@@ -431,7 +424,6 @@ double SigSwitch::getRCS(const Emission* const em)
 // Class: SigAzEl
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigAzEl,"SigAzEl")
-EMPTY_SERIALIZER(SigAzEl)
 
 BEGIN_SLOTTABLE(SigAzEl)
     "table",            // 1: Table of RCS by target Az/El angles  (base::Table2)

@@ -13,7 +13,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(HexReadout, "HexReadout")
 EMPTY_COPYDATA(HexReadout)
 EMPTY_DELETEDATA(HexReadout)
-EMPTY_SERIALIZER(HexReadout)
 
 HexReadout::HexReadout()
 {

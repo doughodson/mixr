@@ -16,7 +16,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrSignature, "IrSignature")
-EMPTY_SERIALIZER(IrSignature)
 
 BEGIN_SLOTTABLE(IrSignature)
    "binSizes",                // 1 The size of the wavelength bins used in the tables

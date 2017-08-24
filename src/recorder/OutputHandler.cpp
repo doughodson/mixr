@@ -11,7 +11,6 @@ namespace recorder {
 
 IMPLEMENT_SUBCLASS(OutputHandler, "RecorderOutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
-EMPTY_SERIALIZER(OutputHandler)
 
 OutputHandler::OutputHandler()
 {

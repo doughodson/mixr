@@ -9,7 +9,6 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Clip3D, "Clip3D")
 EMPTY_SLOTTABLE(Clip3D)
-EMPTY_SERIALIZER(Clip3D)
 
 Clip3D::Clip3D()
 {

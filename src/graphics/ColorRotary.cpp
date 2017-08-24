@@ -11,7 +11,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
-EMPTY_SERIALIZER(ColorRotary)
 
 BEGIN_SLOTTABLE(ColorRotary)
     "breakcolors",      // set colors

@@ -10,7 +10,6 @@ namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
-EMPTY_SERIALIZER(NavaidLoader)
 
 NavaidLoader::NavaidLoader() : Database()
 {

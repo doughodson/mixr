@@ -5,7 +5,6 @@ namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint, "Waypoint")
-EMPTY_SERIALIZER(Waypoint)
 EMPTY_COPYDATA(Waypoint)
 EMPTY_DELETEDATA(Waypoint)
 

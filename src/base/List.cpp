@@ -395,16 +395,5 @@ const Object* List::getPosition1(const unsigned int n) const
         return nullptr;
 }
 
-std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
-{
-    std::cout << "{" << std::endl;
-    for (const Item* p = getFirstItem(); p != nullptr; p = p->getNext() ) {
-        if (p->getValue() != nullptr) p->getValue()->serialize(sout,4);
-        else std::cout << "<BAD VALUE>" << std::endl;
-    }
-    std::cout << "}" << std::endl;
-    return sout;
-}
-
 }
 }

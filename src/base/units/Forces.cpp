@@ -29,33 +29,10 @@ void Force::copyData(const Force& org, const bool)
    val = fromForce(org.toForce());;
 }
 
-std::ostream& Force::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
-
 //==============================================================================
 // Newtons() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Newtons, "Newtons")
-EMPTY_SERIALIZER(Newtons)
 EMPTY_COPYDATA(Newtons)
 EMPTY_DELETEDATA(Newtons)
 
@@ -79,7 +56,6 @@ Newtons::Newtons(const Force& value) : Force()
 // Kilonewtons() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloNewtons, "KiloNewtons")
-EMPTY_SERIALIZER(KiloNewtons)
 EMPTY_COPYDATA(KiloNewtons)
 EMPTY_DELETEDATA(KiloNewtons)
 
@@ -103,7 +79,6 @@ KiloNewtons::KiloNewtons(const Force& value) : Force()
 // PoundForces() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PoundForces, "PoundForces")
-EMPTY_SERIALIZER(PoundForces)
 EMPTY_COPYDATA(PoundForces)
 EMPTY_DELETEDATA(PoundForces)
 
@@ -127,7 +102,6 @@ PoundForces::PoundForces(const Force& value) : Force()
 // Poundals() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Poundals, "Poundals")
-EMPTY_SERIALIZER(Poundals)
 EMPTY_COPYDATA(Poundals)
 EMPTY_DELETEDATA(Poundals)
 

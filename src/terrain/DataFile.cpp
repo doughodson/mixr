@@ -10,7 +10,6 @@ namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DataFile, "DataFile")
 EMPTY_SLOTTABLE(DataFile)
-EMPTY_SERIALIZER(DataFile)
 
 DataFile::DataFile()
 {

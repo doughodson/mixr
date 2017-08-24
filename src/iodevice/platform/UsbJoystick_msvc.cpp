@@ -8,7 +8,6 @@ namespace iodevice {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystick)
-EMPTY_SERIALIZER(UsbJoystick)
 EMPTY_DELETEDATA(UsbJoystick)
 
 UsbJoystick::UsbJoystick()

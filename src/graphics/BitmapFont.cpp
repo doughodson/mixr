@@ -158,28 +158,6 @@ bool BitmapFont::setReverse(const base::Number* const rnumber)
     return true;
 }
 
-std::ostream& BitmapFont::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    unsigned int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "reverse: " << reverse << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-
 //------------------------------------------------------------------------------
 // Default font ----
 //------------------------------------------------------------------------------

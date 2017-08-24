@@ -6,7 +6,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Button, "Button")
-EMPTY_SERIALIZER(Button)
 EMPTY_DELETEDATA(Button)
 
 BEGIN_SLOTTABLE(Button)

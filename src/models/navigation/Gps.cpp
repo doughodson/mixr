@@ -7,7 +7,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Gps, "Gps")
 EMPTY_SLOTTABLE(Gps)
-EMPTY_SERIALIZER(Gps)
 EMPTY_DELETEDATA(Gps)
 
 Gps::Gps()

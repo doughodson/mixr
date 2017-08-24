@@ -8,7 +8,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogDial, "AnalogDial")
-EMPTY_SERIALIZER(AnalogDial)
 EMPTY_DELETEDATA(AnalogDial)
 
 BEGIN_EVENT_HANDLER(AnalogDial)

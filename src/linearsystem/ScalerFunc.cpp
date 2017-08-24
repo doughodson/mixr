@@ -192,38 +192,5 @@ bool ScalerFunc::setSlotY0(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& ScalerFunc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if (rate > 0) {
-       indent(sout,i+j);
-       sout << "rate:   " << rate << std::endl;
-    }
-
-    if (x0 != 0) {
-       indent(sout,i+j);
-       sout << "x0:   " << x0 << std::endl;
-    }
-
-    if (y0 != 0) {
-       indent(sout,i+j);
-       sout << "y0:   " << y0 << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

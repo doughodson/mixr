@@ -9,7 +9,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(MapPage, "MapPage")
-EMPTY_SERIALIZER(MapPage)
 EMPTY_DELETEDATA(MapPage)
 
 BEGIN_SLOTTABLE(MapPage)

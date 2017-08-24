@@ -1591,52 +1591,5 @@ bool Autopilot::setSlotMaxVelAccNps(const base::Number* const msg)
    return ok;
 }
 
-// serializer
-std::ostream& Autopilot::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName();
-        j = 4;
-    }
-
-    if (loiterLength > 0) {
-        // loiter pattern length
-        indent(sout,i+j);
-        sout << "loiterPatternLength:  " << loiterLength << std::endl;
-        // loiter pattern counter clockwise flag
-        indent(sout,i+j);
-        sout << "loiterPatternCcwFlag:  " << loiterCcwFlag << std::endl;
-    }
-
-    // follow the leader stuff
-    if (leadName != nullptr) {
-        // leader name
-        indent(sout,i+j);
-        sout << "leadPlayerName:  " << *leadName << std::endl;
-        // distance behind lead
-        indent(sout,i+j);
-        sout << "leadFollowingDistanceTrail:  " <<  leadOffset[0] << std::endl;
-        // distance to the right lead
-        indent(sout,i+j);
-        sout << "leadFollowingDistanceRight:  " <<  leadOffset[1] << std::endl;
-        // distance above (or below) lead
-        indent(sout,i+j);
-        sout << "leadFollowingDeltaAltitude:  " <<  leadOffset[2] << std::endl;
-        // follow the lead mode
-        indent(sout,i+j);
-        sout << "followTheLeadMode:  " <<  followLeadModeOn << std::endl;
-
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

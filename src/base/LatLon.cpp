@@ -157,22 +157,6 @@ bool LatLon::setSec(const double s)
    return ok;
 }
 
-std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    //int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName()  << std::endl;
-        //j = 4;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 //------------------------------------------------------------------------------
 // setDirection() -- sets the initial direction "n", "s", "e", "w"
 //------------------------------------------------------------------------------

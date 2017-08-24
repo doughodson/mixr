@@ -9,7 +9,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(Adi, "Adi")
-EMPTY_SERIALIZER(Adi)
 EMPTY_DELETEDATA(Adi)
 
 BEGIN_SLOTTABLE(Adi)

@@ -482,36 +482,6 @@ void Database::printIcaoList(std::ostream& sout)
    }
 }
 
-std::ostream& Database::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (strlen(getPathname()) > 0) {
-        indent(sout,i+j);
-        sout << "pathname: \"";
-        sout << getPathname();
-        sout << "\"" << std::endl;
-    }
-
-    if (strlen(getFilename()) > 0) {
-        indent(sout,i+j);
-        sout << "filename: \"";
-        sout << getFilename();
-        sout << "\"" << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 //------------------------------------------------------------------------------
 // Database::Key
 //------------------------------------------------------------------------------

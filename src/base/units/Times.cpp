@@ -30,32 +30,10 @@ void Time::copyData(const Time& org, const bool)
    val = fromTime(org.toTime());;
 }
 
-std::ostream& Time::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
 //==============================================================================
 // Seconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Seconds, "Seconds")
-EMPTY_SERIALIZER(Seconds)
 EMPTY_COPYDATA(Seconds)
 EMPTY_DELETEDATA(Seconds)
 
@@ -79,7 +57,6 @@ Seconds::Seconds(const Time& org) : Time()
 // MilliSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliSeconds, "MilliSeconds")
-EMPTY_SERIALIZER(MilliSeconds)
 EMPTY_COPYDATA(MilliSeconds)
 EMPTY_DELETEDATA(MilliSeconds)
 
@@ -103,7 +80,6 @@ MilliSeconds::MilliSeconds(const Time& org) : Time()
 // MicroSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MicroSeconds, "MicroSeconds")
-EMPTY_SERIALIZER(MicroSeconds)
 EMPTY_COPYDATA(MicroSeconds)
 EMPTY_DELETEDATA(MicroSeconds)
 
@@ -127,7 +103,6 @@ MicroSeconds::MicroSeconds(const Time& org) : Time()
 // NanoSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NanoSeconds, "NanoSeconds")
-EMPTY_SERIALIZER(NanoSeconds)
 EMPTY_COPYDATA(NanoSeconds)
 EMPTY_DELETEDATA(NanoSeconds)
 
@@ -151,7 +126,6 @@ NanoSeconds::NanoSeconds(const Time& org) : Time()
 // Minutes --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Minutes, "Minutes")
-EMPTY_SERIALIZER(Minutes)
 EMPTY_COPYDATA(Minutes)
 EMPTY_DELETEDATA(Minutes)
 
@@ -175,7 +149,6 @@ Minutes::Minutes(const Time& org) : Time()
 // Hours --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Hours, "Hours")
-EMPTY_SERIALIZER(Hours)
 EMPTY_COPYDATA(Hours)
 EMPTY_DELETEDATA(Hours)
 
@@ -199,7 +172,6 @@ Hours::Hours(const Time& org) : Time()
 // Days --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Days, "Days")
-EMPTY_SERIALIZER(Days)
 EMPTY_COPYDATA(Days)
 EMPTY_DELETEDATA(Days)
 

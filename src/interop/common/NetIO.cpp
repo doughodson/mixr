@@ -1165,12 +1165,6 @@ bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
        ok = true;
     }
 
-    // Test rig
-    //if (ok && inputNtmTree != 0) {
-    //   inputNtmTree->print(std::cout);
-    //   testInputEntityTypes(100);
-    //}
-
     return ok;
 }
 
@@ -1196,11 +1190,6 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
        ok = true;
     }
 
-    // Test rig
-    //if (ok && outputNtmTree != 0) {
-    //   outputNtmTree->print(std::cout);
-    //   //testOutputEntityTypes(100);
-    //}
     return ok;
 }
 
@@ -1259,120 +1248,12 @@ bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
    return ok;
 }
 
-std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "networkID: ";
-   sout << getNetworkID();
-   sout << std::endl;
-
-   {
-      const base::String* name = getFederateName();
-      if (name != nullptr && name->len() > 0) {
-         indent(sout,i+j);
-         sout << "federateName: ";
-         sout << *name;
-         sout << std::endl;
-      }
-   }
-
-   {
-      const base::String* name = getFederationName();
-      if (name != nullptr && name->len() > 0) {
-         indent(sout,i+j);
-         sout << "federationName: ";
-         sout << *name;
-         sout << std::endl;
-            }
-         }
-
-   indent(sout,i+j);
-   sout << "enableInput: ";
-   sout << isInputEnabled();
-   sout << std::endl;
-
-   indent(sout,i+j);
-   sout << "enableOutput: ";
-   sout << isOutputEnabled();
-   sout << std::endl;
-
-   indent(sout,i+j);
-   sout << "enableRelay: ";
-   sout << relayFlg;
-   sout << std::endl;
-
-   indent(sout,i+j);
-   sout << "timeline: ";
-   if (getTimeline() == EXEC) {
-      sout << "EXEC";
-   }
-   else {
-      sout << "UTC";
-   }
-   sout << std::endl;
-
-   if (nInputEntityTypes > 0) {
-      indent(sout,i+j);
-      sout << "inputEntityTypes: {" << std::endl;
-      for (unsigned int k = 0; k < nInputEntityTypes; k++) {
-         inputEntityTypes[k]->serialize(sout,i+j+4);
-      }
-      indent(sout,i+j);
-      sout << "}" << std::endl;
-   }
-
-   if (nOutputEntityTypes > 0) {
-      indent(sout,i+j);
-      sout << "outputEntityTypes: {" << std::endl;
-      for (unsigned int k = 0; k < nOutputEntityTypes; k++) {
-         outputEntityTypes[k]->serialize(sout,i+j+4);
-      }
-      indent(sout,i+j);
-      sout << "}" << std::endl;
-   }
-
-   indent(sout,i+j);
-   sout << "maxTimeDR: ( Seconds " << maxTimeDR << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxPositionError: ( Meters " << maxPositionErr << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxOrientationError: ( Degrees " << (maxOrientationErr*base::angle::R2DCC) << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxAge: ( Seconds " << maxAge << " )" << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxEntityRange: ( NauticalMiles " << (maxEntityRange*base::distance::M2NM) << " )" << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
-
-
-
 //==============================================================================
 // Class: NtmInputNode
 //==============================================================================
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmInputNode,"AbstractNtmInputNode")
 EMPTY_SLOTTABLE(NetIO::NtmInputNode)
-EMPTY_SERIALIZER(NetIO::NtmInputNode)
 EMPTY_COPYDATA(NetIO::NtmInputNode)
 EMPTY_DELETEDATA(NetIO::NtmInputNode)
 
@@ -1406,7 +1287,6 @@ NetIO::NtmInputNode* NetIO::NtmInputNode::clone() const
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmOutputNode,"AbstractNtmOutputNode")
 EMPTY_SLOTTABLE(NetIO::NtmOutputNode)
-EMPTY_SERIALIZER(NetIO::NtmOutputNode)
 EMPTY_COPYDATA(NetIO::NtmOutputNode)
 EMPTY_DELETEDATA(NetIO::NtmOutputNode)
 
@@ -1449,7 +1329,6 @@ public:
    // NetIO::NtmOutputNode class functions
    virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const override;
    virtual bool add2OurLists(Ntm* const ntm) override;
-   virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
    bool checkAndAddNtm(Ntm* const ntm);
@@ -1461,9 +1340,8 @@ private:
    base::List* subnodeList;   // List of NtmOutputNode nodes for players derived this level
 };
 
-IMPLEMENT_SUBCLASS(NtmOutputNodeStd,"NtmOutputNodeStd")
+IMPLEMENT_SUBCLASS(NtmOutputNodeStd, "NtmOutputNodeStd")
 EMPTY_SLOTTABLE(NtmOutputNodeStd)
-EMPTY_SERIALIZER(NtmOutputNodeStd)
 
 //------------------------------------------------------------------------------
 // root outgoing NTM node factory
@@ -1688,7 +1566,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
       // this Ntm object and add it to our list of subnodes.
       if (!ok) {
          // Create a new node and add the NTM
-         const auto newNode = new NtmOutputNodeStd(tp,tpfn);
+         const auto newNode = new NtmOutputNodeStd(tp, tpfn);
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
@@ -1776,42 +1654,6 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
    }
 
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// print our data and our subnodes
-//------------------------------------------------------------------------------
-void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
-{
-   // Print our node's factory name
-   indent(sout,icnt);
-   sout << "( NtmOutputNodeStd: FormName: ";
-   if (nodeFactoryName != nullptr) sout << nodeFactoryName;
-   else sout << "ROOT";
-   sout << std::endl;
-
-   // Print our Ntm objects
-   {
-      const base::List::Item* item = ntmList->getFirstItem();
-      while (item != nullptr) {
-         const Ntm* ntm = static_cast<const Ntm*>(item->getValue());
-         ntm->serialize(sout, icnt+4);
-         item = item->getNext();
-      }
-   }
-
-   // Print our subnodes
-   {
-      const base::List::Item* item = subnodeList->getFirstItem();
-      while (item != nullptr) {
-         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
-         subnode->print(sout, icnt+4);
-         item = item->getNext();
-      }
-   }
-
-   indent(sout,icnt);
-   sout << ")" << std::endl;
 }
 
 }

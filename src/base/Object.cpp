@@ -235,26 +235,6 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
 }
 
 //------------------------------------------------------------------------------
-// indent() -- indent the output stream by 'ii' spaces
-//------------------------------------------------------------------------------
-void Object::indent(std::ostream& sout, const int ii) const
-{
-    for (int i = 0; i < ii; i++) sout << " ";
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- Sends the contents of an object (important stuff anyway) to
-//            the output stream, sout.  Each output line can be indented
-//            by 'indent' spaces.  If slotsOnly is true, then only the
-//            slots are printed.
-//------------------------------------------------------------------------------
-std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
-{
-   return sout;
-}
-
-//------------------------------------------------------------------------------
 // return object and class metadata
 //------------------------------------------------------------------------------
 const MetaObject* Object::getMetaObject()

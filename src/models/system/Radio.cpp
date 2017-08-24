@@ -360,60 +360,11 @@ bool Radio::setSlotRadioId(base::Number* const num)
    return ok;
 }
 
-std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "numChannels: " << getNumberOfChannels() << std::endl;
-
-   if (getNumberOfChannels() > 0) {
-      indent(sout,i+j);
-      sout << "channels: }" << std::endl;
-
-      for (unsigned short chan = 1; chan <= getNumberOfChannels(); chan++) {
-         double freq = getChannelFrequency(chan);
-         indent(sout,i+j+4);
-         sout << "( MegaHertz " << (freq * base::frequency::Hz2MHz) << " )" << std::endl;
-      }
-
-      indent(sout,i+j);
-      sout << "}" << std::endl;
-   }
-
-   indent(sout,i+j);
-   sout << "channel: " << getChannel() << std::endl;
-
-   indent(sout,i+j);
-   sout << "maxDetectRange: ( NauticalMiles " << maxDetectRange << " )" << std::endl;
-
-   if (radioId > 0) {
-      indent(sout,i+j);
-      sout << "radioID: " << radioId << std::endl;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
-
 //==============================================================================
 // Class: CommRadio
 //==============================================================================
 IMPLEMENT_SUBCLASS(CommRadio, "CommRadio")
 EMPTY_SLOTTABLE(CommRadio)
-EMPTY_SERIALIZER(CommRadio)
 
 CommRadio::CommRadio()
 {

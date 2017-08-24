@@ -36,21 +36,13 @@ const float FtglExtrdFont::DEFAULT_DEPTH = 5.0f;
 // Setting up classes
 //------------------------------------------------------------------------------
 IMPLEMENT_PARTIAL_SUBCLASS(FtglFonts,"FTGLFonts")
-EMPTY_SERIALIZER(FtglFonts)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglBitmapFont,"FTGLBitmapFonts")
-EMPTY_SERIALIZER(FtglBitmapFont)
 IMPLEMENT_SUBCLASS(FtglExtrdFont,"FTGLExtrdFonts")
-EMPTY_SERIALIZER(FtglExtrdFont)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglOutlineFont,"FTGLOutlineFonts")
-EMPTY_SERIALIZER(FtglOutlineFont)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglPixmapFont,"FTGLPixmapFonts")
-EMPTY_SERIALIZER(FtglPixmapFont)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglPolygonFont,"FTGLPolygonFonts")
-EMPTY_SERIALIZER(FtglPolygonFont)
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglTextureFont,"FTGLTextureFonts")
-EMPTY_SERIALIZER(FtglTextureFont)
 IMPLEMENT_SUBCLASS(FtglHaloFont,"FTGLHaloFonts")
-EMPTY_SERIALIZER(FtglHaloFont)
 
 //------------------------------------------------------------------------------
 // Slot tables
@@ -314,7 +306,7 @@ void FtglBitmapFont::outputText(const char* txt, const int n, const bool vf, con
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
-    int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    const int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
     if (nn <= 0) return;
 
     // output the text
@@ -351,7 +343,7 @@ void FtglBitmapFont::loadFont()
 
     // Check for required parameters
 
-    if( filename() == nullptr ) {
+    if ( filename() == nullptr ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "No ttf file" << std::endl;
         }

@@ -24,7 +24,6 @@ namespace mixr {
 namespace otw {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Otw, "AbstractOtw")
-EMPTY_SERIALIZER(Otw)
 
 BEGIN_SLOTTABLE(Otw)
    "maxRange",         // 1: Max range of visual system (distance: meters)

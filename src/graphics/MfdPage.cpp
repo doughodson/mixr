@@ -4,7 +4,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MfdPage,"MfdPage")
-EMPTY_SERIALIZER(MfdPage)
 EMPTY_COPYDATA(MfdPage)
 EMPTY_DELETEDATA(MfdPage)
 

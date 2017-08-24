@@ -11,7 +11,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")
 EMPTY_SLOTTABLE(TexturePager)
-EMPTY_SERIALIZER(TexturePager)
 
 TexturePager::TexturePager()
 {

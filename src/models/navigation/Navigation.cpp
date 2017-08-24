@@ -896,32 +896,5 @@ bool Navigation::setSlotBullseye(Bullseye* const msg)
    return true;
 }
 
-// serializer
-std::ostream& Navigation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    // primary route
-    if (priRoute != nullptr) {
-        indent(sout,i+j);
-        sout << "route: " << std::endl;
-        priRoute->serialize(sout,(i+j),slotsOnly);
-    }
-
-    //BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

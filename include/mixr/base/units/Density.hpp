@@ -38,9 +38,6 @@ namespace base {
 // convert() -- converts from one mass/volume ratio to another
 //     double Density::convert(const Density& n) const
 //
-// serialize() -- print the value of this object to the output stream sout.
-//     std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-//
 // NOTE: The = operator and copy constructor WILL change the units
 // of the target density object.  To perform a conversion, use set().
 //------------------------------------------------------------------------------

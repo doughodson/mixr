@@ -28,9 +28,7 @@
 namespace mixr {
 namespace models {
 
-//IMPLEMENT_SUBCLASS(IrSensor,"IrSensor")
 IMPLEMENT_PARTIAL_SUBCLASS(IrSensor, "IrSensor")
-EMPTY_SERIALIZER(IrSensor)
 
 BEGIN_SLOTTABLE(IrSensor)
    "lowerWavelength",   // 1: Lower wavelength limit       (microns)

@@ -216,42 +216,5 @@ const char* FileReader::getRecord(const int nn, const int ll)
 
 }
 
-std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (std::strlen(pathname) > 0) {
-        indent(sout,i+j);
-        sout << "pathname: \"";
-        sout << pathname;
-        sout << "\"" << std::endl;
-    }
-
-    if (std::strlen(filename) > 0) {
-        indent(sout,i+j);
-        sout << "filename: \"";
-        sout << filename;
-        sout << "\"" << std::endl;
-    }
-
-    if (rlen > 0) {
-        indent(sout,i+j);
-        sout << "recordLength: ";
-        sout << rlen;
-        sout << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

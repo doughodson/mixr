@@ -490,32 +490,6 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
    return true;
 }
 
-std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (stMachList != nullptr) {
-        indent(sout,i+j);
-        sout << "stateMachines: {" << std::endl;
-        stMachList->serialize(sout,i+j+4,slotsOnly);
-        indent(sout,i+j);
-        sout << "}" << std::endl;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }
 

@@ -664,42 +664,5 @@ bool Stores::setSlotSelected(base::Number* const msg)
    return ok;
 }
 
-std::ostream& Stores::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "numStations: " << getNumberOfStations() << std::endl;
-
-   { // List of external stores
-      const base::PairStream* list = getStores();
-      if (list != nullptr) {
-         indent(sout,i+j);
-         sout << "stores: {" << std::endl;
-         list->serialize(sout,i+j+4,slotsOnly);
-         indent(sout,i+j);
-         sout << "}" << std::endl;
-         list->unref();
-      }
-   }
-
-   indent(sout,i+j);
-   sout << "selected: " << getSelectedStation() << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

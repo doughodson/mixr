@@ -15,6 +15,12 @@ General framework-wide changes/improvements
 - Moved all color classes into 'base/colors'
   This included Cie, Cmy, Color, Hls, Hsv, Hsva, Rgb, Rgba and Yiq.
 
+- Removed 'serialize()' method from base Object.  This method is no longer needed
+  and all original functionality has been removed.  Therefore, removed any 'serialize()'
+  methods defined you might have defined for your classes.  If you did not defined
+  any such method, you probably defined an 'empty' implementation using the
+  'EMPTY_SERIALIZE()' macro.  Delete this macro.
+  
 --------------------------------------------------------------------------------
 base library
 

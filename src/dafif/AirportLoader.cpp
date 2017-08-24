@@ -13,7 +13,6 @@ namespace dafif {
 
 IMPLEMENT_SUBCLASS(AirportLoader, "AirportLoader")
 EMPTY_SLOTTABLE(AirportLoader)
-EMPTY_SERIALIZER(AirportLoader)
 EMPTY_DELETEDATA(AirportLoader)
 
 AirportLoader::AirportLoader() : Database()

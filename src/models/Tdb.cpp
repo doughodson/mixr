@@ -21,7 +21,6 @@ namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Gimbal_Tdb")
 EMPTY_SLOTTABLE(Tdb)
-EMPTY_SERIALIZER(Tdb)
 
 Tdb::Tdb(const unsigned int mt, const Gimbal* const gp)
 {

@@ -9,7 +9,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Message, "Message")
 EMPTY_SLOTTABLE(Message)
-EMPTY_SERIALIZER(Message)
 
 Message::Message()
 {

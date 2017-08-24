@@ -56,11 +56,5 @@ bool Decibel::setSlotValue(const Number* const msg)
    return ok;
 }
 
-std::ostream& Decibel::serialize(std::ostream& sout, const int, const bool) const
-{
-   sout << db;
-   return sout;
-}
-
 }
 }

@@ -235,38 +235,6 @@ bool AngleOnlyTrackManager::setSlotBeta(const base::Number* const msg)
     return ok;
 }
 
-std::ostream& AngleOnlyTrackManager::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    // Max number of tracks
-    indent(sout,i+j);
-    sout << "azimuthBin: ";
-    sout << azimuthBin;
-    sout << std::endl;
-
-    // Max track age (seconds)
-    indent(sout,i+j);
-    sout << "elevationBin: ";
-    sout << elevationBin;
-    sout << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-
 //==============================================================================
 // Class: AirAngleOnlyTrkMgr
 //==============================================================================
@@ -566,26 +534,6 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 
 }
 
-std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-
 //==============================================================================
 // Class: AirAngleOnlyTrkMgrPT - perceived truth version of above
 //==============================================================================
@@ -602,7 +550,6 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgrPT, "AirAngleOnlyTrkMgrPT")
 EMPTY_DELETEDATA(AirAngleOnlyTrkMgrPT)
-EMPTY_SERIALIZER(AirAngleOnlyTrkMgrPT)
 
 AirAngleOnlyTrkMgrPT::AirAngleOnlyTrkMgrPT()
 {

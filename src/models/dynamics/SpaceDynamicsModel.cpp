@@ -7,7 +7,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(SpaceDynamicsModel, "SpaceDynamicsModel")
 EMPTY_SLOTTABLE(SpaceDynamicsModel)
-EMPTY_SERIALIZER(SpaceDynamicsModel)
 EMPTY_COPYDATA(SpaceDynamicsModel)
 EMPTY_DELETEDATA(SpaceDynamicsModel)
 

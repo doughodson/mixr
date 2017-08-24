@@ -8,7 +8,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Timer, "Timer")
-EMPTY_SERIALIZER(Timer)
 
 //------------------------------------------------------------------------------
 // Class (static) variables
@@ -197,7 +196,6 @@ bool Timer::setSlotTimerActive(const Number* const msg)
 // Class UpTimer
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(UpTimer,"UpTimer")
-EMPTY_SERIALIZER(UpTimer)
 EMPTY_COPYDATA(UpTimer)
 EMPTY_DELETEDATA(UpTimer)
 
@@ -210,7 +208,6 @@ UpTimer::UpTimer(const double rtime) : Timer(UP,rtime)
 // Class UpTimer
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DownTimer,"DownTimer")
-EMPTY_SERIALIZER(DownTimer)
 EMPTY_COPYDATA(DownTimer)
 EMPTY_DELETEDATA(DownTimer)
 

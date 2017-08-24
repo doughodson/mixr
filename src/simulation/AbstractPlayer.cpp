@@ -230,30 +230,5 @@ bool AbstractPlayer::setSlotInitMode(base::String* const msg)
    return ok;
 }
 
-std::ostream& AbstractPlayer::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-/*
-   // initial player mode
-   indent(sout,i+j);
-   sout << "mode: ";
-   if (initMode == ACTIVE)
-      sout << "ACTIVE";
-   else if (initMode == KILLED)
-      sout << "KILLED";
-   else if (initMode == CRASHED)
-      sout << "CRASHED";
-   else if (initMode == DETONATED)
-      sout << "DETONATED";
-   else if (initMode == LAUNCHED)
-      sout << "LAUNCHED";
-   else
-      sout << "INACTIVE";
-   sout << std::endl;
-*/
-   return sout;
-
-}
-
-
 }
 }

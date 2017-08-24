@@ -55,7 +55,6 @@ namespace mixr {
 namespace otw {
 
 IMPLEMENT_SUBCLASS(OtwCigiCl, "OtwCigiCl")
-EMPTY_SERIALIZER(OtwCigiCl)
 
 BEGIN_SLOTTABLE(OtwCigiCl)
    "cigi",                 // 1) Required CIGI handler

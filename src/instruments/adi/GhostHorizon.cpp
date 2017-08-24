@@ -16,7 +16,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(GhostHorizon, "GhostHorizon")
-EMPTY_SERIALIZER(GhostHorizon)
 
 BEGIN_SLOTTABLE(GhostHorizon)
     "skyColor",     // 1) determine our sky color to draw

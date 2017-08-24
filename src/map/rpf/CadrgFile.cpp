@@ -14,7 +14,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgFile, "CadrgFile")
 EMPTY_SLOTTABLE(CadrgFile)
-EMPTY_SERIALIZER(CadrgFile)
 
 CadrgFile::CadrgFile()
 {

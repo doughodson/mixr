@@ -9,7 +9,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(SpaceVehicle,"SpaceVehicle")
 EMPTY_SLOTTABLE(SpaceVehicle)
-EMPTY_SERIALIZER(SpaceVehicle)
 EMPTY_COPYDATA(SpaceVehicle)
 EMPTY_DELETEDATA(SpaceVehicle)
 
@@ -143,7 +142,6 @@ int SpaceVehicle::getEngThrust(double* const data, const int max) const
 //==============================================================================
 IMPLEMENT_SUBCLASS(BoosterSpaceVehicle,"BoosterSpaceVehicle")
 EMPTY_SLOTTABLE(BoosterSpaceVehicle)
-EMPTY_SERIALIZER(BoosterSpaceVehicle)
 EMPTY_COPYDATA(BoosterSpaceVehicle)
 EMPTY_DELETEDATA(BoosterSpaceVehicle)
 
@@ -163,7 +161,6 @@ BoosterSpaceVehicle::BoosterSpaceVehicle()
 //==============================================================================
 IMPLEMENT_SUBCLASS(MannedSpaceVehicle,"MannedSpaceVehicle")
 EMPTY_SLOTTABLE(MannedSpaceVehicle)
-EMPTY_SERIALIZER(MannedSpaceVehicle)
 EMPTY_COPYDATA(MannedSpaceVehicle)
 EMPTY_DELETEDATA(MannedSpaceVehicle)
 
@@ -183,7 +180,6 @@ MannedSpaceVehicle::MannedSpaceVehicle()
 //==============================================================================
 IMPLEMENT_SUBCLASS(UnmannedSpaceVehicle,"UnmannedSpaceVehicle")
 EMPTY_SLOTTABLE(UnmannedSpaceVehicle)
-EMPTY_SERIALIZER(UnmannedSpaceVehicle)
 EMPTY_COPYDATA(UnmannedSpaceVehicle)
 EMPTY_DELETEDATA(UnmannedSpaceVehicle)
 

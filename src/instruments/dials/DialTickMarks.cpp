@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialTickMarks, "DialTickMarks")
-EMPTY_SERIALIZER(DialTickMarks)
 
 BEGIN_SLOTTABLE(DialTickMarks)
     "length",           // length of the tick marks

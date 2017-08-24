@@ -10,7 +10,6 @@ IMPLEMENT_SUBCLASS(BgThread,"BgThread")
 EMPTY_SLOTTABLE(BgThread)
 EMPTY_COPYDATA(BgThread)
 EMPTY_DELETEDATA(BgThread)
-EMPTY_SERIALIZER(BgThread)
 
 BgThread::BgThread(base::Component* const parent, const double priority, const double rate): base::PeriodicTask(parent, priority, rate)
 {

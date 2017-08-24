@@ -8,7 +8,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Texture, "Texture")
-EMPTY_SERIALIZER(Texture)
 EMPTY_DELETEDATA(Texture)
 
 BEGIN_SLOTTABLE(Texture)

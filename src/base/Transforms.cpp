@@ -50,39 +50,12 @@ void Transform::computeMatrix()
 {
 }
 
-std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,(i+4),slotsOnly);
-
-   if (nv > 0) {
-      indent(sout,i+j);
-      for (int k = 0; k < nv; k++) {
-         sout << v[k] << " ";
-      }
-      sout << std::endl;
-   }
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
 
 //==============================================================================
 // Class: Translation
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation, "Translation")
-EMPTY_SERIALIZER(Translation)
 
 Translation::Translation()
 {
@@ -116,7 +89,6 @@ void Translation::computeMatrix()
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation, "Rotation")
-EMPTY_SERIALIZER(Rotation)
 
 Rotation::Rotation()
 {
@@ -149,7 +121,6 @@ void Rotation::computeMatrix()
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale, "Scale")
-EMPTY_SERIALIZER(Scale)
 
 Scale::Scale()
 {

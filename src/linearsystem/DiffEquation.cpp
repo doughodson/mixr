@@ -7,7 +7,6 @@ namespace linearsystem {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation, "DiffEquation")
 EMPTY_SLOTTABLE(DiffEquation)
-EMPTY_SERIALIZER(DiffEquation)
 EMPTY_DELETEDATA(DiffEquation)
 
 DiffEquation::DiffEquation()

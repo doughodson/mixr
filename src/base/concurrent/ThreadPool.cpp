@@ -9,7 +9,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(ThreadPool, "ThreadPool")
-EMPTY_SERIALIZER(ThreadPool)
 
 BEGIN_SLOTTABLE(ThreadPool)
    "numThreads",  // Number of threads to use - 0 = don't use threading

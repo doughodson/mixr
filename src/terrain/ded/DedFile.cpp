@@ -15,7 +15,6 @@ namespace terrain {
 
 IMPLEMENT_SUBCLASS(DedFile, "DedFile")
 EMPTY_SLOTTABLE(DedFile)
-EMPTY_SERIALIZER(DedFile)
 
 //------------------------------------------------------------------------------
 // MultiGen structure: standard file header block (128 bytes)

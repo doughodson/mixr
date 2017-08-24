@@ -18,7 +18,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere1, "IrAtmosphere1")
-EMPTY_SERIALIZER(IrAtmosphere1)
 
 BEGIN_SLOTTABLE(IrAtmosphere1)
    "solarRadiationTable",      // The tables containing solar radiation tables
@@ -67,7 +66,6 @@ void IrAtmosphere1::deleteData()
 bool IrAtmosphere1::setSlotSolarRadiationTable(const base::Table2* const tbl)
 {
    bool ok = false;
-   // tbl->serialize(std::cout);
    if (tbl != nullptr) {
       if (solarRadiationTable != nullptr) solarRadiationTable->unref();
       tbl->ref();

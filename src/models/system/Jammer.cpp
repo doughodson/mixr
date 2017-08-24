@@ -17,7 +17,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer, "Jammer")
-EMPTY_SERIALIZER(Jammer)
 
 Jammer::Jammer()
 {

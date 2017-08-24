@@ -9,7 +9,6 @@ namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")
 EMPTY_SLOTTABLE(Thread)
-EMPTY_SERIALIZER(Thread)
 
 Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 {

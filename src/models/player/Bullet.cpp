@@ -11,7 +11,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet, "Bullet")
-EMPTY_SERIALIZER(Bullet)
 
 // Default Parameters
 const double Bullet::DEFAULT_MUZZLE_VEL = 1000.0f;     // Meters / second

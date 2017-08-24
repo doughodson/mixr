@@ -12,7 +12,6 @@ namespace mixr {
 namespace otw {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")
-EMPTY_SERIALIZER(OtwModelCigiCl)
 
 OtwModelCigiCl::OtwModelCigiCl()
 {

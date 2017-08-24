@@ -11,7 +11,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Emission, "Emission")
 EMPTY_SLOTTABLE(Emission)
-EMPTY_SERIALIZER(Emission)
 
 Emission::Emission()
 {

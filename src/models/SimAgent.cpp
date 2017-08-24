@@ -13,7 +13,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(SimAgent, "SimAgent")
-EMPTY_SERIALIZER(SimAgent)
 EMPTY_COPYDATA(SimAgent)
 
 BEGIN_SLOTTABLE(SimAgent)

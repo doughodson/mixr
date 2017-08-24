@@ -6,7 +6,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DynamicsModel, "DynamicsModel")
-EMPTY_SERIALIZER(DynamicsModel)
 EMPTY_DELETEDATA(DynamicsModel)
 
 DynamicsModel::DynamicsModel()

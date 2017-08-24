@@ -9,7 +9,6 @@ IMPLEMENT_ABSTRACT_SUBCLASS(AbstractNetIO, "AbstractNetIO")
 EMPTY_SLOTTABLE(AbstractNetIO)
 EMPTY_COPYDATA(AbstractNetIO)
 EMPTY_DELETEDATA(AbstractNetIO)
-EMPTY_SERIALIZER(AbstractNetIO)
 
 AbstractNetIO::AbstractNetIO()
 {

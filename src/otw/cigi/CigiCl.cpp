@@ -8,7 +8,6 @@ namespace otw {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(CigiCl, "CigiClAbstract")
 EMPTY_SLOTTABLE(CigiCl)
-EMPTY_SERIALIZER(CigiCl)
 
 //------------------------------------------------------------------------------
 // Parameters

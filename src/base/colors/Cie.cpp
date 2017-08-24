@@ -145,30 +145,5 @@ void Cie::cie2rgb(Vec4d& rgb, const Vec3d& cie, const MonitorMetrics* m)
    m->cie2rgb(rgb, cie);
 }
 
-std::ostream& Cie::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "Luminance: " << luminance() << std::endl;
-
-    indent(sout,i+j);
-    sout << "X:         " << x() << std::endl;
-
-    indent(sout,i+j);
-    sout << "Y:         " << y() << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

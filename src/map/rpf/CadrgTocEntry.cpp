@@ -11,7 +11,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgTocEntry, "CadrgTocEntry")
 EMPTY_SLOTTABLE(CadrgTocEntry)
-EMPTY_SERIALIZER(CadrgTocEntry)
 
 CadrgTocEntry::CadrgTocEntry()
 {

@@ -175,35 +175,5 @@ bool Ai2DiSwitch::setSlotInverted(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& Ai2DiSwitch::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "di: " << getLocation() << std::endl;
-
-   indent(sout,i+j);
-   sout << "channel: " << getChannel() << std::endl;
-
-   indent(sout,i+j);
-   sout << "level: " << getLevel() << std::endl;
-
-   indent(sout,i+j);
-   sout << "inverted: " << getInvertFlag() << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

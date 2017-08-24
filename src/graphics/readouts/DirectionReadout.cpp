@@ -12,7 +12,6 @@ namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout, "DirectionReadout")
 EMPTY_DELETEDATA(DirectionReadout)
-EMPTY_SERIALIZER(DirectionReadout)
 
 DirectionReadout::DirectionReadout()
 {

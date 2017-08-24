@@ -525,50 +525,5 @@ bool Page::setSlotFocusSlavedToSubpage(const base::Number* const msg)
     return true;
 }
 
-std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        //indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (cpName.len() > 0) {
-        indent(sout,i+j);
-        sout << "page: " << cpName << std::endl;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if (subpages != nullptr) {
-        indent(sout,i+j);
-        sout << "pages: {" << std::endl;
-        subpages->serialize(sout,i+j+4,slotsOnly);
-        indent(sout,i+j);
-        sout << "}" << std::endl;
-    }
-
-    if (pageChgEvents != nullptr) {
-        indent(sout,i+j);
-        sout << "pagingEvent: {" << std::endl;
-        pageChgEvents->serialize(sout,i+j+4,slotsOnly);
-        indent(sout,i+j);
-        sout << "}" << std::endl;
-    }
-
-    if (postDraw1) {
-        indent(sout,i+j);
-        sout << "subpagesFirst: 1" << std::endl;
-    }
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

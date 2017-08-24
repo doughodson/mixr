@@ -12,7 +12,6 @@ namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintPlayer,"PrintPlayer")
-EMPTY_SERIALIZER(PrintPlayer)
 
 BEGIN_SLOTTABLE(PrintPlayer)
    "playerName",   // 1) Player name

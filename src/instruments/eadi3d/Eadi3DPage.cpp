@@ -20,7 +20,6 @@ static double BLACK[3] =  { 0.0f, 0.0f, 0.0f };
 static double GREEN[3] =  { 0.0f, 1.0f, 0.0f };
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Eadi3DPage, "Eadi3DPage")
-EMPTY_SERIALIZER(Eadi3DPage)
 EMPTY_DELETEDATA(Eadi3DPage)
 
 BEGIN_EVENT_HANDLER(Eadi3DPage)

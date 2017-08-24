@@ -145,25 +145,6 @@ bool Action::execute(base::Component* actor)
    return ok;
 }
 
-std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 
 // =============================================================================
 // Class: ActionImagingSar
@@ -435,41 +416,6 @@ double ActionImagingSar::computeOrientation(const Steerpoint* const wp)
    return orientation;
 }
 
-std::ostream& ActionImagingSar::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "sarLatitude: " << sarLatitude << std::endl;
-
-    indent(sout,i+j);
-    sout << "sarLongitude: " << sarLongitude << std::endl;
-
-    indent(sout,i+j);
-    sout << "sarElevation: " << sarElevation << std::endl;
-
-    indent(sout,i+j);
-    sout << "resolution: " << resolution << std::endl;
-
-    indent(sout,i+j);
-    sout << "imageSize: " << imgSize << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-
 // =============================================================================
 // Class: ActionWeaponRelease
 // =============================================================================
@@ -609,39 +555,10 @@ bool ActionWeaponRelease::setSlotStationNum(const base::Number* newStation)
     return ok;
 }
 
-std::ostream& ActionWeaponRelease::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "targetLatitude: " << targetLatitude << std::endl;
-
-    indent(sout,i+j);
-    sout << "targetLongitude: " << targetLongitude << std::endl;
-
-    indent(sout,i+j);
-    sout << "targetElevation: " << targetElevation << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 // =============================================================================
 // Class: ActionDecoyRelease
 // =============================================================================
-
-IMPLEMENT_SUBCLASS(ActionDecoyRelease,"ActionDecoyRelease")
+IMPLEMENT_SUBCLASS(ActionDecoyRelease, "ActionDecoyRelease")
 EMPTY_DELETEDATA(ActionDecoyRelease)
 
 BEGIN_SLOTTABLE(ActionDecoyRelease)
@@ -761,25 +678,6 @@ bool ActionDecoyRelease::setSlotInterval(const base::Number* x)
     return ok;
 }
 
-std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 
 // =============================================================================
 // Class: ActionCamouflageType
@@ -852,28 +750,6 @@ bool ActionCamouflageType::setSlotCamouflageType(const base::Number* const msg)
       }
    }
    return ok;
-}
-
-std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "camouflageType: " << camouflage << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
 }
 
 }

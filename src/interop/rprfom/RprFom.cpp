@@ -10,7 +10,6 @@ namespace rprfom {
 
 IMPLEMENT_SUBCLASS(BaseEntity, "BaseEntity")
 EMPTY_SLOTTABLE(BaseEntity)
-EMPTY_SERIALIZER(BaseEntity)
 EMPTY_DELETEDATA(BaseEntity)
 
 void BaseEntity::copyData(const BaseEntity& org, const bool)
@@ -23,7 +22,6 @@ void BaseEntity::copyData(const BaseEntity& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PhysicalEntity, "PhysicalEntity")
-EMPTY_SERIALIZER(PhysicalEntity)
 EMPTY_DELETEDATA(PhysicalEntity)
 
 void PhysicalEntity::copyData(const PhysicalEntity& org, const bool)
@@ -36,7 +34,6 @@ void PhysicalEntity::copyData(const PhysicalEntity& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Lifeform, "Lifeform")
-EMPTY_SERIALIZER(Lifeform)
 EMPTY_DELETEDATA(Lifeform)
 
 void Lifeform::copyData(const Lifeform& org, const bool)
@@ -49,7 +46,6 @@ void Lifeform::copyData(const Lifeform& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Human, "Human")
-EMPTY_SERIALIZER(Human)
 EMPTY_DELETEDATA(Human)
 
 void Human::copyData(const Human& org, const bool)
@@ -62,7 +58,6 @@ void Human::copyData(const Human& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NonHuman, "NonHuman")
-EMPTY_SERIALIZER(NonHuman)
 EMPTY_DELETEDATA(NonHuman)
 
 void NonHuman::copyData(const NonHuman& org, const bool)
@@ -75,7 +70,6 @@ void NonHuman::copyData(const NonHuman& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Munition, "Munition")
-EMPTY_SERIALIZER(Munition)
 EMPTY_DELETEDATA(Munition)
 
 void Munition::copyData(const Munition& org, const bool)
@@ -88,7 +82,6 @@ void Munition::copyData(const Munition& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Platform, "Platform")
-EMPTY_SERIALIZER(Platform)
 EMPTY_DELETEDATA(Platform)
 
 void Platform::copyData(const Platform& org, const bool)
@@ -101,7 +94,6 @@ void Platform::copyData(const Platform& org, const bool)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Aircraft, "Aircraft")
-EMPTY_SERIALIZER(Aircraft)
 EMPTY_COPYDATA(Aircraft)
 EMPTY_DELETEDATA(Aircraft)
 
@@ -110,7 +102,6 @@ EMPTY_DELETEDATA(Aircraft)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AmphibiousVehicle, "AmphibiousVehicle")
-EMPTY_SERIALIZER(AmphibiousVehicle)
 EMPTY_COPYDATA(AmphibiousVehicle)
 EMPTY_DELETEDATA(AmphibiousVehicle)
 
@@ -119,7 +110,6 @@ EMPTY_DELETEDATA(AmphibiousVehicle)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundVehicle, "GroundVehicle")
-EMPTY_SERIALIZER(GroundVehicle)
 EMPTY_COPYDATA(GroundVehicle)
 EMPTY_DELETEDATA(GroundVehicle)
 
@@ -128,7 +118,6 @@ EMPTY_DELETEDATA(GroundVehicle)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MultiDomainPlatform, "MultiDomainPlatform")
-EMPTY_SERIALIZER(MultiDomainPlatform)
 EMPTY_COPYDATA(MultiDomainPlatform)
 EMPTY_DELETEDATA(MultiDomainPlatform)
   
@@ -137,7 +126,6 @@ EMPTY_DELETEDATA(MultiDomainPlatform)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Spacecraft, "Spacecraft")
-EMPTY_SERIALIZER(Spacecraft)
 EMPTY_COPYDATA(Spacecraft)
 EMPTY_DELETEDATA(Spacecraft)
   
@@ -146,7 +134,6 @@ EMPTY_DELETEDATA(Spacecraft)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SubmersibleVessel, "SubmersibleVessel")
-EMPTY_SERIALIZER(SubmersibleVessel)
 EMPTY_COPYDATA(SubmersibleVessel)
 EMPTY_DELETEDATA(SubmersibleVessel)
 
@@ -155,7 +142,6 @@ EMPTY_DELETEDATA(SubmersibleVessel)
 //==============================================================================
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SurfaceVessel, "SurfaceVessel")
-EMPTY_SERIALIZER(SurfaceVessel)
 EMPTY_COPYDATA(SurfaceVessel)
 EMPTY_DELETEDATA(SurfaceVessel)
 

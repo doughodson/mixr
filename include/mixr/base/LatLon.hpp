@@ -63,9 +63,6 @@ class Number;
 //      void LatLon::setSec(const double s)
 //          Sets seconds -- then calls computeVal().
 //
-//      std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-//          serialize() -- print the value of this object to the output stream sout.
-//
 //------------------------------------------------------------------------------
 class LatLon : public Number
 {

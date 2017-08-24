@@ -172,35 +172,5 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
    return ok;
 }
 
-std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "entityType: [ ";
-   sout << static_cast<int>(kind) << " ";
-   sout << static_cast<int>(domain) << " ";
-   sout << static_cast<int>(country) << " ";
-   sout << static_cast<int>(category) << " ";
-   sout << static_cast<int>(subcategory) << " ";
-   sout << static_cast<int>(specific) << " ";
-   sout << static_cast<int>(extra) << " ";
-   sout << "]" << std::endl;
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

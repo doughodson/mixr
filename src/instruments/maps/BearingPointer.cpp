@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(BearingPointer, "BearingPointer")
-EMPTY_SERIALIZER(BearingPointer)
 
 BEGIN_SLOTTABLE(BearingPointer)
     "headGraphic",  // the graphic we will draw for the head

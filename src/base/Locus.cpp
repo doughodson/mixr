@@ -7,7 +7,6 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(Locus, "Locus")
 EMPTY_SLOTTABLE(Locus)
-EMPTY_SERIALIZER(Locus)
 
 Locus::Locus()
 {

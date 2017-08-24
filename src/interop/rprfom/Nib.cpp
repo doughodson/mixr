@@ -23,7 +23,6 @@ namespace rprfom {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
-EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const interop::NetIO::IoType ioType) : hla::Nib(ioType) 
 {

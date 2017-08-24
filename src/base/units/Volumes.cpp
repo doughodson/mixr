@@ -28,32 +28,10 @@ void Volume::copyData(const Volume& org, const bool)
    val = fromVolume(org.toVolume());;
 }
 
-std::ostream& Volume::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
 //==============================================================================
 // CubicMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicMeters, "CubicMeters")
-EMPTY_SERIALIZER(CubicMeters)
 EMPTY_COPYDATA(CubicMeters)
 EMPTY_DELETEDATA(CubicMeters)
 
@@ -76,7 +54,6 @@ CubicMeters::CubicMeters(const Volume& value) : Volume()
 // CubicFeet() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicFeet, "CubicFeet")
-EMPTY_SERIALIZER(CubicFeet)
 EMPTY_COPYDATA(CubicFeet)
 EMPTY_DELETEDATA(CubicFeet)
 
@@ -99,7 +76,6 @@ CubicFeet::CubicFeet(const Volume& value) : Volume()
 // CubicInches() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicInches, "CubicInches")
-EMPTY_SERIALIZER(CubicInches)
 EMPTY_COPYDATA(CubicInches)
 EMPTY_DELETEDATA(CubicInches)
 
@@ -122,7 +98,6 @@ CubicInches::CubicInches(const Volume& value) : Volume()
 // Liters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Liters, "Liters")
-EMPTY_SERIALIZER(Liters)
 EMPTY_COPYDATA(Liters)
 EMPTY_DELETEDATA(Liters)
 

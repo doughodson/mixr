@@ -59,8 +59,6 @@ BEGIN_SLOT_MAP(JSBSimModel)
     ON_SLOT(3, setDebugLevel, base::Integer)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(JSBSimModel)
-
 JSBSimModel::JSBSimModel()
 {
     STANDARD_CONSTRUCTOR()

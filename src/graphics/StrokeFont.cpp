@@ -6,7 +6,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")
-EMPTY_SERIALIZER(StrokeFont)
 EMPTY_DELETEDATA(StrokeFont)
 
 // SGI font scaled so six stroke font points (units used below) is 1 screen unit

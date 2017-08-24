@@ -19,24 +19,18 @@ IMPLEMENT_SUBCLASS(Cylinder, "Cylinder")
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cone, "Cone")
 
 IMPLEMENT_SUBCLASS(Cube, "Cube")
-EMPTY_SERIALIZER(Cone)
 
 IMPLEMENT_SUBCLASS(Torus, "Torus")
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Dodecahedron, "Dodecahedron")
-EMPTY_SERIALIZER(Dodecahedron)
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tetrahedron, "Tetrahedron")
-EMPTY_SERIALIZER(Tetrahedron)
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Icosahedron, "Icosahedron")
-EMPTY_SERIALIZER(Icosahedron)
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Octahedron, "Octahedron")
-EMPTY_SERIALIZER(Octahedron)
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Teapot, "Teapot")
-EMPTY_SERIALIZER(Teapot)
 
 //------------------------------------------------------------------------------
 // Slot tables
@@ -320,96 +314,6 @@ bool Torus::setSlotOuterRadius(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) ok = setOuterRadius(x->getReal());
     return ok;
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print functions
-//------------------------------------------------------------------------------
-std::ostream& Sphere::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "stacks: " << stacks << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-std::ostream& Cylinder::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "topRadius: " << topRadius << std::endl;
-
-   indent(sout,i+j);
-   sout << "height: " << height << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-std::ostream& Cube::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "size: " << size << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-std::ostream& Torus::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "outerRadius: " << oRadius << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
 }
 
 }

@@ -11,7 +11,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")
-EMPTY_SERIALIZER(Color)
 EMPTY_DELETEDATA(Color)
 
 double Color::defaultAlpha = 1.0f;

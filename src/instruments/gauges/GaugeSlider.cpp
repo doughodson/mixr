@@ -6,7 +6,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")
-EMPTY_SERIALIZER(GaugeSlider)
 EMPTY_DELETEDATA(GaugeSlider)
 
 GaugeSlider::GaugeSlider()

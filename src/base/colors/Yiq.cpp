@@ -142,30 +142,5 @@ void Yiq::rgb2yiq(Vec3d& yiq, const Vec4d& rgb)
     yiq[Q] = 0.21f * rgb[RED] - 0.52f * rgb[GREEN] + 0.31f * rgb[BLUE];
 }
 
-std::ostream& Yiq::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout,i+j);
-    sout << "y: " << this->y() << std::endl;
-
-    indent(sout,i+j);
-    sout << "i: " << this->i() << std::endl;
-
-    indent(sout,i+j);
-    sout << "q: " << this->q() << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

@@ -582,43 +582,5 @@ bool PosixHandler::setSlotIgnoreSourcePort(const Number* const msg)
     return ok;
 }
 
-std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (port != 0) {
-        indent(sout,i+j);
-        sout << "port: ";
-        sout << port;
-        sout << std::endl;
-    }
-
-    if (localPort != 0) {
-        indent(sout,i+j);
-        sout << "localPort: ";
-        sout << localPort;
-        sout << std::endl;
-    }
-
-    indent(sout,i+j);
-    sout << "shared: ";
-    sout << getSharedFlag();
-    sout << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if (!slotsOnly) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

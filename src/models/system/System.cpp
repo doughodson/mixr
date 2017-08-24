@@ -244,35 +244,5 @@ bool System::setSlotPowerSwitch(const base::String* const msg)
    return ok;
 }
 
-std::ostream& System::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   // Power switch (if greater than PWR_LAST then our derived class should handle this)
-   if (getPowerSwitch() < PWR_LAST) {
-      indent(sout,i+j);
-      sout << "powerSwitch: " ;
-      switch (getPowerSwitch()) {
-         case PWR_OFF : sout << "OFF"; break;
-         case PWR_STBY : sout << "STBY"; break;
-         case PWR_ON : sout << "ON"; break;
-      }
-      sout << std::endl;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

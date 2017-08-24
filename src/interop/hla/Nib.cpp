@@ -15,7 +15,6 @@ namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
-EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
 {

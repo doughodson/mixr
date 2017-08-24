@@ -11,7 +11,6 @@ namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")
-EMPTY_SERIALIZER(WaypointLoader)
 
 
 //------------------------------------------------------------------------------

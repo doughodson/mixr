@@ -14,7 +14,6 @@ namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(TimeReadout, "TimeReadout")
 EMPTY_DELETEDATA(TimeReadout)
-EMPTY_SERIALIZER(TimeReadout)
 
 TimeReadout::TimeReadout()
 {

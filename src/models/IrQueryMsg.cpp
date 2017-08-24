@@ -11,7 +11,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(IrQueryMsg, "IrQueryMsg")
 EMPTY_SLOTTABLE(IrQueryMsg)
-EMPTY_SERIALIZER(IrQueryMsg)
 
 IrQueryMsg::IrQueryMsg()
 {

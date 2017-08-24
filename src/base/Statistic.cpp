@@ -8,7 +8,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic, "Statistic")
-EMPTY_SERIALIZER(Statistic)
 EMPTY_DELETEDATA(Statistic)
 
 Statistic::Statistic()

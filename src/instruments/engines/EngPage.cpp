@@ -5,7 +5,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage, "EngPage")
-EMPTY_SERIALIZER(EngPage)
 EMPTY_DELETEDATA(EngPage)
 
 EngPage::EngPage()

@@ -90,34 +90,6 @@ bool Circle::setSlotSlices(const base::Number* const x)
     return ok;
 }
 
-std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "radius: " << radius << std::endl;
-
-   indent(sout,i+j);
-   sout << "filled: " << filled << std::endl;
-
-   indent(sout,i+j);
-   sout << "slices: " << slices << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-
 //==============================================================================
 // Class: OcclusionCircle
 //==============================================================================
@@ -168,29 +140,6 @@ bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
     if (x != nullptr) ok = setOuterRadius(x->getReal());
     return ok;
 }
-
-std::ostream& OcclusionCircle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "outerRadius: " << outerRadius << std::endl;
-
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
 
 //==============================================================================
 // Class: Arc
@@ -267,30 +216,6 @@ bool Arc::setSlotIsConnected(const base::Number* const x)
     return ok;
 }
 
-std::ostream& Arc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "startAngle: " << startAngle << std::endl;
-
-   indent(sout,i+j);
-   sout << "arcLength: " << arcLength << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
 
 //==============================================================================
 // Class: OcclusionArc
@@ -345,34 +270,10 @@ bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
     return ok;
 }
 
-std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "outerRadius: " << outerRadius << std::endl;
-
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-
 //==============================================================================
 // Class: Point
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point, "Point")
-EMPTY_SERIALIZER(Point)
 EMPTY_CONSTRUCTOR(Point)
 EMPTY_COPYDATA(Point)
 EMPTY_DELETEDATA(Point)
@@ -396,7 +297,6 @@ void Point::drawFunc()
 // Class: LineLoop
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop, "LineLoop")
-EMPTY_SERIALIZER(LineLoop)
 EMPTY_CONSTRUCTOR(LineLoop)
 EMPTY_COPYDATA(LineLoop)
 EMPTY_DELETEDATA(LineLoop)
@@ -477,28 +377,6 @@ bool Line::setSlotSegments(const base::Number* const x)
     if (x != nullptr) ok = setSegments(x->getBoolean());
     return ok;
 }
-
-std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "segment: " << segment << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
 
 //==============================================================================
 // Class: Quad
@@ -607,28 +485,6 @@ void Quad::drawFunc()
     else std::cerr << "Quad::drawFunc() - Quad or QuadStrip needs at least 4 vertices!" << std::endl;
 }
 
-std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "strip: " << strip << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
-}
-
-
 //==============================================================================
 // Class: Triangle
 //==============================================================================
@@ -733,27 +589,6 @@ void Triangle::drawFunc()
         }
     }
     else std::cerr << "Triangle::drawFunc() - Triangle or Triangle needs at least 3 vertices!" << std::endl;
-}
-
-std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      //indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   indent(sout,i+j);
-   sout << "fan: " << fan << std::endl;
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-   return sout;
 }
 
 }

@@ -11,7 +11,6 @@ namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")
-EMPTY_SERIALIZER(PrintHandler)
 
 BEGIN_SLOTTABLE(PrintHandler)
    "filename",     // 1) Data file name (required)

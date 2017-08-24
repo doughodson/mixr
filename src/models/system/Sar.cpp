@@ -19,7 +19,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Sar, "Sar")
-EMPTY_SERIALIZER(Sar)
 
 BEGIN_SLOTTABLE(Sar)
     "chipSize",         // 1) Chip size (pixels)   <base::Number>

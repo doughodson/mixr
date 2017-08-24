@@ -51,7 +51,6 @@ public:
    // NetIO::NtmOutputNode class functions
    virtual const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
    virtual bool add2OurLists(interop::Ntm* const ntm) override;
-   virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
    unsigned int level {};        // Level
@@ -67,7 +66,6 @@ private:
 
 IMPLEMENT_SUBCLASS(NetIO, "RprFomNetIO")
 EMPTY_SLOTTABLE(NetIO)
-EMPTY_SERIALIZER(NetIO)
 EMPTY_DELETEDATA(NetIO)
 
 NetIO::NetIO()
@@ -317,7 +315,6 @@ const Ntm* NetIO::findNtmByTypeCodes(
 
 IMPLEMENT_SUBCLASS(NtmInputNode, "NtmInputNode")
 EMPTY_SLOTTABLE(NtmInputNode)
-EMPTY_SERIALIZER(NtmInputNode)
 
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
@@ -614,35 +611,6 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
    }
 
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// print our data and our subnodes
-//------------------------------------------------------------------------------
-void NtmInputNode::print(std::ostream& sout, const int icnt) const
-{
-   // Print our node's form name
-   indent(sout,icnt);
-   sout << "( NtmInputNode: level=" << level << ", code=" << code;
-   sout << std::endl;
-
-   // Print our Ntm object
-   if (ourNtm != nullptr) {
-      ourNtm->serialize(sout, icnt+4);
-   }
-
-   // Print our subnodes
-   {
-      const base::List::Item* item = subnodeList->getFirstItem();
-      while (item != nullptr) {
-         const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
-         subnode->print(sout,icnt+4);
-         item = item->getNext();
-      }
-   }
-
-   indent(sout,icnt);
-   sout << ")" << std::endl;
 }
 
 }

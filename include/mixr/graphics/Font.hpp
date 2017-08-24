@@ -187,17 +187,6 @@ public:
     };
 
 protected:
-    // Slot functions
-    bool setSlotFontWidth(const base::Number* const sfwobj);
-    bool setSlotFontHeight (const base::Number* const sfhobj);
-    bool setSlotFontPosition (const base::List* const sfpobj);
-    bool setSlotBitmapWidth(const base::Number* const sbwobj);
-    bool setSlotBitmapHeight(const base::Number* const sbhobj);
-    bool setSlotFontPath(const base::String* const sfpobj);
-    bool setSlotFTGLFontFileName(const base::String* const sgffnobj);
-    bool setSlotLookupTable(const base::List* const sltobj);
-    bool setSlotCharacterSpacing(const base::Number* const newCharSpacing);
-    bool setSlotLineSpacing(const base::Number* const newLineSpacing);
 
     static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers
     int xferChars(char* const outp, const size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
@@ -220,6 +209,19 @@ private:
     bool      loaded {};                   // Font has been loaded
     double charSpacing {};                 // holds our character spacing
     double lineSpacing {};                 // holds our line spacing
+
+private:
+    // slot table helper methods
+    bool setSlotFontWidth(const base::Number* const sfwobj);
+    bool setSlotFontHeight(const base::Number* const sfhobj);
+    bool setSlotFontPosition(const base::List* const sfpobj);
+    bool setSlotBitmapWidth(const base::Number* const sbwobj);
+    bool setSlotBitmapHeight(const base::Number* const sbhobj);
+    bool setSlotFontPath(const base::String* const sfpobj);
+    bool setSlotFTGLFontFileName(const base::String* const sgffnobj);
+    bool setSlotLookupTable(const base::List* const sltobj);
+    bool setSlotCharacterSpacing(const base::Number* const newCharSpacing);
+    bool setSlotLineSpacing(const base::Number* const newLineSpacing);
 };
 
 }

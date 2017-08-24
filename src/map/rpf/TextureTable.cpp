@@ -8,7 +8,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")
 EMPTY_SLOTTABLE(TextureTable)
-EMPTY_SERIALIZER(TextureTable)
 
 TextureTable::TextureTable()
 {

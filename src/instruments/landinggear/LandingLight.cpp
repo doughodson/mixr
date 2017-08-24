@@ -9,7 +9,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingLight, "LandingLight")
-EMPTY_SERIALIZER(LandingLight)
 EMPTY_DELETEDATA(LandingLight)
 
 BEGIN_SLOTTABLE(LandingLight)

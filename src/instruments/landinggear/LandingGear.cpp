@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(LandingGear, "LandingGear")
-EMPTY_SERIALIZER(LandingGear)
 EMPTY_DELETEDATA(LandingGear)
 
 BEGIN_SLOTTABLE(LandingGear)

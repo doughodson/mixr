@@ -7,7 +7,6 @@ namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(SecondOrderTf, "SecondOrderTf")
 EMPTY_SLOTTABLE(SecondOrderTf)
-EMPTY_SERIALIZER(SecondOrderTf)
 
 SecondOrderTf::SecondOrderTf()
 {

@@ -28,32 +28,10 @@ void Power::copyData(const Power& org, const bool)
    val = fromPower(org.toPower());;
 }
 
-std::ostream& Power::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
 //==============================================================================
 // KiloWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloWatts, "KiloWatts")
-EMPTY_SERIALIZER(KiloWatts)
 EMPTY_COPYDATA(KiloWatts)
 EMPTY_DELETEDATA(KiloWatts)
 
@@ -77,7 +55,6 @@ KiloWatts::KiloWatts(const Power& org) : Power()
 // Watts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Watts, "Watts")
-EMPTY_SERIALIZER(Watts)
 EMPTY_COPYDATA(Watts)
 EMPTY_DELETEDATA(Watts)
 
@@ -101,7 +78,6 @@ Watts::Watts(const Power& org) : Power()
 // Horsepower() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Horsepower, "Horsepower")
-EMPTY_SERIALIZER(Horsepower)
 EMPTY_COPYDATA(Horsepower)
 EMPTY_DELETEDATA(Horsepower)
 
@@ -126,7 +102,6 @@ Horsepower::Horsepower(const Power& org) : Power()
 // DecibelWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelWatts, "DecibelWatts")
-EMPTY_SERIALIZER(DecibelWatts)
 EMPTY_COPYDATA(DecibelWatts)
 EMPTY_DELETEDATA(DecibelWatts)
 
@@ -150,7 +125,6 @@ DecibelWatts::DecibelWatts(const Power& org) : Power()
 // MilliWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliWatts, "MilliWatts")
-EMPTY_SERIALIZER(MilliWatts)
 EMPTY_COPYDATA(MilliWatts)
 EMPTY_DELETEDATA(MilliWatts)
 
@@ -174,7 +148,6 @@ MilliWatts::MilliWatts(const Power& org) : Power()
 // DecibelMilliWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelMilliWatts, "DecibelMilliWatts")
-EMPTY_SERIALIZER(DecibelMilliWatts)
 EMPTY_COPYDATA(DecibelMilliWatts)
 EMPTY_DELETEDATA(DecibelMilliWatts)
 

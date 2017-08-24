@@ -17,7 +17,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(SymbolLoader, "SymbolLoader")
-EMPTY_SERIALIZER(SymbolLoader)
 
 BEGIN_SLOTTABLE(SymbolLoader)
    "templates",         // 1) List of templates to use for navaids
@@ -1015,7 +1014,6 @@ bool SymbolLoader::setSlotInterconnect(const base::Number* const msg)
 // class SlSymbol
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SlSymbol, "SlSymbol")
-EMPTY_SERIALIZER(SlSymbol)
 
 
 SlSymbol::SlSymbol()

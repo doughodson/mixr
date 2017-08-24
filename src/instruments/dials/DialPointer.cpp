@@ -7,7 +7,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DialPointer, "DialPointer")
-EMPTY_SERIALIZER(DialPointer)
 EMPTY_COPYDATA(DialPointer)
 EMPTY_DELETEDATA(DialPointer)
 

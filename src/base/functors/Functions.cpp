@@ -23,7 +23,6 @@ EMPTY_SLOTTABLE(Func1)
 EMPTY_CONSTRUCTOR(Func1)
 EMPTY_COPYDATA(Func1)
 EMPTY_DELETEDATA(Func1)
-EMPTY_SERIALIZER(Func1)
 
 double Func1::f(const double iv1, FStorage* const s) const
 {
@@ -63,7 +62,6 @@ EMPTY_SLOTTABLE(Func2)
 EMPTY_CONSTRUCTOR(Func2)
 EMPTY_COPYDATA(Func2)
 EMPTY_DELETEDATA(Func2)
-EMPTY_SERIALIZER(Func2)
 
 double Func2::f(const double iv1, const double iv2, FStorage* const s) const
 {
@@ -103,7 +101,6 @@ EMPTY_SLOTTABLE(Func3)
 EMPTY_CONSTRUCTOR(Func3)
 EMPTY_COPYDATA(Func3)
 EMPTY_DELETEDATA(Func3)
-EMPTY_SERIALIZER(Func3)
 
 double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* const s) const
 {
@@ -143,7 +140,6 @@ EMPTY_SLOTTABLE(Func4)
 EMPTY_CONSTRUCTOR(Func4)
 EMPTY_COPYDATA(Func4)
 EMPTY_DELETEDATA(Func4)
-EMPTY_SERIALIZER(Func4)
 
 double Func4::f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s) const
 {
@@ -184,7 +180,6 @@ EMPTY_SLOTTABLE(Func5)
 EMPTY_CONSTRUCTOR(Func5)
 EMPTY_COPYDATA(Func5)
 EMPTY_DELETEDATA(Func5)
-EMPTY_SERIALIZER(Func5)
 
 double Func5::f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s) const
 {
@@ -326,35 +321,6 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
    }
 
    return ok;
-}
-
-std::ostream& Polynomial::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if (!slotsOnly) {
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   int mm = getDegree() + 1;
-   if (mm > 0) {
-      const double* aa = getCoefficients();
-      indent(sout,i+j);
-      sout << "coefficients: [ ";
-      for (int i = 0; i < mm; i++) {
-         std::cout << aa[i] << " ";
-      }
-      sout << " ]" << std::endl;
-   }
-
-   BaseClass::serialize(sout, i + j, true);
-
-   if (!slotsOnly) {
-      indent(sout, i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
 }
 
 }

@@ -9,7 +9,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(PushButton, "PushButton")
-EMPTY_SERIALIZER(PushButton)
 EMPTY_DELETEDATA(PushButton)
 
 BEGIN_SLOTTABLE(PushButton)

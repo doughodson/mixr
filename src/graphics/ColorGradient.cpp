@@ -7,7 +7,6 @@ namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(ColorGradient,"ColorGradient")
-EMPTY_SERIALIZER(ColorGradient)
 
 BEGIN_SLOTTABLE(ColorGradient)
     "colors",      // set colors

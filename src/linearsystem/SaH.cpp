@@ -160,26 +160,5 @@ bool SaH::setSlotSampleRate(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& SaH::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout,i+j,true);
-
-    //indent(sout,i+j);
-    //sout << "N1:   " << n1 << std::endl;
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

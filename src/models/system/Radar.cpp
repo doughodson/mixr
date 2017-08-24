@@ -544,30 +544,5 @@ bool Radar::setSlotIGain(base::Number* const v)
    return ok;
 }
 
-std::ostream& Radar::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (rfIGain > 1.0) {
-      indent(sout,i+j);
-      sout << "igain: " << rfIGain << std::endl;
-   }
-
-   // DPG #### Need to print slots!!!
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

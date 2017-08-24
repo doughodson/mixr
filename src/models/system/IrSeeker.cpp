@@ -30,11 +30,7 @@
 namespace mixr {
 namespace models {
 
-//==============================================================================
-// Class: IrSeeker
-//==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(IrSeeker, "IrSeeker")
-EMPTY_SERIALIZER(IrSeeker)
 EMPTY_SLOTTABLE(IrSeeker)
 EMPTY_COPYDATA(IrSeeker)
 
@@ -326,7 +322,6 @@ bool IrSeeker::irQueryReturnEvent(IrQueryMsg* const msg)
 
 IMPLEMENT_SUBCLASS(TdbIr,"Seeker_TdbIr")
 EMPTY_SLOTTABLE(TdbIr)
-EMPTY_SERIALIZER(TdbIr)
 EMPTY_DELETEDATA(TdbIr)
 
 TdbIr::TdbIr(const unsigned int mt, const Gimbal* const gp) : Tdb(mt,gp)

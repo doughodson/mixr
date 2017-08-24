@@ -28,7 +28,6 @@ namespace mixr {
 namespace dis {
 
 IMPLEMENT_SUBCLASS(EmissionPduHandler, "EmissionPduHandler")
-EMPTY_SERIALIZER(EmissionPduHandler)
 
 BEGIN_SLOTTABLE(EmissionPduHandler)
    "emitterName",       // 1) DIS emitter name (see enums)

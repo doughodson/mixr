@@ -10,7 +10,6 @@ namespace mixr {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(NetInput, "RecorderNetInput")
-EMPTY_SERIALIZER(NetInput)
 
 BEGIN_SLOTTABLE(NetInput)
    "netHandler",           // 1) Network handler

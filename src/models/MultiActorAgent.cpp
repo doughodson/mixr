@@ -18,7 +18,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(MultiActorAgent, "MultiActorAgent")
-EMPTY_SERIALIZER(MultiActorAgent)
 EMPTY_COPYDATA(MultiActorAgent)
 
 BEGIN_SLOTTABLE(MultiActorAgent)

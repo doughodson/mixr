@@ -11,7 +11,6 @@ namespace ubf {
 
 IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
-EMPTY_SERIALIZER(Arbiter)
 
 BEGIN_SLOTTABLE(Arbiter)
    "behaviors"                    //  1) behaviors

@@ -19,7 +19,6 @@ namespace mixr {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgMap, "CadrgMap")
-EMPTY_SERIALIZER(CadrgMap)
 
 BEGIN_SLOTTABLE(CadrgMap)
     "pathNames",        // Path names to our TOC file

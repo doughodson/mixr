@@ -41,7 +41,6 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(TcpServerSingle, "TcpServerSingle")
 EMPTY_SLOTTABLE(TcpServerSingle)
-EMPTY_SERIALIZER(TcpServerSingle)
 
 //------------------------------------------------------------------------------
 // Constructors

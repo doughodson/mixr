@@ -12,7 +12,6 @@ namespace base {
 namespace ubf {
 
 IMPLEMENT_SUBCLASS(Agent, "UbfAgent")
-EMPTY_SERIALIZER(Agent)
 EMPTY_COPYDATA(Agent)
 
 BEGIN_SLOTTABLE(Agent)
@@ -163,7 +162,6 @@ bool Agent::setSlotBehavior(AbstractBehavior* const x)
 IMPLEMENT_SUBCLASS(AgentTC, "UbfAgentTC")
 EMPTY_SLOTTABLE(AgentTC)
 EMPTY_CONSTRUCTOR(AgentTC)
-EMPTY_SERIALIZER(AgentTC)
 EMPTY_COPYDATA(AgentTC)
 EMPTY_DELETEDATA(AgentTC)
 

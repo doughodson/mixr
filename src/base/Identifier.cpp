@@ -83,12 +83,5 @@ std::ostream& operator<<(std::ostream& sout, const Identifier& ident)
     return sout;
 }
 
-std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) const
-{
-    const char* s = *this;
-    sout << s;
-    return sout;
-}
-
 }
 }

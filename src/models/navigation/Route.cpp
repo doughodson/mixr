@@ -741,42 +741,5 @@ bool Route::setSlotWrap(const base::Number* const msg)
     return ok;
 }
 
-std::ostream& Route::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    if (initToStptName != nullptr) {
-        indent(sout, i+j);
-        sout << "to: " << *initToStptName << std::endl;
-    }
-
-    // auto sequence
-    indent(sout, i+j);
-    sout << "autoSequence: " << (isAutoSequence() ? "true" : "false") << std::endl;
-
-    // auto sequence distance
-    indent(sout, i+j);
-    sout << "autoSeqDistance: ( NauticalMiles " << getAutoSeqDistance() << " )" << std::endl;
-
-    // wrap
-    indent(sout, i+j);
-    sout << "wrap: " << (isWrapEnabled() ? "true" : "false") << std::endl;
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }

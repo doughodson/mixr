@@ -29,33 +29,10 @@ void Angle::copyData(const Angle& org, const bool)
    val = fromAngle(org.toAngle());;
 }
 
-std::ostream& Angle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
-
 //==============================================================================
 // Degrees --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Degrees, "Degrees")
-EMPTY_SERIALIZER(Degrees)
 EMPTY_COPYDATA(Degrees)
 EMPTY_DELETEDATA(Degrees)
 
@@ -79,7 +56,6 @@ Degrees::Degrees(const Angle& value) : Angle()
 // Radians --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Radians, "Radians")
-EMPTY_SERIALIZER(Radians)
 EMPTY_COPYDATA(Radians)
 EMPTY_DELETEDATA(Radians)
 
@@ -103,7 +79,6 @@ Radians::Radians(const Angle& value) : Angle()
 // Semicircles --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Semicircles, "Semicircles")
-EMPTY_SERIALIZER(Semicircles)
 EMPTY_COPYDATA(Semicircles)
 EMPTY_DELETEDATA(Semicircles)
 

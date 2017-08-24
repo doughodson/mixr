@@ -7,7 +7,6 @@ namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(FirstOrderTf, "FirstOrderTf")
 EMPTY_SLOTTABLE(FirstOrderTf)
-EMPTY_SERIALIZER(FirstOrderTf)
 EMPTY_DELETEDATA(FirstOrderTf)
 
 FirstOrderTf::FirstOrderTf()

@@ -16,8 +16,8 @@
 //    IMPLEMENT_SUBCLASS(ThisType, "factoryName")
 //       Macro to implement a standard set of required member functions
 //       and member variables for the class 'ThisType', and to set its factory name to
-//       'factoryName'.  The user is required to implement the copyData(), deleteData()
-//       and serialize() functions, the slot table, and any constructors that the user
+//       'factoryName'.  The user is required to implement the copyData() and deleteData()
+//       functions, the slot table, and any constructors that the user
 //       has declared.
 //
 //    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "factoryName") 
@@ -63,9 +63,6 @@
 //
 //    EMPTY_DELETEDATA(ThisType) 
 //       Implements an empty delete data function for the class 'ThisType'
-//
-//    EMPTY_SERIALIZER(ThisType) 
-//       Implements an empty serialize function for the class 'ThisType'
 //
 //    IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, "factoryName")
 //       Combines the IMPLEMENT_SUBCLASS() and EMPTY_SLOTTABLE() macros
@@ -147,7 +144,6 @@
     protected: static const ::mixr::base::SlotTable slottable;                                                                  \
     private: static const char* slotnames[];                                                                                    \
     private: static const int nslots;                                                                                           \
-    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const override;  \
     private:
 
 
@@ -292,25 +288,6 @@
     }
 
 
-#define EMPTY_SERIALIZER(ThisType)                                                     \
-    std::ostream& ThisType::serialize(                                                 \
-    std::ostream& sout, const int i, const bool slotsOnly) const                       \
-    {                                                                                  \
-        int j = 0;                                                                     \
-        if ( !slotsOnly ) {                                                            \
-            indent(sout,i);                                                            \
-            sout << "( " << getFactoryName() << std::endl;                             \
-            j = 4;                                                                     \
-        }                                                                              \
-        BaseClass::serialize(sout,i+j,true);                                           \
-        if ( !slotsOnly ) {                                                            \
-            indent(sout,i);                                                            \
-            sout << ")" << std::endl;                                                  \
-        }                                                                              \
-        return sout;                                                                   \
-    }
-
-
 #define BEGIN_SLOTTABLE(ThisType)                                                      \
     const char* ThisType::slotnames[] = {
 
@@ -320,7 +297,6 @@
     const int ThisType::nslots = (sizeof(slotnames)/sizeof(char*));                            \
     const ::mixr::base::SlotTable ThisType::slottable(ThisType::slotnames, ThisType::nslots,   \
                                                ThisType::BaseClass::getSlotTable());
-
 
 
 #define BEGIN_SLOT_MAP(ThisType)                                                           \

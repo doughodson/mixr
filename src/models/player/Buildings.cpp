@@ -8,7 +8,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Building, "Building")
-EMPTY_SERIALIZER(Building)
 EMPTY_DELETEDATA(Building)
 
 Building::Building()

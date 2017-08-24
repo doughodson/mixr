@@ -33,33 +33,10 @@ void Area::copyData(const Area& org, const bool)
    val = fromArea(org.toArea());;
 }
 
-std::ostream& Area::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << val << std::endl;
-
-    BaseClass::serialize(sout, i+j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-    return sout;
-}
-
-
 //==============================================================================
 // SquareMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMeters, "SquareMeters")
-EMPTY_SERIALIZER(SquareMeters)
 EMPTY_COPYDATA(SquareMeters)
 EMPTY_DELETEDATA(SquareMeters)
 
@@ -84,7 +61,6 @@ SquareMeters::SquareMeters(const Area& value) : Area()
 // SquareFeet() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareFeet, "SquareFeet")
-EMPTY_SERIALIZER(SquareFeet)
 EMPTY_COPYDATA(SquareFeet)
 EMPTY_DELETEDATA(SquareFeet)
 
@@ -108,7 +84,6 @@ SquareFeet::SquareFeet(const Area& value) : Area()
 // SquareInches() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareInches, "SquareInches")
-EMPTY_SERIALIZER(SquareInches)
 EMPTY_COPYDATA(SquareInches)
 EMPTY_DELETEDATA(SquareInches)
 
@@ -132,7 +107,6 @@ SquareInches::SquareInches(const Area& value) : Area()
 // SquareYards() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareYards, "SquareYards")
-EMPTY_SERIALIZER(SquareYards)
 EMPTY_COPYDATA(SquareYards)
 EMPTY_DELETEDATA(SquareYards)
 
@@ -156,7 +130,6 @@ SquareYards::SquareYards(const Area& value) : Area()
 // SquareMiles() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMiles, "SquareMiles")
-EMPTY_SERIALIZER(SquareMiles)
 EMPTY_COPYDATA(SquareMiles)
 EMPTY_DELETEDATA(SquareMiles)
 
@@ -180,7 +153,6 @@ SquareMiles::SquareMiles(const Area& value) : Area()
 // SquareCentiMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareCentiMeters, "SquareCentiMeters")
-EMPTY_SERIALIZER(SquareCentiMeters)
 EMPTY_COPYDATA(SquareCentiMeters)
 EMPTY_DELETEDATA(SquareCentiMeters)
 
@@ -204,7 +176,6 @@ SquareCentiMeters::SquareCentiMeters(const Area& value) : Area()
 // SquareMilliMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMilliMeters, "SquareMilliMeters")
-EMPTY_SERIALIZER(SquareMilliMeters)
 EMPTY_COPYDATA(SquareMilliMeters)
 EMPTY_DELETEDATA(SquareMilliMeters)
 
@@ -228,7 +199,6 @@ SquareMilliMeters::SquareMilliMeters(const Area& value) : Area()
 // SquareKiloMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareKiloMeters, "SquareKiloMeters")
-EMPTY_SERIALIZER(SquareKiloMeters)
 EMPTY_COPYDATA(SquareKiloMeters)
 EMPTY_DELETEDATA(SquareKiloMeters)
 
@@ -252,7 +222,6 @@ SquareKiloMeters::SquareKiloMeters(const Area& value) : Area()
 // DecibelSquareMeters() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelSquareMeters, "DecibelSquareMeters")
-EMPTY_SERIALIZER(DecibelSquareMeters)
 EMPTY_COPYDATA(DecibelSquareMeters)
 EMPTY_DELETEDATA(DecibelSquareMeters)
 

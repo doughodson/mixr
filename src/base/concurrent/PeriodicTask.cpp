@@ -9,7 +9,6 @@ namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(PeriodicTask, "AbstractPeriodicTask")
 EMPTY_SLOTTABLE(PeriodicTask)
-EMPTY_SERIALIZER(PeriodicTask)
 EMPTY_DELETEDATA(PeriodicTask)
 
 PeriodicTask::PeriodicTask(Component* const p, const double pri, const double rt) : Thread(p, pri), rate(rt)

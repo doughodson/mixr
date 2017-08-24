@@ -9,7 +9,6 @@ namespace graphics {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary2, "Rotary2")
 EMPTY_COPYDATA(Rotary2)
 EMPTY_DELETEDATA(Rotary2)
-EMPTY_SERIALIZER(Rotary2)
 
 // Event handler for Rotary2 events
 BEGIN_EVENT_HANDLER(Rotary2)

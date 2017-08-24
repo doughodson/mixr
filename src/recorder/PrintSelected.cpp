@@ -38,7 +38,6 @@ BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 7, setSlotTimeOnly,        base::Number)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(PrintSelected)
 EMPTY_DELETEDATA(PrintSelected)
 
 PrintSelected::PrintSelected()

@@ -6,7 +6,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullseye, "Bullseye")
-EMPTY_SERIALIZER(Bullseye)
 EMPTY_DELETEDATA(Bullseye)
 
 Bullseye::Bullseye()

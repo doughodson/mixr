@@ -10,7 +10,6 @@ namespace mixr {
 namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")
-EMPTY_SERIALIZER(Navaid)
 EMPTY_COPYDATA(Navaid)
 EMPTY_DELETEDATA(Navaid)
 

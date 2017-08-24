@@ -31,7 +31,6 @@ namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "NetHandler")
 EMPTY_SLOTTABLE(NetHandler)
-EMPTY_SERIALIZER(NetHandler)
 EMPTY_COPYDATA(NetHandler)
 EMPTY_DELETEDATA(NetHandler)
 

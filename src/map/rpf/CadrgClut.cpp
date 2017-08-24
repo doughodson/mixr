@@ -11,7 +11,6 @@ namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgClut, "CadrgClut")
 EMPTY_SLOTTABLE(CadrgClut)
-EMPTY_SERIALIZER(CadrgClut)
 EMPTY_COPYDATA(CadrgClut)
 EMPTY_DELETEDATA(CadrgClut)
 

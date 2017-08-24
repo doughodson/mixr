@@ -14,7 +14,6 @@ namespace base {
 IMPLEMENT_SUBCLASS(TableStorage, "TableStorage")
 EMPTY_SLOTTABLE(TableStorage)
 EMPTY_DELETEDATA(TableStorage)
-EMPTY_SERIALIZER(TableStorage)
 
 TableStorage::TableStorage()
 {
@@ -221,40 +220,6 @@ bool Table::setDataTable(const List* const sdtobj)
         } valid = isValid();
     }
     return ok;
-}
-
-std::ostream& Table::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    BaseClass::serialize(sout, i + j, true);
-
-    indent(sout, i + j);
-    sout << "data: ";
-    printData(sout, dtable, (i + j));
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-// printVector() -- print a vector of breakpoints
-//------------------------------------------------------------------------------
-void Table::printVector(std::ostream& sout, const double* table, const unsigned int n)
-{
-    sout << "[";
-    if (table != nullptr) {
-        for (unsigned int i = 0; i < n; i++) sout << " " << table[i];
-    }
-    sout << " ]";
 }
 
 }

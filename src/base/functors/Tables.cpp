@@ -163,40 +163,6 @@ bool Table1::setXBreakpoints1(const List* const sxb1obj)
     return true;
 }
 
-std::ostream& Table1::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i + j);
-    sout << "x: ";
-    printVector(sout, xtable, nx);
-    sout << std::endl;
-
-    BaseClass::serialize(sout, i + j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-//  Print 1D table
-//------------------------------------------------------------------------------
-void Table1::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
-{
-    indent(sout, ns);
-    printVector(sout, tbl, nx);
-    sout << std::endl;
-}
-
-
 //==============================================================================
 // Class Table2
 //==============================================================================
@@ -380,51 +346,6 @@ bool Table2::setYBreakpoints2(const List* const syb2obj)
     }
     return true;
 }
-
-std::ostream& Table2::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i + j);
-    sout << "y: ";
-    printVector(sout, ytable, ny);
-    sout << std::endl;
-
-    BaseClass::serialize(sout, i + j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-//  Print 2D table
-//------------------------------------------------------------------------------
-void Table2::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
-{
-    indent(sout, ns);
-    sout << "{" << std::endl;
-
-    if (tbl != nullptr) {
-        unsigned int j = 0;
-        unsigned int k = BaseClass::tableSize();
-        for (unsigned int i = 0; i < ny; i++) {
-            BaseClass::printData(sout, &tbl[j], ns + 4);
-            j += k;
-        }
-    }
-
-    indent(sout, ns);
-    sout << "}" << std::endl;
-}
-
 
 //==============================================================================
 // Class Table3
@@ -634,51 +555,6 @@ bool Table3::setZBreakpoints3(const List* const szb3obj)
     }
     return true;
 }
-
-std::ostream& Table3::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i + j);
-    sout << "z: ";
-    printVector(sout, ztable, nz);
-    sout << std::endl;
-
-    BaseClass::serialize(sout, i + j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-//  Print 3D table
-//------------------------------------------------------------------------------
-void Table3::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
-{
-    indent(sout, ns);
-    sout << "{" << std::endl;
-
-    if (tbl != nullptr) {
-        unsigned int j = 0;
-        unsigned int k = BaseClass::tableSize();
-        for (unsigned int i = 0; i < nz; i++) {
-            BaseClass::printData(sout, &tbl[j], ns + 4);
-            j += k;
-        }
-    }
-
-    indent(sout, ns);
-    sout << "}" << std::endl;
-}
-
 
 //==============================================================================
 // Class Table4
@@ -931,50 +807,6 @@ bool Table4::setWBreakpoints4(const List* const swb4obj)
         valid = isValid();
     }
     return true;
-}
-
-std::ostream& Table4::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i + j);
-    sout << "w: ";
-    printVector(sout, wtable, nw);
-    sout << std::endl;
-
-    BaseClass::serialize(sout, i + j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-//  print 4D table
-//------------------------------------------------------------------------------
-void Table4::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
-{
-    indent(sout, ns);
-    sout << "{" << std::endl;
-
-    if (tbl != nullptr) {
-        unsigned int j = 0;
-        unsigned int k = BaseClass::tableSize();
-        for (unsigned int i = 0; i < nw; i++) {
-            BaseClass::printData(sout, &tbl[j], ns + 4);
-            j += k;
-        }
-    }
-
-    indent(sout, ns);
-    sout << "}" << std::endl;
 }
 
 
@@ -1254,50 +1086,6 @@ bool Table5::setVBreakpoints5(const List* const swb5obj)
         valid = isValid();
     }
     return true;
-}
-
-std::ostream& Table5::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-        if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    indent(sout, i + j);
-    sout << "v: ";
-    printVector(sout, vtable, nv);
-    sout << std::endl;
-
-    BaseClass::serialize(sout, i + j, true);
-
-    if (!slotsOnly) {
-        indent(sout, i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
-//------------------------------------------------------------------------------
-//  Print 5D table
-//------------------------------------------------------------------------------
-void Table5::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
-{
-    indent(sout, ns);
-    sout << "{" << std::endl;
-
-    if (tbl != nullptr) {
-        unsigned int j = 0;
-        unsigned int k = BaseClass::tableSize();
-        for (unsigned int i = 0; i < nv; i++) {
-            BaseClass::printData(sout, &tbl[j], ns + 4);
-            j += k;
-        }
-    }
-
-    indent(sout, ns);
-    sout << "}" << std::endl;
 }
 
 }

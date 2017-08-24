@@ -13,7 +13,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer, "OnboardComputer")
-EMPTY_SERIALIZER(OnboardComputer)
 
 OnboardComputer::OnboardComputer()
 {

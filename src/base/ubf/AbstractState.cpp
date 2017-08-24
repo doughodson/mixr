@@ -13,7 +13,6 @@ EMPTY_SLOTTABLE(AbstractState)
 EMPTY_CONSTRUCTOR(AbstractState)
 EMPTY_DELETEDATA(AbstractState)
 EMPTY_COPYDATA(AbstractState)
-EMPTY_SERIALIZER(AbstractState)
 
 void AbstractState::updateGlobalState()
 {

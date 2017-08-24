@@ -246,17 +246,5 @@ String& String::operator=(const char* s)
    return *this;
 }
 
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
-std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
-{
-   sout << "\"";
-   if (str != nullptr) sout << str;
-   sout << "\"";
-   return sout;
-}
-
 }
 }

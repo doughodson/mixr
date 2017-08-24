@@ -9,7 +9,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ship,"Ship")
-EMPTY_SERIALIZER(Ship)
 
 Ship::Ship()
 {

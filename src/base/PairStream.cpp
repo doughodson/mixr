@@ -113,17 +113,5 @@ bool PairStream::operator!=(const PairStream& stream) const
     return *s1 != *s2;
 }
 
-std::ostream& PairStream::serialize(std::ostream& sout, const int i, const bool) const
-{
-    const Item* item = getFirstItem();
-    while (item != nullptr) {
-        const auto pair = static_cast<const Pair*>(item->getValue());
-        indent(sout,i);
-        pair->serialize(sout,i);
-        item = item->getNext();
-    }
-    return sout;
-}
-
 }
 }

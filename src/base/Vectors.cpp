@@ -13,7 +13,6 @@ namespace base {
 //==============================================================================
 IMPLEMENT_SUBCLASS(RVector,"RVector")
 EMPTY_SLOTTABLE(RVector)
-EMPTY_SERIALIZER(RVector)
 EMPTY_COPYDATA(RVector)
 EMPTY_DELETEDATA(RVector)
 
@@ -142,7 +141,6 @@ bool RVector::setFldWidth(const unsigned int FW)
 //==============================================================================
 IMPLEMENT_SUBCLASS(CVector,"CVector")
 EMPTY_SLOTTABLE(CVector)
-EMPTY_SERIALIZER(CVector)
 EMPTY_COPYDATA(CVector)
 EMPTY_DELETEDATA(CVector)
 

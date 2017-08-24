@@ -8,7 +8,6 @@ namespace mixr {
 namespace instruments {
 
 IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")
-EMPTY_SERIALIZER(AoAIndexer)
 
 BEGIN_SLOTTABLE(AoAIndexer)
     "aboveMax",     // min value when aoa is over in-range value

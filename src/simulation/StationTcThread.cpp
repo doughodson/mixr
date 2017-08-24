@@ -10,7 +10,6 @@ IMPLEMENT_SUBCLASS(TcThread, "TcThread")
 EMPTY_SLOTTABLE(TcThread)
 EMPTY_COPYDATA(TcThread)
 EMPTY_DELETEDATA(TcThread)
-EMPTY_SERIALIZER(TcThread)
 
 TcThread::TcThread(base::Component* const parent, const double priority, const double rate): base::PeriodicTask(parent, priority, rate)
 {

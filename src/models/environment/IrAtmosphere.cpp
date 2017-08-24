@@ -18,7 +18,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(IrAtmosphere, "IrAtmosphere")
-EMPTY_SERIALIZER(IrAtmosphere)
 EMPTY_COPYDATA(IrAtmosphere)
 
 BEGIN_SLOTTABLE(IrAtmosphere)

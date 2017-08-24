@@ -9,7 +9,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(AirVehicle, "AirVehicle")
-EMPTY_SERIALIZER(AirVehicle)
 
 BEGIN_SLOTTABLE(AirVehicle)
     "initGearPos",      // 1: initial gear position (default: up),
@@ -581,7 +580,6 @@ double AirVehicle::getRadarAltitude() const
 // class Aircraft
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Aircraft,"Aircraft")
-EMPTY_SERIALIZER(Aircraft)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -610,7 +608,6 @@ void Aircraft::deleteData()
 // class Helicopter
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Helicopter,"Helicopter")
-EMPTY_SERIALIZER(Helicopter)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -639,7 +636,6 @@ void Helicopter::deleteData()
 // class UnmannedAirVehicle
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(UnmannedAirVehicle,"UnmannedAirVehicle")
-EMPTY_SERIALIZER(UnmannedAirVehicle)
 
 //------------------------------------------------------------------------------
 // Constructor(s)

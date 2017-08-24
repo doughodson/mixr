@@ -7,7 +7,6 @@ namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecordHandle,"DataRecordHandle")
 EMPTY_SLOTTABLE(DataRecordHandle)
-EMPTY_SERIALIZER(DataRecordHandle)
 
 DataRecordHandle::DataRecordHandle()
 {

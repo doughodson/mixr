@@ -173,35 +173,5 @@ bool Ntm::setSlotDisEntityType(const base::List* const msg)
    return ok;
 }
 
-std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   indent(sout,i+j);
-   sout << "disEntityType: [ ";
-   sout << static_cast<int>(disKind) << " ";
-   sout << static_cast<int>(disDomain) << " ";
-   sout << static_cast<int>(disCountry) << " ";
-   sout << static_cast<int>(disCategory) << " ";
-   sout << static_cast<int>(disSubcategory) << " ";
-   sout << static_cast<int>(disSpecific) << " ";
-   sout << static_cast<int>(disExtra) << " ";
-   sout << "]" << std::endl;
-
-   BaseClass::serialize(sout,i+j, true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }

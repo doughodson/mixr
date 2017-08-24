@@ -159,35 +159,5 @@ bool FlowRate::setSlotTime(Time* newTime)
     return ok;
 }
 
-std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if (!slotsOnly) {
-        sout << "( " << getFactoryName() << std::endl;
-        // tab here
-        j = 4;
-    }
-
-    indent(sout, i+j);
-    sout << "value: " << flowRate << std::endl;
-
-    if (myVolume != nullptr) {
-        indent(sout, i+j);
-        sout << "volume: ";
-        const auto mv = static_cast<Volume*>(myVolume);
-        mv->serialize(sout, i+j);
-    }
-    if (myTime != nullptr) {
-        indent(sout, i+j);
-        sout << "time: ";
-        const auto mt = static_cast<Time*>(myTime);
-        mt->serialize(sout, i+j);
-    }
-
-    sout << ")" << std::endl;
-
-    return sout;
-}
-
 }
 }

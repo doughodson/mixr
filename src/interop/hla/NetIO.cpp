@@ -991,32 +991,6 @@ int NetIO::compareObjHandles(const void* p1, const void* p2)
    return result;
 }
 
-std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-    int j = 0;
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << "( " << getFactoryName() << std::endl;
-        j = 4;
-    }
-
-    //if (multicastGroup != 0) {
-    //    indent(sout,i+j);
-    //    sout << "multicastGroup: \"";
-    //    sout << multicastGroup;
-    //    sout << "\"" << std::endl;
-    //}
-
-    BaseClass::serialize(sout,i+j,true);
-
-    if ( !slotsOnly ) {
-        indent(sout,i);
-        sout << ")" << std::endl;
-    }
-
-    return sout;
-}
-
 }
 }
 

@@ -13,7 +13,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
-EMPTY_SERIALIZER(GroundVehicle)
 
 static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(base::PI/2.0);  // Default max launcher angle (rad)
 static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                              // Default min launcher angle (rad)
@@ -252,7 +251,6 @@ bool GroundVehicle::setSlotLauncherMoveTime(const base::Time* const msg)
 // class Tank
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tank,"Tank")
-EMPTY_SERIALIZER(Tank)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -281,7 +279,6 @@ void Tank::deleteData()
 // class ArmoredVehicle
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ArmoredVehicle,"ArmoredVehicle")
-EMPTY_SERIALIZER(ArmoredVehicle)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -309,7 +306,6 @@ void ArmoredVehicle::deleteData()
 // class WheeledVehicle
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WheeledVehicle,"WheeledVehicle")
-EMPTY_SERIALIZER(WheeledVehicle)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -337,7 +333,6 @@ void WheeledVehicle::deleteData()
 // class Artillery
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Artillery,"Artillery")
-EMPTY_SERIALIZER(Artillery)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -361,12 +356,10 @@ void Artillery::deleteData()
 {
 }
 
-
 //==============================================================================
 // class GroundStation
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStation,"GroundStation")
-EMPTY_SERIALIZER(GroundStation)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -394,7 +387,6 @@ void GroundStation::deleteData()
 // class GroundStationRadar
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStationRadar,"GroundStationRadar")
-EMPTY_SERIALIZER(GroundStationRadar)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -422,7 +414,6 @@ void GroundStationRadar::deleteData()
 // class GroundStationUav
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStationUav,"GroundStationUav")
-EMPTY_SERIALIZER(GroundStationUav)
 
 //------------------------------------------------------------------------------
 // Constructor(s)

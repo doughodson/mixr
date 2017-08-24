@@ -7,7 +7,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(SynchronizedState, "SynchronizedState")
 EMPTY_SLOTTABLE(SynchronizedState)
-EMPTY_SERIALIZER(SynchronizedState)
 EMPTY_DELETEDATA(SynchronizedState)
 
 SynchronizedState::SynchronizedState()

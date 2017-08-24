@@ -15,10 +15,5 @@ Stack::Stack()
    STANDARD_CONSTRUCTOR()
 }
 
-std::ostream& Stack::serialize(std::ostream& sout, const int, const bool) const
-{
-    return sout;
-}
-
 }
 }

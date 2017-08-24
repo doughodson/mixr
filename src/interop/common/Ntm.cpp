@@ -44,37 +44,5 @@ bool Ntm::setSlotTemplatePlayer(const models::Player* const msg)
    return true;
 }
 
-std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-{
-   int j = 0;
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << "( " << getFactoryName() << std::endl;
-      j = 4;
-   }
-
-   if (tPlayer != nullptr) {
-      indent(sout,i+j);
-      //sout << "template:" << std::endl;
-      //tPlayer->serialize(sout,(i+j+4));
-      sout << "template: ( " << tPlayer->getFactoryName();
-      const base::String* tt = tPlayer->getType();
-      if (tt != nullptr) {
-         sout << " type: " << *tt;
-      }
-      sout << " )";
-      sout << std::endl;
-   }
-
-   BaseClass::serialize(sout,i+j,true);
-
-   if ( !slotsOnly ) {
-      indent(sout,i);
-      sout << ")" << std::endl;
-   }
-
-   return sout;
-}
-
 }
 }
