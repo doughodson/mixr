@@ -351,7 +351,7 @@ void FtglBitmapFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -485,7 +485,7 @@ void FtglExtrdFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -622,7 +622,7 @@ void FtglOutlineFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -749,7 +749,7 @@ void FtglPixmapFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -885,7 +885,7 @@ void FtglPolygonFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -1108,7 +1108,7 @@ void FtglHaloFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
+    const std::size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
@@ -1260,8 +1260,8 @@ void FtglTextureFont::loadFont()
     }
 
     // Generate filename
-    const size_t FONTPATHNAME_LENGTH = 256;
-    char fontPathname[FONTPATHNAME_LENGTH];
+    const std::size_t FONTPATHNAME_LENGTH {256};
+    char fontPathname[FONTPATHNAME_LENGTH] {};
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());

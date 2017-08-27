@@ -181,15 +181,15 @@ protected:
 
    const char* dbGetRecord(const Key* key, const int size = 0);
 
-   int sQuery(Key** key, Key** base, size_t n,
+   int sQuery(Key** key, Key** base, std::size_t n,
                int (*cmp)(const void*, const void*));
 
-   int mQuery(Key** key, Key** base, size_t n,
+   int mQuery(Key** key, Key** base, std::size_t n,
                int (*cmp)(const void*, const void*));
 
    void expandResults(Key** key, Key** keyPtr,
                         int (*cmp)(const void*, const void*),
-                        Key** base, size_t n);
+                        Key** base, std::size_t n);
 
    void createIcaoList();
 

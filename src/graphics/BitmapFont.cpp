@@ -14,8 +14,8 @@ IMPLEMENT_SUBCLASS(BitmapFont, "BitmapFont")
 EMPTY_DELETEDATA(BitmapFont)
 
 // Default font size
-const unsigned int defaultFontWidth = 10;
-const unsigned int defaultFontHeight = 15;
+const unsigned int defaultFontWidth {10};
+const unsigned int defaultFontHeight {15};
 
 BEGIN_SLOTTABLE(BitmapFont)
     "reverse",      // Invert the bitmap's bits (reverse video)
@@ -62,8 +62,8 @@ void BitmapFont::outputText(const double x, const double y, const char* txt, con
     }
 
     // Prepare the output text
-    char cbuf[MSG_BUF_LEN];
-    int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    char cbuf[MSG_BUF_LEN] {};
+    int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
     // Set the base
@@ -96,8 +96,8 @@ void BitmapFont::outputText(const char* txt, const int n, const bool vf, const b
     }
 
     // Prepare the output text
-    char cbuf[MSG_BUF_LEN];
-    int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    char cbuf[MSG_BUF_LEN] {};
+    int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
     // Set the base
@@ -469,8 +469,8 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
       return nullptr;
 
    // Create the font file name
-   const size_t FONTPATHNAME_LENGTH = 256;
-   char fontPathname[FONTPATHNAME_LENGTH];
+   const std::size_t FONTPATHNAME_LENGTH {256};
+   char fontPathname[FONTPATHNAME_LENGTH] {};
    if (fontDirectory() != nullptr)
       base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
    else
@@ -488,28 +488,28 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    }
 
    // Calculate the size of the font
-   unsigned int width1(0);
+   unsigned int width1 {};
    std::fscanf(fp, "%u\n", &width1);
-   unsigned int height1(0);
+   unsigned int height1 {};
    std::fscanf(fp, "%u\n", &height1);
 
-   unsigned int numBytesWide = static_cast<int>(std::ceil(static_cast<double>(width1) / 8.0));
-   unsigned int numFileBytes = numBytesWide * height1;
-   unsigned int numFontBytes = numBytesWide * getBitmapHeight();
+   unsigned int numBytesWide {static_cast<unsigned int>(std::ceil(static_cast<double>(width1) / 8.0))};
+   unsigned int numFileBytes {numBytesWide * height1};
+   unsigned int numFontBytes {numBytesWide * getBitmapHeight()};
 
    const auto bitmap = new GLubyte[numFontBytes];
 
-   unsigned int i;  // index
+   unsigned int i {};  // index
 
    // Pad rest of the height
-   unsigned int diff = numFontBytes - numFileBytes;
+   unsigned int diff {numFontBytes - numFileBytes};
    for (i = 0; i < diff; i++) {
       bitmap[i] = reverse ? 255 : 0;
    }
 
    // Read in the bitmap bytes
    for (; i < numFontBytes; i++) {
-      int value;
+      int value {};
       std::fscanf(fp, "0x%x\n", &value);
       bitmap[i] = reverse ? GLubyte(~value) : GLubyte(value);
    }

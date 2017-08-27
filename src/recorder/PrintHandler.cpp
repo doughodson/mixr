@@ -126,7 +126,7 @@ bool PrintHandler::openFile()
    //---
    // Allocate space for the full file name
    //---
-   size_t nameLength = 0;
+   std::size_t nameLength = 0;
    if (pathname != nullptr) {
       nameLength += pathname->len();     // add the length of the path name
       nameLength += 1;                         // add a character for the slash
@@ -244,7 +244,7 @@ void PrintHandler::setFullFilename(const char* const name)
       fullFilename = nullptr;
    }
    if (name != nullptr) {
-      size_t n = std::strlen(name) + 1;
+      std::size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
       base::utStrcpy(fullFilename, n, name);
    }

@@ -111,12 +111,12 @@ void Font::copyData(const Font& org, const bool cc)
    fontPath = nullptr;
    fontFile = nullptr;
    if (org.fontPath != nullptr) {
-      size_t len = std::strlen(org.fontPath);
+      std::size_t len {std::strlen(org.fontPath)};
       fontPath = new char[len+1];
       base::utStrcpy(fontPath,len+1,org.fontPath);
    }
    if (org.fontFile != nullptr) {
-      size_t len = std::strlen(org.fontFile);
+      std::size_t len {std::strlen(org.fontFile)};
       fontFile = new char[len+1];
       base::utStrcpy(fontFile,len+1,org.fontFile);
    }
@@ -167,7 +167,7 @@ void Font::setTextOrigin(const GLdouble x, const GLdouble y)
 //------------------------------------------------------------------------------
 // xferChars() -- transfer characters
 //------------------------------------------------------------------------------
-int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const inp, const unsigned int n) const
+int Font::xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const
 {
     if (outp == nullptr || inp == nullptr) return 0;
     if (n >= BUF_SIZE) return 0;
@@ -251,7 +251,7 @@ bool Font::setSlotFontPath(const base::String* const str)
 {
     bool ok = true;
     if (str != nullptr) {
-        size_t j = str->len();
+        std::size_t j {str->len()};
         if (j > 0) {
             fontPath = new char[j+1];
             utStrcpy(fontPath, j+1, *str);
@@ -273,7 +273,7 @@ bool Font::setSlotFTGLFontFileName(const base::String* const str)
 {
     bool ok = true;
     if (str != nullptr) {
-        size_t j = str->len();
+        std::size_t j = str->len();
         if (j > 0) {
             fontFile = new char[j+1];
             utStrcpy(fontFile, j+1, *str);

@@ -1675,7 +1675,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
 {
    bool ok = false;
    if (slotname != nullptr && kind != nullptr) {
-      size_t len = std::strlen(slotname);
+      std::size_t len = std::strlen(slotname);
       bool haveTheK = (len > 0 && (slotname[0] == 'K' || slotname[0] == 'k') );
       bool haveTheD = (len > 2 && (slotname[2] == 'D' || slotname[2] == 'd') );
       if (haveTheK && std::isdigit(slotname[1]) && (len == 2 || haveTheD)) {
@@ -1849,7 +1849,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                base::utStrcpy(cbuff, 64, origType->getString());
 
 #if 0 /* optionally increment the last character to look for generic matches */
-               size_t ll = std::strlen(cbuff);
+               std::size_t ll = std::strlen(cbuff);
                if (ll > 1) {
                   cbuff[ll-1]++;
                }

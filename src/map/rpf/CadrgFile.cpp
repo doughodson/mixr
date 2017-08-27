@@ -598,7 +598,7 @@ bool CadrgFile::initialize(const char* dir)
 
                     // Allocate our frame file directory path, which is our path name length + 1 + string length of the directory name passed in
 
-                    size_t size = ffPathLength + 1 + std::strlen(dir);
+                    std::size_t size = ffPathLength + 1 + std::strlen(dir);
                     #if defined(WIN32)
                         char* directory = (char *) malloc(size);
                     #else

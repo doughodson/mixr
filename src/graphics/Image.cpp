@@ -278,7 +278,7 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    //unsigned int bitmapFileHdrSize =
    //   sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
-   size_t nItemsRead(0);
+   std::size_t nItemsRead(0);
    nItemsRead = std::fread(&bfType, sizeof(char), 2, fp);
 
    nItemsRead = std::fread(&bfSize, sizeof(bfSize), 1, fp);
@@ -424,7 +424,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
       sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
    // Number of bytes per row of pixels
-   size_t widthBytes = getWidth() * getNumComponents();
+   std::size_t widthBytes = getWidth() * getNumComponents();
 
    // Offset to bitmap data
    unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER_X);
@@ -512,13 +512,13 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
     std::fseek(fp, offset, SEEK_SET);
 
     // Read the bitmap
-    size_t widthBytes = (getWidth() * getNumComponents());          // Number of bytes we want per row
-    size_t origWidthBytes = (bmfi->biWidth * getNumComponents());   // Original number of bytes per row
+    std::size_t widthBytes = (getWidth() * getNumComponents());          // Number of bytes we want per row
+    std::size_t origWidthBytes = (bmfi->biWidth * getNumComponents());   // Original number of bytes per row
     origWidthBytes = (((origWidthBytes + 3) / 4 ) * 4);             // round up to 4 byte boundary
-    size_t seekBytes = (origWidthBytes - widthBytes);               // Number of bytes to skip
+    std::size_t seekBytes = (origWidthBytes - widthBytes);               // Number of bytes to skip
     for (unsigned int i = 0; i < getHeight(); i++) {
         GLubyte* p = bmap + (i * widthBytes);
-        size_t n = std::fread(p, widthBytes, 1, fp);
+        std::size_t n = std::fread(p, widthBytes, 1, fp);
         if (n == 0) {
             delete[] bmap;
             return nullptr;
@@ -542,10 +542,10 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     auto bmap = new GLubyte[bmSize];
 
     // Read the color table
-    size_t ctSize = 256;
+    std::size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
     const auto colorTable = new GLubyte[ctSize*4];
-    size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
+    std::size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
     std::fseek(fp, offset, SEEK_SET);
@@ -554,7 +554,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
     auto tbuf = new GLubyte[nbytes];
     for (unsigned int i = 0; bmap != nullptr && i < getHeight(); i++) {
-        size_t n = std::fread(tbuf, nbytes, 1, fp);
+        std::size_t n = std::fread(tbuf, nbytes, 1, fp);
         if (n > 0) {
             // transfer the colors
             GLubyte* p = bmap + (i * getWidth() * getNumComponents());

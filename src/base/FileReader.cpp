@@ -155,8 +155,8 @@ bool FileReader::setSlotRecordLength(Number* const msg)
 bool FileReader::open()
 {
    // Create the full file name
-   const size_t FILE_LENGTH = 512; // Max length of file
-   char file[FILE_LENGTH];
+   const std::size_t FILE_LENGTH {512}; // Max length of file
+   char file[FILE_LENGTH] {};
    utStrcpy(file, FILE_LENGTH, pathname);
    utStrcat(file, FILE_LENGTH, "/");
    utStrcat(file, FILE_LENGTH, filename);
@@ -188,16 +188,16 @@ const char* FileReader::getRecord(const int nn, const int ll)
    if ( !isReady() ) return nullptr;
 
    // Set record number
-   int n = nn;
+   int n {nn};
    if (n == -1) n = rnum;
    else rnum = n;
 
    // Set length to read
-   int len = ll;
+   int len {ll};
    if (len == 0) len = rlen;
 
    // Read the record
-   bool ok = false;
+   bool ok {};
    if (!dbf->seekg(rlen*(n-1), std::ios::beg).eof()) {
       dbf->read(rec, len);
       if (!dbf->eof() && !dbf->fail()) ok = true;

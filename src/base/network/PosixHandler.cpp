@@ -83,9 +83,9 @@ void PosixHandler::copyData(const PosixHandler& org, const bool)
     if (localIpAddr != nullptr) delete[] localIpAddr;
     localIpAddr = nullptr;
     if (org.localIpAddr != nullptr) {
-        size_t len = std::strlen(org.localIpAddr);
+        const std::size_t len {std::strlen(org.localIpAddr)};
         localIpAddr = new char[len+1];
-        utStrcpy(localIpAddr,(len+1),org.localIpAddr);
+        utStrcpy(localIpAddr, (len+1) ,org.localIpAddr);
     }
 }
 

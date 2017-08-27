@@ -92,7 +92,7 @@ const void* Thread::getThreadHandle() const
 }
 
 // thread stack size in bytes (or zero if using the default stack size)
-size_t Thread::getStackSize() const
+std::size_t Thread::getStackSize() const
 {
    return stackSize;
 }
@@ -102,7 +102,7 @@ size_t Thread::getStackSize() const
 //-----------------------------------------------------------------------------
 
 // Set the thread's stack size in bytes (or zero to use the system default size)
-bool Thread::setStackSize(const size_t size)
+bool Thread::setStackSize(const std::size_t size)
 {
    stackSize = size;
    return true;

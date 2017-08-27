@@ -95,7 +95,7 @@ public:
    bool isTerminated() const;
 
    // thread stack size in bytes (or zero if using the default stack size)
-   size_t getStackSize() const;
+   std::size_t getStackSize() const;
 
    // Create/start the child thread
    virtual bool create();
@@ -105,7 +105,7 @@ public:
 
    // Set the thread's stack size (zero to use the system default size)
    // -- set before creating the thread --
-   bool setStackSize(const size_t size);
+   bool setStackSize(const std::size_t size);
 
    // number of processors assigned to this process
    static unsigned short getNumProcessors();
@@ -134,10 +134,10 @@ private: // Functions
    #endif
 
 private: // Data
-   Component* parent {};   // Our parent component that created us.
-   double priority {};     // Thread priority (0->lowest, 1->highest)
-   bool killed {};         // Are we terminated?
-   size_t stackSize {};    // Stack size in bytes (zero to use the system default stack size)
+   Component* parent {};        // Our parent component that created us.
+   double priority {};          // Thread priority (0->lowest, 1->highest)
+   bool killed {};              // Are we terminated?
+   std::size_t stackSize {};    // Stack size in bytes (zero to use the system default stack size)
 
    // Implementation dependent
    void* theThread {};     // Thread handle

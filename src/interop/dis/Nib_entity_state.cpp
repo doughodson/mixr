@@ -685,7 +685,7 @@ bool Nib::entityStateManager(const double curExecTime)
       // ---
       {
          const char* const pName = getPlayerName();
-         size_t nameLen = std::strlen(pName);
+         std::size_t nameLen = std::strlen(pName);
          for (unsigned int i = 0; i < EntityMarking::BUFF_SIZE; i++) {
             if (i < nameLen) {
                pdu->entityMarking.marking[i] = pName[i];

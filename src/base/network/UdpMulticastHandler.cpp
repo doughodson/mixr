@@ -72,9 +72,9 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 
     multicastGroup = nullptr;
     if (org.multicastGroup != nullptr) {
-        size_t len = std::strlen(org.multicastGroup);
+        const std::size_t len {std::strlen(org.multicastGroup)};
         multicastGroup = new char[len+1];
-        utStrcpy(multicastGroup,(len+1),org.multicastGroup);
+        utStrcpy(multicastGroup, (len+1), org.multicastGroup);
     }
     setTTL(org.getTTL());
     setLoopback(org.getLoopback());
@@ -92,7 +92,7 @@ void UdpMulticastHandler::deleteData()
 //------------------------------------------------------------------------------
 bool UdpMulticastHandler::initNetwork(const bool noWaitFlag)
 {
-    bool ok = BaseClass::initNetwork(noWaitFlag);
+    bool ok {BaseClass::initNetwork(noWaitFlag)};
     if (ok) {
         ok = joinTheGroup();
         if (!ok) std::cerr << "initNetwork(): joinTheGroup() FAILED" << std::endl;
@@ -109,7 +109,7 @@ bool UdpMulticastHandler::init()
     // ---
     // Init the base class
     // ---
-    bool ok = BaseClass::init();
+    bool ok {BaseClass::init()};
     if (!ok) return false;
 
     // ---
@@ -168,7 +168,7 @@ bool UdpMulticastHandler::bindSocket()
     // ---
     // Our base class will bind the socket
     // ---
-    bool ok = BaseClass::bindSocket();
+    bool ok {BaseClass::bindSocket()};
 
     if (ok) {
        struct sockaddr_in addr;        // Working address structure

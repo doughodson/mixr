@@ -1362,7 +1362,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const models::Player* const p, const char* co
    tp = nullptr;
 
    if (name != nullptr) {
-      const size_t LENGTH = std::strlen(name) + 1;
+      const std::size_t LENGTH = std::strlen(name) + 1;
       nodeFactoryName = new char[LENGTH];
       base::utStrcpy(nodeFactoryName,LENGTH,name);
    }
@@ -1392,7 +1392,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       nodeFactoryName = nullptr;
    }
    if (org.nodeFactoryName != nullptr) {
-      const size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
+      const std::size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
       nodeFactoryName = new char[LENGTH];
       base::utStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
    }
@@ -1472,7 +1472,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
 
          // Target player's type string and length
          const base::String* const pType = p->getType();
-         const size_t pTypeLen = pType->len();
+         const std::size_t pTypeLen = pType->len();
 
          // Search the NTM for a match with the most matching type string characters,
          // but not more than the target player's type string.
@@ -1483,7 +1483,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
             const Ntm* tstNtm = static_cast<const Ntm*>(item->getValue());
             const models::Player* const tp = tstNtm->getTemplatePlayer();
             const base::String* const tpType = tp->getType();
-            const size_t tpTypeLen = tpType->len();
+            const std::size_t tpTypeLen = tpType->len();
 
             if (tpTypeLen <= pTypeLen) {
                bool match = (std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0);
@@ -1609,7 +1609,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       // Get the template player's type string from the 'new' Ntm
       const models::Player* newP = newNtm->getTemplatePlayer();
       const base::String* newTypeStr = newP->getType();
-      const size_t newTypeLen = newTypeStr->len();
+      const std::size_t newTypeLen = newTypeStr->len();
 
       bool inserted = false;
       bool err = false;
@@ -1620,10 +1620,10 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          const Ntm* refNtm =  static_cast<const Ntm*>(refItem->getValue());
          const models::Player* refP = refNtm->getTemplatePlayer();
          const base::String* refTypeStr = refP->getType();
-         const size_t refTypeLen = refTypeStr->len();
+         const std::size_t refTypeLen = refTypeStr->len();
 
          // compare to the shortest string length
-         size_t len = newTypeLen;
+         std::size_t len = newTypeLen;
          if (refTypeLen < len) len = refTypeLen;
 
          int r = std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len);

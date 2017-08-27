@@ -67,7 +67,7 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool)
     if (networkMask != nullptr) delete[] networkMask;
     networkMask = nullptr;
     if (org.networkMask != nullptr) {
-        size_t len = std::strlen(org.networkMask);
+        const std::size_t len {std::strlen(org.networkMask)};
         networkMask = new char[len+1];
         utStrcpy(networkMask,(len+1),org.networkMask);
     }

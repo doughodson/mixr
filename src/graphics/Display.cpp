@@ -1030,22 +1030,22 @@ bool Display::setNormalFont(const base::Identifier* const fontName)
 void Display::outputTextLC(const int ln, const int cp, const char* sp, const int n, const bool vf) const
 {
    if (currentFont == nullptr || n <= 0) return;
-   base::Vec4d ocolor = getCurrentColor();
+   base::Vec4d ocolor {getCurrentColor()};
 
    const auto that = const_cast<Display*>(this);
    // If manual reverse text, draw a background polygon
    // Computer posiiton
-   GLdouble x = 0.0;
-   GLdouble y = 0.0;
+   GLdouble x {};
+   GLdouble y {};
    currentFont->position(ln,cp,x,y);
    GLdouble dx = (currentFont->getCharacterSpacing());
    GLdouble dy = (currentFont->getLineSpacing());
-   size_t len = std::strlen(sp);
+   std::size_t len {std::strlen(sp)};
 
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
       if (vf) {
-         GLdouble x1 = 0, y1 = 0;
+         GLdouble x1 {}, y1 {};
          //currentFont->position(ln+1, cp, x1, y1);
          glPushMatrix();
          // we have to move over 1/2 a character for our xpos
@@ -1053,8 +1053,8 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
          y1 = y + dy;
          glTranslated(x1, y1, 0);
 
-         GLdouble myX = (dx * len) * 0.2f;
-         GLdouble myY = (dy * len) + (dy / 2);
+         GLdouble myX {(dx * len) * 0.2};
+         GLdouble myY {(dy * len) + (dy / 2)};
 
 
          GLdouble vv[4][3] = {
@@ -1072,10 +1072,10 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
          dx *= 0.1;
          dy *= 0.2;
 
-         GLdouble x0 = x - dx;
-         GLdouble y0 = y - dy;
-         GLdouble x1 = 0.0;
-         GLdouble y1 = 0.0;
+         GLdouble x0 {x - dx};
+         GLdouble y0 {y - dy};
+         GLdouble x1 {};
+         GLdouble y1 {};
          currentFont->position((ln-1),(cp+n),x1,y1);
          x1 = x1 - dx;
          y1 = y1 - dy;
@@ -1095,14 +1095,14 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
    }
 
    if (underlinedFlg) {
-      GLdouble height = currentFont->getLineSpacing();
-      GLdouble width = currentFont->getCharacterSpacing();
+      GLdouble height {currentFont->getLineSpacing()};
+      GLdouble width {currentFont->getCharacterSpacing()};
 
       // only come down about a third for underlining
       glPushMatrix();
       that->setColor(ocolor);
 
-      GLdouble myY = 0, myX = 0;
+      GLdouble myY {}, myX {};
       if (vf) {
          // do nothing if we are vertical and underlined, because then it wouldn't be UNDERlined!
          //height /= 2;
@@ -1145,17 +1145,17 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
    if (currentFont == nullptr || n <= 0) return;
 
    const auto that = const_cast<Display*>(this);
-   base::Vec4d ocolor = getCurrentColor();
+   base::Vec4d ocolor {getCurrentColor()};
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
       // Offsets to center to polygon
-      GLdouble cSpace = (currentFont->getCharacterSpacing());
-      GLdouble lSpace = (currentFont->getLineSpacing());
-      size_t len = std::strlen(sp);
+      GLdouble cSpace {(currentFont->getCharacterSpacing())};
+      GLdouble lSpace {(currentFont->getLineSpacing())};
+      std::size_t len {std::strlen(sp)};
       // are we vertical?
       if (vf) {
-         GLdouble startX = cSpace / 2;
-         GLdouble startY = 0;
+         GLdouble startX {cSpace / 2};
+         GLdouble startY {};
          if (len > 1) startY = lSpace * (len / 2);
          else startY = lSpace * (len);
 
@@ -1165,8 +1165,8 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          glTranslatef(static_cast<GLfloat>(startX), -static_cast<GLfloat>(startY), 0);
 
          // now add a buffer for around the edges
-         GLdouble deltaX = startX + (cSpace * 0.1);
-         GLdouble deltaY = startY + (lSpace * 1.1);
+         GLdouble deltaX {startX + (cSpace * 0.1)};
+         GLdouble deltaY {startY + (lSpace * 1.1)};
 
          GLdouble vv[4][3] = {
             { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 }
@@ -1179,19 +1179,19 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
          glPopMatrix();
       }
       else {
-         GLdouble cSpace = currentFont->getCharacterSpacing();
-         GLdouble lSpace = currentFont->getLineSpacing();
-         size_t len = std::strlen(sp);
+         GLdouble cSpace {currentFont->getCharacterSpacing()};
+         GLdouble lSpace {currentFont->getLineSpacing()};
+         std::size_t len {std::strlen(sp)};
 
-         GLdouble startX = (cSpace * len / 2);
-         GLdouble startY = (lSpace / 2);
+         GLdouble startX {(cSpace * len / 2)};
+         GLdouble startY {(lSpace / 2)};
 
          glPushMatrix();
 
          glTranslated(startX, startY, 0);
 
-         GLdouble deltaX = startX + (cSpace * 0.1);
-         GLdouble deltaY = startY + (lSpace * 0.1);
+         GLdouble deltaX {startX + (cSpace * 0.1)};
+         GLdouble deltaY {startY + (lSpace * 0.1)};
 
          GLdouble vv[4][3] = {
             { -deltaX, -deltaY, -0.001 }, { -deltaX, deltaY, -0.001 }, { deltaX, deltaY, -0.001 }, { deltaX, -deltaY, -0.001 }
@@ -1206,9 +1206,9 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
       that->setColor(getClearColor());
    }
    if (underlinedFlg) {
-      GLdouble height = currentFont->getLineSpacing();
-      GLdouble width = currentFont->getCharacterSpacing();
-      size_t len = std::strlen(sp);
+      GLdouble height {currentFont->getLineSpacing()};
+      GLdouble width {currentFont->getCharacterSpacing()};
+      std::size_t len {std::strlen(sp)};
 
       if (vf) {
          // do nothing if we are vertical and underlined, because then it wouldn't be UNDERlined!
@@ -1251,14 +1251,14 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
 void Display::drawLeftBracket(const int ln, const int cp)
 {
    // Select reversed video?
-   bool oReversedFlg = reversedFlg;
+   bool oReversedFlg {reversedFlg};
    if (getReverseVideoBrackets() && !oReversedFlg) {
       // select reverse font
       selectFont(true, underlinedFlg);
    }
 
    // Draw the left bracket
-   char cbuf[2];
+   char cbuf[2] {};
    cbuf[0] = getLeftBracketCharacter();
    cbuf[1] = '\0';
    outputTextLC(ln, cp, cbuf, 1, reversedFlg);
@@ -1272,14 +1272,14 @@ void Display::drawLeftBracket(const int ln, const int cp)
 void Display::drawRightBracket(const int ln, const int cp)
 {
    // Select reversed video?
-   bool oReversedFlg = reversedFlg;
+   bool oReversedFlg {reversedFlg};
    if (getReverseVideoBrackets() && !oReversedFlg) {
       // select reverse font
       selectFont(true, underlinedFlg);
    }
 
    // Draw the right bracket
-   char cbuf[2];
+   char cbuf[2] {};
    cbuf[0] = getRightBracketCharacter();
    cbuf[1] = '\0';
    outputTextLC(ln, cp, cbuf, 1, reversedFlg);
@@ -1296,7 +1296,7 @@ void Display::drawRightBracket(const int ln, const int cp)
 //------------------------------------------------------------------------------
 base::Color* Display::getColor(const char* const colorName)
 {
-   base::Color* cc = nullptr;
+   base::Color* cc {};
    if (colorTable != nullptr) {
       base::Pair* p = colorTable->findByName(colorName);
       if (p != nullptr) cc = static_cast<base::Color*>(p->object());
@@ -1307,7 +1307,7 @@ base::Color* Display::getColor(const char* const colorName)
 
 base::Color* Display::getColor(const int index)
 {
-   base::Color* cc = nullptr;
+   base::Color* cc {};
    if (colorTable != nullptr) {
       base::Pair* p = colorTable->getPosition(index+1);
       if (p != nullptr) cc = static_cast<base::Color*>(p->object());
@@ -1422,7 +1422,7 @@ base::PairStream* Display::defaultColors()
 //------------------------------------------------------------------------------
 bool Display::setName(base::String* const n)
 {
-   bool ok = false;
+   bool ok {};
    if (n != nullptr) {
       name = n->getString();
       ok = true;
@@ -1458,7 +1458,7 @@ bool Display::setSlotMaterials(base::PairStream* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotMaterials(Material* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       if (materials != nullptr) materials->unref();
 
@@ -1474,7 +1474,7 @@ bool Display::setSlotMaterials(Material* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotAntialias(const base::Number* const x)
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr) ok = setAntialiasing(x->getBoolean());
    return ok;
 }
@@ -1566,7 +1566,7 @@ bool Display::setSlotViewportHeight(const base::Number* const svhobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotSubdisplayStream (base::PairStream* const dsobj)
 {
-   bool ok = false;
+   bool ok {};
    if (dsobj != nullptr) {
       // When a PairStream (i.e., more than one, a list) of displays
       if (subdisplays != nullptr) subdisplays->unref();
@@ -1583,7 +1583,7 @@ bool Display::setSlotSubdisplayStream (base::PairStream* const dsobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotSubdisplaySingle(Display* const dobj)
 {
-   bool ok = false;
+   bool ok {};
    if (dobj != nullptr) {
       if (subdisplays != nullptr) subdisplays->unref();
 
@@ -1599,7 +1599,7 @@ bool Display::setSlotSubdisplaySingle(Display* const dobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotTexturesStream (base::PairStream* const obj)
 {
-   bool ok = false;
+   bool ok {};
    if (obj != nullptr) {
       // When a PairStream (i.e., more than one, a list) of displays
       if (textures != nullptr) textures->unref();
@@ -1616,7 +1616,7 @@ bool Display::setSlotTexturesStream (base::PairStream* const obj)
 //------------------------------------------------------------------------------
 bool Display::setSlotTexturesSingle(Texture* const obj)
 {
-   bool ok = false;
+   bool ok {};
    if (obj != nullptr) {
       if (textures != nullptr) textures->unref();
 
@@ -1641,7 +1641,7 @@ bool Display::setSlotStdLineWidth(const base::Number* const obj)
 //------------------------------------------------------------------------------
 bool Display::setSlotClearColor(const base::Color* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setClearColor(*msg);
       ok = true;
@@ -1654,9 +1654,9 @@ bool Display::setSlotClearColor(const base::Color* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotLeftBracketCharacter(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int num = msg->getInt();
+      int num {msg->getInt()};
       if (std::isalnum(num)) {
          setLeftBracketCharacter(char(num));
          ok = true;
@@ -1667,9 +1667,9 @@ bool Display::setSlotLeftBracketCharacter(const base::Number* const msg)
 
 bool Display::setSlotLeftBracketCharacter(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      const char* str = *msg;
+      const char* str {*msg};
       if (str != nullptr) {
          setLeftBracketCharacter(str[0]);
          ok = true;
@@ -1683,9 +1683,9 @@ bool Display::setSlotLeftBracketCharacter(const base::String* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotRightBracketCharacter(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int num = msg->getInt();
+      int num {msg->getInt()};
       if (std::isalnum(num)) {
          setRightBracketCharacter(char(num));
          ok = true;
@@ -1696,9 +1696,9 @@ bool Display::setSlotRightBracketCharacter(const base::Number* const msg)
 
 bool Display::setSlotRightBracketCharacter(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      const char* str = *msg;
+      const char* str {*msg};
       if (str != nullptr) {
          setRightBracketCharacter(str[0]);
          ok = true;
@@ -1712,7 +1712,7 @@ bool Display::setSlotRightBracketCharacter(const base::String* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotReverseVideoBrackets(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setReverseVideoBrackets(msg->getBoolean());
    }
@@ -1724,7 +1724,7 @@ bool Display::setSlotReverseVideoBrackets(const base::Number* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotClearDepth(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setClearDepth(msg->getReal());
       ok = true;
@@ -1738,7 +1738,7 @@ bool Display::setSlotClearDepth(const base::Number* const msg)
 //------------------------------------------------------------------------------
 bool Display::setSlotDisplayOrientation(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (*msg == "normal")        { setDisplayOrientation(NORMAL);   ok = true; }
    else if (*msg == "cw90")     { setDisplayOrientation(CW90);     ok = true; }
    else if (*msg == "ccw90")    { setDisplayOrientation(CCW90);    ok = true; }
@@ -1753,9 +1753,9 @@ bool Display::setSlotDisplayOrientation(const base::String* const msg)
 //------------------------------------------------------------------------------
 bool Display::processSubdisplays()
 {
-   bool ok = true;
+   bool ok {true};
    if (subdisplays != nullptr) {
-      const base::List::Item* item = subdisplays->getFirstItem();
+      const base::List::Item* item {subdisplays->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1781,9 +1781,9 @@ bool Display::processSubdisplays()
 //------------------------------------------------------------------------------
 bool Display::processTextures()
 {
-   bool ok = true;
+   bool ok {true};
    if (textures != nullptr) {
-      const base::List::Item* item = textures->getFirstItem();
+      const base::List::Item* item {textures->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1806,9 +1806,9 @@ bool Display::processTextures()
 //------------------------------------------------------------------------------
 bool Display::processMaterials()
 {
-   bool ok = true;
+   bool ok {true};
    if (materials != nullptr) {
-      const base::List::Item* item = materials->getFirstItem();
+      const base::List::Item* item {materials->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1893,11 +1893,11 @@ void Display::configure()
 void Display::loadTextures()
 {
    if (textures != nullptr) {
-      const base::List::Item* item = textures->getFirstItem();
+      const base::List::Item* item {textures->getFirstItem()};
       while (item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
-         Texture* g = static_cast<Texture*>(p->object());
+         Texture* g {static_cast<Texture*>(p->object())};
          g->loadTexture();
       }
    }
@@ -1910,13 +1910,13 @@ void Display::loadTextures()
 Image* Display::readFrameBuffer(unsigned int* const w, unsigned int* const h)
 {
    // Get Viewport width and height
-   GLsizei vpWidth = 0;
-   GLsizei vpHeight = 0;
+   GLsizei vpWidth {};
+   GLsizei vpHeight {};
    getViewportSize(&vpWidth, &vpHeight);
-   unsigned int width = static_cast<unsigned int>(vpWidth);
-   unsigned int height = static_cast<unsigned int>(vpHeight);
+   unsigned int width {static_cast<unsigned int>(vpWidth)};
+   unsigned int height {static_cast<unsigned int>(vpHeight)};
 
-   Image* image = readFrameBuffer(0, 0, width, height);
+   Image* image {readFrameBuffer(0, 0, width, height)};
 
    if (w != nullptr) *w = width;
    if (h != nullptr) *h = height;
@@ -1928,9 +1928,9 @@ Image* Display::readFrameBuffer(unsigned int* const w, unsigned int* const h)
 //------------------------------------------------------------------------------
 Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, const unsigned int width, const unsigned int height)
 {
-   static const unsigned int MAX_IMAGE_WIDTH  = 2048; // maximum image width
-   static const unsigned int MAX_IMAGE_HEIGHT = 2048; // maximum image height
-   static const unsigned int PIXEL_SIZE = 3; // pixel size in bytes { GL_BGR_EXT }
+   static const unsigned int MAX_IMAGE_WIDTH  {2048}; // maximum image width
+   static const unsigned int MAX_IMAGE_HEIGHT {2048}; // maximum image height
+   static const unsigned int PIXEL_SIZE {3};          // pixel size in bytes { GL_BGR_EXT }
 
    // check input parameters
    if ((width < 1) || (height < 1) || (width > MAX_IMAGE_WIDTH) || (height > MAX_IMAGE_HEIGHT)) {
@@ -1939,8 +1939,8 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
    }
 
    // align width to 4-byte boundary:
-   unsigned int size = (width + 3) / 4;
-   unsigned int w = size * 4;
+   unsigned int size = {(width + 3) / 4};
+   unsigned int w {size * 4};
 
    const auto pixelData = new GLubyte[PIXEL_SIZE * w * height];
    glReadPixels(x, y, w, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixelData);

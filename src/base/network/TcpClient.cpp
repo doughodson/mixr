@@ -64,9 +64,9 @@ void TcpClient::copyData(const TcpClient& org, const bool)
     if (ipAddr != nullptr) delete[] ipAddr;
     ipAddr = nullptr;
     if (org.ipAddr != nullptr) {
-        size_t len = std::strlen(org.ipAddr);
+        const std::size_t len {std::strlen(org.ipAddr)};
         ipAddr = new char[len+1];
-        utStrcpy(ipAddr,(len+1),org.ipAddr);
+        utStrcpy(ipAddr, (len+1), org.ipAddr);
     }
 }
 
@@ -85,7 +85,7 @@ void TcpClient::deleteData()
 bool TcpClient::initNetwork(const bool noWaitFlag)
 {
     noWait = noWaitFlag;
-    bool ok = BaseClass::initNetwork(false);
+    bool ok {BaseClass::initNetwork(false)};
     if (ok) {
         ok = connectToServer();
         if (!ok && isMessageEnabled(MSG_ERROR)) {
@@ -101,7 +101,7 @@ bool TcpClient::initNetwork(const bool noWaitFlag)
 bool TcpClient::init()
 {
    // Init the base class
-   bool success = BaseClass::init();
+   bool success {BaseClass::init()};
    if (!success) return false;
 
    // Find our network address
@@ -120,7 +120,7 @@ bool TcpClient::bindSocket()
    // ---
    // Our base class will bind the socket
    // ---
-   bool ok = BaseClass::bindSocket();
+   bool ok {BaseClass::bindSocket()};
 
    if (ok) {
       if (!setSendBuffSize()) return false;

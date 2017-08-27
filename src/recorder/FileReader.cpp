@@ -105,7 +105,7 @@ bool FileReader::openFile()
       //---
       // Allocate space for the full file name
       //---
-      size_t nameLength = 0;
+      std::size_t nameLength = 0;
       if (pathname != nullptr) {
          nameLength += pathname->len();     // add the length of the path name
          nameLength += 1;                         // add a character for the slash

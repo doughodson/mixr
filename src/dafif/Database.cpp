@@ -307,7 +307,7 @@ bool Database::setSlotFilename(base::String* const msg)
 // Single query -- when you want only a single instance of a record that
 // matches the key.
 int Database::sQuery(Key** key, Key** base,
-                            size_t n, int (*cmp)(const void*, const void*))
+                            std::size_t n, int (*cmp)(const void*, const void*))
 {
    nql = 0;
    // search the record list for matches and sort by range
@@ -325,7 +325,7 @@ int Database::sQuery(Key** key, Key** base,
 
 // Multi-query -- when you want the full range of records that match the key.
 int Database::mQuery(Key** key, Key** base,
-                            size_t n, int (*cmp)(const void*, const void*))
+                            std::size_t n, int (*cmp)(const void*, const void*))
 {
    nql = 0;
 
@@ -366,7 +366,7 @@ int Database::queryByIcao(const char* code)
 //------------------------------------------------------------------------------
 void Database::expandResults(Key** key, Key** keyPtr,
                                     int (*cmp)(const void*, const void*),
-                                    Key** base, size_t n)
+                                    Key** base, std::size_t n)
 {
    // Look for the bottom end
    Key** b = keyPtr - 1;

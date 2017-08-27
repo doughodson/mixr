@@ -933,13 +933,13 @@ struct TransmitterPDU {
 
    uint8_t* getModulationData() {
       uint8_t* p = reinterpret_cast<uint8_t*>(this);
-      size_t offset = sizeof(TransmitterPDU);
+      std::size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
 
    const uint8_t* getModulationData() const {
       auto p = reinterpret_cast<const uint8_t*>(this);
-      size_t offset = sizeof(TransmitterPDU);
+      std::size_t offset = sizeof(TransmitterPDU);
       return &p[offset];
    };
 

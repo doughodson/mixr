@@ -201,7 +201,7 @@ public:
    static float  dsFrequency(const char* const p);    // convert string to frequency  (MHz)
 
 protected:
-   const char* makePointer(const size_t offset) const;
+   const char* makePointer(const std::size_t offset) const;
    void resetData();
 
    // ---

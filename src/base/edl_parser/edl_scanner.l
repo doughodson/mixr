@@ -225,10 +225,10 @@ FALSE   {
            // literal string (i.e., in double quotes): "hi there"
            // return STRING without quotes
            //-----------------------------------------------------------------------------
-           size_t slen = std::strlen(yytext)+1;
+           std::size_t slen = std::strlen(yytext)+1;
            yylval.cvalp = new char[slen];
-           utStrcpy(yylval.cvalp,slen,yytext+1);
-           yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
+           utStrcpy(yylval.cvalp, slen, yytext+1);
+           yylval.cvalp[std::strlen(yylval.cvalp)-1] = 0;
            return STRING_LITERAL;
         }
 
@@ -237,10 +237,10 @@ FALSE   {
            // literal string (i.e., in brackets): <hi there>
            // return STRING without quotes
            //-----------------------------------------------------------------------------
-           size_t slen = std::strlen(yytext)+1;
+           std::size_t slen = std::strlen(yytext)+1;
            yylval.cvalp = new char[slen];
-           utStrcpy(yylval.cvalp,slen,yytext+1);
-           yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
+           utStrcpy(yylval.cvalp, slen, yytext + 1);
+           yylval.cvalp[std::strlen(yylval.cvalp) -1 ] = 0;
            return STRING_LITERAL;
         }
 
@@ -248,10 +248,10 @@ FALSE   {
            //-----------------------------------------------------------------------------
            // slot-id is one or more legal characters followed by a ':'
            //-----------------------------------------------------------------------------
-           size_t slen = std::strlen(yytext)+1;
+           std::size_t slen = std::strlen(yytext)+1;
            yylval.cvalp = new char[slen];
-           utStrcpy(yylval.cvalp,slen,yytext);
-           yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
+           utStrcpy(yylval.cvalp, slen, yytext);
+           yylval.cvalp[std::strlen(yylval.cvalp) - 1] = 0; // remove the :
            return SLOT_ID;
         }
 
@@ -259,9 +259,9 @@ FALSE   {
            //-----------------------------------------------------------------------------
            // ident: one or more legal characters
            //-----------------------------------------------------------------------------
-           size_t slen = std::strlen(yytext)+1;
+           std::size_t slen = std::strlen(yytext)+1;
            yylval.cvalp = new char[slen];
-           utStrcpy(yylval.cvalp,slen,yytext);
+           utStrcpy(yylval.cvalp, slen, yytext);
            return IDENT;
         }
 

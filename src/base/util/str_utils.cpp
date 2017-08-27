@@ -13,18 +13,18 @@ namespace base {
 //------------
 void utInteger2Str(const int num, char* const str, int width)
 {
-   const int MAX_CHARS = 32;
+   const int MAX_CHARS {32};
 
    // check sign
-   const bool isNeg = (num < 0);
+   const bool isNeg {num < 0};
 
    // Abs value of the number
-   int tnum = num;
+   int tnum {num};
    if (isNeg) tnum = -num;
 
    // Convert to a string (reverse order)
-   char temp[MAX_CHARS];
-   int nc = 0;
+   char temp[MAX_CHARS] {};
+   int nc {};
    do {
       temp[nc++] = char(tnum % 10 + static_cast<int>('0'));
       tnum = tnum / 10;
@@ -36,7 +36,7 @@ void utInteger2Str(const int num, char* const str, int width)
    }
 
    // pad with blanks
-   int nBlanks = (width - nc);
+   int nBlanks {width - nc};
    if (nBlanks < 0) nBlanks = 0;
    for (int i = 0; i < nBlanks; i++) {
       str[i] = ' ';
@@ -54,14 +54,14 @@ void utInteger2Str(const int num, char* const str, int width)
 // destination buffer, 'strDest'.  The destination string is null terminated.
 // The 'strSource' string will be truncated if the 'strDest' string is too small.
 //------------
-bool utStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcpy(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // Max characters to copy
-   const size_t maxToCopy = sizeOfDest - 1;
+   const std::size_t maxToCopy {sizeOfDest - 1};
 
    // Set our working pointers
    char* q = strDest;
@@ -81,14 +81,14 @@ bool utStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
 // is null terminated.  The 'strSource' string will be truncated if the 'strDest'
 // string is too small.
 //------------
-bool utStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool utStrncpy(char* const strDest, const std::size_t sizeOfDest, const char* const strSource, const std::size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // Max characters to copy
-   size_t maxToCopy = sizeOfDest - 1;
+   std::size_t maxToCopy {sizeOfDest - 1};
    if (count < maxToCopy) maxToCopy = count;
 
    // Set our working pointers
@@ -96,7 +96,7 @@ bool utStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
    const char* p = strSource;
 
    // Everything looks good, copy...
-   size_t idx = 0;
+   std::size_t idx {};
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
@@ -110,7 +110,7 @@ bool utStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
 // pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
 // is returned and the destination buffer is unchanged.
 //------------
-bool utStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcat(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -121,10 +121,10 @@ bool utStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
    const char* p = strSource;
 
    // Max characters to the destination buffer
-   const size_t maxToCopy = sizeOfDest - 1;
+   const std::size_t maxToCopy {sizeOfDest - 1};
 
    // Forward to the end of the current destination string
-   size_t idx = 0;
+   std::size_t idx {};
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
    // if we have a terminated string ...
@@ -147,25 +147,25 @@ bool utStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
 // If the destination buffer is too small then false is returned and the destination buffer
 // is unchanged.
 //------------
-bool utStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcpyFull(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // do we have space for the full string plus termination?
-   const size_t srcSize = std::strlen(strSource);
+   const std::size_t srcSize {std::strlen(strSource)};
    if (sizeOfDest < (srcSize+1)) return false;
 
    // Max characters to copy
-   const size_t maxToCopy = sizeOfDest - 1;
+   const std::size_t maxToCopy {sizeOfDest - 1};
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q {strDest};
+   const char* p {strSource};
 
    // Everything looks good, copy...
-   size_t idx = 0;
+   std::size_t idx {};
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
@@ -178,7 +178,7 @@ bool utStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
 // terminated.   If the destination buffer is too small then false is returned and the
 // destination buffer is unchanged.
 //------------
-bool utStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool utStrncpyFull(char* const strDest, const std::size_t sizeOfDest, const char* const strSource, const std::size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -188,15 +188,15 @@ bool utStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* con
    if (sizeOfDest < (count+1)) return false;
 
    // Max characters to copy
-   size_t maxToCopy = sizeOfDest - 1;
+   std::size_t maxToCopy {sizeOfDest - 1};
    if (count < maxToCopy) maxToCopy = count;
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q {strDest};
+   const char* p {strSource};
 
    // Everything looks good, copy...
-   size_t idx = 0;
+   std::size_t idx {};
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 
@@ -210,28 +210,28 @@ bool utStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* con
 // null-terminated, or if 'strSource' is a null pointer then false is returned and the
 // destination buffer is unchanged.
 //------------
-bool utStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcatFull(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
    }
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q {strDest};
+   const char* p {strSource};
 
    // Max characters to the destination buffer
-   const size_t maxToCopy = sizeOfDest - 1;
+   const std::size_t maxToCopy {sizeOfDest - 1};
 
    // Forward to the end of the current destination string
-   size_t idx = 0;
+   std::size_t idx {};
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
    // do we have space for the full string plus termination?
-   const size_t srcSize = std::strlen(strSource);
+   const std::size_t srcSize {std::strlen(strSource)};
 
    // if we have room for both strings ...
-   bool ok = ((idx+srcSize) <= maxToCopy);
+   bool ok {((idx+srcSize) <= maxToCopy)};
    if (ok) {
 
       // Back space for the original string's null character
@@ -254,8 +254,8 @@ int utStrcasecmp(const char* const s1, const char* const s2)
    if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
    if (s1 == nullptr && s2 != nullptr) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
 
-   const char* p1 = s1;
-   const char* p2 = s2;
+   const char* p1 {s1};
+   const char* p2 {s2};
    while (*p1 != '\0' && *p2 != '\0') {
       int c1 = std::tolower(static_cast<int>(*p1++));
       int c2 = std::tolower(static_cast<int>(*p2++));
@@ -271,15 +271,15 @@ int utStrcasecmp(const char* const s1, const char* const s2)
 //------------
 // Compare the first 'n' characters of two strings ignoring case (using lower case characters)
 //------------
-int utStrncasecmp(const char* const s1, const char* const s2, const size_t n)
+int utStrncasecmp(const char* const s1, const char* const s2, const std::size_t n)
 {
    if ( (s1 == nullptr && s2 == nullptr) || n == 0) return 0;  // They're the same if they both don't exist
    if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
    if (s1 == nullptr && s2 != nullptr) return -1;  // S1 is less than S2 if S1 doesn't exist and S2 does
 
-   const char* p1 = s1;
-   const char* p2 = s2;
-   size_t icnt = 0;
+   const char* p1 {s1};
+   const char* p2 {s2};
+   std::size_t icnt {};
    while (*p1 != '\0' && *p2 != '\0' && icnt++ < n) {
       int c1 = std::tolower(static_cast<int>(*p1++));
       int c2 = std::tolower(static_cast<int>(*p2++));

@@ -121,7 +121,7 @@ namespace graphics {
 //
 //
 // Protected functions:
-//      int xferChars(char* outp, size_t outpSize, char* inp, int n)
+//      int xferChars(char* outp, std::size_t outpSize, char* inp, int n)
 //        Transfers n characters of inp to outp and returns the size of outp.
 //
 //      ftgl(void* p)
@@ -134,7 +134,7 @@ class Font : public base::Object
     DECLARE_SUBCLASS(Font, base::Object)
 
 public:
-    static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers
+    static const std::size_t MAX_MESSAGE_LENGTH {256}; // Max length of character buffers
 
 public:
     Font();
@@ -188,8 +188,8 @@ public:
 
 protected:
 
-    static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers
-    int xferChars(char* const outp, const size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
+    static const std::size_t MSG_BUF_LEN {MAX_MESSAGE_LENGTH+1}; // Max length of character buffers
+    int xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
 
     GLdouble leftSide {0.0}, topSide {0.0};             // Origin: upper left corner of ln=1, cp=1
     void ftgl(void* p)                                  { pFTGL = p; }

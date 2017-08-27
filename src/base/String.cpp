@@ -57,11 +57,11 @@ void String::deleteData()
 //------------------------------------------------------------------------------
 // setString() --
 //------------------------------------------------------------------------------
-void String::setString(const String& origStr, const size_t w, const Justify j)
+void String::setString(const String& origStr, const std::size_t w, const Justify j)
 {
-   char sbuf[MAX_STRING_LENGTH+1];  // Source buffer
-   char dbuf[MAX_STRING_LENGTH+1];  // Destination buffer
-   const char* ss = sbuf;           // Pointer to source buffer
+   char sbuf[MAX_STRING_LENGTH+1] {};  // Source buffer
+   char dbuf[MAX_STRING_LENGTH+1] {};  // Destination buffer
+   const char* ss {sbuf};              // Pointer to source buffer
 
 
    // ---
@@ -98,13 +98,13 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
    // Set this to the new string justified
    // ---
 
-   int i1 = 0;                                         // Source index
-   int i2 = 0;                                         // Destination index
-   int l1 = static_cast<int>(std::strlen(ss));         // Source string length
+   int i1 {};                                          // Source index
+   int i2 {};                                          // Destination index
+   int l1 {static_cast<int>(std::strlen(ss))};         // Source string length
    if (l1 > MAX_STRING_LENGTH) l1 = MAX_STRING_LENGTH;
    int l2 = static_cast<int>(w);                       // Destination string length
    if (l2 > MAX_STRING_LENGTH) l2 = MAX_STRING_LENGTH;
-   int d = l2 - l1;                                    // Difference in lengths
+   int d {l2 - l1};                                    // Difference in lengths
 
    switch (j) {
 
@@ -145,13 +145,13 @@ void String::setString(const String& origStr, const size_t w, const Justify j)
 // getSubString() -- Returns in "subStr" a "numChars" character sub-string
 //                   of 'this' string that starts a "startIndex"
 //------------------------------------------------------------------------------
-bool String::getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const
+bool String::getSubString(String& subStr, const unsigned int startIndex, const std::size_t numChars) const
 {
-   if(startIndex > (n - 1))
+   if (startIndex > (n - 1))
       return false;
 
    size_t maxChars = 0;
-   if((startIndex + numChars) > n)
+   if ((startIndex + numChars) > n)
       maxChars = (n - startIndex);
    else
       maxChars = numChars;
@@ -173,7 +173,7 @@ void String::setStr(const char* string)
 {
    // copy the new text string
    if (string != nullptr) {
-      size_t l = std::strlen(string);
+      std::size_t l {std::strlen(string)};
       if (l >= nn || str == nullptr) {
          if (str != nullptr) delete[] str;
          nn = (l+1);
@@ -204,15 +204,15 @@ void String::catStr(const char* s)
    }
 
    // Have new text to append to the original text
-   size_t l = n + std::strlen(s);
+   std::size_t l {n + std::strlen(s)};
    if (l >= nn) {
-      char* t = str;
+      char* t {str};
       nn = (l+1);
       str = new char[nn];
       utStrcpy(str,nn,t);
       delete[] t;
    }
-   utStrcat(str,nn,s);
+   utStrcat(str, nn, s);
    n = l;
 }
 

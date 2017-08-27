@@ -62,22 +62,22 @@ char DirectionReadout::filterInputEvent(const int event, const int tc)
 //------------------------------------------------------------------------------
 double DirectionReadout::getInputValue() const
 {
-   double value = 0.0;
+   double value {};
 
    // copy string to buffer with correct sign character
-   const size_t CBUFLOCAL_LEN = 100;
-   char cbuf[CBUFLOCAL_LEN];
-   const char* p = *this;
-   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   const std::size_t CBUFLOCAL_LEN {100};
+   char cbuf[CBUFLOCAL_LEN] {};
+   const char* p {*this};
+   base::utStrcpy(cbuf, CBUFLOCAL_LEN, p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
    switch (tmode) {
 
       case ddmmss : {   // Degrees, Minutes, and seconds
-         double degs = 0.0;
-         double min = 0.0;
-         double sec = 0.0;
+         double degs {};
+         double min {};
+         double sec {};
          std::sscanf(cbuf, "%lf@%lf'%lf", &degs, &min, &sec);
          min += sec/60.0f;
          if (degs >= 0.0) value = degs + min/60.0f;
@@ -86,8 +86,8 @@ double DirectionReadout::getInputValue() const
       break;
 
       case ddmm : { // Degrees and minutes
-         double degs = 0.0;
-         double min = 0.0;
+         double degs {};
+         double min {};
          std::sscanf(cbuf, "%lf@%lf", &degs, &min);
          if (degs >= 0.0) value = degs + min/60.0f;
          else value = degs - min/60.0f;
@@ -107,8 +107,8 @@ double DirectionReadout::getInputValue() const
 //------------------------------------------------------------------------------
 void DirectionReadout::makeText()
 {
-   bool neg = false;
-   double degrees = getFloat();
+   bool neg {};
+   double degrees {getFloat()};
    if (degrees < 0.0) {
       degrees = -degrees;
       neg = true;
@@ -117,18 +117,18 @@ void DirectionReadout::makeText()
    switch (tmode) {
 
       case ddmmss : { // Degrees, Minutes, and seconds
-         int     ideg = static_cast<int>(degrees);
-         double  min = (degrees - static_cast<double>(ideg))*60.0f;
-         int     imin = static_cast<int>(min);
-         double sec = (min - static_cast<double>(imin))*60.0f;
+         int     ideg {static_cast<int>(degrees)};
+         double  min  {(degrees - static_cast<double>(ideg))*60.0};
+         int     imin {static_cast<int>(min)};
+         double sec {(min - static_cast<double>(imin))*60.0};
          if (neg) ideg = -ideg;
          std::sprintf(cbuf, format, ideg, imin, sec);
       }
       break;
 
       case ddmm : {   // Degrees and minutes
-         int     ideg = static_cast<int>(degrees);
-         double  min  = (degrees - static_cast<double>(ideg))*60.0f;
+         int     ideg {static_cast<int>(degrees)};
+         double  min  {(degrees - static_cast<double>(ideg))*60.0};
          if (neg) ideg = -ideg;
          std::sprintf(cbuf, format, ideg, min);
       }
@@ -144,7 +144,7 @@ void DirectionReadout::makeText()
 
    // then turn any '@' characters to degree symbols.
    {
-      size_t len = std::strlen(cbuf);
+      std::size_t len {std::strlen(cbuf)};
       for (unsigned int i = 0; i < len; i++) {
          if (cbuf[i] == '@') cbuf[i] = static_cast<char>(0xB0);
       }

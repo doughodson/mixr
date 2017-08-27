@@ -48,10 +48,10 @@ namespace graphics {
 //  int column()
 //      Sets the column number.
 //
-//  size_t width()
+//  std::size_t width()
 //      Returns the field width.
 //
-//  size_t width(size_t t)
+//  std::size_t width(size_t t)
 //      Sets and returns the field width to size t.
 //
 //  Mode getMode()
@@ -203,8 +203,8 @@ public:
    virtual int column(const int cc);
    virtual int column() const;
 
-   size_t width() const                   { return w; }
-   size_t width(const size_t t)           { w = t; adjust(); return w; }
+   std::size_t width() const              { return w; }
+   std::size_t width(const size_t t)      { w = t; adjust(); return w; }
 
    Mode getMode() const                   { return mode; }
    Mode setMode(const Mode newMode);
@@ -288,10 +288,10 @@ protected:
 private:
    void adjust()  { str.setString(origStr, w, jmode); }
 
-   int      ln {};                     // Line this field is on
-   int      cp {};                     // Starting character position of field
-   size_t   w {};                      // Width of the field
-   bool     linked {};                 // Linked field (on input)
+   int          ln {};                 // Line this field is on
+   int          cp {};                 // Starting character position of field
+   std::size_t  w {};                  // Width of the field
+   bool         linked {};             // Linked field (on input)
    unsigned int startCP {};            // our starting character position that we "write" from
 
    int      dmode {};                  // Display mode flags

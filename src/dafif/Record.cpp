@@ -241,7 +241,7 @@ bool Record::isCycleDate(const char date[]) const
 //------------------------------------------------------------------------------
 // makePointer: make a pointer to the string starting at record column 'n'
 //------------------------------------------------------------------------------
-const char* Record::makePointer(const size_t n) const
+const char* Record::makePointer(const std::size_t n) const
 {
    const char* p = nullptr;
    if (len() != 0) {
@@ -302,7 +302,7 @@ double Record::dsAtofn(const char* const s, const int n)
    if (s == nullptr) return 0.0f;
    if (*s == 'U') return 0.0f;
 
-   const size_t BUF_LENGTH = 256;
+   const std::size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
    base::utStrncpy(buf, BUF_LENGTH, s, n);
@@ -320,7 +320,7 @@ long Record::dsAtoln(const char* const s, const int n)
    if (s == nullptr) return 0;
    if (*s == 'U') return 0;
 
-   const size_t BUF_LENGTH = 256;
+   const std::size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
    base::utStrncpy(buf, BUF_LENGTH, s, n);
@@ -365,7 +365,7 @@ void Record::dsGetString(char* const d, const char* const s, const int n)
 //------------------------------------------------------------------------------
 bool Record::dsIsString(const char* const p, const char* const refStr)
 {
-   size_t len;
+   std::size_t len;
    if (p == nullptr || refStr == nullptr) return false;
    len = std::strlen(refStr);
    return std::strncmp(p,refStr,len) == 0;
@@ -376,14 +376,14 @@ bool Record::dsIsString(const char* const p, const char* const refStr)
 //------------------------------------------------------------------------------
 double Record::dsLatitude(const char* const p)
 {
-   double lat = 0.0f;
+   double lat {};
    if (p != nullptr) {
-      char   h = *p;
-      double d = dsAtofn(p+1, 2);
-      double m = dsAtofn(p+3, 2);
-      double s = dsAtofn(p+5, 2);
-      double f = dsAtofn(p+7, 2);
-      double v = d + m / 60.0 + (s + f / 100.0) / 3600.0;
+      char   h {*p};
+      double d {dsAtofn(p+1, 2)};
+      double m {dsAtofn(p+3, 2)};
+      double s {dsAtofn(p+5, 2)};
+      double f {dsAtofn(p+7, 2)};
+      double v {d + m / 60.0 + (s + f / 100.0) / 3600.0};
       lat = (h == 'N' ? v : -v);
    }
    return lat;

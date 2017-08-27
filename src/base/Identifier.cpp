@@ -26,7 +26,7 @@ Identifier::Identifier(const char* string) : String()
 //------------------------------------------------------------------------------
 void Identifier::setStr(const char* string)
 {
-   size_t len = 0;
+   std::size_t len {};
    if (string != nullptr) len = std::strlen(string);
 
    // copy the string and replace any spaces
@@ -62,7 +62,7 @@ void Identifier::catStr(const char* s)
    }
 
    // replace any spaces
-   size_t len = std::strlen(s);
+   std::size_t len = std::strlen(s);
    const auto newStr = new char[len+1];
    for (unsigned int i = 0; i < len; i++) {
       if (s[i] == ' ') newStr[i] = '_';
@@ -78,7 +78,7 @@ void Identifier::catStr(const char* s)
 //------------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& sout, const Identifier& ident)
 {
-    const char* s = ident;
+    const char* s {ident};
     sout << s;
     return sout;
 }

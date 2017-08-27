@@ -43,13 +43,13 @@ char HexReadout::filterInputEvent(const int event, const int tc)
 //------------------------------------------------------------------------------
 double HexReadout::getInputValue() const
 {
-   int value = 0;
+   int value {};
 
    // copy string to buffer with correct sign character
-   const size_t CBUFLOCAL_LEN = 100;
-   char cbuf[CBUFLOCAL_LEN];
-   const char* p = *this;
-   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   const std::size_t CBUFLOCAL_LEN {100};
+   char cbuf[CBUFLOCAL_LEN] {};
+   const char* p {*this};
+   base::utStrcpy(cbuf, CBUFLOCAL_LEN, p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 

@@ -27,8 +27,8 @@ void swap(unsigned char* ptr, int count)
 // ----------------------------------------------------------------
 char* stringToLowercase(char* str)
 {
-    size_t len = std::strlen(str);
-    for (size_t i = 0; i < len; i++) {
+    std::size_t len = std::strlen(str);
+    for (std::size_t i = 0; i < len; i++) {
         if (isascii(str[i]) && std::isalpha(str[i])) str[i] = std::tolower(str[i]);
     }
 
