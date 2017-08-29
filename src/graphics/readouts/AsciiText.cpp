@@ -11,7 +11,6 @@ IMPLEMENT_SUBCLASS(AsciiText, "AsciiText")
 EMPTY_COPYDATA(AsciiText)
 EMPTY_DELETEDATA(AsciiText)
 
-// Slot table
 BEGIN_SLOTTABLE(AsciiText)
    "text",             // Text String
 END_SLOTTABLE(AsciiText)

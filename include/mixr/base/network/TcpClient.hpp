@@ -36,9 +36,6 @@ class TcpClient : public TcpHandler
 public:
     TcpClient();
 
-    // Slot functions
-    virtual bool setSlotIpAddress(const String* const msg);
-
     virtual bool initNetwork(const bool noWaitFlag) override;
 
 protected:
@@ -51,6 +48,10 @@ protected:
 
 private:
     char* ipAddr {};                // IP Address
+
+private:
+    // slot table helper methods
+    bool setSlotIpAddress(const String* const);
 };
 
 }

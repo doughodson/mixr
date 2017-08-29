@@ -44,13 +44,14 @@ public:
 
    virtual void loadTexture() override;
 
-protected:
-   bool setSlotTexturePath(base::String* const s);
-   bool setSlotTextureFileName(base::String* const s);
-
 private:
    char texPath[MAX_PATH_LEN+1] {};       // Path to texture directory
    char texFile[MAX_FILENAME_LEN+1] {};   // BmpTexture filename
+
+private:
+   // slot table helper methods
+   bool setSlotTexturePath(base::String* const);
+   bool setSlotTextureFileName(base::String* const);
 };
 
 //------------------------------------------------------------------------------

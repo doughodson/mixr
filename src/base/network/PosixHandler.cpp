@@ -21,7 +21,7 @@
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
@@ -32,7 +32,6 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")
 
-// Slot Table
 BEGIN_SLOTTABLE(PosixHandler)
     "localIpAddress",       // 1) String containing the local host's name or its IP
                             //    address in the Internet standard "." (dotted) notation.
@@ -45,7 +44,6 @@ BEGIN_SLOTTABLE(PosixHandler)
     "ignoreSourcePort",     // 7) Ignore message from this source port
 END_SLOTTABLE(PosixHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PosixHandler)
     ON_SLOT(1, setSlotLocalIpAddress,   String)
     ON_SLOT(2, setSlotLocalPort,        Number)

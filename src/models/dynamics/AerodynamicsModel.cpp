@@ -6,7 +6,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
+IMPLEMENT_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
+EMPTY_SLOTTABLE(AerodynamicsModel)
 EMPTY_DELETEDATA(AerodynamicsModel)
 
 AerodynamicsModel::AerodynamicsModel()

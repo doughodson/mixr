@@ -30,7 +30,7 @@ class String : public Object
 
 public:
     enum Justify { NONE, LEFT, RIGHT, CENTER };
-    static const unsigned int MAX_STRING_LENGTH = 512; /* used only by setString() */
+    static const int MAX_STRING_LENGTH {512};   // only by setString()
 
 public:
     String(const char* string);
@@ -42,7 +42,7 @@ public:
     String& operator=(const char*);
     void operator+=(const char*);
 
-    size_t len() const;                            // Returns the length of this string.
+    std::size_t len() const;                       // Returns the length of this string.
     bool isEmpty() const;                          // Returns true if this string is empty (null).
 
     const char* getString() const;                 // Returns a pointer to the text string.
@@ -67,16 +67,16 @@ public:
     int getInteger() const;
 
     // Returns in "subStr" a "numChars" character sub-string of 'this' string that starts a "startIndex"
-    bool getSubString(String& subStr, const unsigned int startIndex, const size_t numChars) const;
+    bool getSubString(String& subStr, const unsigned int startIndex, const std::size_t numChars) const;
 
     // Set to the first 'w' characters of 'str'.
     // If the length of 'str' is less than 'w', than justify as 'j'.
-    virtual void setString(const String& str, const size_t w, const Justify j = NONE);
+    virtual void setString(const String& str, const std::size_t w, const Justify j = NONE);
 
 private:
-    char* str {};      // the character string
-    size_t n {};       // length of this string
-    size_t nn {};      // length of the memory allocated for this string
+    char* str {};         // the character string
+    std::size_t n {};     // length of this string
+    std::size_t nn {};    // length of the memory allocated for this string
 };
 
 //------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ inline String::operator const char*() const
 //------------------------------------------------------------------------------
 // len() -- returns the length of this string.
 //------------------------------------------------------------------------------
-inline size_t String::len() const
+inline std::size_t String::len() const
 {
     return n;
 }
@@ -161,8 +161,8 @@ inline const char* String::getString() const
 //------------------------------------------------------------------------------
 inline char* String::getCopyString() const
 {
-    char* p = nullptr;
-    size_t l = len();
+    char* p {};
+    std::size_t l {len()};
     if (l > 0) {
         p = new char[l+1];
         utStrcpy(p,(l+1),str);
@@ -220,7 +220,7 @@ inline double String::getNumber() const
 //------------------------------------------------------------------------------
 inline bool operator==(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then both must be null to be equal
       if (s1.isEmpty() && s2.isEmpty()) ok = true;
@@ -231,7 +231,7 @@ inline bool operator==(const String& s1, const String& s2)
 
 inline bool operator==(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then both must be null to be equal
       if (s1 == nullptr && s2.isEmpty()) ok = true;
@@ -242,7 +242,7 @@ inline bool operator==(const char* s1, const String& s2)
 
 inline bool operator==(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then both must be null to be equal
       if (s1.isEmpty() && s2 == nullptr) ok = true;
@@ -253,7 +253,7 @@ inline bool operator==(const String& s1, const char* s2)
 
 inline bool operator!=(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only one must be null to be not equal
       if (!s1.isEmpty() || !s2.isEmpty()) ok = true;
@@ -264,7 +264,7 @@ inline bool operator!=(const String& s1, const String& s2)
 
 inline bool operator!=(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only one must be null to be not equal
       if (s1 != nullptr || !s2.isEmpty()) ok = true;
@@ -275,7 +275,7 @@ inline bool operator!=(const char* s1, const String& s2)
 
 inline bool operator!=(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only one must be null to be not equal
       if (!s1.isEmpty() || s2 != nullptr) ok = true;
@@ -286,7 +286,7 @@ inline bool operator!=(const String& s1, const char* s2)
 
 inline bool operator<(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only s1 must be null to be less than s2
       if (s1.isEmpty() && !s2.isEmpty()) ok = true;
@@ -297,7 +297,7 @@ inline bool operator<(const String& s1, const String& s2)
 
 inline bool operator<(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only s1 must be null to be less than s2
       if (s1 == nullptr && !s2.isEmpty()) ok = true;
@@ -308,7 +308,7 @@ inline bool operator<(const char* s1, const String& s2)
 
 inline bool operator<(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only s1 must be null to be less than s2
       if (s1.isEmpty() && s2 != nullptr) ok = true;
@@ -319,7 +319,7 @@ inline bool operator<(const String& s1, const char* s2)
 
 inline bool operator<=(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then s1 must be null to be less than or equal s2.
       if (s1.isEmpty()) ok = true;
@@ -330,7 +330,7 @@ inline bool operator<=(const String& s1, const String& s2)
 
 inline bool operator<=(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then s1 must be null to be less than or equal s2.
       if (s1 == nullptr) ok = true;
@@ -341,7 +341,7 @@ inline bool operator<=(const char* s1, const String& s2)
 
 inline bool operator<=(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then s1 must be null to be less than or equal s2.
       if (s1.isEmpty()) ok = true;
@@ -352,7 +352,7 @@ inline bool operator<=(const String& s1, const char* s2)
 
 inline bool operator>(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only s2 must be null to be less than s1
       if (!s1.isEmpty() && s2.isEmpty()) ok = true;
@@ -363,7 +363,7 @@ inline bool operator>(const String& s1, const String& s2)
 
 inline bool operator>(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only s2 must be null to be less than s1
       if (s1 != nullptr && s2.isEmpty()) ok = true;
@@ -374,7 +374,7 @@ inline bool operator>(const char* s1, const String& s2)
 
 inline bool operator>(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only s2 must be null to be less than s1
       if (!s1.isEmpty() && s2 == nullptr) ok = true;
@@ -385,7 +385,7 @@ inline bool operator>(const String& s1, const char* s2)
 
 inline bool operator>=(const String& s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then s2 must be null to be less than or equal s1
       if (s2.isEmpty()) ok = true;
@@ -396,7 +396,7 @@ inline bool operator>=(const String& s1, const String& s2)
 
 inline bool operator>=(const char* s1, const String& s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then s2 must be null to be less than or equal s1
       if (s2.isEmpty()) ok = true;
@@ -407,7 +407,7 @@ inline bool operator>=(const char* s1, const String& s2)
 
 inline bool operator>=(const String& s1, const char* s2)
 {
-   bool ok = false;
+   bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then s2 must be null to be less than or equal s1
       if (s2 == nullptr) ok = true;
@@ -435,10 +435,10 @@ inline std::ostream& operator<<(std::ostream& sout, const String& s)
 //------------------------------------------------------------------------------
 inline std::istream& operator>>(std::istream& sin, String& s)
 {
-    const int a = 256;
+    const int a {256};
     const auto buf = new char[a+1];
-    int   n1 = 0;
-    char  c;
+    int   n1 {};
+    char  c {};
 
     sin.get(c);
     while ( (c != '\n') && !sin.eof() && n1 < a) {

@@ -56,15 +56,16 @@ public:
     // called to determine a color based on a given value
     virtual bool determineColor(const double value);
 
-protected:
-    bool setSlotColors(base::PairStream* const newStream);
-    bool setSlotValues(const base::PairStream* const newStream);
-
 private:
     static const unsigned int MAX_VALUES = 50;
     base::PairStream* myColors {};               // our colors (rgba value)
     std::array<double, MAX_VALUES> myValues {};  // our values
     unsigned int numVals {};                     // number of values
+
+private:
+    // slot table helper methods
+    bool setSlotColors(base::PairStream* const);
+    bool setSlotValues(const base::PairStream* const);
 };
 
 }

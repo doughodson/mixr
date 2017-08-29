@@ -2,13 +2,14 @@
 #include "mixr/graphics/readouts/Rotary.hpp"
 
 #include "mixr/graphics/Graphic.hpp"
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary, "Rotary")
+IMPLEMENT_SUBCLASS(Rotary, "Rotary")
+EMPTY_SLOTTABLE(Rotary)
 EMPTY_COPYDATA(Rotary)
 EMPTY_DELETEDATA(Rotary)
 
@@ -28,7 +29,7 @@ Rotary::Rotary()
 void Rotary::draw()
 {
    if (preDrawSelectList) {
-      int start = 1;
+      int start {1};
       base::Pair* p = findByIndex(start);
       while (p != nullptr) {
          const auto g = dynamic_cast<graphics::Graphic*>(p->object());

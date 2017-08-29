@@ -4,7 +4,7 @@
 
 #include "mixr/base/Referenced.hpp"
 
-// framework configuration file
+// platform configuration file
 #include "mixr/config.hpp"
 // keep this include to correct a bug in vs2012 compiler intrinsics
 #include "mixr/base/util/platform_api.hpp"

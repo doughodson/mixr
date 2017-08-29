@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_numbers_Integer_H__
-#define __mixr_base_numbers_Integer_H__
+#ifndef __mixr_base_numeric_Integer_H__
+#define __mixr_base_numeric_Integer_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 namespace mixr {

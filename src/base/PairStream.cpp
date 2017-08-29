@@ -7,7 +7,8 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PairStream, "PairStream")
+IMPLEMENT_SUBCLASS(PairStream, "PairStream")
+EMPTY_SLOTTABLE(PairStream)
 EMPTY_COPYDATA(PairStream)
 EMPTY_DELETEDATA(PairStream)
 

@@ -62,15 +62,16 @@ public:
          const uint16_t port        // Destination port (this packet only)
       );
 
-   // Slot functions
-   virtual bool setSlotIpAddress(const String* const msg);
-
 protected:
    virtual bool init() override;
    virtual bool bindSocket() override;
 
 private:
    char* ipAddr {};   // Host's name or IP Address
+
+private:
+   // slot table helper methods
+   bool setSlotIpAddress(const String* const);
 };
 
 }

@@ -5,7 +5,8 @@
 namespace mixr {
 namespace instruments {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial, "AltitudeDial")
+IMPLEMENT_SUBCLASS(AltitudeDial, "AltitudeDial")
+EMPTY_SLOTTABLE(AltitudeDial)
 EMPTY_DELETEDATA(AltitudeDial)
 
 AltitudeDial::AltitudeDial()

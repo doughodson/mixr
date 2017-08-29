@@ -9,7 +9,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
@@ -19,7 +19,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LifeForm, "LifeForm")
+IMPLEMENT_SUBCLASS(LifeForm, "LifeForm")
+EMPTY_SLOTTABLE(LifeForm)
 
 LifeForm::LifeForm()
 {
@@ -267,11 +268,11 @@ void LifeForm::look(const double up, const double sdws)
 //==============================================================================
 // class InfantryMan - default grunt
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(InfantryMan,"InfantryMan")
+IMPLEMENT_SUBCLASS(InfantryMan, "InfantryMan")
+EMPTY_SLOTTABLE(InfantryMan)
+EMPTY_COPYDATA(InfantryMan)
+EMPTY_DELETEDATA(InfantryMan)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 InfantryMan::InfantryMan()
 {
     STANDARD_CONSTRUCTOR()
@@ -279,26 +280,14 @@ InfantryMan::InfantryMan()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void InfantryMan::copyData(const InfantryMan& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void InfantryMan::deleteData()
-{
-}
-
 //==============================================================================
 // class Parachutist - grunt who jumps out of planes!
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Parachutist,"Parachutist")
+IMPLEMENT_SUBCLASS(Parachutist, "Parachutist")
+EMPTY_SLOTTABLE(Parachutist)
+EMPTY_COPYDATA(Parachutist)
+EMPTY_DELETEDATA(Parachutist)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Parachutist::Parachutist()
 {
     STANDARD_CONSTRUCTOR()
@@ -306,8 +295,6 @@ Parachutist::Parachutist()
     setType(&generic);
 }
 
-EMPTY_COPYDATA(Parachutist)
-EMPTY_DELETEDATA(Parachutist)
 */
 }
 }

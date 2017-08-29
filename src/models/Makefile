@@ -102,9 +102,9 @@ clean:
 	-rm -f dynamics/*.o
 	-rm -f environment/*.o
 	-rm -f navigation/*.o
-	-rm -f players/*.o
-	-rm -f sensors/*.o
-	-rm -f systems/*.o
+	-rm -f player/*.o
+	-rm -f sensor/*.o
+	-rm -f system/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
 

@@ -12,7 +12,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(TimeReadout, "TimeReadout")
+IMPLEMENT_SUBCLASS(TimeReadout, "TimeReadout")
+EMPTY_SLOTTABLE(TimeReadout)
 EMPTY_DELETEDATA(TimeReadout)
 
 TimeReadout::TimeReadout()
@@ -55,18 +56,18 @@ double TimeReadout::getInputValue() const
    double value = 0.0;
 
    // copy string to buffer with correct sign character
-   const size_t CBUFLOCAL_LEN = 100;
-   char cbuf[CBUFLOCAL_LEN];
-   const char* p = *this;
+   const std::size_t CBUFLOCAL_LEN {100};
+   char cbuf[CBUFLOCAL_LEN] {};
+   const char* p {*this};
    base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
    // Modify the output format statement for use with the sscanf
-   char format1[32];
-   int i = 0;
-   int j = 0;
-   bool skipIt = false;
+   char format1[32] {};
+   int i {};
+   int j {};
+   bool skipIt {};
    for (i = 0;  i < 31 && format[i] != '\0'; i++) {
       if (skipIt && format[i] == 'f') skipIt = false;
       if (format[i] == '.') {
@@ -136,6 +137,10 @@ double TimeReadout::getInputValue() const
          value = sec;
       }
       break;
+
+      case invalid: {     // not handled
+      }
+      break;
    }
    return static_cast<double>(value);
 }
@@ -145,8 +150,8 @@ double TimeReadout::getInputValue() const
 //------------------------------------------------------------------------------
 void TimeReadout::makeText()
 {
-   bool neg = false;
-   double seconds = getFloat();
+   bool neg {};
+   double seconds {getFloat()};
    if (seconds < 0.0) {
       seconds = -seconds;
       neg = true;
@@ -217,6 +222,10 @@ void TimeReadout::makeText()
       case ss : { // Seconds only
          if (neg) seconds = -seconds;
          std::sprintf(cbuf, format, seconds);
+      }
+      break;
+
+      case invalid: {     // not handled
       }
       break;
    }

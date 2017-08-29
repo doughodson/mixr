@@ -19,7 +19,6 @@ BEGIN_SLOTTABLE(Agent)
    "behavior"                    //  2) behavior
 END_SLOTTABLE(Agent)
 
-//  mapping of slots to handles
 BEGIN_SLOT_MAP(Agent)
    ON_SLOT(1, setSlotState, AbstractState)
    ON_SLOT(2, setSlotBehavior, AbstractBehavior)

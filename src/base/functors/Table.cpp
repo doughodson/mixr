@@ -1,7 +1,7 @@
 
 #include "mixr/base/functors/Tables.hpp"
-#include "mixr/base/numbers/Integer.hpp"
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -42,8 +42,8 @@ BEGIN_SLOTTABLE(Table)
 END_SLOTTABLE(Table)
 
 BEGIN_SLOT_MAP(Table)
-    ON_SLOT(1,setDataTable,List)
-    ON_SLOT(2,setExtrapolationEnabled,Number)
+    ON_SLOT(1, setDataTable, List)
+    ON_SLOT(2, setExtrapolationEnabled, Number)
 END_SLOT_MAP()
 
 Table::Table()
@@ -54,10 +54,12 @@ Table::Table()
 Table::Table(const double* dtbl, const unsigned int dsize)
 {
     STANDARD_CONSTRUCTOR()
-    if (dtbl != nullptr && dsize > 0) {   /* Copy the data table */
+    if (dtbl != nullptr && dsize > 0) {   // copy the data table
         dtable = new double[dsize];
         if (dtable != nullptr) {
-            for (unsigned int i = 0; i < dsize; i++) dtable[i] = dtbl[i];
+            for (unsigned int i = 0; i < dsize; i++) {
+                dtable[i] = dtbl[i];
+            }
             nd = dsize;
         }
     }
@@ -92,13 +94,18 @@ void Table::copyData(const Table& org, const bool cc)
     BaseClass::copyData(org);
 
     // Delete old data
-    if (!cc && dtable != nullptr) { delete[] dtable; dtable = nullptr; }
+    if ( !cc && dtable != nullptr ) {
+        delete[] dtable;
+        dtable = nullptr;
+    }
 
     // Copy new data
     nd = org.nd;
     if (org.dtable != nullptr) {
         dtable = new double[nd];
-        for (unsigned int i = 0; i < nd; i++) dtable[i] = org.dtable[i];
+        for (unsigned int i = 0; i < nd; i++) {
+            dtable[i] = org.dtable[i];
+        }
     } else {
         dtable = nullptr;
     }
@@ -153,8 +160,8 @@ bool Table::setExtrapolationEnabled(const Number* const msg)
 void Table::findMinMax(double* minValue, double* maxValue) const
 {
     if (nd > 0) {
-        double minv = dtable[0];
-        double maxv = dtable[0];
+        double minv {dtable[0]};
+        double maxv {dtable[0]};
         for (unsigned int i = 1; i < nd; i++) {
             if (dtable[i] < minv) minv = dtable[i];
             if (dtable[i] > maxv) maxv = dtable[i];
@@ -170,7 +177,7 @@ void Table::findMinMax(double* minValue, double* maxValue) const
 //------------------------------------------------------------------------------
 bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 {
-    unsigned int n = list.entries();
+    unsigned int n {list.entries()};
     if (n <= 0) return false;
 
     const auto p = new double[n];
@@ -182,9 +189,9 @@ bool Table::loadVector(const List& list, double** table, unsigned int* nn)
         *nn = n;
     }
     else {
-        // Something was wrong, free the table
+        // Something is wrong, free the table
         delete[] p;
-        throw new ExpInvalidVector();     //invalid vector - throw an exception
+        throw new ExpInvalidVector();     // invalid vector - throw an exception
     }
     return ok;
 }
@@ -194,12 +201,12 @@ bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 //------------------------------------------------------------------------------
 bool Table::setDataTable(const List* const sdtobj)
 {
-    bool ok = true;
+    bool ok {true};
     if (sdtobj != nullptr) {
         // First determine the size of the table -- ALL breakpoint data MUST
         // have been set first (order in input file) to determine the size
         // of the data table
-        unsigned int ts = tableSize();
+        const unsigned int ts {tableSize()};
         if (ts > 0) {
             // Allocate table space and load the table
             const auto p = new double[ts];
@@ -212,12 +219,13 @@ bool Table::setDataTable(const List* const sdtobj)
                 nd = ts;
             }
             else {
-                // Something was wrong!
+                // Something is wrong!
                 delete[] p;
                 std::cerr << "Table::setDataTable: Something is wrong!  Data table aborted." << std::endl;
                 ok = false;
             }
-        } valid = isValid();
+        }
+        valid = isValid();
     }
     return ok;
 }

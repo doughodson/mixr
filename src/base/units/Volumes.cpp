@@ -31,7 +31,8 @@ void Volume::copyData(const Volume& org, const bool)
 //==============================================================================
 // CubicMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicMeters, "CubicMeters")
+IMPLEMENT_SUBCLASS(CubicMeters, "CubicMeters")
+EMPTY_SLOTTABLE(CubicMeters)
 EMPTY_COPYDATA(CubicMeters)
 EMPTY_DELETEDATA(CubicMeters)
 
@@ -53,7 +54,8 @@ CubicMeters::CubicMeters(const Volume& value) : Volume()
 //==============================================================================
 // CubicFeet() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicFeet, "CubicFeet")
+IMPLEMENT_SUBCLASS(CubicFeet, "CubicFeet")
+EMPTY_SLOTTABLE(CubicFeet)
 EMPTY_COPYDATA(CubicFeet)
 EMPTY_DELETEDATA(CubicFeet)
 
@@ -75,7 +77,8 @@ CubicFeet::CubicFeet(const Volume& value) : Volume()
 //==============================================================================
 // CubicInches() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CubicInches, "CubicInches")
+IMPLEMENT_SUBCLASS(CubicInches, "CubicInches")
+EMPTY_SLOTTABLE(CubicInches)
 EMPTY_COPYDATA(CubicInches)
 EMPTY_DELETEDATA(CubicInches)
 
@@ -97,7 +100,8 @@ CubicInches::CubicInches(const Volume& value) : Volume()
 //==============================================================================
 // Liters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Liters, "Liters")
+IMPLEMENT_SUBCLASS(Liters, "Liters")
+EMPTY_SLOTTABLE(Liters)
 EMPTY_COPYDATA(Liters)
 EMPTY_DELETEDATA(Liters)
 

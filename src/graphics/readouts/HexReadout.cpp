@@ -10,7 +10,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(HexReadout, "HexReadout")
+IMPLEMENT_SUBCLASS(HexReadout, "HexReadout")
+EMPTY_SLOTTABLE(HexReadout)
 EMPTY_COPYDATA(HexReadout)
 EMPTY_DELETEDATA(HexReadout)
 

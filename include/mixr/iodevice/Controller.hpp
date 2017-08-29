@@ -41,21 +41,21 @@ public:
 protected:
 
    // Slot functions
-   virtual bool setSlotDeviceIndex(const base::Number* const msg);
+   virtual bool setSlotDeviceIndex(const base::Number* const);
 
    unsigned int deviceIndex {}; // Device index
 
    // ---
    // analog
    // ---
-   static const unsigned short MAX_AI = 16;
+   static const unsigned short MAX_AI {16};
    unsigned short numAI {};                // Number of analog channels
    std::array<double, MAX_AI> inData {};   // Input analog array
 
    // ---
    // digital bits
    // ---
-   static const unsigned short MAX_DI = 32;
+   static const unsigned short MAX_DI {32};
    unsigned short numDI {};                 // Number of input bits
    std::array<bool, MAX_DI> inBits {};      // Input bit array
 

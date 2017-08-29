@@ -1,7 +1,6 @@
 
 #include "mixr/linearsystem/Sz1.hpp"
-#include "mixr/base/numbers/Number.hpp"
-#include <iostream>
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace linearsystem {
@@ -45,7 +44,7 @@ EMPTY_DELETEDATA(Sz1)
 
 bool Sz1::setSlotN1(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setN1( msg->getReal() );
       ok = true;
@@ -55,7 +54,7 @@ bool Sz1::setSlotN1(const base::Number* const msg)
 
 bool Sz1::setSlotN2(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setN2( msg->getReal() );
       ok = true;
@@ -65,7 +64,7 @@ bool Sz1::setSlotN2(const base::Number* const msg)
 
 bool Sz1::setSlotD1(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setD1( msg->getReal() );
       ok = true;
@@ -75,7 +74,7 @@ bool Sz1::setSlotD1(const base::Number* const msg)
 
 bool Sz1::setSlotD2(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setD2( msg->getReal() );
       ok = true;

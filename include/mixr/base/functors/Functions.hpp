@@ -22,13 +22,15 @@ class List;
 //------------------------------------------------------------------------------
 class Func1 : public Function
 {
-    DECLARE_SUBCLASS(Func1, Function)
+   DECLARE_SUBCLASS(Func1, Function)
 public:
    Func1();
 
    virtual double f(const double iv1, FStorage* const s = nullptr) const;
 
-   virtual bool setSlotLfiTable(const Table* const msg) override;
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const) override;
 };
 
 //------------------------------------------------------------------------------
@@ -38,13 +40,15 @@ public:
 //------------------------------------------------------------------------------
 class Func2 : public Function
 {
-    DECLARE_SUBCLASS(Func2, Function)
+   DECLARE_SUBCLASS(Func2, Function)
 public:
    Func2();
 
    virtual double f(const double iv1, const double iv2, FStorage* const s = nullptr) const;
 
-   virtual bool setSlotLfiTable(const Table* const msg) override;
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const) override;
 };
 
 //------------------------------------------------------------------------------
@@ -60,7 +64,9 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const;
 
-   virtual bool setSlotLfiTable(const Table* const msg) override;
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const) override;
 };
 
 //------------------------------------------------------------------------------
@@ -76,7 +82,9 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const;
 
-   virtual bool setSlotLfiTable(const Table* const msg) override;
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const) override;
 };
 
 //------------------------------------------------------------------------------
@@ -92,7 +100,9 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = nullptr) const;
 
-   virtual bool setSlotLfiTable(const Table* const msg) override;
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const) override;
 };
 
 //------------------------------------------------------------------------------
@@ -120,7 +130,7 @@ public:
 //------------------------------------------------------------------------------
 class Polynomial : public Func1
 {
-    DECLARE_SUBCLASS(Polynomial, Func1)
+   DECLARE_SUBCLASS(Polynomial, Func1)
 
 public:
    // Highest allowed degree of polynomial
@@ -135,14 +145,15 @@ public:
    virtual double f(const double x, FStorage* const s = nullptr) const override;
 
 protected:
-   virtual bool setSlotCoefficients(const List* const msg);
-   bool setCoefficients(const double* const coeff, const unsigned short n);
+   // slot table helper methods
+   virtual bool setSlotCoefficients(const List* const);
+   bool setCoefficients(const double* const coeff, const int n);
 
 private:
-   static const unsigned short MAX_COEFF = (MAX_DEGREE+1);
+   static const int MAX_COEFF = (MAX_DEGREE+1);
 
-   double  a[MAX_COEFF] {};   // Constant coefficients vector
-   unsigned short m {};       // Number of coefficients (degree + 1)
+   double a[MAX_COEFF] {};   // Constant coefficients vector
+   int m {};                 // Number of coefficients (degree + 1)
 };
 
 }

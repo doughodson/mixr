@@ -9,7 +9,7 @@
 #include "mixr/models/system/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
@@ -498,7 +498,7 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 // Sets pulse width using base::Time
 bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
 {
-   bool ok = false;
+   bool ok {};
 
    if (msg != nullptr) {
       const double x = base::Seconds::convertStatic( *msg );
@@ -514,7 +514,7 @@ bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
 // Sets pulse width in seconds
 bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
 
    if (msg != nullptr) {
       ok = setPulseWidth( msg->getReal() );
@@ -533,7 +533,7 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 // Sets beam width as an base::Angle
 bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok {};
 
    if (msg != nullptr) {
       const double x = static_cast<double>(base::Radians::convertStatic( *msg ));
@@ -549,7 +549,7 @@ bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
 // Sets beam width in radians
 bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
 
    if (msg != nullptr) {
       ok = setBeamWidth( msg->getReal() );
@@ -565,7 +565,7 @@ bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
 // Sets the type ID
 bool RfSensor::setSlotTypeId(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok {};
 
    if (msg != nullptr) {
       ok = setTypeId( msg->getString() );
@@ -577,7 +577,7 @@ bool RfSensor::setSlotTypeId(const base::String* const msg)
 // Sets sync transmitter with antenna scan flag
 bool RfSensor::setSlotSyncXmitWithScan(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       syncXmitWithScan = msg->getBoolean();
       ok = true;
@@ -662,7 +662,7 @@ bool RfSensor::setSlotTrackManagerName(base::String* const v)
 //------------------------------------------------------------------------------
 bool RfSensor::processModes()
 {
-    bool ok = true;
+    bool ok {true};
     if (modes != nullptr) {
         // Make sure we have only Mode and tell all of the objects
         // that we are their master mode.
@@ -690,7 +690,7 @@ bool RfSensor::processModes()
 //------------------------------------------------------------------------------
 bool RfSensor::incRange()
 {
-    bool ok = false;
+    bool ok {};
     if (rngIdx < nRanges) {
         rngIdx++;
         setRange( ranges[rngIdx-1] );
@@ -704,7 +704,7 @@ bool RfSensor::incRange()
 //------------------------------------------------------------------------------
 bool RfSensor::decRange()
 {
-    bool ok = false;
+    bool ok {};
     if (rngIdx > 1) {
         rngIdx--;
         setRange( ranges[rngIdx-1] );
@@ -716,28 +716,14 @@ bool RfSensor::decRange()
 //==============================================================================
 // Class: SensorMgr
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SensorMgr,"SensorMgr")
+IMPLEMENT_SUBCLASS(SensorMgr, "SensorMgr")
+EMPTY_SLOTTABLE(SensorMgr)
+EMPTY_COPYDATA(SensorMgr)
+EMPTY_DELETEDATA(SensorMgr)
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 SensorMgr::SensorMgr()
 {
     STANDARD_CONSTRUCTOR()
-}
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void SensorMgr::copyData(const SensorMgr& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void SensorMgr::deleteData()
-{
 }
 
 }

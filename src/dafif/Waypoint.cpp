@@ -4,10 +4,10 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint, "Waypoint")
+IMPLEMENT_SUBCLASS(Waypoint, "Waypoint")
+EMPTY_SLOTTABLE(Waypoint)
 EMPTY_COPYDATA(Waypoint)
 EMPTY_DELETEDATA(Waypoint)
-
 
 //  Waypoint class field Position Table
 const Waypoint::Ptbl Waypoint::ptable = {

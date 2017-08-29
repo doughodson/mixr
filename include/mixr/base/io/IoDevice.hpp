@@ -81,16 +81,17 @@ protected:
    PairStream* getDeviceList();
    PairStream* getAdapterList();
 
-   // Slot functions
-   virtual bool setSlotAdapters(PairStream* const list);
-   virtual bool setSlotDevices(PairStream* const list);
-
    // base::Component protected functions
    virtual bool shutdownNotification() override;
 
 private:
    safe_ptr<PairStream> adapters;   // Adapter list
    safe_ptr<PairStream> devices;    // Device list
+
+private:
+   // slot table helper methods
+   bool setSlotAdapters(PairStream* const);
+   bool setSlotDevices(PairStream* const);
 };
 
 }

@@ -2,7 +2,7 @@
 #include "mixr/models/system/Stores.hpp"
 #include "mixr/models/player/AbstractWeapon.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"

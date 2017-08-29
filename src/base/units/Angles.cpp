@@ -32,7 +32,8 @@ void Angle::copyData(const Angle& org, const bool)
 //==============================================================================
 // Degrees --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Degrees, "Degrees")
+IMPLEMENT_SUBCLASS(Degrees, "Degrees")
+EMPTY_SLOTTABLE(Degrees)
 EMPTY_COPYDATA(Degrees)
 EMPTY_DELETEDATA(Degrees)
 
@@ -55,7 +56,8 @@ Degrees::Degrees(const Angle& value) : Angle()
 //==============================================================================
 // Radians --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Radians, "Radians")
+IMPLEMENT_SUBCLASS(Radians, "Radians")
+EMPTY_SLOTTABLE(Radians)
 EMPTY_COPYDATA(Radians)
 EMPTY_DELETEDATA(Radians)
 
@@ -78,7 +80,8 @@ Radians::Radians(const Angle& value) : Angle()
 //==============================================================================
 // Semicircles --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Semicircles, "Semicircles")
+IMPLEMENT_SUBCLASS(Semicircles, "Semicircles")
+EMPTY_SLOTTABLE(Semicircles)
 EMPTY_COPYDATA(Semicircles)
 EMPTY_DELETEDATA(Semicircles)
 

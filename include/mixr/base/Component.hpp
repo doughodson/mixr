@@ -30,8 +30,6 @@ class String;
 //    select               <String>     ! Selects a child component by name (default: 0)
 //                         <Number>     ! Selects a child component by index (default: 0)
 //
-//    logger               <Logger>     ! Set the event logger for this component (default: 0)
-//
 //    enableTimingStats    <Number>     ! Enable/disable the timing statistics for updateTC() (default: 0)
 //
 //    printTimingStats     <Number>     ! Enable/disable the printing of the timing statistics (default: false)
@@ -92,7 +90,7 @@ class String;
 //
 // Components and Containers:
 //
-//    Using a PairStream (see PairStream.h), a component can contain a list of
+//    Using a PairStream (see PairStream.hpp), a component can contain a list of
 //    named components, and can be contained in a container's component list,
 //    therefore creating a component tree.  All functions return zero if the
 //    container or component is not found.  The components are initially set
@@ -267,7 +265,7 @@ public:
       public:  SendData() = default;
       public:  SendData(const SendData&) = delete;
       public:  SendData& operator=(const SendData&) = delete;
-      public:  ~SendData()  { empty(); }
+      public:  ~SendData()                                         { empty(); }
       public:  void empty();
       public:  Component* getObject(Component* p, const char* const id, const int n = 0);
       public:  void setObject(Component* p);
@@ -293,7 +291,7 @@ public:
 
    PairStream* getComponents();
    const PairStream* getComponents() const;
-   virtual bool addComponent(Pair* const p);
+   virtual bool addComponent(Pair* const);
 
    // find a component by its name
    virtual Pair* findByName(const char* const slotname);
@@ -309,7 +307,7 @@ public:
    Component* getSelectedComponent()                                         { return selected; }
    const Component* getSelectedComponent() const                             { return selected; }
 
-   virtual const Identifier* findNameOfComponent(const Component* const p) const;
+   virtual const Identifier* findNameOfComponent(const Component* const) const;
 
    virtual void updateTC(const double dt = 0.0);
    virtual void updateData(const double dt = 0.0);
@@ -317,11 +315,11 @@ public:
 
    virtual bool isFrozen() const;
    virtual bool isNotFrozen() const;
-   virtual void freeze(const bool fflag);
+   virtual void freeze(const bool);
    virtual void reset();
 
-   bool isShutdown() const                                                   { return shutdown; }
-   bool isNotShutdown() const                                                { return !shutdown; }
+   bool isShutdown() const                    { return shutdown; }
+   bool isNotShutdown() const                 { return !shutdown; }
 
    // ---
    // Sends the 'event' token with an optional argument 'obj' to this component.
@@ -337,12 +335,12 @@ public:
    // has been received and used.
    // ---
    bool send(const char* const id, const int event);
-   bool send(const char* const id, const int event, const int value, SendData& sd);
-   bool send(const char* const id, const int event, const float value, SendData& sd);
-   bool send(const char* const id, const int event, const double value, SendData& sd);
-   bool send(const char* const id, const int event, const char* const value, SendData& sd);
-   bool send(const char* const id, const int event, const bool value, SendData& sd);
-   bool send(const char* const id, const int event, Object* const value, SendData& sd);
+   bool send(const char* const id, const int event, const int value, SendData&);
+   bool send(const char* const id, const int event, const float value, SendData&);
+   bool send(const char* const id, const int event, const double value, SendData&);
+   bool send(const char* const id, const int event, const char* const value, SendData&);
+   bool send(const char* const id, const int event, const bool value, SendData&);
+   bool send(const char* const id, const int event, Object* const value, SendData&);
 
    // ---
    // Sends the 'event' message to 'n' components with 'n' arguments from the
@@ -364,19 +362,8 @@ public:
    const Statistic* getTimingStats() const                                   { return timingStats; }
    bool isTimingStatsEnabled() const                                         { return (timingStats != nullptr); }
    bool isTimingStatsPrintEnabled() const                                    { return (pts && isTimingStatsEnabled()); }
-   virtual bool setTimingStatsEnabled(const bool b);
-   virtual bool setPrintTimingStats(const bool b);
-
-   // Slot functions
-   virtual bool setSlotComponent(PairStream* const multiple);        // Sets the components list
-   virtual bool setSlotComponent(Component* const single);           // Sets a single component
-   virtual bool setSlotEnableTimingStats(const Number* const num);   // Sets the timing enabled flag
-   virtual bool setSlotPrintTimingStats(const Number* const num);    // Sets the print timing stats flag
-   virtual bool setSlotFreeze(const Number* const num);              // Sets the freeze flag
-   virtual bool setSlotEnableMsgType(const Identifier* const msg);   // Enables message types by name
-   virtual bool setSlotEnableMsgType(const Number* const msg);       // Enables message types by bit
-   virtual bool setSlotDisableMsgType(const Identifier* const msg);  // Disables message types by name
-   virtual bool setSlotDisableMsgType(const Number* const msg);      // Disables message types by bit
+   virtual bool setTimingStatsEnabled(const bool);
+   virtual bool setPrintTimingStats(const bool);
 
    virtual bool isMessageEnabled(const unsigned short msgType) const override;
 
@@ -414,6 +401,18 @@ private:
    bool pts {};                        // Print timing statistics
    bool frz {};                        // Freeze flag -- true if this component is frozen
    bool shutdown {};                   // True if this component is being (or has been) shutdown
+
+private:
+   // slot table helper methods
+   bool setSlotComponent(PairStream* const multiple);        // Sets the components list
+   bool setSlotComponent(Component* const single);           // Sets a single component
+   bool setSlotEnableTimingStats(const Number* const);       // Sets the timing enabled flag
+   bool setSlotPrintTimingStats(const Number* const);        // Sets the print timing stats flag
+   bool setSlotFreeze(const Number* const);                  // Sets the freeze flag
+   bool setSlotEnableMsgType(const Identifier* const);       // Enables message types by name
+   bool setSlotEnableMsgType(const Number* const);           // Enables message types by bit
+   bool setSlotDisableMsgType(const Identifier* const);      // Disables message types by name
+   bool setSlotDisableMsgType(const Number* const);          // Disables message types by bit
 };
 
 }

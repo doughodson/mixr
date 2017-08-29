@@ -1,6 +1,6 @@
 
 #include "mixr/base/Transforms.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/units/Angles.hpp"
 
@@ -14,14 +14,14 @@ BEGIN_SLOTTABLE(Transform)
 END_SLOTTABLE(Transform)
 
 BEGIN_SLOT_MAP(Transform)
-    ON_SLOT(1,setComputematrix1, Angle)
-    ON_SLOT(1,setComputematrix1, Number)
-    ON_SLOT(2,setComputematrix2, Angle)
-    ON_SLOT(2,setComputematrix2, Number)
-    ON_SLOT(3,setComputematrix3, Angle)
-    ON_SLOT(3,setComputematrix3, Number)
-    ON_SLOT(4,setComputematrix4, Angle)
-    ON_SLOT(4,setComputematrix4, Number)
+    ON_SLOT(1, setComputematrix1, Angle)
+    ON_SLOT(1, setComputematrix1, Number)
+    ON_SLOT(2, setComputematrix2, Angle)
+    ON_SLOT(2, setComputematrix2, Number)
+    ON_SLOT(3, setComputematrix3, Angle)
+    ON_SLOT(3, setComputematrix3, Number)
+    ON_SLOT(4, setComputematrix4, Angle)
+    ON_SLOT(4, setComputematrix4, Number)
 END_SLOT_MAP()
 
 Transform::Transform()
@@ -55,7 +55,8 @@ void Transform::computeMatrix()
 // Class: Translation
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation, "Translation")
+IMPLEMENT_SUBCLASS(Translation, "Translation")
+EMPTY_SLOTTABLE(Translation)
 
 Translation::Translation()
 {
@@ -88,7 +89,8 @@ void Translation::computeMatrix()
 // Class: Rotation
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation, "Rotation")
+IMPLEMENT_SUBCLASS(Rotation, "Rotation")
+EMPTY_SLOTTABLE(Rotation)
 
 Rotation::Rotation()
 {
@@ -120,7 +122,8 @@ void Rotation::computeMatrix()
 // Class: Scale
 //==============================================================================
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale, "Scale")
+IMPLEMENT_SUBCLASS(Scale, "Scale")
+EMPTY_SLOTTABLE(Scale)
 
 Scale::Scale()
 {

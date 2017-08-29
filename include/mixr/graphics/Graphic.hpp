@@ -397,29 +397,6 @@ protected:
    virtual bool onSetFlashRateEvent(const base::Number* const msg);
    virtual bool onSetVisibilityEvent(const base::Number* const msg);
 
-   // set slot functions
-   virtual bool setSlotFlashRate(const base::Number* const msg);
-   virtual bool setSlotLineWidth(const base::Number* const msg);
-   virtual bool setSlotSelectName(const base::Number* const msg);
-   virtual bool setSlotTransformList(base::PairStream* msg);      // Set the transformation list
-   virtual bool setSlotSingleTransform(base::Transform* const msg);
-   virtual bool setSlotNoDisplayList(const base::Number* const msg);
-   virtual bool setSlotSubcomponentsFirst(const base::Number* const msg);
-   virtual bool setSlotVertices(const base::PairStream* const msg);
-   virtual bool setSlotNormals(const base::PairStream* const msg);
-   virtual bool setSlotTexCoord(const base::PairStream* const msg);
-   virtual bool setSlotMask(const base::Number* const msg);
-   virtual bool setSlotTextureName(base::Identifier* msg);
-   virtual bool setSlotScissorX(const base::Number* const msg);
-   virtual bool setSlotScissorY(const base::Number* const msg);
-   virtual bool setSlotScissorWidth(const base::Number* const msg);
-   virtual bool setSlotScissorHeight(const base::Number* const msg);
-   virtual bool setSlotStippling(const base::Number* const msg);
-   virtual bool setSlotStippleFactor(const base::Number* const msg);
-   virtual bool setSlotStipplePattern(const base::Number* const msg);
-   virtual bool setSlotVisibility(const base::Number* const msg);
-   virtual bool setSlotTranslateLight(base::PairStream* const msg);
-
    virtual void processComponents(                  // Process our subcomponent list (which should be other Graphics)
         base::PairStream* const list,               // Source list of components
         const std::type_info& filter,               // Type filter
@@ -482,6 +459,30 @@ private:
 
    base::Vec4d lightPos;                 // light position relative to us (default is leave it where it was)
    bool lightMoved {};                   // our light is moving!
+
+private:
+   // slot table helper methods
+   bool setSlotFlashRate(const base::Number* const);
+   bool setSlotLineWidth(const base::Number* const);
+   bool setSlotSelectName(const base::Number* const);
+   bool setSlotTransformList(base::PairStream*);      // Set the transformation list
+   bool setSlotSingleTransform(base::Transform* const);
+   bool setSlotNoDisplayList(const base::Number* const);
+   bool setSlotSubcomponentsFirst(const base::Number* const);
+   bool setSlotVertices(const base::PairStream* const);
+   bool setSlotNormals(const base::PairStream* const);
+   bool setSlotTexCoord(const base::PairStream* const);
+   bool setSlotMask(const base::Number* const);
+   bool setSlotTextureName(base::Identifier*);
+   bool setSlotScissorX(const base::Number* const);
+   bool setSlotScissorY(const base::Number* const);
+   bool setSlotScissorWidth(const base::Number* const);
+   bool setSlotScissorHeight(const base::Number* const);
+   bool setSlotStippling(const base::Number* const);
+   bool setSlotStippleFactor(const base::Number* const);
+   bool setSlotStipplePattern(const base::Number* const);
+   bool setSlotVisibility(const base::Number* const);
+   bool setSlotTranslateLight(base::PairStream* const);
 };
 
 inline GLuint Graphic::getNewSelectName()

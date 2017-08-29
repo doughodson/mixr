@@ -42,9 +42,6 @@ public:
 
    unsigned int getBacklog() const        { return backlog; }
 
-   // Slot functions
-   virtual bool setSlotBacklog(const Number* const msg);
-
    virtual bool initNetwork(const bool noWaitFlag) override;
 
 protected:
@@ -55,6 +52,10 @@ protected:
 
 private:
    unsigned int backlog {1};
+
+private:
+   // slot table helper methods
+   bool setSlotBacklog(const Number* const);
 };
 
 }

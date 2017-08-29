@@ -1,5 +1,5 @@
 
-#include "mixr/base/numbers/Operators.hpp"
+#include "mixr/base/numeric/Operators.hpp"
 
 #include <iostream>
 
@@ -7,13 +7,23 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Add, "+")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Subtract, "-")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Multiply, "*")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Divide, "/")
+EMPTY_DELETEDATA(Add)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
+IMPLEMENT_SUBCLASS(Subtract, "-")
+EMPTY_SLOTTABLE(Subtract)
+EMPTY_COPYDATA(Subtract)
+EMPTY_DELETEDATA(Subtract)
+
+IMPLEMENT_SUBCLASS(Multiply, "*")
+EMPTY_SLOTTABLE(Multiply)
+EMPTY_COPYDATA(Multiply)
+EMPTY_DELETEDATA(Multiply)
+
+IMPLEMENT_SUBCLASS(Divide, "/")
+EMPTY_SLOTTABLE(Divide)
+EMPTY_COPYDATA(Divide)
+EMPTY_DELETEDATA(Divide)
+
 BEGIN_SLOTTABLE(Add)
     "n2",       //  2nd number (first number is from Number)
     "n3",       //  3rd number
@@ -26,18 +36,12 @@ BEGIN_SLOTTABLE(Add)
     "n10",      // 10th number
 END_SLOTTABLE(Add)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Add)
     // Accept an Number at any slot index ...
     const auto _msg = dynamic_cast<Number*>(obj);
     if (_msg != nullptr) { _ok = setSecondNumber(_msg); }
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Add::Add()
 {
    STANDARD_CONSTRUCTOR()
@@ -58,25 +62,11 @@ Divide::Divide()
    STANDARD_CONSTRUCTOR()
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Add::copyData(const Add& org, const bool)
 {
    BaseClass::copyData(org);
    n2 = org.n2;
 }
-EMPTY_DELETEDATA(Add)
-
-EMPTY_COPYDATA(Subtract)
-EMPTY_DELETEDATA(Subtract)
-
-EMPTY_COPYDATA(Multiply)
-EMPTY_DELETEDATA(Multiply)
-
-EMPTY_COPYDATA(Divide)
-EMPTY_DELETEDATA(Divide)
 
 //------------------------------------------------------------------------------
 // operation() -- the operations
@@ -98,7 +88,7 @@ void Multiply::operation()
 
 void Divide::operation()
 {
-    if (n2 != 0.0) val = (val / n2);  /* only if non-zero divisor */
+    if (n2 != 0.0) val = (val / n2);  // only if non-zero divisor
 }
 
 //------------------------------------------------------------------------------

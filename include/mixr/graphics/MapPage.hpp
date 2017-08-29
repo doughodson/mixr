@@ -145,13 +145,6 @@ public:
    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-   // slot functions
-   virtual bool setSlotOuterRadius(const base::Number* const newRadius);
-   virtual bool setSlotOuterRadiusDC(const base::Number* const newRadiusDC);
-   virtual bool setSlotRange(const base::Number* const newR);
-   virtual bool setSlotDisplacement(const base::Number* const newD);
-   virtual bool setSlotCentered(const base::Number* const newC);
-   virtual bool setSlotNorthUp(const base::Number* const x);
 
    // event functions
    virtual bool onUpdateRange(const base::Number* const newR);
@@ -162,11 +155,6 @@ protected:
    virtual bool onUpdateOuterRadius(const base::Number* const newR);
    virtual bool onUpdateOuterRadiusDC(const base::Number* const newRDC);
    virtual bool onUpdateDisplacement(const base::Number* const newD);
-
-   // ref lat/lon heading
-   virtual bool setSlotRefLat(const base::Number* const x);
-   virtual bool setSlotRefLon(const base::Number* const x);
-   virtual bool setSlotRefHdg(const base::Number* const x);
 
 private:
    double referenceLat {};           // our latitude from center reference point (degs)
@@ -186,6 +174,19 @@ private:
 
    double displacement {};           // how far to translate up or down when centered/decentered (display units)
    bool   isCentered {true};         // flag for centering our map page
+
+private:
+   // slot table helper methods
+   bool setSlotOuterRadius(const base::Number* const);
+   bool setSlotOuterRadiusDC(const base::Number* const);
+   bool setSlotRange(const base::Number* const);
+   bool setSlotDisplacement(const base::Number* const);
+   bool setSlotCentered(const base::Number* const);
+   bool setSlotNorthUp(const base::Number* const);
+   // ref lat/lon heading
+   bool setSlotRefLat(const base::Number* const);
+   bool setSlotRefLon(const base::Number* const);
+   bool setSlotRefHdg(const base::Number* const);
 };
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }

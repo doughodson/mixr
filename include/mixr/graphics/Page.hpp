@@ -119,14 +119,6 @@ public:
    virtual bool onButtonHit(const base::String* const obhobj);
    virtual bool onKeyHit(const int key);
 
-   // slottable functions
-   bool setPage(const base::Identifier* const pobj);
-   bool setSubpageStream (base::PairStream* const psobj);
-   bool setSubpageSingle (Page* const pobj);
-   bool setPagingEvent(base::PairStream* const peobj);
-   bool drawSubpageFirst(const base::Number* const spfobj);
-   bool setSlotFocusSlavedToSubpage(const base::Number* const spfobj);
-
    virtual void draw() override;
    virtual base::Pair* findBySelectName(const GLuint name) override;
    virtual bool event(const int event, base::Object* const obj = nullptr) override;
@@ -175,6 +167,15 @@ private:
    static const int SUBPAGE_STACK_SIZE = 50;
    std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
    int subpageSP {SUBPAGE_STACK_SIZE};       // Stack pointer
+
+private:
+   // slot table helper methods
+   bool setPage(const base::Identifier* const);
+   bool setSubpageStream (base::PairStream* const);
+   bool setSubpageSingle (Page* const);
+   bool setPagingEvent(base::PairStream* const);
+   bool drawSubpageFirst(const base::Number* const);
+   bool setSlotFocusSlavedToSubpage(const base::Number* const);
 };
 
 }

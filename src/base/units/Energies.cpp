@@ -32,7 +32,8 @@ void Energy::copyData(const Energy& org, const bool)
 //==============================================================================
 // KiloWattHours() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloWattHours, "KiloWattHours")
+IMPLEMENT_SUBCLASS(KiloWattHours, "KiloWattHours")
+EMPTY_SLOTTABLE(KiloWattHours)
 EMPTY_COPYDATA(KiloWattHours)
 EMPTY_DELETEDATA(KiloWattHours)
 
@@ -55,7 +56,8 @@ KiloWattHours::KiloWattHours(const Energy& value) : Energy()
 //==============================================================================
 // BTUs() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(BTUs, "BTUs")
+IMPLEMENT_SUBCLASS(BTUs, "BTUs")
+EMPTY_SLOTTABLE(BTUs)
 EMPTY_COPYDATA(BTUs)
 EMPTY_DELETEDATA(BTUs)
 
@@ -78,7 +80,8 @@ BTUs::BTUs(const Energy& value) : Energy()
 //==============================================================================
 // Calories() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Calories, "Calories")
+IMPLEMENT_SUBCLASS(Calories, "Calories")
+EMPTY_SLOTTABLE(Calories)
 EMPTY_COPYDATA(Calories)
 EMPTY_DELETEDATA(Calories)
 
@@ -102,7 +105,8 @@ Calories::Calories(const Energy& value) : Energy()
 //==============================================================================
 // Joules() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Joules, "Joules")
+IMPLEMENT_SUBCLASS(Joules, "Joules")
+EMPTY_SLOTTABLE(Joules)
 EMPTY_COPYDATA(Joules)
 EMPTY_DELETEDATA(Joules)
 
@@ -125,7 +129,8 @@ Joules::Joules(const Energy& value) : Energy()
 //==============================================================================
 // FootPounds() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FootPounds, "FootPounds")
+IMPLEMENT_SUBCLASS(FootPounds, "FootPounds")
+EMPTY_SLOTTABLE(FootPounds)
 EMPTY_COPYDATA(FootPounds)
 EMPTY_DELETEDATA(FootPounds)
 

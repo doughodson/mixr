@@ -53,10 +53,10 @@ public:
    virtual void clear() override;
 
 protected:
-   bool setSlotNumAI(const base::Number* const msg);
-   bool setSlotNumAO(const base::Number* const msg);
-   bool setSlotNumDI(const base::Number* const msg);
-   bool setSlotNumDO(const base::Number* const msg);
+   bool setSlotNumAI(const base::Number* const);
+   bool setSlotNumAO(const base::Number* const);
+   bool setSlotNumDI(const base::Number* const);
+   bool setSlotNumDO(const base::Number* const);
 
 private:
    unsigned int numAI {};  // Number of AIs

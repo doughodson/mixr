@@ -29,12 +29,12 @@ class CompassRose : public graphics::Graphic
 public:
     CompassRose();
 
-    virtual bool setRotationDeg(const double newR);
-    virtual bool setRotationRad(const double newR);
-    virtual bool setCenteredRadius(const double newR);
-    virtual bool setDeCenteredRadius(const double newDR);
-    virtual bool setDisplacement(const double newD);
-    virtual bool setCentered(const bool newC);
+    virtual bool setRotationDeg(const double);
+    virtual bool setRotationRad(const double);
+    virtual bool setCenteredRadius(const double);
+    virtual bool setDeCenteredRadius(const double);
+    virtual bool setDisplacement(const double);
+    virtual bool setCentered(const bool);
 
     double getRotationDeg() const      { return rot * static_cast<double>(base::angle::R2DCC); }
     double getRotationRad() const      { return rot; }
@@ -49,18 +49,13 @@ public:
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-    // slot functions
-    bool setSlotCenteredRadius(const base::Number* const newR);
-    bool setSlotDeCenteredRadius(const base::Number* const newR);
-    bool setSlotDisplacement(const base::Number* const newD);
-
     // event functions
-    bool onUpdateRotDeg(const base::Number* const x);
-    bool onUpdateRadius(const base::Number* const x);
-    bool onUpdateCenRad(const base::Number* const x);
-    bool onUpdateDecRadius(const base::Number* const x);
-    bool onUpdateDisplacement(const base::Number* const x);
-    bool onUpdateCentered(const base::Number* const x);
+    bool onUpdateRotDeg(const base::Number* const);
+    bool onUpdateRadius(const base::Number* const);
+    bool onUpdateCenRad(const base::Number* const);
+    bool onUpdateDecRadius(const base::Number* const);
+    bool onUpdateDisplacement(const base::Number* const);
+    bool onUpdateCentered(const base::Number* const);
 
 private:
     double rot {};              // rotation angle (rads)
@@ -72,6 +67,12 @@ private:
     SendData lTicksSD;
     SendData sTicksSD;
     SendData dialSD;
+
+private:
+    // slot table helper methods
+    bool setSlotCenteredRadius(const base::Number* const);
+    bool setSlotDeCenteredRadius(const base::Number* const);
+    bool setSlotDisplacement(const base::Number* const);
 };
 
 }

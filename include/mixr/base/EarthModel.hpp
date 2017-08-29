@@ -71,13 +71,6 @@ public:
    // (see the above list of pre-defined earth models)
    static const EarthModel* getEarthModel(const char* const name);
 
-protected:
-   bool setSlotA(const Distance* const msg);
-   bool setSlotA(const Number* const msg);
-   bool setSlotB(const Distance* const msg);
-   bool setSlotB(const Number* const msg);
-   bool setSlotF(const Number* const msg);
-
 private:
    void initData(const double a0, const double f0);
 
@@ -85,6 +78,15 @@ private:
    double b {};   // semi minor axis (meters)
    double f {};   // flattening
    double e2 {};  // Eccentricity Squared
+
+private:
+   // slot table helper methods
+   bool setSlotA(const Distance* const);
+   bool setSlotA(const Number* const);
+   bool setSlotB(const Distance* const);
+   bool setSlotB(const Number* const);
+   bool setSlotF(const Number* const);
+
 };
 
 inline double EarthModel::getA() const  { return a; }

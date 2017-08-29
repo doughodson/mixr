@@ -56,14 +56,15 @@ protected:
    base::Component* getActor();
    void setActor(base::Component* const myActor);
 
-   // slot functions
-   virtual bool setSlotBehavior(AbstractBehavior* const);
-   bool setSlotState(AbstractState* const state);
-
 private:
    AbstractBehavior* behavior {};
    AbstractState* state {};
    safe_ptr<base::Component> myActor;
+
+private:
+   // slot table helper methods
+   bool setSlotBehavior(AbstractBehavior* const);
+   bool setSlotState(AbstractState* const);
 };
 
 inline void Agent::setActor(base::Component* const actor)      { myActor = actor; return; }

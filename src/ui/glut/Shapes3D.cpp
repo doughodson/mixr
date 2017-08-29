@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "mixr/ui/glut/Shapes3D.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include <GL/glut.h>
 #include <GL/glu.h>
@@ -16,21 +16,27 @@ IMPLEMENT_SUBCLASS(Sphere, "Sphere")
 
 IMPLEMENT_SUBCLASS(Cylinder, "Cylinder")
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cone, "Cone")
+IMPLEMENT_SUBCLASS(Cone, "Cone")
+EMPTY_SLOTTABLE(Cone)
 
 IMPLEMENT_SUBCLASS(Cube, "Cube")
 
 IMPLEMENT_SUBCLASS(Torus, "Torus")
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Dodecahedron, "Dodecahedron")
+IMPLEMENT_SUBCLASS(Dodecahedron, "Dodecahedron")
+EMPTY_SLOTTABLE(Dodecahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tetrahedron, "Tetrahedron")
+IMPLEMENT_SUBCLASS(Tetrahedron, "Tetrahedron")
+EMPTY_SLOTTABLE(Tetrahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Icosahedron, "Icosahedron")
+IMPLEMENT_SUBCLASS(Icosahedron, "Icosahedron")
+EMPTY_SLOTTABLE(Icosahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Octahedron, "Octahedron")
+IMPLEMENT_SUBCLASS(Octahedron, "Octahedron")
+EMPTY_SLOTTABLE(Octahedron)
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Teapot, "Teapot")
+IMPLEMENT_SUBCLASS(Teapot, "Teapot")
+EMPTY_SLOTTABLE(Teapot)
 
 //------------------------------------------------------------------------------
 // Slot tables
@@ -77,9 +83,6 @@ BEGIN_SLOT_MAP(Torus)
     ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Sphere::Sphere()
 {
     STANDARD_CONSTRUCTOR()
@@ -130,9 +133,6 @@ Teapot::Teapot()
     STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Sphere::copyData(const Sphere& org, const bool)
 {
     BaseClass::copyData(org);
@@ -170,9 +170,6 @@ EMPTY_COPYDATA(Octahedron)
 
 EMPTY_COPYDATA(Teapot)
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 EMPTY_DELETEDATA(Sphere)
 EMPTY_DELETEDATA(Cylinder)
 EMPTY_DELETEDATA(Cone)

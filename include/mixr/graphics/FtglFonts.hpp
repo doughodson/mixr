@@ -56,15 +56,16 @@ class FtglFonts : public Font
 public:
     FtglFonts();
 
-    // Slot table Set Functions
-    virtual bool setFaceSize(const base::Number* const faceSize);
-
     // Get Functions
     unsigned int getFaceSize()      { return fSize; };
 
 private:
     static const int DEFAULT_FACE_SIZE;
     int fSize {DEFAULT_FACE_SIZE};      // face size
+
+private:
+    // slot table help methods
+    bool setFaceSize(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -130,12 +131,13 @@ public:
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     virtual void loadFont() override;
 
-    // slot table functions
-    bool setDepth(const base::Number* const newDepth);
-
 private:
     static const float DEFAULT_DEPTH;
     float depth {DEFAULT_DEPTH};        // depth of the extruded font (for 3D purposes)
+
+private:
+    // slot table helper methods
+    bool setDepth(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -264,14 +266,15 @@ public:
     float getHaloLineWidth()        { return linewidth; }
     FTGLOutlineFont* getOutline()   { return outline; }
 
-protected:
-    bool setHaloColor(base::Color* x);
-    bool setLinewidth(const base::Number* const x);
-
 private:
     FTGLOutlineFont* outline {};
     base::Color* haloColor {};
     float linewidth {1.0};
+
+private:
+    // slot table helper methods
+    bool setHaloColor(base::Color*);
+    bool setLinewidth(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------

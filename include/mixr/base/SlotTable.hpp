@@ -26,26 +26,26 @@ class SlotTable
 {
 public:
    SlotTable() = default;
-   SlotTable(const char* slotnames[], const unsigned int nslots, const SlotTable& baseTable);
-   SlotTable(const char* slotnames[], const unsigned int nslots);
+   SlotTable(const char* slotnames[], const int nslots, const SlotTable& baseTable);
+   SlotTable(const char* slotnames[], const int nslots);
    SlotTable(const SlotTable&) = delete;
    SlotTable& operator=(const SlotTable&) = delete;
    virtual ~SlotTable();
 
    // Returns the last slot index number, which includes all base class slots.
-   unsigned int n() const;
+   int n() const;
 
    // Returns the index, [ 1 .. n() ], for slot name 'slotname', or zero if not found
-   unsigned int index(const char* const slotname) const;
+   int index(const char* const slotname) const;
 
    // Returns the name of the slot at index 'slotindex', range [ 1 .. n() ],
    // or zero is returned if the index is out of range.
-   const char* name(const unsigned int slotindex) const;
+   const char* name(const int slotindex) const;
 
 private:
    SlotTable* baseTable {};   // Pointer to base class's slot table
    char** slots1 {};          // Array of slot names
-   unsigned int nslots1 {};   // Number of slots in table
+   int nslots1 {};            // Number of slots in table
 };
 
 }

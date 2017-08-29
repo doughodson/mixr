@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Shapes.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
 #include <GL/glu.h>
@@ -12,7 +12,7 @@ namespace graphics {
 //==============================================================================
 // Class: Circle
 //==============================================================================
-IMPLEMENT_SUBCLASS(Circle,"Circle")
+IMPLEMENT_SUBCLASS(Circle, "Circle")
 EMPTY_DELETEDATA(Circle)
 
 BEGIN_SLOTTABLE(Circle)
@@ -22,9 +22,9 @@ BEGIN_SLOTTABLE(Circle)
 END_SLOTTABLE(Circle)
 
 BEGIN_SLOT_MAP(Circle)
-    ON_SLOT(1,setSlotRadius,base::Number)
-    ON_SLOT(2,setSlotFilled,base::Number)
-    ON_SLOT(3,setSlotSlices,base::Number)
+    ON_SLOT(1, setSlotRadius, base::Number)
+    ON_SLOT(2, setSlotFilled, base::Number)
+    ON_SLOT(3, setSlotSlices, base::Number)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Circle)
@@ -101,7 +101,7 @@ BEGIN_SLOTTABLE(OcclusionCircle)
 END_SLOTTABLE(OcclusionCircle)
 
 BEGIN_SLOT_MAP(OcclusionCircle)
-    ON_SLOT(1,setSlotOuterRadius,base::Number)
+    ON_SLOT(1, setSlotOuterRadius, base::Number)
 END_SLOT_MAP()
 
 OcclusionCircle::OcclusionCircle()
@@ -144,7 +144,7 @@ bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
 //==============================================================================
 // Class: Arc
 //==============================================================================
-IMPLEMENT_SUBCLASS(Arc,"Arc")
+IMPLEMENT_SUBCLASS(Arc, "Arc")
 EMPTY_DELETEDATA(Arc)
 
 BEGIN_SLOTTABLE(Arc)
@@ -155,9 +155,9 @@ BEGIN_SLOTTABLE(Arc)
 END_SLOTTABLE(Arc)
 
 BEGIN_SLOT_MAP(Arc)
-    ON_SLOT(1,setSlotStartAngle,base::Number)
-    ON_SLOT(2,setSlotArcLength,base::Number)
-    ON_SLOT(3,setSlotIsConnected,base::Number)
+    ON_SLOT(1, setSlotStartAngle, base::Number)
+    ON_SLOT(2, setSlotArcLength, base::Number)
+    ON_SLOT(3, setSlotIsConnected, base::Number)
 END_SLOT_MAP()
 
 Arc::Arc()
@@ -220,7 +220,7 @@ bool Arc::setSlotIsConnected(const base::Number* const x)
 //==============================================================================
 // Class: OcclusionArc
 //==============================================================================
-IMPLEMENT_SUBCLASS(OcclusionArc,"OcclusionArc")
+IMPLEMENT_SUBCLASS(OcclusionArc, "OcclusionArc")
 EMPTY_DELETEDATA(OcclusionArc)
 
 BEGIN_SLOTTABLE(OcclusionArc)
@@ -228,7 +228,7 @@ BEGIN_SLOTTABLE(OcclusionArc)
 END_SLOTTABLE(OcclusionArc)
 
 BEGIN_SLOT_MAP(OcclusionArc)
-    ON_SLOT(1,setSlotOuterRadius,base::Number)
+    ON_SLOT(1, setSlotOuterRadius, base::Number)
 END_SLOT_MAP()
 
 OcclusionArc::OcclusionArc()
@@ -273,7 +273,8 @@ bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
 //==============================================================================
 // Class: Point
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point, "Point")
+IMPLEMENT_SUBCLASS(Point, "Point")
+EMPTY_SLOTTABLE(Point)
 EMPTY_CONSTRUCTOR(Point)
 EMPTY_COPYDATA(Point)
 EMPTY_DELETEDATA(Point)
@@ -296,7 +297,8 @@ void Point::drawFunc()
 //==============================================================================
 // Class: LineLoop
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop, "LineLoop")
+IMPLEMENT_SUBCLASS(LineLoop, "LineLoop")
+EMPTY_SLOTTABLE(LineLoop)
 EMPTY_CONSTRUCTOR(LineLoop)
 EMPTY_COPYDATA(LineLoop)
 EMPTY_DELETEDATA(LineLoop)
@@ -329,7 +331,7 @@ BEGIN_SLOTTABLE(Line)
 END_SLOTTABLE(Line)
 
 BEGIN_SLOT_MAP(Line)
-    ON_SLOT(1,setSlotSegments,base::Number)
+    ON_SLOT(1, setSlotSegments, base::Number)
 END_SLOT_MAP()
 
 Line::Line()
@@ -389,10 +391,9 @@ BEGIN_SLOTTABLE(Quad)
 END_SLOTTABLE(Quad)
 
 BEGIN_SLOT_MAP(Quad)
-    ON_SLOT(1,setSlotStrip,base::Number)
+    ON_SLOT(1, setSlotStrip, base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Quad::Quad()
 {
     STANDARD_CONSTRUCTOR()
@@ -405,7 +406,6 @@ void Quad::copyData(const Quad& org, const bool)
     strip = org.strip;
 }
 
-// Slot functions
 bool Quad::setSlotStrip(const base::Number* const x)
 {
     bool ok = false;
@@ -415,7 +415,6 @@ bool Quad::setSlotStrip(const base::Number* const x)
     return ok;
 }
 
-// Draw function
 void Quad::drawFunc()
 {
     bool ok = false;
@@ -496,7 +495,7 @@ BEGIN_SLOTTABLE(Triangle)
 END_SLOTTABLE(Triangle)
 
 BEGIN_SLOT_MAP(Triangle)
-    ON_SLOT(1,setSlotFan,base::Number)
+    ON_SLOT(1, setSlotFan, base::Number)
 END_SLOT_MAP()
 
 Triangle::Triangle()
@@ -511,23 +510,21 @@ void Triangle::copyData(const Triangle& org, const bool)
     fan = org.fan;
 }
 
-// Slot functions
 bool Triangle::setSlotFan(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok {};
     if (x != nullptr) {
         ok = setFan(x->getBoolean());
     }
     return ok;
 }
 
-// Draw function
 void Triangle::drawFunc()
 {
     // get our color gradient and apply it (if we have one)
-    unsigned int nv = getNumberOfVertices();
+    unsigned int nv {getNumberOfVertices()};
 
-    bool ok = false;
+    bool ok {};
     if (nv > 2) {
         if (!strip && !fan) {
             const int rem = nv % 3;
@@ -551,9 +548,9 @@ void Triangle::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const base::Vec3d* v = getVertices();
+            const base::Vec3d* v {getVertices()};
 
-            const unsigned int ntc = getNumberOfTextureCoords();
+            const unsigned int ntc {getNumberOfTextureCoords()};
             // draw with texture
             if (ntc > 0 && hasTexture()) {
                 const base::Vec2d* texCoord = getTextureCoord();

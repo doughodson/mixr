@@ -31,7 +31,8 @@ void Power::copyData(const Power& org, const bool)
 //==============================================================================
 // KiloWatts() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloWatts, "KiloWatts")
+IMPLEMENT_SUBCLASS(KiloWatts, "KiloWatts")
+EMPTY_SLOTTABLE(KiloWatts)
 EMPTY_COPYDATA(KiloWatts)
 EMPTY_DELETEDATA(KiloWatts)
 
@@ -54,7 +55,8 @@ KiloWatts::KiloWatts(const Power& org) : Power()
 //==============================================================================
 // Watts() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Watts, "Watts")
+IMPLEMENT_SUBCLASS(Watts, "Watts")
+EMPTY_SLOTTABLE(Watts)
 EMPTY_COPYDATA(Watts)
 EMPTY_DELETEDATA(Watts)
 
@@ -77,7 +79,8 @@ Watts::Watts(const Power& org) : Power()
 //==============================================================================
 // Horsepower() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Horsepower, "Horsepower")
+IMPLEMENT_SUBCLASS(Horsepower, "Horsepower")
+EMPTY_SLOTTABLE(Horsepower)
 EMPTY_COPYDATA(Horsepower)
 EMPTY_DELETEDATA(Horsepower)
 
@@ -85,7 +88,6 @@ Horsepower::Horsepower() : Power()
 {
     STANDARD_CONSTRUCTOR()
 }
-
 
 Horsepower::Horsepower(const double value) : Power(value)
 {
@@ -101,7 +103,8 @@ Horsepower::Horsepower(const Power& org) : Power()
 //==============================================================================
 // DecibelWatts() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelWatts, "DecibelWatts")
+IMPLEMENT_SUBCLASS(DecibelWatts, "DecibelWatts")
+EMPTY_SLOTTABLE(DecibelWatts)
 EMPTY_COPYDATA(DecibelWatts)
 EMPTY_DELETEDATA(DecibelWatts)
 
@@ -124,7 +127,8 @@ DecibelWatts::DecibelWatts(const Power& org) : Power()
 //==============================================================================
 // MilliWatts() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliWatts, "MilliWatts")
+IMPLEMENT_SUBCLASS(MilliWatts, "MilliWatts")
+EMPTY_SLOTTABLE(MilliWatts)
 EMPTY_COPYDATA(MilliWatts)
 EMPTY_DELETEDATA(MilliWatts)
 
@@ -147,7 +151,8 @@ MilliWatts::MilliWatts(const Power& org) : Power()
 //==============================================================================
 // DecibelMilliWatts() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelMilliWatts, "DecibelMilliWatts")
+IMPLEMENT_SUBCLASS(DecibelMilliWatts, "DecibelMilliWatts")
+EMPTY_SLOTTABLE(DecibelMilliWatts)
 EMPTY_COPYDATA(DecibelMilliWatts)
 EMPTY_DELETEDATA(DecibelMilliWatts)
 

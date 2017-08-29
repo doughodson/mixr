@@ -25,22 +25,22 @@ class LandingLight : public LandingGear
 public:
     LandingLight();
 
-    double getLightRadius() const { return lRadius; }
+    double getLightRadius() const           { return lRadius; }
 
-    virtual bool setLightRadius(const double newLR);
+    virtual bool setLightRadius(const double);
 
     virtual void updateData(const double dt = 0.0) override;
 
     virtual void drawFunc() override;
 
-protected:
-    // slot functions
-    bool setSlotLightRadius(const base::Number* const newLR);
-
 private:
     double lRadius {};     // our light radius - 0 means don't use it
     double gearCurrent {}; // our gear current value
     SendData selSD;        // our selection
+
+private:
+    // slot table helper methods
+    bool setSlotLightRadius(const base::Number* const);
 };
 
 }

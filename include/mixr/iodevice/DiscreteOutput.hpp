@@ -52,12 +52,12 @@ public:
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const base::Number* const msg);
-   virtual bool setSlotPort(const base::Number* const msg);
-   virtual bool setSlotChannel(const base::Number* const msg);
-   virtual bool setSlotValue(const base::Number* const msg);
-   virtual bool setSlotInverted(const base::Number* const msg);
-   virtual bool setSlotNum(const base::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const);
+   virtual bool setSlotPort(const base::Number* const);
+   virtual bool setSlotChannel(const base::Number* const);
+   virtual bool setSlotValue(const base::Number* const);
+   virtual bool setSlotInverted(const base::Number* const);
+   virtual bool setSlotNum(const base::Number* const);
 
 private:
    void initData();

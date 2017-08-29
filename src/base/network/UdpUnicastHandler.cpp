@@ -44,9 +44,8 @@ BEGIN_SLOTTABLE(UdpUnicastHandler)
                         //    the Internet standard "." (dotted) notation.
 END_SLOTTABLE(UdpUnicastHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(UdpUnicastHandler)
-    ON_SLOT(1,setSlotIpAddress,String)
+    ON_SLOT(1, setSlotIpAddress, String)
 END_SLOT_MAP()
 
 UdpUnicastHandler::UdpUnicastHandler()
@@ -62,7 +61,7 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool)
     if (ipAddr != nullptr) delete[] ipAddr;
     ipAddr = nullptr;
     if (org.ipAddr != nullptr) {
-        size_t len = std::strlen(org.ipAddr);
+        std::size_t len {std::strlen(org.ipAddr)};
         ipAddr = new char[len+1];
         utStrcpy(ipAddr,(len+1), org.ipAddr);
     }

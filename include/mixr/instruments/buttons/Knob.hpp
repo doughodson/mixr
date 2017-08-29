@@ -43,12 +43,6 @@ public:
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-    // Sets the Event ID to newEvent
-    bool setSlotValueTable(base::Table1* const x);
-    bool setSlotEndless(const base::Number* const x);
-    bool setSlotEndlessStart(const base::Number* const x);
-    bool setSlotEndlessLimit(const base::Number* const x);
-
     // event functions
     bool onMotion();
 
@@ -68,6 +62,13 @@ private:
     bool endless {};            // does our knob keep spinning?
     double endlessStart {};     // start value of the endless knob (default to 0)
     double endlessLimit {360};  // end value of the endless knob (default to 360)
+
+private:
+    // slot table helper methods
+    bool setSlotValueTable(base::Table1* const);
+    bool setSlotEndless(const base::Number* const);
+    bool setSlotEndlessStart(const base::Number* const);
+    bool setSlotEndlessLimit(const base::Number* const);
 };
 
 }

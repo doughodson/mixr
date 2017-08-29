@@ -22,7 +22,7 @@
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
@@ -1362,7 +1362,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const models::Player* const p, const char* co
    tp = nullptr;
 
    if (name != nullptr) {
-      const std::size_t LENGTH = std::strlen(name) + 1;
+      const std::size_t LENGTH {std::strlen(name) + 1};
       nodeFactoryName = new char[LENGTH];
       base::utStrcpy(nodeFactoryName,LENGTH,name);
    }

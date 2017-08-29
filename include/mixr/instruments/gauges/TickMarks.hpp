@@ -32,19 +32,19 @@ public:
 
     virtual void drawFunc() override;
 
-protected:
-    // slot functions
-    bool setSlotTickMarkLength(const base::Number* const newLength);
-    bool setSlotQuantity(const base::Number* const newQ);
-    bool setSlotGaugeLength(const base::Number* const newL);
-    bool setSlotFlip(const base::Number* const x);
-
 private:
     double lengthTM {1.0};           // tick mark length (if not a graphic)
     int    quantity {1};             // how many tick marks will we have?
     double gaugeLength {};           // length we are spanning our tick marks over
     bool   flip {};                  // our flip variable
     graphics::Graphic* myGraphic {}; // our graphic (if we choose to use one for a tick mark)
+
+private:
+    // slot table helper methods
+    bool setSlotTickMarkLength(const base::Number* const);
+    bool setSlotQuantity(const base::Number* const);
+    bool setSlotGaugeLength(const base::Number* const);
+    bool setSlotFlip(const base::Number* const);
 };
 
 }

@@ -23,11 +23,11 @@ class Identifier : public String
     DECLARE_SUBCLASS(Identifier, String)
 
 public:
-    Identifier(const char* string);
+    Identifier(const char*);
     Identifier();
 
-    virtual void setStr(const char* string) override;
-    virtual void catStr(const char* string) override;
+    virtual void setStr(const char*) override;
+    virtual void catStr(const char*) override;
 };
 
 }

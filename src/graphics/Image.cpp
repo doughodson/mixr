@@ -117,7 +117,6 @@ static uint16_t convertUInt16(const uint16_t v)
 IMPLEMENT_SUBCLASS(Image, "Image")
 EMPTY_SLOTTABLE(Image)
 
-// Constructors
 Image::Image()
 {
    STANDARD_CONSTRUCTOR()
@@ -155,7 +154,6 @@ void Image::copyData(const Image& org, const bool)
    yPixPerMeter = org.yPixPerMeter;
 }
 
-// deleteData() -
 void Image::deleteData()
 {
    setPixels(nullptr);
@@ -266,20 +264,19 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    }
 
    // Big or little ending?  Swap if we're a big endian arch
-   bool swap = checkSwap();
+   bool swap {checkSwap()};
 
    // Read the bitmap file header (BITMAPFILEHEADER)
-   char bfType[2];
-   uint32_t  bfSize(0);
-   uint16_t  bfReserved1(0);
-   uint16_t  bfReserved2(0);
-   uint32_t  bfOffBits(0);
+   char bfType[2] {};
+   uint32_t bfSize {};
+   uint16_t bfReserved1 {};
+   uint16_t bfReserved2 {};
+   uint32_t bfOffBits {};
 
    //unsigned int bitmapFileHdrSize =
    //   sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
 
-   std::size_t nItemsRead(0);
-   nItemsRead = std::fread(&bfType, sizeof(char), 2, fp);
+   std::size_t nItemsRead {std::fread(&bfType, sizeof(char), 2, fp)};
 
    nItemsRead = std::fread(&bfSize, sizeof(bfSize), 1, fp);
    if (swap) bfSize = convertUInt32(bfSize);
@@ -420,8 +417,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned short bfReserved2(0);
    unsigned int   bfOffBits(0);
 
-   unsigned int bitmapFileHdrSize =
-      sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits);
+   unsigned int bitmapFileHdrSize {sizeof(bfType) + sizeof(bfSize) + sizeof(bfReserved1) + sizeof(bfReserved2) + sizeof(bfOffBits)};
 
    // Number of bytes per row of pixels
    std::size_t widthBytes = getWidth() * getNumComponents();
@@ -430,19 +426,19 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    unsigned int offset = bitmapFileHdrSize + sizeof(BITMAPINFOHEADER_X);
 
    // Image size
-   unsigned int isize = getHeight() * static_cast<unsigned int>(widthBytes);
+   unsigned int isize {getHeight() * static_cast<unsigned int>(widthBytes)};
 
    // File size (active bytes)
-   unsigned int size = isize + offset;
+   unsigned int size {isize + offset};
 
    // File size (4 byte words)
-   unsigned int sizew = (size + 3)/4;
+   unsigned int sizew {(size + 3)/4};
 
    // Total file size (with padding)
-   unsigned int tsize = sizew*4;
+   unsigned int tsize {sizew * 4};
 
    // Number of padding bytes at the end if the file to give a even word boundary
-   unsigned int filePadding = tsize - size;
+   unsigned int filePadding {tsize - size};
 
    // ---
    // Write the bitmap file header (BITMAPFILEHEADER)

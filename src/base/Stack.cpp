@@ -1,12 +1,11 @@
 
 #include "mixr/base/Stack.hpp"
-#include <stdlib.h>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack, "Stack")
-
+IMPLEMENT_SUBCLASS(Stack, "Stack")
+EMPTY_SLOTTABLE(Stack)
 EMPTY_COPYDATA(Stack)
 EMPTY_DELETEDATA(Stack)
 

@@ -49,12 +49,6 @@ public:
     MonitorMetrics();
     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
                    const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
-    bool setSlotRed(const Table1* red);
-    bool setSlotGreen(const Table1* green);
-    bool setSlotBlue(const Table1* blue);
-    bool setSlotPhosphors(const List* phosphors);
-    bool setSlotWhiteRGB(const List* whiteRGB);
-    bool setSlotWhiteCIE(const List* whiteCIE);
 
     void cie2rgb(Vec4d& rgba, const Vec3d& cie) const;
 
@@ -75,6 +69,15 @@ private:
     // CIE and RGB coordinates of a reference white
     Vec3d refwhiteRGB;
     Vec3d refwhiteCIE;
+
+private:
+    // slot table helper methods
+    bool setSlotRed(const Table1*);
+    bool setSlotGreen(const Table1*);
+    bool setSlotBlue(const Table1*);
+    bool setSlotPhosphors(const List*);
+    bool setSlotWhiteRGB(const List*);
+    bool setSlotWhiteCIE(const List*);
 };
 
 }

@@ -18,26 +18,26 @@ class Eadi3DPage : public graphics::Page
 public:
     Eadi3DPage();
 
-    void setAltitude(const double alt);                 // feet
-    void setAirspeed(const double spd);                 // knots
-    void setHeading(const double hdg);                  // deg
-    void setAOA(const double aoa);                      // deg
-    void setVVI(const double vvi);                      // ft/min
-    void setPitch(const double pitch);                  // deg
-    void setRoll(const double roll);                    // deg
-    void setMach(const double mach);                    // mach number
-    void setGLoad(const double gload);                  // Gs
-    void setLandingMode(const bool landMode);           // T = landing mode
-    void setPitchSteeringCmd(const double pitchCmd);    // [-1, 1]
-    void setRollSteeringCmd(const double rollCmd);      // [-1, 1]
-    void setPitchSteeringValid(const bool psValid);     // T = valid
-    void setRollSteeringValid(const bool rcValid);      // T = valid
-    void setGlideslopeDev(const double gsDev);          // dots [-2, 2]
-    void setLocalizerDev(const double locDev);          // dots [-2, 2]
-    void setTurnRate(const double turnRate);            // dots [-2, 2]
-    void setSlipInd(const double slipInd);              // dots [-2, 2]
-    void setGlideslopeValid(const bool gsValid);        // T = valid
-    void setLocalizerValid(const bool locValid);        // T = valid
+    void setAltitude(const double);             // feet
+    void setAirspeed(const double);             // knots
+    void setHeading(const double);              // deg
+    void setAOA(const double);                  // deg
+    void setVVI(const double);                  // ft/min
+    void setPitch(const double);                // deg
+    void setRoll(const double);                 // deg
+    void setMach(const double);                 // mach number
+    void setGLoad(const double);                // Gs
+    void setLandingMode(const bool);            // T = landing mode
+    void setPitchSteeringCmd(const double);     // [-1, 1]
+    void setRollSteeringCmd(const double);      // [-1, 1]
+    void setPitchSteeringValid(const bool);     // T = valid
+    void setRollSteeringValid(const bool);      // T = valid
+    void setGlideslopeDev(const double);        // dots [-2, 2]
+    void setLocalizerDev(const double);         // dots [-2, 2]
+    void setTurnRate(const double);             // dots [-2, 2]
+    void setSlipInd(const double);              // dots [-2, 2]
+    void setGlideslopeValid(const bool);        // T = valid
+    void setLocalizerValid(const bool);         // T = valid
 
     virtual void draw() override;
 
@@ -45,26 +45,26 @@ public:
 
 private:
     // event functions
-    bool onEventSetAltitude(const base::Number* const x);
-    bool onEventSetAirspeed(const base::Number* const x);
-    bool onEventSetHeading(const base::Number* const x);
-    bool onEventSetAOA(const base::Number* const x);
-    bool onEventSetVVI(const base::Number* const x);
-    bool onEventSetPitch(const base::Number* const x);
-    bool onEventSetRoll(const base::Number* const x);
-    bool onEventSetMach(const base::Number* const x);
-    bool onEventSetGLoad(const base::Number* const x);
-    bool onEventSetLandingMode(const base::Number* const x);
-    bool onEventSetPitchSteeringCmd(const base::Number* const x);
-    bool onEventSetRollSteeringCmd(const base::Number* const x);
-    bool onEventSetPitchSteeringValid(const base::Number* const x);
-    bool onEventSetRollSteeringValid(const base::Number* const x);
-    bool onEventSetGlideslopeDev(const base::Number* const x);
-    bool onEventSetLocalizerDev(const base::Number* const x);
-    bool onEventSetTurnRate(const base::Number* const x);
-    bool onEventSetSlipInd(const base::Number* const x);
-    bool onEventSetGlideslopeValid(const base::Number* const x);
-    bool onEventSetLocalizerValid(const base::Number* const x);
+    bool onEventSetAltitude(const base::Number* const);
+    bool onEventSetAirspeed(const base::Number* const);
+    bool onEventSetHeading(const base::Number* const);
+    bool onEventSetAOA(const base::Number* const);
+    bool onEventSetVVI(const base::Number* const);
+    bool onEventSetPitch(const base::Number* const);
+    bool onEventSetRoll(const base::Number* const);
+    bool onEventSetMach(const base::Number* const);
+    bool onEventSetGLoad(const base::Number* const);
+    bool onEventSetLandingMode(const base::Number* const);
+    bool onEventSetPitchSteeringCmd(const base::Number* const);
+    bool onEventSetRollSteeringCmd(const base::Number* const);
+    bool onEventSetPitchSteeringValid(const base::Number* const);
+    bool onEventSetRollSteeringValid(const base::Number* const);
+    bool onEventSetGlideslopeDev(const base::Number* const);
+    bool onEventSetLocalizerDev(const base::Number* const);
+    bool onEventSetTurnRate(const base::Number* const);
+    bool onEventSetSlipInd(const base::Number* const);
+    bool onEventSetGlideslopeValid(const base::Number* const);
+    bool onEventSetLocalizerValid(const base::Number* const);
 
     void globeBall(double pitch, double roll, double pitchCmd, double rollCmd, bool psValid, bool rcValid, bool landMode);
     void scales(double gsDev, double locDev, double turnRate, double slipInd, bool gsValid, bool locValid, bool landMode);

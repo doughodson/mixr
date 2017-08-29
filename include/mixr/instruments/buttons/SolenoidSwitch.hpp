@@ -52,9 +52,6 @@ public:
 protected:
     // event function
     bool selectLatch(const base::Number* const x);
-    // slot functions
-    bool setSlotHoldTimer(const base::Number* const x);
-    bool setSlotEventMap(const base::PairStream* const x);
 
 private:
     std::array<bool, NUM_BUTTONS> picked {};     // tells our buttons if they are currently picked or not
@@ -66,6 +63,11 @@ private:
     bool latched {};                             // our latch flag, which, without a timer, will be a logical
                                                  // flag to determine when to keep the switch up or down, or
                                                  // make the switch return to it's starting position
+
+private:
+    // slot table helper methods
+    bool setSlotHoldTimer(const base::Number* const);
+    bool setSlotEventMap(const base::PairStream* const);
 };
 
 //------------------------------------------------------------------------------
@@ -83,7 +85,7 @@ public:
 
     // The left mouse button has been depressed
     virtual bool onMouseDown();
-    virtual bool onPicked(const base::Number* const x);
+    virtual bool onPicked(const base::Number* const);
 
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
     virtual void updateData(const double dt = 0.0) override;

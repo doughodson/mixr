@@ -19,7 +19,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/units/Distances.hpp"
 

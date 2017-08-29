@@ -6,7 +6,7 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(ColorGradient,"ColorGradient")
+IMPLEMENT_SUBCLASS(ColorGradient, "ColorGradient")
 
 BEGIN_SLOTTABLE(ColorGradient)
     "colors",      // set colors

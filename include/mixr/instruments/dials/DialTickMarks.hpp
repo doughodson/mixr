@@ -23,30 +23,30 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class DialTickMarks : public AnalogDial
 {
-    DECLARE_SUBCLASS(DialTickMarks,AnalogDial)
+    DECLARE_SUBCLASS(DialTickMarks, AnalogDial)
 
 public:
     DialTickMarks();
 
-    double getLength() const                    { return length; }
-    int  getQuantity() const                    { return quantity; }
+    double getLength() const                     { return length; }
+    int  getQuantity() const                     { return quantity; }
     graphics::Graphic* getTickGraphic() const    { return myGraphic;  }
 
-    virtual bool setLength(const double newLength);
-    virtual bool setQuantity(const int newQ);
-    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
+    virtual bool setLength(const double);
+    virtual bool setQuantity(const int);
+    virtual bool setTickGraphic(const graphics::Graphic* const);
 
     virtual void drawFunc() override;
-
-protected:
-    // slot functions
-    bool setSlotLength(const base::Number* const newLength);
-    bool setSlotQuantity(const base::Number* const newQ);
 
 private:
     double length {1.0};    // tick mark length (if not a graphic)
     int quantity {1};       // how many tick marks will we have?
     graphics::Graphic* myGraphic {};  // our graphic (if we choose to use on for a tick mark)
+
+private:
+    // slot table helper methods
+    bool setSlotLength(const base::Number* const);
+    bool setSlotQuantity(const base::Number* const);
 };
 
 }

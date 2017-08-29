@@ -1,6 +1,6 @@
 
 #include "mixr/graphics/Polygon.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
 #include "mixr/base/PairStream.hpp"
 #include <GL/glu.h>
@@ -8,7 +8,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
+IMPLEMENT_SUBCLASS(Polygon, "Polygon")
+EMPTY_SLOTTABLE(Polygon)
 EMPTY_DELETEDATA(Polygon)
 
 Polygon::Polygon()

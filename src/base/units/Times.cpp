@@ -33,7 +33,8 @@ void Time::copyData(const Time& org, const bool)
 //==============================================================================
 // Seconds --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Seconds, "Seconds")
+IMPLEMENT_SUBCLASS(Seconds, "Seconds")
+EMPTY_SLOTTABLE(Seconds)
 EMPTY_COPYDATA(Seconds)
 EMPTY_DELETEDATA(Seconds)
 
@@ -56,7 +57,8 @@ Seconds::Seconds(const Time& org) : Time()
 //==============================================================================
 // MilliSeconds --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliSeconds, "MilliSeconds")
+IMPLEMENT_SUBCLASS(MilliSeconds, "MilliSeconds")
+EMPTY_SLOTTABLE(MilliSeconds)
 EMPTY_COPYDATA(MilliSeconds)
 EMPTY_DELETEDATA(MilliSeconds)
 
@@ -79,7 +81,8 @@ MilliSeconds::MilliSeconds(const Time& org) : Time()
 //==============================================================================
 // MicroSeconds --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MicroSeconds, "MicroSeconds")
+IMPLEMENT_SUBCLASS(MicroSeconds, "MicroSeconds")
+EMPTY_SLOTTABLE(MicroSeconds)
 EMPTY_COPYDATA(MicroSeconds)
 EMPTY_DELETEDATA(MicroSeconds)
 
@@ -102,7 +105,8 @@ MicroSeconds::MicroSeconds(const Time& org) : Time()
 //==============================================================================
 // NanoSeconds --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NanoSeconds, "NanoSeconds")
+IMPLEMENT_SUBCLASS(NanoSeconds, "NanoSeconds")
+EMPTY_SLOTTABLE(NanoSeconds)
 EMPTY_COPYDATA(NanoSeconds)
 EMPTY_DELETEDATA(NanoSeconds)
 
@@ -125,7 +129,8 @@ NanoSeconds::NanoSeconds(const Time& org) : Time()
 //==============================================================================
 // Minutes --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Minutes, "Minutes")
+IMPLEMENT_SUBCLASS(Minutes, "Minutes")
+EMPTY_SLOTTABLE(Minutes)
 EMPTY_COPYDATA(Minutes)
 EMPTY_DELETEDATA(Minutes)
 
@@ -148,7 +153,8 @@ Minutes::Minutes(const Time& org) : Time()
 //==============================================================================
 // Hours --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Hours, "Hours")
+IMPLEMENT_SUBCLASS(Hours, "Hours")
+EMPTY_SLOTTABLE(Hours)
 EMPTY_COPYDATA(Hours)
 EMPTY_DELETEDATA(Hours)
 
@@ -171,7 +177,8 @@ Hours::Hours(const Time& org) : Time()
 //==============================================================================
 // Days --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Days, "Days")
+IMPLEMENT_SUBCLASS(Days, "Days")
+EMPTY_SLOTTABLE(Days)
 EMPTY_COPYDATA(Days)
 EMPTY_DELETEDATA(Days)
 

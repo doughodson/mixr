@@ -45,11 +45,12 @@ protected:
    // add new behavior to list
    void addBehavior(AbstractBehavior* const);
 
-   // slot functions
-   bool setSlotBehaviors(base::PairStream* const);
-
 private:
    base::List* behaviors {};
+
+private:
+   // slot table helper methods
+   bool setSlotBehaviors(base::PairStream* const);
 };
 
 inline base::List* Arbiter::getBehaviors()                 { return behaviors; }

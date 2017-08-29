@@ -11,7 +11,8 @@
 namespace mixr {
 namespace otw {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModel, "OtwModel")
+IMPLEMENT_SUBCLASS(OtwModel, "OtwModel")
+EMPTY_SLOTTABLE(OtwModel)
 
 OtwModel::OtwModel()
 {

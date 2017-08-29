@@ -15,7 +15,7 @@
 #include "mixr/simulation/AbstractNib.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/math_utils.hpp"
 

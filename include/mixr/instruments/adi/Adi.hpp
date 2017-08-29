@@ -38,27 +38,22 @@ public:
     double getRollRad() const           { return curPhi; }
     double getMaxRate() const           { return maxRate; }
 
-    virtual bool setRollRad(const double newR);
-    virtual bool setRollDeg(const double newR);
-    virtual bool setPitch(const double newP);
-    virtual bool setMaxRate(const double newMR);
+    virtual bool setRollRad(const double);
+    virtual bool setRollDeg(const double);
+    virtual bool setPitch(const double);
+    virtual bool setMaxRate(const double);
 
     virtual void draw() override;
 
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
     virtual void updateData(const double dt = 0) override;
 
-protected:
-    // slot functions
-    virtual bool setSlotMaxRate(const base::Angle* const newMR);
-    virtual bool setSlotMaxRate(const base::Number* const newMR);
-
 private:
     // event function
-    bool onUpdatePitchAdi(const base::Number* const newP);
-    bool onUpdateRollDegAdi(const base::Number* const newR);
-    bool onUpdateRollRadAdi(const base::Number* const newR);
-    bool onUpdateMaxRateAdi(const base::Number* const newMR);
+    bool onUpdatePitchAdi(const base::Number* const);
+    bool onUpdateRollDegAdi(const base::Number* const);
+    bool onUpdateRollRadAdi(const base::Number* const);
+    bool onUpdateMaxRateAdi(const base::Number* const);
 
     double pitch {};         // actual pitch (degrees)
     double scaledPitch {};   // our pitch value (inches)
@@ -67,6 +62,11 @@ private:
     double roll {};          // our roll value (radians)
     double maxRate {500.0};  // maximum mechanical rate at which the adi can move pitch or roll
                              // default set high degrees/second (for instantaneous movement)
+
+private:
+    // slot table helper methods
+    bool setSlotMaxRate(const base::Angle* const);
+    bool setSlotMaxRate(const base::Number* const);
 };
 
 }

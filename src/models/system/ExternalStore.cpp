@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/ExternalStore.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {

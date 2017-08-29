@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_numbers_Complex_H__
-#define __mixr_base_numbers_Complex_H__
+#ifndef __mixr_base_numeric_Complex_H__
+#define __mixr_base_numeric_Complex_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <cmath>
 
 namespace mixr {
@@ -115,16 +115,15 @@ public:
    void showPhasor(const int dp=2) const;
    friend std::ostream& operator<<(std::ostream& sout, const Complex& z);
 
-   //--------------------------------------------------------------------------
-   // Slot functions
-   //--------------------------------------------------------------------------
-   virtual bool setSlotImaginary(const Number* const msg);
-
 private:
    double imag {};   // imaginary component
+
+private:
+   // slot table helper methods
+   bool setSlotImaginary(const Number* const);
 };
 
-#include "mixr/base/numbers/Complex.inl"
+#include "mixr/base/numeric/Complex.inl"
 
 }
 }

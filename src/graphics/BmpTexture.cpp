@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/BmpTexture.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"
@@ -12,11 +12,10 @@
    #include <GL/glext.h>
 #endif
 
-
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")
+IMPLEMENT_SUBCLASS(BmpTexture, "BitmapTexture")
 EMPTY_DELETEDATA(BmpTexture)
 
 BEGIN_SLOTTABLE(BmpTexture)

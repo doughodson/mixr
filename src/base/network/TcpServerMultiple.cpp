@@ -28,7 +28,7 @@
 
 #include "mixr/base/network/TcpServerMultiple.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -44,9 +44,8 @@ BEGIN_SLOTTABLE(TcpServerMultiple)
     "backlog",    // 1) Listen socket's max backlog (default: 1)
 END_SLOTTABLE(TcpServerMultiple)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(TcpServerMultiple)
-    ON_SLOT(1 ,setSlotBacklog, Number)
+    ON_SLOT(1, setSlotBacklog, Number)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(TcpServerMultiple)

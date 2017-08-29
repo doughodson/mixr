@@ -12,7 +12,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OctalReadout, "OctalReadout")
+IMPLEMENT_SUBCLASS(OctalReadout, "OctalReadout")
+EMPTY_SLOTTABLE(OctalReadout)
 EMPTY_COPYDATA(OctalReadout)
 EMPTY_DELETEDATA(OctalReadout)
 

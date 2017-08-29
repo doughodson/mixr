@@ -9,7 +9,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/AbstractWeapon.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"

@@ -1,12 +1,13 @@
 
 #include "mixr/graphics/readouts/Rotary2.hpp"
 
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotary2, "Rotary2")
+IMPLEMENT_SUBCLASS(Rotary2, "Rotary2")
+EMPTY_SLOTTABLE(Rotary2)
 EMPTY_COPYDATA(Rotary2)
 EMPTY_DELETEDATA(Rotary2)
 

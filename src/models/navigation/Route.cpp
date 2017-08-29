@@ -21,7 +21,7 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Route,"Route")
+IMPLEMENT_SUBCLASS(Route, "Route")
 
 BEGIN_SLOTTABLE(Route)
     "to",               // 1) Initial "TO" steerpoint: by name (base::Identifier) or index (base::Number)
@@ -54,7 +54,7 @@ void Route::copyData(const Route& org, const bool)
     to = nullptr; // find it using 'initToStptName' or 'initToStptIdx'
 
     {
-        base::String* n = nullptr;
+        base::String* n {};
         if (org.initToStptName != nullptr) n = org.initToStptName->clone();
         initToStptName = n;
         if (n != nullptr) n->unref();  // safe_ptr<> has it
@@ -489,13 +489,13 @@ unsigned int Route::getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList
 //------------------------------------------------------------------------------
 bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 {
-    bool ok = false;
-    unsigned int num = getNumberOfSteerpoints();
+    bool ok {};
+    int num = static_cast<int>(getNumberOfSteerpoints());
     // make a new character string
-    char numString[10];
+    char numString[10] {};
 
     // this tells us the number of the next steerpoint to be created in the slot list
-    std::sprintf(numString,"%i", static_cast<int>(num+1));
+    std::sprintf(numString, "%i", static_cast<int>(num+1));
 
     // now we have the slot name, which is the next number in the steerpoint list
     // now create a new pair, and if we have a component list, add it to it, if
@@ -536,7 +536,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
             else if (pos > 0 && pos <= static_cast<int>(num)) {
 
                 // count to our position, then insert it
-                int counter = 1;
+                int counter {1};
                 base::List::Item* item = tempList->getFirstItem();
                 while (counter < pos && item != nullptr) {
                     item = item->getNext();

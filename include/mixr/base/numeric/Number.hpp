@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_numbers_Number_H__
-#define __mixr_base_numbers_Number_H__
+#ifndef __mixr_base_numeric_Number_H__
+#define __mixr_base_numeric_Number_H__
 
 #include "mixr/base/Object.hpp"
 #include <cstdint>
@@ -55,10 +55,11 @@ public:
 
    virtual void setValue(const double nv)   { val = nv; }
 
-   virtual bool setSlotValue(const Number* const);
-
 protected:
    double val {};   // value of this object
+
+   // slot table helper methods
+   virtual bool setSlotValue(const Number* const);
 };
 
 }

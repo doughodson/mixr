@@ -88,12 +88,6 @@ public:
     // Updates this timer.  Usually called by updateTimers().
     virtual void update(const double dt);
 
-protected:
-    // Slot functions
-    virtual bool setSlotTimerValue(const Time* const msg);    // Sets the timer value
-    virtual bool setSlotAlarmTime(const Time* const msg);    // Sets the alarm value
-    virtual bool setSlotTimerActive(const Number* const msg); // Sets the timer active (running) flag
-
 private:
     void initData();
 
@@ -108,8 +102,14 @@ private:
     static unsigned int nTimers;        // Number of timers in the list
     static long semaphore;              // Semaphore for the timer list
 
-    static void addToTimerList(Timer* timer);
-    static void removeFromTimerList(Timer* timer);
+    static void addToTimerList(Timer*);
+    static void removeFromTimerList(Timer*);
+
+private:
+    // slot table helper methods
+    bool setSlotTimerValue(const Time* const);      // Sets the timer value
+    bool setSlotAlarmTime(const Time* const);       // Sets the alarm value
+    bool setSlotTimerActive(const Number* const);   // Sets the timer active (running) flag
 };
 
 //

@@ -1,13 +1,14 @@
 
 #include "mixr/graphics/Translator.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
+IMPLEMENT_SUBCLASS(Translator, "Translator")
+EMPTY_SLOTTABLE(Translator)
 EMPTY_DELETEDATA(Translator)
 
 BEGIN_EVENT_HANDLER(Translator)
@@ -48,7 +49,7 @@ void Translator::draw()
 //------------------------------------------------------------------------------
 bool Translator::onUpdateX(const base::Number* const newX)
 {
-    bool ok = false;
+    bool ok {};
     if (newX != nullptr) ok = setXPos(newX->getReal());
     return ok;
 }
@@ -57,7 +58,7 @@ bool Translator::onUpdateX(const base::Number* const newX)
 //------------------------------------------------------------------------------
 bool Translator::onUpdateY(const base::Number* const newY)
 {
-    bool ok = false;
+    bool ok {};
     if (newY != nullptr) ok = setYPos(newY->getReal());
     return ok;
 }
@@ -66,7 +67,7 @@ bool Translator::onUpdateY(const base::Number* const newY)
 //------------------------------------------------------------------------------
 bool Translator::onUpdateZ(const base::Number* const newZ)
 {
-    bool ok = false;
+    bool ok {};
     if (newZ != nullptr) ok = setZPos(newZ->getReal());
     return ok;
 }

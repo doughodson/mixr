@@ -1,7 +1,6 @@
 
 #include "mixr/linearsystem/Sz2.hpp"
-#include "mixr/base/numbers/Number.hpp"
-#include <iostream>
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace linearsystem {
@@ -53,7 +52,7 @@ EMPTY_DELETEDATA(Sz2)
 
 bool Sz2::setSlotN1(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setN1( msg->getReal() );
       ok = true;
@@ -63,7 +62,7 @@ bool Sz2::setSlotN1(const base::Number* const msg)
 
 bool Sz2::setSlotN2(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setN2( msg->getReal() );
       ok = true;
@@ -73,7 +72,7 @@ bool Sz2::setSlotN2(const base::Number* const msg)
 
 bool Sz2::setSlotN3(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setN3( msg->getReal() );
       ok = true;
@@ -83,7 +82,7 @@ bool Sz2::setSlotN3(const base::Number* const msg)
 
 bool Sz2::setSlotD1(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setD1( msg->getReal() );
       ok = true;
@@ -93,7 +92,7 @@ bool Sz2::setSlotD1(const base::Number* const msg)
 
 bool Sz2::setSlotD2(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setD2( msg->getReal() );
       ok = true;
@@ -103,7 +102,7 @@ bool Sz2::setSlotD2(const base::Number* const msg)
 
 bool Sz2::setSlotD3(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setD3( msg->getReal() );
       ok = true;

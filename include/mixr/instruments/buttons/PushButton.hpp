@@ -25,7 +25,7 @@ public:
    bool getCurrentState() const { return currentState; };
 
    // sets the pushbutton type ie momentary = false or maintained = true
-   virtual bool setFunction(const bool x);
+   virtual bool setFunction(const bool);
 
    // The left mouse button has been depressed
    virtual bool onMouseDown();
@@ -36,17 +36,18 @@ public:
    virtual void updateData(const double dt = 0.0) override;
    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
-protected:
-   // sets the pushbutton type to momentary = false or maintained = true
-   bool setSlotFunction(const base::Number* const newFunction);
-   bool setSlotStartState(const base::Number* const newFunction);
-
 private:
    bool functionType {};     // false = momentary, true = maintained
    bool currentState {};     // false = off, true = on
    bool mouseDown {};        // mouse press down status
    SendData buttonStatusSD;  // what is our button doing?
    bool initState {};        // initial state
+
+private:
+   // slot table helper methods
+   // sets the pushbutton type to momentary = false or maintained = true
+   bool setSlotFunction(const base::Number* const);
+   bool setSlotStartState(const base::Number* const);
 };
 
 }

@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/ColorRotary.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -10,7 +10,7 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
+IMPLEMENT_SUBCLASS(ColorRotary, "ColorRotary")
 
 BEGIN_SLOTTABLE(ColorRotary)
     "breakcolors",      // set colors

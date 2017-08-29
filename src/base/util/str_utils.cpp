@@ -64,11 +64,11 @@ bool utStrcpy(char* const strDest, const std::size_t sizeOfDest, const char* con
    const std::size_t maxToCopy {sizeOfDest - 1};
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q {strDest};
+   const char* p {strSource};
 
    // Everything looks good, copy...
-   size_t idx = 0;
+   std::size_t idx {};
    while (idx++ < maxToCopy && (*q++ = *p++) != '\0') {}
    *q = '\0'; // null terminate
 

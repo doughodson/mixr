@@ -139,21 +139,6 @@ public:
    virtual bool setWidth(const unsigned int w) override;
    virtual bool setHeight(const unsigned int h) override;
 
-protected:
-   // Slot functions
-   bool setSlotWidth(const base::Number* const size);
-   bool setSlotHeight(const base::Number* const size);
-   bool setSlotRedScale(const base::Number* const s);
-   bool setSlotRedBias(const base::Number* const b);
-   bool setSlotGreenScale(const base::Number* const s);
-   bool setSlotGreenBias(const base::Number* const b);
-   bool setSlotBlueScale(const base::Number* const s);
-   bool setSlotBlueBias(const base::Number* const b);
-   bool setSlotWrapS(const base::Identifier* const v);
-   bool setSlotWrapT(const base::Identifier* const v);
-   bool setSlotMagFilter(const base::Identifier* const v);
-   bool setSlotMinFilter(const base::Identifier* const v);
-
 private:
    void initData();
 
@@ -172,6 +157,21 @@ private:
    GLfloat greenBias {0.0};
    GLfloat blueScale {1.0};
    GLfloat blueBias {0.0};
+
+private:
+   // slot table helper methods
+   bool setSlotWidth(const base::Number* const);
+   bool setSlotHeight(const base::Number* const);
+   bool setSlotRedScale(const base::Number* const);
+   bool setSlotRedBias(const base::Number* const);
+   bool setSlotGreenScale(const base::Number* const);
+   bool setSlotGreenBias(const base::Number* const);
+   bool setSlotBlueScale(const base::Number* const);
+   bool setSlotBlueBias(const base::Number* const);
+   bool setSlotWrapS(const base::Identifier* const);
+   bool setSlotWrapT(const base::Identifier* const);
+   bool setSlotMagFilter(const base::Identifier* const);
+   bool setSlotMinFilter(const base::Identifier* const);
 };
 
 inline GLuint Texture::getTexture() const          { return texture; }

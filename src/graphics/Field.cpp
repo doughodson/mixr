@@ -5,7 +5,7 @@
 #include "mixr/graphics/Page.hpp"
 #include "mixr/graphics/Display.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/colors/Rgb.hpp"

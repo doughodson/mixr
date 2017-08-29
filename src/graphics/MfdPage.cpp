@@ -1,9 +1,11 @@
+
 #include "mixr/graphics/MfdPage.hpp"
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MfdPage,"MfdPage")
+IMPLEMENT_SUBCLASS(MfdPage, "MfdPage")
+EMPTY_SLOTTABLE(MfdPage)
 EMPTY_COPYDATA(MfdPage)
 EMPTY_DELETEDATA(MfdPage)
 
@@ -61,10 +63,6 @@ BEGIN_EVENT_HANDLER(MfdPage)
     ON_EVENT(OSB_L10,onOsbL10)
 END_EVENT_HANDLER()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 MfdPage::MfdPage()
 {
     STANDARD_CONSTRUCTOR()

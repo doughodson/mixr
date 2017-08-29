@@ -32,7 +32,8 @@ void Force::copyData(const Force& org, const bool)
 //==============================================================================
 // Newtons() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Newtons, "Newtons")
+IMPLEMENT_SUBCLASS(Newtons, "Newtons")
+EMPTY_SLOTTABLE(Newtons)
 EMPTY_COPYDATA(Newtons)
 EMPTY_DELETEDATA(Newtons)
 
@@ -55,7 +56,8 @@ Newtons::Newtons(const Force& value) : Force()
 //==============================================================================
 // Kilonewtons() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloNewtons, "KiloNewtons")
+IMPLEMENT_SUBCLASS(KiloNewtons, "KiloNewtons")
+EMPTY_SLOTTABLE(KiloNewtons)
 EMPTY_COPYDATA(KiloNewtons)
 EMPTY_DELETEDATA(KiloNewtons)
 
@@ -78,7 +80,8 @@ KiloNewtons::KiloNewtons(const Force& value) : Force()
 //==============================================================================
 // PoundForces() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PoundForces, "PoundForces")
+IMPLEMENT_SUBCLASS(PoundForces, "PoundForces")
+EMPTY_SLOTTABLE(PoundForces)
 EMPTY_COPYDATA(PoundForces)
 EMPTY_DELETEDATA(PoundForces)
 
@@ -101,7 +104,8 @@ PoundForces::PoundForces(const Force& value) : Force()
 //==============================================================================
 // Poundals() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Poundals, "Poundals")
+IMPLEMENT_SUBCLASS(Poundals, "Poundals")
+EMPTY_SLOTTABLE(Poundals)
 EMPTY_COPYDATA(Poundals)
 EMPTY_DELETEDATA(Poundals)
 

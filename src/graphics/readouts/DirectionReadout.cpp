@@ -10,7 +10,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout, "DirectionReadout")
+IMPLEMENT_SUBCLASS(DirectionReadout, "DirectionReadout")
+EMPTY_SLOTTABLE(DirectionReadout)
 EMPTY_DELETEDATA(DirectionReadout)
 
 DirectionReadout::DirectionReadout()
@@ -98,6 +99,10 @@ double DirectionReadout::getInputValue() const
          std::sscanf(cbuf, "%lf", &value);
       }
       break;
+
+      case invalid: {   // not handled
+      }
+      break;
    }
    return static_cast<double>(value);
 }
@@ -140,6 +145,9 @@ void DirectionReadout::makeText()
       }
       break;
 
+      case invalid: {   // not handled
+      }
+      break;
    }
 
    // then turn any '@' characters to degree symbols.

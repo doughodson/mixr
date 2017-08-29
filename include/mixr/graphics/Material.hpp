@@ -63,23 +63,24 @@ public:
     base::Vec4d& getSpecularColor()      { return specularColor; }
     double getShininess()                { return shininess; }
 
-protected:
-    bool setSlotAmbientColor(const base::PairStream* const x);
-    bool setSlotAmbientColor(const base::Number* const x);
-    bool setSlotDiffuseColor(const base::PairStream* const x);
-    bool setSlotDiffuseColor(const base::Number* const x);
-    bool setSlotEmissiveColor(const base::PairStream* const x);
-    bool setSlotEmissiveColor(const base::Number* const x);
-    bool setSlotSpecularColor(const base::PairStream* const x);
-    bool setSlotSpecularColor(const base::Number* const x);
-    bool setSlotShininess(const base::Number*const x);
-
 private:
     base::Vec4d ambientColor;     // ambient color
     base::Vec4d diffuseColor;     // diffuse color
     base::Vec4d emissiveColor;    // emissive color
     base::Vec4d specularColor;    // specular color
     double shininess {};          // shininess value (default: no shine)
+
+private:
+    // slot table helper methods
+    bool setSlotAmbientColor(const base::PairStream* const);
+    bool setSlotAmbientColor(const base::Number* const);
+    bool setSlotDiffuseColor(const base::PairStream* const);
+    bool setSlotDiffuseColor(const base::Number* const);
+    bool setSlotEmissiveColor(const base::PairStream* const);
+    bool setSlotEmissiveColor(const base::Number* const);
+    bool setSlotSpecularColor(const base::PairStream* const);
+    bool setSlotSpecularColor(const base::Number* const);
+    bool setSlotShininess(const base::Number*const);
 };
 
 }

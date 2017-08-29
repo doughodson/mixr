@@ -15,12 +15,12 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class EngPage : public graphics::Page
 {
-   DECLARE_SUBCLASS(EngPage,graphics::Page)
+   DECLARE_SUBCLASS(EngPage, graphics::Page)
 
 public:
     EngPage();
 
-    static const int NUM_ENG = 4;
+    static const int NUM_ENG {4};
 
     // set functions: engine index range [ 1 .. NUM_ENG ]
     virtual bool setEngN1(const int idx, const double newN1);       // %RPM

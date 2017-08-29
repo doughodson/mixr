@@ -22,25 +22,27 @@ public:
     DialArcSegment();
 
     // set functions
-    virtual bool setIsDynamic(const bool newID);
-    virtual bool setOuterRadius(const double x);
-    virtual bool setFilled(const bool x);
+    virtual bool setIsDynamic(const bool);
+    virtual bool setOuterRadius(const double);
+    virtual bool setFilled(const bool);
 
     virtual void drawFunc() override;
 
     virtual void updateData(const double dt = 0.0) override;
 
 protected:
-    bool setSlotIsDynamic(const base::Number* const newD);
-    bool setSlotOuterRadius(const base::Number* const x);
-    bool setSlotFilled(const base::Number* const x);
-
-    virtual bool onUpdateRadius(const base::Number* const x) override;
+    virtual bool onUpdateRadius(const base::Number* const) override;
 
 private:
     bool isDynamic {};          // are we setting sweep angle based on value?
     double outerRadius {0.5};   // just a bit bigger than analog dial
     bool filled {true};
+
+private:
+    // slot table helper methods
+    bool setSlotIsDynamic(const base::Number* const);
+    bool setSlotOuterRadius(const base::Number* const);
+    bool setSlotFilled(const base::Number* const);
 };
 
 }

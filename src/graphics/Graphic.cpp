@@ -9,17 +9,17 @@
 #include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
-#include "mixr/base/numbers/Integer.hpp"
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
 
 namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
-double Graphic::fTimer = 0.0;
-GLuint Graphic::autoSelName = 0x00800000;
+double Graphic::fTimer {};
+GLuint Graphic::autoSelName {0x00800000};
 
 BEGIN_SLOTTABLE(Graphic)
     "color",                //  1: color

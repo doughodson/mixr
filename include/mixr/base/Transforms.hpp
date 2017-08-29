@@ -45,25 +45,25 @@ class Number;
 //------------------------------------------------------------------------------
 class Transform : public Object
 {
-    DECLARE_SUBCLASS(Transform, Object)
+   DECLARE_SUBCLASS(Transform, Object)
 
 public:
-    Transform();
-    operator const Matrixd&()                                         { return m; }
-    virtual bool setComputematrix1(const Angle* const sc1obj);
-    virtual bool setComputematrix1(const Number* const sc1obj);
-    virtual bool setComputematrix2(const Angle* const sc2obj);
-    virtual bool setComputematrix2(const Number* const sc2obj);
-    virtual bool setComputematrix3(const Angle* const sc3obj);
-    virtual bool setComputematrix3(const Number* const sc3obj);
-    virtual bool setComputematrix4(const Angle* const sc4obj);
-    virtual bool setComputematrix4(const Number* const sc4obj);
+   Transform();
+   operator const Matrixd&()                                         { return m; }
+   virtual bool setComputematrix1(const Angle* const);
+   virtual bool setComputematrix1(const Number* const);
+   virtual bool setComputematrix2(const Angle* const);
+   virtual bool setComputematrix2(const Number* const);
+   virtual bool setComputematrix3(const Angle* const);
+   virtual bool setComputematrix3(const Number* const);
+   virtual bool setComputematrix4(const Angle* const);
+   virtual bool setComputematrix4(const Number* const);
 
 protected:
-    virtual void computeMatrix();
-    Matrixd m;                   // transformation matrix
-    std::array<double, 4> v {};  // values
-    int nv {};                   // Number of values
+   virtual void computeMatrix();
+   Matrixd m;                   // transformation matrix
+   std::array<double, 4> v {};  // values
+   int nv {};                   // Number of values
 };
 
 //------------------------------------------------------------------------------
@@ -84,9 +84,9 @@ protected:
 //------------------------------------------------------------------------------
 class Translation : public Transform
 {
-    DECLARE_SUBCLASS(Translation, Transform)
+   DECLARE_SUBCLASS(Translation, Transform)
 public:
-    Translation();
+   Translation();
 protected:
    virtual void computeMatrix() override;
 };
@@ -109,9 +109,9 @@ protected:
 //------------------------------------------------------------------------------
 class Rotation : public Transform
 {
-    DECLARE_SUBCLASS(Rotation, Transform)
+   DECLARE_SUBCLASS(Rotation, Transform)
 public:
-    Rotation();
+   Rotation();
 protected:
    virtual void computeMatrix() override;
 };
@@ -134,9 +134,9 @@ protected:
 //------------------------------------------------------------------------------
 class Scale : public Transform
 {
-    DECLARE_SUBCLASS(Scale, Transform)
+   DECLARE_SUBCLASS(Scale, Transform)
 public:
-    Scale();
+   Scale();
 protected:
    virtual void computeMatrix() override;
 };

@@ -79,7 +79,7 @@ public:
    uint32_t getNetAddr() const;                 // Gets the network (remote) host IP address
 
    bool getSharedFlag() const;                  // Is the socket address shared?
-   void setSharedFlag(const bool b);
+   void setSharedFlag(const bool);
 
    virtual bool initNetwork(const bool noWaitFlag) override;
    virtual bool isConnected() const override;
@@ -93,37 +93,28 @@ public:
    uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
    uint16_t getLastFromPort() const;     // Port address of last valid recvData()
 
-   // Slot functions
-   virtual bool setSlotLocalIpAddress(const String* const msg);
-   virtual bool setSlotPort(const Number* const msg);
-   virtual bool setSlotLocalPort(const Number* const msg);
-   virtual bool setSlotShared(const Number* const msg);
-   virtual bool setSlotSendBuffSize(const Number* const msg);
-   virtual bool setSlotRecvBuffSize(const Number* const msg);
-   virtual bool setSlotIgnoreSourcePort(const Number* const msg);
-
 protected:
    virtual bool init() override;
 
    virtual bool bindSocket();          // Bind socket to address
 
    // Sets the network IP address
-   bool setNetAddr(const uint32_t netAddr);
+   bool setNetAddr(const uint32_t);
 
    // Sets the network IP address by host name
    bool setNetAddr(const char* const hostname);
 
    // Sets the port number
-   bool setPort(const uint16_t n);
+   bool setPort(const uint16_t);
 
    // Sets the local IP address
-   bool setLocalAddr(const uint32_t addr);
+   bool setLocalAddr(const uint32_t);
 
    // Sets the local IP address using the Internet standard "." (dotted) notation
-   bool setLocalAddr(const char* const addr);
+   bool setLocalAddr(const char* const);
 
    // Sets the local port number
-   bool setLocalPort(const uint16_t n);
+   bool setLocalPort(const uint16_t);
 
    // Set the output buffer size
    bool setSendBuffSize();
@@ -146,6 +137,16 @@ private:
    bool initialized {};                // handler has been initialized
    unsigned int sendBuffSizeKb {32};   // Send buffer size in KBs
    unsigned int recvBuffSizeKb {128};  // Receive buffer size in KBs
+
+private:
+   // slot table helper methods
+   bool setSlotLocalIpAddress(const String* const);
+   bool setSlotPort(const Number* const);
+   bool setSlotLocalPort(const Number* const);
+   bool setSlotShared(const Number* const);
+   bool setSlotSendBuffSize(const Number* const);
+   bool setSlotRecvBuffSize(const Number* const);
+   bool setSlotIgnoreSourcePort(const Number* const);
 };
 
 // Port#

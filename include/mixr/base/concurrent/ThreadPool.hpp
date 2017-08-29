@@ -72,10 +72,6 @@ public:
    // Destroys all threads in the thread pool.
    void destroy();
 
-   // Slot functions
-   virtual bool setSlotNumThreads(const Number* const);
-   virtual bool setSlotPriority(const Number* const);
-
 protected:
    void threadAvailable(ThreadPoolThread* availableThread);
 
@@ -99,6 +95,11 @@ private:
 
    // Callback object for when we're not using threading
    Object* unthreadedObj {};
+
+private:
+   // slot table helper methods
+   bool setSlotNumThreads(const Number* const);
+   bool setSlotPriority(const Number* const);
 };
 
 }

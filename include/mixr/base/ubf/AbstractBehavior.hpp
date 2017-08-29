@@ -35,10 +35,12 @@ protected:
    unsigned int getVote() const;
    virtual void setVote(const unsigned int x);
 
-   bool setSlotVote(const base::Number* const num);
-
 private:
    unsigned int vote {};
+
+private:
+   // slot table helper methods
+   bool setSlotVote(const base::Number* const);
 };
 
 inline void AbstractBehavior::setVote(const unsigned int x)    { vote = x; }

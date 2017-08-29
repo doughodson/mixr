@@ -5,28 +5,19 @@
 namespace mixr {
 namespace base {
 
-//==============================================================================
-// Density --
-//==============================================================================
 IMPLEMENT_SUBCLASS(Density, "Density")
+EMPTY_DELETEDATA(Density)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Density)
     "mass",    // 1: Mass
     "volume",  // 2: Volume
 END_SLOTTABLE(Density)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Density)
     ON_SLOT(1, setSlotMass, Mass)
     ON_SLOT(2, setSlotVolume, Volume)
 END_SLOT_MAP()
 
-// ---
-// constructors
-// ---
 Density::Density(double value, const Mass* newMass, const Volume* newVolume) : Number()
 {
     STANDARD_CONSTRUCTOR()
@@ -59,32 +50,13 @@ Density::Density() : Number()
     val = 1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void Density::copyData(const Density& org, const bool cc)
+void Density::copyData(const Density& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc)
-    {
-        // initialize pointers when called by copy constructor
-        myMass = nullptr;
-        myVolume = nullptr;
-    }
 
     val = org.getReal();
     myMass = org.getMass();
     myVolume = org.getVolume();
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void Density::deleteData()
-{
-    myMass = nullptr;
-    myVolume = nullptr;
 }
 
 //------------------------------------------------------------------------------

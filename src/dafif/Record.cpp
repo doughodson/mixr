@@ -13,7 +13,8 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
+IMPLEMENT_SUBCLASS(Record, "Record")
+EMPTY_SLOTTABLE(Record)
 
 Record::Record()
 {
@@ -243,9 +244,9 @@ bool Record::isCycleDate(const char date[]) const
 //------------------------------------------------------------------------------
 const char* Record::makePointer(const std::size_t n) const
 {
-   const char* p = nullptr;
+   const char* p {};
    if (len() != 0) {
-      const char* rec = *this;
+      const char* rec {*this};
       if (n > 0 && n <= len()) p = (rec + n - 1);
    }
    return p;

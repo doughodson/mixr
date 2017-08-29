@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/time_utils.hpp"
 
@@ -18,7 +18,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel, "LaeroModel")
+IMPLEMENT_SUBCLASS(LaeroModel, "LaeroModel")
+EMPTY_SLOTTABLE(LaeroModel)
 EMPTY_DELETEDATA(LaeroModel)
 
 //----------------------------------------------------------

@@ -1,7 +1,9 @@
-// Area.cpp: implementation of the Area class .          
+
+//------------------------------------------------------------------------------
+// Area.cpp: implementation of the Area classes          
 // Square - Meters, Inches, Yards, Miles, KiloMeters, CentiMeters, MilliMeters,
 // DecibelMeters, Feet
-///////////////////////////////////////////////////////////////////////////////
+//------------------------------------------------------------------------------
 
 #include "mixr/base/units/Areas.hpp"
 
@@ -36,7 +38,8 @@ void Area::copyData(const Area& org, const bool)
 //==============================================================================
 // SquareMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMeters, "SquareMeters")
+IMPLEMENT_SUBCLASS(SquareMeters, "SquareMeters")
+EMPTY_SLOTTABLE(SquareMeters)
 EMPTY_COPYDATA(SquareMeters)
 EMPTY_DELETEDATA(SquareMeters)
 
@@ -60,7 +63,8 @@ SquareMeters::SquareMeters(const Area& value) : Area()
 //==============================================================================
 // SquareFeet() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareFeet, "SquareFeet")
+IMPLEMENT_SUBCLASS(SquareFeet, "SquareFeet")
+EMPTY_SLOTTABLE(SquareFeet)
 EMPTY_COPYDATA(SquareFeet)
 EMPTY_DELETEDATA(SquareFeet)
 
@@ -83,7 +87,8 @@ SquareFeet::SquareFeet(const Area& value) : Area()
 //==============================================================================
 // SquareInches() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareInches, "SquareInches")
+IMPLEMENT_SUBCLASS(SquareInches, "SquareInches")
+EMPTY_SLOTTABLE(SquareInches)
 EMPTY_COPYDATA(SquareInches)
 EMPTY_DELETEDATA(SquareInches)
 
@@ -106,7 +111,8 @@ SquareInches::SquareInches(const Area& value) : Area()
 //==============================================================================
 // SquareYards() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareYards, "SquareYards")
+IMPLEMENT_SUBCLASS(SquareYards, "SquareYards")
+EMPTY_SLOTTABLE(SquareYards)
 EMPTY_COPYDATA(SquareYards)
 EMPTY_DELETEDATA(SquareYards)
 
@@ -129,7 +135,8 @@ SquareYards::SquareYards(const Area& value) : Area()
 //==============================================================================
 // SquareMiles() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMiles, "SquareMiles")
+IMPLEMENT_SUBCLASS(SquareMiles, "SquareMiles")
+EMPTY_SLOTTABLE(SquareMiles)
 EMPTY_COPYDATA(SquareMiles)
 EMPTY_DELETEDATA(SquareMiles)
 
@@ -152,7 +159,8 @@ SquareMiles::SquareMiles(const Area& value) : Area()
 //==============================================================================
 // SquareCentiMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareCentiMeters, "SquareCentiMeters")
+IMPLEMENT_SUBCLASS(SquareCentiMeters, "SquareCentiMeters")
+EMPTY_SLOTTABLE(SquareCentiMeters)
 EMPTY_COPYDATA(SquareCentiMeters)
 EMPTY_DELETEDATA(SquareCentiMeters)
 
@@ -175,7 +183,8 @@ SquareCentiMeters::SquareCentiMeters(const Area& value) : Area()
 //==============================================================================
 // SquareMilliMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareMilliMeters, "SquareMilliMeters")
+IMPLEMENT_SUBCLASS(SquareMilliMeters, "SquareMilliMeters")
+EMPTY_SLOTTABLE(SquareMilliMeters)
 EMPTY_COPYDATA(SquareMilliMeters)
 EMPTY_DELETEDATA(SquareMilliMeters)
 
@@ -198,7 +207,8 @@ SquareMilliMeters::SquareMilliMeters(const Area& value) : Area()
 //==============================================================================
 // SquareKiloMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SquareKiloMeters, "SquareKiloMeters")
+IMPLEMENT_SUBCLASS(SquareKiloMeters, "SquareKiloMeters")
+EMPTY_SLOTTABLE(SquareKiloMeters)
 EMPTY_COPYDATA(SquareKiloMeters)
 EMPTY_DELETEDATA(SquareKiloMeters)
 
@@ -221,7 +231,8 @@ SquareKiloMeters::SquareKiloMeters(const Area& value) : Area()
 //==============================================================================
 // DecibelSquareMeters() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelSquareMeters, "DecibelSquareMeters")
+IMPLEMENT_SUBCLASS(DecibelSquareMeters, "DecibelSquareMeters")
+EMPTY_SLOTTABLE(DecibelSquareMeters)
 EMPTY_COPYDATA(DecibelSquareMeters)
 EMPTY_DELETEDATA(DecibelSquareMeters)
 

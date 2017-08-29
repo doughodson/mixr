@@ -9,10 +9,10 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")
+IMPLEMENT_SUBCLASS(Navaid, "Navaid")
+EMPTY_SLOTTABLE(Navaid)
 EMPTY_COPYDATA(Navaid)
 EMPTY_DELETEDATA(Navaid)
-
 
 // Navaid class field Position Table
 const Navaid::Ptbl Navaid::ptable = {

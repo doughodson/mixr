@@ -28,7 +28,7 @@
 #include "mixr/simulation/AbstractNetIO.hpp"
 #include "mixr/simulation/AbstractNib.hpp"
 
-#include "mixr/base/numbers/Boolean.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/LatLon.hpp"
 #include "mixr/base/PairStream.hpp"

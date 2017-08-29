@@ -8,7 +8,7 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
+IMPLEMENT_SUBCLASS(NavaidLoader, "NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
 
 NavaidLoader::NavaidLoader() : Database()

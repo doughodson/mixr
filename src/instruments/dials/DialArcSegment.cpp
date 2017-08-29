@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/dials/DialArcSegment.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 #include <GL/glu.h>

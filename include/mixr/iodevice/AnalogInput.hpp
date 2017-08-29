@@ -76,12 +76,12 @@ protected:
    virtual double convert(const double vin, const double dt);
 
    // Slot functions
-   virtual bool setSlotLocation(const base::Number* const msg);
-   virtual bool setSlotChannel(const base::Number* const msg);
-   virtual bool setSlotValue(const base::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const);
+   virtual bool setSlotChannel(const base::Number* const);
+   virtual bool setSlotValue(const base::Number* const);
    virtual bool setSlotDeadband(const base::Number* const);
-   virtual bool setSlotOffset(const base::Number* const msg);
-   virtual bool setSlotGain(const base::Number* const msg);
+   virtual bool setSlotOffset(const base::Number* const);
+   virtual bool setSlotGain(const base::Number* const);
 
 private:
    void initData();

@@ -10,12 +10,11 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WaypointLoader,"WaypointLoader")
+IMPLEMENT_SUBCLASS(WaypointLoader, "WaypointLoader")
+EMPTY_SLOTTABLE(WaypointLoader)
+EMPTY_DELETEDATA(WaypointLoader)
+EMPTY_COPYDATA(WaypointLoader)
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 WaypointLoader::WaypointLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -36,25 +35,6 @@ WaypointLoader::WaypointLoader(
    db->setFilename(file);
    load(country);
 }
-
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void WaypointLoader::copyData(const WaypointLoader& org, const bool cc)
-{
-   BaseClass::copyData(org);
-   if (cc) {
-   }
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void WaypointLoader::deleteData()
-{
-}
-
 
 //------------------------------------------------------------------------------
 // load() --

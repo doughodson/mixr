@@ -16,7 +16,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class DialPointer : public AnalogDial
 {
-    DECLARE_SUBCLASS(DialPointer,AnalogDial)
+    DECLARE_SUBCLASS(DialPointer, AnalogDial)
 
 public:
     DialPointer();

@@ -34,7 +34,8 @@ void Distance::copyData(const Distance& org, const bool)
 //==============================================================================
 // Meters --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Meters, "Meters")
+IMPLEMENT_SUBCLASS(Meters, "Meters")
+EMPTY_SLOTTABLE(Meters)
 EMPTY_COPYDATA(Meters)
 EMPTY_DELETEDATA(Meters)
 
@@ -57,7 +58,8 @@ Meters::Meters(const Distance& value) : Distance()
 //==============================================================================
 // CentiMeters --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(CentiMeters, "CentiMeters")
+IMPLEMENT_SUBCLASS(CentiMeters, "CentiMeters")
+EMPTY_SLOTTABLE(CentiMeters)
 EMPTY_COPYDATA(CentiMeters)
 EMPTY_DELETEDATA(CentiMeters)
 
@@ -80,7 +82,8 @@ CentiMeters::CentiMeters(const Distance& value) : Distance()
 //==============================================================================
 // MicroMeters --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MicroMeters, "MicroMeters")
+IMPLEMENT_SUBCLASS(MicroMeters, "MicroMeters")
+EMPTY_SLOTTABLE(MicroMeters)
 EMPTY_COPYDATA(MicroMeters)
 EMPTY_DELETEDATA(MicroMeters)
 
@@ -103,7 +106,8 @@ MicroMeters::MicroMeters(const Distance& value) : Distance()
 //==============================================================================
 // Microns -- Same as Micrometers
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Microns, "Microns")
+IMPLEMENT_SUBCLASS(Microns, "Microns")
+EMPTY_SLOTTABLE(Microns)
 EMPTY_COPYDATA(Microns)
 EMPTY_DELETEDATA(Microns)
 
@@ -126,7 +130,8 @@ Microns::Microns(const Distance& value) : Distance()
 //==============================================================================
 // KiloMeters --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloMeters, "KiloMeters")
+IMPLEMENT_SUBCLASS(KiloMeters, "KiloMeters")
+EMPTY_SLOTTABLE(KiloMeters)
 EMPTY_COPYDATA(KiloMeters)
 EMPTY_DELETEDATA(KiloMeters)
 
@@ -149,7 +154,8 @@ KiloMeters::KiloMeters(const Distance& value) : Distance()
 //==============================================================================
 // Inches --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Inches, "Inches")
+IMPLEMENT_SUBCLASS(Inches, "Inches")
+EMPTY_SLOTTABLE(Inches)
 EMPTY_COPYDATA(Inches)
 EMPTY_DELETEDATA(Inches)
 
@@ -172,7 +178,8 @@ Inches::Inches(const Distance& value) : Distance()
 //==============================================================================
 // Feet --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Feet, "Feet")
+IMPLEMENT_SUBCLASS(Feet, "Feet")
+EMPTY_SLOTTABLE(Feet)
 EMPTY_COPYDATA(Feet)
 EMPTY_DELETEDATA(Feet)
 
@@ -195,7 +202,8 @@ Feet::Feet(const Distance& value) : Distance()
 //==============================================================================
 // NauticalMiles --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NauticalMiles, "NauticalMiles")
+IMPLEMENT_SUBCLASS(NauticalMiles, "NauticalMiles")
+EMPTY_SLOTTABLE(NauticalMiles)
 EMPTY_COPYDATA(NauticalMiles)
 EMPTY_DELETEDATA(NauticalMiles)
 
@@ -218,7 +226,8 @@ NauticalMiles::NauticalMiles(const Distance& value) : Distance()
 //==============================================================================
 // StatuteMiles --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StatuteMiles, "StatuteMiles")
+IMPLEMENT_SUBCLASS(StatuteMiles, "StatuteMiles")
+EMPTY_SLOTTABLE(StatuteMiles)
 EMPTY_COPYDATA(StatuteMiles)
 EMPTY_DELETEDATA(StatuteMiles)
 

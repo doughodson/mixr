@@ -43,13 +43,8 @@ public:
     virtual void updateData(const double dt = 0.0) override;
 
 protected:
-    // slot functions
-    bool setSlotScalingTable(const base::Table1* const newTable);
-    bool setSlotInstVal(const base::Number* const newVal);
-    bool setSlotAllowValPass(const base::Number* const newAVP);
-
     // event functions
-    bool onUpdateInstVal(const base::Number* const newPos);
+    bool onUpdateInstVal(const base::Number* const);
 
 private:
     // member variables
@@ -57,6 +52,12 @@ private:
     double instVal {};                 // our instrument value
     double preScaleInstVal {};         // our pre-scaled instrument value (before linear interpolation)
     bool allowPassing {true};          // do we pass our instrument value down to our components?
+
+private:
+    // slot table helper methods
+    bool setSlotScalingTable(const base::Table1* const);
+    bool setSlotInstVal(const base::Number* const);
+    bool setSlotAllowValPass(const base::Number* const);
 };
 
 }

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_LatLon_H__
 #define __mixr_base_LatLon_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -66,38 +66,39 @@ class Number;
 //------------------------------------------------------------------------------
 class LatLon : public Number
 {
-    DECLARE_SUBCLASS(LatLon, Number)
+   DECLARE_SUBCLASS(LatLon, Number)
 
 public:
-    enum Dir { NONE, NORTH, SOUTH, EAST, WEST };
+   enum Dir { NONE, NORTH, SOUTH, EAST, WEST };
 
-    LatLon();
+   LatLon();
 
-    operator double() const                 { return Number::getDouble(); }
+   operator double() const         { return Number::getDouble(); }
 
-    Dir getDir() const                      { return dir; }
-    int getDeg() const                      { return deg; }
-    int getMin() const                      { return min; }
-    double getSec() const                   { return sec; }
-
-    //slottable functions start here
-    virtual bool setDirection(const String* const sdobj);
-    virtual bool setDegrees(const Number* const sdeobj);
-    virtual bool setMinutes(const Number* const smobj);
-    virtual bool setSeconds(const Number* const ssobj);
+   Dir getDir() const              { return dir; }
+   int getDeg() const              { return deg; }
+   int getMin() const              { return min; }
+   double getSec() const           { return sec; }
 
 protected:
-    void computeVal();
-    bool setDir(const char* const direction);
-    bool setDeg(const double degrees);
-    bool setMin(const double minutes);
-    bool setSec(const double seconds);
+   void computeVal();
+   bool setDir(const char* const direction);
+   bool setDeg(const double degrees);
+   bool setMin(const double minutes);
+   bool setSec(const double seconds);
 
 private:
-    Dir     dir {NONE};         // direction
-    int     deg {};             // degrees
-    int     min {};             // minutes
-    double  sec {};             // seconds
+   Dir     dir {NONE};  // direction
+   int     deg {};      // degrees
+   int     min {};      // minutes
+   double  sec {};      // seconds
+
+private:
+   // slot table helper methods
+   bool setDirection(const String* const);
+   bool setDegrees(const Number* const);
+   bool setMinutes(const Number* const);
+   bool setSeconds(const Number* const);
 };
 
 }

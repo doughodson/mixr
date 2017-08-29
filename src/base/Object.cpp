@@ -150,10 +150,12 @@ int Object::slotName2Index(const char* const slotname) const
 //------------------------------------------------------------------------------
 bool Object::setSlotByName(const char* const slotname, Object* const obj)
 {
-    bool ok = false;
+    bool ok {};
     if (obj == nullptr) return ok;
-    int slotindex = slotName2Index(slotname);
-    if (slotindex > 0) ok = setSlotByIndex(slotindex,obj);
+    const int slotindex {slotName2Index(slotname)};
+    if (slotindex > 0) {
+        ok = setSlotByIndex(slotindex,obj);
+    }
     return ok;
 }
 

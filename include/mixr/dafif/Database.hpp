@@ -174,9 +174,6 @@ public:
    };
 
 protected:
-   bool setSlotPathname(base::String* const msg);
-   bool setSlotFilename(base::String* const msg);
-
    bool openDatabaseFile();
 
    const char* dbGetRecord(const Key* key, const int size = 0);
@@ -228,6 +225,12 @@ protected:
 
    bool dbInUse {};     // Database In-Use flag
    bool dbLoaded {};    // Database has been loader
+
+private:
+   // slot table helper methods
+   bool setSlotPathname(base::String* const);
+   bool setSlotFilename(base::String* const);
+
 };
 
 }

@@ -16,7 +16,6 @@ BEGIN_SLOTTABLE(Arbiter)
    "behaviors"                    //  1) behaviors
 END_SLOTTABLE(Arbiter)
 
-//  mapping of slots to handles
 BEGIN_SLOT_MAP(Arbiter)
    ON_SLOT(1, setSlotBehaviors, base::PairStream)
 END_SLOT_MAP()

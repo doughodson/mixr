@@ -32,6 +32,10 @@ class Rgba : public Rgb
 public:
     Rgba(const double r, const double g, const double b, const double a);
     Rgba();
+
+private:
+    // slot table helper methods
+    bool setSlotAlpha(Number* const);
 };
 
 }

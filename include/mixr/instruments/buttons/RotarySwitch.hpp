@@ -15,7 +15,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class RotarySwitch : public Button
 {
-    DECLARE_SUBCLASS(RotarySwitch,Button)
+   DECLARE_SUBCLASS(RotarySwitch,Button)
 
 public:
    RotarySwitch();
@@ -27,18 +27,18 @@ public:
 
    virtual void updateData(const double dt = 0.0) override;
 
-protected:
-    bool setSlotAngles(const base::PairStream* const stream);
-    bool setSlotStartPosition(const base::Number* const x);
+private:
+   static const int MAX_ANGLES = 500;
+
+   int currentPosition {1};    //current switch position
+   std::array<double, MAX_ANGLES> angles {};
+   int numAngs {};
+   int startPosition {1};
+   SendData angleSD;       // angle to send to our rotator
 
 private:
-    static const int MAX_ANGLES = 500;
-
-    int currentPosition {1};    //current switch position
-    std::array<double, MAX_ANGLES> angles {};
-    int numAngs {};
-    int startPosition {1};
-    SendData angleSD;       // angle to send to our rotator
+   bool setSlotAngles(const base::PairStream* const);
+   bool setSlotStartPosition(const base::Number* const);
 };
 
 }

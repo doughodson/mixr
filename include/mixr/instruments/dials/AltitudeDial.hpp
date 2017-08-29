@@ -32,7 +32,7 @@ public:
     virtual void updateData(const double dt = 0) override;
 
 private:
-    bool figureRotation(const double thisAlt);
+    bool figureRotation(const double);
 
     SendData dialAltSD;                     // sending our altitude to our dial pointer
     SendData altHundredsSD;                 // our hundreds altitude

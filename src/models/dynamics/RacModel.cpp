@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"

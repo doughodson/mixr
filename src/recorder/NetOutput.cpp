@@ -3,8 +3,7 @@
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/base/network/NetHandler.hpp"
-#include "mixr/base/numbers/Number.hpp"
-#include <iostream>
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace recorder {

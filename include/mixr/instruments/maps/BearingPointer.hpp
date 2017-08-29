@@ -29,13 +29,13 @@ class BearingPointer : public CompassRose
 public:
     BearingPointer();
 
-    double getBearingRad() const { return bearing; } // radians
-    double getBearingDeg() const { return bearing * static_cast<double>(base::angle::R2DCC); }    // degrees
-    graphics::Graphic* getHeadGraphic() const { return head; }
-    graphics::Graphic* getTailGraphic() const { return tail; }
+    double getBearingRad() const                          { return bearing; }  // radians
+    double getBearingDeg() const                          { return bearing * static_cast<double>(base::angle::R2DCC); }  // degrees
+    graphics::Graphic* getHeadGraphic() const             { return head; }
+    graphics::Graphic* getTailGraphic() const             { return tail; }
 
-    bool setBearingRad(const double newB);             // radians
-    bool setBearingDeg(const double newB);             // degrees
+    bool setBearingRad(const double);             // radians
+    bool setBearingDeg(const double);             // degrees
 
     virtual void drawFunc() override;
     virtual void draw() override;
@@ -43,22 +43,22 @@ public:
     virtual void updateData(const double dt = 0) override;
     virtual bool event(const int key, base::Object* const obj = nullptr) override;
 
-protected:
-    // slot functions
-    virtual bool setSlotHeadGraphic(const graphics::Graphic* const newH);
-    virtual bool setSlotTailGraphic(const graphics::Graphic* const newT);
-
 private:
     // event handlers
-    bool onUpdateRadBearingPointer(const base::Angle* const msg);
-    bool onUpdateRadBearingPointer(const base::Number* const msg);
-    bool onUpdateDegBearingPointer(const base::Number* const msg);
+    bool onUpdateRadBearingPointer(const base::Angle* const);
+    bool onUpdateRadBearingPointer(const base::Number* const);
+    bool onUpdateDegBearingPointer(const base::Number* const);
 
     double bearing {};     // used for bearing pointer, or if anyone else needs it for calculations (radians)
     double myRotation {};  // how much we are going to rotate the compass
     double myRadius {};    // our radius (comes from dial radius)
     graphics::Graphic* head {};    // our head graphic (if we have one)
     graphics::Graphic* tail {};    // our tail graphic (if we have one)
+
+private:
+    // slot table helper methods
+    bool setSlotHeadGraphic(const graphics::Graphic* const);
+    bool setSlotTailGraphic(const graphics::Graphic* const);
 };
 
 }

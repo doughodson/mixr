@@ -7,7 +7,7 @@
 #include "mixr/map/rpf/MapDrawer.hpp"
 #include "mixr/graphics/Texture.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

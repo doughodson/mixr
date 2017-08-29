@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
-// Classes:  Angle, Degrees, Radians, Semicircles
+// Classes: Angle, Degrees, Radians, Semicircles
 //------------------------------------------------------------------------------
 
 #ifndef __mixr_base_Angles_H__
 #define __mixr_base_Angles_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/constants.hpp"
 #include "mixr/base/units/angle_utils.hpp"
 #include <iostream>

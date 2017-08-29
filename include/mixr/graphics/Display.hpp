@@ -193,7 +193,6 @@ public:
          GLdouble oFar = 10.0
       );
 
-
    // ---
    // Scissor and subscreen areas
    // ---
@@ -310,37 +309,6 @@ public:
    virtual Image* readFrameBuffer(unsigned int* const width=0, unsigned int* const height=0);
    virtual Image* readFrameBuffer(const unsigned int x, const unsigned int y, const unsigned int width, const unsigned int height);
 
-   // ---
-   // Slot functions
-   // ---
-   bool setSlotLeftOrthoBound(const base::Number* const sloobj);
-   bool setSlotRightOrthoBound(const base::Number* const sroobj);
-   bool setSlotBottomOrthoBound(const base::Number* const sbobobj);
-   bool setSlotTopOrthoBound(const base::Number* const stobobj);
-   bool setSlotNearOrthoBound(const base::Number* const snobobj);
-   bool setSlotFarOrthoBound(const base::Number* const sfobobj);
-   bool setSlotViewportXOrigin(const base::Number* const svxoobj);
-   bool setSlotViewportYOrigin(const base::Number* const svyoobj);
-   bool setSlotViewportWidth(const base::Number* const svwobj);
-   bool setSlotViewportHeight(const base::Number* const svhobj);
-   bool setSlotSubdisplayStream(base::PairStream* const dsobj);
-   bool setSlotSubdisplaySingle(Display* const dobj);
-   bool setSlotStdLineWidth(const base::Number* const svhobj);
-   bool setSlotTexturesStream(base::PairStream* const obj);
-   bool setSlotTexturesSingle(Texture* const obj);
-   bool setSlotClearColor(const base::Color* const msg);
-   bool setSlotLeftBracketCharacter(const base::Number* const svhob);
-   bool setSlotLeftBracketCharacter(const base::String* const svhob);
-   bool setSlotRightBracketCharacter(const base::Number* const svhob);
-   bool setSlotRightBracketCharacter(const base::String* const svhob);
-   bool setSlotReverseVideoBrackets(const base::Number* const svhobj);
-   bool setFontList(base::PairStream* const dsobj);
-   bool setSlotClearDepth(const base::Number* const msg);
-   bool setSlotDisplayOrientation(const base::String* const msg);
-   bool setSlotMaterials(base::PairStream* const msg);
-   bool setSlotMaterials(Material* const msg);
-   bool setSlotAntialias(const base::Number* const msg);
-
    // sync double buffer swapping flag
    // (just in case we don't want to swap buffers every time, we can wait)
    virtual bool isOkToSwap() const;
@@ -408,6 +376,36 @@ private:
     char rightBracketChar {']'};          // right bracket character
 
     bool okToSwap {true};                 // just in case we don't want to swap buffers every time, we can wait.
+
+private:
+    // slot table helper methods
+    bool setSlotLeftOrthoBound(const base::Number* const);
+    bool setSlotRightOrthoBound(const base::Number* const);
+    bool setSlotBottomOrthoBound(const base::Number* const);
+    bool setSlotTopOrthoBound(const base::Number* const);
+    bool setSlotNearOrthoBound(const base::Number* const);
+    bool setSlotFarOrthoBound(const base::Number* const);
+    bool setSlotViewportXOrigin(const base::Number* const);
+    bool setSlotViewportYOrigin(const base::Number* const);
+    bool setSlotViewportWidth(const base::Number* const);
+    bool setSlotViewportHeight(const base::Number* const);
+    bool setSlotSubdisplayStream(base::PairStream* const);
+    bool setSlotSubdisplaySingle(Display* const);
+    bool setSlotStdLineWidth(const base::Number* const);
+    bool setSlotTexturesStream(base::PairStream* const);
+    bool setSlotTexturesSingle(Texture* const);
+    bool setSlotClearColor(const base::Color* const);
+    bool setSlotLeftBracketCharacter(const base::Number* const);
+    bool setSlotLeftBracketCharacter(const base::String* const);
+    bool setSlotRightBracketCharacter(const base::Number* const);
+    bool setSlotRightBracketCharacter(const base::String* const);
+    bool setSlotReverseVideoBrackets(const base::Number* const);
+    bool setFontList(base::PairStream* const);
+    bool setSlotClearDepth(const base::Number* const);
+    bool setSlotDisplayOrientation(const base::String* const);
+    bool setSlotMaterials(base::PairStream* const);
+    bool setSlotMaterials(Material* const);
+    bool setSlotAntialias(const base::Number* const);
 };
 
 inline const char* Display::getName() const                            { return name.c_str(); }

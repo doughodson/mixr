@@ -34,7 +34,8 @@ void Frequency::copyData(const Frequency& org, const bool)
 //==============================================================================
 // Hertz --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Hertz, "Hertz")
+IMPLEMENT_SUBCLASS(Hertz, "Hertz")
+EMPTY_SLOTTABLE(Hertz)
 EMPTY_COPYDATA(Hertz)
 EMPTY_DELETEDATA(Hertz)
 
@@ -57,7 +58,8 @@ Hertz::Hertz(const Frequency& value) : Frequency()
 //==============================================================================
 // KiloHertz --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloHertz, "KiloHertz")
+IMPLEMENT_SUBCLASS(KiloHertz, "KiloHertz")
+EMPTY_SLOTTABLE(KiloHertz)
 EMPTY_COPYDATA(KiloHertz)
 EMPTY_DELETEDATA(KiloHertz)
 
@@ -80,7 +82,8 @@ KiloHertz::KiloHertz(const Frequency& value) : Frequency()
 //==============================================================================
 // MegaHertz --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MegaHertz, "MegaHertz")
+IMPLEMENT_SUBCLASS(MegaHertz, "MegaHertz")
+EMPTY_SLOTTABLE(MegaHertz)
 EMPTY_COPYDATA(MegaHertz)
 EMPTY_DELETEDATA(MegaHertz)
 
@@ -103,7 +106,8 @@ MegaHertz::MegaHertz(const Frequency& value) : Frequency()
 //==============================================================================
 // GigaHertz --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GigaHertz, "GigaHertz")
+IMPLEMENT_SUBCLASS(GigaHertz, "GigaHertz")
+EMPTY_SLOTTABLE(GigaHertz)
 EMPTY_COPYDATA(GigaHertz)
 EMPTY_DELETEDATA(GigaHertz)
 
@@ -126,7 +130,8 @@ GigaHertz::GigaHertz(const Frequency& value) : Frequency()
 //==============================================================================
 // TeraHertz --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(TeraHertz, "TeraHertz")
+IMPLEMENT_SUBCLASS(TeraHertz, "TeraHertz")
+EMPTY_SLOTTABLE(TeraHertz)
 EMPTY_COPYDATA(TeraHertz)
 EMPTY_DELETEDATA(TeraHertz)
 

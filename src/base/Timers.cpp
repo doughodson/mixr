@@ -1,6 +1,6 @@
 
 #include "mixr/base/Timers.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/util/atomics.hpp"
 
@@ -9,14 +9,10 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(Timer, "Timer")
 
-//------------------------------------------------------------------------------
-// Class (static) variables
-//------------------------------------------------------------------------------
-bool Timer::frz = false;            // Freeze flag
-Timer* Timer::timers[MAX_TIMERS];   // List of timers
-unsigned int Timer::nTimers = 0;    // Number of timers in the list
-long Timer::semaphore = 0;          // Semaphore for the timer list
-
+bool Timer::frz {};                    // Freeze flag
+Timer* Timer::timers[MAX_TIMERS] {};   // List of timers
+unsigned int Timer::nTimers {};        // Number of timers in the list
+long Timer::semaphore {};              // Semaphore for the timer list
 
 BEGIN_SLOTTABLE(Timer)
    "timerValue",         // 1: Timer interval (default: 0)
@@ -24,11 +20,10 @@ BEGIN_SLOTTABLE(Timer)
    "active",             // 3: Sets timer active (running) flag (default: false)
 END_SLOTTABLE(Timer)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Timer)
-   ON_SLOT(1, setSlotTimerValue,Time)
-   ON_SLOT(2, setSlotAlarmTime,Time)
-   ON_SLOT(3, setSlotTimerActive,Number)
+   ON_SLOT(1, setSlotTimerValue, Time)
+   ON_SLOT(2, setSlotAlarmTime, Time)
+   ON_SLOT(3, setSlotTimerActive, Number)
 END_SLOT_MAP()
 
 Timer::Timer()
@@ -195,7 +190,8 @@ bool Timer::setSlotTimerActive(const Number* const msg)
 //==============================================================================
 // Class UpTimer
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(UpTimer,"UpTimer")
+IMPLEMENT_SUBCLASS(UpTimer, "UpTimer")
+EMPTY_SLOTTABLE(UpTimer)
 EMPTY_COPYDATA(UpTimer)
 EMPTY_DELETEDATA(UpTimer)
 
@@ -207,7 +203,8 @@ UpTimer::UpTimer(const double rtime) : Timer(UP,rtime)
 //==============================================================================
 // Class UpTimer
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DownTimer,"DownTimer")
+IMPLEMENT_SUBCLASS(DownTimer, "DownTimer")
+EMPTY_SLOTTABLE(DownTimer)
 EMPTY_COPYDATA(DownTimer)
 EMPTY_DELETEDATA(DownTimer)
 

@@ -315,9 +315,6 @@ protected:
    Pair* findStMachByType(const std::type_info& type);
    bool setStMach(const char* const name, const StateTableCode code);
 
-   // Slot function
-   bool setSlotStateMachines(const PairStream* const msg);
-
 private:
    void initData();
 
@@ -348,6 +345,10 @@ private:
 
    // List of state machines
    safe_ptr<PairStream> stMachList;
+
+private:
+   // slot table helper methods
+   bool setSlotStateMachines(const PairStream* const);
 };
 
 }

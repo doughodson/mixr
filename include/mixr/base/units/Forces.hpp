@@ -11,7 +11,7 @@
 #ifndef __mixr_base_Forces_H__
 #define __mixr_base_Forces_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/force_utils.hpp"
 #include <iostream>
 

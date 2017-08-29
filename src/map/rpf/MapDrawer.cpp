@@ -7,7 +7,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Texture.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
 

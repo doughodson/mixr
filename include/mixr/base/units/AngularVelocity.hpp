@@ -2,7 +2,7 @@
 #ifndef __mixr_base_AngularVelocity_H__
 #define __mixr_base_AngularVelocity_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -83,34 +83,32 @@ class AngularVelocity : public Number
 
 public:
 
-    //Constructor for input parser:
     AngularVelocity();
-    //Constructor with input as radians per second:
+    // constructor with input as radians per second
     AngularVelocity(const double newAngularVelocityRadiansPerSec);
-    //Constructor with angle in units desired and time in units desired:
+    // constructor with angle in units desired and time in units desired
     AngularVelocity(const Angle* const newAngle, const Time* const newTime);
 
-    //Returns in radians/second:
+    // Returns in radians/second
     double getRadiansPerSecond() const;
-    //Convert routine - converts angular velocity and outputs in units specified:
+    // Convert routine - converts angular velocity and outputs in units specified
     double convert(Angle* newAngle, Time* newTime);
 
-    //Sets Value of Object - Be sure input is in (rad/sec)
+    // Sets Value of Object - Be sure input is in (rad/sec)
     bool setRadiansPerSecond(const double newAngularVelocity);
 
-//------------------------------------------------------------------------------
-//Slot Table functions
-//------------------------------------------------------------------------------
-
-    bool setDegrees(const double newAngle);         //Input angle in (degrees)
-    bool setRadians(const double newAngle);         //Input angle in (radians)
-    bool setSeconds(const double newTime);          //Input time in (seconds)
-    bool setSlotAngle(const Angle* const msg);      //Input as type of angle (Radians, Degrees, ...)
-    bool setSlotTime(const Time* const msg);        //Input as type of time (Seconds, MilliSeconds, ...)
+    bool setDegrees(const double);         // Input angle in (degrees)
+    bool setRadians(const double);         // Input angle in (radians)
+    bool setSeconds(const double);         // Input time in (seconds)
 
 private:
     double angle {1.0};       // holds our angle (radians)
     double time {1.0};        // holds our time (seconds)
+
+private:
+    // slot table helper methods
+    bool setSlotAngle(const Angle* const);      // Input as type of angle (Radians, Degrees, ...)
+    bool setSlotTime(const Time* const);        // Input as type of time (Seconds, MilliSeconds, ...)
 };
 
 }

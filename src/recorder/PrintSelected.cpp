@@ -5,12 +5,14 @@
 
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/numbers/Float.hpp"
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 
+#include <string>
+#include <iostream>
 #include <iomanip>
 
 namespace mixr {
@@ -464,7 +466,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_UINT32) {
-                  unsigned int num = reflection->GetUInt32(root, fieldDescriptor);
+                  int num = static_cast<int>(reflection->GetUInt32(root, fieldDescriptor));
                   if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
                      ((condition == Condition::GT) && (static_cast<int>(num) > getCompareToNum())) ||
                      ((condition == Condition::LT) && (static_cast<int>(num) < getCompareToNum()))) {

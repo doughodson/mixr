@@ -256,7 +256,7 @@
 
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
-    const int ThisType::nslots = 0;                                                        \
+    const int ThisType::nslots {};                                                         \
     const ::mixr::base::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());    \
     bool ThisType::setSlotByIndex(const int si, ::mixr::base::Object* const obj)           \
     {                                                                                      \
@@ -302,12 +302,12 @@
 #define BEGIN_SLOT_MAP(ThisType)                                                           \
     bool ThisType::setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj)    \
     {                                                                                      \
-        const int _n = BaseClass::getSlotTable().n();                                      \
+        const int _n {BaseClass::getSlotTable().n()};                                      \
         if (slotindex <= _n) {                                                             \
             return BaseClass::setSlotByIndex(slotindex,obj);                               \
         }                                                                                  \
-        bool _ok = false;                                                                  \
-        int _n1 = (slotindex - _n);
+        bool _ok {};                                                                       \
+        int _n1 {slotindex - _n};
 
 
 #define END_SLOT_MAP()                                                                 \
@@ -315,7 +315,7 @@
     }
 
 
-#define ON_SLOT(idx,setFunc,ObjType)                                                   \
+#define ON_SLOT(idx, setFunc, ObjType)                                                 \
     if ( !_ok ) {                                                                      \
         const auto _msg = dynamic_cast<ObjType*>(obj);                                 \
         if (idx == _n1 && _msg != nullptr) {                                           \
@@ -410,7 +410,7 @@
       _ok = true;                                                          \
    }                                                                       \
    else if (_code == FIND_NEXT_STATE && _next == INVALID_STATE) {          \
-      _next =_cstate+1;        /* next is just one more! */                \
+      _next =_cstate + 1;      /* next is just one more! */                \
    }
 
 #endif

@@ -25,9 +25,9 @@ BEGIN_SLOTTABLE(SymbolLoader)
 END_SLOTTABLE(SymbolLoader)
 
 BEGIN_SLOT_MAP(SymbolLoader)
-   ON_SLOT(1,setSlotTemplates,base::PairStream)
-   ON_SLOT(2,setSlotShowInRangeOnly,base::Number)
-   ON_SLOT(3,setSlotInterconnect,base::Number)
+   ON_SLOT(1, setSlotTemplates, base::PairStream)
+   ON_SLOT(2, setSlotShowInRangeOnly, base::Number)
+   ON_SLOT(3, setSlotInterconnect, base::Number)
 END_SLOT_MAP()
 
 SymbolLoader::SymbolLoader()
@@ -76,7 +76,7 @@ void SymbolLoader::deleteData()
 //------------------------------------------------------------------------------
 int SymbolLoader::getNumberOfActiveSymbols() const
 {
-   int num = 0;
+   int num {};
    for (int i = 0; i < MAX_SYMBOLS; i++) {
       if(symbols[i] != nullptr) num++;
    }
@@ -88,7 +88,7 @@ int SymbolLoader::getNumberOfActiveSymbols() const
 //------------------------------------------------------------------------------
 int SymbolLoader::getSymbolType(const int idx) const
 {
-   int result = 0;
+   int result {};
 
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
@@ -106,7 +106,7 @@ int SymbolLoader::getSymbolType(const int idx) const
 //------------------------------------------------------------------------------
 int SymbolLoader::getSymbolIndex(const graphics::Graphic* const mySymbol) const
 {
-   int index = 0;
+   int index {};
    for (int i = 0; i < MAX_SYMBOLS; i++) {
       if (symbols[i] != nullptr) {
          base::Pair* p = symbols[i]->getSymbolPair();
@@ -122,33 +122,33 @@ int SymbolLoader::getSymbolIndex(const graphics::Graphic* const mySymbol) const
 //------------------------------------------------------------------------------
 SlSymbol* SymbolLoader::getSymbol(const int xPixel, const int yPixel)
 {
-   SlSymbol* sym = nullptr;
+   SlSymbol* sym {};
    if (getDisplay() != nullptr) {
 
       // we have to do a little math and figure our pixel to inches value
-      GLdouble l = 0, r = 0, b = 0, t = 0, n = 0, f = 0;
-      GLsizei w = 0, h = 0;
+      GLdouble l {}, r {}, b {}, t {}, n {}, f {};
+      GLsizei w {}, h {};
       getDisplay()->getOrtho(l, r, b, t, n, f);
       getDisplay()->getViewportSize(&w, &h);
-      const double inchPerPixWidth = (r * 2) / w;
-      const double inchPerPixHeight = (t * 2) / h;
+      const double inchPerPixWidth {(r * 2) / w};
+      const double inchPerPixHeight {(t * 2) / h};
 
       // we assume our xPixel and yPixel are from the center
-      const double inchX = xPixel * inchPerPixWidth;
-      const double inchY = yPixel * inchPerPixHeight;
+      const double inchX {xPixel * inchPerPixWidth};
+      const double inchY {yPixel * inchPerPixHeight};
 
       // index of the closest symbol
-      int id = -1;
+      int id {-1};
 
       // our "snapping" cursor distance is basically 1 pixel in the y direction
-      const double cursorDist = 1 * inchPerPixHeight;
+      const double cursorDist {1.0 * inchPerPixHeight};
 
-      double symX = 0;
-      double symY = 0;
-      double distX = 0;
-      double distY = 0;
-      double dist = 0;
-      double lastDist = 500000;
+      double symX {};
+      double symY {};
+      double distX {};
+      double distY {};
+      double dist {};
+      double lastDist {500000.0};
 
       // now search our symbols for the closest symbol
       for (int i = 0; i < MAX_SYMBOLS; i++) {
@@ -181,7 +181,7 @@ SlSymbol* SymbolLoader::getSymbol(const int xPixel, const int yPixel)
 //------------------------------------------------------------------------------
 int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 {
-   int idx = 0;
+   int idx {};
 
    if (templates != nullptr) {
 
@@ -202,18 +202,18 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 
                   // Clone the graphic template and set it as the
                   // symbol's graphical component.
-                  base::Pair* newPair = tpair->clone();
+                  base::Pair* newPair {tpair->clone()};
                   const auto newGraph = static_cast<graphics::Graphic*>(newPair->object());
 
                   // Set the new graphical component's select name
-                  GLuint mySelName = 0;
+                  GLuint mySelName {};
                   if (specName > 0) mySelName = specName;
                   else mySelName = graphics::Graphic::getNewSelectName();
                   newGraph->setSelectName(mySelName);
 
                   // Add the symbol's graphical component to our component list.
                   {
-                     base::PairStream* comp = getComponents();
+                     base::PairStream* comp {getComponents()};
                      base::Component::processComponents(comp, typeid(graphics::Graphic), newPair);
                      if (comp != nullptr) comp->unref();
                   }
@@ -242,11 +242,11 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 //------------------------------------------------------------------------------
 bool SymbolLoader::setSymbolType(const int idx, const int nType)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
 
          // Find the graphic template for this type symbol, and make
@@ -300,11 +300,11 @@ bool SymbolLoader::setSymbolType(const int idx, const int nType)
 //------------------------------------------------------------------------------
 bool SymbolLoader::removeSymbol(const int idx)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
 
          // ---
@@ -338,7 +338,7 @@ bool SymbolLoader::removeSymbol(const int idx)
 //------------------------------------------------------------------------------
 bool SymbolLoader::clearLoader()
 {
-   bool ok = false;
+   bool ok {};
    for (int idx = 1; idx <= MAX_SYMBOLS; idx++) {
       removeSymbol(idx);
    }
@@ -359,9 +359,9 @@ bool SymbolLoader::setShowInRangeOnly(const bool x)
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolPositionLL(const int idx, const double nLat, const double nLon)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setXPosition( nLat );
          symbols[i]->setYPosition( nLon );
@@ -380,9 +380,9 @@ bool SymbolLoader::updateSymbolPositionLL(const int idx, const double nLat, cons
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolPositionXY(const int idx, const double xPos, const double yPos)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setXPosition( xPos );
          symbols[i]->setYPosition( yPos );
@@ -400,9 +400,9 @@ bool SymbolLoader::updateSymbolPositionXY(const int idx, const double xPos, cons
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolPositionXYAircraft(const int idx, const double xPos, const double yPos)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setXPosition( xPos );
          symbols[i]->setYPosition( yPos );
@@ -422,9 +422,9 @@ bool SymbolLoader::updateSymbolPositionXYAircraft(const int idx, const double xP
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolPositionXYScreen(const int idx, const double xPos, const double yPos)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setXScreenPos( xPos );
          symbols[i]->setYScreenPos( yPos );
@@ -443,9 +443,9 @@ bool SymbolLoader::updateSymbolPositionXYScreen(const int idx, const double xPos
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolHeading(const int idx, const double hdg)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setHeadingDeg( hdg );
          ok = true;
@@ -459,9 +459,9 @@ bool SymbolLoader::updateSymbolHeading(const int idx, const double hdg)
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolValue(const int idx, base::Object* const value)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          symbols[i]->setValue( value );
          ok = true;
@@ -475,11 +475,11 @@ bool SymbolLoader::updateSymbolValue(const int idx, base::Object* const value)
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char newString[])
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
 
          // Get its graphical component
@@ -491,7 +491,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
                // If we were passed a name then use it to find the subcomponent
                // and change 'g' to point to the subcomponent instead.
                if (name != nullptr) {
-                  base::Pair* spair = g->findByName(name);
+                  base::Pair* spair {g->findByName(name)};
                   if (spair != nullptr) {
                      // subcomponent found by name
                      g = static_cast<graphics::Graphic*>(spair->object());
@@ -525,12 +525,12 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolText(const int idx, const char* name, const double x)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
-      if(symbols[i] != nullptr){
+      const int i {idx - 1};
+      if (symbols[i] != nullptr) {
 
          // Get its graphical component
          const auto p = static_cast<base::Pair*>(symbols[i]->getSymbolPair());
@@ -575,18 +575,18 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const doubl
 //------------------------------------------------------------------------------
 bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visibility)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
          // if no name is passed, the symbol is invisible, otherwise just
          // parts are
          if (name == nullptr) symbols[i]->setVisible(visibility);
 
          // Get its graphical component
-         base::Pair* p = symbols[i]->getSymbolPair();
+         base::Pair* p {symbols[i]->getSymbolPair()};
          if (p != nullptr) {
             auto g = static_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
@@ -621,15 +621,15 @@ bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visib
 //------------------------------------------------------------------------------
 bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const double flashRate )
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
 
          // Get its graphical component
-         base::Pair* p = symbols[i]->getSymbolPair();
+         base::Pair* p {symbols[i]->getSymbolPair()};
          if (p != nullptr) {
             auto g = static_cast<graphics::Graphic*>(p->object());
             if (g != nullptr) {
@@ -637,7 +637,7 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const dou
                // If we were passed a name then use it to find the subcomponent
                // and change 'g' to point to the subcomponent instead.
                if (name != nullptr) {
-                  base::Pair* spair = g->findByName(name);
+                  base::Pair* spair {g->findByName(name)};
                   if (spair != nullptr) {
                      // subcomponent found by name
                      g = static_cast<graphics::Graphic*>(spair->object());
@@ -663,11 +663,11 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const dou
 //------------------------------------------------------------------------------
 bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::Color* cobj)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if(symbols[i] != nullptr) {
 
          // Get its graphical component
@@ -705,11 +705,11 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::C
 //------------------------------------------------------------------------------
 bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::Identifier* cname)
 {
-   bool ok = false;
+   bool ok {};
 
    // Find the symbol
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if(symbols[i] != nullptr) {
 
          // Get its graphical component
@@ -721,7 +721,7 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::I
                // If we were passed a name then use it to find the subcomponent
                // and change 'g' to point to the subcomponent instead.
                if (name != nullptr) {
-                  base::Pair* spair = g->findByName(name);
+                  base::Pair* spair {g->findByName(name)};
                   if (spair != nullptr) {
                      // subcomponent found by name
                      g = static_cast<graphics::Graphic*>(spair->object());
@@ -747,11 +747,10 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::I
 //------------------------------------------------------------------------------
 bool SymbolLoader::updateSymbolSelectName(const int idx, const int newSN)
 {
-   bool ok = false;
+   bool ok {};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i {idx - 1};
       if (symbols[i] != nullptr) {
-
          const auto pair = static_cast<base::Pair*>(symbols[i]->getSymbolPair());
          if (pair != nullptr) {
             const auto graphic = static_cast<graphics::Graphic*>(pair->object());
@@ -815,14 +814,14 @@ void SymbolLoader::draw()
    if (isVisible()) {
 
       // Y Displacement (ie, decentered)
-      double displacement = 0;
+      double displacement {};
       if (!getCentered()) displacement = getDisplacement();
 
       // Radius (ie., range)
-      double radius = 0;
+      double radius {};
       if (!getCentered()) radius = getOuterRadiusDC();
       else radius = getOuterRadius();
-      double radius2 = radius * radius;
+      double radius2 {radius * radius};
 
       // ---
       // Setup the drawing parameters for all of our symbols ...
@@ -835,7 +834,7 @@ void SymbolLoader::draw()
             if (symbols[i]->isVisible()) {
 
                // Get the pointer to the symbol's graphical component
-               base::Pair* p = symbols[i]->getSymbolPair();
+               base::Pair* p {symbols[i]->getSymbolPair()};
                const auto g = static_cast<graphics::Graphic*>(p->object());
 
                // We need the symbol's position in screen coordinates (inches) ...
@@ -846,8 +845,8 @@ void SymbolLoader::draw()
 
                   // But when we were not give screen coordinates,
                   // we'll need to compute them from A/C coordinates
-                  double acX = 0.0;
-                  double acY = 0.0;
+                  double acX {};
+                  double acY {};
 
                   // 1) when given A/C coordinates ...
                   if ( symbols[i]->isPositionAC() ) {
@@ -857,8 +856,8 @@ void SymbolLoader::draw()
 
                   // 2) when given NED or L/L coordinates ..
                   else {
-                     double north = 0;
-                     double east  = 0;
+                     double north {};
+                     double east  {};
 
                      if (symbols[i]->isPositionLL()) {
                         // 2a) we were give L/L so convert to NED coordinates
@@ -885,7 +884,7 @@ void SymbolLoader::draw()
                }
 
                // In range?  Do we care?
-               bool inRange  = !showInRangeOnly || (((xScn * xScn) + (yScn * yScn)) <= radius2);
+               bool inRange {!showInRangeOnly || (((xScn * xScn) + (yScn * yScn)) <= radius2)};
 
                if (inRange) {
 
@@ -963,7 +962,7 @@ void SymbolLoader::draw()
 //------------------------------------------------------------------------------
 int SymbolLoader::getSymbols(base::safe_ptr<SlSymbol>* const newSyms, const int max)
 {
-   int numSymbols = 0;
+   int numSymbols {};
    if (max > 0) {
       for(int i = 0; i < MAX_SYMBOLS; i++) {
          if (symbols[i] != nullptr) {
@@ -983,7 +982,7 @@ int SymbolLoader::getSymbols(base::safe_ptr<SlSymbol>* const newSyms, const int 
 // simply loads our template pairstream
 bool SymbolLoader::setSlotTemplates(base::PairStream* msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       if (templates != nullptr) templates->unref();
       templates = msg;
@@ -996,7 +995,7 @@ bool SymbolLoader::setSlotTemplates(base::PairStream* msg)
 // Show in range only flag
 bool SymbolLoader::setSlotShowInRangeOnly(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) ok = setShowInRangeOnly(msg->getBoolean());
    return ok;
 }
@@ -1004,7 +1003,7 @@ bool SymbolLoader::setSlotShowInRangeOnly(const base::Number* const msg)
 // Interconnect flag
 bool SymbolLoader::setSlotInterconnect(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) ok = setInterconnect(msg->getBoolean());
    return ok;
 }
@@ -1013,8 +1012,8 @@ bool SymbolLoader::setSlotInterconnect(const base::Number* const msg)
 //==============================================================================
 // class SlSymbol
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SlSymbol, "SlSymbol")
-
+IMPLEMENT_SUBCLASS(SlSymbol, "SlSymbol")
+EMPTY_SLOTTABLE(SlSymbol)
 
 SlSymbol::SlSymbol()
 {
@@ -1053,14 +1052,14 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
    setHdgAngleObj(nullptr);
 
    {
-      base::Object* copy = nullptr;
+      base::Object* copy {};
       if (org.value != nullptr) copy = org.value->clone();
       setValue(copy);
       if (copy != nullptr) copy->unref();
    }
 
    {
-      base::Pair* copy = nullptr;
+      base::Pair* copy {};
       if (org.pntr != nullptr) copy = org.pntr->clone();
       setSymbolPair(copy);
       if (copy != nullptr) copy->unref();

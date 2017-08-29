@@ -1,5 +1,5 @@
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -22,12 +22,9 @@ void Number::copyData(const Number& org, const bool)
    val = org.val;
 }
 
-//------------------------------------------------------------------------------
-// slot functions
-//------------------------------------------------------------------------------
 bool Number::setSlotValue(const Number* const svobj)
 {
-   bool ok = false;
+   bool ok {};
    if (svobj != nullptr) {
       val = svobj->val;
       ok = true;

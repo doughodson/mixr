@@ -35,11 +35,11 @@ public:
     Rgb(const double r, const double g, const double b);
     Rgb();
 
-    // Slot methods
-    virtual bool setSlotRed(Number* const msg);
-    virtual bool setSlotGreen(Number* const msg);
-    virtual bool setSlotBlue(Number* const msg);
-    virtual bool setSlotAlpha(Number* const msg);
+private:
+    // slot table helper methods
+    bool setSlotRed(Number* const);
+    bool setSlotGreen(Number* const);
+    bool setSlotBlue(Number* const);
 };
 
 }

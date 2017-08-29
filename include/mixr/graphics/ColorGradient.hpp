@@ -25,12 +25,13 @@ public:
 
     base::Color* getColorByIdx(const int idx);
 
-protected:
-    bool setSlotColors(base::PairStream* const newStream);
-
 private:
     static const int MAX_VALUES = 50;
     base::PairStream* myColors {};
+
+private:
+    // slot table helper methods
+    bool setSlotColors(base::PairStream* const);
 };
 
 }

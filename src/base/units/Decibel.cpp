@@ -1,5 +1,6 @@
 
 #include "mixr/base/units/Decibel.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -7,7 +8,15 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel, "dB")
+IMPLEMENT_SUBCLASS(Decibel, "dB")
+
+BEGIN_SLOTTABLE(Decibel)
+    "value",
+END_SLOTTABLE(Decibel)
+
+BEGIN_SLOT_MAP(Decibel)
+    ON_SLOT(1, setSlotValue, Number)
+END_SLOT_MAP()
 
 Decibel::Decibel()
 {
@@ -43,12 +52,9 @@ void Decibel::setValue(const double v)
    db = std::log10(static_cast<double>(v)) * 10.0f;
 }
 
-//------------------------------------------------------------------------------
-// slot functions
-//------------------------------------------------------------------------------
 bool Decibel::setSlotValue(const Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setValueDB( msg->getReal() );
       ok = true;

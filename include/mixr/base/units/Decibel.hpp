@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Decibel_H__
 #define __mixr_base_Decibel_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -61,7 +61,10 @@ public:
     void operator-=(const double);
 
     virtual void setValue(const double nv) override;
-    virtual bool setSlotValue(const Number* const svobj) override;
+
+protected:
+    // slot table helper methods
+    bool setSlotValue(const Number* const) override;
 
 private:
     double db {};    // value in dBs

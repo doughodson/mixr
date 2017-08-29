@@ -3,7 +3,7 @@
 #include "mixr/graphics/Display.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -53,7 +53,6 @@ MapPage::MapPage()
 
 void MapPage::copyData(const MapPage& org, const bool)
 {
-   // copy base class stuff first
    BaseClass::copyData(org);
 
    heading = org.heading;
@@ -72,9 +71,6 @@ void MapPage::copyData(const MapPage& org, const bool)
    northUp = org.northUp;
 }
 
-//------------------------------------------------------------------------------
-// updateData() - updates the values
-//------------------------------------------------------------------------------
 void MapPage::updateData(const double dt)
 {
    // find our nearest map page above us and get the data from it!
@@ -107,30 +103,30 @@ void MapPage::updateData(const double dt)
 //------------------------------------------------------------------------------
 void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
 {
-   double xpos = x;
-   double ypos = y;
+   double xpos {static_cast<double>(x)};
+   double ypos {static_cast<double>(y)};
 
    // convert pixels position from top left to movement from center, so we
    // can base our cals from the center.
    if (getDisplay() != nullptr) {
-      double myLat = 0, myLon = 0;
-      double dLat = 0, dLon = 0;
-      GLsizei vpW = 0, vpH = 0;
+      double myLat {}, myLon {};
+      double dLat {}, dLon {};
+      GLsizei vpW {}, vpH {};
       getDisplay()->getViewportSize(&vpW, &vpH);
-      GLdouble tl = 0, tr = 0, tb = 0, tt = 0, tn = 0, tf = 0;
+      GLdouble tl {}, tr {}, tb {}, tt {}, tn {}, tf {};
       getDisplay()->getOrtho(tl, tr, tb, tt, tn, tf);
 
       // determine the middle of our viewing screen
-      const double startX = (vpW / 2.0);
-      const double startY = (vpH / 2.0);
+      const double startX {vpW / 2.0};
+      const double startY {vpH / 2.0};
 
       // find the position from our screen center (in pixels)
       xpos -= startX;
       ypos = startY - ypos;
 
       // we have to find our units per pixel
-      const double unitsPerPixE = ((tr * 2) / vpW);
-      const double unitsPerPixN = ((tt * 2) / vpH);
+      const double unitsPerPixE {(tr * 2) / vpW};
+      const double unitsPerPixN {(tt * 2) / vpH};
 
       // now from that we can determine our position in inches
       xpos *= unitsPerPixE;
@@ -143,8 +139,8 @@ void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
       ypos /= nm2Screen;
 
       if (!getNorthUp()) {
-         double acX = 0;
-         double acY = 0;
+         double acX {};
+         double acY {};
          earth2Aircraft( static_cast<double>(xpos), static_cast<double>(ypos), &acX, &acY);
          xpos = acX;
          ypos = acY;
@@ -171,7 +167,7 @@ void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
 //------------------------------------------------------------------------------
 void MapPage::moveMap(const int startX, const int startY, const int endX, const int endY)
 {
-   double eLat = 0, eLon = 0, lat = 0, lon = 0, sLat = 0, sLon = 0, deltaLat = 0, deltaLon = 0;
+   double eLat {}, eLon {}, lat {}, lon {}, sLat {}, sLon {}, deltaLat {}, deltaLon {};
 
    // figure our lat/lon positioning
    pixelsToLatLon(startX, startY, sLat, sLon);
@@ -204,16 +200,16 @@ void MapPage::moveMap(const int startX, const int startY, const int endX, const 
 bool MapPage::latLon2Screen(const double lat, const double lon,
                               double* const x, double* const y) const
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr && y != nullptr) {
 
       // Convert to nautical miles (NED) centered on ownship
-      const double earthX = ((lat - getReferenceLatDeg()) * 60.0);
-      const double earthY = ((lon - getReferenceLonDeg()) * 60.0 * getCosRefLat());
+      const double earthX {(lat - getReferenceLatDeg()) * 60.0};
+      const double earthY {(lon - getReferenceLonDeg()) * 60.0 * getCosRefLat()};
 
       // Rotate to aircraft coordinates
-      double acX = 0;
-      double acY = 0;
+      double acX {};
+      double acY {};
       if (getNorthUp()) {
          acX = earthX;
          acY = earthY;
@@ -225,8 +221,8 @@ bool MapPage::latLon2Screen(const double lat, const double lon,
 
       // Scale from nautical miles to inches and
       // transpose the X and Y from A/C to screen
-      double screenY = acX * getScale();
-      const double screenX = acY * getScale();
+      double screenY {acX * getScale()};
+      const double screenX {acY * getScale()};
 
       // Adjust for the decentered displayment
       if ( !getCentered() ) screenY += getDisplacement();
@@ -246,32 +242,31 @@ bool MapPage::latLon2Screen(const double lat, const double lon,
 bool MapPage::screen2LatLon(const double x, const double y,
                               double* const lat, double* const lon) const
 {
-   bool ok = false;
+   bool ok {};
 
-   const double scale = getScale();
-   const double cosLat = getCosRefLat();
+   const double scale {getScale()};
+   const double cosLat {getCosRefLat()};
    if (lat != nullptr && lon != nullptr && scale != 0 && cosLat != 0) {
 
       // buffer the inputs
-      double screenX = x;
-      double screenY = y;
+      double screenX {x};
+      double screenY {y};
 
       // Adjust for the decentered displayment
       if ( !getCentered() ) screenY -= getDisplacement();
 
       // Scale from screen (inches) to A/C (NM) and
       // transpose the X and Y from screen to A/C
-      const double acX = screenY/scale;
-      const double acY = screenX/scale;
+      const double acX {screenY/scale};
+      const double acY {screenX/scale};
 
       // Rotate A/C to NED
-      double earthX = 0.0;
-      double earthY = 0.0;
+      double earthX {};
+      double earthY {};
       if (getNorthUp()) {
          earthX = acX;
          earthY = acY;
-      }
-      else {
+      } else {
          earthX = (acX * headingCos) - (acY * headingSin);
          earthY = (acX * headingSin) + (acY * headingCos);
       }
@@ -291,12 +286,12 @@ bool MapPage::screen2LatLon(const double x, const double y,
 //------------------------------------------------------------------------------
 bool MapPage::aircraft2Screen(const double acX, const double acY, double* const screenX, double* const screenY) const
 {
-   bool ok = false;
+   bool ok {};
 
    if (screenX != nullptr && screenY != nullptr) {
 
-      const double newX = (acX * nm2Screen);
-      const double newY = (acY * nm2Screen);
+      const double newX {acX * nm2Screen};
+      const double newY {acY * nm2Screen};
 
       // now set the pointers to the new X and Y values
       *screenX = static_cast<double>(newY);
@@ -313,10 +308,10 @@ bool MapPage::aircraft2Screen(const double acX, const double acY, double* const 
 //------------------------------------------------------------------------------
 bool MapPage::earth2Aircraft(const double earthX, const double earthY, double* const acX, double* const acY) const
 {
-   bool ok = false;
+   bool ok {};
    if (acX != nullptr && acY != nullptr) {
-      const double x =  (earthX * headingCos) + (earthY * headingSin);
-      const double y = -(earthX * headingSin) + (earthY * headingCos);
+      const double x {(earthX * headingCos) + (earthY * headingSin)};
+      const double y {-(earthX * headingSin) + (earthY * headingCos)};
       *acX = static_cast<double>(x);
       *acY = static_cast<double>(y);
       ok = true;
@@ -330,7 +325,7 @@ bool MapPage::earth2Aircraft(const double earthX, const double earthY, double* c
 //------------------------------------------------------------------------------
 bool MapPage::latLon2Earth(const double lat, const double lon, double* const earthX, double* const earthY) const
 {
-   bool ok = false;
+   bool ok {};
    if (earthX != nullptr && earthY != nullptr) {
       *earthX = static_cast<double>((lat - referenceLat) * 60.0);
       *earthY = static_cast<double>((lon - referenceLon) * 60.0 * cosineLatReference);
@@ -349,7 +344,7 @@ bool MapPage::latLon2Earth(const double lat, const double lon, double* const ear
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateRange(const base::Number* const newR)
 {
-   bool ok = false;
+   bool ok {};
    if (newR != nullptr) ok = setRange(newR->getReal());
    return ok;
 }
@@ -359,7 +354,7 @@ bool MapPage::onUpdateRange(const base::Number* const newR)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateHeading(const base::Number* const newH)
 {
-   bool ok = false;
+   bool ok {};
    if (newH != nullptr) ok = setHeadingDeg(newH->getReal());
    return ok;
 }
@@ -369,7 +364,7 @@ bool MapPage::onUpdateHeading(const base::Number* const newH)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateReferenceLat(const base::Number* const newOL)
 {
-   bool ok = false;
+   bool ok {};
    if (newOL != nullptr) ok = setReferenceLatDeg(newOL->getDouble());
    return ok;
 }
@@ -379,7 +374,7 @@ bool MapPage::onUpdateReferenceLat(const base::Number* const newOL)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateReferenceLon(const base::Number* const newOL)
 {
-   bool ok = false;
+   bool ok {};
    if (newOL != nullptr) ok = setReferenceLonDeg(newOL->getDouble());
    return ok;
 }
@@ -389,7 +384,7 @@ bool MapPage::onUpdateReferenceLon(const base::Number* const newOL)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateCentered(const base::Number* const newC)
 {
-   bool ok = false;
+   bool ok {};
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
    return ok;
 }
@@ -399,7 +394,7 @@ bool MapPage::onUpdateCentered(const base::Number* const newC)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateOuterRadius(const base::Number* const newR)
 {
-   bool ok = false;
+   bool ok {};
    if (newR != nullptr) ok = setOuterRadius(newR->getReal());
    return ok;
 }
@@ -409,7 +404,7 @@ bool MapPage::onUpdateOuterRadius(const base::Number* const newR)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateOuterRadiusDC(const base::Number* const newRDC)
 {
-   bool ok = false;
+   bool ok {};
    if (newRDC != nullptr) ok = setOuterRadiusDC(newRDC->getReal());
    return ok;
 }
@@ -419,7 +414,7 @@ bool MapPage::onUpdateOuterRadiusDC(const base::Number* const newRDC)
 //------------------------------------------------------------------------------
 bool MapPage::onUpdateDisplacement(const base::Number* const newD)
 {
-   bool ok = false;
+   bool ok {};
    if (newD != nullptr) ok = setDisplacement(newD->getReal());
    return ok;
 }
@@ -431,7 +426,7 @@ bool MapPage::onUpdateDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotOuterRadius(const base::Number* const newRadius)
 {
-   bool ok = false;
+   bool ok {};
    if (newRadius != nullptr) ok = setOuterRadius(newRadius->getReal());
    return ok;
 }
@@ -442,7 +437,7 @@ bool MapPage::setSlotOuterRadius(const base::Number* const newRadius)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotOuterRadiusDC(const base::Number* const newDCRadius)
 {
-   bool ok = false;
+   bool ok {};
    if (newDCRadius != nullptr) ok = setOuterRadiusDC(newDCRadius->getReal());
    return ok;
 }
@@ -452,7 +447,7 @@ bool MapPage::setSlotOuterRadiusDC(const base::Number* const newDCRadius)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotRange(const base::Number* const newR)
 {
-   bool ok = false;
+   bool ok {};
    if (newR != nullptr) ok = setRange(newR->getReal());
    return ok;
 }
@@ -462,7 +457,7 @@ bool MapPage::setSlotRange(const base::Number* const newR)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotDisplacement(const base::Number* const newD)
 {
-   bool ok = false;
+   bool ok {};
    if (newD != nullptr) ok = setDisplacement(newD->getReal());
    return ok;
 }
@@ -472,7 +467,7 @@ bool MapPage::setSlotDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotCentered(const base::Number* const newC)
 {
-   bool ok = false;
+   bool ok {};
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
    return ok;
 }
@@ -482,7 +477,7 @@ bool MapPage::setSlotCentered(const base::Number* const newC)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotRefLat(const base::Number* const x)
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr) ok = setReferenceLatDeg(x->getDouble());
    return ok;
 }
@@ -492,7 +487,7 @@ bool MapPage::setSlotRefLat(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotRefLon(const base::Number* const x)
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr) ok = setReferenceLonDeg(x->getDouble());
    return ok;
 }
@@ -502,7 +497,7 @@ bool MapPage::setSlotRefLon(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotRefHdg(const base::Number* const x)
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr) ok = setHeadingDeg(x->getReal());
    return ok;
 }
@@ -512,7 +507,7 @@ bool MapPage::setSlotRefHdg(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapPage::setSlotNorthUp(const base::Number* const x)
 {
-   bool ok = false;
+   bool ok {};
    if (x != nullptr) ok = setNorthUp(x->getBoolean());
    return ok;
 }

@@ -92,20 +92,6 @@ public:
    virtual bool onUpdateValue(const base::Number* const ouvobj);
 
 protected:
-   virtual bool setSlotFloatToBeDisplayed(const base::Float* const msg);
-   virtual bool setSlotNumberToBeDisplayed(const base::Number* const msg);
-   virtual bool setSlotFloatMaxValue(const base::Float* const msg);
-   virtual bool setSlotNumberMaxValue(const base::Number* const msg);
-   virtual bool setSlotExampleFormatText(const base::String* const msg);
-   virtual bool setSlotPlusChar(const base::String* const msg);
-   virtual bool setSlotMinusChar(const base::String* const msg);
-   virtual bool setSlotDecimalPointChar(const base::String* const msg);
-   virtual bool setSlotUndefinedChar(const base::String* const msg);
-   virtual bool setSlotOverflowChar(const base::String* const msg);
-   virtual bool setSlotMaxValid(const base::Number* const msg);
-   virtual bool setSlotMinValid(const base::Number* const msg);
-   virtual bool setSlotBlankZero(const base::Number* const msg);
-
    virtual void makeText();
    virtual void redisplay();
    virtual void reformat(const char* const example);
@@ -131,6 +117,22 @@ private:
    double maxValid {base::UNDEFINED_VALUE};  // Maximum valid input value
    double minValid {base::UNDEFINED_VALUE};  // Minimum valid input value
    bool blankZero {};                        // Display blank instead of zero value
+
+private:
+   // slot table helper methods
+   bool setSlotFloatToBeDisplayed(const base::Float* const);
+   bool setSlotNumberToBeDisplayed(const base::Number* const);
+   bool setSlotFloatMaxValue(const base::Float* const);
+   bool setSlotNumberMaxValue(const base::Number* const);
+   bool setSlotExampleFormatText(const base::String* const);
+   bool setSlotPlusChar(const base::String* const);
+   bool setSlotMinusChar(const base::String* const);
+   bool setSlotDecimalPointChar(const base::String* const);
+   bool setSlotUndefinedChar(const base::String* const);
+   bool setSlotOverflowChar(const base::String* const);
+   bool setSlotMaxValid(const base::Number* const);
+   bool setSlotMinValid(const base::Number* const);
+   bool setSlotBlankZero(const base::Number* const);
 };
 
 }

@@ -13,7 +13,7 @@
 #ifndef __mixr_base_Frequencies_H__
 #define __mixr_base_Frequencies_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/frequency_utils.hpp"
 #include <iostream>
 

@@ -1,9 +1,9 @@
 
 #include "mixr/graphics/readouts/NumericReadout.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
-#include "mixr/base/numbers/Number.hpp"
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/String.hpp"
 
@@ -236,7 +236,7 @@ void NumericReadout::redisplay()
    if (plusChar != '\0' || minusChar != '\0' || postSign) {
 
       // Find the sign character (if any)
-      size_t i = 0;
+      std::size_t i {};
       while (i < len) {
          if (cbuf[i] == '+' || cbuf[i] == '-') break;
          i++;

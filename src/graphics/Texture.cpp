@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Texture.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 
 namespace mixr {
@@ -37,7 +37,7 @@ BEGIN_SLOT_MAP(Texture)
     ON_SLOT(9,  setSlotWrapS, base::Identifier)
     ON_SLOT(10, setSlotWrapT, base::Identifier)
     ON_SLOT(11, setSlotMagFilter, base::Identifier)
-   ON_SLOT(12, setSlotMinFilter, base::Identifier)
+    ON_SLOT(12, setSlotMinFilter, base::Identifier)
 END_SLOT_MAP()
 
 Texture::Texture()

@@ -3,8 +3,8 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/functors/Tables.hpp"
 

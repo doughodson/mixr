@@ -2,7 +2,7 @@
 #ifndef __mixr_base_LinearVelocity_H__
 #define __mixr_base_LinearVelocity_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -111,14 +111,8 @@ public:
 
     bool setMetersPerSecond(const double newLinearVelocity);
 
-    //---------------------------------------------------------------------
-    //Slot Table functions
-    //---------------------------------------------------------------------
-
     bool setMeters(const double newDistance);             //Input distance in (meters)
     bool setSeconds(const double newTime);                //Input time in (seconds)
-    bool setSlotDistance(const Distance* const msg);      //Input as type of distance (Meters, Degrees, ...)
-    bool setSlotTime(const Time* const msg);              //Input as type of time (Seconds, MilliSeconds, ...)
 
     //---------------------------------------------------------------------
     //Conversion Constants
@@ -130,6 +124,10 @@ private:
     double distance {1.0};                // holds our distance (meters)
     double time {1.0};                    // holds our time seconds)
 
+private:
+    // slot table helper methods
+    bool setSlotDistance(const Distance* const);      //Input as type of distance (Meters, Degrees, ...)
+    bool setSlotTime(const Time* const);              //Input as type of time (Seconds, MilliSeconds, ...)
 };
 
 }

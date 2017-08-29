@@ -102,7 +102,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
    int i2 {};                                          // Destination index
    int l1 {static_cast<int>(std::strlen(ss))};         // Source string length
    if (l1 > MAX_STRING_LENGTH) l1 = MAX_STRING_LENGTH;
-   int l2 = static_cast<int>(w);                       // Destination string length
+   int l2 {static_cast<int>(w)};                       // Destination string length
    if (l2 > MAX_STRING_LENGTH) l2 = MAX_STRING_LENGTH;
    int d {l2 - l1};                                    // Difference in lengths
 
@@ -150,7 +150,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
    if (startIndex > (n - 1))
       return false;
 
-   size_t maxChars = 0;
+   std::size_t maxChars {};
    if ((startIndex + numChars) > n)
       maxChars = (n - startIndex);
    else

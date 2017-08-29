@@ -92,10 +92,10 @@ class String;
 //------------------------------------------------------------------------------
 class FileReader : public Object
 {
-    DECLARE_SUBCLASS(FileReader, Object)
+   DECLARE_SUBCLASS(FileReader, Object)
 
 public:
-    FileReader();
+   FileReader();
 
    bool open();
    bool isReady();
@@ -121,10 +121,6 @@ public:
    const char* getNextRecord();
 
 private:
-   bool setSlotPathname(String* const msg);
-   bool setSlotFilename(String* const msg);
-   bool setSlotRecordLength(Number* const msg);
-
    std::ifstream* dbf {};
 
    int   rnum {1};         // record number
@@ -132,10 +128,16 @@ private:
    int   rlen {};          // record length
    char* rec {};           // the (in memory) record
 
-   static const size_t FILENAME_LENGTH = 256; // Max length of file name
-   static const size_t PATHNAME_LENGTH = 256; // Max length of path name
+   static const std::size_t FILENAME_LENGTH {256}; // Max length of file name
+   static const std::size_t PATHNAME_LENGTH {256}; // Max length of path name
    char filename[FILENAME_LENGTH] {};         // file name
    char pathname[PATHNAME_LENGTH] {};         // path name
+
+private:
+   // slot table helper methods
+   bool setSlotPathname(String* const);
+   bool setSlotFilename(String* const);
+   bool setSlotRecordLength(Number* const);
 };
 
 inline bool FileReader::setRecordNumber(const int num)

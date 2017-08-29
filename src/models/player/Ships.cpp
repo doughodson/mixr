@@ -8,7 +8,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ship,"Ship")
+IMPLEMENT_SUBCLASS(Ship, "Ship")
+EMPTY_SLOTTABLE(Ship)
 
 Ship::Ship()
 {

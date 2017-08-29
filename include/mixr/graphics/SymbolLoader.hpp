@@ -173,10 +173,6 @@ public:
    virtual void updateTC(const double dt = 0.0) override;
 
 protected:
-   bool setSlotTemplates(base::PairStream* myTemps);
-   bool setSlotShowInRangeOnly(const base::Number* const x);
-   bool setSlotInterconnect(const base::Number* const x);
-
    virtual SlSymbol* symbolFactory();  // Creates symbols objects
 
    int getSymbols(base::safe_ptr<SlSymbol>* const newSyms, const int max);
@@ -188,6 +184,12 @@ private:
    std::array<SlSymbol*, MAX_SYMBOLS> symbols {}; // holds our array of symbols
    bool showInRangeOnly {true};                   // only show the symbols within our range, else draw all the symbols if false
    bool interconnect {};                          // Connect our symbols with a line?
+
+private:
+   // slot table helper methods
+   bool setSlotTemplates(base::PairStream*);
+   bool setSlotShowInRangeOnly(const base::Number* const);
+   bool setSlotInterconnect(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------

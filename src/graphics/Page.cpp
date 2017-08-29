@@ -2,13 +2,13 @@
 #include "mixr/graphics/Page.hpp"
 #include "mixr/graphics/Display.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Page,"Page")
+IMPLEMENT_SUBCLASS(Page, "Page")
 
 BEGIN_SLOTTABLE(Page)
     "page",                // 1: Initial subpage
@@ -19,12 +19,12 @@ BEGIN_SLOTTABLE(Page)
 END_SLOTTABLE(Page)
 
 BEGIN_SLOT_MAP(Page)
-    ON_SLOT(1,setPage,base::Identifier)
-    ON_SLOT(2,setSubpageStream,base::PairStream)
-    ON_SLOT(2,setSubpageSingle,Page)
-    ON_SLOT(3,setPagingEvent,base::PairStream)
-    ON_SLOT(4,drawSubpageFirst,base::Number)
-    ON_SLOT(5,setSlotFocusSlavedToSubpage,base::Number)
+    ON_SLOT(1, setPage, base::Identifier)
+    ON_SLOT(2, setSubpageStream, base::PairStream)
+    ON_SLOT(2, setSubpageSingle, Page)
+    ON_SLOT(3, setPagingEvent, base::PairStream)
+    ON_SLOT(4, drawSubpageFirst, base::Number)
+    ON_SLOT(5, setSlotFocusSlavedToSubpage, base::Number)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Page)

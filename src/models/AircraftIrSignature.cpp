@@ -10,7 +10,7 @@
 
 #include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Areas.hpp"
 
 namespace mixr {

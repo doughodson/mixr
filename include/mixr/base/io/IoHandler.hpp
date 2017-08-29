@@ -18,16 +18,16 @@ class IoThread;
 // Description: Handles the flow of I/O data to and from the I/O devices.
 //
 //    The I/O data is buffered using application specific IoData classes
-//    (see IoData.h) that are attached to the I/O handler using the 'ioData',
+//    (see IoData.hpp) that are attached to the I/O handler using the 'ioData',
 //    'inputData' or 'outputData' slots (see note #2 below).
 //
 //    This I/O handler class will contain (via the 'devices' slot) a number of
-//    I/O device handles (see IoDevice.h) to interface with the physical I/O
+//    I/O device handles (see IoDevice.hpp) to interface with the physical I/O
 //    devices (e.g., joysticks, linkage systems).  Typically these I/O device
 //    handlers will contain a number of I/O adapters that control the flow of
-//    data between a device handler and an I/O data buffer (see IoAdapter.h).
+//    data between a device handler and an I/O data buffer (see IoAdapter.hpp).
 //
-//    For an example, see the example 'testIo'.
+//    For an example, see the example 'testIoHandler'.
 //
 //
 // Notes:
@@ -90,14 +90,6 @@ protected:
    virtual bool initNetworks();           // Initialize the networks (if any)
    virtual void clear();                  // Clear our data
 
-   // Slot functions
-   virtual bool setSlotIoData(IoData* const msg);
-   virtual bool setSlotInputData(IoData* const msg);
-   virtual bool setSlotOutputData(IoData* const msg);
-   virtual bool setSlotDevices(PairStream* const list);
-   virtual bool setSlotRate(const Frequency* const num);
-   virtual bool setSlotPriority(const Number* const num);
-
    virtual bool shutdownNotification() override;
 
 private:
@@ -117,6 +109,15 @@ private:
    double rate {50};              // Thread Rate (hz)
    double pri {0.5};              // Priority of the thread (0->lowest, 1->highest)
    safe_ptr<base::Thread> thread; // The thread
+
+private:
+   // slot table helper methods
+   bool setSlotIoData(IoData* const);
+   bool setSlotInputData(IoData* const);
+   bool setSlotOutputData(IoData* const);
+   bool setSlotDevices(PairStream* const);
+   bool setSlotRate(const Frequency* const);
+   bool setSlotPriority(const Number* const);
 };
 
 }

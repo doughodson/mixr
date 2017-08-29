@@ -11,7 +11,8 @@
 namespace mixr {
 namespace otw {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")
+IMPLEMENT_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")
+EMPTY_SLOTTABLE(OtwModelCigiCl)
 
 OtwModelCigiCl::OtwModelCigiCl()
 {

@@ -32,7 +32,8 @@ void Mass::copyData(const Mass& org, const bool)
 //==============================================================================
 // KiloGrams() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloGrams, "KiloGrams")
+IMPLEMENT_SUBCLASS(KiloGrams, "KiloGrams")
+EMPTY_SLOTTABLE(KiloGrams)
 EMPTY_COPYDATA(KiloGrams)
 EMPTY_DELETEDATA(KiloGrams)
 
@@ -55,7 +56,8 @@ KiloGrams::KiloGrams(const Mass& value) : Mass()
 //==============================================================================
 // Grams() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Grams, "Grams")
+IMPLEMENT_SUBCLASS(Grams, "Grams")
+EMPTY_SLOTTABLE(Grams)
 EMPTY_COPYDATA(Grams)
 EMPTY_DELETEDATA(Grams)
 
@@ -78,7 +80,8 @@ Grams::Grams(const Mass& value) : Mass()
 //==============================================================================
 // Slugs() --
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Slugs, "Slugs")
+IMPLEMENT_SUBCLASS(Slugs, "Slugs")
+EMPTY_SLOTTABLE(Slugs)
 EMPTY_COPYDATA(Slugs)
 EMPTY_DELETEDATA(Slugs)
 

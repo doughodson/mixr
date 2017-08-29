@@ -5,7 +5,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Designator, "Designator")
+IMPLEMENT_SUBCLASS(Designator, "Designator")
+EMPTY_SLOTTABLE(Designator)
 EMPTY_DELETEDATA(Designator)
 
 Designator::Designator() : data()

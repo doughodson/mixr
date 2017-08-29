@@ -51,10 +51,6 @@ public:
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-    bool setSlotRadius(const base::Number* const x);
-    bool setSlotFilled(const base::Number* const x);
-    bool setSlotSlices(const base::Number* const x);
-
     // event functions
     bool updateRadius(const base::Number* const x);
 
@@ -62,6 +58,12 @@ private:
     double radius {1.0};
     bool filled {};
     int slices {16};
+
+private:
+    // slot table helper methods
+    bool setSlotRadius(const base::Number* const);
+    bool setSlotFilled(const base::Number* const);
+    bool setSlotSlices(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -86,11 +88,11 @@ public:
 
     double getOuterRadius()                         { return outerRadius; }
 
-protected:
-    bool setSlotOuterRadius(const base::Number* const x);
-
 private:
     double outerRadius {1.1};        // portion that is occluded (just a bit bigger than inner radius)
+
+private:
+    bool setSlotOuterRadius(const base::Number* const);
 };
 
 
@@ -132,15 +134,16 @@ public:
     double getArcLength()                       { return arcLength; }
     bool  isConnected()                         { return connected; }
 
-protected:
-    bool setSlotStartAngle(const base::Number* const x);
-    bool setSlotArcLength(const base::Number* const x);
-    bool setSlotIsConnected(const base::Number* const x);
-
 private:
     double startAngle {};
     double arcLength {90.0};
     bool connected {};
+
+private:
+    // slot table helper methods   
+    bool setSlotStartAngle(const base::Number* const);
+    bool setSlotArcLength(const base::Number* const);
+    bool setSlotIsConnected(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -165,12 +168,13 @@ public:
 
     double getOuterRadius()              { return outerRadius; }
 
-protected:
-    bool setSlotOuterRadius(const base::Number* const x);
-
 private:
     // outer radius just a bit bigger than inner radius
     double outerRadius {1.1};          // portion that is occluded
+
+private:
+    // slot table helper methods
+    bool setSlotOuterRadius(const base::Number* const);
 };
 
 
@@ -238,11 +242,12 @@ public:
 
     bool isSegmented()                   { return segment; }
 
-protected:
-    bool setSlotSegments(const base::Number* const x);
-
 private:
     bool segment {};         // True if line segments
+
+private:
+    // slot table helper methods      
+    bool setSlotSegments(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -259,15 +264,15 @@ public:
     Quad();
 
     bool setStrip(const bool x)     { strip = x; return true; }
-
     bool isStrip()                  { return strip; }
 
     virtual void drawFunc() override;
 
 protected:
-    bool setSlotStrip(const base::Number* const x);
     bool strip {};     // are we a Quad Strip?
 
+private:
+    bool setSlotStrip(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -290,11 +295,12 @@ public:
 
     virtual void drawFunc() override;
 
-protected:
-    bool setSlotFan(const base::Number* const x);
-
 private:
     bool fan {};       // are we a triangle fan?
+
+private:
+    // slot table helper methods
+    bool setSlotFan(const base::Number* const);
 };
 
 }

@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Hls.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <cmath>
 
@@ -20,9 +20,9 @@ BEGIN_SLOTTABLE(Hls)
 END_SLOTTABLE(Hls)
 
 BEGIN_SLOT_MAP(Hls)
-    ON_SLOT(1,setHue,Number)
-    ON_SLOT(2,setLightness,Number)
-    ON_SLOT(3,setSaturation,Number)
+    ON_SLOT(1, setHue, Number)
+    ON_SLOT(2, setLightness, Number)
+    ON_SLOT(3, setSaturation, Number)
 END_SLOT_MAP()
 
 Hls::Hls(const double h, const double l, const double s)

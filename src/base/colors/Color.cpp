@@ -4,16 +4,17 @@
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")
+IMPLEMENT_SUBCLASS(Color, "Color")
+EMPTY_SLOTTABLE(Color)
 EMPTY_DELETEDATA(Color)
 
-double Color::defaultAlpha = 1.0f;
+double Color::defaultAlpha {1.0};
 
 Color::Color()
 {

@@ -7,7 +7,8 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
+IMPLEMENT_SUBCLASS(Runway, "Runway")
+EMPTY_SLOTTABLE(Runway)
 EMPTY_COPYDATA(Runway)
 EMPTY_DELETEDATA(Runway)
 

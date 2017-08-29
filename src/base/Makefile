@@ -57,12 +57,12 @@ OBJS =  \
 	network/UdpBroadcastHandler.o \
 	network/UdpMulticastHandler.o \
 	network/UdpUnicastHandler.o \
-	numbers/Boolean.o \
-	numbers/Complex.o \
-	numbers/Float.o \
-	numbers/Integer.o \
-	numbers/Number.o \
-	numbers/Operators.o \
+	numeric/Boolean.o \
+	numeric/Complex.o \
+	numeric/Float.o \
+	numeric/Integer.o \
+	numeric/Number.o \
+	numeric/Operators.o \
 	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \
@@ -134,7 +134,7 @@ clean:
 	-rm -f functors/*.o
 	-rm -f io/*.o
 	-rm -f network/*.o
-	-rm -f numbers/*.o
+	-rm -f numeric/*.o
 	-rm -f osg/*.o
 	-rm -f ubf/*.o
 	-rm -f units/*.o

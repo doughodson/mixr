@@ -28,14 +28,6 @@ public:
 
     virtual void updateData(const double dt = 0.0) override;
 
-protected:
-    bool setSlotSkyColor(const base::Color* const cobj);
-    bool setSlotSkyColor(const base::String* const cname);
-    bool setSlotGroundColor(const base::String* const cname);
-    bool setSlotGroundColor(const base::Color* const cobj);
-    bool setSlotWidth(const base::Number* const x);
-    bool setSlotHeight(const base::Number* const x);
-
 private:
     base::Vec3d skyColor;         // color of our sky
     base::Vec3d groundColor;      // color of our ground
@@ -43,6 +35,15 @@ private:
     base::String* sColorName {};  // sky color name
     double width {20.0};          // width of our polygon
     double height {20.0};         // height of our polygon
+
+private:
+    // slot table helper methods   
+    bool setSlotSkyColor(const base::Color* const);
+    bool setSlotSkyColor(const base::String* const);
+    bool setSlotGroundColor(const base::String* const);
+    bool setSlotGroundColor(const base::Color* const);
+    bool setSlotWidth(const base::Number* const);
+    bool setSlotHeight(const base::Number* const);
 };
 
 }

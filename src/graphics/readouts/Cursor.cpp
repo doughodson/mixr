@@ -6,7 +6,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Cursor, "Cursor")
+IMPLEMENT_SUBCLASS(Cursor, "Cursor")
+EMPTY_SLOTTABLE(Cursor)
 EMPTY_COPYDATA(Cursor)
 EMPTY_DELETEDATA(Cursor)
 

@@ -35,7 +35,7 @@ EMPTY_COPYDATA(NetHandler)
 EMPTY_DELETEDATA(NetHandler)
 
 // Byte order
-bool NetHandler::netByteOrder = checkByteOrder();
+bool NetHandler::netByteOrder {checkByteOrder()};
 
 NetHandler::NetHandler()
 {
@@ -47,8 +47,8 @@ NetHandler::NetHandler()
 //------------------------------------------------------------------------------
 bool NetHandler::initNetwork(const bool noWaitFlag)
 {
-    // Initialize socket
-    bool ok =  init();
+    // initialize socket
+    bool ok {init()};
     if (!ok) {
         std::cerr << "NetHandler::initNetwork(): init() FAILED" << std::endl;
     }
@@ -61,7 +61,7 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 bool NetHandler::init()
 {
-    bool ok = true;
+    bool ok {true};
 
 #if defined(WIN32)
     // initialize Winsock2
@@ -87,7 +87,7 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 {
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
-   auto psl  = static_cast<const u_long*>(hostData);
+   auto psl = static_cast<const u_long*>(hostData);
    auto pss = reinterpret_cast<const u_short*>(psl + nl);
 
    // Compute pointers to the int word (4 byte) and short
@@ -138,7 +138,7 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
 //------------------------------------------------------------------------------
 bool NetHandler::checkByteOrder()
 {
-    unsigned short n1 = 1;
+    unsigned short n1 {1};
     unsigned short n2 = htons(n1);
     return (n1 == n2);               // No difference? Then we already in network order!
 }

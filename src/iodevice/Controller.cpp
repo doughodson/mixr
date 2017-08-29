@@ -1,7 +1,7 @@
 
 #include "mixr/iodevice/Controller.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include <iostream>
 

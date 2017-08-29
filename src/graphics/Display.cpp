@@ -6,7 +6,7 @@
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/graphics/Material.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
 #include "mixr/base/colors/Rgba.hpp"

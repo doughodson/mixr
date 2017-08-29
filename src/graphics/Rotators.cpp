@@ -1,13 +1,14 @@
 
 #include "mixr/graphics/Rotators.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")
+IMPLEMENT_SUBCLASS(Rotators, "Rotators")
+EMPTY_SLOTTABLE(Rotators)
 EMPTY_DELETEDATA(Rotators)
 
 BEGIN_EVENT_HANDLER(Rotators)

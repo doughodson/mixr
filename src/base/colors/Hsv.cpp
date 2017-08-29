@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Hsv.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -23,11 +23,10 @@ BEGIN_SLOTTABLE(Hsv)
     "value"         // 3: value component,      range(0.0 to 1.0)
 END_SLOTTABLE(Hsv)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Hsv)
-    ON_SLOT(1,setHue,Number)
-    ON_SLOT(2,setSaturation,Number)
-    ON_SLOT(3,setValue,Number)
+    ON_SLOT(1, setHue, Number)
+    ON_SLOT(2, setSaturation, Number)
+    ON_SLOT(3, setValue, Number)
 END_SLOT_MAP()
 
 Hsv::Hsv(const double h, const double s, const double v)

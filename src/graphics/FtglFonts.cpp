@@ -3,7 +3,7 @@
 
 #include "mixr/graphics/Graphic.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -26,103 +26,139 @@
 namespace mixr {
 namespace graphics {
 
-//------------------------------------------------------------------------------
-// static class members
-//------------------------------------------------------------------------------
-const int FtglFonts::DEFAULT_FACE_SIZE = 1;        // one unit by unit (in this case, inches)
-const float FtglExtrdFont::DEFAULT_DEPTH = 5.0f;
+const int FtglFonts::DEFAULT_FACE_SIZE {1};        // one unit by unit (in this case, inches)
+const float FtglExtrdFont::DEFAULT_DEPTH {5.0};
 
 //------------------------------------------------------------------------------
 // Setting up classes
 //------------------------------------------------------------------------------
-IMPLEMENT_PARTIAL_SUBCLASS(FtglFonts,"FTGLFonts")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglBitmapFont,"FTGLBitmapFonts")
-IMPLEMENT_SUBCLASS(FtglExtrdFont,"FTGLExtrdFonts")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglOutlineFont,"FTGLOutlineFonts")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglPixmapFont,"FTGLPixmapFonts")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglPolygonFont,"FTGLPolygonFonts")
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FtglTextureFont,"FTGLTextureFonts")
-IMPLEMENT_SUBCLASS(FtglHaloFont,"FTGLHaloFonts")
+IMPLEMENT_PARTIAL_SUBCLASS(FtglFonts, "FTGLFonts")
+EMPTY_DELETEDATA(FtglFonts)
 
-//------------------------------------------------------------------------------
-// Slot tables
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(FtglFonts)
     "faceSize",
 END_SLOTTABLE(FtglFonts)
+
+BEGIN_SLOT_MAP(FtglFonts)
+    ON_SLOT(1,setFaceSize,base::Number)
+END_SLOT_MAP()
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglBitmapFont, "FTGLBitmapFonts")
+EMPTY_DELETEDATA(FtglBitmapFont)
+EMPTY_SLOTTABLE(FtglBitmapFont)
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglExtrdFont, "FTGLExtrdFonts")
+EMPTY_DELETEDATA(FtglExtrdFont)
+
 BEGIN_SLOTTABLE(FtglExtrdFont)
     "depth",
 END_SLOTTABLE(FtglExtrdFont)
+
+BEGIN_SLOT_MAP(FtglExtrdFont)
+    ON_SLOT(1, setDepth, base::Number)
+END_SLOT_MAP()
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglOutlineFont, "FTGLOutlineFonts")
+EMPTY_DELETEDATA(FtglOutlineFont)
+EMPTY_SLOTTABLE(FtglOutlineFont)
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglPixmapFont, "FTGLPixmapFonts")
+EMPTY_DELETEDATA(FtglPixmapFont)
+EMPTY_SLOTTABLE(FtglPixmapFont)
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglPolygonFont, "FTGLPolygonFonts")
+EMPTY_DELETEDATA(FtglPolygonFont)
+EMPTY_SLOTTABLE(FtglPolygonFont)
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglTextureFont, "FTGLTextureFonts")
+EMPTY_SLOTTABLE(FtglTextureFont)
+EMPTY_DELETEDATA(FtglTextureFont)
+
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(FtglHaloFont, "FTGLHaloFonts")
 BEGIN_SLOTTABLE(FtglHaloFont)
     "halocolor",
     "linewidth",
 END_SLOTTABLE(FtglHaloFont)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
-BEGIN_SLOT_MAP(FtglFonts)
-    ON_SLOT(1,setFaceSize,base::Number)
-END_SLOT_MAP()
-BEGIN_SLOT_MAP(FtglExtrdFont)
-    ON_SLOT(1, setDepth, base::Number)
-END_SLOT_MAP()
 BEGIN_SLOT_MAP(FtglHaloFont)
     ON_SLOT(1, setHaloColor, base::Color)
     ON_SLOT(2, setLinewidth, base::Number)
 END_SLOT_MAP()
 
+//------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
-// Constructor(s) - FtglFonts
-//------------------------------------------------------------------------------
 FtglFonts::FtglFonts()
 {
     STANDARD_CONSTRUCTOR()
 }
+
 FtglFonts::FtglFonts(const FtglFonts& org)
 {
     STANDARD_CONSTRUCTOR()
     fSize = org.fSize;
     copyData(org,true);
 }
+
 FtglFonts::~FtglFonts()
 {
    STANDARD_DESTRUCTOR()
 }
+
 FtglFonts& FtglFonts::operator=(const FtglFonts& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
+
 FtglFonts* FtglFonts::clone() const
 {
     return nullptr;
 }
+
 FtglBitmapFont::FtglBitmapFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglExtrdFont::FtglExtrdFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglOutlineFont::FtglOutlineFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglPixmapFont::FtglPixmapFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglPolygonFont::FtglPolygonFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglTextureFont::FtglTextureFont()
 {
     STANDARD_CONSTRUCTOR();
 }
+
 FtglHaloFont::FtglHaloFont()
 {
     STANDARD_CONSTRUCTOR();
@@ -171,34 +207,6 @@ void FtglHaloFont::copyData(const FtglHaloFont& org, const bool)
     if (haloColor != nullptr) haloColor->unref();
     haloColor = nullptr;
     linewidth = org.linewidth;
-}
-
-void FtglFonts::deleteData()
-{
-}
-
-void FtglBitmapFont::deleteData()
-{
-}
-
-void FtglExtrdFont::deleteData()
-{
-}
-
-void FtglOutlineFont::deleteData()
-{
-}
-
-void FtglPixmapFont::deleteData()
-{
-}
-
-void FtglPolygonFont::deleteData()
-{
-}
-
-void FtglTextureFont::deleteData()
-{
 }
 
 void FtglHaloFont::deleteData()
@@ -351,8 +359,8 @@ void FtglBitmapFont::loadFont()
     }
 
     // Generate filename
-    const std::size_t FONTPATHNAME_LENGTH = 256;
-    char fontPathname[FONTPATHNAME_LENGTH];
+    const std::size_t FONTPATHNAME_LENGTH {256};
+    char fontPathname[FONTPATHNAME_LENGTH] {};
     if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());

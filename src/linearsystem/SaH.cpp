@@ -1,6 +1,6 @@
 
 #include "mixr/linearsystem/SaH.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Frequencies.hpp"
 
 namespace mixr {

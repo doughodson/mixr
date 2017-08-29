@@ -1,36 +1,29 @@
 
 #include "mixr/base/colors/Yiq.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Float.hpp"
 
 namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Yiq, "yiq")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Yiq)
     "y",  // 1: ... Y component, range(0.0 to 1.0)
     "i",  // 2: ... I component, range(-0.6 to -0.6)
     "q",  // 3: ... Q component, range(-0.52 to 0.52)
 END_SLOTTABLE(Yiq)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Yiq)
-    ON_SLOT(1,setY,Number)
-    ON_SLOT(2,setI,Number)
-    ON_SLOT(3,setQ,Number)
+    ON_SLOT(1, setY, Number)
+    ON_SLOT(2, setI, Number)
+    ON_SLOT(3, setQ, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Yiq::Yiq(const double y, const double i, const double q)
 {
    STANDARD_CONSTRUCTOR()
-   yiq[Y] = y;     // set the values
+   yiq[Y] = y;           // set the values
    yiq[I] = i;
    yiq[Q] = q;
    yiq2rgb(color,yiq);   // set the rgb values
@@ -39,16 +32,12 @@ Yiq::Yiq(const double y, const double i, const double q)
 Yiq::Yiq()
 {
    STANDARD_CONSTRUCTOR()
-   yiq[Y] = 0.0f;  // default to black
+   yiq[Y] = 0.0f;        // default to black
    yiq[I] = 0.0f;
    yiq[Q] = 0.0f;
    yiq2rgb(color,yiq);   // set the rgb values
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Yiq::copyData(const Yiq& org, const bool)
 {
    BaseClass::copyData(org);
@@ -86,7 +75,7 @@ void Yiq::getYIQ(Vec3d& hhh) const
 bool Yiq::setY(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value {msg->getReal()};
     const bool ok = (value >= 0 && value <= 1);
     if (ok) { yiq[Y] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -99,7 +88,7 @@ bool Yiq::setY(Number* const msg)
 bool Yiq::setI(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value {msg->getReal()};
     const bool ok = (value >= -0.6 && value <= 0.6);
     if (ok) { yiq[I] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setI: invalid entry(" << value << "), valid range: -0.6 to 0.6" << std::endl;
@@ -112,7 +101,7 @@ bool Yiq::setI(Number* const msg)
 bool Yiq::setQ(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value {msg->getReal()};
     const bool ok = (value >= -0.52 && value <= 0.52);
     if (ok) { yiq[Q] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setQ: invalid entry(" << value << "), valid range: -0.52 to 0.52" << std::endl;

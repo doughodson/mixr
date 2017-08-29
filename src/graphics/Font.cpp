@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Font.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/String.hpp"
@@ -15,8 +15,8 @@ namespace graphics {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Font, "Font")
 
-const double defaultFontWidth = 1;
-const double defaultFontHeight = 1;
+const double defaultFontWidth {1.0};
+const double defaultFontHeight {1.0};
 
 BEGIN_SLOTTABLE(Font)
         "fontWidth",

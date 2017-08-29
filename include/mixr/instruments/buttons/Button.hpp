@@ -22,7 +22,7 @@ public:
     virtual int getEventId() const               { return eventId; }
 
     // Sets the Event ID to newID.
-    virtual bool setEventId(const int newId)     { eventId = newId; return true; };
+    virtual bool setEventId(const int id)     { eventId = id; return true; };
 
     // Right now, this function merely detects when the button has been
     // clicked, but it can be overridden to do anything.
@@ -33,12 +33,12 @@ public:
 
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
-protected:
-    // Sets the Event ID to newEvent
-    virtual bool setSlotEventId(const base::Number* const newEvent);
-
 private:
     int eventId {-1};        // holds our event number
+
+private:
+    // slot table helper methods
+    bool setSlotEventId(const base::Number* const);
 };
 
 }

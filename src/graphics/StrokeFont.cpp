@@ -5,16 +5,17 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")
+IMPLEMENT_SUBCLASS(StrokeFont, "StrokeFont")
+EMPTY_SLOTTABLE(StrokeFont)
 EMPTY_DELETEDATA(StrokeFont)
 
 // SGI font scaled so six stroke font points (units used below) is 1 screen unit
-static const double XSCALE = (1.0/6.0);
-static const double YSCALE = (1.0/6.0);
+static const double XSCALE {1.0/6.0};
+static const double YSCALE {1.0/6.0};
 
 // Default font sizes
-const double defaultFontWidth = 6.0f * XSCALE;
-const double defaultFontHeight = 9.0f * YSCALE;
+const double defaultFontWidth {6.0 * XSCALE};
+const double defaultFontHeight {9.0 * YSCALE};
 
 StrokeFont::StrokeFont()
 {
@@ -183,7 +184,6 @@ void StrokeFont::loadFont()
  *
  * OpenGL(TM) is a trademark of Silicon Graphics, Inc.
  */
-
 
 enum {
     FONT_BEGIN = 1,

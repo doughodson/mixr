@@ -5,7 +5,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DynamicsModel, "DynamicsModel")
+IMPLEMENT_SUBCLASS(DynamicsModel, "DynamicsModel")
+EMPTY_SLOTTABLE(DynamicsModel)
 EMPTY_DELETEDATA(DynamicsModel)
 
 DynamicsModel::DynamicsModel()

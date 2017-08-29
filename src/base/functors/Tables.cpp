@@ -4,8 +4,8 @@
 
 #include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/numbers/Integer.hpp"
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(Table1)
 END_SLOTTABLE(Table1)
 
 BEGIN_SLOT_MAP(Table1)
-    ON_SLOT(1,setXBreakpoints1,List)
+    ON_SLOT(1, setXBreakpoints1, List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ BEGIN_SLOTTABLE(Table2)
 END_SLOTTABLE(Table2)
 
 BEGIN_SLOT_MAP(Table2)
-    ON_SLOT(1,setYBreakpoints2,List)
+    ON_SLOT(1, setYBreakpoints2,List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -293,8 +293,7 @@ double Table2::getMaxY() const
 //------------------------------------------------------------------------------
 //  2D LFIs
 //------------------------------------------------------------------------------
-double
-Table2::lfi(const double iv1, FStorage* const f) const
+double Table2::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -314,8 +313,7 @@ Table2::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double
-Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -357,7 +355,7 @@ BEGIN_SLOTTABLE(Table3)
 END_SLOTTABLE(Table3)
 
 BEGIN_SLOT_MAP(Table3)
-    ON_SLOT(1,setZBreakpoints3,List)
+    ON_SLOT(1, setZBreakpoints3,List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -480,8 +478,7 @@ double Table3::getMaxZ() const
 //------------------------------------------------------------------------------
 //  3D LFIs
 //------------------------------------------------------------------------------
-double
-Table3::lfi(const double iv1, FStorage* const f) const
+double Table3::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -502,8 +499,7 @@ Table3::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double
-Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -523,8 +519,7 @@ Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
    }
 }
 
-double
-Table3::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
+double Table3::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -566,7 +561,7 @@ BEGIN_SLOTTABLE(Table4)
 END_SLOTTABLE(Table4)
 
 BEGIN_SLOT_MAP(Table4)
-    ON_SLOT(1,setWBreakpoints4,List)
+    ON_SLOT(1, setWBreakpoints4,List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -702,8 +697,7 @@ double Table4::getMaxW() const
 //------------------------------------------------------------------------------
 //  4D LFIs
 //------------------------------------------------------------------------------
-double
-Table4::lfi(const double iv1, FStorage* const f) const
+double Table4::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -727,8 +721,7 @@ Table4::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double
-Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -751,8 +744,7 @@ Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
    }
 }
 
-double
-Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -774,8 +766,7 @@ Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    }
 }
 
-double
-Table4::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -820,12 +811,9 @@ BEGIN_SLOTTABLE(Table5)
 END_SLOTTABLE(Table5)
 
 BEGIN_SLOT_MAP(Table5)
-    ON_SLOT(1,setVBreakpoints5,List)
+    ON_SLOT(1, setVBreakpoints5, List)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Table5::Table5() : Table4()
 {
    STANDARD_CONSTRUCTOR()
@@ -945,8 +933,7 @@ double Table5::getMaxV() const
 //------------------------------------------------------------------------------
 //  5D LFIs
 //------------------------------------------------------------------------------
-double
-Table5::lfi(const double iv1, FStorage* const f) const
+double Table5::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -973,8 +960,7 @@ Table5::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double
-Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1000,8 +986,7 @@ Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
    }
 }
 
-double
-Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1026,8 +1011,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    }
 }
 
-double
-Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1051,8 +1035,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, const double i
    }
 }
 
-double
-Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 

@@ -65,7 +65,7 @@ public:
 
    // Returns the number of entries in the data table
    virtual unsigned int tableSize() const = 0;
-   virtual bool setDataTable(const List* const msg);
+   virtual bool setDataTable(const List* const);
 
    // Returns the min and max values of the dependent variable data table
    virtual void findMinMax(double* minValue, double* maxValue) const;
@@ -74,8 +74,8 @@ public:
    bool isExtrapolationEnabled() const                           { return extFlg; }
 
    // Sets the extrapolation enabled flag.
-   bool setExtrapolationEnabled(const bool flg);
-   virtual bool setExtrapolationEnabled(const Number* const msg);
+   bool setExtrapolationEnabled(const bool);
+   virtual bool setExtrapolationEnabled(const Number* const);
 
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
@@ -118,8 +118,10 @@ private:
 //------------------------------------------------------------------------------
 // Class TableStorage
 //------------------------------------------------------------------------------
-class TableStorage : public FStorage {
+class TableStorage : public FStorage
+{
    DECLARE_SUBCLASS(TableStorage, FStorage)
+
 public:
    TableStorage();
    unsigned int xbp {}, ybp {}, zbp {}, wbp {}, vbp {};

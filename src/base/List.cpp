@@ -1,8 +1,8 @@
 
 #include "mixr/base/List.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
-#include "mixr/base/numbers/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include <cstdlib>
@@ -10,7 +10,8 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List, "List")
+IMPLEMENT_SUBCLASS(List, "List")
+EMPTY_SLOTTABLE(List)
 
 List::List()
 {

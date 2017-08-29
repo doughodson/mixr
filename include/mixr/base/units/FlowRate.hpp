@@ -2,7 +2,7 @@
 #ifndef __mixr_base_FlowRate_H__
 #define __mixr_base_FlowRate_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Volumes.hpp"
 #include "mixr/base/units/Times.hpp"
 
@@ -46,15 +46,17 @@ public:
     // get functions
     double getFlowRate()                 { return flowRate; };
     // set functions
-    bool set(const double newFlowRate, Volume* newVolume, Time* newTime);
-    // slot table functions
-    bool setSlotVolume(Volume* newVol);
-    bool setSlotTime(Time* newTime);
+    bool set(const double newFlowRate, Volume*, Time*);
 
 private:
-    Volume* myVolume {};       // holds our distance type
-    Time*   myTime {};         // holds our time type
-    double  flowRate {1.0};    // holds our velocity
+    Volume* myVolume {};       // volume
+    Time*   myTime {};         // time
+    double  flowRate {1.0};    // flow rate
+
+private:
+    // slot table helper methods
+    bool setSlotVolume(Volume*);
+    bool setSlotTime(Time*);
 };
 
 }

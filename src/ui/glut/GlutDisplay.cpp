@@ -1,7 +1,7 @@
 
 #include "mixr/ui/glut/GlutDisplay.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
 

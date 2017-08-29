@@ -10,11 +10,12 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet, "Bullet")
+IMPLEMENT_SUBCLASS(Bullet, "Bullet")
+EMPTY_SLOTTABLE(Bullet)
 
 // Default Parameters
-const double Bullet::DEFAULT_MUZZLE_VEL = 1000.0f;     // Meters / second
-const double Bullet::DEFAULT_MAX_TOF = 3.0f;           // Seconds
+const double Bullet::DEFAULT_MUZZLE_VEL {1000.0};     // Meters / second
+const double Bullet::DEFAULT_MAX_TOF {3.0};           // Seconds
 
 int Bullet::getCategory() const               { return (GRAVITY); }
 const char* Bullet::getDescription() const    { return "Bullets"; }

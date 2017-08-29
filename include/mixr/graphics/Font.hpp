@@ -198,7 +198,7 @@ protected:
 private:
     void initData();
 
-    static const int LUT_SIZE = 256;
+    static const int LUT_SIZE {256};
     GLdouble  fWidth {}, fHeight {};       // Font size
     GLuint    bWidth {}, bHeight {};       // Bitmap size
     GLuint    b {};                        // Font call list base
@@ -212,16 +212,16 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotFontWidth(const base::Number* const sfwobj);
-    bool setSlotFontHeight(const base::Number* const sfhobj);
-    bool setSlotFontPosition(const base::List* const sfpobj);
-    bool setSlotBitmapWidth(const base::Number* const sbwobj);
-    bool setSlotBitmapHeight(const base::Number* const sbhobj);
-    bool setSlotFontPath(const base::String* const sfpobj);
-    bool setSlotFTGLFontFileName(const base::String* const sgffnobj);
-    bool setSlotLookupTable(const base::List* const sltobj);
-    bool setSlotCharacterSpacing(const base::Number* const newCharSpacing);
-    bool setSlotLineSpacing(const base::Number* const newLineSpacing);
+    bool setSlotFontWidth(const base::Number* const);
+    bool setSlotFontHeight(const base::Number* const);
+    bool setSlotFontPosition(const base::List* const);
+    bool setSlotBitmapWidth(const base::Number* const);
+    bool setSlotBitmapHeight(const base::Number* const);
+    bool setSlotFontPath(const base::String* const);
+    bool setSlotFTGLFontFileName(const base::String* const);
+    bool setSlotLookupTable(const base::List* const);
+    bool setSlotCharacterSpacing(const base::Number* const);
+    bool setSlotLineSpacing(const base::Number* const);
 };
 
 }

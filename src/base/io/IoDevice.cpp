@@ -11,13 +11,11 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(IoDevice, "IoDevice")
 
-// slot table for this class type
 BEGIN_SLOTTABLE(IoDevice)
    "adapters",    // 1) List of IoAdapter objects (default: none)
    "devices",     // 2) List of IoDevice objects; i.e., sub-devices (default: none)
 END_SLOTTABLE(IoDevice)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(IoDevice)
    ON_SLOT(1, setSlotAdapters, PairStream)
    ON_SLOT(2, setSlotDevices,  PairStream)

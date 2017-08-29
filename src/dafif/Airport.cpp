@@ -5,7 +5,8 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport, "Airport")
+IMPLEMENT_SUBCLASS(Airport, "Airport")
+EMPTY_SLOTTABLE(Airport)
 EMPTY_COPYDATA(Airport)
 EMPTY_DELETEDATA(Airport)
 

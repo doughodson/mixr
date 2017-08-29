@@ -213,7 +213,7 @@ bool DedFile::loadData()
 //------------------------------------------------------------------------------
 bool DedFile::getFileHeaders( std::istream& in )
 {
-   bool ok = true;
+   bool ok {true};
 
    // Read file header
    stdhdr = new DedStdHdr();

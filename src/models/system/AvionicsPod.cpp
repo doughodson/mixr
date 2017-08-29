@@ -1,8 +1,7 @@
 
 #include "mixr/models/system/AvionicsPod.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
-#include <iostream>
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace models {

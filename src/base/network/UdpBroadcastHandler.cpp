@@ -38,18 +38,14 @@
 namespace mixr {
 namespace base {
 
-//==============================================================================
-// Class: UdpBroadcastHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(UdpBroadcastHandler, "UdpBroadcastHandler")
 
 BEGIN_SLOTTABLE(UdpBroadcastHandler)
     "networkMask",       // 1) Host Net Mask   "255.255.255.255"
 END_SLOTTABLE(UdpBroadcastHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(UdpBroadcastHandler)
-    ON_SLOT(1,setSlotNetworkMask,String)
+    ON_SLOT(1, setSlotNetworkMask, String)
 END_SLOT_MAP()
 
 UdpBroadcastHandler::UdpBroadcastHandler()
@@ -57,9 +53,6 @@ UdpBroadcastHandler::UdpBroadcastHandler()
     STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool)
 {
     BaseClass::copyData(org);
@@ -73,9 +66,6 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void UdpBroadcastHandler::deleteData()
 {
     if (networkMask != nullptr) delete[] networkMask;

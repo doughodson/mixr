@@ -203,10 +203,10 @@ public:
    virtual int column(const int cc);
    virtual int column() const;
 
-   std::size_t width() const              { return w; }
-   std::size_t width(const size_t t)      { w = t; adjust(); return w; }
+   std::size_t width() const                 { return w; }
+   std::size_t width(const std::size_t t)    { w = t; adjust(); return w; }
 
-   Mode getMode() const                   { return mode; }
+   Mode getMode() const                      { return mode; }
    Mode setMode(const Mode newMode);
 
    bool isHighLighted() const             { return (dmode & highlight) != 0; }
@@ -264,19 +264,6 @@ public:
    virtual void updateData(const double dt = 0.0) override;
 
 protected:
-   //slot table macro functions
-   virtual bool setSlotWidth(const base::Number* const swobj);
-   virtual bool setSlotHighlight(const base::Number* const shobj);
-   virtual bool setSlotUnderline(const base::Number* const suobj);
-   virtual bool setSlotReversed(const base::Number* const srobj);
-   virtual bool setSlotJustification(const base::String* const sjobj);
-   virtual bool setSlotVertical(const base::Number* const ssobj);
-   virtual bool setSlotBrackets(const base::Number* const obj);
-   virtual bool setSlotLinked(const base::Number* const msg);
-   virtual bool setSlotInheritColor(const base::Number* const ic);
-   virtual bool setSlotFont(const base::String* const font);
-   virtual bool setSlotStartCharPos(const base::Number* const x);
-
    base::String origStr;         // Original text saved by setText
    base::String inputExample;    // Input Template String
    base::String str;             // Text stored in field
@@ -298,6 +285,20 @@ private:
    base::String::Justify jmode {};     // Justification mode
    bool     inheritColor {};           // Inherit color instead of using a default color
    base::String* fontName {};          // name of the font we want our display to use (if overridden)
+
+private:
+   // slot table helper methods
+   bool setSlotWidth(const base::Number* const);
+   bool setSlotHighlight(const base::Number* const);
+   bool setSlotUnderline(const base::Number* const);
+   bool setSlotReversed(const base::Number* const);
+   bool setSlotJustification(const base::String* const);
+   bool setSlotVertical(const base::Number* const);
+   bool setSlotBrackets(const base::Number* const);
+   bool setSlotLinked(const base::Number* const);
+   bool setSlotInheritColor(const base::Number* const);
+   bool setSlotFont(const base::String* const);
+   bool setSlotStartCharPos(const base::Number* const);
 };
 
 }

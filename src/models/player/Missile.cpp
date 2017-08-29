@@ -8,7 +8,7 @@
 #include "mixr/simulation/AbstractDataRecorder.hpp"
 
 #include "mixr/base/List.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 

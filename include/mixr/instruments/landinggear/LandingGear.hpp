@@ -23,8 +23,8 @@ class LandingGear : public Instrument
 public:
     LandingGear();
 
-    virtual bool setGearDownValue(const double newDV);
-    virtual bool setGearUpValue(const double newUV);
+    virtual bool setGearDownValue(const double);
+    virtual bool setGearUpValue(const double);
 
     double getGearUpValue() const   { return gearUV; }
     double getGearDownValue() const { return gearDV; }
@@ -37,11 +37,6 @@ public:
 
     virtual void updateData(const double dt = 0.0) override;
 
-protected:
-    // slot functions
-    bool setSlotGearDownValue(const base::Number* const newDV);
-    bool setSlotGearUpValue(const base::Number* const newUV);
-
 private:
     int gearState {};      // is our gear down, up, or in transit?
     bool inTransit {};     // are we going from one commanded position to another?
@@ -51,6 +46,11 @@ private:
 
     SendData gearSelSD;    // which gear position we are setting
     bool haveRotary {};    // do we have a rotary now that is our components (we won't draw if we do)
+
+private:
+    // slot table helper methods
+    bool setSlotGearDownValue(const base::Number* const);
+    bool setSlotGearUpValue(const base::Number* const);
 };
 
 }

@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_numbers_Operators_H__
-#define __mixr_base_numbers_Operators_H__
+#ifndef __mixr_base_numeric_Operators_H__
+#define __mixr_base_numeric_Operators_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -65,8 +65,9 @@ protected:
 //      virtual void operation()
 //          Performs the numeric operation of the class ( - ).
 //------------------------------------------------------------------------------
-class Subtract : public Add {
-    DECLARE_SUBCLASS(Subtract,Add)
+class Subtract : public Add
+{
+    DECLARE_SUBCLASS(Subtract, Add)
 
 public:
     Subtract();
@@ -87,8 +88,9 @@ public:
 //      virtual void operation()
 //          Performs the numeric operation of the class ( * ).
 //------------------------------------------------------------------------------
-class Multiply : public Add {
-    DECLARE_SUBCLASS(Multiply,Add)
+class Multiply : public Add
+{
+    DECLARE_SUBCLASS(Multiply, Add)
 
 public:
     Multiply();
@@ -110,8 +112,9 @@ public:
 //          Performs the numeric operation of the class ( / ).
 //          Note:  In Divide, a zero divisor causes operation() to do nothing.
 //------------------------------------------------------------------------------
-class Divide : public Add {
-    DECLARE_SUBCLASS(Divide,Add)
+class Divide : public Add
+{
+    DECLARE_SUBCLASS(Divide, Add)
 
 public:
     Divide();

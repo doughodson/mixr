@@ -28,12 +28,12 @@ class AoAIndexer : public Instrument
 public:
     AoAIndexer();
 
-    virtual bool setAoaRedMin(const double a);
-    virtual bool setAoaRedMax(const double b);
-    virtual bool setAoaYellowMin(const double a);
-    virtual bool setAoaYellowMax(const double b);
-    virtual bool setAoaGreenMin(const double a);
-    virtual bool setAoaGreenMax(const double b);
+    virtual bool setAoaRedMin(const double);
+    virtual bool setAoaRedMax(const double);
+    virtual bool setAoaYellowMin(const double);
+    virtual bool setAoaYellowMax(const double);
+    virtual bool setAoaGreenMin(const double);
+    virtual bool setAoaGreenMax(const double);
 
     double getAoaRedMin() const     { return aoaRedMin; }
     double getAoaRedMax() const     { return aoaRedMax; }
@@ -46,16 +46,6 @@ public:
     virtual void drawFunc() override;
 
     virtual void updateData(const double dt = 0) override;
-
-protected:
-
-    // slot functions
-    virtual bool setSlotAoaRedMin(const base::Number* const newRMin);
-    virtual bool setSlotAoaRedMax(const base::Number* const newRMax);
-    virtual bool setSlotAoaYellowMin(const base::Number* const newYMin);
-    virtual bool setSlotAoaYellowMax(const base::Number* const newYMax);
-    virtual bool setSlotAoaGreenMax(const base::Number* const newGMax);
-    virtual bool setSlotAoaGreenMin(const base::Number* const newGMin);
 
 private:
 
@@ -76,6 +66,15 @@ private:
     bool isDlist {};        // do we have a display list?
     int aoaState {2};       // shows which state we are in
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
+
+private:
+    // slot table helper methods
+    bool setSlotAoaRedMin(const base::Number* const);
+    bool setSlotAoaRedMax(const base::Number* const);
+    bool setSlotAoaYellowMin(const base::Number* const);
+    bool setSlotAoaYellowMax(const base::Number* const);
+    bool setSlotAoaGreenMax(const base::Number* const);
+    bool setSlotAoaGreenMin(const base::Number* const);
 };
 
 }

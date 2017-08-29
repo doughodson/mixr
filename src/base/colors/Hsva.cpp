@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Hsva.hpp"
 
-#include "mixr/base/numbers/Float.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 namespace mixr {
@@ -15,13 +15,12 @@ BEGIN_SLOTTABLE(Hsva)
     "alpha",    // alpha component,   range(0.0f .. 1.0f)
 END_SLOTTABLE(Hsva)
 
-// Map slot table to handles 
 BEGIN_SLOT_MAP(Hsva)
-    ON_SLOT(1,setAlpha,Number)
+    ON_SLOT(1, setAlpha, Number)
 END_SLOT_MAP()
 
 Hsva::Hsva(const double h, const double s,
-               const double v, const double a) : Hsv(h,s,v)
+           const double v, const double a) : Hsv(h,s,v)
 {
     STANDARD_CONSTRUCTOR()
     hsv[ALPHA] = a;

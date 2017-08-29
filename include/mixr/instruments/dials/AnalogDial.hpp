@@ -21,16 +21,16 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class AnalogDial : public Instrument
 {
-    DECLARE_SUBCLASS(AnalogDial,Instrument)
+    DECLARE_SUBCLASS(AnalogDial, Instrument)
 
 public:
     AnalogDial();
 
-    virtual bool setOriginAngle(const double na);
-    virtual bool setSweepAngle(const double newSweepAngle);
-    virtual bool setRadius(const double newR);
-    virtual bool setMobile(const bool newM);
-    virtual bool setSlices(const int x);
+    virtual bool setOriginAngle(const double);
+    virtual bool setSweepAngle(const double);
+    virtual bool setRadius(const double);
+    virtual bool setMobile(const bool);
+    virtual bool setSlices(const int);
 
     // here are the get functions
     double getStartAngle() const    { return originAngle; }
@@ -44,14 +44,8 @@ public:
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-    // slot functions
-    bool setSlotOriginAngle(const base::Number* const newAngle);
-    bool setSlotMobile(const base::Number* const newM);
-    bool setSlotSweepAngle(const base::Number* const newSweepAngle);
-    bool setSlotRadius(const base::Number* const newR);
-    bool setSlotSlices(const base::Number* const x);
     // event function
-    virtual bool onUpdateRadius(const base::Number* const x);
+    virtual bool onUpdateRadius(const base::Number* const);
 
 private:
     double originAngle {};     // angle we start drawing ticks from (degrees, default is 0)
@@ -60,6 +54,14 @@ private:
     double radius {};          // radius of our background
     bool isMobile {};          // are we moving around on the dial, or just sending the value down (to our components)
     int slices {1000};         // number of slices to use while drawing
+
+private:
+    // slot table helper methods
+    bool setSlotOriginAngle(const base::Number* const);
+    bool setSlotMobile(const base::Number* const);
+    bool setSlotSweepAngle(const base::Number* const);
+    bool setSlotRadius(const base::Number* const);
+    bool setSlotSlices(const base::Number* const);
 };
 
 }

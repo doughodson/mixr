@@ -73,11 +73,6 @@ public:
     bool getLoopback() const                { return loopback; }
     void setLoopback(const bool b)          { loopback = b; }
 
-    // Slot functions
-    virtual bool setSlotMulticastGroup(const String* const msg);
-    virtual bool setSlotTTL(const Number* const msg);
-    virtual bool setSlotLoopback(const Number* const msg);
-
     virtual bool initNetwork(const bool noWaitFlag) override;
     virtual bool isConnected() const override;
     virtual bool closeConnection() override;
@@ -93,10 +88,15 @@ private:
     int   ttl {1};                     // Time-to-live value
     bool  loopback {true};             // Loop back flag
     bool  initialized {};              // handler has been initialized
+
+private:
+    // slot table helper methods
+    bool setSlotMulticastGroup(const String* const);
+    bool setSlotTTL(const Number* const);
+    bool setSlotLoopback(const Number* const);
 };
 
 }
 }
 
 #endif
-

@@ -12,7 +12,7 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
+IMPLEMENT_SUBCLASS(GroundVehicle, "GroundVehicle")
 
 static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(base::PI/2.0);  // Default max launcher angle (rad)
 static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                              // Default min launcher angle (rad)
@@ -250,11 +250,11 @@ bool GroundVehicle::setSlotLauncherMoveTime(const base::Time* const msg)
 //==============================================================================
 // class Tank
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tank,"Tank")
+IMPLEMENT_SUBCLASS(Tank, "Tank")
+EMPTY_SLOTTABLE(Tank)
+EMPTY_DELETEDATA(Tank)
+EMPTY_COPYDATA(Tank)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Tank::Tank()
 {
     STANDARD_CONSTRUCTOR()
@@ -262,27 +262,14 @@ Tank::Tank()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Tank::copyData(const Tank& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void Tank::deleteData()
-{
-}
-
-
 //==============================================================================
 // class ArmoredVehicle
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ArmoredVehicle,"ArmoredVehicle")
+IMPLEMENT_SUBCLASS(ArmoredVehicle, "ArmoredVehicle")
+EMPTY_SLOTTABLE(ArmoredVehicle)
+EMPTY_DELETEDATA(ArmoredVehicle)
+EMPTY_COPYDATA(ArmoredVehicle)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 ArmoredVehicle::ArmoredVehicle()
 {
     STANDARD_CONSTRUCTOR()
@@ -290,26 +277,14 @@ ArmoredVehicle::ArmoredVehicle()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void ArmoredVehicle::copyData(const ArmoredVehicle& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void ArmoredVehicle::deleteData()
-{
-}
-
 //==============================================================================
 // class WheeledVehicle
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(WheeledVehicle,"WheeledVehicle")
+IMPLEMENT_SUBCLASS(WheeledVehicle, "WheeledVehicle")
+EMPTY_SLOTTABLE(WheeledVehicle)
+EMPTY_DELETEDATA(WheeledVehicle)
+EMPTY_COPYDATA(WheeledVehicle)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 WheeledVehicle::WheeledVehicle()
 {
     STANDARD_CONSTRUCTOR()
@@ -317,26 +292,14 @@ WheeledVehicle::WheeledVehicle()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void WheeledVehicle::copyData(const WheeledVehicle& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void WheeledVehicle::deleteData()
-{
-}
-
 //==============================================================================
 // class Artillery
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Artillery,"Artillery")
+IMPLEMENT_SUBCLASS(Artillery, "Artillery")
+EMPTY_SLOTTABLE(Artillery)
+EMPTY_DELETEDATA(Artillery)
+EMPTY_COPYDATA(Artillery)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Artillery::Artillery()
 {
     STANDARD_CONSTRUCTOR()
@@ -344,26 +307,14 @@ Artillery::Artillery()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Artillery::copyData(const Artillery& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void Artillery::deleteData()
-{
-}
-
 //==============================================================================
 // class GroundStation
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStation,"GroundStation")
+IMPLEMENT_SUBCLASS(GroundStation, "GroundStation")
+EMPTY_SLOTTABLE(GroundStation)
+EMPTY_DELETEDATA(GroundStation)
+EMPTY_COPYDATA(GroundStation)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GroundStation::GroundStation()
 {
     STANDARD_CONSTRUCTOR()
@@ -371,26 +322,14 @@ GroundStation::GroundStation()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void GroundStation::copyData(const GroundStation& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void GroundStation::deleteData()
-{
-}
-
 //==============================================================================
 // class GroundStationRadar
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStationRadar,"GroundStationRadar")
+IMPLEMENT_SUBCLASS(GroundStationRadar, "GroundStationRadar")
+EMPTY_SLOTTABLE(GroundStationRadar)
+EMPTY_DELETEDATA(GroundStationRadar)
+EMPTY_COPYDATA(GroundStationRadar)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GroundStationRadar::GroundStationRadar()
 {
     STANDARD_CONSTRUCTOR()
@@ -398,43 +337,19 @@ GroundStationRadar::GroundStationRadar()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void GroundStationRadar::copyData(const GroundStationRadar& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void GroundStationRadar::deleteData()
-{
-}
-
 //==============================================================================
 // class GroundStationUav
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GroundStationUav,"GroundStationUav")
+IMPLEMENT_SUBCLASS(GroundStationUav, "GroundStationUav")
+EMPTY_SLOTTABLE(GroundStationUav)
+EMPTY_DELETEDATA(GroundStationUav)
+EMPTY_COPYDATA(GroundStationUav)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GroundStationUav::GroundStationUav()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GroundStationUav");
     setType(&generic);
-}
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void GroundStationUav::copyData(const GroundStationUav& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void GroundStationUav::deleteData()
-{
 }
 
 }

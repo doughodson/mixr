@@ -4,7 +4,7 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
 

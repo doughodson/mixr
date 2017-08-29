@@ -24,16 +24,16 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class AnalogGauge : public Instrument
 {
-    DECLARE_SUBCLASS(AnalogGauge,Instrument)
+    DECLARE_SUBCLASS(AnalogGauge, Instrument)
 
 public:
     AnalogGauge();
 
-    virtual bool setLeftBoundary(const double newLB);
-    virtual bool setRightBoundary(const double newRB);
-    virtual bool setIsOutlined(const bool newO);
-    virtual bool setIsVertical(const bool newV);
-    virtual bool setDrawMe(const bool x);
+    virtual bool setLeftBoundary(const double);
+    virtual bool setRightBoundary(const double);
+    virtual bool setIsOutlined(const bool);
+    virtual bool setIsVertical(const bool);
+    virtual bool setDrawMe(const bool);
 
     double getLeftBoundary() const  { return leftBoundary; }
     double getRightBoundary() const { return rightBoundary; }
@@ -43,13 +43,6 @@ public:
 
     virtual void drawFunc() override;
 
-protected:
-    // slot functions
-    virtual bool setSlotLeftBoundary(const base::Number* const newLB);
-    virtual bool setSlotRightBoundary(const base::Number* const newRB);
-    virtual bool setSlotIsOutlined(const base::Number* const newO);
-    virtual bool setSlotIsVertical(const base::Number* const newV);
-
 private:
     double gaugePos {};           // direction, in inches, that we want to scale our gauge
     double leftBoundary {-1.0};   // our left boundary (in inches)
@@ -57,8 +50,15 @@ private:
     bool outline {};              // are we an outline or filled?
     bool vertical {true};         // are we sliding vertically or horizontally? (True = vertical)
     bool drawMe {true};           // this is for derived classes that don't want us to draw
-};
 
+private:
+    // slot table helper methods
+    bool setSlotLeftBoundary(const base::Number* const);
+    bool setSlotRightBoundary(const base::Number* const);
+    bool setSlotIsOutlined(const base::Number* const);
+    bool setSlotIsVertical(const base::Number* const);
+};
+   
 }
 }
 

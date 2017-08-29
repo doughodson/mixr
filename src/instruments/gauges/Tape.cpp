@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/gauges/Tape.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <iostream>
 

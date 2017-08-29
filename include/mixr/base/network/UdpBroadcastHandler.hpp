@@ -38,15 +38,16 @@ class UdpBroadcastHandler : public PosixHandler
 public:
     UdpBroadcastHandler();
 
-    // Slot Functions
-    virtual bool setSlotNetworkMask(const String* const msg);
-
 protected:
     virtual bool init() override;
     virtual bool bindSocket() override;
 
 private:
-    char* networkMask {};           // Network Mask
+    char* networkMask {};
+    
+private:
+    // slot table helper methods
+    bool setSlotNetworkMask(const String* const);
 };
 
 }

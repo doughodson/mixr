@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Density_H__
 #define __mixr_base_Density_H__
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/safe_ptr.hpp"
 #include "mixr/base/units/Masses.hpp"
 #include "mixr/base/units/Volumes.hpp"
@@ -54,19 +54,20 @@ public:
     const Mass* getMass() const;
     const Volume* getVolume() const;
 
-    // slot table functions
-    bool setSlotMass(const Mass* newMass);
-    bool setSlotVolume(const Volume* newVolume);
+private:
+    safe_ptr<const Mass>   myMass;
+    safe_ptr<const Volume> myVolume;
 
 private:
-    safe_ptr<const Mass>   myMass;         // holds our mass type
-    safe_ptr<const Volume> myVolume;       // holds our volume type
+    // slot table helper methods
+    bool setSlotMass(const Mass*);
+    bool setSlotVolume(const Volume*);
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Density& n)
 {
-    const Mass* m = n.getMass();
-    const Volume* v = n.getVolume();
+    const Mass* m {n.getMass()};
+    const Volume* v {n.getVolume()};
 
     sout << "( " << n.getFactoryName() << " " << n.getReal();
     if ( m != nullptr ) sout << " " << *m;

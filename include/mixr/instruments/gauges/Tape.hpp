@@ -30,15 +30,6 @@ public:
     virtual bool setMinNumber(const double x)           { minNum = x; return true;    }
     virtual bool setConvert(const bool x)               { convert = x; return true;   }
 
-protected:
-    bool setSlotRange(const base::Number* const x);
-    bool setSlotHeight(const base::Number* const x);
-    bool setSlotIncrement(const base::Number* const x);
-    bool setSlotVertical(const base::Number* const x);
-    bool setSlotMaxNum(const base::Number* const x);
-    bool setSlotMinNum(const base::Number* const x);
-    bool setSlotConvert(const base::Number* const x);
-
 private:
     SendData transTapeGraphicSD;    // our translation of our tape graphic
     SendData transTapeGraphicVSD;   // vertical
@@ -59,6 +50,16 @@ private:
     double maxNum {-1.0};
     double minNum {-1.0};
     bool convert {};
+
+private:
+    // slot table helper methods
+    bool setSlotRange(const base::Number* const);
+    bool setSlotHeight(const base::Number* const);
+    bool setSlotIncrement(const base::Number* const);
+    bool setSlotVertical(const base::Number* const);
+    bool setSlotMaxNum(const base::Number* const);
+    bool setSlotMinNum(const base::Number* const);
+    bool setSlotConvert(const base::Number* const);
 };
 
 }

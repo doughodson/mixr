@@ -14,11 +14,11 @@
 #include "mixr/base/functors/Functions.hpp"
 
 // Numbers
-#include "mixr/base/numbers/Boolean.hpp"
-#include "mixr/base/numbers/Complex.hpp"
-#include "mixr/base/numbers/Integer.hpp"
-#include "mixr/base/numbers/Float.hpp"
-#include "mixr/base/numbers/Operators.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Complex.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Operators.hpp"
 
 // IO
 #include "mixr/base/io/IoData.hpp"

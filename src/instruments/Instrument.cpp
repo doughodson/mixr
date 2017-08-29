@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/Instrument.hpp"
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/PairStream.hpp"

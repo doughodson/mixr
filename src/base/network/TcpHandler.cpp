@@ -29,7 +29,7 @@
 
 #include "mixr/base/network/TcpHandler.hpp"
 
-#include "mixr/base/numbers/Number.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -43,9 +43,6 @@ IMPLEMENT_SUBCLASS(TcpHandler, "TcpHandler")
 EMPTY_SLOTTABLE(TcpHandler)
 EMPTY_DELETEDATA(TcpHandler)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 TcpHandler::TcpHandler()
 {
    STANDARD_CONSTRUCTOR()
@@ -59,9 +56,6 @@ TcpHandler::TcpHandler(const LcSocket sn)
    setRecvBuffSize();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void TcpHandler::copyData(const TcpHandler& org, const bool)
 {
    BaseClass::copyData(org);
@@ -108,7 +102,7 @@ bool TcpHandler::isConnected() const
 //------------------------------------------------------------------------------
 bool TcpHandler::closeConnection()
 {
-    bool success = true;
+    bool success {true};
 
 #if defined(WIN32)
     if (::closesocket(socketNum) == SOCKET_ERROR) {
@@ -162,7 +156,7 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    if (!isConnected() || hasBeenTerminated()) return 0;
    if (socketNum == INVALID_SOCKET) return 0;
 
-   unsigned int n = 0; // default return value (no data)
+   unsigned int n {}; // default return value (no data)
 
    // Try to receive the data
    int result = ::recv(socketNum, packet, maxSize, 0);

@@ -6,7 +6,8 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LongitudeReadout, "LongitudeReadout")
+IMPLEMENT_SUBCLASS(LongitudeReadout, "LongitudeReadout")
+EMPTY_SLOTTABLE(LongitudeReadout)
 EMPTY_COPYDATA(LongitudeReadout)
 EMPTY_DELETEDATA(LongitudeReadout)
 

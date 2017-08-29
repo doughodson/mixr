@@ -30,7 +30,7 @@ class Table;
 //------------------------------------------------------------------------------
 class Function : public Object
 {
-    DECLARE_SUBCLASS(Function, Object)
+   DECLARE_SUBCLASS(Function, Object)
 
 public:
    Function();

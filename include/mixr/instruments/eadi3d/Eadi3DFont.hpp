@@ -26,7 +26,7 @@ class Eadi3DFont : public graphics::Font
 public:
     Eadi3DFont();
 
-    static GLenum createEadi3DFont(GLuint fontBase);
+    static GLenum createEadi3DFont(GLuint);
 
     virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
