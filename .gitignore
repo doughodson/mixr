@@ -10,6 +10,9 @@ codelite/
 # lib directory
 lib/
 
+# keep premake
+!premake*.*
+
 # vs runtime libs
 concrt*.dll
 msvcp*.dll

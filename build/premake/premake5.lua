@@ -69,7 +69,7 @@ workspace "mixr"
 
    -- common release configuration flags and symbols
    filter { "Release" }
-      flags { "Optimize" }
+      optimize "On"
       -- favor speed over size
       buildoptions { "/Ot" }
       defines { "WIN32", "_LIB", "NDEBUG" }
