@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Font_H__
-#define __mixr_graphics_Font_H__
+#ifndef __mixr_graphics_AbstractFont_H__
+#define __mixr_graphics_AbstractFont_H__
 
 #include "mixr/base/Object.hpp"
 
@@ -12,12 +12,11 @@ namespace base { class Number; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class:  Font
-// Base class:  Object -> Font
+// Class: AbstractFont
 //
-// Description:  Abstract font class
+// Description: Provides base functionality for all font classes
 //
-// Factory name: Font
+// Factory name: AbstractFont
 // Slots:
 //      fontWidth        <Number>  ! Font width (default: 1)
 //      fontHeight       <Number>  ! Font height (default: 1)
@@ -126,18 +125,16 @@ namespace graphics {
 //
 //      ftgl(void* p)
 //        Sets the pFTGL font pointer to p.
-//
-//Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Font : public base::Object
+class AbstractFont : public base::Object
 {
-    DECLARE_SUBCLASS(Font, base::Object)
+    DECLARE_SUBCLASS(AbstractFont, base::Object)
 
 public:
     static const std::size_t MAX_MESSAGE_LENGTH {256}; // Max length of character buffers
 
 public:
-    Font();
+    AbstractFont();
 
     virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) =0;
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) =0;

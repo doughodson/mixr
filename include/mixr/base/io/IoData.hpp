@@ -19,7 +19,7 @@ namespace base {
 //    For a standard I/O data buffer, see "mixr/iodevice/IoData.hpp".
 //
 //    The main input and output data buffers are typically managed by an I/O
-//    handler class (see IoHander.h).
+//    handler class (see IoHander.hpp).
 //
 // Notes:
 //    1) Inputs from hardware are called Analog Inputs (AI) and Discrete Inputs (DI)

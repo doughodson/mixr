@@ -57,7 +57,7 @@ class Ntm;
 //    Each NetIO object in the simulation has an unique, user defined network ID,
 //    which is set using the 'networkID' slot.  The NetIO objects are also
 //    identified by their federation and federate names, which are based on HLA.
-//    (see "dis/NetIO.h" for functions that will map the DIS exercise number to
+//    (see "dis/NetIO.hpp" for functions that will map the DIS exercise number to
 //    a federation name, and the DIS site and application numbers to the federate
 //    name)
 //
@@ -250,22 +250,6 @@ protected:
    virtual bool setMaxEntityRange(const double v);          // Sets the max entity range (meters)
    virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
    virtual bool setFederationName(const base::String* const msg); // Sets our federation name
-
-   // Set slot routines
-   virtual bool setSlotNetworkID(const base::Number* const p);                   // Sets the network ID
-   virtual bool setSlotFederateName(const base::String* const msg);              // Sets our federate name
-   virtual bool setSlotFederationName(const base::String* const msg);            // Sets our federation name
-   virtual bool setSlotEnableInput(const base::Number* const p);                 // Sets input enabled flag
-   virtual bool setSlotEnableOutput(const base::Number* const p);                // Sets output enabled flag
-   virtual bool setSlotEnableRelay(const base::Number* const p);                 // Sets relay enabled flag
-   virtual bool setSlotTimeline(const base::Identifier* const p);                // Sets the source of the time ( UTC or EXEC )
-   virtual bool setSlotInputEntityTypes(base::PairStream* const msg);            // Sets the table of input entity to player mapper objects
-   virtual bool setSlotOutputEntityTypes(base::PairStream* const msg);           // Sets the table of output entity to player mapper objects
-   virtual bool setSlotMaxTimeDR(const base::Time* const msg);                   // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const base::Distance* const msg);          // Sets the max positional error(s)
-   virtual bool setSlotMaxOrientationErr(const base::Angle* const msg);          // Sets the max orientation error(s)
-   virtual bool setSlotMaxAge(const base::Time* const msg);                      // Sets the max age(s)
-   virtual bool setSlotMaxEntityRange(const base::Distance* const msg);          // Sets the max entity range(s)
 
    virtual bool shutdownNotification() override;
 
@@ -472,6 +456,23 @@ private:  // Ntm related private
    // Output entity type table
    std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes {};  // Table of pointers to output entity type mappers; Ntm objects
    unsigned int nOutputEntityTypes {};             // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
+
+protected:
+   // slot table helper methods
+   virtual bool setSlotNetworkID(const base::Number* const);                 // Sets the network ID
+   virtual bool setSlotFederateName(const base::String* const);              // Sets our federate name
+   virtual bool setSlotFederationName(const base::String* const);            // Sets our federation name
+   virtual bool setSlotEnableInput(const base::Number* const);               // Sets input enabled flag
+   virtual bool setSlotEnableOutput(const base::Number* const);              // Sets output enabled flag
+   virtual bool setSlotEnableRelay(const base::Number* const);               // Sets relay enabled flag
+   virtual bool setSlotTimeline(const base::Identifier* const);              // Sets the source of the time ( UTC or EXEC )
+   virtual bool setSlotInputEntityTypes(base::PairStream* const);            // Sets the table of input entity to player mapper objects
+   virtual bool setSlotOutputEntityTypes(base::PairStream* const);           // Sets the table of output entity to player mapper objects
+   virtual bool setSlotMaxTimeDR(const base::Time* const);                   // Sets the mac DR time(s)
+   virtual bool setSlotMaxPositionErr(const base::Distance* const);          // Sets the max positional error(s)
+   virtual bool setSlotMaxOrientationErr(const base::Angle* const);          // Sets the max orientation error(s)
+   virtual bool setSlotMaxAge(const base::Time* const);                      // Sets the max age(s)
+   virtual bool setSlotMaxEntityRange(const base::Distance* const);          // Sets the max entity range(s)
 };
 
 }

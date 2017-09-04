@@ -19,7 +19,7 @@ class PairStream;
 //    or other state machines.  The state functions implement the state's actions,
 //    check input conditions, determine transitions, and perform the transition
 //    actions.  A "state table" is used to map state numbers to these state functions
-//    and macros (see macros.h) are used to define the state table.
+//    and macros (see macros.hpp) are used to define the state table.
 //
 // Slots:
 //    stateMachines   <PairStream>  ! List of state machines that are used to
@@ -54,7 +54,7 @@ class PairStream;
 //          that performs the state's actions, processes inputs, and executes
 //          transitions.  The state functions are mapped to state numbers by
 //          the "state table" using macros similar to the 'event' mapping tables
-//          in the Component class (see macros.h).
+//          in the Component class (see macros.hpp).
 //
 //       3) The 'post-state' function, postStateProc(), is a user define, state
 //          independent function that is called just after the state's function.
@@ -64,7 +64,7 @@ class PairStream;
 //
 // State table:
 //
-//    Use the following macros (see macros.h) to build the "state table".
+//    Use the following macros (see macros.hpp) to build the "state table".
 //
 //       BEGIN_STATE_TABLE(Foo)
 //          -- Start of the state table for the 'Foo' state machine class.

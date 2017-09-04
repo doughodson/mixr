@@ -26,7 +26,7 @@ class TrackManager;
 //    track managers.
 //
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 // Factory name: OnboardComputer
 //------------------------------------------------------------------------------

@@ -2,13 +2,13 @@
 #ifndef __mixr_graphics_StrokeFont_H__
 #define __mixr_graphics_StrokeFont_H__
 
-#include "Font.hpp"
+#include "AbstractFont.hpp"
 
 namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class:  StrokeFont
+// Class: StrokeFont
 // Description: Modified version of SGI's stroke font
 // Factory name: StrokeFont
 //
@@ -19,9 +19,9 @@ namespace graphics {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class StrokeFont : public Font
+class StrokeFont : public AbstractFont
 {
-    DECLARE_SUBCLASS(StrokeFont, Font)
+    DECLARE_SUBCLASS(StrokeFont, AbstractFont)
 
 public:
     StrokeFont();

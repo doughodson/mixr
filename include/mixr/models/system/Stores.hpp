@@ -48,7 +48,7 @@ class AbstractWeapon;
 //
 //    4) The getStores() function returns a pre-ref()'d pointer to the stores lists.
 //
-//    5) Weapons (see Weapon.h) are derived from the Player class.  They're
+//    5) Weapons (see Weapon.hpp) are derived from the Player class.  They're
 //       attached to the launch vehicle, which owns this stores manager.
 //       When the weapon is released, it is cloned to create a flyout weapon,
 //       which is added to the simulation's player list and becomes an active
@@ -65,7 +65,7 @@ class AbstractWeapon;
 //       systems are active and its sensor can see other players, and other players
 //       can see any R/F emissions from the weapon's R/F systems.
 //
-//    6) External equipment (see ExternalStore.h) includes launchers, guns, fuel
+//    6) External equipment (see ExternalStore.hpp) includes launchers, guns, fuel
 //       tanks, avionics pods, etc.
 //
 //       This class updates the external equipment using the System's class time

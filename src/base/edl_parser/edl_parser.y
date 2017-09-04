@@ -34,10 +34,10 @@
 #include "mixr/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mixr::base::Object* result;             // result of all our work (i.e., an Object)
-static mixr::base::EdlScanner* scanner;        // edl scanner
-static mixr::base::factory_func factory;       // factory function 
-static unsigned int err_count;                 // error count
+static mixr::base::Object* result {};          // result of all our work (i.e., an Object)
+static mixr::base::EdlScanner* scanner {};     // edl scanner
+static mixr::base::factory_func factory {};    // factory function 
+static int err_count {};                       // error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
@@ -78,17 +78,17 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            mixr::base::List::Item* item = arg_list->getFirstItem();
+            mixr::base::List::Item* item {arg_list->getFirstItem()};
             while (item != nullptr) {
-                mixr::base::Pair* p = static_cast<mixr::base::Pair*>(item->getValue());
-                bool ok = obj->setSlotByName(*p->slot(), p->object());
+                mixr::base::Pair* p {static_cast<mixr::base::Pair*>(item->getValue())};
+                bool ok {obj->setSlotByName(*p->slot(), p->object())};
                 if (!ok) {
                     std::string msg = "error while setting slot name: " + std::string(*p->slot());
                     yyerror(msg.c_str());
                 }
                 item = item->getNext();
             }
-            bool ok = obj->isValid();
+            bool ok {obj->isValid()};
             if (!ok) {
                 std::string msg = "error: invalid object: " + name;
                 yyerror(msg.c_str());
@@ -144,9 +144,9 @@ arglist :                           { $$ = new mixr::base::PairStream(); }
 
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
-                                        char cbuf[20];
+                                        char cbuf[20] {};
                                         std::sprintf(cbuf, "%i", i+1);
-                                        mixr::base::Pair* p = new mixr::base::Pair(cbuf, $2);
+                                        mixr::base::Pair* p {new mixr::base::Pair(cbuf, $2)};
                                         $2->unref();
                                         $1->put(p);
                                         p->unref();
@@ -156,9 +156,9 @@ arglist :                           { $$ = new mixr::base::PairStream(); }
 
         | arglist prim              {
                                     int i = $1->entries();
-                                    char cbuf[20];
-                                    std::sprintf(cbuf,"%i", i+1);
-                                    mixr::base::Pair* p = new mixr::base::Pair(cbuf, $2);
+                                    char cbuf[20] {};
+                                    std::sprintf(cbuf, "%i", i+1);
+                                    mixr::base::Pair* p {new mixr::base::Pair(cbuf, $2)};
                                     $2->unref();
                                     $1->put(p);
                                     p->unref();
@@ -202,7 +202,7 @@ namespace base {
 // Returns an Object* that was constructed from parsing an EDL file.
 // factory is the name of the Object creation function  
 //------------------------------------------------------------------------------
-Object* edl_parser(const std::string& filename, factory_func f, unsigned int* num_errors)
+Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
 {
     // set the global file scope static variables
     factory = f;
@@ -223,6 +223,7 @@ Object* edl_parser(const std::string& filename, factory_func f, unsigned int* nu
     // close the text file and delete the scanner
     fin.close();
     delete scanner;
+    scanner = nullptr;
 
     // if we have a good pointer, set the number of errors encountered
     if (num_errors != nullptr) {

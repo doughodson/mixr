@@ -15,7 +15,7 @@ namespace models {
 //    any oe Player type, and not just those related to air vehicles.
 //
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 // Factory name: Pilot
 //------------------------------------------------------------------------------

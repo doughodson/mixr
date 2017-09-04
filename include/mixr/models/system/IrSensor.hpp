@@ -42,7 +42,7 @@ class TrackManager;
 // Events:
 //    bool irQueryReturnEvent(IrQueryMsg* const irQuery);
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 //
 // Public Member functions:

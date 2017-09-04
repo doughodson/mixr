@@ -172,7 +172,7 @@ class String;
 //    event() function.  Event() can be called from an updateTC() routines, so the
 //    event tokens must be processed quickly, similar to interrupt handlers.
 //
-//    Standard event tokens are defined in the file, eventTokens.h, which is included
+//    Standard event tokens are defined in the file, eventTokens.hpp, which is included
 //    by this Component class and are therefore within the mixr::base::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
 //    as part of the oe Description Language (EDL) input files.
@@ -208,7 +208,7 @@ class String;
 //    or 'false' if the event was not processed.
 //
 //    Events that are not processed are passed up to the 'BaseClass' class until reaching
-//    this Component class.  'Key' events (see eventTokens.h) that are not processed by
+//    this Component class.  'Key' events (see eventTokens.hpp) that are not processed by
 //    this Component class are passed up to the container object.
 //
 //

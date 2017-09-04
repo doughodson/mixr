@@ -25,6 +25,4 @@ export LD_LIBRARY_PATH
 # ---
 # Update path to search for binaries in our 3rd party library path
 # ---
-PATH=$MIXR_3RD_PARTY_ROOT/bin:$PATH
-export PATH
-
+export PATH=$MIXR_3RD_PARTY_ROOT/bin:$PATH

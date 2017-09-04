@@ -26,10 +26,10 @@ class ReformatScanner : public rfFlexLexer
 public:
    enum DataType { invalid, number, octal, hex, time, dir };
 
-   ReformatScanner() : rfFlexLexer() { }
-   virtual ~ReformatScanner() { }
+   ReformatScanner() : rfFlexLexer()   { }
+   virtual ~ReformatScanner()          { }
 
-   const char* getFormat() const { return dataType != invalid ? format : nullptr; }
+   const char* getFormat() const       { return dataType != invalid ? format : nullptr; }
 
    DataType convertNumber(const char* s);
    DataType convertOctal(const char* s);
@@ -37,11 +37,11 @@ public:
    TimeReadout::TimeMode convertTime(const char* s);
    DirectionReadout::DirMode convertDirection(const char* s);
 
-   bool isPostSign() { return postSign; }
+   bool isPostSign()                   { return postSign; }
 
 protected:
    virtual int yylex();
-   virtual int yylex(const DataType dt);
+   virtual int yylex(const DataType);
 
    int processInteger(const char* text, const int len);
    int processFloat(const char* text, const int len);

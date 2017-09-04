@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/Field.hpp"
+#include "mixr/graphics/readouts/AbstractField.hpp"
 
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Page.hpp"
@@ -15,9 +15,9 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Field, "Field")
+IMPLEMENT_SUBCLASS(AbstractField, "AbstractField")
 
-BEGIN_SLOTTABLE(Field)
+BEGIN_SLOTTABLE(AbstractField)
     "position",         // 1) Starting Position ( ln cp )
     "width",            // 2) Field width
     "highLight",        // 3) Highlight text flag
@@ -30,9 +30,9 @@ BEGIN_SLOTTABLE(Field)
     "inheritColor",     //10) Inherit color of our container (instead of using default color)
     "font",             //11) Type of font to use before drawing
     "startCharPos",     //12) Our starting character position (we may want to skip!)
-END_SLOTTABLE(Field)
+END_SLOTTABLE(AbstractField)
 
-BEGIN_SLOT_MAP(Field)
+BEGIN_SLOT_MAP(AbstractField)
     ON_SLOT(1, setPosition, base::List)
     ON_SLOT(2, setSlotWidth, base::Number)
     ON_SLOT(3, setSlotHighlight, base::Number)
@@ -47,9 +47,9 @@ BEGIN_SLOT_MAP(Field)
     ON_SLOT(12, setSlotStartCharPos, base::Number)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Field)
+BEGIN_EVENT_HANDLER(AbstractField)
     if (mode == input) {
-        bool kb = ( _event >= 0x20 && _event <= 0x7f );
+        bool kb {( _event >= 0x20 && _event <= 0x7f )};
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
         ON_EVENT(BACK_SPACE,onBackSpace)
         // Keyboard Entry
@@ -57,7 +57,7 @@ BEGIN_EVENT_HANDLER(Field)
             // Filter the input event -- that is, let a virtual member
             // function filter the input event using the current template
             // character.
-            char nc = filterInputEvent(_event,inputExample.getChar(icp));
+            char nc {filterInputEvent(_event, inputExample.getChar(icp))};
             if (nc != '\0') {
                 setChar(nc);
                 _used = true;
@@ -74,13 +74,13 @@ BEGIN_EVENT_HANDLER(Field)
     ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,base::String)
 END_EVENT_HANDLER()
 
-Field::Field()
+AbstractField::AbstractField()
 {
     STANDARD_CONSTRUCTOR()
     jmode = base::String::NONE;
 }
 
-void Field::copyData(const Field& org, const bool)
+void AbstractField::copyData(const AbstractField& org, const bool)
 {
     BaseClass::copyData(org);
     origStr = org.origStr;
@@ -101,7 +101,7 @@ void Field::copyData(const Field& org, const bool)
     setSlotFont(org.fontName);
 }
 
-void Field::deleteData()
+void AbstractField::deleteData()
 {
     origStr.empty();
     inputExample.empty();
@@ -121,7 +121,7 @@ void Field::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void Field::updateData(const double dt)
+void AbstractField::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -155,22 +155,22 @@ void Field::updateData(const double dt)
 // line() -- set the line number
 // column() -- set the column number
 //------------------------------------------------------------------------------
-int Field::line(const int ll)
+int AbstractField::line(const int ll)
 {
     return (ln = ll);
 }
 
-int Field::line() const
+int AbstractField::line() const
 {
     return ln;
 }
 
-int Field::column(const int cc)
+int AbstractField::column(const int cc)
 {
     return (cp = cc);
 }
 
-int Field::column() const
+int AbstractField::column() const
 {
     return cp;
 }
@@ -178,9 +178,9 @@ int Field::column() const
 //------------------------------------------------------------------------------
 // withinField() -- Return True/False if cp,ln is in the field space
 //------------------------------------------------------------------------------
-bool Field::withinField(const int l, const int c) const
+bool AbstractField::withinField(const int l, const int c) const
 {
-    bool stat = false;
+    bool stat {};
     if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
     return stat;
 }
@@ -188,9 +188,9 @@ bool Field::withinField(const int l, const int c) const
 //------------------------------------------------------------------------------
 // setText() -- set the field's text string
 //------------------------------------------------------------------------------
-void Field::setText(const char newString[])
+void AbstractField::setText(const char s[])
 {
-    origStr = newString;
+    origStr = s;
     if (mode == display) {
         adjust();
     }
@@ -199,12 +199,12 @@ void Field::setText(const char newString[])
 //------------------------------------------------------------------------------
 // justification() --
 //------------------------------------------------------------------------------
-base::String::Justify Field::justification() const
+base::String::Justify AbstractField::justification() const
 {
     return jmode;
 }
 
-base::String::Justify Field::justification(const base::String::Justify t)
+base::String::Justify AbstractField::justification(const base::String::Justify t)
 {
     jmode = t;
     if (mode == display) adjust();
@@ -214,7 +214,7 @@ base::String::Justify Field::justification(const base::String::Justify t)
 //------------------------------------------------------------------------------
 // setMode() -- set the mode of the field (display, input)
 //------------------------------------------------------------------------------
-Field::Mode Field::setMode(const Field::Mode nmode)
+AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
 {
     Mode omode = mode;
     mode = nmode;
@@ -257,14 +257,14 @@ Field::Mode Field::setMode(const Field::Mode nmode)
 //------------------------------------------------------------------------------
 
 // isValidInputPosition() -- Makes sure the position is valid for input
-bool Field::isValidInputPosition(const int tc)
+bool AbstractField::isValidInputPosition(const int tc)
 {
     return (tc == '+' || tc == '0' || tc == '#' ||
             tc == 'D' || tc == 'H' || tc == 'M' || tc == 'S');
 }
 
 // filterInputEvent() -- Filter input events using a template character (tc)
-char Field::filterInputEvent(const int event, const int tc)
+char AbstractField::filterInputEvent(const int event, const int tc)
 {
     if (tc == '+') {
         // Default sign keys
@@ -289,13 +289,13 @@ char Field::filterInputEvent(const int event, const int tc)
 
 }
 
-int Field::setExample(const char* const example)
+int AbstractField::setExample(const char* const example)
 {
     inputExample = example;
     return static_cast<int>(inputExample.len());
 }
 
-void Field::advanceSpace(const int ns)
+void AbstractField::advanceSpace(const int ns)
 {
     if (mode != input) return;
     icp += ns;
@@ -307,7 +307,7 @@ void Field::advanceSpace(const int ns)
     }
 }
 
-void Field::backSpace(const int ns)
+void AbstractField::backSpace(const int ns)
 {
    if (mode != input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
@@ -325,7 +325,7 @@ void Field::backSpace(const int ns)
    }
 }
 
-bool Field::setInputCharacterPosition(const unsigned int ii)
+bool AbstractField::setInputCharacterPosition(const unsigned int ii)
 {
     if (startCP > 0) {
         if (ii >= startCP) icp = ii;
@@ -335,7 +335,7 @@ bool Field::setInputCharacterPosition(const unsigned int ii)
 }
 
 
-char Field::getChar()
+char AbstractField::getChar()
 {
     if (mode == input)
         return str.getChar(icp);
@@ -343,19 +343,19 @@ char Field::getChar()
         return '\0';
 }
 
-void Field::setChar(const char c)
+void AbstractField::setChar(const char c)
 {
     if (mode != input) return;
     str.setChar(icp,c);
     advanceSpace();
 }
 
-double Field::getInputValue() const
+double AbstractField::getInputValue() const
 {
     return 0.0;
 }
 
-bool Field::isInputValueValid() const
+bool AbstractField::isInputValueValid() const
 {
     return true;
 }
@@ -364,7 +364,7 @@ bool Field::isInputValueValid() const
 //------------------------------------------------------------------------------
 // onForwardSpace() --
 //------------------------------------------------------------------------------
-bool Field::onForwardSpace()
+bool AbstractField::onForwardSpace()
 {
     advanceSpace();
     return true;
@@ -373,7 +373,7 @@ bool Field::onForwardSpace()
 //------------------------------------------------------------------------------
 // onBackSpace() --
 //------------------------------------------------------------------------------
-bool Field::onBackSpace()
+bool AbstractField::onBackSpace()
 {
     backSpace();
     return true;
@@ -383,7 +383,7 @@ bool Field::onBackSpace()
 // cursor() -- Returns true if text cursor should be seen within this
 //             object and the position of the cursor.
 //------------------------------------------------------------------------------
-bool Field::cursor(int* l, int* c) const
+bool AbstractField::cursor(int* l, int* c) const
 {
     if (mode == input) {
         *l = ln;
@@ -400,26 +400,26 @@ bool Field::cursor(int* l, int* c) const
 //------------------------------------------------------------------------------
 // drawFunc -- draw this text field
 //------------------------------------------------------------------------------
-void Field::drawFunc()
+void AbstractField::drawFunc()
 {
     // Get a pointer to the current display
-    graphics::Display* dsp = getDisplay();
+    graphics::Display* dsp {getDisplay()};
     if (dsp == nullptr) return;
 
     // ---
     // When our container is also a Field, get a pointer to it.
     // ---
-    graphics::Field* parent = nullptr;
+    graphics::AbstractField* parent {};
     if (container() != nullptr) {
-        const auto fp = dynamic_cast<graphics::Field*>(container());
+        const auto fp = dynamic_cast<graphics::AbstractField*>(container());
         if (fp != nullptr) parent = fp;
     }
 
     // ---
     // If we don't have a position, try to get one from our container
     // ---
-    int ll = line();
-    int cc = column();
+    int ll {line()};
+    int cc {column()};
     if (ll == 0 && parent != nullptr) {
         ll = parent->line();
         cc = parent->column();
@@ -435,8 +435,8 @@ void Field::drawFunc()
     // ---
     // Set the color
     // ---
-    bool restoreColor = false;
-    base::Vec4d ocolor = dsp->getCurrentColor();
+    bool restoreColor {};
+    base::Vec4d ocolor {dsp->getCurrentColor()};
     // only use default colors if we aren't inheriting our container's colors
 
     if (!isInheritColor()) {
@@ -458,7 +458,7 @@ void Field::drawFunc()
 
     if (str.len() > 0) {
         // Draw the text string
-        const char* sp = str;
+        const char* sp {str};
         if (ll > 0 && cc > 0)
             dsp->outputTextLC(ll, cc, sp, static_cast<int>(width()), isVertical());
         else
@@ -491,19 +491,18 @@ void Field::drawFunc()
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
 //------------------------------------------------------------------------------
-bool Field::setPosition(const base::List* const spobj)
+bool AbstractField::setPosition(const base::List* const spobj)
 {
-    bool ok = true;
+    bool ok {true};
     if (spobj != nullptr) {
-        int values[2];
-        int n = spobj->getNumberList(values, 2);
+        int values[2] {};
+        int n {static_cast<int>(spobj->getNumberList(values, 2))};
             if (n >= 2) {
                 line(values[0]);
                 column(values[1]);
-            }
-            else {
+            } else {
                  if (isMessageEnabled(MSG_ERROR)) {
-                std::cerr << "Field::setPosition: not enough data to process list" << std::endl;
+                std::cerr << "AbstractField::setPosition: not enough data to process list" << std::endl;
                  }
                 ok = false;
             }
@@ -514,7 +513,7 @@ bool Field::setPosition(const base::List* const spobj)
 //------------------------------------------------------------------------------
 // setLine() --
 //------------------------------------------------------------------------------
-bool Field::onSetLine(const base::Number* const oslobj)
+bool AbstractField::onSetLine(const base::Number* const oslobj)
 {
     if (oslobj != nullptr) line(oslobj->getInt());
     return true;
@@ -523,7 +522,7 @@ bool Field::onSetLine(const base::Number* const oslobj)
 //------------------------------------------------------------------------------
 // setColumn() --
 //------------------------------------------------------------------------------
-bool Field::onSetColumn(const base::Number* const oscobj)
+bool AbstractField::onSetColumn(const base::Number* const oscobj)
 {
    if (oscobj != nullptr) column(oscobj->getInt());
    return true;
@@ -532,7 +531,7 @@ bool Field::onSetColumn(const base::Number* const oscobj)
 //------------------------------------------------------------------------------
 // setSlotWidth() --
 //------------------------------------------------------------------------------
-bool Field::setSlotWidth(const base::Number* const swobj)
+bool AbstractField::setSlotWidth(const base::Number* const swobj)
 {
 
     if (swobj != nullptr) width(swobj->getInt());
@@ -542,26 +541,24 @@ bool Field::setSlotWidth(const base::Number* const swobj)
 //------------------------------------------------------------------------------
 // setSlotHighlight() --
 //------------------------------------------------------------------------------
-bool Field::setSlotHighlight(const base::Number* const shobj)
+bool AbstractField::setSlotHighlight(const base::Number* const shobj)
 {
     if (shobj != nullptr) {
         // Set our mode
         if (shobj->getBoolean()) {
             setDisplayMode(highlight);
             setDisplayMode(highlight1);
-        }
-        else {
+        } else {
             clearDisplayMode(highlight);
             clearDisplayMode(highlight1);
         }
 
-        base::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-
-            const base::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<Field*>(p->object());
+                const auto child = dynamic_cast<AbstractField*>(p->object());
                 if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
             }
@@ -576,7 +573,7 @@ bool Field::setSlotHighlight(const base::Number* const shobj)
 //------------------------------------------------------------------------------
 // setSlotUnderline() --
 //------------------------------------------------------------------------------
-bool Field::setSlotUnderline(const base::Number* const suobj)
+bool AbstractField::setSlotUnderline(const base::Number* const suobj)
 {
     if (suobj != nullptr) {
 
@@ -591,13 +588,13 @@ bool Field::setSlotUnderline(const base::Number* const suobj)
         }
 
         // Set our children's mode
-        base::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
 
-            const base::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<Field*>(p->object());
+                const auto child = dynamic_cast<AbstractField*>(p->object());
                 if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
             }
@@ -612,9 +609,8 @@ bool Field::setSlotUnderline(const base::Number* const suobj)
 //------------------------------------------------------------------------------
 // setSlotReversed() --
 //------------------------------------------------------------------------------
-bool Field::setSlotReversed(const base::Number* const srobj)
+bool AbstractField::setSlotReversed(const base::Number* const srobj)
 {
-
     if (srobj != nullptr) {
 
         // Set our mode
@@ -628,13 +624,13 @@ bool Field::setSlotReversed(const base::Number* const srobj)
         }
 
         // Set our children's mode
-        base::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
 
-            const base::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<Field*>(p->object());
+                const auto child = dynamic_cast<AbstractField*>(p->object());
                 if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
             }
@@ -649,7 +645,7 @@ bool Field::setSlotReversed(const base::Number* const srobj)
 //------------------------------------------------------------------------------
 // setSlotVertical() --
 //------------------------------------------------------------------------------
-bool Field::setSlotVertical(const base::Number* const ssobj)
+bool AbstractField::setSlotVertical(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -668,7 +664,7 @@ bool Field::setSlotVertical(const base::Number* const ssobj)
 //------------------------------------------------------------------------------
 // setSlotBrackets() --
 //------------------------------------------------------------------------------
-bool Field::setSlotBrackets(const base::Number* const ssobj)
+bool AbstractField::setSlotBrackets(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -687,7 +683,7 @@ bool Field::setSlotBrackets(const base::Number* const ssobj)
 //------------------------------------------------------------------------------
 // setSlotLinked() --
 //------------------------------------------------------------------------------
-bool Field::setSlotLinked(const base::Number* const msg)
+bool AbstractField::setSlotLinked(const base::Number* const msg)
 {
     if (msg != nullptr) {
         setLinked( msg->getBoolean() );
@@ -698,9 +694,9 @@ bool Field::setSlotLinked(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotInheritColor() --
 //------------------------------------------------------------------------------
-bool Field::setSlotInheritColor(const base::Number* const ic)
+bool AbstractField::setSlotInheritColor(const base::Number* const ic)
 {
-    bool ok = false;
+    bool ok {};
     if (ic != nullptr) {
         ok = setInheritColor(ic->getBoolean());
     }
@@ -710,9 +706,9 @@ bool Field::setSlotInheritColor(const base::Number* const ic)
 //------------------------------------------------------------------------------
 // setSlotJustification() --
 //------------------------------------------------------------------------------
-bool Field::setSlotJustification(const base::String* const sjobj)
+bool AbstractField::setSlotJustification(const base::String* const sjobj)
 {
-    bool ok = true;
+    bool ok {true};
     if (sjobj != nullptr) {
 
         // Set our justification
@@ -726,19 +722,19 @@ bool Field::setSlotJustification(const base::String* const sjobj)
             justification(base::String::RIGHT);
         else {
               if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Field::setJustification: No proper inputs" << std::endl;
+            std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
               }
             ok = false;
         }
 
         // Set our children's justification
-        base::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<Field*>(p->object());
+                const auto child = dynamic_cast<AbstractField*>(p->object());
                 if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
             }
@@ -750,9 +746,9 @@ bool Field::setSlotJustification(const base::String* const sjobj)
     return ok;
 }
 
-bool Field::setSlotFont(const base::String* const font)
+bool AbstractField::setSlotFont(const base::String* const font)
 {
-    bool ok = false;
+    bool ok {};
     if (fontName != nullptr) fontName->unref();
     fontName = nullptr;
     if (font != nullptr) {
@@ -763,10 +759,11 @@ bool Field::setSlotFont(const base::String* const font)
     return ok;
 }
 
-bool Field::setSlotStartCharPos(const base::Number* const msg) {
-    bool ok = false;
+bool AbstractField::setSlotStartCharPos(const base::Number* const msg)
+{
+    bool ok {};
     if (msg != nullptr) {
-        int ii = msg->getInt();
+        int ii {msg->getInt()};
         if (ii > 0) {
            // come in as 1 based, convert to 0 based
            startCP = static_cast<unsigned int>(ii - 1);

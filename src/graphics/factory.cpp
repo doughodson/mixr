@@ -9,13 +9,21 @@
 #include "mixr/graphics/Polygon.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
-#include "mixr/graphics/FtglFonts.hpp"
-#include "mixr/graphics/BitmapFont.hpp"
-#include "mixr/graphics/StrokeFont.hpp"
 #include "mixr/graphics/BmpTexture.hpp"
 #include "mixr/graphics/Rotators.hpp"
 #include "mixr/graphics/Translator.hpp"
 #include "mixr/graphics/Material.hpp"
+
+// fonts
+#include "mixr/graphics/fonts/FtglBitmapFont.hpp"
+#include "mixr/graphics/fonts/FtglExtrdFont.hpp"
+#include "mixr/graphics/fonts/FtglHaloFont.hpp"
+#include "mixr/graphics/fonts/FtglOutlineFont.hpp"
+#include "mixr/graphics/fonts/FtglPixmapFont.hpp"
+#include "mixr/graphics/fonts/FtglPolygonFont.hpp"
+#include "mixr/graphics/fonts/FtglTextureFont.hpp"
+#include "mixr/graphics/fonts/BitmapFont.hpp"
+#include "mixr/graphics/fonts/StrokeFont.hpp"
 
 // fields and readouts
 #include "mixr/graphics/readouts/AsciiText.hpp"
@@ -35,8 +43,6 @@
 #include "mixr/graphics/MapPage.hpp"
 #include "mixr/graphics/SymbolLoader.hpp"
 
-
-
 #include <string>
 
 namespace mixr {
@@ -44,7 +50,7 @@ namespace graphics {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     // General graphics support
     if ( name == Graphic::getFactoryName() ) {

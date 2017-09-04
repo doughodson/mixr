@@ -33,7 +33,7 @@ class TrackManager;
 //       then 'radioId' will override the ID of the named radio.
 //    2) 'maxRange' is used when a named radio, 'radioName', is not provided.
 //    3) This class is one of the "top level" systems attached to a Player
-//       class (see Player.h).
+//       class (see Player.hpp).
 //------------------------------------------------------------------------------
 class Datalink : public System
 {

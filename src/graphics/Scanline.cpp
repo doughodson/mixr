@@ -204,7 +204,7 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
    const auto tnorms = const_cast<base::Vec3d*>(static_cast<const base::Vec3d*>(polygon->getNormals()));
    const auto tcoord = const_cast<base::Vec2d*>(static_cast<const base::Vec2d*>(polygon->getTextureCoord()));
 
-   bool reduced = true;
+   bool reduced {true};
    while (reduced && n1 > 2) {
       reduced = false;
       int ix0 = static_cast<int>( tvect[0][0] + 0.5f );

@@ -26,7 +26,7 @@ namespace models {
 //       Not used by air vehicles.
 //
 //    4) This class is one of the "top level" systems attached to a Player
-//       class (see Player.h).
+//       class (see Player.hpp).
 //
 // Factory name: DynamicsModel
 //

@@ -36,7 +36,7 @@ Object::Object():Referenced()
 Object::Object(const Object& org):Referenced()
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 Object::~Object()
@@ -111,7 +111,7 @@ const SlotTable& Object::getSlotTable()
 //------------------------------------------------------------------------------
 int Object::slotName2Index(const char* const slotname) const
 {
-   int slotindex = 0;
+   int slotindex {};
 
    // No 'slotname' then no slot index
    if (slotname == nullptr) {
@@ -119,28 +119,30 @@ int Object::slotName2Index(const char* const slotname) const
    }
 
    // How many slots do we have
-   int n = slotTable->n();
+   int n {slotTable->n()};
 
    // a) check if 'slotname' is a number (e.g., "12")
-   bool isNum = true;
+   bool isNum {true};
    for (int i = 0; isNum && slotname[i] != '\0'; i++) {
-      if ( !std::isdigit(slotname[i]) ) isNum = false;
+      if ( !std::isdigit(slotname[i]) ) {
+         isNum = false;
+      }
    }
 
    // b) convert 'slotname' to a slot index
    if (isNum) {
       // when the slotname is just a number (e.g., "12")
-      int j = std::atoi(slotname);
-      if (j > 0 && j <= n) slotindex = j;
-   }
-   else {
+      int j {std::atoi(slotname)};
+      if (j > 0 && j <= n) {
+         slotindex = j;
+      }
+   } else {
       // when the 'slotname' is a name (e.g., "some-slot")
       slotindex = slotTable->index(slotname);
       if (slotindex <= 0)
-      std::cerr << "slot not found: " << slotname << std::endl;
+         std::cerr << "slot not found: " << slotname << std::endl;
    }
-
-    return slotindex;
+   return slotindex;
 }
 
 //------------------------------------------------------------------------------
@@ -164,7 +166,7 @@ bool Object::setSlotByName(const char* const slotname, Object* const obj)
 //------------------------------------------------------------------------------
 const char* Object::slotIndex2Name(const int slotindex) const
 {
-    return slotTable->name(slotindex);
+   return slotTable->name(slotindex);
 }
 
 //------------------------------------------------------------------------------
@@ -172,7 +174,7 @@ const char* Object::slotIndex2Name(const int slotindex) const
 //------------------------------------------------------------------------------
 bool Object::isValid() const
 {
-    return true;
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -181,14 +183,13 @@ bool Object::isValid() const
 
 bool Object::isMessageEnabled(const unsigned short msgType) const
 {
-   bool enabled = false;
+   bool enabled {};
 
    if (msgType != 0) {
       if ((msgType & MSG_ERROR) != 0) {
          // Error messages are always enabled
          enabled = true;
-      }
-      else {
+      } else {
          // enabled if any bits match
          enabled = (msgType & enbMsgBits) != 0;
       }
@@ -198,14 +199,13 @@ bool Object::isMessageEnabled(const unsigned short msgType) const
 
 bool Object::isMessageDisabled(const unsigned short msgType) const
 {
-   bool disabled = false;
+   bool disabled {};
 
    if (msgType != 0) {
       if ((msgType & MSG_ERROR) != 0) {
          // Error messages are not disabled
          disabled = false;
-      }
-      else {
+      } else {
          // disabled if any bits match
          disabled = (msgType & disMsgBits) != 0;
       }
@@ -241,7 +241,7 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
 //------------------------------------------------------------------------------
 const MetaObject* Object::getMetaObject()
 {
-    return &metaObject;
+   return &metaObject;
 }
 
 }

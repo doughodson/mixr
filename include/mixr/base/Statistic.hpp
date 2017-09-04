@@ -61,7 +61,8 @@ namespace base {
 //       Returns the confidence interval for the statistic given Z
 //
 //------------------------------------------------------------------------------
-class Statistic : public Object {
+class Statistic : public Object
+{
     DECLARE_SUBCLASS(Statistic, Object)
 
 public:
@@ -76,13 +77,13 @@ public:
    double absMean() const;                          // Returns the mean of the abs values
    double variance() const;                         // Returns the variance
    double stdDev() const;                           // Returns the standard deviation
-   double maxValue() const   { return maximum; }    // Returns the max data point
-   double minValue() const   { return minimum; }    // Returns the min data point
+   double maxValue() const     { return maximum; }  // Returns the max data point
+   double minValue() const     { return minimum; }  // Returns the min data point
    double rms() const;                              // Returns the Root-Mean-Squared
    double ci(const double) const;                   // Returns confidence interval given "Z"
-   double value() const      { return value1; }     // Returns the last values added by sigma()
+   double value() const        { return value1; }   // Returns the last values added by sigma()
 
-   void clear();             // Clear statistics
+   void clear();             // clear statistics
 
 private:
    unsigned long n {};       // number of values
@@ -101,7 +102,7 @@ inline void Statistic::sigma(const double value)
    value1 = value;
 
    // Abs value
-   double avalue = value;
+   double avalue {value};
    if (avalue < 0.0) avalue = -avalue;
 
    // Max/Min value
@@ -162,10 +163,10 @@ inline double Statistic::absMean() const
 // returns the variance
 inline double Statistic::variance() const
 {
-   double var = 0.0;
-   unsigned long n1 = n - 1;
-   double sqTheSum = (sum * sum);
-   double numer = (n * (sumSq )) - sqTheSum;
+   double var {};
+   unsigned long n1 {n - 1};
+   double sqTheSum {sum * sum};
+   double numer {(n * (sumSq )) - sqTheSum};
    // due to round-off error, numerator can end up less than zero!
    // if so, variance is very, very small, therefore set to zero.
    if (numer < 0.0) {
@@ -181,13 +182,13 @@ inline double Statistic::variance() const
 // returns the standard deviation
 inline double Statistic::stdDev() const
 {
-   return( std::sqrt( variance() ) );
+   return (std::sqrt(variance()));
 }
 
 // returns the RMS value
 inline double Statistic::rms() const
 {
-   double rmsValue = 0;
+   double rmsValue {};
    if (n != 0.0) {
       rmsValue = std::sqrt( sumSq / static_cast<double>(n) );
    }

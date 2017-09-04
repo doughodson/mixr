@@ -72,7 +72,7 @@ namespace base {
 
 Object* factory(const std::string& name)
 {
-    Object* obj = nullptr;
+    Object* obj {};
 
     // Numbers
     if ( name == Number::getFactoryName() ) {

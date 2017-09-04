@@ -25,7 +25,7 @@ class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
 //
 // Factory name: TabPrinter
 // Slots:
-//    msgHdrOptn   ! Msg Header options (see TabPrinter.h)
+//    msgHdrOptn   ! Msg Header options (see TabPrinter.hpp)
 //    divider      ! Field divider (default: tab)
 //------------------------------------------------------------------------------
 class TabPrinter : public PrintHandler

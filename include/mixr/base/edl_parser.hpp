@@ -19,7 +19,7 @@ typedef Object* (*factory_func)(const std::string& name);
 // edl_parser( text filename to parse, user supplied factory function to create objects,
 //             pointer to variable for num of errors found )
 //
-extern Object* edl_parser(const std::string& filename, factory_func f, unsigned int* num_errors = nullptr);
+extern Object* edl_parser(const std::string& filename, factory_func f, int* num_errors = nullptr);
 
 }
 }

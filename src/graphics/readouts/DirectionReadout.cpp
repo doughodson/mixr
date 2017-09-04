@@ -164,7 +164,7 @@ void DirectionReadout::makeText()
 //------------------------------------------------------------------------------
 void DirectionReadout::reformat(const char* const example)
 {
-   DirMode results = reformatter->convertDirection(example);
+   DirMode results {reformatter->convertDirection(example)};
    if (results != invalid) {
       setExample(example);
       base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());

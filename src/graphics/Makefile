@@ -18,6 +18,18 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_graphics.a
 
 OBJS =  \
+	fonts/AbstractFont.o \
+	fonts/AbstractFtglFont.o \
+	fonts/BitmapFont.o \
+	fonts/FtglBitmapFont.o \
+	fonts/FtglExtrdFont.o \
+	fonts/FtglHaloFont.o \
+	fonts/FtglOutlineFont.o \
+	fonts/FtglPixmapFont.o \
+	fonts/FtglPolygonFont.o \
+	fonts/FtglTextureFont.o \
+	fonts/StrokeFont.o \
+	readouts/AbstractField.o \
 	readouts/AsciiText.o \
 	readouts/Cursor.o \
 	readouts/DirectionReadout.o \
@@ -31,15 +43,11 @@ OBJS =  \
 	readouts/Rotary2.o \
 	readouts/TimeReadout.o \
 	BmpTexture.o \
-	BitmapFont.o \
 	Clip3D.o \
 	ColorGradient.o \
 	ColorRotary.o \
 	Display.o \
 	factory.o \
-	Field.o \
-	Font.o \
-	FtglFonts.o \
 	Graphic.o \
 	Image.o \
 	Material.o \
@@ -48,7 +56,6 @@ OBJS =  \
 	Rotators.o \
 	Scanline.o \
 	Shapes.o \
-	StrokeFont.o \
 	SymbolLoader.o \
 	Texture.o \
 	Translator.o \
@@ -65,6 +72,7 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f fonts/*.o
 	-rm -f readouts/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

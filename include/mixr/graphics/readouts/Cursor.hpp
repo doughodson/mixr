@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Cursor_H__
 #define __mixr_graphics_Cursor_H__
 
-#include "mixr/graphics/Field.hpp"
+#include "mixr/graphics/readouts/AbstractField.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -12,9 +12,9 @@ namespace graphics {
 //
 // Factory name: Cursor
 //------------------------------------------------------------------------------
-class Cursor : public Field
+class Cursor : public AbstractField
 {
-    DECLARE_SUBCLASS(Cursor, Field)
+    DECLARE_SUBCLASS(Cursor, AbstractField)
 
 public:
    Cursor();

@@ -7,27 +7,67 @@ General framework-wide changes/improvements
 
 - Renamed user interface directory from 'gui' to 'ui' as it's more general.
 
-- Removed 'serialize()' method from base Object.  This method is no longer needed,
-  was rarely used, so all functionality has been removed.  Therefore, in user code,
-  remove any 'serialize()' methods you might have defined for your classes.  If
-  you did not defined any such method, you probably used the 'EMPTY_SERIALIZE()'
-  macro to define something.  Delete this macro.
+- Removed 'serialize()' method from base Object.  This method is no longer needed
+  and rarely used, so all functionality associated with it has been removed.
+  
+  Therefore, in user code, remove any 'serialize()' methods you might have
+  defined for your classes.  If you did not defined any such method, you probably
+  used the 'EMPTY_SERIALIZE()' macro to define something.  Remove this macro.
 
 - Prefixed all 'size_t' types with std (e.g., std::size_t) to clearly indicate
-  that this is a type from C++ std library.  This has no impact on API.
+  that this type is defined in the C++ std library.  This has no impact on API.
   It was done to improve codebase to fully adopt C++ things as opposed to
-  global 'C' types.
+  global 'C' types (i.e., 'size_t' without namespace qualifier).
 
-- Moving to using more brace initialization for types throughout implementation
+- Using more brace initialization for types throughout implementation
   code.  This causes a more careful examination of type initialization to take
   place, which should improve the quality of generated code.  For example, it
-  prevents accidential narrowing initializations from say 'ints' to 'doubles' or
-  'doubles' to 'ints.' This is a time consuming activity to make throughout
-  codebase, so this is happening when the opporunity presents itself and
-  sufficient time is available.
+  prevents accidential initializations from say 'ints' to 'doubles' or
+  'doubles' to 'ints.' This is a time consuming activity, so this is happening
+  when the opporunity presents itself and sufficient time is available.
+
+- Shifting to using 'int's as opposed to 'unsigned int's almost exclusively.
+
+  Rationale:
+  
+  The reason to shift from using 'unsigned int's to 'int's is to improve code
+  quality and conform to conventions.  The convention is as follows: "Favor the
+  use of 'int's over 'unsigned int's unless there is a strong reason not to."
+
+  There are many cited reasons to follow this convention: 1) as an algebraic type,
+  'unsigned int's are discontinuous at 0, leading to error prone bugs, 2) 'int' is
+  shorter to type, read and generally digest, and 3) 'int's map directly to
+  computer hardware architecture.
+
+  The only detractor from this practice comes from the standard library defined
+  std::size_t datatype, which is unfortunately typed 'unsigned int'.  Today,
+  this apparently is considered a mistake by the standard committee.
+
+  As we move towards using more C++11 features (such as universal brace
+  initialization), the inadvertent mixing of 'unsigned int's with 'int's is no
+  longer masked due to implicit type conversions (coercions).  Narrowing
+  conversions (coercions) now produce compiler errors.
+
+  For example:
+  
+  double x = 1;    // compiles, but is technically wrong, 1 is an 'int' which
+                   // will be coerced (converted) into a double.
+
+  double x {1};    // using brace initialization, the compiler will flag this
+                   // as an error.
+  
+  The big picture is this - C++11 provides the features to sharpen distinctions
+  between types (including primitives) - a good thing, and we are starting
+  to take advantage to improve type-safety and improve code quality.
+  
+--------------------------------------------------------------------------------
+
+#####################################################
+Infrastructure oriented libraries
+#####################################################
 
 --------------------------------------------------------------------------------
-base library
+base library (mixr_base)
 
    -- Removed all random number generation-oriented classes which included the
       Mersenne Twister algorithm and distibution classes.  C++11 includes
@@ -37,9 +77,43 @@ base library
       This included the Boolean, Complex, Float, Integer, Number and Operator
       classes.
 
-   -- Moved all color classes into 'base/colors.'  This included Cie, Cmy, Color,
+   -- Moved all color classes into 'base/colors'.  This included Cie, Cmy, Color,
       Hls, Hsv, Hsva, Rgb, Rgba and Yiq.
   
    -- Moved the base/Decibel class into 'units' directory.
+
+   -- EDL parser function signature has changed slightly.
+
+      From : Object* edl_parser(..., unsigned int* num_errors = nullptr);
+      To   : Object* edl_parser(..., int* num_errors = nullptr);
+
+      The only difference is the shift from using 'unsigned int' to 'int' to
+      report a parser calculated and returned error count.
+--------------------------------------------------------------------------------
+
+#####################################################
+Graphics oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+graphics library (mixr_graphics)
+
+   -- Updated all readout classes to use brace initialization.
+
+   -- Renamed and moved graphics/Field to graphics/readouts/AbstractField.
+      This class serves as an abstract base to several graphic readout classes.
+
+   -- Renamed and moved graphics/Font to graphics/fonts/AbstractFont.
+
+   -- Moved all font related (derived) classes into graphics/fonts directory.
+
+   -- Separated all FTGL-based classes from FtglFonts.hpp/.cpp into individual
+      files: AbstractFtglFont, FtglBitmapFont, FtglExtrdFont, FtglHaloFont,
+      FtglOutlineFont, FtglPixmapFont, FtglPolygonFont and FtglTextureFont.
+
+   -- Renamed 2 factory names as follows:
+         FTGLTextureFonts -> FTGLTextureFont
+         FTGLHaloFonts -> FTGLHaloFont
+      Make sure to adjust epp/edl files to account for factory name change.
 
 --------------------------------------------------------------------------------

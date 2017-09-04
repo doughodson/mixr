@@ -1,20 +1,20 @@
 
-#ifndef __mixr_graphics_Field_H__
-#define __mixr_graphics_Field_H__
+#ifndef __mixr_graphics_AbstractField_H__
+#define __mixr_graphics_AbstractField_H__
 
-#include "Graphic.hpp"
+#include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class String; class Number; class List; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class: Field
+// Class: AbstractField
 //
-// Description: Abstract Field class
+// Description: Provides base functionality for several readout classes
 //
-// Factory name: Field
+// Factory name: AbstractField
 // Slots:
 //      position       <List>   ! Starting position ( Line Column ) (default: 0)
 //      width          <Number> ! Field width (default: 0)
@@ -162,13 +162,10 @@ namespace graphics {
 //
 //  onSetColumn(Number* oscobj)
 //      Sets the column number and returns true.
-//
-//
-//Comment section last modified: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Field : public Graphic
+class AbstractField : public Graphic
 {
-   DECLARE_SUBCLASS(Field, Graphic)
+   DECLARE_SUBCLASS(AbstractField, Graphic)
 
 public:
    enum Mode { display, input };
@@ -192,44 +189,44 @@ public:
         };
 
 public:
-   Field();
+   AbstractField();
 
-   operator char*()                     { return str; }
-   operator const char*() const         { return str; }
+   operator char*()                          { return str; }
+   operator const char*() const              { return str; }
 
-   virtual int line(const int ll);
+   virtual int line(const int);
    virtual int line() const;
 
-   virtual int column(const int cc);
+   virtual int column(const int);
    virtual int column() const;
 
-   std::size_t width() const                 { return w; }
+   std::size_t width() const                 { return w;    }
    std::size_t width(const std::size_t t)    { w = t; adjust(); return w; }
 
    Mode getMode() const                      { return mode; }
-   Mode setMode(const Mode newMode);
+   Mode setMode(const Mode);
 
-   bool isHighLighted() const             { return (dmode & highlight) != 0; }
-   bool isUnderlined() const              { return (dmode & underline) != 0; }
-   bool isReversed() const                { return (dmode & reversed) != 0;  }
-   bool isSpecial() const                 { return (dmode & special) != 0;   }
-   bool isVertical() const                { return (dmode & vertical) != 0;  }
-   bool areBracketsOn() const             { return (dmode & brackets) != 0;  }
-   bool isDisplayMode(const int t) const  { return (dmode & t) != 0; }
-   void setDisplayMode(const int t)       { dmode |= t; }
-   void clearDisplayMode(const int t)     { dmode &= ~t; }
-   void clearAllDisplayModes()            { dmode = 0; }
+   bool isHighLighted() const                { return (dmode & highlight) != 0; }
+   bool isUnderlined() const                 { return (dmode & underline) != 0; }
+   bool isReversed() const                   { return (dmode & reversed) != 0;  }
+   bool isSpecial() const                    { return (dmode & special) != 0;   }
+   bool isVertical() const                   { return (dmode & vertical) != 0;  }
+   bool areBracketsOn() const                { return (dmode & brackets) != 0;  }
+   bool isDisplayMode(const int t) const     { return (dmode & t) != 0;         }
+   void setDisplayMode(const int t)          { dmode |= t;   }
+   void clearDisplayMode(const int t)        { dmode &= ~t;  }
+   void clearAllDisplayModes()               { dmode = 0;    }
 
    base::String::Justify justification() const;
-   base::String::Justify justification(const base::String::Justify t);
+   base::String::Justify justification(const base::String::Justify);
 
-   virtual bool setPosition(const base::List* const spobj);
+   virtual bool setPosition(const base::List* const);
 
    virtual bool withinField(const int ln, const int cp) const;
-   virtual void setText(const char newString[]);
-   virtual int setExample(const char* const example);
+   virtual void setText(const char s[]);
+   virtual int setExample(const char* const);
    virtual char getChar();
-   virtual void setChar(const char c);
+   virtual void setChar(const char);
 
    virtual void backSpace(const int ns = 1);
    virtual void advanceSpace(const int ns = 1);
@@ -241,21 +238,21 @@ public:
 
    virtual double getInputValue() const;
    virtual bool isInputValueValid() const;
-   int getInputCharacterPosition() const            { return icp; }
+   int getInputCharacterPosition() const                 { return icp; }
 
    bool setInputCharacterPosition(const unsigned int);
 
-   bool isLinked() const                            { return linked; }
-   void setLinked(const bool f)                     { linked = f; }
+   bool isLinked() const                                 { return linked; }
+   void setLinked(const bool f)                          { linked = f; }
 
-   bool isInheritColor() const                      { return inheritColor; }
-   bool setInheritColor(const bool i)               { inheritColor = i; return true; }
+   bool isInheritColor() const                           { return inheritColor; }
+   bool setInheritColor(const bool i)                    { inheritColor = i; return true; }
 
-   virtual bool onSetLine(const base::Number* const oslobj);
-   virtual bool onSetColumn(const base::Number* const oscobj);
+   virtual bool onSetLine(const base::Number* const);
+   virtual bool onSetColumn(const base::Number* const);
 
-   const base::String& getInputExample() const  { return inputExample; }
-   int getCharacterPos() const                   { return icp; }
+   const base::String& getInputExample() const           { return inputExample; }
+   int getCharacterPos() const                           { return icp; }
 
    virtual bool cursor(int* ln, int* cp) const override;
    virtual void drawFunc() override;
@@ -264,16 +261,16 @@ public:
    virtual void updateData(const double dt = 0.0) override;
 
 protected:
-   base::String origStr;         // Original text saved by setText
-   base::String inputExample;    // Input Template String
-   base::String str;             // Text stored in field
-   Mode mode {display};          // Current mode
-   int icp {};                   // Input character pointer
-   int inpDspMode {};            // Auto switches to this display mode during input mode
-   bool inpModeHold {};          // Hold input mode until after first input character
+   base::String origStr;               // Original text saved by setText
+   base::String inputExample;          // Input Template String
+   base::String str;                   // Text stored in field
+   Mode mode {display};                // Current mode
+   int icp {};                         // Input character pointer
+   int inpDspMode {};                  // Auto switches to this display mode during input mode
+   bool inpModeHold {};                // Hold input mode until after first input character
 
 private:
-   void adjust()  { str.setString(origStr, w, jmode); }
+   void adjust()                                         { str.setString(origStr, w, jmode); }
 
    int          ln {};                 // Line this field is on
    int          cp {};                 // Starting character position of field

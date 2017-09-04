@@ -15,7 +15,7 @@ namespace terrain {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     if ( name == QuadMap::getFactoryName() ) {
         obj = new QuadMap();

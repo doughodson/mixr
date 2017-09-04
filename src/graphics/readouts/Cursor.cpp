@@ -18,17 +18,16 @@ Cursor::Cursor()
    width(1);
    setText(" ");
    setDisplayMode(reversed);
-   setFlashRate(1.0f);
+   setFlashRate(1.0);
 }
 
 void Cursor::updateData(const double dt)
 {
-   int ln = 0;
-   int cp = 0;
+   int ln {};
+   int cp {};
    if (getDisplay()->focus() != nullptr) {
       setVisibility( getDisplay()->focus()->cursor(&ln, &cp) );
-   }
-   else {
+   } else {
       setVisibility(false);
    }
 

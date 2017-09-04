@@ -126,7 +126,7 @@ public:
    virtual bool updateSymbolPositionLL(const int idx, const double lat, const double lon);
 
    // Updates the position of a symbol using distances north (X) and east (Y) from
-   // the center of the MapPage reference point (see MapPage.h)
+   // the center of the MapPage reference point (see MapPage.hpp)
    virtual bool updateSymbolPositionXY(const int idx, const double xPos, const double yPos);
 
    // Updates the position of a symbol using distances X (nose) and Y (right wing) from our

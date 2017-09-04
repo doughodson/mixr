@@ -28,7 +28,7 @@ class Timer : public Object
 public:
     enum Type { UP, DOWN };        // Timer type/direction
 
-    static  const unsigned int MAX_TIMERS = MIXR_CONFIG_MAX_INTERVAL_TIMERS;
+    static  const unsigned int MAX_TIMERS {MIXR_CONFIG_MAX_INTERVAL_TIMERS};
 
 public:
     Timer();
@@ -75,7 +75,7 @@ public:
 
     // When the state of the freeze flag is true, ALL timers are frozen;
     // the previous value of the freeze flag is returned.
-    static bool freeze(const bool ff);
+    static bool freeze(const bool);
 
     virtual bool setCurrentTime(const double sec);    // Set the current time (sec)
     virtual bool setAlarmTime(const double sec);      // Set the alarm time (sec)
@@ -97,10 +97,10 @@ private:
     bool   active {};          // Active flag.
     Type dir {DOWN};           // Direction up/down.
 
-    static bool frz;                    // Freeze all timers (freeze time)
-    static Timer* timers[MAX_TIMERS];   // List of timers
-    static unsigned int nTimers;        // Number of timers in the list
-    static long semaphore;              // Semaphore for the timer list
+    static bool frz;                   // Freeze all timers (freeze time)
+    static Timer* timers[MAX_TIMERS];  // List of timers
+    static unsigned int nTimers;       // Number of timers in the list
+    static long semaphore;             // Semaphore for the timer list
 
     static void addToTimerList(Timer*);
     static void removeFromTimerList(Timer*);

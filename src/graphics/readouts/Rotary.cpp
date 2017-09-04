@@ -20,7 +20,6 @@ Rotary::Rotary()
    const auto p = new base::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
-   preDrawSelectList = true;
 }
 
 // Rotary - we do this "pre-draw" of all of our possible selections, that will
@@ -30,7 +29,7 @@ void Rotary::draw()
 {
    if (preDrawSelectList) {
       int start {1};
-      base::Pair* p = findByIndex(start);
+      base::Pair* p {findByIndex(start)};
       while (p != nullptr) {
          const auto g = dynamic_cast<graphics::Graphic*>(p->object());
          if (g != nullptr) g->draw();

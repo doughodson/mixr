@@ -10,7 +10,6 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Rotary2
-// Base class: Object > Graphic > Field > Rotary > Rotary2
 //
 // Description: Binary rotary
 //
@@ -24,7 +23,8 @@ class Rotary2 : public Rotary
 public:
    Rotary2();
    virtual bool event(const int key, base::Object* const obj = nullptr) override;
-   //macro function for event handler
+
+   // event handler methods
    virtual bool onSelect(const base::Number* const osobj);
 };
 

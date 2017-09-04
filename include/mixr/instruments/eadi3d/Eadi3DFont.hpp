@@ -2,7 +2,7 @@
 #ifndef __mixr_instruments_Eadi3DFont_H__
 #define __mixr_instruments_Eadi3DFont_H__
 
-#include "mixr/graphics/Font.hpp"
+#include "mixr/graphics/fonts/AbstractFont.hpp"
 
 namespace mixr {
 namespace instruments {
@@ -13,15 +13,15 @@ namespace instruments {
 // Description: Eadi3D font
 //
 // public methods (member functions):
-//      (All of the classes derived from Font have the same public methods.)
+//      (All of the classes derived from AbstractFont have the same public methods.)
 //
 //      static GLenum createEadi3DFont(GLuint fontBase)
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class Eadi3DFont : public graphics::Font
+class Eadi3DFont : public graphics::AbstractFont
 {
-    DECLARE_SUBCLASS(Eadi3DFont, graphics::Font)
+    DECLARE_SUBCLASS(Eadi3DFont, graphics::AbstractFont)
 
 public:
     Eadi3DFont();

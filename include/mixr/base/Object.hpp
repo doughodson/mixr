@@ -28,13 +28,13 @@ namespace base {
 //
 //       Provides a common base class for type checking and support for factory names,
 //       slot tables, exceptions and reference counting.  Most of this needs to
-//       be implemented by each derived class, and the macros in 'macros.h' provide
+//       be implemented by each derived class, and the macros in 'macros.hpp' provide
 //       an easy way to do this.
 //
 // Macros
 //
 //    Macros are provided to generate much of the boilerplate code that is required
-//    for each derived class (see macros.h).  The macro DECLARE_SUBCLASS() must be
+//    for each derived class (see macros.hpp).  The macro DECLARE_SUBCLASS() must be
 //    in every derived class declaration, and the macro IMPLEMENT_SUBCLASS() must
 //    be included with each class implementation.  Use IMPLEMENT_ABSTRACT_SUBCLASS()
 //    for the implementation of abstract classes, and IMPLEMENT_PARTIAL_SUBCLASS()
@@ -210,7 +210,7 @@ namespace base {
 //    derived classes and derived classes can override base class slot names.
 //
 //    Note: there are the SlotTable's index numbers and our local slot index
-//    numbers.  As defined by the SlotTable class (see SlotTable.h), the first
+//    numbers.  As defined by the SlotTable class (see SlotTable.hpp), the first
 //    slot of the first base class that contains a slot table is slot number one.
 //    Whereas BEGIN_SLOT_MAP() remaps these to local slot numbers, which are
 //    relative to our class (i.e. a local slot one), and these local number are

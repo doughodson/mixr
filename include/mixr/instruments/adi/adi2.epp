@@ -258,9 +258,9 @@
     }
 )
 
-// Climb dive marker takes x, y, and roll values, and translates and rotates accordingly
-// see inputs for send in ClimbDiveMarker.h.  This is basically a mini adi, but it moves about seperately
-// from the adi.  TestMfdAdi.cpp sends the events to this named object for it to respond.
+// Climb dive marker takes x, y, and roll values, and translates and rotates accordingly.
+// This is basically a mini adi, but it moves separately from the adi.
+// TestMfdAdi.cpp sends the events to this named object for it to respond.
 climbdivemarker: 
 ( Translator
     color: black

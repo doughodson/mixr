@@ -2,12 +2,12 @@
 #ifndef __mixr_graphics_NumericReadout_H__
 #define __mixr_graphics_NumericReadout_H__
 
-#include "mixr/graphics/Field.hpp"
+#include "mixr/graphics/readouts/AbstractField.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Object; class Float; class Integer; class Number; }
+namespace base { class Object; class String; class Float; class Integer; class Number; }
 namespace graphics {
 class ReformatScanner;
 
@@ -64,21 +64,21 @@ class ReformatScanner;
 //      Checks the input value and returns true if it is valid.
 //
 //------------------------------------------------------------------------------
-class NumericReadout : public Field
+class NumericReadout : public AbstractField
 {
-   DECLARE_SUBCLASS(NumericReadout, Field)
+   DECLARE_SUBCLASS(NumericReadout, AbstractField)
 
 public:
    NumericReadout();
 
-   int getInt() const               { return int(num); }
-   double getFloat() const          { return num; }
+   int getInt() const                           { return static_cast<int>(num); }
+   double getFloat() const                      { return num; }
 
-   void setValue(const int v)       { num = static_cast<double>(v); redisplay(); }
-   void setValue(const double v)    { num = v; redisplay(); }
+   void setValue(const int v)                   { num = static_cast<double>(v); redisplay(); }
+   void setValue(const double v)                { num = v; redisplay(); }
 
-   void setMaxValue(const int v)    { maxNum = static_cast<double>(v); redisplay(); }
-   void setMaxValue(const double v) { maxNum = v; redisplay(); }
+   void setMaxValue(const int v)                { maxNum = static_cast<double>(v); redisplay(); }
+   void setMaxValue(const double v)             { maxNum = v; redisplay(); }
 
    virtual double getInputValue() const override;
    virtual bool isInputValueValid() const override;
@@ -86,10 +86,10 @@ public:
    virtual bool event(const int key, base::Object* const obj = nullptr) override;
    virtual void updateData(const double dt = 0.0) override;
 
-   //event handler macro functions
-   virtual bool onUpdateValue(const base::Float* const ouvobj);
-   virtual bool onUpdateValue(const base::Integer* const ouvobj);
-   virtual bool onUpdateValue(const base::Number* const ouvobj);
+   // event handler methods
+   virtual bool onUpdateValue(const base::Float* const);
+   virtual bool onUpdateValue(const base::Integer* const);
+   virtual bool onUpdateValue(const base::Number* const);
 
 protected:
    virtual void makeText();
@@ -109,7 +109,7 @@ protected:
    char overflowChar {'*'};         // Overflow character
    bool postSign {};                // If true, sign char is at end of string
 
-   static ReformatScanner* reformatter; // Generates format statements by example
+   static ReformatScanner* reformatter;      // Generates format statements by example
 
 private:
    double num {};                            // Value as double

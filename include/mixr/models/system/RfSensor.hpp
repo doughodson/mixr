@@ -52,7 +52,7 @@ class TrackManager;
 //    SCAN_END          (Int)       End of scan event (bar number)
 //
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
 class RfSensor : public RfSystem

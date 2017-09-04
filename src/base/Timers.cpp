@@ -79,7 +79,7 @@ bool Timer::setTimerValue(const double sec)  { timerValue = sec; return true; }
 
 bool Timer::freeze(const bool ff)
 {
-    bool f = frz;
+    bool f {frz};
     frz = ff;
     return f;
 }
@@ -111,7 +111,7 @@ void Timer::updateTimers(const double dt)
 // -----------------------------------------------------------------
 void Timer::addToTimerList(Timer* timer)
 {
-   bool ok = false;
+   bool ok {};
    lock( semaphore );
    if (nTimers < MAX_TIMERS) {
       timers[nTimers++] = timer;
@@ -133,7 +133,7 @@ void Timer::removeFromTimerList(Timer* timer)
    lock( semaphore );
 
    // Find this timer in the list
-   unsigned int found = MAX_TIMERS;
+   unsigned int found {MAX_TIMERS};
    for (unsigned int i = 0; i < nTimers && found == MAX_TIMERS; i++) {
       if (timers[i] == timer) found = i;
    }
@@ -144,8 +144,8 @@ void Timer::removeFromTimerList(Timer* timer)
       --nTimers;  // One less timer
       for (unsigned int i = found; i < nTimers; i++) {
          timers[i] = timers[i+1];
-    }
-}
+      }
+   }
 
    unlock( semaphore );
 }
@@ -157,9 +157,9 @@ void Timer::removeFromTimerList(Timer* timer)
 // Sets the timer value
 bool Timer::setSlotTimerValue(const Time* const msg)
 {
-    bool ok = false;
-    if (msg != nullptr) {
-      double sec = Seconds::convertStatic(*msg);
+   bool ok {};
+   if (msg != nullptr) {
+      double sec {Seconds::convertStatic(*msg)};
       ok = setTimerValue(sec);
       if (ok) setCurrentTime(sec);
    }
@@ -169,7 +169,7 @@ bool Timer::setSlotTimerValue(const Time* const msg)
 // Sets the alarm value
 bool Timer::setSlotAlarmTime(const Time* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setAlarmTime( Seconds::convertStatic(*msg) );
     }
@@ -179,12 +179,12 @@ bool Timer::setSlotAlarmTime(const Time* const msg)
 // Sets the timer active (running) flag
 bool Timer::setSlotTimerActive(const Number* const msg)
 {
-    bool ok = false;
-    if (msg != nullptr) {
-        active = msg->getBoolean();
-        ok = true;
-    }
-    return ok;
+   bool ok {};
+   if (msg != nullptr) {
+      active = msg->getBoolean();
+      ok = true;
+   }
+   return ok;
 }
 
 //==============================================================================
@@ -195,7 +195,7 @@ EMPTY_SLOTTABLE(UpTimer)
 EMPTY_COPYDATA(UpTimer)
 EMPTY_DELETEDATA(UpTimer)
 
-UpTimer::UpTimer(const double rtime) : Timer(UP,rtime)
+UpTimer::UpTimer(const double rtime) : Timer(UP, rtime)
 {
 }
 
@@ -208,7 +208,7 @@ EMPTY_SLOTTABLE(DownTimer)
 EMPTY_COPYDATA(DownTimer)
 EMPTY_DELETEDATA(DownTimer)
 
-DownTimer::DownTimer(const double rtime) : Timer(DOWN,rtime)
+DownTimer::DownTimer(const double rtime) : Timer(DOWN, rtime)
 {
 }
 

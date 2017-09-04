@@ -21,7 +21,7 @@ class Tdb;
 //
 // Notes:
 //    1) This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 //    2) By convention, R/F and IR systems are responsible for filtering their
 //    own players of interest.  This gimbal class has its own variation of the

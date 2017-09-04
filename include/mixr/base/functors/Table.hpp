@@ -30,7 +30,7 @@ class Number;
 //       dependent and independent data has been set.
 //
 //    2) For large tables, use the storageFactory() function to create the FStorage
-//       object (see Functions.h) that will maintain the table's previous search
+//       object (see Functions.hpp) that will maintain the table's previous search
 //       values.  This object is an optional parameter to the non-static lfi()
 //       functions.
 //

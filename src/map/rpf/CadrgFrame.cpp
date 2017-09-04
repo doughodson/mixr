@@ -41,7 +41,7 @@ void CadrgFrame::deleteData()
 // -------------------------------------------------------------------------------------
 void CadrgFrame::load(CadrgFrameEntry* entry)
 {
-    // Header, Location - from CadrgSupport.h
+    // Header, Location - from CadrgSupport.hpp
     Header head;
     // Physical locations
     Location loc[6];

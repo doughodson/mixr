@@ -12,7 +12,7 @@ namespace rpf  {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     // Map Drawer
     if ( name == MapDrawer::getFactoryName() ) {

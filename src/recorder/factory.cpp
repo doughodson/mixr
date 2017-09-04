@@ -20,7 +20,7 @@ namespace recorder {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     if ( name == FileWriter::getFactoryName() ) {
         obj = new FileWriter();

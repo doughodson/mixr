@@ -2937,14 +2937,14 @@ int ReformatScanner::processInteger(const char* text, const int len)
    }
 
    // Check for an leading zeros
-   int lz = 0;
+   int lz {};
    while (text[i] == '0' && i < len) {
       lz++;
       i++;
    }
 
    // Check for an leading numbers
-   int ln = 0;
+   int ln {};
    while (text[i] == '#' && i < len) {
       ln++;
       i++;
@@ -2964,7 +2964,7 @@ int ReformatScanner::processInteger(const char* text, const int len)
 
    // Computer total number of characters in numberic field:
    //    sign, leading zeros, and leading numbers.
-   int fw = s + lz + ln;
+   int fw {s + lz + ln};
 
    // Create the sprintf() format string
    int j {};
@@ -3008,8 +3008,8 @@ int ReformatScanner::processFloat(const char* text, const int len)
    // ---
 
    // Check for the sign
-   int i = 0;
-   int s = 0;
+   int i {};
+   int s {};
 
    if (text[i] == '+') {
       s = 1;
@@ -3017,14 +3017,14 @@ int ReformatScanner::processFloat(const char* text, const int len)
    }
 
    // Check for an leading zeros
-   int lz = 0;
+   int lz {};
    while (text[i] == '0' && i < len) {
       lz++;
       i++;
    }
 
    // Check for an leading numbers
-   int ln = 0;
+   int ln {};
    while (text[i] == '#' && i < len) {
       ln++;
       i++;
@@ -3034,7 +3034,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
    i++;
 
    // Check for the trailing numbers
-   int nr = 0;
+   int nr {};
    while (text[i] == '#' && i < len) {
       nr++;
       i++;
@@ -3055,7 +3055,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
    // Computer total number of characters in numberic field:
    //    sign, leading zeros, leading numbers, decimal point, and
    //    trailing numbers.
-   int fw = s + lz + ln + 1 + nr;
+   int fw {s + lz + ln + 1 + nr};
 
    // Create the sprintf() format string
    int j {};
@@ -3098,14 +3098,14 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
    }
 
    // Check leading zeros
-   int lz = 0;
+   int lz {};
    if (text[i] == '0') {
       lz = 1;
       i++;
    }
 
    // Handle hours
-   int hh = 0;
+   int hh {};
    while (text[i] == 'H' && i < len) {
       hh++;
       i++;
@@ -3151,19 +3151,19 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
       i++;
 
       while (text[i] == 'M' && i < len) {
-	 mr++;
-	 i++;
+         mr++;
+         i++;
       }
    }
 
    // Handle seconds
-   int ss = 0;
+   int ss {};
    while (text[i] == 'S' && i < len) {
       ss++;
       i++;
    }
 
-   int sr = 0;
+   int sr {};
 
    // A decimal point is optional with seconds
    if (text[i] == '.') {
@@ -3183,7 +3183,7 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
    }
 
    // Build format string
-   int j = 0;
+   int j {};
 
    format[j++] = '%';
 
@@ -3259,8 +3259,8 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
       return formatError(text);
 
    // Check sign
-   int i = 0;
-   int s = 0;
+   int i {};
+   int s {};
 
    if (text[i] == '+') {
       s = 1;
@@ -3268,14 +3268,14 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
    }
 
    // Check leading zeros
-   int lz = 0;
+   int lz {};
    if (text[i] == '0') {
       lz = 1;
       i++;
    }
 
    // Handle degrees
-   int dd = 0;
+   int dd {};
    while (text[i] == 'D' && i < len) {
       dd++;
       i++;
@@ -3298,7 +3298,7 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
       dc = text[i++];
 
    // Handle minutes
-   int mm = 0;
+   int mm {};
    while (text[i] == 'M' && i < len) {
       mm++;
       i++;

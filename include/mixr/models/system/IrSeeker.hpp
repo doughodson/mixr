@@ -69,7 +69,7 @@ private:
 //------------------------------------------------------------------------------
 // Class: TdbIr
 //
-// Description: Target(s) Data Block for an IrSeeker (see Tdb in Gimbal.h)
+// Description: Target(s) Data Block for an IrSeeker (see Tdb in Gimbal.hpp)
 //------------------------------------------------------------------------------
 class TdbIr : public Tdb
 {

@@ -1,5 +1,5 @@
     // Digital aoa gauge and corresponding analog tape scale with it
-    // Inputs can be found in AoAIndexer.h
+    // Inputs can be found in AoAIndexer.hpp
     ( Graphic 
         transform: ( Translation 5.0 0 )
         components: {

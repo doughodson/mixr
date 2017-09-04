@@ -9,7 +9,7 @@ namespace rprfom {
 
 base::Object* formFunc(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     if ( name == NetIO::getFactoryName() ) {
         obj = new NetIO();

@@ -76,7 +76,7 @@ void Component::copyData(const Component& org, const bool)
    selected = nullptr;
 
    // Copy child components
-   const PairStream* oc = org.components.getRefPtr();
+   const PairStream* oc {org.components.getRefPtr()};
    if (oc != nullptr) {
       const auto tmp = static_cast<PairStream*>(oc->clone());
       oc->unref();
@@ -125,7 +125,7 @@ void Component::deleteData()
 bool Component::isMessageEnabled(const unsigned short msgType) const
 {
    // Start with our own object's "is enabled" check
-   bool enabled = BaseClass::isMessageEnabled(msgType);
+   bool enabled {BaseClass::isMessageEnabled(msgType)};
 
    // If we were not enabled, and we were not explicitly disabled, and if
    // we have a container, then see if our container has this message enabled.
@@ -158,7 +158,7 @@ void Component::freeze(const bool fflag)
 //------------------------------------------------------------------------------
 void Component::reset()
 {
-   PairStream* subcomponents = getComponents();
+   PairStream* subcomponents {getComponents()};
    if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -187,7 +187,7 @@ void Component::tcFrame(const double dt)
    // ---
    // Collect start time
    // ---
-   double tcStartTime = 0.0;
+   double tcStartTime {};
    if (isTimingStatsEnabled()) {
       #if defined(WIN32)
          LARGE_INTEGER fcnt;
@@ -208,7 +208,7 @@ void Component::tcFrame(const double dt)
    // ---
    if (isTimingStatsEnabled()) {
 
-      double dtime = 0;    // Delta time in MS
+      double dtime {};    // Delta time in MS
       #if defined(WIN32)
          LARGE_INTEGER cFreq;
          QueryPerformanceFrequency(&cFreq);
@@ -216,7 +216,7 @@ void Component::tcFrame(const double dt)
          LARGE_INTEGER fcnt;
          QueryPerformanceCounter(&fcnt);
          const auto endCnt = static_cast<double>( fcnt.QuadPart );
-         double dcnt = endCnt - tcStartTime;
+         double dcnt {endCnt - tcStartTime};
          dtime = (dcnt/freq) * 1000.0;
       #else
          dtime = (getComputerTime() - tcStartTime) * 1000.0;
@@ -244,7 +244,7 @@ void Component::printTimingStats()
 void Component::updateTC(const double dt)
 {
     // Update all my children
-    PairStream* subcomponents = getComponents();
+    PairStream* subcomponents {getComponents()};
     if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -271,7 +271,7 @@ void Component::updateTC(const double dt)
 void Component::updateData(const double dt)
 {
     // Update all my children
-    PairStream* subcomponents = getComponents();
+    PairStream* subcomponents {getComponents()};
     if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -279,7 +279,7 @@ void Component::updateData(const double dt)
         }
         else {
             // When we should update them all
-            List::Item* item = subcomponents->getFirstItem();
+            List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<Component*>(pair->object());
@@ -312,7 +312,7 @@ const PairStream* Component::getComponents() const
 unsigned int Component::getNumberOfComponents() const
 {
    unsigned int n {};
-   const PairStream* subcomponents = components.getRefPtr();
+   const PairStream* subcomponents {components.getRefPtr()};
    if (subcomponents != nullptr) {
       n = subcomponents->entries();
       subcomponents->unref();
@@ -336,9 +336,9 @@ bool Component::onEventReset()
 bool Component::shutdownNotification()
 {
    // Tell all of our components
-   PairStream* subcomponents = getComponents();
+   PairStream* subcomponents {getComponents()};
    if (subcomponents != nullptr) {
-      List::Item* item = subcomponents->getFirstItem();
+      List::Item* item {subcomponents->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<Component*>(pair->object());
@@ -397,10 +397,10 @@ const Component* Component::findContainerByType(const std::type_info& type) cons
 const Pair* Component::findByName(const char* const slotname) const
 {
     const Pair* q {};
-    const PairStream* subcomponents = getComponents();
+    const PairStream* subcomponents {getComponents()};
     if (subcomponents != nullptr) {
 
-        const char* name = slotname;
+        const char* name {slotname};
         if (slotname[0] == '.') name++;      // remove '.' from hard names
 
         // Copy the name up to a possible period.
@@ -417,7 +417,7 @@ const Pair* Component::findByName(const char* const slotname) const
             // When it is a complex name ...
 
             // Find a component named 'xxx' (we copied 'xxx' to fname above)
-            const Pair* q1 = subcomponents->findByName(fname);
+            const Pair* q1 {subcomponents->findByName(fname)};
 
             // Found it?
             if (q1 != nullptr) {
@@ -435,7 +435,7 @@ const Pair* Component::findByName(const char* const slotname) const
         if (q == nullptr && slotname[0] != '.') {
             // No, its not one of our components and its not a hard name,
             //  so check our components' components
-            const List::Item* item = subcomponents->getFirstItem();
+            const List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr && q == nullptr) {
                 const auto p = static_cast<const Pair*>(item->getValue());
                 const auto obj = static_cast<const Component*>(p->object());
@@ -453,7 +453,7 @@ const Pair* Component::findByName(const char* const slotname) const
 Pair* Component::findByName(const char* const slotname)
 {
    const Component* cThis {this};
-   const Pair* p = cThis->findByName(slotname);
+   const Pair* p {cThis->findByName(slotname)};
    return const_cast<Pair*>(p);
 }
 
@@ -464,7 +464,7 @@ const Pair* Component::findByIndex(const int slotindex) const
 {
    const Pair* p {};
 
-   const PairStream* subcomponents = getComponents();
+   const PairStream* subcomponents {getComponents()};
    if (subcomponents != nullptr) {
       p = subcomponents->getPosition(slotindex);
       subcomponents->unref();
@@ -478,7 +478,7 @@ Pair* Component::findByIndex(const int slotindex)
 {
    Pair* p {};
 
-   PairStream* subcomponents = getComponents();
+   PairStream* subcomponents {getComponents()};
    if (subcomponents != nullptr) {
       p = subcomponents->getPosition(slotindex);
       subcomponents->unref();
@@ -495,10 +495,10 @@ Pair* Component::findByIndex(const int slotindex)
 const Pair* Component::findByType(const std::type_info& type) const
 {
     const Pair* q {};
-    const PairStream* subcomponents = getComponents();
+    const PairStream* subcomponents {getComponents()};
     if (subcomponents != nullptr) {
         q = subcomponents->findByType(type);
-        const List::Item* item = subcomponents->getFirstItem();
+        const List::Item* item {subcomponents->getFirstItem()};
         while (item != nullptr && q == nullptr) {
             const auto p = static_cast<const Pair*>(item->getValue());
             const auto obj = static_cast<const Component*>(p->object());
@@ -514,7 +514,7 @@ const Pair* Component::findByType(const std::type_info& type) const
 Pair* Component::findByType(const std::type_info& type)
 {
    const Component* cThis {this};
-   const Pair* p = cThis->findByType(type);
+   const Pair* p {cThis->findByType(type)};
    return const_cast<Pair*>(p);
 }
 
@@ -530,7 +530,7 @@ Pair* Component::findByType(const std::type_info& type)
 const Identifier* Component::findNameOfComponent(const Component* const p) const
 {
     const Identifier* name {};
-    const PairStream* subcomponents = getComponents();
+    const PairStream* subcomponents {getComponents()};
     if (subcomponents != nullptr) {
 
         // First check our component list ..
@@ -540,11 +540,11 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
 
             // Not found, so check our children's components ...
 
-            const List::Item* item = subcomponents->getFirstItem();
+            const List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr && name == nullptr) {
                 const auto pair = static_cast<const Pair*>(item->getValue());
                 const auto child = static_cast<const Component*>(pair->object());
-                const Identifier* name0 = child->findNameOfComponent(p);
+                const Identifier* name0 {child->findNameOfComponent(p)};
                 if (name0 != nullptr) {
                     // Found it, so prefix it with our child's name and
                     // return the full name.
@@ -568,7 +568,7 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
 //------------------------------------------------------------------------------
 bool Component::addComponent(Pair* const p)
 {
-   PairStream* subcomponents = getComponents();
+   PairStream* subcomponents {getComponents()};
    processComponents(subcomponents, typeid(Component), p);
    if (subcomponents != nullptr) subcomponents->unref();
    return true;
@@ -591,7 +591,7 @@ void Component::processComponents(
       Component* const remove
    )
 {
-   PairStream* oldList = components.getRefPtr();
+   PairStream* oldList {components.getRefPtr()};
 
    // ---
    // Our dynamic_cast (see below) already filters on the Component class
@@ -608,7 +608,7 @@ void Component::processComponents(
    if (list != nullptr) {
 
       // Add the (filtered) components to the new list and set their container
-      List::Item* item = list->getFirstItem();
+      List::Item* item {list->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto cp = dynamic_cast<Component*>( pair->object() );
@@ -685,7 +685,7 @@ bool Component::select(const String* const name)
     setSelectionName(nullptr);
     if (name != nullptr) {
         setSelectionName(name);
-        Pair* p = findByName(*name);
+        Pair* p {findByName(*name)};
         if (p != nullptr) selected = static_cast<Component*>(p->object());
         else {
             std::cerr << "Component::select: name not found!"  << std::endl;
@@ -702,7 +702,7 @@ bool Component::select(const Number* const num)
     setSelectionName(nullptr);
     if (num != nullptr) {
         setSelectionName(num);
-        Pair* p = findByIndex(num->getInt());
+        Pair* p {findByIndex(num->getInt())};
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
         }
@@ -813,9 +813,7 @@ bool Component::setSlotEnableMsgType(const Identifier* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-
-      const Identifier* p = msg;
-
+      const Identifier* p {msg};
       if (*p == "WARNING")    ok = enableMessageTypes(MSG_WARNING);
       else if (*p == "INFO")  ok = enableMessageTypes(MSG_INFO);
       else if (*p == "DEBUG") ok = enableMessageTypes(MSG_DEBUG);
@@ -847,9 +845,7 @@ bool Component::setSlotDisableMsgType(const Identifier* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-
-      const Identifier* p = msg;
-
+      const Identifier* p {msg};
       if (*p == "WARNING")    ok = disableMessageTypes(MSG_WARNING);
       else if (*p == "INFO")  ok = disableMessageTypes(MSG_INFO);
       else if (*p == "DEBUG") ok = disableMessageTypes(MSG_DEBUG);
@@ -885,7 +881,7 @@ bool Component::setSlotDisableMsgType(const Number* const msg)
 bool Component::send(const char* const id, const int event)
 {
     bool val {};
-    Pair* p = findByName(id);
+    Pair* p {findByName(id)};
     if (p != nullptr) {
         const auto g = static_cast<Component*>(p->object());
         val = g->event(event);
@@ -900,7 +896,7 @@ bool Component::send(const char* const id, const int event, const int value, Sen
    bool val {};
    Object* vv = sd.getValue(value);
    if (vv != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this,id)};
       if (g != nullptr) val = g->event(event,vv);
    }
    return val;
@@ -910,9 +906,9 @@ bool Component::send(const char* const id, const int event, const int value, Sen
 bool Component::send(const char* const id, const int event, const float value, SendData& sd)
 {
    bool val {};
-   Object* vv = sd.getValue(static_cast<double>(value));
+   Object* vv {sd.getValue(static_cast<double>(value))};
    if (vv != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
    }
    return val;
@@ -922,9 +918,9 @@ bool Component::send(const char* const id, const int event, const float value, S
 bool Component::send(const char* const id, const int event, const double value, SendData& sd)
 {
    bool val {};
-   Object* vv = sd.getValue(static_cast<double>(value));
+   Object* vv {sd.getValue(static_cast<double>(value))};
    if (vv != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
    }
    return val;
@@ -934,9 +930,9 @@ bool Component::send(const char* const id, const int event, const double value, 
 bool Component::send(const char* const id, const int event, const char* const value, SendData& sd)
 {
    bool val {};
-   Object* vv = sd.getValue(value);
+   Object* vv {sd.getValue(value)};
    if (vv != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
    }
    return val;
@@ -946,9 +942,9 @@ bool Component::send(const char* const id, const int event, const char* const va
 bool Component::send(const char* const id, const int event, const bool value, SendData& sd)
 {
    bool val {};
-   Object* vv = sd.getValue(value);
+   Object* vv {sd.getValue(value)};
    if (vv != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
    }
    return val;
@@ -960,9 +956,9 @@ bool Component::send(const char* const id, const int event, Object* const value,
     // we don't check past values here, because it would be tedious and more overhead
     // to go through each object and see if any data has changed.  So we take a smaller
     // hit just by sending the data through every time.
-    bool val = false;
+    bool val {};
     if (value != nullptr) {
-      Component* g = sd.getObject(this,id);
+      Component* g {sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event, value);
    }
    return val;
@@ -978,9 +974,9 @@ bool Component::send(const char* const id, const int event, const int value[], S
 {
    bool val {};
    for (int i = 0; i < n; i++) {
-      Object* vv = sd[i].getValue(value[i]);
+      Object* vv {sd[i].getValue(value[i])};
       if (vv != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this, id, (i+1))};
          if (g != nullptr) val = g->event(event,vv);
       }
    }
@@ -996,9 +992,9 @@ bool Component::send(const char* const id, const int event, const float value[],
 {
    bool val {};
    for (int i = 0; i < n; i++) {
-      Object* vv = sd[i].getValue(value[i]);
+      Object* vv {sd[i].getValue(value[i])};
       if (vv != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
       }
    }
@@ -1014,9 +1010,9 @@ bool Component::send(const char* const id, const int event, const double value[]
 {
    bool val {};
    for (int i = 0; i < n; i++) {
-      Object* vv = sd[i].getValue(value[i]);
+      Object* vv {sd[i].getValue(value[i])};
       if (vv != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
       }
    }
@@ -1027,9 +1023,9 @@ bool Component::send(const char* const id, const int event, const bool value[], 
 {
    bool val {};
    for (int i = 0; i < n; i++) {
-      Object* vv = sd[i].getValue(value[i]);
+      Object* vv {sd[i].getValue(value[i])};
       if (vv != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
       }
    }
@@ -1040,9 +1036,9 @@ bool Component::send(const char* const id, const int event, const char* const va
 {
    bool val {};
    for (int i = 0; i < n; i++) {
-      Object* vv = sd[i].getValue(value[i]);
+      Object* vv {sd[i].getValue(value[i])};
       if (vv != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
       }
    }
@@ -1054,7 +1050,7 @@ bool Component::send(const char* const id, const int event, Object* const value[
    bool val {};
    for (int i = 0; i < n; i++) {
       if (value != nullptr) {
-         Component* g = sd[i].getObject(this,id,(i+1));
+         Component* g {sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,value[i]);
       }
    }
@@ -1087,13 +1083,12 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
     // Did we already find the object?
     if (obj == nullptr) {
         // No, then try to find it among our components ...
-        Pair* p = nullptr;
+        Pair* p {};
         if (n <= 0) {
             // When n is zero (or less) just use 'id' as
             // the name when finding the object.
             p = gobj->findByName(id);
-        }
-        else {
+        } else {
             // ---
             // When n is greater than zero, use 'id' as a format
             // with 'n' to get the name.  Great for items in rows
@@ -1102,7 +1097,7 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
             //             id = xxx.%d
             //      gives name = xxx.5
             // ---
-            char name[128];
+            char name[128] {};
             std::sprintf(name,id,n);
             p = gobj->findByName(name);
         }

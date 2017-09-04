@@ -20,8 +20,8 @@
 
 #include "mixr/base/util/platform_api.hpp"
 
-#include "math.h"
-#include <memory.h>
+//#include <math.h>
+//#include <memory.h>
 
 #ifdef  __cplusplus
 extern "C" {

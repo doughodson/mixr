@@ -28,9 +28,6 @@ String::String(const char* s1, const char* s2)
    catStr(s2);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void String::copyData(const String& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -41,10 +38,6 @@ void String::copyData(const String& org, const bool cc)
    setStr(org);
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void String::deleteData()
 {
    if (str != nullptr) delete[] str;
@@ -53,10 +46,6 @@ void String::deleteData()
    n = 0;
 }
 
-
-//------------------------------------------------------------------------------
-// setString() --
-//------------------------------------------------------------------------------
 void String::setString(const String& origStr, const std::size_t w, const Justify j)
 {
    char sbuf[MAX_STRING_LENGTH+1] {};  // Source buffer

@@ -96,7 +96,7 @@ namespace models {
 
 base::Object* factory(const std::string& name)
 {
-   base::Object* obj = nullptr;
+   base::Object* obj {};
 
    // dynamics models
    if ( name == RacModel::getFactoryName() ) {              // RAC

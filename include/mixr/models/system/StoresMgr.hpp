@@ -50,7 +50,7 @@ class AbstractWeapon;
 //       define these functions as required (e.g., SimpleStoresMgr class).
 //
 //    4) This class is one of the "top level" systems attached to a Player
-//       class (see Player.h).
+//       class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
 class StoresMgr : public Stores

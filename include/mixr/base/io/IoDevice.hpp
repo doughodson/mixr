@@ -19,11 +19,11 @@ class IoData;
 //    attached using the 'devices' slot.
 //
 //    Using the 'adapters' slot, an I/O device handlers can contain a list
-//    of I/O adapters (see IoAdapter.h) that control the flow of I/O data
-//    between the I/O device hander and I/O data buffers (see IoData.h).
+//    of I/O adapters (see IoAdapter.hpp) that control the flow of I/O data
+//    between the I/O device hander and I/O data buffers (see IoData.hpp).
 //
 //    The top level list of I/O devices is typically managed by an I/O
-//    handler class (see IoHander.h).
+//    handler class (see IoHander.hpp).
 //
 // Notes:
 //    1) All Channel (and port) numbers start with zero;

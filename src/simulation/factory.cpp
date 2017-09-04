@@ -13,7 +13,7 @@ namespace simulation {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = nullptr;
+    base::Object* obj {};
 
     if ( name == Simulation::getFactoryName() ) {
         obj = new Simulation();

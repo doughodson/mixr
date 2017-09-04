@@ -2,23 +2,22 @@
 #ifndef __mixr_graphics_Rotary_H__
 #define __mixr_graphics_Rotary_H__
 
-#include "mixr/graphics/Field.hpp"
+#include "mixr/graphics/readouts/AbstractField.hpp"
 
 namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Rotary
-// Base class: Object > Graphic > Field > Rotary
 //
 // Description: Rotary text
 //
 // Factory name: Rotary
 //
 //------------------------------------------------------------------------------
-class Rotary : public Field
+class Rotary : public AbstractField
 {
-    DECLARE_SUBCLASS(Rotary, Field)
+    DECLARE_SUBCLASS(Rotary, AbstractField)
 
 public:
    Rotary();
@@ -26,7 +25,7 @@ public:
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)
-    bool preDrawSelectList;
+    bool preDrawSelectList {true};
 };
 
 }

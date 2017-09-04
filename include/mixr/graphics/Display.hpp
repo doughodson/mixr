@@ -9,13 +9,13 @@
 namespace mixr {
 namespace base { class Color; class PairStream; class Identifier; class String; }
 namespace graphics {
-class Font;
+class AbstractFont;
 class Image;
 class Texture;
 class Material;
 
 //------------------------------------------------------------------------------
-// Class:  Display
+// Class: Display
 //
 // Description:  Display (MFD, CDU, HUD, etc) Manager;
 //               provides a OpenGL canvas and manages the textures, fonts,
@@ -40,38 +40,38 @@ class Material;
 //
 // Factory name: Display
 // Slots:
-//  name             <String>      ! Display name (default: " ")
-//  colorTable       <PairStream>  ! Color table (default: 0)
-//  normalFont       <Font>        ! Normal font; Font (default: 0)
-//  normalFont       <Identifier>  ! Normal font; base::Identifier (default: 0)
-//  left             <Number>      ! Left ortho bound (default: -0.5)
-//  right            <Number>      ! Right ortho bound (default: 640.5)
-//  bottom           <Number>      ! Bottom ortho bound (default: -0.5)
-//  top              <Number>      ! Top ortho bound (default: 480.5)
-//  near             <Number>      ! Near ortho bound (default: -1)
-//  far              <Number>      ! Far ortho bound (default: 1)
-//  vpX              <Number>      ! Viewport x origin (default: -1)
-//  vpY              <Number>      ! Viewport y origin (default: -1)
-//  vpWidth          <Number>      ! Viewport width (default: 300)
-//  vpHeight         <Number>      ! Viewport height (default: 300)
-//  displays         <PairStream>  ! Sub-displays, stream (default: 0)
-//  displays         <Display>     ! Sub-displays, single (default: 0)
-//  stdLineWidth     <Number>      ! Standard Line width (default: 1)
-//  textures         <PairStream>  ! Texture, stream (default: 0)
-//  textures         <Texture>     ! Texture, single (default: 0)
-//  clearColor       <Color>       ! Clear (Background) color (default: 0.0f,0.0f,0.0f,0.0f)
-//  leftBracketChar  <Number>      ! Left bracket character (default: '[')
-//  leftBracketChar  <String>      ! Left bracket character (default: '[')
-//  rightBracketChar <Number>      ! Right bracket character (default: ']')
-//  rightBracketChar <String>      ! Right bracket character (default: ']')
-//  reverseVideoBrackets  <Number> ! Reverse video brackets flag:
-//                                 ! If true, brackets are drawn with reversed video font,
-//                                 ! otherwise follow the field's drawing mode.  (default: false)
-//  fonts             <PairStream> ! List of fonts (default: none)
-//  clearDepth        <number>     ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
-//  orientation       <String>     ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
-//  materials         <Material>   ! List of material objects (default: 0)
-//  antiAliasing      <Number>     ! Turn on/off anti-aliasing (default: true)
+//  name             <String>       ! Display name (default: " ")
+//  colorTable       <PairStream>   ! Color table (default: 0)
+//  normalFont       <AbstractFont> ! Normal font; Font (default: 0)
+//  normalFont       <Identifier>   ! Normal font; base::Identifier (default: 0)
+//  left             <Number>       ! Left ortho bound (default: -0.5)
+//  right            <Number>       ! Right ortho bound (default: 640.5)
+//  bottom           <Number>       ! Bottom ortho bound (default: -0.5)
+//  top              <Number>       ! Top ortho bound (default: 480.5)
+//  near             <Number>       ! Near ortho bound (default: -1)
+//  far              <Number>       ! Far ortho bound (default: 1)
+//  vpX              <Number>       ! Viewport x origin (default: -1)
+//  vpY              <Number>       ! Viewport y origin (default: -1)
+//  vpWidth          <Number>       ! Viewport width (default: 300)
+//  vpHeight         <Number>       ! Viewport height (default: 300)
+//  displays         <PairStream>   ! Sub-displays, stream (default: 0)
+//  displays         <Display>      ! Sub-displays, single (default: 0)
+//  stdLineWidth     <Number>       ! Standard Line width (default: 1)
+//  textures         <PairStream>   ! Texture, stream (default: 0)
+//  textures         <Texture>      ! Texture, single (default: 0)
+//  clearColor       <Color>        ! Clear (Background) color (default: 0.0f,0.0f,0.0f,0.0f)
+//  leftBracketChar  <Number>       ! Left bracket character (default: '[')
+//  leftBracketChar  <String>       ! Left bracket character (default: '[')
+//  rightBracketChar <Number>       ! Right bracket character (default: ']')
+//  rightBracketChar <String>       ! Right bracket character (default: ']')
+//  reverseVideoBrackets  <Number>  ! Reverse video brackets flag:
+//                                  ! If true, brackets are drawn with reversed video font,
+//                                  ! otherwise follow the field's drawing mode.  (default: false)
+//  fonts             <PairStream>  ! List of fonts (default: none)
+//  clearDepth        <number>      ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
+//  orientation       <String>      ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
+//  materials         <Material>    ! List of material objects (default: 0)
+//  antiAliasing      <Number>      ! Turn on/off anti-aliasing (default: true)
 //
 // Exceptions:
 //      ExpInvalidDisplayPtr
@@ -247,32 +247,32 @@ public:
    // Text and font functions
    // ---
 
-   Font* getFont(const char* const name);                          // Returns a font by name.
-   const Font* getFont(const char* const name) const;              // const version
+   AbstractFont* getFont(const char* const name);                          // Returns a font by name.
+   const AbstractFont* getFont(const char* const name) const;              // const version
 
-   Font* getFont(const base::Identifier* const name);              // Returns a font by name (using an Identifier)
-   const Font* getFont(const base::Identifier* const name) const;  // const version
+   AbstractFont* getFont(const base::Identifier* const name);              // Returns a font by name (using an Identifier)
+   const AbstractFont* getFont(const base::Identifier* const name) const;  // const version
 
-   Font* getFont(const int index);              // Returns a font by its font table index.
-   const Font* getFont(const int index) const;  // const version
+   AbstractFont* getFont(const int index);                 // Returns a font by its font table index.
+   const AbstractFont* getFont(const int index) const;     // const version
 
-   Font* getNormalFont();                       // Returns the normal text font
-   const Font* getNormalFont() const;           // const version
+   AbstractFont* getNormalFont();                          // Returns the normal text font
+   const AbstractFont* getNormalFont() const;              // const version
 
    bool isDefaultFont() const;                  // Are we using the default font?
    bool isFontReversed() const;                 // Is the reversed video font selected?
    bool isFontUnderlined() const;               // Is the underline font selected?
 
    // Sets the normal text font
-   bool setNormalFont(Font* const f);
+   bool setNormalFont(AbstractFont* const);
    bool setNormalFont(const char* const fontName);
    bool setNormalFont(const base::Identifier* const fontName);
 
    // Sets the current font) based on the font mode flags.
-   void selectFont(const bool reversed, const bool underlined, Font* newFont = nullptr);
+   void selectFont(const bool reversed, const bool underlined, AbstractFont* newFont = nullptr);
 
-   Font* getCurrentFont();                              // Returns a pointer to the current font
-   void setFont(Font* newFont);                         // Sets the current font.
+   AbstractFont* getCurrentFont();                      // Returns a pointer to the current font
+   void setFont(AbstractFont*);                         // Sets the current font.
 
    const base::Color* getNormColor() const;             // Returns the normal text color
    void setNormColor(const base::Color* const nc);      // Sets the normal text color
@@ -365,8 +365,8 @@ private:
     const base::Color* hiColor {};        // Color of a high lighted text field.
 
     base::PairStream* fontList {};        // List of fonts
-    Font* currentFont {};                 // Current font
-    Font* normalFont {};                  // Normal font
+    AbstractFont* currentFont {};         // Current font
+    AbstractFont* normalFont {};          // Normal font
     base::Identifier* normalFontName {};  // Normal font name
     bool reversedFlg {};                  // Current font setting
     bool underlinedFlg {};                // Current font setting
@@ -426,26 +426,26 @@ inline const base::Vec4d& Display::getCurrentColor() const       { return color;
 
 inline void Display::getMouse(int* const x, int* const y) const  { *x = mx; *y = my; }
 
-inline Font* Display::getCurrentFont()                         { return currentFont; }
-inline bool Display::isFontReversed() const                    { return reversedFlg; }
-inline bool Display::isFontUnderlined() const                  { return underlinedFlg; }
-inline bool Display::isDefaultFont() const                     { return currentFont == nullptr; }
-inline const base::Color* Display::getNormColor() const        { return normColor; }
-inline const base::Color* Display::getHighlightColor() const   { return hiColor; }
-inline char Display::getLeftBracketCharacter() const           { return leftBracketChar; }
-inline bool Display::setLeftBracketCharacter(const char c)     { leftBracketChar = c; return true; }
-inline char Display::getRightBracketCharacter() const          { return rightBracketChar; }
-inline bool Display::setRightBracketCharacter(const char c)    { rightBracketChar = c; return true; }
-inline bool Display::getReverseVideoBrackets() const           { return rvBrackets; }
-inline bool Display::setReverseVideoBrackets(const bool f)     { rvBrackets = f; return true; }
+inline AbstractFont* Display::getCurrentFont()                   { return currentFont; }
+inline bool Display::isFontReversed() const                      { return reversedFlg; }
+inline bool Display::isFontUnderlined() const                    { return underlinedFlg; }
+inline bool Display::isDefaultFont() const                       { return currentFont == nullptr; }
+inline const base::Color* Display::getNormColor() const          { return normColor; }
+inline const base::Color* Display::getHighlightColor() const     { return hiColor; }
+inline char Display::getLeftBracketCharacter() const             { return leftBracketChar; }
+inline bool Display::setLeftBracketCharacter(const char c)       { leftBracketChar = c; return true; }
+inline char Display::getRightBracketCharacter() const            { return rightBracketChar; }
+inline bool Display::setRightBracketCharacter(const char c)      { rightBracketChar = c; return true; }
+inline bool Display::getReverseVideoBrackets() const             { return rvBrackets; }
+inline bool Display::setReverseVideoBrackets(const bool f)       { rvBrackets = f; return true; }
 
-inline base::PairStream* Display::getTextures()               { return textures; }
-inline const base::PairStream* Display::getTextures() const   { return textures; }
+inline base::PairStream* Display::getTextures()                  { return textures; }
+inline const base::PairStream* Display::getTextures() const      { return textures; }
 
-inline base::PairStream* Display::subDisplays()               { return subdisplays; }
-inline void Display::setSubdisplayFlag(const bool flg)        { subdisplayFlg = flg; }
-inline bool Display::isOkToSwap() const                       { return okToSwap; }
-inline void Display::setOkToSwap(const bool x)                { okToSwap = x; }
+inline base::PairStream* Display::subDisplays()                  { return subdisplays; }
+inline void Display::setSubdisplayFlag(const bool flg)           { subdisplayFlg = flg; }
+inline bool Display::isOkToSwap() const                          { return okToSwap; }
+inline void Display::setOkToSwap(const bool x)                   { okToSwap = x; }
 
 }
 }

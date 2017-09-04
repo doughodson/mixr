@@ -16,7 +16,7 @@ IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
 EMPTY_DELETEDATA(TabPrinter)
 
 BEGIN_SLOTTABLE(TabPrinter)
-   "msgHdrOptn",   // 1) Msg Header options (see TabPrinter.h)
+   "msgHdrOptn",   // 1) Msg Header options (see TabPrinter.hpp)
    "divider",      // 2) Field divider
 END_SLOTTABLE(TabPrinter)
 

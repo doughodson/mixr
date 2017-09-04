@@ -1,7 +1,7 @@
 // this is our map page module, which displays waypoints, tacans, ground and air tracks, and a compass rose
 // Map page is actually not derived from an instrument, but it acts as a simple way to draw tacans, waypoints, and other nav data on a page, using
 // lat longs and such to determine screen position.  Map page also tells all of its components which are map pages what its reference lat and lon is, what the
-// range is, displacement, and any other pertinent information (see MapPage.cpp, and .h).  This is very similar to instrument in the fact that it eliminates
+// range is, displacement, and any other pertinent information (see MapPage.cpp, and .hpp).  This is very similar to instrument in the fact that it eliminates
 // redundancy.
 // The MapPage event handler does different things depending on the event message sent to it.  See MapPage.hpp for an explanation of what each event does.
 mappage:
@@ -65,7 +65,7 @@ mappage:
                     // Templates are the type of symbol we will draw for each type of symbol trait we get.  Here, we are drawing navaids.  If we get a list
                     // of navaids that have type VOR, VORTAC, TACAN, and VORDME.  We bring all of the symbols in at once, and based on the type, we create
                     // a graphic object of each type.  Also, if there are labels associated with each symbol, you can send that value to it as well, 
-                    // that way you can label each symbol.  You can see more documentation in SymbolLoader.cpp and .h.
+                    // that way you can label each symbol.  You can see more documentation in SymbolLoader.cpp and .hpp.
                     templates: {
                     
                         // VOR
@@ -327,7 +327,7 @@ mappage:
 #define AIRPORT_SYM_SCALE  4
 #define AIRPORT_TEXT_SCALE 0.5
                 // to test these symbol loaders, you must run a test page which loads an array of airports, using the given inputs
-                // in SymbolLoader.h
+                // in SymbolLoader.hpp
             
                 // load our nav aids and draw them
                 airports:
@@ -608,7 +608,7 @@ mappage:
                 )
         // this is the outer compass rose.  This is also a unique graphic that isn't derived from MapPage, but instead needs a centered radius and decentered radius, and also 
         // a value to deteremine how to rotate.  This may eventually be incorporated into a MapPage derived class, along with BearingPointer.  But for right now, they are treated
-        // as seperate graphic objects.
+        // as separate graphic objects.
         compassrose:
         ( CompassRose 
             centeredRad: 10.5

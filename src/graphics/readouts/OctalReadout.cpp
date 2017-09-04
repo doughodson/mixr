@@ -20,7 +20,7 @@ EMPTY_DELETEDATA(OctalReadout)
 OctalReadout::OctalReadout()
 {
    STANDARD_CONSTRUCTOR()
-   base::utStrcpy(format,FORMAT_LENGTH,"%o");
+   base::utStrcpy(format, FORMAT_LENGTH, "%o");
 }
 
 //------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ char OctalReadout::filterInputEvent(const int event, const int tc)
 //------------------------------------------------------------------------------
 double OctalReadout::getInputValue() const
 {
-   int value = 0;
+   int value {};
 
    // copy string to buffer with correct sign character
    const std::size_t CBUFLOCAL_LEN {100};

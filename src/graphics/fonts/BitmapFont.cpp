@@ -1,5 +1,6 @@
 
-#include "mixr/graphics/BitmapFont.hpp"
+#include "mixr/graphics/fonts/BitmapFont.hpp"
+
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/str_utils.hpp"

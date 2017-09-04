@@ -1,5 +1,6 @@
 
-#include "mixr/graphics/StrokeFont.hpp"
+#include "mixr/graphics/fonts/StrokeFont.hpp"
+
 #include <iostream>
 
 namespace mixr {

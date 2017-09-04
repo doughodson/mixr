@@ -12,7 +12,7 @@ EMPTY_COPYDATA(AsciiText)
 EMPTY_DELETEDATA(AsciiText)
 
 BEGIN_SLOTTABLE(AsciiText)
-   "text",             // Text String
+   "text",                  // text string
 END_SLOTTABLE(AsciiText)
 
 BEGIN_SLOT_MAP(AsciiText)
@@ -52,7 +52,7 @@ bool AsciiText::isValidInputPosition(const int)
 // setTextString() -- takes in a base::String and sets it
 bool AsciiText::setTextString(const base::String* const stsobj)
 {
-   bool ok = true;
+   bool ok {true};
    if (stsobj != nullptr) {
       if (width() == 0) width(stsobj->len());
       setText(*stsobj);
@@ -69,13 +69,13 @@ bool AsciiText::setTextString(const base::String* const stsobj)
 // setTextList() -- takes in alist of ascii numbers
 bool AsciiText::setTextList(const base::List* const stlobj)
 {
-   bool ok = true;
+   bool ok {true};
    if (stlobj != nullptr) {
-      float values[256];
-      int n = stlobj->getNumberList(values, 256);
+      float values[256] {};
+      int n {static_cast<int>(stlobj->getNumberList(values, 256))};
       if (n > 0) {
-         char cbuf[258];
-         int j;
+         char cbuf[258] {};
+         int j {};
          for (j = 0; j < n; j++) {
             cbuf[j] = char(values[j]);
          }
@@ -83,8 +83,7 @@ bool AsciiText::setTextList(const base::List* const stlobj)
          if (width() == 0) width(j);
          setText(cbuf);
          ok = true;
-      }
-      else {
+      } else {
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "AsciiText::setTextList: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
          }

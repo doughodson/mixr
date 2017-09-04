@@ -2,17 +2,16 @@
 #ifndef __mixr_graphics_BitmapFont_H__
 #define __mixr_graphics_BitmapFont_H__
 
-#include "Font.hpp"
+#include "AbstractFont.hpp"
 
 namespace mixr {
 namespace base { class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class:  BitmapFont
-// Base class:  Object -> Font -> BitmapFont
+// Class: BitmapFont
 //
-// Description:  Class to create and load bit map fonts
+// Description: Creates and load bit map fonts
 //
 // Factory name: BitmapFont
 // Slots:
@@ -35,9 +34,9 @@ namespace graphics {
 //   -- Sets the font to reverse if rnumber != 0.
 //
 //------------------------------------------------------------------------------
-class BitmapFont : public Font
+class BitmapFont : public AbstractFont
 {
-    DECLARE_SUBCLASS(BitmapFont, Font)
+    DECLARE_SUBCLASS(BitmapFont, AbstractFont)
 
 public:
     BitmapFont();

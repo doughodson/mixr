@@ -39,7 +39,7 @@ package mixr.recorder.pb;
 message DataRecord {
    required Time time   = 1;  // Sample time
 
-   required uint32 id   = 2;  // Recorder Event ID (see "mxrp/simulation/dataRecorderTokens.hpp")
+   required uint32 id   = 2;  // Recorder Event ID (see "mixr/simulation/dataRecorderTokens.hpp")
 
    // Recorder and simulation messages
    optional FileIdMsg                  file_id_msg                   = 11;
@@ -382,7 +382,7 @@ message PlayerState {
 }
 
 message TrackData {
-   optional uint32 type          = 1;  // track type (see Track.h)
+   optional uint32 type          = 1;  // track type (see Track.hpp)
    optional double quality       = 2;  // Quality
    optional double true_az       = 3;  // True azimuth (radians)
    optional double rel_az        = 4;  // Relative azimuth (radians)

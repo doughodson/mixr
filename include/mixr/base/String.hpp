@@ -33,7 +33,7 @@ public:
     static const int MAX_STRING_LENGTH {512};   // only by setString()
 
 public:
-    String(const char* string);
+    String(const char*);
     String(const char* s1, const char* s2);
     String();
 
@@ -50,8 +50,8 @@ public:
     char getChar(const unsigned int index) const;  // Gets a specific character
 
     virtual void empty();                          // Empty (null) this string.
-    virtual void setStr(const char* string);       // Sets us to a copy of 'string'
-    virtual void catStr(const char* string);       // Append a copy of 'string' to our text string
+    virtual void setStr(const char*);              // Sets us to a copy of 'string'
+    virtual void catStr(const char*);              // Append a copy of 'string' to our text string
     virtual void setChar(const unsigned int index, const char c);    // Sets a specific character
 
     // Returns true if this string is the ascii form of a number

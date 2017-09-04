@@ -54,7 +54,7 @@ public:
    virtual int getTrackList(Track* tlist[], const unsigned int max);
    virtual int getTrackList(const Track* tlist[], const unsigned int max) const;
 
-   // Type of tracks managed (see enum TypeBits in Track.h)
+   // Type of tracks managed (see enum TypeBits in Track.hpp)
    virtual bool isType(const short t) const;
    virtual short getType() const;
    virtual void setType(const short t);
@@ -122,7 +122,7 @@ protected:
 
 private:
    double maxTrackAge {3.0};      // Max Track age (sec)
-   short  type {};                // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.h)
+   short  type {};                // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.hpp)
    bool   logTrackUpdates {true}; // input slot; if false, updates to tracks are not logged.
 };
 

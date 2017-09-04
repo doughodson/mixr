@@ -94,7 +94,7 @@ public:
     Hsv(const double h, const double s, const double v);
     Hsv();
 
-    double hue() const;                          // Hue value (0.0 to 360.0) (see Hsv.h)
+    double hue() const;                          // Hue value (0.0 to 360.0) (see Hsv.hpp)
     double saturation() const;                   // Saturation: 0.0 (white) to 1.0 (pure color)
     double value() const;                        // Value: 0.0 (black) to 1.0 (full)
 
