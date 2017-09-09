@@ -934,8 +934,14 @@ bool Nib::mainDeadReckoning(
       }
       break;
 
+      // No dead reckoning
+      case STATIC_DRM: {
+         *pNewP0 = drP0;
+         *pNewRPY = drRPY0;
+      }
+      break;
+
       case OTHER_DRM:   // User defined
-      case STATIC_DRM:  // No dead reckoning
       default:          // default
          std::cout << "drNum == default" << std::endl;
          *pNewP0 = drP0;

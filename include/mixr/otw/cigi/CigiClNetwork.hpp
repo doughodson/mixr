@@ -69,9 +69,16 @@ public:
    virtual void addPacketHatHotReq(CigiHatHotReqV3* const p) override;
    virtual void addPacketLosRangeReq(CigiLosVectReqV3* const p) override;
 
+   CigiIncomingMsg* getCigiIncomingMsg() { return msgIn; };
+   CigiOutgoingMsg* getCigiOutgoingMsg() { return msgOut; };
+
 protected:
    bool createCigiProcess();        // Create the CIGI network thread
    bool initCigiNetwork();          // Initialize the network
+
+   CigiIncomingMsg* msgIn {};
+   CigiOutgoingMsg* msgOut {};
+   CigiClNetworkSignalProcessing* sigProcessor {};
 
 private:
    base::safe_ptr<base::NetHandler> netInput;   // Input network handler
@@ -79,10 +86,6 @@ private:
    base::safe_ptr<base::Thread> thread;         // The thread
    bool networkInitialized {};                  // CIGI has been initialized
    bool networkInitFailed {};                   // CIGI initialization has failed
-
-   CigiIncomingMsg* msgIn {};
-   CigiOutgoingMsg* msgOut {};
-   CigiClNetworkSignalProcessing* sigProcessor {};
 };
 
 }
