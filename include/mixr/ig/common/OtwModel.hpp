@@ -1,6 +1,6 @@
 
-#ifndef __mixr_otw_OtwModel_H__
-#define __mixr_otw_OtwModel_H__
+#ifndef __mixr_ig_OtwModel_H__
+#define __mixr_ig_OtwModel_H__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base { class String; }
 namespace models { class Player; }
-namespace otw {
+namespace ig {
 class Otm;
 
 //------------------------------------------------------------------------------
@@ -23,6 +23,7 @@ class Otm;
 //
 //    2) The age counters are used by the OTW unique handlers (derived from
 //       the Otw class).
+//
 // Factory name: OtwModel
 //------------------------------------------------------------------------------
 class OtwModel : public base::Object

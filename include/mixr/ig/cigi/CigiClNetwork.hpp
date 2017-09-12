@@ -1,8 +1,8 @@
 
-#ifndef __mixr_otw_CigiClNetwork_H__
-#define __mixr_otw_CigiClNetwork_H__
+#ifndef __mixr_ig_cigi_CigiClNetwork_H__
+#define __mixr_ig_cigi_CigiClNetwork_H__
 
-#include "mixr/otw/cigi/CigiCl.hpp"
+#include "mixr/ig/cigi/AbstractCigiCl.hpp"
 
 class CigiIGCtrlV3;
 class CigiViewCtrlV3;
@@ -19,7 +19,7 @@ class CigiOutgoingMsg;
 
 namespace mixr {
 namespace base { class NetHandler; class Thread; }
-namespace otw {
+namespace cigi {
 class OtwCigiCl;
 class CigiClNetworkSignalProcessing;
 
@@ -33,9 +33,9 @@ class CigiClNetworkSignalProcessing;
 //    netInput       (NetHandler)   Network input handler
 //    netOutput      (NetHandler)   Network output handler
 //------------------------------------------------------------------------------
-class CigiClNetwork : public CigiCl
+class CigiClNetwork : public AbstractCigiCl
 {
-   DECLARE_SUBCLASS(CigiClNetwork, CigiCl)
+   DECLARE_SUBCLASS(CigiClNetwork, AbstractCigiCl)
 
 public:
    CigiClNetwork();
@@ -46,28 +46,24 @@ public:
    // get a pre-ref'd pointer to the network output handler
    virtual base::NetHandler* getOutputHandler();
 
-   // Set Slot functions
-   virtual bool setSlotNetInput(base::NetHandler* const msg);
-   virtual bool setSlotNetOutput(base::NetHandler* const msg);
-
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
 
-   virtual bool initialize(OtwCigiCl* const p) override;
+   virtual bool initialize(OtwCigiCl* const) override;
    virtual bool isInitialized() override;
    virtual void startMessage() override;
    virtual void endMessage() override;
    virtual int  getOutgoingBufferSize() override;
 
-   virtual void addPacketIGCtrl(CigiIGCtrlV3* const p) override;
-   virtual void addPacketViewCtrl(CigiViewCtrlV3* const p) override;
-   virtual void addPacketSensorCtrl(CigiSensorCtrlV3* const p) override;
-   virtual void addPacketViewDef(CigiViewDefV3* const p) override;
-   virtual void addPacketEntityCtrl(CigiEntityCtrlV3* const p) override;
-   virtual void addPacketComponentCtrl(CigiCompCtrlV3* const p) override;
-   virtual void addPacketArtPartCtrl(CigiArtPartCtrlV3* const p) override;
-   virtual void addPacketHatHotReq(CigiHatHotReqV3* const p) override;
-   virtual void addPacketLosRangeReq(CigiLosVectReqV3* const p) override;
+   virtual void addPacketIGCtrl(CigiIGCtrlV3* const) override;
+   virtual void addPacketViewCtrl(CigiViewCtrlV3* const) override;
+   virtual void addPacketSensorCtrl(CigiSensorCtrlV3* const) override;
+   virtual void addPacketViewDef(CigiViewDefV3* const) override;
+   virtual void addPacketEntityCtrl(CigiEntityCtrlV3* const) override;
+   virtual void addPacketComponentCtrl(CigiCompCtrlV3* const) override;
+   virtual void addPacketArtPartCtrl(CigiArtPartCtrlV3* const) override;
+   virtual void addPacketHatHotReq(CigiHatHotReqV3* const) override;
+   virtual void addPacketLosRangeReq(CigiLosVectReqV3* const) override;
 
    CigiIncomingMsg* getCigiIncomingMsg() { return msgIn; };
    CigiOutgoingMsg* getCigiOutgoingMsg() { return msgOut; };
@@ -86,6 +82,11 @@ private:
    base::safe_ptr<base::Thread> thread;         // The thread
    bool networkInitialized {};                  // CIGI has been initialized
    bool networkInitFailed {};                   // CIGI initialization has failed
+
+private:
+   // slot table helper methods
+   bool setSlotNetInput(base::NetHandler* const);
+   bool setSlotNetOutput(base::NetHandler* const);
 };
 
 }

@@ -1,10 +1,10 @@
 
-#ifndef __mixr_otw_OtwModelCigiCl_H__
-#define __mixr_otw_OtwModelCigiCl_H__
+#ifndef __mixr_ig_cigi_OtwModelCigiCl_H__
+#define __mixr_ig_cigi_OtwModelCigiCl_H__
 
-#include "mixr/otw/OtwModel.hpp"
+#include "mixr/ig/common/OtwModel.hpp"
 
-#include "mixr/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/ig/cigi/OtwCigiCl.hpp"
 #include <array>
 
 class CigiEntityCtrlV3;
@@ -30,22 +30,22 @@ class CigiArtPartCtrlV3;
 
 namespace mixr {
 namespace models { class Player; }
-namespace otw {
+namespace cigi {
 
 //------------------------------------------------------------------------------
 // Class: OtwModelCigiCl
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
-class OtwModelCigiCl : public OtwModel
+class OtwModelCigiCl : public ig::OtwModel
 {
-   DECLARE_SUBCLASS(OtwModelCigiCl, OtwModel)
+   DECLARE_SUBCLASS(OtwModelCigiCl, ig::OtwModel)
 
 public:
    OtwModelCigiCl();
 
    virtual void clear() override;
 
-   virtual void initialize(models::Player* const p);
+   virtual void initialize(models::Player* const);
 
    unsigned short getID() const          { return id; }
    void setID(const unsigned short i)    { id = i; }

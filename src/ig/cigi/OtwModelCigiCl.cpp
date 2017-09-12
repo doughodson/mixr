@@ -1,6 +1,6 @@
 
-#include "mixr/otw/cigi/OtwModelCigiCl.hpp"
-#include "mixr/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/ig/cigi/OtwModelCigiCl.hpp"
+#include "mixr/ig/cigi/OtwCigiCl.hpp"
 
 #include "mixr/models/player/GroundVehicle.hpp"
 
@@ -9,7 +9,7 @@
 #include "cigicl/CigiArtPartCtrlV3.h"
 
 namespace mixr {
-namespace otw {
+namespace cigi {
 
 IMPLEMENT_SUBCLASS(OtwModelCigiCl, "OtwModelCigiCl")
 EMPTY_SLOTTABLE(OtwModelCigiCl)

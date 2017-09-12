@@ -1,5 +1,5 @@
 
-#include "mixr/otw/Otm.hpp"
+#include "mixr/ig/common/Otm.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
-namespace otw {
+namespace ig {
 
 IMPLEMENT_SUBCLASS(Otm, "Otm")
 
@@ -58,9 +58,9 @@ bool Otm::setTypeId(const unsigned int newType)
 // Sets the OTW entity type number
 bool Otm::setSlotTypeId(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      const int i = msg->getInt();
+      const int i {msg->getInt()};
       if (i >= 0) {
          ok = setTypeId( static_cast<unsigned int>(i) );
       }
@@ -87,7 +87,7 @@ bool Otm::setSlotRefTypeName(const base::String* const msg)
 //------------------------------------------------------------------------------
 bool Otm::isMatchingPlayerType(const models::Player* const p) const
 {
-   bool match = false;
+   bool match {};
    if (p != nullptr && refFactoryName != nullptr) {
       // first match the factory name --
       if (p->isFactoryName( *refFactoryName ) ) {
@@ -98,7 +98,7 @@ bool Otm::isMatchingPlayerType(const models::Player* const p) const
          match = true;
 
          // Do we have both type names?
-         const base::String* ptype = p->getType();
+         const base::String* ptype {p->getType()};
          if ( refTypeName != nullptr && ptype != nullptr) {
 
             // Then compare at most the length of our reference type name ...

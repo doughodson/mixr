@@ -1,9 +1,9 @@
 
-#include "mixr/otw/pc/OtwPC.hpp"
+#include "mixr/ig/viewpoint/OtwPC.hpp"
 
-#include "mixr/otw/OtwModel.hpp"
+#include "mixr/ig/common/OtwModel.hpp"
 
-#include "dsFlightModelData.hpp"
+#include "mixr/ig/viewpoint/EntityState.hpp"
 
 #include "mixr/models/player/AirVehicle.hpp"
 #include "mixr/models/player/GroundVehicle.hpp"
@@ -19,7 +19,7 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace otw {
+namespace viewpoint {
 
 IMPLEMENT_SUBCLASS(OtwPC, "OtwPC")
 
@@ -27,12 +27,11 @@ BEGIN_SLOTTABLE(OtwPC)
     "netOutput",        // 1) Network output handler
 END_SLOTTABLE(OtwPC)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(OtwPC)
-    ON_SLOT(1,setSlotNetOutput,base::NetHandler)
+    ON_SLOT(1, setSlotNetOutput, base::NetHandler)
 END_SLOT_MAP()
 
-OtwPC::OtwPC() : netOutput(nullptr)
+OtwPC::OtwPC()
 {
     STANDARD_CONSTRUCTOR()
     setMaxRange(0);
@@ -65,17 +64,17 @@ void OtwPC::deleteData()
 //------------------------------------------------------------------------------
 // modelFactory() -- Create OtwModel objects unique to interface
 //------------------------------------------------------------------------------
-OtwModel* OtwPC::modelFactory()
+ig::OtwModel* OtwPC::modelFactory()
 {
-    return new OtwModel();
+    return new ig::OtwModel();
 }
 
 //------------------------------------------------------------------------------
 // hotFactory() -- Create OtwHot objects unique to interface
 //------------------------------------------------------------------------------
-OtwModel* OtwPC::hotFactory()
+ig::OtwModel* OtwPC::hotFactory()
 {
-    return new OtwModel();
+    return new ig::OtwModel();
 }
 
 //------------------------------------------------------------------------------
@@ -91,25 +90,25 @@ void OtwPC::sendOwnshipAndModels()
 }
 
 //------------------------------------------------------------------------------
-// sendElevationRequests() - Sends terrain height requests
+// sends terrain height requests
 //------------------------------------------------------------------------------
 void OtwPC::sendElevationRequests()
 {
 }
 
 //------------------------------------------------------------------------------
-// recvElevations() - Receives terrain height data
+// receives terrain height data
 //------------------------------------------------------------------------------
 void OtwPC::recvElevations()
 {
 }
 
 //------------------------------------------------------------------------------
-// frameSync() - Trigger the frame update
+// triggers the frame update
 //------------------------------------------------------------------------------
 void OtwPC::frameSync()
 {
-    // Initialization
+    // initialization
     if (!isNetworkInitialized() && !didInitializationFail()) {
         if (initNetwork()) {
             netInit = true;
@@ -122,22 +121,16 @@ void OtwPC::frameSync()
     }
 }
 
-//------------------------------------------------------------------------------
-// reset() - Reset OTW
-//------------------------------------------------------------------------------
 void OtwPC::reset()
 {
     BaseClass::reset();
 }
 
-//------------------------------------------------------------------------------
-// initNetwork() -- Init the network
-//------------------------------------------------------------------------------
 bool OtwPC::initNetwork()
 {
-    bool ok = true;
+    bool ok {true};
 
-    // Initialize network output handler
+    // initialize network output handler
     if (netOutput != nullptr) {
         if (netOutput->initNetwork(true)) {
             if (isMessageEnabled(MSG_INFO)) {
@@ -159,16 +152,12 @@ bool OtwPC::initNetwork()
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-// Net Network Output Handler
 bool OtwPC::setSlotNetOutput(base::NetHandler* const msg)
 {
     netOutput = msg;
     return true;
 }
 
-//------------------------------------------------------------------------------
-// sendPcData() -- Send PC data block
-//------------------------------------------------------------------------------
 void OtwPC::sendPcData()
 {
     //const double DEG2MR = (PI / 180.0f * 1000.0f);
@@ -177,56 +166,56 @@ void OtwPC::sendPcData()
     const auto av = dynamic_cast<const models::AirVehicle*>(getOwnship());
     if (av != nullptr) {
 
-        dsFlightModelData fmd;
+        EntityState entityState;
 
-        fmd.m_x_cg = 0;
-        fmd.m_y_cg = 0;
-        fmd.m_z_cg = 0;          // altitude
+        entityState.x_cg = 0;
+        entityState.y_cg = 0;
+        entityState.z_cg = 0;          // altitude
 
         const base::Vec3d pos = av->getPosition();
-        fmd.m_pilot_eye_x = pos[0] * base::distance::M2FT;
-        fmd.m_pilot_eye_y = pos[1] * base::distance::M2FT;
-        fmd.m_pilot_eye_z = -pos[2] * base::distance::M2FT;   // altitude
+        entityState.pilot_eye_x = pos[0] * base::distance::M2FT;
+        entityState.pilot_eye_y = pos[1] * base::distance::M2FT;
+        entityState.pilot_eye_z = -pos[2] * base::distance::M2FT;   // altitude
 
-        fmd.m_alphad = av->getAngleOfAttackD();
-        fmd.m_betad = av->getSideSlipD();
-        fmd.m_mach = av->getMach();
-        fmd.m_runalt = 0.0;
+        entityState.alphad = av->getAngleOfAttackD();
+        entityState.betad = av->getSideSlipD();
+        entityState.mach = av->getMach();
+        entityState.runalt = 0.0;
 
-        fmd.m_theta    = static_cast<float_4>(av->getPitchD());
-        fmd.m_phi      = static_cast<float_4>(av->getRollD());
-        fmd.m_psi      = static_cast<float_4>(av->getHeadingD());
-        fmd.m_airspeed = static_cast<float_4>(av->getTotalVelocityKts());
+        entityState.theta    = static_cast<float>(av->getPitchD());
+        entityState.phi      = static_cast<float>(av->getRollD());
+        entityState.psi      = static_cast<float>(av->getHeadingD());
+        entityState.airspeed = static_cast<float>(av->getTotalVelocityKts());
 
-        fmd.m_heading = static_cast<float_4>(av->getHeadingD());
+        entityState.heading = static_cast<float>(av->getHeadingD());
 
-        fmd.m_dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
-        fmd.m_dsb = static_cast<float_4>(av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
-        fmd.m_nz  = static_cast<float_4>(av->getGload());
+        entityState.dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
+        entityState.dsb = static_cast<float>(av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
+        entityState.nz  = static_cast<float>(av->getGload());
 
-        fmd.m_aetrc = 0;         // Commanded throttle position
-        fmd.m_afterburner = 0;   // logical, true in in A/B
+        entityState.aetrc = 0;         // Commanded throttle position
+        entityState.afterburner = 0;   // logical, true in in A/B
 
-        fmd.m_target_id = 0;
+        entityState.target_id = 0;
 
-        fmd.m_id_self = 0;       // make use of a hole
-        fmd.m_flags = 0;
+        entityState.id_self = 0;       // make use of a hole
+        entityState.flags = 0;
 
-        fmd.m_target_x = 0;
-        fmd.m_target_y = 0;
-        fmd.m_target_z = 0;
+        entityState.target_x = 0;
+        entityState.target_y = 0;
+        entityState.target_z = 0;
 
-        fmd.m_target_theta = 0;
-        fmd.m_target_phi = 0;
-        fmd.m_target_psi = 0;
+        entityState.target_theta = 0;
+        entityState.target_phi = 0;
+        entityState.target_psi = 0;
 
-        fmd.m_target_uearth = 0;
-        fmd.m_target_vearth = 0;
-        fmd.m_target_wearth = 0;
-        fmd.m_target_vcas = 0;
+        entityState.target_uearth = 0;
+        entityState.target_vearth = 0;
+        entityState.target_wearth = 0;
+        entityState.target_vcas = 0;
 
         if (netOutput != nullptr) {
-           netOutput->sendData( reinterpret_cast<char*>(&fmd), sizeof(fmd) );
+           netOutput->sendData( reinterpret_cast<char*>(&entityState), sizeof(entityState) );
         }
     }
 }

@@ -16,7 +16,9 @@ include makedefs
 # linearsystem    : -
 # map_rpf         : -
 # models          : JSBSim
-# otw             : CIGICL 3.x
+# ig              : -
+# ig_cigi         : CIGICL 3.x
+# ig_pov          : -
 # recorder        : Google protocol buffers
 # simulation      : -
 # terrain         : -
@@ -38,7 +40,7 @@ PROJECTS += instruments
 #
 # User interface libraries
 #
-PROJECTS += "ui/glut"
+PROJECTS += ui/glut
 
 #
 # Interoperability interfaces
@@ -48,10 +50,12 @@ PROJECTS += interop/dis
 PROJECTS += interop/hla
 PROJECTS += interop/rprfom
 
-# Out-the-Window interface classes to talk to visual systems
-# - CIGI Class Library 3.x interface
-# - download and install cigicl
-PROJECTS += otw
+#
+# Image generator host interfaces
+#
+PROJECTS += ig/common
+PROJECTS += ig/cigi
+PROJECTS += ig/viewpoint
 
 #
 # Map format reader libraries

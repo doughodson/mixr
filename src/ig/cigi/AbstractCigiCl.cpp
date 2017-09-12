@@ -1,34 +1,34 @@
 
-#include "mixr/otw/cigi/CigiCl.hpp"
+#include "mixr/ig/cigi/AbstractCigiCl.hpp"
 
 #include "cigicl/CigiHostSession.h"
 
 namespace mixr {
-namespace otw {
+namespace cigi {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(CigiCl, "CigiClAbstract")
-EMPTY_SLOTTABLE(CigiCl)
+IMPLEMENT_ABSTRACT_SUBCLASS(AbstractCigiCl, "AbstractCigiCl")
+EMPTY_SLOTTABLE(AbstractCigiCl)
 
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const int MAX_BUF_SIZE = 1472;
-static const double LOS_REQ_TIMEOUT = 2.0;     // one second timeout
+static const int MAX_BUF_SIZE {1472};
+static const double LOS_REQ_TIMEOUT {2.0};  // one second timeout
 
-bool CigiCl::cigiInitialized = false;    // CIGI has been initialized
-bool CigiCl::cigiInitFailed  = false;    // CIGI initialization has failed
+bool AbstractCigiCl::cigiInitialized {};    // CIGI has been initialized
+bool AbstractCigiCl::cigiInitFailed  {};    // CIGI initialization has failed
 
-CigiCl::CigiCl()
+AbstractCigiCl::AbstractCigiCl()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void CigiCl::copyData(const CigiCl& org, const bool)
+void AbstractCigiCl::copyData(const AbstractCigiCl& org, const bool)
 {
    BaseClass::copyData(org);
 }
 
-void CigiCl::deleteData()
+void AbstractCigiCl::deleteData()
 {
    if (session != nullptr) {
       delete session;
@@ -40,7 +40,7 @@ void CigiCl::deleteData()
 //------------------------------------------------------------------------------
 // initialize() -- Initialize this CIGI session
 //------------------------------------------------------------------------------
-bool CigiCl::initialize(OtwCigiCl* const p)
+bool AbstractCigiCl::initialize(OtwCigiCl* const p)
 {
    // Our parent OTW CIGI handler
    // (no need to ref(), it owns us and it's not going to be deleted before us)
@@ -69,7 +69,7 @@ bool CigiCl::initialize(OtwCigiCl* const p)
 //------------------------------------------------------------------------------
 // True if we've been successfully initialized
 //------------------------------------------------------------------------------
-bool CigiCl::isInitialized()
+bool AbstractCigiCl::isInitialized()
 {
    return cigiInitialized && (session != nullptr);
 }
@@ -77,7 +77,7 @@ bool CigiCl::isInitialized()
 //------------------------------------------------------------------------------
 // initCigi() -- Initialize the static CIGI system
 //------------------------------------------------------------------------------
-bool CigiCl::initCigi()
+bool AbstractCigiCl::initCigi()
 {
    std::cout << "CigiCl::initCigi(): CIGI initialized!" << std::endl;
    return true;
@@ -86,14 +86,14 @@ bool CigiCl::initCigi()
 //------------------------------------------------------------------------------
 // R/T frame sync -- called from OtwCigiCl::frameSync() in the R/T thread
 //------------------------------------------------------------------------------
-void CigiCl::frameSync()
+void AbstractCigiCl::frameSync()
 {
 }
 
 //------------------------------------------------------------------------------
 // Background frame sync -- called from OtwCigiCl::updateData() in the background
 //------------------------------------------------------------------------------
-void CigiCl::frameBg()
+void AbstractCigiCl::frameBg()
 {
 }
 

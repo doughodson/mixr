@@ -1,19 +1,17 @@
 
-#include "mixr/otw/factory.hpp"
+#include "mixr/ig/cigi/factory.hpp"
 
 #include "mixr/base/Object.hpp"
 
-#include "mixr/otw/Otm.hpp"
+#include "mixr/ig/common/Otm.hpp"
 
-#include "mixr/otw/cigi/OtwCigiCl.hpp"
-#include "mixr/otw/cigi/CigiClNetwork.hpp"
-
-#include "mixr/otw/pc/OtwPC.hpp"
+#include "mixr/ig/cigi/OtwCigiCl.hpp"
+#include "mixr/ig/cigi/CigiClNetwork.hpp"
 
 #include <string>
 
 namespace mixr {
-namespace otw {
+namespace cigi {
 
 base::Object* factory(const std::string& name)
 {
@@ -27,13 +25,9 @@ base::Object* factory(const std::string& name)
         obj = new CigiClNetwork();
     }
 
-    // PC Visual Driver
-    else if ( name == OtwPC::getFactoryName() ) {
-        obj = new OtwPC();
-    }
-
-    else if ( name == Otm::getFactoryName() ) {
-        obj = new Otm();
+    // used by CIGI interface
+    else if ( name == ::mixr::ig::Otm::getFactoryName() ) {
+        obj = new ::mixr::ig::Otm();
     }
 
     return obj;

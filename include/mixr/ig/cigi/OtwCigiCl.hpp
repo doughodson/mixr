@@ -1,8 +1,8 @@
 
-#ifndef __mixr_otw_OtwCigiCl_H__
-#define __mixr_otw_OtwCigiCl_H__
+#ifndef __mixr_ig_cigi_OtwCigiCl_H__
+#define __mixr_ig_cigi_OtwCigiCl_H__
 
-#include "mixr/otw/Otw.hpp"
+#include "mixr/ig/common/Otw.hpp"
 #include <array>
 
 class CigiIGCtrlV3;
@@ -32,8 +32,8 @@ namespace models {
 class AirVehicle; class Building; class Effects; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
 }
-namespace otw {
-class CigiCl;
+namespace cigi {
+class AbstractCigiCl;
 class OtwModelCigiCl;
 
 //------------------------------------------------------------------------------
@@ -59,9 +59,9 @@ class OtwModelCigiCl;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class OtwCigiCl : public Otw
+class OtwCigiCl : public ig::Otw
 {
-   DECLARE_SUBCLASS(OtwCigiCl, Otw)
+   DECLARE_SUBCLASS(OtwCigiCl, ig::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -101,30 +101,19 @@ public:
    virtual bool setShipWakeModelId(const unsigned short);                           // "Ship Wake" effect model ID
 
    // IG callbacks
-   virtual void startOfFrame(const CigiSOFV3* const p);
-   virtual void hatHotResp(const CigiHatHotRespV3* const p);
-   virtual void losResp(const CigiLosRespV3* const p);
-   virtual void collisionSegmentResp(const CigiCollDetSegRespV3* const p);
-   virtual void sensorResp(const CigiSensorRespV3* const p);
-   virtual void collisionVolumeResp(const CigiCollDetVolRespV3* const p);
-   virtual void igResponse(const CigiIGMsgV3* const p);
+   virtual void startOfFrame(const CigiSOFV3* const);
+   virtual void hatHotResp(const CigiHatHotRespV3* const);
+   virtual void losResp(const CigiLosRespV3* const);
+   virtual void collisionSegmentResp(const CigiCollDetSegRespV3* const);
+   virtual void sensorResp(const CigiSensorRespV3* const);
+   virtual void collisionVolumeResp(const CigiCollDetVolRespV3* const);
+   virtual void igResponse(const CigiIGMsgV3* const);
 
    // Send data to the Cigi handler
    virtual bool sendCigiData();
 
-   CigiCl* getCigi()                  { return cigi; }
-   const CigiCl* getCigi() const      { return cigi; }
-
-   // Set Slot functions
-   virtual bool setSlotCigi(CigiCl* const msg);
-   virtual bool setSlotASyncMode(const base::Number* const msg);
-   virtual bool setSlotHideOwnshipModel(const base::Number* const msg);
-   virtual bool setSlotOwnshipModel(const base::Number* const msg);
-   virtual bool setSlotMslTrailModel(const base::Number* const msg);
-   virtual bool setSlotSmokePlumeModel(const base::Number* const msg);
-   virtual bool setSlotAirExplosionModel(const base::Number* const msg);
-   virtual bool setSlotGroundExplosionModel(const base::Number* const msg);
-   virtual bool setSlotShipWakeModel(const base::Number* const msg);
+   AbstractCigiCl* getCigi()                  { return cigi; }
+   const AbstractCigiCl* getCigi() const      { return cigi; }
 
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
@@ -148,16 +137,16 @@ protected:
       return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
    }
 
-   unsigned int getWriteBuffer() const { return iw; }          // Write buffer index
-   unsigned int getLastWriteBuffer() const { return iw0; }     // Last write buffer index
-   unsigned int getReadBuffer() const { return ir; }           // Read index {returns index or NUM_BUFFERS if not valid)
-   void swapReadBuffer() { if (iw0 < NUM_BUFFERS) ir = iw0; }  // Swap the read buffer
+   unsigned int getWriteBuffer() const         { return iw; }                        // Write buffer index
+   unsigned int getLastWriteBuffer() const     { return iw0; }                       // Last write buffer index
+   unsigned int getReadBuffer() const          { return ir; }                        // Read index {returns index or NUM_BUFFERS if not valid)
+   void swapReadBuffer()                       { if (iw0 < NUM_BUFFERS) ir = iw0; }  // Swap the read buffer
 
-   bool isIgResetRequested() const { return resetRequest; }
-   void clearIgResetRequest() { resetRequest = false; }
+   bool isIgResetRequested() const             { return resetRequest; }
+   void clearIgResetRequest()                  { resetRequest = false; }
 
-   unsigned short getNexLosId() { return ++losReqId; }
-   bool isNewLosequested() const { return newLosReq; }
+   unsigned short getNexLosId()                { return ++losReqId; }
+   bool isNewLosequested() const               { return newLosReq; }
    void losRequestSend();          // LOS request has been sent to the IG
 
    void elevationRequestSend();    // Elevation request has been sent to the IG
@@ -183,16 +172,16 @@ protected:
       );
 
    // Set functions
-   virtual bool setViewControlPacket(CigiViewCtrlV3* const p);
-   virtual bool setViewDefinitionPacket(CigiViewDefV3* const p);
-   virtual bool setSensorControlPacket(CigiSensorCtrlV3* const p);
+   virtual bool setViewControlPacket(CigiViewCtrlV3* const);
+   virtual bool setViewDefinitionPacket(CigiViewDefV3* const);
+   virtual bool setSensorControlPacket(CigiSensorCtrlV3* const);
 
    virtual void sendOwnshipAndModels() override;    // Send state data for ownship and models
    virtual void sendElevationRequests() override;   // Sends terrain height requests
    virtual void recvElevations() override;          // Receives terrain height data
    virtual void frameSync() override;               // Send frame sync (if any)
-   virtual OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
-   virtual OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
+   virtual ig::OtwModel* modelFactory() override;   // Create OtwModel objects unique to interface
+   virtual ig::OtwModel* hotFactory() override;     // Create OtwHot objects unique to interface
 
    virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::AirVehicle* const p);
    virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const models::Building* const p);
@@ -206,37 +195,37 @@ protected:
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p);
 
 private:
-   base::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
+   base::safe_ptr<AbstractCigiCl> cigi;    // CIGI handler (direct, networked, ...)
    // CIGI init support
-   bool cigiInitialized {};            // CIGI has been initialized
-   bool cigiInitFailed {};             // CIGI initialization has failed
+   bool cigiInitialized {};               // CIGI has been initialized
+   bool cigiInitFailed {};                // CIGI initialization has failed
 
-   bool asyncMode {};                   // Running in ASYNC mode if true
-   bool hideOwn {true};                 // Hide ownship model flag
-   bool resetRequest {true};                  // IG reset request
+   bool asyncMode {};                     // Running in ASYNC mode if true
+   bool hideOwn {true};                   // Hide ownship model flag
+   bool resetRequest {true};              // IG reset request
 
-   unsigned short entityIdCount {};         // Entity ID count
-   unsigned short elevReqIdCount {};        // Elevation request ID count
+   unsigned short entityIdCount {};       // Entity ID count
+   unsigned short elevReqIdCount {};      // Elevation request ID count
 
    // Terrain elevation request data
-   bool elevReqFlg {};                      // Elevation request flag
-   double elevReqTimer {};                  // Elevation request timer
+   bool elevReqFlg {};                    // Elevation request flag
+   double elevReqTimer {};                // Elevation request timer
 
    // Line of sight (LOS) data
-   double losRespLat {};                    // LOS Response latitude intersection point (deg)
-   double losRespLon {};                    // LOS Response longitude intersection point (deg)
-   double losRespAlt {};                    // LOS Response altitude intersection point (m)
-   double losRespRange {};                  // LOS response range (m)
-   unsigned short losRespId {};             // LOS Response ID
-   bool losRespDataValid {true};            // LOS response data is valid flag
-   unsigned short losReqId {};              // LOS Request ID
-   bool newLosReq {true};                   // New LOS request flag
-   double losReqTimer {};                   // LOS request timer
+   double losRespLat {};                  // LOS Response latitude intersection point (deg)
+   double losRespLon {};                  // LOS Response longitude intersection point (deg)
+   double losRespAlt {};                  // LOS Response altitude intersection point (m)
+   double losRespRange {};                // LOS response range (m)
+   unsigned short losRespId {};           // LOS Response ID
+   bool losRespDataValid {true};          // LOS response data is valid flag
+   unsigned short losReqId {};            // LOS Request ID
+   bool newLosReq {true};                 // New LOS request flag
+   double losReqTimer {};                 // LOS request timer
 
    // CIGI entity data buffers
-   unsigned int iw {NUM_BUFFERS};           // Write buffer index
-   unsigned int iw0 {NUM_BUFFERS};          // Last write buffer index
-   unsigned int ir {NUM_BUFFERS};           // Read index
+   unsigned int iw {NUM_BUFFERS};         // Write buffer index
+   unsigned int iw0 {NUM_BUFFERS};        // Last write buffer index
+   unsigned int ir {NUM_BUFFERS};         // Read index
 
    // Packets
    std::array<CigiEntityCtrlV3*, NUM_BUFFERS> ownshipEC {}; // Ownship entity control packet
@@ -254,6 +243,18 @@ private:
    unsigned short cmtAirExplosion {1102};       // "Air Explosion" effect model ID
    unsigned short cmtGroundExplosion {1103};    // "Ground Explosion" effect model ID
    unsigned short cmtShipWake {1104};           // "Ship Wake" effect model ID
+
+private:
+   // slot table helper methods
+   bool setSlotCigi(AbstractCigiCl* const);
+   bool setSlotASyncMode(const base::Number* const);
+   bool setSlotHideOwnshipModel(const base::Number* const);
+   bool setSlotOwnshipModel(const base::Number* const);
+   bool setSlotMslTrailModel(const base::Number* const);
+   bool setSlotSmokePlumeModel(const base::Number* const);
+   bool setSlotAirExplosionModel(const base::Number* const);
+   bool setSlotGroundExplosionModel(const base::Number* const);
+   bool setSlotShipWakeModel(const base::Number* const);
 };
 
 }

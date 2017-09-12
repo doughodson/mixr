@@ -161,15 +161,7 @@ workspace "mixr"
       includedirs { MIXR_3rdPartyIncPath.."/JSBSim" }
       targetname "models"
 
-   -- otw library
-   project "otw"
-      files {
-         "../../include/mixr/otw/**.h*",
-         "../../src/otw/**.h*",
-         "../../src/otw/**.cpp"
-      }
-      targetname "otw"
-
+   -- data recorder library
    project "recorder"
       files {
          "../../include/mixr/recorder/**.h*",
@@ -217,4 +209,6 @@ workspace "mixr"
    -- interoperability libraries
    dofile "interop.lua"
 
+   -- image generator libraries
+   dofile "ig.lua"
 	

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_otw_Otm_H__
-#define __mixr_otw_Otm_H__
+#ifndef __mixr_ig_Otm_H__
+#define __mixr_ig_Otm_H__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base { class Identifier; class Number; class String; }
 namespace models { class Player; }
-namespace otw {
+namespace ig {
 
 //------------------------------------------------------------------------------
 // Class: Otm
@@ -58,23 +58,26 @@ class Otm : public base::Object
 public:
     Otm();
 
-    unsigned int getTypeId() const                                          { return typeId; }      // OTW entity type ID number
-    virtual bool setTypeId(const unsigned int newType);                     // Sets the OTW entity type number
-    virtual bool setSlotTypeId(const base::Number* const msg);              // Sets the OTW entity type number
+    unsigned int getTypeId() const                           { return typeId; }          // OTW entity type ID number
+    virtual bool setTypeId(const unsigned int newType);                                  // Sets the OTW entity type number
 
-    const base::Identifier* getRefFactoryName() const                       { return refFactoryName; } // Reference factory name
-    virtual bool setSlotRefFactoryName(const base::Identifier* const msg);  // Sets the Reference factory name
+    const base::Identifier* getRefFactoryName() const        { return refFactoryName; }  // Reference factory name
 
-    const base::String* getRefTypeName() const                              { return refTypeName; } // Reference type name
-    virtual bool setSlotRefTypeName(const base::String* const msg);         // Sets the Reference type name
+    const base::String* getRefTypeName() const               { return refTypeName; }     // Reference type name
 
     // True if player's factory & type names match our reference factory and type names.
-    virtual bool isMatchingPlayerType(const models::Player* const p) const;
+    virtual bool isMatchingPlayerType(const models::Player* const) const;
 
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
     base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
     unsigned int typeId {};                                   // OTW entity type ID number
+
+private:
+    // slot table helper methods
+    bool setSlotTypeId(const base::Number* const);              // Sets the OTW entity type number
+    bool setSlotRefFactoryName(const base::Identifier* const);  // Sets the Reference factory name
+    bool setSlotRefTypeName(const base::String* const);         // Sets the Reference type name
 };
 
 }

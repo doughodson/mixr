@@ -1,6 +1,6 @@
 
-#ifndef __mixr_otw_CigiCl_H__
-#define __mixr_otw_CigiCl_H__
+#ifndef __mixr_ig_cigi_AbstractCigiCl_H__
+#define __mixr_ig_cigi_AbstractCigiCl_H__
 
 #include "mixr/base/Component.hpp"
 
@@ -16,7 +16,7 @@ class CigiHatHotReqV3;
 class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
 
 namespace mixr {
-namespace otw {
+namespace cigi {
 class OtwCigiCl;
 
 //------------------------------------------------------------------------------
@@ -25,12 +25,12 @@ class OtwCigiCl;
 //
 // Factory name: CigiCl
 //------------------------------------------------------------------------------
-class CigiCl : public base::Component
+class AbstractCigiCl : public base::Component
 {
-   DECLARE_SUBCLASS(CigiCl, base::Component)
+   DECLARE_SUBCLASS(AbstractCigiCl, base::Component)
 
 public:
-   CigiCl();
+   AbstractCigiCl();
 
    // ID number of this CIGI session
    CigiHostSession* getSession() const  { return session; }
@@ -63,12 +63,11 @@ public:
    virtual void addPacketLosRangeReq(CigiLosVectReqV3* const p) =0;
 
 protected:
-
    // Our parent OtwCigiCl
    OtwCigiCl* getOtwCigi() { return otwCigi; }
 
    // Return the Cigi object for this session id
-   static CigiCl* getSession(const int id) { return (id >= 0 && id < MAX_SESSIONS) ? sessions[id] : 0; }
+   static AbstractCigiCl* getSession(const int id) { return (id >= 0 && id < MAX_SESSIONS) ? sessions[id] : 0; }
 
 private:
    OtwCigiCl* otwCigi {};   // Our parent OtwCigiCl
@@ -77,8 +76,8 @@ private:
    CigiHostSession* session {};
 
    // Static table of CIGI session objects ...
-   static const int MAX_SESSIONS = 8;
-   static CigiCl* sessions[MAX_SESSIONS];
+   static const int MAX_SESSIONS {8};
+   static AbstractCigiCl* sessions[MAX_SESSIONS];
 
    // CIGI init support
    static bool initCigi();                 // init the CIGI static system

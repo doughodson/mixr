@@ -1,8 +1,8 @@
 
-#include "mixr/otw/Otw.hpp"
+#include "mixr/ig/common/Otw.hpp"
 
-#include "mixr/otw/Otm.hpp"
-#include "mixr/otw/OtwModel.hpp"
+#include "mixr/ig/common/Otm.hpp"
+#include "mixr/ig/common/OtwModel.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -21,7 +21,7 @@
 #include <cmath>
 
 namespace mixr {
-namespace otw {
+namespace ig {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Otw, "AbstractOtw")
 
@@ -220,14 +220,14 @@ void Otw::mapPlayerList2ModelTable()
       // ---
       // Find players that are alive and within range of the visual system ...
       // ---
-      base::List::Item* item = playerList->getFirstItem();
+      base::List::Item* item {playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<models::Player*>(pair->object());
 
-         bool dummy = false;
+         bool dummy {};
          const auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
          if (wpn != nullptr) dummy = wpn->isDummy();
 
@@ -237,7 +237,7 @@ void Otw::mapPlayerList2ModelTable()
             OtwModel* model = findModel(p, MODEL_TABLE);
 
             // Check if in-range
-            bool inRange = computeRangeToPlayer(p) <= maxRange;
+            bool inRange {computeRangeToPlayer(p) <= maxRange};
 
             // Check if this player is alive and within range.
             if (p->isActive() && inRange) {
@@ -245,20 +245,17 @@ void Otw::mapPlayerList2ModelTable()
                if (model != nullptr) {
                   // a) and it already has a model entry: make sure it's active ...
                   model->setState( OtwModel::ACTIVE );
-               }
-               else {
+               } else {
                   // b) and it doesn't have a model entry (new, in-range player) ...
                   model = newModelEntry(p);
                }
-            }
-            else if (p->isDead() && inRange) {
+            } else if (p->isDead() && inRange) {
                // When player isn't alive and it had a model entry
                if (model != nullptr) {
                   // set state to dead
                   model->setState( OtwModel::DEAD );
                }
-            }
-            else {
+            } else {
                // When player is out-of-range and it had a model entry
                if (model != nullptr) {
                   // set state to out-of-range
@@ -304,29 +301,28 @@ void Otw::mapPlayers2ElevTable()
       // ---
       // Find players that are alive and require terrain elevation from the visual system ...
       // ---
-      base::List::Item* item = playerList->getFirstItem();
+      base::List::Item* item {playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         models::Player* p = static_cast<models::Player*>(pair->object());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+         models::Player* p {static_cast<models::Player*>(pair->object())};
 
          // Check if this player is alive and within range.
          if ( p->isActive() && p->isTerrainElevationRequired() ) {
 
             // Check if in-range
-            const bool inRange = computeRangeToPlayer(p) <= maxRange;
+            const bool inRange {computeRangeToPlayer(p) <= maxRange};
 
             if (inRange) {
 
                // Find the player's model entry (if any)
-               OtwModel* model = findModel(p, HOT_TABLE);
+               OtwModel* model {findModel(p, HOT_TABLE)};
 
                if (model != nullptr) {
                   // The player has a valid entry.
                   model->incReqCount();
-               }
-               else {
+               } else {
                   // Player doesn't have an entry, so create one.
                   model = newElevEntry(p);
                }
@@ -357,7 +353,7 @@ void Otw::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 double Otw::computeRangeToPlayer(const models::Player* const ip) const
 {
-    double rng = maxRange*2.0 + 1.0;  // Default is out-of-range
+    double rng {maxRange*2.0 + 1.0};  // Default is out-of-range
     if (ownship != nullptr) {
         base::Vec3d diff = ip->getPosition() - ownship->getPosition();
         rng = diff.length();
@@ -371,7 +367,7 @@ double Otw::computeRangeToPlayer(const models::Player* const ip) const
 //------------------------------------------------------------------------------
 OtwModel* Otw::newModelEntry(models::Player* const ip)
 {
-   OtwModel* model = nullptr;
+   OtwModel* model {};
 
    // Only if we have a player pointer ...
    if (ip != nullptr && (getModelTableSize() < getMaxModels())) {
@@ -393,7 +389,7 @@ OtwModel* Otw::newModelEntry(models::Player* const ip)
 //------------------------------------------------------------------------------
 OtwModel* Otw::newElevEntry(models::Player* const ip)
 {
-   OtwModel* model = nullptr;
+   OtwModel* model {};
 
    // Only if we have a player pointer ...
    if (ip != nullptr && (getElevationTableSize() < getMaxElevations())) {
@@ -486,7 +482,7 @@ bool Otw::setMaxElevations(const unsigned int n)
 //------------------------------------------------------------------------------
 bool Otw::addModelToList(OtwModel* const model, const TableType type)
 {
-   bool ok = false;
+   bool ok {};
    if (model != nullptr) {
 
       // Select the table
@@ -511,7 +507,7 @@ bool Otw::addModelToList(OtwModel* const model, const TableType type)
 
          if (n > 0) {
             // Now, 'bubble down' to its correct position
-            int idx = n-1;
+            int idx {n-1};
             while (idx >= 0 && compareKey2Model(&key, &tbl[idx]) <= 0) {
                // Swap the table entries
                OtwModel* tmp = tbl[idx];
@@ -555,7 +551,7 @@ void Otw::removeModelFromList(const int idx, const TableType type)
       OtwModel* model = tbl[idx];
 
       // Shift down all items above this index by one position
-      int n1 = (n - 1);
+      int n1 {n - 1};
       for (int i = idx; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
@@ -581,7 +577,7 @@ void Otw::removeModelFromList(OtwModel* const model, const TableType type)
       n = nHots;
    }
 
-   int found = -1;
+   int found {-1};
    // Find the model
    for (int i = 0; i < n && found < 0; i++) {
       if (model == tbl[i]) found = i;
@@ -591,7 +587,7 @@ void Otw::removeModelFromList(OtwModel* const model, const TableType type)
    if (found >= 0) {
 
       // Shift down all items above this model by one position
-      int n1 = (n - 1);
+      int n1 {n - 1};
       for (int i = found; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
@@ -617,7 +613,7 @@ OtwModel* Otw::findModel(const unsigned short playerID, const base::String* cons
    OtwModelKey key(playerID, federateName);
 
    // Binary search the table for the models
-   OtwModel* found = nullptr;
+   OtwModel* found {};
    if (type == HOT_TABLE) {
       OtwModel** k =
          static_cast<OtwModel**>(bsearch(&key, hotTbl.data(), nHots, sizeof(OtwModel*), compareKey2Model));
@@ -633,13 +629,13 @@ OtwModel* Otw::findModel(const unsigned short playerID, const base::String* cons
 
 OtwModel* Otw::findModel(const simulation::AbstractPlayer* const player, const TableType type)
 {
-   OtwModel* found = nullptr;
+   OtwModel* found {};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::String* fName = nullptr;
+      const base::String* fName {};
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const simulation::AbstractNib* pNib = player->getNib();
+         const simulation::AbstractNib* pNib {player->getNib()};
          fName = pNib->getFederateName();
       }
       // Now find the model using the player's IDs
@@ -655,14 +651,14 @@ OtwModel* Otw::findModel(const simulation::AbstractPlayer* const player, const T
 int Otw::compareKey2Model(const void* key, const void* model)
 {
    // The Key
-   const OtwModelKey* pKey = static_cast<const OtwModelKey*>(key);
+   const OtwModelKey* pKey {static_cast<const OtwModelKey*>(key)};
 
    // The NIB
-   const OtwModel* const* pp = static_cast<const OtwModel* const*>(model);
-   const OtwModel* pModel = *pp;
+   const OtwModel* const* pp {static_cast<const OtwModel* const*>(model)};
+   const OtwModel* pModel {*pp};
 
    // Default to equal
-   int result = 0;
+   int result {};
 
    // Compare player IDs
    if (pKey->playerID < pModel->getPlayerID()) result = -1;
@@ -670,8 +666,8 @@ int Otw::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const base::String* pKeyFedName = pKey->fName;
-      const base::String* pModelFedName = pModel->getFederateName();
+      const base::String* pKeyFedName {pKey->fName};
+      const base::String* pModelFedName {pModel->getFederateName()};
 
       if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
 
@@ -698,14 +694,14 @@ bool Otw::isResetInProgress() const
 //------------------------------------------------------------------------------
 bool Otw::setRefLatitude(const double v)
 {
-    bool ok = (v <= 90.0 && v >= -90.0);
+    bool ok {v <= 90.0 && v >= -90.0};
     if (ok) refLat = v;
     return ok;
 }
 
 bool Otw::setRefLongitude(const double v)
 {
-    bool ok = (v <= 180.0 && v >= -180.0);
+    bool ok {v <= 180.0 && v >= -180.0};
     if (ok) refLon = v;
     return ok;
 }
@@ -717,11 +713,11 @@ bool Otw::setRefLongitude(const double v)
 // setSlotMaxRange() -- sets the maxRange slot
 bool Otw::setSlotMaxRange(const base::Distance* const msg)
 {
-    bool ok = false;
+    bool ok {};
 
     if (msg != nullptr) {
         // We have a distance which we can convert to meters
-        const double rng = base::Meters::convertStatic(*msg);
+        const double rng {base::Meters::convertStatic(*msg)};
         ok = setMaxRange( rng );
     }
 
@@ -735,7 +731,7 @@ bool Otw::setSlotMaxRange(const base::Distance* const msg)
 // setSlotMaxRange() -- sets the maxRange slot
 bool Otw::setSlotMaxRange(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok {};
 
     if (msg != nullptr) {
         // We have a simple number, which should be meters!
@@ -752,9 +748,9 @@ bool Otw::setSlotMaxRange(const base::Number* const msg)
 // setSlotMaxModels() -- sets the max number of models slot
 bool Otw::setSlotMaxModels(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok {};
     if (num != nullptr) {
-        const int n = num->getInt();
+        const int n {num->getInt()};
         if (n >= 0) {
              ok = setMaxModels( static_cast<unsigned int>(n) );
         }
@@ -767,9 +763,9 @@ bool Otw::setSlotMaxModels(const base::Number* const num)
 
 bool Otw::setSlotMaxElevations(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok {};
     if (num != nullptr) {
-        const int n = num->getInt();
+        const int n {num->getInt()};
         if (n >= 0) {
              ok = setMaxElevations( static_cast<unsigned int>(n) );
         }
@@ -783,7 +779,7 @@ bool Otw::setSlotMaxElevations(const base::Number* const num)
 // latitude: Ref latitude (deg)
 bool Otw::setSlotRefLatitude(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok {};
     if (num != nullptr) {
         ok = setRefLatitude(num->getDouble());
     }
@@ -793,7 +789,7 @@ bool Otw::setSlotRefLatitude(const base::Number* const num)
 // longitude: Ref longitude (deg)
 bool Otw::setSlotRefLongitude(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok {};
     if (num != nullptr) {
         ok = setRefLongitude(num->getDouble());
     }
@@ -803,14 +799,14 @@ bool Otw::setSlotRefLongitude(const base::Number* const num)
 // Sets the list of OTW model type IDs (Otm objects)
 bool Otw::setSlotOtwModelTypes(const base::PairStream* const msg)
 {
-    bool ok = false;
+    bool ok {};
     if (msg != nullptr) {
        // First clear the old table
        clearOtwModelTypes();
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
-       const base::List::Item* item = msg->getFirstItem();
+       const base::List::Item* item {msg->getFirstItem()};
        while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
           const auto otwType = dynamic_cast<const Otm*>( pair->object() );

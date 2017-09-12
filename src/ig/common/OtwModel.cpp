@@ -1,7 +1,7 @@
 
-#include "mixr/otw/OtwModel.hpp"
+#include "mixr/ig/common/OtwModel.hpp"
 
-#include "mixr/otw/Otm.hpp"
+#include "mixr/ig/common/Otm.hpp"
 
 #include "mixr/base/String.hpp"
 
@@ -9,7 +9,7 @@
 #include "mixr/simulation/AbstractNib.hpp"
 
 namespace mixr {
-namespace otw {
+namespace ig {
 
 IMPLEMENT_SUBCLASS(OtwModel, "OtwModel")
 EMPTY_SLOTTABLE(OtwModel)

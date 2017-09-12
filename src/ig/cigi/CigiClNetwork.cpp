@@ -1,7 +1,7 @@
 
-#include "mixr/otw/cigi/CigiClNetwork.hpp"
+#include "mixr/ig/cigi/CigiClNetwork.hpp"
 
-#include "mixr/otw/cigi/OtwCigiCl.hpp"
+#include "mixr/ig/cigi/OtwCigiCl.hpp"
 
 #include "mixr/base/concurrent/SingleTask.hpp"
 #include "mixr/base/network/NetHandler.hpp"
@@ -29,13 +29,13 @@
 #include "cigicl/CigiSensorCtrlV3.h"
 
 namespace mixr {
-namespace otw {
+namespace cigi {
 
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const int MAX_BUF_SIZE = 1472;
-static const double LOS_REQ_TIMEOUT = 2.0;     // one second timeout
+static const int MAX_BUF_SIZE {1472};
+static const double LOS_REQ_TIMEOUT {2.0};     // one second timeout
 
 //==============================================================================
 // CigiClNetworkSignalProcessing class
@@ -45,14 +45,14 @@ public:
    inline CigiClNetworkSignalProcessing(OtwCigiCl* parent) : p(parent) { }
    virtual ~CigiClNetworkSignalProcessing();
 
-   virtual void OnSOF(CigiBasePacket* packet);
-   virtual void OnCollDetSegResp(CigiBasePacket* packet);
-   virtual void OnCollDetVolResp(CigiBasePacket* packet);
-   virtual void OnHatHotResp(CigiBasePacket* packet);
-   virtual void OnHotResp(CigiBasePacket *Packet);
-   virtual void OnIGMsg(CigiBasePacket* packet);
-   virtual void OnLosResp(CigiBasePacket* packet);
-   virtual void OnSensorResp(CigiBasePacket* packet);
+   virtual void OnSOF(CigiBasePacket*);
+   virtual void OnCollDetSegResp(CigiBasePacket*);
+   virtual void OnCollDetVolResp(CigiBasePacket*);
+   virtual void OnHatHotResp(CigiBasePacket*);
+   virtual void OnHotResp(CigiBasePacket*);
+   virtual void OnIGMsg(CigiBasePacket*);
+   virtual void OnLosResp(CigiBasePacket*);
+   virtual void OnSensorResp(CigiBasePacket*);
 
 private:
    OtwCigiCl* p {};
@@ -89,8 +89,7 @@ void CigiClNetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
       const auto m3 = dynamic_cast<CigiHatHotRespV3*> (packet);
       if (m3 != nullptr) {
          p->hatHotResp( m3 );
-      }
-      else {
+      } else {
 
          const auto m3_2 = dynamic_cast<CigiHatHotRespV3_2*> (packet);
          if (m3_2 != nullptr) {
@@ -99,8 +98,7 @@ void CigiClNetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
             resp.SetHot(m3_2->GetHot());
             resp.SetValid(m3_2->GetValid());
             p->hatHotResp( &resp );
-         }
-         else {
+         } else {
             const auto mx3_2 = dynamic_cast<CigiHatHotXRespV3_2*> (packet);
             if (mx3_2 != nullptr) {
                CigiHatHotRespV3 resp;
@@ -174,15 +172,11 @@ unsigned long NetThread::userFunc()
 
 IMPLEMENT_SUBCLASS(CigiClNetwork, "CigiClNetwork")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(CigiClNetwork)
 "netInput",             // 1) Network input handler
 "netOutput",            // 2) Network output handler
 END_SLOTTABLE(CigiClNetwork)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(CigiClNetwork)
    ON_SLOT(1, setSlotNetInput,  base::NetHandler)
    ON_SLOT(2, setSlotNetOutput, base::NetHandler)
@@ -229,7 +223,7 @@ void CigiClNetwork::deleteData()
 //------------------------------------------------------------------------------
 bool CigiClNetwork::initialize(OtwCigiCl* const p)
 {
-   bool ok = BaseClass::initialize(p);
+   bool ok {BaseClass::initialize(p)};
 
    if (ok) {
       // ---
@@ -310,7 +304,7 @@ bool CigiClNetwork::isInitialized()
 //------------------------------------------------------------------------------
 bool CigiClNetwork::initCigiNetwork()
 {
-   bool ok = true;
+   bool ok {true};
 
    // Initialize network input handler
    if (netInput != nullptr) {
@@ -319,8 +313,7 @@ bool CigiClNetwork::initCigiNetwork()
             std::cout << "netInput Initialize OK" << std::endl;
          }
       }
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "CigiClNetwork::initNetwork(): failure to find the network input handler (see slot 'netInput')" << std::endl;
       }
@@ -334,8 +327,7 @@ bool CigiClNetwork::initCigiNetwork()
             std::cout << "netOutput Initialize OK" << std::endl;
          }
       }
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "CigiClNetwork::initNetwork(): failure to find the network output handler (see slot 'netOutput')" << std::endl;
       }
@@ -385,7 +377,7 @@ void CigiClNetwork::endMessage()
 
 int CigiClNetwork::getOutgoingBufferSize()
 {
-   int sendSize = 0;
+   int sendSize {};
    msgOut->GetMsg(sendSize);
    return sendSize;
 }

@@ -117,3 +117,40 @@ graphics library (mixr_graphics)
       Make sure to adjust epp/edl files to account for factory name change.
 
 --------------------------------------------------------------------------------
+
+#####################################################
+Image generation oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+ig library (mixr_ig)
+
+-- Much cleanup of this library by breaking out and making explicit all the IG
+   related code.  This includes all cigi classes now logically grouped within 'cigi'
+   folder.
+
+-- Moved all code common to providing otw capabilities into this library.
+   Explicitly removed specific implementations for CIGI and the simple so-called
+   "PC" visual driver, which was renamed to the "viewpoint" library
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ig library (mixr_ig_cigi)
+
+-- Moved all code common specific to implementing a CIGI driver to this new
+   library.
+   
+-- CigiCl class has been renamed to AbstractCigiCl, as it's abstract.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ig library (mixr_ig_viewpoint)
+
+-- Moved all code common specific to implementing a simple IG host system.
+
+--------------------------------------------------------------------------------
+
+
+
