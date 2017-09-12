@@ -24,20 +24,20 @@ namespace graphics {
 class ReformatScanner : public rfFlexLexer
 {
 public:
-   enum DataType { invalid, number, octal, hex, time, dir };
+   enum class DataType { invalid, number, octal, hex, time, dir };
 
-   ReformatScanner() : rfFlexLexer()   { }
-   virtual ~ReformatScanner()          { }
+   ReformatScanner() : rfFlexLexer()        { }
+   virtual ~ReformatScanner()               { }
 
-   const char* getFormat() const       { return dataType != invalid ? format : nullptr; }
+   const char* getFormat() const            { return dataType != DataType::invalid ? format : nullptr; }
 
-   DataType convertNumber(const char* s);
-   DataType convertOctal(const char* s);
-   DataType convertHex(const char* s);
-   TimeReadout::TimeMode convertTime(const char* s);
-   DirectionReadout::DirMode convertDirection(const char* s);
+   DataType convertNumber(const char*);
+   DataType convertOctal(const char*);
+   DataType convertHex(const char*);
+   TimeReadout::TimeMode convertTime(const char*);
+   DirectionReadout::DirMode convertDirection(const char*);
 
-   bool isPostSign()                   { return postSign; }
+   bool isPostSign()                        { return postSign; }
 
 protected:
    virtual int yylex();
@@ -51,7 +51,7 @@ protected:
    int formatError(const char* text);
 
 private:
-   DataType dataType {invalid};
+   DataType dataType {DataType::invalid};
    char format[256] {};
    bool postSign {};
 };

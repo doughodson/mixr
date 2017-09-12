@@ -15,8 +15,8 @@ namespace nav {
 //------------------------------------------------------------------------------
 // Local status codes
 //------------------------------------------------------------------------------
-enum Status { NORMAL, SPECIAL_CASE, BAD_INPUT, TOO_MANY_LOOPS, POLAR_POINT,
-              IDENTICAL_POINTS, ANTIPODAL_POINTS };
+enum class Status { NORMAL, SPECIAL_CASE, BAD_INPUT, TOO_MANY_LOOPS, POLAR_POINT,
+                    IDENTICAL_POINTS, ANTIPODAL_POINTS };
 
 //==============================================================================
 // Navigation Functions
@@ -950,7 +950,7 @@ bool convertEcef2Geod(
    //---------------------------------------------
    // Initialize Local Variables
    //---------------------------------------------
-   int status  = NORMAL;
+   Status status  = Status::NORMAL;
 
    double rn   = a;
    double phi  = 0.0;
@@ -962,12 +962,12 @@ bool convertEcef2Geod(
    // check status
    //---------------------------------------------
    double polarXY = std::fabs(x) + std::fabs(y);
-   if (polarXY < EPS) { status = POLAR_POINT; }
+   if (polarXY < EPS) { status = Status::POLAR_POINT; }
 
    //---------------------------------------------
    // iterate for accurate latitude and altitude
    //---------------------------------------------
-   if (status == NORMAL) {
+   if (status == Status::NORMAL) {
       while ((++idx <= MAX_LOOPS) && (std::fabs(newH - oldH) > ACCURACY)) {
          const double sinPhi = z / (newH + rn*(1.0 - e2));
          const double q      = z + e2*rn*sinPhi;
@@ -983,13 +983,13 @@ bool convertEcef2Geod(
    //---------------------------------------------
    // re-check status after iteration
    //---------------------------------------------
-   if (idx > MAX_LOOPS) { status = TOO_MANY_LOOPS; }
+   if (idx > MAX_LOOPS) { status = Status::TOO_MANY_LOOPS; }
 
    //---------------------------------------------
    // process based on status
    //---------------------------------------------
    switch (status) {
-      case NORMAL: {
+      case Status::NORMAL: {
          // begin iteration loop
 
          // Calculate Outputs
@@ -999,7 +999,7 @@ bool convertEcef2Geod(
          break;
       } // NORMAL
 
-      case POLAR_POINT: {
+      case Status::POLAR_POINT: {
          if (z < 0.0) {
             *pLat = -90.0;
             *pLon = 0.0;
@@ -1013,7 +1013,7 @@ bool convertEcef2Geod(
          break;
       } // POLAR_POINT
 
-      case TOO_MANY_LOOPS: {
+      case Status::TOO_MANY_LOOPS: {
          break;
       } // TOO_MANY_LOOPS
 
@@ -1023,7 +1023,7 @@ bool convertEcef2Geod(
 
    } // end switch
 
-   return (status == NORMAL || status == POLAR_POINT);
+   return (status == Status::NORMAL || status == Status::POLAR_POINT);
 }
 
 //----------------------------------------------------------
@@ -1065,7 +1065,7 @@ bool convertGeod2Ecef(
    //---------------------------------------------
    // Initialize Local Variables
    //---------------------------------------------
-   int status = NORMAL;
+   Status status = Status::NORMAL;
 
    //---------------------------------------------
    // check status
@@ -1076,34 +1076,34 @@ bool convertGeod2Ecef(
    const bool b4 = (90.0 + lat) < EPS;
 
    if (b1 || b2) {
-      status = BAD_INPUT;
+      status = Status::BAD_INPUT;
    }
    else if (b3 || b4) {
-      status = POLAR_POINT;
+      status = Status::POLAR_POINT;
    }
    else {
-      status = NORMAL;
+      status = Status::NORMAL;
    }
 
    //---------------------------------------------
    // process according to status
    //---------------------------------------------
    switch (status) {
-      case NORMAL: {
+      case Status::NORMAL: {
          *pX = (alt + rn) * cosLat * cosLon;
          *pY = (alt + rn) * cosLat * sinLon;
          *pZ = (alt + rn*(1.0 - e2)) * sinLat;
          break;
       } // NORMAL
 
-      case BAD_INPUT: {
+      case Status::BAD_INPUT: {
          *pX = 0.0;
          *pY = 0.0;
          *pZ = 0.0;
          break;
       } // BAD_INPUT
 
-      case POLAR_POINT: {
+      case Status::POLAR_POINT: {
          *pX = 0.0;
          *pY = 0.0;
          if (lat > 0.0)
@@ -1119,7 +1119,7 @@ bool convertGeod2Ecef(
 
    } // end switch
 
-   return (status == NORMAL || status == POLAR_POINT);
+   return (status == Status::NORMAL || status == Status::POLAR_POINT);
 }
 
 

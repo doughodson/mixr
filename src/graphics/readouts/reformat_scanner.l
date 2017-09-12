@@ -46,43 +46,43 @@
                         }
 
 \+?(0|H)H+:?MM:?SS(\.S+)?\+?  {   // HH:MM:SS (Hours, minutes and seconds)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hhmmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmmss, yytext, yyleng);
                               }
 
 \+?(0|H)H+:?MM(\.M+)?\+?      {   // HH:MM (Hours and minutes)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hhmm, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmm, yytext, yyleng);
                               }
 
 \+?(0|H)H+(\.H+)?\+?    {   // HH (Hours)
-                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::hh, yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hh, yytext, yyleng);
 			}
 
 \+?(0|M)M+:?SS(\.S+)?\+?      {   // MM:SS (Minutes and seconds)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::mmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mmss, yytext, yyleng);
                               }
 
 \+?(0|M)M+(\.M+)?\+?    {   // MM (Minutes)
-                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::mm, yytext, yyleng);
+                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mm, yytext, yyleng);
                         }
 
 \+?(0|S)S+(\.S+)?\+?    {  // SS (Seconds)
-                           return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::ss, yytext, yyleng);
+                           return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::ss, yytext, yyleng);
                         }
 
 \+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?    {   // +DDMMSS (Degrees, minutes and seconds)
-                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::ddmmss, yytext, yyleng);
+                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmmss, yytext, yyleng);
                                         }
 
 \+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?    {   // +DDMM (Degrees and minutes)
-                                       return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::ddmm, yytext, yyleng);
+                                       return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmm, yytext, yyleng);
                                    }
 
 \+?(0|D)D{1,2}(\.D+)?@?\+?    {   // +DD (Degrees)
-                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
                               }
 
 \+?D(\.D+)?@?\+?              {   // +DD (Degrees)
-                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
                               }
 
 %%
@@ -108,11 +108,11 @@ int ReformatScanner::yylex(const DataType dt)
 int ReformatScanner::processInteger(const char* text, const int len)
 {
    switch (dataType) {
-   case number:         // We're looking for a number,
-   case hex:            //   a Hexadecimal number, or
-   case octal:          //   an Octal number.
+   case DataType::number:         // We're looking for a number,
+   case DataType::hex:            //   a Hexadecimal number, or
+   case DataType::octal:          //   an Octal number.
       break;
-   default:             // No, we didn't want any of these
+   default:                       // No, we didn't want any of these
       return formatError(text);
    }
 
@@ -172,13 +172,13 @@ int ReformatScanner::processInteger(const char* text, const int len)
 
    j += std::sprintf(&format[j], "%d", fw);		// Add total field size
 
-   if (dataType == number) {
+   if (dataType == DataType::number) {
       format[j++] = '.';
       format[j++] = '0';
       format[j++] = 'f';
    }
-   else if (dataType == octal) format[j++] = 'o';
-   else if (dataType == hex) format[j++] = 'X';
+   else if (dataType == DataType::octal) format[j++] = 'o';
+   else if (dataType == DataType::hex) format[j++] = 'X';
 
    format[j] = '\0';
 
@@ -193,7 +193,7 @@ int ReformatScanner::processInteger(const char* text, const int len)
 int ReformatScanner::processFloat(const char* text, const int len)
 {
    // Check valid type
-   if (dataType != number)
+   if (dataType != DataType::number)
       return formatError(text);
 
    // ---
@@ -278,7 +278,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
 int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* text, const int len)
 {
    // If not a time data type, exit with an error
-   if (dataType != time)
+   if (dataType != DataType::time)
       return formatError(text);
 
    // Check sign
@@ -448,7 +448,7 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
 int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const char* text, const int len)
 {
    // If not a directional type, return error
-   if (dataType != dir)
+   if (dataType != DataType::dir)
       return formatError(text);
 
    // Check sign
@@ -614,17 +614,17 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
 int ReformatScanner::formatError(const char* text)
 {
    switch (dataType) {
-   case hex:
-   case octal:
+   case DataType::hex:
+   case DataType::octal:
       *yyout << "error: " << text << " is an invalid integer format." << std::endl;
       break;
-   case number:
+   case DataType::number:
       *yyout << "error: " << text << " is an invalid number format." << std::endl;
       break;
-   case time:
+   case DataType::time:
       *yyout << "error: " << text << " is an invalid time format." << std::endl;
       break;
-   case dir:
+   case DataType::dir:
       *yyout << "error: " << text << " is an invalid degree format." << std::endl;
       break;
    default:
@@ -644,13 +644,13 @@ ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return DataType(yylex(number));
+   return DataType(yylex(DataType::number));
 
 // for flex 2.6.0
 // std::istringstream iss(s);
 // yyin.rdbuf(iss.rdbuf());
 // yyrestart(yyin);
-// return DataType(yylex(number));
+// return DataType(yylex(DataType::number));
 }
 
 
@@ -661,13 +661,13 @@ ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return DataType(yylex(octal));
+   return DataType(yylex(DataType::octal));
 
 // for flex 2.6.0
 // std::istringstream iss(s);
 // yyin.rdbuf(iss.rdbuf());
 // yyrestart(yyin);
-// return DataType(yylex(octal));
+// return DataType(yylex(DataType::octal));
 }
 
 
@@ -678,13 +678,13 @@ ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return DataType(yylex(hex));
+   return DataType(yylex(DataType::hex));
 
 // for flex 2.6.0
 // std::istringstream iss(s);
 // yyin.rdbuf(iss.rdbuf());
 // yyrestart(yyin);
-// return DataType(yylex(hex));
+// return DataType(yylex(DataType::hex));
 }
 
 
@@ -696,7 +696,7 @@ TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return TimeReadout::TimeMode(yylex(time));
+   return TimeReadout::TimeMode(yylex(DataType::time));
 
 // for flex 2.6.0
 // std::string str(s);
@@ -704,7 +704,7 @@ TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 // std::istringstream iss(s);
 // yyin.rdbuf(iss.rdbuf());
 // yyrestart(yyin);
-// return TimeReadout::TimeMode(yylex(time));
+// return TimeReadout::TimeMode(yylex(DataType::time));
 }
 
 
@@ -716,7 +716,7 @@ DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return DirectionReadout::DirMode(yylex(dir));
+   return DirectionReadout::DirMode(yylex(DataType::dir));
 
 // for flex 2.6.0
 // std::string str(s);
@@ -724,7 +724,7 @@ DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
 // std::istringstream iss(s);
 // yyin.rdbuf(iss.rdbuf());
 // yyrestart(yyin);
-// return DirectionReadout::DirMode(yylex(dir));
+// return DirectionReadout::DirMode(yylex(DataType::dir));
 }
 
 }

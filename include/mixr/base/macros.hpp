@@ -360,57 +360,57 @@
     }
 
 
-#define BEGIN_STATE_TABLE(ThisType)                                        \
-   unsigned short ThisType::stateTable(                                    \
-         const unsigned short _cstate,                                     \
-         const StateTableCode _code,                                       \
-         const double _dt)                                                 \
-    {                                                                      \
-        unsigned short _next = INVALID_STATE;                              \
-        bool _ok = false;
+#define BEGIN_STATE_TABLE(ThisType)                                                        \
+   unsigned short ThisType::stateTable(                                                    \
+         const unsigned short _cstate,                                                     \
+         const StateTableCode _code,                                                       \
+         const double _dt)                                                                 \
+    {                                                                                      \
+        unsigned short _next = INVALID_STATE;                                              \
+        bool _ok {};
 
 
-#define END_STATE_TABLE()                                                  \
-        return _next;                                                      \
+#define END_STATE_TABLE()                                                                  \
+        return _next;                                                                      \
     }
 
 
-#define STATE_FUNC(state,stateFunc)                                        \
-   if (state == _cstate) {                                                 \
-      if (_code == CURR_STATE) {                                           \
-         setStMach(0, _code);                                              \
-         stateFunc(_dt);                                                   \
-      }                                                                    \
-      else if (_code == TEST_STATE) _next = state;                         \
-      _ok = true;                                                          \
-   }                                                                       \
-   else if (_code == FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
-      _next = state;                                                       \
+#define STATE_FUNC(state,stateFunc)                                                        \
+   if (state == _cstate) {                                                                 \
+      if (_code == StateTableCode::CURR_STATE) {                                           \
+         setStMach(0, _code);                                                              \
+         stateFunc(_dt);                                                                   \
+      }                                                                                    \
+      else if (_code == StateTableCode::TEST_STATE) _next = state;                         \
+      _ok = true;                                                                          \
+   }                                                                                       \
+   else if (_code == StateTableCode::FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
+      _next = state;                                                                       \
    }
 
 
-#define STATE_MACH(state,name)                                             \
-   if (state == _cstate) {                                                 \
-      _ok = setStMach(name, _code);                                        \
-      if (_ok && _code == TEST_STATE) _next = state;                       \
-   }                                                                       \
-   else if (_code == FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
-      _next = state;                                                       \
+#define STATE_MACH(state,name)                                                             \
+   if (state == _cstate) {                                                                 \
+      _ok = setStMach(name, _code);                                                        \
+      if (_ok && _code == StateTableCode::TEST_STATE) _next = state;                       \
+   }                                                                                       \
+   else if (_code == StateTableCode::FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
+      _next = state;                                                                       \
    }
 
 
-#define ANY_STATE_FUNC(stateFunc)                                          \
-   if (_code == CURR_STATE && !_ok) {                                      \
-      setStMach(0, _code);                                                 \
-      stateFunc(_dt);                                                      \
-      _ok = true;                                                          \
-   }                                                                       \
-   else if (_code == TEST_STATE && !_ok) {                                 \
-      _next =_cstate;                                                      \
-      _ok = true;                                                          \
-   }                                                                       \
-   else if (_code == FIND_NEXT_STATE && _next == INVALID_STATE) {          \
-      _next =_cstate + 1;      /* next is just one more! */                \
+#define ANY_STATE_FUNC(stateFunc)                                                          \
+   if (_code == StateTableCode::CURR_STATE && !_ok) {                                      \
+      setStMach(0, _code);                                                                 \
+      stateFunc(_dt);                                                                      \
+      _ok = true;                                                                          \
+   }                                                                                       \
+   else if (_code == StateTableCode::TEST_STATE && !_ok) {                                 \
+      _next =_cstate;                                                                      \
+      _ok = true;                                                                          \
+   }                                                                                       \
+   else if (_code ==StateTableCode:: FIND_NEXT_STATE && _next == INVALID_STATE) {          \
+      _next =_cstate + 1;      /* next is just one more! */                                \
    }
 
 #endif

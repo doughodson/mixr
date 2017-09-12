@@ -48,7 +48,7 @@ BEGIN_SLOT_MAP(AbstractField)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AbstractField)
-    if (mode == input) {
+    if (mode == Mode::input) {
         bool kb {( _event >= 0x20 && _event <= 0x7f )};
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
         ON_EVENT(BACK_SPACE,onBackSpace)
@@ -111,7 +111,7 @@ void AbstractField::deleteData()
     str.empty();
     dmode = 0;
     jmode = base::String::Justify::NONE;
-    mode  = display;
+    mode  = Mode::display;
     icp   = 0;
     inpDspMode = 0;
     inpModeHold = false;
@@ -130,12 +130,12 @@ void AbstractField::updateData(const double dt)
     // ---
     if (inpDspMode != 0) {
         // Auto switch ON input display mode?
-        if ( (mode == input) &&  (icp > 0 || !inpModeHold) ) {
+        if ( (mode == Mode::input) &&  (icp > 0 || !inpModeHold) ) {
             setDisplayMode( inpDspMode );
         }
 
         // Auto swtich OFF input display mode?
-        if ( (mode == display) || (inpModeHold && icp == 0) ) {
+        if ( (mode == Mode::display) || (inpModeHold && icp == 0) ) {
             // If it wasn't previously set by a setSlot() function then turn it off.
             if ( !isDisplayMode(0x1000 & inpDspMode) ) {
                 clearDisplayMode( inpDspMode );
@@ -146,7 +146,7 @@ void AbstractField::updateData(const double dt)
     // ---
     // Update readout during input mode?
     // ---
-    if ( (mode == input) && inpModeHold && icp == 0 ) {
+    if ( (mode == Mode::input) && inpModeHold && icp == 0 ) {
         adjust();
     }
 }
@@ -191,7 +191,7 @@ bool AbstractField::withinField(const int l, const int c) const
 void AbstractField::setText(const char s[])
 {
     origStr = s;
-    if (mode == display) {
+    if (mode == Mode::display) {
         adjust();
     }
 }
@@ -207,7 +207,7 @@ base::String::Justify AbstractField::justification() const
 base::String::Justify AbstractField::justification(const base::String::Justify t)
 {
     jmode = t;
-    if (mode == display) adjust();
+    if (mode == Mode::display) adjust();
     return jmode;
 }
 
@@ -219,7 +219,7 @@ AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
     Mode omode = mode;
     mode = nmode;
 
-    if (nmode == input && omode == display) {
+    if (nmode == Mode::input && omode == Mode::display) {
 
         // When we're entering the INPUT mode ...
 
@@ -231,7 +231,7 @@ AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
         else icp = 0;
 
     }
-    else if (nmode == display && omode == input) {
+    else if (nmode == Mode::display && omode == Mode::input) {
 
         // When we're leaving the INPUT mode ...
 
@@ -297,7 +297,7 @@ int AbstractField::setExample(const char* const example)
 
 void AbstractField::advanceSpace(const int ns)
 {
-    if (mode != input) return;
+    if (mode != Mode::input) return;
     icp += ns;
     while ( icp < static_cast<int>(w) && !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
     if (icp >= static_cast<int>(w)) {
@@ -309,7 +309,7 @@ void AbstractField::advanceSpace(const int ns)
 
 void AbstractField::backSpace(const int ns)
 {
-   if (mode != input) return;
+   if (mode != Mode::input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
    if (startCP > 0 && icp == static_cast<int>(startCP)) {
       event(INPUT_LEFT_EDGE);
@@ -337,7 +337,7 @@ bool AbstractField::setInputCharacterPosition(const unsigned int ii)
 
 char AbstractField::getChar()
 {
-    if (mode == input)
+    if (mode == Mode::input)
         return str.getChar(icp);
     else
         return '\0';
@@ -345,7 +345,7 @@ char AbstractField::getChar()
 
 void AbstractField::setChar(const char c)
 {
-    if (mode != input) return;
+    if (mode != Mode::input) return;
     str.setChar(icp,c);
     advanceSpace();
 }
@@ -385,7 +385,7 @@ bool AbstractField::onBackSpace()
 //------------------------------------------------------------------------------
 bool AbstractField::cursor(int* l, int* c) const
 {
-    if (mode == input) {
+    if (mode == Mode::input) {
         *l = ln;
         *c = cp + icp;
         return true;

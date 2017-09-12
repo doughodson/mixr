@@ -84,7 +84,7 @@ class Display : public Page
    DECLARE_SUBCLASS(Display, Page)
 
 public:
-   enum Orientation { NORMAL, CW90, CCW90, INVERTED };
+   enum class Orientation { NORMAL, CW90, CCW90, INVERTED };
 
 public:
    Display();
@@ -332,29 +332,29 @@ private:
     bool processTextures();
     bool processMaterials();
 
-    std::string name;                  // Display name
-    base::PairStream* subdisplays {};  // Sub-displays
+    std::string name;                               // Display name
+    base::PairStream* subdisplays {};               // Sub-displays
 
-    Graphic* focusPtr {};              // Input focus
-    base::PairStream* materials {};    // list of material objects
+    Graphic* focusPtr {};                           // Input focus
+    base::PairStream* materials {};                 // list of material objects
 
-    base::PairStream* textures {};     // List of textures
+    base::PairStream* textures {};                  // List of textures
 
-    GLsizei  vpX {-1}, vpY {-1};             // viewport size
+    GLsizei  vpX {-1}, vpY {-1};                    // viewport size
     GLsizei  vpWidth {300}, vpHeight {300};
 
-    GLdouble oLeft {-0.5}, oRight {640.5};   // Ortho parameters
+    GLdouble oLeft {-0.5}, oRight {640.5};          // Ortho parameters
     GLdouble oBottom {-0.5}, oTop {480.5};
     GLdouble oNear {-1.0}, oFar {1.0};
 
-    GLfloat linewidth {1.0};              // Current Linewidth (last glLineWidth())
-    GLfloat stdLinewidth {1.0};           // Standard linewidth
+    GLfloat linewidth {1.0};                        // Current Linewidth (last glLineWidth())
+    GLfloat stdLinewidth {1.0};                     // Standard linewidth
 
-    bool subdisplayFlg {};                // We're a sub-display
-    bool antialias {true};                // Anti-alias flag  (default on)
-    int mx {}, my {};                     // Mouse x, y
+    bool subdisplayFlg {};                          // We're a sub-display
+    bool antialias {true};                          // Anti-alias flag  (default on)
+    int mx {}, my {};                               // Mouse x, y
 
-    Orientation orientation {NORMAL};     // Display orientation
+    Orientation orientation {Orientation::NORMAL};  // Display orientation
 
     GLclampd clearDepth {-1.0};           // Display clear depth
     base::PairStream* colorTable {};      // Color table

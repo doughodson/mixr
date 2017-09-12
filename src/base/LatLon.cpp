@@ -47,7 +47,7 @@ void LatLon::copyData(const LatLon& org, const bool)
 void LatLon::computeVal()
 {
     val = deg + (static_cast<double>(min) + static_cast<double>(sec)/60.0) / 60.0;
-    if (dir == SOUTH || dir == WEST) val = -val;
+    if (dir == Dir::SOUTH || dir == Dir::WEST) val = -val;
 }
 
 //------------------------------------------------------------------------------
@@ -57,20 +57,20 @@ void LatLon::computeVal()
 // Sets direction
 bool LatLon::setDir(const char* const d)
 {
-    dir = NONE;
+    dir = Dir::NONE;
     if (d != nullptr) {
-        if (d[0] == 'N' || d[0] == 'n')      dir = NORTH;
-        else if (d[0] == 'S' || d[0] == 's') dir = SOUTH;
-        else if (d[0] == 'E' || d[0] == 'e') dir = EAST;
-        else if (d[0] == 'W' || d[0] == 'w') dir = WEST;
+        if (d[0] == 'N' || d[0] == 'n')      dir = Dir::NORTH;
+        else if (d[0] == 'S' || d[0] == 's') dir = Dir::SOUTH;
+        else if (d[0] == 'E' || d[0] == 'e') dir = Dir::EAST;
+        else if (d[0] == 'W' || d[0] == 'w') dir = Dir::WEST;
     }
 
-    if (dir == NONE && d != nullptr) {
+    if (dir == Dir::NONE && d != nullptr) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "LatLon::setDir: invalid lat/long direction: " << d << std::endl;
         }
     }
-    return (dir != NONE);
+    return (dir != Dir::NONE);
 }
 
 // Sets degrees, minutes, seconds -- then calls computeVal().
@@ -79,7 +79,7 @@ bool LatLon::setDeg(const double d)
    bool ok = true;
 
    double dd = std::fabs(d);
-   if (dir == NORTH || dir == SOUTH) {
+   if (dir == Dir::NORTH || dir == Dir::SOUTH) {
       // check for valid degree numbers
       if (dd > 90.0) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -88,7 +88,7 @@ bool LatLon::setDeg(const double d)
          ok = false;
       }
    }
-   else if (dir == EAST || dir == WEST) {
+   else if (dir == Dir::EAST || dir == Dir::WEST) {
       // check for valid degree numbers
       if (dd > 180.0) {
          if (isMessageEnabled(MSG_ERROR)) {

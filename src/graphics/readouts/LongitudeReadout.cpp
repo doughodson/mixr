@@ -16,7 +16,7 @@ LongitudeReadout::LongitudeReadout()
    STANDARD_CONSTRUCTOR()
 
    base::utStrcpy(format, FORMAT_LENGTH, "%+04d@%04.1f");
-   tmode = ddmm;
+   tmode = DirMode::ddmm;
    plusChar = 'E';
    minusChar = 'W';
    postSign = false;

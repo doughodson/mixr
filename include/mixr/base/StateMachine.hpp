@@ -218,8 +218,8 @@ public:
    virtual void reset() override;
 
 protected:
-   enum Mode { HOLD_STATE, NEW_STATE, RTN_STATE };
-   enum StateTableCode { CURR_STATE, TEST_STATE, FIND_NEXT_STATE };
+   enum class Mode { HOLD_STATE, NEW_STATE, RTN_STATE };
+   enum class StateTableCode { CURR_STATE, TEST_STATE, FIND_NEXT_STATE };
 
    // Current mode
    Mode getMode() const                { return mode; }
@@ -322,12 +322,12 @@ private:
    unsigned short nState {INVALID_STATE};     // Next state number
    unsigned short nSubstate {INVALID_STATE};  // Next substate number
    safe_ptr<Object> nArg;                     // Next argument
-   Mode nMode {HOLD_STATE};                   // Next mode
+   Mode nMode {Mode::HOLD_STATE};             // Next mode
 
    // Current state
    unsigned short state {INVALID_STATE};      // Current state number
    unsigned short substate {INVALID_STATE};   // Current substate number
-   Mode mode {HOLD_STATE};                    // Current mode
+   Mode mode {Mode::HOLD_STATE};              // Current mode
    safe_ptr<Object> arg;                      // Current argument
    StateMachine* stMach {};                   // Current state's state machine object
    Identifier* stMachName {};                 // Current state's state machine name

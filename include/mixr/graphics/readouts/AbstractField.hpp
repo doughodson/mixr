@@ -168,7 +168,7 @@ class AbstractField : public Graphic
    DECLARE_SUBCLASS(AbstractField, Graphic)
 
 public:
-   enum Mode { display, input };
+   enum class Mode { display, input };
 
    enum {
           // display modes
@@ -264,7 +264,7 @@ protected:
    base::String origStr;               // Original text saved by setText
    base::String inputExample;          // Input Template String
    base::String str;                   // Text stored in field
-   Mode mode {display};                // Current mode
+   Mode mode {Mode::display};          // Current mode
    int icp {};                         // Input character pointer
    int inpDspMode {};                  // Auto switches to this display mode during input mode
    bool inpModeHold {};                // Hold input mode until after first input character

@@ -16,7 +16,7 @@ LatitudeReadout::LatitudeReadout()
    STANDARD_CONSTRUCTOR()
 
    base::utStrcpy(format, FORMAT_LENGTH, "%+03d@%04.1f");
-   tmode = ddmm;
+   tmode = DirMode::ddmm;
    plusChar = 'N';
    minusChar = 'S';
    postSign = false;

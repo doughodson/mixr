@@ -69,7 +69,7 @@ class LatLon : public Number
    DECLARE_SUBCLASS(LatLon, Number)
 
 public:
-   enum Dir { NONE, NORTH, SOUTH, EAST, WEST };
+   enum class Dir { NONE, NORTH, SOUTH, EAST, WEST };
 
    LatLon();
 
@@ -88,10 +88,10 @@ protected:
    bool setSec(const double seconds);
 
 private:
-   Dir     dir {NONE};  // direction
-   int     deg {};      // degrees
-   int     min {};      // minutes
-   double  sec {};      // seconds
+   Dir    dir {Dir::NONE};  // direction
+   int    deg {};           // degrees
+   int    min {};           // minutes
+   double sec {};           // seconds
 
 private:
    // slot table helper methods

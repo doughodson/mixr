@@ -532,11 +532,11 @@ void Display::drawIt()
    configure();
    clear();
 
-   if (getDisplayOrientation() != NORMAL) {
+   if (getDisplayOrientation() != Orientation::NORMAL) {
       glPushMatrix();
-      if (getDisplayOrientation() == CW90)
+      if (getDisplayOrientation() == Orientation::CW90)
          glRotated(-90.0, 0.0, 0.0, 1.0);
-      else if (getDisplayOrientation() == CCW90)
+      else if (getDisplayOrientation() == Orientation::CCW90)
          glRotated(90.0, 0.0, 0.0, 1.0);
       else
          glRotated(180.0, 0.0, 0.0, 1.0);
@@ -545,7 +545,7 @@ void Display::drawIt()
    // Draw the display
    draw();
 
-   if (getDisplayOrientation() != NORMAL) {
+   if (getDisplayOrientation() != Orientation::NORMAL) {
       glPopMatrix();
    }
 
@@ -701,7 +701,7 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
 
    // now we are going to scissor a small box using our window coordinates
    glEnable(GL_SCISSOR_TEST);
-   if (getDisplayOrientation() == CCW90) {
+   if (getDisplayOrientation() == Orientation::CCW90) {
       // 90 degrees Counter-clockwise rotation
       GLint x = static_cast<GLint>(winx1);
       GLint y = static_cast<GLint>(winy0);
@@ -709,7 +709,7 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
       GLsizei height = static_cast<GLsizei>(winy1 - winy0);
       glScissor(x, y, width, height);
    }
-   else if (getDisplayOrientation() == CW90) {
+   else if (getDisplayOrientation() == Orientation::CW90) {
       // 90 degrees Counter-clockwise rotation
       GLint x = static_cast<GLint>(winx0);
       GLint y = static_cast<GLint>(winy1);
@@ -717,7 +717,7 @@ void Display::setScissor(const GLdouble scissorLeft, const GLdouble scissorRight
       GLsizei height = static_cast<GLsizei>(winy0 - winy1);
       glScissor(x, y, width, height);
    }
-   else if (getDisplayOrientation() == INVERTED) {
+   else if (getDisplayOrientation() == Orientation::INVERTED) {
       // Normal
       GLint x = static_cast<GLint>(winx1);
       GLint y = static_cast<GLint>(winy1);
@@ -1739,10 +1739,10 @@ bool Display::setSlotClearDepth(const base::Number* const msg)
 bool Display::setSlotDisplayOrientation(const base::String* const msg)
 {
    bool ok {};
-   if (*msg == "normal")        { setDisplayOrientation(NORMAL);   ok = true; }
-   else if (*msg == "cw90")     { setDisplayOrientation(CW90);     ok = true; }
-   else if (*msg == "ccw90")    { setDisplayOrientation(CCW90);    ok = true; }
-   else if (*msg == "inverted") { setDisplayOrientation(INVERTED); ok = true; }
+   if (*msg == "normal")        { setDisplayOrientation(Orientation::NORMAL);   ok = true; }
+   else if (*msg == "cw90")     { setDisplayOrientation(Orientation::CW90);     ok = true; }
+   else if (*msg == "ccw90")    { setDisplayOrientation(Orientation::CCW90);    ok = true; }
+   else if (*msg == "inverted") { setDisplayOrientation(Orientation::INVERTED); ok = true; }
    return ok;
 }
 

@@ -71,7 +71,7 @@ void Timer::reset()                          { stop(); ctime = timerValue; }
 void Timer::reset(const double rtime)        { stop(); timerValue = rtime; reset(); }
 void Timer::restart()                        { reset(); start(); }
 void Timer::restart(const double rtime)      { reset(rtime); start(); }
-void Timer::update(const double dt)          { if (active && !frz) { ctime += (dir == UP ? dt : -dt); } }
+void Timer::update(const double dt)          { if (active && !frz) { ctime += (dir == Type::UP ? dt : -dt); } }
 bool Timer::alarm(const double atime)        { alarmTime = atime; return alarm(); }
 bool Timer::setCurrentTime(const double sec) { ctime = sec; return true; }
 bool Timer::setAlarmTime(const double sec)   { alarmTime = sec; return true; }
@@ -86,7 +86,7 @@ bool Timer::freeze(const bool ff)
 
 bool Timer::alarm() const
 {
-    if (active) return dir == UP ? (ctime >= alarmTime) : (ctime <= alarmTime);
+    if (active) return dir == Type::UP ? (ctime >= alarmTime) : (ctime <= alarmTime);
     else return false;
 }
 
@@ -195,7 +195,7 @@ EMPTY_SLOTTABLE(UpTimer)
 EMPTY_COPYDATA(UpTimer)
 EMPTY_DELETEDATA(UpTimer)
 
-UpTimer::UpTimer(const double rtime) : Timer(UP, rtime)
+UpTimer::UpTimer(const double rtime) : Timer(Type::UP, rtime)
 {
 }
 
@@ -208,7 +208,7 @@ EMPTY_SLOTTABLE(DownTimer)
 EMPTY_COPYDATA(DownTimer)
 EMPTY_DELETEDATA(DownTimer)
 
-DownTimer::DownTimer(const double rtime) : Timer(DOWN, rtime)
+DownTimer::DownTimer(const double rtime) : Timer(Type::DOWN, rtime)
 {
 }
 

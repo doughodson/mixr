@@ -75,7 +75,7 @@ double DirectionReadout::getInputValue() const
 
    switch (tmode) {
 
-      case ddmmss : {   // Degrees, Minutes, and seconds
+      case DirMode::ddmmss : {   // Degrees, Minutes, and seconds
          double degs {};
          double min {};
          double sec {};
@@ -86,7 +86,7 @@ double DirectionReadout::getInputValue() const
       }
       break;
 
-      case ddmm : { // Degrees and minutes
+      case DirMode::ddmm : { // Degrees and minutes
          double degs {};
          double min {};
          std::sscanf(cbuf, "%lf@%lf", &degs, &min);
@@ -95,12 +95,12 @@ double DirectionReadout::getInputValue() const
       }
       break;
 
-      case dd : {   // Degrees only
+      case DirMode::dd : {   // Degrees only
          std::sscanf(cbuf, "%lf", &value);
       }
       break;
 
-      case invalid: {   // not handled
+      case DirMode::invalid: {   // not handled
       }
       break;
    }
@@ -121,7 +121,7 @@ void DirectionReadout::makeText()
 
    switch (tmode) {
 
-      case ddmmss : { // Degrees, Minutes, and seconds
+      case DirMode::ddmmss : { // Degrees, Minutes, and seconds
          int     ideg {static_cast<int>(degrees)};
          double  min  {(degrees - static_cast<double>(ideg))*60.0};
          int     imin {static_cast<int>(min)};
@@ -131,7 +131,7 @@ void DirectionReadout::makeText()
       }
       break;
 
-      case ddmm : {   // Degrees and minutes
+      case DirMode::ddmm : {   // Degrees and minutes
          int     ideg {static_cast<int>(degrees)};
          double  min  {(degrees - static_cast<double>(ideg))*60.0};
          if (neg) ideg = -ideg;
@@ -139,13 +139,13 @@ void DirectionReadout::makeText()
       }
       break;
 
-      case dd : { // Degrees only
+      case DirMode::dd : { // Degrees only
          if (neg) degrees = -degrees;
          std::sprintf(cbuf, format, degrees);
       }
       break;
 
-      case invalid: {   // not handled
+      case DirMode::invalid: {   // not handled
       }
       break;
    }
@@ -165,7 +165,7 @@ void DirectionReadout::makeText()
 void DirectionReadout::reformat(const char* const example)
 {
    DirMode results {reformatter->convertDirection(example)};
-   if (results != invalid) {
+   if (results != DirMode::invalid) {
       setExample(example);
       base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());
       tmode = results;

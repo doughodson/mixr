@@ -48,7 +48,7 @@ class DirectionReadout : public NumericReadout
    DECLARE_SUBCLASS(DirectionReadout, NumericReadout)
 
 public:
-   enum DirMode { invalid, ddmmss, ddmm, dd };
+   enum class DirMode { invalid, ddmmss, ddmm, dd };
    DirectionReadout();
    virtual char filterInputEvent(const int event, const int tc) override;
    virtual double getInputValue() const override;
@@ -56,7 +56,7 @@ public:
 protected:
    virtual void makeText() override;
    virtual void reformat(const char* const example) override;
-   DirMode tmode {dd};
+   DirMode tmode {DirMode::dd};
 };
 
 }

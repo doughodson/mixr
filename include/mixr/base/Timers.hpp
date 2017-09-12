@@ -26,7 +26,7 @@ class Timer : public Object
     DECLARE_SUBCLASS(Timer, Object)
 
 public:
-    enum Type { UP, DOWN };        // Timer type/direction
+    enum class Type { UP, DOWN };        // Timer type/direction
 
     static  const unsigned int MAX_TIMERS {MIXR_CONFIG_MAX_INTERVAL_TIMERS};
 
@@ -95,7 +95,7 @@ private:
     double alarmTime {};       // Alarm time (seconds).
     double timerValue {};      // Timer value (seconds).
     bool   active {};          // Active flag.
-    Type dir {DOWN};           // Direction up/down.
+    Type dir {Type::DOWN};     // Direction up/down.
 
     static bool frz;                   // Freeze all timers (freeze time)
     static Timer* timers[MAX_TIMERS];  // List of timers

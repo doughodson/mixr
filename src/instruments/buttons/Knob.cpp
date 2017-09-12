@@ -181,7 +181,7 @@ void Knob::computeRotation()
         lastAngle = angle;
         //std::cout << "START X , Y = " << startX << ", " << startY << std::endl;
         //std::cout << "POSITION X, Y = " << posMoveX << ", " << posMoveY << std::endl;
-        if (myDisplay->getDisplayOrientation() == graphics::Display::CCW90) {
+        if (myDisplay->getDisplayOrientation() == graphics::Display::Orientation::CCW90) {
            angle = atan2f(static_cast<float>(posMoveX), static_cast<float>(posMoveY));
         }
         else {

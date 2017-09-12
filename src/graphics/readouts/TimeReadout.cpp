@@ -82,7 +82,7 @@ double TimeReadout::getInputValue() const
 
    switch (tmode) {
 
-      case hhmmss : {        // Hours, Minutes, and seconds
+      case TimeMode::hhmmss : {        // Hours, Minutes, and seconds
          int   hrs = 0;
          int   min = 0;
          float sec = 0.0f;
@@ -96,7 +96,7 @@ double TimeReadout::getInputValue() const
       }
       break;
 
-      case hhmm : { // Hours and minutes
+      case TimeMode::hhmm : { // Hours and minutes
          int   hrs = 0;
          float min = 0.0f;
          std::sscanf(cbuf, format1, &hrs, &min);
@@ -107,14 +107,14 @@ double TimeReadout::getInputValue() const
       }
       break;
 
-      case hh : {   // Hours only
+      case TimeMode::hh : {   // Hours only
          float hrs = 0.0f;
          std::sscanf(cbuf, format1, &hrs);
          value = hrs*3600.0f;
       }
       break;
 
-      case mmss : { // Minutes and seconds
+      case TimeMode::mmss : { // Minutes and seconds
          int   min = 0;
          float sec = 0.0f;
          std::sscanf(cbuf, format1, &min, &sec);
@@ -124,21 +124,21 @@ double TimeReadout::getInputValue() const
       }
       break;
 
-      case mm : {   // Minutes only
+      case TimeMode::mm : {   // Minutes only
          float min = 0.0;
          std::sscanf(cbuf, format1, &min);
          value = min*60.0f;
       }
       break;
 
-      case ss : {   // Seconds only
+      case TimeMode::ss : {   // Seconds only
          float sec = 0.0;
          std::sscanf(cbuf, format1, &sec);
          value = sec;
       }
       break;
 
-      case invalid: {     // not handled
+      case TimeMode::invalid: {     // not handled
       }
       break;
    }
@@ -159,7 +159,7 @@ void TimeReadout::makeText()
 
    switch (tmode) {
 
-      case hhmmss : { // Hours, Minutes, and seconds
+      case TimeMode::hhmmss : { // Hours, Minutes, and seconds
          double minutes = seconds/60.0f;
          const auto ihrs = static_cast<int>(minutes/60.0f);
          const auto min = minutes - static_cast<double>(ihrs*60);
@@ -176,7 +176,7 @@ void TimeReadout::makeText()
       }
       break;
 
-      case hhmm : {   // Hours and minutes
+      case TimeMode::hhmm : {   // Hours and minutes
          double minutes = seconds/60.0f;
          const auto ihrs = static_cast<int>(minutes/60.0f);
          double min = minutes - static_cast<double>(ihrs*60);
@@ -191,14 +191,14 @@ void TimeReadout::makeText()
       }
       break;
 
-      case hh : { // Hours only
+      case TimeMode::hh : { // Hours only
          double hrs = getFloat()/3600.0f;
          if (neg) hrs = -hrs;
          std::sprintf(cbuf, format, hrs);
       }
       break;
 
-      case mmss : {   // Minutes and seconds
+      case TimeMode::mmss : {   // Minutes and seconds
          int  imin = static_cast<int>(seconds/60.0f);
          double sec = seconds - static_cast<double>(imin*60);
          std::sprintf(cbuf, format, imin, sec);
@@ -212,20 +212,20 @@ void TimeReadout::makeText()
       }
       break;
 
-      case mm : { // Minutes only
+      case TimeMode::mm : { // Minutes only
          double min = seconds/60.0f;
          if (neg) min = -min;
          std::sprintf(cbuf, format, min);
       }
       break;
 
-      case ss : { // Seconds only
+      case TimeMode::ss : { // Seconds only
          if (neg) seconds = -seconds;
          std::sprintf(cbuf, format, seconds);
       }
       break;
 
-      case invalid: {     // not handled
+      case TimeMode::invalid: {     // not handled
       }
       break;
    }
@@ -237,7 +237,7 @@ void TimeReadout::makeText()
 void TimeReadout::reformat(const char* const example)
 {
    TimeMode results = reformatter->convertTime(example);
-   if (results != invalid) {
+   if (results != TimeMode::invalid) {
       setExample(example);
       base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());
       tmode = results;

@@ -90,10 +90,25 @@ base library (mixr_base)
       The only difference is the shift from using 'unsigned int' to 'int' to
       report a parser calculated and returned error count.
 	  
-	  
-   String class
-      1) Limited scope of Justify enum to 'enum class.' This constrains the scope of
+   LatLon class
+      1) Limited scope of 'Dir' enum to 'enum class'. This constrains the scope of
          this enumerated type.
+
+   StateMachine class
+      1) Limited scope of 'Mode' and 'StateTableCode' enums to 'enum class'. This
+         constrains the scope of this enumerated type.
+		 
+   String class
+      1) Limited scope of 'Justify' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   Timer classes
+      1) Limited scope of 'Type' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   util/nav_utils
+      1) Limited scope of 'Status' enum to 'enum class'. This constrains the scope of
+         this enumerated type.  Updated code that used this type.
 
 --------------------------------------------------------------------------------
 
@@ -121,6 +136,26 @@ graphics library (mixr_graphics)
          FTGLTextureFonts -> FTGLTextureFont
          FTGLHaloFonts -> FTGLHaloFont
       Make sure to adjust epp/edl files to account for factory name change.
+
+   readouts/AbstractField class
+      1) Limited scope of 'Mode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/DirectionReadout class
+      1) Limited scope of 'DirMode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/ReformatScanner class
+      1) Limited scope of 'DataType' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/TimeReadout class
+      1) Limited scope of 'TimeMode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   Display class
+      1) Limited scope of 'Orientation' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
 
 --------------------------------------------------------------------------------
 

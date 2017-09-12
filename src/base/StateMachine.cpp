@@ -55,7 +55,7 @@ void StateMachine::copyData(const StateMachine& org, const bool cc)
 
 void StateMachine::deleteData()
 {
-   setStMach(nullptr,CURR_STATE);
+   setStMach(nullptr, StateTableCode::CURR_STATE);
    setSlotStateMachines(nullptr);
 }
 
@@ -116,26 +116,26 @@ void StateMachine::step(const double dt)
    // ---
    // 1) If requested, step into a new state
    // ---
-   if (nMode == NEW_STATE) {
+   if (nMode == Mode::NEW_STATE) {
       pState = state;
       state = nState;
       arg = nArg;
-      mode = NEW_STATE;
+      mode = Mode::NEW_STATE;
    }
-   else if (nMode == RTN_STATE) {
+   else if (nMode == Mode::RTN_STATE) {
       pState = state;
       state = nState;
       arg = nArg;
-      mode = RTN_STATE;
+      mode = Mode::RTN_STATE;
    }
    else { // (nMode == HOLD_STATE)
       pState = state;
       arg = nullptr;
-      mode = HOLD_STATE;
+      mode = Mode::HOLD_STATE;
    }
    nState = INVALID_STATE;
    nArg = nullptr;
-   nMode = HOLD_STATE;
+   nMode = Mode::HOLD_STATE;
 
    // always step the substate
    pSubstate = substate;
@@ -153,7 +153,7 @@ void StateMachine::step(const double dt)
    //    or sets this state's child state machine, 'stMach'.
    // ---
    {
-      stateTable(state, CURR_STATE, dt);
+      stateTable(state, StateTableCode::CURR_STATE, dt);
 
       // Send state exit events to the previous state's state machine
       if (pStMach != nullptr) {
@@ -162,11 +162,11 @@ void StateMachine::step(const double dt)
       }
 
       if (stMach != nullptr) {
-         if (mode == NEW_STATE) {
+         if (mode == Mode::NEW_STATE) {
             // Send state entry events
             stMach->event(ON_ENTRY);
          }
-         else if (mode == RTN_STATE) {
+         else if (mode == Mode::RTN_STATE) {
             // Send returning events
             stMach->event(ON_RETURN);
          }
@@ -189,12 +189,12 @@ void StateMachine::step(const double dt)
 bool StateMachine::next(Object* const arg)
 {
    bool ok = false;
-   unsigned short newState = stateTable(state, FIND_NEXT_STATE);
+   unsigned short newState = stateTable(state, StateTableCode::FIND_NEXT_STATE);
    if (newState != INVALID_STATE) {
       nState = newState;
       nSubstate = INIT_STATE;
       nArg = arg;
-      nMode = NEW_STATE;
+      nMode = Mode::NEW_STATE;
       ok = true;
    }
    return ok;
@@ -203,12 +203,12 @@ bool StateMachine::next(Object* const arg)
 bool StateMachine::goTo(const unsigned short newState, Object* const arg)
 {
    bool ok = false;
-   unsigned short test = stateTable(newState, TEST_STATE);
+   unsigned short test = stateTable(newState, StateTableCode::TEST_STATE);
    if (test != INVALID_STATE) {
       nState = newState;
       nSubstate = INIT_STATE;
       nArg = arg;
-      nMode = NEW_STATE;
+      nMode = Mode::NEW_STATE;
       ok = true;
    }
    return ok;
@@ -218,14 +218,14 @@ bool StateMachine::call(const unsigned short newState, Object* const arg)
 {
    bool ok = false;
    if (sp > 0) {
-      unsigned short test = stateTable(newState, TEST_STATE);
+      unsigned short test = stateTable(newState, StateTableCode::TEST_STATE);
       if (test != INVALID_STATE) {
          stateStack[--sp] = state;
          substateStack[sp] = substate;
          nState = newState;
          nSubstate = INIT_STATE;
          nArg = arg;
-         nMode = NEW_STATE;
+         nMode = Mode::NEW_STATE;
          ok = true;
       }
    }
@@ -239,7 +239,7 @@ bool StateMachine::rtn(Object* const arg)
       nSubstate = substateStack[sp];
       nState = stateStack[sp++];
       nArg = arg;
-      nMode = RTN_STATE;
+      nMode = Mode::RTN_STATE;
       ok = true;
    }
    return ok;
@@ -320,7 +320,7 @@ bool StateMachine::onEntry(Object* const msg)
 {
    nState = INIT_STATE;
    nArg = msg;
-   nMode = NEW_STATE;
+   nMode = Mode::NEW_STATE;
    nSubstate = INIT_STATE;
    return true;
 }
@@ -329,7 +329,7 @@ bool StateMachine::onExit()
 {
    state = INVALID_STATE;
    stMach = nullptr;
-   mode = HOLD_STATE;
+   mode = Mode::HOLD_STATE;
    arg = nullptr;
 
    pState = INVALID_STATE;
@@ -347,7 +347,7 @@ bool StateMachine::onReturn(Object* const msg)
       // or just goto the reset state
       nState = INIT_STATE;
       nArg = msg;
-      nMode = RTN_STATE;
+      nMode = Mode::RTN_STATE;
       nSubstate = INIT_STATE;
    }
    return true;
@@ -397,7 +397,7 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 {
    bool ok = false;
 
-   if (code == CURR_STATE) {
+   if (code == StateTableCode::CURR_STATE) {
 
       // Current state is now also the previous state
       StateMachine* oldStMach = stMach;

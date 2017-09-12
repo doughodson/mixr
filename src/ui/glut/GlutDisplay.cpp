@@ -437,11 +437,11 @@ graphics::Graphic* GlutDisplay::pick(const int item)
    glOrtho(oLeft, oRight, oBottom, oTop, oNear, oFar);
    glMatrixMode(GL_MODELVIEW);
 
-   if (getDisplayOrientation() != NORMAL) {
+   if (getDisplayOrientation() != Orientation::NORMAL) {
       glPushMatrix();
-      if (getDisplayOrientation() == CW90)
+      if (getDisplayOrientation() == Orientation::CW90)
          glRotated(-90.0, 0.0, 0.0, 1.0);
-      else if (getDisplayOrientation() == CCW90)
+      else if (getDisplayOrientation() == Orientation::CCW90)
          glRotated(90.0, 0.0, 0.0, 1.0);
       else
          glRotated(180.0, 0.0, 0.0, 1.0);
@@ -458,7 +458,7 @@ graphics::Graphic* GlutDisplay::pick(const int item)
 
    GLint hits = glRenderMode(GL_RENDER);
 
-   if (getDisplayOrientation() != NORMAL) glPopMatrix();
+   if (getDisplayOrientation() != Orientation::NORMAL) glPopMatrix();
 
    Graphic* selected = findSelected(hits, sbuff, item);
 
