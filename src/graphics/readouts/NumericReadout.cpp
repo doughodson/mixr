@@ -65,7 +65,7 @@ NumericReadout::NumericReadout()
 
    maxNum = base::UNDEFINED_VALUE;
    base::utStrcpy(format, FORMAT_LENGTH, "%.0f");
-   justification(base::String::RIGHT);
+   justification(base::String::Justify::RIGHT);
 }
 
 void NumericReadout::copyData(const NumericReadout& org, const bool)

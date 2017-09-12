@@ -68,16 +68,15 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
    // or trailing spaces.
    // ---
 
-   if (j != NONE) {
+   if (j != Justify::NONE) {
       // Justified:  copy without leading or trailing spaces
-      const char* p = origStr;
-      char* q = sbuf;
+      const char* p {origStr};
+      char* q {sbuf};
       while (*p != '\0' && *p == ' ') { p++; }
       while (*p != '\0' && q <= &sbuf[MAX_STRING_LENGTH-1]) { *q++ = *p++; }
       *q-- = '\0';
       while (*q == ' ' && q >= sbuf) { *q-- = ' '; }
-   }
-   else {
+   } else {
       // Not justified:  change our source buffer pointer to the orig string
       ss = origStr;
    }
@@ -98,8 +97,8 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
    switch (j) {
 
       // NONE or LEFT justified
-      case NONE :
-      case LEFT :
+      case Justify::NONE :
+      case Justify::LEFT :
       {
          if (d < 0) l1 += d;
          while (i1 < l1) { dbuf[i2++] = ss[i1++]; }
@@ -108,7 +107,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
       break;
 
       // RIGHT justified
-      case RIGHT : {
+      case Justify::RIGHT : {
          if (d < 0) i1 = -d;
          while (i2 < d)  { dbuf[i2++] = ' '; }
          while (i1 < l1) { dbuf[i2++] = ss[i1++]; }
@@ -116,7 +115,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
       break;
 
       // CENTER justified
-      case CENTER : {
+      case Justify::CENTER : {
          int n1 = d/2;
          if (d < 0) { i1 = -n1; l1 += (d-n1); }
          while (i2 < n1) { dbuf[i2++] = ' '; }

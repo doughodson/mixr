@@ -89,6 +89,12 @@ base library (mixr_base)
 
       The only difference is the shift from using 'unsigned int' to 'int' to
       report a parser calculated and returned error count.
+	  
+	  
+   String class
+      1) Limited scope of Justify enum to 'enum class.' This constrains the scope of
+         this enumerated type.
+
 --------------------------------------------------------------------------------
 
 #####################################################

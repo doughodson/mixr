@@ -77,7 +77,7 @@ END_EVENT_HANDLER()
 AbstractField::AbstractField()
 {
     STANDARD_CONSTRUCTOR()
-    jmode = base::String::NONE;
+    jmode = base::String::Justify::NONE;
 }
 
 void AbstractField::copyData(const AbstractField& org, const bool)
@@ -110,7 +110,7 @@ void AbstractField::deleteData()
     w  = 0;
     str.empty();
     dmode = 0;
-    jmode = base::String::NONE;
+    jmode = base::String::Justify::NONE;
     mode  = display;
     icp   = 0;
     inpDspMode = 0;
@@ -713,13 +713,13 @@ bool AbstractField::setSlotJustification(const base::String* const sjobj)
 
         // Set our justification
         if ( *sjobj == "none" )
-            justification(base::String::NONE);
+            justification(base::String::Justify::NONE);
         else if ( *sjobj == "left" )
-            justification(base::String::LEFT);
+            justification(base::String::Justify::LEFT);
         else if ( *sjobj == "center" )
-            justification(base::String::CENTER);
+            justification(base::String::Justify::CENTER);
         else if ( *sjobj == "right" )
-            justification(base::String::RIGHT);
+            justification(base::String::Justify::RIGHT);
         else {
               if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
