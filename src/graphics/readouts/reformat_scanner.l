@@ -37,6 +37,14 @@
 
 %%
 
+\+?0*#+\+?                    {   // "+0#" (Integer w/sign and leading zeros)
+                                  return mixr::graphics::ReformatScanner::processInteger(yytext, yyleng);
+                              }
+
+\+?0*#+\.#+\+?                {   // "+0#.#" (Floating w/sign and leading zeros)
+                                  return mixr::graphics::ReformatScanner::processFloat(yytext, yyleng);
+                              }
+
 \+?(0|H)H+:?MM:?SS(\.S+)?\+?  {   // HH:MM:SS (Hours, minutes and seconds)
                                   return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmmss, yytext, yyleng);
                               }
@@ -90,6 +98,174 @@ int ReformatScanner::yylex(const DataType dt)
    postSign = false;
    dataType = dt;
    return yylex();
+}
+
+//------------------------------------------------------------------------------
+// processInteger() -- process a integer number string
+//    Take in a format such as "+0##" and return "%+04d".
+//------------------------------------------------------------------------------
+int ReformatScanner::processInteger(const char* text, const int len)
+{
+   switch (dataType) {
+   case DataType::number:         // We're looking for a number,
+   case DataType::hex:            //   a Hexadecimal number, or
+   case DataType::octal:          //   an Octal number.
+      break;
+   default:                       // No, we didn't want any of these
+      return formatError(text);
+   }
+
+   // ---
+   // Scan the example string
+   // ---
+
+   // Check for the sign
+   int i {};
+   int s {};
+
+   if (text[i] == '+') {
+      s = 1;
+      i++;
+   }
+
+   // Check for an leading zeros
+   int lz {};
+   while (text[i] == '0' && i < len) {
+      lz++;
+      i++;
+   }
+
+   // Check for an leading numbers
+   int ln {};
+   while (text[i] == '#' && i < len) {
+      ln++;
+      i++;
+   }
+
+   // Check for the post sign
+   if (text[i] == '+') {
+      postSign = true;
+      s = 1;
+      i++;
+   }
+
+   // ---
+   // Build the format statement
+   // ---
+
+   // Computer total number of characters in numberic field:
+   //    sign, leading zeros, and leading numbers.
+   int fw {s + lz + ln};
+
+   // Create the sprintf() format string
+   int j {};
+
+   format[j++] = '%';				// Start with %
+
+   if (s)
+      format[j++] = '+';			// Add a '+' if signed
+
+   if (lz > 0)
+      format[j++] = '0';			// Add a '0' if leading zeros
+
+   j += std::sprintf(&format[j], "%d", fw);		// Add total field size
+
+   if (dataType == DataType::number) {
+      format[j++] = '.';
+      format[j++] = '0';
+      format[j++] = 'f';
+   }
+   else if (dataType == DataType::octal) format[j++] = 'o';
+   else if (dataType == DataType::hex) format[j++] = 'X';
+
+   format[j] = '\0';
+
+   return 1;
+}
+
+//------------------------------------------------------------------------------
+// processFloat() -- process a floating point number string
+//    Take in a format such as "+0###.###" and return "%+09.3f".
+//------------------------------------------------------------------------------
+int ReformatScanner::processFloat(const char* text, const int len)
+{
+   // Check valid type
+   if (dataType != DataType::number)
+      return formatError(text);
+
+   // ---
+   // Scan the example string
+   // ---
+
+   // Check for the sign
+   int i {};
+   int s {};
+
+   if (text[i] == '+') {
+      s = 1;
+      i++;
+   }
+
+   // Check for an leading zeros
+   int lz {};
+   while (text[i] == '0' && i < len) {
+      lz++;
+      i++;
+   }
+
+   // Check for an leading numbers
+   int ln {};
+   while (text[i] == '#' && i < len) {
+      ln++;
+      i++;
+   }
+
+   // Skip the decimal point
+   i++;
+
+   // Check for the trailing numbers
+   int nr {};
+   while (text[i] == '#' && i < len) {
+      nr++;
+      i++;
+   }
+
+   // Check for the post sign
+   if (text[i] == '+') {
+      postSign = true;
+      s = 1;
+      i++;
+   }
+
+
+   // ---
+   // Build the format statement
+   // ---
+
+   // Computer total number of characters in numberic field:
+   //    sign, leading zeros, leading numbers, decimal point, and
+   //    trailing numbers.
+   int fw {s + lz + ln + 1 + nr};
+
+   // Create the sprintf() format string
+   int j {};
+
+   format[j++] = '%';                           // Start with %
+
+   if (s)
+      format[j++] = '+';                        // Add a '+' if signed
+
+   if (lz > 0)
+      format[j++] = '0';                        // Add a '0' if leading zeros
+
+   j += std::sprintf(&format[j], "%d", fw);     // Add total field size
+   j += std::sprintf(&format[j], ".%d", nr);    // Add trailing numbers
+
+   format[j++] = 'f';                           // Add the data type
+
+   format[j] = '\0';
+
+   return 1;
 }
 
 //------------------------------------------------------------------------------
