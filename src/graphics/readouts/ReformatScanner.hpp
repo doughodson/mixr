@@ -43,8 +43,6 @@ protected:
    virtual int yylex();
    virtual int yylex(const DataType);
 
-   int processInteger(const char* text, const int len);
-   int processFloat(const char* text, const int len);
    int processTime(const TimeReadout::TimeMode tm, const char* text, const int len);
    int processDirection(const DirectionReadout::DirMode dm, const char* text, const int len);
 
