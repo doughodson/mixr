@@ -10,6 +10,8 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+#include <sstream>
+
 #include "ReformatScanner.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */

@@ -10,7 +10,6 @@
 
 #include "mixr/graphics/readouts/TimeReadout.hpp"
 #include "mixr/graphics/readouts/DirectionReadout.hpp"
-#include <sstream>
 
 namespace mixr {
 namespace graphics {
@@ -31,11 +30,11 @@ public:
 
    const char* getFormat() const            { return dataType != DataType::invalid ? format : nullptr; }
 
-   DataType convertNumber(const char*);
-   DataType convertOctal(const char*);
-   DataType convertHex(const char*);
-   TimeReadout::TimeMode convertTime(const char*);
-   DirectionReadout::DirMode convertDirection(const char*);
+   DataType convertNumber(const char*);                       // called by NumericReadout
+   DataType convertOctal(const char*);                        // called by OctalReadout
+   DataType convertHex(const char*);                          // called by HexReadout
+   TimeReadout::TimeMode convertTime(const char*);            // called by TimeReadout
+   DirectionReadout::DirMode convertDirection(const char*);   // called by DirectionReadout
 
    bool isPostSign()                        { return postSign; }
 

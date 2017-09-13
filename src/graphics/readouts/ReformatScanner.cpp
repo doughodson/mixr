@@ -1598,6 +1598,8 @@ static yyconst yy_state_type yy_NUL_trans[70] =
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+#include <sstream>
+
 #include "ReformatScanner.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -1609,7 +1611,7 @@ static yyconst yy_state_type yy_NUL_trans[70] =
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "rfFlexLexer" */
 /* derived 'mixr::graphics::ReformatScanner' is a subclass of rfFlexLexer */
-#line 1613 "ReformatScanner.cpp"
+#line 1615 "ReformatScanner.cpp"
 
 #define INITIAL 0
 
@@ -1736,10 +1738,10 @@ YY_DECL
 		}
 
 	{
-#line 36 "reformat_scanner.l"
+#line 38 "reformat_scanner.l"
 
 
-#line 1743 "ReformatScanner.cpp"
+#line 1745 "ReformatScanner.cpp"
 
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
@@ -1786,80 +1788,80 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 38 "reformat_scanner.l"
+#line 40 "reformat_scanner.l"
 {   // HH:MM:SS (Hours, minutes and seconds)
                                   return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 42 "reformat_scanner.l"
+#line 44 "reformat_scanner.l"
 {   // HH:MM (Hours and minutes)
                                   return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmm, yytext, yyleng);
                               }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 46 "reformat_scanner.l"
+#line 48 "reformat_scanner.l"
 {   // HH (Hours)
-                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hh, yytext, yyleng);
-			}
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hh, yytext, yyleng);
+                              }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 50 "reformat_scanner.l"
+#line 52 "reformat_scanner.l"
 {   // MM:SS (Minutes and seconds)
                                   return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 54 "reformat_scanner.l"
+#line 56 "reformat_scanner.l"
 {   // MM (Minutes)
-                            return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mm, yytext, yyleng);
-                        }
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mm, yytext, yyleng);
+                              }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 58 "reformat_scanner.l"
+#line 60 "reformat_scanner.l"
 {  // SS (Seconds)
-                           return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::ss, yytext, yyleng);
-                        }
+                                 return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::ss, yytext, yyleng);
+                              }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 62 "reformat_scanner.l"
+#line 64 "reformat_scanner.l"
 {   // +DDMMSS (Degrees, minutes and seconds)
                                             return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmmss, yytext, yyleng);
                                         }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 66 "reformat_scanner.l"
+#line 68 "reformat_scanner.l"
 {   // +DDMM (Degrees and minutes)
-                                       return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmm, yytext, yyleng);
-                                   }
+                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmm, yytext, yyleng);
+                                        }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 70 "reformat_scanner.l"
+#line 72 "reformat_scanner.l"
 {   // +DD (Degrees)
                                   return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 74 "reformat_scanner.l"
+#line 76 "reformat_scanner.l"
 {   // +DD (Degrees)
                                   return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 78 "reformat_scanner.l"
+#line 80 "reformat_scanner.l"
 ECHO;
 	YY_BREAK
-#line 1863 "ReformatScanner.cpp"
+#line 1865 "ReformatScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2753,7 +2755,7 @@ void rffree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 78 "reformat_scanner.l"
+#line 80 "reformat_scanner.l"
 
 
 
