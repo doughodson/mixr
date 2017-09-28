@@ -61,6 +61,7 @@ PROJECTS += ig/viewpoint
 # Map format reader libraries
 #
 PROJECTS += map/rpf
+PROJECTS += map/vpf
 
 .PHONY: all clean $(PROJECTS)
 
