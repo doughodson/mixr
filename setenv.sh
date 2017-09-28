@@ -11,6 +11,12 @@ MIXR_ROOT=$PWD
 export MIXR_ROOT
 
 # ---
+# MIXR data root
+# ---
+MIXR_DATA_ROOT=$PWD/../mixr-data
+export MIXR_DATA_ROOT
+
+# ---
 # MIXR 3rd party (e.g. cigi, JSBSim) root
 # ---
 MIXR_3RD_PARTY_ROOT=$PWD/../mixr_3rdparty

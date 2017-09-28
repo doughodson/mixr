@@ -10,11 +10,11 @@ OBJS = \
 	CadrgFrameEntry.o \
 	CadrgMap.o \
 	CadrgTocEntry.o \
-	factory.o \
 	MapDrawer.o \
 	TexturePager.o \
 	TextureTable.o \
-	map_utils.o
+	map_utils.o \
+	factory.o
 
 .PHONY: all clean
 

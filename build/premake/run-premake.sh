@@ -2,7 +2,6 @@
 # remove any generated build files
 #
 rm -rf ..\gmake
-rm -rf ..\vs2013
 rm -rf ..\vs2015
 rm -rf ..\vs2017
 rm -rf ..\obj

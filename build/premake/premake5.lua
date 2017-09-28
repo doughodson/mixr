@@ -173,14 +173,6 @@ workspace "mixr"
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
 
-   -- raster product format map library
-   project "map_rpf"
-      files {
-         "../../include/mixr/map/rpf/**.h*",
-         "../../src/map/rpf/**.cpp"
-      }
-      targetname "map_rpf"
-
    -- simulation library
    project "simulation"
       files {
@@ -211,4 +203,7 @@ workspace "mixr"
 
    -- image generator libraries
    dofile "ig.lua"
+	
+	-- map libraries
+	dofile "map.lua"
 	
