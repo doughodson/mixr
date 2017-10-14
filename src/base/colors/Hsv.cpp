@@ -24,9 +24,9 @@ BEGIN_SLOTTABLE(Hsv)
 END_SLOTTABLE(Hsv)
 
 BEGIN_SLOT_MAP(Hsv)
-    ON_SLOT(1, setHue, Number)
-    ON_SLOT(2, setSaturation, Number)
-    ON_SLOT(3, setValue, Number)
+    ON_SLOT(1, setSlotHue, Number)
+    ON_SLOT(2, setSlotSaturation, Number)
+    ON_SLOT(3, setSlotValue, Number)
 END_SLOT_MAP()
 
 Hsv::Hsv(const double h, const double s, const double v)
@@ -84,54 +84,53 @@ void Hsv::getHSVA(Vec4d& hhh) const
 }
 
 //------------------------------------------------------------------------------
-// setHue() -- set the HSV hue
+// setSlotHue() -- set the HSV hue
 //------------------------------------------------------------------------------
-bool Hsv::setHue(Number* const msg)
+bool Hsv::setSlotHue(const Number* const msg)
 {
     if (msg == nullptr) return false;
     double value = msg->getReal();
     bool ok = (value >= 0 && value <= 360);
-    if (ok) { hsv[HUE] = value; hsv2rgb(color,hsv); }
-    else std::cerr << "Hsv::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
+    if (ok) {
+        hsv[HUE] = value;
+        hsv2rgb(color,hsv);
+    } else {
+        std::cerr << "Hsv::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSaturation() -- set the HSV saturation
+// setSlotSaturation() -- set the HSV saturation
 //------------------------------------------------------------------------------
-bool Hsv::setSaturation(Number* const msg)
+bool Hsv::setSlotSaturation(const Number* const msg)
 {
     if (msg == nullptr) return false;
     double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
-    if (ok) { hsv[SATURATION] = value; hsv2rgb(color,hsv); }
-    else std::cerr << "Hsv::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        hsv[SATURATION] = value;
+        hsv2rgb(color,hsv);
+    } else {
+        std::cerr << "Hsv::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setValue() -- set the HSV value
+// setSlotValue() -- set the HSV value
 //------------------------------------------------------------------------------
-bool Hsv::setValue(Number* const msg)
+bool Hsv::setSlotValue(const Number* const msg)
 {
     if (msg == nullptr) return false;
     double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
-    if (ok) { hsv[VALUE] = value; hsv2rgb(color,hsv); }
-    else std::cerr << "Hsv::setValue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
-    return ok;
-}
-
-//------------------------------------------------------------------------------
-// setAlpha() -- set the ALPHA value
-//------------------------------------------------------------------------------
-bool Hsv::setAlpha(Number* const msg)
-{
-    if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
-    if (ok) { hsv[ALPHA] = value; hsv2rgb(color,hsv); }
-    else std::cerr << "Hsv::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        hsv[VALUE] = value;
+        hsv2rgb(color,hsv);
+    } else {
+        std::cerr << "Hsv::setValue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 

@@ -10,8 +10,17 @@
 #include "mixr/base/LatLon.hpp"
 
 // Functors
-#include "mixr/base/functors/Tables.hpp"
-#include "mixr/base/functors/Functions.hpp"
+#include "mixr/base/functors/Func1.hpp"
+#include "mixr/base/functors/Func2.hpp"
+#include "mixr/base/functors/Func3.hpp"
+#include "mixr/base/functors/Func4.hpp"
+#include "mixr/base/functors/Func5.hpp"
+#include "mixr/base/functors/Polynomial.hpp"
+#include "mixr/base/functors/Table1.hpp"
+#include "mixr/base/functors/Table2.hpp"
+#include "mixr/base/functors/Table3.hpp"
+#include "mixr/base/functors/Table4.hpp"
+#include "mixr/base/functors/Table5.hpp"
 
 // Numbers
 #include "mixr/base/numeric/Boolean.hpp"

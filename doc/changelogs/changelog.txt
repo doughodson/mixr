@@ -29,7 +29,7 @@ General framework-wide changes/improvements
 - Shifting to using 'int's as opposed to 'unsigned int's almost exclusively.
 
   Rationale:
-  
+
   The reason to shift from using 'unsigned int's to 'int's is to improve code
   quality and conform to conventions.  The convention is as follows: "Favor the
   use of 'int's over 'unsigned int's unless there is a strong reason not to."
@@ -49,17 +49,17 @@ General framework-wide changes/improvements
   conversions (coercions) now produce compiler errors.
 
   For example:
-  
+
   double x = 1;    // compiles, but is technically wrong, 1 is an 'int' which
                    // will be coerced (converted) into a double.
 
   double x {1};    // using brace initialization, the compiler will flag this
                    // as an error.
-  
+
   The big picture is this - C++11 provides the features to sharpen distinctions
   between types (including primitives) - a good thing, and we are starting
   to take advantage to improve type-safety and improve code quality.
-  
+
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -89,7 +89,11 @@ base library (mixr_base)
 
       The only difference is the shift from using 'unsigned int' to 'int' to
       report a parser calculated and returned error count.
-	  
+
+   -- All the classes defined in Tables and Functions within the 'functors' subfolder
+      have been separated into individual files.  Also the depreciated header files
+      Functions.hpp and Tables.hpp have been removed.
+
    LatLon class
       1) Limited scope of 'Dir' enum to 'enum class'. This constrains the scope of
          this enumerated type.
@@ -97,7 +101,7 @@ base library (mixr_base)
    StateMachine class
       1) Limited scope of 'Mode' and 'StateTableCode' enums to 'enum class'. This
          constrains the scope of this enumerated type.
-		 
+
    String class
       1) Limited scope of 'Justify' enum to 'enum class'. This constrains the scope of
          this enumerated type.

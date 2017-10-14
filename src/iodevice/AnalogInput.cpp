@@ -7,7 +7,7 @@
 
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table1.hpp"
 
 #include <iostream>
 

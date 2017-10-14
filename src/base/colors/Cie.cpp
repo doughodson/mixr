@@ -4,7 +4,6 @@
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/MonitorMetrics.hpp"
-#include "mixr/base/functors/Tables.hpp"
 #include <cstdio>
 
 namespace mixr {
@@ -20,10 +19,10 @@ BEGIN_SLOTTABLE(Cie)
 END_SLOTTABLE(Cie)
 
 BEGIN_SLOT_MAP(Cie)
-    ON_SLOT(1, setLuminance, Number)
-    ON_SLOT(2, setX, Number)
-    ON_SLOT(3, setY, Number)
-    ON_SLOT(4, setMonitor, MonitorMetrics)
+    ON_SLOT(1, setSlotLuminance, Number)
+    ON_SLOT(2, setSlotX, Number)
+    ON_SLOT(3, setSlotY, Number)
+    ON_SLOT(4, setSlotMonitor, MonitorMetrics)
 END_SLOT_MAP()
 
 Cie::Cie(const MonitorMetrics*, const double l, const double x, const double y)
@@ -84,52 +83,64 @@ void Cie::getCIE(Vec3d& hhh) const
 }
 
 //------------------------------------------------------------------------------
-// setLuminance() -- set the luminance value
+// setSlotLuminance() -- set the luminance value
 //------------------------------------------------------------------------------
-bool Cie::setLuminance(Number* const msg)
+bool Cie::setSlotLuminance(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { cie[LUMINANCE] = value; cie2rgb(color,cie,monitor); }
-    else std::cerr << "Cie::setLuminance: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cie[LUMINANCE] = value;
+        cie2rgb(color,cie,monitor);
+    } else {
+        std::cerr << "Cie::setLuminance: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setX() -- set the X value
+// setSlotX() -- set the X value
 //------------------------------------------------------------------------------
-bool Cie::setX(Number* const msg)
+bool Cie::setSlotX(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { cie[X] = value; cie2rgb(color,cie,monitor); }
-    else std::cerr << "Cie::setX: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cie[X] = value;
+        cie2rgb(color,cie,monitor);
+    } else {
+        std::cerr << "Cie::setX: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setY() -- set the X value
+// setSlotY() -- set the X value
 //------------------------------------------------------------------------------
-bool Cie::setY(Number* const msg)
+bool Cie::setSlotY(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { cie[Y] = value; cie2rgb(color,cie,monitor); }
-    else std::cerr << "Cie::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cie[Y] = value;
+        cie2rgb(color,cie,monitor);
+    } else {
+        std::cerr << "Cie::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setMonitor() -- set the monitor parameters
+// setSlotMonitor() -- set the monitor parameters
 //------------------------------------------------------------------------------
-bool Cie::setMonitor(MonitorMetrics* const msg)
+bool Cie::setSlotMonitor(const MonitorMetrics* const msg)
 {
     if (msg == nullptr) return false;
     monitor = msg;
-    cie2rgb(color,cie,monitor);
+    cie2rgb(color, cie, monitor);
     return true;
 }
 

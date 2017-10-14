@@ -6,8 +6,6 @@
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
-#include "mixr/base/functors/Tables.hpp"
-
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"

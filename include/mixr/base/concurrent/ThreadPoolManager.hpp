@@ -37,11 +37,11 @@ protected:
 
    // Called just before a thread executes and gives the calling thread a
    // chance to manipulate the callback object before the thread executes.
-   virtual void prepare(Object* const obj);
+   virtual void prepare(Object* const);
 
    // Called when a thread executes. Can and will be raised from multiple
    // thread contexts, so anything this method does must be thread safe.
-   virtual void execute(Object* const obj);
+   virtual void execute(Object* const);
 
    // Same as execute(Object*) except also passes the additional current
    // callback object provided to the ThreadPool using its alternate
@@ -49,11 +49,11 @@ protected:
    // version that passes a current callback object is used in the
    // ThreadPool. If both version are overridden, they will both get
    // called from the thread, this one last.
-   virtual void execute(Object* const obj, Object* cur);
+   virtual void execute(Object* const, Object*);
 
    // Called for each thread when the thread is destroyed and resources
    // (such as the callback object) need to be cleaned up.
-   virtual void destroy(Object* const obj);
+   virtual void destroy(Object* const);
 };
 
 }

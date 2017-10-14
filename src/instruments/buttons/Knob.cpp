@@ -5,7 +5,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/angle_utils.hpp"
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table1.hpp"
 
 #include <GL/glu.h>
 #include <cmath>
@@ -24,8 +24,8 @@ BEGIN_SLOTTABLE(Knob)
 END_SLOTTABLE(Knob)
 
 BEGIN_SLOT_MAP(Knob)
-    ON_SLOT(1, setSlotValueTable, base::Table1)
-    ON_SLOT(2, setSlotEndless, base::Number)
+    ON_SLOT(1, setSlotValueTable,   base::Table1)
+    ON_SLOT(2, setSlotEndless,      base::Number)
     ON_SLOT(3, setSlotEndlessStart, base::Number)
     ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()

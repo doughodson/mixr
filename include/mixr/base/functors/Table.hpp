@@ -3,17 +3,17 @@
 #define __mixr_base_Table_H__
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/functors/Functions.hpp"
 
 namespace mixr {
 namespace base {
+class FStorage;
 class List;
 class Number;
 
 //------------------------------------------------------------------------------
 // Class: Table
 //
-// Description: Abstract table class ---
+// Description: Abstract Table
 //
 //    Used as a base for derived table classes that maintain multi-dimensional,
 //    dependent data tables, along with their independent variable breakpoint
@@ -22,8 +22,8 @@ class Number;
 //
 //
 // Slots:
-//    data        <List>      ! Dependant variable data. (default: 0)
-//    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: 0)
+//    data        <List>      ! Dependant variable data (default: 0)
+//    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: false)
 //
 // Notes:
 //    1) The isValid() function will return true only if all of the required
@@ -113,18 +113,6 @@ private:
    double* dtable {};    // Data Table
    unsigned int nd {};   // Number of data points
    bool extFlg {};       // Extrapolation enabled flag
-};
-
-//------------------------------------------------------------------------------
-// Class TableStorage
-//------------------------------------------------------------------------------
-class TableStorage : public FStorage
-{
-   DECLARE_SUBCLASS(TableStorage, FStorage)
-
-public:
-   TableStorage();
-   unsigned int xbp {}, ybp {}, zbp {}, wbp {}, vbp {};
 };
 
 }

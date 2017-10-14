@@ -14,8 +14,6 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/functors/Functions.hpp"
-#include "mixr/base/functors/Tables.hpp"
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -38,7 +36,6 @@ BEGIN_SLOTTABLE(EmissionPduHandler)
    "defaultOut",        // 6) This is the default handler for outgoing PDUs
 END_SLOTTABLE(EmissionPduHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(EmissionPduHandler)
     ON_SLOT(1, setSlotEmitterName,     base::Number )
     ON_SLOT(2, setSlotEmitterFunction, base::Number )

@@ -17,7 +17,6 @@ class Number;
 //
 // Factory name: Color
 //
-//
 // Public methods:
 //
 //      double red()

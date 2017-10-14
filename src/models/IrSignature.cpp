@@ -7,7 +7,7 @@
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table1.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Areas.hpp"

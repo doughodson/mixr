@@ -37,9 +37,9 @@ public:
 
 private:
     // slot table helper methods
-    bool setSlotRed(Number* const);
-    bool setSlotGreen(Number* const);
-    bool setSlotBlue(Number* const);
+    bool setSlotRed(const Number* const);
+    bool setSlotGreen(const Number* const);
+    bool setSlotBlue(const Number* const);
 };
 
 }

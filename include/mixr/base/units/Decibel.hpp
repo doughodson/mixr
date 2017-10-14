@@ -62,12 +62,12 @@ public:
 
     virtual void setValue(const double nv) override;
 
-protected:
-    // slot table helper methods
-    bool setSlotValue(const Number* const) override;
-
 private:
     double db {};    // value in dBs
+
+private:
+   // slot table helper methods
+   bool setSlotValue(const Number* const) override;
 };
 
 //------------------------------------------------------------------------------

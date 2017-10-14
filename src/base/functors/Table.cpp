@@ -1,39 +1,17 @@
 
-#include "mixr/base/functors/Tables.hpp"
-#include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/functors/Table.hpp"
+
+#include "mixr/base/functors/FStorage.hpp"
+#include "mixr/base/functors/TableStorage.hpp"
+
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/Pair.hpp"
+
+#include <iostream>
 
 namespace mixr {
 namespace base {
 
-//==============================================================================
-// Class TableStorage
-//==============================================================================
-IMPLEMENT_SUBCLASS(TableStorage, "TableStorage")
-EMPTY_SLOTTABLE(TableStorage)
-EMPTY_DELETEDATA(TableStorage)
-
-TableStorage::TableStorage()
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-void TableStorage::copyData(const TableStorage& org, const bool)
-{
-   BaseClass::copyData(org);
-   xbp = org.xbp;
-   ybp = org.ybp;
-   zbp = org.zbp;
-   wbp = org.wbp;
-   vbp = org.vbp;
-}
-
-//==============================================================================
-// Class Table
-//  (Note: the static lfi() functions are located at the end of this file)
-//==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Table, "Table")
 
 BEGIN_SLOTTABLE(Table)

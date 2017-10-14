@@ -58,6 +58,7 @@ public:
 protected:
    double val {};   // value of this object
 
+private:
    // slot table helper methods
    virtual bool setSlotValue(const Number* const);
 };

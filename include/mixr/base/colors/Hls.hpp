@@ -63,18 +63,20 @@ public:
     double saturation() const;
     void getHLS(Vec3d& hls) const;
 
-    virtual bool setHue(Number* const msg);
-    virtual bool setLightness(Number* const msg);
-    virtual bool setSaturation(Number* const msg);
-
     static void hls2rgb(Vec4d& rgb, const Vec3d& hls);
     static void rgb2hls(Vec3d& hls, const Vec4d& rgb);
 
-private:
-    static double value(double n1, double n2, double hue);
-
 protected:
     Vec3d hls;
+
+private:
+   static double value(double n1, double n2, double hue);
+
+private:
+   // slot table helper methods
+   bool setSlotHue(const Number* const);
+   bool setSlotLightness(const Number* const);
+   bool setSlotSaturation(const Number* const);
 };
 
 }

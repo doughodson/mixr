@@ -63,15 +63,17 @@ public:
     double yellow() const;
     void getCMY(Vec3d& cmy) const;
 
-    virtual bool setCyan(Number* const msg);
-    virtual bool setMagenta(Number* const msg);
-    virtual bool setYellow(Number* const msg);
-
     static void cmy2rgb(Vec4d& rgb, const Vec3d& cmy);
     static void rgb2cmy(Vec3d& cmy, const Vec4d& rgb);
 
 protected:
     Vec3d cmy;
+
+private:
+   // slot table helper methods
+   bool setSlotCyan(const Number* const);
+   bool setSlotMagenta(const Number* const);
+   bool setSlotYellow(const Number* const);
 };
 
 }

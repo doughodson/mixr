@@ -40,10 +40,21 @@ OBJS =  \
 	concurrent/ThreadPoolThread.o \
 	edl_parser/EdlParser.o \
 	edl_parser/EdlScanner.o \
+	functors/FStorage.o \
+	functors/Func1.o \
+	functors/Func2.o \
+	functors/Func3.o \
+	functors/Func4.o \
+	functors/Func5.o \
 	functors/Function.o \
-	functors/Functions.o \
+	functors/Polynomial.o \
 	functors/Table.o \
-	functors/Tables.o \
+	functors/Table1.o \
+	functors/Table2.o \
+	functors/Table3.o \
+	functors/Table4.o \
+	functors/Table5.o \
+	functors/TableStorage.o \
 	io/IoAdapter.o \
 	io/IoData.o \
 	io/IoDevice.o \

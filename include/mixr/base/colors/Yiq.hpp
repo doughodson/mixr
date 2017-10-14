@@ -24,7 +24,7 @@ namespace base {
 // Events: None
 //
 //
-// Public methods: Base class public methods, plus ...
+// Public methods:
 //
 //      Yiq(const double y, const double i, const double q)
 //          Special constructor that initializes the object to y, i, and q
@@ -67,15 +67,17 @@ public:
     double q() const;
     void getYIQ(Vec3d& yiq) const;
 
-    virtual bool setY(Number* const msg);
-    virtual bool setI(Number* const msg);
-    virtual bool setQ(Number* const msg);
-
     static void yiq2rgb(Vec4d& rgb, const Vec3d& yiq);
     static void rgb2yiq(Vec3d& yiq, const Vec4d& rgb);
 
 protected:
     Vec3d yiq;
+
+private:
+   // slot table helper methods
+   bool setSlotY(const Number* const);
+   bool setSlotI(const Number* const);
+   bool setSlotQ(const Number* const);
 };
 
 }

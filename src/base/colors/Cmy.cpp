@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Cmy)
 END_SLOTTABLE(Cmy)
 
 BEGIN_SLOT_MAP(Cmy)
-    ON_SLOT(1, setCyan, Number)
-    ON_SLOT(2, setMagenta, Number)
-    ON_SLOT(3, setYellow, Number)
+    ON_SLOT(1, setSlotCyan, Number)
+    ON_SLOT(2, setSlotMagenta, Number)
+    ON_SLOT(3, setSlotYellow, Number)
 END_SLOT_MAP()
 
 Cmy::Cmy(const double c, const double m, const double y)
@@ -69,41 +69,53 @@ void Cmy::getCMY(Vec3d& hhh) const
 }
 
 //------------------------------------------------------------------------------
-// setCyan() -- set the cyan value
+// setSlotCyan() -- set the cyan value
 //------------------------------------------------------------------------------
-bool Cmy::setCyan(Number* const msg)
+bool Cmy::setSlotCyan(const Number* const msg)
 {
     if (msg == nullptr) return false;
     double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
-    if (ok) { cmy[CYAN] = value; cmy2rgb(color,cmy); }
-    else std::cerr << "Cmy::setCyan: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cmy[CYAN] = value;
+        cmy2rgb(color,cmy);
+    } else {
+        std::cerr << "Cmy::setCyan: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setMagenta() -- set the magenta value
+// setSlotMagenta() -- set the magenta value
 //------------------------------------------------------------------------------
-bool Cmy::setMagenta(Number* const msg)
+bool Cmy::setSlotMagenta(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { cmy[MAGENTA] = value; cmy2rgb(color,cmy); }
-    else std::cerr << "Cmy::setMagenta: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cmy[MAGENTA] = value;
+        cmy2rgb(color,cmy);
+    } else {
+        std::cerr << "Cmy::setMagenta: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setYellow() -- set the yellow value
+// setSlotYellow() -- set the yellow value
 //------------------------------------------------------------------------------
-bool Cmy::setYellow(Number* const msg)
+bool Cmy::setSlotYellow(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { cmy[YELLOW] = value; cmy2rgb(color,cmy); }
-    else std::cerr << "Cmy::setYellow: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        cmy[YELLOW] = value;
+        cmy2rgb(color,cmy);
+    } else {
+        std::cerr << "Cmy::setYellow: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 

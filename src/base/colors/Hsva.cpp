@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Hsva)
 END_SLOTTABLE(Hsva)
 
 BEGIN_SLOT_MAP(Hsva)
-    ON_SLOT(1, setAlpha, Number)
+    ON_SLOT(1, setSlotAlpha, Number)
 END_SLOT_MAP()
 
 Hsva::Hsva(const double h, const double s,
@@ -55,6 +55,24 @@ bool Hsva::colorInterpolate(
    }
    setHSVA(newColor);
    return true;
+}
+
+//------------------------------------------------------------------------------
+// setSlotAlpha() -- set the ALPHA value
+//------------------------------------------------------------------------------
+bool Hsva::setSlotAlpha(const Number* const msg)
+{
+   if (msg == nullptr) return false;
+   double value = msg->getReal();
+   bool ok = (value >= 0 && value <= 1);
+   if (ok) {
+      hsv[ALPHA] = value;
+      hsv2rgb(color, hsv);
+   }
+   else {
+      std::cerr << "Hsva::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+   }
+   return ok;
 }
 
 }

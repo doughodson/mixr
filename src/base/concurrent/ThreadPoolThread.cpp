@@ -20,8 +20,7 @@ ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const po
 unsigned long ThreadPoolThread::userFunc()
 {
    //Execute the thread callback methods
-   if (manager != nullptr)
-   {
+   if (manager != nullptr) {
       manager->execute(persistentObj);
       manager->execute(persistentObj, currentObj);
    }

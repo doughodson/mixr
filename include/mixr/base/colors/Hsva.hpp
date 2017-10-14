@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class Number;
 
 //------------------------------------------------------------------------------
 // Class: Hsva
@@ -17,16 +18,16 @@ namespace base {
 //    alpha      <Number>  ! Set the alpha component (0.0 to 1.0) (default: 1.0)
 //
 //
-// Public methods: Base class public methods, plus ...
+// Public methods:
 //
 //      Hsva(double h, double s, double v, double a)
-//          Special constructor that initializes the object to h, s, v and a
+//          Constructor that initializes the object to h, s, v and a
 //
 //      getHSVA(Vec4d hsv)
-//          Returns the HSVA components in a vector.
+//          Returns the HSVA components in a vector
 //
 //      setHSVA(const Vec4d& vec)
-//          Sets the HSVA components in a vector.
+//          Sets the HSVA components in a vector
 //
 //      bool Hsva::colorInterpolate( const double value, const double minValue,
 //                                   const double maxValue,  const Hsva& minColor,
@@ -58,6 +59,10 @@ public:
       const Hsva& minColor,    // Minimum HSV color
       const Hsva& maxColor     // Minimum HSV color
     );
+
+private:
+   // slot table helper methods
+   bool setSlotAlpha(const Number* const);
 };
 
 }

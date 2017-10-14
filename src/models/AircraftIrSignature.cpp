@@ -8,7 +8,9 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table2.hpp"
+#include "mixr/base/functors/Table4.hpp"
+#include "mixr/base/functors/Table5.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Areas.hpp"
@@ -64,12 +66,12 @@ BEGIN_SLOTTABLE(AircraftIrSignature)
 END_SLOTTABLE(AircraftIrSignature)
 
 BEGIN_SLOT_MAP(AircraftIrSignature)
-   ON_SLOT(1,setSlotAirframeSignatureTable,base::Table4)
-   ON_SLOT(2,setSlotAirframeWavebandFactorTable,base::Table2)
-   ON_SLOT(3,setSlotPlumeSignatureTable,base::Table5)
-   ON_SLOT(4,setSlotPlumeWavebandFactorTable,base::Table2)
-   ON_SLOT(5,setSlotHotPartsSignatureTable,base::Table5)
-   ON_SLOT(6,setSlotHotPartsWavebandFactorTable,base::Table2)
+   ON_SLOT(1,setSlotAirframeSignatureTable,      base::Table4)
+   ON_SLOT(2,setSlotAirframeWavebandFactorTable, base::Table2)
+   ON_SLOT(3,setSlotPlumeSignatureTable,         base::Table5)
+   ON_SLOT(4,setSlotPlumeWavebandFactorTable,    base::Table2)
+   ON_SLOT(5,setSlotHotPartsSignatureTable,      base::Table5)
+   ON_SLOT(6,setSlotHotPartsWavebandFactorTable, base::Table2)
 END_SLOT_MAP()
 
 AircraftIrSignature::AircraftIrSignature()

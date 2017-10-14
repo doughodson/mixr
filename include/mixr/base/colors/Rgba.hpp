@@ -35,7 +35,7 @@ public:
 
 private:
     // slot table helper methods
-    bool setSlotAlpha(Number* const);
+    bool setSlotAlpha(const Number* const);
 };
 
 }

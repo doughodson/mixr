@@ -7,7 +7,7 @@
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/List.hpp"
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table1.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -28,10 +28,10 @@ BEGIN_SLOTTABLE(IrAtmosphere)
 END_SLOTTABLE(IrAtmosphere)
 
 BEGIN_SLOT_MAP(IrAtmosphere)
-   ON_SLOT(1,setSlotWaveBands, base::Table1)
+   ON_SLOT(1,setSlotWaveBands,            base::Table1)
    ON_SLOT(2,setSlotTransmissivityTable1, base::Table1)
-   ON_SLOT(3,setSlotSkyRadiance, base::Number)
-   ON_SLOT(4,setSlotEarthRadiance, base::Number)
+   ON_SLOT(3,setSlotSkyRadiance,          base::Number)
+   ON_SLOT(4,setSlotEarthRadiance,        base::Number)
 END_SLOT_MAP()
 
 IrAtmosphere::IrAtmosphere()

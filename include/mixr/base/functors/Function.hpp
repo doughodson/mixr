@@ -36,26 +36,16 @@ public:
    Function();
 
    virtual FStorage* storageFactory() const;    // Data storage factory (pre-ref()'d)
-   virtual bool setSlotLfiTable(const Table* const msg);
 
 protected:
    const Table* getTable() const {  return table; }
 
 private:
    safe_ptr<const Table> table;   // Optional LFI Table
-};
 
-//------------------------------------------------------------------------------
-// class FStorage
-// Description: Generic storage class for past values of function calls.
-//              Use Function::storageFactory() to generate pre-ref()'d
-//              FStorage objects.
-//------------------------------------------------------------------------------
-class FStorage : public Object
-{
-   DECLARE_SUBCLASS(FStorage, Object)
-public:
-   FStorage();
+protected:
+   // slot table helper methods
+   virtual bool setSlotLfiTable(const Table* const);
 };
 
 }

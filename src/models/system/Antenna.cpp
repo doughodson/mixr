@@ -5,7 +5,8 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
 
-#include "mixr/base/functors/Functions.hpp"
+#include "mixr/base/functors/Func1.hpp"
+#include "mixr/base/functors/Func2.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"

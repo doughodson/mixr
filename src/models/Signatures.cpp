@@ -7,7 +7,7 @@
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/functors/Tables.hpp"
+#include "mixr/base/functors/Table2.hpp"
 
 #include "mixr/base/units/Areas.hpp"
 #include "mixr/base/units/Decibel.hpp"

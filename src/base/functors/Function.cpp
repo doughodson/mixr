@@ -1,25 +1,15 @@
 
 #include "mixr/base/functors/Function.hpp"
 
+#include "mixr/base/functors/Table.hpp"
+#include "mixr/base/functors/FStorage.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/functors/Tables.hpp"
+
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-//==============================================================================
-// class FStorage
-//==============================================================================
-IMPLEMENT_SUBCLASS(FStorage, "FStorage")
-EMPTY_SLOTTABLE(FStorage)
-EMPTY_CONSTRUCTOR(FStorage)
-EMPTY_COPYDATA(FStorage)
-EMPTY_DELETEDATA(FStorage)
-
-//==============================================================================
-// Class: Function
-//==============================================================================
 IMPLEMENT_SUBCLASS(Function, "Function")
 
 BEGIN_SLOTTABLE(Function)
@@ -73,9 +63,6 @@ FStorage* Function::storageFactory() const
    }
 }
 
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
 bool Function::setSlotLfiTable(const Table* const msg)
 {
    table = msg;

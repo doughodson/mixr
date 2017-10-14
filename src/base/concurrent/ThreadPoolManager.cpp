@@ -19,19 +19,19 @@ Object* ThreadPoolManager::initialize()
    return nullptr;
 }
 
-void ThreadPoolManager::prepare( Object* const obj )
+void ThreadPoolManager::prepare(Object* const)
 {
 }
 
-void ThreadPoolManager::execute( Object* const obj )
+void ThreadPoolManager::execute(Object* const)
 {
 }
 
-void ThreadPoolManager::execute( Object* const obj, Object* cur )
+void ThreadPoolManager::execute(Object* const, Object*)
 {
 }
 
-void ThreadPoolManager::destroy( Object* const obj )
+void ThreadPoolManager::destroy(Object* const)
 {
 }
 

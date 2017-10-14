@@ -30,7 +30,7 @@ Rgba::Rgba()
    STANDARD_CONSTRUCTOR()
 }
 
-bool Rgba::setSlotAlpha(Number* const msg)
+bool Rgba::setSlotAlpha(const Number* const msg)
 {
     double value = msg->getReal();
     bool ok = setAlpha( value );

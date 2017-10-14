@@ -67,16 +67,18 @@ public:
     double y() const;
     void getCIE(Vec3d& cie) const;
 
-    virtual bool setMonitor(MonitorMetrics* const msg);
-    virtual bool setLuminance(Number* const msg);
-    virtual bool setX(Number* const msg);
-    virtual bool setY(Number* const msg);
-
     static void cie2rgb(Vec4d& rgba, const Vec3d& cie, const MonitorMetrics* m);
 
 protected:
     Vec3d cie;
     safe_ptr<const MonitorMetrics> monitor;
+
+private:
+   // slot table helper methods
+   bool setSlotMonitor(const MonitorMetrics* const);
+   bool setSlotLuminance(const Number* const);
+   bool setSlotX(const Number* const);
+   bool setSlotY(const Number* const);
 };
 
 }

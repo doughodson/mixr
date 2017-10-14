@@ -21,7 +21,7 @@ public:
 
 protected:
    Object* getPersistentObj();
-   void setCurrentObj(Object* const obj);
+   void setCurrentObj(Object* const);
 
 private:
    virtual unsigned long userFunc() override;

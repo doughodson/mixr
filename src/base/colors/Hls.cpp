@@ -20,9 +20,9 @@ BEGIN_SLOTTABLE(Hls)
 END_SLOTTABLE(Hls)
 
 BEGIN_SLOT_MAP(Hls)
-    ON_SLOT(1, setHue, Number)
-    ON_SLOT(2, setLightness, Number)
-    ON_SLOT(3, setSaturation, Number)
+    ON_SLOT(1, setSlotHue, Number)
+    ON_SLOT(2, setSlotLightness, Number)
+    ON_SLOT(3, setSlotSaturation, Number)
 END_SLOT_MAP()
 
 Hls::Hls(const double h, const double l, const double s)
@@ -31,7 +31,7 @@ Hls::Hls(const double h, const double l, const double s)
    hls[HUE]        = h;     // set the values
    hls[LIGHTNESS]  = l;
    hls[SATURATION] = s;
-   hls2rgb(color,hls);   // set the rgb values
+   hls2rgb(color,hls);      // set the rgb values
 }
 
 Hls::Hls()
@@ -73,41 +73,53 @@ void Hls::getHLS(Vec3d& hhh) const
 }
 
 //------------------------------------------------------------------------------
-// setHue() -- set the hue value
+// setSlotHue() -- set the hue value
 //------------------------------------------------------------------------------
-bool Hls::setHue(Number* const msg)
+bool Hls::setSlotHue(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 360);
-    if (ok) { hls[HUE] = value; hls2rgb(color,hls); }
-    else std::cerr << "Hls::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
+    if (ok) {
+        hls[HUE] = value;
+        hls2rgb(color,hls);
+    } else {
+        std::cerr << "Hls::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSaturation() -- set the saturation value
+// setSlotSaturation() -- set the saturation value
 //------------------------------------------------------------------------------
-bool Hls::setSaturation(Number* const msg)
+bool Hls::setSlotSaturation(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { hls[SATURATION] = value; hls2rgb(color,hls); }
-    else std::cerr << "Hls::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        hls[SATURATION] = value;
+        hls2rgb(color,hls);
+    } else {
+       std::cerr << "Hls::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setLightness() -- set the lightness value
+// setSlotLightness() -- set the lightness value
 //------------------------------------------------------------------------------
-bool Hls::setLightness(Number* const msg)
+bool Hls::setSlotLightness(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
-    if (ok) { hls[LIGHTNESS] = value; hls2rgb(color,hls); }
-    else std::cerr << "Hls::setLightness: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    if (ok) {
+        hls[LIGHTNESS] = value;
+        hls2rgb(color,hls);
+    } else {
+        std::cerr << "Hls::setLightness: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    }
     return ok;
 }
 

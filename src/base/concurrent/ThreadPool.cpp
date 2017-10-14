@@ -25,20 +25,20 @@ ThreadPool::ThreadPool()
    STANDARD_CONSTRUCTOR()
 }
 
-ThreadPool::ThreadPool( ThreadPoolManager* mgr )
+ThreadPool::ThreadPool(ThreadPoolManager* mgr)
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
 }
 
-ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
+ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num)
    : numThreads(num)
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
 }
 
-ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const double pri )
+ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri)
    : numThreads(num), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
@@ -65,11 +65,9 @@ void ThreadPool::initialize(Component* const parent)
    destroy();
 
    // Create the thread pool
-   if (numThreads > 0)
-   {
+   if (numThreads > 0) {
       std::cout << "Running thread pool in multi-threaded mode" << std::endl;
-      for (unsigned int i = 0; i < numThreads; i++)
-      {
+      for (unsigned int i = 0; i < numThreads; i++) {
          //Get the callback object for this thread
          Object* callbackObj = nullptr;
          if (manager != nullptr)
@@ -79,15 +77,12 @@ void ThreadPool::initialize(Component* const parent)
          allThreads[actualThreads] = new ThreadPoolThread(parent, this, manager, priority, callbackObj);
 
          //Create the thread
-         bool ok = allThreads[actualThreads]->create();
-         if (ok)
-         {
+         const bool ok = allThreads[actualThreads]->create();
+         if (ok) {
             std::cout << "Created thread pool thread[" << actualThreads << "] = " << allThreads[actualThreads] << std::endl;
             availableThreads[actualThreads] = allThreads[actualThreads];
             actualThreads++;
-         }
-         else
-         {
+         } else {
             allThreads[actualThreads]->unref();
             allThreads[actualThreads] = nullptr;
             if (isMessageEnabled(MSG_ERROR)) {
@@ -97,9 +92,8 @@ void ThreadPool::initialize(Component* const parent)
       }
    }
 
-   //Use single-threaded mode if we're not using threads or if threading failed
-   if (actualThreads == 0)
-   {
+   // use single-threaded mode if we're not using threads or if threading failed
+   if (actualThreads == 0) {
       std::cout << "Running thread pool in single-threaded mode" << std::endl;
       if(manager != nullptr)
          unthreadedObj = manager->initialize();
@@ -114,10 +108,8 @@ void ThreadPool::execute()
 void ThreadPool::execute(Object* cur)
 {
    //If we're unthreaded, just use this thread
-   if (actualThreads == 0)
-   {
-      if (manager != nullptr)
-      {
+   if (actualThreads == 0) {
+      if (manager != nullptr) {
          manager->prepare(unthreadedObj);
          manager->execute(unthreadedObj);
          manager->execute(unthreadedObj, cur);
@@ -129,12 +121,10 @@ void ThreadPool::execute(Object* cur)
    ThreadPoolThread* availableThread = getAvailableThread();
 
    //If we didn't get one, we'll have to wait
-   if (availableThread == nullptr)
-   {
+   if (availableThread == nullptr) {
       //Wait for one to become available
       SyncTask** pp = reinterpret_cast<SyncTask**>( &allThreads[0] );
-      if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1)
-      {
+      if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1) {
          //Error
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "ThreadPool::execute(): ERROR, unknown error while waiting for completed thread signal!" << std::endl;
@@ -147,8 +137,7 @@ void ThreadPool::execute(Object* cur)
    }
 
    //Do we have one now (we should)?
-   if (availableThread == nullptr)
-   {
+   if (availableThread == nullptr) {
       //Error
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "ThreadPool::execute(): ERROR, could not get an available thread!" << std::endl;
@@ -169,10 +158,8 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
 {
    ThreadPoolThread* availableThread = nullptr;
    lock(availableThreadsLock);
-   for (int i = actualThreads - 1 ; i >= 0 ; i--)
-   {
-      if (availableThreads[i] != nullptr)
-      {
+   for (int i = actualThreads - 1 ; i >= 0 ; i--) {
+      if (availableThreads[i] != nullptr) {
          availableThread = availableThreads[i];
          availableThreads[i] = nullptr;
          break;
@@ -185,10 +172,8 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
 void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 {
    lock(availableThreadsLock);
-   for (unsigned int i = 0 ; i < actualThreads ; i++)
-   {
-      if (availableThreads[i] == nullptr)
-      {
+   for (unsigned int i = 0 ; i < actualThreads ; i++) {
+      if (availableThreads[i] == nullptr) {
          availableThreads[i] = availableThread;
          break;
       }
@@ -212,8 +197,7 @@ void ThreadPool::destroy()
    actualThreads = 0;
 
    //Destroy the unthreaded object
-   if (unthreadedObj != nullptr)
-   {
+   if (unthreadedObj != nullptr) {
       if (manager != nullptr)
          manager->destroy(unthreadedObj);
       unthreadedObj = nullptr;
@@ -252,12 +236,11 @@ bool ThreadPool::setSlotNumThreads(const Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int num = msg->getInt();
+      const int num = msg->getInt();
       if (num >= 0 && num <= static_cast<int>(MAX_THREADS)) {
          numThreads = static_cast<unsigned int>(num);
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "ThreadPool::setSlotNumThreads: numThreads is invalid, range: [0 .. " << MAX_THREADS << "]" << std::endl;
       }
    }
@@ -268,12 +251,11 @@ bool ThreadPool::setSlotPriority(const Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      double pri = msg->getReal();
-      if (pri >= 0 && pri <= 1.0f) {
+      const double pri = msg->getReal();
+      if (pri >= 0 && pri <= 1.0) {
          priority = pri;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "ThreadPool::setSlotPriority: priority is invalid, range: [0 .. 1]" << std::endl;
       }
    }

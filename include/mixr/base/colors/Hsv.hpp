@@ -8,6 +8,7 @@
 
 namespace mixr {
 namespace base {
+class Number;
 
 //------------------------------------------------------------------------------
 // Class: Hsv
@@ -56,15 +57,6 @@ namespace base {
 //      setHSV(const Vecd3& vec);
 //          Sets the hsv vector
 //
-//      virtual bool setHue(Number* const msg);
-//          Sets the hue (see Hsv.hpp)
-//      virtual bool setSaturation(Number* const msg);
-//          Sets the saturation (see Hsv.hpp)
-//      virtual bool setValue(Number* const msg);
-//          Sets the value (see Hsv.hpp)
-//      virtual bool setAlpha(Number* const msg);
-//          Sets the alpha value
-//
 //      static void hsv2rgb(Vec4d& rgb, const Vec4d& hsv);
 //      static void rgb2hsv(Vec4d& hsv, const Vec4d& rgb);
 //          Static functions to convert HSVA colors to RGBA and visa versa.
@@ -101,11 +93,6 @@ public:
     void getHSV(Vec3d& vec) const;               // Returns the hsv vector
     bool setHSV(const Vec3d& vec);               // Sets the hsv vector
 
-    virtual bool setHue(Number* const msg);
-    virtual bool setSaturation(Number* const msg);
-    virtual bool setValue(Number* const msg);
-    virtual bool setAlpha(Number* const msg);
-
     static void hsv2rgb(Vec4d& rgb, const Vec4d& hsv); // Converts an HSVA color vector to a RGBA color vector
     static void hsv2rgb(Vec3d& rgb, const Vec3d& hsv); // Converts an HSV color vector to a RGB color vector
     static void rgb2hsv(Vec4d& hsv, const Vec4d& rgb); // Converts a RGBA color vector to a HSVA color vector
@@ -116,6 +103,11 @@ protected:
     bool setHSVA(const Vec4d& vec);
 
     Vec4d hsv;
+
+private:
+    bool setSlotHue(const Number* const);
+    bool setSlotSaturation(const Number* const);
+    bool setSlotValue(const Number* const);
 };
 
 }
