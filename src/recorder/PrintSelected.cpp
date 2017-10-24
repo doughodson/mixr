@@ -699,7 +699,7 @@ std::string PrintSelected::getEventMsgName(const google::protobuf::Message* cons
    const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
    const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
-   const google::protobuf::Message& root{*msg};
+   const google::protobuf::Message& root = *msg;
 
    int fieldCount{descriptor->field_count()};
    const google::protobuf::FieldDescriptor* fieldDescriptor{};
