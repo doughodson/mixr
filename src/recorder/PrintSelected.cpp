@@ -525,7 +525,7 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
    const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
    const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
-   const google::protobuf::Message& root{*msg};
+   const google::protobuf::Message& root = *msg;
    std::string msgName{descriptor->name()};
 
    int fieldCount{descriptor->field_count()};

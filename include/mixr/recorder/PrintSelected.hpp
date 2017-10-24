@@ -56,20 +56,20 @@ public:
    bool getCompareToBool() const;
 
    // Set comparison criteria:
-   bool setMsgToken(const unsigned int token);
-   bool setFieldOfInterest(const std::string& fieldName );
-   bool setCompareToValue(const std::string& strVal);
-   bool setCompareToValue(const int numVal );
-   bool setCompareToValue(const double dblVal );
-   bool setCompareCondition(const Condition cc );
-   bool setTimeOnly(const bool flg );
+   bool setMsgToken(const unsigned int);
+   bool setFieldOfInterest(const std::string& name);
+   bool setCompareToValue(const std::string&);
+   bool setCompareToValue(const int);
+   bool setCompareToValue(const double);
+   bool setCompareCondition(const Condition);
+   bool setTimeOnly(const bool);
 
 protected:
 
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
    // Recursive function to look at each embedded message
-   void processMessage(const google::protobuf::Message* const msg);
+   void processMessage(const google::protobuf::Message* const);
 
    // Recursive function to print all messages within a top-level message
    void printMessage(std::ostream& soutFields, std::ostream& soutVals, const google::protobuf::Message* const msg);
