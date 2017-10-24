@@ -397,7 +397,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
 void MapDrawer::drawTexture(const int row, const int column, const int idx)
 {
     if (pagers[idx] != nullptr && myMap != nullptr && getDisplay() != nullptr) {
-        TextureTable& tbl {pagers[idx]->getTable()};
+        TextureTable& tbl = pagers[idx]->getTable();
         const auto newTex = dynamic_cast<graphics::Texture*>(tbl.getTexture(row, column));
         if (newTex != nullptr) {
             // Bind our texture and set up our modulation

@@ -409,7 +409,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 //---------------------------------------------------------------------------
 void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 {
-   const google::protobuf::Message& root{*msg};
+   const google::protobuf::Message& root = *msg;
    const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
    const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
@@ -430,7 +430,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
          // If this field is a message, then call this again
          if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
             // Get sub message
-            const google::protobuf::Message& sub_message{reflection->GetMessage(root, fieldDescriptor)};
+            const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
             processMessage(&sub_message);
          }
          else {
@@ -550,7 +550,7 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
          if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
 
             // do the same again for this message, etc.
-            const google::protobuf::Message& sub_message{reflection->GetMessage(root, fieldDescriptor)};
+            const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
             printMessage(soutFields, soutVals, &sub_message);
          }
          else {
