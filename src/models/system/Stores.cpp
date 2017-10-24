@@ -595,7 +595,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
                   // Weapon types ...
 
                   // Assign the weapon to the station
-                  const auto cwpn{static_cast<AbstractWeapon*>( cpair->object() )};
+                  const auto cwpn = static_cast<AbstractWeapon*>( cpair->object() );
                   assignWeaponToStation(stationNumber, cwpn);
 
                }
