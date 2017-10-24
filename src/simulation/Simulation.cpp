@@ -1098,7 +1098,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     base::List::Item* refItem{newList->getFirstItem()};
     while (refItem != nullptr && !inserted) {
         base::Pair* refPair {static_cast<base::Pair*>(refItem->getValue())};
-        const auto refPlayer {static_cast<AbstractPlayer*>(refPair->object())};
+        const auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
 
         bool insert{};
         if (newPlayer->isNetworkedPlayer()) {
