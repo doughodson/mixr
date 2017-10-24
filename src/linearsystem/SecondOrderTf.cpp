@@ -68,22 +68,21 @@ void SecondOrderTf::deleteData()
 //------------------------------------------------------------------------------
 bool SecondOrderTf::isValid() const
 {
-   unsigned int orderN = 0;
-   if (n1 != 0) orderN = 2;
-   else if (n2 != 0) orderN = 1;
+   unsigned int orderN {};
+   if (n1 != 0)
+      orderN = 2;
+   else if (n2 != 0)
+      orderN = 1;
 
-   unsigned int orderD = 0;
-   if (d1 != 0) orderD = 2;
-   else if (d2 != 0) orderD = 1;
+   unsigned int orderD {};
+   if (d1 != 0)
+      orderD = 2;
+   else if (d2 != 0)
+      orderD = 1;
 
    // Valid if we have a update rate and a value for the denominator, and the
    // order of the denominator is greater than or equal the numerator.
-   bool valid = (
-         n == ORDER &&
-         rate > 0 &&
-         (d1 != 0 || d2 != 0 || d3 != 0)
-         && (orderD >= orderN)
-      );
+   bool valid = {(n == ORDER && rate > 0 && (d1 != 0 || d2 != 0 || d3 != 0) && (orderD >= orderN))};
 
    return valid && BaseClass::isValid();
 }

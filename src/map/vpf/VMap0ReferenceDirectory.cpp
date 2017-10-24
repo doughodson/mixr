@@ -108,7 +108,7 @@ void VMap0ReferenceDirectory::loadTables()
             while (record != nullptr) {
                 string->empty();
                 // column 2 is the column we need
-                char* x = (char*)record->getData(2);
+                char* x = const_cast<char*>(record->getData(2));
                 std::size_t size {std::strlen(x)};
                 std::size_t count {};
                 while (x[count] != ' ' && count < size) count++;
@@ -131,7 +131,7 @@ void VMap0ReferenceDirectory::loadTables()
                     string->catStr("/");
                     // make sure you set the type first, or it will not create the proper tables
                     coverages[CVG_PLACENAM]->setType(CVG_PLACENAM);
-                    coverages[CVG_PLACENAM]->setSlotPath(string);
+                    coverages[CVG_PLACENAM]->setPath(string);
                 }
 #endif
 
@@ -183,7 +183,7 @@ void VMap0ReferenceDirectory::loadTables()
 VMap0RefCoverageDirectory* VMap0ReferenceDirectory::getCoverage(const int cov)
 {
     if (cov < MAX_COVERAGES) return coverages[cov];
-    return 0;
+    return nullptr;
 }
 
 }

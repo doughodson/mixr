@@ -18,8 +18,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-//    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-//    static const int SOCKET_ERROR   = -1;
+//    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+//    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/NetHandler.hpp"
@@ -66,9 +66,9 @@ bool NetHandler::init()
 #if defined(WIN32)
     // initialize Winsock2
     WSADATA wsaData;
-    WORD wVersionRequested = MAKEWORD( 2, 2 );
+    WORD wVersionRequested{MAKEWORD( 2, 2 )};
     // initiate the use of Winsock DLL
-    int err = ::WSAStartup( wVersionRequested, &wsaData );
+    int err{::WSAStartup( wVersionRequested, &wsaData )};
     if ((err != 0) && isMessageEnabled(MSG_ERROR)) {
         std::cerr << "NetHandler::init() -- WSAStartup() FAILED" << std::endl;
     }
@@ -92,18 +92,18 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the destination (netData).
-   u_long* pdl = static_cast<u_long*>(netData);
-   u_short* pds = (u_short*) (pdl + nl);
+   u_long* pdl{static_cast<u_long*>(netData)};
+   u_short* pds{(u_short*) (pdl + nl)};
 
    for (int i = 0; i < nl; i++) {
-      const u_long kk = *psl++;
-      u_long ll = htonl(kk);
+      const u_long kk{*psl++};
+      u_long ll{htonl(kk)};
       *pdl++ = ll;
    }
    for (int i = 0; i < ns; i++) {
       //*pds++ = htons(*pss++);
-      const u_short kk = *pss++;
-      u_short ss = htons(kk);
+      const u_short kk{*pss++};
+      u_short ss{htons(kk)};
       *pds++ = ss;
    }
 }

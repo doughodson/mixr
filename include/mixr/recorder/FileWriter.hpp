@@ -54,11 +54,11 @@ public:
                                           // (valid only while file is open)
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const base::String* const msg);
-   virtual bool setPathName(const base::String* const msg);
+   virtual bool setFilename(const base::String* const);
+   virtual bool setPathName(const base::String* const);
 
 protected:
-   void setFullFilename(const char* const name);
+   void setFullFilename(const char* const);
 
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
@@ -74,6 +74,11 @@ private:
    bool fileOpened {};                // File opened
    bool fileFailed {};                // Open or write failed
    bool eodFlag {};                   // REID_END_OF_DATA message has been written
+
+private:
+   // slot table helper methods
+   bool setSlotFilename(const base::String* const x)                { return setFilename(x); }
+   bool setSlotPathName(const base::String* const x)                { return setPathName(x); }
 };
 
 }

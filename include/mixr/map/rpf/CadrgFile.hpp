@@ -58,10 +58,10 @@ public:
     CadrgFile();
 
     // Max number of Toc entries we can have.
-    static const int MAX_TOC_ENTRIES = 50;
+    static const int MAX_TOC_ENTRIES {50};
 
     // Get / Set / Add / Initialize
-    int getNumBoundaries() { return numBoundaries; }
+    int getNumBoundaries()                    { return numBoundaries; }
 
     const CadrgTocEntry* entry(int boundaryIndex) const;
     CadrgTocEntry* entry(int boundaryIndex);
@@ -81,11 +81,10 @@ public:
     void setDirectory(const char* x);
 
 private:
-    void initData();
-    int numBoundaries {};                       // How many boundaries are there?
+    int numBoundaries {};                                    // How many boundaries are there?
     std::array<CadrgTocEntry*, MAX_TOC_ENTRIES> entries {};  // Holds our table of contents entries
-    bool cib {};                                // CIB flag
-    base::String* originalDir {};               // directory of the file we are associated with
+    bool cib {};                                             // CIB flag
+    base::String* originalDir {};                            // directory of the file we are associated with
 };
 
 }

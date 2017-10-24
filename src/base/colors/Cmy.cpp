@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Cmy)
 END_SLOTTABLE(Cmy)
 
 BEGIN_SLOT_MAP(Cmy)
-    ON_SLOT(1, setSlotCyan, Number)
+    ON_SLOT(1, setSlotCyan,    Number)
     ON_SLOT(2, setSlotMagenta, Number)
-    ON_SLOT(3, setSlotYellow, Number)
+    ON_SLOT(3, setSlotYellow,  Number)
 END_SLOT_MAP()
 
 Cmy::Cmy(const double c, const double m, const double y)
@@ -74,8 +74,8 @@ void Cmy::getCMY(Vec3d& hhh) const
 bool Cmy::setSlotCyan(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    double value{msg->getReal()};
+    bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[CYAN] = value;
         cmy2rgb(color,cmy);
@@ -91,8 +91,8 @@ bool Cmy::setSlotCyan(const Number* const msg)
 bool Cmy::setSlotMagenta(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{msg->getReal()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[MAGENTA] = value;
         cmy2rgb(color,cmy);
@@ -108,8 +108,8 @@ bool Cmy::setSlotMagenta(const Number* const msg)
 bool Cmy::setSlotYellow(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{msg->getReal()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[YELLOW] = value;
         cmy2rgb(color,cmy);

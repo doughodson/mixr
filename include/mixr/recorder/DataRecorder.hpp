@@ -79,16 +79,7 @@ protected:
    bool isFirstPass() const               { return firstPass; }
 
    // Set functions
-   bool setOutputHandler(OutputHandler* const msg);
-   bool setSlotEventName(base::String* const msg);
-   bool setSlotApplication(base::String* const msg);
-   bool setSlotCaseNum(base::Number* const msg);
-   bool setSlotMissionNum(base::Number* const msg);
-   bool setSlotSubjectNum(base::Number* const msg);
-   bool setSlotRunNum(base::Number* const msg);
-   bool setSlotDay(base::Number* const msg);
-   bool setSlotMonth(base::Number* const msg);
-   bool setSlotYear(base::Number* const msg);
+   bool setOutputHandler(OutputHandler* const);
 
    // data filler functions
    virtual void genPlayerId( pb::PlayerId* const id, const models::Player* const player );
@@ -146,6 +137,19 @@ private:
    unsigned int day {};
    unsigned int month {};
    unsigned int year {};
+
+private:
+   // slot table helper methods
+   bool setSlotOutputHandler(OutputHandler* const x)         { return setOutputHandler(x); }
+   bool setSlotEventName(base::String* const);
+   bool setSlotApplication(base::String* const);
+   bool setSlotCaseNum(base::Number* const);
+   bool setSlotMissionNum(base::Number* const);
+   bool setSlotSubjectNum(base::Number* const);
+   bool setSlotRunNum(base::Number* const);
+   bool setSlotDay(base::Number* const);
+   bool setSlotMonth(base::Number* const);
+   bool setSlotYear(base::Number* const);
 };
 
 #include "mixr/recorder/DataRecorder.inl"

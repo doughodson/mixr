@@ -22,8 +22,8 @@ BEGIN_SLOTTABLE(FileReader)
 END_SLOTTABLE(FileReader)
 
 BEGIN_SLOT_MAP(FileReader)
-    ON_SLOT(1, setSlotPathname, String)
-    ON_SLOT(2, setSlotFilename, String)
+    ON_SLOT(1, setSlotPathname,     String)
+    ON_SLOT(2, setSlotFilename,     String)
     ON_SLOT(3, setSlotRecordLength, Number)
 END_SLOT_MAP()
 
@@ -69,7 +69,7 @@ void FileReader::deleteData()
 //------------------------------------------------------------------------------
 bool FileReader::isReady()
 {
-   bool ready = false;
+   bool ready{};
    if (dbf != nullptr && rec != nullptr) {
       if (rlen > 0 && dbf->is_open()) ready = true;
    }
@@ -83,7 +83,7 @@ bool FileReader::isReady()
 // setPathname() -- sets the path name (limit to 255 chars)
 bool FileReader::setPathname(const char* const path)
 {
-   bool ok = false;
+   bool ok{};
    if (path != nullptr) {
       utStrncpy(pathname, (PATHNAME_LENGTH-1), path, (PATHNAME_LENGTH-1));
       pathname[PATHNAME_LENGTH-1] = '\0';
@@ -95,7 +95,7 @@ bool FileReader::setPathname(const char* const path)
 // setFilename() -- sets the file name (limit to 255 chars)
 bool FileReader::setFilename(const char* const file)
 {
-   bool ok = false;
+   bool ok{};
    if (file != nullptr) {
       utStrncpy(filename, (FILENAME_LENGTH-1), file, (FILENAME_LENGTH-1));
       filename[FILENAME_LENGTH-1] = '\0';
@@ -112,7 +112,7 @@ bool FileReader::setRecordLength(const int len)
          delete[] rec;
       }
       rlen = len;
-      int tlen = rlen*4;       // allow space for 4 times the record length
+      int tlen{rlen*4};         // allow space for 4 times the record length
       rec = new char[tlen+1];
       rec[0] = '\0';
    }
@@ -124,7 +124,7 @@ bool FileReader::setRecordLength(const int len)
 //------------------------------------------------------------------------------
 bool FileReader::setSlotPathname(String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setPathname( *msg );
    }
@@ -133,16 +133,16 @@ bool FileReader::setSlotPathname(String* const msg)
 
 bool FileReader::setSlotFilename(String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setFilename( *msg );
    }
    return ok;
 }
 
-bool FileReader::setSlotRecordLength(Number* const msg)
+bool FileReader::setSlotRecordLength(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setRecordLength( msg->getInt() );
    }
@@ -165,8 +165,7 @@ bool FileReader::open()
    if (dbf != nullptr) {
       // close any previous files
       dbf->close();
-   }
-   else {
+   } else {
       // Create the input stream
       dbf = new std::ifstream();
    }

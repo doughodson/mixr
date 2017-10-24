@@ -42,15 +42,16 @@ protected:
    void setActorPlayerByName(const char*);
    void setActorComponentByName(const char*);
 
-   // slot functions
-   // slot to set agent's actor (component to be controlled)
-   bool setSlotActorPlayerName(const base::String* const);
-   bool setSlotActorComponentName(const base::String* const);
-
 private:
    const base::String* actorPlayerName {};
    const base::String* actorComponentName {};
    simulation::Station* myStation {};
+
+private:
+   // slot table helper methods
+   // slot to set agent's actor (component to be controlled)
+   bool setSlotActorPlayerName(const base::String* const);
+   bool setSlotActorComponentName(const base::String* const);
 };
 
 

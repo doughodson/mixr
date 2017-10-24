@@ -19,9 +19,9 @@ BEGIN_SLOTTABLE(DialArcSegment)
 END_SLOTTABLE(DialArcSegment)
 
 BEGIN_SLOT_MAP(DialArcSegment)
-    ON_SLOT(1, setSlotIsDynamic, base::Number)
+    ON_SLOT(1, setSlotIsDynamic,   base::Number)
     ON_SLOT(2, setSlotOuterRadius, base::Number)
-    ON_SLOT(3, setSlotFilled, base::Number)
+    ON_SLOT(3, setSlotFilled,      base::Number)
 END_SLOT_MAP()
 
 DialArcSegment::DialArcSegment()

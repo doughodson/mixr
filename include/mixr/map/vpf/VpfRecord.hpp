@@ -26,7 +26,7 @@ class VpfRecord : public base::Object
 public:
     VpfRecord();
 
-    static const int MAX_COORDS = 500;
+    static const int MAX_COORDS {500};
 
     virtual void createRecord(VpfTable* x, const char* file, const int idx);
     

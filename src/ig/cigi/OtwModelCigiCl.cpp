@@ -2,7 +2,8 @@
 #include "mixr/ig/cigi/OtwModelCigiCl.hpp"
 #include "mixr/ig/cigi/OtwCigiCl.hpp"
 
-#include "mixr/models/player/GroundVehicle.hpp"
+#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/Player.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"

@@ -47,17 +47,17 @@ public:
    // Set a list of 'n' of data records disabled from being processed
    bool setDisabledList(const unsigned int* const list, const unsigned int n);
 
-protected:
-   // Slot functions
-   bool setSlotEnabledList(const base::List* const list);
-   bool setSlotDisabledList(const base::List* const list);
-
 private:
    unsigned int* enabledList {};    // List of data records enabled for processing (default: all)
    unsigned int numEnabled {};      // Number of enabled record IDs, or zero for all records enabled
 
    unsigned int* disabledList {};   // List of data records disabled from being processed (default: none)
    unsigned int numDisabled {};     // Number of disabled record IDs
+
+private:
+   // slot table helper methods
+   bool setSlotEnabledList(const base::List* const);
+   bool setSlotDisabledList(const base::List* const);
 };
 
 

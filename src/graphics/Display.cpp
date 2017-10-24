@@ -65,37 +65,37 @@ BEGIN_SLOTTABLE(Display)
 END_SLOTTABLE(Display)
 
 BEGIN_SLOT_MAP(Display)
-   ON_SLOT( 1, setName, base::String)
-   ON_SLOT( 2, setColorTable, base::PairStream)
-   ON_SLOT( 3, setNormalFont, AbstractFont)
-   ON_SLOT( 3, setNormalFont, base::Identifier)
-   ON_SLOT( 4, setSlotLeftOrthoBound, base::Number)
-   ON_SLOT( 5, setSlotRightOrthoBound, base::Number)
-   ON_SLOT( 6, setSlotBottomOrthoBound, base::Number)
-   ON_SLOT( 7, setSlotTopOrthoBound, base::Number)
-   ON_SLOT( 8, setSlotNearOrthoBound, base::Number)
-   ON_SLOT( 9, setSlotFarOrthoBound, base::Number)
-   ON_SLOT(10, setSlotViewportXOrigin, base::Number)
-   ON_SLOT(11, setSlotViewportYOrigin, base::Number)
-   ON_SLOT(12, setSlotViewportWidth, base::Number)
-   ON_SLOT(13, setSlotViewportHeight, base::Number)
-   ON_SLOT(14, setSlotSubdisplayStream, base::PairStream)
-   ON_SLOT(14, setSlotSubdisplaySingle, Display)
-   ON_SLOT(15, setSlotStdLineWidth, base::Number)
-   ON_SLOT(16, setSlotTexturesStream, base::PairStream)
-   ON_SLOT(16, setSlotTexturesSingle, Texture)
-   ON_SLOT(17, setSlotClearColor, base::Color)
-   ON_SLOT(18, setSlotLeftBracketCharacter, base::Number)
-   ON_SLOT(18, setSlotLeftBracketCharacter, base::String)
+   ON_SLOT( 1, setSlotName,                  base::String)
+   ON_SLOT( 2, setSlotColorTable,            base::PairStream)
+   ON_SLOT( 3, setSlotNormalFont,            AbstractFont)
+   ON_SLOT( 3, setSlotNormalFont,            base::Identifier)
+   ON_SLOT( 4, setSlotLeftOrthoBound,        base::Number)
+   ON_SLOT( 5, setSlotRightOrthoBound,       base::Number)
+   ON_SLOT( 6, setSlotBottomOrthoBound,      base::Number)
+   ON_SLOT( 7, setSlotTopOrthoBound,         base::Number)
+   ON_SLOT( 8, setSlotNearOrthoBound,        base::Number)
+   ON_SLOT( 9, setSlotFarOrthoBound,         base::Number)
+   ON_SLOT(10, setSlotViewportXOrigin,       base::Number)
+   ON_SLOT(11, setSlotViewportYOrigin,       base::Number)
+   ON_SLOT(12, setSlotViewportWidth,         base::Number)
+   ON_SLOT(13, setSlotViewportHeight,        base::Number)
+   ON_SLOT(14, setSlotSubdisplayStream,      base::PairStream)
+   ON_SLOT(14, setSlotSubdisplaySingle,      Display)
+   ON_SLOT(15, setSlotStdLineWidth,          base::Number)
+   ON_SLOT(16, setSlotTexturesStream,        base::PairStream)
+   ON_SLOT(16, setSlotTexturesSingle,        Texture)
+   ON_SLOT(17, setSlotClearColor,            base::Color)
+   ON_SLOT(18, setSlotLeftBracketCharacter,  base::Number)
+   ON_SLOT(18, setSlotLeftBracketCharacter,  base::String)
    ON_SLOT(19, setSlotRightBracketCharacter, base::Number)
    ON_SLOT(19, setSlotRightBracketCharacter, base::String)
-   ON_SLOT(20, setSlotReverseVideoBrackets, base::Number)
-   ON_SLOT(21, setFontList, base::PairStream)
-   ON_SLOT(22, setSlotClearDepth, base::Number)
-   ON_SLOT(23, setSlotDisplayOrientation, base::String)
-   ON_SLOT(24, setSlotMaterials, base::PairStream)
-   ON_SLOT(24, setSlotMaterials, Material)
-   ON_SLOT(25, setSlotAntialias, base::Number)
+   ON_SLOT(20, setSlotReverseVideoBrackets,  base::Number)
+   ON_SLOT(21, setFontList,                  base::PairStream)
+   ON_SLOT(22, setSlotClearDepth,            base::Number)
+   ON_SLOT(23, setSlotDisplayOrientation,    base::String)
+   ON_SLOT(24, setSlotMaterials,             base::PairStream)
+   ON_SLOT(24, setSlotMaterials,             Material)
+   ON_SLOT(25, setSlotAntialias,             base::Number)
 END_SLOT_MAP()
 
 Display::Display()
@@ -1420,7 +1420,7 @@ base::PairStream* Display::defaultColors()
 //------------------------------------------------------------------------------
 // setName() -- set the display name
 //------------------------------------------------------------------------------
-bool Display::setName(base::String* const n)
+bool Display::setName(const base::String* const n)
 {
    bool ok {};
    if (n != nullptr) {
@@ -1428,6 +1428,26 @@ bool Display::setName(base::String* const n)
       ok = true;
    }
    return ok;
+}
+
+bool Display::setSlotName(const base::String* const n)
+{
+   return setName(n);
+}
+
+bool Display::setSlotColorTable(base::PairStream* const list)
+{
+    return setColorTable(list);
+}
+
+bool Display::setSlotNormalFont(AbstractFont* const font)
+{
+    return setNormalFont(font);
+}
+
+bool Display::setSlotNormalFont(const base::Identifier* const fontName)
+{
+    return setNormalFont(fontName);
 }
 
 //------------------------------------------------------------------------------

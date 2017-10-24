@@ -55,19 +55,19 @@ public:
    virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
    virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
-protected:
-   // Slot functions
-   virtual bool setSlotLocation(const base::Number* const);
-   virtual bool setSlotChannel(const base::Number* const);
-   virtual bool setSlotLevel(const base::Number* const);
-   virtual bool setSlotInverted(const base::Number* const);
-
 private:
    bool devEnb {};             // Device enabled
    unsigned int location {};   // IoData input bit location
    unsigned int channel {};    // Port's channel (bit) number
    double level {};            // Switching level
    bool invert {};             // Inverted bit flag
+
+private:
+   // slot table helper methods
+   bool setSlotLocation(const base::Number* const);
+   bool setSlotChannel(const base::Number* const);
+   bool setSlotLevel(const base::Number* const);
+   bool setSlotInverted(const base::Number* const);
 };
 
 }

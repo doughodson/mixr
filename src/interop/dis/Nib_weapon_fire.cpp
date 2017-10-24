@@ -7,8 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -25,11 +24,11 @@ namespace dis {
 //------------------------------------------------------------------------------
 bool Nib::weaponFireMsgFactory(const double)
 {
-    bool ok = true;
+    bool ok {true};
     //std::cout << "NetIO::weaponFireMsgFactory() HERE!!" << std::endl;
 
     // Get our NetIO
-    NetIO* disIO = static_cast<NetIO*>(getNetIO());
+    NetIO* disIO {static_cast<NetIO*>(getNetIO())};
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
@@ -39,8 +38,8 @@ bool Nib::weaponFireMsgFactory(const double)
     const auto mPlayer = static_cast<models::AbstractWeapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
-    models::Player* tPlayer = mPlayer->getTargetPlayer();
-    models::Player* fPlayer = mPlayer->getLaunchVehicle();
+    models::Player* tPlayer {mPlayer->getTargetPlayer()};
+    models::Player* fPlayer {mPlayer->getLaunchVehicle()};
     if (fPlayer == nullptr) return false;
 
     // ---
@@ -74,7 +73,7 @@ bool Nib::weaponFireMsgFactory(const double)
     // Set the PDU data with the target's ID
     // ---
     {
-      bool tOk = false;
+      bool tOk {};
       if (tPlayer != nullptr) {
          pdu.targetEntityID.ID = tPlayer->getID();
          if (tPlayer->isLocalPlayer()) {
@@ -82,8 +81,7 @@ bool Nib::weaponFireMsgFactory(const double)
             pdu.targetEntityID.simulationID.siteIdentification = disIO->getSiteID();
             pdu.targetEntityID.simulationID.applicationIdentification = disIO->getApplicationID();
             tOk = true;
-         }
-         else {
+         } else {
             const auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
             if (fNIB != nullptr) {
                // Networked player, use its NIB's IDs
@@ -135,7 +133,7 @@ bool Nib::weaponFireMsgFactory(const double)
     pdu.burst.munition.specific     = getEntitySpecific();
     pdu.burst.munition.extra        = getEntityExtra();
     pdu.burst.warhead = 0;
-    pdu.burst.fuse = 0;;
+    pdu.burst.fuse = 0;
     pdu.burst.quantity = 1;
     pdu.burst.rate = 0;
 

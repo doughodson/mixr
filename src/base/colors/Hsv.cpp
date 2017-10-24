@@ -24,9 +24,9 @@ BEGIN_SLOTTABLE(Hsv)
 END_SLOTTABLE(Hsv)
 
 BEGIN_SLOT_MAP(Hsv)
-    ON_SLOT(1, setSlotHue, Number)
+    ON_SLOT(1, setSlotHue,        Number)
     ON_SLOT(2, setSlotSaturation, Number)
-    ON_SLOT(3, setSlotValue, Number)
+    ON_SLOT(3, setSlotValue,      Number)
 END_SLOT_MAP()
 
 Hsv::Hsv(const double h, const double s, const double v)
@@ -89,8 +89,8 @@ void Hsv::getHSVA(Vec4d& hhh) const
 bool Hsv::setSlotHue(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 360);
+    double value{msg->getReal()};
+    bool ok{value >= 0 && value <= 360};
     if (ok) {
         hsv[HUE] = value;
         hsv2rgb(color,hsv);
@@ -106,8 +106,8 @@ bool Hsv::setSlotHue(const Number* const msg)
 bool Hsv::setSlotSaturation(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    double value{msg->getReal()};
+    bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[SATURATION] = value;
         hsv2rgb(color,hsv);
@@ -123,8 +123,8 @@ bool Hsv::setSlotSaturation(const Number* const msg)
 bool Hsv::setSlotValue(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    double value{msg->getReal()};
+    bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[VALUE] = value;
         hsv2rgb(color,hsv);
@@ -162,10 +162,10 @@ bool Hsv::setHSVA(const Vec4d& vec)
 void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
 {
     // local HSV values
-    double h = angle::aepcdDeg(hsv[HUE]);
+    double h{angle::aepcdDeg(hsv[HUE])};
     if (h < 0.0f) h += 360.0f;
-    double s = hsv[SATURATION];
-    double v = hsv[VALUE];
+    double s{hsv[SATURATION]};
+    double v{hsv[VALUE]};
 
     if (s != 0.0) {
 
@@ -176,10 +176,10 @@ void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
         // computer some parameters
         //int i = ffloor(h);
         const auto i = static_cast<int>(h);
-        const double f = h - static_cast<double>(i);
-        double p = v * (1.0f - s);
-        double q = v * (1.0f - (s * f));
-        double t = v * (1.0f - (s * (1.0f - f)));
+        const double f{h - static_cast<double>(i)};
+        double p{v * (1.0f - s)};
+        double q{v * (1.0f - (s * f))};
+        double t{v * (1.0f - (s * (1.0f - f)))};
 
         switch (i) {
             case 0 : {
@@ -262,20 +262,20 @@ void Hsv::hsv2rgb(Vec4d& rgb, const Vec4d& hsv)
 //------------------------------------------------------------------------------
 void Hsv::rgb2hsv(Vec3d& hsv, const Vec3d& rgb)
 {
-   double cmax = std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) );
-   double cmin = std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) );
-   double cdelta = cmax - cmin;
-   double h = 0;
-   double s = 0;
+   double cmax{std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) )};
+   double cmin{std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) )};
+   double cdelta{cmax - cmin};
+   double h{};
+   double s{};
 
    if ( cmax != 0.0 )
       s = cdelta / cmax;
 
    if ( s != 0.0 )
    {
-      double rc = (cmax - rgb[RED]) / cdelta;
-      double gc = (cmax - rgb[GREEN]) / cdelta;
-      double bc = (cmax - rgb[BLUE]) / cdelta;
+      double rc{(cmax - rgb[RED]) / cdelta};
+      double gc{(cmax - rgb[GREEN]) / cdelta};
+      double bc{(cmax - rgb[BLUE]) / cdelta};
 
       if ( rgb[RED] == cmax )
          h = bc - gc;

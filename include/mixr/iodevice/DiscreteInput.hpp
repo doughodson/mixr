@@ -50,15 +50,6 @@ public:
    virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
    virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
-protected:
-   // Slot functions
-   virtual bool setSlotLocation(const base::Number* const);
-   virtual bool setSlotPort(const base::Number* const);
-   virtual bool setSlotChannel(const base::Number* const);
-   virtual bool setSlotValue(const base::Number* const);
-   virtual bool setSlotInverted(const base::Number* const);
-   virtual bool setSlotNum(const base::Number* const);
-
 private:
    bool devEnb {};            // Device enabled
    unsigned int location {};  // IoData input bit location
@@ -67,6 +58,15 @@ private:
    bool value {};             // Initial value of bit.
    bool invert {};            // Inverted bit flag
    int num {1};               // Number of DIs (neg for reverse order)
+
+private:
+   // slot table helper methods
+   bool setSlotLocation(const base::Number* const);
+   bool setSlotPort(const base::Number* const);
+   bool setSlotChannel(const base::Number* const);
+   bool setSlotValue(const base::Number* const);
+   bool setSlotInverted(const base::Number* const);
+   bool setSlotNum(const base::Number* const);
 };
 
 }

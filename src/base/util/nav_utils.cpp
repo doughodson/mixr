@@ -128,45 +128,45 @@ bool gbd2ll(
    )
 {
    // Initialize earth model parameters
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = distance::M2NM * pModel->getA();
+   const double eemA{distance::M2NM * pModel->getA()};
    //const double eemF  = pModel->getF();
-   const double eemE2 = pModel->getE2();
+   const double eemE2{pModel->getE2()};
 
    // ---
    // *** Convert slat/slon & brg to radians **
    // ---
-   const double slatr = slat * angle::D2RCC;
-   const double slonr = slon * angle::D2RCC;
-   const double psi = angle::aepcdDeg(brg) * angle::D2RCC;
+   const double slatr{slat * angle::D2RCC};
+   const double slonr{slon * angle::D2RCC};
+   const double psi{angle::aepcdDeg(brg) * angle::D2RCC};
 
    // ---
    // *** Transform source point about zero longitude **
    // ---
-   const double tslatr = slatr;
+   const double tslatr{slatr};
    //double tslonr = 0.0;
 
    // ---
    // *** Calculate Gaussian radius of curvature at source lat **
    // ---
-   const double grad = eemA * (1.0 - ((eemE2 / 2.0) * std::cos(2.0 * tslatr))); // Gaussian radius
+   const double grad{eemA * (1.0 - ((eemE2 / 2.0) * std::cos(2.0 * tslatr)))}; // Gaussian radius
 
    // ---
    // *** Compute transformed destination lat/lon **
    // ---
-   double tdlatr = 0.0;
-   double tdlonr = -slonr;
+   double tdlatr{};
+   double tdlonr{-slonr};
    if (dist <= 10000.0) {
-      double x = std::cos(dist / grad) * std::sin(tslatr);
-      double y = std::sin(dist / grad) * std::cos(tslatr) * std::cos(psi);
+      double x{std::cos(dist / grad) * std::sin(tslatr)};
+      double y{std::sin(dist / grad) * std::cos(tslatr) * std::cos(psi)};
       tdlatr = std::asin(x + y);
 
       x = std::cos(dist / grad) - std::sin(tslatr) * std::sin(tdlatr);
       y = std::cos(tslatr) * std::cos(tdlatr);
 
-      double z = 0;
+      double z{};
       if (y != 0.0) z = x / y;
       else z = (x >= 0 ? 1.0 : -1.0);
       z = alimd(z, 1.0);
@@ -179,19 +179,19 @@ bool gbd2ll(
    // ---
    // *** Retransform destination point **
    // ---
-   const double dlatr = tdlatr;
-   const double dlonr = tdlonr + slonr;
+   const double dlatr{tdlatr};
+   const double dlonr{tdlonr + slonr};
 
    // ---
    // *** Convert to degrees **
    // ---
-   double dlat0 = dlatr * angle::R2DCC;
-   double dlon0 = dlonr * angle::R2DCC;
+   double dlat0{dlatr * angle::R2DCC};
+   double dlon0{dlonr * angle::R2DCC};
 
    // ---
    // *** Apply ellipsoidal correction **
    // ---
-   const double ellip = 0.00334 * std::pow( std::cos(tslatr), 2 );
+   const double ellip{0.00334 * std::pow( std::cos(tslatr), 2 )};
    dlat0 = dlat0 - ellip * (dlat0 - slat);
    dlon0 = dlon0 + ellip * (dlon0 - slon);
 
@@ -220,20 +220,20 @@ bool gbd2llS(
       double* const dlon   // OUT: Target longitude (degs)
    )
 {
-   const double arc     = dist / ERAD60;
-   const double sinArc  = std::sin(arc);
-   const double cosArc  = std::cos(arc);
-   const double sinLat1 = std::sin(angle::D2RCC * slat);
-   const double cosLat1 = std::cos(angle::D2RCC * slat);
-   const double sinBrng = std::sin(angle::D2RCC * brg);
+   const double arc     {dist / ERAD60};
+   const double sinArc  {std::sin(arc)};
+   const double cosArc  {std::cos(arc)};
+   const double sinLat1 {std::sin(angle::D2RCC * slat)};
+   const double cosLat1 {std::cos(angle::D2RCC * slat)};
+   const double sinBrng {std::sin(angle::D2RCC * brg)};
 
    // -----------------------------------------------------
    // compute latitude
-   double k1 = sinLat1 * cosArc;
-   double k2 = cosLat1 * sinArc * std::cos(angle::D2RCC * brg);
-   double k3 = k1 + k2;
+   double k1{sinLat1 * cosArc};
+   double k2{cosLat1 * sinArc * std::cos(angle::D2RCC * brg)};
+   double k3{k1 + k2};
    k3 = alimd(k3, 1.0);
-   double k4 = dist * std::asin(k3);
+   double k4{dist * std::asin(k3)};
    k4 = alimd(k4, 1.0);
    *dlat = angle::R2DCC * std::asin(k3);
 
@@ -266,12 +266,12 @@ bool gll2bd(
    )
 {
    // Initialize earth model parameters
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = distance::M2NM * pModel->getA();
+   const double eemA{distance::M2NM * pModel->getA()};
    //const double eemF  = pModel->getF();
-   const double eemE2 = pModel->getE2();
+   const double eemE2{pModel->getE2()};
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon )) {
@@ -285,39 +285,39 @@ bool gll2bd(
    // ---
 
    // Ellipsoidal correction factor
-   const double ellip = 0.00334 * std::pow( std::cos(slat * angle::D2RCC), 2 );
+   const double ellip{0.00334 * std::pow( std::cos(slat * angle::D2RCC), 2 )};
 
-   const double dlat0 = angle::aepcdDeg( dlat + ellip * angle::aepcdDeg(dlat - slat) );
-   const double dlon0 = angle::aepcdDeg( dlon - ellip * angle::aepcdDeg(dlon - slon) );
+   const double dlat0{angle::aepcdDeg( dlat + ellip * angle::aepcdDeg(dlat - slat) )};
+   const double dlon0{angle::aepcdDeg( dlon - ellip * angle::aepcdDeg(dlon - slon) )};
 
    // *** Transform lat/lon about zero longitude **
-   double tslat = slat;          // Transformed source lat (deg)
-   double tdlat = dlat0;         // Transformed destination lat (deg)
+   double tslat{slat};           // Transformed source lat (deg)
+   double tdlat{dlat0};          // Transformed destination lat (deg)
    //double tslon = 0.0;         // Transformed source lon (deg)
-   double tdlon = dlon0 - slon;  // Transformed destination lon (deg)
+   double tdlon{dlon0 - slon};   // Transformed destination lon (deg)
    if (tdlon < -180.0) { tdlon = tdlon + 360.0; }
    else if (tdlon > +180.0) { tdlon = tdlon - 360.0; }
 
    // ---
    // *** Convert lat/lon to radians **
    // ---
-   const double tslatr = tslat * angle::D2RCC;  // Transformed source lat (rad)
-   //double tslonr = tslon * angle::D2RCC;      // Transformed source lon (rad)
-   const double tdlatr = tdlat * angle::D2RCC;  // Transformed destination lat (rad)
-   const double tdlonr = tdlon * angle::D2RCC;  // Transformed destination lon (rad)
+   const double tslatr{tslat * angle::D2RCC};  // Transformed source lat (rad)
+   //double tslonr{tslon * angle::D2RCC};      // Transformed source lon (rad)
+   const double tdlatr{tdlat * angle::D2RCC};  // Transformed destination lat (rad)
+   const double tdlonr{tdlon * angle::D2RCC};  // Transformed destination lon (rad)
 
    // ---
    // *** Calculate Gaussian radius of curvature at source lat **
    // ---
-   const double grad = eemA * (1.0 - ((eemE2 / 2.0) * std::cos(2.0 * tslatr)));   // Gaussian radius
+   const double grad{eemA * (1.0 - ((eemE2 / 2.0) * std::cos(2.0 * tslatr)))};   // Gaussian radius
 
    // ---
    // *** Compute great circle distance **
    // ---
-   const double tzlonr = tdlonr;// Lon deviation(rad)
-   double x = std::sin(tslatr) * std::sin(tdlatr);
-   double y = std::cos(tslatr) * std::cos(tdlatr) * std::cos(tzlonr);
-   double z = x + y;
+   const double tzlonr{tdlonr};    // Lon deviation(rad)
+   double x{std::sin(tslatr) * std::sin(tdlatr)};
+   double y{std::cos(tslatr) * std::cos(tdlatr) * std::cos(tzlonr)};
+   double z{x + y};
    z = alimd(z, 1.0);
 
    *dist = grad * std::fabs(std::acos(z));
@@ -355,17 +355,17 @@ bool gll2bdS(
       double* const dist   // OUT: distance (ground range) (nm)
    )
 {
-   const double sinLat1 = std::sin(angle::D2RCC * slat);
-   const double cosLat1 = std::cos(angle::D2RCC * slat);
-   const double sinLat2 = std::sin(angle::D2RCC * dlat);
-   const double cosLat2 = std::cos(angle::D2RCC * dlat);
-   const double sinDLon = std::sin(angle::D2RCC * (dlon - slon));
-   const double cosDLon = std::cos(angle::D2RCC * (dlon - slon));
+   const double sinLat1{std::sin(angle::D2RCC * slat)};
+   const double cosLat1{std::cos(angle::D2RCC * slat)};
+   const double sinLat2{std::sin(angle::D2RCC * dlat)};
+   const double cosLat2{std::cos(angle::D2RCC * dlat)};
+   const double sinDLon{std::sin(angle::D2RCC * (dlon - slon))};
+   const double cosDLon{std::cos(angle::D2RCC * (dlon - slon))};
 
    // -----------------------------------------------------
    // compute distance
    if (dist != nullptr) {
-      double k  = sinLat1 * sinLat2 + cosLat1 * cosLat2 * cosDLon;
+      double k{sinLat1 * sinLat2 + cosLat1 * cosLat2 * cosDLon};
       k = alimd(k, 1.0);
       *dist = ERAD60 * std::acos(k);
    }
@@ -373,9 +373,9 @@ bool gll2bdS(
    // -----------------------------------------------------
    // compute bearing
    if (brg != nullptr) {
-      const double k1 = sinDLon * cosLat2;
-      const double k2 = cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon;
-      const double k3 = std::atan2(k1, k2);
+      const double k1{sinDLon * cosLat2};
+      const double k2{cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon};
+      const double k3{std::atan2(k1, k2)};
       *brg = angle::aepcdDeg(angle::R2DCC * k3);
    }
 
@@ -408,7 +408,7 @@ bool glla2bd(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt = (dalt - salt) * distance::M2NM;
+   const double deltaAlt{(dalt - salt) * distance::M2NM};
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon ) ) {
@@ -424,7 +424,7 @@ bool glla2bd(
       return true;
    }
 
-   const bool ok = gll2bd(slat,slon, dlat, dlon, brg, dist, em);
+   const bool ok{gll2bd(slat,slon, dlat, dlon, brg, dist, em)};
 
    if (ok) {
       *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
@@ -454,7 +454,7 @@ bool glla2bdS(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt = (dalt - salt) * distance::M2NM;
+   const double deltaAlt{(dalt - salt) * distance::M2NM};
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon ) ) {
@@ -470,10 +470,10 @@ bool glla2bdS(
       return true;
    }
 
-   const bool ok = gll2bdS(slat,slon, dlat, dlon, brg, dist);
+   const bool ok{gll2bdS(slat,slon, dlat, dlon, brg, dist)};
 
    if (ok) {
-      *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
+      *slantRng = std::sqrt( (*dist) * (*dist) + deltaAlt * deltaAlt );
       if (elev != nullptr && (*slantRng) > 0) {
          *elev = angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
@@ -503,61 +503,61 @@ bool vbd2ll(
    //---------------------------------------------
    // Initialize earth model parameters
    //---------------------------------------------
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = pModel->getA();
-   const double eemF  = pModel->getF();
-   const double eemB  = pModel->getB();
+   const double eemA{pModel->getA()};
+   const double eemF{pModel->getF()};
+   const double eemB{pModel->getB()};
    //const double eemE2 = pModel->getE2();
 
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double tanU1       = (1.0 - eemF) * std::tan(angle::D2RCC * slat);
-   const double u1          = std::atan(tanU1);
-   const double sinU1       = std::sin(u1);
-   const double cosU1       = std::cos(u1);
-   const double alpha1      = angle::D2RCC * brng;
-   const double sinAlpha1   = std::sin(alpha1);
-   const double cosAlpha1   = std::cos(alpha1);
-   const double sigma1      = std::atan2(tanU1, cosAlpha1);
-   //const double tanSigma1   = tanU1 / cosAlpha1;                        // Eq. 1
-   const double sinAlpha    = cosU1 * sinAlpha1;                        // Eq. 2
-   const double cosSqrAlpha = 1.0 - sinAlpha * sinAlpha;
+   const double tanU1       {(1.0 - eemF) * std::tan(angle::D2RCC * slat)};
+   const double u1          {std::atan(tanU1)};
+   const double sinU1       {std::sin(u1)};
+   const double cosU1       {std::cos(u1)};
+   const double alpha1      {angle::D2RCC * brng};
+   const double sinAlpha1   {std::sin(alpha1)};
+   const double cosAlpha1   {std::cos(alpha1)};
+   const double sigma1      {std::atan2(tanU1, cosAlpha1)};
+   //const double tanSigma1  {tanU1 / cosAlpha1};                       // Eq. 1
+   const double sinAlpha    {cosU1 * sinAlpha1};                        // Eq. 2
+   const double cosSqrAlpha {1.0 - sinAlpha * sinAlpha};
 
-   const double ra          = eemA;
-   const double rb          = eemB;
-   const double Usqr        = cosSqrAlpha * (ra*ra - rb*rb) / (rb*rb);
-   const double a = 1.0 + (Usqr/16384.0)*(4096.0 + Usqr*(-768.0 + Usqr*(320.0 - 175.0*Usqr)));   // Eq. 3
-   const double b =       (Usqr/ 1024.0)*( 256.0 + Usqr*(-128.0 + Usqr*( 74.0 -  47.0*Usqr)));   // Eq. 4
+   const double ra{eemA};
+   const double rb{eemB};
+   const double Usqr{cosSqrAlpha * (ra*ra - rb*rb) / (rb*rb)};
+   const double a{1.0 + (Usqr/16384.0)*(4096.0 + Usqr*(-768.0 + Usqr*(320.0 - 175.0*Usqr)))};   // Eq. 3
+   const double b{(Usqr/ 1024.0)*( 256.0 + Usqr*(-128.0 + Usqr*( 74.0 -  47.0*Usqr)))};         // Eq. 4
 
-   const double EPS         = 1.0E-12;
+   const double EPS{1.0E-12};
 
    //-----------------------------------
    // intermediate variables
    //-----------------------------------
-   double lastSigma     = 0.0;
-   double twoSigmaM     = 0.0;
-   double cos2SigmaM    = 0.0;
-   double cosSqr2SigmaM = 0.0;
-   double sinSigma      = 0.0;
-   double cosSigma      = 0.0;
-   double delSigma      = 0.0;
-   double sinSqrSigma   = 0.0;
-   double lambda        = 0.0;
-   double c             = 0.0;
-   double err           = 0.0;
-   double p             = 0.0;
-   double q             = 0.0;
-   double r             = 0.0;
+   double lastSigma{};
+   double twoSigmaM{};
+   double cos2SigmaM{};
+   double cosSqr2SigmaM{};
+   double sinSigma{};
+   double cosSigma{};
+   double delSigma{};
+   double sinSqrSigma{};
+   double lambda{};
+   double c{};
+   double err{};
+   double p{};
+   double q{};
+   double r{};
 
    //-----------------------------------
    // initialization
    //-----------------------------------
-   const double s     = dist * distance::NM2M;  // geodesic distance in meters
-   const double baseS = (s / eemB / a);
-   double sigma = baseS;
+   const double s{dist * distance::NM2M};  // geodesic distance in meters
+   const double baseS{(s / eemB / a)};
+   double sigma{baseS};
 
    //-----------------------------------
    // begin iteration loop
@@ -636,57 +636,57 @@ bool vll2bd(
    //---------------------------------------------
    // Initialize earth model parameters
    //---------------------------------------------
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = pModel->getA();
-   const double eemF  = pModel->getF();
-   const double eemB  = pModel->getB();
+   const double eemA{pModel->getA()};
+   const double eemF{pModel->getF()};
+   const double eemB{pModel->getB()};
    //const double eemE2 = pModel->getE2();
 
    //-----------------------------------
    // local constants
    //-----------------------------------
    //const double EPS      = 1.0E-12;
-   const double deltaLon = angle::aepcdDeg(dlon - slon);
-   const double l        = angle::D2RCC * deltaLon;
-   const double u1       = std::atan((1.0 - eemF) * std::tan(angle::D2RCC * slat));
-   const double u2       = std::atan((1.0 - eemF) * std::tan(angle::D2RCC * dlat));
-   const double sinU1    = std::sin(u1);
-   const double cosU1    = std::cos(u1);
-   const double sinU2    = std::sin(u2);
-   const double cosU2    = std::cos(u2);
-   const double ra       = eemA;
-   const double rb       = eemB;
+   const double deltaLon {angle::aepcdDeg(dlon - slon)};
+   const double l        {angle::D2RCC * deltaLon};
+   const double u1       {std::atan((1.0 - eemF) * std::tan(angle::D2RCC * slat))};
+   const double u2       {std::atan((1.0 - eemF) * std::tan(angle::D2RCC * dlat))};
+   const double sinU1    {std::sin(u1)};
+   const double cosU1    {std::cos(u1)};
+   const double sinU2    {std::sin(u2)};
+   const double cosU2    {std::cos(u2)};
+   const double ra       {eemA};
+   const double rb       {eemB};
 
    //-----------------------------------
    // intermediate variables
    //-----------------------------------
-   double oldLambda     = 0.0;
-   double sinLambda     = 0.0;
-   double cosLambda     = 0.0;
-   double cosSqrAlfa    = 0.0;
-   double cos2SigmaM    = 0.0;
-   double cosSqr2SigmaM = 0.0;
-   double sigma         = 0.0;
-   double sinSigma      = 0.0;
-   double cosSigma      = 0.0;
-   double sinSqrSigma   = 0.0;
-   double sinAlfa       = 0.0;
-   double c             = 0.0;
-   double p             = 0.0;
-   double q             = 0.0;
-   double r             = 0.0;
+   double oldLambda{};
+   double sinLambda{};
+   double cosLambda{};
+   double cosSqrAlfa{};
+   double cos2SigmaM{};
+   double cosSqr2SigmaM{};
+   double sigma{};
+   double sinSigma{};
+   double cosSigma{};
+   double sinSqrSigma{};
+   double sinAlfa{};
+   double c{};
+   double p{};
+   double q{};
+   double r{};
 
    //-----------------------------------
    // check for identical or antipodal input points
    //-----------------------------------
    //int status = NORMAL;
 
-   const bool b1 = (slat ==  dlat) && (slon == dlon);                         // identical points
+   const bool b1{(slat ==  dlat) && (slon == dlon)};                         // identical points
    //if (b1) status = IDENTICAL_POINTS;
 
-   const bool b2 = (slat == -dlat) && (std::fabs(deltaLon) == 180.0);         // antipodal points
+   const bool b2{(slat == -dlat) && (std::fabs(deltaLon) == 180.0)};         // antipodal points
    //if (b2) status = ANTIPODAL_POINTS;
 
    if (b1 || b2)  return false;
@@ -694,7 +694,7 @@ bool vll2bd(
    //-----------------------------------
    // initialization
    //-----------------------------------
-   double lambda = l;
+   double lambda{l};
 
    //-----------------------------------
    // begin iteration loop
@@ -734,7 +734,7 @@ bool vll2bd(
 
    p = cosU2 * sinLambda;
    q = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
-   const double Alfa1 = std::atan2(p, q);                                     // Eq. 20
+   const double Alfa1{std::atan2(p, q)};                                     // Eq. 20
    *brng = angle::aepcdDeg(angle::R2DCC * Alfa1);
 
    //-----------------------------------
@@ -743,27 +743,27 @@ bool vll2bd(
    if (brng2 != nullptr) {
       p =  cosU1 * sinLambda;
       q = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda;
-      const double Alfa2 = std::atan2(p, q);                                  // Eq. 21
+      const double Alfa2{std::atan2(p, q)};                                  // Eq. 21
       *brng2 = angle::aepcdDeg(180.0 + angle::R2DCC * Alfa2);
    }
 
    //-----------------------------------
    // calculate geodesic distance (NM)
    //-----------------------------------
-   const double Usqr  = cosSqrAlfa * (ra*ra - rb*rb) / (rb*rb);
+   const double Usqr{cosSqrAlfa * (ra*ra - rb*rb) / (rb*rb)};
 
    p = (-768.0 + Usqr * (320.0 - 175.0 * Usqr));
    q = (Usqr / 16384.0) * (4096.0 + Usqr * p);
-   const double a = 1.0 + q;                                                  // Eq. 3
+   const double a{1.0 + q};                                                  // Eq. 3
 
    p = (-128.0 + Usqr * ( 74.0 -  47.0 * Usqr));
    q = (Usqr / 1024.0) * ( 256.0 + Usqr * p);
-   const double b = q;                                                        // Eq. 4
+   const double b{q};                                                        // Eq. 4
 
    p = (-3.0 + 4.0 * cosSqr2SigmaM);
    q = (b / 6.0) *  cos2SigmaM * (-3.0 + 4.0 * sinSqrSigma) * p;
    r = (b / 4.0) * (cosSigma * (-1.0 + 2.0 * cosSqr2SigmaM) - q);
-   const double delSigma = b * sinSigma * (cos2SigmaM + r);                   // Eq. 6
+   const double delSigma{b * sinSigma * (cos2SigmaM + r)};                   // Eq. 6
 
    *dist = (eemB * a * (sigma - delSigma)) * distance::M2NM;
 
@@ -787,12 +787,12 @@ bool computeRotationalMatrix(
       Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
    )
 {
-   const double sphi = std::sin(phi);
-   const double cphi = std::cos(phi);
-   const double stht = std::sin(theta);
-   const double ctht = std::cos(theta);
-   const double spsi = std::sin(psi);
-   const double cpsi = std::cos(psi);
+   const double sphi{std::sin(phi)};
+   const double cphi{std::cos(phi)};
+   const double stht{std::sin(theta)};
+   const double ctht{std::cos(theta)};
+   const double spsi{std::sin(psi)};
+   const double cpsi{std::cos(psi)};
 
    if (scPhi != nullptr) scPhi->set( sphi, cphi  );
    if (scTht != nullptr) scTht->set( stht, ctht  );
@@ -834,14 +834,14 @@ bool computeEulerAngles(
       Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
    )
 {
-   double stht = -rm(0,2);
+   double stht{-rm(0,2)};
    if (-1.0 > stht) stht = -1.0;
    if ( 1.0 < stht) stht =  1.0;
 
-   const double ctht = std::sqrt(1.0 - stht*stht);
+   const double ctht{std::sqrt(1.0 - stht*stht)};
 
-   double sphi = 0;
-   double cphi = 1;
+   double sphi{};
+   double cphi{1.0};
    if (ctht > 0) {
       sphi = rm(1,2)/ctht;
       if ( 1.0 < sphi) sphi =  1.0;
@@ -852,11 +852,11 @@ bool computeEulerAngles(
       if (-1.0 > cphi) cphi = -1.0;
    }
 
-   double spsi = rm(2,0)*sphi - rm(1,0)*cphi;
+   double spsi{rm(2,0)*sphi - rm(1,0)*cphi};
    if ( 1.0 < spsi) spsi =  1.0;
    if (-1.0 > spsi) spsi = -1.0;
 
-   double cpsi = rm(1,1)*cphi - rm(2,1)*sphi;
+   double cpsi{rm(1,1)*cphi - rm(2,1)*sphi};
    if ( 1.0 < cpsi) cpsi =  1.0;
    if (-1.0 > cpsi) cpsi = -1.0;
 
@@ -900,9 +900,9 @@ bool computeWorldMatrix(
       Matrixd* const m        // OUT: Matrix M
    )
 {
-   const double phi  = 0;
-   const double theta = -(90.0 + latD) * angle::D2RCC;
-   const double psi   = lonD * angle::D2RCC;
+   const double phi{};
+   const double theta{-(90.0 + latD) * angle::D2RCC};
+   const double psi{lonD * angle::D2RCC};
    computeRotationalMatrix(phi, theta, psi, m);
    return true;
 }
@@ -931,37 +931,37 @@ bool convertEcef2Geod(
    //---------------------------------------------
    // Initialize earth model parameters
    //---------------------------------------------
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = pModel->getA();
-   //const double f  = pModel->getF();
-   const double b  = pModel->getB();
-   const double e2 = pModel->getE2();
+   const double a{pModel->getA()};
+   //const double f{pModel->getF()};
+   const double b{pModel->getB()};
+   const double e2{pModel->getE2()};
 
    //---------------------------------------------
    // Define Local Constants
    //---------------------------------------------
-   const double p  = std::sqrt(x*x + y*y);
-   const double ACCURACY = 0.1;  // iterate to accuracy of 0.1 meter
-   const double EPS = 1.0E-10;
-   const int    MAX_LOOPS = 10;
+   const double p{std::sqrt(x*x + y*y)};
+   const double ACCURACY{0.1};            // iterate to accuracy of 0.1 meter
+   const double EPS{1.0E-10};
+   const int    MAX_LOOPS{10};
 
    //---------------------------------------------
    // Initialize Local Variables
    //---------------------------------------------
-   Status status  = Status::NORMAL;
+   Status status{Status::NORMAL};
 
-   double rn   = a;
-   double phi  = 0.0;
-   double oldH = 0.0;
-   double newH = 100.0 * ACCURACY;  // (newH - oldH) significantly different
-   int idx = 0;
+   double rn{a};
+   double phi{};
+   double oldH{};
+   double newH{100.0 * ACCURACY};  // (newH - oldH) significantly different
+   int idx{};
 
    //---------------------------------------------
    // check status
    //---------------------------------------------
-   double polarXY = std::fabs(x) + std::fabs(y);
+   double polarXY{std::fabs(x) + std::fabs(y)};
    if (polarXY < EPS) { status = Status::POLAR_POINT; }
 
    //---------------------------------------------
@@ -969,11 +969,11 @@ bool convertEcef2Geod(
    //---------------------------------------------
    if (status == Status::NORMAL) {
       while ((++idx <= MAX_LOOPS) && (std::fabs(newH - oldH) > ACCURACY)) {
-         const double sinPhi = z / (newH + rn*(1.0 - e2));
-         const double q      = z + e2*rn*sinPhi;
+         const double sinPhi{z / (newH + rn*(1.0 - e2))};
+         const double q{z + e2*rn*sinPhi};
          phi           = std::atan2(q, p);
-         const double cosPhi = std::cos(phi);
-         const double w      = std::sqrt(1.0 - e2*sinPhi*sinPhi);
+         const double cosPhi{std::cos(phi)};
+         const double w{std::sqrt(1.0 - e2*sinPhi*sinPhi)};
          rn            = a/w;
          oldH          = newH;
          newH          = p/cosPhi - rn;
@@ -1042,46 +1042,44 @@ bool convertGeod2Ecef(
    //---------------------------------------------
    // Initialize earth model parameters
    //---------------------------------------------
-   const EarthModel* p = em;
+   const EarthModel* p{em};
    if (p == nullptr) { p = &EarthModel::wgs84; }
 
-   const double a  = p->getA();
+   const double a{p->getA()};
    //const double f  = p->getF();
-   const double b  = p->getB();
-   const double e2 = p->getE2();
+   const double b{p->getB()};
+   const double e2{p->getE2()};
 
    //---------------------------------------------
    // Define Local Constants
    //---------------------------------------------
-   const double EPS = 0.5;  // degrees
+   const double EPS{0.5};  // degrees
 
-   const double sinLat = std::sin(angle::D2RCC * lat);
-   const double cosLat = std::cos(angle::D2RCC * lat);
-   const double sinLon = std::sin(angle::D2RCC * lon);
-   const double cosLon = std::cos(angle::D2RCC * lon);
-   const double w      = std::sqrt(1.0 - e2*sinLat*sinLat);
-   const double rn     = a/w;
+   const double sinLat {std::sin(angle::D2RCC * lat)};
+   const double cosLat {std::cos(angle::D2RCC * lat)};
+   const double sinLon {std::sin(angle::D2RCC * lon)};
+   const double cosLon {std::cos(angle::D2RCC * lon)};
+   const double w      {std::sqrt(1.0 - e2*sinLat*sinLat)};
+   const double rn     {a/w};
 
    //---------------------------------------------
    // Initialize Local Variables
    //---------------------------------------------
-   Status status = Status::NORMAL;
+   Status status{Status::NORMAL};
 
    //---------------------------------------------
    // check status
    //---------------------------------------------
-   const bool b1 = (lat <  -90.0) || (lat >  +90.0);
-   const bool b2 = (lon < -180.0) || (lon > +180.0);
-   const bool b3 = (90.0 - lat) < EPS;
-   const bool b4 = (90.0 + lat) < EPS;
+   const bool b1{(lat <  -90.0) || (lat >  +90.0)};
+   const bool b2{(lon < -180.0) || (lon > +180.0)};
+   const bool b3{(90.0 - lat) < EPS};
+   const bool b4{(90.0 + lat) < EPS};
 
    if (b1 || b2) {
       status = Status::BAD_INPUT;
-   }
-   else if (b3 || b4) {
+   } else if (b3 || b4) {
       status = Status::POLAR_POINT;
-   }
-   else {
+   } else {
       status = Status::NORMAL;
    }
 
@@ -1137,29 +1135,29 @@ bool getGeocCoords(
       double geocPos[3]          // OUT: Geocentric (ECEF) [ IX IY IZ ] (meters)
    )
 {
-   static const double ellipseC1   = (1.0 - ellipseF) * (1.0 - ellipseF);
+   static const double ellipseC1{(1.0 - ellipseF) * (1.0 - ellipseF)};
 
-   const double lat = geodPos[ILAT] * angle::D2RCC;
-   const double lon = geodPos[ILON] * angle::D2RCC;
-   const double alt = geodPos[IALT];                 // meters
+   const double lat{geodPos[ILAT] * angle::D2RCC};
+   const double lon{geodPos[ILON] * angle::D2RCC};
+   const double alt{geodPos[IALT]};                 // meters
 
-   const double sinlat = std::sin(lat);
-   double temp1 = ellipseA /  std::sqrt(1.0 - (ellipseE2 * (sinlat * sinlat)));
-   double temp2 = temp1 * ellipseC1;
+   const double sinlat{std::sin(lat)};
+   double temp1{ellipseA /  std::sqrt(1.0 - (ellipseE2 * (sinlat * sinlat)))};
+   double temp2{temp1 * ellipseC1};
    temp1 += alt;
    temp2 += alt;                          /* equ. A-10a */
 
    /* Obtain the projected horz position on the equatorial plane */
-   const double w = temp1 * std::cos(lat);
+   const double w{temp1 * std::cos(lat)};
 
    /* Obtain the projected vert position on the polar axis */
-   const double z = temp2 * sinlat;             /* equ. A-10b */
+   const double z{temp2 * sinlat};             /* equ. A-10b */
 
    /* Project the horizontal position on the two axes
    * in the equatorial plane */
-   const double x = w * std::cos(lon);          /* equ. A-11 */
+   const double x{w * std::cos(lon)};          /* equ. A-11 */
 
-   const double y = w * std::sin(lon);          /* modified by Huat Ng, IST */
+   const double y{w * std::sin(lon)};          /* modified by Huat Ng, IST */
 
    geocPos[IX] = x;
    geocPos[IY] = y;
@@ -1177,17 +1175,17 @@ bool getGeodCoords(
       double geodPos[3]          // OUT: Geodetic (WGS84) [ ILAT ILON IALT ] [ degs degs meters ]
    )
 {
-   static const double ellipseAsqOverB  = ellipseAsq / ellipseB;
-   static const double PIOVER2 = PI / 2.0;
+   static const double ellipseAsqOverB{ellipseAsq / ellipseB};
+   static const double PIOVER2{PI / 2.0};
 
-   long special_case2 = 0;
+   long special_case2{};
 
-   const double xp = geocPos[IX];
-   const double yp = geocPos[IY];
-   const double zp = geocPos[IZ];
+   const double xp{geocPos[IX]};
+   const double yp{geocPos[IY]};
+   const double zp{geocPos[IZ]};
 
-   double lat = 0;
-   double lon = 0;
+   double lat{};
+   double lon{};
    if ( xp != 0 ) {
       // normal (non-zero divide) case
       lon = std::atan2( yp, xp );
@@ -1218,49 +1216,48 @@ bool getGeodCoords(
    }
 
    /* calculate squares of xp, yp and zp */
-   const double xp_sq = xp * xp;
-   const double yp_sq = yp * yp;
-   const double zp_sq = zp * zp;
+   const double xp_sq{xp * xp};
+   const double yp_sq{yp * yp};
+   const double zp_sq{zp * zp};
 
    /* calculate wp_sq */
-   const double wp_sq = xp_sq + yp_sq;
-   const double wp = std::sqrt( wp_sq );
+   const double wp_sq{xp_sq + yp_sq};
+   const double wp{std::sqrt( wp_sq )};
 
    /* initial guess */
-   const double temp_m = ellipseAsq * zp_sq + ellipseBsq * wp_sq;
-   const double temp_sq = (std::sqrt (temp_m) - ellipseA * ellipseB);
-   double m = 0.5 * ((ellipseA * ellipseB * temp_m * (temp_sq))
-      / (ellipseAsq * ellipseAsq * zp_sq + ellipseBsq *
-      ellipseBsq * wp_sq));
+   const double temp_m{ellipseAsq * zp_sq + ellipseBsq * wp_sq};
+   const double temp_sq{(std::sqrt (temp_m) - ellipseA * ellipseB)};
+   double m{0.5 * ((ellipseA * ellipseB * temp_m * (temp_sq))
+      / (ellipseAsq * ellipseAsq * zp_sq + ellipseBsq * ellipseBsq * wp_sq))};
 
    /* calculate x,y z */
-   const double x = (1.0 / (1.0 + (2.0 * m) / ellipseAsq)) * xp;
-   const double y = (1.0 / (1.0 + (2.0 * m) / ellipseAsq)) * yp;
-   double z = (1.0 / (1.0 + (2.0 * m) / ellipseBsq)) * zp;
+   const double x{(1.0 / (1.0 + (2.0 * m) / ellipseAsq)) * xp};
+   const double y{(1.0 / (1.0 + (2.0 * m) / ellipseAsq)) * yp};
+   double z{(1.0 / (1.0 + (2.0 * m) / ellipseBsq)) * zp};
 
    /* calculate alt */
-   double h = std::sqrt((xp - x) * (xp - x) + (yp - y) * (yp - y) + (zp - z) * (zp - z));
+   double h{std::sqrt((xp - x) * (xp - x) + (yp - y) * (yp - y) + (zp - z) * (zp - z))};
 
    /* begin the iteration for convergence */
-   double w = 0;
-   double h_previous = h;
+   double w{};
+   double h_previous{h};
 
-   int index = 0;
+   int index{};
 
    do {
       h_previous = h;
 
-      const double temp1 = ellipseA + (2.0 * m) / ellipseA;
-      const double temp2 = ellipseB + (2.0 * m) / ellipseB;
-      const double temp1_sq = temp1 * temp1;
+      const double temp1{ellipseA + (2.0 * m) / ellipseA};
+      const double temp2{ellipseB + (2.0 * m) / ellipseB};
+      const double temp1_sq{temp1 * temp1};
 
-      const double temp2_sq = temp2 * temp2;
+      const double temp2_sq{temp2 * temp2};
 
       /* calculate f and f_prime */
 
-      const double f = wp_sq / temp1_sq + zp_sq / temp2_sq - 1.0;
-      const double f_prime = - (4.0 * wp_sq) / (ellipseA * temp1 * temp1_sq)
-         - (4.0 * zp_sq) / (ellipseB * temp2 * temp2_sq);
+      const double f{wp_sq / temp1_sq + zp_sq / temp2_sq - 1.0};
+      const double f_prime{-(4.0 * wp_sq) / (ellipseA * temp1 * temp1_sq)
+         - (4.0 * zp_sq) / (ellipseB * temp2 * temp2_sq)};
 
       /* Newton-Raphson's convergence algorithm */
 
@@ -1278,8 +1275,8 @@ bool getGeodCoords(
 
    /* convert x,y,z into latitude, longitude and height */
 
-   const double w_sq = w * w;
-   double alt = h;
+   const double w_sq{w * w};
+   double alt{h};
 
    if( (wp_sq + zp_sq) < (w_sq + z * z) ) {
       alt = -(alt);
@@ -1288,7 +1285,7 @@ bool getGeodCoords(
    /* calculate for latitude */
 
    if ( special_case2 == 0 ) {
-      double tanphi = 0;
+      double tanphi{};
       //if( wp != w )     /* if denominator not 0 */
       if ( (wp - w) > 1.0 ) {     /* if denominator not 0 */
          tanphi = (zp - z) / (wp - w);
@@ -1317,50 +1314,50 @@ bool getGeodAngle(
       double geodAngle[3]           // OUT: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
-   const double phi    = geodPos[ILAT] * angle::D2RCC; // Latitude
-   const double lambda = geodPos[ILON] * angle::D2RCC; // Longitude
+   const double phi    {geodPos[ILAT] * angle::D2RCC}; // Latitude
+   const double lambda {geodPos[ILON] * angle::D2RCC}; // Longitude
 
-   const double dis_roll  = geocAngle[IPHI];
-   const double dis_pitch = geocAngle[ITHETA];
-   const double dis_yaw   = geocAngle[IPSI];
+   const double dis_roll  {geocAngle[IPHI]};
+   const double dis_pitch {geocAngle[ITHETA]};
+   const double dis_yaw   {geocAngle[IPSI]};
 
-   const double cos_lat = std::cos(phi);
-   const double sin_lat = std::sin(phi);
-   const double cos_lon = std::cos(lambda);
-   const double sin_lon = std::sin(lambda);
+   const double cos_lat{std::cos(phi)};
+   const double sin_lat{std::sin(phi)};
+   const double cos_lon{std::cos(lambda)};
+   const double sin_lon{std::sin(lambda)};
 
-   const double sin_sin = sin_lat * sin_lon;
-   const double sin_cos = sin_lat * cos_lon;
-   const double cos_sin = cos_lat * sin_lon;
-   const double cos_cos = cos_lat * cos_lon;
+   const double sin_sin{sin_lat * sin_lon};
+   const double sin_cos{sin_lat * cos_lon};
+   const double cos_sin{cos_lat * sin_lon};
+   const double cos_cos{cos_lat * cos_lon};
 
-   const double cos_r = std::cos(dis_roll);
-   const double sin_r = std::sin(dis_roll);
+   const double cos_r{std::cos(dis_roll)};
+   const double sin_r{std::sin(dis_roll)};
 
-   const double cos_p = std::cos(dis_pitch);
-   const double sin_p = std::sin(dis_pitch);
+   const double cos_p{std::cos(dis_pitch)};
+   const double sin_p{std::sin(dis_pitch)};
 
-   const double cos_y = std::cos(dis_yaw);
-   const double sin_y = std::sin(dis_yaw);
+   const double cos_y{std::cos(dis_yaw)};
+   const double sin_y{std::sin(dis_yaw)};
 
-   const double pitch = std::asin(cos_cos * cos_p * cos_y + cos_sin * cos_p * sin_y - sin_lat * sin_p);
+   const double pitch{std::asin(cos_cos * cos_p * cos_y + cos_sin * cos_p * sin_y - sin_lat * sin_p)};
 
-   const double poly1 = cos_p * cos_y;
-   const double poly2 = cos_p * sin_y;
+   const double poly1{cos_p * cos_y};
+   const double poly2{cos_p * sin_y};
 
-   const double b_sub_11 = -sin_lon * poly1 + cos_lon * poly2;
-   const double b_sub_12 = -sin_cos * poly1 - sin_sin * poly2 - cos_lat * sin_p;
+   const double b_sub_11{-sin_lon * poly1 + cos_lon * poly2};
+   const double b_sub_12{-sin_cos * poly1 - sin_sin * poly2 - cos_lat * sin_p};
 
-   const double yaw = std::atan2(b_sub_11, b_sub_12);
+   const double yaw{std::atan2(b_sub_11, b_sub_12)};
 
-   const double b_sub_23 = cos_cos * (-cos_r * sin_y + sin_r * sin_p * cos_y) +
+   const double b_sub_23{cos_cos * (-cos_r * sin_y + sin_r * sin_p * cos_y) +
       cos_sin * ( cos_r * cos_y + sin_r * sin_p * sin_y) +
-      sin_lat * ( sin_r * cos_p);
-   const double b_sub_33 = cos_cos * ( sin_r * sin_y + cos_r * sin_p * cos_y) +
+      sin_lat * ( sin_r * cos_p)};
+   const double b_sub_33{cos_cos * ( sin_r * sin_y + cos_r * sin_p * cos_y) +
       cos_sin * (-sin_r * cos_y + cos_r * sin_p * sin_y) +
-      sin_lat * (cos_r * cos_p);
+      sin_lat * (cos_r * cos_p)};
 
-   const double roll = std::atan2(-b_sub_23, -b_sub_33);
+   const double roll{std::atan2(-b_sub_23, -b_sub_33)};
 
    geodAngle[IPITCH] = pitch;
    geodAngle[IROLL]  = roll;
@@ -1395,10 +1392,10 @@ bool getGeocAngle(
     Vec3d hpVec(0.0, 1.0, 0.0);
 
     hpVec = mat.transform3x3(hpVec, mat);
-    const double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
+    const double d{std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y())};
 
-    const double yawd   = -1.0 * std::atan2(hpVec.x(), hpVec.y());
-    double pitchd = std::atan2(static_cast<double>(hpVec.z()), d);
+    const double yawd{-1.0 * std::atan2(hpVec.x(), hpVec.y())};
+    double pitchd{std::atan2(static_cast<double>(hpVec.z()), d)};
 
     Vec3d rollVec(1.0, 0.0, 0.0);
 
@@ -1412,7 +1409,7 @@ bool getGeocAngle(
     hpMat.invert(hpMat);
 
     rollVec = hpMat.transform3x3(rollVec, hpMat);
-    const double rolld = -1.0 * std::atan2(rollVec.z(), rollVec.x());
+    const double rolld{-1.0 * std::atan2(rollVec.z(), rollVec.x())};
     pitchd   = -1.0 * pitchd;
 
     geocAngle[IPHI]   =  rolld;
@@ -1435,22 +1432,22 @@ bool getSimPosAccVel(
 {
    getGeodCoords(geocPos, geodPos);
 
-   const double lat = geodPos[ILAT] * angle::D2RCC;
-   const double lon = geodPos[ILON] * angle::D2RCC;
+   const double lat{geodPos[ILAT] * angle::D2RCC};
+   const double lon{geodPos[ILON] * angle::D2RCC};
 
-   const double cos_lat = std::cos(lat);
-   const double sin_lat = std::sin(lat);
-   const double cos_lon = std::cos(lon);
-   const double sin_lon = std::sin(lon);
+   const double cos_lat{std::cos(lat)};
+   const double sin_lat{std::sin(lat)};
+   const double cos_lon{std::cos(lon)};
+   const double sin_lon{std::sin(lon)};
 
-   const double sin_sin = sin_lat * sin_lon;
-   const double sin_cos = sin_lat * cos_lon;
-   const double cos_sin = cos_lat * sin_lon;
-   const double cos_cos = cos_lat * cos_lon;
+   const double sin_sin{sin_lat * sin_lon};
+   const double sin_cos{sin_lat * cos_lon};
+   const double cos_sin{cos_lat * sin_lon};
+   const double cos_cos{cos_lat * cos_lon};
 
-   double p_dworld = geocVel[IX];
-   double q_dworld = geocVel[IY];
-   double r_dworld = geocVel[IZ];
+   double p_dworld{geocVel[IX]};
+   double q_dworld{geocVel[IY]};
+   double r_dworld{geocVel[IZ]};
    geodVel[INORTH] = ( (p_dworld * -sin_cos + q_dworld * -sin_sin + r_dworld * cos_lat) );
    geodVel[IEAST]  = ( (p_dworld * -sin_lon + q_dworld * cos_lon) );
    geodVel[IDOWN]  = ( (p_dworld * -cos_cos + q_dworld * -cos_sin + r_dworld * -sin_lat) );
@@ -1480,22 +1477,22 @@ bool getWorldPosAccVel(
    /* get the geocentric position */
    getGeocCoords(geodPos, geocPos);
 
-   const double lat = geodPos[ILAT] * angle::D2RCC;
-   const double lon = geodPos[ILON] * angle::D2RCC;
+   const double lat{geodPos[ILAT] * angle::D2RCC};
+   const double lon{geodPos[ILON] * angle::D2RCC};
 
-   const double cos_lat = std::cos(lat);
-   const double sin_lat = std::sin(lat);
-   const double cos_lon = std::cos(lon);
-   const double sin_lon = std::sin(lon);
+   const double cos_lat{std::cos(lat)};
+   const double sin_lat{std::sin(lat)};
+   const double cos_lon{std::cos(lon)};
+   const double sin_lon{std::sin(lon)};
 
-   const double sin_sin = sin_lat * sin_lon;
-   const double sin_cos = sin_lat * cos_lon;
-   const double cos_sin = cos_lat * sin_lon;
-   const double cos_cos = cos_lat * cos_lon;
+   const double sin_sin{sin_lat * sin_lon};
+   const double sin_cos{sin_lat * cos_lon};
+   const double cos_sin{cos_lat * sin_lon};
+   const double cos_cos{cos_lat * cos_lon};
 
-   double p_aworld =  geodVel[INORTH];
-   double q_aworld =  geodVel[IEAST];
-   double r_aworld = geodVel[IDOWN];
+   double p_aworld{geodVel[INORTH]};
+   double q_aworld{geodVel[IEAST]};
+   double r_aworld{geodVel[IDOWN]};
 
    geocVel[IX] = ( p_aworld * -sin_cos + q_aworld * -sin_lon + r_aworld * -cos_cos );
    geocVel[IY] = ( p_aworld * -sin_sin + q_aworld *  cos_lon + r_aworld * -cos_sin );
@@ -1519,7 +1516,7 @@ bool getWorldPosAccVel(
 
 static char getLatZone(const double lat)
 {
-   char latZone = '*';
+   char latZone{'*'};
 
    if      (lat >   84.0) latZone = 'Z';  // error north
    else if (lat >=  72.0) latZone = 'X';
@@ -1552,8 +1549,8 @@ static int getLonZone(const double latDeg, const double lonDeg)
    //-----------------------------------
    // get longitude zone number
    //-----------------------------------
-   double lonZone = (lonDeg >= 0.0) ? 31.0 + lonDeg/6.0
-                                    : 1.0 + (lonDeg + 180.0)/6.0;
+   double lonZone{(lonDeg >= 0.0) ? 31.0 + lonDeg/6.0
+                                    : 1.0 + (lonDeg + 180.0)/6.0};
 
    //-----------------------------------
    // special case longitude zone number
@@ -1577,7 +1574,7 @@ static int getLonZone(const double latDeg, const double lonDeg)
 
 static bool inNorthHemi(const char latZone)
 {
-   bool northHemi = true;
+   bool northHemi{true};
 
    if (latZone == 'M' ||
        latZone == 'L' ||
@@ -1613,102 +1610,102 @@ bool convertLL2Utm(
    //-----------------------------------
    // local variables
    //-----------------------------------
-   double k1 = 0.0;
-   double k2 = 0.0;
-   double k3 = 0.0;
-   double k4 = 0.0;
+   double k1{};
+   double k2{};
+   double k3{};
+   double k4{};
 
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A       = pEM->getA();
-   const double B       = pEM->getB();
-   const double E2      = pEM->getE2();
+   const double A   {pEM->getA()};
+   const double B   {pEM->getB()};
+   const double E2  {pEM->getE2()};
 
    //-----------------------------------
    // check input terms valid
    //-----------------------------------
-   const bool latValid =  (-80.0 <= lat) && (lat <=  +84.0);
-   const bool lonValid = (-180.0 <= lon) && (lon <= +180.0);
-   const bool ok = latValid && lonValid;
+   const bool latValid  { (-80.0 <= lat) && (lat <=  +84.0)};
+   const bool lonValid  {(-180.0 <= lon) && (lon <= +180.0)};
+   const bool ok{latValid && lonValid};
    if (ok) {
-      const double LATDEG  = lat;
-      const double LATRAD  = lat * angle::D2RCC;
-      const double LONDEG  = lon;
+      const double LATDEG{lat};
+      const double LATRAD{lat * angle::D2RCC};
+      const double LONDEG{lon};
 
       //-----------------------------------
       // powers of sin,cos,tan of latitude
       //-----------------------------------
-      const double SIN1  = std::sin(LATRAD);
-      const double COS1  = std::cos(LATRAD);
+      const double SIN1  {std::sin(LATRAD)};
+      const double COS1  {std::cos(LATRAD)};
 
-      const double SIN2 = SIN1*SIN1;
+      const double SIN2  {SIN1*SIN1};
 
-      const double COS2 = COS1*COS1;
-      const double COS3 = COS1*COS2;
-      const double COS4 = COS1*COS3;
-      const double COS5 = COS1*COS4;
-      const double COS6 = COS1*COS5;
-      const double COS7 = COS1*COS6;
-      const double COS8 = COS1*COS7;
+      const double COS2  {COS1*COS1};
+      const double COS3  {COS1*COS2};
+      const double COS4  {COS1*COS3};
+      const double COS5  {COS1*COS4};
+      const double COS6  {COS1*COS5};
+      const double COS7  {COS1*COS6};
+      const double COS8  {COS1*COS7};
 
-      const double TAN1 = SIN1/COS1;
-      const double TAN2 = TAN1*TAN1;
-      const double TAN3 = TAN1*TAN2;
-      const double TAN4 = TAN1*TAN3;
-      const double TAN5 = TAN1*TAN4;
-      const double TAN6 = TAN1*TAN5;
+      const double TAN1  {SIN1/COS1};
+      const double TAN2  {TAN1*TAN1};
+      const double TAN3  {TAN1*TAN2};
+      const double TAN4  {TAN1*TAN3};
+      const double TAN5  {TAN1*TAN4};
+      const double TAN6  {TAN1*TAN5};
 
       //---------------
       // term S
       //---------------
-      const double N1 = (A - B)/(A + B);
-      const double N2 = N1*N1;
-      const double N3 = N1*N2;
-      const double N4 = N1*N3;
-      const double N5 = N1*N4;
+      const double N1  {(A - B)/(A + B)};
+      const double N2  {N1*N1};
+      const double N3  {N1*N2};
+      const double N4  {N1*N3};
+      const double N5  {N1*N4};
 
-      const double Ap =               A*( 1.0 - N1 + (1.25)  *(N2 - N3) + (81.0/64.0)*(N4 - N5) );
-      const double Bp =         (1.5)*A*(  N1 - N2 + (0.875) *(N3 - N4) + (55.0/64.0)*(N5) );
-      const double Cp =      (0.9375)*A*(  N2 - N3 + (0.75)  *(N4 - N5) );
-      const double Dp =   (35.0/48.0)*A*(  N3 - N4 + (0.6875)*(N5) );
-      const double Ep = (315.0/512.0)*A*(  N4 - N5 );
+      const double Ap  {              A*( 1.0 - N1 + (1.25)  *(N2 - N3) + (81.0/64.0)*(N4 - N5) )};
+      const double Bp  {        (1.5)*A*(  N1 - N2 + (0.875) *(N3 - N4) + (55.0/64.0)*(N5) )};
+      const double Cp  {     (0.9375)*A*(  N2 - N3 + (0.75)  *(N4 - N5) )};
+      const double Dp  {  (35.0/48.0)*A*(  N3 - N4 + (0.6875)*(N5) )};
+      const double Ep  {(315.0/512.0)*A*(  N4 - N5 )};
 
-      const double SIN2LAT = std::sin(2.0*LATRAD);
-      const double SIN4LAT = std::sin(4.0*LATRAD);
-      const double SIN6LAT = std::sin(6.0*LATRAD);
-      const double SIN8LAT = std::cos(6.0*LATRAD);
+      const double SIN2LAT  {std::sin(2.0*LATRAD)};
+      const double SIN4LAT  {std::sin(4.0*LATRAD)};
+      const double SIN6LAT  {std::sin(6.0*LATRAD)};
+      const double SIN8LAT  {std::cos(6.0*LATRAD)};
 
-      const double S  = Ap*LATRAD - Bp*SIN2LAT + Cp*SIN4LAT - Dp*SIN6LAT + Ep*SIN8LAT;
+      const double S  {Ap*LATRAD - Bp*SIN2LAT + Cp*SIN4LAT - Dp*SIN6LAT + Ep*SIN8LAT};
 
       //---------------
       // constants
       //---------------
-      const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;  // -1.0 indicates an error
-      const double EP4  = EP2*EP2;
-      const double EP6  = EP2*EP4;
-      const double EP8  = EP2*EP6;
+      const double EP2   {(E2 != 1.0) ? E2/(1.0 - E2) : -1.0};  // -1.0 indicates an error
+      const double EP4   {EP2*EP2};
+      const double EP6   {EP2*EP4};
+      const double EP8   {EP2*EP6};
 
-      const double K0   = 0.9996;
-      const double P    = A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5);
-      const double Q    = P*(1.0 + EP2*COS2);
+      const double K0    {0.9996};
+      const double P     {A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5)};
+      const double Q     {P*(1.0 + EP2*COS2)};
 
       //---------------
       // term T1
       //---------------
-      const double T1 = S*K0;
+      const double T1   {S*K0};
 
       //---------------
       // term T2
       //---------------
-      const double T2 = Q*SIN1*COS1*K0/2.0;
+      const double T2   {Q*SIN1*COS1*K0/2.0};
 
       //---------------
       // term T3
       //---------------
       k1 = Q*SIN1*COS3*K0/24.0;
       k2 = 5.0 - TAN2 + 9.0*EP2*COS2 + 4.0*EP4*COS4;
-      const double T3 = k1*k2;
+      const double T3   {k1*k2};
 
       //---------------
       // term T4
@@ -1717,26 +1714,26 @@ bool convertLL2Utm(
       k2 = 61.0 - 58.0*TAN2 + TAN4 + 270.0*EP2*COS2 - 330.0*TAN2*EP2*COS2;
       k3 = 445.0*EP4*COS4 + 324.0*EP6*COS6 - 680.0*TAN2*EP4*COS4;
       k4 = 88.0*EP8*COS8 - 600.0*TAN2*EP6*COS6 - 192.0*TAN2*EP8*COS8;
-      const double T4 =  k1*(k2 + k3 + k4);
+      const double T4   {k1*(k2 + k3 + k4)};
 
       //---------------
       // term T5
       //---------------
       k1 = Q*SIN1*COS7*K0/40320.0;
       k2 = 1385.0 - 3111.0*TAN2 + 543.0*TAN4 - TAN6;
-      const double T5 = k1*k2;
+      const double T5   {k1*k2};
 
       //---------------
       // term T6
       //---------------
-      const double T6 = Q*COS1*K0;
+      const double T6   {Q*COS1*K0};
 
       //---------------
       // term T7
       //---------------
       k1 = Q*COS3*K0/6.0;
       k2 = 1.0 - TAN2 + EP2*COS2;
-      const double T7 = k1*k2;
+      const double T7   {k1*k2};
 
       //---------------
       // term T8
@@ -1744,14 +1741,14 @@ bool convertLL2Utm(
       k1 = Q*COS5*K0/120.0;
       k2 = 5.0 - 18.0*TAN2 + TAN4 + 14.0*EP2*COS2 - 58.0*TAN2*EP2*COS2;
       k3 = 13.0*EP4*COS4 + 4.0*EP6*COS6 - 64.0*TAN2*EP4*COS4 - 24.0*TAN2*EP6*COS6;
-      const double T8 = k1*(k2 + k3);
+      const double T8   {k1*(k2 + k3)};
 
       //---------------
       // term T9
       //---------------
       k1 = Q*COS7*K0/5040.0;
       k2 = 61.0 - 479.0*TAN2 + 179*TAN4 - TAN6;
-      const double T9 = k1*k2;
+      const double T9   {k1*k2};
 
       //-----------------------------------
       // get latitude and longitude zones
@@ -1759,20 +1756,20 @@ bool convertLL2Utm(
       *pLatZone = getLatZone(lat);
       *pLonZone = getLonZone(lat, lon);
 
-      const int    LONZONE = 1 + static_cast<int>((LONDEG + 180.0)/6.0);
-      const double LONORIG = 6.0*(LONZONE - 1) - 180.0 + 3.0;
+      const int    LONZONE   {1 + static_cast<int>((LONDEG + 180.0)/6.0)};
+      const double LONORIG   {6.0*(LONZONE - 1) - 180.0 + 3.0};
 
-      const double dL1 = angle::D2RCC*(LONDEG - LONORIG);
-      const double dL2 = dL1*dL1;
-      const double dL3 = dL1*dL2;
-      const double dL4 = dL1*dL3;
-      const double dL5 = dL1*dL4;
-      const double dL6 = dL1*dL5;
-      const double dL7 = dL1*dL6;
-      const double dL8 = dL1*dL7;
+      const double dL1   {angle::D2RCC*(LONDEG - LONORIG)};
+      const double dL2   {dL1*dL1};
+      const double dL3   {dL1*dL2};
+      const double dL4   {dL1*dL3};
+      const double dL5   {dL1*dL4};
+      const double dL6   {dL1*dL5};
+      const double dL7   {dL1*dL6};
+      const double dL8   {dL1*dL7};
 
-      const double FN  = (LATDEG < 0.0) ? 1.0e7 : 0.0;
-      const double FE  = 500000.0;
+      const double FN   {(LATDEG < 0.0) ? 1.0e7 : 0.0};
+      const double FE   {500000.0};
 
       *pNorthing = FN + T1 + dL2*T2 + dL4*T3 + dL6*T4 + dL8*T5;
       *pEasting  = FE +      dL1*T6 + dL3*T7 + dL5*T8 + dL7*T9;
@@ -1801,35 +1798,35 @@ bool convertUtm2LL(
    //-----------------------------------
    // local variables
    //-----------------------------------
-   double k1 = 0.0;
-   double k2 = 0.0;
-   double k3 = 0.0;
-   double k4 = 0.0;
-   double k5 = 0.0;
+   double k1{};
+   double k2{};
+   double k3{};
+   double k4{};
+   double k5{};
 
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double A    = pEM->getA();
-   const double B    = pEM->getB();
+   const double A     {pEM->getA()};
+   const double B     {pEM->getB()};
 
-   const double E2   = pEM->getE2();
-   const double E4   = E2*E2;
-   const double E6   = E2*E4;
+   const double E2    {pEM->getE2()};
+   const double E4    {E2*E2};
+   const double E6    {E2*E4};
 
-   const double EP2  = (E2 != 1.0) ? E2/(1.0 - E2) : -1.0;
-   const double EP4  = EP2*EP2;
-   const double EP6  = EP2*EP4;
-   const double EP8  = EP2*EP6;
+   const double EP2   {(E2 != 1.0) ? E2/(1.0 - E2) : -1.0};
+   const double EP4   {EP2*EP2};
+   const double EP6   {EP2*EP4};
+   const double EP8   {EP2*EP6};
 
-   const double K01  = 0.9996;   // central scale factor for UTM
-   const double K02  = K01*K01;
-   const double K03  = K01*K02;
-   const double K04  = K01*K03;
-   const double K05  = K01*K04;
-   const double K06  = K01*K05;
-   const double K07  = K01*K06;
-   const double K08  = K01*K07;
+   const double K01   {0.9996};   // central scale factor for UTM
+   const double K02   {K01*K01};
+   const double K03   {K01*K02};
+   const double K04   {K01*K03};
+   const double K05   {K01*K04};
+   const double K06   {K01*K05};
+   const double K07   {K01*K06};
+   const double K08   {K01*K07};
 
    //-----------------------------------
    // calculate the footprint latitude (FPLAT)
@@ -1837,77 +1834,77 @@ bool convertUtm2LL(
    k1 = inNorthHemi(latZone) ? northing : (northing - 1.0e7);
    k2 = A*K01*(1.0 - E2/4.0 - (3.0/64.0)*E4 - (5.0/256.0)*E6);
 
-   const double MU      = k1/k2;
-   const double SIN2MU  = std::sin(2.0*MU);
-   const double SIN4MU  = std::cos(4.0*MU);
-   const double SIN6MU  = std::sin(6.0*MU);
-   const double SIN8MU  = std::cos(8.0*MU);
+   const double MU       {k1/k2};
+   const double SIN2MU   {std::sin(2.0*MU)};
+   const double SIN4MU   {std::cos(4.0*MU)};
+   const double SIN6MU   {std::sin(6.0*MU)};
+   const double SIN8MU   {std::cos(8.0*MU)};
 
-   const double N1      = (A - B)/(A + B);
-   const double N2      = N1*N1;
-   const double N3      = N1*N2;
-   const double N4      = N1*N3;
+   const double N1       {(A - B)/(A + B)};
+   const double N2       {N1*N1};
+   const double N3       {N1*N2};
+   const double N4       {N1*N3};
 
-   const double J1      =      (3.0/2.0)*N1 - (27.0/32.0)*N3;
-   const double J2      =    (21.0/16.0)*N2 - (55.0/32.0)*N4;
-   const double J3      =   (151.0/96.0)*N3;
-   const double J4      = (1097.0/512.0)*N4;
+   const double J1       {     (3.0/2.0)*N1 - (27.0/32.0)*N3};
+   const double J2       {   (21.0/16.0)*N2 - (55.0/32.0)*N4};
+   const double J3       {  (151.0/96.0)*N3};
+   const double J4       {(1097.0/512.0)*N4};
 
-   const double FPLAT   = MU + J1*SIN2MU + J2*SIN4MU + J3*SIN6MU + J4*SIN8MU;
+   const double FPLAT    {MU + J1*SIN2MU + J2*SIN4MU + J3*SIN6MU + J4*SIN8MU};
 
    //-----------------------------------
    // powers of sin,cos,tan of FPLAT
    //-----------------------------------
-   const double SIN1    = std::sin(FPLAT);
-   const double SIN2    = SIN1*SIN1;
+   const double SIN1     {std::sin(FPLAT)};
+   const double SIN2     {SIN1*SIN1};
 
-   const double COS1    = std::cos(FPLAT);
-   const double COS2    = COS1*COS1;
-   const double COS3    = COS1*COS2;
-   const double COS4    = COS1*COS3;
-   const double COS5    = COS1*COS4;
-   const double COS6    = COS1*COS5;
-   const double COS7    = COS1*COS6;
-   const double COS8    = COS1*COS7;
+   const double COS1     {std::cos(FPLAT)};
+   const double COS2     {COS1*COS1};
+   const double COS3     {COS1*COS2};
+   const double COS4     {COS1*COS3};
+   const double COS5     {COS1*COS4};
+   const double COS6     {COS1*COS5};
+   const double COS7     {COS1*COS6};
+   const double COS8     {COS1*COS7};
 
-   const double TAN1    = SIN1/COS1;
-   const double TAN2    = TAN1*TAN1;
-   const double TAN3    = TAN1*TAN2;
-   const double TAN4    = TAN1*TAN3;
-   const double TAN5    = TAN1*TAN4;
-   const double TAN6    = TAN1*TAN5;
+   const double TAN1     {SIN1/COS1};
+   const double TAN2     {TAN1*TAN1};
+   const double TAN3     {TAN1*TAN2};
+   const double TAN4     {TAN1*TAN3};
+   const double TAN5     {TAN1*TAN4};
+   const double TAN6     {TAN1*TAN5};
 
-   const double P       = A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5);
-   const double Q1      = P*(1.0 + EP2*COS2);
-   const double Q2      = Q1*Q1;
-   const double Q3      = Q1*Q2;
-   const double Q4      = Q1*Q3;
-   const double Q5      = Q1*Q4;
-   const double Q6      = Q1*Q5;
-   const double Q7      = Q1*Q6;
+   const double P        {A*(1.0 - E2)/std::pow((1.0 - E2*SIN2), 1.5)};
+   const double Q1       {P*(1.0 + EP2*COS2)};
+   const double Q2       {Q1*Q1};
+   const double Q3       {Q1*Q2};
+   const double Q4       {Q1*Q3};
+   const double Q5       {Q1*Q4};
+   const double Q6       {Q1*Q5};
+   const double Q7       {Q1*Q6};
 
-   const double FE      = 500000.0;
-   const double DE1     = easting - FE;
-   const double DE2     = DE1*DE1;
-   const double DE3     = DE1*DE2;
-   const double DE4     = DE1*DE3;
-   const double DE5     = DE1*DE4;
-   const double DE6     = DE1*DE5;
-   const double DE7     = DE1*DE6;
-   const double DE8     = DE1*DE7;
+   const double FE       {500000.0};
+   const double DE1      {easting - FE};
+   const double DE2      {DE1*DE1};
+   const double DE3      {DE1*DE2};
+   const double DE4      {DE1*DE3};
+   const double DE5      {DE1*DE4};
+   const double DE6      {DE1*DE5};
+   const double DE7      {DE1*DE6};
+   const double DE8      {DE1*DE7};
 
    //---------------
    // term T10
    //---------------
    k1 = 2.0*P*Q1*K02;
-   const double T10 = TAN1/k1;
+   const double T10   {TAN1/k1};
 
    //---------------
    // term T11
    //---------------
    k1 = 5.0 + 3.0*TAN2 + EP2*COS2 - 4.0*EP4*COS4 - 9.0*TAN2*EP2*COS2;
    k2 = 24.0*P*Q3*K04;
-   const double T11 = TAN1*k1/k2;
+   const double T11   {TAN1*k1/k2};
 
    //---------------
    // term T12
@@ -1917,27 +1914,27 @@ bool convertUtm2LL(
    k3 = - 90.0*TAN4*EP2*COS2 + 88.0*EP8*COS8 + 225.0*TAN4*EP4*COS4;
    k4 = + 84.0*TAN2*EP6*COS6 - 192.0*TAN2*EP8*COS8;
    k5 = 720.0*P*Q5*K06;
-   const double T12 = TAN1*(k1 + k2 + k3 + k4)/k5;
+   const double T12   {TAN1*(k1 + k2 + k3 + k4)/k5};
 
    //---------------
    // term T13
    //---------------
    k1 = 1385.0 + 3633.0*TAN2 + 4095.0*TAN4 + 1575.0*TAN6;
    k2 = 40320.0*P*Q7*K08;
-   const double T13 = TAN1*k1/k2;
+   const double T13   {TAN1*k1/k2};
 
    //---------------
    // term T14
    //---------------
    k1 = Q1*COS1*K01;
-   const double T14 = 1.0/k1;
+   const double T14   {1.0/k1};
 
    //---------------
    // term T15
    //---------------
    k1 = 1.0 + 2.0*TAN2 + EP2*COS2;
    k2 = 6.0*Q3*COS1*K03;
-   const double T15 = k1/k2;
+   const double T15   {k1/k2};
 
    //---------------
    // term T16
@@ -1945,21 +1942,20 @@ bool convertUtm2LL(
    k1 = 5.0 + 6.0*EP2*COS2 + 28.0*TAN2 - 3.0*EP4*COS4 + 8.0*TAN2*EP2*COS2;
    k2 = 24.0*TAN4 - 4.0*EP6*COS6 + 4.0*TAN2*EP4*COS4 + 24.0*TAN2*EP6*COS6;
    k3 = 120.0*Q5*COS1*K05;
-   const double T16 = (k1 + k2)/k3;
+   const double T16   {(k1 + k2)/k3};
 
    //---------------
    // term T17
    //---------------
    k1 = 61.0 + 662.0*TAN2 + 1320.0*TAN4 + 720.0*TAN6;
    k2 = 5040.0*Q7*COS1*K07;
-   const double T17 = k1/k2;
-
+   const double T17   {k1/k2};
 
    //-----------------------------------
    // calculate latitude and longitude
    //-----------------------------------
-   const double LATDEG = FPLAT * angle::R2DCC;
-   const double LONDEG = 6.0*(lonZone - 1.0) - 180.0 + 3.0;
+   const double LATDEG   {FPLAT * angle::R2DCC};
+   const double LONDEG   {6.0*(lonZone - 1.0) - 180.0 + 3.0};
    *pLat = LATDEG + angle::R2DCC*(-DE2*T10 + DE4*T11 - DE6*T12 + DE8*T13);
    *pLon = LONDEG + angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
 

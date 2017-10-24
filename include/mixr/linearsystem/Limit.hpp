@@ -26,9 +26,10 @@ public:
    Limit();
    Limit(const double lower, const double upper);
 
-   // Set slot functions
-   virtual bool setSlotLowerLimit(const base::Number* const msg);
-   virtual bool setSlotUpperLimit(const base::Number* const msg);
+private:
+   // slot table helper methods
+   bool setSlotLowerLimit(const base::Number* const);
+   bool setSlotUpperLimit(const base::Number* const);
 };
 
 }

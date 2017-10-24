@@ -37,17 +37,17 @@ public:
     CadrgFrameEntry();
 
     // Get
-    bool doIExist() { return exists; }
-    const char* getDirectory() { return directory; }
-    const char* getFileName() { return filename; }
-    CadrgFrame* getFrame() { return frame; }
-    const CadrgClut& getClut() { return clut; }
+    bool doIExist()                   { return exists; }
+    const char* getDirectory()        { return directory; }
+    const char* getFileName()         { return filename; }
+    CadrgFrame* getFrame()            { return frame; }
+    const CadrgClut& getClut()        { return clut; }
 
     // Set
     virtual void setPathName(const char* dir, const char* file);
-    virtual void setCib(const bool x);
+    virtual void setCib(const bool);
     virtual void loadClut();
-    virtual void setFrame(CadrgFrame* newFrame);
+    virtual void setFrame(CadrgFrame*);
 
 private:
     bool exists {};        // Does this entry exist (has a path name been set?)

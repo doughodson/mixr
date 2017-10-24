@@ -25,8 +25,8 @@ BEGIN_SLOTTABLE(FtglHaloFont)
 END_SLOTTABLE(FtglHaloFont)
 
 BEGIN_SLOT_MAP(FtglHaloFont)
-    ON_SLOT(1, setHaloColor, base::Color)
-    ON_SLOT(2, setLinewidth, base::Number)
+    ON_SLOT(1, setSlotHaloColor, base::Color)
+    ON_SLOT(2, setSlotLinewidth, base::Number)
 END_SLOT_MAP()
 
 FtglHaloFont::FtglHaloFont()
@@ -277,7 +277,7 @@ void FtglHaloFont::loadFont()
 
 }
 
-bool FtglHaloFont::setHaloColor(base::Color* x)
+bool FtglHaloFont::setSlotHaloColor(base::Color* x)
 {
     // set our halo color
     if (haloColor != nullptr) haloColor->unref();
@@ -289,7 +289,7 @@ bool FtglHaloFont::setHaloColor(base::Color* x)
     return true;
 }
 
-bool FtglHaloFont::setLinewidth(const base::Number* const x)
+bool FtglHaloFont::setSlotLinewidth(const base::Number* const x)
 {
     bool ok {};
     if (x != nullptr) {

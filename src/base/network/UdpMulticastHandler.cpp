@@ -23,8 +23,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/UdpMulticastHandler.hpp"
@@ -56,8 +56,8 @@ END_SLOTTABLE(UdpMulticastHandler)
 
 BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1, setSlotMulticastGroup, String)
-    ON_SLOT(2, setSlotTTL, Number)
-    ON_SLOT(3, setSlotLoopback, Number)
+    ON_SLOT(2, setSlotTTL,            Number)
+    ON_SLOT(3, setSlotLoopback,       Number)
 END_SLOT_MAP()
 
 UdpMulticastHandler::UdpMulticastHandler()
@@ -125,10 +125,10 @@ bool UdpMulticastHandler::init()
     // ---
     {
 #if defined(WIN32)
-        BOOL optval = getLoopback();
+        BOOL optval{getLoopback()};
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
-        int optval = getLoopback();
+        int optval{getLoopback()};
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_LOOP, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
             std::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_LOOP)\n");
@@ -141,10 +141,10 @@ bool UdpMulticastHandler::init()
     // ---
     {
 #if defined(WIN32)
-        int optval = getTTL();
+        int optval{getTTL()};
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
-        int optval = getTTL();
+        int optval{getTTL()};
         if (::setsockopt(socketNum, IPPROTO_IP, IP_MULTICAST_TTL, &optval, sizeof(optval)) == SOCKET_ERROR) {
 #endif
             std::perror("UdpMulticastHandler::init(): error setsockopt(IP_MULTICAST_TTL)\n");
@@ -203,7 +203,7 @@ bool UdpMulticastHandler::joinTheGroup()
    if (socketNum == INVALID_SOCKET) return false;
 
    // Find our network address
-   uint32_t mg = htonl (INADDR_NONE);
+   uint32_t mg{htonl (INADDR_NONE)};
    if (multicastGroup != nullptr) mg = ::inet_addr(multicastGroup);
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
@@ -214,13 +214,13 @@ bool UdpMulticastHandler::joinTheGroup()
    }
 
    // Use our local IP address to select which interface to use
-   uint32_t iface = getLocalAddr();
+   uint32_t iface{getLocalAddr()};
 
    // Set the socket option to add membership to the multicast group
    struct ip_mreq mreq;
    mreq.imr_multiaddr.s_addr = getNetAddr();
    mreq.imr_interface.s_addr = iface;
-   int result = ::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, reinterpret_cast<const char*>(&mreq), sizeof(mreq));
+   int result{::setsockopt(socketNum, IPPROTO_IP, IP_ADD_MEMBERSHIP, reinterpret_cast<const char*>(&mreq), sizeof(mreq))};
    if (result == SOCKET_ERROR) {
       std::perror("UdpMulticastHandler::joinTheGroup(): setsockopt mreq");
       return false;
@@ -254,7 +254,7 @@ bool UdpMulticastHandler::closeConnection()
 // multicastGroup: String containing the multicast IP address
 bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         multicastGroup = msg->getCopyString();
         ok = true;
@@ -265,7 +265,7 @@ bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 // ttl: Time-To-Live value
 bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         setTTL( msg->getInt() );
         ok = true;
@@ -276,7 +276,7 @@ bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 // loopback: Loopback flag
 bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         setLoopback( msg->getBoolean() );
         ok = true;

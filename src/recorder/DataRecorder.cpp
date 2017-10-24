@@ -5,9 +5,9 @@
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 
-#include "mixr/models/player/AirVehicle.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/Emission.hpp"
@@ -120,7 +120,7 @@ bool DataRecorder::processUnhandledId(const unsigned int id)
    const auto msg = new pb::DataRecord();
 
    // Record the unknown ID
-   pb::UnknownIdMsg* unknownIdMsg = msg->mutable_unknown_id_msg();
+   pb::UnknownIdMsg* unknownIdMsg {msg->mutable_unknown_id_msg()};
    unknownIdMsg->set_id(id);
 
    // DataRecord header
@@ -211,7 +211,7 @@ bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
    msg->set_id( REID_AI_EVENT );
 
    // new Input Device message
-   pb::InputDeviceMsg* aiMsg = msg->mutable_input_device_msg();
+   pb::InputDeviceMsg* aiMsg {msg->mutable_input_device_msg()};
    aiMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
    aiMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    aiMsg->set_value( static_cast<float>(values[2]) );
@@ -238,7 +238,7 @@ bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
    msg->set_id( REID_DI_EVENT );
 
    // new Input Device message
-   pb::InputDeviceMsg* diMsg = msg->mutable_input_device_msg();
+   pb::InputDeviceMsg* diMsg {msg->mutable_input_device_msg()};
    diMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
    diMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    diMsg->set_value( static_cast<float>(values[2]) );
@@ -266,7 +266,7 @@ bool DataRecorder::recordNewPlayer(const base::Object* objs[4], const double val
    msg->set_id( REID_NEW_PLAYER );
 
    // new player message
-   pb::NewPlayerEventMsg* newPlayerMsg = msg->mutable_new_player_event_msg();
+   pb::NewPlayerEventMsg* newPlayerMsg {msg->mutable_new_player_event_msg()};
 
    genPlayerId( newPlayerMsg->mutable_id(), player );
    genPlayerState( newPlayerMsg->mutable_state(), player );
@@ -293,7 +293,7 @@ bool DataRecorder::recordPlayerRemoved(const base::Object* objs[4], const double
    msg->set_id( REID_PLAYER_REMOVED );
 
    // removed player message
-   pb::PlayerRemovedEventMsg* removedEventMsg = msg->mutable_player_removed_event_msg();
+   pb::PlayerRemovedEventMsg* removedEventMsg {msg->mutable_player_removed_event_msg()};
 
    genPlayerId( removedEventMsg->mutable_id(), player );
    genPlayerState( removedEventMsg->mutable_state(), player );
@@ -320,7 +320,7 @@ bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double va
    msg->set_id( REID_PLAYER_DATA );
 
    // player data
-   pb::PlayerDataMsg* playerDataMsg = msg->mutable_player_data_msg();
+   pb::PlayerDataMsg* playerDataMsg {msg->mutable_player_data_msg()};
 
    genPlayerId( playerDataMsg->mutable_id(), player );
    genPlayerState( playerDataMsg->mutable_state(), player );
@@ -354,7 +354,7 @@ bool DataRecorder::recordPlayerDamaged(const base::Object* objs[4], const double
    msg->set_id( REID_PLAYER_DAMAGED );
 
    // player damaged message
-   pb::PlayerDamagedEventMsg* playerDamagedMsg = msg->mutable_player_damaged_event_msg();
+   pb::PlayerDamagedEventMsg* playerDamagedMsg {msg->mutable_player_damaged_event_msg()};
 
    genPlayerId( playerDamagedMsg->mutable_id(), player );
    genPlayerState( playerDamagedMsg->mutable_state(), player );
@@ -381,7 +381,7 @@ bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const doub
    msg->set_id( REID_PLAYER_COLLISION );
 
    // player collision message
-   pb::PlayerCollisionEventMsg* playerCollisionMsg = msg->mutable_player_collision_event_msg();
+   pb::PlayerCollisionEventMsg* playerCollisionMsg {msg->mutable_player_collision_event_msg()};
 
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
@@ -413,7 +413,7 @@ bool DataRecorder::recordPlayerCrash(const base::Object* objs[4], const double v
    msg->set_id( REID_PLAYER_CRASH );
 
    // player crashed message
-   pb::PlayerCrashEventMsg* playerCrashMsg = msg->mutable_player_crash_event_msg();
+   pb::PlayerCrashEventMsg* playerCrashMsg {msg->mutable_player_crash_event_msg()};
 
    genPlayerId( playerCrashMsg->mutable_id(), player );
    genPlayerState( playerCrashMsg->mutable_state(), player );
@@ -440,7 +440,7 @@ bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double 
    msg->set_id( REID_PLAYER_KILLED );
 
    // player killed message
-   pb::PlayerKilledEventMsg* playerKilledMsg = msg->mutable_player_killed_event_msg();
+   pb::PlayerKilledEventMsg* playerKilledMsg {msg->mutable_player_killed_event_msg()};
 
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
@@ -473,7 +473,7 @@ bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const doubl
    msg->set_id( REID_WEAPON_RELEASED );
 
    // Weapon Released message
-   pb::WeaponReleaseEventMsg* wpnRelMsg = msg->mutable_weapon_release_event_msg();
+   pb::WeaponReleaseEventMsg* wpnRelMsg {msg->mutable_weapon_release_event_msg()};
 
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
@@ -512,7 +512,7 @@ bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double va
    msg->set_id( REID_WEAPON_HUNG );
 
    // Weapon Hung message
-   pb::WeaponHungEventMsg* wpnHungMsg = msg->mutable_weapon_hung_event_msg();
+   pb::WeaponHungEventMsg* wpnHungMsg {msg->mutable_weapon_hung_event_msg()};
 
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
@@ -545,8 +545,8 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   const unsigned int detType =  static_cast<unsigned int>(values[0]);
-   const double missDist = values[1];
+   const unsigned int detType {static_cast<unsigned int>(values[0])};
+   const double missDist {values[1]};
 
    const auto msg = new pb::DataRecord();
 
@@ -632,7 +632,7 @@ bool DataRecorder::recordGunFired(const base::Object* objs[4], const double valu
    msg->set_id( REID_GUN_FIRED );
 
    // Gun Fired message
-   pb::GunFiredEventMsg* gunFiredMsg = msg->mutable_gun_fired_event_msg();
+   pb::GunFiredEventMsg* gunFiredMsg {msg->mutable_gun_fired_event_msg()};
 
    genPlayerId( gunFiredMsg->mutable_shooter_id(), shooter );
    gunFiredMsg->set_rounds(rounds);
@@ -662,7 +662,7 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
    msg->set_id( REID_NEW_TRACK );
 
    // New Track message
-   pb::NewTrackEventMsg* newTrackMsg = msg->mutable_new_track_event_msg();
+   pb::NewTrackEventMsg* newTrackMsg {msg->mutable_new_track_event_msg()};
 
    // player ID and state
    genPlayerId( newTrackMsg->mutable_player_id(), player );
@@ -675,7 +675,7 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
    genTrackData(newTrackMsg->mutable_track_data(), newTrack);
 
    // Track player
-   const models::Player* trkPlayer = newTrack->getTarget();
+   const models::Player* trkPlayer {newTrack->getTarget()};
    if (trkPlayer != nullptr) {
       genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
@@ -685,7 +685,7 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
    const auto rfTrk = dynamic_cast<const models::RfTrack*>(newTrack);
    if (rfTrk != nullptr) {
 
-      const models::Emission* emissionData = rfTrk->getLastEmission();
+      const models::Emission* emissionData {rfTrk->getLastEmission()};
       if (emissionData != nullptr) {
          genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
@@ -718,7 +718,7 @@ bool DataRecorder::recordTrackRemoved(const base::Object* objs[4], const double 
    msg->set_id( REID_TRACK_REMOVED );
 
    // Track Removed message
-   pb::TrackRemovedEventMsg* trackRemovedMsg = msg->mutable_track_removed_event_msg();
+   pb::TrackRemovedEventMsg* trackRemovedMsg {msg->mutable_track_removed_event_msg()};
 
    genPlayerId(trackRemovedMsg->mutable_player_id(), player);
 
@@ -751,7 +751,7 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
    msg->set_id( REID_TRACK_DATA );
 
    // Track Data message
-   pb::TrackDataMsg* trackDataMsg = msg->mutable_track_data_msg();
+   pb::TrackDataMsg* trackDataMsg {msg->mutable_track_data_msg()};
 
    // player ID and state
    genPlayerId( trackDataMsg->mutable_player_id(), player );
@@ -764,14 +764,14 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
    // track player
-   const models::Player* trkPlayer = trackData->getTarget();
+   const models::Player* trkPlayer {trackData->getTarget()};
    if (trkPlayer != nullptr) {
       genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
    }
 
    // Emission Data
-   const models::RfTrack* const rfTrk = dynamic_cast<const models::RfTrack*>(trackData);
+   const models::RfTrack* const rfTrk {dynamic_cast<const models::RfTrack*>(trackData)};
    if (rfTrk != nullptr) {
       const models::Emission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
@@ -799,13 +799,13 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
          id->set_id( player->getID() );
 
          // Player name
-         const base::String* name = player->getName();
+         const base::String* name {player->getName()};
          if (name != nullptr) id->set_name( *name );
 
          // Networked player federation name
          if ( player->isNetworkedPlayer() ) {
-            const simulation::AbstractNib* nib = player->getNib();
-            const base::String* fedName = nib->getFederateName();
+            const simulation::AbstractNib* nib {player->getNib()};
+            const base::String* fedName {nib->getFederateName()};
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
       }
@@ -891,8 +891,8 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track
          trkMsg->set_range(track->getRange());
 
          // lat/lon:
-         double lat(0.0);
-         double lon(0.0);
+         double lat{};
+         double lon{};
          track->getLatLonPosition(&lat, &lon);
 
          trkMsg->set_latitude(lat);
@@ -941,7 +941,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
 
          // transmitting player ID
          {
-            const models::Player* p = emData->getOwnship();
+            const models::Player* p {emData->getOwnship()};
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_origin_id(), p );
             }
@@ -949,7 +949,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
 
          // target player ID
          {
-            const models::Player* p = emData->getTarget();
+            const models::Player* p {emData->getTarget()};
             if (p != nullptr) {
                genPlayerId( emMsg->mutable_target_id(), p );
             }
@@ -1012,7 +1012,7 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
          msg->set_id( REID_FILE_ID );
 
          // File ID message
-         pb::FileIdMsg* fileIdMsg = msg->mutable_file_id_msg();
+         pb::FileIdMsg* fileIdMsg {msg->mutable_file_id_msg()};
 
          // from slot data:
          fileIdMsg->set_application(getApplication());
@@ -1046,16 +1046,16 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 void DataRecorder::timeStamp(pb::DataRecord* const msg)
 {
    if (msg != nullptr) {
-      simulation::Simulation* sim = getSimulation();
+      simulation::Simulation* sim {getSimulation()};
       if (sim != nullptr) {
-         pb::Time* time = msg->mutable_time();
+         pb::Time* time {msg->mutable_time()};
          time->set_exec_time( sim->getExecTimeSec() );
          time->set_sim_time( sim->getSimTimeOfDay() );
          time->set_utc_time( sim->getSysTimeOfDay() );
       }
       else {
          // unknown time
-         pb::Time* time = msg->mutable_time();
+         pb::Time* time {msg->mutable_time()};
          time->set_exec_time( -1.0 );
          time->set_sim_time( -1.0 );
          time->set_utc_time( -1.0 );
@@ -1082,7 +1082,7 @@ bool DataRecorder::setOutputHandler(OutputHandler* const msg)
 
 bool DataRecorder::setSlotEventName(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       eventName = msg->getCopyString();
       ok = true;
@@ -1092,7 +1092,7 @@ bool DataRecorder::setSlotEventName(base::String* const msg)
 
 bool DataRecorder::setSlotApplication(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       application = msg->getCopyString();
       ok = true;
@@ -1102,7 +1102,7 @@ bool DataRecorder::setSlotApplication(base::String* const msg)
 
 bool DataRecorder::setSlotCaseNum(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       caseNum = msg->getInt();
@@ -1112,7 +1112,7 @@ bool DataRecorder::setSlotCaseNum(base::Number* const msg)
 
 bool DataRecorder::setSlotMissionNum(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       missionNum = msg->getInt();
@@ -1122,7 +1122,7 @@ bool DataRecorder::setSlotMissionNum(base::Number* const msg)
 
 bool DataRecorder::setSlotSubjectNum(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       subjectNum = msg->getInt();
@@ -1132,7 +1132,7 @@ bool DataRecorder::setSlotSubjectNum(base::Number* const msg)
 
 bool DataRecorder::setSlotRunNum(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       runNum = msg->getInt();
@@ -1142,7 +1142,7 @@ bool DataRecorder::setSlotRunNum(base::Number* const msg)
 
 bool DataRecorder::setSlotDay(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       day = msg->getInt();
@@ -1152,7 +1152,7 @@ bool DataRecorder::setSlotDay(base::Number* const msg)
 
 bool DataRecorder::setSlotMonth(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       month = msg->getInt();
@@ -1162,7 +1162,7 @@ bool DataRecorder::setSlotMonth(base::Number* const msg)
 
 bool DataRecorder::setSlotYear(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
 
    if (msg != nullptr) {
       ok = true;

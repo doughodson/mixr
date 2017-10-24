@@ -20,8 +20,8 @@ BEGIN_SLOTTABLE(Table)
 END_SLOTTABLE(Table)
 
 BEGIN_SLOT_MAP(Table)
-    ON_SLOT(1, setDataTable, List)
-    ON_SLOT(2, setExtrapolationEnabled, Number)
+    ON_SLOT(1, setSlotDataTable, List)
+    ON_SLOT(2, setSlotExtrapolationEnabled, Number)
 END_SLOT_MAP()
 
 Table::Table()
@@ -123,9 +123,9 @@ bool Table::setExtrapolationEnabled(const bool flg)
    return true;
 }
 
-bool Table::setExtrapolationEnabled(const Number* const msg)
+bool Table::setSlotExtrapolationEnabled(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setExtrapolationEnabled( msg->getBoolean() );
    }
@@ -155,18 +155,17 @@ void Table::findMinMax(double* minValue, double* maxValue) const
 //------------------------------------------------------------------------------
 bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 {
-    unsigned int n {list.entries()};
+    const unsigned int n {list.entries()};
     if (n <= 0) return false;
 
     const auto p = new double[n];
-    unsigned int n2 = list.getNumberList(p, n);
-    bool ok = (n == n2);
+    const unsigned int n2{list.getNumberList(p, n)};
+    bool ok{(n == n2)};
     if (ok) {
         // Have the data!
         *table = p;
         *nn = n;
-    }
-    else {
+    } else {
         // Something is wrong, free the table
         delete[] p;
         throw new ExpInvalidVector();     // invalid vector - throw an exception
@@ -195,8 +194,7 @@ bool Table::setDataTable(const List* const sdtobj)
                 if (dtable != nullptr) delete[] dtable;
                 dtable = p;
                 nd = ts;
-            }
-            else {
+            } else {
                 // Something is wrong!
                 delete[] p;
                 std::cerr << "Table::setDataTable: Something is wrong!  Data table aborted." << std::endl;

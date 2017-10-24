@@ -114,7 +114,7 @@ int VMap0RefCoverageDirectory::getPolBndCoordsByLatLon(const float maxLat, const
     if (featureTables[EBR]->isLoaded() && featureTables[EDG]->isLoaded()) {
         int index {1};
         VpfRecord* record = featureTables[EBR]->getRecord(index);
-        double xMin {}, yMin {}, xMax {}, yMax {};
+        double xMin{}, yMin{}, xMax{}, yMax{};
         // take the absolute value of xmin thru xmax and our lat coverage, so we don't have to worry about sign
         while (record != nullptr) {
             xMin = std::atof(record->getData(2));
@@ -127,7 +127,7 @@ int VMap0RefCoverageDirectory::getPolBndCoordsByLatLon(const float maxLat, const
                     //int temp = record->getCoordinate
                     VpfRecord* r {featureTables[EDG]->getRecord(index)};
                     if (r != nullptr) {
-                        int temp {r->getCoordinate(8, vec, idx, max)};
+                        const int temp {r->getCoordinate(8, vec, idx, max)};
                         numCoords += temp;
                     }
                 }
@@ -278,7 +278,7 @@ VMap0FeatureClass* VMap0RefCoverageDirectory::getFeatureClassByName(const char* 
     for (int i = 0; i < numFeatureClasses; i++) {
         if (std::strcmp(featureClass[i]->getName(), name) == 0) return featureClass[i];
     }
-    return 0;
+    return nullptr;
 }
 
 }

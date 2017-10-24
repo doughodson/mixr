@@ -17,27 +17,30 @@ namespace terrain {
 //------------------------------------------------------------------------------
 class DtedFile : public DataFile
 {
-    DECLARE_SUBCLASS(DtedFile, DataFile)
+   DECLARE_SUBCLASS(DtedFile, DataFile)
 
 public:
-    DtedFile();
+   DtedFile();
 
 protected:
    bool isVerifyChecksum() const { return verifyChecksum; }
-   virtual bool setSlotVerifyChecksum(const base::Number* const msg);
 
 private:
-    // Interpret signed-magnitude values from DTED file
-    static short readValue(const unsigned char hbyte, const unsigned char lbyte);
-    static long readValue(const unsigned char hbyte, const unsigned char byte1, const unsigned char byte2, const unsigned char lbyte);
+   // Interpret signed-magnitude values from DTED file
+   static short readValue(const unsigned char hbyte, const unsigned char lbyte);
+   static long readValue(const unsigned char hbyte, const unsigned char byte1, const unsigned char byte2, const unsigned char lbyte);
 
-    // Read in cell parameters from DTED headers
-    bool readDtedHeaders(std::istream& in);
-    bool readDtedData(std::istream& in);
+   // Read in cell parameters from DTED headers
+   bool readDtedHeaders(std::istream&);
+   bool readDtedData(std::istream&);
 
-    virtual bool loadData() override;
+   virtual bool loadData() override;
 
    bool verifyChecksum {true};    // verify the file checksum flag
+
+private:
+   // slot table helper methods
+   bool setSlotVerifyChecksum(const base::Number* const);
 };
 
 

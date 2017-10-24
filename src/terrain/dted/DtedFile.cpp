@@ -110,9 +110,9 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constants
 //------------------------------------------------------------------------------
-static const unsigned char  DATA_RECOGNITION_SENTINEL = 170; // 252 base 8
-static const char* UHL_RECOGNITION_SENTINEL = "UHL";
-static const char  UHL_FIXED_BY_STANDARD_BYTE = '1';
+static const unsigned char  DATA_RECOGNITION_SENTINEL {170};   // 252 base 8
+static const char* UHL_RECOGNITION_SENTINEL           {"UHL"};
+static const char  UHL_FIXED_BY_STANDARD_BYTE         {'1'};
 
 DtedFile::DtedFile()
 {
@@ -131,7 +131,7 @@ void DtedFile::copyData(const DtedFile& org, const bool)
 //------------------------------------------------------------------------------
 bool DtedFile::setSlotVerifyChecksum(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       verifyChecksum = msg->getBoolean();
       ok = true;
@@ -147,9 +147,8 @@ bool DtedFile::loadData()
 {
     // Compute the filename (why can't we be given just one filename string!??)
     std::string temp_filename;
-    const char* p = getPathname();
-    if (p != nullptr)
-    {
+    const char* p {getPathname()};
+    if (p != nullptr) {
         temp_filename += p;
         temp_filename += '/';
     }
@@ -158,12 +157,11 @@ bool DtedFile::loadData()
         temp_filename += p;
 
     // Open the terrain file.
-    const char* filename = temp_filename.c_str();
+    const char* filename {temp_filename.c_str()};
 
     std::ifstream in;
     in.open(filename, std::ios::binary);
-    if ( in.fail() )
-    {
+    if ( in.fail() ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "DtedFile::loadData() ERROR, could not open file: " << filename << std::endl;
         }
@@ -171,8 +169,7 @@ bool DtedFile::loadData()
     }
 
     // Read cell parameters from the DTED headers
-    if ( !readDtedHeaders(in))
-    {
+    if ( !readDtedHeaders(in)) {
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
@@ -182,8 +179,7 @@ bool DtedFile::loadData()
     }
 
     // Read elevation data from the DTED file
-    if ( !readDtedData(in))
-    {
+    if ( !readDtedData(in)) {
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
@@ -205,22 +201,19 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the User Header Label (UHL) record
     dtedUhlRecord uhl;
     in.read(reinterpret_cast<char*>(&uhl), sizeof(uhl));
-    if (in.fail() || in.gcount() < sizeof(uhl))
-    {
+    if (in.fail() || in.gcount() < sizeof(uhl)) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: error reading UHL record." << std::endl;
         }
         return false;
     }
-    if (std::strncmp(uhl.recognition_sentinel, UHL_RECOGNITION_SENTINEL, sizeof(uhl.recognition_sentinel)) != 0)
-    {
+    if (std::strncmp(uhl.recognition_sentinel, UHL_RECOGNITION_SENTINEL, sizeof(uhl.recognition_sentinel)) != 0) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: invalid recognition sentinel in UHL record." << std::endl;
         }
         return false;
     }
-    if (uhl.fixed_by_standard[0] != UHL_FIXED_BY_STANDARD_BYTE)
-    {
+    if (uhl.fixed_by_standard[0] != UHL_FIXED_BY_STANDARD_BYTE) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: invalid fixed_by_standard byte in UHL record." << std::endl;
         }
@@ -230,8 +223,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the Data Set Identification (DSI) record
     dtedDsiRecord dsi;
     in.read(reinterpret_cast<char*>(&dsi), sizeof(dsi));
-    if (in.fail() || in.gcount() < sizeof(dsi))
-    {
+    if (in.fail() || in.gcount() < sizeof(dsi)) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: error reading DSI record." << std::endl;
         }
@@ -241,10 +233,9 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the Accuracy Description (ACC) record
     dtedAccRecord acc;
     in.read(reinterpret_cast<char*>(&acc), sizeof(acc));
-    if (in.fail() || in.gcount() < sizeof(acc))
-    {
+    if (in.fail() || in.gcount() < sizeof(acc)) {
         if (isMessageEnabled(MSG_ERROR)) {
-        std::cerr << "DtedFile::readDtedHeaders: error reading ACC record." << std::endl;
+           std::cerr << "DtedFile::readDtedHeaders: error reading ACC record." << std::endl;
         }
         return false;
     }
@@ -252,8 +243,8 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Extract the latitude and longitude of cell's SW corner.
     // DTED cells are always 1 degree by 1 degree,
     // and always start on an integer degree.
-    int swcLatitude(0);
-    int swcLongitude(0);
+    int swcLatitude{};
+    int swcLongitude{};
     std::sscanf(uhl.origin_latitude, "%3d", &swcLatitude);
     std::sscanf(uhl.origin_longitude, "%3d", &swcLongitude);
     if (uhl.origin_latitude[7] == 'S')
@@ -267,16 +258,16 @@ bool DtedFile::readDtedHeaders(std::istream& in)
 
     // Extract the data intervals for latitude and longitude
     static const double TENTHS_OF_SECONDS_PER_DEGREE = 36000.0;
-    int latIncr(0);
-    int lonIncr(0);
+    int latIncr{};
+    int lonIncr{};
     std::sscanf(uhl.data_interval_latitude, "%4d", &latIncr);
     std::sscanf(uhl.data_interval_longitude, "%4d", &lonIncr);
     latSpacing = latIncr / TENTHS_OF_SECONDS_PER_DEGREE;
     lonSpacing = lonIncr / TENTHS_OF_SECONDS_PER_DEGREE;
 
     // Extract the number of latitude and longitude lines
-    unsigned int num_lat(0);
-    unsigned int num_lon(0);
+    unsigned int num_lat{};
+    unsigned int num_lon{};
     std::sscanf(uhl.number_latitude_lines, "%4u", &num_lat);
     std::sscanf(uhl.number_longitude_lines, "%4u", &num_lon);
     nptlat = num_lat;
@@ -290,8 +281,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
 //------------------------------------------------------------------------------
 bool DtedFile::readDtedData(std::istream& in)
 {
-    if (nptlat < 1 || nptlong < 1)
-    {
+    if (nptlat < 1 || nptlong < 1) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "DtedFile::readDtedData: DTED headers indicate an empty file." << std::endl;
         }
@@ -300,46 +290,41 @@ bool DtedFile::readDtedData(std::istream& in)
 
     // Allocate the elevation array
     columns = new short*[nptlong];
-    for (unsigned int i=0; i<nptlong; i++)
-    {
+    for (unsigned int i=0; i<nptlong; i++) {
         columns[i] = new short[nptlat];
     }
 
     // Read the elevation array.
     for (unsigned int lon=0; lon<nptlong; lon++)
     {
-        unsigned long checksum = 0;
+        unsigned long checksum{};
 
         // read record header
         dtedColumnHeader head;
         in.read(reinterpret_cast<char*>(&head), sizeof(head));
-        if (in.fail() || in.gcount() < sizeof(head))
-        {
+        if (in.fail() || in.gcount() < sizeof(head)) {
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "DtedFile::readDtedData: error reading column header." << std::endl;
+               std::cerr << "DtedFile::readDtedData: error reading column header." << std::endl;
             }
             return false;
         }
         for (unsigned int i=0; i<sizeof(head); i++)
             checksum += (reinterpret_cast<unsigned char*>(&head))[i];
 
-        if (head.recognition_sentinel[0] != DATA_RECOGNITION_SENTINEL)
-        {
+        if (head.recognition_sentinel[0] != DATA_RECOGNITION_SENTINEL) {
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "DtedFile::readDtedData: record contains invalid recognition sentinel." << std::endl;
+               std::cerr << "DtedFile::readDtedData: record contains invalid recognition sentinel." << std::endl;
             }
             return false;
         }
 
         // Read elevation values for record
-        double minElev0 = 99999.0;
-        double maxElev0 = 0.0;
-        for(unsigned int lat=0; lat<nptlat; lat++)
-        {
-            unsigned char values[2];
+        double minElev0{99999.0};
+        double maxElev0{};
+        for (unsigned int lat=0; lat<nptlat; lat++) {
+            unsigned char values[2]{};
             in.read(reinterpret_cast<char*>(values), sizeof(values));
-            if (in.fail() || in.gcount() < sizeof(values))
-            {
+            if (in.fail() || in.gcount() < sizeof(values)) {
                 if (isMessageEnabled(MSG_ERROR)) {
                     std::cerr << "DtedFile::readDtedData: error reading data value." << std::endl;
                 }
@@ -347,7 +332,7 @@ bool DtedFile::readDtedData(std::istream& in)
             }
             checksum += values[0] + values[1];
 
-            short height = readValue(values[0], values[1]);
+            short height {readValue(values[0], values[1])};
             columns[lon][lat] = height;
 
             // check if this is the new min or max elevation
@@ -360,8 +345,7 @@ bool DtedFile::readDtedData(std::istream& in)
         // Read data record footer and verify checksum
         dtedColumnFooter foot;
         in.read(reinterpret_cast<char*>(&foot), sizeof(foot));
-        if (in.fail() || in.gcount() < sizeof(foot))
-        {
+        if (in.fail() || in.gcount() < sizeof(foot)) {
             if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "DtedFile::readDtedData: error reading column footer." << std::endl;
             }
@@ -369,9 +353,8 @@ bool DtedFile::readDtedData(std::istream& in)
         }
 
         if (isVerifyChecksum()) {
-           unsigned long file_cksum = readValue(foot.checksum[0], foot.checksum[1], foot.checksum[2], foot.checksum[3]);
-           if (file_cksum != checksum)
-           {
+           unsigned long file_cksum {static_cast<unsigned long>(readValue(foot.checksum[0], foot.checksum[1], foot.checksum[2], foot.checksum[3]))};
+           if (file_cksum != checksum) {
                if (isMessageEnabled(MSG_ERROR)) {
                    std::cerr << "DtedFile::readDtedData: bad checksum in data record." << std::endl;
                }
@@ -390,12 +373,11 @@ short DtedFile::readValue(const unsigned char hbyte, const unsigned char lbyte)
     // The data is stored as 2 byte characters (sign and magnitude)
     // with high byte first.  The high bit is the sign bit.  Check for
     // sign bit and then turn it off and set SIGN_VAL accordingly.
-    short height = 0;
-    short sign_val = 1;
-    unsigned char nhbyte = hbyte;
+    short height{};
+    short sign_val{1};
+    unsigned char nhbyte{hbyte};
 
-    if (hbyte & ~0177)
-    {
+    if (hbyte & ~0177) {
         // sign bit set
         nhbyte   = hbyte & 0177;
         sign_val = -1;
@@ -410,12 +392,11 @@ long DtedFile::readValue(const unsigned char hbyte, const unsigned char byte1, c
     // The data is stored as 4 byte characters (sign and magnitude)
     // with high byte first.  The high bit is the sign bit.  Check for
     // sign bit and then turn it off and set SIGN_VAL accordingly.
-    long height = 0;
-    int sign_val = 1;
-    unsigned char nhbyte = hbyte;
+    long height{};
+    int sign_val{1};
+    unsigned char nhbyte{hbyte};
 
-    if (hbyte & ~0177)
-    {
+    if (hbyte & ~0177) {
         // sign bit set
         nhbyte   = hbyte & 0177;
         sign_val = -1;

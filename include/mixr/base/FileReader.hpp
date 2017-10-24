@@ -137,7 +137,7 @@ private:
    // slot table helper methods
    bool setSlotPathname(String* const);
    bool setSlotFilename(String* const);
-   bool setSlotRecordLength(Number* const);
+   bool setSlotRecordLength(const Number* const);
 };
 
 inline bool FileReader::setRecordNumber(const int num)

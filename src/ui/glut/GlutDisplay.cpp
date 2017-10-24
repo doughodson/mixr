@@ -29,8 +29,8 @@ int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS] {};                 // List o
 GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS] {};   // Display List
 int GlutDisplay::numGlutDisplays {};                                   // Number of  registered GlutDisplays
 
-const float GlutDisplay::CLICK_TIME = 0.5f;                             // our double click timeout
-const unsigned int DEFAULT_IDLE_SLEEP = 40;                             // default idle CB sleep time
+const float GlutDisplay::CLICK_TIME    {0.5f};                         // our double click timeout
+const unsigned int DEFAULT_IDLE_SLEEP  {40};                            // default idle CB sleep time
 
 BEGIN_SLOTTABLE(GlutDisplay)
    "fullScreen",           // 1) Full screen flag     -- Main windows only --
@@ -43,13 +43,13 @@ BEGIN_SLOTTABLE(GlutDisplay)
 END_SLOTTABLE(GlutDisplay)
 
 BEGIN_SLOT_MAP(GlutDisplay)
-   ON_SLOT(1,setSlotFullScreen,base::Number)
-   ON_SLOT(2,setSlotIdleSleepTime,base::Number)
-   ON_SLOT(3,setSlotResizeWindows,base::Number)
-   ON_SLOT(4,setSlotPickWidth,base::Number)
-   ON_SLOT(5,setSlotPickHeight,base::Number)
-   ON_SLOT(6,setSlotAccumBuff,base::Number)
-   ON_SLOT(7,setSlotStencilBuff,base::Number)
+   ON_SLOT(1,setSlotFullScreen,    base::Number)
+   ON_SLOT(2,setSlotIdleSleepTime, base::Number)
+   ON_SLOT(3,setSlotResizeWindows, base::Number)
+   ON_SLOT(4,setSlotPickWidth,     base::Number)
+   ON_SLOT(5,setSlotPickHeight,    base::Number)
+   ON_SLOT(6,setSlotAccumBuff,     base::Number)
+   ON_SLOT(7,setSlotStencilBuff,   base::Number)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(GlutDisplay)

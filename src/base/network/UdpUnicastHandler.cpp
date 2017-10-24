@@ -22,8 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/UdpUnicastHandler.hpp"
@@ -81,7 +81,7 @@ bool UdpUnicastHandler::init()
     // ---
     // Init the base class
     // ---
-    bool ok = BaseClass::init();
+    bool ok{BaseClass::init()};
     if (!ok) {
         return false;
     }
@@ -112,7 +112,7 @@ bool UdpUnicastHandler::bindSocket()
     // ---
     // Our base class will bind the socket
     // ---
-    bool ok = BaseClass::bindSocket();
+    bool ok{BaseClass::bindSocket()};
 
     if (ok) {
        struct sockaddr_in addr;        // Working address structure
@@ -153,11 +153,11 @@ bool UdpUnicastHandler::sendDataTo(
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = ip0;
     addr.sin_port = htons(port0);
-    socklen_t addrlen = sizeof(addr);
-    int result = ::sendto(socketNum, packet, size, 0, reinterpret_cast<const struct sockaddr*>(&addr), addrlen);
+    socklen_t addrlen{sizeof(addr)};
+    long result{::sendto(socketNum, packet, size, 0, reinterpret_cast<const struct sockaddr*>(&addr), addrlen)};
     if (result == SOCKET_ERROR) {
 #if defined(WIN32)
-        int err = WSAGetLastError();
+        int err{WSAGetLastError()};
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UdpUnicastHandler::sendDataTo(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
@@ -179,7 +179,7 @@ bool UdpUnicastHandler::sendDataTo(
 // ipAddress: String containing the IP address
 bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         if (ipAddr != nullptr) delete[] ipAddr;
         ipAddr = msg->getCopyString();

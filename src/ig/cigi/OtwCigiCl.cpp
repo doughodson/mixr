@@ -7,18 +7,20 @@
 #include "mixr/ig/common/Otm.hpp"
 
 #include "mixr/models/navigation/Navigation.hpp"
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/Bomb.hpp"
-#include "mixr/models/player/Buildings.hpp"
-#include "mixr/models/player/Effects.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/LifeForms.hpp"
-#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/effect/Decoy.hpp"
+#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/Flare.hpp"
+#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/ground/SamVehicle.hpp"
+#include "mixr/models/player/weapon/Bomb.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/Building.hpp"
+#include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/SamVehicles.hpp"
-#include "mixr/models/player/Ships.hpp"
-#include "mixr/models/player/SpaceVehicle.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/Ship.hpp"
+#include "mixr/models/player/space/SpaceVehicle.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -438,11 +440,11 @@ int OtwCigiCl::updateModels()
                } else if (player->isMajorType(models::Player::BUILDING)) {
                   setBuildingData(model, entity, static_cast<const models::Building*>(player));
                } else if (player->isMajorType(models::Player::WEAPON)) {
-                  const auto effect = dynamic_cast<const models::Effects*>(model->getPlayer());
+                  const auto effect = dynamic_cast<const models::Effect*>(model->getPlayer());
                   const auto msl = dynamic_cast<const models::Missile*>(model->getPlayer());
                   const auto wpn = dynamic_cast<const models::AbstractWeapon*>(model->getPlayer());
                   if (effect != nullptr)     // Effects before general weapons (because effects are also weapons)
-                     setEffectsData(model, entity, effect);
+                     setEffectData(model, entity, effect);
                   else if (msl != nullptr)   // Missiles before general weapons (because missiles are also weapons)
                      setMissileData(model, entity, msl);
                   else if (wpn != nullptr)
@@ -847,7 +849,7 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
 //------------------------------------------------------------------------------
 // setEffectsData() -- Sets a 'model_t' structure to a effects' state
 //------------------------------------------------------------------------------
-bool OtwCigiCl::setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effects* const p)
+bool OtwCigiCl::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effect* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {

@@ -63,11 +63,7 @@ void SaH::copyData(const SaH& org, const bool cc)
 bool SaH::isValid() const
 {
    // Valid if we have a master rate and a sample rate
-   bool valid = (
-         n == ORDER &&
-         rate > 0 &&
-         sampleRate > 0
-      );
+   bool valid {(n == ORDER && rate > 0 && sampleRate > 0)};
 
    return valid && BaseClass::isValid();
 }
@@ -92,8 +88,7 @@ double SaH::g(const double xn)
       }
 
       return py[0];
-   }
-   else {
+   } else {
       // If invalid transfer function, just return the input value
       return xn;
    }
@@ -136,9 +131,9 @@ bool SaH::setSampleRate(const unsigned int v)
 
 bool SaH::setSlotSampleRate(const base::Frequency* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f );
+      const int v {static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5 )};
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -149,9 +144,9 @@ bool SaH::setSlotSampleRate(const base::Frequency* const msg)
 
 bool SaH::setSlotSampleRate(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;

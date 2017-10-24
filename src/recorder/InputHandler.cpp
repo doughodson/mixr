@@ -17,8 +17,8 @@ EMPTY_DELETEDATA(InputHandler)
 //------------------------------------------------------------------------------
 const DataRecordHandle* InputHandler::readRecord()
 {
-   const DataRecordHandle* p = nullptr;
-   bool finished = false;
+   const DataRecordHandle* p{};
+   bool finished{};
 
    while (!finished) {
 
@@ -28,8 +28,8 @@ const DataRecordHandle* InputHandler::readRecord()
       // Did we get one?
       if (p != nullptr) {
          // Yes -- now check to see if this data record is enabled
-         unsigned int id = p->getRecord()->id();
-         bool enabled = isDataEnabled(id);
+         unsigned int id{p->getRecord()->id()};
+         bool enabled{isDataEnabled(id)};
 
          if (enabled) finished = true;    // If it is then we're done
          else { p->unref(); p = nullptr; }      // If itis disabled then we'll try again

@@ -12,13 +12,13 @@ namespace base {
 //------------
 double getTimeUtc(unsigned int* const day, unsigned int* const month, unsigned int* const year)
 {
-   unsigned long seconds = 0;
-   unsigned long uSec = 0;
+   unsigned long seconds{};
+   unsigned long uSec{};
    getTime(&seconds, &uSec);
 
-   unsigned int hour = 0;
-   unsigned int min = 0;
-   unsigned int sec = 0;
+   unsigned int hour{};
+   unsigned int min{};
+   unsigned int sec{};
    convertSec2Ymdhms(seconds, year, month, day, &hour, &min, &sec);
 
    // Return time since midnight (sec)
@@ -30,7 +30,7 @@ double getTimeUtc(unsigned int* const day, unsigned int* const month, unsigned i
 //------------
 double getTime()
 {
-   unsigned long sec(0), uSec(0);
+   unsigned long sec{}, uSec{};
    getTime(&sec, &uSec);
    return static_cast<double>(sec) + static_cast<double>(uSec)/1000000.0;
 }
@@ -43,17 +43,17 @@ bool convertSec2Ntp(
       unsigned long* const ntpSecF  // (OUT) NTP fraction of seconds
    )
 {
-   static const double P32 = 4294967296.0; // 2^32
+   static const double P32{4294967296.0}; // 2^32
 
    // Adjust by 2208988800 seconds (1900 to 1970)
    if (ntpSec != nullptr) {
-      static const unsigned long ADJ = 0x83AA7E80;   // 2208988800 seconds
+      static const unsigned long ADJ{0x83AA7E80};   // 2208988800 seconds
       *ntpSec = seconds + ADJ;
    }
 
    // Microseconds to fractional second
    if (ntpSecF != nullptr) {
-      const double fsec = static_cast<double>(uSec) / 1000000.0;
+      const double fsec{static_cast<double>(uSec) / 1000000.0};
       *ntpSecF = static_cast<unsigned long>((fsec * P32) + 0.5);
    }
    return true;
@@ -67,17 +67,17 @@ bool convertNtp2Sec(
       unsigned long* const uSec     // (OUT) microseconds seconds
    )
 {
-   static const double P32 = 4294967296.0; // 2^32
+   static const double P32 {4294967296.0}; // 2^32
 
    // Adjust by 2208988800L seconds (1900 to 1970)
    if (seconds != nullptr) {
-      static const unsigned long ADJ = 0x83AA7E80;   // 2208988800 seconds
+      static const unsigned long ADJ{0x83AA7E80};   // 2208988800 seconds
       *seconds = ntpSec - ADJ;
    }
 
    // fractional second to microseconds
    if (uSec != nullptr) {
-      const double fsec = static_cast<double>(ntpSecF) / P32;
+      const double fsec{static_cast<double>(ntpSecF) / P32};
       *uSec = static_cast<unsigned long>((fsec * 1000000.0) + 0.5);
    }
    return true;
@@ -88,7 +88,7 @@ bool convertNtp2Sec(
 //------------
 bool doesFileExist(const char* const fullname)
 {
-   bool result = false;
+   bool result{};
    if (fullname != nullptr) {
       // Test open the file
       std::ifstream t;

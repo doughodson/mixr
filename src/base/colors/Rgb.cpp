@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Rgb)
 END_SLOTTABLE(Rgb)
 
 BEGIN_SLOT_MAP(Rgb)
-    ON_SLOT(1, setSlotRed, Number)
+    ON_SLOT(1, setSlotRed,   Number)
     ON_SLOT(2, setSlotGreen, Number)
-    ON_SLOT(3, setSlotBlue, Number)
+    ON_SLOT(3, setSlotBlue,  Number)
 END_SLOT_MAP()
 
 Rgb::Rgb(const double r, const double g, const double b)
@@ -45,8 +45,8 @@ void Rgb::copyData(const Rgb& org, const bool)
 //------------------------------------------------------------------------------
 bool Rgb::setSlotRed(const Number* const msg)
 {
-    const double value = msg->getReal();
-    const bool ok = setRed( value );
+    const double value{msg->getReal()};
+    const bool ok{setRed( value )};
     if (!ok) {
         std::cerr << "Rgb::setRed: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     }
@@ -55,8 +55,8 @@ bool Rgb::setSlotRed(const Number* const msg)
 
 bool Rgb::setSlotGreen(const Number* const msg)
 {
-    const double value = msg->getReal();
-    const bool ok = setGreen( value );
+    const double value{msg->getReal()};
+    const bool ok{setGreen( value )};
     if (!ok) {
         std::cerr << "Rgb::setGreen: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     }
@@ -65,8 +65,8 @@ bool Rgb::setSlotGreen(const Number* const msg)
 
 bool Rgb::setSlotBlue(const Number* const msg)
 {
-    const double value = msg->getReal();
-    const bool ok = setBlue( value );
+    const double value{msg->getReal()};
+    const bool ok{setBlue( value )};
     if (!ok) {
         std::cerr << "Rgb::setBlue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     }

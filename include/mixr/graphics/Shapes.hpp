@@ -272,6 +272,7 @@ protected:
     bool strip {};     // are we a Quad Strip?
 
 private:
+    // slot table helper methods
     bool setSlotStrip(const base::Number* const);
 };
 

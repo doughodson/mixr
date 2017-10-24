@@ -18,7 +18,7 @@ TcThread::TcThread(base::Component* const parent, const double priority, const d
 
 unsigned long TcThread::userFunc(const double dt)
 {
-   Station* station = static_cast<Station*>(getParent());
+   Station* station {static_cast<Station*>(getParent())};
    station->processTimeCriticalTasks(dt);
    return 0;
 }

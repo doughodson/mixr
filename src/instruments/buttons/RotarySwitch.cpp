@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(RotarySwitch)
 END_SLOTTABLE(RotarySwitch)
 
 BEGIN_SLOT_MAP(RotarySwitch)
-   ON_SLOT(1, setSlotAngles, base::PairStream)
+   ON_SLOT(1, setSlotAngles,        base::PairStream)
    ON_SLOT(2, setSlotStartPosition, base::Number)
 END_SLOT_MAP()
 

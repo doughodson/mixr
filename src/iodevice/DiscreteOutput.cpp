@@ -138,9 +138,9 @@ void DiscreteOutput::processInputs(const double, const base::IoDevice* const, ba
 void DiscreteOutput::processOutputs(const double, const base::IoData* const outData, base::IoDevice* const device)
 {
    if (device != nullptr && devEnb) {
-      unsigned int chan = channel;
-      unsigned int loc  = location;
-      unsigned int n = ((num >= 0) ? num : -num);
+      unsigned int chan {channel};
+      unsigned int loc {location};
+      unsigned int n {static_cast<unsigned int>((num >= 0) ? num : -num)};
 
       for (unsigned int i = 0; i < n; i++) {
 
@@ -150,13 +150,16 @@ void DiscreteOutput::processOutputs(const double, const base::IoData* const outD
          }
 
          // Send the bit to the DO card
-         bool value0 = value;
-         if (invert) value0 = !value;
+         bool value0 {value};
+         if (invert)
+            value0 = !value;
          device->setDiscreteOutput(value0, chan, port);
 
          chan++;
-         if (num >= 0) loc++;
-         else if (loc > 0) loc--;
+         if (num >= 0)
+            loc++;
+         else if (loc > 0)
+            loc--;
       }
    }
 }
@@ -169,9 +172,9 @@ void DiscreteOutput::processOutputs(const double, const base::IoData* const outD
 // location: Output array index (location)
 bool DiscreteOutput::setSlotLocation(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
       }
@@ -182,9 +185,9 @@ bool DiscreteOutput::setSlotLocation(const base::Number* const msg)
 // port: DiHandler's port number
 bool DiscreteOutput::setSlotPort(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setPort( static_cast<unsigned int>(v) );
       }
@@ -195,9 +198,9 @@ bool DiscreteOutput::setSlotPort(const base::Number* const msg)
 // channel: DiHandler's channel (bit) number on the port
 bool DiscreteOutput::setSlotChannel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
       }
@@ -208,7 +211,7 @@ bool DiscreteOutput::setSlotChannel(const base::Number* const msg)
 // value: Initial value (default: false)
 bool DiscreteOutput::setSlotValue(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setValue( msg->getBoolean() );
    }
@@ -218,7 +221,7 @@ bool DiscreteOutput::setSlotValue(const base::Number* const msg)
 // invert: Inverted bit flag (default: false)
 bool DiscreteOutput::setSlotInverted(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setInvertFlag( msg->getBoolean() );
    }
@@ -227,7 +230,7 @@ bool DiscreteOutput::setSlotInverted(const base::Number* const msg)
 
 bool DiscreteOutput::setSlotNum(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setNumber( msg->getInt() );
    }

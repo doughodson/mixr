@@ -63,20 +63,22 @@ void FirstOrderTf::copyData(const FirstOrderTf& org, const bool cc)
 //------------------------------------------------------------------------------
 bool FirstOrderTf::isValid() const
 {
-   unsigned int orderN = 0;
-   if (n1 != 0) orderN = 1;
+   unsigned int orderN {};
+   if (n1 != 0)
+      orderN = 1;
 
-   unsigned int orderD = 0;
-   if (d1 != 0) orderD = 1;
+   unsigned int orderD {};
+   if (d1 != 0)
+      orderD = 1;
 
    // Valid if we have a update rate and a value for the denominator, and the
    // order of the denominator is greater than or equal the numerator.
-   bool valid = (
+   bool valid {(
          n == ORDER &&
          rate > 0 &&
          (d1 != 0 || d2 != 0) &&
          (orderD >= orderN)
-      );
+      )};
 
    return valid && BaseClass::isValid();
 }
@@ -89,7 +91,7 @@ void FirstOrderTf::initialize()
    BaseClass::initialize();
 
    if (isValid()) {
-      const double T = 1.0f / static_cast<double>(rate);
+      const double T {1.0 / static_cast<double>(rate)};
       pa[0] = 0;
       pa[1] = -(T*d2 - 2.0f*d1)/(T*d2 + 2.0f*d1);
       pb[0] =  (T*n2 + 2.0f*n1)/(T*d2 + 2.0f*d1);

@@ -16,7 +16,7 @@ END_SLOTTABLE(Switch)
 
 BEGIN_SLOT_MAP(Switch)
    ON_SLOT(1, setSlotNumSelections, base::Number)
-   ON_SLOT(2, setSlotCurrentState, base::Number)
+   ON_SLOT(2, setSlotCurrentState,  base::Number)
 END_SLOT_MAP()
 
 Switch::Switch()

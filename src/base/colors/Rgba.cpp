@@ -32,8 +32,8 @@ Rgba::Rgba()
 
 bool Rgba::setSlotAlpha(const Number* const msg)
 {
-    double value = msg->getReal();
-    bool ok = setAlpha( value );
+    double value{msg->getReal()};
+    bool ok{setAlpha( value )};
     if (!ok) std::cerr << "Rgba::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
 }

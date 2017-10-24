@@ -54,15 +54,6 @@ public:
 
     virtual void reset() override;
 
-    // Slot methods
-    virtual bool setSlotMinSpeed(const base::Number* const msg);
-    virtual bool setSlotSpeedMaxG(const base::Number* const msg);
-    virtual bool setSlotMaxG(const base::Number* const msg);
-    virtual bool setSlotMaxAccel(const base::Number* const msg);
-    virtual bool setSlotCmdAltitude(const base::Distance* const msg);
-    virtual bool setSlotCmdHeading(const base::Angle* const msg);
-    virtual bool setSlotCmdVelocity(const base::Number* const msg);
-
 private:
     void updateRAC(const double dt);
 
@@ -73,6 +64,16 @@ private:
     double cmdAltitude {-9999.0};  // Commanded Altitude            (meters)
     double cmdHeading {-9999.0};   // Commanded Heading             (degs)
     double cmdVelocity {-9999.0};  // Commanded speed               (kts)
+
+private:
+   // slot table helper methods
+   bool setSlotMinSpeed(const base::Number* const);
+   bool setSlotSpeedMaxG(const base::Number* const);
+   bool setSlotMaxG(const base::Number* const);
+   bool setSlotMaxAccel(const base::Number* const);
+   bool setSlotCmdAltitude(const base::Distance* const);
+   bool setSlotCmdHeading(const base::Angle* const);
+   bool setSlotCmdVelocity(const base::Number* const);
 };
 
 }

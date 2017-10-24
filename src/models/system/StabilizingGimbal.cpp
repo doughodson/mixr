@@ -24,11 +24,11 @@ IMPLEMENT_SUBCLASS(StabilizingGimbal, "StabilizingGimbal")
 EMPTY_DELETEDATA(StabilizingGimbal)
 
 BEGIN_SLOTTABLE(StabilizingGimbal)
-    "stabilizingMode",      //  4: Sets the type of stabilization we desire  (elevation, roll, horizon)
+    "stabilizingMode",      //  Sets the type of stabilization we desire  (elevation, roll, horizon)
 END_SLOTTABLE(StabilizingGimbal)
 
 BEGIN_SLOT_MAP(StabilizingGimbal)
-    ON_SLOT(1,setSlotStabilizingMode,base::String);
+    ON_SLOT(1, setSlotStabilizingMode, base::String);
 END_SLOT_MAP()
 
 StabilizingGimbal::StabilizingGimbal()
@@ -80,7 +80,7 @@ void StabilizingGimbal::rollStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
-    base::Vec3d tpos = getCmdPosition();
+    base::Vec3d tpos{getCmdPosition()};
     if (mountPosition == NOSE){
         tpos[ROLL_IDX] = static_cast<double>(-getOwnship()->getRoll());
     }
@@ -103,7 +103,7 @@ void StabilizingGimbal::elevationStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
-    base::Vec3d tpos = getCmdPosition();
+    base::Vec3d tpos{getCmdPosition()};
     if (mountPosition == NOSE){
         tpos[ELEV_IDX] = static_cast<double>(-getOwnship()->getPitch());
     }
@@ -143,7 +143,7 @@ bool StabilizingGimbal::setMountPosition(const MountPosition m)
 bool StabilizingGimbal::setSlotStabilizingMode(base::String* const msg)
 {
     // set our scan mode
-    bool ok = true;
+    bool ok{true};
     if (msg != nullptr) {
         if (*msg == "roll") ok = setStabilizingMode(ROLL);
         else if (*msg == "elevation") ok = setStabilizingMode(ELEVATION);
@@ -156,6 +156,7 @@ bool StabilizingGimbal::setSlotStabilizingMode(base::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotMountPosition() -- calls setMountPosition()
 //------------------------------------------------------------------------------
+/*
 bool StabilizingGimbal::setSlotMountPosition(base::String* const msg)
 {
     // set our scan mode
@@ -169,6 +170,7 @@ bool StabilizingGimbal::setSlotMountPosition(base::String* const msg)
     }
     return ok;
 }
+*/
 
 }
 }

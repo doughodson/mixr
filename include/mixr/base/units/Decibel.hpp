@@ -67,7 +67,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotValue(const Number* const) override;
+   virtual bool setSlotValue(const Number* const) override;
 };
 
 //------------------------------------------------------------------------------

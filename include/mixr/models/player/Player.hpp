@@ -751,6 +751,11 @@ public:
    // Sets the quaternions
    virtual bool setQuaternions(const base::Quat&);
 
+   virtual bool setInitPitch(const base::Angle* const);
+   virtual bool setInitPitch(const base::Number* const);
+   virtual bool setInitHeading(const base::Angle* const);
+   virtual bool setInitHeading(const base::Number* const);
+
    // ---
    // Set the player's angular velocities:
    //    body and geocentric (ecef) coordinate systems
@@ -884,67 +889,6 @@ public:
    virtual void updateTC(const double dt = 0.0) override;
    virtual void updateData(const double dt = 0.0) override;
    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-
-public:
-
-   // ---
-   // Slot functions
-   // ---
-   virtual bool setSlotInitXPos(const base::Distance* const msg);
-   virtual bool setSlotInitXPos(const base::Number* const msg);
-   virtual bool setSlotInitYPos(const base::Distance* const msg);
-   virtual bool setSlotInitYPos(const base::Number* const msg);
-   virtual bool setSlotInitAlt(const base::Distance* const msg);
-   virtual bool setSlotInitAlt(const base::Number* const msg);
-   virtual bool setSlotInitPosition(const base::List* const msg);
-
-   virtual bool setSlotInitLat(const base::LatLon* const msg);
-   virtual bool setSlotInitLat(const base::Angle* const msg);
-   virtual bool setSlotInitLat(const base::Number* const msg);
-   virtual bool setSlotInitLon(const base::LatLon* const msg);
-   virtual bool setSlotInitLon(const base::Angle* const msg);
-   virtual bool setSlotInitLon(const base::Number* const msg);
-
-   virtual bool setSlotInitGeocentric(const base::List* const msg);
-
-   virtual bool setSlotInitRoll(const base::Angle* const msg);
-   virtual bool setSlotInitRoll(const base::Number* const msg);
-   virtual bool setSlotInitPitch(const base::Angle* const msg);
-   virtual bool setSlotInitPitch(const base::Number* const msg);
-   virtual bool setSlotInitHeading(const base::Angle* const msg);
-   virtual bool setSlotInitHeading(const base::Number* const msg);
-   virtual bool setSlotInitEulerAngles(const base::List* const msg);
-
-   virtual bool setSlotInitVelocity(const base::Number* const msg);
-   virtual bool setSlotInitVelocityKts(const base::Number* const msg);
-
-   virtual bool setSlotID(const base::Number* const msg);
-   virtual bool setSlotSide(base::String* const msg);
-   virtual bool setSlotInitMode(base::String* const msg);
-   virtual bool setSlotUseCoordSys(base::String* const msg);
-
-   virtual bool setSlotSignature(RfSignature* const msg);
-   virtual bool setSlotIrSignature(IrSignature* const msg);
-   virtual bool setSlotCamouflageType(const base::Number* const msg);
-
-   virtual bool setSlotTerrainElevReq(const base::Number* const msg);
-   virtual bool setSlotInterpolateTerrain(const base::Number* const msg);
-   virtual bool setSlotTerrainOffset(const base::Distance* const msg);
-
-   virtual bool setSlotPositionFreeze(const base::Number* const msg);
-   virtual bool setSlotAltitudeFreeze(const base::Number* const msg);
-   virtual bool setSlotAttitudeFreeze(const base::Number* const msg);
-   virtual bool setSlotFuelFreeze(const base::Number* const msg);
-   virtual bool setSlotCrashOverride(const base::Number* const msg);
-   virtual bool setSlotKillOverride(const base::Number* const msg);
-   virtual bool setSlotKillRemoval(const base::Number* const msg);
-   virtual bool setSlotEnableNetOutput(const base::Number* const msg);
-   virtual bool setSlotDataLogTime(const base::Time* const msg);
-
-   virtual bool setSlotTestRollRate(const base::Angle* const msg);
-   virtual bool setSlotTestPitchRate(const base::Angle* const msg);
-   virtual bool setSlotTestYawRate(const base::Angle* const msg);
-   virtual bool setSlotTestBodyAxis(const base::Number* const msg);
 
 protected:
 
@@ -1130,6 +1074,67 @@ private:
    bool              syncState2Ready {};
    SynchronizedState syncState1;
    SynchronizedState syncState2;
+
+private:
+   // slot table helper methods
+   bool setSlotInitXPos(const base::Distance* const);
+   bool setSlotInitXPos(const base::Number* const);
+   bool setSlotInitYPos(const base::Distance* const);
+   bool setSlotInitYPos(const base::Number* const);
+   bool setSlotInitAlt(const base::Distance* const);
+   bool setSlotInitAlt(const base::Number* const);
+   bool setSlotInitPosition(const base::List* const);
+
+   bool setSlotInitLat(const base::LatLon* const);
+   bool setSlotInitLat(const base::Angle* const);
+   bool setSlotInitLat(const base::Number* const);
+   bool setSlotInitLon(const base::LatLon* const);
+   bool setSlotInitLon(const base::Angle* const);
+   bool setSlotInitLon(const base::Number* const);
+
+   bool setSlotInitGeocentric(const base::List* const);
+
+   bool setSlotInitRoll(const base::Angle* const);
+   bool setSlotInitRoll(const base::Number* const);
+   bool setSlotInitPitch(const base::Angle* const x)         { return setInitPitch(x);   }
+   bool setSlotInitPitch(const base::Number* const x)        { return setInitPitch(x);   }
+   bool setSlotInitHeading(const base::Angle* const x)       { return setInitHeading(x); }
+   bool setSlotInitHeading(const base::Number* const x)      { return setInitHeading(x); }
+
+   bool setSlotInitEulerAngles(const base::List* const);
+   bool setSlotInitVelocity(const base::Number* const);
+   bool setSlotInitVelocityKts(const base::Number* const);
+
+   bool setSlotType(const base::String* const x)             { return setType(x); }
+   bool setSlotSide(base::String* const);
+
+   bool setSlotSignature(RfSignature* const);
+   bool setSlotIrSignature(IrSignature* const);
+   bool setSlotCamouflageType(const base::Number* const);
+
+   bool setSlotTerrainElevReq(const base::Number* const);
+   bool setSlotInterpolateTerrain(const base::Number* const);
+   bool setSlotTerrainOffset(const base::Distance* const);
+
+   bool setSlotPositionFreeze(const base::Number* const);
+   bool setSlotAltitudeFreeze(const base::Number* const);
+   bool setSlotAttitudeFreeze(const base::Number* const);
+   bool setSlotFuelFreeze(const base::Number* const);
+   bool setSlotCrashOverride(const base::Number* const);
+   bool setSlotKillOverride(const base::Number* const);
+   bool setSlotKillRemoval(const base::Number* const);
+   bool setSlotEnableNetOutput(const base::Number* const);
+   bool setSlotDataLogTime(const base::Time* const);
+
+   bool setSlotTestRollRate(const base::Angle* const);
+   bool setSlotTestPitchRate(const base::Angle* const);
+   bool setSlotTestYawRate(const base::Angle* const);
+   bool setSlotTestBodyAxis(const base::Number* const);
+
+   bool setSlotUseCoordSys(base::String* const);
+
+//   bool setSlotID(const base::Number* const);
+//   bool setSlotInitMode(base::String* const);
 };
 
 #include "mixr/models/player/Player.inl"

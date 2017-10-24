@@ -5,8 +5,6 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Emission.hpp"
 
-//#include "mixr/models/WorldModel.hpp"
-
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/units/Angles.hpp"
@@ -16,7 +14,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Jammer, "Jammer")
+IMPLEMENT_SUBCLASS(Jammer, "Jammer")
+EMPTY_SLOTTABLE(Jammer)
+EMPTY_DELETEDATA(Jammer)
 
 Jammer::Jammer()
 {
@@ -31,8 +31,6 @@ void Jammer::copyData(const Jammer& org, const bool)
     BaseClass::copyData(org);
 }
 
-EMPTY_DELETEDATA(Jammer)
-
 //------------------------------------------------------------------------------
 // transmit() -- send jam emissions
 //------------------------------------------------------------------------------
@@ -42,7 +40,7 @@ void Jammer::transmit(const double)
     if ( !areEmissionsDisabled() && isTransmitting() ) {
         const auto em = new Emission();
         em->setFrequency(getFrequency());
-        const double p = getPeakPower();
+        const double p{getPeakPower()};
         em->setPower(p);
         em->setTransmitLoss(getRfTransmitLoss());
         em->setMaxRangeNM(getRange());

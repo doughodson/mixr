@@ -84,7 +84,7 @@ unsigned int QuadMap::getElevations(
       const bool interp            // Interpolate between elevation posts (if true)
    ) const
 {
-   unsigned int num = 0;
+   unsigned int num{};
 
    // Early out tests
    if ( elevations == nullptr ||       // The elevation array wasn't provided, or
@@ -123,8 +123,8 @@ bool QuadMap::getElevation(
         ) return false;
 
 
-   double value = 0.0;              // the elevation (meters)
-   bool found = false;
+   double value{};                  // the elevation (meters)
+   bool found{};
    for (unsigned int i = 0; i < numDataFiles && !found; i++) {
       found = dataFiles[i]->getElevation(&value, lat, lon, interp);
    }
@@ -148,8 +148,8 @@ void QuadMap::findDataFiles()
    {
       base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
-         unsigned int count = 0;
-         base::List::Item* item = subcomponents->getFirstItem();
+         unsigned int count{};
+         base::List::Item* item {subcomponents->getFirstItem()};
          while (item != nullptr && count < MAX_DATA_FILES) {
             const auto pair = static_cast<base::Pair*>( item->getValue() );
             const auto dataFile = dynamic_cast<Terrain*>( pair->object() );
@@ -168,12 +168,12 @@ void QuadMap::findDataFiles()
 
    // Find the max/min elevations and the corner points
    if (numDataFiles > 0) {
-      double elevMin =  999999.0;
-      double elevMax = -999999.0;
-      double lowerLat = 90.0;
-      double lowerLon = 180.0;
-      double upperLat = -90.0;
-      double upperLon = -180.0;
+      double elevMin {999999.0};
+      double elevMax {-999999.0};
+      double lowerLat {90.0};
+      double lowerLon {180.0};
+      double upperLat {-90.0};
+      double upperLon {-180.0};
       for (unsigned int i = 0; i < numDataFiles; i++) {
 
          if (dataFiles[i]->getMinElevation() < elevMin)

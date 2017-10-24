@@ -4,6 +4,8 @@
 
 #include "mixr/iodevice/Controller.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace iodevice {
 
@@ -27,7 +29,7 @@ public:
 
 private:
    int stream {};
-   char deviceName[128] {};
+   std::string deviceName;
 };
 
 }

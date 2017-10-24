@@ -84,16 +84,6 @@ public:
    bool setPosition(const double x, const double y, const double z);
    bool setAngles(const double r, const double p, const double y);
 
-   // Slot functions
-   virtual bool setSlotNumRounds(const base::Number* const num);  // Number of rounds
-   virtual bool setSlotUnlimited(const base::Number* const num);  // Unlimited rounds flag
-   virtual bool setSlotRate(const base::Number* const num);       // Rate of fire (rds per min)
-   virtual bool setSlotBurstRate(const base::Number* const num);  // Burst rate
-   virtual bool setSlotPosition(base::List* const numList);       // Gun position relative to ownship
-   virtual bool setSlotRoll(const base::Number* const num);       // Gun roll angle to ownship
-   virtual bool setSlotPitch(const base::Number* const num);      // Gun pitch angle to ownship
-   virtual bool setSlotYaw(const base::Number* const num);        // Gun heading angle to ownship
-
    virtual void reset() override;
 
 protected:
@@ -125,6 +115,17 @@ private:
    base::Vec3d posVec;        // Position vector; relative to ownship body axis (m)
    base::Vec3d angles;        // (Euler) angles; relative to ownship body axis (rad)
    base::Matrixd rm;          // Rotational Matrix; relative to ownship body axis
+
+private:
+   // slot table helper methods
+   bool setSlotNumRounds(const base::Number* const);  // Number of rounds
+   bool setSlotUnlimited(const base::Number* const);  // Unlimited rounds flag
+   bool setSlotRate(const base::Number* const);       // Rate of fire (rds per min)
+   bool setSlotBurstRate(const base::Number* const);  // Burst rate
+   bool setSlotPosition(base::List* const);           // Gun position relative to ownship
+   bool setSlotRoll(const base::Number* const);       // Gun roll angle to ownship
+   bool setSlotPitch(const base::Number* const);      // Gun pitch angle to ownship
+   bool setSlotYaw(const base::Number* const);        // Gun heading angle to ownship
 };
 
 }

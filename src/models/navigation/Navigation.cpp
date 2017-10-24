@@ -36,10 +36,10 @@ BEGIN_SLOTTABLE(Navigation)
 END_SLOTTABLE(Navigation)
 
 BEGIN_SLOT_MAP(Navigation)
-    ON_SLOT(1,setSlotRoute, Route)
-    ON_SLOT(2,setSlotUtc, base::Time)
-    ON_SLOT(3,setSlotFeba, base::PairStream)
-    ON_SLOT(4,setSlotBullseye, Bullseye)
+    ON_SLOT(1, setSlotRoute,    Route)
+    ON_SLOT(2, setSlotUtc,      base::Time)
+    ON_SLOT(3, setSlotFeba,     base::PairStream)
+    ON_SLOT(4, setSlotBullseye, Bullseye)
 END_SLOT_MAP()
 
 Navigation::Navigation() : rm()
@@ -61,27 +61,28 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    if (cc) initData();
 
    if (org.priRoute != nullptr) {
-      Route* p = org.priRoute->clone();
+      Route* p{org.priRoute->clone()};
       priRoute = p;
       p->container(this);
       p->unref();  // safe_ptr<> has it
+   } else {
+      priRoute = nullptr;
    }
-   else priRoute = nullptr;
-
    if (org.initRoute != nullptr) {
-      Route* p = org.initRoute->clone();
+      Route* p{org.initRoute->clone()};
       initRoute = p;
       p->unref();  // safe_ptr<> has it
+   } else {
+      initRoute = nullptr;
    }
-   else initRoute = nullptr;
-
    if (org.bull != nullptr) {
-      Bullseye* b = org.bull->clone();
+      Bullseye* b{org.bull->clone()};
       bull = b;
       b->container(this);
       b->unref();  // safe_ptr<> has it
+   } else {
+      bull = nullptr;
    }
-   else bull = nullptr;
 
    latitude = org.latitude;
    longitude = org.longitude;
@@ -166,7 +167,7 @@ void Navigation::reset()
    if (bull != nullptr) bull->event(RESET_EVENT);
 
    // Set the reference center of our gaming area
-   const WorldModel* sim = getWorldModel();
+   const WorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
       refLat = sim->getRefLatitude();
       refLon = sim->getRefLongitude();
@@ -208,8 +209,10 @@ void Navigation::process(const double dt)
    }
 
    // Update UTC
-   double v = utc + dt;
-   if (v >= base::time::D2S) v = (v - base::time::D2S);
+   double v {utc + dt};
+   if (v >= base::time::D2S) {
+      v = (v - base::time::D2S);
+   }
    setUTC(v);
 
    // ---
@@ -645,12 +648,12 @@ bool Navigation::setNavSteeringValid(const bool flg)
 // (default) System position (using truth data from ownship)
 bool Navigation::updateSysPosition()
 {
-    bool ok = false;
+    bool ok{};
     if (getOwnship() != nullptr) {
         // -- convert ownship's position vector to lat/lon/alt
-        double lat0 = 0;
-        double lon0 = 0;
-        double alt0 = 0;
+        double lat0{};
+        double lon0{};
+        double alt0{};
         ok = base::nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
         setPosition(lat0, lon0, alt0);
     }
@@ -660,7 +663,7 @@ bool Navigation::updateSysPosition()
 // (default) System attitude function  (using truth data from ownship)
 bool Navigation::updateSysAttitude()
 {
-    bool ok = false;
+    bool ok{};
     if (getOwnship() != nullptr) {
         setAttitude(getOwnship()->getRollD(), getOwnship()->getPitchD(), getOwnship()->getHeadingD());
         ok = true;
@@ -679,7 +682,7 @@ bool Navigation::updateMagVar()
 // (default) Velocity data function (using truth data from ownship)
 bool Navigation::updateSysVelocity()
 {
-    bool ok = false;
+    bool ok{};
     if (getOwnship() != nullptr) {
         setVelocity( getOwnship()->getVelocity() );
         setAcceleration( getOwnship()->getAcceleration() );
@@ -698,7 +701,7 @@ bool Navigation::updateSysVelocity()
 bool Navigation::updateNavSteering()
 {
    if (getPriRoute() != nullptr) {
-      const Steerpoint* to = getPriRoute()->getSteerpoint();
+      const Steerpoint* to{getPriRoute()->getSteerpoint()};
       if (to != nullptr) {
          if (to->isNavDataValid()) {
             setTrueBrgDeg( to->getTrueBrgDeg() );
@@ -710,8 +713,7 @@ bool Navigation::updateNavSteering()
             setETA( to->getETA() );
             setCrossTrackErrorNM( to->getCrossTrackErrNM() );
             setNavSteeringValid( true );
-         }
-         else {
+         } else {
             setNavSteeringValid( false );
          }
       }
@@ -724,7 +726,7 @@ bool Navigation::updateNavSteering()
 //------------------------------------------------------------------------------
 int Navigation::getFeba(base::Vec2d* const points, const int max) const
 {
-    int n = 0;
+    int n{};
     if (points != nullptr && max > 0 && feba != nullptr && nFeba > 0) {
 
         // Number of points; limited by 'max'
@@ -795,7 +797,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
 
 bool Navigation::setSlotUtc(const base::Time* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         initUTC = base::Seconds::convertStatic( *msg );
         ok = true;
@@ -806,28 +808,28 @@ bool Navigation::setSlotUtc(const base::Time* const msg)
 // setSlotFeba() --- Sets the FEBA points
 bool Navigation::setSlotFeba(const base::PairStream* const msg)
 {
-    bool ok = true;
+    bool ok{true};
 
     if (msg != nullptr) {
         // allocate space for the points
-        int max = msg->entries();
+        const unsigned int max{msg->entries()};
         const auto tmpFeba = new base::Vec2d[max];
 
         // Get the points from the pair stream
-        int np = 0;
-        const base::List::Item* item = msg->getFirstItem();
-        while (item != nullptr && np < max && ok) {
-            bool validFlg = false;
+        int np{};
+        const base::List::Item* item{msg->getFirstItem()};
+        while (item != nullptr && np < static_cast<int>(max) && ok) {
+            bool validFlg{};
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
-                const base::Object* obj2 = p->object();
+                const base::Object* obj2{p->object()};
                 const auto msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
-                    double values[2];
-                    int n = 0;
+                    double values[2]{};
+                    int n{};
 
                     { // Get the north (first) distance
-                        const base::Number* pNum = nullptr;
+                        const base::Number* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
                         if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
@@ -836,15 +838,14 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             const auto pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
-                            }
-                            else {
+                            } else {
                                 values[n++] = pNum->getReal();
                             }
                         }
                     }
 
                     { // Get the east (second) distance
-                        const base::Number* pNum = nullptr;
+                        const base::Number* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
                         if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
@@ -853,8 +854,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             const auto pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
-                            }
-                            else {
+                            } else {
                                 values[n++] = pNum->getReal();
                             }
                         }

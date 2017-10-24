@@ -5,19 +5,7 @@
 
 #include "mixr/models/system/Guns.hpp"
 
-// players
-#include "mixr/models/player/Aam.hpp"
-#include "mixr/models/player/Agm.hpp"
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/Bomb.hpp"
-#include "mixr/models/player/Effects.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/Missile.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/Sam.hpp"
-#include "mixr/models/player/SamVehicles.hpp"
-#include "mixr/models/player/Ships.hpp"
-#include "mixr/models/Signatures.hpp"
 
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"

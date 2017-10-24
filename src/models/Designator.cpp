@@ -1,6 +1,5 @@
 
 #include "mixr/models/Designator.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace models {

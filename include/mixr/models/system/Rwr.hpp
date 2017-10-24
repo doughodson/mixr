@@ -39,8 +39,8 @@ public:
     virtual bool killedNotification(Player* const killedBy = 0) override;
 
 protected:
-   static const int MAX_EMISSIONS = 1000;
-   static const int NUM_RAYS = 360;
+   static const int MAX_EMISSIONS{1000};
+   static const int NUM_RAYS{360};
 
    virtual void receive(const double dt) override;
    virtual void process(const double dt) override;

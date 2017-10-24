@@ -34,9 +34,6 @@ public:
    virtual void closeConnections();
 
 protected:
-   // Slot functions
-   virtual bool setSlotNetwork(base::NetHandler* const msg);
-   virtual bool setSlotNoWait(base::Number* const msg);
 
    virtual const DataRecordHandle* readRecordImp() override;
 
@@ -50,6 +47,11 @@ private:
     bool firstPassFlg {true};          // First pass flag
 
    char* ibuf {};    // Input buffer
+
+private:
+   // slot table helper methods
+   bool setSlotNetwork(base::NetHandler* const);
+   bool setSlotNoWait(base::Number* const);
 };
 
 }

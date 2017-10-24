@@ -139,7 +139,7 @@ public:
 public:
     ScanGimbal();
 
-    const base::Vec2d& getRefPosition() const   { return refAngle; }       // Returns the current reference position vector (rad)
+    const base::Vec2d& getRefPosition() const   { return refAngle; }             // Returns the current reference position vector (rad)
     double getRefAzimuth() const                { return refAngle[AZ_IDX]; }     // Return the current reference azimuth (rad)
     double getRefElevation() const              { return refAngle[ELEV_IDX]; }   // Return the current reference elevation (rad)
 
@@ -188,19 +188,6 @@ public:
     // Event handler(s)
     virtual bool onStartScanEvent(base::Integer* const bar);
     virtual bool onEndScanEvent(base::Integer* const bar);
-
-    // Slot functions
-    virtual bool setSlotScanMode(base::String* const newMode);
-    virtual bool setSlotLeftToRightScan(const base::Number* const newLeftToRightScan);
-    virtual bool setSlotScanWidth(const base::Number* const newWidth);
-    virtual bool setSlotSearchVolume(base::List* const numList);
-    virtual bool setSlotRefPosition(const base::List* const numList);
-    virtual bool setSlotBarSpacing(const base::Number* const newSpacing);
-    virtual bool setSlotNumBars(const base::Number* const newNumBars);
-    virtual bool setSlotRevPerSec(const base::Number* const newRevPerSec);
-    virtual bool setSlotScanRadius(const base::Number* const newScanRadius);
-    virtual bool setSlotPRVertices(const base::PairStream* const prObj);
-    virtual bool setSlotMaxRevs(const base::Number* const newMaxRevs);
 
     // Component Interface
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
@@ -266,6 +253,20 @@ private:
     double     myLastAngle {};            // Angle (radians) of our last position in a rate servo
     double     numRevs {};                // Spiral Scan - current number of revolutions
     double     maxNumRevs {1.0};          // Spiral Scan - maximum number of revolutions
+
+private:
+   // slot table helper methods
+   bool setSlotScanMode(base::String* const);
+   bool setSlotLeftToRightScan(const base::Number* const);
+   bool setSlotScanWidth(const base::Number* const);
+   bool setSlotSearchVolume(base::List* const);
+   bool setSlotRefPosition(const base::List* const);
+   bool setSlotBarSpacing(const base::Number* const);
+   bool setSlotNumBars(const base::Number* const);
+   bool setSlotRevPerSec(const base::Number* const);
+   bool setSlotScanRadius(const base::Number* const);
+   bool setSlotPRVertices(const base::PairStream* const);
+   bool setSlotMaxRevs(const base::Number* const);
 };
 
 }

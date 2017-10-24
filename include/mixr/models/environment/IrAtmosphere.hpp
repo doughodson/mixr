@@ -115,26 +115,25 @@ public:
    }
 
 protected:
-
-   // slot operations 
-   virtual bool setSlotWaveBands(const base::Table1* const tbl);
-   virtual bool setSlotTransmissivityTable1(const base::Table1* const tbl);
-   virtual bool setSlotSkyRadiance(base::Number* const num);
-   virtual bool setSlotEarthRadiance(base::Number* const num);
-
    double getTransmissivity(const unsigned int i, const double range) const;
    double getTransmissivity(const double waveBandCenter, const double range) const;
    double getSkyRadiance() const {return skyRadiance;}
    double getEarthRadiance() const {return earthRadiance;}
 
 private:
-
    unsigned int numWaveBands {};
    const base::Table1* waveBandTable {};
    const base::Table1* transmissivityTable1 {};
 
    double skyRadiance {};      // Simple background radiance for targets in sky
    double earthRadiance {};    // Simple background radiance for targets on ground
+
+private:
+   // slot operations
+   bool setSlotWaveBands(const base::Table1* const);
+   bool setSlotTransmissivityTable1(const base::Table1* const);
+   bool setSlotSkyRadiance(base::Number* const);
+   bool setSlotEarthRadiance(base::Number* const);
 };
 
 }

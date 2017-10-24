@@ -21,7 +21,7 @@ BEGIN_SLOTTABLE(SimAgent)
 END_SLOTTABLE(SimAgent)
 
 BEGIN_SLOT_MAP(SimAgent)
-   ON_SLOT(1, setSlotActorPlayerName, base::String )
+   ON_SLOT(1, setSlotActorPlayerName,    base::String )
    ON_SLOT(2, setSlotActorComponentName, base::String )
 END_SLOT_MAP()
 
@@ -55,8 +55,8 @@ simulation::Station* SimAgent::getStation()
 
 WorldModel* SimAgent::getWorldModel()
 {
-   WorldModel* sim = nullptr;
-   simulation::Station* s = getStation();
+   WorldModel* sim{};
+   simulation::Station* s{getStation()};
    if (s != nullptr) {
       sim = dynamic_cast<WorldModel*>(s->getSimulation());
    }
@@ -70,17 +70,15 @@ void SimAgent::initActor()
       if (actorPlayerName == nullptr) {
          // not correctly specified as a SimAgent, try baseClass ?
          BaseClass::initActor();
-      }
-      else {
-         WorldModel* sim = getWorldModel();
+      } else {
+         WorldModel* sim{getWorldModel()};
          if ( sim != nullptr ) {
-            base::Component* player = sim->findPlayerByName(actorPlayerName->getString());
+            base::Component* player{sim->findPlayerByName(actorPlayerName->getString())};
             if (actorComponentName == nullptr) {
                // no player component specified, so the player is the actor
                setActor(player);
-            }
-            else if (player != nullptr) {
-               base::Pair* pair = player->findByName(actorComponentName->getString());
+            } else if (player != nullptr) {
+               base::Pair* pair{player->findByName(actorComponentName->getString())};
                if (pair != nullptr) {
                   setActor(dynamic_cast<base::Component*>( pair->object() ));
                }
@@ -104,7 +102,7 @@ void SimAgent::setActorComponentByName(const char* x)
 
 bool SimAgent::setSlotActorPlayerName(const base::String* const x)
 {
-   bool ok = false;
+   bool ok{};
    if ( x != nullptr ) {
       setActorPlayerByName(x->getString());
       ok = true;
@@ -114,7 +112,7 @@ bool SimAgent::setSlotActorPlayerName(const base::String* const x)
 
 bool SimAgent::setSlotActorComponentName(const base::String* const x)
 {
-   bool ok = false;
+   bool ok{};
    if ( x != nullptr ) {
       setActorComponentByName(x->getString());
       ok = true;

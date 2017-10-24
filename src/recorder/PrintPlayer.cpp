@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(PrintPlayer)
 END_SLOTTABLE(PrintPlayer)
 
 BEGIN_SLOT_MAP(PrintPlayer)
-   ON_SLOT( 1, setName, base::String)
+   ON_SLOT( 1, setSlotName, base::String)
 END_SLOT_MAP()
 
 PrintPlayer::PrintPlayer()
@@ -31,7 +31,7 @@ void PrintPlayer::copyData(const PrintPlayer& org, const bool)
    BaseClass::copyData(org);
 
    { // clone player name
-      const base::String* clone = nullptr;
+      const base::String* clone{};
       if (org.name != nullptr) clone = org.name->clone();
       setName(clone);
       if (clone != nullptr) clone->unref();
@@ -60,7 +60,7 @@ bool PrintPlayer::setName(const base::String* const msg)
 void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord{handle->getRecord()};
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
@@ -70,13 +70,13 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 //   }
 
    // Get message id
-   unsigned int messageId = dataRecord->id();
+   unsigned int messageId{dataRecord->id()};
    enum MsgType { NEW, DATA, REMOVED, DAMAGE, COLLISION, CRASH, KILL, UNKNOWN };
-   MsgType msgType = UNKNOWN;
-   std::string msgTypeStr = "";
+   MsgType msgType{UNKNOWN};
+   std::string msgTypeStr{""};
 
-   const pb::PlayerId* playerIdMsg = nullptr;
-   const pb::PlayerState* playerStMsg = nullptr;
+   const pb::PlayerId* playerIdMsg{};
+   const pb::PlayerState* playerStMsg{};
 
    switch (messageId) {
 
@@ -85,7 +85,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_player_event_msg()) {
             msgType = NEW;
             msgTypeStr = "NEW";
-            const pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
+            const pb::NewPlayerEventMsg* msg{&dataRecord->new_player_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
             std::string playerName = playerIdMsg->name();  // example
@@ -97,7 +97,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_removed_event_msg()) {
             msgType = REMOVED;
             msgTypeStr = "REMOVED";
-            const pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
+            const pb::PlayerRemovedEventMsg* msg{&dataRecord->player_removed_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -108,7 +108,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_data_msg()) {
             msgType = DATA;
             msgTypeStr = "DATA";
-            const pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
+            const pb::PlayerDataMsg* msg{&dataRecord->player_data_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -118,7 +118,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_damaged_event_msg()) {
             msgType = DAMAGE;
             msgTypeStr = "DAMAGE";
-            const pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
+            const pb::PlayerDamagedEventMsg* msg{&dataRecord->player_damaged_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -128,7 +128,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_collision_event_msg()) {
             msgType = COLLISION;
             msgTypeStr = "COLLISION";
-            const pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
+            const pb::PlayerCollisionEventMsg* msg{&dataRecord->player_collision_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -138,7 +138,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_crash_event_msg()) {
             msgType = CRASH;
             msgTypeStr = "CRASH";
-            const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
+            const pb::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -148,7 +148,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_killed_event_msg()) {
             msgType = KILL;
             msgTypeStr = "KILL";
-            const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
+            const pb::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -165,10 +165,10 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    // if message handled, continue
    if (msgType != UNKNOWN) {
 
-      bool printIt = (name == nullptr);
+      bool printIt{(name == nullptr)};
       if (!printIt) {
          if (playerIdMsg != nullptr && playerIdMsg->has_name()) {
-            const char* sname = playerIdMsg->name().c_str();
+            const char* sname{playerIdMsg->name().c_str()};
             printIt = (*name == sname);
          }
       }

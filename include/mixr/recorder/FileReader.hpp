@@ -40,8 +40,8 @@ public:
    virtual void closeFile();        // Close the data file
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const base::String* const msg);
-   virtual bool setPathName(const base::String* const msg);
+   virtual bool setFilename(const base::String* const);
+   virtual bool setPathName(const base::String* const);
 
 protected:
    virtual const DataRecordHandle* readRecordImp() override;
@@ -57,6 +57,11 @@ private:
    bool fileOpened {};               // File opened
    bool fileFailed {};               // Open or read failed
    bool firstPassFlg {true};         // First pass flag
+
+private:
+   // slot table helper methods
+   bool setSlotFilename(const base::String* const x)                 { return setFilename(x); }
+   bool setSlotPathName(const base::String* const x)                 { return setPathName(x); }
 };
 
 }

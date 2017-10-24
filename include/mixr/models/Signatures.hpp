@@ -38,14 +38,18 @@ class SigConstant : public RfSignature
     DECLARE_SUBCLASS(SigConstant, RfSignature)
 public:
     SigConstant();
-    SigConstant(const double c);
-    SigConstant(const base::Number* const c);
+    SigConstant(const double);
+    SigConstant(const base::Number* const);
 
-    virtual bool setRCS(const base::Number* const num);
+    bool setRCS(const base::Number* const);
 
-    virtual double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const) override;
 private:
     double rcs {};         // Constant RCS value
+
+private:
+    // slot table helper methods
+    bool setSlotRCS(const base::Number* const x)     { return setRCS(x); }
 };
 
 //------------------------------------------------------------------------------
@@ -62,14 +66,18 @@ class SigSphere : public RfSignature
 public:
     SigSphere();
     SigSphere(const double r);
-    virtual bool setRadiusFromSlot(base::Number* const num);
     double computeRcs(const double r)                          { return static_cast<double>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
-    virtual double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const) override;
+
 private:
     double radius {};      // Sphere radius
     double rcs {};         // RCS of sphere
+
+private:
+   // slot table helper methods
+   virtual bool setSlotRadius(base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -92,10 +100,11 @@ public:
     double getA() const                             { return a; }
     double getB() const                             { return b; }
 
-    virtual bool setA(base::Number* const num);
-    virtual bool setB(base::Number* const num);
+    virtual bool setA(base::Number* const);
+    virtual bool setB(base::Number* const);
 
-    virtual double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const) override;
+
 private:
     double a {};       // Length dimension
     double b {};       // Width dimension
@@ -112,9 +121,10 @@ class SigDihedralCR : public SigPlate
     DECLARE_SUBCLASS(SigDihedralCR, SigPlate)
 public:
     SigDihedralCR();
-    SigDihedralCR(const double a);
+    SigDihedralCR(const double);
 
-    virtual double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const) override;
+
 private:
     double length {};      // Length dimension
 };
@@ -131,9 +141,9 @@ class SigTrihedralCR : public SigDihedralCR
     DECLARE_SUBCLASS(SigTrihedralCR, SigDihedralCR)
 public:
     SigTrihedralCR();
-    SigTrihedralCR(const double a);
+    SigTrihedralCR(const double);
 
-    virtual double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const) override;
 };
 
 
@@ -150,7 +160,7 @@ class SigSwitch : public RfSignature
 public:
    SigSwitch();
 
-   virtual double getRCS(const Emission* const em) override;
+   virtual double getRCS(const Emission* const) override;
 };
 
 
@@ -192,31 +202,33 @@ class SigAzEl : public RfSignature
     DECLARE_SUBCLASS(SigAzEl, RfSignature)
 public:
    SigAzEl();
-   SigAzEl(const base::Table2* const tbl);
+   SigAzEl(const base::Table2* const);
 
    virtual bool isTableValid() const;
 
    bool isOrderSwapped() const                  { return swapOrderFlg; }
-   virtual bool setSwapOrder(const bool flg);
+   virtual bool setSwapOrder(const bool);
 
    bool isInDegrees() const                     { return degFlg; }
-   virtual bool setInDegrees(const bool flg);
+   virtual bool setInDegrees(const bool);
 
    bool isDecibel() const                       { return dbFlg; }
-   virtual bool setDecibel(const bool flg);
-
-   // Slot functions
-   virtual bool setSlotTable(const base::Table2* const tbl);
-   virtual bool setSlotSwapOrder(const base::Number* const msg);
-   virtual bool setSlotInDegrees(const base::Number* const msg);
-   virtual bool setSlotDecibel(const base::Number* const msg);
+   virtual bool setDecibel(const bool);
 
    virtual double getRCS(const Emission* const em) override;
+
 protected:
    const base::Table2* tbl {};      // The table
    bool swapOrderFlg {};            // Swap independent data order from az/el to el/az
    bool degFlg {};                  // independent data in degrees
    bool dbFlg {};                   // dependent data in decibels
+
+private:
+   // slot table helper methods
+   bool setSlotTable(const base::Table2* const);
+   bool setSlotSwapOrder(const base::Number* const);
+   bool setSlotInDegrees(const base::Number* const);
+   bool setSlotDecibel(const base::Number* const);
 };
 
 }

@@ -51,7 +51,7 @@ void System::deleteData()
 //------------------------------------------------------------------------------
 bool System::isFrozen() const
 {
-   bool frz = BaseClass::isFrozen();
+   bool frz{BaseClass::isFrozen()};
    if (!frz && ownship != nullptr) frz = ownship->isFrozen();
    return frz;
 }
@@ -91,16 +91,16 @@ void System::updateTC(const double dt0)
    // ---
 
    // real or frozen?
-   double dt = dt0;
+   double dt{dt0};
    if (isFrozen()) dt = 0.0;
 
    // Delta time for methods that are running every fourth phase
-   double dt4 = dt * 4.0f;
+   double dt4{dt * 4.0};
 
    // ---
    // Four phases per frame
    // ---
-   WorldModel* sim = ownship->getWorldModel();
+   WorldModel* sim{ownship->getWorldModel()};
    if (sim == nullptr) return;
 
    switch (sim->phase()) {
@@ -154,11 +154,11 @@ void System::process(const double)
 bool System::killedNotification(Player* const p)
 {
    // Just let all of our subcomponents know that we were just killed
-   base::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents{getComponents()};
    if(subcomponents != nullptr) {
       for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::Component* sc = static_cast<base::Component*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         base::Component* sc{static_cast<base::Component*>(pair->object())};
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();
@@ -174,7 +174,7 @@ bool System::killedNotification(Player* const p)
 // Returns a pointer to the world model
 WorldModel* System::getWorldModel()
 {
-   WorldModel* p = nullptr;
+   WorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }
@@ -182,7 +182,7 @@ WorldModel* System::getWorldModel()
 // Returns a pointer to the world model (const version)
 const WorldModel* System::getWorldModel() const
 {
-   const WorldModel* p = nullptr;
+   const WorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }
@@ -235,7 +235,7 @@ bool System::findOwnship()
 //-----------------------------------------------------------------------------
 bool System::setSlotPowerSwitch(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       if (*msg == "OFF" || *msg == "off") ok = setPowerSwitch(PWR_OFF);
       else if (*msg == "STBY" || *msg == "stby") ok = setPowerSwitch(PWR_STBY);

@@ -16,7 +16,7 @@ SynchronizedState::SynchronizedState()
    clear();
 }
 
-void SynchronizedState::copyData(const SynchronizedState& org, const bool cc)
+void SynchronizedState::copyData(const SynchronizedState& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -93,4 +93,3 @@ bool SynchronizedState::setAngularVelocities(const base::Vec3d& newAngVel)
 
 }
 }
-

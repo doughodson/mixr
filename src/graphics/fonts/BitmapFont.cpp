@@ -23,7 +23,7 @@ BEGIN_SLOTTABLE(BitmapFont)
 END_SLOTTABLE(BitmapFont)
 
 BEGIN_SLOT_MAP(BitmapFont)
-    ON_SLOT(1, setReverse, base::Number)
+    ON_SLOT(1, setSlotReverse, base::Number)
 END_SLOT_MAP()
 
 BitmapFont::BitmapFont()
@@ -150,9 +150,9 @@ void BitmapFont::loadFont()
 }
 
 //------------------------------------------------------------------------------
-// setReverse() -- sets text in reverse type
+// sets text in reverse type
 //------------------------------------------------------------------------------
-bool BitmapFont::setReverse(const base::Number* const rnumber)
+bool BitmapFont::setSlotReverse(const base::Number* const rnumber)
 {
     if (rnumber != nullptr)
         reverse = rnumber->getBoolean();

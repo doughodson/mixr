@@ -155,7 +155,7 @@ void Simulation::deleteData()
    if (origPlayers != nullptr) { origPlayers = nullptr; }
    if (players != nullptr)     { players = nullptr; }
 
-   base::Pair* newPlayer = newPlayerQueue.get();
+   base::Pair* newPlayer {newPlayerQueue.get()};
    while (newPlayer != nullptr) {
       newPlayer->unref();
       newPlayer = newPlayerQueue.get();
@@ -198,10 +198,10 @@ void Simulation::reset()
    {
       if (origPlayers != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
-         base::List::Item* item = origPlayerList->getFirstItem();
+         base::List::Item* item {origPlayerList->getFirstItem()};
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
 
             // reinstated the container pointer and player name
             ip->container(this);
@@ -220,10 +220,10 @@ void Simulation::reset()
    {
       if (players != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = players;
-         base::List::Item* item = origPlayerList->getFirstItem();
+         base::List::Item* item {origPlayerList->getFirstItem()};
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
             if (ip->isNetworkedPlayer()) {
 
                // reinstated the container pointer and player name
@@ -249,15 +249,15 @@ void Simulation::reset()
    if (reqTcThreads > 1 && numTcThreads == 0 && !tcThreadsFailed) {
 
       // Use the T/C priority from our container Station.
-      double pri = Station::DEFAULT_TC_THREAD_PRI;
-      const Station* sta = static_cast<const Station*>(findContainerByType( typeid(Station) ));
+      double pri {Station::DEFAULT_TC_THREAD_PRI};
+      const Station* sta {static_cast<const Station*>(findContainerByType( typeid(Station) ))};
       if (sta != nullptr) {
          pri = sta->getTimeCriticalPriority();
       }
 
       for (unsigned int i = 0; i < (reqTcThreads-1); i++) {
          tcThreads[numTcThreads] = new SimTcThread(this, pri);
-         bool ok = tcThreads[numTcThreads]->create();
+         bool ok {tcThreads[numTcThreads]->create()};
          if (ok) {
             std::cout << "Created T/C pool thread[" << i << "] = " << tcThreads[i] << std::endl;
             numTcThreads++;
@@ -283,15 +283,15 @@ void Simulation::reset()
    if (reqBgThreads > 1 && numBgThreads == 0 && !bgThreadsFailed) {
 
       // Use the background priority from our container Station.
-      double pri = Station::DEFAULT_BG_THREAD_PRI;
-      const Station* sta = static_cast<const Station*>(findContainerByType( typeid(Station) ));
+      double pri {Station::DEFAULT_BG_THREAD_PRI};
+      const Station* sta {static_cast<const Station*>(findContainerByType( typeid(Station) ))};
       if (sta != nullptr) {
          pri = sta->getBackgroundPriority();
       }
 
       for (unsigned int i = 0; i < (reqBgThreads-1); i++) {
          bgThreads[numBgThreads] = new SimBgThread(this, pri);
-         bool ok = bgThreads[numBgThreads]->create();
+         bool ok {bgThreads[numBgThreads]->create()};
          if (ok) {
             std::cout << "Created background pool thread[" << i << "] = " << bgThreads[i] << std::endl;
             numBgThreads++;
@@ -320,12 +320,12 @@ void Simulation::reset()
    base::getTime(&pcTvSec, &pcTvUSec);
 
    // Decompose into year, month, etc
-   unsigned int cYear = 0;
-   unsigned int cMonth = 0;
-   unsigned int cDay = 0;
-   unsigned int cHour = 0;
-   unsigned int cMin = 0;
-   unsigned int cSec = 0;
+   unsigned int cYear{};
+   unsigned int cMonth{};
+   unsigned int cDay{};
+   unsigned int cHour{};
+   unsigned int cMin{};
+   unsigned int cSec{};
    base::convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
       //std::printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
       //std::printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
@@ -345,7 +345,7 @@ void Simulation::reset()
 
       // Replace the time of day, as required
       if (simTime0 >= 0) {
-         unsigned int t = simTime0;
+         unsigned int t {static_cast<unsigned int>(simTime0)};
          // Compute simulated hour of the date
          cHour = (t / 3600);
          t -= (cHour * 3600);
@@ -377,11 +377,11 @@ void Simulation::reset()
    // ---
    if (players != nullptr) {
       base::safe_ptr<base::PairStream> pl = players;
-      base::List::Item* item = pl->getFirstItem();
+      base::List::Item* item {pl->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
          if (pair != nullptr) {
-            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
+            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
             if (ip != nullptr) ip->event(RESET_EVENT);
          }
          item = item->getNext();
@@ -404,14 +404,14 @@ bool Simulation::shutdownNotification()
    // ---
    // Tell everyone on our player list
    // ---
-   base::PairStream* plist = getPlayers();
+   base::PairStream* plist {getPlayers()};
    if (plist != nullptr) {
 
       // Send shutdown to all players
-      base::List::Item* item = plist->getFirstItem();
+      base::List::Item* item {plist->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::Component* p = static_cast<base::Component*>(pair->object());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+         base::Component* p {static_cast<base::Component*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -425,9 +425,9 @@ bool Simulation::shutdownNotification()
    // Tell everyone on our 'new' player list, and remove
    // them from the list
    // ---
-   base::Pair* newPlayer = newPlayerQueue.get();
+   base::Pair* newPlayer {newPlayerQueue.get()};
    while (newPlayer != nullptr) {
-      base::Component* p = static_cast<base::Component*>(newPlayer->object());
+      base::Component* p {static_cast<base::Component*>(newPlayer->object())};
       p->event(SHUTDOWN_EVENT);
       newPlayer->unref();
       newPlayer = newPlayerQueue.get();
@@ -469,7 +469,7 @@ void Simulation::updateTC(const double dt)
    // and set the current time of day
    // ---
    {
-      unsigned long newPcTvUSec = pcTvUSec + static_cast<unsigned long>(dt * 1000000.0 + 0.5);
+      unsigned long newPcTvUSec {pcTvUSec + static_cast<unsigned long>(dt * 1000000.0 + 0.5)};
       // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
       while (newPcTvUSec >= 1000000) {
          newPcTvUSec = newPcTvUSec - 1000000;
@@ -478,12 +478,12 @@ void Simulation::updateTC(const double dt)
       pcTvUSec = newPcTvUSec;
       //getTime(&pcTvSec, &pcTvUSec); /* test */
 
-      unsigned int cYear = 0;
-      unsigned int cMonth = 0;
-      unsigned int cDay = 0;
-      unsigned int cHour = 0;
-      unsigned int cMin = 0;
-      unsigned int cSec = 0;
+      unsigned int cYear{};
+      unsigned int cMonth{};
+      unsigned int cDay{};
+      unsigned int cHour{};
+      unsigned int cMin{};
+      unsigned int cSec{};
       base::convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
@@ -497,7 +497,7 @@ void Simulation::updateTC(const double dt)
    // ---
    // Delta-Time (Frozen?)
    // ---
-   double dt0 = dt;
+   double dt0 {dt};
    if (isFrozen()) dt0 = 0.0;
 
    // ---
@@ -505,10 +505,10 @@ void Simulation::updateTC(const double dt)
    // ---
    {
       // If slaved then the simulated time can not be frozen
-      double deltaTime = dt0;
+      double deltaTime {dt0};
       if (simTimeSlaved) deltaTime = dt;
 
-      unsigned long newSimTvUSec = simTvUSec + static_cast<unsigned long>(deltaTime * 1000000.0 + 0.5);
+      unsigned long newSimTvUSec {simTvUSec + static_cast<unsigned long>(deltaTime * 1000000.0 + 0.5)};
       // while loop is used instead of if statement in case dt > 1 sec (i.e., tcRate < 1 Hz)
       while (newSimTvUSec >= 1000000) {
          newSimTvUSec = newSimTvUSec - 1000000;
@@ -520,12 +520,12 @@ void Simulation::updateTC(const double dt)
 
    // compute the simulated time of day
    {
-      unsigned int cYear = 0;
-      unsigned int cMonth = 0;
-      unsigned int cDay = 0;
-      unsigned int cHour = 0;
-      unsigned int cMin = 0;
-      unsigned int cSec = 0;
+      unsigned int cYear{};
+      unsigned int cMonth{};
+      unsigned int cDay{};
+      unsigned int cHour{};
+      unsigned int cMin{};
+      unsigned int cSec{};
       base::convertSec2Ymdhms(simTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
@@ -562,7 +562,7 @@ void Simulation::updateTC(const double dt)
             for (unsigned short i = 0; i < numTcThreads; i++) {
 
                // assign the threads from the pool
-               unsigned int idx = (i+1);
+               unsigned int idx {static_cast<unsigned int>(i+1)};
                tcThreads[i]->start(currentPlayerList, (dt0/4.0), idx, reqTcThreads);
             }
 
@@ -570,7 +570,7 @@ void Simulation::updateTC(const double dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0), reqTcThreads, reqTcThreads);
 
             // Now wait for the other thread(s) to complete
-            base::SyncTask** pp = reinterpret_cast<base::SyncTask**>(&tcThreads[0]);
+            base::SyncTask** pp {reinterpret_cast<base::SyncTask**>(&tcThreads[0])};
             base::SyncTask::waitForAllCompleted(pp, numTcThreads);
 
          }
@@ -604,14 +604,14 @@ void Simulation::updateTcPlayerList(
    const unsigned int n)
 {
    if (playerList != nullptr) {
-      unsigned int index = idx;
-      unsigned int count = 0;
-      base::List::Item* item = playerList->getFirstItem();
+      unsigned int index{idx};
+      unsigned int count{};
+      base::List::Item* item {playerList->getFirstItem()};
       while (item != nullptr) {
          count++;
          if (count == index) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
             ip->tcFrame(dt);
             index += n;
          }
@@ -626,7 +626,7 @@ void Simulation::updateTcPlayerList(
 void Simulation::updateData(const double dt)
 {
     // Delta-Time (Frozen?)
-    double dt0 = dt;
+    double dt0 {dt};
     if (isFrozen()) dt0 = 0.0;
 
     // Update base classes stuff
@@ -648,7 +648,7 @@ void Simulation::updateData(const double dt)
             for (unsigned short i = 0; i < numBgThreads; i++) {
 
                // assign the threads from the pool
-               unsigned int idx = (i+1);
+               unsigned int idx {static_cast<unsigned int>(i+1)};
                bgThreads[i]->start(currentPlayerList, dt0, idx, reqBgThreads);
             }
 
@@ -680,14 +680,14 @@ void Simulation::updateBgPlayerList(
          const unsigned int n)
 {
    if (playerList != nullptr) {
-      unsigned int index = idx;
-      unsigned int count = 0;
-      base::List::Item* item = playerList->getFirstItem();
+      unsigned int index{idx};
+      unsigned int count{};
+      base::List::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
          count++;
          if (count == index) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+            AbstractPlayer* ip{static_cast<AbstractPlayer*>(pair->object())};
             ip->updateData(dt);
             index += n;
          }
@@ -701,9 +701,9 @@ void Simulation::updateBgPlayerList(
 //------------------------------------------------------------------------------
 void Simulation::printTimingStats()
 {
-   const base::Statistic* ts = getTimingStats();
-   int c = cycle();
-   int f = frame() - 1;
+   const base::Statistic* ts{getTimingStats()};
+   int c{static_cast<int>(cycle())};
+   int f{static_cast<int>(frame() - 1)};
    if (f < 0) {
       c--;
       f = 15;
@@ -800,8 +800,8 @@ unsigned short Simulation::getNewReleasedWeaponID()
 // Returns the data recorder
 AbstractDataRecorder* Simulation::getDataRecorder()
 {
-   AbstractDataRecorder* p = nullptr;
-   Station* sta = getStation();
+   AbstractDataRecorder* p{};
+   Station* sta{getStation()};
    if (sta != nullptr) p = sta->getDataRecorder();
    return p;
 }
@@ -848,14 +848,14 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       return true;
    }
 
-   bool ok = true;
-   unsigned short maxID=0;
+   bool ok{true};
+   unsigned short maxID{};
 
    // First, make sure they are all Players.
    {
-      base::List::Item* item = pl->getFirstItem();
+      base::List::Item* item{pl->getFirstItem()};
       while (item != nullptr && ok) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
          const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
          if (ip == nullptr) {
@@ -877,11 +877,11 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
    // Next, make sure we have unique player names and IDs
    if (ok) {
       // For all players ...
-      base::List::Item* item1 = pl->getFirstItem();
+      base::List::Item* item1{pl->getFirstItem()};
       while (item1 != nullptr) {
-         base::Pair* pair1 = static_cast<base::Pair*>(item1->getValue());
+         base::Pair* pair1{static_cast<base::Pair*>(item1->getValue())};
          item1 = item1->getNext();
-         AbstractPlayer* ip1 = static_cast<AbstractPlayer*>(pair1->object());
+         AbstractPlayer* ip1{static_cast<AbstractPlayer*>(pair1->object())};
 
          // unassigned ID
          if ( (ip1->getID() == 0) && (maxID < 65535) ) {
@@ -889,10 +889,10 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
             ++maxID;
          }
 
-         base::List::Item* item2 = item1;
+         base::List::Item* item2{item1};
          while (item2 != nullptr) {
-            base::Pair* pair2 = static_cast<base::Pair*>(item2->getValue());
-            AbstractPlayer* ip2 = static_cast<AbstractPlayer*>(pair2->object());
+            base::Pair* pair2{static_cast<base::Pair*>(item2->getValue())};
+            AbstractPlayer* ip2{static_cast<AbstractPlayer*>(pair2->object())};
 
             // unassigned ID
             if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
@@ -919,9 +919,9 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
    // Next, set the container pointer, set the player's name
    // and setup the player lists.
    if (ok) {
-      base::List::Item* item = pl->getFirstItem();
+      base::List::Item* item{pl->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
          const auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
@@ -932,14 +932,14 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       origPlayers = pl;
 
       // Create the new active player list
-      base::PairStream* newList( new base::PairStream() );
+      base::PairStream* newList{new base::PairStream()};
 
       // Copy original players to the new list
       if (origPlayers != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
-         base::List::Item* item = origPlayerList->getFirstItem();
+         base::List::Item* item {origPlayerList->getFirstItem()};
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             insertPlayerSort(pair, newList);
             item = item->getNext();
          }
@@ -971,9 +971,9 @@ void Simulation::updatePlayerList()
     // Second, check for delete requests
     if (!yes) {
         base::safe_ptr<base::PairStream> pl = players;
-        base::List::Item* item = pl->getFirstItem();
+        base::List::Item* item {pl->getFirstItem()};
         while (!yes && item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             const auto p = static_cast<AbstractPlayer*>(pair->object());
             yes = p->isMode(AbstractPlayer::DELETE_REQUEST);
             item = item->getNext();
@@ -994,9 +994,9 @@ void Simulation::updatePlayerList()
         // Copy players to the new list; except 'deleteRequest' mode players
         // ---
         base::safe_ptr<base::PairStream> oldList = players;
-        base::List::Item* item = oldList->getFirstItem();
+        base::List::Item* item {oldList->getFirstItem()};
         while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             item = item->getNext();
             const auto p = static_cast<AbstractPlayer*>(pair->object());
             if (p->isNotMode(AbstractPlayer::DELETE_REQUEST)) {
@@ -1017,7 +1017,7 @@ void Simulation::updatePlayerList()
         // ---
         // Add any new players
         // ---
-      base::Pair* newPlayer = newPlayerQueue.get();
+      base::Pair* newPlayer {newPlayerQueue.get()};
       while (newPlayer != nullptr) {
             // get the player
             const auto ip = static_cast<AbstractPlayer*>(newPlayer->object());
@@ -1072,7 +1072,7 @@ bool Simulation::addNewPlayer(const char* const playerName, AbstractPlayer* cons
     if (playerName == nullptr || player == nullptr) return false;
 
     const auto pair = new base::Pair(playerName, player);
-    bool ok = addNewPlayer(pair);
+    bool ok {addNewPlayer(pair)};
     pair->unref();
     return ok;
 }
@@ -1085,7 +1085,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     newList->ref();
 
     // create a new base::List::Item to hold the player
-    base::List::Item* newItem = new base::List::Item;
+    base::List::Item* newItem {new base::List::Item};
     newPlayerPair->ref();
     newItem->value = newPlayerPair;
 
@@ -1094,24 +1094,24 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
 
     // Search the new player list and insert into the correct position --
     //  -- sorted by network ID and player ID
-    bool inserted = false;
-    base::List::Item* refItem = newList->getFirstItem();
+    bool inserted{};
+    base::List::Item* refItem{newList->getFirstItem()};
     while (refItem != nullptr && !inserted) {
-        base::Pair* refPair = static_cast<base::Pair*>(refItem->getValue());
-        const auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
+        base::Pair* refPair {static_cast<base::Pair*>(refItem->getValue())};
+        const auto refPlayer {static_cast<AbstractPlayer*>(refPair->object())};
 
-        bool insert = false;
+        bool insert{};
         if (newPlayer->isNetworkedPlayer()) {
 
             // *** Insert IPlayer -- after local players and lower NIB IDs first
             if (refPlayer->isNetworkedPlayer()) {
 
                // Get the NIBs
-               const AbstractNib* nNib = newPlayer->getNib();
-               const AbstractNib* rNib = refPlayer->getNib();
+               const AbstractNib* nNib {newPlayer->getNib()};
+               const AbstractNib* rNib {refPlayer->getNib()};
 
                // Compare federate names
-               int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());
+               int result{std::strcmp(*nNib->getFederateName(), *rNib->getFederateName())};
                if (result == 0) {
                   // Same federate name; compare player IDs
                   if (nNib->getPlayerID() > rNib->getPlayerID()) result = +1;
@@ -1166,8 +1166,8 @@ AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) c
     if (players == nullptr) return nullptr;
 
     // Find a Player that matches player ID and Sources
-    AbstractPlayer* iplayer = nullptr;
-    const base::List::Item* item = players->getFirstItem();
+    AbstractPlayer* iplayer{};
+    const base::List::Item* item{players->getFirstItem()};
     while (iplayer == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
@@ -1210,8 +1210,8 @@ AbstractPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName
     if (players == nullptr || playerName == nullptr) return nullptr;
 
     // Find a Player named 'playerName'
-    AbstractPlayer* iplayer = nullptr;
-    const base::List::Item* item = players->getFirstItem();
+    AbstractPlayer* iplayer{};
+    const base::List::Item* item{players->getFirstItem()};
     while (iplayer == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
@@ -1279,9 +1279,9 @@ void Simulation::setWeaponEventID(unsigned short id)
 
 bool Simulation::setSlotSimulationTime(const base::Time* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
-       const long t = static_cast<long>( base::osg::round(base::Seconds::convertStatic(*msg)) );
+       const long t {static_cast<long>( base::osg::round(base::Seconds::convertStatic(*msg)) )};
        if (t >= -1 && t < (60*60*24)) {
           ok = setInitialSimulationTime(t);
        }
@@ -1294,9 +1294,9 @@ bool Simulation::setSlotSimulationTime(const base::Time* const msg)
 
 bool Simulation::setSlotDay(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0 && v <= 31) {
          simDay0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1310,9 +1310,9 @@ bool Simulation::setSlotDay(const base::Number* const msg)
 
 bool Simulation::setSlotMonth(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 12) {
          simMonth0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1326,9 +1326,9 @@ bool Simulation::setSlotMonth(const base::Number* const msg)
 
 bool Simulation::setSlotYear(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if ((v >= 1970 && v <= 2099) || v == 0) {
          simYear0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1342,9 +1342,9 @@ bool Simulation::setSlotYear(const base::Number* const msg)
 
 bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= MIN_WPN_ID && v <= 0xffff) {
          relWpnId = static_cast<unsigned short>(v);
          ok = true;
@@ -1359,16 +1359,16 @@ bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
 
 bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::Thread::getNumProcessors();
-      unsigned short maxT = 1;
+      const unsigned short np{base::Thread::getNumProcessors()};
+      unsigned short maxT{1};
       if (np > 1) maxT = np - 1;
 
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 1 && v <= maxT) {
          reqTcThreads = static_cast<unsigned short>(v);
          ok = true;
@@ -1384,16 +1384,16 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 
 bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::Thread::getNumProcessors();
-      unsigned short maxT = 1;
+      const unsigned short np{base::Thread::getNumProcessors()};
+      unsigned short maxT{1};
       if (np > 1) maxT = np - 1;
 
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 1 && v <= maxT) {
          reqBgThreads = static_cast<unsigned short>(v);
          ok = true;

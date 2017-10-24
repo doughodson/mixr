@@ -50,16 +50,17 @@ public:
    virtual void reset() override;
 
 protected:
-   bool setJettisonable(const bool f);    // Sets the jettison enable flag
-
-   // Slot function(s)
-   virtual bool setSlotType(const base::String* const msg);
-   virtual bool setSlotJettisonable(base::Number* const p);
+   bool setJettisonable(const bool);    // Sets the jettison enable flag
 
 private:
    base::safe_ptr<const base::String> type;   // Type string for external store
    bool canJettison {true};                   // Weapon can be jettisoned.
    bool jettisoned {};                        // Weapon has been jettisoned.
+
+private:
+   // slot table helper methods
+   bool setSlotType(const base::String* const);
+   bool setSlotJettisonable(base::Number* const);
 };
 
 }

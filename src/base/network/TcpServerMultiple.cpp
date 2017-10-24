@@ -22,8 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/TcpServerMultiple.hpp"
@@ -67,7 +67,7 @@ void TcpServerMultiple::copyData(const TcpServerMultiple& org, const bool)
 bool TcpServerMultiple::initNetwork(const bool noWaitFlag)
 {
     noWait = noWaitFlag;
-    bool ok = BaseClass::initNetwork(false);
+    bool ok{BaseClass::initNetwork(false)};
     if (ok) {
         ok = listenForConnections();
     }
@@ -83,7 +83,7 @@ bool TcpServerMultiple::bindSocket()
    // ---
    // Our base class will bind the socket
    // ---
-   bool ok = BaseClass::bindSocket();
+   bool ok{BaseClass::bindSocket()};
 
    if (ok) {
       struct sockaddr_in addr;        // Working address structure
@@ -128,8 +128,8 @@ TcpHandler* TcpServerMultiple::acceptConnection()
 {
    struct sockaddr_in clientAddr;
 
-   socklen_t cAddrSize = sizeof(clientAddr);
-   LcSocket newSocket  = INVALID_SOCKET;
+   socklen_t cAddrSize{sizeof(clientAddr)};
+   LcSocket newSocket{INVALID_SOCKET};
 
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::endl;
@@ -138,7 +138,7 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    // Since INVALID_SOCKET is defined as -1 for POSIX, ::accept will return
    // INVALID_SOCKET as the error condition (see MSDN help and POSIX man pages
    // for more information).
-   TcpHandler* newHandler = nullptr;
+   TcpHandler* newHandler{};
    if (newSocket != INVALID_SOCKET) {
       newHandler = new TcpHandler(newSocket);
 
@@ -164,7 +164,7 @@ bool TcpServerMultiple::setBacklog(const unsigned int value)
 //------------------------------------------------------------------------------
 bool TcpServerMultiple::setSlotBacklog(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setBacklog(msg->getInt());
    }

@@ -21,8 +21,8 @@ namespace rprfom {
 //------------------------------------------------------------------------------
 bool NetIO::publishAndSubscribePlatforms()
 {
-   bool ok = true;
-   RTI::RTIambassador* p = getRTIambassador();
+   bool ok {true};
+   RTI::RTIambassador* p {getRTIambassador()};
 
    // ----------
    // Get handles to the class, attributes and parameters
@@ -33,8 +33,8 @@ bool NetIO::publishAndSubscribePlatforms()
       // Base entity class and attribute handles
       // ---
       {
-         RTI::ObjectClassHandle basicEntityClassHandle = 
-            p->getObjectClassHandle(BaseEntity::getClassFedName());
+         RTI::ObjectClassHandle basicEntityClassHandle {
+               p->getObjectClassHandle(BaseEntity::getClassFedName())};
 
          setObjectClassHandle(BASE_ENTITY_CLASS, basicEntityClassHandle );
 
@@ -64,8 +64,8 @@ bool NetIO::publishAndSubscribePlatforms()
       // Physical entity class and attribute handles
       // ---
       {
-         RTI::ObjectClassHandle physicalEntityClassHandle =
-            p->getObjectClassHandle(PhysicalEntity::getClassFedName());
+         RTI::ObjectClassHandle physicalEntityClassHandle {
+               p->getObjectClassHandle(PhysicalEntity::getClassFedName())};
 
          setObjectClassHandle(PHYSICAL_ENTITY_CLASS, physicalEntityClassHandle );
 
@@ -81,8 +81,8 @@ bool NetIO::publishAndSubscribePlatforms()
       // Platform entity class and attribute handles
       // ---
       {
-         RTI::ObjectClassHandle platformClassHandle =
-            p->getObjectClassHandle(Platform::getClassFedName());
+         RTI::ObjectClassHandle platformClassHandle {
+               p->getObjectClassHandle(Platform::getClassFedName())};
 
          setObjectClassHandle(PLATFORM_CLASS, platformClassHandle );
          // No attributes at this time ...
@@ -128,7 +128,7 @@ bool NetIO::publishAndSubscribePlatforms()
          p->getObjectClassHandle(SurfaceVessel::getClassFedName())
       );
    }
-   catch( RTI::Exception& e) {
+   catch(RTI::Exception& e) {
       std::cerr << &e << std::endl;
       ok = false;
    }
@@ -141,8 +141,7 @@ bool NetIO::publishAndSubscribePlatforms()
       try {
 
          // General purpose attribute handle set used to publish and subscribe to class attributes
-         RTI::AttributeHandleSet* attrs =
-            RTI::AttributeHandleSetFactory::create( NUM_OBJECT_ATTRIBUTES );
+         RTI::AttributeHandleSet* attrs {RTI::AttributeHandleSetFactory::create( NUM_OBJECT_ATTRIBUTES )};
 
          // ---
          // Publish these entity classes and attributes

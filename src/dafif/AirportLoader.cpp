@@ -264,8 +264,8 @@ bool AirportLoader::load(const char* country)
 
             // setup localizer component data
             {
-               double nlat(0.0), nlon(0.0);
-               float  elev(0.0);
+               double nlat{}, nlon{};
+               float  elev{};
                key[ILS_KEY_LEN-1] = 'Z';
                Ils::IlsType type = Ils::localizer;
 
@@ -299,8 +299,8 @@ bool AirportLoader::load(const char* country)
 
             // setup glide slope component data
             {
-               double nlat(0.0), nlon(0.0);
-               float  elev(0.0);
+               double nlat{}, nlon{};
+               float  elev{};
 
                key[ILS_KEY_LEN-1] = 'G';
                Ils::IlsType type = Ils::glideSlope;
@@ -334,8 +334,8 @@ bool AirportLoader::load(const char* country)
 
             // setup Inner marker component data
             if (ilsr->imd != 0.0f) {
-               double nlat(0.0), nlon(0.0);
-               float  elev(0.0);
+               double nlat{}, nlon{};
+               float  elev{};
 
                Ils::IlsType type = Ils::innerMarker;
                key[ILS_KEY_LEN-1] = 'I';
@@ -369,8 +369,8 @@ bool AirportLoader::load(const char* country)
 
             // setup Middle marker component data
             if (ilsr->mmd != 0.0f) {
-               double nlat(0.0), nlon(0.0);
-               float  elev(0.0);
+               double nlat{}, nlon{};
+               float  elev{};
 
                Ils::IlsType type = Ils::middleMarker;
                key[ILS_KEY_LEN-1] = 'M';
@@ -404,8 +404,8 @@ bool AirportLoader::load(const char* country)
 
             // setup Outer marker component data
             if (ilsr->omd != 0.0f) {
-               double nlat(0.0), nlon(0.0);
-               float  elev(0.0);
+               double nlat{}, nlon{};
+               float  elev{};
 
                Ils::IlsType type = Ils::outerMarker;
                key[ILS_KEY_LEN-1] = 'O';

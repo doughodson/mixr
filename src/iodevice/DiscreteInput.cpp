@@ -131,9 +131,9 @@ bool DiscreteInput::setNumber(const int n)
 void DiscreteInput::processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData)
 {
    if (inData != nullptr) {
-      unsigned int chan = channel;
-      unsigned int loc  = location;
-      unsigned int n = ((num >= 0) ? num : -num);
+      unsigned int chan {channel};
+      unsigned int loc {location};
+      unsigned int n {static_cast<unsigned int>((num >= 0) ? num : -num)};
 
       for (unsigned int i = 0; i < n; i++) {
 
@@ -143,13 +143,16 @@ void DiscreteInput::processInputs(const double dt, const base::IoDevice* const d
          }
 
          // Set the bit to the cockpit input handler
-         bool value0 = value;
-         if (invert) value0 = !value;
+         bool value0 {value};
+         if (invert)
+            value0 = !value;
          inData->setDiscreteInput(loc,value0);
 
          chan++;
-         if (num >= 0) loc++;
-         else if (loc > 0) loc--;
+         if (num >= 0)
+            loc++;
+         else if (loc > 0)
+            loc--;
       }
    }
 }
@@ -169,9 +172,9 @@ void DiscreteInput::processOutputs(const double, const base::IoData* const, base
 // location: Input array index (location)
 bool DiscreteInput::setSlotLocation(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
       }
@@ -182,9 +185,9 @@ bool DiscreteInput::setSlotLocation(const base::Number* const msg)
 // port: DiHandler's port number
 bool DiscreteInput::setSlotPort(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setPort( static_cast<unsigned int>(v) );
       }
@@ -195,9 +198,9 @@ bool DiscreteInput::setSlotPort(const base::Number* const msg)
 // channel: DiHandler's channel (bit) number on the port
 bool DiscreteInput::setSlotChannel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
       }
@@ -208,7 +211,7 @@ bool DiscreteInput::setSlotChannel(const base::Number* const msg)
 // value: Initial value (default: false)
 bool DiscreteInput::setSlotValue(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setValue( msg->getBoolean() );
    }
@@ -218,7 +221,7 @@ bool DiscreteInput::setSlotValue(const base::Number* const msg)
 // invert: Inverted bit flag (default: false)
 bool DiscreteInput::setSlotInverted(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setInvertFlag( msg->getBoolean() );
    }
@@ -227,7 +230,7 @@ bool DiscreteInput::setSlotInverted(const base::Number* const msg)
 
 bool DiscreteInput::setSlotNum(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setNumber( msg->getInt() );
    }

@@ -89,8 +89,8 @@ std::ostream& operator<<(std::ostream& sout, const Complex& z)
 //------------------------------------------------------------------------------
 bool Complex::setSlotImaginary(const Number* const msg)
 {
-    double value = msg->getDouble();
-    bool ok = setImag( value );
+    double value{msg->getDouble()};
+    const bool ok{setImag( value )};
     if (!ok) std::cerr << "Complex::setSlotImaginary: invalid entry(" << value << ")" << std::endl;
     return ok;
 }

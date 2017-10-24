@@ -7,9 +7,8 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 
@@ -20,7 +19,6 @@
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -34,7 +32,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
       if (ww->isDummy()) return true;
    }
 
-    bool ok = true;
+    bool ok {true};
     //std::cout << "NetIO::munitionDetonationMsgFactory() HERE!!" << std::endl;
 
     // Get our NetIO
@@ -80,7 +78,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     // Set the PDU data with the target's ID
     // ---
     {
-         bool tOk = false;
+         bool tOk {};
          if (tPlayer != nullptr) {
             pdu.targetEntityID.ID = tPlayer->getID();
             if (tPlayer->isLocalPlayer()) {
@@ -88,8 +86,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
                pdu.targetEntityID.simulationID.siteIdentification = getSiteID();
                pdu.targetEntityID.simulationID.applicationIdentification = getApplicationID();
                tOk = true;
-            }
-            else {
+            } else {
                // Networked player, use its NIB's IDs
                const auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
                if (fNIB != nullptr) {

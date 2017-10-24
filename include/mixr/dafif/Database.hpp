@@ -228,8 +228,8 @@ protected:
 
 private:
    // slot table helper methods
-   bool setSlotPathname(base::String* const);
-   bool setSlotFilename(base::String* const);
+   bool setSlotPathname(const base::String* const);
+   bool setSlotFilename(const base::String* const);
 
 };
 

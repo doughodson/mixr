@@ -38,8 +38,9 @@ public:
    virtual bool isValidInputPosition(const int) override;
    virtual bool event(const int key, base::Object* const obj = nullptr) override;
 
-   virtual bool setTextString(const base::String* const);
-   virtual bool setTextList(const base::List* const);
+public:
+   bool setSlotTextString(const base::String* const);
+   bool setSlotTextList(const base::List* const);
 };
 
 }

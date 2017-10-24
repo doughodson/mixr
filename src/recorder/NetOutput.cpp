@@ -46,7 +46,7 @@ void NetOutput::deleteData()
 //------------------------------------------------------------------------------
 bool NetOutput::isNetworkEnabled() const
 {
-   bool ok = networkInitialized && netHandler->isConnected();
+   bool ok{networkInitialized && netHandler->isConnected()};
    return ok;
 }
 
@@ -56,7 +56,7 @@ bool NetOutput::isNetworkEnabled() const
 //------------------------------------------------------------------------------
 bool NetOutput::initNetworks()
 {
-   bool ok = false;
+   bool ok{};
    if (netHandler != nullptr) {
       ok = netHandler->initNetwork(noWaitFlag);
       networkInitialized = ok;
@@ -82,7 +82,7 @@ void NetOutput::closeConnections()
 //------------------------------------------------------------------------------
 void NetOutput::processRecordImp(const DataRecordHandle* const handle)
 {
-   bool thisIsEodMsg = false;
+   bool thisIsEodMsg{};
 
    // ---
    // Open the file, if it hasn't been already ...
@@ -92,11 +92,11 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
    if (handle != nullptr && networkInitialized && netHandler->isConnected()) {
 
       // The DataRecord to be sent
-      const pb::DataRecord* dataRecord = handle->getRecord();
+      const pb::DataRecord* dataRecord{handle->getRecord()};
 
       // Serialize the DataRecord
       std::string wireFormat;
-      bool ok = dataRecord->SerializeToString(&wireFormat);
+      bool ok{dataRecord->SerializeToString(&wireFormat)};
 
       // Write the serialized message to the network
       if (ok) {
@@ -136,7 +136,7 @@ bool NetOutput::setSlotNetwork(mixr::base::NetHandler* const msg)
 // No wait (unblocked) I/O flag
 bool NetOutput::setSlotNoWait(mixr::base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       noWaitFlag = msg->getBoolean();
       ok = true;

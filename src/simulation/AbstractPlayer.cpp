@@ -144,7 +144,7 @@ void AbstractPlayer::setInitMode(const Mode m)
 // Player's outgoing NIB(s)
 AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId)
 {
-   AbstractNib* p = nullptr;
+   AbstractNib* p{};
    if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
@@ -154,7 +154,7 @@ AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId)
 // Player's outgoing NIB(s)  (const version)
 const AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId) const
 {
-   const AbstractNib* p = nullptr;
+   const AbstractNib* p{};
    if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
@@ -171,10 +171,9 @@ bool AbstractPlayer::setNib(AbstractNib* const n)
    if (nib != nullptr) {
       // Ref() the new NIB and get the network ID
       nib->ref();
-      AbstractNetIO* netIO = nib->getNetIO();
+      AbstractNetIO* netIO {nib->getNetIO()};
       if (netIO != nullptr) netID = netIO->getNetworkID();
-   }
-   else {
+   } else {
       netID = 0;
    }
    return true;
@@ -190,9 +189,9 @@ bool AbstractPlayer::setEnableNetOutput(const bool x)
 // Sets the outgoing NIB for network 'id'
 bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const unsigned int id)
 {
-   bool ok = false;
+   bool ok{};
    if (nibList != nullptr && id >= 1 && id <= AbstractNetIO::MAX_NETWORD_ID) {
-      unsigned int idx = id - 1;
+      unsigned int idx {id - 1};
       if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;
       if (nibList[idx] != nullptr) nibList[idx]->ref();
@@ -205,13 +204,12 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const unsigned int id)
 // id: Player id  [ 1 .. 65535 ]
 bool AbstractPlayer::setSlotID(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    int newID = num->getInt();
    if (newID > 0 && newID <= 65535) {
       setID( static_cast<unsigned short>(newID)  );
       ok = true;
-   }
-   else {
+   } else {
       std::cerr << "AbstractPlayer::setSlotID(): Invalid ID number: range 1 .. 65535" << std::endl;
    }
    return ok;
@@ -220,7 +218,7 @@ bool AbstractPlayer::setSlotID(const base::Number* const num)
 // mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
 bool AbstractPlayer::setSlotInitMode(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (*msg == "inactive" || *msg == "INACTIVE") { setInitMode(INACTIVE); ok = true; }
    else if (*msg == "active" || *msg == "ACTIVE") { setInitMode(ACTIVE); ok = true; }
    else if (*msg == "killed" || *msg == "KILLED") { setInitMode(KILLED); ok = true; }

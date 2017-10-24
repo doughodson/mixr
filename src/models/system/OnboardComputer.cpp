@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Actions.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
@@ -12,7 +12,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer, "OnboardComputer")
+IMPLEMENT_SUBCLASS(OnboardComputer, "OnboardComputer")
+EMPTY_SLOTTABLE(OnboardComputer)
 
 OnboardComputer::OnboardComputer()
 {
@@ -134,7 +135,7 @@ void OnboardComputer::actionManager(const double dt)
 
 int OnboardComputer::getShootList(Track* tlist[], const int max)
 {
-    int n = 0;
+    int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         nextToShoot->ref();
         tlist[0] = nextToShoot;
@@ -145,7 +146,7 @@ int OnboardComputer::getShootList(Track* tlist[], const int max)
 
 int OnboardComputer::getShootList(const Track* tlist[], const int max) const
 {
-    int n = 0;
+    int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         nextToShoot->ref();
         tlist[0] = nextToShoot;
@@ -156,7 +157,7 @@ int OnboardComputer::getShootList(const Track* tlist[], const int max) const
 
 int OnboardComputer::getShootList(base::safe_ptr<Track>* const tlist, const int max)
 {
-    int n = 0;
+    int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         tlist[0] = nextToShoot;
         n = 1;
@@ -166,7 +167,7 @@ int OnboardComputer::getShootList(base::safe_ptr<Track>* const tlist, const int 
 
 int OnboardComputer::getShootList(base::safe_ptr<const Track>* const tlist, const int max) const
 {
-    int n = 0;
+    int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
         tlist[0] = nextToShoot;
         n = 1;
@@ -180,8 +181,8 @@ int OnboardComputer::getShootList(base::safe_ptr<const Track>* const tlist, cons
 Track* OnboardComputer::getNextTarget()
 {
     base::safe_ptr<Track> trackList[2];
-    int n = getShootList(trackList,2);
-    Track* trk = nullptr;
+    int n{getShootList(trackList, 2)};
+    Track* trk{};
     if (n > 0) {
        trk = trackList[0];
     }
@@ -195,15 +196,15 @@ Track* OnboardComputer::getNextTarget()
 void OnboardComputer::updateShootList(const bool step)
 {
    // Temporary next to shoot indexes
-   int cNTS = -1;  // Current
-   int nNTS = -1;  // New
+   int cNTS{-1};  // Current
+   int nNTS{-1};  // New
 
    // First, let's get the active track list
-   const unsigned int MAX_TRKS = 20;
+   const unsigned int MAX_TRKS{20};
    base::safe_ptr<Track> trackList[MAX_TRKS];
 
-   int n = 0;
-   TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
+   int n{};
+   TrackManager* tm{getTrackManagerByType(typeid(AirTrkMgr))};
    // fall back to whatever TM we have, if we don't have an AirTrkMgr
    if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
    if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
@@ -213,7 +214,7 @@ void OnboardComputer::updateShootList(const bool step)
       // ---
       // Find the current next-to-shoot index
       // ---
-      Track* nts = nextToShoot;
+      Track* nts{nextToShoot};
       if (nextToShoot != nullptr) {
          for (int i = 0; i < n && cNTS < 0; i++) {
             if (nts == trackList[i]) cNTS = i;
@@ -226,7 +227,7 @@ void OnboardComputer::updateShootList(const bool step)
       if (cNTS < 0) {
          // 1) When we don't have or couldn't find our NTS, pick the closest track
          //    that has a valid ground speed.
-         int i = 0;
+         int i{};
          do {
             if (trackList[i]->getGroundSpeed() >= 1.0) {
                if (nNTS >= 0) {
@@ -234,8 +235,7 @@ void OnboardComputer::updateShootList(const bool step)
                   if (trackList[i]->getRange() < trackList[nNTS]->getRange()) {
                      nNTS = i;
                   }
-               }
-               else {
+               } else {
                   // only one so far
                   nNTS = i;
                }
@@ -243,10 +243,9 @@ void OnboardComputer::updateShootList(const bool step)
             i = i + 1;
             if (i >= n) i = 0;
          } while (i != 0);
-      }
-      else if (step) {
+      } else if (step) {
          // 2) When a target step has been requested ...
-         int i = cNTS + 1;
+         int i{cNTS + 1};
          if (i >= n) i = 0;
          do {
             if (trackList[i]->getGroundSpeed() >= 50.0f) {
@@ -255,8 +254,7 @@ void OnboardComputer::updateShootList(const bool step)
             i = i + 1;
             if (i >= n) i = 0;
          } while (nNTS < 0 && i != cNTS);
-      }
-      else {
+      } else {
          // 3) Keep the same next-to-shoot track
          nNTS = cNTS;
       }
@@ -266,13 +264,12 @@ void OnboardComputer::updateShootList(const bool step)
       // ---
       if (nNTS >= 0) {
          // Start at the next-to-shoot
-         int idx = nNTS;
+         int idx{nNTS};
          for (int i = 0; i < n; i++) {
             trackList[idx++]->setShootListIndex(i+1);
             if (idx >= n) idx = 0;
          }
-      }
-      else {
+      } else {
          // When there isn't a next to shoot, clear all
          for (int i = 0; i < n; i++) trackList[i]->setShootListIndex(0);
       }
@@ -289,15 +286,15 @@ void OnboardComputer::updateShootList(const bool step)
 //------------------------------------------------------------------------------
 bool OnboardComputer::requestNextToShoot(const Track* const nts)
 {
-   bool ok = false;
+   bool ok{};
    if (nts != nullptr) {
 
       // First, let's get the active track list
-      const unsigned int MAX_TRKS = 20;
+      const unsigned int MAX_TRKS{20};
       base::safe_ptr<Track> trackList[MAX_TRKS];
 
-      int n = 0;
-      TrackManager* tm = getTrackManagerByType(typeid(AirTrkMgr));
+      int n{};
+      TrackManager* tm{getTrackManagerByType(typeid(AirTrkMgr))};
       // fall back to whatever TM we have, if we don't have an AirTrkMgr
       if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
       if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
@@ -305,7 +302,7 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
       if (n > 0) {
 
          // try to find the requested track and save its index
-         int nNTS = -1;
+         int nNTS{-1};
          for (int i = 0; i < n && nNTS < 0; i++) {
             if (nts == trackList[i]) nNTS = i;
          }
@@ -313,7 +310,7 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
          // update the shoot list index values in the tracks
          if (nNTS >= 0) {
             // Start at the next-to-shoot
-            int idx = nNTS;
+            int idx{nNTS};
             for (int i = 0; i < n; i++) {
                trackList[idx++]->setShootListIndex(i+1);
                if (idx >= n) idx = 0;
@@ -348,8 +345,8 @@ void OnboardComputer::setNextToShoot(Track* const p)
 //------------------------------------------------------------------------------
 TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 {
-   TrackManager* p = nullptr;
-   base::Pair* pair = findByType(type);
+   TrackManager* p{};
+   base::Pair* pair{findByType(type)};
    if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
@@ -358,8 +355,8 @@ TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 
 const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type) const
 {
-   const TrackManager* p = nullptr;
-   const base::Pair* pair = findByType(type);
+   const TrackManager* p{};
+   const base::Pair* pair{findByType(type)};
    if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }
@@ -371,8 +368,8 @@ const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info&
 //------------------------------------------------------------------------------
 TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 {
-   TrackManager* p = nullptr;
-   base::Pair* pair = findByName(name);
+   TrackManager* p{};
+   base::Pair* pair{findByName(name)};
    if (pair != nullptr) {
       p = dynamic_cast<TrackManager*>( pair->object() );
    }
@@ -381,8 +378,8 @@ TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
 
 const TrackManager* OnboardComputer::getTrackManagerByName(const char* const name) const
 {
-   const TrackManager* p = nullptr;
-   const base::Pair* pair = findByName(name);
+   const TrackManager* p{};
+   const base::Pair* pair{findByName(name)};
    if (pair != nullptr) {
       p = dynamic_cast<const TrackManager*>( pair->object() );
    }

@@ -50,8 +50,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotTexturePath(base::String* const);
-   bool setSlotTextureFileName(base::String* const);
+   bool setSlotTexturePath(const base::String* const);
+   bool setSlotTextureFileName(const base::String* const);
 };
 
 //------------------------------------------------------------------------------

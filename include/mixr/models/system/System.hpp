@@ -88,9 +88,6 @@ protected:
    virtual WorldModel* getWorldModel();
    virtual const WorldModel* getWorldModel() const;
 
-   // Slot function(s)
-   virtual bool setSlotPowerSwitch(const base::String* const msg);
-
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
    virtual void dynamics(const double dt);    // Phase 0
@@ -103,6 +100,10 @@ private:
 
    Player* ownship {};           // Our player (not ref()'d because the own player owns us).
    unsigned int pwrSw {PWR_ON};  // System's master power switch
+
+private:
+   // slot table helper methods
+   bool setSlotPowerSwitch(const base::String* const);
 };
 
 }

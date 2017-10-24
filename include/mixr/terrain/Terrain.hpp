@@ -194,6 +194,11 @@ private:
    double swLat {}, swLon {};       // Southwest lat/lon (degs)
    double minElev {};               // Minimum elevation (m)
    double maxElev {};               // Maximum elevation (m)
+
+private:
+   // slot table helper methods
+   bool setSlotFilename(const base::String* const x)             { return setFilename(x); }
+   bool setSlotPathname(const base::String* const x)             { return setPathname(x); }
 };
 
 }

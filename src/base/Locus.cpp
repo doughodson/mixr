@@ -53,7 +53,7 @@ void Locus::deleteData()
 //------------------------------------------------------------------------------
 double Locus::getRange(const unsigned int idx) const
 {
-   double rng = 0;
+   double rng{};
    if (idx < np && isDataValid()) {
       rng = minRng + deltaRng * static_cast<double>(idx);
    }
@@ -62,7 +62,7 @@ double Locus::getRange(const unsigned int idx) const
 
 double Locus::getData(const unsigned int idx) const
 {
-   double value = 0;
+   double value{};
    if (idx < np && isDataValid()) {
       value = data[idx];
    }
@@ -93,8 +93,8 @@ void Locus::setData(
    if (n < MAX_SIZE && newData != nullptr) {
       np = n;
       data = new double[np];
-      double* p = data;
-      const double* q = newData;
+      double* p{data};
+      const double* q{newData};
       for (unsigned int i = 0; i < np; i++) {
          *p++ = *q++;
       }

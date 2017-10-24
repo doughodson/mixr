@@ -16,13 +16,12 @@ BEGIN_SLOTTABLE(AsciiText)
 END_SLOTTABLE(AsciiText)
 
 BEGIN_SLOT_MAP(AsciiText)
-   ON_SLOT(1,setTextString, base::String)
-   ON_SLOT(1,setTextList, base::List)
+   ON_SLOT(1,setSlotTextString, base::String)
+   ON_SLOT(1,setSlotTextList,   base::List)
 END_SLOT_MAP()
 
-// Event handlers for AsciiText events
 BEGIN_EVENT_HANDLER(AsciiText)
-   ON_EVENT_OBJ(UPDATE_VALUE, setTextString, base::String)
+   ON_EVENT_OBJ(UPDATE_VALUE, setSlotTextString, base::String)
 END_EVENT_HANDLER()
 
 AsciiText::AsciiText()
@@ -45,12 +44,8 @@ bool AsciiText::isValidInputPosition(const int)
    return true;     // AsciiText fields do not have template characters
 }
 
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
-
-// setTextString() -- takes in a base::String and sets it
-bool AsciiText::setTextString(const base::String* const stsobj)
+// takes in a base::String and sets it
+bool AsciiText::setSlotTextString(const base::String* const stsobj)
 {
    bool ok {true};
    if (stsobj != nullptr) {
@@ -66,8 +61,8 @@ bool AsciiText::setTextString(const base::String* const stsobj)
    return ok;
 }
 
-// setTextList() -- takes in alist of ascii numbers
-bool AsciiText::setTextList(const base::List* const stlobj)
+// takes in alist of ascii numbers
+bool AsciiText::setSlotTextList(const base::List* const stlobj)
 {
    bool ok {true};
    if (stlobj != nullptr) {

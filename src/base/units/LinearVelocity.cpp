@@ -19,7 +19,7 @@ END_SLOTTABLE(LinearVelocity)
 
 BEGIN_SLOT_MAP(LinearVelocity)
     ON_SLOT(1, setSlotDistance, Distance)
-    ON_SLOT(2, setSlotTime, Time)
+    ON_SLOT(2, setSlotTime,     Time)
 END_SLOT_MAP()
 
 LinearVelocity::LinearVelocity()
@@ -55,13 +55,13 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
 
     //Check and convert the distance to meters
     if (newDistance != nullptr) {
-        const double finalDistance = Meters::convertStatic( *newDistance );
+        const double finalDistance{Meters::convertStatic( *newDistance )};
         okDistance = setMeters(finalDistance);
     }
 
     //Check and convert the time to seconds
     if (newTime != nullptr) {
-        const double finaltime = Seconds::convertStatic( *newTime );
+        const double finaltime{Seconds::convertStatic( *newTime )};
         okTime = setSeconds(finaltime);
     }
 
@@ -187,7 +187,7 @@ bool LinearVelocity::setSlotDistance(const Distance* const msg)
 
     //Try to convert Number to a distance
     if ( msg != nullptr ) {
-        const double finalNumber = Meters::convertStatic(*msg);
+        const double finalNumber{Meters::convertStatic(*msg)};
         ok = setMeters(finalNumber);
     }
     return ok;
@@ -199,7 +199,7 @@ bool LinearVelocity::setSlotTime(const Time* const msg)
 
     //Try to convert Number to a distance
     if (msg != nullptr) {
-        const double finalNumber = Seconds::convertStatic(*msg);
+        const double finalNumber{Seconds::convertStatic(*msg)};
         ok = setSeconds(finalNumber);
     }
     return ok;

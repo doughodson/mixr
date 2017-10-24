@@ -101,9 +101,8 @@ bool SrtmHgtFile::loadData()
 {
     // Compute the filename (why can't we be given just one filename string!??)
     std::string temp_filename;
-    const char* p = getPathname();
-    if (p != nullptr)
-    {
+    const char* p {getPathname()};
+    if (p != nullptr) {
         temp_filename += p;
         temp_filename += '/';
     }
@@ -114,11 +113,10 @@ bool SrtmHgtFile::loadData()
     std::string srtmFilename(p);
 
     // Open the terrain file.
-    const char* filename = temp_filename.c_str();
+    const char* filename {temp_filename.c_str()};
     std::ifstream in;
     in.open(filename, std::ios::binary);
-    if ( in.fail() )
-    {
+    if ( in.fail() ) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "SrtmHgtFile::loadData() ERROR, could not open file: " << filename << std::endl;
         }
@@ -128,9 +126,8 @@ bool SrtmHgtFile::loadData()
     in.seekg(0, std::ios::end);
     std::streamoff byteSize = in.tellg();
     in.seekg(0, std::ios::beg);
-    int nameSize = static_cast<int>(srtmFilename.size());
-    if (nameSize < 11 || !determineSrtmInfo(srtmFilename.substr(nameSize - 11, 11), byteSize))
-    {
+    int nameSize {static_cast<int>(srtmFilename.size())};
+    if (nameSize < 11 || !determineSrtmInfo(srtmFilename.substr(nameSize - 11, 11), byteSize)) {
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
@@ -140,8 +137,7 @@ bool SrtmHgtFile::loadData()
     }
 
     // Read elevation data from the SRTM file
-    if (! readSrtmData(in))
-    {
+    if (! readSrtmData(in)) {
         clearData();
         in.close();
         if (isMessageEnabled(MSG_ERROR)) {
@@ -158,8 +154,8 @@ bool SrtmHgtFile::loadData()
 bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::streamoff size)
 {
     // Extract the number of latitude and longitude lines
-    unsigned int num_lat;
-    unsigned int num_lon;
+    unsigned int num_lat{};
+    unsigned int num_lon{};
     // Extract the data intervals for latitude and longitude
     switch (size) {
        case 2884802:
@@ -186,10 +182,10 @@ bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::stream
     }
 
     // nXXwXXX.hgt   srtm1 srtm3
-    int swcLatitude = std::atoi(srtmFilename.substr(1, 2).c_str());
-    int swcLongitude = std::atoi(srtmFilename.substr(4, 3).c_str());
-    char ns = static_cast<char>(std::tolower(srtmFilename[0]));
-    char ew = static_cast<char>(std::tolower(srtmFilename[3]));
+    int swcLatitude {std::atoi(srtmFilename.substr(1, 2).c_str())};
+    int swcLongitude {std::atoi(srtmFilename.substr(4, 3).c_str())};
+    char ns {static_cast<char>(std::tolower(srtmFilename[0]))};
+    char ew {static_cast<char>(std::tolower(srtmFilename[3]))};
     if ((ns != 'n' && ns != 's') || (ew != 'e' && ew != 'w')) {
         return false;
     }
@@ -215,8 +211,7 @@ bool SrtmHgtFile::determineSrtmInfo(const std::string& srtmFilename, std::stream
 //------------------------------------------------------------------------------
 bool SrtmHgtFile::readSrtmData(std::istream& in)
 {
-    if (nptlat < 1 || nptlong < 1)
-    {
+    if (nptlat < 1 || nptlong < 1) {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "SrtmHgtFile::readSrtmData: SRTM headers indicate an empty file." << std::endl;
         }
@@ -225,37 +220,32 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
 
     // Allocate the elevation array
     columns = new short*[nptlong];
-    for(unsigned int i=0; i<nptlong; i++)
-    {
+    for (unsigned int i=0; i<nptlong; i++) {
         columns[i] = new short[nptlat];
     }
 
     // Read the elevation array.
-    for(unsigned int lat=0; lat<nptlat; lat++)
-    {
+    for (unsigned int lat=0; lat<nptlat; lat++) {
         //unsigned long checksum = 0;
 
         // Read elevation values for record
-        double minElev0 = 99999.0;
-        double maxElev0 = 0.0;
-        for(unsigned int lon=0; lon<nptlong; lon++)
-        {
-            unsigned char values[2];
+        double minElev0{99999.0};
+        double maxElev0{};
+        for (unsigned int lon=0; lon<nptlong; lon++) {
+            unsigned char values[2]{};
             in.read(reinterpret_cast<char*>(values), sizeof(values));
-            if (in.fail() || in.gcount() < sizeof(values))
-            {
+            if (in.fail() || in.gcount() < sizeof(values)) {
                 if (isMessageEnabled(MSG_ERROR)) {
                     std::cerr << "SrtmHgtFile::readSrtmData: error reading data value." << std::endl;
                 }
                 return false;
             }
 
-            short height  = readValue(values[0], values[1]);
+            short height{readValue(values[0], values[1])};
             columns[lon][nptlat-lat-1] = height;
 
             // check if this is the new min or max elevation
-            if (height != voidValue)
-            {
+            if (height != voidValue) {
                 if (height < minElev0) minElev0 = height;
                 if (height > maxElev0) maxElev0 = height;
             }
@@ -274,12 +264,11 @@ short SrtmHgtFile::readValue(const unsigned char hbyte, const unsigned char lbyt
     // The data is stored as 2 byte characters (sign and magnitude)
     // with high byte first.  The high bit is the sign bit.  Check for
     // sign bit and then turn it off and set SIGN_VAL accordingly.
-    short height = 0;
-    short sign_val = 1;
-    unsigned char nhbyte = hbyte;
+    short height{};
+    short sign_val{1};
+    unsigned char nhbyte{hbyte};
 
-    if (hbyte & ~0177)
-    {
+    if (hbyte & ~0177) {
         // sign bit set
         nhbyte   = hbyte & 0177;
         sign_val = -1;

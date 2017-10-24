@@ -32,9 +32,6 @@ public:
    MountPosition getMountPosition() const                      { return mountPosition; }
    virtual bool setMountPosition(const MountPosition m);
 
-   virtual bool setSlotStabilizingMode(base::String* const msg);
-   virtual bool setSlotMountPosition(base::String* const msg);
-
 protected:
    virtual void stabilizingController(const double dt = 0.0);
    virtual void rollStabilizingController(const double dt = 0.0);
@@ -45,6 +42,11 @@ protected:
 private:
    StabilizingMode stabilizingMode {HORIZON};  // Gimbal stabilization mode
    MountPosition mountPosition {NOSE};         // Gimbal Mount position
+
+private:
+   // slot table helper methods
+   bool setSlotStabilizingMode(base::String* const);
+   //bool setSlotMountPosition(base::String* const);
 };
 
 }

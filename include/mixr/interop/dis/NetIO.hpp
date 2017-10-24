@@ -321,24 +321,6 @@ protected:
    virtual bool setApplicationID(const unsigned short v);   // Sets the network's application ID
    virtual bool setExerciseID(const unsigned char v);       // Sets the network's exercise ID
 
-   virtual bool setSlotNetInput(base::NetHandler* const msg);                             // Network input handler
-   virtual bool setSlotNetOutput(base::NetHandler* const msg);                            // Network output handler
-   virtual bool setSlotVersion(const base::Number* const num);                            // DIS version
-   virtual bool setSlotMaxTimeDR(const base::PairStream* const msg);                      // Sets the max DR time(s) for selected entity types
-   virtual bool setSlotMaxTimeDR(const base::Time* const msg) override;                   // Sets the max DR time(s) for all entity types
-   virtual bool setSlotMaxPositionErr(const base::PairStream* const msg);                 // Sets the max positional error(s) for selected entity types
-   virtual bool setSlotMaxPositionErr(const base::Distance* const msg) override;          // Sets the max positional error(s) for all entity types
-   virtual bool setSlotMaxOrientationErr(const base::PairStream* const msg);              // Sets the max orientation error(s) for selected entity types
-   virtual bool setSlotMaxOrientationErr(const base::Angle* const msg) override;          // Sets the max orientation error(s) for all entity types
-   virtual bool setSlotMaxAge(const base::PairStream* const msg);                         // Sets the max age(s) for selected entity types
-   virtual bool setSlotMaxAge(const base::Time* const msg) override;                      // Sets the max age(s) for all entity types
-   virtual bool setSlotMaxEntityRange(const base::PairStream* const msg);                 // Sets the max entity range(s) for selected entity types
-   virtual bool setSlotMaxEntityRange(const base::Distance* const msg) override;          // Sets the max entity range(s) for all entity types
-   virtual bool setSlotEmissionPduHandlers(base::PairStream* const msg);                  // Sets the list of Electromagnetic Emission PDU handlers
-   virtual bool setSlotSiteID(const base::Number* const num);                             // Sets Site ID
-   virtual bool setSlotApplicationID(const base::Number* const num);                      // Sets Application ID
-   virtual bool setSlotExerciseID(const base::Number* const num);                         // Sets Exercise ID
-
    virtual bool slot2KD(const char* const slotname, unsigned char* const k, unsigned char* const d);
    virtual bool setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain);
@@ -396,6 +378,26 @@ private:
 
    // Number of emission PDU handlers in the table, 'emissionHandlers'
    unsigned int nEmissionHandlers {};
+
+private:
+   // slot table helper methods
+   virtual bool setSlotNetInput(base::NetHandler* const);                             // Network input handler
+   virtual bool setSlotNetOutput(base::NetHandler* const);                            // Network output handler
+   virtual bool setSlotVersion(const base::Number* const);                            // DIS version
+   virtual bool setSlotMaxTimeDR(const base::PairStream* const);                      // Sets the max DR time(s) for selected entity types
+   virtual bool setSlotMaxTimeDR(const base::Time* const) override;                   // Sets the max DR time(s) for all entity types
+   virtual bool setSlotMaxPositionErr(const base::PairStream* const);                 // Sets the max positional error(s) for selected entity types
+   virtual bool setSlotMaxPositionErr(const base::Distance* const) override;          // Sets the max positional error(s) for all entity types
+   virtual bool setSlotMaxOrientationErr(const base::PairStream* const);              // Sets the max orientation error(s) for selected entity types
+   virtual bool setSlotMaxOrientationErr(const base::Angle* const) override;          // Sets the max orientation error(s) for all entity types
+   virtual bool setSlotMaxAge(const base::PairStream* const);                         // Sets the max age(s) for selected entity types
+   virtual bool setSlotMaxAge(const base::Time* const) override;                      // Sets the max age(s) for all entity types
+   virtual bool setSlotMaxEntityRange(const base::PairStream* const);                 // Sets the max entity range(s) for selected entity types
+   virtual bool setSlotMaxEntityRange(const base::Distance* const) override;          // Sets the max entity range(s) for all entity types
+   virtual bool setSlotEmissionPduHandlers(base::PairStream* const);                  // Sets the list of Electromagnetic Emission PDU handlers
+   virtual bool setSlotSiteID(const base::Number* const);                             // Sets Site ID
+   virtual bool setSlotApplicationID(const base::Number* const);                      // Sets Application ID
+   virtual bool setSlotExerciseID(const base::Number* const);                         // Sets Exercise ID
 };
 
 }

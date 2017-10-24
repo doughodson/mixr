@@ -20,10 +20,10 @@ BEGIN_SLOTTABLE(LatLon)
 END_SLOTTABLE(LatLon)
 
 BEGIN_SLOT_MAP(LatLon)
-    ON_SLOT(1, setDirection, String)
-    ON_SLOT(2, setDegrees, Number)
-    ON_SLOT(3, setMinutes, Number)
-    ON_SLOT(4, setSeconds, Number)
+    ON_SLOT(1, setSlotDirection, String)
+    ON_SLOT(2, setSlotDegrees,   Number)
+    ON_SLOT(3, setSlotMinutes,   Number)
+    ON_SLOT(4, setSlotSeconds,   Number)
 END_SLOT_MAP()
 
 LatLon::LatLon()
@@ -76,9 +76,9 @@ bool LatLon::setDir(const char* const d)
 // Sets degrees, minutes, seconds -- then calls computeVal().
 bool LatLon::setDeg(const double d)
 {
-   bool ok = true;
+   bool ok{true};
 
-   double dd = std::fabs(d);
+   double dd{std::fabs(d)};
    if (dir == Dir::NORTH || dir == Dir::SOUTH) {
       // check for valid degree numbers
       if (dd > 90.0) {
@@ -87,8 +87,7 @@ bool LatLon::setDeg(const double d)
          }
          ok = false;
       }
-   }
-   else if (dir == Dir::EAST || dir == Dir::WEST) {
+   } else if (dir == Dir::EAST || dir == Dir::WEST) {
       // check for valid degree numbers
       if (dd > 180.0) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -96,8 +95,7 @@ bool LatLon::setDeg(const double d)
          }
          ok = false;
       }
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "LatLon::setDeg: invalid degrees value: " << d << std::endl;
       }
@@ -106,7 +104,7 @@ bool LatLon::setDeg(const double d)
 
    if (ok) {
       deg = static_cast<int>(dd);
-      double m = (dd - static_cast<double>(deg)) * 60.0;
+      double m{(dd - static_cast<double>(deg)) * 60.0};
       min = static_cast<int>(m);
       sec = static_cast<double>(m - static_cast<double>(min)) * 60.0;
       computeVal();
@@ -117,16 +115,15 @@ bool LatLon::setDeg(const double d)
 // Sets minutes, seconds -- then calls computeVal().
 bool LatLon::setMin(const double m) //
 {
-   bool ok = true;
+   bool ok{true};
 
-   double mm = std::fabs(m);
+   double mm{std::fabs(m)};
    // check for valid minute numbers
    if (mm >= 0.0 && mm < 60.0) {
       min = static_cast<int>(mm);
       sec = (mm - static_cast<double>(min)) * 60.0;
       computeVal();
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "LatLon::setMin: invalid minutes value: " << m << std::endl;
       }
@@ -139,15 +136,14 @@ bool LatLon::setMin(const double m) //
 // Sets seconds -- then calls computeVal().
 bool LatLon::setSec(const double s)
 {
-   bool ok = true;
+   bool ok{true};
 
-   const double ss = std::fabs(s);
+   const double ss{std::fabs(s)};
    // check for valid second numbers
    if (ss >= 0.0 && ss < 60.0) {
       sec = ss;
       computeVal();
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "LatLon::setMin: invalid seconds value: " << s << std::endl;
       }
@@ -158,41 +154,41 @@ bool LatLon::setSec(const double s)
 }
 
 //------------------------------------------------------------------------------
-// setDirection() -- sets the initial direction "n", "s", "e", "w"
+// setSlotDirection() -- sets the initial direction "n", "s", "e", "w"
 //------------------------------------------------------------------------------
-bool LatLon::setDirection(const String* const sdobj)
+bool LatLon::setSlotDirection(const String* const sdobj)
 {
-   bool ok = false;
+   bool ok{};
    if (sdobj != nullptr) ok = setDir(*sdobj);
    return ok;
 }
 
 //------------------------------------------------------------------------------
-//  setDegrees() -- sets the initial degrees
+//  setSlotDegrees() -- sets the initial degrees
 //------------------------------------------------------------------------------
-bool LatLon::setDegrees(const Number* const sdeobj)
+bool LatLon::setSlotDegrees(const Number* const sdeobj)
 {
-   bool ok = false;
+   bool ok{};
    if (sdeobj != nullptr) ok = setDeg(sdeobj->getReal());
    return ok;
 }
 
 //------------------------------------------------------------------------------
-// setMinutes() -- sets the minutes
+// setSlotMinutes() -- sets the minutes
 //------------------------------------------------------------------------------
-bool LatLon::setMinutes(const Number* const smobj)
+bool LatLon::setSlotMinutes(const Number* const smobj)
 {
-   bool ok = false;
+   bool ok{};
    if (smobj != nullptr) ok = setMin(smobj->getReal());
    return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSeconds() --
+// setSlotSeconds() --
 //------------------------------------------------------------------------------
-bool LatLon::setSeconds(const Number* const ssobj)
+bool LatLon::setSlotSeconds(const Number* const ssobj)
 {
-   bool ok = false;
+   bool ok{};
    if (ssobj != nullptr) ok = setSec(ssobj->getReal());
    return ok;
 }

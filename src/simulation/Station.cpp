@@ -26,9 +26,9 @@ namespace simulation {
 
 IMPLEMENT_SUBCLASS(Station, "Station")
 
-const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
-const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
-const double Station::DEFAULT_NET_THREAD_PRI = 0.5;
+const double Station::DEFAULT_TC_THREAD_PRI  {0.8};
+const double Station::DEFAULT_BG_THREAD_PRI  {0.5};
+const double Station::DEFAULT_NET_THREAD_PRI {0.5};
 
 BEGIN_SLOTTABLE(Station)
    "simulation",        //  1: Simulation executive
@@ -80,7 +80,7 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(16,  setSlotStartupResetTime,      base::Time)
    ON_SLOT(17,  setSlotEnableUpdateTimers,    base::Number)
 
-   ON_SLOT(18, setDataRecorder,               AbstractDataRecorder)
+   ON_SLOT(18, setSlotDataRecorder,           AbstractDataRecorder)
 END_SLOT_MAP()
 
 Station::Station()
@@ -138,7 +138,7 @@ void Station::copyData(const Station& org, const bool)
    }
 
    {  // clone the data recorder
-      AbstractDataRecorder* copy = nullptr;
+      AbstractDataRecorder* copy{};
       if (org.dataRecorder != nullptr) copy = org.dataRecorder->clone();
       setDataRecorder(copy);
       if (copy != nullptr) copy->unref();
@@ -228,10 +228,10 @@ void Station::reset()
 
    // Reset the I/O Handlers
    if (ioHandlers != nullptr) {
-      base::List::Item* item = ioHandlers ->getFirstItem();
+      base::List::Item* item {ioHandlers->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::IoHandler* p = static_cast<base::IoHandler*>(pair->object());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+         base::IoHandler* p {static_cast<base::IoHandler*>(pair->object())};
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -239,9 +239,9 @@ void Station::reset()
 
    // Reset the OTW subsystems
    if (otw != nullptr) {
-      base::List::Item* item = otw ->getFirstItem();
+      base::List::Item* item {otw->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
          const auto p = static_cast<AbstractOtw*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
@@ -250,7 +250,7 @@ void Station::reset()
 
    // Reset the networks
    if (networks != nullptr) {
-      base::List::Item* item = networks ->getFirstItem();
+      base::List::Item* item {networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<AbstractNetIO*>(pair->object());
@@ -279,10 +279,10 @@ void Station::updateTC(const double dt)
 
    // The I/O handlers
    if (ioHandlers != nullptr) {
-      base::List::Item* item = ioHandlers ->getFirstItem();
+      base::List::Item* item {ioHandlers->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::IoHandler* p = static_cast<base::IoHandler*>(pair->object());
+         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
+         base::IoHandler* p {static_cast<base::IoHandler*>(pair->object())};
          p->tcFrame(dt);
          item = item->getNext();
       }
@@ -299,8 +299,8 @@ void Station::updateTC(const double dt)
 
    // Our major subsystems
    if (sim != nullptr && otw != nullptr) {
-      base::PairStream* playerList = sim->getPlayers();
-      base::List::Item* item = otw->getFirstItem();
+      base::PairStream* playerList{sim->getPlayers()};
+      base::List::Item* item{otw->getFirstItem()};
       while (item != nullptr) {
 
          const auto pair = static_cast<base::Pair*>(item->getValue());
@@ -380,10 +380,10 @@ bool Station::shutdownNotification()
 {
    // Tell the interoperability networks that we're shutting down
    if (networks != nullptr) {
-      base::List::Item* item = networks->getFirstItem();
+      base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::Component* p = static_cast<base::Component*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         base::Component* p{static_cast<base::Component*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -391,10 +391,10 @@ bool Station::shutdownNotification()
 
    // Tell the I/O devices that we're shutting down
    if (ioHandlers != nullptr) {
-      base::List::Item* item = ioHandlers->getFirstItem();
+      base::List::Item* item{ioHandlers->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::Component* p = static_cast<base::Component*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         base::Component* p{static_cast<base::Component*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -402,7 +402,7 @@ bool Station::shutdownNotification()
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation executive to shut down
-   Simulation* s = getSimulation();
+   Simulation* s{getSimulation()};
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -410,10 +410,10 @@ bool Station::shutdownNotification()
 
    // Inform our OTW interfaces
    if (otw != nullptr) {
-      base::List::Item* item = otw ->getFirstItem();
+      base::List::Item* item{otw->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::Component* p = static_cast<base::Component*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         base::Component* p{static_cast<base::Component*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -451,10 +451,10 @@ bool Station::shutdownNotification()
 void Station::inputDevices(const double dt)
 {
    if (ioHandlers != nullptr) {
-     base::List::Item* item = ioHandlers ->getFirstItem();
+     base::List::Item* item{ioHandlers->getFirstItem()};
      while (item != nullptr) {
-        base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-        base::IoHandler* p = static_cast<base::IoHandler*>(pair->object());
+        base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+        base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
         p->inputDevices(dt);
         item = item->getNext();
      }
@@ -467,10 +467,10 @@ void Station::inputDevices(const double dt)
 void Station::outputDevices(const double dt)
 {
    if (ioHandlers != nullptr) {
-     base::List::Item* item = ioHandlers ->getFirstItem();
+     base::List::Item* item{ioHandlers->getFirstItem()};
      while (item != nullptr) {
-        base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-        base::IoHandler* p = static_cast<base::IoHandler*>(pair->object());
+        base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+        base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
         p->outputDevices(dt);
         item = item->getNext();
      }
@@ -488,7 +488,7 @@ void Station::createTimeCriticalProcess()
 
       if (tcStackSize > 0) tcThread->setStackSize( tcStackSize );
 
-      bool ok = tcThread->create();
+      bool ok{tcThread->create()};
       if (!ok) {
          tcThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -509,7 +509,7 @@ void Station::createNetworkProcess()
 
       if (netStackSize > 0) netThread->setStackSize( netStackSize );
 
-      bool ok = netThread->create();
+      bool ok{netThread->create()};
       if (!ok) {
          netThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -530,7 +530,7 @@ void Station::createBackgroundProcess()
 
       if (bgStackSize > 0) bgThread->setStackSize( bgStackSize );
 
-      bool ok = bgThread->create();
+      bool ok{bgThread->create()};
       if (!ok) {
          bgThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -560,10 +560,10 @@ void Station::processBackgroundTasks(const double dt)
 
    // The I/O handlers
    if (ioHandlers != nullptr) {
-      base::List::Item* item = ioHandlers ->getFirstItem();
+      base::List::Item* item{ioHandlers ->getFirstItem()};
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         base::IoHandler* p = static_cast<base::IoHandler*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
          p->updateData(dt);
          item = item->getNext();
       }
@@ -574,7 +574,7 @@ void Station::processBackgroundTasks(const double dt)
 
    // Our OTW interfaces
    if (otw != nullptr) {
-      base::List::Item* item = otw ->getFirstItem();
+      base::List::Item* item{otw ->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<AbstractOtw*>(pair->object());
@@ -592,7 +592,7 @@ void Station::processNetworkInputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
-      base::List::Item* item = networks->getFirstItem();
+      base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<AbstractNetIO*>(pair->object());
@@ -611,7 +611,7 @@ void Station::processNetworkOutputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
-      base::List::Item* item = networks->getFirstItem();
+      base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<AbstractNetIO*>(pair->object());
@@ -744,7 +744,7 @@ bool Station::doWeHaveTheTcThread() const
 // Pre-ref() pointer to the T/Cthread
 base::Thread* Station::getTcThread()
 {
-   base::Thread* p = nullptr;
+   base::Thread* p{};
    if (tcThread != nullptr) {
       p = tcThread.getRefPtr();
    }
@@ -778,7 +778,7 @@ bool Station::doWeHaveTheBgThread() const
 // Pre-ref() pointer to the Background thread
 base::Thread* Station::getBgThread()
 {
-   base::Thread* p = nullptr;
+   base::Thread* p{};
    if (bgThread != nullptr) {
       p = bgThread.getRefPtr();
    }
@@ -812,7 +812,7 @@ bool Station::doWeHaveTheNetThread() const
 // Pre-ref() pointer to the Network thread
 base::Thread* Station::getNetThread()
 {
-   base::Thread* p = nullptr;
+   base::Thread* p{};
    if (netThread != nullptr) {
       p = netThread.getRefPtr();
    }
@@ -881,14 +881,14 @@ void Station::setBgThread(base::Thread* h)
 //------------------------------------------------------------------------------
 bool Station::setOwnshipByName(const char* const newOS)
 {
-   bool set = false;
-   base::PairStream* pl = nullptr;
+   bool set{};
+   base::PairStream* pl{};
    if (sim != nullptr) pl = sim->getPlayers();
 
    // Look for this ownship in our list of players
    if (pl != nullptr) {
       if (newOS != nullptr) {
-         base::Pair* p = pl->findByName(newOS);
+         base::Pair* p{pl->findByName(newOS)};
          if (p != nullptr) {
             const auto newOwnship = static_cast<AbstractPlayer*>(p->object());
             if (newOwnship != ownship) {
@@ -930,10 +930,10 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
     }
 
     // Look for this ownship in our list of players
-    bool set = false;
-    base::PairStream* pl = sim->getPlayers();
+    bool set{};
+    base::PairStream* pl{sim->getPlayers()};
     if (pl != nullptr) {
-        base::List::Item* item = pl->getFirstItem();
+        base::List::Item* item{pl->getFirstItem()};
         while (item != nullptr && !set) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
@@ -1002,14 +1002,14 @@ bool Station::setSlotOutTheWindow(AbstractOtw* const p)
     const auto pair = new base::Pair("1",p);
     list->put( pair );
     pair->unref();
-    bool ok = setSlotOutTheWindow(list);
+    bool ok{setSlotOutTheWindow(list)};
     list->unref();
     return ok;
 }
 
 bool Station::setSlotOutTheWindow(base::PairStream* const list)
 {
-   base::PairStream* newList = nullptr;
+   base::PairStream* newList{};
 
    // Make sure the new list only has OTW type objects
    if (list != nullptr) {
@@ -1062,14 +1062,14 @@ bool Station::setSlotIoHandler(base::IoHandler* const p)
 
 bool Station::setSlotIoHandler(base::PairStream* const list)
 {
-    bool ok = true;
+    bool ok{true};
 
     // Remove the old list
     if (ioHandlers != nullptr) {
         // we are no longer the container for these handlers
         for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            base::Component* p = static_cast<base::Component*>(pair->object());
+            base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+            base::Component* p{static_cast<base::Component*>(pair->object())};
             p->container(nullptr);
         }
         ioHandlers = nullptr;
@@ -1113,7 +1113,7 @@ bool Station::setSlotOwnshipName(const base::String* const newName)
 //------------------------------------------------------------------------------
 bool Station::setSlotNetworks(base::PairStream* const a)
 {
-    bool ok = true;
+    bool ok{true};
 
     // Remove the old networks list
     if (networks != nullptr) {
@@ -1153,14 +1153,13 @@ bool Station::setSlotNetworks(base::PairStream* const a)
 //------------------------------------------------------------------------------
 bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double rate = num->getReal();
+        const double rate{num->getReal()};
         if (rate > 0) {
             tcRate = rate;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setTimeCriticalRate: Thread rate is invalid; must be greater than zero" << std::endl;
         }
     }
@@ -1173,9 +1172,9 @@ bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool Station::setSlotTimeCriticalPri(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double pri = num->getReal();
+        const double pri{num->getReal()};
         if (pri >= 0 && pri <= 1.0f) {
             tcPri = pri;
             ok = true;
@@ -1189,9 +1188,9 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
 
 bool Station::setSlotTimeCriticalStackSize(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        int isize = num->getInt();
+        const int isize{num->getInt()};
         if (isize >= 0) {
             ok = setTimeCriticalStackSize(static_cast<unsigned int>(isize));
         }
@@ -1205,14 +1204,13 @@ bool Station::setSlotTimeCriticalStackSize(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool Station::setSlotNetworkRate(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double rate = num->getReal();
+        const double rate{num->getReal()};
         if (rate > 0) {
             netRate = rate;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setNetworkRate: Thread rate is invalid; must be greater than zero" << std::endl;
         }
     }
@@ -1225,14 +1223,13 @@ bool Station::setSlotNetworkRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool Station::setSlotNetworkPri(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double pri = num->getReal();
-        if (pri >= 0 && pri <= 1.0f) {
+        const double pri{num->getReal()};
+        if (pri >= 0 && pri <= 1.0) {
             netPri = pri;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setSlotNetworkPri: Priority is invalid, range: [0 .. 1]" << std::endl;
         }
     }
@@ -1241,9 +1238,9 @@ bool Station::setSlotNetworkPri(const base::Number* const num)
 
 bool Station::setSlotNetworkStackSize(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        int isize = num->getInt();
+        const int isize{num->getInt()};
         if (isize >= 0) {
             ok = setNetworkStackSize(static_cast<unsigned int>(isize));
         }
@@ -1257,9 +1254,9 @@ bool Station::setSlotNetworkStackSize(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool Station::setSlotBackgroundRate(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double rate = num->getReal();
+        const double rate{num->getReal()};
         if (rate >= 0 ) {
             bgRate = rate;
             ok = true;
@@ -1277,14 +1274,13 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool Station::setSlotBackgroundPri(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        double pri = num->getReal();
+        const double pri{num->getReal()};
         if (pri >= 0 && pri <= 1.0f) {
             bgPri = pri;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setSlotBackgroundPri: Priority is invalid, range: [0 .. 1]" << std::endl;
         }
     }
@@ -1293,9 +1289,9 @@ bool Station::setSlotBackgroundPri(const base::Number* const num)
 
 bool Station::setSlotBackgroundStackSize(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        int isize = num->getInt();
+        const int isize{num->getInt()};
         if (isize >= 0) {
             ok = setBackgroundStackSize(static_cast<unsigned int>(isize));
         }
@@ -1337,9 +1333,9 @@ bool Station::setFastForwardRate(const unsigned int r)
 //------------------------------------------------------------------------------
 bool Station::setSlotFastForwardRate(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int ii = msg->getInt();
+      const int ii{msg->getInt()};
       if (ii >= 0) {
          ok = setFastForwardRate( ii );
       }
@@ -1352,7 +1348,7 @@ bool Station::setSlotFastForwardRate(const base::Number* const msg)
 //------------------------------------------------------------------------------
 bool Station::setSlotEnableUpdateTimers(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setUpdateTimersEnable( msg->getBoolean() );
    }

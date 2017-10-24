@@ -27,8 +27,8 @@ BEGIN_SLOTTABLE(Terrain)
 END_SLOTTABLE(Terrain)
 
 BEGIN_SLOT_MAP(Terrain)
-   ON_SLOT(1, setFilename, base::String)
-   ON_SLOT(2, setPathname, base::String)
+   ON_SLOT(1, setSlotFilename, base::String)
+   ON_SLOT(2, setSlotPathname, base::String)
 END_SLOT_MAP()
 
 Terrain::Terrain()

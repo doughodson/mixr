@@ -50,10 +50,6 @@ public:
 
    virtual const base::String* getSeekerName() const;   // Name of the seeker model, or zero (0) if none
 
-   // Slot functions
-   virtual bool setSlotSeekerName(base::String* const p);
-   virtual bool setSlotDisableQueries(base::Number* const msg);
-
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
 
@@ -70,6 +66,11 @@ private:
    base::String* seekerName {};    // Name of our seeker
 
    bool disableQueries {};         // Disable sending queries flag
+
+private:
+   // slot table helper methods
+   bool setSlotSeekerName(base::String* const);
+   bool setSlotDisableQueries(base::Number* const);
 };
 
 }

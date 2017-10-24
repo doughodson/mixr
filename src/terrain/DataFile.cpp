@@ -38,14 +38,11 @@ void DataFile::copyData(const DataFile& org, const bool)
             for (unsigned int j = 0; j < nptlat; j++) {
                columns[i][j] = org.columns[i][j];
             }
-         }
-         else {
+         } else {
             columns[i] = nullptr;
          }
       }
-
    } // end columns check
-
 }
 
 void DataFile::deleteData()
@@ -60,7 +57,7 @@ void DataFile::deleteData()
 // Number of latitude points (# of rows), or zero if the data isn't loaded
 unsigned int DataFile::getNumLatPoints() const
 {
-   unsigned int v = 0;
+   unsigned int v{};
    if (isDataLoaded()) {
       v = nptlat;
    }
@@ -70,7 +67,7 @@ unsigned int DataFile::getNumLatPoints() const
 // Number of longitude points (# of columns), or zero if the data isn't loaded
 unsigned int DataFile::getNumLonPoints() const
 {
-   unsigned int v = 0;
+   unsigned int v{};
    if (isDataLoaded()) {
       v = nptlong;
    }
@@ -80,7 +77,7 @@ unsigned int DataFile::getNumLonPoints() const
 // Spacing between latitude points (degs), or zero if the data isn't loaded
 double DataFile::getLatSpacing() const
 {
-   double v = 0.0;
+   double v{};
    if (isDataLoaded()) {
       v = latSpacing;
    }
@@ -90,7 +87,7 @@ double DataFile::getLatSpacing() const
 // Spacing between longitude points (degs), or zero if the data isn't loaded
 double DataFile::getLonSpacing() const
 {
-   double v = 0.0;
+   double v{};
    if (isDataLoaded()) {
       v = lonSpacing;
    }
@@ -99,7 +96,7 @@ double DataFile::getLonSpacing() const
 
 const short* DataFile::getColumn(const unsigned int idx) const
 {
-   const short* p = nullptr;
+   const short* p{};
    if (isDataLoaded() && idx < getNumLonPoints()) {
       p = columns[idx];
    }
@@ -128,7 +125,7 @@ unsigned int DataFile::getElevations(
       const bool interp            // Interpolate between elevation posts (if true)
    ) const
 {
-   unsigned int num = 0;
+   unsigned int num{};
 
    // Early out tests
    if ( elevations == nullptr ||       // The elevation array wasn't provided, or
@@ -140,22 +137,22 @@ unsigned int DataFile::getElevations(
 
 
    // Upper limit points
-   double maxLatPoint = static_cast<double>(nptlat-1);
-   double maxLonPoint = static_cast<double>(nptlong-1);
+   double maxLatPoint {static_cast<double>(nptlat-1)};
+   double maxLonPoint {static_cast<double>(nptlong-1)};
 
    // Starting points
-   double pointsLat = (lat - getLatitudeSW()) / latSpacing;
-   double pointsLon = (lon - getLongitudeSW()) / lonSpacing;
+   double pointsLat {(lat - getLatitudeSW()) / latSpacing};
+   double pointsLon {(lon - getLongitudeSW()) / lonSpacing};
 
    // Spacing between points (in each direction)
-   double deltaPoint = maxRng / (n - 1);
-   double dirR = direction * base::angle::D2RCC;
-   double deltaNorth = deltaPoint * std::cos(dirR) * base::distance::M2NM;  // (NM)
-   double deltaEast  = deltaPoint * std::sin(dirR) * base::distance::M2NM;
-   double deltaLat = deltaNorth/60.0;
-   double deltaLon = deltaEast/(60.0 * std::cos(lat * base::angle::D2RCC));
-   double deltaPointsLat = deltaLat / latSpacing;
-   double deltaPointsLon = deltaLon / lonSpacing;
+   double deltaPoint {maxRng / (n - 1)};
+   double dirR {direction * base::angle::D2RCC};
+   double deltaNorth {deltaPoint * std::cos(dirR) * base::distance::M2NM};  // (NM)
+   double deltaEast {deltaPoint * std::sin(dirR) * base::distance::M2NM};
+   double deltaLat {deltaNorth/60.0};
+   double deltaLon {deltaEast/(60.0 * std::cos(lat * base::angle::D2RCC))};
+   double deltaPointsLat {deltaLat / latSpacing};
+   double deltaPointsLon {deltaLon / lonSpacing};
 
    // ---
    // Loop for the number of points in the arrays;
@@ -167,7 +164,7 @@ unsigned int DataFile::getElevations(
           (pointsLon >= 0 && pointsLon <= maxLonPoint) ) {  // and within longitude range ...
 
             // We're within our data limits
-            double value = 0;          // the elevation (meters)
+            double value{};          // the elevation (meters)
 
             // ---
             // Interpolating between elevation posts?
@@ -176,26 +173,26 @@ unsigned int DataFile::getElevations(
                // Yes ---
 
                // South-west corner post is [icol][irow]
-               unsigned int irow = static_cast<unsigned int>(pointsLat);
-               unsigned int icol = static_cast<unsigned int>(pointsLon);
+               unsigned int irow {static_cast<unsigned int>(pointsLat)};
+               unsigned int icol {static_cast<unsigned int>(pointsLon)};
                if (irow > (nptlat-2)) irow = (nptlat-2);
                if (icol > (nptlong-2)) icol = (nptlong-2);
 
                // delta from s-w corner post
-               double deltaLat = static_cast<double>(pointsLat - static_cast<double>(irow));
-               double deltaLon = static_cast<double>(pointsLon - static_cast<double>(icol));
+               double deltaLat {static_cast<double>(pointsLat - static_cast<double>(irow))};
+               double deltaLon {static_cast<double>(pointsLon - static_cast<double>(icol))};
 
                // Get the elevations at each corner
-               double elevSW = static_cast<double>(columns[icol][irow]);
-               double elevNW = static_cast<double>(columns[icol][irow+1]);
-               double elevSE = static_cast<double>(columns[icol+1][irow]);
-               double elevNE = static_cast<double>(columns[icol+1][irow+1]);
+               double elevSW {static_cast<double>(columns[icol][irow])};
+               double elevNW {static_cast<double>(columns[icol][irow+1])};
+               double elevSE {static_cast<double>(columns[icol+1][irow])};
+               double elevNE {static_cast<double>(columns[icol+1][irow+1])};
 
                // Interpolate the west point
-               double westPoint = elevSW + (elevNW - elevSW) * deltaLat;
+               double westPoint {elevSW + (elevNW - elevSW) * deltaLat};
 
                // Interpolate the east point
-               double eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
+               double eastPoint {elevSE + (elevNE - elevSE) * deltaLat};
 
                // Interpolate between the west and east points
                value = westPoint + (eastPoint - westPoint) * deltaLon;
@@ -205,8 +202,8 @@ unsigned int DataFile::getElevations(
                // No -- just use the nearest post
 
                // Nearest post
-               unsigned int irow = static_cast<unsigned int>(pointsLat + 0.5);
-               unsigned int icol = static_cast<unsigned int>(pointsLon + 0.5);
+               unsigned int irow {static_cast<unsigned int>(pointsLat + 0.5)};
+               unsigned int icol {static_cast<unsigned int>(pointsLon + 0.5)};
                if (irow >= nptlat) irow = (nptlat-1);
                if (icol >= nptlong) icol = (nptlong-1);
 
@@ -241,7 +238,7 @@ bool DataFile::getElevation(
       const bool interp       // Interpolate between elevation posts (if true)
    ) const
 {
-   double value = 0;          // the elevation (meters)
+   double value{};            // the elevation (meters)
 
    // Early out tests
    if ( !isDataLoaded() ||          // Not loaded or
@@ -255,10 +252,10 @@ bool DataFile::getElevation(
    // Compute the lat and lon points
    // ---
 
-   double pointsLat = (lat - getLatitudeSW()) / latSpacing;
+   double pointsLat {(lat - getLatitudeSW()) / latSpacing};
    if (pointsLat < 0) pointsLat = 0;
 
-   double pointsLon = (lon - getLongitudeSW()) / lonSpacing;
+   double pointsLon {(lon - getLongitudeSW()) / lonSpacing};
    if (pointsLon < 0) pointsLon = 0;
 
    // ---
@@ -268,26 +265,26 @@ bool DataFile::getElevation(
       // Yes ---
 
       // South-west corner post is [icol][irow]
-      unsigned int irow = static_cast<unsigned int>(pointsLat);
-      unsigned int icol = static_cast<unsigned int>(pointsLon);
+      unsigned int irow {static_cast<unsigned int>(pointsLat)};
+      unsigned int icol {static_cast<unsigned int>(pointsLon)};
       if (irow > (nptlat-2)) irow = (nptlat-2);
       if (icol > (nptlong-2)) icol = (nptlong-2);
 
       // delta from s-w corner post
-      double deltaLat = static_cast<double>(pointsLat - static_cast<double>(irow));
-      double deltaLon = static_cast<double>(pointsLon - static_cast<double>(icol));
+      double deltaLat {static_cast<double>(pointsLat - static_cast<double>(irow))};
+      double deltaLon {static_cast<double>(pointsLon - static_cast<double>(icol))};
 
       // Get the elevations at each corner
-      double elevSW = static_cast<double>(columns[icol][irow]);
-      double elevNW = static_cast<double>(columns[icol][irow+1]);
-      double elevSE = static_cast<double>(columns[icol+1][irow]);
-      double elevNE = static_cast<double>(columns[icol+1][irow+1]);
+      double elevSW {static_cast<double>(columns[icol][irow])};
+      double elevNW {static_cast<double>(columns[icol][irow+1])};
+      double elevSE {static_cast<double>(columns[icol+1][irow])};
+      double elevNE {static_cast<double>(columns[icol+1][irow+1])};
 
       // Interpolate the west point
-      double westPoint = elevSW + (elevNW - elevSW) * deltaLat;
+      double westPoint {elevSW + (elevNW - elevSW) * deltaLat};
 
       // Interpolate the east point
-      double eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
+      double eastPoint {elevSE + (elevNE - elevSE) * deltaLat};
 
       // Interpolate between the west and east points
       value = westPoint + (eastPoint - westPoint) * deltaLon;
@@ -297,8 +294,8 @@ bool DataFile::getElevation(
       // No -- just use the nearest post
 
       // Nearest post
-      unsigned int irow = static_cast<unsigned int>(pointsLat + 0.5f);
-      unsigned int icol = static_cast<unsigned int>(pointsLon + 0.5f);
+      unsigned int irow {static_cast<unsigned int>(pointsLat + 0.5f)};
+      unsigned int icol {static_cast<unsigned int>(pointsLon + 0.5f)};
       if (irow >= nptlat) irow = (nptlat-1);
       if (icol >= nptlong) icol = (nptlong-1);
 
@@ -328,10 +325,10 @@ bool DataFile::computerRowIndex(unsigned int* const irow, const double lat) cons
       ) return false;
 
    // Locate row (latitude) index
-   double points = (lat - getLatitudeSW()) / latSpacing;
+   double points {(lat - getLatitudeSW()) / latSpacing};
    if (points < 0) points = 0;
 
-   unsigned int idx = static_cast<unsigned int>(points + 0.5);
+   unsigned int idx {static_cast<unsigned int>(points + 0.5)};
    if (idx >= nptlat) {
       idx = nptlat - 1;
    }
@@ -354,11 +351,11 @@ bool DataFile::computeColumnIndex(unsigned int* const icol, const double lon) co
       ) return false;
 
    // Locate column (longitude) index
-   double points = (lon - getLongitudeSW()) / lonSpacing;
+   double points {(lon - getLongitudeSW()) / lonSpacing};
    if (points < 0) {
       points = 0.0;
    }
-   unsigned int idx = static_cast<unsigned int>(points + 0.5);
+   unsigned int idx {static_cast<unsigned int>(points + 0.5)};
    if (idx >= nptlong) {
       idx = nptlong - 1;
    }

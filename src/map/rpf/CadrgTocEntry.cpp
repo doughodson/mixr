@@ -58,7 +58,7 @@ void CadrgTocEntry::deleteData()
 // ---------------------------------------------------------------------------------------------------
 CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 {
-    CadrgFrameEntry* p = &frames[v][h];
+    CadrgFrameEntry* p {&frames[v][h]};
     if (p != nullptr) {
        return p;
     }
@@ -127,7 +127,7 @@ void CadrgTocEntry::setScale(const char* x, const int size)
 // ---------------------------------------------------------------------------------------------------
 bool CadrgTocEntry::isInZone(double lat, double lon)
 {
-    bool ok = (lat >= swLat && lon >= swLon && lat <= neLat && lon <= neLon);
+    bool ok {(lat >= swLat && lon >= swLon && lat <= neLat && lon <= neLon)};
     return ok;
 }
 

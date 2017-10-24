@@ -147,14 +147,6 @@ public:
    // Check to see if a PDU needs to be sent; returns true if a PDU was sent
    virtual bool updateOutgoing(const double curExecTime, Nib* const nib);
 
-   // Slot functions
-   virtual bool setSlotEmitterName(const base::Number* const msg);      // Sets our DIS Emitter Name
-   virtual bool setSlotEmitterFunction(const base::Number* const msg);  // Sets our DIS Emitter Function
-   virtual bool setSlotSensorTemplate(models::RfSensor* const msg);    // Sets our template sensor model
-   virtual bool setSlotAntennaTemplate(models::Antenna* const msg);    // Sets our template antenna model
-   virtual bool setSlotDefaultIn(const base::Number* const msg);
-   virtual bool setSlotDefaultOut(const base::Number* const msg);
-
 protected:
     const EmissionSystem* getSavedEmissionSystemData() const;
     bool setSavedEmissionSystemData(const EmissionSystem& newES);
@@ -189,6 +181,15 @@ private:
    base::safe_ptr<models::Antenna>  antennaModel;      // Our template antenna model
 
    double emPduExecTime {};                            // Exec time of last Emission PDU output (seconds)
+
+private:
+   // slot table helper methods
+   bool setSlotEmitterName(const base::Number* const);      // Sets our DIS Emitter Name
+   bool setSlotEmitterFunction(const base::Number* const);  // Sets our DIS Emitter Function
+   bool setSlotSensorTemplate(models::RfSensor* const);     // Sets our template sensor model
+   bool setSlotAntennaTemplate(models::Antenna* const);     // Sets our template antenna model
+   bool setSlotDefaultIn(const base::Number* const);
+   bool setSlotDefaultOut(const base::Number* const);
 };
 
 inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return emitterIdNumber; }

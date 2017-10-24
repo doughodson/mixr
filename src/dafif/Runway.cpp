@@ -44,7 +44,7 @@ Runway::Runway(const char* const s) : Record(s)
 //------------------------------------------------------------------------------
 void Runway::getRunwayMagHeading(const double aclat, const double aclon, const double acelev, float* magHeading1, float* magHeading2, double* trueBearing1, double* trueBearing2)const
 {
-   double range(0.0), grdrange(0.0);
+   double range{}, grdrange{};
    base::nav::glla2bd(aclat, aclon, acelev, latitude(LOW_END), longitude(LOW_END), elevation(LOW_END), trueBearing1, &range, &grdrange);
    base::nav::glla2bd(aclat, aclon, acelev, latitude(HIGH_END), longitude(HIGH_END), elevation(HIGH_END), trueBearing2, &range, &grdrange);
    *magHeading1 = magHeading(LOW_END);
@@ -56,8 +56,8 @@ void Runway::getRunwayMagHeading(const double aclat, const double aclon, const d
 //------------------------------------------------------------------------------
 void Runway::printRecord(std::ostream& sout) const
 {
-   char key1[16];
-   char id[12];
+   char key1[16]{};
+   char id[12]{};
 
    key(key1);
 
@@ -115,8 +115,8 @@ void Runway::printRecord(std::ostream& sout) const
 //------------------------------------------------------------------------------
 void Runway::printRunwayMagHeading(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
-   float magHeading1(0.0), magHeading2(0.0);
-   double trueBearing1(0.0), trueBearing2(0.0);
+   float magHeading1{}, magHeading2{};
+   double trueBearing1{}, trueBearing2{};
    getRunwayMagHeading(aclat, aclon, acelev, &magHeading1, &magHeading2, &trueBearing1, &trueBearing2);
    sout << " Runway_Low_End_Mag_heading " << magHeading1 << " aircraft_bearing_Low_End " << trueBearing1 << "  Runway_High_End_Mag_heading " <<  magHeading2 << " aircraft_bearing_High_End " << trueBearing2;
 }

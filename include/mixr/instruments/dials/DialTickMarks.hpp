@@ -47,6 +47,7 @@ private:
     // slot table helper methods
     bool setSlotLength(const base::Number* const);
     bool setSlotQuantity(const base::Number* const);
+    bool setSlotTickGraphic(const graphics::Graphic* const);
 };
 
 }

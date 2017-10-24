@@ -103,7 +103,7 @@ bool Ai2DiSwitch::setInvertFlag(const bool f)
 void Ai2DiSwitch::processInputs(const double, const base::IoDevice* const device, base::IoData* const inData)
 {
    // Default is our initial value
-   double vin(0.0);
+   double vin {};
 
    // Get data from the AI device
    if (device != nullptr && devEnb) {
@@ -112,7 +112,7 @@ void Ai2DiSwitch::processInputs(const double, const base::IoDevice* const device
 
    // Set the bit to the cockpit input handler
    if (inData != nullptr) {
-      bool flag = (vin >= level);
+      bool flag {vin >= level};
       if (invert) flag = !flag;
       inData->setDiscreteInput(location,flag);
    }
@@ -132,9 +132,9 @@ void Ai2DiSwitch::processOutputs(const double, const base::IoData* const, base::
 // location: Input array index (location)
 bool Ai2DiSwitch::setSlotLocation(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
       }
@@ -145,9 +145,9 @@ bool Ai2DiSwitch::setSlotLocation(const base::Number* const msg)
 // channel: Device's AI channel number
 bool Ai2DiSwitch::setSlotChannel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
       }
@@ -158,7 +158,7 @@ bool Ai2DiSwitch::setSlotChannel(const base::Number* const msg)
 // level: Level to switch DI (default: 0)
 bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setLevel( msg->getReal() );
    }
@@ -168,7 +168,7 @@ bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
 // invert: Inverted bit flag (default: false)
 bool Ai2DiSwitch::setSlotInverted(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {false};
    if (msg != nullptr) {
       ok = setInvertFlag( msg->getBoolean() );
    }

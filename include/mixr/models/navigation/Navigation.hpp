@@ -125,12 +125,6 @@ public:
    // set/change the current route; does not change the initial route used by reset()
    virtual bool setRoute(Route* const msg);
 
-   // Slot functions
-   virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
-   virtual bool setSlotUtc(const base::Time* const msg);
-   virtual bool setSlotFeba(const base::PairStream* const msg);
-   virtual bool setSlotBullseye(Bullseye* const msg);
-
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
 
@@ -244,6 +238,13 @@ private:
    // Ref position
    double refLat {};      // Ref latitude (deg)
    double refLon {};      // Ref longitude (deg)
+
+private:
+   // slot table helper methods
+   bool setSlotRoute(const Route* const);        // and the initial route used by reset()
+   bool setSlotUtc(const base::Time* const);
+   bool setSlotFeba(const base::PairStream* const);
+   bool setSlotBullseye(Bullseye* const);
 };
 
 }

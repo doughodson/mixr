@@ -6,7 +6,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
@@ -121,9 +121,9 @@ void IrSeeker::process(const double dt)
    // Update IR query queues: from 'in-use' to 'free'
    // ---
    base::lock(inUseQueryLock);
-   int n = inUseQueryQueue.entries();
-   for (int i = 0; i < n; i++) {
-      IrQueryMsg* query = inUseQueryQueue.get();
+   unsigned int n{inUseQueryQueue.entries()};
+   for (unsigned int i = 0; i < n; i++) {
+      IrQueryMsg* query{inUseQueryQueue.get()};
       if (query != nullptr) {
          if (query->getRefCount() <= 1) {
             // No one else is referencing the query, push on free stack
@@ -131,13 +131,11 @@ void IrSeeker::process(const double dt)
             base::lock(freeQueryLock);
             if (freeQueryStack.isNotFull()) {
                freeQueryStack.push(query);
-            }
-            else {
+            } else {
                query->unref();
             }
             base::unlock(freeQueryLock);
-         }
-         else {
+         } else {
             // Others are still referencing the query, put back on in-use queue
             inUseQueryQueue.put(query);
          }
@@ -153,7 +151,7 @@ void IrSeeker::process(const double dt)
 void IrSeeker::clearQueues()
 {
    base::lock(freeQueryLock);
-   IrQueryMsg* query = freeQueryStack.pop();
+   IrQueryMsg* query{freeQueryStack.pop()};
    while (query != nullptr) {
       query->unref();
       query = freeQueryStack.pop();
@@ -180,8 +178,8 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
 {
    // Need something to store the required data for the IR signatures and someone to send to
 
-   Tdb* tdb0 = getCurrentTDB();
-   Player* ownship = getOwnship();
+   Tdb* tdb0{getCurrentTDB()};
+   Player* ownship{getOwnship()};
    if (irQuery == nullptr || tdb0 == nullptr || ownship == nullptr) {
       // Clean up and leave
       if (tdb0 != nullptr) tdb0->unref();
@@ -193,23 +191,23 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
    // ---
 
    // FAB - cannot use ownHdgOnly
-   unsigned int ntgts = tdb0->computeBoresightData();
+   unsigned int ntgts{tdb0->computeBoresightData()};
    if (ntgts > MAX_PLAYERS) ntgts = MAX_PLAYERS;
 
    // ---
    // If we have targets
    // ---
-   const base::Vec3d* losG = tdb0->getGimbalLosVectors();
+   const base::Vec3d* losG{tdb0->getGimbalLosVectors()};
    if (ntgts > 0 && losG != nullptr) {
 
       // Fetch the required data arrays from the TargetDataBlock
-      const double* ranges = tdb0->getTargetRanges();
-      const double* rngRates = tdb0->getTargetRangeRates();
-      const double* anglesOffBoresight = tdb0->getBoresightErrorAngles();
-      const base::Vec3d* losO2T = tdb0->getLosVectors();
-      const base::Vec3d* losT2O = tdb0->getTargetLosVectors();
-      Player** targets = tdb0->getTargets();
-      const double maximumRange = irQuery->getMaxRangeNM()*base::distance::NM2M;
+      const double* ranges{tdb0->getTargetRanges()};
+      const double* rngRates{tdb0->getTargetRangeRates()};
+      const double* anglesOffBoresight{tdb0->getBoresightErrorAngles()};
+      const base::Vec3d* losO2T{tdb0->getLosVectors()};
+      const base::Vec3d* losT2O{tdb0->getTargetLosVectors()};
+      Player** targets{tdb0->getTargets()};
+      const double maximumRange{irQuery->getMaxRangeNM()*base::distance::NM2M};
 
       // ---
       // Send query packets to the targets
@@ -223,7 +221,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
 
          // Get a free query packet
          base::lock(freeQueryLock);
-         IrQueryMsg* query = freeQueryStack.pop();
+         IrQueryMsg* query{freeQueryStack.pop()};
          base::unlock(freeQueryLock);
 
          if (query == nullptr) {
@@ -269,26 +267,22 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
                base::lock(freeQueryLock);
                if (freeQueryStack.isNotFull()) {
                   freeQueryStack.push(query);
-               }
-               else {
+               } else {
                   query->unref();
                }
                base::unlock(freeQueryLock);
-            }
-            else {
+            } else {
                // Store for future reference
                base::lock(inUseQueryLock);
                if (inUseQueryQueue.isNotFull()) {
                   inUseQueryQueue.put(query);
-               }
-               else {
+               } else {
                   // Just forget it
                   query->unref();
                }
                base::unlock(inUseQueryLock);
             }
-         }
-         else {
+         } else {
             // When we couldn't get a free query packet
             if (isMessageEnabled(MSG_WARNING)) {
                std::cerr << "IR Seeker: OUT OF Query messages!" << std::endl;

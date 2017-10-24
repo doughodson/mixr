@@ -36,9 +36,9 @@ BEGIN_SLOT_MAP(Iff)
    ON_SLOT( 6, setSlotEnableMode1,  base::Number)
    ON_SLOT( 7, setSlotEnableMode2,  base::Number)
    ON_SLOT( 8, setSlotEnableMode3a, base::Number)
-   ON_SLOT( 9, setSlotEnableMode4, base::Number)
-   ON_SLOT( 10, setSlotWhichMode4,  base::Number)
-   ON_SLOT( 11, setSlotEnableModeC, base::Number)
+   ON_SLOT( 9, setSlotEnableMode4,  base::Number)
+   ON_SLOT(10, setSlotWhichMode4,   base::Number)
+   ON_SLOT(11, setSlotEnableModeC,  base::Number)
 END_SLOT_MAP()
 
 Iff::Iff()
@@ -201,35 +201,35 @@ bool Iff::setSlotEnableModeC(const base::Number* const msg)
 }
 bool Iff::setSlotMode1(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) ok = setMode1(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode1 = mode1;
     return ok;
 }
 bool Iff::setSlotMode2(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) ok = setMode2(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode2 = mode2;
     return ok;
 }
 bool Iff::setSlotMode3a(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) ok = setMode3a(static_cast<unsigned short>(msg->getInt()));
     if (ok) icMode3a = mode3a;
     return ok;
 }
 bool Iff::setSlotMode4a(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) ok = setMode4A(static_cast<unsigned short>(msg->getInt()));
     icMode4a = mode4a;
     return ok;
 }
 bool Iff::setSlotMode4b(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) ok = setMode4B(static_cast<unsigned short>(msg->getInt()));
     icMode4b = mode4b;
     return ok;

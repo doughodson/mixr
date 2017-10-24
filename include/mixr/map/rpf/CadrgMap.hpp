@@ -146,8 +146,8 @@ public:
     };
 
     // Set functions - these functions must be set for it to work properly
-    virtual bool setPathName(const char* aGenPathName);
-    virtual bool setMaxTableSize(const int x);
+    virtual bool setPathName(const char*);
+    virtual bool setMaxTableSize(const int);
 
     // More set functions
     virtual void setZone(const int num, TexturePager* tp);
@@ -172,25 +172,19 @@ public:
     const char* getLevel();
 
     // Finds a specific file by string
-    bool setMapLevel(const char* x);
+    bool setMapLevel(const char*);
 
     MapDrawer* getMapImage();
     const MapDrawer* getMapImage() const;
 
-    int getMaxTableSize()   { return maxTableSize; }
+    int getMaxTableSize()                { return maxTableSize; }
 
     virtual void updateData(const double dt = 0.0) override;
 
     virtual void sortMaps(const int count);             // simple function to sort our maps.
 
-protected:
-    // Slot functions
-    bool setSlotPathnames(const base::PairStream* const x);
-    bool setSlotMaxTableSize(const base::Number* const x);
-    bool setSlotMapLevel(base::String* x);
-
 private:
-    static const int MAX_FILES = 10;            // Holds the maximum number of cadrg files we can hold
+    static const int MAX_FILES {10};            // Holds the maximum number of cadrg files we can hold
 
     std::array<CadrgFile*, MAX_FILES> cadrgFiles {};        // List of cadrg files
     std::array<CadrgFile*, MAX_FILES> mergedCadrgFiles {};  // Merged list of cadrg files from all paths
@@ -203,6 +197,12 @@ private:
     ColorArray outTile;                         // Holds the tile color information
     base::String* mapLevel {};                  // Our map "level" we are ("1:500K", etc..)
     bool initLevelLoaded {};                    // Has our initial map level been loaded?
+
+private:
+   // slot table helper methods
+   bool setSlotPathnames(const base::PairStream* const);
+   bool setSlotMaxTableSize(const base::Number* const);
+   bool setSlotMapLevel(base::String*);
 };
 
 }

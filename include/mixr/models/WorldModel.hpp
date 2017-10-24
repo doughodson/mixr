@@ -115,7 +115,6 @@ public:
     virtual void reset() override;
 
 protected:
-
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
 
@@ -129,20 +128,6 @@ protected:
 
 private:
    void initData();
-
-   bool setSlotRefLatitude(const base::LatLon* const msg);
-   bool setSlotRefLatitude(const base::Number* const msg);
-   bool setSlotRefLongitude(const base::LatLon* const msg);
-   bool setSlotRefLongitude(const base::Number* const msg);
-
-   bool setSlotGamingAreaRange(const base::Distance* const msg);
-   bool setSlotEarthModel(const base::EarthModel* const msg);
-   bool setSlotEarthModel(const base::String* const msg);
-   bool setSlotGamingAreaEarthModel(const base::Number* const msg);
-
-   // environmental interface
-   bool setSlotTerrain(terrain::Terrain* const msg);
-   bool setSlotAtmosphere(AbstractAtmosphere* const msg);
 
    // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
    const base::EarthModel* em {};
@@ -162,6 +147,21 @@ private:
    AbstractAtmosphere* atmosphere {};
    terrain::Terrain* terrain {};
 
+private:
+   // slot table helper methods
+   bool setSlotRefLatitude(const base::LatLon* const);
+   bool setSlotRefLatitude(const base::Number* const);
+   bool setSlotRefLongitude(const base::LatLon* const);
+   bool setSlotRefLongitude(const base::Number* const);
+
+   bool setSlotGamingAreaRange(const base::Distance* const);
+   bool setSlotEarthModel(const base::EarthModel* const);
+   bool setSlotEarthModel(const base::String* const);
+   bool setSlotGamingAreaEarthModel(const base::Number* const);
+
+   // environmental interface
+   bool setSlotTerrain(terrain::Terrain* const);
+   bool setSlotAtmosphere(AbstractAtmosphere* const);
 };
 
 }

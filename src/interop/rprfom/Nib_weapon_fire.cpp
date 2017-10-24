@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 
@@ -31,11 +31,10 @@ bool Nib::weaponFireMsgFactory(const double)
    if (!isRegistered()) return false;
 
    // Get our Simulation::NetIO
-   NetIO* netIO = static_cast<NetIO*>(getNetIO());
+   NetIO* netIO {static_cast<NetIO*>(getNetIO())};
 
    // Create the parameter/value set
-   RTI::ParameterHandleValuePairSet* pParams =
-      RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
+   RTI::ParameterHandleValuePairSet* pParams {RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER )};
 
    // Set our mode so that we don't do this again.
    setMode(models::Player::ACTIVE);
@@ -47,7 +46,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    // Event ID
    // ---
-   unsigned short fireEvent = mPlayer->getReleaseEventID();
+   unsigned short fireEvent {mPlayer->getReleaseEventID()};
    EventIdentifierStruct eventIdentifier;
    base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
    base::utStrncpy(
@@ -114,13 +113,12 @@ bool Nib::weaponFireMsgFactory(const double)
    //   If it's not, then check our output list.
    // ---
    {
-      Nib* fNib = nullptr;
-      models::Player* fPlayer = mPlayer->getLaunchVehicle();
+      Nib* fNib {};
+      models::Player* fPlayer {mPlayer->getLaunchVehicle()};
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
-         }
-         else {
+         } else {
             fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::NetIO::OUTPUT_NIB) );
          }
       }
@@ -147,8 +145,8 @@ bool Nib::weaponFireMsgFactory(const double)
    //   If it's not, then check our output list.
    // ---
    {
-      Nib* tNib = nullptr;
-      models::Player* tPlayer = mPlayer->getTargetPlayer();
+      Nib* tNib {};
+      models::Player* tPlayer {mPlayer->getTargetPlayer()};
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, interop::NetIO::OUTPUT_NIB) );
@@ -191,7 +189,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // Fire Control Solution Range (meters)
    // ---
    {
-      float fireControlSolutionRange(0.0);
+      float fireControlSolutionRange {};
       base::NetHandler::toNetOrder(&fireControlSolutionRange, 0 );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_CONTROL_SOLUTION_RANGE_WF_PI),
@@ -203,8 +201,8 @@ bool Nib::weaponFireMsgFactory(const double)
    // Fire Mission Index
    // ---
    {
-      uint32_t fireMissionIndex = 0;
-      uint32_t netBuffer;
+      uint32_t fireMissionIndex {};
+      uint32_t netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, fireMissionIndex );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_MISSION_INDEX_WF_PI),
@@ -216,8 +214,8 @@ bool Nib::weaponFireMsgFactory(const double)
    // Fuse Type (16 bit enum)
    // ---
    {
-      FuseTypeEnum16 fuseType = FuseTypeOther;
-      unsigned short netBuffer;
+      FuseTypeEnum16 fuseType {FuseTypeOther};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FUSE_TYPE_WF_PI),
@@ -229,8 +227,8 @@ bool Nib::weaponFireMsgFactory(const double)
    // Quantity fired
    // ---
    {
-      unsigned short quantityFired = 1;
-      unsigned short netBuffer;
+      unsigned short quantityFired {1};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, quantityFired );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::QUANTITY_FIRED_WF_PI),
@@ -242,8 +240,8 @@ bool Nib::weaponFireMsgFactory(const double)
    // Rate Of Fire
    // ---
    {
-      unsigned short rateOfFire = 0;
-      unsigned short netBuffer;
+      unsigned short rateOfFire {};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, rateOfFire );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RATE_OF_FIRE_WF_PI),
@@ -255,8 +253,8 @@ bool Nib::weaponFireMsgFactory(const double)
    // Warhead type
    // ---
    {
-      WarheadTypeEnum16 warheadType = WarheadTypeOther;
-      unsigned short netBuffer;
+      WarheadTypeEnum16 warheadType {WarheadTypeOther};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::WARHEAD_TYPE_WF_PI),
@@ -267,9 +265,9 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    // Send the interaction
    // ---
-   bool ok = netIO->sendInteraction(
+   bool ok {netIO->sendInteraction(
          netIO->getInteractionClassHandle(NetIO::WEAPON_FIRE_INTERACTION), 
-         pParams );
+         pParams )};
 
    // don't need this anymore
    delete pParams;

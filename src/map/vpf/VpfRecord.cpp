@@ -53,10 +53,10 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
     if (!stream.fail() && parent != 0) {
         // let's try to get the size of my file contents
         stream.seekg(0);
-        std::streamoff begin = stream.tellg();
+        std::streamoff begin{stream.tellg()};
         stream.seekg(0, std::ios::end);
-        std::streamoff end = stream.tellg();
-        std::streamoff mySize = end - begin;
+        std::streamoff end{stream.tellg()};
+        std::streamoff mySize{end - begin};
         int size {parent->getRecordSize()};
         if (size > 0) {
             int recordOffset = size * (idx - 1);
@@ -81,7 +81,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         // we read an integer
                         int y {};
                         // 4 byte integer
-                        stream.read((char*)&y, num*sizeof(y));
+                        stream.read(reinterpret_cast<char*>(&y), num*sizeof(y));
                         // convert to string
                         char tempBuff[255] {};
                         std::sprintf(tempBuff, "%i", y);
@@ -115,7 +115,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         buff[num] = 0;
                         if (!rowNull) data[i]->setValue(buff);
                         else data[i]->setValue(NULL);
-                        
+
                         data[i]->setLength(num);
                         data[i]->setType(VpfDataType::FIXED_TEXT);
                     }
@@ -191,7 +191,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         std::cout << "UNKNOWN TYPE = " << dType << std::endl;
                         // clean up our data row, because we didn't use it
                         data[i]->unref();
-                        data[i] = 0;
+                        data[i] = nullptr;
                     }
                 }
             }
@@ -224,7 +224,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         // we read an integer
                         int y {};
                         // 4 byte integer
-                        stream.read((char*)&y, num*sizeof(y));
+                        stream.read(reinterpret_cast<char*>(&y), num*sizeof(y));
                         // convert to string
                         char tempBuff[255] {};
                         std::sprintf(tempBuff, "%i", y);
@@ -241,7 +241,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         // we read a short integer
                         short int y {};
                         // 2 byte integer
-                        stream.read((char*)&y, num*sizeof(y));
+                        stream.read(reinterpret_cast<char*>(&y), num*sizeof(y));
                         // convert to string
                         char tempBuff[255] {};
                         std::sprintf(tempBuff, "%i", y);                        
@@ -325,7 +325,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                                 std::sprintf(buff, "%f", tempFloat);
                                 string->catStr(buff);
                                 string->catStr(" ");
-                                stream.read((char*)&tempFloat, sizeof(tempFloat));
+                                stream.read(reinterpret_cast<char*>(&tempFloat), sizeof(tempFloat));
                                 //gcvt(tempFloat, 8, buff);
                                 std::sprintf(buff, "%f", tempFloat);
                                 string->catStr(buff);
@@ -343,23 +343,23 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                             float tempFloat {};
                             base::String* string {new base::String()};
                             char buff[255] {};
-                            stream.read((char*)&tempFloat, sizeof(tempFloat));
+                            stream.read(reinterpret_cast<char*>(&tempFloat), sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
                             std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
-                            stream.read((char*)&tempFloat, sizeof(tempFloat));
+                            stream.read(reinterpret_cast<char*>(&tempFloat), sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
                             std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
-                            stream.read((char*)&tempFloat, sizeof(tempFloat));
+                            stream.read(reinterpret_cast<char*>(&tempFloat), sizeof(tempFloat));
                             //gcvt(tempFloat, 8, buff);
                             std::sprintf(buff, "%f", tempFloat);
                             string->catStr(buff);
                             string->catStr(" ");
                             if (rowNull) data[i]->setValue(0);
-                            else data[i]->setValue((char*)string->getString());
+                            else data[i]->setValue(const_cast<char*>(string->getString()));
                             data[i]->setLength(sizeof(tempFloat)*3);
                             data[i]->setType(VpfDataType::THREE_D_COORD);
                             std::cout << "COORDINATE = " << string->getString() << std::endl;
@@ -395,10 +395,10 @@ int VpfRecord::getCoordinate(const int column, base::Vec3d vec[], const int idx,
     if (data[column-1] != 0) {
         if (data[column-1]->getType() == VpfDataType::THREE_D_COORD) {
             // ok, they have a valid column, now lets convert our string into 3 coordinates (x,y,z from center)
-            float first {}, second {}, third {};
+            float first{}, second{}, third{};
             // grab our first coordinate
             char temp[255] {};
-            char* x = (char*)data[column-1]->getValue();
+            char* x {const_cast<char*>(data[column-1]->getValue())};
             int j {idx};
             int count {};
             int tCount {};
@@ -448,8 +448,9 @@ const char* VpfRecord::getData(const int column)
     if (column < VpfTable::MAX_COLUMNS && data[column-1] != 0) {
         //std::cout << "RECORD # & DATA = " << index << ", " << data[column-1]->getValue() << std::endl;
         return data[column-1]->getValue();
+    } else {
+        return nullptr;
     }
-    else return 0;
 }
 
 }

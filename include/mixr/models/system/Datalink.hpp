@@ -52,7 +52,7 @@ public:
    virtual bool setRadio(CommRadio* const);
 
    const base::String* getRadioName() const                            { return radioName; }
-   virtual bool setRadioName(const base::String* const name);
+   bool setRadioName(const base::String* const);
 
    // Max range (nm) of datalink without radio
    double getMaxRange() const                                          { return noRadioMaxRange; }
@@ -74,7 +74,7 @@ public:
    virtual bool setTrackManager(TrackManager* const tm);
 
    const base::String* getTrackManagerName() const                     { return tmName; }
-   virtual bool setTrackManagerName(const base::String* const name);
+   bool setTrackManagerName(const base::String* const);
 
    // Event handler(s)
    virtual bool onDatalinkMessageEvent(base::Object* const);
@@ -83,13 +83,9 @@ public:
    virtual void reset() override;
 
 protected:
-   virtual bool queueIncomingMessage(base::Object* const msg);  // Queue up an incoming message
-   virtual bool queueOutgoingMessage(base::Object* const msg);  // Queue up an outgoing message
+   virtual bool queueIncomingMessage(base::Object* const);  // Queue up an incoming message
+   virtual bool queueOutgoingMessage(base::Object* const);  // Queue up an outgoing message
    virtual void clearQueues(); // Clear all queues
-
-   // Slot functions
-   virtual bool setSlotRadioId(const base::Number* const num);
-   virtual bool setSlotMaxRange(const base::Distance* const num);
 
    virtual void dynamics(const double dt) override;
 
@@ -98,7 +94,7 @@ protected:
 private:
    void initData();
 
-   static const int MAX_MESSAGES = 1000;  // Max number of messages in queues
+   static const int MAX_MESSAGES{1000};    // Max number of messages in queues
 
    base::safe_queue<base::Object*>* inQueue {};   // Received message queue
    base::safe_queue<base::Object*>* outQueue {};  // Queue for messages going out over the network/DIS
@@ -115,6 +111,13 @@ private:
 
    TrackManager* trackManager {};        // Track manager
    const base::String* tmName {};        // Track manager name
+
+private:
+   // slot table helper methods
+   bool setSlotRadioId(const base::Number* const);
+   bool setSlotMaxRange(const base::Distance* const);
+   bool setSlotRadioName(const base::String* const x)                { return setRadioName(x); }
+   bool setSlotTrackManagerName(const base::String* const x)         { return setTrackManagerName(x); }
 };
 
 }

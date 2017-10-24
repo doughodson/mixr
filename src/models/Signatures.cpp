@@ -23,6 +23,7 @@ namespace models {
 //==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(RfSignature, "Signature")
 EMPTY_SLOTTABLE(RfSignature)
+EMPTY_DELETEDATA(RfSignature)
 
 RfSignature::RfSignature()
 {
@@ -34,15 +35,12 @@ void RfSignature::copyData(const RfSignature& org, const bool)
     BaseClass::copyData(org);
 }
 
-void RfSignature::deleteData()
-{
-}
-
 
 //==============================================================================
 // Class: SigConstant
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigConstant,"SigConstant")
+EMPTY_DELETEDATA(SigConstant)
 
 BEGIN_SLOTTABLE(SigConstant)
     "rcs",          // 1 Constant Radar Cross Section value
@@ -50,7 +48,7 @@ BEGIN_SLOTTABLE(SigConstant)
 END_SLOTTABLE(SigConstant)
 
 BEGIN_SLOT_MAP(SigConstant)
-    ON_SLOT(1,setRCS,base::Number)
+    ON_SLOT(1, setSlotRCS, base::Number)
 END_SLOT_MAP()
 
 SigConstant::SigConstant()
@@ -76,33 +74,22 @@ void SigConstant::copyData(const SigConstant& org, const bool)
     rcs = org.rcs;
 }
 
-void SigConstant::deleteData()
-{
-}
-
-//------------------------------------------------------------------------------
-// getRCS() -- Get the RCS
-//------------------------------------------------------------------------------
 double SigConstant::getRCS(const Emission* const)
 {
     return rcs;
 }
 
-//------------------------------------------------------------------------------
-// setRCS() -- Set the RCS
-//------------------------------------------------------------------------------
 bool SigConstant::setRCS(const base::Number* const num)
 {
-    bool ok = false;
-    double r = -1.0;
+    bool ok{};
+    double r{-1.0};
 
     const auto d = dynamic_cast<const base::Area*>(num);
     if (d != nullptr) {
         // Has area units and we need square meters
         base::SquareMeters m2;
         r = m2.convert(*d);
-    }
-    else if (num != nullptr) {
+    } else if (num != nullptr) {
         // square meters (Number or Decibel)
         r = num->getReal();
     }
@@ -116,13 +103,14 @@ bool SigConstant::setRCS(const base::Number* const num)
 // Class: SigSphere
 //==============================================================================
 IMPLEMENT_SUBCLASS(SigSphere,"SigSphere")
+EMPTY_DELETEDATA(SigSphere)
 
 BEGIN_SLOTTABLE(SigSphere)
     "radius",       // 1 Radius of the sphere
 END_SLOTTABLE(SigSphere)
 
 BEGIN_SLOT_MAP(SigSphere)
-    ON_SLOT(1,setRadiusFromSlot,base::Number)
+    ON_SLOT(1, setSlotRadius, base::Number)
 END_SLOT_MAP()
 
 SigSphere::SigSphere()
@@ -143,10 +131,6 @@ void SigSphere::copyData(const SigSphere& org, const bool)
     setRadius(org.radius);
 }
 
-void SigSphere::deleteData()
-{
-}
-
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
@@ -158,18 +142,17 @@ double SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setRadiusFromSlot(base::Number* const num)
+bool SigSphere::setSlotRadius(base::Number* const num)
 {
-    bool ok = false;
-    double r = -1.0;
+    bool ok{};
+    double r{-1.0};
 
     const auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
         r = meters.convert(*d);
-    }
-    else if (num != nullptr) {
+    } else if (num != nullptr) {
         // Just a Number
         r = num->getReal();
     }
@@ -222,10 +205,10 @@ void SigPlate::deleteData()
 //------------------------------------------------------------------------------
 double SigPlate::getRCS(const Emission* const em)
 {
-    double rcs = 0.0;
+    double rcs{};
     if (em != nullptr) {
-        double lambda = em->getWavelength();
-        double area = a * b;
+        double lambda{em->getWavelength()};
+        double area{a * b};
         if (lambda > 0.0 && area > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             rcs = (4.0 * base::PI * area * area) / (lambda * lambda);
@@ -239,16 +222,15 @@ double SigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 bool SigPlate::setA(base::Number* const num)
 {
-    bool ok = false;
-    double v = -1.0;
+    bool ok{};
+    double v{-1.0};
 
     const auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
         v = meters.convert(*d);
-    }
-    else if (num != nullptr) {
+    } else if (num != nullptr) {
         // Just a Number
         v = num->getReal();
     }
@@ -263,16 +245,15 @@ bool SigPlate::setA(base::Number* const num)
 //------------------------------------------------------------------------------
 bool SigPlate::setB(base::Number* const num)
 {
-    bool ok = false;
-    double v = -1.0;
+    bool ok{};
+    double v{-1.0};
 
     const auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
         v = meters.convert(*d);
-    }
-    else if (num != nullptr) {
+    } else if (num != nullptr) {
         // Just a Number
         v = num->getReal();
     }
@@ -285,7 +266,8 @@ bool SigPlate::setB(base::Number* const num)
 //==============================================================================
 // Class: SigDihedralCR
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigDihedralCR,"SigDihedralCR")
+IMPLEMENT_SUBCLASS(SigDihedralCR, "SigDihedralCR")
+EMPTY_SLOTTABLE(SigDihedralCR)
 
 SigDihedralCR::SigDihedralCR()
 {
@@ -313,12 +295,12 @@ void SigDihedralCR::deleteData()
 //------------------------------------------------------------------------------
 double SigDihedralCR::getRCS(const Emission* const em)
 {
-    double rcs = 0.0;
+    double rcs{};
     if (em != nullptr) {
-        const double lambda = em->getWavelength();
+        const double lambda{em->getWavelength()};
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            const double a = getA();
+            const double a{getA()};
             rcs = (8.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
@@ -329,7 +311,10 @@ double SigDihedralCR::getRCS(const Emission* const em)
 //==============================================================================
 // Class: SigTrihedralCR
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigTrihedralCR,"SigTrihedralCR")
+IMPLEMENT_SUBCLASS(SigTrihedralCR, "SigTrihedralCR")
+EMPTY_SLOTTABLE(SigTrihedralCR)
+EMPTY_DELETEDATA(SigTrihedralCR)
+EMPTY_COPYDATA(SigTrihedralCR)
 
 SigTrihedralCR::SigTrihedralCR()
 {
@@ -341,26 +326,17 @@ SigTrihedralCR::SigTrihedralCR(const double a) : SigDihedralCR(a)
     STANDARD_CONSTRUCTOR()
 }
 
-void SigTrihedralCR::copyData(const SigTrihedralCR& org, const bool)
-{
-    BaseClass::copyData(org);
-}
-
-void SigTrihedralCR::deleteData()
-{
-}
-
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
 double SigTrihedralCR::getRCS(const Emission* const em)
 {
-    double rcs = 0.0;
+    double rcs{};
     if (em != nullptr) {
-        const double lambda = em->getWavelength();
+        const double lambda{em->getWavelength()};
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            const double a = getA();
+            const double a{getA()};
             rcs = (12.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
@@ -370,20 +346,14 @@ double SigTrihedralCR::getRCS(const Emission* const em)
 //==============================================================================
 // Class: SigSwitch
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SigSwitch,"SigSwitch")
+IMPLEMENT_SUBCLASS(SigSwitch, "SigSwitch")
+EMPTY_SLOTTABLE(SigSwitch)
+EMPTY_DELETEDATA(SigSwitch)
+EMPTY_COPYDATA(SigSwitch)
 
 SigSwitch::SigSwitch()
 {
    STANDARD_CONSTRUCTOR()
-}
-
-void SigSwitch::copyData(const SigSwitch& org, const bool)
-{
-   BaseClass::copyData(org);
-}
-
-void SigSwitch::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -391,18 +361,18 @@ void SigSwitch::deleteData()
 //------------------------------------------------------------------------------
 double SigSwitch::getRCS(const Emission* const em)
 {
-   double rcs = 0.0;
+   double rcs{};
 
    // Find our ownship player ...
-   const Player* ownship = static_cast<const Player*>(findContainerByType(typeid(Player)));
+   const Player* ownship{static_cast<const Player*>(findContainerByType(typeid(Player)))};
    if (ownship != nullptr) {
 
       // get our ownship's camouflage type
-      unsigned int camouflage = ownship->getCamouflageType();
+      unsigned int camouflage{ownship->getCamouflageType()};
       camouflage++; // our components are one based
 
       // find a RfSignature with this index
-      base::Pair* pair = findByIndex(camouflage);
+      base::Pair* pair{findByIndex(camouflage)};
       if (pair != nullptr) {
          const auto sig = dynamic_cast<RfSignature*>( pair->object() );
          if (sig != nullptr) {
@@ -413,9 +383,7 @@ double SigSwitch::getRCS(const Emission* const em)
 
          }
       }
-
    }
-
    return rcs;
 }
 
@@ -423,7 +391,7 @@ double SigSwitch::getRCS(const Emission* const em)
 //==============================================================================
 // Class: SigAzEl
 //==============================================================================
-IMPLEMENT_SUBCLASS(SigAzEl,"SigAzEl")
+IMPLEMENT_SUBCLASS(SigAzEl, "SigAzEl")
 
 BEGIN_SLOTTABLE(SigAzEl)
     "table",            // 1: Table of RCS by target Az/El angles  (base::Table2)
@@ -480,12 +448,12 @@ void SigAzEl::deleteData()
 //------------------------------------------------------------------------------
 double SigAzEl::getRCS(const Emission* const em)
 {
-   double rcs = 0.0;
+   double rcs{};
    if (em != nullptr && tbl != nullptr) {
 
       // angle of arrival (radians)
-      double iv1 = em->getAzimuthAoi();
-      double iv2 = em->getElevationAoi();
+      double iv1{em->getAzimuthAoi()};
+      double iv2{em->getElevationAoi()};
 
       // If the table's independent variable's order is swapped: (El, Az)
       if (isOrderSwapped()) {
@@ -514,7 +482,7 @@ double SigAzEl::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 bool SigAzEl::isTableValid() const
 {
-   bool ok = false;
+   bool ok{};
    if (tbl != nullptr) {
       ok = tbl->isValid();
    }
@@ -550,7 +518,7 @@ bool SigAzEl::setDecibel(const bool flg)
 // Sets the signature table
 bool SigAzEl::setSlotTable(const base::Table2* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       if (tbl != nullptr) tbl->unref();
       msg->ref();
@@ -562,7 +530,7 @@ bool SigAzEl::setSlotTable(const base::Table2* const msg)
 
 bool SigAzEl::setSlotSwapOrder(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setSwapOrder( msg->getBoolean() );
    }
@@ -571,7 +539,7 @@ bool SigAzEl::setSlotSwapOrder(const base::Number* const msg)
 
 bool SigAzEl::setSlotInDegrees(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setInDegrees( msg->getBoolean() );
    }
@@ -580,7 +548,7 @@ bool SigAzEl::setSlotInDegrees(const base::Number* const msg)
 
 bool SigAzEl::setSlotDecibel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setDecibel( msg->getBoolean() );
    }

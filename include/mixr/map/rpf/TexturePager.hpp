@@ -60,13 +60,13 @@ public:
 
     // Set functions
     virtual void setSize(int tableSize = 9);
-    virtual void setMap(CadrgMap* newMap);
-    virtual void setToc(CadrgTocEntry* x);
+    virtual void setMap(CadrgMap*);
+    virtual void setToc(CadrgTocEntry*);
 
     // Get functions
-    TextureTable& getTable() { return table; }
-    CadrgTocEntry* getToc()     { return toc; }
-    const CadrgTocEntry* getToc() const { return toc; }
+    TextureTable& getTable()                  { return table; }
+    CadrgTocEntry* getToc()                   { return toc; }
+    const CadrgTocEntry* getToc() const       { return toc; }
 
     // Texture table operations
     void updateTextures(const int tRow, const int tCol);

@@ -52,32 +52,6 @@ namespace graphics {
 //  void setFocusSlavedToSubpage(bool f)
 //    Sets focusSlavedToSubpage to f.
 //
-// macro slottable functions
-//  bool setPage(Identifier* const pobj)
-//    Sets the page to pobj and returns true if successful.
-//
-//  bool setSubpageStream (PairStream* psobj)
-//    Sets the subpage stream to psobj and returns true if successful.
-//
-//  bool setSubpageSingle (Page* pobj)
-//    Sets the subpage single to pobj and returns true if successful.
-//
-//  bool setPagingEvent(PairStream* peobj)
-//    Sets the paging event to peobj and returns true if successful.
-//
-//  bool drawSubpageFirst(Number* spfobj)
-//    Set drawSubpageFirst (boolean) then return true if successful.
-//
-//  bool setSlotFocusSlavedToSubpage(Number* spfobj)
-//    Set focusSlavedToSubpage (boolean) and return true if successful.
-//
-// macro event handler functions
-//  bool onEntry()
-//    Returns true. (Function Not Implemented.)
-//
-//  bool onExit()
-//    Returns true. (Function Not Implemented.)
-//
 //  bool onButtonHit(String* obhobj)
 //    Handles the button hit as a page change event.
 //
@@ -164,17 +138,17 @@ private:
    const Page* caller {};                    // Calling page
 
    // Subpage Stack
-   static const int SUBPAGE_STACK_SIZE = 50;
+   static const int SUBPAGE_STACK_SIZE {50};
    std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
    int subpageSP {SUBPAGE_STACK_SIZE};       // Stack pointer
 
 private:
    // slot table helper methods
-   bool setPage(const base::Identifier* const);
-   bool setSubpageStream (base::PairStream* const);
-   bool setSubpageSingle (Page* const);
-   bool setPagingEvent(base::PairStream* const);
-   bool drawSubpageFirst(const base::Number* const);
+   bool setSlotPage(const base::Identifier* const);
+   bool setSlotSubpageStream(base::PairStream* const);
+   bool setSlotSubpageSingle(Page* const);
+   bool setSlotPagingEvent(base::PairStream* const);
+   bool setSlotDrawSubpageFirst(const base::Number* const);
    bool setSlotFocusSlavedToSubpage(const base::Number* const);
 };
 

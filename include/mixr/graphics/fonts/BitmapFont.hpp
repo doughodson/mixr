@@ -45,8 +45,6 @@ public:
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     virtual void loadFont() override;
 
-    virtual bool setReverse(const base::Number* const rnumber);
-
 private:
     // Loader support functions
     GLubyte* loadTypeFace(const GLint index, const GLenum reverse);
@@ -60,6 +58,10 @@ private:
     // Default fontMap
     static const char** defaultFontMap;
     static const unsigned int defaultNumFonts;
+
+private:
+    // slot table helper methods
+    bool setSlotReverse(const base::Number* const);
 };
 
 }

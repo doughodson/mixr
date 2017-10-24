@@ -71,7 +71,6 @@ void CollisionDetect::deleteData()
    resizePoiList(0);
 }
 
-
 //------------------------------------------------------------------------------
 // Returns the current number of collisions, or zero if none
 // -- Pointers to the players that we've collided with and the distances are
@@ -79,7 +78,7 @@ void CollisionDetect::deleteData()
 //------------------------------------------------------------------------------
 unsigned int CollisionDetect::getCollisions(Player* list[], double distances[], const unsigned int arraySize)
 {
-   unsigned int n = 0;
+   unsigned int n{};
    base::lock(poiLock);
    for (unsigned int i = 0; i < maxPlayers && n < arraySize; i++) {
       if (players[i].active &&  players[i].collided) {
@@ -153,34 +152,33 @@ void CollisionDetect::updateData(const double dt)
    // Our base class methods
    BaseClass::updateData(dt);
 
-   const Player* const ownship = getOwnship();
-   WorldModel* const sim = getWorldModel();
+   const Player* const ownship{getOwnship()};
+   WorldModel* const sim{getWorldModel()};
 
    // early out checks ...
    if (ownship == nullptr || sim == nullptr || maxPlayers == 0) return;
 
    // World (ECEF) to local (NED)
-   const base::Matrixd wm = ownship->getWorldMat();
+   const base::Matrixd wm{ownship->getWorldMat()};
 
    // Local (NED) to body coordinates
-   const base::Matrixd rm = ownship->getRotMat();
+   const base::Matrixd rm{ownship->getRotMat()};
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
    // is not valid.
-   const bool usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
+   const bool usingEcefFlg{useWorld || !(ownship->isPositionVectorValid())};
 
    // Position Vector (ECEF or local gaming area NED)
    base::Vec3d ownPos;
    if (usingEcefFlg) {
       ownPos = ownship->getGeocPosition();
-   }
-   else {
+   } else {
       ownPos = ownship->getPosition();
    }
 
    // Cosine of our max FOV angle
-   const double cosMaxFovAngle = std::cos(maxAngle2Players);
+   const double cosMaxFovAngle{std::cos(maxAngle2Players)};
 
    // Mark all active POIs as unmatched ...
    for (unsigned int i = 0; i < maxPlayers; i++) {
@@ -190,27 +188,27 @@ void CollisionDetect::updateData(const double dt)
    // ---
    // Scan the player list ---
    // ---
-   base::PairStream* plist = sim->getPlayers();
+   base::PairStream* plist{sim->getPlayers()};
    if (plist != nullptr) {
 
-      base::List::Item* item = plist->getFirstItem();
-      bool finished = false;
+      base::List::Item* item{plist->getFirstItem()};
+      bool finished{};
       while ( item != nullptr && !finished ) {
 
          // Get the pointer to the target player
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Player* target = static_cast<Player*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         Player* target{static_cast<Player*>(pair->object())};
 
          // Did we complete the local only players?
          finished = localOnly && target->isNetworkedPlayer();
 
          // We should process this target if ...
-         bool processTgt =
-            !finished &&                                       // we're not finished AND
-            target != ownship &&                               // its not our ownship AND
-            target->isActive() &&                              // the target is active AND
-            target->isMajorType(playerTypes) &&                // the target is one of the selected types AND
-            (usingEcefFlg || target->isPositionVectorValid()); // we're using ECEF or the target's gaming area position is valid
+         bool processTgt {
+            !finished &&                                        // we're not finished AND
+            target != ownship &&                                // its not our ownship AND
+            target->isActive() &&                               // the target is active AND
+            target->isMajorType(playerTypes) &&                 // the target is one of the selected types AND
+            (usingEcefFlg || target->isPositionVectorValid())}; // we're using ECEF or the target's gaming area position is valid
 
          if ( processTgt ) {
 
@@ -218,19 +216,18 @@ void CollisionDetect::updateData(const double dt)
             base::Vec3d tgtPos;
             if (usingEcefFlg) {
                tgtPos = target->getGeocPosition();
-            }
-            else {
+            } else {
                tgtPos = target->getPosition();
             }
 
             // Target Line-Of-Sight (LOS) vector
-            base::Vec3d los = (tgtPos - ownPos);
+            base::Vec3d los{tgtPos - ownPos};
 
             // Normalized and compute length:
-            const double range = los.normalize();
+            const double range{los.normalize()};
 
             // In-range check; but only if max range is greater than zero
-            bool inRange = (maxRange2Players == 0.0);
+            bool inRange{maxRange2Players == 0.0};
             if ( !inRange ) {
                inRange = range <= maxRange2Players;
             }
@@ -239,18 +236,18 @@ void CollisionDetect::updateData(const double dt)
 
                // Field of View (FOV) check; but only if the max FOV angle is
                // greater than zero
-               bool inFov = (maxAngle2Players == 0.0);
+               bool inFov{maxAngle2Players == 0.0};
                if ( !inFov ) {
 
                   // Transform the LOS vector to local tangent plane NED
-                  base::Vec3d losNED = los;
+                  base::Vec3d losNED{los};
                   if (usingEcefFlg) {
                      // LOS vector: ECEF to NED
                      losNED = wm * los;
                   }
 
                   // Transform the LOS vector from NED to body coordinates
-                  base::Vec3d losBody = rm * losNED;
+                  base::Vec3d losBody{rm * losNED};
 
                   // It's within our max FOV angle when the X component is
                   // greater than the cosine of the max FOV angle.
@@ -300,7 +297,7 @@ void CollisionDetect::updateData(const double dt)
 //------------------------------------------------------------------------------
 void CollisionDetect::process(const double dt)
 {
-   Player* const ownship = getOwnship();
+   Player* const ownship{getOwnship()};
 
    // early out checks ...
    if (ownship == nullptr || maxPlayers == 0 || dt == 0.0) return;
@@ -308,7 +305,7 @@ void CollisionDetect::process(const double dt)
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
    // is not valid.
-   bool usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
+   const bool usingEcefFlg{useWorld || !(ownship->isPositionVectorValid())};
 
    // Ownship position and velocity vectors
    //   (ECEF or local gaming area NED)
@@ -317,14 +314,13 @@ void CollisionDetect::process(const double dt)
    if (usingEcefFlg) {
       ownPos = ownship->getGeocPosition();
       ownVel = ownship->getGeocVelocity();
-   }
-   else {
+   } else {
       ownPos = ownship->getPosition();
       ownVel = ownship->getVelocity();
    }
 
    // Collision range squared
-   const double cr2 = collisionRange * collisionRange;
+   const double cr2{collisionRange * collisionRange};
 
    base::lock(poiLock);
 
@@ -334,7 +330,7 @@ void CollisionDetect::process(const double dt)
    for (unsigned int i = 0; i < maxPlayers; i++) {
 
       // If this player active  ...
-      Player* const tgt = players[i].player;
+      Player* const tgt{players[i].player};
       if ( players[i].active && tgt != nullptr && tgt->isActive() ) {
 
          // Target position and velocity vectors
@@ -344,28 +340,27 @@ void CollisionDetect::process(const double dt)
          if (usingEcefFlg) {
             tgtPos = tgt->getGeocPosition();
             tgtVel = tgt->getGeocVelocity();
-         }
-         else {
+         } else {
             tgtPos = tgt->getPosition();
             tgtVel = tgt->getVelocity();
          }
 
          // Ownship to target Line-Of-Sight (LOS) vector
-         base::Vec3d los = (tgtPos - ownPos);
+         base::Vec3d los{tgtPos - ownPos};
 
          // Current and previous target range
-         const double tgtRng = los.length();
-         const double tgtRng0 = players[i].range;
+         const double tgtRng{los.length()};
+         const double tgtRng0{players[i].range};
 
          // Current and previous ranging rate
-         const double rngRate = (tgtRng - tgtRng0)/dt;
-         const double rngRate0 = players[i].rangeRate;
+         const double rngRate{(tgtRng - tgtRng0)/dt};
+         const double rngRate0{players[i].rangeRate};
 
          // Distance at possible collision
-         double distance = tgtRng;
+         double distance{tgtRng};
 
          // Simple check: are we within the collision range?
-         bool collision = (tgtRng <= collisionRange);
+         bool collision{tgtRng <= collisionRange};
 
          // Otherwise, if our range was decreasing, but now it's increasing
          // then compute the point of closest approach and see if it is less
@@ -374,21 +369,21 @@ void CollisionDetect::process(const double dt)
          if ( !collision && rngRate0 < 0 && rngRate >= 0 && players[i].passCnt >= 2) {
 
             // Compute the relative velocity vector.
-            base::Vec3d velRel = (tgtVel - ownVel);
+            base::Vec3d velRel{tgtVel - ownVel};
 
             // Relative velocity squared,
-            double velRelSq = velRel.length2();
+            double velRelSq{velRel.length2()};
             if (velRelSq > 0) {
 
                // LOS vector (dot) relative velocity vector
-               const double rdv = los * velRel;
+               const double rdv{los * velRel};
 
                // Interpolate back to the closest point
-               const double ndt = -rdv/velRelSq;
-               base::Vec3d closestPoint = los + (velRel*ndt);
+               const double ndt{-rdv/velRelSq};
+               base::Vec3d closestPoint{los + (velRel*ndt)};
 
                // Compute the range squared at the closest point
-               const double r2 = closestPoint.length2();
+               const double r2{closestPoint.length2()};
 
                // Did we collide at the closest point?
                if (r2 <= cr2) {
@@ -406,8 +401,7 @@ void CollisionDetect::process(const double dt)
                tgt->event(CRASH_EVENT, ownship);
                ownship->event(CRASH_EVENT, tgt);
             }
-         }
-         else {
+         } else {
             players[i].collided = false;
          }
 
@@ -448,16 +442,15 @@ void CollisionDetect::updatePoiList(Player* const target)
       // ---
       // First try to match it with an existing POI
       // ---
-      bool matched = false;
-      unsigned int idx = maxPlayers;
+      bool matched{};
+      unsigned int idx{maxPlayers};
       for (unsigned int i = 0; i < maxPlayers && !matched; i++) {
-         const Player* p = players[i].player;
+         const Player* p{players[i].player};
          if (players[i].active && p == target) {
             // Matched!
             players[i].unmatched = false;
             matched = true;
-         }
-         else if ( !players[i].active ) {
+         } else if ( !players[i].active ) {
             // Inactive slot -- to be used if we don't get a match
             idx = i;
          }
@@ -478,7 +471,6 @@ void CollisionDetect::updatePoiList(Player* const target)
       }
 
       base::unlock(poiLock);
-
    }
 }
 
@@ -533,9 +525,9 @@ void CollisionDetect::clearPoiList()
 //------------------------------------------------------------------------------
 bool CollisionDetect::setSlotCollisionRange(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double meters = base::Meters::convertStatic(*msg);
+      const double meters{base::Meters::convertStatic(*msg)};
       if (meters >= 0.0) {
          ok = setCollisionRange( meters );
       }
@@ -545,9 +537,9 @@ bool CollisionDetect::setSlotCollisionRange(const base::Distance* const msg)
 
 bool CollisionDetect::setSlotMaxPlayers(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int n = msg->getInt();
+      const int n{msg->getInt()};
       if (n >= 0) {
          ok = setMaxPlayers( static_cast<unsigned int>(n) );
       }
@@ -557,33 +549,27 @@ bool CollisionDetect::setSlotMaxPlayers(const base::Number* const msg)
 
 bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      unsigned int mask = 0;
-      const base::List::Item* item = msg->getFirstItem();
+      unsigned int mask{};
+      const base::List::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<const base::Pair*>(item->getValue());
          const auto type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
             if ( utStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
-            }
-            else if ( utStrcasecmp(*type,"ground") == 0 ) {
+            } else if ( utStrcasecmp(*type,"ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
-            }
-            else if ( utStrcasecmp(*type,"weapon") == 0 ) {
+            } else if ( utStrcasecmp(*type,"weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
-            }
-            else if ( utStrcasecmp(*type,"ship") == 0 ) {
+            } else if ( utStrcasecmp(*type,"ship") == 0 ) {
                mask = (mask | Player::SHIP);
-            }
-            else if ( utStrcasecmp(*type,"building") == 0 ) {
+            } else if ( utStrcasecmp(*type,"building") == 0 ) {
                mask = (mask | Player::BUILDING);
-            }
-            else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
+            } else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
-            }
-            else if ( utStrcasecmp(*type,"space") == 0 ) {
+            } else if ( utStrcasecmp(*type,"space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }
@@ -596,9 +582,9 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
 
 bool CollisionDetect::setSlotMaxRange2Players(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double meters = base::Meters::convertStatic(*msg);
+      const double meters{base::Meters::convertStatic(*msg)};
       if (meters >= 0.0) {
          ok = setMaxRange2Players( meters );
       }
@@ -608,9 +594,9 @@ bool CollisionDetect::setSlotMaxRange2Players(const base::Distance* const msg)
 
 bool CollisionDetect::setSlotMaxAngle2Players(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double radians = base::Radians::convertStatic(*msg);
+      const double radians{base::Radians::convertStatic(*msg)};
       if (radians >= 0.0) {
          ok = setMaxAngle2Players( radians );
       }
@@ -620,7 +606,7 @@ bool CollisionDetect::setSlotMaxAngle2Players(const base::Angle* const msg)
 
 bool CollisionDetect::setSlotUseWorldCoordinates(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setUseWorld( msg->getBoolean() );
    }
@@ -629,7 +615,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const base::Number* const msg)
 
 bool CollisionDetect::setSlotLocalOnly(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setLocalOnly( msg->getBoolean() );
    }
@@ -638,7 +624,7 @@ bool CollisionDetect::setSlotLocalOnly(const base::Number* const msg)
 
 bool CollisionDetect::setSlotSendCrashEvents(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setSendCrashEventsEnabled( msg->getBoolean() );
    }

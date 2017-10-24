@@ -29,10 +29,6 @@ public:
    virtual void closeConnections();          // close the network connection
 
 protected:
-   // Slot functions
-   virtual bool setSlotNetwork(base::NetHandler* const msg);
-   virtual bool setSlotNoWait(base::Number* const msg);
-
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
@@ -40,6 +36,11 @@ private:
     bool networkInitialized {};    // Network has been initialized
     bool networkInitFailed {};     // Network initialization has failed
     bool noWaitFlag {};            // No wait (unblocked) I/O flag
+
+private:
+   // slot table helper methods
+   bool setSlotNetwork(base::NetHandler* const);
+   bool setSlotNoWait(base::Number* const);
 };
 
 }

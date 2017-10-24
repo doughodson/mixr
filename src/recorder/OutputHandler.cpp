@@ -41,11 +41,11 @@ void OutputHandler::deleteData()
 bool OutputHandler::shutdownNotification()
 {
    // Pass the shutdown notification to our subcomponent recorders
-   base::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
+         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+         OutputHandler* sc{static_cast<OutputHandler*>(pair->object())};
          sc->event(SHUTDOWN_EVENT);
       }
       subcomponents->unref();
@@ -70,12 +70,12 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 
       // Next, pass the data record to our subcomponent OutputHandlers
       // for further processing
-      base::PairStream* subcomponents = getComponents();
+      base::PairStream* subcomponents{getComponents()};
       if (subcomponents != nullptr) {
          for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            OutputHandler* sc = static_cast<OutputHandler*>(pair->object());
+            base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+            OutputHandler* sc{static_cast<OutputHandler*>(pair->object())};
 
             sc->processRecord(dataRecord);
          }
@@ -108,7 +108,7 @@ void OutputHandler::processQueue()
 {
    // Get the first record from the queue
    base::lock( semaphore );
-   const DataRecordHandle* dataRecord = static_cast<const DataRecordHandle*>(queue.get());
+   const DataRecordHandle* dataRecord{static_cast<const DataRecordHandle*>(queue.get())};
    base::unlock( semaphore );
 
    // While we have records ...
@@ -138,7 +138,7 @@ void OutputHandler::processRecordImp(const DataRecordHandle* const)
 //------------------------------------------------------------------------------
 bool OutputHandler::isDataTypeEnabled(const DataRecordHandle* const handle) const
 {
-   unsigned int id = handle->getRecord()->id();
+   unsigned int id{handle->getRecord()->id()};
    return isDataEnabled(id);
 }
 
@@ -153,7 +153,7 @@ void OutputHandler::processComponents(
       base::Component* const remove
    )
 {
-   BaseClass::processComponents(list,typeid(OutputHandler),add,remove);
+   BaseClass::processComponents(list, typeid(OutputHandler), add, remove);
 }
 
 }

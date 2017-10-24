@@ -23,8 +23,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/TcpHandler.hpp"
@@ -73,7 +73,7 @@ bool TcpHandler::init()
     // ---
     // Init the base class
     // ---
-    bool success = BaseClass::init();
+    bool success{BaseClass::init()};
     if (!success) return false;
 
     // ---
@@ -128,12 +128,12 @@ bool TcpHandler::sendData(const char* const packet, const int size)
 
     if (socketNum == INVALID_SOCKET) return false;
 
-    int result = ::send(socketNum, packet, size, 0);
+    long result{::send(socketNum, packet, size, 0)};
     if (result == SOCKET_ERROR) {
         connected = false;
         connectionTerminated = true;
 #if defined(WIN32)
-        int err = WSAGetLastError();
+        int err{WSAGetLastError()};
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "TcpHandler::sendData(): sendto error: " << err << " hex=0x" << std::hex << err << std::dec << std::endl;
         }
@@ -159,7 +159,7 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    unsigned int n {}; // default return value (no data)
 
    // Try to receive the data
-   int result = ::recv(socketNum, packet, maxSize, 0);
+   long result{::recv(socketNum, packet, maxSize, 0)};
 
    // Did we received any data?
    if (result > 0) {

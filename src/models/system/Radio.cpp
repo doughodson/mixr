@@ -1,18 +1,13 @@
 
 #include "mixr/models/system/Radio.hpp"
 
-#include "mixr/models/player/Player.hpp"
-#include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/String.hpp"
-#include "mixr/base/units/Decibel.hpp"
+
 #include "mixr/base/units/Frequencies.hpp"
-#include "mixr/base/units/Powers.hpp"
 
 #include <cmath>
 
@@ -30,11 +25,11 @@ BEGIN_SLOTTABLE(Radio)
 END_SLOTTABLE(Radio)
 
 BEGIN_SLOT_MAP(Radio)
-    ON_SLOT(1, setSlotNumChannels,  base::Number)
-    ON_SLOT(2, setSlotChannels,     base::PairStream)
-    ON_SLOT(3, setSlotChannel,      base::Number)
+    ON_SLOT(1, setSlotNumChannels,    base::Number)
+    ON_SLOT(2, setSlotChannels,       base::PairStream)
+    ON_SLOT(3, setSlotChannel,        base::Number)
     ON_SLOT(4, setSlotMaxDetectRange, base::Number)
-    ON_SLOT(5, setSlotRadioId,      base::Number)
+    ON_SLOT(5, setSlotRadioId,        base::Number)
 END_SLOT_MAP()
 
 Radio::Radio()
@@ -50,7 +45,7 @@ void Radio::copyData(const Radio& org, const bool)
    setNumberOfChannels(org.numChan);
 
    // Copy the channel frequencies
-   unsigned short numChannels = getNumberOfChannels();
+   const unsigned short numChannels{getNumberOfChannels()};
    for (unsigned short chan = 1; chan <= numChannels; chan++) {
       setChannelFrequency( chan, org.getChannelFrequency(chan) );
    }
@@ -100,8 +95,8 @@ unsigned short Radio::getNumberOfChannels() const
 // Returns -1 if the channel is invalid
 double Radio::getChannelFrequency(const unsigned short chan) const
 {
-   unsigned short nc = getNumberOfChannels();
-   double freq = -1;
+   const unsigned short nc{getNumberOfChannels()};
+   double freq{-1.0};
    if (chanFreqTbl != nullptr && nc > 0 && chan > 0 && chan <= nc) {
       freq = chanFreqTbl[chan-1];
    }
@@ -128,14 +123,14 @@ unsigned short Radio::getRadioId() const
 // Sets the radio's channel number and changes the radio frequency
 bool Radio::setChannel(const unsigned short chan)
 {
-   bool ok = false;
+   bool ok{};
 
-   unsigned short nc = getNumberOfChannels();
+   unsigned short nc{getNumberOfChannels()};
    if (nc > 0 && chan <= nc) {
 
       // Set a temporary channel number, c1, which defaults to the
       // current channel number
-      unsigned short c1 = chan;
+      unsigned short c1{chan};
       if (chan == 0) c1 = channel;
 
       // If the temp channel number is greater than zero then try
@@ -154,9 +149,9 @@ bool Radio::setChannel(const unsigned short chan)
 // Set a channel's frequency; channel numbers [ 1 .. getNumberOfChannels() ]
 bool Radio::setChannelFrequency(const unsigned short chan, const double freq)
 {
-   bool ok = false;
+   bool ok{};
 
-   unsigned short nc = getNumberOfChannels();
+   const unsigned short nc{getNumberOfChannels()};
    if (chanFreqTbl != nullptr && nc > 0 && chan > 0 && chan <= nc) {
       chanFreqTbl[chan-1] = freq;
       ok = true;
@@ -168,7 +163,7 @@ bool Radio::setChannelFrequency(const unsigned short chan, const double freq)
 // Sets the number of channels; previous channels are lost!
 bool Radio::setNumberOfChannels(const unsigned short n)
 {
-   bool ok = true;
+   bool ok{true};
 
    // When 'n' is zero
    if (n == 0) {
@@ -219,7 +214,7 @@ void Radio::receive(const double dt)
    BaseClass::receive(dt);
 
    // Receiver losses
-   double noise = getRfRecvNoise();
+   const double noise{getRfRecvNoise()};
 
    // ---
    // Process Emissions
@@ -239,10 +234,9 @@ void Radio::receive(const double dt)
 
    while (em != nullptr) {
 
-
       // Signal/Noise  (Equation 2-9)
-      double sn = signal / noise;
-      double snDbl = 10.0 * std::log10(sn);
+      double sn{signal / noise};
+      double snDbl{10.0 * std::log10(sn)};
 
       // Is S/N above receiver threshold?
       if ( snDbl >= getRfThreshold() ) {
@@ -278,9 +272,9 @@ void Radio::receivedEmissionReport(Emission* const)
 
 bool Radio::setSlotNumChannels(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setNumberOfChannels( static_cast<unsigned short>(v) );
       }
@@ -293,27 +287,26 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
    // ---
    // Quick out if the number of channels hasn't been set.
    // ---
-   unsigned short nc = getNumberOfChannels();
+   const unsigned short nc{getNumberOfChannels()};
    if (nc == 0 || msg == nullptr) {
       std::cerr << "Radio::setSlotChannels() Number of channels is not set!" << std::endl;
       return false;
    }
 
    {
-      unsigned short chan = 1;
-      const base::List::Item* item = msg->getFirstItem();
+      unsigned short chan{1};
+      const base::List::Item* item{msg->getFirstItem()};
       while (chan <= nc && item != nullptr) {
 
-         const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
-         const base::Frequency* p = static_cast<const base::Frequency*>(pair->object());
+         const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
+         const base::Frequency* p{static_cast<const base::Frequency*>(pair->object())};
          if (p != nullptr) {
-            double freq = base::Hertz::convertStatic( *p );
-            bool ok = setChannelFrequency(chan, freq);
+            const double freq{base::Hertz::convertStatic( *p )};
+            const bool ok{setChannelFrequency(chan, freq)};
             if (!ok) {
                std::cerr << "Radio::setSlotChannels() Error setting frequency for channel " << chan << "; with freq = " << *p << std::endl;
             }
-         }
-         else {
+         } else {
             std::cerr << "Radio::setSlotChannels() channel# " << chan << " is not of type Frequency" << std::endl;
          }
 
@@ -328,9 +321,9 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
 // channel: Channel the radio is set to
 bool Radio::setSlotChannel(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setChannel( static_cast<unsigned short>(v) );
       }
@@ -341,7 +334,7 @@ bool Radio::setSlotChannel(base::Number* const msg)
 // maxDetectRange: maximum detection capability (NM)
 bool Radio::setSlotMaxDetectRange(base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       maxDetectRange = num->getReal();
       ok = true;
@@ -352,107 +345,12 @@ bool Radio::setSlotMaxDetectRange(base::Number* const num)
 // radio ID: the radio id used for DIS
 bool Radio::setSlotRadioId(base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
-      const unsigned short num2 = static_cast<unsigned short>(num->getInt());
+      const unsigned short num2{static_cast<unsigned short>(num->getInt())};
       ok = setRadioId(num2);
    }
    return ok;
-}
-
-//==============================================================================
-// Class: CommRadio
-//==============================================================================
-IMPLEMENT_SUBCLASS(CommRadio, "CommRadio")
-EMPTY_SLOTTABLE(CommRadio)
-
-CommRadio::CommRadio()
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-void CommRadio::copyData(const CommRadio& org, const bool)
-{
-   BaseClass::copyData(org);
-
-   // No datalink yet
-   setDatalink(nullptr);
-}
-
-void CommRadio::deleteData()
-{
-   setDatalink(nullptr);
-}
-
-//------------------------------------------------------------------------------
-// get functions
-//------------------------------------------------------------------------------
-
-Datalink* CommRadio::getDatalink()
-{
-   return datalink;
-}
-
-const Datalink* CommRadio::getDatalink() const
-{
-   return datalink;
-}
-
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
-bool CommRadio::setDatalink(Datalink* const p)
-{
-   datalink = p;
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// transmitDataMessage() -- send a data message emission;
-// returns true if the data emission was sent.
-//------------------------------------------------------------------------------
-bool CommRadio::transmitDataMessage(base::Object* const msg)
-{
-   bool sent = false;
-   // Transmitting, scanning and have an antenna?
-   if(getOwnship() == nullptr) {
-      if (isMessageEnabled(MSG_DEBUG)) {
-         std::cout << "CommRadio ownship == nullptr!" << std::endl;
-      }
-      return sent;
-   }
-
-   if (msg != nullptr && isTransmitterEnabled() && getAntenna() != nullptr) {
-      // Send the emission to the other player
-      const auto em = new Emission();
-      em->setDataMessage(msg);
-      em->setFrequency(getFrequency());
-      em->setBandwidth(getBandwidth());
-      em->setPower(getPeakPower());
-      em->setTransmitLoss(getRfTransmitLoss());
-      em->setMaxRangeNM(getMaxDetectRange());
-      em->setTransmitter(this);
-      em->setReturnRequest(false);
-      getAntenna()->rfTransmit(em);
-      em->unref();
-      sent = true;
-   }
-   return sent;
-}
-
-//------------------------------------------------------------------------------
-// receivedEmissionReport() -- Datalink messages --
-//  Handle reports of valid emission reports (signal/noise ratio above threshold).
-//------------------------------------------------------------------------------
-void CommRadio::receivedEmissionReport(Emission* const em)
-{
-   if (em != nullptr && datalink != nullptr) {
-      // If we have a datalink and this emission contains a message, then it
-      // must be a datalink message.
-      base::Object* msg = em->getDataMessage();
-      if (msg != nullptr) datalink->event(DATALINK_MESSAGE, msg);
-   }
 }
 
 }

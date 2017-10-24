@@ -99,9 +99,6 @@ protected:
 
    virtual bool shutdownNotification() override;
 
-   virtual bool setSlotID(const base::Number* const msg);
-   virtual bool setSlotInitMode(base::String* const msg);
-
    Mode mode {ACTIVE};           // Player mode (see above)
    AbstractNib* nib {};          // Network Interface Block (ref()'d)
 
@@ -120,6 +117,11 @@ private:
    // outgoing network support data
    AbstractNib** nibList {};      // Pointer to a list of outgoing NIBs
    bool enableNetOutput {true};   // Allow output to the network
+
+private:
+   // slot table helper methods
+   bool setSlotID(const base::Number* const);
+   bool setSlotInitMode(base::String* const);
 };
 
 #include "mixr/simulation/AbstractPlayer.inl"

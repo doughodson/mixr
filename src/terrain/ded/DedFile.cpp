@@ -20,21 +20,15 @@ EMPTY_SLOTTABLE(DedFile)
 // MultiGen structure: standard file header block (128 bytes)
 //------------------------------------------------------------------------------
 struct DedStdHdr {
-   uint32_t len;        // size of header block in byte
-   char id[4];          // file identification code "SSYS"
-   char part[8];        // software part no.
-   char rev[8];         // software revision no.
-   char create[26];     // creation date/time
-   char update[26];     // last update date/time
-   char spare[52];      // spare
+   uint32_t len{};        // size of header block in byte
+   char id[4]{};          // file identification code "SSYS"
+   char part[8]{};        // software part no.
+   char rev[8]{};         // software revision no.
+   char create[26]{};     // creation date/time
+   char update[26]{};     // last update date/time
+   char spare[52]{};      // spare
 
-   DedStdHdr() {
-      len = 0;
-      for (unsigned int i = 0; i <  4; i++) { id[i]     = '0'; }
-      for (unsigned int i = 0; i <  8; i++) { part[i]   = '0'; rev[i]    = '0'; }
-      for (unsigned int i = 0; i < 26; i++) { create[i] = '0'; update[i] = '0'; }
-      for (unsigned int i = 0; i < 52; i++) { spare[i]  = '0'; }
-   }
+   DedStdHdr() = default;
 
    DedStdHdr(const DedStdHdr& org) {
       len = org.len;
@@ -49,16 +43,11 @@ struct DedStdHdr {
 // MultiGen structure: Statistics record (32 bytes)
 //------------------------------------------------------------------------------
 struct DedStats {
-   uint32_t  ncell;        // no. of cell in this file
-   int16_t minz, maxz;     // min/max z of the entire file
-   char  spare[24];        // spare
+   uint32_t  ncell{};        // no. of cell in this file
+   int16_t minz, maxz{};     // min/max z of the entire file
+   char  spare[24]{};        // spare
 
-   DedStats() {
-      ncell = 0;
-      minz = 0;
-      maxz = 0;
-      for (unsigned int i = 0; i < 24; i++) { spare[i]  = '0'; }
-   }
+   DedStats() = default;
 
    DedStats(const DedStats& org) {
       ncell = org.ncell;
@@ -72,24 +61,13 @@ struct DedStats {
 // MultiGen structure: Header for each DMA cell on disk (40 bytes)
 //------------------------------------------------------------------------------
 struct DedCellHdr {
-   float latstart, latend;    // lat start end
-   float longstart, longend;  // long start end
-   float deltalat, deltalong; // post spacing in seconds * 10.0
-   float nptlat, nptlong;     // no. of points in lat or long
-   float deltax, deltay;      // actual distance between points in feet
+   float latstart{}, latend{};    // lat start end
+   float longstart{}, longend{};  // long start end
+   float deltalat{}, deltalong{}; // post spacing in seconds * 10.0
+   float nptlat{}, nptlong{};     // no. of points in lat or long
+   float deltax{}, deltay{};      // actual distance between points in feet
 
-   DedCellHdr() {
-      latstart  = 0.0;
-      latend    = 0.0;
-      longstart = 0.0;
-      longend   = 0.0;
-      deltalat  = 0.0;
-      deltalong = 0.0;
-      nptlat    = 0.0;
-      nptlong   = 0.0;
-      deltax    = 0.0;
-      deltay    = 0.0;
-   }
+   DedCellHdr() = default;
 
    DedCellHdr(const DedCellHdr& org) {
       latstart  = org.latstart;
@@ -108,13 +86,13 @@ struct DedCellHdr {
 //------------------------------------------------------------------------------
 // Some parameters
 //------------------------------------------------------------------------------
-static const double M_TO_FT      = 3.28084;
-static const double MIN_TO_FT    = 6076.0/60.0;       // 1 minute = 6076 ft based on nautical def.
-static const double DEG_TO_RAD   = 0.017453292;
-static const char* const SS_STDID = "SSYS";
-static const char* const PARTNO  = "DMA1";
-static const char* const REVNO   = "V1.0";
-static const double NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
+static const double M_TO_FT             {3.28084};
+static const double MIN_TO_FT           {6076.0/60.0};    // 1 minute = 6076 ft based on nautical def.
+static const double DEG_TO_RAD          {0.017453292};
+static const char* const SS_STDID       {"SSYS"};
+static const char* const PARTNO         {"DMA1"};
+static const char* const REVNO          {"V1.0"};
+static const double NUM_SECS_PER_DEG_10 {36000.0};        // # seconds in a degree * 10.0
 
 DedFile::DedFile()
 {
@@ -175,7 +153,7 @@ bool DedFile::isDataLoaded() const
 bool DedFile::loadData()
 {
    std::string filename;
-   const char* p = getPathname();
+   const char* p {getPathname()};
    if (p != nullptr) {
       filename += p;
       filename += '/';
@@ -195,7 +173,7 @@ bool DedFile::loadData()
    }
 
    // Input the file headers */
-   bool ok = getFileHeaders(in);
+   bool ok {getFileHeaders(in)};
 
    if ( ok ) {
       // Read in the data
@@ -220,7 +198,7 @@ bool DedFile::getFileHeaders( std::istream& in )
    in.read( reinterpret_cast<char*>(stdhdr), sizeof(DedStdHdr) );
    if (in.fail() || in.gcount() < sizeof(DedStdHdr)) {
       if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "DedFile::getFileHeaders: invalid standard header.";
+         std::cerr << "DedFile::getFileHeaders: invalid standard header.";
       }
       ok = false;
    }
@@ -236,7 +214,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
       // Check ID of input file
       if ( std::strncmp(stdhdr->id,SS_STDID,4) != 0 ) {
-         char id[5];
+         char id[5]{};
          base::utStrncpy(id,5,stdhdr->id,4);
          id[4] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
@@ -250,7 +228,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
       // Check Part# of input file
       if ( std::strncmp(stdhdr->part,PARTNO,8) != 0 ) {
-         char part[10];
+         char part[10]{};
          base::utStrncpy(part,10,stdhdr->part,8);
          part[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
@@ -263,14 +241,14 @@ bool DedFile::getFileHeaders( std::istream& in )
       }
 
       if ( std::strncmp(stdhdr->rev,REVNO,8) != 0 ) {    // Check Rev of input file
-         char rev[10];
+         char rev[10]{};
          base::utStrncpy(rev,10,stdhdr->rev,8);
          rev[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "DedFile::getFileHeaders: invalid revision number:";
-         std::cerr << " should be " << REVNO << "; ";
-         std::cerr << " is " << rev;
-         std::cerr << std::endl;
+            std::cerr << "DedFile::getFileHeaders: invalid revision number:";
+            std::cerr << " should be " << REVNO << "; ";
+            std::cerr << " is " << rev;
+            std::cerr << std::endl;
          }
          ok = false;
       }
@@ -281,7 +259,7 @@ bool DedFile::getFileHeaders( std::istream& in )
          in.read( reinterpret_cast<char*>(fstat), sizeof(DedStats) );
          if (in.fail() || in.gcount() < sizeof(DedStats)) {
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "DedFile::getFileHeaders: invalid statistics header.";
+               std::cerr << "DedFile::getFileHeaders: invalid statistics header.";
             }
             ok = false;
          }
@@ -289,8 +267,8 @@ bool DedFile::getFileHeaders( std::istream& in )
          if (ok) {
             {
                // Byte-swap
-               uint32_t lTemp = 0;
-               int16_t sTemp = 0;
+               uint32_t lTemp{};
+               int16_t sTemp{};
                base::NetHandler::fromNetOrder(&lTemp, fstat->ncell);
                fstat->ncell = lTemp;
                base::NetHandler::fromNetOrder(&sTemp, fstat->maxz);
@@ -327,7 +305,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
                // Byte-swap
                if (ok) {
-                  float fTemp = 0.0;
+                  float fTemp{};
                   base::NetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
                   cells[i]->latstart = fTemp;
                   base::NetHandler::fromNetOrder(&fTemp, cells[i]->latend);
@@ -379,7 +357,7 @@ bool DedFile::getFileHeaders( std::istream& in )
                   setLongitudeNE( cells[0]->longstart );
                   setLongitudeSW( cells[0]->longend );
                }
-               nptlat = static_cast<unsigned int>( cells[0]->nptlat  );
+               nptlat = static_cast<unsigned int>( cells[0]->nptlat );
                nptlong = static_cast<unsigned int>( cells[0]->nptlong );
                latSpacing = cells[0]->deltalat  / NUM_SECS_PER_DEG_10;
                lonSpacing = cells[0]->deltalong / NUM_SECS_PER_DEG_10;
@@ -401,11 +379,11 @@ bool DedFile::getFileHeaders( std::istream& in )
 //------------------------------------------------------------------------------
 bool DedFile::getData( std::istream& in )
 {
-   bool ok = true;
+   bool ok{true};
 
    // Get number of rows (n) and columns (m) */
-   const unsigned int N = nptlat;  // Number of elevations to be read per column
-   const unsigned int M = nptlong; // Number of columns
+   const unsigned int N {nptlat};  // Number of elevations to be read per column
+   const unsigned int M {nptlong}; // Number of columns
 
    if (N > 0 && M > 0) {
 
@@ -416,11 +394,11 @@ bool DedFile::getData( std::istream& in )
       }
 
       // reset min/max elevations
-      double minElev0 = 99999.0;
-      double maxElev0 = 0.0;
+      double minElev0 {99999.0};
+      double maxElev0 {0.0};
 
       // Read in the data
-      const int NUM_BYTES_IN_COL = sizeof(short) * N;
+      const int NUM_BYTES_IN_COL {static_cast<int>(sizeof(short) * N)};
       for (unsigned int i = 0; i < M && ok; i++) {
 
          // Read the data
@@ -438,7 +416,7 @@ bool DedFile::getData( std::istream& in )
          }
          else {
             // Successful: Byte-swap
-            short sTemp = 0;
+            short sTemp{};
             for (unsigned int j = 0; j < N; j++ ) {
                base::NetHandler::fromNetOrder(&sTemp, columns[i][j]);
                columns[i][j] = sTemp;
@@ -527,8 +505,8 @@ void DedFile::dump(std::ostream& sout) const
       for (unsigned int ix = 0; ix < static_cast<unsigned int>(cells[0]->nptlong); ix++) {
          sout << std::endl;
          sout << "ix = " << ix << std::endl << " ";
-         unsigned int i = 0;
-         const short* colm = columns[ix];
+         unsigned int i{};
+         const short* colm {columns[ix]};
          for (unsigned int iy = 0; iy < static_cast<unsigned int>(cells[0]->nptlat); iy++) {
             sout << " " << std::setw(6) << colm[iy];
             i++;

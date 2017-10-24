@@ -6,7 +6,6 @@
 
 namespace mixr {
 namespace models {
-class Player;
 
 //------------------------------------------------------------------------------
 // Class: Designator

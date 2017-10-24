@@ -90,28 +90,28 @@ const Vec4d* Color::getRGBA() const
 
 bool Color::setRed(const double value)
 {
-    bool ok = (value >= 0 && value <= 1);
+    bool ok{value >= 0 && value <= 1};
     if (ok) color[Color::RED] = value;
     return ok;
 }
 
 bool Color::setGreen(const double value)
 {
-    bool ok = (value >= 0 && value <= 1);
+    bool ok{value >= 0 && value <= 1};
     if (ok) color[Color::GREEN] = value;
     return ok;
 }
 
 bool Color::setBlue(const double value)
 {
-    bool ok = (value >= 0 && value <= 1);
+    bool ok{value >= 0 && value <= 1};
     if (ok) color[Color::BLUE] = value;
     return ok;
 }
 
 bool Color::setAlpha(const double value)
 {
-    bool ok = (value >= 0 && value <= 1);
+    bool ok{value >= 0 && value <= 1};
     if (ok) color[Color::ALPHA] = value;
     return ok;
 }

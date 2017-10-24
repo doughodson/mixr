@@ -27,9 +27,9 @@ BEGIN_SLOTTABLE(CadrgMap)
 END_SLOTTABLE(CadrgMap)
 
 BEGIN_SLOT_MAP(CadrgMap)
-    ON_SLOT(1, setSlotPathnames, base::PairStream)
+    ON_SLOT(1, setSlotPathnames,    base::PairStream)
     ON_SLOT(2, setSlotMaxTableSize, base::Number)
-    ON_SLOT(3, setSlotMapLevel, base::String)
+    ON_SLOT(3, setSlotMapLevel,     base::String)
 END_SLOT_MAP()
 
 CadrgMap::CadrgMap()

@@ -103,8 +103,8 @@ public:
    void setElevationAoi(const double a)         { iel = a; }
 
    // Sets the target's normalized AOI vector
-   void setAoiVector(const base::Vec3d& v)   { aoi = v; }
-   void setAoiVector(const base::Vec4d& v)   { aoi.set(v.x(),v.y(),v.z()); }
+   void setAoiVector(const base::Vec3d& v)      { aoi = v; }
+   void setAoiVector(const base::Vec4d& v)      { aoi.set(v.x(),v.y(),v.z()); }
 
    // ---
    // Modes and flags
@@ -144,16 +144,16 @@ public:
    const base::Object* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
-   void setGimbal(Gimbal* const t);
+   void setGimbal(Gimbal* const);
 
    // Sets the player that sent this message
-   void setOwnship(Player* const p);
+   void setOwnship(Player* const);
 
    // Sets the target player
-   void setTarget(Player* const p);
+   void setTarget(Player* const);
 
    // Sets the optional data message attached to sensor message
-   void setDataMessage(base::Object* const msg);
+   void setDataMessage(base::Object* const);
 
    // Clear data
    virtual void clear();

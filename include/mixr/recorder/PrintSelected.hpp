@@ -46,14 +46,6 @@ public:
 
    PrintSelected();
 
-   virtual bool setSlotMsgToken(const base::Number* const msg);
-   virtual bool setSlotFieldName(const base::String* const msg);
-
-   virtual bool setSlotCompareToStr(const base::String* const msg);
-   virtual bool setSlotCompareToNum(const base::Number* const msg);
-   virtual bool setSlotCompareToDbl(const base::Number* const msg);
-   virtual bool setSlotCondition(const base::String* const msg);
-   virtual bool setSlotTimeOnly(const base::Number* const msg);
    enum class Condition { EQ, LT, GT };
 
    unsigned int getMsgToken() const;
@@ -100,6 +92,16 @@ private:
    bool foundSelected {};
    bool printHeader {};
    bool timeOnly {};
+
+private:
+   // slot table helper methods
+   bool setSlotMsgToken(const base::Number* const);
+   bool setSlotFieldName(const base::String* const);
+   bool setSlotCompareToStr(const base::String* const);
+   bool setSlotCompareToNum(const base::Number* const);
+   bool setSlotCompareToDbl(const base::Number* const);
+   bool setSlotCondition(const base::String* const);
+   bool setSlotTimeOnly(const base::Number* const);
 };
 
 inline unsigned int PrintSelected::getMsgToken() const { return msgToken; }

@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(PushButton)
 END_SLOTTABLE(PushButton)
 
 BEGIN_SLOT_MAP(PushButton)
-   ON_SLOT(1, setSlotFunction, base::Number)
+   ON_SLOT(1, setSlotFunction,   base::Number)
    ON_SLOT(2, setSlotStartState, base::Number)
 END_SLOT_MAP()
 

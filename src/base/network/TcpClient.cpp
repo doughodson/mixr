@@ -22,8 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/TcpClient.hpp"
@@ -156,13 +156,13 @@ bool TcpClient::connectToServer()
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << "Failed!" << std::endl;
       }
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << "Connected!" << std::endl;
       }
       connected = true;
    }
+
    if (isMessageEnabled(MSG_INFO)) {
       std::cout << "TcpClient::connectToServer: socketNum = " << socketNum << std::endl;
    }
@@ -181,7 +181,7 @@ bool TcpClient::connectToServer()
 // ipAddress: String containing the IP address
 bool TcpClient::setSlotIpAddress(const String* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         ipAddr = msg->getCopyString();
         ok = true;

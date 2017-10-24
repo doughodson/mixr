@@ -69,7 +69,7 @@ void ThreadPool::initialize(Component* const parent)
       std::cout << "Running thread pool in multi-threaded mode" << std::endl;
       for (unsigned int i = 0; i < numThreads; i++) {
          //Get the callback object for this thread
-         Object* callbackObj = nullptr;
+         Object* callbackObj{};
          if (manager != nullptr)
             callbackObj = manager->initialize();
 
@@ -77,7 +77,7 @@ void ThreadPool::initialize(Component* const parent)
          allThreads[actualThreads] = new ThreadPoolThread(parent, this, manager, priority, callbackObj);
 
          //Create the thread
-         const bool ok = allThreads[actualThreads]->create();
+         const bool ok{allThreads[actualThreads]->create()};
          if (ok) {
             std::cout << "Created thread pool thread[" << actualThreads << "] = " << allThreads[actualThreads] << std::endl;
             availableThreads[actualThreads] = allThreads[actualThreads];
@@ -118,12 +118,12 @@ void ThreadPool::execute(Object* cur)
    }
 
    //Try to get an available thread from the pool
-   ThreadPoolThread* availableThread = getAvailableThread();
+   ThreadPoolThread* availableThread{getAvailableThread()};
 
    //If we didn't get one, we'll have to wait
    if (availableThread == nullptr) {
       //Wait for one to become available
-      SyncTask** pp = reinterpret_cast<SyncTask**>( &allThreads[0] );
+      SyncTask** pp{reinterpret_cast<SyncTask**>( &allThreads[0] )};
       if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1) {
          //Error
          if (isMessageEnabled(MSG_ERROR)) {
@@ -156,7 +156,7 @@ void ThreadPool::execute(Object* cur)
 
 ThreadPoolThread* ThreadPool::getAvailableThread()
 {
-   ThreadPoolThread* availableThread = nullptr;
+   ThreadPoolThread* availableThread{};
    lock(availableThreadsLock);
    for (int i = actualThreads - 1 ; i >= 0 ; i--) {
       if (availableThreads[i] != nullptr) {
@@ -218,6 +218,7 @@ void ThreadPool::copyData(const ThreadPool& org, const bool)
       setManager( static_cast<ThreadPoolManager*>(org.manager->clone()) );
    else
       setManager(nullptr);
+
    numThreads = org.numThreads;
    priority = org.priority;
 }
@@ -234,9 +235,9 @@ void ThreadPool::deleteData()
 
 bool ThreadPool::setSlotNumThreads(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const int num = msg->getInt();
+      const int num{msg->getInt()};
       if (num >= 0 && num <= static_cast<int>(MAX_THREADS)) {
          numThreads = static_cast<unsigned int>(num);
          ok = true;
@@ -249,9 +250,9 @@ bool ThreadPool::setSlotNumThreads(const Number* const msg)
 
 bool ThreadPool::setSlotPriority(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double pri = msg->getReal();
+      const double pri{msg->getReal()};
       if (pri >= 0 && pri <= 1.0) {
          priority = pri;
          ok = true;

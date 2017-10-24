@@ -39,21 +39,21 @@ BEGIN_SLOTTABLE(WorldModel)
 END_SLOTTABLE(WorldModel)
 
 BEGIN_SLOT_MAP(WorldModel)
-    ON_SLOT( 1, setSlotRefLatitude,     base::LatLon)
-    ON_SLOT( 1, setSlotRefLatitude,     base::Number)
+    ON_SLOT( 1, setSlotRefLatitude,          base::LatLon)
+    ON_SLOT( 1, setSlotRefLatitude,          base::Number)
 
-    ON_SLOT( 2, setSlotRefLongitude,    base::LatLon)
-    ON_SLOT( 2, setSlotRefLongitude,    base::Number)
+    ON_SLOT( 2, setSlotRefLongitude,         base::LatLon)
+    ON_SLOT( 2, setSlotRefLongitude,         base::Number)
 
-    ON_SLOT( 3, setSlotGamingAreaRange, base::Distance)
+    ON_SLOT( 3, setSlotGamingAreaRange,      base::Distance)
 
-    ON_SLOT( 4, setSlotEarthModel,      base::EarthModel)
-    ON_SLOT( 4, setSlotEarthModel,      base::String)
+    ON_SLOT( 4, setSlotEarthModel,           base::EarthModel)
+    ON_SLOT( 4, setSlotEarthModel,           base::String)
 
     ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Number)
 
-    ON_SLOT( 6, setSlotTerrain,      terrain::Terrain)
-    ON_SLOT( 7, setSlotAtmosphere,   AbstractAtmosphere)
+    ON_SLOT( 6, setSlotTerrain,              terrain::Terrain)
+    ON_SLOT( 7, setSlotAtmosphere,           AbstractAtmosphere)
 END_SLOT_MAP()
 
 WorldModel::WorldModel()
@@ -223,11 +223,11 @@ bool WorldModel::setGamingAreaUseEarthModel(const bool flg)
 // Sets Ref latitude
 bool WorldModel::setRefLatitude(const double v)
 {
-   bool ok = (v <= 90.0 && v >= -90.0);
+   bool ok{v <= 90.0 && v >= -90.0};
    if (ok) {
       // Set the latitude and compute the world matrix
       refLat = v;
-      const double r = base::angle::D2RCC * refLat;
+      const double r{base::angle::D2RCC * refLat};
       sinRlat = std::sin(r);
       cosRlat = std::cos(r);
       base::nav::computeWorldMatrix(refLat, refLon, &wm);
@@ -238,7 +238,7 @@ bool WorldModel::setRefLatitude(const double v)
 // Sets Ref longitude
 bool WorldModel::setRefLongitude(const double v)
 {
-   bool ok = (v <= 180.0 && v >= -180.0);
+   bool ok{v <= 180.0 && v >= -180.0};
    if (ok) {
       // Set the longitude and compute the world matrix
       refLon = v;
@@ -250,7 +250,7 @@ bool WorldModel::setRefLongitude(const double v)
 // Sets the max range (meters) of the gaming area or zero if there's no limit.
 bool WorldModel::setMaxRefRange(const double v)
 {
-   bool ok = (v >= 0);
+   bool ok{v >= 0};
    if (ok) maxRefRange = v;
    return ok;
 }
@@ -261,7 +261,7 @@ bool WorldModel::setMaxRefRange(const double v)
 
 bool WorldModel::setSlotRefLatitude(const base::LatLon* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         ok = setRefLatitude(msg->getDouble());
     }
@@ -270,7 +270,7 @@ bool WorldModel::setSlotRefLatitude(const base::LatLon* const msg)
 
 bool WorldModel::setSlotRefLatitude(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         ok = setRefLatitude(msg->getDouble());
     }
@@ -279,7 +279,7 @@ bool WorldModel::setSlotRefLatitude(const base::Number* const msg)
 
 bool WorldModel::setSlotRefLongitude(const base::LatLon* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         ok = setRefLongitude(msg->getDouble());
     }
@@ -288,7 +288,7 @@ bool WorldModel::setSlotRefLongitude(const base::LatLon* const msg)
 
 bool WorldModel::setSlotRefLongitude(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         ok = setRefLongitude(msg->getDouble());
     }
@@ -297,7 +297,7 @@ bool WorldModel::setSlotRefLongitude(const base::Number* const msg)
 
 bool WorldModel::setSlotGamingAreaRange(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setMaxRefRange( base::Meters::convertStatic(*msg) );
    }
@@ -311,19 +311,17 @@ bool WorldModel::setSlotEarthModel(const base::EarthModel* const msg)
 
 bool WorldModel::setSlotEarthModel(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr && msg->len() > 0) {
-      const base::EarthModel* p = base::EarthModel::getEarthModel(*msg);
+      const base::EarthModel* p{base::EarthModel::getEarthModel(*msg)};
       if (p != nullptr) {
          // found the earth model
          ok = setEarthModel(p);
-      }
-      else {
+      } else {
          // Earth model not found by name
          std::cerr << "simulation::setSlotEarthModel() earth model not found: " << *msg << std::endl;
       }
-   }
-   else {
+   } else {
       // clear the earth model with a empty string
       ok = setEarthModel(nullptr);
    }
@@ -332,7 +330,7 @@ bool WorldModel::setSlotEarthModel(const base::String* const msg)
 
 bool WorldModel::setSlotGamingAreaEarthModel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setGamingAreaUseEarthModel(msg->getBoolean());
    }
@@ -380,4 +378,3 @@ bool WorldModel::setSlotAtmosphere(AbstractAtmosphere* const msg)
 
 }
 }
-

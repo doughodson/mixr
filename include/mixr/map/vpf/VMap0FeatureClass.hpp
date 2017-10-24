@@ -36,7 +36,6 @@ public:
     };
 
     virtual void addRelation(const char* table1, const char* table2, const char* table1key, const char* table2key);
-    int determineTableType(const char* x);
 
 private:
     static const int MAX_RELATIONS {50};

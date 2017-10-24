@@ -97,21 +97,6 @@ public:
     virtual bool setRanges(const double* const rngs, const int n);  // Sets the list of ranges
     virtual bool setInitRngIdx(const int idx);                      // Sets the starting range index; returns true if successful
 
-    // Slot functions
-    virtual bool setSlotTrackManagerName(base::String* const v);           // Sets our track manager by name
-    virtual bool setSlotModeStream(base::PairStream* const obj);           // Sets a list of R/F sensor submodes
-    virtual bool setSlotModeSingle(RfSensor* const obj);                   // Sets a single (only) R/F sensor submode
-    virtual bool setSlotRanges(base::List* const list);                    // Sets out list of valid ranges (nm)
-    virtual bool setSlotInitRangeIdx(base::Number* const num);             // Sets out initial range index [ 1 .. nRanges ]
-    virtual bool setSlotPrf(const base::Frequency* const msg);             // Sets PRF as a base::Frequency
-    virtual bool setSlotPrf(const base::Number* const msg);                // Sets PRF in hertz
-    virtual bool setSlotPulseWidth(const base::Time* const msg);           // Sets pulse width using base::Time
-    virtual bool setSlotPulseWidth(const base::Number* const msg);         // Sets pulse width in seconds
-    virtual bool setSlotBeamWidth(const base::Angle* const msg);           // Sets beam width as a base::Angle
-    virtual bool setSlotBeamWidth(const base::Number* const msg);          // Sets beam width in radians
-    virtual bool setSlotTypeId(const base::String* const msg);             // Sets the type ID
-    virtual bool setSlotSyncXmitWithScan(const base::Number* const msg);   // Sets sync transmitter with antenna scan flag
-
     virtual bool isTransmitting() const override;
 
     virtual bool event(const int event, base::Object* const obj = nullptr) override;
@@ -146,7 +131,7 @@ private:
     RfSensor*     masterModePtr {};     // Our Master (Parent) mode (e.g., Sensor)
     TrackManager* trackManager {};      // Our Track manager -- managed by the onboard computer
 
-    static const unsigned int TYPE_ID_LENGTH = 64;
+    static const unsigned int TYPE_ID_LENGTH{64};
     char typeId[TYPE_ID_LENGTH] {};     // R/F system type ID
 
     // Characteristics
@@ -154,20 +139,21 @@ private:
     double pulseWidth {};                         // Pulse Width                  (Sec)
     double beamWidth {base::angle::D2RCC * 3.5};  // Beamwidth                    (R)
 
-};
-
-//------------------------------------------------------------------------------
-// Class: SensorMgr
-//
-// Description: Generic class for managing a list of R/F sensors
-// Factory name: SensorMgr
-//------------------------------------------------------------------------------
-class SensorMgr : public RfSensor
-{
-    DECLARE_SUBCLASS(SensorMgr, RfSensor)
-
-public:
-    SensorMgr();
+private:
+   // slot table helper methods
+   bool setSlotTrackManagerName(base::String* const);         // Sets our track manager by name
+   bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
+   bool setSlotModeSingle(RfSensor* const);                   // Sets a single (only) R/F sensor submode
+   bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)
+   bool setSlotInitRangeIdx(base::Number* const);             // Sets out initial range index [ 1 .. nRanges ]
+   bool setSlotPrf(const base::Frequency* const);             // Sets PRF as a base::Frequency
+   bool setSlotPrf(const base::Number* const);                // Sets PRF in hertz
+   bool setSlotPulseWidth(const base::Time* const);           // Sets pulse width using base::Time
+   bool setSlotPulseWidth(const base::Number* const);         // Sets pulse width in seconds
+   bool setSlotBeamWidth(const base::Angle* const);           // Sets beam width as a base::Angle
+   bool setSlotBeamWidth(const base::Number* const);          // Sets beam width in radians
+   bool setSlotTypeId(const base::String* const);             // Sets the type ID
+   bool setSlotSyncXmitWithScan(const base::Number* const);   // Sets sync transmitter with antenna scan flag
 };
 
 }

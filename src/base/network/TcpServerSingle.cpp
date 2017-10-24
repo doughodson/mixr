@@ -23,8 +23,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/TcpServerSingle.hpp"
@@ -60,8 +60,7 @@ bool TcpServerSingle::initNetwork(const bool noWaitFlag)
         ok = listenForConnections();
         if (ok) {
            ok = acceptConnection();
-        }
-        else if (isMessageEnabled(MSG_ERROR)) {
+        } else if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "initNetwork(): listenForConnections() FAILED" << std::endl;
         }
     }
@@ -123,11 +122,11 @@ bool TcpServerSingle::acceptConnection()
    if (socketNum == INVALID_SOCKET) return 0;
 
    struct sockaddr_in clientAddr;
-   socklen_t cAddrSize = sizeof(clientAddr);
+   socklen_t cAddrSize{sizeof(clientAddr)};
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Waiting to accept connection on " << getPort() << " ... " << std::flush;
    }
-   LcSocket tcpSocket = ::accept(socketNum, reinterpret_cast<struct sockaddr*>(&clientAddr), &cAddrSize);
+   LcSocket tcpSocket{::accept(socketNum, reinterpret_cast<struct sockaddr*>(&clientAddr), &cAddrSize)};
    if (tcpSocket == INVALID_SOCKET) {
       if (isMessageEnabled(MSG_INFO)) {
           std::cout << " failed!" << std::endl;
@@ -137,7 +136,7 @@ bool TcpServerSingle::acceptConnection()
 
    if (isMessageEnabled(MSG_INFO)) {
        std::cout << "Accepted";
-       char* ip = ::inet_ntoa(clientAddr.sin_addr);
+       char* ip{::inet_ntoa(clientAddr.sin_addr)};
        if (ip != nullptr) {
            std::cout << " connection from " << ip;
        }

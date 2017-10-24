@@ -76,13 +76,13 @@ void Table5::deleteData()
 bool Table5::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    unsigned int n1 = list.entries();
-    bool ok = (n1 > 0 && n1 == nv);
+    const unsigned int n1{list.entries()};
+    bool ok{n1 > 0 && n1 == nv};
 
     // Process each item in the list
-    unsigned int i = 0;
-    unsigned int k = BaseClass::tableSize();
-    const List::Item* item = list.getFirstItem();
+    unsigned int i{};
+    unsigned int k{BaseClass::tableSize()};
+    const List::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
@@ -142,9 +142,9 @@ double Table5::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const double* y_data = getYData();
-   const double* z_data = getZData();
-   const double* w_data = getWData();
+   const double* y_data{getYData()};
+   const double* z_data{getZData()};
+   const double* w_data{getWData()};
    if (f != nullptr) {
       const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -155,8 +155,7 @@ double Table5::lfi(const double iv1, FStorage* const f) const
                          getVData(), getNumVPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp, &s->vbp );
-   }
-   else {
+   } else {
       return lfi_5D( iv1, y_data[0], z_data[0], w_data[0], vtable[0], getXData(),
                          getNumXPoints(), y_data, getNumYPoints(), z_data,
                          getNumZPoints(), getWData(), getNumWPoints(),
@@ -169,8 +168,8 @@ double Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const double* z_data = getZData();
-   const double* w_data = getWData();
+   const double* z_data{getZData()};
+   const double* w_data{getWData()};
    if (f != nullptr) {
       const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -181,8 +180,7 @@ double Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
                          getVData(), getNumVPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp, &s->vbp );
-   }
-   else {
+   } else {
       return lfi_5D( iv1, iv2, z_data[0], w_data[0], vtable[0], getXData(),
                          getNumXPoints(), getYData(), getNumYPoints(),
                          z_data, getNumZPoints(), getWData(), getNumWPoints(),
@@ -195,7 +193,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, FStorag
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const double* w_data = getWData();
+   const double* w_data{getWData()};
    if (f != nullptr) {
       const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -206,8 +204,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, FStorag
                          getVData(), getNumVPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp, &s->vbp );
-   }
-   else {
+   } else {
       return lfi_5D( iv1, iv2, iv3, w_data[0], vtable[0], getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getWData(), getNumWPoints(),
@@ -230,8 +227,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, const d
                          getVData(), getNumVPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp, &s->vbp );
-   }
-   else {
+   } else {
       return lfi_5D( iv1, iv2, iv3, iv4, vtable[0], getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getWData(), getNumWPoints(),
@@ -254,8 +250,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, const d
                          getVData(), getNumVPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp, &s->vbp );
-   }
-   else {
+   } else {
       return lfi_5D( iv1, iv2, iv3, iv4, iv5, getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getWData(), getNumWPoints(),

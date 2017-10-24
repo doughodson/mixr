@@ -141,15 +141,16 @@ protected:
       const double viewAngle             // View Angle (Radians)
    ) const;
 
-   //Slot functions
-   virtual bool setSlotSolarRadiationTable(const base::Table2* const tbl);
-   virtual bool setSlotBackgroundRadiationTable(const base::Table3* const tbl);
-   virtual bool setSlotTransmissivityTable(const base::Table4* const tbl);
-
 private:
    const base::Table2* solarRadiationTable {};
    const base::Table3* backgroundRadiationTable {};
    const base::Table4* transmissivityTable {};
+
+private:
+   // slot table helper methods
+   bool setSlotSolarRadiationTable(const base::Table2* const);
+   bool setSlotBackgroundRadiationTable(const base::Table3* const);
+   bool setSlotTransmissivityTable(const base::Table4* const);
 };
 
 }

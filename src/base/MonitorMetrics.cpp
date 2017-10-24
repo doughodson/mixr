@@ -22,12 +22,12 @@ BEGIN_SLOTTABLE(MonitorMetrics)
 END_SLOTTABLE(MonitorMetrics)
 
 BEGIN_SLOT_MAP(MonitorMetrics)
-    ON_SLOT(1, setSlotRed, Table1)
-    ON_SLOT(2, setSlotGreen, Table1)
-    ON_SLOT(3, setSlotBlue, Table1)
+    ON_SLOT(1, setSlotRed,       Table1)
+    ON_SLOT(2, setSlotGreen,     Table1)
+    ON_SLOT(3, setSlotBlue,      Table1)
     ON_SLOT(4, setSlotPhosphors, List)
-    ON_SLOT(5, setSlotWhiteRGB, List)
-    ON_SLOT(6, setSlotWhiteCIE, List)
+    ON_SLOT(5, setSlotWhiteRGB,  List)
+    ON_SLOT(6, setSlotWhiteCIE,  List)
 END_SLOT_MAP()
 
 MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl,
@@ -103,30 +103,30 @@ void MonitorMetrics::deleteData()
     blueLuminance = nullptr;
 }
 
-bool MonitorMetrics::setSlotRed(const Table1* red)
+bool MonitorMetrics::setSlotRed(const Table1* const red)
 {
     if ( red == nullptr ) return false;
     redLuminance = red;
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotGreen(const Table1* green)
+bool MonitorMetrics::setSlotGreen(const Table1* const green)
 {
     if ( green == nullptr ) return false;
     greenLuminance = green;
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotBlue(const Table1* blue)
+bool MonitorMetrics::setSlotBlue(const Table1* const blue)
 {
     if ( blue == nullptr ) return false;
     blueLuminance = blue;
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotPhosphors(const List* phosphors)
+bool MonitorMetrics::setSlotPhosphors(const List* const phosphors)
 {
-    double listItems[6];
+    double listItems[6] {};
 
     if ( phosphors == nullptr ) return false;
     if ( phosphors->entries() != 6 ) return false;
@@ -140,9 +140,9 @@ bool MonitorMetrics::setSlotPhosphors(const List* phosphors)
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotWhiteRGB(const List* whiteRGB)
+bool MonitorMetrics::setSlotWhiteRGB(const List* const whiteRGB)
 {
-    double listItems[3];
+    double listItems[3] {};
 
     if ( whiteRGB == nullptr ) return false;
     if ( whiteRGB->entries() != 6 ) return false;
@@ -152,9 +152,9 @@ bool MonitorMetrics::setSlotWhiteRGB(const List* whiteRGB)
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotWhiteCIE(const List* whiteCIE)
+bool MonitorMetrics::setSlotWhiteCIE(const List* const whiteCIE)
 {
-    double listItems[3];
+    double listItems[3] {};
 
     if ( whiteCIE == nullptr ) return false;
     if ( whiteCIE->entries() != 6 ) return false;

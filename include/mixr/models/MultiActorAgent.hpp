@@ -58,13 +58,9 @@ protected:
       base::safe_ptr<base::Component> actor;
    };
 
-   static const unsigned int MAX_AGENTS = 10;
+   static const unsigned int MAX_AGENTS{10};
    bool clearAgentList();
    bool addAgent( base::String* name, base::ubf::AbstractBehavior* const b);
-
-   // slot functions
-   bool setSlotState(base::ubf::AbstractState* const state);
-   bool setSlotAgentList(base::PairStream* const msg);
 
 private:
    base::Component* actor {};
@@ -74,6 +70,11 @@ private:
    // agent/behavior list
    unsigned int nAgents {};          // Number of input behavior/agent pairs
    std::array<AgentItem, MAX_AGENTS> agentList;
+
+private:
+   // slot table helper methods
+   bool setSlotState(base::ubf::AbstractState* const);
+   bool setSlotAgentList(base::PairStream* const);
 };
 
 inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }

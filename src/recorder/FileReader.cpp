@@ -20,8 +20,8 @@ BEGIN_SLOTTABLE(FileReader)
 END_SLOTTABLE(FileReader)
 
 BEGIN_SLOT_MAP(FileReader)
-    ON_SLOT( 1, setFilename, base::String)
-    ON_SLOT( 2, setPathName, base::String)
+    ON_SLOT( 1, setSlotFilename, base::String)
+    ON_SLOT( 2, setSlotPathName, base::String)
 END_SLOT_MAP()
 
 FileReader::FileReader()
@@ -89,8 +89,8 @@ bool FileReader::openFile()
    if (isOpen()) return true;
 
    // local flags (default is success)
-   bool tOpened = true;
-   bool tFailed = false;
+   bool tOpened{true};
+   bool tFailed{};
 
    // Need a file name
    if (filename == nullptr || filename->len() ==  0) {
@@ -105,7 +105,7 @@ bool FileReader::openFile()
       //---
       // Allocate space for the full file name
       //---
-      std::size_t nameLength = 0;
+      std::size_t nameLength{};
       if (pathname != nullptr) {
          nameLength += pathname->len();     // add the length of the path name
          nameLength += 1;                         // add a character for the slash
@@ -128,7 +128,7 @@ bool FileReader::openFile()
       //---
       // Make sure that it exists
       //---
-      bool validName = base::doesFileExist(fullname);
+      bool validName{base::doesFileExist(fullname)};
 
       //---
       // When we have a valid file name ...
@@ -184,7 +184,7 @@ void FileReader::closeFile()
 //------------------------------------------------------------------------------
 const DataRecordHandle* FileReader::readRecordImp()
 {
-   DataRecordHandle* handle = nullptr;
+   DataRecordHandle* handle{};
 
    // First pass?  Does the file need to be opened?
    if (firstPassFlg) {
@@ -199,12 +199,12 @@ const DataRecordHandle* FileReader::readRecordImp()
    if ( isOpen() && !isFailed() && !sin->eof() ) {
 
       // Number of bytes in the next serialized DataRecord
-      unsigned int n = 0;
+      unsigned int n{};
 
       // ---
       // Read the size of the next serialized DataRecord
       // ---
-      char nbuff[8];
+      char nbuff[8]{};
       sin->read(nbuff, 4);
 
       // Check for error or eof
@@ -245,7 +245,7 @@ const DataRecordHandle* FileReader::readRecordImp()
             // Parse the DataRecord
             std::string wireFormat(ibuf, n);
             auto dataRecord = new pb::DataRecord();
-            bool ok = dataRecord->ParseFromString(wireFormat);
+            bool ok{dataRecord->ParseFromString(wireFormat)};
 
             // Create a handle for the DataRecord (it now has ownership)
             if (ok) {
@@ -273,16 +273,24 @@ const DataRecordHandle* FileReader::readRecordImp()
 //------------------------------------------------------------------------------
 bool FileReader::setFilename(const base::String* const msg)
 {
-   if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new base::String(*msg);
+   if (filename != nullptr) {
+      filename->unref();
+      filename = nullptr;
+   }
+   if (msg != nullptr)
+      filename = new base::String(*msg);
 
    return true;
 }
 
 bool FileReader::setPathName(const base::String* const msg)
 {
-   if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new base::String(*msg);
+   if (pathname != nullptr) {
+      pathname->unref();
+      pathname = nullptr;
+   }
+   if (msg != nullptr)
+      pathname = new base::String(*msg);
 
    return true;
 }

@@ -12,7 +12,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
-#include "mixr/models/system/AngleOnlyTrackManager.hpp"
+#include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
@@ -45,17 +45,17 @@ BEGIN_SLOTTABLE(IrSensor)
 END_SLOTTABLE(IrSensor)
 
 BEGIN_SLOT_MAP(IrSensor)
-   ON_SLOT(1,setSlotLowerWavelength,base::Number)
-   ON_SLOT(2,setSlotUpperWavelength,base::Number)
-   ON_SLOT(3,setSlotNEI,base::Number)
-   ON_SLOT(4,setSlotThreshold,base::Number)
-   ON_SLOT(5,setSlotIFOV,base::Number)
-   ON_SLOT(6,setSlotSensorType,base::String)
-   //ON_SLOT(7,setSlotFieldOfRegard,base::Number)
-   //ON_SLOT(7,setSlotAzimuthBin,base::Number)
-   //ON_SLOT(8,setSlotElevationBin,base::Number)
-   ON_SLOT(7,setSlotMaximumRange,base::Number)
-   ON_SLOT(8,setSlotTrackManagerName,base::String)
+   ON_SLOT(1, setSlotLowerWavelength,  base::Number)
+   ON_SLOT(2, setSlotUpperWavelength,  base::Number)
+   ON_SLOT(3, setSlotNEI,              base::Number)
+   ON_SLOT(4, setSlotThreshold,        base::Number)
+   ON_SLOT(5, setSlotIFOV,             base::Number)
+   ON_SLOT(6, setSlotSensorType,       base::String)
+   //ON_SLOT(7, setSlotFieldOfRegard,  base::Number)
+   //ON_SLOT(7, setSlotAzimuthBin,     base::Number)
+   //ON_SLOT(8, setSlotElevationBin,   base::Number)
+   ON_SLOT(7, setSlotMaximumRange,     base::Number)
+   ON_SLOT(8, setSlotTrackManagerName, base::String)
 END_SLOT_MAP()
 
 IrSensor::IrSensor()
@@ -139,10 +139,10 @@ void IrSensor::reset()
    base::lock(storedMessagesLock);
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
-      const char* name = *getTrackManagerName();
+      const char* name{*getTrackManagerName()};
 
       // Get the named track manager from the onboard computer
-      OnboardComputer* obc = getOwnship()->getOnboardComputer();
+      OnboardComputer* obc{getOwnship()->getOnboardComputer()};
       if (obc != nullptr) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
@@ -170,10 +170,10 @@ void IrSensor::updateData(const double dt)
    // ---
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
-      const char* name = *getTrackManagerName();
+      const char* name{*getTrackManagerName()};
 
       // Get the named track manager from the onboard computer
-      OnboardComputer* obc = getOwnship()->getOnboardComputer();
+      OnboardComputer* obc{getOwnship()->getOnboardComputer()};
       if (obc != nullptr) {
          setTrackManager( obc->getTrackManagerByName(name) );
       }
@@ -221,17 +221,17 @@ void IrSensor::transmit(const double dt)
 // this is called by the IrSeeker in the transmit frame, once for each target that returns a query
 bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 {
-   Player* ownship = getOwnship();
-   IrAtmosphere* atmos = nullptr;
-   double totalSignal = 0.0;
-   double totalBackground = 0.0;
+   Player* ownship{getOwnship()};
+   IrAtmosphere* atmos{};
+   double totalSignal{};
+   double totalBackground{};
 
    if (msg->getSendingSensor() != this) {
       // this should not happen
    }
 
    if (ownship != nullptr) {
-      WorldModel* sim = ownship->getWorldModel();
+      WorldModel* sim{ownship->getWorldModel()};
       if (sim)
          atmos = dynamic_cast<IrAtmosphere*>(sim->getAtmosphere());
    }
@@ -239,21 +239,20 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
    if (atmos == nullptr) {
       // assume simple signature
       totalSignal = msg->getSignatureAtRange();
-   }
-   else {
+   } else {
       atmos->calculateAtmosphereContribution(msg, &totalSignal, &totalBackground);
    }
 
    if (totalSignal > 0.0) {
 
-      const double targetRange = msg->getRange();
-      const double rangeSquared =  targetRange * targetRange;
-      const double reflectorArea = msg->getProjectedArea();
-      const double ifov = msg->getInstantaneousFieldOfView();
+      const double targetRange{msg->getRange()};
+      const double rangeSquared{targetRange * targetRange};
+      const double reflectorArea{msg->getProjectedArea()};
+      const double ifov{msg->getInstantaneousFieldOfView()};
 
       // The relevant amount of background area is the field of view multiplied by the range squared
 
-      const double backgroundArea =  ifov * rangeSquared;
+      const double backgroundArea{ifov * rangeSquared};
 
       // The seeker detects by comparing the amount of signal present
       // with the target to the amount of signal there would be without the target.
@@ -264,7 +263,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 
      // noiseBlockedByTarget is irradiance, in units of watts/m^2
 
-      double noiseBlockedByTarget = totalBackground * ifov;
+      double noiseBlockedByTarget{totalBackground * ifov};
 
       // If the target is smaller than the field of view, it is the background power
       // in the effective field of view represented by the target, i.e. the
@@ -276,7 +275,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       }
 
       // attenuatedPower is irradiance, in watts/m^2
-      const double attenuatedPower = totalSignal / rangeSquared;
+      const double attenuatedPower{totalSignal / rangeSquared};
 
       // signalAboveNoise is the signal that the detector sees minus what it would see with
       // only the background radiation, and is just the amount of power subtracted by how much
@@ -284,7 +283,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // = (attenuatedPower + totalBackground*ifov - noiseBlockedByTarget) - totalBackground*ifov
       // signalAboveNoise is irradiance, in watts/m^2
 
-      double signalAboveNoise = attenuatedPower - noiseBlockedByTarget;
+      double signalAboveNoise{attenuatedPower - noiseBlockedByTarget};
 
       // only Contrast seekers take absolute value in this equation.
       // Hotspot does not.
@@ -294,16 +293,16 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          signalAboveNoise = -signalAboveNoise;
       }
 
-      const double nei = msg->getNEI();
+      const double nei{msg->getNEI()};
 
       // Determine the ratio between the signal above the noise as compared to the level of
       // radiation that would create a response at the same level as the sensor's internal noise.
       // if NEI is in watts/m^2, then SNR will be dimensionless.
       // if NEI is in watts/cm^2, then need to correct by 10^4.
 
-      const double signalToNoiseRatio = signalAboveNoise / nei;
-      const double backgroundNoiseRatio = noiseBlockedByTarget / nei;
-      //double signalToNoiseThreshold = msg->getSendingSensor()->getThreshold();
+      const double signalToNoiseRatio{signalAboveNoise / nei};
+      const double backgroundNoiseRatio{noiseBlockedByTarget / nei};
+      //double signalToNoiseThreshold{msg->getSendingSensor()->getThreshold()};
 
       // allow all signals to be returned; threshold test will be applied in process()
       {
@@ -314,15 +313,15 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setAzimuthAoi(msg->getAzimuthAoi());
          outMsg->setElevationAoi(msg->getElevationAoi());
 
-         base::Vec3d los = msg->getLosVec();
+         base::Vec3d los{msg->getLosVec()};
 
          {
             // This is for non-ownHdgOnly-stabilized gimbal angles
             base::Vec4d los0( los.x(), los.y(), los.z(), 0.0 );
-            base::Vec4d los_vec = ownship->getRotMat() * los0;
-            double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
-            double az = std::atan2(los_vec.y(), los_vec.x());
-            double el = std::atan2(-los_vec.z(), ra);
+            base::Vec4d los_vec{ownship->getRotMat() * los0};
+            double ra{std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y())};
+            double az{std::atan2(los_vec.y(), los_vec.x())};
+            double el{std::atan2(-los_vec.z(), ra)};
             outMsg->setRelativeAzimuth(az);
             outMsg->setRelativeElevation(el);
          }
@@ -333,15 +332,15 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setVelocityVec(msg->getTarget()->getVelocity());
          outMsg->setAccelVec(msg->getTarget()->getAcceleration());
 
-         double angleAspect1 = outMsg->getPosVec().y() *
+         double angleAspect1{outMsg->getPosVec().y() *
                                  outMsg->getVelocityVec().x() -
                                  outMsg->getPosVec().x() *
-                                 outMsg->getVelocityVec().y();
+                                 outMsg->getVelocityVec().y()};
 
-         double angleAspect2 = outMsg->getPosVec().x() *
+         double angleAspect2{outMsg->getPosVec().x() *
                                  outMsg->getVelocityVec().x() +
                                  outMsg->getPosVec().y() *
-                                 outMsg->getVelocityVec().y();
+                                 outMsg->getVelocityVec().y()};
 
          outMsg->setAngleAspect(std::atan2(-angleAspect1,angleAspect2));
 
@@ -374,9 +373,9 @@ void IrSensor::process(const double dt)
 {
    BaseClass::process(dt);
 
-   int numRecords = storedMessagesQueue.entries();
+   unsigned int numRecords{storedMessagesQueue.entries()};
    if (numRecords > 0) {
-      AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
+      AngleOnlyTrackManager* tm{static_cast<AngleOnlyTrackManager*>(getTrackManager())};
       if (tm != nullptr) {
          base::lock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
@@ -384,8 +383,8 @@ void IrSensor::process(const double dt)
          // Send on all messages EXCEPT those with signal below threshold and those merged
          // into another signal. Those will simply be ignored and unreferenced.
 
-         for (int i=0; i < numRecords; i++) {
-            IrQueryMsg* msg = storedMessagesQueue.get();
+         for (unsigned int i=0; i < numRecords; i++) {
+            IrQueryMsg* msg{storedMessagesQueue.get()};
             if (msg->getQueryMergeStatus() != IrQueryMsg::MERGED_OUT) {
                if (msg->getSignalToNoiseRatio() > getThreshold())
                   tm->newReport(msg, msg->getSignalToNoiseRatio());
@@ -405,7 +404,7 @@ void IrSensor::process(const double dt)
 // setLowerWavelength() - Sets the lower wavelength (microns; must be greater than or equal to 0)
 bool IrSensor::setLowerWavelength(const double w)
 {
-   bool ok = false;
+   bool ok{};
    if (w >= 0) {
       lowerWavelength = w;
       ok = true;
@@ -417,7 +416,7 @@ bool IrSensor::setLowerWavelength(const double w)
 // setUpperWavelength() - Sets the upper wavelength (microns; must be greater than 0)
 bool IrSensor::setUpperWavelength(const double w)
 {
-   bool ok = false;
+   bool ok{};
    if (w > 0) {
       upperWavelength = w;
       ok = true;
@@ -428,7 +427,7 @@ bool IrSensor::setUpperWavelength(const double w)
 // setNEI() - Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than or equal to 0)
 bool IrSensor::setNEI(const double n)
 {
-   bool ok = false;
+   bool ok{};
    if (n >= 0) {
       nei = n;
       ok = true;
@@ -439,7 +438,7 @@ bool IrSensor::setNEI(const double n)
 // setThreshold() - Sets the Signal to Noise Threshold
 bool IrSensor::setThreshold(const double t)
 {
-   bool ok = false;
+   bool ok{};
    if (t >= 0) {
       threshold = t;
       ok = true;
@@ -453,7 +452,7 @@ bool IrSensor::setThreshold(const double t)
 //   - but all IR code that references ifovtheta actually wants ifovtheta/2 anyway
 bool IrSensor::setIFOV(const double i)
 {
-   bool ok = false;
+   bool ok{};
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
@@ -526,14 +525,13 @@ bool IrSensor::setMaximumRange(const double w)
 
 bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 {
-   double value = 0.0;
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::Meters m;
        value = static_cast<double>(m.convert(*d));
-   }
-   else if (msg != nullptr) {
+   } else if (msg != nullptr) {
       value = msg->getReal();
    }
 
@@ -562,15 +560,14 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 // setSlotLowerWavelength() - Sets lower wavelength
 bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
 {
-   double value = 0.0;
-   bool ok = false;
+   double value{};
+   bool ok{};
 
    const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));
-   }
-   else if (msg != nullptr) {
+   } else if (msg != nullptr) {
       value = msg->getReal();
    }
    ok = setLowerWavelength(value);
@@ -586,15 +583,14 @@ bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
 // setSlotUpperWavelength() - Sets upper wavelength
 bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
 {
-   bool ok = false;
-   double value = 0.0;
+   bool ok{};
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));
-   }
-   else if (msg != nullptr) {
+   } else if (msg != nullptr) {
       value = msg->getReal();
    }
    ok = setUpperWavelength(value);
@@ -609,9 +605,9 @@ bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
 // setSlotNEI() - Sets Noise Equivalent Irradiance
 bool IrSensor::setSlotNEI(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double x = msg->getReal();
+      const double x{msg->getReal()};
       ok = setNEI(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -625,9 +621,9 @@ bool IrSensor::setSlotNEI(const base::Number* const msg)
 // setSlotThreshold() - Sets Signal to Noise Threshold
 bool IrSensor::setSlotThreshold(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double x = msg->getReal();
+      const double x{msg->getReal()};
       ok = setThreshold(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -641,9 +637,9 @@ bool IrSensor::setSlotThreshold(const base::Number* const msg)
 // setSlotIFOV() - Sets Instantaneous Field of View
 bool IrSensor::setSlotIFOV(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double x = msg->getReal();
+      const double x{msg->getReal()};
       ok = setIFOV(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -657,7 +653,7 @@ bool IrSensor::setSlotIFOV(const base::Number* const msg)
 // setSlotSensorType() -- Sets the Sensor Type
 bool IrSensor::setSlotSensorType(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
 
    if (msg != nullptr) {
       if (*msg == "contrast") ok = setSensorType(CONTRAST);
@@ -745,7 +741,7 @@ const TrackManager* IrSensor::getTrackManager() const
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::getStoredMessage()
 {
-   IrQueryMsg* msg = nullptr;
+   IrQueryMsg* msg{};
 
    base::lock(storedMessagesLock);
    msg = storedMessagesQueue.get();
@@ -759,7 +755,7 @@ IrQueryMsg* IrSensor::getStoredMessage()
 //------------------------------------------------------------------------------
 IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
-   IrQueryMsg* msg = nullptr;
+   IrQueryMsg* msg{};
 
    base::lock(storedMessagesLock);
    msg = storedMessagesQueue.peek0(i);

@@ -18,8 +18,8 @@ BEGIN_SLOTTABLE(PrintHandler)
 END_SLOTTABLE(PrintHandler)
 
 BEGIN_SLOT_MAP(PrintHandler)
-   ON_SLOT( 1, setFilename,        base::String)
-   ON_SLOT( 2, setPathName,        base::String)
+   ON_SLOT( 1, setSlotFilename, base::String)
+   ON_SLOT( 2, setSlotPathName, base::String)
 END_SLOT_MAP()
 
 PrintHandler::PrintHandler()
@@ -85,7 +85,7 @@ const char* PrintHandler::getFullFilename() const
 // File name as entered
 const char* PrintHandler::getFilename() const
 {
-   const char* p = nullptr;
+   const char* p{};
    if (filename != nullptr) p = *filename;
    return p;
 }
@@ -93,7 +93,7 @@ const char* PrintHandler::getFilename() const
 // Path to file
 const char* PrintHandler::getPathname() const
 {
-   const char* p = nullptr;
+   const char* p{};
    if (pathname != nullptr) p = *pathname;
    return p;
 }
@@ -119,14 +119,14 @@ bool PrintHandler::openFile()
    setFullFilename(nullptr);
 
    // local flags (default is success)
-   bool tOpened = true;
-   bool tFailed = false;
+   bool tOpened{true};
+   bool tFailed{};
 
 
    //---
    // Allocate space for the full file name
    //---
-   std::size_t nameLength {};
+   std::size_t nameLength{};
    if (pathname != nullptr) {
       nameLength += pathname->len();     // add the length of the path name
       nameLength += 1;                         // add a character for the slash
@@ -152,7 +152,7 @@ bool PrintHandler::openFile()
    //---
    // Make sure that it doesn't already exist (we don't want to over write good data).
    //---
-   bool validName = !base::doesFileExist(fullname);
+   bool validName{!base::doesFileExist(fullname)};
    if ( !validName ) {
       // If the file already exists, try appending a version number "v99" ..
 
@@ -244,7 +244,7 @@ void PrintHandler::setFullFilename(const char* const name)
       fullFilename = nullptr;
    }
    if (name != nullptr) {
-      std::size_t n = std::strlen(name) + 1;
+      std::size_t n{std::strlen(name) + 1};
       fullFilename = new char[n];
       base::utStrcpy(fullFilename, n, name);
    }

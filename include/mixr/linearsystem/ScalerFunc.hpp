@@ -58,12 +58,6 @@ public:
    // Sets the master update rate (hz)
    virtual bool setRate(const unsigned int v);
 
-   // Set slot functions
-   virtual bool setSlotRate(const base::Frequency* const msg);
-   virtual bool setSlotRate(const base::Number* const msg);
-   virtual bool setSlotX0(const base::Number* const msg);
-   virtual bool setSlotY0(const base::Number* const msg);
-
    virtual bool isValid() const override;
 
 protected:
@@ -84,6 +78,13 @@ protected:
    unsigned int rate {};
    double x0 {};
    double y0 {};
+
+private:
+   // slot table helper methods
+   bool setSlotRate(const base::Frequency* const);
+   bool setSlotRate(const base::Number* const);
+   bool setSlotX0(const base::Number* const);
+   bool setSlotY0(const base::Number* const);
 };
 
 }

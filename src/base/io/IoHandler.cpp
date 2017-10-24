@@ -137,7 +137,7 @@ void IoHandler::reset()
 
    // Reset our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -162,7 +162,7 @@ bool IoHandler::shutdownNotification()
 {
    // Shutdown our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -197,8 +197,8 @@ void IoHandler::clear()
 //------------------------------------------------------------------------------
 bool IoHandler::initNetworks()
 {
-   bool ok1 = false;
-   bool ok2 = false;
+   bool ok1{};
+   bool ok2{};
 
    if (inData != nullptr) ok1 = inData->initNetwork();
    if (outData != nullptr) ok2 = outData->initNetwork();
@@ -229,7 +229,7 @@ void IoHandler::inputDevicesImp(const double dt)
 {
    // process our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -252,7 +252,7 @@ void IoHandler::outputDevicesImp(const double dt)
 
    // process our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -271,7 +271,7 @@ void IoHandler::createDataThread()
       thread = new IoThread(this, getPriority(), getRate());
       thread->unref(); // 'thread' is a safe_ptr<>
 
-      bool ok = thread->create();
+      bool ok{thread->create()};
       if (!ok) {
          thread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -309,16 +309,15 @@ bool IoHandler::setSlotDevices(PairStream* const list)
 
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O Devices
-      unsigned int cnt = 0;
-      List::Item* item = list->getFirstItem();
+      unsigned int cnt{};
+      List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
             static_cast<IoDevice*>(pair->object())->container(this);
-         }
-         else {
+         } else {
             std::cerr << "IoHandler::setSlotDevices(): Item number " << cnt;
             std::cerr << " on the list is a non-IoDevice component!" << std::endl;
          }
@@ -333,14 +332,13 @@ bool IoHandler::setSlotDevices(PairStream* const list)
 
 bool IoHandler::setSlotRate(const Frequency* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
-        double x = Hertz::convertStatic(*msg);
+        const double x{Hertz::convertStatic(*msg)};
         if (x > 0) {
             rate = x;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "IoHandler::setSlotRate: Rate is invalid; must be greater than zero" << std::endl;
         }
     }
@@ -349,14 +347,13 @@ bool IoHandler::setSlotRate(const Frequency* const msg)
 
 bool IoHandler::setSlotPriority(const Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-       double x = num->getReal();
-        if (x >= 0 && x <= 1.0f) {
+        const double x{num->getReal()};
+        if (x >= 0 && x <= 1.0) {
             pri = x;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "IoHandler::setSlotPriority: Priority is invalid, range: [0 .. 1]" << std::endl;
         }
     }

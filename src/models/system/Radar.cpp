@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
@@ -160,12 +160,12 @@ void Radar::transmit(const double dt)
       const auto em = new Emission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
-      const double prf1 = getPRF();
+      const double prf1{getPRF()};
       em->setPRF(prf1);
-      int pulses = static_cast<int>(prf1 * dt + 0.5);
+      int pulses{static_cast<int>(prf1 * dt + 0.5)};
       if (pulses == 0) pulses = 1; // at least one
       em->setPulses(pulses);
-      const double p = getPeakPower();
+      const double p{getPeakPower()};
       em->setPower(p);
       em->setMaxRangeNM(getRange());
       em->setPulseWidth(getPulseWidth());
@@ -197,17 +197,17 @@ void Radar::receive(const double dt)
    // Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
    // Where I is N + J. J is noise from jamming.
    // Receiver Loss affects the total I, so we have to wait until this point to account for it.
-   const double interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
-   const double noise = getRfRecvNoise() * getRfReceiveLoss();
+   const double interference{(getRfRecvNoise() + jamSignal) * getRfReceiveLoss()};
+   const double noise{getRfRecvNoise() * getRfReceiveLoss()};
    currentJamSignal = jamSignal * getRfReceiveLoss();
-   int countNumJammedEm = 0;
+   int countNumJammedEm{};
 
    // ---
    // Process Returned Emissions
    // ---
 
-   Emission* em = nullptr;
-   double signal = 0;
+   Emission* em{};
+   double signal{};
 
    // Get an emission from the queue
    base::lock(packetLock);
@@ -226,21 +226,21 @@ void Radar::receive(const double dt)
          // compute the return trip loss ...
 
          // Compute signal received
-         double rcs = em->getRCS();
+         double rcs{em->getRCS()};
 
          // Signal Equation (Equation 2-7)
-         double rl = em->getRangeLoss();
+         double rl{em->getRangeLoss()};
          signal *= (rcs * rl);
 
          // Integration gain
          signal *= rfIGain;
 
          // Range attenuation: we don't want the strong signal from short range targets
-         double maxRng = getRange() * base::distance::NM2M;
+         double maxRng{getRange() * base::distance::NM2M};
          //double maxRng4 = (maxRng*maxRng*maxRng*maxRng);
          //double rng = (em->getRange());
 
-         const double s1 = 1.0;
+         const double s1{1.0};
          //if (rng > 0) {
          //    double rng4 = (rng*rng*rng*rng);
          //    s1 = (rng4/maxRng4);
@@ -251,10 +251,10 @@ void Radar::receive(const double dt)
          if (signal > 0.0) {
 
             // Signal/Noise  (Equation 2-9)
-            const double signalToInterferenceRatio = signal / interference;
-            const double signalToInterferenceRatioDbl = 10.0f * std::log10(signalToInterferenceRatio);
-            const double signalToNoiseRatio = signal / noise;
-            const double signalToNoiseRatioDbl = 10.0f * std::log10(signalToNoiseRatio);
+            const double signalToInterferenceRatio{signal / interference};
+            const double signalToInterferenceRatioDbl{10.0f * std::log10(signalToInterferenceRatio)};
+            const double signalToNoiseRatio{signal / noise};
+            const double signalToNoiseRatioDbl{10.0f * std::log10(signalToNoiseRatio)};
 
             //std::cout << "Radar::receive(" << em->getTarget() << "): ";
             //std::cout << " pwr=" << em->getPower();
@@ -282,8 +282,8 @@ void Radar::receive(const double dt)
                //std::cout << " (" << em->getRange() << ", " << signalToInterferenceRatioDbl << ", " << signalToInterferenceRatio << ", " << signalToInterferenceRatioDbl << ")";
 
                // Save signal for real-beam display
-               int iaz = csweep;
-               int irng = computeRangeIndex( em->getRange() );
+               const int iaz{csweep};
+               const unsigned int irng{computeRangeIndex( em->getRange() )};
                sweeps[iaz][irng] += (signalToInterferenceRatioDbl/100.0f);
                vclos[iaz][irng] = em->getRangeRate();
 
@@ -327,7 +327,7 @@ void Radar::process(const double dt)
    BaseClass::process(dt);
 
    // Find the track manager
-   TrackManager* tm = getTrackManager();
+   TrackManager* tm{getTrackManager()};
    if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
       base::lock(myLock);
@@ -370,14 +370,14 @@ void Radar::process(const double dt)
    while (rptQueue.isNotEmpty()) {
 
       // Get the emission
-      Emission* em = rptQueue.get();
-      double snDbl = rptSnQueue.get();
+      Emission* em{rptQueue.get()};
+      double snDbl{rptSnQueue.get()};
 
       if (em != nullptr) {
          // ---
          // 1) Match the emission with existing reports
          // ---
-         int matched = -1;
+         int matched{-1};
          for (unsigned int i = 0; i < numReports && matched < 0; i++) {
             // Compare targets
             if ( em->getTarget() == reports[i]->getTarget() ) {
@@ -424,7 +424,7 @@ void Radar::process(const double dt)
 //------------------------------------------------------------------------------
 unsigned int Radar::getReports(const Emission** list, const unsigned int max) const
 {
-   unsigned int num = 0;
+   unsigned int num{};
    if (list != nullptr && max > 0 && numReports > 0) {
       base::lock(myLock);
       num = numReports;
@@ -481,10 +481,10 @@ void Radar::clearSweep(const unsigned int n)
 //------------------------------------------------------------------------------
 void Radar::ageSweeps()
 {
-   const double aging = 0.002;
+   const double aging{0.002};
    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
       for (unsigned int j = 0; j < PTRS_PER_SWEEP; j++) {
-         double p = sweeps[i][j];
+         double p{sweeps[i][j]};
          if (p > 0) {
             p -= aging;
             if (p < 0) p = 0;
@@ -499,11 +499,11 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 unsigned int Radar::computeSweepIndex(const double az)
 {
-   double s = static_cast<double>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
+   double s{static_cast<double>(NUM_SWEEPS-1)/60.0};      // sweeps per display scaling
 
-   double az1 = az + 30.0;                                 // Offset from left side (sweep 0)
-   int n = static_cast<int>(az1*s + 0.5);                  // Compute index
-   if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
+   double az1{az + 30.0};                                 // Offset from left side (sweep 0)
+   int n{static_cast<int>(az1*s + 0.5)};                  // Compute index
+   if (n >= static_cast<int>(NUM_SWEEPS)) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
    return static_cast<unsigned int>(n);
 }
@@ -517,9 +517,9 @@ unsigned int Radar::computeRangeIndex(const double rng)
    if (rng < 0) return 0;
 
    //double maxRng = 40000.0;
-   double maxRng = getRange() * base::distance::NM2M;
-   double rng1 = (rng/ maxRng );
-   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<double>(PTRS_PER_SWEEP) + 0.5);
+   double maxRng{getRange() * base::distance::NM2M};
+   double rng1{rng / maxRng};
+   unsigned int n{static_cast<unsigned int>(rng1 * static_cast<double>(PTRS_PER_SWEEP) + 0.5)};
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
    return n;
 }
@@ -531,13 +531,12 @@ unsigned int Radar::computeRangeIndex(const double rng)
 // igain: Integrator gain (dB or no units; def: 1.0)
 bool Radar::setSlotIGain(base::Number* const v)
 {
-   bool ok = false;
+   bool ok{};
    if (v != nullptr) {
-      double g = v->getReal();
+      double g{v->getReal()};
       if (g >= 1.0) {
          ok = setIGain(g);
-      }
-      else {
+      } else {
          std::cerr << "RfSystem::setSlotIGain: gain must be greater than or equal to one (i.e., 0db)" << std::endl;
       }
    }

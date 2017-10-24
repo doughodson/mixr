@@ -71,23 +71,9 @@ public:
    bool isEnabledModeC() const                     { return enableModeC; }
    virtual void setEnabledModeC(const bool flg);
 
-   // Slot functions
-   virtual bool setSlotMode1(const base::Number* const msg);
-   virtual bool setSlotMode2(const base::Number* const msg);
-   virtual bool setSlotMode3a(const base::Number* const msg);
-   virtual bool setSlotMode4a(const base::Number* const msg);
-   virtual bool setSlotMode4b(const base::Number* const msg);
-   virtual bool setSlotEnableMode1(const base::Number* const msg);
-   virtual bool setSlotEnableMode2(const base::Number* const msg);
-   virtual bool setSlotEnableMode3a(const base::Number* const msg);
-   virtual bool setSlotWhichMode4(const base::Number* const msg);
-   virtual bool setSlotEnableMode4(const base::Number* const msg);
-   virtual bool setSlotEnableModeC(const base::Number* const msg);
-
    virtual void reset() override;
 
 private:
-
    // Codes
    unsigned short mode1 {};      // Mode 1 Code
    unsigned short mode2 {};      // Mode 2 Code
@@ -115,6 +101,20 @@ private:
    bool icModeCFlg {};           // Initial Mode C flag
    bool whichMode4 {};           // Tells us which mode 4 we are using (A/B)
    bool icWhichMode4 {};         // Initial Mode 4 mode
+
+private:
+   // slot table helper methods
+   bool setSlotMode1(const base::Number* const);
+   bool setSlotMode2(const base::Number* const);
+   bool setSlotMode3a(const base::Number* const);
+   bool setSlotMode4a(const base::Number* const);
+   bool setSlotMode4b(const base::Number* const);
+   bool setSlotEnableMode1(const base::Number* const);
+   bool setSlotEnableMode2(const base::Number* const);
+   bool setSlotEnableMode3a(const base::Number* const);
+   bool setSlotWhichMode4(const base::Number* const);
+   bool setSlotEnableMode4(const base::Number* const);
+   bool setSlotEnableModeC(const base::Number* const);
 };
 
 }

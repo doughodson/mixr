@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/network/NetHandler.hpp"
@@ -28,11 +28,10 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Early out -- we must be registered
    if (!isRegistered()) return false;
 
-   NetIO* netIO = static_cast<NetIO*>(getNetIO());
+   NetIO* netIO {static_cast<NetIO*>(getNetIO())};
 
    // Create the parameter/value set
-   RTI::ParameterHandleValuePairSet* pParams =
-      RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
+   RTI::ParameterHandleValuePairSet* pParams {RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER )};
 
    // Set our mode so that we don't do this again.
    setMode(models::Player::DETONATED);
@@ -44,7 +43,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    // Event ID
    // ---
-   unsigned short fireEvent = getWeaponFireEvent();
+   unsigned short fireEvent {getWeaponFireEvent()};
    EventIdentifierStruct eventIdentifier;
    base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
    base::utStrncpy(
@@ -61,9 +60,9 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Location & Velocity
    // ---
    {
-      base::Vec3d geocPos = getDrPosition();
-      base::Vec3d geocVel = getDrVelocity();
-      base::Vec3d geocAcc = getDrAcceleration();
+      base::Vec3d geocPos {getDrPosition()};
+      base::Vec3d geocVel {getDrVelocity()};
+      base::Vec3d geocAcc {getDrAcceleration()};
 
       // World Coordinates
       WorldLocationStruct detonationLocation;
@@ -110,13 +109,12 @@ bool Nib::munitionDetonationMsgFactory(const double)
    //   If it's not, then check our output list.
    // ---
    {
-      Nib* fNib = nullptr;
-      models::Player* fPlayer = mPlayer->getLaunchVehicle();
+      Nib* fNib {};
+      models::Player* fPlayer {mPlayer->getLaunchVehicle()};
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
-         }
-         else {
+         } else {
             fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::NetIO::OUTPUT_NIB) );
          }
       }
@@ -143,8 +141,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
    //   If it's not, then check our output list.
    // ---
    {
-      Nib* tNib = nullptr;
-      models::Player* tPlayer = mPlayer->getTargetPlayer();
+      Nib* tNib {};
+      models::Player* tPlayer {mPlayer->getTargetPlayer()};
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr)
@@ -188,7 +186,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       FuseTypeEnum16 fuseType = FuseTypeOther;
-      unsigned short netBuffer;
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FUSE_TYPE_MD_PI),
@@ -200,8 +198,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Quantity fired
    // ---
    {
-      unsigned short quantityFired = 1;
-      unsigned short netBuffer;
+      unsigned short quantityFired {1};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, quantityFired );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::QUANTITY_FIRED_MD_PI),
@@ -213,8 +211,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Rate Of Fire
    // ---
    {
-      unsigned short rateOfFire = 0;
-      unsigned short netBuffer;
+      unsigned short rateOfFire {};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, rateOfFire );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RATE_OF_FIRE_MD_PI),
@@ -226,8 +224,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Warhead type
    // ---
    {
-      WarheadTypeEnum16 warheadType = WarheadTypeOther;
-      unsigned short netBuffer;
+      WarheadTypeEnum16 warheadType {WarheadTypeOther};
+      unsigned short netBuffer {};
       base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::WARHEAD_TYPE_MD_PI),
@@ -286,7 +284,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             break;
       };
 
-      unsigned char netBuffer = static_cast<unsigned char>(detonationResultCode);
+      unsigned char netBuffer {static_cast<unsigned char>(detonationResultCode)};
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::DETONATION_RESULT_CODE_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -296,8 +294,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    // Send the interaction
    // ---
-   bool ok = netIO->sendInteraction(
-      netIO->getInteractionClassHandle(NetIO::MUNITION_DETONATION_INTERACTION), pParams );
+   bool ok {netIO->sendInteraction(
+      netIO->getInteractionClassHandle(NetIO::MUNITION_DETONATION_INTERACTION), pParams )};
 
    // don't need this anymore
    delete pParams;

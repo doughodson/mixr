@@ -5,9 +5,10 @@
 #include "mixr/models/system/RfSystem.hpp"
 
 namespace mixr {
-namespace base { class PairStream; }
+namespace base { class Number; class PairStream; }
 namespace models {
 class Datalink;
+class Emission;
 
 //------------------------------------------------------------------------------
 // Class: Radio
@@ -120,13 +121,6 @@ protected:
    // Sets the number of channels; previous channels are lost!
    virtual bool setNumberOfChannels(const unsigned short n);
 
-   // Slot functions
-   virtual bool setSlotNumChannels(base::Number* const msg);
-   virtual bool setSlotChannels(const base::PairStream* const msg);
-   virtual bool setSlotChannel(base::Number* const msg);
-   virtual bool setSlotMaxDetectRange(base::Number* const num);
-   virtual bool setSlotRadioId(base::Number* const num);
-
    virtual void receive(const double dt) override;
 
 private:
@@ -138,34 +132,14 @@ private:
 
    double  maxDetectRange {120.0};  // Radio maximum detection range  (NM)
    unsigned short radioId {};
-};
-
-//------------------------------------------------------------------------------
-// Class: CommRadio
-// Description: Generic class for all communication radio models
-//
-// Factory name: CommRadio
-//------------------------------------------------------------------------------
-class CommRadio : public Radio
-{
-   DECLARE_SUBCLASS(CommRadio, Radio)
-
-public:
-   CommRadio();
-
-   // The optional datalink system attached to this radio
-   Datalink* getDatalink();
-   const Datalink* getDatalink() const;
-   virtual bool setDatalink(Datalink* const p);
-
-   // Transmit a datalink message
-   virtual bool transmitDataMessage(base::Object* const msg);
-
-protected:
-   virtual void receivedEmissionReport(Emission* const em) override;
 
 private:
-   base::safe_ptr<Datalink> datalink;   // Our companion datalink system
+   // slot table helper methods
+   bool setSlotNumChannels(base::Number* const);
+   bool setSlotChannels(const base::PairStream* const);
+   bool setSlotChannel(base::Number* const);
+   bool setSlotMaxDetectRange(base::Number* const);
+   bool setSlotRadioId(base::Number* const);
 };
 
 }

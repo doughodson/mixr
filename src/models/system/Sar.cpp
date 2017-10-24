@@ -29,7 +29,7 @@ BEGIN_SLOT_MAP(Sar)
 END_SLOT_MAP()
 
 // Default parameters
-static const double DEFAULT_SAR_TIME = 10.0f;
+static const double DEFAULT_SAR_TIME{10.0};
 
 Sar::Sar() : imgList(nullptr)
 {
@@ -100,7 +100,7 @@ bool Sar::isSystemReady() const
 // Return a list of all images
 base::PairStream* Sar::getImages()
 {
-    base::PairStream* p = imgList;
+    base::PairStream* p{imgList};
     if (p != nullptr) p->ref();
     return p;
 }
@@ -108,9 +108,9 @@ base::PairStream* Sar::getImages()
 // Returns the last image
 const Image* Sar::getImage() const
 {
-    const Image* p = nullptr;
+    const Image* p{};
     if (imgList != nullptr) {
-        const base::Pair* pair = imgList->getPosition( imgList->entries() );    // Last item
+        const base::Pair* pair{imgList->getPosition( imgList->entries() )};    // Last item
         p = dynamic_cast<const Image*>(pair->object());
         if (p != nullptr) p->ref();
     }
@@ -135,9 +135,9 @@ bool Sar::setStarePoint(const double lat, const double lon, const double elev)
 
 bool Sar::setSlotChipSize(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
-        const int n = msg->getInt();
+        const int n{msg->getInt()};
         if (n >= 0) {
             ok = setChipSize( n );
         }
@@ -159,7 +159,7 @@ bool Sar::requestImage(
         const unsigned int h,           // Image height (pixels)
         const double r)                 // Image Resolution (meters/pixel)
 {
-   bool ok = false;
+   bool ok{};
    if ( isSystemReady() ) {
       if (isMessageEnabled(MSG_INFO)) {
          std::cout << "starting new SAR (" << w << "," << h << ") at " << r << std::endl;
@@ -195,12 +195,12 @@ void Sar::process(const double dt)
       // ---
       // Point the beam
       // ---
-      Antenna* ant = getAntenna();
+      Antenna* ant{getAntenna()};
       if (ant != nullptr) {
 
-         const WorldModel* s = getWorldModel();
-         const double refLat = s->getRefLatitude();
-         const double refLon = s->getRefLongitude();
+         const WorldModel* s{getWorldModel()};
+         const double refLat{s->getRefLatitude()};
+         const double refLon{s->getRefLongitude()};
 
          base::Vec3d pos;
          base::nav::convertLL2PosVec(
@@ -209,17 +209,17 @@ void Sar::process(const double dt)
             &pos); // x,y,z  NED
 
          // Platform (ownship) coord and then body
-         const base::Vec3d posP = pos - getOwnship()->getPosition();
-         const base::Vec3d posB = getOwnship()->getRotMat() * posP;
+         const base::Vec3d posP{pos - getOwnship()->getPosition()};
+         const base::Vec3d posB{getOwnship()->getRotMat() * posP};
 
          // Convert to az/el
-         double tgt_az = 0.0;   // Angle (degs)
-         double tgt_el = 0.0;   // Angle (degs)
+         double tgt_az{};   // Angle (degs)
+         double tgt_el{};   // Angle (degs)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         const double az = tgt_az * static_cast<double>(base::angle::D2RCC);
-         const double el = tgt_el * static_cast<double>(base::angle::D2RCC);
+         const double az{tgt_az * static_cast<double>(base::angle::D2RCC)};
+         const double el{tgt_el * static_cast<double>(base::angle::D2RCC)};
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -229,7 +229,7 @@ void Sar::process(const double dt)
       // ---
       // Process timer
       // ---
-      double ttimer = timer - dt;
+      double ttimer{timer - dt};
       if (ttimer <= 0) {
 
          // ### test -- Generate a test image ###
@@ -282,7 +282,7 @@ bool Sar::setChipSize(const unsigned int pixels)
 //------------------------------------------------------------------------------
 bool Sar::addImage(base::Pair* const newImage)
 {
-    bool ok = false;
+    bool ok{};
     if (newImage != nullptr) {
         if (imgList == nullptr) {
             imgList = new base::PairStream();
@@ -304,7 +304,7 @@ void Sar::xyz2AzEl(const double x, const double y, const double z, double* const
    }
 
    if (el != nullptr) {
-      const double r = std::sqrt(x * x + y * y);
+      const double r{std::sqrt(x * x + y * y)};
       *el = std::atan2(-z, r) * static_cast<double>(base::angle::R2DCC);
    }
 }

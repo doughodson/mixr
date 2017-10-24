@@ -43,7 +43,7 @@ public:
 
     virtual bool isHeadingHoldOn() const;
     virtual double getCommandedHeadingD() const;
-    virtual bool setHeadingHoldOn(const bool b);
+    virtual bool setHeadingHoldOn(const bool);
 
     // commanded heading inputs:  true heading in degrees (h),
     //                            degrees per second rate of heading change (hDps)
@@ -52,7 +52,7 @@ public:
 
     virtual bool isVelocityHoldOn() const;
     virtual double getCommandedVelocityKts() const;
-    virtual bool setVelocityHoldOn(const bool b);
+    virtual bool setVelocityHoldOn(const bool);
 
     // commanded velocity inputs: commanded velocity in knots (v),
     //                            acceleration limiter (vNps)
@@ -61,7 +61,7 @@ public:
 
     virtual bool isAltitudeHoldOn() const;
     virtual double getCommandedAltitude() const;
-    virtual bool setAltitudeHoldOn(const bool b);
+    virtual bool setAltitudeHoldOn(const bool);
 
     // commanded altitude  inputs: commanded altitude in meters (a),
     //                             rate of change (in meters per second) associated with moving to new altitude (aMps)
@@ -75,8 +75,8 @@ public:
     virtual int getEngThrust(double* const fn, const int max) const;          // Thrust: lbs
 
     // Control Stick Input Positions (not the flight surfaces!)
-    virtual void setControlStickRollInput(const double roll);
-    virtual void setControlStickPitchInput(const double pitch);
+    virtual void setControlStickRollInput(const double);
+    virtual void setControlStickPitchInput(const double);
     void setControlStick(const double roll, const double pitch) {
         setControlStickRollInput(roll);
         setControlStickPitchInput(pitch);
@@ -100,7 +100,7 @@ public:
     // ---
     virtual void setBrakes(const double left, const double right);
 
-    // Sets the fuel weight
+    // Sets the fuel weight (lbs)
     virtual bool setFuelWt(const double lbs);
 };
 

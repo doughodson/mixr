@@ -53,8 +53,8 @@ private:
 
 private:
     // slot table helper methods
-    bool setHaloColor(base::Color*);
-    bool setLinewidth(const base::Number* const);
+    bool setSlotHaloColor(base::Color*);
+    bool setSlotLinewidth(const base::Number* const);
 };
 
 }

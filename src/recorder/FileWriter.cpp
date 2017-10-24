@@ -20,8 +20,8 @@ BEGIN_SLOTTABLE(FileWriter)
 END_SLOTTABLE(FileWriter)
 
 BEGIN_SLOT_MAP(FileWriter)
-    ON_SLOT( 1, setFilename, base::String)
-    ON_SLOT( 2, setPathName, base::String)
+    ON_SLOT( 1, setSlotFilename, base::String)
+    ON_SLOT( 2, setSlotPathName, base::String)
 END_SLOT_MAP()
 
 FileWriter::FileWriter()
@@ -98,7 +98,7 @@ const char* FileWriter::getFullFilename() const
 // File name as entered
 const char* FileWriter::getFilename() const
 {
-   const char* p = nullptr;
+   const char* p{};
    if (filename != nullptr) p = *filename;
    return p;
 }
@@ -106,7 +106,7 @@ const char* FileWriter::getFilename() const
 // Path to file
 const char* FileWriter::getPathname() const
 {
-   const char* p = nullptr;
+   const char* p{};
    if (pathname != nullptr) p = *pathname;
    return p;
 }
@@ -124,8 +124,8 @@ bool FileWriter::openFile()
    setFullFilename(nullptr);
 
    // local flags (default is success)
-   bool tOpened = true;
-   bool tFailed = false;
+   bool tOpened{true};
+   bool tFailed{};
    eodFlag = false;
 
    // Need a file name
@@ -141,7 +141,7 @@ bool FileWriter::openFile()
       //---
       // Allocate space for the full file name
       //---
-      std::size_t nameLength = 0;
+      std::size_t nameLength{};
       if (pathname != nullptr) {
          nameLength += pathname->len();     // add the length of the path name
          nameLength += 1;                         // add a character for the slash
@@ -165,7 +165,7 @@ bool FileWriter::openFile()
       //---
       // Make sure that it doesn't already exist (we don't want to over write good data).
       //---
-      bool validName = !base::doesFileExist(fullname);
+      bool validName{!base::doesFileExist(fullname)};
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
@@ -249,7 +249,7 @@ void FileWriter::closeFile()
          lastMsg->set_id(REID_END_OF_DATA);
 
          // Time is also required, although not used:
-         pb::Time* time = lastMsg->mutable_time();
+         pb::Time* time {lastMsg->mutable_time()};
          time->set_exec_time(0);
          time->set_sim_time(0);
          time->set_utc_time(0);

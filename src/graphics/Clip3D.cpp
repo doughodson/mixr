@@ -301,11 +301,11 @@ unsigned int Clip3D::clip(
    // ---
 
    // p: pre-clipped polygon
-   base::Vec3d* const poly1 = new base::Vec3d[num*3];
+   base::Vec3d* const poly1 {new base::Vec3d[num*3]};
    for (unsigned int i = 0; i < num; i++) {
       poly1[i] = in[i];
    }
-   base::Vec3d* p = poly1;
+   base::Vec3d* p {poly1};
 
    // pn: pre-clipped normals
    base::Vec3d* norm1 = nullptr;
@@ -448,7 +448,7 @@ unsigned int Clip3D::polyClip2Halfspace(
    if ( p == nullptr || q == nullptr || n < 2 ) return 0;
 
    // Which clipping plane (upper or lower)
-   double sign = -1.0f;
+   double sign {-1.0};
    if (clipUpperPlane) sign = 1.0f;
 
    // Loop for all vertices; start with v = 0 and u = n-1

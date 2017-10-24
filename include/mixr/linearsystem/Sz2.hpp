@@ -47,13 +47,14 @@ class Sz2 : public SecondOrderTf
 public:
    Sz2();
 
-   // Set slot functions
-   virtual bool setSlotN1(const base::Number* const msg);
-   virtual bool setSlotN2(const base::Number* const msg);
-   virtual bool setSlotN3(const base::Number* const msg);
-   virtual bool setSlotD1(const base::Number* const msg);
-   virtual bool setSlotD2(const base::Number* const msg);
-   virtual bool setSlotD3(const base::Number* const msg);
+private:
+   // slot table helper methods
+   bool setSlotN1(const base::Number* const);
+   bool setSlotN2(const base::Number* const);
+   bool setSlotN3(const base::Number* const);
+   bool setSlotD1(const base::Number* const);
+   bool setSlotD2(const base::Number* const);
+   bool setSlotD3(const base::Number* const);
 };
 
 }

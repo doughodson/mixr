@@ -26,11 +26,11 @@ BEGIN_SLOTTABLE(IrSignature)
 END_SLOTTABLE(IrSignature)
 
 BEGIN_SLOT_MAP(IrSignature)
-   ON_SLOT(1,setSlotWaveBandSizes,base::Table1)
-   ON_SLOT(2,setSlotIrShapeSignature, IrShape)
-   ON_SLOT(3,setSlotBaseHeatSignature,base::Number)
-   ON_SLOT(4,setSlotEmissivity,base::Number)
-   ON_SLOT(5,setSlotEffectiveArea,base::Number)
+   ON_SLOT(1, setSlotWaveBandSizes,     base::Table1)
+   ON_SLOT(2, setSlotIrShapeSignature,  IrShape)
+   ON_SLOT(3, setSlotBaseHeatSignature, base::Number)
+   ON_SLOT(4, setSlotEmissivity,        base::Number)
+   ON_SLOT(5, setSlotEffectiveArea,     base::Number)
 END_SLOT_MAP()
 
 IrSignature::IrSignature()
@@ -52,20 +52,18 @@ void IrSignature::copyData(const IrSignature& org, const bool)
    effectiveArea     = org.effectiveArea;
 
    if (org.waveBandTable != nullptr) {
-      base::Table1* copy = org.waveBandTable->clone();
+      base::Table1* copy{org.waveBandTable->clone()};
       setSlotWaveBandSizes( copy );
       copy->unref();
-   }
-   else {
+   } else {
       setSlotWaveBandSizes(nullptr);
    }
 
    if (org.irShapeSignature != nullptr) {
-      IrShape* copy = org.irShapeSignature->clone();
+      IrShape* copy{org.irShapeSignature->clone()};
       setSlotIrShapeSignature( copy );
       copy->unref();
-   }
-   else {
+   } else {
       setSlotIrShapeSignature(nullptr);
    }
 }
@@ -120,9 +118,9 @@ bool IrSignature::setSlotIrShapeSignature(IrShape* const s)
 //------------------------------------------------------------------------------
 bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
-      const double x = num->getReal();
+      const double x{num->getReal()};
       ok = setBaseHeatSignature(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -139,9 +137,9 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 //------------------------------------------------------------------------------
 bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
-      const double x = num->getReal();
+      const double x{num->getReal()};
       ok = setEmissivity(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -157,8 +155,8 @@ bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
 //------------------------------------------------------------------------------
 bool IrSignature::setSlotEffectiveArea(mixr::base::Number* const num)
 {
-   bool ok = false;
-   double value = 0.0;
+   bool ok{};
+   double value{};
 
    const auto a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
@@ -178,10 +176,10 @@ bool IrSignature::setSlotEffectiveArea(mixr::base::Number* const num)
 
 bool IrSignature::getIrSignature(IrQueryMsg* const msg)
 {
-   bool ok = false;
+   bool ok{};
    //const auto msg = dynamic_cast<IrQueryMsg*>( msg0 );     // FAB - do we really need to cast away const?
    if (msg != nullptr) {
-      double projectedAreaInFOV = getSignatureArea(msg);
+      double projectedAreaInFOV{getSignatureArea(msg)};
       msg->setProjectedArea(projectedAreaInFOV);
       // if no projectedAreaInFOV, then target was not in FOV
       if (projectedAreaInFOV > 0.0){
@@ -200,13 +198,12 @@ bool IrSignature::getIrSignature(IrQueryMsg* const msg)
 double IrSignature::getSignatureArea(IrQueryMsg* msg)
 {
    if (irShapeSignature == nullptr) {
-      double angleOffBoresight = msg->getAngleOffBoresight();
-      double maxAngle = msg->getSendingSensor()->getIFOVTheta();
+      double angleOffBoresight{msg->getAngleOffBoresight()};
+      double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
       if (angleOffBoresight > maxAngle) return 0;
       return getEffectiveArea();
-   }
-   else {
-      double reflectorArea = irShapeSignature->getReflectorAreaInFieldOfView(msg);
+   } else {
+      double reflectorArea{irShapeSignature->getReflectorAreaInFieldOfView(msg)};
       return reflectorArea;
    }
 }

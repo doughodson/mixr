@@ -207,3 +207,23 @@ vpf library (mixr_map_vpf)
 -- Resurected this old 'map' library for reading vector product map data (vmap) 
 --------------------------------------------------------------------------------
 
+
+#####################################################
+Models & general capabilities oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+models library (mixr_models)
+
+-- Much organization of player folder has been made. This includes the creation
+   of additional subfolders to arrange and catergorize related types (related in
+   terms of 'is-a').  For example, all the classes that were defined AirVehicle
+   files were separated into individual files and put into a new 'air' folder.
+   This same approach was used for effects, ground vehicles and weapons.
+   This organization is undoubtedly not perfect, but its a step towards being more
+   understandable, in terms of what is what, and what is available.
+
+-- Renamed 'Buildings' filename to 'Building' to match the class name defined
+   within it.
+
+--------------------------------------------------------------------------------

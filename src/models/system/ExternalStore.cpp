@@ -7,9 +7,6 @@
 namespace mixr {
 namespace models {
 
-//------------------------------------------------------------
-// Dummy weapon for non-releasable, non-jettisonable stores
-//------------------------------------------------------------
 IMPLEMENT_SUBCLASS(ExternalStore, "ExternalStore")
 
 BEGIN_SLOTTABLE(ExternalStore)
@@ -18,7 +15,7 @@ BEGIN_SLOTTABLE(ExternalStore)
 END_SLOTTABLE(ExternalStore)
 
 BEGIN_SLOT_MAP(ExternalStore)
-   ON_SLOT( 1, setSlotType, base::String)
+   ON_SLOT( 1, setSlotType,         base::String)
    ON_SLOT( 2, setSlotJettisonable, base::Number )
 END_SLOT_MAP()
 
@@ -36,7 +33,7 @@ void ExternalStore::copyData(const ExternalStore& org, const bool)
    BaseClass::copyData(org);
 
    {
-      const base::String* p = nullptr;
+      const base::String* p{};
       if (org.type != nullptr) p = org.type->clone();
       setSlotType( p );
       if (p != nullptr) p->unref();
@@ -66,7 +63,7 @@ void ExternalStore::reset()
 //------------------------------------------------------------------------------
 bool ExternalStore::onJettisonEvent()
 {
-   bool ok = false;
+   bool ok{};
    if (canJettison && !jettisoned) {
       // If we can be jettisoned and we haven't already been ...
       jettisoned =  true;

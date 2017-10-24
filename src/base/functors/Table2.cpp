@@ -73,13 +73,13 @@ void Table2::deleteData()
 bool Table2::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    unsigned int n1 = list.entries();
-    bool ok = (n1 > 0 && n1 == ny);
+    const unsigned int n1{list.entries()};
+    bool ok{n1 > 0 && n1 == ny};
 
     // Process each item in the list
-    unsigned int i = 0;
-    unsigned int k = BaseClass::tableSize();
-    const List::Item* item = list.getFirstItem();
+    unsigned int i{};
+    const unsigned int k{BaseClass::tableSize()};
+    const List::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
@@ -147,8 +147,7 @@ double Table2::lfi(const double iv1, FStorage* const f) const
                          getYData(), getNumYPoints(), getDataTable(),
                          isExtrapolationEnabled(),
                          &s->xbp, &s->ybp );
-   }
-   else {
+   } else {
       return lfi_2D( iv1, ytable[0], getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getDataTable(),
                          isExtrapolationEnabled() );
@@ -167,8 +166,7 @@ double Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
                          getNumYPoints(), getDataTable(),
                          isExtrapolationEnabled(),
                          &s->xbp, &s->ybp );
-   }
-   else {
+   } else {
       return lfi_2D( iv1, iv2, getXData(), getNumXPoints(), getYData(),
                          getNumYPoints(), getDataTable(),
                          isExtrapolationEnabled() );

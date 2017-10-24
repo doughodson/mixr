@@ -22,8 +22,8 @@
     #ifdef sun
         #include <sys/filio.h> // -- added for Solaris 10
     #endif
-    static const int INVALID_SOCKET = -1; // Always -1 and errno is set
-    static const int SOCKET_ERROR   = -1;
+    static const int INVALID_SOCKET{-1}; // Always -1 and errno is set
+    static const int SOCKET_ERROR{-1};
 #endif
 
 #include "mixr/base/network/UdpBroadcastHandler.hpp"
@@ -80,7 +80,7 @@ bool UdpBroadcastHandler::init()
     // ---
     // Init the base class
     // ---
-    bool ok = BaseClass::init();
+    bool ok{BaseClass::init()};
     if (!ok) return false;
 
     // ---
@@ -97,7 +97,7 @@ bool UdpBroadcastHandler::init()
     // ---
     {
 #if defined(WIN32)
-        BOOL optval = 1;
+        BOOL optval{1};
         if (::setsockopt(socketNum, SOL_SOCKET, SO_BROADCAST, (const char*) &optval, sizeof(optval)) == SOCKET_ERROR) {
 #else
         int optval = 1;
@@ -119,7 +119,7 @@ bool UdpBroadcastHandler::bindSocket()
     // ---
     // Our base class will bind the socket
     // ---
-    bool ok = BaseClass::bindSocket();
+    bool ok{BaseClass::bindSocket()};
 
     // ---
     // Next, find and set the broadcast address
@@ -128,11 +128,11 @@ bool UdpBroadcastHandler::bindSocket()
         ok = false;
         if (networkMask != nullptr) {
             // User defined broadcast address
-            const uint32_t localNetAddr = getLocalAddr();
-            const uint32_t localNetMask = ::inet_addr(networkMask);
+            const uint32_t localNetAddr{getLocalAddr()};
+            const uint32_t localNetMask{::inet_addr(networkMask)};
             if (localNetAddr != INADDR_NONE && localNetMask != INADDR_NONE) {
-               const uint32_t localNet = localNetAddr & localNetMask;
-               const uint32_t ba = localNet | ~localNetMask;
+               const uint32_t localNet{localNetAddr & localNetMask};
+               const uint32_t ba{localNet | ~localNetMask};
                if (isMessageEnabled(MSG_INFO)) {
                   std::cout << std::hex << "UdpBroadcast::bindSocket() -- address: " << ba << std::dec << std::endl;
                }
@@ -182,7 +182,7 @@ bool UdpBroadcastHandler::bindSocket()
 // networkMask: Host Net Mask   "255.255.255.255"
 bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
         networkMask = msg->getCopyString();
         ok = true;

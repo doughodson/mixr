@@ -35,20 +35,20 @@ public:
     };
 
     // Set functions
-    virtual void setHeaderLength(const int x);
-    virtual void setByteOrder(char x);
-    virtual void setTableDesc(char* x);
-    virtual void setNarrTable(char* x);
+    virtual void setHeaderLength(const int);
+    virtual void setByteOrder(char);
+    virtual void setTableDesc(char*);
+    virtual void setNarrTable(char*);
     // Column functions
-    virtual void setCurrentColumn(const int x);
-    virtual void setColumnName(char* x);
-    virtual void setColumnDataType(char x);
-    virtual void setColumnNumber(char* x);
-    virtual void setColumnKeyType(char x);
-    virtual void setColumnDesc(char* x);
-    virtual void setColumnValueDescTableName(char* x);
-    virtual void setColumnThematicIndex(char* x);
-    virtual void setColumnNarrTable(char* x);
+    virtual void setCurrentColumn(const int);
+    virtual void setColumnName(char*);
+    virtual void setColumnDataType(char);
+    virtual void setColumnNumber(char*);
+    virtual void setColumnKeyType(char);
+    virtual void setColumnDesc(char*);
+    virtual void setColumnValueDescTableName(char*);
+    virtual void setColumnThematicIndex(char*);
+    virtual void setColumnNarrTable(char*);
 
     // Get functions
     int         getHeaderLength()               { return headerLength; }
@@ -79,8 +79,8 @@ public:
     VpfRecord* getRecord(const int idx);             
 
     virtual bool loadTableFromFile(const char* pathname, const char* filename, const int xType = -1);
-    static const int MAX_COLUMNS = 50;
-    static const int MAX_ROWS = 5000;
+    static const int MAX_COLUMNS {50};
+    static const int MAX_ROWS    {5000};
 
     virtual void loadIndexFile();
 

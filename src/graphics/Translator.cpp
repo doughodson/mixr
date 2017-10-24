@@ -12,7 +12,7 @@ EMPTY_SLOTTABLE(Translator)
 EMPTY_DELETEDATA(Translator)
 
 BEGIN_EVENT_HANDLER(Translator)
-    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateX, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateX, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, base::Number)
 END_EVENT_HANDLER()

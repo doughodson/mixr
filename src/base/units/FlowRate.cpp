@@ -14,7 +14,7 @@ END_SLOTTABLE(FlowRate)
 
 BEGIN_SLOT_MAP(FlowRate)
     ON_SLOT(1, setSlotVolume, Volume)
-    ON_SLOT(2, setSlotTime, Time)
+    ON_SLOT(2, setSlotTime,   Time)
 END_SLOT_MAP()
 
 FlowRate::FlowRate(double newFlowRate, Volume* volume, Time* time)

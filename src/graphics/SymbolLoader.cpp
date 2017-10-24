@@ -25,9 +25,9 @@ BEGIN_SLOTTABLE(SymbolLoader)
 END_SLOTTABLE(SymbolLoader)
 
 BEGIN_SLOT_MAP(SymbolLoader)
-   ON_SLOT(1, setSlotTemplates, base::PairStream)
+   ON_SLOT(1, setSlotTemplates,       base::PairStream)
    ON_SLOT(2, setSlotShowInRangeOnly, base::Number)
-   ON_SLOT(3, setSlotInterconnect, base::Number)
+   ON_SLOT(3, setSlotInterconnect,    base::Number)
 END_SLOT_MAP()
 
 SymbolLoader::SymbolLoader()

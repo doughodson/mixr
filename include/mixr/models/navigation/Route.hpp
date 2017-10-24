@@ -119,14 +119,6 @@ protected:
     // Auto Sequence through Steerpoints
     virtual void autoSequencer(const double dt, const  Navigation* const nav);
 
-    // Slot functions
-    bool setSlotTo(const base::Identifier* const msg);
-    bool setSlotTo(const base::Number* const msg);
-    bool setSlotAutoSequence(const base::Number* const msg);
-    bool setSlotAutoSeqDistance(const base::Distance* const msg);
-    bool setSlotAutoSeqDistance(const base::Number* const msg);
-    bool setSlotWrap(const base::Number* const msg);
-
     virtual void processComponents(
          base::PairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
@@ -147,6 +139,15 @@ private:
    double       autoSeqDistNM {2.0};                    // Distance to auto sequence (NM)
    bool         autoSeq {true};                         // Auto sequence of steerpoint
    bool         wrap {true};                            // Wrap around route when inc or dec 'to' steerpoint
+
+private:
+   // slot table helper methods
+   bool setSlotTo(const base::Identifier* const);
+   bool setSlotTo(const base::Number* const);
+   bool setSlotAutoSequence(const base::Number* const);
+   bool setSlotAutoSeqDistance(const base::Distance* const);
+   bool setSlotAutoSeqDistance(const base::Number* const);
+   bool setSlotWrap(const base::Number* const);
 };
 
 inline Steerpoint* Route::getSteerpoint()

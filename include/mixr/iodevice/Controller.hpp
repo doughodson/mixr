@@ -40,9 +40,6 @@ public:
 
 protected:
 
-   // Slot functions
-   virtual bool setSlotDeviceIndex(const base::Number* const);
-
    unsigned int deviceIndex {}; // Device index
 
    // ---
@@ -61,6 +58,10 @@ protected:
 
 private:
    void initData();
+
+private:
+   // slot table helper methods
+   bool setSlotDeviceIndex(const base::Number* const);
 };
 
 }

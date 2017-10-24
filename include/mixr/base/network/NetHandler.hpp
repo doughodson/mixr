@@ -26,12 +26,12 @@ class NetHandler : public Component
 public:  // Define the Windows vs Unix socket type
    #if defined(WIN32)
       typedef SOCKET LcSocket;
-      static const LcSocket NET_INVALID_SOCKET = INVALID_SOCKET;
-      static const int      NET_SOCKET_ERROR   = SOCKET_ERROR;
+      static const LcSocket NET_INVALID_SOCKET{INVALID_SOCKET};
+      static const int      NET_SOCKET_ERROR{SOCKET_ERROR};
    #else
       typedef int LcSocket;
-      static const LcSocket NET_INVALID_SOCKET = -1;  // Always -1 and errno is
-      static const int      NET_SOCKET_ERROR   = -1;  // set
+      static const LcSocket NET_INVALID_SOCKET{-1};  // Always -1 and errno is
+      static const int      NET_SOCKET_ERROR{-1};  // set
    #endif
 
 public:

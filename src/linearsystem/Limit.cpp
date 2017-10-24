@@ -7,6 +7,8 @@ namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Limit, "Limit")
+EMPTY_COPYDATA(Limit)
+EMPTY_DELETEDATA(Limit)
 
 BEGIN_SLOTTABLE(Limit)
     "lower",   //  1: Lower boundary (default: -1) (must be less than the upper)
@@ -28,16 +30,13 @@ Limit::Limit(const double ll, const double uu) : LimitFunc(ll,uu)
    STANDARD_CONSTRUCTOR()
 }
 
-EMPTY_COPYDATA(Limit)
-EMPTY_DELETEDATA(Limit)
-
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
 
 bool Limit::setSlotLowerLimit(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setLowerLimit( msg->getReal() );
       ok = true;
@@ -47,7 +46,7 @@ bool Limit::setSlotLowerLimit(const base::Number* const msg)
 
 bool Limit::setSlotUpperLimit(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setUpperLimit( msg->getReal() );
       ok = true;

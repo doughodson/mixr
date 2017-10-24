@@ -24,9 +24,9 @@ double lfi_1D(
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
-   unsigned int low = 0;
-   unsigned int high = nx - 1;
-   int delta = 1;
+   unsigned int low{};
+   unsigned int high{nx - 1};
+   int delta{1};
    if (x_data[1] < x_data[0]) {
       // Reverse order of breakpoints
       low = nx - 1;
@@ -37,7 +37,7 @@ double lfi_1D(
    // ---
    // Find the breakpoints with endpoint checks
    // ---
-   unsigned int x2 = 0;
+   unsigned int x2{};
    if (x <= x_data[low]) {
       // At or below the 'low' end
       x2 = low + delta;
@@ -75,8 +75,8 @@ double lfi_1D(
    // ---
    // Linear interpolation
    // ---
-   const unsigned int x1 = x2 - delta;
-   const double m = (x - x_data[x1]) / (x_data[x2] - x_data[x1]);
+   const unsigned int x1{x2 - delta};
+   const double m{(x - x_data[x1]) / (x_data[x2] - x_data[x1])};
    return m * (a_data[x2] - a_data[x1]) + a_data[x1];
 }
 
@@ -106,9 +106,9 @@ double lfi_2D(
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
-   unsigned int low = 0;
-   unsigned int high = ny - 1;
-   int delta = 1;
+   unsigned int low{};
+   unsigned int high{ny - 1};
+   int delta{1};
    if (y_data[1] < y_data[0]) {
       // Reverse order of breakpoints
       low = ny - 1;
@@ -119,7 +119,7 @@ double lfi_2D(
    // ---
    // Find the breakpoints with endpoint checks
    // ---
-   unsigned int y2 = 0;
+   unsigned int y2{};
    if (y <= y_data[low]) {
       // At or below the 'low' end
       y2 = low + delta;
@@ -160,16 +160,16 @@ double lfi_2D(
    // ---
    // Interpolate the breakpoints at one dimension lower
    // ---
-   const unsigned int y1 = y2 - delta;
-   const unsigned int ax1 = nx * y1;
-   const double a1 = lfi_1D(x, x_data, nx, &a_data[ax1], eFlg, xbp);
-   const unsigned int ax2 = nx * y2;
-   const double a2 = lfi_1D(x, x_data, nx, &a_data[ax2], eFlg, xbp);
+   const unsigned int y1{y2 - delta};
+   const unsigned int ax1{nx * y1};
+   const double a1{lfi_1D(x, x_data, nx, &a_data[ax1], eFlg, xbp)};
+   const unsigned int ax2{nx * y2};
+   const double a2{lfi_1D(x, x_data, nx, &a_data[ax2], eFlg, xbp)};
 
    // ---
    // Final linear interpolation
    // ---
-   const double m = (y - y_data[y1]) / (y_data[y2] - y_data[y1]);
+   const double m{(y - y_data[y1]) / (y_data[y2] - y_data[y1])};
    return m * (a2 - a1) + a1;
 }
 
@@ -203,9 +203,9 @@ double lfi_3D(
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
-   unsigned int low = 0;
-   unsigned int high = nz - 1;
-   int delta = 1;
+   unsigned int low{};
+   unsigned int high{nz - 1};
+   int delta{1};
    if (z_data[1] < z_data[0]) {
       // Reverse order of breakpoints
       low = nz - 1;
@@ -216,14 +216,14 @@ double lfi_3D(
    // ---
    // Find the breakpoints with endpoint checks
    // ---
-   unsigned int z2 = 0;
+   unsigned int z2{};
    if (z <= z_data[low]) {
       // At or below the 'low' end
       z2 = low + delta;
       if (!eFlg) {
          // Early out with the 'low' end
          if (zbp != nullptr) *zbp = z2;
-         unsigned int ax = nx * ny * low;
+         unsigned int ax{nx * ny * low};
          return lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
       }
    }
@@ -233,7 +233,7 @@ double lfi_3D(
       if (!eFlg) {
          // Early out with the 'high' end
          if (zbp != nullptr) *zbp = z2;
-         unsigned int ax = nx * ny * high;
+         unsigned int ax{nx * ny * high};
          return lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax], eFlg, xbp, ybp);
       }
    }
@@ -258,16 +258,16 @@ double lfi_3D(
    // ---
    // Interpolate the breakpoints at one dimension lower
    // ---
-   const unsigned int z1 = z2 - delta;
-   const unsigned int ax1 = nx * ny * z1;
-   const double a1 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp);
-   const unsigned int ax2 = nx * ny * z2;
-   const double a2 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp);
+   const unsigned int z1{z2 - delta};
+   const unsigned int ax1{nx * ny * z1};
+   const double a1{lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp)};
+   const unsigned int ax2{nx * ny * z2};
+   const double a2{lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp)};
 
    // ---
    // Final linear interpolation
    // ---
-   const double m = (z - z_data[z1]) / (z_data[z2] - z_data[z1]);
+   const double m{(z - z_data[z1]) / (z_data[z2] - z_data[z1])};
    return m * (a2 - a1) + a1;
 }
 
@@ -305,9 +305,9 @@ double lfi_4D(
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
-   unsigned int low = 0;
-   unsigned int high = nw - 1;
-   int delta = 1;
+   unsigned int low{};
+   unsigned int high{nw - 1};
+   int delta{1};
    if (w_data[1] < w_data[0]) {
       // Reverse order of breakpoints
       low = nw - 1;
@@ -318,14 +318,14 @@ double lfi_4D(
    // ---
    // Find the breakpoints with endpoint checks
    // ---
-   unsigned int w2 = 0;
+   unsigned int w2{};
    if (w <= w_data[low]) {
       // At or below the 'low' end
       w2 = low + delta;
       if (!eFlg) {
          // Early out with the 'low' end
          if (wbp != nullptr) *wbp = w2;
-         unsigned int ax = nx * ny * nz * low;
+         unsigned int ax{nx * ny * nz * low};
          return lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
       }
    }
@@ -335,7 +335,7 @@ double lfi_4D(
       if (!eFlg) {
          // Early out with the 'high' end
          if (wbp != nullptr) *wbp = w2;
-         unsigned int ax = nx* ny * nz * high;
+         unsigned int ax{nx* ny * nz * high};
          return lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax], eFlg, xbp, ybp, zbp);
       }
    }
@@ -361,16 +361,16 @@ double lfi_4D(
    // ---
    // Interpolate the breakpoints at one dimension lower
    // ---
-   const unsigned int w1 = w2 - delta;
-   const unsigned int ax1 = nx * ny * nz * w1;
-   const double a1 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp);
-   const unsigned int ax2 = nx * ny * nz * w2;
-   const double a2 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp);
+   const unsigned int w1{w2 - delta};
+   const unsigned int ax1{nx * ny * nz * w1};
+   const double a1{lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp)};
+   const unsigned int ax2{nx * ny * nz * w2};
+   const double a2{lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp)};
 
    // ---
    // Final linear interpolation
    // ---
-   const double m  = (w - w_data[w1]) / (w_data[w2] - w_data[w1]);
+   const double m{(w - w_data[w1]) / (w_data[w2] - w_data[w1])};
    return m * (a2 - a1) + a1;
 }
 
@@ -412,9 +412,9 @@ double lfi_5D(
    // ---
    // Check increasing vs decreasing order of the breakpoints
    // ---
-   unsigned int low = 0;
-   unsigned int high = nv - 1;
-   int delta = 1;
+   unsigned int low{};
+   unsigned int high{nv - 1};
+   int delta{1};
    if (v_data[1] < v_data[0]) {
       // Reverse order of breakpoints
       low = nv - 1;
@@ -425,14 +425,14 @@ double lfi_5D(
    // ---
    // Find the breakpoints with endpoint checks
    // ---
-   unsigned int v2 = 0;
+   unsigned int v2{};
    if (v <= v_data[low]) {
       // At or below the 'low' end
       v2 = low + delta;
       if (!eFlg) {
          // Early out with the 'low' end
          if (vbp != nullptr) *vbp = v2;
-         unsigned int ax = nx * ny * nz * nw * low;
+         unsigned int ax{nx * ny * nz * nw * low};
          return lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
       }
    }
@@ -442,7 +442,7 @@ double lfi_5D(
       if (!eFlg) {
          // Early out with the 'high' end
          if (vbp != nullptr) *vbp = v2;
-         unsigned int ax = nx* ny * nz * nw * high;
+         unsigned int ax{nx* ny * nz * nw * high};
          return lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax], eFlg, xbp, ybp, zbp, wbp);
       }
    }
@@ -469,16 +469,16 @@ double lfi_5D(
    // ---
    // Interpolate the breakpoints at one dimension lower
    // ---
-   const unsigned int v1 = v2 - delta;
-   const unsigned int ax1 = nx * ny * nz * nw * v1;
-   const double a1 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp);
-   const unsigned int ax2 = nx * ny * nz * nw * v2;
-   const double a2 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp);
+   const unsigned int v1{v2 - delta};
+   const unsigned int ax1{nx * ny * nz * nw * v1};
+   const double a1{lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp)};
+   const unsigned int ax2{nx * ny * nz * nw * v2};
+   const double a2{lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp)};
 
    // ---
    // Final linear interpolation
    // ---
-   const double m  = (v - v_data[v1]) / (v_data[v2] - v_data[v1]);
+   const double m{(v - v_data[v1]) / (v_data[v2] - v_data[v1])};
    return m * (a2 - a1) + a1;
 }
 

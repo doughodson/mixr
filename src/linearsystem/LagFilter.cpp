@@ -62,34 +62,32 @@ bool LagFilter::setTau(const double v)
 
 bool LagFilter::setSlotTau(const base::Time* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      double tsec = base::Seconds::convertStatic(*msg);
+      const double tsec {base::Seconds::convertStatic(*msg)};
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
-      }
-      else {
+      } else {
          if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "LagFilter::setSlotTau() -- tau must be greater than zero!" << std::endl;
+            std::cerr << "LagFilter::setSlotTau() -- tau must be greater than zero!" << std::endl;
+         }
       }
-   }
    }
    return ok;
 }
 
 bool LagFilter::setSlotTau(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      double tsec = msg->getReal();
+      const double tsec {msg->getReal()};
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
-      }
-      else {
+      } else {
          if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "LagFilter::setSlotTau() -- tau must be greater than zero!" << std::endl;
+            std::cerr << "LagFilter::setSlotTau() -- tau must be greater than zero!" << std::endl;
          }
       }
    }

@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 
@@ -22,8 +22,8 @@ namespace rprfom {
 //------------------------------------------------------------------------------
 bool NetIO::publishAndSubscribeWeaponFire()
 {
-   RTI::RTIambassador* p = getRTIambassador();
-   bool ok = true;
+   RTI::RTIambassador* p {getRTIambassador()};
+   bool ok {true};
 
    // ----------
    // Get handles to the class, attributes and parameters
@@ -34,8 +34,8 @@ bool NetIO::publishAndSubscribeWeaponFire()
       // Weapon Fire Interaction class handle and parameter handles
       // ---
       {
-         RTI::InteractionClassHandle handle =
-            p->getInteractionClassHandle(WeaponFire::getInteractionFedName());
+         RTI::InteractionClassHandle handle {
+            p->getInteractionClassHandle(WeaponFire::getInteractionFedName())};
 
          setInteractionClassHandle(WEAPON_FIRE_INTERACTION, handle );
 
@@ -179,7 +179,7 @@ bool NetIO::receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParamet
 {
     std::cout << "rprfom::Nib::receiveWeaponFire() HERE!!" << std::endl;
     RTI::ULong length;
-    char netBuffer[1000];
+    char netBuffer[1000] {};
     for (RTI::ULong i = 0 ; i < theParameters.size(); i++ ) {
         
         // get the parameter's handed and data (network byte order)

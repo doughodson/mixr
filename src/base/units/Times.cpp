@@ -123,7 +123,7 @@ NanoSeconds::NanoSeconds(const double value) : Time(value)
 NanoSeconds::NanoSeconds(const Time& org) : Time()
 {
     STANDARD_CONSTRUCTOR()
-    BaseClass::copyData(org,true);
+    BaseClass::copyData(org, true);
 }
 
 //==============================================================================

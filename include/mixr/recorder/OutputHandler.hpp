@@ -41,17 +41,17 @@ public:
    OutputHandler();
 
    // Process the data record
-   void processRecord(const DataRecordHandle* const handle);
+   void processRecord(const DataRecordHandle* const);
 
    // Add the data record to a queue for later processing
-   void addToQueue(const DataRecordHandle* const handle);
+   void addToQueue(const DataRecordHandle* const);
 
    // Process all data records from the queue
    void processQueue();
 
 protected:
    // Process record implementations by derived classes
-   virtual void processRecordImp(const DataRecordHandle* const handle);
+   virtual void processRecordImp(const DataRecordHandle* const);
 
    // Checks the data enabled list and returns true if the record should be processed.
    bool isDataTypeEnabled(const DataRecordHandle* const handle) const;

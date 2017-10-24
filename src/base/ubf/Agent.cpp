@@ -20,7 +20,7 @@ BEGIN_SLOTTABLE(Agent)
 END_SLOTTABLE(Agent)
 
 BEGIN_SLOT_MAP(Agent)
-   ON_SLOT(1, setSlotState, AbstractState)
+   ON_SLOT(1, setSlotState,    AbstractState)
    ON_SLOT(2, setSlotBehavior, AbstractBehavior)
 END_SLOT_MAP()
 
@@ -47,7 +47,7 @@ void Agent::reset()
       state->reset();
    }
 
-   myActor=nullptr;
+   myActor = nullptr;
    initActor();
 
    // although state is not explicitly initialized as component, the set state
@@ -63,7 +63,7 @@ void Agent::updateData(const double dt)
 
 void Agent::controller(const double dt)
 {
-   base::Component* actor = getActor();
+   base::Component* actor{getActor()};
 
    if ( (actor!=nullptr) && (getState()!=nullptr) && (getBehavior()!=nullptr) ) {
 
@@ -71,7 +71,7 @@ void Agent::controller(const double dt)
       getState()->updateState(actor);
 
       // generate an action, but allow possibility of no action returned
-      AbstractAction* action = getBehavior()->genAction(state, dt);
+      AbstractAction* action{getBehavior()->genAction(state, dt)};
       if (action) {
          action->execute(actor);
          action->unref();
@@ -134,7 +134,7 @@ void Agent::initActor()
 // Sets the state object for this agent
 bool Agent::setSlotState(AbstractState* const state)
 {
-   bool ok = false;
+   bool ok{};
    if (state != nullptr) {
       setState(state);
       ok = true;
@@ -144,7 +144,7 @@ bool Agent::setSlotState(AbstractState* const state)
 
 bool Agent::setSlotBehavior(AbstractBehavior* const x)
 {
-   bool ok = false;
+   bool ok{};
    if ( x!=nullptr ) {
       setBehavior(x);
       ok = true;

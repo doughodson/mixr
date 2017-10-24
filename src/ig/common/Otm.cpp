@@ -19,8 +19,8 @@ END_SLOTTABLE(Otm)
 
 BEGIN_SLOT_MAP(Otm)
     ON_SLOT(1, setSlotRefFactoryName, base::Identifier)
-    ON_SLOT(2, setSlotRefTypeName, base::String)
-    ON_SLOT(3, setSlotTypeId,      base::Number)
+    ON_SLOT(2, setSlotRefTypeName,    base::String)
+    ON_SLOT(3, setSlotTypeId,         base::Number)
 END_SLOT_MAP()
 
 Otm::Otm()

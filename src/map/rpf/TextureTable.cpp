@@ -115,8 +115,8 @@ bool TextureTable::setSize(const int newSize)
 //------------------------------------------------------------------------------
 bool TextureTable::setTextureObject(int row, int col, graphics::Texture* newObj)
 {
-    int x = row + centerTablePos;
-    int y = col + centerTablePos;
+    const int x {row + centerTablePos};
+    const int y {col + centerTablePos};
 
     if (texes[x][y] != nullptr) {
         texes[x][y]->unref();

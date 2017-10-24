@@ -35,8 +35,8 @@ bool deadReckoning(
    const Vec4d av(av0, 0.0);
 
    // new (output) vectors
-   Vec4d newP = p;
-   Vec4d newRPY = rpy;
+   Vec4d newP{p};
+   Vec4d newRPY{rpy};
 
    switch (drNum) {
 

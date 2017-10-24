@@ -212,7 +212,7 @@ inline double Player::getLongitude() const
 // Player's Lat/lon (degs)
 inline bool Player::getPositionLL(double* const lat, double* const lon) const
 {
-   bool ok = false;
+   bool ok{};
    if (lat != nullptr && lon != nullptr) {
       *lat = latitude;
       *lon = longitude;
@@ -224,7 +224,7 @@ inline bool Player::getPositionLL(double* const lat, double* const lon) const
 // Players Lat/Lon (degs) and altitude (meters)
 inline bool Player::getPositionLLA(double* const lat, double* const lon, double* const alt) const
 {
-   bool ok = false;
+   bool ok{};
    if (lat != nullptr && lon != nullptr) {
       *lat = latitude;
       *lon = longitude;

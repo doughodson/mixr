@@ -165,11 +165,11 @@ class Simulation : public base::Component
 
 public:
    // Minimum released weapon ID
-   static const unsigned short MIN_WPN_ID = 10001;
+   static const unsigned short MIN_WPN_ID {10001};
 
    // Size of the new player queue; ie, the max number
    // of new players accepted per background frame
-   static const int MAX_NEW_PLAYERS = 1000;
+   static const int MAX_NEW_PLAYERS {1000};
 
 public:
     Simulation();
@@ -234,7 +234,6 @@ public:
 
 protected:
     virtual void updatePlayerList();                  // Updates the current player list
-    bool setSlotPlayers(base::PairStream* const msg);
 
     virtual void incCycle();                          // Increments the cycle counter
     virtual void setCycle(const unsigned int c);      // Sets the cycle counter
@@ -253,16 +252,6 @@ private:
    bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
    AbstractPlayer* findPlayerPrivate(const short id, const int netID) const;
    AbstractPlayer* findPlayerByNamePrivate(const char* const playerName) const;
-
-   bool setSlotSimulationTime(const base::Time* const msg);
-   bool setSlotDay(const base::Number* const msg);
-   bool setSlotMonth(const base::Number* const msg);
-   bool setSlotYear(const base::Number* const msg);
-
-   bool setSlotFirstWeaponId(const base::Number* const msg);
-
-   bool setSlotNumTcThreads(const base::Number* const msg);
-   bool setSlotNumBgThreads(const base::Number* const msg);
 
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
@@ -296,18 +285,32 @@ private:
    Station* station {};          // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
-   static const unsigned short MAX_TC_THREADS = 32;
+   static const unsigned short MAX_TC_THREADS {32};
    std::array<SimTcThread*, MAX_TC_THREADS> tcThreads {};  // Thread pool; 'numTcThreads' threads
    unsigned int reqTcThreads {1};                          // Requested number of threads
    unsigned int numTcThreads {};                           // Number of threads in pool; should be (reqTcThreads - 1)
    bool tcThreadsFailed {};                                // Failed to create threads.
 
    // Background thread pool
-   static const unsigned short MAX_BG_THREADS = 32;
+   static const unsigned short MAX_BG_THREADS {32};
    std::array<SimBgThread*, MAX_BG_THREADS> bgThreads {};  // Thread pool; 'reqBgThreads' threads
    unsigned int reqBgThreads {1};                          // Requested number of threads
    unsigned int numBgThreads {};                           // Number of threads in pool; should be (reqBgThreads - 1)
    bool bgThreadsFailed {};                                // Failed to create threads.
+
+private:
+   // slot table helper methods
+   bool setSlotPlayers(base::PairStream* const);
+
+   bool setSlotSimulationTime(const base::Time* const);
+   bool setSlotDay(const base::Number* const);
+   bool setSlotMonth(const base::Number* const);
+   bool setSlotYear(const base::Number* const);
+
+   bool setSlotFirstWeaponId(const base::Number* const);
+
+   bool setSlotNumTcThreads(const base::Number* const);
+   bool setSlotNumBgThreads(const base::Number* const);
 };
 
 }

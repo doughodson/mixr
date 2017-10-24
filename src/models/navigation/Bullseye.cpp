@@ -5,17 +5,14 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullseye, "Bullseye")
+IMPLEMENT_SUBCLASS(Bullseye, "Bullseye")
+EMPTY_SLOTTABLE(Bullseye)
 EMPTY_DELETEDATA(Bullseye)
+EMPTY_COPYDATA(Bullseye)
 
 Bullseye::Bullseye()
 {
     STANDARD_CONSTRUCTOR()
-}
-
-void Bullseye::copyData(const Bullseye& org, const bool)
-{
-    BaseClass::copyData(org);
 }
 
 }

@@ -75,7 +75,6 @@ public:
 
    // Sets the extrapolation enabled flag.
    bool setExtrapolationEnabled(const bool);
-   virtual bool setExtrapolationEnabled(const Number* const);
 
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
@@ -113,6 +112,11 @@ private:
    double* dtable {};    // Data Table
    unsigned int nd {};   // Number of data points
    bool extFlg {};       // Extrapolation enabled flag
+
+private:
+   // slot table helper methods
+   bool setSlotDataTable(const List* const x)               { return setDataTable(x); }
+   bool setSlotExtrapolationEnabled(const Number* const);
 };
 
 }

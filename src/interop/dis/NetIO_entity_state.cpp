@@ -8,10 +8,7 @@
 #include "mixr/interop/dis/Ntm.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/LifeForms.hpp"
-#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/WorldModel.hpp"
 
@@ -31,9 +28,9 @@ namespace dis {
 void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
 {
     // Get PDU IDs
-    unsigned short playerId = pdu->entityID.ID;
-    unsigned short site = pdu->entityID.simulationID.siteIdentification;
-    unsigned short app = pdu->entityID.simulationID.applicationIdentification;
+    unsigned short playerId {pdu->entityID.ID};
+    unsigned short site     {pdu->entityID.simulationID.siteIdentification};
+    unsigned short app      {pdu->entityID.simulationID.applicationIdentification};
 
     // ---
     // Make sure it's not one of ours
@@ -43,13 +40,13 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     if (site == getSiteID() &&  app == getApplicationID()) return;
 
     // Search test (reject PDUs from players on our output list)
-    interop::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
+    interop::Nib* testNib {findDisNib(playerId, site, app, OUTPUT_NIB)};
     if (testNib != nullptr) return;
 
     // ---
     // Find the Network Interface Block
     // ---
-    Nib* nib = static_cast<Nib*>( findDisNib(playerId, site, app, INPUT_NIB) );
+    Nib* nib {static_cast<Nib*>( findDisNib(playerId, site, app, INPUT_NIB) )};
 
     // ---
     // When we don't have a NIB, create one
@@ -59,18 +56,17 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
         if (nib != nullptr) {
             nib->setPlayerID(playerId);
             if (pdu->entityMarking.characterSet == 1) {
-               char name[12];
+               char name[12] {};
                base::utStrcpy(name, 12, reinterpret_cast<const char*>(pdu->entityMarking.marking));
                nib->setPlayerName(name);
-            }
-            else
+            } else
                nib->setPlayerName("DIS PLAYER");
 
             // Set the site id, app id and fed name
             {
                nib->setSiteID(site);
                nib->setApplicationID(app);
-               char cbuff[32];
+               char cbuff[32] {};
                makeFederateName(cbuff, 32, site, app);
                const auto fname = new base::String(cbuff);
                nib->setFederateName(fname);
@@ -92,16 +88,13 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             if (pdu->forceID == FRIENDLY_FORCE) {
                 // Friendly's are blue, ...
                 nib->setSide(models::Player::BLUE);
-            }
-            else if (pdu->forceID == OPPOSING_FORCE) {
+            } else if (pdu->forceID == OPPOSING_FORCE) {
                 // opposing side is red, ...
                 nib->setSide(models::Player::RED);
-            }
-            else if (pdu->forceID == NEUTRAL_FORCE) {
+            } else if (pdu->forceID == NEUTRAL_FORCE) {
                 // Neutrals are white, ...
                 nib->setSide(models::Player::WHITE);
-            }
-            else  {
+            } else  {
                 // and everyone else is gray.
                 nib->setSide(models::Player::GRAY);
             }

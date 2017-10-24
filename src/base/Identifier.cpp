@@ -62,7 +62,7 @@ void Identifier::catStr(const char* s)
    }
 
    // replace any spaces
-   std::size_t len = std::strlen(s);
+   std::size_t len{std::strlen(s)};
    const auto newStr = new char[len+1];
    for (unsigned int i = 0; i < len; i++) {
       if (s[i] == ' ') newStr[i] = '_';

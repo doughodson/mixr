@@ -52,12 +52,6 @@ public:
    virtual bool setDiscreteOutput(const unsigned int channel, const bool value) override;
    virtual void clear() override;
 
-protected:
-   bool setSlotNumAI(const base::Number* const);
-   bool setSlotNumAO(const base::Number* const);
-   bool setSlotNumDI(const base::Number* const);
-   bool setSlotNumDO(const base::Number* const);
-
 private:
    unsigned int numAI {};  // Number of AIs
    double*  aiTable {};    // AIs
@@ -70,6 +64,13 @@ private:
 
    unsigned int numDO {};  // Number of DOs
    bool*    doTable {};    // DOs
+
+private:
+   // slot table helper methods
+   bool setSlotNumAI(const base::Number* const);
+   bool setSlotNumAO(const base::Number* const);
+   bool setSlotNumDI(const base::Number* const);
+   bool setSlotNumDO(const base::Number* const);
 };
 
 }

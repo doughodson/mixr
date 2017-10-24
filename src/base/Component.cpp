@@ -29,17 +29,17 @@ BEGIN_SLOTTABLE(Component)
 END_SLOTTABLE(Component)
 
 BEGIN_SLOT_MAP(Component)
-    ON_SLOT( 1, setSlotComponent, PairStream)
-    ON_SLOT( 1, setSlotComponent, Component)
-    ON_SLOT( 2, select, Number)
-    ON_SLOT( 2, select, String)
+    ON_SLOT( 1, setSlotComponent,         PairStream)
+    ON_SLOT( 1, setSlotComponent,         Component)
+    ON_SLOT( 2, setSlotSelect,            String)
+    ON_SLOT( 2, setSlotSelect,            Number)
     ON_SLOT( 3, setSlotEnableTimingStats, Number)
-    ON_SLOT( 4, setSlotPrintTimingStats, Number)
-    ON_SLOT( 5, setSlotFreeze, Number)
-    ON_SLOT( 6, setSlotEnableMsgType, Identifier)
-    ON_SLOT( 6, setSlotEnableMsgType, Number)
-    ON_SLOT( 7, setSlotDisableMsgType, Identifier)
-    ON_SLOT( 7, setSlotDisableMsgType, Number)
+    ON_SLOT( 4, setSlotPrintTimingStats,  Number)
+    ON_SLOT( 5, setSlotFreeze,            Number)
+    ON_SLOT( 6, setSlotEnableMsgType,     Identifier)
+    ON_SLOT( 6, setSlotEnableMsgType,     Number)
+    ON_SLOT( 7, setSlotDisableMsgType,    Identifier)
+    ON_SLOT( 7, setSlotDisableMsgType,    Number)
 END_SLOT_MAP()
 
 bool Component::event(const int _event, ::mixr::base::Object* const _obj)
@@ -166,7 +166,7 @@ void Component::reset()
         }
         else {
             // When we should reset them all
-            List::Item* item = subcomponents->getFirstItem();
+            List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<Component*>(pair->object());
@@ -252,7 +252,7 @@ void Component::updateTC(const double dt)
         }
         else {
             // When we should update them all
-            List::Item* item = subcomponents->getFirstItem();
+            List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<Component*>( pair->object() );

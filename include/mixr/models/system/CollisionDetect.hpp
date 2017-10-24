@@ -82,16 +82,6 @@ protected:
    // Update the POI list with this target player
    virtual void updatePoiList(Player* const target);
 
-   // Slot functions
-   virtual bool setSlotCollisionRange(const base::Distance* const msg);
-   virtual bool setSlotMaxPlayers(const base::Number* const msg);
-   virtual bool setSlotPlayerTypes(const base::PairStream* const msg);
-   virtual bool setSlotMaxRange2Players(const base::Distance* const msg);
-   virtual bool setSlotMaxAngle2Players(const base::Angle* const msg);
-   virtual bool setSlotUseWorldCoordinates(const base::Number* const msg);
-   virtual bool setSlotLocalOnly(const base::Number* const msg);
-   virtual bool setSlotSendCrashEvents(const base::Number* const msg);
-
    virtual void process(const double dt) override;     // Phase 3
 
 protected:
@@ -130,6 +120,17 @@ private:
 
    PlayerOfInterest* players {};       // Player of interest (POI) list
    unsigned int maxPlayers {};         // Max number of players of interest
+
+private:
+   // slot table helper methods
+   bool setSlotCollisionRange(const base::Distance* const);
+   bool setSlotMaxPlayers(const base::Number* const);
+   bool setSlotPlayerTypes(const base::PairStream* const);
+   bool setSlotMaxRange2Players(const base::Distance* const);
+   bool setSlotMaxAngle2Players(const base::Angle* const);
+   bool setSlotUseWorldCoordinates(const base::Number* const);
+   bool setSlotLocalOnly(const base::Number* const);
+   bool setSlotSendCrashEvents(const base::Number* const);
 };
 
 inline double CollisionDetect::getCollisionRange() const       { return collisionRange; }

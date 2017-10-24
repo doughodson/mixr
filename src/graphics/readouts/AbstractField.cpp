@@ -33,17 +33,17 @@ BEGIN_SLOTTABLE(AbstractField)
 END_SLOTTABLE(AbstractField)
 
 BEGIN_SLOT_MAP(AbstractField)
-    ON_SLOT(1, setPosition, base::List)
-    ON_SLOT(2, setSlotWidth, base::Number)
-    ON_SLOT(3, setSlotHighlight, base::Number)
-    ON_SLOT(4, setSlotUnderline, base::Number)
-    ON_SLOT(5, setSlotReversed, base::Number)
+    ON_SLOT(1, setSlotPosition,      base::List)
+    ON_SLOT(2, setSlotWidth,         base::Number)
+    ON_SLOT(3, setSlotHighlight,     base::Number)
+    ON_SLOT(4, setSlotUnderline,     base::Number)
+    ON_SLOT(5, setSlotReversed,      base::Number)
     ON_SLOT(6, setSlotJustification, base::String)
-    ON_SLOT(7, setSlotVertical, base::Number)
-    ON_SLOT(8, setSlotBrackets, base::Number)
-    ON_SLOT(9, setSlotLinked, base::Number)
-    ON_SLOT(10, setSlotInheritColor,base::Number)
-    ON_SLOT(11, setSlotFont, base::String)
+    ON_SLOT(7, setSlotVertical,      base::Number)
+    ON_SLOT(8, setSlotBrackets,      base::Number)
+    ON_SLOT(9, setSlotLinked,        base::Number)
+    ON_SLOT(10, setSlotInheritColor, base::Number)
+    ON_SLOT(11, setSlotFont,         base::String)
     ON_SLOT(12, setSlotStartCharPos, base::Number)
 END_SLOT_MAP()
 
@@ -398,7 +398,7 @@ bool AbstractField::cursor(int* l, int* c) const
 }
 
 //------------------------------------------------------------------------------
-// drawFunc -- draw this text field
+// draw this text field
 //------------------------------------------------------------------------------
 void AbstractField::drawFunc()
 {
@@ -510,27 +510,23 @@ bool AbstractField::setPosition(const base::List* const spobj)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// setLine() --
-//------------------------------------------------------------------------------
 bool AbstractField::onSetLine(const base::Number* const oslobj)
 {
     if (oslobj != nullptr) line(oslobj->getInt());
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setColumn() --
-//------------------------------------------------------------------------------
 bool AbstractField::onSetColumn(const base::Number* const oscobj)
 {
    if (oscobj != nullptr) column(oscobj->getInt());
    return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotWidth() --
-//------------------------------------------------------------------------------
+bool AbstractField::setSlotPosition(const base::List* const spobj)
+{
+   return setPosition(spobj);
+}
+
 bool AbstractField::setSlotWidth(const base::Number* const swobj)
 {
 
@@ -538,9 +534,6 @@ bool AbstractField::setSlotWidth(const base::Number* const swobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotHighlight() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotHighlight(const base::Number* const shobj)
 {
     if (shobj != nullptr) {
@@ -570,9 +563,6 @@ bool AbstractField::setSlotHighlight(const base::Number* const shobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotUnderline() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotUnderline(const base::Number* const suobj)
 {
     if (suobj != nullptr) {
@@ -606,9 +596,6 @@ bool AbstractField::setSlotUnderline(const base::Number* const suobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotReversed() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotReversed(const base::Number* const srobj)
 {
     if (srobj != nullptr) {
@@ -642,9 +629,6 @@ bool AbstractField::setSlotReversed(const base::Number* const srobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotVertical() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotVertical(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
@@ -661,9 +645,6 @@ bool AbstractField::setSlotVertical(const base::Number* const ssobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotBrackets() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotBrackets(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
@@ -680,9 +661,6 @@ bool AbstractField::setSlotBrackets(const base::Number* const ssobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotLinked() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotLinked(const base::Number* const msg)
 {
     if (msg != nullptr) {
@@ -691,9 +669,6 @@ bool AbstractField::setSlotLinked(const base::Number* const msg)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// setSlotInheritColor() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotInheritColor(const base::Number* const ic)
 {
     bool ok {};
@@ -703,9 +678,6 @@ bool AbstractField::setSlotInheritColor(const base::Number* const ic)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// setSlotJustification() --
-//------------------------------------------------------------------------------
 bool AbstractField::setSlotJustification(const base::String* const sjobj)
 {
     bool ok {true};

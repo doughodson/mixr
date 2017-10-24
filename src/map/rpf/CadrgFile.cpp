@@ -148,7 +148,7 @@ void CadrgFile::removeTocEntry(const int idx)
 //--------------------------------------------------------------------------
 bool CadrgFile::checkForMap(const char* dir)
 {
-    bool ok = false;
+    bool ok {};
     // Try to find and open our a.toc file
     std::ifstream toc;
     const auto string = new base::String(dir);
@@ -195,39 +195,39 @@ bool CadrgFile::initialize(const char* dir)
     for (int yy = 0; yy < MAX_TOC_ENTRIES; yy++) entries[yy] = nullptr;
 
     // Our header
-    Header          head;
+    Header head;
     // Physical locations of our boundary rectangles
-    Location        locations[4];
+    Location locations[4];
     // Number of boundary records
-    ushort          numBndryRecords = 0;
-    ushort          ffPathLength = 0;
-    int i = 0;
-    int j = 0;
-    std::streamoff currTocPos = 0;
+    ushort numBndryRecords {};
+    ushort ffPathLength {};
+    int i {};
+    int j {};
+    std::streamoff currTocPos {};
     //char            filename[80];
     // Boundary record number
-    ushort          boundaryRecNum = 0;
+    ushort          boundaryRecNum {};
     // Frame row number
-    ushort          frameRow = 0;
+    ushort          frameRow {};
     // Frame column number
-    ushort          frameCol = 0;
+    ushort          frameCol {};
     // # of frame file index records
-    uint            numFFIdxRec = 0;
+    uint            numFFIdxRec {};
     // Offset of frame file pathname
 
-    uint            ffPathOff = 0;
+    uint            ffPathOff {};
     // Boundary record length
-    ushort          bndryRecLength = 0;
+    ushort          bndryRecLength {};
     // # frame file pathname records
-    ushort          numPathNameRecs = 0;
+    ushort          numPathNameRecs {};
     // Frame file index record length
-    ushort          idxRecLength = 0;
+    ushort          idxRecLength {};
     // TOC NITF header length, if there
-    uint            nitfHdrLength = 410;
+    uint            nitfHdrLength {410};
     // Boundary rectangle table offset
-    uint            bndryRecTableOffset = 0;
+    uint            bndryRecTableOffset {};
     // Frame file index table offset (not used)
-    uint            ffIdxTableOff = 0;
+    uint            ffIdxTableOff {};
 
     // Try to find and open our a.toc file
     std::ifstream toc;
@@ -279,17 +279,17 @@ bool CadrgFile::initialize(const char* dir)
     // for the Raster Product Format Header (RPFHDR).
     if (std::strncmp(head.govSpecdate, "199", 3) != 0) {
         // Make a large set of characters to read from
-        char buf[1024];
+        char buf[1024] {};
         // Read in some of the file
         toc.read(buf,1024);
 
         // Look for the RPFHDR indicator
-        char* ptr = std::strstr(buf, "RPFHDR");
+        char* ptr {std::strstr(buf, "RPFHDR")};
 
         // Found it!
         if (ptr) {
             // Distance from where we found RPFHDR to the beginning of the file (sizeof the NITF message, basically)
-            int dist = static_cast<int>(ptr - &buf[0]);
+            int dist {static_cast<int>(ptr - &buf[0])};
             // Padding 11 for some reason.
             nitfHdrLength = dist + 11;
         }
@@ -312,7 +312,7 @@ bool CadrgFile::initialize(const char* dir)
     // <location section location>      uint:    4                  45
 
     // endian indicator
-    unsigned char byte(0);
+    unsigned char byte {};
     toc.read(reinterpret_cast<char*>(&byte), sizeof(byte));
     head.endian = (byte != 0);
 
@@ -348,16 +348,13 @@ bool CadrgFile::initialize(const char* dir)
     if (locations[0].physicalIdx == ~0) {
         std::cout << "Can't find the LOC_BOUNDARY_SECTION_SUBHEADER in the TOC!" << std::endl;
         return false;
-    }
-    else if (locations[1].physicalIdx == ~0) {
+    } else if (locations[1].physicalIdx == ~0) {
         std::cout << "Can't find the LOC_BOUNDARY_RECTANGLE_TABLE in the TOC!" << std::endl;
         return false;
-    }
-    else if (locations[2].physicalIdx == ~0) {
+    } else if (locations[2].physicalIdx == ~0) {
         std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBHEADER in the TOC!" << std::endl;
         return false;
-    }
-    else if (locations[3].physicalIdx == ~0) {
+    } else if (locations[3].physicalIdx == ~0) {
         std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBSECTION in the TOC!" << std::endl;
         return false;
     }
@@ -412,7 +409,7 @@ bool CadrgFile::initialize(const char* dir)
         // Create a new entry
         entries[i] = new CadrgTocEntry();
 
-        char type[5];
+        char type[5] {};
         //strncpy(type, entries[i]->getType(), 5);
         // Read the type in
         toc.read(type, 5);
@@ -425,22 +422,22 @@ bool CadrgFile::initialize(const char* dir)
         // Skip the compression ratio
         toc.seekg(5, std::ios::cur);
         // Scale of our map (1:250k, etc...)
-        char scale[12];
+        char scale[12] {};
         std::strncpy(scale, entries[i]->getScale(), 12);
         toc.read(scale, 12);
 
         // Read the zone we are in.
-        char zone[2];
+        char zone[2] {};
         std::strncpy(zone, entries[i]->getZone(), 1);
         toc.read(zone, 1);
 
         // Skip producer (5 chars)
         toc.seekg(5, std::ios::cur);
 
-        double nwLat = 0, nwLon = 0, swLat = 0, swLon = 0, neLat = 0, neLon = 0, seLat = 0, seLon = 0;
-        double vertResolution = 0, horzResolution = 0;
-        double vertInterval = 0, horzInterval = 0;
-        int vertFrames = 0, horzFrames = 0;
+        double nwLat{}, nwLon{}, swLat{}, swLon{}, neLat{}, neLon{}, seLat{}, seLon{};
+        double vertResolution{}, horzResolution{};
+        double vertInterval{}, horzInterval{};
+        int vertFrames{}, horzFrames{};
 
         // Read all of our geodetic data.
         toc.read(reinterpret_cast<char*>(&nwLat), sizeof(double));
@@ -661,4 +658,3 @@ const char* CadrgFile::getDirectory()
 
 }
 }
-

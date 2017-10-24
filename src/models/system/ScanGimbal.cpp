@@ -176,7 +176,7 @@ void ScanGimbal::scanController(const double dt)
 //------------------------------------------------------------------------------
 void ScanGimbal::conicalScanController(const double dt)
 {
-    const double degPerDT = (getRevPerSec() * 360.0) * dt;
+    const double degPerDT{(getRevPerSec() * 360.0) * dt};
     static base::Integer iBar(1);
 
     switch(getScanState()) {
@@ -211,11 +211,11 @@ void ScanGimbal::conicalScanController(const double dt)
 
             // turn revolutions per second into degrees per sec per frame
             // now we get this to each time step
-            double conAngleN1 = getConAngle();
+            double conAngleN1{getConAngle()};
             setConAngle( base::angle::aepcdDeg(degPerDT + getConAngle()) );
 
             // end scan - finished with one rotation, check if our reference has moved
-            bool onceAround = false;
+            bool onceAround{};
 
             // clockwise rotation
             if (getRevPerSec() >= 0.0) {
@@ -237,9 +237,9 @@ void ScanGimbal::conicalScanController(const double dt)
     }
 
     // azimuth
-    const double newX = getScanRadius() * std::sin(getConAngle() * base::angle::D2RCC);
+    const double newX{getScanRadius() * std::sin(getConAngle() * base::angle::D2RCC)};
     // elevation
-    const double newY = getScanRadius() * std::cos(getConAngle() * base::angle::D2RCC);
+    const double newY{getScanRadius() * std::cos(getConAngle() * base::angle::D2RCC)};
     setScanPos(newX, newY);
 
     // command our new position
@@ -251,7 +251,7 @@ void ScanGimbal::conicalScanController(const double dt)
 //------------------------------------------------------------------------------
 void ScanGimbal::spiralScanController(const double dt)
 {
-    const double degPerDT = (getRevPerSec() * 360.0) * dt;
+    const double degPerDT{(getRevPerSec() * 360.0) * dt};
     static base::Integer iBar(1);
 
     switch(getScanState()) {
@@ -306,7 +306,7 @@ void ScanGimbal::spiralScanController(const double dt)
             }
 
             // end scan - finished with one rotation, check if our reference has moved
-            bool onceAround = false;
+            bool onceAround{};
 
             if (getNumRevs() >= getMaxNumRevs()) {
                 onceAround = true;
@@ -324,16 +324,16 @@ void ScanGimbal::spiralScanController(const double dt)
             break;
     }
 
-    double fullAngleRadians = getNumRevs() * 360.0;
+    double fullAngleRadians{getNumRevs() * 360.0};
     if (getRevPerSec() < 0.0) {
         fullAngleRadians = -fullAngleRadians;
     }
     fullAngleRadians = (fullAngleRadians + getConAngle()) * base::angle::D2RCC;
 
     // azimuth
-    const double newX = getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::sin(fullAngleRadians);
+    const double newX{getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::sin(fullAngleRadians)};
     // elevation
-    const double newY = getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::cos(fullAngleRadians);
+    const double newY{getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::cos(fullAngleRadians)};
     setScanPos(newX, newY);
 
     // command our new position
@@ -379,11 +379,11 @@ void ScanGimbal::circularScanController(const double)
 
         case 3: {
             // end scan - finished with one rotation, start over again
-            bool onceAround = false;
+            bool onceAround{};
 
-            double myAngle = base::angle::aepcdRad(getPosition().x() - getRefPosition().x());
+            double myAngle{base::angle::aepcdRad(getPosition().x() - getRefPosition().x())};
             // clockwise
-            if(getCmdAzRate() >= 0.0) {
+            if (getCmdAzRate() >= 0.0) {
                 onceAround = (myLastAngle < 0.0 && myAngle >= 0.0);
             }
             // we are going counter-clockwise
@@ -534,10 +534,10 @@ void ScanGimbal::userModesScanController(const double)
 //------------------------------------------------------------------------------
 void ScanGimbal::nextBar()
 {
-    const unsigned int nbars = getNumBars();
-    const unsigned int bn = getBarNumber();
+    const unsigned int nbars{getNumBars()};
+    const unsigned int bn{getBarNumber()};
 
-    if(isOddNumberOfBars()) {
+    if (isOddNumberOfBars()) {
         if (nbars == 1) {
             setReverseScan( !isReverseScan() );
         }
@@ -549,7 +549,7 @@ void ScanGimbal::nextBar()
             setBarNumber(getBarNumber()-1);
         }
         else {
-            unsigned int newBar = bn;
+            unsigned int newBar{bn};
             if (newBar < 1) {
                 newBar = 1;
             }
@@ -559,7 +559,7 @@ void ScanGimbal::nextBar()
     }
     else {
         setReverseScan(false);
-        unsigned int newBar = bn + 1;
+        unsigned int newBar{bn + 1};
         if (newBar > nbars) newBar = 1;
         setBarNumber(newBar);
     }
@@ -573,35 +573,32 @@ void ScanGimbal::computeNewBarPos(const int bar, const Side side)
 {
     // Lookup tables
     // 1 bar scan
-    static double table1[2][2] = { { -1, 0 },
-                                    { 1, 0 } };
+    static double table1[2][2] { { -1.0, 0.0 }, { 1.0, 0.0 } };
     // 2 bar scan
-    static double table2[2][2][2] = {
-        { {-1, 0.5f}, {1, 0.5f} },
-        { {1, -0.5f}, {-1, -0.5f} }
+    static double table2[2][2][2] { { {-1.0, 0.5}, {1.0, 0.5} }, { {1.0, -0.5}, {-1.0, -0.5} }
     };
 
     // 3 bar scan
-    static double table3[3][2][2] = {
-        { { -1, 1 }, {  1, 1 } },
-        { { 1, 0 },  { -1, 0 } },
-        { { -1, -1 }, { 1 , -1 } }
+    static double table3[3][2][2] {
+        { { -1.0,  1.0 }, {  1.0,  1.0 } },
+        { {  1.0,  0.0 }, { -1.0,  0.0 } },
+        { { -1.0, -1.0 }, {  1.0, -1.0 } }
     };
 
     // 4 bar scan
-    static double table4[4][2][2] = {
-        { { -1,  1.5f},   {  1,  1.5f} },
-        { {  1,  0.5f},   { -1,  0.5f} },
-        { { -1, -0.5f},   {  1, -0.5f} },
-        { {  1, -1.5f},   { -1, -1.5f} }
+    static double table4[4][2][2] {
+        { { -1.0,  1.5},   {  1.0,  1.5} },
+        { {  1.0,  0.5},   { -1.0,  0.5} },
+        { { -1.0, -0.5},   {  1.0, -0.5} },
+        { {  1.0, -1.5},   { -1.0, -1.5} }
     };
 
     // Now we determine which table to use, depending on the number of bars
-    double x = 0.0;
-    double y = 0.0;
+    double x{};
+    double y{};
 
     // now we draw the Unitless numbers from the tables
-    unsigned int nb = getNumBars();
+    unsigned int nb{getNumBars()};
     if (nb == 1) {
         x = table1[side][0];
         y = table1[side][1];
@@ -629,8 +626,8 @@ void ScanGimbal::computeNewBarPos(const int bar, const Side side)
     }
 
     // now turn our Unitless numbers in something we can use
-    const double x1 = x * (0.5 * getScanWidth());
-    const double y1 = y * (getBarSpacing());
+    const double x1{x * (0.5 * getScanWidth())};
+    const double y1{y * (getBarSpacing())};
 
     // We need to find which mode we are in before computing the start position
     if (getScanMode() == HORIZONTAL_BAR_SCAN) { setScanPos(x1, y1); }
@@ -746,7 +743,7 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
 //------------------------------------------------------------------------------
 bool ScanGimbal::setRefPosition(const double refAz,  const double refEl)
 {
-    bool ok = false;
+    bool ok{};
 
     // set one, and if it is ok, set the other
     ok = setRefAzimuth(refAz);
@@ -848,7 +845,7 @@ bool ScanGimbal::setMaxRevs(const double newMaxRevs)
 bool ScanGimbal::setSlotScanMode(base::String* const newMode)
 {
     // set our scan mode
-    bool ok = true;
+    bool ok{true};
     if (newMode != nullptr) {
         if (*newMode == "manual") ok = setScanMode(MANUAL_SCAN);
         else if (*newMode == "horizontal") ok = setScanMode(HORIZONTAL_BAR_SCAN);
@@ -865,9 +862,9 @@ bool ScanGimbal::setSlotScanMode(base::String* const newMode)
 // setSlotLeftToRightScan() - calls setLeftToRightScan()
 bool ScanGimbal::setSlotLeftToRightScan(const base::Number* const newLeftToRightScan)
 {
-    bool ok = false;
+    bool ok{};
     if (newLeftToRightScan != nullptr) {
-        const bool x = newLeftToRightScan->getBoolean();
+        const bool x{newLeftToRightScan->getBoolean()};
         ok = setLeftToRightScan(x);
     }
 
@@ -877,9 +874,9 @@ bool ScanGimbal::setSlotLeftToRightScan(const base::Number* const newLeftToRight
 // setSlotScanWidth() -- calls setScanWidth()
 bool ScanGimbal::setSlotScanWidth(const base::Number* const newWidth)
 {
-    bool ok = false;
+    bool ok{};
     if (newWidth != nullptr) {
-        const double x = newWidth->getDouble();
+        const double x{newWidth->getDouble()};
         ok = setScanWidth(x);
     }
     return ok;
@@ -888,10 +885,10 @@ bool ScanGimbal::setSlotScanWidth(const base::Number* const newWidth)
 // setSlotSearchVolume() -- calls setSearchVolume()
 bool ScanGimbal::setSlotSearchVolume(base::List* const numList)
 {
-    bool ok = false;
-    double values[2];
+    bool ok{};
+    double values[2]{};
     if (numList != nullptr) {
-        const int n = numList->getNumberList(values, 2);
+        const unsigned int n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setSearchVolume(values[0], values[1]);
     }
     return ok;
@@ -900,10 +897,10 @@ bool ScanGimbal::setSlotSearchVolume(base::List* const numList)
 // setSlotRefPosition() --  calls setRefPosition
 bool ScanGimbal::setSlotRefPosition(const base::List* const numList)
 {
-    bool ok = false;
-    double values[2];
+    bool ok{};
+    double values[2]{};
     if (numList != nullptr) {
-        const int n = numList->getNumberList(values, 2);
+        const unsigned int n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setRefPosition(values[0], values[1]);
     }
     return ok;
@@ -912,9 +909,9 @@ bool ScanGimbal::setSlotRefPosition(const base::List* const numList)
 // setSlotBarSpacing() --
 bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
 {
-    bool ok = false;
+    bool ok{};
     if (newSpacing != nullptr) {
-        const double x = newSpacing->getDouble();
+        const double x{newSpacing->getDouble()};
         ok = setBarSpacing(x);
     }
     return ok;
@@ -923,9 +920,9 @@ bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
 // setSlotNumBars() --
 bool ScanGimbal::setSlotNumBars(const base::Number* const newNumBars)
 {
-    bool ok = false;
+    bool ok{};
     if (newNumBars != nullptr) {
-        const int temp = newNumBars->getInt();
+        const int temp{newNumBars->getInt()};
         ok = setNumBars(temp);
     }
     return ok;
@@ -934,9 +931,9 @@ bool ScanGimbal::setSlotNumBars(const base::Number* const newNumBars)
 // setSlotRevPerSec() --
 bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
 {
-    bool ok = false;
+    bool ok{};
     if (newRevPerSec != nullptr) {
-        const double x = newRevPerSec->getDouble();
+        const double x{newRevPerSec->getDouble()};
         ok = setRevPerSec(x);
     }
     return ok;
@@ -945,9 +942,9 @@ bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
 // setSlotScanRadius() --
 bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
 {
-    bool ok = false;
+    bool ok{};
     if (newScanRadius != nullptr) {
-        double x = newScanRadius->getDouble();
+        double x{newScanRadius->getDouble()};
         const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
             x = base::Radians::convertStatic(*aa);
@@ -962,25 +959,25 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
 //     vertices: { [ 1 2 ]  [ 3 4 ] [ 5 6 ] }
 bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
 {
-   bool ok = true;
+   bool ok{true};
 
    if (prObj != nullptr) {
         // find how many vertices we have
-        unsigned int n = prObj->entries();
+        const unsigned int n{prObj->entries()};
         // Get the vertices from the pair stream
         nprv = 0;
-        const base::List::Item* item = prObj->getFirstItem();
+        const base::List::Item* item{prObj->getFirstItem()};
         // holds our array values
         base::Vec2d tempVerts(0.0, 0.0);
 
         while (item != nullptr && nprv < n) {
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
-                const base::Object* obj2 = p->object();
+                const base::Object* obj2{p->object()};
                 const auto msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
-                    double values[2];
-                    int nl = msg2->getNumberList(values, 2);
+                    double values[2]{};
+                    const unsigned int nl{msg2->getNumberList(values, 2)};
 
                     if (nl == 2) {
                         // set our values in our vector array
@@ -999,9 +996,9 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
 // setSlotMaxRevs() --
 bool ScanGimbal::setSlotMaxRevs(const base::Number* const newMaxRevs)
 {
-    bool ok = false;
+    bool ok{};
     if (newMaxRevs != nullptr) {
-        const double x = newMaxRevs->getDouble();
+        const double x{newMaxRevs->getDouble()};
         ok = setMaxRevs(x);
     }
     return ok;

@@ -72,7 +72,7 @@ void Message::setSenderName(const char* const sName)
 //-------------------------------------------------------------------------
 bool Message::addDestName(base::String* const name)
 {
-   bool ret = false;
+   bool ret{};
    if(name != nullptr) {
       if (destNames == nullptr)
          destNames = new base::List();
@@ -84,7 +84,7 @@ bool Message::addDestName(base::String* const name)
 
 bool Message::addDestName(const char* const name)
 {
-   bool ret = false;
+   bool ret{};
    if (name != nullptr) {
       const auto p = new base::String(name);
       ret = addDestName(p);
@@ -113,4 +113,3 @@ void Message::clearDestNames()
 
 }
 }
-

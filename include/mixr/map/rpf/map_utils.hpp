@@ -55,32 +55,32 @@ enum NitfHdrLengths {
 // List of all constants needed to do any CADRG file operations.
 // all values were found in MIL-STD-2411-2, section 5.1.1
 
-static const int LOC_HEADER_SECTION                     = 128;
-static const int LOC_LOCATION_SECTION                   = 129;
-static const int LOC_COVERAGE_SECTION                   = 130;
-static const int LOC_COMPRESSION_SECTION                = 131;
-static const int LOC_COMPRESSION_LOOKUP_SUBSECTION      = 132;
-static const int LOC_COMPRESSION_PARAMETER_SUBSECTION   = 133;
-static const int LOC_COLORGRAY_SECTION_SUBHEADER        = 134;
-static const int LOC_COLORMAP_SUBSECTION                = 135;
-static const int LOC_IMAGE_DESCR_SUBHEADER              = 136;
-static const int LOC_IMAGE_DISPLAY_PARAM_SUBHEADER      = 137;
-static const int LOC_MASK_SUBSECTION                    = 138;
-static const int LOC_COLOR_CONVERTER_SUBSECTION         = 139;
-static const int LOC_SPATIAL_DATA_SUBSECTION            = 140;
-static const int LOC_ATTRIBUTE_SECTION_SUBHEADER        = 141;
-static const int LOC_ATTRIBUTE_SUBSECTION               = 142;
-static const int LOC_EXPLICIT_AREAL_TABLE               = 143;
-static const int LOC_RELATED_IMAGE_SECTION_SUBHEADER    = 144;
-static const int LOC_RELATED_IMAGE_SUBSECTION           = 145;
-static const int LOC_REPLACE_UPDATE_SECTION_SUBHEADER   = 146;
-static const int LOC_REPLACE_UPDATE_TABLE               = 147;
-static const int LOC_BOUNDARY_SECTION_SUBHEADER         = 148;
-static const int LOC_BOUNDARY_RECTANGLE_TABLE           = 149;
-static const int LOC_FRAME_FILE_INDEX_SUBHEADER         = 150;
-static const int LOC_FRAME_FILE_INDEX_SUBSECTION        = 151;
-static const int LOC_COLOR_TABLE_SECTION_SUBHEADER      = 152;
-static const int LOC_COLOR_TABLE_INDEX_RECORD           = 153;
+static const int LOC_HEADER_SECTION                     {128};
+static const int LOC_LOCATION_SECTION                   {129};
+static const int LOC_COVERAGE_SECTION                   {130};
+static const int LOC_COMPRESSION_SECTION                {131};
+static const int LOC_COMPRESSION_LOOKUP_SUBSECTION      {132};
+static const int LOC_COMPRESSION_PARAMETER_SUBSECTION   {133};
+static const int LOC_COLORGRAY_SECTION_SUBHEADER        {134};
+static const int LOC_COLORMAP_SUBSECTION                {135};
+static const int LOC_IMAGE_DESCR_SUBHEADER              {136};
+static const int LOC_IMAGE_DISPLAY_PARAM_SUBHEADER      {137};
+static const int LOC_MASK_SUBSECTION                    {138};
+static const int LOC_COLOR_CONVERTER_SUBSECTION         {139};
+static const int LOC_SPATIAL_DATA_SUBSECTION            {140};
+static const int LOC_ATTRIBUTE_SECTION_SUBHEADER        {141};
+static const int LOC_ATTRIBUTE_SUBSECTION               {142};
+static const int LOC_EXPLICIT_AREAL_TABLE               {143};
+static const int LOC_RELATED_IMAGE_SECTION_SUBHEADER    {144};
+static const int LOC_RELATED_IMAGE_SUBSECTION           {145};
+static const int LOC_REPLACE_UPDATE_SECTION_SUBHEADER   {146};
+static const int LOC_REPLACE_UPDATE_TABLE               {147};
+static const int LOC_BOUNDARY_SECTION_SUBHEADER         {148};
+static const int LOC_BOUNDARY_RECTANGLE_TABLE           {149};
+static const int LOC_FRAME_FILE_INDEX_SUBHEADER         {150};
+static const int LOC_FRAME_FILE_INDEX_SUBSECTION        {151};
+static const int LOC_COLOR_TABLE_SECTION_SUBHEADER      {152};
+static const int LOC_COLOR_TABLE_INDEX_RECORD           {153};
 
 // Structures - List of all structured needed to hold any data or operation status.
 

@@ -5,6 +5,7 @@ LIB = $(MIXR_LIB_DIR)/libmixr_interop_rprfom.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM
+CPPFLAGS += -Wno-deprecated
 
 OBJS =  \
 	factory.o \

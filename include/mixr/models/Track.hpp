@@ -161,7 +161,7 @@ public:
    // Track's estimated ground speed (m/s)
    double getGroundSpeed() const                   { return gndSpd; }
    double getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2FT); }
-   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2NM * 3600.0f); }
+   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2NM * 3600.0); }
 
    // Ground track angle, true north
    double getGroundTrack() const                   { return gndTrk; }
@@ -261,7 +261,7 @@ protected:
    Player*     tgt {};            // (Optional) pointer to the Track Player
 
    bool        mslWarn {};         // Missile warning flag
-   static const int MAX_SIG = 4;
+   static const int MAX_SIG{4};
    std::array<double, MAX_SIG> lastSN{}; // Last MAX_SIG signal values         (dB)
    double      avgSig {};                // Average signal                     (dB)
    double      maxSig {};                // Max Signal                         (dB)
@@ -291,11 +291,11 @@ public:
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                   { return mslWarn; }
-   virtual bool setMissileWarning(const bool b);
+   virtual bool setMissileWarning(const bool);
 
    virtual void clear() override;
 
-   virtual bool setLastEmission(const Emission* const em);
+   virtual bool setLastEmission(const Emission* const);
 
 protected:
    const Emission* lastEM {};      // Last emission
@@ -319,17 +319,17 @@ public:
    double getMaxSignal() const                                             { return maxSig; }
    int getNumSignals() const                                               { return nSig; }
    const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
-   virtual bool setSignal(const double snDbl, const IrQueryMsg* const q);
-   virtual bool setPosition(const base::Vec3d& p) override;
+   virtual bool setSignal(const double snDbl, const IrQueryMsg* const);
+   virtual bool setPosition(const base::Vec3d&) override;
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                                           { return mslWarn; }
-   virtual bool setMissileWarning(const bool b);
+   virtual bool setMissileWarning(const bool);
 
    virtual void clear() override;
 
 //protected:
-   virtual bool setLastQuery(const IrQueryMsg* const q);
+   virtual bool setLastQuery(const IrQueryMsg* const);
 
 protected:
    const IrQueryMsg* lastQuery {}; // Last query

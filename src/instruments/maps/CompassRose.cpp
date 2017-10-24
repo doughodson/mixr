@@ -25,9 +25,9 @@ BEGIN_SLOTTABLE(CompassRose)
 END_SLOTTABLE(CompassRose)       
 
 BEGIN_SLOT_MAP(CompassRose)
-    ON_SLOT(1, setSlotCenteredRadius, base::Number)
+    ON_SLOT(1, setSlotCenteredRadius,   base::Number)
     ON_SLOT(2, setSlotDeCenteredRadius, base::Number)
-    ON_SLOT(3, setSlotDisplacement, base::Number)
+    ON_SLOT(3, setSlotDisplacement,     base::Number)
 END_SLOT_MAP()
 
 CompassRose::CompassRose()

@@ -42,7 +42,7 @@ void Thread::deleteData()
 //------------------------------------------------------------------------------
 bool Thread::create()
 {
-   bool ok = true;
+   bool ok{true};
 
    // Check for a parent pointer
    if (parent == nullptr) {

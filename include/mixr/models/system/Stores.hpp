@@ -192,11 +192,6 @@ protected:
    // Sends a Reset Event to all players
    void resetStores(base::PairStream* const list);
 
-   // Slot functions
-   virtual bool setSlotNumStations(base::Number* const msg);       // Number of stations
-   virtual bool setSlotStores(const base::PairStream* const msg); // (clones the 'msg' list)
-   virtual bool setSlotSelected(base::Number* const msg);         // Selected station
-
    virtual void process(const double dt) override;
 
 private:
@@ -222,6 +217,14 @@ private:
       else if (s <= ns) return (s-1);
       return -1;
    }
+
+protected:
+   virtual bool setSlotStores(const base::PairStream* const);   // (clones the 'msg' list)
+
+private:
+   // slot table helper methods
+   bool setSlotNumStations(base::Number* const);                // Number of stations
+   bool setSlotSelected(base::Number* const);                   // Selected station
 };
 
 }

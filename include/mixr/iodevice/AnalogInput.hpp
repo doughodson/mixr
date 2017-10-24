@@ -75,14 +75,6 @@ public:
 protected:
    virtual double convert(const double vin, const double dt);
 
-   // Slot functions
-   virtual bool setSlotLocation(const base::Number* const);
-   virtual bool setSlotChannel(const base::Number* const);
-   virtual bool setSlotValue(const base::Number* const);
-   virtual bool setSlotDeadband(const base::Number* const);
-   virtual bool setSlotOffset(const base::Number* const);
-   virtual bool setSlotGain(const base::Number* const);
-
 private:
    void initData();
 
@@ -94,6 +86,15 @@ private:
    double offset {};             // Offset
    double gain {1.0};            // Gain
    const base::Table1* table {}; // Shaping table
+
+private:
+   // slot table helper methods
+   bool setSlotLocation(const base::Number* const);
+   bool setSlotChannel(const base::Number* const);
+   bool setSlotValue(const base::Number* const);
+   bool setSlotDeadband(const base::Number* const);
+   bool setSlotOffset(const base::Number* const);
+   bool setSlotGain(const base::Number* const);
 };
 
 }

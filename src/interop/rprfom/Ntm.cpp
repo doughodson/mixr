@@ -42,7 +42,7 @@ void Ntm::copyData(const Ntm& org, const bool)
 //------------------------------------------------------------------------------
 bool Ntm::copyEntityType(interop::Nib* const targetNib) const
 {
-   bool ok = false;
+   bool ok {};
    const auto tgtNib = dynamic_cast<Nib*>(targetNib);
    if (tgtNib != nullptr) {
       ok = tgtNib->setEntityType(kind, domain, country, category, subcategory, specific, extra);
@@ -64,7 +64,7 @@ bool Ntm::setEntityType(
     )
 {
    // Some simple validity checks
-   bool ok = (k < NetIO::NUM_ENTITY_KINDS) || (d < NetIO::NUM_ENTITY_DOMAINS);
+   bool ok {(k < NetIO::NUM_ENTITY_KINDS) || (d < NetIO::NUM_ENTITY_DOMAINS)};
 
    if (ok) {
       kind = k;
@@ -84,58 +84,53 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 bool Ntm::setSlotEntityType(const base::List* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int values[7];
-      int n = msg->getNumberList(values, 7);
+      int values[7] {};
+      unsigned int n {msg->getNumberList(values, 7) };
       if (n >= 4) {
          // Need at least Kind, domain, country & category
          ok = true;  // First, assume they're valid
-         unsigned char k = 0;    // Kind
+         unsigned char k {};    // Kind
          if (values[0] >= 0x0 && values[0] <= 0xff) {
             k = static_cast<unsigned char>(values[0]);
-         }
-         else {
+         } else {
             std::cerr << "Ntm::setSlotEntityType: Invalid kind: [ 0 .. 255 ]" << std::endl;
             ok = false;
          }
 
-         unsigned char d = 0;    // Domain
+         unsigned char d {};    // Domain
          if (values[1] >= 0x0 && values[1] <= 0xff) {
             d = static_cast<unsigned char>(values[1]);
-         }
-         else {
+         } else {
             std::cerr << "Ntm::setSlotEntityType: Invalid domain: [ 0 .. 255 ]" << std::endl;
             ok = false;
          }
 
-         unsigned short cc = 0;  // Country code
+         unsigned short cc {};  // Country code
          if (values[2] >= 0x0 && values[2] <= 0xffff) {
             cc = (unsigned char) values[2];
-         }
-         else {
+         } else {
             std::cerr << "Ntm::setSlotEntityType: Invalid country: [ 0 .. 65535 ]" << std::endl;
             ok = false;
          }
 
-         unsigned char c = 0;    // Category
+         unsigned char c {};    // Category
          if (values[3] >= 0x0 && values[3] <= 0xff) {
             c = static_cast<unsigned char>(values[3]);
-         }
-         else {
+         } else {
             std::cerr << "Ntm::setSlotEntityType: Invalid category: [ 0 .. 255 ]" << std::endl;
             ok = false;
          }
 
          // Ok so far, now for the optional stuff ...
-         unsigned char sc = 0;   // Subcategory
-         unsigned char sp = 0;   // Specific
-         unsigned char ex = 0;   // Extra
+         unsigned char sc {};   // Subcategory
+         unsigned char sp {};   // Specific
+         unsigned char ex {};   // Extra
          if (n >= 5) {
             if (values[4] >= 0x0 && values[4] <= 0xff) {
                sc = static_cast<unsigned char>(values[4]);
-            }
-            else {
+            } else {
                std::cerr << "Ntm::setSlotEntityType: Invalid subcategory: [ 0 .. 255 ]" << std::endl;
                ok = false;
             }
@@ -143,8 +138,7 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
          if (n >= 6) {
             if (values[5] >= 0x0 && values[5] <= 0xff) {
                sp = static_cast<unsigned char>(values[5]);
-            }
-            else {
+            } else {
                std::cerr << "Ntm::setSlotEntityType: Invalid specific: [ 0 .. 255 ]" << std::endl;
                ok = false;
             }
@@ -152,8 +146,7 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
          if (n >= 7) {
             if (values[6] >= 0x0 && values[6] <= 0xff) {
                ex = static_cast<unsigned char>(values[6]);
-            }
-            else {
+            } else {
                std::cerr << "Ntm::setSlotEntityType: Invalid extra: [ 0 .. 255 ]" << std::endl;
                ok = false;
             }
@@ -164,8 +157,7 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
             ok = setEntityType(k, d, cc, c, sc, sp, ex);
          }
 
-      }
-      else {
+      } else {
          std::cerr << "Ntm::setSlotEntityType: Invalid entity type vector: need at least [ kind domain country category ]" << std::endl;
       }
    }

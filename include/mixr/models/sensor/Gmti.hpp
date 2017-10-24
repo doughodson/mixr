@@ -24,12 +24,14 @@ public:
    void setPoi(const base::Vec3d& newPos);
 
 protected:
-   bool setSlotPoi(base::List* const numList);                // Set Point of Interest
-
    virtual void dynamics(const double dt) override;
 
 private:
    base::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
+
+private:
+   // slot table helper methods
+   bool setSlotPoi(base::List* const);
 };
 
 }

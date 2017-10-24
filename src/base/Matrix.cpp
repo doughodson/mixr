@@ -50,7 +50,7 @@ void Matrix::copyData(const Matrix& org, const bool)
 
    rows = org.rows;
    cols = org.cols;
-   unsigned int arraySize = rows*cols;
+   const unsigned int arraySize{rows*cols};
    mda = new double[arraySize];
 
    for (unsigned int idx = 0; idx < arraySize; idx++) {
@@ -94,13 +94,13 @@ unsigned int Matrix::getFldWidth() const
 
 double Matrix::getMaxMag() const
 {
-   double val = mda[0];
-   double max = std::fabs(val);
+   double val{mda[0]};
+   double max{std::fabs(val)};
    for (unsigned int i = 0; i < rows; i++) {
-      unsigned int idx = cols*i;
+      unsigned int idx{cols*i};
       for (unsigned int j = 0; j < cols; j++) {
-         double x = mda[idx];
-         double y = std::fabs(x);
+         const double x{mda[idx]};
+         const double y{std::fabs(x)};
          if (max < y) {
             max = y;
             val = x;
@@ -113,12 +113,12 @@ double Matrix::getMaxMag() const
 
 double Matrix::getMinMag() const
 {
-   double val = mda[0];
-   double min = std::fabs(val);
+   double val{mda[0]};
+   double min{std::fabs(val)};
    for (unsigned int i=0; i<rows; i++) {
       unsigned int idx = cols*i;
       for (unsigned int j=0; j<cols; j++) {
-         double x = std::fabs(mda[idx]);
+         const double x{std::fabs(mda[idx])};
          if (min > x) {
             val = mda[idx];
             min = x;
@@ -141,7 +141,7 @@ Matrix* Matrix::getTranspose() const
 // if the matrix can not be inverted
 Matrix* Matrix::getInvGJ() const
 {
-   Matrix* m = nullptr;
+   Matrix* m{};
    if (isSquare()) {
       m = new Matrix(*this);
       m->invert();
@@ -155,7 +155,7 @@ Matrix* Matrix::getInvLU() const
 {
    if (!isGoodMatrix() || !isSquare()) return nullptr;
 
-   const unsigned int N = rows;
+   const unsigned int N{rows};
    const auto pL = new Matrix(N,N);
    const auto pU = new Matrix(N,N);
    getLU(pL, pU);
@@ -204,17 +204,17 @@ Matrix* Matrix::getInvLU() const
 double Matrix::getDeterm() const
 {
    // check 'this' matrix for compatibility
-   if (!isGoodMatrix() || !isSquare()) return 0;
+   if (!isGoodMatrix() || !isSquare()) return 0.0;
 
    // get the L and U matrices
-   const unsigned int N = rows;
+   const unsigned int N {rows};
    const auto pL = new Matrix(N,N);
    const auto pU = new Matrix(N,N);
 
    getLU(pL, pU);
 
    // find determinate by calculating product of U's diagonal elements
-   double determ = 1.0;
+   double determ {1.0};
    for (unsigned int i = 0; i < N; i++) {
       determ *= (*pU)(i,i);
    }
@@ -247,7 +247,7 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c)
 
    rows = r;
    cols = c;
-   unsigned int arraySize = rows*cols;
+   unsigned int arraySize {rows*cols};
    mda = new double[arraySize];
 
    for (unsigned int i = 0; i < arraySize; i++) {
@@ -262,10 +262,10 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c, const double*
 
    rows = r;
    cols = c;
-   unsigned int mdaSize = rows*cols;
+   const unsigned int mdaSize{rows*cols};
    mda = new double[mdaSize];
 
-   unsigned int idx = 0;
+   unsigned int idx{};
    while (idx < mdaSize && idx < dataSize) {
       mda[idx] = data[idx];
       idx++;
@@ -282,10 +282,10 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c, const float* 
 
    rows = r;
    cols = c;
-   unsigned int mdaSize = rows*cols;
+   const unsigned int mdaSize{rows*cols};
    mda = new double[mdaSize];
 
-   unsigned int idx = 0;
+   unsigned int idx{};
    while (idx < mdaSize && idx < dataSize) {
       mda[idx] = data[idx];
       idx++;
@@ -297,9 +297,9 @@ void Matrix::setMatrix(const unsigned int r, const unsigned int c, const float* 
 
 bool Matrix::setElem(const unsigned int i, const unsigned int j, const double x)
 {
-   bool ok = isGoodIndex(i,j);
+   bool ok{isGoodIndex(i,j)};
    if (ok) {
-      int idx = i*cols + j;
+      const unsigned int idx{i*cols + j};
       mda[idx] = x;
    }
    return ok;
@@ -322,9 +322,9 @@ bool Matrix::setFldWidth(const unsigned int FW)
 //------------------------------------------------------------------------------
 double* Matrix::operator[](unsigned int x)
 {
-   double* p = nullptr;
+   double* p{};
    if (x < rows) {
-      unsigned int idx = cols * x;
+      const unsigned int idx{cols * x};
       p = &mda[idx];
    }
    return p;
@@ -332,9 +332,9 @@ double* Matrix::operator[](unsigned int x)
 
 const double* Matrix::operator[](unsigned int x) const
 {
-   const double* p = nullptr;
+   const double* p{};
    if (x < rows) {
-      unsigned int idx = cols * x;
+      const unsigned int idx{cols * x};
       p = &mda[idx];
    }
    return p;
@@ -346,10 +346,10 @@ const double* Matrix::operator[](unsigned int x) const
 //------------------------------------------------------------------------------
 bool Matrix::add(const Matrix& m)
 {
-   bool ok = false;
+   bool ok{};
    if (m.rows == rows || m.cols == cols) {
       for (unsigned int i=0; i<rows; i++) {
-         int idx = cols*i;
+         unsigned int idx{cols*i};
          for (unsigned int j=0; j < cols; j++) {
             mda[idx] += m.mda[idx];
             idx++;
@@ -366,10 +366,10 @@ bool Matrix::add(const Matrix& m)
 //------------------------------------------------------------------------------
 bool Matrix::subtract(const Matrix& m)
 {
-   bool ok = false;
+   bool ok{};
    if (m.rows == rows || m.cols == cols) {
       for (unsigned int i=0; i < rows; i++) {
-         unsigned int idx = cols*i;
+         unsigned int idx{cols*i};
          for (unsigned int j=0; j < cols; j++) {
             mda[idx] -= m.mda[idx];
             idx++;
@@ -386,7 +386,7 @@ bool Matrix::subtract(const Matrix& m)
 //------------------------------------------------------------------------------
 bool Matrix::multiply(const Matrix& m2)
 {
-   bool ok = false;
+   bool ok{};
    if (cols == m2.rows) {
       Matrix m1(*this);
 
@@ -397,11 +397,11 @@ bool Matrix::multiply(const Matrix& m2)
 
       for (unsigned int i=0; i < rows; i++) {
          for (unsigned int j=0; j < cols; j++) {
-            unsigned int idx = cols*i + j;
+            unsigned int idx{cols*i + j};
             mda[idx] = 0.0;
             for (unsigned int k=0; k < m1.cols; k++) {
-               unsigned int idx1 = m1.cols*i + k;
-               unsigned int idx2 = m2.cols*k + j;
+               unsigned int idx1{m1.cols*i + k};
+               unsigned int idx2{m2.cols*k + j};
                mda[idx] += (m1.mda[idx1] * m2.mda[idx2]);
             }
          }
@@ -417,7 +417,7 @@ bool Matrix::multiply(const Matrix& m2)
 bool Matrix::multiply(const double s)
 {
    for (unsigned int i=0; i<rows; i++) {
-      unsigned int idx = cols*i;
+      unsigned int idx{cols*i};
       for (unsigned int j=0; j<cols; j++) {
          mda[idx++] *= s;
       }
@@ -430,14 +430,14 @@ bool Matrix::multiply(const double s)
 //------------------------------------------------------------------------------
 bool Matrix::transpose()
 {
-   bool ok = mda != nullptr && rows > 0 && cols > 0;
+   bool ok{mda != nullptr && rows > 0 && cols > 0};
    if (ok) {
       const auto temp = new double[rows*cols];
 
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
-            unsigned int idx1 = cols*i + j;
-            unsigned int idx2 = rows*j + i;
+            unsigned int idx1{cols*i + j};
+            unsigned int idx2{rows*j + i};
             temp[idx2] = mda[idx1];
          }
       }
@@ -446,7 +446,7 @@ bool Matrix::transpose()
       mda = temp;
 
       if (rows != cols) {
-         unsigned int xxxx = rows;
+         unsigned int xxxx{rows};
          rows = cols;
          cols = xxxx;
       }
@@ -459,16 +459,16 @@ bool Matrix::transpose()
 //------------------------------------------------------------------------------
 bool Matrix::invert()
 {
-   bool ok = mda != nullptr && rows > 0 && cols > 0 && isSquare();
+   bool ok{mda != nullptr && rows > 0 && cols > 0 && isSquare()};
 
    if (ok) {
       Matrix m(rows, cols);
       m.makeIdent();
-      unsigned int origCols = cols;  // 'cols' is changed after augment()
+      unsigned int origCols{cols};  // 'cols' is changed after augment()
       augment(m);
 
       for (unsigned int k = 0; k < origCols; k++) {
-         pivotRow(k,k);
+         pivotRow(k, k);
          mulRow(k, 1.0/getElem(k,k));
          for (unsigned int i=0; i<rows; i++) {
             if (i != k) {
@@ -487,16 +487,16 @@ bool Matrix::invert()
 //------------------------------------------------------------------------------
 bool Matrix::pivotRow(const unsigned int r, const unsigned int c)
 {
-   bool l1 = (r < rows-1);
-   bool l2 = (c < cols);
+   const bool l1{(r < rows-1)};
+   const bool l2{(c < cols)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
-      unsigned int refrow = r;
-      double max = std::fabs(getElem(r,c));
+      unsigned int refrow{r};
+      double max{std::fabs(getElem(r,c))};
 
       for (unsigned int i=r+1; i<rows; i++) {
-         double val = std::fabs(getElem(i,c));
+         const double val{std::fabs(getElem(i,c))};
          if (val > max) {
             refrow = i;
             max = val;
@@ -518,16 +518,16 @@ bool Matrix::pivotRow(const unsigned int r, const unsigned int c)
 bool Matrix::pivotCol(const unsigned int r, const unsigned int c)
 {
    // error check
-   bool l1 = (r < rows);
-   bool l2 = (c < cols-1);
+   const bool l1{(r < rows)};
+   const bool l2{(c < cols-1)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
-      unsigned int refcol = c;
-      double max = std::fabs(getElem(r,c));
+      unsigned int refcol{c};
+      double max{std::fabs(getElem(r,c))};
 
       for (unsigned int j=c+1; j<=cols; j++) {
-         double val = std::fabs(getElem(r,j));
+         const double val{std::fabs(getElem(r,j))};
          if (val > max) {
             refcol = j;
             max = val;
@@ -537,12 +537,12 @@ bool Matrix::pivotCol(const unsigned int r, const unsigned int c)
       if (c != refcol) {
          //swapCol(c, refcol);
 
-         int c1 = c;
-         int c2 = refcol;
+         const unsigned int c1{c};
+         const unsigned int c2{refcol};
          for (unsigned int i=0; i<rows; i++) {
-            unsigned int idx1 = i*cols + c1;
-            unsigned int idx2 = i*cols + c2;
-            double xxxx = mda[idx1];
+            const unsigned int idx1{i*cols + c1};
+            const unsigned int idx2{i*cols + c2};
+            const double xxxx{mda[idx1]};
             mda[idx1]  = mda[idx2];
             mda[idx2]  = xxxx;
          }
@@ -558,17 +558,17 @@ bool Matrix::pivotCol(const unsigned int r, const unsigned int c)
 //------------------------------------------------------------------------------
 bool Matrix::augment(const Matrix& m)
 {
-   bool ok = false;
+   bool ok{};
    if (rows == m.rows) {
       const auto arr = new double[rows*(cols + m.cols)];
-      unsigned int idx = 0;
+      unsigned int idx{};
       for (unsigned int i=0; i<rows; i++) {
-         unsigned int idx1 = i*cols;
+         unsigned int idx1{i*cols};
          for (unsigned int j=0; j<cols; j++) {
             arr[idx++] = mda[idx1++];
          }
 
-         unsigned int idx2 = i*m.cols;
+         unsigned int idx2{i*m.cols};
          for (unsigned int k=0; k<m.cols; k++) {
             arr[idx++] = m.mda[idx2++];
          }
@@ -588,16 +588,16 @@ bool Matrix::augment(const Matrix& m)
 bool Matrix::swapRow(const unsigned int r1, const unsigned int r2)
 {
    // error check
-   bool l1 = (r1 < rows);
-   bool l2 = (r2 < rows);
+   const bool l1{(r1 < rows)};
+   const bool l2{(r2 < rows)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
       if (r1 != r2) {
-         unsigned int idx1 = r1*cols;
-         unsigned int idx2 = r2*cols;
+         unsigned int idx1{r1*cols};
+         unsigned int idx2{r2*cols};
          for (unsigned int j=0; j<cols; j++) {
-            double xxxx = mda[idx1];
+            const double xxxx{mda[idx1]};
             mda[idx1]  = mda[idx2];
             mda[idx2]  = xxxx;
             idx1++;
@@ -616,16 +616,16 @@ bool Matrix::swapRow(const unsigned int r1, const unsigned int r2)
 bool Matrix::swapCol(const unsigned int c1, const unsigned int c2)
 {
    // error check
-   bool l1 = (c1 < cols);
-   bool l2 = (c2 < cols);
+   const bool l1{(c1 < cols)};
+   const bool l2{(c2 < cols)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
       if (c1 != c2) {
          for (unsigned int i=0; i<rows; i++) {
-            unsigned int idx1 = i*cols + c1;
-            unsigned int idx2 = i*cols + c2;
-            double xxxx = mda[idx1];
+            const unsigned int idx1{i*cols + c1};
+            const unsigned int idx2{i*cols + c2};
+            const double xxxx{mda[idx1]};
             mda[idx1]  = mda[idx2];
             mda[idx2]  = xxxx;
          }
@@ -641,14 +641,14 @@ bool Matrix::swapCol(const unsigned int c1, const unsigned int c2)
 bool Matrix::addRow(const unsigned int r1, const unsigned int r2, const double k)
 {
    // error check
-   bool l1 = (r1 < rows);
-   bool l2 = (r2 < rows);
-   bool l3 = (r1 != r2);
+   const bool l1{(r1 < rows)};
+   const bool l2{(r2 < rows)};
+   const bool l3{(r1 != r2)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2 && l3) {
-      unsigned int idx1 = r1*cols;
-      unsigned int idx2 = r2*cols;
+      unsigned int idx1{r1*cols};
+      unsigned int idx2{r2*cols};
       for (unsigned int j=0; j<cols; j++) {
          mda[idx1++] += k*mda[idx2++];
       }
@@ -663,15 +663,15 @@ bool Matrix::addRow(const unsigned int r1, const unsigned int r2, const double k
 bool Matrix::addCol(const unsigned int c1, const unsigned int c2, const double k)
 {
    // error check
-   bool l1 = (c1 < cols);
-   bool l2 = (c2 < cols);
-   bool l3 = (c1 != c2);
+   const bool l1{(c1 < cols)};
+   const bool l2{(c2 < cols)};
+   const bool l3{(c1 != c2)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2 && l3) {
       for (unsigned int i=0; i<rows; i++) {
-         unsigned int idx1 = cols*i + c1;
-         unsigned int idx2 = cols*i + c2;
+         const unsigned int idx1{cols*i + c1};
+         const unsigned int idx2{cols*i + c2};
          mda[idx1] += k*mda[idx2];
       }
       ok = true;
@@ -685,12 +685,12 @@ bool Matrix::addCol(const unsigned int c1, const unsigned int c2, const double k
 bool Matrix::mulRow(const unsigned int r, const double k)
 {
    // error check
-   bool l1 = (r < rows);
+   const bool l1{(r < rows)};
 
-   bool ok = false;
+   bool ok{};
    if (l1) {
       for (unsigned int j=0; j<cols; j++) {
-         unsigned int idx = cols*r + j;
+         const unsigned int idx{cols*r + j};
          mda[idx] *= k;
       }
       ok = true;
@@ -704,12 +704,12 @@ bool Matrix::mulRow(const unsigned int r, const double k)
 bool Matrix::mulCol(const unsigned int c, const double k)
 {
    // error check
-   bool l1 = (c < cols);
+   const bool l1{(c < cols)};
 
-   bool ok = false;
+   bool ok{};
    if (l1) {
       for (unsigned int i=0; i<rows; i++) {
-         unsigned int idx = cols*i + c;
+         const unsigned int idx{cols*i + c};
          mda[idx] *= k;
       }
       ok = true;
@@ -723,17 +723,17 @@ bool Matrix::mulCol(const unsigned int c, const double k)
 bool Matrix::remRow(const unsigned int r)
 {
    // error check
-   bool l1 = (r < rows);
-   bool l2 = (0 < rows);  // must have at least one row
+   const bool l1{(r < rows)};
+   const bool l2{(0 < rows)};  // must have at least one row
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
       const auto arr = new double[(rows-1)*cols];
-      unsigned int idx1 = 0;
+      unsigned int idx1{};
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
             if (i != r) {
-               unsigned int idx2 = cols*i + j;
+               const unsigned int idx2{cols*i + j};
                arr[idx1] = mda[idx2];
                idx1++;
             }
@@ -754,19 +754,19 @@ bool Matrix::remRow(const unsigned int r)
 bool Matrix::remRows(const unsigned int r1, const unsigned int r2)
 {
    // error check
-   bool l1 = (r1 < rows) && (r2 < rows);
-   bool l2 = (0 < rows);
+   const bool l1{(r1 < rows) && (r2 < rows)};
+   const bool l2{(0 < rows)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
-      unsigned int rr = 1 + std::abs(static_cast<int>(r2) - static_cast<int>(r1));
-      if (rr < rows) {
+      const int rr{1 + std::abs(static_cast<int>(r2) - static_cast<int>(r1))};
+      if (rr < static_cast<int>(rows)) {
          const auto arr = new double[(rows-rr)*cols];
-         unsigned int idx1 = 0;
+         unsigned int idx1{};
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
                if ( ((i<r1) && (i<r2)) || ((r1<i) && (r2<i)) ) {
-                  unsigned int idx2 = cols*i + j;
+                  const unsigned int idx2{cols*i + j};
                   arr[idx1] = mda[idx2];
                   idx1++;
                }
@@ -787,17 +787,17 @@ bool Matrix::remRows(const unsigned int r1, const unsigned int r2)
 bool Matrix::remCol(const unsigned int c)
 {
    // error check
-   bool l1 = (c < cols);
-   bool l2 = (0 < cols);  // must have at least one column
+   const bool l1{(c < cols)};
+   const bool l2{(0 < cols)};  // must have at least one column
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
       const auto arr = new double[rows*(cols-1)];
-      unsigned int idx1 = 0;
+      unsigned int idx1{};
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
             if (j != c) {
-               unsigned int idx2 = cols*i + j;
+               const unsigned int idx2{cols*i + j};
                arr[idx1] = mda[idx2];
                idx1++;
             }
@@ -817,19 +817,19 @@ bool Matrix::remCol(const unsigned int c)
 bool Matrix::remCols(const unsigned int c1, const unsigned int c2)
 {
    // error check
-   bool l1 = (c1 < cols) && (c2 < cols);
-   bool l2 = (0 < cols);
+   const bool l1{(c1 < cols) && (c2 < cols)};
+   const bool l2{(0 < cols)};
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2) {
-      unsigned int cc = 1 + std::abs(static_cast<int>(c2) - static_cast<int>(c1));
-      if (cc < cols) {
+      const int cc{1 + std::abs(static_cast<int>(c2) - static_cast<int>(c1))};
+      if (cc < static_cast<int>(cols)) {
          const auto arr = new double[rows*(cols-cc)];
-         unsigned int idx1 = 0;
+         unsigned int idx1{};
          for (unsigned int i=0; i<rows; i++) {
             for (unsigned int j=0; j<cols; j++) {
                if ( ((j<c1) && (j<c2)) || ((c1<j) && (c2<j)) ) {
-                  unsigned int idx2 = cols*i + j;
+                  const unsigned int idx2{cols*i + j};
                   arr[idx1] = mda[idx2];
                   idx1++;
                }
@@ -850,20 +850,20 @@ bool Matrix::remCols(const unsigned int c1, const unsigned int c2)
 bool Matrix::remRowCol(const unsigned int r, const unsigned int c)
 {
    // error check
-   bool l1 = (r < rows);
-   bool l2 = (c < cols);
-   bool l3 = (0 < rows) && (0 < cols);  // (special cases - e.g. r=1,c=1 ??)
+   const bool l1{(r < rows)};
+   const bool l2{(c < cols)};
+   const bool l3{(0 < rows) && (0 < cols)};  // (special cases - e.g. r=1,c=1 ??)
 
-   bool ok = false;
+   bool ok{};
    if (l1 && l2 && l3) {
       const auto temp = new double[(rows-1)*(cols-1)];
-      unsigned int idx1 = 0;
+      unsigned int idx1{};
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
-            bool b1 = (i != r);
-            bool b2 = (j != c);
+            const bool b1{(i != r)};
+            const bool b2{(j != c)};
             if (b1 && b2) {
-               unsigned int idx2 = cols*i + j;
+               const unsigned int idx2{cols*i + j};
                temp[idx1++] = mda[idx2];
             }
          }
@@ -884,17 +884,16 @@ void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
 {
    if (!isGoodMatrix()) {
       std::cout << "There is a problem displaying this matrix." << std::endl;
-   }
-   else {
+   } else {
       unsigned int decpnt = getDecPoint();
       if (DP != decpnt) {
          decpnt = DP;
       }
 
-      unsigned int fldwth = 0;
-      unsigned int gfw = getFldWidth();
-      unsigned int margin = 3;
-      unsigned int sum = decpnt;
+      unsigned int fldwth{};
+      unsigned int gfw{getFldWidth()};
+      unsigned int margin{3};
+      unsigned int sum{decpnt};
       sum += (decpnt == 0 ? -1 : 0);
       sum += getDigits(getMaxMag());
       sum += margin;
@@ -914,15 +913,13 @@ void Matrix::showMatrix(const unsigned int DP, const unsigned int FW) const
 
       for (unsigned int i=0; i<rows; i++) {
          for (unsigned int j=0; j<cols; j++) {
-            unsigned int idx = cols*i + j;
+            const unsigned int idx{cols*i + j};
             std::cout << std::setw(fldwth) << mda[idx];
          }
          std::cout << std::endl;
       }
-
       std::cout.setf(oldFmtFlgs);
       std::cout << std::setprecision(oldprec);
-
    }
 }
 
@@ -933,13 +930,12 @@ std::ostream& operator<<(std::ostream& sout, const Matrix& m)
 {
    if (!m.isGoodMatrix()) {
       sout << "There is a problem displaying this matrix." << std::endl;
-   }
-   else {
-      const unsigned int DECPNT = m.getDecPoint();
+   } else {
+      const unsigned int DECPNT{m.getDecPoint()};
       const unsigned int DPZERO = (DECPNT == 0 ? -1 : 0);
-      const unsigned int DIGITS = getDigits(m.getMaxMag());
-      const unsigned int MARGIN = 3;
-      const unsigned int FLDWTH = DECPNT + DPZERO + DIGITS + MARGIN;
+      const unsigned int DIGITS{getDigits(m.getMaxMag())};
+      const unsigned int MARGIN{3};
+      const unsigned int FLDWTH{DECPNT + DPZERO + DIGITS + MARGIN};
 
       std::ios_base::fmtflags oldFmtFlgs =  sout.flags();
       std::streamsize oldprec = sout.precision();
@@ -971,7 +967,7 @@ bool Matrix::makeZero()
       return false;
    }
 
-   const unsigned int SIZE = rows * cols;
+   const unsigned int SIZE{rows * cols};
    for (unsigned int i = 0; i < SIZE; i++) {
       mda[i] = 0.0;
    }
@@ -988,7 +984,7 @@ bool Matrix::makeIdent()
    }
 
    for (unsigned int i = 0; i < rows; i++) {
-      unsigned int idx = cols*i;
+      unsigned int idx{cols*i};
       for (unsigned int j=0; j< cols; j++) {
          if (i == j)
             mda[idx] = 1.0;
@@ -1021,11 +1017,11 @@ bool Matrix::isSymmetric() const
       return false;
    }
 
-   const unsigned int N = rows;
+   const unsigned int N{rows};
    for (unsigned int i = 0; i < N-1; i++) {
       for (unsigned int j = i+1; j < N; j++) {
-         unsigned int idx1 = N*i + j;
-         unsigned int idx2 = N*j + i;
+         unsigned int idx1{N*i + j};
+         unsigned int idx2{N*j + i};
          if (mda[idx1] != mda[idx2]) return false;
       }
    }
@@ -1046,13 +1042,13 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    //-------------------------------------------------------
    // initialize variables
    //-------------------------------------------------------
-   int Iter = 0;                          // iterator initialized to zero
-   double Err = 10.0*maxErr;              // make Err > maxErr on entry
+   int Iter{};                            // iterator initialized to zero
+   double Err{10.0*maxErr};               // make Err > maxErr on entry
 
    const auto pA = new Matrix(*this);     // A is a buffer matrix for 'this' matrix
-   const int N = pA->getRows();           // pA->getCols works too since A is square
+   const unsigned int N{pA->getRows()};   // pA->getCols works too since A is square
 
-   double alfa = 0.0;                     // current eigenvalue estimate
+   double alfa{};                         // current eigenvalue estimate
    const auto pZ = new CVector(N);        // current eigenvector estimate
    pZ->fillWith(1.0);                     // all 1's in initial estimate
 
@@ -1065,8 +1061,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
          //----------------------------------------------------
          // get estimate of eigenvector
          //----------------------------------------------------
-         CVector* pW = base::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
-         const double Wmag = pW->getMaxMag();      // max mag value from elements of vector W
+         CVector* pW{base::multiply(*pA, *pZ)};   // get new estimate (W) based on old estimate (Z)
+         const double Wmag{pW->getMaxMag()};      // max mag value from elements of vector W
          if (Wmag == 0.0) {
             // mag value is zero; cleanup and leave
             pW->unref();
@@ -1106,8 +1102,8 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
       // calculate error of estimate: Err = ||A*Z - alfa*Z||
       //----------------------------------------------------
       {
-         CVector* pE = base::multiply(*pA, *pZ);
-         CVector* pW1 = base::multiply(*pZ, alfa);  // pW1 used here as intermediate vector
+         CVector* pE{base::multiply(*pA, *pZ)};
+         CVector* pW1{base::multiply(*pZ, alfa)};  // pW1 used here as intermediate vector
          pE->subtract(*pW1);
          Err = pE->getNorm();              // magnitude of error vector
          pE->unref();
@@ -1150,7 +1146,7 @@ bool Matrix::getCholesky(Matrix* const pL, Matrix* const pU) const
    //-------------------------------------------------------
    // calculate the lower Cholesky matrix
    //-------------------------------------------------------
-   const unsigned int N = rows;
+   const unsigned int N{rows};
    for (unsigned int j = 0; j < N; j++) {
       for (unsigned int i = j; i < N; i++) {
          (*pL)(i,j) = (*this)(i,j);
@@ -1159,7 +1155,7 @@ bool Matrix::getCholesky(Matrix* const pL, Matrix* const pU) const
          }
 
          if (i == j) {
-            double x = (*pL)(i,j);
+            double x{(*pL)(i,j)};
             if (x < 0.0) {
                std::cout << "Cholesky failed. Matrix is not positive definite." << std::endl;
                return false;
@@ -1167,8 +1163,8 @@ bool Matrix::getCholesky(Matrix* const pL, Matrix* const pU) const
             (*pL)(i,j) = std::sqrt(x);
          }
          else {
-            double x = (*pL)(j,j);
-            double eps = 1.0e-12;
+            double x{(*pL)(j,j)};
+            double eps{1.0e-12};
             if (std::fabs(x) < eps) {
                // Note: excessive roundoff error for some reason - LDB
                std::cout << "Cholesky failed. Division by very small number." << std::endl;
@@ -1197,13 +1193,13 @@ bool Matrix::getLU(Matrix* const pL, Matrix* const pU) const
    //-------------------------------------------------------
    // initial compatibility and error checks
    //-------------------------------------------------------
-   bool b1 = isGoodMatrix();
-   bool b2 = isSquare();
+   const bool b1{isGoodMatrix()};
+   const bool b2{isSquare()};
    if (!b1 || !b2) {
       return false;
    }
 
-   const unsigned int N = rows;
+   const unsigned int N{rows};
    pL->makeIdent();
    pU->makeZero();
 
@@ -1240,8 +1236,8 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // initial compatibility and error checks
    //-------------------------------------------------------
-   bool b1 = isGoodMatrix();
-   bool b2 = isSquare();
+   const bool b1{isGoodMatrix()};
+   const bool b2{isSquare()};
    if (!b1 || !b2) return false;
 
    //-------------------------------------------------------
@@ -1252,7 +1248,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // Initialize intermediate Q matrix to 'identity' matrix
    //-------------------------------------------------------
-   const int N = getRows();
+   const int N{static_cast<int>(getRows())};
    const auto pQI = new Matrix(N,N);
    pQI->makeIdent();
 
@@ -1265,17 +1261,17 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
    //-------------------------------------------------------
    // Begin loop
    //-------------------------------------------------------
-   for (int k = 0; k < N-1; k++) {
+   for (int k = 0; k < (N-1); k++) {
 
       pX->fillWith(0.0);
       for (int i = k; i<N ; i++) {
          (*pX)[i] = (*pRI)(i,k);
       }
 
-      double g = pX->getNorm();
+      double g{pX->getNorm()};
       (*pV) = (*pX);
       (*pV)[k] += g;
-      double s = pV->getNorm();
+      double s{pV->getNorm()};
 
       if (s == 0.0) {
          pQI->unref();
@@ -1285,17 +1281,17 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
          return false;
       }
 
-      CVector* pW = base::multiply((*pV), 1.0/s);
-      RVector* pWT = pW->getTranspose();
+      CVector* pW{base::multiply((*pV), 1.0/s)};
+      RVector* pWT{pW->getTranspose()};
 
       {
          //----------------------------------------------------
          // U' = (2*R'*W)'
          //----------------------------------------------------
-         Matrix* pRIT = pRI->getTranspose();
-         CVector* pU0 = base::multiply((*pRIT), (*pW));
-         CVector* pU = base::multiply((*pU0), 2.0);
-         RVector* pUT = pU->getTranspose();
+         Matrix* pRIT{pRI->getTranspose()};
+         CVector* pU0{base::multiply((*pRIT), (*pW))};
+         CVector* pU{base::multiply((*pU0), 2.0)};
+         RVector* pUT{pU->getTranspose()};
          pU0->unref();
          pU->unref();
          pRIT->unref();
@@ -1303,7 +1299,7 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
          //----------------------------------------------------
          // R = R - W*U'
          //----------------------------------------------------
-         Matrix* pM1 = outerProduct(*pW, *pUT);
+         Matrix* pM1{outerProduct(*pW, *pUT)};
          pRI->subtract(*pM1);
          pM1->unref();
          pUT->unref();
@@ -1313,9 +1309,9 @@ bool Matrix::getQR(Matrix* const pQ, Matrix* const pR) const
       // Q = Q - 2*Q*W*W'
       //----------------------------------------------------
       {
-         Matrix* pM2 = outerProduct(*pW, *pWT);
-         Matrix* pM3 = base::multiply(*pQI, *pM2);
-         Matrix* pM4 = base::multiply(*pM3, 2.0);
+         Matrix* pM2{outerProduct(*pW, *pWT)};
+         Matrix* pM3{base::multiply(*pQI, *pM2)};
+         Matrix* pM4{base::multiply(*pM3, 2.0)};
          pQI->subtract(*pM4);
          pM2->unref();
          pM3->unref();
@@ -1357,19 +1353,19 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
    //-------------------------------------------------------
    //if (!isSymmetric()) return 0;
 
-   const int N = getRows();
+   const int N{static_cast<int>(getRows())};
    const auto pAI = new Matrix(*this);
 
    for (int k=0; k<N-2; k++) {
-      double gama = (*pAI)(k+1,k);
-      double alfa = (gama * gama);
+      double gama{(*pAI)(k+1,k)};
+      double alfa{(gama * gama)};
       for (int j=k+2; j<N; j++) {
-         double zeta = (*pAI)(j,k);
+         double zeta{(*pAI)(j,k)};
          alfa += (zeta * zeta);
       }
 
       alfa = -sign(gama) * std::sqrt(alfa);
-      double beta = std::sqrt(0.5 * alfa * (alfa - gama));
+      double beta{std::sqrt(0.5 * alfa * (alfa - gama))};
 
       //----------------------------------------------------
       // construct column vector X
@@ -1388,12 +1384,12 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // construct row vector Y = X'
       //----------------------------------------------------
-      RVector* pY = pX->getTranspose();
+      RVector* pY{pX->getTranspose()};
 
       //----------------------------------------------------
       // M = 2*X*Y = 2*X*X'
       //----------------------------------------------------
-      Matrix* pM = outerProduct(*pX, *pY);
+      Matrix* pM{outerProduct(*pX, *pY)};
       pM->multiply(2.0);
 
       //----------------------------------------------------
@@ -1406,8 +1402,8 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
       //----------------------------------------------------
       // A = H*A*H
       //----------------------------------------------------
-      Matrix* pAI0 = base::multiply(*pH, *pAI);
-      Matrix* pAI1 = base::multiply(*pAI0, *pH);
+      Matrix* pAI0{base::multiply(*pH, *pAI)};
+      Matrix* pAI1{base::multiply(*pAI0, *pH)};
       *pAI = *pAI1;
 
       //----------------------------------------------------
@@ -1433,7 +1429,6 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
 
    return true;
 }
-
 
 }
 }

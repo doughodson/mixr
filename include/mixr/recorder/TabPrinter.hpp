@@ -42,15 +42,7 @@ public:
    void setMsgHdrOptions(MsgHdrOptions msg);
    bool isSimReset() const;                   // True if reset msg recorded
 
-   // set divider string
-   bool setSlotDivider(const base::String* const msg);
-
 protected:
-
-   virtual bool setSlotMsgHdr(const base::String* const msg);
-
-   // Print functions
-
    // Event Messages
    virtual void printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdMsg* const msg);
    virtual void printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb::NewPlayerEventMsg* const msg);
@@ -135,6 +127,12 @@ private:
    MsgHdrOptions option {MsgHdrOptions::NO_HDR};        // options for printing field names
    unsigned int lastMessage {REID_UNHANDLED_ID_TOKEN};  // previous message printed
    const char* divider {"\t"};                          // divider between message fields
+
+private:
+   // slot table helper methods
+   bool setSlotMsgHdr(const base::String* const);
+   bool setSlotDivider(const base::String* const);
+
 };
 
 inline bool TabPrinter::isSimReset() const { return simReset; }

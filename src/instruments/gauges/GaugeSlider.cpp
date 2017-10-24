@@ -5,7 +5,8 @@
 namespace mixr {
 namespace instruments {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GaugeSlider, "GaugeSlider")
+IMPLEMENT_SUBCLASS(GaugeSlider, "GaugeSlider")
+EMPTY_SLOTTABLE(GaugeSlider)
 EMPTY_DELETEDATA(GaugeSlider)
 
 GaugeSlider::GaugeSlider()
@@ -28,10 +29,13 @@ void GaugeSlider::draw()
     sliderPos = getInstValue();
     bool vertical = isVertical();
     lcSaveMatrix();
-    if (vertical) lcTranslate(0, sliderPos);
-    else lcTranslate(sliderPos, 0);
+    if (vertical) {
+        lcTranslate(0, sliderPos);
+    } else {
+        lcTranslate(sliderPos, 0);
+    }
 
-       BaseClass::draw();
+    BaseClass::draw();
 
     lcRestoreMatrix();
 }

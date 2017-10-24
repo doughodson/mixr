@@ -49,9 +49,6 @@ public:
       const unsigned char  extra = 0
    );
 
-   // Slot functions
-   virtual bool setSlotEntityType(const base::List* const msg);         // Sets entity type enumerations
-
    // Simulation::Ntm class functions
    virtual bool copyEntityType(interop::Nib* const targetNib) const override;
 
@@ -64,6 +61,10 @@ private:
    unsigned char  subcategory {};
    unsigned char  specific {};
    unsigned char  extra {};
+
+private:
+   // slot table helper methods
+   bool setSlotEntityType(const base::List* const);         // Sets entity type enumerations
 };
 
 }

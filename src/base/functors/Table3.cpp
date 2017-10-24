@@ -74,13 +74,13 @@ void Table3::deleteData()
 bool Table3::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    unsigned int n1 = list.entries();
-    bool ok = (n1 > 0 && n1 == nz);
+    const unsigned int n1{list.entries()};
+    bool ok{n1 > 0 && n1 == nz};
 
     // Process each item in the list
-    unsigned int i = 0;
-    unsigned int k = BaseClass::tableSize();
-    const List::Item* item = list.getFirstItem();
+    unsigned int i{};
+    unsigned int k{BaseClass::tableSize()};
+    const List::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
@@ -149,8 +149,7 @@ double Table3::lfi(const double iv1, FStorage* const f) const
                          y_data, getNumYPoints(), getZData(), getNumZPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp );
-   }
-   else {
+   } else {
       return lfi_3D( iv1, y_data[0], ztable[0], getXData(), getNumXPoints(),
                          y_data, getNumYPoints(), getZData(), getNumZPoints(),
                          getDataTable(), isExtrapolationEnabled() );
@@ -169,8 +168,7 @@ double Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp );
-   }
-   else {
+   } else {
       return lfi_3D( iv1, iv2, ztable[0], getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getDataTable(), isExtrapolationEnabled() );
@@ -189,8 +187,7 @@ double Table3::lfi(const double iv1, const double iv2, const double iv3, FStorag
                          getNumYPoints(), getZData(), getNumZPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp );
-   }
-   else {
+   } else {
       return lfi_3D( iv1, iv2, iv3, getXData(), getNumXPoints(), getYData(),
                          getNumYPoints(), getZData(), getNumZPoints(),
                          getDataTable(), isExtrapolationEnabled() );

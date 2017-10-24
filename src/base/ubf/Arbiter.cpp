@@ -41,12 +41,12 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
    const auto actionSet = new base::List();
 
    // fill out list of recommended actions by behaviors
-   base::List::Item* item = behaviors->getFirstItem();
+   base::List::Item* item{behaviors->getFirstItem()};
    while (item != nullptr) {
       // get a behavior
       const auto behavior = static_cast<AbstractBehavior*>(item->getValue());
       // generate action, we have reference
-      AbstractAction* action = behavior->genAction(state, dt);
+      AbstractAction* action{behavior->genAction(state, dt)};
       if (action != nullptr) {
          // add to action set
          actionSet->addTail(action);
@@ -59,7 +59,7 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
 
    // given the set of recommended actions, the arbiter
    // decides what action to take
-   AbstractAction* complexAction = genComplexAction(actionSet);
+   AbstractAction* complexAction{genComplexAction(actionSet)};
 
    // done with action set
    actionSet->unref();
@@ -74,11 +74,11 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
 //------------------------------------------------------------------------------
 AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
 {
-   AbstractAction* complexAction = nullptr;
-   unsigned int maxVote = 0;
+   AbstractAction* complexAction{};
+   unsigned int maxVote{};
 
    // process entire action set
-   base::List::Item* item = actionSet->getFirstItem();
+   base::List::Item* item{actionSet->getFirstItem()};
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
@@ -123,11 +123,11 @@ void Arbiter::addBehavior(AbstractBehavior* const x)
 
 bool Arbiter::setSlotBehaviors(base::PairStream* const x)
 {
-   bool ok = true;
+   bool ok{true};
 
    // First, make sure they are all behaviors
    {
-      base::List::Item* item = x->getFirstItem();
+      base::List::Item* item{x->getFirstItem()};
       while (item != nullptr && ok) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
@@ -142,7 +142,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
 
    // next, add behaviors to our list
    if (ok) {
-      base::List::Item* item = x->getFirstItem();
+      base::List::Item* item{x->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
@@ -157,4 +157,3 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
 }
 }
 }
-

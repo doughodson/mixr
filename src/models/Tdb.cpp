@@ -99,8 +99,7 @@ void Tdb::clearArrays()
             targets[numTgts] = nullptr;
          }
       }
-   }
-   else {
+   } else {
       numTgts = 0;
    }
 }
@@ -111,7 +110,7 @@ void Tdb::clearArrays()
 //------------------------------------------------------------------------------
 bool Tdb::resizeArrays(const unsigned int newSize)
 {
-   bool ok = false;
+   bool ok{};
    if (newSize <= Gimbal::MAX_PLAYERS) {
 
       // Clear out the old data
@@ -184,41 +183,40 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // ---
    // Terrain occulting check setup
    // ---
-   const terrain::Terrain* terrain = nullptr;
+   const terrain::Terrain* terrain{};
    if (gimbal->isTerrainOccultingEnabled()) {
-      const WorldModel* const sim = ownship->getWorldModel();
+      const WorldModel* const sim{ownship->getWorldModel()};
       terrain = sim->getTerrain();
    }
 
    // ---
    // Player of interest parameters
    // ---
-   const double maxRange = gimbal->getMaxRange2PlayersOfInterest();
-   const double maxAngle = gimbal->getMaxAngle2PlayersOfInterest();
-   const double cosMaxFov = std::cos(maxAngle);
-   const unsigned int mask = gimbal->getPlayerOfInterestTypes();
-   const bool localOnly = gimbal->isLocalPlayersOfInterestOnly();
-   const bool useWorld = gimbal->isUsingWorldCoordinates();
-   const bool ownHdgOnly = gimbal->isUsingHeadingOnly();
-   const double earthRadius = gimbal->getEarthRadius();
-   const bool checkHorizon = gimbal->isHorizonCheckEnabled();
+   const double maxRange{gimbal->getMaxRange2PlayersOfInterest()};
+   const double maxAngle{gimbal->getMaxAngle2PlayersOfInterest()};
+   const double cosMaxFov{std::cos(maxAngle)};
+   const unsigned int mask{gimbal->getPlayerOfInterestTypes()};
+   const bool localOnly{gimbal->isLocalPlayersOfInterestOnly()};
+   const bool useWorld{gimbal->isUsingWorldCoordinates()};
+   const bool ownHdgOnly{gimbal->isUsingHeadingOnly()};
+   const double earthRadius{gimbal->getEarthRadius()};
+   const bool checkHorizon{gimbal->isHorizonCheckEnabled()};
 
    // ---
    // Get the matrices
    // ---
 
    // World (ECEF) to local (NED)
-   base::Matrixd wm = ownship->getWorldMat();
+   base::Matrixd wm{ownship->getWorldMat()};
 
    // Local (NED) to gimbal coord
-   base::Matrixd rm = gimbal->getRotMat();
+   base::Matrixd rm{gimbal->getRotMat()};
    if (ownHdgOnly) {
       // Using heading only, ignore ownship roll and pitch
       base::Matrixd rr;
       rr.makeRotate( ownship->getHeading(), 0, 0, 1);
       rm *= rr;
-   }
-   else {
+   } else {
       // Using ownship roll, pitch and heading
       rm *= ownship->getRotMat();
    }
@@ -237,36 +235,35 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    if (usingEcefFlg) {
       // Using geocentric position (ECEF)
       p0 = ownship->getGeocPosition();
-   }
-   else {
+   } else {
       // Using local gaming area position vector (NED)
       p0 = ownship->getPosition();
    }
 
    // Geodetic position of our ownship
-   const double osLat = ownship->getLatitude();
-   const double osLon = ownship->getLongitude();
-   const double osAlt = ownship->getAltitudeM();
+   const double osLat{ownship->getLatitude()};
+   const double osLon{ownship->getLongitude()};
+   const double osAlt{ownship->getAltitudeM()};
 
    // If we're using ECEF coordinates then we compute the distance
    // to the earth horizon and the tangent of the angle from our
    // local level to the earth horizon
-   double hDist = 1000000.0 * base::distance::NM2M;  // Distance to horizon (m) (default: really far away)
-   double hTanAng = 0;                                // Tangent of the angle to horizon (positive down)
+   double hDist{1000000.0 * base::distance::NM2M};  // Distance to horizon (m) (default: really far away)
+   double hTanAng{};                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
       // translation component from our gimbal to NED matrix.
-      const double vertOffset = -rm(3,2);    // Z translation (but positive up)
+      const double vertOffset{-rm(3,2)};    // Z translation (but positive up)
 
       // distance from the center of the earth
-      const double distEC = vertOffset + osAlt + earthRadius;
-      const double distEC2 = distEC * distEC;  // squared
+      const double distEC{vertOffset + osAlt + earthRadius};
+      const double distEC2{distEC * distEC};  // squared
 
       // earth radius squared
-      const double er2 = earthRadius * earthRadius;
+      const double er2{earthRadius * earthRadius};
 
       // distance to horizon squared
-      const double dh2 = distEC2 - er2;
+      const double dh2{distEC2 - er2};
 
       // the distance and the tangent of the angle to the horizon
       hDist = std::sqrt(dh2);
@@ -274,28 +271,28 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    }
 
    // Are we a space vehicle?
-   const bool osSpaceVehicle = ownship->isMajorType(Player::SPACE_VEHICLE);
+   const bool osSpaceVehicle{ownship->isMajorType(Player::SPACE_VEHICLE)};
 
    // ---
    // 1) Scan the player list ---
    // ---
-   bool finished = false;
+   bool finished{};
    for (base::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
-      base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-      Player* target = static_cast<Player*>(pair->object());
+      base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+      Player* target{static_cast<Player*>(pair->object())};
 
       // Did we complete the local only players?
       finished = localOnly && target->isNetworkedPlayer();
 
       // We should process this target if ...
-      const bool processTgt =
-         !finished &&                                       // we're not finished AND
-         target != ownship &&                               // its not our ownship AND
-         target->isActive() &&                              // the target is active AND
-         target->isMajorType(mask) &&                       // the target is one of the selected types AND
-         (usingEcefFlg || target->isPositionVectorValid()); // we're using ECEF or the target's position vector is valid
+      const bool processTgt {
+         !finished &&                                        // we're not finished AND
+         target != ownship &&                                // its not our ownship AND
+         target->isActive() &&                               // the target is active AND
+         target->isMajorType(mask) &&                        // the target is one of the selected types AND
+         (usingEcefFlg || target->isPositionVectorValid())}; // we're using ECEF or the target's position vector is valid
 
       if ( processTgt ) {
 
@@ -305,10 +302,10 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
          else tlos = target->getPosition() - p0;
 
          // Normalized and compute length: unit LOS vector and range (meters)
-         const double range = tlos.normalize();
+         const double range{tlos.normalize()};
 
          // In-range check (only if maxRange is greater than zero)
-         bool inRange = (maxRange == 0);
+         bool inRange{maxRange == 0};
          if ( !inRange ) {
             inRange = range <= maxRange;
          }
@@ -324,13 +321,13 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
 
             // Compute the tangent of the angle from our local level to
             // the target (positive angles are down)
-            double tanTgtAng = 999999.9; // initial tangent (down)
-            double xyRng = std::sqrt(losNED[0]*losNED[0] + losNED[1]*losNED[1]);
+            double tanTgtAng{999999.9}; // initial tangent (down)
+            double xyRng{std::sqrt(losNED[0]*losNED[0] + losNED[1]*losNED[1])};
             if (xyRng > 0) tanTgtAng = losNED[2]/xyRng;
             else if (losNED[2] <= 0) tanTgtAng = -999999.9; // up
 
             // Horizon check
-            bool aboveHorizon = true;
+            bool aboveHorizon{true};
             if (usingEcefFlg && checkHorizon) {
                // We can see targets that are above the horizon or
                // targets that are on or above the earth and are closer
@@ -341,36 +338,35 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
             if (aboveHorizon) {
 
                // In FOV check (only if maxAngle is greater than zero)
-               bool inFov = (maxAngle == 0);
+               bool inFov{maxAngle == 0};
                if ( !inFov ) {
                   // LOS vector: NED to gimbal coordinates
-                  const base::Vec3d losG = rm * losNED;
+                  const base::Vec3d losG{rm * losNED};
                   inFov = (losG.x() >= cosMaxFov);
                }
 
                if (inFov) {
 
                   // Terrain occulting if we have terrain data and we're not a space vehicle
-                  bool occulted = false;
+                  bool occulted{};
                   if (terrain != nullptr && !osSpaceVehicle) {
 
-                     const double tgtLat = target->getLatitude();
-                     const double tgtLon = target->getLongitude();
-                     const double tgtAlt = target->getAltitudeM();
+                     const double tgtLat{target->getLatitude()};
+                     const double tgtLon{target->getLongitude()};
+                     const double tgtAlt{target->getAltitudeM()};
 
                      // Is the target a space vehicle?
                      if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
                         // Get the true, great-circle bearing to the target
-                        double tbrg(0), distNM(0);
+                        double tbrg{}, distNM{};
                         base::nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
 
                         // Set the distance to check to 60 nm
-                        double dist = 60.0 * base::distance::NM2M;
+                        double dist{60.0 * base::distance::NM2M};
 
                         // Terrain occulting check toward the space vehicle
                         occulted = terrain->targetOcculting2(osLat, osLon, osAlt, tbrg, dist, -tanTgtAng);
-                     }
-                     else {
+                     } else {
                         // Occulting check between two standard player
                         occulted = terrain->targetOcculting(osLat, osLon, static_cast<double>(osAlt),
                                                             tgtLat, tgtLon, static_cast<double>(tgtAlt));
@@ -410,7 +406,7 @@ unsigned int Tdb::computeBoresightData()
    // If 'ownHdgOnly' is true (default) then only the ownship's heading angle is used,
    // which earth stabilizes the gimbal in roll and pitch, otherwise the full
    // ownship rotational matrix is used.
-   const bool ownHdgOnly = gimbal->isUsingHeadingOnly();
+   const bool ownHdgOnly{gimbal->isUsingHeadingOnly()};
 
    // ---
    // Compute normalized LOS vector (NED), range and ranging rate
@@ -421,14 +417,13 @@ unsigned int Tdb::computeBoresightData()
       base::Vec3d v0;  // Velocity vector [ x y z ] (meters/second)
 
       // World (ECEF) to local tanget plane (NED)
-      base::Matrixd wm = ownship->getWorldMat();
+      base::Matrixd wm{ownship->getWorldMat()};
 
       if (usingEcefFlg) {
          // Using ECEF
          p0 = ownship->getGeocPosition();  // Geocentric position (ECEF)
          v0 = ownship->getGeocVelocity();  // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-      }
-      else {
+      } else {
          // Using local gaming area positions
          p0 = ownship->getPosition();  // Local gaming area position vector (NED)
          v0 = ownship->getVelocity();  // Local gaming area velocity vector (NED)
@@ -443,15 +438,14 @@ unsigned int Tdb::computeBoresightData()
             // Using ECEF
             pt = targets[i]->getGeocPosition();  // Geocentric position (ECEF)
             vt = targets[i]->getGeocVelocity();  // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-         }
-         else {
+         } else {
             // Using local gaming area positions
             pt = targets[i]->getPosition();  // Local gaming area position vector (NED)
             vt = targets[i]->getVelocity();  // Local gaming area velocity vector (NED)
          }
 
          // Target LOS vector
-         base::Vec3d los = (pt - p0);
+         base::Vec3d los{pt - p0};
 
          // Normalized and compute length [unit vector and range(meters)]
          ranges[i] = los.normalize();
@@ -464,8 +458,7 @@ unsigned int Tdb::computeBoresightData()
             // Rotate the LOS vectors into their local tangent planes
             losO2T[i] = wm * los;
             losT2O[i] = targets[i]->getWorldMat() * (-los);
-         }
-         else {
+         } else {
             losO2T[i] =  los;
             losT2O[i] = -los;
          }
@@ -482,7 +475,7 @@ unsigned int Tdb::computeBoresightData()
       // ---
 
       // Start with the body to gimbal matrix
-      base::Matrixd mm = gimbal->getRotMat();
+      base::Matrixd mm{gimbal->getRotMat()};
 
       // Post multi by the inertial (NED) to body matrix
       if (ownHdgOnly) {
@@ -490,8 +483,7 @@ unsigned int Tdb::computeBoresightData()
          base::Matrixd rr;
          rr.makeRotate( ownship->getHeading(), 0, 0, 1);
          mm *= rr;
-      }
-      else {
+      } else {
          // Using ownship roll, pitch and heading
          mm *= ownship->getRotMat();
       }
@@ -500,7 +492,7 @@ unsigned int Tdb::computeBoresightData()
       // 2) Transform the ownship to target LOS vector into gimbal coordinate system
       //       losG = mm * losO2T;
       // ---
-      base::postMultVec3Array(losO2T,mm,losG,numTgts);
+      base::postMultVec3Array(losO2T, mm, losG, numTgts);
    }
 
    // ---

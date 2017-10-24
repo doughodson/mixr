@@ -75,7 +75,7 @@ bool Yiq::setSlotY(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value {msg->getReal()};
-    const bool ok = (value >= 0 && value <= 1);
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         yiq[Y] = value;
         yiq2rgb(color,yiq);
@@ -92,7 +92,7 @@ bool Yiq::setSlotI(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value {msg->getReal()};
-    const bool ok = (value >= -0.6 && value <= 0.6);
+    const bool ok{value >= -0.6 && value <= 0.6};
     if (ok) {
         yiq[I] = value;
         yiq2rgb(color, yiq);
@@ -109,7 +109,7 @@ bool Yiq::setSlotQ(const Number* const msg)
 {
     if (msg == nullptr) return false;
     const double value {msg->getReal()};
-    const bool ok = (value >= -0.52 && value <= 0.52);
+    const bool ok{value >= -0.52 && value <= 0.52};
     if (ok) {
         yiq[Q] = value;
         yiq2rgb(color, yiq);

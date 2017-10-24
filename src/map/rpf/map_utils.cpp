@@ -12,8 +12,8 @@ namespace rpf {
 // -----------------------------------------------------------
 void swap(unsigned char* ptr, int count)
 {
-    unsigned char temp(0);
-    unsigned char* end = &ptr[count - 1];
+    unsigned char temp {};
+    unsigned char* end {&ptr[count - 1]};
     while (end > ptr) {
         temp = *end;
         *end = *ptr;
@@ -27,7 +27,7 @@ void swap(unsigned char* ptr, int count)
 // ----------------------------------------------------------------
 char* stringToLowercase(char* str)
 {
-    std::size_t len = std::strlen(str);
+    std::size_t len {std::strlen(str)};
     for (std::size_t i = 0; i < len; i++) {
         if (isascii(str[i]) && std::isalpha(str[i])) str[i] = std::tolower(str[i]);
     }

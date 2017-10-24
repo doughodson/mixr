@@ -6,7 +6,7 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
 #include "mixr/simulation/AbstractNib.hpp"
 

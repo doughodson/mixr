@@ -47,31 +47,31 @@ BEGIN_SLOTTABLE(Graphic)
 END_SLOTTABLE(Graphic)
 
 BEGIN_SLOT_MAP(Graphic)
-    ON_SLOT( 1, setColor, base::Color)
-    ON_SLOT( 1, setColor, base::Identifier)
-    ON_SLOT( 2, setSlotLineWidth, base::Number)
-    ON_SLOT( 3, setSlotFlashRate, base::Number)
-    ON_SLOT( 4, setSlotTransformList,   base::PairStream)
-    ON_SLOT( 4, setSlotSingleTransform, base::Transform)
-    ON_SLOT( 5, setSlotVertices, base::PairStream)
-    ON_SLOT( 6, setSlotNormals, base::PairStream)
-    ON_SLOT( 7, setSlotTexCoord, base::PairStream)
-    ON_SLOT( 8, setSlotNoDisplayList, base::Number)
+    ON_SLOT( 1, setSlotColor,              base::Color)
+    ON_SLOT( 1, setSlotColor,              base::Identifier)
+    ON_SLOT( 2, setSlotLineWidth,          base::Number)
+    ON_SLOT( 3, setSlotFlashRate,          base::Number)
+    ON_SLOT( 4, setSlotTransformList,      base::PairStream)
+    ON_SLOT( 4, setSlotSingleTransform,    base::Transform)
+    ON_SLOT( 5, setSlotVertices,           base::PairStream)
+    ON_SLOT( 6, setSlotNormals,            base::PairStream)
+    ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
+    ON_SLOT( 8, setSlotNoDisplayList,      base::Number)
     ON_SLOT( 9, setSlotSubcomponentsFirst, base::Number)
-    ON_SLOT(10, setSlotSelectName, base::Number)
-    ON_SLOT(11, setSlotTextureName, base::Identifier)
-    ON_SLOT(12, setSlotScissorX, base::Number)
-    ON_SLOT(13, setSlotScissorY, base::Number)
-    ON_SLOT(14, setSlotScissorWidth, base::Number)
-    ON_SLOT(15, setSlotScissorHeight, base::Number)
-    ON_SLOT(16, setSlotStippling, base::Number)
-    ON_SLOT(17, setSlotStippleFactor, base::Number)
-    ON_SLOT(18, setSlotStipplePattern, base::Number)
-    ON_SLOT(19, setSlotVisibility, base::Number)
-    ON_SLOT(20, setSlotMask, base::Number)
-    ON_SLOT(21, setMaterial, base::Identifier)
-    ON_SLOT(21, setMaterial, graphics::Material)
-    ON_SLOT(22, setSlotTranslateLight, base::PairStream)
+    ON_SLOT(10, setSlotSelectName,         base::Number)
+    ON_SLOT(11, setSlotTextureName,        base::Identifier)
+    ON_SLOT(12, setSlotScissorX,           base::Number)
+    ON_SLOT(13, setSlotScissorY,           base::Number)
+    ON_SLOT(14, setSlotScissorWidth,       base::Number)
+    ON_SLOT(15, setSlotScissorHeight,      base::Number)
+    ON_SLOT(16, setSlotStippling,          base::Number)
+    ON_SLOT(17, setSlotStippleFactor,      base::Number)
+    ON_SLOT(18, setSlotStipplePattern,     base::Number)
+    ON_SLOT(19, setSlotVisibility,         base::Number)
+    ON_SLOT(20, setSlotMask,               base::Number)
+    ON_SLOT(21, setMaterial,               base::Identifier)
+    ON_SLOT(21, setMaterial,               graphics::Material)
+    ON_SLOT(22, setSlotTranslateLight,     base::PairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Graphic)
@@ -1017,6 +1017,15 @@ bool Graphic::setLightPosition(base::Vec4d& newPos)
     return true;
 }
 
+bool Graphic::setSlotColor(const base::Color* const color)
+{
+   return setColor(color);
+}
+
+bool Graphic::setSlotColor(const base::Identifier* const color)
+{
+   return setColor(color);
+}
 
 // setSlotLineWidth -- set this object's line width
 bool Graphic::setSlotLineWidth(const base::Number* const msg)

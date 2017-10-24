@@ -35,11 +35,13 @@ public:
    double getWc() const                           { return wc; }
    virtual bool setWc(const double v);
 
-   virtual bool setSlotWc(const base::Frequency* const msg);
-   virtual bool setSlotWc(const base::Number* const msg);
-
 private:
    double wc {};    // Cutoff frequency (rad/sec)
+
+private:
+   // slot table helper methods
+   bool setSlotWc(const base::Frequency* const);
+   bool setSlotWc(const base::Number* const);
 };
 
 }

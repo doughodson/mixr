@@ -33,7 +33,7 @@ void Function::copyData(const Function& org, const bool cc)
    if (cc) table = nullptr;
 
    {
-      const Table* copy = nullptr;
+      const Table* copy{};
       if (org.table != nullptr) {
          copy = static_cast<const Table*>(org.table->clone());
       }
@@ -56,8 +56,7 @@ FStorage* Function::storageFactory() const
    if (table != nullptr) {
       // then we're going to let the table handle it, if any
       return table->storageFactory();
-   }
-   else {
+   } else {
       // or we're just going to return a standard FStorage object.
       return new FStorage();
    }

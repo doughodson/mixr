@@ -147,7 +147,7 @@ public:
    virtual bool setLeadFollowingDeltaAltitude(const double above);   // Desired delta altitude (meters) above(+) the lead
    virtual bool setFollowTheLeadMode(const bool f);                  // "Follow the lead" mode flag
    virtual bool setLeadPlayerName(const base::Identifier* const);    // Changes the name of our lead player
-   virtual bool setLeadPlayerName(const char* x);                    // set the lead player name by characters
+   virtual bool setLeadPlayerName(const char*);                      // set the lead player name by characters
    virtual bool setLeadPlayer(const Player* const);                  // Our lead player
 
    virtual bool isRollSasOn() const { return rollSasOn; }
@@ -164,7 +164,7 @@ public:
    virtual double getControlStickRollInput() const                     { return stickRollPos; }
 
    // Sets the stick roll input (see getControlStickRollInput()
-   virtual bool setControlStickRollInput(const double roll);
+   virtual bool setControlStickRollInput(const double);
 
    // Pitch Control Input
    //      Normalized inputs
@@ -172,7 +172,7 @@ public:
    virtual double getControlStickPitchInput() const                    { return stickPitchPos; }
 
    // Sets the control stick pitch input (getControlStickPitchInput xxx())
-   virtual bool setControlStickPitchInput(const double pitch);
+   virtual bool setControlStickPitchInput(const double);
 
    // Throttle(s) Control Input
    //      Normalized inputs
@@ -200,47 +200,19 @@ public:
    //            );
 
    // max turn rate (degrees per second)
-   virtual bool setMaxTurnRateDps(const double x);
+   virtual bool setMaxTurnRateDps(const double);
    // maximum bank angle (degrees)
-   virtual bool setMaxBankAngleDeg(const double x);
+   virtual bool setMaxBankAngleDeg(const double);
    // maximum climb/dive rate
-   virtual bool setMaxClimbRateMps(const double x);
+   virtual bool setMaxClimbRateMps(const double);
    // maximum pitch angle
-   virtual bool setMaxPitchAngleDeg(const double x);
+   virtual bool setMaxPitchAngleDeg(const double);
    // maximum velocity acceleration
-   virtual bool setMaxVelAccNps(const double x);
+   virtual bool setMaxVelAccNps(const double);
 
    virtual void reset() override;
 
 protected:
-   // Slot functions
-   bool setSlotNavMode(const base::Number* const msg);                       // Nav (route follow) mode flag
-   bool setSlotHoldAltitude(const base::Distance* const msg);                // Hold altitude
-   bool setSlotAltitudeHoldMode(const base::Number* const msg);              // Altitude hold mode flag
-   bool setSlotHoldVelocityKts(const base::Number* const msg);               // Hold velocity (kts)
-   bool setSlotVelocityHoldMode(const base::Number* const msg);              // Velocity hold mode flag
-   bool setSlotHoldHeading(const base::Angle* const msg);                    // Hold heading
-   bool setSlotHeadingHoldMode(const base::Number* const msg);               // Heading altitude mode flag
-   bool setSlotLoiterMode(const base::Number* const msg);                    // Loiter mode flag
-   bool setSlotLoiterPatternLength(const base::Distance* const msg);         // Loiter orbit pattern length
-   bool setSlotLoiterPatternLength(const base::Number* const msg);           // Loiter orbit pattern length (NM)
-   bool setSlotLoiterPatternTime(const base::Time* const msg);               // Loiter orbit pattern length (seconds)
-   bool setSlotLoiterPatternCcwFlag(const base::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
-   bool setSlotLeadFollowingDistanceTrail(const base::Distance* const msg);  // Desired distance behind(+) the lead
-   bool setSlotLeadFollowingDistanceTrail(const base::Number* const msg);    // Desired distance (meters) behind(+) the lead
-   bool setSlotLeadFollowingDistanceRight(const base::Distance* const msg);  // Desired distance right(+) of the lead
-   bool setSlotLeadFollowingDistanceRight(const base::Number* const msg);    // Desired distance (meters) right(+) of the lead
-   bool setSlotLeadFollowingDeltaAltitude(const base::Distance* const msg);  // Desired delta altitude above(+) the lead
-   bool setSlotLeadFollowingDeltaAltitude(const base::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
-   bool setSlotLeadPlayerName(const base::Identifier* const msg);            // Name of the player we are following
-   bool setSlotFollowTheLeadMode(const base::Number* const msg);             // "Follow the lead" mode flag
-   bool setSlotMaxRateOfTurnDps(const base::Number* const msg);              // Maximum turn rate - degrees per second
-   bool setSlotMaxBankAngle(const base::Number* const msg);                  // Maximum bank angle - degrees
-   bool setSlotMaxClimbRateMps(const base::Number* const msg);               // Max climb/dive rate - meters per second
-   bool setSlotMaxClimbRateFpm(const base::Number* const msg);               // Max climb/dive rate - feet per minute
-   bool setSlotMaxPitchAngle(const base::Number* const msg);                 // Max pitch angle - degrees
-   bool setSlotMaxVelAccNps(const base::Number* const msg);                  // Maximum velocity acceleration (Nps)
-
    virtual bool modeManager();
    virtual bool headingController();
    virtual bool altitudeController();
@@ -269,7 +241,7 @@ private:
    double stickPitchPos {};    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
 
    // Throttles
-   static const unsigned int MAX_THR = 8;
+   static const unsigned int MAX_THR{8};
    double thrPos[MAX_THR] {};    // Throttle positions: min(0.0) to full(1.0)
    unsigned int nThrPos {};      // Number of throttles
 
@@ -328,6 +300,35 @@ private:
    const base::Identifier* leadName {};    // Name of our lead player
    double leadHdg {};                      // lead's heading (rad)
    bool   followLeadModeOn {};             // Follow the lead mode flag
+
+private:
+   // slot table helper methods
+   bool setSlotNavMode(const base::Number* const);                       // Nav (route follow) mode flag
+   bool setSlotHoldAltitude(const base::Distance* const);                // Hold altitude
+   bool setSlotAltitudeHoldMode(const base::Number* const);              // Altitude hold mode flag
+   bool setSlotHoldVelocityKts(const base::Number* const);               // Hold velocity (kts)
+   bool setSlotVelocityHoldMode(const base::Number* const);              // Velocity hold mode flag
+   bool setSlotHoldHeading(const base::Angle* const);                    // Hold heading
+   bool setSlotHeadingHoldMode(const base::Number* const);               // Heading altitude mode flag
+   bool setSlotLoiterMode(const base::Number* const);                    // Loiter mode flag
+   bool setSlotLoiterPatternLength(const base::Distance* const);         // Loiter orbit pattern length
+   bool setSlotLoiterPatternLength(const base::Number* const);           // Loiter orbit pattern length (NM)
+   bool setSlotLoiterPatternTime(const base::Time* const);               // Loiter orbit pattern length (seconds)
+   bool setSlotLoiterPatternCcwFlag(const base::Number* const);          // Loiter orbit pattern counter-clockwise flag
+   bool setSlotLeadFollowingDistanceTrail(const base::Distance* const);  // Desired distance behind(+) the lead
+   bool setSlotLeadFollowingDistanceTrail(const base::Number* const);    // Desired distance (meters) behind(+) the lead
+   bool setSlotLeadFollowingDistanceRight(const base::Distance* const);  // Desired distance right(+) of the lead
+   bool setSlotLeadFollowingDistanceRight(const base::Number* const);    // Desired distance (meters) right(+) of the lead
+   bool setSlotLeadFollowingDeltaAltitude(const base::Distance* const);  // Desired delta altitude above(+) the lead
+   bool setSlotLeadFollowingDeltaAltitude(const base::Number* const);    // Desired delta altitude (meters) above(+) the lead
+   bool setSlotLeadPlayerName(const base::Identifier* const);            // Name of the player we are following
+   bool setSlotFollowTheLeadMode(const base::Number* const);             // "Follow the lead" mode flag
+   bool setSlotMaxRateOfTurnDps(const base::Number* const);              // Maximum turn rate - degrees per second
+   bool setSlotMaxBankAngle(const base::Number* const);                  // Maximum bank angle - degrees
+   bool setSlotMaxClimbRateMps(const base::Number* const);               // Max climb/dive rate - meters per second
+   bool setSlotMaxClimbRateFpm(const base::Number* const);               // Max climb/dive rate - feet per minute
+   bool setSlotMaxPitchAngle(const base::Number* const);                 // Max pitch angle - degrees
+   bool setSlotMaxVelAccNps(const base::Number* const);                  // Maximum velocity acceleration (Nps)
 };
 
 inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x; return true; }

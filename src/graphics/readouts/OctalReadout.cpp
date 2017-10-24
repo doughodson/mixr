@@ -35,8 +35,7 @@ char OctalReadout::filterInputEvent(const int event, const int tc)
          return static_cast<char>(event);
       else
          return '\0';
-   }
-   else {
+   } else {
       return BaseClass::filterInputEvent(event,tc);
    }
 }

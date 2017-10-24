@@ -14,14 +14,14 @@ BEGIN_SLOTTABLE(Transform)
 END_SLOTTABLE(Transform)
 
 BEGIN_SLOT_MAP(Transform)
-    ON_SLOT(1, setComputematrix1, Angle)
-    ON_SLOT(1, setComputematrix1, Number)
-    ON_SLOT(2, setComputematrix2, Angle)
-    ON_SLOT(2, setComputematrix2, Number)
-    ON_SLOT(3, setComputematrix3, Angle)
-    ON_SLOT(3, setComputematrix3, Number)
-    ON_SLOT(4, setComputematrix4, Angle)
-    ON_SLOT(4, setComputematrix4, Number)
+    ON_SLOT(1, setSlotComputematrix1, Angle)
+    ON_SLOT(1, setSlotComputematrix1, Number)
+    ON_SLOT(2, setSlotComputematrix2, Angle)
+    ON_SLOT(2, setSlotComputematrix2, Number)
+    ON_SLOT(3, setSlotComputematrix3, Angle)
+    ON_SLOT(3, setSlotComputematrix3, Number)
+    ON_SLOT(4, setSlotComputematrix4, Angle)
+    ON_SLOT(4, setSlotComputematrix4, Number)
 END_SLOT_MAP()
 
 Transform::Transform()
@@ -74,8 +74,7 @@ void Translation::computeMatrix()
         Matrixd tt;
         tt.makeTranslate(v[0], v[1], 0.0f);
         m.preMult(tt);
-    }
-    else if (nv >= 3) {
+    } else if (nv >= 3) {
         // Translate X, Y and Z
         Matrixd tt;
         tt.makeTranslate(v[0], v[1], v[2]);
@@ -108,8 +107,7 @@ void Rotation::computeMatrix()
         Matrixd rr;
         rr.makeRotate(v[0], 0.0f, 0.0f, 1.0f);
         m.preMult(rr);
-    }
-    else if (nv == 4) {
+    } else if (nv == 4) {
         // Four values: rotate about vector [ v[0] v[1] v[2] ] by v[3] degrees
         Matrixd rr;
         rr.makeRotate(v[3], v[0], v[1], v[2]);
@@ -142,13 +140,13 @@ void Scale::computeMatrix()
         ss.makeScale(v[0], v[0], 1.0f);
         m.preMult(ss);
     }
+
     if (nv == 2) {
         // Two values: scale X and Y by the values and hold Z constant
         Matrixd ss;
         ss.makeScale(v[0], v[1], 1.0f);
         m.preMult(ss);
-    }
-    else if (nv >= 3) {
+    } else if (nv >= 3) {
         // Three values: scale X, Y and Z
         Matrixd ss;
         ss.makeScale(v[0], v[1], v[2]);
@@ -158,17 +156,16 @@ void Scale::computeMatrix()
 
 
 //------------------------------------------------------------------------------
-// setComputematrix1 () - for Angle types
+// setSlotComputematrix1 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix1(const Angle* const sc1obj)
+bool Transform::setSlotComputematrix1(const Angle* const sc1obj)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
         v[nv++] = static_cast<double>(rad.convert(*sc1obj));
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix1: Invalid Angle type or input" << std::endl;
         ok = false;
     }
@@ -176,16 +173,15 @@ bool Transform::setComputematrix1(const Angle* const sc1obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix1 () - for Number types
+// setSlotComputematrix1 () - for Number types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix1(const Number* const sc1obj)
+bool Transform::setSlotComputematrix1(const Number* const sc1obj)
 {
     bool ok = true;
     if (sc1obj != nullptr) {
         v[nv++] = sc1obj->getReal();
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix1:  Invalid Number type or input" << std::endl;
         ok = false;
     }
@@ -193,17 +189,16 @@ bool Transform::setComputematrix1(const Number* const sc1obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix2 () - for Angle types
+// setSlotComputematrix2 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix2(const Angle* const sc2obj)
+bool Transform::setSlotComputematrix2(const Angle* const sc2obj)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
         v[nv++] = static_cast<double>(rad.convert(*sc2obj));
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix2:  Invalid Angle type or input" << std::endl;
         ok = false;
     }
@@ -211,16 +206,15 @@ bool Transform::setComputematrix2(const Angle* const sc2obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix2 () - for Number types
+// setSlotComputematrix2 () - for Number types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix2(const Number* const sc2obj)
+bool Transform::setSlotComputematrix2(const Number* const sc2obj)
 {
     bool ok = true;
     if (sc2obj != nullptr) {
         v[nv++] = sc2obj->getReal();
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix2:  Invalid Number type or input" << std::endl;
         ok = false;
     }
@@ -228,17 +222,16 @@ bool Transform::setComputematrix2(const Number* const sc2obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix3 () - for Angle types
+// setSlotComputematrix3 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix3(const Angle* const sc3obj)
+bool Transform::setSlotComputematrix3(const Angle* const sc3obj)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
         v[nv++] = static_cast<double>(rad.convert(*sc3obj));
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix3:  Invalid Angle type or input" << std::endl;
         ok = false;
     }
@@ -246,16 +239,15 @@ bool Transform::setComputematrix3(const Angle* const sc3obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix3 () - for Number types
+// setSlotComputematrix3 () - for Number types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix3(const Number* const sc3obj)
+bool Transform::setSlotComputematrix3(const Number* const sc3obj)
 {
     bool ok = true;
     if (sc3obj != nullptr) {
         v[nv++] = sc3obj->getReal();
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix3:  Invalid Number type or input" << std::endl;
         ok = false;
     }
@@ -263,17 +255,16 @@ bool Transform::setComputematrix3(const Number* const sc3obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix4 () - for Angle types
+// setSlotComputematrix4 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix4(const Angle* const sc4obj)
+bool Transform::setSlotComputematrix4(const Angle* const sc4obj)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
         Radians rad;
         v[nv++] = static_cast<double>(rad.convert(*sc4obj));
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix4:  Invalid Angle type or input" << std::endl;
         ok = false;
     }
@@ -281,16 +272,15 @@ bool Transform::setComputematrix4(const Angle* const sc4obj)
 }
 
 //------------------------------------------------------------------------------
-// setComputematrix4 () - for Number types
+// setSlotComputematrix4 () - for Number types
 //------------------------------------------------------------------------------
-bool Transform::setComputematrix4(const Number* const sc4obj)
+bool Transform::setSlotComputematrix4(const Number* const sc4obj)
 {
     bool ok = true;
     if (sc4obj != nullptr) {
         v[nv++] = sc4obj->getReal();
         computeMatrix();
-    }
-    else {
+    } else {
         std::cerr << "Transform::setComputematrix4:  Invalid Number type or input" << std::endl;
         ok = false;
     }

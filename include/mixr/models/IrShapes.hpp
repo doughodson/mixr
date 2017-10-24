@@ -22,10 +22,15 @@ public:
    IrShape();
 
    virtual double getArea();            // returns the effective area as a number in square meters
-   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
-   virtual bool setSlotIrShapeArea(const base::Number* const s);
+
+   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const);
+
 private:
-   double area {};
+   double area{};
+
+private:
+   // slot table helper methods
+   bool setSlotIrShapeArea(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -47,10 +52,12 @@ public:
 
    double getRadius()              { return radius; }
 
-   virtual bool setSlotIrSphereRadius(const base::Number* const s);
+private:
+   double radius{10.0};
 
 private:
-   double radius {10.0};
+   // slot table helper methods
+   bool setSlotIrSphereRadius(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -71,14 +78,15 @@ public:
    IrBox();
 
    virtual double getArea() override;
-   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
-
-   virtual bool setSlotIrBoxX(const base::Number* const s);
-   virtual bool setSlotIrBoxY(const base::Number* const s);
-   virtual bool setSlotIrBoxZ(const base::Number* const s);
+   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const) override;
 
 private:
-   double x {10.0}, y {10.0}, z {10.0};
+   double x{10.0}, y{10.0}, z{10.0};
+
+private:
+   bool setSlotIrBoxX(const base::Number* const);
+   bool setSlotIrBoxY(const base::Number* const);
+   bool setSlotIrBoxZ(const base::Number* const);
 };
 
 }

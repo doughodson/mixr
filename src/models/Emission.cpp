@@ -3,9 +3,6 @@
 
 #include "mixr/models/system/RfSystem.hpp"
 
-#include <cmath>
-#include <iostream>
-
 namespace mixr {
 namespace models {
 

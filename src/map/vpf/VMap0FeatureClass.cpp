@@ -24,10 +24,10 @@ void VMap0FeatureClass::deleteData()
 
 void VMap0FeatureClass::addRelation(const char* table1, const char* table2, const char *table1key, const char *table2key)
 {   
-    char* tempTable1 = (char*)table1;
-    char* tempTable2 = (char*)table2;
-    char* tempTable1Key = (char*)table1key;
-    char* tempTable2Key = (char*)table2key;
+    char* tempTable1 {const_cast<char*>(table1)};
+    char* tempTable2 {const_cast<char*>(table2)};
+    char* tempTable1Key {const_cast<char*>(table1key)};
+    char* tempTable2Key {const_cast<char*>(table2key)};
 
     // truncate our values
     std::size_t size {std::strlen(tempTable1)};

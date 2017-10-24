@@ -31,7 +31,7 @@ void utInteger2Str(const int num, char* const str, int width)
    } while( tnum > 0 && nc < MAX_CHARS);
 
    // Add the negative character (if needed)
-   if(isNeg && nc < MAX_CHARS) {
+   if (isNeg && nc < MAX_CHARS) {
       temp[nc++] = '-';
    }
 
@@ -92,8 +92,8 @@ bool utStrncpy(char* const strDest, const std::size_t sizeOfDest, const char* co
    if (count < maxToCopy) maxToCopy = count;
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q{strDest};
+   const char* p{strSource};
 
    // Everything looks good, copy...
    std::size_t idx {};
@@ -117,8 +117,8 @@ bool utStrcat(char* const strDest, const std::size_t sizeOfDest, const char* con
    }
 
    // Set our working pointers
-   char* q = strDest;
-   const char* p = strSource;
+   char* q{strDest};
+   const char* p{strSource};
 
    // Max characters to the destination buffer
    const std::size_t maxToCopy {sizeOfDest - 1};
@@ -128,7 +128,7 @@ bool utStrcat(char* const strDest, const std::size_t sizeOfDest, const char* con
    while (*q++ != '\0' && idx++ < maxToCopy) {}
 
    // if we have a terminated string ...
-   bool ok = (idx <= maxToCopy);
+   bool ok{(idx <= maxToCopy)};
    if (ok) {
       // Back space for the original string's null character
       --q;
@@ -257,8 +257,8 @@ int utStrcasecmp(const char* const s1, const char* const s2)
    const char* p1 {s1};
    const char* p2 {s2};
    while (*p1 != '\0' && *p2 != '\0') {
-      int c1 = std::tolower(static_cast<int>(*p1++));
-      int c2 = std::tolower(static_cast<int>(*p2++));
+      const int c1{std::tolower(static_cast<int>(*p1++))};
+      const int c2{std::tolower(static_cast<int>(*p2++))};
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }
@@ -281,8 +281,8 @@ int utStrncasecmp(const char* const s1, const char* const s2, const std::size_t 
    const char* p2 {s2};
    std::size_t icnt {};
    while (*p1 != '\0' && *p2 != '\0' && icnt++ < n) {
-      int c1 = std::tolower(static_cast<int>(*p1++));
-      int c2 = std::tolower(static_cast<int>(*p2++));
+      const int c1{std::tolower(static_cast<int>(*p1++))};
+      const int c2{std::tolower(static_cast<int>(*p2++))};
       if (c1 < c2) return -1;
       if (c1 > c2) return  1;
    }

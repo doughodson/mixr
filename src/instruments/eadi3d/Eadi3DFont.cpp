@@ -7,6 +7,8 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(Eadi3DFont, "Eadi3DFont")
 EMPTY_SLOTTABLE(Eadi3DFont)
+EMPTY_COPYDATA(Eadi3DFont)
+EMPTY_DELETEDATA(Eadi3DFont)
 
 // font scaled so six stroke font points (units used below) is 1 screen unit
 #define XSCALE (1.0/6.0)
@@ -16,9 +18,6 @@ EMPTY_SLOTTABLE(Eadi3DFont)
 const double defaultFontWidth = static_cast<double>(6.0f * XSCALE);
 const double defaultFontHeight = static_cast<double>(7.0f * YSCALE);
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Eadi3DFont::Eadi3DFont()
 {
     STANDARD_CONSTRUCTOR()
@@ -28,17 +27,6 @@ Eadi3DFont::Eadi3DFont()
     setCharacterSpacing( defaultFontWidth );
     setLineSpacing( defaultFontHeight );
 }
-
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-EMPTY_COPYDATA(Eadi3DFont)
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Eadi3DFont)
 
 //------------------------------------------------------------------------------
 // outputText() -- Text output routines
@@ -133,9 +121,6 @@ void Eadi3DFont::outputText(const char* txt, const int n, const bool vf, const b
     glPopMatrix();
 }
 
-//------------------------------------------------------------------------------
-// loadFont() --
-//------------------------------------------------------------------------------
 void Eadi3DFont::loadFont()
 {
     if (isLoaded()) return;
@@ -156,6 +141,7 @@ enum {
     FONT_END,
     FONT_ADVANCE
 };
+
 #define MAX_STROKES 256
 #define END_OF_LIST 256
 

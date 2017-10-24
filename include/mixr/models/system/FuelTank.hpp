@@ -27,24 +27,25 @@ public:
 
    // Tank capacity (lb)
    virtual double getCapacity() const;
-   virtual bool setCapacity(const double cap);
+   virtual bool setCapacity(const double);
    virtual bool isCapacityValid() const;
 
    // Fuel weight (lb)
    virtual double getFuelWt() const;
-   virtual bool setFuelWt(const double wt);
+   virtual bool setFuelWt(const double);
    virtual bool isFuelWtValid() const;
 
    virtual void reset() override;
-
-protected:
-   virtual bool setSlotFuelWt(const base::Number* const msg);
-   virtual bool setSlotCapacity(const base::Number* const msg);
 
 private:
    double capacity {-1.0};      // Fuel capacity (lb)
    double fuelWt {-1.0};        // Fuel contents (lb)
    double initFuelWt {-1.0};    // Fuel contents at reset (lb)
+
+private:
+   // slot table helper methods
+   bool setSlotFuelWt(const base::Number* const);
+   bool setSlotCapacity(const base::Number* const);
 };
 
 }

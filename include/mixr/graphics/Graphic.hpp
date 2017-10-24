@@ -462,6 +462,8 @@ private:
 
 private:
    // slot table helper methods
+   bool setSlotColor(const base::Color* const);
+   bool setSlotColor(const base::Identifier* const);
    bool setSlotFlashRate(const base::Number* const);
    bool setSlotLineWidth(const base::Number* const);
    bool setSlotSelectName(const base::Number* const);

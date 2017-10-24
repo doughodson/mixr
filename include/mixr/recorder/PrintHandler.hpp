@@ -69,6 +69,11 @@ private:
    bool fileFailed {};                // Open or write failed
    bool firstPassFlg {true};          // First pass flag
    bool fileEmpty {true};             // Is the file opened and empty?
+
+private:
+   // slot table helper methods
+   bool setSlotFilename(const base::String* const x)             { return setFilename(x); }
+   bool setSlotPathName(const base::String* const x)             { return setPathName(x); }
 };
 
 }

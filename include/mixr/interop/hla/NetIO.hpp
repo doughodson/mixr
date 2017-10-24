@@ -195,11 +195,6 @@ protected:
     virtual bool advanceTime();
     virtual bool doTick();
 
-    // Slot functions
-    bool setSlotFedFile(base::String* const msg);
-    bool setSlotRegulatingTime(base::Number* const msg);
-    bool setSlotConstrainedTime(base::Number* const msg);
-
 private:
    RTI::ObjectClassHandle  objectClassHandles[MAX_CLASSES];                // Object class handles
    RTI::AttributeHandle objectAttributeHandles[MAX_ATTRIBUTES];            // Object attribute handles
@@ -249,6 +244,12 @@ private:
    // bsearch callbacks: object handle compare function --
    //   True types are (const RTI::ObjectClassHandle* key, const Nib** nib)
    static int compareObjHandles(const void* key, const void* nib);
+
+private:
+    // slot table helper methods
+    bool setSlotFedFile(base::String* const);
+    bool setSlotRegulatingTime(base::Number* const);
+    bool setSlotConstrainedTime(base::Number* const);
 };
 
 }

@@ -69,7 +69,7 @@ void VMap0MainDirectory::loadTables()
                 //          << ", " << record->getData(5) << ", "
                 //          << record->getData(6) << std::endl;
                 // column 2 is the column we need
-                char* x = (char*)record->getData(2);
+                char* x = const_cast<char*>(record->getData(2));
                 std::size_t size {std::strlen(x)};
                 std::size_t count {};
                 while (x[count] != ' ' && count < size) count++;
@@ -79,7 +79,7 @@ void VMap0MainDirectory::loadTables()
                     string->catStr(x);
                     string->catStr("/");
                     if (rference == nullptr) rference = new VMap0ReferenceDirectory();
-                    rference->setSlotPath(string);
+                    rference->setPath(string);
                 }
                 //else if (strcmp(x, "noamer") == 0) {
                 //    string->catStr(getPath());

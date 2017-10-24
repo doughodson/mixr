@@ -10,8 +10,8 @@ namespace base {
 //------------
 unsigned int getDigits(const double x)
 {
-   unsigned int digits = 2;
-   double z = std::fabs(x);
+   unsigned int digits{2};
+   double z{std::fabs(x)};
    while (z >= 10.0) {
       digits++;
       z /= 10.0;
@@ -44,8 +44,8 @@ void sinCos(const float src, float* const dst1, float* const dst2)
 //------------
 void sinArray(const double* const src, double* const dst, const unsigned int n)
 {
-   const double* ps = src;
-   double* pd = dst;
+   const double* ps{src};
+   double* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::sin(*ps++);
    }
@@ -53,8 +53,8 @@ void sinArray(const double* const src, double* const dst, const unsigned int n)
 
 void sinArray(const float* const src, float* const dst, const unsigned int n)
 {
-   const float* ps = src;
-   float* pd = dst;
+   const float* ps{src};
+   float* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = sinf(*ps++);
    }
@@ -65,8 +65,8 @@ void sinArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 void cosArray(const double* const src, double* const dst, const unsigned int n)
 {
-   const double* ps = src;
-   double* pd = dst;
+   const double* ps{src};
+   double* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::cos(*ps++);
    }
@@ -74,8 +74,8 @@ void cosArray(const double* const src, double* const dst, const unsigned int n)
 
 void cosArray(const float* const src, float* const dst, const unsigned int n)
 {
-   const float* ps = src;
-   float* pd = dst;
+   const float* ps{src};
+   float* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = cosf(*ps++);
    }
@@ -86,9 +86,9 @@ void cosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 void sinCosArray(const double* const src, double* const dst1, double* const dst2, const unsigned int n)
 {
-   const double* ps = src;
-   double* pd1 = dst1;
-   double* pd2 = dst2;
+   const double* ps{src};
+   double* pd1{dst1};
+   double* pd2{dst2};
    for (unsigned int i = 0; i < n; i++) {
       *pd1++ = std::sin(*ps);
       *pd2++ = std::cos(*ps++);
@@ -97,9 +97,9 @@ void sinCosArray(const double* const src, double* const dst1, double* const dst2
 
 void sinCosArray(const float* const src, float* const dst1, float* const dst2, const unsigned int n)
 {
-   const float* ps = src;
-   float* pd1 = dst1;
-   float* pd2 = dst2;
+   const float* ps{src};
+   float* pd1{dst1};
+   float* pd2{dst2};
    for (unsigned int i = 0; i < n; i++) {
       *pd1++ = sinf(*ps);
       *pd2++ = cosf(*ps++);
@@ -111,8 +111,8 @@ void sinCosArray(const float* const src, float* const dst1, float* const dst2, c
 //------------
 void acosArray(const double* const src, double* const dst, const unsigned int n)
 {
-   double* pd = dst;
-   const double* ps = src;
+   double* pd{dst};
+   const double* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::acos(*ps++);
    }
@@ -120,8 +120,8 @@ void acosArray(const double* const src, double* const dst, const unsigned int n)
 
 void acosArray(const float* const src, float* const dst, const unsigned int n)
 {
-   float* pd = dst;
-   const float* ps = src;
+   float* pd{dst};
+   const float* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = acosf(*ps++);
    }
@@ -132,9 +132,9 @@ void acosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 void atan2Array(const double* const yValues, const double* const xValues, double* const dst, const unsigned int n)
 {
-   double* pd = dst;
-   const double* ps1 = yValues;
-   const double* ps2 = xValues;
+   double* pd{dst};
+   const double* ps1{yValues};
+   const double* ps2{xValues};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::atan2(*ps1++,*ps2++);
    }
@@ -142,9 +142,9 @@ void atan2Array(const double* const yValues, const double* const xValues, double
 
 void atan2Array(const float* const yValues, const float* const xValues, float* const dst, const unsigned int n)
 {
-   float* pd = dst;
-   const float* ps1 = yValues;
-   const float* ps2 = xValues;
+   float* pd{dst};
+   const float* ps1{yValues};
+   const float* ps2{xValues};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = atan2f(*ps1++,*ps2++);
    }
@@ -155,8 +155,8 @@ void atan2Array(const float* const yValues, const float* const xValues, float* c
 //------------
 void sqrtArray(const double* const src, double* const dst, const unsigned int n)
 {
-   const double* ps = src;
-   double* pd = dst;
+   const double* ps{src};
+   double* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::sqrt(*ps++);
    }
@@ -164,8 +164,8 @@ void sqrtArray(const double* const src, double* const dst, const unsigned int n)
 
 void sqrtArray(const float* const src, float* const dst, const unsigned int n)
 {
-   const float* ps = src;
-   float* pd = dst;
+   const float* ps{src};
+   float* pd{dst};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = sqrtf(*ps++);
    }
@@ -176,8 +176,8 @@ void sqrtArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 void pow10Array(const double* const src, double* const dst, const unsigned int n)
 {
-   double* pd = dst;
-   const double* ps = src;
+   double* pd{dst};
+   const double* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = std::pow(10.0,*ps++);
    }
@@ -185,8 +185,8 @@ void pow10Array(const double* const src, double* const dst, const unsigned int n
 
 void pow10Array(const float* const src, float* const dst, const unsigned int n)
 {
-   float* pd = dst;
-   const float* ps = src;
+   float* pd{dst};
+   const float* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = powf(10.0f,*ps++);
    }
@@ -197,8 +197,8 @@ void pow10Array(const float* const src, float* const dst, const unsigned int n)
 //------------
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n)
 {
-   double* pd = dst;
-   const double* ps = src;
+   double* pd{dst};
+   const double* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = *ps++ * c;
    }
@@ -206,8 +206,8 @@ void multArrayConst(const double* const src, const double c, double* const dst, 
 
 void multArrayConst(const float* const src, const float c, double* const dst, const unsigned int n)
 {
-   double* pd = dst;
-   const float* ps = src;
+   double* pd{dst};
+   const float* ps{src};
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = *ps++ * c;
    }

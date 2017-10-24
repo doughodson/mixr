@@ -18,6 +18,7 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(RacModel, "RacModel")
+EMPTY_DELETEDATA(RacModel)
 
 BEGIN_SLOTTABLE(RacModel)
     "minSpeed",    // 1 Minimum Velocity        (kts)
@@ -30,12 +31,12 @@ BEGIN_SLOTTABLE(RacModel)
 END_SLOTTABLE(RacModel)
 
 BEGIN_SLOT_MAP(RacModel)
-    ON_SLOT( 1, setSlotMinSpeed, base::Number)
-    ON_SLOT( 2, setSlotSpeedMaxG, base::Number)
-    ON_SLOT( 3, setSlotMaxG,base::Number)
-    ON_SLOT( 4, setSlotMaxAccel, base::Number)
+    ON_SLOT( 1, setSlotMinSpeed,    base::Number)
+    ON_SLOT( 2, setSlotSpeedMaxG,   base::Number)
+    ON_SLOT( 3, setSlotMaxG,        base::Number)
+    ON_SLOT( 4, setSlotMaxAccel,    base::Number)
     ON_SLOT( 5, setSlotCmdAltitude, base::Distance)
-    ON_SLOT( 6, setSlotCmdHeading, base::Angle)
+    ON_SLOT( 6, setSlotCmdHeading,  base::Angle)
     ON_SLOT( 7, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
@@ -58,8 +59,6 @@ void RacModel::copyData(const RacModel& org, const bool)
    cmdVelocity = org.cmdVelocity;
 }
 
-EMPTY_DELETEDATA(RacModel)
-
 void RacModel::reset()
 {
    BaseClass::reset();
@@ -73,9 +72,6 @@ void RacModel::dynamics(const double dt)
     updateRAC(dt);
 }
 
-//------------------------------------------------------------------------------
-// Get Vehicle data
-//------------------------------------------------------------------------------
 double RacModel::getGload() const
 {
    return -1;
@@ -192,7 +188,7 @@ void RacModel::updateRAC(const double dt)
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   const double g = base::ETHG * base::distance::FT2M;
+   const double g{base::ETHG * base::distance::FT2M};
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
@@ -208,16 +204,16 @@ void RacModel::updateRAC(const double dt)
    // ---
 
    // Max altitude rate 6000 ft /min converted to M/S
-   double maxAltRate = (3000.0 / 60.0) * base::distance::FT2M;
+   double maxAltRate{(3000.0 / 60.0) * base::distance::FT2M};
 
    // commanded vertical velocity is delta altitude limited to max rate
-   double cmdAltRate = (cmdAltitude - pp->getAltitudeM());
+   double cmdAltRate{(cmdAltitude - pp->getAltitudeM())};
    if (cmdAltRate > maxAltRate) cmdAltRate = maxAltRate;
    else if (cmdAltRate < -maxAltRate) cmdAltRate = -maxAltRate;
 
    // Compute commanded flight path angle (gamma)
-   double cmdPitch = 0;
-   double vt = pp->getTotalVelocity();
+   double cmdPitch{};
+   double vt{pp->getTotalVelocity()};
    if (vt > 0) {
       cmdPitch = std::asin( cmdAltRate/vt );
    }
@@ -225,18 +221,18 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Compute Max G
    // ---
-   double gmax = gMax;                     // Max g,s
-   if(pp->getTotalVelocity() < vpMaxG) {
+   double gmax{gMax};                     // Max g,s
+   if (pp->getTotalVelocity() < vpMaxG) {
       gmax = 1.0f + (gMax - 1.0f) * (pp->getTotalVelocity() - vpMin) / (vpMaxG - vpMin);
    }
 
    // ---
    // Computer max turn rate, max/min pitch rates
    // ---
-   double ra_max = gmax * g / pp->getTotalVelocity();    // Turn rate base on vp and g,s (rad/sec)
-   double qa_max = ra_max;                           // Max pull up pitch rate (rad/sec)
-   double qa_min = -qa_max;                          // Max pushover pitch rate (rad/sec)
-   if(gmax > 2.0) {
+   double ra_max{gmax * g / pp->getTotalVelocity()};    // Turn rate base on vp and g,s (rad/sec)
+   double qa_max{ra_max};                               // Max pull up pitch rate (rad/sec)
+   double qa_min{-qa_max};                              // Max pushover pitch rate (rad/sec)
+   if (gmax > 2.0) {
       // Max yaw rate (rad/sec)
       qa_min = -( 2.0f * g / pp->getTotalVelocity());
    }
@@ -244,60 +240,60 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Get old angular values
    // ---
-   const base::Vec3d oldRates = pp->getAngularVelocities();
-   //double pa1 = oldRates[simulation::Player::IROLL];
-   double qa1 = oldRates[models::Player::IPITCH];
-   double ra1 = oldRates[models::Player::IYAW];
+   const base::Vec3d oldRates{pp->getAngularVelocities()};
+   //double pa1{oldRates[simulation::Player::IROLL]};
+   double qa1{oldRates[models::Player::IPITCH]};
+   double ra1{oldRates[models::Player::IYAW]};
 
    // ---
    // Find pitch rate and update pitch
    // ---
-   double qa = base::angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1;
-   if(qa > qa_max) qa = qa_max;
-   if(qa < qa_min) qa = qa_min;
+   double qa{base::angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1};
+   if (qa > qa_max) qa = qa_max;
+   if (qa < qa_min) qa = qa_min;
 
    // Find turn rate
-   double ra = base::angle::aepcdRad((cmdHeading  * base::angle::D2RCC) - pp->getHeadingR()) * 0.1;
-   if(ra > ra_max) ra = ra_max;
-   if(ra < -ra_max) ra = -ra_max;
+   double ra{base::angle::aepcdRad((cmdHeading  * base::angle::D2RCC) - pp->getHeadingR()) * 0.1};
+   if (ra > ra_max) ra = ra_max;
+   if (ra < -ra_max) ra = -ra_max;
 
    // Damage
-   double dd = pp->getDamage();
+   double dd{pp->getDamage()};
    if (dd > 0.5) {
       ra += (dd - 0.5) * ra_max;
       qa -= (dd - 0.5) * qa_max;
    }
 
    // Using Pitch rate, integrate pitch
-   double newTheta = static_cast<double>(pp->getPitch() + (qa + qa1) * dt / 2.0);
+   double newTheta{static_cast<double>(pp->getPitch() + (qa + qa1) * dt / 2.0)};
 
    // Use turn rate integrate heading
-   double newPsi = static_cast<double>(pp->getHeading() + (ra + ra1) * dt / 2.0);
-   if(newPsi > 2.0 * base::PI) newPsi -= 2.0 * base::PI;
-   if(newPsi < 0.0) newPsi += 2.0 * base::PI;
+   double newPsi{static_cast<double>(pp->getHeading() + (ra + ra1) * dt / 2.0)};
+   if (newPsi > 2.0 * base::PI) newPsi -= 2.0 * base::PI;
+   if (newPsi < 0.0) newPsi += 2.0 * base::PI;
 
    // Roll angle is proportional to max turn rate - filtered
-   double pa = 0.0;
-   double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::angle::D2RCC * 60.0));
+   double pa{};
+   double newPhi{0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::angle::D2RCC * 60.0))};
 
    // Find Acceleration
-   double cmdVelMPS = cmdVelocity * (base::distance::NM2M / 3600.0);
-   double vpdot = (cmdVelMPS - pp->getTotalVelocity()) * 0.05;
-   if(vpdot > maxAccel)  vpdot = maxAccel;
-   if(vpdot < -maxAccel) vpdot = -maxAccel;
+   double cmdVelMPS{cmdVelocity * (base::distance::NM2M / 3600.0)};
+   double vpdot{(cmdVelMPS - pp->getTotalVelocity()) * 0.05};
+   if (vpdot > maxAccel)  vpdot = maxAccel;
+   if (vpdot < -maxAccel) vpdot = -maxAccel;
 
    // Compute new velocity (body coordinates)
-   double newVP = pp->getTotalVelocity() + vpdot * dt;
+   double newVP{pp->getTotalVelocity() + vpdot * dt};
 
    // Set our angular values
    pp->setEulerAngles(newPhi, newTheta, newPsi);
    pp->setAngularVelocities(pa, qa, ra);
 
    // Set our velocity vector (body coordinates)
-   pp->setVelocityBody( static_cast<double>(newVP), 0.0, 0.0);
+   pp->setVelocityBody(static_cast<double>(newVP), 0.0, 0.0);
 
    // Set our acceleration vector (body coordinates)
-   pp->setAccelerationBody( static_cast<double>(vpdot), 0.0, 0.0);
+   pp->setAccelerationBody(static_cast<double>(vpdot), 0.0, 0.0);
 }
 
 
@@ -307,7 +303,7 @@ void RacModel::updateRAC(const double dt)
 
 bool RacModel::setSlotMinSpeed(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        vpMin = msg->getReal();
        ok = true;
@@ -317,7 +313,7 @@ bool RacModel::setSlotMinSpeed(const base::Number* const msg)
 
 bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        vpMaxG = msg->getReal();
        ok = true;
@@ -327,7 +323,7 @@ bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
 
 bool RacModel::setSlotMaxG(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        gMax = msg->getReal();
        ok = true;
@@ -337,7 +333,7 @@ bool RacModel::setSlotMaxG(const base::Number* const msg)
 
 bool RacModel::setSlotMaxAccel(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        maxAccel = msg->getReal();
        ok = true;
@@ -347,7 +343,7 @@ bool RacModel::setSlotMaxAccel(const base::Number* const msg)
 
 bool RacModel::setSlotCmdAltitude(const base::Distance* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        double value = base::Meters::convertStatic( *msg );
        cmdAltitude = value;
@@ -358,7 +354,7 @@ bool RacModel::setSlotCmdAltitude(const base::Distance* const msg)
 
 bool RacModel::setSlotCmdHeading(const base::Angle* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        double value  = base::Degrees::convertStatic( *msg );
        cmdHeading = value;
@@ -369,7 +365,7 @@ bool RacModel::setSlotCmdHeading(const base::Angle* const msg)
 
 bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        double value = msg->getReal();
        cmdVelocity = value;

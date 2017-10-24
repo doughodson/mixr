@@ -15,9 +15,9 @@ BEGIN_SLOTTABLE(DialTickMarks)
 END_SLOTTABLE(DialTickMarks)
 
 BEGIN_SLOT_MAP(DialTickMarks)
-    ON_SLOT(1, setSlotLength, base::Number)
-    ON_SLOT(2, setSlotQuantity, base::Number)
-    ON_SLOT(3, setTickGraphic, graphics::Graphic)
+    ON_SLOT(1, setSlotLength,       base::Number)
+    ON_SLOT(2, setSlotQuantity,     base::Number)
+    ON_SLOT(3, setSlotTickGraphic,  graphics::Graphic)
 END_SLOT_MAP()
 
 DialTickMarks::DialTickMarks()
@@ -99,6 +99,11 @@ bool DialTickMarks::setSlotQuantity(const base::Number* const newQ)
     bool ok = true;
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
     return ok;
+}
+
+bool DialTickMarks::setSlotTickGraphic(const graphics::Graphic* const graphic)
+{
+    return setTickGraphic(graphic);
 }
 
 // Set function

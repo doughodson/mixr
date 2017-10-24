@@ -67,7 +67,7 @@ void PrintSelected::copyData(const PrintSelected& org, const bool)
 
 bool PrintSelected::setSlotMsgToken(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       msgToken = msg->getInt();
@@ -77,7 +77,7 @@ bool PrintSelected::setSlotMsgToken(const base::Number* const msg)
 
 bool PrintSelected::setSlotFieldName(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       fieldNameStr.assign( msg->getString() );
@@ -88,7 +88,7 @@ bool PrintSelected::setSlotFieldName(const base::String* const msg)
 
 bool PrintSelected::setSlotCompareToStr(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       compareStr.assign( msg->getString() );
@@ -98,7 +98,7 @@ bool PrintSelected::setSlotCompareToStr(const base::String* const msg)
 
 bool PrintSelected::setSlotCompareToNum(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       compareValI = msg->getInt();
@@ -108,7 +108,7 @@ bool PrintSelected::setSlotCompareToNum(const base::Number* const msg)
 
 bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       compareValD = msg->getDouble();
@@ -119,7 +119,7 @@ bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
 
 bool PrintSelected::setSlotCondition(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
 
@@ -143,7 +143,7 @@ bool PrintSelected::setSlotCondition(const base::String* const msg)
 
 bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = true;
       timeOnly = msg->getBoolean();
@@ -156,20 +156,19 @@ bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
 //------------------------------------------------------------------------------
 void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 {
-
    if (handle == nullptr) return;  // cannot continue
-   const pb::DataRecord* dataRecord = handle->getRecord();
+   const pb::DataRecord* dataRecord{handle->getRecord()};
    if (dataRecord == nullptr) return;  // cannot continue
 
    // using reflection:
    // save to: const google::protobuf::Message* recMsg
    recMsg = dataRecord;
    //const google::protobuf::Message& root = *recMsg;
-   const google::protobuf::Descriptor* descriptor = recMsg->GetDescriptor();
-   const google::protobuf::Reflection* reflection = recMsg->GetReflection();
+   const google::protobuf::Descriptor* descriptor{recMsg->GetDescriptor()};
+   const google::protobuf::Reflection* reflection{recMsg->GetReflection()};
 
-   const google::protobuf::FieldDescriptor* idField = descriptor->FindFieldByName("id");
-   unsigned int id = reflection->GetUInt32(*recMsg, idField);
+   const google::protobuf::FieldDescriptor* idField{descriptor->FindFieldByName("id")};
+   unsigned int id{reflection->GetUInt32(*recMsg, idField)};
 
    foundSelected = false;
 
@@ -177,16 +176,16 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    processMessage( &dataRecord->time());
 
    // Process the event message
-   const google::protobuf::Message* processMsg = nullptr;
-   std::string msgCat = "";
-   std::string msgType = "";
+   const google::protobuf::Message* processMsg{};
+   std::string msgCat{""};
+   std::string msgType{""};
 
    switch (msgToken) {
       case REID_FILE_ID: {
          processMsg = &dataRecord->file_id_msg();
          msgCat =  "FILE     ";
          msgType = "ID       ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if ((firstTime) || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -195,7 +194,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->new_player_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "NEW      ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if ((firstTime) || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -204,7 +203,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_removed_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "REMOVED  ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -213,7 +212,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_data_msg();
          msgCat =  "PLAYER   ";
          msgType = "DATA     ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) {
             printHeader = true;
          }
@@ -224,7 +223,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_damaged_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "DAMAGED  ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -233,7 +232,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_collision_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "COLLISION";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -242,7 +241,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_crash_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "CRASH    ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -251,7 +250,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->player_killed_event_msg();
          msgCat =  "PLAYER   ";
          msgType = "KILLED   ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -260,7 +259,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->weapon_release_event_msg();
          msgCat =  "WEAPON   ";
          msgType = "RELEASED ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -269,7 +268,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->weapon_hung_event_msg();
          msgCat =  "WEAPON   ";
          msgType = "HUNG     ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -278,7 +277,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->weapon_detonation_event_msg();
          msgCat =  "WEAPON  ";
          msgType = "DETONATE";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -287,7 +286,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->gun_fired_event_msg();
          msgCat =  "GUN     ";
          msgType = "FIRED   ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -296,7 +295,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->new_track_event_msg();
          msgCat =  "TRACK   ";
          msgType = "NEW     ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -305,7 +304,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->track_removed_event_msg();
          msgCat =  "TRACK   ";
          msgType = "REMOVED ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -314,7 +313,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
          processMsg = &dataRecord->track_data_msg();
          msgCat =  "TRACK   ";
          msgType = "DATA    ";
-         static bool firstTime = true;
+         static bool firstTime{true};
          if (firstTime || isFileEmpty()) printHeader = true;
          firstTime = false;
          break;
@@ -332,7 +331,7 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
    std::stringstream soutVals;
    if (foundSelected &&  timeOnly) {
       // print the message, whatever it is, because it matches the time criteria
-      std::string msgName = getEventMsgName(recMsg);  // This also sets the event message
+      std::string msgName{getEventMsgName(recMsg)};  // This also sets the event message
       if (eventMsg != nullptr) {
          soutFields << std::left << std::setw(32) << msgName << "\t" << "HEADER" << "\t";
          soutVals << std::left << std::setw(32) << msgName << "\t" "VALUES" << "\t";
@@ -410,12 +409,12 @@ void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 //---------------------------------------------------------------------------
 void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 {
-   const google::protobuf::Message& root = *msg;
-   const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
-   const google::protobuf::Reflection* reflection = msg->GetReflection();
+   const google::protobuf::Message& root{*msg};
+   const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
+   const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
-   int fieldCount = descriptor->field_count();
-   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
+   int fieldCount{descriptor->field_count()};
+   const google::protobuf::FieldDescriptor* fieldDescriptor{};
 
    // look at fields to find a match with the slot condition
    if (fieldCount > 0) {
@@ -426,12 +425,12 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
          fieldDescriptor = descriptor->field(i);
 
          // what type is this field?
-         google::protobuf::FieldDescriptor::CppType cppType = fieldDescriptor->cpp_type();
+         google::protobuf::FieldDescriptor::CppType cppType{fieldDescriptor->cpp_type()};
 
          // If this field is a message, then call this again
          if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
             // Get sub message
-            const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
+            const google::protobuf::Message& sub_message{reflection->GetMessage(root, fieldDescriptor)};
             processMessage(&sub_message);
          }
          else {
@@ -440,15 +439,15 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 
                // This is the right field. Now check the value, based on type
                if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_STRING) {
-                  std::string str = reflection->GetString(root, fieldDescriptor);
-                  std::string matchStr = getCompareToStr();
+                  std::string str{reflection->GetString(root, fieldDescriptor)};
+                  std::string matchStr{getCompareToStr()};
                   if (str == matchStr) {
                      // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_INT32) {
-                  int num = reflection->GetInt32(root, fieldDescriptor);
+                  const int num{reflection->GetInt32(root, fieldDescriptor)};
                   if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
                      ((condition == Condition::GT) && (num > getCompareToNum())) ||
                      ((condition == Condition::LT) && (num < getCompareToNum()))) {
@@ -457,7 +456,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_INT64) {
-                  long long num = reflection->GetInt64(root, fieldDescriptor);
+                  const long long num{reflection->GetInt64(root, fieldDescriptor)};
                   if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
                      ((condition == Condition::GT) && (num > getCompareToNum())) ||
                      ((condition == Condition::LT) && (num < getCompareToNum()))) {
@@ -466,7 +465,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_UINT32) {
-                  int num = static_cast<int>(reflection->GetUInt32(root, fieldDescriptor));
+                  const int num{static_cast<int>(reflection->GetUInt32(root, fieldDescriptor))};
                   if (((condition == Condition::EQ) && (num == getCompareToNum())) ||
                      ((condition == Condition::GT) && (static_cast<int>(num) > getCompareToNum())) ||
                      ((condition == Condition::LT) && (static_cast<int>(num) < getCompareToNum()))) {
@@ -475,7 +474,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_FLOAT) {
-                  double num = static_cast<double>(reflection->GetFloat(root, fieldDescriptor));
+                  const double num{static_cast<double>(reflection->GetFloat(root, fieldDescriptor))};
                   if ( ((condition == Condition::EQ) && base::equal(num, getCompareToDbl())) ||
                      ((condition == Condition::GT) && (num > getCompareToDbl())) ||
                      ((condition == Condition::LT) && (num < getCompareToDbl()))) {
@@ -484,7 +483,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE) {
-                  double num = reflection->GetDouble(root, fieldDescriptor);
+                  const double num{reflection->GetDouble(root, fieldDescriptor)};
                   if ( ((condition == Condition::EQ) && base::equal(num, getCompareToDbl())) ||
                      ((condition == Condition::GT) && (num > getCompareToDbl())) ||
                      ((condition == Condition::LT) && (num < getCompareToDbl()))) {
@@ -493,15 +492,15 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_BOOL) {
-                  bool num = reflection->GetBool(root, fieldDescriptor);
+                  const bool num{reflection->GetBool(root, fieldDescriptor)};
                   if (num == getCompareToBool()) {
                       // Found it!
                      foundSelected = true;
                   }
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_ENUM) {
-                  const google::protobuf::EnumValueDescriptor* enumVal = reflection->GetEnum(root, fieldDescriptor);
-                  int enumIndex = enumVal->index();
+                  const google::protobuf::EnumValueDescriptor* enumVal{reflection->GetEnum(root, fieldDescriptor)};
+                  const int enumIndex{enumVal->index()};
                   if (((condition == Condition::EQ) && (enumIndex == getCompareToNum())) ||
                      ((condition == Condition::GT) && (enumIndex > getCompareToNum())) ||
                      ((condition == Condition::LT) && (enumIndex < getCompareToNum()))) {
@@ -520,23 +519,23 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
 //---------------------------------------------------------------------------
 void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVals, const google::protobuf::Message* const msg)
 {
-   std::streamsize oldWidth = soutFields.width();
-   std::ostream::fmtflags oldFlags = soutFields.flags();
+   std::streamsize oldWidth{soutFields.width()};
+   std::ostream::fmtflags oldFlags{soutFields.flags()};
 
-   const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
-   const google::protobuf::Reflection* reflection = msg->GetReflection();
+   const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
+   const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
-   const google::protobuf::Message& root = *msg;
-   std::string msgName = descriptor->name();
+   const google::protobuf::Message& root{*msg};
+   std::string msgName{descriptor->name()};
 
-   int fieldCount = descriptor->field_count();
+   int fieldCount{descriptor->field_count()};
 
-   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
+   const google::protobuf::FieldDescriptor* fieldDescriptor{};
 
-   std::string msgDivider = ";   ";
-   std::string fieldDivider = ", ";
+   std::string msgDivider{";   "};
+   std::string fieldDivider{", "};
 
-   bool lastField = false;
+   bool lastField{};
 
    if (fieldCount > 0) {
       for (int i = 0; i < fieldCount; i++) {
@@ -546,12 +545,12 @@ void PrintSelected::printMessage(std::ostream& soutFields, std::ostream& soutVal
          fieldDescriptor = descriptor->field(i);
 
          // what type is this field?
-         google::protobuf::FieldDescriptor::CppType cppType = fieldDescriptor->cpp_type();
+         google::protobuf::FieldDescriptor::CppType cppType{fieldDescriptor->cpp_type()};
 
          if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_MESSAGE) {
 
             // do the same again for this message, etc.
-            const google::protobuf::Message& sub_message = reflection->GetMessage(root, fieldDescriptor);
+            const google::protobuf::Message& sub_message{reflection->GetMessage(root, fieldDescriptor)};
             printMessage(soutFields, soutVals, &sub_message);
          }
          else {
@@ -695,15 +694,15 @@ bool PrintSelected::setTimeOnly(const bool flg)
 //---------------------------------------------------------------------------
 std::string PrintSelected::getEventMsgName(const google::protobuf::Message* const msg)
 {
-   std::string name = "";
+   std::string name{""};
 
-   const google::protobuf::Descriptor* descriptor = msg->GetDescriptor();
-   const google::protobuf::Reflection* reflection = msg->GetReflection();
+   const google::protobuf::Descriptor* descriptor{msg->GetDescriptor()};
+   const google::protobuf::Reflection* reflection{msg->GetReflection()};
 
-   const google::protobuf::Message& root = *msg;
+   const google::protobuf::Message& root{*msg};
 
-   int fieldCount = descriptor->field_count();
-   const google::protobuf::FieldDescriptor* fieldDescriptor = nullptr;
+   int fieldCount{descriptor->field_count()};
+   const google::protobuf::FieldDescriptor* fieldDescriptor{};
    eventMsg = nullptr;
 
    if (descriptor->field_count() > 0) {
@@ -733,10 +732,10 @@ std::string PrintSelected::getEventMsgName(const google::protobuf::Message* cons
 //------------------------------------------------------------------------------
 std::string PrintSelected::printTimeMsg(double time)
 {
-    char cbuf[16];
-    int hh = 0;     // Hours
-    int mm = 0;     // Min
-    double ss = 0;  // Sec
+    char cbuf[16]{};
+    int hh{};        // Hours
+    int mm{};        // Min
+    double ss{};     // Sec
 
     // utc time
     base::time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);

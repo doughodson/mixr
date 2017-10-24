@@ -29,10 +29,10 @@ class Radar : public RfSensor
 
 public:
    // Max number of reports (per scan)
-   static const unsigned int MAX_REPORTS = MIXR_CONFIG_MAX_REPORTS;
+   static const unsigned int MAX_REPORTS{MIXR_CONFIG_MAX_REPORTS};
 
-   static const unsigned int NUM_SWEEPS = 121;          // Number of sweeps in Real-Beam display
-   static const unsigned int PTRS_PER_SWEEP = 128;      // Number of points per sweep in RB display
+   static const unsigned int NUM_SWEEPS{121};          // Number of sweeps in Real-Beam display
+   static const unsigned int PTRS_PER_SWEEP{128};      // Number of points per sweep in RB display
 
 public:
    Radar();
@@ -62,9 +62,6 @@ public:
 
    // Sets integration gain
    virtual bool setIGain(const double);
-
-   // Slot functions
-   virtual bool setSlotIGain(base::Number* const msg);
 
    virtual bool killedNotification(Player* const killedBy = 0) override;
 
@@ -111,6 +108,10 @@ private:
    int    numberOfJammedEmissions {};
 
    double rfIGain {1.0};              // Integrator gain (default: 1.0) (no units)
+
+private:
+   // slot table helper methods
+   bool setSlotIGain(base::Number* const);
 };
 
 }

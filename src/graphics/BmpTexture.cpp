@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(BmpTexture)
 END_SLOTTABLE(BmpTexture)
 
 BEGIN_SLOT_MAP(BmpTexture)
-    ON_SLOT(1, setSlotTexturePath, base::String)
+    ON_SLOT(1, setSlotTexturePath,     base::String)
     ON_SLOT(2, setSlotTextureFileName, base::String)
 END_SLOT_MAP()
 
@@ -99,7 +99,7 @@ bool BmpTexture::writeFile()
 //------------------------------------------------------------------------------
 
 // setSlotTexturePath() -- sets the path to the textures directory
-bool BmpTexture::setSlotTexturePath(base::String* const s)
+bool BmpTexture::setSlotTexturePath(const base::String* const s)
 {
    if (s != nullptr) setTexturePath(*s);
    else setTexturePath(nullptr);
@@ -107,7 +107,7 @@ bool BmpTexture::setSlotTexturePath(base::String* const s)
 }
 
 // setSlotTextureFileName() -- sets the texture file name
-bool BmpTexture::setSlotTextureFileName(base::String* const s)
+bool BmpTexture::setSlotTextureFileName(const base::String* const s)
 {
    if (s != nullptr) setTextureFileName(*s);
    else setTextureFileName(nullptr);

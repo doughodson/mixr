@@ -64,13 +64,14 @@ public:
     double getTopRadius()                       { return topRadius; }
     double getHeight()                          { return height; }
 
-protected:
-    bool setSlotTopRadius(const base::Number* const x);
-    bool setSlotHeight(const base::Number* const x);
-
 private:
     double topRadius {1.0};
     double height {1.0};
+
+private:
+   // slot table helper methods
+   bool setSlotTopRadius(const base::Number* const);
+   bool setSlotHeight(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -108,11 +109,12 @@ public:
     virtual bool setSize(const double x)   { size = x; return true; }
     double getSize()                       { return size; }
 
-protected:
-    bool setSlotSize(const base::Number* const srobj);
-
 private:
     double size {1.0};
+
+private:
+   // slot table helper methods
+   bool setSlotSize(const base::Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -135,11 +137,12 @@ public:
     virtual bool setOuterRadius(const double x)    { oRadius = x; return true; }
     double getOuterRadius()                        { return oRadius; }
 
-protected:
-    bool setSlotOuterRadius(const base::Number* const x);
-
 private:
     double oRadius {2.0};
+
+private:
+   // slot table helper methods
+   bool setSlotOuterRadius(const base::Number* const);
 };
 
 

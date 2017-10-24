@@ -5,7 +5,8 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws, "Tws")
+IMPLEMENT_SUBCLASS(Tws, "Tws")
+EMPTY_SLOTTABLE(Tws)
 EMPTY_DELETEDATA(Tws)
 
 Tws::Tws()

@@ -55,10 +55,7 @@ void LimitFunc::copyData(const LimitFunc& org, const bool cc)
 bool LimitFunc::isValid() const
 {
    // Valid if we have a master rate and a sample rate
-   bool valid = (
-         n == ORDER &&
-         lower <= upper
-      );
+   bool valid {(n == ORDER && lower <= upper)};
 
    return valid && BaseClass::isValid();
 }
@@ -74,7 +71,7 @@ double LimitFunc::g(const double xn)
       px[0] = xn;
 
       // LimitFunc the input
-      double tmp = xn;
+      double tmp {xn};
 
       if (tmp > upper) tmp = upper;
       else if (tmp < lower) tmp = lower;
@@ -82,8 +79,7 @@ double LimitFunc::g(const double xn)
       py[0] = tmp;
 
       return py[0];
-   }
-   else {
+   } else {
       // If invalid transfer function, just return the input value
       return xn;
    }

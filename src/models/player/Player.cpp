@@ -2,8 +2,8 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/models/WorldModel.hpp"
-#include "mixr/models/player/Missile.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/dynamics/DynamicsModel.hpp"
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/system/Datalink.hpp"
@@ -109,67 +109,67 @@ END_SLOTTABLE(Player)
 
 BEGIN_SLOT_MAP(Player)
 
-   ON_SLOT( 1, setSlotInitXPos, base::Distance)
-   ON_SLOT( 1, setSlotInitXPos, base::Number)
+   ON_SLOT( 1, setSlotInitXPos,           base::Distance)
+   ON_SLOT( 1, setSlotInitXPos,           base::Number)
 
-   ON_SLOT( 2, setSlotInitYPos, base::Distance)
-   ON_SLOT( 2, setSlotInitYPos, base::Number)
+   ON_SLOT( 2, setSlotInitYPos,           base::Distance)
+   ON_SLOT( 2, setSlotInitYPos,           base::Number)
 
-   ON_SLOT( 3, setSlotInitAlt,  base::Distance)
-   ON_SLOT( 3, setSlotInitAlt,  base::Number)
+   ON_SLOT( 3, setSlotInitAlt,            base::Distance)
+   ON_SLOT( 3, setSlotInitAlt,            base::Number)
 
-   ON_SLOT( 4, setSlotInitPosition, base::List)
+   ON_SLOT( 4, setSlotInitPosition,       base::List)
 
-   ON_SLOT( 5, setSlotInitLat, base::LatLon)
-   ON_SLOT( 5, setSlotInitLat, base::Angle)
-   ON_SLOT( 5, setSlotInitLat, base::Number)
+   ON_SLOT( 5, setSlotInitLat,            base::LatLon)
+   ON_SLOT( 5, setSlotInitLat,            base::Angle)
+   ON_SLOT( 5, setSlotInitLat,            base::Number)
 
-   ON_SLOT( 6, setSlotInitLon, base::LatLon)
-   ON_SLOT( 6, setSlotInitLon, base::Angle)
-   ON_SLOT( 6, setSlotInitLon, base::Number)
+   ON_SLOT( 6, setSlotInitLon,            base::LatLon)
+   ON_SLOT( 6, setSlotInitLon,            base::Angle)
+   ON_SLOT( 6, setSlotInitLon,            base::Number)
 
-   ON_SLOT( 7, setSlotInitGeocentric, base::List)
+   ON_SLOT( 7, setSlotInitGeocentric,     base::List)
 
-   ON_SLOT( 8, setSlotInitRoll, base::Angle)
-   ON_SLOT( 8, setSlotInitRoll, base::Number)
+   ON_SLOT( 8, setSlotInitRoll,           base::Angle)
+   ON_SLOT( 8, setSlotInitRoll,           base::Number)
 
-   ON_SLOT( 9, setSlotInitPitch, base::Angle)
-   ON_SLOT( 9, setSlotInitPitch, base::Number)
+   ON_SLOT( 9, setSlotInitPitch,          base::Angle)
+   ON_SLOT( 9, setSlotInitPitch,          base::Number)
 
-   ON_SLOT(10, setSlotInitHeading, base::Angle)
-   ON_SLOT(10, setSlotInitHeading, base::Number)
+   ON_SLOT(10, setSlotInitHeading,        base::Angle)
+   ON_SLOT(10, setSlotInitHeading,        base::Number)
 
-   ON_SLOT(11, setSlotInitEulerAngles, base::List)
-   ON_SLOT(12, setSlotInitVelocity, base::Number)
-   ON_SLOT(13, setSlotInitVelocityKts, base::Number)
+   ON_SLOT(11, setSlotInitEulerAngles,    base::List)
+   ON_SLOT(12, setSlotInitVelocity,       base::Number)
+   ON_SLOT(13, setSlotInitVelocityKts,    base::Number)
 
-   ON_SLOT(14, setType, base::String)
-   ON_SLOT(15, setSlotSide, base::String)
+   ON_SLOT(14, setSlotType,               base::String)
+   ON_SLOT(15, setSlotSide,               base::String)
 
-   ON_SLOT(16, setSlotSignature, RfSignature)
-   ON_SLOT(17, setSlotIrSignature, IrSignature)
-   ON_SLOT(18, setSlotCamouflageType, base::Number)
+   ON_SLOT(16, setSlotSignature,          RfSignature)
+   ON_SLOT(17, setSlotIrSignature,        IrSignature)
+   ON_SLOT(18, setSlotCamouflageType,     base::Number)
 
-   ON_SLOT(19, setSlotTerrainElevReq, base::Number)
+   ON_SLOT(19, setSlotTerrainElevReq,     base::Number)
    ON_SLOT(20, setSlotInterpolateTerrain, base::Number)
-   ON_SLOT(21, setSlotTerrainOffset, base::Distance)
+   ON_SLOT(21, setSlotTerrainOffset,      base::Distance)
 
-   ON_SLOT(22, setSlotPositionFreeze, base::Number)
-   ON_SLOT(23, setSlotAltitudeFreeze, base::Number)
-   ON_SLOT(24, setSlotAttitudeFreeze, base::Number)
-   ON_SLOT(25, setSlotFuelFreeze, base::Number)
-   ON_SLOT(26, setSlotCrashOverride, base::Number)
-   ON_SLOT(27, setSlotKillOverride, base::Number)
-   ON_SLOT(28, setSlotKillRemoval, base::Number)
-   ON_SLOT(29, setSlotEnableNetOutput, base::Number)
-   ON_SLOT(30, setSlotDataLogTime, base::Time)
+   ON_SLOT(22, setSlotPositionFreeze,     base::Number)
+   ON_SLOT(23, setSlotAltitudeFreeze,     base::Number)
+   ON_SLOT(24, setSlotAttitudeFreeze,     base::Number)
+   ON_SLOT(25, setSlotFuelFreeze,         base::Number)
+   ON_SLOT(26, setSlotCrashOverride,      base::Number)
+   ON_SLOT(27, setSlotKillOverride,       base::Number)
+   ON_SLOT(28, setSlotKillRemoval,        base::Number)
+   ON_SLOT(29, setSlotEnableNetOutput,    base::Number)
+   ON_SLOT(30, setSlotDataLogTime,        base::Time)
 
-   ON_SLOT(31, setSlotTestRollRate, base::Angle)
-   ON_SLOT(32, setSlotTestPitchRate, base::Angle)
-   ON_SLOT(33, setSlotTestYawRate, base::Angle)
-   ON_SLOT(34, setSlotTestBodyAxis, base::Number)
+   ON_SLOT(31, setSlotTestRollRate,       base::Angle)
+   ON_SLOT(32, setSlotTestPitchRate,      base::Angle)
+   ON_SLOT(33, setSlotTestYawRate,        base::Angle)
+   ON_SLOT(34, setSlotTestBodyAxis,       base::Number)
 
-   ON_SLOT(35, setSlotUseCoordSys, base::String)
+   ON_SLOT(35, setSlotUseCoordSys,        base::String)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Player)
@@ -275,7 +275,7 @@ void Player::copyData(const Player& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   const base::String* tt = org.type;
+   const base::String* tt{org.type};
    setType( const_cast<base::String*>(static_cast<const base::String*>(tt)) );
 
    side = org.side;
@@ -344,7 +344,7 @@ void Player::copyData(const Player& org, const bool cc)
    }
 
    if (org.irSignature != nullptr) {
-      IrSignature* copy = org.irSignature->clone();
+      IrSignature* copy{org.irSignature->clone()};
       setSlotIrSignature( copy );
       copy->unref();
    } else {
@@ -444,7 +444,7 @@ bool Player::shutdownNotification()
 //------------------------------------------------------------------------------
 bool Player::isFrozen() const
 {
-   bool frz = BaseClass::isFrozen();
+   bool frz{BaseClass::isFrozen()};
    if (!frz && sim != nullptr) frz = sim->isFrozen();
    return frz;
 }
@@ -469,16 +469,13 @@ void Player::reset()
       if (initPosFlg) {
          setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
          if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
-      }
-      else if (initLatLonFlg) {
+      } else if (initLatLonFlg) {
          setPositionLLA(initLat, initLon, initAlt);
          if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
-      }
-      else if (initGeoPosFlg) {
+      } else if (initGeoPosFlg) {
          setGeocPosition(initGeoPosVec);
          if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
-      }
-      else {
+      } else {
          setPosition(0,0,-initAlt,false);
          if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
       }
@@ -555,13 +552,13 @@ void Player::updateTC(const double dt0)
       // ---
       // Delta time -- real or frozen?
       // ---
-      double dt = dt0;
+      double dt{dt0};
       if (isFrozen()) dt = 0.0;
 
       // ---
       // Compute delta time for modules running every fourth phase
       // ---
-      double dt4 = dt * 4.0f; // Delta time for items running every fourth phase
+      double dt4{dt * 4.0};     // Delta time for items running every fourth phase
       switch (getWorldModel()->phase()) {
 
          // Phase 0 -- Dynamics
@@ -613,7 +610,6 @@ void Player::updateTC(const double dt0)
       //     our player dynamics, etc before our subsystems.
       // ---
       BaseClass::updateTC(dt);
-
    }
 }
 
@@ -663,16 +659,16 @@ double Player::getMach() const
    // Really only good up to around 30,000 feet, and
    // using standard air temp of 15 degrees Celsius
 
-   const double G = 1.4;     // density ratio      // number
-   const double R = 287.06;  // gas constant       // mps/degK
-   const double L = 0.0065;  // temp. lapse rate   // degC/meter
+   const double G {1.4};     // density ratio      // number
+   const double R {287.06};  // gas constant       // mps/degK
+   const double L {0.0065};  // temp. lapse rate   // degC/meter
 
-   double altitude   = getAltitude();              // meters
-   double velocPlane = getTotalVelocity();         // meters/sec
-   double Tc         = 15.0 - L * altitude;        // degrees Celsius
-   double Tk         = Tc + 273.15;                // degrees Kelvin
-   double velocSound = std::sqrt(G * R * Tk);      // meters/sec
-   double mach       = velocPlane / velocSound;    // number
+   double altitude   {getAltitude()};              // meters
+   double velocPlane {getTotalVelocity()};         // meters/sec
+   double Tc         {15.0 - L * altitude};        // degrees Celsius
+   double Tk         {Tc + 273.15};                // degrees Kelvin
+   double velocSound {std::sqrt(G * R * Tk)};      // meters/sec
+   double mach       {velocPlane / velocSound};    // number
 
    return mach;
 }
@@ -782,18 +778,18 @@ bool Player::isDestroyed() const
 // Earth radius (meters)
 double Player::getEarthRadius() const
 {
-   double erad = base::nav::ERAD60 * base::distance::NM2M;  // (default)
+   double erad{base::nav::ERAD60 * base::distance::NM2M};  // (default)
 
-   const WorldModel* sim = getWorldModel();
+   const WorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
-      const base::EarthModel* pModel = sim->getEarthModel();
+      const base::EarthModel* pModel{sim->getEarthModel()};
       if (pModel == nullptr) pModel = &base::EarthModel::wgs84;
 
-      const double b  = pModel->getB();   // semi-major axis
-      const double e2 = pModel->getE2();  // eccentricity squared
+      const double b  {pModel->getB()};   // semi-major axis
+      const double e2 {pModel->getE2()};  // eccentricity squared
 
-      const double slat = getLatitude();
-      const double cosSlat = std::cos(base::angle::D2RCC * slat);
+      const double slat{getLatitude()};
+      const double cosSlat{std::cos(base::angle::D2RCC * slat)};
 
       erad = b / std::sqrt(1.0 - e2*cosSlat*cosSlat);
    }
@@ -881,14 +877,14 @@ const base::Identifier* Player::getPilotName() const
 // Returns a Pilot model by its name
 Pilot* Player::getPilotByName(const char* const name1)
 {
-   Pilot* p = nullptr;
+   Pilot* p{};
    if (pilot != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128] {};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -896,14 +892,13 @@ Pilot* Player::getPilotByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getPilotName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getPilot()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our top level system is a match.
             pair = pilot;
          }
@@ -926,15 +921,14 @@ Pilot* Player::getPilotByName(const char* const name1)
 // Returns a Pilot model by its type
 base::Pair* Player::getPilotByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;  // Our return value
+   base::Pair* p{};  // Our return value
 
    if (pilot != nullptr) {
-      Pilot* root = getPilot();  // Root node of the list
+      Pilot* root{getPilot()};  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = pilot;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -990,14 +984,14 @@ const base::Identifier* Player::getDatalinkName() const
 // Returns a Datalink model by its name
 Datalink* Player::getDatalinkByName(const char* const name1)
 {
-   Datalink* p = nullptr;
+   Datalink* p{};
    if (datalink != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1005,14 +999,13 @@ Datalink* Player::getDatalinkByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getDatalinkName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getDatalink()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our top level system is a match.
             pair = datalink;
          }
@@ -1035,15 +1028,14 @@ Datalink* Player::getDatalinkByName(const char* const name1)
 // Returns a Datalink model by its type
 base::Pair* Player::getDatalinkByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                 // Our return value
+   base::Pair* p{};                 // Our return value
 
    if (datalink != nullptr) {
-      Datalink* root = getDatalink();  // Root node of the list
+      Datalink* root{getDatalink()};  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = datalink;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1077,14 +1069,14 @@ const base::Identifier* Player::getGimbalName() const
 // Returns a Gimbal model by its name
 Gimbal* Player::getGimbalByName(const char* const name1)
 {
-   Gimbal* p = nullptr;
+   Gimbal* p{};
    if (gimbal != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1092,14 +1084,13 @@ Gimbal* Player::getGimbalByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getGimbalName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getGimbal()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our top level system is a match.
             pair = gimbal;
          }
@@ -1122,15 +1113,14 @@ Gimbal* Player::getGimbalByName(const char* const name1)
 // Returns a Gimbal model by its type
 base::Pair* Player::getGimbalByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                // Our return value
+   base::Pair* p{};                // Our return value
 
    if (gimbal != nullptr) {
-      Gimbal* root = getGimbal();   // Root node of the list
+      Gimbal* root{getGimbal()};   // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = gimbal;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1164,14 +1154,14 @@ const base::Identifier* Player::getNavigationName() const
 // Returns a Navigation model by its name
 Navigation* Player::getNavigationByName(const char* const name1)
 {
-   Navigation* p = nullptr;
+   Navigation* p{};
    if (nav != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1179,14 +1169,13 @@ Navigation* Player::getNavigationByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getNavigationName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getNavigation()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our root is a match.
             pair = nav;
          }
@@ -1209,15 +1198,14 @@ Navigation* Player::getNavigationByName(const char* const name1)
 // Returns a Navigation model by its type
 base::Pair* Player::getNavigationByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                 // Our return value
+   base::Pair* p{};                 // Our return value
 
    if (nav != nullptr) {
-      Navigation* root = getNavigation();    // Root node of the list
+      Navigation* root{getNavigation()};    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = nav;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1251,14 +1239,14 @@ const base::Identifier* Player::getOnboardComputerName() const
 // Returns an OnboardComputer model by its name
 OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 {
-   OnboardComputer* p = nullptr;
+   OnboardComputer* p{};
    if (obc != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1266,14 +1254,13 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getOnboardComputerName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getOnboardComputer()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our root is a match.
             pair = obc;
          }
@@ -1296,15 +1283,14 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 // Returns an OnboardComputer model by its type
 base::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                // Our return value
+   base::Pair* p{};                // Our return value
 
    if (obc != nullptr) {
-      OnboardComputer* root = getOnboardComputer();    // Root node of the list
+      OnboardComputer* root{getOnboardComputer()};    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = obc;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1338,14 +1324,14 @@ const base::Identifier* Player::getRadioName() const
 // Returns a Radio model by its name
 Radio* Player::getRadioByName(const char* const name1)
 {
-   Radio* p = nullptr;
+   Radio* p{};
    if (radio != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1353,14 +1339,13 @@ Radio* Player::getRadioByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getRadioName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getRadio()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our root is a match.
             pair = radio;
          }
@@ -1383,15 +1368,14 @@ Radio* Player::getRadioByName(const char* const name1)
 // Returns a Radio model by its type
 base::Pair* Player::getRadioByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                // Our return value
+   base::Pair* p{};                // Our return value
 
    if (radio != nullptr) {
-      Radio* root = getRadio();    // Root node of the list
+      Radio* root{getRadio()};    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = radio;
-      }
-      else {
+      } else {
          // See if our root owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1425,14 +1409,14 @@ const base::Identifier* Player::getSensorName() const
 // Returns a R/F sensor model by its name
 RfSensor* Player::getSensorByName(const char* const name1)
 {
-   RfSensor* p = nullptr;
+   RfSensor* p{};
    if (sensor != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1440,14 +1424,13 @@ RfSensor* Player::getSensorByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getSensorName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getSensor()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our top level system is a match.
             pair = sensor;
          }
@@ -1470,15 +1453,14 @@ RfSensor* Player::getSensorByName(const char* const name1)
 // Returns a R/F sensor model by its type
 base::Pair* Player::getSensorByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                // Our return value
+   base::Pair* p{};                // Our return value
 
    if (sensor != nullptr) {
-      RfSensor* root = getSensor();   // Root node of the list
+      RfSensor* root{getSensor()};   // Root node of the list
       if (root->isClassType(type)) {
          // Our root sensor is the correct type.
          p = sensor;
-      }
-      else {
+      } else {
          // See if our root sensor owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1512,14 +1494,14 @@ const base::Identifier* Player::getIrSystemName() const
 // Returns a IR sensor model by its name
 IrSystem* Player::getIrSystemByName(const char* const name1)
 {
-   IrSystem* p = nullptr;
+   IrSystem* p{};
    if (irSystem != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
       // To check, copy the first name up to a possible period.
-      const char* name = name1;
-      char fname[128];
-      int i = 0;
+      const char* name{name1};
+      char fname[128]{};
+      int i{};
       while (name[i] != '\0' && name[i] != '.') {
          fname[i] = name[i];
          i++;
@@ -1527,14 +1509,13 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      base::Pair* pair = nullptr;
+      base::Pair* pair{};
       if ( *getIrSystemName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
             pair = getIrSystem()->findByName(name);
-         }
-         else {
+         } else {
             // It's a simple name and our top level system is a match.
             pair = irSystem;
          }
@@ -1557,15 +1538,14 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
 // Returns a IR sensor model by its type
 base::Pair* Player::getIrSystemByType(const std::type_info& type)
 {
-   base::Pair* p = nullptr;                // Our return value
+   base::Pair* p{};                // Our return value
 
    if (irSystem != nullptr) {
-      IrSystem* root = getIrSystem();   // Root node of the list
+      IrSystem* root{getIrSystem()};   // Root node of the list
       if (root->isClassType(type)) {
          // Our root sensor is the correct type.
          p = irSystem;
-      }
-      else {
+      } else {
          // See if our root sensor owns a node of the correct type.
          p = root->findByType(type);
       }
@@ -1582,10 +1562,9 @@ base::Pair* Player::getIrSystemByType(const std::type_info& type)
 bool Player::setType(const base::String* const msg)
 {
    if (msg != nullptr) {
-      base::String* p = msg->clone();
+      base::String* p{msg->clone()};
       type.set(p, false);
-   }
-   else {
+   } else {
       type = nullptr;
    }
    return true;
@@ -1641,7 +1620,7 @@ void Player::resetJustKilled()
 // Sets the damage for this player
 bool Player::setDamage(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    damage = x;
@@ -1651,7 +1630,7 @@ bool Player::setDamage(const double v)
 // Sets the smoke for this player
 bool Player::setSmoke(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    smoking = x;
@@ -1661,7 +1640,7 @@ bool Player::setSmoke(const double v)
 // Sets the flames for this player
 bool Player::setFlames(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    flames = x;
@@ -1805,14 +1784,13 @@ bool Player::setTerrainElevationRequired(const bool b)
 // Set the player's altitude (m)
 bool Player::setAltitude(const double alt, const bool slaved)
 {
-   bool saved = posSlaved;
+   bool saved{posSlaved};
 
-   bool ok = false;
+   bool ok{};
    if (useCoordSys == CS_LOCAL) {
       // Set altitude along with the local north and east gaming area coordinates
       ok = setPosition(posVecNED[INORTH], posVecNED[IEAST], -alt, slaved);
-   }
-   else if (useCoordSys == CS_GEOD || useCoordSys == CS_WORLD) {
+   } else if (useCoordSys == CS_GEOD || useCoordSys == CS_WORLD) {
       // Set altitude with the geodetic coordinates
       ok = setPositionLLA(latitude, longitude, alt, false);
    }
@@ -1826,8 +1804,8 @@ bool Player::setAltitude(const double alt, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool Player::setPosition(const double n, const double e, const bool slaved)
 {
-   bool saved = altSlaved;
-   bool ok = setPosition(n, e, -getAltitudeM(), false);
+   bool saved{altSlaved};
+   bool ok{setPosition(n, e, -getAltitudeM(), false)};
    if (ok) {
       altSlaved = saved;
       posSlaved = slaved;
@@ -1838,9 +1816,9 @@ bool Player::setPosition(const double n, const double e, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool Player::setPosition(const double n, const double e, const double d, const bool slaved)
 {
-   WorldModel* s = getWorldModel();
-   const double maxRefRange = s->getMaxRefRange();
-   const base::EarthModel* em = s->getEarthModel();
+   WorldModel* s{getWorldModel()};
+   const double maxRefRange{s->getMaxRefRange()};
+   const base::EarthModel* em{s->getEarthModel()};
 
    // Set the position vector relative to sim ref pt
    posVecNED.set(n, e, d);
@@ -1850,14 +1828,13 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
    // Compute & set the lat/lon/alt position
-   const double refLat = s->getRefLatitude();
-   const double refLon = s->getRefLongitude();
-   const double cosRlat = s->getCosRefLat();
+   const double refLat{s->getRefLatitude()};
+   const double refLon{s->getRefLongitude()};
+   const double cosRlat{s->getCosRefLat()};
    if (s->isGamingAreaUsingEarthModel()) {
-      const double sinRlat = s->getSinRefLat();
+      const double sinRlat{s->getSinRefLat()};
       base::nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
-   }
-   else {
+   } else {
       base::nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
    }
 
@@ -1868,8 +1845,8 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    rmW2B = rm * wm;
 
    // Compute & set the  geocentric position
-   double lla[3] = { latitude, longitude, altitude };
-   double ecef[3] = { 0, 0, 0 };
+   double lla[3]{ latitude, longitude, altitude };
+   double ecef[3]{ 0, 0, 0 };
    base::nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
@@ -1888,8 +1865,8 @@ bool Player::setPosition(const base::Vec3d& pos, const bool slaved)
 // Sets present position using lat/long position; (degs)
 bool Player::setPositionLL(const double lat, const double lon, const bool slaved)
 {
-   bool saved = altSlaved;
-   bool ok = setPositionLLA(lat, lon, getAltitudeM(), false);
+   bool saved{altSlaved};
+   bool ok{setPositionLLA(lat, lon, getAltitudeM(), false)};
    if (ok) {
       altSlaved =  saved;
       posSlaved = slaved;
@@ -1900,9 +1877,9 @@ bool Player::setPositionLL(const double lat, const double lon, const bool slaved
 // Sets present position using lat/long position; (degs) and altitude (m)
 bool Player::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
 {
-   WorldModel* s = getWorldModel();
-   const double maxRefRange = s->getMaxRefRange();
-   const base::EarthModel* em = s->getEarthModel();
+   WorldModel* s{getWorldModel()};
+   const double maxRefRange{s->getMaxRefRange()};
+   const base::EarthModel* em{s->getEarthModel()};
 
    // Set the lat/lon position
    latitude = lat;
@@ -1916,14 +1893,13 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    rmW2B = rm * wm;
 
    // Compute and set the position vector relative to sim ref pt
-   const double refLat = s->getRefLatitude();
-   const double refLon = s->getRefLongitude();
-   const double cosRlat = s->getCosRefLat();
+   const double refLat{s->getRefLatitude()};
+   const double refLon{s->getRefLongitude()};
+   const double cosRlat{s->getCosRefLat()};
    if (s->isGamingAreaUsingEarthModel()) {
-      const double sinRlat = s->getSinRefLat();
+      const double sinRlat{s->getSinRefLat()};
       base::nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
-   }
-   else {
+   } else {
       base::nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
    }
 
@@ -1932,8 +1908,8 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    posVecValid = (maxRefRange <= 0.0) || (posVecNED.length2() <= (maxRefRange*maxRefRange));
 
    // Compute & set the geocentric position
-   double lla[3] = { lat, lon, alt };
-   double ecef[3] = { 0, 0, 0 };
+   double lla[3]{ lat, lon, alt };
+   double ecef[3]{ 0, 0, 0 };
    base::nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
@@ -1947,16 +1923,16 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 // Geocentric position vector (meters)
 bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 {
-   WorldModel* s = getWorldModel();
-   const double maxRefRange = s->getMaxRefRange();
-   const base::EarthModel* em = s->getEarthModel();
+   WorldModel* s{getWorldModel()};
+   const double maxRefRange{s->getMaxRefRange()};
+   const base::EarthModel* em{s->getEarthModel()};
 
    // Set the geocentric position
    posVecECEF = pos;
 
    // Compute & set the geodetic position
-   double ecef[3] = { posVecECEF[0], posVecECEF[1], posVecECEF[2] };
-   double lla[3] = { 0, 0, 0 };
+   double ecef[3]{ posVecECEF[0], posVecECEF[1], posVecECEF[2] };
+   double lla[3]{ 0, 0, 0 };
    base::nav::convertEcef2Geod(ecef, lla, em);
    latitude = lla[base::nav::ILAT];
    longitude = lla[base::nav::ILON];
@@ -1969,14 +1945,13 @@ bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
    rmW2B = rm * wm;
 
    // Compute and set the position vector relative to sim ref pt
-   const double refLat = s->getRefLatitude();
-   const double refLon = s->getRefLongitude();
-   const double cosRlat = s->getCosRefLat();
+   const double refLat{s->getRefLatitude()};
+   const double refLon{s->getRefLongitude()};
+   const double cosRlat{s->getCosRefLat()};
    if (s->isGamingAreaUsingEarthModel()) {
-      const double sinRlat = s->getSinRefLat();
+      const double sinRlat{s->getSinRefLat()};
       base::nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
-   }
-   else {
+   } else {
       base::nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
    }
 
@@ -1995,7 +1970,7 @@ bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 bool Player::setEulerAngles(const double r, const double p, const double y)
 {
    // Set angles
-   angles.set(r,p,y);
+   angles.set(r, p, y);
 
    // Compute rotational matrix and the sin/cos values of the angles
    base::nav::computeRotationalMatrix(r, p, y, &rm, &scPhi, &scTheta, &scPsi);
@@ -2028,7 +2003,7 @@ bool Player::setGeocEulerAngles(const base::Vec3d& newAngles)
    base::nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
 
    // Transpose the world matrix
-   base::Matrixd wmT = wm;
+   base::Matrixd wmT{wm};
    wmT.transpose();
 
    // Compute rotational matrix: body/NED directional cosines
@@ -2090,10 +2065,10 @@ bool Player::setAngularVelocities(const double pa, const double qa, const double
 {
    angularVel.set(pa,qa,ra);
 
-   double dpsiW = 0;
+   double dpsiW{};
    if (scThetaW[1] != 0.0) dpsiW = (ra*scPhiW[1] + qa*scPhiW[0])/scThetaW[1];
-   double dthetaW = qa*scPhiW[1] - ra*scPhiW[0];
-   double dphiW = pa + dpsiW*scThetaW[0];
+   double dthetaW{qa*scPhiW[1] - ra*scPhiW[0]};
+   double dphiW{pa + dpsiW*scThetaW[0]};
    gcAngVel.set(dphiW, dthetaW, dpsiW);
 
    return true;
@@ -2110,13 +2085,13 @@ bool Player::setGeocAngularVelocities(const base::Vec3d& newAngVel)
 {
    gcAngVel = newAngVel;
 
-   double pw = gcAngVel[0];
-   double qw = gcAngVel[1];
-   double rw = gcAngVel[2];
+   double pw{gcAngVel[0]};
+   double qw{gcAngVel[1]};
+   double rw{gcAngVel[2]};
 
-   double pa = pw - scThetaW[0] * rw;
-   double qa = scPhiW[1] * qw + scThetaW[1] * scPhiW[0] * rw;
-   double ra = -scPhiW[0] * qw + scThetaW[1] * scPhiW[1] * rw;
+   double pa{pw - scThetaW[0] * rw};
+   double qa{scPhiW[1] * qw + scThetaW[1] * scPhiW[0] * rw};
+   double ra{-scPhiW[0] * qw + scThetaW[1] * scPhiW[1] * rw};
 
    angularVel.set(pa,qa,ra);
 
@@ -2168,9 +2143,9 @@ bool Player::setVelocityBody(const double ua, const double va, const double wa)
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
 
    // Compute other velocities
-   const double ue = static_cast<double>(velVecNED[INORTH]);
-   const double ve = static_cast<double>(velVecNED[IEAST]);
-   const double we = static_cast<double>(velVecNED[IDOWN]);
+   const double ue{static_cast<double>(velVecNED[INORTH])};
+   const double ve{static_cast<double>(velVecNED[IEAST])};
+   const double we{static_cast<double>(velVecNED[IDOWN])};
    vp = std::sqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = std::sqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = std::atan2(ve,ue);            // Ground track
@@ -2207,9 +2182,9 @@ bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
    velVecBody = rm * velVecNED;
 
    // Compute other velocities
-   const double ue = static_cast<double>(velVecNED[INORTH]);
-   const double ve = static_cast<double>(velVecNED[IEAST]);
-   const double we = static_cast<double>(velVecNED[IDOWN]);
+   const double ue{static_cast<double>(velVecNED[INORTH])};
+   const double ve{static_cast<double>(velVecNED[IEAST])};
+   const double we{static_cast<double>(velVecNED[IDOWN])};
    vp = std::sqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = std::sqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = std::atan2(ve,ue);            // Ground track
@@ -2263,7 +2238,7 @@ bool Player::setInitPosition(const base::Vec2d& pos)
 // Sets the player's initial (reset) latitude (degrees)
 bool Player::setInitLat(const double x)
 {
-   bool ok = false;
+   bool ok{};
    if (x >= -90.0 && x <= 90.0) {
       initLat = x;
       initLatLonFlg = true;
@@ -2275,7 +2250,7 @@ bool Player::setInitLat(const double x)
 // Sets the player's initial (reset) longitude (degrees)
 bool Player::setInitLon(const double x)
 {
-   bool ok = false;
+   bool ok{};
    if (x >= -180.0 && x <= 180.0) {
       initLon = x;
       initLatLonFlg = true;
@@ -2327,7 +2302,7 @@ void Player::setControlStickPitchInput(const double value)
 //------------------------------------------------------------------------------
 int Player::setThrottles(const double* const data, const int num)
 {
-   int n = 0;
+   int n{};
    if (getDynamicsModel() != nullptr) {
       n = getDynamicsModel()->setThrottles(data, num);
    }
@@ -2342,10 +2317,10 @@ void Player::processDetonation(const double detRange, AbstractWeapon* const wpn)
    if (!isKillOverride()) {
 
       // Weapon, launcher & range info
-      Player* launcher = nullptr;
-      double rng = detRange;
-      double blastRange  = 500.0;    // burst range (meters)
-      double lethalRange =  50.0;    // lethal range  (meters)
+      Player* launcher{};
+      double rng{detRange};
+      double blastRange{500.0};    // burst range (meters)
+      double lethalRange{50.0};    // lethal range  (meters)
       if (wpn != nullptr) {
          launcher = wpn->getLaunchVehicle();
          blastRange = wpn->getMaxBurstRng();
@@ -2365,9 +2340,9 @@ void Player::processDetonation(const double detRange, AbstractWeapon* const wpn)
       // Near by?
       else if (rng <= blastRange) {
          // use distance to compute amount of damage
-         double damageRng = blastRange - lethalRange;
+         double damageRng{blastRange - lethalRange};
          if (damageRng <= 1.0) damageRng = 1.0;
-         double newDamage = 1.0 - ( (rng - lethalRange) / damageRng );
+         double newDamage{1.0 - ( (rng - lethalRange) / damageRng )};
          setDamage(newDamage + getDamage());
          setFlames( getDamage() - 0.25 );
          setSmoke( getDamage() + 0.25 );
@@ -2396,11 +2371,11 @@ bool Player::killedNotification(Player* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-               base::Component* sc = static_cast<base::Component*>(pair->object());
+               base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+               base::Component* sc{static_cast<base::Component*>(pair->object())};
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2442,11 +2417,11 @@ bool Player::collisionNotification(Player* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-               base::Component* sc = static_cast<base::Component*>(pair->object());
+               base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+               base::Component* sc{static_cast<base::Component*>(pair->object())};
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2481,11 +2456,11 @@ bool Player::crashNotification()
       // Let our sensors know we were just killed
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-               base::Component* sc = static_cast<base::Component*>(pair->object());
+               base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+               base::Component* sc{static_cast<base::Component*>(pair->object())};
                sc->event(KILL_EVENT);
             }
             subcomponents->unref();
@@ -2513,14 +2488,13 @@ bool Player::crashNotification()
 //------------------------------------------------------------------------------
 bool Player::onWpnRelEvent(const base::Boolean* const sw)
 {
-   bool used = false;
+   bool used{};
 
-   StoresMgr* p = getStoresManagement();
+   StoresMgr* p{getStoresManagement()};
    if (p != nullptr) {
       // When we have an SMS, let it handle this event ...
       used = p->onWpnRelEvent(sw);
-   }
-   else {
+   } else {
       // We don't have an SMS, we can do some TBD default handling of this event.
       if (isMessageEnabled(MSG_WARNING)) {
          std::cout << "Player::onWpnRelEvent() No SMS!" << std::endl;
@@ -2536,13 +2510,12 @@ bool Player::onWpnRelEvent(const base::Boolean* const sw)
 //------------------------------------------------------------------------------
 bool Player::onTriggerSwEvent(const base::Boolean* const sw)
 {
-   bool used = false;
+   bool used{};
 
    if (sms != nullptr) {
       // When we have an SMS, let it handle this event ...
       used = getStoresManagement()->onTriggerSwEvent(sw);
-   }
-   else {
+   } else {
       // We don't have an SMS, we can do some TBD default handling of this event.
       used = true;
    }
@@ -2588,28 +2561,28 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // ---
    //  1) Compute the Line-Of-Sight vectors back to the transmitter (los0)
    // ---
-   base::Vec3d xlos = em->getTgtLosVec();
+   base::Vec3d xlos{em->getTgtLosVec()};
    base::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
 
    // 2) Transform the LOS vector to our player coordinates to get
    // the Angle Of Incidence (AOI) vector
-   base::Vec4d aoi = rm * los0;
+   base::Vec4d aoi{rm * los0};
    em->setAoiVector(aoi);
 
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
    {
       // 3-a) Get the aoi vector values & compute range squared
-      const double xa = aoi.x();
-      const double ya = aoi.y();
-      const double za = -aoi.z();
+      const double xa{aoi.x()};
+      const double ya{aoi.y()};
+      const double za{-aoi.z()};
 
       // 3-b) Compute azimuth: az = atan2(ya, xa)
-      double aazr = std::atan2(ya, xa);
+      double aazr{std::atan2(ya, xa)};
       em->setAzimuthAoi(aazr);
 
       // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-      double ra = std::sqrt(xa*xa + ya*ya);
-      double aelr = std::atan2(za,ra);
+      double ra{std::sqrt(xa*xa + ya*ya)};
+      double aelr{std::atan2(za,ra)};
       em->setElevationAoi(aelr);
    }
 
@@ -2617,10 +2590,11 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    if (em->isReturnRequested()) {
 
       if (signature != nullptr) {
-         double rcs = signature->getRCS(em);
+         double rcs{signature->getRCS(em)};
          em->setRCS(rcs);
+      } else {
+         em->setRCS(0);
       }
-      else em->setRCS(0);
 
       // Send reflected emissions back to the transmitter
       em->getGimbal()->event(RF_EMISSION_RETURN,em);
@@ -2628,7 +2602,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
 
    // 6) Pass the emission to our antennas
    {
-      Gimbal* g = getGimbal();
+      Gimbal* g{getGimbal()};
       if (g != nullptr && g->getPowerSwitch() != System::PWR_OFF) {
          g->event(RF_EMISSION,em);
       }
@@ -2660,9 +2634,9 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 //------------------------------------------------------------------------------
 bool Player::onReflectionsRequest(base::Component* const p)
 {
-   bool ok = false;           // Did we succeed?
-   unsigned int idx = 0;      // Empty slot index
-   bool haveEmptySlot = false;
+   bool ok{};               // Did we succeed?
+   unsigned int idx{};      // Empty slot index
+   bool haveEmptySlot{};
 
    // First see if this is a re-request ...
    //  (and look for an empty slot while we're at it)
@@ -2671,8 +2645,7 @@ bool Player::onReflectionsRequest(base::Component* const p)
          // Old request -- reset the timer
          rfReflectTimer[i] = 1.1;
          ok = true;
-      }
-      else if (rfReflect[i] == nullptr) {
+      } else if (rfReflect[i] == nullptr) {
          idx = i;
          haveEmptySlot = true;
       }
@@ -2695,7 +2668,7 @@ bool Player::onReflectionsRequest(base::Component* const p)
 //------------------------------------------------------------------------------
 bool Player::onReflectionsCancel(const base::Component* const p)
 {
-   bool ok = false;        // Did we succeed?
+   bool ok{};        // Did we succeed?
 
    // Find player 'p' and clear its request
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS && !ok; i++) {
@@ -2736,32 +2709,32 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
    // ---
    //  1) Compute the Line-Of-Sight vectors back to the seeker (los0)
    // ---
-   base::Vec3d xlos = msg->getTgtLosVec();
+   base::Vec3d xlos{msg->getTgtLosVec()};
    base::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
 
    // 2) Transform the LOS vector to our player coordinates to get
    // the Angle Of Incidence (AOI) vector
-   base::Vec4d aoi = rm * los0;
+   base::Vec4d aoi{rm * los0};
    msg->setAoiVector(aoi);
 
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
 
    // 3-a) Get the aoi vector values & compute range squared
-   const double xa = aoi.x();
-   const double ya = aoi.y();
-   const double za = -aoi.z();
+   const double xa{aoi.x()};
+   const double ya{aoi.y()};
+   const double za{-aoi.z()};
 
    // 3-b) Compute azimuth: az = atan2(ya, xa)
-   double aazr = std::atan2(ya, xa);
+   double aazr{std::atan2(ya, xa)};
    msg->setAzimuthAoi(aazr);
 
    // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-   double ra = std::sqrt(xa*xa + ya*ya);
-   double aelr = std::atan2(za,ra);
+   double ra{std::sqrt(xa*xa + ya*ya)};
+   double aelr{std::atan2(za,ra)};
    msg->setElevationAoi(aelr);
 
    // 4) Compute and return the IR Signature
-   bool hasSignature = irSignature->getIrSignature(msg);
+   bool hasSignature{irSignature->getIrSignature(msg)};
 
    // 5) If the target has a signature, send the query response back to seeker
    if (hasSignature) msg->getGimbal()->event(IR_QUERY_RETURN,msg);
@@ -2804,8 +2777,8 @@ void Player::dynamics(const double dt)
       // Update our position
       positionUpdate(dt);
 
-      if(getNib() != nullptr || true) {
-         if(!syncState1Ready) {
+      if (getNib() != nullptr || true) {
+         if (!syncState1Ready) {
             syncState1.setGeocPosition(getGeocPosition());
             syncState1.setGeocVelocity(getGeocVelocity());
             syncState1.setGeocAcceleration(getGeocAcceleration());
@@ -2864,13 +2837,13 @@ void Player::positionUpdate(const double dt)
    if ( !isLocalPlayer() ) return;
 
    // (GEOD or LOCAL) Position frozen or slaved?
-   const bool pfrz = (isPositionFrozen() || isPositionSlaved());
+   const bool pfrz{(isPositionFrozen() || isPositionSlaved())};
 
    // (GEOD or LOCAL) Altitude frozen or slaved?
-   const bool afrz = (isAltitudeFrozen() || isAltitudeSlaved());
+   const bool afrz{(isAltitudeFrozen() || isAltitudeSlaved())};
 
    // Ground clamping enabled?
-   const bool gcEnabled = tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM);
+   const bool gcEnabled{tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM)};
 
    // If switching systems then clear the previous velocity vector
    if (useCoordSys != useCoordSysN1) velVecN1.set(0,0,0);
@@ -2879,7 +2852,7 @@ void Player::positionUpdate(const double dt)
    // Position update enabled?
    //   Only if we have a velocity and a delta time
    //   and if either position or altitude is not frozen
-   const bool enabled = ( vp > 0 && dt != 0 && (!pfrz || !afrz) );
+   const bool enabled{( vp > 0 && dt != 0 && (!pfrz || !afrz) )};
    if ( enabled ) {
 
       // ---
@@ -2895,14 +2868,14 @@ void Player::positionUpdate(const double dt)
          base::Vec3d newPosVecNED = posVecNED;
 
          // Current velocities
-         const double ue = velVecNED.x();
-         const double ve = velVecNED.y();
-         const double we = velVecNED.z();
+         const double ue{velVecNED.x()};
+         const double ve{velVecNED.y()};
+         const double we{velVecNED.z()};
 
          // Previous velocities
-         const double ue0 = velVecN1.x();
-         const double ve0 = velVecN1.y();
-         const double we0 = velVecN1.z();
+         const double ue0{velVecN1.x()};
+         const double ve0{velVecN1.y()};
+         const double we0{velVecN1.z()};
 
          if (!pfrz) {
             newPosVecNED[INORTH] += (ue + ue0) * 0.5 * dt;
@@ -2912,10 +2885,9 @@ void Player::positionUpdate(const double dt)
          if (!afrz) {
             if (gcEnabled) {
                // Ground clamping enabled
-               const double alt = tElev + tOffset;
+               const double alt{tElev + tOffset};
                newPosVecNED[IDOWN] = -alt;
-            }
-            else {
+            } else {
                // Update altitude
                newPosVecNED[IDOWN] += (we + we0) * 0.5 * dt;
             }
@@ -2938,39 +2910,39 @@ void Player::positionUpdate(const double dt)
          //std::cout << "( " << posVecECEF[0] << ", " << posVecECEF[1] << ", " << posVecECEF[2] << " ); ";
          //std::cout << std::endl;
 
-         double newLatitude = latitude;
-         double newLongitude = longitude;
-         double newAltitude = altitude;
+         double newLatitude{latitude};
+         double newLongitude{longitude};
+         double newAltitude{altitude};
 
          // Current velocities
-         const double ue = velVecNED.x();
-         const double ve = velVecNED.y();
-         const double we = velVecNED.z();
+         const double ue{velVecNED.x()};
+         const double ve{velVecNED.y()};
+         const double we{velVecNED.z()};
 
          // Previous velocities
-         const double ue0 = velVecN1.x();
-         const double ve0 = velVecN1.y();
-         const double we0 = velVecN1.z();
+         const double ue0{velVecN1.x()};
+         const double ve0{velVecN1.y()};
+         const double we0{velVecN1.z()};
 
          if (!pfrz) {
 
-            const double slat = std::sin(latitude * base::angle::D2RCC);
-            const double clat = std::cos(latitude * base::angle::D2RCC);
+            const double slat{std::sin(latitude * base::angle::D2RCC)};
+            const double clat{std::cos(latitude * base::angle::D2RCC)};
 
-            const base::EarthModel* em = getWorldModel()->getEarthModel();
+            const base::EarthModel* em{getWorldModel()->getEarthModel()};
             if (em == nullptr) em = &base::EarthModel::wgs84;
 
-            const double a  = em->getA();   // semi-major axis (meters)
-            const double e2 = em->getE2();  // eccentricity squared
-            const double q  = 1.0 - e2 * slat * slat;
-            double rn = a / std::sqrt(q);    // radius #1
-            rn += getAltitude();             // radius #1 plus our altitude
-            double rm = rn * (1.0 - e2) / q; // radius #2
+            const double a  {em->getA()};               // semi-major axis (meters)
+            const double e2 {em->getE2()};              // eccentricity squared
+            const double q  {1.0 - e2 * slat * slat};
+            double rn{a / std::sqrt(q)};                // radius #1
+            rn += getAltitude();                        // radius #1 plus our altitude
+            double rm{rn * (1.0 - e2) / q};             // radius #2
 
             // Update latitude
             // ### May not support crossing the north or south pole correctly ###
-            double dn = (ue + ue0) * 0.5 * dt;
-            double dlatR = ( 1.0 / rm ) * dn;
+            double dn{(ue + ue0) * 0.5 * dt};
+            double dlatR{( 1.0 / rm ) * dn};
             newLatitude += (dlatR * base::angle::R2DCC);
             if (newLatitude >  90.0) {
                newLatitude = 180.0 - newLatitude;
@@ -2983,8 +2955,8 @@ void Player::positionUpdate(const double dt)
 
             // Update longitude
             if (clat != 0) {
-               const double de = (ve + ve0) * 0.5 * dt;
-               const double dlonR = ( 1.0 / (rn * clat) ) * de;
+               const double de{(ve + ve0) * 0.5 * dt};
+               const double dlonR{( 1.0 / (rn * clat) ) * de};
 
                newLongitude += (dlonR * base::angle::R2DCC);
                if (newLongitude >  180.0) newLongitude -= 360.0;
@@ -2995,10 +2967,9 @@ void Player::positionUpdate(const double dt)
          if (!afrz) {
             if (gcEnabled) {
                // Ground clamping enabled
-               const double alt = tElev + tOffset;
+               const double alt{tElev + tOffset};
                newAltitude = alt;
-            }
-            else {
+            } else {
                // Update altitude
                newAltitude -= (we + we0) * 0.5 * dt;
             }
@@ -3023,24 +2994,22 @@ void Player::positionUpdate(const double dt)
 
          if (!pfrz) {
             // Update our position
-            base::Vec3d newPosVecECEF = posVecECEF + (velVecECEF + velVecN1) * 0.5 * dt;
+            base::Vec3d newPosVecECEF{posVecECEF + (velVecECEF + velVecN1) * 0.5 * dt};
 
             if (!gcEnabled) {
                // Set the our position
                setGeocPosition(newPosVecECEF);
-            }
-
-            else {
+            } else {
                // Ground clamping!
 
                // 1) Compute the ground clamped altitude
-               const double alt = tElev + tOffset;
+               const double alt{tElev + tOffset};
 
                // 2) Compute the geodetic lat/lon position
-               double ecef[3] = { newPosVecECEF[0], newPosVecECEF[1], newPosVecECEF[2] };
-               double lla[3] = { 0, 0, 0 };
+               double ecef[3]{ newPosVecECEF[0], newPosVecECEF[1], newPosVecECEF[2] };
+               double lla[3]{ 0, 0, 0 };
 
-               const base::EarthModel* em = getWorldModel()->getEarthModel();
+               const base::EarthModel* em{getWorldModel()->getEarthModel()};
                base::nav::convertEcef2Geod(ecef, lla, em);
 
                // 3) Set position using these ground clamped coordinates
@@ -3060,8 +3029,8 @@ void Player::positionUpdate(const double dt)
    if (testAngRates.length2() > 0 && !attFrz) {
 
       // Set body/earth rates
-      double pa(0), qa(0), ra(0);
-      double pe(0), qe(0), re(0);
+      double pa{}, qa{}, ra{};
+      double pe{}, qe{}, re{};
       if (testBodyAxis) {
          // Body
          pa = testAngRates[0];
@@ -3072,8 +3041,7 @@ void Player::positionUpdate(const double dt)
          if (scTheta[1] != 0.0) re = (ra*scPhi[1] + qa*scPhi[0])/scTheta[1];
          qe = qa*scPhi[1] - ra*scPhi[0];
          pe = pa + re*scTheta[0];
-      }
-      else {
+      } else {
          // Earth
          pe = testAngRates[0];
          qe = testAngRates[1];
@@ -3085,7 +3053,7 @@ void Player::positionUpdate(const double dt)
       }
 
       // Update angles
-      base::Vec3d oldAngles = getEulerAngles();
+      base::Vec3d oldAngles{getEulerAngles()};
       base::Vec3d newAngles;
       newAngles[0] = base::angle::aepcdRad(oldAngles[0] + (pe * dt));
       newAngles[1] = base::angle::aepcdRad(oldAngles[1] + (qe * dt));
@@ -3131,26 +3099,24 @@ void Player::deadReckonPosition(const double dt)
          //std::cout << std::endl;
 
       // Ground clamping enabled?
-      const bool gcEnabled = tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM);
+      const bool gcEnabled{tElevValid && isMajorType(GROUND_VEHICLE | SHIP | BUILDING | LIFE_FORM)};
 
       if (!gcEnabled) {
          // Not ground clamping then set the DR position
          setGeocPosition( drPos );
-      }
-
-      else {
+      } else {
          // Ground clamping!
 
          // 1) Compute the ground clamped altitude
-         double alt = tElev + tOffset;
+         double alt{tElev + tOffset};
 
          // 2) Compute the geodetic lat/lon position
-         const base::EarthModel* em = getWorldModel()->getEarthModel();
-         double ecef[3] = { drPos[0], drPos[1], drPos[2] };
-         double lla[3] = { 0, 0, 0 };
+         const base::EarthModel* em{getWorldModel()->getEarthModel()};
+         double ecef[3]{ drPos[0], drPos[1], drPos[2] };
+         double lla[3]{ 0, 0, 0 };
          base::nav::convertEcef2Geod(ecef, lla, em);
-         const double lat = lla[base::nav::ILAT];
-         const double lon = lla[base::nav::ILON];
+         const double lat{lla[base::nav::ILAT]};
+         const double lon{lla[base::nav::ILON]};
 
          // 3) Set position using these ground clamped coordinates
          setPositionLLA(lat, lon, alt);
@@ -3231,11 +3197,11 @@ void Player::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the OTW system.
-   const WorldModel* s = getWorldModel();
+   const WorldModel* s{getWorldModel()};
    if (s != nullptr && !isTerrainElevationRequired()) {
-      const terrain::Terrain* terrain = s->getTerrain();
+      const terrain::Terrain* terrain{s->getTerrain()};
       if (terrain != nullptr) {
-         double el = 0;
+         double el{};
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());
          setTerrainElevation(el);
       }
@@ -3247,7 +3213,7 @@ void Player::updateElevation()
 //------------------------------------------------------------------------------
 void Player::printTimingStats()
 {
-   const base::Statistic* ts = getTimingStats();
+   const base::Statistic* ts{getTimingStats()};
    std::cout << "Player(" << getWorldModel()->cycle() << "," << getWorldModel()->frame() << "," << getWorldModel()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
 }
 
@@ -3256,13 +3222,12 @@ void Player::printTimingStats()
 //------------------------------------------------------------------------------
 bool Player::setDynamicsModel(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (dynamicsModel != nullptr) dynamicsModel->unref();
       dynamicsModel = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(DynamicsModel)) ) {
+   } else if ( sys->object()->isClassType(typeid(DynamicsModel)) ) {
       if (dynamicsModel != nullptr) dynamicsModel->unref();
       dynamicsModel = sys;
       dynamicsModel->ref();
@@ -3276,13 +3241,12 @@ bool Player::setDynamicsModel(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setDatalink(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (datalink != nullptr) datalink->unref();
       datalink = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(Datalink)) ) {
+   } else if ( sys->object()->isClassType(typeid(Datalink)) ) {
       if (datalink != nullptr) datalink->unref();
       datalink = sys;
       datalink->ref();
@@ -3296,13 +3260,12 @@ bool Player::setDatalink(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setGimbal(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (gimbal != nullptr) gimbal->unref();
       gimbal = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(Gimbal)) ) {
+   } else if ( sys->object()->isClassType(typeid(Gimbal)) ) {
       if (gimbal != nullptr) gimbal->unref();
       gimbal = sys;
       gimbal->ref();
@@ -3316,13 +3279,12 @@ bool Player::setGimbal(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setNavigation(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (nav != nullptr) nav->unref();
       nav = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(Navigation)) ) {
+   } else if ( sys->object()->isClassType(typeid(Navigation)) ) {
       if (nav != nullptr) nav->unref();
       nav = sys;
       nav->ref();
@@ -3336,13 +3298,12 @@ bool Player::setNavigation(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setOnboardComputer(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (obc != nullptr) obc->unref();
       obc = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(OnboardComputer)) ) {
+   } else if ( sys->object()->isClassType(typeid(OnboardComputer)) ) {
       if (obc != nullptr) obc->unref();
       obc = sys;
       obc->ref();
@@ -3356,13 +3317,12 @@ bool Player::setOnboardComputer(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setPilot(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (pilot != nullptr) pilot->unref();
       pilot = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(Pilot)) ) {
+   } else if ( sys->object()->isClassType(typeid(Pilot)) ) {
       if (pilot != nullptr) pilot->unref();
       pilot = sys;
       pilot->ref();
@@ -3376,13 +3336,12 @@ bool Player::setPilot(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setRadio(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (radio != nullptr) radio->unref();
       radio = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(Radio)) ) {
+   } else if ( sys->object()->isClassType(typeid(Radio)) ) {
       if (radio != nullptr) radio->unref();
       radio = sys;
       radio->ref();
@@ -3396,13 +3355,12 @@ bool Player::setRadio(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setSensor(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (sensor != nullptr) sensor->unref();
       sensor = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(RfSensor)) ) {
+   } else if ( sys->object()->isClassType(typeid(RfSensor)) ) {
       if (sensor != nullptr) sensor->unref();
       sensor = sys;
       sensor->ref();
@@ -3416,13 +3374,12 @@ bool Player::setSensor(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setIrSystem(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (irSystem != nullptr) irSystem->unref();
       irSystem = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(IrSystem)) ) {
+   } else if ( sys->object()->isClassType(typeid(IrSystem)) ) {
       if (irSystem != nullptr) irSystem->unref();
       irSystem = sys;
       irSystem->ref();
@@ -3436,13 +3393,12 @@ bool Player::setIrSystem(base::Pair* const sys)
 //------------------------------------------------------------------------------
 bool Player::setStoresMgr(base::Pair* const sys)
 {
-   bool ok = false;
+   bool ok{};
    if (sys == nullptr) {
       if (sms != nullptr) sms->unref();
       sms = nullptr;
       ok = true;
-   }
-   else if ( sys->object()->isClassType(typeid(StoresMgr)) ) {
+   } else if ( sys->object()->isClassType(typeid(StoresMgr)) ) {
       if (sms != nullptr) sms->unref();
       sms = sys;
       sms->ref();
@@ -3458,9 +3414,9 @@ bool Player::setStoresMgr(base::Pair* const sys)
 // initXPos: X position (+north)
 bool Player::setSlotInitXPos(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      base::Vec2d pos = getInitPosition();
+      base::Vec2d pos{getInitPosition()};
       pos[INORTH] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
@@ -3470,9 +3426,9 @@ bool Player::setSlotInitXPos(const base::Distance* const msg)
 // initXPos: X position (+north) (meters)
 bool Player::setSlotInitXPos(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      base::Vec2d pos = getInitPosition();
+      base::Vec2d pos{getInitPosition()};
       pos[INORTH] = msg->getReal();
       ok = setInitPosition(pos);
    }
@@ -3482,9 +3438,9 @@ bool Player::setSlotInitXPos(const base::Number* const msg)
 // initYPos: Y position (+east)
 bool Player::setSlotInitYPos(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      base::Vec2d pos = getInitPosition();
+      base::Vec2d pos{getInitPosition()};
       pos[IEAST] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
@@ -3494,9 +3450,9 @@ bool Player::setSlotInitYPos(const base::Distance* const msg)
 // initYPos: Y position (+east)(meters)
 bool Player::setSlotInitYPos(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      base::Vec2d pos = getInitPosition();
+      base::Vec2d pos{getInitPosition()};
       pos[IEAST] = msg->getReal();
       ok = setInitPosition(pos);
    }
@@ -3506,9 +3462,9 @@ bool Player::setSlotInitYPos(const base::Number* const msg)
 // initAlt: Altitude (HAE @ sim ref pt) (+up)
 bool Player::setSlotInitAlt(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Meters::convertStatic(*msg);
+      const double value{base::Meters::convertStatic(*msg)};
       setInitAltitude( value );
       ok = true;
    }
@@ -3518,9 +3474,9 @@ bool Player::setSlotInitAlt(const base::Distance* const msg)
 // initAlt: Altitude (HAE @ sim ref pt) (+up) (meters)
 bool Player::setSlotInitAlt(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double value = msg->getReal();
+      double value{msg->getReal()};
       setInitAltitude( value );
       ok = true;
    }
@@ -3530,9 +3486,9 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
 // initPosition: Position Vector: meters [ north east down ]
 bool Player::setSlotInitPosition(const base::List* const msg)
 {
-   bool ok = false;
-   double values[3];
-   const int n = msg->getNumberList(values, 3);
+   bool ok{};
+   double values[3]{};
+   const unsigned int n{msg->getNumberList(values, 3)};
    if (n == 3) {
       setInitPosition(values[0], values[1]);
       setInitAltitude( -values[2] );
@@ -3544,13 +3500,12 @@ bool Player::setSlotInitPosition(const base::List* const msg)
 // initLatitude: Latitude
 bool Player::setSlotInitLat(const base::LatLon* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = msg->getDouble();
+      const double val{msg->getDouble()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
@@ -3560,13 +3515,12 @@ bool Player::setSlotInitLat(const base::LatLon* const msg)
 // initLatitude: Latitude
 bool Player::setSlotInitLat(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = static_cast<double>(base::Degrees::convertStatic(*msg));
+      const double val{static_cast<double>(base::Degrees::convertStatic(*msg))};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
@@ -3576,13 +3530,12 @@ bool Player::setSlotInitLat(const base::Angle* const msg)
 // initLatitude: Latitude (degrees)
 bool Player::setSlotInitLat(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = msg->getDouble();
+      const double val{msg->getDouble()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
@@ -3592,13 +3545,12 @@ bool Player::setSlotInitLat(const base::Number* const msg)
 // initLongitude: Longitude
 bool Player::setSlotInitLon(const base::LatLon* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = msg->getDouble();
+      const double val{msg->getDouble()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLon(): invalid longitude: " << val << std::endl;
       }
    }
@@ -3608,13 +3560,12 @@ bool Player::setSlotInitLon(const base::LatLon* const msg)
 // initLongitude: Longitude
 bool Player::setSlotInitLon(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = static_cast<double>(base::Degrees::convertStatic(*msg));
+      const double val{static_cast<double>(base::Degrees::convertStatic(*msg))};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLon(): invalid longitude: " << val << std::endl;
       }
    }
@@ -3624,13 +3575,12 @@ bool Player::setSlotInitLon(const base::Angle* const msg)
 // initLongitude: Longitude (degrees)
 bool Player::setSlotInitLon(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double val = msg->getDouble();
+      const double val{msg->getDouble()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
@@ -3640,9 +3590,9 @@ bool Player::setSlotInitLon(const base::Number* const msg)
 // initGeocentric: Position vector [ x y z ] (meters)
 bool Player::setSlotInitGeocentric(const base::List* const msg)
 {
-   bool ok = false;
-   double values[3];
-   const int n = msg->getNumberList(values, 3);
+   bool ok{};
+   double values[3]{};
+   const unsigned int n{msg->getNumberList(values, 3)};
    if (n == 3) {
       base::Vec3d pos(values[0], values[1], values[2]);
       ok = setInitGeocentricPosition(pos);
@@ -3653,14 +3603,13 @@ bool Player::setSlotInitGeocentric(const base::List* const msg)
 // initRoll: Initial roll angle
 bool Player::setSlotInitRoll(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Radians::convertStatic(*msg);
+      const double value{base::Radians::convertStatic(*msg)};
       if ( value >= -base::PI && value <= base::PI ) {
          initAngles[IROLL] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
       }
    }
@@ -3671,14 +3620,13 @@ bool Player::setSlotInitRoll(const base::Angle* const msg)
 // initRoll: Initial roll angle (radians)
 bool Player::setSlotInitRoll(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = msg->getDouble();
+      const double value{msg->getDouble()};
       if ( value >= -(2.0*base::PI) && value <= (2.0*base::PI) ) {
          initAngles[IROLL] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
       }
    }
@@ -3687,16 +3635,15 @@ bool Player::setSlotInitRoll(const base::Number* const msg)
 }
 
 // initPitch: Initial pitch angle
-bool Player::setSlotInitPitch(const base::Angle* const msg)
+bool Player::setInitPitch(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Radians::convertStatic(*msg);
+      const double value{base::Radians::convertStatic(*msg)};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
       }
    }
@@ -3705,16 +3652,15 @@ bool Player::setSlotInitPitch(const base::Angle* const msg)
 }
 
 // initPitch: Initial pitch angle (radians)
-bool Player::setSlotInitPitch(const base::Number* const msg)
+bool Player::setInitPitch(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = msg->getDouble();
+      const double value{msg->getDouble()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
       }
    }
@@ -3723,17 +3669,16 @@ bool Player::setSlotInitPitch(const base::Number* const msg)
 }
 
 // initHeading: Initial heading angle
-bool Player::setSlotInitHeading(const base::Angle* const msg)
+bool Player::setInitHeading(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double value = base::Radians::convertStatic(*msg);
+      double value{base::Radians::convertStatic(*msg)};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi )" << std::endl;
       }
    }
@@ -3742,17 +3687,16 @@ bool Player::setSlotInitHeading(const base::Angle* const msg)
 }
 
 // initHeading: Initial heading angle (radians)
-bool Player::setSlotInitHeading(const base::Number* const msg)
+bool Player::setInitHeading(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      double value = msg->getDouble();
+      double value{msg->getDouble()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi ]" << std::endl;
       }
    }
@@ -3763,9 +3707,9 @@ bool Player::setSlotInitHeading(const base::Number* const msg)
 // initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
 bool Player::setSlotInitEulerAngles(const base::List* const numList)
 {
-   bool ok = false;
-   double values[3];
-   const int n = numList->getNumberList(values, 3);
+   bool ok{};
+   double values[3]{};
+   const unsigned int n{numList->getNumberList(values, 3)};
    if (n == 3) {
       if ( ( values[0] >= -(2.0f*base::PI) && values[0] <= (2.0f*base::PI) ) &&
          ( values[1] >= -base::PI && values[1] <= base::PI ) &&
@@ -3773,8 +3717,7 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 
             initAngles.set(values[0], values[1], values[2]);
             ok = true;
-      }
-      else {
+      } else {
          std::cerr << "Player::setSlotInitEulerAngles: invalid angle;";
          std::cerr << " valid roll & yaw are [-2*pi ... +2*pi], and valid pitch is [-pi ... +pi]";
          std::cerr << std::endl;
@@ -3786,9 +3729,9 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 // testRollRate: Test roll rate
 bool Player::setSlotTestRollRate(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Radians::convertStatic(*msg);
+      const double value{base::Radians::convertStatic(*msg)};
       testAngRates[IROLL] = value;
       ok = true;
    }
@@ -3799,9 +3742,9 @@ bool Player::setSlotTestRollRate(const base::Angle* const msg)
 // testPitchRate: Test pitch rate
 bool Player::setSlotTestPitchRate(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Radians::convertStatic(*msg);
+      const double value{base::Radians::convertStatic(*msg)};
       testAngRates[IPITCH] = value;
       ok = true;
    }
@@ -3812,9 +3755,9 @@ bool Player::setSlotTestPitchRate(const base::Angle* const msg)
 // testHeadingRate: Test heading rate
 bool Player::setSlotTestYawRate(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double value = base::Radians::convertStatic(*msg);
+      const double value{base::Radians::convertStatic(*msg)};
       testAngRates[IYAW] = value;
       ok = true;
    }
@@ -3825,7 +3768,7 @@ bool Player::setSlotTestYawRate(const base::Angle* const msg)
 // testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
 bool Player::setSlotTestBodyAxis(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       testBodyAxis = msg->getBoolean();
       ok = true;
@@ -3837,7 +3780,7 @@ bool Player::setSlotTestBodyAxis(const base::Number* const msg)
 // initVelocity: Initial Velocity: meters/second
 bool Player::setSlotInitVelocity(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       initVp = msg->getReal();
       ok = true;
@@ -3848,7 +3791,7 @@ bool Player::setSlotInitVelocity(const base::Number* const msg)
 // initVelocityKts: Initial Velocity: knots (NM/hour)
 bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       initVp = (msg->getReal() * mixr::base::distance::NM2M) / 3600.0f;
       ok = true;
@@ -3858,24 +3801,25 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 
 
 // id: Player id  [ 1 .. 65535 ]
+/*
 bool Player::setSlotID(const base::Number* const num)
 {
-   bool ok = false;
-   int newID = num->getInt();
+   bool ok{};
+   int newID{num->getInt()};
    if (newID > 0 && newID <= 65535) {
       setID( static_cast<unsigned short>(newID)  );
       ok = true;
-   }
-   else {
+   } else {
       std::cerr << "Player::setSlotID(): Invalid ID number: range 1 .. 65535" << std::endl;
    }
    return ok;
 }
+*/
 
 // side: Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
 bool Player::setSlotSide(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (*msg == "blue" || *msg == "BLUE") { setSide(BLUE); ok = true; }
    else if (*msg == "red" || *msg == "RED") { setSide(RED); ok = true; }
    else if (*msg == "gray" || *msg == "GRAY") { setSide(GRAY); ok = true; }
@@ -3886,9 +3830,10 @@ bool Player::setSlotSide(base::String* const msg)
 }
 
 // mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
+/*
 bool Player::setSlotInitMode(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (*msg == "inactive" || *msg == "INACTIVE") { setInitMode(INACTIVE); ok = true; }
    else if (*msg == "active" || *msg == "ACTIVE") { setInitMode(ACTIVE); ok = true; }
    else if (*msg == "killed" || *msg == "KILLED") { setInitMode(KILLED); ok = true; }
@@ -3897,11 +3842,12 @@ bool Player::setSlotInitMode(base::String* const msg)
    else if (*msg == "launched" || *msg == "LAUNCHED") { setInitMode(LAUNCHED); ok = true; }
    return ok;
 }
+*/
 
 // useCoordSys: Coord system to use for updating player position
 bool Player::setSlotUseCoordSys(base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (*msg == "local" || *msg == "LOCAL") { setUseCoordSys(CS_LOCAL); ok = true; }
    else if (*msg == "geod" || *msg == "GEOD") { setUseCoordSys(CS_GEOD); ok = true; }
    else if (*msg == "world" || *msg == "WORLD") { setUseCoordSys(CS_WORLD); ok = true; }
@@ -3931,9 +3877,9 @@ bool Player::setSlotIrSignature(IrSignature* const s)
 // camouflageType: User defined camouflage type (positive integer or zero for none)
 bool Player::setSlotCamouflageType(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int ii = msg->getInt();
+      const int ii{msg->getInt()};
       if (ii >= 0) {
          ok = setCamouflageType( ii );
       }
@@ -3944,7 +3890,7 @@ bool Player::setSlotCamouflageType(const base::Number* const msg)
 // terrainElevReq: Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
 bool Player::setSlotTerrainElevReq(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setTerrainElevationRequired(num->getBoolean());
    }
@@ -3954,7 +3900,7 @@ bool Player::setSlotTerrainElevReq(const base::Number* const num)
 // interpolateTerrain: Interpolate our DTED terrain elevation data (default: false)
 bool Player::setSlotInterpolateTerrain(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setInterpolateTerrain(msg->getBoolean());
    }
@@ -3964,7 +3910,7 @@ bool Player::setSlotInterpolateTerrain(const base::Number* const msg)
 // terrainOffset: Ground clamp offset from terrain to player's CG (base::Distance)
 bool Player::setSlotTerrainOffset(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setTerrainOffset( base::Meters::convertStatic( *msg ) );
    }
@@ -3974,7 +3920,7 @@ bool Player::setSlotTerrainOffset(const base::Distance* const msg)
 // positionFreeze: Position freeze (default: false)
 bool Player::setSlotPositionFreeze(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setPositionFreeze( num->getBoolean() );
    }
@@ -3984,7 +3930,7 @@ bool Player::setSlotPositionFreeze(const base::Number* const num)
 // altitudeFreeze: Altitude freeze (default: false)
 bool Player::setSlotAltitudeFreeze(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setAltitudeFreeze( num->getBoolean() );
    }
@@ -3994,7 +3940,7 @@ bool Player::setSlotAltitudeFreeze(const base::Number* const num)
 // attitudeFreeze: Attitude freeze (default: false)
 bool Player::setSlotAttitudeFreeze(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setAttitudeFreeze( num->getBoolean() );
    }
@@ -4004,7 +3950,7 @@ bool Player::setSlotAttitudeFreeze(const base::Number* const num)
 // fuelFreeze: Fuel freeze (default: false)
 bool Player::setSlotFuelFreeze(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setFuelFreeze( num->getBoolean() );
    }
@@ -4014,7 +3960,7 @@ bool Player::setSlotFuelFreeze(const base::Number* const num)
 // crashOverride: Crash Override (i.e., ignore collision and crash events)(default: false)
 bool Player::setSlotCrashOverride(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setCrashOverride( num->getBoolean() );
    }
@@ -4024,7 +3970,7 @@ bool Player::setSlotCrashOverride(const base::Number* const num)
 // killOverride: Kill/Damage Override -- player can not be killed/damaged (default: false)
 bool Player::setSlotKillOverride(const base::Number* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       ok = setKillOverride( num->getBoolean() );
    }
@@ -4034,7 +3980,7 @@ bool Player::setSlotKillOverride(const base::Number* const num)
 // killRemoval: If true destroyed players are set to KILLED and are eventually removed (default: false)
 bool Player::setSlotKillRemoval(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setKillRemoval( msg->getBoolean() );
    }
@@ -4044,7 +3990,7 @@ bool Player::setSlotKillRemoval(const base::Number* const msg)
 // enableNetOutput: Enable network output of this player (default: true)
 bool Player::setSlotEnableNetOutput(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setEnableNetOutput(msg->getBoolean());
    }
@@ -4054,7 +4000,7 @@ bool Player::setSlotEnableNetOutput(const base::Number* const msg)
 // dataLogTime: Time between player data samples to an optional data
 bool Player::setSlotDataLogTime(const base::Time* const num)
 {
-   bool ok = false;
+   bool ok{};
    if (num != nullptr) {
       dataLogTime = num->getReal();
       ok = true;

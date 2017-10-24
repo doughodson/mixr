@@ -7,9 +7,8 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -19,7 +18,6 @@
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -28,29 +26,29 @@ namespace dis {
 void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 {
    // Get the Firing Player's ID
-   unsigned short fPlayerId = pdu->firingEntityID.ID;
-   unsigned short fSiteId = pdu->firingEntityID.simulationID.siteIdentification;
-   unsigned short fApplicationId = pdu->firingEntityID.simulationID.applicationIdentification;
+   unsigned short fPlayerId      {pdu->firingEntityID.ID};
+   unsigned short fSiteId        {pdu->firingEntityID.simulationID.siteIdentification};
+   unsigned short fApplicationId {pdu->firingEntityID.simulationID.applicationIdentification};
 
    // Ignore our own PDUs
    if (fSiteId == getSiteID() && fApplicationId == getApplicationID()) return;
 
    // Get the Munition Player's ID
-   unsigned short mPlayerId = pdu->munitionID.ID;
-   unsigned short mSiteId = pdu->munitionID.simulationID.siteIdentification;
-   unsigned short mApplicationId = pdu->munitionID.simulationID.applicationIdentification;
+   unsigned short mPlayerId      {pdu->munitionID.ID};
+   unsigned short mSiteId        {pdu->munitionID.simulationID.siteIdentification};
+   unsigned short mApplicationId {pdu->munitionID.simulationID.applicationIdentification};
 
    // Get the Target Player's ID
-   unsigned short tPlayerId = pdu->targetEntityID.ID;
-   unsigned short tSiteId = pdu->targetEntityID.simulationID.siteIdentification;
-   unsigned short tApplicationId = pdu->targetEntityID.simulationID.applicationIdentification;
+   unsigned short tPlayerId      {pdu->targetEntityID.ID};
+   unsigned short tSiteId        {pdu->targetEntityID.simulationID.siteIdentification};
+   unsigned short tApplicationId {pdu->targetEntityID.simulationID.applicationIdentification};
 
    // ---
    // 1) Find the target player
    // ---
-   models::Player* tPlayer = nullptr;
+   models::Player* tPlayer {};
    if (tPlayerId != 0 && tSiteId != 0 && tApplicationId != 0) {
-      interop::Nib* tNib = findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB);
+      interop::Nib* tNib {findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB)};
       if (tNib != nullptr) {
          tPlayer = tNib->getPlayer();
       }
@@ -60,19 +58,18 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 2) Find the firing player and munitions (networked) IPlayers
    // ---
-   models::Player* fPlayer = nullptr;
+   models::Player* fPlayer {};
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
-      interop::Nib* fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
+      interop::Nib* fNib {findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB)};
       if (fNib != nullptr) {
          fPlayer = fNib->getPlayer();
-      }
-      else {
+      } else {
          base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
          fPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(fPlayerId));   // added DDH
       }
    }
 
-   interop::Nib* mNib = nullptr;
+   interop::Nib* mNib {};
    if (mPlayerId != 0 && mSiteId != 0 && mApplicationId != 0) {
       mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
    }
@@ -82,7 +79,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 3) Update the data of the munition's NIB and player
    // ---
-   models::AbstractWeapon* mPlayer = nullptr;
+   models::AbstractWeapon* mPlayer {};
    if (mNib != nullptr) {
 
       // ---
@@ -133,9 +130,9 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
          // Munition's target player and the location of detonation relative to target
          mPlayer->setTargetPlayer(tPlayer,false);
-         double x = pdu->locationInEntityCoordinates.component[0];
-         double y = pdu->locationInEntityCoordinates.component[1];
-         double z = pdu->locationInEntityCoordinates.component[2];
+         const double x {pdu->locationInEntityCoordinates.component[0]};
+         const double y {pdu->locationInEntityCoordinates.component[1]};
+         const double z {pdu->locationInEntityCoordinates.component[2]};
          base::Vec3d loc(x,y,z);
          mPlayer->setDetonationLocation(loc);
 

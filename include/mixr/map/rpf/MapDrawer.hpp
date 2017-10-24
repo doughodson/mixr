@@ -66,26 +66,21 @@ public:
     // Set functions
     virtual bool setDrawGridMode(const bool dg)             { drawGrid = dg; return true; }
     virtual bool setMapIntensity(const double intensity)    { mapIntensity = intensity; return true; }
-    virtual bool setShowMap(const bool x);
-    virtual void setMap(CadrgMap* map);
+    virtual bool setShowMap(const bool);
+    virtual void setMap(CadrgMap*);
     // this function initializes our size
-    virtual bool setGridSize(const int aGridSize);
+    virtual bool setGridSize(const int);
 
     // Get functions
-    double getMapIntensity() { return mapIntensity; }
+    double getMapIntensity()                                { return mapIntensity; }
     virtual void updateZone(int zone, int& selected, const int idx);
 
     virtual void drawFunc() override;
 
     virtual void updateData(const double dt = 0.0) override;
 
-protected:
-    bool setSlotMapIntensity(const base::Number* const x);
-    bool setSlotDrawGridMode(const base::Number* const x);
-    bool setSlotShowMap(const base::Number* const x);
-
 private:
-    static const int MAX_PAGERS = 2;
+    static const int MAX_PAGERS {2};
 
     enum { CENTER_PAGER, TOP_PAGER };   // Names of our pagers
     void drawTexture(const int row, const int column, const int idx);
@@ -119,6 +114,11 @@ private:
     std::array<float, MAX_PAGERS> pixelCol {};     // Pixel col position of the textures to draw
     std::array<float, MAX_PAGERS> originRow {};    // Pixel + texture row of the textures to draw
     std::array<float, MAX_PAGERS> originCol {};    // Pixel + texture col of the textures to draw
+
+private:
+   bool setSlotMapIntensity(const base::Number* const);
+   bool setSlotDrawGridMode(const base::Number* const);
+   bool setSlotShowMap(const base::Number* const);
 };
 
 }

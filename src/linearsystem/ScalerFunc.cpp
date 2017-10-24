@@ -17,8 +17,8 @@ END_SLOTTABLE(ScalerFunc)
 BEGIN_SLOT_MAP(ScalerFunc)
    ON_SLOT( 1, setSlotRate, base::Frequency)
    ON_SLOT( 1, setSlotRate, base::Number)
-   ON_SLOT( 2, setSlotX0,  base::Number)
-   ON_SLOT( 3, setSlotY0, base::Number)
+   ON_SLOT( 2, setSlotX0,   base::Number)
+   ON_SLOT( 3, setSlotY0,   base::Number)
 END_SLOT_MAP()
 
 ScalerFunc::ScalerFunc()
@@ -134,7 +134,7 @@ bool ScalerFunc::setY0(const double v)
 
 bool ScalerFunc::setRate(const unsigned int v)
 {
-   bool ok = false;
+   bool ok {};
    if (v > 0) {
       rate = v;
       initialize();
@@ -148,9 +148,9 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f );
+      const int v {static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f )};
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -161,9 +161,9 @@ bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
 
 bool ScalerFunc::setSlotRate(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -174,7 +174,7 @@ bool ScalerFunc::setSlotRate(const base::Number* const msg)
 
 bool ScalerFunc::setSlotX0(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setX0( msg->getReal() );
       ok = true;
@@ -184,7 +184,7 @@ bool ScalerFunc::setSlotX0(const base::Number* const msg)
 
 bool ScalerFunc::setSlotY0(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       setY0( msg->getReal() );
       ok = true;

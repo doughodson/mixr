@@ -28,10 +28,10 @@ BEGIN_SLOTTABLE(IrAtmosphere)
 END_SLOTTABLE(IrAtmosphere)
 
 BEGIN_SLOT_MAP(IrAtmosphere)
-   ON_SLOT(1,setSlotWaveBands,            base::Table1)
-   ON_SLOT(2,setSlotTransmissivityTable1, base::Table1)
-   ON_SLOT(3,setSlotSkyRadiance,          base::Number)
-   ON_SLOT(4,setSlotEarthRadiance,        base::Number)
+   ON_SLOT(1, setSlotWaveBands,            base::Table1)
+   ON_SLOT(2, setSlotTransmissivityTable1, base::Table1)
+   ON_SLOT(3, setSlotSkyRadiance,          base::Number)
+   ON_SLOT(4, setSlotEarthRadiance,        base::Number)
 END_SLOT_MAP()
 
 IrAtmosphere::IrAtmosphere()
@@ -51,7 +51,7 @@ void IrAtmosphere::deleteData()
 
 bool IrAtmosphere::setSlotWaveBands(const base::Table1* const tbl)
 {
-    bool ok = false;
+    bool ok{};
     if (tbl != nullptr) {
         if (waveBandTable != nullptr) waveBandTable->unref();
         tbl->ref();
@@ -64,7 +64,7 @@ bool IrAtmosphere::setSlotWaveBands(const base::Table1* const tbl)
 
 bool IrAtmosphere::setSlotTransmissivityTable1(const base::Table1* const tbl)
 {
-    bool ok = false;
+    bool ok{};
     if (tbl != nullptr) {
         if (transmissivityTable1 != nullptr) transmissivityTable1->unref();
         tbl->ref();
@@ -79,7 +79,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
         skyRadiance = num->getReal();
         ok = true;
@@ -92,7 +92,7 @@ bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
 //------------------------------------------------------------------------------
 bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
         earthRadiance = num->getReal();
         ok = true;
@@ -104,9 +104,9 @@ bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
 // Values in the table are coefficients of absorption
 double IrAtmosphere::getTransmissivity(const unsigned int i, const double range) const
 {
-    double trans = 1.0;
+    double trans{1.0};
     if (transmissivityTable1 != nullptr && i < transmissivityTable1->tableSize()) {
-        const double* transmissivities = transmissivityTable1->getDataTable();
+        const double* transmissivities{transmissivityTable1->getDataTable()};
         trans = transmissivities[i];
         trans = std::exp(trans * -0.001 * range);
     }
@@ -115,7 +115,7 @@ double IrAtmosphere::getTransmissivity(const unsigned int i, const double range)
 
 double IrAtmosphere::getTransmissivity(const double wavebandCenter, const double range) const
 {
-    double trans = 1.0;
+    double trans{1.0};
     if (transmissivityTable1 != nullptr){
         trans = transmissivityTable1->lfi(wavebandCenter);
         trans = std::exp(trans * -0.001 * range);
@@ -125,19 +125,19 @@ double IrAtmosphere::getTransmissivity(const double wavebandCenter, const double
 
 bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground)
 {
-    const double* centerWavelengths = getWaveBandCenters();
-    const double* widths = getWaveBandWidths();
-    double totalWavelengthRange = ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
-    const double* sigArray = msg->getSignatureByWaveband();
-    double range2D = msg->getRange();
+    const double* centerWavelengths{getWaveBandCenters()};
+    const double* widths{getWaveBandWidths()};
+    double totalWavelengthRange{((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)))};
+    const double* sigArray{msg->getSignatureByWaveband()};
+    double range2D{msg->getRange()};
     *totalSignal = 0.0;
     *totalBackground = 0.0;
-    double backgroundRadiance(0.0);
+    double backgroundRadiance{};
 
     // determine relation of FOV to horizon, to decide how much earth and how much sky in background
     {
-        double currentViewAngle(0.0);
-        double viewAngleToHorizon(0.0);
+        double currentViewAngle{};
+        double viewAngleToHorizon{};
 
         // viewAngleToTarget is angle to target, not angle my sensor is actually pointing.
         // we want the fov i'm actually pointing at, not a FOV centered on each target
@@ -157,7 +157,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
 
         // determine elevation angle of gimbal/ownship, negative angles are down
         {
-            const base::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
+            const base::Matrixd mm{msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat()};
             // compute Geodetic orientation angles
             base::Vec3d angles;
             base::nav::computeEulerAngles(mm, &angles);
@@ -166,21 +166,21 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
 
         // FAB determine angle to horizon, positive angles are down
         {
-            double hDist = 1000000.0 * base::distance::NM2M;  // Distance to horizon (m) (default: really far away)
-            double hTanAng = 0;
+            double hDist{1000000.0 * base::distance::NM2M};  // Distance to horizon (m) (default: really far away)
+            double hTanAng{};
 
             // earth radius in meters
-            const double er = base::nav::ERAD60 * base::distance::NM2M;
+            const double er{base::nav::ERAD60 * base::distance::NM2M};
 
             // distance from the center of the earth
-            const double distEC = msg->getOwnship()->getAltitudeM() + er;
-            const double distEC2 = distEC * distEC;  // squared
+            const double distEC{msg->getOwnship()->getAltitudeM() + er};
+            const double distEC2{distEC * distEC};  // squared
 
             // earth radius squared
-            const double er2 = er * er;
+            const double er2{er * er};
 
             // distance to horizon squared
-            const double dh2 = distEC2 - er2;
+            const double dh2{distEC2 - er2};
 
             // the distance and the tangent of the angle to the horizon
             hDist = std::sqrt(dh2);
@@ -189,54 +189,51 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
         }
 
         // determine ratio of earth and sky in the FOV
-        const double angleToHorizon = currentViewAngle + viewAngleToHorizon;
-        const double fovtheta = msg->getSendingSensor()->getIFOVTheta();
+        const double angleToHorizon{currentViewAngle + viewAngleToHorizon};
+        const double fovtheta{msg->getSendingSensor()->getIFOVTheta()};
 
         if (angleToHorizon - fovtheta >= 0) {
             // no ground, all sky?
             backgroundRadiance = getSkyRadiance();
-        }
-        else if (fovtheta - angleToHorizon >= 2*fovtheta) {
+        } else if (fovtheta - angleToHorizon >= 2*fovtheta) {
             // all ground, no sky?
             backgroundRadiance = getEarthRadiance();
-        }
-        else  {
+        } else  {
             // looking at ground & sky
-            double ratio = 0.5 + 0.5*angleToHorizon/fovtheta;   // convert range of -1 to 1 noninclusive to range of 0 to 1 noninclusive
-            backgroundRadiance = ratio*getSkyRadiance() + (1.0-ratio)*getEarthRadiance();
+            const double ratio{0.5 + 0.5 * angleToHorizon / fovtheta};   // convert range of -1 to 1 noninclusive to range of 0 to 1 noninclusive
+            backgroundRadiance = ratio * getSkyRadiance() + (1.0-ratio) * getEarthRadiance();
         }
     }
 
     for (unsigned int i=0; i<getNumWaveBands(); i++) {
-        const double lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0);
-        const double upperBandBound = lowerBandBound + widths[i];
+        const double lowerBandBound{centerWavelengths[i] - (widths[i] / 2.0)};
+        const double upperBandBound{lowerBandBound + widths[i]};
 
         // determine ratio of this band's coverage to entire atmosphere waveband
-        const double fractionOfBandToTotal = (upperBandBound - lowerBandBound) / totalWavelengthRange;
+        const double fractionOfBandToTotal{(upperBandBound - lowerBandBound) / totalWavelengthRange};
 
         // Find the limits of the sensor
-        const double lowerSensorBound = msg->getLowerWavelength();
-        const double upperSensorBound = msg->getUpperWavelength();
+        const double lowerSensorBound{msg->getLowerWavelength()};
+        const double upperSensorBound{msg->getUpperWavelength()};
 
         // Determine how much of this wave band overlaps the sensor limits
-        double lowerOverlap = getLowerEndOfWavelengthOverlap(lowerBandBound, lowerSensorBound);
-        double upperOverlap = getUpperEndOfWavelengthOverlap(upperBandBound, upperSensorBound);
+        double lowerOverlap{getLowerEndOfWavelengthOverlap(lowerBandBound, lowerSensorBound)};
+        double upperOverlap{getUpperEndOfWavelengthOverlap(upperBandBound, upperSensorBound)};
 
         if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
 
-        const double overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
+        const double overlapRatio{(upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound)};
 
         // this depends on whether target is a sky or earth based target
-        const double backgroundRadianceInBand = backgroundRadiance * fractionOfBandToTotal * overlapRatio;
+        const double backgroundRadianceInBand{backgroundRadiance * fractionOfBandToTotal * overlapRatio};
 
-        double radiantIntensityInBin(0.0);
+        double radiantIntensityInBin{};
         if (sigArray == nullptr) {
             // signature is a simple number
             // distribute simple signature evenly across atmosphere bins
             // need to apply overlapRatio to simple signature - already applied for complex signature in IrSignature...
             radiantIntensityInBin = msg->getSignatureAtRange() * fractionOfBandToTotal * overlapRatio;
-        }
-        else {
+        } else {
             // if the IrQueryMsg has a sigArray, then the signature is a multi-band signature
             // Find the limits of the bin
             //lowerBandBound = sigArray [i*3];
@@ -273,4 +270,3 @@ const double* IrAtmosphere::getWaveBandWidths() const
 
 }
 }
-

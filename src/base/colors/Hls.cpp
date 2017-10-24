@@ -20,8 +20,8 @@ BEGIN_SLOTTABLE(Hls)
 END_SLOTTABLE(Hls)
 
 BEGIN_SLOT_MAP(Hls)
-    ON_SLOT(1, setSlotHue, Number)
-    ON_SLOT(2, setSlotLightness, Number)
+    ON_SLOT(1, setSlotHue,        Number)
+    ON_SLOT(2, setSlotLightness,  Number)
     ON_SLOT(3, setSlotSaturation, Number)
 END_SLOT_MAP()
 
@@ -78,8 +78,8 @@ void Hls::getHLS(Vec3d& hhh) const
 bool Hls::setSlotHue(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
-    const bool ok = (value >= 0 && value <= 360);
+    const double value{msg->getReal()};
+    const bool ok{value >= 0 && value <= 360};
     if (ok) {
         hls[HUE] = value;
         hls2rgb(color,hls);
@@ -95,8 +95,8 @@ bool Hls::setSlotHue(const Number* const msg)
 bool Hls::setSlotSaturation(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{msg->getReal()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         hls[SATURATION] = value;
         hls2rgb(color,hls);
@@ -112,8 +112,8 @@ bool Hls::setSlotSaturation(const Number* const msg)
 bool Hls::setSlotLightness(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{msg->getReal()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         hls[LIGHTNESS] = value;
         hls2rgb(color,hls);
@@ -148,20 +148,20 @@ double Hls::value(double n1, double n2, double hue)
 //------------------------------------------------------------------------------
 void Hls::hls2rgb(Vec4d& rgb, const Vec3d& hls)
 {
-    double m1, m2;
+    double m1{}, m2{};
 
     if (hls[LIGHTNESS] <= 0.5)
         m2 = hls[LIGHTNESS] * (1.0f + hls[SATURATION]);
     else
         m2 = hls[SATURATION] + hls[LIGHTNESS] * (1.0f - hls[SATURATION]);
+
     m1 = 2.0f * hls[LIGHTNESS] - m2;
 
     if (hls[SATURATION] == 0.0) {
         rgb[RED] = hls[LIGHTNESS];
         rgb[GREEN] = hls[LIGHTNESS];
         rgb[BLUE] = hls[LIGHTNESS];
-    }
-    else {
+    } else {
         rgb[RED]   = value( m1, m2, hls[HUE] + 120.0f );
         rgb[GREEN] = value( m1, m2, hls[HUE] );
         rgb[BLUE]  = value( m1, m2, hls[HUE] - 120.0f );
@@ -176,18 +176,18 @@ void Hls::hls2rgb(Vec4d& rgb, const Vec3d& hls)
 //------------------------------------------------------------------------------
 void Hls::rgb2hls(Vec3d& hls, const Vec4d& rgb)
 {
-    const double maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
-    const double mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );
+    const double maxcol{std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) )};
+    const double mincol{std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) )};
     hls[LIGHTNESS] = (mincol + maxcol) / 2.0f;
 
     if (maxcol == mincol) {
         hls[SATURATION] = 0.0f;
         hls[HUE] = 0.0f;
     } else {
-        const double cdelta = maxcol - mincol;
-        const double rc = ( maxcol - rgb[RED] ) / cdelta;
-        const double gc = ( maxcol - rgb[GREEN] ) / cdelta;
-        const double bc = ( maxcol - rgb[BLUE] ) / cdelta;
+        const double cdelta{maxcol - mincol};
+        const double rc{( maxcol - rgb[RED] ) / cdelta};
+        const double gc{( maxcol - rgb[GREEN] ) / cdelta};
+        const double bc{( maxcol - rgb[BLUE] ) / cdelta};
 
         if (hls[LIGHTNESS] <= 0.5)
             hls[SATURATION] = cdelta / (maxcol + mincol);

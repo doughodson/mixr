@@ -53,8 +53,8 @@ bool convertSec2Ymdhms(
       unsigned int* const sec       // (OUT) seconds after the minute [ 0 .. 59 ]
    )
 {
-   time_t tt = seconds;
-   struct tm* tmx = gmtime( &tt );
+   time_t tt{static_cast<time_t>(seconds)};
+   struct tm* tmx{gmtime( &tt )};
 
    if (year != nullptr)  *year = tmx->tm_year + 1900;
    if (month != nullptr) *month = tmx->tm_mon + 1;
@@ -78,7 +78,7 @@ bool convertYmdhms2Sec(
       unsigned long* const seconds  // (OUT) whole seconds since midnight (00:00:00), January 1, 1970
    )
 {
-   bool ok = false;
+   bool ok{};
    if (seconds != nullptr) {
       struct tm tmx;
       tmx.tm_year = (year - 1900);

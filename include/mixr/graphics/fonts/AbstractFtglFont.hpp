@@ -4,14 +4,6 @@
 
 #include "AbstractFont.hpp"
 
-//#define FTGL_2_1_2  // version 2.1.2 or earlier
-
-//#ifdef FTGL_2_1_2
-//class FTGLOutlineFont;
-//#else
-//#include <FTGL/ftgl.h>
-//#endif
-
 namespace mixr {
 namespace base { class Number; }
 namespace graphics {
@@ -29,12 +21,14 @@ namespace graphics {
 //
 // public methods (member functions):
 //
-//  setFaceSize(Number* faceSize) - sets the face size in points (1/72 of an inch per point)
-//      - this is different than setting character width and height, as it
-//      - expands and retracts the font proportionally.
-//
 //  unsigned int getFaceSize()
 //  -- Gets the face size of the font.
+//
+//  private slot methods:
+//
+//  setSlotFaceSize(Number* faceSize) - sets the face size in points (1/72 of an inch per point)
+//      - this is different than setting character width and height, as it
+//      - expands and retracts the font proportionally.
 //
 // All font files NEED the following info to work correctly:
 //      - path to the font  "path"  ie.. "C:WINNT\FONTS"
@@ -63,7 +57,7 @@ private:
 
 private:
     // slot table help methods
-    bool setFaceSize(const base::Number* const);
+    bool setSlotFaceSize(const base::Number* const);
 };
 
 }

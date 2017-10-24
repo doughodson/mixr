@@ -32,16 +32,16 @@ BEGIN_SLOTTABLE(AbstractFont)
 END_SLOTTABLE(AbstractFont)
 
 BEGIN_SLOT_MAP(AbstractFont)
-    ON_SLOT(1, setSlotFontWidth, base::Number)
-    ON_SLOT(2, setSlotFontHeight, base::Number)
-    ON_SLOT(3, setSlotFontPosition, base::List)
-    ON_SLOT(4, setSlotBitmapWidth, base::Number)
-    ON_SLOT(5, setSlotBitmapHeight, base::Number)
-    ON_SLOT(6, setSlotFontPath, base::String)
+    ON_SLOT(1, setSlotFontWidth,        base::Number)
+    ON_SLOT(2, setSlotFontHeight,       base::Number)
+    ON_SLOT(3, setSlotFontPosition,     base::List)
+    ON_SLOT(4, setSlotBitmapWidth,      base::Number)
+    ON_SLOT(5, setSlotBitmapHeight,     base::Number)
+    ON_SLOT(6, setSlotFontPath,         base::String)
     ON_SLOT(7, setSlotFTGLFontFileName, base::String)
-    ON_SLOT(8, setSlotLookupTable, base::List)
+    ON_SLOT(8, setSlotLookupTable,      base::List)
     ON_SLOT(9, setSlotCharacterSpacing, base::Number);
-    ON_SLOT(10, setSlotLineSpacing, base::Number);
+    ON_SLOT(10, setSlotLineSpacing,     base::Number);
 END_SLOT_MAP()
 
 AbstractFont::AbstractFont()

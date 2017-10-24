@@ -58,7 +58,7 @@ private:
     bool setSlotIsOutlined(const base::Number* const);
     bool setSlotIsVertical(const base::Number* const);
 };
-   
+
 }
 }
 

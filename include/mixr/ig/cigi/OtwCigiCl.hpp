@@ -29,7 +29,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 namespace mixr {
 namespace base { class Number; class NetHandler; class Thread; }
 namespace models {
-class AirVehicle; class Building; class Effects; class GroundVehicle; class LifeForm;
+class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
 }
 namespace cigi {
@@ -185,7 +185,7 @@ protected:
 
    virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::AirVehicle* const p);
    virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const models::Building* const p);
-   virtual bool setEffectsData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effects* const p);
+   virtual bool setEffectData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effect* const p);
    virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::GroundVehicle* const p);
    virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const models::LifeForm* const p);
    virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const models::Missile* const p);

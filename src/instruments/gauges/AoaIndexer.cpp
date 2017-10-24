@@ -7,7 +7,7 @@
 namespace mixr {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(AoAIndexer,"AoAIndexer")
+IMPLEMENT_SUBCLASS(AoAIndexer, "AoAIndexer")
 
 BEGIN_SLOTTABLE(AoAIndexer)
     "aboveMax",     // min value when aoa is over in-range value
@@ -19,10 +19,10 @@ BEGIN_SLOTTABLE(AoAIndexer)
 END_SLOTTABLE(AoAIndexer)
 
 BEGIN_SLOT_MAP(AoAIndexer)
-    ON_SLOT(1, setSlotAoaRedMax, base::Number)
-    ON_SLOT(2, setSlotAoaRedMin, base::Number)
-    ON_SLOT(3, setSlotAoaGreenMax, base::Number)
-    ON_SLOT(4, setSlotAoaGreenMin, base::Number)
+    ON_SLOT(1, setSlotAoaRedMax,    base::Number)
+    ON_SLOT(2, setSlotAoaRedMin,    base::Number)
+    ON_SLOT(3, setSlotAoaGreenMax,  base::Number)
+    ON_SLOT(4, setSlotAoaGreenMin,  base::Number)
     ON_SLOT(5, setSlotAoaYellowMax, base::Number)
     ON_SLOT(6, setSlotAoaYellowMin, base::Number)
 END_SLOT_MAP()

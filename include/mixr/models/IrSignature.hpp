@@ -66,25 +66,18 @@ public:
    virtual bool getIrSignature(IrQueryMsg* const);
    virtual double getSignatureArea(IrQueryMsg*); 
 
-   // slot operations 
-   virtual bool setSlotWaveBandSizes(const base::Table1* const);
-   virtual bool setSlotIrShapeSignature(IrShape* const);
-   virtual bool setSlotBaseHeatSignature(base::Number* const);
-   virtual bool setSlotEmissivity(base::Number* const);
-   virtual bool setSlotEffectiveArea(base::Number* const);
-
 protected:
 
-   //Get the number of waveband bins
+   // get the number of waveband bins
    unsigned int getNumWaveBands()                         { return numWaveBands; };
 
-   //Get the waveband centers from each bin
+   // get the waveband centers from each bin
    const double* getWaveBandCenters() const;
 
-   //Get the waveband widths from each bin
+   // get the waveband widths from each bin
    const double* getWaveBandWidths() const;
 
-   // Return the lowest wavelength for which data for the atmosphere is required. 
+   // return the lowest wavelength for which data for the atmosphere is required. 
    //        It is higher of the bottom sensor waveband and the lowest waveband represented by the atmosphere.
    double getLowerEndOfWavelengthOverlap(
       const double lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
@@ -94,7 +87,7 @@ protected:
      return ((lowerRadiationWaveband > lowerSensorWaveband) ? lowerRadiationWaveband : lowerSensorWaveband);
    }
 
-   // Return the highest wavelength for which data for the atmosphere is required. 
+   // return the highest wavelength for which data for the atmosphere is required. 
    //        It is lower of the top of the sensor waveband and the highest waveband represented by the atmosphere.
    double getUpperEndOfWavelengthOverlap(
       const double upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
@@ -134,6 +127,14 @@ private:
                                            // is absorbed. The value ranges from 0.0 for total reflection to
                                            // 1.0 for total absorption.
    double effectiveArea {1e-12};           // The effective area for heat calculations  (m^2) (near zero, but non-zero)
+
+private:
+   // slot table helper methods 
+   bool setSlotWaveBandSizes(const base::Table1* const);
+   bool setSlotIrShapeSignature(IrShape* const);
+   bool setSlotBaseHeatSignature(base::Number* const);
+   bool setSlotEmissivity(base::Number* const);
+   bool setSlotEffectiveArea(base::Number* const);
 };
 
 }

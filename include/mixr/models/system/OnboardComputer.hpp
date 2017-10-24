@@ -41,7 +41,7 @@ public:
    virtual TrackManager* getTrackManagerByType(const std::type_info& type);
    virtual const TrackManager* getTrackManagerByType(const std::type_info& type) const;
    virtual TrackManager* getTrackManagerByName(const char* const name);
-   virtual const TrackManager* getTrackManagerByName(const char* const name) const;
+   virtual const TrackManager* getTrackManagerByName(const char* const) const;
 
    // Air to Air functions
    virtual Track* getNextTarget();                                      // Get the target track

@@ -281,7 +281,7 @@ void Database::createIcaoList()
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Database::setSlotPathname(base::String* const msg)
+bool Database::setSlotPathname(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -290,7 +290,7 @@ bool Database::setSlotPathname(base::String* const msg)
    return ok;
 }
 
-bool Database::setSlotFilename(base::String* const msg)
+bool Database::setSlotFilename(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

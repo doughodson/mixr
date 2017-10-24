@@ -51,9 +51,6 @@ public:
       const unsigned char  extra = 0
    );
 
-   // Slot functions
-   virtual bool setSlotDisEntityType(const base::List* const);         // Sets DIS entity type enumerations
-
    virtual bool copyEntityType(interop::Nib* const targetNib) const override;
 
 private:
@@ -65,6 +62,10 @@ private:
     unsigned char  disSubcategory {}; // DIS subcategory code
     unsigned char  disSpecific {};  // DIS specific code
     unsigned char  disExtra {};     // DIS extra code
+
+private:
+   // slot table helper methods
+   virtual bool setSlotDisEntityType(const base::List* const);         // Sets DIS entity type enumerations
 };
 
 }

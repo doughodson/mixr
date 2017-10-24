@@ -4,7 +4,6 @@
 #include "mixr/interop/dis/EmissionPduHandler.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -20,6 +19,7 @@ EMPTY_SLOTTABLE(Nib)
 
 Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType)
 {
+   STANDARD_CONSTRUCTOR()
 }
 
 Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())

@@ -36,14 +36,18 @@ public:
 
     // Tables
     void createTable(const int type);
-    VpfTable* getTable(const int type)     { if (tables[type] != 0) return tables[type]; else return 0; }
+    VpfTable* getTable(const int type)     { if (tables[type] != nullptr) return tables[type]; else return nullptr; }
 
-    bool setSlotPath(const base::String* const sfpobj);
+    bool setPath(const base::String* const);
 
 private:
     char* path {};                                // Path name to our database directory
     int type {};                                  // Type of directory we are
     std::array<VpfTable*, MAX_TABLES> tables {};  // Tables
+
+private:
+    // slot table helper methods
+    bool setSlotPath(const base::String* const x)   { return setPath(x); }
 };
 
 }

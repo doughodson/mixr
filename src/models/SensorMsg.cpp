@@ -28,7 +28,7 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     BaseClass::copyData(org);
     if (cc) initData();
 
-    // Copy the data
+    // copy the data
     maxRng = org.maxRng;
     rng = org.rng;
     rngRate = org.rngRate;
@@ -40,16 +40,16 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     losO2T = org.losO2T;
     losT2O = org.losT2O;
 
-    const Player* oo = org.ownship;
+    const Player* oo{org.ownship};
     setOwnship( const_cast<Player*>(static_cast<const Player*>(oo)) );
 
-    const Gimbal* aa = org.gimbal;
+    const Gimbal* aa{org.gimbal};
     setGimbal( const_cast<Gimbal*>(static_cast<const Gimbal*>(aa)) );
 
-    const Player* pp = org.target;
+    const Player* pp{org.target};
     setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
 
-    const base::Object* msg = org.dataMsg;
+    const base::Object* msg{org.dataMsg};
     setDataMessage( const_cast<base::Object*>(static_cast<const base::Object*>(msg)) );
 
     returnReq = org.returnReq;
@@ -92,7 +92,6 @@ double SensorMsg::getRangeRateKts() const
 {
    return getRangeRate() * base::distance::M2NM * 3600.0f;
 }
-
 
 //------------------------------------------------------------------------------
 // setOwnship() -- Sets the pointer to the originator (ownship)

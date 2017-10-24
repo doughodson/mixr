@@ -14,7 +14,7 @@ BEGIN_SLOTTABLE(FuelTank)
 END_SLOTTABLE(FuelTank)
 
 BEGIN_SLOT_MAP(FuelTank)
-    ON_SLOT(1, setSlotFuelWt, base::Number)
+    ON_SLOT(1, setSlotFuelWt,   base::Number)
     ON_SLOT(2, setSlotCapacity, base::Number)
 END_SLOT_MAP()
 
@@ -65,7 +65,7 @@ bool   FuelTank::isFuelWtValid() const          { return (fuelWt >= 0 && fuelWt 
 bool FuelTank::setSlotFuelWt(const base::Number* const msg)
 {
     if (msg == nullptr) return false;
-    bool ok {setFuelWt( msg->getReal() )};
+    bool ok{setFuelWt(msg->getReal())};
     if (ok) initFuelWt = getFuelWt();
     return ok;
 }

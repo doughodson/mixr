@@ -72,12 +72,12 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotRed(const Table1*);
-    bool setSlotGreen(const Table1*);
-    bool setSlotBlue(const Table1*);
-    bool setSlotPhosphors(const List*);
-    bool setSlotWhiteRGB(const List*);
-    bool setSlotWhiteCIE(const List*);
+    bool setSlotRed(const Table1* const);
+    bool setSlotGreen(const Table1* const);
+    bool setSlotBlue(const Table1* const);
+    bool setSlotPhosphors(const List* const);
+    bool setSlotWhiteRGB(const List* const);
+    bool setSlotWhiteCIE(const List* const);
 };
 
 }

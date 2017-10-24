@@ -37,10 +37,6 @@ public:
    // Set Parameter
    virtual bool setSampleRate(const unsigned int v);   // hz
 
-   // Set slot functions
-   virtual bool setSlotSampleRate(const base::Frequency* const msg);
-   virtual bool setSlotSampleRate(const base::Number* const msg);
-
    virtual double g(const double x) override;
    virtual bool isValid() const override;
 
@@ -55,6 +51,11 @@ private:
    double       time {};       // Current time since last sample (s)
    double       stime {};      // Sample time: time of next sample (s)
    unsigned int sampleRate {}; // Sample rate (hz)
+
+private:
+   // slot table helper methods
+   bool setSlotSampleRate(const base::Frequency* const);
+   bool setSlotSampleRate(const base::Number* const);
 };
 
 }

@@ -93,7 +93,7 @@ void EarthModel::copyData(const EarthModel& org, const bool cc)
 //------------------------------------------------------------------------------
 const EarthModel* EarthModel::getEarthModel(const char* const name)
 {
-   const EarthModel* em = nullptr;
+   const EarthModel* em{};
    if (name != nullptr) {
       if      (std::strcmp( name, "airy") == 0) em = &airy;
       else if (std::strcmp( name, "australianNational") == 0) em = &australianNational;
@@ -127,7 +127,7 @@ const EarthModel* EarthModel::getEarthModel(const char* const name)
 
 bool EarthModel::setA(const double a0)
 {
-   bool ok = false;
+   bool ok{};
    if (a0 > 0) {
       initData(a0,f);
       ok = true;
@@ -137,7 +137,7 @@ bool EarthModel::setA(const double a0)
 
 bool EarthModel::setB(const double b0)
 {
-   bool ok = false;
+   bool ok{};
    if (b0 > 0) {
       b = b0;
       f  = (a-b)/a;
@@ -158,7 +158,7 @@ bool EarthModel::setF(const double f0)
 //------------------------------------------------------------------------------
 bool EarthModel::setSlotA(const Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setA( Meters::convertStatic( *msg ) );
    }
@@ -167,7 +167,7 @@ bool EarthModel::setSlotA(const Distance* const msg)
 
 bool EarthModel::setSlotA(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setA( msg->getDouble() );
    }
@@ -176,7 +176,7 @@ bool EarthModel::setSlotA(const Number* const msg)
 
 bool EarthModel::setSlotB(const Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setB( Meters::convertStatic( *msg ) );
    }
@@ -185,7 +185,7 @@ bool EarthModel::setSlotB(const Distance* const msg)
 
 bool EarthModel::setSlotB(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setB( msg->getDouble() );
    }
@@ -194,7 +194,7 @@ bool EarthModel::setSlotB(const Number* const msg)
 
 bool EarthModel::setSlotF(const Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setF( msg->getDouble() );
    }

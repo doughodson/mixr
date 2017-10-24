@@ -87,13 +87,13 @@ void Table4::deleteData()
 bool Table4::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    unsigned int n1 = list.entries();
-    bool ok = (n1 > 0 && n1 == nw);
+    const unsigned int n1{list.entries()};
+    bool ok{n1 > 0 && n1 == nw};
 
     // Process each item in the list
-    unsigned int i = 0;
-    unsigned int k = BaseClass::tableSize();
-    const List::Item* item = list.getFirstItem();
+    unsigned int i{};
+    unsigned int k{BaseClass::tableSize()};
+    const List::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
@@ -154,8 +154,8 @@ double Table4::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const double* y_data = getYData();
-   const double* z_data = getZData();
+   const double* y_data{getYData()};
+   const double* z_data{getZData()};
    if (f != nullptr) {
       const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -178,7 +178,7 @@ double Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const double* z_data = getZData();
+   const double* z_data{getZData()};
    if (f != nullptr) {
       const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -188,8 +188,7 @@ double Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
                          z_data, getNumZPoints(), getWData(), getNumWPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp );
-   }
-   else {
+   } else {
       return lfi_4D( iv1, iv2, z_data[0], wtable[0], getXData(),
                          getNumXPoints(), getYData(), getNumYPoints(),
                          z_data, getNumZPoints(), getWData(), getNumWPoints(),
@@ -210,8 +209,7 @@ double Table4::lfi(const double iv1, const double iv2, const double iv3, FStorag
                          getNumZPoints(), getWData(), getNumWPoints(),
                          getDataTable(), isExtrapolationEnabled(),
                          &s->xbp, &s->ybp, &s->zbp, &s->wbp );
-   }
-   else {
+   } else {
       return lfi_4D( iv1, iv2, iv3, wtable[0], getXData(), getNumXPoints(),
                          getYData(), getNumYPoints(), getZData(),
                          getNumZPoints(), getWData(), getNumWPoints(),
@@ -232,8 +230,7 @@ double Table4::lfi(const double iv1, const double iv2, const double iv3, const d
                            getNumZPoints(), getWData(), getNumWPoints(),
                            getDataTable(), isExtrapolationEnabled(),
                            &s->xbp, &s->ybp, &s->zbp, &s->wbp );
-   }
-   else {
+   } else {
        return lfi_4D( iv1, iv2, iv3, iv4, getXData(), getNumXPoints(),
                            getYData(), getNumYPoints(), getZData(),
                            getNumZPoints(), getWData(), getNumWPoints(),

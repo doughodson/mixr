@@ -39,16 +39,17 @@ public:
 protected:
    virtual void mergeIrReturns();
 
-   // Slot functions
-   virtual bool setSlotAzimuthBin(const base::Number* const msg);     // Sets the Azimuth Bin
-   virtual bool setSlotElevationBin(const base::Number* const msg);   // Sets the Elevation Bin
-
 private:
    double azimuthBin {};      // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
 
    double elevationBin {};    // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
+
+private:
+   // slot table helper methods
+   bool setSlotAzimuthBin(const base::Number* const);     // Sets the Azimuth Bin
+   bool setSlotElevationBin(const base::Number* const);   // Sets the Elevation Bin
 };
 
 }

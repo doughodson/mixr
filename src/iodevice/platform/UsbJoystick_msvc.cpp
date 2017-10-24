@@ -56,7 +56,7 @@ void UsbJoystick::reset()
 
          // number of bits
          {
-            unsigned short tmp = static_cast<unsigned short>(jsCaps.wNumButtons);
+            unsigned short tmp{static_cast<unsigned short>(jsCaps.wNumButtons)};
             if (tmp > MAX_DI) tmp = MAX_DI;
             numDI = tmp;
          }
@@ -74,7 +74,7 @@ void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
    js.dwSize  = sizeof(js);      // set the size of the structure / effectively sets version
 
    // query joystick for its position and button status
-   MMRESULT status = joyGetPosEx(deviceIndex, &js);
+   MMRESULT status {joyGetPosEx(deviceIndex, &js)};
    if (status == JOYERR_NOERROR) {
 
       // First 6 channels are X, Y, Z, R, U, V, and they need to be scaled.
@@ -93,18 +93,18 @@ void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
 
             // right/left
             if (js.dwPOV >= (45*100) && js.dwPOV <= (135*100)) {
-               povLR = 1.0f;  //right
+               povLR = 1.0;  //right
             }
             else if (js.dwPOV >= (225*100) && js.dwPOV <= (315*100)) {
-               povLR = -1.0f; // left
+               povLR = -1.0; // left
             }
 
             // back/forward
             if (js.dwPOV >= (135*100) && js.dwPOV <= (225*100)) {
-               povFB = 1.0f;  // back
+               povFB = 1.0;  // back
             }
             else if (js.dwPOV >= (315*100) || js.dwPOV <= (45*100)) {
-               povFB = -1.0f; // forward
+               povFB = -1.0; // forward
             }
 
          }
@@ -114,7 +114,7 @@ void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
 
       // update all individual button states
       {
-         unsigned long buttons = js.dwButtons;
+         unsigned long buttons {js.dwButtons};
          for (unsigned int i = 0; i < numDI; i++) {
             inBits[i] = (buttons & (1 << i)) != 0;
          }
@@ -133,7 +133,7 @@ void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
 // Set an analog input channels min/max values
 bool UsbJoystick::setMaxMin(const unsigned int channel, const double max, const double min)
 {
-   bool ok {false};
+   bool ok {};
    if (channel < numAI) {
       cmax[channel] = max;
       cmin[channel] = min;
@@ -145,10 +145,10 @@ bool UsbJoystick::setMaxMin(const unsigned int channel, const double max, const 
 // Set an analog input channel values using a raw input and the max/min values
 bool UsbJoystick::setInputScaled(const unsigned int cn, const double raw)
 {
-   bool ok {false};
+   bool ok {};
    if (cn < numAI) {
-      double normalized = (raw - cmin[cn])/(cmax[cn] - cmin[cn]);  // range: [ 0 ... 1 ]
-      double v11 = (normalized * 2.0f) - 1.0f;                     // range: [ -1 ... 1 ]
+      double normalized {(raw - cmin[cn])/(cmax[cn] - cmin[cn])};  // range: [ 0 ... 1 ]
+      double v11 {(normalized * 2.0) - 1.0};                       // range: [ -1 ... 1 ]
       inData[cn] = v11;
       ok = true;
    }

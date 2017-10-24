@@ -22,24 +22,24 @@ inline bool fbd2llE(
       )
 {
    // Initialize earth model parameters
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = distance::M2NM * pModel->getA();   // semi-major axis
-   const double e2 = pModel->getE2();  // eccentricity squared
+   const double a  {distance::M2NM * pModel->getA()};   // semi-major axis
+   const double e2 {pModel->getE2()};  // eccentricity squared
 
    // Define Local Constants
-   const double sinSlat = std::sin(angle::D2RCC * slat);
-   const double cosSlat = std::cos(angle::D2RCC * slat);
-   const double sinBrng = std::sin(angle::D2RCC * brng);
-   const double cosBrng = std::cos(angle::D2RCC * brng);
-   const double q       = 1.0 - e2 * sinSlat * sinSlat;
-   const double rn      = a / std::sqrt(q);
-   const double rm      = rn * (1.0 - e2) / q;
+   const double sinSlat {std::sin(angle::D2RCC * slat)};
+   const double cosSlat {std::cos(angle::D2RCC * slat)};
+   const double sinBrng {std::sin(angle::D2RCC * brng)};
+   const double cosBrng {std::cos(angle::D2RCC * brng)};
+   const double q       {1.0 - e2 * sinSlat * sinSlat};
+   const double rn      {a / std::sqrt(q)};
+   const double rm      {rn * (1.0 - e2) / q};
 
    // Compute new lat/lon
-   const double dN = cosBrng * dist;
-   const double dE = sinBrng * dist;
+   const double dN{cosBrng * dist};
+   const double dE{sinBrng * dist};
 
    if (dlat != nullptr) *dlat = slat + angle::R2DCC * (dN / rm);
 
@@ -70,18 +70,18 @@ inline bool fll2bdE(
       )
 {
    // Initialize earth model parameters
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = distance::M2NM * pModel->getA();   // semi-major axis
-   const double e2 = pModel->getE2();  // eccentricity squared
+   const double a{distance::M2NM * pModel->getA()};   // semi-major axis
+   const double e2{pModel->getE2()};  // eccentricity squared
 
    // Define Local Constants
-   const double sinSlat = std::sin(angle::D2RCC * slat);
-   const double cosSlat = std::cos(angle::D2RCC * slat);
-   const double q       = 1.0 - e2 * sinSlat * sinSlat;
-   const double rn      = a / std::sqrt(q);
-   const double rm      = rn * (1.0 - e2) / q;
+   const double sinSlat {std::sin(angle::D2RCC * slat)};
+   const double cosSlat {std::cos(angle::D2RCC * slat)};
+   const double q       {1.0 - e2 * sinSlat * sinSlat};
+   const double rn      {a / std::sqrt(q)};
+   const double rm      {rn * (1.0 - e2) / q};
 
    // IDENTICAL_POINTS;
    if ((slat == dlat) && (slon == dlon)) {
@@ -91,8 +91,8 @@ inline bool fll2bdE(
 
    // Compute brg/dist
    else {
-      const double dN = angle::D2RCC * angle::aepcdDeg(dlat - slat) * rm;
-      const double dE = angle::D2RCC * angle::aepcdDeg(dlon - slon) * rn * cosSlat;
+      const double dN{angle::D2RCC * angle::aepcdDeg(dlat - slat) * rm};
+      const double dE{angle::D2RCC * angle::aepcdDeg(dlon - slon) * rn * cosSlat};
 
       *brng = angle::R2DCC * std::atan2(dE, dN);
       *dist = std::sqrt(dN*dN + dE*dE);
@@ -116,15 +116,15 @@ inline bool fbd2llS(
       double* const dlon   // OUT:  Destination longitude (degs)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (dlat != nullptr && dlon != nullptr) {
-      const double ang = brg * angle::D2RCC;
-      const double ew = std::sin(ang) * dist;
-      const double ns = std::cos(ang) * dist;
+      const double ang{brg * angle::D2RCC};
+      const double ew{std::sin(ang) * dist};
+      const double ns{std::cos(ang) * dist};
 
       *dlat = slat + (ns/60.0);
 
-      double tlat = slat;
+      double tlat{slat};
       if (tlat > 89.0 || tlat < -89.0) tlat = 89.0;
 
       *dlon = angle::aepcdDeg( slon + ( ew / (60.0 * std::cos(tlat * angle::D2RCC)) ) );
@@ -147,10 +147,10 @@ inline bool fll2bdS(
       double* const dist   // OUT: distance (ground range) (nm)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (brg != nullptr && dist != nullptr) {
-      const double ns = ( angle::aepcdDeg(dlat - slat) * 60.0 );
-      const double ew = ( angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat * angle::D2RCC) );
+      const double ns{angle::aepcdDeg(dlat - slat) * 60.0};
+      const double ew{angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat * angle::D2RCC)};
       *brg = std::atan2(ew,ns) * angle::R2DCC;
       *dist = sqrt(ns*ns + ew*ew);
       ok = true;
@@ -204,24 +204,24 @@ inline bool aer2xyz(
       const double rng           // IN:  range (meters)
    )
 {
-   bool ok = false;
+   bool ok{};
 
    if (pos != nullptr) {
       // Compute sin/cos of azimuth
-      double saz, caz;
-      sinCos(az,&saz,&caz);
+      double saz{}, caz{};
+      sinCos(az, &saz, &caz);
 
       // Compute sin/cos of elevation
-      double sel(0.0), cel(0.0);
+      double sel{}, cel{};
       sinCos(el, &sel, &cel);
 
       // ---
       // Compute to x, y and z positions (player coordinates)
       // ---
-      const double d = -rng * sel;
-      const double r = rng * cel;
-      const double n = r * caz;
-      const double e = r * saz;
+      const double d{-rng * sel};
+      const double r{rng * cel};
+      const double n{r * caz};
+      const double e{r * saz};
       Vec3d pos0(n,e,d);
 
       // Rotate from player to NED coordinates (NED, player centered)
@@ -242,24 +242,24 @@ inline bool aer2xyz(
       const double rng           // IN:  range (meters)
    )
 {
-   bool ok = false;
+   bool ok{};
 
    if (pos != nullptr) {
       // Compute sin/cos of azimuth
-      double saz(0.0), caz(0.0);
-      sinCos(az,&saz,&caz);
+      double saz{}, caz{};
+      sinCos(az, &saz, &caz);
 
       // Compute sin/cos of elevation
-      double sel(0.0), cel(0.0);
-      sinCos(el,&sel,&cel);
+      double sel{}, cel{};
+      sinCos(el, &sel, &cel);
 
       // ---
       // Compute to x, y and z positions (player coordinates)
       // ---
-      const double d = -rng * sel;
-      const double r = rng * cel;
-      const double n = r * caz;
-      const double e = r * saz;
+      const double d{-rng * sel};
+      const double r{rng * cel};
+      const double n{r * caz};
+      const double e{r * saz};
       Vec3d pos0(n,e,d);
 
       // Rotate from player to NED coordinates (NED, player centered)
@@ -285,9 +285,9 @@ inline bool xyz2aer(
    )
 {
    // Compute AER position vector
-   const double ranj = std::sqrt(x*x + y*y + z*z);
-   const double elev = angle::R2DCC * std::asin(-z / ranj);
-   const double azim = angle::R2DCC * std::atan2(y, x);
+   const double ranj{std::sqrt(x*x + y*y + z*z)};
+   const double elev{angle::R2DCC * std::asin(-z / ranj)};
+   const double azim{angle::R2DCC * std::atan2(y, x)};
 
    (*aer)[0] = azim;
    (*aer)[1] = elev;
@@ -307,14 +307,14 @@ inline bool xyz2aer(
 {
    Vec3d vi(x0, y0, z0);    // Earth vector (NED)
    Vec3d vb = rm * vi;      // Body vector
-   const double x = vb[0];
-   const double y = vb[1];
-   const double z = vb[2];
+   const double x{vb[0]};
+   const double y{vb[1]};
+   const double z{vb[2]};
 
    // Compute AER position vector
-   const double ranj = std::sqrt(x*x + y*y + z*z);
-   const double elev = angle::R2DCC * std::asin(-z / ranj);
-   const double azim = angle::R2DCC * std::atan2(y, x);
+   const double ranj{std::sqrt(x*x + y*y + z*z)};
+   const double elev{angle::R2DCC * std::asin(-z / ranj)};
+   const double azim{angle::R2DCC * std::atan2(y, x)};
 
    (*aer)[0] = azim;
    (*aer)[1] = elev;
@@ -335,9 +335,9 @@ inline bool convertEcef2Geod(
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
-   bool ok = false;
+   bool ok{};
    if (lla != nullptr) {
-      double lat(0.0), lon(0.0), alt(0.0);
+      double lat{}, lon{}, alt{};
       ok = convertEcef2Geod(vec[IX], vec[IY], vec[IZ], &lat, &lon, &alt, em);
       if (ok) lla->set(lat, lon, alt);
    }
@@ -351,9 +351,9 @@ inline bool convertEcef2Geod(
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
-   bool ok = false;
+   bool ok{};
    if (lla != nullptr) {
-      double lat(0.0), lon(0.0), alt(0.0);
+      double lat{}, lon{}, alt{};
       ok = convertEcef2Geod(vec[IX], vec[IY], vec[IZ], &lat, &lon, &alt, em);
       if (ok) { lla[ILAT] = lat; lla[ILON] = lon; lla[IALT] = alt; }
    }
@@ -367,9 +367,9 @@ inline bool convertGeod2Ecef(
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
-   bool ok = false;
+   bool ok{};
    if (ecef != nullptr) {
-      double x(0.0), y(0.0), z(0.0);
+      double x{}, y{}, z{};
       ok = convertGeod2Ecef(lla[ILAT], lla[ILON], lla[IALT], &x, &y, &z, em);
       if (ok) ecef->set(x, y, z);
    }
@@ -383,9 +383,9 @@ inline bool convertGeod2Ecef(
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
-   bool ok = false;
+   bool ok{};
    if (ecef != nullptr) {
-      double x(0.0), y(0.0), z(0.0);
+      double x{}, y{}, z{};
       ok = convertGeod2Ecef(lla[ILAT], lla[ILON], lla[IALT], &x, &y, &z, em);
       if (ok) { ecef[IX] = x; ecef[IY] = y; ecef[IZ] = z; }
    }
@@ -458,7 +458,7 @@ inline bool computeEulerAnglesDeg(
          )
 {
    Vec3d angles;
-   bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
+   bool ok{computeEulerAngles(rm, &angles, scPhi, scTht, scPsi)};
    if (ok && anglesD != nullptr) {
       anglesD->set(
          angles[0] * angle::R2DCC,
@@ -481,10 +481,10 @@ inline bool convertGeodAngles2EcefAngles(
             Vec3d* const vc        // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
          )
 {
-   bool ok = false;
+   bool ok{};
    if (vc != nullptr) {
       // compute body/ECEF directional cosines
-      const Matrixd T = rm * wm;
+      const Matrixd T{rm * wm};
       // compute geocentric orientation angles
       computeEulerAngles(T, vc);
       ok = true;
@@ -528,7 +528,7 @@ inline bool convertEcefAngles2GeodAngles(
             Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
          )
 {
-   bool ok = false;
+   bool ok{};
    if (vd != nullptr) {
       // Transpose world matrix
       Matrixd wmT = wm;
@@ -589,26 +589,26 @@ inline bool convertPosVec2llE(
    )
 {
    // Initialize earth model parameters
-   const EarthModel* pModel = em;
+   const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = pModel->getA();   // semi-major axis
-   const double e2 = pModel->getE2();  // eccentricity squared
+   const double a{pModel->getA()};   // semi-major axis
+   const double e2{pModel->getE2()};  // eccentricity squared
 
    // Define Local Constants
-   const double q  = 1.0 - e2 * sinSlat * sinSlat;
-   const double rn = a / std::sqrt(q);
-   const double rm = rn * (1.0 - e2) / q;
+   const double q{1.0 - e2 * sinSlat * sinSlat};
+   const double rn{a / std::sqrt(q)};
+   const double rm{rn * (1.0 - e2) / q};
 
    // compute position
-   const double north = pos.x();
-   const double east = pos.y();
-   const double down = pos.z();
+   const double north{pos.x()};
+   const double east{pos.y()};
+   const double down{pos.z()};
    if (lat != nullptr) {
       *lat = slat + angle::R2DCC * (north / rm);
    }
    if (lon != nullptr) {
-      if (cosSlat != 0) {
+      if (cosSlat != 0.0) {
          *lon = angle::aepcdDeg( slon + angle::R2DCC * (east / rn) / cosSlat );
       } else {
          *lon = slon;
@@ -632,8 +632,8 @@ inline bool convertPosVec2llE(
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
-   const double sinSlat = std::sin(angle::D2RCC * slat);
-   const double cosSlat = std::cos(angle::D2RCC * slat);
+   const double sinSlat{std::sin(angle::D2RCC * slat)};
+   const double cosSlat{std::cos(angle::D2RCC * slat)};
    return convertPosVec2llE(slat, slon, sinSlat, cosSlat, pos, lat, lon, alt, em);
 }
 
@@ -652,7 +652,7 @@ inline bool convertPosVec2llS(
       double* const alt       // OUT: Altitude (meters)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (lat != nullptr && lon != nullptr && alt != nullptr) {
 
       *lat = (pos[INORTH] * distance::M2NM)/60.0 + slat;
@@ -693,8 +693,8 @@ inline bool convertPosVec2LL(
       double* const alt          // OUT: Altitude (meters)
    )
 {
-   const Vec3d posD = pos;
-   const double cosSlat = std::cos(angle::D2RCC * slat);
+   const Vec3d posD{pos};
+   const double cosSlat{std::cos(angle::D2RCC * slat)};
    return convertPosVec2llS(slat, slon, cosSlat, posD, lat, lon, alt);
 }
 
@@ -714,24 +714,24 @@ inline bool convertLL2PosVecE(
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (pos != nullptr) {
       // Initialize earth model parameters
-      const EarthModel* pModel = em;
+      const EarthModel* pModel{em};
       if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-      const double a  = pModel->getA();   // semi-major axis
-      const double e2 = pModel->getE2();  // eccentricity squared
+      const double a{pModel->getA()};   // semi-major axis
+      const double e2{pModel->getE2()};  // eccentricity squared
 
       // Define Constants
-      const double q   = 1.0 - e2 * sinSlat * sinSlat;
-      const double rn  = a / std::sqrt(q);
-      const double rm  = rn * (1.0 - e2) / q;
+      const double q{1.0 - e2 * sinSlat * sinSlat};
+      const double rn{a / std::sqrt(q)};
+      const double rm{rn * (1.0 - e2) / q};
 
       // Compute NED variables
-      const double x = angle::D2RCC * angle::aepcdDeg(lat - slat) * rm;
-      const double y = angle::D2RCC * angle::aepcdDeg(lon - slon) * rn * cosSlat;
-      const double z = ( -alt );
+      const double x{angle::D2RCC * angle::aepcdDeg(lat - slat) * rm};
+      const double y{angle::D2RCC * angle::aepcdDeg(lon - slon) * rn * cosSlat};
+      const double z{-alt};
       pos->set(x, y, z);
       ok = true;
    }
@@ -754,11 +754,11 @@ inline bool convertLL2PosVecS(
       Vec3d* const pos        // OUT: NED position vector from ref point (Meters)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (pos != nullptr) {
-      const double x = ( angle::aepcdDeg(lat - slat) * 60.0 * distance::NM2M );
-      const double y = ( angle::aepcdDeg(lon - slon) * 60.0 * distance::NM2M * cosSlat );
-      const double z = ( -alt );
+      const double x{angle::aepcdDeg(lat - slat) * 60.0 * distance::NM2M};
+      const double y{angle::aepcdDeg(lon - slon) * 60.0 * distance::NM2M * cosSlat};
+      const double z{-alt};
       pos->set(x, y, z);
       ok = true;
    }
@@ -776,8 +776,8 @@ inline bool convertLL2PosVecE(
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
-   const double sinSlat = std::sin(angle::D2RCC * slat);
-   const double cosSlat = std::cos(angle::D2RCC * slat);
+   const double sinSlat{std::sin(angle::D2RCC * slat)};
+   const double cosSlat{std::cos(angle::D2RCC * slat)};
    return convertLL2PosVecE(slat, slon, sinSlat, cosSlat, lat, lon, alt, pos, em);
 }
 
@@ -791,7 +791,7 @@ inline bool convertLL2PosVec(
       Vec3d* const pos           // OUT: NED position vector from ref point (Meters)
    )
 {
-   const double cosSlat = std::cos(angle::D2RCC * slat);
+   const double cosSlat{std::cos(angle::D2RCC * slat)};
    return convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, pos);
 }
 
@@ -805,9 +805,9 @@ inline bool convertLL2PosVec(
       Vec3f* const pos           // OUT: NED position vector from ref point (Meters)
    )
 {
-   bool ok = false;
+   bool ok{};
    if (pos != nullptr) {
-      const double cosSlat = std::cos(angle::D2RCC * slat);
+      const double cosSlat{std::cos(angle::D2RCC * slat)};
       Vec3d posD;
       ok = convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, &posD);
       *pos = posD;

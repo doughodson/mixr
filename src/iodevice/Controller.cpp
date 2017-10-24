@@ -53,7 +53,7 @@ unsigned short Controller::getNumDiscreteInputPorts() const
 
 bool Controller::getDiscreteInput(bool* const value, const unsigned int bit, const unsigned int) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && bit < numDI) {
       *value = inBits[bit];
       ok = true;
@@ -68,7 +68,7 @@ unsigned short Controller::getNumAnalogInputs() const
 
 bool Controller::getAnalogInput(double* const value, const unsigned int channel) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && channel < numAI) {
       *value = inData[channel];
       ok = true;
@@ -89,7 +89,7 @@ unsigned int Controller::getDeviceIndex() const
 // Device number
 bool Controller::setDeviceIndex(const int v)
 {
-   bool ok = false;
+   bool ok {};
    if (v >= 0 && v <= 31) {
       deviceIndex = static_cast<unsigned int>(v);
       ok = true;
@@ -105,7 +105,7 @@ bool Controller::setDeviceIndex(const int v)
 // deviceIndex: device index
 bool Controller::setSlotDeviceIndex(const mixr::base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setDeviceIndex( msg->getInt() );
    }

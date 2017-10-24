@@ -265,63 +265,6 @@ public:  // Public section
    // Event handler(s)
    virtual bool onRfEmissionEvent(Emission* const);                             // Handles R/F emission events
 
-   // Slot functions
-   virtual bool setSlotType(const base::String* const msg);                     // Physical gimbal type: "mechanical" or "electronic"
-   virtual bool setSlotLocation(const base::List* const msg);                   // Relative location vector (meters) [ x y z ]
-
-   virtual bool setSlotPosition(const base::List* const msg);                   // Initial position vector (radians) [ az el roll ]
-   virtual bool setSlotPosAzimuth(const base::Angle* const msg);                // Initial azimuth position
-   virtual bool setSlotPosElevation(const base::Angle* const msg);              // Initial elevation position
-   virtual bool setSlotPosRoll(const base::Angle* const msg);                   // Initial roll position
-
-   virtual bool setSlotAzimuthLimits(const base::List* const msg);              // Azimuth limit vector (radians) [ left right ]
-   virtual bool setSlotAzimuthLimitLeft(const base::Angle* const msg);          // Left azimuth limit
-   virtual bool setSlotAzimuthLimitRight(const base::Angle* const msg);         // Right azimuth limit
-
-   virtual bool setSlotElevationLimits(const base::List* const msg);            // Elevation limit vector (radians) [ lower upper ]
-   virtual bool setSlotElevationLower(const base::Angle* const msg);            // Lower elevation limit
-   virtual bool setSlotElevationUpper(const base::Angle* const msg);            // Upper elevation limit
-
-   virtual bool setSlotRollLimits(const base::List* const msg);                 // Roll limit vector (radians) [ lower upper ]
-   virtual bool setSlotRollLimitLower(const base::Angle* const msg);            // Lower roll limit
-   virtual bool setSlotRollLimitUpper(const base::Angle* const msg);            // Upper roll limit
-
-   virtual bool setSlotMaxRates(const base::List* const msg);                   // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-   virtual bool setSlotMaxRateAzimuth(const base::Angle* const msg);            // Max "mechanical" azimuth rate (base::Angle/sec)
-   virtual bool setSlotMaxRateElevation(const base::Angle* const msg);          // Max "mechanical" elevation rate (base::Angle/sec)
-   virtual bool setSlotMaxRateRoll(const base::Angle* const msg);               // Max "mechanical" roll rate (base::Angle/sec)
-
-   virtual bool setSlotCmdPos(const base::List* const msg);                     // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosAzimuth(const base::Angle* const msg);             // Commanded azimuth position  (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosElevation(const base::Angle* const msg);           // Commanded elevation position (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosRoll(const base::Angle* const msg);                // Commanded roll position  (sets POSITION_SERVO)
-
-   virtual bool setSlotCmdRate(const base::List* const msg);                    // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-   virtual bool setSlotCmdRateAzimuth(const base::Angle* const msg);            // Commanded azimuth rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateElevation(const base::Angle* const msg);          // Commanded elevation rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateRoll(const base::Angle* const msg);               // Commanded roll rate (sets RATE_SERVO)
-
-   virtual bool setSlotTerrainOcculting(const base::Number* const msg);         // Enable target terrain occulting (default: false)
-   virtual bool setSlotCheckHorizon(const base::Number* const msg);             // Enable horizon masking check (default: true)
-
-   virtual bool setSlotPlayerTypes(const base::PairStream* const msg);          // Player of interest types (default: 0 )
-   virtual bool setSlotMaxPlayers(const base::Number* const msg);               // Max number of players of interest (default: 0)
-
-   // Max range to players of interest or zero for all (meters)
-   virtual bool setSlotMaxRange2PlayersOfInterest(const base::Distance* const msg);
-
-   // Max angle of gimbal boresight to players of interest or zero for all (rad)
-   virtual bool setSlotMaxAngle2PlayersOfInterest(const base::Angle* const msg);
-
-   // Sets the local only players of interest flag
-   virtual bool setSlotLocalPlayersOfInterestOnly(const base::Number* const msg);
-
-   // Using player of interest's world (ECEF) coordinate system
-   virtual bool setSlotUseWorldCoordinates(const base::Number* const msg);
-
-   // Use only the ownship player's heading to when transforming between body and local NED
-   virtual bool setSlotUseOwnHeadingOnly(const base::Number* const msg);
-
    static void limitVec(base::Vec2d& vec, const base::Vec2d& lim);
    static void limitVec(base::Vec3d& vec, const base::Vec3d& lim);
    static void limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul);
@@ -383,6 +326,64 @@ private:
    bool     ownHeadingOnly {true};     // Whether only the ownship heading is used by the target data block
 
    base::safe_ptr<Tdb> tdb;  // Current Target Data Block
+
+private:
+   // slot table helper methods
+   bool setSlotType(const base::String* const);                     // Physical gimbal type: "mechanical" or "electronic"
+   bool setSlotLocation(const base::List* const);                   // Relative location vector (meters) [ x y z ]
+
+   bool setSlotPosition(const base::List* const);                   // Initial position vector (radians) [ az el roll ]
+   bool setSlotPosAzimuth(const base::Angle* const);                // Initial azimuth position
+   bool setSlotPosElevation(const base::Angle* const);              // Initial elevation position
+   bool setSlotPosRoll(const base::Angle* const);                   // Initial roll position
+
+   bool setSlotAzimuthLimits(const base::List* const);              // Azimuth limit vector (radians) [ left right ]
+   bool setSlotAzimuthLimitLeft(const base::Angle* const);          // Left azimuth limit
+   bool setSlotAzimuthLimitRight(const base::Angle* const);         // Right azimuth limit
+
+   bool setSlotElevationLimits(const base::List* const);            // Elevation limit vector (radians) [ lower upper ]
+   bool setSlotElevationLower(const base::Angle* const);            // Lower elevation limit
+   bool setSlotElevationUpper(const base::Angle* const);            // Upper elevation limit
+
+   bool setSlotRollLimits(const base::List* const);                 // Roll limit vector (radians) [ lower upper ]
+   bool setSlotRollLimitLower(const base::Angle* const);            // Lower roll limit
+   bool setSlotRollLimitUpper(const base::Angle* const);            // Upper roll limit
+
+   bool setSlotMaxRates(const base::List* const);                   // Max "mechanical" rate vector (rad/sec) [ az el roll ]
+   bool setSlotMaxRateAzimuth(const base::Angle* const);            // Max "mechanical" azimuth rate (base::Angle/sec)
+   bool setSlotMaxRateElevation(const base::Angle* const);          // Max "mechanical" elevation rate (base::Angle/sec)
+   bool setSlotMaxRateRoll(const base::Angle* const);               // Max "mechanical" roll rate (base::Angle/sec)
+
+   bool setSlotCmdPos(const base::List* const);                     // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
+   bool setSlotCmdPosAzimuth(const base::Angle* const);             // Commanded azimuth position  (sets POSITION_SERVO)
+   bool setSlotCmdPosElevation(const base::Angle* const);           // Commanded elevation position (sets POSITION_SERVO)
+   bool setSlotCmdPosRoll(const base::Angle* const);                // Commanded roll position  (sets POSITION_SERVO)
+
+   bool setSlotCmdRate(const base::List* const);                    // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+   bool setSlotCmdRateAzimuth(const base::Angle* const);            // Commanded azimuth rate (sets RATE_SERVO)
+   bool setSlotCmdRateElevation(const base::Angle* const);          // Commanded elevation rate (sets RATE_SERVO)
+   bool setSlotCmdRateRoll(const base::Angle* const);               // Commanded roll rate (sets RATE_SERVO)
+
+   bool setSlotTerrainOcculting(const base::Number* const);         // Enable target terrain occulting (default: false)
+   bool setSlotCheckHorizon(const base::Number* const);             // Enable horizon masking check (default: true)
+
+   bool setSlotPlayerTypes(const base::PairStream* const);          // Player of interest types (default: 0 )
+   bool setSlotMaxPlayers(const base::Number* const);               // Max number of players of interest (default: 0)
+
+                                                                    // Max range to players of interest or zero for all (meters)
+   bool setSlotMaxRange2PlayersOfInterest(const base::Distance* const);
+
+   // Max angle of gimbal boresight to players of interest or zero for all (rad)
+   bool setSlotMaxAngle2PlayersOfInterest(const base::Angle* const);
+
+   // Sets the local only players of interest flag
+   bool setSlotLocalPlayersOfInterestOnly(const base::Number* const);
+
+   // Using player of interest's world (ECEF) coordinate system
+   bool setSlotUseWorldCoordinates(const base::Number* const);
+
+   // Use only the ownship player's heading to when transforming between body and local NED
+   bool setSlotUseOwnHeadingOnly(const base::Number* const);
 };
 
 }

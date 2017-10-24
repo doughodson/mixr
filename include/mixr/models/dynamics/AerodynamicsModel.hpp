@@ -56,22 +56,22 @@ public:
     virtual int getEngThrustAb(double* const fn, const int max) const;        // Thrust if at Full afterburner: lbs
 
     // Trim switch inputs
-    virtual void setTrimSwitchRollInput(const double rollTrim);
-    virtual void setTrimSwitchPitchInput(const double pitchTrim);
+    virtual void setTrimSwitchRollInput(const double);
+    virtual void setTrimSwitchPitchInput(const double);
     void setTrimSwitch(const double rollTrim, const double pitchTrim) {
         setTrimSwitchRollInput(rollTrim);
         setTrimSwitchPitchInput(pitchTrim);
     }
 
-    virtual void setRudderPedalInput(const double pedal);
+    virtual void setRudderPedalInput(const double);
     virtual void setFlaps(const double pos);
 
-    virtual void setGearHandleSwitch(const double sw);
-    virtual void setSpeedBrakesSwitch(const double sw);
-    virtual void setWeaponBayDoorSwitch(const double sw);
+    virtual void setGearHandleSwitch(const double);
+    virtual void setSpeedBrakesSwitch(const double);
+    virtual void setWeaponBayDoorSwitch(const double);
 
     // Sets the commanded wing sweep angle (radians)
-    virtual void setCmdWingSweepAngle(const double rad);
+    virtual void setCmdWingSweepAngle(const double);
 };
 
 }

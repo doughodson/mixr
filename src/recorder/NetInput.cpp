@@ -15,7 +15,6 @@ BEGIN_SLOTTABLE(NetInput)
    "noWait",               // 2) No wait (unblocked) I/O flag (default: false -- blocked I/O)
 END_SLOTTABLE(NetInput)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
     ON_SLOT(1, setSlotNetwork,   mixr::base::NetHandler)
     ON_SLOT(2, setSlotNoWait,    mixr::base::Number)
@@ -59,7 +58,7 @@ void NetInput::deleteData()
 //------------------------------------------------------------------------------
 bool NetInput::isNetworkEnabled() const
 {
-   bool ok = networkInitialized && netHandler->isConnected();
+   bool ok{networkInitialized && netHandler->isConnected()};
    return ok;
 }
 
@@ -69,7 +68,7 @@ bool NetInput::isNetworkEnabled() const
 //------------------------------------------------------------------------------
 bool NetInput::initNetworks()
 {
-   bool ok = false;
+   bool ok{};
    if (netHandler != nullptr) {
       ok = netHandler->initNetwork(noWaitFlag);
       networkInitialized = ok;
@@ -109,7 +108,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       // ---
       // Try to read a message into 'ibuf'
       // ---
-      unsigned int n = netHandler->recvData( ibuf, MAX_INPUT_BUFFER_SIZE );
+      unsigned int n{netHandler->recvData( ibuf, MAX_INPUT_BUFFER_SIZE )};
 
       // ---
       // If we've successfully read a message from the network
@@ -119,7 +118,7 @@ const DataRecordHandle* NetInput::readRecordImp()
          // Parse the data record
          std::string wireFormat(ibuf, n);
          auto dataRecord = new pb::DataRecord();
-         bool ok = dataRecord->ParseFromString(wireFormat);
+         bool ok{dataRecord->ParseFromString(wireFormat)};
 
          if (ok) {
             // Create a handle for the data record (it now has ownership)
@@ -152,7 +151,7 @@ bool NetInput::setSlotNetwork(mixr::base::NetHandler* const msg)
 // No wait (unblocked) I/O flag
 bool NetInput::setSlotNoWait(mixr::base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       noWaitFlag = msg->getBoolean();
       ok = true;

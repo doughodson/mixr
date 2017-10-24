@@ -68,7 +68,7 @@ void IoDevice::reset()
 
    // Reset our I/O adapters
    if (adapters != nullptr) {
-      List::Item* item = adapters->getFirstItem();
+      List::Item* item{adapters->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoAdapter*>(pair->object());
@@ -79,7 +79,7 @@ void IoDevice::reset()
 
    // Reset our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -96,7 +96,7 @@ bool IoDevice::shutdownNotification()
 {
    // Shutdown our I/O adapters
    if (adapters != nullptr) {
-      List::Item* item = adapters->getFirstItem();
+      List::Item* item{adapters->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoAdapter*>(pair->object());
@@ -107,7 +107,7 @@ bool IoDevice::shutdownNotification()
 
    // Shutdown our I/O devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -131,7 +131,7 @@ void IoDevice::processInputs(const double dt, IoData* const inData)
    // process any input adapters
    if (adapters != nullptr) {
 
-      List::Item* item = adapters->getFirstItem();
+      List::Item* item{adapters->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoAdapter*>(pair->object());
@@ -142,7 +142,7 @@ void IoDevice::processInputs(const double dt, IoData* const inData)
 
    // process any input (sub)devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -163,7 +163,7 @@ void IoDevice::processOutputs(const double dt, const IoData* const outData)
 
    // process our output (sub)devices
    if (devices != nullptr) {
-      List::Item* item = devices->getFirstItem();
+      List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IoDevice*>(pair->object());
@@ -176,7 +176,7 @@ void IoDevice::processOutputs(const double dt, const IoData* const outData)
    if (adapters != nullptr) {
 
       if (outData != nullptr) {
-         List::Item* item = adapters->getFirstItem();
+         List::Item* item{adapters->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<Pair*>(item->getValue());
             const auto p = static_cast<IoAdapter*>(pair->object());
@@ -258,20 +258,19 @@ PairStream* IoDevice::getAdapterList()
 // adapters: List of IoAdapter objects
 bool IoDevice::setSlotAdapters(PairStream* const list)
 {
-   bool ok = true;
+   bool ok{true};
 
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O adapters
-      unsigned int cnt = 0;
-      List::Item* item = list->getFirstItem();
+      unsigned int cnt{};
+      List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoAdapter));
          if (ok) {
             static_cast<IoAdapter*>(pair->object())->container(this);
-         }
-         else {
+         } else {
             std::cerr << "IoDevice::setSlotAdapters(): Item number " << cnt;
             std::cerr << " on the list is a non-IoAdapter component!" << std::endl;
          }
@@ -287,20 +286,19 @@ bool IoDevice::setSlotAdapters(PairStream* const list)
 // devices: List of IoDevice objects
 bool IoDevice::setSlotDevices(PairStream* const list)
 {
-   bool ok = true;
+   bool ok{true};
 
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O Devices
-      unsigned int cnt = 0;
-      List::Item* item = list->getFirstItem();
+      unsigned int cnt{};
+      List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
             static_cast<IoDevice*>(pair->object())->container(this);
-         }
-         else {
+         } else {
             std::cerr << "IoDevice::setSlotDevices(): Item number " << cnt;
             std::cerr << " on the list is a non-IoDevice component!" << std::endl;
          }

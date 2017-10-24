@@ -19,7 +19,7 @@ END_SLOTTABLE(SolenoidSwitch)
 
 BEGIN_SLOT_MAP(SolenoidSwitch)
     ON_SLOT(1, setSlotHoldTimer, base::Number)
-    ON_SLOT(2, setSlotEventMap, base::PairStream)
+    ON_SLOT(2, setSlotEventMap,  base::PairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(SolenoidSwitch)
@@ -246,7 +246,8 @@ void SolenoidSwitch::updateData(const double dt)
 
 
 // Hold Button -------------------------------------------------------------------------------------
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(SolenoidButton, "SolenoidButton")
+IMPLEMENT_SUBCLASS(SolenoidButton, "SolenoidButton")
+EMPTY_SLOTTABLE(SolenoidButton)
 
 BEGIN_EVENT_HANDLER(SolenoidButton)
    ON_EVENT(INPUT_LEFT_EDGE, onMouseDown)

@@ -31,18 +31,18 @@ public:
    AckCodes getAckCode() const;     // the ack code for this message
 
    // set functions
-   virtual void setSenderName(const base::String* const sName);
-   virtual void setSenderName(const char* const sName);
-   virtual void setTimeStamp(const double ts);
-   virtual void setLifeSpan(const double ls);
-   virtual void setAckCode(const AckCodes a);
+   virtual void setSenderName(const base::String* const);
+   virtual void setSenderName(const char* const);
+   virtual void setTimeStamp(const double);
+   virtual void setLifeSpan(const double);
+   virtual void setAckCode(const AckCodes);
 
    // adds a destination name to the list of intended recipients of this message
-   virtual bool addDestName(base::String* const name);
-   virtual bool addDestName(const char* const name);
+   virtual bool addDestName(base::String* const);
+   virtual bool addDestName(const char* const);
 
    // removes all destination names that fully match the value passed in as a parameter
-   virtual void removeDestName(base::String* const name);
+   virtual void removeDestName(base::String* const);
 
    // clears the list of destination names
    virtual void clearDestNames();

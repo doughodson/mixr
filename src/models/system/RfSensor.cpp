@@ -1,12 +1,10 @@
-//------------------------------------------------------------------------------
-// Classes: RfSensor, SensorMgr
-//------------------------------------------------------------------------------
+
 #include "mixr/models/system/RfSensor.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
-#include "mixr/models/system/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
@@ -24,9 +22,6 @@
 namespace mixr {
 namespace models {
 
-//==============================================================================
-// Class: RfSensor
-//==============================================================================
 IMPLEMENT_SUBCLASS(RfSensor, "RfSensor")
 
 BEGIN_SLOTTABLE(RfSensor)
@@ -78,15 +73,15 @@ void RfSensor::copyData(const RfSensor& org, const bool)
     if (org.modes != nullptr) {
         modes = org.modes->clone();
         processModes();
+    } else {
+        modes = nullptr;
     }
-    else modes = nullptr;
 
     if (org.tmName != nullptr) {
-       base::String* clone = org.tmName->clone();
+       base::String* clone{org.tmName->clone()};
        setTrackManagerName(clone);
        clone->unref();
-    }
-    else {
+    } else {
       setTrackManagerName(nullptr);
     }
 
@@ -146,10 +141,10 @@ void RfSensor::reset()
     // ---
     if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
         // We have a name of the track manager, but not the track manager itself
-        const char* name = *getTrackManagerName();
+        const char* name{*getTrackManagerName()};
 
         // Get the named track manager from the onboard computer
-        OnboardComputer* obc = getOwnship()->getOnboardComputer();
+        OnboardComputer* obc{getOwnship()->getOnboardComputer()};
         if (obc != nullptr) {
             setTrackManager( obc->getTrackManagerByName(name) );
         }
@@ -254,7 +249,7 @@ int RfSensor::getRanges(double* const rngs, const int max)
     // Do we have something to do?
     if (rngs == nullptr || max == 0 || nRanges == 0) return 0;
 
-    int n = nRanges;
+    int n{nRanges};
     if (n > max) n = max;
     for (int i = 0; i < n; i++) {
         rngs[i] = ranges[i];
@@ -335,7 +330,7 @@ bool RfSensor::setRanges(const double* const rngs, const int n)
 // Sets PRF (hertz; must be greater than 0)
 bool RfSensor::setPRF(const double v)
 {
-   bool ok = false;
+   bool ok{};
    if (v > 0) {
       prf = v;
       ok = true;
@@ -346,7 +341,7 @@ bool RfSensor::setPRF(const double v)
 // Sets the pulse width (seconds; must be greater than 0)
 bool RfSensor::setPulseWidth(const double v)
 {
-   bool ok = false;
+   bool ok{};
    if (v > 0) {
       pulseWidth = v;
       ok = true;
@@ -357,7 +352,7 @@ bool RfSensor::setPulseWidth(const double v)
 // Sets the beam width (radians; must be greater than 0)
 bool RfSensor::setBeamWidth(const double v)
 {
-   bool ok = false;
+   bool ok{};
    if (v > 0) {
       beamWidth = v;
       ok = true;
@@ -375,7 +370,7 @@ bool RfSensor::setTypeId(const char* const str)
 // Sets the current range (nm; must be greater than or equal 0)
 bool RfSensor::setRange(const double v)
 {
-   bool ok = false;
+   bool ok{};
    if (v >= 0) {
       rng = v;
       ok = true;
@@ -420,10 +415,10 @@ bool RfSensor::setSlotModeSingle(RfSensor* const obj)
 //------------------------------------------------------------------------------
 bool RfSensor::setSlotRanges(base::List* const list)
 {
-    bool ok = false;
+    bool ok{};
     if (list != nullptr) {
-        double rngs[100];
-        int n = list->getNumberList(rngs,100);
+        double rngs[100]{};
+        const unsigned int n{list->getNumberList(rngs,100)};
         ok = setRanges(rngs, n);
     }
     return ok;
@@ -434,7 +429,7 @@ bool RfSensor::setSlotRanges(base::List* const list)
 //------------------------------------------------------------------------------
 bool RfSensor::setSlotInitRangeIdx(base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
         ok = setInitRngIdx(num->getInt());
     }
@@ -446,7 +441,7 @@ bool RfSensor::setSlotInitRangeIdx(base::Number* const num)
 //------------------------------------------------------------------------------
 bool RfSensor::setInitRngIdx(const int idx)
 {
-    bool ok = false;
+    bool ok{};
     if (idx > 0) {
         initRngIdx = idx;
         ok = true;
@@ -461,10 +456,10 @@ bool RfSensor::setInitRngIdx(const int idx)
 // Sets PRF as a base::Frequency
 bool RfSensor::setSlotPrf(const base::Frequency* const msg)
 {
-   bool ok = false;
+   bool ok{};
 
    if (msg != nullptr) {
-      const double x = base::Hertz::convertStatic(*msg);
+      const double x{base::Hertz::convertStatic(*msg)};
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -477,11 +472,11 @@ bool RfSensor::setSlotPrf(const base::Frequency* const msg)
 // Sets PRF in hertz
 bool RfSensor::setSlotPrf(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
 
    if (msg != nullptr) {
       // Standard base::Number
-      const double x = msg->getReal();
+      const double x{msg->getReal()};
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -498,10 +493,10 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 // Sets pulse width using base::Time
 bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
 {
-   bool ok {};
+   bool ok{};
 
    if (msg != nullptr) {
-      const double x = base::Seconds::convertStatic( *msg );
+      const double x{base::Seconds::convertStatic( *msg )};
       ok = setPulseWidth( x );
       if (!ok) {
          std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
@@ -514,7 +509,7 @@ bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
 // Sets pulse width in seconds
 bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
 
    if (msg != nullptr) {
       ok = setPulseWidth( msg->getReal() );
@@ -533,10 +528,10 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 // Sets beam width as an base::Angle
 bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
 {
-   bool ok {};
+   bool ok{};
 
    if (msg != nullptr) {
-      const double x = static_cast<double>(base::Radians::convertStatic( *msg ));
+      const double x{static_cast<double>(base::Radians::convertStatic( *msg ))};
       ok = setBeamWidth( x );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
@@ -549,7 +544,7 @@ bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
 // Sets beam width in radians
 bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
 
    if (msg != nullptr) {
       ok = setBeamWidth( msg->getReal() );
@@ -565,7 +560,7 @@ bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
 // Sets the type ID
 bool RfSensor::setSlotTypeId(const base::String* const msg)
 {
-   bool ok {};
+   bool ok{};
 
    if (msg != nullptr) {
       ok = setTypeId( msg->getString() );
@@ -577,7 +572,7 @@ bool RfSensor::setSlotTypeId(const base::String* const msg)
 // Sets sync transmitter with antenna scan flag
 bool RfSensor::setSlotSyncXmitWithScan(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       syncXmitWithScan = msg->getBoolean();
       ok = true;
@@ -662,11 +657,11 @@ bool RfSensor::setSlotTrackManagerName(base::String* const v)
 //------------------------------------------------------------------------------
 bool RfSensor::processModes()
 {
-    bool ok {true};
+    bool ok{true};
     if (modes != nullptr) {
         // Make sure we have only Mode and tell all of the objects
         // that we are their master mode.
-        const base::List::Item* item = modes->getFirstItem();
+        const base::List::Item* item{modes->getFirstItem()};
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             item = item->getNext();
@@ -675,8 +670,7 @@ bool RfSensor::processModes()
                 // It MUST be of type Mode
                 m->setMasterMode(this);
                 m->container(this);
-            }
-            else {
+            } else {
                 ok = false;
                 std::cerr << "RfSensor::processModes(): object is not a RfSensor!" << std::endl;
             }
@@ -690,7 +684,7 @@ bool RfSensor::processModes()
 //------------------------------------------------------------------------------
 bool RfSensor::incRange()
 {
-    bool ok {};
+    bool ok{};
     if (rngIdx < nRanges) {
         rngIdx++;
         setRange( ranges[rngIdx-1] );
@@ -704,26 +698,13 @@ bool RfSensor::incRange()
 //------------------------------------------------------------------------------
 bool RfSensor::decRange()
 {
-    bool ok {};
+    bool ok{};
     if (rngIdx > 1) {
         rngIdx--;
         setRange( ranges[rngIdx-1] );
         ok = true;
     }
     return ok;
-}
-
-//==============================================================================
-// Class: SensorMgr
-//==============================================================================
-IMPLEMENT_SUBCLASS(SensorMgr, "SensorMgr")
-EMPTY_SLOTTABLE(SensorMgr)
-EMPTY_COPYDATA(SensorMgr)
-EMPTY_DELETEDATA(SensorMgr)
-
-SensorMgr::SensorMgr()
-{
-    STANDARD_CONSTRUCTOR()
 }
 
 }

@@ -34,14 +34,13 @@
 #include <cstdint>
 
 namespace mixr {
-
 namespace dis {
 
 //-----------------------------------------------
 // EntityStatePDU (1152 + 128*n bits)
 //-----------------------------------------------
-struct EntityStatePDU {
-
+struct EntityStatePDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  entityID {};
    uint8_t              forceID {};
@@ -66,9 +65,9 @@ struct EntityStatePDU {
    // Note: 'idx' is zero based, so an idx == 1 will return the second VpArticulatedPart structure
    VpArticulatedPart* getArticulationParameter(const unsigned int idx)
    {
-      VpArticulatedPart* ap = nullptr;
+      VpArticulatedPart* ap{};
       if (idx < numberOfArticulationParameters) {
-         uint8_t *p = reinterpret_cast<uint8_t *>(this) + sizeof(*this);
+         uint8_t* p{reinterpret_cast<uint8_t *>(this) + sizeof(*this)};
 
          // First Emission system data is just after this structure
          ap = reinterpret_cast<VpArticulatedPart*>(p);
@@ -85,11 +84,11 @@ struct EntityStatePDU {
 
    const VpArticulatedPart* getArticulationParameter(const unsigned int idx) const
    {
-      const VpArticulatedPart* ap = nullptr;
+      const VpArticulatedPart* ap{};
       if (idx < numberOfArticulationParameters) {
 
          // First articulation parameter is just after this structure
-         auto p = reinterpret_cast<const uint8_t*>(this) + sizeof(*this);
+         const uint8_t* p = reinterpret_cast<const uint8_t*>(this) + sizeof(*this);
          ap = reinterpret_cast<const VpArticulatedPart*>(p);
 
          for (unsigned int i = 0; i < idx; i++) {
@@ -118,7 +117,7 @@ struct EntityStatePDU {
 
       // then swap the articulation parameters
       for(int i = 0; i < numberOfArticulationParameters; i++) {
-         VpArticulatedPart* ap = getArticulationParameter(i);
+         VpArticulatedPart* ap{getArticulationParameter(i)};
          if (ap != nullptr) ap->swapBytes();
       }
    };
@@ -162,7 +161,7 @@ struct EntityStatePDU {
       std::cout << entityMarking;
       std::cout << "Capabilities (" << capabilites << ")" << std::endl;
       for (unsigned int i = 0; i < numberOfArticulationParameters; i++) {
-         const VpArticulatedPart* ap = getArticulationParameter(i);
+         const VpArticulatedPart* ap{getArticulationParameter(i)};
          std::cout << "Articulation Parameter(" << i << ") = " << *ap << std::endl;
       }
       std::cout.flush();
@@ -173,8 +172,8 @@ struct EntityStatePDU {
 //-----------------------------------------------
 // CollisionPDU (480 bits)
 //-----------------------------------------------
-struct CollisionPDU {
-
+struct CollisionPDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  issuingEntityID {};
    EntityIdentifierDIS  collidingEntityID {};
@@ -203,8 +202,8 @@ struct CollisionPDU {
 //-----------------------------------------------
 // Fire PDU (768 bits)
 //-----------------------------------------------
-struct FirePDU {
-
+struct FirePDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  firingEntityID {};
    EntityIdentifierDIS  targetEntityID {};
@@ -251,8 +250,8 @@ struct FirePDU {
 //-----------------------------------------------
 // Detonation PDU
 //-----------------------------------------------
-struct DetonationPDU {
-
+struct DetonationPDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  firingEntityID {};
    EntityIdentifierDIS  targetEntityID {};
@@ -301,8 +300,8 @@ struct DetonationPDU {
 //-----------------------------------
 // Start/Resume PDU (352 bits)
 //-----------------------------------
-struct StartPDU{
-
+struct StartPDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  originatingID {};
    EntityIdentifierDIS  receivingID {};
@@ -335,8 +334,8 @@ struct StartPDU{
 // Stop/Freeze PDU (320 bits)
 //-----------------------------------
 
-struct StopPDU{
-
+struct StopPDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  originatingID {};
    EntityIdentifierDIS  receivingID {};
@@ -371,8 +370,8 @@ struct StopPDU{
 //-----------------------------------
 // Acknowledge PDU
 //-----------------------------------
-struct AcknowledgePDU{
-
+struct AcknowledgePDU
+{
    PDUHeader              header {};
    EntityIdentifierDIS    originatingID {};
    EntityIdentifierDIS    receivingID {};
@@ -405,8 +404,8 @@ struct AcknowledgePDU{
 //-----------------------------------
 // Action Request PDU
 //-----------------------------------
-struct ActionRequestPDU {
-
+struct ActionRequestPDU
+{
    PDUHeader            header {};
    EntityIdentifierDIS  originatingID {};
    EntityIdentifierDIS  receivingID {};
@@ -416,26 +415,16 @@ struct ActionRequestPDU {
    uint32_t             numVariableRecords {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(actionID)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(actionID) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(actionID)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(actionID) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
 
@@ -465,8 +454,8 @@ struct ActionRequestPDU {
 //-----------------------------------------------
 // Data Query PDU
 //-----------------------------------------------
-struct DataQueryPDU{
-
+struct DataQueryPDU
+{
    PDUHeader              header {};
    EntityIdentifierDIS    originatingID {};
    EntityIdentifierDIS    receivingID {};
@@ -477,27 +466,17 @@ struct DataQueryPDU{
 
    // Returns a pointer to the start of the fixed/variable records
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(timeInterval)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(timeInterval) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
 
    // Returns a const pointer to the start of the fixed/variable records
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(timeInterval)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(timeInterval) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
 
@@ -527,8 +506,8 @@ struct DataQueryPDU{
 //-----------------------------------------------
 // Data PDU
 //-----------------------------------------------
-struct DataPDU{
-
+struct DataPDU
+{
    PDUHeader              header {};
    EntityIdentifierDIS    originatingID {};
    EntityIdentifierDIS    receivingID {};
@@ -538,25 +517,15 @@ struct DataPDU{
    uint32_t               numVariableRecords {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(padding)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(padding) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + sizeof(requestID)
-         + sizeof(padding)
-         + sizeof(numFixedRecords)
-         + sizeof(numVariableRecords);
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + sizeof(requestID)
+         + sizeof(padding) + sizeof(numFixedRecords) + sizeof(numVariableRecords)};
       return &p[pcount];
    };
 
@@ -585,8 +554,8 @@ struct DataPDU{
 //-----------------------------------------------
 // Comment PDU
 //-----------------------------------------------
-struct CommentPDU{
-
+struct CommentPDU
+{
    PDUHeader              header {};
    EntityIdentifierDIS    originatingID {};
    EntityIdentifierDIS    receivingID {};
@@ -594,30 +563,24 @@ struct CommentPDU{
    uint32_t               numVariableRecords {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 8;
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + 8};
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 8;
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID) + 8};
       return &p[pcount];
    };
 
 
    FixedDatum* getFixedDatum(const unsigned int index) {
-      if (index >= numFixedRecords) return 0;
+      if (index >= numFixedRecords) return nullptr;
 
-      uint8_t* ptr = getData();
-      FixedDatum* datum = reinterpret_cast<FixedDatum*>(ptr);
-      for(unsigned int i = 0; i < index; i++) {
+      uint8_t* ptr{getData()};
+      FixedDatum* datum{reinterpret_cast<FixedDatum*>(ptr)};
+      for (unsigned int i = 0; i < index; i++) {
          datum++;
       }
 
@@ -625,25 +588,25 @@ struct CommentPDU{
    };
 
    void swapFixedDatum() {
-      FixedDatum *datum = 0;
-      for(unsigned int  i= 0; i < numFixedRecords; i++) {
+      FixedDatum* datum{};
+      for (unsigned int  i= 0; i < numFixedRecords; i++) {
          datum = getFixedDatum(i);
          datum->swapBytes();
       }
    };
 
    VariableDatum* getVariableDatum(const unsigned int index) {
-      if (index >= numVariableRecords) return 0;
+      if (index >= numVariableRecords) return nullptr;
 
-      uint8_t *ptr = getData();
+      uint8_t* ptr{getData()};
       if (numFixedRecords > 0) {
-         FixedDatum *datum = getFixedDatum(numFixedRecords-1);
+         FixedDatum* datum{getFixedDatum(numFixedRecords-1)};
          ptr = reinterpret_cast<uint8_t*>(datum);
          ptr += sizeof(FixedDatum);
       }
 
-      VariableDatum *vdatum = (VariableDatum *)ptr;
-      for(unsigned int i = 0;i < index;i++) {
+      VariableDatum* vdatum{reinterpret_cast<VariableDatum*>(ptr)};
+      for (unsigned int i = 0;i < index;i++) {
          ptr += vdatum->getSize();
          vdatum = reinterpret_cast<VariableDatum*>(ptr);
       }
@@ -652,8 +615,8 @@ struct CommentPDU{
    };
 
    void swapVariableDatum() {
-      VariableDatum *datum = 0;
-      for(unsigned int i = 0; i < numVariableRecords; i++) {
+      VariableDatum* datum{};
+      for (unsigned int i = 0; i < numVariableRecords; i++) {
          datum = getVariableDatum(i);
          datum->swapBytes();
       }
@@ -697,8 +660,8 @@ struct CommentPDU{
 //-----------------------------------------------
 // 7.6.2 -- Electromagnetic Emission PDU
 //-----------------------------------------------
-struct ElectromagneticEmissionPDU {
-
+struct ElectromagneticEmissionPDU
+{
    // (IST-CF-03-01, May 5, 2003)
    enum { STATE_UPDATE = 0, CHANGED_DATA_UPDATE = 1 };
 
@@ -715,9 +678,9 @@ struct ElectromagneticEmissionPDU {
    //    'numberOfSystems' member variable, need to be correct for this to work)
    // Note: 'idx' is zero based, so a idx == 1 will return the second EmissionSystem structure
    EmissionSystem* getEmissionSystem(const unsigned int idx) {
-      EmissionSystem* es = 0;
+      EmissionSystem* es{};
       if (idx < numberOfSystems) {
-         uint8_t *p = reinterpret_cast<uint8_t*>(this) + sizeof(*this);
+         uint8_t* p{reinterpret_cast<uint8_t*>(this) + sizeof(*this)};
 
          // First Emission system data is just after this structure
          es = reinterpret_cast<EmissionSystem*>(p);
@@ -732,9 +695,9 @@ struct ElectromagneticEmissionPDU {
       return es;
    }
    const EmissionSystem* getEmissionSystem(const unsigned int idx) const {
-      const EmissionSystem* es = 0;
+      const EmissionSystem* es{};
       if (idx < numberOfSystems) {
-         auto p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
+         uint8_t* p{const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this)};
 
          // First Emission system data is just after this structure
          es = reinterpret_cast<const EmissionSystem*>(p);
@@ -758,7 +721,7 @@ struct ElectromagneticEmissionPDU {
 
       // then swap emission data
       for(unsigned int i = 0; i < numberOfSystems; i++) {
-         EmissionSystem* em = getEmissionSystem(i);
+         EmissionSystem* em{getEmissionSystem(i)};
          if (em != 0) em->swapBytes();
       }
    }
@@ -787,8 +750,8 @@ struct ElectromagneticEmissionPDU {
 //-----------------------------------------------
 // 7.6.3 -- Designator PDU
 //-----------------------------------------------
-struct DesignatorPDU {
-
+struct DesignatorPDU
+{
    PDUHeader            header {};                 // PDU Header
    EntityIdentifierDIS  designatingEntityID {};    // Entity that is positioning the designator
    uint16_t             codeName {};               // code name for the designation system
@@ -834,14 +797,11 @@ struct DesignatorPDU {
    };
 };
 
-
-
 //-----------------------------------------------
 // IFF/ATC/NAVAIDS PDU
 //-----------------------------------------------
 struct IffAtcNavaidsPDU
 {
-
    // Layer 1 -- basic data
    PDUHeader            header {};
    EntityIdentifierDIS  emittingEntityID {};
@@ -878,8 +838,8 @@ struct IffAtcNavaidsPDU
 //-----------------------------------------------
 // Transmitter PDU
 //-----------------------------------------------
-struct TransmitterPDU {
-
+struct TransmitterPDU
+{
    PDUHeader            header {};                 // PDU Header
    EntityIdentifierDIS  radioRefID {};             // Entity that owns these systems
    uint16_t             radioID {};                // Radio ID (unique to entity)
@@ -932,14 +892,14 @@ struct TransmitterPDU {
    };
 
    uint8_t* getModulationData() {
-      uint8_t* p = reinterpret_cast<uint8_t*>(this);
-      std::size_t offset = sizeof(TransmitterPDU);
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      std::size_t offset{sizeof(TransmitterPDU)};
       return &p[offset];
    };
 
    const uint8_t* getModulationData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      std::size_t offset = sizeof(TransmitterPDU);
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      std::size_t offset{sizeof(TransmitterPDU)};
       return &p[offset];
    };
 
@@ -970,7 +930,6 @@ struct TransmitterPDU {
       std::cout << "Length of Modulation Parameters: " << lengthOfModulationParameters << std::endl;
       std::cout << "--------------------end data-----------------" << std::endl;
    };
-
 };
 
 
@@ -989,14 +948,14 @@ struct SignalPDU {
    uint16_t            samples {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(radioRefID) + 14};
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader) + sizeof(radioRefID) + 14;
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(radioRefID) + 14};
       return &p[pcount];
    };
 
@@ -1023,9 +982,9 @@ struct SignalPDU {
       std::cout << "samples: ( " << samples << " )" << std::endl;
       std::cout << "Data:" << std::endl;
 
-      unsigned int count = 0;
+      unsigned int count{};
 
-      const uint8_t* p = getData();
+      const uint8_t* p{getData()};
 
       std::cout << std::hex;
 
@@ -1038,8 +997,7 @@ struct SignalPDU {
          if (count >= 16) {
             std::cout << std::endl;
             count = 0;
-         }
-         else {
+         } else {
             count++;
          }
       }
@@ -1053,8 +1011,8 @@ struct SignalPDU {
 //-----------------------------------
 // Action Request-R PDU
 //-----------------------------------
-struct ActionRequestPDU_R {
-
+struct ActionRequestPDU_R
+{
    PDUHeader            header {};
    EntityIdentifierDIS  originatingID {};
    EntityIdentifierDIS  receivingID {};
@@ -1068,22 +1026,18 @@ struct ActionRequestPDU_R {
    uint32_t             numVariableRecords {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 1 + 3 //reliabilityService and padding
-         + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
+      uint8_t* p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID)
+         + 1 + 3  // reliabilityService and padding
+         + 16};   // requestid, actionid, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 1 + 3 //reliabilityService and padding
-         + 16;   //requestid, actionid, numfixedrecords, numvariablerecords
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID)
+         + 1 + 3   // reliabilityService and padding
+         + 16};    // requestid, actionid, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
 
@@ -1114,8 +1068,8 @@ struct ActionRequestPDU_R {
 //-----------------------------------
 // Action Response PDU
 //-----------------------------------
-struct ActionResponsePDU_R {
-
+struct ActionResponsePDU_R
+{
    PDUHeader                 header {};
    EntityIdentifierDIS       originatingID {};
    EntityIdentifierDIS       receivingID {};
@@ -1125,20 +1079,16 @@ struct ActionResponsePDU_R {
    uint32_t                  numVariableRecords {};
 
    uint8_t* getData() {
-      uint8_t *p = reinterpret_cast<uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 16;  //requestid, responseStatus, numfixedrecords, numvariablerecords
+      uint8_t *p{reinterpret_cast<uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID)
+         + 16};  // requestid, responseStatus, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
 
    const uint8_t* getData() const {
-      auto p = reinterpret_cast<const uint8_t*>(this);
-      int pcount = sizeof(PDUHeader)
-         + sizeof(originatingID)
-         + sizeof(receivingID)
-         + 16;  //requestid, responseStatus, numfixedrecords, numvariablerecords
+      const uint8_t* p{reinterpret_cast<const uint8_t*>(this)};
+      int pcount{sizeof(PDUHeader) + sizeof(originatingID) + sizeof(receivingID)
+         + 16};  // requestid, responseStatus, numfixedrecords, numvariablerecords
       return &p[pcount];
    };
 

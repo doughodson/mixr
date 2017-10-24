@@ -33,8 +33,8 @@ class IrSeeker : public ScanGimbal
 public:
    IrSeeker();
 
-   virtual void irRequestSignature(IrQueryMsg* const irQuery);
-   virtual bool irQueryReturnEvent(IrQueryMsg* const irQuery);
+   virtual void irRequestSignature(IrQueryMsg* const);
+   virtual bool irQueryReturnEvent(IrQueryMsg* const);
 
    // System limits
    int getMaxQueries() const                 { return MAX_QUERIES; }
@@ -62,7 +62,7 @@ protected:
    mutable long inUseQueryLock {};                               // Semaphore to protect 'inUseQueryQueue'
 
 private:
-   static const int MAX_QUERIES = 10000;   // Max size of queues and arrays
+   static const int MAX_QUERIES{10000};                          // Max size of queues and arrays
 };
 
 #ifdef USE_TDBIR

@@ -39,7 +39,7 @@ void SyncTask::deleteData()
 //-----------------------------------------------------------------------------
 bool SyncTask::configThread()
 {
-   bool ok = BaseClass::configThread();
+   bool ok{BaseClass::configThread()};
 
    // Create the signals
    if (ok) ok = createSignals();
@@ -56,10 +56,10 @@ bool SyncTask::configThread()
 //-----------------------------------------------------------------------------
 unsigned long SyncTask::mainThreadFunc()
 {
-   unsigned long rtn = 0;
+   unsigned long rtn{};
 
    // Configure this thread
-   bool ok = configThread();
+   bool ok{configThread()};
 
    if ( getParent()->isMessageEnabled(MSG_INFO) ) {
       std::cout << "SyncTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
@@ -98,4 +98,3 @@ bool SyncTask::terminate()
 
 }
 }
-

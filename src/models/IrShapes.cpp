@@ -29,7 +29,7 @@ BEGIN_SLOTTABLE(IrShape)
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-   ON_SLOT(1,setSlotIrShapeArea,base::Number)
+   ON_SLOT(1, setSlotIrShapeArea, base::Number)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -47,13 +47,12 @@ void IrShape::copyData(const IrShape& org, const bool)
 
 bool IrShape::setSlotIrShapeArea(const mixr::base::Number* const num)
 {
-   double value = 0.0;
+   double value{};
    const auto a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
       value = static_cast<double>(sm.convert(*a));
-   }
-   else if (num != nullptr) {
+   } else if (num != nullptr) {
       value = num->getReal();
    }
    area = value;
@@ -67,9 +66,9 @@ double IrShape::getArea()
 
 double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   double angleOffBoresight = msg->getAngleOffBoresight();
+   double angleOffBoresight{msg->getAngleOffBoresight()};
 
-   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
 
    if (angleOffBoresight > maxAngle) return 0;
 
@@ -88,7 +87,7 @@ BEGIN_SLOTTABLE(IrSphere)
 END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
-   ON_SLOT(1,setSlotIrSphereRadius,base::Number)
+   ON_SLOT(1, setSlotIrSphereRadius, base::Number)
 END_SLOT_MAP()
 
 IrSphere::IrSphere()
@@ -104,14 +103,13 @@ void IrSphere::copyData(const IrSphere& org, const bool)
 
 bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
 {
-   double value = 0.0;
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
-   }
-   else if (s != nullptr) {
+   } else if (s != nullptr) {
       value = s->getReal();
    }
    radius = value;
@@ -138,9 +136,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-   ON_SLOT(1,setSlotIrBoxX,base::Number)
-   ON_SLOT(2,setSlotIrBoxY,base::Number)
-   ON_SLOT(3,setSlotIrBoxZ,base::Number)
+   ON_SLOT(1, setSlotIrBoxX, base::Number)
+   ON_SLOT(2, setSlotIrBoxY, base::Number)
+   ON_SLOT(3, setSlotIrBoxZ, base::Number)
 END_SLOT_MAP()
 
 IrBox::IrBox()
@@ -162,14 +160,13 @@ void IrBox::deleteData()
 
 bool IrBox::setSlotIrBoxX(const mixr::base::Number* const s)
 {
-   double value = 0.0;
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
-   }
-   else if (s != nullptr) {
+   } else if (s != nullptr) {
       value = s->getReal();
    }
    x = value;
@@ -178,14 +175,13 @@ bool IrBox::setSlotIrBoxX(const mixr::base::Number* const s)
 
 bool IrBox::setSlotIrBoxY(const mixr::base::Number* const s)
 {
-   double value = 0.0;
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
-   }
-   else if (s != nullptr) {
+   } else if (s != nullptr) {
        value = s->getReal();
    }
    y = value;
@@ -194,14 +190,13 @@ bool IrBox::setSlotIrBoxY(const mixr::base::Number* const s)
 
 bool IrBox::setSlotIrBoxZ(const mixr::base::Number* const s)
 {
-   double value = 0.0;
+   double value{};
 
    const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
-   }
-   else if (s != nullptr) {
+   } else if (s != nullptr) {
        value = s->getReal();
    }
    z = value;
@@ -215,13 +210,13 @@ double IrBox::getArea()
 
 double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   double area = 0.0;
+   double area{};
 #if 1
    //retrieve the angle off of the gimbal boresight
-   const double angleOffBoresight = msg->getAngleOffBoresight();
+   const double angleOffBoresight{msg->getAngleOffBoresight()};
 
    //retrieve the planar angle of the IFOV of the IR sensor
-   const double maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   const double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
 
    //If the angle to the target is outside the IFOV, then return an area of 0.
    //This will cause the target to be discarded from further IR signature processing.
@@ -233,7 +228,7 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
 
    //Calculate the projected area of the box.
-   const base::Vec3d targetAoiVector = msg->getAoiVector();
+   const base::Vec3d targetAoiVector{msg->getAoiVector()};
 
    // front/back of the box to the sensor
    // x, z are members of this object corresponding to width and height.
@@ -252,44 +247,43 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 #else
    double angleOffBoresight = msg->getAngleOffBoresight();
 
-   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
 
    if (angleOffBoresight > maxAngle)
       return area;
    else {
 
-   const Player* sensorPlatform = msg->getOwnship();
-   const Player* target = msg->getTarget();
-   base::Vec3d targetVelocityVector = target->getVelocity();
-   base::Vec3d targetPosition = target->getPosition();
-   base::Vec3d sensorPosition = sensorPlatform->getPosition();
-   base::Vec3d directionToSensor =  sensorPosition - targetPosition;
+   const Player* sensorPlatform{msg->getOwnship()};
+   const Player* target{msg->getTarget()};
+   base::Vec3d targetVelocityVector{target->getVelocity()};
+   base::Vec3d targetPosition{target->getPosition()};
+   base::Vec3d sensorPosition{sensorPlatform->getPosition()};
+   base::Vec3d directionToSensor{sensorPosition - targetPosition};
    base::Vec3d normalizedDirectionToSensor = directionToSensor;
    normalizedDirectionToSensor.normalize();
-   base::Vec3d normalizedTargetVelocityVector = targetVelocityVector;
+   base::Vec3d normalizedTargetVelocityVector{targetVelocityVector};
    normalizedTargetVelocityVector.normalize();
    base::Vec3d targetXVector;
    targetXVector[0] = normalizedTargetVelocityVector[0]; // x
-   double frontToSensor = targetXVector * normalizedDirectionToSensor;
+   double frontToSensor{targetXVector * normalizedDirectionToSensor};
    if (frontToSensor < 0) frontToSensor = -frontToSensor;
       area += frontToSensor * x * z; // x, z are members of this object corresponding to
                                      // width and height.
 
    base::Vec3d targetYVector;
    targetYVector[1] = normalizedTargetVelocityVector[1]; // y
-   double sideToSensor = targetYVector * normalizedDirectionToSensor;
+   double sideToSensor{targetYVector * normalizedDirectionToSensor};
    if (sideToSensor < 0) sideToSensor = -sideToSensor;
       area += sideToSensor * y * z; // y,z are members of this object corresponding to
                                     // length and height.
 
    base::Vec3d targetZVector;
    targetZVector[2] = normalizedTargetVelocityVector[2]; // y
-   double topToSensor = targetZVector * normalizedDirectionToSensor;
+   double topToSensor{targetZVector * normalizedDirectionToSensor};
    if (topToSensor < 0) topToSensor = -topToSensor;
       area += topToSensor * x * y; // x,y is a member of this object corresponding to
                                    // width and length.
    return area;
-}
 #endif
 
 }

@@ -457,7 +457,7 @@ private:  // Ntm related private
    std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes {};  // Table of pointers to output entity type mappers; Ntm objects
    unsigned int nOutputEntityTypes {};             // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
 
-protected:
+private:
    // slot table helper methods
    virtual bool setSlotNetworkID(const base::Number* const);                 // Sets the network ID
    virtual bool setSlotFederateName(const base::String* const);              // Sets our federate name

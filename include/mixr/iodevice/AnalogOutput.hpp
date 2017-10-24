@@ -58,22 +58,23 @@ public:
    virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
    virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
-protected:
-   // Slot functions
-   virtual bool setSlotLocation(const base::Number* const);
-   virtual bool setSlotChannel(const base::Number* const);
-   virtual bool setSlotValue(const base::Number* const);
-   virtual bool setSlotOffset(const base::Number* const);
-   virtual bool setSlotGain(const base::Number* const);
-
 private:
-   bool devEnb {};               // Device enabled
+   bool devEnb {};                // Device enabled
    unsigned int location {};      // IoData analog output channel number
    unsigned int channel {};       // Analog channel number
    double value {};               // Initial value
    double offset {};              // Offset:  value = gain * (vin - offset)
    double gain {1.0};             // Gain:    value = gain * (vin - offset)
    const base::Table1* table {};  // Shaping table
+
+private:
+   // slot table helper methods
+   bool setSlotLocation(const base::Number* const);
+   bool setSlotChannel(const base::Number* const);
+   bool setSlotValue(const base::Number* const);
+   bool setSlotOffset(const base::Number* const);
+   bool setSlotGain(const base::Number* const);
+   bool setSlotTable(const base::Table1* const x)           {return setTable(x);}
 };
 
 }

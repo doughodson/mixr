@@ -165,7 +165,7 @@ void Track::ownshipDynamics(const double gtrk, const base::Vec3d velOS, const ba
 //------------------------------------------------------------------------------
 bool Track::getLatLonPosition(double* const lat, double* const lon) const
 {
-   bool ok = false;
+   bool ok{};
    if (llValid && lat != nullptr && lon != nullptr) {
       *lat = latitude;
       *lon = longitude;
@@ -253,7 +253,7 @@ bool Track::setPosition(const base::Vec3d& p)
    pos = p;
 
    // compute ranges
-   const double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
+   const double gndRng2{pos.x()*pos.x() + pos.y()*pos.y()};
    gndRng = std::sqrt(gndRng2);
    rng = std::sqrt(gndRng2 +  pos.z()*pos.z());
 
@@ -297,14 +297,14 @@ bool Track::setVelocity(const base::Vec3d v)
    vel = v;
 
    // Total velocity (NED) (m/s)
-   base::Vec3d totalVel = vel + osVel;
+   base::Vec3d totalVel{vel + osVel};
 
    gndSpd = std::sqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
    gndTrk = std::atan2(totalVel[1], totalVel[0]);
    relGndTrk = base::angle::aepcdRad(gndTrk - osGndTrk);
 
-   double tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
-   double tmp2 = pos[0] * totalVel[0] + pos[1] * totalVel[1];
+   const double tmp1{pos[1] * totalVel[0] - pos[0] * totalVel[1]};
+   const double tmp2{pos[0] * totalVel[0] + pos[1] * totalVel[1]};
    aa = std::atan2(-tmp1,tmp2);
 
    return true;
@@ -418,9 +418,9 @@ bool RfTrack::setSignal(const double snDbl, const Emission* const em)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    double sum = 0.0;
-    double avg = 0.0;
-    double maxs = 0.0;
+    double sum{};
+    double avg{};
+    double maxs{};
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
@@ -522,9 +522,9 @@ bool IrTrack::setSignal(const double snDbl, const IrQueryMsg* const q)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    double sum = 0.0;
-    double avg = 0.0;
-    double maxs = 0.0;
+    double sum{};
+    double avg{};
+    double maxs{};
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
@@ -545,7 +545,7 @@ bool IrTrack::setPosition(const base::Vec3d& p)
    pos = p;
 
    // compute ranges
-   double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
+   double gndRng2{pos.x()*pos.x() + pos.y()*pos.y()};
    gndRng = std::sqrt(gndRng2);
    rng = std::sqrt(gndRng2 +  pos.z()*pos.z());
 

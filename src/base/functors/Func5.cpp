@@ -35,11 +35,9 @@ bool Func5::setSlotLfiTable(const Table* const msg)
    bool ok {};
    if (msg == nullptr) {
       ok = BaseClass::setSlotLfiTable(nullptr);
-   }
-   else if ( msg->isClassType(typeid(Table5)) ) {
+   } else if ( msg->isClassType(typeid(Table5)) ) {
       ok = BaseClass::setSlotLfiTable(msg);  // We have a 5-D table.
-   }
-   else if (isMessageEnabled(MSG_ERROR)) {
+   } else if (isMessageEnabled(MSG_ERROR)) {
       std::cerr << "Func5::setSlotLfiTable(): ERROR -- table must use a Table5 or derived class" << std::endl;
    }
    return ok;

@@ -8,7 +8,6 @@
 
 namespace mixr {
 namespace rpf {
-
 class CadrgFrameEntry;
 
 //------------------------------------------------------------------------------
@@ -47,10 +46,10 @@ public:
     const CadrgClut::Rgb& getColor(unsigned int index) const;
 
 private:
-    enum { CADRG_COLORS = 217 };            // Max CADRG colors
-    static const int MAXRECLEN = 500;       // Max record length
-    static const int MAXOFFSETRECS = 10;    // Max # of color/gray offset records: usually 3
-    static const int MAXCCRECS = 5;         // Max # of color converter records: usually 2
+    enum { CADRG_COLORS = 217 };             // Max CADRG colors
+    static const int MAXRECLEN      {500};   // Max record length
+    static const int MAXOFFSETRECS  {10};    // Max # of color/gray offset records: usually 3
+    static const int MAXCCRECS      {5};     // Max # of color converter records: usually 2
 
     std::array<unsigned int, CADRG_COLORS> cct {};  // Holds the list of RGB colors
 

@@ -43,6 +43,10 @@ protected:
 
 private:
    const base::String* name {};    // Player name
+
+private:
+   // slot table helper methods
+   bool setSlotName(const base::String* const x)           { return setName(x); }
 };
 
 }

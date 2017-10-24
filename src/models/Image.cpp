@@ -43,11 +43,11 @@ void Image::deleteData()
 //------------------------------------------------------------------------------
 bool Image::setImageData(const unsigned char* const image, const unsigned int w, const unsigned int h, const unsigned int d)
 {
-    bool ok = true;     // Assume all will go well.
+    bool ok{true};     // Assume all will go well.
 
     // Allocate space for and transfer the new image
-    unsigned int s = (w*h*d);
-    unsigned char* buff = nullptr;
+    unsigned int s{w*h*d};
+    unsigned char* buff{};
     if (image != nullptr) {
         // Allocate space
         buff = new unsigned char[s];
@@ -77,10 +77,10 @@ bool Image::setImageData(const unsigned char* const image, const unsigned int w,
 //------------------------------------------------------------------------------
 bool Image::setOriginalImageData(const unsigned char* const ti, const unsigned int s, const bool c)
 {
-    bool ok = true;     // Assume all will go well.
+    bool ok{true};     // Assume all will go well.
 
     // Allocate space for and transfer the new image
-    unsigned char* buff = nullptr;
+    unsigned char* buff{};
     if (ti != nullptr) {
         // Allocate space
         buff = new unsigned char[s];
@@ -108,14 +108,14 @@ bool Image::setOriginalImageData(const unsigned char* const ti, const unsigned i
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 bool Image::testImage(const unsigned w0, const unsigned h0)
 {
-    unsigned int d0 = 1;
+    unsigned int d0{1};
     const auto image = new unsigned char[w0*h0*d0];
 
     for (unsigned int h = 0; h < h0; h++) {
         for (unsigned int w = 0; w < w0; w++) {
 
             // Edges
-            unsigned char c = 0x00;
+            unsigned char c{};
             if (h < 64 || h >= (h0 - 32)) c = 0x7f;
             if (w < 32 || w >= (w0 - 16)) c += 0x7f;
 
@@ -123,12 +123,12 @@ bool Image::testImage(const unsigned w0, const unsigned h0)
             if (h == (h0/2) || w == (w0/2)) c = 0xff;
 
             // Store the color
-            unsigned int os = (h * (w0 * d0)) + (w * d0);
+            unsigned int os{(h * (w0 * d0)) + (w * d0)};
             image[os] = c;
         }
     }
 
-    bool ok = setImageData(image, w0, h0, d0);
+    bool ok{setImageData(image, w0, h0, d0)};
     delete [] image;
     return ok;
 }

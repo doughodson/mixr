@@ -40,26 +40,26 @@ void UsbJoystick::reset()
 {
    BaseClass::reset();
 
-   if (deviceName[0] == '\0') {
+   if (deviceName.empty()) {
 
       // create the device name based on the device index
       {
-         char cbuff[128] {};
+         char cbuff[128]{};
          // search for device at "/dev/jsX" first
          std::sprintf(cbuff, "/dev/js%d", getDeviceIndex());
          if (base::doesFileExist(cbuff)) {
-           base::utStrcpy(deviceName, sizeof(deviceName), cbuff);
+            deviceName = cbuff;
          } else {
-            // search for device at "/dev/input/jsX" next
+            // if not found, search for device at "/dev/input/jsX"
             std::sprintf(cbuff, "/dev/input/js%d", getDeviceIndex());
             if (base::doesFileExist(cbuff)) {
-               base::utStrcpy(deviceName, sizeof(deviceName), cbuff);
+               deviceName = cbuff;
             }
          }
       }
 
       // if no device found, print message and leave
-      if (deviceName[0] == '\0') {
+      if (deviceName.empty()) {
          stream = -1;
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "UsbJoystick::reset(): Valid joystick device not found" << std::endl;
@@ -68,7 +68,7 @@ void UsbJoystick::reset()
       }
 
       // try opening device
-      stream = open(deviceName, O_RDONLY | O_NONBLOCK );
+      stream = open(deviceName.c_str(), O_RDONLY | O_NONBLOCK );
       if ((stream == -1) && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "UsbJoystick::reset(): Error opening device at : " << deviceName << std::endl;
       }
@@ -80,12 +80,12 @@ void UsbJoystick::reset()
          ioctl(stream, JSIOCGVERSION, &driverVersion);
 
          char modelName[128] {};
-         ioctl(stream, JSIOCGNAME(128), modelName);
+         ioctl(stream, JSIOCGNAME(sizeof(modelName)), modelName);
 
          {
             unsigned char numOfAxes {};
             ioctl(stream, JSIOCGAXES, &numOfAxes);
-            unsigned short tmp = static_cast<unsigned short>(numOfAxes);
+            unsigned short tmp {static_cast<unsigned short>(numOfAxes)};
             if (tmp > MAX_AI)
                 tmp = MAX_AI;
             numAI = tmp;
@@ -94,23 +94,26 @@ void UsbJoystick::reset()
          {
             unsigned char numOfBtns {};
             ioctl(stream, JSIOCGBUTTONS, &numOfBtns);
-            unsigned short tmp = static_cast<unsigned short>(numOfBtns);
+            unsigned short tmp {static_cast<unsigned short>(numOfBtns)};
             if (tmp > MAX_DI)
                 tmp = MAX_DI;
             numDI = tmp;
          }
 
-         std::printf("\n");
-         std::printf("---------------------------\n");
-         std::printf("USB Joystick Configuration:\n");
-         std::printf("---------------------------\n");
-         std::printf("  Port          : %s\n", deviceName);
-         std::printf("  Name          : %s\n", modelName);
-         std::printf("  NumAIs        : %d\n", numAI);
-         std::printf("  NumDIs        : %d\n", numDI);
-         std::printf("  Driver version: %d.%d.%d\n", driverVersion >> 16,
-                       (driverVersion >> 8) & 0xff, driverVersion & 0xff);
-         std::printf("\n");
+         const int major_version{driverVersion >> 16};
+         const int minor_version{(driverVersion >> 8) & 0xff};
+         const int bug_fix{driverVersion & 0xff};
+
+         std::cout << std::endl;
+         std::cout << "---------------------------" << std::endl;
+         std::cout << "USB Joystick Configuration:" << std::endl;
+         std::cout << "---------------------------" << std::endl;
+         std::cout << "  Port          : " << deviceName << std::endl;
+         std::cout << "  Name          : " << modelName  << std::endl;
+         std::cout << "  NumAIs        : " << numAI      << std::endl;
+         std::cout << "  NumDIs        : " << numDI      << std::endl;
+         std::cout << "  Driver version: " << major_version << "." << minor_version << "." << bug_fix;
+         std::cout  << std::endl << std::endl;
       }
    }
 }
@@ -126,7 +129,7 @@ void UsbJoystick::processInputs(const double dt, base::IoData* const pInData)
    while (true) {
 
       // read the next joystick event (if any)
-      int status = read(stream, &js, sizeof(js));
+      int status {static_cast<int>(read(stream, &js, sizeof(js)))};
 
       // Break out of the loop when there are no more events
       if (status != sizeof(js)) break;
@@ -137,7 +140,7 @@ void UsbJoystick::processInputs(const double dt, base::IoData* const pInData)
          // button event
          case JS_EVENT_BUTTON:
             {
-            int n = js.number;
+            int n {js.number};
             if (n < numDI)
                 inBits[n] = static_cast<bool>(js.value);
             }
@@ -146,9 +149,9 @@ void UsbJoystick::processInputs(const double dt, base::IoData* const pInData)
          // axis event
          case JS_EVENT_AXIS:
             {
-            int n = js.number;
+            int n {js.number};
             if (n < numAI)
-                inData[n] = (js.value / 32767.0f);
+                inData[n] = (js.value / 32767.0);
             }
             break;
 

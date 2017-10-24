@@ -28,8 +28,8 @@ BEGIN_SLOTTABLE(NetIO)
 END_SLOTTABLE(NetIO)
 
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1, setSlotFedFile, base::String)
-   ON_SLOT(2, setSlotRegulatingTime, base::Number)
+   ON_SLOT(1, setSlotFedFile,         base::String)
+   ON_SLOT(2, setSlotRegulatingTime,  base::Number)
    ON_SLOT(3, setSlotConstrainedTime, base::Number)
 END_SLOT_MAP()
 

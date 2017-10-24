@@ -194,8 +194,8 @@ inline uint16_t convertUInt16(const uint16_t v) {
 //-----------------------------------------------
 // 6.2.30 -- Entity Type Record (64 bits)
 //-----------------------------------------------
-struct EntityType {
-
+struct EntityType
+{
    uint8_t  kind;
    uint8_t  domain;
    uint16_t country;
@@ -321,12 +321,11 @@ struct EntityType {
 //-----------------------------------------------
 // 6.2.79 -- Simulation Address Record
 //-----------------------------------------------
-struct SimulationAddressDIS {
-
+struct SimulationAddressDIS
+{
    uint16_t siteIdentification {};
    uint16_t applicationIdentification {};
 
-   // Constructors
    SimulationAddressDIS(const uint16_t a, const uint16_t b) : siteIdentification(a), applicationIdentification(b) { }
    SimulationAddressDIS() = default;
 
@@ -389,11 +388,10 @@ struct SimulationAddressDIS {
 //-----------------------------------------------
 // 6.2.95 -- VectorDIS Record (96 bits)
 //-----------------------------------------------
-struct VectorDIS {
-
+struct VectorDIS
+{
    float component[3] {};        // X, Y Z components of the vectory
 
-   // Constructor(s)
    VectorDIS(const float x, const float y, const float z) {
       component[0] = x;
       component[1] = y;
@@ -443,8 +441,8 @@ struct VectorDIS {
 //-----------------------------------------------
 // 6.2.97 -- World Coordinates Record (192 bits)
 //-----------------------------------------------
-struct WorldCoordinates {
-
+struct WorldCoordinates
+{
    double X_coord {};
    double Y_coord {};
    double Z_coord {};
@@ -502,8 +500,8 @@ struct WorldCoordinates {
 //-----------------------------------------------
 // 6.2.7 -- Angular Velocity Vector Record (96 bits)
 //-----------------------------------------------
-struct AngularVelocityVectorDIS {
-
+struct AngularVelocityVectorDIS
+{
    float x_axis {};
    float y_axis {};
    float z_axis {};
@@ -536,8 +534,8 @@ struct AngularVelocityVectorDIS {
 //-----------------------------------------------
 // 6.2.9 -- Antenna Pattern Record (320 bits)
 //-----------------------------------------------
-struct AntennaPattern {
-
+struct AntennaPattern
+{
    float psi {};
    float theta {};
    float phi {};
@@ -591,8 +589,8 @@ struct AntennaPattern {
 //-----------------------------------------------
 // 6.2.13 -- Beam Data Record
 //-----------------------------------------------
-struct BeamData {
-
+struct BeamData
+{
    float beamAzimuthCenter {};         // Azimuth center of sweep volume (radians)
    float beamAzimuthSweep {};          // Azimuth sweep width, half angle (radians)
    float beamElevationCenter {};       // Elevation center of sweep volume (radians)
@@ -659,8 +657,8 @@ struct BeamData {
 //-----------------------------------------------
 // 6.2.16 -- Clock Time Record
 //-----------------------------------------------
-struct ClockTime{
-
+struct ClockTime
+{
    float hour {};
    float timePastTheHour {};
 
@@ -690,7 +688,8 @@ struct ClockTime{
 //-----------------------------------------------
 // 6.2.18 -- Data Query Datum Specification Record
 //-----------------------------------------------
-struct DataQueryDatumSpecification{
+struct DataQueryDatumSpecification
+{
    // Not Finished
 };
 
@@ -698,7 +697,8 @@ struct DataQueryDatumSpecification{
 //-----------------------------------------------
 // 6.2.19 -- Datum Specification Record
 //-----------------------------------------------
-struct DatumSpecification{
+struct DatumSpecification
+{
    // Not Finished
 };
 
@@ -706,8 +706,8 @@ struct DatumSpecification{
 //-----------------------------------------------
 // 6.2.20.2 -- Burst () Descriptor Record
 //-----------------------------------------------
-struct BurstDescriptor {
-
+struct BurstDescriptor
+{
    EntityType munition {};
    uint16_t warhead {};
    uint16_t fuse {};
@@ -747,8 +747,8 @@ struct BurstDescriptor {
 //-----------------------------------------------
 // 6.2.22 -- EE Fundamental Parameter Data Record
 //-----------------------------------------------
-struct EeFundamentalParameterData {
-
+struct EeFundamentalParameterData
+{
    float frequency {};                 // Center frequency (Hz)
    float frequencyRange {};            // Beam width (i.e., at 3db) or zero (Hz)
    float effectiveRadiatedPower {};    // Effective radiated power ( watts dB)
@@ -815,8 +815,8 @@ struct EeFundamentalParameterData {
 //-----------------------------------------------
 // 6.2.23 -- Emitter System Record
 //-----------------------------------------------
-struct EmitterSystem {
-
+struct EmitterSystem
+{
    uint16_t emitterName {};                  // Emitter Name enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.1.1)
    uint8_t  function {};                     // Function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.2)
    uint8_t  emitterIdentificationNumber {};  // Unique emitter system number
@@ -872,8 +872,8 @@ struct EmitterSystem {
 //-----------------------------------------------
 // 6.2.28 -- Entity Identifier Record (48 bits)
 //-----------------------------------------------
-struct EntityIdentifierDIS {
-
+struct EntityIdentifierDIS
+{
    SimulationAddressDIS simulationID {};      // ID of the simulation
    uint16_t             ID {};                // Entity ID within the simulation
 
@@ -937,9 +937,9 @@ struct EntityIdentifierDIS {
 //-----------------------------------------------
 // 6.2.29 -- Entity Marking Record (96 bits)
 //-----------------------------------------------
-struct EntityMarking {
-
-   static const uint32_t BUFF_SIZE = 11;
+struct EntityMarking
+{
+   static const uint32_t BUFF_SIZE {11};
    uint8_t characterSet {};         // Marking character set
    uint8_t marking[BUFF_SIZE] {};   // Entity marking buffer
 
@@ -964,8 +964,8 @@ struct EntityMarking {
 //-----------------------------------------------
 // 6.2.33 -- Euler Angles Record (96)
 //-----------------------------------------------
-struct EulerAngles{
-
+struct EulerAngles
+{
    float psi {};
    float theta {};
    float phi {};
@@ -1008,8 +1008,8 @@ struct EulerAngles{
 //-----------------------------------------------
 // 6.2.34 -- Event Identifier Record (48 bits)
 //-----------------------------------------------
-struct EventIdentifier {
-
+struct EventIdentifier
+{
    SimulationAddressDIS simulationID {};
    uint16_t             eventNumber {};
 
@@ -1040,8 +1040,8 @@ struct EventIdentifier {
 //-----------------------------------------------
 // 6.2.38 -- Fixed Datum Record
 //-----------------------------------------------
-struct FixedDatum {
-
+struct FixedDatum
+{
    uint32_t fixedDatumID {};
    uint32_t fixedDatumValue {};
 
@@ -1055,8 +1055,8 @@ struct FixedDatum {
 //-----------------------------------------------
 // 6.2.40 -- Fundamental Op Data (128 bits)
 //-----------------------------------------------
-struct FundamentalOpData {
-
+struct FundamentalOpData
+{
    uint8_t  systemStatus {};
    uint8_t  alternateParam4 {};
    uint8_t  informationLayers {};
@@ -1130,8 +1130,8 @@ struct FundamentalOpData {
 // Use getJammingModeSequence() and setJammingModeSequence()
 // to access the older 32 bit jamming mode sequence value
 //-----------------------------------------------
-struct JammingTechnique {
-
+struct JammingTechnique
+{
    uint8_t kind {};                // Jamming technique kind
    uint8_t category {};            // Jamming technique category
    uint8_t subcat {};              // Jamming technique subcategory
@@ -1221,8 +1221,8 @@ struct JammingTechnique {
 //-----------------------------------------------
 //  6.2.59 -- Modulation Type Record (64 bits)
 //-----------------------------------------------
-struct ModulationType {
-
+struct ModulationType
+{
    uint16_t spreadSpectrum {};         // Spread Spectrum
    uint16_t majorModulationType {};    // Major Modulation type
    uint16_t detail {};                 // Detail
@@ -1284,8 +1284,8 @@ struct ModulationType {
 //-----------------------------------------------
 // 6.2.66 -- PDU Header Record (96 bits)
 //-----------------------------------------------
-struct PDUHeader {
-
+struct PDUHeader
+{
    uint8_t  protocolVersion {};
    uint8_t  exerciseIdentifier {};
    uint8_t  PDUType {};
@@ -1326,8 +1326,8 @@ struct PDUHeader {
 //-----------------------------------------------
 // 6.2.70 -- Radio Entity Type Record (64 bits)
 //-----------------------------------------------
-struct RadioEntityType {
-
+struct RadioEntityType
+{
    uint8_t  kind {};                // Kind
    uint8_t  domain {};              // Domain
    uint16_t country {};             // Country
@@ -1395,8 +1395,8 @@ struct RadioEntityType {
 //-----------------------------------------------
 // 6.2.81 -- Simulation Management PDU Header Record
 //-----------------------------------------------
-struct SimulationManagementPDUHeader{
-
+struct SimulationManagementPDUHeader
+{
    PDUHeader        header {};
    EntityIdentifierDIS originatingEntityID {};
    EntityIdentifierDIS receivingEntityID {};
@@ -1432,8 +1432,8 @@ struct SimulationManagementPDUHeader{
 //-----------------------------------------------
 // 6.2.85 -- Supply Quantity Record
 //-----------------------------------------------
-struct SupplyQuantity{
-
+struct SupplyQuantity
+{
    EntityType supplyType {};
    float      quantity {};
 
@@ -1465,8 +1465,8 @@ struct SupplyQuantity{
 //-----------------------------------------------
 // 6.2.86 -- System ID
 //-----------------------------------------------
-struct SystemID {
-
+struct SystemID
+{
    uint16_t systemType {};
    uint16_t systemName {};
    uint8_t  systemMode {};
@@ -1506,8 +1506,8 @@ struct SystemID {
 //-----------------------------------------------
 // 6.2.89 -- Fundamental Parameter Data Record
 //-----------------------------------------------
-struct TrackJamTargets {
-
+struct TrackJamTargets
+{
    EntityIdentifierDIS targetID {}; // Track/Jam target ID
    uint8_t emitterID {};            // Target's emitter ID being jammed
    uint8_t beamID {};               // Target's beam ID being jammed
@@ -1564,8 +1564,8 @@ struct TrackJamTargets {
 //-----------------------------------------------
 // 6.2.89 -- Variable Datum Record
 //-----------------------------------------------
-struct VariableDatum {
-
+struct VariableDatum
+{
    uint32_t variableDatumID {};
    uint32_t variableDatumLength {};
 
@@ -1604,8 +1604,8 @@ struct VariableDatum {
 //-----------------------------------------------
 // 6.2.93.2 -- Variable Parameter (VP) Articulated Part (128 bits)
 //-----------------------------------------------
-struct VpArticulatedPart {
-
+struct VpArticulatedPart
+{
    // Parameter Type Designator; SISO-REF-010-2005, 25 March 2005
    enum {
       ARTICULATED_PART,       // Articulated Part
@@ -1698,8 +1698,8 @@ struct VpArticulatedPart {
 //-----------------------------------
 // 7.6.2 -- Emitter Beam Data (part of Electromagnetic Emission PDU)
 //-----------------------------------
-struct EmitterBeamData {
-
+struct EmitterBeamData
+{
    // Enum for highDensityTracks, (see IST-CF-03-01, May 5, 2003, Sec 8.1.5)
    enum { NOT_SELECTED, SELECTED };
 
@@ -1824,8 +1824,8 @@ struct EmitterBeamData {
 //-----------------------------------
 // 7.6.2 -- Emission System Data (part of Electromagnetic Emission PDU)
 //-----------------------------------
-struct EmissionSystem {
-
+struct EmissionSystem
+{
    uint8_t        systemDataLength {};    // Length of this system data, in 32bit words, including the Emitter Beam Data
    uint8_t        numberOfBeams {};       // Number of beams (EmitterBeamData's that follow)
    uint16_t       padding1 {};

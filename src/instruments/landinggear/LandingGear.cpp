@@ -18,7 +18,7 @@ END_SLOTTABLE(LandingGear)
 
 BEGIN_SLOT_MAP(LandingGear)
     ON_SLOT(1, setSlotGearDownValue, base::Number)
-    ON_SLOT(2, setSlotGearUpValue, base::Number)
+    ON_SLOT(2, setSlotGearUpValue,   base::Number)
 END_SLOT_MAP()
 
 LandingGear::LandingGear()

@@ -17,7 +17,7 @@ EMPTY_COPYDATA(AbstractState)
 void AbstractState::updateGlobalState()
 {
    // Update all my children
-   base::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one
@@ -26,10 +26,9 @@ void AbstractState::updateGlobalState()
             if (state != nullptr)
                state->updateGlobalState();
          }
-      }
-      else {
+      } else {
          // When we should update them all
-         base::List::Item* item = subcomponents->getFirstItem();
+         base::List::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::Component*>(pair->object());
@@ -47,7 +46,7 @@ void AbstractState::updateGlobalState()
 void AbstractState::updateState(const base::Component* const actor)
 {
    // Update all my children
-   base::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one
@@ -56,10 +55,9 @@ void AbstractState::updateState(const base::Component* const actor)
             if (state != nullptr)
                state->updateState(actor);
          }
-      }
-      else {
+      } else {
          // When we should update them all
-         base::List::Item* item = subcomponents->getFirstItem();
+         base::List::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::Component*>(pair->object());
@@ -77,9 +75,9 @@ void AbstractState::updateState(const base::Component* const actor)
 
 const AbstractState* AbstractState::getUbfStateByType(const std::type_info& type) const
 {
-   const AbstractState* p = this;
+   const AbstractState* p{this};
    if ( !p->isClassType(type) ) {
-      const base::Pair* pair = findByType(type);
+      const base::Pair* pair{findByType(type)};
       if (pair != nullptr) {
          p = dynamic_cast<const AbstractState*>( pair->object() );
       }

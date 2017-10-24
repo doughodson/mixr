@@ -49,7 +49,7 @@ void Decibel::setValueDB(const double v)
 void Decibel::setValue(const double v)
 {
    BaseClass::setValue(v);
-   db = std::log10(static_cast<double>(v)) * 10.0f;
+   db = std::log10(v) * 10.0;
 }
 
 bool Decibel::setSlotValue(const Number* const msg)

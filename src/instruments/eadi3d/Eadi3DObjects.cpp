@@ -19,9 +19,11 @@ float GREEN[3] = { 0.0, 1.0, 0.0 };
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Eadi3DObjects, "Eadi3DObjects")
 EMPTY_SLOTTABLE(Eadi3DObjects)
+EMPTY_DELETEDATA(Eadi3DObjects)
 
 Eadi3DObjects::Eadi3DObjects(const float radius) : radius(radius)
 {
+   STANDARD_CONSTRUCTOR()
 }
 
 void Eadi3DObjects::copyData(const Eadi3DObjects& org, const bool)
@@ -32,11 +34,6 @@ void Eadi3DObjects::copyData(const Eadi3DObjects& org, const bool)
     radius = org.radius;
     made = org.made;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Eadi3DObjects)
 
 //------------------------------------------------------------------------------
 // drawObj() - draw the given objective

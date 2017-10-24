@@ -15,6 +15,7 @@ namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
+EMPTY_DELETEDATA(Nib)
 
 Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
 {
@@ -60,10 +61,6 @@ void Nib::copyData(const Nib& org, const bool)
    }
 }
 
-void Nib::deleteData()
-{
-}
-
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
@@ -85,8 +82,8 @@ void Nib::setObjectName(const char* s)
 // Makes a default RTI name
 void Nib::makeObjectName()
 {
-   char name[256];
-   const char* fname = *getFederateName();
+   char name[256] {};
+   const char* fname {*getFederateName()};
    std::sprintf(name, "P%d_%s", int(getPlayerID()), fname );
    setObjectName(name);
 }                            
@@ -154,13 +151,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO = static_cast<NetIO*>(getNetIO());
+   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " ON ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
-         RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
+         RTI::AttributeHandle theHandle {theAttributes.getHandle(i)};
+         unsigned int theIndex {hlaIO->findAttributeIndex(theHandle)};
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;
@@ -179,13 +176,13 @@ void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 //------------------------------------------------------------------------------
 void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO = static_cast<NetIO*>(getNetIO());
+   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " OFF ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
-         RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
+         RTI::AttributeHandle theHandle {theAttributes.getHandle(i)};
+         unsigned int theIndex {hlaIO->findAttributeIndex(theHandle)};
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;
@@ -203,13 +200,13 @@ void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 //------------------------------------------------------------------------------
 void Nib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO = static_cast<NetIO*>(getNetIO());
+   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " Update ( ";
       for (RTI::ULong i = 0; i < theAttributes.size(); i++) {
-         RTI::AttributeHandle theHandle =  theAttributes.getHandle(i);
-         unsigned int theIndex = hlaIO->findAttributeIndex(theHandle);
+         RTI::AttributeHandle theHandle {theAttributes.getHandle(i)};
+         unsigned int theIndex {hlaIO->findAttributeIndex(theHandle)};
          //std::cout << "[" << theHandle << ":";
          if (theIndex != 0) {
             //std::cout << theIndex;

@@ -164,31 +164,6 @@ public:
    virtual void reset() override;
 
 protected:
-
-    // Slot functions
-    virtual bool setSlotSteerpointType(const base::Identifier* const msg);
-    virtual bool setSlotLatitude(const base::LatLon* const msg);
-    virtual bool setSlotLatitude(const base::Number* const msg);
-    virtual bool setSlotLongitude(const base::LatLon* const msg);
-    virtual bool setSlotLongitude(const base::Number* const msg);
-    virtual bool setSlotPosition(const base::List* const numList);
-    virtual bool setSlotXPos(const base::Distance* const num);
-    virtual bool setSlotYPos(const base::Distance* const num);
-    virtual bool setSlotElevation(const base::Distance* const num);
-    virtual bool setSlotElevation(const base::Number* const num);
-    virtual bool setSlotPTA(const base::Time* const msg);
-    virtual bool setSlotPTA(const base::Number* const msg);
-    virtual bool setSlotSCA(const base::Distance* const msg);
-    virtual bool setSlotSCA(const base::Number* const msg);
-    virtual bool setSlotDescription(const base::String* const msg);
-    virtual bool setSlotMagVar(const base::Angle* const msg);
-    virtual bool setSlotMagVar(const base::Number* const msg);
-    virtual bool setSlotCmdAltitude(const base::Distance* const num);
-    virtual bool setSlotCmdAltitude(const base::Number* const num);
-    virtual bool setSlotCmdAirspeed(const base::Number* const num);
-    virtual bool setSlotNext(const base::Identifier* const num);
-    virtual bool setSlotNext(const base::Number* const num);
-
     virtual void processComponents(                 // Process our subcomponent list (which should be other steerpoints)
          base::PairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
@@ -254,6 +229,33 @@ private:
     double elt {};            // Early/Late time          (sec)
     bool   scaWarn {};        // Safe clearance Alt warning flag
     bool   navDataValid {};   // Nav data is valid
+
+private:
+   // slot table helper methods
+   bool setSlotSteerpointType(const base::Identifier* const);
+   bool setSlotLatitude(const base::LatLon* const);
+   bool setSlotLatitude(const base::Number* const);
+   bool setSlotLongitude(const base::LatLon* const);
+   bool setSlotLongitude(const base::Number* const);
+   bool setSlotXPos(const base::Distance* const);
+   bool setSlotYPos(const base::Distance* const);
+   bool setSlotElevation(const base::Distance* const);
+   bool setSlotElevation(const base::Number* const);
+   bool setSlotCmdAltitude(const base::Distance* const);
+   bool setSlotCmdAltitude(const base::Number* const);
+   bool setSlotCmdAirspeed(const base::Number* const);
+   bool setSlotPTA(const base::Time* const);
+   bool setSlotPTA(const base::Number* const);
+   bool setSlotSCA(const base::Distance* const);
+   bool setSlotSCA(const base::Number* const);
+   bool setSlotDescription(const base::String* const);
+   bool setSlotMagVar(const base::Angle* const);
+   bool setSlotMagVar(const base::Number* const);
+   bool setSlotNext(const base::Identifier* const);
+   bool setSlotNext(const base::Number* const);
+   bool setSlotAction(Action* const x)                   { return setAction(x); }
+
+   //bool setSlotPosition(const base::List* const);
 };
 
 }

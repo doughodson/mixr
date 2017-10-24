@@ -75,7 +75,7 @@ unsigned int IoData::getNumDiscreteOutputChannels() const  { return numDO; }
 // -----------------------------------------------------------------------------
 bool IoData::getAnalogInput(const unsigned int channel, double* const value) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && aiTable != nullptr && channel > 0 && channel <= numAI) {
       *value = aiTable[channel-1];
       ok = true;
@@ -88,7 +88,7 @@ bool IoData::getAnalogInput(const unsigned int channel, double* const value) con
 // -----------------------------------------------------------------------------
 bool IoData::getAnalogOutput(const unsigned int channel, double* const value) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && aoTable != nullptr && channel > 0 && channel <= numAO) {
       *value = aoTable[channel-1];
       ok = true;
@@ -101,7 +101,7 @@ bool IoData::getAnalogOutput(const unsigned int channel, double* const value) co
 // -----------------------------------------------------------------------------
 bool IoData::getDiscreteInput(const unsigned int channel, bool* const value) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && diTable != nullptr && channel > 0 && channel <= numDI) {
       *value = diTable[channel-1];
       ok = true;
@@ -114,7 +114,7 @@ bool IoData::getDiscreteInput(const unsigned int channel, bool* const value) con
 // -----------------------------------------------------------------------------
 bool IoData::getDiscreteOutput(const unsigned int channel, bool* const value) const
 {
-   bool ok = false;
+   bool ok {};
    if (value != nullptr && doTable != nullptr && channel > 0 && channel <= numDO) {
       *value = doTable[channel-1];
       ok = true;
@@ -127,7 +127,7 @@ bool IoData::getDiscreteOutput(const unsigned int channel, bool* const value) co
 // -----------------------------------------------------------------------------
 bool IoData::setAnalogInput(const unsigned int channel, const double value)
 {
-   bool ok = false;
+   bool ok {};
    if (aiTable != nullptr && channel > 0 && channel <= numAI) {
       aiTable[channel-1] = value;
       ok = true;
@@ -140,7 +140,7 @@ bool IoData::setAnalogInput(const unsigned int channel, const double value)
 // -----------------------------------------------------------------------------
 bool IoData::setAnalogOutput(const unsigned int channel, const double value)
 {
-   bool ok = false;
+   bool ok {};
    if (aoTable != nullptr && channel > 0 && channel <= numAO) {
       aoTable[channel-1] = value;
       ok = true;
@@ -153,7 +153,7 @@ bool IoData::setAnalogOutput(const unsigned int channel, const double value)
 // -----------------------------------------------------------------------------
 bool IoData::setDiscreteInput(const unsigned int channel, const bool value)
 {
-   bool ok = false;
+   bool ok {};
    if (diTable != nullptr && channel > 0 && channel <= numDI) {
       diTable[channel-1] = value;
       ok = true;
@@ -166,7 +166,7 @@ bool IoData::setDiscreteInput(const unsigned int channel, const bool value)
 // -----------------------------------------------------------------------------
 bool IoData::setDiscreteOutput(const unsigned int channel, const bool value)
 {
-   bool ok = false;
+   bool ok {};
    if (doTable != nullptr && channel > 0 && channel <= numDO) {
       doTable[channel-1] = value;
       ok = true;
@@ -312,11 +312,11 @@ bool IoData::setSlotNumAI(const base::Number* const msg)
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
 
-   bool ok = true;
-   unsigned int num = 0;
+   bool ok {true};
+   unsigned int num {};
 
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
@@ -331,11 +331,11 @@ bool IoData::setSlotNumAO(const base::Number* const msg)
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
 
-   bool ok = true;
-   unsigned int num = 0;
+   bool ok {true};
+   unsigned int num {};
 
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
@@ -350,11 +350,11 @@ bool IoData::setSlotNumDI(const base::Number* const msg)
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
 
-   bool ok = true;
-   unsigned int num = 0;
+   bool ok {true};
+   unsigned int num {};
 
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }
@@ -369,11 +369,11 @@ bool IoData::setSlotNumDO(const base::Number* const msg)
    // Null 'msg' is ok, but the value of 'msg' must
    // be greater than or equal to zero.
 
-   bool ok = true;
-   unsigned int num = 0;
+   bool ok {true};
+   unsigned int num {};
 
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) num = static_cast<unsigned int>(v);
       else ok = false;
    }

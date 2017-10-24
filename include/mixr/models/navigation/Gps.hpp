@@ -65,7 +65,7 @@ public:
    virtual void setKeyOvrdEnabled(const bool keyOvrd);
 
 private:
-    static const unsigned int MAX_CRYPTO_KEYS = 8; // max GPS Crypto variables
+    static const unsigned int MAX_CRYPTO_KEYS {8}; // max GPS Crypto variables
 
    // GPS Status Data
    RcvrStat rcvr {RCVR_INVALID};  // Receiver status

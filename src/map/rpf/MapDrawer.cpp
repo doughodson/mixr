@@ -25,7 +25,7 @@ END_SLOTTABLE(MapDrawer)
 BEGIN_SLOT_MAP(MapDrawer)
     ON_SLOT(1, setSlotMapIntensity, base::Number)
     ON_SLOT(2, setSlotDrawGridMode, base::Number)
-    ON_SLOT(3, setSlotShowMap, base::Number)
+    ON_SLOT(3, setSlotShowMap,      base::Number)
 END_SLOT_MAP()
 
 MapDrawer::MapDrawer()
@@ -96,8 +96,9 @@ void MapDrawer::deleteData()
 //------------------------------------------------------------------------------
 bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 {
-    bool ok = false;
-    if (x != nullptr) ok = setMapIntensity(x->getReal());
+    bool ok {};
+    if (x != nullptr)
+        ok = setMapIntensity(x->getReal());
     return ok;
 }
 
@@ -106,9 +107,10 @@ bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 {
-    bool ok = false;
-    if (x != nullptr) ok = setDrawGridMode(x->getBoolean());
-    return ok;
+   bool ok {};
+   if (x != nullptr)
+      ok = setDrawGridMode(x->getBoolean());
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -116,8 +118,9 @@ bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapDrawer::setSlotShowMap(const base::Number* const x)
 {
-   bool ok = false;
-   if (x != nullptr) ok = setShowMap(x->getBoolean());
+   bool ok {};
+   if (x != nullptr)
+      ok = setShowMap(x->getBoolean());
    return ok;
 }
 
@@ -126,8 +129,8 @@ bool MapDrawer::setSlotShowMap(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool MapDrawer::setGridSize(const int aGridSize)
 {
-    bool ok = false;
-    int rem = aGridSize % 2;
+    bool ok {};
+    const int rem {aGridSize % 2};
     // Create a new tile pager with the new values
     if (aGridSize > 0 && rem) {
         gridSize = aGridSize;
@@ -137,8 +140,7 @@ bool MapDrawer::setGridSize(const int aGridSize)
             pagers[i]->setSize(gridSize);
         }
         ok = true;
-    }
-    else {
+    } else {
         std::cout << "MapDrawer::setGridSize() - grid size MUST be greater than 0 and an odd number!" << std::endl;
         return ok;
     }
@@ -159,7 +161,7 @@ bool MapDrawer::setShowMap(const bool x)
 //------------------------------------------------------------------------------
 void MapDrawer::setMap(CadrgMap* map)
 {
-    bool done = false;
+    bool done {};
 
     if (myMap != nullptr && myMap != map) {
         for (int i = 0; i < MAX_PAGERS; i++) {
@@ -169,8 +171,7 @@ void MapDrawer::setMap(CadrgMap* map)
         myMap = map;
         myMap->ref();
         done = true;
-    }
-    else if (myMap == nullptr && map != nullptr) {
+    } else if (myMap == nullptr && map != nullptr) {
         myMap = map;
         myMap->ref();
         done = true;
@@ -208,31 +209,31 @@ void MapDrawer::updateZone(int curZone, int &oldZone, const int idx)
 //------------------------------------------------------------------------------
 void MapDrawer::drawFunc()
 {
-    GLdouble ocolor[4];
+    GLdouble ocolor[4] {};
     // Get our old color
     glGetDoublev(GL_CURRENT_COLOR, &ocolor[0]);
 
-    GLdouble dLeft = 0, dRight = 0, dBottom = 0, dTop = 0, dNear = 0, dFar = 0;
+    GLdouble dLeft{}, dRight{}, dBottom{}, dTop{}, dNear{}, dFar{};
     //double lat = 0, lon = 0;
 
     // Determine our rotation, if needed.
     if (getDisplay() != nullptr) getDisplay()->getOrtho(dLeft, dRight, dBottom, dTop, dNear, dFar);
 
     if (myMap != nullptr) {
-        const double rLat = myMap->getReferenceLatDeg();
-        const double rLon = myMap->getReferenceLonDeg();
-        const int refZone = myMap->findBestZone(rLat, rLon);
+        const double rLat {myMap->getReferenceLatDeg()};
+        const double rLon {myMap->getReferenceLonDeg()};
+        const int refZone {myMap->findBestZone(rLat, rLon)};
         if (refZone != -1) {
             // Determine our CENTER tile and pixel position
             myMap->latLonToTileRowColumn(rLat, rLon, originRow[CENTER_PAGER], originCol[CENTER_PAGER], textureRow[CENTER_PAGER], textureCol[CENTER_PAGER], pixelRow[CENTER_PAGER], \
                 pixelCol[CENTER_PAGER], pagers[CENTER_PAGER]);
             // Take the distance in nautical miles, and then convert to degrees
-            const double quickRange = getRange();
-            const double disDegN = quickRange / 60.0f;
-            const double disDegE = static_cast<double>(quickRange / (60.0 * getCosRefLat()));
+            const double quickRange {getRange()};
+            const double disDegN {quickRange / 60.0};
+            const double disDegE {static_cast<double>(quickRange / (60.0 * getCosRefLat()))};
             // Get the space (in latitude degrees) between each pixel
-            CadrgTocEntry* te = pagers[CENTER_PAGER]->getToc();
-            double n = 1, e = 1;
+            CadrgTocEntry* te {pagers[CENTER_PAGER]->getToc()};
+            double n{1.0}, e{1.0};
             if (te != nullptr) {
                 n = static_cast<double>(te->getVertInterval());
                 e = static_cast<double>(te->getHorizInterval());
@@ -244,14 +245,14 @@ void MapDrawer::drawFunc()
             vpWL = disDegE / e;
 
             // Scale our viewport by the ratio of our map page to our actual ortho, to make our background map fit into our range circle
-            const double rad = getOuterRadius();
-            const double radRatio = static_cast<double>(dTop / rad);
+            const double rad {getOuterRadius()};
+            const double radRatio {static_cast<double>(dTop / rad)};
             vpHL *= radRatio;
             vpWL *= radRatio;
 
             // Now stretch and shrink our ortho based on if we are track up
-            const double newVPHL = vpHL;
-            const double newVPWL = vpWL;
+            const double newVPHL {vpHL};
+            const double newVPWL {vpWL};
 
             // Force our ortho before drawing
             getDisplay()->forceOrtho(-newVPWL, newVPWL,  -newVPHL, newVPHL, -2, 2);
@@ -263,8 +264,8 @@ void MapDrawer::drawFunc()
             drawMap(zones[CENTER_PAGER], CENTER_PAGER);
 
             // Check to see if we need to have zones around us (depending on the range)
-            const double rngDeg = (quickRange * 2) / 60.0f;
-            const int tZone = myMap->findBestZone(rLat + rngDeg, rLon);
+            const double rngDeg {(quickRange * 2.0) / 60.0};
+            const int tZone {myMap->findBestZone(rLat + rngDeg, rLon)};
 
             // Now determine if there are other zones to draw
             if (tZone != zones[CENTER_PAGER]) {
@@ -293,8 +294,8 @@ void MapDrawer::determineScaling(const int idx)
 {
     // Scaling issues here, because one zone
     if (pagers[CENTER_PAGER] != nullptr && pagers[idx] != nullptr && pagers[idx] != pagers[CENTER_PAGER]) {
-        CadrgTocEntry* toc = pagers[CENTER_PAGER]->getToc();
-        double centerHi = 0, centerVi = 0, currHi = 0, currVi = 0;
+        CadrgTocEntry* toc {pagers[CENTER_PAGER]->getToc()};
+        double centerHi{}, centerVi{}, currHi{}, currVi{};
         if (toc != nullptr) {
             centerHi = toc->getHorizInterval();
             centerVi = toc->getVertInterval();
@@ -326,19 +327,19 @@ void MapDrawer::drawMap(const int zone, const int idx)
         glPushMatrix();
             // Not centered, move the whole map down the displacement value.
             if (!getCentered()) {
-                const double dis = getOuterRadius();
+                const double dis {getOuterRadius()};
                 //double scale = getScale();
-                const double myScale = vpHL / dis;
+                const double myScale {vpHL / dis};
                 glTranslatef(0, static_cast<GLfloat>(getDisplacement() * myScale), 0);
             }
             glTranslatef(0, 0, -0.1f);
-            sinAng = 0.0f;
-            cosAng = 1.0f;
+            sinAng = 0.0;
+            cosAng = 1.0;
 
             // Set the scale, if not the CENTER_PAGER
             if (idx != CENTER_PAGER) determineScaling(idx);
 
-            bool nu = getNorthUp();
+            const bool nu {getNorthUp()};
             if (!nu) {
                 const GLfloat hdg = static_cast<GLfloat>(getHeadingDeg());
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
@@ -347,24 +348,24 @@ void MapDrawer::drawMap(const int zone, const int idx)
             }
 
             // Translate down the pixels first
-            const float transPixelX = -pixelCol[idx] * scalingEast[idx];
-            const float transPixelY =  pixelRow[idx] * scalingNorth[idx];
+            const float transPixelX {-pixelCol[idx] * scalingEast[idx]};
+            const float transPixelY {pixelRow[idx] * scalingNorth[idx]};
 
             // Translate to the next tile
             glTranslatef(transPixelX, transPixelY, 0.0f);
             TextureTable& tbl = pagers[idx]->getTable();
-            int si = tbl.getLowerBoundIndex();
+            const int si {tbl.getLowerBoundIndex()};
 
-            int i1 = si;
-            int i = 0;
-            int lb = 0, ub = 0;
+            int i1 {si};
+            int i {};
+            int lb{}, ub{};
 
             // Enable texturing
             glEnable(GL_TEXTURE_2D);
             lb = tbl.getLowerBoundIndex();
             ub = tbl.getUpperBoundIndex();
             for (i = lb; i <= ub; i++) {
-                int j1 = si;
+                int j1 {si};
                 for (int j = lb; j <= ub; j++) {
                     drawTexture(i1, j1, idx);
                     j1++;
@@ -378,7 +379,7 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (drawGrid) {
                 i1 = si;
                 for (i = lb; i <= ub; i++) {
-                    int j1 = si;
+                    int j1 {si};
                     for (int j = lb; j <= ub; j++) {
                         goDrawGrid(i1, j1, idx);
                         j1++;
@@ -396,15 +397,15 @@ void MapDrawer::drawMap(const int zone, const int idx)
 void MapDrawer::drawTexture(const int row, const int column, const int idx)
 {
     if (pagers[idx] != nullptr && myMap != nullptr && getDisplay() != nullptr) {
-        TextureTable& tbl = pagers[idx]->getTable();
+        TextureTable& tbl {pagers[idx]->getTable()};
         const auto newTex = dynamic_cast<graphics::Texture*>(tbl.getTexture(row, column));
         if (newTex != nullptr) {
             // Bind our texture and set up our modulation
             glBindTexture(GL_TEXTURE_2D, newTex->getTexture());
             glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-            const double transX = static_cast<double>(column * pixPerTile * scalingEast[idx]);
-            const double transY = static_cast<double>(-row * pixPerTile * scalingNorth[idx]);
+            const double transX {static_cast<double>(column * pixPerTile * scalingEast[idx])};
+            const double transY {static_cast<double>(-row * pixPerTile * scalingNorth[idx])};
             glPushMatrix();
                 glTranslatef(static_cast<GLfloat>(transX), static_cast<GLfloat>(transY), 0.0f);
                 glBegin(GL_POLYGON);

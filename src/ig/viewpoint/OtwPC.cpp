@@ -5,9 +5,9 @@
 
 #include "mixr/ig/viewpoint/EntityState.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"

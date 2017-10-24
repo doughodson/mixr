@@ -57,7 +57,7 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
 
     //Check and convert the time to seconds
     if ( newTime != nullptr ) {
-        double finaltime = Seconds::convertStatic( *newTime );
+        double finaltime{Seconds::convertStatic( *newTime )};
         okTime = setSeconds(finaltime);
     }
 
@@ -148,22 +148,22 @@ bool AngularVelocity::setRadiansPerSecond(const double newAngularVelocity)
 {
 
     //Set angle and time - units in radians per second -> num = input; den = 1:
-    bool ok1 = setRadians(newAngularVelocity);
-    bool ok2 = setSeconds(1);
+    bool ok1{setRadians(newAngularVelocity)};
+    bool ok2{setSeconds(1)};
 
     //Check both values for ok:
-    ok1 = (ok1)&&(ok2);
+    ok1 = (ok1 && ok2);
 
     return ok1;
 }
 
 bool AngularVelocity::setSlotAngle(const Angle* const msg)
 {
-    bool ok = false;
+    bool ok{};
 
     //Try to convert Number to an angle:
     if( msg != nullptr ) {
-        double finalNumber = static_cast<double>(Radians::convertStatic(*msg));
+        double finalNumber{static_cast<double>(Radians::convertStatic(*msg))};
         ok = setRadians(finalNumber);
     }
     return ok;
@@ -174,11 +174,11 @@ bool AngularVelocity::setSlotAngle(const Angle* const msg)
 //------------------------------------------------------------------------------
 bool AngularVelocity::setSlotTime(const Time* const msg)
 {
-    bool ok = false;
+    bool ok{};
 
     //Try to convert Number to a time:
     if( msg != nullptr ) {
-        double finalNumber = Seconds::convertStatic(*msg);
+        const double finalNumber{Seconds::convertStatic(*msg)};
         ok = setSeconds(finalNumber);
     }
     return ok;
@@ -190,7 +190,7 @@ bool AngularVelocity::setSlotTime(const Time* const msg)
 bool AngularVelocity::setDegrees(const double newAngle)
 {
     //Set the angle in radians:
-    bool ok = setRadians( newAngle * static_cast<double>(angle::D2RCC) );
+    const bool ok{setRadians( newAngle * static_cast<double>(angle::D2RCC) )};
 
     return ok;
 }

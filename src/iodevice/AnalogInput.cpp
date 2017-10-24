@@ -149,7 +149,7 @@ bool AnalogInput::setGain(const double v)
 // table: Shaping function table
 bool AnalogInput::setTable(const base::Table1* const msg)
 {
-    bool ok = true;
+    bool ok {true};
 
     // Unref() the old (if any)
     if (table != nullptr) {
@@ -163,10 +163,9 @@ bool AnalogInput::setTable(const base::Table1* const msg)
     if (table != nullptr) {
         if (table->isValid()) {
             table->ref();
-        }
-        else {
+        } else {
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AnalogInput::setTable(): invalid table!" << std::endl;
+                std::cerr << "AnalogInput::setTable(): invalid table!" << std::endl;
             }
             ok = false;
             table = nullptr;
@@ -182,8 +181,7 @@ bool AnalogInput::setTable(const base::Table1* const msg)
 void AnalogInput::processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData)
 {
    // Default is our initial value
-   double vin = value;
-
+   double vin {value};
 
    // Get data from the AI card
    if (device != nullptr && devEnb) {
@@ -191,11 +189,11 @@ void AnalogInput::processInputs(const double dt, const base::IoDevice* const dev
    }
 
    // process the input value, as needed
-   double vout = convert(vin,dt);
+   double vout {convert(vin,dt)};
 
    // Set the data to the input data handler
    if (inData != nullptr) {
-      inData->setAnalogInput(location,vout);
+      inData->setAnalogInput(location, vout);
    }
 }
 
@@ -212,16 +210,16 @@ void AnalogInput::processOutputs(const double, const base::IoData* const, base::
 double AnalogInput::convert(const double vin, const double)
 {
    // Deadband
-   double v1 = vin;
+   double v1 {vin};
    if (deadband != 0 && vin < deadband && vin > -deadband) {
       v1 = 0;
    }
 
    // Offset & Gain
-   double v2 = (v1 - offset) * gain;
+   const double v2 {(v1 - offset) * gain};
 
    // Shaping function
-   double v3 = v2;
+   double v3 {v2};
    if (table != nullptr) v3 = table->lfi(v2);
 
    // return final value
@@ -236,9 +234,9 @@ double AnalogInput::convert(const double vin, const double)
 // ai: Analog Input location
 bool AnalogInput::setSlotLocation(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
       }
@@ -249,9 +247,9 @@ bool AnalogInput::setSlotLocation(const base::Number* const msg)
 // channel: AI card's channel number
 bool AnalogInput::setSlotChannel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
       }
@@ -262,7 +260,7 @@ bool AnalogInput::setSlotChannel(const base::Number* const msg)
 // value: Initial value (default: 0)
 bool AnalogInput::setSlotValue(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setValue( msg->getReal() );
    }
@@ -272,7 +270,7 @@ bool AnalogInput::setSlotValue(const base::Number* const msg)
 // deadband: Deadband: [ 0 .. 1 ] (default: 0.0)
 bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setDeadband( msg->getReal() );
    }
@@ -282,7 +280,7 @@ bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 // offset: Offset value
 bool AnalogInput::setSlotOffset(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setOffset( msg->getReal() );
    }
@@ -292,7 +290,7 @@ bool AnalogInput::setSlotOffset(const base::Number* const msg)
 // gain: Gain value
 bool AnalogInput::setSlotGain(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setGain( msg->getReal() );
    }

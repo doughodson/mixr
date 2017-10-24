@@ -72,11 +72,12 @@ public:
    // type codes to a target NIB object.
    virtual bool copyEntityType(Nib* const targetNib) const =0;
 
-   // Slot functions
-   virtual bool setSlotTemplatePlayer(const models::Player* const msg);     // Sets the template player
-
 private:
    base::safe_ptr<const models::Player> tPlayer; // Template player
+
+private:
+   // slot table helper methods
+   virtual bool setSlotTemplatePlayer(const models::Player* const);     // Sets the template player
 };
 
 }

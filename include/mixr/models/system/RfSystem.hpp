@@ -90,7 +90,7 @@ public:
 
    virtual Antenna* getAntenna();
    virtual const Antenna* getAntenna() const;            // Pointer to the antenna model, or zero (0) if none
-   virtual bool setAntenna(Antenna* const p);            // Sets the R/F system's antenna
+   virtual bool setAntenna(Antenna* const);              // Sets the R/F system's antenna
 
    virtual base::String* getAntennaName();
    virtual const base::String* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
@@ -120,26 +120,12 @@ public:
    // Accepts an emission from an antenna
    virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const double raGain);
 
-   // Slot functions
-   virtual bool setSlotAntennaName(base::String* const msg);
-   virtual bool setSlotPeakPower(base::Number* const msg);
-   virtual bool setSlotFrequency(base::Number* const msg);
-   virtual bool setSlotBandwidth(base::Number* const msg);
-   virtual bool setSlotBandwidthNoise(base::Number* const msg);
-   virtual bool setSlotRfThreshold(base::Decibel* const msg);
-   virtual bool setSlotRfNoiseFigure(base::Number* const msg);
-   virtual bool setSlotRfSysTemp(base::Number* const msg);
-   virtual bool setSlotRfTransmitLoss(base::Number* const msg);
-   virtual bool setSlotRfReceiveLoss(base::Number* const msg);
-   virtual bool setSlotRfSignalProcessLoss(base::Number* const msg);
-   virtual bool setSlotDisableEmissions(base::Number* const msg);
-
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
 
 protected:
    // Max size of emission queues (per frame)
-   static const unsigned int MAX_EMISSIONS = MIXR_CONFIG_RF_MAX_EMISSIONS;
+   static const unsigned int MAX_EMISSIONS{MIXR_CONFIG_RF_MAX_EMISSIONS};
 
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();
@@ -181,6 +167,21 @@ private:
    double rfLossXmit {1.0};          // Transmit loss (default: 1.0)             (no units)
    double rfLossRecv {1.0};          // Receive loss (default: 1.0)              (no units)
    double rfLossSignalProcess {1.0}; // Signal Processing loss (default: 1.0)    (no units)
+
+private:
+   // slot table helper methods
+   bool setSlotAntennaName(base::String* const);
+   bool setSlotPeakPower(base::Number* const);
+   bool setSlotFrequency(base::Number* const);
+   bool setSlotBandwidth(base::Number* const);
+   bool setSlotBandwidthNoise(base::Number* const);
+   bool setSlotRfThreshold(base::Decibel* const);
+   bool setSlotRfNoiseFigure(base::Number* const);
+   bool setSlotRfSysTemp(base::Number* const);
+   bool setSlotRfTransmitLoss(base::Number* const);
+   bool setSlotRfReceiveLoss(base::Number* const);
+   bool setSlotRfSignalProcessLoss(base::Number* const);
+   bool setSlotDisableEmissions(base::Number* const);
 };
 
 }

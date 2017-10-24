@@ -19,11 +19,11 @@ BEGIN_SLOTTABLE(Page)
 END_SLOTTABLE(Page)
 
 BEGIN_SLOT_MAP(Page)
-    ON_SLOT(1, setPage, base::Identifier)
-    ON_SLOT(2, setSubpageStream, base::PairStream)
-    ON_SLOT(2, setSubpageSingle, Page)
-    ON_SLOT(3, setPagingEvent, base::PairStream)
-    ON_SLOT(4, drawSubpageFirst, base::Number)
+    ON_SLOT(1, setSlotPage,                 base::Identifier)
+    ON_SLOT(2, setSlotSubpageStream,        base::PairStream)
+    ON_SLOT(2, setSlotSubpageSingle,        Page)
+    ON_SLOT(3, setSlotPagingEvent,          base::PairStream)
+    ON_SLOT(4, setSlotDrawSubpageFirst,     base::Number)
     ON_SLOT(5, setSlotFocusSlavedToSubpage, base::Number)
 END_SLOT_MAP()
 
@@ -453,18 +453,18 @@ bool Page::processSubpages()
 }
 
 //------------------------------------------------------------------------------
-// setPage() -- sets the initial page
+// setSlotPage() -- sets the initial page
 //------------------------------------------------------------------------------
-bool Page::setPage(const base::Identifier* const pobj)
+bool Page::setSlotPage(const base::Identifier* const pobj)
 {
     if (pobj != nullptr) cpName =  *pobj;
     return true;
 }
 
 //------------------------------------------------------------------------------
-//  setSubpageStream() -- it takes a pair stream
+//  setSlotSubpageStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Page::setSubpageStream (base::PairStream* const psobj)
+bool Page::setSlotSubpageStream (base::PairStream* const psobj)
 {
     bool ok = false;
     if (psobj != nullptr) {
@@ -479,9 +479,9 @@ bool Page::setSubpageStream (base::PairStream* const psobj)
 }
 
 //------------------------------------------------------------------------------
-//  setSubpageSingle() -- it takes an Page
+//  setSlotSubpageSingle() -- it takes an Page
 //------------------------------------------------------------------------------
-bool Page::setSubpageSingle(Page* const pobj)
+bool Page::setSlotSubpageSingle(Page* const pobj)
 {
     bool ok = false;
     if (pobj != nullptr) {
@@ -495,9 +495,9 @@ bool Page::setSubpageSingle(Page* const pobj)
 }
 
 //------------------------------------------------------------------------------
-// setPagingEvent() -- sets the page change event
+// setSlotPagingEvent() -- sets the page change event
 //------------------------------------------------------------------------------
-bool Page::setPagingEvent(base::PairStream* const peobj)
+bool Page::setSlotPagingEvent(base::PairStream* const peobj)
 {
     if (peobj != nullptr) {
         if (pageChgEvents != nullptr) pageChgEvents->unref();
@@ -508,9 +508,9 @@ bool Page::setPagingEvent(base::PairStream* const peobj)
 }
 
 //------------------------------------------------------------------------------
-// drawSubpageFirst() -- Draw subpages first (default: draw our page graphics first)
- //------------------------------------------------------------------------------
-bool Page::drawSubpageFirst(const base::Number* const spfobj)
+// setSlotDrawSubpageFirst() -- Draw subpages first (default: draw our page graphics first)
+//------------------------------------------------------------------------------
+bool Page::setSlotDrawSubpageFirst(const base::Number* const spfobj)
 {
     if (spfobj != nullptr) postDraw1 = spfobj->getBoolean();
     return true;

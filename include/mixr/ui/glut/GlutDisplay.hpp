@@ -91,15 +91,6 @@ public:
    // Subwindow size [ width height ] as a ratio of its main window (see note #4)
    const base::Vec2d& getSubwindowSize() const;
 
-   // Slot functions
-   bool setSlotFullScreen(const base::Number* const msg);
-   bool setSlotIdleSleepTime(const base::Number* const msg);
-   bool setSlotResizeWindows(const base::Number* const msg);
-   bool setSlotPickWidth(const base::Number* const msg);
-   bool setSlotPickHeight(const base::Number* const msg);
-   bool setSlotAccumBuff(const base::Number* const msg);
-   bool setSlotStencilBuff(const base::Number* const msg);
-
    virtual void select() override;                       // Selects this display.
    virtual void hide() override;
    virtual void show() override;
@@ -179,6 +170,16 @@ private:
    static GlutDisplay* displayList[MAX_DISPLAYS];      // Display List
    static int numGlutDisplays;                         // Number of GlutDisplays
    Graphic* picked {};                                 // our "picked graphic"
+
+private:
+   // slot table helper methods
+   bool setSlotFullScreen(const base::Number* const);
+   bool setSlotIdleSleepTime(const base::Number* const);
+   bool setSlotResizeWindows(const base::Number* const);
+   bool setSlotPickWidth(const base::Number* const);
+   bool setSlotPickHeight(const base::Number* const);
+   bool setSlotAccumBuff(const base::Number* const);
+   bool setSlotStencilBuff(const base::Number* const);
 };
 
 inline int GlutDisplay::getWindowId() const                               { return winId;           }

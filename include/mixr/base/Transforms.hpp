@@ -28,15 +28,16 @@ class Number;
 // Description: Coordinate Transformations (e.g., translate, rotate, scale)
 //
 //
-// Public methods: Base class public methods, plus ...
+// Public methods:
 //
 //      operator const Matrixd&()
 //          Returns a copy of the transformation matrix
 //
-//      bool setComputeMatrix1(Angle* sc1obj)
-//      bool setComputeMatrix1(Number* sc1obj)
+// Private slot methods:
+//      bool setSlotComputeMatrix1(Angle* sc1obj)
+//      bool setSlotComputeMatrix1(Number* sc1obj)
 //      ...
-//      bool setComputeMatrix4(Number* sc4obj)
+//      bool setSlotComputeMatrix4(Number* sc4obj)
 //          Set the n'th parameter to the transformation function
 //          and create the transformation matrix.  Returns true if the matrix
 //          is valid.  These functions must be called in order.  For example,
@@ -50,20 +51,23 @@ class Transform : public Object
 public:
    Transform();
    operator const Matrixd&()                                         { return m; }
-   virtual bool setComputematrix1(const Angle* const);
-   virtual bool setComputematrix1(const Number* const);
-   virtual bool setComputematrix2(const Angle* const);
-   virtual bool setComputematrix2(const Number* const);
-   virtual bool setComputematrix3(const Angle* const);
-   virtual bool setComputematrix3(const Number* const);
-   virtual bool setComputematrix4(const Angle* const);
-   virtual bool setComputematrix4(const Number* const);
 
 protected:
    virtual void computeMatrix();
    Matrixd m;                   // transformation matrix
    std::array<double, 4> v {};  // values
    int nv {};                   // Number of values
+
+private:
+   // slot table helper methods
+   bool setSlotComputematrix1(const Angle* const);
+   bool setSlotComputematrix1(const Number* const);
+   bool setSlotComputematrix2(const Angle* const);
+   bool setSlotComputematrix2(const Number* const);
+   bool setSlotComputematrix3(const Angle* const);
+   bool setSlotComputematrix3(const Number* const);
+   bool setSlotComputematrix4(const Angle* const);
+   bool setSlotComputematrix4(const Number* const);
 };
 
 //------------------------------------------------------------------------------

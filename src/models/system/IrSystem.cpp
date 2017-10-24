@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(IrSystem)
 END_SLOTTABLE(IrSystem)
 
 BEGIN_SLOT_MAP(IrSystem)
-   ON_SLOT(1,  setSlotSeekerName,  base::String)
+   ON_SLOT(1,  setSlotSeekerName,      base::String)
    ON_SLOT(2,  setSlotDisableQueries,  base::Number)
 END_SLOT_MAP()
 
@@ -66,7 +66,7 @@ void IrSystem::reset()
    // FAB - sensor needs to know its seeker without waiting for updateData
    if (getSeeker() == nullptr && getSeekerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the seeker, but not the seeker itself
-      const char* name = *getSeekerName();
+      const char* name{*getSeekerName()};
 
       // Get the named seeker from the player's list of gimbals
       const auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
@@ -96,7 +96,7 @@ void IrSystem::updateData(const double dt)
    // ---
    if (getSeeker() == nullptr && getSeekerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the seeker, but not the seeker itself
-      const char* name = *getSeekerName();
+      const char* name{*getSeekerName()};
 
       // Get the named seeker from the player's list of gimbals
       const auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
@@ -136,8 +136,8 @@ void IrSystem::processPlayersOfInterest()
    // Do we have a seeker?
    // ---
    if (getSeeker() != nullptr) {
-      base::PairStream* poi = nullptr;
-      WorldModel* sim = getWorldModel();
+      base::PairStream* poi{};
+      WorldModel* sim{getWorldModel()};
       if ( sim != nullptr && !areQueriesDisabled() )
          poi = getWorldModel()->getPlayers();
 
@@ -227,7 +227,7 @@ bool IrSystem::setSlotSeekerName(base::String* const p)
 // setSlotDisableQueries() -- sets the disable sending emissions flag
 bool IrSystem::setSlotDisableQueries(base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setDisableQueriesFlag( msg->getBoolean() );
    }
@@ -236,4 +236,3 @@ bool IrSystem::setSlotDisableQueries(base::Number* const msg)
 
 }
 }
-

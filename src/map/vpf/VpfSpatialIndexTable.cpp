@@ -74,15 +74,15 @@ int VpfSpatialIndexTable::findPrimitivesBySpatialQuery(const float lat, const fl
     // first, check our minimum bounding rectangle just to see if we contain this lat/lon point
     if ((lon >= mbrX1 && lon <= mbrX2) && (lat >= mbrY1 && lat <= mbrY2)) {
         //std::cout << "VALID LAT / LON convert to spatial coordinates!" << std::endl;
-        int x {}, y {};
-        int left {}, right {}, top {}, bottom {};
+        int x{}, y{};
+        int left{}, right{}, top{}, bottom{};
         // flag to tell our checker to check for a space query, not just a point query
-        bool spaceQuery {};
+        bool spaceQuery{};
         // we are going to convert our latitude to spatial coordinates, but we are also going to create spacial coordinates for our width and height
         if (width != 0 && height != 0) {
             spaceQuery = true;
-            float widthDeg {static_cast<float>((width / 60) / 2.0)};
-            float heightDeg {static_cast<float>((height / 60) / 2.0)};
+            float widthDeg {(width / 60) / 2.0f};
+            float heightDeg {(height / 60) / 2.0f};
             convertDegsToSpatialPoint(lat + heightDeg, lon + widthDeg, top, right);
             convertDegsToSpatialPoint(lat - heightDeg, lon - widthDeg, bottom, left);
         }

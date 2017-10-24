@@ -26,7 +26,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 {
     // Local variables
     // Header length
-    int headerLength = 0;
+    int headerLength {};
     // Filename
     //char filename[80];
     // Location records
@@ -34,47 +34,47 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Holds our colors locally
     Rgb rgb[CADRG_COLORS];
     // Location section physical location
-    uint locSecPhysLoc = 0;
+    uint locSecPhysLoc {};
     // # of color/gray offset records
-    uchar numOffsetRecs = 0;
+    uchar numOffsetRecs {};
     // # of color converter offset records
-    uchar numCCOffRecs = 0;
+    uchar numCCOffRecs {};
     // Offset record length
-    ushort offsetRecLen = 17;
+    ushort offsetRecLen {17};
     // Color/Gray offset record fields
-    ushort tableId[MAXOFFSETRECS];
+    ushort tableId[MAXOFFSETRECS] {};
     // # Color records
-    uint numColRecs[MAXOFFSETRECS];
+    uint numColRecs[MAXOFFSETRECS] {};
     // Color element length
-    uchar colorElemLen[MAXOFFSETRECS];
+    uchar colorElemLen[MAXOFFSETRECS] {};
     // Histogram record length
-    ushort histRecLen[MAXOFFSETRECS];
+    ushort histRecLen[MAXOFFSETRECS] {};
     // Color table offset
-    uint colorTblOff[MAXOFFSETRECS];
+    uint colorTblOff[MAXOFFSETRECS] {};
     // Histogram table offset
-    uint histTblOff[MAXOFFSETRECS];
+    uint histTblOff[MAXOFFSETRECS] {};
     // Colormap offset table offset
-    uint colorMapOffTblOff = 0;
+    uint colorMapOffTblOff {};
     // Color converter subsection hdr
     // Color conversion offset table offset
-    uint ccOffTblOff = 0;
+    uint ccOffTblOff {};
     // Color converter offset recl
-    ushort ccOffRect = 0;
+    ushort ccOffRect {};
     // cc Rectangle
-    ushort ccRect = 0;
+    ushort ccRect {};
     // Color converter offset record fields
     // Color conversion table ID
-    ushort cctId[MAXCCRECS];
+    ushort cctId[MAXCCRECS] {};
     // Color conversion # records
-    uint cctNumRecs[MAXCCRECS];
+    uint cctNumRecs[MAXCCRECS] {};
     // cc table offset
-    uint ccTblOff[MAXCCRECS];
+    uint ccTblOff[MAXCCRECS] {};
     // cc src color/gray offset table offset
-    uint ccTblSrc[MAXCCRECS];
+    uint ccTblSrc[MAXCCRECS] {};
     // cc tgt color/gray offset table offset
-    uint ccTblTgt[MAXCCRECS];
+    uint ccTblTgt[MAXCCRECS] {};
     // Found lookup table flag
-    bool foundLut = false;
+    bool foundLut {};
     // Temporary filename
     const auto string = new base::String(frame.getDirectory());
     string->catStr(frame.getFileName());
@@ -97,18 +97,18 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     headerLength = NITF_HDR_NONE;
 
     // Buffer to hold our header
-    char buf[1024];
+    char buf[1024] {};
 
     // Go to beginning of file
-    fin.seekg(0,std::ios::beg);
+    fin.seekg(0, std::ios::beg);
     fin.read(buf,1024);
 
     // Search for end of header
-    char* ptr = std::strstr(buf,"RPFHDR");
+    char* ptr {std::strstr(buf, "RPFHDR")};
 
     // Have valid pointer, find header length
     if (ptr) {
-        int dist = static_cast<int>(ptr - &buf[0]);
+        int dist {static_cast<int>(ptr - &buf[0])};
         headerLength = dist + 11;
     }
 
@@ -334,8 +334,9 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
 // getColor() - Retrieve our color value for a specific index
 // ------------------------------------------------------------------------------------------------
 const CadrgClut::Rgb& CadrgClut::getColor(unsigned int index) const {
-    if (index < 256) return colorTable[index];
-    else {
+    if (index < 256) {
+        return colorTable[index];
+    } else {
         std::cout << "CadrgClut::getColor() - Index > 256, no colortable associated!" << std::endl;
         return colorTable[0];
     }

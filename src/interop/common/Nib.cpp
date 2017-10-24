@@ -2,10 +2,10 @@
 #include "mixr/interop/common/Nib.hpp"
 #include "mixr/interop/common/Ntm.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/Missile.hpp"
-#include "mixr/models/player/SamVehicles.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/ground/Artillery.hpp"
+#include "mixr/models/player/ground/SamVehicle.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
@@ -20,7 +20,8 @@
 namespace mixr {
 namespace interop {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
+IMPLEMENT_SUBCLASS(Nib, "Nib")
+EMPTY_SLOTTABLE(Nib)
 
 Nib::Nib(const NetIO::IoType t) : ioType(t)
 {

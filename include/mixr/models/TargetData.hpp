@@ -82,27 +82,6 @@ public:
     bool setAzimuth(const double degs);
     bool setVelocity(const double fps);
 
-protected:
-    bool setSlotEnabled(const base::Number* const msg);
-    bool setSlotCompleted(const base::Number* const msg);
-    bool setSlotWpnType(const base::String* const msg);
-    bool setSlotQuantity(const base::Number* const msg);
-    bool setSlotManualAssign(const base::Number* const msg);
-    bool setSlotStickType(const base::Identifier* const msg);
-    bool setSlotStickDistance(const base::Distance* const msg);
-    bool setSlotStickDistance(const base::Number* const msg);
-    bool setSlotInterval(const base::Time* const msg);
-    bool setSlotInterval(const base::Number* const msg);
-    bool setSlotMaxMissDistance(const base::Distance* const msg);
-    bool setSlotMaxMissDistance(const base::Number* const msg);
-    bool setSlotArmDelay(const base::Time* const msg);
-    bool setSlotArmDelay(const base::Number* const msg);
-    bool setSlotAngle(const base::Angle* const msg);
-    bool setSlotAngle(const base::Number* const msg);
-    bool setSlotAzimuth(const base::Angle* const msg);
-    bool setSlotAzimuth(const base::Number* const msg);
-    bool setSlotVelocity(const base::Number* const msg);
-
 private:
     bool enabled {};
     bool completed {};
@@ -120,6 +99,27 @@ private:
     unsigned int quantity {};
     unsigned int stickType {MIDPOINT};
     bool manualAssign {};
+
+private:
+   bool setSlotEnabled(const base::Number* const);
+   bool setSlotCompleted(const base::Number* const);
+   bool setSlotWpnType(const base::String* const);
+   bool setSlotQuantity(const base::Number* const);
+   bool setSlotManualAssign(const base::Number* const);
+   bool setSlotStickType(const base::Identifier* const);
+   bool setSlotStickDistance(const base::Distance* const);
+   bool setSlotStickDistance(const base::Number* const);
+   bool setSlotInterval(const base::Time* const);
+   bool setSlotInterval(const base::Number* const);
+   bool setSlotMaxMissDistance(const base::Distance* const);
+   bool setSlotMaxMissDistance(const base::Number* const);
+   bool setSlotArmDelay(const base::Time* const);
+   bool setSlotArmDelay(const base::Number* const);
+   bool setSlotAngle(const base::Angle* const);
+   bool setSlotAngle(const base::Number* const);
+   bool setSlotAzimuth(const base::Angle* const);
+   bool setSlotAzimuth(const base::Number* const);
+   bool setSlotVelocity(const base::Number* const);
 };
 
 inline bool TargetData::isEnabled() const                    { return enabled; }

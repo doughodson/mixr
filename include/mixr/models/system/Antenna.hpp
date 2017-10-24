@@ -63,19 +63,19 @@ public:
 
    virtual void rfTransmit(Emission* const em);
 
-   RfSystem* getSystem()                       { return sys; }
-   const RfSystem* getSystem() const           { return sys; }
+   RfSystem* getSystem()                          { return sys; }
+   const RfSystem* getSystem() const              { return sys; }
    virtual bool setSystem(RfSystem* const p);
 
    // System limits
-   int getMaxEmissions() const                 { return MAX_EMISSIONS; }
+   int getMaxEmissions() const                    { return MAX_EMISSIONS; }
 
    // Antenna polarization matching gain
    double getPolarizationGain(const Polarization p1) const;
-   Polarization getPolarization() const        { return polar; }
+   Polarization getPolarization() const           { return polar; }
 
    // Antenna gain
-   virtual double getGain() const              { return gain; }
+   virtual double getGain() const                 { return gain; }
 
    // Gain pattern
    const base::Function* gainPatternTable() const { return gainPattern; }
@@ -90,10 +90,10 @@ public:
    }
 
    // Recycle emissions flag (reuse old emission structure instead of creating new ones)
-   bool isEmissionRecycleEnabled() const       { return recycle; }
+   bool isEmissionRecycleEnabled() const          { return recycle; }
 
    // Beam width (radians)
-   double getBeamWidth() const                 { return beamWidth; }
+   double getBeamWidth() const                    { return beamWidth; }
 
    // Member functions
    virtual bool setPolarization(const Polarization p) { polar = p; return true; }
@@ -102,15 +102,14 @@ public:
    virtual bool setEmissionRecycleFlag(const bool enable);
    virtual bool setBeamWidth(const double radians);
 
-   // slot functions that need public access because there is no corresponding member function
-   virtual bool setSlotPolarization(base::String* const v);
-   virtual bool setSlotThreshold(base::Power* const p);
-   virtual bool setSlotGain(const base::Number* const g);
-   virtual bool setSlotGainPattern(base::Function* const func);
-   virtual bool setSlotGainPatternDeg(const base::Number* const g);
-   virtual bool setSlotRecycleFlg(const base::Number* const);
-   virtual bool setSlotBeamWidth(const base::Angle* const msg);
-   virtual bool setSlotBeamWidth(const base::Number* const msg);
+   virtual bool setPolarization(base::String* const v);
+   virtual bool setThreshold(base::Power* const p);
+   virtual bool setGain(const base::Number* const g);
+   virtual bool setGainPattern(base::Function* const func);
+   virtual bool setGainPatternDeg(const base::Number* const g);
+   virtual bool setRecycleFlg(const base::Number* const);
+   virtual bool setBeamWidth(const base::Angle* const msg);
+   virtual bool setBeamWidth(const base::Number* const msg);
 
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
@@ -137,7 +136,7 @@ protected:
    mutable long inUseEmLock {};                              // Semaphore to protect 'inUseEmQueue'
 
 private:
-   static const int MAX_EMISSIONS = 10000;   // Max size of emission queues and arrays
+   static const int MAX_EMISSIONS{10000};   // Max size of emission queues and arrays
 
    RfSystem* sys {};                // Assigned R/F system (e.g., sensor, radio)
 
@@ -154,6 +153,17 @@ private:
    bool gainPatternDeg {};          // Gain pattern is in degrees flag (else radians)
 
    bool recycle {true};             // Recycle emissions flag
+
+private:
+   // slot table helper methods
+   bool setSlotPolarization(base::String* const x)                  { return setPolarization(x);   }
+   bool setSlotThreshold(base::Power* const x)                      { return setThreshold(x);      }
+   bool setSlotGain(const base::Number* const x)                    { return setGain(x);           }
+   bool setSlotGainPattern(base::Function* const x)                 { return setGainPattern(x);    }
+   bool setSlotGainPatternDeg(const base::Number* const x)          { return setGainPatternDeg(x); }
+   bool setSlotRecycleFlg(const base::Number* const x)              { return setRecycleFlg(x);     }
+   bool setSlotBeamWidth(const base::Angle* const x)                { return setBeamWidth(x);      }
+   bool setSlotBeamWidth(const base::Number* const x)               { return setBeamWidth(x);      }
 };
 
 }

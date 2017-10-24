@@ -61,7 +61,7 @@ protected:
    virtual void clearData() override;
 
 private:
-   static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
+   static const unsigned int MAX_DATA_FILES {4};            // Only 4 files (as in Quad!)
 
    std::array<const Terrain*, MAX_DATA_FILES> dataFiles {}; // Terrain data files
    unsigned int numDataFiles {};                            // Number of data files

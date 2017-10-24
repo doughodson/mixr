@@ -5,12 +5,12 @@
 #include "mixr/interop/rprfom/RprFom.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/GroundVehicle.hpp"
-#include "mixr/models/player/LifeForms.hpp"
-#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/Ships.hpp"
+#include "mixr/models/player/Ship.hpp"
 #include "mixr/models/Signatures.hpp"
 
 #include "mixr/base/Pair.hpp"
@@ -119,33 +119,29 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
     // Check if we are enabled to register this class of objects and
     // create the proper FOM class structure
     // ---
-    unsigned int idx = 0;
-    BaseEntity* baseEntity = nullptr;
+    unsigned int idx {};
+    BaseEntity* baseEntity {};
     if (player->isClassType(typeid(models::AirVehicle))) {
         if (isObjectClassRegistrationEnabled( AIRCRAFT_CLASS )) {
             baseEntity = new Aircraft();
             idx = AIRCRAFT_CLASS;
         }
-    }
-    else if (player->isClassType(typeid(models::Missile))) {
+    } else if (player->isClassType(typeid(models::Missile))) {
         if (isObjectClassRegistrationEnabled( MUNITION_CLASS )) {
             baseEntity = new Munition();
             idx = MUNITION_CLASS;
         }
-    }
-    else if (player->isClassType(typeid(models::LifeForm))) {
+    } else if (player->isClassType(typeid(models::LifeForm))) {
         if (isObjectClassRegistrationEnabled( HUMAN_CLASS )) {
             baseEntity = new Human();
             idx = HUMAN_CLASS;
         }
-    }
-    else if (player->isClassType(typeid(models::GroundVehicle))) {
+    } else if (player->isClassType(typeid(models::GroundVehicle))) {
         if (isObjectClassRegistrationEnabled( GROUND_VEHICLE_CLASS )) {
             baseEntity = new GroundVehicle();
             idx = GROUND_VEHICLE_CLASS;
         }
-    }
-    else if (player->isClassType(typeid(models::Ship))) {
+    } else if (player->isClassType(typeid(models::Ship))) {
         if (isObjectClassRegistrationEnabled( SURFACE_VESSEL_CLASS )) {
             baseEntity = new SurfaceVessel();
             idx = SURFACE_VESSEL_CLASS;
@@ -155,7 +151,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
     // ---
     // If enabled, create and set the output NIB
     // ---
-    Nib* nib = nullptr;
+    Nib* nib {};
     if (baseEntity != nullptr) {
         nib = static_cast<Nib*>(nibFactory(interop::NetIO::OUTPUT_NIB));
         if (nib != nullptr) {
@@ -176,7 +172,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
 //------------------------------------------------------------------------------
 bool NetIO::publishAndSubscribe()
 {
-   bool ok = true;
+   bool ok {true};
 
    // ----------
    // We want the callbacks for attribute level advisories
@@ -208,7 +204,7 @@ bool NetIO::publishAndSubscribe()
 void NetIO::processInputList()
 {
    for (unsigned int idx = 0; idx < getInputListSize(); idx++) {
-      Nib* nib = static_cast<Nib*>( getInputNib(idx) );
+      Nib* nib {static_cast<Nib*>( getInputNib(idx) )};
       if (nib != nullptr) nib->updateTheIPlayer();
    }
 }
@@ -229,9 +225,9 @@ void NetIO::discoverObjectInstance(
         const RTI::ObjectClassHandle theObjectClass,
         const char* theObjectName)
 {
-   BaseEntity* baseEntity = nullptr;
+   BaseEntity* baseEntity {};
 
-   unsigned int idx = findObjectClassIndex(theObjectClass);
+   unsigned int idx {findObjectClassIndex(theObjectClass)};
    switch (idx) {
       case AIRCRAFT_CLASS :
          baseEntity = new Aircraft();
@@ -299,7 +295,7 @@ const Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const rprfom::Ntm* result = nullptr;
+   const rprfom::Ntm* result {};
 
    const auto root = dynamic_cast<const rprfom::NtmInputNode*>( getRootNtmInputNode() );
    if (root != nullptr) {
@@ -381,7 +377,7 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* const nib) const
 {
-   const interop::Ntm* result = nullptr;
+   const interop::Ntm* result {};
 
    const auto rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
@@ -411,13 +407,13 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
       const unsigned char  extra
    ) const
 {
-   const Ntm* result = nullptr;
+   const Ntm* result {};
 
    {
       // Yes we have the proper type of NIB ...
 
       // Make sure that the NIB's code for this level matches our code
-      bool match = true;
+      bool match {true};
       switch (level) {
          case ROOT_LVL :         match = true; break; // the 'root' node always matches
          case KIND_LVL :         match = (code == kind);         break;
@@ -434,9 +430,9 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // First, if we're not the last 'extra' level then search
          // our subnodes to see if they can find a match
          if (level < EXTRA_LVL) {
-            const base::List::Item* item = subnodeList->getFirstItem();
+            const base::List::Item* item {subnodeList->getFirstItem()};
             while (item != nullptr && result == nullptr) {
-               const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
+               const NtmInputNode* subnode {static_cast<const NtmInputNode*>(item->getValue())};
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
                item = item->getNext();
             }
@@ -461,15 +457,15 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
 {
-   bool ok = false;
+   bool ok {};
 
    // Make sure we have the correct kind of NTM ...
    const auto disNtm = dynamic_cast<rprfom::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
-      unsigned int currLevelCode = 0;
-      unsigned int nextLevelCode = 0;
+      unsigned int currLevelCode {};
+      unsigned int nextLevelCode {};
       switch (level) {
          case ROOT_LVL : {
             currLevelCode = 0;
@@ -515,15 +511,15 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
 
       // Does our code match the NIB's entity type code for this level?
       // And the 'root' node always matches.
-      bool match = (code == currLevelCode) || (level == ROOT_LVL);
+      bool match {(code == currLevelCode) || (level == ROOT_LVL)};
 
       if (match) {
-         bool err = false;
+         bool err {};
 
          // Case #1; if we're at the 'category' level or above, and all remaining codes are
          // zero, then this becomes a wild card terminal node.
          {
-            bool wild = (level >= CATEGORY_LVL);
+            bool wild {(level >= CATEGORY_LVL)};
 
             if (wild && level < EXTRA_LVL)        wild = (disNtm->getEntityExtra() == 0);
             if (wild && level < SPECIFIC_LVL)     wild = (disNtm->getEntitySpecific() == 0);
@@ -556,10 +552,10 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
          if (!ok && !err && level == SPECIFIC_LVL) {
 
             // make sure the terminal node doesn't already exist.
-            bool alreadyExists = false;
-            const base::List::Item* item = subnodeList->getFirstItem();
+            bool alreadyExists {};
+            const base::List::Item* item {subnodeList->getFirstItem()};
             while (item != nullptr && !alreadyExists) {
-               const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
+               const NtmInputNode* subnode {static_cast<const NtmInputNode*>(item->getValue())};
                alreadyExists = (nextLevelCode == subnode->code);
                item = item->getNext();
             }
@@ -587,9 +583,9 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
          // Case #3; if we're at a level less than the 'specific' level, so try
          // to add the NTM to one of our existing subnodes.
          if (!ok && !err && level < SPECIFIC_LVL) {
-            const base::List::Item* item = subnodeList->getFirstItem();
+            const base::List::Item* item {subnodeList->getFirstItem()};
             while (item != nullptr && !ok) {
-               NtmInputNode* subnode = const_cast<NtmInputNode*>(static_cast<const NtmInputNode*>(item->getValue()));
+               NtmInputNode* subnode {const_cast<NtmInputNode*>(static_cast<const NtmInputNode*>(item->getValue()))};
                if (nextLevelCode == subnode->code) {
                   ok = subnode->add2OurLists(disNtm);
                }

@@ -93,7 +93,7 @@ public:
    bool isSubdisplay() const;                   // Is this a subwindow
 
    const char* getName() const;                 // Returns the display's (window) name
-   bool setName(base::String* const n);         // Sets the display's name
+   bool setName(const base::String* const);     // Sets the display's name
 
    virtual void select();                       // Selects this display.
 
@@ -379,6 +379,10 @@ private:
 
 private:
     // slot table helper methods
+    bool setSlotName(const base::String* const);
+    bool setSlotNormalFont(AbstractFont* const);
+    bool setSlotNormalFont(const base::Identifier* const fontName);
+    bool setSlotColorTable(base::PairStream* const list);
     bool setSlotLeftOrthoBound(const base::Number* const);
     bool setSlotRightOrthoBound(const base::Number* const);
     bool setSlotBottomOrthoBound(const base::Number* const);

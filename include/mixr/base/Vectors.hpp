@@ -210,7 +210,7 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 {
    bool B1 = A.isGoodMatrix();
    bool B2 = r < A.getRows();
-   if (!B1 || !B2) return 0;
+   if (!B1 || !B2) return nullptr;
 
    const unsigned int N = A.getCols();
 
@@ -424,7 +424,7 @@ inline CVector* getColVector(const Matrix& A, const unsigned int c)
 {
    bool B1 = A.isGoodMatrix();
    bool B2 = c < A.getCols();
-   if (!B1 || !B2) return 0;
+   if (!B1 || !B2) return nullptr;
 
    const unsigned int N = A.getRows();
    const auto pV = new CVector(N);
@@ -498,7 +498,7 @@ inline RVector* crossProduct(const RVector& v1, const RVector& v2)
 inline CVector* getDiag(const Matrix& A)
 {
    if (!A.isGoodMatrix() || !A.isSquare()) {
-      return 0;
+      return nullptr;
    }
 
    const unsigned int N = A.getRows();

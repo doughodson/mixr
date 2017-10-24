@@ -3,7 +3,8 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
-#include "mixr/models/system/AngleOnlyTrackManager.hpp"
+#include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
+#include "mixr/models/system/trackmanager/AirAngleOnlyTrkMgrPT.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
@@ -24,8 +25,8 @@ BEGIN_SLOTTABLE(MergingIrSensor)
 END_SLOTTABLE(MergingIrSensor)
 
 BEGIN_SLOT_MAP(MergingIrSensor)
-   ON_SLOT(1,setSlotAzimuthBin,base::Number)
-   ON_SLOT(2,setSlotElevationBin,base::Number)
+   ON_SLOT(1, setSlotAzimuthBin,   base::Number)
+   ON_SLOT(2, setSlotElevationBin, base::Number)
 END_SLOT_MAP()
 
 MergingIrSensor::MergingIrSensor()
@@ -98,7 +99,7 @@ void MergingIrSensor::mergeIrReturns()
                // for deletion -- these have already been
                // merged and must be ignored.
 
-            IrQueryMsg* currentMsg = storedMessagesQueue.peek0(i);
+            IrQueryMsg* currentMsg{storedMessagesQueue.peek0(i)};
 
             // Do not bother processing those marked
             // for deletion -- these have already been
@@ -107,10 +108,9 @@ void MergingIrSensor::mergeIrReturns()
 
                for (int j = i+1; j < numRecords; j++) {
 
-                  IrQueryMsg* nextMsg = storedMessagesQueue.peek0(j);
-                  double azimuthDelta = currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth();
-                  double elevationDelta = currentMsg->getRelativeElevation()
-                     - nextMsg->getRelativeElevation();
+                  IrQueryMsg* nextMsg{storedMessagesQueue.peek0(j)};
+                  double azimuthDelta{currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth()};
+                  double elevationDelta{currentMsg->getRelativeElevation() - nextMsg->getRelativeElevation()};
 
                   if (azimuthDelta < 0)
                      azimuthDelta = -azimuthDelta;
@@ -123,8 +123,8 @@ void MergingIrSensor::mergeIrReturns()
                     // for the sensor to distinguish between them;
                     // we will merge the two signals based
                     // on their weighted signal-to-noise.
-                    double currentRatio = 0.0;
-                    double nextRatio = 0.0;
+                    double currentRatio{};
+                    double nextRatio{};
 
                     // find current ratio.
                     if (isMessageEnabled(MSG_DEBUG)) {
@@ -166,10 +166,10 @@ void MergingIrSensor::mergeIrReturns()
                     } // if next signal > background
 
                     // use ratios to find weights.
-                    double sumRatio = currentRatio + nextRatio;
+                    double sumRatio{currentRatio + nextRatio};
 
-                    const double currentWeight = currentRatio / sumRatio;
-                    const double nextWeight = 1.0 - currentWeight;
+                    const double currentWeight{currentRatio / sumRatio};
+                    const double nextWeight{1.0 - currentWeight};
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
@@ -252,14 +252,13 @@ bool MergingIrSensor::setElevationBin(const double w)
 
 bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
 {
-   double value = 0.0;
+   double value{};
 
    const auto a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
-   }
-   else if (msg != nullptr) {
+   } else if (msg != nullptr) {
       value = msg->getReal();
    }
    setAzimuthBin(value);
@@ -268,14 +267,13 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
 
 bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
 {
-   double value = 0.0;
+   double value{};
 
    const auto a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
-   }
-   else if (msg != nullptr) {
+   } else if (msg != nullptr) {
       value = msg->getReal();
    }
    setElevationBin(value);

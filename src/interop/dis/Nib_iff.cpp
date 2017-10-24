@@ -14,7 +14,6 @@
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -29,14 +28,14 @@ static const unsigned short ALTERNATE_MODE_C     = 0x0004;
 //------------------------------------------------------------------------------
 bool Nib::IffManager(const double curExecTime)
 {
-   NetIO* disIO = static_cast<NetIO*>(getNetIO());
-   const base::Pair* pair = getPlayer()->getRadioByType(typeid(models::Iff));
+   NetIO* disIO {static_cast<NetIO*>(getNetIO())};
+   const base::Pair* pair {getPlayer()->getRadioByType(typeid(models::Iff))};
 
    // OK if the player has an IFF transponder and we're the correct version.
-   bool ok = (disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != nullptr);
+   bool ok {(disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != nullptr)};
 
    if (ok) {
-      const models::Iff* iffSystem = static_cast<const models::Iff*>(pair->object());
+      const models::Iff* iffSystem {static_cast<const models::Iff*>(pair->object())};
 
       if (isIffUpdateRequired(curExecTime, iffSystem)) {
 
@@ -101,36 +100,35 @@ bool Nib::IffManager(const double curExecTime)
 //------------------------------------------------------------------------------
 bool Nib::isIffUpdateRequired(const double curExecTime, const models::Iff* const iffSystem)
 {
-
    // System status Bits
-   static const unsigned short SYSTEM_STATUS_ON     = 0x0001;
-   //static const unsigned short SYSTEM_STATUS_NO_P1  = 0x0002;
-   //static const unsigned short SYSTEM_STATUS_NO_P2  = 0x0004;
-   //static const unsigned short SYSTEM_STATUS_NO_P3  = 0x0008;
-   //static const unsigned short SYSTEM_STATUS_NO_P4  = 0x0010;
-   //static const unsigned short SYSTEM_STATUS_NO_P5  = 0x0020;
-   static const unsigned short SYSTEM_STATUS_NO_P6  = 0x0040;
-   //static const unsigned short SYSTEM_STATUS_FAILED = 0x0080;
+   static const unsigned short SYSTEM_STATUS_ON      {0x0001};
+   //static const unsigned short SYSTEM_STATUS_NO_P1 {0x0002};
+   //static const unsigned short SYSTEM_STATUS_NO_P2 {0x0004};
+   //static const unsigned short SYSTEM_STATUS_NO_P3 {0x0008};
+   //static const unsigned short SYSTEM_STATUS_NO_P4 {0x0010};
+   //static const unsigned short SYSTEM_STATUS_NO_P5 {0x0020};
+   static const unsigned short SYSTEM_STATUS_NO_P6   {0x0040};
+   //static const unsigned short SYSTEM_STATUS_FAILED  {0x0080};
 
    // Parameter bits
-   static const unsigned short MODE_ON             = 0x2000;
-   static const unsigned short MODE_C_ALT_NEG      = 0x0001;
+   static const unsigned short MODE_ON             {0x2000};
+   static const unsigned short MODE_C_ALT_NEG      {0x0001};
 
    //Modifier bits
-   static const unsigned short MODIFIER_EMERGENCY  = 0x0002;
-   static const unsigned short MODIFIER_IDENT      = 0x0004;
+   static const unsigned short MODIFIER_EMERGENCY  {0x0002};
+   static const unsigned short MODIFIER_IDENT      {0x0004};
 
    // Informational layer bits
-   static const unsigned short LAYER_1_PRESENT     = 0x0002;
-   static const unsigned short LAYER_2_PRESENT     = 0x0004;
+   static const unsigned short LAYER_1_PRESENT     {0x0002};
+   static const unsigned short LAYER_2_PRESENT     {0x0004};
 
    enum { NO, YES, UNSURE } result = UNSURE;    // Result of update check
-   unsigned char options = 0;                   // New IFF PDU option bits
+   unsigned char options {};                    // New IFF PDU option bits
 
    // ---
    // Delta time since last message
    // ---
-   double drTime = curExecTime - iffLastExecTime;
+   const double drTime {curExecTime - iffLastExecTime};
 
    // ---
    // 1) First time?
@@ -198,9 +196,12 @@ bool Nib::isIffUpdateRequired(const double curExecTime, const models::Iff* const
 
       // Parameter 5 - Mode C
       opData.param5 = 0;
-      double alt100 = static_cast<double>((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
-      if (alt100 < 0) { alt100 = -alt100; opData.param5 = MODE_C_ALT_NEG; }
-      unsigned short ialt = static_cast<unsigned short>(alt100);
+      double alt100 {static_cast<double>((getPlayer()->getAltitudeFt() + 50.0) / 100.0)};
+      if (alt100 < 0) {
+         alt100 = -alt100;
+         opData.param5 = MODE_C_ALT_NEG;
+      }
+      unsigned short ialt {static_cast<unsigned short>(alt100)};
       opData.param5 = (opData.param5 | (ialt << 1));  // alt shifted left one bit
       if (iffSystem->isEnabledModeC()) {
          opData.param5 = (opData.param5 | MODE_ON);

@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 
@@ -27,8 +27,8 @@ namespace rprfom {
 //------------------------------------------------------------------------------
 bool NetIO::publishAndSubscribeMunitionDetonation()
 {
-   RTI::RTIambassador* p = getRTIambassador();
-   bool ok = true;
+   RTI::RTIambassador* p {getRTIambassador()};
+   bool ok {true};
 
    // ----------
    // Get handles to the class, attributes and parameters
@@ -39,8 +39,8 @@ bool NetIO::publishAndSubscribeMunitionDetonation()
       // Munition detonation Interaction class handle and parameter handles
       // ---
       {
-         RTI::InteractionClassHandle handle =
-            p->getInteractionClassHandle(MunitionDetonation::getInteractionFedName());
+         RTI::InteractionClassHandle handle {
+            p->getInteractionClassHandle(MunitionDetonation::getInteractionFedName())};
 
          setInteractionClassHandle(MUNITION_DETONATION_INTERACTION, handle );
 
@@ -171,17 +171,17 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     RTIObjectIdStruct firingObjectIdentifier;
     RTIObjectIdStruct munitionObjectIdentifier;
     RTIObjectIdStruct targetObjectIdentifier;
-    models::AbstractWeapon::Detonation detonationResult = models::AbstractWeapon::DETONATE_NONE;
+    models::AbstractWeapon::Detonation detonationResult {models::AbstractWeapon::DETONATE_NONE};
 
     // ---
     // Extract the required data from the interaction's parameters
     // ---
     RTI::ULong length;
-    char netBuffer[1000];
+    char netBuffer[1000] {};
     for (RTI::ULong i = 0 ; i < theParameters.size(); i++ ) {
         
         // get the parameter's handed and data (network byte order)
-        RTI::ParameterHandle theHandle = theParameters.getHandle(i);
+        RTI::ParameterHandle theHandle {theParameters.getHandle(i)};
         theParameters.getValue(i, netBuffer, length);
 
         // Process the parameter
@@ -220,7 +220,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         
         case FIRING_OBJECT_IDENTIFIER_MD_PI : {
             // Get the object's name
-            RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
+            RTI::ULong n {RTIObjectIdStruct::ID_SIZE};
             if (n > length) n = length;
             base::utStrncpy(reinterpret_cast<char*>(&firingObjectIdentifier.id[0]), sizeof(firingObjectIdentifier.id), netBuffer, n);
             firingObjectIdentifier.id[n-1] = '\0';   
@@ -229,7 +229,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         
         case MUNITION_OBJECT_IDENTIFIER_MD_PI : {
             // Get the object's name
-            RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
+            RTI::ULong n {RTIObjectIdStruct::ID_SIZE};
             if (n > length) n = length;
             base::utStrncpy(reinterpret_cast<char*>(&munitionObjectIdentifier.id[0]), sizeof(munitionObjectIdentifier.id), netBuffer, n);
             munitionObjectIdentifier.id[n-1] = '\0';   
@@ -238,7 +238,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         
         case TARGET_OBJECT_IDENTIFIER_MD_PI : {
             // Get the object's name
-            RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
+            RTI::ULong n {RTIObjectIdStruct::ID_SIZE};
             if (n > length) n = length;
             base::utStrncpy(reinterpret_cast<char*>(&targetObjectIdentifier.id[0]), sizeof(targetObjectIdentifier.id), netBuffer, n);
             targetObjectIdentifier.id[n-1] = '\0';   
@@ -252,9 +252,9 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     // ---
     // 1) Find the target (local) player
     // ---
-    models::Player* tPlayer = nullptr;
+    models::Player* tPlayer {};
     if ( std::strlen(reinterpret_cast<const char*>(targetObjectIdentifier.id)) > 0 ) {
-        interop::Nib* tNib = findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB);
+        interop::Nib* tNib {findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB)};
         if (tNib != nullptr) tPlayer = tNib->getPlayer();
     }
     
@@ -267,8 +267,8 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // ---
         // 2) Find the firing player and munitions (networked) IPlayers
         // ---
-        interop::Nib* fNib = nullptr;
-        interop::Nib* mNib = nullptr;
+        interop::Nib* fNib {};
+        interop::Nib* mNib {};
         if ( std::strlen(reinterpret_cast<const char*>(firingObjectIdentifier.id)) > 0 ) {
             fNib = findNibByObjectName( reinterpret_cast<char*>(firingObjectIdentifier.id), INPUT_NIB);
         }

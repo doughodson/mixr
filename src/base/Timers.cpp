@@ -21,8 +21,8 @@ BEGIN_SLOTTABLE(Timer)
 END_SLOTTABLE(Timer)
 
 BEGIN_SLOT_MAP(Timer)
-   ON_SLOT(1, setSlotTimerValue, Time)
-   ON_SLOT(2, setSlotAlarmTime, Time)
+   ON_SLOT(1, setSlotTimerValue,  Time)
+   ON_SLOT(2, setSlotAlarmTime,   Time)
    ON_SLOT(3, setSlotTimerActive, Number)
 END_SLOT_MAP()
 

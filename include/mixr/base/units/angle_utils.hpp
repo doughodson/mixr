@@ -33,7 +33,7 @@ inline double semicirclesToDegrees(const double v) { return v * SC2D; }
 // aepcfDeg -- angle end point check (float-degrees)
 inline float aepcfDeg(float x)
 {
-   float y(0.0);
+   float y {};
    if (x < -180.0f || x > 180.0f) {
       y = fmodf(x, 360.0f);
       if (y >  180.0f) y -= 360.0f;
@@ -49,7 +49,7 @@ inline float aepcfDeg(float x)
 // aepcdDeg -- angle end point check (float-degrees)
 inline double aepcdDeg(double x)
 {
-   double y(0.0);
+   double y {};
    if (x < -180.0 || x > 180.0) {
       y = std::fmod(x, 360.0);
       if (y >  180.0) y -= 360.0;
@@ -65,7 +65,7 @@ inline double aepcdDeg(double x)
 // aepcfRad -- angle end point check (float-radians)
 inline float aepcfRad(float x)
 {
-   float y(0.0);
+   float y {};
    if (x < -static_cast<float>(PI) || x > static_cast<float>(PI)) {
       y = fmodf(x, (2.0f * static_cast<float>(PI)));
       if (y >  static_cast<float>(PI)) y -= (2.0f * static_cast<float>(PI));
@@ -81,7 +81,7 @@ inline float aepcfRad(float x)
 // aepcdRad -- angle end point check (double-radians)
 inline double aepcdRad(double x)
 {
-   double y(0.0);
+   double y {};
    if (x < -PI || x > PI) {
       y = std::fmod(x, (2.0 * PI));
       if (y >  PI) y -= (2.0 * PI);

@@ -38,18 +38,10 @@ class AircraftIrSignature : public IrSignature
 public:
    AircraftIrSignature();
 
-   virtual bool getIrSignature(IrQueryMsg* const em) override;
-
-   // slot operations
-   virtual bool setSlotAirframeSignatureTable(const base::Table4* const tbl);
-   virtual bool setSlotAirframeWavebandFactorTable(const base::Table2* const tbl);
-   virtual bool setSlotPlumeSignatureTable(const base::Table5* const tbl);
-   virtual bool setSlotPlumeWavebandFactorTable(const base::Table2* const tbl);
-   virtual bool setSlotHotPartsSignatureTable(const base::Table5* const tbl);
-   virtual bool setSlotHotPartsWavebandFactorTable(const base::Table2* const tbl);
+   virtual bool getIrSignature(IrQueryMsg* const) override;
 
 protected:
-   virtual double* getHeatSignature(IrQueryMsg* msg);
+   virtual double* getHeatSignature(IrQueryMsg*);
 
    virtual double getAirframeSignature(double velocity, double altitude, double azimuth, double elevation);
    virtual double getAirframeWavebandFactor(double midpoint, double width);
@@ -60,18 +52,18 @@ protected:
    virtual double getHotPartsSignature(double pla, double velocity, double altitude, double azimuth, double elevation);
    virtual double getHotPartsWavebandFactor(double midpoint, double width);
 
-   virtual double getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg);
+   virtual double getCalculatedAirframeHeatSignature(const IrQueryMsg* const);
 
    // FAB - added to parallel plume and hotparts calculations
    virtual void getAirframeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound);
 
-   virtual double getPlumeRadiation(const IrQueryMsg* const msg);
+   virtual double getPlumeRadiation(const IrQueryMsg* const);
 
    virtual void getPlumeSignatures(const IrQueryMsg* const msg,
                                    const double lowerBound,
                                    const double upperBound);
 
-   virtual double getHotPartsRadiation(const IrQueryMsg* const msg);
+   virtual double getHotPartsRadiation(const IrQueryMsg* const);
 
    virtual void getHotPartsSignatures(const IrQueryMsg* const msg,
                                       const double lowerBound,
@@ -129,6 +121,15 @@ private:
    double* airframeSig {};       // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
    double* plumeSigs {};         // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
    double* hotPartsSigs {};      // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+
+private:
+   // slot table helper methods
+   bool setSlotAirframeSignatureTable(const base::Table4* const);
+   bool setSlotAirframeWavebandFactorTable(const base::Table2* const);
+   bool setSlotPlumeSignatureTable(const base::Table5* const);
+   bool setSlotPlumeWavebandFactorTable(const base::Table2* const);
+   bool setSlotHotPartsSignatureTable(const base::Table5* const);
+   bool setSlotHotPartsWavebandFactorTable(const base::Table2* const);
 };
 
 }

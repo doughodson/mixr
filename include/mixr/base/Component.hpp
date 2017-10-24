@@ -406,6 +406,8 @@ private:
    // slot table helper methods
    bool setSlotComponent(PairStream* const multiple);        // Sets the components list
    bool setSlotComponent(Component* const single);           // Sets a single component
+   bool setSlotSelect(const String* const name)              { return select(name); }
+   bool setSlotSelect(const Number* const num)               { return select(num);  }
    bool setSlotEnableTimingStats(const Number* const);       // Sets the timing enabled flag
    bool setSlotPrintTimingStats(const Number* const);        // Sets the print timing stats flag
    bool setSlotFreeze(const Number* const);                  // Sets the freeze flag

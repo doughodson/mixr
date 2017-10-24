@@ -58,9 +58,6 @@ public:
    unsigned int getChipSize() const        { return chipSize; }
    virtual bool setChipSize(const unsigned int pixels);
 
-   // Slot functions
-   virtual bool setSlotChipSize(const base::Number* const msg);
-
    // Request a new image
    virtual bool  requestImage(
          const unsigned int width,       // Image width (pixels)
@@ -98,6 +95,10 @@ private:
 
    unsigned int width {};           // Image width (pixels)
    unsigned int height {};          // Image height (pixels)
+
+private:
+   // slot table helper methods
+   bool setSlotChipSize(const base::Number* const);
 };
 
 }

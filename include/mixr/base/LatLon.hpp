@@ -95,10 +95,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setDirection(const String* const);
-   bool setDegrees(const Number* const);
-   bool setMinutes(const Number* const);
-   bool setSeconds(const Number* const);
+   bool setSlotDirection(const String* const);
+   bool setSlotDegrees(const Number* const);
+   bool setSlotMinutes(const Number* const);
+   bool setSlotSeconds(const Number* const);
 };
 
 }

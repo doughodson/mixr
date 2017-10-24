@@ -246,17 +246,17 @@ VpfRecord* VpfTable::getRecord(const int idx)
             if (eor) {
                 // we have to delete our record, because it's was not valid
                 records[idx-1]->unref();
-                records[idx-1] = 0;
-                return 0;
+                records[idx-1] = nullptr;
+                return nullptr;
             }
             else return records[idx-1];
         }
         else {
-            if (records[idx-1]->isEOR()) return 0;
+            if (records[idx-1]->isEOR()) return nullptr;
             return records[idx-1];
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void VpfTable::determineRecordSize()

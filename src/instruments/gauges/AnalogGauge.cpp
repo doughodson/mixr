@@ -17,10 +17,10 @@ BEGIN_SLOTTABLE(AnalogGauge)
 END_SLOTTABLE(AnalogGauge)
 
 BEGIN_SLOT_MAP(AnalogGauge)
-    ON_SLOT(1, setSlotLeftBoundary, base::Number)
+    ON_SLOT(1, setSlotLeftBoundary,  base::Number)
     ON_SLOT(2, setSlotRightBoundary, base::Number)
-    ON_SLOT(3, setSlotIsOutlined, base::Number)
-    ON_SLOT(4, setSlotIsVertical, base::Number)
+    ON_SLOT(3, setSlotIsOutlined,    base::Number)
+    ON_SLOT(4, setSlotIsVertical,    base::Number)
 END_SLOT_MAP()
 
 AnalogGauge::AnalogGauge()
@@ -46,31 +46,36 @@ void AnalogGauge::copyData(const AnalogGauge& org, const bool)
 void AnalogGauge::drawFunc()
 {
     if (drawMe) {
-    glPushMatrix();
+        glPushMatrix();
         // move us just slightly into the background, so things will overlay us
         gaugePos = getInstValue();
         //glTranslatef(0, 0, -0.1f);
         // if we are vertical, draw us growing up and down, else draw us growing left to right
         if (vertical) {
-            if (outline) glBegin(GL_LINE_STRIP);
-            else glBegin(GL_POLYGON);
-                    lcVertex2(leftBoundary, 0);
-                    lcVertex2(leftBoundary, gaugePos);
-                    lcVertex2(rightBoundary, gaugePos);
-                    lcVertex2(rightBoundary, 0);
-                glEnd();
+            if (outline) {
+                glBegin(GL_LINE_STRIP);
+            } else {
+                glBegin(GL_POLYGON);
+            }
+            lcVertex2(leftBoundary, 0);
+            lcVertex2(leftBoundary, gaugePos);
+            lcVertex2(rightBoundary, gaugePos);
+            lcVertex2(rightBoundary, 0);
+            glEnd();
+        } else {
+            if (outline) {
+                glBegin(GL_LINE_STRIP);
+            } else {
+                glBegin(GL_POLYGON);
+            }
+            lcVertex2(0, leftBoundary);
+            lcVertex2(gaugePos, leftBoundary);
+            lcVertex2(gaugePos, rightBoundary);
+            lcVertex2(0, rightBoundary);
+            glEnd();
         }
-        else {
-            if (outline) glBegin(GL_LINE_STRIP);
-            else glBegin(GL_POLYGON);
-                    lcVertex2(0, leftBoundary);
-                    lcVertex2(gaugePos, leftBoundary);
-                    lcVertex2(gaugePos, rightBoundary);
-                    lcVertex2(0, rightBoundary);
-                glEnd();
-        }
-    glPopMatrix();
-}
+        glPopMatrix();
+    }
 }
 
 // SLOT functions

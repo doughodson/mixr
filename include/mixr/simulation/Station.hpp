@@ -147,7 +147,7 @@ public:
    static const double DEFAULT_TC_THREAD_PRI;
    static const double DEFAULT_BG_THREAD_PRI;
    static const double DEFAULT_NET_THREAD_PRI;
-   static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
+   static const unsigned int DEFAULT_FAST_FORWARD_RATE {1};
 
 public:
    Station();
@@ -228,29 +228,6 @@ public:
    bool setBackgroundStackSize(const unsigned int bytes);    // Background thread stack size (bytes or zero for default)
    bool doWeHaveTheBgThread() const;                         // Do we have a background thread?
 
-   // ---
-   // Slot functions
-   // ---
-   virtual bool setSlotSimulation(Simulation* const);
-   virtual bool setSlotOutTheWindow(AbstractOtw* const);
-   virtual bool setSlotOutTheWindow(base::PairStream* const);
-   virtual bool setSlotIoHandler(base::IoHandler* const);
-   virtual bool setSlotIoHandler(base::PairStream* const);
-   virtual bool setSlotNetworks(base::PairStream* const);
-   virtual bool setSlotTimeCriticalRate(const base::Number* const hz);
-   virtual bool setSlotTimeCriticalPri(const base::Number* const);
-   virtual bool setSlotTimeCriticalStackSize(const base::Number* const);
-   virtual bool setSlotNetworkRate(const base::Number* const hz);
-   virtual bool setSlotNetworkPri(const base::Number* const);
-   virtual bool setSlotNetworkStackSize(const base::Number* const);
-   virtual bool setSlotBackgroundRate(const base::Number* const hz);
-   virtual bool setSlotBackgroundPri(const base::Number* const);
-   virtual bool setSlotBackgroundStackSize(const base::Number* const);
-   virtual bool setSlotStartupResetTime(const base::Time* const);
-   virtual bool setSlotOwnshipName(const base::String* const);
-   virtual bool setSlotFastForwardRate(const base::Number* const);
-   virtual bool setSlotEnableUpdateTimers(const base::Number* const);
-
    virtual void updateTC(const double dt = 0.0) override;
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
@@ -300,8 +277,40 @@ private:
    unsigned int bgStackSize {};                      // Background thread stack size (bytes or zero for system default size)
    base::safe_ptr<base::Thread> bgThread;            // The optional background thread
 
-   double startupResetTimer {-1.0};             // Startup RESET timer (sends a RESET_EVENT after timeout)
-   const base::Time* startupResetTimer0 {};     // Init value of the startup RESET timer
+   double startupResetTimer {-1.0};                  // Startup RESET timer (sends a RESET_EVENT after timeout)
+   const base::Time* startupResetTimer0 {};          // Init value of the startup RESET timer
+
+private:
+   // slot table helper methods
+   bool setSlotSimulation(Simulation* const);
+
+   bool setSlotNetworks(base::PairStream* const);
+
+   bool setSlotOutTheWindow(AbstractOtw* const);
+   bool setSlotOutTheWindow(base::PairStream* const);
+
+   bool setSlotIoHandler(base::IoHandler* const);
+   bool setSlotIoHandler(base::PairStream* const);
+
+   bool setSlotOwnshipName(const base::String* const);
+
+   bool setSlotTimeCriticalRate(const base::Number* const hz);
+   bool setSlotTimeCriticalPri(const base::Number* const);
+   bool setSlotTimeCriticalStackSize(const base::Number* const);
+   bool setSlotFastForwardRate(const base::Number* const);
+
+   bool setSlotNetworkRate(const base::Number* const hz);
+   bool setSlotNetworkPri(const base::Number* const);
+   bool setSlotNetworkStackSize(const base::Number* const);
+
+   bool setSlotBackgroundRate(const base::Number* const hz);
+   bool setSlotBackgroundPri(const base::Number* const);
+   bool setSlotBackgroundStackSize(const base::Number* const);
+
+   bool setSlotStartupResetTime(const base::Time* const);
+   bool setSlotEnableUpdateTimers(const base::Number* const);
+
+   bool setSlotDataRecorder(AbstractDataRecorder* const x)              { return setDataRecorder(x); }
 };
 
 }

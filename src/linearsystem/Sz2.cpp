@@ -6,6 +6,8 @@ namespace mixr {
 namespace linearsystem {
 
 IMPLEMENT_SUBCLASS(Sz2, "Sz2")
+EMPTY_COPYDATA(Sz2)
+EMPTY_DELETEDATA(Sz2)
 
 BEGIN_SLOTTABLE(Sz2)
     "n1",      //  1: N1
@@ -41,10 +43,6 @@ Sz2::Sz2()
 {
    STANDARD_CONSTRUCTOR()
 }
-
-EMPTY_COPYDATA(Sz2)
-EMPTY_DELETEDATA(Sz2)
-
 
 //------------------------------------------------------------------------------
 // Set slot functions

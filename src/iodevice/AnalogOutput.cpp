@@ -31,7 +31,7 @@ BEGIN_SLOT_MAP(AnalogOutput)
     ON_SLOT( 3, setSlotValue,    base::Number)
     ON_SLOT( 4, setSlotOffset,   base::Number)
     ON_SLOT( 5, setSlotGain,     base::Number)
-    ON_SLOT( 6, setTable,        base::Table1)
+    ON_SLOT( 6, setSlotTable,    base::Table1)
 END_SLOT_MAP()
 
 AnalogOutput::AnalogOutput()
@@ -50,7 +50,7 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool)
    gain = org.gain;
    offset = org.offset;
    {
-      const base::Table1* copy = nullptr;
+      const base::Table1* copy {};
       if (org.table != nullptr) {
          copy = org.table->clone();
       }
@@ -128,7 +128,7 @@ bool AnalogOutput::setOffset(const double v)
 
 bool AnalogOutput::setGain(const double v)
 {
-   bool ok = false;
+   bool ok {};
    if (v != 0) {
       gain = v;
       ok = true;
@@ -139,7 +139,7 @@ bool AnalogOutput::setGain(const double v)
 // table: Shaping function table
 bool AnalogOutput::setTable(const base::Table1* const msg)
 {
-    bool ok = true;
+    bool ok {true};
 
     // Unref() the old (if any)
     if (table != nullptr) {
@@ -153,10 +153,9 @@ bool AnalogOutput::setTable(const base::Table1* const msg)
     if (table != nullptr) {
         if (table->isValid()) {
             table->ref();
-        }
-        else {
+        } else {
             if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AnalogOutput::setTable(): invalid table!" << std::endl;
+                std::cerr << "AnalogOutput::setTable(): invalid table!" << std::endl;
             }
             ok = false;
             table = nullptr;
@@ -185,7 +184,7 @@ void AnalogOutput::processOutputs(const double, const base::IoData* const outDat
 
    // Send the scaled data to the AO card
    if (device != nullptr && devEnb) {
-      double vout = 0;
+      double vout {};
       if (gain != 0) {
          vout = (value / gain ) + offset;
       }
@@ -200,9 +199,9 @@ void AnalogOutput::processOutputs(const double, const base::IoData* const outDat
 // location: Output array index (location)
 bool AnalogOutput::setSlotLocation(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setLocation( static_cast<unsigned int>(v) );
       }
@@ -213,9 +212,9 @@ bool AnalogOutput::setSlotLocation(const base::Number* const msg)
 // channel: AI card's channel number
 bool AnalogOutput::setSlotChannel(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v {msg->getInt()};
       if (v >= 0) {
          ok = setChannel( static_cast<unsigned int>(v) );
       }
@@ -226,7 +225,7 @@ bool AnalogOutput::setSlotChannel(const base::Number* const msg)
 // value: Initial value (default: 0)
 bool AnalogOutput::setSlotValue(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setValue( msg->getFloat() );
    }
@@ -236,7 +235,7 @@ bool AnalogOutput::setSlotValue(const base::Number* const msg)
 // offset: Offset value
 bool AnalogOutput::setSlotOffset(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setOffset( msg->getFloat() );
    }
@@ -246,12 +245,12 @@ bool AnalogOutput::setSlotOffset(const base::Number* const msg)
 // gain: Gain value
 bool AnalogOutput::setSlotGain(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = setGain( msg->getFloat() );
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "AnalogOutput::setSlotGain(): ERROR -- gain can not be zero." << std::endl;
+             std::cerr << "AnalogOutput::setSlotGain(): ERROR -- gain can not be zero." << std::endl;
          }
       }
    }

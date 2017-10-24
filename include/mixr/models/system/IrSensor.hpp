@@ -103,17 +103,17 @@ public:
    virtual bool setUpperWavelength(const double w);                        // Sets the upper wavelength (microns; must be greater than 0)
 
    virtual double getNEI() const {return nei; };   // Returns the Noise Equivalent Irradiance  (watts/str-cm^2)
-   virtual bool setNEI(const double n);            // Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than 0)
+   virtual bool setNEI(const double);              // Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than 0)
 
    virtual double getThreshold() const {return threshold; };   // Returns the Signal to Noise Threshold
-   virtual bool setThreshold(const double t);                  // Sets the Signal to Noise Threshold
+   virtual bool setThreshold(const double);                    // Sets the Signal to Noise Threshold
 
    virtual double getIFOVTheta() const {return ifovTheta; };   // Returns ifov planar angle (radians)
    virtual double getIFOV() const {return ifov; };             // Returns the Instantaneous Field of View  (steradians)
-   virtual bool setIFOV(const double i);                       // Sets the Instantaneous Field of View  (steradians)
+   virtual bool setIFOV(const double);                         // Sets the Instantaneous Field of View  (steradians)
 
    virtual SensorType getSensorType() const {return sensorType; } ;  // Returns the type of sensor
-   virtual bool setSensorType(const SensorType st);                  // Sets the type of sensor
+   virtual bool setSensorType(const SensorType);                     // Sets the type of sensor
 
    //virtual double getFieldOfRegardTheta() const {return fieldOfRegardTheta; };   // Returns Field of Regard planar angle (radians)
    //virtual double getFieldOfRegard() const { return fieldOfRegard; };            // Returns the Field of Regard  (steradians)
@@ -129,24 +129,11 @@ public:
    virtual bool setMaximumRange(const double maximumRange);          // Sets maximum Range
 
    virtual const base::String* getTrackManagerName() const; // Returns the requested track manager's name
-   virtual bool setTrackManagerName(base::String* const a); // Sets the name of the track manager to use
+   virtual bool setTrackManagerName(base::String* const);   // Sets the name of the track manager to use
 
    virtual TrackManager* getTrackManager();               // Returns our current track manager
    virtual const TrackManager* getTrackManager() const;   // Returns our current track manager (const version)
-   virtual bool setTrackManager(TrackManager* const a);   // Sets the track manager
-
-   // Slot functions
-   virtual bool setSlotLowerWavelength(const base::Number* const msg);   // Sets lower wavelength
-   virtual bool setSlotUpperWavelength(const base::Number* const msg);   // Sets upper wavelength
-   virtual bool setSlotNEI(const base::Number* const msg);               // Sets Noise Equivalent Irradiance
-   virtual bool setSlotThreshold(const base::Number* const msg);         // Sets Signal to Noise Threshold
-   virtual bool setSlotIFOV(const base::Number* const msg);              // Sets Instantaneous Field of View
-   virtual bool setSlotSensorType(const base::String* const msg);        // Sets the Sensor Type
-   //virtual bool setSlotFieldOfRegard(const base::Number* const msg);   // Sets the field of regard
-   //virtual bool setSlotAzimuthBin(const base::Number* const msg);      // Sets the Azimuth Bin
-   //virtual bool setSlotElevationBin(const base::Number* const msg);    // Sets the Elevation Bin
-   virtual bool setSlotMaximumRange(const base::Number* const msg);      // Sets the Maximum Range
-   virtual bool setSlotTrackManagerName(base::String* const v);          // Sets our track manager by name
+   virtual bool setTrackManager(TrackManager* const);     // Sets the track manager
 
    // Store sensor reports until we are ready to pass on to track manager.
    void addStoredMessage(IrQueryMsg* msg);
@@ -197,6 +184,20 @@ private:
                                      // azimuth differs by less than this will be merged
 
    double maximumRange {};           // max sensor range.
+
+private:
+   // slot table helper methods
+   bool setSlotLowerWavelength(const base::Number* const);   // Sets lower wavelength
+   bool setSlotUpperWavelength(const base::Number* const);   // Sets upper wavelength
+   bool setSlotNEI(const base::Number* const);               // Sets Noise Equivalent Irradiance
+   bool setSlotThreshold(const base::Number* const);         // Sets Signal to Noise Threshold
+   bool setSlotIFOV(const base::Number* const);              // Sets Instantaneous Field of View
+   bool setSlotSensorType(const base::String* const);        // Sets the Sensor Type
+   //bool setSlotFieldOfRegard(const base::Number* const);   // Sets the field of regard
+   //bool setSlotAzimuthBin(const base::Number* const);      // Sets the Azimuth Bin
+   //bool setSlotElevationBin(const base::Number* const);    // Sets the Elevation Bin
+   bool setSlotMaximumRange(const base::Number* const);      // Sets the Maximum Range
+   bool setSlotTrackManagerName(base::String* const);        // Sets our track manager by name
 };
 
 }

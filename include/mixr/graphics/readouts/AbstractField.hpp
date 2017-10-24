@@ -285,6 +285,7 @@ private:
 
 private:
    // slot table helper methods
+   bool setSlotPosition(const base::List* const);
    bool setSlotWidth(const base::Number* const);
    bool setSlotHighlight(const base::Number* const);
    bool setSlotUnderline(const base::Number* const);

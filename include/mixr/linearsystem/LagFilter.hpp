@@ -39,11 +39,13 @@ public:
    double getTau() const                         { return tau; }
    virtual bool setTau(const double v);
 
-   virtual bool setSlotTau(const base::Time* const msg);
-   virtual bool setSlotTau(const base::Number* const msg);
-
 private:
    double tau {1.0};    // filter time constant (seconds)
+
+private:
+   // slot table helper methods
+   bool setSlotTau(const base::Time* const);
+   bool setSlotTau(const base::Number* const);
 };
 
 }

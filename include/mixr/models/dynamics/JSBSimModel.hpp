@@ -70,14 +70,6 @@ public:
     virtual bool setAltitudeHoldOn(const bool b) override;
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
-    // slot methods
-    const base::String* getRootDir() const                  { return rootDir;    }   // JSBSim root directory
-    virtual bool setRootDir(const base::String* const);
-    const base::String* getModel() const                    { return model;      }   // JSBSim model
-    virtual bool setModel(const base::String* const);
-    int getDebugLevel() const                               { return debugLevel; }   // JSBSim debug level
-    virtual bool setDebugLevel(const base::Integer* const);
-
 protected:
 
     JSBSim::FGFDMExec* fdmex {};
@@ -106,6 +98,12 @@ private:
     bool   hasHeadingHold {};
     bool   hasVelocityHold {};
     bool   hasAltitudeHold {};
+
+private:
+   // slot table helper methods
+   bool setSlotRootDir(const base::String* const);
+   bool setSlotModel(const base::String* const);
+   bool setSlotDebugLevel(const base::Integer* const);
 };
 
 }

@@ -72,13 +72,13 @@ void Table1::deleteData()
 bool Table1::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    unsigned int n1 = list.entries();
+    const unsigned int n1{list.entries()};
     if (n1 <= 0 || n1 != nx) return false;
 
     // Transfer numbers from the list to a temp table
     const auto p = new double[nx];
-    unsigned int n2 = list.getNumberList(p, nx);
-    bool ok = (nx == n2);
+    const unsigned int n2{list.getNumberList(p, nx)};
+    bool ok{nx == n2};
     if (ok) {
         // all is well -- copy the data
         for( unsigned int i = 0; i < nx; i++) table[i] = p[i];
@@ -137,8 +137,7 @@ double Table1::lfi(const double iv1, FStorage* const f) const
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_1D(iv1, getXData(), getNumXPoints(), getDataTable(), isExtrapolationEnabled(), &s->xbp);
-   }
-   else {
+   } else {
       return lfi_1D(iv1, getXData(), getNumXPoints(), getDataTable(), isExtrapolationEnabled());
    }
 }

@@ -15,7 +15,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class GaugeSlider : public AnalogGauge
 {
-    DECLARE_SUBCLASS(GaugeSlider,AnalogGauge)
+    DECLARE_SUBCLASS(GaugeSlider, AnalogGauge)
 
 public:
     GaugeSlider();

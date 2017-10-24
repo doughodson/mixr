@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(AbstractFtglFont)
 END_SLOTTABLE(AbstractFtglFont)
 
 BEGIN_SLOT_MAP(AbstractFtglFont)
-    ON_SLOT(1, setFaceSize, base::Number)
+    ON_SLOT(1, setSlotFaceSize, base::Number)
 END_SLOT_MAP()
 
 AbstractFtglFont::AbstractFtglFont()
@@ -53,14 +53,13 @@ void AbstractFtglFont::copyData(const AbstractFtglFont& org, const bool)
     fSize = org.fSize;
 }
 
-//------------------------------------------------------------------------------
-// AbstractFtglFont slot table methods
-//------------------------------------------------------------------------------
-bool AbstractFtglFont::setFaceSize(const base::Number* const faceSize)
+bool AbstractFtglFont::setSlotFaceSize(const base::Number* const faceSize)
 {
     // get our new face size, else we return to a default face size
-    if (faceSize != nullptr) fSize = faceSize->getInt();
-    else fSize = DEFAULT_FACE_SIZE;
+    if (faceSize != nullptr)
+        fSize = faceSize->getInt();
+    else
+        fSize = DEFAULT_FACE_SIZE;
     return true;
 }
 

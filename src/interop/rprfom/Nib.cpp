@@ -7,8 +7,8 @@
 
 #include "mixr/interop/dis/Ntm.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/Missile.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Signatures.hpp"
 
@@ -116,7 +116,7 @@ bool Nib::setEntityType(
     )
 {
    // Some simple validity checks
-   bool ok = (k < dis::NetIO::NUM_ENTITY_KINDS) || (d < dis::NetIO::MAX_ENTITY_DOMAINS);
+   bool ok {(k < dis::NetIO::NUM_ENTITY_KINDS) || (d < dis::NetIO::MAX_ENTITY_DOMAINS)};
 
    if (ok) {
       disKind = k;    
@@ -137,11 +137,11 @@ bool Nib::setEntityType(
 bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 {
     // Check the update required flags first ...
-    bool required = 
+    bool required {
       isAttributeUpdateRequired(NetIO::SPATIAL_AI) ||
       isAttributeUpdateRequired(NetIO::ENTITY_TYPE_AI) ||
       isAttributeUpdateRequired(NetIO::ENTITY_IDENTIFIER_AI) ||
-      isAttributeUpdateRequired(NetIO::FORCE_IDENTIFIER_AI);
+      isAttributeUpdateRequired(NetIO::FORCE_IDENTIFIER_AI)};
 
     // Check the base class next ...
     if (!required) {
@@ -159,7 +159,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-   models::Player* p = getPlayer();
+   models::Player* p {getPlayer()};
 
    // ---
    // If we haven't tried to created the IPlayer yet and we have at least position,

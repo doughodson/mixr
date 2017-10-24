@@ -7,8 +7,6 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/AirVehicle.hpp"
-#include "mixr/models/player/AbstractWeapon.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
@@ -16,7 +14,6 @@
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -25,9 +22,9 @@ namespace dis {
 void NetIO::processFirePDU(const FirePDU* const pdu)
 {
     // Get the Firing Player's ID
-    unsigned short fPlayerId = pdu->firingEntityID.ID;
-    unsigned short fSiteId = pdu->firingEntityID.simulationID.siteIdentification;
-    unsigned short fApplicationId = pdu->firingEntityID.simulationID.applicationIdentification;
+    unsigned short fPlayerId      {pdu->firingEntityID.ID};
+    unsigned short fSiteId        {pdu->firingEntityID.simulationID.siteIdentification};
+    unsigned short fApplicationId {pdu->firingEntityID.simulationID.applicationIdentification};
 
     //std::cout << "NetIO::processFirePDU() fired";
     //std::cout << "(" << pdu->firingEntityID.ID;
@@ -41,14 +38,14 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     //pdu->dumpData();
 
     // Get the Munition Player's ID
-    unsigned short mPlayerId = pdu->munitionID.ID;
-    unsigned short mSiteId = pdu->munitionID.simulationID.siteIdentification;
-    unsigned short mApplicationId = pdu->munitionID.simulationID.applicationIdentification;
+    unsigned short mPlayerId      {pdu->munitionID.ID};
+    unsigned short mSiteId        {pdu->munitionID.simulationID.siteIdentification};
+    unsigned short mApplicationId {pdu->munitionID.simulationID.applicationIdentification};
 
     // Get the Target Player's ID
-    unsigned short tPlayerId = pdu->targetEntityID.ID;
-    unsigned short tSiteId = pdu->targetEntityID.simulationID.siteIdentification;
-    unsigned short tApplicationId = pdu->targetEntityID.simulationID.applicationIdentification;
+    unsigned short tPlayerId      {pdu->targetEntityID.ID};
+    unsigned short tSiteId        {pdu->targetEntityID.simulationID.siteIdentification};
+    unsigned short tApplicationId {pdu->targetEntityID.simulationID.applicationIdentification};
 
     // ---
     // 1) Find the target (local) player
