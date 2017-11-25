@@ -161,8 +161,8 @@ inline bool operator!=(const RVector& v1, const RVector& v2)
 // ---
 inline RVector* add(const RVector& v1, const RVector& v2)
 {
-   Matrix* r = add( *((const Matrix*)&v1), *((const Matrix*)&v2) );
-   return (RVector*) r;
+   Matrix* r{add( *((const Matrix*)&v1), *((const Matrix*)&v2) )};
+   return reinterpret_cast<RVector*>(r);
 }
 
 // ---
@@ -170,8 +170,8 @@ inline RVector* add(const RVector& v1, const RVector& v2)
 // minus 'v2', or returns zero if they are not compatible for subtraction
 // ---
 inline RVector* subtract(const RVector& v1, const RVector& v2) {
-   Matrix* r = subtract( *((const Matrix*)&v1), *((const Matrix*)&v2) );
-   return (RVector*) r;
+   Matrix* r{subtract( *((const Matrix*)&v1), *((const Matrix*)&v2) )};
+   return reinterpret_cast<RVector*>(r);
 }
 
 // ---
@@ -179,8 +179,8 @@ inline RVector* subtract(const RVector& v1, const RVector& v2) {
 // ---
 inline RVector* minus(const RVector& v)
 {
-   Matrix* r = minus( *((const Matrix*)&v) );
-   return (RVector*) r;
+   Matrix* r{minus( *((const Matrix*)&v) )};
+   return reinterpret_cast<RVector*>(r);
 }
 
 // ---
@@ -189,8 +189,8 @@ inline RVector* minus(const RVector& v)
 // ---
 inline RVector* multiply(const RVector& v, const Matrix& m)
 {
-   Matrix* r = multiply( *((const Matrix*)&v), m );
-   return (RVector*) r;
+   Matrix* r{multiply( *((const Matrix*)&v), m )};
+   return reinterpret_cast<RVector*>(r);
 }
 
 // ---
@@ -198,8 +198,8 @@ inline RVector* multiply(const RVector& v, const Matrix& m)
 // ---
 inline RVector* multiply(const RVector& v, const double s)
 {
-   Matrix* r = multiply( *((const Matrix*)&v), s);
-   return (RVector*) r;
+   Matrix* r{multiply( *((const Matrix*)&v), s)};
+   return reinterpret_cast<RVector*>(r);
 }
 
 // ---
@@ -208,11 +208,11 @@ inline RVector* multiply(const RVector& v, const double s)
 // ---
 inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 {
-   bool B1 = A.isGoodMatrix();
-   bool B2 = r < A.getRows();
+   bool B1{A.isGoodMatrix()};
+   bool B2{r < A.getRows()};
    if (!B1 || !B2) return nullptr;
 
-   const unsigned int N = A.getCols();
+   const unsigned int N{A.getCols()};
 
    const auto pV = new RVector(N);
    if (pV == nullptr) return nullptr;
@@ -352,7 +352,6 @@ public:
    void unref() { BaseClass::unref(); }
 };
 
-
 // ---
 // equal
 // ---
@@ -375,8 +374,8 @@ inline bool operator!=(const CVector& v1, const CVector& v2)
 // ---
 inline CVector* add(const CVector& v1, const CVector& v2)
 {
-   Matrix* r = add( *((const Matrix*)&v1), *((const Matrix*)&v2) );
-   return (CVector*) r;
+   Matrix* r{add( *((const Matrix*)&v1), *((const Matrix*)&v2) )};
+   return reinterpret_cast<CVector*>(r);
 }
 
 // ---
@@ -385,8 +384,8 @@ inline CVector* add(const CVector& v1, const CVector& v2)
 // ---
 inline CVector* subtract(const CVector& v1, const CVector& v2)
 {
-   Matrix* r = subtract( *((const Matrix*)&v1), *((const Matrix*)&v2) );
-   return (CVector*) r;
+   Matrix* r{subtract( *((const Matrix*)&v1), *((const Matrix*)&v2) )};
+   return reinterpret_cast<CVector*>(r);
 }
 
 // ---
@@ -394,8 +393,8 @@ inline CVector* subtract(const CVector& v1, const CVector& v2)
 // ---
 inline CVector* minus(const CVector& v)
 {
-   Matrix* r = minus( *((const Matrix*)&v) );
-   return (CVector*) r;
+   Matrix* r{minus( *((const Matrix*)&v) )};
+   return reinterpret_cast<CVector*>(r);
 }
 
 // ---
@@ -404,8 +403,8 @@ inline CVector* minus(const CVector& v)
 // ---
 inline CVector* multiply(const Matrix& m, const CVector& v)
 {
-   Matrix* r = multiply(m, *((const Matrix*)&v));
-   return (CVector*) r;
+   Matrix* r{multiply(m, *((const Matrix*)&v))};
+   return reinterpret_cast<CVector*>(r);
 }
 
 // ---
@@ -413,8 +412,8 @@ inline CVector* multiply(const Matrix& m, const CVector& v)
 // ---
 inline CVector* multiply(const CVector& v, const double s)
 {
-   Matrix* r = multiply( *((const Matrix*)&v), s);
-   return (CVector*) r;
+   Matrix* r{multiply( *((const Matrix*)&v), s)};
+   return reinterpret_cast<CVector*>(r);
 }
 
 // ---
@@ -422,11 +421,11 @@ inline CVector* multiply(const CVector& v, const double s)
 // ---
 inline CVector* getColVector(const Matrix& A, const unsigned int c)
 {
-   bool B1 = A.isGoodMatrix();
-   bool B2 = c < A.getCols();
+   bool B1{A.isGoodMatrix()};
+   bool B2{c < A.getCols()};
    if (!B1 || !B2) return nullptr;
 
-   const unsigned int N = A.getRows();
+   const unsigned int N{A.getRows()};
    const auto pV = new CVector(N);
    if (pV == nullptr) return nullptr;
 
@@ -446,8 +445,8 @@ inline CVector* getColVector(const Matrix& A, const unsigned int c)
 // ---
 inline double dotProduct(const RVector& v1, const CVector& v2)
 {
-   double sum = 0;
-   const unsigned int N = v1.getSize();
+   double sum{};
+   const unsigned int N{v1.getSize()};
 
    if (N == v2.getSize()) {
       for (unsigned int i = 0; i < N; i++) {
@@ -464,7 +463,7 @@ inline double dotProduct(const RVector& v1, const CVector& v2)
 // ---
 inline Matrix* outerProduct(const CVector& v1, const RVector& v2)
 {
-   Matrix* r = multiply( *((const Matrix*)&v1), *((const Matrix*)&v2) );
+   Matrix* r{multiply( *((const Matrix*)&v1), *((const Matrix*)&v2) )};
    return r;
 }
 
@@ -473,7 +472,7 @@ inline Matrix* outerProduct(const CVector& v1, const RVector& v2)
 // ---
 inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 {
-   CVector* p = nullptr;
+   CVector* p{};
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new CVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );
@@ -485,7 +484,7 @@ inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 
 inline RVector* crossProduct(const RVector& v1, const RVector& v2)
 {
-   RVector* p = nullptr;
+   RVector* p{};
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new RVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );
@@ -501,7 +500,7 @@ inline CVector* getDiag(const Matrix& A)
       return nullptr;
    }
 
-   const unsigned int N = A.getRows();
+   const unsigned int N{A.getRows()};
    const auto p = new CVector(N);
    for (unsigned int i = 0; i < N; i++) {
       (*p)[i] = A(i,i);

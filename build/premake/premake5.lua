@@ -134,14 +134,15 @@ workspace "mixr"
       }
       targetname "instruments"
 
-   -- i/o device library
-   project "iodevice"
+   -- i/o linkage library
+   project "iolinkage"
       files {
-         "../../include/mixr/iodevice/**.h*",
-         "../../src/iodevice/**.*"
+         "../../include/mixr/iolinkage/**.h*",
+         "../../src/iolinkage/**.*",
+         "../../src/iolinkage/**.h*"
       }
-      excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
-      targetname "iodevice"
+      excludes { "../../src/iolinkage/platform/UsbJoystick_linux.*"   }
+      targetname "iolinkage"
 
    -- linear systems library
    project "linearsystem"

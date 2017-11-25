@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 namespace mixr {
 namespace base {

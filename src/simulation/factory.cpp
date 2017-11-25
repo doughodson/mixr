@@ -15,12 +15,8 @@ base::Object* factory(const std::string& name)
 {
     base::Object* obj {};
 
-    if ( name == Simulation::getFactoryName() ) {
-        obj = new Simulation();
-    }
-    else if ( name == Station::getFactoryName() ) {
-        obj = new Station();
-    }
+    if ( name == Simulation::getFactoryName() )   { obj = new Simulation(); }
+    else if ( name == Station::getFactoryName() ) { obj = new Station();    }
 
     return obj;
 }

@@ -25,49 +25,27 @@ base::Object* factory(const std::string& name)
     base::Object* obj {};
 
     // Feature Class
-    if ( name == VMap0FeatureClass::getFactoryName() ) {
-        obj = new VMap0FeatureClass();
-    }
+    if ( name == VMap0FeatureClass::getFactoryName() )              { obj = new VMap0FeatureClass(); }
     // Library directory
-    else if ( name == VMap0LibDirectory::getFactoryName() ) {
-        obj = new VMap0LibDirectory();
-    }
+    else if ( name == VMap0LibDirectory::getFactoryName() )         { obj = new VMap0LibDirectory(); }
     // Main directory
-    else if ( name == VMap0MainDirectory::getFactoryName() ) {
-        obj = new VMap0MainDirectory();
-    }
-    // Reference Coverage  directory
-    else if ( name == VMap0RefCoverageDirectory::getFactoryName() ) {
-        obj = new VMap0RefCoverageDirectory();
-    }
+    else if ( name == VMap0MainDirectory::getFactoryName() )        { obj = new VMap0MainDirectory(); }
+    // Reference Coverage directory
+    else if ( name == VMap0RefCoverageDirectory::getFactoryName() ) { obj = new VMap0RefCoverageDirectory(); }
     // Reference directory
-    else if ( name == VMap0ReferenceDirectory::getFactoryName() ) {
-        obj = new VMap0ReferenceDirectory();
-    }
+    else if ( name == VMap0ReferenceDirectory::getFactoryName() )   { obj = new VMap0ReferenceDirectory();   }
     // Data Type
-    else if ( name == VpfDataType::getFactoryName() ) {
-        obj = new VpfDataType();
-    }
+    else if ( name == VpfDataType::getFactoryName() )               { obj = new VpfDataType(); }
     // Top Level Directory
-    else if ( name == VpfDirectory::getFactoryName() ) {
-        obj = new VpfDirectory();
-    }
+    else if ( name == VpfDirectory::getFactoryName() )              { obj = new VpfDirectory();}
     // Index Table
-    else if ( name == VpfIndexTable::getFactoryName() ) {
-        obj = new VpfIndexTable();
-    }
+    else if ( name == VpfIndexTable::getFactoryName() )             { obj = new VpfIndexTable(); }
     // Record
-    else if ( name == VpfRecord::getFactoryName() ) {
-        obj = new VpfRecord();
-    }
+    else if ( name == VpfRecord::getFactoryName() )                 { obj = new VpfRecord(); }
     // Spatial Index File
-    else if ( name == VpfSpatialIndexTable::getFactoryName() ) {
-        obj = new VpfSpatialIndexTable();
-    }
+    else if ( name == VpfSpatialIndexTable::getFactoryName() )      { obj = new VpfSpatialIndexTable(); }
     // Table
-    else if ( name == VpfTable::getFactoryName() ) {
-        obj = new VpfTable();
-    }
+    else if ( name == VpfTable::getFactoryName() )                  { obj = new VpfTable(); }
 
     return obj;
 }

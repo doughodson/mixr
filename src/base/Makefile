@@ -28,6 +28,9 @@ OBJS =  \
 	colors/Rgb.o \
 	colors/Rgba.o \
 	colors/Yiq.o \
+	concepts/io/AbstractIoData.o \
+	concepts/io/AbstractIoDevice.o \
+	concepts/io/AbstractIoHandler.o \
 	concurrent/platform/PeriodicTask_linux.o \
 	concurrent/platform/SyncTask_linux.o \
 	concurrent/platform/Thread_linux.o \
@@ -55,10 +58,6 @@ OBJS =  \
 	functors/Table4.o \
 	functors/Table5.o \
 	functors/TableStorage.o \
-	io/IoAdapter.o \
-	io/IoData.o \
-	io/IoDevice.o \
-	io/IoHandler.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -139,6 +138,7 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f colors/*.o
+	-rm -f concepts/*.o
 	-rm -f concurrent/platform/*.o
 	-rm -f concurrent/*.o
 	-rm -f edl_parser/*.o

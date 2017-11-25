@@ -82,9 +82,9 @@ void Component::copyData(const Component& org, const bool)
       oc->unref();
       processComponents(tmp, typeid(Component));
       tmp->unref();
-   }
-   else
+   } else {
       components = nullptr;
+   }
 
    // Timing statistics
    if (timingStats != nullptr) timingStats->unref();
@@ -163,8 +163,7 @@ void Component::reset()
         if (selection != nullptr) {
             // When we've selected only one
             if (selected != nullptr) selected->reset();
-        }
-        else {
+        } else {
             // When we should reset them all
             List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -249,8 +248,7 @@ void Component::updateTC(const double dt)
         if (selection != nullptr) {
             // When we've selected only one
             if (selected != nullptr) selected->tcFrame(dt);
-        }
-        else {
+        } else {
             // When we should update them all
             List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -276,8 +274,7 @@ void Component::updateData(const double dt)
         if (selection != nullptr) {
             // When we've selected only one
             if (selected != nullptr) selected->updateData(dt);
-        }
-        else {
+        } else {
             // When we should update them all
             List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -426,10 +423,10 @@ const Pair* Component::findByName(const char* const slotname) const
                 q = gobj->findByName(&name[i]);
             }
 
-        }
-        else
+        } else {
             // When it's a simple name ...
             q = subcomponents->findByName(name);
+        }
 
         // Did we find it?
         if (q == nullptr && slotname[0] != '.') {
@@ -517,7 +514,6 @@ Pair* Component::findByType(const std::type_info& type)
    const Pair* p {cThis->findByType(type)};
    return const_cast<Pair*>(p);
 }
-
 
 //------------------------------------------------------------------------------
 // findNameOfComponent() --
@@ -615,8 +611,7 @@ void Component::processComponents(
          if ( cp != nullptr && cp != remove && (skipFilter || cp->isClassType(filter)) ) {
             newList->put(pair);
             cp->container(this);
-         }
-         else if ( cp != nullptr && cp == remove ) {
+         } else if ( cp != nullptr && cp == remove ) {
             cp->container(nullptr);
          }
          item = item->getNext();
@@ -649,8 +644,7 @@ void Component::processComponents(
             const auto str = new String(*(static_cast<String*>(selection)));
             select(str);
             str->unref();
-      }
-      else {
+      } else {
             const auto num = new Integer((static_cast<Number*>(selection))->getInt());
             select(num);
             num->unref();
@@ -686,8 +680,9 @@ bool Component::select(const String* const name)
     if (name != nullptr) {
         setSelectionName(name);
         Pair* p {findByName(*name)};
-        if (p != nullptr) selected = static_cast<Component*>(p->object());
-        else {
+        if (p != nullptr) {
+           selected = static_cast<Component*>(p->object());
+        } else {
             std::cerr << "Component::select: name not found!"  << std::endl;
             ok = false;
         }
@@ -705,8 +700,7 @@ bool Component::select(const Number* const num)
         Pair* p {findByIndex(num->getInt())};
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
-        }
-        else {
+        } else {
            std::cerr << "Component::select: index out of range; num = " << num->getInt() << std::endl;
            ok = false;
         }
@@ -724,12 +718,10 @@ bool Component::setTimingStatsEnabled(const bool b)
       if (timingStats != nullptr) {
          // Already have one, just clear it
          timingStats->clear();
-      }
-      else {
+      } else {
          timingStats = new Statistic();
       }
-   }
-   else {
+   } else {
       // Disable the timing statistics
       if (timingStats != nullptr) {
          // We disable it by getting rid of it.
@@ -825,7 +817,6 @@ bool Component::setSlotEnableMsgType(const Identifier* const msg)
              std::cerr << "; use: { WARNING INFO DEBUG USER DATA }" << std::endl;
          }
       }
-
    }
    return ok;
 }
@@ -857,7 +848,6 @@ bool Component::setSlotDisableMsgType(const Identifier* const msg)
              std::cerr << "; use: { WARNING INFO DEBUG USER DATA }" << std::endl;
          }
       }
-
    }
    return ok;
 }
@@ -1119,8 +1109,9 @@ Object* Component::SendData::getValue(const int value)
     if (*num != value) {
         *num = value;
         return num;
+    } else {
+        return nullptr;
     }
-    else return nullptr;
 }
 
 // getValue() -- get an object containing the real value to send
@@ -1137,7 +1128,9 @@ Object* Component::SendData::getValue(const float value)
         *num = value;
         return num;
     }
-    else return nullptr;
+    else {
+        return nullptr;
+    }
 }
 
 Object* Component::SendData::getValue(const double value)
@@ -1148,11 +1141,13 @@ Object* Component::SendData::getValue(const double value)
         past = new Float(value);
         return past;
     }
+
     if (num != nullptr && num->getDouble() != value) {
         num->setValue(value);
         return num;
+    } else {
+        return nullptr;
     }
-    else return nullptr;
 }
 
 
@@ -1200,8 +1195,9 @@ Object* Component::SendData::getValue(const bool value)
     if (*num != value) {
         *num = value;
         return num;
+    } else {
+        return nullptr;
     }
-    else return nullptr;
 }
 
 }

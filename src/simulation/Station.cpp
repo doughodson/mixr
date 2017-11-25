@@ -8,7 +8,7 @@
 #include "mixr/simulation/AbstractOtw.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/base/io/IoHandler.hpp"
+#include "mixr/base/concepts/io/AbstractIoHandler.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -59,7 +59,7 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT( 3,  setSlotOutTheWindow,          AbstractOtw)
    ON_SLOT( 3,  setSlotOutTheWindow,          base::PairStream)
 
-   ON_SLOT( 4,  setSlotIoHandler,             base::IoHandler)
+   ON_SLOT( 4,  setSlotIoHandler,             base::AbstractIoHandler)
    ON_SLOT( 4,  setSlotIoHandler,             base::PairStream)
 
    ON_SLOT( 5,  setSlotOwnshipName,           base::String)
@@ -231,7 +231,7 @@ void Station::reset()
       base::List::Item* item {ioHandlers->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         base::IoHandler* p {static_cast<base::IoHandler*>(pair->object())};
+         base::AbstractIoHandler* p {static_cast<base::AbstractIoHandler*>(pair->object())};
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -282,7 +282,7 @@ void Station::updateTC(const double dt)
       base::List::Item* item {ioHandlers->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         base::IoHandler* p {static_cast<base::IoHandler*>(pair->object())};
+         base::AbstractIoHandler* p {static_cast<base::AbstractIoHandler*>(pair->object())};
          p->tcFrame(dt);
          item = item->getNext();
       }
@@ -454,7 +454,7 @@ void Station::inputDevices(const double dt)
      base::List::Item* item{ioHandlers->getFirstItem()};
      while (item != nullptr) {
         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-        base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
+        base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
         p->inputDevices(dt);
         item = item->getNext();
      }
@@ -470,7 +470,7 @@ void Station::outputDevices(const double dt)
      base::List::Item* item{ioHandlers->getFirstItem()};
      while (item != nullptr) {
         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-        base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
+        base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
         p->outputDevices(dt);
         item = item->getNext();
      }
@@ -563,7 +563,7 @@ void Station::processBackgroundTasks(const double dt)
       base::List::Item* item{ioHandlers ->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::IoHandler* p{static_cast<base::IoHandler*>(pair->object())};
+         base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
          p->updateData(dt);
          item = item->getNext();
       }
@@ -1053,7 +1053,7 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
 //-----------------------------------------------------------------------------
 // setSlotIoHandler() -- Sets a list of I/O handlers
 //-----------------------------------------------------------------------------
-bool Station::setSlotIoHandler(base::IoHandler* const p)
+bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
 {
     const auto list = new base::PairStream();
     list->put( new base::Pair("1",p) );
@@ -1082,14 +1082,13 @@ bool Station::setSlotIoHandler(base::PairStream* const list)
     if (ioHandlers != nullptr) {
         for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<base::IoHandler*>(pair->object());
+            const auto p = dynamic_cast<base::AbstractIoHandler*>(pair->object());
             if (p != nullptr) {
                 // We are its container
                 p->container(this);
-            }
-            else {
+            } else {
                 // Not of the proper type
-                std::cerr << "Player::setSlotIoHandler: Slot \"" << pair->slot() << "\" is not of type base::IoHandler" << std::endl;
+                std::cerr << "Player::setSlotIoHandler: Slot \"" << pair->slot() << "\" is not of type base::AbstractIoHandler" << std::endl;
                 ok = false;
             }
         }
@@ -1136,8 +1135,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
             if (p != nullptr) {
                 // We are this network's container
                 p->container(this);
-            }
-            else {
+            } else {
                 // Not of the proper type
                 std::cerr << "Player::setSlotNetworks: network at slot \"" << pair->slot() << "\" is not of class type NetIO" << std::endl;
                 ok = false;
@@ -1178,8 +1176,7 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
         if (pri >= 0 && pri <= 1.0f) {
             tcPri = pri;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setTimeCriticalPri: Priority is invalid, range: [0 .. 1]" << std::endl;
         }
     }
@@ -1260,8 +1257,7 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
         if (rate >= 0 ) {
             bgRate = rate;
             ok = true;
-        }
-        else {
+        } else {
             std::cerr << "Station::setSlotBackgroundRate(): Thread rate is invalid; must be greater than or equal zero." << std::endl;
         }
     }

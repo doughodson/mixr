@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class IoHandler; class Number; class Thread; class Time; }
+namespace base { class AbstractIoHandler; class Number; class Thread; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
@@ -289,7 +289,7 @@ private:
    bool setSlotOutTheWindow(AbstractOtw* const);
    bool setSlotOutTheWindow(base::PairStream* const);
 
-   bool setSlotIoHandler(base::IoHandler* const);
+   bool setSlotIoHandler(base::AbstractIoHandler* const);
    bool setSlotIoHandler(base::PairStream* const);
 
    bool setSlotOwnshipName(const base::String* const);

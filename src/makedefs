@@ -39,11 +39,6 @@ MIXR_LIB_DIR = $(MIXR_ROOT)/lib
 FREETYPE2_INC_DIR = /usr/include/freetype2
 
 # ---
-# deviceIO device options
-# ---
-JOYSTICKDEVICE = 1
-
-# ---
 # JSBSim include directory
 # ---
 JSBSIM_INC_DIR = $(MIXR_3RD_PARTY_ROOT)/include/JSBSim

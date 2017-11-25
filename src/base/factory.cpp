@@ -29,10 +29,6 @@
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Operators.hpp"
 
-// IO
-#include "mixr/base/io/IoData.hpp"
-#include "mixr/base/io/IoHandler.hpp"
-
 // Network handlers
 #include "mixr/base/network/TcpHandler.hpp"
 #include "mixr/base/network/TcpClient.hpp"
@@ -406,14 +402,6 @@ Object* factory(const std::string& name)
     }
     else if ( name == UdpUnicastHandler::getFactoryName() ) {
         obj = new UdpUnicastHandler();
-    }
-
-    // General I/O Devices
-    else if ( name == IoHandler::getFactoryName() ) {
-        obj = new IoHandler();
-    }
-    else if ( name == IoData::getFactoryName() ) {
-        obj = new IoData();
     }
 
     // Earth models

@@ -7,8 +7,6 @@
 #include "mixr/base/osg/Matrixf"
 #include "mixr/base/osg/Matrixd"
 
-#include <cmath>
-
 namespace mixr {
 namespace base {
 class CVector; // Column vector
@@ -31,8 +29,8 @@ class Matrix : public Object
    DECLARE_SUBCLASS(Matrix, Object)
 
 public:
-   static const unsigned int DEF_FLDWIDTH=8;
-   static const unsigned int DEF_DECPOINT=2;
+   static const unsigned int DEF_FLDWIDTH{8};
+   static const unsigned int DEF_DECPOINT{2};
 
 public:
    Matrix();
@@ -251,7 +249,6 @@ private:
    unsigned int decPoint {DEF_DECPOINT};  // decimal point accuracy for display of matrix
 };
 
-
 //------------------------------------------------------------------------------
 // friend functions
 //------------------------------------------------------------------------------
@@ -264,7 +261,7 @@ std::ostream& operator<<(std::ostream& sout, const Matrix& A);
 inline bool operator==(const Matrix& m1, const Matrix& m2)
 {
    if (m1.rows != m2.rows || m1.cols != m2.cols) return false;
-   const double EPS = 1.0e-15;
+   const double EPS{1.0e-15};
 
    for (unsigned int i=0; i < m1.rows; i++) {
       unsigned int idx = m1.cols*i;
@@ -281,7 +278,7 @@ inline bool operator==(const Matrix& m1, const Matrix& m2)
 inline bool operator!=(const Matrix& m1, const Matrix& m2)
 {
    if ((m1.rows != m2.rows) || (m1.cols != m2.cols)) return true;
-   const double EPS = 1.0e-15;
+   const double EPS{1.0e-15};
 
    for (unsigned int i=0; i < m1.rows; i++) {
       unsigned int idx = m1.cols*i;
@@ -295,15 +292,14 @@ inline bool operator!=(const Matrix& m1, const Matrix& m2)
    return false;
 }
 
-
 inline Matrix* add(const Matrix& m1, const Matrix& m2)
 {
-   Matrix* temp = 0;
+   Matrix* temp{};
 
    if (m1.rows == m2.rows && m1.cols == m2.cols) {
       temp = new Matrix(m1);
       for (unsigned int i=0; i < temp->rows; i++) {
-         unsigned int idx = temp->cols*i;
+         unsigned int idx{temp->cols*i};
          for (unsigned int j=0; j < temp->cols; j++) {
             temp->mda[idx] += m2.mda[idx];
             idx++;
@@ -314,16 +310,15 @@ inline Matrix* add(const Matrix& m1, const Matrix& m2)
    return temp;
 }
 
-
 inline Matrix* subtract(const Matrix& m1, const Matrix& m2)
 {
-   Matrix* temp = 0;
+   Matrix* temp{};
 
    if  (m1.rows == m2.rows && m1.cols == m2.cols) {
       temp = new Matrix(m1);
       for (unsigned int i = 0; i < temp->rows; i++) {
          for (unsigned int j = 0; j < temp->cols; j++) {
-            unsigned int idx = temp->cols*i + j;
+            unsigned int idx{temp->cols*i + j};
             temp->mda[idx] -= m2.mda[idx];
          }
       }
@@ -332,13 +327,12 @@ inline Matrix* subtract(const Matrix& m1, const Matrix& m2)
    return temp;
 }
 
-
 inline Matrix* minus(const Matrix& m1)
 {
    const auto temp = new Matrix(m1);
 
    for (unsigned int i = 0; i < temp->rows; i++) {
-      unsigned int idx = temp->cols*i;
+      unsigned int idx{temp->cols*i};
       for (unsigned int j = 0; j < temp->cols; j++) {
          temp->mda[idx] = -temp->mda[idx];
          idx++;
@@ -347,21 +341,20 @@ inline Matrix* minus(const Matrix& m1)
    return temp;
 }
 
-
 inline Matrix* multiply(const Matrix& m1, const Matrix& m2)
 {
-   Matrix* temp = 0;
+   Matrix* temp{};
 
    if (m1.cols == m2.rows) {
       temp = new Matrix(m1.rows, m2.cols);
 
       for (unsigned int i=0; i<temp->rows; i++) {
          for (unsigned int j=0; j < temp->cols; j++) {
-            unsigned int idx = temp->cols*i + j;
+            unsigned int idx{temp->cols*i + j};
             temp->mda[idx] = 0.0;
             for (unsigned int k=0; k < m1.cols; k++) {
-               unsigned int idx1 = m1.cols*i + k;
-               unsigned int idx2 = m2.cols*k + j;
+               unsigned int idx1{m1.cols*i + k};
+               unsigned int idx2{m2.cols*k + j};
                temp->mda[idx] += (m1.mda[idx1] * m2.mda[idx2]);
             }
          }
@@ -370,13 +363,12 @@ inline Matrix* multiply(const Matrix& m1, const Matrix& m2)
    return temp;
 }
 
-
 inline Matrix* multiply(const Matrix& m1, const double s)
 {
    const auto temp = new Matrix(m1);
    for (unsigned int i=0; i<temp->rows; i++) {
       for (unsigned int j=0; j<temp->cols; j++) {
-         unsigned int idx = temp->cols*i + j;
+         unsigned int idx{temp->cols*i + j};
          temp->mda[idx] *= s;
       }
    }
@@ -389,8 +381,8 @@ inline double getTrace(const Matrix& A)
       return -999999.0;
    }
 
-   int N = A.getRows();
-   double trace = 0.0;
+   const int N{static_cast<int>(A.getRows())};
+   double trace{};
    for (int i=0; i<N; i++) {
       trace += A(i,i);
    }

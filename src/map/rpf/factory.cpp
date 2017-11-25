@@ -15,13 +15,10 @@ base::Object* factory(const std::string& name)
     base::Object* obj {};
 
     // Map Drawer
-    if ( name == MapDrawer::getFactoryName() ) {
-        obj = new MapDrawer();
-    }
+    if ( name == MapDrawer::getFactoryName() )     { obj = new MapDrawer(); }
+
     // CadrgMap
-    else if ( name == CadrgMap::getFactoryName() ) {
-        obj = new CadrgMap();
-    }
+    else if ( name == CadrgMap::getFactoryName() ) { obj = new CadrgMap();  }
 
     return obj;
 }
