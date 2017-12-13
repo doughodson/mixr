@@ -5,9 +5,9 @@ LIB = $(MIXR_LIB_DIR)/libmixr_simulation.a
 
 OBJS =  \
 	AbstractDataRecorder.o \
+	AbstractIgHost.o \
 	AbstractNetIO.o \
 	AbstractNib.o \
-	AbstractOtw.o \
 	AbstractPlayer.o \
 	AbstractRecorderComponent.o \
 	SimBgThread.o \

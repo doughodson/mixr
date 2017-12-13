@@ -10,7 +10,7 @@ namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
 class AbstractPlayer;
-class AbstractOtw;
+class AbstractIgHost;
 
 //------------------------------------------------------------------------------
 // Class: Station
@@ -26,8 +26,8 @@ class AbstractOtw;
 //
 //    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    otw                <AbstractOtw>          ! Single Out-The-Window (OTW) visual system (default: nullptr)
-//    otw                <base::PairStream>     ! List of Out-The-Window (OTW) visual systems
+//    igHost             <AbstractIgHost>       ! Single image generator host interface (default: nullptr)
+//    igHost             <base::PairStream>     ! List of image generator host interfaces
 //
 //    ioHandler          <base::IoHandler>      ! Single I/O data handler (default: nullptr)
 //    ioHandler          <base::PairStream>     ! List of I/O data handlers
@@ -165,8 +165,8 @@ public:
    virtual bool setOwnshipPlayer(AbstractPlayer* const newOS);      // Sets the ownship player
    virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
-   base::PairStream* getOutTheWindowList();                         // OTW systems
-   const base::PairStream* getOutTheWindowList() const;             // OTW systems (const version)
+   base::PairStream* getIgHostList();                               // Image generator host interfaces
+   const base::PairStream* getIgHostList() const;                   // Image generator host interfaces (const version)
 
    base::PairStream* getNetworks();                                 // Interoperability network handlers
    const base::PairStream* getNetworks() const;                     // Interoperability network handlers (const version)
@@ -228,9 +228,9 @@ public:
    bool setBackgroundStackSize(const unsigned int bytes);    // Background thread stack size (bytes or zero for default)
    bool doWeHaveTheBgThread() const;                         // Do we have a background thread?
 
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
    virtual void inputDevices(const double dt);    // Handle device inputs
@@ -246,14 +246,14 @@ protected:
    void setBgThread(base::Thread*);
 
    // base::Component protected functions
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    virtual void createNetworkProcess();           // Creates a network thread
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
    Simulation* sim {};                            // Executable simulation model
-   base::safe_ptr<base::PairStream> otw;          // List of  Out-The-Window visual system interfaces
+   base::safe_ptr<base::PairStream> igHosts;      // List of Image generator host interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
    base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers
    AbstractPlayer* ownship {};                    // Ownship (primary) player
@@ -286,11 +286,11 @@ private:
 
    bool setSlotNetworks(base::PairStream* const);
 
-   bool setSlotOutTheWindow(AbstractOtw* const);
-   bool setSlotOutTheWindow(base::PairStream* const);
+   bool setSlotIgHost(AbstractIgHost* const);
+   bool setSlotIgHosts(base::PairStream* const);
 
    bool setSlotIoHandler(base::AbstractIoHandler* const);
-   bool setSlotIoHandler(base::PairStream* const);
+   bool setSlotIoHandlers(base::PairStream* const);
 
    bool setSlotOwnshipName(const base::String* const);
 

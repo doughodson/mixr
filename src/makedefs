@@ -62,7 +62,12 @@ CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -pedantic
 #CPPFLAGS += -Wextra
-CPPFLAGS += -std=c++11
+
+# ---
+# Compiler specific C++ version flags
+# ---
+CPPFLAGS += -std=c++11 
+
 # warn of old c-style casts, so they can be replaced
 #CPPFLAGS += -Wold-style-cast
 # supress warnings of misleading-indentation coming from google protocol buffers code

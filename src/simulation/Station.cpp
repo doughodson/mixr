@@ -5,7 +5,7 @@
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
 #include "mixr/simulation/AbstractNetIO.hpp"
-#include "mixr/simulation/AbstractOtw.hpp"
+#include "mixr/simulation/AbstractIgHost.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
 #include "mixr/base/concepts/io/AbstractIoHandler.hpp"
@@ -33,7 +33,7 @@ const double Station::DEFAULT_NET_THREAD_PRI {0.5};
 BEGIN_SLOTTABLE(Station)
    "simulation",        //  1: Simulation executive
    "networks",          //  2: List of Network models
-   "otw",               //  3: Out-The-Window (OTW) visual system  [ Otw or base::PairStream ]
+   "igHost",            //  3: Image generator visual system host interface(s)
    "ioHandler",         //  4: I/O data handler(s)  [ base::IoHandler or base::PairStream ]
    "ownship",           //  5: Player name of our ownship (primary) player
    "tcRate",            //  6: Time-critical rate (Hz) (base::Number, default: 50hz)
@@ -56,11 +56,11 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
-   ON_SLOT( 3,  setSlotOutTheWindow,          AbstractOtw)
-   ON_SLOT( 3,  setSlotOutTheWindow,          base::PairStream)
+   ON_SLOT( 3,  setSlotIgHost,                AbstractIgHost)
+   ON_SLOT( 3,  setSlotIgHosts,               base::PairStream)
 
    ON_SLOT( 4,  setSlotIoHandler,             base::AbstractIoHandler)
-   ON_SLOT( 4,  setSlotIoHandler,             base::PairStream)
+   ON_SLOT( 4,  setSlotIoHandlers,            base::PairStream)
 
    ON_SLOT( 5,  setSlotOwnshipName,           base::String)
 
@@ -102,19 +102,17 @@ void Station::copyData(const Station& org, const bool)
       Simulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
-   }
-   else {
+   } else {
       setSlotSimulation(nullptr);
    }
 
-   // Copy the OTW handlers
-   if (org.otw != nullptr) {
-      base::PairStream* copy = org.otw->clone();
-      setSlotOutTheWindow( copy );
+   // Copy the image generator host handlers
+   if (org.igHosts != nullptr) {
+      base::PairStream* copy = org.igHosts->clone();
+      setSlotIgHosts( copy );
       copy->unref();
-   }
-   else {
-      setSlotOutTheWindow(static_cast<base::PairStream*>(nullptr));
+   } else {
+      setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
    }
 
    // Copy the networks
@@ -122,19 +120,17 @@ void Station::copyData(const Station& org, const bool)
       base::PairStream* copy = org.networks->clone();
       setSlotNetworks( copy );
       copy->unref();
-   }
-   else {
+   } else {
       setSlotNetworks(static_cast<base::PairStream*>(nullptr));
    }
 
    // Copy the I/O handlers
    if (org.ioHandlers != nullptr) {
       base::PairStream* copy = org.ioHandlers->clone();
-      setSlotIoHandler( copy );
+      setSlotIoHandlers( copy );
       copy->unref();
-   }
-   else {
-      setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
+   } else {
+      setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
    }
 
    {  // clone the data recorder
@@ -163,16 +159,15 @@ void Station::copyData(const Station& org, const bool)
       base::Time* copy = org.startupResetTimer0->clone();
       setSlotStartupResetTime( copy );
       copy->unref();
-   }
-   else {
+   } else {
       setSlotStartupResetTime(nullptr);
    }
 
    startupResetTimer = org.startupResetTimer;
 
    // Unref our old stuff (if any)
-   if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
-   if (ownship != nullptr)     { ownship->unref(); ownship = nullptr; }
+   if (ownshipName != nullptr)      { ownshipName->unref(); ownshipName = nullptr; }
+   if (ownship != nullptr)          { ownship->unref(); ownship = nullptr; }
 
    // Copy own ownship name
    if (org.ownshipName != nullptr) {
@@ -194,9 +189,9 @@ void Station::deleteData()
 
    // Clear our pointers
    setOwnshipPlayer(nullptr);
-   setSlotOutTheWindow(static_cast<base::PairStream*>(nullptr));
+   setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
    setSlotNetworks(nullptr);
-   setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
+   setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
    setSlotSimulation(nullptr);
    setSlotStartupResetTime(nullptr);
    setDataRecorder(nullptr);
@@ -237,12 +232,12 @@ void Station::reset()
       }
    }
 
-   // Reset the OTW subsystems
-   if (otw != nullptr) {
-      base::List::Item* item {otw->getFirstItem()};
+   // Reset image generator host interfaces
+   if (igHosts != nullptr) {
+      base::List::Item* item {igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         const auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto p = static_cast<AbstractIgHost*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -298,13 +293,13 @@ void Station::updateTC(const double dt)
    outputDevices(dt);
 
    // Our major subsystems
-   if (sim != nullptr && otw != nullptr) {
+   if (sim != nullptr && igHosts != nullptr) {
       base::PairStream* playerList{sim->getPlayers()};
-      base::List::Item* item{otw->getFirstItem()};
+      base::List::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
 
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto p = static_cast<AbstractIgHost*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -348,7 +343,7 @@ void Station::updateData(const double dt)
       createBackgroundProcess();
    }
 
-   // Our simulation model and OTW interfaces (if no separate thread)
+   // Our simulation model and image generator host interfaces (if no separate thread)
    if (getBackgroundRate() == 0 && !doWeHaveTheBgThread()) {
       processBackgroundTasks(dt);
    }
@@ -399,7 +394,7 @@ bool Station::shutdownNotification()
          item = item->getNext();
       }
    }
-   setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
+   setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation executive to shut down
    Simulation* s{getSimulation()};
@@ -408,9 +403,9 @@ bool Station::shutdownNotification()
    }
    setOwnshipPlayer(nullptr);
 
-   // Inform our OTW interfaces
-   if (otw != nullptr) {
-      base::List::Item* item{otw->getFirstItem()};
+   // Inform our image generator host interfaces
+   if (igHosts != nullptr) {
+      base::List::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::Component* p{static_cast<base::Component*>(pair->object())};
@@ -418,7 +413,7 @@ bool Station::shutdownNotification()
          item = item->getNext();
       }
    }
-   setSlotOutTheWindow(static_cast<base::PairStream*>(nullptr));
+   setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
 
    // Zero (unref) our thread objects (of any).  The thread's functions have ref()'d
    // these objects, so they won't be deleted until the threads terminate, which they
@@ -572,12 +567,12 @@ void Station::processBackgroundTasks(const double dt)
    // Our simulation model
    if (sim != nullptr) sim->updateData(dt);
 
-   // Our OTW interfaces
-   if (otw != nullptr) {
-      base::List::Item* item{otw ->getFirstItem()};
+   // Our image generator host interfaces
+   if (igHosts != nullptr) {
+      base::List::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto p = static_cast<AbstractIgHost*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -669,16 +664,16 @@ const base::PairStream* Station::getPlayers() const
     return ((getSimulation() != nullptr) ? getSimulation()->getPlayers() : nullptr);
 }
 
-// Returns the list of OTW systems
-base::PairStream* Station::getOutTheWindowList()
+// Returns the list of image generator host interfaces
+base::PairStream* Station::getIgHostList()
 {
-   return otw;
+   return igHosts;
 }
 
-// Returns the list of OTW systems (const version)
-const base::PairStream* Station::getOutTheWindowList() const
+// Returns the list of image generator host interfaces (const version)
+const base::PairStream* Station::getIgHostList() const
 {
-   return otw;
+   return igHosts;
 }
 
 // List of interoperability network handlers (e.g., DIS, HLA, TENA)
@@ -996,47 +991,46 @@ bool Station::setSlotSimulation(Simulation* const p)
 //-----------------------------------------------------------------------------
 // setSlotOutTheWindow() -- Sets a list of Out-The-Window subsystems
 //-----------------------------------------------------------------------------
-bool Station::setSlotOutTheWindow(AbstractOtw* const p)
+bool Station::setSlotIgHost(AbstractIgHost* const p)
 {
     const auto list = new base::PairStream();
     const auto pair = new base::Pair("1",p);
     list->put( pair );
     pair->unref();
-    bool ok{setSlotOutTheWindow(list)};
+    bool ok{setSlotIgHosts(list)};
     list->unref();
     return ok;
 }
 
-bool Station::setSlotOutTheWindow(base::PairStream* const list)
+bool Station::setSlotIgHosts(base::PairStream* const list)
 {
    base::PairStream* newList{};
 
-   // Make sure the new list only has OTW type objects
+   // Make sure the new list only has image generator host type objects
    if (list != nullptr) {
       for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
-            const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<AbstractOtw*>(pair->object());
-            if (p != nullptr) {
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<AbstractIgHost*>(pair->object());
+         if (p != nullptr) {
             if (newList == nullptr) {
                newList = new base::PairStream();
             }
-            newList->put(pair);  // Add this OTW to our new OTW list
-                p->container(this);
-            }
-         else if (isMessageEnabled(MSG_WARNING)) {
-                // Not of the proper type
-                std::cerr << "Player::setOutTheWindow: OTW at slot \"" << pair->slot() << "\" is not of type Otw" << std::endl;
-            }
-        }
-    }
+            newList->put(pair);  // Add this IG to our new image generator host list
+            p->container(this);
+         } else if (isMessageEnabled(MSG_WARNING)) {
+            // Not of the proper type
+            std::cerr << "Player::setIgHosts: igHosts at slot \"" << pair->slot() << "\" is not of type AbstractIgHost" << std::endl;
+         }
+      }
+   }
 
-   // Remove the old OTW interfaces
-   if (otw != nullptr) {
+   // Remove the old image generator host interfaces
+   if (igHosts != nullptr) {
 
-      base::safe_ptr<base::PairStream> oldList( otw );
-      otw = nullptr;
+      base::safe_ptr<base::PairStream> oldList( igHosts );
+      igHosts = nullptr;
 
-      // we are no longer the container for these old OTW interfaces
+      // we are no longer the container for these old image generator host interfaces
       for (base::List::Item* item = oldList->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          Component* p = static_cast<Component*>(pair->object());
@@ -1044,8 +1038,8 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
       }
    }
 
-   // Set the pointer to the list of OTW interfaces
-   otw = newList;
+   // Set the pointer to the list of image generator host interfaces
+   igHosts = newList;
 
    return true;
 }
@@ -1056,11 +1050,11 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
 bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
 {
     const auto list = new base::PairStream();
-    list->put( new base::Pair("1",p) );
-    return setSlotIoHandler(list);
+    list->put( new base::Pair("1", p) );
+    return setSlotIoHandlers(list);
 }
 
-bool Station::setSlotIoHandler(base::PairStream* const list)
+bool Station::setSlotIoHandlers(base::PairStream* const list)
 {
     bool ok{true};
 

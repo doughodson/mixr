@@ -124,7 +124,7 @@ workspace "mixr"
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
-	  
+
    -- graphical instruments library
    project "instruments"
       files {
@@ -202,9 +202,8 @@ workspace "mixr"
    -- interoperability libraries
    dofile "interop.lua"
 
-   -- image generator libraries
-   dofile "ig.lua"
-	
-	-- map libraries
-	dofile "map.lua"
-	
+   -- image generator host libraries
+   dofile "ighost.lua"
+
+   -- map libraries
+   dofile "map.lua"

@@ -1,27 +1,26 @@
 
 include makedefs
 
-# Library         : Requires
+# Library           : Requires
 # ------------------------------------------------------------------------
-# base            : -
-# dafif           : -
-# graphics        : OpenGL, FTGL, freetype
-# gui_glut        : freeglut
-# instruments     : -
-# interop         : -
-# interop_dis     : -
-# interop_hla     : HLA RTI
-# interop_rprfom  : HLA RTI
-# iolinkage       : -
-# linearsystem    : -
-# map_rpf         : -
-# models          : JSBSim
-# ig              : -
-# ig_cigi         : CIGICL 3.x
-# ig_pov          : -
-# recorder        : Google protocol buffers
-# simulation      : -
-# terrain         : -
+# base              : -
+# dafif             : -
+# graphics          : OpenGL, FTGL, freetype
+# gui_glut          : freeglut
+# instruments       : -
+# interop           : -
+# interop_dis       : -
+# interop_hla       : HLA RTI
+# interop_rprfom    : HLA RTI
+# iolinkage         : -
+# linearsystem      : -
+# map_rpf           : -
+# models            : JSBSim
+# ighost_cigi       : CIGICL 3.x
+# ighost_viewpoint  : -
+# recorder          : Google protocol buffers
+# simulation        : -
+# terrain           : -
 #
 PROJECTS = base
 PROJECTS += dafif
@@ -53,9 +52,8 @@ PROJECTS += interop/rprfom
 #
 # Image generator host interfaces
 #
-PROJECTS += ig/common
-PROJECTS += ig/cigi
-PROJECTS += ig/viewpoint
+PROJECTS += ighost/cigi
+PROJECTS += ighost/viewpoint
 
 #
 # Map format reader libraries
