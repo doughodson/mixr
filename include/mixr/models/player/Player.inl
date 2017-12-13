@@ -552,7 +552,7 @@ inline bool Player::isDtedTerrainInterpolationEnabled() const
    return interpTrrn;
 }
 
-// True if terrain elevation is required from the OTW system; otherwise we use DTED, if available
+// True if terrain elevation is required from the IG system; otherwise we use DTED, if available
 inline bool Player::isTerrainElevationRequired() const
 {
    return tElevReq;

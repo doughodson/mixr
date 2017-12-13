@@ -1774,7 +1774,7 @@ bool Player::setInterpolateTerrain(const bool x)
    return true;
 }
 
-// Sets OTW terrain elevation request flag
+// Sets IG terrain elevation request flag
 bool Player::setTerrainElevationRequired(const bool b)
 {
    tElevReq = b;
@@ -3196,7 +3196,7 @@ void Player::processComponents(
 void Player::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
-   // elevation is from the OTW system.
+   // elevation is from the IG system.
    const WorldModel* s{getWorldModel()};
    if (s != nullptr && !isTerrainElevationRequired()) {
       const terrain::Terrain* terrain{s->getTerrain()};
@@ -3887,7 +3887,7 @@ bool Player::setSlotCamouflageType(const base::Number* const msg)
    return ok;
 }
 
-// terrainElevReq: Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
+// terrainElevReq: Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
 bool Player::setSlotTerrainElevReq(const base::Number* const num)
 {
    bool ok{};

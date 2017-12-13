@@ -17,7 +17,7 @@ class AbstractIgHost;
 //
 // Description:  Application's top level container class with support for the
 //               simulation model, controls & displays, network interfaces
-//               and the out-the-window visual systems.  Also, contains default
+//               and image generator systems.  Also, contains default
 //               support for the time-critical and network threads.
 //
 // Factory name: Station
@@ -26,8 +26,7 @@ class AbstractIgHost;
 //
 //    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    igHost             <AbstractIgHost>       ! Single image generator host interface (default: nullptr)
-//    igHost             <base::PairStream>     ! List of image generator host interfaces
+//    igHosts            <base::PairStream>     ! List of image generator host interfaces
 //
 //    ioHandler          <base::IoHandler>      ! Single I/O data handler (default: nullptr)
 //    ioHandler          <base::PairStream>     ! List of I/O data handlers
@@ -286,7 +285,6 @@ private:
 
    bool setSlotNetworks(base::PairStream* const);
 
-   bool setSlotIgHost(AbstractIgHost* const);
    bool setSlotIgHosts(base::PairStream* const);
 
    bool setSlotIoHandler(base::AbstractIoHandler* const);

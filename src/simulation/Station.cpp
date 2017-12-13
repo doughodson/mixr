@@ -26,9 +26,9 @@ namespace simulation {
 
 IMPLEMENT_SUBCLASS(Station, "Station")
 
-const double Station::DEFAULT_TC_THREAD_PRI  {0.8};
-const double Station::DEFAULT_BG_THREAD_PRI  {0.5};
-const double Station::DEFAULT_NET_THREAD_PRI {0.5};
+const double Station::DEFAULT_TC_THREAD_PRI{0.8};
+const double Station::DEFAULT_BG_THREAD_PRI{0.5};
+const double Station::DEFAULT_NET_THREAD_PRI{0.5};
 
 BEGIN_SLOTTABLE(Station)
    "simulation",        //  1: Simulation executive
@@ -56,7 +56,6 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
-   ON_SLOT( 3,  setSlotIgHost,                AbstractIgHost)
    ON_SLOT( 3,  setSlotIgHosts,               base::PairStream)
 
    ON_SLOT( 4,  setSlotIoHandler,             base::AbstractIoHandler)
@@ -986,20 +985,6 @@ bool Station::setSlotSimulation(Simulation* const p)
         sim->container(this);
     }
     return true;
-}
-
-//-----------------------------------------------------------------------------
-// setSlotOutTheWindow() -- Sets a list of Out-The-Window subsystems
-//-----------------------------------------------------------------------------
-bool Station::setSlotIgHost(AbstractIgHost* const p)
-{
-    const auto list = new base::PairStream();
-    const auto pair = new base::Pair("1",p);
-    list->put( pair );
-    pair->unref();
-    bool ok{setSlotIgHosts(list)};
-    list->unref();
-    return ok;
 }
 
 bool Station::setSlotIgHosts(base::PairStream* const list)

@@ -126,7 +126,7 @@ class Track;
 //    irSignature    <IrSignature>       ! Player's IR signature (default: 0)
 //    camouflageType <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
 //
-//    terrainElevReq <base::Boolean>     ! Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
+//    terrainElevReq <base::Boolean>     ! Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
 //    interpolateTerrain <base::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
 //    terrainOffset  <base::Distance>    ! Ground clamp offset from terrain to player's CG (base::Distance)
 //
@@ -561,7 +561,7 @@ public:
    virtual double getTerrainOffset() const;                        // Ground clamping offset from the terrain to our CG (meters)
    virtual bool isDtedTerrainInterpolationEnabled() const;         // Interpolate our terrain from DTED if true
 
-   virtual bool isTerrainElevationRequired() const;                // True if terrain elevation is required from the OTW system;
+   virtual bool isTerrainElevationRequired() const;                // True if terrain elevation is required from the IG system;
                                                                    // otherwise we use DTED, if available
 
    virtual CoordSys getCoordSystemInUse() const;                   // Returns the coordinate system currently being used to
@@ -689,7 +689,7 @@ public:
    virtual void setTerrainElevation(const double v);                       // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const double v);                          // Sets the ground clamping offset (meters)
    virtual bool setInterpolateTerrain(const bool f);                       // sets the DTED terrain interpolation flag
-   virtual bool setTerrainElevationRequired(const bool b);                 // Sets OTW terrain elevation request flag
+   virtual bool setTerrainElevationRequired(const bool b);                 // Sets IG terrain elevation request flag
 
    // ---
    // Set the player's position
@@ -992,7 +992,7 @@ private:
 
    double tElev {};         // Terrain Elevation  (meters -- up+)
    bool   tElevValid {};    // Terrain elevation is valid
-   bool   tElevReq {};      // Height-Of-Terrain is required from the OTW system (default: terrain height isn't required)
+   bool   tElevReq {};      // Height-Of-Terrain is required from the IG system (default: terrain height isn't required)
    bool   interpTrrn {};    // interpolate between terrain elevation posts (local terrain database only)
    double tOffset {};       // Offset from the terrain to the player's CG for ground clamping
    bool   posVecValid {};   // Local position vector valid
