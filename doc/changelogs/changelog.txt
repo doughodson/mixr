@@ -14,7 +14,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   and integrates or blends guidelines in a nice way.  Of course, some of this is
   a result of dwelling on these issues or topics for probably unreasonable
   amounts of time, and equally, how they might be applied to the MIXR
-  codebase.
+  code base.
 
 - Renamed user interface directory from 'gui' to 'ui' as it's more general.
 
@@ -28,7 +28,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
 - Prefixed all 'size_t' types with std (e.g., std::size_t) to clearly indicate
   that this type is defined in the std library (it is not defined in the core
-  language).  This has no impact on API. This was done to improve codebase to
+  language).  This has no impact on API. This was done to improve code base to
   adopt explicit C++ notation as opposed to using global 'C' types (i.e., 'size_t'
   without namespace qualifier).
 
@@ -37,7 +37,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   nonsensical coercions from taking place which, in some cases, might
   surprise or even alarm a developer about a potential problem.
 
-  For example, it prevents accidential initializations from 'ints' to 'doubles'
+  For example, it prevents accidental initializations from 'ints' to 'doubles'
   or 'doubles' to 'ints.' This change required a significant investment in time,
   but yielded a few interesting cases to address.
 
@@ -109,12 +109,12 @@ General framework-wide changes/improvements/trends/philosophy/goals
   For example, the 'models' library is plural to indicate a collection
   of models, yet the 'sensor' directory within could have been named 'sensors'
   to again indicate a collection.  The tension to name a 'collection of things'
-  as opposed to only stating 'what it is' is not alway obvious. To make matters
+  as opposed to only stating 'what it is' is not always obvious. To make matters
   worse, some words just seem to naturally fit better.
 
   We are doing our best to make good choices, and as a general rule, will favor
   the use of plural names.  Examples of this include 'graphics', 'instruments',
-  'models', 'colors', 'units', etc. Reviewing the codebase and overall organization
+  'models', 'colors', 'units', etc. Reviewing the code base and overall organization
   will reveal some inconsistencies, such as 'util' - which is a collection
   of utilities. Over time, these issues will be addressed, but in a way to avoid
   massive end-user changes to existing application code.
@@ -178,7 +178,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   'base' classes between abstracts and concretes, as code will become difficult to
   understand. Having said that, it's not an all or nothing thing, we do have
   hierarchies of classes within MIXR that serves as useful points to derive
-  completely functional concrete instances.  This is always being reevaluated
+  completely functional concrete instances.  This is always being re-evaluated
   from the standpoint of understandability, improving overall platform
   capabilities and flexibility.  It can be challenging to optimize all 3 at
   the same time.
@@ -193,11 +193,11 @@ General framework-wide changes/improvements/trends/philosophy/goals
   In a nutshell, code clarity, and a more clear separation of 'interface'
   from 'implementation.'  One goal of frameworks is to define relationships
   and organize code in a way to build a variety of applications efficiently.
-  Abstract classes that define high level algoithms, in effect, provide
-  strutures or patterns that are useful - in other words, abstract classes
+  Abstract classes that define high level algorithms, in effect, provide
+  structures or patterns that are useful - in other words, abstract classes
   can serve as a blueprints for classes, much like class relationships serve
   as high level organizational blueprints that define an architecture.
-  Identifying the role a class plays within the codebase, helps a developer
+  Identifying the role a class plays within the code base, helps a developer
   organize it in a way that provides the most value.
 
   Topic: The Non-Virtual Interface (NVI) idiom
@@ -209,18 +209,18 @@ General framework-wide changes/improvements/trends/philosophy/goals
   code that is very difficult to follow or comprehend.
 
   To avoid the problem of making too many methods virtual, the NVI
-  idiom flips the sitation, it effectively says NO public methods should be
+  idiom flips the situation, it effectively says NO public methods should be
   virtual; all of them should be non-virtual.  Sticking with the role of
   what abstract classes are about, using NVI, non-virtual methods are
   supported by private virtual methods that serve as points of extension;
   the so-called 'extension points' - public virtual methods are the
   'hooks' as described.
 
-  So within the MIXR codebase, why do we care?
+  So within the MIXR code base, why do we care?
 
-  To improve code clarity, a recommened practice is to minimize
+  To improve code clarity, a recommended practice is to minimize
   'inheritance call chains.'  Inheritance call chains are formed when
-  subclasses call parent methods of the same name. Unfortunatelly,
+  subclasses call parent methods of the same name. Unfortunately,
   calling the parent class method such as updateTc()
   (i.e., BaseClass::updateTc()) within a subclasses updateTc() provides
   no indication of what the shared common code is doing.  As an alternative,
@@ -255,7 +255,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   improve clarity.
 
   Within MIXR, inheritance call chains are in abundance - as code is updated,
-  there is a conscious effect to minimize them. (See iolinkage library as
+  there is a conscious effect to minimize them. (See linkage library as
   an example.)
 
 - Topic: Guidelines for virtual function declaration
@@ -283,22 +283,22 @@ Infrastructure oriented libraries
 --------------------------------------------------------------------------------
 base library (mixr_base)
 
-   -- Renamed all the i/o classes to 'AbstractThis' or 'AbstractThat' to more clearly
-      convey their purpose; namely a structure that defines the I/O linkage system.
-      It should also be noted that these classes are abstract, they are now much more
-      oriented at defining interfaces, and much less about about how to do it (i.e.,
-      no domain implementation code).  All of these classes are now organized within
-      a subdirectory called 'base/concepts/io'.
+   -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
+      to more clearly convey their purpose; namely a structure that defines the
+      linkage system. It should also be noted that these classes are abstract, they
+      are now much more oriented at defining interfaces, and much less about about
+      how to do it (i.e., no domain implementation code).  All of these classes
+      are now organized within a subdirectory called 'base/concepts/linkage'.
 
       These abstract classes have been simplified to reduce complexity, yet retain
       flexibility.  Simplification has come in the form of rebaselining several of them
       to be Objects with clear interfaces as opposed to Components which presents
       a much more complex interface.
 
-      See iolinkage library section for more info.
+      See linkage library section for more info.
 
    -- Removed all random number generation-oriented classes which included the
-      Mersenne Twister algorithm and distibution classes.  C++11 includes
+      Mersenne Twister algorithm and distribution classes.  C++11 includes
       all of this capability and more as part of the standard library.
 
    -- Moved all classes that represent numeric types into 'base/numeric'
@@ -349,11 +349,11 @@ Devices, I/O, controllers libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-iolinkage library (mixr_iolinkage)
+linkage library (mixr_linkage)
 
    -- This library is not new - it was previously named 'iodevice'.  Renaming was
       done because it more correctly names what this library is - an implementation
-      of a flexible i/o linkage system to read and write to device(s), transform
+      of a flexible I/O linkage system to read and write to device(s), transform
       their value and map them to application defined data structures.  Many
       aspects of this library have been updated to retain flexibility but
       reduce complexity and ease understandability.
@@ -429,18 +429,13 @@ graphics library (mixr_graphics)
 Image generation oriented libraries
 #####################################################
 
---------------------------------------------------------------------------------
-ig library (mixr_ig)
-
--- Much cleanup of this library by breaking out and making explicit all the IG
+-- Much clean up of the 'otw' library by breaking out and making explicit all the IG
    related code.  This includes all cigi classes now logically grouped within 'cigi'
    folder.
 
--- Moved all code common to providing otw capabilities into this library.
+-- Moved all code common to providing otw capabilities into cigi library.
    Explicitly removed specific implementations for CIGI and the simple so-called
    "PC" visual driver, which was renamed to the "viewpoint" library
-
---------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_cigi)
@@ -466,7 +461,7 @@ Map libraries
 --------------------------------------------------------------------------------
 vpf library (mixr_map_vpf)
 
--- Resurected this old 'map' library for reading vector product map data (vmap) 
+-- Resurrected this old 'map' library for reading vector product map data (vmap) 
 --------------------------------------------------------------------------------
 
 
@@ -478,7 +473,7 @@ Models & general capabilities oriented libraries
 models library (mixr_models)
 
 -- Much organization of player folder has been made. This includes the creation
-   of additional subfolders to arrange and catergorize related types (related in
+   of additional subfolders to arrange and categorize related types (related in
    terms of 'is-a').  For example, all the classes that were defined AirVehicle
    files were separated into individual files and put into a new 'air' folder.
    This same approach was used for effects, ground vehicles and weapons.

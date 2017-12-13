@@ -134,16 +134,6 @@ workspace "mixr"
       }
       targetname "instruments"
 
-   -- i/o linkage library
-   project "iolinkage"
-      files {
-         "../../include/mixr/iolinkage/**.h*",
-         "../../src/iolinkage/**.*",
-         "../../src/iolinkage/**.h*"
-      }
-      excludes { "../../src/iolinkage/platform/UsbJoystick_linux.*"   }
-      targetname "iolinkage"
-
    -- linear systems library
    project "linearsystem"
       files {
@@ -151,6 +141,16 @@ workspace "mixr"
          "../../src/linearsystem/**.cpp"
       }
       targetname "linearsystem"
+
+   -- linkage library
+   project "linkage"
+      files {
+         "../../include/mixr/linkage/**.h*",
+         "../../src/linkage/**.*",
+         "../../src/linkage/**.h*"
+      }
+      excludes { "../../src/linkage/platform/UsbJoystick_linux.*"   }
+      targetname "linkage"
 
    -- models library
    project "models"
