@@ -12,7 +12,7 @@ include makedefs
 # interop_dis       : -
 # interop_hla       : HLA RTI
 # interop_rprfom    : HLA RTI
-# iolinkage         : -
+# linkage           : -
 # linearsystem      : -
 # map_rpf           : -
 # models            : JSBSim
@@ -24,7 +24,7 @@ include makedefs
 #
 PROJECTS = base
 PROJECTS += dafif
-PROJECTS += iolinkage
+PROJECTS += linkage
 PROJECTS += linearsystem 
 PROJECTS += simulation terrain
 PROJECTS += models
