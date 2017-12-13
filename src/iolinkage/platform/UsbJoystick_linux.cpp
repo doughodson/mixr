@@ -21,7 +21,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")
 EMPTY_DELETEDATA(UsbJoystick)

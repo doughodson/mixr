@@ -8,7 +8,7 @@
 #include <algorithm>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(IoData, "IoData")
 EMPTY_DELETEDATA(IoData)

@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Component; }
-namespace iolinkage {
+namespace linkage {
 
 class IoThread : public base::PeriodicTask
 {

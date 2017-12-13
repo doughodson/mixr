@@ -7,7 +7,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(AnalogInputFixed, "AnalogInputFixed")
 EMPTY_DELETEDATA(AnalogInputFixed)

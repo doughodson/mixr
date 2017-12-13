@@ -15,7 +15,7 @@
 #include <algorithm>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(AnalogSignalGen, "AnalogSignalGen")
 EMPTY_DELETEDATA(AnalogSignalGen)

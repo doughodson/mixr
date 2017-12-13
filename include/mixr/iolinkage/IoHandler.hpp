@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_IoHandler_H__
-#define __mixr_base_IoHandler_H__
+#ifndef __mixr_linkage_IoHandler_H__
+#define __mixr_linkage_IoHandler_H__
 
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 
@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class Frequency; class Number; class Thread; class AbstractIoData; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: IoHandler

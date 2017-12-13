@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_AnalogInput_H__
-#define __mixr_iolinkage_AnalogInput_H__
+#ifndef __mixr_linkage_AnalogInput_H__
+#define __mixr_linkage_AnalogInput_H__
 
 #include "mixr/iolinkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; class Number; class Table1; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: AnalogInput
@@ -43,9 +43,9 @@ namespace iolinkage {
 //      gain         <Number>    Gain value   (default: 1.0)
 //      table        <Table1>    Shaping function table (default: none)
 //------------------------------------------------------------------------------
-class AnalogInput : public iolinkage::AbstractAdapter
+class AnalogInput : public AbstractAdapter
 {
-   DECLARE_SUBCLASS(AnalogInput, iolinkage::AbstractAdapter)
+   DECLARE_SUBCLASS(AnalogInput, AbstractAdapter)
 
 public:
    AnalogInput();

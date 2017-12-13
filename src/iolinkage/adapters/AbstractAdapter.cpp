@@ -2,7 +2,7 @@
 #include "mixr/iolinkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractAdapter, "AbstractAdapter")
 EMPTY_SLOTTABLE(AbstractAdapter)

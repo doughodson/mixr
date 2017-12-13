@@ -8,7 +8,7 @@
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(MockDevice, "MockDevice")
 EMPTY_DELETEDATA(MockDevice)

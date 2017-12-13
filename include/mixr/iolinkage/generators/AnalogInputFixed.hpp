@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_AnalogInputFixed_H__
-#define __mixr_iolinkage_AnalogInputFixed_H__
+#ifndef __mixr_linkage_AnalogInputFixed_H__
+#define __mixr_linkage_AnalogInputFixed_H__
 
 #include "mixr/iolinkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class Number; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: AnalogInputFixed

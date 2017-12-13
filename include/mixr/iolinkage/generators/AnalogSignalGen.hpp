@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_AnalogSignalGen_H__
-#define __mixr_iolinkage_AnalogSignalGen_H__
+#ifndef __mixr_linkage_AnalogSignalGen_H__
+#define __mixr_linkage_AnalogSignalGen_H__
 
 #include "mixr/iolinkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; class Number; class Angle; class Frequency; class String; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: AnalogSignalGen

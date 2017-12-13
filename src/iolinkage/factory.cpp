@@ -30,7 +30,7 @@
 #endif
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 base::Object* factory(const std::string& name)
 {

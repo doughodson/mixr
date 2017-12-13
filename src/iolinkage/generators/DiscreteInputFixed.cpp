@@ -13,7 +13,7 @@
 #include <algorithm>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(DiscreteInputFixed, "DiscreteInputFixed")
 EMPTY_DELETEDATA(DiscreteInputFixed)

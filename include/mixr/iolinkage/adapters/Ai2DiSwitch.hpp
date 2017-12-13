@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_Ai2DiSwitch_H__
-#define __mixr_iolinkage_Ai2DiSwitch_H__
+#ifndef __mixr_linkage_Ai2DiSwitch_H__
+#define __mixr_linkage_Ai2DiSwitch_H__
 
 #include "mixr/iolinkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; class Number; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class:  Ai2DiSwitch
@@ -34,9 +34,9 @@ namespace iolinkage {
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch : public iolinkage::AbstractAdapter
+class Ai2DiSwitch : public AbstractAdapter
 {
-   DECLARE_SUBCLASS(Ai2DiSwitch, iolinkage::AbstractAdapter)
+   DECLARE_SUBCLASS(Ai2DiSwitch, AbstractAdapter)
 
 public:
    Ai2DiSwitch();

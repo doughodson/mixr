@@ -1,6 +1,6 @@
 
-#ifndef __mixr_iolinkage_platform_UsbJoystick_linux_H__
-#define __mixr_iolinkage_platform_UsbJoystick_linux_H__
+#ifndef __mixr_linkage_platform_UsbJoystick_linux_H__
+#define __mixr_linkage_platform_UsbJoystick_linux_H__
 
 #include "mixr/iolinkage/IoDevice.hpp"
 
@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base { class Number; class AbstractIoData; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: UsbJoystick

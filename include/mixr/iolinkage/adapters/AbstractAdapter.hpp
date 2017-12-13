@@ -1,12 +1,12 @@
 
-#ifndef __mixr_base_AbstractAdapter_H__
-#define __mixr_base_AbstractAdapter_H__
+#ifndef __mixr_linkage_AbstractAdapter_H__
+#define __mixr_linkage_AbstractAdapter_H__
 
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: AbstractIoAdapter

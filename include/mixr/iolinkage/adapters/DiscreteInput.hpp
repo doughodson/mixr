@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_DiscreteInput_H__
-#define __mixr_iolinkage_DiscreteInput_H__
+#ifndef __mixr_linkage_DiscreteInput_H__
+#define __mixr_linkage_DiscreteInput_H__
 
 #include "mixr/iolinkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; class Number; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: DiscreteInput
@@ -19,9 +19,9 @@ namespace iolinkage {
 //      port         <Number>    Device port number (default: 0)
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //------------------------------------------------------------------------------
-class DiscreteInput : public iolinkage::AbstractAdapter
+class DiscreteInput : public AbstractAdapter
 {
-   DECLARE_SUBCLASS(DiscreteInput, iolinkage::AbstractAdapter)
+   DECLARE_SUBCLASS(DiscreteInput, AbstractAdapter)
 
 public:
    DiscreteInput();

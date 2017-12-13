@@ -9,7 +9,7 @@
 #include <iostream>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(Ai2DiSwitch, "Ai2DiSwitch")
 EMPTY_DELETEDATA(Ai2DiSwitch)

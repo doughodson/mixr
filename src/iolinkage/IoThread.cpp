@@ -6,7 +6,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(IoThread, "IoThread")
 EMPTY_SLOTTABLE(IoThread)

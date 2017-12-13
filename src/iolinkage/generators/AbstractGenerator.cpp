@@ -2,7 +2,7 @@
 #include "mixr/iolinkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractGenerator, "AbstractGenerator")
 EMPTY_SLOTTABLE(AbstractGenerator)

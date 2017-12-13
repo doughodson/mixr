@@ -1,12 +1,12 @@
 
-#ifndef __mixr_iolinkage_AbstractGenerator_H__
-#define __mixr_iolinkage_AbstractGenerator_H__
+#ifndef __mixr_linkage_AbstractGenerator_H__
+#define __mixr_linkage_AbstractGenerator_H__
 
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: AbstractGenerator

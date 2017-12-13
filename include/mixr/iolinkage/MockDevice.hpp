@@ -1,6 +1,6 @@
 
-#ifndef __mixr_iolinkage_MockDevice_H__
-#define __mixr_iolinkage_MockDevice_H__
+#ifndef __mixr_linkage_MockDevice_H__
+#define __mixr_linkage_MockDevice_H__
 
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class PairStream; class AbstractIoData; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: MockDevice

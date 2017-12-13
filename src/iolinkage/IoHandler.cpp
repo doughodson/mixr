@@ -12,7 +12,7 @@
 #include "mixr/base/units/Frequencies.hpp"
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IoHandler, "BaseIoHandler")
 

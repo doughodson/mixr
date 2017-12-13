@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class Number; class AbstractIoData; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: UsbJoystick

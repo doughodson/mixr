@@ -9,7 +9,7 @@
 #include <iostream>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")
 EMPTY_DELETEDATA(DiscreteInput)

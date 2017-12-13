@@ -11,7 +11,7 @@
 #include <iostream>
 
 namespace mixr {
-namespace iolinkage {
+namespace linkage {
 
 IMPLEMENT_SUBCLASS(AnalogOutput, "AnalogOutput")
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_iolinkage_IoData_H__
-#define __mixr_iolinkage_IoData_H__
+#ifndef __mixr_linkage_IoData_H__
+#define __mixr_linkage_IoData_H__
 
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 
@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class Number; }
-namespace iolinkage {
+namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: IoData
