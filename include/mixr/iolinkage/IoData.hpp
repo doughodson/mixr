@@ -2,7 +2,7 @@
 #ifndef __mixr_iolinkage_IoData_H__
 #define __mixr_iolinkage_IoData_H__
 
-#include "mixr/base/concepts/io/AbstractIoData.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 
 #include <vector>
 

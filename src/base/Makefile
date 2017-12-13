@@ -28,9 +28,9 @@ OBJS =  \
 	colors/Rgb.o \
 	colors/Rgba.o \
 	colors/Yiq.o \
-	concepts/io/AbstractIoData.o \
-	concepts/io/AbstractIoDevice.o \
-	concepts/io/AbstractIoHandler.o \
+	concepts/linkage/AbstractIoData.o \
+	concepts/linkage/AbstractIoDevice.o \
+	concepts/linkage/AbstractIoHandler.o \
 	concurrent/platform/PeriodicTask_linux.o \
 	concurrent/platform/SyncTask_linux.o \
 	concurrent/platform/Thread_linux.o \
@@ -138,7 +138,7 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f colors/*.o
-	-rm -f concepts/*.o
+	-rm -f concepts/linkage/*.o
 	-rm -f concurrent/platform/*.o
 	-rm -f concurrent/*.o
 	-rm -f edl_parser/*.o

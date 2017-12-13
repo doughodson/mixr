@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IoHandler_H__
 #define __mixr_base_IoHandler_H__
 
-#include "mixr/base/concepts/io/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 

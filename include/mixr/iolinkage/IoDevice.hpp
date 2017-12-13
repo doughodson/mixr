@@ -2,7 +2,7 @@
 #ifndef __mixr_iolinkage_IoDevice_H__
 #define __mixr_iolinkage_IoDevice_H__
 
-#include "mixr/base/concepts/io/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 

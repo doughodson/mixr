@@ -3,7 +3,7 @@
 
 #include "mixr/iolinkage/adapters/AbstractAdapter.hpp"
 
-#include "mixr/base/concepts/io/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 
 #include "mixr/base/List.hpp"
 

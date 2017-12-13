@@ -1,8 +1,8 @@
 
 #include "mixr/iolinkage/adapters/AnalogInput.hpp"
 
-#include "mixr/base/concepts/io/AbstractIoData.hpp"
-#include "mixr/base/concepts/io/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 

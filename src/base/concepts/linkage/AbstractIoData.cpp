@@ -1,5 +1,5 @@
 
-#include "mixr/base/concepts/io/AbstractIoData.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 
 namespace mixr {
 namespace base {

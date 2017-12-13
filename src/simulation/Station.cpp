@@ -8,7 +8,7 @@
 #include "mixr/simulation/AbstractIgHost.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/base/concepts/io/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
