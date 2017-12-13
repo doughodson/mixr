@@ -33,7 +33,7 @@ const double Station::DEFAULT_NET_THREAD_PRI{0.5};
 BEGIN_SLOTTABLE(Station)
    "simulation",        //  1: Simulation executive
    "networks",          //  2: List of Network models
-   "igHost",            //  3: Image generator visual system host interface(s)
+   "igHosts",           //  3: Image generator visual system host interface(s)
    "ioHandler",         //  4: I/O data handler(s)  [ base::IoHandler or base::PairStream ]
    "ownship",           //  5: Player name of our ownship (primary) player
    "tcRate",            //  6: Time-critical rate (Hz) (base::Number, default: 50hz)

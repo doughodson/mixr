@@ -361,20 +361,22 @@ linkage library (mixr_linkage)
    -- All 'AbstractIoAdapter'-based classes have been moved into an 'adapters'
       subdirectory to improve clarity.
 
-   -- 'IoData' no longer includes methods for process this or that, and is not
-      associated with networking - IoData is just data.
+   -- 'IoData' no longer includes methods to process the data itself and is not
+      associated with networking - IoData represents data, nothing more.
 
    -- 'IoHander' is now abstract and serves as a 'base' class given definitions
-      above, in which concretes can be created (see examples).  It should be
+      above, from which concretes are created (see examples).  It should be
       noted how functionality is used -- inheritance related virtual method
       call chains have been eliminated, concretes just call protected methods
       to perform the functions they need.
 
    -- Added MockDevice class to be used as a container for signal generators.
+      This object serves as a source of input signals from which no real
+      device exists - in other words, it's a signal generator.
 
-   -- The testIoHandler example has also been renamed to testIoLinkage and
-      significantly updated to use more modern C++ available features such as
-      std::string and std::array<> where it makes sense.
+   -- The testIoHandler example has also been renamed to testLinkage and has
+      been significantly updated to use more modern C++ available features
+      such as std::string and std::array<> where it makes sense.
 
 --------------------------------------------------------------------------------
 
@@ -429,13 +431,13 @@ graphics library (mixr_graphics)
 Image generation oriented libraries
 #####################################################
 
--- Much clean up of the 'otw' library by breaking out and making explicit all the IG
-   related code.  This includes all cigi classes now logically grouped within 'cigi'
-   folder.
+-- Much clean up and restructuring of the old 'otw' library has taken place. The
+   functionality of 'otw' library has been broken out into 2 specific IG host
+   interfaces.
 
 -- Moved all code common to providing otw capabilities into cigi library.
    Explicitly removed specific implementations for CIGI and the simple so-called
-   "PC" visual driver, which was renamed to the "viewpoint" library
+   'PC' visual driver, which was renamed to the "viewpoint" library
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_cigi)
@@ -443,14 +445,15 @@ ig library (mixr_ig_cigi)
 -- Moved all code common specific to implementing a CIGI driver to this new
    library.
    
--- CigiCl class has been renamed to AbstractCigiCl, as it's abstract.
+-- CigiCl class has been renamed to AbstractCigi, as it's abstract.
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_viewpoint)
 
--- Moved all code common specific to implementing a simple IG host system.
+-- This library is what was named the "PC" visual driver.  It has been simplified,
+   and improved to some extent, but is basically defines the same functionality.
 
 --------------------------------------------------------------------------------
 
@@ -482,5 +485,10 @@ models library (mixr_models)
 
 -- Renamed 'Buildings' filename to 'Building' to match the class name defined
    within it.
+
+   Station class
+      1) Renamed 'otw' slot to 'igHosts'.  Use this new slotname to define a list,
+      of one or more IG host interfaces.  Note, that a list must be provided.
+
 
 --------------------------------------------------------------------------------
