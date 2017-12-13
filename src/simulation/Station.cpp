@@ -52,32 +52,32 @@ BEGIN_SLOTTABLE(Station)
 END_SLOTTABLE(Station)
 
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1,  setSlotSimulation,            Simulation)
+   ON_SLOT( 1, setSlotSimulation,            Simulation)
 
-   ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
+   ON_SLOT( 2, setSlotNetworks,              base::PairStream)
 
-   ON_SLOT( 3,  setSlotIgHosts,               base::PairStream)
+   ON_SLOT( 3, setSlotIgHosts,               base::PairStream)
 
-   ON_SLOT( 4,  setSlotIoHandler,             base::AbstractIoHandler)
-   ON_SLOT( 4,  setSlotIoHandlers,            base::PairStream)
+   ON_SLOT( 4, setSlotIoHandler,             base::AbstractIoHandler)
+   ON_SLOT( 4, setSlotIoHandlers,            base::PairStream)
 
-   ON_SLOT( 5,  setSlotOwnshipName,           base::String)
+   ON_SLOT( 5, setSlotOwnshipName,           base::String)
 
-   ON_SLOT( 6,  setSlotTimeCriticalRate,      base::Number)
-   ON_SLOT( 7,  setSlotTimeCriticalPri,       base::Number)
-   ON_SLOT( 8,  setSlotTimeCriticalStackSize, base::Number)
-   ON_SLOT( 9,  setSlotFastForwardRate,       base::Number)
+   ON_SLOT( 6, setSlotTimeCriticalRate,      base::Number)
+   ON_SLOT( 7, setSlotTimeCriticalPri,       base::Number)
+   ON_SLOT( 8, setSlotTimeCriticalStackSize, base::Number)
+   ON_SLOT( 9, setSlotFastForwardRate,       base::Number)
 
-   ON_SLOT(10,  setSlotNetworkRate,           base::Number)
-   ON_SLOT(11,  setSlotNetworkPri,            base::Number)
-   ON_SLOT(12,  setSlotNetworkStackSize,      base::Number)
+   ON_SLOT(10, setSlotNetworkRate,           base::Number)
+   ON_SLOT(11, setSlotNetworkPri,            base::Number)
+   ON_SLOT(12, setSlotNetworkStackSize,      base::Number)
 
-   ON_SLOT(13,  setSlotBackgroundRate,        base::Number)
-   ON_SLOT(14,  setSlotBackgroundPri,         base::Number)
-   ON_SLOT(15,  setSlotBackgroundStackSize,   base::Number)
+   ON_SLOT(13, setSlotBackgroundRate,        base::Number)
+   ON_SLOT(14, setSlotBackgroundPri,         base::Number)
+   ON_SLOT(15, setSlotBackgroundStackSize,   base::Number)
 
-   ON_SLOT(16,  setSlotStartupResetTime,      base::Time)
-   ON_SLOT(17,  setSlotEnableUpdateTimers,    base::Number)
+   ON_SLOT(16, setSlotStartupResetTime,      base::Time)
+   ON_SLOT(17, setSlotEnableUpdateTimers,    base::Number)
 
    ON_SLOT(18, setSlotDataRecorder,           AbstractDataRecorder)
 END_SLOT_MAP()
