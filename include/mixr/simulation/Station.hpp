@@ -81,7 +81,7 @@ class AbstractIgHost;
 //       external interrupt).
 //
 //    2) Thread priorities are from zero (lowest) to one (highest).
-//       (see base/Thread.hpp)
+//       (see base/concurrent/Thread.hpp)
 //
 //    3) updateTC() -- The main application can use createTimeCriticalProcess()
 //       to create a thread, which will run at 'tcRate' Hz and 'tcPriority'
