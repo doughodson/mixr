@@ -25,7 +25,7 @@ class CigiOutgoingMsg;
 namespace mixr {
 namespace base { class NetHandler; }
 namespace cigi {
-class Cigi;
+class CigiHost;
 class SignalProcessor;
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ public:
 
    virtual void processIgMessages();
 
-   bool initialize(Cigi* const);
+   bool initialize(CigiHost* const);
    bool isInitialized();
 
    void startMessage();
@@ -68,7 +68,7 @@ public:
    void addPacketLosRangeReq(CigiLosVectReqV3* const);
 
 private:
-   Cigi* parent{};   // parent (host) component
+   CigiHost* parent{};   // parent (host) component
 
    // cigi session, incoming and outgoing message pointers
    std::unique_ptr<CigiHostSession> session;

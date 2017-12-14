@@ -1,12 +1,12 @@
 
-#include "mixr/ighost/cigi/Cigi.hpp"
+#include "mixr/ighost/cigi/CigiHost.hpp"
 
 #include "mixr/ighost/cigi/session/HostSession.hpp"
 #include "IgThread.hpp"
 
-#include "mixr/ighost/cigi/OtwModelCigiCl.hpp"
+#include "mixr/ighost/cigi/CigiModel.hpp"
 
-#include "mixr/ighost/cigi/Otm.hpp"
+#include "mixr/ighost/cigi/TypeMapper.hpp"
 
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/player/air/AirVehicle.hpp"
@@ -53,14 +53,14 @@
 #include "cigicl/CigiBaseSignalProcessing.h"
 #include "cigicl/CigiSensorCtrlV3.h"
 
-#include <cstdio>
+#include <iostream>
 
 namespace mixr {
 namespace cigi {
 
-IMPLEMENT_SUBCLASS(Cigi, "Cigi")
+IMPLEMENT_SUBCLASS(CigiHost, "CigiHost")
 
-BEGIN_SLOTTABLE(Cigi)
+BEGIN_SLOTTABLE(CigiHost)
    "session",              // 1) Networked host session (required)
    "async",                // 2) True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
    "hideOwnshipModel",     // 3) True to hide the ownship's model (default: true - ownship's model is not seen)
@@ -70,9 +70,9 @@ BEGIN_SLOTTABLE(Cigi)
    "airExplosionModel",    // 7) Air Explosion" effect model ID
    "groundExplosionModel", // 8) Ground Explosion" effect model ID
    "shipWakeModel",        // 9) Ship Wake" effect model ID
-END_SLOTTABLE(Cigi)
+END_SLOTTABLE(CigiHost)
 
-BEGIN_SLOT_MAP(Cigi)
+BEGIN_SLOT_MAP(CigiHost)
    ON_SLOT(1, setSlotHostSession,           HostSession)
    ON_SLOT(2, setSlotASyncMode,             base::Number)
    ON_SLOT(3, setSlotHideOwnshipModel,      base::Number)
@@ -90,7 +90,7 @@ END_SLOT_MAP()
 static const int MAX_BUF_SIZE{1472};
 static const double LOS_REQ_TIMEOUT{2.0};     // one second timeout
 
-Cigi::Cigi()
+CigiHost::CigiHost()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -104,7 +104,7 @@ Cigi::Cigi()
    fov = new CigiViewDefV3();
 }
 
-void Cigi::copyData(const Cigi& org, const bool cc)
+void CigiHost::copyData(const CigiHost& org, const bool cc)
 {
    BaseClass::copyData(org);
 
@@ -161,7 +161,7 @@ void Cigi::copyData(const Cigi& org, const bool cc)
    cmtShipWake = org.cmtShipWake;
 }
 
-void Cigi::deleteData()
+void CigiHost::deleteData()
 {
    session = nullptr;
 
@@ -184,11 +184,11 @@ void Cigi::deleteData()
 }
 
 // creates a thread to receive and process incoming IG packets
-bool Cigi::createProcessingThread()
+bool CigiHost::createProcessingThread()
 {
    if ( thread == nullptr ) {
 
-      // parent -> our OTW manager
+      // parent -> our IG manager
       thread = new IgThread(this, 0.6);
       thread->unref(); // 'thread' is a safe_ptr<>
 
@@ -196,44 +196,44 @@ bool Cigi::createProcessingThread()
       if (!ok) {
          thread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Cigi::createProcessingThread(): ERROR, failed to create the thread!" << std::endl;
+            std::cerr << "CigiHost::createProcessingThread(): ERROR, failed to create the thread!" << std::endl;
          }
       }
    }
    return (thread != nullptr);
 }
 
-// create OtwModel objects unique to interface
-OtwModel* Cigi::modelFactory()
+// create Cigi model objects
+CigiModel* CigiHost::modelFactory()
 {
-   const auto p = new OtwModelCigiCl();
+   const auto p = new CigiModel();
    p->setID( ++entityIdCount );
    return p;
 }
 
-// create OtwHot objects unique to interface
-OtwModel* Cigi::hotFactory()
+// create Cigi Hot objects
+CigiModel* CigiHost::hotFactory()
 {
-   const auto p = new OtwModelCigiCl();
+   const auto p = new CigiModel();
    p->setID( ++elevReqIdCount );
    return p;
 }
 
 // sets/clears the async mode flag
-bool Cigi::setASyncMode(const bool f)
+bool CigiHost::setASyncMode(const bool f)
 {
    asyncMode = f;
    return true;
 }
 
 // sets/clears the hide ownship flag
-bool Cigi::setHideOwnshipModel(const bool f)
+bool CigiHost::setHideOwnshipModel(const bool f)
 {
    hideOwn = f;
    return true;
 }
 
-void Cigi::updateData(const double dt)
+void CigiHost::updateData(const double dt)
 {
    // ---
    // init cigi session handler
@@ -278,7 +278,7 @@ void Cigi::updateData(const double dt)
 }
 
 // send state data for ownship and models
-void Cigi::sendOwnshipAndModels()
+void CigiHost::sendOwnshipAndModels()
 {
    // update the write buffer index
    iw++;
@@ -297,19 +297,19 @@ void Cigi::sendOwnshipAndModels()
 }
 
 // sends terrain height requests
-void Cigi::sendElevationRequests()
+void CigiHost::sendElevationRequests()
 {
    // Handled by Start-Of-Frame
 }
 
 // receives terrain height data
-void Cigi::recvElevations()
+void CigiHost::recvElevations()
 {
    // Handled by CIGI callback
 }
 
 // trigger the frame update
-void Cigi::frameSync()
+void CigiHost::frameSync()
 {
    if (session != nullptr && session->isInitialized()) {
       if (isASyncMode()) sendCigiData();
@@ -318,7 +318,7 @@ void Cigi::frameSync()
 }
 
 // reset host interface
-void Cigi::reset()
+void CigiHost::reset()
 {
    BaseClass::reset();
 
@@ -331,7 +331,7 @@ void Cigi::reset()
 }
 
 // update the ownship model; returns true if ok
-bool Cigi::updateOwnshipModel()
+bool CigiHost::updateOwnshipModel()
 {
    // Ownship active and type air vehicle?
 //   bool active = false;
@@ -404,20 +404,20 @@ bool Cigi::updateOwnshipModel()
 }
 
 // update the other models; returns number of active models
-int Cigi::updateModels()
+int CigiHost::updateModels()
 {
    int n{};
 
    // Do we have models?
-   OtwModel** const table{getModelTable()};
+   CigiModel** const table{getModelTable()};
    if (table != nullptr && getModelTableSize() > 0) {
 
       // For all active models in the table ...
       for (unsigned short i = 0; i < getModelTableSize(); i++) {
-         base::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+         base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
          if (model != nullptr) {
 
-            if (model->getState() != OtwModel::INACTIVE) {
+            if (model->getState() != CigiModel::INACTIVE) {
                unsigned short entity{static_cast<unsigned short>(model->getID()* 8 + 1)}; // Save a block of four entities per model
                //  (id*8+1) is parent entity
                //  (id*8+2) is smoke trail entity
@@ -462,7 +462,7 @@ int Cigi::updateModels()
 }
 
 // sets a CigiEntityCtrlV3 structure with common data entity data
-bool Cigi::setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p)
+bool CigiHost::setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p)
 {
    bool ok{ec != nullptr && p != nullptr};
 
@@ -489,7 +489,7 @@ bool Cigi::setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short e
 }
 
 // sets a CigiEntityCtrlV3 structure to an air vheicle's state
-bool Cigi::setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::AirVehicle* const p)
+bool CigiHost::setAirVehicleData(CigiModel* const m, const unsigned short entity, const models::AirVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -505,12 +505,12 @@ bool Cigi::setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entit
    CigiEntityCtrlV3* const smoke{m->smokeEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec,entity,p)};
       if (ok) {
          // Set the entity type
          int tt{};
-         const Otm* otm {m->getTypeMapper()};
+         const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -556,7 +556,7 @@ bool Cigi::setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entit
 }
 
 // sets a 'model_t' structure to a building's state
-bool Cigi::setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const models::Building* const p)
+bool CigiHost::setBuildingData(CigiModel* const m, const unsigned short entity, const models::Building* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -585,12 +585,12 @@ bool Cigi::setBuildingData(OtwModelCigiCl* const m, const unsigned short entity,
    CigiCompCtrlV3* const damage{m->damageCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec,entity,p)};
       if (ok) {
          // Set the entity type
          int tt{};
-         const Otm* otm {m->getTypeMapper()};
+         const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -648,7 +648,7 @@ bool Cigi::setBuildingData(OtwModelCigiCl* const m, const unsigned short entity,
 }
 
 // sets a 'model_t' structure to a ground vheicle's state
-bool Cigi::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::GroundVehicle* const p)
+bool CigiHost::setGndVehicleData(CigiModel* const m, const unsigned short entity, const models::GroundVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -698,13 +698,13 @@ bool Cigi::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entit
    CigiCompCtrlV3* const attachedPartCC{m->attachedCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec,entity,p)};
       if (ok) {
 
          // Set the entity type
          int tt{};
-         const Otm* otm{m->getTypeMapper()};
+         const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -833,7 +833,7 @@ bool Cigi::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entit
 //------------------------------------------------------------------------------
 // setEffectsData() -- Sets a 'model_t' structure to a effects' state
 //------------------------------------------------------------------------------
-bool Cigi::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effect* const p)
+bool CigiHost::setEffectData(CigiModel* const m, const unsigned short entity, const models::Effect* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -848,7 +848,7 @@ bool Cigi::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, c
    }
    CigiEntityCtrlV3* const trail{m->trailEC[iw]};
 
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
 
       // As long as we're active, update the entity control
       if (p->isClassType(typeid(models::Decoy))) {
@@ -859,7 +859,7 @@ bool Cigi::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, c
 
          // Set the entity type
          int tt{};
-         const Otm* otm {m->getTypeMapper()};
+         const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -903,7 +903,7 @@ bool Cigi::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, c
 
             // Set the entity type
             int tt{};
-            const Otm* otm {m->getTypeMapper()};
+            const TypeMapper* otm {m->getTypeMapper()};
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -932,7 +932,7 @@ bool Cigi::setEffectData(OtwModelCigiCl* const m, const unsigned short entity, c
 //------------------------------------------------------------------------------
 // setLifeFormData() -- Sets a 'model_t' structure to a lifeform's state
 //------------------------------------------------------------------------------
-bool Cigi::setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const models::LifeForm* const p)
+bool CigiHost::setLifeFormData(CigiModel* const m, const unsigned short entity, const models::LifeForm* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -954,12 +954,12 @@ bool Cigi::setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity,
    CigiCompCtrlV3* const animation{m->animationCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec,entity,p)};
       if (ok) {
          // Set the entity type
          int tt{};
-         const Otm* otm{m->getTypeMapper()};
+         const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1001,7 +1001,7 @@ bool Cigi::setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity,
 //------------------------------------------------------------------------------
 // setMissileData() -- Sets a 'model_t' structure to a missile's state
 //------------------------------------------------------------------------------
-bool Cigi::setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const models::Missile* const p)
+bool CigiHost::setMissileData(CigiModel* const m, const unsigned short entity, const models::Missile* const p)
 {
    // Make sure we have an entity control block, ...
    if (m->parentEC[iw] == nullptr) {
@@ -1044,13 +1044,13 @@ bool Cigi::setMissileData(OtwModelCigiCl* const m, const unsigned short entity, 
    CigiEntityCtrlV3* const explosion{m->explosionEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       // Load the parent entity control
       setCommonModelData(ec,entity,p);
 
       // Set the entity type
       int tt{};
-      const Otm* otm{m->getTypeMapper()};
+      const TypeMapper* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getTypeId();
       if (tt > 0xffff) tt = 0;   // unsigned shorts only
       ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1089,7 +1089,7 @@ bool Cigi::setMissileData(OtwModelCigiCl* const m, const unsigned short entity, 
    } else {
       ec->SetEntityState(CigiEntityCtrlV3::Standby);
       trail->SetEntityState(CigiEntityCtrlV3::Standby);
-      if (m->getState() == OtwModel::DEAD) {
+      if (m->getState() == CigiModel::DEAD) {
          // Start air explosion at last known location of missile
          explosion->SetRoll(ec->GetRoll());
          explosion->SetPitch(ec->GetPitch());
@@ -1114,7 +1114,7 @@ bool Cigi::setMissileData(OtwModelCigiCl* const m, const unsigned short entity, 
 //------------------------------------------------------------------------------
 // setShipData() -- Sets a 'model_t' structure to a ship's state
 //------------------------------------------------------------------------------
-bool Cigi::setShipData(OtwModelCigiCl* const m, const unsigned short entity, const models::Ship* const p)
+bool CigiHost::setShipData(CigiModel* const m, const unsigned short entity, const models::Ship* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -1130,13 +1130,13 @@ bool Cigi::setShipData(OtwModelCigiCl* const m, const unsigned short entity, con
    CigiEntityCtrlV3* const wake{m->trailEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec,entity,p)};
       if (ok) {
 
          // Set the entity type
          int tt{};
-         const Otm* otm {m->getTypeMapper()};
+         const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned shorts only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1183,7 +1183,7 @@ bool Cigi::setShipData(OtwModelCigiCl* const m, const unsigned short entity, con
 // setSpaceVehicleData()
 //  -- Sets a CigiEntityCtrlV3 structure to a space vheicle's state
 //------------------------------------------------------------------------------
-bool Cigi::setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::SpaceVehicle* const p)
+bool CigiHost::setSpaceVehicleData(CigiModel* const m, const unsigned short entity, const models::SpaceVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -1192,12 +1192,12 @@ bool Cigi::setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short ent
    CigiEntityCtrlV3* const ec{m->parentEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
          // Set the entity type
          int tt{};
-         const Otm* otm{m->getTypeMapper()};
+         const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1219,7 +1219,7 @@ bool Cigi::setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short ent
 //------------------------------------------------------------------------------
 // setWeaponData() -- Sets a 'model_t' structure to a weapon's state
 //------------------------------------------------------------------------------
-bool Cigi::setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const models::AbstractWeapon* const p)
+bool CigiHost::setWeaponData(CigiModel* const m, const unsigned short entity, const models::AbstractWeapon* const p)
 {
    // Make sure we have an entity control block, ...
    if (m->parentEC[iw] == nullptr) {
@@ -1256,13 +1256,13 @@ bool Cigi::setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, c
    CigiEntityCtrlV3* const explosion{m->explosionEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == OtwModel::ACTIVE) {
+   if (m->getState() == CigiModel::ACTIVE) {
       // Load the parent entity control
       setCommonModelData(ec, entity, p);
 
       // Set the entity type
       int tt{};
-      const Otm* otm{m->getTypeMapper()};
+      const TypeMapper* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getTypeId();
       if (tt > 0xffff) tt = 0;   // unsigned shorts only
       ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1276,7 +1276,7 @@ bool Cigi::setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, c
       m->parentActive = true;
    } else {
       ec->SetEntityState(CigiEntityCtrlV3::Standby);
-      if (m->getState() == OtwModel::DEAD) {
+      if (m->getState() == CigiModel::DEAD) {
          // Start air explosion at last known location of missile
          explosion->SetRoll(ec->GetRoll());
          explosion->SetPitch(ec->GetPitch());
@@ -1301,7 +1301,7 @@ bool Cigi::setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, c
 //------------------------------------------------------------------------------
 // Line of sight request -- returns true of request was issued
 //------------------------------------------------------------------------------
-bool Cigi::lineOfSightRequest(
+bool CigiHost::lineOfSightRequest(
                                    const double lat,          // Source latitude         (deg)
                                    const double lon,          // Source longitude        (deg)
                                    const double alt,          // Source altitude         (m)
@@ -1333,7 +1333,7 @@ bool Cigi::lineOfSightRequest(
 //------------------------------------------------------------------------------
 // Get Line of sight -- returns true of the LOS data is valid
 //------------------------------------------------------------------------------
-bool Cigi::getLineOfSightData(
+bool CigiHost::getLineOfSightData(
                                    double* const lat,      // Point latitude         (deg)
                                    double* const lon,      // Point longitude        (deg)
                                    double* const alt,      // Point altitude         (m)
@@ -1356,14 +1356,14 @@ bool Cigi::getLineOfSightData(
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool Cigi::setSlotHostSession(HostSession* const msg)
+bool CigiHost::setSlotHostSession(HostSession* const msg)
 {
    session = msg;
    return true;
 }
 
 // Set/clear the ASYNC mode
-bool Cigi::setSlotASyncMode(const base::Number* const msg)
+bool CigiHost::setSlotASyncMode(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1373,7 +1373,7 @@ bool Cigi::setSlotASyncMode(const base::Number* const msg)
 }
 
 // Set/clear the hide ownship model flag
-bool Cigi::setSlotHideOwnshipModel(const base::Number* const msg)
+bool CigiHost::setSlotHideOwnshipModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1382,11 +1382,11 @@ bool Cigi::setSlotHideOwnshipModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotOwnshipModel(const base::Number* const msg)
+bool CigiHost::setSlotOwnshipModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setOwnshipModelId(static_cast<unsigned short>(v));
       }
@@ -1394,11 +1394,11 @@ bool Cigi::setSlotOwnshipModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotMslTrailModel(const base::Number* const msg)
+bool CigiHost::setSlotMslTrailModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setMslTrailModelId(static_cast<unsigned short>(v));
       }
@@ -1406,11 +1406,11 @@ bool Cigi::setSlotMslTrailModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotSmokePlumeModel(const base::Number* const msg)
+bool CigiHost::setSlotSmokePlumeModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setSmokePlumeModelId(static_cast<unsigned short>(v));
       }
@@ -1418,11 +1418,11 @@ bool Cigi::setSlotSmokePlumeModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotAirExplosionModel(const base::Number* const msg)
+bool CigiHost::setSlotAirExplosionModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setAirExplosionModelId(static_cast<unsigned short>(v));
       }
@@ -1430,11 +1430,11 @@ bool Cigi::setSlotAirExplosionModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotGroundExplosionModel(const base::Number* const msg)
+bool CigiHost::setSlotGroundExplosionModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setGroundExplosionModelId(static_cast<unsigned short>(v));
       }
@@ -1442,11 +1442,11 @@ bool Cigi::setSlotGroundExplosionModel(const base::Number* const msg)
    return ok;
 }
 
-bool Cigi::setSlotShipWakeModel(const base::Number* const msg)
+bool CigiHost::setSlotShipWakeModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v{msg->getInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setShipWakeModelId(static_cast<unsigned short>(v));
       }
@@ -1457,7 +1457,7 @@ bool Cigi::setSlotShipWakeModel(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // sendCigiData() -- Handles sending CIGI data to the visual system
 //------------------------------------------------------------------------------
-bool Cigi::sendCigiData()
+bool CigiHost::sendCigiData()
 {
    // Select the 'read' buffer index
    if (iw0 == NUM_BUFFERS) return false;
@@ -1494,7 +1494,7 @@ bool Cigi::sendCigiData()
    // ---
    {
       // Do we have models?
-      OtwModelCigiCl** const table{reinterpret_cast<OtwModelCigiCl**>(getModelTable())};
+      CigiModel** const table{reinterpret_cast<CigiModel**>(getModelTable())};
       if (table != nullptr && getModelTableSize() > 0) {
 
          // Need at least this much in the buffer to add another entity
@@ -1507,14 +1507,14 @@ bool Cigi::sendCigiData()
          int sendSize{session->getOutgoingBufferSize()};
          int maxAge{static_cast<int>(getModelTableSize())};
          for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-            base::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+            base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
             if (model != nullptr) {
 
                // For all active models in the table ...
                // (send ground models only after 'maxAge' frames)
                // (always update the inactive models to clear them)
                model->incAgeCount();
-               bool updateThisOne{!model->isGroundPlayer || model->isState(OtwModel::OUT_OF_RANGE) || (model->isGroundPlayer && model->getAgeCount() >= maxAge)};
+               bool updateThisOne{!model->isGroundPlayer || model->isState(CigiModel::OUT_OF_RANGE) || (model->isGroundPlayer && model->getAgeCount() >= maxAge)};
 
                if (updateThisOne) {
                   //if (model->isGroundPlayer) {
@@ -1576,8 +1576,8 @@ bool Cigi::sendCigiData()
                      }
 
                      // Clear the model?
-                     if (model->getState() != OtwModel::ACTIVE) {
-                        model->setState( OtwModel::CLEARED );
+                     if (model->getState() != CigiModel::ACTIVE) {
+                        model->setState( CigiModel::CLEARED );
                      }
                   }
                   model->setAgeCount(0);
@@ -1594,14 +1594,14 @@ bool Cigi::sendCigiData()
    // ---
    if (!isElevationRequestPending()) {
       // Do we have a elevation request entries?
-      OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
+      CigiModel** const table{reinterpret_cast<CigiModel**>( getElevationTable() )};
       if (table != nullptr && getElevationTableSize() > 0) {
-         int maxAge = getElevationTableSize() * 4;
+         int maxAge{getElevationTableSize() * 4};
 
          // For all active elevation requests in the table ...
          // -- look for the oldest request ---
-         base::safe_ptr<OtwModelCigiCl> oldest( nullptr );
-         base::safe_ptr<OtwModelCigiCl> model( nullptr );
+         base::safe_ptr<CigiModel> oldest( nullptr );
+         base::safe_ptr<CigiModel> model( nullptr );
          for (unsigned short i = 0; i < getElevationTableSize(); i++) {
             model = table[i];
             if (model != nullptr) {
@@ -1616,7 +1616,7 @@ bool Cigi::sendCigiData()
 
          if (oldest != nullptr) {
 
-            int idx {-1};
+            int idx{-1};
             for (unsigned short i = 0; idx < 0 && i < getElevationTableSize(); i++) {
                if (table[i] == oldest) idx = i;
             }
@@ -1626,7 +1626,7 @@ bool Cigi::sendCigiData()
                hotRequest.SetHatHotID(table[idx]->getID());
 
                // Requested Position (lat/lon)
-               double hotLat {}, hotLon {};
+               double hotLat{}, hotLon{};
                dynamic_cast<models::Player*>(oldest->getPlayer())->getPositionLL(&hotLat, &hotLon);   // DDH
                hotRequest.SetLat(hotLat);
                hotRequest.SetLon(hotLon);
@@ -1652,7 +1652,7 @@ bool Cigi::sendCigiData()
    // Optional LOS request packet
    // ---
    {
-      CigiLosVectReqV3* los0 = getLosRangeRequestPacket();
+      CigiLosVectReqV3* los0{getLosRangeRequestPacket()};
       if (isNewLosequested() && los0 != nullptr) {
          los->SetLosID(getNexLosId());
          session->addPacketLosRangeReq(los0);
@@ -1664,7 +1664,7 @@ bool Cigi::sendCigiData()
    // Optional view control and definition packets
    // ---
    if (getSensorControlPacket() != nullptr) {
-      CigiSensorCtrlV3* mySensor = getSensorControlPacket();
+      CigiSensorCtrlV3* mySensor{getSensorControlPacket()};
       session->addPacketSensorCtrl(mySensor);
    }
 
@@ -1672,7 +1672,7 @@ bool Cigi::sendCigiData()
    // Optional view control and definition packets
    // ---
    if (getViewControlPacket() != nullptr) {
-      CigiViewCtrlV3* myView = getViewControlPacket();
+      CigiViewCtrlV3* myView{getViewControlPacket()};
       //if ( getMaxModels() == 20 ) {
       //if (isMessageEnabled(MSG_DEBUG)) {
       //std::cout << myView->entity_id << std::endl;
@@ -1732,7 +1732,7 @@ bool Cigi::sendCigiData()
 //------------------------------------------------------------------------------
 // startOfFrame() -- Handles Start of Frame packets
 //------------------------------------------------------------------------------
-void Cigi::startOfFrame(const CigiSOFV3* const)
+void CigiHost::startOfFrame(const CigiSOFV3* const)
 {
    if (isSyncMode()) sendCigiData();
 }
@@ -1740,7 +1740,7 @@ void Cigi::startOfFrame(const CigiSOFV3* const)
 //------------------------------------------------------------------------------
 // losResp() -- Handles Line-Of-Sight Response packets
 //------------------------------------------------------------------------------
-void Cigi::losResp(const CigiLosRespV3* const p)
+void CigiHost::losResp(const CigiLosRespV3* const p)
 {
    if ( p != nullptr && isLosRequestPending() && losReqTimer > 0.0 ) {
       // We do have a pending request that hasn't timed out,
@@ -1755,8 +1755,7 @@ void Cigi::losResp(const CigiLosRespV3* const p)
             losRespLon = p->GetLongitude();
             losRespAlt = p->GetAltitude();
             losRespRange = static_cast<double>(p->GetRange());
-         }
-         else {
+         } else {
             // Don't have a valid point
             losRespDataValid = false;
          }
@@ -1769,7 +1768,7 @@ void Cigi::losResp(const CigiLosRespV3* const p)
 //------------------------------------------------------------------------------
 // LOS request has been sent to the IG
 //------------------------------------------------------------------------------
-void Cigi::losRequestSend()
+void CigiHost::losRequestSend()
 {
    newLosReq = false;
    losReqTimer = LOS_REQ_TIMEOUT;
@@ -1778,44 +1777,44 @@ void Cigi::losRequestSend()
 //------------------------------------------------------------------------------
 // Elevation request has been sent to the IG
 //------------------------------------------------------------------------------
-void Cigi::elevationRequestSend()
+void CigiHost::elevationRequestSend()
 {
    elevReqFlg = true;   // active request
-   elevReqTimer = 0.5f; // time-out
+   elevReqTimer = 0.5;  // time-out
 }
 
 //------------------------------------------------------------------------------
 // collisionSegmentResp() -- Handles Collision Segment Response packets
 //------------------------------------------------------------------------------
-void Cigi::collisionSegmentResp(const CigiCollDetSegRespV3* const p)
+void CigiHost::collisionSegmentResp(const CigiCollDetSegRespV3* const p)
 {
    if (p != nullptr) {
-      std::printf("<< Incoming\n");
+      std::cout << "<< Incoming\n";
 #if 0
       CigiPrintCollisionSegmentRespPacket(p, 2);
 #endif
-      std::printf("\n");
+      std::cout << "\n";
    }
 }
 
 //------------------------------------------------------------------------------
 // sensorResp() -- Handles Sensor Response packets
 //------------------------------------------------------------------------------
-void Cigi::sensorResp(const CigiSensorRespV3* const p)
+void CigiHost::sensorResp(const CigiSensorRespV3* const p)
 {
    if (p != nullptr) {
-      std::printf("<< Incoming\n");
+      std::cout << "<< Incoming\n";
 #if 0
       CigiPrintSensorResponsePacket(p, 2);
 #endif
-      std::printf("\n");
+      std::cout << "\n";
    }
 }
 
 //------------------------------------------------------------------------------
 // hatHotResp() -- Handles Height-Above-Terrain and Height-Of-Terrain Response packets
 //------------------------------------------------------------------------------
-void Cigi::hatHotResp(const CigiHatHotRespV3* const p)
+void CigiHost::hatHotResp(const CigiHatHotRespV3* const p)
 {
    // Valid?
    if (p != nullptr && p->GetValid()) {
@@ -1826,8 +1825,8 @@ void Cigi::hatHotResp(const CigiHatHotRespV3* const p)
       //std::cout << "hotResp: id = " << id << std::endl;
       //}
 
-      OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
-      base::safe_ptr<OtwModelCigiCl> model(nullptr);
+      CigiModel** const table{reinterpret_cast<CigiModel**>( getElevationTable() )};
+      base::safe_ptr<CigiModel> model(nullptr);
       for (int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
          if (table[i]->getID() == id) model = table[i];
       }
@@ -1850,28 +1849,28 @@ void Cigi::hatHotResp(const CigiHatHotRespV3* const p)
 //------------------------------------------------------------------------------
 // collisionVolumeResp() -- Handles Collision Volume Response packets
 //------------------------------------------------------------------------------
-void Cigi::collisionVolumeResp(const CigiCollDetVolRespV3* const p)
+void CigiHost::collisionVolumeResp(const CigiCollDetVolRespV3* const p)
 {
    if (p != nullptr) {
-      std::printf("<< Incoming\n");
+      std::cout << "<< Incoming\n";
 #if 0
       CigiPrintCollisionVolumeRespPacket(p, 2);
 #endif
-      std::printf("\n");
+      std::cout << "\n";
    }
 }
 
 //------------------------------------------------------------------------------
 // igResponse() -- Handles IG Response packets
 //------------------------------------------------------------------------------
-void Cigi::igResponse(const CigiIGMsgV3* const p)
+void CigiHost::igResponse(const CigiIGMsgV3* const p)
 {
    if (p != nullptr) {
-      std::printf("<< Incoming\n");
+      std::cout << "<< Incoming\n";
 #if 0
       CigiPrintIGResponseMessagePacket(p, 2);
 #endif
-      std::printf("\n");
+      std::cout << "\n";
    }
 }
 
@@ -1879,61 +1878,61 @@ void Cigi::igResponse(const CigiIGMsgV3* const p)
 // Set functions
 //------------------------------------------------------------------------------
 
-bool Cigi::setSensorControlPacket(CigiSensorCtrlV3* const p)
+bool CigiHost::setSensorControlPacket(CigiSensorCtrlV3* const p)
 {
    sensor = p;
    return true;
 }
 
-bool Cigi::setViewControlPacket(CigiViewCtrlV3* const p)
+bool CigiHost::setViewControlPacket(CigiViewCtrlV3* const p)
 {
    view = p;
    return true;
 }
 
-bool Cigi::setViewDefinitionPacket(CigiViewDefV3* const p)
+bool CigiHost::setViewDefinitionPacket(CigiViewDefV3* const p)
 {
    fov = p;
    return true;
 }
 
 // Ownship's model ID
-bool Cigi::setOwnshipModelId(const unsigned short v)
+bool CigiHost::setOwnshipModelId(const unsigned short v)
 {
    cmtOwnship = v;
    return true;
 }
 
 // "Missile Trail" effect model ID
-bool Cigi::setMslTrailModelId(const unsigned short v)
+bool CigiHost::setMslTrailModelId(const unsigned short v)
 {
    cmtMslTrail = v;
    return true;
 }
 
 // "Smoke Plume" effect model ID
-bool Cigi::setSmokePlumeModelId(const unsigned short v)
+bool CigiHost::setSmokePlumeModelId(const unsigned short v)
 {
    cmtSmokePlume = v;
    return true;
 }
 
 // "Air Explosion" effect model ID
-bool Cigi::setAirExplosionModelId(const unsigned short v)
+bool CigiHost::setAirExplosionModelId(const unsigned short v)
 {
    cmtAirExplosion = v;
    return true;
 }
 
 // "Ground Explosion" effect model ID
-bool Cigi::setGroundExplosionModelId(const unsigned short v)
+bool CigiHost::setGroundExplosionModelId(const unsigned short v)
 {
    cmtGroundExplosion = v;
    return true;
 }
 
 // "Ship Wake" effect model ID
-bool Cigi::setShipWakeModelId(const unsigned short v)
+bool CigiHost::setShipWakeModelId(const unsigned short v)
 {
    cmtShipWake = v;
    return true;

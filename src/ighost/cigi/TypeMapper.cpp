@@ -1,5 +1,5 @@
 
-#include "mixr/ighost/cigi/Otm.hpp"
+#include "mixr/ighost/cigi/TypeMapper.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -9,26 +9,26 @@
 namespace mixr {
 namespace cigi {
 
-IMPLEMENT_SUBCLASS(Otm, "Otm")
+IMPLEMENT_SUBCLASS(TypeMapper, "CigiTypeMapper")
 
-BEGIN_SLOTTABLE(Otm)
+BEGIN_SLOTTABLE(TypeMapper)
    "factoryName",       // 1) Reference factory name
    "typeName",          // 2) Reference type name
-   "modelTypeId",       // 3) OTW entity type ID number
-END_SLOTTABLE(Otm)
+   "modelTypeId",       // 3) IG entity type ID number
+END_SLOTTABLE(TypeMapper)
 
-BEGIN_SLOT_MAP(Otm)
+BEGIN_SLOT_MAP(TypeMapper)
     ON_SLOT(1, setSlotRefFactoryName, base::Identifier)
     ON_SLOT(2, setSlotRefTypeName,    base::String)
     ON_SLOT(3, setSlotTypeId,         base::Number)
 END_SLOT_MAP()
 
-Otm::Otm()
+TypeMapper::TypeMapper()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Otm::copyData(const Otm& org, const bool)
+void TypeMapper::copyData(const TypeMapper& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -37,7 +37,7 @@ void Otm::copyData(const Otm& org, const bool)
    setSlotRefTypeName( org.refTypeName );
 }
 
-void Otm::deleteData()
+void TypeMapper::deleteData()
 {
    setTypeId( 0 );
    setSlotRefFactoryName( nullptr );
@@ -48,19 +48,19 @@ void Otm::deleteData()
 // Set functions
 //------------------------------------------------------------------------------
 
-// Sets the OTW entity type number
-bool Otm::setTypeId(const int newType)
+// Sets the IG entity type number
+bool TypeMapper::setTypeId(const int newType)
 {
    typeId = newType;
    return true;
 }
 
-// Sets the OTW entity type number
-bool Otm::setSlotTypeId(const base::Number* const msg)
+// Sets the IG entity type number
+bool TypeMapper::setSlotTypeId(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
-      const int i {msg->getInt()};
+      const int i{msg->getInt()};
       if (i >= 0) {
          ok = setTypeId(i);
       }
@@ -69,14 +69,14 @@ bool Otm::setSlotTypeId(const base::Number* const msg)
 }
 
 // Sets the player's factory name
-bool Otm::setSlotRefFactoryName(const base::Identifier* const msg)
+bool TypeMapper::setSlotRefFactoryName(const base::Identifier* const msg)
 {
    refFactoryName = msg;
    return true;
 }
 
 // Sets the player's type name
-bool Otm::setSlotRefTypeName(const base::String* const msg)
+bool TypeMapper::setSlotRefTypeName(const base::String* const msg)
 {
    refTypeName = msg;
    return true;
@@ -85,7 +85,7 @@ bool Otm::setSlotRefTypeName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // isMatchingPlayerType() -- Returns true if the factory & type names match
 //------------------------------------------------------------------------------
-bool Otm::isMatchingPlayerType(const models::Player* const p) const
+bool TypeMapper::isMatchingPlayerType(const models::Player* const p) const
 {
    bool match{};
    if (p != nullptr && refFactoryName != nullptr) {

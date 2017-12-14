@@ -1,8 +1,8 @@
 
 #include "mixr/ighost/cigi/IgHost.hpp"
 
-#include "mixr/ighost/cigi/Otm.hpp"
-#include "mixr/ighost/cigi/OtwModel.hpp"
+#include "mixr/ighost/cigi/TypeMapper.hpp"
+#include "mixr/ighost/cigi/CigiModel.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -23,7 +23,7 @@
 namespace mixr {
 namespace cigi {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(IgHost, "BaseOtw")
+IMPLEMENT_ABSTRACT_SUBCLASS(IgHost, "BaseIgHost")
 
 BEGIN_SLOTTABLE(IgHost)
    "maxRange",         // 1: Max range of visual system (distance: meters)
@@ -31,7 +31,7 @@ BEGIN_SLOTTABLE(IgHost)
    "maxElevations",    // 3: Max number of terrain elevation requests
    "latitude",         // 4: Visual reference latitude (deg)
    "longitude",        // 5: Visual reference longitude (deg)
-   "otwModelTypes",    // 6: OTW system's model type IDs (PairStream of Otm objects)
+   "typeMap",          // 6: IG's system model type IDs (PairStream of TypeMapper objects)
 END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
@@ -41,7 +41,7 @@ BEGIN_SLOT_MAP(IgHost)
    ON_SLOT(3, setSlotMaxElevations, base::Number)
    ON_SLOT(4, setSlotRefLatitude,   base::Number)
    ON_SLOT(5, setSlotRefLongitude,  base::Number)
-   ON_SLOT(6, setSlotOtwModelTypes, base::PairStream)
+   ON_SLOT(6, setSlotTypeMap,       base::PairStream)
 END_SLOT_MAP()
 
 IgHost::IgHost()
@@ -55,7 +55,7 @@ void IgHost::copyData(const IgHost& org, const bool)
 
    resetTables();
 
-   clearOtwModelTypes();
+   clearModelTypes();
    for (int i = 0; i < org.nOtwModelTypes; i++) {
       org.otwModelTypes[i]->ref();
       otwModelTypes[i] = org.otwModelTypes[i];
@@ -81,7 +81,7 @@ void IgHost::deleteData()
    setOwnship(nullptr);
    setPlayerList(nullptr);
    resetTables();
-   clearOtwModelTypes();
+   clearModelTypes();
 }
 
 //------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ void IgHost::resetTables()
 //------------------------------------------------------------------------------
 // clearOtwModelTypes() -- Clear the OTW model types table
 //------------------------------------------------------------------------------
-void IgHost::clearOtwModelTypes()
+void IgHost::clearModelTypes()
 {
    // Clear our old OTW model type table --
    // Just in case someone is scanning the table, we clear the entries
@@ -185,7 +185,7 @@ void IgHost::mapPlayerList2ModelTable()
    if (isResetInProgress()) {
       // Set all active models as Out-Of-Range so that sendOwnshipAndModels() can remove them
       for (int i = 0; i < getModelTableSize(); i++) {
-         modelTbl[i]->setState( OtwModel::OUT_OF_RANGE );
+         modelTbl[i]->setState( CigiModel::OUT_OF_RANGE );
       }
       return;
    }
@@ -198,7 +198,7 @@ void IgHost::mapPlayerList2ModelTable()
    //   -- We're also clearing the model's 'checked' flag
    // ---
    for (int i = getModelTableSize(); i > 0; --i) {
-      if ( modelTbl[i-1]->isState(OtwModel::CLEARED) ) {
+      if ( modelTbl[i-1]->isState(CigiModel::CLEARED) ) {
          // Deleting this model
          //std::cout << "Otw::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
          removeModelFromList( (i-1), MODEL_TABLE);
@@ -214,21 +214,21 @@ void IgHost::mapPlayerList2ModelTable()
       // ---
       // Find players that are alive and within range of the visual system ...
       // ---
-      base::List::Item* item {playerList->getFirstItem()};
+      base::List::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<models::Player*>(pair->object());
 
-         bool dummy {};
+         bool dummy{};
          const auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
          if (wpn != nullptr) dummy = wpn->isDummy();
 
          if ( p != getOwnship() && !dummy ) {
 
             // Find the player's model entry (if any)
-            OtwModel* model = findModel(p, MODEL_TABLE);
+            CigiModel* model = findModel(p, MODEL_TABLE);
 
             // Check if in-range
             bool inRange {computeRangeToPlayer(p) <= maxRange};
@@ -238,7 +238,7 @@ void IgHost::mapPlayerList2ModelTable()
                // When alive and in range ...
                if (model != nullptr) {
                   // a) and it already has a model entry: make sure it's active ...
-                  model->setState( OtwModel::ACTIVE );
+                  model->setState( CigiModel::ACTIVE );
                } else {
                   // b) and it doesn't have a model entry (new, in-range player) ...
                   model = newModelEntry(p);
@@ -247,13 +247,13 @@ void IgHost::mapPlayerList2ModelTable()
                // When player isn't alive and it had a model entry
                if (model != nullptr) {
                   // set state to dead
-                  model->setState( OtwModel::DEAD );
+                  model->setState( CigiModel::DEAD );
                }
             } else {
                // When player is out-of-range and it had a model entry
                if (model != nullptr) {
                   // set state to out-of-range
-                  model->setState( OtwModel::OUT_OF_RANGE );
+                  model->setState( CigiModel::OUT_OF_RANGE );
                }
             }
             if (model != nullptr) model->setCheckedFlag(true);
@@ -273,7 +273,7 @@ void IgHost::mapPlayerList2ModelTable()
          // Request removal;
          // (note: the OTW system specific code now has one frame to cleanup its own code
          //  before the model is dropped from the output list next frame -- see above)
-         modelTbl[i]->setState( OtwModel::OUT_OF_RANGE );
+         modelTbl[i]->setState( CigiModel::OUT_OF_RANGE );
       }
    }
 
@@ -295,7 +295,7 @@ void IgHost::mapPlayers2ElevTable()
       // ---
       // Find players that are alive and require terrain elevation from the visual system ...
       // ---
-      base::List::Item* item {playerList->getFirstItem()};
+      base::List::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
@@ -311,7 +311,7 @@ void IgHost::mapPlayers2ElevTable()
             if (inRange) {
 
                // Find the player's model entry (if any)
-               OtwModel* model {findModel(p, HOT_TABLE)};
+               CigiModel* model {findModel(p, HOT_TABLE)};
 
                if (model != nullptr) {
                   // The player has a valid entry.
@@ -347,9 +347,9 @@ void IgHost::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 double IgHost::computeRangeToPlayer(const models::Player* const ip) const
 {
-    double rng {maxRange*2.0 + 1.0};  // Default is out-of-range
+    double rng{maxRange*2.0 + 1.0};  // Default is out-of-range
     if (ownship != nullptr) {
-        base::Vec3d diff = ip->getPosition() - ownship->getPosition();
+        base::Vec3d diff{ip->getPosition() - ownship->getPosition()};
         rng = diff.length();
     }
     return rng;
@@ -359,9 +359,9 @@ double IgHost::computeRangeToPlayer(const models::Player* const ip) const
 // newModelEntry() -- Generates a new model entry for this player.
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* IgHost::newModelEntry(models::Player* const ip)
+CigiModel* IgHost::newModelEntry(models::Player* const ip)
 {
-   OtwModel* model {};
+   CigiModel* model{};
 
    // Only if we have a player pointer ...
    if (ip != nullptr && (getModelTableSize() < getMaxModels())) {
@@ -381,9 +381,9 @@ OtwModel* IgHost::newModelEntry(models::Player* const ip)
 // newElevEntry() -- Generates a new elevation entry for this player
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* IgHost::newElevEntry(models::Player* const ip)
+CigiModel* IgHost::newElevEntry(models::Player* const ip)
 {
-   OtwModel* model {};
+   CigiModel* model{};
 
    // Only if we have a player pointer ...
    if (ip != nullptr && (getElevationTableSize() < getMaxElevations())) {
@@ -474,15 +474,15 @@ bool IgHost::setMaxElevations(const int n)
 //------------------------------------------------------------------------------
 // addModelToList() -- adds a model to the quick access table
 //------------------------------------------------------------------------------
-bool IgHost::addModelToList(OtwModel* const model, const TableType type)
+bool IgHost::addModelToList(CigiModel* const model, const TableType type)
 {
-   bool ok {};
+   bool ok{};
    if (model != nullptr) {
 
       // Select the table
-      OtwModel** tbl = modelTbl.data();
-      int n = nModels;
-      int max = maxModels;
+      CigiModel** tbl{modelTbl.data()};
+      int n{nModels};
+      int max{maxModels};
       if (type == HOT_TABLE) {
          tbl = hotTbl.data();
          n = nHots;
@@ -497,14 +497,14 @@ bool IgHost::addModelToList(OtwModel* const model, const TableType type)
          tbl[n] = model;
 
          // Create a key for this new NIB
-         OtwModelKey key(model->getPlayerID(), model->getFederateName());
+         ModelKey key(model->getPlayerID(), model->getFederateName());
 
          if (n > 0) {
             // Now, 'bubble down' to its correct position
-            int idx {n-1};
+            int idx{n-1};
             while (idx >= 0 && compareKey2Model(&key, &tbl[idx]) <= 0) {
                // Swap the table entries
-               OtwModel* tmp = tbl[idx];
+               CigiModel* tmp{tbl[idx]};
                tbl[idx] = tbl[idx+1];
                tbl[idx+1] = tmp;
                idx--;
@@ -527,7 +527,7 @@ bool IgHost::addModelToList(OtwModel* const model, const TableType type)
 void IgHost::removeModelFromList(const int idx, const TableType type)
 {
    // Select the table size
-   int n = nModels;
+   int n{nModels};
    if (type == HOT_TABLE) {
       n = nHots;
    }
@@ -536,16 +536,16 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
    if (idx >= 0 && idx < n) {
 
       // Select the table
-      OtwModel** tbl = modelTbl.data();
+      CigiModel** tbl{modelTbl.data()};
       if (type == HOT_TABLE) {
          tbl = hotTbl.data();
       }
 
       // Remember the model
-      OtwModel* model = tbl[idx];
+      CigiModel* model{tbl[idx]};
 
       // Shift down all items above this index by one position
-      int n1 {n - 1};
+      int n1{n - 1};
       for (int i = idx; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
@@ -562,16 +562,16 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
    }
 }
 
-void IgHost::removeModelFromList(OtwModel* const model, const TableType type)
+void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 {
-   OtwModel** tbl = modelTbl.data();
-   int n = nModels;
+   CigiModel** tbl{modelTbl.data()};
+   int n{nModels};
    if (type == HOT_TABLE) {
       tbl = hotTbl.data();
       n = nHots;
    }
 
-   int found {-1};
+   int found{-1};
    // Find the model
    for (int i = 0; i < n && found < 0; i++) {
       if (model == tbl[i]) found = i;
@@ -581,7 +581,7 @@ void IgHost::removeModelFromList(OtwModel* const model, const TableType type)
    if (found >= 0) {
 
       // Shift down all items above this model by one position
-      int n1 {n - 1};
+      int n1{n - 1};
       for (int i = found; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
@@ -601,35 +601,32 @@ void IgHost::removeModelFromList(OtwModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 // findModel() -- find the model that matches ALL IDs.
 //------------------------------------------------------------------------------
-OtwModel* IgHost::findModel(const unsigned short playerID, const base::String* const federateName, const TableType type)
+CigiModel* IgHost::findModel(const unsigned short playerID, const base::String* const federateName, const TableType type)
 {
    // Define the key
-   OtwModelKey key(playerID, federateName);
+   ModelKey key(playerID, federateName);
 
    // Binary search the table for the models
-   OtwModel* found {};
+   CigiModel* found{};
    if (type == HOT_TABLE) {
-      OtwModel** k =
-         static_cast<OtwModel**>(bsearch(&key, hotTbl.data(), nHots, sizeof(OtwModel*), compareKey2Model));
+      CigiModel** k{static_cast<CigiModel**>(bsearch(&key, hotTbl.data(), nHots, sizeof(CigiModel*), compareKey2Model))};
       if (k != nullptr) found = *k;
-   }
-   else {
-      OtwModel** k =
-         static_cast<OtwModel**>(bsearch(&key, modelTbl.data(), nModels, sizeof(OtwModel*), compareKey2Model));
+   } else {
+      CigiModel** k{static_cast<CigiModel**>(bsearch(&key, modelTbl.data(), nModels, sizeof(CigiModel*), compareKey2Model))};
       if (k != nullptr) found = *k;
    }
    return found;
 }
 
-OtwModel* IgHost::findModel(const simulation::AbstractPlayer* const player, const TableType type)
+CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, const TableType type)
 {
-   OtwModel* found {};
+   CigiModel* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::String* fName {};
+      const base::String* fName{};
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const simulation::AbstractNib* pNib {player->getNib()};
+         const simulation::AbstractNib* pNib{player->getNib()};
          fName = pNib->getFederateName();
       }
       // Now find the model using the player's IDs
@@ -645,14 +642,14 @@ OtwModel* IgHost::findModel(const simulation::AbstractPlayer* const player, cons
 int IgHost::compareKey2Model(const void* key, const void* model)
 {
    // The Key
-   const OtwModelKey* pKey {static_cast<const OtwModelKey*>(key)};
+   const ModelKey* pKey{static_cast<const ModelKey*>(key)};
 
    // The NIB
-   const OtwModel* const* pp {static_cast<const OtwModel* const*>(model)};
-   const OtwModel* pModel {*pp};
+   const CigiModel* const* pp{static_cast<const CigiModel* const*>(model)};
+   const CigiModel* pModel{*pp};
 
    // Default to equal
-   int result {};
+   int result{};
 
    // Compare player IDs
    if (pKey->playerID < pModel->getPlayerID()) result = -1;
@@ -660,8 +657,8 @@ int IgHost::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const base::String* pKeyFedName {pKey->fName};
-      const base::String* pModelFedName {pModel->getFederateName()};
+      const base::String* pKeyFedName{pKey->fName};
+      const base::String* pModelFedName{pModel->getFederateName()};
 
       if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
 
@@ -688,14 +685,14 @@ bool IgHost::isResetInProgress() const
 //------------------------------------------------------------------------------
 bool IgHost::setRefLatitude(const double v)
 {
-    bool ok {v <= 90.0 && v >= -90.0};
+    bool ok{v <= 90.0 && v >= -90.0};
     if (ok) refLat = v;
     return ok;
 }
 
 bool IgHost::setRefLongitude(const double v)
 {
-    bool ok {v <= 180.0 && v >= -180.0};
+    bool ok{v <= 180.0 && v >= -180.0};
     if (ok) refLon = v;
     return ok;
 }
@@ -707,17 +704,17 @@ bool IgHost::setRefLongitude(const double v)
 // setSlotMaxRange() -- sets the maxRange slot
 bool IgHost::setSlotMaxRange(const base::Distance* const msg)
 {
-    bool ok {};
+    bool ok{};
 
     if (msg != nullptr) {
         // We have a distance which we can convert to meters
-        const double rng {base::Meters::convertStatic(*msg)};
+        const double rng{base::Meters::convertStatic(*msg)};
         ok = setMaxRange( rng );
     }
 
     if (!ok) {
         // error -- invalid range
-        std::cerr << "Otw::setSlotMaxRange: invalid maximum range" << std::endl;
+        std::cerr << "IgHost::setSlotMaxRange: invalid maximum range" << std::endl;
     }
     return ok;
 }
@@ -725,7 +722,7 @@ bool IgHost::setSlotMaxRange(const base::Distance* const msg)
 // setSlotMaxRange() -- sets the maxRange slot
 bool IgHost::setSlotMaxRange(const base::Number* const msg)
 {
-    bool ok {};
+    bool ok{};
 
     if (msg != nullptr) {
         // We have a simple number, which should be meters!
@@ -734,7 +731,7 @@ bool IgHost::setSlotMaxRange(const base::Number* const msg)
 
     if (!ok) {
         // error -- invalid range
-        std::cerr << "Otw::setSlotMaxRange: invalid maximum range" << std::endl;
+        std::cerr << "IgHost::setSlotMaxRange: invalid maximum range" << std::endl;
     }
     return ok;
 }
@@ -742,14 +739,14 @@ bool IgHost::setSlotMaxRange(const base::Number* const msg)
 // setSlotMaxModels() -- sets the max number of models slot
 bool IgHost::setSlotMaxModels(const base::Number* const num)
 {
-    bool ok {};
+    bool ok{};
     if (num != nullptr) {
-        const int n {num->getInt()};
+        const int n{num->getInt()};
         if (n >= 0) {
              ok = setMaxModels(n);
         }
         if (!ok) {
-            std::cerr << "Otw::setSlotMaxModels: maximum number of models limited to Otw::MAX_MODELS1" << std::endl;
+            std::cerr << "IgHost::setSlotMaxModels: maximum number of models limited to Otw::MAX_MODELS1" << std::endl;
         }
     }
     return ok;
@@ -757,14 +754,14 @@ bool IgHost::setSlotMaxModels(const base::Number* const num)
 
 bool IgHost::setSlotMaxElevations(const base::Number* const num)
 {
-    bool ok {};
+    bool ok{};
     if (num != nullptr) {
-        const int n {num->getInt()};
+        const int n{num->getInt()};
         if (n >= 0) {
              ok = setMaxElevations(n);
         }
         if (!ok) {
-            std::cerr << "Otw::setSlotMaxElevations: maximum number of terrain elevation requests limited to Otw::MAX_ELEV" << std::endl;
+            std::cerr << "IgHost::setSlotMaxElevations: maximum number of terrain elevation requests limited to Otw::MAX_ELEV" << std::endl;
         }
     }
     return ok;
@@ -773,7 +770,7 @@ bool IgHost::setSlotMaxElevations(const base::Number* const num)
 // latitude: Ref latitude (deg)
 bool IgHost::setSlotRefLatitude(const base::Number* const num)
 {
-    bool ok {};
+    bool ok{};
     if (num != nullptr) {
         ok = setRefLatitude(num->getDouble());
     }
@@ -783,27 +780,27 @@ bool IgHost::setSlotRefLatitude(const base::Number* const num)
 // longitude: Ref longitude (deg)
 bool IgHost::setSlotRefLongitude(const base::Number* const num)
 {
-    bool ok {};
+    bool ok{};
     if (num != nullptr) {
         ok = setRefLongitude(num->getDouble());
     }
     return ok;
 }
 
-// Sets the list of OTW model type IDs (Otm objects)
-bool IgHost::setSlotOtwModelTypes(const base::PairStream* const msg)
+// Sets the list of IG model type IDs (TypeMapper objects)
+bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
 {
-    bool ok {};
+    bool ok{};
     if (msg != nullptr) {
        // First clear the old table
-       clearOtwModelTypes();
+       clearModelTypes();
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
-       const base::List::Item* item {msg->getFirstItem()};
+       const base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
-          const auto otwType = dynamic_cast<const Otm*>( pair->object() );
+          const auto otwType = dynamic_cast<const TypeMapper*>( pair->object() );
           if (otwType != nullptr) {
              // We have an Otm object, so put it in the table
              otwType->ref();
@@ -818,9 +815,9 @@ bool IgHost::setSlotOtwModelTypes(const base::PairStream* const msg)
 }
 
 //==============================================================================
-// Otw::OtwModelKey class
+// IgModel::ModelKey class
 //==============================================================================
-IgHost::OtwModelKey::OtwModelKey(const unsigned short pid, const base::String* const federateName)
+IgHost::ModelKey::ModelKey(const unsigned short pid, const base::String* const federateName)
 {
    playerID = pid;
    fName = federateName;

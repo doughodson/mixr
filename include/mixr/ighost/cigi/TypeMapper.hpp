@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_Otm_H__
-#define __mixr_ighost_cigi_Otm_H__
+#ifndef __mixr_ighost_cigi_TypeMapper_H__
+#define __mixr_ighost_cigi_TypeMapper_H__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -11,12 +11,12 @@ namespace models { class Player; }
 namespace cigi {
 
 //------------------------------------------------------------------------------
-// Class: Otm
+// Class: TypeMapper
 //
-// Description: OTW-Type-Mapper (OTM) --
-//              Maps player's factory name and type string to a OTW entity type ID.
+// Description: Cigi Type-Mapper --
+//              Maps player's factory name and type string to Cigi IG entity type ID.
 //
-// Factory name: Otm
+// Factory name: CigiTypeMapper
 // Slots:
 //     factoryName   <Identifier>     ! Reference factory name (default: 0)
 //     typeName      <String>         ! Reference type name (default: 0)
@@ -30,7 +30,6 @@ namespace cigi {
 //
 // Notes:
 //   1) If typeName isn't given, only the factoryName will be used.
-//   2) Derived class (OTW unique) can use 'modelTypeId' or add their own IDs
 //
 //
 // Notes on comparing player types -- isMatchingPlayerType()
@@ -51,15 +50,15 @@ namespace cigi {
 //          (e.g., Test player's general "F-16" type would not match our "F-16C")
 //
 //------------------------------------------------------------------------------
-class Otm : public base::Object
+class TypeMapper : public base::Object
 {
-    DECLARE_SUBCLASS(Otm, base::Object)
+    DECLARE_SUBCLASS(TypeMapper, base::Object)
 
 public:
-    Otm();
+    TypeMapper();
 
-    int getTypeId() const                                    { return typeId; }          // OTW entity type ID number
-    virtual bool setTypeId(const int newType);                                           // Sets the OTW entity type number
+    int getTypeId() const                                    { return typeId; }          // IG entity type ID number
+    virtual bool setTypeId(const int newType);                                           // Sets the IG entity type number
 
     const base::Identifier* getRefFactoryName() const        { return refFactoryName; }  // Reference factory name
 
@@ -71,11 +70,11 @@ public:
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
     base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
-    int typeId {};                                            // OTW entity type ID number
+    int typeId {};                                            // IG entity type ID number
 
 private:
     // slot table helper methods
-    bool setSlotTypeId(const base::Number* const);              // Sets the OTW entity type number
+    bool setSlotTypeId(const base::Number* const);              // Sets the IG entity type number
     bool setSlotRefFactoryName(const base::Identifier* const);  // Sets the Reference factory name
     bool setSlotRefTypeName(const base::String* const);         // Sets the Reference type name
 };

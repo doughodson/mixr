@@ -6,12 +6,12 @@
 
 namespace mixr {
 namespace cigi {
-class Cigi;
+class CigiHost;
 
 class SignalProcessor : public CigiBaseSignalProcessing
 {
 public:
-   SignalProcessor(Cigi* parent) : p(parent) { }
+   SignalProcessor(CigiHost* parent) : p(parent) { }
    virtual ~SignalProcessor() = default;
 
    virtual void OnSOF(CigiBasePacket*);
@@ -24,7 +24,7 @@ public:
    virtual void OnSensorResp(CigiBasePacket*);
 
 private:
-   Cigi* p{};
+   CigiHost* p{};
 };
 
 }

@@ -11,7 +11,7 @@ class AbstractIoData;
 //------------------------------------------------------------------------------
 // Class: AbstractIoHandler
 //
-// Description: Handles the flow of data to/from i/o devices.
+// Description: Handles the flow of data to/from devices.
 //
 //    Data flowing to/from devices is buffered using application specific
 //    data objects (AbstractIoData).

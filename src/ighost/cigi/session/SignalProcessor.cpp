@@ -2,7 +2,7 @@
 #include "SignalProcessor.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"
-#include "mixr/ighost/cigi/Cigi.hpp"
+#include "mixr/ighost/cigi/CigiHost.hpp"
 
 #include "cigicl/CigiSOFV3.h"
 #include "cigicl/CigiCollDetSegRespV3.h"

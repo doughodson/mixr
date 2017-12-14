@@ -6,12 +6,11 @@ LIB = $(MIXR_LIB_DIR)/libmixr_ighost_cigi.a
 OBJS =  \
 	session/HostSession.o \
 	session/SignalProcessor.o \
-	Cigi.o \
+	CigiHost.o \
+	CigiModel.o \
 	IgHost.o \
 	IgThread.o \
-	Otm.o \
-	OtwModel.o \
-	OtwModelCigiCl.o \
+	TypeMapper.o \
 	factory.o
 
 .PHONY: all clean

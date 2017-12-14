@@ -5,7 +5,7 @@
 
 #include "SignalProcessor.hpp"
 
-#include "mixr/ighost/cigi/Cigi.hpp"
+#include "mixr/ighost/cigi/CigiHost.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 
@@ -59,7 +59,7 @@ HostSession::HostSession()
 }
 
 // initialize session, signal callback interface and network connections
-bool HostSession::initialize(Cigi* const p)
+bool HostSession::initialize(CigiHost* const p)
 {
    // our parent component
    parent = p;

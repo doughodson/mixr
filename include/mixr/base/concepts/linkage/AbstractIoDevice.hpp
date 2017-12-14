@@ -13,13 +13,14 @@ class AbstractIoData;
 //
 // Description: Abstract interface to an I/O device
 //
-//    I/O devices handle communication with I/O hardware, usually via
-//    device drivers.  Most of the time, device drivers communication with
-//    operating system specific device drivers.
+//    I/O devices communicate with I/O hardware, usually via device drivers.
+//    Most of the time, these drivers are operating specific.  This class
+//    abstracts communication to I/O devices for both different devices
+//    and different platforms.
 //
-//    I/O devices are typically managed by an I/O handler class (AbstractIoHander)
-//    which can provide either synchronous or asynchronous execution of data to/from
-//    devices.
+//    I/O devices are typically managed by a handler class (AbstractIoHander)
+//    which provides either synchronous or asynchronous movement of data to/from
+//    data buffers (AbstractIoData) and devices (AbstractIoDevice).
 //
 // Notes:
 //    1) All Channel (and port) numbers start with zero;

@@ -11,10 +11,8 @@ namespace base {
 // Class: AbstractIoData
 // Description: I/O data buffer
 //
-//    Abstract interface to I/O channels that are used to hold data coming from
-//    and going to our I/O devices.  These I/O channels contain applications
-//    specific I/O items that are independent of the actual I/O device channels.
-//    Derived classes will handle the application specific details.
+//    Abstract interface to I/O data organized as channels that flow to/from
+//    devices.
 //
 //    The main input and output data buffers are typically managed by an I/O
 //    handler class (see AbstractIoHander).

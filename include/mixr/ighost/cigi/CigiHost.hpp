@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_Cigi_H__
-#define __mixr_ighost_cigi_Cigi_H__
+#ifndef __mixr_ighost_cigi_CigiHost_H__
+#define __mixr_ighost_cigi_CigiHost_H__
 
 #include "mixr/ighost/cigi/IgHost.hpp"
 
@@ -35,10 +35,10 @@ class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapo
 }
 namespace cigi {
 class HostSession;
-class OtwModelCigiCl;
+class CigiModel;
 
 //------------------------------------------------------------------------------
-// Class: Cigi
+// Class: CigiHost
 //
 // Description: Host side for the Common Image Generator Interface (CIGI)
 //
@@ -60,15 +60,15 @@ class OtwModelCigiCl;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class Cigi : public IgHost
+class CigiHost : public IgHost
 {
-   DECLARE_SUBCLASS(Cigi, IgHost)
+   DECLARE_SUBCLASS(CigiHost, IgHost)
 
 public:
    static const int NUM_BUFFERS{2};
 
 public:
-   Cigi();
+   CigiHost();
 
    // is a LOS request pending?
    virtual bool isLosRequestPending() const         { return (losReqId != losRespId); }
@@ -181,18 +181,19 @@ protected:
    void sendElevationRequests() override;    // Sends terrain height requests
    void recvElevations() override;           // Receives terrain height data
    void frameSync() override;                // Send frame sync (if any)
-   OtwModel* modelFactory() override;        // Create OtwModel objects unique to interface
-   OtwModel* hotFactory() override;          // Create OtwHot objects unique to interface
+   CigiModel* modelFactory() override;       // Create IgModel objects unique to interface
+   CigiModel* hotFactory() override;         // Create IgHot objects unique to interface
 
-   virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::AirVehicle* const p);
-   virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const models::Building* const p);
-   virtual bool setEffectData(OtwModelCigiCl* const m, const unsigned short entity, const models::Effect* const p);
-   virtual bool setGndVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::GroundVehicle* const p);
-   virtual bool setLifeFormData(OtwModelCigiCl* const m, const unsigned short entity, const models::LifeForm* const p);
-   virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const models::Missile* const p);
-   virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const models::Ship* const p);
-   virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::SpaceVehicle* const p);
-   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const models::AbstractWeapon* const p);
+   virtual bool setAirVehicleData(CigiModel* const m, const unsigned short entity, const models::AirVehicle* const p);
+   virtual bool setBuildingData(CigiModel* const m, const unsigned short entity, const models::Building* const p);
+   virtual bool setEffectData(CigiModel* const m, const unsigned short entity, const models::Effect* const p);
+   virtual bool setGndVehicleData(CigiModel* const m, const unsigned short entity, const models::GroundVehicle* const p);
+   virtual bool setLifeFormData(CigiModel* const m, const unsigned short entity, const models::LifeForm* const p);
+   virtual bool setMissileData(CigiModel* const m, const unsigned short entity, const models::Missile* const p);
+   virtual bool setShipData(CigiModel* const m, const unsigned short entity, const models::Ship* const p);
+   virtual bool setSpaceVehicleData(CigiModel* const m, const unsigned short entity, const models::SpaceVehicle* const p);
+   virtual bool setWeaponData(CigiModel* const m, const unsigned short entity, const models::AbstractWeapon* const p);
+
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p);
 
 private:
