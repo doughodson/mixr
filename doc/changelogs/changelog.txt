@@ -286,7 +286,7 @@ base library (mixr_base)
    -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
       to more clearly convey their purpose; namely a structure that defines the
       linkage system. It should also be noted that these classes are abstract, they
-      are now much more oriented at defining interfaces, and much less about about
+      are now much more oriented at defining interfaces, and much less about
       how to do it (i.e., no domain implementation code).  All of these classes
       are now organized within a subdirectory called 'base/concepts/linkage'.
 
@@ -445,8 +445,6 @@ ig library (mixr_ig_cigi)
 -- Moved all code common specific to implementing a CIGI driver to this new
    library.
    
--- CigiCl class has been renamed to AbstractCigi, as it's abstract.
-
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------

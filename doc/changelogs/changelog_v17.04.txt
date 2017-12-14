@@ -42,12 +42,12 @@ Modern C++ Improvements (code modernization, enhancements and general improvemen
 
 -- Now using in-class brace initializers throughout codebase for member data.
    This C++11 feature improves code clarity, and potentially reduces
-   data initalization issues by eliminating multiple redundant initializations
+   data initialization issues by eliminating multiple redundant initializations
    (sometimes by assignment) when several constructors have been defined. This,
    in some cases, eliminates the need for 'initData()' member methods often defined
    to support this initialization activity.
 
-   This also eliminates any possible initalization vs assignment performance issues
+   This also eliminates any possible initialization vs assignment performance issues
    and often reduces the amount of code within the 'copyData' method. Specifically,
    this often reduces or completely eliminates additional code associated to support
    copy construction.
@@ -86,11 +86,11 @@ base library (oe_base)
 
    Some rework of the OSG-based classes (Vec and Matrix) was done to modernize them from
    the standpoint of using current, readily available, standard library functionality (e.g.,
-   std::fabs, std::isnan) as opposed to defining new functions that 'wrap' or encapulate
+   std::fabs, std::isnan) as opposed to defining new functions that 'wrap' or encapsulate
    platform specific workarounds for very old OS's, such as IRIX.
 
    This decision allowed for the removal of some included C header files, such as
-   <math.h> and <limits.h> which reduces global namespace polution - and improves
+   <math.h> and <limits.h> which reduces global namespace pollution - and improves
    the readability of the codebase.  The header file 'Math' was renamed to 'osg_math.hpp'
    to clearly indicate its nature (i.e., it's math functions to support osg classes).
 
@@ -134,14 +134,14 @@ base library (oe_base)
      -- Extracted '_Static' structure (i.e., struct) from Object and moved into a
         standalone class called MetaObject - which is, what it is.  Updated
         Object to use this object (via, the variable called 'metaObject')
-        in lue of '_static' to store class and object related information.  This has
+        in lieu of '_static' to store class and object related information.  This has
         NO impact on API, but does improve code readable.
 
      -- Removed both registerClass() and WriteClassList() methods and underlying
         support structure to maintain a list of classes compiled into an application.
         This was used so that a developer could print a list of classes
         available within an application and metadata related to them,
-        such as the number of instances currently in existance.
+        such as the number of instances currently in existence.
 
         In theory, this information could be used to help debug memory leaks within
         a running application. Not only can this capability be replicated outside of
@@ -203,7 +203,7 @@ simulation library (oe_simulation)
 
    Otm class
       -- Renamed 'formName' slot to 'factoryName' to align code with existing
-         framework termionology.
+         framework terminology.
 
    AbstractPlayer
       -- Removed two undefined methods 'isSmoothing()' and 'getSmoothingRate()'.
@@ -213,7 +213,7 @@ simulation library (oe_simulation)
      -- This class serves as the connection between the execution infrastructure
         to update players within a simulated world, and a model of that world.
         This division of responsibilities is now more explicit by keeping all
-        infrastructure related activites, such as, multi-threaded Player execution
+        infrastructure related activities, such as, multi-threaded Player execution
         mechanics away from modeling the world itself.  The world being modeled
         is defined by a new class (i.e., WorldModel), that resides in the models
         library.
@@ -222,7 +222,7 @@ simulation library (oe_simulation)
         files need to be updated by replacing 'Simulation' references to
         'WorldModel'.
 
-     -- It is recoginized that by subclassing, there still remains a close coupling
+     -- It is recognized that by subclassing, there still remains a close coupling
         between these two different aspects (models and simulation execution).  But,
         even though not optimal, it is a step in the right direction to decouple
         this relationship.  At some point, the relationship between the simulation
