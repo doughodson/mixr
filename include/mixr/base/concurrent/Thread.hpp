@@ -140,7 +140,7 @@ private: // Data
    std::size_t stackSize {};    // Stack size in bytes (zero to use the system default stack size)
 
    // Implementation dependent
-   void* theThread {};     // Thread handle
+   void* theThread{};     // Thread handle
 };
 
 }

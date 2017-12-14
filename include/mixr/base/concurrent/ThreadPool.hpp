@@ -76,25 +76,25 @@ protected:
    void threadAvailable(ThreadPoolThread* availableThread);
 
 private:
-   static const unsigned int MAX_THREADS = 32;
+   static const unsigned int MAX_THREADS{32};
    void initData();
    ThreadPoolThread* getAvailableThread();
 
-   ThreadPoolManager* manager {};
-   unsigned int numThreads {};
-   double priority {0.5};
+   ThreadPoolManager* manager{};
+   unsigned int numThreads{};
+   double priority{0.5};
 
-   unsigned int actualThreads {};
-   std::array<ThreadPoolThread*, MAX_THREADS> allThreads {};
+   unsigned int actualThreads{};
+   std::array<ThreadPoolThread*, MAX_THREADS> allThreads{};
 
    // Keeps track of which threads are available to avoid performance penalty of checking signal state
-   std::array<ThreadPoolThread*, MAX_THREADS> availableThreads {};
+   std::array<ThreadPoolThread*, MAX_THREADS> availableThreads{};
 
    // Semaphore to protect the available thread pool
-   mutable long availableThreadsLock {};
+   mutable long availableThreadsLock{};
 
    // Callback object for when we're not using threading
-   Object* unthreadedObj {};
+   Object* unthreadedObj{};
 
 private:
    // slot table helper methods
