@@ -42,7 +42,7 @@ class CigiModel;
 //
 // Description: Host side for the Common Image Generator Interface (CIGI)
 //
-// Factory name: Cigi
+// Factory name: CigiHost
 // Slots:
 //    session              (HostSession)     CIGI host session
 //    async                (Number)          True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
@@ -76,11 +76,11 @@ public:
    // is an elevation request pending?
    virtual bool isElevationRequestPending() const   { return elevReqFlg; }
 
-   bool isASyncMode() const                         { return asyncMode; }            // True if running in CIGI async mode
-   bool isSyncMode() const                          { return !asyncMode; }           // True if running in CIGI sync mode
+   bool isASyncMode() const                         { return asyncMode; }           // True if running in CIGI async mode
+   bool isSyncMode() const                          { return !asyncMode; }          // True if running in CIGI sync mode
    virtual bool setASyncMode(const bool f);                                         // Sets the CIGI async mode flag
 
-   bool isOwnshipModelHidden() const                { return hideOwn; }              // True if the ownship's model is hidden
+   bool isOwnshipModelHidden() const                { return hideOwn; }             // True if the ownship's model is hidden
    virtual bool setHideOwnshipModel(const bool f);                                  // Sets the hide ownship flag
 
    unsigned short getOwnshipModelID() const         { return cmtOwnship; }          // Ownship's model ID
@@ -177,12 +177,12 @@ protected:
    virtual bool setViewDefinitionPacket(CigiViewDefV3* const);
    virtual bool setSensorControlPacket(CigiSensorCtrlV3* const);
 
-   void sendOwnshipAndModels() override;     // Send state data for ownship and models
-   void sendElevationRequests() override;    // Sends terrain height requests
-   void recvElevations() override;           // Receives terrain height data
-   void frameSync() override;                // Send frame sync (if any)
-   CigiModel* modelFactory() override;       // Create IgModel objects unique to interface
-   CigiModel* hotFactory() override;         // Create IgHot objects unique to interface
+   void sendOwnshipAndModels() override;       // Send state data for ownship and models
+   void sendElevationRequests() override;      // Sends terrain height requests
+   void recvElevations() override;             // Receives terrain height data
+   void frameSync() override;                  // Send frame sync (if any)
+   CigiModel* modelFactory() override;         // Create IgModel objects unique to interface
+   CigiModel* hotFactory() override;           // Create IgHot objects unique to interface
 
    virtual bool setAirVehicleData(CigiModel* const m, const unsigned short entity, const models::AirVehicle* const p);
    virtual bool setBuildingData(CigiModel* const m, const unsigned short entity, const models::Building* const p);
@@ -201,38 +201,38 @@ private:
    bool createProcessingThread();
    base::safe_ptr<base::Thread> thread;
 
-   base::safe_ptr<HostSession> session;         // networked host session
+   base::safe_ptr<HostSession> session;        // networked host session
 
    // CIGI init support
-   bool cigiInitialized{};                      // CIGI has been initialized
-   bool cigiInitFailed{};                       // CIGI initialization has failed
+   bool cigiInitialized{};                     // CIGI has been initialized
+   bool cigiInitFailed{};                      // CIGI initialization has failed
 
-   bool asyncMode{};                            // Running in ASYNC mode if true
-   bool hideOwn{true};                          // Hide ownship model flag
-   bool resetRequest{true};                     // IG reset request
+   bool asyncMode{};                           // Running in ASYNC mode if true
+   bool hideOwn{true};                         // Hide ownship model flag
+   bool resetRequest{true};                    // IG reset request
 
-   unsigned short entityIdCount{};              // Entity ID count
-   unsigned short elevReqIdCount{};             // Elevation request ID count
+   unsigned short entityIdCount{};             // Entity ID count
+   unsigned short elevReqIdCount{};            // Elevation request ID count
 
    // Terrain elevation request data
-   bool elevReqFlg {};                          // Elevation request flag
-   double elevReqTimer {};                      // Elevation request timer
+   bool elevReqFlg {};                         // Elevation request flag
+   double elevReqTimer {};                     // Elevation request timer
 
    // Line of sight (LOS) data
-   double losRespLat{};                         // LOS Response latitude intersection point (deg)
-   double losRespLon{};                         // LOS Response longitude intersection point (deg)
-   double losRespAlt{};                         // LOS Response altitude intersection point (m)
-   double losRespRange{};                       // LOS response range (m)
-   unsigned short losRespId{};                  // LOS Response ID
-   bool losRespDataValid{true};                 // LOS response data is valid flag
-   unsigned short losReqId{};                   // LOS Request ID
-   bool newLosReq{true};                        // New LOS request flag
-   double losReqTimer{};                        // LOS request timer
+   double losRespLat{};                        // LOS Response latitude intersection point (deg)
+   double losRespLon{};                        // LOS Response longitude intersection point (deg)
+   double losRespAlt{};                        // LOS Response altitude intersection point (m)
+   double losRespRange{};                      // LOS response range (m)
+   unsigned short losRespId{};                 // LOS Response ID
+   bool losRespDataValid{true};                // LOS response data is valid flag
+   unsigned short losReqId{};                  // LOS Request ID
+   bool newLosReq{true};                       // New LOS request flag
+   double losReqTimer{};                       // LOS request timer
 
    // CIGI entity data buffers
-   int iw{NUM_BUFFERS};                         // Write buffer index
-   int iw0{NUM_BUFFERS};                        // Last write buffer index
-   int ir{NUM_BUFFERS};                         // Read index
+   int iw{NUM_BUFFERS};                        // Write buffer index
+   int iw0{NUM_BUFFERS};                       // Last write buffer index
+   int ir{NUM_BUFFERS};                        // Read index
 
    // messages
    std::array<CigiEntityCtrlV3*, NUM_BUFFERS> ownshipEC{}; // Ownship entity control
