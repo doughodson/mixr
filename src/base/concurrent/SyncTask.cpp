@@ -11,12 +11,10 @@ SyncTask::SyncTask(Component* const p, const double pri) : Thread(p, pri)
 {
 }
 
-/*
-void SyncTask::deleteData()
+SyncTask::~SyncTask()
 {
    closeSignals();
 }
-*/
 
 //-----------------------------------------------------------------------------
 // Configure thread

@@ -30,9 +30,11 @@ ThreadPool::ThreadPool(ThreadPoolManager* mgr, const int num, const double pri)
    setManager(mgr);
 }
 
-//------------------------------------------------------------------------------
-// Public interface
-//------------------------------------------------------------------------------
+ThreadPool::~ThreadPool()
+{
+   destroy();
+   setManager(nullptr);
+}
 
 void ThreadPool::setManager(ThreadPoolManager* mgr)
 {
@@ -94,7 +96,7 @@ void ThreadPool::execute()
 
 void ThreadPool::execute(Object* cur)
 {
-   //If we're unthreaded, just use this thread
+   // if we're unthreaded, just use this thread
    if (actualThreads == 0) {
       if (manager != nullptr) {
          manager->prepare(unthreadedObj);
@@ -104,12 +106,12 @@ void ThreadPool::execute(Object* cur)
       return;
    }
 
-   //Try to get an available thread from the pool
+   // try to get an available thread from the pool
    ThreadPoolThread* availableThread{getAvailableThread()};
 
-   //If we didn't get one, we'll have to wait
+   // if we didn't get one, we'll have to wait
    if (availableThread == nullptr) {
-      //Wait for one to become available
+      // wait for one to become available
       SyncTask** pp{reinterpret_cast<SyncTask**>( &allThreads[0] )};
       if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1) {
          //Error
@@ -121,11 +123,11 @@ void ThreadPool::execute(Object* cur)
          return;
       }
 
-      //Should have at least one now - try again
+      // should have at least one now - try again
       availableThread = getAvailableThread();
    }
 
-   //Do we have one now (we should)?
+   // do we have one now (we should)?
    if (availableThread == nullptr) {
       //Error
 /*
@@ -174,7 +176,7 @@ void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 
 void ThreadPool::destroy()
 {
-   //Delete all threads
+   // delete all threads
    for (int i = 0; i < actualThreads; i++) {
       allThreads[i]->terminate();
 //      allThreads[i]->unref();
@@ -194,68 +196,6 @@ void ThreadPool::destroy()
       unthreadedObj = nullptr;
    }
 }
-
-//------------------------------------------------------------------------------
-// Object overloads
-//------------------------------------------------------------------------------
-/*
-void ThreadPool::copyData(const ThreadPool& org, const bool)
-{
-   BaseClass::copyData(org);
-   destroy();
-
-   // Copy the manager, number of threads, and priority
-   if (org.manager != nullptr)
-      setManager( static_cast<ThreadPoolManager*>(org.manager->clone()) );
-   else
-      setManager(nullptr);
-
-   numThreads = org.numThreads;
-   priority = org.priority;
-}
-
-void ThreadPool::deleteData()
-{
-   destroy();
-   setManager(nullptr);
-}
-*/
-
-//------------------------------------------------------------------------------
-// Slot methods
-//------------------------------------------------------------------------------
-
-/*
-bool ThreadPool::setSlotNumThreads(const Number* const msg)
-{
-   bool ok{};
-   if (msg != nullptr) {
-      const int num{msg->getInt()};
-      if (num >= 0 && num <= static_cast<int>(MAX_THREADS)) {
-         numThreads = static_cast<unsigned int>(num);
-         ok = true;
-      } else {
-         std::cerr << "ThreadPool::setSlotNumThreads: numThreads is invalid, range: [0 .. " << MAX_THREADS << "]" << std::endl;
-      }
-   }
-   return ok;
-}
-
-bool ThreadPool::setSlotPriority(const Number* const msg)
-{
-   bool ok{};
-   if (msg != nullptr) {
-      const double pri{msg->getReal()};
-      if (pri >= 0 && pri <= 1.0) {
-         priority = pri;
-         ok = true;
-      } else {
-         std::cerr << "ThreadPool::setSlotPriority: priority is invalid, range: [0 .. 1]" << std::endl;
-      }
-   }
-   return ok;
-}
-*/
 
 }
 }

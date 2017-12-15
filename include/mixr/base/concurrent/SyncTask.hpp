@@ -27,6 +27,7 @@ public:
    SyncTask(Component* const parent, const double priority);
    SyncTask(const SyncTask&) = delete;
    SyncTask& operator=(const SyncTask&) = delete;
+   ~SyncTask();
 
    void signalStart();
    void waitForCompleted();

@@ -15,30 +15,29 @@ ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const po
 {
 }
 
+ThreadPoolThread::~ThreadPoolThread()
+{
+   if (manager != nullptr)
+      manager->destroy(persistentObj);
+
+}
+
 unsigned long ThreadPoolThread::userFunc()
 {
-   //Execute the thread callback methods
+   // execute the thread callback methods
    if (manager != nullptr) {
       manager->execute(persistentObj);
       manager->execute(persistentObj, currentObj);
    }
 
-   //Clear the current callback object because we're done with it
+   // clear the current callback object because we're done with it
    currentObj = nullptr;
 
-   //Add the thread back to the pool
+   // add the thread back to the pool
    threadPool->threadAvailable(this);
 
    return 0;
 }
-
-/*
-void ThreadPoolThread::deleteData()
-{
-   if (manager != nullptr)
-      manager->destroy(persistentObj);
-}
-*/
 
 Object* ThreadPoolThread::getPersistentObj()
 {

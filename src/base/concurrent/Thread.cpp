@@ -11,15 +11,13 @@ Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 {
 }
 
-/*
-void Thread::deleteData()
+Thread::~Thread()
 {
    if (!isTerminated()) {
       terminate();
    }
    closeThread();
 }
-*/
 
 //------------------------------------------------------------------------------
 // Create the thread

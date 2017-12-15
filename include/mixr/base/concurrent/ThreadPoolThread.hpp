@@ -21,6 +21,7 @@ public:
    ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const double priority, Object* const obj);
    ThreadPoolThread(const ThreadPoolThread&) = delete;
    ThreadPoolThread& operator=(const ThreadPoolThread&) = delete;
+   ~ThreadPoolThread();
 
 protected:
    Object* getPersistentObj();

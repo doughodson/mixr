@@ -91,6 +91,7 @@ public:
    Thread(Component* const parent, const double priority);
    Thread(const Thread&) = delete;
    Thread& operator=(const Thread&) = delete;
+   ~Thread();
 
    double getPriority() const;
    bool isTerminated() const;

@@ -26,14 +26,14 @@ public:
    );
 
 private:
-   // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc() override;
+   // SyncTask class function -- our userFunc()
+   unsigned long userFunc() override;
 
 private:
-   base::PairStream* pl0 {};
-   double dt0 {};
-   unsigned int idx0 {};
-   unsigned int n0 {};
+   base::PairStream* pl0{};
+   double dt0{};
+   unsigned int idx0{};
+   unsigned int n0{};
 };
 
 }

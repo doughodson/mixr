@@ -12,7 +12,7 @@ BgThread::BgThread(base::Component* const parent, const double priority, const d
 
 unsigned long BgThread::userFunc(const double dt)
 {
-   Station* station {static_cast<Station*>(getParent())};
+   Station* station{static_cast<Station*>(getParent())};
    station->processBackgroundTasks(dt);
    return 0;
 }

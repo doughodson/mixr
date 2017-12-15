@@ -4,10 +4,10 @@
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
-/* ----------------------------------------------------------------- */
-/* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
-/* The default is HIGH_PRIORITY_CLASS                                */
-/* ----------------------------------------------------------------- */
+//-----------------------------------------------------------------
+// Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'
+// The default is HIGH_PRIORITY_CLASS
+//-----------------------------------------------------------------
 //#define USE_REALTIME_PRI_CLASS
 
 namespace mixr {

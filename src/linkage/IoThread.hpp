@@ -11,7 +11,7 @@ namespace linkage {
 class IoThread : public base::PeriodicTask
 {
    public: IoThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
+   private: unsigned long userFunc(const double dt) override;
 };
 
 }

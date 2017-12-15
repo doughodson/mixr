@@ -11,9 +11,6 @@ PeriodicTask::PeriodicTask(Component* const p, const double pri, const double rt
 {
 }
 
-//------------------------------------------------------------------------------
-// get/set functions
-//------------------------------------------------------------------------------
 double PeriodicTask::getRate() const
 {
    return rate;

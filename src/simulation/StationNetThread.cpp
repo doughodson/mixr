@@ -12,7 +12,7 @@ NetThread::NetThread(base::Component* const parent, const double priority, const
 
 unsigned long NetThread::userFunc(const double dt)
 {
-   Station* station {static_cast<Station*>(getParent())};
+   Station* station{static_cast<Station*>(getParent())};
    station->processNetworkInputTasks(dt);
    station->processNetworkOutputTasks(dt);
    return 0;
