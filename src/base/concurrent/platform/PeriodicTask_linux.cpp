@@ -34,8 +34,8 @@ unsigned long PeriodicTask::mainThreadFunc()
    clock_gettime(CLOCK_REALTIME, &tp);
 
    // Mutex
-   pthread_cond_t cond{PTHREAD_COND_INITIALIZER};
-   pthread_mutex_t mutex{PTHREAD_MUTEX_INITIALIZER};
+   pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+   pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
    pthread_mutex_lock(&mutex);
 
    // ---

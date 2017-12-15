@@ -19,6 +19,7 @@
 #define __mixr_base_Thread_H__
 
 #include "mixr/base/Referenced.hpp"
+#include <cstddef>
 
 #include "mixr/base/util/platform_api.hpp"
 
