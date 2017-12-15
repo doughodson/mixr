@@ -3,7 +3,6 @@
 
 #include "mixr/base/Object.hpp"
 
-//#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/concurrent/ThreadPoolManager.hpp"
 #include "mixr/base/concurrent/ThreadPoolThread.hpp"
 

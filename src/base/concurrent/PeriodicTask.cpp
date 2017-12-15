@@ -11,15 +11,6 @@ PeriodicTask::PeriodicTask(Component* const p, const double pri, const double rt
 {
 }
 
-/*
-void PeriodicTask::copyData(const PeriodicTask& org, const bool)
-{
-   BaseClass::copyData(org);
-
-   std::cerr << "Thread(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
-}
-*/
-
 //------------------------------------------------------------------------------
 // get/set functions
 //------------------------------------------------------------------------------

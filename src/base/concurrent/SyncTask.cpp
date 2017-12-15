@@ -12,13 +12,6 @@ SyncTask::SyncTask(Component* const p, const double pri) : Thread(p, pri)
 }
 
 /*
-void SyncTask::copyData(const SyncTask& org, const bool)
-{
-   BaseClass::copyData(org);
-
-   std::cerr << "SyncTask(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
-}
-
 void SyncTask::deleteData()
 {
    closeSignals();

@@ -9,7 +9,7 @@ class ThreadPool;
 class ThreadPoolManager;
 
 //------------------------------------------------------------------------------
-// ThreadPoolThread
+// Class: ThreadPoolThread
 //
 // Description: The implementation of ThreadSyncTask used for the ThreadPool
 //------------------------------------------------------------------------------
@@ -19,6 +19,8 @@ class ThreadPoolThread : public SyncTask
 
 public:
    ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const double priority, Object* const obj);
+   ThreadPoolThread(const ThreadPoolThread&) = delete;
+   ThreadPoolThread& operator=(const ThreadPoolThread&) = delete;
 
 protected:
    Object* getPersistentObj();

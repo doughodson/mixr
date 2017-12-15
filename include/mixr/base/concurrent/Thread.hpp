@@ -41,9 +41,8 @@ class Component;
 //    On Windows applications, the process is converted to a "High priority
 //    class" process during the creation of the first Thread.
 //
-//    The constructor requires several parameters, so the default constructors are
-//    'protected', and because of the nature of threads, this class can not be copied
-//    or cloned.
+//    The constructor requires several parameters, and because of the nature of
+//    threads, this class can not be copied or assigned.
 //
 //
 // Thread priority mapping: range [ 0.0 ... 1.0 ] (default: 0.5 -> Normal)

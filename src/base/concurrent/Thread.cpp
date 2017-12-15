@@ -12,13 +12,6 @@ Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 }
 
 /*
-void Thread::copyData(const Thread& org, const bool)
-{
-   BaseClass::copyData(org);
-
-   std::cerr << "Thread(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
-}
-
 void Thread::deleteData()
 {
    if (!isTerminated()) {

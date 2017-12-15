@@ -44,6 +44,8 @@ public:
    ThreadPool(ThreadPoolManager* mgr);
    ThreadPool(ThreadPoolManager* mgr, const unsigned int num);
    ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri);
+   ThreadPool(const ThreadPool&) = delete;
+   ThreadPool& operator=(const ThreadPool&) = delete;
 
    // Sets a manager for the thread pool. Will often need to call this if
    // the thread pool is created as a slot (as opposed to creating it

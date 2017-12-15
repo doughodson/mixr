@@ -11,15 +11,6 @@ SingleTask::SingleTask(Component* const p, const double pri) : Thread(p, pri)
 {
 }
 
-/*
-void SingleTask::copyData(const SingleTask& org, const bool)
-{
-   BaseClass::copyData(org);
-
-   std::cerr << "SingleTask(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
-}
-*/
-
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------

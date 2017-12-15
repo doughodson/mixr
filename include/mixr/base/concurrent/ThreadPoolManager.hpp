@@ -26,6 +26,8 @@ class ThreadPoolManager : public Referenced
 
 public:
    ThreadPoolManager();
+   ThreadPoolManager(const ThreadPoolManager&) = delete;
+   ThreadPoolManager& operator=(const ThreadPoolManager&) = delete;
 
 protected:
    // Called when each individual thread is being initialized. Should pass
