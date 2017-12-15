@@ -1364,16 +1364,15 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np{base::Thread::getNumProcessors()};
-      unsigned short maxT{1};
+      const int np{base::Thread::getNumProcessors()};
+      int maxT{1};
       if (np > 1) maxT = np - 1;
 
       const int v{msg->getInt()};
       if (v >= 1 && v <= maxT) {
          reqTcThreads = static_cast<unsigned short>(v);
          ok = true;
-      }
-      else {
+      } else {
          std::cerr << "simulation::setSlotNumTcThreads(): invalid number of threads: " << v;
          std::cerr << "; number of processors = " << np;
          std::cerr << "; use [ 1 ... " << maxT << " ];" << std::endl;
@@ -1389,8 +1388,8 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np{base::Thread::getNumProcessors()};
-      unsigned short maxT{1};
+      const int np{base::Thread::getNumProcessors()};
+      int maxT{1};
       if (np > 1) maxT = np - 1;
 
       const int v{msg->getInt()};

@@ -2,6 +2,8 @@
 #ifndef __mixr_base_ThreadPool_H__
 #define __mixr_base_ThreadPool_H__
 
+#include "mixr/base/Referenced.hpp"
+
 #include <array>
 
 namespace mixr {
@@ -33,7 +35,7 @@ class ThreadPoolThread;
 //   without executing, or even better, execute a timeout() callback in the
 //   manager class to handle timeouts.
 //------------------------------------------------------------------------------
-class ThreadPool
+class ThreadPool : public Referenced
 {
    friend class ThreadPoolThread;
 

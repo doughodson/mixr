@@ -8,14 +8,8 @@
 namespace mixr {
 namespace linkage {
 
-IMPLEMENT_SUBCLASS(IoThread, "IoThread")
-EMPTY_SLOTTABLE(IoThread)
-EMPTY_COPYDATA(IoThread)
-EMPTY_DELETEDATA(IoThread)
-
 IoThread::IoThread(base::Component* const parent, const double priority, const double rate): PeriodicTask(parent, priority, rate)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
 unsigned long IoThread::userFunc(const double dt)

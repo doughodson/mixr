@@ -12,7 +12,6 @@ namespace simulation {
 // ---
 class NetThread : public base::PeriodicTask
 {
-   DECLARE_SUBCLASS(NetThread, base::PeriodicTask)
    public: NetThread(base::Component* const parent, const double priority, const double rate);
    private: virtual unsigned long userFunc(const double dt) override;
 };

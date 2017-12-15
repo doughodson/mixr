@@ -68,8 +68,8 @@ public:
    };
 
 private:
-   mutable long semaphore {};           // ref(), unref() semaphore
-   mutable unsigned int refCount {1};   // reference count
+   mutable long semaphore{};           // ref(), unref() semaphore
+   mutable unsigned int refCount{1};   // reference count
 };
 
 inline Referenced::~Referenced() {}

@@ -14,8 +14,6 @@ namespace simulation {
 //------------------------------------------------------------------------------
 class SimBgThread : public base::SyncTask
 {
-   DECLARE_SUBCLASS(SimBgThread, base::SyncTask)
-
 public:
    SimBgThread(base::Component* const parent, const double priority);
 

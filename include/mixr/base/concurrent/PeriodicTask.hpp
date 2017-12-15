@@ -23,6 +23,8 @@ class PeriodicTask : public Thread
 {
 public:
    PeriodicTask(Component* const parent, const double priority, const double rate);
+   PeriodicTask(const PeriodicTask&) = delete;
+   PeriodicTask& operator=(const PeriodicTask&) = delete;
 
    double getRate() const;                         // Update rate (must be greater than zero)
    unsigned int getTotalFrameCount() const;        // Total frame count

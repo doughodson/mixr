@@ -25,6 +25,8 @@ class SyncTask : public Thread
 {
 public:
    SyncTask(Component* const parent, const double priority);
+   SyncTask(const SyncTask&) = delete;
+   SyncTask& operator=(const SyncTask&) = delete;
 
    void signalStart();
    void waitForCompleted();

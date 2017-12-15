@@ -38,11 +38,11 @@ ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const dou
 void ThreadPool::setManager(ThreadPoolManager* mgr)
 {
    if (manager != nullptr) {
-//      manager->unref();   DDH
+      manager->unref();
    }
    manager = mgr;
    if (manager != nullptr) {
-//      manager->ref();     DDH
+      manager->ref();
    }
 }
 

@@ -9,14 +9,8 @@
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_SUBCLASS(SimTcThread, "SimTcThread")
-EMPTY_SLOTTABLE(SimTcThread)
-EMPTY_COPYDATA(SimTcThread)
-EMPTY_DELETEDATA(SimTcThread)
-
 SimTcThread::SimTcThread(base::Component* const parent, const double priority): base::SyncTask(parent, priority)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
 void SimTcThread::start(

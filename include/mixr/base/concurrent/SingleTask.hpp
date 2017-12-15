@@ -19,6 +19,8 @@ class SingleTask : public Thread
 {
 public:
    SingleTask(Component* const parent, const double priority);
+   SingleTask(const SingleTask&) = delete;
+   SingleTask& operator=(const SingleTask&) = delete;
 
    // User defined work function
    private: virtual unsigned long userFunc() =0;

@@ -6,6 +6,10 @@
 namespace mixr {
 namespace base {
 
+ThreadPoolManager::ThreadPoolManager()
+{
+}
+
 //------------------------------------------------------------------------------
 // Default callback implementations (do nothing)
 //------------------------------------------------------------------------------

@@ -2,8 +2,7 @@
 #ifndef __mixr_base_ThreadPoolManager_H__
 #define __mixr_base_ThreadPoolManager_H__
 
-//#include "mixr/base/Object.hpp"
-//#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/Referenced.hpp"
 
 namespace mixr {
 namespace base {
@@ -20,7 +19,7 @@ class ThreadPoolThread;
 //    the ThreadPool will be used for every thread in the pool.
 
 //------------------------------------------------------------------------------
-class ThreadPoolManager
+class ThreadPoolManager : public Referenced
 {
    friend class ThreadPool;
    friend class ThreadPoolThread;

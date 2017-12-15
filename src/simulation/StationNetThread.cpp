@@ -6,14 +6,8 @@
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_SUBCLASS(NetThread,"NetThread")
-EMPTY_SLOTTABLE(NetThread)
-EMPTY_COPYDATA(NetThread)
-EMPTY_DELETEDATA(NetThread)
-
 NetThread::NetThread(base::Component* const parent, const double priority, const double rate): base::PeriodicTask(parent, priority, rate)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
 unsigned long NetThread::userFunc(const double dt)

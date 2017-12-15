@@ -18,6 +18,8 @@
 #ifndef __mixr_base_Thread_H__
 #define __mixr_base_Thread_H__
 
+#include "mixr/base/Referenced.hpp"
+
 #include "mixr/base/util/platform_api.hpp"
 
 namespace mixr {
@@ -83,10 +85,12 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class Thread
+class Thread : public Referenced
 {
 public:
    Thread(Component* const parent, const double priority);
+   Thread(const Thread&) = delete;
+   Thread& operator=(const Thread&) = delete;
 
    double getPriority() const;
    bool isTerminated() const;
