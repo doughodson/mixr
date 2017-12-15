@@ -30,10 +30,10 @@ public:
 
    void signalStart();
    void waitForCompleted();
-   static void waitForAllCompleted(SyncTask** threads, const unsigned int num);
+   static void waitForAllCompleted(SyncTask** threads, const int num);
 
    //Returns the index of the first thread that is completed, or -1 if an error
-   static int waitForAnyCompleted(SyncTask** threads, const unsigned int num);
+   static int waitForAnyCompleted(SyncTask** threads, const int num);
 
    virtual bool terminate() override;
 

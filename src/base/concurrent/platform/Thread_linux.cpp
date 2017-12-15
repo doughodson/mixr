@@ -12,7 +12,7 @@ namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS = 32;
+static const int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // Static thread function
@@ -20,7 +20,7 @@ static const unsigned int MAX_CPUS = 32;
 void* Thread::staticThreadFunc(void* lpParam)
 {
    const auto thread = static_cast<Thread*>(lpParam);
-   Component* parent = thread->getParent();
+   Component* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
    thread->ref();
@@ -28,7 +28,7 @@ void* Thread::staticThreadFunc(void* lpParam)
 
    // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
-   unsigned long rtn = thread->mainThreadFunc();
+   unsigned long rtn{thread->mainThreadFunc()};
    thread->setTerminated();
 
    parent->unref();
@@ -40,15 +40,15 @@ void* Thread::staticThreadFunc(void* lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-unsigned short Thread::getNumProcessors()
+int Thread::getNumProcessors()
 {
-   unsigned short num = 0;
+   int num{};
 
    cpu_set_t mask;
-   int rtn = sched_getaffinity(0, sizeof(cpu_set_t), &mask);
+   int rtn{sched_getaffinity(0, sizeof(cpu_set_t), &mask)};
    if (rtn == 0) {
       // we're checking the number of bits that are set in 'mask'
-      for (unsigned int cpu = 0; cpu < MAX_CPUS; cpu++) {
+      for (int cpu = 0; cpu < MAX_CPUS; cpu++) {
          if ( CPU_ISSET(cpu, &mask) != 0 ) num++;
       }
    }
@@ -73,24 +73,23 @@ bool Thread::createThread()
    struct sched_param param;
    {
       if (priority > 0.0f && priority <= 1.0f) {
-         float maxp = sched_get_priority_max(SCHED_FIFO);
-         float minp = sched_get_priority_min(SCHED_FIFO);
-         float value = (maxp - minp);
-         if (priority      == 1.0f) value *= 1.0f;
-         else if (priority >= 0.9f) value *= 0.9f;
-         else if (priority >= 0.8f) value *= 0.8f;
-         else if (priority >= 0.7f) value *= 0.7f;
-         else if (priority >= 0.6f) value *= 0.6f;
-         else if (priority >= 0.5f) value *= 0.5f;
-         else if (priority >= 0.4f) value *= 0.4f;
-         else if (priority >= 0.3f) value *= 0.3f;
-         else if (priority >= 0.2f) value *= 0.2f;
-         else if (priority  > 0.1f) value *= 0.1f;
+         float maxp{sched_get_priority_max(SCHED_FIFO)};
+         float minp{sched_get_priority_min(SCHED_FIFO)};
+         float value{maxp - minp};
+         if (priority      == 1.0) value *= 1.0;
+         else if (priority >= 0.9) value *= 0.9;
+         else if (priority >= 0.8) value *= 0.8;
+         else if (priority >= 0.7) value *= 0.7;
+         else if (priority >= 0.6) value *= 0.6;
+         else if (priority >= 0.5) value *= 0.5;
+         else if (priority >= 0.4) value *= 0.4;
+         else if (priority >= 0.3) value *= 0.3;
+         else if (priority >= 0.2) value *= 0.2;
+         else if (priority  > 0.1) value *= 0.1;
          else value = 0.0f;
          param.sched_priority = nint(value + minp);
          pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
-      }
-      else {
+      } else {
          param.sched_priority = sched_get_priority_max(SCHED_OTHER);
          pthread_attr_setschedpolicy(&attr, SCHED_OTHER);
       }
@@ -108,7 +107,7 @@ bool Thread::createThread()
    // ---
    // Create the thread
    // ---
-   pthread_t* thread = new pthread_t;
+   pthread_t* thread{new pthread_t};
    pthread_create(thread, &attr, staticThreadFunc, this);
 
    //if ( stat != 0 && parent->isMessageEnabled(MSG_INFO) ) {
@@ -142,11 +141,11 @@ void Thread::closeThread()
 bool Thread::terminate()
 {
    if (theThread != nullptr && !killed) {
-      if ( getParent()->isMessageEnabled(MSG_INFO) ) {
+//      if ( getParent()->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
-      }
+//      }
 
-      pthread_t* thread = static_cast<pthread_t*>(theThread);
+      pthread_t* thread{static_cast<pthread_t*>(theThread)};
       pthread_kill(*thread, SIGKILL);
       theThread = nullptr;
       killed = true;
@@ -162,4 +161,3 @@ bool Thread::terminate()
 
 }
 }
-

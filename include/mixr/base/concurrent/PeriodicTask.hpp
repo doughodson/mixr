@@ -26,8 +26,8 @@ public:
    PeriodicTask(const PeriodicTask&) = delete;
    PeriodicTask& operator=(const PeriodicTask&) = delete;
 
-   double getRate() const;                         // Update rate (must be greater than zero)
-   unsigned int getTotalFrameCount() const;        // Total frame count
+   double getRate() const;                // Update rate (must be greater than zero)
+   int getTotalFrameCount() const;        // Total frame count
 
    // Busted (overrun) frames statistics; overrun frames time (seconds)
    // (Windows only)
@@ -48,7 +48,7 @@ private:
 
    double rate {};         // Loop rate (hz); until our parent shuts down
    Statistic bfStats {};   // Busted (overrun) frame statistics (windows only)
-   unsigned int tcnt {};   // total frame count
+   int tcnt {};            // total frame count
    bool vdtFlg {};         // Variable delta time flag
 };
 

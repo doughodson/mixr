@@ -14,7 +14,7 @@ namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS{32};
+static const int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // create the signals
@@ -77,12 +77,12 @@ void SyncTask::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void SyncTask::waitForAllCompleted(SyncTask** threads, const unsigned int num)
+void SyncTask::waitForAllCompleted(SyncTask** threads, const int num)
 {
    if (threads != 0 && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
       DWORD count{};
-      for (unsigned int i = 0; i < num; i++) {
+      for (int i = 0; i < num; i++) {
          if (threads[i] != nullptr) {
             handles[count++] = static_cast<HANDLE>(threads[i]->completedSig);
          }
@@ -97,14 +97,14 @@ void SyncTask::waitForAllCompleted(SyncTask** threads, const unsigned int num)
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int SyncTask::waitForAnyCompleted(SyncTask** threads, const unsigned int num)
+int SyncTask::waitForAnyCompleted(SyncTask** threads, const int num)
 {
    if (threads != nullptr && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
       //Need to keep a mapping of handle index -> thread index (since we skip invalid ones)
       int indexes[MAXIMUM_WAIT_OBJECTS];
       DWORD count{};
-      for (unsigned int i = 0; i < num; i++) {
+      for (int i = 0; i < num; i++) {
          if (threads[i] != nullptr) {
             handles[count] = static_cast<HANDLE>(threads[i]->completedSig);
             indexes[count++] = i;

@@ -24,7 +24,7 @@ const Statistic& PeriodicTask::getBustedFrameStats() const
    return bfStats;
 }
 
-unsigned int PeriodicTask::getTotalFrameCount() const
+int PeriodicTask::getTotalFrameCount() const
 {
    return tcnt;
 }

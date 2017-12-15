@@ -18,13 +18,13 @@ ThreadPool::ThreadPool(ThreadPoolManager* mgr)
    setManager(mgr);
 }
 
-ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num)
+ThreadPool::ThreadPool(ThreadPoolManager* mgr, const int num)
    : numThreads(num)
 {
    setManager(mgr);
 }
 
-ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri)
+ThreadPool::ThreadPool(ThreadPoolManager* mgr, const int num, const double pri)
    : numThreads(num), priority(pri)
 {
    setManager(mgr);
@@ -52,7 +52,7 @@ void ThreadPool::initialize(Component* const parent)
    // Create the thread pool
    if (numThreads > 0) {
       std::cout << "Running thread pool in multi-threaded mode" << std::endl;
-      for (unsigned int i = 0; i < numThreads; i++) {
+      for (int i = 0; i < numThreads; i++) {
          //Get the callback object for this thread
          Object* callbackObj{};
          if (manager != nullptr)
@@ -163,7 +163,7 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
 void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 {
    lock(availableThreadsLock);
-   for (unsigned int i = 0 ; i < actualThreads ; i++) {
+   for (int i = 0 ; i < actualThreads ; i++) {
       if (availableThreads[i] == nullptr) {
          availableThreads[i] = availableThread;
          break;
@@ -175,13 +175,13 @@ void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 void ThreadPool::destroy()
 {
    //Delete all threads
-   for (unsigned int i = 0; i < actualThreads; i++) {
+   for (int i = 0; i < actualThreads; i++) {
       allThreads[i]->terminate();
 //      allThreads[i]->unref();
       allThreads[i] = nullptr;
    }
    lock(availableThreadsLock);
-   for (unsigned int i = 0; i < actualThreads; i++) {
+   for (int i = 0; i < actualThreads; i++) {
       availableThreads[i] = nullptr;
    }
    unlock(availableThreadsLock);

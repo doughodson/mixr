@@ -6,17 +6,17 @@
 #include "mixr/base/util/system_utils.hpp"
 #include <iostream>
 
-/* ----------------------------------------------------------------- */
-/* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
-/* The default is HIGH_PRIORITY_CLASS                                */
-/* ----------------------------------------------------------------- */
+//-----------------------------------------------------------------
+// Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'
+// The default is HIGH_PRIORITY_CLASS
+//-----------------------------------------------------------------
 //#define USE_REALTIME_PRI_CLASS
 
 namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS{32};
+static const int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // Our main thread function

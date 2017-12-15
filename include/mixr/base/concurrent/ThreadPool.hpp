@@ -9,7 +9,6 @@
 namespace mixr {
 namespace base {
 class Object;
-//class Number;
 class Component;
 class ThreadPoolManager;
 class ThreadPoolThread;
@@ -42,8 +41,8 @@ class ThreadPool : public Referenced
 public:
    ThreadPool();
    ThreadPool(ThreadPoolManager* mgr);
-   ThreadPool(ThreadPoolManager* mgr, const unsigned int num);
-   ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri);
+   ThreadPool(ThreadPoolManager* mgr, const int num);
+   ThreadPool(ThreadPoolManager* mgr, const int num, const double pri);
    ThreadPool(const ThreadPool&) = delete;
    ThreadPool& operator=(const ThreadPool&) = delete;
 
@@ -78,14 +77,14 @@ protected:
    void threadAvailable(ThreadPoolThread* availableThread);
 
 private:
-   static const unsigned int MAX_THREADS{32};
+   static const int MAX_THREADS{32};
    ThreadPoolThread* getAvailableThread();
 
    ThreadPoolManager* manager{};
-   unsigned int numThreads{};
+   int numThreads{};
    double priority{0.5};
 
-   unsigned int actualThreads{};
+   int actualThreads{};
    std::array<ThreadPoolThread*, MAX_THREADS> allThreads{};
 
    // Keeps track of which threads are available to avoid performance penalty of checking signal state

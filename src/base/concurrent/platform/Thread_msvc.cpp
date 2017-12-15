@@ -15,7 +15,7 @@ namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS{32};
+static const int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // Static thread function
