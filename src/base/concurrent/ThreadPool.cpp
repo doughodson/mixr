@@ -1,47 +1,33 @@
 
 #include "mixr/base/concurrent/ThreadPool.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/Object.hpp"
+
+//#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/concurrent/ThreadPoolManager.hpp"
 #include "mixr/base/concurrent/ThreadPoolThread.hpp"
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(ThreadPool, "ThreadPool")
-
-BEGIN_SLOTTABLE(ThreadPool)
-   "numThreads",  // Number of threads to use - 0 = don't use threading
-   "priority"     // Thread priority (zero(0) is lowest, one(1) is highest)
-END_SLOTTABLE(ThreadPool)
-
-BEGIN_SLOT_MAP(ThreadPool)
-   ON_SLOT( 1, setSlotNumThreads, Number)
-   ON_SLOT( 2, setSlotPriority,   Number)
-END_SLOT_MAP()
-
 ThreadPool::ThreadPool()
 {
-   STANDARD_CONSTRUCTOR()
 }
 
 ThreadPool::ThreadPool(ThreadPoolManager* mgr)
 {
-   STANDARD_CONSTRUCTOR()
    setManager(mgr);
 }
 
 ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num)
    : numThreads(num)
 {
-   STANDARD_CONSTRUCTOR()
    setManager(mgr);
 }
 
 ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri)
    : numThreads(num), priority(pri)
 {
-   STANDARD_CONSTRUCTOR()
    setManager(mgr);
 }
 
@@ -52,11 +38,11 @@ ThreadPool::ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const dou
 void ThreadPool::setManager(ThreadPoolManager* mgr)
 {
    if (manager != nullptr) {
-      manager->unref();
+//      manager->unref();   DDH
    }
    manager = mgr;
    if (manager != nullptr) {
-      manager->ref();
+//      manager->ref();     DDH
    }
 }
 
@@ -83,11 +69,13 @@ void ThreadPool::initialize(Component* const parent)
             availableThreads[actualThreads] = allThreads[actualThreads];
             actualThreads++;
          } else {
-            allThreads[actualThreads]->unref();
+//            allThreads[actualThreads]->unref();
             allThreads[actualThreads] = nullptr;
+/*
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "ThreadPool::initialize(): ERROR, failed to create a thread pool thread!" << std::endl;
             }
+*/
          }
       }
    }
@@ -126,9 +114,11 @@ void ThreadPool::execute(Object* cur)
       SyncTask** pp{reinterpret_cast<SyncTask**>( &allThreads[0] )};
       if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1) {
          //Error
+/*
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "ThreadPool::execute(): ERROR, unknown error while waiting for completed thread signal!" << std::endl;
          }
+*/
          return;
       }
 
@@ -139,9 +129,11 @@ void ThreadPool::execute(Object* cur)
    //Do we have one now (we should)?
    if (availableThread == nullptr) {
       //Error
+/*
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "ThreadPool::execute(): ERROR, could not get an available thread!" << std::endl;
       }
+*/
       return;
    }
 
@@ -186,7 +178,7 @@ void ThreadPool::destroy()
    //Delete all threads
    for (unsigned int i = 0; i < actualThreads; i++) {
       allThreads[i]->terminate();
-      allThreads[i]->unref();
+//      allThreads[i]->unref();
       allThreads[i] = nullptr;
    }
    lock(availableThreadsLock);
@@ -207,7 +199,7 @@ void ThreadPool::destroy()
 //------------------------------------------------------------------------------
 // Object overloads
 //------------------------------------------------------------------------------
-
+/*
 void ThreadPool::copyData(const ThreadPool& org, const bool)
 {
    BaseClass::copyData(org);
@@ -228,11 +220,13 @@ void ThreadPool::deleteData()
    destroy();
    setManager(nullptr);
 }
+*/
 
 //------------------------------------------------------------------------------
 // Slot methods
 //------------------------------------------------------------------------------
 
+/*
 bool ThreadPool::setSlotNumThreads(const Number* const msg)
 {
    bool ok{};
@@ -262,6 +256,7 @@ bool ThreadPool::setSlotPriority(const Number* const msg)
    }
    return ok;
 }
+*/
 
 }
 }

@@ -3,6 +3,8 @@
 
 namespace mixr {
 namespace base {
+class Object;
+class Component;
 class ThreadPool;
 class ThreadPoolManager;
 
@@ -13,7 +15,6 @@ class ThreadPoolManager;
 //------------------------------------------------------------------------------
 class ThreadPoolThread : public SyncTask
 {
-   DECLARE_SUBCLASS(ThreadPoolThread, SyncTask)
    friend class ThreadPool;
 
 public:

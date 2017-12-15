@@ -7,21 +7,11 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")
-EMPTY_SLOTTABLE(Thread)
-
 Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
-Thread::Thread()
-{
-   STANDARD_CONSTRUCTOR()
-   std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Do not use the default constructor" << std::endl;
-   std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Did NOT create the thread!" << std::endl;
-}
-
+/*
 void Thread::copyData(const Thread& org, const bool)
 {
    BaseClass::copyData(org);
@@ -36,6 +26,7 @@ void Thread::deleteData()
    }
    closeThread();
 }
+*/
 
 //------------------------------------------------------------------------------
 // Create the thread

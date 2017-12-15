@@ -17,16 +17,11 @@ class Component;
 //------------------------------------------------------------------------------
 class SingleTask : public Thread
 {
-   DECLARE_SUBCLASS(SingleTask, Thread)
-
 public:
    SingleTask(Component* const parent, const double priority);
 
    // User defined work function
    private: virtual unsigned long userFunc() =0;
-
-protected:
-   SingleTask();
 
 private:
    // Thread class function

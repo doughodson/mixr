@@ -14,7 +14,7 @@ namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS = 32;
+static const unsigned int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // create the signals
@@ -81,7 +81,7 @@ void SyncTask::waitForAllCompleted(SyncTask** threads, const unsigned int num)
 {
    if (threads != 0 && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
-      DWORD count = 0;
+      DWORD count{};
       for (unsigned int i = 0; i < num; i++) {
          if (threads[i] != nullptr) {
             handles[count++] = static_cast<HANDLE>(threads[i]->completedSig);
@@ -103,7 +103,7 @@ int SyncTask::waitForAnyCompleted(SyncTask** threads, const unsigned int num)
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
       //Need to keep a mapping of handle index -> thread index (since we skip invalid ones)
       int indexes[MAXIMUM_WAIT_OBJECTS];
-      DWORD count = 0;
+      DWORD count{};
       for (unsigned int i = 0; i < num; i++) {
          if (threads[i] != nullptr) {
             handles[count] = static_cast<HANDLE>(threads[i]->completedSig);

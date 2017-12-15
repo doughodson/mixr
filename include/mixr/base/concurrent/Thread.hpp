@@ -18,7 +18,6 @@
 #ifndef __mixr_base_Thread_H__
 #define __mixr_base_Thread_H__
 
-#include "mixr/base/Object.hpp"
 #include "mixr/base/util/platform_api.hpp"
 
 namespace mixr {
@@ -84,10 +83,8 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class Thread : public Object
+class Thread
 {
-   DECLARE_SUBCLASS(Thread, Object)
-
 public:
    Thread(Component* const parent, const double priority);
 
@@ -110,8 +107,7 @@ public:
    // number of processors assigned to this process
    static unsigned short getNumProcessors();
 
-protected: // Functions
-   Thread();
+protected:
    Component* getParent();
    const void* getThreadHandle() const;
 
@@ -119,7 +115,7 @@ protected: // Functions
 
    virtual bool configThread(); // called by the child thread
 
-private: // Functions
+private:
    bool createThread();
    void closeThread();
 

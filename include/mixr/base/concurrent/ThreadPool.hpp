@@ -2,13 +2,12 @@
 #ifndef __mixr_base_ThreadPool_H__
 #define __mixr_base_ThreadPool_H__
 
-#include "mixr/base/Object.hpp"
-
 #include <array>
 
 namespace mixr {
 namespace base {
-class Number;
+class Object;
+//class Number;
 class Component;
 class ThreadPoolManager;
 class ThreadPoolThread;
@@ -34,9 +33,8 @@ class ThreadPoolThread;
 //   without executing, or even better, execute a timeout() callback in the
 //   manager class to handle timeouts.
 //------------------------------------------------------------------------------
-class ThreadPool : public Object
+class ThreadPool
 {
-   DECLARE_SUBCLASS(ThreadPool, Object)
    friend class ThreadPoolThread;
 
 public:
@@ -77,7 +75,6 @@ protected:
 
 private:
    static const unsigned int MAX_THREADS{32};
-   void initData();
    ThreadPoolThread* getAvailableThread();
 
    ThreadPoolManager* manager{};
@@ -96,10 +93,6 @@ private:
    // Callback object for when we're not using threading
    Object* unthreadedObj{};
 
-private:
-   // slot table helper methods
-   bool setSlotNumThreads(const Number* const);
-   bool setSlotPriority(const Number* const);
 };
 
 }

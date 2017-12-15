@@ -1,4 +1,7 @@
 
+#include "mixr/base/Object.hpp"
+#include "mixr/base/Component.hpp"
+
 #include "mixr/base/concurrent/ThreadPoolThread.hpp"
 
 #include "mixr/base/concurrent/ThreadPool.hpp"
@@ -7,14 +10,9 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(ThreadPoolThread, "ThreadPoolThread")
-EMPTY_SLOTTABLE(ThreadPoolThread)
-EMPTY_COPYDATA(ThreadPoolThread)
-
 ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const double priority, Object* const obj)
    : SyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj), currentObj(nullptr)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
 unsigned long ThreadPoolThread::userFunc()
@@ -34,11 +32,13 @@ unsigned long ThreadPoolThread::userFunc()
    return 0;
 }
 
+/*
 void ThreadPoolThread::deleteData()
 {
    if (manager != nullptr)
       manager->destroy(persistentObj);
 }
+*/
 
 Object* ThreadPoolThread::getPersistentObj()
 {

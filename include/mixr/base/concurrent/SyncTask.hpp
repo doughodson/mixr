@@ -23,8 +23,6 @@ class Component;
 //------------------------------------------------------------------------------
 class SyncTask : public Thread
 {
-   DECLARE_SUBCLASS(SyncTask, Thread)
-
 public:
    SyncTask(Component* const parent, const double priority);
 
@@ -41,8 +39,6 @@ public:
    private: virtual unsigned long userFunc() =0;
 
 protected:
-   SyncTask();
-
    void waitForStart();
    void signalCompleted();
 

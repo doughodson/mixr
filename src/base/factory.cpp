@@ -64,7 +64,6 @@
 
 // Others
 #include "mixr/base/EarthModel.hpp"
-#include "mixr/base/concurrent/ThreadPool.hpp"
 
 // ubf
 #include "mixr/base/ubf/Agent.hpp"
@@ -407,11 +406,6 @@ Object* factory(const std::string& name)
     // Earth models
     else if ( name == EarthModel::getFactoryName() ) {
         obj = new EarthModel();
-    }
-
-    // Thread pool
-    else if ( name == ThreadPool::getFactoryName() ) {
-       obj = new ThreadPool();
     }
 
     // Ubf

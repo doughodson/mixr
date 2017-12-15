@@ -15,7 +15,7 @@ namespace mixr {
 namespace base {
 
 // max number of processors we'll allow
-static const unsigned int MAX_CPUS = 32;
+static const unsigned int MAX_CPUS{32};
 
 //-----------------------------------------------------------------------------
 // Static thread function
@@ -23,19 +23,19 @@ static const unsigned int MAX_CPUS = 32;
 DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 {
    const auto thread = static_cast<Thread*>(lpParam);
-   Component* parent = thread->getParent();
+   Component* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
-   thread->ref();
-   parent->ref();
+//   thread->ref();    DDH
+//   parent->ref();
 
    // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
-   DWORD rtn = thread->mainThreadFunc();
+   DWORD rtn{thread->mainThreadFunc()};
    thread->setTerminated();
 
-   parent->unref();
-   thread->unref();
+//   parent->unref();    DDH
+//   thread->unref();
 
    return rtn;
 }
@@ -45,15 +45,15 @@ DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 //-----------------------------------------------------------------------------
 unsigned short Thread::getNumProcessors()
 {
-   unsigned short num = 0;
+   unsigned short num{};
 
-   DWORD_PTR mask = 0;
-   DWORD_PTR sysMask = 0;
-   HANDLE hProcess = GetCurrentProcess();
-   BOOL rtn = GetProcessAffinityMask(hProcess, &mask, &sysMask);
+   DWORD_PTR mask{};
+   DWORD_PTR sysMask{};
+   HANDLE hProcess{GetCurrentProcess()};
+   BOOL rtn{GetProcessAffinityMask(hProcess, &mask, &sysMask)};
    if (rtn != 0) {
       // we're checking the number of bits that are set in 'mask'
-      unsigned tbit = 0x01;
+      unsigned tbit{0x01};
       for (unsigned int i = 0; i < MAX_CPUS; i++) {
          if ( (tbit & mask) != 0 ) num++;
          tbit = (tbit << 1);
@@ -69,7 +69,7 @@ unsigned short Thread::getNumProcessors()
 bool Thread::createThread()
 {
    // Creation flags
-   DWORD dwCreationFlags = 0;
+   DWORD dwCreationFlags{};
 
    // create the thread
    HANDLE hnd =
@@ -82,9 +82,9 @@ bool Thread::createThread()
          NULL              // returns the thread identifier
       );
 
-   if ( hnd != 0 && parent->isMessageEnabled(MSG_INFO) ) {
+//   if ( hnd != 0 && parent->isMessageEnabled(MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
-   }
+//   }
 
    theThread = hnd;
 
@@ -97,32 +97,33 @@ bool Thread::createThread()
 bool Thread::configThread()
 {
    // Get handles
-   HANDLE hProcess = GetCurrentProcess();
-   HANDLE hThread  = GetCurrentThread();
+   HANDLE hProcess{GetCurrentProcess()};
+   HANDLE hThread{GetCurrentThread()};
 
-   if (parent->isMessageEnabled(MSG_INFO)) {
+//   if (parent->isMessageEnabled(MSG_INFO)) {
       std::cout << "Thread(" << this << ")::configThread(): process handle = " << hProcess << std::endl;
       std::cout << "Thread(" << this << ")::configThread(): thread handle = " << hThread  << std::endl;
-   }
+//   }
 
    // ---
    // (if it isn't already) Set our process priority class to high priority class
    // ---
    {
       #ifdef USE_REALTIME_PRI_CLASS
-         DWORD pclass = REALTIME_PRIORITY_CLASS;
+         DWORD pclass{REALTIME_PRIORITY_CLASS};
       #else
-         DWORD pclass = HIGH_PRIORITY_CLASS;
+         DWORD pclass{HIGH_PRIORITY_CLASS};
       #endif
 
       if (GetPriorityClass(hProcess) != pclass) {
-         BOOL stat = SetPriorityClass(hProcess,pclass);
+         BOOL stat{SetPriorityClass(hProcess, pclass)};
 
-         if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
+         if (stat == 0) {
+//         if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Thread(" << this << ")::configThread(): Error: SetPriorityClass() failed! ";
             std::cerr << GetLastError() << std::endl;
-         }
-         else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
+         } else if (stat != 0) {
+//       } else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
             std::cout << "Thread(" << this << ")::configThread(): SetPriorityClass() set!" << std::endl;
          }
       }
@@ -132,7 +133,7 @@ bool Thread::configThread()
    // Map and set our priority
    // ---
    {
-      int value = 0;
+      int value{};
       #ifdef USE_RT_PRI_CLASS
          if (priority      == 1.0f) value = THREAD_PRIORITY_TIME_CRITICAL;
          else if (priority >= 0.9f) value = 5;
@@ -157,13 +158,14 @@ bool Thread::configThread()
          else                       value = THREAD_PRIORITY_IDLE;
       #endif
 
-      BOOL stat = SetThreadPriority(hThread,value);
+      BOOL stat{SetThreadPriority(hThread,value)};
 
-      if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
+//      if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
+      if (stat == 0) {
          std::cerr << "Thread(" << this << ")::configThread(): Error: SetThreadPriority(" << value << ") failed! ";
          std::cerr << GetLastError()  << std::endl;
-      }
-      else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
+//      } else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
+      } else if (stat != 0) {
          std::cout << "Thread(" << this << ")::configThread(): SetThreadPriority(" << value << ") set!" << std::endl;
       }
    }
@@ -187,9 +189,9 @@ void Thread::closeThread()
 bool Thread::terminate()
 {
    if (theThread != nullptr && !killed) {
-      if ( parent->isMessageEnabled(MSG_INFO) ) {
+//      if ( parent->isMessageEnabled(MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
-      }
+//      }
 
       TerminateThread(theThread, 0);
       theThread = nullptr;
@@ -199,7 +201,7 @@ bool Thread::terminate()
       // but since the child thread is being terminated, the thread won't be
       // able to do the unref()'s, so we need to unref() here.
       parent->unref();
-      this->unref();
+//      this->unref();    DDH
    }
    return killed;
 }

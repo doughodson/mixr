@@ -7,21 +7,11 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(SyncTask, "AbstractSyncTask")
-EMPTY_SLOTTABLE(SyncTask)
-
 SyncTask::SyncTask(Component* const p, const double pri) : Thread(p, pri)
 {
-   STANDARD_CONSTRUCTOR()
 }
 
-SyncTask::SyncTask()
-{
-   STANDARD_CONSTRUCTOR()
-   std::cerr << "SyncTask(" << this << ")::SyncTask() -- ERROR: Do not use the default constructor" << std::endl;
-   std::cerr << "SyncTask(" << this << ")::SyncTask() -- ERROR: Did NOT create the thread!" << std::endl;
-}
-
+/*
 void SyncTask::copyData(const SyncTask& org, const bool)
 {
    BaseClass::copyData(org);
@@ -33,13 +23,15 @@ void SyncTask::deleteData()
 {
    closeSignals();
 }
+*/
 
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
 bool SyncTask::configThread()
 {
-   bool ok{BaseClass::configThread()};
+//   bool ok{BaseClass::configThread()};
+   bool ok{true};                           // added DDH
 
    // Create the signals
    if (ok) ok = createSignals();
@@ -61,9 +53,9 @@ unsigned long SyncTask::mainThreadFunc()
    // Configure this thread
    bool ok{configThread()};
 
-   if ( getParent()->isMessageEnabled(MSG_INFO) ) {
+//   if ( getParent()->isMessageEnabled(MSG_INFO) ) {
       std::cout << "SyncTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
-   }
+//   }
 
    // Main start-complete loop ...
    while ( ok && getParent()->isNotShutdown() ) {
@@ -93,7 +85,8 @@ unsigned long SyncTask::mainThreadFunc()
 bool SyncTask::terminate()
 {
    signalCompleted();
-   return BaseClass::terminate();
+//   return BaseClass::terminate();    commented out ddh
+   return true;
 }
 
 }

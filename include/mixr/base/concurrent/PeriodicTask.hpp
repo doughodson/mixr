@@ -21,8 +21,6 @@ class Component;
 //------------------------------------------------------------------------------
 class PeriodicTask : public Thread
 {
-   DECLARE_SUBCLASS(PeriodicTask, Thread)
-
 public:
    PeriodicTask(Component* const parent, const double priority, const double rate);
 
@@ -42,9 +40,6 @@ public:
 
    // User defined work function
    private: virtual unsigned long userFunc(const double dt) =0;
-
-protected:
-   PeriodicTask();
 
 private:
    virtual unsigned long mainThreadFunc() override;
