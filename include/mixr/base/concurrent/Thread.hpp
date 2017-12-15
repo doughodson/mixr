@@ -105,7 +105,7 @@ public:
    bool setStackSize(const std::size_t size);
 
    // number of processors assigned to this process
-   static unsigned short getNumProcessors();
+   static int getNumProcessors();
 
 protected:
    Component* getParent();
@@ -129,14 +129,14 @@ private:
       static void* staticThreadFunc(void* lpParam);
    #endif
 
-private: // Data
-   Component* parent {};        // Our parent component that created us.
-   double priority {};          // Thread priority (0->lowest, 1->highest)
-   bool killed {};              // Are we terminated?
-   std::size_t stackSize {};    // Stack size in bytes (zero to use the system default stack size)
+private:
+   Component* parent{};        // Our parent component that created us.
+   double priority{};          // Thread priority (0->lowest, 1->highest)
+   bool killed{};              // Are we terminated?
+   std::size_t stackSize{};    // Stack size in bytes (zero to use the system default stack size)
 
    // Implementation dependent
-   void* theThread{};     // Thread handle
+   void* theThread{};          // thread handle
 };
 
 }

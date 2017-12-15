@@ -43,9 +43,9 @@ DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-unsigned short Thread::getNumProcessors()
+int Thread::getNumProcessors()
 {
-   unsigned short num{};
+   int num{};
 
    DWORD_PTR mask{};
    DWORD_PTR sysMask{};
