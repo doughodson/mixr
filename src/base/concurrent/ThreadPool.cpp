@@ -70,13 +70,13 @@ void ThreadPool::initialize(Component* const parent)
             availableThreads[actualThreads] = allThreads[actualThreads];
             actualThreads++;
          } else {
-//            allThreads[actualThreads]->unref();
+            allThreads[actualThreads]->unref();
             allThreads[actualThreads] = nullptr;
-/*
-            if (isMessageEnabled(MSG_ERROR)) {
+
+//            if (isMessageEnabled(Object::MSG_ERROR)) {
                std::cerr << "ThreadPool::initialize(): ERROR, failed to create a thread pool thread!" << std::endl;
-            }
-*/
+//            }
+
          }
       }
    }
@@ -115,11 +115,11 @@ void ThreadPool::execute(Object* cur)
       SyncTask** pp{reinterpret_cast<SyncTask**>( &allThreads[0] )};
       if (SyncTask::waitForAnyCompleted(pp, actualThreads) == -1) {
          //Error
-/*
-         if (isMessageEnabled(MSG_ERROR)) {
+
+//         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "ThreadPool::execute(): ERROR, unknown error while waiting for completed thread signal!" << std::endl;
-         }
-*/
+//         }
+
          return;
       }
 
@@ -130,11 +130,11 @@ void ThreadPool::execute(Object* cur)
    // do we have one now (we should)?
    if (availableThread == nullptr) {
       //Error
-/*
-      if (isMessageEnabled(MSG_ERROR)) {
+
+//      if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "ThreadPool::execute(): ERROR, could not get an available thread!" << std::endl;
-      }
-*/
+//      }
+
       return;
    }
 
@@ -179,7 +179,7 @@ void ThreadPool::destroy()
    // delete all threads
    for (int i = 0; i < actualThreads; i++) {
       allThreads[i]->terminate();
-//      allThreads[i]->unref();
+      allThreads[i]->unref();
       allThreads[i] = nullptr;
    }
    lock(availableThreadsLock);

@@ -1,6 +1,7 @@
 
 #include "mixr/base/concurrent/SyncTask.hpp"
 
+#include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
 #include <iostream>
 
@@ -44,9 +45,9 @@ unsigned long SyncTask::mainThreadFunc()
    // Configure this thread
    bool ok{configThread()};
 
-//   if ( getParent()->isMessageEnabled(MSG_INFO) ) {
+   if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "SyncTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
-//   }
+   }
 
    // Main start-complete loop ...
    while ( ok && getParent()->isNotShutdown() ) {
