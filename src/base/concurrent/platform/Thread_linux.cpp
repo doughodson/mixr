@@ -1,6 +1,7 @@
 
 #include "mixr/base/concurrent/Thread.hpp"
 
+#include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -110,9 +111,9 @@ bool Thread::createThread()
    pthread_t* thread{new pthread_t};
    pthread_create(thread, &attr, staticThreadFunc, this);
 
-   //if ( stat != 0 && parent->isMessageEnabled(MSG_INFO) ) {
+   if ( stat != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
-   //}
+   }
 
    theThread = thread;
 
@@ -141,9 +142,9 @@ void Thread::closeThread()
 bool Thread::terminate()
 {
    if (theThread != nullptr && !killed) {
-//      if ( getParent()->isMessageEnabled(MSG_INFO) ) {
+      if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
-//      }
+      }
 
       pthread_t* thread{static_cast<pthread_t*>(theThread)};
       pthread_kill(*thread, SIGKILL);

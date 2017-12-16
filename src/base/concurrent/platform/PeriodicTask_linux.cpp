@@ -1,6 +1,7 @@
 
 #include "mixr/base/concurrent/PeriodicTask.hpp"
 
+#include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -19,10 +20,10 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 unsigned long PeriodicTask::mainThreadFunc()
 {
-//   if (getParent()->isMessageEnabled(MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::mainLoopFunc(): Parent = " << getParent() << std::endl;
       std::cout << "Thread(" << this << ")::mainLoopFunc(): Starting main loop ..." << std::endl;
-//   }
+   }
 
    // Delta time
    const double dt{1.0/static_cast<double>(getRate())};
@@ -71,9 +72,9 @@ unsigned long PeriodicTask::mainThreadFunc()
 
    pthread_mutex_unlock(&mutex);
 
-//   if (getParent()->isMessageEnabled(MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::mainLoopFunc(): ... end of main loop." << std::endl;
-//   }
+   }
 
    return 0;
 }

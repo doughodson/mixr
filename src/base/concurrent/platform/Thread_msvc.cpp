@@ -1,6 +1,7 @@
 
 #include "mixr/base/concurrent/Thread.hpp"
 
+#include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/system_utils.hpp"
 #include <iostream>
@@ -82,9 +83,9 @@ bool Thread::createThread()
          NULL              // returns the thread identifier
       );
 
-//   if ( hnd != 0 && parent->isMessageEnabled(MSG_INFO) ) {
+   if ( hnd != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
-//   }
+   }
 
    theThread = hnd;
 
@@ -100,10 +101,10 @@ bool Thread::configThread()
    HANDLE hProcess{GetCurrentProcess()};
    HANDLE hThread{GetCurrentThread()};
 
-//   if (parent->isMessageEnabled(MSG_INFO)) {
+   if (parent->isMessageEnabled(Object::MSG_INFO)) {
       std::cout << "Thread(" << this << ")::configThread(): process handle = " << hProcess << std::endl;
       std::cout << "Thread(" << this << ")::configThread(): thread handle = " << hThread  << std::endl;
-//   }
+   }
 
    // ---
    // (if it isn't already) Set our process priority class to high priority class
@@ -118,12 +119,10 @@ bool Thread::configThread()
       if (GetPriorityClass(hProcess) != pclass) {
          BOOL stat{SetPriorityClass(hProcess, pclass)};
 
-         if (stat == 0) {
-//         if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
+         if (stat == 0 && parent->isMessageEnabled(Object::MSG_ERROR)) {
             std::cerr << "Thread(" << this << ")::configThread(): Error: SetPriorityClass() failed! ";
             std::cerr << GetLastError() << std::endl;
-         } else if (stat != 0) {
-//       } else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
+         } else if (stat != 0 && parent->isMessageEnabled(Object::MSG_INFO)) {
             std::cout << "Thread(" << this << ")::configThread(): SetPriorityClass() set!" << std::endl;
          }
       }
@@ -160,12 +159,10 @@ bool Thread::configThread()
 
       BOOL stat{SetThreadPriority(hThread,value)};
 
-//      if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
-      if (stat == 0) {
+      if (stat == 0 && parent->isMessageEnabled(Object::MSG_ERROR)) {
          std::cerr << "Thread(" << this << ")::configThread(): Error: SetThreadPriority(" << value << ") failed! ";
          std::cerr << GetLastError()  << std::endl;
-//      } else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
-      } else if (stat != 0) {
+      } else if (stat != 0 && parent->isMessageEnabled(Object::MSG_INFO)) {
          std::cout << "Thread(" << this << ")::configThread(): SetThreadPriority(" << value << ") set!" << std::endl;
       }
    }
@@ -189,9 +186,9 @@ void Thread::closeThread()
 bool Thread::terminate()
 {
    if (theThread != nullptr && !killed) {
-//      if ( parent->isMessageEnabled(MSG_INFO) ) {
+      if ( parent->isMessageEnabled(Object::MSG_INFO) ) {
          std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
-//      }
+      }
 
       TerminateThread(theThread, 0);
       theThread = nullptr;

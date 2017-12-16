@@ -1,6 +1,7 @@
 
 #include "mixr/base/concurrent/PeriodicTask.hpp"
 
+#include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -28,11 +29,11 @@ unsigned long PeriodicTask::mainThreadFunc()
    // Configure this thread
    bool ok{configThread()};
 
-//   if ( getParent()->isMessageEnabled(MSG_INFO) ) {
+   if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "ThreadPeriodicTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
       std::cout << "ThreadPeriodicTask(" << this << ")::mainThreadFunc(): Parent = " << getParent() << std::endl;
       std::cout << "ThreadPeriodicTask(" << this << ")::mainThreadFunc(): Starting main loop ..." << std::endl;
-//   }
+   }
 
    // All of the real work is done by ...
    if (ok) {
@@ -83,9 +84,9 @@ unsigned long PeriodicTask::mainThreadFunc()
       }
    }
 
-//   if (getParent()->isMessageEnabled(MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "ThreadPeriodicTask(" << this << ")::mainThreadFunc(): ... end of main loop." << std::endl;
-//   }
+   }
 
    return rtn;
 }
