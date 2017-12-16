@@ -74,8 +74,8 @@ bool Thread::createThread()
    struct sched_param param;
    {
       if (priority > 0.0f && priority <= 1.0f) {
-         float maxp{sched_get_priority_max(SCHED_FIFO)};
-         float minp{sched_get_priority_min(SCHED_FIFO)};
+         float maxp{static_cast<float>(sched_get_priority_max(SCHED_FIFO))};
+         float minp{static_cast<float>(sched_get_priority_min(SCHED_FIFO))};
          float value{maxp - minp};
          if (priority      == 1.0) value *= 1.0;
          else if (priority >= 0.9) value *= 0.9;
@@ -111,9 +111,9 @@ bool Thread::createThread()
    pthread_t* thread{new pthread_t};
    pthread_create(thread, &attr, staticThreadFunc, this);
 
-   if ( stat != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
+   //if ( stat != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
-   }
+   //}
 
    theThread = thread;
 
