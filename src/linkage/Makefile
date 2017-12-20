@@ -19,7 +19,7 @@ OBJS =  \
 	IoData.o \
 	IoDevice.o \
 	IoHandler.o \
-	IoThread.o \
+	IoPeriodicThread.o \
 	MockDevice.o
 
 .PHONY: all clean

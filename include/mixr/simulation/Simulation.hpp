@@ -11,8 +11,8 @@ namespace mixr {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
-class SimBgThread;
-class SimTcThread;
+class SimulationBgSyncThread;
+class SimulationTcSyncThread;
 class Station;
 class AbstractPlayer;
 
@@ -165,11 +165,11 @@ class Simulation : public base::Component
 
 public:
    // Minimum released weapon ID
-   static const unsigned short MIN_WPN_ID {10001};
+   static const unsigned short MIN_WPN_ID{10001};
 
    // Size of the new player queue; ie, the max number
    // of new players accepted per background frame
-   static const int MAX_NEW_PLAYERS {1000};
+   static const int MAX_NEW_PLAYERS{1000};
 
 public:
     Simulation();
@@ -286,17 +286,17 @@ private:
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS{32};
-   std::array<SimTcThread*, MAX_TC_THREADS> tcThreads{};   // Thread pool; 'numTcThreads' threads
-   unsigned int reqTcThreads{1};                           // Requested number of threads
-   unsigned int numTcThreads{};                            // Number of threads in pool; should be (reqTcThreads - 1)
-   bool tcThreadsFailed{};                                 // Failed to create threads.
+   std::array<SimulationTcSyncThread*, MAX_TC_THREADS> tcThreads{};   // Thread pool; 'numTcThreads' threads
+   int reqTcThreads{1};                                               // Requested number of threads
+   int numTcThreads{};                                                // Number of threads in pool; should be (reqTcThreads - 1)
+   bool tcThreadsFailed{};                                            // Failed to create threads.
 
    // Background thread pool
    static const unsigned short MAX_BG_THREADS{32};
-   std::array<SimBgThread*, MAX_BG_THREADS> bgThreads{};   // Thread pool; 'reqBgThreads' threads
-   unsigned int reqBgThreads{1};                           // Requested number of threads
-   unsigned int numBgThreads{};                            // Number of threads in pool; should be (reqBgThreads - 1)
-   bool bgThreadsFailed{};                                 // Failed to create threads.
+   std::array<SimulationBgSyncThread*, MAX_BG_THREADS> bgThreads{};   // Thread pool; 'reqBgThreads' threads
+   int reqBgThreads{1};                                               // Requested number of threads
+   int numBgThreads{};                                                // Number of threads in pool; should be (reqBgThreads - 1)
+   bool bgThreadsFailed{};                                            // Failed to create threads.
 
 private:
    // slot table helper methods

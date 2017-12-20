@@ -10,13 +10,13 @@ OBJS =  \
 	AbstractNib.o \
 	AbstractPlayer.o \
 	AbstractRecorderComponent.o \
-	SimBgThread.o \
-	SimTcThread.o \
 	Simulation.o \
+	SimulationBgSyncThread.o \
+	SimulationTcSyncThread.o \
 	Station.o \
-	StationBgThread.o \
-	StationNetThread.o \
-	StationTcThread.o \
+	StationBgPeriodicThread.o \
+	StationNetPeriodicThread.o \
+	StationTcPeriodicThread.o \
 	factory.o
 
 .PHONY: all clean

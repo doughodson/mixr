@@ -7,7 +7,7 @@
 namespace mixr {
 namespace cigi {
 
-IgThread::IgThread(base::Component* const parent, const double priority): base::SingleTask(parent, priority)
+IgThread::IgThread(base::Component* const parent): base::Thread(parent)
 {
 }
 

@@ -5,12 +5,15 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoHandler; class Number; class Thread; class Time; }
+namespace base { class AbstractIoHandler; class Number; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
 class AbstractPlayer;
 class AbstractIgHost;
+class StationBgPeriodicThread;
+class StationTcPeriodicThread;
+class StationNetPeriodicThread;
 
 //------------------------------------------------------------------------------
 // Class: Station
@@ -235,19 +238,14 @@ protected:
    virtual void inputDevices(const double dt);    // Handle device inputs
    virtual void outputDevices(const double dt);   // Handle device output
 
-   base::Thread* getTcThread();                   // Pre-ref() pointer to the Time-critical thread
-   void setTcThread(base::Thread*);
-
-   base::Thread* getNetThread();                  // Pre-ref() pointer to the Network thread
-   void setNetThread(base::Thread*);
-
-   base::Thread* getBgThread();                   // Pre-ref() pointer to the Background thread
-   void setBgThread(base::Thread*);
-
    // base::Component protected functions
    bool shutdownNotification() override;
 
 private:
+   void setTcThread(StationTcPeriodicThread*);
+   void setNetThread(StationNetPeriodicThread*);
+   void setBgThread(StationBgPeriodicThread*);
+
    virtual void createNetworkProcess();           // Creates a network thread
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
@@ -263,21 +261,21 @@ private:
    double tcRate{50.0};                                      // Time-critical thread Rate (hz)
    double tcPri{DEFAULT_TC_THREAD_PRI};                      // Priority of the time-critical thread (0->lowest, 1->highest)
    unsigned int tcStackSize{};                               // Time-critical thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::Thread> tcThread;                    // The Time-critical thread
+   base::safe_ptr<StationTcPeriodicThread> tcThread;         // The Time-critical thread
    unsigned int fastForwardRate{DEFAULT_FAST_FORWARD_RATE};  // Time-critical thread fast forward rate
 
-   double netRate{};                                 // Network thread Rate (hz)
-   double netPri{DEFAULT_NET_THREAD_PRI};            // Priority of the Network thread (0->lowest, 1->highest)
-   unsigned int netStackSize{};                      // Network thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::Thread> netThread;           // The optional network thread
+   double netRate{};                                         // Network thread Rate (hz)
+   double netPri{DEFAULT_NET_THREAD_PRI};                    // Priority of the Network thread (0->lowest, 1->highest)
+   unsigned int netStackSize{};                              // Network thread stack size (bytes or zero for system default size)
+   base::safe_ptr<StationNetPeriodicThread> netThread;       // The optional network thread
 
-   double bgRate{};                                  // Background thread Rate (hz)
-   double bgPri{DEFAULT_BG_THREAD_PRI};              // Priority of the Background thread (0->lowest, 1->highest)
-   unsigned int bgStackSize{};                       // Background thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::Thread> bgThread;            // The optional background thread
+   double bgRate{};                                          // Background thread Rate (hz)
+   double bgPri{DEFAULT_BG_THREAD_PRI};                      // Priority of the Background thread (0->lowest, 1->highest)
+   unsigned int bgStackSize{};                               // Background thread stack size (bytes or zero for system default size)
+   base::safe_ptr<StationBgPeriodicThread> bgThread;         // The optional background thread
 
-   double startupResetTimer{-1.0};                   // Startup RESET timer (sends a RESET_EVENT after timeout)
-   const base::Time* startupResetTimer0{};           // Init value of the startup RESET timer
+   double startupResetTimer{-1.0};                           // Startup RESET timer (sends a RESET_EVENT after timeout)
+   const base::Time* startupResetTimer0{};                   // Init value of the startup RESET timer
 
 private:
    // slot table helper methods

@@ -9,11 +9,12 @@ General framework-wide changes/improvements/trends/philosophy/goals
   reading material concerning good coding practices from influential people
   within the world of C++ programming, such as Bjarne Stroustrup, Scott Meyers,
   Herb Sutter and Andrei Alexandrescu.  We also cannot dismiss high quality answers
-  posted by folks on Stack Overflow and even the treasure trove Microsoft posted
-  with their "Framework Design Guidelines for .NET" - this in many ways rolls up
-  and integrates or blends guidelines in a nice way.  Of course, some of this is
-  a result of dwelling on these issues or topics for probably unreasonable
-  amounts of time, and equally, how they might be applied to the MIXR
+  posted by folks on Stack Overflow and even the consolidated treasure trove of design
+  practices espoused by Microsoft in their "Framework Design Guidelines for .NET" book.
+
+  This book in many ways rolls up and integrates guidelines in a nice way.  Of course,
+  some of the changes are a result of dwelling on these issues or topics for probably
+  unreasonable amounts of time, and equally, how they might be applied to the MIXR
   code base.
 
 - Renamed user interface directory from 'gui' to 'ui' as it's more general.
@@ -282,6 +283,20 @@ Infrastructure oriented libraries
 
 --------------------------------------------------------------------------------
 base library (mixr_base)
+
+   -- Renamed 'concurrent' directory to 'threads' and removed all thread pool
+      related classes (ThreadPool, ThreadPoolManager and ThreadPoolManagerThread)
+      as they were not being used.  Some work done to streamline the existing
+      classes to eventually use C++11 thread functionality.
+
+      Note that the 'create()' method has been renamed to 'start(const double
+      priority)' to better indicate what is happening (i.e., thread is starting),
+      with a given execution priority.  Threads are created via 'new Thread()',
+      after that, they can be started.
+
+      Specific thread classes defined in ig_host_cigi, linkage and simulation
+      libraries have been updated and renamed to more clearly indicate what kind
+      of thread is being used (i.e., periodic, single shot or sync'd).
 
    -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
       to more clearly convey their purpose; namely a structure that defines the

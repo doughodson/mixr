@@ -31,16 +31,13 @@ OBJS =  \
 	concepts/linkage/AbstractIoData.o \
 	concepts/linkage/AbstractIoDevice.o \
 	concepts/linkage/AbstractIoHandler.o \
-	concurrent/platform/PeriodicTask_linux.o \
-	concurrent/platform/SyncTask_linux.o \
-	concurrent/platform/Thread_linux.o \
-	concurrent/PeriodicTask.o \
-	concurrent/SingleTask.o \
-	concurrent/SyncTask.o \
-	concurrent/Thread.o \
-	concurrent/ThreadPool.o \
-	concurrent/ThreadPoolManager.o \
-	concurrent/ThreadPoolThread.o \
+	threads/platform/AbstractThread_linux.o \
+	threads/platform/PeriodicThread_linux.o \
+	threads/platform/SyncThread_linux.o \
+	threads/AbstractThread.o \
+	threads/PeriodicThread.o \
+	threads/SyncThread.o \
+	threads/Thread.o \
 	edl_parser/EdlParser.o \
 	edl_parser/EdlScanner.o \
 	functors/FStorage.o \
@@ -139,8 +136,8 @@ $(LIB) : $(OBJS)
 clean:
 	-rm -f colors/*.o
 	-rm -f concepts/linkage/*.o
-	-rm -f concurrent/platform/*.o
-	-rm -f concurrent/*.o
+	-rm -f threads/platform/*.o
+	-rm -f threads/*.o
 	-rm -f edl_parser/*.o
 	-rm -f functors/*.o
 	-rm -f io/*.o

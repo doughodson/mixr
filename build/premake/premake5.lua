@@ -101,7 +101,7 @@ workspace "mixr"
          "../../src/base/osg/Matrix_implementation.cpp",
          "../../src/base/util/platform/system_linux.cpp",
          "../../src/base/util/platform/system_mingw.cpp",
-         "../../src/base/concurrent/platform/*_linux.cpp"
+         "../../src/base/threads/platform/*_linux.cpp"
       }
       targetname "base"
 
@@ -179,6 +179,7 @@ workspace "mixr"
       files {
          "../../include/mixr/simulation/**.h*",
          "../../include/mixr/simulation/**.inl",
+         "../../src/simulation/**.h*",
          "../../src/simulation/**.cpp"
       }
       targetname "simulation"

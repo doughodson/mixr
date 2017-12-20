@@ -28,7 +28,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 //class CigiOutgoingMsg;
 
 namespace mixr {
-namespace base { class Number; class NetHandler; class Thread; }
+namespace base { class Number; class NetHandler; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
@@ -36,6 +36,7 @@ class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapo
 namespace cigi {
 class HostSession;
 class CigiModel;
+class IgThread;
 
 //------------------------------------------------------------------------------
 // Class: CigiHost
@@ -197,9 +198,9 @@ protected:
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p);
 
 private:
-   // creates a thread to process IG packets
+   // creates a single task thread to process IG packets
    bool createProcessingThread();
-   base::safe_ptr<base::Thread> thread;
+   base::safe_ptr<IgThread> igThread;
 
    base::safe_ptr<HostSession> session;        // networked host session
 

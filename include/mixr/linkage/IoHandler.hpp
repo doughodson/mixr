@@ -7,8 +7,9 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Frequency; class Number; class Thread; class AbstractIoData; }
+namespace base { class Frequency; class Number; class AbstractIoData; }
 namespace linkage {
+class IoPeriodicThread;
 
 //------------------------------------------------------------------------------
 // Class: IoHandler
@@ -69,8 +70,8 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   // return state of asynchronous i/o processing
-   bool async() override                                             { return thread!=nullptr; }
+   // return state of asynchronous periodic i/o processing
+   bool async() override                                             { return periodicThread != nullptr; }
 
    // return input data buffer implementation
    base::AbstractIoData* getInputDataImpl() override                 { return inData; }
@@ -88,13 +89,13 @@ private:
    double getRate() const         { return rate; }      // Thread rate (hz)
 
    // data i/o
-   base::safe_ptr<base::AbstractIoData> inData;     // "input" data received from the hardware
-   base::safe_ptr<base::AbstractIoData> outData;    // "output" data sent to the hardware
-   base::safe_ptr<base::PairStream> devices;        // Device list
+   base::safe_ptr<base::AbstractIoData> inData;         // "input" data received from the hardware
+   base::safe_ptr<base::AbstractIoData> outData;        // "output" data sent to the hardware
+   base::safe_ptr<base::PairStream> devices;            // Device list
 
-   double rate {50};                                // Thread Rate (hz)
-   double pri {0.5};                                // Priority of the thread (0->lowest, 1->highest)
-   base::safe_ptr<base::Thread> thread;             // The thread
+   double rate {50};                                    // Thread Rate (hz)
+   double pri {0.5};                                    // Priority of the thread (0->lowest, 1->highest)
+   base::safe_ptr<IoPeriodicThread> periodicThread;     // periodic thread to process I/O
 
 private:
    // slot table helper methods

@@ -117,9 +117,9 @@ void CigiHost::copyData(const CigiHost& org, const bool cc)
       los = new CigiLosVectReqV3();
    }
 
-   if (thread != nullptr) {
-      thread->terminate();
-      thread = nullptr;
+   if (igThread != nullptr) {
+      igThread->terminate();
+      igThread = nullptr;
    }
 
    session = nullptr;
@@ -165,9 +165,9 @@ void CigiHost::deleteData()
 {
    session = nullptr;
 
-   if (thread != nullptr) {
-      thread->terminate();
-      thread = nullptr;
+   if (igThread != nullptr) {
+      igThread->terminate();
+      igThread = nullptr;
    }
 
    for (int i = 0; i < NUM_BUFFERS; i++) {
@@ -186,21 +186,21 @@ void CigiHost::deleteData()
 // creates a thread to receive and process incoming IG packets
 bool CigiHost::createProcessingThread()
 {
-   if ( thread == nullptr ) {
+   if ( igThread == nullptr ) {
 
       // parent -> our IG manager
-      thread = new IgThread(this, 0.6);
-      thread->unref(); // 'thread' is a safe_ptr<>
+      igThread = new IgThread(this);
+      igThread->unref(); // 'singleTask' is a safe_ptr<>
 
-      bool ok{thread->create()};
+      bool ok{igThread->start(0.6)};
       if (!ok) {
-         thread = nullptr;
+         igThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "CigiHost::createProcessingThread(): ERROR, failed to create the thread!" << std::endl;
+            std::cerr << "CigiHost::createProcessingThread(): ERROR, failed to create thread!" << std::endl;
          }
       }
    }
-   return (thread != nullptr);
+   return (igThread != nullptr);
 }
 
 // create Cigi model objects
@@ -244,7 +244,7 @@ void CigiHost::updateData(const double dt)
    }
 
    // initialize thread
-   if (thread == nullptr) {
+   if (igThread == nullptr) {
       createProcessingThread();
    }
 

@@ -15,9 +15,9 @@
 #include "mixr/base/Timers.hpp"
 #include "mixr/base/units/Times.hpp"
 
-#include "mixr/simulation/StationTcThread.hpp"
-#include "mixr/simulation/StationBgThread.hpp"
-#include "mixr/simulation/StationNetThread.hpp"
+#include "StationTcPeriodicThread.hpp"
+#include "StationBgPeriodicThread.hpp"
+#include "StationNetPeriodicThread.hpp"
 
 #include <ctime>
 
@@ -477,12 +477,12 @@ void Station::outputDevices(const double dt)
 void Station::createTimeCriticalProcess()
 {
    if ( tcThread == nullptr ) {
-      tcThread = new TcThread(this, getTimeCriticalPriority(), getTimeCriticalRate());
+      tcThread = new StationTcPeriodicThread(this, getTimeCriticalRate());
       tcThread->unref(); // 'tcThread' is a safe_ptr<>
 
       if (tcStackSize > 0) tcThread->setStackSize( tcStackSize );
 
-      bool ok{tcThread->create()};
+      bool ok{tcThread->start(getTimeCriticalPriority())};
       if (!ok) {
          tcThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -498,12 +498,12 @@ void Station::createTimeCriticalProcess()
 void Station::createNetworkProcess()
 {
    if ( netThread == nullptr ) {
-      netThread = new NetThread(this, getNetworkPriority(), getNetworkRate());
+      netThread = new StationNetPeriodicThread(this, getNetworkRate());
       netThread->unref(); // 'netThread' is a safe_ptr<>
 
       if (netStackSize > 0) netThread->setStackSize( netStackSize );
 
-      bool ok{netThread->create()};
+      bool ok{netThread->start(getNetworkPriority())};
       if (!ok) {
          netThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -519,12 +519,12 @@ void Station::createNetworkProcess()
 void Station::createBackgroundProcess()
 {
    if ( bgThread == nullptr ) {
-      bgThread = new BgThread(this, getBackgroundPriority(), getBackgroundRate());
+      bgThread = new StationBgPeriodicThread(this, getBackgroundRate());
       bgThread->unref(); // 'bgThread' is a safe_ptr<>
 
       if (bgStackSize > 0) bgThread->setStackSize( bgStackSize );
 
-      bool ok{bgThread->create()};
+      bool ok{bgThread->start(getBackgroundPriority())};
       if (!ok) {
          bgThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
@@ -735,16 +735,6 @@ bool Station::doWeHaveTheTcThread() const
    return (tcThread != nullptr);
 }
 
-// Pre-ref() pointer to the T/Cthread
-base::Thread* Station::getTcThread()
-{
-   base::Thread* p{};
-   if (tcThread != nullptr) {
-      p = tcThread.getRefPtr();
-   }
-   return p;
-}
-
 // Background thread rate (Hz)
 double Station::getBackgroundRate() const
 {
@@ -769,16 +759,6 @@ bool Station::doWeHaveTheBgThread() const
    return (bgThread != nullptr);
 }
 
-// Pre-ref() pointer to the Background thread
-base::Thread* Station::getBgThread()
-{
-   base::Thread* p{};
-   if (bgThread != nullptr) {
-      p = bgThread.getRefPtr();
-   }
-   return p;
-}
-
 // Network thread rate (Hz)
 double Station::getNetworkRate() const
 {
@@ -801,16 +781,6 @@ unsigned int Station::getNetworkStackSize() const
 bool Station::doWeHaveTheNetThread() const
 {
    return (netThread != nullptr);
-}
-
-// Pre-ref() pointer to the Network thread
-base::Thread* Station::getNetThread()
-{
-   base::Thread* p{};
-   if (netThread != nullptr) {
-      p = netThread.getRefPtr();
-   }
-   return p;
 }
 
 // Is Timer::updateTimers() being called from our updateTC()
@@ -852,19 +822,19 @@ bool Station::setBackgroundStackSize(const unsigned int bytes)
 //------------------------------------------------------------------------------
 // Set thread handle functions
 //------------------------------------------------------------------------------
-void Station::setTcThread(base::Thread* h)
+void Station::setTcThread(StationTcPeriodicThread* h)
 {
    if (tcThread != nullptr) tcThread->terminate();
    tcThread = h;
 }
 
-void Station::setNetThread(base::Thread* h)
+void Station::setNetThread(StationNetPeriodicThread* h)
 {
    if (netThread != nullptr) netThread->terminate();
    netThread = h;
 }
 
-void Station::setBgThread(base::Thread* h)
+void Station::setBgThread(StationBgPeriodicThread* h)
 {
    if (bgThread != nullptr) bgThread->terminate();
    bgThread = h;

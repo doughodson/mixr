@@ -31,7 +31,7 @@ public:  // Define the Windows vs Unix socket type
    #else
       typedef int LcSocket;
       static const LcSocket NET_INVALID_SOCKET{-1};  // Always -1 and errno is
-      static const int      NET_SOCKET_ERROR{-1};  // set
+      static const int      NET_SOCKET_ERROR{-1};    // set
    #endif
 
 public:

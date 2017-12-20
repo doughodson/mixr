@@ -4,7 +4,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
-#include "IoThread.hpp"
+#include "IoPeriodicThread.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
@@ -81,9 +81,9 @@ void IoHandler::copyData(const IoHandler& org, const bool)
    rate = 50;
    pri = 0.0;
 
-   if (thread != nullptr) {
-      thread->terminate();
-      thread = nullptr;
+   if (periodicThread != nullptr) {
+      periodicThread->terminate();
+      periodicThread = nullptr;
    }
 }
 
@@ -93,9 +93,9 @@ void IoHandler::deleteData()
    outData = nullptr;
    devices = nullptr;
 
-   if (thread != nullptr) {
-      thread->terminate();
-      thread = nullptr;
+   if (periodicThread != nullptr) {
+      periodicThread->terminate();
+      periodicThread = nullptr;
    }
 }
 
@@ -121,13 +121,13 @@ void IoHandler::reset()
 
 bool IoHandler::shutdownNotification()
 {
-   // Zero (unref) our thread object (of any).  The thread's function has ref()'d
+   // Zero (unref) our periodic task thread object (of any).  The thread's function has ref()'d
    // this object, so it won't be deleted until the thread terminates, which it
    // will based on our BaseClass::isShutdown() function.  But at least we won't
    // mistakenly think that it's still around.
-   if (thread != nullptr) {
-      thread->terminate();
-      thread = nullptr;
+   if (periodicThread != nullptr) {
+      periodicThread->terminate();
+      periodicThread = nullptr;
    }
 
    return BaseClass::shutdownNotification();
@@ -164,13 +164,13 @@ void IoHandler::writeDeviceOutputs(const double dt)
 // setup and start asynchronous processing (i.e., create a data acq thread)
 void IoHandler::startAsyncProcessingImpl()
 {
-   if ( thread == nullptr ) {
-      thread = new IoThread(this, getPriority(), getRate());
-      thread->unref(); // 'thread' is a safe_ptr<>
+   if ( periodicThread == nullptr ) {
+      periodicThread = new IoPeriodicThread(this, getRate());
+      periodicThread->unref(); // 'periodicTask' is a safe_ptr<>
 
-      bool ok{thread->create()};
+      bool ok{periodicThread->start(getPriority())};
       if (!ok) {
-         thread = nullptr;
+         periodicThread = nullptr;
          if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "IoHandler::createDataThread(): ERROR, failed to create the thread!" << std::endl;
          }
