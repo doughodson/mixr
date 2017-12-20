@@ -11,11 +11,13 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: SyncThread
 //
-// Description: Abstract sync (i.e., start/complete loop) thread;
+// Description: Abstract synchronized (i.e., start/complete loop) thread;
+//              multiple calls to the user defined work function with
+//              start/complete signals.
 //
-//    User's will need to derive a class from this class and define the
-//    work function, userFunc(), which is called once after each 'start' signal,
-//    signalStart().  This class will then signal 'completed' after each return
+//    Derived classes need to define the work function (i.e., userFunc()),
+//    which is called once after each 'start' signal (i.e., signalStart()).
+//    This class will then signal 'completed' after each return
 //    from the userFunc(). Users can use waitForCompleted() to wait for the
 //    'completed' signal, or use the static function waitForAllCompleted() to
 //    wait for several sync task threads.  Loop will end with the shutdown of
@@ -38,7 +40,7 @@ public:
 
    bool terminate() override;
 
-   // User defined work function
+   // user defined work function
    private: virtual unsigned long userFunc() =0;
 
 protected:

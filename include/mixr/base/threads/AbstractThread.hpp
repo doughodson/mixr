@@ -1,26 +1,11 @@
-//------------------------------------------------------------------------------
-// Classes:
-//
-//    AbstractThread       -- Abstract class for all thread classes.
-//
-//    PeriodicThread       -- Periodic thread; multiple calls to the user's
-//                            function at a fixed rate
-//
-//    SyncThread           -- Synchronized thread; multiple calls to the
-//                            user's function with start/complete signals
-//
-//    Thread               -- Single task thread; single call to the user's
-//                            function
-//
-//    ### All of these classes are abstract. ###
-//------------------------------------------------------------------------------
+
 #ifndef __mixr_base_AbstractThread_H__
 #define __mixr_base_AbstractThread_H__
 
 #include "mixr/base/Referenced.hpp"
-#include <cstddef>
-
 #include "mixr/base/util/platform_api.hpp"
+
+#include <cstddef>
 
 namespace mixr {
 namespace base {
@@ -29,14 +14,12 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: AbstractThread
 //
-// Description: Abstract thread class
-//
-//    User's will need to define the work function, mainThreadFunc() that is derived
-//    from this class.
-//
-//    Thread objects and their parent objects are ref()'d as the child threads
-//    starts, and are unref()'d when the threads terminate.  This prevents the
-//    objects from being deleted before the thread terminates.
+// Description: Abstract thread class - defines common functionality needed
+//              by more specific (althrough still abstract) thread classes.
+//              Thread objects and their parent objects are ref()'d as child
+//              threads start, and are unref()'d when the thread terminates.
+//              This prevents the objects from being deleted before the thread
+//              terminates.
 //
 //    On Windows applications, the process is converted to a "High priority
 //    class" process during the creation of the first Thread.
@@ -92,7 +75,6 @@ public:
    AbstractThread& operator=(const AbstractThread&) = delete;
    ~AbstractThread();
 
-//   double getPriority() const;
    bool isTerminated() const;
 
    // thread stack size in bytes (or zero if using the default stack size)

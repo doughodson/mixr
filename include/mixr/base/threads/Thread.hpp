@@ -10,10 +10,10 @@ class Component;
 
 //------------------------------------------------------------------------------
 // Class: Thread
-// Description: Abstract thread class
 //
-//    User's will need to derive a class from this class and define the
-//    work function, userFunc(), which is only called once.
+// Description: Abstract thread class that executes a single task. Derived classes
+//              need to define the work function (i.e., userFunc()), which is
+//              called once.
 //------------------------------------------------------------------------------
 class Thread : public AbstractThread
 {
@@ -22,11 +22,11 @@ public:
    Thread(const Thread&) = delete;
    Thread& operator=(const Thread&) = delete;
 
-   // User defined work function
+   // user defined work function
    private: virtual unsigned long userFunc() =0;
 
 private:
-   // Thread class function
+   // thread class function
    unsigned long mainThreadFunc() final;
 };
 

@@ -12,12 +12,12 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: PeriodicThread
 //
-// Description: Abstract periodic thread
-//
-//    User's will need to derive a class from this class and define the
-//    work function, userFunc(), which is called at fixed rate of 'rate' Hz
-//    until the parent component is shutdown.  A value of 1.0/rate is passed
-//    to userFunc() as the delta time parameter.
+// Description: Abstract periodic thread that calls the user supplied function
+//              at a fixed rate. Derived classes define the work
+//              function (i.e., userFunc()), which will be called at a fixed
+//              rate of 'rate' Hz until the parent component is shutdown.
+//              A value of 1.0/rate is passed to userFunc() as the delta time
+//              parameter.
 //------------------------------------------------------------------------------
 class PeriodicThread : public AbstractThread
 {
@@ -43,7 +43,7 @@ public:
 private:
    unsigned long mainThreadFunc() final;
 
-   // User defined work function
+   // user defined work function
    virtual unsigned long userFunc(const double dt) =0;
 
    double rate {};         // Loop rate (hz); until our parent shuts down
