@@ -55,11 +55,11 @@ void IgHost::copyData(const IgHost& org, const bool)
 
    resetTables();
 
-   clearModelTypes();
-   for (int i = 0; i < org.nOtwModelTypes; i++) {
-      org.otwModelTypes[i]->ref();
-      otwModelTypes[i] = org.otwModelTypes[i];
-      nOtwModelTypes++;
+   clearIgModelTypes();
+   for (int i = 0; i < org.nIgModelTypes; i++) {
+      org.igModelTypes[i]->ref();
+      igModelTypes[i] = org.igModelTypes[i];
+      nIgModelTypes++;
    }
 
    maxRange = org.maxRange;
@@ -81,7 +81,7 @@ void IgHost::deleteData()
    setOwnship(nullptr);
    setPlayerList(nullptr);
    resetTables();
-   clearModelTypes();
+   clearIgModelTypes();
 }
 
 //------------------------------------------------------------------------------
@@ -115,17 +115,17 @@ void IgHost::resetTables()
 }
 
 //------------------------------------------------------------------------------
-// clearOtwModelTypes() -- Clear the OTW model types table
+// clearIgModelTypes() -- Clear the IG model types table
 //------------------------------------------------------------------------------
-void IgHost::clearModelTypes()
+void IgHost::clearIgModelTypes()
 {
-   // Clear our old OTW model type table --
+   // Clear our old IG model type table --
    // Just in case someone is scanning the table, we clear the entries
-   // and decrement 'nOtwModelTypes' before the object is unref()'ed
-   while (nOtwModelTypes > 0) {
-      nOtwModelTypes--;
-      otwModelTypes[nOtwModelTypes]->unref();
-      otwModelTypes[nOtwModelTypes] = nullptr;
+   // and decrement 'nIgModelTypes' before the object is unref()'ed
+   while (nIgModelTypes > 0) {
+      nIgModelTypes--;
+      igModelTypes[nIgModelTypes]->unref();
+      igModelTypes[nIgModelTypes] = nullptr;
    }
 }
 
@@ -192,7 +192,7 @@ void IgHost::mapPlayerList2ModelTable()
 
    // ---
    // Remove all inactive, dead or out-of-range models
-   //   -- These states were issued last pass, so the OTW system
+   //   -- These states were issued last pass, so the IG system
    //       specific software should have handled them by now.
    //   -- As models are removed, the table above the model is shifted down.
    //   -- We're also clearing the model's 'checked' flag
@@ -200,7 +200,7 @@ void IgHost::mapPlayerList2ModelTable()
    for (int i = getModelTableSize(); i > 0; --i) {
       if ( modelTbl[i-1]->isState(CigiModel::CLEARED) ) {
          // Deleting this model
-         //std::cout << "Otw::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
+         //std::cout << "IgHost::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
          removeModelFromList( (i-1), MODEL_TABLE);
       }
    }
@@ -271,7 +271,7 @@ void IgHost::mapPlayerList2ModelTable()
    for (int i = 0; i < getModelTableSize(); i++) {
       if ( modelTbl[i]->isNotChecked() ) {
          // Request removal;
-         // (note: the OTW system specific code now has one frame to cleanup its own code
+         // (note: the IG system specific code now has one frame to cleanup its own code
          //  before the model is dropped from the output list next frame -- see above)
          modelTbl[i]->setState( CigiModel::OUT_OF_RANGE );
       }
@@ -370,7 +370,7 @@ CigiModel* IgHost::newModelEntry(models::Player* const ip)
       model = modelFactory();
       if (model != nullptr) {
          // Yes, initialize the model entry
-         model->initialize(ip, otwModelTypes.data(), nOtwModelTypes);
+         model->initialize(ip, igModelTypes.data(), nIgModelTypes);
          addModelToList(model, MODEL_TABLE);
       }
    }
@@ -401,7 +401,7 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
 
 //------------------------------------------------------------------------------
 // Sets our ownship pointer; public version, which is usually called by
-// the Station class.  Derived versions of Otw can override this function
+// the Station class.  Derived versions of IgHost can override this function
 // and control the switch of ownship using setOwnship0()
 //------------------------------------------------------------------------------
 void IgHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
@@ -637,7 +637,7 @@ CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, con
 
 //------------------------------------------------------------------------------
 // bsearch callbacks: object name compare function --
-//   True types are (const OtwModelKey* key, const OtwModel** model)
+//   True types are (const ModelKey* key, const Model** model)
 //------------------------------------------------------------------------------
 int IgHost::compareKey2Model(const void* key, const void* model)
 {
@@ -746,7 +746,7 @@ bool IgHost::setSlotMaxModels(const base::Number* const num)
              ok = setMaxModels(n);
         }
         if (!ok) {
-            std::cerr << "IgHost::setSlotMaxModels: maximum number of models limited to Otw::MAX_MODELS1" << std::endl;
+            std::cerr << "IgHost::setSlotMaxModels: maximum number of models limited to IgHost::MAX_MODELS" << std::endl;
         }
     }
     return ok;
@@ -761,7 +761,7 @@ bool IgHost::setSlotMaxElevations(const base::Number* const num)
              ok = setMaxElevations(n);
         }
         if (!ok) {
-            std::cerr << "IgHost::setSlotMaxElevations: maximum number of terrain elevation requests limited to Otw::MAX_ELEV" << std::endl;
+            std::cerr << "IgHost::setSlotMaxElevations: maximum number of terrain elevation requests limited to IgHost::MAX_ELEV" << std::endl;
         }
     }
     return ok;
@@ -793,19 +793,19 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
     bool ok{};
     if (msg != nullptr) {
        // First clear the old table
-       clearModelTypes();
+       clearIgModelTypes();
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
        const base::List::Item* item{msg->getFirstItem()};
-       while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
+       while (item != nullptr && nIgModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
-          const auto otwType = dynamic_cast<const TypeMapper*>( pair->object() );
-          if (otwType != nullptr) {
+          const auto igType = dynamic_cast<const TypeMapper*>( pair->object() );
+          if (igType != nullptr) {
              // We have an Otm object, so put it in the table
-             otwType->ref();
-             otwModelTypes[nOtwModelTypes] = otwType;
-             nOtwModelTypes++;
+             igType->ref();
+             igModelTypes[nIgModelTypes] = igType;
+             nIgModelTypes++;
           }
           item = item->getNext();
        }
@@ -817,7 +817,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
 //==============================================================================
 // IgModel::ModelKey class
 //==============================================================================
-IgHost::ModelKey::ModelKey(const unsigned short pid, const base::String* const federateName)
+IgHost::ModelKey::ModelKey(const int pid, const base::String* const federateName)
 {
    playerID = pid;
    fName = federateName;

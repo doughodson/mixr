@@ -58,8 +58,8 @@ public:
     double getRefLongitude() const                        { return refLon; }         // Visual database reference longitude (degs)
     virtual bool isResetInProgress() const;                                          // True if visual system is resetting
 
-    virtual bool setRefLatitude(const double);              // Sets the visual database reference latitude  (degs)
-    virtual bool setRefLongitude(const double);             // Sets the visual database reference longitude (degs)
+    bool setRefLatitude(const double);                      // Sets the visual database reference latitude  (degs)
+    bool setRefLongitude(const double);                     // Sets the visual database reference longitude (degs)
     void setPlayerList(base::PairStream* const) override;   // Sets the player list that we're to use to generate player/models
 
     bool setMaxRange(const double);                         // Sets the max range (meters)
@@ -115,7 +115,7 @@ protected:
     virtual void recvElevations() =0;
 
 private:
-    void updateIg(const double dt = 0.0) override;
+    void updateIg(const double dt = 0.0) final;
 
     static const int MAX_MODELS{400};                    // Max model table size
     static const int MAX_MODELS_TYPES{400};              // Max IG model type table size
@@ -127,7 +127,7 @@ private:
     virtual void frameSync() =0;
 
     void resetTables();                                  // Resets the tables
-    void clearModelTypes();                              // Clear the IG model types table
+    void clearIgModelTypes();                            // Clear the IG model types table
     void mapPlayerList2ModelTable();                     // Map the player list to the model table
     void mapPlayers2ElevTable();                         // Map player list to terrain elevation table
     CigiModel* newModelEntry(models::Player* const ip);  // Create a new model entry for this player & return the table index
@@ -158,15 +158,15 @@ private:
 
     // Model quick lookup key
     struct ModelKey {
-        ModelKey(const unsigned short pid, const base::String* const federateName);
+        ModelKey(const int pid, const base::String* const federateName);
         // IgModel IDs  -- Comparisons in this order --
-        unsigned short playerID;                    // Player ID
+        int playerID;                               // Player ID
         base::safe_ptr<const base::String> fName;   // Federate name
     };
 
     // IG model type table
-    std::array<const TypeMapper*, MAX_MODELS_TYPES> otwModelTypes{}; // Table of pointers to IG type mappers
-    int nOtwModelTypes{};                                            // Number of type mappers in the table, 'otwModelTable'
+    std::array<const TypeMapper*, MAX_MODELS_TYPES> igModelTypes{}; // Table of pointers to IG type mappers
+    int nIgModelTypes{};                                            // Number of type mappers in the table, 'igModelTable'
 
     // bsearch callbacks: object name compare function --
     //   True types are (const IgModelKey* key, const IgModel** model)

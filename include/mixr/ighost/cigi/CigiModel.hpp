@@ -47,8 +47,8 @@ public:
 public:
    CigiModel();
 
-   unsigned short getID() const                { return entityId; }
-   void setID(const unsigned short i)          { entityId = i; }
+   int getID() const                           { return entityId; }
+   void setID(const int id)                    { entityId = id; }
 
    bool isState(const State tst) const         { return (tst == state); } // True if the model is this state ( INACTIVE, ACTIVE, etc. }
    State getState() const                      { return state; }          // Model's state  ( INACTIVE, ACTIVE, etc. }
@@ -78,12 +78,12 @@ public:
    void setCheckedFlag(const bool flg)         { checked = flg; }         // Sets the 'checked' flag
 
    // Initializes this model for player, 'p' (we're ACTIVE), and
-   // looks up the IG model type ID in the model table, 'otwModelTable'.
+   // looks up the IG model type ID in the model table, 'igModelTable'.
    // If the size of the IG model table is zero(0), then the model type ID is not set.
-   virtual void initialize(models::Player* const p, const TypeMapper** const otwModelTable = nullptr, const int numModels = 0);
+   void initialize(models::Player* const p, const TypeMapper** const igModelTable = nullptr, const int numModels = 0);
 
    // Clear out this model (we're INACTIVE)
-   virtual void clear();
+   void clear();
 
    std::array<CigiEntityCtrlV3*, CigiHost::NUM_BUFFERS> parentEC{};      // (entity_id)   Our main entity
    std::array<CigiEntityCtrlV3*, CigiHost::NUM_BUFFERS> trailEC{};       // (entity_id+1) Trails (missile, smoke, wake, etc.)
@@ -109,10 +109,10 @@ public:
    double effectsTimer{};
 
 private:
-   unsigned short entityId{};
+   int entityId{};
 
    // Sets the player object, p, associated with this model
-   virtual void setPlayer(models::Player* const p);
+   virtual void setPlayer(models::Player* const);
 
    models::Player* player{};       // This player
    State state{INACTIVE};          // Model Active flag
@@ -124,7 +124,7 @@ private:
    bool hotActive{};               // HOT entry is active
 
    // Model IDs  -- Comparisons in this order --
-   unsigned short playerID{};                         // Player ID
+   int playerID{};                                    // Player ID
    base::safe_ptr<const base::String> federateName;   // Federate name
 };
 

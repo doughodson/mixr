@@ -48,7 +48,7 @@ class HostSession : public base::Component
 public:
    HostSession();
 
-   virtual void processIgMessages();
+   void processIgMessages();
 
    bool initialize(CigiHost* const);
    bool isInitialized();

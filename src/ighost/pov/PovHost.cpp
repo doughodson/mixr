@@ -77,8 +77,7 @@ void PovHost::setPlayerList(base::PairStream* const newPlayerList)
 
 //------------------------------------------------------------------------------
 // Sets our ownship pointer; public version, which is usually called by
-// the Station class.  Derived versions of Otw can override this function
-// and control the switch of ownship using setOwnship0()
+// the Station class.
 //------------------------------------------------------------------------------
 void PovHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
 {
@@ -146,7 +145,7 @@ bool PovHost::initNetwork()
       }
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "OtwPC::initNetwork(): failure to find the network output handler (see slot 'netOutput')" << std::endl;
+         std::cerr << "PovHost::initNetwork(): failure to find the network output handler (see slot 'netOutput')" << std::endl;
       }
       ok = false;
    }

@@ -110,8 +110,8 @@ class StationNetPeriodicThread;
 //
 //       a: If the background thread rate, 'bgRate', is set greater than zero,
 //          then our updateData() will create a separate thread to call the
-//          simulation and otw models' updateData() functions, otherwise
-//       they're called from our updateData().
+//          simulation and IG models' updateData() functions, otherwise
+//          they're called from our updateData().
 //
 //       b: The interoperabilty networks (e.g., DIS, HLA, TENA, etc) are updated
 //          using the two functions, inputFrame() and outputFrame(), which are
@@ -123,7 +123,7 @@ class StationNetPeriodicThread;
 //          interoperability network functions, otherwise they're called from
 //          our updateData().
 //
-//    5) The time-critical and background functions for the OTW models are
+//    5) The time-critical and background functions for the IG host are
 //       called from the same thread, or threads, as the simulation model's
 //       functions are called from.
 //

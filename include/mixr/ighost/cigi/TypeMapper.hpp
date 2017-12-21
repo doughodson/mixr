@@ -58,7 +58,7 @@ public:
     TypeMapper();
 
     int getTypeId() const                                    { return typeId; }          // IG entity type ID number
-    virtual bool setTypeId(const int newType);                                           // Sets the IG entity type number
+    bool setTypeId(const int newType);                                                   // Sets the IG entity type number
 
     const base::Identifier* getRefFactoryName() const        { return refFactoryName; }  // Reference factory name
 
@@ -70,7 +70,7 @@ public:
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
     base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
-    int typeId {};                                            // IG entity type ID number
+    int typeId{};                                             // IG entity type ID number
 
 private:
     // slot table helper methods

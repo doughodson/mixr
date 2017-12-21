@@ -49,11 +49,11 @@ class IgThread;
 //    async                (Number)          True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel     (Number)          True to hide the ownship's model (default: true - ownship's model is not seen)
 //    ownshipModel         (Number)          Ownship's model ID
-//    mslTrailModel        (Number)          Missile Trail" effect model ID
-//    smokePlumeModel      (Number)          Smoke Plume" effect model ID
-//    airExplosionModel    (Number)          Air Explosion" effect model ID
-//    groundExplosionModel (Number)          Ground Explosion" effect model ID
-//    shipWakeModel        (Number)          Ship Wake" effect model ID
+//    mslTrailModel        (Number)          "Missile Trail" effect model ID
+//    smokePlumeModel      (Number)          "Smoke Plume" effect model ID
+//    airExplosionModel    (Number)          "Air Explosion" effect model ID
+//    groundExplosionModel (Number)          "Ground Explosion" effect model ID
+//    shipWakeModel        (Number)          "Ship Wake" effect model ID
 //
 // Note: In the async mode, the sendCigiData() function, which sends the CIGI
 // packets to the CigiCl handler, is called by our frameSync() function in the
@@ -61,7 +61,7 @@ class IgThread;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class CigiHost : public IgHost
+class CigiHost final: public IgHost
 {
    DECLARE_SUBCLASS(CigiHost, IgHost)
 
@@ -72,59 +72,59 @@ public:
    CigiHost();
 
    // is a LOS request pending?
-   virtual bool isLosRequestPending() const         { return (losReqId != losRespId); }
+   bool isLosRequestPending() const                 { return (losReqId != losRespId); }
 
    // is an elevation request pending?
-   virtual bool isElevationRequestPending() const   { return elevReqFlg; }
+   bool isElevationRequestPending() const           { return elevReqFlg; }
 
    bool isASyncMode() const                         { return asyncMode; }           // True if running in CIGI async mode
    bool isSyncMode() const                          { return !asyncMode; }          // True if running in CIGI sync mode
-   virtual bool setASyncMode(const bool f);                                         // Sets the CIGI async mode flag
+   bool setASyncMode(const bool);                                                   // Sets the CIGI async mode flag
 
    bool isOwnshipModelHidden() const                { return hideOwn; }             // True if the ownship's model is hidden
-   virtual bool setHideOwnshipModel(const bool f);                                  // Sets the hide ownship flag
+   bool setHideOwnshipModel(const bool);                                            // Sets the hide ownship flag
 
-   unsigned short getOwnshipModelID() const         { return cmtOwnship; }          // Ownship's model ID
-   virtual bool setOwnshipModelId(const unsigned short);                            // Ownship's model ID
+   int getOwnshipModelId() const                    { return cmtOwnship; }          // Ownship's model ID
+   void setOwnshipModelId(const int id)             { cmtOwnship = id;   }          // Ownship's model ID
 
-   unsigned short getMslTrailModelID() const        { return cmtMslTrail; }         // "Missile Trail" effect model ID
-   virtual bool setMslTrailModelId(const unsigned short);                           // "Missile Trail" effect model ID
+   int getMslTrailModelId() const                   { return cmtMslTrail; }         // "Missile Trail" effect model ID
+   void setMslTrailModelId(const int id)            { cmtMslTrail = id;   }         // "Missile Trail" effect model ID
 
-   unsigned short getSmokePlumeModelID() const      { return cmtSmokePlume; }       // "Smoke Plume" effect model ID
-   virtual bool setSmokePlumeModelId(const unsigned short);                         // "Smoke Plume" effect model ID
+   int getSmokePlumeModelId() const                 { return cmtSmokePlume; }       // "Smoke Plume" effect model ID
+   void setSmokePlumeModelId(const int id)          { cmtSmokePlume = id;   }       // "Smoke Plume" effect model ID
 
-   unsigned short getAirExplosionModelID() const    { return cmtAirExplosion; }     // "Air Explosion" effect model ID
-   virtual bool setAirExplosionModelId(const unsigned short);                       // "Air Explosion" effect model ID
+   int getAirExplosionModelId() const               { return cmtAirExplosion; }     // "Air Explosion" effect model ID
+   void setAirExplosionModelId(const int id)        { cmtAirExplosion = id;   }     // "Air Explosion" effect model ID
 
-   unsigned short getGroundExplosionModelID() const { return cmtGroundExplosion; }  // "Ground Explosion" effect model ID
-   virtual bool setGroundExplosionModelId(const unsigned short);                    // "Ground Explosion" effect model ID
+   int getGroundExplosionModelId() const            { return cmtGroundExplosion; }  // "Ground Explosion" effect model ID
+   void setGroundExplosionModelId(const int id)     { cmtGroundExplosion = id;   }  // "Ground Explosion" effect model ID
 
-   unsigned short getShipWakeModelID() const        { return cmtShipWake; }         // "Ship Wake" effect model ID
-   virtual bool setShipWakeModelId(const unsigned short);                           // "Ship Wake" effect model ID
+   int getShipWakeModelId() const                   { return cmtShipWake; }         // "Ship Wake" effect model ID
+   void setShipWakeModelId(const int id)            { cmtShipWake = id;   }         // "Ship Wake" effect model ID
 
    // IG callbacks
-   virtual void startOfFrame(const CigiSOFV3* const);
-   virtual void hatHotResp(const CigiHatHotRespV3* const);
-   virtual void losResp(const CigiLosRespV3* const);
-   virtual void collisionSegmentResp(const CigiCollDetSegRespV3* const);
-   virtual void sensorResp(const CigiSensorRespV3* const);
-   virtual void collisionVolumeResp(const CigiCollDetVolRespV3* const);
-   virtual void igResponse(const CigiIGMsgV3* const);
+   void startOfFrame(const CigiSOFV3* const);
+   void hatHotResp(const CigiHatHotRespV3* const);
+   void losResp(const CigiLosRespV3* const);
+   void collisionSegmentResp(const CigiCollDetSegRespV3* const);
+   void sensorResp(const CigiSensorRespV3* const);
+   void collisionVolumeResp(const CigiCollDetVolRespV3* const);
+   void igResponse(const CigiIGMsgV3* const);
 
    // send data to the cigi handler
-   virtual bool sendCigiData();
+   bool sendCigiData();
 
    HostSession* getHostSession()                         { return session; }
    const HostSession* getHostSession() const             { return session; }
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   void updateData(const double dt = 0.0) final;
+   void reset() final;
 
 protected:
    enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };
 
-   virtual bool updateOwnshipModel();          // update the ownship model; returns true if ok
-   virtual int updateModels();                 // update the other models; returns number of active models
+   bool updateOwnshipModel();          // update the ownship model; returns true if ok
+   int updateModels();                 // update the other models; returns number of active models
 
    // access functions
    CigiIGCtrlV3* getIgControlPacket()                                          { return igc; }
@@ -147,14 +147,14 @@ protected:
    bool isIgResetRequested() const             { return resetRequest; }
    void clearIgResetRequest()                  { resetRequest = false; }
 
-   unsigned short getNexLosId()                { return ++losReqId; }
+   int getNexLosId()                           { return ++losReqId; }
    bool isNewLosequested() const               { return newLosReq; }
    void losRequestSend();           // LOS request has been sent to the IG
 
    void elevationRequestSend();     // Elevation request has been sent to the IG
 
    // get Line of sight data from previous request
-   virtual bool getLineOfSightData(
+   bool getLineOfSightData(
       double* const lat,            // Point latitude         (deg)
       double* const lon,            // Point longitude        (deg)
       double* const alt,            // Point altitude         (m)
@@ -163,7 +163,7 @@ protected:
       );
 
    // issue a new light of sight request
-   virtual bool lineOfSightRequest(
+   bool lineOfSightRequest(
       const double lat,             // Source latitude         (deg)
       const double lon,             // Source longitude        (deg)
       const double alt,             // Source altitude         (m)
@@ -174,95 +174,94 @@ protected:
       );
 
    // set functions
-   virtual bool setViewControlPacket(CigiViewCtrlV3* const);
-   virtual bool setViewDefinitionPacket(CigiViewDefV3* const);
-   virtual bool setSensorControlPacket(CigiSensorCtrlV3* const);
+   void setViewControlPacket(CigiViewCtrlV3* const p)            { view = p;   }
+   void setViewDefinitionPacket(CigiViewDefV3* const p)          { fov = p;    }
+   void setSensorControlPacket(CigiSensorCtrlV3* const p)        { sensor = p; }
 
-   void sendOwnshipAndModels() override;       // Send state data for ownship and models
-   void sendElevationRequests() override;      // Sends terrain height requests
-   void recvElevations() override;             // Receives terrain height data
-   void frameSync() override;                  // Send frame sync (if any)
-   CigiModel* modelFactory() override;         // Create IgModel objects unique to interface
-   CigiModel* hotFactory() override;           // Create IgHot objects unique to interface
+   void sendOwnshipAndModels() final;       // Send state data for ownship and models
+   void sendElevationRequests() final;      // Sends terrain height requests
+   void recvElevations() final;             // Receives terrain height data
+   void frameSync() final;                  // Send frame sync (if any)
+   CigiModel* modelFactory() final;         // Create objects unique to interface
+   CigiModel* hotFactory() final;           // Create objects unique to interface
 
-   virtual bool setAirVehicleData(CigiModel* const m, const unsigned short entity, const models::AirVehicle* const p);
-   virtual bool setBuildingData(CigiModel* const m, const unsigned short entity, const models::Building* const p);
-   virtual bool setEffectData(CigiModel* const m, const unsigned short entity, const models::Effect* const p);
-   virtual bool setGndVehicleData(CigiModel* const m, const unsigned short entity, const models::GroundVehicle* const p);
-   virtual bool setLifeFormData(CigiModel* const m, const unsigned short entity, const models::LifeForm* const p);
-   virtual bool setMissileData(CigiModel* const m, const unsigned short entity, const models::Missile* const p);
-   virtual bool setShipData(CigiModel* const m, const unsigned short entity, const models::Ship* const p);
-   virtual bool setSpaceVehicleData(CigiModel* const m, const unsigned short entity, const models::SpaceVehicle* const p);
-   virtual bool setWeaponData(CigiModel* const m, const unsigned short entity, const models::AbstractWeapon* const p);
-
-   virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p);
+   bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const p);
+   bool setAirVehicleData(CigiModel* const m, const int entity, const models::AirVehicle* const);
+   bool setBuildingData(CigiModel* const m, const int entity, const models::Building* const);
+   bool setEffectData(CigiModel* const m, const int entity, const models::Effect* const);
+   bool setGndVehicleData(CigiModel* const m, const int entity, const models::GroundVehicle* const);
+   bool setLifeFormData(CigiModel* const m, const int entity, const models::LifeForm* const);
+   bool setMissileData(CigiModel* const m, const int entity, const models::Missile* const);
+   bool setShipData(CigiModel* const m, const int entity, const models::Ship* const);
+   bool setSpaceVehicleData(CigiModel* const m, const int entity, const models::SpaceVehicle* const);
+   bool setWeaponData(CigiModel* const m, const int entity, const models::AbstractWeapon* const);
 
 private:
    // creates a single task thread to process IG packets
    bool createProcessingThread();
    base::safe_ptr<IgThread> igThread;
 
-   base::safe_ptr<HostSession> session;        // networked host session
+   base::safe_ptr<HostSession> session;   // networked host session
 
    // CIGI init support
-   bool cigiInitialized{};                     // CIGI has been initialized
-   bool cigiInitFailed{};                      // CIGI initialization has failed
+   bool cigiInitialized{};                // CIGI has been initialized
+   bool cigiInitFailed{};                 // CIGI initialization has failed
 
-   bool asyncMode{};                           // Running in ASYNC mode if true
-   bool hideOwn{true};                         // Hide ownship model flag
-   bool resetRequest{true};                    // IG reset request
+   bool asyncMode{};                      // Running in ASYNC mode if true
+   bool hideOwn{true};                    // Hide ownship model flag
+   bool resetRequest{true};               // IG reset request
 
-   unsigned short entityIdCount{};             // Entity ID count
-   unsigned short elevReqIdCount{};            // Elevation request ID count
+   int entityIdCount{};                   // Entity ID count
+   int elevReqIdCount{};                  // Elevation request ID count
 
    // Terrain elevation request data
-   bool elevReqFlg {};                         // Elevation request flag
-   double elevReqTimer {};                     // Elevation request timer
+   bool elevReqFlg{};                     // Elevation request flag
+   double elevReqTimer{};                 // Elevation request timer
 
    // Line of sight (LOS) data
-   double losRespLat{};                        // LOS Response latitude intersection point (deg)
-   double losRespLon{};                        // LOS Response longitude intersection point (deg)
-   double losRespAlt{};                        // LOS Response altitude intersection point (m)
-   double losRespRange{};                      // LOS response range (m)
-   unsigned short losRespId{};                 // LOS Response ID
-   bool losRespDataValid{true};                // LOS response data is valid flag
-   unsigned short losReqId{};                  // LOS Request ID
-   bool newLosReq{true};                       // New LOS request flag
-   double losReqTimer{};                       // LOS request timer
+   double losRespLat{};                   // LOS Response latitude intersection point (deg)
+   double losRespLon{};                   // LOS Response longitude intersection point (deg)
+   double losRespAlt{};                   // LOS Response altitude intersection point (m)
+   double losRespRange{};                 // LOS response range (m)
+   int losRespId{};                       // LOS Response ID
+   bool losRespDataValid{true};           // LOS response data is valid flag
+   int losReqId{};                        // LOS Request ID
+   bool newLosReq{true};                  // New LOS request flag
+   double losReqTimer{};                  // LOS request timer
 
    // CIGI entity data buffers
-   int iw{NUM_BUFFERS};                        // Write buffer index
-   int iw0{NUM_BUFFERS};                       // Last write buffer index
-   int ir{NUM_BUFFERS};                        // Read index
+   int iw{NUM_BUFFERS};                   // Write buffer index
+   int iw0{NUM_BUFFERS};                  // Last write buffer index
+   int ir{NUM_BUFFERS};                   // Read index
 
    // messages
    std::array<CigiEntityCtrlV3*, NUM_BUFFERS> ownshipEC{}; // Ownship entity control
    std::array<CigiCompCtrlV3*, NUM_BUFFERS> ownshipCC{};   // ownship component control
-   CigiIGCtrlV3*     igc{};                    // IG control
-   CigiLosVectReqV3* los{};                    // LOS request
-   CigiViewCtrlV3*   view{};                   // View control (optional, set by derived classes)
-   CigiViewDefV3*    fov{};                    // FOV definition (optional, set by derived classes
-   CigiSensorCtrlV3* sensor{};                 // Sensor control
+   CigiIGCtrlV3*     igc{};               // IG control
+   CigiLosVectReqV3* los{};               // LOS request
+   CigiViewCtrlV3*   view{};              // View control (optional, set by derived classes)
+   CigiViewDefV3*    fov{};               // FOV definition (optional, set by derived classes
+   CigiSensorCtrlV3* sensor{};            // Sensor control
 
    // special model IDs
-   unsigned short cmtOwnship{302};             // Ownship's model ID
-   unsigned short cmtMslTrail{1100};           // "Missile Trail" effect model ID
-   unsigned short cmtSmokePlume{1101};         // "Smoke Plume" effect model ID
-   unsigned short cmtAirExplosion{1102};       // "Air Explosion" effect model ID
-   unsigned short cmtGroundExplosion{1103};    // "Ground Explosion" effect model ID
-   unsigned short cmtShipWake{1104};           // "Ship Wake" effect model ID
+   int cmtOwnship{302};                   // Ownship's model ID
+   int cmtMslTrail{1100};                 // "Missile Trail" effect model ID
+   int cmtSmokePlume{1101};               // "Smoke Plume" effect model ID
+   int cmtAirExplosion{1102};             // "Air Explosion" effect model ID
+   int cmtGroundExplosion{1103};          // "Ground Explosion" effect model ID
+   int cmtShipWake{1104};                 // "Ship Wake" effect model ID
 
 private:
    // slot table helper methods
    bool setSlotHostSession(HostSession* const);
    bool setSlotASyncMode(const base::Number* const);
    bool setSlotHideOwnshipModel(const base::Number* const);
-   bool setSlotOwnshipModel(const base::Number* const);
-   bool setSlotMslTrailModel(const base::Number* const);
-   bool setSlotSmokePlumeModel(const base::Number* const);
-   bool setSlotAirExplosionModel(const base::Number* const);
-   bool setSlotGroundExplosionModel(const base::Number* const);
-   bool setSlotShipWakeModel(const base::Number* const);
+   bool setSlotOwnshipModelId(const base::Number* const);
+   bool setSlotMslTrailModelId(const base::Number* const);
+   bool setSlotSmokePlumeModelId(const base::Number* const);
+   bool setSlotAirExplosionModelId(const base::Number* const);
+   bool setSlotGroundExplosionModelId(const base::Number* const);
+   bool setSlotShipWakeModelId(const base::Number* const);
 };
 
 }

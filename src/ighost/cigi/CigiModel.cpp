@@ -85,7 +85,7 @@ void CigiModel::setPlayer(models::Player* const p)
 }
 
 // initialize the model
-void CigiModel::initialize(models::Player* const p, const TypeMapper** const otwModelTable, const int numModels)
+void CigiModel::initialize(models::Player* const p, const TypeMapper** const igModelTable, const int numModels)
 {
    isGroundPlayer = p->isClassType(typeid(models::GroundVehicle));
 
@@ -97,14 +97,14 @@ void CigiModel::initialize(models::Player* const p, const TypeMapper** const otw
    checked = true;
 
    // If the IG model table was provided, then look for a match.
-   if (otwModelTable != nullptr && numModels > 0) {
+   if (igModelTable != nullptr && numModels > 0) {
       bool found{};
       for (int i = 0; i < numModels && !found; i++) {
-         const TypeMapper* otwTypeMapper{otwModelTable[i]};
-         if (otwTypeMapper != nullptr) {
-            if (otwTypeMapper->isMatchingPlayerType(p)) {
-               // We found a match for our player in the OTW model table!
-               typeMapper = otwTypeMapper;
+         const TypeMapper* igTypeMapper{igModelTable[i]};
+         if (igTypeMapper != nullptr) {
+            if (igTypeMapper->isMatchingPlayerType(p)) {
+               // We found a match for our player in the IG model table!
+               typeMapper = igTypeMapper;
                found = true;
             }
          }
