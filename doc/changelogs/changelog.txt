@@ -11,27 +11,25 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Herb Sutter and Andrei Alexandrescu.  We also cannot dismiss high quality answers
   posted by folks on Stack Overflow and even the consolidated treasure trove of design
   practices espoused by Microsoft in their "Framework Design Guidelines for .NET" book.
-
   This book in many ways rolls up and integrates guidelines in a nice way.  Of course,
   some of the changes are a result of dwelling on these issues or topics for probably
-  unreasonable amounts of time, and equally, how they might be applied to the MIXR
-  code base.
+  unreasonable amounts of time, and equally, how they might be applied in a systematic
+  way over time to improve the MIXR code base.
 
 - Renamed user interface directory from 'gui' to 'ui' as it's more general.
 
 - Removed 'serialize()' method from base Object.  This method is no longer needed
   and was rarely used, so all functionality associated with it has been removed.
-
-  As a result, in user code, remove any 'serialize()' methods you might have
+  As a consequence, in user code, remove any 'serialize()' methods you might have
   defined for your classes.  If you did not define any such methods, you probably
   used the 'EMPTY_SERIALIZE()' macro to satisfy the dependency to define the
   method itself. Remove this macro from your mixr-based application code.
 
 - Prefixed all 'size_t' types with std (e.g., std::size_t) to clearly indicate
-  that this type is defined in the std library (it is not defined in the core
-  language).  This has no impact on API. This was done to improve code base to
-  adopt explicit C++ notation as opposed to using global 'C' types (i.e., 'size_t'
-  without namespace qualifier).
+  that this type is defined in the std library (it is not defined as part of the core
+  C++ language).  This has no impact on API. This was done to improve code base by
+  adopting explicit C++ notation as opposed to using global 'C' types (i.e., 'size_t'
+  without a namespace qualifier).
 
 - Using uniform/brace initialization syntax for types throughout code base.
   This notation forces more explicit initialization of types, and avoids
@@ -43,6 +41,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   but yielded a few interesting cases to address.
 
 - Topic: use of 'unsigned int', 'unsigned short', etc. verses plain old 'int'.
+
   Throughout the code base, use of the 'unsigned' primitive types prevails. This
   is because, in the old days, using, what was considered the most
   appropriate type for a particular programming problem, seemed rather
@@ -132,19 +131,19 @@ General framework-wide changes/improvements/trends/philosophy/goals
   used as a foundation for a class hierarchy - in fact, quite the oppose, it's useful
   because it defines a set of functionality (methods names with signatures) that maybe
   implemented in completely different hierarchies.  Within MIXR, we don't have any
-  interfaces defined in this sense.  Of course, MIXR is highly organized as a single
-  hierarchy rooted by Object.
+  interfaces defined in this sense.  Of course, MIXR is highly organized into a single
+  rooted hierarchy by Object.
 
   Abstract: C++ does officially acknowledge the concept of an abstract class.
   It's simply a class that is not completely defined, therefore object instances
   cannot be created. Given that, an abstract class often defines something, at least
   a set of methods, and maybe a high level algorithm that partially defines how
-  it works - hopefully documented.  These high level algorithms define the blueprint
+  it works; hopefully documented.  These high level algorithms define the blueprint
   for the design of what the class is suppose to do, and to a limited extent, how it
   does it. Particular aspects of those algorithms often leave the door open for
   subclasses to define or change (i.e., tailor). In some cases, those doors are
   wide open for redefinition, meaning, absolutely no high level algorithm, within
-  the abstract class uses it.
+  the class is defined.
 
   The means to tailor how a class operates include defining so-called 'extension
   points' or 'hook' methods.  The difference between 'extension points' and
@@ -159,10 +158,11 @@ General framework-wide changes/improvements/trends/philosophy/goals
   methods), and in some cases, eliminate them all together (see the Non-Virtual
   Interface idiom and the Template method design pattern for more information).
   Within MIXR, we are starting to define more explicit standalone abstract classes,
-  as they are often the foundation (and principle value) of a framework or platform.
+  as they are often the foundation (and principle value) that the framework
+  or platform provides.
 
-  Abstract classes do in fact define a public interface - it just adds details
-  beyond Interface classes as to how they function.  They are the foundation for
+  Abstract classes do in fact define a public interface - they just add detail
+  beyond what a typical Interface class provides.  They are the foundation for
   class hierarchies.  Given that, within MIXR, we are striving to present more
   non-virtual methods within their public interface.
 
@@ -187,9 +187,12 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Concrete: These classes are maybe the easiest to digest - they complete,
   define or fill in remaining bits of implementation functionality
   needed to create real working instances. MIXR obviously includes many of these
-  classes.
+  classes.  Some argue that all concrete class should be marked 'final'
+  as they are complete and help resolve other issues.  For now, this is not
+  the case in MIXR code, we have concrete classes that are effectively
+  serving as 'base' classes through extension.
 
-  So given the following, why does this matter?
+  So given all this, why does this matter?
 
   In a nutshell, code clarity, and a more clear separation of 'interface'
   from 'implementation.'  One goal of frameworks is to define relationships
@@ -234,7 +237,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   define methods (with names that indicates what they are doing) to be
   used by the concretes.  Basically what is happening is all the classes
   between the abstracts and concretes define implementation code - there
-  role as abstract 'base' class is to define useful common code for the
+  role as abstract 'base' classes is to define useful common code for the
   concretes.  This allows the concrete classes to clearly express what they
   do.
 
@@ -287,11 +290,11 @@ base library (mixr_base)
    -- Renamed 'concurrent' directory to 'threads' and removed all thread pool
       related classes (ThreadPool, ThreadPoolManager and ThreadPoolManagerThread)
       as they were not being used.  Some work done to streamline the existing
-      classes to eventually use C++11 thread functionality.
+      classes to eventually use C++11 std library thread functionality.
 
       Note that the 'create()' method has been renamed to 'start(const double
-      priority)' to better indicate what is happening (i.e., thread is starting),
-      with a given execution priority.  Threads are created via 'new Thread()',
+      priority)' to better indicate what is happening (i.e., start a thread
+      with a given execution priority).  Threads are created via 'new Thread()',
       after that, they can be started.
 
       Specific thread classes defined in ig_host_cigi, linkage and simulation
@@ -300,24 +303,24 @@ base library (mixr_base)
 
    -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
       to more clearly convey their purpose; namely a structure that defines the
-      linkage system. It should also be noted that these classes are abstract, they
-      are now much more oriented at defining interfaces, and much less about
+      architecture of the I/O linkage system. It should also be noted that these
+	  classes are abstract and are oriented at defining interfaces and much less about
       how to do it (i.e., no domain implementation code).  All of these classes
-      are now organized within a subdirectory called 'base/concepts/linkage'.
+      are now grouped in the subdirectory called 'base/concepts/linkage'.
 
-      These abstract classes have been simplified to reduce complexity, yet retain
-      flexibility.  Simplification has come in the form of rebaselining several of them
+      Classes have been simplified to reduce complexity, yet retain flexibility.
+	  Simplification has come in the form of rebaselining several of them
       to be Objects with clear interfaces as opposed to Components which presents
       a much more complex interface.
 
-      See linkage library section for more info.
+      See linkage library documentation in this changelog for more info.
 
    -- Removed all random number generation-oriented classes which included the
       Mersenne Twister algorithm and distribution classes.  C++11 includes
       all of this capability and more as part of the standard library.
 
    -- Moved all classes that represent numeric types into 'base/numeric'
-      This included the Boolean, Complex, Float, Integer, Number and Operator
+      This includes Boolean, Complex, Float, Integer, Number and Operator
       classes.
 
    -- Moved all color classes into 'base/colors'.  This included Cie, Cmy, Color,
@@ -335,7 +338,8 @@ base library (mixr_base)
 
    -- All the classes defined in Tables and Functions within the 'functors' subfolder
       have been separated into individual files.  The depreciated header files
-      Functions.hpp and Tables.hpp have been removed.
+      Functions.hpp and Tables.hpp have been removed.  This folder needs a better
+	  name, although it's not clear what it should be.
 
    LatLon class
       1) Limited scope of 'Dir' enum to 'enum class'. This constrains the scope of
@@ -367,29 +371,28 @@ Devices, I/O, controllers libraries
 linkage library (mixr_linkage)
 
    -- This library is not new - it was previously named 'iodevice'.  Renaming was
-      done because it more correctly names what this library is - an implementation
-      of a flexible I/O linkage system to read and write to device(s), transform
-      their value and map them to application defined data structures.  Many
-      aspects of this library have been updated to retain flexibility but
-      reduce complexity and ease understandability.
+      done because it more correctly indicate what this library includes - an
+	  implementation of a flexible I/O linkage system to read and write to
+	  device(s), transform their value and map them to application defined data
+	  structures.  Many aspects of this library have been updated to simpily code
+	  base, reduce complexity and ease understandability.
 
-   -- All 'AbstractIoAdapter'-based classes have been moved into an 'adapters'
+   -- All 'AbstractAdapter'-based classes have been moved into an 'adapters'
       subdirectory to improve clarity.
 
    -- 'IoData' no longer includes methods to process the data itself and is not
-      associated with networking - IoData represents data, nothing more.
+      associated with networking - it stores data, nothing more.
 
-   -- 'IoHander' is now abstract and serves as a 'base' class given definitions
+   -- 'IoHander' is now abstract and serves as a base class given definitions
       above, from which concretes are created (see examples).  It should be
       noted how functionality is used -- inheritance related virtual method
-      call chains have been eliminated, concretes just call protected methods
-      to perform the functions they need.
+      call chains have been eliminated.
 
    -- Added MockDevice class to be used as a container for signal generators.
       This object serves as a source of input signals from which no real
-      device exists - in other words, it's a signal generator.
+      physical device exists - in other words, it's a signal generator.
 
-   -- The testIoHandler example has also been renamed to testLinkage and has
+   -- The 'testIoHandler' example has also been renamed to 'testLinkage' and has
       been significantly updated to use more modern C++ available features
       such as std::string and std::array<> where it makes sense.
 
@@ -450,23 +453,23 @@ Image generation oriented libraries
    functionality of 'otw' library has been broken out into 2 specific IG host
    interfaces.
 
--- Moved all code common to providing otw capabilities into cigi library.
+-- Moved all code common to providing IG capabilities into cigi library.
    Explicitly removed specific implementations for CIGI and the simple so-called
-   'PC' visual driver, which was renamed to the 'pov' library
+   'PC' host driver, which was renamed to 'pov'.
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_cigi)
 
 -- Moved all code common specific to implementing a CIGI driver to this new
-   library.
+   library.  It has been updated.
    
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_pov)
 
--- This library is what was named the "PC" visual driver.  It has been simplified,
-   and improved to some extent, but is basically defines the same functionality.
+-- This library is what used to be named the 'PC' host driver.  It has been simplified,
+   and improved to some extent, but basically defines the same functionality.
 
 --------------------------------------------------------------------------------
 

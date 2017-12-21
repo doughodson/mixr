@@ -40,9 +40,6 @@ public:
 
    bool terminate() override;
 
-   // user defined work function
-   private: virtual unsigned long userFunc() =0;
-
 protected:
    void waitForStart();
    void signalCompleted();
@@ -50,10 +47,13 @@ protected:
    bool configThread() override;
 
 private:
+   unsigned long mainThreadFunc() final;
+
+   // user defined work function
+   virtual unsigned long userFunc() =0;
+
    bool createSignals();
    void closeSignals();
-
-   unsigned long mainThreadFunc() final;
 
    // Implementation dependent
    void* startSig {};      // Start signal

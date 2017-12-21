@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/Thread.hpp"
+#include "mixr/base/threads/OneShotThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
@@ -8,14 +8,14 @@
 namespace mixr {
 namespace base {
 
-Thread::Thread(Component* const p) : AbstractThread(p)
+OneShotThread::OneShotThread(Component* const p) : AbstractThread(p)
 {
 }
 
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long Thread::mainThreadFunc()
+unsigned long OneShotThread::mainThreadFunc()
 {
    unsigned long rtn {};
 
@@ -23,7 +23,7 @@ unsigned long Thread::mainThreadFunc()
    configThread();
 
    if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
-      std::cout << "Thread (" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
+      std::cout << "OneShotThread (" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
    }
 
    // Call the user function only once

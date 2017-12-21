@@ -31,13 +31,6 @@ OBJS =  \
 	concepts/linkage/AbstractIoData.o \
 	concepts/linkage/AbstractIoDevice.o \
 	concepts/linkage/AbstractIoHandler.o \
-	threads/platform/AbstractThread_linux.o \
-	threads/platform/PeriodicThread_linux.o \
-	threads/platform/SyncThread_linux.o \
-	threads/AbstractThread.o \
-	threads/PeriodicThread.o \
-	threads/SyncThread.o \
-	threads/Thread.o \
 	edl_parser/EdlParser.o \
 	edl_parser/EdlScanner.o \
 	functors/FStorage.o \
@@ -75,6 +68,13 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
+	threads/platform/AbstractThread_linux.o \
+	threads/platform/PeriodicThread_linux.o \
+	threads/platform/SyncThread_linux.o \
+	threads/AbstractThread.o \
+	threads/OneShotThread.o \
+	threads/PeriodicThread.o \
+	threads/SyncThread.o \
 	ubf/AbstractAction.o \
 	ubf/AbstractBehavior.o \
 	ubf/AbstractState.o \
