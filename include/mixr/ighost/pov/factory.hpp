@@ -1,12 +1,12 @@
 
-#ifndef __mixr_ighost_viewpoint_factory_H__
-#define __mixr_ighost_viewpoint_factory_H__
+#ifndef __mixr_ighost_pov_factory_H__
+#define __mixr_ighost_pov_factory_H__
 
 #include <string>
 
 namespace mixr {
 namespace base { class Object; }
-namespace viewpoint {
+namespace pov {
 base::Object* factory(const std::string&);
 }
 }

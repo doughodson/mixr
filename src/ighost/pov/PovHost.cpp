@@ -1,7 +1,7 @@
 
-#include "mixr/ighost/viewpoint/Viewpoint.hpp"
+#include "mixr/ighost/pov/PovHost.hpp"
 
-#include "mixr/ighost/viewpoint/EntityState.hpp"
+#include "mixr/ighost/pov/EntityState.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -12,24 +12,24 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace viewpoint {
+namespace pov {
 
-IMPLEMENT_SUBCLASS(Viewpoint, "Viewpoint")
+IMPLEMENT_SUBCLASS(PovHost, "PovHost")
 
-BEGIN_SLOTTABLE(Viewpoint)
+BEGIN_SLOTTABLE(PovHost)
    "netOutput",        // 1) Network output handler
-END_SLOTTABLE(Viewpoint)
+END_SLOTTABLE(PovHost)
 
-BEGIN_SLOT_MAP(Viewpoint)
+BEGIN_SLOT_MAP(PovHost)
    ON_SLOT(1, setSlotNetOutput, base::NetHandler)
 END_SLOT_MAP()
 
-Viewpoint::Viewpoint()
+PovHost::PovHost()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Viewpoint::copyData(const Viewpoint& org, const bool cc)
+void PovHost::copyData(const PovHost& org, const bool cc)
 {
    BaseClass::copyData(org);
 
@@ -42,7 +42,7 @@ void Viewpoint::copyData(const Viewpoint& org, const bool cc)
    scnt = 0;
 }
 
-void Viewpoint::deleteData()
+void PovHost::deleteData()
 {
    setOwnship(nullptr);
    setPlayerList(nullptr);
@@ -55,7 +55,7 @@ void Viewpoint::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset the visual system interface
 //------------------------------------------------------------------------------
-void Viewpoint::reset()
+void PovHost::reset()
 {
    BaseClass::reset();
    setPlayerList(nullptr);
@@ -64,7 +64,7 @@ void Viewpoint::reset()
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void Viewpoint::setPlayerList(base::PairStream* const newPlayerList)
+void PovHost::setPlayerList(base::PairStream* const newPlayerList)
 {
     // Nothing's changed, just return
     if (playerList == newPlayerList) return;
@@ -80,7 +80,7 @@ void Viewpoint::setPlayerList(base::PairStream* const newPlayerList)
 // the Station class.  Derived versions of Otw can override this function
 // and control the switch of ownship using setOwnship0()
 //------------------------------------------------------------------------------
-void Viewpoint::setOwnship(simulation::AbstractPlayer* const newOwnship)
+void PovHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
 {
    const auto player = dynamic_cast<models::Player*>(newOwnship);
    if (player != nullptr) {
@@ -91,7 +91,7 @@ void Viewpoint::setOwnship(simulation::AbstractPlayer* const newOwnship)
 //------------------------------------------------------------------------------
 // Sets our ownship player (for derived class control)
 //------------------------------------------------------------------------------
-void Viewpoint::setOwnship0(models::Player* const newOwnship)
+void PovHost::setOwnship0(models::Player* const newOwnship)
 {
     // Nothing's changed, just return
     if (ownship == newOwnship) return;
@@ -105,7 +105,7 @@ void Viewpoint::setOwnship0(models::Player* const newOwnship)
 //------------------------------------------------------------------------------
 // Send state data for ownship to IG
 //------------------------------------------------------------------------------
-void Viewpoint::updateIg(const double)
+void PovHost::updateIg(const double)
 {
    frameSync();
 
@@ -119,7 +119,7 @@ void Viewpoint::updateIg(const double)
 //------------------------------------------------------------------------------
 // triggers the frame update
 //------------------------------------------------------------------------------
-void Viewpoint::frameSync()
+void PovHost::frameSync()
 {
    // initialization
    if (!isNetworkInitialized() && !didInitializationFail()) {
@@ -133,7 +133,7 @@ void Viewpoint::frameSync()
    }
 }
 
-bool Viewpoint::initNetwork()
+bool PovHost::initNetwork()
 {
    bool ok{true};
 
@@ -154,7 +154,7 @@ bool Viewpoint::initNetwork()
    return ok;
 }
 
-void Viewpoint::sendData()
+void PovHost::sendData()
 {
    //const double DEG2MR = (PI / 180.0f * 1000.0f);
 
@@ -220,7 +220,7 @@ void Viewpoint::sendData()
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool Viewpoint::setSlotNetOutput(base::NetHandler* const msg)
+bool PovHost::setSlotNetOutput(base::NetHandler* const msg)
 {
    netOutput = msg;
    return true;

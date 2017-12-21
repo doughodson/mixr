@@ -452,7 +452,7 @@ Image generation oriented libraries
 
 -- Moved all code common to providing otw capabilities into cigi library.
    Explicitly removed specific implementations for CIGI and the simple so-called
-   'PC' visual driver, which was renamed to the "viewpoint" library
+   'PC' visual driver, which was renamed to the 'pov' library
 
 --------------------------------------------------------------------------------
 ig library (mixr_ig_cigi)
@@ -463,7 +463,7 @@ ig library (mixr_ig_cigi)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-ig library (mixr_ig_viewpoint)
+ig library (mixr_ig_pov)
 
 -- This library is what was named the "PC" visual driver.  It has been simplified,
    and improved to some extent, but is basically defines the same functionality.

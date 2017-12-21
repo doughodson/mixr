@@ -1,23 +1,23 @@
 
-#ifndef __mixr_ighost_viewpoint_Viewpoint_H__
-#define __mixr_ighost_viewpoint_Viewpoint_H__
+#ifndef __mixr_ighost_pov_PovHost_H__
+#define __mixr_ighost_pov_PovHost_H__
 
 #include "mixr/simulation/AbstractIgHost.hpp"
 
 namespace mixr {
 namespace base { class NetHandler; }
 namespace models { class Player; }
-namespace viewpoint {
+namespace pov {
 
 //------------------------------------------------------------------------------
-// Class: Viewpoint
+// Class: PovHost
 //------------------------------------------------------------------------------
-class Viewpoint : public simulation::AbstractIgHost
+class PovHost : public simulation::AbstractIgHost
 {
-   DECLARE_SUBCLASS(Viewpoint, simulation::AbstractIgHost)
+   DECLARE_SUBCLASS(PovHost, simulation::AbstractIgHost)
 
 public:
-   Viewpoint();
+   PovHost();
 
    const models::Player* getOwnship() const              { return ownship; }        // Our ownship -- the player that we're following
 

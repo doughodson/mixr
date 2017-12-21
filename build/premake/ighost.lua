@@ -13,10 +13,10 @@
       targetname "ighost_cigi"
 
    -- Simple IG interface library
-   project "ighost_viewpoint"
+   project "ighost_pov"
       files {
-         "../../include/mixr/ighost/viewpoint/**.h*",
-         "../../src/ighost/viewpoint/**.h**",
-         "../../src/ighost/viewpoint/**.cpp"
+         "../../include/mixr/ighost/pov/**.h*",
+         "../../src/ighost/pov/**.h**",
+         "../../src/ighost/pov/**.cpp"
       }
-      targetname "ighost_viewpoint"
+      targetname "ighost_pov"

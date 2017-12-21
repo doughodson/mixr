@@ -1,10 +1,10 @@
 #
 include ../../makedefs
 
-LIB = $(MIXR_LIB_DIR)/libmixr_ighost_viewpoint.a
+LIB = $(MIXR_LIB_DIR)/libmixr_ighost_pov.a
 
 OBJS =  \
-	Viewpoint.o \
+	PovHost.o \
 	factory.o
 
 .PHONY: all clean
