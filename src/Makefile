@@ -17,7 +17,7 @@ include makedefs
 # map_rpf           : -
 # models            : JSBSim
 # ighost_cigi       : CIGICL 3.x
-# ighost_viewpoint  : -
+# ighost_pov        : -
 # recorder          : Google protocol buffers
 # simulation        : -
 # terrain           : -
@@ -53,7 +53,7 @@ PROJECTS += interop/rprfom
 # Image generator host interfaces
 #
 PROJECTS += ighost/cigi
-PROJECTS += ighost/viewpoint
+PROJECTS += ighost/pov
 
 #
 # Map format reader libraries
