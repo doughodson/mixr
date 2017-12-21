@@ -30,7 +30,7 @@ class Sphere : public graphics::Circle
 public:
     Sphere();
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
     virtual bool setStacks(const int x)       { stacks = x; return true; }
     int getStacks()                           { return stacks; }
@@ -57,7 +57,7 @@ class Cylinder : public Sphere
     DECLARE_SUBCLASS(Cylinder, Sphere)
 public:
     Cylinder();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
     virtual bool setTopRadius(const double x)   { topRadius = x; return true; }
     virtual bool setHeight(const double x)      { height = x; return true; }
@@ -86,7 +86,7 @@ class Cone : public Cylinder
     DECLARE_SUBCLASS(Cone, Cylinder)
 public:
     Cone();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ class Cube : public graphics::Circle
     DECLARE_SUBCLASS(Cube, graphics::Circle)
 public:
     Cube();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
     virtual bool setSize(const double x)   { size = x; return true; }
     double getSize()                       { return size; }
@@ -132,7 +132,7 @@ class Torus : public Sphere
     DECLARE_SUBCLASS(Torus, Sphere)
 public:
     Torus();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
     virtual bool setOuterRadius(const double x)    { oRadius = x; return true; }
     double getOuterRadius()                        { return oRadius; }
@@ -158,7 +158,7 @@ class Dodecahedron : public graphics::Circle
     DECLARE_SUBCLASS(Dodecahedron, graphics::Circle)
 public:
     Dodecahedron();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ class Tetrahedron : public graphics::Circle
     DECLARE_SUBCLASS(Tetrahedron, graphics::Circle)
 public:
     Tetrahedron();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ class Icosahedron : public graphics::Circle
     DECLARE_SUBCLASS(Icosahedron, graphics::Circle)
 public:
     Icosahedron();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ class Octahedron : public graphics::Circle
     DECLARE_SUBCLASS(Octahedron, graphics::Circle)
 public:
     Octahedron();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -218,7 +218,7 @@ class Teapot : public Cube
     DECLARE_SUBCLASS(Teapot, Cube)
 public:
     Teapot();
-    virtual void drawFunc() override;
+    void drawFunc() override;
 };
 
 }

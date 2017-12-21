@@ -123,15 +123,15 @@ public:
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
     virtual void setPosition(const double x, const double y, const double z);
-    virtual void setElevation(const double x);
-    virtual void setPosition(const base::Vec3d& newPos);
-    virtual void setLatitude(const double v);
-    virtual void setLongitude(const double v);
+    virtual void setElevation(const double);
+    virtual void setPosition(const base::Vec3d&);
+    virtual void setLatitude(const double);
+    virtual void setLongitude(const double);
     virtual void setPTA(const double v)                 { pta = v; }
     virtual void setSCA(const double v)                 { sca = v; }
-    virtual void setDescription(const base::String* const d);
-    virtual void setCmdAltitude(const double v);
-    virtual void setCmdAirspeedKts(const double v);
+    virtual void setDescription(const base::String* const);
+    virtual void setCmdAltitude(const double);
+    virtual void setCmdAirspeedKts(const double);
 
     // Set nav data
     virtual void setTrueBrgDeg(const double v)           { tbrg = v; }
@@ -161,7 +161,7 @@ public:
    virtual bool compute(const Navigation* const nav, const Steerpoint* const from = nullptr);
    virtual void clearNavData();
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
     virtual void processComponents(                 // Process our subcomponent list (which should be other steerpoints)
@@ -173,43 +173,43 @@ protected:
 
 private:
     // Steerpoint parameters
-    double      latitude {};          // latitude
-    double      longitude {};         // Longitude
-    double      elevation {};         // Elevation                (m)
+    double      latitude{};           // latitude
+    double      longitude{};          // Longitude
+    double      elevation{};          // Elevation                (m)
     base::Vec3d posVec;               // Position vector          (m)           [ x, y, z ] NED
-    StptType    stptType {DEST};      // Steerpoint type
-    double      pta {};               // Planned Time of Arrival  (sec)
-    double      sca {};               // Safe Clearance Alt       (ft)
-    double      magvar {};            // Mag Var                  (degs)
+    StptType    stptType{DEST};       // Steerpoint type
+    double      pta{};                // Planned Time of Arrival  (sec)
+    double      sca{};                // Safe Clearance Alt       (ft)
+    double      magvar{};             // Mag Var                  (degs)
     base::safe_ptr<const base::String> description; // Description
-    bool        needPosVec {true};    // Request calucaltion of 'posVec' from Lat/Lon
-    bool        needLL {true};        // Request calucaltion of Lat/Lon from 'posVec'
-    double      cmdAlt {};            // Commanded Altitude       (m)
-    bool        haveCmdAlt {};        // Have commanded altitude
-    double      cmdAirspeed {};       // Commanded Airspeed       (kts)
-    bool        haveCmdAs {};         // Have commanded airspeed
+    bool        needPosVec{true};     // Request calucaltion of 'posVec' from Lat/Lon
+    bool        needLL{true};         // Request calucaltion of Lat/Lon from 'posVec'
+    double      cmdAlt{};             // Commanded Altitude       (m)
+    bool        haveCmdAlt{};         // Have commanded altitude
+    double      cmdAirspeed{};        // Commanded Airspeed       (kts)
+    bool        haveCmdAs{};          // Have commanded airspeed
     base::safe_ptr<base::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
     base::safe_ptr<Action> action;    // Action to be performed at this steerpoint
 
     // Initial (reset) data
-    double      initLatitude {};      // latitude
-    double      initLongitude {};     // Longitude
+    double      initLatitude{};       // latitude
+    double      initLongitude{};      // Longitude
     base::Vec3d  initPosVec;          // Init Position vector (m)           [ x, y, z ] NED
-    double      initMagVar {};        // Mag Var entered for this point  (deg)
-    bool        haveInitLat {};       // Have initial latitude
-    bool        haveInitLon {};       // Have initial longitude
-    bool        haveInitPos {};       // Have initial pos vector
-    bool        haveInitMagVar {};    // Have initial mag var
-    double      initElev {};          // Elevation                  (m)
-    bool        haveInitElev {};      // Have initial elevation
-    double      initCmdAlt {};        // Initial commanded altitude (m)
-    bool        haveInitCmdAlt {};    // Have initial cmd altitude
-    double      initCmdAirspeed {};   // Initial commanded airspeed (kts)
-    bool        haveInitCmdAs {};     // Have commanded airspeed
+    double      initMagVar{};         // Mag Var entered for this point  (deg)
+    bool        haveInitLat{};        // Have initial latitude
+    bool        haveInitLon{};        // Have initial longitude
+    bool        haveInitPos{};        // Have initial pos vector
+    bool        haveInitMagVar{};     // Have initial mag var
+    double      initElev{};           // Elevation                  (m)
+    bool        haveInitElev{};       // Have initial elevation
+    double      initCmdAlt{};         // Initial commanded altitude (m)
+    bool        haveInitCmdAlt{};     // Have initial cmd altitude
+    double      initCmdAirspeed{};    // Initial commanded airspeed (kts)
+    bool        haveInitCmdAs{};      // Have commanded airspeed
     base::safe_ptr<const base::String> initNextStptName; // Name of the inital "next" steerpoint
-    int         initNextStptIdx {};   // Index of the initial "next" steerpoint
+    int         initNextStptIdx{};    // Index of the initial "next" steerpoint
 
     // Computed data
     double tbrg {};           // True bearing direct-to point (deg)
@@ -227,8 +227,8 @@ private:
     double ete {};            // Est Time Enroute         (sec)
     double eta {};            // Est Time of Arrival (UTC)(sec)
     double elt {};            // Early/Late time          (sec)
-    bool   scaWarn {};        // Safe clearance Alt warning flag
-    bool   navDataValid {};   // Nav data is valid
+    bool scaWarn {};          // Safe clearance Alt warning flag
+    bool navDataValid {};     // Nav data is valid
 
 private:
    // slot table helper methods

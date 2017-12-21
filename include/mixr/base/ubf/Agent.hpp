@@ -38,8 +38,8 @@ class Agent : public base::Component
 public:
    Agent();
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
    // generic controller
@@ -57,8 +57,8 @@ protected:
    void setActor(base::Component* const myActor);
 
 private:
-   AbstractBehavior* behavior {};
-   AbstractState* state {};
+   AbstractBehavior* behavior{};
+   AbstractState* state{};
    safe_ptr<base::Component> myActor;
 
 private:
@@ -86,7 +86,7 @@ class AgentTC : public Agent
 public:
    AgentTC();
 
-   virtual void updateTC(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
 };
 
 }

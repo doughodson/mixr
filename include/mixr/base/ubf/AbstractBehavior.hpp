@@ -32,19 +32,19 @@ public:
    virtual AbstractAction* genAction(const AbstractState* const state, const double dt) = 0;
 
 protected:
-   unsigned int getVote() const;
-   virtual void setVote(const unsigned int x);
+   int getVote() const;
+   virtual void setVote(const int x);
 
 private:
-   unsigned int vote {};
+   int vote {};
 
 private:
    // slot table helper methods
    bool setSlotVote(const base::Number* const);
 };
 
-inline void AbstractBehavior::setVote(const unsigned int x)    { vote = x; }
-inline unsigned int AbstractBehavior::getVote() const          { return vote; }
+inline void AbstractBehavior::setVote(const int x)    { vote = x; }
+inline int AbstractBehavior::getVote() const          { return vote; }
 
 }
 }

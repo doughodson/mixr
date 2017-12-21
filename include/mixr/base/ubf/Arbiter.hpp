@@ -33,7 +33,7 @@ class Arbiter : public AbstractBehavior
 public:
    Arbiter();
 
-   virtual AbstractAction* genAction(const AbstractState* const state, const double dt) override;
+   AbstractAction* genAction(const AbstractState* const state, const double dt) override;
 
 protected:
    base::List* getBehaviors();

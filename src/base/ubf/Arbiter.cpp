@@ -75,7 +75,7 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
 AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
 {
    AbstractAction* complexAction{};
-   unsigned int maxVote{};
+   int maxVote{};
 
    // process entire action set
    base::List::Item* item{actionSet->getFirstItem()};

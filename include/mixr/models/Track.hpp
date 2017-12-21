@@ -293,7 +293,7 @@ public:
    bool isMissileWarning() const                   { return mslWarn; }
    virtual bool setMissileWarning(const bool);
 
-   virtual void clear() override;
+   void clear() override;
 
    virtual bool setLastEmission(const Emission* const);
 
@@ -320,13 +320,13 @@ public:
    int getNumSignals() const                                               { return nSig; }
    const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
    virtual bool setSignal(const double snDbl, const IrQueryMsg* const);
-   virtual bool setPosition(const base::Vec3d&) override;
+   bool setPosition(const base::Vec3d&) override;
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                                           { return mslWarn; }
    virtual bool setMissileWarning(const bool);
 
-   virtual void clear() override;
+   void clear() override;
 
 //protected:
    virtual bool setLastQuery(const IrQueryMsg* const);

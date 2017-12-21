@@ -1315,8 +1315,8 @@ public:
    NtmOutputNodeStd(const models::Player* const p, const char* const formName);
 
    // NetIO::NtmOutputNode class functions
-   virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const override;
-   virtual bool add2OurLists(Ntm* const ntm) override;
+   const Ntm* findNetworkTypeMapper(const models::Player* const p) const override;
+   bool add2OurLists(Ntm* const ntm) override;
 
 private:
    bool checkAndAddNtm(Ntm* const ntm);

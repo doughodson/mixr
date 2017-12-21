@@ -58,8 +58,8 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
-   virtual bool add2OurLists(interop::Ntm* const ntm) override;
+   const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
+   bool add2OurLists(interop::Ntm* const ntm) override;
 
 private:
    unsigned int level {};        // Level

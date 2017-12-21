@@ -91,15 +91,15 @@ public:
    // Subwindow size [ width height ] as a ratio of its main window (see note #4)
    const base::Vec2d& getSubwindowSize() const;
 
-   virtual void select() override;                       // Selects this display.
-   virtual void hide() override;
-   virtual void show() override;
-   virtual void swapBuffers() override;
-   virtual void reshapeIt(int w, int h) override;
-   virtual void mouseEvent(const int button, const int state, const int x, const int y) override;
+   void select() override;                       // Selects this display.
+   void hide() override;
+   void show() override;
+   void swapBuffers() override;
+   void reshapeIt(int w, int h) override;
+   void mouseEvent(const int button, const int state, const int x, const int y) override;
 
-   virtual void reset() override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)

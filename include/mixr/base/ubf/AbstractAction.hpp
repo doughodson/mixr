@@ -27,18 +27,18 @@ class AbstractAction : public base::Object
 public:
    AbstractAction();
 
-   unsigned int getVote() const;
-   void setVote(const unsigned int x);
+   int getVote() const;
+   void setVote(const int x);
 
    // Execute the behavior
    virtual bool execute(base::Component* actor)=0;
 
 private:
-   unsigned int vote {};
+   int vote{};
 };
 
-inline void AbstractAction::setVote(const unsigned int x)      { vote = x; return; }
-inline unsigned int AbstractAction::getVote() const            { return vote; }
+inline void AbstractAction::setVote(const int x)      { vote = x; return; }
+inline int AbstractAction::getVote() const            { return vote; }
 
 }
 }
