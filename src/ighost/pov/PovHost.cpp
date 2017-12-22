@@ -158,7 +158,7 @@ void PovHost::sendData()
    //const double DEG2MR = (PI / 180.0f * 1000.0f);
 
    // Ownship type air vehicle?
-   const auto av = dynamic_cast<const models::AirVehicle*>(getOwnship());
+   const auto av = dynamic_cast<const models::AirVehicle*>(ownship);
    if (av != nullptr) {
 
       EntityState entityState;

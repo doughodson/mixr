@@ -28,8 +28,7 @@ class AbstractIgHost : public base::Component
 public:
    AbstractIgHost();
 
-   // Sets our ownship pointer; public version, which is usually called by the Station class.  Derived classes
-   // can override this function and control the switching of the ownship using setOwnship0()
+   // sets our ownship and player list pointers, used by Station class
    virtual void setOwnship(AbstractPlayer* const) =0;
    virtual void setPlayerList(base::PairStream* const) =0; // Sets the player list that we're to use to generate player/models
 
@@ -39,6 +38,7 @@ public:
    }
 
 private:
+   // main work function that manages IG communications
    virtual void updateIg(const double dt = 0.0) =0;
 };
 

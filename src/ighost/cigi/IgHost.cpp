@@ -4,6 +4,7 @@
 #include "mixr/ighost/cigi/TypeMapper.hpp"
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
+#include "mixr/simulation/AbstractPlayer.hpp"
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
@@ -61,7 +62,6 @@ void IgHost::copyData(const IgHost& org, const bool)
    maxRange = org.maxRange;
    maxModels = org.maxModels;
    maxElevations = org.maxElevations;
-   rstFlg = org.rstFlg;
    rstReq = org.rstReq;
 
    setOwnship(org.ownship);
@@ -125,7 +125,6 @@ void IgHost::updateIg(const double)
 {
    // Check reset flag
    if (rstReq) {
-      rstFlg = true;
       rstReq = false;
    }
 
@@ -133,8 +132,6 @@ void IgHost::updateIg(const double)
    processesModels();
    processesElevations();
    frameSync();
-
-   rstFlg = false;
 }
 
 //------------------------------------------------------------------------------
@@ -174,13 +171,13 @@ void IgHost::mapPlayerList2ModelTable()
    // ---
    // Check for reset
    // ---
-   if (isResetInProgress()) {
-      // Set all active models as Out-Of-Range so that sendOwnshipAndModels() can remove them
-      for (int i = 0; i < getModelTableSize(); i++) {
-         modelTbl[i]->setState( CigiModel::State::OUT_OF_RANGE );
-      }
-      return;
-   }
+//   if (isResetInProgress()) {
+//      // Set all active models as Out-Of-Range so that sendOwnshipAndModels() can remove them
+//      for (int i = 0; i < getModelTableSize(); i++) {
+//         modelTbl[i]->setState( CigiModel::State::OUT_OF_RANGE );
+//      }
+//      return;
+//   }
 
    // ---
    // Remove all inactive, dead or out-of-range models
@@ -391,31 +388,19 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
    return model;
 }
 
-//------------------------------------------------------------------------------
-// Sets our ownship pointer; public version, which is usually called by
-// the Station class.  Derived versions of IgHost can override this function
-// and control the switch of ownship using setOwnship0()
-//------------------------------------------------------------------------------
-void IgHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
+// sets our ownship pointer, which is used by the Station class
+void IgHost::setOwnship(simulation::AbstractPlayer* const p)
 {
-   const auto player = dynamic_cast<models::Player*>(newOwnship);
-   if (player != nullptr) {
-      setOwnship0(player);
-   }
-}
+   models::Player* const player = dynamic_cast<models::Player* const>(p);
 
-//------------------------------------------------------------------------------
-// Sets our ownship player (for derived class control)
-//------------------------------------------------------------------------------
-void IgHost::setOwnship0(models::Player* const newOwnship)
-{
-    // Nothing's changed, just return
-    if (ownship == newOwnship) return;
+    // nothing's changed, just return
+    if (player == ownship) return;
 
-    // Unref() the old, set and ref() the new
-    if (ownship != nullptr) ownship->unref();
-    ownship = newOwnship;
-    if (ownship != nullptr) ownship->ref();
+   // unref current pointer, if we have one
+   if (ownship != nullptr) { ownship->unref(); ownship = nullptr; }
+
+   // set internal player pointer
+   if (player != nullptr) { ownship = player; ownship->ref(); }
 }
 
 //------------------------------------------------------------------------------
@@ -423,7 +408,7 @@ void IgHost::setOwnship0(models::Player* const newOwnship)
 //------------------------------------------------------------------------------
 void IgHost::setPlayerList(base::PairStream* const newPlayerList)
 {
-    // Nothing's changed, just return
+    // nothing's changed, just return
     if (playerList == newPlayerList) return;
 
     // Unref() the old, set and ref() the new
@@ -662,14 +647,6 @@ int IgHost::compareKey2Model(const void* key, const void* model)
    }
 
    return result;
-}
-
-//------------------------------------------------------------------------------
-// True if visual system is resetting
-//------------------------------------------------------------------------------
-bool IgHost::isResetInProgress() const
-{
-   return rstFlg;
 }
 
 //------------------------------------------------------------------------------
