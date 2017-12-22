@@ -20,7 +20,7 @@ class GaugeSlider : public AnalogGauge
 public:
     GaugeSlider();
 
-    virtual void draw() override;
+    void draw() override;
 
 private:
     double sliderPos {};       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)

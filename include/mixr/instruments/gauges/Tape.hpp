@@ -20,7 +20,7 @@ class Tape : public Instrument
 public:
     Tape();
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     virtual bool setRange(const int x)                  { range = x; return true;     }
     virtual bool setHeight(const double x)              { height = x; return true;    }

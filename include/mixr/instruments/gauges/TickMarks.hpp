@@ -30,7 +30,7 @@ public:
     double getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
 private:
     double lengthTM {1.0};           // tick mark length (if not a graphic)

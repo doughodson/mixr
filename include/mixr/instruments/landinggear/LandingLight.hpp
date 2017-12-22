@@ -29,9 +29,9 @@ public:
 
     virtual bool setLightRadius(const double);
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
 private:
     double lRadius {};     // our light radius - 0 means don't use it

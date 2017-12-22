@@ -36,7 +36,7 @@ public:
     virtual bool setQuantity(const int);
     virtual bool setTickGraphic(const graphics::Graphic* const);
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
 private:
     double length {1.0};    // tick mark length (if not a graphic)

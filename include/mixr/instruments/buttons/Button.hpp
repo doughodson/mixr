@@ -31,7 +31,7 @@ public:
     // Cancel
     virtual bool onCancel();
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     int eventId {-1};        // holds our event number

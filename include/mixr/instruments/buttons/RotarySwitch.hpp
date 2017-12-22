@@ -23,9 +23,9 @@ public:
    // Get current switch position
    int getCurrentPosition() const         { return currentPosition; };
 
-   virtual bool onSingleClick() override;
+   bool onSingleClick() override;
 
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 private:
    static const int MAX_ANGLES = 500;

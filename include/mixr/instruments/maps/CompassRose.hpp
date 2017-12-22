@@ -43,10 +43,10 @@ public:
     bool isCentered() const            { return centered; }
     double getDisplacement() const     { return displacement; }
 
-    virtual void draw() override;
+    void draw() override;
 
-    virtual void updateData(const double dt = 0.0) override;
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event functions

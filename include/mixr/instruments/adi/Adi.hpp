@@ -45,8 +45,8 @@ public:
 
     virtual void draw() override;
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-    virtual void updateData(const double dt = 0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0) override;
 
 private:
     // event function

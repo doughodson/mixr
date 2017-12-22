@@ -148,7 +148,7 @@ private:
     void drawArrow(float bAngle, float s, float c);
     void drawArrow2(float bAngle, float s, float c);
 
-    unsigned int base {};
+    unsigned int base{};
     float radius {1.625};
     bool made {};
 };

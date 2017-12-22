@@ -20,7 +20,7 @@ class EngPage : public graphics::Page
 public:
     EngPage();
 
-    static const int NUM_ENG {4};
+    static const int NUM_ENG{4};
 
     // set functions: engine index range [ 1 .. NUM_ENG ]
     virtual bool setEngN1(const int idx, const double newN1);       // %RPM
@@ -34,7 +34,7 @@ public:
     double getEngTit(const int engNum) const { return tit[engNum]; }
     double getEngFF(const int engNum) const { return ff[engNum]; }
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 private:
 

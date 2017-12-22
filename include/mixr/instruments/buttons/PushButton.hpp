@@ -30,11 +30,11 @@ public:
    // The left mouse button has been depressed
    virtual bool onMouseDown();
 
-   virtual bool onSingleClick() override;
-   virtual bool onCancel() override;
+   bool onSingleClick() override;
+   bool onCancel() override;
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   void updateData(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
    bool functionType {};     // false = momentary, true = maintained

@@ -43,9 +43,9 @@ public:
     double getAoaGreenMax() const   { return aoaGreenMax; }
     int    getState() const         { return aoaState; }
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
-    virtual void updateData(const double dt = 0) override;
+    void updateData(const double dt = 0) override;
 
 private:
 

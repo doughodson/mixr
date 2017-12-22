@@ -26,7 +26,7 @@ class SolenoidSwitch : public graphics::Graphic
 public:
     SolenoidSwitch();
 
-    virtual bool setHoldTimer(const double x);
+    virtual bool setHoldTimer(const double);
 
     // button enums
     enum { CENTER_BUTTON = 1, TOP_BUTTON = 2, BOTTOM_BUTTON = 3, NUM_BUTTONS = 3 };
@@ -46,8 +46,8 @@ public:
     int getSwitchPosition()   { return currButtonId; }
     base::UpTimer* getTimer() { return timer; }
 
-    virtual void updateData(const double dt = 0.0) override;
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event function

@@ -29,7 +29,7 @@ class AltitudeDial : public Instrument
 public:
     AltitudeDial();
 
-    virtual void updateData(const double dt = 0) override;
+    void updateData(const double dt = 0) override;
 
 private:
     bool figureRotation(const double);

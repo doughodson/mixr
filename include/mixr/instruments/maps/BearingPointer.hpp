@@ -37,11 +37,11 @@ public:
     bool setBearingRad(const double);             // radians
     bool setBearingDeg(const double);             // degrees
 
-    virtual void drawFunc() override;
-    virtual void draw() override;
+    void drawFunc() override;
+    void draw() override;
 
-    virtual void updateData(const double dt = 0) override;
-    virtual bool event(const int key, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0) override;
+    bool event(const int key, base::Object* const obj = nullptr) override;
 
 private:
     // event handlers

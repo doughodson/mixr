@@ -33,9 +33,9 @@ public:
     double getGearPos() const       { return gearPos; }
     bool getHaveRotary() const      { return haveRotary; }
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 private:
     int gearState {};      // is our gear down, up, or in transit?

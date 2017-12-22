@@ -26,12 +26,12 @@ public:
     virtual bool setOuterRadius(const double);
     virtual bool setFilled(const bool);
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
-    virtual bool onUpdateRadius(const base::Number* const) override;
+    bool onUpdateRadius(const base::Number* const) override;
 
 private:
     bool isDynamic {};          // are we setting sweep angle based on value?

@@ -39,9 +39,9 @@ public:
     void setGlideslopeValid(const bool);        // T = valid
     void setLocalizerValid(const bool);         // T = valid
 
-    virtual void draw() override;
+    void draw() override;
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // event functions

@@ -41,7 +41,7 @@ public:
     bool isVertical() const         { return vertical; }
     bool isDrawing() const          { return drawMe; }
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
 private:
     double gaugePos {};           // direction, in inches, that we want to scale our gauge

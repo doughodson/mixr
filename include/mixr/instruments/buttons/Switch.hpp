@@ -26,13 +26,13 @@ public:
     virtual bool setNumSelections(const int);
     virtual bool setCurrentState(const int);
 
-    virtual bool onSingleClick() override;
+    bool onSingleClick() override;
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 private:
-    int currentState {1};   // which state are we currently in?
-    int numSelections {1};  // number of selections to go through
+    int currentState{1};     // which state are we currently in?
+    int numSelections{1};    // number of selections to go through
     SendData currentStateSD;
 
 private:

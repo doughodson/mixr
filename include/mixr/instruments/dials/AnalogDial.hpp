@@ -39,9 +39,9 @@ public:
     double getRadius() const        { return radius; }
     int getSlices() const           { return slices; }
 
-    virtual void drawFunc() override;
+    void drawFunc() override;
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event function

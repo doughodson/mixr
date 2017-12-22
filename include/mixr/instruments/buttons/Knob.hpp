@@ -30,17 +30,17 @@ public:
 
     double const getValue() { return value; }
 
-    virtual bool onSingleClick() override;
+    bool onSingleClick() override;
 
     virtual bool setEndless(const bool x)           { endless = x; return true; }
     virtual bool setEndlessStart(const double x)    { endlessStart = x; return true; }
     virtual bool setEndlessLimit(const double x)    { endlessLimit = x; return true; }
 
-    virtual void drawFunc() override;
-    virtual void draw() override;
+    void drawFunc() override;
+    void draw() override;
 
-    virtual void updateData(const double dt = 0.0) override;
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event functions

@@ -24,9 +24,8 @@ public:
     virtual bool setWidth(const double x)           { width = x; return true; }
     virtual bool setHeight(const double x)          { height = x; return true; }
 
-    virtual void drawFunc() override;
-
-    virtual void updateData(const double dt = 0.0) override;
+    void drawFunc() override;
+    void updateData(const double dt = 0.0) override;
 
 private:
     base::Vec3d skyColor;         // color of our sky

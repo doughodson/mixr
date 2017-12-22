@@ -21,7 +21,7 @@ class DialPointer : public AnalogDial
 public:
     DialPointer();
 
-    virtual void draw() override;
+    void draw() override;
 };
 
 }
