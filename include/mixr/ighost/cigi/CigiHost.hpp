@@ -120,7 +120,14 @@ public:
    void updateData(const double dt = 0.0) final;
    void reset() final;
 
-protected:
+private:
+   CigiModel* modelFactory() final;         // Create objects unique to interface
+   CigiModel* hotFactory() final;           // Create objects unique to interface
+   void sendOwnshipAndModels() final;       // Send state data for ownship and models
+   void sendElevationRequests() final;      // Sends terrain height requests
+   void recvElevations() final;             // Receives terrain height data
+   void frameSync() final;                  // Send frame sync
+
    enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };
 
    bool updateOwnshipModel();          // update the ownship model; returns true if ok
@@ -139,16 +146,16 @@ protected:
       return (buffer < NUM_BUFFERS ? ownshipEC[buffer] : 0);
    }
 
-   int getWriteBuffer() const                  { return iw; }                        // Write buffer index
+   int getWriteBuffer() const                  { return iw;  }                       // Write buffer index
    int getLastWriteBuffer() const              { return iw0; }                       // Last write buffer index
-   int getReadBuffer() const                   { return ir; }                        // Read index {returns index or NUM_BUFFERS if not valid)
+   int getReadBuffer() const                   { return ir;  }                       // Read index {returns index or NUM_BUFFERS if not valid)
    void swapReadBuffer()                       { if (iw0 < NUM_BUFFERS) ir = iw0; }  // Swap the read buffer
 
-   bool isIgResetRequested() const             { return resetRequest; }
+   bool isIgResetRequested() const             { return resetRequest;  }
    void clearIgResetRequest()                  { resetRequest = false; }
 
    int getNexLosId()                           { return ++losReqId; }
-   bool isNewLosequested() const               { return newLosReq; }
+   bool isNewLosequested() const               { return newLosReq;  }
    void losRequestSend();           // LOS request has been sent to the IG
 
    void elevationRequestSend();     // Elevation request has been sent to the IG
@@ -178,14 +185,8 @@ protected:
    void setViewDefinitionPacket(CigiViewDefV3* const p)          { fov = p;    }
    void setSensorControlPacket(CigiSensorCtrlV3* const p)        { sensor = p; }
 
-   void sendOwnshipAndModels() final;       // Send state data for ownship and models
-   void sendElevationRequests() final;      // Sends terrain height requests
-   void recvElevations() final;             // Receives terrain height data
-   void frameSync() final;                  // Send frame sync (if any)
-   CigiModel* modelFactory() final;         // Create objects unique to interface
-   CigiModel* hotFactory() final;           // Create objects unique to interface
+   bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const);
 
-   bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const p);
    bool setAirVehicleData(CigiModel* const, const int entity, const models::AirVehicle* const);
    bool setBuildingData(CigiModel* const, const int entity, const models::Building* const);
    bool setEffectData(CigiModel* const, const int entity, const models::Effect* const);
@@ -196,8 +197,7 @@ protected:
    bool setSpaceVehicleData(CigiModel* const, const int entity, const models::SpaceVehicle* const);
    bool setWeaponData(CigiModel* const, const int entity, const models::AbstractWeapon* const);
 
-private:
-   // creates a single task thread to process IG packets
+   // creates a one shot task thread to process IG packets
    bool createProcessingThread();
    base::safe_ptr<IgThread> igThread;
 

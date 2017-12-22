@@ -90,7 +90,7 @@ void CigiModel::initialize(models::Player* const p, const TypeMapper** const igM
    isGroundPlayer = p->isClassType(typeid(models::GroundVehicle));
 
    setPlayer(p);
-   state = CigiModel::ACTIVE;
+   state = CigiModel::State::Active;
    ageCount = 999;
    hotActive = true;
    rcount = 999;
@@ -127,7 +127,7 @@ void CigiModel::clear()
    isGroundPlayer = false;
 
    setPlayer(nullptr);
-   state = INACTIVE;
+   state = State::Inactive;
    ageCount = 0;
    checked = false;
    typeMapper = nullptr;

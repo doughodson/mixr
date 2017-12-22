@@ -185,7 +185,7 @@ void IgHost::mapPlayerList2ModelTable()
    if (isResetInProgress()) {
       // Set all active models as Out-Of-Range so that sendOwnshipAndModels() can remove them
       for (int i = 0; i < getModelTableSize(); i++) {
-         modelTbl[i]->setState( CigiModel::OUT_OF_RANGE );
+         modelTbl[i]->setState( CigiModel::State::Out_of_range );
       }
       return;
    }
@@ -198,7 +198,7 @@ void IgHost::mapPlayerList2ModelTable()
    //   -- We're also clearing the model's 'checked' flag
    // ---
    for (int i = getModelTableSize(); i > 0; --i) {
-      if ( modelTbl[i-1]->isState(CigiModel::CLEARED) ) {
+      if ( modelTbl[i-1]->isState(CigiModel::State::Cleared) ) {
          // Deleting this model
          //std::cout << "IgHost::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
          removeModelFromList( (i-1), MODEL_TABLE);
@@ -238,7 +238,7 @@ void IgHost::mapPlayerList2ModelTable()
                // When alive and in range ...
                if (model != nullptr) {
                   // a) and it already has a model entry: make sure it's active ...
-                  model->setState( CigiModel::ACTIVE );
+                  model->setState( CigiModel::State::Active );
                } else {
                   // b) and it doesn't have a model entry (new, in-range player) ...
                   model = newModelEntry(p);
@@ -247,13 +247,13 @@ void IgHost::mapPlayerList2ModelTable()
                // When player isn't alive and it had a model entry
                if (model != nullptr) {
                   // set state to dead
-                  model->setState( CigiModel::DEAD );
+                  model->setState( CigiModel::State::Dead );
                }
             } else {
                // When player is out-of-range and it had a model entry
                if (model != nullptr) {
                   // set state to out-of-range
-                  model->setState( CigiModel::OUT_OF_RANGE );
+                  model->setState( CigiModel::State::Out_of_range );
                }
             }
             if (model != nullptr) model->setCheckedFlag(true);
@@ -273,7 +273,7 @@ void IgHost::mapPlayerList2ModelTable()
          // Request removal;
          // (note: the IG system specific code now has one frame to cleanup its own code
          //  before the model is dropped from the output list next frame -- see above)
-         modelTbl[i]->setState( CigiModel::OUT_OF_RANGE );
+         modelTbl[i]->setState( CigiModel::State::Out_of_range );
       }
    }
 

@@ -16,13 +16,9 @@ class TypeMapper;
 // Class: IgHost
 // Description: Abstract base image generator host interface class
 //
-// Notes:
-//    Derived versions of this class are used to interface with various
-//    visual systems.
-//
 // Factory name: BaseIgHost
 // Slots:
-//    maxRange       <Distance>     ! Max range of visual system (default: 20000.0f)
+//    maxRange       <Distance>     ! Max range of visual system (default: 20000.0)
 //    maxRange       <Number>       ! Max range of visual system (meters)
 //
 //    maxModels      <Number>       ! Max number of active, in-range player/models (default: 0)
@@ -73,25 +69,25 @@ public:
     void reset() override;
 
 protected:
-    virtual void setOwnship0(models::Player* const);           // Sets our ownship player
+    void setOwnship0(models::Player* const);           // Sets our ownship player
 
     // Computers the range (meters) from our ownship to this player.
-    virtual double computeRangeToPlayer(const models::Player* const) const;
+    double computeRangeToPlayer(const models::Player* const) const;
 
     // Find a player's model object in table 'type' by the player IDs
-    virtual CigiModel* findModel(const unsigned short playerID, const base::String* const federateName, const TableType type);
+    CigiModel* findModel(const unsigned short playerID, const base::String* const federateName, const TableType type);
 
     // Find a player's model object in table 'type' using a pointer to the player
-    virtual CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
+    CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
 
     // Add a player's model object to table 'type'
-    virtual bool addModelToList(CigiModel* const model, const TableType type);
+    bool addModelToList(CigiModel* const model, const TableType type);
 
     // Remove a player's model object from table 'type'
-    virtual void removeModelFromList(CigiModel* const model, const TableType type);
+    void removeModelFromList(CigiModel* const model, const TableType type);
 
     // Remove model object at index, 'idx', from table 'type'
-    virtual void removeModelFromList(const int idx, const TableType type);
+    void removeModelFromList(const int idx, const TableType type);
 
     // Derived class' access to the tables
     int getModelTableSize() const               { return nModels; }
@@ -99,23 +95,21 @@ protected:
     CigiModel** getModelTable()                 { return modelTbl.data(); }
     CigiModel** getElevationTable()             { return hotTbl.data(); }
 
-    // Create Cigi model objects to manage player/models
-    virtual CigiModel* modelFactory() =0;
-
-    // Create Cigi model objects to manage player terrain elevation requests
-    virtual CigiModel* hotFactory() =0;
-
-    // Manages the sending of ownship and player/model state data
-    virtual void sendOwnshipAndModels() =0;
-
-    // Manages the sending of player terrain elevation requests
-    virtual void sendElevationRequests() =0;
-
-    // Handles received player terrain elevation data
-    virtual void recvElevations() =0;
-
 private:
     void updateIg(const double dt = 0.0) final;
+
+    // Create Cigi model objects to manage player/models
+    virtual CigiModel* modelFactory() =0;
+    // Create Cigi model objects to manage player terrain elevation requests
+    virtual CigiModel* hotFactory() =0;
+    // Manages the sending of ownship and player/model state data
+    virtual void sendOwnshipAndModels() =0;
+    // Manages the sending of player terrain elevation requests
+    virtual void sendElevationRequests() =0;
+    // Handles received player terrain elevation data
+    virtual void recvElevations() =0;
+    // Send frame sync (if any)
+    virtual void frameSync() =0;
 
     static const int MAX_MODELS{400};                    // Max model table size
     static const int MAX_MODELS_TYPES{400};              // Max IG model type table size
@@ -123,8 +117,6 @@ private:
     void processesModels();                              // Process ownship & player models
     void processesElevations();                          // Process terrain elevation requests
 
-    // Send frame sync (if any)
-    virtual void frameSync() =0;
 
     void resetTables();                                  // Resets the tables
     void clearIgModelTypes();                            // Clear the IG model types table
