@@ -20,7 +20,7 @@ class TypeMapper;
 
 //------------------------------------------------------------------------------
 // Class: CigiModel
-// Description: Represents a CIG system model object or height-of-terrain request.
+// Description: Represents a CIGI system model object or height-of-terrain request.
 //              Relates simulation player to IG model relationships.
 //
 // Notes:
