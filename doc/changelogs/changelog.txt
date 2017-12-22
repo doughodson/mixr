@@ -531,6 +531,11 @@ simulation library (mixr_simulation)
 
    Station class
       1) Renamed 'otw' slot to 'igHosts'.  Use this slot name to define a list,
-      of one or more IG host interfaces.  Note, that a list must be provided!
+         of one or more IG host interfaces.  Note, that a list must be provided!
+      2) Slot 'ioHandler' used to be polymorphic in the sense that it could 
+         accept a single I/O handler, or a list. This behavior has changed, it
+         now allows for one handler to manage the flow of data between a single
+         input/output data buffer and an unlimited number of real or 'mock'
+         signal generating devices.
 
 --------------------------------------------------------------------------------

@@ -25,38 +25,38 @@ class StationNetPeriodicThread;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <Simulation>           ! Executable simulation model (default: nullptr)
+//    simulation         <Simulation>               ! Executable simulation model (default: nullptr)
 //
-//    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
+//    networks           <base::PairStream>         ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    igHosts            <base::PairStream>     ! List of Image Generator (IG) host interfaces
+//    igHosts            <base::PairStream>         ! List of Image Generator (IG) host interfaces
 //
-//    ioHandlers         <base::PairStream>     ! List of Input/Output (IO) data handlers
+//    ioHandler          <base::AbstractIoHandler>  ! Input/Output (IO) data handler
 //
-//    ownship            <base::String>         ! Player name of our ownship (primary) player (default: nullptr)
+//    ownship            <base::String>             ! Player name of our ownship (primary) player (default: nullptr)
 //
-//    tcRate             <base::Number>         ! Time-critical thread rate (Hz) (default: 50hz)
-//    tcPriority         <base::Number>         ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
-//    tcStackSize        <base::Number>         ! Time-critical thread stack size (default: <system default size>)
+//    tcRate             <base::Number>             ! Time-critical thread rate (Hz) (default: 50hz)
+//    tcPriority         <base::Number>             ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
+//    tcStackSize        <base::Number>             ! Time-critical thread stack size (default: <system default size>)
 //
-//    fastForwardRate    <base::Number>         ! Fast forward rate for time critical functions
-//                                              ! (i.e., the number of times updateTC() is called per frame).
-//                                              ! (default: DEFAULT_FAST_FORWARD_RATE)
+//    fastForwardRate    <base::Number>             ! Fast forward rate for time critical functions
+//                                                  ! (i.e., the number of times updateTC() is called per frame).
+//                                                  ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
-//    netRate            <base::Number>         ! Network thread rate (Hz) (default: 0hz)
-//    netPriority        <base::Number>         ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
-//    netStackSize       <base::Number>         ! Network thread stack size (default: <system default size>)
+//    netRate            <base::Number>             ! Network thread rate (Hz) (default: 0hz)
+//    netPriority        <base::Number>             ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
+//    netStackSize       <base::Number>             ! Network thread stack size (default: <system default size>)
 //
-//    bgRate             <base::Number>         ! Background thread rate (Hz) (default: 0 -- no thread)
-//    bgPriority         <base::Number>         ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
-//    bgStackSize        <base::Number>         ! Background thread stack size (default: <system default size>)
+//    bgRate             <base::Number>             ! Background thread rate (Hz) (default: 0 -- no thread)
+//    bgPriority         <base::Number>             ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
+//    bgStackSize        <base::Number>             ! Background thread stack size (default: <system default size>)
 //
-//    startupResetTime   <base::Time>           ! Startup (initial) RESET event timer value (default: no reset event)
-//                                              !  (some simulations may need this -- let it run a few initial frames then reset)
+//    startupResetTime   <base::Time>               ! Startup (initial) RESET event timer value (default: no reset event)
+//                                                  !  (some simulations may need this -- let it run a few initial frames then reset)
 //
-//    enableUpdateTimers <base::Boolean>        ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
+//    enableUpdateTimers <base::Boolean>            ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
 //
-//    dataRecorder       <AbstractDataRecorder> ! Our Data Recorder
+//    dataRecorder       <AbstractDataRecorder>     ! Our Data Recorder
 //
 //
 // Ownship player:
@@ -172,8 +172,8 @@ public:
    base::PairStream* getNetworks();                                 // Interoperability network handlers
    const base::PairStream* getNetworks() const;                     // Interoperability network handlers (const version)
 
-   base::PairStream* getIoHandlers();                               // I/O handlers
-   const base::PairStream* getIoHandlers() const;                   // I/O handlers (const version)
+   base::AbstractIoHandler* getIoHandler();                         // I/O handler
+   const base::AbstractIoHandler* getIoHandler() const;             // I/O handler (const version)
 
    AbstractDataRecorder* getDataRecorder();                         // Returns the data recorder
    const AbstractDataRecorder* getDataRecorder() const;             // Returns the data recorder (const version)
@@ -245,17 +245,17 @@ private:
    void setNetThread(StationNetPeriodicThread*);
    void setBgThread(StationBgPeriodicThread*);
 
-   virtual void createNetworkProcess();           // Creates a network thread
-   virtual void createBackgroundProcess();        // Creates a B/G thread
+   virtual void createNetworkProcess();                      // Creates a network thread
+   virtual void createBackgroundProcess();                   // Creates a B/G thread
 
-   Simulation* sim{};                             // Executable simulation model
-   base::safe_ptr<base::PairStream> networks;     // List of networks
-   base::safe_ptr<base::PairStream> igHosts;      // List of Image generator (IG) host interfaces
-   base::safe_ptr<base::PairStream> ioHandlers;   // List of Input/Output (IO) data handlers
-   AbstractPlayer* ownship{};                     // Ownship (primary) player
-   const base::String* ownshipName{};             // Name of our ownship player
-   bool tmrUpdateEnbl{};                          // Enable base::Timers::updateTimers() call from updateTC()
-   AbstractDataRecorder* dataRecorder{};          // Data Recorder
+   Simulation* sim{};                                        // Executable simulation model
+   base::safe_ptr<base::PairStream> networks;                // List of networks
+   base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
+   base::safe_ptr<base::AbstractIoHandler> ioHandler;        // Input/Output (IO) data handler
+   AbstractPlayer* ownship{};                                // Ownship (primary) player
+   const base::String* ownshipName{};                        // Name of our ownship player
+   bool tmrUpdateEnbl{};                                     // Enable base::Timers::updateTimers() call from updateTC()
+   AbstractDataRecorder* dataRecorder{};                     // Data Recorder
 
    double tcRate{50.0};                                      // Time-critical thread Rate (hz)
    double tcPri{DEFAULT_TC_THREAD_PRI};                      // Priority of the time-critical thread (0->lowest, 1->highest)
@@ -284,7 +284,7 @@ private:
 
    bool setSlotIgHosts(base::PairStream* const);
 
-   bool setSlotIoHandlers(base::PairStream* const);
+   bool setSlotIoHandler(base::AbstractIoHandler* const);
 
    bool setSlotOwnshipName(const base::String* const);
 

@@ -34,7 +34,7 @@ BEGIN_SLOTTABLE(Station)
    "simulation",         //  1: Simulation executive
    "networks",           //  2: List of Network models
    "igHosts",            //  3: Image Generator (IG) visual system host interface(s)
-   "ioHandlers",         //  4: Input/Output (IO) data handler(s)
+   "ioHandler",          //  4: Input/Output (IO) data handler
    "ownship",            //  5: Player name of our ownship (primary) player
    "tcRate",             //  6: Time-critical rate (Hz) (base::Number, default: 50hz)
    "tcPriority",         //  7: Time-critical thread priority (zero(0) is lowest, one(1) is highest)
@@ -58,7 +58,7 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 3, setSlotIgHosts,               base::PairStream)
 
-   ON_SLOT( 4, setSlotIoHandlers,            base::PairStream)
+   ON_SLOT( 4, setSlotIoHandler,             base::AbstractIoHandler)
 
    ON_SLOT( 5, setSlotOwnshipName,           base::String)
 
@@ -123,12 +123,10 @@ void Station::copyData(const Station& org, const bool)
    }
 
    // Copy the I/O handlers
-   if (org.ioHandlers != nullptr) {
-      base::PairStream* copy = org.ioHandlers->clone();
-      setSlotIoHandlers( copy );
+   if (org.ioHandler != nullptr) {
+      base::AbstractIoHandler* copy = org.ioHandler->clone();
+      setSlotIoHandler( copy );
       copy->unref();
-   } else {
-      setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
    }
 
    {  // clone the data recorder
@@ -187,9 +185,9 @@ void Station::deleteData()
 
    // Clear our pointers
    setOwnshipPlayer(nullptr);
-   setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
+   setSlotIgHosts(nullptr);
    setSlotNetworks(nullptr);
-   setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
+   setSlotIoHandler(nullptr);
    setSlotSimulation(nullptr);
    setSlotStartupResetTime(nullptr);
    setDataRecorder(nullptr);
@@ -219,15 +217,9 @@ void Station::reset()
       }
    }
 
-   // Reset the I/O Handlers
-   if (ioHandlers != nullptr) {
-      base::List::Item* item {ioHandlers->getFirstItem()};
-      while (item != nullptr) {
-         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         base::AbstractIoHandler* p {static_cast<base::AbstractIoHandler*>(pair->object())};
-         p->event(RESET_EVENT);
-         item = item->getNext();
-      }
+   // reset the I/O Handler
+   if (ioHandler != nullptr) {
+      ioHandler->event(RESET_EVENT);
    }
 
    // Reset image generator host interfaces
@@ -270,15 +262,9 @@ void Station::updateTC(const double dt)
       base::Timer::updateTimers(dt);
    }
 
-   // The I/O handlers
-   if (ioHandlers != nullptr) {
-      base::List::Item* item {ioHandlers->getFirstItem()};
-      while (item != nullptr) {
-         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         base::AbstractIoHandler* p {static_cast<base::AbstractIoHandler*>(pair->object())};
-         p->tcFrame(dt);
-         item = item->getNext();
-      }
+   // the I/O handler
+   if (ioHandler != nullptr) {
+      ioHandler->tcFrame(dt);
    }
 
    // Process station inputs
@@ -383,16 +369,10 @@ bool Station::shutdownNotification()
    }
 
    // Tell the I/O devices that we're shutting down
-   if (ioHandlers != nullptr) {
-      base::List::Item* item{ioHandlers->getFirstItem()};
-      while (item != nullptr) {
-         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>(pair->object())};
-         p->event(SHUTDOWN_EVENT);
-         item = item->getNext();
-      }
+   if (ioHandler != nullptr) {
+      ioHandler->event(SHUTDOWN_EVENT);
+      setSlotIoHandler(nullptr);
    }
-   setSlotIoHandlers(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation executive to shut down
    Simulation* s{getSimulation()};
@@ -437,36 +417,23 @@ bool Station::shutdownNotification()
    return shutdown;
 }
 
-
 //------------------------------------------------------------------------------
-// inputDevices() -- Process station inputs outputs
+// inputDevices() -- Process station inputs
 //------------------------------------------------------------------------------
 void Station::inputDevices(const double dt)
 {
-   if (ioHandlers != nullptr) {
-     base::List::Item* item{ioHandlers->getFirstItem()};
-     while (item != nullptr) {
-        base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-        base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
-        p->inputDevices(dt);
-        item = item->getNext();
-     }
+   if (ioHandler != nullptr) {
+      ioHandler->inputDevices(dt);
    }
 }
 
 //------------------------------------------------------------------------------
-// outputDevices() -- Process station hardware outputs
+// outputDevices() -- Process station outputs
 //------------------------------------------------------------------------------
 void Station::outputDevices(const double dt)
 {
-   if (ioHandlers != nullptr) {
-     base::List::Item* item{ioHandlers->getFirstItem()};
-     while (item != nullptr) {
-        base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-        base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
-        p->outputDevices(dt);
-        item = item->getNext();
-     }
+   if (ioHandler != nullptr) {
+      ioHandler->outputDevices(dt);
    }
 }
 
@@ -552,14 +519,8 @@ void Station::processBackgroundTasks(const double dt)
    // processNetworkInputTasks() and processNetworkOutputTasks()
 
    // The I/O handlers
-   if (ioHandlers != nullptr) {
-      base::List::Item* item{ioHandlers ->getFirstItem()};
-      while (item != nullptr) {
-         base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::AbstractIoHandler* p{static_cast<base::AbstractIoHandler*>(pair->object())};
-         p->updateData(dt);
-         item = item->getNext();
-      }
+   if (ioHandler != nullptr) {
+      ioHandler->updateData(dt);
    }
 
    // Our simulation model
@@ -686,16 +647,16 @@ const base::PairStream* Station::getNetworks() const
    return networks;
 }
 
-// I/O handlers
-base::PairStream* Station::getIoHandlers()
+// I/O handler
+base::AbstractIoHandler* Station::getIoHandler()
 {
-   return ioHandlers;
+   return ioHandler;
 }
 
-// I/O handlers (const version)
-const base::PairStream* Station::getIoHandlers() const
+// I/O handler (const version)
+const base::AbstractIoHandler* Station::getIoHandler() const
 {
-   return ioHandlers;
+   return ioHandler;
 }
 
 // Returns the data recorder
@@ -998,43 +959,14 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
    return true;
 }
 
-//-----------------------------------------------------------------------------
-// setSlotIoHandler() -- Sets a list of I/O handlers
-//-----------------------------------------------------------------------------
-bool Station::setSlotIoHandlers(base::PairStream* const list)
+bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
 {
-    bool ok{true};
-
-    // Remove the old list
-    if (ioHandlers != nullptr) {
-        // we are no longer the container for these handlers
-        for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-            base::Component* p{static_cast<base::Component*>(pair->object())};
-            p->container(nullptr);
-        }
-        ioHandlers = nullptr;
-    }
-
-    // Set our list pointer
-    ioHandlers = list;
-
-    // Make sure the new list is setup correctly
-    if (ioHandlers != nullptr) {
-        for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
-            const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<base::AbstractIoHandler*>(pair->object());
-            if (p != nullptr) {
-                // We are its container
-                p->container(this);
-            } else {
-                // Not of the proper type
-                std::cerr << "Player::setSlotIoHandler: Slot \"" << pair->slot() << "\" is not of type base::AbstractIoHandler" << std::endl;
-                ok = false;
-            }
-        }
-    }
-    return ok;
+   if (ioHandler != nullptr) {
+      ioHandler->container(nullptr);
+   }
+   ioHandler = p;
+   if (ioHandler != nullptr) { ioHandler->container(this); }
+   return true;
 }
 
 //------------------------------------------------------------------------------
