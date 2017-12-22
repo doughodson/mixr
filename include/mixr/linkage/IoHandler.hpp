@@ -7,7 +7,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Frequency; class Number; class AbstractIoData; }
+namespace base { class PairStream; class Frequency; class Number; class AbstractIoData; }
 namespace linkage {
 class IoPeriodicThread;
 
