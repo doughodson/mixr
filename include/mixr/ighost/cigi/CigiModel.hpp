@@ -37,11 +37,11 @@ class CigiModel : public base::Object
 
 public:
    enum class State {
-      Inactive,        // Unused model object
-      Active,          // Player is alive and in-range
-      Dead,            // player is dead or destoryed
-      Out_of_range,    // Player is alive but out of range
-      Cleared          // Request removel from table
+      INACTIVE,        // Unused model object
+      ACTIVE,          // Player is alive and in-range
+      DEAD,            // player is dead or destoryed
+      OUT_OF_RANGE,    // Player is alive but out of range
+      CLEARED          // Request removel from table
    };
 
 public:
@@ -115,7 +115,7 @@ private:
    void setPlayer(models::Player* const);
 
    models::Player* player{};       // This player
-   State state{State::Inactive};   // Model Active flag
+   State state{State::INACTIVE};   // Model Active flag
    int ageCount{};                 // Age counter (how many times have we've been overlooked)
    bool checked{};                 // Model was checked
    const TypeMapper* typeMapper{}; // IG unique model type mapper

@@ -403,7 +403,7 @@ int CigiHost::updateModels()
          base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
          if (model != nullptr) {
 
-            if (model->getState() != CigiModel::State::Inactive) {
+            if (model->getState() != CigiModel::State::INACTIVE) {
                int entity{model->getID()* 8 + 1};      // Save a block of four entities per model
                //  (id*8+1) is parent entity
                //  (id*8+2) is smoke trail entity
@@ -491,7 +491,7 @@ bool CigiHost::setAirVehicleData(CigiModel* const m, const int entity, const mod
    CigiEntityCtrlV3* const smoke{m->smokeEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
          // Set the entity type
@@ -571,7 +571,7 @@ bool CigiHost::setBuildingData(CigiModel* const m, const int entity, const model
    CigiCompCtrlV3* const damage{m->damageCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
          // Set the entity type
@@ -684,7 +684,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
    CigiCompCtrlV3* const attachedPartCC{m->attachedCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
 
@@ -834,7 +834,7 @@ bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models:
    }
    CigiEntityCtrlV3* const trail{m->trailEC[iw]};
 
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
 
       // As long as we're active, update the entity control
       if (p->isClassType(typeid(models::Decoy))) {
@@ -940,7 +940,7 @@ bool CigiHost::setLifeFormData(CigiModel* const m, const int entity, const model
    CigiCompCtrlV3* const animation{m->animationCC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
          // Set the entity type
@@ -1030,7 +1030,7 @@ bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models
    CigiEntityCtrlV3* const explosion{m->explosionEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       // Load the parent entity control
       setCommonModelData(ec, entity, p);
 
@@ -1075,7 +1075,7 @@ bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models
    } else {
       ec->SetEntityState(CigiEntityCtrlV3::Standby);
       trail->SetEntityState(CigiEntityCtrlV3::Standby);
-      if (m->getState() == CigiModel::State::Dead) {
+      if (m->getState() == CigiModel::State::DEAD) {
          // Start air explosion at last known location of missile
          explosion->SetRoll(ec->GetRoll());
          explosion->SetPitch(ec->GetPitch());
@@ -1116,7 +1116,7 @@ bool CigiHost::setShipData(CigiModel* const m, const int entity, const models::S
    CigiEntityCtrlV3* const wake{m->trailEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
 
@@ -1178,7 +1178,7 @@ bool CigiHost::setSpaceVehicleData(CigiModel* const m, const int entity, const m
    CigiEntityCtrlV3* const ec{m->parentEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       bool ok{setCommonModelData(ec, entity, p)};
       if (ok) {
          // Set the entity type
@@ -1242,7 +1242,7 @@ bool CigiHost::setWeaponData(CigiModel* const m, const int entity, const models:
    CigiEntityCtrlV3* const explosion{m->explosionEC[iw]};
 
    // As long as we're active, update the entity control
-   if (m->getState() == CigiModel::State::Active) {
+   if (m->getState() == CigiModel::State::ACTIVE) {
       // Load the parent entity control
       setCommonModelData(ec, entity, p);
 
@@ -1262,7 +1262,7 @@ bool CigiHost::setWeaponData(CigiModel* const m, const int entity, const models:
       m->parentActive = true;
    } else {
       ec->SetEntityState(CigiEntityCtrlV3::Standby);
-      if (m->getState() == CigiModel::State::Dead) {
+      if (m->getState() == CigiModel::State::DEAD) {
          // Start air explosion at last known location of missile
          explosion->SetRoll(ec->GetRoll());
          explosion->SetPitch(ec->GetPitch());
@@ -1508,7 +1508,7 @@ bool CigiHost::sendCigiData()
                // (send ground models only after 'maxAge' frames)
                // (always update the inactive models to clear them)
                model->incAgeCount();
-               bool updateThisOne{!model->isGroundPlayer || model->isState(CigiModel::State::Out_of_range) || (model->isGroundPlayer && model->getAgeCount() >= maxAge)};
+               bool updateThisOne{!model->isGroundPlayer || model->isState(CigiModel::State::OUT_OF_RANGE) || (model->isGroundPlayer && model->getAgeCount() >= maxAge)};
 
                if (updateThisOne) {
                   //if (model->isGroundPlayer) {
@@ -1570,8 +1570,8 @@ bool CigiHost::sendCigiData()
                      }
 
                      // Clear the model?
-                     if (model->getState() != CigiModel::State::Active) {
-                        model->setState( CigiModel::State::Cleared );
+                     if (model->getState() != CigiModel::State::ACTIVE) {
+                        model->setState( CigiModel::State::CLEARED );
                      }
                   }
                   model->setAgeCount(0);

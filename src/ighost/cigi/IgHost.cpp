@@ -95,14 +95,14 @@ void IgHost::resetTables()
    // (in reverse order just in case another thread is traversing the
    //  table from bottom up)
    while (nModels > 0) {
-      removeModelFromList(nModels-1, MODEL_TABLE);
+      removeModelFromList(nModels-1, TableType::MODEL);
    }
 
    // Clear the elevation table
    // (in reverse order just in case another thread is traversing the
    //  table from bottom up)
    while (nHots > 0) {
-      removeModelFromList(nHots-1, HOT_TABLE);
+      removeModelFromList(nHots-1, TableType::HOT);
    }
 }
 
@@ -177,7 +177,7 @@ void IgHost::mapPlayerList2ModelTable()
    if (isResetInProgress()) {
       // Set all active models as Out-Of-Range so that sendOwnshipAndModels() can remove them
       for (int i = 0; i < getModelTableSize(); i++) {
-         modelTbl[i]->setState( CigiModel::State::Out_of_range );
+         modelTbl[i]->setState( CigiModel::State::OUT_OF_RANGE );
       }
       return;
    }
@@ -190,10 +190,10 @@ void IgHost::mapPlayerList2ModelTable()
    //   -- We're also clearing the model's 'checked' flag
    // ---
    for (int i = getModelTableSize(); i > 0; --i) {
-      if ( modelTbl[i-1]->isState(CigiModel::State::Cleared) ) {
+      if ( modelTbl[i-1]->isState(CigiModel::State::CLEARED) ) {
          // Deleting this model
          //std::cout << "IgHost::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
-         removeModelFromList( (i-1), MODEL_TABLE);
+         removeModelFromList( (i-1), TableType::MODEL);
       }
    }
    for (int i = 0; i < getModelTableSize(); i++) {
@@ -220,7 +220,7 @@ void IgHost::mapPlayerList2ModelTable()
          if ( p != getOwnship() && !dummy ) {
 
             // Find the player's model entry (if any)
-            CigiModel* model = findModel(p, MODEL_TABLE);
+            CigiModel* model = findModel(p, TableType::MODEL);
 
             // Check if in-range
             bool inRange {computeRangeToPlayer(p) <= maxRange};
@@ -230,7 +230,7 @@ void IgHost::mapPlayerList2ModelTable()
                // When alive and in range ...
                if (model != nullptr) {
                   // a) and it already has a model entry: make sure it's active ...
-                  model->setState( CigiModel::State::Active );
+                  model->setState( CigiModel::State::ACTIVE );
                } else {
                   // b) and it doesn't have a model entry (new, in-range player) ...
                   model = newModelEntry(p);
@@ -239,13 +239,13 @@ void IgHost::mapPlayerList2ModelTable()
                // When player isn't alive and it had a model entry
                if (model != nullptr) {
                   // set state to dead
-                  model->setState( CigiModel::State::Dead );
+                  model->setState( CigiModel::State::DEAD );
                }
             } else {
                // When player is out-of-range and it had a model entry
                if (model != nullptr) {
                   // set state to out-of-range
-                  model->setState( CigiModel::State::Out_of_range );
+                  model->setState( CigiModel::State::OUT_OF_RANGE );
                }
             }
             if (model != nullptr) model->setCheckedFlag(true);
@@ -265,7 +265,7 @@ void IgHost::mapPlayerList2ModelTable()
          // Request removal;
          // (note: the IG system specific code now has one frame to cleanup its own code
          //  before the model is dropped from the output list next frame -- see above)
-         modelTbl[i]->setState( CigiModel::State::Out_of_range );
+         modelTbl[i]->setState( CigiModel::State::OUT_OF_RANGE );
       }
    }
 
@@ -303,7 +303,7 @@ void IgHost::mapPlayers2ElevTable()
             if (inRange) {
 
                // Find the player's model entry (if any)
-               CigiModel* model {findModel(p, HOT_TABLE)};
+               CigiModel* model {findModel(p, TableType::HOT)};
 
                if (model != nullptr) {
                   // The player has a valid entry.
@@ -329,7 +329,7 @@ void IgHost::mapPlayers2ElevTable()
    for (int i = getElevationTableSize(); i > 0; --i) {
       if ( hotTbl[i-1]->isNotChecked() ) {
          // Deleting this entry
-         removeModelFromList( (i-1), HOT_TABLE);
+         removeModelFromList( (i-1), TableType::HOT);
       }
    }
 }
@@ -363,7 +363,7 @@ CigiModel* IgHost::newModelEntry(models::Player* const ip)
       if (model != nullptr) {
          // Yes, initialize the model entry
          model->initialize(ip, igModelTypes.data(), nIgModelTypes);
-         addModelToList(model, MODEL_TABLE);
+         addModelToList(model, TableType::MODEL);
       }
    }
    return model;
@@ -385,7 +385,7 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
       if (model != nullptr) {
          // Yes, initialize the model entry
          model->initialize(ip);
-         addModelToList(model, HOT_TABLE);
+         addModelToList(model, TableType::HOT);
       }
    }
    return model;
@@ -475,7 +475,7 @@ bool IgHost::addModelToList(CigiModel* const model, const TableType type)
       CigiModel** tbl{modelTbl.data()};
       int n{nModels};
       int max{maxModels};
-      if (type == HOT_TABLE) {
+      if (type == TableType::HOT) {
          tbl = hotTbl.data();
          n = nHots;
          max = maxElevations;
@@ -504,7 +504,7 @@ bool IgHost::addModelToList(CigiModel* const model, const TableType type)
          }
 
          // Increment the count
-         if (type == HOT_TABLE) nHots++;
+         if (type == TableType::HOT) nHots++;
          else nModels++;
 
          ok = true;
@@ -520,7 +520,7 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
 {
    // Select the table size
    int n{nModels};
-   if (type == HOT_TABLE) {
+   if (type == TableType::HOT) {
       n = nHots;
    }
 
@@ -529,7 +529,7 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
 
       // Select the table
       CigiModel** tbl{modelTbl.data()};
-      if (type == HOT_TABLE) {
+      if (type == TableType::HOT) {
          tbl = hotTbl.data();
       }
 
@@ -543,7 +543,7 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
       }
 
       // Decrement the count
-      if (type == HOT_TABLE) --nHots;
+      if (type == TableType::HOT) --nHots;
       else --nModels;
 
       // clear the last pointer
@@ -558,7 +558,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 {
    CigiModel** tbl{modelTbl.data()};
    int n{nModels};
-   if (type == HOT_TABLE) {
+   if (type == TableType::HOT) {
       tbl = hotTbl.data();
       n = nHots;
    }
@@ -579,7 +579,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
       }
 
       // Decrement the count
-      if (type == HOT_TABLE) --nHots;
+      if (type == TableType::HOT) --nHots;
       else --nModels;
 
       // clear the last pointer
@@ -600,7 +600,7 @@ CigiModel* IgHost::findModel(const int playerID, const base::String* const feder
 
    // Binary search the table for the models
    CigiModel* found{};
-   if (type == HOT_TABLE) {
+   if (type == TableType::HOT) {
       CigiModel** k{static_cast<CigiModel**>(bsearch(&key, hotTbl.data(), nHots, sizeof(CigiModel*), compareKey2Model))};
       if (k != nullptr) found = *k;
    } else {

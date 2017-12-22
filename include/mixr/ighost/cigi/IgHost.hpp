@@ -34,9 +34,9 @@ class IgHost : public simulation::AbstractIgHost
 
 public:
     // Model table types
-    enum TableType {
-       MODEL_TABLE,     // Model table -- maps players to visual system models
-       HOT_TABLE        // Height-Of-Terrain request table
+    enum class TableType {
+       MODEL,               // Model table -- maps players to visual system models
+       HOT                  // Height-Of-Terrain request table
     };
 
 public:
