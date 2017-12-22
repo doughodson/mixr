@@ -48,9 +48,7 @@ public:
     double getMaxRange() const                            { return maxRange; }       // Max range of active player/models
     virtual bool isResetInProgress() const;                                          // True if visual system is resetting
 
-    bool setRefLatitude(const double);                      // Sets the visual database reference latitude  (degs)
-    bool setRefLongitude(const double);                     // Sets the visual database reference longitude (degs)
-    void setPlayerList(base::PairStream* const) override;   // Sets the player list that we're to use to generate player/models
+    void setPlayerList(base::PairStream* const) final;   // Sets the player list that we're to use to generate player/models
 
     bool setMaxRange(const double);                         // Sets the max range (meters)
     bool setMaxModels(const int);                           // Sets the max number of active, in-range player/models
