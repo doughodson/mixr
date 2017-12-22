@@ -19,7 +19,7 @@ namespace linkage {
 //      port         <Number>    Device port number (default: 0)
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //------------------------------------------------------------------------------
-class DiscreteInput : public AbstractAdapter
+class DiscreteInput final: public AbstractAdapter
 {
    DECLARE_SUBCLASS(DiscreteInput, AbstractAdapter)
 
@@ -37,8 +37,8 @@ public:
    bool setInvert(const bool x)                    { invert = x;       return true; }
 
 private:
-   virtual void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) override;
-   virtual void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) override   {}
+   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
+   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
 
    int location {};      // AbstractIoData input bit location
    int port {};          // Port number

@@ -33,7 +33,7 @@ namespace linkage {
 //      table        <Table1>    Shaping function table (default: none)
 //
 //------------------------------------------------------------------------------
-class AnalogOutput : public AbstractAdapter
+class AnalogOutput final: public AbstractAdapter
 {
    DECLARE_SUBCLASS(AnalogOutput, AbstractAdapter)
 
@@ -54,8 +54,8 @@ public:
    bool setTable(const base::Table1* const);
 
 private:
-   virtual void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) override     {}
-   virtual void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) override;
+   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final     {}
+   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final;
 
    int location {};               // AbstractIoData analog output channel number
    int channel {};                // Analog channel number

@@ -36,7 +36,7 @@ namespace linkage {
 //
 //      ai        <Number>       ! AbstractIoData's AI channel index
 //------------------------------------------------------------------------------
-class AnalogSignalGen : public AbstractGenerator
+class AnalogSignalGen final: public AbstractGenerator
 {
    DECLARE_SUBCLASS(AnalogSignalGen, AbstractGenerator)
 
@@ -46,7 +46,7 @@ public:
 public:
    AnalogSignalGen();
 
-   void reset() override;
+   void reset() final;
 
 private:
    void processInputsImpl(const double dt, base::AbstractIoData* const) final;

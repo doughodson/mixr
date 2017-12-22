@@ -23,38 +23,38 @@ namespace linkage {
 // Slots:
 //    generators <PairStream>   : A list of generators
 //------------------------------------------------------------------------------
-class MockDevice : public base::AbstractIoDevice
+class MockDevice final: public base::AbstractIoDevice
 {
     DECLARE_SUBCLASS(MockDevice, base::AbstractIoDevice)
 
 public:
    MockDevice();
 
-   void reset() override                                                                          {}
+   void reset() final                                                                          {}
 
    // DI methods
-   int getNumDiscreteInputChannels() const override                                               { return 0; }
-   int getNumDiscreteInputPorts() const override                                                  { return 0; }
-   bool getDiscreteInput(bool* const value, const int channel, const int port) const override     { return false; }
+   int getNumDiscreteInputChannels() const final                                               { return 0; }
+   int getNumDiscreteInputPorts() const final                                                  { return 0; }
+   bool getDiscreteInput(bool* const value, const int channel, const int port) const final     { return false; }
 
    // DO methods
-   int getNumDiscreteOutputChannels() const override                                              { return 0; }
-   int getNumDiscreteOutputPorts() const override                                                 { return 0; }
-   bool setDiscreteOutput(const bool value, const int channel, const int port) override           { return false; }
+   int getNumDiscreteOutputChannels() const final                                              { return 0; }
+   int getNumDiscreteOutputPorts() const final                                                 { return 0; }
+   bool setDiscreteOutput(const bool value, const int channel, const int port) final           { return false; }
 
    // AI methods
-   int getNumAnalogInputs() const override                                                        { return 0; }
-   bool getAnalogInput(double* const value, const int channel) const override                     { return false; }
+   int getNumAnalogInputs() const final                                                        { return 0; }
+   bool getAnalogInput(double* const value, const int channel) const final                     { return false; }
 
    // AO methods
-   int getNumAnalogOutputs() const override                                                       { return 0;     }
-   bool setAnalogOutput(const double value, const int channel) override                           { return false; }
+   int getNumAnalogOutputs() const final                                                       { return 0;     }
+   bool setAnalogOutput(const double value, const int channel) final                           { return false; }
 
 private:
    // mock device executes all generators to create values to store in input data buffer
-   void processInputsImpl(const double dt, base::AbstractIoData* const inData) override;
+   void processInputsImpl(const double dt, base::AbstractIoData* const inData) final;
    // mock device looks like a null device, it has no output
-   void processOutputsImpl(const double dt, const base::AbstractIoData* const outData) override       { }
+   void processOutputsImpl(const double dt, const base::AbstractIoData* const outData) final       { }
 
    base::safe_ptr<base::PairStream> generators;   // list of adapters used to generate values
 

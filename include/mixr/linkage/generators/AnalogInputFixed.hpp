@@ -18,14 +18,14 @@ namespace linkage {
 //      ai        <Number>       ! AbstractIoData's AI channel index
 //      value     <Number>       ! Default is 0.0
 //------------------------------------------------------------------------------
-class AnalogInputFixed : public AbstractGenerator
+class AnalogInputFixed final: public AbstractGenerator
 {
    DECLARE_SUBCLASS(AnalogInputFixed, AbstractGenerator)
 
 public:
    AnalogInputFixed();
 
-   void reset() override    {}
+   void reset() final    {}
 
 private:
    void processInputsImpl(const double dt, base::AbstractIoData* const) final;

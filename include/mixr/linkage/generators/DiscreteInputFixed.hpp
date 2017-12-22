@@ -21,7 +21,7 @@ namespace linkage {
 //
 //      di        <Number>       ! AbstractIoData's DI channel index
 //------------------------------------------------------------------------------
-class DiscreteInputFixed : public AbstractGenerator
+class DiscreteInputFixed final: public AbstractGenerator
 {
    DECLARE_SUBCLASS(DiscreteInputFixed, AbstractGenerator)
 
@@ -31,7 +31,7 @@ public:
 public:
    DiscreteInputFixed();
 
-   void reset() override    {}
+   void reset() final    {}
 
 private:
    void processInputsImpl(const double dt, base::AbstractIoData* const) final;

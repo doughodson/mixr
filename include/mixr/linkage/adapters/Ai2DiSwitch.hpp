@@ -34,7 +34,7 @@ namespace linkage {
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch : public AbstractAdapter
+class Ai2DiSwitch final: public AbstractAdapter
 {
    DECLARE_SUBCLASS(Ai2DiSwitch, AbstractAdapter)
 
@@ -52,8 +52,8 @@ public:
    bool setInvertFlag(const bool x)               { invert = x;      return true; }
 
 private:
-   virtual void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) override;
-   virtual void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) override   {}
+   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
+   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
 
    int location {};     // AbstractIoData input bit location
    int channel {};      // Port's channel (bit) number
