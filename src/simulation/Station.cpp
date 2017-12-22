@@ -31,24 +31,24 @@ const double Station::DEFAULT_BG_THREAD_PRI{0.5};
 const double Station::DEFAULT_NET_THREAD_PRI{0.5};
 
 BEGIN_SLOTTABLE(Station)
-   "simulation",        //  1: Simulation executive
-   "networks",          //  2: List of Network models
-   "igHosts",           //  3: Image generator visual system host interface(s)
-   "ioHandler",         //  4: I/O data handler(s)  [ base::IoHandler or base::PairStream ]
-   "ownship",           //  5: Player name of our ownship (primary) player
-   "tcRate",            //  6: Time-critical rate (Hz) (base::Number, default: 50hz)
-   "tcPriority",        //  7: Time-critical thread priority (zero(0) is lowest, one(1) is highest)
-   "tcStackSize",       //  8: Time-critical thread stack size (default: <system default size>)
-   "fastForwardRate",   //  9: Fast forward rate (i.e., number of times updateTC() is called per frame)
-   "netRate",           // 10: Network thread rate (Hz)  (base::Number, default: 20 hz)
-   "netPriority",       // 11: Network thread priority (zero(0) is lowest, one(1) is highest)
-   "netStackSize",      // 12: Network thread stack size (default: <system default size>)
-   "bgRate",            // 13: Background thread rate (Hz) (default: 0.0 -- no thread)
-   "bgPriority",        // 14: Background thread priority
-   "bgStackSize",       // 15: Background thread stack size (default: <system default size>)
-   "startupResetTimer", // 16: Startup (initial) RESET event timer value (base::Time) (default: no reset event)
-   "enableUpdateTimers",// 17: Enable calling base::Timers::updateTimers() from updateTC() (default: false)
-   "dataRecorder",      // 18) Our Data Recorder
+   "simulation",         //  1: Simulation executive
+   "networks",           //  2: List of Network models
+   "igHosts",            //  3: Image Generator (IG) visual system host interface(s)
+   "ioHandlers",         //  4: Input/Output (IO) data handler(s)
+   "ownship",            //  5: Player name of our ownship (primary) player
+   "tcRate",             //  6: Time-critical rate (Hz) (base::Number, default: 50hz)
+   "tcPriority",         //  7: Time-critical thread priority (zero(0) is lowest, one(1) is highest)
+   "tcStackSize",        //  8: Time-critical thread stack size (default: <system default size>)
+   "fastForwardRate",    //  9: Fast forward rate (i.e., number of times updateTC() is called per frame)
+   "netRate",            // 10: Network thread rate (Hz)  (base::Number, default: 20 hz)
+   "netPriority",        // 11: Network thread priority (zero(0) is lowest, one(1) is highest)
+   "netStackSize",       // 12: Network thread stack size (default: <system default size>)
+   "bgRate",             // 13: Background thread rate (Hz) (default: 0.0 -- no thread)
+   "bgPriority",         // 14: Background thread priority
+   "bgStackSize",        // 15: Background thread stack size (default: <system default size>)
+   "startupResetTimer",  // 16: Startup (initial) RESET event timer value (base::Time) (default: no reset event)
+   "enableUpdateTimers", // 17: Enable calling base::Timers::updateTimers() from updateTC() (default: false)
+   "dataRecorder",       // 18) Our Data Recorder
 END_SLOTTABLE(Station)
 
 BEGIN_SLOT_MAP(Station)
@@ -58,7 +58,6 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 3, setSlotIgHosts,               base::PairStream)
 
-   ON_SLOT( 4, setSlotIoHandler,             base::AbstractIoHandler)
    ON_SLOT( 4, setSlotIoHandlers,            base::PairStream)
 
    ON_SLOT( 5, setSlotOwnshipName,           base::String)
@@ -1002,13 +1001,6 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
 //-----------------------------------------------------------------------------
 // setSlotIoHandler() -- Sets a list of I/O handlers
 //-----------------------------------------------------------------------------
-bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
-{
-    const auto list = new base::PairStream();
-    list->put( new base::Pair("1", p) );
-    return setSlotIoHandlers(list);
-}
-
 bool Station::setSlotIoHandlers(base::PairStream* const list)
 {
     bool ok{true};

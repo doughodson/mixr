@@ -29,10 +29,9 @@ class StationNetPeriodicThread;
 //
 //    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    igHosts            <base::PairStream>     ! List of image generator host interfaces
+//    igHosts            <base::PairStream>     ! List of Image Generator (IG) host interfaces
 //
-//    ioHandler          <base::IoHandler>      ! Single I/O data handler (default: nullptr)
-//    ioHandler          <base::PairStream>     ! List of I/O data handlers
+//    ioHandlers         <base::PairStream>     ! List of Input/Output (IO) data handlers
 //
 //    ownship            <base::String>         ! Player name of our ownship (primary) player (default: nullptr)
 //
@@ -250,9 +249,9 @@ private:
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
    Simulation* sim{};                             // Executable simulation model
-   base::safe_ptr<base::PairStream> igHosts;      // List of Image generator host interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
-   base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers
+   base::safe_ptr<base::PairStream> igHosts;      // List of Image generator (IG) host interfaces
+   base::safe_ptr<base::PairStream> ioHandlers;   // List of Input/Output (IO) data handlers
    AbstractPlayer* ownship{};                     // Ownship (primary) player
    const base::String* ownshipName{};             // Name of our ownship player
    bool tmrUpdateEnbl{};                          // Enable base::Timers::updateTimers() call from updateTC()
@@ -285,7 +284,6 @@ private:
 
    bool setSlotIgHosts(base::PairStream* const);
 
-   bool setSlotIoHandler(base::AbstractIoHandler* const);
    bool setSlotIoHandlers(base::PairStream* const);
 
    bool setSlotOwnshipName(const base::String* const);

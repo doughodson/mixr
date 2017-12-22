@@ -278,6 +278,28 @@ General framework-wide changes/improvements/trends/philosophy/goals
   are starting to adopt this guideline by systematically stripping
   off 'virtual' where no longer needed.
 
+- Topic: Slot table helper methods
+
+  Throughout the code base, methods that support the processing of
+  EDL configuration file inputs defined by so-called 'slot names'
+  have not always been defined in a consistent manner.  For example,
+  code written long ago frequently defined the visibility of them
+  as 'private' - later, newer classes often set their visibility as
+  'protected', and even later the visibility was often 'public.'  In some
+  cases, they were defined as hooks by allowing them to be overridden
+  as a virtual method.
+
+  With this release, all (with a few minor exceptions) slot methods have
+  been made 'non-virtual private'.  This was done for several reason,
+  but first and foremost, was to declutter the public interfaces of class
+  definitions as much as possible.  This improves the understandability
+  of classes, and because they were all mostly named 'setSlotThis' or
+  'setSlotThat', it restates and solidifies their role as an EDL slot
+  table helper method and not necessarily intended to be a general purpose
+  object 'public' interface.
+
+  This change should have no impact on existing applications.
+
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -372,10 +394,10 @@ linkage library (mixr_linkage)
 
    -- This library is not new - it was previously named 'iodevice'.  Renaming was
       done because it more correctly indicate what this library includes - an
-	  implementation of a flexible I/O linkage system to read and write to
-	  device(s), transform their value and map them to application defined data
-	  structures.  Many aspects of this library have been updated to simpily code
-	  base, reduce complexity and ease understandability.
+      implementation of a flexible I/O linkage system to read and write to
+      device(s), transform their value and map them to application defined data
+      structures.  Many aspects of this library have been updated to simplify code
+      base, reduce complexity and ease understandability.
 
    -- All 'AbstractAdapter'-based classes have been moved into an 'adapters'
       subdirectory to improve clarity.
@@ -502,9 +524,13 @@ models library (mixr_models)
 -- Renamed 'Buildings' filename to 'Building' to match the class name defined
    within it.
 
-   Station class
-      1) Renamed 'otw' slot to 'igHosts'.  Use this new slotname to define a list,
-      of one or more IG host interfaces.  Note, that a list must be provided.
+--------------------------------------------------------------------------------
 
+--------------------------------------------------------------------------------
+simulation library (mixr_simulation)
+
+   Station class
+      1) Renamed 'otw' slot to 'igHosts'.  Use this slot name to define a list,
+      of one or more IG host interfaces.  Note, that a list must be provided!
 
 --------------------------------------------------------------------------------
