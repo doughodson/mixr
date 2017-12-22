@@ -37,7 +37,7 @@ namespace cigi {
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const int MAX_BUF_SIZE {1472};
+static const int MAX_BUF_SIZE{1472};
 
 IMPLEMENT_SUBCLASS(HostSession, "CigiHostSession")
 EMPTY_DELETEDATA(HostSession)
@@ -178,7 +178,7 @@ void HostSession::endMessage()
 
 int HostSession::getOutgoingBufferSize()
 {
-   int sendSize {};
+   int sendSize{};
    msgOut->GetMsg(sendSize);
    return sendSize;
 }

@@ -77,12 +77,12 @@ public:
    // is an elevation request pending?
    bool isElevationRequestPending() const           { return elevReqFlg; }
 
-   bool isASyncMode() const                         { return asyncMode; }           // True if running in CIGI async mode
+   bool isASyncMode() const                         { return asyncMode;  }          // True if running in CIGI async mode
    bool isSyncMode() const                          { return !asyncMode; }          // True if running in CIGI sync mode
-   bool setASyncMode(const bool);                                                   // Sets the CIGI async mode flag
+   void setASyncMode(const bool x)                  { asyncMode = x;     }          // Sets the CIGI async mode flag
 
-   bool isOwnshipModelHidden() const                { return hideOwn; }             // True if the ownship's model is hidden
-   bool setHideOwnshipModel(const bool);                                            // Sets the hide ownship flag
+   bool isOwnshipModelHidden() const                { return hideOwn;    }          // True if the ownship's model is hidden
+   void setHideOwnshipModel(const bool x)           { hideOwn = x;       }          // Sets the hide ownship flag
 
    int getOwnshipModelId() const                    { return cmtOwnship; }          // Ownship's model ID
    void setOwnshipModelId(const int id)             { cmtOwnship = id;   }          // Ownship's model ID
@@ -186,15 +186,15 @@ protected:
    CigiModel* hotFactory() final;           // Create objects unique to interface
 
    bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const p);
-   bool setAirVehicleData(CigiModel* const m, const int entity, const models::AirVehicle* const);
-   bool setBuildingData(CigiModel* const m, const int entity, const models::Building* const);
-   bool setEffectData(CigiModel* const m, const int entity, const models::Effect* const);
-   bool setGndVehicleData(CigiModel* const m, const int entity, const models::GroundVehicle* const);
-   bool setLifeFormData(CigiModel* const m, const int entity, const models::LifeForm* const);
-   bool setMissileData(CigiModel* const m, const int entity, const models::Missile* const);
-   bool setShipData(CigiModel* const m, const int entity, const models::Ship* const);
-   bool setSpaceVehicleData(CigiModel* const m, const int entity, const models::SpaceVehicle* const);
-   bool setWeaponData(CigiModel* const m, const int entity, const models::AbstractWeapon* const);
+   bool setAirVehicleData(CigiModel* const, const int entity, const models::AirVehicle* const);
+   bool setBuildingData(CigiModel* const, const int entity, const models::Building* const);
+   bool setEffectData(CigiModel* const, const int entity, const models::Effect* const);
+   bool setGndVehicleData(CigiModel* const, const int entity, const models::GroundVehicle* const);
+   bool setLifeFormData(CigiModel* const, const int entity, const models::LifeForm* const);
+   bool setMissileData(CigiModel* const, const int entity, const models::Missile* const);
+   bool setShipData(CigiModel* const, const int entity, const models::Ship* const);
+   bool setSpaceVehicleData(CigiModel* const, const int entity, const models::SpaceVehicle* const);
+   bool setWeaponData(CigiModel* const, const int entity, const models::AbstractWeapon* const);
 
 private:
    // creates a single task thread to process IG packets

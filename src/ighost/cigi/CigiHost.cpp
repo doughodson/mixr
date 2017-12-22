@@ -219,20 +219,6 @@ CigiModel* CigiHost::hotFactory()
    return p;
 }
 
-// sets/clears the async mode flag
-bool CigiHost::setASyncMode(const bool f)
-{
-   asyncMode = f;
-   return true;
-}
-
-// sets/clears the hide ownship flag
-bool CigiHost::setHideOwnshipModel(const bool f)
-{
-   hideOwn = f;
-   return true;
-}
-
 void CigiHost::updateData(const double dt)
 {
    // ---
@@ -1367,7 +1353,8 @@ bool CigiHost::setSlotASyncMode(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setASyncMode(msg->getBoolean());
+      setASyncMode(msg->getBoolean());
+      ok = true;
    }
    return ok;
 }
@@ -1377,7 +1364,8 @@ bool CigiHost::setSlotHideOwnshipModel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setHideOwnshipModel(msg->getBoolean());
+      setHideOwnshipModel(msg->getBoolean());
+      ok = true;
    }
    return ok;
 }
