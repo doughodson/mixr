@@ -29,9 +29,7 @@ BEGIN_SLOTTABLE(IgHost)
    "maxRange",         // 1: Max range of visual system (distance: meters)
    "maxModels",        // 2: Max number of models
    "maxElevations",    // 3: Max number of terrain elevation requests
-   "latitude",         // 4: Visual reference latitude (deg)
-   "longitude",        // 5: Visual reference longitude (deg)
-   "typeMap",          // 6: IG's system model type IDs (PairStream of TypeMapper objects)
+   "typeMap",          // 4: IG's system model type IDs (PairStream of TypeMapper objects)
 END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
@@ -39,9 +37,7 @@ BEGIN_SLOT_MAP(IgHost)
    ON_SLOT(1, setSlotMaxRange,      base::Number)
    ON_SLOT(2, setSlotMaxModels,     base::Number)
    ON_SLOT(3, setSlotMaxElevations, base::Number)
-   ON_SLOT(4, setSlotRefLatitude,   base::Number)
-   ON_SLOT(5, setSlotRefLongitude,  base::Number)
-   ON_SLOT(6, setSlotTypeMap,       base::PairStream)
+   ON_SLOT(4, setSlotTypeMap,       base::PairStream)
 END_SLOT_MAP()
 
 IgHost::IgHost()
@@ -67,10 +63,6 @@ void IgHost::copyData(const IgHost& org, const bool)
    maxElevations = org.maxElevations;
    rstFlg = org.rstFlg;
    rstReq = org.rstReq;
-
-   // Posiiton
-   refLat = org.refLat;
-   refLon = org.refLon;
 
    setOwnship(org.ownship);
    setPlayerList(org.playerList);
@@ -601,7 +593,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 // findModel() -- find the model that matches ALL IDs.
 //------------------------------------------------------------------------------
-CigiModel* IgHost::findModel(const unsigned short playerID, const base::String* const federateName, const TableType type)
+CigiModel* IgHost::findModel(const int playerID, const base::String* const federateName, const TableType type)
 {
    // Define the key
    ModelKey key(playerID, federateName);
@@ -681,23 +673,6 @@ bool IgHost::isResetInProgress() const
 }
 
 //------------------------------------------------------------------------------
-// Data set routines
-//------------------------------------------------------------------------------
-bool IgHost::setRefLatitude(const double v)
-{
-    bool ok{v <= 90.0 && v >= -90.0};
-    if (ok) refLat = v;
-    return ok;
-}
-
-bool IgHost::setRefLongitude(const double v)
-{
-    bool ok{v <= 180.0 && v >= -180.0};
-    if (ok) refLon = v;
-    return ok;
-}
-
-//------------------------------------------------------------------------------
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
@@ -763,26 +738,6 @@ bool IgHost::setSlotMaxElevations(const base::Number* const num)
         if (!ok) {
             std::cerr << "IgHost::setSlotMaxElevations: maximum number of terrain elevation requests limited to IgHost::MAX_ELEV" << std::endl;
         }
-    }
-    return ok;
-}
-
-// latitude: Ref latitude (deg)
-bool IgHost::setSlotRefLatitude(const base::Number* const num)
-{
-    bool ok{};
-    if (num != nullptr) {
-        ok = setRefLatitude(num->getDouble());
-    }
-    return ok;
-}
-
-// longitude: Ref longitude (deg)
-bool IgHost::setSlotRefLongitude(const base::Number* const num)
-{
-    bool ok{};
-    if (num != nullptr) {
-        ok = setRefLongitude(num->getDouble());
     }
     return ok;
 }

@@ -399,12 +399,12 @@ int CigiHost::updateModels()
    if (table != nullptr && getModelTableSize() > 0) {
 
       // For all active models in the table ...
-      for (unsigned short i = 0; i < getModelTableSize(); i++) {
+      for (int i = 0; i < getModelTableSize(); i++) {
          base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
          if (model != nullptr) {
 
             if (model->getState() != CigiModel::State::Inactive) {
-               unsigned short entity{static_cast<unsigned short>(model->getID()* 8 + 1)}; // Save a block of four entities per model
+               int entity{model->getID()* 8 + 1};      // Save a block of four entities per model
                //  (id*8+1) is parent entity
                //  (id*8+2) is smoke trail entity
                //  (id*8+3) is air explosion entity
@@ -498,7 +498,7 @@ bool CigiHost::setAirVehicleData(CigiModel* const m, const int entity, const mod
          int tt{};
          const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -578,7 +578,7 @@ bool CigiHost::setBuildingData(CigiModel* const m, const int entity, const model
          int tt{};
          const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -692,7 +692,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
          int tt{};
          const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -847,7 +847,7 @@ bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models:
          int tt{};
          const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -891,7 +891,7 @@ bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models:
             int tt{};
             const TypeMapper* otm {m->getTypeMapper()};
             if (otm != nullptr) tt = otm->getTypeId();
-            if (tt > 0xffff) tt = 0;   // unsigned short only
+            if (tt > 0xffff) tt = 0;
             ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
             // Set entity control data
@@ -947,7 +947,7 @@ bool CigiHost::setLifeFormData(CigiModel* const m, const int entity, const model
          int tt{};
          const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -1038,7 +1038,7 @@ bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models
       int tt{};
       const TypeMapper* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getTypeId();
-      if (tt > 0xffff) tt = 0;   // unsigned shorts only
+      if (tt > 0xffff) tt = 0;
       ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
       // Set entity control data
@@ -1124,7 +1124,7 @@ bool CigiHost::setShipData(CigiModel* const m, const int entity, const models::S
          int tt{};
          const TypeMapper* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned shorts only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -1185,7 +1185,7 @@ bool CigiHost::setSpaceVehicleData(CigiModel* const m, const int entity, const m
          int tt{};
          const TypeMapper* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getTypeId();
-         if (tt > 0xffff) tt = 0;   // unsigned short only
+         if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
          // Set entity control data
@@ -1250,7 +1250,7 @@ bool CigiHost::setWeaponData(CigiModel* const m, const int entity, const models:
       int tt{};
       const TypeMapper* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getTypeId();
-      if (tt > 0xffff) tt = 0;   // unsigned shorts only
+      if (tt > 0xffff) tt = 0;
       ec->SetEntityType(static_cast<Cigi_uint16>(tt));
 
       // Set entity control data
@@ -1500,7 +1500,7 @@ bool CigiHost::sendCigiData()
          // Add all of the models (that we can) to the buffer.
          int sendSize{session->getOutgoingBufferSize()};
          int maxAge{static_cast<int>(getModelTableSize())};
-         for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
+         for (int i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
             base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
             if (model != nullptr) {
 
@@ -1594,9 +1594,9 @@ bool CigiHost::sendCigiData()
 
          // For all active elevation requests in the table ...
          // -- look for the oldest request ---
-         base::safe_ptr<CigiModel> oldest( nullptr );
-         base::safe_ptr<CigiModel> model( nullptr );
-         for (unsigned short i = 0; i < getElevationTableSize(); i++) {
+         base::safe_ptr<CigiModel> oldest;
+         base::safe_ptr<CigiModel> model;
+         for (int i = 0; i < getElevationTableSize(); i++) {
             model = table[i];
             if (model != nullptr) {
                // Must be active and haven't been requested for at least TBD frames ...
@@ -1611,7 +1611,7 @@ bool CigiHost::sendCigiData()
          if (oldest != nullptr) {
 
             int idx{-1};
-            for (unsigned short i = 0; idx < 0 && i < getElevationTableSize(); i++) {
+            for (int i = 0; idx < 0 && i < getElevationTableSize(); i++) {
                if (table[i] == oldest) idx = i;
             }
 
@@ -1621,7 +1621,7 @@ bool CigiHost::sendCigiData()
 
                // Requested Position (lat/lon)
                double hotLat{}, hotLon{};
-               dynamic_cast<models::Player*>(oldest->getPlayer())->getPositionLL(&hotLat, &hotLon);   // DDH
+               dynamic_cast<models::Player*>(oldest->getPlayer())->getPositionLL(&hotLat, &hotLon);
                hotRequest.SetLat(hotLat);
                hotRequest.SetLon(hotLon);
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
@@ -1813,7 +1813,7 @@ void CigiHost::hatHotResp(const CigiHatHotRespV3* const p)
    // Valid?
    if (p != nullptr && p->GetValid()) {
       // Yes and the hot_id is the elevation table index
-      unsigned short id{p->GetHatHotID()};
+      int id{p->GetHatHotID()};
 
       //if (isMessageEnabled(MSG_DEBUG)) {
       //std::cout << "hotResp: id = " << id << std::endl;
@@ -1828,7 +1828,7 @@ void CigiHost::hatHotResp(const CigiHatHotRespV3* const p)
          if (model->isHotActive() && model->getPlayer() != nullptr) {
             // When the player and elevation table are still valid, store
             // the terrain elevation (meters)
-            dynamic_cast<models::Player*>(model->getPlayer())->setTerrainElevation(static_cast<double>(p->GetHot()));  // DDH
+            dynamic_cast<models::Player*>(model->getPlayer())->setTerrainElevation(static_cast<double>(p->GetHot()));
 
             //if (isMessageEnabled(MSG_DEBUG)) {
             //   std::cout << "hotResp: alt = --, pid = " << model->getPlayer()->getID() << std::endl;

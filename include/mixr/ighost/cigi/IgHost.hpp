@@ -25,10 +25,6 @@ class TypeMapper;
 //
 //    maxElevations  <Number>       ! Max number of player terrain elevation requests (default: 0)
 //
-//    latitude       <Number>       ! Visual database reference latitude (deg) (default: 0.0)
-//
-//    longitude      <Number>       ! Visual database reference longitude (deg) (default: 0.0)
-//
 //    typeMap        <PairStream>   ! IG's system model type IDs (list of TypeMapper objects) (default: 0)
 //
 //------------------------------------------------------------------------------
@@ -50,8 +46,6 @@ public:
     int getMaxModels() const                              { return maxModels; }      // Max number of active, in-range player/models
     int getMaxElevations() const                          { return maxElevations; }  // Max number of terrain elevation requests
     double getMaxRange() const                            { return maxRange; }       // Max range of active player/models
-    double getRefLatitude() const                         { return refLat; }         // Visual database reference latitude  (degs)
-    double getRefLongitude() const                        { return refLon; }         // Visual database reference longitude (degs)
     virtual bool isResetInProgress() const;                                          // True if visual system is resetting
 
     bool setRefLatitude(const double);                      // Sets the visual database reference latitude  (degs)
@@ -75,7 +69,7 @@ protected:
     double computeRangeToPlayer(const models::Player* const) const;
 
     // Find a player's model object in table 'type' by the player IDs
-    CigiModel* findModel(const unsigned short playerID, const base::String* const federateName, const TableType type);
+    CigiModel* findModel(const int playerID, const base::String* const federateName, const TableType type);
 
     // Find a player's model object in table 'type' using a pointer to the player
     CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
@@ -117,7 +111,6 @@ private:
     void processesModels();                              // Process ownship & player models
     void processesElevations();                          // Process terrain elevation requests
 
-
     void resetTables();                                  // Resets the tables
     void clearIgModelTypes();                            // Clear the IG model types table
     void mapPlayerList2ModelTable();                     // Map the player list to the model table
@@ -126,34 +119,30 @@ private:
     CigiModel* newElevEntry(models::Player* const ip);   // Create a new elevation entry for this player & return the table index
 
     // Parameters
-    double maxRange{20000.0};               // Max range of visual system  (meters) (default: 20km)
-    int maxModels{};                        // Max number of models (must be <= MAX_MODELS)
-    int maxElevations{};                    // Max number of terrain elevation requests (default: no requests)
-
-    // Ref position
-    double refLat{};                        // Visual database reference latitude (deg)
-    double refLon{};                        // Visual database reference longitude (deg)
+    double maxRange{20000.0};                            // Max range of visual system  (meters) (default: 20km)
+    int maxModels{};                                     // Max number of models (must be <= MAX_MODELS)
+    int maxElevations{};                                 // Max number of terrain elevation requests (default: no requests)
 
     // Simulation inputs
-    models::Player* ownship{};              // Current ownship
-    base::PairStream* playerList{};         // Current player list
-    bool rstFlg{};                          // Reset in progress
-    bool rstReq{};                          // Reset request flag
+    models::Player* ownship{};                           // Current ownship
+    base::PairStream* playerList{};                      // Current player list
+    bool rstFlg{};                                       // Reset in progress
+    bool rstReq{};                                       // Reset request flag
 
     // Model table
-    std::array<CigiModel*, MAX_MODELS> modelTbl{};    // The table of models
-    int nModels{};                                    // Number of models
+    std::array<CigiModel*, MAX_MODELS> modelTbl{};       // The table of models
+    int nModels{};                                       // Number of models
 
     // Height-Of-Terrain request table
-    std::array<CigiModel*, MAX_MODELS> hotTbl{};      // Height-Of-Terrain request table
-    int nHots{};                                      // Number of HOTs requests
+    std::array<CigiModel*, MAX_MODELS> hotTbl{};         // Height-Of-Terrain request table
+    int nHots{};                                         // Number of HOTs requests
 
     // Model quick lookup key
     struct ModelKey {
         ModelKey(const int pid, const base::String* const federateName);
         // IgModel IDs  -- Comparisons in this order --
-        int playerID;                               // Player ID
-        base::safe_ptr<const base::String> fName;   // Federate name
+        int playerID;                                    // Player ID
+        base::safe_ptr<const base::String> fName;        // Federate name
     };
 
     // IG model type table
@@ -170,8 +159,6 @@ private:
     bool setSlotMaxRange(const base::Number* const);       // Sets the max range (meters) slot
     bool setSlotMaxModels(const base::Number* const);      // Sets the max number of active, in-range player/models slot
     bool setSlotMaxElevations(const base::Number* const);  // Sets the max number of player terrain elevation requests slot
-    bool setSlotRefLatitude(const base::Number* const);    // Sets the visual database reference latitude  (degs) slot
-    bool setSlotRefLongitude(const base::Number* const);   // Sets the visual database reference longitude (degs) slot
     bool setSlotTypeMap(const base::PairStream* const);    // Sets the list of IG model type IDs (TypeMapper objects)
 };
 

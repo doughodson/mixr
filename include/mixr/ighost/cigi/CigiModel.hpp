@@ -59,7 +59,7 @@ public:
 
    const TypeMapper* getTypeMapper() const     { return typeMapper; }     // IG type mapper
 
-   unsigned short getPlayerID() const          { return playerID; }       // Player ID for the player associated with this model
+   int getPlayerID() const                     { return playerID; }       // Player ID for the player associated with this model
    const base::String* getFederateName() const { return federateName; }   // Player's federate name (if networked)
 
    int getAgeCount() const                     { return ageCount; }       // Age counter value (number of IG frames since last IG update)
