@@ -28,7 +28,7 @@ public:
    // Dump this data to an output stream
    void dump(std::ostream& sout) const;
 
-   virtual bool isDataLoaded() const override;
+   bool isDataLoaded() const override;
 
 private:
    void clearHeaders();
@@ -40,7 +40,7 @@ private:
    DedStats* fstat {};        // Statistics header
 
    // terrain::Database private interface
-   virtual bool loadData() override;   // Load the data file
+   bool loadData() override;   // Load the data file
 };
 
 }

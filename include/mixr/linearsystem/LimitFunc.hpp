@@ -26,16 +26,16 @@ public:
    virtual bool setLowerLimit(const double v);
    virtual bool setUpperLimit(const double v);
 
-   virtual double g(const double x) override;
-   virtual bool isValid() const override;
+   double g(const double x) override;
+   bool isValid() const override;
 
 protected:
-   virtual void initialize() override;
+   void initialize() override;
 
 private:
    void initData();  // Initialize our data
 
-   static const unsigned int ORDER = 1;
+   static const unsigned int ORDER{1};
 
    double lower {};      // Lower limit
    double upper {};      // Upper limit

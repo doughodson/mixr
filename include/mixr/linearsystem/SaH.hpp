@@ -35,18 +35,18 @@ public:
    double getAge() const                      { return time; }
 
    // Set Parameter
-   virtual bool setSampleRate(const unsigned int v);   // hz
+   virtual bool setSampleRate(const unsigned int);   // hz
 
-   virtual double g(const double x) override;
-   virtual bool isValid() const override;
+   double g(const double x) override;
+   bool isValid() const override;
 
 protected:
-   virtual void initialize() override;
+   void initialize() override;
 
 private:
    void initData();
 
-   static const unsigned int ORDER = 1;
+   static const unsigned int ORDER{1};
 
    double       time {};       // Current time since last sample (s)
    double       stime {};      // Sample time: time of next sample (s)

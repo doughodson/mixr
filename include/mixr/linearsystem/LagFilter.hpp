@@ -37,10 +37,10 @@ public:
    LagFilter(const unsigned int rate, const double tau);
 
    double getTau() const                         { return tau; }
-   virtual bool setTau(const double v);
+   virtual bool setTau(const double);
 
 private:
-   double tau {1.0};    // filter time constant (seconds)
+   double tau{1.0};    // filter time constant (seconds)
 
 private:
    // slot table helper methods

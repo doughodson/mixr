@@ -173,7 +173,7 @@ public:
       const unsigned int numColors,     // Number of colors
       base::Vec3d& rgb);                // Color
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    virtual void clearData();                       // Clear the data arrays

@@ -56,11 +56,11 @@ public:
    // simulation::Terrain interface
    // ---
 
-   virtual bool isDataLoaded() const override;
+   bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile
-   virtual unsigned int getElevations(
+   unsigned int getElevations(
          double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
@@ -73,7 +73,7 @@ public:
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
-   virtual bool getElevation(
+   bool getElevation(
          double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
@@ -88,7 +88,7 @@ protected:
    unsigned int nptlong {};       // Number of points in longitude (i.e., number of columns)
    short    voidValue {-32767};   // Value representing a void (missing) data point
 
-   virtual void clearData() override;
+   void clearData() override;
 };
 
 }

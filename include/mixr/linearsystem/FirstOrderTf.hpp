@@ -40,15 +40,15 @@ public:
    virtual bool setD1(const double v);
    virtual bool setD2(const double v);
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
-   virtual void initialize() override;
+   void initialize() override;
 
 private:
    void initData();  // Initialize our data
 
-   static const unsigned int ORDER = 2;
+   static const unsigned int ORDER{2};
 
    // Parameters and initial values
    double n1 {};

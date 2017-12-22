@@ -34,7 +34,7 @@ private:
    bool readDtedHeaders(std::istream&);
    bool readDtedData(std::istream&);
 
-   virtual bool loadData() override;
+   bool loadData() override;
 
    bool verifyChecksum {true};    // verify the file checksum flag
 

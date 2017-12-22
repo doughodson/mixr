@@ -11,6 +11,7 @@ OBJS =  \
 	buttons/RotarySwitch.o \
 	buttons/Knob.o \
 	buttons/Switch.o \
+	buttons/SolenoidButton.o \
 	buttons/SolenoidSwitch.o \
 	dials/AltitudeDial.o \
 	dials/AnalogDial.o \

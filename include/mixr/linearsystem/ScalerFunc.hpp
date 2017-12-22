@@ -50,15 +50,15 @@ public:
    unsigned int getRate() const  { return rate; } // hz
 
    // Sets the initial X value, X(0), and all past X values, X(-1), X(-2) ,, X(-k+1)
-   virtual bool setX0(const double v);
+   virtual bool setX0(const double);
 
    // Sets the initial Y value, Y(0), and all past Y values, Y(-1), Y(-2) ,, Y(-k+1)
-   virtual bool setY0(const double v);
+   virtual bool setY0(const double);
 
    // Sets the master update rate (hz)
-   virtual bool setRate(const unsigned int v);
+   virtual bool setRate(const unsigned int);
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
    // Allocate memory arrays -- removes old arrays, if any

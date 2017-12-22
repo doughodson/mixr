@@ -39,22 +39,22 @@ public:
    double getD3() const          { return d3; }
 
    // Set Parameters
-   virtual bool setN1(const double v);
-   virtual bool setN2(const double v);
-   virtual bool setN3(const double v);
-   virtual bool setD1(const double v);
-   virtual bool setD2(const double v);
-   virtual bool setD3(const double v);
+   virtual bool setN1(const double);
+   virtual bool setN2(const double);
+   virtual bool setN3(const double);
+   virtual bool setD1(const double);
+   virtual bool setD2(const double);
+   virtual bool setD3(const double);
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
-   virtual void initialize() override;
+   void initialize() override;
 
 private:
    void initData();
 
-   static const unsigned int ORDER = 6;
+   static const unsigned int ORDER{6};
 
    // Parameters and initial values
    double n1 {};

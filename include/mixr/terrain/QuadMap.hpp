@@ -29,11 +29,11 @@ public:
    // simulation::Terrain interface
    // ---
 
-   virtual bool isDataLoaded() const override;
+   bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this QuadMap
-   virtual unsigned int getElevations(
+   unsigned int getElevations(
          double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
@@ -46,27 +46,27 @@ public:
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
-   virtual bool getElevation(
+   bool getElevation(
          double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
       ) const override;
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    virtual void findDataFiles();           // Initializes the channel array
 
-   virtual void clearData() override;
+   void clearData() override;
 
 private:
-   static const unsigned int MAX_DATA_FILES {4};            // Only 4 files (as in Quad!)
+   static const unsigned int MAX_DATA_FILES{4};            // Only 4 files (as in Quad!)
 
-   std::array<const Terrain*, MAX_DATA_FILES> dataFiles {}; // Terrain data files
-   unsigned int numDataFiles {};                            // Number of data files
+   std::array<const Terrain*, MAX_DATA_FILES> dataFiles{}; // Terrain data files
+   unsigned int numDataFiles{};                            // Number of data files
 
-   virtual bool loadData() override;
+   bool loadData() override;
 };
 
 }

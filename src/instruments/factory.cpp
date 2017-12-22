@@ -38,6 +38,7 @@
 #include "mixr/instruments/buttons/RotarySwitch.hpp"
 #include "mixr/instruments/buttons/Knob.hpp"
 #include "mixr/instruments/buttons/Switch.hpp"
+#include "mixr/instruments/buttons/SolenoidButton.hpp"
 #include "mixr/instruments/buttons/SolenoidSwitch.hpp"
 
 // Adi

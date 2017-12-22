@@ -3,7 +3,6 @@
 #define __mixr_instruments_SolenoidSwitch_H__
 
 #include "mixr/graphics/Graphic.hpp"
-#include "mixr/instruments/buttons/Button.hpp"
 #include <array>
 
 namespace mixr {
@@ -21,7 +20,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class SolenoidSwitch : public graphics::Graphic
 {
-    DECLARE_SUBCLASS(SolenoidSwitch,graphics::Graphic)
+    DECLARE_SUBCLASS(SolenoidSwitch, graphics::Graphic)
 
 public:
     SolenoidSwitch();
@@ -68,32 +67,6 @@ private:
     // slot table helper methods
     bool setSlotHoldTimer(const base::Number* const);
     bool setSlotEventMap(const base::PairStream* const);
-};
-
-//------------------------------------------------------------------------------
-// Class: SolenoidButton
-// Description: Custom button that understands that it belongs to a SolenoidSwitch,
-// and will let it know when its respective button has been hit.
-//------------------------------------------------------------------------------
-class SolenoidButton : public Button
-{
-    DECLARE_SUBCLASS(SolenoidButton,Button)
-public:
-    SolenoidButton();
-
-    virtual bool onSingleClick() override;
-
-    // The left mouse button has been depressed
-    virtual bool onMouseDown();
-    virtual bool onPicked(const base::Number* const);
-
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-    virtual void updateData(const double dt = 0.0) override;
-
-private:
-    bool noTimer {};    // this flag tells this button that we don't time, we simply switch
-    bool pushed {};     // flag that tells us we have the mouse down on our current graphic
-    SendData pushedSD;
 };
 
 }

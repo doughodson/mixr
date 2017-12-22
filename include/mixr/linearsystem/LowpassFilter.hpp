@@ -33,10 +33,10 @@ public:
    LowpassFilter(const unsigned int rate, const double w);
 
    double getWc() const                           { return wc; }
-   virtual bool setWc(const double v);
+   virtual bool setWc(const double);
 
 private:
-   double wc {};    // Cutoff frequency (rad/sec)
+   double wc{};    // Cutoff frequency (rad/sec)
 
 private:
    // slot table helper methods
