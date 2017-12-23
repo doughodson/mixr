@@ -39,8 +39,8 @@ public:
     UdpBroadcastHandler();
 
 protected:
-    virtual bool init() override;
-    virtual bool bindSocket() override;
+    bool init() override;
+    bool bindSocket() override;
 
 private:
     char* networkMask {};

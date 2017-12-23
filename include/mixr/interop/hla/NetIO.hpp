@@ -16,7 +16,7 @@ class Ambassador;
 class Nib;
 
 //------------------------------------------------------------------------------
-// Class: Hla::NetIO
+// Class: hla::NetIO
 // Description: Abstract High-Level Architecture (HLA) protocol manager.
 //              Unique Federations are managed by derived classes.
 //
@@ -37,24 +37,24 @@ public:
 
    // Max active HLA object classes
    // Note: the class handle indexes range from 1 to MAX_CLASSES
-   static const unsigned int MAX_CLASSES = 30;
+   static const unsigned int MAX_CLASSES{30};
 
    // Max active HLA object attributes
    // Note: the class handle indexes range from 1 to MAX_ATTRIBUTES
-   static const unsigned int MAX_ATTRIBUTES = 100;
+   static const unsigned int MAX_ATTRIBUTES{100};
 
    // Max active HLA interactions
    // Note: the class handle indexes range from 1 to MAX_INTERACTIONS
-   static const unsigned int MAX_INTERACTIONS = 30;
+   static const unsigned int MAX_INTERACTIONS{30};
 
    // Max active HLA interaction parameters
    // Note: the class handle indexes range from 1 to MAX_CLASSES
-   static const unsigned int MAX_PARAMETERS = 100;
+   static const unsigned int MAX_PARAMETERS{100};
 
 public:
 
     // HLA Object Class handles
-    //    Note: ndex range [ 1 ... MAX_CLASSES ]
+    //    Note: index range [ 1 ... MAX_CLASSES ]
     unsigned int findObjectClassIndex(const RTI::ObjectClassHandle handle) const;
     virtual unsigned int getNumberOfObjectClasses() const=0;
     virtual bool setObjectClassHandle(const unsigned int idx, const RTI::ObjectClassHandle handle);
@@ -72,7 +72,7 @@ public:
     virtual bool setObjectClassSubscribed(const unsigned int idx, const bool flag);
 
     // HLA Object attribute handles
-    //    Note: ndex range [ 1 ... MAX_ATTRIBUTES ]
+    //    Note: index range [ 1 ... MAX_ATTRIBUTES ]
     unsigned int findAttributeIndex(const RTI::AttributeHandle handle) const;
     virtual unsigned int getNumberOfObjectAttributes() const=0;
     virtual bool setObjectAttributeHandle(const unsigned int idx, const RTI::AttributeHandle handle);
@@ -80,7 +80,7 @@ public:
             { return (idx >= 1 && idx <= MAX_ATTRIBUTES) ? objectAttributeHandles[idx-1] : 0; }
 
     // HLA Interaction Class handles
-    //    Note: ndex range [ 1 ... MAX_INTERACTIONS ]
+    //    Note: index range [ 1 ... MAX_INTERACTIONS ]
     unsigned int findInteractionClassIndex(const RTI::InteractionClassHandle handle) const;
     virtual unsigned int getNumberOfOInteractionClasses() const=0;
     virtual bool setInteractionClassHandle(const unsigned int idx, const RTI::InteractionClassHandle handle);
@@ -166,9 +166,9 @@ public:
     const RTI::Boolean getConstrained() const               { return cFlag; }
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
-    // simulation::NetIO Interface
-    virtual void destroyInputNib(interop::Nib* const nib) override;
-    virtual void destroyOutputNib(interop::Nib* const nib) override;
+    // interop::NetIO Interface
+    void destroyInputNib(interop::Nib* const) override;
+    void destroyOutputNib(interop::Nib* const) override;
 
 protected:
     virtual void clearAllObjectClassHandles();
@@ -185,8 +185,8 @@ protected:
     virtual Ambassador* createFederateAmbassador();
 
     // Simulation::NetIO Interface (Callbacks)
-    virtual bool initNetwork() override;             // Initialize the network
-    virtual void netInputHander() override;          // Network input handler
+    bool initNetwork() override;             // Initialize the network
+    void netInputHander() override;          // Network input handler
 
     // Federation Support
     virtual bool createAndJoinFederation();
@@ -198,39 +198,39 @@ protected:
 private:
    RTI::ObjectClassHandle  objectClassHandles[MAX_CLASSES];                // Object class handles
    RTI::AttributeHandle objectAttributeHandles[MAX_ATTRIBUTES];            // Object attribute handles
-   std::array<bool, MAX_CLASSES> regEnbl {};                               // Object registration enabled flags
-   std::array<bool, MAX_CLASSES> objectClassPublished {};                  // Object class is published
-   std::array<bool, MAX_CLASSES> objectClassSubscribed {};                 // Object class is subscribed
+   std::array<bool, MAX_CLASSES> regEnbl{};                                // Object registration enabled flags
+   std::array<bool, MAX_CLASSES> objectClassPublished{};                   // Object class is published
+   std::array<bool, MAX_CLASSES> objectClassSubscribed{};                  // Object class is subscribed
 
    std::array<RTI::InteractionClassHandle, MAX_INTERACTIONS> interactionClassHandles;  // Interaction class handles
    std::array<RTI::ParameterHandle, MAX_PARAMETERS> interactionParameterHandles;       // Interaction parameter handles
-   std::array<bool, MAX_INTERACTIONS> interactEnbl {};                     // Interaction enable flags
-   std::array<bool, MAX_INTERACTIONS> interactionClassPublished {};        // Interaction class is published
-   std::array<bool, MAX_INTERACTIONS> interactionClassSubscribed {};       // Interaction class is subscribed
+   std::array<bool, MAX_INTERACTIONS> interactEnbl{};                      // Interaction enable flags
+   std::array<bool, MAX_INTERACTIONS> interactionClassPublished{};         // Interaction class is published
+   std::array<bool, MAX_INTERACTIONS> interactionClassSubscribed{};        // Interaction class is subscribed
 
-   RTI::RTIambassador* rtiAmb {};                // RTI's Ambassador
-   Ambassador* fedAmb {};                        // Our Fed Ambassador
+   RTI::RTIambassador* rtiAmb{};                 // RTI's Ambassador
+   Ambassador* fedAmb{};                         // Our Fed Ambassador
    base::safe_ptr<base::String> fedFileName;     // FED filename
 
-   RTIfedTime lookAhead {};                      // lookahead time
-   RTIfedTime timeIncrement {};                  // time to increment clock by
-   RTIfedTime federationTime {};                 // current federation time
-   RTI::Boolean otaFlag {RTI::RTI_FALSE};        // Outstanding time advance flag
-   RTI::Boolean rFlag {RTI::RTI_FALSE};          // Time Regulating flag
-   RTI::Boolean cFlag {RTI::RTI_FALSE};          // Time constrained flag
+   RTIfedTime lookAhead{};                       // lookahead time
+   RTIfedTime timeIncrement{};                   // time to increment clock by
+   RTIfedTime federationTime{};                  // current federation time
+   RTI::Boolean otaFlag{RTI::RTI_FALSE};         // Outstanding time advance flag
+   RTI::Boolean rFlag{RTI::RTI_FALSE};           // Time Regulating flag
+   RTI::Boolean cFlag{RTI::RTI_FALSE};           // Time constrained flag
 
    // ---
    // Quick lookup tables
    // ---
    // input tables
-   std::array<Nib*, MAX_OBJECTS> inNameTbl {};    // Table of input objects in name order
-   std::array<Nib*, MAX_OBJECTS> inHandleTbl {};  // Table of input objects in handle order
-   unsigned int nInObjects {};                    // Number of input objects in both tables
+   std::array<Nib*, MAX_OBJECTS> inNameTbl{};    // Table of input objects in name order
+   std::array<Nib*, MAX_OBJECTS> inHandleTbl{};  // Table of input objects in handle order
+   unsigned int nInObjects{};                    // Number of input objects in both tables
 
    // output tables
-   std::array<Nib*, MAX_OBJECTS> outNameTbl {};    // Table of output objects in name order
-   std::array<Nib*, MAX_OBJECTS> outHandleTbl {};  // Table of output objects in handle order
-   unsigned int nOutObjects {};                    // Number of output objects in both tables
+   std::array<Nib*, MAX_OBJECTS> outNameTbl{};    // Table of output objects in name order
+   std::array<Nib*, MAX_OBJECTS> outHandleTbl{};  // Table of output objects in handle order
+   unsigned int nOutObjects{};                    // Number of output objects in both tables
 
    // Support functions
    void addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n);

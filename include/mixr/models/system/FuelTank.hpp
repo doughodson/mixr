@@ -35,7 +35,7 @@ public:
    virtual bool setFuelWt(const double);
    virtual bool isFuelWtValid() const;
 
-   virtual void reset() override;
+   void reset() override;
 
 private:
    double capacity {-1.0};      // Fuel capacity (lb)

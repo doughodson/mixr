@@ -51,7 +51,7 @@ public:
       const unsigned char  extra = 0
    );
 
-   virtual bool copyEntityType(interop::Nib* const targetNib) const override;
+   bool copyEntityType(interop::Nib* const targetNib) const override;
 
 private:
     // Standard (DIS based) type codes

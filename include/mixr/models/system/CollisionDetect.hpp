@@ -73,7 +73,7 @@ public:
    virtual bool setLocalOnly(const bool flg);
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool resizePoiList(const unsigned int newSize);
@@ -82,7 +82,7 @@ protected:
    // Update the POI list with this target player
    virtual void updatePoiList(Player* const target);
 
-   virtual void process(const double dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
 protected:
    class PlayerOfInterest

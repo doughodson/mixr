@@ -125,8 +125,8 @@ public:
    // set/change the current route; does not change the initial route used by reset()
    virtual bool setRoute(Route* const msg);
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
    // Set positional data
@@ -175,7 +175,7 @@ protected:
    virtual bool updateMagVar();            // Method to compute nav system's mag variation
    virtual bool updateNavSteering();       // Method to compute nav steering
 
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
 private:
    void initData();

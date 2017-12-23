@@ -39,7 +39,7 @@ public:
    Object* object()                 { return obj; }      // The object
    const Object* object() const     { return obj; }      // The object (const version)
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 private:
    Identifier* slotname {};   // Slot name

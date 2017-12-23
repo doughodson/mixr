@@ -93,11 +93,11 @@ public:
    virtual bool setEnableNetOutput(const bool f);                             // Sets the network output enabled flag
    virtual bool setOutgoingNib(AbstractNib* const p, const unsigned int id);  // Sets the outgoing NIB for network 'id'
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
    Mode mode {ACTIVE};           // Player mode (see above)
    AbstractNib* nib {};          // Network Interface Block (ref()'d)

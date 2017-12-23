@@ -53,35 +53,35 @@ public:
 
    virtual bool setWeaponReleaseTimer(const double v);   // Sets the release timer
 
-   virtual bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
-   virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
+   bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
+   bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
 
-   virtual AbstractWeapon* getCurrentWeapon() override;
-   virtual const AbstractWeapon* getCurrentWeapon() const override;
-   virtual bool isWeaponReleased() const override;
-   virtual Missile* getNextMissile() override;
-   virtual const Missile* getNextMissile() const override;
-   virtual Sam* getNextSam() override;
-   virtual const Sam* getNextSam() const override;
-   virtual Bomb* getNextBomb() override;
-   virtual const Bomb* getNextBomb() const override;
-   virtual Chaff* getNextChaff() override;
-   virtual const Chaff* getNextChaff() const override;
-   virtual Flare* getNextFlare() override;
-   virtual const Flare* getNextFlare() const override;
-   virtual Decoy* getNextDecoy() override;
-   virtual const Decoy* getNextDecoy() const override;
-   virtual Missile* releaseOneMissile() override;
-   virtual Sam* releaseOneSam() override;
-   virtual Bomb* releaseOneBomb() override;
-   virtual Chaff* releaseOneChaff() override;
-   virtual Flare* releaseOneFlare() override;
-   virtual Decoy* releaseOneDecoy() override;
+   AbstractWeapon* getCurrentWeapon() override;
+   const AbstractWeapon* getCurrentWeapon() const override;
+   bool isWeaponReleased() const override;
+   Missile* getNextMissile() override;
+   const Missile* getNextMissile() const override;
+   Sam* getNextSam() override;
+   const Sam* getNextSam() const override;
+   Bomb* getNextBomb() override;
+   const Bomb* getNextBomb() const override;
+   Chaff* getNextChaff() override;
+   const Chaff* getNextChaff() const override;
+   Flare* getNextFlare() override;
+   const Flare* getNextFlare() const override;
+   Decoy* getNextDecoy() override;
+   const Decoy* getNextDecoy() const override;
+   Missile* releaseOneMissile() override;
+   Sam* releaseOneSam() override;
+   Bomb* releaseOneBomb() override;
+   Chaff* releaseOneChaff() override;
+   Flare* releaseOneFlare() override;
+   Decoy* releaseOneDecoy() override;
 
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
 private:
    Missile* getNextMissileImp();        // First available missile from our weapons list (Pre-ref()'d) (const version)

@@ -57,8 +57,8 @@ public:
    virtual int getShootList(base::safe_ptr<Track>* const tlist, const int max);
    virtual int getShootList(base::safe_ptr<const Track>* const tlist, const int max) const;
 
-   virtual void reset() override;
-   virtual void updateData(const double dt = 0.0) override;
+   void reset() override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    virtual void setNextToShoot(Track* const p);
@@ -66,9 +66,9 @@ protected:
    // Manage the active action
    virtual void actionManager(const double dt);
 
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    base::safe_ptr<Action> action;  // Current steerpoint action

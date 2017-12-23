@@ -42,7 +42,7 @@ public:
    // Write the BMP file
    bool writeFile();
 
-   virtual void loadTexture() override;
+   void loadTexture() override;
 
 private:
    char texPath[MAX_PATH_LEN+1] {};       // Path to texture directory

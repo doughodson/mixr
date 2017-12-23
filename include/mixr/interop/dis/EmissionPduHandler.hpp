@@ -111,32 +111,32 @@ public:
 
    models::RfSensor* getSensor();                          // Our R/F emitter System
    const models::RfSensor* getSensor() const;              // Our R/F emitter System (const version)
-   virtual bool setSensor(models::RfSensor* const msg);    // Sets our R/F emitter system
+   virtual bool setSensor(models::RfSensor* const);        // Sets our R/F emitter system
 
    models::RfSensor* getSensorModel();                     // Our template sensor model
    const models::RfSensor* getSensorModel() const;         // Our template sensor model
-   virtual bool setSensorModel(models::RfSensor* const msg); // Sets our template sensor model
+   virtual bool setSensorModel(models::RfSensor* const);   // Sets our template sensor model
 
    models::Antenna* getAntennaModel();                     // Our template antenna model
    const models::Antenna* getAntennaModel() const;         // Our template antenna model
-   virtual bool setAntennaModel(models::Antenna* const msg); // Sets our template antenna model
+   virtual bool setAntennaModel(models::Antenna* const);   // Sets our template antenna model
 
    double getEmPduExecTime() const { return emPduExecTime; }
-   virtual void setEmPduExecTime(const double v);
+   virtual void setEmPduExecTime(const double);
 
    bool isDefaultIncomingHandler() const;    // Is this the default incoming emission PDU handler?
-   bool setDefaultIn(const bool flg);
+   bool setDefaultIn(const bool);
 
    bool isDefaultOutgoingHandler() const;    // Is this the default outgoing emission PDU handler?
-   bool setDefaultOut(const bool flg);
+   bool setDefaultOut(const bool);
 
    // True if RfSensor data matches our parameters
    // (does not check the default handler flags)
-   virtual bool isMatchingRfSystemType(const models::RfSensor* const p) const;
+   virtual bool isMatchingRfSystemType(const models::RfSensor* const) const;
 
    // True if EmissionSystem PDU data matches our parameters
    // (does not check the default handler flags)
-   virtual bool isMatchingRfSystemType(const EmissionSystem* const p) const;
+   virtual bool isMatchingRfSystemType(const EmissionSystem* const) const;
 
    // Process an emission system from incoming PDUs
    virtual bool updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib);

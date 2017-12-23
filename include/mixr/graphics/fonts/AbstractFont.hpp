@@ -180,7 +180,7 @@ public:
     class ExpInvalidFont : public base::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
-            virtual const char* getDescription() const override     { return "font is invalid"; }
+            const char* getDescription() const override     { return "font is invalid"; }
     };
 
 protected:

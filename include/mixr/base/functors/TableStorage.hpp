@@ -16,7 +16,7 @@ class TableStorage : public FStorage
 
 public:
    TableStorage();
-   unsigned int xbp {}, ybp {}, zbp {}, wbp {}, vbp {};
+   unsigned int xbp{}, ybp{}, zbp{}, wbp{}, vbp{};
 };
 
 }

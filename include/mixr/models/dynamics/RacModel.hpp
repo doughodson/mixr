@@ -24,46 +24,46 @@ namespace models {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <Number>    ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacModel : public AerodynamicsModel
+class RacModel final: public AerodynamicsModel
 {
     DECLARE_SUBCLASS(RacModel, AerodynamicsModel)
 
 public:
     RacModel();
 
-    virtual double getGload() const override;                   // G's (+up, one at level)
-    virtual double getMach() const override;                    // mach number
-    virtual double getAngleOfAttack() const override;           // radians
-    virtual double getSideSlip() const override;                // radians
-    virtual double getFlightPath() const override;              // radians
-    virtual double getCalibratedAirspeed() const override;      // Kts
+    double getGload() const final;                   // G's (+up, one at level)
+    double getMach() const final;                    // mach number
+    double getAngleOfAttack() const final;           // radians
+    double getSideSlip() const final;                // radians
+    double getFlightPath() const final;              // radians
+    double getCalibratedAirspeed() const final;      // Kts
 
-    virtual bool isHeadingHoldOn() const override;
-    virtual double getCommandedHeadingD() const override;
-    virtual bool setHeadingHoldOn(const bool b) override;
-    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
-    virtual bool isVelocityHoldOn() const override;
-    virtual double getCommandedVelocityKts() const override;
-    virtual bool setVelocityHoldOn(const bool b) override;
-    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
-    virtual bool isAltitudeHoldOn() const override;
-    virtual double getCommandedAltitude() const override;
-    virtual bool setAltitudeHoldOn(const bool b) override;
-    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
-    virtual void dynamics(const double dt) override;            // One pass model update; called from Player::dynamics()
+    bool isHeadingHoldOn() const final;
+    double getCommandedHeadingD() const final;
+    bool setHeadingHoldOn(const bool b) final;
+    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) final;
+    bool isVelocityHoldOn() const final;
+    double getCommandedVelocityKts() const final;
+    bool setVelocityHoldOn(const bool b) final;
+    bool setCommandedVelocityKts(const double v, const double vNps = 0) final;
+    bool isAltitudeHoldOn() const final;
+    double getCommandedAltitude() const final;
+    bool setAltitudeHoldOn(const bool) final;
+    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) final;
+    void dynamics(const double dt) final;            // One pass model update; called from Player::dynamics()
 
-    virtual void reset() override;
+    void reset() final;
 
 private:
     void updateRAC(const double dt);
 
-    double vpMin {};               // Minimum Velocity              (m/s)
-    double vpMaxG {250.0};         // Velocity for Max G's          (g's)
-    double gMax {4.0};             // Max G's                       (g's)
-    double maxAccel {10.0};        // Max longitudinal acceleration (m/s/s)
-    double cmdAltitude {-9999.0};  // Commanded Altitude            (meters)
-    double cmdHeading {-9999.0};   // Commanded Heading             (degs)
-    double cmdVelocity {-9999.0};  // Commanded speed               (kts)
+    double vpMin{};               // Minimum Velocity              (m/s)
+    double vpMaxG{250.0};         // Velocity for Max G's          (g's)
+    double gMax{4.0};             // Max G's                       (g's)
+    double maxAccel{10.0};        // Max longitudinal acceleration (m/s/s)
+    double cmdAltitude{-9999.0};  // Commanded Altitude            (meters)
+    double cmdHeading{-9999.0};   // Commanded Heading             (degs)
+    double cmdVelocity{-9999.0};  // Commanded speed               (kts)
 
 private:
    // slot table helper methods

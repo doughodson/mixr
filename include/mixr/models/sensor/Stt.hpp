@@ -19,7 +19,7 @@ public:
     Stt();
 
 protected:
-   virtual void dynamics(const double dt) override;
+   void dynamics(const double dt) override;
 };
 
 }

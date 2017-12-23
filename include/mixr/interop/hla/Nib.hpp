@@ -39,11 +39,11 @@ public:
    // Object class index
    unsigned int getClassIndex() const                       { return objectClassIndex; }
    bool isClassIndex(const unsigned int idx)                { return (idx == objectClassIndex); }
-   virtual void setClassIndex(const unsigned int idx);
+   virtual void setClassIndex(const unsigned int);
 
    // Object name
    const char* getObjectName() const                        { return oname; }
-   virtual void setObjectName(const char* s);
+   virtual void setObjectName(const char*);
 
    // Makes a default RTI name
    virtual void makeObjectName();
@@ -65,8 +65,8 @@ public:
    bool isAttributeUpdateRequired(const unsigned int attribIndex) const
       { return (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) ? updateRequired[attribIndex-1] : 0; }
 
-   // Simulation::Nib Interface
-   virtual bool isPlayerStateUpdateRequired(const double curExecTime) override;
+   // interop::Nib Interface
+   bool isPlayerStateUpdateRequired(const double curExecTime) override;
 
 protected:
     virtual void clearAllAttributeUpdateEnabledFlags();
@@ -74,11 +74,11 @@ protected:
 
 private:
     base::String oname;                          // Our object name
-    RTI::ObjectHandle handle {0};                // Our object handle
-    unsigned int objectClassIndex {};            // We are of this FOM object class
+    RTI::ObjectHandle handle{0};                 // Our object handle
+    unsigned int objectClassIndex{};             // We are of this FOM object class
 
-    std::array<bool, NetIO::MAX_ATTRIBUTES> updateEnabled {};   // If true, an attribute update is enabled
-    std::array<bool, NetIO::MAX_ATTRIBUTES> updateRequired {};  // If true, an attribute update is required (see note above)
+    std::array<bool, NetIO::MAX_ATTRIBUTES> updateEnabled{};   // If true, an attribute update is enabled
+    std::array<bool, NetIO::MAX_ATTRIBUTES> updateRequired{};  // If true, an attribute update is required (see note above)
 };
 
 }

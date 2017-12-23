@@ -87,9 +87,9 @@ public:
     Newtons(const double value);
     Newtons(const Force& value);
 
-    static double convertStatic(const Force& n)                { return n.toForce(); }
-    virtual double toForce() const override                    { return static_cast<double>(val); }
-    virtual double fromForce(const double a) const override    { return a; }
+    static double convertStatic(const Force& n)        { return n.toForce(); }
+    double toForce() const override                    { return static_cast<double>(val); }
+    double fromForce(const double a) const override    { return a; }
 };
 
 
@@ -107,9 +107,9 @@ public:
     KiloNewtons(const double value);
     KiloNewtons(const Force& value);
 
-    static double convertStatic(const Force& n)                { return n.toForce() * force::N2KN; }
-    virtual double toForce() const override                    { return static_cast<double>(val * force::KN2N); }
-    virtual double fromForce(const double a) const override    { return a * force::N2KN; }
+    static double convertStatic(const Force& n)        { return n.toForce() * force::N2KN; }
+    double toForce() const override                    { return static_cast<double>(val * force::KN2N); }
+    double fromForce(const double a) const override    { return a * force::N2KN; }
 };
 
 
@@ -127,9 +127,9 @@ public:
     PoundForces(const double value);
     PoundForces(const Force& value);
 
-    static double convertStatic(const Force& n)                { return n.toForce() * force::N2PF; }
-    virtual double toForce() const override                    { return static_cast<double>(val * force::PF2N); }
-    virtual double fromForce(const double a) const override    { return a * force::N2PF; }
+    static double convertStatic(const Force& n)        { return n.toForce() * force::N2PF; }
+    double toForce() const override                    { return static_cast<double>(val * force::PF2N); }
+    double fromForce(const double a) const override    { return a * force::N2PF; }
 };
 
 
@@ -147,9 +147,9 @@ public:
     Poundals(const double value);
     Poundals(const Force& value);
 
-    static double convertStatic(const Force& n)                { return n.toForce() * force::N2PD; }
-    virtual double toForce() const override                    { return static_cast<double>(val * force::PD2N); }
-    virtual double fromForce(const double a) const override    { return a * force::N2PD; }
+    static double convertStatic(const Force& n)        { return n.toForce() * force::N2PD; }
+    double toForce() const override                    { return static_cast<double>(val * force::PD2N); }
+    double fromForce(const double a) const override    { return a * force::N2PD; }
 };
 
 }

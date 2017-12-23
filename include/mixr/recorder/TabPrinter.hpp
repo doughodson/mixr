@@ -92,9 +92,9 @@ protected:
    void printSimTimeMsg(std::ostream& sout, double simTime);
    void printUtcTimeMsg(std::ostream& sout, double utcTime);
 
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
-   virtual void setMsgHeaders(const bool f);
+   virtual void setMsgHeaders(const bool);
 private:
    // print options
    bool printHeader {};

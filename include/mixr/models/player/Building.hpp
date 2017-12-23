@@ -19,7 +19,7 @@ class Building : public Player
 public:
     Building();
 
-    virtual unsigned int getMajorType() const override;
+    unsigned int getMajorType() const override;
 };
 
 }

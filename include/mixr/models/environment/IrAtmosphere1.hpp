@@ -93,7 +93,7 @@ class IrAtmosphere1 : public IrAtmosphere
 
 public:
    IrAtmosphere1();
-   virtual bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground) override;
+   bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground) override;
 
 protected:
 

@@ -19,9 +19,9 @@ class Decoy : public Effect
 public:
     Decoy();
 
-    virtual const char* getDescription() const override;
-    virtual const char* getNickname() const override;
-    virtual int getCategory() const override;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 };
 
 }

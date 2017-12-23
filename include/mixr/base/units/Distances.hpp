@@ -84,9 +84,9 @@ public:
     Meters(const double value);
     Meters(const Distance& value);
 
-    static double convertStatic(const Distance& n)                        { return n.toDistance(); }
-    virtual double toDistance() const override                            { return static_cast<double>(val); }
-    virtual double fromDistance(const double a) const override            { return a; }
+    static double convertStatic(const Distance& n)                { return n.toDistance(); }
+    double toDistance() const override                            { return static_cast<double>(val); }
+    double fromDistance(const double a) const override            { return a; }
 };
 
 
@@ -104,9 +104,9 @@ public:
     CentiMeters(const double value);
     CentiMeters(const Distance& value);
 
-    static double convertStatic(const Distance& n)                { return n.toDistance() * distance::M2CM; }
-    virtual double toDistance() const override                    { return static_cast<double>(val * distance::CM2M); }
-    virtual double fromDistance(const double a) const override    { return a * distance::M2CM; }
+    static double convertStatic(const Distance& n)        { return n.toDistance() * distance::M2CM; }
+    double toDistance() const override                    { return static_cast<double>(val * distance::CM2M); }
+    double fromDistance(const double a) const override    { return a * distance::M2CM; }
 };
 
 
@@ -125,9 +125,9 @@ public:
     MicroMeters(const double value);
     MicroMeters(const Distance& value);
 
-    static double convertStatic(const Distance& n)               { return n.toDistance() * distance::M2UM; }
-    virtual double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
-    virtual double fromDistance(const double a) const override   { return a * distance::M2UM; }
+    static double convertStatic(const Distance& n)       { return n.toDistance() * distance::M2UM; }
+    double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
+    double fromDistance(const double a) const override   { return a * distance::M2UM; }
 };
 
 //------------------------------------------------------------------------------
@@ -144,9 +144,9 @@ public:
     Microns(const double value);
     Microns(const Distance& value);
 
-    static double convertStatic(const Distance& n)               { return n.toDistance() * distance::M2UM; }
-    virtual double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
-    virtual double fromDistance(const double a) const override   { return a * distance::M2UM; }
+    static double convertStatic(const Distance& n)       { return n.toDistance() * distance::M2UM; }
+    double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
+    double fromDistance(const double a) const override   { return a * distance::M2UM; }
 };
 //------------------------------------------------------------------------------
 // Class:  KiloMeters
@@ -162,9 +162,9 @@ public:
     KiloMeters(const double value);
     KiloMeters(const Distance& value);
 
-    static double convertStatic(const Distance& n)              { return n.toDistance() * distance::M2KM; }
-    virtual double toDistance() const override                  { return static_cast<double>(val * distance::KM2M); }
-    virtual double fromDistance(const double a) const override  { return a * distance::M2KM; }
+    static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2KM; }
+    double toDistance() const override                  { return static_cast<double>(val * distance::KM2M); }
+    double fromDistance(const double a) const override  { return a * distance::M2KM; }
 };
 
 
@@ -182,9 +182,9 @@ public:
     Inches(const double value);
     Inches(const Distance& value);
 
-    static double convertStatic(const Distance& n)              { return n.toDistance() * distance::M2IN; }
-    virtual double toDistance() const override                  { return static_cast<double>(val * distance::IN2M); }
-    virtual double fromDistance(const double a) const override  { return a * distance::M2IN; }
+    static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2IN; }
+    double toDistance() const override                  { return static_cast<double>(val * distance::IN2M); }
+    double fromDistance(const double a) const override  { return a * distance::M2IN; }
 };
 
 
@@ -202,9 +202,9 @@ public:
     Feet(const double value);
     Feet(const Distance& value);
 
-    static double convertStatic(const Distance& n)              { return n.toDistance() * distance::M2FT; }
-    virtual double toDistance() const override                  { return static_cast<double>(val * distance::FT2M); }
-    virtual double fromDistance(const double a) const override  { return a * distance::M2FT; }
+    static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2FT; }
+    double toDistance() const override                  { return static_cast<double>(val * distance::FT2M); }
+    double fromDistance(const double a) const override  { return a * distance::M2FT; }
 };
 
 
@@ -222,9 +222,9 @@ public:
     NauticalMiles(const double value);
     NauticalMiles(const Distance& value);
 
-    static double convertStatic(const Distance& n)             { return n.toDistance() * distance::M2NM; }
-    virtual double toDistance() const override                 { return static_cast<double>(val * distance::NM2M); }
-    virtual double fromDistance(const double a) const override { return a * distance::M2NM; }
+    static double convertStatic(const Distance& n)     { return n.toDistance() * distance::M2NM; }
+    double toDistance() const override                 { return static_cast<double>(val * distance::NM2M); }
+    double fromDistance(const double a) const override { return a * distance::M2NM; }
 };
 
 
@@ -242,9 +242,9 @@ public:
     StatuteMiles(const double value);
     StatuteMiles(const Distance& value);
 
-    static double convertStatic(const Distance& n)              { return n.toDistance() * distance::M2SM; }
-    virtual double toDistance() const override                  { return static_cast<double>(val * distance::SM2M); }
-    virtual double fromDistance(const double a) const override  { return a * distance::M2SM; }
+    static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2SM; }
+    double toDistance() const override                  { return static_cast<double>(val * distance::SM2M); }
+    double fromDistance(const double a) const override  { return a * distance::M2SM; }
 };
 
 }

@@ -112,7 +112,7 @@ public:
     AbstractAtmosphere* getAtmosphere();                   // returns the atmosphere model
     const AbstractAtmosphere* getAtmosphere() const;       // returns the atmosphere model (const version)
 
-    virtual void reset() override;
+    void reset() override;
 
 protected:
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
@@ -124,7 +124,7 @@ protected:
 
    // environmental interface
     terrain::Terrain* getTerrain();                        // returns the terrain elevation database
-    virtual bool shutdownNotification() override;
+    bool shutdownNotification() override;
 
 private:
    void initData();

@@ -379,25 +379,25 @@ public:
    static void lcTexCoord4v(const double* v)    { glTexCoord4dv(v); }
 
 
-   virtual bool event(const int event, Object* const obj = nullptr) override;
+   bool event(const int event, Object* const obj = nullptr) override;
 
 public:
    // Exceptions
    class ExpInvalidDisplayPtr : public Object::Exception {
       public:
          ExpInvalidDisplayPtr() : Exception() {}
-         virtual const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
+         const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
    };
 
 protected:
 
    // event handlers
-   virtual bool onSetTextureId(const base::Number* const msg);
-   virtual bool onSetLineWidthEvent(const base::Number* const msg);
-   virtual bool onSetFlashRateEvent(const base::Number* const msg);
-   virtual bool onSetVisibilityEvent(const base::Number* const msg);
+   virtual bool onSetTextureId(const base::Number* const);
+   virtual bool onSetLineWidthEvent(const base::Number* const);
+   virtual bool onSetFlashRateEvent(const base::Number* const);
+   virtual bool onSetVisibilityEvent(const base::Number* const);
 
-   virtual void processComponents(                  // Process our subcomponent list (which should be other Graphics)
+   void processComponents(                          // Process our subcomponent list (which should be other Graphics)
         base::PairStream* const list,               // Source list of components
         const std::type_info& filter,               // Type filter
         base::Pair* const add = nullptr,            // Optional pair to add

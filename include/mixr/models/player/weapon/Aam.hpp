@@ -23,9 +23,9 @@ class Aam : public Missile
 public:
     Aam();
 
-    virtual const char* getDescription() const override;  // Returns "AIM"
-    virtual const char* getNickname() const override;     // Returns "GenericAam"
-    virtual int getCategory() const override;             // Returns MISSILE or GUIDED
+    const char* getDescription() const override;  // Returns "AIM"
+    const char* getNickname() const override;     // Returns "GenericAam"
+    int getCategory() const override;             // Returns MISSILE or GUIDED
 };
 
 }

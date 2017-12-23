@@ -39,7 +39,7 @@ public:
    virtual bool setMaxLaunchRange(const double rng);
    virtual bool setMinLaunchRange(const double rng);
 
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 private:
    double       maxMslRng {};        // Max Launch Range        (meters)

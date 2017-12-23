@@ -13,19 +13,19 @@ namespace models {
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
 //    written by Larry Buckner
 //------------------------------------------------------------------------------
-class LaeroModel : public AerodynamicsModel
+class LaeroModel final: public AerodynamicsModel
 {
    DECLARE_SUBCLASS(LaeroModel, AerodynamicsModel )
 
 public:
    LaeroModel();
 
-   virtual void dynamics(const double dt) override;  // One pass model update; called from Player::dynamics()
-   virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
-   virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
-   virtual bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
+   void dynamics(const double dt) final;  // One pass model update; called from Player::dynamics()
+   bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) final;
+   bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) final;
+   bool setCommandedVelocityKts(const double v, const double vNps = 0) final;
 
-   virtual void reset() override;
+   void reset() final;
 
 protected:
    //-----------------------------------
@@ -46,54 +46,54 @@ private:
    static const double EPSILON;
    void update4DofModel(const double dt);
 
-   double dT {};
+   double dT{};
 
    // Body angular vel, acc components
-   double p {};
-   double q {};
-   double r {};
-   double pDot {};
-   double qDot {};
-   double rDot {};
+   double p{};
+   double q{};
+   double r{};
+   double pDot{};
+   double qDot{};
+   double rDot{};
 
    // Euler rotation angle, rate components
-   double phi {};
-   double tht {};
-   double psi {};
-   double phiDot {};
-   double thtDot {};
-   double psiDot {};
+   double phi{};
+   double tht{};
+   double psi{};
+   double phiDot{};
+   double thtDot{};
+   double psiDot{};
 
    // Body linear vel, acc components
-   double u {};
-   double v {};
-   double w {};
-   double uDot {};
-   double vDot {};
-   double wDot {};
+   double u{};
+   double v{};
+   double w{};
+   double uDot{};
+   double vDot{};
+   double wDot{};
 
    // NED pos, vel, acc components
-   double refPosN {};
-   double refPosE {};
-   double refPosD {};
-   double posN {};
-   double posE {};
-   double posD {};
+   double refPosN{};
+   double refPosE{};
+   double refPosD{};
+   double posN{};
+   double posE{};
+   double posD{};
 
-   double velN {};
-   double velE {};
-   double velD {};
-   double accN {};
-   double accE {};
-   double accD {};
+   double velN{};
+   double velE{};
+   double velD{};
+   double accN{};
+   double accE{};
+   double accD{};
 
    // Hold components
-   double phiDot1 {};
-   double thtDot1 {};
-   double psiDot1 {};
-   double uDot1 {};
-   double vDot1 {};
-   double wDot1 {};
+   double phiDot1{};
+   double thtDot1{};
+   double psiDot1{};
+   double uDot1{};
+   double vDot1{};
+   double wDot1{};
 };
 
 }

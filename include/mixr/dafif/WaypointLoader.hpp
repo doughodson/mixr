@@ -45,17 +45,17 @@ public:
       const char* path = "/data/dafif/fullall/"
    );
 
-   virtual Waypoint* waypoint(const int n);
-   virtual Waypoint* getWaypoint(const int n);
+   virtual Waypoint* waypoint(const int);
+   virtual Waypoint* getWaypoint(const int);
 
-   virtual bool load(const char* code = nullptr) override;
-   virtual int getRecordLength() override;
-   virtual int getMaxRecords() override;
-   virtual int queryByRange() override;
-   virtual int queryByIdent(const char* id) override;
-   virtual int queryByKey(const char* key) override;
-   virtual void printLoaded(std::ostream& sout) override;
-   virtual void printResults(std::ostream& sout) override;
+   bool load(const char* code = nullptr) override;
+   int getRecordLength() override;
+   int getMaxRecords() override;
+   int queryByRange() override;
+   int queryByIdent(const char* id) override;
+   int queryByKey(const char* key) override;
+   void printLoaded(std::ostream& sout) override;
+   void printResults(std::ostream& sout) override;
 
 protected:
 

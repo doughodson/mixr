@@ -44,13 +44,13 @@ public:
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   virtual unsigned int tableSize() const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   unsigned int tableSize() const override;
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, double* const table) override;
+   bool loadData(const List& list, double* const table) override;
 
 private:
    double* ytable {};    // Y Breakpoint Table

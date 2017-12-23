@@ -108,9 +108,9 @@ public:
    // Trigger the 'to' steerpoint action; auto sequencing only
    virtual void triggerAction();
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
     // Compute nav steering data for each steerpoint.
@@ -119,7 +119,7 @@ protected:
     // Auto Sequence through Steerpoints
     virtual void autoSequencer(const double dt, const  Navigation* const nav);
 
-    virtual void processComponents(
+    void processComponents(
          base::PairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
          base::Pair* const add = nullptr,           // Optional pair to add

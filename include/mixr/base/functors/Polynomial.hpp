@@ -39,7 +39,7 @@ class Polynomial : public Func1
 
 public:
    // Highest allowed degree of polynomial
-   static const unsigned int MAX_DEGREE = 32;
+   static const int MAX_DEGREE{32};
 
 public:
    Polynomial();
@@ -47,16 +47,16 @@ public:
    int getDegree() const                  { return (m-1); }
    const double* getCoefficients() const  { return a; }
 
-   virtual double f(const double x, FStorage* const s = nullptr) const override;
+   double f(const double x, FStorage* const s = nullptr) const override;
 
 protected:
    bool setCoefficients(const double* const coeff, const int n);
 
 private:
-   static const int MAX_COEFF = (MAX_DEGREE+1);
+   static const int MAX_COEFF{MAX_DEGREE+1};
 
-   double a[MAX_COEFF] {};   // Constant coefficients vector
-   int m {};                 // Number of coefficients (degree + 1)
+   double a[MAX_COEFF]{};   // Constant coefficients vector
+   int m{};                 // Number of coefficients (degree + 1)
 
 protected:
    // slot table helper methods

@@ -29,7 +29,7 @@ class VMap0ReferenceDirectory : public VpfDirectory
 public:
     VMap0ReferenceDirectory();
 
-    virtual void loadTables() override;
+    void loadTables() override;
 
     // Defined coverages for VMAP level 0 reference directories
     enum { CVG_DBREF = 0, CVG_LIBREF, CVG_PLACENAM, CVG_POLBND, MAX_COVERAGES };

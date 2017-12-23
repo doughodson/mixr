@@ -189,7 +189,7 @@ public:
    bool insert(Item* newItem, Item* refItem);
    Object* remove(Item* oldItem);
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 private:
    const Object* getPosition1(const unsigned int n) const;

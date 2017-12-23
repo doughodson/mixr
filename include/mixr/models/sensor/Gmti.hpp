@@ -24,7 +24,7 @@ public:
    void setPoi(const base::Vec3d& newPos);
 
 protected:
-   virtual void dynamics(const double dt) override;
+   void dynamics(const double dt) override;
 
 private:
    base::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED

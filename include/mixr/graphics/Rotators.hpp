@@ -58,24 +58,24 @@ public:
     bool setRotations(const double x, const double y = 0, const double z = 0);
     bool setRotationsDeg(const double x, const double y = 0, const double z = 0);
 
-    virtual void draw() override;
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    void draw() override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // Event callbacks
-    bool onXRotate(const base::Angle* const rotation);
-    bool onXRotate(const base::Number* const rotation);
-    bool onXRotateDeg(const base::Number* const rotation);
-    bool onYRotate(const base::Angle* const rotation);
-    bool onYRotate(const base::Number* const rotation);
-    bool onYRotateDeg(const base::Number* const rotation);
-    bool onZRotate(const base::Angle* const rotation);
-    bool onZRotate(const base::Number* const rotation);
-    bool onZRotateDeg(const base::Number* const rotation);
+    bool onXRotate(const base::Angle* const);
+    bool onXRotate(const base::Number* const);
+    bool onXRotateDeg(const base::Number* const);
+    bool onYRotate(const base::Angle* const);
+    bool onYRotate(const base::Number* const);
+    bool onYRotateDeg(const base::Number* const);
+    bool onZRotate(const base::Angle* const);
+    bool onZRotate(const base::Number* const);
+    bool onZRotateDeg(const base::Number* const);
 
-    double xRot {-1.0};  // x axis rotation
-    double yRot {-1.0};  // y axis rotation
-    double zRot {-1.0};  // z axis rotation
+    double xRot{-1.0};   // x axis rotation
+    double yRot{-1.0};   // y axis rotation
+    double zRot{-1.0};   // z axis rotation
 };
 
 }

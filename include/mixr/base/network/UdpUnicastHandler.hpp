@@ -63,8 +63,8 @@ public:
       );
 
 protected:
-   virtual bool init() override;
-   virtual bool bindSocket() override;
+   bool init() override;
+   bool bindSocket() override;
 
 private:
    char* ipAddr {};   // Host's name or IP Address

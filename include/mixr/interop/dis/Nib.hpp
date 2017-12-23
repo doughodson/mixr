@@ -30,13 +30,13 @@ public:
 
    // Site & App IDs
    unsigned short getSiteID() const                           { return siteID; }
-   virtual void setSiteID(const unsigned short v);
+   virtual void setSiteID(const unsigned short);
    unsigned short getApplicationID() const                    { return appID; }
-   virtual void setApplicationID(const unsigned short v);
+   virtual void setApplicationID(const unsigned short);
 
    // Input support functions
    virtual void updateTheIPlayer();
-   virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
+   virtual void entityStatePdu2Nib(const EntityStatePDU* const);
 
    // Update check functions
    virtual bool isIffUpdateRequired(const double curExecTime, const models::Iff* const iffSystem);
@@ -44,7 +44,7 @@ public:
    //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
    virtual bool IffManager(const double curExecTime);
    virtual bool emitterBeamsManager(const double curExecTime);
-   virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu);
+   virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const);
 
    // Standard (DIS) entity type codes
    unsigned char getEntityKind() const         { return disKind;        }       // DIS kind type code (or 255 if not valid)
@@ -66,50 +66,50 @@ public:
       const unsigned char  extra = 0
    );
 
-   virtual bool entityStateManager(const double curExecTime) override;
-   virtual bool weaponFireMsgFactory(const double curExecTime) override;
-   virtual bool munitionDetonationMsgFactory(const double curExecTime) override;
-   virtual bool networkOutputManagers(const double curExecTime) override;
+   bool entityStateManager(const double curExecTime) override;
+   bool weaponFireMsgFactory(const double curExecTime) override;
+   bool munitionDetonationMsgFactory(const double curExecTime) override;
+   bool networkOutputManagers(const double curExecTime) override;
 
 protected:
-   unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
-   void processArticulationParameters(const EntityStatePDU* const pdu);
+   unsigned char manageArticulationParameters(EntityStatePDU* const);
+   void processArticulationParameters(const EntityStatePDU* const);
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)
-   unsigned char numEmissionSystems {};                           // Number of emission systems
-   unsigned char emissionSystemsIndex {};                         // Emission systems index (outgoing only)
-   std::array<EmissionPduHandler*, MAX_EM_SYSTEMS> emitterSysHandler {}; // Handler for each emitter system
+   unsigned char numEmissionSystems{};                                   // Number of emission systems
+   unsigned char emissionSystemsIndex{};                                 // Emission systems index (outgoing only)
+   std::array<EmissionPduHandler*, MAX_EM_SYSTEMS> emitterSysHandler{};  // Handler for each emitter system
 
 private:
-   unsigned short siteID {};     // Site ID
-   unsigned short appID {};      // Application ID
+   unsigned short siteID{};     // Site ID
+   unsigned short appID{};      // Application ID
 
    // IFF PDU data
-   FundamentalOpData* iffFunOpData {};   // IFF Functional Operational Data
-   double iffLastExecTime {};            // Exec time of last IFF update
-   unsigned short iffEventId {};         // IFF event ID
-   unsigned char  iffOptions {};         // IFF PDU option bits
+   FundamentalOpData* iffFunOpData{};   // IFF Functional Operational Data
+   double iffLastExecTime{};            // Exec time of last IFF update
+   unsigned short iffEventId{};         // IFF event ID
+   unsigned char  iffOptions{};         // IFF PDU option bits
 
    // Attached missile entity types
-   std::array<const Ntm*, MAX_AMSL> apartMslTypes {};
+   std::array<const Ntm*, MAX_AMSL> apartMslTypes{};
 
    // Standard (DIS based) type codes
-   unsigned char  disKind {};          // DIS kind code
-   unsigned char  disDomain {};        // DIS domain code
-   unsigned short disCountry {};       // DIS country code
-   unsigned char  disCategory {};      // DIS category code
-   unsigned char  disSubcategory {};   // DIS subcategory code
-   unsigned char  disSpecific {};      // DIS specific code
-   unsigned char  disExtra {};         // DIS extra code
+   unsigned char  disKind{};          // DIS kind code
+   unsigned char  disDomain{};        // DIS domain code
+   unsigned short disCountry{};       // DIS country code
+   unsigned char  disCategory{};      // DIS category code
+   unsigned char  disSubcategory{};   // DIS subcategory code
+   unsigned char  disSpecific{};      // DIS specific code
+   unsigned char  disExtra{};         // DIS extra code
 
    // timeOffset has 2 uses
    // 1) In a time synchronized network, it is merely as estimation of PDU latency
    //    Over time, it is updated so that i will eventually become the minimum observed latency
    // 2) If time is not synchronized across the network, then it becomes the time difference + latency
    //    This allows applications to run time relative
-   double timeOffset {};
+   double timeOffset{};
 };
 
 }

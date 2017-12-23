@@ -130,16 +130,16 @@
     typedef BaseType BaseClass;                                                                                                 \
     public: ThisType(const ThisType& org);                                                                                      \
     public: virtual ~ThisType();                                                                                                \
-    public: virtual ThisType* clone() const override;                                                                           \
+    public: ThisType* clone() const override;                                                                                   \
     public: ThisType& operator=(const ThisType& org);                                                                           \
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
-    public: virtual bool isClassType(const std::type_info& type) const override;                                                \
+    public: bool isClassType(const std::type_info& type) const override;                                                        \
     private: static ::mixr::base::MetaObject metaObject;                                                                        \
     public: static const ::mixr::base::MetaObject* getMetaObject();                                                             \
     public: static const char* getFactoryName();                                                                                \
-    public: virtual bool isFactoryName(const char name[]) const override;                                                       \
-    protected: virtual bool setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj) override;                      \
+    public: bool isFactoryName(const char name[]) const override;                                                               \
+    protected: bool setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj) override;                              \
     public: static const ::mixr::base::SlotTable& getSlotTable();                                                               \
     protected: static const ::mixr::base::SlotTable slottable;                                                                  \
     private: static const char* slotnames[];                                                                                    \

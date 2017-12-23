@@ -43,7 +43,7 @@ public:
 
     bool setRCS(const base::Number* const);
 
-    virtual double getRCS(const Emission* const) override;
+    double getRCS(const Emission* const) override;
 private:
     double rcs {};         // Constant RCS value
 
@@ -69,7 +69,7 @@ public:
     double computeRcs(const double r)                          { return static_cast<double>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
-    virtual double getRCS(const Emission* const) override;
+    double getRCS(const Emission* const) override;
 
 private:
     double radius {};      // Sphere radius
@@ -103,7 +103,7 @@ public:
     virtual bool setA(base::Number* const);
     virtual bool setB(base::Number* const);
 
-    virtual double getRCS(const Emission* const) override;
+    double getRCS(const Emission* const) override;
 
 private:
     double a {};       // Length dimension
@@ -123,7 +123,7 @@ public:
     SigDihedralCR();
     SigDihedralCR(const double);
 
-    virtual double getRCS(const Emission* const) override;
+    double getRCS(const Emission* const) override;
 
 private:
     double length {};      // Length dimension
@@ -143,7 +143,7 @@ public:
     SigTrihedralCR();
     SigTrihedralCR(const double);
 
-    virtual double getRCS(const Emission* const) override;
+    double getRCS(const Emission* const) override;
 };
 
 
@@ -160,7 +160,7 @@ class SigSwitch : public RfSignature
 public:
    SigSwitch();
 
-   virtual double getRCS(const Emission* const) override;
+   double getRCS(const Emission* const) override;
 };
 
 
@@ -215,7 +215,7 @@ public:
    bool isDecibel() const                       { return dbFlg; }
    virtual bool setDecibel(const bool);
 
-   virtual double getRCS(const Emission* const em) override;
+   double getRCS(const Emission* const em) override;
 
 protected:
    const base::Table2* tbl {};      // The table

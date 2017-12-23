@@ -84,7 +84,7 @@ public:
    bool setPosition(const double x, const double y, const double z);
    bool setAngles(const double r, const double p, const double y);
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    virtual double computeBulletRatePerSecond();
@@ -94,9 +94,9 @@ protected:
    virtual base::Vec3d computeInitBulletPosition();
    virtual base::Vec3d computeInitBulletVelocity();
 
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    Bullet*  bullet {};             // Type of bullet

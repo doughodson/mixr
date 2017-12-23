@@ -73,21 +73,21 @@ public:
       double* const tof                 // TOF (sec)
    );
 
-   virtual const char* getDescription() const override;
-   virtual const char* getNickname() const override;
-   virtual int getCategory() const override;
+   const char* getDescription() const override;
+   const char* getNickname() const override;
+   int getCategory() const override;
 
 protected:
-   virtual bool setNoseFuze(const bool f);
-   virtual bool setMidFuze(const bool f);
-   virtual bool setTailFuze(const bool f);
-   virtual bool setArmingOption(const unsigned int a);
-   virtual bool setFuzeAltitude(const double v);
-   virtual bool setFuzeTime(const double v);
-   virtual bool setDragIndex(const double v);
+   virtual bool setNoseFuze(const bool);
+   virtual bool setMidFuze(const bool);
+   virtual bool setTailFuze(const bool);
+   virtual bool setArmingOption(const unsigned int);
+   virtual bool setFuzeAltitude(const double);
+   virtual bool setFuzeTime(const double);
+   virtual bool setDragIndex(const double);
 
-   virtual void weaponGuidance(const double dt) override;
-   virtual void weaponDynamics(const double dt) override;
+   void weaponGuidance(const double dt) override;
+   void weaponDynamics(const double dt) override;
 
 private:
    void initData();

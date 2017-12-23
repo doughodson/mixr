@@ -31,23 +31,22 @@ public:
     double getYPos() const        { return myYPos; }    // Returns the Y position (world coord)
     double getZPos() const        { return myZPos; }    // Returns the Z position (world coord)
 
-    bool setXPos(const double xPos);                    // Sets the X position (world coord)
-    bool setYPos(const double yPos);                    // Sets the Y position (world coord)
-    bool setZPos(const double zPos);                    // Sets the Z position (world coord)
+    bool setXPos(const double);                    // Sets the X position (world coord)
+    bool setYPos(const double);                    // Sets the Y position (world coord)
+    bool setZPos(const double);                    // Sets the Z position (world coord)
 
-    virtual void draw() override;
-
-    virtual bool event(const int event, Object* const obj = nullptr) override;
+    void draw() override;
+    bool event(const int event, Object* const obj = nullptr) override;
 
 private:
     // event functions
-    bool onUpdateX(const base::Number* const newX);
-    bool onUpdateY(const base::Number* const newY);
-    bool onUpdateZ(const base::Number* const newZ);
+    bool onUpdateX(const base::Number* const);
+    bool onUpdateY(const base::Number* const);
+    bool onUpdateZ(const base::Number* const);
 
-    double myXPos {};
-    double myYPos {};
-    double myZPos {};
+    double myXPos{};
+    double myYPos{};
+    double myZPos{};
 };
 
 }

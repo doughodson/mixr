@@ -71,7 +71,7 @@ public:
    bool isEnabledModeC() const                     { return enableModeC; }
    virtual void setEnabledModeC(const bool flg);
 
-   virtual void reset() override;
+   void reset() override;
 
 private:
    // Codes

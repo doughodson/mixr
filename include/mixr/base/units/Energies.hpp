@@ -85,9 +85,9 @@ public:
     Joules(const double value);
     Joules(const Energy& value);
 
-    static double convertStatic(const Energy& n)               { return n.toEnergy(); }
-    virtual double toEnergy() const override                   { return static_cast<double>(val); }
-    virtual double fromEnergy(const double a) const override   { return a; }
+    static double convertStatic(const Energy& n)       { return n.toEnergy(); }
+    double toEnergy() const override                   { return static_cast<double>(val); }
+    double fromEnergy(const double a) const override   { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -103,9 +103,9 @@ public:
     KiloWattHours(const double value);
     KiloWattHours(const Energy& value);
 
-    static double convertStatic(const Energy& n)             { return n.toEnergy() * energy::J2KWH; }
-    virtual double toEnergy() const override                 { return static_cast<double>(val * energy::KWH2J); }
-    virtual double fromEnergy(const double a) const override { return a * energy::J2KWH; }
+    static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2KWH; }
+    double toEnergy() const override                 { return static_cast<double>(val * energy::KWH2J); }
+    double fromEnergy(const double a) const override { return a * energy::J2KWH; }
 };
 
 
@@ -122,9 +122,9 @@ public:
     BTUs(const double value);
     BTUs(const Energy& value);
 
-    static double convertStatic(const Energy& n)             { return n.toEnergy() * energy::J2BTU; }
-    virtual double toEnergy() const override                 { return static_cast<double>(val * energy::BTU2J); }
-    virtual double fromEnergy(const double a) const override { return a * energy::J2BTU; }
+    static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2BTU; }
+    double toEnergy() const override                 { return static_cast<double>(val * energy::BTU2J); }
+    double fromEnergy(const double a) const override { return a * energy::J2BTU; }
 };
 
 
@@ -141,9 +141,9 @@ public:
     Calories(const double value);
     Calories(const Energy& value);
 
-    static double convertStatic(const Energy& n)               { return n.toEnergy() * energy::J2C; }
-    virtual double toEnergy() const override                   { return static_cast<double>(val * energy::C2J); }
-    virtual double fromEnergy(const double a) const override   { return a * energy::J2C; }
+    static double convertStatic(const Energy& n)       { return n.toEnergy() * energy::J2C; }
+    double toEnergy() const override                   { return static_cast<double>(val * energy::C2J); }
+    double fromEnergy(const double a) const override   { return a * energy::J2C; }
 };
 
 
@@ -160,9 +160,9 @@ public:
     FootPounds(const double value);
     FootPounds(const Energy& value);
 
-    static double convertStatic(const Energy& n)              { return n.toEnergy() * energy::J2FP; }
-    virtual double toEnergy() const override                  { return static_cast<double>(val * energy::FP2J); }
-    virtual double fromEnergy(const double a) const override  { return a * energy::J2FP; }
+    static double convertStatic(const Energy& n)      { return n.toEnergy() * energy::J2FP; }
+    double toEnergy() const override                  { return static_cast<double>(val * energy::FP2J); }
+    double fromEnergy(const double a) const override  { return a * energy::J2FP; }
 };
 
 }

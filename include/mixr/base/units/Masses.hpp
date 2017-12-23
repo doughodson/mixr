@@ -86,9 +86,9 @@ public:
     KiloGrams(const double value);
     KiloGrams(const Mass& value);
 
-    static double convertStatic(const Mass &n)               { return n.toMass(); }
-    virtual double toMass() const override                   { return static_cast<double>(val); }
-    virtual double fromMass(const double a) const override   { return a; }
+    static double convertStatic(const Mass &n)       { return n.toMass(); }
+    double toMass() const override                   { return static_cast<double>(val); }
+    double fromMass(const double a) const override   { return a; }
 };
 
 
@@ -106,9 +106,9 @@ public:
     Grams(const double value);
     Grams(const Mass& value);
 
-    static double convertStatic(const Mass &n)               { return n.toMass() * mass::KG2G; }
-    virtual double toMass() const override                   { return static_cast<double>(val * mass::G2KG); }
-    virtual double fromMass(const double a) const override   { return a * mass::KG2G; }
+    static double convertStatic(const Mass &n)       { return n.toMass() * mass::KG2G; }
+    double toMass() const override                   { return static_cast<double>(val * mass::G2KG); }
+    double fromMass(const double a) const override   { return a * mass::KG2G; }
 };
 
 
@@ -126,9 +126,9 @@ public:
     Slugs(const double value);
     Slugs(const Mass& value);
 
-    static double convertStatic(const Mass &n)               { return n.toMass() * mass::KG2SL; }
-    virtual double toMass() const override                   { return static_cast<double>(val * mass::SL2KG); }
-    virtual double fromMass(const double a) const override   { return a * mass::KG2SL; }
+    static double convertStatic(const Mass &n)       { return n.toMass() * mass::KG2SL; }
+    double toMass() const override                   { return static_cast<double>(val * mass::SL2KG); }
+    double fromMass(const double a) const override   { return a * mass::KG2SL; }
 };
 
 }

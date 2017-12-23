@@ -97,11 +97,11 @@ public:
     virtual bool setRanges(const double* const rngs, const int n);  // Sets the list of ranges
     virtual bool setInitRngIdx(const int idx);                      // Sets the starting range index; returns true if successful
 
-    virtual bool isTransmitting() const override;
+    bool isTransmitting() const override;
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-    virtual void updateData(const double dt = 0.0) override;
-    virtual void reset() override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void updateData(const double dt = 0.0) override;
+    void reset() override;
 
 protected:
     virtual base::PairStream* getModes();                              // Returns the list of submodes
@@ -109,10 +109,10 @@ protected:
     // Event handler(s)
     virtual bool onStartScanEvent(const base::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
     virtual bool onEndScanEvent(const base::Integer* const bar);       // End of scan (SENSOR_RTS) event handler
-    virtual bool onTgtDesignateEvent();                        // Target Designate (SCAN_START) event handler
-    virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
+    virtual bool onTgtDesignateEvent();                                // Target Designate (SCAN_START) event handler
+    virtual bool onReturnToSearchEvent();                              // Return to search (SCAN_END) event handler
 
-    virtual bool shutdownNotification() override;
+    bool shutdownNotification() override;
 
 private:
     bool processModes();

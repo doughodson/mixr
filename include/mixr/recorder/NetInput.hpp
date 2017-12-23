@@ -35,7 +35,7 @@ public:
 
 protected:
 
-   virtual const DataRecordHandle* readRecordImp() override;
+   const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();

@@ -60,9 +60,9 @@ public:
 protected:
    void setFullFilename(const char* const);
 
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    std::ofstream* sout {};            // Output stream

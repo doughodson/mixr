@@ -26,7 +26,7 @@ public:
            WADING = 13, SURRENDER = 14, DETAINED = 15 };
 
 
-    virtual unsigned int getMajorType() const override;
+    unsigned int getMajorType() const override;
 
     // sets our actions (right now we can stand, walk, or run)
     virtual bool setActionState(const int x);
@@ -40,7 +40,7 @@ public:
     virtual void look(const double up, const double sdws);
     virtual bool setLookAngle(const double x)              { lookAngle = x; return true; }
 
-    virtual bool setVelocity(const double ue, const double ve, const double we) override;
+    bool setVelocity(const double ue, const double ve, const double we) override;
 
     double getLookAngle() const                            { return lookAngle; }
     bool isTargetAquired() const                           { return tgtAquired; }
@@ -53,13 +53,13 @@ public:
     enum { SEARCHING = 0, TGT_IN_SIGHT, LOCKED };
     enum { LF_GUN = 0, LF_MISSILE };
 
-    virtual void setWeapon(const int x) { weaponSel = x; }
-    int getWeaponSelMode() const { return weaponSel; }
+    virtual void setWeapon(const int x)     { weaponSel = x; }
+    int getWeaponSelMode() const            { return weaponSel; }
 
-    virtual void reset() override;
+    void reset() override;
 
 protected:
-    virtual bool shutdownNotification() override;
+    bool shutdownNotification() override;
 
 private:
     int actionState {UPRIGHT_STANDING}; // the action we are doing (for DIS enumerations)

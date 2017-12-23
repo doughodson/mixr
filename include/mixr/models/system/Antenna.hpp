@@ -114,20 +114,20 @@ public:
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
-   virtual bool onStartScanEvent(base::Integer* const bar) override;
-   virtual bool onEndScanEvent(base::Integer* const bar) override;
+   bool onStartScanEvent(base::Integer* const bar) override;
+   bool onEndScanEvent(base::Integer* const bar) override;
 
-   virtual bool onRfEmissionEvent(Emission* const) override;
+   bool onRfEmissionEvent(Emission* const) override;
 
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    void clearQueues();
 
-   virtual void process(const double dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
    base::safe_stack<Emission*> freeEmStack {MAX_EMISSIONS};  // Free emission stack
    mutable long freeEmLock {};                               // Semaphore to protect 'freeEmStack'

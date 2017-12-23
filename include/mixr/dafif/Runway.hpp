@@ -60,7 +60,7 @@ public:
 
 public:
    Runway();
-   Runway(const char* const s);
+   Runway(const char* const);
 
    double latitude(const WhichEnd whichEnd) const;
    double longitude(const WhichEnd whichEnd) const;
@@ -79,7 +79,7 @@ public:
 
    WhichEnd whichEnd(const char rwEndId[]) const;
 
-   virtual void printRecord(std::ostream& sout) const override;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;

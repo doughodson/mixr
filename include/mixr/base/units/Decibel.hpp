@@ -60,14 +60,14 @@ public:
     void operator-=(const Decibel&);
     void operator-=(const double);
 
-    virtual void setValue(const double nv) override;
+    void setValue(const double nv) override;
 
 private:
-    double db {};    // value in dBs
+    double db{};    // value in dBs
 
 private:
    // slot table helper methods
-   virtual bool setSlotValue(const Number* const) override;
+   bool setSlotValue(const Number* const) override;
 };
 
 //------------------------------------------------------------------------------

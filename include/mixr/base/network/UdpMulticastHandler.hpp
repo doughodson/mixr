@@ -73,15 +73,15 @@ public:
     bool getLoopback() const                { return loopback; }
     void setLoopback(const bool b)          { loopback = b; }
 
-    virtual bool initNetwork(const bool noWaitFlag) override;
-    virtual bool isConnected() const override;
-    virtual bool closeConnection() override;
+    bool initNetwork(const bool noWaitFlag) override;
+    bool isConnected() const override;
+    bool closeConnection() override;
 
 protected:
     virtual bool joinTheGroup();
 
-    virtual bool init() override;
-    virtual bool bindSocket() override;
+    bool init() override;
+    bool bindSocket() override;
 
 private:
     char* multicastGroup {};           // Multicast Group Name

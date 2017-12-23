@@ -63,19 +63,19 @@ public:
    // Sets integration gain
    virtual bool setIGain(const double);
 
-   virtual bool killedNotification(Player* const killedBy = 0) override;
+   bool killedNotification(Player* const killedBy = 0) override;
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
-   virtual bool onEndScanEvent(const base::Integer* const bar) override;
+   bool onEndScanEvent(const base::Integer* const bar) override;
 
-   virtual void transmit(const double dt) override;
-   virtual void receive(const double dt) override;
-   virtual void process(const double dt) override;
+   void transmit(const double dt) override;
+   void receive(const double dt) override;
+   void process(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 protected: // (#temporary#) allow subclasses to access and use report queue
 

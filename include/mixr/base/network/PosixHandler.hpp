@@ -81,20 +81,20 @@ public:
    bool getSharedFlag() const;                  // Is the socket address shared?
    void setSharedFlag(const bool);
 
-   virtual bool initNetwork(const bool noWaitFlag) override;
-   virtual bool isConnected() const override;
-   virtual bool closeConnection() override;
-   virtual bool sendData(const char* const packet, const int size) override;
-   virtual unsigned int recvData(char* const packet, const int maxSize) override;
-   virtual bool setBlocked() override;
-   virtual bool setNoWait() override;
+   bool initNetwork(const bool noWaitFlag) override;
+   bool isConnected() const override;
+   bool closeConnection() override;
+   bool sendData(const char* const packet, const int size) override;
+   unsigned int recvData(char* const packet, const int maxSize) override;
+   bool setBlocked() override;
+   bool setNoWait() override;
 
    // Last recvData() origin IP and port
    uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
    uint16_t getLastFromPort() const;     // Port address of last valid recvData()
 
 protected:
-   virtual bool init() override;
+   bool init() override;
 
    virtual bool bindSocket();          // Bind socket to address
 

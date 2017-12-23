@@ -21,7 +21,7 @@ class Rotary : public AbstractField
 
 public:
    Rotary();
-   virtual void draw() override;
+   void draw() override;
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)

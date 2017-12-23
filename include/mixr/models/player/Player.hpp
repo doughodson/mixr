@@ -603,7 +603,7 @@ public:
    Pilot* getPilot();                                                 // Player's top level pilot model
    const Pilot* getPilot() const;                                     // Player's top level pilot model (const version)
    const base::Identifier* getPilotName() const;                      // Name of the player's top level pilot model
-   Pilot* getPilotByName(const char* const name);                     // Returns a pilot model by its name
+   Pilot* getPilotByName(const char* const);                          // Returns a pilot model by its name
    base::Pair* getPilotByType(const std::type_info& type);            // Returns a pilot model by its type
 
    StoresMgr* getStoresManagement();                                  // Player's stores (weapons, fuel, etc...) manager model
@@ -613,83 +613,83 @@ public:
    Datalink* getDatalink();                                           // Player's top level Datalink model
    const Datalink* getDatalink() const;                               // Player's top level Datalink (const version)
    const base::Identifier* getDatalinkName() const;                   // Name of the player's top level Datalink model
-   Datalink* getDatalinkByName(const char* const name);               // Returns a Datalink model by its name
+   Datalink* getDatalinkByName(const char* const);                    // Returns a Datalink model by its name
    base::Pair* getDatalinkByType(const std::type_info& type);         // Returns a Datalink model by its type
 
    Gimbal* getGimbal();                                               // Player's top level Gimbal model
    const Gimbal* getGimbal() const;                                   // Player's top level Gimbal (const version)
    const base::Identifier* getGimbalName() const;                     // Name of the player's top level Gimbal model
-   Gimbal* getGimbalByName(const char* const name);                   // Returns a Gimbal model by its name
+   Gimbal* getGimbalByName(const char* const);                        // Returns a Gimbal model by its name
    base::Pair* getGimbalByType(const std::type_info& type);           // Returns a Gimbal model by its type
 
    Navigation* getNavigation();                                       // Player's top level Navigation model
    const Navigation* getNavigation() const;                           // Player's top level Navigation (const version)
    const base::Identifier* getNavigationName() const;                 // Name of the player's top level Navigation model
-   Navigation* getNavigationByName(const char* const name);           // Returns a Navigation model by its name
+   Navigation* getNavigationByName(const char* const);                // Returns a Navigation model by its name
    base::Pair* getNavigationByType(const std::type_info& type);       // Returns a Navigation model by its type
 
    OnboardComputer* getOnboardComputer();                             // Player's top level OnboardComputer model
    const OnboardComputer* getOnboardComputer() const;                 // Player's top level OnboardComputer (const version)
    const base::Identifier* getOnboardComputerName() const;            // Name of the player's top level OnboardComputer model
-   OnboardComputer* getOnboardComputerByName(const char* const name); // Returns an OnboardComputer model by its name
+   OnboardComputer* getOnboardComputerByName(const char* const);      // Returns an OnboardComputer model by its name
    base::Pair* getOnboardComputerByType(const std::type_info& type);  // Returns an OnboardComputer model by its type
 
    Radio* getRadio();                                          // Player's top level Radio model
    const Radio* getRadio() const;                              // Player's top level Radio (const version)
    const base::Identifier* getRadioName() const;               // Name of the player's top level Radio model
-   Radio* getRadioByName(const char* const name);              // Returns a Radio model by its name
+   Radio* getRadioByName(const char* const);                   // Returns a Radio model by its name
    base::Pair* getRadioByType(const std::type_info& type);     // Returns a Radio model by its type
 
    RfSensor* getSensor();                                      // Player's top level R/F sensor model
    const RfSensor* getSensor() const;                          // Player's top level R/F sensor model (const version)
    const base::Identifier* getSensorName() const;              // Name of the player's top level R/F sensor model
-   RfSensor* getSensorByName(const char* const name);          // Returns a R/F sensor model by its name
+   RfSensor* getSensorByName(const char* const);               // Returns a R/F sensor model by its name
    base::Pair* getSensorByType(const std::type_info& type);    // Returns a R/F sensor model by its type
 
    IrSystem* getIrSystem();                                    // Player's top level IR sensor model
    const IrSystem* getIrSystem() const;                        // Player's top level IR sensor model (const version)
    const base::Identifier* getIrSystemName() const;            // Name of the player's top level IR sensor model
-   IrSystem* getIrSystemByName(const char* const name);        // Returns a IR sensor model by its name
+   IrSystem* getIrSystemByName(const char* const);             // Returns a IR sensor model by its name
    base::Pair* getIrSystemByType(const std::type_info& type);  // Returns a IR sensor model by its type
 
    // ---
    // Set functions
    // ---
 
-   virtual bool setType(const base::String* const newTypeString);          // Sets the player's type string
-   virtual void setSide(const Side newSide);                               // Sets the player's side enum
-   virtual bool setUseCoordSys(const CoordSys);                            // Sets the coord system to use for updating position
+   virtual bool setType(const base::String* const newTypeString);      // Sets the player's type string
+   virtual void setSide(const Side);                                   // Sets the player's side enum
+   virtual bool setUseCoordSys(const CoordSys);                        // Sets the coord system to use for updating position
 
-   virtual bool setFuelFreeze(const bool f);                               // Sets the player's fuel freeze flag
-   virtual bool setCrashOverride(const bool f);                            // Sets the player's crash override flag
-   virtual bool setKillOverride(const bool f);                             // Sets the player's kill override flag
-   virtual bool setKillRemoval(const bool f);                              // Sets the player's kill removal flag
-   virtual void resetJustKilled();                                         // Resets the just killed flag
-   virtual bool setDamage(const double v);                                 // Sets the player's damage state
-   virtual bool setSmoke(const double v);                                  // Sets the player's smoke state
-   virtual bool setFlames(const double v);                                 // Sets the player's flames state
-   virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
-   virtual bool setPositionFreeze(const bool f);                           // Sets the player's freeze flag
-   virtual bool setAltitudeFreeze(const bool f);                           // Sets the player's altitude freeze flag
-   virtual bool setAttitudeFreeze(const bool f);                           // Sets the player's attitude freeze flag
+   virtual bool setFuelFreeze(const bool);                             // Sets the player's fuel freeze flag
+   virtual bool setCrashOverride(const bool);                          // Sets the player's crash override flag
+   virtual bool setKillOverride(const bool);                           // Sets the player's kill override flag
+   virtual bool setKillRemoval(const bool);                            // Sets the player's kill removal flag
+   virtual void resetJustKilled();                                     // Resets the just killed flag
+   virtual bool setDamage(const double);                               // Sets the player's damage state
+   virtual bool setSmoke(const double);                                // Sets the player's smoke state
+   virtual bool setFlames(const double);                               // Sets the player's flames state
+   virtual bool setCamouflageType(const unsigned int);                 // Sets the user defined camouflage type (or zero for none)
+   virtual bool setPositionFreeze(const bool);                         // Sets the player's freeze flag
+   virtual bool setAltitudeFreeze(const bool);                         // Sets the player's altitude freeze flag
+   virtual bool setAttitudeFreeze(const bool);                         // Sets the player's attitude freeze flag
+ 
+   virtual bool setHeadingHoldOn(const bool);                          // Turns heading-hold mode on/off
+   virtual bool setCommandedHeading(const double);                     // Sets the commanded (true) heading default (radians)
+   virtual bool setCommandedHeadingD(const double);                    // Sets the commanded (true) heading (degrees)
+   virtual bool setCommandedHeadingR(const double);                    // Sets the commanded (true) heading (radians)
 
-   virtual bool setHeadingHoldOn(const bool b);                            // Turns heading-hold mode on/off
-   virtual bool setCommandedHeading(const double h);                       // Sets the commanded (true) heading default (radians)
-   virtual bool setCommandedHeadingD(const double h);                      // Sets the commanded (true) heading (degrees)
-   virtual bool setCommandedHeadingR(const double h);                      // Sets the commanded (true) heading (radians)
+   virtual bool setVelocityHoldOn(const bool);                         // Turns velocity-hold mode on/off
+   virtual bool setCommandedVelocityKts(const double);                 // Sets the commanded (true) velocity (knots)
 
-   virtual bool setVelocityHoldOn(const bool b);                           // Turns velocity-hold mode on/off
-   virtual bool setCommandedVelocityKts(const double a);                   // Sets the commanded (true) velocity (knots)
+   virtual bool setAltitudeHoldOn(const bool);                         // Turns altitude-hold mode on/off
+   virtual bool setCommandedAltitude(const double);                    // Sets commanded (HAE) altitude, default (meters)
+   virtual bool setCommandedAltitudeM(const double);                   // Sets commanded (HAE) altitude (meters)
+   virtual bool setCommandedAltitudeFt(const double);                  // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setAltitudeHoldOn(const bool b);                           // Turns altitude-hold mode on/off
-   virtual bool setCommandedAltitude(const double a);                      // Sets commanded (HAE) altitude, default (meters)
-   virtual bool setCommandedAltitudeM(const double a);                     // Sets commanded (HAE) altitude (meters)
-   virtual bool setCommandedAltitudeFt(const double a);                    // Sets commanded (HAE) altitude (feet)
-
-   virtual void setTerrainElevation(const double v);                       // Sets the elevation of the terrain at this player's location (meters)
-   virtual bool setTerrainOffset(const double v);                          // Sets the ground clamping offset (meters)
-   virtual bool setInterpolateTerrain(const bool f);                       // sets the DTED terrain interpolation flag
-   virtual bool setTerrainElevationRequired(const bool b);                 // Sets IG terrain elevation request flag
+   virtual void setTerrainElevation(const double);                     // Sets the elevation of the terrain at this player's location (meters)
+   virtual bool setTerrainOffset(const double);                        // Sets the ground clamping offset (meters)
+   virtual bool setInterpolateTerrain(const bool);                     // sets the DTED terrain interpolation flag
+   virtual bool setTerrainElevationRequired(const bool);               // Sets IG terrain elevation request flag
 
    // ---
    // Set the player's position
@@ -770,10 +770,10 @@ public:
 
    // Sets the body angular velocities (radians/second)
    virtual bool setAngularVelocities(const double pa, const double qa, const double ra);
-   virtual bool setAngularVelocities(const base::Vec3d& newAngVel);
+   virtual bool setAngularVelocities(const base::Vec3d&);
 
    // Sets the body angular velocities (radians/second)
-   virtual bool setGeocAngularVelocities(const base::Vec3d& newAngVel);
+   virtual bool setGeocAngularVelocities(const base::Vec3d&);
 
    // ---
    // Set the player's velocity and acceleration vectors
@@ -815,16 +815,16 @@ public:
    // ---
 
    // Sets the player's initial (reset) latitude (degrees)
-   virtual bool setInitLat(const double x);
+   virtual bool setInitLat(const double);
 
    // Sets the player's initial (reset) longitude (degrees)
-   virtual bool setInitLon(const double x);
+   virtual bool setInitLon(const double);
 
    // Initial altitude (HAE) (meters)
-   virtual bool setInitAltitude(const double altitude);
+   virtual bool setInitAltitude(const double);
 
    // Initial geocentric (ECEF) position vector
-   virtual bool setInitGeocentricPosition(const base::Vec3d& newPos);
+   virtual bool setInitGeocentricPosition(const base::Vec3d&);
 
    // Initial position (after reset) relative to the simulation reference point (meters)
    virtual bool setInitPosition(const double north, const double east);
@@ -837,14 +837,14 @@ public:
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
    // ---
-   virtual void setControlStickRollInput(const double roll);
+   virtual void setControlStickRollInput(const double);
 
    // ---
    // Pitch Control Input
    //      Normalized inputs
    //      pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
    // ---
-   virtual void setControlStickPitchInput(const double pitch);
+   virtual void setControlStickPitchInput(const double);
 
    // ---
    // Throttle(s) Control Input
@@ -870,25 +870,25 @@ public:
    // Event handler(s)
    // ---
    virtual bool killedNotification(Player* const killedBy = nullptr);         // Handles the KILL_EVENT event
-   virtual bool collisionNotification(Player* const msg);                     // Handles the CRASH_EVENT event with another player
+   virtual bool collisionNotification(Player* const);                         // Handles the CRASH_EVENT event with another player
    virtual bool crashNotification();                                          // Handles the CRASH_EVENT event
    virtual bool onWpnRelEvent(const base::Boolean* const msg = nullptr);      // Handles the WPN_REL_EVENT event
    virtual bool onTriggerSwEvent(const base::Boolean* const msg = nullptr);   // Handles the TRIGGER_SW_EVENT event
    virtual bool onTgtStepEvent();                                             // Handles the TGT_STEP_EVENT event
-   virtual bool onRfEmissionEventPlayer(Emission* const msg);                 // Handles the RF_EMISSION event
-   virtual bool onRfReflectedEmissionEventPlayer(Emission* const msg);        // Handles the RF_EMISSION event reflected to a 3rd party
-   virtual bool onReflectionsRequest(base::Component* const msg);             // Handles the RF_REFLECTIONS_REQUEST event
-   virtual bool onReflectionsCancel(const base::Component* const msg);        // Handles the RF_REFLECTIONS_CANCEL event
-   virtual bool onIrMsgEventPlayer(IrQueryMsg* const msg);                    // Handle IR_QUERY_MSG event
-   virtual bool onDatalinkMessageEventPlayer(base::Object* const msg);        // Handles the DATALINK_MESSAGE event
-   virtual bool onDeEmissionEvent(base::Object* const msg);                   // Handles the DE_EMISSION event
+   virtual bool onRfEmissionEventPlayer(Emission* const);                     // Handles the RF_EMISSION event
+   virtual bool onRfReflectedEmissionEventPlayer(Emission* const);            // Handles the RF_EMISSION event reflected to a 3rd party
+   virtual bool onReflectionsRequest(base::Component* const);                 // Handles the RF_REFLECTIONS_REQUEST event
+   virtual bool onReflectionsCancel(const base::Component* const);            // Handles the RF_REFLECTIONS_CANCEL event
+   virtual bool onIrMsgEventPlayer(IrQueryMsg* const);                        // Handle IR_QUERY_MSG event
+   virtual bool onDatalinkMessageEventPlayer(base::Object* const);            // Handles the DATALINK_MESSAGE event
+   virtual bool onDeEmissionEvent(base::Object* const);                       // Handles the DE_EMISSION event
 
    // Component methods
-   virtual bool isFrozen() const override;
-   virtual void reset() override;
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual void updateData(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   bool isFrozen() const override;
+   void reset() override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
 
@@ -908,22 +908,22 @@ protected:
    // Update terrain elevation at our location
    virtual void updateElevation();
 
-   virtual bool shutdownNotification() override;
-   virtual void printTimingStats() override;
+   bool shutdownNotification() override;
+   void printTimingStats() override;
 
    // These systems, from our subcomponent list, can only be set by reset()
-   virtual bool setDynamicsModel(base::Pair* const sys); // Sets our dynamics model
-   virtual bool setDatalink(base::Pair* const n);        // Sets our Datalink models
-   virtual bool setGimbal(base::Pair* const n);          // Sets our gimbal/antenna/optic models
-   virtual bool setNavigation(base::Pair* const n);      // Sets our navigation model
-   virtual bool setOnboardComputer(base::Pair* const s); // Sets our onboard computer model
-   virtual bool setPilot(base::Pair* const p);           // Sets our pilot model
-   virtual bool setRadio(base::Pair* const n);           // Sets our radio models
-   virtual bool setSensor(base::Pair* const n);          // Sets our sensor models
-   virtual bool setIrSystem(base::Pair* const n);        // Sets our IR sensors models
-   virtual bool setStoresMgr(base::Pair* const s);       // Sets our stores management model
+   virtual bool setDynamicsModel(base::Pair* const);    // Sets our dynamics model
+   virtual bool setDatalink(base::Pair* const);         // Sets our Datalink models
+   virtual bool setGimbal(base::Pair* const);           // Sets our gimbal/antenna/optic models
+   virtual bool setNavigation(base::Pair* const);       // Sets our navigation model
+   virtual bool setOnboardComputer(base::Pair* const);  // Sets our onboard computer model
+   virtual bool setPilot(base::Pair* const);            // Sets our pilot model
+   virtual bool setRadio(base::Pair* const);            // Sets our radio models
+   virtual bool setSensor(base::Pair* const);           // Sets our sensor models
+   virtual bool setIrSystem(base::Pair* const);         // Sets our IR sensors models
+   virtual bool setStoresMgr(base::Pair* const);        // Sets our stores management model
 
-   virtual void processComponents(              // Process our subcomponent list (which should be other steer points)
+   void processComponents(                      // Process our subcomponent list (which should be other steer points)
       base::PairStream* const list,             // Source list of components
       const std::type_info& filter,             // Type filter
       base::Pair* const add = nullptr,          // Optional pair to add

@@ -28,7 +28,7 @@ class VMap0LibDirectory : public VpfDirectory
 public:
     VMap0LibDirectory();
 
-    virtual void loadTables() override;
+    void loadTables() override;
 
 private:
     // Holds table information for this directory

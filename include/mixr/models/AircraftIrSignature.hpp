@@ -38,7 +38,7 @@ class AircraftIrSignature : public IrSignature
 public:
    AircraftIrSignature();
 
-   virtual bool getIrSignature(IrQueryMsg* const) override;
+   bool getIrSignature(IrQueryMsg* const) override;
 
 protected:
    virtual double* getHeatSignature(IrQueryMsg*);

@@ -29,7 +29,7 @@ public:
    AirAngleOnlyTrkMgrPT();
 
 protected:
-   virtual void processTrackList(const double dt) override;
+   void processTrackList(const double dt) override;
 
    virtual void updateTrackAges(const double dt);
    virtual void removeAgedTracks();

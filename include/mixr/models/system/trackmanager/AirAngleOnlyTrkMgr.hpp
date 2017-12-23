@@ -22,7 +22,7 @@ public:
    AirAngleOnlyTrkMgr();
 
 protected:
-   virtual void processTrackList(const double dt) override;
+   void processTrackList(const double dt) override;
 };
 
 }

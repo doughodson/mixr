@@ -27,7 +27,7 @@ class NetIO : public hla::NetIO
 
 public:
     // Object Class Indexes
-    // (see RpfFom.hpp for class declarations)
+    // (see RprFom.hpp for class declarations)
     enum {
         BASE_ENTITY_CLASS = 1,
         PHYSICAL_ENTITY_CLASS = 2,
@@ -48,7 +48,7 @@ public:
     };
 
     // Object Attribute Indexes
-    // (see RpfFom.hpp for class declarations)
+    // (see RprFom.hpp for class declarations)
     enum {
         // Base Entity arguments indexes (AI)
         ENTITY_TYPE_AI = 1,
@@ -184,23 +184,23 @@ public:
       ) const;
 
     // NetIO interface
-    virtual unsigned int getNumberOfObjectClasses() const override;
-    virtual unsigned int getNumberOfObjectAttributes() const override;
-    virtual unsigned int getNumberOfOInteractionClasses() const override;
-    virtual unsigned int getNumberOfInteractionParameters() const override;
+    unsigned int getNumberOfObjectClasses() const override;
+    unsigned int getNumberOfObjectAttributes() const override;
+    unsigned int getNumberOfOInteractionClasses() const override;
+    unsigned int getNumberOfInteractionParameters() const override;
 
-    virtual void discoverObjectInstance(
+    void discoverObjectInstance(
         const RTI::ObjectHandle theObject, const RTI::ObjectClassHandle theObjectClass, const char* theObjectName
     ) override;
 
-    virtual void receiveInteraction(
+    void receiveInteraction(
         const RTI::InteractionClassHandle theInteraction,
         const RTI::ParameterHandleValuePairSet& theParameters
     ) override;
 
-    // Simulation::NetIO interface
-    virtual interop::Nib* createNewOutputNib(models::Player* const player) override;
-    virtual interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
+    // interop::NetIO interface
+    interop::Nib* createNewOutputNib(models::Player* const player) override;
+    interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
 
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
@@ -211,13 +211,13 @@ protected:
     virtual bool publishAndSubscribeMunitionDetonation();
 
     // NetIO interface (callbacks)
-    virtual bool publishAndSubscribe() override;
+    bool publishAndSubscribe() override;
 
-    // Simulation::NetIO Interface (Callbacks)
+    // interop::NetIO Interface (Callbacks)
     // Update players/systems from the Input-list
-    virtual void processInputList() override;
+    void processInputList() override;
     // Create a new rprfom::Nib
-    virtual interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;
+    interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;
 };
 
 }

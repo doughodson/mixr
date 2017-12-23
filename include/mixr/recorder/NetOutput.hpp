@@ -29,7 +29,7 @@ public:
    virtual void closeConnections();          // close the network connection
 
 protected:
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
     base::safe_ptr<base::NetHandler> netHandler; // Network handler (input/output, or just output if netInput is defined)

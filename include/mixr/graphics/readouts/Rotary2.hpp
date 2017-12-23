@@ -22,7 +22,7 @@ class Rotary2 : public Rotary
 
 public:
    Rotary2();
-   virtual bool event(const int key, base::Object* const obj = nullptr) override;
+   bool event(const int key, base::Object* const obj = nullptr) override;
 
    // event handler methods
    virtual bool onSelect(const base::Number* const osobj);

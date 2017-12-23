@@ -46,8 +46,8 @@ public:
    // Event handler(s)
    virtual bool onJettisonEvent();
 
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    bool setJettisonable(const bool);    // Sets the jettison enable flag

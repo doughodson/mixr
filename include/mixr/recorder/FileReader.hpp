@@ -44,7 +44,7 @@ public:
    virtual bool setPathName(const base::String* const);
 
 protected:
-   virtual const DataRecordHandle* readRecordImp() override;
+   const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();

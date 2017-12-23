@@ -40,11 +40,11 @@ public:
       const int re                      // Release event id
    );
 
-   virtual const char* getDescription() const override;
-   virtual const char* getNickname() const override;
-   virtual int getCategory() const override;
+   const char* getDescription() const override;
+   const char* getNickname() const override;
+   int getCategory() const override;
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    virtual void resetBurstTrajectories();
@@ -55,10 +55,10 @@ protected:
    const Player* getHitPlayer() const     { return hitPlayer; }
    void setHitPlayer(Player*);
 
-   virtual void weaponDynamics(const double dt) override;
-   virtual void updateTOF(const double dt) override;
+   void weaponDynamics(const double dt) override;
+   void updateTOF(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };

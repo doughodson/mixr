@@ -90,7 +90,7 @@ public:
    unsigned int getLayer() const                    { return layerValue; }
    void setLayer(const unsigned int newLayer);
 
-   virtual void drawFunc() override;
+   void drawFunc() override;
 
 private:
    base::Vec4d coeff;          // Coefficients of the plane equation

@@ -24,7 +24,7 @@ class VMap0MainDirectory : public VpfDirectory
 public:
     VMap0MainDirectory();
 
-    virtual void loadTables() override;
+    void loadTables() override;
 
     VMap0ReferenceDirectory* getReferenceDir()      { return rference; }
 

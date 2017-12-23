@@ -72,9 +72,9 @@ public:
    // Add a new emission report (RF track managers only)
    virtual void newReport(Emission* em, double snDbl);
 
-   virtual bool killedNotification(Player* const killedBy = 0) override;
+   bool killedNotification(Player* const killedBy = 0) override;
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    static const unsigned int MAX_TRKS{MIXR_CONFIG_MAX_TRACKS};         // Max tracks
@@ -108,10 +108,10 @@ protected:
    mutable long queueLock {};                      // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
-   virtual void process(const double dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    double maxTrackAge {3.0};      // Max Track age (sec)

@@ -127,8 +127,8 @@ public:
    // IrQueryMsg class interface
    virtual void clearIrSignature();
 
-   virtual void setRange(const double r) override;
-   virtual void clear() override;
+   void setRange(const double) override;
+   void clear() override;
 
    // FAB - valuable to keep info about merging
    enum MergedQueryStatus {

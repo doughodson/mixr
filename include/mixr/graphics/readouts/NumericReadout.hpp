@@ -80,11 +80,11 @@ public:
    void setMaxValue(const int v)                { maxNum = static_cast<double>(v); redisplay(); }
    void setMaxValue(const double v)             { maxNum = v; redisplay(); }
 
-   virtual double getInputValue() const override;
-   virtual bool isInputValueValid() const override;
-   virtual char filterInputEvent(const int event, const int tc) override;
-   virtual bool event(const int key, base::Object* const obj = nullptr) override;
-   virtual void updateData(const double dt = 0.0) override;
+   double getInputValue() const override;
+   bool isInputValueValid() const override;
+   char filterInputEvent(const int event, const int tc) override;
+   bool event(const int key, base::Object* const obj = nullptr) override;
+   void updateData(const double dt = 0.0) override;
 
    // event handler methods
    virtual bool onUpdateValue(const base::Float* const);

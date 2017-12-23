@@ -254,11 +254,11 @@ public:
    const base::String& getInputExample() const           { return inputExample; }
    int getCharacterPos() const                           { return icp; }
 
-   virtual bool cursor(int* ln, int* cp) const override;
-   virtual void drawFunc() override;
-   virtual bool event(const int event, Object* const obj = nullptr) override;
+   bool cursor(int* ln, int* cp) const override;
+   void drawFunc() override;
+   bool event(const int event, Object* const obj = nullptr) override;
 
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    base::String origStr;               // Original text saved by setText

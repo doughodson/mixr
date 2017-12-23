@@ -36,15 +36,15 @@ class TcpClient : public TcpHandler
 public:
     TcpClient();
 
-    virtual bool initNetwork(const bool noWaitFlag) override;
+    bool initNetwork(const bool noWaitFlag) override;
 
 protected:
     const char* getIpAddress()  { return ipAddr; }
     bool connectToServer();      // Connect to the server
 
-    virtual bool init() override;
+    bool init() override;
 
-    virtual bool bindSocket() override;
+    bool bindSocket() override;
 
 private:
     char* ipAddr {};                // IP Address

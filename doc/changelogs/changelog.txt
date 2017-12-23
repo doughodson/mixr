@@ -20,10 +20,11 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
 - Removed 'serialize()' method from base Object.  This method is no longer needed
   and was rarely used, so all functionality associated with it has been removed.
-  As a consequence, in user code, remove any 'serialize()' methods you might have
-  defined for your classes.  If you did not define any such methods, you probably
-  used the 'EMPTY_SERIALIZE()' macro to satisfy the dependency to define the
-  method itself. Remove this macro from your mixr-based application code.
+  As a consequence, in user code, remove all 'serialize()' methods you have
+  defined in your classes.  If you did not define any such methods, you probably
+  used the 'EMPTY_SERIALIZE()' macro to satisfy the Object-based dependency, which
+  defined the method itself (to do nothing). Remove this macro from your mixr-based
+  application code, otherwise, compiling errors will be produced.
 
 - Prefixed all 'size_t' types with std (e.g., std::size_t) to clearly indicate
   that this type is defined in the std library (it is not defined as part of the core
@@ -34,11 +35,10 @@ General framework-wide changes/improvements/trends/philosophy/goals
 - Using uniform/brace initialization syntax for types throughout code base.
   This notation forces more explicit initialization of types, and avoids
   nonsensical coercions from taking place which, in some cases, might
-  surprise or even alarm a developer about a potential problem.
-
-  For example, it prevents accidental initializations from 'ints' to 'doubles'
-  or 'doubles' to 'ints.' This change required a significant investment in time,
-  but yielded a few interesting cases to address.
+  surprise or even alarm a developer about a potential problem.  For example, it
+  prevents accidental initializations from 'ints' to 'doubles' or 'doubles' to
+  'ints.' This change required a significant investment in time, but yielded a
+  few interesting cases to address.
 
 - Topic: use of 'unsigned int', 'unsigned short', etc. verses plain old 'int'.
 
@@ -52,7 +52,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Given a more fair evaluation of 'other issues' means we have decided to shift
   to using 'int's as opposed to 'unsigned int's almost exclusively; we are moving
   this direction in a staged manner, meaning, transitioning slowly as opportunities
-  naturally arise.
+  naturally arise or stand out in an obvious way due to uniform initialization.
 
   Rationale:
 
@@ -60,7 +60,8 @@ General framework-wide changes/improvements/trends/philosophy/goals
   quality and conform to conventions.  The convention is often stated as follows:
   "Favor the use of int's over unsigned int's unless there is a strong reason
   not to." In general, the signedness of the type is not considered a strong reason,
-  but is it acknowledged that there are a few good reasons to use unsigned.
+  but it is acknowledged that there are a few good places to stick with the unsigned
+  types.
 
   Today, the use of unsigned types is out of favor, as they introduce a number of
   problems - some potentially severe, some annoying, some due to readability,
@@ -79,7 +80,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   committee messed up.
 
   As we move towards using more C++11 features (such as universal
-  initialization), the inadvertent mixing of unsigned int's with int's is no
+  initialization), the inadvertent mixing of unsigned with signed types is no
   longer masked due to implicit type conversions (coercions).  Narrowing
   conversions (coercions) now produce compiler errors.  Explicit conversions
   back and forth make the code ugly to read and often harder to comprehend.
@@ -127,28 +128,29 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Interface: C++ does not officially have an explicit 'interface' class type or
   keyword like Java. It does support an equivalent concept as a class entirely
   defined by pure virtual methods. This type of class defines no implementation,
-  no state, no algorithm, nothing, zero.  Most importantly, it's not necessarily
-  used as a foundation for a class hierarchy - in fact, quite the oppose, it's useful
-  because it defines a set of functionality (methods names with signatures) that maybe
-  implemented in completely different hierarchies.  Within MIXR, we don't have any
-  interfaces defined in this sense.  Of course, MIXR is highly organized into a single
-  rooted hierarchy by Object.
+  no state, no algorithm, nothing, zero - well, function signatures.  Most importantly,
+  this class type isn't necessarily used as a foundation for a class hierarchy -
+  in fact, quite the oppose, it's useful because it defines a set of functionality
+  (i.e., methods names / function signatures) that maybe implemented by classes,
+  potentially in completely different hierarchies.  Within MIXR, we don't have any
+  interfaces defined in this sense.  Of course, MIXR classes are mostly organized
+  in a single hierarchy rooted by Object.
 
   Abstract: C++ does officially acknowledge the concept of an abstract class.
   It's simply a class that is not completely defined, therefore object instances
   cannot be created. Given that, an abstract class often defines something, at least
   a set of methods, and maybe a high level algorithm that partially defines how
-  it works; hopefully documented.  These high level algorithms define the blueprint
-  for the design of what the class is suppose to do, and to a limited extent, how it
-  does it. Particular aspects of those algorithms often leave the door open for
-  subclasses to define or change (i.e., tailor). In some cases, those doors are
-  wide open for redefinition, meaning, absolutely no high level algorithm, within
-  the class is defined.
+  it works (hopefully documented).  These high level algorithms define the blueprint
+  for the design of what subclasses are suppose to do, and to a limited extent,
+  how it does it (i.e., a partial algorithm). Particular aspects of those algorithms
+  often leave the door open for subclasses to define or change (i.e., tailor).
+  In some cases, those doors are wide open for redefinition, meaning, absolutely
+  no high level algorithm, within the class is defined (think Interface!).
 
   The means to tailor how a class operates include defining so-called 'extension
-  points' or 'hook' methods.  The difference between 'extension points' and
+  points' and 'hook' methods.  The difference between 'extension points' and
   'hook' methods is subtle; extension points are usually available as private
-  virtual methods that can be used to alter aspects of how a high level algorithm
+  virtual methods that can be used to alter aspects of how the high level algorithm
   executes.
 
   Hook methods are a little different; they are usually available as public
@@ -158,13 +160,13 @@ General framework-wide changes/improvements/trends/philosophy/goals
   methods), and in some cases, eliminate them all together (see the Non-Virtual
   Interface idiom and the Template method design pattern for more information).
   Within MIXR, we are starting to define more explicit standalone abstract classes,
-  as they are often the foundation (and principle value) that the framework
+  as they are often define the foundation (and principle value) that the framework
   or platform provides.
 
   Abstract classes do in fact define a public interface - they just add detail
   beyond what a typical Interface class provides.  They are the foundation for
   class hierarchies.  Given that, within MIXR, we are striving to present more
-  non-virtual methods within their public interface.
+  non-virtual methods within class public interfaces.
 
   From a naming perspective, we are starting to prefix abstract classes with
   the word 'Abstract' to indicate it's role within a hierarchy.
@@ -172,27 +174,27 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Base: The meaning of a 'base' class in C++ is overloaded.  In alignment
   with Microsoft's framework guidelines, MIXR base classes define useful
   'common code' for subclasses to leverage (if needed).  They should be abstract
-  as well, meaning, they should not be concrete, otherwise they wouldn't be
-  a 'base' class at all.
+  as well, meaning, they should not be concrete, otherwise they wouldn't
+  necessarily be a 'base' to anything at all.
 
   It easy to understand the recommended practice of avoiding defining too many
-  'base' classes between abstracts and concretes, as code will become difficult to
-  understand. Having said that, it's not an all or nothing thing, we do have
-  hierarchies of classes within MIXR that serves as useful points to derive
-  completely functional concrete instances.  This is always being re-evaluated
-  from the standpoint of understandability, improving overall platform
-  capabilities and flexibility.  It can be challenging to optimize all 3 at
-  the same time.
+  'base' classes between abstracts and concretes (i.e., layers), as code will
+  become difficult to understand. Having said that, it's not an all or nothing
+  thing, we do have hierarchies of classes within MIXR that serves as useful
+  points to derive completely functional concrete instances.  This is always
+  being re-evaluated from the standpoint of understandability such that there
+  is continued improvement in platform capabilities and flexibility.  It
+  can be challenging to optimize all these aspects at the same time.
 
   Concrete: These classes are maybe the easiest to digest - they complete,
   define or fill in remaining bits of implementation functionality
   needed to create real working instances. MIXR obviously includes many of these
   classes.  Some argue that all concrete class should be marked 'final'
-  as they are complete and help resolve other issues.  For now, this is not
-  the case in MIXR code, we have concrete classes that are effectively
-  serving as 'base' classes through extension.
+  as they are complete and help resolve other issues (assignments and copying!).
+  For now, this is not the case in MIXR code, we have concrete classes that are
+  effectively serving as 'base' classes through extension.
 
-  So given all this, why does this matter?
+  Why it matters?
 
   In a nutshell, code clarity, and a more clear separation of 'interface'
   from 'implementation.'  One goal of frameworks is to define relationships
@@ -209,7 +211,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   If every method in a class can be overridden, then you are effectively
   telling the developer "you are free to throw away the provided blueprint
   and go your own way."  That does maximize flexibility of how you might use
-  the class, but arguably it opens the door to abuse and the creation of
+  the class, but arguably, it opens the door to abuse and the creation of
   code that is very difficult to follow or comprehend.
 
   To avoid the problem of making too many methods virtual, the NVI
@@ -236,10 +238,10 @@ General framework-wide changes/improvements/trends/philosophy/goals
   classes!  They in effect, force the developer of the parent class to
   define methods (with names that indicates what they are doing) to be
   used by the concretes.  Basically what is happening is all the classes
-  between the abstracts and concretes define implementation code - there
+  between the abstracts and concretes define implementation code - their
   role as abstract 'base' classes is to define useful common code for the
-  concretes.  This allows the concrete classes to clearly express what they
-  do.
+  concretes.  This allows the concrete classes to clearly express their
+  behavior in a more understandable way.
 
   A point to consider.  If you are implementing a algorithm (i.e., an
   'extension point') then consider defining a new extension point that
@@ -276,7 +278,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   at the appropriate spots - but left the 'virtual' specification alone.
   This was a very good first step, as it helped detect mistakes; now we
   are starting to adopt this guideline by systematically stripping
-  off 'virtual' where no longer needed.
+  off 'virtual' where it no longer needed to adhere to this recommendation.
 
 - Topic: Slot table helper methods
 
@@ -285,18 +287,18 @@ General framework-wide changes/improvements/trends/philosophy/goals
   have not always been defined in a consistent manner.  For example,
   code written long ago frequently defined the visibility of them
   as 'private' - later, newer classes often set their visibility as
-  'protected', and even later the visibility was often 'public.'  In some
-  cases, they were defined as hooks by allowing them to be overridden
+  'protected', and even later the visibility was often made 'public.'
+  In some cases, they were defined as hooks by allowing them to be overridden
   as a virtual method.
 
   With this release, all (with a few minor exceptions) slot methods have
   been made 'non-virtual private'.  This was done for several reason,
-  but first and foremost, was to declutter the public interfaces of class
-  definitions as much as possible.  This improves the understandability
-  of classes, and because they were all mostly named 'setSlotThis' or
-  'setSlotThat', it restates and solidifies their role as an EDL slot
-  table helper method and not necessarily intended to be a general purpose
-  object 'public' interface.
+  but first and foremost, was to reduce cluttering up the public interfaces
+  of class definitions as much as possible.  This improves the
+  understandability of classes, and because almost all were named
+  'setSlotThis' or 'setSlotThat', it restates and solidifies their role as
+  an EDL slot table helper methods not necessarily intended to be a
+  general purpose object 'public' interface.
 
   This change should have no impact on existing applications.
 
@@ -326,12 +328,12 @@ base library (mixr_base)
    -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
       to more clearly convey their purpose; namely a structure that defines the
       architecture of the I/O linkage system. It should also be noted that these
-	  classes are abstract and are oriented at defining interfaces and much less about
+      classes are abstract and are oriented at defining interfaces and much less about
       how to do it (i.e., no domain implementation code).  All of these classes
       are now grouped in the subdirectory called 'base/concepts/linkage'.
 
       Classes have been simplified to reduce complexity, yet retain flexibility.
-	  Simplification has come in the form of rebaselining several of them
+      Simplification has come in the form of rebaselining several of them
       to be Objects with clear interfaces as opposed to Components which presents
       a much more complex interface.
 
@@ -361,11 +363,14 @@ base library (mixr_base)
    -- All the classes defined in Tables and Functions within the 'functors' subfolder
       have been separated into individual files.  The depreciated header files
       Functions.hpp and Tables.hpp have been removed.  This folder needs a better
-	  name, although it's not clear what it should be.
+      name, although it's not clear what it should be.
 
    LatLon class
       1) Limited scope of 'Dir' enum to 'enum class'. This constrains the scope of
          this enumerated type.
+
+   Referenced class
+      1) Changed internal reference count type from 'unsigned int' to 'int'.
 
    StateMachine class
       1) Limited scope of 'Mode' and 'StateTableCode' enums to 'enum class'. This

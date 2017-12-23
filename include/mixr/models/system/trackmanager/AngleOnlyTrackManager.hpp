@@ -31,13 +31,13 @@ public:
 
    virtual void newReport(IrQueryMsg* q, double snDbl);
 
-   virtual void clearTracksAndQueues() override;
-   virtual bool addTrack(Track* const t) override;
+   void clearTracksAndQueues() override;
+   bool addTrack(Track* const t) override;
 
 protected:
    virtual IrQueryMsg* getQuery(double* const sn);                     // Get the next 'new' report from the queue
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
    // Prediction parameters
    double azimuthBin {base::PI};     // Azimuth Bin
@@ -52,8 +52,8 @@ private:
    // slot table helper methods
    bool setSlotAzimuthBin(const base::Number* const);
    bool setSlotElevationBin(const base::Number* const);
-   virtual bool setSlotAlpha(const base::Number* const) override;
-   virtual bool setSlotBeta(const base::Number* const) override;
+   bool setSlotAlpha(const base::Number* const) override;
+   bool setSlotBeta(const base::Number* const) override;
 };
 
 }

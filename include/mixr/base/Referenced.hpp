@@ -22,7 +22,7 @@ public:
    Referenced& operator=(const Referenced&) = delete;
    virtual ~Referenced() =0;
 
-   unsigned int getRefCount() const { return refCount; }
+   int getRefCount() const       { return refCount; }
 
    // ---
    // ref() --
@@ -54,7 +54,7 @@ public:
    class ExpInvalidRefCount : public Exception {
    public:
       ExpInvalidRefCount() : Exception() {}
-      virtual const char* getDescription() const override {
+      const char* getDescription() const override {
          return "invalid reference count";
       }
    };
@@ -62,14 +62,14 @@ public:
    class ExpInvalidRefCountDelete : public Exception {
    public:
       ExpInvalidRefCountDelete() : Exception() {}
-      virtual const char* getDescription() const override {
+      const char* getDescription() const override {
          return "deleting object with positive reference count";
       }
    };
 
 private:
-   mutable long semaphore{};           // ref(), unref() semaphore
-   mutable unsigned int refCount{1};   // reference count
+   mutable long semaphore{};  // ref(), unref() semaphore
+   mutable int refCount{1};   // reference count
 };
 
 inline Referenced::~Referenced() {}

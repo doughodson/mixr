@@ -66,7 +66,7 @@ public:
 
 protected:
 
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
    // Recursive function to look at each embedded message
    void processMessage(const google::protobuf::Message* const);

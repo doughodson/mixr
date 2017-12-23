@@ -127,17 +127,17 @@ public:
    GLfloat getGreenBias() const;
    GLfloat getBlueScale() const;
    GLfloat getBlueBias() const;
-   virtual bool setRedScale(const GLfloat s);
-   virtual bool setRedBias(const GLfloat b);
-   virtual bool setGreenScale(const GLfloat s);
-   virtual bool setGreenBias(const GLfloat b);
-   virtual bool setBlueScale(const GLfloat s);
-   virtual bool setBlueBias(const GLfloat b);
+   virtual bool setRedScale(const GLfloat);
+   virtual bool setRedBias(const GLfloat);
+   virtual bool setGreenScale(const GLfloat);
+   virtual bool setGreenBias(const GLfloat);
+   virtual bool setBlueScale(const GLfloat);
+   virtual bool setBlueBias(const GLfloat);
 
    virtual void loadTexture();
 
-   virtual bool setWidth(const unsigned int w) override;
-   virtual bool setHeight(const unsigned int h) override;
+   bool setWidth(const unsigned int w) override;
+   bool setHeight(const unsigned int h) override;
 
 private:
    void initData();

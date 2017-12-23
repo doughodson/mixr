@@ -298,7 +298,7 @@ public:
    virtual bool setLastEmission(const Emission* const);
 
 protected:
-   const Emission* lastEM {};      // Last emission
+   const Emission* lastEM{};      // Last emission
 
 };
 

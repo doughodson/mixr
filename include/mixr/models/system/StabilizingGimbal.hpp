@@ -37,7 +37,7 @@ protected:
    virtual void rollStabilizingController(const double dt = 0.0);
    virtual void elevationStabilizingController(const double dt = 0.0);
 
-   virtual void dynamics(const double dt) override;
+   void dynamics(const double dt) override;
 
 private:
    StabilizingMode stabilizingMode {HORIZON};  // Gimbal stabilization mode

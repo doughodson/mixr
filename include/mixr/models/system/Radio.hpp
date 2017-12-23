@@ -121,7 +121,7 @@ protected:
    // Sets the number of channels; previous channels are lost!
    virtual bool setNumberOfChannels(const unsigned short n);
 
-   virtual void receive(const double dt) override;
+   void receive(const double dt) override;
 
 private:
    unsigned short channel {};    // Channel number [ 1 .. numChan ]; or zero for "not set"

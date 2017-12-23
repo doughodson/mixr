@@ -43,12 +43,12 @@ public:
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);
 
-   virtual unsigned int tableSize() const override;
+   unsigned int tableSize() const override;
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, double* const table) override;
+   bool loadData(const List& list, double* const table) override;
 
 private:
    double* xtable {};    // X Breakpoint Table

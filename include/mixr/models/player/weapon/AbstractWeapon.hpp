@@ -271,13 +271,13 @@ public:
    virtual bool onDesignatorEvent(const Designator* const msg);
    virtual bool onJettisonEvent();
 
-   virtual unsigned int getMajorType() const override;
-   virtual bool collisionNotification(Player* const p) override;
-   virtual bool crashNotification() override;
+   unsigned int getMajorType() const override;
+   bool collisionNotification(Player* const p) override;
+   bool crashNotification() override;
 
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   void updateTC(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    virtual void weaponGuidance(const double dt);
@@ -314,9 +314,9 @@ protected:
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
 
-   virtual void dynamics(const double  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
     void initData();

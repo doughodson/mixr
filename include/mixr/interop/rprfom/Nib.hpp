@@ -56,7 +56,7 @@ public:
    );
 
    // Input support functions
-   virtual void reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttrs) override;
+   void reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttrs) override;
    virtual void entityState2Nib();
    virtual void updateTheIPlayer();
 
@@ -70,12 +70,12 @@ public:
    const BaseEntity* getBaseEntity() const              { return baseEntity; }
    virtual void setBaseEntity(BaseEntity* const p);
 
-   // Simulation::Nib Interface
-   virtual bool isPlayerStateUpdateRequired(const double curExecTime) override;
-   virtual bool entityStateManager(const double curExecTime) override;
+   // interop::Nib Interface
+   bool isPlayerStateUpdateRequired(const double curExecTime) override;
+   bool entityStateManager(const double curExecTime) override;
    virtual bool emitterBeamsManager(const double curExecTime);
-   virtual bool weaponFireMsgFactory(const double curExecTime) override;
-   virtual bool munitionDetonationMsgFactory(const double curExecTime) override;
+   bool weaponFireMsgFactory(const double curExecTime) override;
+   bool munitionDetonationMsgFactory(const double curExecTime) override;
 
 private:
    unsigned short siteID {};     // Site ID

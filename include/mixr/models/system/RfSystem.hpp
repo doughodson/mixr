@@ -120,8 +120,8 @@ public:
    // Accepts an emission from an antenna
    virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const double raGain);
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
    // Max size of emission queues (per frame)
@@ -142,10 +142,10 @@ protected:
    virtual void processPlayersOfInterest();
 
    // Callbacks by phase -- to be used by the derived classes, as needed
-   virtual void process(const double dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    Antenna* antenna {};              // Our antenna

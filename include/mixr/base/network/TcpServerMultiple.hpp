@@ -42,16 +42,16 @@ public:
 
    unsigned int getBacklog() const        { return backlog; }
 
-   virtual bool initNetwork(const bool noWaitFlag) override;
+   bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   virtual bool bindSocket() override;
+   bool bindSocket() override;
 
-   virtual bool setBacklog(const unsigned int value);
+   virtual bool setBacklog(const unsigned int);
    virtual bool listenForConnections();
 
 private:
-   unsigned int backlog {1};
+   unsigned int backlog{1};
 
 private:
    // slot table helper methods

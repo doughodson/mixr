@@ -26,7 +26,7 @@ class MergingIrSensor : public IrSensor
 public:
    MergingIrSensor();
 
-   virtual void receive(const double dt) override;
+   void receive(const double dt) override;
 
    virtual double getAzimuthBin() const {return azimuthBin; };         // Returns min azimuth distance
    virtual bool setAzimuthBin(const double azimuthBin);                // Sets min Azimuth Distance
@@ -34,7 +34,7 @@ public:
    virtual double getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
    virtual bool setElevationBin(const double elevationBin);            // Sets min Azimuth Distance
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    virtual void mergeIrReturns();

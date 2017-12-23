@@ -25,12 +25,12 @@ class HexReadout : public NumericReadout
 public:
    HexReadout();
 
-   virtual void makeText() override;
-   virtual char filterInputEvent(const int event, const int tc) override;
-   virtual double getInputValue() const override;
+   void makeText() override;
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-   virtual void reformat(const char* const example) override;
+   void reformat(const char* const example) override;
 };
 
 }

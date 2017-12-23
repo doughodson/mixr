@@ -79,17 +79,17 @@ public:
    // Event handler(s)
    virtual bool onDatalinkMessageEvent(base::Object* const);
 
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    virtual bool queueIncomingMessage(base::Object* const);  // Queue up an incoming message
    virtual bool queueOutgoingMessage(base::Object* const);  // Queue up an outgoing message
    virtual void clearQueues(); // Clear all queues
 
-   virtual void dynamics(const double dt) override;
+   void dynamics(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    void initData();

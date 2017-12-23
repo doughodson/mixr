@@ -171,10 +171,10 @@ public:
    virtual bool onJettisonEvent(AbstractWeapon* const msg);
    virtual bool onJettisonEvent(ExternalStore* const msg);
 
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual void updateData(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    // Sets the number of stations on this launcher
@@ -192,7 +192,7 @@ protected:
    // Sends a Reset Event to all players
    void resetStores(base::PairStream* const list);
 
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
 private:
    void initData();

@@ -14,90 +14,88 @@ namespace models {
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-class JSBSimModel : public AerodynamicsModel
+class JSBSimModel final: public AerodynamicsModel
 {
     DECLARE_SUBCLASS(JSBSimModel, AerodynamicsModel)
 
 public:
     JSBSimModel();
 
-    virtual double getGload() const override;
-    virtual double getMach() const override;
-    virtual double getAngleOfAttack() const override;
-    virtual double getSideSlip() const override;
-    virtual double getFlightPath() const override;
-    virtual double getCalibratedAirspeed() const override;
-    virtual double getGrossWeight() const override;
-    virtual double getFuelWt() const override;
-    virtual double getFuelWtMax() const override;
-    virtual double getSpeedBrakePosition() const override;
-    virtual double getLandingGearPosition() const override;
-    virtual bool isWeightOnWheels() const override;
-    virtual int getNumberOfEngines() const override;
-    virtual int getEngThrust(double* const fn, const int max) const override;
-    virtual int getEngRPM(double* const rpm, const int max) const override;
-    virtual int getEngFuelFlow(double* const ff, const int max) const override;
-    virtual int getEngOilPressure(double* const oil, const int max) const override;    // Pressure: psi
-    virtual int getEngInletTemp(double* const tmp, const int max) const override;      // Temp: C
-    virtual int getEngNozzle(double* const noz, const int max) const override;         // Nozzle Pos: %
-    virtual int getEngPLA(double* const pla, const int max) const override;
-    virtual void setControlStickRollInput(const double roll) override;
-    virtual void setControlStickPitchInput(const double pitch) override;
-    virtual void setTrimSwitchRollInput(const double rollTrim) override;
-    virtual void setTrimSwitchPitchInput(const double pitchTrim) override;
-    virtual void setGearHandleSwitch(const double sw) override;
-    virtual void setSpeedBrakesSwitch(const double sw) override;
-    virtual void setBrakes(const double left, const double right) override;
-    virtual int setThrottles(const double* const positions, const int num) override;
-    virtual  void setRudderPedalInput(const double pedal) override;
+    double getGload() const final;
+    double getMach() const final;
+    double getAngleOfAttack() const final;
+    double getSideSlip() const final;
+    double getFlightPath() const final;
+    double getCalibratedAirspeed() const final;
+    double getGrossWeight() const final;
+    double getFuelWt() const final;
+    double getFuelWtMax() const final;
+    double getSpeedBrakePosition() const final;
+    double getLandingGearPosition() const final;
+    bool isWeightOnWheels() const final;
+    int getNumberOfEngines() const final;
+    int getEngThrust(double* const fn, const int max) const final;
+    int getEngRPM(double* const rpm, const int max) const final;
+    int getEngFuelFlow(double* const ff, const int max) const final;
+    int getEngOilPressure(double* const oil, const int max) const final;    // Pressure: psi
+    int getEngInletTemp(double* const tmp, const int max) const final;      // Temp: C
+    int getEngNozzle(double* const noz, const int max) const final;         // Nozzle Pos: %
+    int getEngPLA(double* const pla, const int max) const final;
+    void setControlStickRollInput(const double roll) final;
+    void setControlStickPitchInput(const double pitch) final;
+    void setTrimSwitchRollInput(const double rollTrim) final;
+    void setTrimSwitchPitchInput(const double pitchTrim) final;
+    void setGearHandleSwitch(const double sw) final;
+    void setSpeedBrakesSwitch(const double sw) final;
+    void setBrakes(const double left, const double right) final;
+    int setThrottles(const double* const positions, const int num) final;
+    void setRudderPedalInput(const double pedal) final;
 
-    virtual void reset() override;
+    void reset() final;
 
-    virtual void dynamics(const double  dt = 0.0) override;
+    void dynamics(const double  dt = 0.0) final;
 
-    virtual bool isHeadingHoldOn() const override;
-    virtual double getCommandedHeadingD() const override;
-    virtual bool setHeadingHoldOn(const bool b) override;
-    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
+    bool isHeadingHoldOn() const final;
+    double getCommandedHeadingD() const final;
+    bool setHeadingHoldOn(const bool b) final;
+    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) final;
 
-    virtual bool isVelocityHoldOn() const override;
-    virtual double getCommandedVelocityKts() const override;
-    virtual bool setVelocityHoldOn(const bool b) override;
-    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
+    bool isVelocityHoldOn() const final;
+    double getCommandedVelocityKts() const final;
+    bool setVelocityHoldOn(const bool b) final;
+    bool setCommandedVelocityKts(const double v, const double vNps = 0) final;
 
-    virtual bool isAltitudeHoldOn() const override;
-    virtual double getCommandedAltitude() const override;
-    virtual bool setAltitudeHoldOn(const bool b) override;
-    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
+    bool isAltitudeHoldOn() const final;
+    double getCommandedAltitude() const final;
+    bool setAltitudeHoldOn(const bool b) final;
+    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) final;
 
 protected:
 
-    JSBSim::FGFDMExec* fdmex {};
-    JSBSim::FGPropertyManager* propMgr {};
+    JSBSim::FGFDMExec* fdmex{};
+    JSBSim::FGPropertyManager* propMgr{};
 
 private:
-    void initData();
+    const base::String* rootDir{};  // root directory for JSBSim models
+    const base::String* model{};    // JSBSim model
+    int   debugLevel{};
 
-    const base::String* rootDir {};  // root directory for JSBSim models
-    const base::String* model {};    // JSBSim model
-    int   debugLevel {};
+    double pitchTrimPos{};          // +/- 1.0
+    double pitchTrimRate{};         // maxVal(1.0) per sec
+    double pitchTrimSw{};
+    double rollTrimPos{};           // +/- 1.0
+    double rollTrimRate{};          // maxVal(1.0) per sec
+    double rollTrimSw{};
 
-    double pitchTrimPos {};          // +/- 1.0
-    double pitchTrimRate {};         // maxVal(1.0) per sec
-    double pitchTrimSw {};
-    double rollTrimPos {};           // +/- 1.0
-    double rollTrimRate {};          // maxVal(1.0) per sec
-    double rollTrimSw {};
-
-    bool   headingHoldOn {};
-    bool   altitudeHoldOn {};
-    bool   velocityHoldOn {};
-    double commandedHeadingDeg {};
-    double commandedAltitudeFt {};
-    double commandedVelocityKts {};
-    bool   hasHeadingHold {};
-    bool   hasVelocityHold {};
-    bool   hasAltitudeHold {};
+    bool   headingHoldOn{};
+    bool   altitudeHoldOn{};
+    bool   velocityHoldOn{};
+    double commandedHeadingDeg{};
+    double commandedAltitudeFt{};
+    double commandedVelocityKts{};
+    bool   hasHeadingHold{};
+    bool   hasVelocityHold{};
+    bool   hasAltitudeHold{};
 
 private:
    // slot table helper methods

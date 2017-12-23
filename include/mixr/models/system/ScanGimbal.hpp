@@ -190,8 +190,8 @@ public:
     virtual bool onEndScanEvent(base::Integer* const bar);
 
     // Component Interface
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-    virtual void reset() override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void reset() override;
 
 protected:
    virtual void scanController(const double dt);
@@ -227,7 +227,7 @@ protected:
 
    bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; }
 
-   virtual void dynamics(const double dt) override;
+   void dynamics(const double dt) override;
 
 private:
     base::Vec2d  scanPos;                 // Position in scan pattern     (rad)

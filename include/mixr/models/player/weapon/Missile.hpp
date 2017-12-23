@@ -48,19 +48,19 @@ public:
     bool setMaxG(const double v);
     bool setMaxAccel(const double v);
 
-    virtual const char* getDescription() const override;
-    virtual const char* getNickname() const override;
-    virtual int getCategory() const override;
-    virtual void atReleaseInit() override;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
+    void atReleaseInit() override;
 
     virtual void setCmdPitchD(const double x)  { cmdPitch   = x * static_cast<double>(base::angle::D2RCC); }
     virtual void setCmdHdgD(const double x)    { cmdHeading = x * static_cast<double>(base::angle::D2RCC); }
 
-    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
-    virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
+    bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
+    bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
 
-    virtual bool event(const int event, base::Object* const obj = nullptr) override;
-    virtual void reset() override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
+    void reset() override;
 
 protected:
    virtual bool setSlotVpMin(const base::Number* const msg);
@@ -73,8 +73,8 @@ protected:
    virtual bool setSlotCmdVelocity(const base::Number* const msg);
 
    // Weapon interface
-   virtual void weaponGuidance(const double dt) override;
-   virtual void weaponDynamics(const double dt) override;
+   void weaponGuidance(const double dt) override;
+   void weaponDynamics(const double dt) override;
 
 private:
     virtual bool calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const;

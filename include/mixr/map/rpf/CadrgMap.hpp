@@ -179,7 +179,7 @@ public:
 
     int getMaxTableSize()                { return maxTableSize; }
 
-    virtual void updateData(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     virtual void sortMaps(const int count);             // simple function to sort our maps.
 

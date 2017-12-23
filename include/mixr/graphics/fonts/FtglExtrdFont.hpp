@@ -37,13 +37,13 @@ class FtglExtrdFont : public AbstractFtglFont
 public:
     FtglExtrdFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    virtual void loadFont() override;
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 
 private:
     static const float DEFAULT_DEPTH;
-    float depth {DEFAULT_DEPTH};        // depth of the extruded font (for 3D purposes)
+    float depth{DEFAULT_DEPTH};        // depth of the extruded font (for 3D purposes)
 
 private:
     // slot table helper methods

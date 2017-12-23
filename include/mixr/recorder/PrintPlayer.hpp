@@ -39,7 +39,7 @@ protected:
 
    virtual bool setName(const base::String* const msg);
 
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    const base::String* name {};    // Player name

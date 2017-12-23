@@ -26,8 +26,8 @@ public:
     Identifier(const char*);
     Identifier();
 
-    virtual void setStr(const char*) override;
-    virtual void catStr(const char*) override;
+    void setStr(const char*) override;
+    void catStr(const char*) override;
 };
 
 }

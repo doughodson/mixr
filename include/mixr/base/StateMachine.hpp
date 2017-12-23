@@ -212,10 +212,10 @@ public:
    unsigned short getState() const     { return state; }
    unsigned short getSubstate() const  { return substate; }
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual bool event(const int event, Object* const obj = nullptr) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   bool event(const int event, Object* const obj = nullptr) override;
+   void reset() override;
 
 protected:
    enum class Mode { HOLD_STATE, NEW_STATE, RTN_STATE };

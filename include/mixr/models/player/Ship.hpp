@@ -19,7 +19,7 @@ class Ship : public Player
 public:
     Ship();
 
-    virtual unsigned int getMajorType() const override;
+    unsigned int getMajorType() const override;
 };
 
 }

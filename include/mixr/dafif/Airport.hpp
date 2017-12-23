@@ -51,9 +51,9 @@ public:
    virtual AirportType airportType() const;
    virtual int isAirportType(const AirportType type) const;
 
-   virtual void ident(char id[]) const override;
+   void ident(char id[]) const override;
 
-   virtual void printRecord(std::ostream& sout) const override;
+   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;

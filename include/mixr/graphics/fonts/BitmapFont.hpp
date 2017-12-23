@@ -41,9 +41,9 @@ class BitmapFont : public AbstractFont
 public:
     BitmapFont();
 
-    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    virtual void loadFont() override;
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    void loadFont() override;
 
 private:
     // Loader support functions

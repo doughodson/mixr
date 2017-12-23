@@ -96,7 +96,7 @@ class Ntm;
 //    Use the 'enableOutput' slot to enable or disable the sending of our
 //    application's local players to this interoperability network.
 //
-//    As local oe players are discovered by this class, their player
+//    As local players are discovered by this class, their player
 //    types are mapped to network entity type codes using the Ntm obects that
 //    are listed in the "outgoing entity type mapper" list, which is set using
 //    the "outputEntityTypes" slot.  A local player is not sent to the network
@@ -157,16 +157,16 @@ public:
 //    static const unsigned int MAX_NETWORD_ID = 2;
 
     //  Max number of new, outgoing players published per frame
-    static const unsigned int MAX_NEW_OUTGOING = MIXR_CONFIG_MAX_NETIO_NEW_OUTGOING;
+    static const unsigned int MAX_NEW_OUTGOING{MIXR_CONFIG_MAX_NETIO_NEW_OUTGOING};
 
 public:
    NetIO();
 
    // Updates the 'input' side of the network
-   virtual void inputFrame(const double dt) override;
+   void inputFrame(const double dt) override;
 
    // Updates the 'output' side of the network
-   virtual void outputFrame(const double dt) override;
+   void outputFrame(const double dt) override;
 
    // Network ID number
    unsigned short getNetworkID() const override { return netID; }
@@ -229,29 +229,29 @@ public:
    // IPlayer factory: creates a networked player based on NIB data
    virtual models::Player* createIPlayer(Nib* const nib);
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    // Derived class callbacks
-   virtual bool initNetwork()=0;                            // Initialize the network (pure functions!)
-   virtual void netInputHander()=0;                         // Network input handler (pure functions!)
-   virtual void processInputList()=0;                       // Update players/systems from the Input-list (pure functions!)
+   virtual bool initNetwork()=0;                              // Initialize the network (pure functions!)
+   virtual void netInputHander()=0;                           // Network input handler (pure functions!)
+   virtual void processInputList()=0;                         // Update players/systems from the Input-list (pure functions!)
 
    // Create output packets from Output-List
    virtual void processOutputList();
 
    // Set functions
-   virtual bool setNetworkID(const unsigned short v);       // Sets the Network's ID
-   virtual bool setTimeline(const TSource ts);              // Sets the timeline (UTC or EXEC)
-   virtual bool setMaxTimeDR(const double v);               // Sets the max dead-rec time; forces next update (sec)
-   virtual bool setMaxPositionErr(const double v);          // Sets the max positional error (meters)
-   virtual bool setMaxOrientationErr(const double v);       // Sets the max orientation error (rad)
-   virtual bool setMaxAge(const double v);                  // Sets the max age; for removal (sec)
-   virtual bool setMaxEntityRange(const double v);          // Sets the max entity range (meters)
-   virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
-   virtual bool setFederationName(const base::String* const msg); // Sets our federation name
+   virtual bool setNetworkID(const unsigned short);           // Sets the Network's ID
+   virtual bool setTimeline(const TSource);                   // Sets the timeline (UTC or EXEC)
+   virtual bool setMaxTimeDR(const double);                   // Sets the max dead-rec time; forces next update (sec)
+   virtual bool setMaxPositionErr(const double);              // Sets the max positional error (meters)
+   virtual bool setMaxOrientationErr(const double);           // Sets the max orientation error (rad)
+   virtual bool setMaxAge(const double);                      // Sets the max age; for removal (sec)
+   virtual bool setMaxEntityRange(const double);              // Sets the max entity range (meters)
+   virtual bool setFederateName(const base::String* const);   // Sets our federate name
+   virtual bool setFederationName(const base::String* const); // Sets our federation name
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 //------------------------------------------------------------------------------
 // Network Interface Block (NIB) maintenance sections
@@ -272,10 +272,10 @@ public:
 
    // More NIB support
    virtual Nib* createNewInputNib();
-   virtual Nib* createNewOutputNib(models::Player* const player);
-   virtual void destroyInputNib(Nib* const nib);
-   virtual void destroyOutputNib(Nib* const nib);
-   virtual bool addNib2InputList(Nib* const nib);
+   virtual Nib* createNewOutputNib(models::Player* const);
+   virtual void destroyInputNib(Nib* const);
+   virtual void destroyOutputNib(Nib* const);
+   virtual bool addNib2InputList(Nib* const);
 
 protected:
    // Maximum number of active objects
@@ -425,11 +425,11 @@ private:
 private: // Nib related private
    // input tables
    std::array<Nib*, MAX_OBJECTS> inputList {};  // Table of input objects in name order
-   unsigned int nInNibs {};                    // Number of input objects in both tables
+   unsigned int nInNibs {};                     // Number of input objects in both tables
 
    // output tables
    std::array<Nib*, MAX_OBJECTS> outputList {}; // Table of output objects in name order
-   unsigned int nOutNibs {};                   // Number of output objects in both tables
+   unsigned int nOutNibs {};                    // Number of output objects in both tables
 
    // NIB quick lookup key
    struct NibKey {
@@ -447,7 +447,7 @@ private:  // Ntm related private
    static const unsigned int MAX_ENTITY_TYPES = MIXR_CONFIG_MAX_NETIO_ENTITY_TYPES;
 
    NtmInputNode* inputNtmTree {};   // Input NTM quick lookup tree
-   NtmOutputNode* outputNtmTree {}; // Output NTM quick lookuptree
+   NtmOutputNode* outputNtmTree {}; // Output NTM quick lookup tree
 
    // Input entity type table
    std::array<const Ntm*, MAX_ENTITY_TYPES> inputEntityTypes {};  // Table of pointers to input entity type mappers; Ntm objects
@@ -459,20 +459,21 @@ private:  // Ntm related private
 
 private:
    // slot table helper methods
-   virtual bool setSlotNetworkID(const base::Number* const);                 // Sets the network ID
-   virtual bool setSlotFederateName(const base::String* const);              // Sets our federate name
-   virtual bool setSlotFederationName(const base::String* const);            // Sets our federation name
-   virtual bool setSlotEnableInput(const base::Number* const);               // Sets input enabled flag
-   virtual bool setSlotEnableOutput(const base::Number* const);              // Sets output enabled flag
-   virtual bool setSlotEnableRelay(const base::Number* const);               // Sets relay enabled flag
-   virtual bool setSlotTimeline(const base::Identifier* const);              // Sets the source of the time ( UTC or EXEC )
-   virtual bool setSlotInputEntityTypes(base::PairStream* const);            // Sets the table of input entity to player mapper objects
-   virtual bool setSlotOutputEntityTypes(base::PairStream* const);           // Sets the table of output entity to player mapper objects
-   virtual bool setSlotMaxTimeDR(const base::Time* const);                   // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const base::Distance* const);          // Sets the max positional error(s)
-   virtual bool setSlotMaxOrientationErr(const base::Angle* const);          // Sets the max orientation error(s)
-   virtual bool setSlotMaxAge(const base::Time* const);                      // Sets the max age(s)
-   virtual bool setSlotMaxEntityRange(const base::Distance* const);          // Sets the max entity range(s)
+   virtual bool setSlotFederateName(const base::String* const);      // Sets our federate name
+   virtual bool setSlotFederationName(const base::String* const);    // Sets our federation name
+   virtual bool setSlotMaxTimeDR(const base::Time* const);           // Sets the mac DR time(s)
+   virtual bool setSlotMaxPositionErr(const base::Distance* const);  // Sets the max positional error(s)
+   virtual bool setSlotMaxOrientationErr(const base::Angle* const);  // Sets the max orientation error(s)
+   virtual bool setSlotMaxEntityRange(const base::Distance* const);  // Sets the max entity range(s)
+   virtual bool setSlotMaxAge(const base::Time* const);              // Sets the max age(s)
+
+   bool setSlotNetworkID(const base::Number* const);                 // Sets the network ID
+   bool setSlotEnableInput(const base::Number* const);               // Sets input enabled flag
+   bool setSlotEnableOutput(const base::Number* const);              // Sets output enabled flag
+   bool setSlotEnableRelay(const base::Number* const);               // Sets relay enabled flag
+   bool setSlotTimeline(const base::Identifier* const);              // Sets the source of the time ( UTC or EXEC )
+   bool setSlotInputEntityTypes(base::PairStream* const);            // Sets the table of input entity to player mapper objects
+   bool setSlotOutputEntityTypes(base::PairStream* const);           // Sets the table of output entity to player mapper objects
 };
 
 }

@@ -118,12 +118,12 @@ public:
    virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-   virtual void process(const double dt) override;
+   void process(const double dt) override;
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    void searchAndAdd(base::PairStream* const, const std::type_info&, base::PairStream*);
@@ -139,7 +139,7 @@ private:
 
 protected:
    // slot table helper methods
-   virtual bool setSlotStores(const base::PairStream* const msg) override;
+   bool setSlotStores(const base::PairStream* const) override;
 };
 
 }

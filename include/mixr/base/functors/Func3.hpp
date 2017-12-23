@@ -25,7 +25,7 @@ public:
 
 protected:
    // slot table helper methods
-   virtual bool setSlotLfiTable(const Table* const) override;
+   bool setSlotLfiTable(const Table* const) override;
 };
 
 }

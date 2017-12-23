@@ -84,9 +84,9 @@ public:
     Seconds(const double value);
     Seconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime(); }
-    virtual double toTime() const override                  { return static_cast<double>(val); }
-    virtual double fromTime(const double a) const override  { return a; }
+    static double convertStatic(const Time &n)      { return n.toTime(); }
+    double toTime() const override                  { return static_cast<double>(val); }
+    double fromTime(const double a) const override  { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -102,9 +102,9 @@ public:
     MilliSeconds(const double value);
     MilliSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * time::S2MS; }
-    virtual double toTime() const override                  { return static_cast<double>(val * time::MS2S); }
-    virtual double fromTime(const double a) const override  { return a * time::S2MS; }
+    static double convertStatic(const Time &n)      { return n.toTime() * time::S2MS; }
+    double toTime() const override                  { return static_cast<double>(val * time::MS2S); }
+    double fromTime(const double a) const override  { return a * time::S2MS; }
 };
 
 //------------------------------------------------------------------------------
@@ -120,9 +120,9 @@ public:
     MicroSeconds(const double value);
     MicroSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * time::S2US; }
-    virtual double toTime() const override                  { return static_cast<double>(val * time::US2S); }
-    virtual double fromTime(const double a) const override  { return a * time::S2US; }
+    static double convertStatic(const Time &n)      { return n.toTime() * time::S2US; }
+    double toTime() const override                  { return static_cast<double>(val * time::US2S); }
+    double fromTime(const double a) const override  { return a * time::S2US; }
 };
 
 //------------------------------------------------------------------------------
@@ -138,9 +138,9 @@ public:
     NanoSeconds(const double value);
     NanoSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * time::S2NS; }
-    virtual double toTime() const override                  { return static_cast<double>(val * time::NS2S); }
-    virtual double fromTime(const double a) const override  { return a * time::S2NS; }
+    static double convertStatic(const Time &n)      { return n.toTime() * time::S2NS; }
+    double toTime() const override                  { return static_cast<double>(val * time::NS2S); }
+    double fromTime(const double a) const override  { return a * time::S2NS; }
 };
 
 
@@ -157,9 +157,9 @@ public:
     Minutes(const double value);
     Minutes(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * time::S2M; }
-    virtual double toTime() const override                  { return static_cast<double>(val * time::M2S); }
-    virtual double fromTime(const double a) const override  { return a * time::S2M; }
+    static double convertStatic(const Time &n)      { return n.toTime() * time::S2M; }
+    double toTime() const override                  { return static_cast<double>(val * time::M2S); }
+    double fromTime(const double a) const override  { return a * time::S2M; }
 };
 
 //------------------------------------------------------------------------------
@@ -175,9 +175,9 @@ public:
     Hours(const double value);
     Hours(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * time::S2H; }
-    virtual double toTime() const override                  { return static_cast<double>(val * time::H2S); }
-    virtual double fromTime(const double a) const override  { return a * time::S2H; }
+    static double convertStatic(const Time &n)      { return n.toTime() * time::S2H; }
+    double toTime() const override                  { return static_cast<double>(val * time::H2S); }
+    double fromTime(const double a) const override  { return a * time::S2H; }
 };
 
 //------------------------------------------------------------------------------
@@ -193,9 +193,9 @@ public:
     Days(const double value);
     Days(const Time& org);
 
-    static double convertStatic(const Time &n)             { return n.toTime() * time::S2D; }
-    virtual double toTime() const override                 { return static_cast<double>(val * time::D2S); }
-    virtual double fromTime(const double a) const override { return a * time::S2D; }
+    static double convertStatic(const Time &n)     { return n.toTime() * time::S2D; }
+    double toTime() const override                 { return static_cast<double>(val * time::D2S); }
+    double fromTime(const double a) const override { return a * time::S2D; }
 };
 
 }

@@ -28,7 +28,7 @@ class VMap0RefCoverageDirectory : public VpfDirectory
 public:
     VMap0RefCoverageDirectory();
 
-    virtual void loadTables() override;
+    void loadTables() override;
 
     virtual void buildFeatureClasses();
 

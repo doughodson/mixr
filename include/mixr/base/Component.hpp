@@ -365,7 +365,7 @@ public:
    virtual bool setTimingStatsEnabled(const bool);
    virtual bool setPrintTimingStats(const bool);
 
-   virtual bool isMessageEnabled(const unsigned short msgType) const override;
+   bool isMessageEnabled(const unsigned short msgType) const override;
 
 protected:
    virtual void printTimingStats();         // Print statistics on component timing

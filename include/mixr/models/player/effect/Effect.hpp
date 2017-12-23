@@ -31,16 +31,16 @@ public:
     double getDragIndex() const                    { return dragIndex; }
     void setDragIndex(const double v)              { dragIndex = v; }
 
-    virtual const char* getDescription() const override;
-    virtual const char* getNickname() const override;
-    virtual int getCategory() const override;
+    const char* getDescription() const override;
+    const char* getNickname() const override;
+    int getCategory() const override;
 
-    virtual bool collisionNotification(Player* const p) override;
-    virtual bool crashNotification() override;
+    bool collisionNotification(Player* const p) override;
+    bool crashNotification() override;
 
 protected:
-    virtual void weaponDynamics(const double dt) override;
-    virtual void updateTOF(const double dt) override;
+    void weaponDynamics(const double dt) override;
+    void updateTOF(const double dt) override;
 
 private:
     double dragIndex {0.0006};   // Drag Index

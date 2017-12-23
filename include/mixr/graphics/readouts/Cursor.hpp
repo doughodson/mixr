@@ -18,7 +18,7 @@ class Cursor : public AbstractField
 
 public:
    Cursor();
-   virtual void updateData(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 };
 
 }

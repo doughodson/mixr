@@ -78,11 +78,11 @@ public:
    virtual Player* getOwnship();                         // Returns a pointer to our ownship player
    virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual bool event(const int event, base::Object* const obj = nullptr) override;
-   virtual void reset() override;
-   virtual bool isFrozen() const override;
+   void updateData(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
+   void reset() override;
+   bool isFrozen() const override;
 
 protected:
    virtual WorldModel* getWorldModel();

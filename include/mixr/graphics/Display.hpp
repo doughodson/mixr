@@ -312,10 +312,10 @@ public:
    // sync double buffer swapping flag
    // (just in case we don't want to swap buffers every time, we can wait)
    virtual bool isOkToSwap() const;
-   virtual void setOkToSwap(const bool x);
+   virtual void setOkToSwap(const bool);
 
-   virtual void updateTC(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateTC(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
    // Configures the display's GL modes
@@ -323,7 +323,7 @@ protected:
 
    base::PairStream* getTextures();
    base::PairStream* subDisplays();
-   void setSubdisplayFlag(const bool flg);
+   void setSubdisplayFlag(const bool);
 
 private:
     void initData();

@@ -45,14 +45,14 @@ public:
    // Loads the Z (iv3) breakpoints
    virtual bool setZBreakpoints3(const List* const bkpts);
 
-   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
-   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   virtual unsigned int tableSize() const override;
+   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   unsigned int tableSize() const override;
 
-   virtual bool isValid() const override;
+   bool isValid() const override;
 
 protected:
-   virtual bool loadData(const List& list, double* const table) override;
+   bool loadData(const List& list, double* const table) override;
 
 private:
    double* ztable {};    // Z Breakpoint Table

@@ -64,18 +64,18 @@ public:
 
    NetIO* getNetIO() override                         { return pNetIO; }  // Controlling Network I/O
    const NetIO* getNetIO() const                      { return pNetIO; }  // Controlling Network I/O (const version)
-   virtual bool setNetIO(NetIO* const p);                                 // Sets our Network I/O controller
+   virtual bool setNetIO(NetIO* const);                                   // Sets our Network I/O controller
 
    // The player, its name and ID
    models::Player* getPlayer()                        { return pPlayer; }
    unsigned short getPlayerID() const override        { return playerID; }
    const char* getPlayerName() const                  { return pname; }
 
-   virtual bool setPlayer(models::Player* const p);
-   virtual void setPlayerID(const unsigned short v);
-   virtual void setPlayerName(const char* s);
+   virtual bool setPlayer(models::Player* const);
+   virtual void setPlayerID(const unsigned short);
+   virtual void setPlayerName(const char*);
 
-   virtual const base::String* getFederateName() const override;  // Federate name as String
+   const base::String* getFederateName() const override;          // Federate name as String
    virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
 
    // Mode
@@ -146,10 +146,10 @@ public:
    double getSmoke() const                            { return smoking; }
    double getFlames() const                           { return flames; }
    unsigned int getCamouflageType() const             { return camouflage; }
-   virtual bool setDamage(const double v);
-   virtual bool setSmoke(const double v);
-   virtual bool setFlames(const double v);
-   virtual bool setCamouflageType(const unsigned int v);
+   virtual bool setDamage(const double);
+   virtual bool setSmoke(const double);
+   virtual bool setFlames(const double);
+   virtual bool setCamouflageType(const unsigned int);
 
    // Articulated Part: wing sweep angle change count
    unsigned int getAPartWingSweepCnt() const          { return apartWingSweepCnt; }
@@ -191,17 +191,17 @@ public:
    }
 
    bool wasDetonationMessageSent() const          { return detMsgSent; }
-   virtual bool setDetonationMessageSent(const bool flg);
+   virtual bool setDetonationMessageSent(const bool);
 
    // NIB timeout
    bool isTimeoutEnabled() const                  { return timeoutEnbFlg; }
    void setTimeoutEnabled(const bool flg)         { timeoutEnbFlg = flg; }
 
    double getTimeExec() const                     { return execTime; }
-   virtual void setTimeExec(const double t);
+   virtual void setTimeExec(const double);
 
    double getTimeUtc() const                      { return utcTime; }
-   virtual void setTimeUtc(const double t);
+   virtual void setTimeUtc(const double);
 
    virtual bool setOutputPlayerType(const models::Player* const p);
    virtual bool isPlayerStateUpdateRequired(const double curExecTime);
@@ -227,7 +227,7 @@ protected:
    // Update our DR time and return the new time
    double updateDrTime(const double dt)           { return (drTime += dt); }
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    // compute the rotational matrix R0
@@ -333,10 +333,10 @@ private:
    double apartBayDoor {};                // Articulated Part: bay door position (% [0% closed; 100% open] )
    double apartLnchrElev {};              // Articulated Part: Launcher elevation angle (radians)
 
-   std::array<const models::Missile*, MAX_AMSL> apartMsl {};  // Articulated Part: Attached missiles
-   std::array<unsigned int, MAX_AMSL> apartMslCnt {};         // Articulated Part: Attached missile change counts
-   std::array<bool, MAX_AMSL> apartMslAttached {};            // Articulated Part: Missile attached (not launched) flag
-   unsigned int apartNumMissiles {};                          // Articulated Part: Number of attached missiles
+   std::array<const models::Missile*, MAX_AMSL> apartMsl{};  // Articulated Part: Attached missiles
+   std::array<unsigned int, MAX_AMSL> apartMslCnt{};         // Articulated Part: Attached missile change counts
+   std::array<bool, MAX_AMSL> apartMslAttached{};            // Articulated Part: Missile attached (not launched) flag
+   unsigned int apartNumMissiles{};                          // Articulated Part: Number of attached missiles
 };
 
 }

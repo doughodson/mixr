@@ -53,7 +53,7 @@ public:
    int getRefId() const                  { return refId; }      // Message Ref ID
    virtual void setRefId(const int);                            // Sets the message ref ID
 
-   virtual bool execute(base::Component* actor) override;
+   bool execute(base::Component* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; }          // Our manager
@@ -103,15 +103,15 @@ public:
    // Computes the planned image orientation (degs)
    virtual double computeOrientation(const Steerpoint* const);
 
-   virtual bool trigger(OnboardComputer* const) override;
-   virtual bool cancel() override;
-   virtual void process(const double dt) override;
+   bool trigger(OnboardComputer* const) override;
+   bool cancel() override;
+   void process(const double dt) override;
 
 protected:
    Sar* getSarSystem()                         { return sar; }
-   virtual void setSarSystem(Sar* const p);
+   virtual void setSarSystem(Sar* const);
 
-   virtual void setCompleted(const bool) override;
+   void setCompleted(const bool) override;
 
 private:
    double sarLatitude {};        // Latitude (deg)
@@ -163,7 +163,7 @@ public:
    // Set planned station number
    virtual bool setStation(const unsigned int num);
 
-   virtual bool trigger(OnboardComputer* const mgr) override;
+   bool trigger(OnboardComputer* const mgr) override;
 
 private:
    double targetLatitude {};      // latitude (deg)
@@ -198,9 +198,9 @@ public:
     // set functions
     virtual bool setInterval(const double x)              { interval = x; return true; }
     virtual bool setNumToLaunch(const int x)              { numToLaunch = x; return true; }
-    virtual void process(const double dt) override;
+    void process(const double dt) override;
 
-    virtual bool trigger(OnboardComputer* const mgr) override;
+    bool trigger(OnboardComputer* const mgr) override;
 
 private:
     int numToLaunch {1};   // how many decoys to launch this action?
@@ -232,9 +232,9 @@ public:
    ActionCamouflageType();
 
    unsigned int getCamouflageType() const   { return camouflage; }         // Returns the user defined camouflage type (or zero for none)
-   virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
+   virtual bool setCamouflageType(const unsigned int);                     // Sets the user defined camouflage type (or zero for none)
 
-   virtual bool trigger(OnboardComputer* const mgr) override;
+   bool trigger(OnboardComputer* const mgr) override;
 
 private:
    unsigned int camouflage {};    // Camouflage type (0 is none)

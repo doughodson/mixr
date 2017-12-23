@@ -31,7 +31,7 @@ public:
    virtual bool transmitDataMessage(base::Object* const);
 
 protected:
-   virtual void receivedEmissionReport(Emission* const) override;
+   void receivedEmissionReport(Emission* const) override;
 
 private:
    base::safe_ptr<Datalink> datalink;   // Our companion datalink system

@@ -33,7 +33,7 @@ public:
 
 protected:
 
-   virtual void initActor() override;
+   void initActor() override;
 
    simulation::Station* getStation();
    WorldModel* getWorldModel();

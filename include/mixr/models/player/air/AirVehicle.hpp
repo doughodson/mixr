@@ -68,15 +68,16 @@ public:
     AirVehicle();
 
     // Vehicle data
+    double getMach() const override;                    // mach number
+    double getGrossWeight() const override;             // wt: lbs
+
     virtual double getGload() const;                    // Gs (+up, one at level)
-    virtual double getMach() const override;            // mach number
     virtual double getAngleOfAttack() const;            // radians
     virtual double getSideSlip() const;                 // radians
     virtual double getFlightPath() const;               // radians
     virtual double getCalibratedAirspeed() const;       // Kts
     virtual double getFuelWt() const;                   // wt: lbs
     virtual double getFuelWtMax() const;                // wt: lbs
-    virtual double getGrossWeight() const override;     // wt: lbs
     virtual double getSpeedBrakePosition() const;       // %
     virtual double getLandingGearPosition() const;      // % (0% up; 100% down)
     virtual double getWeaponBayDoorPosition() const;    // % (0% closed; 100% open)
@@ -135,9 +136,9 @@ public:
     // Sets the commanded wing sweep angle (radians)
     virtual void setCmdWingSweepAngle(const double rad);
 
-    virtual unsigned int getMajorType() const override;
+    unsigned int getMajorType() const override;
 
-    virtual void reset() override;
+    void reset() override;
 
 protected:
    AerodynamicsModel* getAerodynamicsModel();

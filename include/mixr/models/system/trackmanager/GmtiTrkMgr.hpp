@@ -21,7 +21,7 @@ class GmtiTrkMgr : public TrackManager
 public:
    GmtiTrkMgr();
 protected:
-   virtual void processTrackList(const double dt) override;
+   void processTrackList(const double dt) override;
 
 private:
    void initData();

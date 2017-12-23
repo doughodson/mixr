@@ -34,12 +34,12 @@ class TimeReadout : public NumericReadout
 public:
    enum class TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
    TimeReadout();
-   virtual char filterInputEvent(const int event, const int tc) override;
-   virtual double getInputValue() const override;
+   char filterInputEvent(const int event, const int tc) override;
+   double getInputValue() const override;
 
 protected:
-   virtual void makeText() override;
-   virtual void reformat(const char* const example) override;
+   void makeText() override;
+   void reformat(const char* const example) override;
    TimeMode tmode {TimeMode::hhmmss};
 };
 

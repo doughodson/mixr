@@ -167,10 +167,9 @@ public:
    virtual bool setInterconnect(const bool x);
    bool isInterconnected()  { return interconnect; };
 
-   virtual void draw() override;
-   virtual void drawFunc() override;
-
-   virtual void updateTC(const double dt = 0.0) override;
+   void draw() override;
+   void drawFunc() override;
+   void updateTC(const double dt = 0.0) override;
 
 protected:
    virtual SlSymbol* symbolFactory();  // Creates symbols objects

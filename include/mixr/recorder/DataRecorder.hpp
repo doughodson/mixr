@@ -68,8 +68,8 @@ public:
    unsigned int getMonth() const        { return month; }
    unsigned int getYear() const         { return year; }
 
-   virtual void processRecords() override;
-   virtual void reset() override;
+   void processRecords() override;
+   void reset() override;
 
 protected:
    // Get functions
@@ -111,16 +111,16 @@ protected:
    virtual bool recordTrackData(const base::Object* objs[4], const double values[4]);
 
    // simulation::DataRecorder class protected interface functions
-   virtual bool recordDataImp(
+   bool recordDataImp(
       const unsigned int id,              // Recorder event Id
       const base::Object* pObjects[4],    // Sample objects
       const double values[4]              // Sample values
    ) override;
 
-   virtual bool processUnhandledId(const unsigned int id) override;
+   bool processUnhandledId(const unsigned int id) override;
 
    // base::Component protected interface
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    void initData();

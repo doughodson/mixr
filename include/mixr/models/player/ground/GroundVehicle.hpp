@@ -34,7 +34,7 @@ public:
 public:
    GroundVehicle();
 
-   virtual double getGrossWeight() const override;     // wt: lbs
+   double getGrossWeight() const override;             // wt: lbs
 
    virtual double getFuelWt() const;                   // wt: lbs
    virtual double getFuelWtMax() const;                // wt: lbs
@@ -50,16 +50,16 @@ public:
    // Sets the launcher elevation angle (rad), and removes the old position command
    virtual bool setLauncherPosition(const double rad);
 
-   virtual unsigned int getMajorType() const override;
+   unsigned int getMajorType() const override;
 
-   virtual void reset() override;
+   void reset() override;
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
    virtual void launcherDynamics(const double dt);
 
    // Player class (protected) interface
-   virtual void dynamics(const double  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 
 private:
    double            lnchrAngle {};        // Current launcher angle  (rad)

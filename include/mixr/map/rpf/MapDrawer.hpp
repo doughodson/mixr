@@ -75,9 +75,8 @@ public:
     double getMapIntensity()                                { return mapIntensity; }
     virtual void updateZone(int zone, int& selected, const int idx);
 
-    virtual void drawFunc() override;
-
-    virtual void updateData(const double dt = 0.0) override;
+    void drawFunc() override;
+    void updateData(const double dt = 0.0) override;
 
 private:
     static const int MAX_PAGERS {2};

@@ -30,25 +30,25 @@ public:
    // setControlStickYawInput(const double yaw)
    //    yaw inputs: normalized
    //    yaw:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setControlStickYawInput(const double yaw);
+   virtual bool setControlStickYawInput(const double);
 
    // setTranslateXInput(const double transx)
    //    transx inputs: normalized
    //    transx:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateXInput(const double transx);
+   virtual bool setTranslateXInput(const double);
 
    // setTranslateYInput(const double transy)
    //    transy inputs: normalized
    //    transy:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateYInput(const double transy);
+   virtual bool setTranslateYInput(const double);
 
    // setTranslateZInput(const double transz)
    //    transz inputs: normalized
    //    transz:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateZInput(const double transz);
+   virtual bool setTranslateZInput(const double);
 
-   virtual double getGrossWeight() const override;
-   virtual unsigned int getMajorType() const override;
+   double getGrossWeight() const override;
+   unsigned int getMajorType() const override;
 };
 
 }

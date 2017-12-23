@@ -71,7 +71,7 @@ class Subtract : public Add
 
 public:
     Subtract();
-    virtual void operation() override;
+    void operation() override;
 };
 
 //------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ class Multiply : public Add
 
 public:
     Multiply();
-    virtual void operation() override;
+    void operation() override;
 };
 
 //------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ class Divide : public Add
 public:
     Divide();
 
-    virtual void operation() override;
+    void operation() override;
 };
 
 }

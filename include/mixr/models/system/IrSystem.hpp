@@ -50,8 +50,8 @@ public:
 
    virtual const base::String* getSeekerName() const;   // Name of the seeker model, or zero (0) if none
 
-   virtual void updateData(const double dt = 0.0) override;
-   virtual void reset() override;
+   void updateData(const double dt = 0.0) override;
+   void reset() override;
 
 protected:
 
@@ -59,7 +59,7 @@ protected:
    // This function will create a filtered list of players that IR systems will interact with.
    virtual void processPlayersOfInterest();
 
-   virtual bool shutdownNotification() override;
+   bool shutdownNotification() override;
 
 private:
    IrSeeker* seeker {};            // Our seeker

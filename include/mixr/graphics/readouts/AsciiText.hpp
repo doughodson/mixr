@@ -34,9 +34,9 @@ class AsciiText : public AbstractField
 public:
    AsciiText();
 
-   virtual char filterInputEvent(const int event, const int tc) override;
-   virtual bool isValidInputPosition(const int) override;
-   virtual bool event(const int key, base::Object* const obj = nullptr) override;
+   char filterInputEvent(const int event, const int tc) override;
+   bool isValidInputPosition(const int) override;
+   bool event(const int key, base::Object* const obj = nullptr) override;
 
 public:
    bool setSlotTextString(const base::String* const);

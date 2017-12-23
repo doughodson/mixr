@@ -56,7 +56,7 @@ public:
 protected:
    void setFullFilename(const char* const name);
 
-   virtual void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    // from FileWriter.hpp:
