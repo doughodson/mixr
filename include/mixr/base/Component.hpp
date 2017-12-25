@@ -175,7 +175,7 @@ class String;
 //    Standard event tokens are defined in the file, eventTokens.hpp, which is included
 //    by this Component class and are therefore within the mixr::base::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
-//    as part of the oe Description Language (EDL) input files.
+//    as part of the mixr Description Language (EDL) input files.
 //
 //    The event() function can be implemented using the BEGIN_EVENT_HANDLER()
 //    and END_EVENT_HANDLER() macros.  Along with the macros ON_EVENT(), ON_EVENT_OBJ(),

@@ -353,7 +353,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          break;
       }
       default: {
-         // not an oe message.
+         // not a mixr message.
          break;
       }
    }

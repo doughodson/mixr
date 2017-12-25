@@ -13,10 +13,10 @@ class Nib;
 // Class: Ntm
 // Description: Abstract Network Type Mapper (NTM) class
 //
-//    This class is used to map oe player types to the entity type codes
+//    This class is used to map mixr player types to the entity type codes
 //    that are unique to an interoperability network (i.e., DIS, HLA/FOM, etc).
 //
-//    The oe player type is defined by providing an example Player using
+//    The mixr player type is defined by providing an example Player using
 //    the 'template' slot.  On incoming entities, the 'template' player is cloned
 //    to create the surrogate, "Interoperability Player" (or IPlayer) that is
 //    added to the simulation players list.

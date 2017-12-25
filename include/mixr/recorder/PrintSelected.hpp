@@ -31,7 +31,7 @@ class TrackData; class EmissionData;
 // Factory name: PrintSelected
 // Slots:
 //   messageToken    <base::Number>   ! Message ID (token)
-//   fieldName       <base::String>   ! Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
+//   fieldName       <base::String>   ! Full field name (e.g., mixr.Recorder.Pb.PlayerId.name)
 //   compareToValS   <base::String>   ! value to compare (string)
 //   compareToValI   <base::Number>   ! value to compare (num)
 //   compareToValD   <base::Number>   ! value to compare (dbl)

@@ -10,7 +10,7 @@
 //
 //    2) Token IDs 500 to 999 are reserved
 //
-//    3) This file is used by both C++ and oe input files, so only use
+//    3) This file is used by both C++ and mixr input files, so only use
 //       C pre-processor directives in this configuration file.
 //
 //    4) P1 to P4 are the required objects passed to the SAMPLE macro, and

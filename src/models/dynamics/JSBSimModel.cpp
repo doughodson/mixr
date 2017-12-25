@@ -716,23 +716,23 @@ void JSBSimModel::dynamics(const double dt)
         //    acData->n1, acData->n2, acData->n3, 0,
         //    0,          0,          0,          1
         //    );
-        // std::printf("oe*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
+        // std::printf("mixr*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // base::Matrixd m0 = getRotationalMatrix();
         // base::Quat q0 = getQuaternions();
         // setRotationalMatrix(m2);
         // //setQuaternions(fq);
         // base::Quat eq = getQuaternions();
         // base::Matrixd m1 = getRotationalMatrix();
-        // std::printf("oe EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
+        // std::printf("mixr EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // std::printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
-        // std::printf("oe* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
-        // std::printf("oe  Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", eq[0], eq[1], eq[2], eq[3]);
+        // std::printf("mixr* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);
+        // std::printf("mixr  Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", eq[0], eq[1], eq[2], eq[3]);
         // std::printf("JSBSim     Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", fq[0], fq[1], fq[2], fq[3]);
-        // std::printf("oe*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
+        // std::printf("mixr*mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(0,0), m0(0,1), m0(0,2), m0(0,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(1,0), m0(1,1), m0(1,2), m0(1,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(2,0), m0(2,1), m0(2,2), m0(2,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m0(3,0), m0(3,1), m0(3,2), m0(3,3));
-        // std::printf("oe mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(0,0), m1(0,1), m1(0,2), m1(0,3));
+        // std::printf("mixr mm: (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(0,0), m1(0,1), m1(0,2), m1(0,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(1,0), m1(1,1), m1(1,2), m1(1,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(2,0), m1(2,1), m1(2,2), m1(2,3));
         // std::printf("            (%6.3f, %6.3f, %6.3f, %6.3f)\n", m1(3,0), m1(3,1), m1(3,2), m1(3,3));
