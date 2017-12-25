@@ -19,7 +19,7 @@ export MIXR_DATA_ROOT
 # ---
 # MIXR 3rd party (e.g. cigi, JSBSim) root
 # ---
-MIXR_3RD_PARTY_ROOT=$PWD/../mixr_3rdparty
+MIXR_3RD_PARTY_ROOT=$PWD/../mixr-3rdparty
 export MIXR_3RD_PARTY_ROOT
 
 # ---
