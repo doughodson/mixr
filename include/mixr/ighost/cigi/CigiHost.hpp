@@ -28,7 +28,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 //class CigiOutgoingMsg;
 
 namespace mixr {
-namespace base { class Number; class NetHandler; }
+namespace base { class Boolean; class Number; class NetHandler; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
@@ -56,7 +56,7 @@ class IgThread;
 //    shipWakeModel        (Number)          "Ship Wake" effect model ID
 //
 // Note: In the async mode, the sendCigiData() function, which sends the CIGI
-// packets to the CigiCl handler, is called by our frameSync() function in the
+// packets to the session, is called by our frameSync() function in the
 // R/T thread.  In the sync mode, the sendCigiData() function is called by the
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
@@ -254,7 +254,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotHostSession(HostSession* const);
-   bool setSlotASyncMode(const base::Number* const);
+   bool setSlotASyncMode(const base::Boolean* const);
    bool setSlotHideOwnshipModel(const base::Number* const);
    bool setSlotOwnshipModelId(const base::Number* const);
    bool setSlotMslTrailModelId(const base::Number* const);

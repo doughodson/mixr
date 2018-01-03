@@ -27,6 +27,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -74,7 +75,7 @@ END_SLOTTABLE(CigiHost)
 
 BEGIN_SLOT_MAP(CigiHost)
    ON_SLOT(1, setSlotHostSession,             HostSession)
-   ON_SLOT(2, setSlotASyncMode,               base::Number)
+   ON_SLOT(2, setSlotASyncMode,               base::Boolean)
    ON_SLOT(3, setSlotHideOwnshipModel,        base::Number)
    ON_SLOT(4, setSlotOwnshipModelId,          base::Number)
    ON_SLOT(5, setSlotMslTrailModelId,         base::Number)
@@ -298,8 +299,9 @@ void CigiHost::recvElevations()
 void CigiHost::frameSync()
 {
    if (session != nullptr && session->isInitialized()) {
-      if (isASyncMode()) sendCigiData();
-      //cigi->frameSync();
+      if (isASyncMode()) {
+         sendCigiData();
+      }
    }
 }
 
@@ -1349,7 +1351,7 @@ bool CigiHost::setSlotHostSession(HostSession* const msg)
 }
 
 // Set/clear the ASYNC mode
-bool CigiHost::setSlotASyncMode(const base::Number* const msg)
+bool CigiHost::setSlotASyncMode(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
