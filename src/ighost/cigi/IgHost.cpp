@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/IgHost.hpp"
 
-#include "mixr/ighost/cigi/TypeMapper.hpp"
+#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
 #include "mixr/simulation/AbstractPlayer.hpp"
@@ -30,7 +30,7 @@ BEGIN_SLOTTABLE(IgHost)
    "maxRange",         // 1: Max range of visual system (distance: meters)
    "maxModels",        // 2: Max number of models
    "maxElevations",    // 3: Max number of terrain elevation requests
-   "typeMap",          // 4: IG's system model type IDs (PairStream of TypeMapper objects)
+   "typeMap",          // 4: a mapping of player types to CIGI entity type IDs
 END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
@@ -732,7 +732,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
        const base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr && nIgModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
-          const auto igType = dynamic_cast<const TypeMapper*>( pair->object() );
+          const auto igType = dynamic_cast<const Player2CigiIdMap*>( pair->object() );
           if (igType != nullptr) {
              // We have an Otm object, so put it in the table
              igType->ref();

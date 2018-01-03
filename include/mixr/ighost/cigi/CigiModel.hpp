@@ -16,7 +16,7 @@ namespace mixr {
 namespace base { class String; }
 namespace models { class Player; }
 namespace cigi {
-class TypeMapper;
+class Player2CigiIdMap;
 
 //------------------------------------------------------------------------------
 // Class: CigiModel
@@ -57,7 +57,7 @@ public:
    models::Player* getPlayer()                 { return player; }         // The player object associated with this model
    const models::Player* getPlayer() const     { return player; }         // The player object associated with this model (const version)
 
-   const TypeMapper* getTypeMapper() const     { return typeMapper; }     // IG type mapper
+   const Player2CigiIdMap* getTypeMapper() const  { return typeMapper; }  // IG type mapper
 
    int getPlayerID() const                     { return playerID; }       // Player ID for the player associated with this model
    const base::String* getFederateName() const { return federateName; }   // Player's federate name (if networked)
@@ -80,7 +80,7 @@ public:
    // Initializes this model for player, 'p' (we're ACTIVE), and
    // looks up the IG model type ID in the model table, 'igModelTable'.
    // If the size of the IG model table is zero(0), then the model type ID is not set.
-   void initialize(models::Player* const p, const TypeMapper** const igModelTable = nullptr, const int numModels = 0);
+   void initialize(models::Player* const p, const Player2CigiIdMap** const igModelTable = nullptr, const int numModels = 0);
 
    // Clear out this model (we're INACTIVE)
    void clear();
@@ -114,11 +114,11 @@ private:
    // Sets the player object, p, associated with this model
    void setPlayer(models::Player* const);
 
-   models::Player* player{};       // This player
-   State state{State::INACTIVE};   // Model Active flag
-   int ageCount{};                 // Age counter (how many times have we've been overlooked)
-   bool checked{};                 // Model was checked
-   const TypeMapper* typeMapper{}; // IG unique model type mapper
+   models::Player* player{};             // This player
+   State state{State::INACTIVE};         // Model Active flag
+   int ageCount{};                       // Age counter (how many times have we've been overlooked)
+   bool checked{};                       // Model was checked
+   const Player2CigiIdMap* typeMapper{}; // IG unique model type mapper
 
    int rcount{};                   // HOT request counter (how many times have we asked)
    bool hotActive{};               // HOT entry is active

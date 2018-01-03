@@ -313,7 +313,7 @@ base library (mixr_base)
 
    -- Renamed 'concurrent' directory to 'threads' and removed all thread pool
       related classes (ThreadPool, ThreadPoolManager and ThreadPoolManagerThread)
-      as they were not being used.  Some work done to streamline the existing
+      as they are not used.  Some work done to streamline the existing
       classes to eventually use C++11 std library thread functionality.
 
       Note that the 'create()' method has been renamed to 'start(const double

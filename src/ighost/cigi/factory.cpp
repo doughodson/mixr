@@ -3,7 +3,7 @@
 
 #include "mixr/base/Object.hpp"
 
-#include "mixr/ighost/cigi/TypeMapper.hpp"
+#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
 
 #include "mixr/ighost/cigi/CigiHost.hpp"
 #include "mixr/ighost/cigi/session/HostSession.hpp"
@@ -25,9 +25,9 @@ base::Object* factory(const std::string& name)
         obj = new HostSession();
     }
 
-    // used by CIGI interface
-    else if ( name == TypeMapper::getFactoryName() ) {
-        obj = new TypeMapper();
+    // Player to CIGI entity type map
+    else if ( name == Player2CigiIdMap::getFactoryName() ) {
+        obj = new Player2CigiIdMap();
     }
 
     return obj;

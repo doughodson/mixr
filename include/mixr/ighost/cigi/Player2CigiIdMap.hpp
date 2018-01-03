@@ -11,21 +11,21 @@ namespace models { class Player; }
 namespace cigi {
 
 //------------------------------------------------------------------------------
-// Class: TypeMapper
+// Class: Player2CigiIdMap
 //
-// Description: Cigi Type-Mapper --
-//              Maps player's factory name and type string to Cigi IG entity type ID.
+// Description: Maps a player's factory name and type string to a specific
+//              CIGI entity type ID.
 //
-// Factory name: CigiTypeMapper
+// Factory name: Player2CigiIdMap
 // Slots:
 //     factoryName   <Identifier>     ! Reference factory name (default: 0)
 //     typeName      <String>         ! Reference type name (default: 0)
-//     modelTypeId   <Number>         ! Entity type ID number (int) (default: 0)
+//     entityId      <Number>         ! Entity type ID number (int) (default: 0)
 //
 // Examples:
-//    ( Otm  Aircraft  "B-1B"          203 )
-//    ( Otm  Aircraft  "F-14"          309 )
-//    ( Otm  Aircraft     modelTypeId: 302 )       // Default aircraft type
+//    ( Player2CigiIdMap  factoryName: Aircraft  typeName: "B-1B"    entityId: 203 )
+//    ( Player2CigiIdMap  factoryName: Aircraft  typeName: "F-14"    entityId: 309 )
+//    ( Player2CigiIdMap  factoryName: Aircraft                      entityId: 302 )  // Default aircraft type
 //
 //
 // Notes:
@@ -50,15 +50,15 @@ namespace cigi {
 //          (e.g., Test player's general "F-16" type would not match our "F-16C")
 //
 //------------------------------------------------------------------------------
-class TypeMapper : public base::Object
+class Player2CigiIdMap : public base::Object
 {
-    DECLARE_SUBCLASS(TypeMapper, base::Object)
+    DECLARE_SUBCLASS(Player2CigiIdMap, base::Object)
 
 public:
-    TypeMapper();
+    Player2CigiIdMap();
 
-    int getTypeId() const                                    { return typeId; }          // IG entity type ID number
-    bool setTypeId(const int newType);                                                   // Sets the IG entity type number
+    int getEntityId() const                                  { return entityId; }        // IG entity type ID number
+    bool setEntityId(const int);                                                         // Sets the IG entity type number
 
     const base::Identifier* getRefFactoryName() const        { return refFactoryName; }  // Reference factory name
 
@@ -70,11 +70,11 @@ public:
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
     base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
-    int typeId{};                                             // IG entity type ID number
+    int entityId{};                                           // IG entity type ID number
 
 private:
     // slot table helper methods
-    bool setSlotTypeId(const base::Number* const);              // Sets the IG entity type number
+    bool setSlotEntityId(const base::Number* const);            // Sets the IG entity type number
     bool setSlotRefFactoryName(const base::Identifier* const);  // Sets the Reference factory name
     bool setSlotRefTypeName(const base::String* const);         // Sets the Reference type name
 };

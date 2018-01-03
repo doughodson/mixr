@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
-#include "mixr/ighost/cigi/TypeMapper.hpp"
+#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
 
 #include "mixr/base/String.hpp"
 
@@ -85,7 +85,7 @@ void CigiModel::setPlayer(models::Player* const p)
 }
 
 // initialize the model
-void CigiModel::initialize(models::Player* const p, const TypeMapper** const igModelTable, const int numModels)
+void CigiModel::initialize(models::Player* const p, const Player2CigiIdMap** const igModelTable, const int numModels)
 {
    isGroundPlayer = p->isClassType(typeid(models::GroundVehicle));
 
@@ -100,7 +100,7 @@ void CigiModel::initialize(models::Player* const p, const TypeMapper** const igM
    if (igModelTable != nullptr && numModels > 0) {
       bool found{};
       for (int i = 0; i < numModels && !found; i++) {
-         const TypeMapper* igTypeMapper{igModelTable[i]};
+         const Player2CigiIdMap* igTypeMapper{igModelTable[i]};
          if (igTypeMapper != nullptr) {
             if (igTypeMapper->isMatchingPlayerType(p)) {
                // We found a match for our player in the IG model table!
