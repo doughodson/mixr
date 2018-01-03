@@ -10,7 +10,7 @@ OBJS =  \
 	CigiModel.o \
 	IgHost.o \
 	IgThread.o \
-	Player2CigiIdMap.o \
+	Player2CigiMap.o \
 	factory.o
 
 .PHONY: all clean

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_TypeMapper_H__
-#define __mixr_ighost_cigi_TypeMapper_H__
+#ifndef __mixr_ighost_cigi_Player2CigiMap_H__
+#define __mixr_ighost_cigi_Player2CigiMap_H__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
