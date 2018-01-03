@@ -1,5 +1,5 @@
 
-#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
+#include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -9,26 +9,26 @@
 namespace mixr {
 namespace cigi {
 
-IMPLEMENT_SUBCLASS(Player2CigiIdMap, "Player2CigiIdMap")
+IMPLEMENT_SUBCLASS(Player2CigiMap, "Player2CigiMap")
 
-BEGIN_SLOTTABLE(Player2CigiIdMap)
+BEGIN_SLOTTABLE(Player2CigiMap)
    "factoryName",       // 1) Reference factory name
    "typeName",          // 2) Reference type name
    "entityId",          // 3) IG entity type ID number
-END_SLOTTABLE(Player2CigiIdMap)
+END_SLOTTABLE(Player2CigiMap)
 
-BEGIN_SLOT_MAP(Player2CigiIdMap)
+BEGIN_SLOT_MAP(Player2CigiMap)
     ON_SLOT(1, setSlotRefFactoryName, base::Identifier)
     ON_SLOT(2, setSlotRefTypeName,    base::String)
     ON_SLOT(3, setSlotEntityId,       base::Number)
 END_SLOT_MAP()
 
-Player2CigiIdMap::Player2CigiIdMap()
+Player2CigiMap::Player2CigiMap()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Player2CigiIdMap::copyData(const Player2CigiIdMap& org, const bool)
+void Player2CigiMap::copyData(const Player2CigiMap& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -37,7 +37,7 @@ void Player2CigiIdMap::copyData(const Player2CigiIdMap& org, const bool)
    setSlotRefTypeName( org.refTypeName );
 }
 
-void Player2CigiIdMap::deleteData()
+void Player2CigiMap::deleteData()
 {
    setEntityId( 0 );
    setSlotRefFactoryName( nullptr );
@@ -49,14 +49,14 @@ void Player2CigiIdMap::deleteData()
 //------------------------------------------------------------------------------
 
 // Sets the IG entity type number
-bool Player2CigiIdMap::setEntityId(const int id)
+bool Player2CigiMap::setEntityId(const int id)
 {
    entityId = id;
    return true;
 }
 
 // Sets the IG entity type number
-bool Player2CigiIdMap::setSlotEntityId(const base::Number* const msg)
+bool Player2CigiMap::setSlotEntityId(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -69,14 +69,14 @@ bool Player2CigiIdMap::setSlotEntityId(const base::Number* const msg)
 }
 
 // Sets the player's factory name
-bool Player2CigiIdMap::setSlotRefFactoryName(const base::Identifier* const msg)
+bool Player2CigiMap::setSlotRefFactoryName(const base::Identifier* const msg)
 {
    refFactoryName = msg;
    return true;
 }
 
 // Sets the player's type name
-bool Player2CigiIdMap::setSlotRefTypeName(const base::String* const msg)
+bool Player2CigiMap::setSlotRefTypeName(const base::String* const msg)
 {
    refTypeName = msg;
    return true;
@@ -85,7 +85,7 @@ bool Player2CigiIdMap::setSlotRefTypeName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // isMatchingPlayerType() -- Returns true if the factory & type names match
 //------------------------------------------------------------------------------
-bool Player2CigiIdMap::isMatchingPlayerType(const models::Player* const p) const
+bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
 {
    bool match{};
    if (p != nullptr && refFactoryName != nullptr) {

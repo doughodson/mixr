@@ -11,7 +11,7 @@ namespace simulation { class AbstractPlayer; }
 namespace models { class Player; }
 namespace cigi {
 class CigiModel;
-class Player2CigiIdMap;
+class Player2CigiMap;
 
 //------------------------------------------------------------------------------
 // Class: IgHost
@@ -138,7 +138,7 @@ private:
    };
 
    // IG model type table
-   std::array<const Player2CigiIdMap*, MAX_MODELS_TYPES> igModelTypes{}; // Table of pointers to IG type mappers
+   std::array<const Player2CigiMap*, MAX_MODELS_TYPES> igModelTypes{};   // Table of pointers to IG type mappers
    int nIgModelTypes{};                                                  // Number of type mappers in the table, 'igModelTable'
 
    // bsearch callbacks: object name compare function --

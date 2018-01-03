@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/IgHost.hpp"
 
-#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
+#include "mixr/ighost/cigi/Player2CigiMap.hpp"
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
 #include "mixr/simulation/AbstractPlayer.hpp"
@@ -732,7 +732,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
        const base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr && nIgModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
-          const auto igType = dynamic_cast<const Player2CigiIdMap*>( pair->object() );
+          const auto igType = dynamic_cast<const Player2CigiMap*>( pair->object() );
           if (igType != nullptr) {
              // We have an Otm object, so put it in the table
              igType->ref();

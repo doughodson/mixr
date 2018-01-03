@@ -6,7 +6,7 @@
 
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
-#include "mixr/ighost/cigi/Player2CigiIdMap.hpp"
+#include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/player/air/AirVehicle.hpp"
@@ -496,7 +496,7 @@ bool CigiHost::setAirVehicleData(CigiModel* const m, const int entity, const mod
       if (ok) {
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm {m->getTypeMapper()};
+         const Player2CigiMap* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -576,7 +576,7 @@ bool CigiHost::setBuildingData(CigiModel* const m, const int entity, const model
       if (ok) {
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm {m->getTypeMapper()};
+         const Player2CigiMap* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -690,7 +690,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
 
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm{m->getTypeMapper()};
+         const Player2CigiMap* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -845,7 +845,7 @@ bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models:
 
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm {m->getTypeMapper()};
+         const Player2CigiMap* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -889,7 +889,7 @@ bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models:
 
             // Set the entity type
             int tt{};
-            const Player2CigiIdMap* otm {m->getTypeMapper()};
+            const Player2CigiMap* otm {m->getTypeMapper()};
             if (otm != nullptr) tt = otm->getEntityId();
             if (tt > 0xffff) tt = 0;
             ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -945,7 +945,7 @@ bool CigiHost::setLifeFormData(CigiModel* const m, const int entity, const model
       if (ok) {
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm{m->getTypeMapper()};
+         const Player2CigiMap* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -1036,7 +1036,7 @@ bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models
 
       // Set the entity type
       int tt{};
-      const Player2CigiIdMap* otm{m->getTypeMapper()};
+      const Player2CigiMap* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getEntityId();
       if (tt > 0xffff) tt = 0;
       ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -1122,7 +1122,7 @@ bool CigiHost::setShipData(CigiModel* const m, const int entity, const models::S
 
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm {m->getTypeMapper()};
+         const Player2CigiMap* otm {m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -1183,7 +1183,7 @@ bool CigiHost::setSpaceVehicleData(CigiModel* const m, const int entity, const m
       if (ok) {
          // Set the entity type
          int tt{};
-         const Player2CigiIdMap* otm{m->getTypeMapper()};
+         const Player2CigiMap* otm{m->getTypeMapper()};
          if (otm != nullptr) tt = otm->getEntityId();
          if (tt > 0xffff) tt = 0;
          ec->SetEntityType(static_cast<Cigi_uint16>(tt));
@@ -1248,7 +1248,7 @@ bool CigiHost::setWeaponData(CigiModel* const m, const int entity, const models:
 
       // Set the entity type
       int tt{};
-      const Player2CigiIdMap* otm{m->getTypeMapper()};
+      const Player2CigiMap* otm{m->getTypeMapper()};
       if (otm != nullptr) tt = otm->getEntityId();
       if (tt > 0xffff) tt = 0;
       ec->SetEntityType(static_cast<Cigi_uint16>(tt));

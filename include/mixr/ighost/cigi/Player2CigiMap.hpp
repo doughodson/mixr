@@ -11,21 +11,21 @@ namespace models { class Player; }
 namespace cigi {
 
 //------------------------------------------------------------------------------
-// Class: Player2CigiIdMap
+// Class: Player2CigiMap
 //
 // Description: Maps a player's factory name and type string to a specific
 //              CIGI entity type ID.
 //
-// Factory name: Player2CigiIdMap
+// Factory name: Player2CigiMap
 // Slots:
 //     factoryName   <Identifier>     ! Reference factory name (default: 0)
 //     typeName      <String>         ! Reference type name (default: 0)
 //     entityId      <Number>         ! Entity type ID number (int) (default: 0)
 //
 // Examples:
-//    ( Player2CigiIdMap  factoryName: Aircraft  typeName: "B-1B"    entityId: 203 )
-//    ( Player2CigiIdMap  factoryName: Aircraft  typeName: "F-14"    entityId: 309 )
-//    ( Player2CigiIdMap  factoryName: Aircraft                      entityId: 302 )  // Default aircraft type
+//    ( Player2CigiMap  factoryName: Aircraft  typeName: "B-1B"  entityId: 203 )
+//    ( Player2CigiMap  factoryName: Aircraft  typeName: "F-14"  entityId: 309 )
+//    ( Player2CigiMap  factoryName: Aircraft                    entityId: 302 )  // Default aircraft type
 //
 //
 // Notes:
@@ -50,12 +50,12 @@ namespace cigi {
 //          (e.g., Test player's general "F-16" type would not match our "F-16C")
 //
 //------------------------------------------------------------------------------
-class Player2CigiIdMap : public base::Object
+class Player2CigiMap : public base::Object
 {
-    DECLARE_SUBCLASS(Player2CigiIdMap, base::Object)
+    DECLARE_SUBCLASS(Player2CigiMap, base::Object)
 
 public:
-    Player2CigiIdMap();
+    Player2CigiMap();
 
     int getEntityId() const                                  { return entityId; }        // IG entity type ID number
     bool setEntityId(const int);                                                         // Sets the IG entity type number
