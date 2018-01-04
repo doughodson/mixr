@@ -1,0 +1,546 @@
+================================================================================
+Changes since v17.06c
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes/improvements/trends/philosophy/goals
+
+- Many of the software changes are based on reasons or rationale gleamed from
+  reading material concerning good coding practices from influential people
+  within the world of C++ programming, such as Bjarne Stroustrup, Scott Meyers,
+  Herb Sutter and Andrei Alexandrescu.  We also cannot dismiss high quality answers
+  posted by folks on Stack Overflow and even the consolidated treasure trove of design
+  practices espoused by Microsoft in their "Framework Design Guidelines for .NET" book.
+  This book in many ways rolls up and integrates guidelines in a nice way.  Of course,
+  some of the changes are a result of dwelling on these issues or topics for probably
+  unreasonable amounts of time, and equally, how they might be applied in a systematic
+  way over time to improve the MIXR code base.
+
+- Renamed user interface directory from 'gui' to 'ui' as it's more general.
+
+- Removed 'serialize()' method from base Object.  This method is no longer needed
+  and was rarely used, so all functionality associated with it has been removed.
+  As a consequence, in user code, remove all 'serialize()' methods you have
+  defined in your classes.  If you did not define any such methods, you probably
+  used the 'EMPTY_SERIALIZE()' macro to satisfy the Object-based dependency, which
+  defined the method itself (to do nothing). Remove this macro from your mixr-based
+  application code, otherwise, compiling errors will be produced.
+
+- Prefixed all 'size_t' types with std (e.g., std::size_t) to clearly indicate
+  that this type is defined in the std library (it is not defined as part of the core
+  C++ language).  This has no impact on API. This was done to improve code base by
+  adopting explicit C++ notation as opposed to using global 'C' types (i.e., 'size_t'
+  without a namespace qualifier).
+
+- Using uniform/brace initialization syntax for types throughout code base.
+  This notation forces more explicit initialization of types, and avoids
+  nonsensical coercions from taking place which, in some cases, might
+  surprise or even alarm a developer about a potential problem.  For example, it
+  prevents accidental initializations from 'ints' to 'doubles' or 'doubles' to
+  'ints.' This change required a significant investment in time, but yielded a
+  few interesting cases to address.
+
+- Topic: use of 'unsigned int', 'unsigned short', etc. verses plain old 'int'.
+
+  Throughout the code base, use of the 'unsigned' primitive types prevails. This
+  is because, in the old days, using, what was considered the most
+  appropriate type for a particular programming problem, seemed rather
+  logical - which of course it is. There is nothing wrong with that argument,
+  but what was deemed 'appropriate' may have been evaluated with a bias that
+  favored the correct 'signedness' of the type, without regard to other issues.
+
+  Given a more fair evaluation of 'other issues' means we have decided to shift
+  to using 'int's as opposed to 'unsigned int's almost exclusively; we are moving
+  this direction in a staged manner, meaning, transitioning slowly as opportunities
+  naturally arise or stand out in an obvious way due to uniform initialization.
+
+  Rationale:
+
+  The reason to shift away from using 'unsigned' types is to improve code
+  quality and conform to conventions.  The convention is often stated as follows:
+  "Favor the use of int's over unsigned int's unless there is a strong reason
+  not to." In general, the signedness of the type is not considered a strong reason,
+  but it is acknowledged that there are a few good places to stick with the unsigned
+  types.
+
+  Today, the use of unsigned types is out of favor, as they introduce a number of
+  problems - some potentially severe, some annoying, some due to readability,
+  and some due to an assumed intended purpose (e.g., low level bit manipulation).
+
+  There are many cited concrete reasons to follow this convention, such as:
+  1) as an algebraic type, 'unsigned int's are discontinuous at 0, leading to
+  potential problems, 2) 'int' is shorter to type, read and generally mentally
+  digest, and 3) int's always, 100% of the time, map directly to the architecture
+  of computer processing hardware (i.e., CPUs/GPUs).
+
+  The only significant detractor comes from the standard library - it
+  defines the std::size_t datatype, unfortunately, as unsigned. It has to be,
+  as its value range represents the full address space of computer memory (which
+  is never negative!).  Even so, some in the C++ community believe the standards
+  committee messed up.
+
+  As we move towards using more C++11 features (such as universal
+  initialization), the inadvertent mixing of unsigned with signed types is no
+  longer masked due to implicit type conversions (coercions).  Narrowing
+  conversions (coercions) now produce compiler errors.  Explicit conversions
+  back and forth make the code ugly to read and often harder to comprehend.
+
+  For example:
+
+  double x = 1;    // compiles, but is technically wrong, 1 is an 'int' which
+                   // will be coerced (converted) into a double.
+
+  double x{1};     // using brace initialization, the compiler will flag this
+                   // as an error.
+
+  double x{1.0};   // correct, perfectly aligned types, no casting required.
+
+  The big picture is this - C++11 provides the features to sharpen distinctions
+  between types (including primitives) which is a good thing - we are starting
+  to take advantage of this to improve type-safety which improves code quality.
+  Moving to using plain old int's improves readability, reduces conversion issues,
+  and helps avoid explicit 'signed' and 'unsigned' casts which reduces noisy
+  syntax.
+
+- Topic: directory names.  Adopting a naming convention for directories
+  that include C++ class definitions has consumed more time and
+  brain power than we'd like to admit.  The struggle to be consistent ultimately
+  comes down to the use of singular verses plural names for directories.
+
+  For example, the 'models' library is plural to indicate a collection
+  of models, yet the 'sensor' directory within could have been named 'sensors'
+  to again indicate a collection.  The tension to name a 'collection of things'
+  as opposed to only stating 'what it is' is not always obvious. To make matters
+  worse, some words just seem to naturally fit better.
+
+  We are doing our best to make good choices, and as a general rule, will favor
+  the use of plural names.  Examples of this include 'graphics', 'instruments',
+  'models', 'colors', 'units', etc. Reviewing the code base and overall organization
+  will reveal some inconsistencies, such as 'util' - which is a collection
+  of utilities. Over time, these issues will be addressed, but in a way to avoid
+  massive end-user changes to existing application code.
+
+- Topic: Interface vs Abstract vs Base vs Concrete classes.  What is what, and
+  why it matters.
+
+  What is what?
+
+  Interface: C++ does not officially have an explicit 'interface' class type or
+  keyword like Java. It does support an equivalent concept as a class entirely
+  defined by pure virtual methods. This type of class defines no implementation,
+  no state, no algorithm, nothing, zero - well, function signatures.  Most importantly,
+  this class type isn't necessarily used as a foundation for a class hierarchy -
+  in fact, quite the oppose, it's useful because it defines a set of functionality
+  (i.e., methods names / function signatures) that maybe implemented by classes,
+  potentially in completely different hierarchies.  Within MIXR, we don't have any
+  interfaces defined in this sense.  Of course, MIXR classes are mostly organized
+  in a single hierarchy rooted by Object.
+
+  Abstract: C++ does officially acknowledge the concept of an abstract class.
+  It's simply a class that is not completely defined, therefore object instances
+  cannot be created. Given that, an abstract class often defines something, at least
+  a set of methods, and maybe a high level algorithm that partially defines how
+  it works (hopefully documented).  These high level algorithms define the blueprint
+  for the design of what subclasses are suppose to do, and to a limited extent,
+  how it does it (i.e., a partial algorithm). Particular aspects of those algorithms
+  often leave the door open for subclasses to define or change (i.e., tailor).
+  In some cases, those doors are wide open for redefinition, meaning, absolutely
+  no high level algorithm, within the class is defined (think Interface!).
+
+  The means to tailor how a class operates include defining so-called 'extension
+  points' and 'hook' methods.  The difference between 'extension points' and
+  'hook' methods is subtle; extension points are usually available as private
+  virtual methods that can be used to alter aspects of how the high level algorithm
+  executes.
+
+  Hook methods are a little different; they are usually available as public
+  virtual methods. They don't necessarily complement a defined algorithm -
+  they open the door to doing almost anything.  In some cases this is desirable,
+  but recommended practice is to minimize public virtual methods (i.e., hook
+  methods), and in some cases, eliminate them all together (see the Non-Virtual
+  Interface idiom and the Template method design pattern for more information).
+  Within MIXR, we are starting to define more explicit standalone abstract classes,
+  as they are often define the foundation (and principle value) that the framework
+  or platform provides.
+
+  Abstract classes do in fact define a public interface - they just add detail
+  beyond what a typical Interface class provides.  They are the foundation for
+  class hierarchies.  Given that, within MIXR, we are striving to present more
+  non-virtual methods within class public interfaces.
+
+  From a naming perspective, we are starting to prefix abstract classes with
+  the word 'Abstract' to indicate it's role within a hierarchy.
+
+  Base: The meaning of a 'base' class in C++ is overloaded.  In alignment
+  with Microsoft's framework guidelines, MIXR base classes define useful
+  'common code' for subclasses to leverage (if needed).  They should be abstract
+  as well, meaning, they should not be concrete, otherwise they wouldn't
+  necessarily be a 'base' to anything at all.
+
+  It easy to understand the recommended practice of avoiding defining too many
+  'base' classes between abstracts and concretes (i.e., layers), as code will
+  become difficult to understand. Having said that, it's not an all or nothing
+  thing, we do have hierarchies of classes within MIXR that serves as useful
+  points to derive completely functional concrete instances.  This is always
+  being re-evaluated from the standpoint of understandability such that there
+  is continued improvement in platform capabilities and flexibility.  It
+  can be challenging to optimize all these aspects at the same time.
+
+  Concrete: These classes are maybe the easiest to digest - they complete,
+  define or fill in remaining bits of implementation functionality
+  needed to create real working instances. MIXR obviously includes many of these
+  classes.  Some argue that all concrete class should be marked 'final'
+  as they are complete and help resolve other issues (assignments and copying!).
+  For now, this is not the case in MIXR code, we have concrete classes that are
+  effectively serving as 'base' classes through extension.
+
+  Why it matters?
+
+  In a nutshell, code clarity, and a more clear separation of 'interface'
+  from 'implementation.'  One goal of frameworks is to define relationships
+  and organize code in a way to build a variety of applications efficiently.
+  Abstract classes that define high level algorithms, in effect, provide
+  structures or patterns that are useful - in other words, abstract classes
+  can serve as a blueprints for classes, much like class relationships serve
+  as high level organizational blueprints that define an architecture.
+  Identifying the role a class plays within the code base, helps a developer
+  organize it in a way that provides the most value.
+
+  Topic: The Non-Virtual Interface (NVI) idiom
+
+  If every method in a class can be overridden, then you are effectively
+  telling the developer "you are free to throw away the provided blueprint
+  and go your own way."  That does maximize flexibility of how you might use
+  the class, but arguably, it opens the door to abuse and the creation of
+  code that is very difficult to follow or comprehend.
+
+  To avoid the problem of making too many methods virtual, the NVI
+  idiom flips the situation, it effectively says NO public methods should be
+  virtual; all of them should be non-virtual.  Sticking with the role of
+  what abstract classes are about, using NVI, non-virtual methods are
+  supported by private virtual methods that serve as points of extension;
+  the so-called 'extension points' - public virtual methods are the
+  'hooks' as described.
+
+  So within the MIXR code base, why do we care?
+
+  To improve code clarity, a recommended practice is to minimize
+  'inheritance call chains.'  Inheritance call chains are formed when
+  subclasses call parent methods of the same name. Unfortunately,
+  calling the parent class method such as updateTc()
+  (i.e., BaseClass::updateTc()) within a subclasses updateTc() provides
+  no indication of what the shared common code is doing.  As an alternative,
+  for example, calling a protected method within a base classes common
+  code makes things more obvious - for example, 'readDeviceInputs()'.
+
+  The NVI idiom prevents inheritance call chains because the extension
+  points are private - they cannot call the private methods in parent
+  classes!  They in effect, force the developer of the parent class to
+  define methods (with names that indicates what they are doing) to be
+  used by the concretes.  Basically what is happening is all the classes
+  between the abstracts and concretes define implementation code - their
+  role as abstract 'base' classes is to define useful common code for the
+  concretes.  This allows the concrete classes to clearly express their
+  behavior in a more understandable way.
+
+  A point to consider.  If you are implementing a algorithm (i.e., an
+  'extension point') then consider defining a new extension point that
+  further defines details and base class hasn't done.  This ensures
+  concretes don't totally violate 'what they are' in terms of how they
+  act relative to their parents.  'Hooks' are totally different, as
+  stated before, they open the door much wider than 'extension points'
+  for subclasses to tailor.
+
+  Using inheritance call chains implements the functionality of class members
+  in a somewhat awkward way - basically opposite of what virtual methods are
+  for - instead of overriding a methods behavior, they extend a methods
+  behaviors by reusing everything defined before it.  This techniques is
+  called 'program by difference' which requires a developer to understand
+  the implementation code of all the classes from abstract to concrete
+  to really understand what is going on.  Simplifying this aspect should
+  improve clarity.
+
+  Within MIXR, inheritance call chains are in abundance - as code is updated,
+  there is a conscious effect to minimize them. (See linkage library as
+  an example.)
+
+- Topic: Guidelines for virtual function declaration
+
+  C++ core guidelines recommends that virtual functions should specify exactly
+  one of 'virtual', 'override', or 'final' for a number of reasons including:
+  readability and detection of mistakes.
+
+  Recommendation: use 'virtual' only when declaring a new virtual function,
+  use 'override' only when declaring an overrider, and use 'final' only
+  when declaring a final overrider.
+
+  Some time ago, we updated the entire MIXR code base by adding 'override'
+  at the appropriate spots - but left the 'virtual' specification alone.
+  This was a very good first step, as it helped detect mistakes; now we
+  are starting to adopt this guideline by systematically stripping
+  off 'virtual' where it no longer needed to adhere to this recommendation.
+
+- Topic: Slot table helper methods
+
+  Throughout the code base, methods that support the processing of
+  EDL configuration file inputs defined by so-called 'slot names'
+  have not always been defined in a consistent manner.  For example,
+  code written long ago frequently defined the visibility of them
+  as 'private' - later, newer classes often set their visibility as
+  'protected', and even later the visibility was often made 'public.'
+  In some cases, they were defined as hooks by allowing them to be overridden
+  as a virtual method.
+
+  With this release, all (with a few minor exceptions) slot methods have
+  been made 'non-virtual private'.  This was done for several reason,
+  but first and foremost, was to reduce cluttering up the public interfaces
+  of class definitions as much as possible.  This improves the
+  understandability of classes, and because almost all were named
+  'setSlotThis' or 'setSlotThat', it restates and solidifies their role as
+  an EDL slot table helper methods not necessarily intended to be a
+  general purpose object 'public' interface.
+
+  This change should have no impact on existing applications.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Infrastructure oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+base library (mixr_base)
+
+   -- Renamed 'concurrent' directory to 'threads' and removed all thread pool
+      related classes (ThreadPool, ThreadPoolManager and ThreadPoolManagerThread)
+      as they are not used.  Some work done to streamline the existing
+      classes to eventually use C++11 std library thread functionality.
+
+      Note that the 'create()' method has been renamed to 'start(const double
+      priority)' to better indicate what is happening (i.e., start a thread
+      with a given execution priority).  Threads are created via 'new Thread()',
+      after that, they can be started.
+
+      Specific thread classes defined in ig_host_cigi, linkage and simulation
+      libraries have been updated and renamed to more clearly indicate what kind
+      of thread is being used (i.e., periodic, single shot or sync'd).
+
+   -- Renamed all the device-oriented I/O classes to 'AbstractThis' or 'AbstractThat'
+      to more clearly convey their purpose; namely a structure that defines the
+      architecture of the I/O linkage system. It should also be noted that these
+      classes are abstract and are oriented at defining interfaces and much less about
+      how to do it (i.e., no domain implementation code).  All of these classes
+      are now grouped in the subdirectory called 'base/concepts/linkage'.
+
+      Classes have been simplified to reduce complexity, yet retain flexibility.
+      Simplification has come in the form of rebaselining several of them
+      to be Objects with clear interfaces as opposed to Components which presents
+      a much more complex interface.
+
+      See linkage library documentation in this changelog for more info.
+
+   -- Removed all random number generation-oriented classes which included the
+      Mersenne Twister algorithm and distribution classes.  C++11 includes
+      all of this capability and more as part of the standard library.
+
+   -- Moved all classes that represent numeric types into 'base/numeric'
+      This includes Boolean, Complex, Float, Integer, Number and Operator
+      classes.
+
+   -- Moved all color classes into 'base/colors'.  This included Cie, Cmy, Color,
+      Hls, Hsv, Hsva, Rgb, Rgba and Yiq.
+
+   -- Moved the Decibel class into 'units' directory.
+
+   -- EDL parser function signature has changed slightly.
+
+      From : Object* edl_parser(..., unsigned int* num_errors = nullptr);
+      To   : Object* edl_parser(..., int* num_errors = nullptr);
+
+      The only difference is the shift from using 'unsigned int' to 'int' to
+      report a parser calculated and returned error count.
+
+   -- All the classes defined in Tables and Functions within the 'functors' subfolder
+      have been separated into individual files.  The depreciated header files
+      Functions.hpp and Tables.hpp have been removed.  This folder needs a better
+      name, although it's not clear what it should be.
+
+   LatLon class
+      1) Limited scope of 'Dir' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   Referenced class
+      1) Changed internal reference count type from 'unsigned int' to 'int'.
+
+   StateMachine class
+      1) Limited scope of 'Mode' and 'StateTableCode' enums to 'enum class'. This
+         constrains the scope of this enumerated type.
+
+   String class
+      1) Limited scope of 'Justify' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   Timer classes
+      1) Limited scope of 'Type' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   util/nav_utils
+      1) Limited scope of 'Status' enum to 'enum class'. This constrains the scope of
+         this enumerated type.  Code that used this type was updated.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Devices, I/O, controllers libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+linkage library (mixr_linkage)
+
+   -- This library is not new - it was previously named 'iodevice'.  Renaming was
+      done because it more correctly indicate what this library includes - an
+      implementation of a flexible I/O linkage system to read and write to
+      device(s), transform their value and map them to application defined data
+      structures.  Many aspects of this library have been updated to simplify code
+      base, reduce complexity and ease understandability.
+
+   -- All 'AbstractAdapter'-based classes have been moved into an 'adapters'
+      subdirectory to improve clarity.
+
+   -- 'IoData' no longer includes methods to process the data itself and is not
+      associated with networking - it stores data, nothing more.
+
+   -- 'IoHander' is now abstract and serves as a base class given definitions
+      above, from which concretes are created (see examples).  It should be
+      noted how functionality is used -- inheritance related virtual method
+      call chains have been eliminated.
+
+   -- Added MockDevice class to be used as a container for signal generators.
+      This object serves as a source of input signals from which no real
+      physical device exists - in other words, it's a signal generator.
+
+   -- The 'testIoHandler' example has also been renamed to 'testLinkage' and has
+      been significantly updated to use more modern C++ available features
+      such as std::string and std::array<> where it makes sense.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Graphics oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+graphics library (mixr_graphics)
+
+   -- Updated all readout classes to use brace initialization.
+
+   -- Renamed and moved graphics/Field to graphics/readouts/AbstractField.
+      This class serves as an abstract base to several graphic readout classes.
+
+   -- Renamed and moved graphics/Font to graphics/fonts/AbstractFont.
+
+   -- Moved all font related (derived) classes into graphics/fonts directory.
+
+   -- Separated all FTGL-based classes from FtglFonts.hpp/.cpp into individual
+      files: AbstractFtglFont, FtglBitmapFont, FtglExtrdFont, FtglHaloFont,
+      FtglOutlineFont, FtglPixmapFont, FtglPolygonFont and FtglTextureFont.
+
+   -- Renamed 2 factory names as follows:
+         FTGLTextureFonts -> FTGLTextureFont
+         FTGLHaloFonts -> FTGLHaloFont
+      Make sure to adjust epp/edl files to account for factory name changes.
+
+   readouts/AbstractField class
+      1) Limited scope of 'Mode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/DirectionReadout class
+      1) Limited scope of 'DirMode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/ReformatScanner class
+      1) Limited scope of 'DataType' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   readouts/TimeReadout class
+      1) Limited scope of 'TimeMode' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+   Display class
+      1) Limited scope of 'Orientation' enum to 'enum class'. This constrains the scope of
+         this enumerated type.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Image generation oriented libraries
+#####################################################
+
+-- Much clean up and restructuring of the old 'otw' library has taken place. The
+   functionality of 'otw' library has been broken out into 2 specific IG host
+   interfaces.
+
+-- Moved all code common to providing IG capabilities into cigi library.
+   Explicitly removed specific implementations for CIGI and the simple so-called
+   'PC' host driver, which was renamed to 'pov'.
+
+--------------------------------------------------------------------------------
+ig library (mixr_ig_cigi)
+
+-- Moved all code common specific to implementing a CIGI driver to this new
+   library.  It has been updated.
+   
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ig library (mixr_ig_pov)
+
+-- This library is what used to be named the 'PC' host driver.  It has been simplified,
+   and improved to some extent, but basically defines the same functionality.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Map libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+vpf library (mixr_map_vpf)
+
+-- Resurrected this old 'map' library for reading vector product map data (vmap) 
+--------------------------------------------------------------------------------
+
+
+#####################################################
+Models & general capabilities oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+models library (mixr_models)
+
+-- Much organization of player folder has been made. This includes the creation
+   of additional subfolders to arrange and categorize related types (related in
+   terms of 'is-a').  For example, all the classes that were defined AirVehicle
+   files were separated into individual files and put into a new 'air' folder.
+   This same approach was used for effects, ground vehicles and weapons.
+   This organization is undoubtedly not perfect, but its a step towards being more
+   understandable, in terms of what is what, and what is available.
+
+-- Renamed 'Buildings' filename to 'Building' to match the class name defined
+   within it.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+simulation library (mixr_simulation)
+
+   Station class
+      1) Renamed 'otw' slot to 'igHosts'.  Use this slot name to define a list,
+         of one or more IG host interfaces.  Note, that a list must be provided!
+      2) Slot 'ioHandler' used to be polymorphic in the sense that it could 
+         accept a single I/O handler, or a list. This behavior has changed, it
+         now allows for one handler to manage the flow of data between a single
+         input/output data buffer and an unlimited number of real or 'mock'
+         signal generating devices.
+
+--------------------------------------------------------------------------------
