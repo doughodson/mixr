@@ -128,13 +128,13 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Interface: C++ does not officially have an explicit 'interface' class type or
   keyword like Java. It does support an equivalent concept as a class entirely
   defined by pure virtual methods. This type of class defines no implementation,
-  no state, no algorithm, nothing, zero - well, function signatures.  Most importantly,
-  this class type isn't necessarily used as a foundation for a class hierarchy -
-  in fact, quite the oppose, it's useful because it defines a set of functionality
-  (i.e., methods names / function signatures) that maybe implemented by classes,
-  potentially in completely different hierarchies.  Within MIXR, we don't have any
-  interfaces defined in this sense.  Of course, MIXR classes are mostly organized
-  in a single hierarchy rooted by Object.
+  no state, no algorithm, nothing, zero, except for, function signatures.  Most
+  importantly, this class type isn't necessarily used as a foundation for a class
+  hierarchy - in fact, quite the oppose, it's useful because it defines a set of
+  functionality (i.e., methods names / function signatures) that must be implemented
+  by classes, potentially in completely different hierarchies.  Within MIXR,
+  we don't have any interfaces defined in this sense.  Of course, MIXR classes
+  are mostly organized in a single hierarchy rooted by Object.
 
   Abstract: C++ does officially acknowledge the concept of an abstract class.
   It's simply a class that is not completely defined, therefore object instances
@@ -165,8 +165,11 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Abstract classes do in fact define a public interface - they just add detail
   beyond what a typical Interface class provides.  They are the foundation for
-  class hierarchies.  Given that, within MIXR, we are striving to present more
-  non-virtual methods within class public interfaces.
+  class hierarchies, in other words, they define the semantics of what is what,
+  whereas, Interfaces define, what can be viewed, as the syntax. Given that,
+  within MIXR, we are striving to reduce the number of public virtual methods
+  within classes.  Abstract methods concern themselves with defining the
+  semantics of what class are / what they do.
 
   From a naming perspective, we are starting to prefix abstract classes with
   the word 'Abstract' to indicate it's role within a hierarchy.
