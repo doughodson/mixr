@@ -98,8 +98,8 @@ AbstractWeapon::AbstractWeapon()
 
    static base::String generic("GenericWeapon");
    setType(&generic);
-   setMode(INACTIVE);
-   setInitMode(INACTIVE);
+   setMode(Mode::INACTIVE);
+   setInitMode(Mode::INACTIVE);
 
    initData();
 }
@@ -178,14 +178,14 @@ void AbstractWeapon::reset()
    AbstractWeapon* flyout{getFlyoutWeapon()};
 
    // If there's a flyout weapon still in PRE_RELEASE then reset it
-   if (flyout != nullptr && flyout != this && flyout->isMode(PRE_RELEASE) ) {
+   if (flyout != nullptr && flyout != this && flyout->isMode(Mode::PRE_RELEASE) ) {
       flyout->reset();
    }
 
    // If this is flyout weapon then set the mode to DELETE_REQUEST to
    // remove us from the player list.
    if (flyout == this) {
-      setMode(DELETE_REQUEST);
+      setMode(Mode::DELETE_REQUEST);
    }
 
    hung       = false;
@@ -231,9 +231,9 @@ void AbstractWeapon::updateTC(const double dt)
    // Phase #0 -- Transition from pre-release to active at the end of dynamics
    // phase (after the call to BaseClass), so that our position, which was
    // relative to our launch vehicle, has been computed.
-   if (ph == 0 && isMode(PRE_RELEASE) && !isReleaseHold() ) {
+   if (ph == 0 && isMode(Mode::PRE_RELEASE) && !isReleaseHold() ) {
       atReleaseInit();
-      setMode(ACTIVE);
+      setMode(Mode::ACTIVE);
    }
 
    // Phase #3
@@ -243,7 +243,7 @@ void AbstractWeapon::updateTC(const double dt)
       if (posTrkEnb) positionTracking();
 
       // Update our Time-Of-Flight (TOF)
-      if (isMode(ACTIVE)) updateTOF(dt * 4.0);
+      if (isMode(Mode::ACTIVE)) updateTOF(dt * 4.0);
    }
 }
 
@@ -252,7 +252,7 @@ void AbstractWeapon::updateTC(const double dt)
 //------------------------------------------------------------------------------
 void AbstractWeapon::dynamics(const double dt)
 {
-   if (isMode(PRE_RELEASE)) {
+   if (isMode(Mode::PRE_RELEASE)) {
       // Weapon is on the same side as the launcher
       setSide( getLaunchVehicle()->getSide() );
 
@@ -349,18 +349,18 @@ bool AbstractWeapon::onJettisonEvent()
 
       // If there is a flyout weapon that's still in PRE_RELEASE mode
       // then call its jettison event handler.
-      if (flyout != nullptr && flyout != this && flyout->isMode(PRE_RELEASE) ) {
+      if (flyout != nullptr && flyout != this && flyout->isMode(Mode::PRE_RELEASE) ) {
          flyout->onJettisonEvent();
       }
 
       // If this is the flyout weapon then set our mode to DELETE_REQUEST
       if (flyout == this) {
-         setMode(DELETE_REQUEST);
+         setMode(Mode::DELETE_REQUEST);
       }
 
       // If this is initial weapon then set our mode to LAUNCHED
       if (initWpn == this) {
-         initWpn->setMode(Player::LAUNCHED);
+         initWpn->setMode(Player::Mode::LAUNCHED);
       }
 
       // And set the 'jettisoned' and 'released' flags
@@ -403,7 +403,7 @@ void AbstractWeapon::checkDetonationEffect()
          while (item != nullptr && !finished) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             Player* p{static_cast<Player*>(pair->object())};
-            finished = p->isNetworkedPlayer();  // local only
+            finished = p->isProxyPlayer();  // local only
             if (!finished && (p != this) ) {
                base::Vec3d dpos{p->getPosition() - getPosition()};
                const double rng{dpos.length()};
@@ -431,7 +431,7 @@ bool AbstractWeapon::collisionNotification(Player* const other)
       ok = killedNotification(other);
 
       // We've detonated!
-      setMode(DETONATED);
+      setMode(Mode::DETONATED);
       setDetonationResults(DETONATE_ENTITY_IMPACT);
 
       // Compute detonation location relative to the other ship
@@ -464,7 +464,7 @@ bool AbstractWeapon::crashNotification()
 
       ok = killedNotification();
       setDetonationResults(DETONATE_GROUND_IMPACT);
-      setMode(DETONATED);
+      setMode(Mode::DETONATED);
 
       // ---
       // Compute location of detonation relative to target
@@ -524,7 +524,7 @@ AbstractWeapon* AbstractWeapon::prerelease()
       flyout->setSide( lplayer->getSide() );
 
       // and set the weapon prerelease
-      flyout->setMode(PRE_RELEASE);
+      flyout->setMode(Mode::PRE_RELEASE);
       flyout->setReleased(false);
       flyout->setReleaseHold(true);
 
@@ -586,7 +586,7 @@ AbstractWeapon* AbstractWeapon::release()
 
                // Set the initial weapon's mode flags to fully released.
                AbstractWeapon* initWpn{getInitialWeapon()};
-               initWpn->setMode(Player::LAUNCHED);
+               initWpn->setMode(Player::Mode::LAUNCHED);
                initWpn->setReleased(true);
                initWpn->setReleaseHold(false);
                initWpn->unref();
@@ -612,14 +612,14 @@ AbstractWeapon* AbstractWeapon::release()
                flyout->setSide( lplayer->getSide() );
 
                // and set the weapon prerelease
-               flyout->setMode(PRE_RELEASE);
+               flyout->setMode(Mode::PRE_RELEASE);
                flyout->setReleased(true);
                flyout->setReleaseHold(false);
 
                // Set our mode flags to fully released.
                setFlyoutWeapon(flyout);
                setInitialWeapon(this);
-               setMode(Player::LAUNCHED);
+               setMode(Player::Mode::LAUNCHED);
                setReleased(true);
                setReleaseHold(false);
 
@@ -694,14 +694,14 @@ void AbstractWeapon::weaponDynamics(const double)
 void AbstractWeapon::updateTOF(const double dt)
 {
    // As long as we're active ...
-   if (isMode(ACTIVE)) {
+   if (isMode(Mode::ACTIVE)) {
 
       // update time of flight,
       setTOF( getTOF() + dt );
 
       // and check for the end of the flight
       if (getTOF() >= getMaxTOF()) {
-         setMode(DETONATED);
+         setMode(Mode::DETONATED);
          setDetonationResults( DETONATE_DETONATION );
 
          BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )

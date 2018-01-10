@@ -202,6 +202,9 @@ public:
     interop::Nib* createNewOutputNib(models::Player* const player) override;
     interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
 
+   void testOutputEntityTypes(const int) final  {};           // Test rig for outgoing quick lookup
+   void testInputEntityTypes(const int) final   {};           // Test rig for incoming quick lookup
+
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
     virtual bool receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& theParameters);

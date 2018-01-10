@@ -9,6 +9,7 @@
 #include <cctype>
 #include <cstring>
 #include <iostream>
+#include <string>
 
 namespace mixr {
 namespace base {
@@ -46,6 +47,7 @@ public:
     bool isEmpty() const;                          // Returns true if this string is empty (null).
 
     const char* getString() const;                 // Returns a pointer to the text string.
+    const std::string getStdString() const;        // Returns a copy of string as a std::string
     char* getCopyString() const;                   // Returns a copy of the text string.
     char getChar(const unsigned int index) const;  // Gets a specific character
 
@@ -155,6 +157,10 @@ inline const char* String::getString() const
     return str;
 }
 
+inline const std::string String::getStdString() const
+{
+   return std::string(str);
+}
 
 //------------------------------------------------------------------------------
 // getCopyString() -- returns a copy of the string

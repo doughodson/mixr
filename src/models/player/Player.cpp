@@ -468,19 +468,19 @@ void Player::reset()
 
       if (initPosFlg) {
          setPosition(initPosVec[INORTH], initPosVec[IEAST], -initAlt);
-         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+         if (useCoordSys == CoordSys::NONE) useCoordSys = CoordSys::LOCAL;
       } else if (initLatLonFlg) {
          setPositionLLA(initLat, initLon, initAlt);
-         if (useCoordSys == CS_NONE) useCoordSys = CS_GEOD;
+         if (useCoordSys == CoordSys::NONE) useCoordSys = CoordSys::GEOD;
       } else if (initGeoPosFlg) {
          setGeocPosition(initGeoPosVec);
-         if (useCoordSys == CS_NONE) useCoordSys = CS_WORLD;
+         if (useCoordSys == CoordSys::NONE) useCoordSys = CoordSys::WORLD;
       } else {
          setPosition(0,0,-initAlt,false);
-         if (useCoordSys == CS_NONE) useCoordSys = CS_LOCAL;
+         if (useCoordSys == CoordSys::NONE) useCoordSys = CoordSys::LOCAL;
       }
 
-      useCoordSysN1 = CS_NONE;
+      useCoordSysN1 = CoordSys::NONE;
 
       // ---
       // Reset Euler angles and rates
@@ -533,7 +533,7 @@ void Player::updateTC(const double dt0)
       loadSysPtrs = false;
    }
 
-   if (mode == ACTIVE || mode == PRE_RELEASE) {
+   if (mode == Mode::ACTIVE || mode == Mode::PRE_RELEASE) {
 
       // ---
       // Time-out requests for reflections of RF emissions hitting us
@@ -618,7 +618,7 @@ void Player::updateTC(const double dt0)
 //------------------------------------------------------------------------------
 void Player::updateData(const double dt)
 {
-   if (mode == ACTIVE || mode == PRE_RELEASE) {
+   if (mode == Mode::ACTIVE || mode == Mode::PRE_RELEASE) {
 
       // Update signatures
       if (signature != nullptr) signature->updateData(dt);
@@ -1787,10 +1787,10 @@ bool Player::setAltitude(const double alt, const bool slaved)
    bool saved{posSlaved};
 
    bool ok{};
-   if (useCoordSys == CS_LOCAL) {
+   if (useCoordSys == CoordSys::LOCAL) {
       // Set altitude along with the local north and east gaming area coordinates
       ok = setPosition(posVecNED[INORTH], posVecNED[IEAST], -alt, slaved);
-   } else if (useCoordSys == CS_GEOD || useCoordSys == CS_WORLD) {
+   } else if (useCoordSys == CoordSys::GEOD || useCoordSys == CoordSys::WORLD) {
       // Set altitude with the geodetic coordinates
       ok = setPositionLLA(latitude, longitude, alt, false);
    }
@@ -2391,7 +2391,7 @@ bool Player::killedNotification(Player* const p)
       if (killRemoval && isLocalPlayer()) {
 
          justKilled = true;
-         setMode(KILLED);
+         setMode(Mode::KILLED);
 
          if (p != nullptr) killedBy = p->getID();
          else killedBy = 0;
@@ -2433,7 +2433,7 @@ bool Player::collisionNotification(Player* const p)
       justKilled = true;
       if (p != nullptr) killedBy = p->getID();
       else killedBy = 0;
-      setMode(CRASHED);
+      setMode(Mode::CRASHED);
    }
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
@@ -2471,7 +2471,7 @@ bool Player::crashNotification()
       // Set our status
       justKilled = true;
       killedBy = 0;
-      setMode(CRASHED);
+      setMode(Mode::CRASHED);
    }
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
@@ -2556,7 +2556,7 @@ bool Player::onTgtStepEvent()
 bool Player::onRfEmissionEventPlayer(Emission* const em)
 {
    // Player must be active ...
-   if (isNotMode(ACTIVE)) return false;
+   if (isNotMode(Mode::ACTIVE)) return false;
 
    // ---
    //  1) Compute the Line-Of-Sight vectors back to the transmitter (los0)
@@ -2701,7 +2701,7 @@ bool Player::onReflectionsCancel(const base::Component* const p)
 bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 {
    // Player must be active and have an IR signature ...
-   if (isNotMode(ACTIVE) || irSignature == nullptr) {
+   if (isNotMode(Mode::ACTIVE) || irSignature == nullptr) {
       msg->clearIrSignature();
       return true;
    }
@@ -2858,7 +2858,7 @@ void Player::positionUpdate(const double dt)
       // ---
       // Update using local NED coordinates on the simulation's gaming area
       // ---
-      if (useCoordSys == CS_LOCAL) {
+      if (useCoordSys == CoordSys::LOCAL) {
          //std::cout << "Local: ";
          //std::cout << "( " << posVecNED[INORTH] << ", " << posVecNED[IEAST] << ", " << posVecNED[IDOWN] << " ); ";
          //std::cout << "( " << latitude << ", " << longitude << ", " << altitude << " ); ";
@@ -2903,7 +2903,7 @@ void Player::positionUpdate(const double dt)
       // ---
       // Update using geodetic latitude, longitude and height above terrain
       // ---
-      if (useCoordSys == CS_GEOD) {
+      if (useCoordSys == CoordSys::GEOD) {
          //std::cout << "Geod: ";
          //std::cout << "( " << posVecNED[INORTH] << ", " << posVecNED[IEAST] << ", " << posVecNED[IDOWN] << " ); ";
          //std::cout << "( " << latitude << ", " << longitude << ", " << altitude << " ); ";
@@ -2985,7 +2985,7 @@ void Player::positionUpdate(const double dt)
       // ---
       // Update using world (ECEF) coordinates
       // ---
-      if (useCoordSys == CS_WORLD) {
+      if (useCoordSys == CoordSys::WORLD) {
             //std::cout << "World: ";
             //std::cout << "( " << posVecNED[INORTH] << ", " << posVecNED[IEAST] << ", " << posVecNED[IDOWN] << " ); ";
             //std::cout << "( " << latitude << ", " << longitude << ", " << altitude << " ); ";
@@ -3083,7 +3083,7 @@ void Player::positionUpdate(const double dt)
 //------------------------------------------------------------------------------
 void Player::deadReckonPosition(const double dt)
 {
-   if ( !isNetworkedPlayer() ) return;
+   if ( !isProxyPlayer() ) return;
 
    if (getNib() != nullptr) {
       nib->ref();
@@ -3848,9 +3848,9 @@ bool Player::setSlotInitMode(base::String* const msg)
 bool Player::setSlotUseCoordSys(base::String* const msg)
 {
    bool ok{};
-   if (*msg == "local" || *msg == "LOCAL") { setUseCoordSys(CS_LOCAL); ok = true; }
-   else if (*msg == "geod" || *msg == "GEOD") { setUseCoordSys(CS_GEOD); ok = true; }
-   else if (*msg == "world" || *msg == "WORLD") { setUseCoordSys(CS_WORLD); ok = true; }
+   if (*msg == "local" || *msg == "LOCAL") { setUseCoordSys(CoordSys::LOCAL); ok = true; }
+   else if (*msg == "geod" || *msg == "GEOD") { setUseCoordSys(CoordSys::GEOD); ok = true; }
+   else if (*msg == "world" || *msg == "WORLD") { setUseCoordSys(CoordSys::WORLD); ok = true; }
    return ok;
 }
 

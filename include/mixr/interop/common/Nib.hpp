@@ -7,6 +7,7 @@
 #include "mixr/interop/common/NetIO.hpp"
 #include "mixr/models/player/Player.hpp"
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace models { class Missile; }
@@ -69,14 +70,14 @@ public:
    // The player, its name and ID
    models::Player* getPlayer()                        { return pPlayer; }
    unsigned short getPlayerID() const override        { return playerID; }
-   const char* getPlayerName() const                  { return pname; }
+   const std::string& getPlayerName() const           { return pname; }
 
    virtual bool setPlayer(models::Player* const);
    virtual void setPlayerID(const unsigned short);
-   virtual void setPlayerName(const char*);
+   virtual void setPlayerName(const std::string& x)   { pname = x; }
 
    const base::String* getFederateName() const override;          // Federate name as String
-   virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
+   virtual bool setFederateName(const base::String* const);       // Sets our federate name
 
    // Mode
    bool isMode(const models::Player::Mode m) const            { return mode == m; }
@@ -281,27 +282,26 @@ private:
    base::safe_ptr<models::Player> pPlayer;          // Our player
    base::safe_ptr<NetIO> pNetIO;                    // Our Network
    bool checked {};                                 // NIB was checked
-   unsigned short playerID {};                      // Player ID
+   unsigned short playerID{};                       // Player ID
 
    // Type mapper and type checked flags
    base::safe_ptr<const Ntm> ntm;      // Type mapper
-   bool entityTypeChecked {};          // Entity type has been checked
+   bool entityTypeChecked{};           // Entity type has been checked
 
-   // Player data
-   static const unsigned int PNAME_BUF_SIZE = 64;
-   char        pname[PNAME_BUF_SIZE] {};  // Name
+   // player data
+   std::string pname;                     // Name
    models::Player::Side side;             // Side
    models::Player::Mode mode;             // NIB Mode
-   bool        timeoutEnbFlg {true};      // NIB can timeout flag
-   double      damage {};                 // Damage state from no damage(0.0) to destroyed (1.0)
-   double      smoking {};                // Smoke state from no smoke (0.0) to maximum (1.0)
-   double      flames {};                 // Flames state from no flames (0.0) to maximum (1.0)
-   unsigned int camouflage {};            // Camouflage type (0 is none)
-   bool        detMsgSent {};             // True if detonation message was sent
+   bool        timeoutEnbFlg{true};       // NIB can timeout flag
+   double      damage{};                  // Damage state from no damage(0.0) to destroyed (1.0)
+   double      smoking{};                 // Smoke state from no smoke (0.0) to maximum (1.0)
+   double      flames{};                  // Flames state from no flames (0.0) to maximum (1.0)
+   unsigned int camouflage{};             // Camouflage type (0 is none)
+   bool        detMsgSent{};              // True if detonation message was sent
 
    // Times
-   double execTime {};                 // Exec time of last update (seconds)
-   double utcTime {};                  // UTC time of last update (seconds)
+   double execTime{};                  // Exec time of last update (seconds)
+   double utcTime{};                   // UTC time of last update (seconds)
 
    // Dead Reckoning (DR) data
    unsigned char drNum {STATIC_DRM};   // Dead-Reckoning algorithm (see enum DeadReckoning)

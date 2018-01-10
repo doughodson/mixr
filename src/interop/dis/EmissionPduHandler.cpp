@@ -337,10 +337,10 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             rp->reset();
             ap->reset();
 
-            // Give the antenna list to the IPlayer
+            // Give the antenna list to the proxy player
             {
                // First get the (top level) container gimbal
-               models::Gimbal* gimbal = player->getGimbal();
+               models::Gimbal* gimbal{player->getGimbal()};
                if (gimbal == nullptr) {
                   // Create the container gimbal!
                   gimbal = new models::Gimbal();
@@ -357,10 +357,10 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                pair->unref(); // top level gimbal owns it
             }
 
-            // Give the sensor list to the IPlayer
+            // Give the sensor list to the proxy player
             {
                // First get the (top level) sensor manager
-               models::RfSensor* sm = player->getSensor();
+               models::RfSensor* sm{player->getSensor()};
                if (sm == nullptr) {
                   // Create the sensor manager
                   sm = new models::SensorMgr();
@@ -395,13 +395,13 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       }
 
       // ---
-      // Update the IPlayer's sensor/antenna structures with the PDU data
+      // Update the proxy players sensor/antenna structures with the PDU data
       // ---
-      models::RfSensor* rfSys = getSensor();
+      models::RfSensor* rfSys{getSensor()};
       if (rfSys != nullptr && !noTemplatesFound) {
-         models::Antenna* antenna = rfSys->getAntenna();
+         models::Antenna* antenna{rfSys->getAntenna()};
 
-         // reset the timeout clock for this Iplayer's emissions
+         // reset the timeout clock for this proxy players emissions
          setEmPduExecTime(player->getWorldModel()->getExecTimeSec());
 
          rfSys->setFrequency( bd->parameterData.frequency );
@@ -423,8 +423,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( models::ScanGimbal::CIRCULAR_SCAN );
                antenna->setCmdRate( (24.0f * static_cast<double>(base::angle::D2RCC)), 0 );  // default rates
-         }
-         else {
+         } else {
             // Standard search volume parameters
             antenna->setRefAzimuth( bd->beamData.beamAzimuthCenter );
             antenna->setRefElevation( bd->beamData.beamElevationCenter );
@@ -432,11 +431,10 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             antenna->setSearchVolume( bd->beamData.beamAzimuthSweep * 2.0f, bd->beamData.beamElevationSweep * 2.0f);
          }
 
-         // IPlayer's transmit (when they're active) but don't need to receive
+         // proxy player's transmit (when they're active) but don't need to receive
          if (pdu->header.protocolVersion >= NetIO::VERSION_7) {
             rfSys->setTransmitterEnableFlag((bd->beamStatus == BS_ACTIVE));
-         }
-         else {
+         } else {
             rfSys->setTransmitterEnableFlag(true);
          }
          rfSys->setReceiverEnabledFlag(false);

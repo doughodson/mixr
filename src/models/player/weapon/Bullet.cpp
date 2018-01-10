@@ -71,7 +71,7 @@ void Bullet::reset()
 //------------------------------------------------------------------------------
 void Bullet::weaponDynamics(const double dt)
 {
-   if (isMode(ACTIVE)) {
+   if (isMode(Mode::ACTIVE)) {
       updateBurstTrajectories(dt);
       checkForTargetHit();
 
@@ -100,7 +100,7 @@ void Bullet::weaponDynamics(const double dt)
 void Bullet::updateTOF(const double)
 {
    // As long as we're active ...
-   if (isMode(ACTIVE)) {
+   if (isMode(Mode::ACTIVE)) {
 
       // count the number of active bursts and remove aged bullet bursts.
       int n{};
@@ -118,7 +118,7 @@ void Bullet::updateTOF(const double)
 
       // If we have no active bursts .. we've detonated (so to speak)
       if (n == 0) {
-         setMode(DETONATED);
+         setMode(Mode::DETONATED);
          // final detonation results (hit or miss) are located with each burst ...
          if (nhits > 0) {
             setDetonationResults( DETONATE_ENTITY_IMPACT );

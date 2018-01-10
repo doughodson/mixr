@@ -128,8 +128,8 @@ void MergingIrSensor::mergeIrReturns()
 
                     // find current ratio.
                     if (isMessageEnabled(MSG_DEBUG)) {
-                       std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()->getString()
-                                 << " into target " <<currentMsg->getTarget()->getName()->getString()  << std::endl;
+                       std::cout << "IrSensor: merging target " <<  nextMsg->getTarget()->getName()
+                                 << " into target " <<currentMsg->getTarget()->getName()  << std::endl;
                     }
 
                     if (currentMsg->getSignalToNoiseRatio() >

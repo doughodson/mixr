@@ -56,7 +56,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    //std::cout << "Net kill(2) tPlayer = " << tPlayer << std::endl;
 
    // ---
-   // 2) Find the firing player and munitions (networked) IPlayers
+   // 2) Find the firing player and munitions proxy players
    // ---
    models::Player* fPlayer {};
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
@@ -111,14 +111,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          arates);
 
       // Set the NIB's mode to DETONATED
-      mNib->setMode(models::Player::DETONATED);
+      mNib->setMode(models::Player::Mode::DETONATED);
 
       // Find the munition player and set its mode, location and target position
       mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
       if (mPlayer != nullptr) {
 
          // Munition's mode
-         mPlayer->setMode(models::Player::DETONATED);
+         mPlayer->setMode(models::Player::Mode::DETONATED);
 
          // munition's position, velocity and acceleration at the time of the detonation
          mPlayer->setGeocPosition(geocPos);

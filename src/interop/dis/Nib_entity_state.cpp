@@ -203,9 +203,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Active or inactive
    if ((pdu->appearance & DEACTIVATE_BIT) != 0) {
       // Player has just gone inactive
-      setMode(models::Player::INACTIVE);
+      setMode(models::Player::Mode::INACTIVE);
    } else {
-      setMode(models::Player::ACTIVE);
+      setMode(models::Player::Mode::ACTIVE);
    }
 
    // Process the articulated parameters and attached parts
@@ -233,7 +233,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
          // ---
          // Articulated Parts
          // Note: We're not worried about the 'change' count at this time.  We just
-         // slave the IPlayer to the value in the articulated parameter.
+         // slave the proxy player to the value in the articulated parameter.
          // ---
          if (ap->parameterTypeDesignator == VpArticulatedPart::ARTICULATED_PART) {
 
@@ -273,7 +273,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
          // ---
          // Attached Parts (for now: only weapons on stations 1 .. MAX_AMSL)
-         // Note: we'll need to create a StoresMgr for this IPlayer and
+         // Note: we'll need to create a StoresMgr for this proxy player and
          // we'll need to lookup the weapon using the list of incoming
          // entity types and add it to the stores manager's stores list.
          // ---
@@ -351,13 +351,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                      }
 
                      // If we have the weapon then set it INACTIVE (not launched)
-                     if (wpn != nullptr) wpn->setMode(models::Player::INACTIVE);
+                     if (wpn != nullptr) wpn->setMode(models::Player::Mode::INACTIVE);
 
                   }
 
                   // No weapon attached, so set our weapon (if any) to launched!
                   else if (wpn != nullptr) {
-                     wpn->setMode(models::Player::LAUNCHED);
+                     wpn->setMode(models::Player::Mode::LAUNCHED);
                   }
 
                } // end of SMS != 0 check
@@ -543,7 +543,7 @@ bool Nib::entityStateManager(const double curExecTime)
 
          // Deactive this entity?
          {
-            if (isMode(models::Player::DELETE_REQUEST) || player->isDead() )
+            if (isMode(models::Player::Mode::DELETE_REQUEST) || player->isDead() )
                pdu->appearance |= DEACTIVATE_BIT;
          }
 
@@ -680,8 +680,8 @@ bool Nib::entityStateManager(const double curExecTime)
       // Entity marking (EntityMarking)
       // ---
       {
-         const char* const pName {getPlayerName()};
-         std::size_t nameLen {std::strlen(pName)};
+         const char* const pName{getPlayerName().c_str()};
+         std::size_t nameLen{std::strlen(pName)};
          for (unsigned int i = 0; i < EntityMarking::BUFF_SIZE; i++) {
             if (i < nameLen) {
                pdu->entityMarking.marking[i] = pName[i];
@@ -834,7 +834,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
             ap->changeIndicator = static_cast<unsigned char>(getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number
-            if (msl->isMode(models::Player::LAUNCHED)) {
+            if (msl->isMode(models::Player::Mode::LAUNCHED)) {
                ap->parameterValue.entityType.kind = 0;
                ap->parameterValue.entityType.domain = 0;
                ap->parameterValue.entityType.country = 0;

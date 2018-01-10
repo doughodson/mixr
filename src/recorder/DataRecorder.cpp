@@ -20,6 +20,7 @@
 #include "mixr/base/util/math_utils.hpp"
 
 #include <cstdio>
+#include <string>
 
 namespace mixr {
 namespace recorder {
@@ -751,7 +752,7 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
    msg->set_id( REID_TRACK_DATA );
 
    // Track Data message
-   pb::TrackDataMsg* trackDataMsg {msg->mutable_track_data_msg()};
+   pb::TrackDataMsg* trackDataMsg{msg->mutable_track_data_msg()};
 
    // player ID and state
    genPlayerId( trackDataMsg->mutable_player_id(), player );
@@ -764,7 +765,7 @@ bool DataRecorder::recordTrackData(const base::Object* objs[4], const double val
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
    // track player
-   const models::Player* trkPlayer {trackData->getTarget()};
+   const models::Player* trkPlayer{trackData->getTarget()};
    if (trkPlayer != nullptr) {
       genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
@@ -795,21 +796,17 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
       // Check for valid player pointer
       if (player != nullptr) {
 
-         // Player Id
+         // player id and name
          id->set_id( player->getID() );
-
-         // Player name
-         const base::String* name {player->getName()};
-         if (name != nullptr) id->set_name( *name );
+         id->set_name(player->getName().c_str());
 
          // Networked player federation name
-         if ( player->isNetworkedPlayer() ) {
+         if ( player->isProxyPlayer() ) {
             const simulation::AbstractNib* nib {player->getNib()};
             const base::String* fedName {nib->getFederateName()};
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
-      }
-      else {
+      } else {
          // We don't have a player, set default values
          id->set_id(0);
       }
@@ -844,8 +841,7 @@ void DataRecorder::genPlayerState(pb::PlayerState* const state, const models::Pl
 
          // Damage
          state->set_damage(player->getDamage());
-      }
-      else {
+      } else {
          state->mutable_pos()->set_x(0);
          state->mutable_pos()->set_y(0);
          state->mutable_pos()->set_z(0);

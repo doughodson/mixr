@@ -333,7 +333,7 @@ bool CigiHost::updateOwnshipModel()
    bool active{};
    const auto av = dynamic_cast<const models::Player*>(getOwnship());
    if (av != nullptr) {
-      active = av->isActive() || av->isMode(models::Player::PRE_RELEASE);
+      active = av->isActive() || av->isMode(models::Player::Mode::PRE_RELEASE);
    }
 
    if (active && av != nullptr && getOwnshipEntityControlPacket(iw) != nullptr) {

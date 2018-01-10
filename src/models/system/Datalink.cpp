@@ -344,7 +344,7 @@ bool Datalink::sendMessage(base::Object* const msg)
 
                if (player->isLocalPlayer()) {
                   // Send to active, local players only (and not to ourself)
-                     if ((player->isActive() || player->isMode(Player::PRE_RELEASE)) && player != getOwnship() ) {
+                     if ((player->isActive() || player->isMode(Player::Mode::PRE_RELEASE)) && player != getOwnship() ) {
                      player->event(DATALINK_MESSAGE, msg);
                   }
                   playerItem = playerItem->getNext();

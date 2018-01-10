@@ -439,7 +439,7 @@ void NetIO::processInputList()
 {
    for (unsigned int idx = 0; idx < getInputListSize(); idx++) {
       Nib* nib {static_cast<Nib*>(getInputNib(idx))};
-      if (nib != nullptr) nib->updateTheIPlayer();
+      if (nib != nullptr) nib->updateProxyPlayer();
    }
 
 //   std::cout << "n = " << getInputListSize();      // #DPG#
@@ -576,7 +576,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
       const base::String* fName {getFederateName()};
       unsigned short site {getSiteID()};
       unsigned short app  {getApplicationID()};
-      if (player->isNetworkedPlayer()) {
+      if (player->isProxyPlayer()) {
          const auto pNib = dynamic_cast<interop::Nib*>(player->getNib());
          fName = pNib->getFederateName();
          // Mapping another federate name to DIS site and application IDs.
@@ -639,11 +639,11 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
     // Or if we have no emission handlers
     if (nEmissionHandlers == 0) return;
 
-    // Find the NIB and IPlayer for the emitting player (they must exist or we're too early)
+    // Find the NIB and proxy player for the emitting player (they must exist or we're too early)
     Nib* eNib {findDisNib(ePlayerId, eSiteId, eApplicationId, INPUT_NIB)};
     if (eNib == nullptr) return;
 
-    // Pass on to the IPlayer's NIB for processing
+    // Pass on to the proxy player's NIB for processing
     eNib->processElectromagneticEmissionPDU(pdu);
 }
 
@@ -1736,12 +1736,12 @@ bool NetIO::setSlotExerciseID(const base::Number* const num)
 //------------------------------------------------------------------------------
 // Test quick lookup of incoming entity types
 //------------------------------------------------------------------------------
-void NetIO::testInputEntityTypes(const unsigned int n)
+void NetIO::testInputEntityTypes(const int n)
 {
-   const NtmInputNode* root {getRootNtmInputNode()};
-   const unsigned int maxTypes {getNumInputEntityTypes()};
+   const NtmInputNode* root{getRootNtmInputNode()};
+   const int maxTypes{getNumInputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (unsigned int i = 0; i < n; i++) {
+      for (int i = 0; i < n; i++) {
          int r {std::rand()};
          double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
          int idx {base::nint(nr * (maxTypes - 1))};
@@ -1796,16 +1796,16 @@ void NetIO::testInputEntityTypes(const unsigned int n)
 // draw of a Ntm from the main NTM list, getting and cloning the template
 // player, optionally modifying the type string, and doing a lookup.
 //------------------------------------------------------------------------------
-void NetIO::testOutputEntityTypes(const unsigned int n)
+void NetIO::testOutputEntityTypes(const int n)
 {
-   const NtmOutputNode* root {getRootNtmOutputNode()};
-   const unsigned int maxTypes {getNumOutputEntityTypes()};
+   const NtmOutputNode* root{getRootNtmOutputNode()};
+   const int maxTypes{getNumOutputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (unsigned int i = 0; i < n; i++) {
-         int r {std::rand()};
-         double nr {static_cast<double>(r) / static_cast<double>(RAND_MAX)};
-         int idx {base::nint(nr * (maxTypes - 1))};
-         const Ntm* origNtm {static_cast<const Ntm*>(getOutputEntityTypes(idx))};
+      for (int i = 0; i < n; i++) {
+         int r{std::rand()};
+         double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
+         int idx{base::nint(nr * (maxTypes - 1))};
+         const Ntm* origNtm{static_cast<const Ntm*>(getOutputEntityTypes(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
          std::cout << "; origNtm= " << origNtm;
@@ -1822,7 +1822,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                base::utStrcpy(cbuff, 64, origType->getString());
 
 #if 0 /* optionally increment the last character to look for generic matches */
-               std::size_t ll = std::strlen(cbuff);
+               std::size_t ll{std::strlen(cbuff)};
                if (ll > 1) {
                   cbuff[ll-1]++;
                }
@@ -1850,8 +1850,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
             }
             if (origNtm == foundNtm) {
                std::cout << "; Match!!";
-            }
-            else {
+            } else {
                std::cout << "; NO match!!";
             }
          }
@@ -1873,7 +1872,7 @@ EMPTY_SLOTTABLE(NtmInputNode)
 //------------------------------------------------------------------------------
 interop::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
-   return new dis::NtmInputNode(dis::NtmInputNode::ROOT_LVL,0); // root level
+   return new dis::NtmInputNode(dis::NtmInputNode::ROOT_LVL, 0); // root level
 }
 
 //------------------------------------------------------------------------------
@@ -1938,7 +1937,7 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* const nib) const
 {
-   const interop::Ntm* result {};
+   const interop::Ntm* result{};
 
    const auto disNib = dynamic_cast<const dis::Nib*>( nib );
    if (disNib != nullptr) {
@@ -1968,13 +1967,13 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
       const unsigned char  extra
    ) const
 {
-   const Ntm* result {};
+   const Ntm* result{};
 
    {
       // Yes we have the proper type of NIB ...
 
       // Make sure that the NIB's code for this level matches our code
-      bool match {true};
+      bool match{true};
       switch (level) {
          case ROOT_LVL :         match = true;                   break; // the 'root' node always matches
          case KIND_LVL :         match = (code == kind);         break;
@@ -1991,7 +1990,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // First, if we're not the last 'extra' level then search
          // our subnodes to see if they can find a match
          if (level < EXTRA_LVL) {
-            const base::List::Item* item {subnodeList->getFirstItem()};
+            const base::List::Item* item{subnodeList->getFirstItem()};
             while (item != nullptr && result == nullptr) {
                const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);

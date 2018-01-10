@@ -294,10 +294,10 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         if (mNib != nullptr) {
             const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
             if (mPlayer != nullptr) {
-                mPlayer->setMode(models::Player::DETONATED);
+                mPlayer->setMode(models::Player::Mode::DETONATED);
                 mPlayer->setDetonationResults(detonationResult);
             }
-            mNib->setMode(models::Player::DETONATED);
+            mNib->setMode(models::Player::Mode::DETONATED);
         }
     }
 

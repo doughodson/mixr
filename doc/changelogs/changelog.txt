@@ -5,6 +5,37 @@ Changes since v18.01
 --------------------------------------------------------------------------------
 General framework-wide changes/improvements/trends/philosophy/goals
 
+- Topic: Consistency in terminology with regard to represented Players discovered,
+         created and/or managed by an interoperability interface.
+
+  Within MIXR, different terms associated with interoperability discovered,
+  created and/or managed players had been used.  For example, in some parts
+  of the code, the term 'remote' player was used, in others, the terms 'networked',
+  'interoperability' and even 'surrogate' can be found. To further complicate
+  matters, the term 'ghost' is used in other simulation packages.
+  Each use of these terms implies the same thing; a stand-in representation of a player being updated or managed by a different simulation (most likely executed
+  on a different computer within a distributed environment).
+
+  To improve the consistency of terminology throughout this code base, we have
+  shifted references to this kind of stand-in representation, to a 'proxy' (or
+  ProxyPlayer in code).  This proxy probably is being updated and/or managed,
+  etc., by a 'remote' simulation, that is connected via a 'networked' interface,
+  sharing data through an 'interoperability' protocol or mechanism, but in the end,
+  it is a stand-in representation - not wholly or necessarily being updated or
+  managed by this simulation process. We feel the term 'proxy' more fairly conveys
+  what it is, as opposed to how it is comes about or where it comes from.
+
+  We especially want to avoid using the term 'interoperability' player (or 'IPlayer'
+  as abbreviated in code), as the 'I' is often stylistically, in code, used to
+  imply interface, or more specifically an interface class (for player in this case).
+
+  Moving to a consistent and more specific terminology, also communicates that a
+  degree of uncertainty or difference (due to inconsistency of state and/or
+  representation) between locally managed representations and stand-ins might exist.
+  For example, from an analysis point of view, the outcomes (or results) from
+  interactions between locally managed players and proxy players might be
+  different than outcomes that do not include induced consistency or representation
+  differences.
 
 --------------------------------------------------------------------------------
 
@@ -70,10 +101,56 @@ Models & general capabilities oriented libraries
 --------------------------------------------------------------------------------
 models library (mixr_models)
 
+   Player class
+      1) The enumerated list of coordinate systems is now a class (i.e.,
+         'enum class CoordSys').  Also the enumeration names have been shorted
+         to eliminate the 'CS_' prefix, as it's no longer needed due to
+         class specification.
+
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 simulation library (mixr_simulation)
 
+   AbstractPlayer class
+      1) Numerical player identifier (ID) was changed to be an 'int' as opposed
+         to 'unsigned short'.
+      2) The enumerated list of modes is now a class (i.e., 'enum class Mode').
+      3) Method 'isNetworkedPlayer()' renamed to 'isProxyPlayer()'
 
+
+
+--------------------------------------------------------------------------------
+
+
+#####################################################
+Interoperability oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+interop library (mixr_interop)
+
+   NetIO class
+      1) The number of input and output Nibs and entity types has changed
+         from an 'unsigned int' quantity to a simple 'int'.
+      2) The methods 'testOutputEntityTypes()' and 'testInputEntityTypes()'
+         that did nothing are now designated abstract.  Subclasses must
+         implement.
+      3) Renamed the method 'createIPlayer()' to 'createProxyPlayer()'
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dis library (mixr_interop_dis)
+--------------------------------------------------------------------------------
+
+   Nib class
+      1) Renamed the method 'updateTheIPlayer()' to 'updateProxyPlayer()'
+
+--------------------------------------------------------------------------------
+hla library (mixr_interop_hla)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+rprfom library (mixr_interop_rprfom)
 --------------------------------------------------------------------------------

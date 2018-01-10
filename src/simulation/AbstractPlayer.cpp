@@ -31,7 +31,7 @@ AbstractPlayer::AbstractPlayer()
 void AbstractPlayer::initData()
 {
    nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORD_ID];
-   for (unsigned int i = 0; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
+   for (int i = 0; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
       nibList[i] = nullptr;
    }
 }
@@ -42,10 +42,7 @@ void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
    if (cc) initData();
 
    id = org.id;
-
-   if (org.pname != nullptr) {
-      setName(org.pname);
-   }
+   name = org.name;
 
    mode = org.mode;
    initMode = org.initMode;
@@ -64,7 +61,7 @@ void AbstractPlayer::deleteData()
 {
    setNib(nullptr);
    if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
@@ -79,7 +76,7 @@ bool AbstractPlayer::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
    if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
@@ -103,46 +100,8 @@ void AbstractPlayer::reset()
    BaseClass::reset();
 }
 
-//-----------------------------------------------------------------------------
-
-// Sets the player's ID
-void AbstractPlayer::setID(const unsigned short v)
-{
-   id = v;
-}
-
-//-----------------------------------------------------------------------------
-
-// Set the player's name
-void AbstractPlayer::setName(const base::Identifier& n)
-{
-   pname = n;
-}
-
-// Set the player's name
-void AbstractPlayer::setName(const char* const str)
-{
-   pname = str;
-}
-
-//-----------------------------------------------------------------------------
-
-// Sets the player's mode (ACTIVE, DEAD, etc)
-void AbstractPlayer::setMode(const Mode m)
-{
-   mode = m;
-}
-
-// Sets the player's initial (reset) mode
-void AbstractPlayer::setInitMode(const Mode m)
-{
-   initMode = m;
-}
-
-//-----------------------------------------------------------------------------
-
 // Player's outgoing NIB(s)
-AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId)
+AbstractNib* AbstractPlayer::getLocalNib(const int netId)
 {
    AbstractNib* p{};
    if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
@@ -152,7 +111,7 @@ AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId)
 }
 
 // Player's outgoing NIB(s)  (const version)
-const AbstractNib* AbstractPlayer::getLocalNib(const unsigned int netId) const
+const AbstractNib* AbstractPlayer::getLocalNib(const int netId) const
 {
    const AbstractNib* p{};
    if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
@@ -187,11 +146,11 @@ bool AbstractPlayer::setEnableNetOutput(const bool x)
 }
 
 // Sets the outgoing NIB for network 'id'
-bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const unsigned int id)
+bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 {
    bool ok{};
    if (nibList != nullptr && id >= 1 && id <= AbstractNetIO::MAX_NETWORD_ID) {
-      unsigned int idx {id - 1};
+      int idx{id - 1};
       if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;
       if (nibList[idx] != nullptr) nibList[idx]->ref();
@@ -205,7 +164,7 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const unsigned int id)
 bool AbstractPlayer::setSlotID(const base::Number* const num)
 {
    bool ok{};
-   int newID = num->getInt();
+   const int newID = num->getInt();
    if (newID > 0 && newID <= 65535) {
       setID( static_cast<unsigned short>(newID)  );
       ok = true;
@@ -219,12 +178,12 @@ bool AbstractPlayer::setSlotID(const base::Number* const num)
 bool AbstractPlayer::setSlotInitMode(base::String* const msg)
 {
    bool ok{};
-   if (*msg == "inactive" || *msg == "INACTIVE") { setInitMode(INACTIVE); ok = true; }
-   else if (*msg == "active" || *msg == "ACTIVE") { setInitMode(ACTIVE); ok = true; }
-   else if (*msg == "killed" || *msg == "KILLED") { setInitMode(KILLED); ok = true; }
-   else if (*msg == "crashed" || *msg == "CRASHED") { setInitMode(CRASHED); ok = true; }
-   else if (*msg == "detonated" || *msg == "DETONATED") { setInitMode(DETONATED); ok = true; }
-   else if (*msg == "launched" || *msg == "LAUNCHED") { setInitMode(LAUNCHED); ok = true; }
+   if (*msg == "inactive" || *msg == "INACTIVE")        { setInitMode(Mode::INACTIVE);  ok = true; }
+   else if (*msg == "active" || *msg == "ACTIVE")       { setInitMode(Mode::ACTIVE);    ok = true; }
+   else if (*msg == "killed" || *msg == "KILLED")       { setInitMode(Mode::KILLED);    ok = true; }
+   else if (*msg == "crashed" || *msg == "CRASHED")     { setInitMode(Mode::CRASHED);   ok = true; }
+   else if (*msg == "detonated" || *msg == "DETONATED") { setInitMode(Mode::DETONATED); ok = true; }
+   else if (*msg == "launched" || *msg == "LAUNCHED")   { setInitMode(Mode::LAUNCHED);  ok = true; }
    return ok;
 }
 

@@ -56,7 +56,7 @@ bool Effect::crashNotification()
 {
     const bool ok{killedNotification()};
     setDetonationResults(DETONATE_NONE);
-    setMode(DETONATED);
+    setMode(Mode::DETONATED);
     return ok;
 }
 
@@ -66,7 +66,7 @@ bool Effect::crashNotification()
 bool Effect::collisionNotification(Player* const p)
 {
     const bool ok{killedNotification(p)};
-    setMode(DETONATED);
+    setMode(Mode::DETONATED);
     setDetonationResults(DETONATE_NONE);
     return ok;
 }
@@ -77,14 +77,14 @@ bool Effect::collisionNotification(Player* const p)
 void Effect::updateTOF(const double dt)
 {
    // As long as we're active ...
-   if (isMode(ACTIVE)) {
+   if (isMode(Mode::ACTIVE)) {
 
       // update time of flight,
       setTOF( getTOF() + dt );
 
       // and check for the end of the flight
       if (getTOF() >= getMaxTOF()) {
-         setMode(DETONATED);
+         setMode(Mode::DETONATED);
          setDetonationResults(DETONATE_NONE);
          return;
       }

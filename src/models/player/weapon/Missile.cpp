@@ -411,7 +411,7 @@ void Missile::weaponGuidance(const double dt)
 
                // We've detonated
                missed = false;
-               setMode(DETONATED);
+               setMode(Mode::DETONATED);
                setDetonationResults( DETONATE_ENTITY_IMPACT );
 
                // compute location of the detonation relative to the target
@@ -439,7 +439,7 @@ void Missile::weaponGuidance(const double dt)
          // Did we miss the target?
          if (missed) {
             // We've detonated ...
-            setMode(DETONATED);
+            setMode(Mode::DETONATED);
             setDetonationResults( DETONATE_DETONATION );
 
             // because we've just missed the target

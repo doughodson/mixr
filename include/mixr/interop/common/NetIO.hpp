@@ -75,21 +75,21 @@ class Ntm;
 //    (Note: without the incoming Ntm list, all network entities are ignored)
 //
 //    When an entity's type matches a Ntm object, the matching Ntm's "template
-//    player" (see Ntm.hpp) is cloned to create the surrogate "interoperability
-//    player" or IPlayer, which is added to simulation's player list.
+//    player" (see Ntm.hpp) is cloned to create the proxy player, which
+//    is added to simulation's player list.
 //
 //    A network specific Network Interface Block (Nib) is created, using the
 //    nibFactory() function, to manage the flow of data from the network entity
 //    to the mixr player.  The incoming Nib objects are managed using the
 //    "input Nib" list.
 //
-//    The incoming surrogate players contain the ID of the NetIO object that
+//    Incoming interoperability player data contains the ID of the NetIO object that
 //    created it, and a pointer to the Nib object that is controlling its data
 //    flow.
 //
 //    Incoming entities can be filtered by range using the 'maxEntityRange'
 //    slot, which defaults to zero or no range filtering.  Currently, this
-//    applies only to new entities; existing IPlayers are not filtered.
+//    applies only to new entities; proxy players are not filtered.
 //
 // Outgoing entities:
 //
@@ -226,8 +226,8 @@ public:
    unsigned short getNewIffEventID()                      { return ++iffEventID; }
    unsigned short getNewEmissionEventID()                 { return ++emEventID; }
 
-   // IPlayer factory: creates a networked player based on NIB data
-   virtual models::Player* createIPlayer(Nib* const nib);
+   // proxy player factory: creates a proxy player based on NIB data
+   virtual models::Player* createProxyPlayer(Nib* const nib);
 
    void reset() override;
 
@@ -259,16 +259,16 @@ protected:
 public:
     // NIB I/O type
     enum IoType {
-       INPUT_NIB,    // NIB is used to map incoming entities to 'networked' players (IPlayer)
-       OUTPUT_NIB    // NIB is used to map outgoing players to networked entities.
+       INPUT_NIB,    // NIB is used to map incoming entities to proxy players
+       OUTPUT_NIB    // NIB is used to map outgoing players to entities.
     };
 
 public:
    // NIB support
-   virtual Nib* findNib(const unsigned short playerID, const base::String* const federateName, const IoType ioType);
-   virtual Nib* findNib(const models::Player* const player, const IoType ioType);
-   virtual bool addNibToList(Nib* const nib, const IoType ioType);
-   virtual void removeNibFromList(Nib* const nib, const IoType ioType);
+   virtual Nib* findNib(const unsigned short playerID, const base::String* const federateName, const IoType);
+   virtual Nib* findNib(const models::Player* const, const IoType);
+   virtual bool addNibToList(Nib* const, const IoType);
+   virtual void removeNibFromList(Nib* const, const IoType);
 
    // More NIB support
    virtual Nib* createNewInputNib();
@@ -279,10 +279,10 @@ public:
 
 protected:
    // Maximum number of active objects
-   static const int MAX_OBJECTS = MIXR_CONFIG_MAX_NETIO_ENTITIES;
+   static const int MAX_OBJECTS{MIXR_CONFIG_MAX_NETIO_ENTITIES};
 
    // Create NIB unique to protocol (pure functions!)
-   virtual Nib* nibFactory(const NetIO::IoType ioType)=0;
+   virtual Nib* nibFactory(const NetIO::IoType ioType) =0;
 
    // Create a new Network Interface Block (NIB) for 'player' and insert it
    // in the output list.  Returns a pointer to the new NIB or 0.
@@ -294,12 +294,12 @@ protected:
    }
 
    // Returns the idx'th NIB from the input list
-   Nib* getInputNib(const unsigned int idx) {
+   Nib* getInputNib(const int idx) {
       return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the input list (const version)
-   const Nib* getInputNib(const unsigned int idx) const  {
+   const Nib* getInputNib(const int idx) const  {
       return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
@@ -319,12 +319,12 @@ protected:
    }
 
    // Returns the idx'th NIB from the output list
-   Nib* getOutputNib(const unsigned int idx) {
+   Nib* getOutputNib(const int idx) {
       return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the output list (const version)
-   const Nib* getOutputNib(const unsigned int idx) const {
+   const Nib* getOutputNib(const int idx) const {
       return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
@@ -378,13 +378,13 @@ protected:
    // ---
    // Raw lists
    // ---
-   const Ntm* getOutputEntityTypes(const unsigned int) const;  // Return a outgoing entity type by index
-   const Ntm* getInputEntityType(const unsigned int) const;    // Return a incoming entity type by index
-   unsigned int getNumOutputEntityTypes() const;               // Number of input types
-   unsigned int getNumInputEntityTypes() const;                // Number of output types
+   const Ntm* getOutputEntityTypes(const int) const;           // Return a outgoing entity type by index
+   const Ntm* getInputEntityType(const int) const;             // Return a incoming entity type by index
+   int getNumOutputEntityTypes() const;                        // Number of input types
+   int getNumInputEntityTypes() const;                         // Number of output types
 
-   virtual void testOutputEntityTypes(const unsigned int n);   // Test rig for outgoing quick lookup
-   virtual void testInputEntityTypes(const unsigned int n);    // Test rig for incoming quick lookup
+   virtual void testOutputEntityTypes(const int) =0;           // Test rig for outgoing quick lookup
+   virtual void testInputEntityTypes(const int) =0;            // Test rig for incoming quick lookup
 
 
 //------------------------------------------------------------------------------
@@ -395,47 +395,47 @@ private:
    void cleanupInputList();                             // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID {1};                            // Network ID
+   unsigned short netID{1};                             // Network ID
    base::safe_ptr<const base::String> federationName;   // Federation name
    base::safe_ptr<const base::String> federateName;     // Federate name
 
    base::safe_ptr<simulation::Station> station;         // Our station class
    base::safe_ptr<simulation::Simulation> simulation;   // Our simulation class
    TSource timeline {UTC};                              // Source of our timeline
-   unsigned short iffEventID {};                        // IFF event ID (as needed)
-   unsigned short emEventID {};                         // Emission event ID (as needed)
+   unsigned short iffEventID{};                         // IFF event ID (as needed)
+   unsigned short emEventID{};                          // Emission event ID (as needed)
 
    // Network Model mode flags
-   bool inputFlg {true};     // Network input enabled
-   bool outputFlg {true};    // Network output enabled
-   bool relayFlg {true};     // Network relay enabled
-   bool netInit {};          // Network has been initialized
-   bool netInitFail {};      // Initialization attempt failed
+   bool inputFlg{true};      // Network input enabled
+   bool outputFlg{true};     // Network output enabled
+   bool relayFlg{true};      // Network relay enabled
+   bool netInit{};           // Network has been initialized
+   bool netInitFail{};       // Initialization attempt failed
 
    // Distance filter by entity kind/domain
-   double maxEntityRange {};   // Max range from ownship           (meters)
-   double maxEntityRange2 {};  // Max range squared from ownship   (meters^2)
+   double maxEntityRange{};   // Max range from ownship           (meters)
+   double maxEntityRange2{};  // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   double maxTimeDR {};          // Maximum DR time                  (seconds)
-   double maxPositionErr {};     // Maximum position error           (meters)
-   double maxOrientationErr {};  // Maximum orientation error        (radians)
-   double maxAge {};             // Maximum age of networked players (seconds)
+   double maxTimeDR{};          // Maximum DR time                  (seconds)
+   double maxPositionErr{};     // Maximum position error           (meters)
+   double maxOrientationErr{};  // Maximum orientation error        (radians)
+   double maxAge{};             // Maximum age of networked players (seconds)
 
 private: // Nib related private
    // input tables
-   std::array<Nib*, MAX_OBJECTS> inputList {};  // Table of input objects in name order
-   unsigned int nInNibs {};                     // Number of input objects in both tables
+   std::array<Nib*, MAX_OBJECTS> inputList{};  // Table of input objects in name order
+   int nInNibs{};                              // Number of input objects in both tables
 
    // output tables
-   std::array<Nib*, MAX_OBJECTS> outputList {}; // Table of output objects in name order
-   unsigned int nOutNibs {};                    // Number of output objects in both tables
+   std::array<Nib*, MAX_OBJECTS> outputList{}; // Table of output objects in name order
+   int nOutNibs{};                             // Number of output objects in both tables
 
    // NIB quick lookup key
    struct NibKey {
       NibKey(const unsigned short playerId, const base::String* const federateName): id(playerId), fName(federateName) {}
       // NIB IDs  -- Comparisons in this order --
-      unsigned short id {};                        // Player id
+      unsigned short id{};                         // Player id
       base::safe_ptr<const base::String> fName;    // Federate name
    };
 
@@ -444,18 +444,18 @@ private: // Nib related private
    static int compareKey2Nib(const void* key, const void* nib);
 
 private:  // Ntm related private
-   static const unsigned int MAX_ENTITY_TYPES = MIXR_CONFIG_MAX_NETIO_ENTITY_TYPES;
+   static const unsigned int MAX_ENTITY_TYPES{MIXR_CONFIG_MAX_NETIO_ENTITY_TYPES};
 
-   NtmInputNode* inputNtmTree {};   // Input NTM quick lookup tree
-   NtmOutputNode* outputNtmTree {}; // Output NTM quick lookup tree
+   NtmInputNode* inputNtmTree{};   // Input NTM quick lookup tree
+   NtmOutputNode* outputNtmTree{}; // Output NTM quick lookup tree
 
    // Input entity type table
-   std::array<const Ntm*, MAX_ENTITY_TYPES> inputEntityTypes {};  // Table of pointers to input entity type mappers; Ntm objects
-   unsigned int nInputEntityTypes {};              // Number of input entity mappers (Ntm objects) in the table, 'inputEntityTypes'
+   std::array<const Ntm*, MAX_ENTITY_TYPES> inputEntityTypes{};  // Table of pointers to input entity type mappers; Ntm objects
+   int nInputEntityTypes {};                                     // Number of input entity mappers (Ntm objects) in the table, 'inputEntityTypes'
 
    // Output entity type table
-   std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes {};  // Table of pointers to output entity type mappers; Ntm objects
-   unsigned int nOutputEntityTypes {};             // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
+   std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes{};  // Table of pointers to output entity type mappers; Ntm objects
+   int nOutputEntityTypes {};                                     // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
 
 private:
    // slot table helper methods

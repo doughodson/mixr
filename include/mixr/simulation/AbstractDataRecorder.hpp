@@ -60,8 +60,8 @@ private:
    Station* getStationImp();
    Simulation* getSimulationImp();
 
-   Station* sta {};         // The station that owns us (not ref()'d)
-   Simulation* sim {};      // The simulation system (not ref()'d)
+   Station* sta{};         // The station that owns us (not ref()'d)
+   Simulation* sim{};      // The simulation system (not ref()'d)
 };
 
 // Record Data function
@@ -71,7 +71,7 @@ inline bool AbstractDataRecorder::recordData(
       const double values[4]
    )
 {
-   bool recorded = false;
+   bool recorded{};
    if (isDataEnabled(id)) {
       recorded = recordDataImp(id, pObjects, values);
       if (!recorded) processUnhandledId(id);

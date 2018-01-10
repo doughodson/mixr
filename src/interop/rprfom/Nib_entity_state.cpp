@@ -321,7 +321,7 @@ void Nib::entityState2Nib()
 
    }
 
-   setMode(models::Player::ACTIVE);    
+   setMode(models::Player::Mode::ACTIVE);    
    setTimeExec( static_cast<double>(getNetIO()->getCurrentTime()) );
 }
 
@@ -332,7 +332,7 @@ void Nib::entityState2Nib()
 bool Nib::entityStateManager(const double curExecTime)
 {
    bool ok {true};
-   if (getPlayer()->isMode(models::Player::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
+   if (getPlayer()->isMode(models::Player::Mode::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
 
       // Need to update this entity object ...
 

@@ -48,11 +48,11 @@ public:
    bool setDisabledList(const unsigned int* const list, const unsigned int n);
 
 private:
-   unsigned int* enabledList {};    // List of data records enabled for processing (default: all)
-   unsigned int numEnabled {};      // Number of enabled record IDs, or zero for all records enabled
+   unsigned int* enabledList{};    // List of data records enabled for processing (default: all)
+   unsigned int numEnabled{};      // Number of enabled record IDs, or zero for all records enabled
 
-   unsigned int* disabledList {};   // List of data records disabled from being processed (default: none)
-   unsigned int numDisabled {};     // Number of disabled record IDs
+   unsigned int* disabledList{};   // List of data records disabled from being processed (default: none)
+   unsigned int numDisabled{};     // Number of disabled record IDs
 
 private:
    // slot table helper methods
@@ -64,7 +64,7 @@ private:
 // Data record enabled function
 inline bool AbstractRecorderComponent::isDataEnabled(const unsigned int id) const
 {
-   bool ok = true;   // default is enabled
+   bool ok{true};   // default is enabled
 
    if (id != REID_END_OF_DATA) { // END_OF_DATA message is always enabled
       // Do we have an enabled list?

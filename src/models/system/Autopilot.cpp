@@ -148,7 +148,7 @@ void Autopilot::copyData(const Autopilot& org, const bool)
 
    leadOffset = org.leadOffset;
    setLeadPlayer( org.lead );
-   setSlotLeadPlayerName( org.leadName );
+   leadName = org.leadName;
    followLeadModeOn =  org.followLeadModeOn;
    leadHdg = org.leadHdg;
    maxTurnRateDps = org.maxTurnRateDps;
@@ -954,14 +954,14 @@ bool Autopilot::velocityController()
 // Attempt to get our lead player
 const Player* Autopilot::getLeadPlayer()
 {
-   if (lead == nullptr && leadName != nullptr) {
+   if (lead == nullptr && leadName == "") {
       // we have no lead player, but we have a lead name, let's try to get this player
       // find the player in the simulation
       const WorldModel* const sim{getWorldModel()};
       if (sim != nullptr) {
          const base::PairStream* players{sim->getPlayers()};
          if (players != nullptr) {
-            const base::Pair* pair{players->findByName(*leadName)};
+            const base::Pair* pair{players->findByName(leadName.c_str())};
             if (pair != nullptr) {
                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             }
@@ -1180,10 +1180,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 {
    // remove old lead information
    if (lead != nullptr) lead->unref();
-   if (leadName != nullptr) {
-      leadName->unref();
-      leadName = nullptr;
-   }
+   leadName = "";
 
    // set our lead
    lead = p;
@@ -1192,7 +1189,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
       lead->ref();
       leadHdg = static_cast<double>(lead->getHeadingR());
       // grab our lead name
-      if (lead->getName() != nullptr) leadName = lead->getName()->clone();
+      leadName = lead->getName();
    }
 
    return true;
@@ -1508,9 +1505,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 // Initial name of our lead player
 bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 {
-   if (leadName != nullptr) leadName->unref();
-   leadName = p;
-   if (leadName != nullptr) leadName->ref();
+   leadName = p->getStdString();
    return true;
 }
 

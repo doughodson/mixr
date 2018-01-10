@@ -35,7 +35,7 @@ public:
    virtual void setApplicationID(const unsigned short);
 
    // Input support functions
-   virtual void updateTheIPlayer();
+   virtual void updateProxyPlayer();
    virtual void entityStatePdu2Nib(const EntityStatePDU* const);
 
    // Update check functions

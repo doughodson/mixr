@@ -4,7 +4,7 @@
 
 #include "mixr/base/Component.hpp"
 
-#include "mixr/base/Identifier.hpp"
+#include <string>
 
 namespace mixr {
 namespace simulation {
@@ -21,8 +21,8 @@ class AbstractNib;
 //    ! ---
 //    ! Player's id and mode parameters
 //    ! ---
-//    id             <base::Integer>     ! Player id  [ 1 .. 65535 ] (default: 0)
-//    mode           <base::String>      ! Initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
+//    id             <base::Integer>     ! player id  [ 1 .. 65535 ] (default: 0)
+//    mode           <base::String>      ! initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
 //------------------------------------------------------------------------------
 class AbstractPlayer : public base::Component
 {
@@ -31,8 +31,8 @@ class AbstractPlayer : public base::Component
 public:
    AbstractPlayer();
 
-   // Player mode
-   enum Mode {
+   // player mode
+   enum class Mode {
       INACTIVE,         // Player is not being updated and is not being sent to the networks
       ACTIVE,           // Player is being updated and is being sent to the networks
       KILLED,           // Player was killed   (One of the dead conditions)
@@ -43,88 +43,75 @@ public:
       DELETE_REQUEST    // Request player removal from the active player list
    };
 
-   // ---
-   // Player ID
-   // ---
-   virtual void setID(const unsigned short newId);                // Sets the player's ID
-   bool isID(const unsigned short tst) const;                     // True if player's ID matches
-   unsigned short getID() const;                                  // The player's ID
+   // player id
+   void setID(const int x)             { id = x;         }        // sets the player's ID
+   bool isID(const int x) const        { return x == id; }        // true if player's ID matches
+   int getID() const                   { return id;      }        // returns ID
 
-   // ---
-   // Player name
-   // ---
-   virtual void setName(const base::Identifier& newName);         // Sets the player's name (base::String version)
-   virtual void setName(const char* const newName);               // Sets the player's name (char* version)
-   bool isName(const base::Identifier* const) const;              // True if the player's name matches
-   bool isName(const char* const) const;                          // True if the player's name matches
-   const base::Identifier* getName() const;                       // The player's name
+   // player name
+   void setName(const std::string& x)            { name = x;         }      // set players name
+   bool isName(const std::string& x) const       { return x == name; }      // true if the players name matches
+   const std::string& getName() const            { return name;      }      // return players name
 
-   // ---
-   // Player mode
-   // ---
-   virtual void setMode(const Mode newMode);                      // Sets the player's current mode
-   virtual void setInitMode(const Mode newMode);                  // Sets the player's initial mode (after reset)
-   Mode getMode() const;                                          // Current mode ( INACTIVE, ACTIVE, DETONATED ... )
-   bool isActive() const;                                         // True if player's mode is active
-   bool isKilled() const;                                         // True if player's mode is killed
-   bool isCrashed() const;                                        // True if player's mode is crashed
-   bool isDetonated() const;                                      // True if player has detonated (weapons only)
-   bool isInactive() const;                                       // True if player's mode is inactive
-   bool isMode(const Mode tst) const;                             // True if player is currently this mode
-   bool isNotMode(const Mode tst) const;                          // True if player is not currently this mode
-   bool isDead() const;                                           // True if player's mode is dead (Killed, Crashed, Detonated, etc....)
+   // player mode
+   void setMode(const Mode x)           { mode = x;     }                    // sets the player's current mode
+   void setInitMode(const Mode x)       { initMode = x; }                    // sets the player's initial mode (after reset)
+   Mode getMode() const                 { return mode;  }                    // current mode ( INACTIVE, ACTIVE, DETONATED ... )
+   bool isActive() const                { return mode == Mode::ACTIVE;    }  // true if player's mode is active
+   bool isKilled() const                { return mode == Mode::KILLED;    }  // true if player's mode is killed
+   bool isCrashed() const               { return mode == Mode::CRASHED;   }  // true if player's mode is crashed
+   bool isDetonated() const             { return mode == Mode::DETONATED; }  // true if player has detonated (weapons only)
+   bool isInactive() const              { return mode == Mode::INACTIVE;  }  // true if player's mode is inactive
+   bool isMode(const Mode x) const      { return mode == x;               }  // true if player is currently this mode
+   bool isNotMode(const Mode x) const   { return mode != x;               }  // true if player is not currently this mode
+   bool isDead() const                  { return isKilled() || isCrashed() || isDetonated(); }  // true if player's mode is dead (Killed, Crashed, Detonated, etc....)
 
-   // ---
-   // Interoperability network data
-   // ---
-   bool isNetworkedPlayer() const;                                    // True if this is a networked player (IPlayer)
-   bool isLocalPlayer() const;                                        // True if this is a local player
+   // proxy related data
+   bool isProxyPlayer() const           { return nib != nullptr; }    // true if this is a proxy player
+   bool isLocalPlayer() const           { return nib == nullptr; }    // true if this is a local player
 
-   int getNetworkID() const;                                          // ID of a networked player's controlling network model
-   AbstractNib* getNib();                                             // Networked player's Nib object
-   const AbstractNib* getNib() const;                                 // Networked player's Nib object  (const version)
+   int getNetworkID() const             { return netID; }             // id of a proxy player's controlling network model
+   AbstractNib* getNib()                { return nib;   }             // proxy player's Nib object
+   const AbstractNib* getNib() const    { return nib;   }             // proxy player's Nib object  (const version)
 
-   bool isNetOutputEnabled() const;                                   // Is player output to the network enabled?
-   AbstractNib* getLocalNib(const unsigned int netId);                // Player's outgoing NIB(s)
-   const AbstractNib* getLocalNib(const unsigned int netId) const;    // Player's outgoing NIB(s)  (const version)
+   bool isNetOutputEnabled() const      { return enableNetOutput; }   // is player output to the network enabled?
+   AbstractNib* getLocalNib(const int netId);                         // player's outgoing NIB(s)
+   const AbstractNib* getLocalNib(const int netId) const;             // player's outgoing NIB(s)  (const version)
 
    // helper methods
-   virtual bool setNib(AbstractNib* const p);                                 // Sets the networked player's Nib object
-   virtual bool setEnableNetOutput(const bool f);                             // Sets the network output enabled flag
-   virtual bool setOutgoingNib(AbstractNib* const p, const unsigned int id);  // Sets the outgoing NIB for network 'id'
+   virtual bool setNib(AbstractNib* const);                           // Sets the proxy player's Nib object
+   virtual bool setEnableNetOutput(const bool);                       // Sets the network output enabled flag
+   virtual bool setOutgoingNib(AbstractNib* const, const int id);     // Sets the outgoing NIB for network 'id'
 
    void reset() override;
 
 protected:
-
    bool shutdownNotification() override;
 
-   Mode mode {ACTIVE};           // Player mode (see above)
-   AbstractNib* nib {};          // Network Interface Block (ref()'d)
+   Mode mode{Mode::ACTIVE};      // Player mode (see above)
+   AbstractNib* nib{};           // Network Interface Block (ref()'d)
 
 private:
    void initData();
 
    // player identity
-   unsigned short id {};          // ID
-   base::Identifier pname;        // Name
+   int id{};
+   std::string name;
 
-   Mode initMode {ACTIVE};        // Initial mode
+   Mode initMode{Mode::ACTIVE};   // initial mode
 
    // incoming network support
-   int netID {};                  // Network id
+   int netID{};                   // network id
 
    // outgoing network support data
-   AbstractNib** nibList {};      // Pointer to a list of outgoing NIBs
-   bool enableNetOutput {true};   // Allow output to the network
+   AbstractNib** nibList{};       // pointer to a list of outgoing NIBs
+   bool enableNetOutput{true};    // enable output to the network
 
 private:
    // slot table helper methods
    bool setSlotID(const base::Number* const);
    bool setSlotInitMode(base::String* const);
 };
-
-#include "mixr/simulation/AbstractPlayer.inl"
 
 }
 }

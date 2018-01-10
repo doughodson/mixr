@@ -175,20 +175,20 @@ bool Nib::networkOutputManagers(const double curExecTime)
 }
 
 //------------------------------------------------------------------------------
-// updateTheIPlayer() -- (Input support)
+// updateProxyPlayer() -- (Input support)
 //   Called by our processInputList() to its time to update the
 //   networked player.
 //------------------------------------------------------------------------------
-void Nib::updateTheIPlayer()
+void Nib::updateProxyPlayer()
 {
-    models::Player* p = getPlayer();
+    models::Player* p{getPlayer()};
 
    // ---
-   // If we haven't tried to created the IPlayer yet ...
+   // If we haven't tried to create the proxy player yet ...
    // ---
    if (p == nullptr && isEntityTypeUnchecked()) {
       // create the player
-      p = getNetIO()->createIPlayer(this);
+      p = getNetIO()->createProxyPlayer(this);
    }
 
    // ---
@@ -202,9 +202,9 @@ void Nib::updateTheIPlayer()
       // ---
       // check all emission handlers for timeout
       // ---
-      NetIO* const disIO = static_cast<NetIO*>(getNetIO());
+      NetIO* const disIO{static_cast<NetIO*>(getNetIO())};
       if (disIO->getVersion() >= NetIO::VERSION_7) {
-         const double curExecTime = disIO->getSimulation()->getExecTimeSec();
+         const double curExecTime{disIO->getSimulation()->getExecTimeSec()};
          for (unsigned char i = 0; i < numEmissionSystems; i++) {
             double drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
             if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {

@@ -200,12 +200,12 @@ void Simulation::reset()
          base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
          base::List::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
-            base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
+            base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
+            AbstractPlayer* ip{static_cast<AbstractPlayer*>(pair->object())};
 
             // reinstated the container pointer and player name
             ip->container(this);
-            ip->setName(*pair->slot());
+            ip->setName((pair->slot()->getStdString()));
 
             // Insert the player into the new list in sorted order
             insertPlayerSort(pair, newList);
@@ -215,7 +215,7 @@ void Simulation::reset()
    }
 
    // ---
-   // Copy the old networked players (IPlayers) to the new list
+   // Copy the old proxy players to the new list
    // ---
    {
       if (players != nullptr) {
@@ -224,13 +224,13 @@ void Simulation::reset()
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
-            if (ip->isNetworkedPlayer()) {
+            if (ip->isProxyPlayer()) {
 
                // reinstated the container pointer and player name
                ip->container(this);
-               ip->setName(*pair->slot());
+               ip->setName(pair->slot()->getStdString());
 
-               // Insert the IPlayer into the new list in sorted order
+               // Insert the proxy player into the new list in sorted order
                insertPlayerSort(pair, newList);
             }
             item = item->getNext();
@@ -917,7 +917,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          item = item->getNext();
          const auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
-         ip->setName(*pair->slot());
+         ip->setName(pair->slot()->getStdString());
       }
 
       // Set the original player list pointer
@@ -967,7 +967,7 @@ void Simulation::updatePlayerList()
         while (!yes && item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             const auto p = static_cast<AbstractPlayer*>(pair->object());
-            yes = p->isMode(AbstractPlayer::DELETE_REQUEST);
+            yes = p->isMode(AbstractPlayer::Mode::DELETE_REQUEST);
             item = item->getNext();
         }
     }
@@ -991,7 +991,7 @@ void Simulation::updatePlayerList()
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             item = item->getNext();
             const auto p = static_cast<AbstractPlayer*>(pair->object());
-            if (p->isNotMode(AbstractPlayer::DELETE_REQUEST)) {
+            if (p->isNotMode(AbstractPlayer::Mode::DELETE_REQUEST)) {
                 // Add the player to the new list
                 newList->put(pair);
             } else {
@@ -1019,7 +1019,7 @@ void Simulation::updatePlayerList()
 
             // Set container and name
             ip->container(this);
-            ip->setName(*newPlayer->slot());
+            ip->setName(newPlayer->slot()->getStdString());
 
             // Insert the new player into the new list in sorted order
             insertPlayerSort(newPlayer, newList);
@@ -1092,10 +1092,10 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
         const auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
 
         bool insert{};
-        if (newPlayer->isNetworkedPlayer()) {
+        if (newPlayer->isProxyPlayer()) {
 
-            // *** Insert IPlayer -- after local players and lower NIB IDs first
-            if (refPlayer->isNetworkedPlayer()) {
+            // *** Insert proxy player -- after local players and lower NIB IDs first
+            if (refPlayer->isProxyPlayer()) {
 
                // Get the NIBs
                const AbstractNib* nNib{newPlayer->getNib()};
@@ -1114,8 +1114,8 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
             }
         } else {
 
-            // *** Insert a local player -- by player ID and before any IPlayer
-            insert = ( (newPlayer->getID() < refPlayer->getID()) || refPlayer->isNetworkedPlayer() );
+            // *** Insert a local player -- by player ID and before any proxy player
+            insert = ( (newPlayer->getID() < refPlayer->getID()) || refPlayer->isProxyPlayer() );
 
         }
 
@@ -1156,20 +1156,20 @@ AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) c
     if (players == nullptr) return nullptr;
 
     // Find a Player that matches player ID and Sources
-    AbstractPlayer* iplayer{};
+    AbstractPlayer* player{};
     const base::List::Item* item{players->getFirstItem()};
-    while (iplayer == nullptr && item != nullptr) {
+    while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
             const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr) {
                 if (netID > 0) {
                     if ((ip->getID() == id) && (ip->getNetworkID() == netID)) {
-                        iplayer = ip;
+                        player = ip;
                     }
                 } else {
                     if (ip->getID() == id) {
-                        iplayer = ip;
+                        player = ip;
                     }
                 }
             }
@@ -1177,7 +1177,7 @@ AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) c
         item = item->getNext();
     }
 
-    return iplayer;
+    return player;
 }
 
 //------------------------------------------------------------------------------
@@ -1199,20 +1199,20 @@ AbstractPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName
     if (players == nullptr || playerName == nullptr) return nullptr;
 
     // Find a Player named 'playerName'
-    AbstractPlayer* iplayer{};
+    AbstractPlayer* player{};
     const base::List::Item* item{players->getFirstItem()};
-    while (iplayer == nullptr && item != nullptr) {
+    while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
             const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr && ip->isName(playerName)) {
-               iplayer = ip;
+               player = ip;
             }
         }
         item = item->getNext();
     }
 
-    return iplayer;
+    return player;
 }
 
 //------------------------------------------------------------------------------

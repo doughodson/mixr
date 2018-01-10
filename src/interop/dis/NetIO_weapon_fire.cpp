@@ -59,7 +59,7 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;
 
     // ---
-    // 2) Find the firing player and munitions (networked) IPlayers
+    // 2) Find the firing player and munitions proxy players
     // ---
 //    interop::Nib* fNib = nullptr;
 //    interop::Nib* mNib = nullptr;

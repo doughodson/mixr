@@ -114,7 +114,7 @@ void Ambassador::removeObjectInstance(RTI::ObjectHandle theObject, const char* t
    Nib* nib {netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB)};
    if (nib != nullptr) {
       // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
-      nib->setMode(models::Player::DELETE_REQUEST);
+      nib->setMode(models::Player::Mode::DELETE_REQUEST);
    }
 }
 

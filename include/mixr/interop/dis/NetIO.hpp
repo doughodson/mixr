@@ -339,8 +339,8 @@ protected:
    void processInputList() override;                                              // Update players/systems from the Input-list
    interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;        // Create a new Nib
    interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
-   void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
-   void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
+   void testOutputEntityTypes(const int) final;                                   // Test quick lookup of outgoing entity types
+   void testInputEntityTypes(const int) final;                                    // Test quick lookup of incoming entity types
 
 private:
     void initData();

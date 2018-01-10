@@ -16,6 +16,7 @@
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cmath>
+#include <string>
 
 namespace mixr {
 namespace interop {
@@ -31,9 +32,9 @@ Nib::Nib(const NetIO::IoType t) : ioType(t)
 
 void Nib::initData()
 {
-   base::utStrcpy(pname, PNAME_BUF_SIZE, "MIXR");
+   pname = "MIXR";
    side = models::Player::BLUE;
-   mode = models::Player::INACTIVE;
+   mode = models::Player::Mode::INACTIVE;
 
    drP0.set(0,0,0);
    drV0.set(0,0,0);
@@ -67,7 +68,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    playerID = org.playerID;
 
-   base::utStrcpy(pname, PNAME_BUF_SIZE, org.pname);
+   pname = org.pname;
    side = org.side;
    mode = org.mode;
 
@@ -174,26 +175,10 @@ bool Nib::setPlayer(models::Player* const p)
     pPlayer = p;
     if (pPlayer != nullptr) {
         playerID = pPlayer->getID();
-    }
-    else {
+    } else {
         playerID = 0;
     }
     return true;
-}
-
-
-//------------------------------------------------------------------------------
-// setPlayer() -- sets a pointer to a player
-//------------------------------------------------------------------------------
-void Nib::setPlayerName(const char* s)
-{
-    if (s != nullptr) {
-        base::utStrcpy(pname,PNAME_BUF_SIZE, s);
-    }
-    else {
-        pname[0] = ' ';
-        pname[1] = '\0';
-    }
 }
 
 //------------------------------------------------------------------------------
@@ -250,7 +235,7 @@ bool Nib::networkOutputManagers(const double)
 //------------------------------------------------------------------------------
 bool Nib::setOutputPlayerType(const models::Player* const p)
 {
-   bool ok = false;
+   bool ok{};
 
    if (getNetIO() != nullptr) {
 
@@ -258,7 +243,7 @@ bool Nib::setOutputPlayerType(const models::Player* const p)
       setEntityTypeChecked( true );
 
       // Find "by player" on the output list
-      const Ntm* typeMapper = getNetIO()->findNetworkTypeMapper(p);
+      const Ntm* typeMapper{getNetIO()->findNetworkTypeMapper(p)};
 
       // If we found a type mapper for this Player type,
       // then set the mapper and copy the unique type codes
@@ -327,7 +312,7 @@ void Nib::setEntityTypeChecked(const bool f)
 // Sets the damage for this player
 bool Nib::setDamage(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    damage = x;
@@ -337,7 +322,7 @@ bool Nib::setDamage(const double v)
 // Sets the smoke for this player
 bool Nib::setSmoke(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    smoking = x;
@@ -347,7 +332,7 @@ bool Nib::setSmoke(const double v)
 // Sets the flames for this player
 bool Nib::setFlames(const double v)
 {
-   double x = v;
+   double x{v};
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    flames = x;
@@ -379,7 +364,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 1) Make sure that we have a valid player and entity type
    // ---
-   const models::Player* player = getPlayer();
+   const models::Player* player{getPlayer()};
    if (player == nullptr || isEntityTypeInvalid()) result = NO;
 
    // ---
@@ -388,7 +373,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    if ( (result == UNSURE) && isNotMode( player->getMode()) ) result = YES;
 
    // 2-a) NIB is being deleted, send one more update to deactivate the entity
-   if ( (result == UNSURE) && isMode( models::Player::DELETE_REQUEST ) ) result = YES;
+   if ( (result == UNSURE) && isMode( models::Player::Mode::DELETE_REQUEST ) ) result = YES;
 
    // ---
    // 3) When we're a local player, check for one of the following ...
@@ -397,7 +382,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
       //double drTime = curExecTime - getTimeExec();
       models::SynchronizedState playerState = player->getSynchronizedState();
-      const double drTime = static_cast<double>(playerState.getTimeExec()) - getTimeExec();
+      const double drTime{static_cast<double>(playerState.getTimeExec()) - getTimeExec()};
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -434,8 +419,8 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
          if (!player->isPositionFrozen() && !player->isAltitudeFrozen()) {
 
             // max position error (meters)
-            const double maxPosErr = getNetIO()->getMaxPositionErr(this);
-            const double maxPosErr2 = maxPosErr*maxPosErr;  // squared
+            const double maxPosErr{getNetIO()->getMaxPositionErr(this)};
+            const double maxPosErr2{maxPosErr*maxPosErr};  // squared
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
@@ -451,7 +436,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
          if (result == UNSURE && !player->isAttitudeFrozen()) {
 
             // max angle error (radians)
-            const double maxAngleErr = getNetIO()->getMaxOrientationErr(this);
+            const double maxAngleErr{getNetIO()->getMaxOrientationErr(this)};
 
             // Compute angular error
             //base::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
@@ -475,13 +460,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    if ( player != nullptr && player->isMajorType(models::Player::AIR_VEHICLE) ) {
 
-      const models::AirVehicle* av = static_cast<const models::AirVehicle*>(player);
+      const models::AirVehicle* av{static_cast<const models::AirVehicle*>(player)};
 
       // (4-a) Check wing sweep angle.  We only send out wing sweep as
       // an part if the position is greater than zero or if we've previously been
       // sending the wing sweep (count > 0).
       {
-         const double angle = av->getWingSweepAngle();  //  radians
+         const double angle{av->getWingSweepAngle()};  //  radians
          if (angle > 0 || apartWingSweepCnt > 0) {
             // Check if the angle has changed.
             if (angle != apartWingSweep) {
@@ -496,7 +481,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
       // an part if the gear is not up (pos != 0) or if we've previously been
       // sending the gear position (count > 0).
       {
-         const double pos = av->getLandingGearPosition(); // (0% up; 100% down)
+         const double pos{av->getLandingGearPosition()}; // (0% up; 100% down)
          if (pos > 0 || apartGearPosCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartLandingGear) {
@@ -511,7 +496,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
       // an part if the door is not closed (pos != 0) or if we've previously been
       // sending the door position (count > 0).
       {
-         const double pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
+         const double pos{av->getWeaponBayDoorPosition()}; // % (0% closed; 100% open)
          if (pos > 0 || apartBayDoorCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartBayDoor) {
@@ -529,23 +514,23 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    if ( player != nullptr && player->isMajorType(models::Player::GROUND_VEHICLE) ) {
 
-      const models::GroundVehicle* gv = static_cast<const models::GroundVehicle*>(player);
+      const models::GroundVehicle* gv{static_cast<const models::GroundVehicle*>(player)};
 
       // (5-a) Send launcher elevation angle and for an attached missile
       //       (on SamVehicles and Artillery only)
       if ( gv->isClassType(typeid(models::SamVehicle)) || gv->isClassType(typeid(models::Artillery)) ) {
 
-         const double angle = gv->getLauncherPosition();  //  (radians)
+         const double angle{gv->getLauncherPosition()};  //  (radians)
 
          // First pass --
          if (apartLnchrElevCnt == 0) {
 
             // find all missiles missiles
-            const models::StoresMgr* sm = gv->getStoresManagement();
+            const models::StoresMgr* sm{gv->getStoresManagement()};
             if (sm != nullptr) {
-               const base::PairStream* stores = sm->getStores();
+               const base::PairStream* stores{sm->getStores()};
                if (stores != nullptr) {
-                  const base::List::Item* item = stores->getFirstItem();
+                  const base::List::Item* item{stores->getFirstItem()};
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
                      const auto pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
@@ -555,7 +540,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
                            // and up the missile count
                            msl->ref();
                            apartMsl[apartNumMissiles] = msl;
-                           apartMslAttached[apartNumMissiles] = !(msl->isMode(models::Player::LAUNCHED));
+                           apartMslAttached[apartNumMissiles] = !(msl->isMode(models::Player::Mode::LAUNCHED));
                            apartMslCnt[apartNumMissiles] = 1;
                            apartNumMissiles++;
                         }
@@ -587,7 +572,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Check all missiles for change in launched status
             for (unsigned int i = 0; i < apartNumMissiles; i++) {
-               bool attached = !(apartMsl[i]->isMode(models::Player::LAUNCHED));
+               bool attached = !(apartMsl[i]->isMode(models::Player::Mode::LAUNCHED));
                if (attached != apartMslAttached[i]) {
                   // There's been a change in status
                   apartMslAttached[i] = attached;
@@ -605,7 +590,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // 6) When we're a network player -- Update when the exec time of the
    //    last input (player's NIB) is different that our exec time.
    // ---
-   if ( (result == UNSURE) && player->isNetworkedPlayer() ) {
+   if ( (result == UNSURE) && player->isProxyPlayer() ) {
       const auto playerNib = dynamic_cast<const Nib*>(player->getNib());
       if (playerNib->getTimeExec() != getTimeExec()) {
          result = YES;
@@ -620,17 +605,15 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::playerState2Nib()
 {
-   const models::Player* player = getPlayer();
+   const models::Player* player{getPlayer()};
    if (player != nullptr) {
-      // Player name
-      const char* cname = nullptr;
-      const base::String* sname = player->getName();
-      if (sname != nullptr) cname = *sname;
-      if (cname != nullptr) setPlayerName(cname);
+      // set player name
+      const std::string cname{player->getName()};
+      if (cname != "") setPlayerName(cname.c_str());
       else setPlayerName("MIXR");
 
       freeze( player->isFrozen() );
-      if (!isMode(models::Player::DELETE_REQUEST)) setMode( player->getMode() );
+      if (!isMode(models::Player::Mode::DELETE_REQUEST)) setMode( player->getMode() );
       setDamage( player->getDamage() );
       setSmoke( player->getSmoke() );
       setFlames( player->getFlames() );
@@ -686,7 +669,7 @@ void Nib::playerState2Nib()
 //------------------------------------------------------------------------------
 void Nib::nib2PlayerState()
 {
-   models::Player* player = getPlayer();
+   models::Player* player{getPlayer()};
    if (player != nullptr) {
 
       // Drive modes
@@ -699,7 +682,7 @@ void Nib::nib2PlayerState()
       player->setFlames( getFlames() );
       player->setCamouflageType( getCamouflageType() );
 
-      // IPlayer's position and Euler angles are set by the player
+      // proxy player's position and Euler angles are set by the player
       // during its dynamics phase and using our DR functions.
    }
 }
@@ -713,9 +696,9 @@ bool Nib::updateDeadReckoning(
       base::Vec3d* const pNewAngles
    )
 {
-   bool ok = (ioType == NetIO::INPUT_NIB);
+   bool ok{ioType == NetIO::INPUT_NIB};
    if (ok) {
-      double time = updateDrTime(dt);
+      double time{updateDrTime(dt)};
 
       // Main Dead Reckoning Function
       mainDeadReckoning( time, &drPos, &drAngles );
@@ -784,7 +767,7 @@ bool Nib::resetDeadReckoning(
    base::Vec3d err;
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
-      const double len = err.length();
+      const double len{err.length()};
       if (len < (2.0 * base::distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
@@ -965,16 +948,16 @@ bool Nib::drComputeMatrixR0(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   const double Rol = RPY[0];
-   const double Pch = RPY[1];
-   const double Yaw = RPY[2];
+   const double Rol{RPY[0]};
+   const double Pch{RPY[1]};
+   const double Yaw{RPY[2]};
 
-   const double sinRol = std::sin(Rol);
-   const double cosRol = std::cos(Rol);
-   const double sinPch = std::sin(Pch);
-   const double cosPch = std::cos(Pch);
-   const double sinYaw = std::sin(Yaw);
-   const double cosYaw = std::cos(Yaw);
+   const double sinRol{std::sin(Rol)};
+   const double cosRol{std::cos(Rol)};
+   const double sinPch{std::sin(Pch)};
+   const double cosPch{std::cos(Pch)};
+   const double sinYaw{std::sin(Yaw)};
+   const double cosYaw{std::cos(Yaw)};
 
    //--------------------------------------------------------------------------
    // Compute R0 - initial orientation matrix (World --> Body)
@@ -1007,9 +990,9 @@ bool Nib::drComputeMatrixWwT(
    // Compute wwT Matrix
    //--------------------------------------------------------------------------
 
-   const double Wx = av[0];
-   const double Wy = av[1];
-   const double Wz = av[2];
+   const double Wx{av[0]};
+   const double Wy{av[1]};
+   const double Wz{av[2]};
 
    (*pwwT)(0,0) = Wx * Wx;
    (*pwwT)(0,1) = Wx * Wy;
@@ -1039,9 +1022,9 @@ bool Nib::drComputeMatrixOmega(
    // Compute Omega Matrix
    //--------------------------------------------------------------------------
 
-   const double Wx = av[0];
-   const double Wy = av[1];
-   const double Wz = av[2];
+   const double Wx{av[0]};
+   const double Wy{av[1]};
+   const double Wz{av[2]};
 
    (*pOmega)(0,0) = 0.0;
    (*pOmega)(0,1) = -Wz;
@@ -1074,23 +1057,23 @@ bool Nib::drComputeMatrixDR(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   const double Wx = av[0];
-   const double Wy = av[1];
-   const double Wz = av[2];
-   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx{av[0]};
+   const double Wy{av[1]};
+   const double Wz{av[2]};
+   const double absAV2{Wx*Wx + Wy*Wy + Wz*Wz};
 
    if (absAV2 > 0.0) {
-      const double absAV1 = std::sqrt(absAV2);
+      const double absAV1{std::sqrt(absAV2)};
 
-      const double cosWT = std::cos(absAV1 * dT);
-      const double sinWT = std::sin(absAV1 * dT);
+      const double cosWT{std::cos(absAV1 * dT)};
+      const double sinWT{std::sin(absAV1 * dT)};
 
       //--------------------------------------------------------------------------
       // Get matrix scaling Coefficients (k1, k2, k3)
       //--------------------------------------------------------------------------
-      const double k1 = (1.0 - cosWT) / absAV2;
-      const double k2 = cosWT;
-      const double k3 = sinWT / absAV1;
+      const double k1{(1.0 - cosWT) / absAV2};
+      const double k2{cosWT};
+      const double k3{sinWT / absAV1};
 
       //--------------------------------------------------------------------------
       // Compute Dead Reckoning Matrix (DR)
@@ -1121,32 +1104,31 @@ bool Nib::drComputeMatrixR1(
    // intermediate values
    //--------------------------------------------------------------------------
 
-   const double Wx = av[0];
-   const double Wy = av[1];
-   const double Wz = av[2];
-   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx{av[0]};
+   const double Wy{av[1]};
+   const double Wz{av[2]};
+   const double absAV2{Wx*Wx + Wy*Wy + Wz*Wz};
 
    if (absAV2 > 0.0) {
-      const double absAV1 = std::sqrt(absAV2);
-      const double absAV3 = absAV2 * absAV1;
+      const double absAV1{std::sqrt(absAV2)};
+      const double absAV3{absAV2 * absAV1};
 
-      const double cosWT = std::cos(absAV1 * dT);
-      const double sinWT = std::sin(absAV1 * dT);
+      const double cosWT{std::cos(absAV1 * dT)};
+      const double sinWT{std::sin(absAV1 * dT)};
 
       //----------------------------------------------------------------------
       // Get Matrix Coefficients (k1, k2, k3)
       //----------------------------------------------------------------------
-      const double k1 = (absAV1 * dT - sinWT) / absAV3;
-      const double k2 = sinWT / absAV1;
-      const double k3 = (1.0 - cosWT) / absAV2;
+      const double k1{(absAV1 * dT - sinWT) / absAV3};
+      const double k2{sinWT / absAV1};
+      const double k3{(1.0 - cosWT) / absAV2};
 
       //----------------------------------------------------------------------
       // Compute R1 Matrix
       //----------------------------------------------------------------------
       static const base::Matrixd I3;
       *pR1 = wwT*k1 + I3*k2 + omega*k3;
-   }
-   else {
+   } else {
       pR1->identity();
    }
 
@@ -1168,33 +1150,32 @@ bool Nib::drComputeMatrixR2(
    //--------------------------------------------------------------------------
    // intermediate values
    //--------------------------------------------------------------------------
-   const double Wx = av[0];
-   const double Wy = av[1];
-   const double Wz = av[2];
-   const double absAV2 = Wx*Wx + Wy*Wy + Wz*Wz;
+   const double Wx{av[0]};
+   const double Wy{av[1]};
+   const double Wz{av[2]};
+   const double absAV2{Wx*Wx + Wy*Wy + Wz*Wz};
 
    if (absAV2 > 0.0) {
-      const double absAV1 = std::sqrt(absAV2);
-      const double absAV3 = absAV2 * absAV1;
-      const double absAV4 = absAV1 * absAV3;
+      const double absAV1{std::sqrt(absAV2)};
+      const double absAV3{absAV2 * absAV1};
+      const double absAV4{absAV1 * absAV3};
 
-      const double cosWT = std::cos(absAV1 * dT);
-      const double sinWT = std::sin(absAV1 * dT);
+      const double cosWT{std::cos(absAV1 * dT)};
+      const double sinWT{std::sin(absAV1 * dT)};
 
       //--------------------------------------------------------------------------
       // Get Matrix Scaling Coefficients (k1, k2, k3)
       //--------------------------------------------------------------------------
-      const double k1 = (0.5*absAV2*dT*dT - cosWT - absAV1*dT*sinWT + 1.0) / absAV4;
-      const double k2 = (cosWT + absAV1*dT*sinWT - 1.0) / absAV2;
-      const double k3 = (sinWT - absAV1*dT*cosWT) / absAV3;
+      const double k1{(0.5*absAV2*dT*dT - cosWT - absAV1*dT*sinWT + 1.0) / absAV4};
+      const double k2{(cosWT + absAV1*dT*sinWT - 1.0) / absAV2};
+      const double k3{(sinWT - absAV1*dT*cosWT) / absAV3};
 
       //--------------------------------------------------------------------------
       // Compute R2 Matrix
       //--------------------------------------------------------------------------
       static const base::Matrixd I3;
       *pR2 = wwT*k1 + I3*k2 + omega*k3;
-   }
-   else {
+   } else {
       pR2->identity();
    }
 

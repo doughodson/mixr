@@ -601,7 +601,7 @@ CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, con
    if (player != nullptr) {
       // Get the player's IDs
       const base::String* fName{};
-      if (player->isNetworkedPlayer()) {
+      if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const simulation::AbstractNib* pNib{player->getNib()};
          fName = pNib->getFederateName();

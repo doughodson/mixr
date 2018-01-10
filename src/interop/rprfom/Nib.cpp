@@ -167,7 +167,7 @@ void Nib::updateTheIPlayer()
    // ---
    if (p == nullptr && isEntityTypeUnchecked() && haveEntityIdFlg && haveEntityTypeFlg && haveWorldLocationFlg && haveOrientationFlg) {
       // Create the player
-      p = getNetIO()->createIPlayer(this);
+      p = getNetIO()->createProxyPlayer(this);
    }
 
    // ---

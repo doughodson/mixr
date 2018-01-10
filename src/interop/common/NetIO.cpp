@@ -40,10 +40,10 @@ IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-const double NET_TIMEOUT          = 12.5;                    //  seconds
-const double NET_UPDATE_RATE      = 5.0;                     //  seconds
-const double NET_THRESHOLD_MTR    = 3.0;                     //  meters
-const double NET_THRESHOLD_RAD    = (3.0 * base::PI/180.0);  //  radians
+const double NET_TIMEOUT          {12.5};                  //  seconds
+const double NET_UPDATE_RATE      {5.0};                   //  seconds
+const double NET_THRESHOLD_MTR    {3.0};                   //  meters
+const double NET_THRESHOLD_RAD    {3.0 * base::PI/180.0};  //  radians
 
 BEGIN_SLOTTABLE(NetIO)
    "networkID",            //  1: Network ID (this interface)
@@ -131,14 +131,14 @@ void NetIO::copyData(const NetIO& org, const bool)
    nOutNibs = 0;
 
    clearInputEntityTypes();
-   for (unsigned int i = 0; i < org.nInputEntityTypes; i++) {
+   for (int i = 0; i < org.nInputEntityTypes; i++) {
       Ntm* cp = org.inputEntityTypes[i]->clone();
       addInputEntityType( cp );
       cp->unref();
    }
 
     clearOutputEntityTypes();
-    for (unsigned int i = 0; i < org.nOutputEntityTypes; i++) {
+    for (int i = 0; i < org.nOutputEntityTypes; i++) {
       Ntm* cp = org.outputEntityTypes[i]->clone();
       addOutputEntityType( cp );
       cp->unref();
@@ -147,13 +147,13 @@ void NetIO::copyData(const NetIO& org, const bool)
 
 void NetIO::deleteData()
 {
-   for (unsigned int i = 0; i < nInNibs; i++) {
+   for (int i = 0; i < nInNibs; i++) {
       inputList[i]->unref();
       inputList[i] = nullptr;
    }
    nInNibs = 0;
 
-   for (unsigned int i = 0; i < nOutNibs; i++) {
+   for (int i = 0; i < nOutNibs; i++) {
       outputList[i]->unref();
       outputList[i] = nullptr;
    }
@@ -187,11 +187,11 @@ void NetIO::reset()
 //------------------------------------------------------------------------------
 bool NetIO::shutdownNotification()
 {
-    for (unsigned int i = 0; i < nInNibs; i++) {
+    for (int i = 0; i < nInNibs; i++) {
         inputList[i]->event(SHUTDOWN_EVENT);
     }
 
-    for (unsigned int i = 0; i < nOutNibs; i++) {
+    for (int i = 0; i < nOutNibs; i++) {
         outputList[i]->event(SHUTDOWN_EVENT);
     }
     return BaseClass::shutdownNotification();
@@ -263,7 +263,7 @@ const base::String* NetIO::getFederationName() const
 // Sets the Network's ID
 bool NetIO::setNetworkID(const unsigned short v)
 {
-   bool ok = false;
+   bool ok{};
    if (v >= 1 && v <= MAX_NETWORD_ID) {
       netID = v;
       ok = true;
@@ -388,31 +388,30 @@ bool NetIO::networkInitialization()
 void NetIO::cleanupInputList()
 {
    // Current exec time
-   const double curExecTime = getSimulation()->getExecTimeSec();
+   const double curExecTime{getSimulation()->getExecTimeSec()};
 
-   for (unsigned int idx = 0; idx < nInNibs; idx++) {
-      Nib* nib = inputList[idx];
+   for (int idx = 0; idx < nInNibs; idx++) {
+      Nib* nib{inputList[idx]};
       if ( (nib->isTimeoutEnabled() && ((curExecTime - nib->getTimeExec()) > getMaxAge(nib)) )) {
             // We have one that's timed-out --
             //std::cout << "REMOVED(TO): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
             // 1) Shift the rest of the list down one
             nInNibs--;
-            for (unsigned int i = idx; i < nInNibs; i++) {
+            for (int i = idx; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
             }
             inputList[nInNibs] = nullptr;
 
             // 2) Destroy the NIB
             destroyInputNib(nib);
-      }
-      else if (nib->isMode(models::Player::DELETE_REQUEST) ) {
+      } else if (nib->isMode(models::Player::Mode::DELETE_REQUEST) ) {
             // We have one that has a DELETE_REQUEST
             //std::cout << "REMOVED(DR): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
             // 1) Shift the rest of the list down one
             nInNibs--;
-            for (unsigned int i = idx; i < nInNibs; i++) {
+            for (int i = idx; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
             }
             inputList[nInNibs] = nullptr;
@@ -440,15 +439,14 @@ void NetIO::updateOutputList()
       //   -- We're also clearing the NIB's 'checked' flag
       // ---
       {
-         unsigned int i = 0;  // src index
-         unsigned int j = 0;  // dest index
+         int i{};  // src index
+         int j{};  // dest index
          while (i < nOutNibs) {
-            if (outputList[i]->isMode(models::Player::DELETE_REQUEST)) {
+            if (outputList[i]->isMode(models::Player::Mode::DELETE_REQUEST)) {
                // Deleting this NIB
                //std::cout << "NetIO::updateOutputList() cleanup: nib = " << outputList[i] << std::endl;
                destroyOutputNib(outputList[i++]);
-            }
-            else {
+            } else {
                if (i != j) outputList[j] = outputList[i];
                outputList[j]->setCheckedFlag(false);
                i++;
@@ -464,17 +462,17 @@ void NetIO::updateOutputList()
       if ( isOutputEnabled() ) {
 
          // Get the player list pointer (pre-ref()'d)
-         base::PairStream* players = getSimulation()->getPlayers();
+         base::PairStream* players{getSimulation()->getPlayers()};
 
          // For all players
-         bool finished = false;
-         unsigned int newCount = 0;
-         base::List::Item* playerItem = players->getFirstItem();
+         bool finished{};
+         unsigned int newCount{};
+         base::List::Item* playerItem{players->getFirstItem()};
          while (playerItem != nullptr && !finished) {
 
             // Get player list items
-            base::Pair* playerPair = static_cast<base::Pair*>(playerItem->getValue());
-            models::Player* player = static_cast<models::Player*>(playerPair->object());
+            base::Pair* playerPair{static_cast<base::Pair*>(playerItem->getValue())};
+            models::Player* player{static_cast<models::Player*>(playerPair->object())};
 
             if (player->isLocalPlayer() || (isRelayEnabled() && player->getNetworkID() != getNetworkID()) )  {
                if ( player->isActive() && player->isNetOutputEnabled()) {
@@ -483,7 +481,7 @@ void NetIO::updateOutputList()
                   //         (2) an active networked player to relay ...
 
                   // Find the output NIB for this player
-                  Nib* nib = findNib(player, OUTPUT_NIB);
+                  Nib* nib{findNib(player, OUTPUT_NIB)};
                   if (nib == nullptr && newCount < MAX_NEW_OUTGOING) {
                      // Not Found then create a new output NIB for this player
                      nib = insertNewOutputNib( player );
@@ -495,8 +493,7 @@ void NetIO::updateOutputList()
                      nib->setCheckedFlag(true);
                   }
                }
-            }
-            else {
+            } else {
                // Finished with local players and we're not relaying
                finished = !isRelayEnabled();
             }
@@ -511,12 +508,12 @@ void NetIO::updateOutputList()
       // ---
       // Any NIB that was not checked needs to be removed
       // ---
-      for (unsigned int i = 0; i < nOutNibs; i++) {
+      for (int i = 0; i < nOutNibs; i++) {
          if ( !outputList[i]->isChecked() ) {
             // Request removal;
             // (note: the network specific code now has one frame to cleanup its own code
             //  before the NIB is dropped from the output list next frame -- see above)
-            outputList[i]->setMode(models::Player::DELETE_REQUEST);
+            outputList[i]->setMode(models::Player::Mode::DELETE_REQUEST);
          }
       }
 
@@ -534,8 +531,8 @@ void NetIO::processOutputList()
    // ---
    for (unsigned int idx = 0; idx < getOutputListSize(); idx++) {
 
-      Nib* nib = getOutputNib(idx);
-      const double curExecTime = getSimulation()->getExecTimeSec();
+      Nib* nib{getOutputNib(idx)};
+      const double curExecTime{getSimulation()->getExecTimeSec()};
 
       if (nib->isEntityTypeValid()) {
 
@@ -544,13 +541,13 @@ void NetIO::processOutputList()
          // Check if a fire event is needed.  When a weapon type player is active,
          // but its NIB state is still inactive, then we say the weapon has just
          // been fired. (delay until after the entity state PDU)
-         bool fired =
-            (nib->isMode(models::Player::INACTIVE) || nib->isMode(models::Player::PRE_RELEASE)) &&
-            nib->getPlayer()->isMode(models::Player::ACTIVE) &&
-            nib->getPlayer()->isMajorType(models::Player::WEAPON);
+         bool fired{
+            (nib->isMode(models::Player::Mode::INACTIVE) || nib->isMode(models::Player::Mode::PRE_RELEASE)) &&
+            nib->getPlayer()->isMode(models::Player::Mode::ACTIVE) &&
+            nib->getPlayer()->isMajorType(models::Player::WEAPON)};
 
          // Send a detonation message
-         if (nib->getPlayer()->isMode(models::Player::DETONATED) && !nib->wasDetonationMessageSent()) {
+         if (nib->getPlayer()->isMode(models::Player::Mode::DETONATED) && !nib->wasDetonationMessageSent()) {
             nib->munitionDetonationMsgFactory(static_cast<double>(curExecTime));
          }
 
@@ -576,14 +573,14 @@ void NetIO::processOutputList()
 //------------------------------------------------------------------------------
 Nib* NetIO::createNewInputNib()
 {
-    Nib* nib = nibFactory(INPUT_NIB);
+    Nib* nib{nibFactory(INPUT_NIB)};
     nib->setNetIO(this);
     return nib;
 }
 
 Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
-   Nib* nib = nibFactory(OUTPUT_NIB);
+   Nib* nib{nibFactory(OUTPUT_NIB)};
    if (nib != nullptr) {
       nib->setNetIO(this);
       nib->setPlayer(player);
@@ -593,8 +590,8 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
       // Default DR: World, No rotation, 2nd order linear
       nib->setDeadReckoning(Nib::FVW_DRM);
 
-      const base::String* fName = getFederateName();
-      if (player->isNetworkedPlayer()) {
+      const base::String* fName{getFederateName()};
+      if (player->isProxyPlayer()) {
          const auto pNib = dynamic_cast<Nib*>(player->getNib());
          fName = pNib->getFederateName();
       }
@@ -617,16 +614,16 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
 void NetIO::destroyInputNib(Nib* const nib)
 {
    if (nib->getPlayer() != nullptr) {
-      // All we really need do is request deletion of the IPlayer.
-      nib->getPlayer()->setMode(models::Player::DELETE_REQUEST);
+      // all we really need do is request deletion of the proxy player
+      nib->getPlayer()->setMode(models::Player::Mode::DELETE_REQUEST);
    }
-   // Once no one has a reference to us, our destructor will be called.
+   // Once no one has a reference to us, our destructor will be called
    nib->unref();
 }
 
 void NetIO::destroyOutputNib(Nib* const nib)
 {
-   models::Player* p = nib->getPlayer();
+   models::Player* p{nib->getPlayer()};
    if (p != nullptr) p->setOutgoingNib(nullptr, netID);
 
    // Once no one has a reference to us, our destructor will be called.
@@ -634,17 +631,17 @@ void NetIO::destroyOutputNib(Nib* const nib)
 }
 
 //------------------------------------------------------------------------------
-// createIPlayer() -- Create a new IPlayer
+// create a new proxy player
 //------------------------------------------------------------------------------
-models::Player* NetIO::createIPlayer(Nib* const nib)
+models::Player* NetIO::createProxyPlayer(Nib* const nib)
 {
-   models::Player* player = nullptr;
+   models::Player* player{};
 
    // Range filter
-   bool inRange = true;
-   double maxRng2 = getMaxEntityRangeSquared(nib);
+   bool inRange{true};
+   double maxRng2{getMaxEntityRangeSquared(nib)};
    if (nib != nullptr && maxRng2 > 0) {
-      const simulation::Station* sta = getStation();
+      const simulation::Station* sta{getStation()};
       const auto own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
          base::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
@@ -661,13 +658,13 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
       nib->setEntityTypeChecked( true );
 
       // Find "by NIB type codes" on the input list
-      const Ntm* typeMapper = findNetworkTypeMapper(nib);
+      const Ntm* typeMapper{findNetworkTypeMapper(nib)};
 
       // ---
       // Clone the 'template' player object (if any)
       // ---
       if (typeMapper != nullptr) {
-         const models::Player* templatePlayer = typeMapper->getTemplatePlayer();
+         const models::Player* templatePlayer{typeMapper->getTemplatePlayer()};
          if (templatePlayer != nullptr) {
             player = templatePlayer->clone();
          }
@@ -684,7 +681,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
          player->setSide( nib->getSide() );
          player->setName( nib->getPlayerName() );
          player->setNib(nib);
-         player->setMode(models::Player::INACTIVE);
+         player->setMode(models::Player::Mode::INACTIVE);
          player->setGeocPosition( nib->getDrPosition() );
          player->setGeocEulerAngles( nib->getDrEulerAngles() );
          player->setGeocVelocity( nib->getDrVelocity() );
@@ -696,7 +693,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
          // ---
          // Add it to the player list
          // ---
-         const auto playerPair = new base::Pair(nib->getPlayerName(), player);
+         const auto playerPair = new base::Pair(nib->getPlayerName().c_str(), player);
          getSimulation()->addNewPlayer(playerPair);
 
          player->reset();
@@ -717,12 +714,12 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
 //------------------------------------------------------------------------------
 Nib* NetIO::insertNewOutputNib(models::Player* const player)
 {
-    Nib* newNib = nullptr;
+    Nib* newNib{};
     if (player != nullptr) {
         newNib = createNewOutputNib(player);
         if (newNib != nullptr) {
             // Insert the new NIB into the 'output' list
-            bool ok = addNibToList(newNib, OUTPUT_NIB);
+            const bool ok{addNibToList(newNib, OUTPUT_NIB)};
             newNib->unref(); // the list owns it now.
             if (!ok) newNib = nullptr;
         }
@@ -752,15 +749,12 @@ Nib* NetIO::findNib(const unsigned short playerID, const base::String* const fed
    NibKey key(playerID, federateName);
 
    // Binary search the table for the NIB
-   Nib* found = nullptr;
+   Nib* found{};
    if (ioType == INPUT_NIB) {
-      Nib** k =
-         static_cast<Nib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib));
+      Nib** k{static_cast<Nib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
-   }
-   else {
-      Nib** k =
-         static_cast<Nib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib));
+   } else {
+      Nib** k{static_cast<Nib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
    }
    return found;
@@ -768,11 +762,11 @@ Nib* NetIO::findNib(const unsigned short playerID, const base::String* const fed
 
 Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
 {
-   Nib* found = nullptr;
+   Nib* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::String* fName = getFederateName();
-      if (player->isNetworkedPlayer()) {
+      const base::String* fName{getFederateName()};
+      if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const auto pNib = dynamic_cast<const Nib*>(player->getNib());
          fName = pNib->getFederateName();
@@ -788,10 +782,10 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
 //------------------------------------------------------------------------------
 bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 {
-   bool ok = false;
+   bool ok{};
    if (nib != nullptr) {
-      Nib** tbl = inputList.data();
-      int n = nInNibs;
+      Nib** tbl{inputList.data()};
+      int n{nInNibs};
       if (ioType == OUTPUT_NIB) {
          tbl = outputList.data();
          n = nOutNibs;
@@ -833,14 +827,14 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 //------------------------------------------------------------------------------
 void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 {
-   Nib** tbl = inputList.data();
-   int n = nInNibs;
+   Nib** tbl{inputList.data()};
+   int n{nInNibs};
    if (ioType == OUTPUT_NIB) {
       tbl = outputList.data();
       n = nOutNibs;
    }
 
-   int found = -1;
+   int found{-1};
    // Find the NIB
    for (int i = 0; i < n && found < 0; i++) {
       if (nib == tbl[i]) found = i;
@@ -849,7 +843,7 @@ void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
    // Shift down all items above this NIB one position
    if (found >= 0) {
       tbl[found]->unref();
-      int n1 = (n - 1);
+      int n1{n - 1};
       for (int i = found; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
@@ -869,14 +863,14 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 {
 
    // The Key
-   const NibKey* pKey = static_cast<const NibKey*>(key);
+   const NibKey* pKey{static_cast<const NibKey*>(key)};
 
    // The NIB
-   const Nib* const* pp = static_cast<const Nib* const*>(nib);
-   const Nib* pNib = *pp;
+   const Nib* const* pp{static_cast<const Nib* const*>(nib)};
+   const Nib* pNib{*pp};
 
    // Default to equal
-   int result = 0;
+   int result{};
 
    // First, compare the player IDs
    if (pKey->id > pNib->getPlayerID()) result = +1;
@@ -897,7 +891,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 // Finds the network type mapper by NIB type codes
 const Ntm* NetIO::findNetworkTypeMapper(const Nib* const nib) const
 {
-   const Ntm* result = nullptr;
+   const Ntm* result{};
    if (inputNtmTree != nullptr && nib != nullptr) {
       result = inputNtmTree->findNetworkTypeMapper(nib);
    }
@@ -907,7 +901,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const Nib* const nib) const
 // Finds the network type mapper by Player
 const Ntm* NetIO::findNetworkTypeMapper(const models::Player* const p) const
 {
-   const Ntm* result = nullptr;
+   const Ntm* result{};
    if (outputNtmTree != nullptr && p != nullptr) {
       result = outputNtmTree->findNetworkTypeMapper(p);
    }
@@ -917,7 +911,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const models::Player* const p) const
 // Adds an item to the input entity type table
 bool NetIO::addInputEntityType(Ntm* const ntm)
 {
-   bool ok = false;
+   bool ok{};
    if (nInputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
 
       ntm->ref();
@@ -941,7 +935,7 @@ bool NetIO::addInputEntityType(Ntm* const ntm)
 // Adds an item to the output entity type table
 bool NetIO::addOutputEntityType(Ntm* const ntm)
 {
-   bool ok = false;
+   bool ok{};
    if (nOutputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
 
       ntm->ref();
@@ -1013,39 +1007,27 @@ const NetIO::NtmOutputNode* NetIO::getRootNtmOutputNode() const
 }
 
 // Return a incoming entity type by index
-const Ntm* NetIO::getInputEntityType(const unsigned int idx) const
+const Ntm* NetIO::getInputEntityType(const int idx) const
 {
    return (idx < nInputEntityTypes) ? inputEntityTypes[idx] : nullptr;
 }
 
 // Return a outgoing entity type by index
-const Ntm* NetIO::getOutputEntityTypes(const unsigned int idx) const
+const Ntm* NetIO::getOutputEntityTypes(const int idx) const
 {
    return (idx < nOutputEntityTypes) ? outputEntityTypes[idx] : nullptr;
 }
 
 // Number of output types
-unsigned int NetIO::getNumInputEntityTypes() const
+int NetIO::getNumInputEntityTypes() const
 {
    return nInputEntityTypes;
 }
 
 // Number of input types
-unsigned int NetIO::getNumOutputEntityTypes() const
+int NetIO::getNumOutputEntityTypes() const
 {
    return nOutputEntityTypes;
-}
-
-// Test rig: quick lookup of incoming entity types
-void NetIO::testInputEntityTypes(const unsigned int)
-{
-   // Handled by derived classes
-}
-
-// Test rig: quick lookup of outgoing entity types
-void NetIO::testOutputEntityTypes(const unsigned int)
-{
-   // Handled by derived classes
 }
 
 //------------------------------------------------------------------------------
@@ -1055,13 +1037,12 @@ void NetIO::testOutputEntityTypes(const unsigned int)
 // Set networkID
 bool NetIO::setSlotNetworkID(const base::Number* const num)
 {
-    bool ok = false;
+    bool ok{};
     if (num != nullptr) {
-        int v = num->getInt();
+        const int v{num->getInt()};
         if (v >= 1 && v <= static_cast<int>(MAX_NETWORD_ID)) {
             ok = setNetworkID(static_cast<unsigned short>(v));
-        }
-        else {
+        } else {
             std::cerr << "NetIO::setSlotNetworkID(): invalid number(" << v << "); ";
             std::cerr << "valid range:[1 ... " << MAX_NETWORD_ID << " ]" << std::endl;
         }
@@ -1084,7 +1065,7 @@ bool NetIO::setSlotFederationName(const base::String* const msg)
 // Set input enable flag
 bool NetIO::setSlotEnableInput(const base::Number* const p)
 {
-    bool ok = false;
+    bool ok{};
     if (p != nullptr) {
         inputFlg = p->getBoolean();
         ok = true;
@@ -1095,7 +1076,7 @@ bool NetIO::setSlotEnableInput(const base::Number* const p)
 // Set output enable flag
 bool NetIO::setSlotEnableOutput(const base::Number* const p)
 {
-    bool ok = false;
+    bool ok{};
     if (p != nullptr) {
         outputFlg = p->getBoolean();
         ok = true;
@@ -1106,7 +1087,7 @@ bool NetIO::setSlotEnableOutput(const base::Number* const p)
 // Set relay enable flag
 bool NetIO::setSlotEnableRelay(const base::Number* const p)
 {
-    bool ok = false;
+    bool ok{};
     if (p != nullptr) {
         relayFlg = p->getBoolean();
         ok = true;
@@ -1117,13 +1098,12 @@ bool NetIO::setSlotEnableRelay(const base::Number* const p)
 // Sets the source of the time ( UTC or EXEC )
 bool NetIO::setSlotTimeline(const base::Identifier* const p)
 {
-    bool ok = false;
+    bool ok{};
     if (p != nullptr) {
         if (*p == "EXEC") {
             setTimeline( EXEC );
             ok = true;
-        }
-        else if (*p == "UTC") {
+        } else if (*p == "UTC") {
             setTimeline( UTC );
             ok = true;
         }
@@ -1134,13 +1114,13 @@ bool NetIO::setSlotTimeline(const base::Identifier* const p)
 // Sets the table of input entity to player mapper objects
 bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        // First clear the old table
        clearInputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item = msg->getFirstItem();
+       base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           const auto ntm = dynamic_cast<Ntm*>( pair->object() );
@@ -1159,13 +1139,13 @@ bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
 // Sets the table of output entity to player mapper objects
 bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 {
-    bool ok = false;
+    bool ok{};
     if (msg != nullptr) {
        // First clear the old table
        clearOutputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item = msg->getFirstItem();
+       base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           const auto ntm = dynamic_cast<Ntm*>( pair->object() );
@@ -1184,9 +1164,9 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 // Sets the mac DR time(s)
 bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double time = base::Seconds::convertStatic( *msg );
+      const double time{base::Seconds::convertStatic( *msg )};
       ok = setMaxTimeDR( time );
    }
    return ok;
@@ -1195,9 +1175,9 @@ bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
 // Sets the max positional error(s)
 bool NetIO::setSlotMaxPositionErr(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double err = base::Meters::convertStatic( *msg );
+      const double err{base::Meters::convertStatic( *msg )};
       ok = setMaxPositionErr( err );
    }
    return ok;
@@ -1206,9 +1186,9 @@ bool NetIO::setSlotMaxPositionErr(const base::Distance* const msg)
 // Sets the max orientation error(s)
 bool NetIO::setSlotMaxOrientationErr(const base::Angle* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double err = static_cast<double>(base::Radians::convertStatic( *msg ));
+      const double err{static_cast<double>(base::Radians::convertStatic( *msg ))};
       ok = setMaxOrientationErr( err );
    }
    return ok;
@@ -1217,9 +1197,9 @@ bool NetIO::setSlotMaxOrientationErr(const base::Angle* const msg)
 // Sets the max age(s)
 bool NetIO::setSlotMaxAge(const base::Time* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double age = base::Seconds::convertStatic( *msg );
+      const double age{base::Seconds::convertStatic( *msg )};
       ok = setMaxAge( age );
    }
    return ok;
@@ -1228,9 +1208,9 @@ bool NetIO::setSlotMaxAge(const base::Time* const msg)
 // Sets the max entity range(s)
 bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      const double rng = base::Meters::convertStatic( *msg );
+      const double rng{base::Meters::convertStatic( *msg )};
       ok = setMaxEntityRange( rng );
    }
    return ok;
@@ -1309,23 +1289,23 @@ NetIO::NtmOutputNode* NetIO::NtmOutputNode::clone() const
 
 class NtmOutputNodeStd : public NetIO::NtmOutputNode
 {
-   DECLARE_SUBCLASS(NtmOutputNodeStd,NetIO::NtmOutputNode)
+   DECLARE_SUBCLASS(NtmOutputNodeStd, NetIO::NtmOutputNode)
 
 public:
-   NtmOutputNodeStd(const models::Player* const p, const char* const formName);
+   NtmOutputNodeStd(const models::Player* const, const char* const factoryName);
 
    // NetIO::NtmOutputNode class functions
-   const Ntm* findNetworkTypeMapper(const models::Player* const p) const override;
-   bool add2OurLists(Ntm* const ntm) override;
+   const Ntm* findNetworkTypeMapper(const models::Player* const) const override;
+   bool add2OurLists(Ntm* const) override;
 
 private:
-   bool checkAndAddNtm(Ntm* const ntm);
-   bool addNtmSorted(Ntm* const ntm);
+   bool checkAndAddNtm(Ntm* const);
+   bool addNtmSorted(Ntm* const);
 
-   char* nodeFactoryName;     // Factory name for this node
-   const models::Player* tp;  // Template player for this node
-   base::List* ntmList;       // List of Ntm objects at this level
-   base::List* subnodeList;   // List of NtmOutputNode nodes for players derived this level
+   char* nodeFactoryName{};     // Factory name for this node
+   const models::Player* tp{};  // Template player for this node
+   base::List* ntmList{};       // List of Ntm objects at this level
+   base::List* subnodeList{};   // List of NtmOutputNode nodes for players derived this level
 };
 
 IMPLEMENT_SUBCLASS(NtmOutputNodeStd, "NtmOutputNodeStd")
@@ -1350,7 +1330,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const models::Player* const p, const char* co
    tp = nullptr;
 
    if (name != nullptr) {
-      const std::size_t LENGTH {std::strlen(name) + 1};
+      const std::size_t LENGTH{std::strlen(name) + 1};
       nodeFactoryName = new char[LENGTH];
       base::utStrcpy(nodeFactoryName,LENGTH,name);
    }
@@ -1380,7 +1360,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
       nodeFactoryName = nullptr;
    }
    if (org.nodeFactoryName != nullptr) {
-      const std::size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
+      const std::size_t LENGTH{std::strlen(org.nodeFactoryName) + 1};
       nodeFactoryName = new char[LENGTH];
       base::utStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
    }
@@ -1439,7 +1419,7 @@ void NtmOutputNodeStd::deleteData()
 //------------------------------------------------------------------------------
 const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p) const
 {
-   const Ntm* result = nullptr;
+   const Ntm* result{};
 
    // Using factory names, is the target player either the same or derived from
    // our node?  (the root node, which has no factory name, will always match)
@@ -1447,9 +1427,9 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
 
       // First, we'll search our subnodes to see if they'll find a match
       // (i.e., if it's derived from our node then there may be a better match)
-      const base::List::Item* item = subnodeList->getFirstItem();
+      const base::List::Item* item{subnodeList->getFirstItem()};
       while (item != nullptr && result == nullptr) {
-         const NtmOutputNodeStd* subnode = static_cast<const NtmOutputNodeStd*>(item->getValue());
+         const NtmOutputNodeStd* subnode{static_cast<const NtmOutputNodeStd*>(item->getValue())};
          result = subnode->findNetworkTypeMapper(p);
          item = item->getNext();
       }
@@ -1459,22 +1439,22 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
       if (result == nullptr && nodeFactoryName != nullptr) {
 
          // Target player's type string and length
-         const base::String* const pType = p->getType();
-         const std::size_t pTypeLen = pType->len();
+         const base::String* const pType{p->getType()};
+         const std::size_t pTypeLen{pType->len()};
 
          // Search the NTM for a match with the most matching type string characters,
          // but not more than the target player's type string.
-         const base::List::Item* item = ntmList->getFirstItem();
+         const base::List::Item* item{ntmList->getFirstItem()};
          while (item != nullptr && result == nullptr) {
 
             // Get the template player and its type string with length
-            const Ntm* tstNtm = static_cast<const Ntm*>(item->getValue());
-            const models::Player* const tp = tstNtm->getTemplatePlayer();
-            const base::String* const tpType = tp->getType();
-            const std::size_t tpTypeLen = tpType->len();
+            const Ntm* tstNtm{static_cast<const Ntm*>(item->getValue())};
+            const models::Player* const tp{tstNtm->getTemplatePlayer()};
+            const base::String* const tpType{tp->getType()};
+            const std::size_t tpTypeLen{tpType->len()};
 
             if (tpTypeLen <= pTypeLen) {
-               bool match = (std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0);
+               bool match{(std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0)};
                if (match) {
                   result = tstNtm;
                }
@@ -1498,7 +1478,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
 //------------------------------------------------------------------------------
 bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
 {
-   bool ok = false;
+   bool ok{};
 
    if (tgtNtm != nullptr) {
 
@@ -1506,16 +1486,16 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
       if (nodeFactoryName != nullptr) {
          // Using factory names, check if the target Ntm's
          // template player our form
-         const models::Player* const p = tgtNtm->getTemplatePlayer();
+         const models::Player* const p{tgtNtm->getTemplatePlayer()};
          ok = p->isFactoryName(nodeFactoryName);
       }
 
       if (ok) {
          // Yes -- check to see if it really belongs to one of our subnodes.
-         bool found = false;
-         base::List::Item* item = subnodeList->getFirstItem();
+         bool found{};
+         base::List::Item* item{subnodeList->getFirstItem()};
          while (item != nullptr && !found) {
-            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
+            NtmOutputNodeStd* subnode{static_cast<NtmOutputNodeStd*>(item->getValue())};
             found = subnode->add2OurLists(tgtNtm);
             item = item->getNext();
          }
@@ -1534,11 +1514,11 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
 //------------------------------------------------------------------------------
 bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
 {
-   bool ok = false;
+   bool ok{};
    if (tgtNtm != nullptr) {
 
-      const models::Player* const tp = tgtNtm->getTemplatePlayer();
-      const char* const tpfn = tp->getFactoryName();
+      const models::Player* const tp{tgtNtm->getTemplatePlayer()};
+      const char* const tpfn{tp->getFactoryName()};
 
       // Case #1 : when the Ntm's template player has the same
       // factory name as this node then we just add it to the list
@@ -1558,7 +1538,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
-         base::List::Item* item = subnodeList->getFirstItem();
+         base::List::Item* item{subnodeList->getFirstItem()};
          while (item != nullptr) {
             const auto subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
@@ -1586,7 +1566,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
 //------------------------------------------------------------------------------
 bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
 {
-   bool ok = false;
+   bool ok{};
    if (newNtm != nullptr) {
       newNtm->ref();
 
@@ -1595,35 +1575,33 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm
-      const models::Player* newP = newNtm->getTemplatePlayer();
-      const base::String* newTypeStr = newP->getType();
-      const std::size_t newTypeLen = newTypeStr->len();
+      const models::Player* newP{newNtm->getTemplatePlayer()};
+      const base::String* newTypeStr{newP->getType()};
+      const std::size_t newTypeLen{newTypeStr->len()};
 
-      bool inserted = false;
-      bool err = false;
-      base::List::Item* refItem = ntmList->getFirstItem();
+      bool inserted{};
+      bool err{};
+      base::List::Item* refItem{ntmList->getFirstItem()};
       while (refItem != nullptr && !inserted && !err) {
 
          // Get the ref player's string from the 'ref' Ntm.
-         const Ntm* refNtm =  static_cast<const Ntm*>(refItem->getValue());
-         const models::Player* refP = refNtm->getTemplatePlayer();
-         const base::String* refTypeStr = refP->getType();
-         const std::size_t refTypeLen = refTypeStr->len();
+         const Ntm* refNtm{static_cast<const Ntm*>(refItem->getValue())};
+         const models::Player* refP{refNtm->getTemplatePlayer()};
+         const base::String* refTypeStr{refP->getType()};
+         const std::size_t refTypeLen{refTypeStr->len()};
 
          // compare to the shortest string length
-         std::size_t len = newTypeLen;
+         std::size_t len{newTypeLen};
          if (refTypeLen < len) len = refTypeLen;
 
-         int r = std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len);
+         int r{std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len)};
          if ( r == 0 && refTypeLen < newTypeLen) {
             ntmList->insert(newItem, refItem);
             inserted = true;
-         }
-         else if (r < 0) {
+         } else if (r < 0) {
             ntmList->insert(newItem, refItem);
             inserted = true;
-         }
-         else if ( r == 0 && refTypeLen == newTypeLen) {
+         } else if ( r == 0 && refTypeLen == newTypeLen) {
             if (isMessageEnabled(MSG_WARNING)) {
                std::cerr << "Warning: duplicate outgoing NTM( ";
                std::cerr << newP->getFactoryName() << " type: " << *newTypeStr;

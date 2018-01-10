@@ -285,14 +285,14 @@ private:
    Station* station{};                    // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
-   static const unsigned short MAX_TC_THREADS{32};
+   static const int MAX_TC_THREADS{32};
    std::array<SimulationTcSyncThread*, MAX_TC_THREADS> tcThreads{};   // Thread pool; 'numTcThreads' threads
    int reqTcThreads{1};                                               // Requested number of threads
    int numTcThreads{};                                                // Number of threads in pool; should be (reqTcThreads - 1)
    bool tcThreadsFailed{};                                            // Failed to create threads.
 
    // Background thread pool
-   static const unsigned short MAX_BG_THREADS{32};
+   static const int MAX_BG_THREADS{32};
    std::array<SimulationBgSyncThread*, MAX_BG_THREADS> bgThreads{};   // Thread pool; 'reqBgThreads' threads
    int reqBgThreads{1};                                               // Requested number of threads
    int numBgThreads{};                                                // Number of threads in pool; should be (reqBgThreads - 1)

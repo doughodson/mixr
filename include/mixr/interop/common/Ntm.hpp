@@ -18,8 +18,7 @@ class Nib;
 //
 //    The mixr player type is defined by providing an example Player using
 //    the 'template' slot.  On incoming entities, the 'template' player is cloned
-//    to create the surrogate, "Interoperability Player" (or IPlayer) that is
-//    added to the simulation players list.
+//    to create a proxy player that is added to the simulation players list.
 //
 //    Network specific classes, which are derived from this class, are used to
 //    define the network specific entity types.
@@ -29,7 +28,7 @@ class Nib;
 //    player types to network entity codes.  These lists are provided as inputs
 //    to the NetIO object using the 'inputEntityTypes' and 'outputEntityTypes'
 //    slots.  For examples of these lists, see  the files 'DisIncomingEntityTypes.epp'
-//    and 'DisOutgoingEntityTypes.epp' in the directory "mixr-examples/shared/data".
+//    and 'DisOutgoingEntityTypes.epp' in the "mixr-data" directory.
 //
 //
 // Slots:

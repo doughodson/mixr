@@ -5,6 +5,8 @@
 #include "mixr/models/system/Pilot.hpp"
 #include "mixr/base/osg/Vec3d"
 
+#include <string>
+
 namespace mixr {
 namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }
 namespace models {
@@ -132,7 +134,7 @@ public:
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
    virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
-   virtual const base::Identifier* getLeadPlayerName()  { return leadName; }
+   virtual const std::string& getLeadPlayerName()       { return leadName; }
    virtual const Player* getLeadPlayer();                                             // Our lead player
 
    // get pilot limits
@@ -296,10 +298,10 @@ private:
 
    // Follow that lead mode data
    base::Vec3d leadOffset;                 // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
-   const Player* lead {};                  // Our lead player
-   const base::Identifier* leadName {};    // Name of our lead player
-   double leadHdg {};                      // lead's heading (rad)
-   bool   followLeadModeOn {};             // Follow the lead mode flag
+   const Player* lead{};                   // Our lead player
+   std::string leadName;                   // Name of our lead player
+   double leadHdg{};                       // lead's heading (rad)
+   bool   followLeadModeOn{};              // Follow the lead mode flag
 
 private:
    // slot table helper methods

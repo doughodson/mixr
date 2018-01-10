@@ -37,7 +37,7 @@ bool Nib::weaponFireMsgFactory(const double)
    RTI::ParameterHandleValuePairSet* pParams {RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER )};
 
    // Set our mode so that we don't do this again.
-   setMode(models::Player::ACTIVE);
+   setMode(models::Player::Mode::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
    const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
@@ -116,7 +116,7 @@ bool Nib::weaponFireMsgFactory(const double)
       Nib* fNib {};
       models::Player* fPlayer {mPlayer->getLaunchVehicle()};
       if (fPlayer != nullptr) {
-         if (fPlayer->isNetworkedPlayer()) {
+         if (fPlayer->isProxyPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
          } else {
             fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::NetIO::OUTPUT_NIB) );

@@ -32,7 +32,7 @@ bool Nib::weaponFireMsgFactory(const double)
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
-    setMode(models::Player::ACTIVE);
+    setMode(models::Player::Mode::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
     const auto mPlayer = static_cast<models::AbstractWeapon*>(getPlayer());

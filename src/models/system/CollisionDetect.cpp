@@ -200,7 +200,7 @@ void CollisionDetect::updateData(const double dt)
          Player* target{static_cast<Player*>(pair->object())};
 
          // Did we complete the local only players?
-         finished = localOnly && target->isNetworkedPlayer();
+         finished = localOnly && target->isProxyPlayer();
 
          // We should process this target if ...
          bool processTgt {
