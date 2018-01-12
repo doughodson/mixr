@@ -3,11 +3,10 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 #include <cmath>
@@ -33,7 +32,7 @@ BEGIN_SLOTTABLE(ScanGimbal)
 END_SLOTTABLE(ScanGimbal)
 
 BEGIN_SLOT_MAP(ScanGimbal)
-    ON_SLOT( 1, setSlotScanMode,          base::String)
+    ON_SLOT( 1, setSlotScanMode,          base::Identifier)
     ON_SLOT( 2, setSlotLeftToRightScan,   base::Number)
     ON_SLOT( 3, setSlotScanWidth,         base::Number)
     ON_SLOT( 4, setSlotSearchVolume,      base::List)
@@ -132,33 +131,33 @@ void ScanGimbal::scanController(const double dt)
 {
    switch (getScanMode()) {
 
-      case CONICAL_SCAN : {
+      case ScanMode::CONICAL_SCAN : {
          conicalScanController(dt);
          break;
       }
 
-      case CIRCULAR_SCAN : {
+      case ScanMode::CIRCULAR_SCAN : {
          circularScanController(dt);
          break;
       }
 
-      case MANUAL_SCAN : {
+      case ScanMode::MANUAL_SCAN : {
          manualScanController(dt);
          break;
       }
 
-      case PSEUDO_RANDOM_SCAN :  {
+      case ScanMode::PSEUDO_RANDOM_SCAN :  {
          pseudoRandomScanController(dt);
          break;
       }
 
-      case SPIRAL_SCAN : {
+      case ScanMode::SPIRAL_SCAN : {
          spiralScanController(dt);
          break;
       }
 
-      case HORIZONTAL_BAR_SCAN :
-      case VERTICAL_BAR_SCAN : {
+      case ScanMode::HORIZONTAL_BAR_SCAN :
+      case ScanMode::VERTICAL_BAR_SCAN : {
          barScanController(dt);
          break;
       }
@@ -182,7 +181,7 @@ void ScanGimbal::conicalScanController(const double dt)
     switch(getScanState()) {
         // reset state: move to ref position
         case 0: {
-            setServoMode(POSITION_SERVO);
+            setServoMode(ServoMode::POSITION);
             setFastSlewMode(true);
             setScanState(1);
             setConAngle(0);
@@ -257,7 +256,7 @@ void ScanGimbal::spiralScanController(const double dt)
     switch(getScanState()) {
         // reset state: move to ref position
         case 0: {
-            setServoMode(POSITION_SERVO);
+            setServoMode(ServoMode::POSITION);
             setFastSlewMode(true);
             setScanState(1);
             setConAngle(0);
@@ -352,7 +351,7 @@ void ScanGimbal::circularScanController(const double)
     switch(getScanState()) {
         // reset state: move to ref position
         case 0: {
-            setServoMode(POSITION_SERVO);
+            setServoMode(ServoMode::POSITION);
             setFastSlewMode(true);
             setCmdPos(getRefPosition());
             setScanState(1);
@@ -370,7 +369,7 @@ void ScanGimbal::circularScanController(const double)
         // start scan - switch to a rate servo, and begin spinning at a commanded rate
             // Trigger the SCAN_START event handler
             onStartScanEvent(&iBar);
-            setServoMode(RATE_SERVO);
+            setServoMode(ServoMode::RATE);
             setFastSlewMode(false);
             myLastAngle = base::angle::aepcdRad(getPosition().x() - getRefPosition().x());
             setScanState(3);
@@ -420,12 +419,12 @@ void ScanGimbal::pseudoRandomScanController(const double)
         // reset state, must be in electronic mode or we will not operate
         case 0: {
             if (prScanVertices != nullptr) {
-                if ( isGimbalType(ELECTRONIC) ) {
-                    setServoMode(POSITION_SERVO);
+                if ( isGimbalType(Type::ELECTRONIC) ) {
+                    setServoMode(ServoMode::POSITION);
                     setFastSlewMode(true);
                     setScanState(1);
                 }
-                else setScanMode(MANUAL_SCAN);
+                else setScanMode(ScanMode::MANUAL_SCAN);
             }
         }
             break;
@@ -483,9 +482,9 @@ void ScanGimbal::barScanController(const double)
         // reset state, we must set our bar number back to 1
         case 0: {
             setBarNumber(1);
-            computeNewBarPos(getBarNumber(), BEGINNING);
+            computeNewBarPos(getBarNumber(), Side::BEGINNING);
             setScanState(1);
-            setServoMode(POSITION_SERVO);
+            setServoMode(ServoMode::POSITION);
             setFastSlewMode(true);
         }
             break;
@@ -496,7 +495,7 @@ void ScanGimbal::barScanController(const double)
                 iBar = getBarNumber();
                 // Trigger the SCAN_START event handler
                 onStartScanEvent(&iBar);
-                computeNewBarPos(getBarNumber(), ENDING);
+                computeNewBarPos(getBarNumber(), Side::ENDING);
                 setScanState(2);
                 setFastSlewMode(false);
             }
@@ -510,7 +509,7 @@ void ScanGimbal::barScanController(const double)
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
                 nextBar();
-                computeNewBarPos(getBarNumber(), BEGINNING);
+                computeNewBarPos(getBarNumber(), Side::BEGINNING);
                 setScanState(1);
                 setFastSlewMode(true);
             }
@@ -600,20 +599,20 @@ void ScanGimbal::computeNewBarPos(const int bar, const Side side)
     // now we draw the Unitless numbers from the tables
     unsigned int nb{getNumBars()};
     if (nb == 1) {
-        x = table1[side][0];
-        y = table1[side][1];
+        x = table1[static_cast<int>(side)][0];
+        y = table1[static_cast<int>(side)][1];
     }
     else if (nb == 2) {
-        x = table2[bar-1][side][0];
-        y = table2[bar-1][side][1];
+        x = table2[bar-1][static_cast<int>(side)][0];
+        y = table2[bar-1][static_cast<int>(side)][1];
     }
     else if (nb == 3) {
-        x = table3[bar-1][side][0];
-        y = table3[bar-1][side][1];
+        x = table3[bar-1][static_cast<int>(side)][0];
+        y = table3[bar-1][static_cast<int>(side)][1];
     }
     else if (nb == 4) {
-        x = table4[bar-1][side][0];
-        y = table4[bar-1][side][1];
+        x = table4[bar-1][static_cast<int>(side)][0];
+        y = table4[bar-1][static_cast<int>(side)][1];
     }
 
     // swap x values if we are scanning right to left
@@ -630,7 +629,7 @@ void ScanGimbal::computeNewBarPos(const int bar, const Side side)
     const double y1{y * (getBarSpacing())};
 
     // We need to find which mode we are in before computing the start position
-    if (getScanMode() == HORIZONTAL_BAR_SCAN) { setScanPos(x1, y1); }
+    if (getScanMode() == ScanMode::HORIZONTAL_BAR_SCAN) { setScanPos(x1, y1); }
     else { setScanPos(y1, x1); }
 }
 
@@ -692,8 +691,8 @@ bool ScanGimbal::setScanWidth(const double newWidth)
     return true;
 }
 
-// setScanMode() - sets the antenna scan pattern
-bool ScanGimbal::setScanMode(const unsigned int m, const bool resetRequired)
+// sets the antenna scan pattern
+bool ScanGimbal::setScanMode(const ScanMode m, const bool resetRequired)
 {
     if (scanMode != m) {
         scanMode = m;
@@ -734,7 +733,7 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
     setBarSpacing(scanHeight/(numBars));
 
     // and start the bar scan (always horizontal)
-    setScanMode(HORIZONTAL_BAR_SCAN);
+    setScanMode(ScanMode::HORIZONTAL_BAR_SCAN);
     return true;
 }
 
@@ -842,18 +841,18 @@ bool ScanGimbal::setMaxRevs(const double newMaxRevs)
 //------------------------------------------------------------------------------
 
 // setSlotScanMode() -- calls setScanMode()
-bool ScanGimbal::setSlotScanMode(base::String* const newMode)
+bool ScanGimbal::setSlotScanMode(base::Identifier* const newMode)
 {
     // set our scan mode
     bool ok{true};
     if (newMode != nullptr) {
-        if (*newMode == "manual") ok = setScanMode(MANUAL_SCAN);
-        else if (*newMode == "horizontal") ok = setScanMode(HORIZONTAL_BAR_SCAN);
-        else if (*newMode == "vertical") ok = setScanMode(VERTICAL_BAR_SCAN);
-        else if (*newMode == "conical") ok = setScanMode(CONICAL_SCAN);
-        else if (*newMode == "circular") ok = setScanMode(CIRCULAR_SCAN);
-        else if (*newMode == "pseudorandom") ok = setScanMode(PSEUDO_RANDOM_SCAN);
-        else if (*newMode == "spiral") ok = setScanMode(SPIRAL_SCAN);
+        if (*newMode == "manual") ok = setScanMode(ScanMode::MANUAL_SCAN);
+        else if (*newMode == "horizontal") ok = setScanMode(ScanMode::HORIZONTAL_BAR_SCAN);
+        else if (*newMode == "vertical") ok = setScanMode(ScanMode::VERTICAL_BAR_SCAN);
+        else if (*newMode == "conical") ok = setScanMode(ScanMode::CONICAL_SCAN);
+        else if (*newMode == "circular") ok = setScanMode(ScanMode::CIRCULAR_SCAN);
+        else if (*newMode == "pseudorandom") ok = setScanMode(ScanMode::PSEUDO_RANDOM_SCAN);
+        else if (*newMode == "spiral") ok = setScanMode(ScanMode::SPIRAL_SCAN);
         else ok = false;
     }
     return ok;

@@ -48,7 +48,7 @@ BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 3, setSlotGamingAreaRange,      base::Distance)
 
     ON_SLOT( 4, setSlotEarthModel,           base::EarthModel)
-    ON_SLOT( 4, setSlotEarthModel,           base::String)
+    ON_SLOT( 4, setSlotEarthModel,           base::Identifier)
 
     ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Number)
 
@@ -309,10 +309,10 @@ bool WorldModel::setSlotEarthModel(const base::EarthModel* const msg)
    return setEarthModel(msg);
 }
 
-bool WorldModel::setSlotEarthModel(const base::String* const msg)
+bool WorldModel::setSlotEarthModel(const base::Identifier* const msg)
 {
    bool ok{};
-   if (msg != nullptr && msg->len() > 0) {
+   if (msg != nullptr && msg->getStdString().length() > 0) {
       const base::EarthModel* p{base::EarthModel::getEarthModel(*msg)};
       if (p != nullptr) {
          // found the earth model

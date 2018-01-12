@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class Vec3d; }
+namespace base { class Identifier; class Vec3d; }
 namespace simulation {
 class AbstractNetIO;
 
@@ -41,7 +41,7 @@ class AbstractNib : public base::Component
 public:
    AbstractNib();
 
-   virtual const base::String* getFederateName() const =0;    // federate name
+   virtual const base::Identifier* getFederateName() const =0;    // federate name
 
    virtual unsigned short getPlayerID() const =0;
 

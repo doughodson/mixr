@@ -6,7 +6,7 @@
 #include "mixr/base/String.hpp"
 
 namespace mixr {
-namespace base { class String; class Number; class List; }
+namespace base { class Identifier; class List; class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -16,19 +16,19 @@ namespace graphics {
 //
 // Factory name: AbstractField
 // Slots:
-//      position       <List>   ! Starting position ( Line Column ) (default: 0)
-//      width          <Number> ! Field width (default: 0)
-//      highLight      <Number> ! Highlight text flag  (Display mode = 0x1001, default 0)
-//      underline      <Number> ! Underlined text flag  (Display mode = 0x1002, default 0)
-//      reversed       <Number> ! Reversed video flag  (Display mode = 0x1004, default 0)
-//      justification  <String> ! "none", "left", "center", or "right" (default: "none")
-//      vertical       <Number> ! vertical field flag (text displayed vertically) (Display mode = 0x1010, default 0)
-//      brackets       <Number> ! Bracket the field with a character just left
-//                              ! and right of this field. (Display mode = 0x1020, default = 0)
-//      linked         <Number> ! Linked flag (auto step to next input field) (default = false)
-//      inheritColor   <Number> ! inherit color of our container (default: false)
-//      font           <String> ! specific font name we wish to use (default: 0)
-//      startCharPos   <Number> ! Our starting character position (we may want to skip!) (default: 0)
+//      position       <List>       ! Starting position ( Line Column ) (default: 0)
+//      width          <Number>     ! Field width (default: 0)
+//      highLight      <Number>     ! Highlight text flag  (Display mode = 0x1001, default 0)
+//      underline      <Number>     ! Underlined text flag  (Display mode = 0x1002, default 0)
+//      reversed       <Number>     ! Reversed video flag  (Display mode = 0x1004, default 0)
+//      justification  <Identifier> ! "none", "left", "center", or "right" (default: "none")
+//      vertical       <Number>     ! vertical field flag (text displayed vertically) (Display mode = 0x1010, default 0)
+//      brackets       <Number>     ! Bracket the field with a character just left
+//                                  ! and right of this field. (Display mode = 0x1020, default = 0)
+//      linked         <Number>     ! Linked flag (auto step to next input field) (default = false)
+//      inheritColor   <Number>     ! inherit color of our container (default: false)
+//      font           <Identifier> ! specific font name we wish to use (default: 0)
+//      startCharPos   <Number>     ! Our starting character position (we may want to skip!) (default: 0)
 //
 //
 // Public member functions:
@@ -168,7 +168,7 @@ class AbstractField : public Graphic
    DECLARE_SUBCLASS(AbstractField, Graphic)
 
 public:
-   enum class Mode { display, input };
+   enum class Mode { DISPLAY, INPUT };
 
    enum {
           // display modes
@@ -261,27 +261,27 @@ public:
    void updateData(const double dt = 0.0) override;
 
 protected:
-   base::String origStr;               // Original text saved by setText
-   base::String inputExample;          // Input Template String
-   base::String str;                   // Text stored in field
-   Mode mode {Mode::display};          // Current mode
-   int icp {};                         // Input character pointer
-   int inpDspMode {};                  // Auto switches to this display mode during input mode
-   bool inpModeHold {};                // Hold input mode until after first input character
+   base::String origStr;              // Original text saved by setText
+   base::String inputExample;         // Input Template String
+   base::String str;                  // Text stored in field
+   Mode mode {Mode::DISPLAY};         // Current mode
+   int icp{};                         // Input character pointer
+   int inpDspMode{};                  // Auto switches to this display mode during input mode
+   bool inpModeHold{};                // Hold input mode until after first input character
 
 private:
-   void adjust()                                         { str.setString(origStr, w, jmode); }
+   void adjust()                                    { str.setString(origStr, w, jmode); }
 
-   int          ln {};                 // Line this field is on
-   int          cp {};                 // Starting character position of field
-   std::size_t  w {};                  // Width of the field
-   bool         linked {};             // Linked field (on input)
-   unsigned int startCP {};            // our starting character position that we "write" from
+   int          ln{};                 // Line this field is on
+   int          cp{};                 // Starting character position of field
+   std::size_t  w{};                  // Width of the field
+   bool         linked{};             // Linked field (on input)
+   unsigned int startCP{};            // our starting character position that we "write" from
 
-   int      dmode {};                  // Display mode flags
-   base::String::Justify jmode {};     // Justification mode
-   bool     inheritColor {};           // Inherit color instead of using a default color
-   base::String* fontName {};          // name of the font we want our display to use (if overridden)
+   int      dmode{};                  // Display mode flags
+   base::String::Justify jmode{};     // Justification mode
+   bool     inheritColor{};           // Inherit color instead of using a default color
+   base::Identifier* fontName{};      // name of the font we want our display to use (if overridden)
 
 private:
    // slot table helper methods
@@ -290,12 +290,12 @@ private:
    bool setSlotHighlight(const base::Number* const);
    bool setSlotUnderline(const base::Number* const);
    bool setSlotReversed(const base::Number* const);
-   bool setSlotJustification(const base::String* const);
+   bool setSlotJustification(const base::Identifier* const);
    bool setSlotVertical(const base::Number* const);
    bool setSlotBrackets(const base::Number* const);
    bool setSlotLinked(const base::Number* const);
    bool setSlotInheritColor(const base::Number* const);
-   bool setSlotFont(const base::String* const);
+   bool setSlotFont(const base::Identifier* const);
    bool setSlotStartCharPos(const base::Number* const);
 };
 

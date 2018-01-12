@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Decibel; }
+namespace base { class Decibel; class Identifier; }
 namespace models {
 class Antenna;
 class Emission;
@@ -29,7 +29,7 @@ class Emission;
 //
 // Factory name: RfSystem
 // Slots:
-//    antennaName        <base::String>        ! Name of the requested Antenna
+//    antennaName        <base::Identifier>    ! Name of the requested Antenna
 //
 //    frequency          <base::Frequency>     ! Radio's Main Frequency (default: 0 hz)
 //                       <base::Number>        ! Radio's Main Frequency (hz)
@@ -92,8 +92,8 @@ public:
    virtual const Antenna* getAntenna() const;            // Pointer to the antenna model, or zero (0) if none
    virtual bool setAntenna(Antenna* const);              // Sets the R/F system's antenna
 
-   virtual base::String* getAntennaName();
-   virtual const base::String* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
+   virtual base::Identifier* getAntennaName();
+   virtual const base::Identifier* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
 
    // Tests if the received emission can affect the RfSystem and be processed by it.
    virtual bool affectsRfSystem(Emission* const em) const;
@@ -102,40 +102,40 @@ public:
    virtual bool setBandwidth(const double hz);           // Sets the bandwidth (hertz) (must be >= 1)
    virtual bool setBandwidthNoise(const double hz);      // Sets the bandwidth noise (hertz) (must be >= 1)
    virtual bool setPeakPower(const double watts);        // Sets the transmitter's peak power (watts)
-   virtual bool setRfSysTemp(const double v);            // Sets the system temperature (Kelvin)
-   virtual bool setRfThreshold(const double v);          // Sets the receiver threshold (over S/N) (dB)
-   virtual bool setRfNoiseFigure(const double v);        // Sets the receiver noise figure (>= 1)  (no units)
-   virtual bool setRfTransmitLoss(const double v);       // Sets the transmit loss (default: 1.0) (no units)
-   virtual bool setRfReceiveLoss(const double v);        // Sets the receive loss (default: 1.0) (no units)
-   virtual bool setRfSignalProcessLoss(const double v);  // Sets the signal Processing loss (default: 1.0) (no units)
-   virtual bool setReceiverNoise(const double v);        // Sets the receiver noise (Watts)
+   virtual bool setRfSysTemp(const double);              // Sets the system temperature (Kelvin)
+   virtual bool setRfThreshold(const double);            // Sets the receiver threshold (over S/N) (dB)
+   virtual bool setRfNoiseFigure(const double);          // Sets the receiver noise figure (>= 1)  (no units)
+   virtual bool setRfTransmitLoss(const double);         // Sets the transmit loss (default: 1.0) (no units)
+   virtual bool setRfReceiveLoss(const double);          // Sets the receive loss (default: 1.0) (no units)
+   virtual bool setRfSignalProcessLoss(const double);    // Sets the signal Processing loss (default: 1.0) (no units)
+   virtual bool setReceiverNoise(const double);          // Sets the receiver noise (Watts)
 
-   virtual bool setReceiverEnabledFlag(const bool b);    // Enables/disables the R/F system's receiver
-   virtual bool setTransmitterEnableFlag(const bool b);  // Enables/disables the R/F system's transmitter
-   virtual bool setDisableEmissionsFlag(const bool b);   // Disables/enables sending the R/F emissions packets
+   virtual bool setReceiverEnabledFlag(const bool);      // Enables/disables the R/F system's receiver
+   virtual bool setTransmitterEnableFlag(const bool);    // Enables/disables the R/F system's transmitter
+   virtual bool setDisableEmissionsFlag(const bool);     // Disables/enables sending the R/F emissions packets
 
    // Returns the transmitter power after losses (watts)
    virtual double transmitPower(const double peakPwr) const;
 
    // Accepts an emission from an antenna
-   virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const double raGain);
+   virtual void rfReceivedEmission(Emission* const, Antenna* const, const double raGain);
 
    void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
    // Max size of emission queues (per frame)
-   static const unsigned int MAX_EMISSIONS{MIXR_CONFIG_RF_MAX_EMISSIONS};
+   static const int MAX_EMISSIONS{MIXR_CONFIG_RF_MAX_EMISSIONS};
 
    // Compute receiver thermal noise
    virtual bool computeReceiverNoise();
 
    // The following are filled by rfReceivedEmission() and consumed (emptied) by receive()
-   double jamSignal {};                              // Interference signal (from Jammer)
-   unsigned int np {};                               // Number of emission packets being passed from rfReceivedEmission() to receive()
-   std::array<double, MAX_EMISSIONS> signals {};     // signals values being passed from rfReceivedEmission() to receive()
-   std::array<Emission*, MAX_EMISSIONS> packets {};  // emission packets being passed from rfReceivedEmission() to receive()
-   mutable long packetLock {};                       // Semaphore to protect 'signals' and 'xxpackets
+   double jamSignal{};                              // Interference signal (from Jammer)
+   int np{};                                        // Number of emission packets being passed from rfReceivedEmission() to receive()
+   std::array<double, MAX_EMISSIONS> signals{};     // signals values being passed from rfReceivedEmission() to receive()
+   std::array<Emission*, MAX_EMISSIONS> packets{};  // emission packets being passed from rfReceivedEmission() to receive()
+   mutable long packetLock{};                       // Semaphore to protect 'signals' and 'xxpackets
 
    // Process players of interest -- Called by our updateData() -- the background thread --
    // This function will create a filtered list of players that R/F systems will interact with.
@@ -148,29 +148,29 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   Antenna* antenna {};              // Our antenna
-   base::String* antennaName {};     // Name of our antenna
+   Antenna* antenna{};              // Our antenna
+   base::Identifier* antennaName{}; // Name of our antenna
 
-   bool xmitEnable {};               // Transmitter enabled
-   bool recvEnable {};               // Receiver enabled
-   bool disableEmissions {};         // Disable sending emission packets flag (default: false)
-   bool bwNoiseSet {};               // Bandwidth noise has been set
+   bool xmitEnable{};               // Transmitter enabled
+   bool recvEnable{};               // Receiver enabled
+   bool disableEmissions{};         // Disable sending emission packets flag (default: false)
+   bool bwNoiseSet{};               // Bandwidth noise has been set
 
-   double powerPeak {};              // Peak Power (default: 0) )    (Watts)
-   double frequency {};              // Frequency            (Hz)
-   double bandwidth {};              // Receiver bandwidth    (Hz)
-   double bandwidthNoise {};         // [B] Receiver bandwidth noise (Hz)
-   double rfNoiseFigure {1.0};       // [F] Receiver noise figure (> 1)          (no units)
-   double rfSysTemp {290.0};         // [T] System Temperature                   (Kelvin)
-   double rfRecvNoise {};            // [N] Noise (N = F * k * T * B)            (Watts)
-   double rfThreshold {};            // Receiver threshold (over S/N)            (dB)
-   double rfLossXmit {1.0};          // Transmit loss (default: 1.0)             (no units)
-   double rfLossRecv {1.0};          // Receive loss (default: 1.0)              (no units)
-   double rfLossSignalProcess {1.0}; // Signal Processing loss (default: 1.0)    (no units)
+   double powerPeak{};              // Peak Power (default: 0) )    (Watts)
+   double frequency{};              // Frequency            (Hz)
+   double bandwidth{};              // Receiver bandwidth    (Hz)
+   double bandwidthNoise{};         // [B] Receiver bandwidth noise (Hz)
+   double rfNoiseFigure{1.0};       // [F] Receiver noise figure (> 1)          (no units)
+   double rfSysTemp{290.0};         // [T] System Temperature                   (Kelvin)
+   double rfRecvNoise{};            // [N] Noise (N = F * k * T * B)            (Watts)
+   double rfThreshold{};            // Receiver threshold (over S/N)            (dB)
+   double rfLossXmit{1.0};          // Transmit loss (default: 1.0)             (no units)
+   double rfLossRecv{1.0};          // Receive loss (default: 1.0)              (no units)
+   double rfLossSignalProcess{1.0}; // Signal Processing loss (default: 1.0)    (no units)
 
 private:
    // slot table helper methods
-   bool setSlotAntennaName(base::String* const);
+   bool setSlotAntennaName(base::Identifier* const);
    bool setSlotPeakPower(base::Number* const);
    bool setSlotFrequency(base::Number* const);
    bool setSlotBandwidth(base::Number* const);

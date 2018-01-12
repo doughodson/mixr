@@ -5,9 +5,11 @@
 #include "mixr/models/system/RfSystem.hpp"
 #include "mixr/base/units/angle_utils.hpp"
 
+#include <string>
+
 namespace mixr {
-namespace base { class Angle; class Frequency; class Integer;
-                 class List;  class String;    class Time; }
+namespace base { class Angle; class Frequency; class Identifier; class Integer;
+                 class List; class String; class Time; }
 namespace models {
 class Antenna;
 class Player;
@@ -20,7 +22,7 @@ class TrackManager;
 //
 // Factory name: RfSensor
 // Slots:
-//    trackManagerName     <String>      ! Name of the requested Track Manager (default: 0)
+//    trackManagerName     <Identifier>  ! Name of the requested Track Manager (default: "")
 //
 //    modes                <PairStream>  ! List of submodes (default: 0)
 //                         <RfSensor>    ! Single (only) submode
@@ -83,8 +85,8 @@ public:
     virtual const base::PairStream* getModes() const;        // Returns the list of sensor submodes
     virtual bool setMasterMode(RfSensor* const m);           // Set our master mode (container)
 
-    virtual const base::String* getTrackManagerName() const; // Returns the requested track manager's name
-    virtual bool setTrackManagerName(base::String* const a); // Sets the name of the track manager to use
+    virtual const std::string& getTrackManagerName() const;  // Returns the requested track manager's name
+    virtual bool setTrackManagerName(const std::string&);    // Sets the name of the track manager to use
 
     virtual TrackManager* getTrackManager();             // Returns our current track manager
     virtual const TrackManager* getTrackManager() const; // Returns our current track manager (const version)
@@ -127,21 +129,21 @@ private:
     int            scanBar {};          // Scan (bar) number
     bool           syncXmitWithScan {}; // Sync transmitter with antenna scan flag
 
-    base::String* tmName {};            // Name of our track manager
+    std::string tmName;                 // Name of our track manager
     RfSensor*     masterModePtr {};     // Our Master (Parent) mode (e.g., Sensor)
     TrackManager* trackManager {};      // Our Track manager -- managed by the onboard computer
 
-    static const unsigned int TYPE_ID_LENGTH{64};
-    char typeId[TYPE_ID_LENGTH] {};     // R/F system type ID
+    static const int TYPE_ID_LENGTH{64};
+    char typeId[TYPE_ID_LENGTH]{};      // R/F system type ID
 
     // Characteristics
-    double prf {};                                // Pulse Repetition Frequency   (Hz)
-    double pulseWidth {};                         // Pulse Width                  (Sec)
-    double beamWidth {base::angle::D2RCC * 3.5};  // Beamwidth                    (R)
+    double prf{};                                // Pulse Repetition Frequency   (Hz)
+    double pulseWidth{};                         // Pulse Width                  (Sec)
+    double beamWidth{base::angle::D2RCC * 3.5};  // Beamwidth                    (R)
 
 private:
    // slot table helper methods
-   bool setSlotTrackManagerName(base::String* const);         // Sets our track manager by name
+   bool setSlotTrackManagerName(base::Identifier* const);     // Sets our track manager by name
    bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
    bool setSlotModeSingle(RfSensor* const);                   // Sets a single (only) R/F sensor submode
    bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)

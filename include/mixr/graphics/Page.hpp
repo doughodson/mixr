@@ -8,6 +8,7 @@
 #include <array>
 
 namespace mixr {
+namespace base { class PairStream; class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------

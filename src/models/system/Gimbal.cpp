@@ -5,11 +5,10 @@
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 
@@ -73,7 +72,7 @@ END_SLOTTABLE(Gimbal)
 
 BEGIN_SLOT_MAP(Gimbal)
 
-    ON_SLOT(1, setSlotType,                        base::String)     // Physical gimbal type: "mechanical" or "electronic"
+    ON_SLOT(1, setSlotType,                        base::Identifier) // Physical gimbal type: "mechanical" or "electronic"
 
     ON_SLOT(2, setSlotLocation,                    base::List)       // Relative location vector (meters) [ x y z ]
 
@@ -287,13 +286,13 @@ double Gimbal::getEarthRadius() const
 void Gimbal::servoController(const double dt)
 {
    // Only if we're not frozen ...
-   if (servoMode != FREEZE_SERVO) {
+   if (servoMode != ServoMode::FREEZE) {
 
       // ---
       // Compute rate
       // ---
       base::Vec3d rate1( 0.0f, 0.0f, 0.0f );
-      if (servoMode == POSITION_SERVO) {
+      if (servoMode == ServoMode::POSITION) {
 
          // position servo: drive the gimbal toward the commanded position
          rate1 = cmdPos - pos;
@@ -309,12 +308,12 @@ void Gimbal::servoController(const double dt)
          //   Mechanical, slow-slew: rate is commanded rate limited to max mechanical rate
          //   Electronic, slow-slew: rate is commanded rate (unlimited)
          // ---
-         if (isFastSlewMode() && type == MECHANICAL) {
+         if (isFastSlewMode() && type == Type::MECHANICAL) {
                base::Vec3d step = maxRate * dt;
                limitVec(rate1, step);
          } else if (isSlowSlewMode()) {
                base::Vec3d cmdRate1 = cmdRate;
-               if (type == MECHANICAL) {
+               if (type == Type::MECHANICAL) {
                   limitVec(cmdRate1, maxRate);
                }
                base::Vec3d step = cmdRate1 * dt;
@@ -325,12 +324,12 @@ void Gimbal::servoController(const double dt)
          else rate.set(0.0,0.0,0.0);
       }
 
-      else if (servoMode == RATE_SERVO) {
+      else if (servoMode == ServoMode::RATE) {
          // rate servo: follow commanded rate
          rate1 = cmdRate;
 
          // set servo rate to limited rate
-         if (type == MECHANICAL) limitVec(rate1, maxRate);
+         if (type == Type::MECHANICAL) limitVec(rate1, maxRate);
 
          rate = rate1;
       }
@@ -613,7 +612,7 @@ bool Gimbal::setRollLimits(const double lowerLim, const double upperLim)
 bool Gimbal::setCmdRate(const base::Vec3d& r)
 {
    cmdRate = r;
-   setServoMode(RATE_SERVO);
+   setServoMode(ServoMode::RATE);
    return true;
 }
 
@@ -632,7 +631,7 @@ bool Gimbal::setCmdRate(const base::Vec2d& r)
 bool Gimbal::setCmdRate(const double azRate, const double elRate, const double rollRate)
 {
    cmdRate.set(azRate,elRate,rollRate);
-   setServoMode(RATE_SERVO);
+   setServoMode(ServoMode::RATE);
    return true;
 }
 
@@ -712,7 +711,7 @@ bool Gimbal::setCmdPos(const base::Vec3d& p)
    // Set the new (limited) commanded position
    // ---
    cmdPos = newPos;
-   setServoMode(POSITION_SERVO);
+   setServoMode(ServoMode::POSITION);
 
    return true;
 }
@@ -748,14 +747,13 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 // Slot functions ---
 //------------------------------------------------------------------------------
 
-// setSlotType() -- calls setType()
-bool Gimbal::setSlotType(const base::String* const msg)
+bool Gimbal::setSlotType(const base::Identifier* const msg)
 {
     if (msg == nullptr) return false;
 
     bool ok{true};
-    if (*msg == "mechanical") ok = setType(MECHANICAL);
-    else if (*msg == "electronic") ok = setType(ELECTRONIC);
+    if (*msg == "mechanical") ok = setType(Type::MECHANICAL);
+    else if (*msg == "electronic") ok = setType(Type::ELECTRONIC);
     else ok = false;
     return ok;
 }

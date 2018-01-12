@@ -7,8 +7,9 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Powers.hpp"
 #include "mixr/base/units/Frequencies.hpp"
@@ -19,7 +20,7 @@ namespace models {
 IMPLEMENT_SUBCLASS(RfSystem, "RfSystem")
 
 BEGIN_SLOTTABLE(RfSystem)
-   "antennaName",          //  1: Name of the requested Antenna  (base::String)
+   "antennaName",          //  1: Name of the requested Antenna  (base::Identifier)
    "frequency",            //  2: Frequency     (Hz; def: 0)   (base::Number or base::Frequency)
    "bandwidth",            //  3: Bandwidth     (Hz; def: 1)   (base::Number or base::Frequency)
    "powerPeak",            //  4: Peak Power (Watts; def: 0)
@@ -34,7 +35,7 @@ BEGIN_SLOTTABLE(RfSystem)
 END_SLOTTABLE(RfSystem)
 
 BEGIN_SLOT_MAP(RfSystem)
-    ON_SLOT(1,  setSlotAntennaName,         base::String)
+    ON_SLOT(1,  setSlotAntennaName,         base::Identifier)
     ON_SLOT(2,  setSlotFrequency,           base::Number)
     ON_SLOT(3,  setSlotBandwidth,           base::Number)
     ON_SLOT(4,  setSlotPeakPower,           base::Number)
@@ -61,7 +62,7 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
 
    // No antenna yet
    setAntenna(nullptr);
-   const auto p = const_cast<base::String*>(static_cast<const base::String*>(org.getAntennaName()));
+   const auto p = const_cast<base::Identifier*>(static_cast<const base::Identifier*>(org.getAntennaName()));
    setSlotAntennaName( p );
 
    xmitEnable = org.xmitEnable;
@@ -85,7 +86,6 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
    computeReceiverNoise();
 }
 
-
 //------------------------------------------------------------------------------
 // deleteData() -- delete member data
 //------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ void RfSystem::deleteData()
 {
    setAntenna(nullptr);
    setSlotAntennaName(nullptr);
-   for (unsigned int i = 0; i < np && i < MAX_EMISSIONS; i++) {
+   for (int i = 0; i < np && i < MAX_EMISSIONS; i++) {
       if (packets[i] != nullptr) {
          packets[i]->unref();
          packets[i] = nullptr;
@@ -109,7 +109,7 @@ bool RfSystem::shutdownNotification()
 {
    setAntenna(nullptr);
 
-   for (unsigned int i = 0; i < np && i < MAX_EMISSIONS; i++) {
+   for (int i = 0; i < np && i < MAX_EMISSIONS; i++) {
       if (packets[i] != nullptr) {
          packets[i]->unref();
          packets[i] = nullptr;
@@ -384,12 +384,12 @@ const Antenna* RfSystem::getAntenna() const
 }
 
 // Name of the antenna model, or zero (0) if none
-base::String* RfSystem::getAntennaName()
+base::Identifier* RfSystem::getAntennaName()
 {
    return antennaName;
 }
 
-const base::String* RfSystem::getAntennaName() const
+const base::Identifier* RfSystem::getAntennaName() const
 {
    return antennaName;
 }
@@ -574,7 +574,7 @@ bool RfSystem::computeReceiverNoise()
 //------------------------------------------------------------------------------
 
 // antennaName: Antenna name  (base::String)
-bool RfSystem::setSlotAntennaName(base::String* const p)
+bool RfSystem::setSlotAntennaName(base::Identifier* const p)
 {
    if (antennaName != nullptr) {
       antennaName->unref();

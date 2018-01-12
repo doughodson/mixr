@@ -5,6 +5,7 @@
 
 #include "mixr/base/numeric/Number.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -116,9 +117,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::String* s = org.getFederationName();
+      const base::Identifier* s = org.getFederationName();
       if (s != nullptr) {
-         setFederationName( static_cast<base::String*>(s->clone()) );
+         setFederationName( static_cast<base::Identifier*>(s->clone()) );
       }
       else {
          setFederationName(nullptr);
@@ -126,9 +127,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::String* s = org.getFederateName();
+      const base::Identifier* s = org.getFederateName();
       if (s != nullptr) {
-         setFederateName( static_cast<base::String*>(s->clone()) );
+         setFederateName( static_cast<base::Identifier*>(s->clone()) );
       }
       else {
          setFederateName(nullptr);
@@ -136,9 +137,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::String* s = org.getFederateName();
+      const base::Identifier* s = org.getFederateName();
       if (s != nullptr) {
-         setFederateName( static_cast<base::String*>(s->clone()) );
+         setFederateName( static_cast<base::Identifier*>(s->clone()) );
       }
       else {
          setFederateName(nullptr);
@@ -510,7 +511,7 @@ bool NetIO::initNetwork()
         ok = createAndJoinFederation();
         doTick();
     }
-        
+
     // initialize time constraints, etc.
     //if (getRegulating() || getConstrained())
     //{
@@ -537,8 +538,8 @@ bool NetIO::createAndJoinFederation()
 {
     bool ok = false;
     
-    const base::String* federation = getFederationName();
-    const base::String* federate   = getFederateName();
+    const base::Identifier* federation = getFederationName();
+    const base::Identifier* federate   = getFederateName();
 
     if (federation != nullptr && federate != nullptr) {
 
@@ -597,7 +598,7 @@ bool NetIO::createAndJoinFederation()
 //------------------------------------------------------------------------------
 bool NetIO::resignAndDestroyFederation()
 {
-    const base::String* federation = getFederationName();
+    const base::Identifier* federation = getFederationName();
 
     if (federation != nullptr) {
        try {

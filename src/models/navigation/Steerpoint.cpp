@@ -97,7 +97,7 @@ void Steerpoint::copyData(const Steerpoint& org, const bool)
     next = nullptr; // find it using 'initNextStptName' or 'initNexStptIdx'
 
     {
-       base::String* n{};
+       base::Identifier* n{};
        if (org.initNextStptName != nullptr) n = org.initNextStptName->clone();
        initNextStptName = n;
        if (n != nullptr) n->unref();

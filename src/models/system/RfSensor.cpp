@@ -8,6 +8,7 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
@@ -18,6 +19,8 @@
 #include "mixr/base/units/Times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
+
+#include <string>
 
 namespace mixr {
 namespace models {
@@ -37,7 +40,7 @@ BEGIN_SLOTTABLE(RfSensor)
 END_SLOTTABLE(RfSensor)
 
 BEGIN_SLOT_MAP(RfSensor)
-    ON_SLOT(1, setSlotTrackManagerName, base::String)
+    ON_SLOT(1, setSlotTrackManagerName, base::Identifier)
     ON_SLOT(2, setSlotModeStream,       base::PairStream)
     ON_SLOT(2, setSlotModeSingle,       RfSensor)
     ON_SLOT(3, setSlotRanges,           base::List)
@@ -77,13 +80,7 @@ void RfSensor::copyData(const RfSensor& org, const bool)
         modes = nullptr;
     }
 
-    if (org.tmName != nullptr) {
-       base::String* clone{org.tmName->clone()};
-       setTrackManagerName(clone);
-       clone->unref();
-    } else {
-      setTrackManagerName(nullptr);
-    }
+    tmName = org.tmName;
 
     scanning = org.scanning;
     scanBar = org.scanBar;
@@ -105,7 +102,6 @@ void RfSensor::deleteData()
     setRanges(nullptr,0);
     setTrackManager(nullptr);
     setMasterMode(nullptr);
-    setTrackManagerName(nullptr);
 
     if (modes != nullptr) {
        modes->unref();
@@ -139,20 +135,18 @@ void RfSensor::reset()
     // ---
     // Do we need to find the track manager?
     // ---
-    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
+    if (getTrackManager() == nullptr && (tmName!="") && getOwnship() != nullptr) {
         // We have a name of the track manager, but not the track manager itself
-        const char* name{*getTrackManagerName()};
-
         // Get the named track manager from the onboard computer
         OnboardComputer* obc{getOwnship()->getOnboardComputer()};
         if (obc != nullptr) {
-            setTrackManager( obc->getTrackManagerByName(name) );
+            setTrackManager( obc->getTrackManagerByName(tmName.c_str()) );
         }
 
         if (getTrackManager() == nullptr) {
             // The assigned track manager was not found!
-            std::cerr << "RfSensor::reset() ERROR -- track manager, " << name << ", was not found!" << std::endl;
-            setTrackManagerName(nullptr);
+            std::cerr << "RfSensor::reset() ERROR -- track manager, " << tmName << ", was not found!" << std::endl;
+            setTrackManagerName("");
         }
     }
 
@@ -270,7 +264,7 @@ int RfSensor::getScanBar() const
 }
 
 // Returns the requested track manager's name
-const base::String* RfSensor::getTrackManagerName() const
+const std::string& RfSensor::getTrackManagerName() const
 {
    return tmName;
 }
@@ -601,15 +595,9 @@ bool RfSensor::onReturnToSearchEvent()
 //------------------------------------------------------------------------------
 // setTrackManagerName() -- Sets the track manager's name
 //------------------------------------------------------------------------------
-bool RfSensor::setTrackManagerName(base::String* name)
+bool RfSensor::setTrackManagerName(const std::string& name)
 {
-    if (tmName != nullptr) {
-        tmName->unref();
-    }
     tmName = name;
-    if (tmName != nullptr) {
-        tmName->ref();
-    }
     return true;
 }
 
@@ -645,9 +633,9 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 
 // setSlotTrackManagerName() -- sets the name of the track manager;
 // we'll lookup the actual track manager in reset() later
-bool RfSensor::setSlotTrackManagerName(base::String* const v)
+bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v);
+    return setTrackManagerName(v->getStdString());
 }
 
 //------------------------------------------------------------------------------

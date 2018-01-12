@@ -9,7 +9,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Function; class Power; }
+namespace base { class Angle; class Function; class Identifier; class Power; }
 namespace models {
 class Player;
 class RfSystem;
@@ -23,7 +23,7 @@ class RfSystem;
 //
 // Factory name: Antenna
 // Slots:
-//      polarization    <base::String>          ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
+//      polarization    <base::Identifier>      ! Antenna polarization  { none, vertical, horizontal, slant, RHC, LHC }
 //                                              ! (default: NONE)
 //
 //      threshold       <base::Power>           ! Antenna threshold  (default: 0.0)
@@ -56,33 +56,33 @@ class Antenna : public ScanGimbal
    DECLARE_SUBCLASS(Antenna, ScanGimbal)
 
 public:
-   enum Polarization { NONE, VERTICAL, HORIZONTAL, SLANT, RHC, LHC };
+   enum class Polarization: int { NONE, VERTICAL, HORIZONTAL, SLANT, RHC, LHC };
 
 public:
    Antenna();
 
    virtual void rfTransmit(Emission* const em);
 
-   RfSystem* getSystem()                          { return sys; }
-   const RfSystem* getSystem() const              { return sys; }
-   virtual bool setSystem(RfSystem* const p);
+   RfSystem* getSystem()                                 { return sys; }
+   const RfSystem* getSystem() const                     { return sys; }
+   virtual bool setSystem(RfSystem* const);
 
    // System limits
-   int getMaxEmissions() const                    { return MAX_EMISSIONS; }
+   int getMaxEmissions() const                           { return MAX_EMISSIONS; }
 
    // Antenna polarization matching gain
-   double getPolarizationGain(const Polarization p1) const;
-   Polarization getPolarization() const           { return polar; }
+   double getPolarizationGain(const Polarization) const;
+   Polarization getPolarization() const                  { return polar; }
 
    // Antenna gain
-   virtual double getGain() const                 { return gain; }
+   virtual double getGain() const                        { return gain; }
 
    // Gain pattern
-   const base::Function* gainPatternTable() const { return gainPattern; }
-   bool isGainPatternDegrees() const              { return gainPatternDeg; }
+   const base::Function* gainPatternTable() const        { return gainPattern; }
+   bool isGainPatternDegrees() const                     { return gainPatternDeg; }
 
    // Antenna threshold (watts)
-   double getTransmitThreshold() const            { return threshold; }
+   double getTransmitThreshold() const                   { return threshold; }
 
    // Antenna effective area (m^2)
    static double getEffectiveArea(const double gain, const double lambda) {
@@ -90,28 +90,28 @@ public:
    }
 
    // Recycle emissions flag (reuse old emission structure instead of creating new ones)
-   bool isEmissionRecycleEnabled() const          { return recycle; }
+   bool isEmissionRecycleEnabled() const                 { return recycle; }
 
    // Beam width (radians)
-   double getBeamWidth() const                    { return beamWidth; }
+   double getBeamWidth() const                           { return beamWidth; }
 
    // Member functions
-   virtual bool setPolarization(const Polarization p) { polar = p; return true; }
-   virtual bool setThreshold(const double th);
-   virtual bool setGain(const double g);
+   virtual bool setPolarization(const Polarization p)    { polar = p; return true; }
+   virtual bool setThreshold(const double);
+   virtual bool setGain(const double);
    virtual bool setEmissionRecycleFlag(const bool enable);
    virtual bool setBeamWidth(const double radians);
 
-   virtual bool setPolarization(base::String* const v);
-   virtual bool setThreshold(base::Power* const p);
-   virtual bool setGain(const base::Number* const g);
-   virtual bool setGainPattern(base::Function* const func);
-   virtual bool setGainPatternDeg(const base::Number* const g);
+   virtual bool setPolarization(base::Identifier* const);
+   virtual bool setThreshold(base::Power* const);
+   virtual bool setGain(const base::Number* const);
+   virtual bool setGainPattern(base::Function* const);
+   virtual bool setGainPatternDeg(const base::Number* const);
    virtual bool setRecycleFlg(const base::Number* const);
-   virtual bool setBeamWidth(const base::Angle* const msg);
-   virtual bool setBeamWidth(const base::Number* const msg);
+   virtual bool setBeamWidth(const base::Angle* const);
+   virtual bool setBeamWidth(const base::Number* const);
 
-   // Event handler(s)
+   // event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
    bool onStartScanEvent(base::Integer* const bar) override;
@@ -125,38 +125,38 @@ public:
 protected:
    void clearQueues();
 
-   void process(const double dt) override;     // Phase 3
+   void process(const double dt) override;                   // phase 3
 
    bool shutdownNotification() override;
 
-   base::safe_stack<Emission*> freeEmStack {MAX_EMISSIONS};  // Free emission stack
-   mutable long freeEmLock {};                               // Semaphore to protect 'freeEmStack'
+   base::safe_stack<Emission*> freeEmStack{MAX_EMISSIONS};   // free emission stack
+   mutable long freeEmLock{};                                // semaphore to protect 'freeEmStack'
 
-   base::safe_queue<Emission*> inUseEmQueue {MAX_EMISSIONS}; // In use emission queue
-   mutable long inUseEmLock {};                              // Semaphore to protect 'inUseEmQueue'
+   base::safe_queue<Emission*> inUseEmQueue{MAX_EMISSIONS};  // in use emission queue
+   mutable long inUseEmLock{};                               // semaphore to protect 'inUseEmQueue'
 
 private:
-   static const int MAX_EMISSIONS{10000};   // Max size of emission queues and arrays
+   static const int MAX_EMISSIONS{10000};       // max size of emission queues and arrays
 
-   RfSystem* sys {};                // Assigned R/F system (e.g., sensor, radio)
+   RfSystem* sys{};                             // assigned R/F system (e.g., sensor, radio)
 
-   // Antenna parameters
-   Polarization polar {NONE};       // Polarization                 (enum)
-   double gain {1.0};               // Gain                         (no units)
-   base::Function* gainPattern {};  // Gain pattern                 (Function)
+   // antenna parameters
+   Polarization polar{Polarization::NONE};      // polarization  (enum)
+   double gain{1.0};                            // gain          (no units)
+   base::Function* gainPattern{};               // gain pattern  (Function)
 
-   double threshold {};             // Antenna threshold; don't send emission if
-                                    // power is below this threshold (watts)
+   double threshold{};                          // antenna threshold; don't send emission if
+                                                // power is below this threshold (watts)
 
-   double beamWidth {base::angle::D2RCC * 3.5};  // Beamwidth (radians)
+   double beamWidth{base::angle::D2RCC * 3.5};  // beamwidth (radians)
 
-   bool gainPatternDeg {};          // Gain pattern is in degrees flag (else radians)
+   bool gainPatternDeg{};                       // gain pattern is in degrees flag (else radians)
 
-   bool recycle {true};             // Recycle emissions flag
+   bool recycle{true};                          // recycle emissions flag
 
 private:
    // slot table helper methods
-   bool setSlotPolarization(base::String* const x)                  { return setPolarization(x);   }
+   bool setSlotPolarization(base::Identifier* const x)              { return setPolarization(x);   }
    bool setSlotThreshold(base::Power* const x)                      { return setThreshold(x);      }
    bool setSlotGain(const base::Number* const x)                    { return setGain(x);           }
    bool setSlotGainPattern(base::Function* const x)                 { return setGainPattern(x);    }

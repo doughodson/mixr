@@ -6,7 +6,7 @@
 #include "mixr/base/units/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Integer; }
+namespace base { class Identifier; class Integer; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace models {
 //
 // Factory name: ScanGimbal
 // Slots:
-//    scanMode             <String>       ! Sets the type of scan we desire ...(default: MANUAL_SCAN)
+//    scanMode             <Identifier>   ! Sets the type of scan we desire ...(default: MANUAL_SCAN)
 //                                        ! ... { manual, horizontal, vertical, conical, circular, pseudorandom }
 //
 //    leftToRightScan      <Boolean>      ! True to scan from left-to-right (else right-to-left) (Default: true)
@@ -131,10 +131,10 @@ class ScanGimbal : public Gimbal
     DECLARE_SUBCLASS(ScanGimbal, Gimbal)
 
 public:
-    enum { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN,
+    enum class ScanMode { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN,
            CONICAL_SCAN, CIRCULAR_SCAN, PSEUDO_RANDOM_SCAN,
            SPIRAL_SCAN, USER_MODES };
-    enum Side { BEGINNING = 0, ENDING = 1 };
+    enum class Side: int { BEGINNING = 0, ENDING = 1 };
 
 public:
     ScanGimbal();
@@ -143,8 +143,8 @@ public:
     double getRefAzimuth() const                { return refAngle[AZ_IDX]; }     // Return the current reference azimuth (rad)
     double getRefElevation() const              { return refAngle[ELEV_IDX]; }   // Return the current reference elevation (rad)
 
-    unsigned int getScanMode() const            { return scanMode; }             // Returns the scan mode
-    virtual bool setScanMode(const unsigned int m, const bool resetRequired = true); // Sets the scan mode (optional reset flag)
+    ScanMode getScanMode() const                { return scanMode; }             // Returns the scan mode
+    virtual bool setScanMode(const ScanMode, const bool resetRequired = true);   // Sets the scan mode (optional reset flag)
     virtual bool resetScan();                                                    // Reset the scan pattern
 
     void getScanVolume(double* width, double* height) const;                     // Returns the scan volume in radians (horizontal, vertical)
@@ -230,33 +230,33 @@ protected:
    void dynamics(const double dt) override;
 
 private:
-    base::Vec2d  scanPos;                 // Position in scan pattern     (rad)
-    base::Vec2d* prScanVertices {};       // Pseudo random scan pattern positions
-    unsigned int nprv {};                 // Number of pseudo random vertices
-    unsigned int cprv {};                 // Current pseudo random vertice number
-    unsigned int scanMode {MANUAL_SCAN};  // Gimbal scan mode
-    double     scanWidth {};              // Width of scan volume         (rad)
-    double     scanHeight {};             // Height of scan volume        (rad)
-    unsigned int scanState {};            // Scan state machine
-    base::Vec2d refAngle;                 // Gimbal reference angles     (rad)
-    base::Vec2d lastRefAngle;             // Last gimbal reference angle (rad)
+    base::Vec2d  scanPos;                       // Position in scan pattern     (rad)
+    base::Vec2d* prScanVertices{};              // Pseudo random scan pattern positions
+    unsigned int nprv{};                        // Number of pseudo random vertices
+    unsigned int cprv{};                        // Current pseudo random vertice number
+    ScanMode scanMode {ScanMode::MANUAL_SCAN};  // Gimbal scan mode
+    double     scanWidth{};                     // Width of scan volume         (rad)
+    double     scanHeight{};                    // Height of scan volume        (rad)
+    unsigned int scanState{};                   // Scan state machine
+    base::Vec2d refAngle;                       // Gimbal reference angles     (rad)
+    base::Vec2d lastRefAngle;                   // Last gimbal reference angle (rad)
 
-    unsigned int numBars {1};             // number of bars in our scan
-    double     barSpacing {};             // width between bars (if applicable) (rad)
-    bool       oddNumberOfBars {};        // flag used to reverse sequence of bar scans
-    bool       leftToRightScan {true};    // flag to tell us if we scan from right to left or left to right
-    bool       reverseScan {};            // Scanning the reverse direction
-    unsigned int barNum {1};              // Bar number that we are on
-    double     conAngle {};               // Conical scan angle (degrees)
-    double     revPerSec {5.0};           // Revolutions per second (hz)
-    double     scanRadius {2.0 * base::angle::D2RCC};    // Radius of the conical or circular scan (rad)
-    double     myLastAngle {};            // Angle (radians) of our last position in a rate servo
-    double     numRevs {};                // Spiral Scan - current number of revolutions
-    double     maxNumRevs {1.0};          // Spiral Scan - maximum number of revolutions
+    unsigned int numBars{1};                    // number of bars in our scan
+    double     barSpacing{};                    // width between bars (if applicable) (rad)
+    bool       oddNumberOfBars{};               // flag used to reverse sequence of bar scans
+    bool       leftToRightScan{true};           // flag to tell us if we scan from right to left or left to right
+    bool       reverseScan{};                   // Scanning the reverse direction
+    unsigned int barNum{1};                     // Bar number that we are on
+    double     conAngle{};                      // Conical scan angle (degrees)
+    double     revPerSec{5.0};                  // Revolutions per second (hz)
+    double     scanRadius{2.0 * base::angle::D2RCC};    // Radius of the conical or circular scan (rad)
+    double     myLastAngle{};                   // Angle (radians) of our last position in a rate servo
+    double     numRevs{};                       // Spiral Scan - current number of revolutions
+    double     maxNumRevs{1.0};                 // Spiral Scan - maximum number of revolutions
 
 private:
    // slot table helper methods
-   bool setSlotScanMode(base::String* const);
+   bool setSlotScanMode(base::Identifier* const);
    bool setSlotLeftToRightScan(const base::Number* const);
    bool setSlotScanWidth(const base::Number* const);
    bool setSlotSearchVolume(base::List* const);

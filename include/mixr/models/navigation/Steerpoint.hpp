@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base { class Angle; class Distance; class Identifier; class LatLon;
-                 class List; class String; class Time; }
+                 class List; class Identifier; class String; class Time; }
 namespace terrain { class Terrain; }
 namespace models {
 class Navigation;
@@ -208,7 +208,7 @@ private:
     bool        haveInitCmdAlt{};     // Have initial cmd altitude
     double      initCmdAirspeed{};    // Initial commanded airspeed (kts)
     bool        haveInitCmdAs{};      // Have commanded airspeed
-    base::safe_ptr<const base::String> initNextStptName; // Name of the inital "next" steerpoint
+    base::safe_ptr<const base::Identifier> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx{};    // Index of the initial "next" steerpoint
 
     // Computed data

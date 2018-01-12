@@ -132,13 +132,13 @@ private:
    const base::Pair* findSteerpointImp(const unsigned int idx) const;
    const Steerpoint* getSteerpointImp() const;
 
-   base::safe_ptr<base::Pair>         to;               // "To" Steerpoint pair [ name steerpoint ]
-   base::safe_ptr<const base::String> initToStptName;   // Name of the initial "to" steerpoint
-   unsigned int initToStptIdx {};                       // Index of the initial "to" steerpoint
-   unsigned int stptIdx {};                             // Steerpoint index [ 1 ... n ] in list
-   double       autoSeqDistNM {2.0};                    // Distance to auto sequence (NM)
-   bool         autoSeq {true};                         // Auto sequence of steerpoint
-   bool         wrap {true};                            // Wrap around route when inc or dec 'to' steerpoint
+   base::safe_ptr<base::Pair>         to;                   // "To" Steerpoint pair [ name steerpoint ]
+   base::safe_ptr<const base::Identifier> initToStptName;   // Name of the initial "to" steerpoint
+   unsigned int initToStptIdx {};                           // Index of the initial "to" steerpoint
+   unsigned int stptIdx {};                                 // Steerpoint index [ 1 ... n ] in list
+   double       autoSeqDistNM {2.0};                        // Distance to auto sequence (NM)
+   bool         autoSeq {true};                             // Auto sequence of steerpoint
+   bool         wrap {true};                                // Wrap around route when inc or dec 'to' steerpoint
 
 private:
    // slot table helper methods

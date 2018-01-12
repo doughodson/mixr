@@ -5,14 +5,14 @@ hsiRO:
 ( NumericReadout
     transform: ( Translation 3.5 4.8 ) 
     color: white
-    format: ###
+    format: "###"
 )
 // here is the DME readout, if we need it
 dmeRO:  
 ( NumericReadout
     color: white
     transform:  ( Translation -5.8 4.8 ) 
-    format: ###
+    format: "###"
 )
 
 

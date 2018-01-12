@@ -3,6 +3,9 @@
 #define __mixr_interop_dis_NetIO_H__
 
 #include "mixr/interop/common/NetIO.hpp"
+
+#include "mixr/base/Identifier.hpp"
+
 #include <array>
 
 namespace mixr {
@@ -377,8 +380,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotFederateName(const base::String* const) final;         // Sets our federate name
-   bool setSlotFederationName(const base::String* const) final;       // Sets our federation name
+   bool setSlotFederateName(const base::Identifier* const) final;     // Sets our federate name
+   bool setSlotFederationName(const base::Identifier* const) final;   // Sets our federation name
    bool setSlotMaxTimeDR(const base::Time* const) final;              // Sets the max DR time(s) for all entity types
    bool setSlotMaxPositionErr(const base::Distance* const) final;     // Sets the max positional error(s) for all entity types
    bool setSlotMaxOrientationErr(const base::Angle* const) final;     // Sets the max orientation error(s) for all entity types

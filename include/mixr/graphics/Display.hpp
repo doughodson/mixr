@@ -381,7 +381,7 @@ private:
     // slot table helper methods
     bool setSlotName(const base::String* const);
     bool setSlotNormalFont(AbstractFont* const);
-    bool setSlotNormalFont(const base::Identifier* const fontName);
+    bool setSlotNormalFont(const base::Identifier* const);
     bool setSlotColorTable(base::PairStream* const list);
     bool setSlotLeftOrthoBound(const base::Number* const);
     bool setSlotRightOrthoBound(const base::Number* const);
@@ -406,7 +406,7 @@ private:
     bool setSlotReverseVideoBrackets(const base::Number* const);
     bool setFontList(base::PairStream* const);
     bool setSlotClearDepth(const base::Number* const);
-    bool setSlotDisplayOrientation(const base::String* const);
+    bool setSlotDisplayOrientation(const base::Identifier* const);
     bool setSlotMaterials(base::PairStream* const);
     bool setSlotMaterials(Material* const);
     bool setSlotAntialias(const base::Number* const);

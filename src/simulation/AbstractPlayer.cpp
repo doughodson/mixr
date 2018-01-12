@@ -2,7 +2,7 @@
 #include "mixr/simulation/AbstractPlayer.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
 
 #include "mixr/simulation/AbstractNetIO.hpp"
 #include "mixr/simulation/AbstractNib.hpp"
@@ -19,7 +19,7 @@ END_SLOTTABLE(AbstractPlayer)
 
 BEGIN_SLOT_MAP(AbstractPlayer)
    ON_SLOT(01, setSlotID,       base::Number)
-   ON_SLOT(02, setSlotInitMode, base::String)
+   ON_SLOT(02, setSlotInitMode, base::Identifier)
 END_SLOT_MAP()
 
 AbstractPlayer::AbstractPlayer()
@@ -52,7 +52,7 @@ void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
 
    // NIB pointers are not copied!
    setNib( nullptr );
-   for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+   for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
       setOutgoingNib(nullptr, i);
    }
 }
@@ -175,7 +175,7 @@ bool AbstractPlayer::setSlotID(const base::Number* const num)
 }
 
 // mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
-bool AbstractPlayer::setSlotInitMode(base::String* const msg)
+bool AbstractPlayer::setSlotInitMode(base::Identifier* const msg)
 {
    bool ok{};
    if (*msg == "inactive" || *msg == "INACTIVE")        { setInitMode(Mode::INACTIVE);  ok = true; }

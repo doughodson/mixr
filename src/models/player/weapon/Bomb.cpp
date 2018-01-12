@@ -1,6 +1,7 @@
 
 #include "mixr/models/player/weapon/Bomb.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>

@@ -19,19 +19,23 @@
 
 #include "mixr/base/network/PosixHandler.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>
 #include <cstdint>
+#include <string>
 
 namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")
+EMPTY_DELETEDATA(PosixHandler)
 
 BEGIN_SLOTTABLE(PosixHandler)
     "localIpAddress",       // 1) String containing the local host's name or its IP
@@ -46,6 +50,7 @@ BEGIN_SLOTTABLE(PosixHandler)
 END_SLOTTABLE(PosixHandler)
 
 BEGIN_SLOT_MAP(PosixHandler)
+    ON_SLOT(1, setSlotLocalIpAddress,   Identifier)
     ON_SLOT(1, setSlotLocalIpAddress,   String)
     ON_SLOT(2, setSlotLocalPort,        Number)
     ON_SLOT(3, setSlotPort,             Number)
@@ -79,19 +84,7 @@ void PosixHandler::copyData(const PosixHandler& org, const bool)
     localAddr = org.localAddr;
     initialized = org.initialized;
 
-    if (localIpAddr != nullptr) delete[] localIpAddr;
-    localIpAddr = nullptr;
-    if (org.localIpAddr != nullptr) {
-        const std::size_t len {std::strlen(org.localIpAddr)};
-        localIpAddr = new char[len+1];
-        utStrcpy(localIpAddr, (len+1) ,org.localIpAddr);
-    }
-}
-
-void PosixHandler::deleteData()
-{
-   if (localIpAddr != nullptr) delete[] localIpAddr;
-   localIpAddr = nullptr;
+    localIpAddr = org.localIpAddr;
 }
 
 //------------------------------------------------------------------------------
@@ -136,8 +129,8 @@ bool PosixHandler::init()
     // ---
     // Set the local IP address
     // ---
-    if (localIpAddr != nullptr) {
-        setLocalAddr(localIpAddr);
+    if (localIpAddr != "") {
+        setLocalAddr(localIpAddr.c_str());
     }
 
     return ok;
@@ -488,12 +481,22 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
 //------------------------------------------------------------------------------
 
 // localIpAddress: String containing the local IP address
+bool PosixHandler::setSlotLocalIpAddress(const Identifier* const msg)
+{
+    bool ok{};
+    if (msg != nullptr) {
+        localIpAddr = msg->getStdString();
+        ok = true;
+    }
+    return ok;
+}
+
+// localIpAddress: String containing the local IP address
 bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        if (localIpAddr != nullptr) delete[] localIpAddr;
-        localIpAddr = msg->getCopyString();
+        localIpAddr = msg->getStdString();
         ok = true;
     }
     return ok;

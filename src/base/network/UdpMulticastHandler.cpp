@@ -35,11 +35,13 @@
 #include "mixr/base/String.hpp"
 #include <cstdio>
 #include <cstring>
+#include <string>
 
 namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(UdpMulticastHandler, "UdpMulticastHandler")
+EMPTY_DELETEDATA(UdpMulticastHandler)
 
 BEGIN_SLOTTABLE(UdpMulticastHandler)
 
@@ -69,21 +71,10 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 {
     BaseClass::copyData(org);
 
-    multicastGroup = nullptr;
-    if (org.multicastGroup != nullptr) {
-        const std::size_t len {std::strlen(org.multicastGroup)};
-        multicastGroup = new char[len+1];
-        utStrcpy(multicastGroup, (len+1), org.multicastGroup);
-    }
+    multicastGroup = org.multicastGroup;
     setTTL(org.getTTL());
     setLoopback(org.getLoopback());
     initialized = org.initialized;
-}
-
-void UdpMulticastHandler::deleteData()
-{
-    if (multicastGroup != nullptr) delete[] multicastGroup;
-    multicastGroup = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -162,7 +153,7 @@ bool UdpMulticastHandler::init()
 bool UdpMulticastHandler::bindSocket()
 {
     // Must have a group
-    if (multicastGroup == nullptr) return false;
+    if (multicastGroup == "") return false;
 
     // ---
     // Our base class will bind the socket
@@ -176,7 +167,7 @@ bool UdpMulticastHandler::bindSocket()
 #if defined(WIN32)
        addr.sin_addr.s_addr = INADDR_ANY;
 #else
-       addr.sin_addr.s_addr = ::inet_addr(multicastGroup);
+       addr.sin_addr.s_addr = ::inet_addr(multicastGroup.c_str());
 #endif
        if (getLocalPort() != 0) addr.sin_port = htons(getLocalPort());
        else addr.sin_port = htons(getPort());
@@ -204,11 +195,10 @@ bool UdpMulticastHandler::joinTheGroup()
 
    // Find our network address
    uint32_t mg{htonl (INADDR_NONE)};
-   if (multicastGroup != nullptr) mg = ::inet_addr(multicastGroup);
+   if (multicastGroup != "") mg = ::inet_addr(multicastGroup.c_str());
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
-   }
-   else {
+   } else {
       std::cerr << "joinTheGroup() -- invalid multicast group" << std::endl;
       return false;
    }

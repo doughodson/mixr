@@ -13,7 +13,8 @@ General framework-wide changes/improvements/trends/philosophy/goals
   of the code, the term 'remote' player was used, in others, the terms 'networked',
   'interoperability' and even 'surrogate' can be found. To further complicate
   matters, the term 'ghost' is used in other simulation packages.
-  Each use of these terms implies the same thing; a stand-in representation of a player being updated or managed by a different simulation (most likely executed
+  Each use of these terms implies the same thing; a stand-in representation of
+  a player being updated or managed by a different simulation (most likely executed
   on a different computer within a distributed environment).
 
   To improve the consistency of terminology throughout this code base, we have
@@ -37,6 +38,62 @@ General framework-wide changes/improvements/trends/philosophy/goals
   different than outcomes that do not include induced consistency or representation
   differences.
 
+- Topic: Strings verses Identifiers, getting more specific
+
+  The Extensible Description Language (EDL) is enabled by a language parser
+  and code embedded within Object-based classes.  Within it, two important data
+  types, String and Identifier are of particular interest.
+
+  Strings are defined in the language as quoted sequences of characters (e.g.,
+  "Hello, World") as is common in many computer languages.  Identifiers are defined
+  as an unquoted sequence of characters (e.g., 'blue', 'localhost', etc.). (Note: We
+  use single quotes in the examples to indicate a particular character sequence for
+  an Identifier; they are not to be used in an actual configuration file.)
+
+  Identifiers, like most computer language are defined using one or more deemed
+  valid characters that excludes spaces; they are most commonly used to label
+  or name things such as objects and variables. In other words, they use a
+  string-based value (i.e., name) to identify things!  In even other words, the
+  value they provide indicate something to do (e.g., the type of scan to select).
+  Within MIXR, although not enforced, stylistically, we prefer to make all
+  identifiers lower case.  We believe this improves the readability of configuration
+  input files by avoiding confusion with macros (which are often written in
+  UPPER case).
+
+  Even though both Identifiers and Strings are created and defined by a sequence
+  of characters, they are distinguished by the role they play within the language.
+  Under the hood, their value is stored as a string, but they serve different
+  roles in terms of semantic meaning.
+
+  Internal to the EDL parser, they are distinguished using different tokens.  Within
+  the C++ code base, they were somewhat confounded - namely, an Identifier was
+  defined as a subclass to a String.  So, all Identifiers were considered Strings,
+  even though their use and meaning is different.
+
+  Change:
+
+  The previous IS-A relationship within the C++ code base no longer exists;
+  Identifiers and Strings are now entirely different types. From an
+  implementation point of view, they both use a string to store a particular
+  value; but they are now unrelated types. This had an impact on the code base,
+  but interestingly enough, little, in fact, almost no impact on the configuration
+  files.  Configuration files mostly specified types completely consistent with
+  the EDL specification.  It was the C++ side, or Object-based classes that
+  required some tweaking.
+
+  In several cases, classes that defined slots to accept identifier-type value
+  information (such as Antenna with its slot to define polarization as either
+  'none', 'vertical', 'horizontal', 'slant', etc.) was in fact accepting a
+  String to process the same input value.  This worked because of the previous
+  IS-A relationship between the two; Identifier type value inputs would be accepted
+  as a valid 'String', because they were related.
+
+  We feel that the role of Identifiers and Strings are more easily understood
+  without an IS-A relationship obfuscating it.  All classes have been updated to
+  handle slot inputs more in-line with the value types they expect. Specific
+  changes are listed within each library.
+
+
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -46,6 +103,19 @@ Infrastructure oriented libraries
 --------------------------------------------------------------------------------
 base library (mixr_base)
 
+- All addresses in network handler classes have been updated to type std::string
+  as opposed to char*.  Also all of classes in which this matters that define a
+  slot parameter for that address also accepts Identifiers to specific host
+  names.  Strings are still used to specify IP addresses, so no native type exist
+  for that.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+recorder library (mixr_recorder)
+
+   TabPrinter class
+      1) Slot parameter 'msgHdrOptn' now accepts an Identifier
 
 --------------------------------------------------------------------------------
 
@@ -65,6 +135,9 @@ Graphics oriented libraries
 
 --------------------------------------------------------------------------------
 graphics library (mixr_graphics)
+
+   AbstractField class
+      1) Slot parameter 'justification' now accepts an Identifier
 
 
 --------------------------------------------------------------------------------
@@ -101,11 +174,49 @@ Models & general capabilities oriented libraries
 --------------------------------------------------------------------------------
 models library (mixr_models)
 
+   Antenna class
+      1) Polarization enum is now an 'enum class' based integer
+      2) Slot parameter 'polarization' now accepts an Identifier
+
+   Gimbal class
+      1) Slot parameter 'type' now accepts an Identifier
+      2) Enumerated type 'Type' is now an 'enum class'
+      3) Enumerated type 'ServoMode' is now an 'enum class'
+      4) 'ServoMode' type names have been shorten by removing the '_SERVO'
+         postfix from each of them
+
+   IrSensor class
+      1) Slot parameter 'sensorType' now accepts an Identifier
+      2) Enumerated type 'SensorType' is now an 'enum class'
+      3) Slot parameter 'trackManagerName' now accepts an Identifier
+      4) The name of the track manager is now stored as a std::string
+
+   IrSystem class
+      1) Slot parameter 'seekerName' now accepts an Identifier
+      2) The name of the seeker stored in this class is now a std::string
+
    Player class
       1) The enumerated list of coordinate systems is now a class (i.e.,
          'enum class CoordSys').  Also the enumeration names have been shorted
          to eliminate the 'CS_' prefix, as it's no longer needed due to
-         class specification.
+         class specification
+
+   RfSensor class
+      1) Slot parameter 'trackManagerName' now accepts an Identifier
+      2) Internally, this class now stores the track manager name as a
+         std::string. Its API has been updated to set or get its name based on
+         this type
+
+   RfSystem class
+      1) Slot parameter 'antennaName' now accepts an Identifier
+
+   ScanGimbal class
+      1) Enumerated type 'Side' is now an 'enum class'
+      2) The anonymous enumerated list of scan modes has been replaced by a
+         'enum class' that defines a ScanMode
+      3) Slot parameter 'scanMode' now accepts an Identifier
+
+
 
 --------------------------------------------------------------------------------
 
@@ -114,10 +225,11 @@ simulation library (mixr_simulation)
 
    AbstractPlayer class
       1) Numerical player identifier (ID) was changed to be an 'int' as opposed
-         to 'unsigned short'.
+         to 'unsigned short'
       2) The enumerated list of modes is now a class (i.e., 'enum class Mode').
       3) Method 'isNetworkedPlayer()' renamed to 'isProxyPlayer()'
-
+      4) String-based players name is now a std::string
+      5) Slot parameter 'mode' now accepts an Identifier
 
 
 --------------------------------------------------------------------------------

@@ -9,6 +9,7 @@
 #include <fstream>
 
 namespace mixr {
+namespace base { class Identifier; class String; }
 namespace recorder {
 namespace pb {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -25,8 +26,8 @@ class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
 //
 // Factory name: TabPrinter
 // Slots:
-//    msgHdrOptn   ! Msg Header options (see TabPrinter.hpp)
-//    divider      ! Field divider (default: tab)
+//    msgHdrOptn   <String>  ! Msg Header options { no_hdr, all_msgs, new_msg, on_change }
+//    divider      <String>  ! Field divider (default: tab)
 //------------------------------------------------------------------------------
 class TabPrinter : public PrintHandler
 {
@@ -39,98 +40,98 @@ public:
    TabPrinter();
 
    // set message header options
-   void setMsgHdrOptions(MsgHdrOptions msg);
+   void setMsgHdrOptions(MsgHdrOptions);
    bool isSimReset() const;                   // True if reset msg recorded
 
 protected:
    // Event Messages
-   virtual void printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdMsg* const msg);
-   virtual void printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb::NewPlayerEventMsg* const msg);
-   virtual void printPlayerRemovedEventMsg(const pb::Time* const timeMsg, const pb::PlayerRemovedEventMsg* const msg);
-   virtual void printPlayerDataMsg(const pb::Time* const timeMsg, const pb::PlayerDataMsg* const msg);
-   virtual void printPlayerDamagedEventMsg(const pb::Time* const timeMsg, const pb::PlayerDamagedEventMsg* const msg);
-   virtual void printPlayerCollisionEventMsg(const pb::Time* const timeMsg, const pb::PlayerCollisionEventMsg* const msg);
-   virtual void printPlayerCrashEventMsg(const pb::Time* const timeMsg, const pb::PlayerCrashEventMsg* const msg);
-   virtual void printPlayerKilledEventMsg(const pb::Time* const timeMsg, const pb::PlayerKilledEventMsg* const msg);
-   virtual void printWeaponReleaseEventMsg(const pb::Time* const timeMsg, const pb::WeaponReleaseEventMsg* const msg);
-   virtual void printWeaponHungEventMsg(const pb::Time* const timeMsg, const pb::WeaponHungEventMsg* const msg);
-   virtual void printWeaponDetonationEventMsg(const pb::Time* const timeMsg, const pb::WeaponDetonationEventMsg* const msg);
-   virtual void printGunFiredEventMsg(const pb::Time* const timeMsg, const pb::GunFiredEventMsg* const msg);
-   virtual void printNewTrackEventMsg(const pb::Time* const timeMsg, const pb::NewTrackEventMsg* const msg);
-   virtual void printTrackRemovedEventMsg(const pb::Time* const timeMsg, const pb::TrackRemovedEventMsg* const msg);
-   virtual void printTrackDataMsg(const pb::Time* const timeMsg, const pb::TrackDataMsg* const msg);
-   virtual void printMarkerMsg(const pb::Time* const timeMsg, const pb::MarkerMsg* const msg);
-   virtual void printInputDeviceMsg(const pb::Time* const timeMsg, const pb::InputDeviceMsg* const msg, const  unsigned int msgId);
+   virtual void printFileIdMsg(const pb::Time* const, const pb::FileIdMsg* const);
+   virtual void printNewPlayerEventMsg(const pb::Time* const, const pb::NewPlayerEventMsg* const);
+   virtual void printPlayerRemovedEventMsg(const pb::Time* const, const pb::PlayerRemovedEventMsg* const);
+   virtual void printPlayerDataMsg(const pb::Time* const, const pb::PlayerDataMsg* const);
+   virtual void printPlayerDamagedEventMsg(const pb::Time* const, const pb::PlayerDamagedEventMsg* const);
+   virtual void printPlayerCollisionEventMsg(const pb::Time* const, const pb::PlayerCollisionEventMsg* const);
+   virtual void printPlayerCrashEventMsg(const pb::Time* const, const pb::PlayerCrashEventMsg* const);
+   virtual void printPlayerKilledEventMsg(const pb::Time* const, const pb::PlayerKilledEventMsg* const);
+   virtual void printWeaponReleaseEventMsg(const pb::Time* const, const pb::WeaponReleaseEventMsg* const);
+   virtual void printWeaponHungEventMsg(const pb::Time* const, const pb::WeaponHungEventMsg* const);
+   virtual void printWeaponDetonationEventMsg(const pb::Time* const, const pb::WeaponDetonationEventMsg* const);
+   virtual void printGunFiredEventMsg(const pb::Time* const, const pb::GunFiredEventMsg* const);
+   virtual void printNewTrackEventMsg(const pb::Time* const, const pb::NewTrackEventMsg* const);
+   virtual void printTrackRemovedEventMsg(const pb::Time* const, const pb::TrackRemovedEventMsg* const);
+   virtual void printTrackDataMsg(const pb::Time* const, const pb::TrackDataMsg* const);
+   virtual void printMarkerMsg(const pb::Time* const, const pb::MarkerMsg* const);
+   virtual void printInputDeviceMsg(const pb::Time* const, const pb::InputDeviceMsg* const, const  unsigned int msgId);
 
    // Events without messages
-   virtual void printUnhandledIdToken(const pb::Time* const timeMsg);
-   virtual void printEndOfData(const pb::Time* const timeMsg);
-   virtual void printResetEvent(const pb::Time* const timeMsg);
+   virtual void printUnhandledIdToken(const pb::Time* const);
+   virtual void printEndOfData(const pb::Time* const);
+   virtual void printResetEvent(const pb::Time* const);
 
    // Common Data Messages
-   virtual void printTimeMsg(std::ostream& sout, const pb::Time* const timeMsg);
-   virtual void printPlayerIdMsg(std::ostream& sout, const pb::PlayerId* const playerIdMsg);
-   virtual void printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* const playerStateMsg);
-   virtual void printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData* const msg);
-   virtual void printEmissionDataMsg(std::ostream& sout, const pb::EmissionData* const msg);
+   virtual void printTimeMsg(std::ostream& sout, const pb::Time* const);
+   virtual void printPlayerIdMsg(std::ostream& sout, const pb::PlayerId* const);
+   virtual void printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* const);
+   virtual void printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData* const);
+   virtual void printEmissionDataMsg(std::ostream& sout, const pb::EmissionData* const);
 
    // Message Field Header functions
-   virtual void printTimeMsgHdr(std::ostream& sout);
-   virtual void printPlayerIdMsgHdr(std::ostream& sout);
-   virtual void printPlayerStateMsgHdr(std::ostream& sout);
-   virtual void printTrackDataHdr(std::ostream& sout);
-   virtual void printEmissionDataMsgHdr(std::ostream& sout);
-   virtual void printWeaponMsgHdr(std::ostream& sout);
-   virtual void printTrackMsgHdr(std::ostream& sout);
+   virtual void printTimeMsgHdr(std::ostream&);
+   virtual void printPlayerIdMsgHdr(std::ostream&);
+   virtual void printPlayerStateMsgHdr(std::ostream&);
+   virtual void printTrackDataHdr(std::ostream&);
+   virtual void printEmissionDataMsgHdr(std::ostream&);
+   virtual void printWeaponMsgHdr(std::ostream&);
+   virtual void printTrackMsgHdr(std::ostream&);
 
-   virtual void printEmissionDataSpacer(std::ostream& sout);
-   virtual void printPlayerIdSpacer(std::ostream& sout);
-   virtual void printPlayerDataSpacer(std::ostream& sout);
-   virtual void printTrackDataSpacer(std::ostream& sout);
+   virtual void printEmissionDataSpacer(std::ostream&);
+   virtual void printPlayerIdSpacer(std::ostream&);
+   virtual void printPlayerDataSpacer(std::ostream&);
+   virtual void printTrackDataSpacer(std::ostream&);
 
    void printExecTimeMsg(std::ostream& sout, double execTime);
    void printSimTimeMsg(std::ostream& sout, double simTime);
    void printUtcTimeMsg(std::ostream& sout, double utcTime);
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   void processRecordImp(const DataRecordHandle* const) override;
 
    virtual void setMsgHeaders(const bool);
 private:
    // print options
-   bool printHeader {};
-   bool simReset {true};
+   bool printHeader{};
+   bool simReset{true};
 
    // individual headers
-   bool fileIdHdr {true};
-   bool playerNewHdr {true};
-   bool playerRemovedHdr {true};
-   bool playerDataHdr {true};
-   bool playerDamagedHdr {true};
-   bool playerCollisionHdr {true};
-   bool playerCrashHdr {true};
-   bool playerKilledHdr {true};
-   bool weaponReleaseHdr {true};
-   bool weaponHungHdr {true};
-   bool weaponDetonateHdr {true};
-   bool gunFiredHdr {true};
-   bool trackNewHdr {true};
-   bool trackRemovedHdr {true};
-   bool trackDataHdr {true};
-   bool markerHdr {true};
-   bool inputDeviceHdr {true};
+   bool fileIdHdr{true};
+   bool playerNewHdr{true};
+   bool playerRemovedHdr{true};
+   bool playerDataHdr{true};
+   bool playerDamagedHdr{true};
+   bool playerCollisionHdr{true};
+   bool playerCrashHdr{true};
+   bool playerKilledHdr{true};
+   bool weaponReleaseHdr{true};
+   bool weaponHungHdr{true};
+   bool weaponDetonateHdr{true};
+   bool gunFiredHdr{true};
+   bool trackNewHdr{true};
+   bool trackRemovedHdr{true};
+   bool trackDataHdr{true};
+   bool markerHdr{true};
+   bool inputDeviceHdr{true};
 
    // Group headers
-   bool playerHeader {true};
-   bool weaponHeader {true};
-   bool trackHeader {true};
+   bool playerHeader{true};
+   bool weaponHeader{true};
+   bool trackHeader{true};
 
-   MsgHdrOptions option {MsgHdrOptions::NO_HDR};        // options for printing field names
-   unsigned int lastMessage {REID_UNHANDLED_ID_TOKEN};  // previous message printed
-   const char* divider {"\t"};                          // divider between message fields
+   MsgHdrOptions option{MsgHdrOptions::NO_HDR};        // options for printing field names
+   unsigned int lastMessage{REID_UNHANDLED_ID_TOKEN};  // previous message printed
+   const char* divider{"\t"};                          // divider between message fields
 
 private:
    // slot table helper methods
-   bool setSlotMsgHdr(const base::String* const);
+   bool setSlotMsgHdr(const base::Identifier* const);
    bool setSlotDivider(const base::String* const);
 
 };

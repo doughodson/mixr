@@ -7,6 +7,7 @@
 
 namespace mixr {
 namespace base {
+class Identifier;
 namespace ubf { class AbstractBehavior; class AbstractState; }
 }
 namespace simulation { class Station; }
@@ -53,22 +54,22 @@ protected:
 
    struct AgentItem
    {
-      base::safe_ptr<base::String> actorName;
+      base::safe_ptr<base::Identifier> actorName;
       base::safe_ptr<base::ubf::AbstractBehavior> behavior;
       base::safe_ptr<base::Component> actor;
    };
 
-   static const unsigned int MAX_AGENTS{10};
+   static const int MAX_AGENTS{10};
    bool clearAgentList();
-   bool addAgent( base::String* name, base::ubf::AbstractBehavior* const b);
+   bool addAgent(base::Identifier* name, base::ubf::AbstractBehavior* const);
 
 private:
-   base::Component* actor {};
-   base::ubf::AbstractState* state {};
-   simulation::Station* myStation {};
+   base::Component* actor{};
+   base::ubf::AbstractState* state{};
+   simulation::Station* myStation{};
 
    // agent/behavior list
-   unsigned int nAgents {};          // Number of input behavior/agent pairs
+   unsigned int nAgents{};          // Number of input behavior/agent pairs
    std::array<AgentItem, MAX_AGENTS> agentList;
 
 private:

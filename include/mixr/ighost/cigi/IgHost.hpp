@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Distance; class Identifier; class Number; class PairStream; class String; }
+namespace base { class Distance; class Identifier; class Number; class PairStream; }
 namespace simulation { class AbstractPlayer; }
 namespace models { class Player; }
 namespace cigi {
@@ -58,7 +58,7 @@ protected:
    double computeRangeToPlayer(const models::Player* const) const;
 
    // find a player's model object in table 'type' by the player IDs
-   CigiModel* findModel(const int playerID, const base::String* const federateName, const TableType type);
+   CigiModel* findModel(const int playerID, const base::Identifier* const federateName, const TableType type);
 
    // find a player's model object in table 'type' using a pointer to the player
    CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
@@ -131,10 +131,10 @@ private:
 
    // Model quick lookup key
    struct ModelKey {
-      ModelKey(const int pid, const base::String* const federateName);
+      ModelKey(const int pid, const base::Identifier* const federateName);
       // IgModel IDs  -- Comparisons in this order --
          int playerID;                                    // Player ID
-         base::safe_ptr<const base::String> fName;        // Federate name
+         base::safe_ptr<const base::Identifier> fName;    // Federate name
    };
 
    // IG model type table

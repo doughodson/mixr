@@ -3,6 +3,7 @@
 #define __mixr_base_String_H__
 
 #include "mixr/base/Object.hpp"
+
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstdlib>
@@ -31,7 +32,7 @@ class String : public Object
 
 public:
     enum class Justify { NONE, LEFT, RIGHT, CENTER };
-    static const int MAX_STRING_LENGTH {512};   // only by setString()
+    static const int MAX_STRING_LENGTH{512};       // only by setString()
 
 public:
     String(const char*);
@@ -51,10 +52,10 @@ public:
     char* getCopyString() const;                   // Returns a copy of the text string.
     char getChar(const unsigned int index) const;  // Gets a specific character
 
-    virtual void empty();                          // Empty (null) this string.
-    virtual void setStr(const char*);              // Sets us to a copy of 'string'
-    virtual void catStr(const char*);              // Append a copy of 'string' to our text string
-    virtual void setChar(const unsigned int index, const char c);    // Sets a specific character
+    void empty();                                            // Empty (null) this string.
+    void setStr(const char*);                                // Sets us to a copy of 'string'
+    void catStr(const char*);                                // Append a copy of 'string' to our text string
+    void setChar(const unsigned int index, const char c);    // Sets a specific character
 
     // Returns true if this string is the ascii form of a number
     bool isNumber() const;
@@ -73,7 +74,7 @@ public:
 
     // Set to the first 'w' characters of 'str'.
     // If the length of 'str' is less than 'w', than justify as 'j'.
-    virtual void setString(const String& str, const std::size_t w, const Justify j = Justify::NONE);
+    void setString(const String& str, const std::size_t w, const Justify j = Justify::NONE);
 
 private:
     char* str {};         // the character string

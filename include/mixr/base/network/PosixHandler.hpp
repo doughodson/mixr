@@ -4,8 +4,11 @@
 
 #include "mixr/base/network/NetHandler.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
+class Identifier;
 class Number;
 class String;
 
@@ -19,9 +22,10 @@ class String;
 // Windows: using Winsock2.h; link with Ws2_32.lib
 //
 // Slots:
-//    localIpAddress    ! String containing the local host's name or its IP
-//                      ! address in the Internet standard "." (dotted) notation.
-//                      ! (default: found via local host name)
+//    localIpAddress    ! IP address in Internet standard "." (dotted) notation
+//                      ! written as a string "127.0.0.1"
+//    localIpAddress    ! IP address name identifier (e.g., 'localhost') to be
+//                      ! used to look up a particular address
 //
 //    localPort         ! Local (source) port number (optional) (see examples below)
 //                      !   send:    Local port that we'll send the packets from
@@ -122,25 +126,26 @@ protected:
    // Sets the input buffer size
    bool setRecvBuffSize();
 
-   LcSocket socketNum;                 // Our Socket
+   LcSocket socketNum;                // uur Socket
 
 private:
-   char* localIpAddr {};               // Local host IP address
-   uint32_t localAddr {};              // Local host address
-   uint32_t netAddr {};                // Network (remote) host address
-   uint32_t fromAddr1 {};              // Last recvData() 'from' ip address
-   uint16_t port {};                   // Port
-   uint16_t localPort {};              // Local (source) port
-   uint16_t ignoreSourcePort {};       // Ignore message from this source port
-   uint16_t fromPort1 {};              // Last recvData() 'from' port number
-   bool sharedFlg {};                  // Shared port flag
-   bool initialized {};                // handler has been initialized
-   unsigned int sendBuffSizeKb {32};   // Send buffer size in KBs
-   unsigned int recvBuffSizeKb {128};  // Receive buffer size in KBs
+   std::string localIpAddr;           // Local host name or IP address
+   uint32_t localAddr{};              // Local host address
+   uint32_t netAddr{};                // Network (remote) host address
+   uint32_t fromAddr1{};              // Last recvData() 'from' ip address
+   uint16_t port{};                   // Port
+   uint16_t localPort{};              // Local (source) port
+   uint16_t ignoreSourcePort{};       // Ignore message from this source port
+   uint16_t fromPort1{};              // Last recvData() 'from' port number
+   bool sharedFlg{};                  // Shared port flag
+   bool initialized{};                // handler has been initialized
+   unsigned int sendBuffSizeKb{32};   // Send buffer size in KBs
+   unsigned int recvBuffSizeKb{128};  // Receive buffer size in KBs
 
 private:
    // slot table helper methods
    bool setSlotLocalIpAddress(const String* const);
+   bool setSlotLocalIpAddress(const Identifier* const);
    bool setSlotPort(const Number* const);
    bool setSlotLocalPort(const Number* const);
    bool setSlotShared(const Number* const);

@@ -12,7 +12,6 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/String.hpp"
 
 #include "mixr/base/units/Distances.hpp"
 
@@ -54,7 +53,7 @@ void Route::copyData(const Route& org, const bool)
     to = nullptr; // find it using 'initToStptName' or 'initToStptIdx'
 
     {
-        base::String* n{};
+        base::Identifier* n{};
         if (org.initToStptName != nullptr) n = org.initToStptName->clone();
         initToStptName = n;
         if (n != nullptr) n->unref();  // safe_ptr<> has it

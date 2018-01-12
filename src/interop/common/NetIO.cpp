@@ -68,8 +68,8 @@ END_SLOTTABLE(NetIO)
 
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1,  setSlotNetworkID,          base::Number)
-   ON_SLOT(2,  setSlotFederationName,     base::String)
-   ON_SLOT(3,  setSlotFederateName,       base::String)
+   ON_SLOT(2,  setSlotFederationName,     base::Identifier)
+   ON_SLOT(3,  setSlotFederateName,       base::Identifier)
 
    ON_SLOT(4,  setSlotEnableInput,        base::Number)
    ON_SLOT(5,  setSlotEnableOutput,       base::Number)
@@ -110,9 +110,9 @@ void NetIO::copyData(const NetIO& org, const bool)
 
    netID = org.netID;
 
-   const base::String* p1 = org.federateName;
+   const base::Identifier* p1 = org.federateName;
    federateName = p1;
-   const base::String* p2 = org.federationName;
+   const base::Identifier* p2 = org.federationName;
    federationName = p2;
 
    inputFlg = org.inputFlg;
@@ -245,13 +245,13 @@ double NetIO::getMaxAge(const Nib* const) const
 }
 
 // Federate name as String
-const base::String* NetIO::getFederateName() const
+const base::Identifier* NetIO::getFederateName() const
 {
    return federateName;
 }
 
 // Federation name as String
-const base::String* NetIO::getFederationName() const
+const base::Identifier* NetIO::getFederationName() const
 {
    return federationName;
 }
@@ -315,14 +315,14 @@ bool NetIO::setMaxEntityRange(const double v)
 }
 
 // Sets our federate name
-bool NetIO::setFederateName(const base::String* const msg)
+bool NetIO::setFederateName(const base::Identifier* const msg)
 {
    federateName = msg;
    return true;
 }
 
 // Sets our federation name
-bool NetIO::setFederationName(const base::String* const msg)
+bool NetIO::setFederationName(const base::Identifier* const msg)
 {
    federationName = msg;
    return true;
@@ -590,7 +590,7 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
       // Default DR: World, No rotation, 2nd order linear
       nib->setDeadReckoning(Nib::FVW_DRM);
 
-      const base::String* fName{getFederateName()};
+      const base::Identifier* fName{getFederateName()};
       if (player->isProxyPlayer()) {
          const auto pNib = dynamic_cast<Nib*>(player->getNib());
          fName = pNib->getFederateName();
@@ -743,7 +743,7 @@ bool NetIO::addNib2InputList(Nib* const nib)
 //------------------------------------------------------------------------------
 // findNib() -- find the NIB that matches ALL IDs.
 //------------------------------------------------------------------------------
-Nib* NetIO::findNib(const unsigned short playerID, const base::String* const federateName, const IoType ioType)
+Nib* NetIO::findNib(const unsigned short playerID, const base::Identifier* const federateName, const IoType ioType)
 {
    // Define the key
    NibKey key(playerID, federateName);
@@ -765,7 +765,7 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
    Nib* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::String* fName{getFederateName()};
+      const base::Identifier* fName{getFederateName()};
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const auto pNib = dynamic_cast<const Nib*>(player->getNib());
@@ -1051,13 +1051,13 @@ bool NetIO::setSlotNetworkID(const base::Number* const num)
 }
 
 // Sets our federate name
-bool NetIO::setSlotFederateName(const base::String* const msg)
+bool NetIO::setSlotFederateName(const base::Identifier* const msg)
 {
    return setFederateName(msg);
 }
 
 // Sets our federation name
-bool NetIO::setSlotFederationName(const base::String* const msg)
+bool NetIO::setSlotFederationName(const base::Identifier* const msg)
 {
    return setFederationName(msg);
 }

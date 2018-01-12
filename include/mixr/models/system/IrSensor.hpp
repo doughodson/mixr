@@ -5,8 +5,10 @@
 #include "mixr/models/system/IrSystem.hpp"
 #include "mixr/base/safe_queue.hpp"
 
+#include <string>
+
 namespace mixr {
-namespace base { class Integer; class Number; class String; }
+namespace base { class Identifier; class Integer; class Number; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -25,19 +27,19 @@ class TrackManager;
 //
 // Slots:
 //
-//    lowerWavelength     (Real)           The lower wavelength limit in microns
+//    lowerWavelength     <Real>        ! The lower wavelength limit in microns
 //
-//    upperWavelength     (Real)           The upper wavelength limit in microns
+//    upperWavelength     <Real>        ! The upper wavelength limit in microns
 //
-//    nei                 (Real)           The Noise Equivalent Irradiance in watts/str-cm^2
+//    nei                 <Real>        ! The Noise Equivalent Irradiance in watts/str-cm^2
 //
-//    threshold           (Real)           The Signal to Noise Threshold
+//    threshold           <Real>        ! The Signal to Noise Threshold
 //
-//    IFOV                (Real)           The Instantaneous Field of View in steradians
+//    IFOV                <Real>        ! The Instantaneous Field of View in steradians
 //
-//    sensorType          (String)         The type of sensor(CONTRAST, HOTSPOT)
+//    sensorType          <Identifier>  ! The type of sensor { contrast, hotspot }
 //
-//    FOR                 (Real)           The Field of Regard in steradians
+//    FOR                 <Real>        ! The Field of Regard in steradians
 //
 // Events:
 //    bool irQueryReturnEvent(IrQueryMsg* const irQuery);
@@ -72,7 +74,7 @@ class TrackManager;
 //       What the sensor can see with no gimbal movement
 //
 //    SensorType getSensorType()
-//    bool setSensorType(const SensorType st)
+//    void setSensorType(const SensorType st)
 //       Gets/Sets the Type of sensor whether hot spot (only objects hotter than the environment
 //           are detected) or contrast (objects hotter and cooler than the environment are observed)
 //
@@ -87,9 +89,9 @@ class IrSensor : public IrSystem
     DECLARE_SUBCLASS(IrSensor, IrSystem)
 
 public:
-   enum SensorType {
-         CONTRAST,   // Detection by difference (hot or cold) from background
-         HOTSPOT     // Detection if hotter than background
+   enum class SensorType {
+      CONTRAST,   // Detection by difference (hot or cold) from background
+      HOTSPOT     // Detection if hotter than background
    };
 
 public:
@@ -113,7 +115,7 @@ public:
    virtual bool setIFOV(const double);                         // Sets the Instantaneous Field of View  (steradians)
 
    virtual SensorType getSensorType() const {return sensorType; } ;  // Returns the type of sensor
-   virtual bool setSensorType(const SensorType);                     // Sets the type of sensor
+   virtual void setSensorType(const SensorType);                     // Sets the type of sensor
 
    //virtual double getFieldOfRegardTheta() const {return fieldOfRegardTheta; };   // Returns Field of Regard planar angle (radians)
    //virtual double getFieldOfRegard() const { return fieldOfRegard; };            // Returns the Field of Regard  (steradians)
@@ -128,12 +130,12 @@ public:
    virtual double getMaximumRange() const {return maximumRange; };   // Returns maximum Range
    virtual bool setMaximumRange(const double maximumRange);          // Sets maximum Range
 
-   virtual const base::String* getTrackManagerName() const; // Returns the requested track manager's name
-   virtual bool setTrackManagerName(base::String* const);   // Sets the name of the track manager to use
+   virtual const std::string& getTrackManagerName() const;    // Returns the requested track manager's name
+   virtual bool setTrackManagerName(const std::string&);      // Sets the name of the track manager to use
 
-   virtual TrackManager* getTrackManager();               // Returns our current track manager
-   virtual const TrackManager* getTrackManager() const;   // Returns our current track manager (const version)
-   virtual bool setTrackManager(TrackManager* const);     // Sets the track manager
+   virtual TrackManager* getTrackManager();                  // Returns our current track manager
+   virtual const TrackManager* getTrackManager() const;      // Returns our current track manager (const version)
+   virtual bool setTrackManager(TrackManager* const);        // Sets the track manager
 
    // Store sensor reports until we are ready to pass on to track manager.
    void addStoredMessage(IrQueryMsg* msg);
@@ -150,40 +152,40 @@ protected:
    bool shutdownNotification() override;
 
    virtual IrQueryMsg* getStoredMessage();
-   virtual IrQueryMsg* peekStoredMessage(unsigned int i);
+   virtual IrQueryMsg* peekStoredMessage(unsigned int);
 
-   base::safe_queue<IrQueryMsg*> storedMessagesQueue {MAX_EMISSIONS};
-   mutable long storedMessagesLock {};        // Semaphore to protect 'storedMessagesQueue'
+   base::safe_queue<IrQueryMsg*> storedMessagesQueue{MAX_EMISSIONS};
+   mutable long storedMessagesLock{};        // Semaphore to protect 'storedMessagesQueue'
 
 private:
-   static const int MAX_EMISSIONS = 10000;   // Max size of emission queues and arrays
+   static const int MAX_EMISSIONS{10000};   // Max size of emission queues and arrays
 
    void clearTracksAndQueues();
 
-   // Characteristics
-   double lowerWavelength {};          // Lower wavelength limit (microns)
-   double upperWavelength {};          // Upper wavelength limit (microns)
-   double nei {};                      // Noise Equivalent Irradiance  (watts/str-cm^2)
-   double threshold {};                // Signal to Noise Threshold
-   double ifov {};                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
-   double ifovTheta {};                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
+   // characteristics
+   double lowerWavelength{};          // Lower wavelength limit (microns)
+   double upperWavelength{};          // Upper wavelength limit (microns)
+   double nei{};                      // Noise Equivalent Irradiance  (watts/str-cm^2)
+   double threshold{};                // Signal to Noise Threshold
+   double ifov{};                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
+   double ifovTheta{};                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
 
    // results in a simple cone.
-   SensorType sensorType {HOTSPOT};    // Sensor Type(CONTRAST, HOTSPOT)
+   SensorType sensorType{SensorType::HOTSPOT};    // Sensor Type(CONTRAST, HOTSPOT)
    //double fieldOfRegard {};          // Field of Regard (steradians) (what can be in view to gimbals limits)
    //double fieldOfRegardTheta {};     // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
 
    // above results in a simple cone.
-   base::String* tmName {};          // Name of our track manager
-   TrackManager* trackManager {};    // Our Track manager -- managed by the onboard computer
+   std::string tmName;                 // Name of our track manager
+   TrackManager* trackManager{};       // Our Track manager -- managed by the onboard computer
 
-   //double azimuthBin {};           // minimum azimuth we can distinguish -- two signals whose
-                                     // azimuth differs by less than this will be merged
+   //double azimuthBin{};              // minimum azimuth we can distinguish -- two signals whose
+                                       // azimuth differs by less than this will be merged
 
-   //double elevationBin {};         // minimum azimuth we can distinguish -- two signals whose
-                                     // azimuth differs by less than this will be merged
+   //double elevationBin{};            // minimum azimuth we can distinguish -- two signals whose
+                                       // azimuth differs by less than this will be merged
 
-   double maximumRange {};           // max sensor range.
+   double maximumRange{};              // max sensor range.
 
 private:
    // slot table helper methods
@@ -192,12 +194,12 @@ private:
    bool setSlotNEI(const base::Number* const);               // Sets Noise Equivalent Irradiance
    bool setSlotThreshold(const base::Number* const);         // Sets Signal to Noise Threshold
    bool setSlotIFOV(const base::Number* const);              // Sets Instantaneous Field of View
-   bool setSlotSensorType(const base::String* const);        // Sets the Sensor Type
+   bool setSlotSensorType(const base::Identifier* const);    // Sets the Sensor Type
    //bool setSlotFieldOfRegard(const base::Number* const);   // Sets the field of regard
    //bool setSlotAzimuthBin(const base::Number* const);      // Sets the Azimuth Bin
    //bool setSlotElevationBin(const base::Number* const);    // Sets the Elevation Bin
    bool setSlotMaximumRange(const base::Number* const);      // Sets the Maximum Range
-   bool setSlotTrackManagerName(base::String* const);        // Sets our track manager by name
+   bool setSlotTrackManagerName(base::Identifier* const);    // Sets our track manager by name
 };
 
 }

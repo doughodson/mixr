@@ -4,7 +4,10 @@
 
 #include "mixr/models/system/System.hpp"
 
+#include <string>
+
 namespace mixr {
+namespace base { class Identifier; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -28,8 +31,8 @@ class OnboardComputer;
 //
 // Factory name: IrSystem
 // Slots:
-//    seekerName     <String>    Name of the requested Seeker (default: 0)
-//    disableQueries <Boolean>   Disable sending queries packets flag (default: false)
+//    seekerName     <Identifier>  ! Name of the requested Seeker
+//    disableQueries <Boolean>     ! Disable sending queries packets flag (default: false)
 //
 //------------------------------------------------------------------------------
 class IrSystem : public System
@@ -42,13 +45,13 @@ public:
    virtual bool isQuerying() const;
 
    virtual bool areQueriesDisabled() const;              // Returns true if sending query packets has been disabled
-   virtual bool setDisableQueriesFlag(const bool b);     // Disables/enables sending the I/R queries packets
+   virtual bool setDisableQueriesFlag(const bool);       // Disables/enables sending the I/R queries packets
 
    virtual IrSeeker* getSeeker();                        // Get the seeker model, or zero (0) if none
    virtual const IrSeeker* getSeeker() const;            // Get the seeker model (const version)
-   virtual bool setSeeker(IrSeeker* const p);            // Sets the IR's seeker model
+   virtual bool setSeeker(IrSeeker* const);              // Sets the IR's seeker model
 
-   virtual const base::String* getSeekerName() const;   // Name of the seeker model, or zero (0) if none
+   virtual const std::string& getSeekerName() const;     // name of our seeker
 
    void updateData(const double dt = 0.0) override;
    void reset() override;
@@ -62,14 +65,14 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   IrSeeker* seeker {};            // Our seeker
-   base::String* seekerName {};    // Name of our seeker
+   IrSeeker* seeker{};        // Our seeker
+   std::string seekerName;    // Name of our seeker
 
-   bool disableQueries {};         // Disable sending queries flag
+   bool disableQueries{};     // Disable sending queries flag
 
 private:
    // slot table helper methods
-   bool setSlotSeekerName(base::String* const);
+   bool setSlotSeekerName(base::Identifier* const);
    bool setSlotDisableQueries(base::Number* const);
 };
 

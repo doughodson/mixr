@@ -8,6 +8,8 @@
 #include "mixr/simulation/AbstractIgHost.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
+#include "mixr/base/Identifier.hpp"
+#include "mixr/base/String.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
@@ -60,7 +62,7 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 4, setSlotIoHandler,             base::AbstractIoHandler)
 
-   ON_SLOT( 5, setSlotOwnshipName,           base::String)
+   ON_SLOT( 5, setSlotOwnshipName,           base::Identifier)
 
    ON_SLOT( 6, setSlotTimeCriticalRate,      base::Number)
    ON_SLOT( 7, setSlotTimeCriticalPri,       base::Number)
@@ -606,7 +608,7 @@ const AbstractPlayer* Station::getOwnship() const
 }
 
 // Returns the ownship's name
-const base::String* Station::getOwnshipName() const
+const base::Identifier* Station::getOwnshipName() const
 {
    return ownshipName;
 }
@@ -972,7 +974,7 @@ bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
 //------------------------------------------------------------------------------
 // setSlotOwnshipName() -- sets the ownship name to the new string
 //------------------------------------------------------------------------------
-bool Station::setSlotOwnshipName(const base::String* const newName)
+bool Station::setSlotOwnshipName(const base::Identifier* const newName)
 {
    if (ownshipName != nullptr) ownshipName->unref();
    ownshipName = newName;

@@ -4,9 +4,11 @@
 
 #include "mixr/base/network/PosixHandler.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
-
+class Identifier;
 class String;
 
 //------------------------------------------------------------------------------
@@ -26,8 +28,10 @@ class String;
 // Factory name: UdpUnicastHandler
 //
 // Slots:
-//      ipAddress  <String>    ! Destination host name or IP address "111.122.133.144"
-//                             ! (default: found via local host name)
+//      ipAddress  <String>     ! Destination host name or IP address "111.122.133.144" string
+//                              ! (default: found via local host name)
+//      ipAddress  <Identifier> ! Destination host name identifier (e.g., 'localhost') to be
+//                              ! used to look up a particular address
 //
 // Input File Example:
 //
@@ -67,11 +71,12 @@ protected:
    bool bindSocket() override;
 
 private:
-   char* ipAddr {};   // Host's name or IP Address
+   std::string ipAddr;   // host name or IP address
 
 private:
    // slot table helper methods
    bool setSlotIpAddress(const String* const);
+   bool setSlotIpAddress(const Identifier* const);
 };
 
 }

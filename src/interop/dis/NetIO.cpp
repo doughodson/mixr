@@ -13,9 +13,9 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/String.hpp"
 
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
@@ -28,7 +28,6 @@
 #include <cctype>
 
 namespace mixr {
-
 namespace dis {
 
 //==============================================================================
@@ -573,7 +572,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
       nib->setDeadReckoning(Nib::FVW_DRM);
 
       bool ok {true};
-      const base::String* fName {getFederateName()};
+      const base::Identifier* fName {getFederateName()};
       unsigned short site {getSiteID()};
       unsigned short app  {getApplicationID()};
       if (player->isProxyPlayer()) {
@@ -611,7 +610,7 @@ Nib* NetIO::findDisNib(const unsigned short playerID, const unsigned short site,
    char cbuff[32] {};
    bool ok {makeFederateName(cbuff, 32, site, app)};
    if (ok) {
-      base::String fname(cbuff);
+      base::Identifier fname(cbuff);
       nib = dynamic_cast<Nib*>( findNib(playerID, &fname, ioType) );
    }
    return nib;
@@ -1012,7 +1011,7 @@ void NetIO::defineFederateName()
       char cbuff[32] {};
       bool ok {makeFederateName(cbuff, 32, siteID, appID)};
       if (ok) {
-         const auto p = new base::String(cbuff);
+         const auto p = new base::Identifier(cbuff);
          setFederateName(p);
          p->unref();
       }
@@ -1028,7 +1027,7 @@ void NetIO::defineFederationName()
       char cbuff[32] {};
       bool ok {makeFederationName(cbuff, 32, exerciseID)};
       if (ok) {
-         const auto p = new base::String(cbuff);
+         const auto p = new base::Identifier(cbuff);
          setFederationName(p);
          p->unref();
       }
@@ -1366,14 +1365,14 @@ const EmissionPduHandler* NetIO::findEmissionPduHandler(const EmissionSystem* co
 //------------------------------------------------------------------------------
 
 // Sets our federate name (override NetIO)
-bool NetIO::setSlotFederateName(const base::String* const)
+bool NetIO::setSlotFederateName(const base::Identifier* const)
 {
    std::cerr << "NetIO::setSlotFederateName() -- With NetIO, use the siteID and applicationID slots to create the federate name" << std::endl;
    return false;
 }
 
 // Sets our federation name (override NetIO)
-bool NetIO::setSlotFederationName(const base::String* const)
+bool NetIO::setSlotFederationName(const base::Identifier* const)
 {
    std::cerr << "NetIO::setSlotFederationName() -- With NetIO, use the exerciseID slot to create the federation name" << std::endl;
    return false;

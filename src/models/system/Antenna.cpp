@@ -5,12 +5,15 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
 
-#include "mixr/base/functors/Func1.hpp"
-#include "mixr/base/functors/Func2.hpp"
-#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+
+#include "mixr/base/functors/Func1.hpp"
+#include "mixr/base/functors/Func2.hpp"
+
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Decibel.hpp"
@@ -37,7 +40,7 @@ BEGIN_SLOTTABLE(Antenna)
 END_SLOTTABLE(Antenna)
 
 BEGIN_SLOT_MAP(Antenna)
-    ON_SLOT(1,  setSlotPolarization,      base::String)
+    ON_SLOT(1,  setSlotPolarization,      base::Identifier)
     ON_SLOT(2,  setSlotThreshold,         base::Power)
     ON_SLOT(3,  setSlotGain,              base::Number)
     ON_SLOT(4,  setSlotGainPattern,       base::Function)
@@ -195,20 +198,17 @@ void Antenna::clearQueues()
    base::unlock(inUseEmLock);
 }
 
-//------------------------------------------------------------------------------
-// setSlotPolarization() -- calls setPolarization()
-//------------------------------------------------------------------------------
-bool Antenna::setPolarization(base::String* const v)
+bool Antenna::setPolarization(base::Identifier* const v)
 {
    if (v == nullptr) return false;
 
    bool ok{true};
-   if (*v == "none") ok = setPolarization(NONE);
-   else if (*v == "vertical") ok = setPolarization(VERTICAL);
-   else if (*v == "horizontal") ok = setPolarization(HORIZONTAL);
-   else if (*v == "slant") ok = setPolarization(SLANT);
-   else if (*v == "RHC") ok = setPolarization(RHC);
-   else if (*v == "LHC") ok = setPolarization(LHC);
+   if (*v == "none") ok = setPolarization(Polarization::NONE);
+   else if (*v == "vertical") ok = setPolarization(Polarization::VERTICAL);
+   else if (*v == "horizontal") ok = setPolarization(Polarization::HORIZONTAL);
+   else if (*v == "slant") ok = setPolarization(Polarization::SLANT);
+   else if (*v == "RHC") ok = setPolarization(Polarization::RHC);
+   else if (*v == "LHC") ok = setPolarization(Polarization::LHC);
    else ok = false;
 
    return ok;
@@ -717,7 +717,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
 //------------------------------------------------------------------------------
 double Antenna::getPolarizationGain(const Polarization p1) const
 {
-    const int n{LHC+1};
+    const int n{static_cast<int>(Polarization::LHC) + 1};
     static double table[n][n] {
       //   NONE     VERTICAL   HORIZONTAL   SLANT       RHC        LHC
         {   1.0,       1.0,       1.0,       1.0,       1.0,       1.0 },     // NONE
@@ -727,7 +727,7 @@ double Antenna::getPolarizationGain(const Polarization p1) const
         {   1.0,       0.5,       0.5,       0.5,       1.0,       0.0 },     // RHC
         {   1.0,       0.5,       0.5,       0.5,       0.0,       1.0 },     // LHC
     };
-    return table[polar][p1];
+    return table[static_cast<int>(polar)][static_cast<int>(p1)];
 }
 
 }

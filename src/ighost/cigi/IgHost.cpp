@@ -578,7 +578,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 // findModel() -- find the model that matches ALL IDs.
 //------------------------------------------------------------------------------
-CigiModel* IgHost::findModel(const int playerID, const base::String* const federateName, const TableType type)
+CigiModel* IgHost::findModel(const int playerID, const base::Identifier* const federateName, const TableType type)
 {
    // Define the key
    ModelKey key(playerID, federateName);
@@ -600,7 +600,7 @@ CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, con
    CigiModel* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::String* fName{};
+      const base::Identifier* fName{};
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const simulation::AbstractNib* pNib{player->getNib()};
@@ -634,8 +634,8 @@ int IgHost::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const base::String* pKeyFedName{pKey->fName};
-      const base::String* pModelFedName{pModel->getFederateName()};
+      const base::Identifier* pKeyFedName{pKey->fName};
+      const base::Identifier* pModelFedName{pModel->getFederateName()};
 
       if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
 
@@ -749,7 +749,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
 //==============================================================================
 // IgModel::ModelKey class
 //==============================================================================
-IgHost::ModelKey::ModelKey(const int pid, const base::String* const federateName)
+IgHost::ModelKey::ModelKey(const int pid, const base::Identifier* const federateName)
 {
    playerID = pid;
    fName = federateName;

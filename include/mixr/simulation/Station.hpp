@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoHandler; class Number; class Time; }
+namespace base { class AbstractIoHandler; class Identifier; class Number; class PairStream; class String; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
@@ -162,7 +162,7 @@ public:
    AbstractPlayer* getOwnship();                                    // The ownship (primary) player
    const AbstractPlayer* getOwnship() const;                        // The ownship (primary) player (const version)
 
-   const base::String* getOwnshipName() const;                      // The ownship's name
+   const base::Identifier* getOwnshipName() const;                  // The ownship's name
    virtual bool setOwnshipPlayer(AbstractPlayer* const newOS);      // Sets the ownship player
    virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
@@ -253,7 +253,7 @@ private:
    base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
    base::safe_ptr<base::AbstractIoHandler> ioHandler;        // Input/Output (IO) data handler
    AbstractPlayer* ownship{};                                // Ownship (primary) player
-   const base::String* ownshipName{};                        // Name of our ownship player
+   const base::Identifier* ownshipName{};                    // Name of our ownship player
    bool tmrUpdateEnbl{};                                     // Enable base::Timers::updateTimers() call from updateTC()
    AbstractDataRecorder* dataRecorder{};                     // Data Recorder
 
@@ -286,7 +286,7 @@ private:
 
    bool setSlotIoHandler(base::AbstractIoHandler* const);
 
-   bool setSlotOwnshipName(const base::String* const);
+   bool setSlotOwnshipName(const base::Identifier* const);
 
    bool setSlotTimeCriticalRate(const base::Number* const hz);
    bool setSlotTimeCriticalPri(const base::Number* const);

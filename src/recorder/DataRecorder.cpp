@@ -15,8 +15,8 @@
 #include "mixr/simulation/AbstractNib.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/String.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 #include <cstdio>
@@ -42,8 +42,8 @@ END_SLOTTABLE(DataRecorder)
 
 BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 1, setOutputHandler,   OutputHandler)
-   ON_SLOT( 2, setSlotEventName,   base::String)
-   ON_SLOT( 3, setSlotApplication, base::String)
+   ON_SLOT( 2, setSlotEventName,   base::Identifier)
+   ON_SLOT( 3, setSlotApplication, base::Identifier)
    ON_SLOT( 4, setSlotCaseNum,     base::Number)
    ON_SLOT( 5, setSlotMissionNum,  base::Number)
    ON_SLOT( 6, setSlotSubjectNum,  base::Number)
@@ -803,7 +803,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
          // Networked player federation name
          if ( player->isProxyPlayer() ) {
             const simulation::AbstractNib* nib {player->getNib()};
-            const base::String* fedName {nib->getFederateName()};
+            const base::Identifier* fedName {nib->getFederateName()};
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }
       } else {
@@ -954,27 +954,27 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
          // polarization
          models::Antenna::Polarization polarization = emData->getPolarization();
          switch (polarization) {
-            case models::Antenna::NONE: {
+            case models::Antenna::Polarization::NONE: {
                emMsg->set_polarization(pb::EmissionData_Polarization_NONE);
                break;
             }
-            case models::Antenna::VERTICAL: {
+            case models::Antenna::Polarization::VERTICAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_VERTICAL);
                break;
             }
-            case models::Antenna::HORIZONTAL: {
+            case models::Antenna::Polarization::HORIZONTAL: {
                emMsg->set_polarization(pb::EmissionData_Polarization_HORIZONTAL);
                break;
             }
-            case models::Antenna::SLANT: {
+            case models::Antenna::Polarization::SLANT: {
                emMsg->set_polarization(pb::EmissionData_Polarization_SLANT);
                break;
             }
-            case models::Antenna::RHC: {
+            case models::Antenna::Polarization::RHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_RHC);
                break;
             }
-            case models::Antenna::LHC: {
+            case models::Antenna::Polarization::LHC: {
                emMsg->set_polarization(pb::EmissionData_Polarization_LHC);
                break;
             }
@@ -1076,21 +1076,21 @@ bool DataRecorder::setOutputHandler(OutputHandler* const msg)
    return true;
 }
 
-bool DataRecorder::setSlotEventName(base::String* const msg)
+bool DataRecorder::setSlotEventName(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      eventName = msg->getCopyString();
+      eventName = msg->getStdString();
       ok = true;
    }
    return ok;
 }
 
-bool DataRecorder::setSlotApplication(base::String* const msg)
+bool DataRecorder::setSlotApplication(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      application = msg->getCopyString();
+      application = msg->getStdString();
       ok = true;
    }
    return ok;

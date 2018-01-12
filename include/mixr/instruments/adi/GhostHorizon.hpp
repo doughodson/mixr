@@ -5,7 +5,7 @@
 #include "mixr/instruments/adi/Adi.hpp"
 
 namespace mixr {
-namespace base { class Color; class String; class Number; }
+namespace base { class Color; class Identifier; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -28,19 +28,19 @@ public:
     void updateData(const double dt = 0.0) override;
 
 private:
-    base::Vec3d skyColor;         // color of our sky
-    base::Vec3d groundColor;      // color of our ground
-    base::String* gColorName {};  // ground color name
-    base::String* sColorName {};  // sky color name
-    double width {20.0};          // width of our polygon
-    double height {20.0};         // height of our polygon
+    base::Vec3d skyColor;             // color of our sky
+    base::Vec3d groundColor;          // color of our ground
+    base::Identifier* gColorName {};  // ground color name
+    base::Identifier* sColorName {};  // sky color name
+    double width {20.0};              // width of our polygon
+    double height {20.0};             // height of our polygon
 
 private:
     // slot table helper methods   
     bool setSlotSkyColor(const base::Color* const);
-    bool setSlotSkyColor(const base::String* const);
-    bool setSlotGroundColor(const base::String* const);
+    bool setSlotSkyColor(const base::Identifier* const);
     bool setSlotGroundColor(const base::Color* const);
+    bool setSlotGroundColor(const base::Identifier* const);
     bool setSlotWidth(const base::Number* const);
     bool setSlotHeight(const base::Number* const);
 };

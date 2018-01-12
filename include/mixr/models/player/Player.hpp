@@ -118,7 +118,7 @@ class Track;
 //    ! Player's type, id and and other parameters
 //    ! ---
 //    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
-//    side           <base::String>      ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
+//    side           <base::Identifier>  ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
 //    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
 //                                       !   (default: based on the coord system used to set the initial position)
 //
@@ -1106,7 +1106,7 @@ private:
    bool setSlotInitVelocityKts(const base::Number* const);
 
    bool setSlotType(const base::String* const x)             { return setType(x); }
-   bool setSlotSide(base::String* const);
+   bool setSlotSide(base::Identifier* const);
 
    bool setSlotSignature(RfSignature* const);
    bool setSlotIrSignature(IrSignature* const);

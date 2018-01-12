@@ -9,6 +9,7 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -58,7 +59,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    ioType = org.ioType;
 
-   const models::Player* p = org.pPlayer;
+   const models::Player* p{org.pPlayer};
    setPlayer( const_cast<models::Player*>(p) );
    setNetIO(nullptr);
    setTypeMapper(org.ntm);
@@ -112,7 +113,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    apartLnchrElev = org.apartLnchrElev;
 
    // Need to clear attached missiles -- after clone these need to be found again
-   for (unsigned int i = 0; i < MAX_AMSL; i++) {
+   for (int i = 0; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -133,7 +134,7 @@ void Nib::deleteData()
    setTypeMapper(nullptr);
 
    // Clear attached missiles
-   for (unsigned int i = 0; i < MAX_AMSL; i++) {
+   for (int i = 0; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -154,7 +155,7 @@ bool Nib::shutdownNotification()
     setTypeMapper(nullptr);
 
     // Clear attached missiles
-   for (unsigned int i = 0; i < MAX_AMSL; i++) {
+   for (int i = 0; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -182,9 +183,9 @@ bool Nib::setPlayer(models::Player* const p)
 }
 
 //------------------------------------------------------------------------------
-// Federate name as String
+// return federate name
 //------------------------------------------------------------------------------
-const base::String* Nib::getFederateName() const
+const base::Identifier* Nib::getFederateName() const
 {
    return federateName;
 }
@@ -192,7 +193,7 @@ const base::String* Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const base::String* const msg)
+bool Nib::setFederateName(const base::Identifier* const msg)
 {
    federateName = msg;
    return true;

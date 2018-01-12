@@ -40,7 +40,7 @@ void CigiModel::copyData(const CigiModel& org, const bool)
 
     playerID = org.playerID;
 
-    const base::String* pp = org.federateName;
+    const base::Identifier* pp = org.federateName;
     federateName = pp;
 }
 

@@ -5,7 +5,7 @@
 #include "mixr/simulation/Simulation.hpp"
 
 namespace mixr {
-namespace terrain { class Terrain; }
+namespace terrain { class Identifier; class Terrain; }
 namespace models {
 class AbstractAtmosphere;
 
@@ -118,9 +118,9 @@ protected:
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
 
-    virtual bool setRefLatitude(const double v);      // Sets Ref latitude
-    virtual bool setRefLongitude(const double v);     // Sets Ref longitude
-    virtual bool setMaxRefRange(const double v);      // Sets the max range (meters) of the gaming area or zero if there's no limit.
+    virtual bool setRefLatitude(const double);      // Sets Ref latitude
+    virtual bool setRefLongitude(const double);     // Sets Ref longitude
+    virtual bool setMaxRefRange(const double);      // Sets the max range (meters) of the gaming area or zero if there's no limit.
 
    // environmental interface
     terrain::Terrain* getTerrain();                        // returns the terrain elevation database
@@ -130,7 +130,7 @@ private:
    void initData();
 
    // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
-   const base::EarthModel* em {};
+   const base::EarthModel* em{};
 
    double refLat {};          // Reference (center of gaming area) latitude (deg)
    double refLon {};          // Reference (center of gaming area) longitude (deg)
@@ -156,7 +156,7 @@ private:
 
    bool setSlotGamingAreaRange(const base::Distance* const);
    bool setSlotEarthModel(const base::EarthModel* const);
-   bool setSlotEarthModel(const base::String* const);
+   bool setSlotEarthModel(const base::Identifier* const);
    bool setSlotGamingAreaEarthModel(const base::Number* const);
 
    // environmental interface

@@ -4,9 +4,10 @@
 
 #include "mixr/base/network/PosixHandler.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
-
 class String;
 class Number;
 
@@ -18,7 +19,7 @@ class Number;
 // Factory name: UdpBroadcastHandler
 //
 // Slots:
-//       networkMask  <String>    ! Host Net Mask   "255.255.255.255"
+//       networkMask  <String>    ! host network mask  (e.g., "255.255.255.255")
 //
 // Input File Example:
 //
@@ -43,8 +44,8 @@ protected:
     bool bindSocket() override;
 
 private:
-    char* networkMask {};
-    
+    std::string networkMask;
+
 private:
     // slot table helper methods
     bool setSlotNetworkMask(const String* const);

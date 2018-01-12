@@ -13,7 +13,7 @@ class CigiCompCtrlV3;
 class CigiArtPartCtrlV3;
 
 namespace mixr {
-namespace base { class String; }
+namespace base { class Identifier; }
 namespace models { class Player; }
 namespace cigi {
 class Player2CigiMap;
@@ -59,8 +59,8 @@ public:
 
    const Player2CigiMap* getTypeMapper() const { return typeMapper; }     // IG type mapper
 
-   int getPlayerID() const                     { return playerID; }       // Player ID for the player associated with this model
-   const base::String* getFederateName() const { return federateName; }   // Player's federate name (if networked)
+   int getPlayerID() const                         { return playerID; }       // Player ID for the player associated with this model
+   const base::Identifier* getFederateName() const { return federateName; }   // Player's federate name (if networked)
 
    int getAgeCount() const                     { return ageCount; }       // Age counter value (number of IG frames since last IG update)
    int incAgeCount()                           { return ++ageCount; }     // Increments the age counter
@@ -124,8 +124,8 @@ private:
    bool hotActive{};               // HOT entry is active
 
    // Model IDs  -- Comparisons in this order --
-   int playerID{};                                    // Player ID
-   base::safe_ptr<const base::String> federateName;   // Federate name
+   int playerID{};                                        // player ID
+   base::safe_ptr<const base::Identifier> federateName;   // federate name
 };
 
 }

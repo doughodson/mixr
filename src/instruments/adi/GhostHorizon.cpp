@@ -8,7 +8,7 @@
 #include "mixr/base/colors/Color.hpp"
 #include "mixr/base/colors/Rgba.hpp"
 
-#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
 
 #include "mixr/graphics/Display.hpp"
 
@@ -26,9 +26,9 @@ END_SLOTTABLE(GhostHorizon)
 
 BEGIN_SLOT_MAP(GhostHorizon)
     ON_SLOT(1, setSlotSkyColor,    base::Color)
-    ON_SLOT(1, setSlotSkyColor,    base::String)
-    ON_SLOT(2, setSlotGroundColor, base::String)
+    ON_SLOT(1, setSlotSkyColor,    base::Identifier)
     ON_SLOT(2, setSlotGroundColor, base::Color)
+    ON_SLOT(2, setSlotGroundColor, base::Identifier)
     ON_SLOT(3, setSlotWidth,       base::Number)
     ON_SLOT(4, setSlotHeight,      base::Number)
 END_SLOT_MAP()
@@ -78,11 +78,11 @@ bool GhostHorizon::setSlotSkyColor(const base::Color* const cobj)
 //------------------------------------------------------------------------------
 // setSlotSkyColor() - set the color of our Ghost Horizon "sky" by a string.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotSkyColor(const base::String* const cname)
+bool GhostHorizon::setSlotSkyColor(const base::Identifier* const cname)
 {
     bool ok = false;
     if (cname != nullptr) {
-        if (sColorName == nullptr) sColorName = new base::String(cname->getString());
+        if (sColorName == nullptr) sColorName = new base::Identifier(cname->getString());
         else sColorName->setStr(cname->getString());
         ok = true;
     }
@@ -93,11 +93,11 @@ bool GhostHorizon::setSlotSkyColor(const base::String* const cname)
 //------------------------------------------------------------------------------
 // setSlotGroundColor() - set our "ground" color by string
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotGroundColor(const base::String* const cname)
+bool GhostHorizon::setSlotGroundColor(const base::Identifier* const cname)
 {
     bool ok = false;
     if (cname != nullptr) {
-        if (gColorName == nullptr) gColorName = new base::String(cname->getString());
+        if (gColorName == nullptr) gColorName = new base::Identifier(cname->getString());
         else gColorName->setStr(cname->getString());
         ok = true;
     }

@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace models { class Player; class Track; class Emission; }
-namespace base { class String; }
+namespace base { class Identifier; }
 namespace recorder {
 namespace pb { class DataRecord; class PlayerId; class PlayerState;
                class TrackData; class EmissionData; }
@@ -141,8 +141,8 @@ private:
 private:
    // slot table helper methods
    bool setSlotOutputHandler(OutputHandler* const x)         { return setOutputHandler(x); }
-   bool setSlotEventName(base::String* const);
-   bool setSlotApplication(base::String* const);
+   bool setSlotEventName(base::Identifier* const);
+   bool setSlotApplication(base::Identifier* const);
    bool setSlotCaseNum(base::Number* const);
    bool setSlotMissionNum(base::Number* const);
    bool setSlotSubjectNum(base::Number* const);

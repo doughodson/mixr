@@ -3,6 +3,7 @@
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 #include "mixr/recorder/DataRecordHandle.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/units/Times.hpp"
@@ -16,12 +17,12 @@ IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
 EMPTY_DELETEDATA(TabPrinter)
 
 BEGIN_SLOTTABLE(TabPrinter)
-   "msgHdrOptn",   // 1) Msg Header options (see TabPrinter.hpp)
+   "msgHdrOptn",   // 1) Msg Header options
    "divider",      // 2) Field divider
 END_SLOTTABLE(TabPrinter)
 
 BEGIN_SLOT_MAP(TabPrinter)
-   ON_SLOT( 1, setSlotMsgHdr,  base::String)
+   ON_SLOT( 1, setSlotMsgHdr,  base::Identifier)
    ON_SLOT( 2, setSlotDivider, base::String)
 END_SLOT_MAP()
 
@@ -71,34 +72,31 @@ void TabPrinter::setMsgHeaders(const bool f)
 // slot functions
 //------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
-// setSlotMsgHdr
-//------------------------------------------------------------------------------
-bool TabPrinter::setSlotMsgHdr(const base::String* const msg)
+bool TabPrinter::setSlotMsgHdr(const base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
 
-      if ((*msg == "NO_HDR") || (*msg == "no_hdr") ) {
+      if (*msg == "no_hdr") {
          option = MsgHdrOptions::NO_HDR;
          ok = true;
       }
-      else if ((*msg == "ALL_MSGS") || (*msg == "all_msgs") ) {
+      else if (*msg == "all_msgs") {
          option = MsgHdrOptions::ALL_MSGS;
          ok = true;
       }
-      else if ((*msg == "NEW_MSG") || (*msg == "new_msg") ) {
+      else if (*msg == "new_msg") {
          option = MsgHdrOptions::NEW_MSG;
          ok = true;
       }
-      else if ((*msg == "ON_CHANGE") || (*msg == "on_change") ) {
+      else if (*msg == "on_change") {
          option = MsgHdrOptions::ON_CHANGE;
          ok = true;
       }
 
       if (!ok && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "TabPrinter::setSlotMsgHdr(): Invalid header option type: " << *msg;
-         std::cerr << ", use: { NO_HDR, ALL_MSGS, NEW_MSG, ON_CHANGE }" << std::endl;
+         std::cerr << "TabPrinter::setSlotMsgHdr(): Invalid header option type: " << msg->getStdString();
+         std::cerr << ", specify one of the following identifiers: { no_hdr, all_msgs, new_msg, on_change }" << std::endl;
       }
    }
 

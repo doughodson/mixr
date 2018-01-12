@@ -147,7 +147,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(base::String* name, base::ubf::AbstractBehavior* const b)
+bool MultiActorAgent::addAgent(base::Identifier* name, base::ubf::AbstractBehavior* const b)
 {
    bool ok{};
    if (nAgents < MAX_AGENTS) {

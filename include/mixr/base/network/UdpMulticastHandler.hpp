@@ -4,9 +4,10 @@
 
 #include "mixr/base/network/PosixHandler.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
-
 class String;
 
 //------------------------------------------------------------------------------
@@ -27,9 +28,9 @@ class String;
 //
 // Slots:
 //      multicastGroup  <String>    ! String containing the multicast IP address in
-//                                  the Internet standard "." (dotted) notation.
-//                                  IP multicast addresses range from 224.0.0.0
-//                                  through 239.255.255.255 (e.g., "225.0.0.251")
+//                                  ! the Internet standard "." (dotted) notation.
+//                                  ! IP multicast addresses range from 224.0.0.0
+//                                  ! through 239.255.255.255 (e.g., "225.0.0.251")
 //
 //      ttl             <Number>    ! Multicast Time-To-Live (TTL) value (default: 1)
 //
@@ -84,7 +85,7 @@ protected:
     bool bindSocket() override;
 
 private:
-    char* multicastGroup {};           // Multicast Group Name
+    std::string multicastGroup;        // Multicast Group Name
     int   ttl {1};                     // Time-to-live value
     bool  loopback {true};             // Loop back flag
     bool  initialized {};              // handler has been initialized

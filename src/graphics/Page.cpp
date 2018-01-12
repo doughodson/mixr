@@ -1,6 +1,9 @@
 
 #include "mixr/graphics/Page.hpp"
 #include "mixr/graphics/Display.hpp"
+
+#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
@@ -30,7 +33,7 @@ END_SLOT_MAP()
 BEGIN_EVENT_HANDLER(Page)
     ON_EVENT(ON_ENTRY,onEntry)
     ON_EVENT(ON_EXIT,onExit)
-    ON_EVENT_OBJ(BUTTON_HIT,onButtonHit,base::String)
+    ON_EVENT_OBJ(BUTTON_HIT, onButtonHit,   base::String)
     ON_ANYKEY(onKeyHit)
 END_EVENT_HANDLER()
 

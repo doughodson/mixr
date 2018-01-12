@@ -14,9 +14,10 @@
 
 #include "mixr/simulation/Station.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 namespace mixr {
@@ -68,7 +69,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                nib->setApplicationID(app);
                char cbuff[32] {};
                makeFederateName(cbuff, 32, site, app);
-               const auto fname = new base::String(cbuff);
+               const auto fname = new base::Identifier(cbuff);
                nib->setFederateName(fname);
                fname->unref();
             }

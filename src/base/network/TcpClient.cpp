@@ -29,15 +29,19 @@
 #include "mixr/base/network/TcpClient.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+
 #include <cstring>
+#include <string>
 
 namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(TcpClient, "TcpClient")
+EMPTY_DELETEDATA(TcpClient)
 
 BEGIN_SLOTTABLE(TcpClient)
     "ipAddress",    // 1) String containing the IP address in
@@ -46,6 +50,7 @@ END_SLOTTABLE(TcpClient)
 
 BEGIN_SLOT_MAP(TcpClient)
     ON_SLOT(1, setSlotIpAddress, String)
+    ON_SLOT(1, setSlotIpAddress, Identifier)
 END_SLOT_MAP()
 
 TcpClient::TcpClient()
@@ -60,22 +65,7 @@ void TcpClient::copyData(const TcpClient& org, const bool)
 {
     BaseClass::copyData(org);
 
-    if (ipAddr != nullptr) delete[] ipAddr;
-    ipAddr = nullptr;
-    if (org.ipAddr != nullptr) {
-        const std::size_t len {std::strlen(org.ipAddr)};
-        ipAddr = new char[len+1];
-        utStrcpy(ipAddr, (len+1), org.ipAddr);
-    }
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TcpClient::deleteData()
-{
-    if (ipAddr != nullptr) delete[] ipAddr;
-    ipAddr = nullptr;
+    ipAddr = org.ipAddr;
 }
 
 //------------------------------------------------------------------------------
@@ -104,7 +94,7 @@ bool TcpClient::init()
    if (!success) return false;
 
    // Find our network address
-   success = setNetAddr(ipAddr);
+   success = setNetAddr(ipAddr.c_str());
 
    return success;
 }
@@ -138,7 +128,7 @@ bool TcpClient::connectToServer()
    connected = false;
    connectionTerminated = false;
 
-   if (ipAddr == nullptr) return false;
+   if (ipAddr == "") return false;
 
    if (socketNum == INVALID_SOCKET) return false;
 
@@ -183,7 +173,18 @@ bool TcpClient::setSlotIpAddress(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ipAddr = msg->getCopyString();
+        ipAddr = msg->getStdString();
+        ok = true;
+    }
+    return ok;
+}
+
+// ipAddress: Identifier containing the IP host name
+bool TcpClient::setSlotIpAddress(const Identifier* const msg)
+{
+    bool ok{};
+    if (msg != nullptr) {
+        ipAddr = msg->getStdString();
         ok = true;
     }
     return ok;

@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class List; class PairStream; }
+namespace base { class Angle; class Distance; class Identifier; class List; class PairStream; }
 namespace models {
 class Emission;
 class SensorMsg;
@@ -53,59 +53,59 @@ class Tdb;
 // Factory name: Gimbal
 // Slots:
 //
-//    type                 (String)          ! Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)
+//    type                 <Identifier>   ! Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)
 //
-//    location             (List)            ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
+//    location             <List>         ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
-//    initPosition         (List)            ! Initial position vector (radians) [ az el roll ] (default: 0,0,0)
-//    initPosAzimuth       (Angle)           ! Initial azimuth position (default: 0)
-//    initPosElevation     (Angle)           ! Initial elevation position (default: 0)
-//    initPosRoll          (Angle)           ! Initial roll position (default: 0)
+//    initPosition         <List>         ! Initial position vector (radians) [ az el roll ] (default: 0,0,0)
+//    initPosAzimuth       <Angle>        ! Initial azimuth position (default: 0)
+//    initPosElevation     <Angle>        ! Initial elevation position (default: 0)
+//    initPosRoll          <Angle>        ! Initial roll position (default: 0)
 //
-//    azimuthLimits        (List)            ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
-//    azimuthLimitLeft     (Angle)           ! Left azimuth limit[ range: -pi to pi; else unlimited ]
-//    azimuthLimitRight    (Angle)           ! Right azimuth limit[ range: -pi to pi; else unlimited ]
-//    elevationLimits      (List)            ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
+//    azimuthLimits        <List>         ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
+//    azimuthLimitLeft     <Angle>        ! Left azimuth limit[ range: -pi to pi; else unlimited ]
+//    azimuthLimitRight    <Angle>        ! Right azimuth limit[ range: -pi to pi; else unlimited ]
+//    elevationLimits      <List>         ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
 //
-//    elevationLimitLower  (Angle)           ! Lower elevation limit[ range: -pi to pi; else unlimited ]
-//    elevationLimitUpper  (Angle)           ! Upper elevation limit[ range: -pi to pi; else unlimited ]
+//    elevationLimitLower  <Angle>        ! Lower elevation limit[ range: -pi to pi; else unlimited ]
+//    elevationLimitUpper  <Angle>        ! Upper elevation limit[ range: -pi to pi; else unlimited ]
 //
-//    rollLimits           (Angle)           ! Roll limit vector (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
-//    rollLimitLower       (Angle)           ! Lower roll limit[ range: -pi to pi; else unlimited ]
-//    rollLimitUpper       (Angle)           ! Upper roll limit[ range: -pi to pi; else unlimited ]
+//    rollLimits           <Angle>        ! Roll limit vector (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
+//    rollLimitLower       <Angle>        ! Lower roll limit[ range: -pi to pi; else unlimited ]
+//    rollLimitUpper       <Angle>        ! Upper roll limit[ range: -pi to pi; else unlimited ]
 //
-//    maxRates             (List)            ! Max mechanical rate vector (rad/sec) [ az el roll ]
-//    maxRateAzimuth       (Angle)           ! Max "mechanical" azimuth rate    (Angle/sec) (default: D2RCC * 120.0)
-//    maxRateElevation     (Angle)           ! Max "mechanical" elevation rate  (Angle/sec) (default: D2RCC * 120.0)
-//    maxRateRoll          (Angle)           ! Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
+//    maxRates             <List>         ! Max mechanical rate vector (rad/sec) [ az el roll ]
+//    maxRateAzimuth       <Angle>        ! Max "mechanical" azimuth rate    (Angle/sec) (default: D2RCC * 120.0)
+//    maxRateElevation     <Angle>        ! Max "mechanical" elevation rate  (Angle/sec) (default: D2RCC * 120.0)
+//    maxRateRoll          <Angle>        ! Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
 //
-//    commandPosition      (List)            ! Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
-//    commandPosAzimuth    (Angle)           ! Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
-//    commandPosElevation  (Angle)           ! Commanded elevation position  (sets POSITION_SERVO) (default: 0)
-//    commandPosRoll       (Angle)           ! Commanded roll position       (sets POSITION_SERVO) (default: 0)
+//    commandPosition      <List>         ! Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
+//    commandPosAzimuth    <Angle>        ! Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
+//    commandPosElevation  <Angle>        ! Commanded elevation position  (sets POSITION_SERVO) (default: 0)
+//    commandPosRoll       <Angle>        ! Commanded roll position       (sets POSITION_SERVO) (default: 0)
 //
-//    commandRates         (List)            ! Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-//    commandRateAzimuth   (Angle)           ! Commanded azimuth rate     (Angle/sec) (sets RATE_SERVO)
-//    commandRateElevation (Angle)           ! Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
-//    commandRateRoll      (Angle)           ! Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
+//    commandRates         <List>         ! Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+//    commandRateAzimuth   <Angle>        ! Commanded azimuth rate     (Angle/sec) (sets RATE_SERVO)
+//    commandRateElevation <Angle>        ! Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
+//    commandRateRoll      <Angle>        ! Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
 //
-//    terrainOcculting     (Boolean)         ! Enable terrain occulting of the players of interest (default: false)
-//    checkHorizon         (Boolean)         ! Enable horizon masking check (default: true)
+//    terrainOcculting     <Boolean>      ! Enable terrain occulting of the players of interest (default: false)
+//    checkHorizon         <Boolean>      ! Enable horizon masking check (default: true)
 //
-//    playerOfInterestTypes (PairStream)     ! List of player of interest types (default: all types )
-//                                           ! Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
+//    playerOfInterestTypes        <PairStream> ! List of player of interest types (default: all types )
+//                                              ! Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //
-//    maxPlayersOfInterest  (Number)         ! Max number of players of interest (default: 200)
-//    maxRange2PlayersOfInterest (Distance)  ! Max range to players of interest, or zero for all (default: 0)
-//    maxAngle2PlayersOfInterest (Angle)     ! Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
-//    localPlayersOfInterestOnly (Number)    ! Sets the local only players of interest flag (default: false)
+//    maxPlayersOfInterest         <Number>     ! Max number of players of interest (default: 200)
+//    maxRange2PlayersOfInterest   <Distance>   ! Max range to players of interest, or zero for all (default: 0)
+//    maxAngle2PlayersOfInterest   <Angle>      ! Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
+//    localPlayersOfInterestOnly   <Number>     ! Sets the local only players of interest flag (default: false)
 //
-//    useWorldCoordinates  (Number)          ! Using player of interest's world (ECEF) coordinate system (default: true)
-//    useOwnHeadingOnly    (Number)          ! Whether only the ownship heading is used by the target data block (default: true)
+//    useWorldCoordinates          <Number>     ! Using player of interest's world (ECEF) coordinate system (default: true)
+//    useOwnHeadingOnly            <Number>     ! Whether only the ownship heading is used by the target data block (default: true)
 //
 //
 // Events:
-//    RF_EMISSION       (Emission)           ! Default handler: Pass emissions to subcomponents.
+//    RF_EMISSION                  <Emission>   ! Default handler: Pass emissions to subcomponents.
 //
 //
 //  Handy support functions
@@ -121,16 +121,16 @@ class Gimbal : public System
 public:
 
    // Servo type
-   enum Type {
+   enum class Type {
       MECHANICAL,   // Mechanical gimbal
       ELECTRONIC    // Electronic servo (e.g., phased array)
    };
 
    // Servo Mode
-   enum ServoMode {
-      FREEZE_SERVO,    // Servo is frozen
-      RATE_SERVO,      // Rate servo
-      POSITION_SERVO   // Position servo
+   enum class ServoMode {
+      FREEZE,         // Servo is frozen
+      RATE,           // Rate servo
+      POSITION        // Position servo
    };
 
    // Position/velocity vector indexes
@@ -295,9 +295,9 @@ private:
 
    static const double defaultTolerance;
 
-   Type        type {ELECTRONIC};          // Mechanical or Electronic gimbal (affects maxRates)
-   ServoMode   servoMode {FREEZE_SERVO};   // Gimbal's servo mode
-   bool        fastSlew {true};            // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
+   Type        type{Type::ELECTRONIC};         // Mechanical or Electronic gimbal (affects maxRates)
+   ServoMode   servoMode{ServoMode::FREEZE};   // Gimbal's servo mode
+   bool        fastSlew{true};                 // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
 
    base::Matrixd tm;          // Transformation matrix (to/from the player's coordinate system)
    base::Vec3d  pos;          // Current gimbal position      (rad)
@@ -305,7 +305,7 @@ private:
    base::Vec3d  cmdPos;       // Commanded position           (rad)
    base::Vec3d  cmdRate;      // Commanded rate               (rad/sec)
    base::Vec3d  location;     // Gimbal's location on parent  (meters)
-   bool atLimit {};           // Gimbal is at a limit
+   bool atLimit{};            // Gimbal is at a limit
 
    base::Vec3d  maxRate;      // Max mechanical rate of gimbal (rad/sec)
    base::Vec3d  lowLimits;    // left/lower gimbal limits     (rad)
@@ -315,21 +315,21 @@ private:
    base::Vec3d  initCmdPos;   // Initial commanded position   (rad)
    base::Vec3d  initCmdRate;  // Initial commanded rate       (rad/sec)
 
-   double    maxRngPlayers {};         // Max range for players of interest or zero for all (meters)
-   double    maxAnglePlayers {};       // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
-   unsigned int playerTypes {0xFFFF};  // Player of interest type mask (default: all players)
-   unsigned int maxPlayers {200};      // Max number of players of interest (i.e., size of the arrays)
-   bool     localOnly {};              // Local players of interest only
-   bool     terrainOcculting {};       // Target terrain occulting enabled flag
-   bool     checkHorizon {true};       // Horizon masking check enabled flag
-   bool     useWorld {true};           // Using player of interest's world coordinates
-   bool     ownHeadingOnly {true};     // Whether only the ownship heading is used by the target data block
+   double    maxRngPlayers{};         // Max range for players of interest or zero for all (meters)
+   double    maxAnglePlayers{};       // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
+   unsigned int playerTypes{0xFFFF};  // Player of interest type mask (default: all players)
+   unsigned int maxPlayers{200};      // Max number of players of interest (i.e., size of the arrays)
+   bool     localOnly{};              // Local players of interest only
+   bool     terrainOcculting{};       // Target terrain occulting enabled flag
+   bool     checkHorizon{true};       // Horizon masking check enabled flag
+   bool     useWorld{true};           // Using player of interest's world coordinates
+   bool     ownHeadingOnly{true};     // Whether only the ownship heading is used by the target data block
 
    base::safe_ptr<Tdb> tdb;  // Current Target Data Block
 
 private:
    // slot table helper methods
-   bool setSlotType(const base::String* const);                     // Physical gimbal type: "mechanical" or "electronic"
+   bool setSlotType(const base::Identifier* const);                 // Physical gimbal type: "mechanical" or "electronic"
    bool setSlotLocation(const base::List* const);                   // Relative location vector (meters) [ x y z ]
 
    bool setSlotPosition(const base::List* const);                   // Initial position vector (radians) [ az el roll ]

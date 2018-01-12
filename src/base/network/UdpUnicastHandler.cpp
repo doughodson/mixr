@@ -28,16 +28,19 @@
 
 #include "mixr/base/network/UdpUnicastHandler.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 #include <cstdio>
 #include <cstring>
+#include <string>
 
 namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(UdpUnicastHandler, "UdpUnicastHandler")
+EMPTY_DELETEDATA(UdpUnicastHandler)
 
 BEGIN_SLOTTABLE(UdpUnicastHandler)
     "ipAddress",        // 1) String containing the IP address in
@@ -46,6 +49,7 @@ END_SLOTTABLE(UdpUnicastHandler)
 
 BEGIN_SLOT_MAP(UdpUnicastHandler)
     ON_SLOT(1, setSlotIpAddress, String)
+    ON_SLOT(1, setSlotIpAddress, Identifier)
 END_SLOT_MAP()
 
 UdpUnicastHandler::UdpUnicastHandler()
@@ -58,19 +62,7 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool)
     BaseClass::copyData(org);
 
     // IP Address
-    if (ipAddr != nullptr) delete[] ipAddr;
-    ipAddr = nullptr;
-    if (org.ipAddr != nullptr) {
-        std::size_t len {std::strlen(org.ipAddr)};
-        ipAddr = new char[len+1];
-        utStrcpy(ipAddr,(len+1), org.ipAddr);
-    }
-}
-
-void UdpUnicastHandler::deleteData()
-{
-    if (ipAddr != nullptr) delete[] ipAddr;
-    ipAddr = nullptr;
+    ipAddr = org.ipAddr;
 }
 
 //------------------------------------------------------------------------------
@@ -89,7 +81,7 @@ bool UdpUnicastHandler::init()
     // ---
     // Find our network address
     // ---
-    setNetAddr(ipAddr);
+    setNetAddr(ipAddr.c_str());
 
     // ---
     // Create our socket
@@ -181,8 +173,18 @@ bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        if (ipAddr != nullptr) delete[] ipAddr;
-        ipAddr = msg->getCopyString();
+        ipAddr = msg->getStdString();
+        ok = true;
+    }
+    return ok;
+}
+
+// ipAddress: Identifier containing the IP address
+bool UdpUnicastHandler::setSlotIpAddress(const Identifier* const msg)
+{
+    bool ok{};
+    if (msg != nullptr) {
+        ipAddr = msg->getStdString();
         ok = true;
     }
     return ok;

@@ -28,11 +28,14 @@
 #include "mixr/simulation/AbstractNetIO.hpp"
 #include "mixr/simulation/AbstractNib.hpp"
 
-#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/LatLon.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Statistic.hpp"
+#include "mixr/base/String.hpp"
+
+#include "mixr/base/numeric/Boolean.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
@@ -144,7 +147,7 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(13, setSlotInitVelocityKts,    base::Number)
 
    ON_SLOT(14, setSlotType,               base::String)
-   ON_SLOT(15, setSlotSide,               base::String)
+   ON_SLOT(15, setSlotSide,               base::Identifier)
 
    ON_SLOT(16, setSlotSignature,          RfSignature)
    ON_SLOT(17, setSlotIrSignature,        IrSignature)
@@ -3817,7 +3820,7 @@ bool Player::setSlotID(const base::Number* const num)
 */
 
 // side: Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
-bool Player::setSlotSide(base::String* const msg)
+bool Player::setSlotSide(base::Identifier* const msg)
 {
    bool ok{};
    if (*msg == "blue" || *msg == "BLUE") { setSide(BLUE); ok = true; }
