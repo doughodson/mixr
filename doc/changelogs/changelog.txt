@@ -63,7 +63,13 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Even though both Identifiers and Strings are created and defined by a sequence
   of characters, they are distinguished by the role they play within the language.
   Under the hood, their value is stored as a string, but they serve different
-  roles in terms of semantic meaning.
+  roles in terms of semantic meaning.  Identifiers can be viewed as value types
+  that have internal meaning to the application, such as specifying a mode
+  of some kind that maps to some enumeration.  Strings can be viewed as value
+  types that have external meaning, for example, a description of something
+  not terribly relevant to the executing application, or a filename or even
+  a network address for which no unique data type (or token) has been
+  defined.
 
   Internal to the EDL parser, they are distinguished using different tokens.  Within
   the C++ code base, they were somewhat confounded - namely, an Identifier was
@@ -109,10 +115,51 @@ base library (mixr_base)
   names.  Strings are still used to specify IP addresses, so no native type exist
   for that.
 
+   -------------------
+   - Network classes -
+   -------------------
+
+   PosixHandler class
+      1) Slot parameter 'localIpAddress' now accepts both a String for IP addresses
+         (e.g., "127.0.0.1") and Identifiers for addresses specified as hostnames
+         (e.g., 'localhost')
+      2) Internally, 'localIpAddress' is now stored as a std::string
+
+   TcpClient class
+      1) Slot parameter 'ipAddress' now accepts both a String and Identifier with
+         the same functionality as PosixHandler class changes
+      2) Internally, 'ipAddress' is now stored as a std::string
+
+   UdpBroadcastHandler class
+      1) Internally, 'networkMask' is now being stored as a std::string
+   
+   UdpMulticastHandler class
+      1) Internally, 'multicastGroup' is now being stored as a std::string
+
+   UdpUnicastHandler class
+      1) Slot parameter 'ipAddress; now accepts both a String and Identifier with
+         the same functionality as PosixHandler class changes
+      2) Internally, ipAddr is now being stored as a std::string
+
+   Identifier class
+      1) This class is no longer a subclass of String.  It provides a complete
+         interface to manage a string-based identifier.  Internally it uses
+         a std::string to store this information.  It is subclassed off of
+         Object to remain compatible with EDL parsing system.  It has also
+         been marked as a 'final' class.
+
+   String class
+      1) No significant changes other than the removal of 'virtual' from several
+         methods no longer used.
+
+
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 recorder library (mixr_recorder)
+
+   DataRecorder class
+      1) Slot parameters 'eventName' and 'application' now accept an Identifier
 
    TabPrinter class
       1) Slot parameter 'msgHdrOptn' now accepts an Identifier
@@ -138,7 +185,25 @@ graphics library (mixr_graphics)
 
    AbstractField class
       1) Slot parameter 'justification' now accepts an Identifier
+      2) Slot parameter 'font' now accepts an Identifier
+   
+   Display class
+      1) Slots for 'normalFont' and 'orientation' now accept and correctly
+         process an Identifier
 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+instruments library (mixr_instruments)
+
+   GhostHorizon class
+      1) Slots for parameters 'skyColor' and 'groundColor' now accept an
+         Identifier
+
+- Within this library, various edl files have been updated to remain consistent
+  with what is a String verses, what an Identifier.  Very few changes were needed,
+  one of which included specifying the slot parameter 'format' for readouts
+  to be quoted (e.g., "###" vs '###').
 
 --------------------------------------------------------------------------------
 
@@ -149,6 +214,11 @@ Image generation oriented libraries
 --------------------------------------------------------------------------------
 ig library (mixr_ig_cigi)
 
+   CigiModel class
+      1) Internally 'federateName' is now being stored as an Identifier
+
+- The move to storing a fererate name as an Identifier caused related code
+  to change to use this datatype.
 
 --------------------------------------------------------------------------------
 
@@ -216,7 +286,9 @@ models library (mixr_models)
          'enum class' that defines a ScanMode
       3) Slot parameter 'scanMode' now accepts an Identifier
 
-
+- Due to changes associated with 'enum's becoming full fledged 'enum class'es
+  more specificity was added in other related classes that used those
+  enumerated values.
 
 --------------------------------------------------------------------------------
 
@@ -231,9 +303,10 @@ simulation library (mixr_simulation)
       4) String-based players name is now a std::string
       5) Slot parameter 'mode' now accepts an Identifier
 
+   Station class
+      1) Slot parameter 'ownship' now accepts an Identifier
 
 --------------------------------------------------------------------------------
-
 
 #####################################################
 Interoperability oriented libraries
@@ -249,6 +322,12 @@ interop library (mixr_interop)
          that did nothing are now designated abstract.  Subclasses must
          implement.
       3) Renamed the method 'createIPlayer()' to 'createProxyPlayer()'
+      4) Slot parameters for 'federationName' and 'federateName' now
+         accept an Identifier
+
+- Due to changes related to federate and federation names being typed
+  as an Identifier caused other classes to also store that information
+  the same way.
 
 --------------------------------------------------------------------------------
 
