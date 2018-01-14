@@ -1,5 +1,5 @@
 
-#include "mixr/models/AircraftIrSignature.hpp"
+#include "mixr/models/signatures/AircraftIrSignature.hpp"
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/IrShapes.hpp"

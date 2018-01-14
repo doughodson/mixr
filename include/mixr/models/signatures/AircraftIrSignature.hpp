@@ -2,7 +2,7 @@
 #ifndef __mixr_models_AircraftIrSignature_H__
 #define __mixr_models_AircraftIrSignature_H__
 
-#include "mixr/models/IrSignature.hpp"
+#include "mixr/models/signatures/IrSignature.hpp"
 
 namespace mixr {
 namespace base { class Number; class List; class Table1; class Table2;

@@ -100,13 +100,20 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/system/System.hpp"
 
+// signatures
+#include "mixr/models/signatures/IrSignature.hpp"
+#include "mixr/models/signatures/AircraftIrSignature.hpp"
+#include "mixr/models/signatures/SigAzEl.hpp"
+#include "mixr/models/signatures/SigConstant.hpp"
+#include "mixr/models/signatures/SigDihedralCR.hpp"
+#include "mixr/models/signatures/SigPlate.hpp"
+#include "mixr/models/signatures/SigSphere.hpp"
+#include "mixr/models/signatures/SigSwitch.hpp"
+#include "mixr/models/signatures/SigTrihedralCR.hpp"
+
 // misc
 #include "mixr/models/Actions.hpp"
-#include "mixr/models/AircraftIrSignature.hpp"
-
 #include "mixr/models/IrShapes.hpp"
-#include "mixr/models/IrSignature.hpp"
-#include "mixr/models/Signatures.hpp"
 
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"

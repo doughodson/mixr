@@ -10,7 +10,6 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/Signatures.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

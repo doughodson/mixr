@@ -16,11 +16,12 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
-#include "mixr/models/Signatures.hpp"
+#include "mixr/models/signatures/RfSignature.hpp"
+#include "mixr/models/signatures/IrSignature.hpp"
+
 #include "mixr/models/Track.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
-#include "mixr/models/IrSignature.hpp"
 
 #include "mixr/terrain/Terrain.hpp"
 

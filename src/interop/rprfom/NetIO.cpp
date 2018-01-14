@@ -11,7 +11,6 @@
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/Ship.hpp"
-#include "mixr/models/Signatures.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

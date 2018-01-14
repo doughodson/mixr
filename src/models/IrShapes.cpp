@@ -6,7 +6,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/IrSignature.hpp"
+#include "mixr/models/signatures/IrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/numeric/Number.hpp"

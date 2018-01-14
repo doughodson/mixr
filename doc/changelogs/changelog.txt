@@ -403,6 +403,10 @@ Models & general capabilities oriented libraries
 --------------------------------------------------------------------------------
 models library (mixr_models)
 
+- All signature classes (IR and RF) are now grouped within the 'signatures'
+  folder.  All the classes defined in previous Signatures (.hpp/.cpp) files
+  have been extracted into their own class files.
+
    AbstractWeapon class
       1) Slot parameters 'released', 'failed', 'power', 'hang', 'hung', 'dummy',
          'jettisonable' now accepts a Boolean

@@ -56,6 +56,16 @@ OBJS =  \
 	sensor/Gmti.o \
 	sensor/Stt.o \
 	sensor/Tws.o \
+	signatures/AircraftIrSignature.o \
+	signatures/IrSignature.o \
+	signatures/RfSignature.o \
+	signatures/SigAzEl.o \
+	signatures/SigConstant.o \
+	signatures/SigDihedralCR.o \
+	signatures/SigPlate.o \
+	signatures/SigSphere.o \
+	signatures/SigSwitch.o \
+	signatures/SigTrihedralCR.o \
 	system/trackmanager/AirAngleOnlyTrkMgr.o \
 	system/trackmanager/AirAngleOnlyTrkMgrPT.o \
 	system/trackmanager/AirTrkMgr.o \
@@ -95,17 +105,14 @@ OBJS =  \
 	system/StoresMgr.o \
 	system/System.o \
 	Actions.o \
-	AircraftIrSignature.o \
 	Designator.o \
 	Emission.o \
 	Image.o \
 	IrQueryMsg.o \
 	IrShapes.o \
-	IrSignature.o \
 	Message.o \
 	MultiActorAgent.o \
 	SensorMsg.o \
-	Signatures.o \
 	SimAgent.o \
 	SimAgent.o \
 	SynchronizedState.o \
@@ -133,6 +140,7 @@ clean:
 	-rm -f player/weapon/*.o
 	-rm -f player/*.o
 	-rm -f sensor/*.o
+	-rm -f signatures/*.o
 	-rm -f system/trackmanager/*.o
 	-rm -f system/*.o
 	-rm -f *.o
