@@ -9,6 +9,7 @@
 #include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/PairStream.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Float.hpp"
@@ -56,34 +57,34 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 5, setSlotVertices,           base::PairStream)
     ON_SLOT( 6, setSlotNormals,            base::PairStream)
     ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
-    ON_SLOT( 8, setSlotNoDisplayList,      base::Number)
-    ON_SLOT( 9, setSlotSubcomponentsFirst, base::Number)
+    ON_SLOT( 8, setSlotNoDisplayList,      base::Boolean)
+    ON_SLOT( 9, setSlotSubcomponentsFirst, base::Boolean)
     ON_SLOT(10, setSlotSelectName,         base::Number)
     ON_SLOT(11, setSlotTextureName,        base::Identifier)
     ON_SLOT(12, setSlotScissorX,           base::Number)
     ON_SLOT(13, setSlotScissorY,           base::Number)
     ON_SLOT(14, setSlotScissorWidth,       base::Number)
     ON_SLOT(15, setSlotScissorHeight,      base::Number)
-    ON_SLOT(16, setSlotStippling,          base::Number)
+    ON_SLOT(16, setSlotStippling,          base::Boolean)
     ON_SLOT(17, setSlotStippleFactor,      base::Number)
     ON_SLOT(18, setSlotStipplePattern,     base::Number)
-    ON_SLOT(19, setSlotVisibility,         base::Number)
-    ON_SLOT(20, setSlotMask,               base::Number)
+    ON_SLOT(19, setSlotVisibility,         base::Boolean)
+    ON_SLOT(20, setSlotMask,               base::Boolean)
     ON_SLOT(21, setMaterial,               base::Identifier)
     ON_SLOT(21, setMaterial,               graphics::Material)
     ON_SLOT(22, setSlotTranslateLight,     base::PairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Graphic)
-    ON_EVENT_OBJ(SET_COLOR,setColor,base::Color)       // Color given as a base::Color object (e.g., rgb)
-    ON_EVENT_OBJ(SET_COLOR,setColor,base::Identifier)  // Color given as a string (e.g., "red")
-    ON_EVENT_OBJ(SET_COLOR,setColor,base::Number)      // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
-    ON_EVENT_OBJ(SET_MATERIAL,setMaterial,base::Identifier )
-    ON_EVENT_OBJ(SET_MATERIAL,setMaterial,graphics::Material)
-    ON_EVENT_OBJ(SET_TEXTURE,onSetTextureId,base::Number)
-    ON_EVENT_OBJ(SET_LINEWIDTH,onSetLineWidthEvent,base::Number)
-    ON_EVENT_OBJ(SET_FLASHRATE,onSetFlashRateEvent,base::Number)
-    ON_EVENT_OBJ(SET_VISIBILITY,onSetVisibilityEvent,base::Number)
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Color)       // Color given as a base::Color object (e.g., rgb)
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Identifier)  // Color given as a string (e.g., "red")
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Number)      // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
+    ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          base::Identifier )
+    ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          graphics::Material)
+    ON_EVENT_OBJ(SET_TEXTURE,    onSetTextureId,       base::Number)
+    ON_EVENT_OBJ(SET_LINEWIDTH,  onSetLineWidthEvent,  base::Number)
+    ON_EVENT_OBJ(SET_FLASHRATE,  onSetFlashRateEvent,  base::Number)
+    ON_EVENT_OBJ(SET_VISIBILITY, onSetVisibilityEvent, base::Boolean)
 END_EVENT_HANDLER()
 
 Graphic::Graphic()
@@ -727,7 +728,7 @@ bool Graphic::onSetFlashRateEvent(const base::Number* const msg)
 }
 
 // onSetVisibilityEvent -- handle the SET_VISIBILITY event
-bool Graphic::onSetVisibilityEvent(const base::Number* const msg)
+bool Graphic::onSetVisibilityEvent(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1043,7 +1044,7 @@ bool Graphic::setSlotFlashRate(const base::Number* const msg)
 
 
 // setSlotNoDisplayList() --  True to disable display list (default false)
-bool Graphic::setSlotNoDisplayList(const base::Number* const msg)
+bool Graphic::setSlotNoDisplayList(const base::Boolean* const msg)
 {
     bool ok = (msg != nullptr);
     if (ok) ok = setDisableDisplayList( msg->getBoolean() );
@@ -1051,7 +1052,7 @@ bool Graphic::setSlotNoDisplayList(const base::Number* const msg)
 }
 
 //  setSlotSubcomponentsFirst() --  Draw component graphics first (default: draw own graphics first)
-bool Graphic::setSlotSubcomponentsFirst(const base::Number* const scfobj)
+bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const scfobj)
 {
     bool ok = (scfobj != nullptr);
     if (ok) postDraw = scfobj->getBoolean();
@@ -1110,7 +1111,7 @@ bool Graphic::setSlotScissorHeight(const base::Number* const newHeight)
 }
 
 // setSlotStippling() - sets our stipple boolean value
-bool Graphic::setSlotStippling(const base::Number* const msg)
+bool Graphic::setSlotStippling(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) ok = setStippling(msg->getBoolean());
@@ -1144,14 +1145,14 @@ bool Graphic::setSlotStipplePattern(const base::Number* const msg)
 }
 
 // setSlotVisibility() - sets our visibility boolean value
-bool Graphic::setSlotVisibility(const base::Number* const msg)
+bool Graphic::setSlotVisibility(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) ok = setVisibility(msg->getBoolean());
    return ok;
 }
 // setSlotMask - determines if we turn off our color guns or not
-bool Graphic::setSlotMask(const base::Number* const msg)
+bool Graphic::setSlotMask(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

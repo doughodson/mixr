@@ -7,7 +7,7 @@
 #include "mixr/base/units/distance_utils.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Number; class PairStream; }
+namespace base { class Angle; class Boolean; class Distance; class Number; class PairStream; }
 namespace models {
 class Player;
 
@@ -128,9 +128,9 @@ private:
    bool setSlotPlayerTypes(const base::PairStream* const);
    bool setSlotMaxRange2Players(const base::Distance* const);
    bool setSlotMaxAngle2Players(const base::Angle* const);
-   bool setSlotUseWorldCoordinates(const base::Number* const);
-   bool setSlotLocalOnly(const base::Number* const);
-   bool setSlotSendCrashEvents(const base::Number* const);
+   bool setSlotUseWorldCoordinates(const base::Boolean* const);
+   bool setSlotLocalOnly(const base::Boolean* const);
+   bool setSlotSendCrashEvents(const base::Boolean* const);
 };
 
 inline double CollisionDetect::getCollisionRange() const       { return collisionRange; }

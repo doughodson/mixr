@@ -8,8 +8,8 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Angle; class Frequency; class Identifier; class Integer;
-                 class List; class String; class Time; }
+namespace base { class Angle; class Boolean; class Frequency; class Identifier; class Integer;
+                 class List; class Number; class String; class Time; }
 namespace models {
 class Antenna;
 class Player;
@@ -44,7 +44,7 @@ class TrackManager;
 //
 //    typeId               <String>      ! R/F system type id (default: '\0')
 //
-//    syncXmitWithScan     <Number>      ! If true, transmitter on is sync'd with the antenna scan (default: false)
+//    syncXmitWithScan     <Boolean>     ! If true, transmitter on is sync'd with the antenna scan (default: false)
 //
 //
 // Events:
@@ -155,7 +155,7 @@ private:
    bool setSlotBeamWidth(const base::Angle* const);           // Sets beam width as a base::Angle
    bool setSlotBeamWidth(const base::Number* const);          // Sets beam width in radians
    bool setSlotTypeId(const base::String* const);             // Sets the type ID
-   bool setSlotSyncXmitWithScan(const base::Number* const);   // Sets sync transmitter with antenna scan flag
+   bool setSlotSyncXmitWithScan(const base::Boolean* const);  // Sets sync transmitter with antenna scan flag
 };
 
 }

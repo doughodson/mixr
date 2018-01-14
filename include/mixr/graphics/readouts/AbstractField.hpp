@@ -16,19 +16,19 @@ namespace graphics {
 //
 // Factory name: AbstractField
 // Slots:
-//      position       <List>       ! Starting position ( Line Column ) (default: 0)
-//      width          <Number>     ! Field width (default: 0)
-//      highLight      <Number>     ! Highlight text flag  (Display mode = 0x1001, default 0)
-//      underline      <Number>     ! Underlined text flag  (Display mode = 0x1002, default 0)
-//      reversed       <Number>     ! Reversed video flag  (Display mode = 0x1004, default 0)
-//      justification  <Identifier> ! "none", "left", "center", or "right" (default: "none")
-//      vertical       <Number>     ! vertical field flag (text displayed vertically) (Display mode = 0x1010, default 0)
-//      brackets       <Number>     ! Bracket the field with a character just left
-//                                  ! and right of this field. (Display mode = 0x1020, default = 0)
-//      linked         <Number>     ! Linked flag (auto step to next input field) (default = false)
-//      inheritColor   <Number>     ! inherit color of our container (default: false)
-//      font           <Identifier> ! specific font name we wish to use (default: 0)
-//      startCharPos   <Number>     ! Our starting character position (we may want to skip!) (default: 0)
+//      position       <List>        ! Starting position ( Line Column ) (default: 0)
+//      width          <Number>      ! Field width (default: 0)
+//      highLight      <Boolean>     ! Highlight text flag  (Display mode = 0x1001, default: false)
+//      underline      <Boolean>     ! Underlined text flag  (Display mode = 0x1002, default: false)
+//      reversed       <Boolean>     ! Reversed video flag  (Display mode = 0x1004, default: false)
+//      justification  <Identifier>  ! { none, left, center, right } (default: "none")
+//      vertical       <Boolean>     ! vertical field flag (text displayed vertically) (Display mode = 0x1010, default: false)
+//      brackets       <Boolean>     ! Bracket the field with a character just left
+//                                   ! and right of this field. (Display mode = 0x1020, default: false)
+//      linked         <Boolean>     ! Linked flag (auto step to next input field) (default: false)
+//      inheritColor   <Boolean>     ! inherit color of our container (default: false)
+//      font           <Identifier>  ! specific font name we wish to use (default: 0)
+//      startCharPos   <Number>      ! Our starting character position (we may want to skip!) (default: 0)
 //
 //
 // Public member functions:
@@ -287,14 +287,14 @@ private:
    // slot table helper methods
    bool setSlotPosition(const base::List* const);
    bool setSlotWidth(const base::Number* const);
-   bool setSlotHighlight(const base::Number* const);
-   bool setSlotUnderline(const base::Number* const);
-   bool setSlotReversed(const base::Number* const);
+   bool setSlotHighlight(const base::Boolean* const);
+   bool setSlotUnderline(const base::Boolean* const);
+   bool setSlotReversed(const base::Boolean* const);
    bool setSlotJustification(const base::Identifier* const);
-   bool setSlotVertical(const base::Number* const);
-   bool setSlotBrackets(const base::Number* const);
-   bool setSlotLinked(const base::Number* const);
-   bool setSlotInheritColor(const base::Number* const);
+   bool setSlotVertical(const base::Boolean* const);
+   bool setSlotBrackets(const base::Boolean* const);
+   bool setSlotLinked(const base::Boolean* const);
+   bool setSlotInheritColor(const base::Boolean* const);
    bool setSlotFont(const base::Identifier* const);
    bool setSlotStartCharPos(const base::Number* const);
 };

@@ -5,7 +5,7 @@
 #include "../DataFile.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Boolean; class Number; }
 namespace terrain {
 
 //------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotVerifyChecksum(const base::Number* const);
+   bool setSlotVerifyChecksum(const base::Boolean* const);
 };
 
 

@@ -34,10 +34,10 @@
 #include "mixr/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mixr::base::Object* result {};          // result of all our work (i.e., an Object)
-static mixr::base::EdlScanner* scanner {};     // edl scanner
-static mixr::base::factory_func factory {};    // factory function 
-static int err_count {};                       // error count
+static mixr::base::Object* result{};          // result of all our work (i.e., an Object)
+static mixr::base::EdlScanner* scanner{};     // EDL scanner
+static mixr::base::factory_func factory{};    // factory function 
+static int err_count{};                       // error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator

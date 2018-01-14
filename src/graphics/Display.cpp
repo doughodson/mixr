@@ -6,6 +6,7 @@
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/graphics/Material.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
@@ -90,13 +91,13 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT(18, setSlotLeftBracketCharacter,  base::String)
    ON_SLOT(19, setSlotRightBracketCharacter, base::Number)
    ON_SLOT(19, setSlotRightBracketCharacter, base::String)
-   ON_SLOT(20, setSlotReverseVideoBrackets,  base::Number)
+   ON_SLOT(20, setSlotReverseVideoBrackets,  base::Boolean)
    ON_SLOT(21, setFontList,                  base::PairStream)
    ON_SLOT(22, setSlotClearDepth,            base::Number)
    ON_SLOT(23, setSlotDisplayOrientation,    base::Identifier)
    ON_SLOT(24, setSlotMaterials,             base::PairStream)
    ON_SLOT(24, setSlotMaterials,             Material)
-   ON_SLOT(25, setSlotAntialias,             base::Number)
+   ON_SLOT(25, setSlotAntialias,             base::Boolean)
 END_SLOT_MAP()
 
 Display::Display()
@@ -1481,7 +1482,7 @@ bool Display::setSlotMaterials(Material* const msg)
 //------------------------------------------------------------------------------
 // setSlotAntialias -- turn on/off anti aliasing
 //------------------------------------------------------------------------------
-bool Display::setSlotAntialias(const base::Number* const x)
+bool Display::setSlotAntialias(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr) ok = setAntialiasing(x->getBoolean());
@@ -1719,7 +1720,7 @@ bool Display::setSlotRightBracketCharacter(const base::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotReverseVideoBrackets() -- set reverse video brackets flag
 //------------------------------------------------------------------------------
-bool Display::setSlotReverseVideoBrackets(const base::Number* const msg)
+bool Display::setSlotReverseVideoBrackets(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

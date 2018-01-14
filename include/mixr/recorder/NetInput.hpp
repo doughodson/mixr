@@ -5,8 +5,7 @@
 #include "mixr/recorder/InputHandler.hpp"
 
 namespace mixr {
-   namespace base { class NetHandler; class Number; }
-
+namespace base { class Boolean; class NetHandler; class Number; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -51,7 +50,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotNetwork(base::NetHandler* const);
-   bool setSlotNoWait(base::Number* const);
+   bool setSlotNoWait(base::Boolean* const);
 };
 
 }

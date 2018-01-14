@@ -50,7 +50,7 @@ bool LandingLight::setLightRadius(const double newLR)
 //------------------------------------------------------------------------------
 bool LandingLight::setSlotLightRadius(const base::Number* const newLR)
 {
-    bool ok = false;
+    bool ok{};
     if (newLR != nullptr) ok = setLightRadius(newLR->getReal());
     return ok;
 }
@@ -62,15 +62,15 @@ void LandingLight::drawFunc()
 {
     // if the user specifies a light radius, then it will draw this way,
     if (lRadius == 0) return;
-    GLfloat currentColor[4];
-    GLfloat lw = 0;
+    GLfloat currentColor[4]{};
+    GLfloat lw{};
     glGetFloatv(GL_CURRENT_COLOR, &currentColor[0]);
     glGetFloatv(GL_LINE_WIDTH, &lw);
 
     // all we need is the gear up value, and we can toggle accordingly
-    double gearUpVal = getGearUpValue();
-    double gearDownVal = getGearDownValue();
-    double lastC = gearCurrent;
+    double gearUpVal{getGearUpValue()};
+    double gearDownVal{getGearDownValue()};
+    double lastC{gearCurrent};
     gearCurrent = getInstValue();
 
     glPushMatrix();
@@ -79,14 +79,13 @@ void LandingLight::drawFunc()
             // going towards the up position (getting closer to 0)
             if (gearCurrent <= gearUpVal) glColor3f(0, 0, 0);
             else glColor3f(0, 1, 0);
-        }
-        else if (lastC < gearCurrent) {
+        } else if (lastC < gearCurrent) {
             // going towards the down position (getting closer to 1)
             if (gearCurrent >= gearDownVal) glColor3f(0, 1, 0);
             else glColor3f(0, 0, 0);
         }
 
-        GLUquadricObj *qobj = gluNewQuadric();
+        GLUquadricObj *qobj{gluNewQuadric()};
         gluDisk(qobj, 0,  lRadius, 1000, 1);
         gluDeleteQuadric(qobj);
     glPopMatrix();
@@ -102,25 +101,24 @@ void LandingLight::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
-    double gearUpVal = getGearUpValue();
-    double gearDownVal = getGearDownValue();
-    double lastC = gearCurrent;
+    double gearUpVal{getGearUpValue()};
+    double gearDownVal{getGearDownValue()};
+    double lastC{gearCurrent};
     gearCurrent = getInstValue();
 
-    int x = 0;
+    bool upDownFlag{};
     // determine which way we are going
     if (lastC >= gearCurrent) {
         // going towards the up position (getting closer to 0)
-        if (gearCurrent <= gearUpVal) x = 0;
-        else x = 1;
-    }
-    else if (lastC < gearCurrent) {
+        if (gearCurrent <= gearUpVal) upDownFlag = false;
+        else upDownFlag = true;
+    } else if (lastC < gearCurrent) {
         // going towards the down position (getting closer to 1)
-        if (gearCurrent >= gearDownVal) x = 1;
-        else x = 0;
+        if (gearCurrent >= gearDownVal) upDownFlag = true;
+        else upDownFlag = false;
     }
 
-    send("index", SELECT, x, selSD);
+    send("index", SELECT, upDownFlag, selSD);
 }
 
 }

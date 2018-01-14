@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class UpTimer; }
+namespace base { class Boolean; class Number; class UpTimer; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ public:
 
 protected:
     // event function
-    bool selectLatch(const base::Number* const x);
+    bool selectLatch(const base::Boolean* const);
 
 private:
     std::array<bool, NUM_BUTTONS> picked {};     // tells our buttons if they are currently picked or not

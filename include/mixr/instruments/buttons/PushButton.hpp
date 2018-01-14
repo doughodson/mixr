@@ -5,6 +5,7 @@
 #include "mixr/instruments/buttons/Button.hpp"
 
 namespace mixr {
+namespace base { class Boolean; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -37,17 +38,17 @@ public:
    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
-   bool functionType {};     // false = momentary, true = maintained
-   bool currentState {};     // false = off, true = on
-   bool mouseDown {};        // mouse press down status
+   bool functionType{};      // false = momentary, true = maintained
+   bool currentState{};      // false = off, true = on
+   bool mouseDown{};         // mouse press down status
    SendData buttonStatusSD;  // what is our button doing?
-   bool initState {};        // initial state
+   bool initState{};         // initial state
 
 private:
    // slot table helper methods
    // sets the pushbutton type to momentary = false or maintained = true
-   bool setSlotFunction(const base::Number* const);
-   bool setSlotStartState(const base::Number* const);
+   bool setSlotFunction(const base::Boolean* const);
+   bool setSlotStartState(const base::Boolean* const);
 };
 
 }

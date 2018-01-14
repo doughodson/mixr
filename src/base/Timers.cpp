@@ -1,6 +1,6 @@
 
 #include "mixr/base/Timers.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/util/atomics.hpp"
 
@@ -23,7 +23,7 @@ END_SLOTTABLE(Timer)
 BEGIN_SLOT_MAP(Timer)
    ON_SLOT(1, setSlotTimerValue,  Time)
    ON_SLOT(2, setSlotAlarmTime,   Time)
-   ON_SLOT(3, setSlotTimerActive, Number)
+   ON_SLOT(3, setSlotTimerActive, Boolean)
 END_SLOT_MAP()
 
 Timer::Timer()
@@ -177,7 +177,7 @@ bool Timer::setSlotAlarmTime(const Time* const msg)
 }
 
 // Sets the timer active (running) flag
-bool Timer::setSlotTimerActive(const Number* const msg)
+bool Timer::setSlotTimerActive(const Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

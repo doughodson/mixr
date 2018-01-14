@@ -6,6 +6,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Times.hpp"
 
@@ -35,7 +36,7 @@ BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(4, setSlotAlpha,           base::Number)
    ON_SLOT(5, setSlotBeta,            base::Number)
    ON_SLOT(6, setSlotGamma,           base::Number)
-   ON_SLOT(7, setSlotLogTrackUpdates, base::Number)
+   ON_SLOT(7, setSlotLogTrackUpdates, base::Boolean)
 END_SLOT_MAP()
 
 TrackManager::TrackManager()
@@ -477,7 +478,7 @@ bool TrackManager::setSlotGamma(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets logTrackUpdates
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotLogTrackUpdates(const base::Number* const num)
+bool TrackManager::setSlotLogTrackUpdates(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {

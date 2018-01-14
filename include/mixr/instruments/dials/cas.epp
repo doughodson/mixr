@@ -17,7 +17,7 @@ tas:
         )
     color: (rgb 0.15 0.15 0.15)
     // this slot will allow the analog dial to rotate.  If you don't set this flag, you will get no rotation.
-    mobile: 1
+    mobile: true
     components: {
         
         ( DialPointer
@@ -83,7 +83,7 @@ tas:
             slices: 100
             radius: 4.8
             outerRadius: 4.9
-            filled: 1
+            filled: true
             color: gray2
         )
         
@@ -92,7 +92,7 @@ tas:
             components: {
                 ( Line
                     color: black
-                    segment: 1
+                    segment: true
                     linewidth: 3
                     vertices: {
                         [ -0.3 0 ] [ 0.3 0 ]
@@ -103,7 +103,7 @@ tas:
                     color: ( rgb 0.15 0.15 0.15 )
                     radius: 0.5
                     slices: 50
-                    filled: 1
+                    filled: true
                 )
             }
         )
@@ -113,7 +113,7 @@ tas:
             components: {
                 ( Line
                     color: black
-                    segment: 1
+                    segment: true
                     linewidth: 3
                     vertices: {
                         [ -0.3 0 ] [ 0.3 0 ]
@@ -124,7 +124,7 @@ tas:
                     color: ( rgb 0.15 0.15 0.15 )
                     radius: 0.5
                     slices: 50
-                    filled: 1
+                    filled: true
                 )
             }
         )
@@ -134,7 +134,7 @@ tas:
             components: {
                 ( Line
                     color: black
-                    segment: 1
+                    segment: true
                     linewidth: 3
                     vertices: {
                         [ -0.3 0 ] [ 0.3 0 ]
@@ -145,7 +145,7 @@ tas:
                     color: ( rgb 0.15 0.15 0.15 )
                     radius: 0.5
                     slices: 50
-                    filled: 1
+                    filled: true
                 )
             }
         )
@@ -155,7 +155,7 @@ tas:
             components: {
                 ( Line
                     color: black
-                    segment: 1
+                    segment: true
                     linewidth: 3
                     vertices: {
                         [ -0.3 0 ] [ 0.3 0 ]
@@ -166,7 +166,7 @@ tas:
                     color: ( rgb 0.15 0.15 0.15 )
                     radius: 0.5
                     slices: 50
-                    filled: 1
+                    filled: true
                 )
             }
         )

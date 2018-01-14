@@ -179,7 +179,7 @@ hsi:
                     components: {
                         ( Line
                             color: gray2
-                            segment: 1
+                            segment: true
                             linewidth: 5
                             vertices: {
                                 [ -0.25 0 ] [ 0.25 0 ]
@@ -189,7 +189,7 @@ hsi:
                         // here is the "screw"
                         ( Circle
                             color: black
-                            filled: 1
+                            filled: true
                             radius: 0.5 
                             slices: 50
                         )   
@@ -223,7 +223,7 @@ hsi:
                     components: {
                         ( Line
                             color: gray2
-                            segment: 1
+                            segment: true
                             linewidth: 5
                             vertices: {
                                 [ -0.25 0 ] [ 0.25 0 ]
@@ -233,7 +233,7 @@ hsi:
                         // here is the "screw"
                         ( Circle
                             color: black
-                            filled: 1
+                            filled: true
                             radius: 0.5 
                             slices: 50
                         )   
@@ -303,7 +303,7 @@ hsi:
         // here is the aircraft symbol in the middle
         ( Line
             color: white
-            segment: 1
+            segment: true
             linewidth: 7
             vertices: {
                 [ 0 -1.1 ] [ 0 1.1 ]

@@ -6,7 +6,7 @@
 #include "mixr/base/units/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Identifier; class Integer; }
+namespace base { class Boolean; class Identifier; class Integer; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -257,7 +257,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotScanMode(base::Identifier* const);
-   bool setSlotLeftToRightScan(const base::Number* const);
+   bool setSlotLeftToRightScan(const base::Boolean* const);
    bool setSlotScanWidth(const base::Number* const);
    bool setSlotSearchVolume(base::List* const);
    bool setSlotRefPosition(const base::List* const);

@@ -25,7 +25,7 @@ public:
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)
-    bool preDrawSelectList {true};
+    bool preDrawSelectList{true};
 };
 
 }

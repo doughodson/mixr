@@ -71,7 +71,7 @@ class Material;
 //  clearDepth        <number>      ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
 //  orientation       <String>      ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
 //  materials         <Material>    ! List of material objects (default: 0)
-//  antiAliasing      <Number>      ! Turn on/off anti-aliasing (default: true)
+//  antiAliasing      <Boolean>     ! Turn on/off anti-aliasing (default: true)
 //
 // Exceptions:
 //      ExpInvalidDisplayPtr
@@ -403,13 +403,13 @@ private:
     bool setSlotLeftBracketCharacter(const base::String* const);
     bool setSlotRightBracketCharacter(const base::Number* const);
     bool setSlotRightBracketCharacter(const base::String* const);
-    bool setSlotReverseVideoBrackets(const base::Number* const);
+    bool setSlotReverseVideoBrackets(const base::Boolean* const);
     bool setFontList(base::PairStream* const);
     bool setSlotClearDepth(const base::Number* const);
     bool setSlotDisplayOrientation(const base::Identifier* const);
     bool setSlotMaterials(base::PairStream* const);
     bool setSlotMaterials(Material* const);
-    bool setSlotAntialias(const base::Number* const);
+    bool setSlotAntialias(const base::Boolean* const);
 };
 
 inline const char* Display::getName() const                            { return name.c_str(); }

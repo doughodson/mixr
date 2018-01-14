@@ -5,7 +5,7 @@
 #include "mixr/graphics/Graphic.hpp"
 
 namespace mixr {
-namespace base { class Table1; }
+namespace base { class Boolean; class Number; class Table1; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -48,16 +48,16 @@ protected:
 
 private:
     // member variables
-    const base::Table1* myTable {};    // holds our scaling data
-    double instVal {};                 // our instrument value
-    double preScaleInstVal {};         // our pre-scaled instrument value (before linear interpolation)
-    bool allowPassing {true};          // do we pass our instrument value down to our components?
+    const base::Table1* myTable{};    // holds our scaling data
+    double instVal{};                 // our instrument value
+    double preScaleInstVal{};         // our pre-scaled instrument value (before linear interpolation)
+    bool allowPassing{true};          // do we pass our instrument value down to our components?
 
 private:
     // slot table helper methods
     bool setSlotScalingTable(const base::Table1* const);
     bool setSlotInstVal(const base::Number* const);
-    bool setSlotAllowValPass(const base::Number* const);
+    bool setSlotAllowValPass(const base::Boolean* const);
 };
 
 }

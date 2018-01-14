@@ -107,7 +107,7 @@
     components: {
         // waterline
         ( Line
-            segment: 1
+            segment: true
             vertices: {
                 [ 0 0 ] [ -0.2 -0.2 ]
                 [ -0.2 -0.2 ] [ -0.4 0 ]
@@ -271,7 +271,7 @@ climbdivemarker:
                 wing1: 
                 ( Line 
                     linewidth: 2
-                    segment: 1
+                    segment: true
                     vertices: { 
                         [ -0.5 0.0 ] [ -1 0.0 ]
                         [ 0.5 0.0 ] [ 1  0.0 ]
@@ -290,7 +290,7 @@ climbdivemarker:
                 // Dot in the middle
                 ( Circle
                     radius: 0.05
-                    filled: 1
+                    filled: true
                     slices: 100
                 ) 
             }
@@ -376,7 +376,7 @@ climbdivemarker:
                         ( Line
                             color: white                
                             linewidth: 2
-                            segment: 1
+                            segment: true
                             vertices: {
                                 [ -1 0.0 ] [ -100 0.0 ]
                                 [ 1 0.0 ] [ 100 0.0 ]
@@ -414,7 +414,7 @@ climbdivemarker:
                             gaugeLength: 20
                             quantity: 10
                             tickLength: -0.2
-                            flip: 1
+                            flip: true
                             color: white
                         )               
                         ( TickMarks  
@@ -423,7 +423,7 @@ climbdivemarker:
                             gaugeLength: 20
                             quantity: 10
                             tickLength: -0.2
-                            flip: 1
+                            flip: true
                             color: white
                         )               
             
@@ -453,7 +453,7 @@ climbdivemarker:
                                     radius: 0.35 
                                     outerRadius: 0.4
                                     slices: 100
-                                    filled: 1
+                                    filled: true
                                 )
                                 ( Line 
                                     linewidth: 2
@@ -481,7 +481,7 @@ climbdivemarker:
                             transform: ( Translation 1 -2.2 )
                             gaugeLength: -20
                             quantity: 10
-                            flip: 1
+                            flip: true
                             tickLength: 0.3
                             color: white
                         )               
@@ -490,7 +490,7 @@ climbdivemarker:
                             transform: ( Translation -1 -2.2 )
                             gaugeLength: -20
                             quantity: 10
-                            flip: 1
+                            flip: true
                             tickLength: 0.3
                             color: white
                         )
@@ -504,7 +504,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.087 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -514,7 +514,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.087 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -534,7 +534,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.174 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -544,7 +544,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.174 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -563,7 +563,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.262 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -573,7 +573,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.262 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -601,7 +601,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.349 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -611,7 +611,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.349 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -630,7 +630,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.436 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -640,7 +640,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.436 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -659,7 +659,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.52 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -669,7 +669,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.52 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -696,7 +696,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.61 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -706,7 +706,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.61 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -725,7 +725,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation 1 0 ) ( Rotation -0.7 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ 0.195 0.0 ]
                                         [ 0.2925 0.0 ] [ 0.4875 0.0 ]
@@ -735,7 +735,7 @@ climbdivemarker:
                                 ( Line
                                     linewidth: 2
                                     transform: { ( Translation -1 0 ) ( Rotation 0.7 ) }
-                                    segment: 1
+                                    segment: true
                                     vertices: {
                                         [ 0.0 0.0 ] [ -0.195 0.0 ]
                                         [ -0.2925 0.0 ] [ -0.4875 0.0 ]
@@ -766,7 +766,7 @@ climbdivemarker:
                 ( Line
                     linewidth: 2
                     transform: ( Translation 0 0 0.05 )
-                    segment: 1
+                    segment: true
                     vertices: {
                         // top
                         [ 1 0 ] [ 2 0 ]

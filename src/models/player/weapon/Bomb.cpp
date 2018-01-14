@@ -2,6 +2,7 @@
 #include "mixr/models/player/weapon/Bomb.hpp"
 
 #include "mixr/base/Identifier.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
@@ -24,9 +25,9 @@ END_SLOTTABLE(Bomb)
 
 BEGIN_SLOT_MAP(Bomb)
    ON_SLOT( 1, setSlotArmingOption, base::Identifier)
-   ON_SLOT( 2, setSlotNoseFuze,     base::Number)
-   ON_SLOT( 3, setSlotMidFuze,      base::Number)
-   ON_SLOT( 4, setSlotTailFuze,     base::Number)
+   ON_SLOT( 2, setSlotNoseFuze,     base::Boolean)
+   ON_SLOT( 3, setSlotMidFuze,      base::Boolean)
+   ON_SLOT( 4, setSlotTailFuze,     base::Boolean)
    ON_SLOT( 5, setSlotFuzeAltitude, base::Number)
    ON_SLOT( 6, setSlotFuzeTime,     base::Number)
    ON_SLOT( 7, setSlotDragIndex,    base::Number)
@@ -411,21 +412,21 @@ bool Bomb::setSlotArmingOption(base::Identifier* const p)
 }
 
 // noseFuze: Nose fuze flag
-bool Bomb::setSlotNoseFuze(base::Number* const p)
+bool Bomb::setSlotNoseFuze(base::Boolean* const p)
 {
     setNoseFuze( p->getBoolean() );
     return true;
 }
 
 // midFuze: Middle fuze flag
-bool Bomb::setSlotMidFuze(base::Number* const p)
+bool Bomb::setSlotMidFuze(base::Boolean* const p)
 {
     setMidFuze( p->getBoolean() );
     return true;
 }
 
 // tailFuze: Tail fuze flag
-bool Bomb::setSlotTailFuze(base::Number* const p)
+bool Bomb::setSlotTailFuze(base::Boolean* const p)
 {
     setTailFuze( p->getBoolean() );
     return true;

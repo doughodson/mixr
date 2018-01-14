@@ -8,7 +8,9 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 
@@ -108,17 +110,17 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(26, setSlotCmdRateElevation,           base::Angle)      // Commanded elevation rate (sets RATE_SERVO)
     ON_SLOT(27, setSlotCmdRateRoll,                base::Angle)      // Commanded roll rate (sets RATE_SERVO)
 
-    ON_SLOT(28, setSlotTerrainOcculting,           base::Number)     // Enable terrain occulting (default: false)
-    ON_SLOT(29, setSlotCheckHorizon,               base::Number)     // Enable horizon masking check (default: true)
+    ON_SLOT(28, setSlotTerrainOcculting,           base::Boolean)    // Enable terrain occulting (default: false)
+    ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: true)
     ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
                                                                      //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
-    ON_SLOT(31, setSlotMaxPlayers,                 base::Number)                         // Max number of players of interest (default: 0)
+    ON_SLOT(31, setSlotMaxPlayers,                 base::Number)     // Max number of players of interest (default: 0)
     ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Distance)   // Max range to players of interest or zero for all (default: 0)
     ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::Angle)      // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
-    ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, base::Number)     // Sets the local only players of interest flag (default: false)
+    ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, base::Boolean)    // Sets the local only players of interest flag (default: false)
 
-    ON_SLOT(35, setSlotUseWorldCoordinates,        base::Number)     // Using player of interest's world (ECEF) coordinate system
-    ON_SLOT(36,setSlotUseOwnHeadingOnly,           base::Number)
+    ON_SLOT(35, setSlotUseWorldCoordinates,        base::Boolean)    // Using player of interest's world (ECEF) coordinate system
+    ON_SLOT(36, setSlotUseOwnHeadingOnly,           base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Gimbal)
@@ -1090,7 +1092,7 @@ bool Gimbal::setSlotCmdRateRoll(const base::Angle* const msg)
 }
 
 // Enable target terrain occulting (default: false)
-bool Gimbal::setSlotTerrainOcculting(const base::Number* const msg)
+bool Gimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1100,7 +1102,7 @@ bool Gimbal::setSlotTerrainOcculting(const base::Number* const msg)
 }
 
 // Enable horizon masking check (default: true)
-bool Gimbal::setSlotCheckHorizon(const base::Number* const msg)
+bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1120,25 +1122,25 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
          const auto pair = static_cast<const base::Pair*>(item->getValue());
          const auto type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
-            if ( utStrcasecmp(*type,"air") == 0 ) {
+            if ( utStrcasecmp(*type, "air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
-            else if ( utStrcasecmp(*type,"ground") == 0 ) {
+            else if ( utStrcasecmp(*type, "ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
             }
-            else if ( utStrcasecmp(*type,"weapon") == 0 ) {
+            else if ( utStrcasecmp(*type, "weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
             }
-            else if ( utStrcasecmp(*type,"ship") == 0 ) {
+            else if ( utStrcasecmp(*type, "ship") == 0 ) {
                mask = (mask | Player::SHIP);
             }
-            else if ( utStrcasecmp(*type,"building") == 0 ) {
+            else if ( utStrcasecmp(*type, "building") == 0 ) {
                mask = (mask | Player::BUILDING);
             }
-            else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
+            else if ( utStrcasecmp(*type, "lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
             }
-            else if ( utStrcasecmp(*type,"space") == 0 ) {
+            else if ( utStrcasecmp(*type, "space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }
@@ -1182,7 +1184,7 @@ bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::Angle* const msg)
 }
 
 // Sets the local only players of interest flag
-bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Number* const msg)
+bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1192,7 +1194,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Number* const msg)
 }
 
 // Using player of interest's world (ECEF) coordinate system
-bool Gimbal::setSlotUseWorldCoordinates(const base::Number* const msg)
+bool Gimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1202,7 +1204,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const base::Number* const msg)
 }
 
 // Sets the own heading only flag
-bool Gimbal::setSlotUseOwnHeadingOnly(const base::Number* const msg)
+bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

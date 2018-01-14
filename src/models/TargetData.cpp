@@ -6,6 +6,9 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Times.hpp"
@@ -32,11 +35,11 @@ BEGIN_SLOTTABLE(TargetData)
 END_SLOTTABLE(TargetData)
 
 BEGIN_SLOT_MAP(TargetData)
-   ON_SLOT( 1, setSlotEnabled,         base::Number)
-   ON_SLOT( 2, setSlotCompleted,       base::Number)
+   ON_SLOT( 1, setSlotEnabled,         base::Boolean)
+   ON_SLOT( 2, setSlotCompleted,       base::Boolean)
    ON_SLOT( 3, setSlotWpnType,         base::String)
    ON_SLOT( 4, setSlotQuantity,        base::Number)
-   ON_SLOT( 5, setSlotManualAssign,    base::Number)
+   ON_SLOT( 5, setSlotManualAssign,    base::Boolean)
    ON_SLOT( 6, setSlotStickType,       base::Identifier)
 
    ON_SLOT( 7, setSlotStickDistance,   base::Distance)
@@ -116,11 +119,7 @@ bool TargetData::setWpnType(const base::String* const s)
    return true;
 }
 
-
-//------------------------------------------------------------------------------
-// Set slot functions
-//------------------------------------------------------------------------------
-bool TargetData::setSlotEnabled(const base::Number* const msg)
+bool TargetData::setSlotEnabled(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -130,7 +129,7 @@ bool TargetData::setSlotEnabled(const base::Number* const msg)
 }
 
 
-bool TargetData::setSlotCompleted(const base::Number* const msg)
+bool TargetData::setSlotCompleted(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -157,7 +156,7 @@ bool TargetData::setSlotQuantity(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotManualAssign(const base::Number* const msg)
+bool TargetData::setSlotManualAssign(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

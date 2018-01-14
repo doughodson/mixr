@@ -3,6 +3,7 @@
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
@@ -17,7 +18,7 @@ END_SLOTTABLE(NetOutput)
 
 BEGIN_SLOT_MAP(NetOutput)
     ON_SLOT(1, setSlotNetwork,   mixr::base::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    mixr::base::Number)
+    ON_SLOT(2, setSlotNoWait,    mixr::base::Boolean)
 END_SLOT_MAP()
 
 NetOutput::NetOutput()
@@ -134,7 +135,7 @@ bool NetOutput::setSlotNetwork(mixr::base::NetHandler* const msg)
 }
 
 // No wait (unblocked) I/O flag
-bool NetOutput::setSlotNoWait(mixr::base::Number* const msg)
+bool NetOutput::setSlotNoWait(mixr::base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

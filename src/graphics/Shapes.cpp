@@ -1,6 +1,7 @@
 
 #include "mixr/graphics/Shapes.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
@@ -23,7 +24,7 @@ END_SLOTTABLE(Circle)
 
 BEGIN_SLOT_MAP(Circle)
     ON_SLOT(1, setSlotRadius, base::Number)
-    ON_SLOT(2, setSlotFilled, base::Number)
+    ON_SLOT(2, setSlotFilled, base::Boolean)
     ON_SLOT(3, setSlotSlices, base::Number)
 END_SLOT_MAP()
 
@@ -76,7 +77,7 @@ bool Circle::setSlotRadius(const base::Number* const x)
     return ok;
 }
 
-bool Circle::setSlotFilled(const base::Number* const x)
+bool Circle::setSlotFilled(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setFilled(x->getBoolean());
@@ -157,7 +158,7 @@ END_SLOTTABLE(Arc)
 BEGIN_SLOT_MAP(Arc)
     ON_SLOT(1, setSlotStartAngle, base::Number)
     ON_SLOT(2, setSlotArcLength, base::Number)
-    ON_SLOT(3, setSlotIsConnected, base::Number)
+    ON_SLOT(3, setSlotIsConnected, base::Boolean)
 END_SLOT_MAP()
 
 Arc::Arc()
@@ -209,7 +210,7 @@ bool Arc::setSlotArcLength(const base::Number* const x)
     return ok;
 }
 
-bool Arc::setSlotIsConnected(const base::Number* const x)
+bool Arc::setSlotIsConnected(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setIsConnected(x->getBoolean());
@@ -331,7 +332,7 @@ BEGIN_SLOTTABLE(Line)
 END_SLOTTABLE(Line)
 
 BEGIN_SLOT_MAP(Line)
-    ON_SLOT(1, setSlotSegments, base::Number)
+    ON_SLOT(1, setSlotSegments, base::Boolean)
 END_SLOT_MAP()
 
 Line::Line()
@@ -373,7 +374,7 @@ void Line::drawFunc()
 }
 
 // Set slot functions
-bool Line::setSlotSegments(const base::Number* const x)
+bool Line::setSlotSegments(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setSegments(x->getBoolean());
@@ -391,7 +392,7 @@ BEGIN_SLOTTABLE(Quad)
 END_SLOTTABLE(Quad)
 
 BEGIN_SLOT_MAP(Quad)
-    ON_SLOT(1, setSlotStrip, base::Number)
+    ON_SLOT(1, setSlotStrip, base::Boolean)
 END_SLOT_MAP()
 
 Quad::Quad()
@@ -406,7 +407,7 @@ void Quad::copyData(const Quad& org, const bool)
     strip = org.strip;
 }
 
-bool Quad::setSlotStrip(const base::Number* const x)
+bool Quad::setSlotStrip(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -495,7 +496,7 @@ BEGIN_SLOTTABLE(Triangle)
 END_SLOTTABLE(Triangle)
 
 BEGIN_SLOT_MAP(Triangle)
-    ON_SLOT(1, setSlotFan, base::Number)
+    ON_SLOT(1, setSlotFan, base::Boolean)
 END_SLOT_MAP()
 
 Triangle::Triangle()
@@ -510,7 +511,7 @@ void Triangle::copyData(const Triangle& org, const bool)
     fan = org.fan;
 }
 
-bool Triangle::setSlotFan(const base::Number* const x)
+bool Triangle::setSlotFan(const base::Boolean* const x)
 {
     bool ok {};
     if (x != nullptr) {

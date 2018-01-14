@@ -76,7 +76,7 @@ END_SLOTTABLE(CigiHost)
 BEGIN_SLOT_MAP(CigiHost)
    ON_SLOT(1, setSlotHostSession,             HostSession)
    ON_SLOT(2, setSlotASyncMode,               base::Boolean)
-   ON_SLOT(3, setSlotHideOwnshipModel,        base::Number)
+   ON_SLOT(3, setSlotHideOwnshipModel,        base::Boolean)
    ON_SLOT(4, setSlotOwnshipModelId,          base::Number)
    ON_SLOT(5, setSlotMslTrailModelId,         base::Number)
    ON_SLOT(6, setSlotSmokePlumeModelId,       base::Number)
@@ -1362,7 +1362,7 @@ bool CigiHost::setSlotASyncMode(const base::Boolean* const msg)
 }
 
 // Set/clear the hide ownship model flag
-bool CigiHost::setSlotHideOwnshipModel(const base::Number* const msg)
+bool CigiHost::setSlotHideOwnshipModel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

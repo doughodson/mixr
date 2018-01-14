@@ -17,6 +17,7 @@
 
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
@@ -42,8 +43,8 @@ BEGIN_SLOT_MAP(EmissionPduHandler)
     ON_SLOT(2, setSlotEmitterFunction, base::Number )
     ON_SLOT(3, setSlotSensorTemplate,  models::RfSensor )
     ON_SLOT(4, setSlotAntennaTemplate, models::Antenna )
-    ON_SLOT(5, setSlotDefaultIn,       base::Number )
-    ON_SLOT(6, setSlotDefaultOut,      base::Number )
+    ON_SLOT(5, setSlotDefaultIn,       base::Boolean )
+    ON_SLOT(6, setSlotDefaultOut,      base::Boolean )
 END_SLOT_MAP()
 
 EmissionPduHandler::EmissionPduHandler()
@@ -251,7 +252,7 @@ bool EmissionPduHandler::setSlotAntennaTemplate(models::Antenna* const msg)
    return setAntennaModel(msg);
 }
 
-bool EmissionPduHandler::setSlotDefaultIn(const base::Number* const msg)
+bool EmissionPduHandler::setSlotDefaultIn(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -260,7 +261,7 @@ bool EmissionPduHandler::setSlotDefaultIn(const base::Number* const msg)
    return ok;
 }
 
-bool EmissionPduHandler::setSlotDefaultOut(const base::Number* const msg)
+bool EmissionPduHandler::setSlotDefaultOut(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

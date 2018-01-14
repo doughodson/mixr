@@ -8,6 +8,7 @@
 
 namespace mixr {
 namespace base {
+class Boolean;
 class Identifier;
 class Number;
 class String;
@@ -148,7 +149,7 @@ private:
    bool setSlotLocalIpAddress(const Identifier* const);
    bool setSlotPort(const Number* const);
    bool setSlotLocalPort(const Number* const);
-   bool setSlotShared(const Number* const);
+   bool setSlotShared(const Boolean* const);
    bool setSlotSendBuffSize(const Number* const);
    bool setSlotRecvBuffSize(const Number* const);
    bool setSlotIgnoreSourcePort(const Number* const);

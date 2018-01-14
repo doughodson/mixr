@@ -10,6 +10,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/colors/Rgb.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
@@ -33,18 +34,18 @@ BEGIN_SLOTTABLE(AbstractField)
 END_SLOTTABLE(AbstractField)
 
 BEGIN_SLOT_MAP(AbstractField)
-    ON_SLOT(1, setSlotPosition,      base::List)
-    ON_SLOT(2, setSlotWidth,         base::Number)
-    ON_SLOT(3, setSlotHighlight,     base::Number)
-    ON_SLOT(4, setSlotUnderline,     base::Number)
-    ON_SLOT(5, setSlotReversed,      base::Number)
-    ON_SLOT(6, setSlotJustification, base::Identifier)
-    ON_SLOT(7, setSlotVertical,      base::Number)
-    ON_SLOT(8, setSlotBrackets,      base::Number)
-    ON_SLOT(9, setSlotLinked,        base::Number)
-    ON_SLOT(10, setSlotInheritColor, base::Number)
-    ON_SLOT(11, setSlotFont,         base::Identifier)
-    ON_SLOT(12, setSlotStartCharPos, base::Number)
+    ON_SLOT(1,  setSlotPosition,      base::List)
+    ON_SLOT(2,  setSlotWidth,         base::Number)
+    ON_SLOT(3,  setSlotHighlight,     base::Boolean)
+    ON_SLOT(4,  setSlotUnderline,     base::Boolean)
+    ON_SLOT(5,  setSlotReversed,      base::Boolean)
+    ON_SLOT(6,  setSlotJustification, base::Identifier)
+    ON_SLOT(7,  setSlotVertical,      base::Boolean)
+    ON_SLOT(8,  setSlotBrackets,      base::Boolean)
+    ON_SLOT(9,  setSlotLinked,        base::Boolean)
+    ON_SLOT(10, setSlotInheritColor,  base::Boolean)
+    ON_SLOT(11, setSlotFont,          base::Identifier)
+    ON_SLOT(12, setSlotStartCharPos,  base::Number)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AbstractField)
@@ -64,13 +65,13 @@ BEGIN_EVENT_HANDLER(AbstractField)
             }
         }
     }
-    ON_EVENT_OBJ(SET_POSITION,setPosition,base::List)
-    ON_EVENT_OBJ(SET_LINE,onSetLine,base::Number)
-    ON_EVENT_OBJ(SET_COLUMN,onSetColumn,base::Number)
-    ON_EVENT_OBJ(SET_WIDTH,setSlotWidth,base::Number)
-    ON_EVENT_OBJ(SET_HIGHLIGHT,setSlotHighlight,base::Number)
-    ON_EVENT_OBJ(SET_UNDERLINE,setSlotUnderline,base::Number)
-    ON_EVENT_OBJ(SET_REVERSED,setSlotReversed,base::Number)
+    ON_EVENT_OBJ(SET_POSITION,      setPosition,          base::List)
+    ON_EVENT_OBJ(SET_LINE,          onSetLine,            base::Number)
+    ON_EVENT_OBJ(SET_COLUMN,        onSetColumn,          base::Number)
+    ON_EVENT_OBJ(SET_WIDTH,         setSlotWidth,         base::Number)
+    ON_EVENT_OBJ(SET_HIGHLIGHT,     setSlotHighlight,     base::Boolean)
+    ON_EVENT_OBJ(SET_UNDERLINE,     setSlotUnderline,     base::Boolean)
+    ON_EVENT_OBJ(SET_REVERSED,      setSlotReversed,      base::Boolean)
     ON_EVENT_OBJ(SET_JUSTIFICATION, setSlotJustification, base::Identifier)
 END_EVENT_HANDLER()
 
@@ -534,7 +535,7 @@ bool AbstractField::setSlotWidth(const base::Number* const swobj)
     return true;
 }
 
-bool AbstractField::setSlotHighlight(const base::Number* const shobj)
+bool AbstractField::setSlotHighlight(const base::Boolean* const shobj)
 {
     if (shobj != nullptr) {
         // Set our mode
@@ -563,7 +564,7 @@ bool AbstractField::setSlotHighlight(const base::Number* const shobj)
     return true;
 }
 
-bool AbstractField::setSlotUnderline(const base::Number* const suobj)
+bool AbstractField::setSlotUnderline(const base::Boolean* const suobj)
 {
     if (suobj != nullptr) {
 
@@ -596,7 +597,7 @@ bool AbstractField::setSlotUnderline(const base::Number* const suobj)
     return true;
 }
 
-bool AbstractField::setSlotReversed(const base::Number* const srobj)
+bool AbstractField::setSlotReversed(const base::Boolean* const srobj)
 {
     if (srobj != nullptr) {
 
@@ -629,7 +630,7 @@ bool AbstractField::setSlotReversed(const base::Number* const srobj)
     return true;
 }
 
-bool AbstractField::setSlotVertical(const base::Number* const ssobj)
+bool AbstractField::setSlotVertical(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -645,7 +646,7 @@ bool AbstractField::setSlotVertical(const base::Number* const ssobj)
     return true;
 }
 
-bool AbstractField::setSlotBrackets(const base::Number* const ssobj)
+bool AbstractField::setSlotBrackets(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -661,7 +662,7 @@ bool AbstractField::setSlotBrackets(const base::Number* const ssobj)
     return true;
 }
 
-bool AbstractField::setSlotLinked(const base::Number* const msg)
+bool AbstractField::setSlotLinked(const base::Boolean* const msg)
 {
     if (msg != nullptr) {
         setLinked( msg->getBoolean() );
@@ -669,7 +670,7 @@ bool AbstractField::setSlotLinked(const base::Number* const msg)
     return true;
 }
 
-bool AbstractField::setSlotInheritColor(const base::Number* const ic)
+bool AbstractField::setSlotInheritColor(const base::Boolean* const ic)
 {
     bool ok {};
     if (ic != nullptr) {

@@ -173,13 +173,13 @@ public:
 //
 //    table      <base::Table2>   ! Table of RCS by target Az/El angles (default: 0)
 //
-//    swapOrder  <base::Number>   ! True if elevation is the table's first independent (default: false)
+//    swapOrder  <base::Boolean>  ! True if elevation is the table's first independent (default: false)
 //                                ! variable and azimuth is the second.
 //
-//    inDegrees  <base::Number>   ! True if the table's independent variables az and
+//    inDegrees  <base::Boolean>  ! True if the table's independent variables az and
 //                                ! el are in degrees instead of the default radians (default: false)
 //
-//    inDecibel  <base::Number>   ! True if the dependent data is in decibel meters
+//    inDecibel  <base::Boolean>  ! True if the dependent data is in decibel meters
 //                                ! squared instead of the default meters squared (default: false)
 //
 // Notes:
@@ -226,9 +226,9 @@ protected:
 private:
    // slot table helper methods
    bool setSlotTable(const base::Table2* const);
-   bool setSlotSwapOrder(const base::Number* const);
-   bool setSlotInDegrees(const base::Number* const);
-   bool setSlotDecibel(const base::Number* const);
+   bool setSlotSwapOrder(const base::Boolean* const);
+   bool setSlotInDegrees(const base::Boolean* const);
+   bool setSlotDecibel(const base::Boolean* const);
 };
 
 }

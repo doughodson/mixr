@@ -4,6 +4,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <iostream>
@@ -25,7 +26,7 @@ BEGIN_SLOT_MAP(Ai2DiSwitch)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotChannel,  base::Number)
     ON_SLOT( 3, setSlotLevel,    base::Number)
-    ON_SLOT( 4, setSlotInverted, base::Number)
+    ON_SLOT( 4, setSlotInverted, base::Boolean)
 END_SLOT_MAP()
 
 Ai2DiSwitch::Ai2DiSwitch()
@@ -98,7 +99,7 @@ bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
 }
 
 // invert: Inverted bit flag (default: false)
-bool Ai2DiSwitch::setSlotInverted(const base::Number* const msg)
+bool Ai2DiSwitch::setSlotInverted(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

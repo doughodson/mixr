@@ -1,5 +1,6 @@
 
 #include "mixr/instruments/dials/DialArcSegment.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
@@ -19,9 +20,9 @@ BEGIN_SLOTTABLE(DialArcSegment)
 END_SLOTTABLE(DialArcSegment)
 
 BEGIN_SLOT_MAP(DialArcSegment)
-    ON_SLOT(1, setSlotIsDynamic,   base::Number)
+    ON_SLOT(1, setSlotIsDynamic,   base::Boolean)
     ON_SLOT(2, setSlotOuterRadius, base::Number)
-    ON_SLOT(3, setSlotFilled,      base::Number)
+    ON_SLOT(3, setSlotFilled,      base::Boolean)
 END_SLOT_MAP()
 
 DialArcSegment::DialArcSegment()
@@ -42,7 +43,7 @@ void DialArcSegment::copyData(const DialArcSegment& org, const bool)
 //------------------------------------------------------------------------------
 // setSlotIsDyanmic()
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotIsDynamic(const base::Number* const newD)
+bool DialArcSegment::setSlotIsDynamic(const base::Boolean* const newD)
 {
     bool ok = false;
     if (newD != nullptr) ok = setIsDynamic(newD->getBoolean());
@@ -62,7 +63,7 @@ bool DialArcSegment::setSlotOuterRadius(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotFilled() - is our segment filled or not?
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotFilled(const base::Number* const x)
+bool DialArcSegment::setSlotFilled(const base::Boolean* const x)
 {
     if (x != nullptr) {
         return setFilled(x->getBoolean());

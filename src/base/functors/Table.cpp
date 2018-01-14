@@ -4,7 +4,7 @@
 #include "mixr/base/functors/FStorage.hpp"
 #include "mixr/base/functors/TableStorage.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/List.hpp"
 
 #include <iostream>
@@ -21,7 +21,7 @@ END_SLOTTABLE(Table)
 
 BEGIN_SLOT_MAP(Table)
     ON_SLOT(1, setSlotDataTable, List)
-    ON_SLOT(2, setSlotExtrapolationEnabled, Number)
+    ON_SLOT(2, setSlotExtrapolationEnabled, Boolean)
 END_SLOT_MAP()
 
 Table::Table()
@@ -123,7 +123,7 @@ bool Table::setExtrapolationEnabled(const bool flg)
    return true;
 }
 
-bool Table::setSlotExtrapolationEnabled(const Number* const msg)
+bool Table::setSlotExtrapolationEnabled(const Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

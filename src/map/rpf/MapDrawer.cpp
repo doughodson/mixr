@@ -7,6 +7,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Texture.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <cmath>
@@ -24,8 +25,8 @@ END_SLOTTABLE(MapDrawer)
 
 BEGIN_SLOT_MAP(MapDrawer)
     ON_SLOT(1, setSlotMapIntensity, base::Number)
-    ON_SLOT(2, setSlotDrawGridMode, base::Number)
-    ON_SLOT(3, setSlotShowMap,      base::Number)
+    ON_SLOT(2, setSlotDrawGridMode, base::Boolean)
+    ON_SLOT(3, setSlotShowMap,      base::Boolean)
 END_SLOT_MAP()
 
 MapDrawer::MapDrawer()
@@ -105,7 +106,7 @@ bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotDrawGridMode() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
+bool MapDrawer::setSlotDrawGridMode(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr)
@@ -116,7 +117,7 @@ bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotShowMap() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotShowMap(const base::Number* const x)
+bool MapDrawer::setSlotShowMap(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr)

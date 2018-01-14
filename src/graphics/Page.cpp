@@ -5,7 +5,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -14,10 +14,10 @@ namespace graphics {
 IMPLEMENT_SUBCLASS(Page, "Page")
 
 BEGIN_SLOTTABLE(Page)
-    "page",                // 1: Initial subpage
-    "pages",               // 2: Subpages
-    "pagingEvent",         // 3: Page change event
-    "subpagesFirst",       // 4: Draw subpages first (default: draw our page graphics first)
+    "page",                 // 1: Initial subpage
+    "pages",                // 2: Subpages
+    "pagingEvent",          // 3: Page change event
+    "subpagesFirst",        // 4: Draw subpages first (default: draw our page graphics first)
     "focusSlavedToSubpage", // 5: Slave the focus to the subpage (default: true)
 END_SLOTTABLE(Page)
 
@@ -26,8 +26,8 @@ BEGIN_SLOT_MAP(Page)
     ON_SLOT(2, setSlotSubpageStream,        base::PairStream)
     ON_SLOT(2, setSlotSubpageSingle,        Page)
     ON_SLOT(3, setSlotPagingEvent,          base::PairStream)
-    ON_SLOT(4, setSlotDrawSubpageFirst,     base::Number)
-    ON_SLOT(5, setSlotFocusSlavedToSubpage, base::Number)
+    ON_SLOT(4, setSlotDrawSubpageFirst,     base::Boolean)
+    ON_SLOT(5, setSlotFocusSlavedToSubpage, base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Page)
@@ -513,7 +513,7 @@ bool Page::setSlotPagingEvent(base::PairStream* const peobj)
 //------------------------------------------------------------------------------
 // setSlotDrawSubpageFirst() -- Draw subpages first (default: draw our page graphics first)
 //------------------------------------------------------------------------------
-bool Page::setSlotDrawSubpageFirst(const base::Number* const spfobj)
+bool Page::setSlotDrawSubpageFirst(const base::Boolean* const spfobj)
 {
     if (spfobj != nullptr) postDraw1 = spfobj->getBoolean();
     return true;
@@ -522,7 +522,7 @@ bool Page::setSlotDrawSubpageFirst(const base::Number* const spfobj)
 //------------------------------------------------------------------------------
 // drawSubpageFirst() -- Draw subpages first (default: draw our page graphics first)
 //------------------------------------------------------------------------------
-bool Page::setSlotFocusSlavedToSubpage(const base::Number* const msg)
+bool Page::setSlotFocusSlavedToSubpage(const base::Boolean* const msg)
 {
     if (msg != nullptr) setFocusSlavedToSubpage( msg->getBoolean() );
     return true;

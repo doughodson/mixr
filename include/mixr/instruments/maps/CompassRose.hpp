@@ -6,7 +6,7 @@
 #include "mixr/base/units/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Boolean; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ protected:
     bool onUpdateCenRad(const base::Number* const);
     bool onUpdateDecRadius(const base::Number* const);
     bool onUpdateDisplacement(const base::Number* const);
-    bool onUpdateCentered(const base::Number* const);
+    bool onUpdateCentered(const base::Boolean* const);
 
 private:
     double rot {};              // rotation angle (rads)

@@ -5,8 +5,10 @@
 
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
@@ -37,7 +39,7 @@ BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 4, setSlotCompareToNum,    base::Number)
    ON_SLOT( 5, setSlotCompareToDbl,    base::Number)
    ON_SLOT( 6, setSlotCondition,       base::String)
-   ON_SLOT( 7, setSlotTimeOnly,        base::Number)
+   ON_SLOT( 7, setSlotTimeOnly,        base::Boolean)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(PrintSelected)
@@ -141,7 +143,7 @@ bool PrintSelected::setSlotCondition(const base::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
+bool PrintSelected::setSlotTimeOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

@@ -1,6 +1,6 @@
     // Digital aoa gauge and corresponding analog tape scale with it
     // Inputs can be found in AoAIndexer.hpp
-    ( Graphic 
+    ( Graphic
         transform: ( Translation 5.0 0 )
         components: {
         // AoAIndexer is a simple instrument that simply takes an aoa value, and based on the values given to it, 
@@ -42,7 +42,7 @@
                                     // top mark
                                     ( Line
                                         transform: ( Translation 0 5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.25 0 ] [ -1 2 ]
@@ -52,7 +52,7 @@
                                     // bottom mark
                                     ( Line
                                         transform: ( Translation 0 -5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.05 0 ] [ -1 -2 ] 
@@ -68,7 +68,7 @@
                                     // top mark
                                     ( Line
                                         transform: ( Translation 0 5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.25 0 ] [ -1 2 ]
@@ -78,7 +78,7 @@
                                     // bottom mark
                                     ( Line
                                         transform: ( Translation 0 -5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.05 0 ] [ -1 -2 ] 
@@ -129,7 +129,7 @@
                                     // top mark
                                     ( Line
                                         transform: ( Translation 0 5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.25 0 ] [ -1 2 ]
@@ -139,7 +139,7 @@
                                     // bottom mark
                                     ( Line
                                         transform: ( Translation 0 -5 )
-                                        segment: 1
+                                        segment: true
                                         color: yellow
                                         linewidth: 3
                                         vertices: {
@@ -173,7 +173,7 @@
                                     // bottom mark
                                     ( Line
                                         transform: ( Translation 0 -5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.05 0 ] [ -1 -2 ] 
@@ -184,7 +184,7 @@
                                     ( Line
                                         color: red
                                         transform: ( Translation 0 5 )
-                                        segment: 1
+                                        segment: true
                                         linewidth: 3
                                         vertices: {
                                             [ -0.25 0 ] [ -1 2 ]
@@ -283,14 +283,14 @@
         
             // this graphic doesn't move either
             ( AsciiText
-                vertical: 1
+                vertical: true
                 color: white
                 font: smallfont
                 transform: ( Translation -2.5 2.5 )
                 text: "AOA"
             )
             ( AsciiText
-                vertical: 1
+                vertical: true
                 color: white
                 font: smallfont
                 transform: ( Translation -2.5 -1.5 )
@@ -574,7 +574,7 @@
                                         // make sure you put the "negative indicator here"
                                         ( AsciiText
                                             text: "NEG"
-                                            vertical: 1
+                                            vertical: true
                                             color: white
                                             transform: ( Translation 0.8 -1.55 )
                                         )
@@ -588,7 +588,7 @@
                                     linewidth: 3
                                     color: white
                                     tickLength: 0.5
-                                    vertical: 1
+                                    vertical: true
                                 )
                                 ( TickMarks
                                     transform: ( Translation -1.25 0 )
@@ -597,7 +597,7 @@
                                     quantity: 9
                                     tickLength: 2.5
                                     linewidth: 3
-                                    vertical: 1
+                                    vertical: true
                                 )
                                 // negative tick marks
                                 ( TickMarks
@@ -607,7 +607,7 @@
                                     color: white
                                     tickLength: 0.25
                                     linewidth: 3
-                                    vertical: 1
+                                    vertical: true
                                 )
                                 ( TickMarks
                                     transform: ( Translation 0.5 0 )
@@ -616,7 +616,7 @@
                                     color: white
                                     tickLength: -0.25
                                     linewidth: 3
-                                    vertical: 1
+                                    vertical: true
                                 )
                                 ( TickMarks
                                     transform: ( Translation -1.25 0 )
@@ -625,7 +625,7 @@
                                     color: white
                                     tickLength: 2.5
                                     linewidth: 3
-                                    vertical: 1
+                                    vertical: true
                                 )
                             }         
                         )

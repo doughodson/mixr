@@ -25,7 +25,7 @@ oil:
     color: white
     components: {
         // 0 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "0" transform: ( Translation 1.25 -0.9 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "0" transform: ( Translation 1.25 -0.9 ) )
         ( Line transform: ( Rotation -1.92 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
         // 5 PSI
         ( Line transform: ( Rotation -2.2 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
@@ -36,7 +36,7 @@ oil:
         // 15 PSI 
         ( Line color: white transform: ( Rotation -2.758 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
         // 20 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "20" transform: ( Translation -0.25 -1.75 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "20" transform: ( Translation -0.25 -1.75 ) )
         ( Line transform: ( Rotation -3.037 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
         // 25 PSI 
         ( Line color: white transform: ( Rotation -3.316 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
@@ -45,7 +45,7 @@ oil:
         // 35 PSI 
         ( Line color: white transform: ( Rotation -3.875 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
         // 40 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "40" transform: ( Translation -1.6 -1 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "40" transform: ( Translation -1.6 -1 ) )
         ( Line transform: ( Rotation -4.154 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
         // 45 PSI 
         ( Line color: white transform: ( Rotation -4.433 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
@@ -54,7 +54,7 @@ oil:
         // 55 PSI 
         ( Line color: white transform: ( Rotation -4.99 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
         // 60 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "60" transform: ( Translation -1.5 0.6 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "60" transform: ( Translation -1.5 0.6 ) )
         ( Line transform: ( Rotation -5.27 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
         // 65 PSI 
         ( Line color: white transform: ( Rotation -5.55 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
@@ -65,7 +65,7 @@ oil:
         // 75 PSI 
         ( Line color: white transform: ( Rotation -6.109 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
         // 80 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "80" transform: ( Translation -0.15 1.25 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "80" transform: ( Translation -0.15 1.25 ) )
         ( Line transform: ( Rotation -0.1047 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } ) 
         // 85 PSI 
         ( Line color: white transform: ( Rotation -0.384 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
@@ -75,11 +75,11 @@ oil:
         ( Line color: white transform: ( Rotation -0.9424 ) linewidth: 3 vertices: { [ 0 2 ] [ 0 2.2 ] } ) 
         
         // 100 PSI
-        ( AsciiText inheritColor: 1 font: smallfont text: "100" transform: ( Translation 0.6 0.25 ) )
+        ( AsciiText inheritColor: true font: smallfont text: "100" transform: ( Translation 0.6 0.25 ) )
         ( Line transform: ( Rotation -1.22 ) linewidth: 3 vertices: { [ 0 1.8 ] [ 0 2.2 ] } )
         
         // OIL Text
-        ( AsciiText font: smallerfont inheritColor: 1 text: "OIL" transform: ( Translation -0.35 -1.2 ) ) 
+        ( AsciiText font: smallerfont inheritColor: true text: "OIL" transform: ( Translation -0.35 -1.2 ) ) 
         
         ( OcclusionCircle
             color: gray2

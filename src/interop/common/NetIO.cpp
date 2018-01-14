@@ -10,6 +10,7 @@
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -71,9 +72,9 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(2,  setSlotFederationName,     base::Identifier)
    ON_SLOT(3,  setSlotFederateName,       base::Identifier)
 
-   ON_SLOT(4,  setSlotEnableInput,        base::Number)
-   ON_SLOT(5,  setSlotEnableOutput,       base::Number)
-   ON_SLOT(6,  setSlotEnableRelay,        base::Number)
+   ON_SLOT(4,  setSlotEnableInput,        base::Boolean)
+   ON_SLOT(5,  setSlotEnableOutput,       base::Boolean)
+   ON_SLOT(6,  setSlotEnableRelay,        base::Boolean)
    ON_SLOT(7,  setSlotTimeline,           base::Identifier)
 
    ON_SLOT(8,  setSlotInputEntityTypes,   base::PairStream)
@@ -1063,7 +1064,7 @@ bool NetIO::setSlotFederationName(const base::Identifier* const msg)
 }
 
 // Set input enable flag
-bool NetIO::setSlotEnableInput(const base::Number* const p)
+bool NetIO::setSlotEnableInput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1074,7 +1075,7 @@ bool NetIO::setSlotEnableInput(const base::Number* const p)
 }
 
 // Set output enable flag
-bool NetIO::setSlotEnableOutput(const base::Number* const p)
+bool NetIO::setSlotEnableOutput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1085,7 +1086,7 @@ bool NetIO::setSlotEnableOutput(const base::Number* const p)
 }
 
 // Set relay enable flag
-bool NetIO::setSlotEnableRelay(const base::Number* const p)
+bool NetIO::setSlotEnableRelay(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {

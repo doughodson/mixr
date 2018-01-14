@@ -8,7 +8,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class PairStream; class Number; }
+namespace base { class Boolean; class Pair; class PairStream;}
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -21,9 +21,10 @@ namespace graphics {
 // Slots:
 //  page                 <Identifier>   ! Initial subpage (default: 0)
 //  pages                <PairStream>   ! Subpages (default: 0)
-//  pagingEvent          <Page>         ! Page change event (default: 0)
-//  subpagesFirst        <PairStream>   ! Draw subpages first (default: draw our page graphics first)
-//  focusSlavedToSubpage <Number>       ! Slave the focus to the subpage (default: true)
+//  pages                <Page>
+//  pagingEvent          <PairStream>
+//  subpagesFirst        <Boolean>      ! Draw subpages first (default: draw our page graphics first)
+//  focusSlavedToSubpage <Boolean>      ! Slave the focus to the subpage (default: true)
 //
 // Events
 //  1. ON_ENTRY
@@ -149,8 +150,8 @@ private:
    bool setSlotSubpageStream(base::PairStream* const);
    bool setSlotSubpageSingle(Page* const);
    bool setSlotPagingEvent(base::PairStream* const);
-   bool setSlotDrawSubpageFirst(const base::Number* const);
-   bool setSlotFocusSlavedToSubpage(const base::Number* const);
+   bool setSlotDrawSubpageFirst(const base::Boolean* const);
+   bool setSlotFocusSlavedToSubpage(const base::Boolean* const);
 };
 
 }

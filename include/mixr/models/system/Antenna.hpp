@@ -9,7 +9,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Function; class Identifier; class Power; }
+namespace base { class Angle; class Boolean; class Function; class Identifier; class Number; class Power; }
 namespace models {
 class Player;
 class RfSystem;
@@ -106,8 +106,8 @@ public:
    virtual bool setThreshold(base::Power* const);
    virtual bool setGain(const base::Number* const);
    virtual bool setGainPattern(base::Function* const);
-   virtual bool setGainPatternDeg(const base::Number* const);
-   virtual bool setRecycleFlg(const base::Number* const);
+   virtual bool setGainPatternDeg(const base::Boolean* const);
+   virtual bool setRecycleFlg(const base::Boolean* const);
    virtual bool setBeamWidth(const base::Angle* const);
    virtual bool setBeamWidth(const base::Number* const);
 
@@ -160,8 +160,8 @@ private:
    bool setSlotThreshold(base::Power* const x)                      { return setThreshold(x);      }
    bool setSlotGain(const base::Number* const x)                    { return setGain(x);           }
    bool setSlotGainPattern(base::Function* const x)                 { return setGainPattern(x);    }
-   bool setSlotGainPatternDeg(const base::Number* const x)          { return setGainPatternDeg(x); }
-   bool setSlotRecycleFlg(const base::Number* const x)              { return setRecycleFlg(x);     }
+   bool setSlotGainPatternDeg(const base::Boolean* const x)         { return setGainPatternDeg(x); }
+   bool setSlotRecycleFlg(const base::Boolean* const x)             { return setRecycleFlg(x);     }
    bool setSlotBeamWidth(const base::Angle* const x)                { return setBeamWidth(x);      }
    bool setSlotBeamWidth(const base::Number* const x)               { return setBeamWidth(x);      }
 };

@@ -30,9 +30,9 @@ public:
     int getLineNumber()          { return line; }
 
 private:
-    static const unsigned int FNAME_SIZE {256};
-    char fname[FNAME_SIZE] {};   // current file name
-    int line {1};                // current line number
+    static const int FNAME_SIZE{256};
+    char fname[FNAME_SIZE]{};   // current file name
+    int line{1};                // current line number
 };
 
 }

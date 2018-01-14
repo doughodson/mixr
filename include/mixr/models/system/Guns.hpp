@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class List; class Number; }
+namespace base { class Boolean; class List; class Number; }
 namespace models {
 class Bullet;
 
@@ -25,7 +25,7 @@ class Bullet;
 // Slots:
 //    bulletType  <Bullet>   ! Type of bullet (have to have bullets to work) (default: 0)
 //    rounds      <Number>   ! Number of rounds (default: 510)
-//    unlimited    <Number>   ! Unlimited rounds flag (default: false)
+//    unlimited   <Boolean>  ! Unlimited rounds flag (default: false)
 //    rate        <Number>   ! Rate of fire (rounds per minute) (default: 6600)
 //    burstRate   <Number>   ! Rate to generate small bursts of bullets (default: 10)
 //
@@ -41,9 +41,10 @@ class Gun : public ExternalStore
    DECLARE_SUBCLASS(Gun, ExternalStore)
 
 public:
-   static const int DEFAULT_ROUNDS_PER_MINUTE;  // Default rate (rds per min)
-   static const int DEFAULT_NUM_ROUNDS;         // Default load
-   static const int DEFAULT_BURST_RATE;         // Default subburst frame rate
+   // Default Parameters (based on GE M61A1)
+   static const int DEFAULT_ROUNDS_PER_MINUTE{6600};  // Default rate (rds per min)
+   static const int DEFAULT_NUM_ROUNDS{510};          // Default load
+   static const int DEFAULT_BURST_RATE{10};           // Default subburst frame rate
 
 public:
    Gun();
@@ -118,14 +119,14 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNumRounds(const base::Number* const);  // Number of rounds
-   bool setSlotUnlimited(const base::Number* const);  // Unlimited rounds flag
-   bool setSlotRate(const base::Number* const);       // Rate of fire (rds per min)
-   bool setSlotBurstRate(const base::Number* const);  // Burst rate
-   bool setSlotPosition(base::List* const);           // Gun position relative to ownship
-   bool setSlotRoll(const base::Number* const);       // Gun roll angle to ownship
-   bool setSlotPitch(const base::Number* const);      // Gun pitch angle to ownship
-   bool setSlotYaw(const base::Number* const);        // Gun heading angle to ownship
+   bool setSlotNumRounds(const base::Number* const);   // Number of rounds
+   bool setSlotUnlimited(const base::Boolean* const);  // Unlimited rounds flag
+   bool setSlotRate(const base::Number* const);        // Rate of fire (rds per min)
+   bool setSlotBurstRate(const base::Number* const);   // Burst rate
+   bool setSlotPosition(base::List* const);            // Gun position relative to ownship
+   bool setSlotRoll(const base::Number* const);        // Gun roll angle to ownship
+   bool setSlotPitch(const base::Number* const);       // Gun pitch angle to ownship
+   bool setSlotYaw(const base::Number* const);         // Gun heading angle to ownship
 };
 
 }

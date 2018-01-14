@@ -6,8 +6,7 @@
 
 namespace mixr {
 namespace base {
-
-class Number;
+class Boolean;
 class Time;
 
 //------------------------------------------------------------------------------
@@ -107,9 +106,9 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotTimerValue(const Time* const);      // Sets the timer value
-    bool setSlotAlarmTime(const Time* const);       // Sets the alarm value
-    bool setSlotTimerActive(const Number* const);   // Sets the timer active (running) flag
+    bool setSlotTimerValue(const Time* const);       // Sets the timer value
+    bool setSlotAlarmTime(const Time* const);        // Sets the alarm value
+    bool setSlotTimerActive(const Boolean* const);   // Sets the timer active (running) flag
 };
 
 //

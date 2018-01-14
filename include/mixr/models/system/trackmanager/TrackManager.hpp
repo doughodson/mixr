@@ -6,7 +6,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Boolean; class Number; }
 namespace models {
 class Emission;
 class Player;
@@ -119,13 +119,13 @@ private:
    bool   logTrackUpdates {true}; // input slot; if false, updates to tracks are not logged.
 
 private:
-   bool setSlotMaxTracks(const base::Number* const);       // Sets the maximum number of track files
-   bool setSlotMaxTrackAge(const base::Number* const);     // Sets the maximum age of tracks
-   bool setSlotFirstTrackId(const base::Number* const);    // Sets the first (starting) track id number
-   virtual bool setSlotAlpha(const base::Number* const);   // Sets alpha
-   virtual bool setSlotBeta(const base::Number* const);    // Sets beta
-   bool setSlotGamma(const base::Number* const);           // Sets gamma
-   bool setSlotLogTrackUpdates(const base::Number* const); // Sets logTrackUpdates
+   bool setSlotMaxTracks(const base::Number* const);        // Sets the maximum number of track files
+   bool setSlotMaxTrackAge(const base::Number* const);      // Sets the maximum age of tracks
+   bool setSlotFirstTrackId(const base::Number* const);     // Sets the first (starting) track id number
+   virtual bool setSlotAlpha(const base::Number* const);    // Sets alpha
+   virtual bool setSlotBeta(const base::Number* const);     // Sets beta
+   bool setSlotGamma(const base::Number* const);            // Sets gamma
+   bool setSlotLogTrackUpdates(const base::Boolean* const); // Sets logTrackUpdates
 };
 
 }

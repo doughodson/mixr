@@ -6,7 +6,7 @@
 #include "mixr/interop/dis/structs.hpp"
 
 namespace mixr {
-namespace models { class Antenna; class RfSensor; }
+namespace models { class Antenna; class Boolean; class Number; class RfSensor; }
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -17,12 +17,12 @@ namespace dis {
 //
 // Factory name: EmissionPduHandler
 // Slots:
-//     emitterName      (Number)    DIS emitter name (see DIS enums)
-//     emitterFunction  (Number)    DIS emitter function code (see enums)
-//     sensor           (RfSensor)  Template sensor model
-//     antenna          (Antenna)   Template antenna model
-//     defaultIn        (Boolean)   This is the default handler for incoming PDUs
-//     defaultOut       (Boolean)   This is the default handler for outgoing PDUs
+//     emitterName      <Number>    ! DIS emitter name (see DIS enums)
+//     emitterFunction  <Number>    ! DIS emitter function code (see enums)
+//     sensor           <RfSensor>  ! Template sensor model
+//     antenna          <Antenna>   ! Template antenna model
+//     defaultIn        <Boolean>   ! This is the default handler for incoming PDUs
+//     defaultOut       <Boolean>   ! This is the default handler for outgoing PDUs
 //
 //
 // Example:
@@ -188,8 +188,8 @@ private:
    bool setSlotEmitterFunction(const base::Number* const);  // Sets our DIS Emitter Function
    bool setSlotSensorTemplate(models::RfSensor* const);     // Sets our template sensor model
    bool setSlotAntennaTemplate(models::Antenna* const);     // Sets our template antenna model
-   bool setSlotDefaultIn(const base::Number* const);
-   bool setSlotDefaultOut(const base::Number* const);
+   bool setSlotDefaultIn(const base::Boolean* const);
+   bool setSlotDefaultOut(const base::Boolean* const);
 };
 
 inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return emitterIdNumber; }

@@ -1,6 +1,7 @@
 
 #include "mixr/ui/glut/GlutDisplay.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
@@ -43,13 +44,13 @@ BEGIN_SLOTTABLE(GlutDisplay)
 END_SLOTTABLE(GlutDisplay)
 
 BEGIN_SLOT_MAP(GlutDisplay)
-   ON_SLOT(1,setSlotFullScreen,    base::Number)
+   ON_SLOT(1,setSlotFullScreen,    base::Boolean)
    ON_SLOT(2,setSlotIdleSleepTime, base::Number)
-   ON_SLOT(3,setSlotResizeWindows, base::Number)
+   ON_SLOT(3,setSlotResizeWindows, base::Boolean)
    ON_SLOT(4,setSlotPickWidth,     base::Number)
    ON_SLOT(5,setSlotPickHeight,    base::Number)
-   ON_SLOT(6,setSlotAccumBuff,     base::Number)
-   ON_SLOT(7,setSlotStencilBuff,   base::Number)
+   ON_SLOT(6,setSlotAccumBuff,     base::Boolean)
+   ON_SLOT(7,setSlotStencilBuff,   base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(GlutDisplay)
@@ -924,7 +925,7 @@ void GlutDisplay::entryFuncCB(int state)
 //-----------------------------------------------------------------------------
 
 // setSlotFullScreen()
-bool GlutDisplay::setSlotFullScreen(const base::Number* const msg)
+bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -949,7 +950,7 @@ bool GlutDisplay::setSlotIdleSleepTime(const base::Number* const msg)
 }
 
 // setSlotResizeWindows()
-bool GlutDisplay::setSlotResizeWindows(const base::Number* const msg)
+bool GlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -992,7 +993,7 @@ bool GlutDisplay::setSlotPickHeight(const base::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotAccumBuff(const base::Number* const msg)
+bool GlutDisplay::setSlotAccumBuff(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1002,7 +1003,7 @@ bool GlutDisplay::setSlotAccumBuff(const base::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotStencilBuff(const base::Number* const msg)
+bool GlutDisplay::setSlotStencilBuff(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

@@ -1,6 +1,7 @@
 
 #include "mixr/graphics/readouts/NumericReadout.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -50,7 +51,7 @@ BEGIN_SLOT_MAP(NumericReadout)
    ON_SLOT(8, setSlotOverflowChar,        base::String)
    ON_SLOT(9, setSlotMaxValid,            base::Number)
    ON_SLOT(10, setSlotMinValid,           base::Number)
-   ON_SLOT(11, setSlotBlankZero,          base::Number)
+   ON_SLOT(11, setSlotBlankZero,          base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(NumericReadout)
@@ -519,13 +520,12 @@ bool NumericReadout::setSlotMinValid(const base::Number* const msg)
 }
 
 //  setSlotBlankZero() -- Display blank if value is zero
-bool NumericReadout::setSlotBlankZero(const base::Number* const msg)
+bool NumericReadout::setSlotBlankZero(const base::Boolean* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
       blankZero = msg->getBoolean();
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setSlotMinValid: \"blankZero\" must be a number!" << std::endl;
       }

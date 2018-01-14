@@ -34,8 +34,8 @@ public:
     void drawFunc() override;
 
 private:
-    double lRadius {};     // our light radius - 0 means don't use it
-    double gearCurrent {}; // our gear current value
+    double lRadius{};      // our light radius - 0 means don't use it
+    double gearCurrent{};  // our gear current value
     SendData selSD;        // our selection
 
 private:

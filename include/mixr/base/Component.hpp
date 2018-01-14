@@ -7,6 +7,7 @@
 
 namespace mixr {
 namespace base {
+class Boolean;
 class Identifier;
 class Number;
 class Pair;
@@ -30,25 +31,25 @@ class String;
 //    select               <String>     ! Selects a child component by name (default: 0)
 //                         <Number>     ! Selects a child component by index (default: 0)
 //
-//    enableTimingStats    <Number>     ! Enable/disable the timing statistics for updateTC() (default: 0)
+//    enableTimingStats    <Boolean>    ! Enable/disable the timing statistics for updateTC() (default: false)
 //
-//    printTimingStats     <Number>     ! Enable/disable the printing of the timing statistics (default: false)
+//    printTimingStats     <Boolean>    ! Enable/disable the printing of the timing statistics (default: false)
 //
-//    freeze               <Number>     ! Freeze flag: true(1)- frozen, false(0)- unfrozen; (default: false)
+//    freeze               <Boolean>    ! Freeze flag: true- frozen, false- unfrozen; (default: false)
 //
-//    enableMessageType    <Identifier> ! Enable message type { WARNING, INFO, DEBUG, DATA, USER } (default: MSG_ERROR | MSG_WARNING)
+//    enableMessageType    <Identifier> ! Enable message type { warning info debug user data }
 //                         <Number>     ! Enable message type by number (e.g., 0x0100)
 //
-//    disableMessageType   <Identifier> ! Disable message type { WARNING, INFO, DEBUG, DATA, USER }
+//    disableMessageType   <Identifier> ! Disable message type { warning, info, debug, data, user }
 //                         <Number>     ! Disable message type by number (e.g., 0x0100) (default: 0)
 //
 // Events:
-//    SELECT         (String)  Select a child component by name.
-//    SELECT         (Number)  Select a child component by index.
-//    RESET_EVENT    ()        Reset the component.
-//    FREEZE_EVENT   ()        Freeze this component.
-//    FREEZE_EVENT   (Boolean) Freeze this component if arg is true.
-//    SHUTDOWN_EVENT ()        Shutdown this component.
+//    SELECT          <String>    ! Select a child component by name.
+//    SELECT          <Number>    ! Select a child component by index.
+//    RESET_EVENT     <>          ! Reset the component.
+//    FREEZE_EVENT    <>          ! Freeze this component.
+//    FREEZE_EVENT    <Boolean>   ! Freeze this component if arg is true.
+//    SHUTDOWN_EVENT  <>          ! Shutdown this component.
 //
 //
 //
@@ -372,7 +373,7 @@ protected:
    virtual bool shutdownNotification();     // We're shutting down
    virtual bool onEventReset();             // Reset event handler
 
-   virtual bool setSelectionName(const Object* const s); // Name (or number) of component to select
+   virtual bool setSelectionName(const Object* const);   // Name (or number) of component to select
    virtual bool select(const String* const name);        // Select component by name
    virtual bool select(const Number* const num);         // Select component by number
 
@@ -392,15 +393,15 @@ protected:
 
 private:
    safe_ptr<PairStream> components;    // Child components
-   Component* containerPtr {};         // We are a component of this container
+   Component* containerPtr{};          // We are a component of this container
 
-   Component* selected {};             // Selected child (process only this one)
-   Object* selection {};               // Name of selected child
+   Component* selected{};              // Selected child (process only this one)
+   Object* selection{};                // Name of selected child
 
-   Statistic* timingStats {};          // Timing statistics
-   bool pts {};                        // Print timing statistics
-   bool frz {};                        // Freeze flag -- true if this component is frozen
-   bool shutdown {};                   // True if this component is being (or has been) shutdown
+   Statistic* timingStats{};           // Timing statistics
+   bool pts{};                         // Print timing statistics
+   bool frz{};                         // Freeze flag -- true if this component is frozen
+   bool shutdown{};                    // True if this component is being (or has been) shutdown
 
 private:
    // slot table helper methods
@@ -408,9 +409,9 @@ private:
    bool setSlotComponent(Component* const single);           // Sets a single component
    bool setSlotSelect(const String* const name)              { return select(name); }
    bool setSlotSelect(const Number* const num)               { return select(num);  }
-   bool setSlotEnableTimingStats(const Number* const);       // Sets the timing enabled flag
-   bool setSlotPrintTimingStats(const Number* const);        // Sets the print timing stats flag
-   bool setSlotFreeze(const Number* const);                  // Sets the freeze flag
+   bool setSlotEnableTimingStats(const Boolean* const);      // Sets the timing enabled flag
+   bool setSlotPrintTimingStats(const Boolean* const);       // Sets the print timing stats flag
+   bool setSlotFreeze(const Boolean* const);                 // Sets the freeze flag
    bool setSlotEnableMsgType(const Identifier* const);       // Enables message types by name
    bool setSlotEnableMsgType(const Number* const);           // Enables message types by bit
    bool setSlotDisableMsgType(const Identifier* const);      // Disables message types by name

@@ -105,7 +105,7 @@ sbrake:
             // linewidth is a graphic slot, which determines how thick the line will be
             outerRadius: 6.1
             slices: 50
-            filled: 1
+            filled: true
             startAngle: -90
             sweepAngle: 180
         )

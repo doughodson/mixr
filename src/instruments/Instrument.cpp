@@ -1,5 +1,6 @@
 
 #include "mixr/instruments/Instrument.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/base/functors/Table1.hpp"
@@ -20,7 +21,7 @@ END_SLOTTABLE(Instrument)
 BEGIN_SLOT_MAP(Instrument)
     ON_SLOT(1, setSlotScalingTable, base::Table1)
     ON_SLOT(2, setSlotInstVal, base::Number)
-    ON_SLOT(3, setSlotAllowValPass, base::Number)
+    ON_SLOT(3, setSlotAllowValPass, base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Instrument)
@@ -87,7 +88,7 @@ bool Instrument::setSlotInstVal(const base::Number* const newVal)
 //------------------------------------------------------------------------------
 // setSlotAllowValPass() --
 //------------------------------------------------------------------------------
-bool Instrument::setSlotAllowValPass(const base::Number* const newAVP)
+bool Instrument::setSlotAllowValPass(const base::Boolean* const newAVP)
 {
     bool ok = false;
     if (newAVP != nullptr) ok = setAllowValPass(newAVP->getBoolean());

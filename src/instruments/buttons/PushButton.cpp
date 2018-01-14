@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/buttons/PushButton.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <iostream>
@@ -17,8 +18,8 @@ BEGIN_SLOTTABLE(PushButton)
 END_SLOTTABLE(PushButton)
 
 BEGIN_SLOT_MAP(PushButton)
-   ON_SLOT(1, setSlotFunction,   base::Number)
-   ON_SLOT(2, setSlotStartState, base::Number)
+   ON_SLOT(1, setSlotFunction,   base::Boolean)
+   ON_SLOT(2, setSlotStartState, base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(PushButton)
@@ -40,13 +41,10 @@ void PushButton::copyData(const PushButton& org, const bool)
    initState = org.initState;
 }
 
-// SLOT FUNCTIONS
-//------------------------------------------------------------------------------
-// setSlotFunction() - sets our pushbutton functionality ie momentary or maintained
-//------------------------------------------------------------------------------
-bool PushButton::setSlotFunction(const base::Number* const newFunction)
+// sets our pushbutton functionality to momentary or maintained
+bool PushButton::setSlotFunction(const base::Boolean* const newFunction)
 {
-   bool ok = false;
+   bool ok{};
    if (newFunction != nullptr) {
       ok = setFunction(newFunction->getBoolean());
    }
@@ -56,9 +54,9 @@ bool PushButton::setSlotFunction(const base::Number* const newFunction)
 //------------------------------------------------------------------------------
 // setStartFunction() - sets our pushbutton start state  ie not pressed or pressed
 //------------------------------------------------------------------------------
-bool PushButton::setSlotStartState(const base::Number* const newFunction)
+bool PushButton::setSlotStartState(const base::Boolean* const newFunction)
 {
-   bool ok = false;
+   bool ok{};
    if (newFunction != nullptr) {
       initState = newFunction->getBoolean();
       // set our current state initially
@@ -85,7 +83,7 @@ bool PushButton::setFunction(const bool x)
 bool PushButton::onSingleClick()
 {
    //if button is not maintained (ie momentary) then switch it after mouse button released
-   if(!functionType && mouseDown) currentState = initState;
+   if (!functionType && mouseDown) currentState = initState;
 
    mouseDown = false;
    BaseClass::onSingleClick();

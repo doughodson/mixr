@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Color; class Identifier; class Transform; }
+namespace base { class Boolean; class Color; class Identifier; class Transform; }
 namespace graphics {
 class Display;
 class Material;
@@ -50,8 +50,8 @@ class Material;
 //    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <Number>       ! Flag: True to disable display list
-//                                      !     (default false)
-//    subcomponentsFirst <Number>       ! Flag: Draw component graphics first
+//                                      !     (default: false)
+//    subcomponentsFirst <Boolean>      ! Flag: Draw component graphics first
 //                                      ! (default: draw own graphics first)
 //    selectName         <Number>       ! GL Select Buffer name
 //                                      ! (see glPushName())  (unsigned integer) (default: 0)
@@ -60,11 +60,11 @@ class Material;
 //    scissorY           <Number>       ! Bottom edge of the scissor box (World coord) (default: 0)
 //    scissorWidth       <Number>       ! How far over do we scissor (World coord) (default: 0)
 //    scissorHeight      <Number>       ! How far up do we scissor (World coord) (default: 0)
-//    stipple            <Number>       ! Line stippling flag - only used for line, lineloop, and circle when not filled.
+//    stipple            <Boolean>      ! Line stippling flag - only used for line, lineloop, and circle when not filled.
 //    stippleFactor      <Number>       ! Line stipple factor, specifies a multiplier for each bit in line stipple pattern (default: 1)
 //    stipplePattern     <Number>       ! Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535) (default: 0xFFFF)
-//    visible            <Number>       ! Visibility flag
-//    mask               <Number>       ! Color Masking
+//    visible            <Boolean>      ! Visibility flag
+//    mask               <Boolean>      ! Color Masking
 //    material           <Number>       ! Sets the current material
 //    translateLight     <Number>       ! Translate our current light to a new position (BEFORE DRAWING)
 //
@@ -263,8 +263,8 @@ public:
    const base::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
    graphics::Material* getMaterial()                 { return materialObj; }  // returns our material object!
    const graphics::Material* getMaterial() const     { return materialObj; }
-   virtual bool setMaterial(const base::Identifier* const msg);
-   virtual bool setMaterial(const graphics::Material* const msg);
+   virtual bool setMaterial(const base::Identifier* const);
+   virtual bool setMaterial(const graphics::Material* const);
 
    // Flash rate functions
    bool flashOn() const;
@@ -395,7 +395,7 @@ protected:
    virtual bool onSetTextureId(const base::Number* const);
    virtual bool onSetLineWidthEvent(const base::Number* const);
    virtual bool onSetFlashRateEvent(const base::Number* const);
-   virtual bool onSetVisibilityEvent(const base::Number* const);
+   virtual bool onSetVisibilityEvent(const base::Boolean* const);
 
    void processComponents(                          // Process our subcomponent list (which should be other Graphics)
         base::PairStream* const list,               // Source list of components
@@ -469,21 +469,21 @@ private:
    bool setSlotSelectName(const base::Number* const);
    bool setSlotTransformList(base::PairStream*);      // Set the transformation list
    bool setSlotSingleTransform(base::Transform* const);
-   bool setSlotNoDisplayList(const base::Number* const);
-   bool setSlotSubcomponentsFirst(const base::Number* const);
+   bool setSlotNoDisplayList(const base::Boolean* const);
+   bool setSlotSubcomponentsFirst(const base::Boolean* const);
    bool setSlotVertices(const base::PairStream* const);
    bool setSlotNormals(const base::PairStream* const);
    bool setSlotTexCoord(const base::PairStream* const);
-   bool setSlotMask(const base::Number* const);
+   bool setSlotMask(const base::Boolean* const);
    bool setSlotTextureName(base::Identifier*);
    bool setSlotScissorX(const base::Number* const);
    bool setSlotScissorY(const base::Number* const);
    bool setSlotScissorWidth(const base::Number* const);
    bool setSlotScissorHeight(const base::Number* const);
-   bool setSlotStippling(const base::Number* const);
+   bool setSlotStippling(const base::Boolean* const);
    bool setSlotStippleFactor(const base::Number* const);
    bool setSlotStipplePattern(const base::Number* const);
-   bool setSlotVisibility(const base::Number* const);
+   bool setSlotVisibility(const base::Boolean* const);
    bool setSlotTranslateLight(base::PairStream* const);
 };
 

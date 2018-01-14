@@ -1,5 +1,6 @@
 
 #include "mixr/instruments/dials/AnalogDial.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include <GL/glu.h>
 #include <iostream>
@@ -26,7 +27,7 @@ BEGIN_SLOT_MAP(AnalogDial)
     ON_SLOT(1, setSlotOriginAngle, base::Number)
     ON_SLOT(2, setSlotSweepAngle,  base::Number)
     ON_SLOT(3, setSlotRadius,      base::Number)
-    ON_SLOT(4, setSlotMobile,      base::Number)
+    ON_SLOT(4, setSlotMobile,      base::Boolean)
     ON_SLOT(5, setSlotSlices,      base::Number)
 END_SLOT_MAP()
 
@@ -118,7 +119,7 @@ bool AnalogDial::setSlotRadius(const base::Number* newR)
 //------------------------------------------------------------------------------
 // setSlotMobile() -- allows us to rotate around our dial
 //------------------------------------------------------------------------------
-bool AnalogDial::setSlotMobile(const base::Number* newM)
+bool AnalogDial::setSlotMobile(const base::Boolean* newM)
 {
     bool ok = false;
     if (newM != nullptr) ok = setMobile(newM->getBoolean());

@@ -5,6 +5,7 @@
 #include "mixr/instruments/dials/AnalogDial.hpp"
 
 namespace mixr {
+namespace base { class Boolean; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -40,9 +41,9 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotIsDynamic(const base::Number* const);
+    bool setSlotIsDynamic(const base::Boolean* const);
     bool setSlotOuterRadius(const base::Number* const);
-    bool setSlotFilled(const base::Number* const);
+    bool setSlotFilled(const base::Boolean* const);
 };
 
 }

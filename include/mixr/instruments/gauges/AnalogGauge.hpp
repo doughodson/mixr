@@ -55,8 +55,8 @@ private:
     // slot table helper methods
     bool setSlotLeftBoundary(const base::Number* const);
     bool setSlotRightBoundary(const base::Number* const);
-    bool setSlotIsOutlined(const base::Number* const);
-    bool setSlotIsVertical(const base::Number* const);
+    bool setSlotIsOutlined(const base::Boolean* const);
+    bool setSlotIsVertical(const base::Boolean* const);
 };
 
 }

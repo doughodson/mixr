@@ -5,7 +5,7 @@
 #include "AbstractFont.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Boolean; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace graphics {
 //
 // Factory name: BitmapFont
 // Slots:
-//   reverse   <Number>    ! Reverse video (default: false)
+//   reverse   <Boolean>    ! Reverse video (default: false)
 //
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)
@@ -51,17 +51,17 @@ private:
     static void reverseBitmapOrder(GLubyte* bitmap, unsigned int numBitmapBytes, unsigned int numBytesWide);
     static GLubyte reverseByteOrder(GLubyte byte);
 
-    bool reverse {};                // Reverse the font
-    const char** fontMap {};        // Font map (ASCII code to file name mapping)
-    unsigned int numFonts {};       // Number of fonts in the map
+    bool reverse{};                // Reverse the font
+    const char** fontMap{};        // Font map (ASCII code to file name mapping)
+    unsigned int numFonts{};       // Number of fonts in the map
 
     // Default fontMap
+    static const int defaultNumFonts;
     static const char** defaultFontMap;
-    static const unsigned int defaultNumFonts;
 
 private:
     // slot table helper methods
-    bool setSlotReverse(const base::Number* const);
+    bool setSlotReverse(const base::Boolean* const);
 };
 
 }

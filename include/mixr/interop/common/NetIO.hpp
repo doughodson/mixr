@@ -9,7 +9,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Identifier; class Time; }
+namespace base { class Angle; class Boolean; class Distance; class Identifier; class Number; class Time; }
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {
@@ -25,27 +25,27 @@ class Ntm;
 //
 // Factory name: NetIO
 // Slots:
-//    networkID            (base::Number)      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
-//    federationName       (base::Identifier)  ! Federation name (default: 0)
-//    federateName         (base::Identifier)  ! Name of this federate (default: 0)
+//    networkID            <base::Number>      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
+//    federationName       <base::Identifier>  ! Federation name (default: 0)
+//    federateName         <base::Identifier>  ! Name of this federate (default: 0)
 //
-//    enableInput          (base::Boolean)     ! Input Enable  accept players from this network (default: true)
-//    enableOutput         (base::Boolean)     ! Output enable: send players to this network (default: true)
-//    enableRelay          (base::Boolean)     ! Relay enable: send other network players to this network (default: true)
-//    timeline             (base::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
+//    enableInput          <base::Boolean>     ! Input Enable  accept players from this network (default: true)
+//    enableOutput         <base::Boolean>     ! Output enable: send players to this network (default: true)
+//    enableRelay          <base::Boolean>     ! Relay enable: send other network players to this network (default: true)
+//    timeline             <base::Identifier>  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
-//    inputEntityTypes     (base::PairSteam)   ! Incoming entity type mappers (default: 0)
+//    inputEntityTypes     <base::PairSteam>   ! Incoming entity type mappers (default: 0)
 //                                             !   (Ntm objects that map incoming entity types to mixr player types)
 //
-//    outputEntityTypes    (base::PairSteam)   ! Outgoing entity type mappers (default: 0)
+//    outputEntityTypes    <base::PairSteam>   ! Outgoing entity type mappers (default: 0)
 //                                             !   (Ntm objects that map mixr player types to outgoing entity types)
 //
-//    maxTimeDR            (base::Time)        ! Max DR time (default: 5 seconds)
-//    maxPositionError     (base::Distance)    ! Max DR position error (default: 3 meters)
-//    maxOrientationError  (base::Angle)       ! Max DR angular error (default: 3 degrees)
-//    maxAge               (base::Time)        ! Max age (without update) of networked players (default: 12.5 seconds)
+//    maxTimeDR            <base::Time>        ! Max DR time (default: 5 seconds)
+//    maxPositionError     <base::Distance>    ! Max DR position error (default: 3 meters)
+//    maxOrientationError  <base::Angle>       ! Max DR angular error (default: 3 degrees)
+//    maxAge               <base::Time>        ! Max age (without update) of networked players (default: 12.5 seconds)
 //
-//    maxEntityRange       (base::Distance)    ! Max entity range of networked players,
+//    maxEntityRange       <base::Distance>    ! Max entity range of networked players,
 //                                             !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
@@ -469,9 +469,9 @@ private:
    virtual bool setSlotMaxAge(const base::Time* const);                // Sets the max age(s)
 
    bool setSlotNetworkID(const base::Number* const);                   // Sets the network ID
-   bool setSlotEnableInput(const base::Number* const);                 // Sets input enabled flag
-   bool setSlotEnableOutput(const base::Number* const);                // Sets output enabled flag
-   bool setSlotEnableRelay(const base::Number* const);                 // Sets relay enabled flag
+   bool setSlotEnableInput(const base::Boolean* const);                // Sets input enabled flag
+   bool setSlotEnableOutput(const base::Boolean* const);               // Sets output enabled flag
+   bool setSlotEnableRelay(const base::Boolean* const);                // Sets relay enabled flag
    bool setSlotTimeline(const base::Identifier* const);                // Sets the source of the time ( UTC or EXEC )
    bool setSlotInputEntityTypes(base::PairStream* const);              // Sets the table of input entity to player mapper objects
    bool setSlotOutputEntityTypes(base::PairStream* const);             // Sets the table of output entity to player mapper objects

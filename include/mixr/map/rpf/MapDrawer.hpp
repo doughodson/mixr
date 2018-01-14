@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Number; class String; }
+namespace base { class Boolean; class Number; class String; }
 namespace rpf {
 class TexturePager;
 class CadrgMap;
@@ -116,8 +116,8 @@ private:
 
 private:
    bool setSlotMapIntensity(const base::Number* const);
-   bool setSlotDrawGridMode(const base::Number* const);
-   bool setSlotShowMap(const base::Number* const);
+   bool setSlotDrawGridMode(const base::Boolean* const);
+   bool setSlotShowMap(const base::Boolean* const);
 };
 
 }

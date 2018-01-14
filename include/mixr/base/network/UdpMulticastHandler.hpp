@@ -8,6 +8,8 @@
 
 namespace mixr {
 namespace base {
+class Boolean;
+class Number;
 class String;
 
 //------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ class String;
 //
 //      ttl             <Number>    ! Multicast Time-To-Live (TTL) value (default: 1)
 //
-//      loopback        <Number>    ! Multicast Loopback flag (default: 0 (off))
+//      loopback        <Boolean>   ! Multicast Loopback flag (default: true)
 //
 //
 // From Windows documentation:
@@ -57,7 +59,7 @@ class String;
 //           localPort: 2011                    // Port to send from
 //           shared: 1                          // Shared socket
 //           ttl:    4                          // Time-to-live
-//           loopback: 1                        // Loop back
+//           loopback: true                     // Loop back
 //        )
 //
 //------------------------------------------------------------------------------
@@ -85,16 +87,16 @@ protected:
     bool bindSocket() override;
 
 private:
-    std::string multicastGroup;        // Multicast Group Name
-    int   ttl {1};                     // Time-to-live value
-    bool  loopback {true};             // Loop back flag
-    bool  initialized {};              // handler has been initialized
+    std::string multicastGroup;      // Multicast Group Name
+    int  ttl{1};                     // Time-to-live value
+    bool loopback{true};             // Loop back flag
+    bool initialized{};              // handler has been initialized
 
 private:
     // slot table helper methods
     bool setSlotMulticastGroup(const String* const);
     bool setSlotTTL(const Number* const);
-    bool setSlotLoopback(const Number* const);
+    bool setSlotLoopback(const Boolean* const);
 };
 
 }

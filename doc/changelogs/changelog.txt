@@ -38,11 +38,11 @@ General framework-wide changes/improvements/trends/philosophy/goals
   different than outcomes that do not include induced consistency or representation
   differences.
 
-- Topic: Strings verses Identifiers, getting more specific
+- Topic: String verses Identifier
 
   The Extensible Description Language (EDL) is enabled by a language parser
   and code embedded within Object-based classes.  Within it, two important data
-  types, String and Identifier are of particular interest.
+  types, in this discussion, String and Identifier are of particular interest.
 
   Strings are defined in the language as quoted sequences of characters (e.g.,
   "Hello, World") as is common in many computer languages.  Identifiers are defined
@@ -99,6 +99,26 @@ General framework-wide changes/improvements/trends/philosophy/goals
   handle slot inputs more in-line with the value types they expect. Specific
   changes are listed within each library.
 
+- Topic: Boolean verses Number
+
+  The Extensible Description Language (EDL) is enabled by a language parser
+  and code embedded within Object-based classes.  Within it, two important data
+  types, in this discussion, Boolean and Number are of particular interest.
+
+  Previously, within the C++ code base, the Boolean type (i.e., class) was defined
+  as a subclass to Number (i.e., IS-A relationship).  This relationship allowed
+  for Boolean's to be viewed substituted for any number, although they, as in many
+  computer languages are considered to be  distinctly different types (e.g., C++
+  'bool' vs 'int').
+
+  Much like String and Identifiers, this can lead to some confusion.  For example,
+  configuration files settings for things like an 'asynchronous' mode,
+  (true/false type values) were being set to, say '5' - disturbing indeed.
+  Unfortunately, this 'worked' -- '5' was being read as a number and interpreted
+  as a positive value, thus 'true' was deemed its Boolean equivalent.
+
+  To resolve any possible misunderstanding w
+
 
 --------------------------------------------------------------------------------
 
@@ -124,6 +144,7 @@ base library (mixr_base)
          (e.g., "127.0.0.1") and Identifiers for addresses specified as hostnames
          (e.g., 'localhost')
       2) Internally, 'localIpAddress' is now stored as a std::string
+      3) Slot parameter 'shared' now accepts a Boolean
 
    TcpClient class
       1) Slot parameter 'ipAddress' now accepts both a String and Identifier with
@@ -135,11 +156,24 @@ base library (mixr_base)
    
    UdpMulticastHandler class
       1) Internally, 'multicastGroup' is now being stored as a std::string
+      2) Slot parameter 'loopback' now accepts a Boolean
 
    UdpUnicastHandler class
       1) Slot parameter 'ipAddress; now accepts both a String and Identifier with
          the same functionality as PosixHandler class changes
       2) Internally, ipAddr is now being stored as a std::string
+
+   -------------------
+   - Other classes -
+   -------------------
+
+   Boolean class
+      1) This class has been refactored and it now based on Object.  It is
+         no longer a subclass to Number.
+
+   Component class
+      1) Slot parameters 'enableTimingStats', 'printTimingStats', and
+         'freeze' now accept a Boolean
 
    Identifier class
       1) This class is no longer a subclass of String.  It provides a complete
@@ -148,10 +182,19 @@ base library (mixr_base)
          Object to remain compatible with EDL parsing system.  It has also
          been marked as a 'final' class.
 
+   Number class
+      1) Methods associated with processing of Boolean values have been removed,
+         please use the Boolean class instead
+
    String class
       1) No significant changes other than the removal of 'virtual' from several
          methods no longer used.
 
+   Table class
+      1) Slot parameter 'extrapolate' now accepts a Boolean
+
+   Timer class
+      1) Slot parameter 'active' now accepts a Boolean
 
 --------------------------------------------------------------------------------
 
@@ -161,8 +204,25 @@ recorder library (mixr_recorder)
    DataRecorder class
       1) Slot parameters 'eventName' and 'application' now accept an Identifier
 
+   PrintSelected class
+      1) Slot parameter 'timeOnly' now accepts a Boolean
+
+   NetInput class
+      1) Slot parameter 'noWait' now accepts a Boolean
+
+   NetOutput class
+      1) Slot parameter 'noWait' now accepts a Boolean
+
    TabPrinter class
       1) Slot parameter 'msgHdrOptn' now accepts an Identifier
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+terrain library (mixr_terrain)
+
+   DtedFile class
+      1) Slot parameter 'verifyChecksum' now accepts a Boolean
 
 --------------------------------------------------------------------------------
 
@@ -173,6 +233,14 @@ Devices, I/O, controllers libraries
 --------------------------------------------------------------------------------
 linkage library (mixr_linkage)
 
+   Ai2DiSwitch class
+      1) Slot parameter 'inverted' now accepts a Boolean
+
+   DiscreteInput class
+      1) Slot parameter 'inverted' now accepts a Boolean
+
+   DiscreteOutput class
+      1) Slot parameter 'inverted' now accepts a Boolean
 
 --------------------------------------------------------------------------------
 
@@ -186,24 +254,106 @@ graphics library (mixr_graphics)
    AbstractField class
       1) Slot parameter 'justification' now accepts an Identifier
       2) Slot parameter 'font' now accepts an Identifier
+      3) Slot parameters 'highlight', 'underline', 'reversed', 'vertical,
+         'brackets', 'linked' and 'inheritColor' now accepts a Boolean
    
+   BitmapFont class
+      1) Slot parameter 'reverse' now accepts a Boolean
+
    Display class
-      1) Slots for 'normalFont' and 'orientation' now accept and correctly
+      1) Slot parameters for 'normalFont' and 'orientation' now accept and correctly
          process an Identifier
+      2) Slot parameters for 'antiAliasing' and 'reverseVideoBrackets' now
+         accept a Boolean
+
+   Graphic class
+      1) Even handler for 'onSetVisibilityEvent' now accepts a Boolean
+      2) Slot parameters 'noDisplayList', 'subcomponentsFirst', 'stipple', 'visible'
+         and 'mask' now accepts a Boolean
+
+
+   NumericReadout class
+      1) Slot parameter for 'blankIfZero' now accepts a Boolean
+
+   MapPage class
+      1) Event handler for 'onUpdateCentered' now accepts a Boolean
+      2) Slot parameter 'centered' now accepts a Boolean
+      3) Slot parameter 'northUp' now accepts a Boolean
+
+   Page class
+      1) Slot parameter for 'subpagesFirst' and 'focusSlavedToSubpage' now
+         accepts a Boolean 
+
+   Rotary2 class
+      1) Event handler for 'onSelect' now accepts a Boolean
+
+   Shape classes
+      1) Slot parameter for 'filled' in Cirle class now accepts Boolean
+      2) Slot parameter for 'connect' in Arc class now accepts Boolean
+      3) Slot parameter for 'segment' in Line class now accepts Boolean
+      4) Slot parameter for 'strip' in Quad class now accepts Boolean
+      5) Slot parameter for 'fan' in Triangle class now accepts Boolean
+
+   SymbolLoader class
+      1) Slot parameters 'showOnlyInRange' and 'interconnect' now accept a
+         Boolean
+
 
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
 instruments library (mixr_instruments)
 
+   AnalogDial class
+      1) Slot parameter 'mobile' now accepts a Boolean
+
+   AnalogGauge class
+      1) Slot parameters 'outlined' and 'vertical' now accepts a Boolean
+
+   CompassRose class
+      1) Event handler 'onUpdateCentered' now accepts a Boolean
+
+   DialArcSegment class
+      1) Slot parameters 'dynamic' and 'filled' now accepts a Boolean
+
    GhostHorizon class
       1) Slots for parameters 'skyColor' and 'groundColor' now accept an
          Identifier
+
+   Knob class
+      1) Slot for parameter 'endless' now accepts a Boolean
+
+   Instrument class
+      1) Slot parameter 'allowComponentPass' now accepts a Boolean
+
+   PushButton class
+      1) Slot parameters 'maintained' and 'startdepressed' now accepts a Boolean
+
+   SolenoidButton class
+      1) Event handler 'onPicked' now accepts a Boolean
+
+   SolenoidSwitch class
+      1) Event handler 'selectLatch' now accepts a Boolean
+
+   Tape class
+      1) Slot for parameters 'vertical' and 'convert' now accepts a Boolean
+
+   TickMarks class
+      1) Slot parameter 'flip' now accepts a Boolean
 
 - Within this library, various edl files have been updated to remain consistent
   with what is a String verses, what an Identifier.  Very few changes were needed,
   one of which included specifying the slot parameter 'format' for readouts
   to be quoted (e.g., "###" vs '###').
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ui_glut library (mixr_ui_glut)
+
+   GlutDisplay class
+      1) Slot parameters 'fullScreen', 'resizeSubwindows', accumBuff' and
+         'stencilBuff' now accepts a Boolean
 
 --------------------------------------------------------------------------------
 
@@ -216,6 +366,7 @@ ig library (mixr_ig_cigi)
 
    CigiModel class
       1) Internally 'federateName' is now being stored as an Identifier
+      2) Slot parameter 'hideOwnshipModel' now accepts a Boolean
 
 - The move to storing a fererate name as an Identifier caused related code
   to change to use this datatype.
@@ -232,6 +383,14 @@ Map libraries
 #####################################################
 
 --------------------------------------------------------------------------------
+rpf library (mixr_map_rpf)
+
+   MapDrawer class
+      1) Slot parameters 'drawGridMode' and 'showMap' now accepts a Boolean
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
 vpf library (mixr_map_vpf)
 
 --------------------------------------------------------------------------------
@@ -244,9 +403,30 @@ Models & general capabilities oriented libraries
 --------------------------------------------------------------------------------
 models library (mixr_models)
 
+   AbstractWeapon class
+      1) Slot parameters 'released', 'failed', 'power', 'hang', 'hung', 'dummy',
+         'jettisonable' now accepts a Boolean
+
    Antenna class
       1) Polarization enum is now an 'enum class' based integer
       2) Slot parameter 'polarization' now accepts an Identifier
+      3) Slot parameter 'gainPatternDeg" and 'recycle' now accepts a Boolean
+
+   Autopilot class
+      1) Slot parameters 'navMode', 'altitudeHoldMode', 'velocityHoldMode',
+         'holdHeading', 'loiterMode', 'loiterPatternCcwFlag', and
+         'followTheLeadMode' now accepts a Boolean
+
+   Bomb class
+      1) Slot parameters 'noseFuze', 'midFuze' and 'tailFuze' now accepts
+         a Boolean
+
+   CollisionDetect class
+      1) Slot parameter 'localOnly', 'useWorldCoordinates', and 'sendCrashEvents'
+         now accepts a Boolean
+
+   ExternalStore
+      1) Slot paramter 'jettisonable' now accepts a Boolean
 
    Gimbal class
       1) Slot parameter 'type' now accepts an Identifier
@@ -254,6 +434,12 @@ models library (mixr_models)
       3) Enumerated type 'ServoMode' is now an 'enum class'
       4) 'ServoMode' type names have been shorten by removing the '_SERVO'
          postfix from each of them
+      5) Slot parameters for 'terrainOcculting', 'checkHorizon', 'localPlayersOfInterest",
+         'useWorldCoordinates', and 'ownHeadingOnly' now accepts a Boolean
+
+   Iff class
+      1) Slot parameters 'enableMode1', 'enableMode2', 'enableMode3a', 'enableMode4',
+         'whichMode4', and 'enableModeC' now accepts a Boolean
 
    IrSensor class
       1) Slot parameter 'sensorType' now accepts an Identifier
@@ -264,27 +450,54 @@ models library (mixr_models)
    IrSystem class
       1) Slot parameter 'seekerName' now accepts an Identifier
       2) The name of the seeker stored in this class is now a std::string
+      3) Slot parameter 'disableQueries' now accepts a Boolean
+
+   Gun class
+      1) Slot parameter 'unlimied' now accepts a Boolean
 
    Player class
       1) The enumerated list of coordinate systems is now a class (i.e.,
          'enum class CoordSys').  Also the enumeration names have been shorted
          to eliminate the 'CS_' prefix, as it's no longer needed due to
          class specification
+      2) Slot parameters 'terrainElevReq', 'interpolateTerrain', 'positionFreeze',
+         'altitudeFreeze', 'attitudeFreeze', 'fuelFreeze', 'crashOverride', killOverride',
+         'killRemoval'' 'enableNetOutput' and 'testBodyAxis' now accepts a Boolean
 
    RfSensor class
       1) Slot parameter 'trackManagerName' now accepts an Identifier
       2) Internally, this class now stores the track manager name as a
          std::string. Its API has been updated to set or get its name based on
          this type
+      3) Slot parameter 'syncXmitWithScan' now accepts a Boolean
 
    RfSystem class
       1) Slot parameter 'antennaName' now accepts an Identifier
+      2) Slot parameter 'disableEmissions' now accepts a Boolean
+
+   Route class
+      1) Slot parameters 'autoSequence' and 'wrap' now accepts a Boolean
 
    ScanGimbal class
       1) Enumerated type 'Side' is now an 'enum class'
       2) The anonymous enumerated list of scan modes has been replaced by a
          'enum class' that defines a ScanMode
       3) Slot parameter 'scanMode' now accepts an Identifier
+      4) Slot parameter 'leftToRightScan' now accept a Boolean
+
+   SigAzEl class
+      1) Slot parameters 'swapOrder', 'inDegrees' and 'inDecibel' now accepts
+         a Boolean
+
+   TargetData class
+      1) Slot parameters 'enabled', 'completed' and 'manualAssign' now accepts
+         a Boolean
+
+   TrackManager class
+      1) Slot parameter 'logTrackUpdates' now accepts a Boolean
+
+   WorldModel class
+      1) Slot parameter 'gamingAreaUseEarthModel' now accepts a Boolean
 
 - Due to changes associated with 'enum's becoming full fledged 'enum class'es
   more specificity was added in other related classes that used those
@@ -305,6 +518,7 @@ simulation library (mixr_simulation)
 
    Station class
       1) Slot parameter 'ownship' now accepts an Identifier
+      2) Slot parameter 'enableUpdateTimers' now accepts a Boolean
 
 --------------------------------------------------------------------------------
 
@@ -324,6 +538,8 @@ interop library (mixr_interop)
       3) Renamed the method 'createIPlayer()' to 'createProxyPlayer()'
       4) Slot parameters for 'federationName' and 'federateName' now
          accept an Identifier
+      5) Slot parameters 'enableInput', 'enableOutput' and 'enableRelay'
+         now accepts a Boolean
 
 - Due to changes related to federate and federation names being typed
   as an Identifier caused other classes to also store that information
@@ -335,12 +551,19 @@ interop library (mixr_interop)
 dis library (mixr_interop_dis)
 --------------------------------------------------------------------------------
 
+   EmissionPduHandler class
+     1) Slot parameters 'defaultIn' and 'defaultOut' now accepts a Boolean
+
    Nib class
-      1) Renamed the method 'updateTheIPlayer()' to 'updateProxyPlayer()'
+     1) Renamed the method 'updateTheIPlayer()' to 'updateProxyPlayer()'
 
 --------------------------------------------------------------------------------
 hla library (mixr_interop_hla)
 --------------------------------------------------------------------------------
+
+   NetIO class
+      1) Slot parameters 'regulatingTime' and 'constrainedTime' now accepts a
+         Boolean
 
 --------------------------------------------------------------------------------
 rprfom library (mixr_interop_rprfom)

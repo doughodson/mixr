@@ -5,7 +5,7 @@
 #include "Rotary.hpp"
 
 namespace mixr {
-namespace base { class Object; class Number; }
+namespace base { class Boolean; class Object; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ public:
    bool event(const int key, base::Object* const obj = nullptr) override;
 
    // event handler methods
-   virtual bool onSelect(const base::Number* const osobj);
+   virtual bool onSelect(const base::Boolean* const);
 };
 
 }

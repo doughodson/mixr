@@ -6,7 +6,7 @@
     components: {
         ( Line
             color: black
-            segment: 1
+            segment: true
             linewidth: 3
             vertices: {
                 [ -0.3 0 ] [ 0.3 0 ]
@@ -17,14 +17,14 @@
             color: ( rgb 0.2 0.2 0.2 )
             radius: 0.5
             slices: 50
-            filled: 1
+            filled: true
         )
     }
 )
 
 gdial:
 ( GMeterDial 
-    allowComponentPass: 0
+    allowComponentPass: false
     scalingTable:
         ( Table1
             // g's

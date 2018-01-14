@@ -9,6 +9,7 @@
 #include <cmath>
 
 namespace mixr {
+namespace base { class Boolean; class Number; }
 namespace graphics {
 
 // -------------------------------------------------------------------------------
@@ -60,13 +61,13 @@ namespace graphics {
 //
 //   range        <Number>    ! our range, in nautical miles, of our map (default: 1.0)
 //   displacement <Number>    ! how far to translate when we are decentered (default: 0.0)
-//   centered     <Number>    ! are we centered, or de-centered (default: centered)
+//   centered     <Boolean>   ! are we centered (true), or de-centered (false) (default: true)
 //
 //   refLat       <Number>    ! reference latitude (degs) (default: 0)
 //   refLon       <Number>    ! reference longitude (degs) (default: 0)
 //
 //   refHdg       <Number>    ! reference heading (degs) (default: 0)
-//   northUp      <Number>    ! north up mode (default: true)
+//   northUp      <Boolean>   ! north up mode (default: true)
 //
 //
 // Inputs for the send commands are as follows:
@@ -151,7 +152,7 @@ protected:
    virtual bool onUpdateHeading(const base::Number* const newH);
    virtual bool onUpdateReferenceLat(const base::Number* const newOL);
    virtual bool onUpdateReferenceLon(const base::Number* const newOL);
-   virtual bool onUpdateCentered(const base::Number* const newC);
+   virtual bool onUpdateCentered(const base::Boolean* const newC);
    virtual bool onUpdateOuterRadius(const base::Number* const newR);
    virtual bool onUpdateOuterRadiusDC(const base::Number* const newRDC);
    virtual bool onUpdateDisplacement(const base::Number* const newD);
@@ -181,8 +182,8 @@ private:
    bool setSlotOuterRadiusDC(const base::Number* const);
    bool setSlotRange(const base::Number* const);
    bool setSlotDisplacement(const base::Number* const);
-   bool setSlotCentered(const base::Number* const);
-   bool setSlotNorthUp(const base::Number* const);
+   bool setSlotCentered(const base::Boolean* const);
+   bool setSlotNorthUp(const base::Boolean* const);
    // ref lat/lon heading
    bool setSlotRefLat(const base::Number* const);
    bool setSlotRefLon(const base::Number* const);

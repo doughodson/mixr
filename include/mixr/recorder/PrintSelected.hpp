@@ -13,7 +13,7 @@
 #include "google/protobuf/message.h"
 
 namespace mixr {
-namespace base { class Float; class Integer; }
+namespace base { class Boolean; class Float; class Integer; class Number; }
 namespace recorder {
 namespace pb {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -36,7 +36,7 @@ class TrackData; class EmissionData;
 //   compareToValI   <base::Number>   ! value to compare (num)
 //   compareToValD   <base::Number>   ! value to compare (dbl)
 //   condition       <base::String>   ! EQ, LT, or GT (ignored for bool and strings)
-//   timeOnly        <base::Number>   ! match time conditions only. Print ALL messages that match
+//   timeOnly        <base::Boolean>  ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
 class PrintSelected : public PrintHandler
 {
@@ -101,7 +101,7 @@ private:
    bool setSlotCompareToNum(const base::Number* const);
    bool setSlotCompareToDbl(const base::Number* const);
    bool setSlotCondition(const base::String* const);
-   bool setSlotTimeOnly(const base::Number* const);
+   bool setSlotTimeOnly(const base::Boolean* const);
 };
 
 inline unsigned int PrintSelected::getMsgToken() const { return msgToken; }

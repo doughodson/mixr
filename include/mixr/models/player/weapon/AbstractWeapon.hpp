@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class String; class Time; }
+namespace base { class Angle; class Boolean; class Distance; class Number; class String; class Time; }
 namespace models {
 class Designator;
 class Stores;
@@ -17,36 +17,36 @@ class Track;
 //
 // Factory name: AbstractWeapon
 // Slots:
-//    released      <base::Number>    ! Weapon has been released (default: false)
-//    failed        <base::Number>    ! Weapon failed (e.g., reasonableness Test) (default: false)
-//    power         <base::Number>    ! Weapon power flag (default: true)
-//    hang          <base::Number>    ! Will be a hung store (default: false)
-//    hung          <base::Number>    ! Hung store flag (default: false)
+//    released      <base::Boolean>    ! Weapon has been released (default: false)
+//    failed        <base::Boolean>    ! Weapon failed (e.g., reasonableness Test) (default: false)
+//    power         <base::Boolean>    ! Weapon power flag (default: true)
+//    hang          <base::Boolean>    ! Will be a hung store (default: false)
+//    hung          <base::Boolean>    ! Hung store flag (default: false)
 //
-//    maxTOF        <base::Time>      ! max time of flight (seconds or base::Time) (default: 60.0f)
-//    maxTOF        <base::Number>    ! max time of flight (seconds or base::Time)
+//    maxTOF        <base::Time>       ! max time of flight (seconds or base::Time) (default: 60.0f)
+//    maxTOF        <base::Number>     ! max time of flight (seconds or base::Time)
 //
-//    tsg           <base::Time>      ! time to start guidance (seconds or base::Time) (default: 9999.0f)
-//    tsg           <base::Number>    ! time to start guidance (seconds or base::Time)
+//    tsg           <base::Time>       ! time to start guidance (seconds or base::Time) (default: 9999.0f)
+//    tsg           <base::Number>     ! time to start guidance (seconds or base::Time)
 //
-//    maxBurstRng   <base::Distance>  ! max burst range (meters or base::Distance) (default: 500.0f)
-//    maxBurstRng   <base::Number>    ! max burst range (meters or base::Distance)
+//    maxBurstRng   <base::Distance>   ! max burst range (meters or base::Distance) (default: 500.0f)
+//    maxBurstRng   <base::Number>     ! max burst range (meters or base::Distance)
 //
-//    lethalRange   <base::Distance>  ! lethal range (meters or base::Distance) (default: 50.0f)
-//    lethalRange   <base::Number>    ! lethal range (meters or base::Distance)
+//    lethalRange   <base::Distance>   ! lethal range (meters or base::Distance) (default: 50.0f)
+//    lethalRange   <base::Number>     ! lethal range (meters or base::Distance)
 //
-//    sobt          <base::Time>      ! start-of-burn time (seconds or base::Time) (default: 9999.0f)
-//    sobt          <base::Number>    ! start-of-burn time (seconds or base::Time)
+//    sobt          <base::Time>       ! start-of-burn time (seconds or base::Time) (default: 9999.0f)
+//    sobt          <base::Number>     ! start-of-burn time (seconds or base::Time)
 //
-//    eobt          <base::Time>      ! end-of-burn time (seconds or base::Time) (default: 0.0f)
-//    eobt          <base::Number>    ! end-of-burn time (seconds or base::Time)
+//    eobt          <base::Time>       ! end-of-burn time (seconds or base::Time) (default: 0.0f)
+//    eobt          <base::Number>     ! end-of-burn time (seconds or base::Time)
 //
-//    maxGimbal     <base::Angle>     ! max gimbal angle (default: 30.0f * D2RCC)
-//    tgtPos        <base::List>      ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
-//    weaponID      <base::Number>    ! Weapon type ID (optional: user defined number) (default: 0)
-//    dummy         <base::Number>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
-//    jettisonable  <base::Number>    ! Weapon can be jettisoned (default: true)
-//    testTgtName   <base::String>    ! TEST only: target player name (default: 0)
+//    maxGimbal     <base::Angle>      ! max gimbal angle (default: 30.0f * D2RCC)
+//    tgtPos        <base::List>       ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
+//    weaponID      <base::Number>     ! Weapon type ID (optional: user defined number) (default: 0)
+//    dummy         <base::Boolean>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
+//    jettisonable  <base::Boolean>    ! Weapon can be jettisoned (default: true)
+//    testTgtName   <base::String>     ! TEST only: target player name (default: 0)
 //
 // Events:
 //      DESIGNATOR_EVENT    Designator (e.g., LASER) event
@@ -374,11 +374,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotReleased(const base::Number* const);
-   bool setSlotFailed(const base::Number* const);
-   bool setSlotPower(const base::Number* const);
-   bool setSlotWillHang(const base::Number* const);
-   bool setSlotHung(const base::Number* const);
+   bool setSlotReleased(const base::Boolean* const);
+   bool setSlotFailed(const base::Boolean* const);
+   bool setSlotPower(const base::Boolean* const);
+   bool setSlotWillHang(const base::Boolean* const);
+   bool setSlotHung(const base::Boolean* const);
    bool setSlotMaxTOF(const base::Time* const);
    bool setSlotMaxTOF(const base::Number* const);
    bool setSlotTSG(const base::Time* const);
@@ -394,8 +394,8 @@ private:
    bool setSlotMaxGimbal(const base::Angle* const);
    bool setSlotTgtPos(const base::List* const);
    bool setSlotWeaponID(const base::Number* const);
-   bool setSlotDummy(const base::Number* const);
-   bool setSlotJettisonable(const base::Number* const);
+   bool setSlotDummy(const base::Boolean* const);
+   bool setSlotJettisonable(const base::Boolean* const);
    bool setSlotTestTgtName(const base::String* const);
 };
 

@@ -5,7 +5,7 @@
 #include "mixr/models/system/System.hpp"
 
 namespace mixr {
-namespace base { class String; }
+namespace base { class Boolean; class String; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotType(const base::String* const);
-   bool setSlotJettisonable(base::Number* const);
+   bool setSlotJettisonable(base::Boolean* const);
 };
 
 }

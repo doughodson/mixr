@@ -13,6 +13,9 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Distances.hpp"
 
 #include <cstdio>
@@ -32,10 +35,10 @@ END_SLOTTABLE(Route)
 BEGIN_SLOT_MAP(Route)
     ON_SLOT(1, setSlotTo,              base::Identifier)
     ON_SLOT(1, setSlotTo,              base::Number)
-    ON_SLOT(2, setSlotAutoSequence,    base::Number)
+    ON_SLOT(2, setSlotAutoSequence,    base::Boolean)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Distance)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Number)
-    ON_SLOT(4, setSlotWrap,            base::Number)
+    ON_SLOT(4, setSlotWrap,            base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Route)
@@ -689,7 +692,7 @@ bool Route::setSlotTo(const base::Number* const msg)
     return ok;
 }
 
-bool Route::setSlotAutoSequence(const base::Number* const msg)
+bool Route::setSlotAutoSequence(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -719,7 +722,7 @@ bool Route::setSlotAutoSeqDistance(const base::Number* const msg)
     return ok;
 }
 
-bool Route::setSlotWrap(const base::Number* const msg)
+bool Route::setSlotWrap(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

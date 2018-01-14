@@ -5,7 +5,7 @@
 #include "mixr/simulation/Simulation.hpp"
 
 namespace mixr {
-namespace terrain { class Identifier; class Terrain; }
+namespace terrain { class Boolean; class Identifier; class Number; class Terrain; }
 namespace models {
 class AbstractAtmosphere;
 
@@ -157,7 +157,7 @@ private:
    bool setSlotGamingAreaRange(const base::Distance* const);
    bool setSlotEarthModel(const base::EarthModel* const);
    bool setSlotEarthModel(const base::Identifier* const);
-   bool setSlotGamingAreaEarthModel(const base::Number* const);
+   bool setSlotGamingAreaEarthModel(const base::Boolean* const);
 
    // environmental interface
    bool setSlotTerrain(terrain::Terrain* const);

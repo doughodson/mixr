@@ -3,6 +3,7 @@
 #include "mixr/graphics/Display.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
@@ -28,11 +29,11 @@ BEGIN_SLOT_MAP(MapPage)
     ON_SLOT(2, setSlotOuterRadiusDC, base::Number)
     ON_SLOT(3, setSlotRange,         base::Number)
     ON_SLOT(4, setSlotDisplacement,  base::Number)
-    ON_SLOT(5, setSlotCentered,      base::Number)
+    ON_SLOT(5, setSlotCentered,      base::Boolean)
     ON_SLOT(6, setSlotRefLat,        base::Number)
     ON_SLOT(7, setSlotRefLon,        base::Number)
     ON_SLOT(8, setSlotRefHdg,        base::Number)
-    ON_SLOT(9, setSlotNorthUp,       base::Number)
+    ON_SLOT(9, setSlotNorthUp,       base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(MapPage)
@@ -40,7 +41,7 @@ BEGIN_EVENT_HANDLER(MapPage)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateHeading,       base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateReferenceLat,  base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateReferenceLon,  base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateCentered,      base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateCentered,      base::Boolean)
     ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateOuterRadius,   base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE7, onUpdateOuterRadiusDC, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDisplacement,  base::Number)
@@ -382,7 +383,7 @@ bool MapPage::onUpdateReferenceLon(const base::Number* const newOL)
 //------------------------------------------------------------------------------
 // onUpdateCentered() - set our centered / decentered flag
 //------------------------------------------------------------------------------
-bool MapPage::onUpdateCentered(const base::Number* const newC)
+bool MapPage::onUpdateCentered(const base::Boolean* const newC)
 {
    bool ok {};
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
@@ -465,7 +466,7 @@ bool MapPage::setSlotDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 // setSlotCentered() - sets if we are centered or decentered
 //------------------------------------------------------------------------------
-bool MapPage::setSlotCentered(const base::Number* const newC)
+bool MapPage::setSlotCentered(const base::Boolean* const newC)
 {
    bool ok {};
    if (newC != nullptr) ok = setCentered(newC->getBoolean());
@@ -505,7 +506,7 @@ bool MapPage::setSlotRefHdg(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotNorthUp() - sets north up / track up from slot
 //------------------------------------------------------------------------------
-bool MapPage::setSlotNorthUp(const base::Number* const x)
+bool MapPage::setSlotNorthUp(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr) ok = setNorthUp(x->getBoolean());

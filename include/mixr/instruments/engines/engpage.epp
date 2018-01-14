@@ -37,7 +37,7 @@
                             components: {
                                 eng1n1ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -188,7 +188,7 @@
                             components: {
                                 eng2n1ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -339,7 +339,7 @@
                             components: {
                                 eng3n1ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -489,7 +489,7 @@
                             components: {
                                 eng4n1ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -649,7 +649,7 @@
                             components: {
                                 eng1n2ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -799,7 +799,7 @@
                             components: {
                                 eng2n2ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -949,7 +949,7 @@
                             components: {
                                 eng3n2ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -1099,7 +1099,7 @@
                             components: {
                                 eng4n2ro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -1258,7 +1258,7 @@
                             components: {
                                 eng1titro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -1441,7 +1441,7 @@
                             components: {
                                 eng2titro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -1624,7 +1624,7 @@
                             components: {
                                 eng3titro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"
@@ -1807,7 +1807,7 @@
                             components: {
                                 eng4titro:
                                 ( NumericReadout
-                                    inheritColor: 1
+                                    inheritColor: true
                                     font: smallfont
                                     transform: ( Translation -0.95 -0.2 ) 
                                     format: "###.#"

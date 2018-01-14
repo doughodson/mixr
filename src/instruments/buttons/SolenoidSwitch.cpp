@@ -2,6 +2,8 @@
 #include "mixr/instruments/buttons/SolenoidSwitch.hpp"
 
 #include "mixr/graphics/Display.hpp"
+
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -23,7 +25,7 @@ BEGIN_SLOT_MAP(SolenoidSwitch)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(SolenoidSwitch)
-    ON_EVENT_OBJ(SELECT, selectLatch, base::Number)
+    ON_EVENT_OBJ(SELECT, selectLatch, base::Boolean)
 END_EVENT_HANDLER()
 
 SolenoidSwitch::SolenoidSwitch()
@@ -103,7 +105,7 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
 //------------------------------------------------------------------------------
 // selectLatch() - tells our switch if it's ok to "latch"
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::selectLatch(const base::Number* const x)
+bool SolenoidSwitch::selectLatch(const base::Boolean* const x)
 {
     if (x != nullptr) {
         latched = x->getBoolean();

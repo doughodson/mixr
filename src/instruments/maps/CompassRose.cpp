@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/maps/CompassRose.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
@@ -8,15 +9,6 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")
 EMPTY_DELETEDATA(CompassRose)
-
-BEGIN_EVENT_HANDLER(CompassRose)
-    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRotDeg, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateCenRad, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateDecRadius, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateDisplacement, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateCentered, base::Number)
-END_EVENT_HANDLER()
 
 BEGIN_SLOTTABLE(CompassRose)
     "centeredRad",      // our centered radius
@@ -29,6 +21,15 @@ BEGIN_SLOT_MAP(CompassRose)
     ON_SLOT(2, setSlotDeCenteredRadius, base::Number)
     ON_SLOT(3, setSlotDisplacement,     base::Number)
 END_SLOT_MAP()
+
+BEGIN_EVENT_HANDLER(CompassRose)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRotDeg,       base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius,       base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateCenRad,       base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateDecRadius,    base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateDisplacement, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateCentered,     base::Boolean)
+END_EVENT_HANDLER()
 
 CompassRose::CompassRose()
 {
@@ -192,7 +193,7 @@ bool CompassRose::onUpdateDisplacement(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onUpdateCentered() - change our centered status
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateCentered(const base::Number* const x)
+bool CompassRose::onUpdateCentered(const base::Boolean* const x)
 {
     bool ok = false; 
     if (x != nullptr) ok = setCentered(x->getBoolean());

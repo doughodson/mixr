@@ -17,7 +17,7 @@ ftit:
         ( Circle
             transform: ( Translation 0 0.15 )
             color: black
-            filled: 1
+            filled: true
             slices: 50
             radius: 0.1
         )
@@ -124,7 +124,7 @@ ftit:
             color: gray1
             radius: 5.1
             slices: 50
-            filled: 1
+            filled: true
         )
         
     }

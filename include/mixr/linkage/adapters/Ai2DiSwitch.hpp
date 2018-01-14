@@ -5,7 +5,7 @@
 #include "mixr/linkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Number; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class Number; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -28,10 +28,10 @@ namespace linkage {
 //
 // Factory name: Ai2DiSwitch
 // Slots:
-//      di           <Number>    Discrete Input location (IoData's DI channel)
-//      channel      <Number>    Device's AI channel number
-//      level        <Number>    Level to switch DI (default: 0)
-//      inverted     <Boolean>   Inverted bit flag (default: false)
+//      di           <Number>    ! Discrete Input location (IoData's DI channel)
+//      channel      <Number>    ! Device's AI channel number
+//      level        <Number>    ! Level to switch DI (default: 0)
+//      inverted     <Boolean>   ! Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
 class Ai2DiSwitch final: public AbstractAdapter
@@ -65,7 +65,7 @@ private:
    bool setSlotLocation(const base::Number* const);
    bool setSlotChannel(const base::Number* const);
    bool setSlotLevel(const base::Number* const);
-   bool setSlotInverted(const base::Number* const);
+   bool setSlotInverted(const base::Boolean* const);
 };
 
 }

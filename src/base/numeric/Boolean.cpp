@@ -4,10 +4,32 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Boolean, "boolean")
-EMPTY_SLOTTABLE(Boolean)
-EMPTY_COPYDATA(Boolean)
+IMPLEMENT_SUBCLASS(Boolean, "Boolean")
 EMPTY_DELETEDATA(Boolean)
+
+BEGIN_SLOTTABLE(Boolean)
+    "value",
+END_SLOTTABLE(Boolean)
+
+BEGIN_SLOT_MAP(Boolean)
+    ON_SLOT(1, setSlotValue, Boolean)
+END_SLOT_MAP()
+
+void Boolean::copyData(const Boolean& org, const bool)
+{
+   BaseClass::copyData(org);
+   value = org.value;
+}
+
+bool Boolean::setSlotValue(const Boolean* const x)
+{
+   bool ok{};
+   if (x != nullptr) {
+      value = x->value;
+      ok = true;
+   }
+   return ok;
+}
 
 }
 }

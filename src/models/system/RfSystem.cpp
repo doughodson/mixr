@@ -9,6 +9,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Powers.hpp"
@@ -45,7 +46,7 @@ BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(8,  setSlotRfTransmitLoss,      base::Number)
     ON_SLOT(9,  setSlotRfReceiveLoss,       base::Number)
     ON_SLOT(10, setSlotRfSignalProcessLoss, base::Number)
-    ON_SLOT(11, setSlotDisableEmissions,    base::Number)
+    ON_SLOT(11, setSlotDisableEmissions,    base::Boolean)
     ON_SLOT(12, setSlotBandwidthNoise,      base::Number)
 END_SLOT_MAP()
 
@@ -775,7 +776,7 @@ bool RfSystem::setSlotRfSignalProcessLoss(base::Number* const v)
 }
 
 // setSlotDisableEmissions() -- sets the disable sending emissions flag
-bool RfSystem::setSlotDisableEmissions(base::Number* const msg)
+bool RfSystem::setSlotDisableEmissions(base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

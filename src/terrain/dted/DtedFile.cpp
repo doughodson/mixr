@@ -34,7 +34,9 @@
 //==============================================================================
 
 #include "mixr/terrain/dted/DtedFile.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
+
 #include <fstream>
 #include <cstdio>
 #include <cstring>
@@ -104,7 +106,7 @@ BEGIN_SLOTTABLE(DtedFile)
 END_SLOTTABLE(DtedFile)
 
 BEGIN_SLOT_MAP(DtedFile)
-   ON_SLOT(1, setSlotVerifyChecksum, base::Number)
+   ON_SLOT(1, setSlotVerifyChecksum, base::Boolean)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -129,7 +131,7 @@ void DtedFile::copyData(const DtedFile& org, const bool)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool DtedFile::setSlotVerifyChecksum(const base::Number* const msg)
+bool DtedFile::setSlotVerifyChecksum(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

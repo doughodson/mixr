@@ -14,7 +14,7 @@ namespace graphics {
 // Factory name: Circle
 // Slots:
 //  radius    <Number>    ! Radius of the circle (default: 1 )
-//  filled    <Number>    ! True if circle is filled (default: false)
+//  filled    <Boolean>   ! True if circle is filled (default: false)
 //  slices    <Number>    ! Number of slices in the circle (i.e. number of sides)
 //                        ! (default: 16)
 //
@@ -62,7 +62,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotRadius(const base::Number* const);
-    bool setSlotFilled(const base::Number* const);
+    bool setSlotFilled(const base::Boolean* const);
     bool setSlotSlices(const base::Number* const);
 };
 
@@ -103,7 +103,7 @@ private:
 // Slots:
 //  startAngle   <Number>    ! Start angle of the arc in degrees (default: 0 )
 //  arcLength    <Number>    ! length of the arc in degrees (default: 90)
-//  connect      <Number>    ! if true, we connect the lines (so the circle looks like a piece of pie,
+//  connect      <Boolean>   ! if true, we connect the lines (so the circle looks like a piece of pie,
 //                           ! instead of an open ended arc) (default: false)
 //
 // Public member functions:
@@ -143,7 +143,7 @@ private:
     // slot table helper methods   
     bool setSlotStartAngle(const base::Number* const);
     bool setSlotArcLength(const base::Number* const);
-    bool setSlotIsConnected(const base::Number* const);
+    bool setSlotIsConnected(const base::Boolean* const);
 };
 
 //------------------------------------------------------------------------------
@@ -220,7 +220,7 @@ public:
 //
 // Factory name: Line
 // Slots:
-//  segment   <Number>    ! True if line segments (default: false)
+//  segment   <Boolean>    ! True if line segments (default: false)
 //
 // Public member functions:
 //
@@ -247,7 +247,7 @@ private:
 
 private:
     // slot table helper methods      
-    bool setSlotSegments(const base::Number* const);
+    bool setSlotSegments(const base::Boolean* const);
 };
 
 //------------------------------------------------------------------------------
@@ -273,7 +273,7 @@ protected:
 
 private:
     // slot table helper methods
-    bool setSlotStrip(const base::Number* const);
+    bool setSlotStrip(const base::Boolean* const);
 };
 
 //------------------------------------------------------------------------------
@@ -301,7 +301,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotFan(const base::Number* const);
+    bool setSlotFan(const base::Boolean* const);
 };
 
 }

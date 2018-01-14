@@ -5,6 +5,8 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/List.hpp"
+
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
@@ -19,11 +21,6 @@ namespace mixr {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Gun, "Gun")
-
-// Default Parameters (based on GE M61A1)
-const int Gun::DEFAULT_ROUNDS_PER_MINUTE{6600};   // Default rate (rds per min)
-const int Gun::DEFAULT_NUM_ROUNDS{510};           // Default load
-const int Gun::DEFAULT_BURST_RATE{10};            // Default burst rate
 
 BEGIN_SLOTTABLE(Gun)
     "bulletType",       //  1: Type of bullet (have have bullets to work)
@@ -42,7 +39,7 @@ END_SLOTTABLE(Gun)
 BEGIN_SLOT_MAP(Gun)
     ON_SLOT(1, setBulletType,     Bullet)
     ON_SLOT(2, setSlotNumRounds,  base::Number)
-    ON_SLOT(3, setSlotUnlimited,  base::Number)
+    ON_SLOT(3, setSlotUnlimited,  base::Boolean)
     ON_SLOT(4, setSlotRate,       base::Number)
     ON_SLOT(5, setSlotBurstRate,  base::Number)
     ON_SLOT(6, setSlotPosition,   base::List)
@@ -399,7 +396,7 @@ bool Gun::setSlotNumRounds(const base::Number* const num)
 }
 
 // Unlimited rounds flag
-bool Gun::setSlotUnlimited(const base::Number* const num)
+bool Gun::setSlotUnlimited(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {

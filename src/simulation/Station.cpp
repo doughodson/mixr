@@ -11,6 +11,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -78,7 +79,7 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(15, setSlotBackgroundStackSize,   base::Number)
 
    ON_SLOT(16, setSlotStartupResetTime,      base::Time)
-   ON_SLOT(17, setSlotEnableUpdateTimers,    base::Number)
+   ON_SLOT(17, setSlotEnableUpdateTimers,    base::Boolean)
 
    ON_SLOT(18, setSlotDataRecorder,           AbstractDataRecorder)
 END_SLOT_MAP()
@@ -1217,7 +1218,7 @@ bool Station::setSlotFastForwardRate(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Enables/disables the base::Timer::updateTimers() call
 //------------------------------------------------------------------------------
-bool Station::setSlotEnableUpdateTimers(const base::Number* const msg)
+bool Station::setSlotEnableUpdateTimers(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

@@ -45,15 +45,15 @@ class IgThread;
 //
 // Factory name: CigiHost
 // Slots:
-//    session              (HostSession)     CIGI host session
-//    async                (Number)          True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
-//    hideOwnshipModel     (Number)          True to hide the ownship's model (default: true - ownship's model is not seen)
-//    ownshipModel         (Number)          Ownship's model ID
-//    mslTrailModel        (Number)          "Missile Trail" effect model ID
-//    smokePlumeModel      (Number)          "Smoke Plume" effect model ID
-//    airExplosionModel    (Number)          "Air Explosion" effect model ID
-//    groundExplosionModel (Number)          "Ground Explosion" effect model ID
-//    shipWakeModel        (Number)          "Ship Wake" effect model ID
+//    session               <HostSession>   !  CIGI host session
+//    async                 <Number>        !  True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
+//    hideOwnshipModel      <Boolean>       !  True to hide the ownship's model (default: true - ownship's model is not seen)
+//    ownshipModel          <Number>        !  Ownship's model ID
+//    mslTrailModel         <Number>        !  "Missile Trail" effect model ID
+//    smokePlumeModel       <Number>        !  "Smoke Plume" effect model ID
+//    airExplosionModel     <Number>        !  "Air Explosion" effect model ID
+//    groundExplosionModel  <Number>        !  "Ground Explosion" effect model ID
+//    shipWakeModel         <Number>        !  "Ship Wake" effect model ID
 //
 // Note: In the async mode, the sendCigiData() function, which sends the CIGI
 // packets to the session, is called by our frameSync() function in the
@@ -255,7 +255,7 @@ private:
    // slot table helper methods
    bool setSlotHostSession(HostSession* const);
    bool setSlotASyncMode(const base::Boolean* const);
-   bool setSlotHideOwnshipModel(const base::Number* const);
+   bool setSlotHideOwnshipModel(const base::Boolean* const);
    bool setSlotOwnshipModelId(const base::Number* const);
    bool setSlotMslTrailModelId(const base::Number* const);
    bool setSlotSmokePlumeModelId(const base::Number* const);

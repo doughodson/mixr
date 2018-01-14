@@ -7,7 +7,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Degrees; }
+namespace base { class Boolean; class Degrees; }
 namespace graphics {
 class SlSymbol;
 
@@ -71,7 +71,8 @@ class SlSymbol;
 // Factory name: SymbolLoader
 // Slots:
 //     templates         <PairStream>   ! List of templates to use for symbols
-//     showOnlyInRange   <Number>       ! only show symbols within range (default: true)
+//     showOnlyInRange   <Boolean>      ! only show symbols within range (default: true)
+//     interconnect      <Boolean>      ! interconnect the symbols (default: false)
 //
 //------------------------------------------------------------------------------
 class SymbolLoader : public MapPage
@@ -179,16 +180,16 @@ protected:
 private:
    void initData();
 
-   base::PairStream* templates {};                // holds our pairstream of templates
-   std::array<SlSymbol*, MAX_SYMBOLS> symbols {}; // holds our array of symbols
-   bool showInRangeOnly {true};                   // only show the symbols within our range, else draw all the symbols if false
-   bool interconnect {};                          // Connect our symbols with a line?
+   base::PairStream* templates{};                // holds our pairstream of templates
+   std::array<SlSymbol*, MAX_SYMBOLS> symbols{}; // holds our array of symbols
+   bool showInRangeOnly{true};                   // only show the symbols within our range, else draw all the symbols if false
+   bool interconnect{};                          // Connect our symbols with a line?
 
 private:
    // slot table helper methods
    bool setSlotTemplates(base::PairStream*);
-   bool setSlotShowInRangeOnly(const base::Number* const);
-   bool setSlotInterconnect(const base::Number* const);
+   bool setSlotShowInRangeOnly(const base::Boolean* const);
+   bool setSlotInterconnect(const base::Boolean* const);
 };
 
 //------------------------------------------------------------------------------

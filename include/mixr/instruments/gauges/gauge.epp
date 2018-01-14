@@ -2,7 +2,7 @@
 // send it UPDATE_INSTRUMENTS 
 // Analog Gauge is an instrument that knows how to draw from left to right or top to bottom, based on a value.  It is a lot like an AnalogDial, only instead of rotating, it
 // draws a nice bar graph to graphically represent a given value.
-gauge:  
+gauge:
 ( AnalogGauge
     // this is the gauge outline
     color: white
@@ -11,7 +11,7 @@ gauge:
     leftBoundary: -0.25
     rightBoundary: 0.25
     // We are using this analog gauge as the outline for the inner bar, so we tell it to just draw the outline by setting our outlined flag.
-    outlined: 1
+    outlined: true
     linewidth: 3
     // Our scaling table works a little different here than for a dial, because we are translating towards or away from a certain unit, instead of rotating a certain degree
     scalingTable: 
@@ -26,7 +26,7 @@ gauge:
         // here is filled in portion of the gauge.  Notice it doesn't have the "outline:" slot flag.  This is because we are drawing the inner portion of 
         // the bar graph
         ( AnalogGauge
-            vertical: 1
+            vertical: true
             color: ( ColorRotary
                         breakpoints: {
                             0 
@@ -69,8 +69,8 @@ gauge:
         ( TickMarks
             // move up one to start
             //transform: ( Translation 0 1 )
-            // This slot tells us that we should draw vertically.  This is default to 1, but we set it here to show how to change it.  
-            vertical: 1
+            // This slot tells us that we should draw vertically.  This is default to 'true', but we set it here to show how to change it.  
+            vertical: true
             // Amount of tick marks to draw
             quantity: 10
             // How big is the gauge?  We have to play with this value to
@@ -103,7 +103,7 @@ gauge:
         // the gauge in the color determined by the instrument.  This way we can change the numeric value color along with 
         // the gauge color.
         ( GaugeSlider
-            vertical: 1
+            vertical: true
             scalingTable:
                 ( Table1
                     x: [ 0 100 ]
@@ -128,7 +128,7 @@ gauge:
                     components: {
                         gr:    
                         ( NumericReadout
-                            inheritColor: 1
+                            inheritColor: true
                             transform: ( Translation 0.6 0 ) 
                             format: "###"
                         )

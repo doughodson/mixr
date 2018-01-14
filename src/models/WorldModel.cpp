@@ -7,6 +7,9 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/util/nav_utils.hpp"
 
 // environment models
@@ -50,7 +53,7 @@ BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 4, setSlotEarthModel,           base::EarthModel)
     ON_SLOT( 4, setSlotEarthModel,           base::Identifier)
 
-    ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Number)
+    ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Boolean)
 
     ON_SLOT( 6, setSlotTerrain,              terrain::Terrain)
     ON_SLOT( 7, setSlotAtmosphere,           AbstractAtmosphere)
@@ -328,7 +331,7 @@ bool WorldModel::setSlotEarthModel(const base::Identifier* const msg)
    return ok;
 }
 
-bool WorldModel::setSlotGamingAreaEarthModel(const base::Number* const msg)
+bool WorldModel::setSlotGamingAreaEarthModel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

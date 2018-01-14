@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; }
+namespace base { class Boolean; class Identifier; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -73,7 +73,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotSeekerName(base::Identifier* const);
-   bool setSlotDisableQueries(base::Number* const);
+   bool setSlotDisableQueries(base::Boolean* const);
 };
 
 }

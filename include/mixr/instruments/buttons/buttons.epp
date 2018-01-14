@@ -127,7 +127,7 @@ button3:
                        ( Circle
                             color: gray2
                             radius: 1
-                            filled: 1
+                            filled: true
                             slices: 25
                         )
                     }
@@ -148,7 +148,7 @@ button3:
                        ( Circle
                             color: white
                             radius: 1
-                            filled: 1
+                            filled: true
                             slices: 25
                         )
                     }
@@ -219,7 +219,7 @@ knob:
             }
         )
         ( Sphere
-            filled: 1
+            filled: true
             radius: 2
             slices: 50
             material: m1
@@ -268,7 +268,7 @@ solenoid:
                             components: {
                                 ( Polygon
                                     color: gray
-                                    mask: 0
+                                    mask: false
                                     vertices: {
                                         [ -1 -1 ]
                                         [  1 -1 ]
@@ -284,7 +284,7 @@ solenoid:
                                 ( Circle
                                     color: white
                                     radius: 0.8
-                                    filled: 1
+                                    filled: true
                                 )
                             }
                         )
@@ -307,7 +307,7 @@ solenoid:
                             components: {
                                 ( Polygon
                                     color: gray
-                                    mask: 0
+                                    mask: false
                                     vertices: {
                                         [ -1 -1 ]
                                         [  1 -1 ]
@@ -323,7 +323,7 @@ solenoid:
                                 ( Circle
                                     color: white
                                     radius: 0.8
-                                    filled: 1
+                                    filled: true
                                 )
                                 ( Polygon
                                     color: white
@@ -356,7 +356,7 @@ solenoid:
                             components: {
                                 ( Polygon
                                     color: gray
-                                    mask: 0 // you can set this to 1 to have nothing draw
+                                    mask: false // you can set this to 'true' to have nothing draw
                                     vertices: {
                                         [ -1 -1 ]
                                         [  1 -1 ]
@@ -372,7 +372,7 @@ solenoid:
                                 ( Circle
                                     color: white
                                     radius: 0.8
-                                    filled: 1
+                                    filled: true
                                 )
                                 ( Polygon
                                     color: white

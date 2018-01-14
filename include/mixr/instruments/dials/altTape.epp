@@ -4,7 +4,7 @@
     components: {
         ( AsciiText
             color: white
-            vertical: 1 
+            vertical: true
             transform: ( Translation 0 0.99 )
             text: "901234567890"
         )

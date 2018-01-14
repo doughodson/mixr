@@ -11,6 +11,7 @@
 #include <fedtime.hh>
 
 namespace mixr {
+namespace base { class Boolean; class Number; class String; }
 namespace hla {
 class Ambassador;
 class Nib;
@@ -22,9 +23,9 @@ class Nib;
 //
 // Factory Name: HlaNetIO
 // Slots:
-//      fedFile:            ! FED file name
-//      regulatingTime:     ! Regulating time flag
-//      constrainedTime:    ! constrained time flag
+//      fedFile:            <base::String>    ! FED file name
+//      regulatingTime:     <base::Boolean>   ! Regulating time flag
+//      constrainedTime:    <base::Boolean>   ! constrained time flag
 //
 //------------------------------------------------------------------------------
 class NetIO : public interop::NetIO
@@ -37,19 +38,19 @@ public:
 
    // Max active HLA object classes
    // Note: the class handle indexes range from 1 to MAX_CLASSES
-   static const unsigned int MAX_CLASSES{30};
+   static const int MAX_CLASSES{30};
 
    // Max active HLA object attributes
    // Note: the class handle indexes range from 1 to MAX_ATTRIBUTES
-   static const unsigned int MAX_ATTRIBUTES{100};
+   static const int MAX_ATTRIBUTES{100};
 
    // Max active HLA interactions
    // Note: the class handle indexes range from 1 to MAX_INTERACTIONS
-   static const unsigned int MAX_INTERACTIONS{30};
+   static const int MAX_INTERACTIONS{30};
 
    // Max active HLA interaction parameters
    // Note: the class handle indexes range from 1 to MAX_CLASSES
-   static const unsigned int MAX_PARAMETERS{100};
+   static const int MAX_PARAMETERS{100};
 
 public:
 
@@ -248,8 +249,8 @@ private:
 private:
     // slot table helper methods
     bool setSlotFedFile(base::String* const);
-    bool setSlotRegulatingTime(base::Number* const);
-    bool setSlotConstrainedTime(base::Number* const);
+    bool setSlotRegulatingTime(base::Boolean* const);
+    bool setSlotConstrainedTime(base::Boolean* const);
 };
 
 }

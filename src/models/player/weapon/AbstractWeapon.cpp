@@ -18,6 +18,9 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/osg/Matrixd"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Times.hpp"
@@ -54,11 +57,11 @@ BEGIN_SLOTTABLE(AbstractWeapon)
 END_SLOTTABLE(AbstractWeapon)
 
 BEGIN_SLOT_MAP(AbstractWeapon)
-    ON_SLOT( 1,  setSlotReleased,    base::Number)
-    ON_SLOT( 2,  setSlotFailed,      base::Number)
-    ON_SLOT( 3,  setSlotPower,       base::Number)
-    ON_SLOT( 4,  setSlotWillHang,    base::Number)
-    ON_SLOT( 5,  setSlotHung,        base::Number)
+    ON_SLOT( 1,  setSlotReleased,    base::Boolean)
+    ON_SLOT( 2,  setSlotFailed,      base::Boolean)
+    ON_SLOT( 3,  setSlotPower,       base::Boolean)
+    ON_SLOT( 4,  setSlotWillHang,    base::Boolean)
+    ON_SLOT( 5,  setSlotHung,        base::Boolean)
 
     ON_SLOT( 6,  setSlotMaxTOF,      base::Time)
     ON_SLOT( 6,  setSlotMaxTOF,      base::Number)
@@ -69,22 +72,22 @@ BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT( 8,  setSlotMaxBurstRng, base::Distance)
     ON_SLOT( 8,  setSlotMaxBurstRng, base::Number)
 
-    ON_SLOT( 9, setSlotLethalRange, base::Distance)
-    ON_SLOT( 9, setSlotLethalRange, base::Number)
+    ON_SLOT( 9, setSlotLethalRange,  base::Distance)
+    ON_SLOT( 9, setSlotLethalRange,  base::Number)
 
-    ON_SLOT(10, setSlotSOBT,        base::Time)
-    ON_SLOT(10, setSlotSOBT,        base::Number)
+    ON_SLOT(10, setSlotSOBT,         base::Time)
+    ON_SLOT(10, setSlotSOBT,         base::Number)
 
-    ON_SLOT(11, setSlotEOBT,        base::Time)
-    ON_SLOT(11, setSlotEOBT,        base::Number)
+    ON_SLOT(11, setSlotEOBT,         base::Time)
+    ON_SLOT(11, setSlotEOBT,         base::Number)
 
-    ON_SLOT(12, setSlotMaxGimbal,   base::Angle)
+    ON_SLOT(12, setSlotMaxGimbal,    base::Angle)
 
-    ON_SLOT(13, setSlotTgtPos,      base::List)
-    ON_SLOT(14, setSlotWeaponID,    base::Number)
-    ON_SLOT(15, setSlotDummy,       base::Number)
-    ON_SLOT(16, setSlotJettisonable, base::Number)
-    ON_SLOT(17, setSlotTestTgtName, base::String)
+    ON_SLOT(13, setSlotTgtPos,       base::List)
+    ON_SLOT(14, setSlotWeaponID,     base::Number)
+    ON_SLOT(15, setSlotDummy,        base::Boolean)
+    ON_SLOT(16, setSlotJettisonable, base::Boolean)
+    ON_SLOT(17, setSlotTestTgtName,  base::String)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AbstractWeapon)
@@ -1289,42 +1292,42 @@ bool AbstractWeapon::setDummy(const bool f)
 //------------------------------------------------------------------------------
 
 // released:  Weapon has been released
-bool AbstractWeapon::setSlotReleased(const base::Number* const p)
+bool AbstractWeapon::setSlotReleased(const base::Boolean* const p)
 {
     setReleased( p->getBoolean() );
     return true;
 }
 
 // failed: Weapon failed (e.g., reasonableness Test)
-bool AbstractWeapon::setSlotFailed(const base::Number* const p)
+bool AbstractWeapon::setSlotFailed(const base::Boolean* const p)
 {
     setFailed( p->getBoolean() );
     return true;
 }
 
 // Power: weapon power flag
-bool AbstractWeapon::setSlotPower(const base::Number* const p)
+bool AbstractWeapon::setSlotPower(const base::Boolean* const p)
 {
     setPower( p->getBoolean() );
     return true;
 }
 
 // hang: Will be a hung store
-bool AbstractWeapon::setSlotWillHang(const base::Number* const p)
+bool AbstractWeapon::setSlotWillHang(const base::Boolean* const p)
 {
     setWillHang( p->getBoolean() );
     return true;
 }
 
 // hung: Hung store
-bool AbstractWeapon::setSlotHung(const base::Number* const p)
+bool AbstractWeapon::setSlotHung(const base::Boolean* const p)
 {
     setHung( p->getBoolean() );
     return true;
 }
 
 // dummy: Dummy store
-bool AbstractWeapon::setSlotDummy(const base::Number* const p)
+bool AbstractWeapon::setSlotDummy(const base::Boolean* const p)
 {
     setDummy( p->getBoolean() );
     return true;
@@ -1458,7 +1461,7 @@ bool AbstractWeapon::setSlotWeaponID(const base::Number* const p)
 }
 
 // jettisonable: weapon can be jettisoned
-bool AbstractWeapon::setSlotJettisonable(const base::Number* const p)
+bool AbstractWeapon::setSlotJettisonable(const base::Boolean* const p)
 {
     setJettisonable( p->getBoolean() );
     return true;

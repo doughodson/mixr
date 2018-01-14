@@ -6,7 +6,9 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 #include <cmath>
@@ -33,7 +35,7 @@ END_SLOTTABLE(ScanGimbal)
 
 BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 1, setSlotScanMode,          base::Identifier)
-    ON_SLOT( 2, setSlotLeftToRightScan,   base::Number)
+    ON_SLOT( 2, setSlotLeftToRightScan,   base::Boolean)
     ON_SLOT( 3, setSlotScanWidth,         base::Number)
     ON_SLOT( 4, setSlotSearchVolume,      base::List)
     ON_SLOT( 5, setSlotRefPosition,       base::List)
@@ -859,7 +861,7 @@ bool ScanGimbal::setSlotScanMode(base::Identifier* const newMode)
 }
 
 // setSlotLeftToRightScan() - calls setLeftToRightScan()
-bool ScanGimbal::setSlotLeftToRightScan(const base::Number* const newLeftToRightScan)
+bool ScanGimbal::setSlotLeftToRightScan(const base::Boolean* const newLeftToRightScan)
 {
     bool ok{};
     if (newLeftToRightScan != nullptr) {

@@ -1,5 +1,6 @@
 
 #include "mixr/instruments/gauges/AnalogGauge.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
@@ -19,8 +20,8 @@ END_SLOTTABLE(AnalogGauge)
 BEGIN_SLOT_MAP(AnalogGauge)
     ON_SLOT(1, setSlotLeftBoundary,  base::Number)
     ON_SLOT(2, setSlotRightBoundary, base::Number)
-    ON_SLOT(3, setSlotIsOutlined,    base::Number)
-    ON_SLOT(4, setSlotIsVertical,    base::Number)
+    ON_SLOT(3, setSlotIsOutlined,    base::Boolean)
+    ON_SLOT(4, setSlotIsVertical,    base::Boolean)
 END_SLOT_MAP()
 
 AnalogGauge::AnalogGauge()
@@ -100,16 +101,16 @@ bool AnalogGauge::setSlotRightBoundary(const base::Number* const newRB)
 //------------------------------------------------------------------------------
 // setSlotIsOutlined() -- determines whether we are a filled bar or outlined
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotIsOutlined(const base::Number* const newO)
+bool AnalogGauge::setSlotIsOutlined(const base::Boolean* const newO)
 {
-    bool ok = false;
+    bool ok{};
     if (newO != nullptr) ok = setIsOutlined(newO->getBoolean());
     return ok;
 }
 //------------------------------------------------------------------------------
 // setSlotIsVertical() - sets our vertical flag
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotIsVertical(const base::Number* const newV)
+bool AnalogGauge::setSlotIsVertical(const base::Boolean* const newV)
 {
     bool ok = false;
     if (newV != nullptr) ok = setIsVertical(newV->getBoolean());

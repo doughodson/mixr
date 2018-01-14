@@ -17,8 +17,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Vec2d;    class Vec3d;  class Angle; class Boolean;
-                 class Distance; class LatLon; class List;  class Time; }
+namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; class Vec2d; class Vec3d;}
 namespace simulation { class AbstractNib; }
 namespace models {
 class WorldModel;
@@ -1112,29 +1111,26 @@ private:
    bool setSlotIrSignature(IrSignature* const);
    bool setSlotCamouflageType(const base::Number* const);
 
-   bool setSlotTerrainElevReq(const base::Number* const);
-   bool setSlotInterpolateTerrain(const base::Number* const);
+   bool setSlotTerrainElevReq(const base::Boolean* const);
+   bool setSlotInterpolateTerrain(const base::Boolean* const);
    bool setSlotTerrainOffset(const base::Distance* const);
 
-   bool setSlotPositionFreeze(const base::Number* const);
-   bool setSlotAltitudeFreeze(const base::Number* const);
-   bool setSlotAttitudeFreeze(const base::Number* const);
-   bool setSlotFuelFreeze(const base::Number* const);
-   bool setSlotCrashOverride(const base::Number* const);
-   bool setSlotKillOverride(const base::Number* const);
-   bool setSlotKillRemoval(const base::Number* const);
-   bool setSlotEnableNetOutput(const base::Number* const);
+   bool setSlotPositionFreeze(const base::Boolean* const);
+   bool setSlotAltitudeFreeze(const base::Boolean* const);
+   bool setSlotAttitudeFreeze(const base::Boolean* const);
+   bool setSlotFuelFreeze(const base::Boolean* const);
+   bool setSlotCrashOverride(const base::Boolean* const);
+   bool setSlotKillOverride(const base::Boolean* const);
+   bool setSlotKillRemoval(const base::Boolean* const);
+   bool setSlotEnableNetOutput(const base::Boolean* const);
    bool setSlotDataLogTime(const base::Time* const);
 
    bool setSlotTestRollRate(const base::Angle* const);
    bool setSlotTestPitchRate(const base::Angle* const);
    bool setSlotTestYawRate(const base::Angle* const);
-   bool setSlotTestBodyAxis(const base::Number* const);
+   bool setSlotTestBodyAxis(const base::Boolean* const);
 
    bool setSlotUseCoordSys(base::String* const);
-
-//   bool setSlotID(const base::Number* const);
-//   bool setSlotInitMode(base::String* const);
 };
 
 #include "mixr/models/player/Player.inl"

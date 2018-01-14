@@ -153,24 +153,24 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(17, setSlotIrSignature,        IrSignature)
    ON_SLOT(18, setSlotCamouflageType,     base::Number)
 
-   ON_SLOT(19, setSlotTerrainElevReq,     base::Number)
-   ON_SLOT(20, setSlotInterpolateTerrain, base::Number)
+   ON_SLOT(19, setSlotTerrainElevReq,     base::Boolean)
+   ON_SLOT(20, setSlotInterpolateTerrain, base::Boolean)
    ON_SLOT(21, setSlotTerrainOffset,      base::Distance)
 
-   ON_SLOT(22, setSlotPositionFreeze,     base::Number)
-   ON_SLOT(23, setSlotAltitudeFreeze,     base::Number)
-   ON_SLOT(24, setSlotAttitudeFreeze,     base::Number)
-   ON_SLOT(25, setSlotFuelFreeze,         base::Number)
-   ON_SLOT(26, setSlotCrashOverride,      base::Number)
-   ON_SLOT(27, setSlotKillOverride,       base::Number)
-   ON_SLOT(28, setSlotKillRemoval,        base::Number)
-   ON_SLOT(29, setSlotEnableNetOutput,    base::Number)
+   ON_SLOT(22, setSlotPositionFreeze,     base::Boolean)
+   ON_SLOT(23, setSlotAltitudeFreeze,     base::Boolean)
+   ON_SLOT(24, setSlotAttitudeFreeze,     base::Boolean)
+   ON_SLOT(25, setSlotFuelFreeze,         base::Boolean)
+   ON_SLOT(26, setSlotCrashOverride,      base::Boolean)
+   ON_SLOT(27, setSlotKillOverride,       base::Boolean)
+   ON_SLOT(28, setSlotKillRemoval,        base::Boolean)
+   ON_SLOT(29, setSlotEnableNetOutput,    base::Boolean)
    ON_SLOT(30, setSlotDataLogTime,        base::Time)
 
    ON_SLOT(31, setSlotTestRollRate,       base::Angle)
    ON_SLOT(32, setSlotTestPitchRate,      base::Angle)
    ON_SLOT(33, setSlotTestYawRate,        base::Angle)
-   ON_SLOT(34, setSlotTestBodyAxis,       base::Number)
+   ON_SLOT(34, setSlotTestBodyAxis,       base::Boolean)
 
    ON_SLOT(35, setSlotUseCoordSys,        base::String)
 END_SLOT_MAP()
@@ -3769,7 +3769,7 @@ bool Player::setSlotTestYawRate(const base::Angle* const msg)
 }
 
 // testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
-bool Player::setSlotTestBodyAxis(const base::Number* const msg)
+bool Player::setSlotTestBodyAxis(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -3891,7 +3891,7 @@ bool Player::setSlotCamouflageType(const base::Number* const msg)
 }
 
 // terrainElevReq: Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
-bool Player::setSlotTerrainElevReq(const base::Number* const num)
+bool Player::setSlotTerrainElevReq(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3901,7 +3901,7 @@ bool Player::setSlotTerrainElevReq(const base::Number* const num)
 }
 
 // interpolateTerrain: Interpolate our DTED terrain elevation data (default: false)
-bool Player::setSlotInterpolateTerrain(const base::Number* const msg)
+bool Player::setSlotInterpolateTerrain(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -3921,7 +3921,7 @@ bool Player::setSlotTerrainOffset(const base::Distance* const msg)
 }
 
 // positionFreeze: Position freeze (default: false)
-bool Player::setSlotPositionFreeze(const base::Number* const num)
+bool Player::setSlotPositionFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3931,7 +3931,7 @@ bool Player::setSlotPositionFreeze(const base::Number* const num)
 }
 
 // altitudeFreeze: Altitude freeze (default: false)
-bool Player::setSlotAltitudeFreeze(const base::Number* const num)
+bool Player::setSlotAltitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3941,7 +3941,7 @@ bool Player::setSlotAltitudeFreeze(const base::Number* const num)
 }
 
 // attitudeFreeze: Attitude freeze (default: false)
-bool Player::setSlotAttitudeFreeze(const base::Number* const num)
+bool Player::setSlotAttitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3951,7 +3951,7 @@ bool Player::setSlotAttitudeFreeze(const base::Number* const num)
 }
 
 // fuelFreeze: Fuel freeze (default: false)
-bool Player::setSlotFuelFreeze(const base::Number* const num)
+bool Player::setSlotFuelFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3961,7 +3961,7 @@ bool Player::setSlotFuelFreeze(const base::Number* const num)
 }
 
 // crashOverride: Crash Override (i.e., ignore collision and crash events)(default: false)
-bool Player::setSlotCrashOverride(const base::Number* const num)
+bool Player::setSlotCrashOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3971,7 +3971,7 @@ bool Player::setSlotCrashOverride(const base::Number* const num)
 }
 
 // killOverride: Kill/Damage Override -- player can not be killed/damaged (default: false)
-bool Player::setSlotKillOverride(const base::Number* const num)
+bool Player::setSlotKillOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -3981,7 +3981,7 @@ bool Player::setSlotKillOverride(const base::Number* const num)
 }
 
 // killRemoval: If true destroyed players are set to KILLED and are eventually removed (default: false)
-bool Player::setSlotKillRemoval(const base::Number* const msg)
+bool Player::setSlotKillRemoval(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -3991,7 +3991,7 @@ bool Player::setSlotKillRemoval(const base::Number* const msg)
 }
 
 // enableNetOutput: Enable network output of this player (default: true)
-bool Player::setSlotEnableNetOutput(const base::Number* const msg)
+bool Player::setSlotEnableNetOutput(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

@@ -2,7 +2,7 @@
 #include "mixr/graphics/fonts/BitmapFont.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
@@ -15,15 +15,15 @@ IMPLEMENT_SUBCLASS(BitmapFont, "BitmapFont")
 EMPTY_DELETEDATA(BitmapFont)
 
 // Default font size
-const unsigned int defaultFontWidth {10};
-const unsigned int defaultFontHeight {15};
+const int defaultFontWidth{10};
+const int defaultFontHeight{15};
 
 BEGIN_SLOTTABLE(BitmapFont)
     "reverse",      // Invert the bitmap's bits (reverse video)
 END_SLOTTABLE(BitmapFont)
 
 BEGIN_SLOT_MAP(BitmapFont)
-    ON_SLOT(1, setSlotReverse, base::Number)
+    ON_SLOT(1, setSlotReverse, base::Boolean)
 END_SLOT_MAP()
 
 BitmapFont::BitmapFont()
@@ -152,7 +152,7 @@ void BitmapFont::loadFont()
 //------------------------------------------------------------------------------
 // sets text in reverse type
 //------------------------------------------------------------------------------
-bool BitmapFont::setSlotReverse(const base::Number* const rnumber)
+bool BitmapFont::setSlotReverse(const base::Boolean* const rnumber)
 {
     if (rnumber != nullptr)
         reverse = rnumber->getBoolean();
@@ -426,7 +426,7 @@ static const char* defaultMap[] =
    nullptr                    // 0xFF
 };
 
-const unsigned int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
+const int BitmapFont::defaultNumFonts = sizeof(defaultMap) / sizeof(const char*);
 const char** BitmapFont::defaultFontMap = &defaultMap[0];
 
 // Reverse the order of the bits

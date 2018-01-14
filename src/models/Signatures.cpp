@@ -9,6 +9,9 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/functors/Table2.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Areas.hpp"
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/units/Distances.hpp"
@@ -405,9 +408,9 @@ END_SLOTTABLE(SigAzEl)
 
 BEGIN_SLOT_MAP(SigAzEl)
     ON_SLOT(1, setSlotTable,        base::Table2)
-    ON_SLOT(2, setSlotSwapOrder,    base::Number)
-    ON_SLOT(3, setSlotInDegrees,    base::Number)
-    ON_SLOT(4, setSlotDecibel,      base::Number)
+    ON_SLOT(2, setSlotSwapOrder,    base::Boolean)
+    ON_SLOT(3, setSlotInDegrees,    base::Boolean)
+    ON_SLOT(4, setSlotDecibel,      base::Boolean)
 END_SLOT_MAP()
 
 SigAzEl::SigAzEl()
@@ -528,7 +531,7 @@ bool SigAzEl::setSlotTable(const base::Table2* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotSwapOrder(const base::Number* const msg)
+bool SigAzEl::setSlotSwapOrder(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -537,7 +540,7 @@ bool SigAzEl::setSlotSwapOrder(const base::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotInDegrees(const base::Number* const msg)
+bool SigAzEl::setSlotInDegrees(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -546,7 +549,7 @@ bool SigAzEl::setSlotInDegrees(const base::Number* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotDecibel(const base::Number* const msg)
+bool SigAzEl::setSlotDecibel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

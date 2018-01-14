@@ -9,7 +9,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/PairStream.hpp"
 
 #include <string>
@@ -26,7 +26,7 @@ END_SLOTTABLE(IrSystem)
 
 BEGIN_SLOT_MAP(IrSystem)
    ON_SLOT(1,  setSlotSeekerName,      base::Identifier)
-   ON_SLOT(2,  setSlotDisableQueries,  base::Number)
+   ON_SLOT(2,  setSlotDisableQueries,  base::Boolean)
 END_SLOT_MAP()
 
 IrSystem::IrSystem()
@@ -214,7 +214,7 @@ bool IrSystem::setSlotSeekerName(base::Identifier* const p)
 }
 
 // setSlotDisableQueries() -- sets the disable sending emissions flag
-bool IrSystem::setSlotDisableQueries(base::Number* const msg)
+bool IrSystem::setSlotDisableQueries(base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

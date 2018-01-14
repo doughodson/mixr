@@ -216,7 +216,7 @@ mappage:
                                         transform: ( Scale NAVAIR_SYM_SCALE )
                                         components: {
                                             ( Line
-                                                segment: 0
+                                                segment: false
                                                 vertices: {
                                                     [ 0.0225 0.035 ]
                                                     [ 0.0575 0.0575 ]
@@ -360,7 +360,7 @@ mappage:
                                         ( Circle
                                             color: green
                                             radius: 0.07
-                                            filled: 1
+                                            filled: true
                                             slices: 12
                                         )
                                     }
@@ -393,7 +393,7 @@ mappage:
                                         ( Circle
                                             color: cyan
                                             radius: 0.07
-                                            filled: 1
+                                            filled: true
                                             slices: 12
                                         )
                                     }
@@ -426,7 +426,7 @@ mappage:
                                         ( Circle
                                             color: blue
                                             radius: 0.07
-                                            filled: 1
+                                            filled: true
                                             slices: 12
                                         )
                                     }
@@ -459,7 +459,7 @@ mappage:
                                         ( Circle
                                             color: yellow
                                             radius: 0.07
-                                            filled: 1
+                                            filled: true
                                             slices: 12
                                         )
                                     }

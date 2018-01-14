@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/ExternalStore.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {
@@ -10,13 +10,13 @@ namespace models {
 IMPLEMENT_SUBCLASS(ExternalStore, "ExternalStore")
 
 BEGIN_SLOTTABLE(ExternalStore)
-   "type",        // 1) Type of external store string
-   "jettisonable" // 2) External store can be jettisoned (default: true)
+   "type",          // 1) Type of external store string
+   "jettisonable"   // 2) External store can be jettisoned (default: true)
 END_SLOTTABLE(ExternalStore)
 
 BEGIN_SLOT_MAP(ExternalStore)
    ON_SLOT( 1, setSlotType,         base::String)
-   ON_SLOT( 2, setSlotJettisonable, base::Number )
+   ON_SLOT( 2, setSlotJettisonable, base::Boolean )
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(ExternalStore)
@@ -117,7 +117,7 @@ bool ExternalStore::setSlotType(const base::String* const msg)
 }
 
 // jettisonable: weapon can be jettisoned
-bool ExternalStore::setSlotJettisonable(base::Number* const p)
+bool ExternalStore::setSlotJettisonable(base::Boolean* const p)
 {
    setJettisonable( p->getBoolean() );
    return true;

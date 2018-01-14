@@ -6,9 +6,9 @@
 
 namespace mixr {
 namespace base {
+class Boolean;
 class FStorage;
 class List;
-class Number;
 
 //------------------------------------------------------------------------------
 // Class: Table
@@ -106,17 +106,17 @@ protected:
    virtual bool loadData(const List& list, double* const table) = 0;
    static bool loadVector(const List& list, double** table, unsigned int* n);
 
-   bool valid {};        // Table is valid
+   bool valid{};        // Table is valid
 
 private:
-   double* dtable {};    // Data Table
-   unsigned int nd {};   // Number of data points
-   bool extFlg {};       // Extrapolation enabled flag
+   double* dtable{};    // Data Table
+   unsigned int nd{};   // Number of data points
+   bool extFlg{};       // Extrapolation enabled flag
 
 private:
    // slot table helper methods
    bool setSlotDataTable(const List* const x)               { return setDataTable(x); }
-   bool setSlotExtrapolationEnabled(const Number* const);
+   bool setSlotExtrapolationEnabled(const Boolean* const);
 };
 
 }

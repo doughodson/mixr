@@ -7,11 +7,14 @@
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
+
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Frequencies.hpp"
@@ -52,7 +55,7 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(7, setSlotBeamWidth,        base::Angle)          // Check for base::Angle before base::Number
     ON_SLOT(7, setSlotBeamWidth,        base::Number)
     ON_SLOT(8, setSlotTypeId,           base::String)
-    ON_SLOT(9, setSlotSyncXmitWithScan, base::Number)
+    ON_SLOT(9, setSlotSyncXmitWithScan, base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(RfSensor)
@@ -564,7 +567,7 @@ bool RfSensor::setSlotTypeId(const base::String* const msg)
 }
 
 // Sets sync transmitter with antenna scan flag
-bool RfSensor::setSlotSyncXmitWithScan(const base::Number* const msg)
+bool RfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

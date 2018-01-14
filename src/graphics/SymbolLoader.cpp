@@ -6,6 +6,7 @@
 #include "mixr/graphics/Display.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 
@@ -26,8 +27,8 @@ END_SLOTTABLE(SymbolLoader)
 
 BEGIN_SLOT_MAP(SymbolLoader)
    ON_SLOT(1, setSlotTemplates,       base::PairStream)
-   ON_SLOT(2, setSlotShowInRangeOnly, base::Number)
-   ON_SLOT(3, setSlotInterconnect,    base::Number)
+   ON_SLOT(2, setSlotShowInRangeOnly, base::Boolean)
+   ON_SLOT(3, setSlotInterconnect,    base::Boolean)
 END_SLOT_MAP()
 
 SymbolLoader::SymbolLoader()
@@ -993,7 +994,7 @@ bool SymbolLoader::setSlotTemplates(base::PairStream* msg)
 }
 
 // Show in range only flag
-bool SymbolLoader::setSlotShowInRangeOnly(const base::Number* const msg)
+bool SymbolLoader::setSlotShowInRangeOnly(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) ok = setShowInRangeOnly(msg->getBoolean());
@@ -1001,7 +1002,7 @@ bool SymbolLoader::setSlotShowInRangeOnly(const base::Number* const msg)
 }
 
 // Interconnect flag
-bool SymbolLoader::setSlotInterconnect(const base::Number* const msg)
+bool SymbolLoader::setSlotInterconnect(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) ok = setInterconnect(msg->getBoolean());

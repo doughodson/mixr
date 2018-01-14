@@ -13,7 +13,9 @@
 #include "mixr/base/functors/Func1.hpp"
 #include "mixr/base/functors/Func2.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Decibel.hpp"
@@ -44,8 +46,8 @@ BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(2,  setSlotThreshold,         base::Power)
     ON_SLOT(3,  setSlotGain,              base::Number)
     ON_SLOT(4,  setSlotGainPattern,       base::Function)
-    ON_SLOT(5,  setSlotGainPatternDeg,    base::Number)
-    ON_SLOT(6,  setSlotRecycleFlg,        base::Number)
+    ON_SLOT(5,  setSlotGainPatternDeg,    base::Boolean)
+    ON_SLOT(6,  setSlotRecycleFlg,        base::Boolean)
     ON_SLOT(7,  setSlotBeamWidth,         base::Angle)      // Check for base::Angle before base::Number
     ON_SLOT(7,  setSlotBeamWidth,         base::Number)
 END_SLOT_MAP()
@@ -267,7 +269,7 @@ bool Antenna::setGainPattern(base::Function* const tbl)
 //------------------------------------------------------------------------------
 // setSlotGainPatternDeg() -- sets the gain pattern is in degrees flag
 //------------------------------------------------------------------------------
-bool Antenna::setGainPatternDeg(const base::Number* const msg)
+bool Antenna::setGainPatternDeg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {
@@ -280,7 +282,7 @@ bool Antenna::setGainPatternDeg(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotRecycleFlg() -- sets the emission recycle flag
 //------------------------------------------------------------------------------
-bool Antenna::setRecycleFlg(const base::Number* const msg)
+bool Antenna::setRecycleFlg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {

@@ -5,6 +5,7 @@
 #include "mixr/graphics/Display.hpp"
 
 namespace mixr {
+namespace base { class Boolean; class Number; }
 namespace glut {
 
 //------------------------------------------------------------------------------
@@ -132,7 +133,7 @@ protected:
    virtual Graphic* findSelected(const GLint hits, const GLuint sbuff[], const int item = 0);
 
 private:
-   static const int MAX_DISPLAYS = 500;     // Maximum number of GlutDisplay classes
+   static const int MAX_DISPLAYS{500};     // Maximum number of GlutDisplay classes
    static const float CLICK_TIME;
 
 private:
@@ -173,13 +174,13 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotFullScreen(const base::Number* const);
+   bool setSlotFullScreen(const base::Boolean* const);
    bool setSlotIdleSleepTime(const base::Number* const);
-   bool setSlotResizeWindows(const base::Number* const);
+   bool setSlotResizeWindows(const base::Boolean* const);
    bool setSlotPickWidth(const base::Number* const);
    bool setSlotPickHeight(const base::Number* const);
-   bool setSlotAccumBuff(const base::Number* const);
-   bool setSlotStencilBuff(const base::Number* const);
+   bool setSlotAccumBuff(const base::Boolean* const);
+   bool setSlotStencilBuff(const base::Boolean* const);
 };
 
 inline int GlutDisplay::getWindowId() const                               { return winId;           }

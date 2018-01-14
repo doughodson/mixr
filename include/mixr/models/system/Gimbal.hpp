@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Identifier; class List; class PairStream; }
+namespace base { class Angle; class Boolean; class Distance; class Identifier; class List; class Number; class PairStream; }
 namespace models {
 class Emission;
 class SensorMsg;
@@ -98,10 +98,10 @@ class Tdb;
 //    maxPlayersOfInterest         <Number>     ! Max number of players of interest (default: 200)
 //    maxRange2PlayersOfInterest   <Distance>   ! Max range to players of interest, or zero for all (default: 0)
 //    maxAngle2PlayersOfInterest   <Angle>      ! Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
-//    localPlayersOfInterestOnly   <Number>     ! Sets the local only players of interest flag (default: false)
+//    localPlayersOfInterestOnly   <Boolean>    ! Sets the local only players of interest flag (default: false)
 //
-//    useWorldCoordinates          <Number>     ! Using player of interest's world (ECEF) coordinate system (default: true)
-//    useOwnHeadingOnly            <Number>     ! Whether only the ownship heading is used by the target data block (default: true)
+//    useWorldCoordinates          <Boolean>    ! Using player of interest's world (ECEF) coordinate system (default: true)
+//    useOwnHeadingOnly            <Boolean>    ! Whether only the ownship heading is used by the target data block (default: true)
 //
 //
 // Events:
@@ -364,8 +364,8 @@ private:
    bool setSlotCmdRateElevation(const base::Angle* const);          // Commanded elevation rate (sets RATE_SERVO)
    bool setSlotCmdRateRoll(const base::Angle* const);               // Commanded roll rate (sets RATE_SERVO)
 
-   bool setSlotTerrainOcculting(const base::Number* const);         // Enable target terrain occulting (default: false)
-   bool setSlotCheckHorizon(const base::Number* const);             // Enable horizon masking check (default: true)
+   bool setSlotTerrainOcculting(const base::Boolean* const);        // Enable target terrain occulting (default: false)
+   bool setSlotCheckHorizon(const base::Boolean* const);            // Enable horizon masking check (default: true)
 
    bool setSlotPlayerTypes(const base::PairStream* const);          // Player of interest types (default: 0 )
    bool setSlotMaxPlayers(const base::Number* const);               // Max number of players of interest (default: 0)
@@ -377,13 +377,13 @@ private:
    bool setSlotMaxAngle2PlayersOfInterest(const base::Angle* const);
 
    // Sets the local only players of interest flag
-   bool setSlotLocalPlayersOfInterestOnly(const base::Number* const);
+   bool setSlotLocalPlayersOfInterestOnly(const base::Boolean* const);
 
    // Using player of interest's world (ECEF) coordinate system
-   bool setSlotUseWorldCoordinates(const base::Number* const);
+   bool setSlotUseWorldCoordinates(const base::Boolean* const);
 
    // Use only the ownship player's heading to when transforming between body and local NED
-   bool setSlotUseOwnHeadingOnly(const base::Number* const);
+   bool setSlotUseOwnHeadingOnly(const base::Boolean* const);
 };
 
 }

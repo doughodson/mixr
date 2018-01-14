@@ -1,5 +1,6 @@
 
 #include "mixr/instruments/gauges/Tape.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <iostream>
@@ -25,10 +26,10 @@ BEGIN_SLOT_MAP(Tape)
     ON_SLOT(1, setSlotRange,     base::Number)
     ON_SLOT(2, setSlotHeight,    base::Number)
     ON_SLOT(3, setSlotIncrement, base::Number)
-    ON_SLOT(4, setSlotVertical,  base::Number)
+    ON_SLOT(4, setSlotVertical,  base::Boolean)
     ON_SLOT(5, setSlotMaxNum,    base::Number)
     ON_SLOT(6, setSlotMinNum,    base::Number)
-    ON_SLOT(7, setSlotConvert,   base::Number)
+    ON_SLOT(7, setSlotConvert,   base::Boolean)
 END_SLOT_MAP()
 
 Tape::Tape()
@@ -83,7 +84,7 @@ void Tape::copyData(const Tape& org, const bool)
 //------------------------------------------------------------------------------
 bool Tape::setSlotRange(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setRange(x->getInt());
     return ok;
 }
@@ -93,7 +94,7 @@ bool Tape::setSlotRange(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool Tape::setSlotHeight(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setHeight(x->getReal());
     return ok;
 }
@@ -103,7 +104,7 @@ bool Tape::setSlotHeight(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool Tape::setSlotIncrement(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setIncrement(x->getInt());
     return ok;
 }
@@ -111,9 +112,9 @@ bool Tape::setSlotIncrement(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotVertical() - vertical or horizontal tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotVertical(const base::Number* const x)
+bool Tape::setSlotVertical(const base::Boolean* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setVertical(x->getBoolean());
     return ok;
 }
@@ -123,7 +124,7 @@ bool Tape::setSlotVertical(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool Tape::setSlotMaxNum(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setMaxNumber(x->getReal());
     return ok;
 }
@@ -134,17 +135,17 @@ bool Tape::setSlotMaxNum(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool Tape::setSlotMinNum(const base::Number* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setMinNumber(x->getReal());
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// setSlotConvert() - conver to degrees instead of units?  (for circular tapes)
+// setSlotConvert() - convert to degrees instead of units?  (for circular tapes)
 //------------------------------------------------------------------------------
-bool Tape::setSlotConvert(const base::Number* const x)
+bool Tape::setSlotConvert(const base::Boolean* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setConvert(x->getBoolean());
     return ok;
 }
@@ -158,7 +159,7 @@ void Tape::updateData(const double dt)
    BaseClass::updateData(dt);
 
     // std::cout << "INSTRUMENT VALUE = " << getInstValue() << std::endl;
-    double x = getInstValue();
+    double x{getInstValue()};
 
     // we take our range, add another for the 0, and then add 2 more for fillers
     int perRange = static_cast<int>(range / increment) + 3;

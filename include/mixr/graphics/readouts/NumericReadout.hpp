@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Object; class String; class Float; class Integer; class Number; }
+namespace base { class Boolean; class Object; class String; class Float; class Integer; class Number; }
 namespace graphics {
 class ReformatScanner;
 
@@ -116,7 +116,7 @@ private:
    double maxNum {base::UNDEFINED_VALUE};    // Maximum value
    double maxValid {base::UNDEFINED_VALUE};  // Maximum valid input value
    double minValid {base::UNDEFINED_VALUE};  // Minimum valid input value
-   bool blankZero {};                        // Display blank instead of zero value
+   bool blankZero{};                         // Display blank instead of zero value
 
 private:
    // slot table helper methods
@@ -132,7 +132,7 @@ private:
    bool setSlotOverflowChar(const base::String* const);
    bool setSlotMaxValid(const base::Number* const);
    bool setSlotMinValid(const base::Number* const);
-   bool setSlotBlankZero(const base::Number* const);
+   bool setSlotBlankZero(const base::Boolean* const);
 };
 
 }

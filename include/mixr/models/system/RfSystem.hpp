@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Decibel; class Identifier; }
+namespace base { class Boolean; class Decibel; class Identifier; class Number; }
 namespace models {
 class Antenna;
 class Emission;
@@ -58,7 +58,7 @@ class Emission;
 //    lossSignalProcess  <base::Number>        ! Signal Processing loss        (no units; def: 1.0)
 //                       <base::Decibel>       ! Signal Processing loss        (dB)
 //
-//    disableEmissions   <Number>               ! Disable sending emission packets flag (default: false)
+//    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
 class RfSystem : public System
@@ -181,7 +181,7 @@ private:
    bool setSlotRfTransmitLoss(base::Number* const);
    bool setSlotRfReceiveLoss(base::Number* const);
    bool setSlotRfSignalProcessLoss(base::Number* const);
-   bool setSlotDisableEmissions(base::Number* const);
+   bool setSlotDisableEmissions(base::Boolean* const);
 };
 
 }

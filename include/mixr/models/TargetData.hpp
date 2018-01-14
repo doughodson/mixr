@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Identifier; class Number; class String; class Time; }
+namespace base { class Angle; class Boolean; class Distance; class Identifier; class Number; class String; class Time; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -101,11 +101,11 @@ private:
     bool manualAssign {};
 
 private:
-   bool setSlotEnabled(const base::Number* const);
-   bool setSlotCompleted(const base::Number* const);
+   bool setSlotEnabled(const base::Boolean* const);
+   bool setSlotCompleted(const base::Boolean* const);
    bool setSlotWpnType(const base::String* const);
    bool setSlotQuantity(const base::Number* const);
-   bool setSlotManualAssign(const base::Number* const);
+   bool setSlotManualAssign(const base::Boolean* const);
    bool setSlotStickType(const base::Identifier* const);
    bool setSlotStickDistance(const base::Distance* const);
    bool setSlotStickDistance(const base::Number* const);

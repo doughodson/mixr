@@ -7,6 +7,9 @@
 #include "mixr/base/units/angle_utils.hpp"
 #include "mixr/base/functors/Table1.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include <GL/glu.h>
 #include <cmath>
 
@@ -25,7 +28,7 @@ END_SLOTTABLE(Knob)
 
 BEGIN_SLOT_MAP(Knob)
     ON_SLOT(1, setSlotValueTable,   base::Table1)
-    ON_SLOT(2, setSlotEndless,      base::Number)
+    ON_SLOT(2, setSlotEndless,      base::Boolean)
     ON_SLOT(3, setSlotEndlessStart, base::Number)
     ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()
@@ -79,7 +82,7 @@ bool Knob::setSlotValueTable(base::Table1* const x)
 //------------------------------------------------------------------------------
 // setSlotEndless() - set up our table to be endless or not
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndless(const base::Number* const x)
+bool Knob::setSlotEndless(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndless(x->getBoolean());

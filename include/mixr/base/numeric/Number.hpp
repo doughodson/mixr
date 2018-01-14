@@ -11,7 +11,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: Number
 //
-// Description:  Base class for number objects (Float, Integer, Boolean, 
+// Description:  Base class for several number-based objects (Float, Integer, 
 //               Decibel and LatLon), numerical operators (Add, Subtract,
 //               Multiply and Divide), and various units (see base/units/*.hpp)
 //
@@ -42,7 +42,6 @@ public:
    Number()                         { STANDARD_CONSTRUCTOR() }
    Number(const int value)          { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const int64_t value)      { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
-   Number(const bool value)         { val = (value ? 1.0 : 0.0); STANDARD_CONSTRUCTOR() }
    Number(const double value)       { val = value; STANDARD_CONSTRUCTOR() }
    Number(const float value)        { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
 
@@ -51,12 +50,11 @@ public:
    float getFloat() const           { return static_cast<float>(val); }
    int getInt() const               { return static_cast<int>(val); }
    int64_t getInt64() const         { return static_cast<int64_t>(val); }
-   bool getBoolean() const          { return (val != 0.0); }
 
    virtual void setValue(const double nv)   { val = nv; }
 
 protected:
-   double val {};   // value of this object
+   double val{};   // value of this object
 
 private:
    // slot table helper methods

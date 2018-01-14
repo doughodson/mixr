@@ -5,7 +5,7 @@
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
 namespace mixr {
-namespace base { class Identifier; }
+namespace base { class Boolean; class Identifier; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -18,9 +18,9 @@ namespace models {
 // Factory name: Bomb
 // Slots:
 //    arming         <Identifier>  ! Bomb arming option (default: NONE)
-//    noseFuze       <Number>      ! Nose fuze flag (default: false)
-//    midFuze        <Number>      ! Middle fuze flag (default: false)
-//    tailFuze       <Number>      ! Tail fuze flag (default: 0.0f)
+//    noseFuze       <Boolean>     ! Nose fuze flag (default: false)
+//    midFuze        <Boolean>     ! Middle fuze flag (default: false)
+//    tailFuze       <Boolean>     ! Tail fuze flag (default: false)
 //    fuzeAltitude   <Number>      ! Fuze arming Altitude (default: 0.0f)
 //    fuzeTime       <Number>      ! Fuze Arming Time (default: 0.0f)
 //    dragIndex      <Number>      ! drag index used by default dynamics (default: 0.0006f)
@@ -115,9 +115,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotArmingOption(base::Identifier* const);
-   bool setSlotNoseFuze(base::Number* const);
-   bool setSlotMidFuze(base::Number* const);
-   bool setSlotTailFuze(base::Number* const);
+   bool setSlotNoseFuze(base::Boolean* const);
+   bool setSlotMidFuze(base::Boolean* const);
+   bool setSlotTailFuze(base::Boolean* const);
    bool setSlotFuzeAltitude(base::Number* const);
    bool setSlotFuzeTime(base::Number* const);
    bool setSlotDragIndex(base::Number* const);

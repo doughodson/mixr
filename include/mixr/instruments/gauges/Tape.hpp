@@ -6,6 +6,7 @@
 #include <array>
 
 namespace mixr {
+namespace base { class Boolean; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -56,10 +57,10 @@ private:
     bool setSlotRange(const base::Number* const);
     bool setSlotHeight(const base::Number* const);
     bool setSlotIncrement(const base::Number* const);
-    bool setSlotVertical(const base::Number* const);
+    bool setSlotVertical(const base::Boolean* const);
     bool setSlotMaxNum(const base::Number* const);
     bool setSlotMinNum(const base::Number* const);
-    bool setSlotConvert(const base::Number* const);
+    bool setSlotConvert(const base::Boolean* const);
 };
 
 }

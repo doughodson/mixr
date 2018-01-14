@@ -29,10 +29,12 @@
 
 #include "mixr/base/network/UdpMulticastHandler.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+
 #include <cstdio>
 #include <cstring>
 #include <string>
@@ -59,7 +61,7 @@ END_SLOTTABLE(UdpMulticastHandler)
 BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1, setSlotMulticastGroup, String)
     ON_SLOT(2, setSlotTTL,            Number)
-    ON_SLOT(3, setSlotLoopback,       Number)
+    ON_SLOT(3, setSlotLoopback,       Boolean)
 END_SLOT_MAP()
 
 UdpMulticastHandler::UdpMulticastHandler()
@@ -264,7 +266,7 @@ bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
 }
 
 // loopback: Loopback flag
-bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
+bool UdpMulticastHandler::setSlotLoopback(const Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

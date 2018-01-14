@@ -1,6 +1,7 @@
 
 #include "mixr/models/system/Iff.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
@@ -33,12 +34,12 @@ BEGIN_SLOT_MAP(Iff)
    ON_SLOT( 3, setSlotMode3a,       base::Number)
    ON_SLOT( 4, setSlotMode4a,       base::Number)
    ON_SLOT( 5, setSlotMode4b,       base::Number)
-   ON_SLOT( 6, setSlotEnableMode1,  base::Number)
-   ON_SLOT( 7, setSlotEnableMode2,  base::Number)
-   ON_SLOT( 8, setSlotEnableMode3a, base::Number)
-   ON_SLOT( 9, setSlotEnableMode4,  base::Number)
-   ON_SLOT(10, setSlotWhichMode4,   base::Number)
-   ON_SLOT(11, setSlotEnableModeC,  base::Number)
+   ON_SLOT( 6, setSlotEnableMode1,  base::Boolean)
+   ON_SLOT( 7, setSlotEnableMode2,  base::Boolean)
+   ON_SLOT( 8, setSlotEnableMode3a, base::Boolean)
+   ON_SLOT( 9, setSlotEnableMode4,  base::Boolean)
+   ON_SLOT(10, setSlotWhichMode4,   base::Boolean)
+   ON_SLOT(11, setSlotEnableModeC,  base::Boolean)
 END_SLOT_MAP()
 
 Iff::Iff()
@@ -96,12 +97,8 @@ void Iff::reset()
    setWhichMode4(icWhichMode4);
 
    setEnabledModeC(icModeCFlg);
-
 }
 
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
 bool Iff::setMode1(const unsigned short m)
 {
    //mode1 = (m && 073);
@@ -162,43 +159,49 @@ bool Iff::setWhichMode4(const bool newM)
 }
 
 // Slot functions
-bool Iff::setSlotEnableMode1(const base::Number* const msg)
+bool Iff::setSlotEnableMode1(const base::Boolean* const msg)
 {
     if (msg != nullptr) setEnabledMode1(msg->getBoolean());
     // make sure we hold this reset value
     icMode1Flg = enableMode1;
     return true;
 }
-bool Iff::setSlotEnableMode2(const base::Number* const msg)
+
+bool Iff::setSlotEnableMode2(const base::Boolean* const msg)
 {
     if (msg != nullptr) setEnabledMode2(msg->getBoolean());
     icMode2Flg = enableMode2;
     return true;
 }
-bool Iff::setSlotEnableMode3a(const base::Number* const msg)
+
+bool Iff::setSlotEnableMode3a(const base::Boolean* const msg)
 {
     if (msg != nullptr) setEnabledMode3a(msg->getBoolean());
     icMode3aFlg = enableMode3a;
     return true;
 }
-bool Iff::setSlotEnableMode4(const base::Number* const msg)
+
+bool Iff::setSlotEnableMode4(const base::Boolean* const msg)
 {
     if (msg != nullptr) setEnabledMode4(msg->getBoolean());
     icMode4Flg = enableMode4;
     return true;
 }
-bool Iff::setSlotWhichMode4(const base::Number* const msg)
+
+bool Iff::setSlotWhichMode4(const base::Boolean* const msg)
 {
     if (msg != nullptr) setWhichMode4(msg->getBoolean());
     icWhichMode4 = whichMode4;
     return true;
 }
-bool Iff::setSlotEnableModeC(const base::Number* const msg)
+
+bool Iff::setSlotEnableModeC(const base::Boolean* const msg)
 {
     if (msg != nullptr) setEnabledModeC(msg->getBoolean());
     icModeCFlg = enableModeC;
     return true;
 }
+
 bool Iff::setSlotMode1(const base::Number* const msg)
 {
     bool ok{};
@@ -206,6 +209,7 @@ bool Iff::setSlotMode1(const base::Number* const msg)
     if (ok) icMode1 = mode1;
     return ok;
 }
+
 bool Iff::setSlotMode2(const base::Number* const msg)
 {
     bool ok{};
@@ -213,6 +217,7 @@ bool Iff::setSlotMode2(const base::Number* const msg)
     if (ok) icMode2 = mode2;
     return ok;
 }
+
 bool Iff::setSlotMode3a(const base::Number* const msg)
 {
     bool ok{};
@@ -220,6 +225,7 @@ bool Iff::setSlotMode3a(const base::Number* const msg)
     if (ok) icMode3a = mode3a;
     return ok;
 }
+
 bool Iff::setSlotMode4a(const base::Number* const msg)
 {
     bool ok{};
@@ -227,6 +233,7 @@ bool Iff::setSlotMode4a(const base::Number* const msg)
     icMode4a = mode4a;
     return ok;
 }
+
 bool Iff::setSlotMode4b(const base::Number* const msg)
 {
     bool ok{};
@@ -234,6 +241,7 @@ bool Iff::setSlotMode4b(const base::Number* const msg)
     icMode4b = mode4b;
     return ok;
 }
+
 //bool Iff::setSlotPower(const base::String* const msg)
 //{
 //    if (strcmp(msg->getString(), "OFF") == 0) pwr = OFF;

@@ -3,13 +3,13 @@
     components: {
         ( AsciiText
             color: white
-            vertical: 1
+            vertical: true
             text: "VVI"
             transform: ( Translation -3 2.5 )
         )
         ( AsciiText
             color: white
-            vertical: 1
+            vertical: true
             text: "1000FPM"
             font: smallfont
             transform: ( Translation -3 -1.5 )
@@ -54,7 +54,7 @@
     components: {    
         vvi:
         ( GaugeSlider  
-            vertical: 1
+            vertical: true
             scalingTable: 
                 ( Table1
                     // velocity (FPM)

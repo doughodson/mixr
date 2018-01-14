@@ -3,6 +3,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/WorldModel.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -33,9 +34,9 @@ BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 3,  setSlotPlayerTypes,         base::PairStream)
     ON_SLOT( 4,  setSlotMaxRange2Players,    base::Distance)
     ON_SLOT( 5,  setSlotMaxAngle2Players,    base::Angle)
-    ON_SLOT( 6,  setSlotLocalOnly,           base::Number)
-    ON_SLOT( 7,  setSlotUseWorldCoordinates, base::Number)
-    ON_SLOT( 8,  setSlotSendCrashEvents,     base::Number)
+    ON_SLOT( 6,  setSlotLocalOnly,           base::Boolean)
+    ON_SLOT( 7,  setSlotUseWorldCoordinates, base::Boolean)
+    ON_SLOT( 8,  setSlotSendCrashEvents,     base::Boolean)
 END_SLOT_MAP()
 
 CollisionDetect::CollisionDetect()
@@ -604,7 +605,7 @@ bool CollisionDetect::setSlotMaxAngle2Players(const base::Angle* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotUseWorldCoordinates(const base::Number* const msg)
+bool CollisionDetect::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -613,7 +614,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const base::Number* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotLocalOnly(const base::Number* const msg)
+bool CollisionDetect::setSlotLocalOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -622,7 +623,7 @@ bool CollisionDetect::setSlotLocalOnly(const base::Number* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotSendCrashEvents(const base::Number* const msg)
+bool CollisionDetect::setSlotSendCrashEvents(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

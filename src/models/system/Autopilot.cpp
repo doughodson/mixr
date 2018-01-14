@@ -14,6 +14,9 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Times.hpp"
@@ -60,17 +63,17 @@ BEGIN_SLOTTABLE(Autopilot)
 END_SLOTTABLE(Autopilot)
 
 BEGIN_SLOT_MAP(Autopilot)
-    ON_SLOT( 1, setSlotNavMode,                    base::Number)
+    ON_SLOT( 1, setSlotNavMode,                    base::Boolean)
     ON_SLOT( 2, setSlotHoldAltitude,               base::Distance)
-    ON_SLOT( 3, setSlotAltitudeHoldMode,           base::Number)
+    ON_SLOT( 3, setSlotAltitudeHoldMode,           base::Boolean)
     ON_SLOT( 4, setSlotHoldVelocityKts,            base::Number)
-    ON_SLOT( 5, setSlotVelocityHoldMode,           base::Number)
+    ON_SLOT( 5, setSlotVelocityHoldMode,           base::Boolean)
     ON_SLOT( 6, setSlotHoldHeading,                base::Angle)
-    ON_SLOT( 7, setSlotHeadingHoldMode,            base::Number)
-    ON_SLOT( 8, setSlotLoiterMode,                 base::Number)
+    ON_SLOT( 7, setSlotHeadingHoldMode,            base::Boolean)
+    ON_SLOT( 8, setSlotLoiterMode,                 base::Boolean)
     ON_SLOT( 9, setSlotLoiterPatternLength,        base::Distance)
     ON_SLOT( 9, setSlotLoiterPatternLength,        base::Number)
-    ON_SLOT(10, setSlotLoiterPatternCcwFlag,       base::Number)
+    ON_SLOT(10, setSlotLoiterPatternCcwFlag,       base::Boolean)
     ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Distance)
     ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Number)
     ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Distance)
@@ -78,7 +81,7 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Distance)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Number)
     ON_SLOT(14, setSlotLeadPlayerName,             base::Identifier)
-    ON_SLOT(15, setSlotFollowTheLeadMode,          base::Number)
+    ON_SLOT(15, setSlotFollowTheLeadMode,          base::Boolean)
     ON_SLOT(16, setSlotMaxRateOfTurnDps,           base::Number)
     ON_SLOT(17, setSlotMaxBankAngle,               base::Number)
     ON_SLOT(18, setSlotMaxClimbRateFpm,            base::Number)
@@ -1312,7 +1315,7 @@ int Autopilot::setThrottles(const double* const positions, const unsigned int nu
 //-----------------------------------------------------------------------------
 
 // Nav (route follow) mode flag
-bool Autopilot::setSlotNavMode(const base::Number* const msg)
+bool Autopilot::setSlotNavMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1333,7 +1336,7 @@ bool Autopilot::setSlotHoldAltitude(const base::Distance* const msg)
 }
 
 // Altitude hold mode flag
-bool Autopilot::setSlotAltitudeHoldMode(const base::Number* const msg)
+bool Autopilot::setSlotAltitudeHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1354,7 +1357,7 @@ bool Autopilot::setSlotHoldVelocityKts(const base::Number* const msg)
 }
 
 // Velocity hold mode flag
-bool Autopilot::setSlotVelocityHoldMode(const base::Number* const msg)
+bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1376,7 +1379,7 @@ bool Autopilot::setSlotHoldHeading(const base::Angle* const msg)
 }
 
 // Heading altitude mode flag
-bool Autopilot::setSlotHeadingHoldMode(const base::Number* const msg)
+bool Autopilot::setSlotHeadingHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1386,7 +1389,7 @@ bool Autopilot::setSlotHeadingHoldMode(const base::Number* const msg)
 }
 
 // Loiter mode flag
-bool Autopilot::setSlotLoiterMode(const base::Number* const msg)
+bool Autopilot::setSlotLoiterMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1430,7 +1433,7 @@ bool Autopilot::setSlotLoiterPatternTime(const base::Time* const msg)
 
 
 // Set slot: Loiter orbit pattern counter-clockwise flag
-bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Number* const msg)
+bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1511,7 +1514,7 @@ bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 
 
 // Set slot: "Follow the lead" mode flag
-bool Autopilot::setSlotFollowTheLeadMode(const base::Number* const msg)
+bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

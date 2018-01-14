@@ -5,7 +5,8 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoHandler; class Identifier; class Number; class PairStream; class String; class Time; }
+namespace base { class AbstractIoHandler; class Boolean; class Identifier;
+                 class Number; class PairStream; class String; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
@@ -302,7 +303,7 @@ private:
    bool setSlotBackgroundStackSize(const base::Number* const);
 
    bool setSlotStartupResetTime(const base::Time* const);
-   bool setSlotEnableUpdateTimers(const base::Number* const);
+   bool setSlotEnableUpdateTimers(const base::Boolean* const);
 
    bool setSlotDataRecorder(AbstractDataRecorder* const x)              { return setDataRecorder(x); }
 };

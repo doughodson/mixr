@@ -23,6 +23,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
@@ -54,7 +55,7 @@ BEGIN_SLOT_MAP(PosixHandler)
     ON_SLOT(1, setSlotLocalIpAddress,   String)
     ON_SLOT(2, setSlotLocalPort,        Number)
     ON_SLOT(3, setSlotPort,             Number)
-    ON_SLOT(4, setSlotShared,           Number)
+    ON_SLOT(4, setSlotShared,           Boolean)
     ON_SLOT(5, setSlotSendBuffSize,     Number)
     ON_SLOT(6, setSlotRecvBuffSize,     Number)
     ON_SLOT(7, setSlotIgnoreSourcePort, Number)
@@ -529,7 +530,7 @@ bool PosixHandler::setSlotLocalPort(const Number* const msg)
 }
 
 // shared: Reuse the port
-bool PosixHandler::setSlotShared(const Number* const msg)
+bool PosixHandler::setSlotShared(const Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

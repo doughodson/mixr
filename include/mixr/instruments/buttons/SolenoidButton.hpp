@@ -5,6 +5,7 @@
 #include "mixr/instruments/buttons/Button.hpp"
 
 namespace mixr {
+namespace base { class Boolean; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ public:
 
     // The left mouse button has been depressed
     virtual bool onMouseDown();
-    virtual bool onPicked(const base::Number* const);
+    virtual bool onPicked(const base::Boolean* const);
 
     bool event(const int event, base::Object* const obj = nullptr) override;
     void updateData(const double dt = 0.0) override;

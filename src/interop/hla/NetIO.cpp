@@ -3,6 +3,7 @@
 #include "mixr/interop/hla/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -30,8 +31,8 @@ END_SLOTTABLE(NetIO)
 
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1, setSlotFedFile,         base::String)
-   ON_SLOT(2, setSlotRegulatingTime,  base::Number)
-   ON_SLOT(3, setSlotConstrainedTime, base::Number)
+   ON_SLOT(2, setSlotRegulatingTime,  base::Boolean)
+   ON_SLOT(3, setSlotConstrainedTime, base::Boolean)
 END_SLOT_MAP()
 
 NetIO::NetIO()
@@ -759,7 +760,7 @@ bool NetIO::setSlotFedFile(base::String* const msg)
    return true;
 }
 
-bool NetIO::setSlotRegulatingTime(base::Number* const msg)
+bool NetIO::setSlotRegulatingTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -770,7 +771,7 @@ bool NetIO::setSlotRegulatingTime(base::Number* const msg)
    return ok;
 }
 
-bool NetIO::setSlotConstrainedTime(base::Number* const msg)
+bool NetIO::setSlotConstrainedTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

@@ -139,7 +139,7 @@ enginedial:
             components: {
                 enginereadout:      
                 ( NumericReadout
-                    inheritColor: 1
+                    inheritColor: true
                     transform: ( Translation -3 1.5 ) 
                     format: "###"
                 )
