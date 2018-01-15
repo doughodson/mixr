@@ -3,7 +3,7 @@
 
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/functors/Table1.hpp"
+#include "mixr/base/relations/Table1.hpp"
 
 #include "mixr/base/colors/Color.hpp"
 #include "mixr/base/colors/Rgba.hpp"

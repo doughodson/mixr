@@ -10,8 +10,8 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
-#include "mixr/base/functors/Func1.hpp"
-#include "mixr/base/functors/Func2.hpp"
+#include "mixr/base/relations/Func1.hpp"
+#include "mixr/base/relations/Func2.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"

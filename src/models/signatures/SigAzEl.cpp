@@ -1,7 +1,7 @@
 
 #include "mixr/models/signatures/SigAzEl.hpp"
 
-#include "mixr/base/functors/Table2.hpp"
+#include "mixr/base/relations/Table2.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 
 #include "mixr/models/Emission.hpp"

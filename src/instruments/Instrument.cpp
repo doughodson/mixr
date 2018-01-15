@@ -3,7 +3,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
-#include "mixr/base/functors/Table1.hpp"
+#include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 

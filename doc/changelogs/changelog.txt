@@ -135,6 +135,14 @@ base library (mixr_base)
   names.  Strings are still used to specify IP addresses, so no native type exist
   for that.
 
+- The directory containing all the function and table classes (previously called
+  'functors') has been renamed to 'relations' to more properly describe the
+  common aspects the classes define - namely, relationships. Background: in
+  mathematics, a relation is just an ordered set of relationships between sets of
+  information - this is exactly what a table defines.  A function is a logical
+  subset and is considered to be a 'well-behaved' relation - meaning the pairing
+  is always one for one (i.e., given an 'x', we get only and exactly one 'y').
+
    -------------------
    - Network classes -
    -------------------
