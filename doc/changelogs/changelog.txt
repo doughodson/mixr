@@ -11,24 +11,25 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Within MIXR, different terms associated with interoperability discovered,
   created and/or managed players had been used.  For example, in some parts
   of the code, the term 'remote' player was used, in others, the terms 'networked',
-  'interoperability' and even 'surrogate' can be found. To further complicate
-  matters, the term 'ghost' is used in other simulation packages.
+  'interoperability' and even 'surrogate' could be found. To further complicate
+  matters, the term 'ghost' is sometimes used in other simulation packages.
   Each use of these terms implies the same thing; a stand-in representation of
   a player being updated or managed by a different simulation (most likely executed
   on a different computer within a distributed environment).
 
-  To improve the consistency of terminology throughout this code base, we have
-  shifted references to this kind of stand-in representation, to a 'proxy' (or
-  ProxyPlayer in code).  This proxy probably is being updated and/or managed,
-  etc., by a 'remote' simulation, that is connected via a 'networked' interface,
-  sharing data through an 'interoperability' protocol or mechanism, but in the end,
-  it is a stand-in representation - not wholly or necessarily being updated or
-  managed by this simulation process. We feel the term 'proxy' more fairly conveys
-  what it is, as opposed to how it is comes about or where it comes from.
+  To improve the consistency of terminology throughout the code base, we have
+  shifted references for this kind of stand-in representation, to a 'proxy' (or
+  proxy player in code).  Proxy's are updated and/or managed, etc., by a 'remote'
+  simulation, that is connected via a 'networked' interface, that share data through
+  some kind of 'interoperability' protocol or mechanism. In the end, this stand-in
+  representation (that is not being updated or managed by this simulation) is called
+  a proxy. We feel the term 'proxy' more fairly conveys what it is, as opposed to how
+  it comes about or where it comes from.
 
   We especially want to avoid using the term 'interoperability' player (or 'IPlayer'
   as abbreviated in code), as the 'I' is often stylistically, in code, used to
-  imply interface, or more specifically an interface class (for player in this case).
+  imply interface, or more specifically an interface class (for a player in this
+  case).
 
   Moving to a consistent and more specific terminology, also communicates that a
   degree of uncertainty or difference (due to inconsistency of state and/or
@@ -53,28 +54,29 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Identifiers, like most computer language are defined using one or more deemed
   valid characters that excludes spaces; they are most commonly used to label
   or name things such as objects and variables. In other words, they use a
-  string-based value (i.e., name) to identify things!  In even other words, the
-  value they provide indicate something to do (e.g., the type of scan to select).
-  Within MIXR, although not enforced, stylistically, we prefer to make all
-  identifiers lower case.  We believe this improves the readability of configuration
-  input files by avoiding confusion with macros (which are often written in
-  UPPER case).
+  string-based value (i.e., name) to identify things!  The value they provide
+  often defines some aspect of behavior within the code (e.g., the type of scan).
+
+  Within MIXR, although not enforced, stylistically, we prefer and strive to keep
+  all identifiers lower case.  We believe this improves the readability of
+  configuration input files, and avoids potential confusion with macros (which
+  are often written in UPPER case).
 
   Even though both Identifiers and Strings are created and defined by a sequence
   of characters, they are distinguished by the role they play within the language.
   Under the hood, their value is stored as a string, but they serve different
-  roles in terms of semantic meaning.  Identifiers can be viewed as value types
+  purposes in terms of semantic meaning.  Identifiers can be viewed as value types
   that have internal meaning to the application, such as specifying a mode
-  of some kind that maps to some enumeration.  Strings can be viewed as value
+  of some kind that maps to an enumeration.  Strings can be viewed as value
   types that have external meaning, for example, a description of something
-  not terribly relevant to the executing application, or a filename or even
-  a network address for which no unique data type (or token) has been
+  not terribly relevant to the executing application, a filename, or even
+  a network address for which no unique data type (think token) has been
   defined.
 
-  Internal to the EDL parser, they are distinguished using different tokens.  Within
-  the C++ code base, they were somewhat confounded - namely, an Identifier was
-  defined as a subclass to a String.  So, all Identifiers were considered Strings,
-  even though their use and meaning is different.
+  Internal to the EDL parser, Strings and Identifiers are distinguished by
+  different tokens.  Within the C++ code base, they were confounded - namely,
+  an Identifier was defined as a subclass to a String. So, all Identifiers
+  were considered Strings, even though their use and meaning is different.
 
   Change:
 
@@ -85,14 +87,14 @@ General framework-wide changes/improvements/trends/philosophy/goals
   but interestingly enough, little, in fact, almost no impact on the configuration
   files.  Configuration files mostly specified types completely consistent with
   the EDL specification.  It was the C++ side, or Object-based classes that
-  required some tweaking.
+  required some rework and tweaking.
 
   In several cases, classes that defined slots to accept identifier-type value
   information (such as Antenna with its slot to define polarization as either
   'none', 'vertical', 'horizontal', 'slant', etc.) was in fact accepting a
   String to process the same input value.  This worked because of the previous
-  IS-A relationship between the two; Identifier type value inputs would be accepted
-  as a valid 'String', because they were related.
+  IS-A relationship between the two; Identifier values were being accepted
+  as a valid 'String'.
 
   We feel that the role of Identifiers and Strings are more easily understood
   without an IS-A relationship obfuscating it.  All classes have been updated to
@@ -107,17 +109,22 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Previously, within the C++ code base, the Boolean type (i.e., class) was defined
   as a subclass to Number (i.e., IS-A relationship).  This relationship allowed
-  for Boolean's to be viewed substituted for any number, although they, as in many
-  computer languages are considered to be  distinctly different types (e.g., C++
-  'bool' vs 'int').
+  for Boolean's to be a valid substitute for any Number, even though, as in many
+  computer languages, they are often considered to be a different types
+  (e.g., C++ 'bool' vs 'int').
 
   Much like String and Identifiers, this can lead to some confusion.  For example,
   configuration files settings for things like an 'asynchronous' mode,
-  (true/false type values) were being set to, say '5' - disturbing indeed.
-  Unfortunately, this 'worked' -- '5' was being read as a number and interpreted
-  as a positive value, thus 'true' was deemed its Boolean equivalent.
+  (true/false type values) were, unfortunately, being set to a number (i.e., '5')
+  - somewhat disturbing. This 'worked' - as numbers were being interpreted
+  as Boolean values (e.g., true if positive).
 
-  To resolve any possible misunderstanding w
+  To resolve any possible misunderstanding of input file settings, and to align
+  class documentation (which often indicated a desired Boolean value) with
+  code implementation, we have made reimplemented Boolean's and Number's as
+  different types (i.e., no IS-A relationship).  Number's no longer convert
+  to Boolean's, and Boolean's don't have a Number equivalent.  Such conversions
+  are, of course, available within the C++ domain as explicit type conversions.
 
 
 --------------------------------------------------------------------------------
@@ -129,19 +136,18 @@ Infrastructure oriented libraries
 --------------------------------------------------------------------------------
 base library (mixr_base)
 
-- All addresses in network handler classes have been updated to type std::string
-  as opposed to char*.  Also all of classes in which this matters that define a
-  slot parameter for that address also accepts Identifiers to specific host
-  names.  Strings are still used to specify IP addresses, so no native type exist
-  for that.
+- All addresses in network handler classes have been updated to use type std::string
+  as opposed to char*.  Also, all of the classes for which this matters also defines a
+  slot method to accept Identifiers for specific host names.  Strings are still used
+  to specify IP addresses.
 
 - The directory containing all the function and table classes (previously called
   'functors') has been renamed to 'relations' to more properly describe the
-  common aspects the classes define - namely, relationships. Background: in
+  commonality of the classes it contains - namely, relationships. Background: in
   mathematics, a relation is just an ordered set of relationships between sets of
-  information - this is exactly what a table defines.  A function is a logical
-  subset and is considered to be a 'well-behaved' relation - meaning the pairing
-  is always one for one (i.e., given an 'x', we get only and exactly one 'y').
+  information.  A function is a logical subset and is considered to be a
+  'well-behaved' relation - meaning the pairing is always one for one (i.e., given
+  an 'x', we get only and exactly one 'y').  Tables also implement relations.
 
    -------------------
    - Network classes -
