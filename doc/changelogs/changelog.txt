@@ -126,6 +126,34 @@ General framework-wide changes/improvements/trends/philosophy/goals
   to Boolean's, and Boolean's don't have a Number equivalent.  Such conversions
   are, of course, available within the C++ domain as explicit type conversions.
 
+- Topic: Character arrays, strings, and String classes - moving to std::string
+
+  Early on, C++ (a superset of C) did not include much support for string handling
+  in its standard library.  In fact, the string class (std::string) did not get
+  defined until 1998. Because initial versions of C++ had only the 'low-level'
+  C string functionality and conventions, multiple incompatible designs for
+  string handling classes were designed.  Unfortunately, due to legacy code,
+  this issue persists even today, multiple conventions often need to be handled
+  within applications; MIXR is no different in this regard. In retrospect, even
+  the inventor of C+ (Bjarne Stoustrup) considers this one of the worse mistakes
+  he made during development. Because, std::string has been around for
+  20 years now, it's probably as good a time as any, to address this issue.
+
+  MIXR defines its own Object-based reference counted String class.  Under the hood,
+  it handles much of the low level management of a C style string (or actually
+  character array).
+
+  Starting with this release, MIXR now, under the hood, within many of its C++
+  classes is starting to use std::string as opposed to a pointer to an array
+  of characters 'char*' or even a pointer to MIXR's String class (String*).  In many
+  aspects, this simplifies things. Over time, we hope to more of the code in this
+  direction.
+
+  We still need to retain MIXR's String class for one important aspect of
+  functionality - namely, it's compatibility with the Object class.
+  This is required for the parser pass parameters to slot methods.  After that,
+  the string itself can often be treated like any other C++ primitive data type
+  (int, double, etc.).
 
 --------------------------------------------------------------------------------
 
