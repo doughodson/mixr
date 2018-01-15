@@ -1,8 +1,8 @@
 
-#include "mixr/base/functors/Func5.hpp"
+#include "mixr/base/relations/Func5.hpp"
 
 #include "mixr/base/List.hpp"
-#include "mixr/base/functors/Table5.hpp"
+#include "mixr/base/relations/Table5.hpp"
 #include <iostream>
 
 namespace mixr {

@@ -1,5 +1,5 @@
 
-#include "mixr/base/functors/Polynomial.hpp"
+#include "mixr/base/relations/Polynomial.hpp"
 
 #include "mixr/base/List.hpp"
 #include <iostream>

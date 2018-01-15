@@ -3,7 +3,7 @@
 #define __mixr_base_Func4_H__
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/functors/Function.hpp"
+#include "mixr/base/relations/Function.hpp"
 
 namespace mixr {
 namespace base {

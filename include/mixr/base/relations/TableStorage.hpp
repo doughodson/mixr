@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TableStorage_H__
 #define __mixr_base_TableStorage_H__
 
-#include "mixr/base/functors/FStorage.hpp"
+#include "mixr/base/relations/FStorage.hpp"
 
 namespace mixr {
 namespace base {

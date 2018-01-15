@@ -1,7 +1,7 @@
 
-#include "mixr/base/functors/Table4.hpp"
+#include "mixr/base/relations/Table4.hpp"
 
-#include "mixr/base/functors/TableStorage.hpp"
+#include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"

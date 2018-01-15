@@ -1,8 +1,8 @@
 
-#include "mixr/base/functors/Table.hpp"
+#include "mixr/base/relations/Table.hpp"
 
-#include "mixr/base/functors/FStorage.hpp"
-#include "mixr/base/functors/TableStorage.hpp"
+#include "mixr/base/relations/FStorage.hpp"
+#include "mixr/base/relations/TableStorage.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/List.hpp"

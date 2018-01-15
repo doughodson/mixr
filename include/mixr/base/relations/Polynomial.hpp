@@ -3,7 +3,7 @@
 #define __mixr_base_Polynomial_H__
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/functors/Func1.hpp"
+#include "mixr/base/relations/Func1.hpp"
 
 namespace mixr {
 namespace base {

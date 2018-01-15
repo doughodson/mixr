@@ -1,5 +1,5 @@
 
-#include "mixr/base/functors/TableStorage.hpp"
+#include "mixr/base/relations/TableStorage.hpp"
 
 namespace mixr {
 namespace base {

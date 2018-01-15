@@ -33,21 +33,7 @@ OBJS =  \
 	concepts/linkage/AbstractIoHandler.o \
 	edl_parser/EdlParser.o \
 	edl_parser/EdlScanner.o \
-	functors/FStorage.o \
-	functors/Func1.o \
-	functors/Func2.o \
-	functors/Func3.o \
-	functors/Func4.o \
-	functors/Func5.o \
-	functors/Function.o \
-	functors/Polynomial.o \
-	functors/Table.o \
-	functors/Table1.o \
-	functors/Table2.o \
-	functors/Table3.o \
-	functors/Table4.o \
-	functors/Table5.o \
-	functors/TableStorage.o \
+	relations/FStorage.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -68,6 +54,20 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
+	relations/Func1.o \
+	relations/Func2.o \
+	relations/Func3.o \
+	relations/Func4.o \
+	relations/Func5.o \
+	relations/Function.o \
+	relations/Polynomial.o \
+	relations/Table.o \
+	relations/Table1.o \
+	relations/Table2.o \
+	relations/Table3.o \
+	relations/Table4.o \
+	relations/Table5.o \
+	relations/TableStorage.o \
 	threads/platform/AbstractThread_linux.o \
 	threads/platform/PeriodicThread_linux.o \
 	threads/platform/SyncThread_linux.o \
@@ -139,11 +139,11 @@ clean:
 	-rm -f threads/platform/*.o
 	-rm -f threads/*.o
 	-rm -f edl_parser/*.o
-	-rm -f functors/*.o
 	-rm -f io/*.o
 	-rm -f network/*.o
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
+	-rm -f relations/*.o
 	-rm -f ubf/*.o
 	-rm -f units/*.o
 	-rm -f util/platform/*.o

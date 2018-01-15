@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Table5_H__
 #define __mixr_base_Table5_H__
 
-#include "mixr/base/functors/Table4.hpp"
+#include "mixr/base/relations/Table4.hpp"
 
 namespace mixr {
 namespace base {
