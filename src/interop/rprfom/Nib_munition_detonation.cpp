@@ -258,25 +258,25 @@ bool Nib::munitionDetonationMsgFactory(const double)
    {
       DetonationResultCodeEnum8 detonationResultCode;
       switch ( mPlayer->getDetonationResults() ) {
-         case models::AbstractWeapon::DETONATE_OTHER :
+         case models::AbstractWeapon::Detonation::OTHER :
             detonationResultCode = DetonationResultCodeOther;
             break;
-         case models::AbstractWeapon::DETONATE_ENTITY_IMPACT :
+         case models::AbstractWeapon::Detonation::ENTITY_IMPACT :
             detonationResultCode = EntityImpact;
             break;
-         case models::AbstractWeapon::DETONATE_ENTITY_PROXIMATE_DETONATION :
+         case models::AbstractWeapon::Detonation::ENTITY_PROXIMATE_DETONATION :
             detonationResultCode = EntityProximateDetonation;
             break;
-         case models::AbstractWeapon::DETONATE_GROUND_IMPACT :
+         case models::AbstractWeapon::Detonation::GROUND_IMPACT :
             detonationResultCode = GroundImpact;
             break;
-         case models::AbstractWeapon::DETONATE_GROUND_PROXIMATE_DETONATION :
+         case models::AbstractWeapon::Detonation::GROUND_PROXIMATE_DETONATION :
             detonationResultCode = GroundProximateDetonation;
             break;
-         case models::AbstractWeapon::DETONATE_DETONATION :
+         case models::AbstractWeapon::Detonation::DETONATION :
             detonationResultCode = Detonation;
             break;
-         case models::AbstractWeapon::DETONATE_NONE :
+         case models::AbstractWeapon::Detonation::NONE :
             detonationResultCode = None;
             break;
          default :
