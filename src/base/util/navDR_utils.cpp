@@ -17,7 +17,7 @@ namespace navDR {
 //==============================================================================
 bool deadReckoning(
          const double dT,               // IN: time increment (secs)
-         const unsigned int drNum,      // IN: dead reckoning code
+         const DeadReckoning drCode,    // IN: dead reckoning code
          const Vec3d& p0,               // IN: Position vector @ T=0 (meters) (ECEF)
          const Vec3d& v0,               // IN: Velocity vector @ T=0 (m/sec)  (ECEF or Body based on 'drNum')
          const Vec3d& a0,               // IN: Acceleration vector @ T=0 ((m/sec)/sec) (ECEF or Body based on 'drNum')
@@ -38,7 +38,7 @@ bool deadReckoning(
    Vec4d newP{p};
    Vec4d newRPY{rpy};
 
-   switch (drNum) {
+   switch (drCode) {
 
       //--------------------------------------------------------------
       // DRM = STATIC -- No dead reckoning 

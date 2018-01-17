@@ -30,7 +30,7 @@ enum class DeadReckoning {
 //--------------------------------------------------------------------------
 bool deadReckoning(
       const double dT,          // IN: time increment (secs)
-      const unsigned int drNum, // IN: dead reckoning codes
+      const DeadReckoning,      // IN: dead reckoning codes
       const Vec3d& p0,          // IN: Position vector @ T=0 (meters) (ECEF)
       const Vec3d& v0,          // IN: Velocity vector @ T=0 (m/sec)  (ECEF or Body based on 'drNum')
       const Vec3d& a0,          // IN: Acceleration vector @ T=0 ((m/sec)/sec) (ECEF or Body based on 'drNum')
