@@ -173,7 +173,7 @@ bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        networkMask = msg->getCopyString();
+        networkMask = msg->c_str();
         ok = true;
     }
     return ok;

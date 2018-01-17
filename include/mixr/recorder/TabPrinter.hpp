@@ -127,7 +127,7 @@ private:
 
    MsgHdrOptions option{MsgHdrOptions::NO_HDR};        // options for printing field names
    unsigned int lastMessage{REID_UNHANDLED_ID_TOKEN};  // previous message printed
-   const char* divider{"\t"};                          // divider between message fields
+   std::string divider{"\t"};                          // divider between message fields
 
 private:
    // slot table helper methods

@@ -313,9 +313,19 @@ base library (mixr_base)
          please use the Boolean class instead
 
    String class
-      1) No significant changes other than the removal of 'virtual' from several
-         methods no longer used.
-      2) The method 'getString' has been renamed to 'c_str'.
+      1) Removal of 'virtual' from several methods that don't need it. String is a
+         fully defined concrete class, so ideally, it should not serve as a base
+         class to something else.
+      2) The method 'getString' has been renamed to 'c_str' per discussion above.
+      3) Removed method 'getCopyString' which allocated a new character array and
+         copied the internal contents of the String object into it.  It returned
+         a char* (character pointer) back to callee.  While seemingly useful, this
+         method was almost never used.  As the move towards using std::string
+         progresses, this method becomes less useful (std::string already provides
+         this functionality).
+
+         String x("hello");
+         std::string y = x->c_str();   // properly copies the char*-based string
 
    Table class
       1) Slot parameter 'extrapolate' now accepts a Boolean

@@ -47,7 +47,6 @@ public:
 
     const char* c_str() const;                     // Returns a pointer to a valid C-style string
 
-    char* getCopyString() const;                   // Returns a copy of the text string
     char getChar(const unsigned int index) const;  // Gets a specific character
 
     void empty();                                            // Empty this string.
@@ -135,20 +134,6 @@ inline char String::getChar(const unsigned int index) const
 inline const char* String::c_str() const
 {
     return cstr;
-}
-
-//------------------------------------------------------------------------------
-// getCopyString() -- returns a copy of the string
-//------------------------------------------------------------------------------
-inline char* String::getCopyString() const
-{
-    char* p {};
-    std::size_t l {len()};
-    if (l > 0) {
-        p = new char[l+1];
-        utStrcpy(p,(l+1), cstr);
-    }
-    return p;
 }
 
 //------------------------------------------------------------------------------

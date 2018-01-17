@@ -111,7 +111,7 @@ bool TabPrinter::setSlotDivider(const base::String* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      divider = msg->getCopyString();
+      divider = msg->c_str();
    }
 
    return ok;
