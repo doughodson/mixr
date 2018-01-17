@@ -82,9 +82,9 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     }
 
     #if defined(WIN32)
-        std::ifstream   fin(*string, std::ios::in | std::ios::binary);
+        std::ifstream   fin(string->c_str(), std::ios::in | std::ios::binary);
     #else
-        std::ifstream   fin(*string, std::ios::in);
+        std::ifstream   fin(string->c_str(), std::ios::in);
     #endif
 
     if (fin.fail()) {

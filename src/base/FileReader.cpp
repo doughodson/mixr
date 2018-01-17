@@ -126,7 +126,7 @@ bool FileReader::setSlotPathname(String* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setPathname( *msg );
+      ok = setPathname( (*msg).c_str() );
    }
    return ok;
 }
@@ -135,7 +135,7 @@ bool FileReader::setSlotFilename(String* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setFilename( *msg );
+      ok = setFilename( (*msg).c_str() );
    }
    return ok;
 }

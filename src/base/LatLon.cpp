@@ -159,7 +159,7 @@ bool LatLon::setSec(const double s)
 bool LatLon::setSlotDirection(const String* const sdobj)
 {
    bool ok{};
-   if (sdobj != nullptr) ok = setDir(*sdobj);
+   if (sdobj != nullptr) ok = setDir((*sdobj).c_str());
    return ok;
 }
 

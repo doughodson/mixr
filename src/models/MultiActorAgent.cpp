@@ -48,7 +48,7 @@ void MultiActorAgent::reset()
    if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
-         base::Component* c{sim->findPlayerByName(agentList[i].actorName->getString())};
+         base::Component* c{sim->findPlayerByName(agentList[i].actorName->c_str())};
          if (c != nullptr) {
             agentList[i].actor = c;
             // send reset to each

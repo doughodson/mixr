@@ -486,7 +486,7 @@ bool PosixHandler::setSlotLocalIpAddress(const Identifier* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        localIpAddr = msg->getStdString();
+        localIpAddr = msg->str();
         ok = true;
     }
     return ok;
@@ -497,7 +497,7 @@ bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        localIpAddr = msg->getStdString();
+        localIpAddr = msg->c_str();
         ok = true;
     }
     return ok;

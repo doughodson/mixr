@@ -99,7 +99,7 @@ const char* FileWriter::getFullFilename() const
 const char* FileWriter::getFilename() const
 {
    const char* p{};
-   if (filename != nullptr) p = *filename;
+   if (filename != nullptr) p = filename->c_str();
    return p;
 }
 
@@ -107,7 +107,7 @@ const char* FileWriter::getFilename() const
 const char* FileWriter::getPathname() const
 {
    const char* p{};
-   if (pathname != nullptr) p = *pathname;
+   if (pathname != nullptr) p = pathname->c_str();
    return p;
 }
 
@@ -157,10 +157,10 @@ bool FileWriter::openFile()
       // Create the (initial) full file name
       //---
       if (pathname != nullptr && pathname->len() > 0) {
-         base::utStrcat(fullname, nameLength ,*pathname);
+         base::utStrcat(fullname, nameLength , pathname->c_str());
          base::utStrcat(fullname, nameLength, "/");
       }
-      base::utStrcat(fullname,nameLength,*filename);
+      base::utStrcat(fullname,nameLength, filename->c_str());
 
       //---
       // Make sure that it doesn't already exist (we don't want to over write good data).

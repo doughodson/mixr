@@ -42,7 +42,7 @@ public:
    virtual void setClassIndex(const unsigned int);
 
    // Object name
-   const char* getObjectName() const                        { return oname; }
+   const char* getObjectName() const                        { return oname.c_str(); }
    virtual void setObjectName(const char*);
 
    // Makes a default RTI name

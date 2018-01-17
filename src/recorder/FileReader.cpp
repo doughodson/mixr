@@ -120,10 +120,10 @@ bool FileReader::openFile()
       // Create the (initial) full file name
       //---
       if (pathname != nullptr && pathname->len() > 0) {
-         base::utStrcat(fullname, nameLength ,*pathname);
+         base::utStrcat(fullname, nameLength , pathname->c_str());
          base::utStrcat(fullname, nameLength, "/");
       }
-      base::utStrcat(fullname,nameLength,*filename);
+      base::utStrcat(fullname,nameLength, filename->c_str());
 
       //---
       // Make sure that it exists

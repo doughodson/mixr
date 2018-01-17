@@ -389,7 +389,7 @@ void Graphic::setupMaterial()
 //------------------------------------------------------------------------------
 void Graphic::draw()
 {
-    Display* display = getDisplay();
+    Display* display{getDisplay()};
 
     // Flashing: return if flashing and the flash flip/flop is OFF
     if (isFlashing() && flashOff()) return;
@@ -404,15 +404,14 @@ void Graphic::draw()
     }
 
     // if we have a color and no material, switch to that color
-    bool setOldColor = false;
+    bool setOldColor{};
     base::Vec4d ocolor;
     if (materialName == nullptr && materialObj == nullptr) {
         if (colorName != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
-            display->setColor(*colorName);
-        }
-        else if (color != nullptr) {
+            display->setColor((*colorName).c_str());
+        } else if (color != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
             const base::Vec4d* p = *color;
@@ -420,8 +419,8 @@ void Graphic::draw()
         }
     }
 
-    bool haveMaterial = false;
-    GLfloat oldPos[4];
+    bool haveMaterial{};
+    GLfloat oldPos[4]{};
     if (lightMoved) {
         GLfloat temp[4] = { static_cast<GLfloat>(lightPos.x()), static_cast<GLfloat>(lightPos.y()),
                             static_cast<GLfloat>(lightPos.z()), static_cast<GLfloat>(lightPos.w()) };
@@ -455,9 +454,9 @@ void Graphic::draw()
     }
 
     // set line width
-    GLfloat olw = 0.0;
+    GLfloat olw{};
     if (linewidth > 0.0f) {
-        GLfloat nlw = linewidth * (display->getStdLineWidth());
+        GLfloat nlw{linewidth * (display->getStdLineWidth())};
         olw = display->setLinewidth(nlw);
     }
 
@@ -487,9 +486,9 @@ void Graphic::draw()
     }
 
     // Draw my children
-    base::PairStream* subcomponents = getComponents();
+    base::PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
-        Component* s = getSelectedComponent();
+        Component* s{getSelectedComponent()};
         if (s != nullptr) {
             // When we've selected only one
             const auto selected0 = dynamic_cast<Graphic*>(s);
@@ -499,7 +498,7 @@ void Graphic::draw()
         }
         else {
             // When we should draw them all
-            base::List::Item* item = subcomponents->getFirstItem();
+            base::List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<base::Pair*>(item->getValue());
                 const auto obj = dynamic_cast<Graphic*>( pair->object() );
@@ -630,11 +629,11 @@ void Graphic::setupMatrix()
 {
     // Start out with an identity matrix
     m.makeIdentity();
-    haveMatrix  = false;
+    haveMatrix = false;
 
     // Modify the matrix with all our transformations.
     if (transforms != nullptr) {
-        const base::List::Item* item = transforms->getFirstItem();
+        const base::List::Item* item{transforms->getFirstItem()};
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             const auto t = dynamic_cast<base::Transform*>(p->object());
@@ -705,9 +704,9 @@ bool Graphic::setColor(const base::Number* const cnobj)
 // handle the SET_TEXTURE event
 bool Graphic::onSetTextureId(const base::Number* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int v = msg->getInt();
+      const int v{msg->getInt()};
       if (v >= 0) {
          ok = setTexture(static_cast<GLuint>(v));
       }
@@ -730,7 +729,7 @@ bool Graphic::onSetFlashRateEvent(const base::Number* const msg)
 // onSetVisibilityEvent -- handle the SET_VISIBILITY event
 bool Graphic::onSetVisibilityEvent(const base::Boolean* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setVisibility( msg->getBoolean() );
    }
@@ -754,13 +753,13 @@ bool Graphic::clipLine2D(
             const double minY,    // Clip box min Y value
             const double maxY)    // Clip box max Y value
 {
-   double x1 = ep1->_v[0];
-   double y1 = ep1->_v[1];
-   double x2 = ep2->_v[0];
-   double y2 = ep2->_v[1];
+   double x1{ep1->_v[0]};
+   double y1{ep1->_v[1]};
+   double x2{ep2->_v[0]};
+   double y2{ep2->_v[1]};
 
-   bool accept = false;
-   bool reject = false;
+   bool accept{};
+   bool reject{};
 
    while ( !(accept || reject) ) {
 

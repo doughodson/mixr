@@ -175,7 +175,7 @@ void Station::copyData(const Station& org, const bool)
 
    // Attach our ownship
    if (ownshipName != nullptr) {
-      setOwnshipByName( *ownshipName );
+      setOwnshipByName( (*ownshipName).c_str() );
    }
 }
 
@@ -212,7 +212,7 @@ void Station::reset()
    // Reset the ownship pointer
    // ---
    if (ownshipName != nullptr) {
-      setOwnshipByName( *ownshipName );
+      setOwnshipByName( (*ownshipName).c_str() );
       if (ownship == nullptr) {
          // Ok, we had a list of players and an ownship player name, but still
          // don't have an ownship pointer -- print an error message.

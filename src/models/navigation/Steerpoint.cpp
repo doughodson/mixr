@@ -217,7 +217,7 @@ double Steerpoint::getElevationFt() const
 const char* Steerpoint::getDescription() const
 {
     const char* p{};
-    if (description != nullptr) p = *description;
+    if (description != nullptr) p = description->c_str();
     return p;
 }
 
@@ -326,15 +326,15 @@ bool Steerpoint::setSlotSteerpointType(const base::Identifier* const msg)
     bool ok{};
     if (msg != nullptr) {
         ok = true;  // assume that it's valid
-        if      (*msg == "DEST"  || *msg == "dest")  setSteerpointType(DEST);
-        else if (*msg == "MARK"  || *msg == "mark")  setSteerpointType(MARK);
-        else if (*msg == "FIX"   || *msg == "fix")   setSteerpointType(FIX);
-        else if (*msg == "OAP"   || *msg == "oap")   setSteerpointType(OAP);
-        else if (*msg == "TGT"   || *msg == "tgt")   setSteerpointType(TGT);
-        else if (*msg == "IP"    || *msg == "ip")    setSteerpointType(IP);
+        if      (*msg == "DEST"  || *msg == "dest")  setSteerpointType(StptType::DEST);
+        else if (*msg == "MARK"  || *msg == "mark")  setSteerpointType(StptType::MARK);
+        else if (*msg == "FIX"   || *msg == "fix")   setSteerpointType(StptType::FIX);
+        else if (*msg == "OAP"   || *msg == "oap")   setSteerpointType(StptType::OAP);
+        else if (*msg == "TGT"   || *msg == "tgt")   setSteerpointType(StptType::TGT);
+        else if (*msg == "IP"    || *msg == "ip")    setSteerpointType(StptType::IP);
         else {
-            std::cerr << "xxx(): invalid steerpoint type: " << *msg << std::endl;
-            std::cerr << " -- valid types are { DEST, MARK, FIX, OAP, TGT }" << std::endl;
+            std::cerr << "Steerpoint::setSlotSteerpointType(): invalid steerpoint type: " << *msg << std::endl;
+            std::cerr << " -- valid types are { dest, mark, fix, oap, tgt }" << std::endl;
             ok = false; // it's no longer ok
         }
     }

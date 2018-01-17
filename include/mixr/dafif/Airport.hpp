@@ -45,11 +45,10 @@ public:
 
    enum { RECORD_LENGTH = AIRPORT_RECORD_LEN  };
 
-   enum AirportType { INVALID = -1, ANY = 'Z',
-                      CIVIL  = 'A', JOINT = 'B', MILITARY = 'C', INACTIVE = 'D' };
+   enum class Type:int { INVALID = -1, ANY = 'Z', CIVIL  = 'A', JOINT = 'B', MILITARY = 'C', INACTIVE = 'D' };
 
-   virtual AirportType airportType() const;
-   virtual int isAirportType(const AirportType type) const;
+   virtual Type airportType() const;
+   virtual int isAirportType(const Type) const;
 
    void ident(char id[]) const override;
 

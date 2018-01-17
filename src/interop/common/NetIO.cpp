@@ -879,7 +879,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 
    if (result == 0) {
       // If they're the same, compare the federate names
-      result = std::strcmp(*pKey->fName, *pNib->getFederateName());
+      result = std::strcmp((*pKey->fName).c_str(), (*pNib->getFederateName()).c_str());
    }
 
    return result;
@@ -1455,7 +1455,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
             const std::size_t tpTypeLen{tpType->len()};
 
             if (tpTypeLen <= pTypeLen) {
-               bool match{(std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0)};
+               bool match{(std::strncmp( pType->c_str(), tpType->c_str(), tpTypeLen ) == 0)};
                if (match) {
                   result = tstNtm;
                }
@@ -1595,7 +1595,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          std::size_t len{newTypeLen};
          if (refTypeLen < len) len = refTypeLen;
 
-         int r{std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len)};
+         int r{std::strncmp(newTypeStr->c_str(), refTypeStr->c_str(), len)};
          if ( r == 0 && refTypeLen < newTypeLen) {
             ntmList->insert(newItem, refItem);
             inserted = true;

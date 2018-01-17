@@ -19,7 +19,7 @@ class Ins : public Navigation
 
 public:
     // Alignment modes
-    enum AlignMode { PREC = 1, SHDG = 2, AIR = 3, ATT = 4 };
+    enum class AlignMode:int { PREC = 1, SHDG = 2, AIR = 3, ATT = 4 };
 
 public:
     Ins();
@@ -38,23 +38,23 @@ public:
     virtual void setAlignmentMode(const AlignMode mode);
 
 protected:
-    virtual void setGyroBias(const base::Vec3d* const p);
-    virtual void setAccelBias(const base::Vec3d* const p);
-    virtual void setWanderAngle(const double v);
-    virtual void setAlignmentTTG(const double v);
-    virtual void setQuality(const double v);
+    virtual void setGyroBias(const base::Vec3d* const);
+    virtual void setAccelBias(const base::Vec3d* const);
+    virtual void setWanderAngle(const double);
+    virtual void setAlignmentTTG(const double);
+    virtual void setQuality(const double);
 
 private:
     base::Vec3d gyroBias;    // Gyro Bias
     base::Vec3d accelBias;   // Acceleration Bias
-    double wander {};        // Wander angle (degs)
-    double dBias {};         // Doppler bias
-    double dSFact {};        // Doppler Scale Factor
+    double wander{};         // Wander angle (degs)
+    double dBias{};          // Doppler bias
+    double dSFact{};         // Doppler Scale Factor
 
     // Alignment/Kalman filter data
-    AlignMode alignMode {SHDG};   // Alignment mode
-    double alignTTG {};           // Alignment Time to Go (sec)
-    double quality {};            // Quality
+    AlignMode alignMode{AlignMode::SHDG};   // Alignment mode
+    double alignTTG{};                      // Alignment Time to Go (sec)
+    double quality{};                       // Quality
 };
 
 }

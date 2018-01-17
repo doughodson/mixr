@@ -155,9 +155,9 @@ bool CadrgFile::checkForMap(const char* dir)
     string->catStr("A.TOC");
 
     #if defined(WIN32)
-        toc.open(*string, std::ios::in | std::ios::binary);
+        toc.open(string->c_str(), std::ios::in | std::ios::binary);
     #else
-        toc.open(*string, std::ios::in);
+        toc.open(string->c_str(), std::ios::in);
     #endif
 
     // We didn't make it, so either we have a bad location, or the filename is lower case.  Let's try lowercase.
@@ -168,9 +168,9 @@ bool CadrgFile::checkForMap(const char* dir)
         string->setStr(dir);
         string->catStr("a.toc");
         #if defined(WIN32)
-            toc.open(*string, std::ios::in | std::ios::binary);
+            toc.open(string->c_str(), std::ios::in | std::ios::binary);
         #else
-            toc.open(*string, std::ios::in);
+            toc.open(string->c_str(), std::ios::in);
         #endif
         // if we succeed, return true
         if (!toc.fail()) ok = true;
@@ -237,9 +237,9 @@ bool CadrgFile::initialize(const char* dir)
     string->catStr("A.TOC");
 
     #if defined(WIN32)
-        toc.open(*string, std::ios::in | std::ios::binary);
+        toc.open(string->c_str(), std::ios::in | std::ios::binary);
     #else
-        toc.open(*string, std::ios::in);
+        toc.open(string->c_str(), std::ios::in);
     #endif
 
     // We didn't make it, so either we have a bad location, or the filename is lower case.  Let's try lowercase.
@@ -250,9 +250,9 @@ bool CadrgFile::initialize(const char* dir)
         string->setStr(dir);
         string->catStr("a.toc");
         #if defined(WIN32)
-            toc.open(*string, std::ios::in | std::ios::binary);
+            toc.open(string->c_str(), std::ios::in | std::ios::binary);
         #else
-            toc.open(*string, std::ios::in);
+            toc.open(string->c_str(), std::ios::in);
         #endif
         // If we still failed again, we know it's the directory that is misspelled or doesn't exist, so we print an error
         // and return.
@@ -652,7 +652,7 @@ bool CadrgFile::initialize(const char* dir)
 //--------------------------------------------------------------------------
 const char* CadrgFile::getDirectory()
 {
-    if (originalDir != nullptr) return originalDir->getString();
+    if (originalDir != nullptr) return originalDir->c_str();
     else return "";
 }
 

@@ -106,12 +106,12 @@ void Bullet::updateTOF(const double)
       int n{};
       int nhits{};
       for (int i = 0; i < nbt; i++) {
-         if (bursts[i].bStatus == Burst::ACTIVE) {
+         if (bursts[i].bStatus == Burst::Status::ACTIVE) {
             n++;
             if ( bursts[i].bTof >= getMaxTOF() ) {
-               bursts[i].bStatus = Burst::MISS;
+               bursts[i].bStatus = Burst::Status::MISS;
             }
-         } else if (bursts[i].bStatus == Burst::HIT) {
+         } else if (bursts[i].bStatus == Burst::Status::HIT) {
             nhits++;
          }
       }
@@ -121,9 +121,9 @@ void Bullet::updateTOF(const double)
          setMode(Mode::DETONATED);
          // final detonation results (hit or miss) are located with each burst ...
          if (nhits > 0) {
-            setDetonationResults( DETONATE_ENTITY_IMPACT );
+            setDetonationResults( Detonation::ENTITY_IMPACT );
          } else {
-            setDetonationResults( DETONATE_NONE );
+            setDetonationResults( Detonation::NONE );
          }
          // final time of flight (slave to the first burst)
          setTOF( bursts[0].bTof );
@@ -151,7 +151,7 @@ bool Bullet::burstOfBullets(const base::Vec3d* const pos, const base::Vec3d* con
       bursts[nbt].bNum = num;  // Number of rounds in burst
       bursts[nbt].bRate = rate;// Round rate for this burst (rds per sec)
       bursts[nbt].bEvent = e;  // Release event number for burst
-      bursts[nbt].bStatus = Burst::ACTIVE;
+      bursts[nbt].bStatus = Burst::Status::ACTIVE;
       nbt++;
    }
    return true;
@@ -166,7 +166,7 @@ void Bullet::updateBurstTrajectories(const double dt)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {
-      if (bursts[i].bStatus == Burst::ACTIVE) {
+      if (bursts[i].bStatus == Burst::Status::ACTIVE) {
          bursts[i].bVel[Player::IDOWN] = bursts[i].bVel[Player::IDOWN] + (g*dt);  // falling bullets
 
          bursts[i].bPos = bursts[i].bPos + (bursts[i].bVel * dt);
@@ -187,14 +187,14 @@ bool Bullet::checkForTargetHit()
 
       // For all active bursts ...
       for (int i = 0; i < nbt; i++) {
-         if (bursts[i].bStatus == Burst::ACTIVE) {
+         if (bursts[i].bStatus == Burst::Status::ACTIVE) {
 
             // Check if we're within range of the target
             base::Vec3d rPos{bursts[i].bPos - osPos};
             double rng{rPos.length()};
             if (rng < 10.0) {
                // Yes -- it's a hit!
-               bursts[i].bStatus = Burst::HIT;
+               bursts[i].bStatus = Burst::Status::HIT;
                setHitPlayer(tgt);
                setLocationOfDetonation();
                tgt->processDetonation(rng,this);

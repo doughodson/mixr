@@ -794,12 +794,12 @@ void JSBSimModel::reset()
         }
         fdmex = new JSBSim::FGFDMExec(propMgr);
         fdmex->SetDebugLevel(debugLevel);           // sets the verbosity of JSBSim model instance
-        std::string RootDir(rootDir->getString());
+        std::string RootDir(rootDir->c_str());
         fdmex->SetAircraftPath(RootDir + "aircraft");
         fdmex->SetEnginePath(RootDir + "engine");
         fdmex->SetSystemsPath(RootDir + "systems"); // JSBSim-1.0 or after only
 
-        fdmex->LoadModel(model->getString());
+        fdmex->LoadModel(model->c_str());
         JSBSim::FGPropertyManager* propMgr{fdmex->GetPropertyManager()};
         if (propMgr != nullptr) {
             hasHeadingHold = propMgr->HasNode("ap/heading_hold") && propMgr->HasNode("ap/heading_setpoint");

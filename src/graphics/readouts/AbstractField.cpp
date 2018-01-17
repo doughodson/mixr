@@ -429,7 +429,7 @@ void AbstractField::drawFunc()
     // ---
     // Select the correct font based on font name if there is one, and if not, then do it normally
     // ---
-    if (fontName != nullptr) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->getString()));
+    if (fontName != nullptr) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->c_str()));
     else dsp->selectFont(isReversed(), isUnderlined());
 
 
@@ -459,7 +459,7 @@ void AbstractField::drawFunc()
 
     if (str.len() > 0) {
         // Draw the text string
-        const char* sp {str};
+        const char* sp {str.c_str()};
         if (ll > 0 && cc > 0)
             dsp->outputTextLC(ll, cc, sp, static_cast<int>(width()), isVertical());
         else

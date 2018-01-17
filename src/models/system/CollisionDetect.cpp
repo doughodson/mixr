@@ -558,19 +558,19 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
          const auto pair = static_cast<const base::Pair*>(item->getValue());
          const auto type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
-            if ( utStrcasecmp(*type,"air") == 0 ) {
+            if ( base::utStrcasecmp(type->c_str(), "air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
-            } else if ( utStrcasecmp(*type,"ground") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
-            } else if ( utStrcasecmp(*type,"weapon") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
-            } else if ( utStrcasecmp(*type,"ship") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "ship") == 0 ) {
                mask = (mask | Player::SHIP);
-            } else if ( utStrcasecmp(*type,"building") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "building") == 0 ) {
                mask = (mask | Player::BUILDING);
-            } else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
-            } else if ( utStrcasecmp(*type,"space") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }

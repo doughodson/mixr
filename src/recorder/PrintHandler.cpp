@@ -86,7 +86,7 @@ const char* PrintHandler::getFullFilename() const
 const char* PrintHandler::getFilename() const
 {
    const char* p{};
-   if (filename != nullptr) p = *filename;
+   if (filename != nullptr) p = filename->c_str();
    return p;
 }
 
@@ -94,7 +94,7 @@ const char* PrintHandler::getFilename() const
 const char* PrintHandler::getPathname() const
 {
    const char* p{};
-   if (pathname != nullptr) p = *pathname;
+   if (pathname != nullptr) p = pathname->c_str();
    return p;
 }
 
@@ -143,10 +143,10 @@ bool PrintHandler::openFile()
    // Create the (initial) full file name
    //---
    if (pathname != nullptr && pathname->len() > 0) {
-      base::utStrcat(fullname, nameLength ,*pathname);
+      base::utStrcat(fullname, nameLength , pathname->c_str());
       base::utStrcat(fullname, nameLength, "/");
    }
-   utStrcat(fullname,nameLength,*filename);
+   base::utStrcat(fullname,nameLength, filename->c_str());
 
 
    //---

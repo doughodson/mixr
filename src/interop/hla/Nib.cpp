@@ -82,8 +82,8 @@ void Nib::setObjectName(const char* s)
 // Makes a default RTI name
 void Nib::makeObjectName()
 {
-   char name[256] {};
-   const char* fname {*getFederateName()};
+   char name[256]{};
+   const char* fname {getFederateName()->c_str()};
    std::sprintf(name, "P%d_%s", int(getPlayerID()), fname );
    setObjectName(name);
 }                            

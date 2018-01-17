@@ -93,7 +93,7 @@ const char* Terrain::getFilename() const
 {
    const char* p = nullptr;
    if (file != nullptr) {
-      p = *file;
+      p = file->c_str();
    }
    return p;
 }
@@ -104,7 +104,7 @@ const char* Terrain::getPathname() const
    const char* p = nullptr;
    if (path != nullptr) {
       // Our path
-      p = *path;
+      p = path->c_str();
    } else {
       // See if we have a contain "Terrain" object that has a path set
       const Terrain* q = static_cast<const Terrain*>(findContainerByType(typeid(Terrain)));

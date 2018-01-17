@@ -254,7 +254,7 @@ bool AbstractFont::setSlotFontPath(const base::String* const str)
         std::size_t j {str->len()};
         if (j > 0) {
             fontPath = new char[j+1];
-            utStrcpy(fontPath, j+1, *str);
+            base::utStrcpy(fontPath, j+1, (*str).c_str());
         }
         else {
               if (isMessageEnabled(MSG_ERROR)) {
@@ -276,7 +276,7 @@ bool AbstractFont::setSlotFTGLFontFileName(const base::String* const str)
         std::size_t j = str->len();
         if (j > 0) {
             fontFile = new char[j+1];
-            utStrcpy(fontFile, j+1, *str);
+            base::utStrcpy(fontFile, j+1, (*str).c_str());
         }
         else {
            if (isMessageEnabled(MSG_ERROR)) {

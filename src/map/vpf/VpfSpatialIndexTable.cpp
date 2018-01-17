@@ -36,7 +36,7 @@ void VpfSpatialIndexTable::loadIndexTableFromFile(const char* pathname, const ch
     fullPath = new base::String(pathname);
     fullPath->catStr(filename);
     std::ifstream inStream;
-    inStream.open(fullPath->getString(), std::ios::in | std::ios::binary);
+    inStream.open(fullPath->c_str(), std::ios::in | std::ios::binary);
     if (inStream.fail()) std::cerr << "VpfSpatialIndexTable::loadIndexFromFile(), failed to open file " << filename << std::endl;
     else {
         inStream.seekg(0, std::ios::beg);
@@ -97,8 +97,8 @@ int VpfSpatialIndexTable::findPrimitivesBySpatialQuery(const float lat, const fl
 #endif
         // ok, we have the spatial point, now let's start reading the records that are in this coordinate
         std::fstream stream;
-        stream.open(fullPath->getString(), std::ios::in | std::ios::binary);
-        if (stream.fail()) std::cout << "COULD NOT OPEN FILE = " << fullPath->getString() << std::endl;
+        stream.open(fullPath->c_str(), std::ios::in | std::ios::binary);
+        if (stream.fail()) std::cout << "COULD NOT OPEN FILE = " << fullPath->c_str() << std::endl;
         else {
             // now get our first cell, and go from there
             for (int i = 0; i < numNodes; i++) {

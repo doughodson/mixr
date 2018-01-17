@@ -55,9 +55,9 @@ BEGIN_SLOT_MAP(NumericReadout)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(NumericReadout)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Float)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Integer)
-ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Number)
+   ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Float)
+   ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Integer)
+   ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Number)
 END_EVENT_HANDLER()
 
 NumericReadout::NumericReadout()
@@ -161,7 +161,7 @@ double NumericReadout::getInputValue() const
    // copy string to buffer with correct sign character
    const std::size_t CBUFLOCAL_LEN {100};
    char cbuf[CBUFLOCAL_LEN] {};
-   const char* p {*this};
+   const char* p {this->str.c_str()};
    base::utStrcpy(cbuf, CBUFLOCAL_LEN, p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
@@ -404,7 +404,7 @@ bool NumericReadout::setSlotExampleFormatText(const base::String* const seftobj)
    bool ok {true};
    if (seftobj != nullptr) {
       if (width() == 0) width(seftobj->len());
-      reformat(*seftobj);
+      reformat((*seftobj).c_str());
    }
    else {
       if (isMessageEnabled(MSG_ERROR)) {
@@ -420,7 +420,7 @@ bool NumericReadout::setSlotPlusChar(const base::String* const spcobj)
 {
    bool ok {true};
    if (spcobj != nullptr) {
-      const char* str {*spcobj};
+      const char* str {(*spcobj).c_str()};
       plusChar = str[0];
       redisplay();
    }
@@ -438,7 +438,7 @@ bool NumericReadout::setSlotMinusChar(const base::String* const smcobj)
 {
    bool ok {true};
    if (smcobj != nullptr) {
-      const char* str {*smcobj};
+      const char* str {(*smcobj).c_str()};
       minusChar = str[0];
       redisplay();
    }
@@ -456,7 +456,7 @@ bool NumericReadout::setSlotDecimalPointChar(const base::String* const sdpcobj)
 {
    bool ok {true};
    if (sdpcobj != nullptr) {
-      const char* str {*sdpcobj};
+      const char* str {(*sdpcobj).c_str()};
       dpChar = str[0];
       redisplay();
    }
@@ -474,7 +474,7 @@ bool NumericReadout::setSlotUndefinedChar(const base::String* const sucobj)
 {
    bool ok {true};
    if (sucobj != nullptr) {
-      const char* str {*sucobj};
+      const char* str {(*sucobj).c_str()};
       undefinedChar = str[0];
       redisplay();
    }
@@ -539,7 +539,7 @@ bool NumericReadout::setSlotOverflowChar(const base::String* const socobj)
 {
    bool ok {true};
    if (socobj != nullptr) {
-      const char* str {*socobj};
+      const char* str {(*socobj).c_str()};
       overflowChar = str[0];
       redisplay();
    }

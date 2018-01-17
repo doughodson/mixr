@@ -65,7 +65,7 @@ class Steerpoint : public base::Component
    DECLARE_SUBCLASS(Steerpoint, base::Component)
 
 public:
-   enum StptType { DEST, MARK, FIX, OAP, IP, TGT, TGT_GRP };
+   enum class StptType { DEST, MARK, FIX, OAP, IP, TGT, TGT_GRP };
 
 public:
     Steerpoint();
@@ -173,22 +173,22 @@ protected:
 
 private:
     // Steerpoint parameters
-    double      latitude{};           // latitude
-    double      longitude{};          // Longitude
-    double      elevation{};          // Elevation                (m)
-    base::Vec3d posVec;               // Position vector          (m)           [ x, y, z ] NED
-    StptType    stptType{DEST};       // Steerpoint type
-    double      pta{};                // Planned Time of Arrival  (sec)
-    double      sca{};                // Safe Clearance Alt       (ft)
-    double      magvar{};             // Mag Var                  (degs)
+    double      latitude{};                 // latitude
+    double      longitude{};                // Longitude
+    double      elevation{};                // Elevation                (m)
+    base::Vec3d posVec;                     // Position vector          (m)           [ x, y, z ] NED
+    StptType    stptType{StptType::DEST};   // Steerpoint type
+    double      pta{};                      // Planned Time of Arrival  (sec)
+    double      sca{};                      // Safe Clearance Alt       (ft)
+    double      magvar{};                   // Mag Var                  (degs)
     base::safe_ptr<const base::String> description; // Description
-    bool        needPosVec{true};     // Request calucaltion of 'posVec' from Lat/Lon
-    bool        needLL{true};         // Request calucaltion of Lat/Lon from 'posVec'
-    double      cmdAlt{};             // Commanded Altitude       (m)
-    bool        haveCmdAlt{};         // Have commanded altitude
-    double      cmdAirspeed{};        // Commanded Airspeed       (kts)
-    bool        haveCmdAs{};          // Have commanded airspeed
-    base::safe_ptr<base::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
+    bool        needPosVec{true};           // Request calucaltion of 'posVec' from Lat/Lon
+    bool        needLL{true};               // Request calucaltion of Lat/Lon from 'posVec'
+    double      cmdAlt{};                   // Commanded Altitude       (m)
+    bool        haveCmdAlt{};               // Have commanded altitude
+    double      cmdAirspeed{};              // Commanded Airspeed       (kts)
+    bool        haveCmdAs{};                // Have commanded airspeed
+    base::safe_ptr<base::Pair> next;        // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
     base::safe_ptr<Action> action;    // Action to be performed at this steerpoint

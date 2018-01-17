@@ -139,14 +139,14 @@ public:
        MISSILE = 0x08
     };
 
-    enum Detonation { /* from DIS */
-        DETONATE_OTHER                       = 0,
-        DETONATE_ENTITY_IMPACT               = 1,
-        DETONATE_ENTITY_PROXIMATE_DETONATION = 2,
-        DETONATE_GROUND_IMPACT               = 3,
-        DETONATE_GROUND_PROXIMATE_DETONATION = 4,
-        DETONATE_DETONATION                  = 5,
-        DETONATE_NONE                        = 6,
+    enum class Detonation:int { /* from DIS */
+        OTHER                       = 0,
+        ENTITY_IMPACT               = 1,
+        ENTITY_PROXIMATE_DETONATION = 2,
+        GROUND_IMPACT               = 3,
+        GROUND_PROXIMATE_DETONATION = 4,
+        DETONATION                  = 5,
+        NONE                        = 6,
     };
 
 public:
@@ -357,7 +357,7 @@ private:
     bool        canJettison {true};            // Weapon can be jettisioned.
     bool        jettisoned {};             // Weapon has been jettisioned.
     bool        dummyFlg {};               // Dummy (launch, but don't flyout or detonate)
-    Detonation  results {DETONATE_NONE};                // Results of weapon detonation
+    Detonation  results {Detonation::NONE};       // Results of weapon detonation
     base::safe_ptr<const base::String> tstTgtNam; // Test only: target player name
 
     // ---

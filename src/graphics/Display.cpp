@@ -775,7 +775,7 @@ GLuint Display::getTextureByName(const base::Identifier* texName)
 {
    GLuint tex{};
    if (texName != nullptr && textures != nullptr) {
-      const base::Pair* pair{textures->findByName( *texName )};
+      const base::Pair* pair{textures->findByName( (*texName).c_str() )};
       if (pair != nullptr) {
          const auto pt = dynamic_cast<const Texture*>( pair->object() );
          if (pt != nullptr) tex = pt->getTexture();
@@ -796,7 +796,7 @@ Material* Display::getMaterial(const base::Identifier* name)
 {
    Material* temp{};
    if (name !=nullptr && materials != nullptr) {
-      const base::Pair* pair{materials->findByName( *name )};
+      const base::Pair* pair{materials->findByName( (*name).c_str() )};
       if (pair != nullptr) {
          const auto mat = dynamic_cast<const Material*>( pair->object() );
          if (mat != nullptr) temp = const_cast<Material*>(static_cast<const Material*>(mat));
@@ -884,13 +884,13 @@ const AbstractFont* Display::getFont(const char* const fontName) const
 // getFont() -- by name
 AbstractFont* Display::getFont(const base::Identifier* const fontName)
 {
-   return getFont(*fontName);
+   return getFont((*fontName).c_str());
 }
 
 // getFont() -- by name (const version)
 const AbstractFont* Display::getFont(const base::Identifier* const fontName) const
 {
-   return getFont(*fontName);
+   return getFont((*fontName).c_str());
 }
 
 // getFont() -- by index
@@ -954,7 +954,7 @@ AbstractFont* Display::getNormalFont()
       if (normalFont == nullptr) {
          // Not found!
          if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Display::getNormalFont(): font name '" << static_cast<const char*>(*normalFontName)
+            std::cerr << "Display::getNormalFont(): font name '" << (*normalFontName).c_str()
                       << "' not found!" << std::endl;
          }
          normalFontName->unref();
@@ -1414,7 +1414,7 @@ bool Display::setName(const base::String* const n)
 {
    bool ok {};
    if (n != nullptr) {
-      name = n->getString();
+      name = n->c_str();
       ok = true;
    }
    return ok;
@@ -1679,7 +1679,7 @@ bool Display::setSlotLeftBracketCharacter(const base::String* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const char* str {*msg};
+      const char* str {(*msg).c_str()};
       if (str != nullptr) {
          setLeftBracketCharacter(str[0]);
          ok = true;
@@ -1708,7 +1708,7 @@ bool Display::setSlotRightBracketCharacter(const base::String* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const char* str {*msg};
+      const char* str {(*msg).c_str()};
       if (str != nullptr) {
          setRightBracketCharacter(str[0]);
          ok = true;

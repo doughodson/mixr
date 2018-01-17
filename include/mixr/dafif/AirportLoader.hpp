@@ -71,7 +71,7 @@ public:
    virtual Ils* getIls(const int n);
 
    virtual int queryByLength(const float minRwLen);
-   virtual int queryByType(const Airport::AirportType type);
+   virtual int queryByType(const Airport::Type);
    virtual int queryByFreq(const float freq);
    virtual int queryByChannel(const int chan);
 
@@ -164,7 +164,7 @@ public:
       char key[AP_KEY_LEN+1] {};                  // DAFIF Key Code
       RunwayKey* runways {};                      // List of runways for this AP
       AirportKey* next {};                        // Next Airport key in list
-      Airport::AirportType type {Airport::ANY};   // Airport component type
+      Airport::Type type {Airport::Type::ANY};    // Airport component type
    };
 
 #ifdef ALT_ILS_FILE    /* Alternate ILS File */
@@ -175,7 +175,7 @@ protected:
 
    enum { AIRPORT_MAX_RECORDS = 40000 };
 
-   int queryAirport(const Airport::AirportType type, const float minRwLen);
+   int queryAirport(const Airport::Type type, const float minRwLen);
 
    int chkRwLen(const AirportKey* key, const float minRwLen);
 

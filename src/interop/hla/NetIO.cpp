@@ -118,7 +118,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::Identifier* s = org.getFederationName();
+      const base::Identifier* s{org.getFederationName()};
       if (s != nullptr) {
          setFederationName( static_cast<base::Identifier*>(s->clone()) );
       }
@@ -128,7 +128,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::Identifier* s = org.getFederateName();
+      const base::Identifier* s{org.getFederateName()};
       if (s != nullptr) {
          setFederateName( static_cast<base::Identifier*>(s->clone()) );
       }
@@ -138,7 +138,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::Identifier* s = org.getFederateName();
+      const base::Identifier* s{org.getFederateName()};
       if (s != nullptr) {
          setFederateName( static_cast<base::Identifier*>(s->clone()) );
       }
@@ -148,7 +148,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const base::String* s = org.fedFileName;
+      const base::String* s{org.fedFileName};
       if (s != nullptr) {
          fedFileName = static_cast<base::String*>(s->clone());
       }
@@ -439,9 +439,9 @@ Ambassador* NetIO::createFederateAmbassador()
 //------------------------------------------------------------------------------
 const char* NetIO::getFedFileName() const
 {
-    const char* s = nullptr;
+    const char* s{};
     if (fedFileName != nullptr) {
-        s = *fedFileName;
+        s = fedFileName->c_str();
     }
     return s;
 }
@@ -537,10 +537,10 @@ bool NetIO::initNetwork()
 //------------------------------------------------------------------------------
 bool NetIO::createAndJoinFederation()
 {
-    bool ok = false;
+    bool ok{};
     
-    const base::Identifier* federation = getFederationName();
-    const base::Identifier* federate   = getFederateName();
+    const base::Identifier* federation{getFederationName()};
+    const base::Identifier* federate{getFederateName()};
 
     if (federation != nullptr && federate != nullptr) {
 
@@ -550,7 +550,7 @@ bool NetIO::createAndJoinFederation()
        // Try to create the federation
        // ---
        try {
-           rtiAmb->createFederationExecution(*federation, getFedFileName());
+           rtiAmb->createFederationExecution(federation->c_str(), getFedFileName());
            std::cout << "*** Federation Created" << std::endl;
            base::msleep(1000);   // DDH: this was set to 2000 for linux?
        }
@@ -566,12 +566,12 @@ bool NetIO::createAndJoinFederation()
        // Try to join the federation.  
        // ---
        if (ok) {
-           RTI::Boolean joined = RTI::RTI_FALSE;
-           int tries = 10;
+           RTI::Boolean joined{RTI::RTI_FALSE};
+           int tries{10};
            while (tries--) {
                try {
-                   rtiAmb->joinFederationExecution(*federate, 
-                                                  *federation,
+                   rtiAmb->joinFederationExecution(federate->c_str(), 
+                                                   federation->c_str(),
                                                    fedAmb);
                    std::cout << "*** Joined Federation" << std::endl;
                    joined = RTI::RTI_TRUE;
@@ -599,7 +599,7 @@ bool NetIO::createAndJoinFederation()
 //------------------------------------------------------------------------------
 bool NetIO::resignAndDestroyFederation()
 {
-    const base::Identifier* federation = getFederationName();
+    const base::Identifier* federation{getFederationName()};
 
     if (federation != nullptr) {
        try {
@@ -613,7 +613,7 @@ bool NetIO::resignAndDestroyFederation()
        }
 
        try {
-           rtiAmb->destroyFederationExecution(*federation);
+           rtiAmb->destroyFederationExecution(federation->c_str());
            std::cout << "*** Destroyed Federation" << std::endl;
        }
        catch(RTI::Exception& e) {

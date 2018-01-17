@@ -29,72 +29,60 @@ public:
    Identifier(const char*);
 
    // operators
-   operator char*();
-   operator const char*() const;
    Identifier& operator=(const char*);            // assignment operator =
    Identifier& operator=(const std::string&);
    void operator+=(const char*);
    void operator+=(const std::string&);
 
-   void empty()                              { str = "";   }          // Empty (null) this string
-   const char* getString() const             { return str.c_str(); }  // Returns a pointer to the text string
-   const std::string& getStdString() const   { return str; }
-   void setStr(const char* x)                { str = x;  replaceSpaces(); }
+   const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
+   const std::string& str() const            { return id; }          // returns a standard string (std::string)
 
-   bool isEmpty() const                      { return str == ""; }   // Returns true if this string is empty (null)
+   void empty()                              { id = "";   }          // empty our string
+   void setStr(const char* x)                { id = x;  replaceSpaces(); }
+   bool isEmpty() const                      { return id == ""; }    // returns true if our string is empty
 
-   // Returns true if this string is the ascii form of a number
+   // returns true if our string is the ascii form of a number
    bool isNumber() const;
 
-   // Returns the value converted to a number or zero if isNumber() is false
+   // returns the value converted to a number or zero if isNumber() is false
    double getNumber() const;
 
-   // Returns true if this string is the ascii form of an integer number
+   // returns true if our string is the ascii form of an integer number
    bool isInteger() const;
 
-   // Returns the value of this string converted to an integer value or zero if isInteger() is false
+   // returns the value of this string converted to an integer value or zero if isInteger() is false
    int getInteger() const;
 
 private:
-   std::string str;
+   std::string id;
    void replaceSpaces();
 };
 
-inline Identifier::operator char*()
-{
-   return const_cast<char*>(str.c_str());
-}
-
-inline Identifier::operator const char*() const
-{
-   return str.c_str();
-}
-
 inline Identifier& Identifier::operator=(const char* s)
 {
-   str = s;
+   id = s;
    return *this;
 }
 
 inline Identifier& Identifier::operator=(const std::string& s)
 {
-   str = s;
+   id = s;
    return *this;
 }
 
 inline void Identifier::operator+=(const char* s)
 {
-   str = str + std::string(s);
+   id = id + std::string(s);
 }
 
 inline void Identifier::operator+=(const std::string& s)
 {
-   str = str + s;
+   id = id + s;
 }
 
 inline std::ostream& operator<<(std::ostream& sout, const Identifier& s)
 {
-   sout << s.getString();
+   sout << s.c_str();
    return sout;
 }
 
@@ -108,8 +96,8 @@ inline bool Identifier::isNumber() const
       return false;
    }
 
-   for (int i = 0; str[i] != '\0'; i++) {
-      if ( !std::isdigit(str[i]) && str[i] != '.' ) {
+   for (int i = 0; id[i] != '\0'; i++) {
+      if ( !std::isdigit(id[i]) && id[i] != '.' ) {
          return false;
       }
    }
@@ -122,7 +110,7 @@ inline bool Identifier::isNumber() const
 inline double Identifier::getNumber() const
 {
    if (isNumber()) {
-      return std::atof(str.c_str());
+      return std::atof(id.c_str());
    }
    return 0.0;
 }
@@ -136,8 +124,8 @@ inline bool Identifier::isInteger() const
       return false;
    }
 
-   for (int i = 0; str[i] != '\0'; i++) {
-      if ( !std::isdigit(str[i]) ) {
+   for (int i = 0; id[i] != '\0'; i++) {
+      if ( !std::isdigit(id[i]) ) {
          return false;
       }
    }
@@ -150,7 +138,7 @@ inline bool Identifier::isInteger() const
 inline int Identifier::getInteger() const
 {
    if (isInteger()) {
-      return std::atoi(str.c_str());
+      return std::atoi(id.c_str());
    }
    return 0;
 }
@@ -158,13 +146,13 @@ inline int Identifier::getInteger() const
 // replace spaces with underscore
 inline void Identifier::replaceSpaces()
 {
-   std::replace(str.begin(), str.end(), ' ', '_');
+   std::replace(id.begin(), id.end(), ' ', '_');
 }
 
 // comparison operator: ==
 inline bool operator==(const Identifier& s1, const Identifier& s2)
 {
-   if (s1.getStdString() == s2.getStdString()) {
+   if (s1.str() == s2.str()) {
       return true;
    }
    return false;
@@ -172,7 +160,7 @@ inline bool operator==(const Identifier& s1, const Identifier& s2)
 
 inline bool operator==(const char* s1, const Identifier& s2)
 {
-   if (s2.getStdString() == std::string(s1)) {
+   if (s2.str() == std::string(s1)) {
       return true;
    }
    return false;
@@ -180,7 +168,7 @@ inline bool operator==(const char* s1, const Identifier& s2)
 
 inline bool operator==(const Identifier& s1, const char* s2)
 {
-   if (s1.getStdString() == std::string(s2)) {
+   if (s1.str() == std::string(s2)) {
       return true;
    }
    return false;

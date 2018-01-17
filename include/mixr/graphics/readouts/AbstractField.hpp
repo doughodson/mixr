@@ -33,9 +33,6 @@ namespace graphics {
 //
 // Public member functions:
 //
-//  operator char*() { return str; }
-//      Conversion function to allow str to be returned as a char*.
-//
 //  int line(int ll)
 //      Sets the line number.
 //
@@ -190,9 +187,6 @@ public:
 
 public:
    AbstractField();
-
-   operator char*()                          { return str; }
-   operator const char*() const              { return str; }
 
    virtual int line(const int);
    virtual int line() const;

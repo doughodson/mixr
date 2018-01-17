@@ -196,7 +196,7 @@ void AbstractWeapon::reset()
    failed     = false;
    jettisoned = false;
 
-   setDetonationResults(DETONATE_NONE);
+   setDetonationResults(Detonation::NONE);
 
    setFlyoutWeapon(nullptr);
    setInitialWeapon(nullptr);
@@ -212,7 +212,7 @@ void AbstractWeapon::reset()
    if (tstTgtNam != nullptr) {
       WorldModel* s = getWorldModel();
       if (s != nullptr) {
-         const auto t = dynamic_cast<Player*>(s->findPlayerByName( *tstTgtNam ));   // added DDH
+         const auto t = dynamic_cast<Player*>(s->findPlayerByName( (*tstTgtNam).c_str() ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
      }
    }
@@ -435,7 +435,7 @@ bool AbstractWeapon::collisionNotification(Player* const other)
 
       // We've detonated!
       setMode(Mode::DETONATED);
-      setDetonationResults(DETONATE_ENTITY_IMPACT);
+      setDetonationResults(Detonation::ENTITY_IMPACT);
 
       // Compute detonation location relative to the other ship
       setTargetPlayer(other, false);
@@ -447,7 +447,7 @@ bool AbstractWeapon::collisionNotification(Player* const other)
       // Log the event
       BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
          SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-         SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, getDetonationRange() )
+         SAMPLE_2_VALUES( static_cast<int>(Detonation::ENTITY_IMPACT), getDetonationRange() )
       END_RECORD_DATA_SAMPLE()
    }
 
@@ -466,7 +466,7 @@ bool AbstractWeapon::crashNotification()
    if (!isCrashOverride() && isLocalPlayer()) {
 
       ok = killedNotification();
-      setDetonationResults(DETONATE_GROUND_IMPACT);
+      setDetonationResults(Detonation::GROUND_IMPACT);
       setMode(Mode::DETONATED);
 
       // ---
@@ -486,7 +486,7 @@ bool AbstractWeapon::crashNotification()
       // ---
       BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
          SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-         SAMPLE_2_VALUES( DETONATE_GROUND_IMPACT, getDetonationRange() )
+         SAMPLE_2_VALUES( static_cast<int>(Detonation::GROUND_IMPACT), getDetonationRange() )
       END_RECORD_DATA_SAMPLE()
    }
 
@@ -705,11 +705,11 @@ void AbstractWeapon::updateTOF(const double dt)
       // and check for the end of the flight
       if (getTOF() >= getMaxTOF()) {
          setMode(Mode::DETONATED);
-         setDetonationResults( DETONATE_DETONATION );
+         setDetonationResults( Detonation::DETONATION );
 
          BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
             SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-            SAMPLE_2_VALUES( DETONATE_DETONATION, 0.0 )
+            SAMPLE_2_VALUES( static_cast<int>(Detonation::DETONATION), 0.0 )
          END_RECORD_DATA_SAMPLE()
 
          return;

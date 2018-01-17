@@ -537,7 +537,7 @@ Ils* AirportLoader::getIls(const int n)
 //------------------------------------------------------------------------------
 int AirportLoader::queryByRange()
 {
-   return queryAirport(Airport::ANY,0.0f);
+   return queryAirport(Airport::Type::ANY, 0.0f);
 }
 
 
@@ -571,14 +571,14 @@ int AirportLoader::queryByKey(const char* subkey)
 //------------------------------------------------------------------------------
 int AirportLoader::queryByLength(const float minRwLen)
 {
-   return queryAirport(Airport::ANY,minRwLen);
+   return queryAirport(Airport::Type::ANY, minRwLen);
 }
 
 
 //------------------------------------------------------------------------------
 // queryByType() -- find all 'type' airports within search area.
 //------------------------------------------------------------------------------
-int AirportLoader::queryByType(const Airport::AirportType type)
+int AirportLoader::queryByType(const Airport::Type type)
 {
    return queryAirport(type, 0.0f);
 }
@@ -652,7 +652,7 @@ int AirportLoader::queryByChannel(const int chan)
 // queryAirport() -- find airports within search area with minimum runway
 // length and airport type.
 //------------------------------------------------------------------------------
-int AirportLoader::queryAirport(const Airport::AirportType type, const float minRwLen)
+int AirportLoader::queryAirport(const Airport::Type type, const float minRwLen)
 {
    double mr2(std::numeric_limits<float>::max());  // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
@@ -662,7 +662,7 @@ int AirportLoader::queryAirport(const Airport::AirportType type, const float min
    nql = 0;
    for (int i = 0; i < nrl; i++) {
       const auto k = static_cast<AirportKey*>(rl[i]);
-      if ( type == k->type || type == Airport::ANY ) {
+      if ( type == k->type || type == Airport::Type::ANY ) {
          k->rng2 = range2(k->lat,k->lon);
          if (k->rng2 < mr2) {
             if ( chkRwLen( k, minRwLen ) ) {
@@ -831,7 +831,7 @@ int AirportLoader::queryRunwayByLength(const float minRwLen)
 {
    int oql = getQueryLimit();
    setQueryLimit(nrl);
-   queryAirport(Airport::ANY,minRwLen);
+   queryAirport(Airport::Type::ANY, minRwLen);
    setQueryLimit(oql);
 
    // select the ILS components from these airports with the correct frequency.
@@ -1045,7 +1045,7 @@ int AirportLoader::queryIlsByType(const Ils::IlsType type)
    // find all the airports within the search area
    int oql = getQueryLimit();
    setQueryLimit(nrl);
-   queryAirport(Airport::ANY,0.0f);
+   queryAirport(Airport::Type::ANY, 0.0f);
    setQueryLimit(oql);
 
    // select our requested 'type' ILS components from these airports
@@ -1078,7 +1078,7 @@ int AirportLoader::queryIlsByFreq(const float freq)
    // find all the airports within the search area
    int oql = getQueryLimit();
    setQueryLimit(nrl);
-   queryAirport(Airport::ANY,0.0f);
+   queryAirport(Airport::Type::ANY, 0.0f);
    setQueryLimit(oql);
 
    // select the ILS components from these airports with the correct frequency.
@@ -1114,7 +1114,7 @@ int AirportLoader::queryIlsByChannel(const int chan)
    // find all the airports within the search area
    int oql = getQueryLimit();
    setQueryLimit(nrl);
-   queryAirport(Airport::ANY,0.0f);
+   queryAirport(Airport::Type::ANY, 0.0f);
    setQueryLimit(oql);
 
    // select the ILS components from these airports with the correct channel#
@@ -1465,7 +1465,7 @@ AirportLoader::AirportKey::AirportKey(const char* key1) : Key(0)
    Record::dsGetString(key,key1,AP_KEY_LEN);
    runways = nullptr;
    next = nullptr;
-   type = Airport::ANY;
+   type = Airport::Type::ANY;
 }
 
 

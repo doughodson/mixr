@@ -82,8 +82,8 @@ bool GhostHorizon::setSlotSkyColor(const base::Identifier* const cname)
 {
     bool ok = false;
     if (cname != nullptr) {
-        if (sColorName == nullptr) sColorName = new base::Identifier(cname->getString());
-        else sColorName->setStr(cname->getString());
+        if (sColorName == nullptr) sColorName = new base::Identifier(cname->c_str());
+        else sColorName->setStr(cname->c_str());
         ok = true;
     }
 
@@ -97,8 +97,8 @@ bool GhostHorizon::setSlotGroundColor(const base::Identifier* const cname)
 {
     bool ok = false;
     if (cname != nullptr) {
-        if (gColorName == nullptr) gColorName = new base::Identifier(cname->getString());
-        else gColorName->setStr(cname->getString());
+        if (gColorName == nullptr) gColorName = new base::Identifier(cname->c_str());
+        else gColorName->setStr(cname->c_str());
         ok = true;
     }
 
@@ -217,7 +217,7 @@ void GhostHorizon::updateData(const double dt)
         if (sColorName != nullptr) {
             graphics::Display* d = getDisplay();
             if (d != nullptr) {
-                base::Color* c = d->getColor(sColorName->getString());
+                base::Color* c = d->getColor(sColorName->c_str());
                 if (c != nullptr) {
                     skyColor.set(c->red(), c->green(), c->blue());
                 }
@@ -230,7 +230,7 @@ void GhostHorizon::updateData(const double dt)
         if (gColorName != nullptr) {
             graphics::Display* d = getDisplay();
             if (d != nullptr) {
-                base::Color* c = d->getColor(gColorName->getString());
+                base::Color* c = d->getColor(gColorName->c_str());
                 if (c != nullptr) {
                     groundColor.set(c->red(), c->green(), c->blue());
                 }

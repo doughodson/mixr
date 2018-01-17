@@ -59,7 +59,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 108 "edl_parser.y" /* yacc.c:1909  */
+#line 110 "edl_parser.y" /* yacc.c:1909  */
 
    double                     dval;
    long                       lval;

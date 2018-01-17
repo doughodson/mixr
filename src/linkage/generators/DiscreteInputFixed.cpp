@@ -72,7 +72,7 @@ bool DiscreteInputFixed::setSlotSignal(const base::String* const msg)
    bool ok{};
    if (msg != nullptr) {
 
-      std::string signalType(msg->getString());
+      std::string signalType(msg->c_str());
       // convert to lowercase
       std::transform(signalType.begin(), signalType.end(), signalType.begin(), ::tolower);
       // set the type

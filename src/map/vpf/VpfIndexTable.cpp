@@ -35,7 +35,7 @@ void VpfIndexTable::getRecordPosition(const int idx, int& offset, int& length)
     // because numBytes is the header length in the VPFTable associated with this index table, 
     if (fullPath != nullptr && !fullPath->isEmpty()) {
         std::ifstream stream;
-        stream.open(fullPath->getString());
+        stream.open(fullPath->c_str());
         if (!stream.fail()) {
             // our record size is actually the same size of our num entires and numBytes, which
             // are both integers, so we can use that to seek 8 + idx * 8 to get the record
@@ -48,7 +48,7 @@ void VpfIndexTable::getRecordPosition(const int idx, int& offset, int& length)
             //std::cout << "OFFSET AND LENGTH FOR RECORD " << idx << " = " << offset << ", " << length << std::endl;
             stream.close();
         }
-        else std::cout << "FAILED TO OPEN INDEX FILE " << fullPath->getString() << std::endl;
+        else std::cout << "FAILED TO OPEN INDEX FILE " << fullPath->c_str() << std::endl;
     }
 }
 
@@ -61,7 +61,7 @@ void VpfIndexTable::loadIndexTableFromFile(const char* pathname, const char* fil
     fullPath = new base::String(pathname);
     fullPath->catStr(filename);
     std::ifstream inStream;
-    inStream.open(fullPath->getString(), std::ios::in | std::ios::binary);
+    inStream.open(fullPath->c_str(), std::ios::in | std::ios::binary);
     if (inStream.fail()) std::cerr << "VpfIndexTable::loadIndexFromFile(), failed to open file " << filename << std::endl;
     else {
         // number of entries in the index (should match associated table number of records)

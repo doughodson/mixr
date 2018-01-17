@@ -642,7 +642,7 @@ int IgHost::compareKey2Model(const void* key, const void* model)
       else if (pKeyFedName != nullptr && pModelFedName == nullptr) result = +1;
 
       else if (pKeyFedName != nullptr && pModelFedName != nullptr) {
-         result = std::strcmp(*pKeyFedName, *pModelFedName);
+         result = std::strcmp((*pKeyFedName).c_str(), (*pModelFedName).c_str());
       }
    }
 

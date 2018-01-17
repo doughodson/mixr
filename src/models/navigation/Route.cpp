@@ -91,7 +91,7 @@ void Route::reset()
 
       // First try to find by name
       if (initToStptName != nullptr) {
-         directTo(*initToStptName);
+         directTo((*initToStptName).c_str());
       }
 
       // Next try to find by index
@@ -278,7 +278,7 @@ const char* Route::getSteerpointName() const
 {
     const char* name{};
     if (to != nullptr) {
-        name = *to->slot();
+        name = (*to->slot()).c_str();
     }
     return name;
 }

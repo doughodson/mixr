@@ -13,6 +13,7 @@ EMPTY_SLOTTABLE(String)
 String::String()
 {
    STANDARD_CONSTRUCTOR()
+   setStr("");
 }
 
 String::String(const char* s)
@@ -31,17 +32,17 @@ String::String(const char* s1, const char* s2)
 void String::copyData(const String& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (!cc && str != nullptr) delete[] str;
-   str = nullptr;
+   if (!cc && cstr != nullptr) delete[] cstr;
+   cstr = nullptr;
    nn = 0;
    n = 0;
-   setStr(org);
+   setStr(org.c_str());
 }
 
 void String::deleteData()
 {
-   if (str != nullptr) delete[] str;
-   str = nullptr;
+   if (cstr != nullptr) delete[] cstr;
+   cstr = nullptr;
    nn = 0;
    n = 0;
 }
@@ -70,7 +71,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
 
    if (j != Justify::NONE) {
       // Justified:  copy without leading or trailing spaces
-      const char* p {origStr};
+      const char* p {origStr.c_str()};
       char* q {sbuf};
       while (*p != '\0' && *p == ' ') { p++; }
       while (*p != '\0' && q <= &sbuf[MAX_STRING_LENGTH-1]) { *q++ = *p++; }
@@ -78,7 +79,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
       while (*q == ' ' && q >= sbuf) { *q-- = ' '; }
    } else {
       // Not justified:  change our source buffer pointer to the orig string
-      ss = origStr;
+      ss = origStr.c_str();
    }
 
 
@@ -145,7 +146,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
       maxChars = numChars;
 
    const auto subString = new char[maxChars + 1];
-   utStrncpy(subString, (maxChars + 1), &str[startIndex], maxChars);
+   utStrncpy(subString, (maxChars + 1), &cstr[startIndex], maxChars);
    subString[maxChars] = '\0';
    subStr.setStr(subString);
    delete[] subString;
@@ -162,15 +163,15 @@ void String::setStr(const char* string)
    // copy the new text string
    if (string != nullptr) {
       std::size_t l {std::strlen(string)};
-      if (l >= nn || str == nullptr) {
-         if (str != nullptr) delete[] str;
+      if (l >= nn || cstr == nullptr) {
+         if (cstr != nullptr) delete[] cstr;
          nn = (l+1);
-         str = new char[nn];
+         cstr = new char[nn];
       }
-      utStrcpy(str,nn,string);
+      utStrcpy(cstr,nn,string);
       n = l;
-   }
-   else {
+   } else {
+      std::cout << "String::setStr being called with a nullptr!\n";
       // remove the old text string
       n = 0;
    }
@@ -194,13 +195,13 @@ void String::catStr(const char* s)
    // Have new text to append to the original text
    std::size_t l {n + std::strlen(s)};
    if (l >= nn) {
-      char* t {str};
+      char* t {cstr};
       nn = (l+1);
-      str = new char[nn];
-      utStrcpy(str,nn,t);
+      cstr = new char[nn];
+      utStrcpy(cstr,nn,t);
       delete[] t;
    }
-   utStrcat(str, nn, s);
+   utStrcat(cstr, nn, s);
    n = l;
 }
 
@@ -211,7 +212,7 @@ void String::catStr(const char* s)
 void String::setChar(const unsigned int index, const char c)
 {
    if (index <= len())
-      str[index] = c;
+      cstr[index] = c;
 }
 
 
@@ -220,7 +221,7 @@ void String::setChar(const unsigned int index, const char c)
 //------------------------------------------------------------------------------
 void String::empty()
 {
-   if (str != nullptr) str[0] = 0;
+   if (cstr != nullptr) cstr[0] = 0;
    n = 0;
 }
 

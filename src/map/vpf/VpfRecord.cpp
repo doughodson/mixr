@@ -49,7 +49,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
     // ok, we have our table and our file, let's open it up, skip the header, 
     // grab the record, then load up our data, and return
     std::ifstream stream;
-    stream.open(filename->getString());
+    stream.open(filename->c_str());
     if (!stream.fail() && parent != 0) {
         // let's try to get the size of my file contents
         stream.seekg(0);
@@ -182,7 +182,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                         //std::cout << "COORDINATE STRING = " << string->getString() << std::endl;
 
                         if (rowNull) data[i]->setValue(0);
-                        else data[i]->setValue((char*)string->getString());
+                        else data[i]->setValue((char*)string->c_str());
                         data[i]->setLength(sizeof(tempFloat)*3);
                         data[i]->setType(VpfDataType::THREE_D_COORD);
                         string->unref();
@@ -332,7 +332,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                                 string->catStr(" ");
                             }
                             if (rowNull) data[i]->setValue(0);
-                            else data[i]->setValue((char*)string->getString());
+                            else data[i]->setValue((char*)string->c_str());
                             data[i]->setLength(numCoords * 3);
                             data[i]->setType(VpfDataType::THREE_D_COORD);
                             //std::cout << "COORDINATES = " << string->getString() << std::endl;
@@ -359,10 +359,10 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
                             string->catStr(buff);
                             string->catStr(" ");
                             if (rowNull) data[i]->setValue(0);
-                            else data[i]->setValue(const_cast<char*>(string->getString()));
+                            else data[i]->setValue(const_cast<char*>(string->c_str()));
                             data[i]->setLength(sizeof(tempFloat)*3);
                             data[i]->setType(VpfDataType::THREE_D_COORD);
-                            std::cout << "COORDINATE = " << string->getString() << std::endl;
+                            std::cout << "COORDINATE = " << string->c_str() << std::endl;
                             string->unref();
                         }
                     }
@@ -381,7 +381,7 @@ void VpfRecord::createRecord(VpfTable* x, const char* file, const int idx)
         stream.close();
     }
     else {
-        std::cout << "FAILURE TO OPEN FILE = " << filename->getString() << std::endl;
+        std::cout << "FAILURE TO OPEN FILE = " << filename->c_str() << std::endl;
     }
 }
 

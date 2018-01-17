@@ -560,7 +560,7 @@ bool RfSensor::setSlotTypeId(const base::String* const msg)
    bool ok{};
 
    if (msg != nullptr) {
-      ok = setTypeId( msg->getString() );
+      ok = setTypeId( msg->c_str() );
    }
 
    return ok;
@@ -638,7 +638,7 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 // we'll lookup the actual track manager in reset() later
 bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v->getStdString());
+    return setTrackManagerName(v->str());
 }
 
 //------------------------------------------------------------------------------

@@ -69,7 +69,7 @@ inline void yyerror(const char* s)
 //------------------------------------------------------------------------------
 static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream* arg_list)
 {
-    mixr::base::Object* obj {};
+    mixr::base::Object* obj{};
 
     if (factory != nullptr) {
 
@@ -78,17 +78,17 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            mixr::base::List::Item* item {arg_list->getFirstItem()};
+            mixr::base::List::Item* item{arg_list->getFirstItem()};
             while (item != nullptr) {
-                mixr::base::Pair* p {static_cast<mixr::base::Pair*>(item->getValue())};
-                bool ok {obj->setSlotByName(*p->slot(), p->object())};
+                mixr::base::Pair* p{static_cast<mixr::base::Pair*>(item->getValue())};
+                bool ok{obj->setSlotByName(p->slot()->c_str(), p->object())};
                 if (!ok) {
-                    std::string msg = "error while setting slot name: " + std::string(*p->slot());
+                    std::string msg = "error while setting slot name: " + std::string( p->slot()->c_str() );
                     yyerror(msg.c_str());
                 }
                 item = item->getNext();
             }
-            bool ok {obj->isValid()};
+            bool ok{obj->isValid()};
             if (!ok) {
                 std::string msg = "error: invalid object: " + name;
                 yyerror(msg.c_str());
@@ -98,6 +98,8 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
             std::string msg = "undefined factory name: " + name;
             yyerror(msg.c_str());
         }
+
+
     }
     return obj;
 }
@@ -144,9 +146,9 @@ arglist :                           { $$ = new mixr::base::PairStream(); }
 
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
-                                        char cbuf[20] {};
+                                        char cbuf[20]{};
                                         std::sprintf(cbuf, "%i", i+1);
-                                        mixr::base::Pair* p {new mixr::base::Pair(cbuf, $2)};
+                                        mixr::base::Pair* p{new mixr::base::Pair(cbuf, $2)};
                                         $2->unref();
                                         $1->put(p);
                                         p->unref();
@@ -156,9 +158,9 @@ arglist :                           { $$ = new mixr::base::PairStream(); }
 
         | arglist prim              {
                                     int i = $1->entries();
-                                    char cbuf[20] {};
+                                    char cbuf[20]{};
                                     std::sprintf(cbuf, "%i", i+1);
-                                    mixr::base::Pair* p {new mixr::base::Pair(cbuf, $2)};
+                                    mixr::base::Pair* p{new mixr::base::Pair(cbuf, $2)};
                                     $2->unref();
                                     $1->put(p);
                                     p->unref();
@@ -215,7 +217,7 @@ Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
-    Object* obj {};
+    Object* obj{};
     if (yyparse() == 0) {    // returns 0 on success
         obj = result;
     }

@@ -61,15 +61,15 @@ protected:
    bool shutdownNotification() override;
 
    struct Burst {
-      enum Status { ACTIVE, HIT, MISS };
+      enum class Status { ACTIVE, HIT, MISS };
       Burst() : bPos(0,0,0), bVel(0,0,0) {}
-      base::Vec3d bPos;         // Burst positions -- world  (m)
-      base::Vec3d bVel;         // Burst velocities -- world (m)
-      double bTof {};           // Burst time of flight      (sec)
-      int    bNum {};           // Number of rounds in burst
-      int    bRate {};          // Round rate for this burst (rds per min)
-      int    bEvent {};         // Release event number for burst
-      Status bStatus {ACTIVE};  // Burst status
+      base::Vec3d bPos;                // Burst positions -- world  (m)
+      base::Vec3d bVel;                // Burst velocities -- world (m)
+      double bTof{};                   // Burst time of flight      (sec)
+      int    bNum{};                   // Number of rounds in burst
+      int    bRate{};                  // Round rate for this burst (rds per min)
+      int    bEvent{};                 // Release event number for burst
+      Status bStatus{Status::ACTIVE};  // Burst status
    };
 
 private:

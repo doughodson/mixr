@@ -47,7 +47,7 @@ void VMap0MainDirectory::loadTables()
     createTable(VpfDirectory::DHT);
     VpfTable* table {getTable(VpfDirectory::DHT)};
     bool ok {};
-    if (table != nullptr) ok = table->loadTableFromFile(string->getString(), "dht", VpfDirectory::DHT);
+    if (table != nullptr) ok = table->loadTableFromFile(string->c_str(), "dht", VpfDirectory::DHT);
 
     // this is the main directory, which for a level 0 map, should use 
     // load our library attribute table
@@ -56,7 +56,7 @@ void VMap0MainDirectory::loadTables()
     createTable(VpfDirectory::LAT);
     table = getTable(VpfDirectory::LAT);
     if (table != nullptr) {
-        ok = table->loadTableFromFile(string->getString(), "lat", VpfDirectory::LAT);
+        ok = table->loadTableFromFile(string->c_str(), "lat", VpfDirectory::LAT);
         // now create our reference library directory
         if (ok) {
             int index {1};

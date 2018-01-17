@@ -133,7 +133,7 @@ void RfSystem::reset()
    // ---
    if (getAntenna() == nullptr && getAntennaName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the antenna, but not the antenna itself
-      const char* name{*getAntennaName()};
+      const char* name{(*getAntennaName()).c_str()};
 
       // Get the named antenna from the player's list of gimbals, antennas and optics
       const auto p = dynamic_cast<Antenna*>( getOwnship()->getGimbalByName(name) );

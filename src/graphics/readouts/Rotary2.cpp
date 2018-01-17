@@ -3,6 +3,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -14,6 +15,7 @@ EMPTY_DELETEDATA(Rotary2)
 
 BEGIN_EVENT_HANDLER(Rotary2)
    ON_EVENT_OBJ(SELECT, onSelect, base::Boolean)
+   ON_EVENT_OBJ(SELECT, onSelect, base::Number)
 END_EVENT_HANDLER()
 
 Rotary2::Rotary2()
@@ -26,10 +28,10 @@ Rotary2::Rotary2()
 }
 
 // onSelect() - Macro function for Rotary2
-bool Rotary2::onSelect(const base::Boolean* const osobj)
+bool Rotary2::onSelect(const base::Boolean* const x)
 {
-   if (osobj != nullptr) {
-      if (osobj->getBoolean()){
+   if (x != nullptr) {
+      if (x->getBoolean()){
          //if true, select the second component
          base::Integer two(2);
          select(&two);
@@ -39,6 +41,13 @@ bool Rotary2::onSelect(const base::Boolean* const osobj)
          select(&one);
       }
    }
+   return true;
+}
+
+// onSelect() - Macro function for Rotary2
+bool Rotary2::onSelect(const base::Number* const x)
+{
+   select(x);
    return true;
 }
 

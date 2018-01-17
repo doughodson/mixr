@@ -573,31 +573,31 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
 
    // Get detonation type
    switch (detType) {
-      case models::AbstractWeapon::DETONATE_OTHER: {
+      case models::AbstractWeapon::Detonation::OTHER: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
          break;
       }
-      case models::AbstractWeapon::DETONATE_ENTITY_IMPACT: {
+      case models::AbstractWeapon::Detonation::ENTITY_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
          break;
       }
-      case models::AbstractWeapon::DETONATE_ENTITY_PROXIMATE_DETONATION: {
+      case models::AbstractWeapon::Detonation::ENTITY_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::DETONATE_GROUND_IMPACT: {
+      case models::AbstractWeapon::Detonation::GROUND_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
          break;
       }
-      case models::AbstractWeapon::DETONATE_GROUND_PROXIMATE_DETONATION: {
+      case models::AbstractWeapon::Detonation::GROUND_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::DETONATE_DETONATION: {
+      case models::AbstractWeapon::Detonation::DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::DETONATE_NONE: {
+      case models::AbstractWeapon::Detonation::NONE: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
          break;
       }
@@ -804,7 +804,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
          if ( player->isProxyPlayer() ) {
             const simulation::AbstractNib* nib {player->getNib()};
             const base::Identifier* fedName {nib->getFederateName()};
-            if (fedName != nullptr) id->set_fed_name( *fedName );
+            if (fedName != nullptr) id->set_fed_name( (*fedName).c_str() );
          }
       } else {
          // We don't have a player, set default values
@@ -1080,7 +1080,7 @@ bool DataRecorder::setSlotEventName(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      eventName = msg->getStdString();
+      eventName = msg->str();
       ok = true;
    }
    return ok;
@@ -1090,7 +1090,7 @@ bool DataRecorder::setSlotApplication(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      application = msg->getStdString();
+      application = msg->str();
       ok = true;
    }
    return ok;

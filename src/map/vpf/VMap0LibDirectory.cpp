@@ -41,7 +41,7 @@ void VMap0LibDirectory::loadTables()
     createTable(VpfDirectory::CAT);
     VpfTable* table {getTable(VpfDirectory::CAT)};
     if (table != nullptr) {
-        ok = table->loadTableFromFile(string->getString(), "cat", VpfDirectory::CAT);
+        ok = table->loadTableFromFile(string->c_str(), "cat", VpfDirectory::CAT);
         cvgOk = ok;
         #if 0
         if (ok) {
@@ -60,7 +60,7 @@ void VMap0LibDirectory::loadTables()
     createTable(VpfDirectory::LHT);
     table = getTable(VpfDirectory::LHT);
     if (table != nullptr) {
-        ok = table->loadTableFromFile(string->getString(), "lat", VpfDirectory::LHT);
+        ok = table->loadTableFromFile(string->c_str(), "lat", VpfDirectory::LHT);
     }
 
     table = nullptr;
@@ -68,7 +68,7 @@ void VMap0LibDirectory::loadTables()
     table = getTable(VpfDirectory::GRT);
     if (table != nullptr) {
         // geographic reference table
-        ok = table->loadTableFromFile(string->getString(), "grt", VpfDirectory::GRT);
+        ok = table->loadTableFromFile(string->c_str(), "grt", VpfDirectory::GRT);
     }
 
     #if 0

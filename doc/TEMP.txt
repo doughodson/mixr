@@ -1,0 +1,105 @@
+Find all "getString()", Subfolders, Find Results 1, "Entire Solution ( Including External Items )", ""
+  C:\mixr-platform\mixr\include\mixr\base\Identifier.hpp(40):   const char* getString() const             { return str.c_str(); }  // Returns a pointer to the text string
+  C:\mixr-platform\mixr\include\mixr\base\Identifier.hpp(97):   sout << s.getString();
+  C:\mixr-platform\mixr\include\mixr\base\String.hpp(50):    const char* getString() const;                 // Returns a pointer to the text string.
+  C:\mixr-platform\mixr\include\mixr\base\String.hpp(154):// getString() -- returns a const pointer of the string
+  C:\mixr-platform\mixr\include\mixr\base\String.hpp(156):inline const char* String::getString() const
+  C:\mixr-platform\mixr\src\base\Component.cpp(550):                    *fullname += name0->getString();
+  C:\mixr-platform\mixr\src\graphics\readouts\AbstractField.cpp(432):    if (fontName != nullptr) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->getString()));
+  C:\mixr-platform\mixr\src\graphics\Display.cpp(1417):      name = n->getString();
+  C:\mixr-platform\mixr\src\dafif\Record.cpp(335):// dsGetString() -- like strncpy() with 0 char* checking and the
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(85):        if (sColorName == nullptr) sColorName = new base::Identifier(cname->getString());
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(86):        else sColorName->setStr(cname->getString());
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(100):        if (gColorName == nullptr) gColorName = new base::Identifier(cname->getString());
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(101):        else gColorName->setStr(cname->getString());
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(220):                base::Color* c = d->getColor(sColorName->getString());
+  C:\mixr-platform\mixr\src\instruments\adi\GhostHorizon.cpp(233):                base::Color* c = d->getColor(gColorName->getString());
+  C:\mixr-platform\mixr\src\linkage\generators\AnalogSignalGen.cpp(132):      std::string signalType(msg->getString());
+  C:\mixr-platform\mixr\src\linkage\generators\DiscreteInputFixed.cpp(75):      std::string signalType(msg->getString());
+  C:\mixr-platform\mixr\src\models\dynamics\JSBSimModel.cpp(797):        std::string RootDir(rootDir->getString());
+  C:\mixr-platform\mixr\src\models\dynamics\JSBSimModel.cpp(802):        fdmex->LoadModel(model->getString());
+  C:\mixr-platform\mixr\src\models\system\Iff.cpp(247)://    if (strcmp(msg->getString(), "OFF") == 0) pwr = OFF;
+  C:\mixr-platform\mixr\src\models\system\Iff.cpp(248)://    else if (strcmp(msg->getString(), "STANDBY") == 0) pwr = STANDBY;
+  C:\mixr-platform\mixr\src\models\system\Iff.cpp(249)://    else if (strcmp(msg->getString(), "LOW") == 0) pwr = LOW;
+  C:\mixr-platform\mixr\src\models\system\Iff.cpp(250)://    else if (strcmp(msg->getString(), "NORMAL") == 0) pwr = NORMAL;
+  C:\mixr-platform\mixr\src\models\system\Iff.cpp(251)://    else if (strcmp(msg->getString(), "EMERGENCY") == 0) pwr = EMERGENCY;
+  C:\mixr-platform\mixr\src\models\system\RfSensor.cpp(563):      ok = setTypeId( msg->getString() );
+  C:\mixr-platform\mixr\src\models\MultiActorAgent.cpp(51):         base::Component* c{sim->findPlayerByName(agentList[i].actorName->getString())};
+  C:\mixr-platform\mixr\src\models\SimAgent.cpp(76):            base::Component* player{sim->findPlayerByName(actorPlayerName->getString())};
+  C:\mixr-platform\mixr\src\models\SimAgent.cpp(81):               base::Pair* pair{player->findByName(actorComponentName->getString())};
+  C:\mixr-platform\mixr\src\models\SimAgent.cpp(107):      setActorPlayerByName(x->getString());
+  C:\mixr-platform\mixr\src\models\SimAgent.cpp(117):      setActorComponentByName(x->getString());
+  C:\mixr-platform\mixr\src\recorder\PrintSelected.cpp(85):      fieldNameStr.assign( msg->getString() );
+  C:\mixr-platform\mixr\src\recorder\PrintSelected.cpp(96):      compareStr.assign( msg->getString() );
+  C:\mixr-platform\mixr\src\interop\common\NetIO.cpp(1458):               bool match{(std::strncmp( pType->getString(), tpType->getString(), tpTypeLen ) == 0)};
+  C:\mixr-platform\mixr\src\interop\common\NetIO.cpp(1598):         int r{std::strncmp(newTypeStr->getString(), refTypeStr->getString(), len)};
+  C:\mixr-platform\mixr\src\interop\dis\NetIO.cpp(1821):               base::utStrcpy(cbuff, 64, origType->getString());
+  C:\mixr-platform\mixr\src\ighost\cigi\Player2CigiMap.cpp(105):            match = std::strncmp( ptype->getString(), refTypeName->getString(), refTypeName->len() ) == 0;
+  C:\mixr-platform\mixr\src\map\rpf\CadrgFile.cpp(655):    if (originalDir != nullptr) return originalDir->getString();
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(64):    if (org.mapLevel != nullptr) setMapLevel(org.mapLevel->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(113):                    ok = setPathName(text->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(161):                                    if (std::strcmp(scales[k].getString(), toc->getScale()) == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(194):                            if (std::strcmp(toc->getScale(), scales[y].getString()) == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(310):        if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(314):        if (std::strcmp(mapLevel->getString(), "10M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(319):        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(324):        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(329):        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(334):        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(339):        else if (std::strcmp(mapLevel->getString(), "1:5M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(345):            ok = setMapLevel(newLevel->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(354):                    ok = setMapLevel(newLevel->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(372):        if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(376):        if (std::strcmp(mapLevel->getString(), "5M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(381):        else if (std::strcmp(mapLevel->getString(), "10M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(386):        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(391):        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(396):        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(401):        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(408):            ok = setMapLevel(newLevel->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(417):                    ok = setMapLevel(newLevel->getString());
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(701):       return mapLevel->getString();
+  C:\mixr-platform\mixr\src\map\rpf\CadrgMap.cpp(714):        setMapLevel(mapLevel->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(44):        ok = table->loadTableFromFile(string->getString(), "cat", VpfDirectory::CAT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(63):        ok = table->loadTableFromFile(string->getString(), "lat", VpfDirectory::LHT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(71):        ok = table->loadTableFromFile(string->getString(), "grt", VpfDirectory::GRT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(81):        ok = table->loadTableFromFile(string.getString(), VPFDirectory::DQX);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(100):        ok = table->loadTableFromFile(string.getString(), VPFDirectory::DQT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0LibDirectory.cpp(120):    //    ok = table->loadTableFromFile(string->getString(), VPFDirectory::LINEAGE);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0MainDirectory.cpp(50):    if (table != nullptr) ok = table->loadTableFromFile(string->getString(), "dht", VpfDirectory::DHT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0MainDirectory.cpp(59):        ok = table->loadTableFromFile(string->getString(), "lat", VpfDirectory::LAT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(51):    if (fcs != nullptr && !fcs->isLoaded()) fcs->loadTableFromFile(string->getString(), "fcs", VpfDirectory::FCS);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(65):            featureTables[PLACENAM_DOT_PFT]->loadTableFromFile(string->getString(), "placenam.pft");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(72):            featureTables[END]->loadTableFromFile(string->getString(), "end");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(79):            spatialTables[NSI]->loadIndexTableFromFile(string->getString(), "nsi");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(91):            featureTables[CND]->loadTableFromFile(string->getString(), "cnd");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(98):            featureTables[EDG]->loadTableFromFile(string->getString(), "edg");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0RefCoverageDirectory.cpp(105):            featureTables[EBR]->loadTableFromFile(string->getString(), "ebr");
+  C:\mixr-platform\mixr\src\map\vpf\VMap0ReferenceDirectory.cpp(44):        ok = table->loadTableFromFile(string->getString(), "cat", VpfDirectory::CAT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0ReferenceDirectory.cpp(53):        ok = table->loadTableFromFile(string->getString(), "lht", VpfDirectory::LHT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0ReferenceDirectory.cpp(61):        ok = table->loadTableFromFile(string->getString(), "grt", VpfDirectory::GRT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0ReferenceDirectory.cpp(87):    //    ok = table->loadTableFromFile(string->getString(), VPFDirectory::DQT);
+  C:\mixr-platform\mixr\src\map\vpf\VMap0ReferenceDirectory.cpp(95):        ok = table->loadTableFromFile(string->getString(), "lineage.doc", VpfDirectory::LINEAGE);
+  C:\mixr-platform\mixr\src\map\vpf\VpfDataType.cpp(38):    if (value != 0 && !value->isEmpty()) return value->getString();
+  C:\mixr-platform\mixr\src\map\vpf\VpfDataType.cpp(45):    const float x = static_cast<float>(std::atof(value->getString()));
+  C:\mixr-platform\mixr\src\map\vpf\VpfIndexTable.cpp(38):        stream.open(fullPath->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfIndexTable.cpp(51):        else std::cout << "FAILED TO OPEN INDEX FILE " << fullPath->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfIndexTable.cpp(64):    inStream.open(fullPath->getString(), std::ios::in | std::ios::binary);
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(52):    stream.open(filename->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(182):                        //std::cout << "COORDINATE STRING = " << string->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(185):                        else data[i]->setValue((char*)string->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(335):                            else data[i]->setValue((char*)string->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(338):                            //std::cout << "COORDINATES = " << string->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(362):                            else data[i]->setValue(const_cast<char*>(string->getString()));
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(365):                            std::cout << "COORDINATE = " << string->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfRecord.cpp(384):        std::cout << "FAILURE TO OPEN FILE = " << filename->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfSpatialIndexTable.cpp(39):    inStream.open(fullPath->getString(), std::ios::in | std::ios::binary);
+  C:\mixr-platform\mixr\src\map\vpf\VpfSpatialIndexTable.cpp(100):        stream.open(fullPath->getString(), std::ios::in | std::ios::binary);
+  C:\mixr-platform\mixr\src\map\vpf\VpfSpatialIndexTable.cpp(101):        if (stream.fail()) std::cout << "COULD NOT OPEN FILE = " << fullPath->getString() << std::endl;
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(81):    inStream.open(temp->getString(), std::ios::in | std::ios::binary);
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(222):    std::strncpy(x, name->getString(), 3);
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(228):        idxTable->loadIndexTableFromFile(path->getString(), x);
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(239):            base::String* string = new base::String(path->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(240):            string->catStr(name->getString());
+  C:\mixr-platform\mixr\src\map\vpf\VpfTable.cpp(241):            records[idx-1]->createRecord(this, string->getString(), idx);
+  Matching lines: 103    Matching files: 29    Total files searched: 916

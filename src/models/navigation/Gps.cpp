@@ -62,9 +62,9 @@ void Gps::setKeyOvrdEnabled(const bool kof)
 //------------------------------------------------------------------------------
 int Gps::getCryptoKeys(double ck[], const int week, const int max) const
 {
-    unsigned int n{static_cast<unsigned int>(max)};
+    int n{max};
     if (n > MAX_CRYPTO_KEYS) n = MAX_CRYPTO_KEYS;
-    for (unsigned int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         ck[i] = cryptoKeys[week][i];
     }
     return static_cast<int>(n);
@@ -72,9 +72,9 @@ int Gps::getCryptoKeys(double ck[], const int week, const int max) const
 
 void Gps::setCryptoKeys(double ck[], const int week, const int num)
 {
-    unsigned int n{static_cast<unsigned int>(num)};
+    int n{num};
     if (n > MAX_CRYPTO_KEYS) n = MAX_CRYPTO_KEYS;
-    for (unsigned int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         cryptoKeys[week][i] = ck[i];
     }
 }

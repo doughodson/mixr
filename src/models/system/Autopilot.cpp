@@ -1207,7 +1207,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
    if (sim != nullptr) {
       const base::PairStream* players{sim->getPlayers()};
       if (players != nullptr) {
-         const base::Pair* pair{players->findByName(*msg)};
+         const base::Pair* pair{players->findByName((*msg).c_str())};
          if (pair != nullptr) {
             setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             found = true;
@@ -1508,7 +1508,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 // Initial name of our lead player
 bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 {
-   leadName = p->getStdString();
+   leadName = p->str();
    return true;
 }
 

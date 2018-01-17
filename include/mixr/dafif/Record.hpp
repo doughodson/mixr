@@ -228,7 +228,7 @@ protected:
       int magVariance;     // Offset to mag var
    };
 
-   const Ptbl* ptbl {};    // Position table; one for each instance
+   const Ptbl* ptbl{};    // Position table; one for each instance
 };
 
 }

@@ -15,16 +15,16 @@ Identifier::Identifier()
    STANDARD_CONSTRUCTOR()
 }
 
-Identifier::Identifier(const char* string)
+Identifier::Identifier(const char* _string)
 {
    STANDARD_CONSTRUCTOR()
-   setStr(string);
+   setStr(_string);
 }
 
 void Identifier::copyData(const Identifier& org, const bool cc)
 {
    BaseClass::copyData(org);
-   str = org.str;
+   id = org.id;
 }
 
 }

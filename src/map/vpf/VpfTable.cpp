@@ -78,7 +78,7 @@ bool VpfTable::loadTableFromFile(const char* pathname, const char* filename, con
     // now create a file and pathname
     base::String* temp {new base::String(pathname)};
     temp->catStr(filename);
-    inStream.open(temp->getString(), std::ios::in | std::ios::binary);
+    inStream.open(temp->c_str(), std::ios::in | std::ios::binary);
     temp->unref();
     if (inStream.fail()) {
         std::cout << "FAILED to open file " << pathname << filename << std::endl;
@@ -219,13 +219,13 @@ void VpfTable::loadIndexFile()
     // reset our record size
     recordSize = 0;
     char x[4] {};
-    std::strncpy(x, name->getString(), 3);
+    std::strncpy(x, name->c_str(), 3);
     x[2] = 'x';
     x[3] = 0;
     // now load the file
     if (idxTable == nullptr) idxTable = new VpfIndexTable();
     if (!idxTable->isLoaded()) {
-        idxTable->loadIndexTableFromFile(path->getString(), x);
+        idxTable->loadIndexTableFromFile(path->c_str(), x);
     }
 }
 
@@ -236,9 +236,9 @@ VpfRecord* VpfTable::getRecord(const int idx)
             // we haven't created this record yet, so let's do it
             records[idx-1] = new VpfRecord();
             // this will load the record for us
-            base::String* string = new base::String(path->getString());
-            string->catStr(name->getString());
-            records[idx-1]->createRecord(this, string->getString(), idx);
+            base::String* string = new base::String(path->c_str());
+            string->catStr(name->c_str());
+            records[idx-1]->createRecord(this, string->c_str(), idx);
             string->unref();
             //std::cout << "CREATED RECORD NUMBER AND TABLE NAME = " << idx << ", " << this->getType() << std::endl;
             // if our record is invalid, it means we have reached the end of the record

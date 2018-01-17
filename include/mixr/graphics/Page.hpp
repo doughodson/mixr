@@ -74,7 +74,7 @@ class Page : public Graphic
 public:
    Page();
 
-   const char* subpageName() const              { return cpName; }
+   const char* subpageName() const              { return cpName.c_str(); }
    Page* subpage() const                        { return cp; }
 
    bool isPostDrawSubpage() const               { return postDraw1; }

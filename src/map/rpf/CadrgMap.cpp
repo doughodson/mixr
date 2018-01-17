@@ -61,7 +61,7 @@ void CadrgMap::copyData(const CadrgMap& org, const bool)
         stack = org.stack;
         stack->ref();
     }
-    if (org.mapLevel != nullptr) setMapLevel(org.mapLevel->getString());
+    if (org.mapLevel != nullptr) setMapLevel(org.mapLevel->c_str());
 
     maxTableSize = org.maxTableSize;
     numFiles = org.numFiles;
@@ -110,7 +110,7 @@ bool CadrgMap::setSlotPathnames(const base::PairStream* const x)
             if (p != nullptr) {
                 const auto text = dynamic_cast<base::String*>(p->object());
                 if (text != nullptr) {
-                    ok = setPathName(text->getString());
+                    ok = setPathName(text->c_str());
                 }
             }
             item = item->getNext();
@@ -158,7 +158,7 @@ void CadrgMap::sortMaps(const int count)
                             bool match = false;
                             for (int k = 0; k < sCount; k++) {
                                 if (scales[k] != nullptr) {
-                                    if (std::strcmp(scales[k].getString(), toc->getScale()) == 0) {
+                                    if (std::strcmp(scales[k].c_str(), toc->getScale()) == 0) {
                                         match = true;
                                         num2Add[k]++;
                                     }
@@ -191,7 +191,7 @@ void CadrgMap::sortMaps(const int count)
                     for (int j = 0; j < nb; j++) {
                         CadrgTocEntry* toc = cadrgFiles[i]->entry(j);
                         if (toc != nullptr) {
-                            if (std::strcmp(toc->getScale(), scales[y].getString()) == 0) {
+                            if (std::strcmp(toc->getScale(), scales[y].c_str()) == 0) {
                                 mergedCadrgFiles[mFile]->addTocEntry(toc, tocIndex++);
                             }
                         }
@@ -307,42 +307,42 @@ bool CadrgMap::zoomInMapLevel()
     int index = 0;
     if (mapLevel != nullptr) {
         // Early out check, we have zoomed in as far as we can
-        if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
+        if (std::strcmp(mapLevel->c_str(), "5M") == 0) return false;
 
         const auto newLevel = new base::String();
         //Zoom in if we can
-        if (std::strcmp(mapLevel->getString(), "10M") == 0) {
+        if (std::strcmp(mapLevel->c_str(), "10M") == 0) {
             newLevel->setStr("5M");
             ok = true;
             index = 1;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:250K") == 0) {
             newLevel->setStr("10M");
             ok = true;
             index = 2;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:500K") == 0) {
             newLevel->setStr("1:250K");
             ok = true;
             index = 3;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:1M") == 0) {
             newLevel->setStr("1:500K");
             ok = true;
             index = 4;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:2M") == 0) {
             newLevel->setStr("1:1M");
             ok = true;
             index = 5;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:5M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:5M") == 0) {
             newLevel->setStr("1:2M");
             ok = true;
             index = 6;
         }
         if (ok) {
-            ok = setMapLevel(newLevel->getString());
+            ok = setMapLevel(newLevel->c_str());
             if (!ok) {
                 while (!ok && index > 0) {
                     index--;
@@ -351,7 +351,7 @@ bool CadrgMap::zoomInMapLevel()
                     if (index == 3) newLevel->setStr("1:250K");
                     if (index == 2) newLevel->setStr("10M");
                     if (index == 1) newLevel->setStr("5M");
-                    ok = setMapLevel(newLevel->getString());
+                    ok = setMapLevel(newLevel->c_str());
                 }
             }
         }
@@ -369,43 +369,43 @@ bool CadrgMap::zoomOutMapLevel()
     int index = 0;
     if (mapLevel != nullptr) {
         // Early out check, we have zoomed out as far as we can
-        if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
+        if (std::strcmp(mapLevel->c_str(), "1:5M") == 0) return false;
 
         const auto newLevel = new base::String();
         //Zoom in if we can
-        if (std::strcmp(mapLevel->getString(), "5M") == 0) {
+        if (std::strcmp(mapLevel->c_str(), "5M") == 0) {
             newLevel->setStr("10M");
             ok = true;
             index = 6;
         }
-        else if (std::strcmp(mapLevel->getString(), "10M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "10M") == 0) {
             newLevel->setStr("1:250K");
             ok = true;
             index = 5;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:250K") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:250K") == 0) {
             newLevel->setStr("1:500K");
             ok = true;
             index = 4;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:500K") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:500K") == 0) {
             newLevel->setStr("1:1M");
             ok = true;
             index = 3;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:1M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:1M") == 0) {
             newLevel->setStr("1:2M");
             ok = true;
             index = 2;
         }
-        else if (std::strcmp(mapLevel->getString(), "1:2M") == 0) {
+        else if (std::strcmp(mapLevel->c_str(), "1:2M") == 0) {
             newLevel->setStr("1:5M");
             ok = true;
             index = 1;
         }
 
         if (ok) {
-            ok = setMapLevel(newLevel->getString());
+            ok = setMapLevel(newLevel->c_str());
             if (!ok) {
                 while (!ok && index > 0) {
                     index--;
@@ -414,7 +414,7 @@ bool CadrgMap::zoomOutMapLevel()
                     if (index == 3) newLevel->setStr("1:1M");
                     if (index == 2) newLevel->setStr("1:2M");
                     if (index == 1) newLevel->setStr("1:5M");
-                    ok = setMapLevel(newLevel->getString());
+                    ok = setMapLevel(newLevel->c_str());
                 }
             }
         }
@@ -514,9 +514,9 @@ MapDrawer* CadrgMap::getMapImage()
 //------------------------------------------------------------------------------
 const MapDrawer* CadrgMap::getMapImage() const
 {
-    MapDrawer* image = nullptr;
-    base::Pair* pair = (base::Pair*)findByType(typeid(MapDrawer));
-    if (pair != nullptr) image = dynamic_cast<MapDrawer*>(pair->object());
+    const MapDrawer* image{};
+    const base::Pair* pair{static_cast<const base::Pair*>(findByType(typeid(MapDrawer)))};
+    if (pair != nullptr) image = dynamic_cast<const MapDrawer*>(pair->object());
     return image;
 }
 
@@ -698,7 +698,7 @@ void CadrgMap::releaseFrame(const int row, const int column, TexturePager* tp)
 const char* CadrgMap::getLevel()
 {
     if (mapLevel != nullptr) {
-       return mapLevel->getString();
+       return mapLevel->c_str();
     }
     return nullptr;
 }
@@ -711,7 +711,7 @@ void CadrgMap::updateData(double dt)
     BaseClass::updateData(dt);
 
     if (!initLevelLoaded && mapLevel != nullptr && !mapLevel->isEmpty()) {
-        setMapLevel(mapLevel->getString());
+        setMapLevel(mapLevel->c_str());
         initLevelLoaded = true;
     }
 }

@@ -19,22 +19,22 @@ class Gps : public Navigation
 public:
 
     // Operating modes
-    enum OperMode { INIT = 1, NAV = 2, TEST = 3, OFF = 4 };
+    enum class OperMode:int { INIT = 1, NAV = 2, TEST = 3, OFF = 4 };
 
     // Receiver Status
-    enum RcvrStat { RCVR_INVALID = 1, RCVR_VALID = 2 };
+    enum class RcvrStat:int { RCVR_INVALID = 1, RCVR_VALID = 2 };
 
     // Bus Switch Relay Status
-    enum BsrStat { PRIMARY = 1, SECONDARY = 2 };
+    enum class BsrStat:int { PRIMARY = 1, SECONDARY = 2 };
 
     // Load Status
-    enum LoadStat { NO_LOAD = 1, VALID_LOAD = 2, INVALID_LOAD = 3 };
+    enum class LoadStat:int { NO_LOAD = 1, VALID_LOAD = 2, INVALID_LOAD = 3 };
 
     // Overall Quality Codes
-    enum QualCode { A = 1, B = 2, C = 3, D = 4 };
+    enum class QualCode:int { A = 1, B = 2, C = 3, D = 4 };
 
     // Crypto Variable Types
-    enum KeyType { CVW = 1, GUV = 2 };
+    enum class KeyType:int { CVW = 1, GUV = 2 };
 
 public:
     Gps();
@@ -65,32 +65,32 @@ public:
    virtual void setKeyOvrdEnabled(const bool keyOvrd);
 
 private:
-    static const unsigned int MAX_CRYPTO_KEYS {8}; // max GPS Crypto variables
+    static const int MAX_CRYPTO_KEYS{8};     // max GPS Crypto variables
 
    // GPS Status Data
-   RcvrStat rcvr {RCVR_INVALID};  // Receiver status
-   OperMode mode {INIT};          // Operation mode
-   bool aided {true};             // GPS Aiding YES/NO
-   BsrStat  bsr {PRIMARY};        // Bus Switch Relay Status
-   bool keyOvrd {};               // Key Override DSBL/ENBL
+   RcvrStat rcvr{RcvrStat::RCVR_INVALID};    // Receiver status
+   OperMode mode{OperMode::INIT};            // Operation mode
+   bool aided{true};                         // GPS Aiding YES/NO
+   BsrStat bsr{BsrStat::PRIMARY};            // Bus Switch Relay Status
+   bool keyOvrd{};                           // Key Override DSBL/ENBL
 
    // Load Status Data
-   LoadStat crypto {NO_LOAD};     // Status of crypto key data files
-   LoadStat almanac {NO_LOAD};    // status of GPS almanac
+   LoadStat crypto{LoadStat::NO_LOAD};       // Status of crypto key data files
+   LoadStat almanac{LoadStat::NO_LOAD};      // status of GPS almanac
 
    // GPS Quality Data
-   QualCode quality {A};   // Data quality code
-   long     state {};      // GPS state
-   long     ehe {};        // Estimated horizontal error
-   long     eve {};        // Estimated vertical error
-   long     fom {};        // Figure of merit
-   long     cnr {};        // Carrier to noise ratio, in dB
+   QualCode quality{QualCode::A};   // Data quality code
+   long     state{};                // GPS state
+   long     ehe{};                  // Estimated horizontal error
+   long     eve{};                  // Estimated vertical error
+   long     fom{};                  // Figure of merit
+   long     cnr{};                  // Carrier to noise ratio, in dB
 
    // Crypto Variable Data
-   long     date {123199};                     // Effective date of keys
-   KeyType  keyType {GUV};                     // Type of keys loaded
-   long     days {5};                          // Number of days the keys remain valid
-   double   cryptoKeys[2][MAX_CRYPTO_KEYS] {}; // Crypto Variables
+   long     date{123199};                      // Effective date of keys
+   KeyType  keyType{KeyType::GUV};             // Type of keys loaded
+   long     days{5};                           // Number of days the keys remain valid
+   double   cryptoKeys[2][MAX_CRYPTO_KEYS]{};  // Crypto Variables
 };
 
 }

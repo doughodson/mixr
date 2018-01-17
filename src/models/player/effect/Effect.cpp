@@ -55,7 +55,7 @@ void Effect::copyData(const Effect& org, const bool)
 bool Effect::crashNotification()
 {
     const bool ok{killedNotification()};
-    setDetonationResults(DETONATE_NONE);
+    setDetonationResults(Detonation::NONE);
     setMode(Mode::DETONATED);
     return ok;
 }
@@ -67,7 +67,7 @@ bool Effect::collisionNotification(Player* const p)
 {
     const bool ok{killedNotification(p)};
     setMode(Mode::DETONATED);
-    setDetonationResults(DETONATE_NONE);
+    setDetonationResults(Detonation::NONE);
     return ok;
 }
 
@@ -85,7 +85,7 @@ void Effect::updateTOF(const double dt)
       // and check for the end of the flight
       if (getTOF() >= getMaxTOF()) {
          setMode(Mode::DETONATED);
-         setDetonationResults(DETONATE_NONE);
+         setDetonationResults(Detonation::NONE);
          return;
       }
    }

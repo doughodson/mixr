@@ -50,7 +50,7 @@ bool AsciiText::setSlotTextString(const base::String* const stsobj)
    bool ok {true};
    if (stsobj != nullptr) {
       if (width() == 0) width(stsobj->len());
-      setText(*stsobj);
+      setText((*stsobj).c_str());
    }
    else {
       if (isMessageEnabled(MSG_ERROR)) {

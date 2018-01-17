@@ -58,7 +58,7 @@ bool VpfDirectory::setPath(const base::String* const sfpobj)
         std::size_t j {sfpobj->len()};
         if (j > 0) {
             path = new char[j+1];
-            base::utStrcpy(path, j+1, *sfpobj);
+            base::utStrcpy(path, j+1, sfpobj->c_str());
         }
         else {
             std::cerr << "VPFDirectory::setPath: Invalid path value" << std::endl;

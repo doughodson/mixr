@@ -101,7 +101,7 @@ bool BmpTexture::writeFile()
 // setSlotTexturePath() -- sets the path to the textures directory
 bool BmpTexture::setSlotTexturePath(const base::String* const s)
 {
-   if (s != nullptr) setTexturePath(*s);
+   if (s != nullptr) setTexturePath((*s).c_str());
    else setTexturePath(nullptr);
    return true;
 }
@@ -109,7 +109,7 @@ bool BmpTexture::setSlotTexturePath(const base::String* const s)
 // setSlotTextureFileName() -- sets the texture file name
 bool BmpTexture::setSlotTextureFileName(const base::String* const s)
 {
-   if (s != nullptr) setTextureFileName(*s);
+   if (s != nullptr) setTextureFileName((*s).c_str());
    else setTextureFileName(nullptr);
    return true;
 }

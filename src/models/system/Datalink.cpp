@@ -214,7 +214,7 @@ void Datalink::reset()
    // ---
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr) {
         // We have a name of the track manager, but not the track manager itself
-        const char* name{*getTrackManagerName()};
+        const char* name{getTrackManagerName()->c_str()};
         // Get the named track manager from the onboard computer
         const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
         if (ownship != nullptr) {
@@ -235,7 +235,7 @@ void Datalink::reset()
    // ---
    if (getRadio() == nullptr && getRadioName() != nullptr) {
         // We have a name of the radio, but not the radio itself
-        const char* name{*getRadioName()};
+        const char* name{getRadioName()->c_str()};
         // Get the named radio from the component list of radios
         const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
         if (ownship != nullptr) {

@@ -12,7 +12,7 @@ namespace base {
 namespace navDR {
 
 // Standard dead reckoning model codes [ 0 .. 9 ]
-enum DeadReckoning { 
+enum class DeadReckoning { 
    OTHER_DRM,        // User defined (i.e., virtual function dynamicsOther())
    STATIC_DRM,       // No dead reckoning 
    FPW_DRM,          // World, No rotation, 1st order linear 

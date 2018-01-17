@@ -675,7 +675,7 @@ bool IrSensor::setSlotSensorType(const base::Identifier* const msg)
 // we'll lookup the actual track manager in reset() later
 bool IrSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v->getStdString());
+    return setTrackManagerName(v->str());
 }
 
 bool IrSensor::setTrackManagerName(const std::string& name)

@@ -82,7 +82,7 @@ bool PrintSelected::setSlotFieldName(const base::String* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      fieldNameStr.assign( msg->getString() );
+      fieldNameStr.assign( msg->c_str() );
    }
    return ok;
 
@@ -93,7 +93,7 @@ bool PrintSelected::setSlotCompareToStr(const base::String* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      compareStr.assign( msg->getString() );
+      compareStr.assign( msg->c_str() );
    }
    return ok;
 }

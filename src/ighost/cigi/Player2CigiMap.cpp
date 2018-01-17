@@ -90,7 +90,7 @@ bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
    bool match{};
    if (p != nullptr && refFactoryName != nullptr) {
       // first match the factory name --
-      if (p->isFactoryName( *refFactoryName ) ) {
+      if (p->isFactoryName( (*refFactoryName).c_str() ) ) {
 
          // The factory names match!
 
@@ -102,7 +102,7 @@ bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
          if ( refTypeName != nullptr && ptype != nullptr) {
 
             // Then compare at most the length of our reference type name ...
-            match = std::strncmp( ptype->getString(), refTypeName->getString(), refTypeName->len() ) == 0;
+            match = std::strncmp( ptype->c_str(), refTypeName->c_str(), refTypeName->len() ) == 0;
 
          }
       }

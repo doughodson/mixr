@@ -63,12 +63,12 @@ char DirectionReadout::filterInputEvent(const int event, const int tc)
 //------------------------------------------------------------------------------
 double DirectionReadout::getInputValue() const
 {
-   double value {};
+   double value{};
 
    // copy string to buffer with correct sign character
    const std::size_t CBUFLOCAL_LEN {100};
    char cbuf[CBUFLOCAL_LEN] {};
-   const char* p {*this};
+   const char* p {this->str.c_str()};
    base::utStrcpy(cbuf, CBUFLOCAL_LEN, p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';

@@ -209,7 +209,7 @@ bool IrSystem::setSeeker(IrSeeker* const p)
 bool IrSystem::setSlotSeekerName(base::Identifier* const p)
 {
    if (p == nullptr) return false;
-   seekerName = p->getStdString();
+   seekerName = p->str();
    return true;
 }
 

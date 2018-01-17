@@ -48,7 +48,7 @@ void VMap0RefCoverageDirectory::loadTables()
 
     createTable(VpfDirectory::FCS);
     VpfTable* fcs {getTable(VpfDirectory::FCS)};
-    if (fcs != nullptr && !fcs->isLoaded()) fcs->loadTableFromFile(string->getString(), "fcs", VpfDirectory::FCS);
+    if (fcs != nullptr && !fcs->isLoaded()) fcs->loadTableFromFile(string->c_str(), "fcs", VpfDirectory::FCS);
 
     // ok, let's build our feature class(es) from our feature class schema
     if (fcs->isLoaded()) buildFeatureClasses();
@@ -62,21 +62,21 @@ void VMap0RefCoverageDirectory::loadTables()
         if (featureTables[PLACENAM_DOT_PFT] == nullptr) featureTables[PLACENAM_DOT_PFT] = new VpfTable();
         if (!featureTables[PLACENAM_DOT_PFT]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            featureTables[PLACENAM_DOT_PFT]->loadTableFromFile(string->getString(), "placenam.pft");
+            featureTables[PLACENAM_DOT_PFT]->loadTableFromFile(string->c_str(), "placenam.pft");
         }
         
         // ok, now our entity node primitive table
         if (featureTables[END] == nullptr) featureTables[END] = new VpfTable();
         if (!featureTables[END]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            featureTables[END]->loadTableFromFile(string->getString(), "end");
+            featureTables[END]->loadTableFromFile(string->c_str(), "end");
         }
 
         // SPATIAL TABLES FOR QUICK REFERENCE!
         if (spatialTables[NSI] == nullptr) spatialTables[END] = new VpfSpatialIndexTable();
         if (!spatialTables[NSI]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            spatialTables[NSI]->loadIndexTableFromFile(string->getString(), "nsi");
+            spatialTables[NSI]->loadIndexTableFromFile(string->c_str(), "nsi");
             // SLS test
             // now do a quick spatial query 
             //spatialTables[NSI]->findPrimitivesBySpatialQuery(32, -115);
@@ -88,21 +88,21 @@ void VMap0RefCoverageDirectory::loadTables()
         if (featureTables[CND] == nullptr) featureTables[CND] = new VpfTable();
         if (!featureTables[CND]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            featureTables[CND]->loadTableFromFile(string->getString(), "cnd");
+            featureTables[CND]->loadTableFromFile(string->c_str(), "cnd");
         }
         // we now have to open our edge primitive table, which will contain information
         // about how our connected nodes are put together
         if (featureTables[EDG] == nullptr) featureTables[EDG] = new VpfTable();
         if (!featureTables[EDG]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            featureTables[EDG]->loadTableFromFile(string->getString(), "edg");
+            featureTables[EDG]->loadTableFromFile(string->c_str(), "edg");
         }
         // now we have to open our edge bouding rectangle, because it contains information
         // to do quick queries on our edg file
         if (featureTables[EBR] == nullptr) featureTables[EBR] = new VpfTable();
         if (!featureTables[EBR]->isLoaded()) {
             // don't give it a type, because we are keeping track of the type
-            featureTables[EBR]->loadTableFromFile(string->getString(), "ebr");
+            featureTables[EBR]->loadTableFromFile(string->c_str(), "ebr");
         }
     }
     string->unref();

@@ -547,7 +547,7 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
                     // return the full name.
                     const auto fullname = static_cast<Identifier*>(pair->slot()->clone());
                     *fullname += ".";
-                    *fullname += name0->getString();
+                    *fullname += name0->c_str();
                     name = fullname;
                     name0->unref();
                 }
@@ -680,7 +680,7 @@ bool Component::select(const String* const name)
     setSelectionName(nullptr);
     if (name != nullptr) {
         setSelectionName(name);
-        Pair* p{findByName(*name)};
+        Pair* p{findByName((*name).c_str())};
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
         } else {

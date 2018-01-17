@@ -25,7 +25,7 @@ class EdlScanner : public edlFlexLexer
 public:
     EdlScanner(std::fstream* f) : edlFlexLexer(f) {}
 
-    virtual int yylex();
+    int yylex() final;
     const char* getFilename()    { return fname; }
     int getLineNumber()          { return line; }
 

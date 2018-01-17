@@ -30,7 +30,7 @@ Record::Record(const char* const s)
 void Record::copyData(const Record& org, const bool)
 {
    BaseClass::copyData(org);
-   setStr( org );
+   setStr( org.c_str() );
    ptbl = org.ptbl;
 }
 
@@ -52,7 +52,7 @@ void Record::resetData()
 //------------------------------------------------------------------------------
 void Record::setRecord(base::String* const s)
 {
-   setStr( *s );
+   setStr( (*s).c_str() );
 }
 
 //------------------------------------------------------------------------------
@@ -246,7 +246,7 @@ const char* Record::makePointer(const std::size_t n) const
 {
    const char* p {};
    if (len() != 0) {
-      const char* rec {*this};
+      const char* rec {this->c_str()};
       if (n > 0 && n <= len()) p = (rec + n - 1);
    }
    return p;

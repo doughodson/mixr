@@ -315,8 +315,8 @@ bool WorldModel::setSlotEarthModel(const base::EarthModel* const msg)
 bool WorldModel::setSlotEarthModel(const base::Identifier* const msg)
 {
    bool ok{};
-   if (msg != nullptr && msg->getStdString().length() > 0) {
-      const base::EarthModel* p{base::EarthModel::getEarthModel(*msg)};
+   if (msg != nullptr && msg->str().length() > 0) {
+      const base::EarthModel* p{base::EarthModel::getEarthModel((*msg).c_str())};
       if (p != nullptr) {
          // found the earth model
          ok = setEarthModel(p);

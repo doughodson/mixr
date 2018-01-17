@@ -412,7 +412,7 @@ void Missile::weaponGuidance(const double dt)
                // We've detonated
                missed = false;
                setMode(Mode::DETONATED);
-               setDetonationResults( DETONATE_ENTITY_IMPACT );
+               setDetonationResults( Detonation::ENTITY_IMPACT );
 
                // compute location of the detonation relative to the target
                base::Vec3d p0n = -p0;
@@ -430,7 +430,7 @@ void Missile::weaponGuidance(const double dt)
 
                BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
                   SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-                  SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, detRange )
+                  SAMPLE_2_VALUES( static_cast<int>(Detonation::ENTITY_IMPACT), detRange )
                END_RECORD_DATA_SAMPLE()
 
             }
@@ -440,7 +440,7 @@ void Missile::weaponGuidance(const double dt)
          if (missed) {
             // We've detonated ...
             setMode(Mode::DETONATED);
-            setDetonationResults( DETONATE_DETONATION );
+            setDetonationResults( Detonation::DETONATION );
 
             // because we've just missed the target
             setTargetPlayer(nullptr,false);
@@ -454,7 +454,7 @@ void Missile::weaponGuidance(const double dt)
 
             BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
                SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
-               SAMPLE_2_VALUES( DETONATE_DETONATION, detRange )
+               SAMPLE_2_VALUES( static_cast<int>(Detonation::DETONATION), detRange )
             END_RECORD_DATA_SAMPLE()
 
          }

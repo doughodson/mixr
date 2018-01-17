@@ -130,31 +130,113 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Early on, C++ (a superset of C) did not include much support for string handling.
   In fact, the string class (std::string) did not get defined until 1998. Because
-  initial versions of C++ only included 'low-level' C string functionality,
+  initial versions of C++ only included low-level C string functionality,
   multiple incompatible designs for string handling classes were designed.
-  
+  In retrospect, even the inventor of C+ (Bjarne Stoustrup) considers this
+  one of the worse mistakes he made during development.
+
   Unfortunately, because of legacy code, this issue persists even today;
   multiple conventions often need to be handled within applications - MIXR is
-  no different in this regard.
-  
-  In retrospect, even the inventor of C+ (Bjarne Stoustrup) considers this
-  one of the worse mistakes he made during development. But now, std::string has
-  been around for almost 20 years, it's probably as good a time as any, to
-  reduce the complexity of code and address the management of C-style strings
-  as much as possible.
+  no different in this regard. But now, std::string has been around for almost
+  20 years, it's probably as good a time as any to reduce the complexity of
+  the code base by using it, and try to avoid as many character-based
+  C-style strings as possible.
   
   MIXR, defines its own Object-based reference counted String class - it,
-  along with character-based (char*) representations had been used almost
-  exclusively as the way to manage and represent a string.
+  along with the character-based (char*) representation has been used almost
+  exclusively as the way to manage and represent a string.  This is changing.
 
-  Starting with this release, we are starting to make the transition to
-  using the standard library defined 'std::string' class as much as possible.
-  We still need to retain MIXR's String class for the important aspect of it
-  being a compatibile Object-based class. But for places within the code base
-  where that is not important, we are striving to replace character-based
-  representations with 'std::string'.  In other words, we are treating
-  'std::string' in the same light as any other defined C++ primitive data type
-  (int, double, bool, etc).
+  Starting with this release, we are transitioning to the standard library
+  defined 'std::string' class as much as possible. We still need to retain
+  MIXR's String class because its an Object-based compatible class that
+  streamlines interactions with the EDL parser; but for places
+  within the code base where this is not an issue, we are striving to replace
+  String, String* and character-based representations with 'std::string'.
+  In other words, we are treating 'std::string' more like a C++ primitive
+  data type (int, double, bool, etc).
+
+  Design goal:
+
+  In the end, we would like to use std::string as much as possible, and turn MIXR's
+  String class essentially into an Object-based wrapper of 'std::string'.
+
+  Transition approach:
+
+  It's difficult to make the a transition away from MIXR Strings and char*
+  representations to std::string in one step.  Here is the series of steps we
+  are taking:
+
+  1) We are making / made MIXR's String class interface look more like (i.e., mimic)
+     std::string. We renamed the 'getString()' method to 'c_str()' - among C++
+     developers 'c_str' is universally understood to be a C-style string.
+
+     Note: we also corrected a basic behavior of the String class to always
+     represent a valid String - or at least maintain a valid C string.  Previously,
+     instantiating a String instance would create a 'shell' object which would
+     return a null pointer when asked for its char* representation (i.e., getString(),
+     implicit char* and const char* methods).  Now, every instance of String
+     will contain a valid string representation. A review of the code base indicated
+     it always initialized Strings with something - in other words, the behavior
+     of existing code did not rely on possible String instances returning null
+     pointers when asked for its char* pointer.  'std::string' always returns
+     a valid C string (via c_str()), even if it's empty; it never returns a nullptr -
+     we felt it important to mimic this behavior as well.
+
+  2) Eliminated the implicit conversions from String to either 'char*' or
+     'const char*'. The standard library string class does not allow this, neither
+     should we.  It did make a few places within code more verbose (as an extra
+     '->c_str()' was occasionally added), but arguably, it did make the code more clear.
+     Also, later in this transition, it's easy to search for all those 'c_str()', and
+     view them as opportunities to streamline type mismatches by again, using std::string.
+
+  3) Much like 'c_str()', a 'str()' method has been added to the Identifier class -
+     it returns a const reference to the underlying std::string.
+
+- Topic: User defined enumeration data types in C++11
+
+  The C programming language includes the capability to define user defined
+  data types using the 'enum' keyword.  For example:
+
+  enum State {Working, Failed};
+  enum Color {Red = 0, Green = 1, Blue = 2};
+
+  While this is convenient, problematic issues surface.
+
+  1) The defined 'types' (State and Color) are unscoped, meaning,
+     Working, Failed, Red, Green and Blue are all defined within
+     the same scope. As is, Working, Failed, Red, Green and Blue
+     represent integers and can be freely interchanged, and easily
+     used in the wrong program context.
+
+  2) The identifiers (e.g., Green) can be used directly to set integer
+     variables.  In this case, the enumeration carries a value that
+     has meaning.
+
+  In C++11, finer grained control over both aspects are available to avoid
+  possible confusion. Now, one would write the code as follows:
+
+  enum class State {Working, Failed}
+  enum class Color: int {Red = 0, Green = 1, Blue = 2};
+
+  Now Working and Failed belong to the class 'State' and Red, Green and Blue
+  belong to the class 'Color'.  Additionally, Red, Green and Blue will (under
+  the hood) be stored using an integer with the value as defined.  It can
+  be extracted using an explicit cast.
+
+  For example:
+
+   // extract the value for Red
+   int x = static_cast<int>(Color::Red);
+
+   - or -
+
+   // extract the value being stored by variable 'color'
+   Color color{Color::Red};
+   color = Color::Green;
+   int x = static_cast<int>(color);
+
+   MIXR code is now be written using these (C++11) provided capabilities.
+
 
 --------------------------------------------------------------------------------
 
@@ -220,10 +302,11 @@ base library (mixr_base)
 
    Identifier class
       1) This class is no longer a subclass of String.  It provides a complete
-         interface to manage a string-based identifier.  Internally it uses
-         a std::string to store this information.  It is subclassed off of
-         Object to remain compatible with EDL parsing system.  It has also
-         been marked as a 'final' class.
+         implementation to manage a std::string-based identifier.  It is
+         a subclass of Object to remain compatible with EDL parsing system.
+         It has also been marked as a 'final' class.
+      2) Two methods are of particular importance, 'c_str()' and 'str()' which
+         returns a C-based and std::string-based representation, respectively.
 
    Number class
       1) Methods associated with processing of Boolean values have been removed,
@@ -232,6 +315,7 @@ base library (mixr_base)
    String class
       1) No significant changes other than the removal of 'virtual' from several
          methods no longer used.
+      2) The method 'getString' has been renamed to 'c_str'.
 
    Table class
       1) Slot parameter 'extrapolate' now accepts a Boolean
@@ -299,6 +383,8 @@ graphics library (mixr_graphics)
       2) Slot parameter 'font' now accepts an Identifier
       3) Slot parameters 'highlight', 'underline', 'reversed', 'vertical,
          'brackets', 'linked' and 'inheritColor' now accepts a Boolean
+      4) removed implicit conversion operators for both 'char*' and
+         'const char*'
    
    BitmapFont class
       1) Slot parameter 'reverse' now accepts a Boolean

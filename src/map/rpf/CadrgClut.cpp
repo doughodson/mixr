@@ -80,9 +80,9 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     string->catStr(frame.getFileName());
 
     #if defined(WIN32)
-        std::ifstream   fin(*string, std::ios::in | std::ios::binary);
+        std::ifstream fin(string->c_str(), std::ios::in | std::ios::binary);
     #else
-        std::ifstream   fin(*string, std::ios::in);
+        std::ifstream fin(string->c_str(), std::ios::in);
     #endif
     // Color lookup table filename doesn't exist or failed to open
     if (fin.fail()) {

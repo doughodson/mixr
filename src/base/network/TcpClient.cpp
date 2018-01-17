@@ -173,7 +173,7 @@ bool TcpClient::setSlotIpAddress(const String* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ipAddr = msg->getStdString();
+        ipAddr = msg->c_str();
         ok = true;
     }
     return ok;
@@ -184,7 +184,7 @@ bool TcpClient::setSlotIpAddress(const Identifier* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ipAddr = msg->getStdString();
+        ipAddr = msg->str();
         ok = true;
     }
     return ok;

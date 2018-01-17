@@ -22,7 +22,7 @@ void VpfDataType::deleteData()
 {
     if (value != nullptr) {
         value->unref();
-        value = 0;
+        value = nullptr;
     }
 }
 
@@ -35,14 +35,14 @@ void VpfDataType::setValue(char* x)
 
 const char* VpfDataType::getValue()
 {
-    if (value != 0 && !value->isEmpty()) return value->getString();
+    if (value != 0 && !value->isEmpty()) return value->c_str();
     else return "";
 }
 
 // returns a float value (if we are a float!)
 float VpfDataType::getFloat()
 {
-    const float x = static_cast<float>(std::atof(value->getString()));
+    const float x{static_cast<float>(std::atof(value->c_str()))};
     return x;
 }
 

@@ -581,7 +581,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
          // more robust federate name to site/app ID map list.
-         if (fName != nullptr) ok = parseFederateName(&site, &app, *fName);
+         if (fName != nullptr) ok = parseFederateName(&site, &app, (*fName).c_str());
          else ok = false;
       }
       nib->setFederateName(fName);
@@ -1418,14 +1418,14 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {*p->slot()};
+            const char* const slotname{(*p->slot()).c_str()};
             const auto pp = dynamic_cast<const base::Distance*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
                //  now can we get valid 'kind' and 'domain' numbers from the slot name?
-               unsigned char kind {255};
-               unsigned char domain {255};
+               unsigned char kind{255};
+               unsigned char domain{255};
                bool isNum {slot2KD(slotname, &kind, &domain)};
                if (isNum) {
                   // Everything is valid, so let setMaxEntityRange() handle it
@@ -1459,7 +1459,7 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {*p->slot()};
+            const char* const slotname{(*p->slot()).c_str()};
             const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {
@@ -1495,14 +1495,14 @@ bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
 // Sets max position errors for pairs of entities by kind/domain
 bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
-      const base::List::Item* item {msg->getFirstItem()};
+      const base::List::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {*p->slot()};
+            const char* const slotname{(*p->slot()).c_str()};
             const auto pp = dynamic_cast<const base::Distance*>( p->object() );
 
             if (pp != nullptr) {
@@ -1543,7 +1543,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {*p->slot()};
+            const char* const slotname{(*p->slot()).c_str()};
             const auto pp = dynamic_cast<const base::Angle*>( p->object() );
 
             if (pp != nullptr) {
@@ -1585,7 +1585,7 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {*p->slot()};
+            const char* const slotname {(*p->slot()).c_str()};
             const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {
@@ -1818,7 +1818,7 @@ void NetIO::testOutputEntityTypes(const int n)
             if (origType != nullptr) {
 
                char cbuff[64] {};
-               base::utStrcpy(cbuff, 64, origType->getString());
+               base::utStrcpy(cbuff, 64, origType->c_str());
 
 #if 0 /* optionally increment the last character to look for generic matches */
                std::size_t ll{std::strlen(cbuff)};

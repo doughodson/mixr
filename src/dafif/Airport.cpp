@@ -40,14 +40,14 @@ Airport::Airport(const char* const s) : Record(s)
 //------------------------------------------------------------------------------
 // Type functions
 //------------------------------------------------------------------------------
-Airport::AirportType Airport::airportType() const
+Airport::Type Airport::airportType() const
 {
    char tt[AP_TYPE_LEN+1];
    dafifType(tt);
-   return AirportType(tt[0]);
+   return Type(tt[0]);
 }
 
-int Airport::isAirportType(const Airport::AirportType tt) const
+int Airport::isAirportType(const Airport::Type tt) const
 {
    return tt == airportType();
 }
