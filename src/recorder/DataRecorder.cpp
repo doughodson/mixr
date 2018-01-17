@@ -546,8 +546,10 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   const unsigned int detType {static_cast<unsigned int>(values[0])};
-   const double missDist {values[1]};
+   const int intVal{static_cast<int>(values[0])};
+   const models::AbstractWeapon::Detonation detType = static_cast<models::AbstractWeapon::Detonation>(intVal);
+
+   const double missDist{values[1]};
 
    const auto msg = new pb::DataRecord();
 
