@@ -28,9 +28,8 @@ namespace base {
 //    double getDouble()
 //    float getFloat()
 //    int getInt()
-//    bool getBoolean()
 //       Return the value of the Number object as a double, double,
-//       float, integer, or bool, respectively, regardless of the derived
+//       float, or integer, respectively, regardless of the derived
 //       class type of the object.
 //
 //------------------------------------------------------------------------------
