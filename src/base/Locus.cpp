@@ -15,7 +15,7 @@ Locus::Locus()
 
 Locus::Locus(
        const double* const newData, // Array of data points
-       const unsigned int n,        // Number of data points
+       const int n,                 // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const double ang,            // True direction (heading) angle of the data (degs)
@@ -51,7 +51,7 @@ void Locus::deleteData()
 //------------------------------------------------------------------------------
 // Access (get) functions
 //------------------------------------------------------------------------------
-double Locus::getRange(const unsigned int idx) const
+double Locus::getRange(const int idx) const
 {
    double rng{};
    if (idx < np && isDataValid()) {
@@ -60,7 +60,7 @@ double Locus::getRange(const unsigned int idx) const
    return rng;
 }
 
-double Locus::getData(const unsigned int idx) const
+double Locus::getData(const int idx) const
 {
    double value{};
    if (idx < np && isDataValid()) {
@@ -74,7 +74,7 @@ double Locus::getData(const unsigned int idx) const
 //------------------------------------------------------------------------------
 void Locus::setData(
        const double* const newData, // Array of data points
-       const unsigned int n,        // Number of data points
+       const int n,                 // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
        const double ang,            // True direction (heading) angle of the data (degs)
@@ -95,7 +95,7 @@ void Locus::setData(
       data = new double[np];
       double* p{data};
       const double* q{newData};
-      for (unsigned int i = 0; i < np; i++) {
+      for (int i = 0; i < np; i++) {
          *p++ = *q++;
       }
    }
