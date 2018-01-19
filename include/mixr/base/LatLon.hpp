@@ -36,10 +36,6 @@ class Number;
 //
 // Public methods:
 //
-//  Conversion operator:
-//
-//      double()
-//          Is C++ equivalent.
 //
 //      Dir getDir()
 //      int getDeg()
@@ -73,7 +69,7 @@ public:
 
    LatLon();
 
-   operator double() const         { return Number::getDouble(); }
+   double getValue() const           { return Number::getDouble(); }
 
    Dir getDir() const              { return dir; }
    int getDeg() const              { return deg; }
@@ -83,15 +79,15 @@ public:
 protected:
    void computeVal();
    bool setDir(const char* const direction);
-   bool setDeg(const double degrees);
-   bool setMin(const double minutes);
-   bool setSec(const double seconds);
+   bool setDeg(const double);
+   bool setMin(const double);
+   bool setSec(const double);
 
 private:
-   Dir    dir {Dir::NONE};  // direction
-   int    deg {};           // degrees
-   int    min {};           // minutes
-   double sec {};           // seconds
+   Dir    dir{Dir::NONE};  // direction
+   int    deg{};           // degrees
+   int    min{};           // minutes
+   double sec{};           // seconds
 
 private:
    // slot table helper methods

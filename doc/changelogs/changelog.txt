@@ -308,6 +308,12 @@ base library (mixr_base)
       2) Two methods are of particular importance, 'c_str()' and 'str()' which
          returns a C-based and std::string-based representation, respectively.
 
+   LatLong class
+      1) Removed implicit conversion operator to that returned a double
+         precision value.
+      2) Added new method called 'getValue()' which returns the value of the
+         LatLong instance.
+
    Number class
       1) Methods associated with processing of Boolean values have been removed,
          please use the Boolean class instead

@@ -345,7 +345,7 @@ bool Steerpoint::setSlotLatitude(const base::LatLon* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLatitude = *msg;
+        initLatitude = msg->getValue();
         haveInitLat = true;
         setLatitude( initLatitude );
         ok = true;
@@ -367,7 +367,7 @@ bool Steerpoint::setSlotLongitude(const base::LatLon* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLongitude = *msg;
+        initLongitude = msg->getValue();
         haveInitLon = true;
         setLongitude( initLongitude );
         ok = true;
