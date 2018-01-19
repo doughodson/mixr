@@ -31,9 +31,8 @@ OBJS =  \
 	concepts/linkage/AbstractIoData.o \
 	concepts/linkage/AbstractIoDevice.o \
 	concepts/linkage/AbstractIoHandler.o \
-	edl_parser/EdlParser.o \
-	edl_parser/EdlScanner.o \
-	relations/FStorage.o \
+	edl/EdlParser.o \
+	edl/EdlScanner.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -54,6 +53,7 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
+	relations/FStorage.o \
 	relations/Func1.o \
 	relations/Func2.o \
 	relations/Func3.o \
@@ -138,7 +138,7 @@ clean:
 	-rm -f concepts/linkage/*.o
 	-rm -f threads/platform/*.o
 	-rm -f threads/*.o
-	-rm -f edl_parser/*.o
+	-rm -f edl/*.o
 	-rm -f io/*.o
 	-rm -f network/*.o
 	-rm -f numeric/*.o
