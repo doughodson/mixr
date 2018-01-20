@@ -317,6 +317,12 @@ base library (mixr_base)
    Number class
       1) Methods associated with processing of Boolean values have been removed,
          please use the Boolean class instead
+      2) Deleted 'getInt64' method.  Unused, and probably returns the wrong
+         result on certain machines.  If you need it, do an explicit cast of
+         the value contained by Number instance to what you want:
+
+         Number x(4.0);
+         int64_t my64 = static_cast<int64_t>(x.getValue());
 
    String class
       1) Removal of 'virtual' from several methods that don't need it. String is a

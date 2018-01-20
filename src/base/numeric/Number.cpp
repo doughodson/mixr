@@ -22,11 +22,11 @@ void Number::copyData(const Number& org, const bool)
    val = org.val;
 }
 
-bool Number::setSlotValue(const Number* const svobj)
+bool Number::setSlotValue(const Number* const num)
 {
    bool ok{};
-   if (svobj != nullptr) {
-      val = svobj->val;
+   if (num != nullptr) {
+      val = num->val;
       ok = true;
    }
    return ok;

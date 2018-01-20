@@ -32,8 +32,8 @@ public:
    double getMag() const;        // returns phasor magnitude
    double getArg() const;        // returns phasor argument
 
-   bool setReal(const double r);
-   bool setImag(const double i);
+   bool setReal(const double);
+   bool setImag(const double);
 
    //--------------------------------------------------------------------------
    // Comparison Functions
@@ -116,7 +116,7 @@ public:
    friend std::ostream& operator<<(std::ostream& sout, const Complex& z);
 
 private:
-   double imag {};   // imaginary component
+   double imag{};   // imaginary component
 
 private:
    // slot table helper methods

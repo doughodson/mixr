@@ -16,7 +16,7 @@ namespace base {
 //               Multiply and Divide), and various units (see base/units/*.hpp)
 //
 // Slots:
-//     value  <Number>  ! Sets the value of this number. (default: 0)
+//     value  <Number>  ! Sets the value of this number. (default: 0.0)
 //
 //
 // Public methods:
@@ -40,7 +40,6 @@ class Number : public Object
 public:
    Number()                         { STANDARD_CONSTRUCTOR() }
    Number(const int value)          { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
-   Number(const int64_t value)      { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const double value)       { val = value; STANDARD_CONSTRUCTOR() }
    Number(const float value)        { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
 
@@ -48,9 +47,8 @@ public:
    double getDouble() const         { return val; }
    float getFloat() const           { return static_cast<float>(val); }
    int getInt() const               { return static_cast<int>(val); }
-   int64_t getInt64() const         { return static_cast<int64_t>(val); }
 
-   virtual void setValue(const double nv)   { val = nv; }
+   virtual void setValue(const double x)   { val = x; }
 
 protected:
    double val{};   // value of this object
