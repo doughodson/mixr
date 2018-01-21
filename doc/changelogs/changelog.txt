@@ -126,69 +126,79 @@ General framework-wide changes/improvements/trends/philosophy/goals
   to Boolean's, and Boolean's don't have a Number equivalent.  Such conversions
   are, of course, available within the C++ domain as explicit type conversions.
 
-- Topic: More general Refactoring of EDL -> C++ support classes
+- Topic: General refactoring of EDL -> C++ support classes
 
   The Extensible Description Language (EDL) parses character string into
   bite size chunks called tokens.  The meaning of those tokens, and how they are
-  organized determines if the 'language' being spoken correctly and can be
-  correctly understood.  In the case of a computer program, the EDL is 'spoken'
-  by a user writing an 'input' file (which we call a configuration file),
-  and it's interpreted by reading it and building an Object tree which eventually
-  is handed (returned) by to the program (the C++ side) for use or execution.
+  organized determines its 'language.'
 
-  C++ is a language in of itself, the EDL is as well.  The connection between
-  these two different languages is often referred to as 'binding' code.  It's the
-  code that smooths the 'impedance mismatch' between two different
-  languages by parsing it, translating it, and eventually aligning it with
-  the other.
+  In the case of computer programs, this input language (i.e.,EDL) is 'spoken'
+  in the form of a ASCII-based file (which we call a configuration file). It is
+  interpreted (i.e., translated) by reading it and building an Object tree which
+  eventually is handed (returned) by to the C++-based program for use.
+
+  Just like the EDL, C++ is a language as well. The software code that connects
+  these two languages is often referred to as 'binding' code.  Some software
+  projects will call this 'wrapper' code.  The purpose of the code is to smooth
+  the 'impedance mismatch' between two different languages.  For EDL based inputs,
+  this means the process of parsing and translating what was specified into
+  it's C++ equivalent.  (Technically, is not translating it to 'C++', but something
+  the C++-base code can understand and use.
 
   The translation aspect of this process is supported by tokens as defined
   by the EDL scanner and C++ classes to represent that information.  The
   process of translating can be thought of a series of representational casts.
   For example, in EDL land, a string is a series of characters surrounded by
-  quotes ("hello world"), this is identified as a string, considered as a token
-  with a particular value, stored in a C++-defined class called String, and eventually
-  translated to a std::string (we are moving this direction).  Boolean's are
-  "true" and "false" strings as identified by the EDL scanner, represented by
-  the C++ class called Boolean, and eventually used by the rest of the C++ code
-  as a 'bool' - a built-in primitive datatype.
+  quotes ("hello world").  This is represented by a token with a particular value,
+  which will be stored in a C++-defined class called String and eventually
+  be used by the C++-based code.  As another example, Boolean's are represented by
+  "true" and "false" strings as identified by the EDL scanner which are represented by
+  the C++ class called Boolean.  Once this translation happens, the C++ code will
+  probably translate it one more step to the primitive 'bool' for use internal to
+  the application.
 
-  We could of used exclusively C++ primitive types for lots of EDL's understood
-  types, such as 'int', 'double', 'float' and 'bool' but we lessen the burden
-  on the user to not be so picky (in terms of syntax) in the domain of numbers.
-  For example, consider a slot parameter called 'range' - which we want the user
-  to enter a floating point number.  If we used purely C++ number representations,
-  the user would be forced to enter 1.0f - a floating point number.  The value
-  1 is considered a C++ int, and the value 1.0 is considered a double.  In other
-  words, the C++ language defines a more strick or finer resolution representation
-  for what a number is.  In EDL land, we are willing to accept 1 or 1.0 as a reasonable
-  input for 'range'.
+  We could of exclusively used C++ primitive types for many of EDL's understood
+  types, such as 'int', 'double' and 'float' but we wanted to lessen the burden
+  on the user by being less picky (in terms of syntax) on how a number is written.
+  We only care if it's an integer or a float; unique, more specific variations from
+  that are not considered important.
 
-  To enable this, the EDL language is purposely weakened (sometimes called weakly
-  typed, although it's all relative) when compared to C++.  It understands integers
-  and floating point numbers, but that's about it.  To further weaken things, it
-  abstracts both of these to just a general purpose number.  If we want the user to
-  specific a 'range', a number is probably good enough.
+  For example, consider a slot parameter called 'range' - in which we want the user
+  to enter/input/specify a number.  If we used purely C++ number representations,
+  the user would be forced to enter one of a number of possible variations of a number
+  (e.g., 1, 1.0, 1.0f, etc).  In C++ land, the value 1 is considered a C++ int, the
+  value 1.0 is considered a double and 1.0f is a float.  In other words, the C++ language
+  defines a more strict or finer resolution representation for numbers.  In EDL land,
+  we are willing to accept 1 or 1.0 as a reasonable input for 'range'.
+
+  To enable this, the EDL language is purposely weakened, sometimes called weakly
+  typed in the domain of numbers, when compared to C++.  It understands integers
+  and floating point numbers, but that's about it.  To further weaken things,
+  both of these types are considered just concrete variations of something more abstract
+  called a Number.  If we want the user to specify the 'range', an abstract Number
+  representation is probably good enough.
 
   Rules (or suggestions):
 
   Within C++ classes that process EDL parser supplied inputs, accept Number if the
-  user is suppose to provide it.  Accept an Integer if you want the user to specific
-  that - it's kind of weird to see code that is looking for an 'int' accept an input
-  value of say, 3.4.  If the user should specify a Boolean-type input, force them to
-  specify 'true' or 'false' by using the Boolean class to perform the translation
-  to C++ 'bool'.
+  user is suppose to provide it.  Accept an Integer if you want the user to specify
+  an integer - it's kind of weird to see code that is ultimately looking for a C++ 'int'
+  accept and happily process, without warning or error, an input value of say, 3.4.
+  Not only does that not make sense, it can lead to a input file values that are
+  easily misunderstood. If the user should specify a Boolean-type input, force
+  them to specify 'true' or 'false' by using the Boolean class to clearly differentiate
+  and/or strengthen that type.
 
 - Topic: Unit oriented classes
 
   Units are no longer numbers; they are units.  Units represents magnitudes of a
-  quantity, defined and adopted by convention of by law, that is used as a standard
-  for measurements of the same kind of quantity.  They are associated with numbers;
-  the can be viewed as a type of metadata.  Units themselves are not numbers, but
-  because the natually relate to numbers, or a specific value, the unit classes
-  within MIXR include a number value.  When parsing and reading in an EDL file,
-  the numbers they contained are accessed in much the same way a number is; but
-  in this class, the unit itself is providing additional information about it.
+  quantity. Obviously they are related to numbers; and can be considered a piece
+  of meta-data.  Units themselves are not numbers, but because the naturally relate
+  to numbers, or a specific value, the unit classes within MIXR specify a number.
+  When parsing and reading in an EDL file, the numbers they contain are accessed
+  in much the same way a number is.  The unit itself provides a context to understand
+  its intrinsic value relate to other units.  The unit classes and utility functions
+  provide the capability to translate from one unit to another.
 
 - Topic: Character arrays, strings, and String class - moving to std::string
 
