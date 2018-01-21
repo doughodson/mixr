@@ -8,7 +8,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(Sar)
 END_SLOTTABLE(Sar)
 
 BEGIN_SLOT_MAP(Sar)
-    ON_SLOT( 1, setSlotChipSize,  base::Number)
+    ON_SLOT( 1, setSlotChipSize,  base::Integer)
 END_SLOT_MAP()
 
 // Default parameters
@@ -130,11 +130,7 @@ bool Sar::setStarePoint(const double lat, const double lon, const double elev)
     return true;
 }
 
-//-----------------------------------------------------------------------------
-// Set functions
-//-----------------------------------------------------------------------------
-
-bool Sar::setSlotChipSize(const base::Number* const msg)
+bool Sar::setSlotChipSize(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

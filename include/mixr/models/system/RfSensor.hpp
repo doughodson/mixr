@@ -29,7 +29,7 @@ class TrackManager;
 //
 //    ranges               <List>        ! List of sensor ranges (nm) [vector] (default: 0)
 //
-//    initRangeIdx         <Number>      ! Initial range index [ 1 ... nRanges ] (default: 1)
+//    initRangeIdx         <Integer>     ! Initial range index [ 1 ... nRanges ] (default: 1)
 //
 //    PRF                  <Frequency>   ! Pulse Repetition Frequency (PRF) (must be greater than zero) (default: 0.0)
 // ### NES: Initial value not greater than 0)
@@ -147,7 +147,7 @@ private:
    bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
    bool setSlotModeSingle(RfSensor* const);                   // Sets a single (only) R/F sensor submode
    bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)
-   bool setSlotInitRangeIdx(base::Number* const);             // Sets out initial range index [ 1 .. nRanges ]
+   bool setSlotInitRangeIdx(base::Integer* const);            // Sets out initial range index [ 1 .. nRanges ]
    bool setSlotPrf(const base::Frequency* const);             // Sets PRF as a base::Frequency
    bool setSlotPrf(const base::Number* const);                // Sets PRF in hertz
    bool setSlotPulseWidth(const base::Time* const);           // Sets pulse width using base::Time

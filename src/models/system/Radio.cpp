@@ -5,6 +5,7 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Frequencies.hpp"
@@ -25,11 +26,11 @@ BEGIN_SLOTTABLE(Radio)
 END_SLOTTABLE(Radio)
 
 BEGIN_SLOT_MAP(Radio)
-    ON_SLOT(1, setSlotNumChannels,    base::Number)
+    ON_SLOT(1, setSlotNumChannels,    base::Integer)
     ON_SLOT(2, setSlotChannels,       base::PairStream)
-    ON_SLOT(3, setSlotChannel,        base::Number)
+    ON_SLOT(3, setSlotChannel,        base::Integer)
     ON_SLOT(4, setSlotMaxDetectRange, base::Number)
-    ON_SLOT(5, setSlotRadioId,        base::Number)
+    ON_SLOT(5, setSlotRadioId,        base::Integer)
 END_SLOT_MAP()
 
 Radio::Radio()
@@ -270,7 +271,7 @@ void Radio::receivedEmissionReport(Emission* const)
 // Slot Functions  (return 'true' if the slot was set, else 'false')
 //------------------------------------------------------------------------------
 
-bool Radio::setSlotNumChannels(base::Number* const msg)
+bool Radio::setSlotNumChannels(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -319,7 +320,7 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
 }
 
 // channel: Channel the radio is set to
-bool Radio::setSlotChannel(base::Number* const msg)
+bool Radio::setSlotChannel(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -343,7 +344,7 @@ bool Radio::setSlotMaxDetectRange(base::Number* const num)
 }
 
 // radio ID: the radio id used for DIS
-bool Radio::setSlotRadioId(base::Number* const num)
+bool Radio::setSlotRadioId(base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {

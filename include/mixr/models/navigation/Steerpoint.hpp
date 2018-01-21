@@ -6,8 +6,8 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Identifier; class LatLon;
-                 class List; class Identifier; class String; class Time; }
+namespace base { class Angle; class Distance; class Identifier; class Integer; class LatLon;
+                 class List; class Identifier; class Number; class String; class Time; }
 namespace terrain { class Terrain; }
 namespace models {
 class Navigation;
@@ -52,7 +52,7 @@ class Action;
 //   magvar    <base::Angle>          ! Magnetic Var at steerpoint (default: 0)
 //             <base::Number>         ! (or as degrees)
 //
-//   next      <base::Number>         ! "Next" steerpoint number (default: 0)
+//   next      <base::Integer>        ! "Next" steerpoint number (default: 0)
 //             <base::Identifier>     ! or by steerpoint name
 //
 //   action    <Action>               ! Action to be triggered at steerpoint crossing (auto only)
@@ -252,7 +252,7 @@ private:
    bool setSlotMagVar(const base::Angle* const);
    bool setSlotMagVar(const base::Number* const);
    bool setSlotNext(const base::Identifier* const);
-   bool setSlotNext(const base::Number* const);
+   bool setSlotNext(const base::Integer* const);
    bool setSlotAction(Action* const x)                   { return setAction(x); }
 
    //bool setSlotPosition(const base::List* const);

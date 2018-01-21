@@ -11,7 +11,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -35,7 +35,7 @@ END_SLOTTABLE(AbstractField)
 
 BEGIN_SLOT_MAP(AbstractField)
     ON_SLOT(1,  setSlotPosition,      base::List)
-    ON_SLOT(2,  setSlotWidth,         base::Number)
+    ON_SLOT(2,  setSlotWidth,         base::Integer)
     ON_SLOT(3,  setSlotHighlight,     base::Boolean)
     ON_SLOT(4,  setSlotUnderline,     base::Boolean)
     ON_SLOT(5,  setSlotReversed,      base::Boolean)
@@ -45,7 +45,7 @@ BEGIN_SLOT_MAP(AbstractField)
     ON_SLOT(9,  setSlotLinked,        base::Boolean)
     ON_SLOT(10, setSlotInheritColor,  base::Boolean)
     ON_SLOT(11, setSlotFont,          base::Identifier)
-    ON_SLOT(12, setSlotStartCharPos,  base::Number)
+    ON_SLOT(12, setSlotStartCharPos,  base::Integer)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AbstractField)
@@ -66,9 +66,9 @@ BEGIN_EVENT_HANDLER(AbstractField)
         }
     }
     ON_EVENT_OBJ(SET_POSITION,      setPosition,          base::List)
-    ON_EVENT_OBJ(SET_LINE,          onSetLine,            base::Number)
-    ON_EVENT_OBJ(SET_COLUMN,        onSetColumn,          base::Number)
-    ON_EVENT_OBJ(SET_WIDTH,         setSlotWidth,         base::Number)
+    ON_EVENT_OBJ(SET_LINE,          onSetLine,            base::Integer)
+    ON_EVENT_OBJ(SET_COLUMN,        onSetColumn,          base::Integer)
+    ON_EVENT_OBJ(SET_WIDTH,         setSlotWidth,         base::Integer)
     ON_EVENT_OBJ(SET_HIGHLIGHT,     setSlotHighlight,     base::Boolean)
     ON_EVENT_OBJ(SET_UNDERLINE,     setSlotUnderline,     base::Boolean)
     ON_EVENT_OBJ(SET_REVERSED,      setSlotReversed,      base::Boolean)
@@ -511,13 +511,13 @@ bool AbstractField::setPosition(const base::List* const spobj)
     return ok;
 }
 
-bool AbstractField::onSetLine(const base::Number* const oslobj)
+bool AbstractField::onSetLine(const base::Integer* const oslobj)
 {
     if (oslobj != nullptr) line(oslobj->getInt());
     return true;
 }
 
-bool AbstractField::onSetColumn(const base::Number* const oscobj)
+bool AbstractField::onSetColumn(const base::Integer* const oscobj)
 {
    if (oscobj != nullptr) column(oscobj->getInt());
    return true;
@@ -528,7 +528,7 @@ bool AbstractField::setSlotPosition(const base::List* const spobj)
    return setPosition(spobj);
 }
 
-bool AbstractField::setSlotWidth(const base::Number* const swobj)
+bool AbstractField::setSlotWidth(const base::Integer* const swobj)
 {
 
     if (swobj != nullptr) width(swobj->getInt());
@@ -732,11 +732,11 @@ bool AbstractField::setSlotFont(const base::Identifier* const font)
     return ok;
 }
 
-bool AbstractField::setSlotStartCharPos(const base::Number* const msg)
+bool AbstractField::setSlotStartCharPos(const base::Integer* const msg)
 {
-    bool ok {};
+    bool ok{};
     if (msg != nullptr) {
-        int ii {msg->getInt()};
+        const int ii{msg->getInt()};
         if (ii > 0) {
            // come in as 1 based, convert to 0 based
            startCP = static_cast<unsigned int>(ii - 1);

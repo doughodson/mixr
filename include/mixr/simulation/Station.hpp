@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoHandler; class Boolean; class Identifier;
+namespace base { class AbstractIoHandler; class Boolean; class Identifier; class Integer;
                  class Number; class PairStream; class String; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
@@ -38,19 +38,19 @@ class StationNetPeriodicThread;
 //
 //    tcRate             <base::Number>             ! Time-critical thread rate (Hz) (default: 50hz)
 //    tcPriority         <base::Number>             ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
-//    tcStackSize        <base::Number>             ! Time-critical thread stack size (default: <system default size>)
+//    tcStackSize        <base::Integer>            ! Time-critical thread stack size (default: <system default size>)
 //
-//    fastForwardRate    <base::Number>             ! Fast forward rate for time critical functions
+//    fastForwardRate    <base::Integer>            ! Fast forward rate for time critical functions
 //                                                  ! (i.e., the number of times updateTC() is called per frame).
 //                                                  ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
 //    netRate            <base::Number>             ! Network thread rate (Hz) (default: 0hz)
 //    netPriority        <base::Number>             ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
-//    netStackSize       <base::Number>             ! Network thread stack size (default: <system default size>)
+//    netStackSize       <base::Integer>            ! Network thread stack size (default: <system default size>)
 //
 //    bgRate             <base::Number>             ! Background thread rate (Hz) (default: 0 -- no thread)
 //    bgPriority         <base::Number>             ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
-//    bgStackSize        <base::Number>             ! Background thread stack size (default: <system default size>)
+//    bgStackSize        <base::Integer>            ! Background thread stack size (default: <system default size>)
 //
 //    startupResetTime   <base::Time>               ! Startup (initial) RESET event timer value (default: no reset event)
 //                                                  !  (some simulations may need this -- let it run a few initial frames then reset)
@@ -291,16 +291,16 @@ private:
 
    bool setSlotTimeCriticalRate(const base::Number* const hz);
    bool setSlotTimeCriticalPri(const base::Number* const);
-   bool setSlotTimeCriticalStackSize(const base::Number* const);
-   bool setSlotFastForwardRate(const base::Number* const);
+   bool setSlotTimeCriticalStackSize(const base::Integer* const);
+   bool setSlotFastForwardRate(const base::Integer* const);
 
    bool setSlotNetworkRate(const base::Number* const hz);
    bool setSlotNetworkPri(const base::Number* const);
-   bool setSlotNetworkStackSize(const base::Number* const);
+   bool setSlotNetworkStackSize(const base::Integer* const);
 
    bool setSlotBackgroundRate(const base::Number* const hz);
    bool setSlotBackgroundPri(const base::Number* const);
-   bool setSlotBackgroundStackSize(const base::Number* const);
+   bool setSlotBackgroundStackSize(const base::Integer* const);
 
    bool setSlotStartupResetTime(const base::Time* const);
    bool setSlotEnableUpdateTimers(const base::Boolean* const);

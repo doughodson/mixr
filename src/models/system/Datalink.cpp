@@ -8,10 +8,11 @@
 #include "mixr/models/Message.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Distances.hpp"
 
 #include "mixr/base/util/system_utils.hpp"
@@ -29,8 +30,8 @@ BEGIN_SLOTTABLE(Datalink)
 END_SLOTTABLE(Datalink)
 
 BEGIN_SLOT_MAP(Datalink)
-    ON_SLOT(1, setSlotRadioId,      base::Number)
-    ON_SLOT(2, setSlotMaxRange,     base::Distance)
+    ON_SLOT(1, setSlotRadioId,          base::Integer)
+    ON_SLOT(2, setSlotMaxRange,         base::Distance)
     ON_SLOT(3, setSlotRadioName,        base::String)
     ON_SLOT(4, setSlotTrackManagerName, base::String)
 END_SLOT_MAP()
@@ -483,11 +484,7 @@ bool Datalink::onDatalinkMessageEvent(base::Object* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// Set slot functions
-//------------------------------------------------------------------------------
-
-bool Datalink::setSlotRadioId(const base::Number* const msg)
+bool Datalink::setSlotRadioId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

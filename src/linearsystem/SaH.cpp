@@ -1,6 +1,7 @@
 
 #include "mixr/linearsystem/SaH.hpp"
-#include "mixr/base/numeric/Number.hpp"
+
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/units/Frequencies.hpp"
 
 namespace mixr {
@@ -15,7 +16,7 @@ END_SLOTTABLE(SaH)
 
 BEGIN_SLOT_MAP(SaH)
    ON_SLOT( 1, setSlotSampleRate, base::Frequency)
-   ON_SLOT( 1, setSlotSampleRate, base::Number)
+   ON_SLOT( 1, setSlotSampleRate, base::Integer)
 END_SLOT_MAP()
 
 SaH::SaH()
@@ -142,7 +143,7 @@ bool SaH::setSlotSampleRate(const base::Frequency* const msg)
    return ok;
 }
 
-bool SaH::setSlotSampleRate(const base::Number* const msg)
+bool SaH::setSlotSampleRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

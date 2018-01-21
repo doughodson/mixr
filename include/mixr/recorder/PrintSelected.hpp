@@ -30,10 +30,10 @@ class TrackData; class EmissionData;
 //
 // Factory name: PrintSelected
 // Slots:
-//   messageToken    <base::Number>   ! Message ID (token)
+//   messageToken    <base::Integer>  ! Message ID (token)
 //   fieldName       <base::String>   ! Full field name (e.g., mixr.Recorder.Pb.PlayerId.name)
 //   compareToValS   <base::String>   ! value to compare (string)
-//   compareToValI   <base::Number>   ! value to compare (num)
+//   compareToValI   <base::Integer>  ! value to compare (num)
 //   compareToValD   <base::Number>   ! value to compare (dbl)
 //   condition       <base::String>   ! EQ, LT, or GT (ignored for bool and strings)
 //   timeOnly        <base::Boolean>  ! match time conditions only. Print ALL messages that match
@@ -43,7 +43,6 @@ class PrintSelected : public PrintHandler
     DECLARE_SUBCLASS(PrintSelected, PrintHandler)
 
 public:
-
    PrintSelected();
 
    enum class Condition { EQ, LT, GT };
@@ -95,10 +94,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMsgToken(const base::Number* const);
+   bool setSlotMsgToken(const base::Integer* const);
    bool setSlotFieldName(const base::String* const);
    bool setSlotCompareToStr(const base::String* const);
-   bool setSlotCompareToNum(const base::Number* const);
+   bool setSlotCompareToNum(const base::Integer* const);
    bool setSlotCompareToDbl(const base::Number* const);
    bool setSlotCondition(const base::String* const);
    bool setSlotTimeOnly(const base::Boolean* const);

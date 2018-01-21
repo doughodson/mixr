@@ -7,7 +7,7 @@
 #include "mixr/base/units/distance_utils.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Number; class PairStream; }
+namespace base { class Angle; class Boolean; class Distance; class Integer; class Number; class PairStream; }
 namespace models {
 class Player;
 
@@ -33,7 +33,7 @@ class Player;
 // Factory name: CollisionDetect
 // Slots:
 //    collisionRange      <Distance>       ! Collision range (default: 4 Meters)
-//    maxPlayers          <Number>         ! Max number of players of interest (default: 20)
+//    maxPlayers          <Integer>        ! Max number of players of interest (default: 20)
 //    playerTypes         <PairStream>     ! List of player of interest types (default: all types )
 //                                         !   Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //    maxRange2Players    <Distance>       ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
@@ -124,7 +124,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotCollisionRange(const base::Distance* const);
-   bool setSlotMaxPlayers(const base::Number* const);
+   bool setSlotMaxPlayers(const base::Integer* const);
    bool setSlotPlayerTypes(const base::PairStream* const);
    bool setSlotMaxRange2Players(const base::Distance* const);
    bool setSlotMaxAngle2Players(const base::Angle* const);

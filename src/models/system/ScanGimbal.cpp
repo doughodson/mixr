@@ -40,7 +40,7 @@ BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 4, setSlotSearchVolume,      base::List)
     ON_SLOT( 5, setSlotRefPosition,       base::List)
     ON_SLOT( 6, setSlotBarSpacing,        base::Number)
-    ON_SLOT( 7, setSlotNumBars,           base::Number)
+    ON_SLOT( 7, setSlotNumBars,           base::Integer)
     ON_SLOT( 8, setSlotRevPerSec,         base::Number)
     ON_SLOT( 9, setSlotScanRadius,        base::Number)
     ON_SLOT(10, setSlotPRVertices,        base::PairStream)
@@ -919,7 +919,7 @@ bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
 }
 
 // setSlotNumBars() --
-bool ScanGimbal::setSlotNumBars(const base::Number* const newNumBars)
+bool ScanGimbal::setSlotNumBars(const base::Integer* const newNumBars)
 {
     bool ok{};
     if (newNumBars != nullptr) {

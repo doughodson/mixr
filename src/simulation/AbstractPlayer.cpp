@@ -1,7 +1,7 @@
 
 #include "mixr/simulation/AbstractPlayer.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Identifier.hpp"
 
 #include "mixr/simulation/AbstractNetIO.hpp"
@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(AbstractPlayer)
 END_SLOTTABLE(AbstractPlayer)
 
 BEGIN_SLOT_MAP(AbstractPlayer)
-   ON_SLOT(01, setSlotID,       base::Number)
+   ON_SLOT(01, setSlotID,       base::Integer)
    ON_SLOT(02, setSlotInitMode, base::Identifier)
 END_SLOT_MAP()
 
@@ -161,7 +161,7 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 //-----------------------------------------------------------------------------
 
 // id: Player id  [ 1 .. 65535 ]
-bool AbstractPlayer::setSlotID(const base::Number* const num)
+bool AbstractPlayer::setSlotID(const base::Integer* const num)
 {
    bool ok{};
    const int newID = num->getInt();

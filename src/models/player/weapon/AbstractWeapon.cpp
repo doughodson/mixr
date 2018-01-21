@@ -19,6 +19,7 @@
 #include "mixr/base/osg/Matrixd"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Angles.hpp"
@@ -84,7 +85,7 @@ BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT(12, setSlotMaxGimbal,    base::Angle)
 
     ON_SLOT(13, setSlotTgtPos,       base::List)
-    ON_SLOT(14, setSlotWeaponID,     base::Number)
+    ON_SLOT(14, setSlotWeaponID,     base::Integer)
     ON_SLOT(15, setSlotDummy,        base::Boolean)
     ON_SLOT(16, setSlotJettisonable, base::Boolean)
     ON_SLOT(17, setSlotTestTgtName,  base::String)
@@ -1454,7 +1455,7 @@ bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
 }
 
 // weaponID: weapon type ID
-bool AbstractWeapon::setSlotWeaponID(const base::Number* const p)
+bool AbstractWeapon::setSlotWeaponID(const base::Integer* const p)
 {
     setWeaponID( p->getInt() );
     return true;

@@ -5,6 +5,7 @@
 #include "mixr/instruments/buttons/Button.hpp"
 
 namespace mixr {
+namespace base { class Integer; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -36,8 +37,8 @@ private:
     SendData currentStateSD;
 
 private:
-    bool setSlotNumSelections(const base::Number* const);
-    bool setSlotCurrentState(const base::Number* const);
+    bool setSlotNumSelections(const base::Integer* const);
+    bool setSlotCurrentState(const base::Integer* const);
 };
 
 }

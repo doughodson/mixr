@@ -6,8 +6,8 @@
 #include <string>
 
 namespace mixr {
+namespace base { class Identifier; class Integer; }
 namespace models { class Player; class Track; class Emission; }
-namespace base { class Identifier; }
 namespace recorder {
 namespace pb { class DataRecord; class PlayerId; class PlayerState;
                class TrackData; class EmissionData; }
@@ -143,13 +143,13 @@ private:
    bool setSlotOutputHandler(OutputHandler* const x)         { return setOutputHandler(x); }
    bool setSlotEventName(base::Identifier* const);
    bool setSlotApplication(base::Identifier* const);
-   bool setSlotCaseNum(base::Number* const);
-   bool setSlotMissionNum(base::Number* const);
-   bool setSlotSubjectNum(base::Number* const);
-   bool setSlotRunNum(base::Number* const);
-   bool setSlotDay(base::Number* const);
-   bool setSlotMonth(base::Number* const);
-   bool setSlotYear(base::Number* const);
+   bool setSlotCaseNum(base::Integer* const);
+   bool setSlotMissionNum(base::Integer* const);
+   bool setSlotSubjectNum(base::Integer* const);
+   bool setSlotRunNum(base::Integer* const);
+   bool setSlotDay(base::Integer* const);
+   bool setSlotMonth(base::Integer* const);
+   bool setSlotYear(base::Integer* const);
 };
 
 #include "mixr/recorder/DataRecorder.inl"

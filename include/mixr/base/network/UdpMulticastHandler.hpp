@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base {
 class Boolean;
-class Number;
+class Integer;
 class String;
 
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ class String;
 //                                  ! IP multicast addresses range from 224.0.0.0
 //                                  ! through 239.255.255.255 (e.g., "225.0.0.251")
 //
-//      ttl             <Number>    ! Multicast Time-To-Live (TTL) value (default: 1)
+//      ttl             <Integer>   ! Multicast Time-To-Live (TTL) value (default: 1)
 //
 //      loopback        <Boolean>   ! Multicast Loopback flag (default: true)
 //
@@ -57,7 +57,7 @@ class String;
 //           multicastGroup: "224.0.0.251"      // Multicast group
 //           port: 2010                         // Multicast port
 //           localPort: 2011                    // Port to send from
-//           shared: 1                          // Shared socket
+//           shared: true                       // Shared socket
 //           ttl:    4                          // Time-to-live
 //           loopback: true                     // Loop back
 //        )
@@ -95,7 +95,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotMulticastGroup(const String* const);
-    bool setSlotTTL(const Number* const);
+    bool setSlotTTL(const Integer* const);
     bool setSlotLoopback(const Boolean* const);
 };
 

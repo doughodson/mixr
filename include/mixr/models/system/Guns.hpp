@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Boolean; class List; class Number; }
+namespace base { class Boolean; class Integer; class List; class Number; }
 namespace models {
 class Bullet;
 
@@ -24,10 +24,10 @@ class Bullet;
 // Factory name: Gun
 // Slots:
 //    bulletType  <Bullet>   ! Type of bullet (have to have bullets to work) (default: 0)
-//    rounds      <Number>   ! Number of rounds (default: 510)
+//    rounds      <Integer>  ! Number of rounds (default: 510)
 //    unlimited   <Boolean>  ! Unlimited rounds flag (default: false)
-//    rate        <Number>   ! Rate of fire (rounds per minute) (default: 6600)
-//    burstRate   <Number>   ! Rate to generate small bursts of bullets (default: 10)
+//    rate        <Integer>  ! Rate of fire (rounds per minute) (default: 6600)
+//    burstRate   <Integer>  ! Rate to generate small bursts of bullets (default: 10)
 //
 //    The following are used to position the gun on the ownship player
 //    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
@@ -119,10 +119,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNumRounds(const base::Number* const);   // Number of rounds
+   bool setSlotNumRounds(const base::Integer* const);  // Number of rounds
    bool setSlotUnlimited(const base::Boolean* const);  // Unlimited rounds flag
-   bool setSlotRate(const base::Number* const);        // Rate of fire (rds per min)
-   bool setSlotBurstRate(const base::Number* const);   // Burst rate
+   bool setSlotRate(const base::Integer* const);       // Rate of fire (rds per min)
+   bool setSlotBurstRate(const base::Integer* const);  // Burst rate
    bool setSlotPosition(base::List* const);            // Gun position relative to ownship
    bool setSlotRoll(const base::Number* const);        // Gun roll angle to ownship
    bool setSlotPitch(const base::Number* const);       // Gun pitch angle to ownship

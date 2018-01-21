@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Identifier; class List; class Number; class PairStream; }
+namespace base { class Angle; class Boolean; class Distance; class Identifier; class Integer; class List; class Number; class PairStream; }
 namespace models {
 class Emission;
 class SensorMsg;
@@ -368,7 +368,7 @@ private:
    bool setSlotCheckHorizon(const base::Boolean* const);            // Enable horizon masking check (default: true)
 
    bool setSlotPlayerTypes(const base::PairStream* const);          // Player of interest types (default: 0 )
-   bool setSlotMaxPlayers(const base::Number* const);               // Max number of players of interest (default: 0)
+   bool setSlotMaxPlayers(const base::Integer* const);              // Max number of players of interest (default: 0)
 
                                                                     // Max range to players of interest or zero for all (meters)
    bool setSlotMaxRange2PlayersOfInterest(const base::Distance* const);

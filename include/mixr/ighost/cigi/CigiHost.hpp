@@ -28,7 +28,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 //class CigiOutgoingMsg;
 
 namespace mixr {
-namespace base { class Boolean; class Number; class NetHandler; }
+namespace base { class Boolean; class Integer; class NetHandler; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
@@ -48,12 +48,12 @@ class IgThread;
 //    session               <HostSession>   !  CIGI host session
 //    async                 <Number>        !  True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel      <Boolean>       !  True to hide the ownship's model (default: true - ownship's model is not seen)
-//    ownshipModel          <Number>        !  Ownship's model ID
-//    mslTrailModel         <Number>        !  "Missile Trail" effect model ID
-//    smokePlumeModel       <Number>        !  "Smoke Plume" effect model ID
-//    airExplosionModel     <Number>        !  "Air Explosion" effect model ID
-//    groundExplosionModel  <Number>        !  "Ground Explosion" effect model ID
-//    shipWakeModel         <Number>        !  "Ship Wake" effect model ID
+//    ownshipModel          <Integer>       !  Ownship's model ID
+//    mslTrailModel         <Integer>       !  "Missile Trail" effect model ID
+//    smokePlumeModel       <Integer>       !  "Smoke Plume" effect model ID
+//    airExplosionModel     <Integer>       !  "Air Explosion" effect model ID
+//    groundExplosionModel  <Integer>       !  "Ground Explosion" effect model ID
+//    shipWakeModel         <Integer>       !  "Ship Wake" effect model ID
 //
 // Note: In the async mode, the sendCigiData() function, which sends the CIGI
 // packets to the session, is called by our frameSync() function in the
@@ -256,12 +256,12 @@ private:
    bool setSlotHostSession(HostSession* const);
    bool setSlotASyncMode(const base::Boolean* const);
    bool setSlotHideOwnshipModel(const base::Boolean* const);
-   bool setSlotOwnshipModelId(const base::Number* const);
-   bool setSlotMslTrailModelId(const base::Number* const);
-   bool setSlotSmokePlumeModelId(const base::Number* const);
-   bool setSlotAirExplosionModelId(const base::Number* const);
-   bool setSlotGroundExplosionModelId(const base::Number* const);
-   bool setSlotShipWakeModelId(const base::Number* const);
+   bool setSlotOwnshipModelId(const base::Integer* const);
+   bool setSlotMslTrailModelId(const base::Integer* const);
+   bool setSlotSmokePlumeModelId(const base::Integer* const);
+   bool setSlotAirExplosionModelId(const base::Integer* const);
+   bool setSlotGroundExplosionModelId(const base::Integer* const);
+   bool setSlotShipWakeModelId(const base::Integer* const);
 };
 
 }

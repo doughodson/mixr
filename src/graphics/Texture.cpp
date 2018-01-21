@@ -1,6 +1,7 @@
 
 #include "mixr/graphics/Texture.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 
@@ -26,8 +27,8 @@ BEGIN_SLOTTABLE(Texture)
 END_SLOTTABLE(Texture)
 
 BEGIN_SLOT_MAP(Texture)
-    ON_SLOT(1,  setSlotWidth,      base::Number)
-    ON_SLOT(2,  setSlotHeight,     base::Number)
+    ON_SLOT(1,  setSlotWidth,      base::Integer)
+    ON_SLOT(2,  setSlotHeight,     base::Integer)
     ON_SLOT(3,  setSlotRedScale,   base::Number)
     ON_SLOT(4,  setSlotRedBias,    base::Number)
     ON_SLOT(5,  setSlotGreenScale, base::Number)
@@ -296,7 +297,7 @@ bool Texture::setMinFilter(const int v)
 //------------------------------------------------------------------------------
 // setSlotWidth() - sets our width slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotWidth(const base::Number* const size)
+bool Texture::setSlotWidth(const base::Integer* const size)
 {
     bool ok = false;
     if (size != nullptr) ok = setWidth(size->getInt());
@@ -306,7 +307,7 @@ bool Texture::setSlotWidth(const base::Number* const size)
 //------------------------------------------------------------------------------
 // setSlotHeight() - sets our height slot
 //------------------------------------------------------------------------------
-bool Texture::setSlotHeight(const base::Number* const size)
+bool Texture::setSlotHeight(const base::Integer* const size)
 {
     bool ok = false;
     if (size != nullptr) ok = setHeight(size->getInt());

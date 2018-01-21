@@ -2,7 +2,7 @@
 #include "mixr/instruments/buttons/RotarySwitch.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
 namespace instruments {
@@ -17,7 +17,7 @@ END_SLOTTABLE(RotarySwitch)
 
 BEGIN_SLOT_MAP(RotarySwitch)
    ON_SLOT(1, setSlotAngles,        base::PairStream)
-   ON_SLOT(2, setSlotStartPosition, base::Number)
+   ON_SLOT(2, setSlotStartPosition, base::Integer)
 END_SLOT_MAP()
 
 RotarySwitch::RotarySwitch()
@@ -64,7 +64,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
 //------------------------------------------------------------------------------
 // setSlotStartPosition() - set the position we start from
 //------------------------------------------------------------------------------
-bool RotarySwitch::setSlotStartPosition(const base::Number* const x)
+bool RotarySwitch::setSlotStartPosition(const base::Integer* const x)
 {
     if (x != nullptr) {
         startPosition = x->getInt();

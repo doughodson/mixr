@@ -28,7 +28,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/SlotTable.hpp"
@@ -77,12 +77,12 @@ BEGIN_SLOT_MAP(CigiHost)
    ON_SLOT(1, setSlotHostSession,             HostSession)
    ON_SLOT(2, setSlotASyncMode,               base::Boolean)
    ON_SLOT(3, setSlotHideOwnshipModel,        base::Boolean)
-   ON_SLOT(4, setSlotOwnshipModelId,          base::Number)
-   ON_SLOT(5, setSlotMslTrailModelId,         base::Number)
-   ON_SLOT(6, setSlotSmokePlumeModelId,       base::Number)
-   ON_SLOT(7, setSlotAirExplosionModelId,     base::Number)
-   ON_SLOT(8, setSlotGroundExplosionModelId,  base::Number)
-   ON_SLOT(9, setSlotShipWakeModelId,         base::Number)
+   ON_SLOT(4, setSlotOwnshipModelId,          base::Integer)
+   ON_SLOT(5, setSlotMslTrailModelId,         base::Integer)
+   ON_SLOT(6, setSlotSmokePlumeModelId,       base::Integer)
+   ON_SLOT(7, setSlotAirExplosionModelId,     base::Integer)
+   ON_SLOT(8, setSlotGroundExplosionModelId,  base::Integer)
+   ON_SLOT(9, setSlotShipWakeModelId,         base::Integer)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -1372,7 +1372,7 @@ bool CigiHost::setSlotHideOwnshipModel(const base::Boolean* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotOwnshipModelId(const base::Number* const msg)
+bool CigiHost::setSlotOwnshipModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1385,7 +1385,7 @@ bool CigiHost::setSlotOwnshipModelId(const base::Number* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotMslTrailModelId(const base::Number* const msg)
+bool CigiHost::setSlotMslTrailModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1398,7 +1398,7 @@ bool CigiHost::setSlotMslTrailModelId(const base::Number* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotSmokePlumeModelId(const base::Number* const msg)
+bool CigiHost::setSlotSmokePlumeModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1411,7 +1411,7 @@ bool CigiHost::setSlotSmokePlumeModelId(const base::Number* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotAirExplosionModelId(const base::Number* const msg)
+bool CigiHost::setSlotAirExplosionModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1424,7 +1424,7 @@ bool CigiHost::setSlotAirExplosionModelId(const base::Number* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotGroundExplosionModelId(const base::Number* const msg)
+bool CigiHost::setSlotGroundExplosionModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1437,7 +1437,7 @@ bool CigiHost::setSlotGroundExplosionModelId(const base::Number* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotShipWakeModelId(const base::Number* const msg)
+bool CigiHost::setSlotShipWakeModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

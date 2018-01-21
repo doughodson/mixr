@@ -5,7 +5,7 @@
 #include "mixr/models/system/Radio.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class Integer; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -15,12 +15,12 @@ namespace models {
 //
 // Factory name: Iff
 // Slots:
-//   mode1         <Number>    ! Mode 1 Code   (range: 00 to 073 octal) (default: 0)
+//   mode1         <Integer>   ! Mode 1 Code   (range: 00 to 073 octal) (default: 0)
 //                             ! -- first digit 0 to 7, second digit 0 to 3 (default: 0)
-//   mode2         <Number>    ! Mode 2 Code   (range: 0000 to 07777 octal) (default: 0)
-//   mode3a        <Number>    ! Mode 3a Code  (range: 0000 to 07777 octal) (default: 0)
-//   mode4a        <Number>    ! Mode 4a Code (default: 0)
-//   mode4b        <Number>    ! Mode 4b Code (default: 0)
+//   mode2         <Integer>   ! Mode 2 Code   (range: 0000 to 07777 octal) (default: 0)
+//   mode3a        <Integer>   ! Mode 3a Code  (range: 0000 to 07777 octal) (default: 0)
+//   mode4a        <Integer>   ! Mode 4a Code (default: 0)
+//   mode4b        <Integer>   ! Mode 4b Code (default: 0)
 //   enableMode1   <Boolean>   ! Mode 1 on (default: false)
 //   enableMode2   <Boolean>   ! Mode 2 on (default: false)
 //   enableMode3a  <Boolean>   ! Mode 3a on (default: false)
@@ -105,11 +105,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMode1(const base::Number* const);
-   bool setSlotMode2(const base::Number* const);
-   bool setSlotMode3a(const base::Number* const);
-   bool setSlotMode4a(const base::Number* const);
-   bool setSlotMode4b(const base::Number* const);
+   bool setSlotMode1(const base::Integer* const);
+   bool setSlotMode2(const base::Integer* const);
+   bool setSlotMode3a(const base::Integer* const);
+   bool setSlotMode4a(const base::Integer* const);
+   bool setSlotMode4b(const base::Integer* const);
    bool setSlotEnableMode1(const base::Boolean* const);
    bool setSlotEnableMode2(const base::Boolean* const);
    bool setSlotEnableMode3a(const base::Boolean* const);

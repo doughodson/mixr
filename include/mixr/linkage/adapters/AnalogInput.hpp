@@ -5,7 +5,7 @@
 #include "mixr/linkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Number; class Table1; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Integer; class Number; class Table1; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -36,12 +36,12 @@ namespace linkage {
 //
 // Factory name: AnalogInput
 // Slots:
-//      ai           <Number>    Analog Input location (IoData's AI channel)
-//      channel      <Number>    Device channel number
-//      deadband     <Number>    Deadband: [ 0 .. 1 ] (default: 0.0)
-//      offset       <Number>    Offset value (default: 0.0)
-//      gain         <Number>    Gain value   (default: 1.0)
-//      table        <Table1>    Shaping function table (default: none)
+//      ai           <Integer>   ! Analog Input location (IoData's AI channel)
+//      channel      <Integer>   ! Device channel number
+//      deadband     <Number>    ! Deadband: [ 0 .. 1 ] (default: 0.0)
+//      offset       <Number>    ! Offset value (default: 0.0)
+//      gain         <Number>    ! Gain value   (default: 1.0)
+//      table        <Table1>    ! Shaping function table (default: none)
 //------------------------------------------------------------------------------
 class AnalogInput final: public AbstractAdapter
 {
@@ -68,20 +68,20 @@ private:
    void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
    void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
 
-   int location {};              // AbstractIoData analog input channel number
-   int channel {};               // Analog channel number
-   double deadband {};           // Deadband value
-   double offset {};             // Offset
-   double gain {1.0};            // Gain
-   const base::Table1* table {}; // Shaping table
+   int location{};              // AbstractIoData analog input channel number
+   int channel{};               // Analog channel number
+   double deadband{};           // Deadband value
+   double offset{};             // Offset
+   double gain{1.0};            // Gain
+   const base::Table1* table{}; // Shaping table
 
 protected:
-   virtual double convert(const double vin);
+   virtual double convert(const double);
 
 private:
    // slot table helper methods
-   bool setSlotLocation(const base::Number* const);
-   bool setSlotChannel(const base::Number* const);
+   bool setSlotLocation(const base::Integer* const);
+   bool setSlotChannel(const base::Integer* const);
    bool setSlotDeadband(const base::Number* const);
    bool setSlotOffset(const base::Number* const);
    bool setSlotGain(const base::Number* const);

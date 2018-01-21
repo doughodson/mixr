@@ -1,5 +1,7 @@
 
 #include "mixr/linearsystem/ScalerFunc.hpp"
+
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Frequencies.hpp"
 
@@ -16,7 +18,7 @@ END_SLOTTABLE(ScalerFunc)
 
 BEGIN_SLOT_MAP(ScalerFunc)
    ON_SLOT( 1, setSlotRate, base::Frequency)
-   ON_SLOT( 1, setSlotRate, base::Number)
+   ON_SLOT( 1, setSlotRate, base::Integer)
    ON_SLOT( 2, setSlotX0,   base::Number)
    ON_SLOT( 3, setSlotY0,   base::Number)
 END_SLOT_MAP()
@@ -159,7 +161,7 @@ bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotRate(const base::Number* const msg)
+bool ScalerFunc::setSlotRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

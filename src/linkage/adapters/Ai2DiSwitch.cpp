@@ -5,6 +5,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <iostream>
@@ -23,8 +24,8 @@ BEGIN_SLOTTABLE(Ai2DiSwitch)
 END_SLOTTABLE(Ai2DiSwitch)
 
 BEGIN_SLOT_MAP(Ai2DiSwitch)
-    ON_SLOT( 1, setSlotLocation, base::Number)
-    ON_SLOT( 2, setSlotChannel,  base::Number)
+    ON_SLOT( 1, setSlotLocation, base::Integer)
+    ON_SLOT( 2, setSlotChannel,  base::Integer)
     ON_SLOT( 3, setSlotLevel,    base::Number)
     ON_SLOT( 4, setSlotInverted, base::Boolean)
 END_SLOT_MAP()
@@ -63,7 +64,7 @@ void Ai2DiSwitch::processInputsImpl(const base::AbstractIoDevice* const device, 
 }
 
 // location: Input array index (location)
-bool Ai2DiSwitch::setSlotLocation(const base::Number* const msg)
+bool Ai2DiSwitch::setSlotLocation(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -76,7 +77,7 @@ bool Ai2DiSwitch::setSlotLocation(const base::Number* const msg)
 }
 
 // channel: Device's AI channel number
-bool Ai2DiSwitch::setSlotChannel(const base::Number* const msg)
+bool Ai2DiSwitch::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

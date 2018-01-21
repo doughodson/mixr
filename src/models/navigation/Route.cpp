@@ -14,6 +14,7 @@
 #include "mixr/base/PairStream.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Distances.hpp"
@@ -34,7 +35,7 @@ END_SLOTTABLE(Route)
 
 BEGIN_SLOT_MAP(Route)
     ON_SLOT(1, setSlotTo,              base::Identifier)
-    ON_SLOT(1, setSlotTo,              base::Number)
+    ON_SLOT(1, setSlotTo,              base::Integer)
     ON_SLOT(2, setSlotAutoSequence,    base::Boolean)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Distance)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Number)
@@ -682,7 +683,7 @@ bool Route::setSlotTo(const base::Identifier* const msg)
     return ok;
 }
 
-bool Route::setSlotTo(const base::Number* const msg)
+bool Route::setSlotTo(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

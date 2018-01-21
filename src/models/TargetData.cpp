@@ -7,6 +7,7 @@
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/Angles.hpp"
@@ -38,7 +39,7 @@ BEGIN_SLOT_MAP(TargetData)
    ON_SLOT( 1, setSlotEnabled,         base::Boolean)
    ON_SLOT( 2, setSlotCompleted,       base::Boolean)
    ON_SLOT( 3, setSlotWpnType,         base::String)
-   ON_SLOT( 4, setSlotQuantity,        base::Number)
+   ON_SLOT( 4, setSlotQuantity,        base::Integer)
    ON_SLOT( 5, setSlotManualAssign,    base::Boolean)
    ON_SLOT( 6, setSlotStickType,       base::Identifier)
 
@@ -144,7 +145,7 @@ bool TargetData::setSlotWpnType(const base::String* const msg)
    return setWpnType(msg);
 }
 
-bool TargetData::setSlotQuantity(const base::Number* const msg)
+bool TargetData::setSlotQuantity(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

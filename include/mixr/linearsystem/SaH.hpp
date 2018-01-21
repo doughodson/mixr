@@ -5,6 +5,7 @@
 #include "mixr/linearsystem/ScalerFunc.hpp"
 
 namespace mixr {
+namespace base { class Frequency; class Integer; }
 namespace linearsystem {
 
 //------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ namespace linearsystem {
 // Factory name: SaH
 // Slots:
 //    rate  <Frequency>  Sample rate
-//    rate  <Number>     Sample rate Hz
+//    rate  <Integer>    Sample rate Hz
 //
 //------------------------------------------------------------------------------
 class SaH : public ScalerFunc
@@ -55,7 +56,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotSampleRate(const base::Frequency* const);
-   bool setSlotSampleRate(const base::Number* const);
+   bool setSlotSampleRate(const base::Integer* const);
 };
 
 }

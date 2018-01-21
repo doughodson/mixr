@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Number; class String; class List; }
+namespace base { class Integer; class String; class List; }
 namespace graphics { class Texture; }
 namespace rpf {
 class CadrgFile;
@@ -201,7 +201,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotPathnames(const base::PairStream* const);
-   bool setSlotMaxTableSize(const base::Number* const);
+   bool setSlotMaxTableSize(const base::Integer* const);
    bool setSlotMapLevel(base::String*);
 };
 

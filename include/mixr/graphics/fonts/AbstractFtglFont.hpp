@@ -5,7 +5,7 @@
 #include "AbstractFont.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Integer; }
 namespace graphics {
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace graphics {
 // Factory name: AbstractFTGLFont
 //
 // Slots:
-//  faceSize      <Number>    ! font face size (default: 1)
+//  faceSize      <Integer>    ! font face size (default: 1)
 //
 // public methods (member functions):
 //
@@ -48,16 +48,15 @@ class AbstractFtglFont : public AbstractFont
 public:
     AbstractFtglFont();
 
-    // Get Functions
-    unsigned int getFaceSize()      { return fSize; };
+    int getFaceSize()      { return fSize; };
 
 private:
-    static const int DEFAULT_FACE_SIZE;
-    int fSize {DEFAULT_FACE_SIZE};      // face size
+    static const int DEFAULT_FACE_SIZE{1};  // one unit by unit (in this case, inches
+    int fSize{DEFAULT_FACE_SIZE};           // face size
 
 private:
     // slot table help methods
-    bool setSlotFaceSize(const base::Number* const);
+    bool setSlotFaceSize(const base::Integer* const);
 };
 
 }

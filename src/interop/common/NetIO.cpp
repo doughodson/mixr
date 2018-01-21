@@ -11,7 +11,7 @@
 #include "mixr/simulation/Station.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
@@ -68,7 +68,7 @@ BEGIN_SLOTTABLE(NetIO)
 END_SLOTTABLE(NetIO)
 
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1,  setSlotNetworkID,          base::Number)
+   ON_SLOT(1,  setSlotNetworkID,          base::Integer)
    ON_SLOT(2,  setSlotFederationName,     base::Identifier)
    ON_SLOT(3,  setSlotFederateName,       base::Identifier)
 
@@ -1036,7 +1036,7 @@ int NetIO::getNumOutputEntityTypes() const
 //------------------------------------------------------------------------------
 
 // Set networkID
-bool NetIO::setSlotNetworkID(const base::Number* const num)
+bool NetIO::setSlotNetworkID(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {

@@ -33,21 +33,21 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 1, setSlotComponent,         PairStream)
     ON_SLOT( 1, setSlotComponent,         Component)
     ON_SLOT( 2, setSlotSelect,            String)
-    ON_SLOT( 2, setSlotSelect,            Number)
+    ON_SLOT( 2, setSlotSelect,            Integer)
     ON_SLOT( 3, setSlotEnableTimingStats, Boolean)
     ON_SLOT( 4, setSlotPrintTimingStats,  Boolean)
     ON_SLOT( 5, setSlotFreeze,            Boolean)
     ON_SLOT( 6, setSlotEnableMsgType,     Identifier)
-    ON_SLOT( 6, setSlotEnableMsgType,     Number)
+    ON_SLOT( 6, setSlotEnableMsgType,     Integer)
     ON_SLOT( 7, setSlotDisableMsgType,    Identifier)
-    ON_SLOT( 7, setSlotDisableMsgType,    Number)
+    ON_SLOT( 7, setSlotDisableMsgType,    Integer)
 END_SLOT_MAP()
 
 bool Component::event(const int _event, ::mixr::base::Object* const _obj)
 {
     bool _used {};
 
-    ON_EVENT_OBJ(SELECT,       select, Number)
+    ON_EVENT_OBJ(SELECT,       select, Integer)
     ON_EVENT_OBJ(SELECT,       select, String)
 
     ON_EVENT(RESET_EVENT,      onEventReset )
@@ -646,7 +646,7 @@ void Component::processComponents(
             select(str);
             str->unref();
       } else {
-            const auto num = new Integer((static_cast<Number*>(selection))->getInt());
+            const auto num = new Integer( static_cast<int>((static_cast<Number*>(selection))->getDouble()) );
             select(num);
             num->unref();
       }
@@ -691,7 +691,7 @@ bool Component::select(const String* const name)
     return ok;
 }
 
-bool Component::select(const Number* const num)
+bool Component::select(const Integer* const num)
 {
     bool ok{true};
     selected = nullptr;
@@ -823,7 +823,7 @@ bool Component::setSlotEnableMsgType(const Identifier* const msg)
 }
 
 // enableMessageType --- Enable message type by number (e.g., 0x0100)
-bool Component::setSlotEnableMsgType(const Number* const msg)
+bool Component::setSlotEnableMsgType(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -854,7 +854,7 @@ bool Component::setSlotDisableMsgType(const Identifier* const msg)
 }
 
 // disableMessageType --- Disable message type by number (e.g., 0x0100)
-bool Component::setSlotDisableMsgType(const Number* const msg)
+bool Component::setSlotDisableMsgType(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

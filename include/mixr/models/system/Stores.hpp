@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Number; class PairStream; }
+namespace base { class Integer; class PairStream; }
 namespace models {
 class AbstractWeapon;
 
@@ -18,13 +18,13 @@ class AbstractWeapon;
 //
 // Factory name: Stores
 // Slots:
-//    numStations <Number>             ! Number of stations (less than or equal MAX_STATIONS)
+//    numStations <Integer>            ! Number of stations (less than or equal MAX_STATIONS)
 //                                     ! (default: 0)
 //
 //    stores      <base::PairStream>   ! Our weapons and other external stores (default 0)
 //                                     ! -- make sure to set the number of stations first,
 //
-//    selected    <Number>             ! Selected weapon station number (default: 0)
+//    selected    <Integer>            ! Selected weapon station number (default: 0)
 //
 //
 // Events:
@@ -223,8 +223,8 @@ protected:
 
 private:
    // slot table helper methods
-   bool setSlotNumStations(base::Number* const);                // Number of stations
-   bool setSlotSelected(base::Number* const);                   // Selected station
+   bool setSlotNumStations(base::Integer* const);    // Number of stations
+   bool setSlotSelected(base::Integer* const);       // Selected station
 };
 
 }

@@ -8,7 +8,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
+namespace base { class Distance; class EarthModel; class Integer; class LatLon; class Pair; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class SimulationBgSyncThread;
@@ -31,22 +31,22 @@ class AbstractPlayer;
 //    simulationTime <base::Time>             ! Initial simulated time since midnight (UTC) (second),
 //                                            ! or -1 to use current time of day (default: -1)
 //
-//    day            <base::Number>           ! Initial simulated day of month [ 1 .. 31 ],
+//    day            <base::Integer>          ! Initial simulated day of month [ 1 .. 31 ],
 //                                            ! or zero to use current day (default: 0)
 //
-//    month          <base::Number>           ! Initial simulated month [ 1 .. 12 ],
+//    month          <base::Integer>          ! Initial simulated month [ 1 .. 12 ],
 //                                            ! or zero to use current month (default: 0)
 //
-//    year           <base::Number>           ! Initial simulated year [ 1970 .. 2100 ],
+//    year           <base::Integer>          ! Initial simulated year [ 1970 .. 2100 ],
 //                                            ! or zero to use current year (default: 0)
 //
-//    firstWeaponId  <base::Number>           ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
+//    firstWeaponId  <base::Integer>          ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
 //
-//    numTcThreads   <base::Number>           ! Number of T/C threads to use with the player list
+//    numTcThreads   <base::Integer>          ! Number of T/C threads to use with the player list
 //                                            !   default: 1 -- no additional threads)
 //                                            !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
-//    numBgThreads   <base::Number>           ! Number of background threads to use with the player list
+//    numBgThreads   <base::Integer>          ! Number of background threads to use with the player list
 //                                            !   default: 1 -- no additional threads)
 //                                            !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
@@ -303,14 +303,14 @@ private:
    bool setSlotPlayers(base::PairStream* const);
 
    bool setSlotSimulationTime(const base::Time* const);
-   bool setSlotDay(const base::Number* const);
-   bool setSlotMonth(const base::Number* const);
-   bool setSlotYear(const base::Number* const);
+   bool setSlotDay(const base::Integer* const);
+   bool setSlotMonth(const base::Integer* const);
+   bool setSlotYear(const base::Integer* const);
 
-   bool setSlotFirstWeaponId(const base::Number* const);
+   bool setSlotFirstWeaponId(const base::Integer* const);
 
-   bool setSlotNumTcThreads(const base::Number* const);
-   bool setSlotNumBgThreads(const base::Number* const);
+   bool setSlotNumTcThreads(const base::Integer* const);
+   bool setSlotNumBgThreads(const base::Integer* const);
 };
 
 }

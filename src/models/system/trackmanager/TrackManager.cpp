@@ -7,6 +7,7 @@
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Times.hpp"
 
@@ -30,9 +31,9 @@ BEGIN_SLOTTABLE(TrackManager)
 END_SLOTTABLE(TrackManager)
 
 BEGIN_SLOT_MAP(TrackManager)
-   ON_SLOT(1, setSlotMaxTracks,       base::Number)
+   ON_SLOT(1, setSlotMaxTracks,       base::Integer)
    ON_SLOT(2, setSlotMaxTrackAge,     base::Number)
-   ON_SLOT(3, setSlotFirstTrackId,    base::Number)
+   ON_SLOT(3, setSlotFirstTrackId,    base::Integer)
    ON_SLOT(4, setSlotAlpha,           base::Number)
    ON_SLOT(5, setSlotBeta,            base::Number)
    ON_SLOT(6, setSlotGamma,           base::Number)
@@ -375,7 +376,7 @@ void TrackManager::makeMatrixA(double dt)
 //------------------------------------------------------------------------------
 // setMaxTracks() -- Sets the maximum number of active tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTracks(const base::Number* const num)
+bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -420,7 +421,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotFirstTrackId() -- Sets the first (starting) track id number
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotFirstTrackId(const base::Number* const num)
+bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {

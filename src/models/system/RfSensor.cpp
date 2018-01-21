@@ -47,7 +47,7 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(2, setSlotModeStream,       base::PairStream)
     ON_SLOT(2, setSlotModeSingle,       RfSensor)
     ON_SLOT(3, setSlotRanges,           base::List)
-    ON_SLOT(4, setSlotInitRangeIdx,     base::Number)
+    ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
     ON_SLOT(5, setSlotPrf,              base::Frequency)      // Check for base::Frequency before base::Number
     ON_SLOT(5, setSlotPrf,              base::Number)
     ON_SLOT(6, setSlotPulseWidth,       base::Time)           // Check for base::Time before base::Number
@@ -424,7 +424,7 @@ bool RfSensor::setSlotRanges(base::List* const list)
 //------------------------------------------------------------------------------
 //  setSlotInitRangeIdx() -- Our initial range index
 //------------------------------------------------------------------------------
-bool RfSensor::setSlotInitRangeIdx(base::Number* const num)
+bool RfSensor::setSlotInitRangeIdx(base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {

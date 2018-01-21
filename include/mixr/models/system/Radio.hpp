@@ -5,7 +5,7 @@
 #include "mixr/models/system/RfSystem.hpp"
 
 namespace mixr {
-namespace base { class Number; class PairStream; }
+namespace base { class Integer; class Number; class PairStream; }
 namespace models {
 class Datalink;
 class Emission;
@@ -45,16 +45,16 @@ class Emission;
 //
 // Factory name: Radio
 // Slots:
-//    numChannels    <base::Number>      ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
+//    numChannels    <base::Integer>     ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
 //
 //    channels       <base::PairStream>  ! Our channels (list of base::Frequency objects) --
-//                                        ! -- make sure to set the number of channels first. (default: 0)
+//                                       ! -- make sure to set the number of channels first. (default: 0)
 //
-//    channel        <base::Number>      ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
+//    channel        <base::Integer>     ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
 //
 //    maxDetectRange <base::Number>      ! Maximum detection capability (NM) (default: 120NM)
 //
-//    radioID        <base::Number>      ! ID number used by DIS (default: 0)
+//    radioID        <base::Integer>     ! ID number used by DIS (default: 0)
 //
 //
 // Example EDL:
@@ -135,11 +135,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNumChannels(base::Number* const);
+   bool setSlotNumChannels(base::Integer* const);
    bool setSlotChannels(const base::PairStream* const);
-   bool setSlotChannel(base::Number* const);
+   bool setSlotChannel(base::Integer* const);
    bool setSlotMaxDetectRange(base::Number* const);
-   bool setSlotRadioId(base::Number* const);
+   bool setSlotRadioId(base::Integer* const);
 };
 
 }

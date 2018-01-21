@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 #include "mixr/ui/glut/Shapes3D.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include <GL/glut.h>
@@ -38,10 +39,6 @@ EMPTY_SLOTTABLE(Octahedron)
 IMPLEMENT_SUBCLASS(Teapot, "Teapot")
 EMPTY_SLOTTABLE(Teapot)
 
-//------------------------------------------------------------------------------
-// Slot tables
-//------------------------------------------------------------------------------
-
 // Sphere --
 BEGIN_SLOTTABLE(Sphere)
     "stacks",       // 1: Number of stacks on the circle
@@ -67,7 +64,7 @@ END_SLOTTABLE(Torus)
 //  Map slot tables
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Sphere)
-    ON_SLOT(1, setSlotStacks, base::Number)
+    ON_SLOT(1, setSlotStacks, base::Integer)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Cylinder)
@@ -265,10 +262,7 @@ void Teapot::drawFunc()
 }
 
 
-//------------------------------------------------------------------------------
-//  setSlotStacks() -- for Sphere
-//------------------------------------------------------------------------------
-bool Sphere::setSlotStacks(const base::Number* const x)
+bool Sphere::setSlotStacks(const base::Integer* const x)
 {
     bool ok {};
     if (x != nullptr) ok = setStacks(x->getInt());

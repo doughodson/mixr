@@ -4,6 +4,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/relations/Table1.hpp"
@@ -24,8 +25,8 @@ BEGIN_SLOTTABLE(AnalogOutput)
 END_SLOTTABLE(AnalogOutput)
 
 BEGIN_SLOT_MAP(AnalogOutput)
-    ON_SLOT( 1, setSlotLocation, base::Number)
-    ON_SLOT( 2, setSlotChannel,  base::Number)
+    ON_SLOT( 1, setSlotLocation, base::Integer)
+    ON_SLOT( 2, setSlotChannel,  base::Integer)
     ON_SLOT( 3, setSlotOffset,   base::Number)
     ON_SLOT( 4, setSlotGain,     base::Number)
     ON_SLOT( 5, setSlotTable,    base::Table1)
@@ -108,7 +109,7 @@ void AnalogOutput::processOutputsImpl(const base::AbstractIoData* const outData,
 }
 
 // location: Output array index (location)
-bool AnalogOutput::setSlotLocation(const base::Number* const msg)
+bool AnalogOutput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -121,7 +122,7 @@ bool AnalogOutput::setSlotLocation(const base::Number* const msg)
 }
 
 // channel: AI card's channel number
-bool AnalogOutput::setSlotChannel(const base::Number* const msg)
+bool AnalogOutput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

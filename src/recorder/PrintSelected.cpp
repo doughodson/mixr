@@ -33,10 +33,10 @@ BEGIN_SLOTTABLE(PrintSelected)
 END_SLOTTABLE(PrintSelected)
 
 BEGIN_SLOT_MAP(PrintSelected)
-   ON_SLOT( 1, setSlotMsgToken,        base::Number)
+   ON_SLOT( 1, setSlotMsgToken,        base::Integer)
    ON_SLOT( 2, setSlotFieldName,       base::String)
    ON_SLOT( 3, setSlotCompareToStr,    base::String)
-   ON_SLOT( 4, setSlotCompareToNum,    base::Number)
+   ON_SLOT( 4, setSlotCompareToNum,    base::Integer)
    ON_SLOT( 5, setSlotCompareToDbl,    base::Number)
    ON_SLOT( 6, setSlotCondition,       base::String)
    ON_SLOT( 7, setSlotTimeOnly,        base::Boolean)
@@ -67,7 +67,7 @@ void PrintSelected::copyData(const PrintSelected& org, const bool)
 
 // Slots
 
-bool PrintSelected::setSlotMsgToken(const base::Number* const msg)
+bool PrintSelected::setSlotMsgToken(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -98,7 +98,7 @@ bool PrintSelected::setSlotCompareToStr(const base::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToNum(const base::Number* const msg)
+bool PrintSelected::setSlotCompareToNum(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

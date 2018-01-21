@@ -1,7 +1,7 @@
 
 #include "mixr/linkage/generators/AnalogSignalGen.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
@@ -28,7 +28,7 @@ BEGIN_SLOTTABLE(AnalogSignalGen)
 END_SLOTTABLE(AnalogSignalGen)
 
 BEGIN_SLOT_MAP(AnalogSignalGen)
-   ON_SLOT( 1, setSlotChannel,   base::Number)
+   ON_SLOT( 1, setSlotChannel,   base::Integer)
    ON_SLOT( 2, setSlotSignal,    base::String)
    ON_SLOT( 3, setSlotFrequency, base::Frequency)
    ON_SLOT( 4, setSlotPhase,     base::Angle)
@@ -111,7 +111,7 @@ double AnalogSignalGen::calc(const double dt)
 // Slot Functions
 //------------------------------------------------------------------------------
 
-bool AnalogSignalGen::setSlotChannel(const base::Number* const msg)
+bool AnalogSignalGen::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

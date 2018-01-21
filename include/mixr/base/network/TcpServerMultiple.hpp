@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class Integer;
 
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
@@ -17,7 +18,7 @@ namespace base {
 //
 // Factory name: TcpServerMultiple
 // Slots:
-//      backlog   <Number>    ! Listen socket's max backlog (default: 1)
+//      backlog   <Integer>    ! Listen socket's max backlog (default: 1)
 //
 // Input File Example:
 //
@@ -51,11 +52,11 @@ protected:
    virtual bool listenForConnections();
 
 private:
-   unsigned int backlog{1};
+   int backlog{1};
 
 private:
    // slot table helper methods
-   bool setSlotBacklog(const Number* const);
+   bool setSlotBacklog(const Integer* const);
 };
 
 }

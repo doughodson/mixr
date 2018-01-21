@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; }
+namespace base { class Identifier; class Integer; }
 namespace simulation {
 class AbstractNib;
 
@@ -110,7 +110,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotID(const base::Number* const);
+   bool setSlotID(const base::Integer* const);
    bool setSlotInitMode(base::Identifier* const);
 };
 

@@ -6,7 +6,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class Integer; class Number; }
 namespace models {
 class Emission;
 class Player;
@@ -19,7 +19,7 @@ class Track;
 //
 // Factory name: TrackManager
 // Slots:
-//    maxTracks       <Number>   ! Maximum number of tracks (default: MAX_TRKS)
+//    maxTracks       <Integer>  ! Maximum number of tracks (default: MAX_TRKS)
 //
 //    maxTrackAge     <Time>     ! Maximum track age (default: 3) ### NES: the comment in the src says 2 sec
 //    maxTrackAge     <Number>   ! Maximum track age (seconds)
@@ -119,9 +119,9 @@ private:
    bool   logTrackUpdates {true}; // input slot; if false, updates to tracks are not logged.
 
 private:
-   bool setSlotMaxTracks(const base::Number* const);        // Sets the maximum number of track files
+   bool setSlotMaxTracks(const base::Integer* const);       // Sets the maximum number of track files
    bool setSlotMaxTrackAge(const base::Number* const);      // Sets the maximum age of tracks
-   bool setSlotFirstTrackId(const base::Number* const);     // Sets the first (starting) track id number
+   bool setSlotFirstTrackId(const base::Integer* const);    // Sets the first (starting) track id number
    virtual bool setSlotAlpha(const base::Number* const);    // Sets alpha
    virtual bool setSlotBeta(const base::Number* const);     // Sets beta
    bool setSlotGamma(const base::Number* const);            // Sets gamma

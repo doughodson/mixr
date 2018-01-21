@@ -1,7 +1,7 @@
 
 #include "mixr/linkage/IoData.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include <iostream>
 #include <vector>
@@ -21,10 +21,10 @@ BEGIN_SLOTTABLE(IoData)
 END_SLOTTABLE(IoData)
 
 BEGIN_SLOT_MAP(IoData)
-   ON_SLOT( 1, setSlotNumAI,    base::Number)
-   ON_SLOT( 2, setSlotNumAO,    base::Number)
-   ON_SLOT( 3, setSlotNumDI,    base::Number)
-   ON_SLOT( 4, setSlotNumDO,    base::Number)
+   ON_SLOT( 1, setSlotNumAI, base::Integer)
+   ON_SLOT( 2, setSlotNumAO, base::Integer)
+   ON_SLOT( 3, setSlotNumDI, base::Integer)
+   ON_SLOT( 4, setSlotNumDO, base::Integer)
 END_SLOT_MAP()
 
 IoData::IoData()
@@ -166,7 +166,7 @@ bool IoData::setNumDO(const int num)
 }
 
 // define the number of analog inputs (AIs) in the data block
-bool IoData::setSlotNumAI(const base::Number* const msg)
+bool IoData::setSlotNumAI(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
@@ -178,7 +178,7 @@ bool IoData::setSlotNumAI(const base::Number* const msg)
 }
 
 // define the number of analog outputs (AOs) in the data block
-bool IoData::setSlotNumAO(const base::Number* const msg)
+bool IoData::setSlotNumAO(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
@@ -190,7 +190,7 @@ bool IoData::setSlotNumAO(const base::Number* const msg)
 }
 
 // define the number of discrete inputs (DIs) in the data block
-bool IoData::setSlotNumDI(const base::Number* const msg)
+bool IoData::setSlotNumDI(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
@@ -202,7 +202,7 @@ bool IoData::setSlotNumDI(const base::Number* const msg)
 }
 
 // define the number of discrete outputs (DOs) in the data block
-bool IoData::setSlotNumDO(const base::Number* const msg)
+bool IoData::setSlotNumDO(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {

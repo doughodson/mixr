@@ -28,7 +28,7 @@
 
 #include "mixr/base/network/TcpServerMultiple.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -45,7 +45,7 @@ BEGIN_SLOTTABLE(TcpServerMultiple)
 END_SLOTTABLE(TcpServerMultiple)
 
 BEGIN_SLOT_MAP(TcpServerMultiple)
-    ON_SLOT(1, setSlotBacklog, Number)
+    ON_SLOT(1, setSlotBacklog, Integer)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(TcpServerMultiple)
@@ -162,7 +162,7 @@ bool TcpServerMultiple::setBacklog(const unsigned int value)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool TcpServerMultiple::setSlotBacklog(const Number* const msg)
+bool TcpServerMultiple::setSlotBacklog(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

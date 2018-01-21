@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Color; class PairStream; class Identifier; class String; }
+namespace base { class Boolean; class Color; class Identifier; class Integer; class Number; class PairStream; class String; }
 namespace graphics {
 class AbstractFont;
 class Image;
@@ -50,19 +50,19 @@ class Material;
 //  top              <Number>       ! Top ortho bound (default: 480.5)
 //  near             <Number>       ! Near ortho bound (default: -1)
 //  far              <Number>       ! Far ortho bound (default: 1)
-//  vpX              <Number>       ! Viewport x origin (default: -1)
-//  vpY              <Number>       ! Viewport y origin (default: -1)
-//  vpWidth          <Number>       ! Viewport width (default: 300)
-//  vpHeight         <Number>       ! Viewport height (default: 300)
+//  vpX              <Integer>      ! Viewport x origin (default: -1)
+//  vpY              <Integer>      ! Viewport y origin (default: -1)
+//  vpWidth          <Integer>      ! Viewport width (default: 300)
+//  vpHeight         <Integer>      ! Viewport height (default: 300)
 //  displays         <PairStream>   ! Sub-displays, stream (default: 0)
 //  displays         <Display>      ! Sub-displays, single (default: 0)
 //  stdLineWidth     <Number>       ! Standard Line width (default: 1)
 //  textures         <PairStream>   ! Texture, stream (default: 0)
 //  textures         <Texture>      ! Texture, single (default: 0)
 //  clearColor       <Color>        ! Clear (Background) color (default: 0.0f,0.0f,0.0f,0.0f)
-//  leftBracketChar  <Number>       ! Left bracket character (default: '[')
+//  leftBracketChar  <Integer>      ! Left bracket character (default: '[')
 //  leftBracketChar  <String>       ! Left bracket character (default: '[')
-//  rightBracketChar <Number>       ! Right bracket character (default: ']')
+//  rightBracketChar <Integer>      ! Right bracket character (default: ']')
 //  rightBracketChar <String>       ! Right bracket character (default: ']')
 //  reverseVideoBrackets  <Number>  ! Reverse video brackets flag:
 //                                  ! If true, brackets are drawn with reversed video font,
@@ -389,19 +389,19 @@ private:
     bool setSlotTopOrthoBound(const base::Number* const);
     bool setSlotNearOrthoBound(const base::Number* const);
     bool setSlotFarOrthoBound(const base::Number* const);
-    bool setSlotViewportXOrigin(const base::Number* const);
-    bool setSlotViewportYOrigin(const base::Number* const);
-    bool setSlotViewportWidth(const base::Number* const);
-    bool setSlotViewportHeight(const base::Number* const);
+    bool setSlotViewportXOrigin(const base::Integer* const);
+    bool setSlotViewportYOrigin(const base::Integer* const);
+    bool setSlotViewportWidth(const base::Integer* const);
+    bool setSlotViewportHeight(const base::Integer* const);
     bool setSlotSubdisplayStream(base::PairStream* const);
     bool setSlotSubdisplaySingle(Display* const);
     bool setSlotStdLineWidth(const base::Number* const);
     bool setSlotTexturesStream(base::PairStream* const);
     bool setSlotTexturesSingle(Texture* const);
     bool setSlotClearColor(const base::Color* const);
-    bool setSlotLeftBracketCharacter(const base::Number* const);
+    bool setSlotLeftBracketCharacter(const base::Integer* const);
     bool setSlotLeftBracketCharacter(const base::String* const);
-    bool setSlotRightBracketCharacter(const base::Number* const);
+    bool setSlotRightBracketCharacter(const base::Integer* const);
     bool setSlotRightBracketCharacter(const base::String* const);
     bool setSlotReverseVideoBrackets(const base::Boolean* const);
     bool setFontList(base::PairStream* const);

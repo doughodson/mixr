@@ -37,6 +37,7 @@
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
@@ -152,7 +153,7 @@ BEGIN_SLOT_MAP(Player)
 
    ON_SLOT(16, setSlotSignature,          RfSignature)
    ON_SLOT(17, setSlotIrSignature,        IrSignature)
-   ON_SLOT(18, setSlotCamouflageType,     base::Number)
+   ON_SLOT(18, setSlotCamouflageType,     base::Integer)
 
    ON_SLOT(19, setSlotTerrainElevReq,     base::Boolean)
    ON_SLOT(20, setSlotInterpolateTerrain, base::Boolean)
@@ -3879,7 +3880,7 @@ bool Player::setSlotIrSignature(IrSignature* const s)
 }
 
 // camouflageType: User defined camouflage type (positive integer or zero for none)
-bool Player::setSlotCamouflageType(const base::Number* const msg)
+bool Player::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

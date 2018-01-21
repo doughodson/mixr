@@ -17,7 +17,8 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; class Vec2d; class Vec3d;}
+namespace base { class Angle; class Boolean; class Distance; class Integer; class LatLon; class List;
+                 class Time; class Vec2d; class Vec3d;}
 namespace simulation { class AbstractNib; }
 namespace models {
 class WorldModel;
@@ -1109,7 +1110,7 @@ private:
 
    bool setSlotSignature(RfSignature* const);
    bool setSlotIrSignature(IrSignature* const);
-   bool setSlotCamouflageType(const base::Number* const);
+   bool setSlotCamouflageType(const base::Integer* const);
 
    bool setSlotTerrainElevReq(const base::Boolean* const);
    bool setSlotInterpolateTerrain(const base::Boolean* const);

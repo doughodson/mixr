@@ -5,6 +5,8 @@
 #include "mixr/instruments/dials/AnalogDial.hpp"
 
 namespace mixr {
+namespace base { class Integer; class Number; }
+namespace graphics { class Graphic; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -39,14 +41,14 @@ public:
     void drawFunc() override;
 
 private:
-    double length {1.0};    // tick mark length (if not a graphic)
-    int quantity {1};       // how many tick marks will we have?
-    graphics::Graphic* myGraphic {};  // our graphic (if we choose to use on for a tick mark)
+    double length{1.0};    // tick mark length (if not a graphic)
+    int quantity{1};       // how many tick marks will we have?
+    graphics::Graphic* myGraphic{};  // our graphic (if we choose to use on for a tick mark)
 
 private:
     // slot table helper methods
     bool setSlotLength(const base::Number* const);
-    bool setSlotQuantity(const base::Number* const);
+    bool setSlotQuantity(const base::Integer* const);
     bool setSlotTickGraphic(const graphics::Graphic* const);
 };
 

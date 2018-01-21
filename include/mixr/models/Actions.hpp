@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Distance; class LatLon; class Number; }
+namespace base { class Distance; class Integer; class LatLon; class Number; }
 namespace models {
 class OnboardComputer;
 class Sar;
@@ -77,7 +77,7 @@ private:
 //   sarLongitude  <LatLon>   ! Target's longitude (LatLon) (default: 0)
 //   sarElevation  <Distance> ! Target's elevation (Distance) (default: 0)
 //   resolution    <Distance> ! Image (pixel) resolution   (Distance) (default: 3)
-//   imageSize     <Number>   ! Image size: height & width (pixels) (default: 512)
+//   imageSize     <Integer>  ! Image size: height & width (pixels) (default: 512)
 //
 //------------------------------------------------------------------------------
 class ActionImagingSar : public Action
@@ -129,7 +129,7 @@ private:
    bool setSlotSarLon(const base::LatLon* const);
    bool setSlotSarElev(const base::Distance* const);
    bool setSlotResolution(const base::Distance* const);
-   bool setSlotImageSize(const base::Number* const);
+   bool setSlotImageSize(const base::Integer* const);
 };
 
 
@@ -175,7 +175,7 @@ private:
    bool setSlotTargetLat(const base::LatLon*);
    bool setSlotTargetLon(const base::LatLon*);
    bool setSlotTargetElev(const base::Number*);
-   bool setSlotStationNum(const base::Number*);
+   bool setSlotStationNum(const base::Integer*);
 };
 
 //------------------------------------------------------------------------------
@@ -210,7 +210,7 @@ private:
 
 private:
    bool setSlotInterval(const base::Number*);
-   bool setSlotNumToLaunch(const base::Number*);
+   bool setSlotNumToLaunch(const base::Integer*);
 };
 
 
@@ -241,7 +241,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotCamouflageType(const base::Number* const);   // Sets user defined camouflage type
+   bool setSlotCamouflageType(const base::Integer* const);   // Sets user defined camouflage type
 };
 
 }

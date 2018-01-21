@@ -6,8 +6,7 @@
 
 namespace mixr {
 namespace base {
-
-class Number;
+class Integer;
 class String;
 
 //------------------------------------------------------------------------------
@@ -19,7 +18,7 @@ class String;
 // Slots:
 //     pathname     <String>      ! Path to the file (default: null string)
 //     filename     <String>      ! File name (appended to pathname) (default: null string)
-//     recordLength <Number>      ! Length (in characters) of the records (default: 0)
+//     recordLength <Integer>     ! Length (in characters) of the records (default: 0)
 //
 //
 // Public member functions:
@@ -128,16 +127,16 @@ private:
    int   rlen {};          // record length
    char* rec {};           // the (in memory) record
 
-   static const std::size_t FILENAME_LENGTH {256}; // Max length of file name
-   static const std::size_t PATHNAME_LENGTH {256}; // Max length of path name
-   char filename[FILENAME_LENGTH] {};         // file name
-   char pathname[PATHNAME_LENGTH] {};         // path name
+   static const std::size_t FILENAME_LENGTH{256}; // Max length of file name
+   static const std::size_t PATHNAME_LENGTH{256}; // Max length of path name
+   char filename[FILENAME_LENGTH]{};         // file name
+   char pathname[PATHNAME_LENGTH]{};         // path name
 
 private:
    // slot table helper methods
    bool setSlotPathname(String* const);
    bool setSlotFilename(String* const);
-   bool setSlotRecordLength(const Number* const);
+   bool setSlotRecordLength(const Integer* const);
 };
 
 inline bool FileReader::setRecordNumber(const int num)

@@ -6,6 +6,7 @@
 #include <array>
 
 namespace mixr {
+namespace base { class Integer; class PairStream; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -38,7 +39,7 @@ private:
 
 private:
    bool setSlotAngles(const base::PairStream* const);
-   bool setSlotStartPosition(const base::Number* const);
+   bool setSlotStartPosition(const base::Integer* const);
 };
 
 }

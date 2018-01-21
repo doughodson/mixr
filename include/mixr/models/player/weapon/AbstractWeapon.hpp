@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Number; class String; class Time; }
+namespace base { class Angle; class Boolean; class Distance; class Integer; class Number; class String; class Time; }
 namespace models {
 class Designator;
 class Stores;
@@ -43,7 +43,7 @@ class Track;
 //
 //    maxGimbal     <base::Angle>      ! max gimbal angle (default: 30.0f * D2RCC)
 //    tgtPos        <base::List>       ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
-//    weaponID      <base::Number>     ! Weapon type ID (optional: user defined number) (default: 0)
+//    weaponID      <base::Integer>    ! Weapon type ID (optional: user defined number) (default: 0)
 //    dummy         <base::Boolean>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
 //    jettisonable  <base::Boolean>    ! Weapon can be jettisoned (default: true)
 //    testTgtName   <base::String>     ! TEST only: target player name (default: 0)
@@ -393,7 +393,7 @@ private:
    bool setSlotEOBT(const base::Number* const);
    bool setSlotMaxGimbal(const base::Angle* const);
    bool setSlotTgtPos(const base::List* const);
-   bool setSlotWeaponID(const base::Number* const);
+   bool setSlotWeaponID(const base::Integer* const);
    bool setSlotDummy(const base::Boolean* const);
    bool setSlotJettisonable(const base::Boolean* const);
    bool setSlotTestTgtName(const base::String* const);

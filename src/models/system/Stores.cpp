@@ -2,7 +2,7 @@
 #include "mixr/models/system/Stores.hpp"
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -20,9 +20,9 @@ BEGIN_SLOTTABLE(Stores)
 END_SLOTTABLE(Stores)
 
 BEGIN_SLOT_MAP(Stores)
-   ON_SLOT( 1, setSlotNumStations, base::Number)
+   ON_SLOT( 1, setSlotNumStations, base::Integer)
    ON_SLOT( 2, setSlotStores,      base::PairStream)
-   ON_SLOT( 3, setSlotSelected,    base::Number)
+   ON_SLOT( 3, setSlotSelected,    base::Integer)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Stores)
@@ -506,12 +506,8 @@ bool Stores::onJettisonEvent(ExternalStore* const sys)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
-
 // Number of station
-bool Stores::setSlotNumStations(base::Number* const msg)
+bool Stores::setSlotNumStations(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -643,7 +639,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
 }
 
 // Set the selected station number
-bool Stores::setSlotSelected(base::Number* const msg)
+bool Stores::setSlotSelected(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

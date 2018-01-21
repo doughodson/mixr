@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Number; class Angle; class Frequency; class String; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class String; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ namespace linkage {
 //
 //      phase     <Angle>        ! Phase shift (default: 0 degrees)
 //
-//      ai        <Number>       ! AbstractIoData's AI channel index
+//      ai        <Integer>    Integer  ! AbstractIoData's AI channel index
 //------------------------------------------------------------------------------
 class AnalogSignalGen final: public AbstractGenerator
 {
@@ -73,7 +73,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotChannel(const base::Number* const);
+   bool setSlotChannel(const base::Integer* const);
    bool setSlotSignal(const base::String* const);
    bool setSlotFrequency(const base::Frequency* const);
    bool setSlotPhase(const base::Angle* const);

@@ -59,15 +59,15 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
     ON_SLOT( 8, setSlotNoDisplayList,      base::Boolean)
     ON_SLOT( 9, setSlotSubcomponentsFirst, base::Boolean)
-    ON_SLOT(10, setSlotSelectName,         base::Number)
+    ON_SLOT(10, setSlotSelectName,         base::Integer)
     ON_SLOT(11, setSlotTextureName,        base::Identifier)
     ON_SLOT(12, setSlotScissorX,           base::Number)
     ON_SLOT(13, setSlotScissorY,           base::Number)
     ON_SLOT(14, setSlotScissorWidth,       base::Number)
     ON_SLOT(15, setSlotScissorHeight,      base::Number)
     ON_SLOT(16, setSlotStippling,          base::Boolean)
-    ON_SLOT(17, setSlotStippleFactor,      base::Number)
-    ON_SLOT(18, setSlotStipplePattern,     base::Number)
+    ON_SLOT(17, setSlotStippleFactor,      base::Integer)
+    ON_SLOT(18, setSlotStipplePattern,     base::Integer)
     ON_SLOT(19, setSlotVisibility,         base::Boolean)
     ON_SLOT(20, setSlotMask,               base::Boolean)
     ON_SLOT(21, setMaterial,               base::Identifier)
@@ -81,7 +81,7 @@ BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Number)      // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          base::Identifier )
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          graphics::Material)
-    ON_EVENT_OBJ(SET_TEXTURE,    onSetTextureId,       base::Number)
+    ON_EVENT_OBJ(SET_TEXTURE,    onSetTextureId,       base::Integer)
     ON_EVENT_OBJ(SET_LINEWIDTH,  onSetLineWidthEvent,  base::Number)
     ON_EVENT_OBJ(SET_FLASHRATE,  onSetFlashRateEvent,  base::Number)
     ON_EVENT_OBJ(SET_VISIBILITY, onSetVisibilityEvent, base::Boolean)
@@ -702,7 +702,7 @@ bool Graphic::setColor(const base::Number* const cnobj)
 //------------------------------------------------------------------------------
 
 // handle the SET_TEXTURE event
-bool Graphic::onSetTextureId(const base::Number* const msg)
+bool Graphic::onSetTextureId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1059,11 +1059,11 @@ bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const scfobj)
 }
 
 // setSlotSelectName() -- GL Select Buffer name (e.g., glPushName())  (unsigned integer)
-bool Graphic::setSlotSelectName(const base::Number* const snobj)
+bool Graphic::setSlotSelectName(const base::Integer* const x)
 {
-    bool ok = (snobj != nullptr);
+    bool ok = (x != nullptr);
     if (ok) {
-         int name = snobj->getInt();
+         const int name = x->getInt();
          ok = setSelectName(static_cast<GLuint>(name));
     }
     return ok;
@@ -1118,7 +1118,7 @@ bool Graphic::setSlotStippling(const base::Boolean* const msg)
 }
 
 // setSlotStippleFactor() - sets our stipple factor integer value
-bool Graphic::setSlotStippleFactor(const base::Number* const msg)
+bool Graphic::setSlotStippleFactor(const base::Integer* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1128,7 +1128,7 @@ bool Graphic::setSlotStippleFactor(const base::Number* const msg)
 }
 
 // setSlotStipplePattern() - sets our stipple pattern integer value
-bool Graphic::setSlotStipplePattern(const base::Number* const msg)
+bool Graphic::setSlotStipplePattern(const base::Integer* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

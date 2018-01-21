@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class Number; }
+namespace base { class AbstractIoData; class Integer; class Number; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace linkage {
 //
 // Factory name: AnalogInputFixed
 // Slots:
-//      ai        <Number>       ! AbstractIoData's AI channel index
+//      ai        <Integer>      ! AbstractIoData's AI channel index
 //      value     <Number>       ! Default is 0.0
 //------------------------------------------------------------------------------
 class AnalogInputFixed final: public AbstractGenerator
@@ -42,7 +42,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotChannel(const base::Number* const);
+   bool setSlotChannel(const base::Integer* const);
    bool setSlotValue(const base::Number* const);
 };
 

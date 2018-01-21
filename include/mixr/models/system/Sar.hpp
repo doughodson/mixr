@@ -6,7 +6,7 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class Pair; class PairStream; }
+namespace base { class Integer; class Pair; class PairStream; }
 namespace models {
 class Image;
 
@@ -16,7 +16,7 @@ class Image;
 // Description: Generic SAR
 // Factory name: Sar
 // Slots:
-//    chipSize      <base::Number>      ! Chip size (pixels) (default: 0)
+//    chipSize      <base::Integer>      ! Chip size (pixels) (default: 0)
 //
 //------------------------------------------------------------------------------
 class Sar : public Radar
@@ -98,7 +98,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotChipSize(const base::Number* const);
+   bool setSlotChipSize(const base::Integer* const);
 };
 
 }

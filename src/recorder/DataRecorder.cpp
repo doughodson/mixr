@@ -16,7 +16,7 @@
 #include "mixr/simulation/Simulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 #include <cstdio>
@@ -44,13 +44,13 @@ BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 1, setOutputHandler,   OutputHandler)
    ON_SLOT( 2, setSlotEventName,   base::Identifier)
    ON_SLOT( 3, setSlotApplication, base::Identifier)
-   ON_SLOT( 4, setSlotCaseNum,     base::Number)
-   ON_SLOT( 5, setSlotMissionNum,  base::Number)
-   ON_SLOT( 6, setSlotSubjectNum,  base::Number)
-   ON_SLOT( 7, setSlotRunNum,      base::Number)
-   ON_SLOT( 8, setSlotDay,         base::Number)
-   ON_SLOT( 9, setSlotMonth,       base::Number)
-   ON_SLOT( 10, setSlotYear,       base::Number)
+   ON_SLOT( 4, setSlotCaseNum,     base::Integer)
+   ON_SLOT( 5, setSlotMissionNum,  base::Integer)
+   ON_SLOT( 6, setSlotSubjectNum,  base::Integer)
+   ON_SLOT( 7, setSlotRunNum,      base::Integer)
+   ON_SLOT( 8, setSlotDay,         base::Integer)
+   ON_SLOT( 9, setSlotMonth,       base::Integer)
+   ON_SLOT( 10, setSlotYear,       base::Integer)
 END_SLOT_MAP()
 
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
@@ -1098,7 +1098,7 @@ bool DataRecorder::setSlotApplication(base::Identifier* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotCaseNum(base::Number* const msg)
+bool DataRecorder::setSlotCaseNum(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1108,7 +1108,7 @@ bool DataRecorder::setSlotCaseNum(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotMissionNum(base::Number* const msg)
+bool DataRecorder::setSlotMissionNum(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1118,7 +1118,7 @@ bool DataRecorder::setSlotMissionNum(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotSubjectNum(base::Number* const msg)
+bool DataRecorder::setSlotSubjectNum(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1128,7 +1128,7 @@ bool DataRecorder::setSlotSubjectNum(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotRunNum(base::Number* const msg)
+bool DataRecorder::setSlotRunNum(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1138,7 +1138,7 @@ bool DataRecorder::setSlotRunNum(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotDay(base::Number* const msg)
+bool DataRecorder::setSlotDay(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1148,7 +1148,7 @@ bool DataRecorder::setSlotDay(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotMonth(base::Number* const msg)
+bool DataRecorder::setSlotMonth(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1158,7 +1158,7 @@ bool DataRecorder::setSlotMonth(base::Number* const msg)
    return ok;
 }
 
-bool DataRecorder::setSlotYear(base::Number* const msg)
+bool DataRecorder::setSlotYear(base::Integer* const msg)
 {
    bool ok{};
 

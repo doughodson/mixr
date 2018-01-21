@@ -24,7 +24,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 #include <cstdio>
@@ -53,12 +53,12 @@ END_SLOTTABLE(PosixHandler)
 BEGIN_SLOT_MAP(PosixHandler)
     ON_SLOT(1, setSlotLocalIpAddress,   Identifier)
     ON_SLOT(1, setSlotLocalIpAddress,   String)
-    ON_SLOT(2, setSlotLocalPort,        Number)
-    ON_SLOT(3, setSlotPort,             Number)
+    ON_SLOT(2, setSlotLocalPort,        Integer)
+    ON_SLOT(3, setSlotPort,             Integer)
     ON_SLOT(4, setSlotShared,           Boolean)
-    ON_SLOT(5, setSlotSendBuffSize,     Number)
-    ON_SLOT(6, setSlotRecvBuffSize,     Number)
-    ON_SLOT(7, setSlotIgnoreSourcePort, Number)
+    ON_SLOT(5, setSlotSendBuffSize,     Integer)
+    ON_SLOT(6, setSlotRecvBuffSize,     Integer)
+    ON_SLOT(7, setSlotIgnoreSourcePort, Integer)
 END_SLOT_MAP()
 
 PosixHandler::PosixHandler():localAddr(INADDR_ANY), netAddr(INADDR_ANY), fromAddr1(INADDR_NONE)
@@ -504,7 +504,7 @@ bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
 }
 
 // port: Port number
-bool PosixHandler::setSlotPort(const Number* const msg)
+bool PosixHandler::setSlotPort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -517,7 +517,7 @@ bool PosixHandler::setSlotPort(const Number* const msg)
 }
 
 // localPort: Local (source) port number
-bool PosixHandler::setSlotLocalPort(const Number* const msg)
+bool PosixHandler::setSlotLocalPort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -541,7 +541,7 @@ bool PosixHandler::setSlotShared(const Boolean* const msg)
 }
 
 // sendBuffSizeKb: Send buffer size in KB's    (default:  32 Kb)
-bool PosixHandler::setSlotSendBuffSize(const Number* const msg)
+bool PosixHandler::setSlotSendBuffSize(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -555,7 +555,7 @@ bool PosixHandler::setSlotSendBuffSize(const Number* const msg)
 }
 
 // recvBuffSizeKb: Receive buffer size in KB's (default: 128 Kb)
-bool PosixHandler::setSlotRecvBuffSize(const Number* const msg)
+bool PosixHandler::setSlotRecvBuffSize(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -569,7 +569,7 @@ bool PosixHandler::setSlotRecvBuffSize(const Number* const msg)
 }
 
 // setSlotIgnoreSourcePort: Ignore message from our this source port number
-bool PosixHandler::setSlotIgnoreSourcePort(const Number* const msg)
+bool PosixHandler::setSlotIgnoreSourcePort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

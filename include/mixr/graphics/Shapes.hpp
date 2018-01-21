@@ -15,21 +15,8 @@ namespace graphics {
 // Slots:
 //  radius    <Number>    ! Radius of the circle (default: 1 )
 //  filled    <Boolean>   ! True if circle is filled (default: false)
-//  slices    <Number>    ! Number of slices in the circle (i.e. number of sides)
+//  slices    <Integer>   ! Number of slices in the circle (i.e. number of sides)
 //                        ! (default: 16)
-//
-//
-// Public member functions:
-//
-//  bool setRadius(Number* srobj)
-//      Sets the radius to srobj and returns true if successful.
-//
-//  bool setFilled(Number* sfobj)
-//      Sets filled to sfobj and returns true if successful.
-//
-//  bool setSlices(Number* ssobj)
-//      Sets slices to ssobj and returns true if successful.
-//
 //------------------------------------------------------------------------------
 class Circle : public Graphic
 {
@@ -40,8 +27,11 @@ public:
 
     void drawFunc() override;
 
+    // sets radius and returns true if successful.
     virtual bool setRadius(const double x)   { radius = x; return true; }
+    // sets filled and returns true if successful.
     virtual bool setFilled(const bool x)     { filled = x; return true; }
+    // sets slices and returns true if successful.
     virtual bool setSlices(const int x)      { slices = x; return true; }
 
     double getRadius()       { return radius; }
@@ -63,7 +53,7 @@ private:
     // slot table helper methods
     bool setSlotRadius(const base::Number* const);
     bool setSlotFilled(const base::Boolean* const);
-    bool setSlotSlices(const base::Number* const);
+    bool setSlotSlices(const base::Integer* const);
 };
 
 //------------------------------------------------------------------------------

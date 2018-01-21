@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Distance; class Identifier; class Number; class PairStream; }
+namespace base { class Distance; class Identifier; class Integer; class Number; class PairStream; }
 namespace simulation { class AbstractPlayer; }
 namespace models { class Player; }
 namespace cigi {
@@ -22,9 +22,9 @@ class Player2CigiMap;
 //    maxRange       <Distance>     ! Max range of visual system (default: 20000.0)
 //    maxRange       <Number>       ! Max range of visual system (meters)
 //
-//    maxModels      <Number>       ! Max number of active, in-range player/models (default: 0)
+//    maxModels      <Integer>      ! Max number of active, in-range player/models (default: 0)
 //
-//    maxElevations  <Number>       ! Max number of player terrain elevation requests (default: 0)
+//    maxElevations  <Integer>      ! Max number of player terrain elevation requests (default: 0)
 //
 //    typeMap        <PairStream>   ! IG's system model type IDs (list of TypeMapper objects) (default: 0)
 //
@@ -147,11 +147,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMaxRange(const base::Distance* const);     // Sets the max range (Distance) slot
-   bool setSlotMaxRange(const base::Number* const);       // Sets the max range (meters) slot
-   bool setSlotMaxModels(const base::Number* const);      // Sets the max number of active, in-range player/models slot
-   bool setSlotMaxElevations(const base::Number* const);  // Sets the max number of player terrain elevation requests slot
-   bool setSlotTypeMap(const base::PairStream* const);    // Sets the list of IG model type IDs (TypeMapper objects)
+   bool setSlotMaxRange(const base::Distance* const);      // Sets the max range (Distance) slot
+   bool setSlotMaxRange(const base::Number* const);        // Sets the max range (meters) slot
+   bool setSlotMaxModels(const base::Integer* const);      // Sets the max number of active, in-range player/models slot
+   bool setSlotMaxElevations(const base::Integer* const);  // Sets the max number of player terrain elevation requests slot
+   bool setSlotTypeMap(const base::PairStream* const);     // Sets the list of IG model type IDs (TypeMapper objects)
 };
 
 }

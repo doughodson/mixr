@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Frequency; class Number; }
+namespace base { class Frequency; class Integer; class Number; }
 namespace linearsystem {
 
 //------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ namespace linearsystem {
 //
 // Slots:
 //    rate  <Frequency>  Master rate
-//    rate  <Number>     Master rate Hz
+//    rate  <Integer>    Master rate Hz
 //    x0    <Number>     Initial (previous) input value: X(0) (default: 0)
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
@@ -82,7 +82,7 @@ protected:
 private:
    // slot table helper methods
    bool setSlotRate(const base::Frequency* const);
-   bool setSlotRate(const base::Number* const);
+   bool setSlotRate(const base::Integer* const);
    bool setSlotX0(const base::Number* const);
    bool setSlotY0(const base::Number* const);
 };

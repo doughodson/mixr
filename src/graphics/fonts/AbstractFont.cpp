@@ -1,6 +1,7 @@
 
 #include "mixr/graphics/fonts/AbstractFont.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/List.hpp"
@@ -35,8 +36,8 @@ BEGIN_SLOT_MAP(AbstractFont)
     ON_SLOT(1, setSlotFontWidth,        base::Number)
     ON_SLOT(2, setSlotFontHeight,       base::Number)
     ON_SLOT(3, setSlotFontPosition,     base::List)
-    ON_SLOT(4, setSlotBitmapWidth,      base::Number)
-    ON_SLOT(5, setSlotBitmapHeight,     base::Number)
+    ON_SLOT(4, setSlotBitmapWidth,      base::Integer)
+    ON_SLOT(5, setSlotBitmapHeight,     base::Integer)
     ON_SLOT(6, setSlotFontPath,         base::String)
     ON_SLOT(7, setSlotFTGLFontFileName, base::String)
     ON_SLOT(8, setSlotLookupTable,      base::List)
@@ -229,7 +230,7 @@ bool AbstractFont::setSlotFontPosition (const base::List* const sfpobj)
 //------------------------------------------------------------------------------
 //  setSlotBitmapWidth() - sets the bitmap width
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapWidth(const base::Number* const sbwobj)
+bool AbstractFont::setSlotBitmapWidth(const base::Integer* const sbwobj)
 {
     if (sbwobj != nullptr) setBitmapWidth( sbwobj->getInt() );
     return true;
@@ -238,7 +239,7 @@ bool AbstractFont::setSlotBitmapWidth(const base::Number* const sbwobj)
 //------------------------------------------------------------------------------
 //  setBitmapHeight() - sets the bitmap height
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapHeight(const base::Number* const sbhobj)
+bool AbstractFont::setSlotBitmapHeight(const base::Integer* const sbhobj)
 {
     if (sbhobj != nullptr) setBitmapHeight( sbhobj->getInt() );
     return true;

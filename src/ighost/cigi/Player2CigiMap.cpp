@@ -4,7 +4,8 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/String.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
 namespace cigi {
@@ -20,7 +21,7 @@ END_SLOTTABLE(Player2CigiMap)
 BEGIN_SLOT_MAP(Player2CigiMap)
     ON_SLOT(1, setSlotRefFactoryName, base::Identifier)
     ON_SLOT(2, setSlotRefTypeName,    base::String)
-    ON_SLOT(3, setSlotEntityId,       base::Number)
+    ON_SLOT(3, setSlotEntityId,       base::Integer)
 END_SLOT_MAP()
 
 Player2CigiMap::Player2CigiMap()
@@ -56,7 +57,7 @@ bool Player2CigiMap::setEntityId(const int id)
 }
 
 // Sets the IG entity type number
-bool Player2CigiMap::setSlotEntityId(const base::Number* const msg)
+bool Player2CigiMap::setSlotEntityId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

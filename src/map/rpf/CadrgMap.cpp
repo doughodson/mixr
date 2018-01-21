@@ -7,7 +7,7 @@
 #include "mixr/map/rpf/MapDrawer.hpp"
 #include "mixr/graphics/Texture.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -28,7 +28,7 @@ END_SLOTTABLE(CadrgMap)
 
 BEGIN_SLOT_MAP(CadrgMap)
     ON_SLOT(1, setSlotPathnames,    base::PairStream)
-    ON_SLOT(2, setSlotMaxTableSize, base::Number)
+    ON_SLOT(2, setSlotMaxTableSize, base::Integer)
     ON_SLOT(3, setSlotMapLevel,     base::String)
 END_SLOT_MAP()
 
@@ -220,9 +220,9 @@ void CadrgMap::sortMaps(const int count)
 //------------------------------------------------------------------------------
 // setSlotMaxTableSize() - Sets our max table size and array up.
 //------------------------------------------------------------------------------
-bool CadrgMap::setSlotMaxTableSize(const base::Number* const x)
+bool CadrgMap::setSlotMaxTableSize(const base::Integer* const x)
 {
-    bool ok = false;
+    bool ok{};
     if (x != nullptr) ok = setMaxTableSize(x->getInt());
     return ok;
 
@@ -233,7 +233,7 @@ bool CadrgMap::setSlotMaxTableSize(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool CadrgMap::setPathName(const char* aGenPathName)
 {
-    bool ok = false;
+    bool ok{};
     if (aGenPathName != nullptr) {
         if (cadrgFiles[numFiles] == nullptr) cadrgFiles[numFiles] = new CadrgFile();
         cadrgFiles[numFiles]->initialize(aGenPathName);

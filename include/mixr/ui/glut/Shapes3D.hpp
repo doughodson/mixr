@@ -9,7 +9,7 @@
 #include "mixr/graphics/Shapes.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Integer; class Number; }
 namespace glut {
 
 //------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ public:
     int getStacks()                           { return stacks; }
 
 protected:
-    bool setSlotStacks(const base::Number* const x);
+    bool setSlotStacks(const base::Integer* const);
 
 private:
     int stacks {10};

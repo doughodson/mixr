@@ -14,6 +14,9 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
+
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Times.hpp"
@@ -77,7 +80,7 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT(12, setSlotMagVar,         base::Number)
 
     ON_SLOT(13, setSlotNext,           base::Identifier)
-    ON_SLOT(13, setSlotNext,           base::Number)
+    ON_SLOT(13, setSlotNext,           base::Integer)
 
     ON_SLOT(14, setSlotAction,         Action)
 END_SLOT_MAP()
@@ -574,7 +577,7 @@ bool Steerpoint::setSlotNext(const base::Identifier* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotNext(const base::Number* const msg)
+bool Steerpoint::setSlotNext(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

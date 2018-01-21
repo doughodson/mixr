@@ -5,7 +5,7 @@
 #include "mixr/instruments/gauges/AnalogGauge.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class Integer; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -22,11 +22,11 @@ class TickMarks : public AnalogGauge
 public:
     TickMarks();
 
-    virtual bool setTickMarkLength(const double newLength);
-    virtual bool setQuantity(const int newQ);
-    virtual bool setGaugeLength(const double newL);
-    virtual bool setFlip(const bool x);
-    virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
+    virtual bool setTickMarkLength(const double);
+    virtual bool setQuantity(const int);
+    virtual bool setGaugeLength(const double);
+    virtual bool setFlip(const bool);
+    virtual bool setTickGraphic(const graphics::Graphic* const);
 
     double getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
@@ -34,16 +34,16 @@ public:
     void drawFunc() override;
 
 private:
-    double lengthTM {1.0};           // tick mark length (if not a graphic)
-    int    quantity {1};             // how many tick marks will we have?
-    double gaugeLength {};           // length we are spanning our tick marks over
-    bool   flip {};                  // our flip variable
-    graphics::Graphic* myGraphic {}; // our graphic (if we choose to use one for a tick mark)
+    double lengthTM{1.0};            // tick mark length (if not a graphic)
+    int    quantity{1};              // how many tick marks will we have?
+    double gaugeLength{};            // length we are spanning our tick marks over
+    bool   flip{};                   // our flip variable
+    graphics::Graphic* myGraphic{};  // our graphic (if we choose to use one for a tick mark)
 
 private:
     // slot table helper methods
     bool setSlotTickMarkLength(const base::Number* const);
-    bool setSlotQuantity(const base::Number* const);
+    bool setSlotQuantity(const base::Integer* const);
     bool setSlotGaugeLength(const base::Number* const);
     bool setSlotFlip(const base::Boolean* const);
 };

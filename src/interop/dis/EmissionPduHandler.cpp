@@ -18,7 +18,7 @@
 #include "mixr/base/units/Decibel.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include <cmath>
 #include <cstring>
@@ -39,8 +39,8 @@ BEGIN_SLOTTABLE(EmissionPduHandler)
 END_SLOTTABLE(EmissionPduHandler)
 
 BEGIN_SLOT_MAP(EmissionPduHandler)
-    ON_SLOT(1, setSlotEmitterName,     base::Number )
-    ON_SLOT(2, setSlotEmitterFunction, base::Number )
+    ON_SLOT(1, setSlotEmitterName,     base::Integer )
+    ON_SLOT(2, setSlotEmitterFunction, base::Integer )
     ON_SLOT(3, setSlotSensorTemplate,  models::RfSensor )
     ON_SLOT(4, setSlotAntennaTemplate, models::Antenna )
     ON_SLOT(5, setSlotDefaultIn,       base::Boolean )
@@ -183,7 +183,7 @@ bool EmissionPduHandler::setSavedEmissionSystemData(const EmissionSystem& newES)
 // Saved EmitterBeamData
 bool EmissionPduHandler::setSavedEmitterBeamData(const unsigned int idx, const EmitterBeamData& newEBD)
 {
-   bool ok = false;
+   bool ok{};
    if (idx < MAX_EM_BEAMS) {
       emitterBeamDataN1[idx] = newEBD;
       ok = true;
@@ -195,7 +195,7 @@ bool EmissionPduHandler::setSavedEmitterBeamData(const unsigned int idx, const E
 bool EmissionPduHandler::setSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield, const TrackJamTargets& newTJT)
 {
 {
-   bool ok = false;
+   bool ok{};
    if (ibeam < MAX_EM_BEAMS && ifield < MAX_TARGETS_IN_TJ_FIELD) {
       tjTargetsN1[ibeam][ifield] = newTJT;
       ok = true;
@@ -215,11 +215,11 @@ bool EmissionPduHandler::setTemplatesFound(const bool newTF)
 //------------------------------------------------------------------------------
 
 // Sets the our DIS Emitter Name
-bool EmissionPduHandler::setSlotEmitterName(const base::Number* const msg)
+bool EmissionPduHandler::setSlotEmitterName(const base::Integer* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int i = msg->getInt();
+      const int i = msg->getInt();
       if (i >= 0 && i <= 0xffff) {
          ok = setEmitterName( static_cast<unsigned short>(i) );
       }
@@ -228,11 +228,11 @@ bool EmissionPduHandler::setSlotEmitterName(const base::Number* const msg)
 }
 
 // Sets our DIS Emitter Function
-bool EmissionPduHandler::setSlotEmitterFunction(const base::Number* const msg)
+bool EmissionPduHandler::setSlotEmitterFunction(const base::Integer* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int i = msg->getInt();
+      const int i = msg->getInt();
       if (i >= 0 && i <= 0xff) {
          ok = setEmitterFunction( static_cast<unsigned char>(i) );
       }
@@ -254,7 +254,7 @@ bool EmissionPduHandler::setSlotAntennaTemplate(models::Antenna* const msg)
 
 bool EmissionPduHandler::setSlotDefaultIn(const base::Boolean* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setDefaultIn( msg->getBoolean() );
    }
@@ -263,7 +263,7 @@ bool EmissionPduHandler::setSlotDefaultIn(const base::Boolean* const msg)
 
 bool EmissionPduHandler::setSlotDefaultOut(const base::Boolean* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setDefaultOut( msg->getBoolean() );
    }
@@ -276,7 +276,7 @@ bool EmissionPduHandler::setSlotDefaultOut(const base::Boolean* const msg)
 // Returns true if RfSensor data matches our parameters
 bool EmissionPduHandler::isMatchingRfSystemType(const models::RfSensor* const p) const
 {
-   bool match = false;
+   bool match{};
    if (p != nullptr && sensorModel != nullptr) {
       match = (std::strcmp(sensorModel->getTypeId(),p->getTypeId()) == 0);
    }
@@ -286,7 +286,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const models::RfSensor* const p)
 // True if EmissionSystem PDU data matches our parameters.
 bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) const
 {
-   bool match = false;
+   bool match{};
    if (p != nullptr) {
       // All we need to match is the DIS "emitter name"
       match = (emitterName == p->emitterSystem.emitterName);
@@ -300,7 +300,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) c
 //------------------------------------------------------------------------------
 void EmissionPduHandler::setTimedOut()
 {
-   models::RfSensor* rfSys = getSensor();
+   models::RfSensor* rfSys{getSensor()};
    if (rfSys != nullptr) {
       rfSys->setTransmitterEnableFlag(false);
       rfSys->setReceiverEnabledFlag(false);
@@ -313,22 +313,22 @@ void EmissionPduHandler::setTimedOut()
 //------------------------------------------------------------------------------
 bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib)
 {
-   models::Player* player = nib->getPlayer();
+   models::Player* player{nib->getPlayer()};
    if (player == nullptr || noTemplatesFound) return false;
 
    // ---
    // Default sensor: process only one beam)
    // ---
    if (es->numberOfBeams > 0) {
-      const EmitterBeamData* bd = es->getEmitterBeamData(0);
+      const EmitterBeamData* bd{es->getEmitterBeamData(0)};
 
       // ---
       // Use our template models to create the RfSensor and Antenna
       // ---
       if (getSensor() == nullptr && !noTemplatesFound) {
 
-         models::RfSensor* rp = getSensorModel();
-         models::Antenna*  ap = getAntennaModel();
+         models::RfSensor* rp{getSensorModel()};
+         models::Antenna*  ap{getAntennaModel()};
 
          // If we have both the RF system and antenna models ...
          if (rp != nullptr && ap != nullptr) {
@@ -445,7 +445,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 
    // No beam data -- turn off the transmitter and receiver
    else {
-      models::RfSensor* rfSys = getSensor();
+      models::RfSensor* rfSys{getSensor()};
       if (rfSys != nullptr) {
          rfSys->setTransmitterEnableFlag(false);
          rfSys->setReceiverEnabledFlag(false);
@@ -460,11 +460,11 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 //------------------------------------------------------------------------------
 bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib)
 {
-   bool pduSent = false;
+   bool pduSent{};
 
-   bool stateChg = false;
+   bool stateChg{};
    if (nib != nullptr) {
-      NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
+      NetIO* const disIO{static_cast<NetIO*>(nib->getNetIO())};
       if (disIO != nullptr && isUpdateRequired(curExecTime, &stateChg, nib)) {
 
          // Out going Electromagnetic Emission PDU is just a buffer to be filled
@@ -507,7 +507,7 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
          // ---
          // Add the emission system to the end of the PDU and send it
          // ---
-         unsigned short result = emissionSystemData2PDU(es);
+         unsigned short result{emissionSystemData2PDU(es)};
          if (result > 0) {
 
             // Update our total length and number of systems
@@ -535,12 +535,12 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
 //------------------------------------------------------------------------------
 bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const stateChg, Nib* const nib)
 {
-   bool sc = false;
+   bool sc{};
    enum { NO, YES, UNSURE } result = UNSURE;
 
    // Early out if we don't have everything we need!
    if (nib == nullptr) return NO;
-   NetIO* const disIO = static_cast<NetIO*>(nib->getNetIO());
+   NetIO* const disIO{static_cast<NetIO*>(nib->getNetIO())};
    if (disIO == nullptr) return NO;
    models::RfSensor* beam = getSensor();
    if (beam == nullptr) return NO;
@@ -553,7 +553,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
    // possibly intended to reduce amount of processing expended for no PDUs sent?
    // otherwise, could be entirely removed.
    if (disIO->getVersion() >= NetIO::VERSION_7) {
-      double drTime = curExecTime - getEmPduExecTime();
+      double drTime{curExecTime - getEmPduExecTime()};
       if ( drTime < (disIO->getHbtPduEe() / 10.0f) ) {
          result = NO;
       }

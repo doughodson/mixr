@@ -2,6 +2,7 @@
 #include "mixr/ui/glut/GlutDisplay.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
@@ -45,7 +46,7 @@ END_SLOTTABLE(GlutDisplay)
 
 BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(1,setSlotFullScreen,    base::Boolean)
-   ON_SLOT(2,setSlotIdleSleepTime, base::Number)
+   ON_SLOT(2,setSlotIdleSleepTime, base::Integer)
    ON_SLOT(3,setSlotResizeWindows, base::Boolean)
    ON_SLOT(4,setSlotPickWidth,     base::Number)
    ON_SLOT(5,setSlotPickHeight,    base::Number)
@@ -920,11 +921,6 @@ void GlutDisplay::entryFuncCB(int state)
    }
 }
 
-//-----------------------------------------------------------------------------
-// Slot functions
-//-----------------------------------------------------------------------------
-
-// setSlotFullScreen()
 bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
 {
    bool ok = false;
@@ -935,12 +931,11 @@ bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
    return ok;
 }
 
-// setSlotIdleSleepTime()
-bool GlutDisplay::setSlotIdleSleepTime(const base::Number* const msg)
+bool GlutDisplay::setSlotIdleSleepTime(const base::Integer* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
-      int i = msg->getInt();
+      const int i = msg->getInt();
       if (i >= 0) {
          unsigned int ms = static_cast<unsigned int>(i);
          ok = setIdleSleepTime(ms);
@@ -949,7 +944,6 @@ bool GlutDisplay::setSlotIdleSleepTime(const base::Number* const msg)
    return ok;
 }
 
-// setSlotResizeWindows()
 bool GlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
 {
    bool ok = false;

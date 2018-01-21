@@ -2,6 +2,7 @@
 #include "mixr/models/system/Iff.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
@@ -29,11 +30,11 @@ BEGIN_SLOTTABLE(Iff)
 END_SLOTTABLE(Iff)
 
 BEGIN_SLOT_MAP(Iff)
-   ON_SLOT( 1, setSlotMode1,        base::Number)
-   ON_SLOT( 2, setSlotMode2,        base::Number)
-   ON_SLOT( 3, setSlotMode3a,       base::Number)
-   ON_SLOT( 4, setSlotMode4a,       base::Number)
-   ON_SLOT( 5, setSlotMode4b,       base::Number)
+   ON_SLOT( 1, setSlotMode1,        base::Integer)
+   ON_SLOT( 2, setSlotMode2,        base::Integer)
+   ON_SLOT( 3, setSlotMode3a,       base::Integer)
+   ON_SLOT( 4, setSlotMode4a,       base::Integer)
+   ON_SLOT( 5, setSlotMode4b,       base::Integer)
    ON_SLOT( 6, setSlotEnableMode1,  base::Boolean)
    ON_SLOT( 7, setSlotEnableMode2,  base::Boolean)
    ON_SLOT( 8, setSlotEnableMode3a, base::Boolean)
@@ -202,7 +203,7 @@ bool Iff::setSlotEnableModeC(const base::Boolean* const msg)
     return true;
 }
 
-bool Iff::setSlotMode1(const base::Number* const msg)
+bool Iff::setSlotMode1(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) ok = setMode1(static_cast<unsigned short>(msg->getInt()));
@@ -210,7 +211,7 @@ bool Iff::setSlotMode1(const base::Number* const msg)
     return ok;
 }
 
-bool Iff::setSlotMode2(const base::Number* const msg)
+bool Iff::setSlotMode2(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) ok = setMode2(static_cast<unsigned short>(msg->getInt()));
@@ -218,7 +219,7 @@ bool Iff::setSlotMode2(const base::Number* const msg)
     return ok;
 }
 
-bool Iff::setSlotMode3a(const base::Number* const msg)
+bool Iff::setSlotMode3a(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) ok = setMode3a(static_cast<unsigned short>(msg->getInt()));
@@ -226,7 +227,7 @@ bool Iff::setSlotMode3a(const base::Number* const msg)
     return ok;
 }
 
-bool Iff::setSlotMode4a(const base::Number* const msg)
+bool Iff::setSlotMode4a(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) ok = setMode4A(static_cast<unsigned short>(msg->getInt()));
@@ -234,7 +235,7 @@ bool Iff::setSlotMode4a(const base::Number* const msg)
     return ok;
 }
 
-bool Iff::setSlotMode4b(const base::Number* const msg)
+bool Iff::setSlotMode4b(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) ok = setMode4B(static_cast<unsigned short>(msg->getInt()));

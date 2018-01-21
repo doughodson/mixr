@@ -46,7 +46,7 @@ public:
    double getReal() const           { return val; }
    double getDouble() const         { return val; }
    float getFloat() const           { return static_cast<float>(val); }
-   int getInt() const               { return static_cast<int>(val); }
+   //int getInt() const               { return static_cast<int>(val); }
 
    virtual void setValue(const double x)   { val = x; }
 

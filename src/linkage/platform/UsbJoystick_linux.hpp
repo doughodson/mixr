@@ -8,7 +8,7 @@
 #include <vector>
 
 namespace mixr {
-namespace base { class Number; class AbstractIoData; }
+namespace base { class Integer; class AbstractIoData; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotDeviceIndex(const base::Number* const);
+   bool setSlotDeviceIndex(const base::Integer* const);
 };
 
 }

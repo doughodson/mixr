@@ -7,6 +7,7 @@
 #include "mixr/graphics/Material.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/colors/Color.hpp"
@@ -77,19 +78,19 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT( 7, setSlotTopOrthoBound,         base::Number)
    ON_SLOT( 8, setSlotNearOrthoBound,        base::Number)
    ON_SLOT( 9, setSlotFarOrthoBound,         base::Number)
-   ON_SLOT(10, setSlotViewportXOrigin,       base::Number)
-   ON_SLOT(11, setSlotViewportYOrigin,       base::Number)
-   ON_SLOT(12, setSlotViewportWidth,         base::Number)
-   ON_SLOT(13, setSlotViewportHeight,        base::Number)
+   ON_SLOT(10, setSlotViewportXOrigin,       base::Integer)
+   ON_SLOT(11, setSlotViewportYOrigin,       base::Integer)
+   ON_SLOT(12, setSlotViewportWidth,         base::Integer)
+   ON_SLOT(13, setSlotViewportHeight,        base::Integer)
    ON_SLOT(14, setSlotSubdisplayStream,      base::PairStream)
    ON_SLOT(14, setSlotSubdisplaySingle,      Display)
    ON_SLOT(15, setSlotStdLineWidth,          base::Number)
    ON_SLOT(16, setSlotTexturesStream,        base::PairStream)
    ON_SLOT(16, setSlotTexturesSingle,        Texture)
    ON_SLOT(17, setSlotClearColor,            base::Color)
-   ON_SLOT(18, setSlotLeftBracketCharacter,  base::Number)
+   ON_SLOT(18, setSlotLeftBracketCharacter,  base::Integer)
    ON_SLOT(18, setSlotLeftBracketCharacter,  base::String)
-   ON_SLOT(19, setSlotRightBracketCharacter, base::Number)
+   ON_SLOT(19, setSlotRightBracketCharacter, base::Integer)
    ON_SLOT(19, setSlotRightBracketCharacter, base::String)
    ON_SLOT(20, setSlotReverseVideoBrackets,  base::Boolean)
    ON_SLOT(21, setFontList,                  base::PairStream)
@@ -1538,7 +1539,7 @@ bool Display::setSlotFarOrthoBound(const base::Number* const sfobobj)
 //------------------------------------------------------------------------------
 // setViewportXOrigin() -- set viewport x origin
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportXOrigin(const base::Number* const svxoobj)
+bool Display::setSlotViewportXOrigin(const base::Integer* const svxoobj)
 {
    if (svxoobj != nullptr) vpX = svxoobj->getInt();
    return true;
@@ -1547,7 +1548,7 @@ bool Display::setSlotViewportXOrigin(const base::Number* const svxoobj)
 //------------------------------------------------------------------------------
 // setViewportYOrigin() -- set viewport y origin
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportYOrigin(const base::Number* const svyoobj)
+bool Display::setSlotViewportYOrigin(const base::Integer* const svyoobj)
 {
    if (svyoobj) vpY = svyoobj->getInt();
    return true;
@@ -1556,7 +1557,7 @@ bool Display::setSlotViewportYOrigin(const base::Number* const svyoobj)
 //------------------------------------------------------------------------------
 // setViewportWidth() -- set viewport width
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportWidth(const base::Number* const svwobj)
+bool Display::setSlotViewportWidth(const base::Integer* const svwobj)
 {
    if (svwobj != nullptr) vpWidth = svwobj->getInt();
    return true;
@@ -1565,7 +1566,7 @@ bool Display::setSlotViewportWidth(const base::Number* const svwobj)
 //------------------------------------------------------------------------------
 // setViewportHeight() -- set viewport height
 //------------------------------------------------------------------------------
-bool Display::setSlotViewportHeight(const base::Number* const svhobj)
+bool Display::setSlotViewportHeight(const base::Integer* const svhobj)
 {
    if (svhobj != nullptr) vpHeight = svhobj->getInt();
    return true;
@@ -1662,7 +1663,7 @@ bool Display::setSlotClearColor(const base::Color* const msg)
 //------------------------------------------------------------------------------
 // setSlotLeftBracketCharacter() -- sets the left bracket character
 //------------------------------------------------------------------------------
-bool Display::setSlotLeftBracketCharacter(const base::Number* const msg)
+bool Display::setSlotLeftBracketCharacter(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -1691,7 +1692,7 @@ bool Display::setSlotLeftBracketCharacter(const base::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotRightBracketCharacter() -- sets the right bracket character
 //------------------------------------------------------------------------------
-bool Display::setSlotRightBracketCharacter(const base::Number* const msg)
+bool Display::setSlotRightBracketCharacter(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

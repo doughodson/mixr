@@ -12,6 +12,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/LatLon.hpp"
 #include "mixr/base/units/Distances.hpp"
@@ -164,7 +165,7 @@ BEGIN_SLOT_MAP(ActionImagingSar)
     ON_SLOT(2, setSlotSarLon,     base::LatLon)
     ON_SLOT(3, setSlotSarElev,    base::Distance)
     ON_SLOT(4, setSlotResolution, base::Distance)
-    ON_SLOT(5, setSlotImageSize,  base::Number)
+    ON_SLOT(5, setSlotImageSize,  base::Integer)
 END_SLOT_MAP()
 
 ActionImagingSar::ActionImagingSar()
@@ -385,7 +386,7 @@ bool ActionImagingSar::setSlotResolution(const base::Distance* const msg)
    return ok;
 }
 
-bool ActionImagingSar::setSlotImageSize(const base::Number* const msg)
+bool ActionImagingSar::setSlotImageSize(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -434,7 +435,7 @@ BEGIN_SLOT_MAP(ActionWeaponRelease)
     ON_SLOT(1, setSlotTargetLat,  base::LatLon)
     ON_SLOT(2, setSlotTargetLon,  base::LatLon)
     ON_SLOT(3, setSlotTargetElev, base::Number)
-    ON_SLOT(4, setSlotStationNum, base::Number)
+    ON_SLOT(4, setSlotStationNum, base::Integer)
 END_SLOT_MAP()
 
 ActionWeaponRelease::ActionWeaponRelease()
@@ -545,7 +546,7 @@ bool ActionWeaponRelease::setSlotTargetElev(const base::Number* newElev)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotStationNum(const base::Number* newStation)
+bool ActionWeaponRelease::setSlotStationNum(const base::Integer* newStation)
 {
     bool ok{};
     if (newStation != nullptr) {
@@ -567,7 +568,7 @@ BEGIN_SLOTTABLE(ActionDecoyRelease)
 END_SLOTTABLE(ActionDecoyRelease)
 
 BEGIN_SLOT_MAP(ActionDecoyRelease)
-    ON_SLOT(1, setSlotNumToLaunch, base::Number)
+    ON_SLOT(1, setSlotNumToLaunch, base::Integer)
     ON_SLOT(2, setSlotInterval,    base::Number)
 END_SLOT_MAP()
 
@@ -660,8 +661,7 @@ void ActionDecoyRelease::process(const double)
     }
 }
 
-// Slot functions
-bool ActionDecoyRelease::setSlotNumToLaunch(const base::Number* x)
+bool ActionDecoyRelease::setSlotNumToLaunch(const base::Integer* x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -691,7 +691,7 @@ BEGIN_SLOTTABLE(ActionCamouflageType)
 END_SLOTTABLE(ActionCamouflageType)
 
 BEGIN_SLOT_MAP(ActionCamouflageType)
-    ON_SLOT( 1, setSlotCamouflageType, base::Number)
+    ON_SLOT( 1, setSlotCamouflageType, base::Integer)
 END_SLOT_MAP()
 
 ActionCamouflageType::ActionCamouflageType()
@@ -739,7 +739,7 @@ bool ActionCamouflageType::setCamouflageType(const unsigned int v)
 }
 
 // Sets user defined camouflage type
-bool ActionCamouflageType::setSlotCamouflageType(const base::Number* const msg)
+bool ActionCamouflageType::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

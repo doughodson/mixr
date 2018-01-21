@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/buttons/Switch.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -15,8 +15,8 @@ BEGIN_SLOTTABLE(Switch)
 END_SLOTTABLE(Switch)
 
 BEGIN_SLOT_MAP(Switch)
-   ON_SLOT(1, setSlotNumSelections, base::Number)
-   ON_SLOT(2, setSlotCurrentState,  base::Number)
+   ON_SLOT(1, setSlotNumSelections, base::Integer)
+   ON_SLOT(2, setSlotCurrentState,  base::Integer)
 END_SLOT_MAP()
 
 Switch::Switch()
@@ -37,7 +37,7 @@ void Switch::copyData(const Switch& org, const bool)
 //------------------------------------------------------------------------------
 // setSlotNumSelections() - set the number of "stops"
 //------------------------------------------------------------------------------
-bool Switch::setSlotNumSelections(const base::Number* const msg)
+bool Switch::setSlotNumSelections(const base::Integer* const msg)
 {
     bool ok = false;
     if (msg != nullptr) ok = setNumSelections(msg->getInt());
@@ -47,7 +47,7 @@ bool Switch::setSlotNumSelections(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotCurrentState() - set the state of our switch
 //------------------------------------------------------------------------------
-bool Switch::setSlotCurrentState(const base::Number* const msg)
+bool Switch::setSlotCurrentState(const base::Integer* const msg)
 {
     bool ok = false;
     if (msg != nullptr) ok = setCurrentState(msg->getInt());

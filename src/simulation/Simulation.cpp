@@ -12,6 +12,7 @@
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/units/Times.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -41,14 +42,14 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
     ON_SLOT( 2, setSlotSimulationTime,  base::Time)
-    ON_SLOT( 3, setSlotDay,             base::Number)
-    ON_SLOT( 4, setSlotMonth,           base::Number)
-    ON_SLOT( 5, setSlotYear,            base::Number)
+    ON_SLOT( 3, setSlotDay,             base::Integer)
+    ON_SLOT( 4, setSlotMonth,           base::Integer)
+    ON_SLOT( 5, setSlotYear,            base::Integer)
 
-    ON_SLOT( 6, setSlotFirstWeaponId,   base::Number)
+    ON_SLOT( 6, setSlotFirstWeaponId,   base::Integer)
 
-    ON_SLOT( 7, setSlotNumTcThreads,    base::Number)
-    ON_SLOT( 8, setSlotNumBgThreads,    base::Number)
+    ON_SLOT( 7, setSlotNumTcThreads,    base::Integer)
+    ON_SLOT( 8, setSlotNumBgThreads,    base::Integer)
 END_SLOT_MAP()
 
 Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
@@ -1280,7 +1281,7 @@ bool Simulation::setSlotSimulationTime(const base::Time* const msg)
     return ok;
 }
 
-bool Simulation::setSlotDay(const base::Number* const msg)
+bool Simulation::setSlotDay(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1295,7 +1296,7 @@ bool Simulation::setSlotDay(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotMonth(const base::Number* const msg)
+bool Simulation::setSlotMonth(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1310,7 +1311,7 @@ bool Simulation::setSlotMonth(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotYear(const base::Number* const msg)
+bool Simulation::setSlotYear(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1325,7 +1326,7 @@ bool Simulation::setSlotYear(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
+bool Simulation::setSlotFirstWeaponId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1341,7 +1342,7 @@ bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
+bool Simulation::setSlotNumTcThreads(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1365,7 +1366,7 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
+bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

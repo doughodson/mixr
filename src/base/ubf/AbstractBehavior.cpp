@@ -1,7 +1,7 @@
 
 #include "mixr/base/ubf/AbstractBehavior.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(AbstractBehavior)
 END_SLOTTABLE(AbstractBehavior)
 
 BEGIN_SLOT_MAP(AbstractBehavior)
-   ON_SLOT(1, setSlotVote, base::Number)
+   ON_SLOT(1, setSlotVote, base::Integer)
 END_SLOT_MAP()
 
 AbstractBehavior::AbstractBehavior()
@@ -26,7 +26,7 @@ AbstractBehavior::AbstractBehavior()
 }
 
 // [ 1 .. 65535 ]
-bool AbstractBehavior::setSlotVote(const base::Number* const num)
+bool AbstractBehavior::setSlotVote(const base::Integer* const num)
 {
    bool ok{};
    const int vote{num->getInt()};

@@ -4,7 +4,7 @@
 #include "mixr/graphics/Display.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Timers.hpp"
@@ -92,7 +92,7 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
         const base::List::Item* item = x->getFirstItem();
         while (item != nullptr && count < 3) {
             const auto pair = static_cast<const base::Pair*>(item->getValue());
-            const auto num = dynamic_cast<const base::Number*>(pair->object());
+            const auto num = dynamic_cast<const base::Integer*>(pair->object());
             if (num != nullptr) eventMap[count] = num->getInt();
             count++;
             item = item->getNext();

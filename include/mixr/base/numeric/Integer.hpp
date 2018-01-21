@@ -49,6 +49,8 @@ public:
 
     operator int() const;
 
+    int getInt() const               { return static_cast<int>(val); }
+
     Integer& operator=(const int);
 
     void operator+=(const Integer&);
@@ -73,7 +75,7 @@ public:
 //------------------------------------------------------------------------------
 inline Integer::operator int() const
 {
-    return Number::getInt();
+    return getInt();
 }
 
 

@@ -9,7 +9,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Identifier; class Number; class Time; }
+namespace base { class Angle; class Boolean; class Distance; class Identifier; class Integer; class Time; }
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {
@@ -25,7 +25,7 @@ class Ntm;
 //
 // Factory name: NetIO
 // Slots:
-//    networkID            <base::Number>      ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
+//    networkID            <base::Integer>     ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
 //    federationName       <base::Identifier>  ! Federation name (default: 0)
 //    federateName         <base::Identifier>  ! Name of this federate (default: 0)
 //
@@ -468,7 +468,7 @@ private:
    virtual bool setSlotMaxEntityRange(const base::Distance* const);    // Sets the max entity range(s)
    virtual bool setSlotMaxAge(const base::Time* const);                // Sets the max age(s)
 
-   bool setSlotNetworkID(const base::Number* const);                   // Sets the network ID
+   bool setSlotNetworkID(const base::Integer* const);                  // Sets the network ID
    bool setSlotEnableInput(const base::Boolean* const);                // Sets input enabled flag
    bool setSlotEnableOutput(const base::Boolean* const);               // Sets output enabled flag
    bool setSlotEnableRelay(const base::Boolean* const);                // Sets relay enabled flag

@@ -14,6 +14,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/units/Distances.hpp"
@@ -36,8 +37,8 @@ END_SLOTTABLE(IgHost)
 BEGIN_SLOT_MAP(IgHost)
    ON_SLOT(1, setSlotMaxRange,      base::Distance)
    ON_SLOT(1, setSlotMaxRange,      base::Number)
-   ON_SLOT(2, setSlotMaxModels,     base::Number)
-   ON_SLOT(3, setSlotMaxElevations, base::Number)
+   ON_SLOT(2, setSlotMaxModels,     base::Integer)
+   ON_SLOT(3, setSlotMaxElevations, base::Integer)
    ON_SLOT(4, setSlotTypeMap,       base::PairStream)
 END_SLOT_MAP()
 
@@ -689,7 +690,7 @@ bool IgHost::setSlotMaxRange(const base::Number* const msg)
 }
 
 // setSlotMaxModels() -- sets the max number of models slot
-bool IgHost::setSlotMaxModels(const base::Number* const num)
+bool IgHost::setSlotMaxModels(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -704,7 +705,7 @@ bool IgHost::setSlotMaxModels(const base::Number* const num)
     return ok;
 }
 
-bool IgHost::setSlotMaxElevations(const base::Number* const num)
+bool IgHost::setSlotMaxElevations(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {

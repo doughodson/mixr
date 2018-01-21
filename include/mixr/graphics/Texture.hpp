@@ -5,7 +5,7 @@
 #include "mixr/graphics/Image.hpp"
 
 namespace mixr {
-namespace base { class Number; class Identifier; }
+namespace base { class Identifier; class Integer; class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -19,8 +19,8 @@ namespace graphics {
 // Factory name: Texture
 //
 // Slots:
-//    width       <Number>       ! Size of the texture map (default: 256)
-//    height      <Number>       ! Size of the texture map.(default: 256)
+//    width       <Integer>      ! Size of the texture map (default: 256)
+//    height      <Integer>      ! Size of the texture map.(default: 256)
 //    redScale    <Number>       ! for glPixelTransferf(GL_RED_SCALE) (default: 1.0)
 //    redBias     <Number>       ! for glPixelTransferf(GL_RED_BIAS) (default: 0.0)
 //    greenScale  <Number>       ! for glPixelTransferf(GL_GREEN_SCALE) (default: 1.0)
@@ -160,8 +160,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotWidth(const base::Number* const);
-   bool setSlotHeight(const base::Number* const);
+   bool setSlotWidth(const base::Integer* const);
+   bool setSlotHeight(const base::Integer* const);
    bool setSlotRedScale(const base::Number* const);
    bool setSlotRedBias(const base::Number* const);
    bool setSlotGreenScale(const base::Number* const);

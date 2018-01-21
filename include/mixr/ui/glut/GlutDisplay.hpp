@@ -5,7 +5,7 @@
 #include "mixr/graphics/Display.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class Integer; class Number; }
 namespace glut {
 
 //------------------------------------------------------------------------------
@@ -34,13 +34,13 @@ namespace glut {
 //
 // Factory name: GlutDisplay
 // Slots:
-//    fullScreen        (Boolean)   ! Flag to set full screen mode  -- Main windows only -- (default: false)
-//    idleSleepTime     (Number)    ! Idle callback sleep time (MS) -- Main windows only -- (default: 40)
-//    resizeSubwindows  (Boolean)   ! Resize our subwindows on a reshape (default: false)
-//    pickWidth         (Number)    ! Width of the pick area in screen coordinates(default: 10)
-//    pickHeight        (Number)    ! Height of the pick area in screen coordinates(default: 10)
-//    accumBuff         (Boolean)   ! Enable the accumulation buffer (default: false)
-//    stencilBuff       (Boolean)   ! Enable the stencil buffer (default: false)
+//    fullScreen        <Boolean>   ! Flag to set full screen mode  -- Main windows only -- (default: false)
+//    idleSleepTime     <Integer>   ! Idle callback sleep time (MS) -- Main windows only -- (default: 40)
+//    resizeSubwindows  <Boolean>   ! Resize our subwindows on a reshape (default: false)
+//    pickWidth         <Number>    ! Width of the pick area in screen coordinates(default: 10)
+//    pickHeight        <Number>    ! Height of the pick area in screen coordinates(default: 10)
+//    accumBuff         <Boolean>   ! Enable the accumulation buffer (default: false)
+//    stencilBuff       <Boolean>   ! Enable the stencil buffer (default: false)
 //
 // Events:
 //    ESC_KEY     -- calls onEscKey() event handler; see note #2.
@@ -175,7 +175,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotFullScreen(const base::Boolean* const);
-   bool setSlotIdleSleepTime(const base::Number* const);
+   bool setSlotIdleSleepTime(const base::Integer* const);
    bool setSlotResizeWindows(const base::Boolean* const);
    bool setSlotPickWidth(const base::Number* const);
    bool setSlotPickHeight(const base::Number* const);

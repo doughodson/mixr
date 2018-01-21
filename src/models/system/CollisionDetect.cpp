@@ -4,6 +4,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -30,7 +31,7 @@ END_SLOTTABLE(CollisionDetect)
 
 BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 1,  setSlotCollisionRange,      base::Distance)
-    ON_SLOT( 2,  setSlotMaxPlayers,          base::Number)
+    ON_SLOT( 2,  setSlotMaxPlayers,          base::Integer)
     ON_SLOT( 3,  setSlotPlayerTypes,         base::PairStream)
     ON_SLOT( 4,  setSlotMaxRange2Players,    base::Distance)
     ON_SLOT( 5,  setSlotMaxAngle2Players,    base::Angle)
@@ -536,7 +537,7 @@ bool CollisionDetect::setSlotCollisionRange(const base::Distance* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotMaxPlayers(const base::Number* const msg)
+bool CollisionDetect::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

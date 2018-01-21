@@ -5,7 +5,7 @@
 #include "mixr/instruments/Instrument.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class Integer; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ private:
     bool setSlotMobile(const base::Boolean* const);
     bool setSlotSweepAngle(const base::Number* const);
     bool setSlotRadius(const base::Number* const);
-    bool setSlotSlices(const base::Number* const);
+    bool setSlotSlices(const base::Integer* const);
 };
 
 }

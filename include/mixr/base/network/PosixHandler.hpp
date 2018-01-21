@@ -10,7 +10,7 @@ namespace mixr {
 namespace base {
 class Boolean;
 class Identifier;
-class Number;
+class Integer;
 class String;
 
 //------------------------------------------------------------------------------
@@ -147,12 +147,12 @@ private:
    // slot table helper methods
    bool setSlotLocalIpAddress(const String* const);
    bool setSlotLocalIpAddress(const Identifier* const);
-   bool setSlotPort(const Number* const);
-   bool setSlotLocalPort(const Number* const);
+   bool setSlotPort(const Integer* const);
+   bool setSlotLocalPort(const Integer* const);
    bool setSlotShared(const Boolean* const);
-   bool setSlotSendBuffSize(const Number* const);
-   bool setSlotRecvBuffSize(const Number* const);
-   bool setSlotIgnoreSourcePort(const Number* const);
+   bool setSlotSendBuffSize(const Integer* const);
+   bool setSlotRecvBuffSize(const Integer* const);
+   bool setSlotIgnoreSourcePort(const Integer* const);
 };
 
 // Port#

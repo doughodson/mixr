@@ -7,6 +7,7 @@
 #include "mixr/base/List.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
@@ -38,10 +39,10 @@ END_SLOTTABLE(Gun)
 
 BEGIN_SLOT_MAP(Gun)
     ON_SLOT(1, setBulletType,     Bullet)
-    ON_SLOT(2, setSlotNumRounds,  base::Number)
+    ON_SLOT(2, setSlotNumRounds,  base::Integer)
     ON_SLOT(3, setSlotUnlimited,  base::Boolean)
-    ON_SLOT(4, setSlotRate,       base::Number)
-    ON_SLOT(5, setSlotBurstRate,  base::Number)
+    ON_SLOT(4, setSlotRate,       base::Integer)
+    ON_SLOT(5, setSlotBurstRate,  base::Integer)
     ON_SLOT(6, setSlotPosition,   base::List)
     ON_SLOT(7, setSlotRoll,       base::Number)
     ON_SLOT(8, setSlotPitch,      base::Number)
@@ -381,12 +382,8 @@ bool Gun::setAngles(const double r, const double p, const double y)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
-
 // Number of rounds
-bool Gun::setSlotNumRounds(const base::Number* const num)
+bool Gun::setSlotNumRounds(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -406,7 +403,7 @@ bool Gun::setSlotUnlimited(const base::Boolean* const num)
 }
 
 // Rate of fire (rds per min)
-bool Gun::setSlotRate(const base::Number* const num)
+bool Gun::setSlotRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -416,7 +413,7 @@ bool Gun::setSlotRate(const base::Number* const num)
 }
 
 // Burst rate
-bool Gun::setSlotBurstRate(const base::Number* const num)
+bool Gun::setSlotBurstRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {

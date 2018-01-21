@@ -114,13 +114,13 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: true)
     ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
                                                                      //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
-    ON_SLOT(31, setSlotMaxPlayers,                 base::Number)     // Max number of players of interest (default: 0)
+    ON_SLOT(31, setSlotMaxPlayers,                 base::Integer)    // Max number of players of interest (default: 0)
     ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Distance)   // Max range to players of interest or zero for all (default: 0)
     ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::Angle)      // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
     ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, base::Boolean)    // Sets the local only players of interest flag (default: false)
 
     ON_SLOT(35, setSlotUseWorldCoordinates,        base::Boolean)    // Using player of interest's world (ECEF) coordinate system
-    ON_SLOT(36, setSlotUseOwnHeadingOnly,           base::Boolean)
+    ON_SLOT(36, setSlotUseOwnHeadingOnly,          base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Gimbal)
@@ -1152,7 +1152,7 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
 }
 
 // Max number of players of interest (default: 0)
-bool Gimbal::setSlotMaxPlayers(const base::Number* const msg)
+bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

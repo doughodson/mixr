@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Distance; class Identifier; class NauticalMiles;
+namespace base { class Boolean; class Distance; class Identifier; class Integer; class NauticalMiles;
                  class Number; class Pair; class PairStream; }
 namespace models {
 class Navigation;
@@ -30,7 +30,7 @@ class Steerpoint;
 //
 // Factory name: Route
 // Slots:
-//    to                <base::Number>      ! Initial "TO" steerpoint by steerpoint index number (default: 0)
+//    to                <base::Integer>     ! Initial "TO" steerpoint by steerpoint index number (default: 0)
 //                      <base::Identifier>  ! or by steerpoint name (default: 0)
 //
 //    autoSequence      <base::Boolean>     ! Auto sequence flag (default: true)
@@ -143,7 +143,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotTo(const base::Identifier* const);
-   bool setSlotTo(const base::Number* const);
+   bool setSlotTo(const base::Integer* const);
    bool setSlotAutoSequence(const base::Boolean* const);
    bool setSlotAutoSeqDistance(const base::Distance* const);
    bool setSlotAutoSeqDistance(const base::Number* const);

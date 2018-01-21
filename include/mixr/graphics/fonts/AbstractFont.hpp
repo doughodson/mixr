@@ -8,7 +8,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Number; class List; class String; }
+namespace base { class Integer; class Number; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -18,16 +18,16 @@ namespace graphics {
 //
 // Factory name: AbstractFont
 // Slots:
-//      fontWidth        <Number>  ! Font width (default: 1)
-//      fontHeight       <Number>  ! Font height (default: 1)
-//      fontPosition     <List>    ! Upper/Left origin of the text field (default: 0, 0)
-//      bitmapWidth      <Number>  ! Width of bit map font (default: 1)
-//      bitmapHeight     <Number>  ! Height of bit map font (default: 1)
-//      path             <String>  ! Path to the font directory (default: 0)
-//      file             <String>  ! FTGL Font file name - will be altered in each instance of FTGLFont (default: 0)
-//      lut              <List>    ! Lookup Table (default: 0)
-//      characterSpacing <Number>  ! spacing for each character (default: 0)
-//      lineSpacing      <Number>  ! spacing for each line (default: 0)
+//      fontWidth        <Number>   ! Font width (default: 1)
+//      fontHeight       <Number>   ! Font height (default: 1)
+//      fontPosition     <List>     ! Upper/Left origin of the text field (default: 0, 0)
+//      bitmapWidth      <Integer>  ! Width of bit map font (default: 1)
+//      bitmapHeight     <Integer>  ! Height of bit map font (default: 1)
+//      path             <String>   ! Path to the font directory (default: 0)
+//      file             <String>   ! FTGL Font file name - will be altered in each instance of FTGLFont (default: 0)
+//      lut              <List>     ! Lookup Table (default: 0)
+//      characterSpacing <Number>   ! spacing for each character (default: 0)
+//      lineSpacing      <Number>   ! spacing for each line (default: 0)
 //
 // public methods (member functions):
 //
@@ -185,35 +185,35 @@ public:
 
 protected:
 
-    static const std::size_t MSG_BUF_LEN {MAX_MESSAGE_LENGTH+1}; // Max length of character buffers
+    static const std::size_t MSG_BUF_LEN{MAX_MESSAGE_LENGTH+1}; // Max length of character buffers
     int xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
 
-    GLdouble leftSide {0.0}, topSide {0.0};             // Origin: upper left corner of ln=1, cp=1
+    GLdouble leftSide{}, topSide{};             // Origin: upper left corner of ln=1, cp=1
     void ftgl(void* p)                                  { pFTGL = p; }
     void setFontLoaded()                                { loaded = true; }
 
 private:
     void initData();
 
-    static const int LUT_SIZE {256};
-    GLdouble  fWidth {}, fHeight {};       // Font size
-    GLuint    bWidth {}, bHeight {};       // Bitmap size
-    GLuint    b {};                        // Font call list base
-    unsigned char* pLUT {};                // Look-Up-Table (character translations)
-    void*     pFTGL {};                    // OpenGL TrueType Font (FTGL)
-    char*     fontPath {};                 // Path to font directory (FTGL & Bitmap fonts)
-    char*     fontFile {};                 // Font filename (FTGL)
-    bool      loaded {};                   // Font has been loaded
-    double charSpacing {};                 // holds our character spacing
-    double lineSpacing {};                 // holds our line spacing
+    static const int LUT_SIZE{256};
+    GLdouble  fWidth{}, fHeight{};       // Font size
+    GLuint    bWidth{}, bHeight{};       // Bitmap size
+    GLuint    b{};                       // Font call list base
+    unsigned char* pLUT{};               // Look-Up-Table (character translations)
+    void*     pFTGL{};                   // OpenGL TrueType Font (FTGL)
+    char*     fontPath{};                // Path to font directory (FTGL & Bitmap fonts)
+    char*     fontFile{};                // Font filename (FTGL)
+    bool      loaded{};                  // Font has been loaded
+    double charSpacing{};                // holds our character spacing
+    double lineSpacing{};                // holds our line spacing
 
 private:
     // slot table helper methods
     bool setSlotFontWidth(const base::Number* const);
     bool setSlotFontHeight(const base::Number* const);
     bool setSlotFontPosition(const base::List* const);
-    bool setSlotBitmapWidth(const base::Number* const);
-    bool setSlotBitmapHeight(const base::Number* const);
+    bool setSlotBitmapWidth(const base::Integer* const);
+    bool setSlotBitmapHeight(const base::Integer* const);
     bool setSlotFontPath(const base::String* const);
     bool setSlotFTGLFontFileName(const base::String* const);
     bool setSlotLookupTable(const base::List* const);

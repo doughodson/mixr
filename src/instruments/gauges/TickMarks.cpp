@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/gauges/TickMarks.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include <iostream>
 
@@ -19,7 +20,7 @@ END_SLOTTABLE(TickMarks)
 
 BEGIN_SLOT_MAP(TickMarks)
     ON_SLOT(1, setSlotTickMarkLength, base::Number)
-    ON_SLOT(2, setSlotQuantity,       base::Number)
+    ON_SLOT(2, setSlotQuantity,       base::Integer)
     ON_SLOT(3, setSlotGaugeLength,    base::Number)
     ON_SLOT(4, setSlotFlip,           base::Boolean)
     ON_SLOT(5, setTickGraphic,        graphics::Graphic)
@@ -119,9 +120,9 @@ bool TickMarks::setSlotTickMarkLength(const base::Number* const newLength)
 //------------------------------------------------------------------------------
 // setSlotQuantity() -- sets the number of tick marks
 //------------------------------------------------------------------------------
-bool TickMarks::setSlotQuantity(const base::Number* const newQ)
+bool TickMarks::setSlotQuantity(const base::Integer* const newQ)
 {
-    bool ok = true;
+    bool ok{true};
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
     return ok;
 }

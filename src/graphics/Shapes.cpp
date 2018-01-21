@@ -2,6 +2,7 @@
 #include "mixr/graphics/Shapes.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
@@ -25,7 +26,7 @@ END_SLOTTABLE(Circle)
 BEGIN_SLOT_MAP(Circle)
     ON_SLOT(1, setSlotRadius, base::Number)
     ON_SLOT(2, setSlotFilled, base::Boolean)
-    ON_SLOT(3, setSlotSlices, base::Number)
+    ON_SLOT(3, setSlotSlices, base::Integer)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Circle)
@@ -84,7 +85,7 @@ bool Circle::setSlotFilled(const base::Boolean* const x)
     return ok;
 }
 
-bool Circle::setSlotSlices(const base::Number* const x)
+bool Circle::setSlotSlices(const base::Integer* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setSlices(x->getInt());

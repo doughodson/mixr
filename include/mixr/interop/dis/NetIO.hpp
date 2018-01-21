@@ -9,7 +9,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class NetHandler; }
+namespace base { class Angle; class Integer; class NetHandler; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }
 namespace dis {
@@ -49,7 +49,7 @@ struct ActionResponsePDU_R;
 //    netInput    <base::NetHandler>     ! Network input handler
 //    netOutput   <base::NetHandler>     ! Network output handler
 //
-//    version     <base::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
+//    version     <base::Integer>        ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
 //                                       !   0 => Other
 //                                       !   1 => DIS PDU version 1.0 (May 92)
 //                                       !   2 => IEEE 1278-1993
@@ -59,9 +59,9 @@ struct ActionResponsePDU_R;
 //                                       !   6 => IEEE 1278.1A-1998
 //                                       !   7 => IEEE 1278.1 -- draft 15
 //
-//    siteID         <base::Number>      ! Site Identification (default: 1)
-//    applicationID  <base::Number>      ! Application Identification (default: 1)
-//    exerciseID     <base::Number>      ! Exercise Identification (default: 1)
+//    siteID         <base::Integer>     ! Site Identification (default: 1)
+//    applicationID  <base::Integer>     ! Application Identification (default: 1)
+//    exerciseID     <base::Integer>     ! Exercise Identification (default: 1)
 //
 //    maxTimeDR   <base::Time>           ! Max DR time (default: 5 seconds)
 //                <base::PairStream>     ! List of max DR times by kinds and domains (see note #4)
@@ -390,16 +390,16 @@ private:
 
    bool setSlotNetInput(base::NetHandler* const);                     // Network input handler
    bool setSlotNetOutput(base::NetHandler* const);                    // Network output handler
-   bool setSlotVersion(const base::Number* const);                    // DIS version
+   bool setSlotVersion(const base::Integer* const);                   // DIS version
    bool setSlotMaxTimeDR(const base::PairStream* const);              // Sets the max DR time(s) for selected entity types
    bool setSlotMaxPositionErr(const base::PairStream* const);         // Sets the max positional error(s) for selected entity types
    bool setSlotMaxOrientationErr(const base::PairStream* const);      // Sets the max orientation error(s) for selected entity types
    bool setSlotMaxAge(const base::PairStream* const);                 // Sets the max age(s) for selected entity types
    bool setSlotMaxEntityRange(const base::PairStream* const);         // Sets the max entity range(s) for selected entity types
    bool setSlotEmissionPduHandlers(base::PairStream* const);          // Sets the list of Electromagnetic Emission PDU handlers
-   bool setSlotSiteID(const base::Number* const);                     // Sets Site ID
-   bool setSlotApplicationID(const base::Number* const);              // Sets Application ID
-   bool setSlotExerciseID(const base::Number* const);                 // Sets Exercise ID
+   bool setSlotSiteID(const base::Integer* const);                    // Sets Site ID
+   bool setSlotApplicationID(const base::Integer* const);             // Sets Application ID
+   bool setSlotExerciseID(const base::Integer* const);                // Sets Exercise ID
 };
 
 }

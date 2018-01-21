@@ -11,6 +11,7 @@
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/models/WorldModel.hpp"
 
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/Identifier.hpp"
@@ -117,7 +118,7 @@ END_SLOTTABLE(NetIO)
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1, setSlotNetInput,            base::NetHandler)
    ON_SLOT(2, setSlotNetOutput,           base::NetHandler)
-   ON_SLOT(3, setSlotVersion,             base::Number)
+   ON_SLOT(3, setSlotVersion,             base::Integer)
 
    ON_SLOT(4, setSlotMaxTimeDR,           base::Time)
    ON_SLOT(4, setSlotMaxTimeDR,           base::PairStream)
@@ -136,9 +137,9 @@ BEGIN_SLOT_MAP(NetIO)
 
    ON_SLOT(9, setSlotEmissionPduHandlers, base::PairStream)
 
-   ON_SLOT(10, setSlotSiteID,             base::Number)
-   ON_SLOT(11, setSlotApplicationID,      base::Number)
-   ON_SLOT(12, setSlotExerciseID,         base::Number)
+   ON_SLOT(10, setSlotSiteID,             base::Integer)
+   ON_SLOT(11, setSlotApplicationID,      base::Integer)
+   ON_SLOT(12, setSlotExerciseID,         base::Integer)
 END_SLOT_MAP()
 
 NetIO::NetIO() : netInput(nullptr), netOutput(nullptr)
@@ -1393,11 +1394,11 @@ bool NetIO::setSlotNetOutput(base::NetHandler* const msg)
 }
 
 // DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
-bool NetIO::setSlotVersion(const base::Number* const num)
+bool NetIO::setSlotVersion(const base::Integer* const num)
 {
-    bool ok {};
+    bool ok{};
     if (num != nullptr) {
-        const int v {num->getInt()};
+        const int v{num->getInt()};
         if (v >= 0 && v < VERSION_MAX) {
             setVersion(static_cast<unsigned char>(v));
             ok = true;
@@ -1688,7 +1689,7 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
 }
 
 // Set Site ID
-bool NetIO::setSlotSiteID(const base::Number* const num)
+bool NetIO::setSlotSiteID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
@@ -1703,7 +1704,7 @@ bool NetIO::setSlotSiteID(const base::Number* const num)
 }
 
 // Set Application ID
-bool NetIO::setSlotApplicationID(const base::Number* const num)
+bool NetIO::setSlotApplicationID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
@@ -1718,7 +1719,7 @@ bool NetIO::setSlotApplicationID(const base::Number* const num)
 }
 
 // Set Exercise ID
-bool NetIO::setSlotExerciseID(const base::Number* const num)
+bool NetIO::setSlotExerciseID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {

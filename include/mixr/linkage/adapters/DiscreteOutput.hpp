@@ -5,7 +5,7 @@
 #include "mixr/linkage/adapters/AbstractAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class NetHandler; class Number; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class Integer; class NetHandler; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -14,9 +14,9 @@ namespace linkage {
 // Description:  Manage discrete outputs (DO).
 //
 // Slots:
-//      do           <Number>    ! Discrete Output location (IoData's DO channel)
-//      port         <Number>    ! Device port number (default: 0)
-//      channel      <Number>    ! Device channel (bit) number on the port
+//      do           <Integer>   ! Discrete Output location (IoData's DO channel)
+//      port         <Integer>   ! Device port number (default: 0)
+//      channel      <Integer>   ! Device channel (bit) number on the port
 //      inverted     <Boolean>   ! Inverted bit flag (default: false)
 //------------------------------------------------------------------------------
 class DiscreteOutput final: public AbstractAdapter
@@ -47,9 +47,9 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotLocation(const base::Number* const);
-   bool setSlotPort(const base::Number* const);
-   bool setSlotChannel(const base::Number* const);
+   bool setSlotLocation(const base::Integer* const);
+   bool setSlotPort(const base::Integer* const);
+   bool setSlotChannel(const base::Integer* const);
    bool setSlotInverted(const base::Boolean* const);
 };
 

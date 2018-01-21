@@ -5,7 +5,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include <iostream>
 
@@ -23,9 +23,9 @@ BEGIN_SLOTTABLE(DiscreteOutput)
 END_SLOTTABLE(DiscreteOutput)
 
 BEGIN_SLOT_MAP(DiscreteOutput)
-    ON_SLOT( 1, setSlotLocation, base::Number)
-    ON_SLOT( 2, setSlotPort,     base::Number)
-    ON_SLOT( 3, setSlotChannel,  base::Number)
+    ON_SLOT( 1, setSlotLocation, base::Integer)
+    ON_SLOT( 2, setSlotPort,     base::Integer)
+    ON_SLOT( 3, setSlotChannel,  base::Integer)
     ON_SLOT( 4, setSlotInverted, base::Boolean)
 END_SLOT_MAP()
 
@@ -63,7 +63,7 @@ void DiscreteOutput::processOutputsImpl(const base::AbstractIoData* const outDat
 }
 
 // location: Output array index (location)
-bool DiscreteOutput::setSlotLocation(const base::Number* const msg)
+bool DiscreteOutput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -76,7 +76,7 @@ bool DiscreteOutput::setSlotLocation(const base::Number* const msg)
 }
 
 // port: DiHandler's port number
-bool DiscreteOutput::setSlotPort(const base::Number* const msg)
+bool DiscreteOutput::setSlotPort(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -89,7 +89,7 @@ bool DiscreteOutput::setSlotPort(const base::Number* const msg)
 }
 
 // channel: DiHandler's channel (bit) number on the port
-bool DiscreteOutput::setSlotChannel(const base::Number* const msg)
+bool DiscreteOutput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

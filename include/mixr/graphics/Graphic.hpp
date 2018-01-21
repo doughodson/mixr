@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Boolean; class Color; class Identifier; class Transform; }
+namespace base { class Boolean; class Color; class Identifier; class Integer; class Transform; }
 namespace graphics {
 class Display;
 class Material;
@@ -53,8 +53,7 @@ class Material;
 //                                      !     (default: false)
 //    subcomponentsFirst <Boolean>      ! Flag: Draw component graphics first
 //                                      ! (default: draw own graphics first)
-//    selectName         <Number>       ! GL Select Buffer name
-//                                      ! (see glPushName())  (unsigned integer) (default: 0)
+//    selectName         <Integer>      ! GL Select Buffer name (default: 0)
 //    texture            <Identifier>   ! Texture name (default: 0)
 //    scissorX           <Number>       ! Left edge of the scissor box (World coord) (default: 0)
 //    scissorY           <Number>       ! Bottom edge of the scissor box (World coord) (default: 0)
@@ -62,7 +61,7 @@ class Material;
 //    scissorHeight      <Number>       ! How far up do we scissor (World coord) (default: 0)
 //    stipple            <Boolean>      ! Line stippling flag - only used for line, lineloop, and circle when not filled.
 //    stippleFactor      <Number>       ! Line stipple factor, specifies a multiplier for each bit in line stipple pattern (default: 1)
-//    stipplePattern     <Number>       ! Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535) (default: 0xFFFF)
+//    stipplePattern     <Integer>      ! Specifies a 16 bit Line stipple pattern; range 0x0000 (0) .. 0xFFFF (65535) (default: 0xFFFF)
 //    visible            <Boolean>      ! Visibility flag
 //    mask               <Boolean>      ! Color Masking
 //    material           <Number>       ! Sets the current material
@@ -392,7 +391,7 @@ public:
 protected:
 
    // event handlers
-   virtual bool onSetTextureId(const base::Number* const);
+   virtual bool onSetTextureId(const base::Integer* const);
    virtual bool onSetLineWidthEvent(const base::Number* const);
    virtual bool onSetFlashRateEvent(const base::Number* const);
    virtual bool onSetVisibilityEvent(const base::Boolean* const);
@@ -466,7 +465,7 @@ private:
    bool setSlotColor(const base::Identifier* const);
    bool setSlotFlashRate(const base::Number* const);
    bool setSlotLineWidth(const base::Number* const);
-   bool setSlotSelectName(const base::Number* const);
+   bool setSlotSelectName(const base::Integer* const);
    bool setSlotTransformList(base::PairStream*);      // Set the transformation list
    bool setSlotSingleTransform(base::Transform* const);
    bool setSlotNoDisplayList(const base::Boolean* const);
@@ -481,8 +480,8 @@ private:
    bool setSlotScissorWidth(const base::Number* const);
    bool setSlotScissorHeight(const base::Number* const);
    bool setSlotStippling(const base::Boolean* const);
-   bool setSlotStippleFactor(const base::Number* const);
-   bool setSlotStipplePattern(const base::Number* const);
+   bool setSlotStippleFactor(const base::Integer* const);
+   bool setSlotStipplePattern(const base::Integer* const);
    bool setSlotVisibility(const base::Boolean* const);
    bool setSlotTranslateLight(base::PairStream* const);
 };

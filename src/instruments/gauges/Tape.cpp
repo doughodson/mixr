@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/gauges/Tape.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <iostream>
@@ -23,9 +24,9 @@ BEGIN_SLOTTABLE(Tape)
 END_SLOTTABLE(Tape)
 
 BEGIN_SLOT_MAP(Tape)
-    ON_SLOT(1, setSlotRange,     base::Number)
+    ON_SLOT(1, setSlotRange,     base::Integer)
     ON_SLOT(2, setSlotHeight,    base::Number)
-    ON_SLOT(3, setSlotIncrement, base::Number)
+    ON_SLOT(3, setSlotIncrement, base::Integer)
     ON_SLOT(4, setSlotVertical,  base::Boolean)
     ON_SLOT(5, setSlotMaxNum,    base::Number)
     ON_SLOT(6, setSlotMinNum,    base::Number)
@@ -78,11 +79,10 @@ void Tape::copyData(const Tape& org, const bool)
     convert = org.convert;
 }
 
-// SLOT Functions
 //------------------------------------------------------------------------------
 // setSlotRange() - set the range of our data
 //------------------------------------------------------------------------------
-bool Tape::setSlotRange(const base::Number* const x)
+bool Tape::setSlotRange(const base::Integer* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setRange(x->getInt());
@@ -102,7 +102,7 @@ bool Tape::setSlotHeight(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotIncrement() - increment of our tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotIncrement(const base::Number* const x)
+bool Tape::setSlotIncrement(const base::Integer* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setIncrement(x->getInt());

@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Object; class String; class Float; class Integer; class Number; }
+namespace base { class Boolean; class Object; class String; class Float; class Integer; }
 namespace graphics {
 class ReformatScanner;
 
@@ -18,9 +18,9 @@ class ReformatScanner;
 //
 // Slots:
 //   value           <Float>     ! Value to be displayed (default: 0.0)
-//   value           <Number>    ! Value to be displayed
-//   maxValue        <Float>     ! Maximum value that can be displayed (default: UNDEFINED_VALUE)
-//   maxValue        <Number>    ! Maximum value that can be displayed
+//   value           <Integer>   ! Value to be displayed
+//   maxValue        <Float>     ! Maximum floating point value that can be displayed (default: UNDEFINED_VALUE)
+//   maxValue        <Integer>   ! Maximum integer value that can be displayed
 //   format          <String>    ! Example format text (default: '\0')
 //   plusChar        <String>    ! Positive value character (default: '\0')
 //   minusChar       <String>    ! Negative value character (default: '\0')
@@ -96,34 +96,34 @@ protected:
    virtual void redisplay();
    virtual void reformat(const char* const example);
 
-   static const std::size_t CBUF_LENGTH {32};    // Max length of cbuf
-   static const std::size_t FORMAT_LENGTH {32};  // Max length of format
+   static const std::size_t CBUF_LENGTH{32};    // Max length of cbuf
+   static const std::size_t FORMAT_LENGTH{32};  // Max length of format
 
-   char cbuf[CBUF_LENGTH] {};       // buffer
-   char format[FORMAT_LENGTH] {};   // Current format string
+   char cbuf[CBUF_LENGTH]{};       // buffer
+   char format[FORMAT_LENGTH]{};   // Current format string
 
-   char plusChar {};                // Positive value character
-   char minusChar {};               // Negative value character
-   char dpChar {};                  // Decimal point character
-   char undefinedChar {'-'};        // Undefined value character
-   char overflowChar {'*'};         // Overflow character
-   bool postSign {};                // If true, sign char is at end of string
+   char plusChar{};                // Positive value character
+   char minusChar{};               // Negative value character
+   char dpChar{};                  // Decimal point character
+   char undefinedChar{'-'};        // Undefined value character
+   char overflowChar{'*'};         // Overflow character
+   bool postSign{};                // If true, sign char is at end of string
 
    static ReformatScanner* reformatter;      // Generates format statements by example
 
 private:
-   double num {};                            // Value as double
-   double maxNum {base::UNDEFINED_VALUE};    // Maximum value
-   double maxValid {base::UNDEFINED_VALUE};  // Maximum valid input value
-   double minValid {base::UNDEFINED_VALUE};  // Minimum valid input value
+   double num{};                             // Value as double
+   double maxNum{base::UNDEFINED_VALUE};     // Maximum value
+   double maxValid{base::UNDEFINED_VALUE};   // Maximum valid input value
+   double minValid{base::UNDEFINED_VALUE};   // Minimum valid input value
    bool blankZero{};                         // Display blank instead of zero value
 
 private:
    // slot table helper methods
    bool setSlotFloatToBeDisplayed(const base::Float* const);
-   bool setSlotNumberToBeDisplayed(const base::Number* const);
+   bool setSlotIntegerToBeDisplayed(const base::Integer* const);
    bool setSlotFloatMaxValue(const base::Float* const);
-   bool setSlotNumberMaxValue(const base::Number* const);
+   bool setSlotIntegerMaxValue(const base::Integer* const);
    bool setSlotExampleFormatText(const base::String* const);
    bool setSlotPlusChar(const base::String* const);
    bool setSlotMinusChar(const base::String* const);

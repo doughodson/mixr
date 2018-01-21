@@ -9,6 +9,7 @@ namespace mixr {
 namespace base {
 class Boolean;
 class Identifier;
+class Integer;
 class Number;
 class Pair;
 class PairStream;
@@ -29,7 +30,7 @@ class String;
 //                         <PairStream> ! List of child components.
 //
 //    select               <String>     ! Selects a child component by name (default: 0)
-//                         <Number>     ! Selects a child component by index (default: 0)
+//                         <Integer>    ! Selects a child component by index (default: 0)
 //
 //    enableTimingStats    <Boolean>    ! Enable/disable the timing statistics for updateTC() (default: false)
 //
@@ -38,14 +39,14 @@ class String;
 //    freeze               <Boolean>    ! Freeze flag: true- frozen, false- unfrozen; (default: false)
 //
 //    enableMessageType    <Identifier> ! Enable message type { warning info debug user data }
-//                         <Number>     ! Enable message type by number (e.g., 0x0100)
+//                         <Integer>    ! Enable message type by number (e.g., 0x0100)
 //
 //    disableMessageType   <Identifier> ! Disable message type { warning, info, debug, data, user }
-//                         <Number>     ! Disable message type by number (e.g., 0x0100) (default: 0)
+//                         <Integer>    ! Disable message type by number (e.g., 0x0100) (default: 0)
 //
 // Events:
 //    SELECT          <String>    ! Select a child component by name.
-//    SELECT          <Number>    ! Select a child component by index.
+//    SELECT          <Integer>   ! Select a child component by index.
 //    RESET_EVENT     <>          ! Reset the component.
 //    FREEZE_EVENT    <>          ! Freeze this component.
 //    FREEZE_EVENT    <Boolean>   ! Freeze this component if arg is true.
@@ -153,7 +154,7 @@ class String;
 //          only the selected component will be updated.  A component can be pre-
 //          selected by name or index number using the 'select' slot.
 //
-//       select(Number* index)
+//       select(Integer* index)
 //          See "select(String* name)" description
 //
 //       bool isComponentSelected()
@@ -375,7 +376,7 @@ protected:
 
    virtual bool setSelectionName(const Object* const);   // Name (or number) of component to select
    virtual bool select(const String* const name);        // Select component by name
-   virtual bool select(const Number* const num);         // Select component by number
+   virtual bool select(const Integer* const num);        // Select component by integer value
 
    // processComponents() -- process our new components list;
    //   -- Add the components from the input list, 'list', to a new list
@@ -408,14 +409,14 @@ private:
    bool setSlotComponent(PairStream* const multiple);        // Sets the components list
    bool setSlotComponent(Component* const single);           // Sets a single component
    bool setSlotSelect(const String* const name)              { return select(name); }
-   bool setSlotSelect(const Number* const num)               { return select(num);  }
+   bool setSlotSelect(const Integer* const num)              { return select(num);  }
    bool setSlotEnableTimingStats(const Boolean* const);      // Sets the timing enabled flag
    bool setSlotPrintTimingStats(const Boolean* const);       // Sets the print timing stats flag
    bool setSlotFreeze(const Boolean* const);                 // Sets the freeze flag
    bool setSlotEnableMsgType(const Identifier* const);       // Enables message types by name
-   bool setSlotEnableMsgType(const Number* const);           // Enables message types by bit
+   bool setSlotEnableMsgType(const Integer* const);          // Enables message types by bit
    bool setSlotDisableMsgType(const Identifier* const);      // Disables message types by name
-   bool setSlotDisableMsgType(const Number* const);          // Disables message types by bit
+   bool setSlotDisableMsgType(const Integer* const);         // Disables message types by bit
 };
 
 }

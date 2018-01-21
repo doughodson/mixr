@@ -7,7 +7,7 @@
 #include <vector>
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Integer; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -22,10 +22,10 @@ namespace linkage {
 //
 // Factory name: IoData
 // Slots:
-//    numAI    <Number>   ! Number of analog inputs (AIs)
-//    numAO    <Number>   ! Number of analog outputs (AOs)
-//    numDI    <Number>   ! Number of discrete inputs (DIs)
-//    numDO    <Number>   ! Number of discrete outputs (DOs)
+//    numAI    <Integer>   ! Number of analog inputs (AIs)
+//    numAO    <Integer>   ! Number of analog outputs (AOs)
+//    numDI    <Integer>   ! Number of discrete inputs (DIs)
+//    numDO    <Integer>   ! Number of discrete outputs (DOs)
 //
 //------------------------------------------------------------------------------
 class IoData : public base::AbstractIoData
@@ -72,10 +72,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNumAI(const base::Number* const);
-   bool setSlotNumAO(const base::Number* const);
-   bool setSlotNumDI(const base::Number* const);
-   bool setSlotNumDO(const base::Number* const);
+   bool setSlotNumAI(const base::Integer* const);
+   bool setSlotNumAO(const base::Integer* const);
+   bool setSlotNumDI(const base::Integer* const);
+   bool setSlotNumDO(const base::Integer* const);
 };
 
 }

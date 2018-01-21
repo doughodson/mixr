@@ -1,7 +1,7 @@
 
 #include "mixr/linkage/generators/DiscreteInputFixed.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(DiscreteInputFixed)
 END_SLOTTABLE(DiscreteInputFixed)
 
 BEGIN_SLOT_MAP(DiscreteInputFixed)
-   ON_SLOT( 1, setSlotChannel,   base::Number)
+   ON_SLOT( 1, setSlotChannel,   base::Integer)
    ON_SLOT( 2, setSlotSignal,    base::String)
 END_SLOT_MAP()
 
@@ -54,7 +54,7 @@ void DiscreteInputFixed::processInputsImpl(const double dt, base::AbstractIoData
 // Slot Functions
 //------------------------------------------------------------------------------
 
-bool DiscreteInputFixed::setSlotChannel(const base::Number* const msg)
+bool DiscreteInputFixed::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

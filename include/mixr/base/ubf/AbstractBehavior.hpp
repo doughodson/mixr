@@ -6,8 +6,8 @@
 
 namespace mixr {
 namespace base {
+class Integer;
 namespace ubf {
-
 class AbstractState;
 class AbstractAction;
 
@@ -18,7 +18,7 @@ class AbstractAction;
 //
 // Factory name: UbfBehavior
 // Slots:
-//    vote     <Number>    ! default vote/weight value for actions generated
+//    vote     <Integer>   ! default vote/weight value for actions generated
 //                         ! by this behavior
 //------------------------------------------------------------------------------
 class AbstractBehavior : public base::Component
@@ -40,7 +40,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotVote(const base::Number* const);
+   bool setSlotVote(const base::Integer* const);
 };
 
 inline void AbstractBehavior::setVote(const int x)    { vote = x; }

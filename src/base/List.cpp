@@ -229,7 +229,8 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
         const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
-            values[n++] = pp->getInt();
+            //values[n++] = pp->getInt(); - revised by DDH
+            values[n++] = static_cast<int>(pp->getDouble());
         } else {
             // when we do not have a number
             values[n++] = 0;

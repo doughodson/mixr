@@ -30,7 +30,7 @@
 #include "mixr/base/network/UdpMulticastHandler.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -54,13 +54,13 @@ BEGIN_SLOTTABLE(UdpMulticastHandler)
 
     "ttl",                      // 2) Multicast Time-To-Live (TTL) value; default: 1
 
-    "loopback",                 // 3) Multicast Loopback flag; default: 1 (on)
+    "loopback",                 // 3) Multicast Loopback flag; default: true (on)
 
 END_SLOTTABLE(UdpMulticastHandler)
 
 BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(1, setSlotMulticastGroup, String)
-    ON_SLOT(2, setSlotTTL,            Number)
+    ON_SLOT(2, setSlotTTL,            Integer)
     ON_SLOT(3, setSlotLoopback,       Boolean)
 END_SLOT_MAP()
 
@@ -255,7 +255,7 @@ bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
 }
 
 // ttl: Time-To-Live value
-bool UdpMulticastHandler::setSlotTTL(const Number* const msg)
+bool UdpMulticastHandler::setSlotTTL(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

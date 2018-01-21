@@ -1,12 +1,10 @@
 
 #include "mixr/graphics/fonts/AbstractFtglFont.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
 namespace graphics {
-
-const int AbstractFtglFont::DEFAULT_FACE_SIZE {1};        // one unit by unit (in this case, inches)
 
 IMPLEMENT_PARTIAL_SUBCLASS(AbstractFtglFont, "AbstractFtglFont")
 EMPTY_DELETEDATA(AbstractFtglFont)
@@ -16,7 +14,7 @@ BEGIN_SLOTTABLE(AbstractFtglFont)
 END_SLOTTABLE(AbstractFtglFont)
 
 BEGIN_SLOT_MAP(AbstractFtglFont)
-    ON_SLOT(1, setSlotFaceSize, base::Number)
+    ON_SLOT(1, setSlotFaceSize, base::Integer)
 END_SLOT_MAP()
 
 AbstractFtglFont::AbstractFtglFont()
@@ -53,7 +51,7 @@ void AbstractFtglFont::copyData(const AbstractFtglFont& org, const bool)
     fSize = org.fSize;
 }
 
-bool AbstractFtglFont::setSlotFaceSize(const base::Number* const faceSize)
+bool AbstractFtglFont::setSlotFaceSize(const base::Integer* const faceSize)
 {
     // get our new face size, else we return to a default face size
     if (faceSize != nullptr)

@@ -12,6 +12,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -67,16 +68,16 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 6, setSlotTimeCriticalRate,      base::Number)
    ON_SLOT( 7, setSlotTimeCriticalPri,       base::Number)
-   ON_SLOT( 8, setSlotTimeCriticalStackSize, base::Number)
-   ON_SLOT( 9, setSlotFastForwardRate,       base::Number)
+   ON_SLOT( 8, setSlotTimeCriticalStackSize, base::Integer)
+   ON_SLOT( 9, setSlotFastForwardRate,       base::Integer)
 
    ON_SLOT(10, setSlotNetworkRate,           base::Number)
    ON_SLOT(11, setSlotNetworkPri,            base::Number)
-   ON_SLOT(12, setSlotNetworkStackSize,      base::Number)
+   ON_SLOT(12, setSlotNetworkStackSize,      base::Integer)
 
    ON_SLOT(13, setSlotBackgroundRate,        base::Number)
    ON_SLOT(14, setSlotBackgroundPri,         base::Number)
-   ON_SLOT(15, setSlotBackgroundStackSize,   base::Number)
+   ON_SLOT(15, setSlotBackgroundStackSize,   base::Integer)
 
    ON_SLOT(16, setSlotStartupResetTime,      base::Time)
    ON_SLOT(17, setSlotEnableUpdateTimers,    base::Boolean)
@@ -1059,7 +1060,7 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
     return ok;
 }
 
-bool Station::setSlotTimeCriticalStackSize(const base::Number* const num)
+bool Station::setSlotTimeCriticalStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1109,7 +1110,7 @@ bool Station::setSlotNetworkPri(const base::Number* const num)
     return ok;
 }
 
-bool Station::setSlotNetworkStackSize(const base::Number* const num)
+bool Station::setSlotNetworkStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1159,7 +1160,7 @@ bool Station::setSlotBackgroundPri(const base::Number* const num)
     return ok;
 }
 
-bool Station::setSlotBackgroundStackSize(const base::Number* const num)
+bool Station::setSlotBackgroundStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1203,7 +1204,7 @@ bool Station::setFastForwardRate(const unsigned int r)
 //------------------------------------------------------------------------------
 // Sets the fast forward rate
 //------------------------------------------------------------------------------
-bool Station::setSlotFastForwardRate(const base::Number* const msg)
+bool Station::setSlotFastForwardRate(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

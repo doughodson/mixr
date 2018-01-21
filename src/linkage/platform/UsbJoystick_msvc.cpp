@@ -1,7 +1,7 @@
 
 #include "UsbJoystick_msvc.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/util/platform_api.hpp"
 
 #include <iostream>
@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(UsbJoystick)
 END_SLOTTABLE(UsbJoystick)
 
 BEGIN_SLOT_MAP(UsbJoystick)
-   ON_SLOT(1, setSlotDeviceIndex, base::Number)
+   ON_SLOT(1, setSlotDeviceIndex, base::Integer)
 END_SLOT_MAP()
 
 UsbJoystick::UsbJoystick()
@@ -215,7 +215,7 @@ bool UsbJoystick::setInputScaled(const int cn, const double raw)
    return ok;
 }
 
-bool UsbJoystick::setSlotDeviceIndex(const base::Number* const msg)
+bool UsbJoystick::setSlotDeviceIndex(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

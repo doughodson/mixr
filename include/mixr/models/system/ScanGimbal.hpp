@@ -262,7 +262,7 @@ private:
    bool setSlotSearchVolume(base::List* const);
    bool setSlotRefPosition(const base::List* const);
    bool setSlotBarSpacing(const base::Number* const);
-   bool setSlotNumBars(const base::Number* const);
+   bool setSlotNumBars(const base::Integer* const);
    bool setSlotRevPerSec(const base::Number* const);
    bool setSlotScanRadius(const base::Number* const);
    bool setSlotPRVertices(const base::PairStream* const);

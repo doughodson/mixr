@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Identifier; class Number; class String; }
+namespace base { class Identifier; class Integer; class String; }
 namespace models { class Player; }
 namespace cigi {
 
@@ -20,7 +20,7 @@ namespace cigi {
 // Slots:
 //     factoryName   <Identifier>     ! Reference factory name (default: 0)
 //     typeName      <String>         ! Reference type name (default: 0)
-//     entityId      <Number>         ! Entity type ID number (int) (default: 0)
+//     entityId      <Integer>        ! Entity type ID number (int) (default: 0)
 //
 // Examples:
 //    ( Player2CigiMap  factoryName: Aircraft  typeName: "B-1B"  entityId: 203 )
@@ -74,7 +74,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotEntityId(const base::Number* const);            // Sets the IG entity type number
+    bool setSlotEntityId(const base::Integer* const);           // Sets the IG entity type number
     bool setSlotRefFactoryName(const base::Identifier* const);  // Sets the Reference factory name
     bool setSlotRefTypeName(const base::String* const);         // Sets the Reference type name
 };
