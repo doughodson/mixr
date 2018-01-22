@@ -379,6 +379,28 @@ base library (mixr_base)
       1) This class has been refactored and it now based on Object.  It is
          no longer a subclass to Number.
 
+   Complex class
+      1) This class in no longer a subclass of Number.  Even through complex
+         numbers are obviously 'numbers', they are usually treated uniquely
+         different in mathematics and in C++.
+      2) This class is primarily used to enable the creation of complex
+         values as part of a configuration specification (i.e., an EDL
+         file).  With the availability of std::complex as part of the C++
+         standard library, there is no longer a need to maintain our own
+         unique data type.  Therefore, much of the infrastructure to do
+         that has been removed.
+      3) The accessor getComplex() has been added to return a reference to
+         the double valued std::complex representation (i.e., complex<double>&).
+      4) The special functions listed below have been deleted as well, but
+         are available within the standard library; a simple mapping is as
+         follows:
+
+             zExp()  --> std::exp(std::complex)
+             zLog()  --> std::log(std::complex)
+             zPow()  --> std::pow(std::complex)
+             zConj() --> std::conj(std::complex)
+             zInv()  --> 1.0/std::complex
+
    Component class
       1) Slot parameters 'enableTimingStats', 'printTimingStats', and
          'freeze' now accept a Boolean

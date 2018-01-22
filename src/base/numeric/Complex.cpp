@@ -1,10 +1,7 @@
 
 #include "mixr/base/numeric/Complex.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -13,11 +10,13 @@ IMPLEMENT_SUBCLASS(Complex, "Complex")
 EMPTY_DELETEDATA(Complex)
 
 BEGIN_SLOTTABLE(Complex)
-   "imag",      // 1: imaginary component
+   "real",      // 1: real component
+   "imag",      // 2: imaginary component
 END_SLOTTABLE(Complex)
 
 BEGIN_SLOT_MAP(Complex)
-   ON_SLOT(1, setSlotImaginary, Number)
+   ON_SLOT(1, setSlotReal,      Number)
+   ON_SLOT(2, setSlotImaginary, Number)
 END_SLOT_MAP()
 
 Complex::Complex()
@@ -25,12 +24,12 @@ Complex::Complex()
    STANDARD_CONSTRUCTOR()
 }
 
-Complex::Complex(const double r) : Number(r)
+Complex::Complex(const double r): value(r)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Complex::Complex(const double r, const double i) : Number(r), imag(i)
+Complex::Complex(const double r, const double i) : value(r, i)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -38,61 +37,19 @@ Complex::Complex(const double r, const double i) : Number(r), imag(i)
 void Complex::copyData(const Complex& org, const bool)
 {
    BaseClass::copyData(org);
-
-   imag = org.imag;
+   value = org.value;
 }
 
-//------------------------------------------------------------------------------
-// Output Functions
-//------------------------------------------------------------------------------
-void Complex::showComplex(const int decpnt) const
+bool Complex::setSlotReal(const Number* const msg)
 {
-   std::ios_base::fmtflags oldFmtFlgs =  std::cout.flags();
-   std::streamsize oldprec = std::cout.precision();
-
-   std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-   std::cout << getReal() << " + j*" << getImag() << std::endl;
-
-   std::cout.setf(oldFmtFlgs);
-   std::cout << std::setprecision(oldprec);
+    value.real(msg->getDouble());
+    return true;
 }
 
-void Complex::showPhasor(const int decpnt) const
-{
-   std::ios_base::fmtflags oldFmtFlgs =  std::cout.flags();
-   std::streamsize oldprec = std::cout.precision();
-
-   std::cout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-   std::cout << "<" << this->getMag() << ", " << this->getArg() << ">" << std::endl;
-
-   std::cout.setf(oldFmtFlgs);
-   std::cout << std::setprecision(oldprec);
-}
-
-std::ostream& operator<<(std::ostream& sout, const Complex& z)
-{
-   std::ios_base::fmtflags oldFmtFlgs =  sout.flags();
-   std::streamsize oldprec = sout.precision();
-
-   const int decpnt = 2;
-   sout << std::setprecision(decpnt) << std::setiosflags(std::ios::fixed);
-   sout << z.getReal() << " + j*" << z.getImag();
-
-   sout.setf(oldFmtFlgs);
-   sout << std::setprecision(oldprec);
-
-   return sout;
-}
-
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
 bool Complex::setSlotImaginary(const Number* const msg)
 {
-    double value{msg->getDouble()};
-    const bool ok{setImag( value )};
-    if (!ok) std::cerr << "Complex::setSlotImaginary: invalid entry(" << value << ")" << std::endl;
-    return ok;
+    value.imag(msg->getDouble());
+    return true;
 }
 
 }
