@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Distance; class Integer; class LatLon; class Number; }
+namespace base { class Distance; class Integer; class Latitude; class Longitude; class Number; }
 namespace models {
 class OnboardComputer;
 class Sar;
@@ -73,11 +73,11 @@ private:
 // Description: SAR capture, ATR run and Image download
 // Factory name: ActionImagingSar
 // Slots:
-//   sarLatitude   <LatLon>   ! Target's latitude (LatLon) (default: 0)
-//   sarLongitude  <LatLon>   ! Target's longitude (LatLon) (default: 0)
-//   sarElevation  <Distance> ! Target's elevation (Distance) (default: 0)
-//   resolution    <Distance> ! Image (pixel) resolution   (Distance) (default: 3)
-//   imageSize     <Integer>  ! Image size: height & width (pixels) (default: 512)
+//   sarLatitude   <Latitude>  ! Target's latitude (default: 0)
+//   sarLongitude  <Longitude> ! Target's longitude (default: 0)
+//   sarElevation  <Distance>  ! Target's elevation (Distance) (default: 0)
+//   resolution    <Distance>  ! Image (pixel) resolution (default: 3)
+//   imageSize     <Integer>   ! Image size: height & width (pixels) (default: 512)
 //
 //------------------------------------------------------------------------------
 class ActionImagingSar : public Action
@@ -125,8 +125,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotSarLat(const base::LatLon* const);
-   bool setSlotSarLon(const base::LatLon* const);
+   bool setSlotSarLat(const base::Latitude* const);
+   bool setSlotSarLon(const base::Longitude* const);
    bool setSlotSarElev(const base::Distance* const);
    bool setSlotResolution(const base::Distance* const);
    bool setSlotImageSize(const base::Integer* const);
@@ -139,10 +139,10 @@ private:
 //
 // Factory name: ActionWeaponRelease
 // Slots:
-//   targetLatitude   <LatLon>  ! Target's latitude (LatLon) (default: 0)
-//   targetLongitude  <LatLon>  ! Target's longitude (LatLon) (default: 0)
-//   targetElevation  <Number>  ! Target's elevation (feet) (default: 0)
-//   station          <Number>  ! Station number to use (default: 0)
+//   targetLatitude   <Latitude>  ! Target's latitude (default: 0)
+//   targetLongitude  <Longitude> ! Target's longitude (default: 0)
+//   targetElevation  <Number>    ! Target's elevation (feet) (default: 0)
+//   station          <Number>    ! Station number to use (default: 0)
 //
 //------------------------------------------------------------------------------
 class ActionWeaponRelease : public Action
@@ -172,8 +172,8 @@ private:
    unsigned int station {};       // station number
 
 private:
-   bool setSlotTargetLat(const base::LatLon*);
-   bool setSlotTargetLon(const base::LatLon*);
+   bool setSlotTargetLat(const base::Latitude*);
+   bool setSlotTargetLon(const base::Longitude*);
    bool setSlotTargetElev(const base::Number*);
    bool setSlotStationNum(const base::Integer*);
 };

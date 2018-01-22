@@ -30,8 +30,9 @@
 #include "mixr/simulation/AbstractNib.hpp"
 
 #include "mixr/base/Identifier.hpp"
+#include "mixr/base/Latitude.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/LatLon.hpp"
+#include "mixr/base/Longitude.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/String.hpp"
@@ -64,8 +65,8 @@ BEGIN_SLOTTABLE(Player)
    "initPosition",      //  4) Initial Position Vector: meters [ north east down ]
 
    // Player's initial position in latitude, longitude and altitude (from initAlt above)
-   "initLatitude",      //  5) Initial latitude      (base::Angle, base::LatLon or degrees)
-   "initLongitude",     //  6) Initial longitude     (base::Angle, base::LatLon or degrees)
+   "initLatitude",      //  5) Initial latitude      (base::Angle, base::Latitude or degrees)
+   "initLongitude",     //  6) Initial longitude     (base::Angle, base::Longitude or degrees)
 
    // Player's initial geocentric position
    "initGeocentric",    //  7) Initial geocentric position vector [ x y z ] (meters)
@@ -125,11 +126,11 @@ BEGIN_SLOT_MAP(Player)
 
    ON_SLOT( 4, setSlotInitPosition,       base::List)
 
-   ON_SLOT( 5, setSlotInitLat,            base::LatLon)
+   ON_SLOT( 5, setSlotInitLat,            base::Latitude)
    ON_SLOT( 5, setSlotInitLat,            base::Angle)
    ON_SLOT( 5, setSlotInitLat,            base::Number)
 
-   ON_SLOT( 6, setSlotInitLon,            base::LatLon)
+   ON_SLOT( 6, setSlotInitLon,            base::Longitude)
    ON_SLOT( 6, setSlotInitLon,            base::Angle)
    ON_SLOT( 6, setSlotInitLon,            base::Number)
 
@@ -3503,7 +3504,7 @@ bool Player::setSlotInitPosition(const base::List* const msg)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::LatLon* const msg)
+bool Player::setSlotInitLat(const base::Latitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -3548,7 +3549,7 @@ bool Player::setSlotInitLat(const base::Number* const msg)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::LatLon* const msg)
+bool Player::setSlotInitLon(const base::Longitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

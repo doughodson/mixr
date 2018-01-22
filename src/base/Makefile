@@ -108,9 +108,10 @@ OBJS =  \
 	factory.o \
 	FileReader.o \
 	Identifier.o \
-	LatLon.o \
+	Latitude.o \
 	List.o \
 	Locus.o \
+	Longitude.o \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \

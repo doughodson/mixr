@@ -14,8 +14,10 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/LatLon.hpp"
 #include "mixr/base/units/Distances.hpp"
+
+#include "mixr/base/Latitude.hpp"
+#include "mixr/base/Longitude.hpp"
 
 namespace mixr {
 namespace models {
@@ -153,16 +155,16 @@ bool Action::execute(base::Component* actor)
 IMPLEMENT_SUBCLASS(ActionImagingSar,"ActionImagingSar")
 
 BEGIN_SLOTTABLE(ActionImagingSar)
-   "sarLatitude",    //  1) Target's latitude (LatLon)
-   "sarLongitude",   //  2) Target's longitude (LatLon)
+   "sarLatitude",    //  1) Target's latitude
+   "sarLongitude",   //  2) Target's longitude
    "sarElevation",   //  3) Target's elevation (Distance) (default: 0)
    "resolution",     //  4) Image (pixel) resolution   (Distance) (default: 1 meter)
    "imageSize",      //  5) Image size: height & width (pixels) (default: 512)
 END_SLOTTABLE(ActionImagingSar)
 
 BEGIN_SLOT_MAP(ActionImagingSar)
-    ON_SLOT(1, setSlotSarLat,     base::LatLon)
-    ON_SLOT(2, setSlotSarLon,     base::LatLon)
+    ON_SLOT(1, setSlotSarLat,     base::Latitude)
+    ON_SLOT(2, setSlotSarLon,     base::Longitude)
     ON_SLOT(3, setSlotSarElev,    base::Distance)
     ON_SLOT(4, setSlotResolution, base::Distance)
     ON_SLOT(5, setSlotImageSize,  base::Integer)
@@ -348,7 +350,7 @@ void ActionImagingSar::setSarSystem(Sar* const p)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool ActionImagingSar::setSlotSarLat(const base::LatLon* const msg)
+bool ActionImagingSar::setSlotSarLat(const base::Latitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -357,7 +359,7 @@ bool ActionImagingSar::setSlotSarLat(const base::LatLon* const msg)
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarLon(const base::LatLon* const msg)
+bool ActionImagingSar::setSlotSarLon(const base::Longitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -425,15 +427,15 @@ IMPLEMENT_SUBCLASS(ActionWeaponRelease,"ActionWeaponRelease")
 EMPTY_DELETEDATA(ActionWeaponRelease)
 
 BEGIN_SLOTTABLE(ActionWeaponRelease)
-   "targetLatitude",    //  1) Target's latitude (LatLon)
-   "targetLongitude",   //  2) Target's longitude (LatLon)
+   "targetLatitude",    //  1) Target's latitude
+   "targetLongitude",   //  2) Target's longitude
    "targetElevation",   //  3) Target's elevation (feet)
    "station",           //  4) Station number to use (default to next available)
 END_SLOTTABLE(ActionWeaponRelease)
 
 BEGIN_SLOT_MAP(ActionWeaponRelease)
-    ON_SLOT(1, setSlotTargetLat,  base::LatLon)
-    ON_SLOT(2, setSlotTargetLon,  base::LatLon)
+    ON_SLOT(1, setSlotTargetLat,  base::Latitude)
+    ON_SLOT(2, setSlotTargetLon,  base::Longitude)
     ON_SLOT(3, setSlotTargetElev, base::Number)
     ON_SLOT(4, setSlotStationNum, base::Integer)
 END_SLOT_MAP()
@@ -519,7 +521,7 @@ bool ActionWeaponRelease::setStation(const unsigned int num)
 }
 
 // Slot functions
-bool ActionWeaponRelease::setSlotTargetLat(const base::LatLon* newLat)
+bool ActionWeaponRelease::setSlotTargetLat(const base::Latitude* newLat)
 {
     bool ok{};
     if (newLat != nullptr) {
@@ -528,7 +530,7 @@ bool ActionWeaponRelease::setSlotTargetLat(const base::LatLon* newLat)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotTargetLon(const base::LatLon* newLon)
+bool ActionWeaponRelease::setSlotTargetLon(const base::Longitude* newLon)
 {
     bool ok{};
     if (newLon != nullptr) {

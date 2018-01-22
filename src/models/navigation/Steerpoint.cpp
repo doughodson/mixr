@@ -8,11 +8,13 @@
 #include "mixr/terrain/Terrain.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/LatLon.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+
+#include "mixr/base/Latitude.hpp"
+#include "mixr/base/Longitude.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -50,10 +52,10 @@ END_SLOTTABLE(Steerpoint)
 BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 1, setSlotSteerpointType, base::Identifier)
 
-    ON_SLOT( 2, setSlotLatitude,       base::LatLon)
+    ON_SLOT( 2, setSlotLatitude,       base::Latitude)
     ON_SLOT( 2, setSlotLatitude,       base::Number)
 
-    ON_SLOT( 3, setSlotLongitude,      base::LatLon)
+    ON_SLOT( 3, setSlotLongitude,      base::Longitude)
     ON_SLOT( 3, setSlotLongitude,      base::Number)
 
     ON_SLOT( 4, setSlotXPos,           base::Distance)
@@ -344,7 +346,7 @@ bool Steerpoint::setSlotSteerpointType(const base::Identifier* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotLatitude(const base::LatLon* const msg)
+bool Steerpoint::setSlotLatitude(const base::Latitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -366,7 +368,7 @@ bool Steerpoint::setSlotLatitude(const base::Number* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLongitude(const base::LatLon* const msg)
+bool Steerpoint::setSlotLongitude(const base::Longitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

@@ -11,9 +11,9 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: Number
 //
-// Description:  Base class for several number-based objects (Float, Integer, 
-//               Decibel and LatLon), numerical operators (Add, Subtract,
-//               Multiply and Divide), and various units (see base/units/*.hpp)
+// Description:  Base class for several number-based objects (Float, Integer), 
+//               numerical operators (Add, Subtract, Multiply and Divide),
+//               and various units (see base/units/*.hpp)
 //
 // Slots:
 //     value  <Number>  ! Sets the value of this number. (default: 0.0)

@@ -7,7 +7,9 @@
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/Transforms.hpp"
 #include "mixr/base/Timers.hpp"
-#include "mixr/base/LatLon.hpp"
+
+#include "mixr/base/Latitude.hpp"
+#include "mixr/base/Longitude.hpp"
 
 // relation classes (functions and tables)
 #include "mixr/base/relations/Func1.hpp"
@@ -78,7 +80,7 @@ Object* factory(const std::string& name)
 {
     Object* obj {};
 
-    // Numbers
+    // numbers
     if ( name == Number::getFactoryName() ) {
         obj = new Number();
     }
@@ -91,15 +93,8 @@ Object* factory(const std::string& name)
     else if ( name == Float::getFactoryName() ) {
         obj = new Float();
     }
-    else if ( name == Boolean::getFactoryName() ) {
-        obj = new Boolean();
-    }
-    else if ( name == Decibel::getFactoryName() ) {
-        obj = new Decibel();
-    }
-    else if ( name == LatLon::getFactoryName() ) {
-        obj = new LatLon();
-    }
+
+    // operators
     else if ( name == Add::getFactoryName() ) {
         obj = new Add();
     }
@@ -113,7 +108,20 @@ Object* factory(const std::string& name)
         obj = new Divide();
     }
 
-    // Components
+    //
+    else if ( name == Boolean::getFactoryName() ) {
+        obj = new Boolean();
+    }
+
+    // position
+    else if ( name == Latitude::getFactoryName() ) {
+        obj = new Latitude();
+    }
+    else if ( name == Longitude::getFactoryName() ) {
+        obj = new Longitude();
+    }
+
+    // components
     else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
     }
@@ -121,7 +129,7 @@ Object* factory(const std::string& name)
         obj = new Statistic();
     }
 
-    // Transformations
+    // transformations
     else if ( name == Translation::getFactoryName() ) {
         obj = new Translation();
     }
@@ -132,7 +140,7 @@ Object* factory(const std::string& name)
         obj = new Scale();
     }
 
-    // Functors
+    // relations
     else if ( name == Func1::getFactoryName() ) {
         obj = new Func1();
     }
@@ -167,7 +175,7 @@ Object* factory(const std::string& name)
         obj = new Table5();
     }
 
-    // Timers
+    // timers
     else if ( name == UpTimer::getFactoryName() ) {
         obj = new UpTimer();
     }
@@ -175,7 +183,7 @@ Object* factory(const std::string& name)
         obj = new DownTimer();
     }
 
-    // Units: Angles
+    // units: angles
     else if ( name == Degrees::getFactoryName() ) {
         obj = new Degrees();
     }
@@ -186,7 +194,12 @@ Object* factory(const std::string& name)
         obj = new Semicircles();
     }
 
-    // Units: Areas
+    // units
+    else if ( name == Decibel::getFactoryName() ) {
+        obj = new Decibel();
+    }
+
+    // units: areas
     else if ( name == SquareMeters::getFactoryName() ) {
         obj = new SquareMeters();
     }
@@ -215,7 +228,7 @@ Object* factory(const std::string& name)
         obj = new DecibelSquareMeters();
     }
 
-    // Units: Distances
+    // units: distances
     else if ( name == Meters::getFactoryName() ) {
         obj = new Meters();
     }
@@ -244,7 +257,7 @@ Object* factory(const std::string& name)
         obj = new StatuteMiles();
     }
 
-    // Units: Energies
+    // units: energies
     else if ( name == KiloWattHours::getFactoryName() ) {
         obj = new KiloWattHours();
     }
@@ -261,7 +274,7 @@ Object* factory(const std::string& name)
         obj = new Joules();
     }
 
-    // Units: Forces
+    // units: forces
     else if ( name == Newtons::getFactoryName() ) {
         obj = new Newtons();
     }
@@ -275,7 +288,7 @@ Object* factory(const std::string& name)
         obj = new PoundForces();
     }
 
-    // Units: Frequencies
+    // units: frequencies
     else if ( name == Hertz::getFactoryName() ) {
         obj = new Hertz();
     }
@@ -292,7 +305,7 @@ Object* factory(const std::string& name)
         obj = new TeraHertz();
     }
 
-    // Units: Masses
+    // units: masses
     else if ( name == Grams::getFactoryName() ) {
         obj = new Grams();
     }
@@ -303,7 +316,7 @@ Object* factory(const std::string& name)
         obj = new Slugs();
     }
 
-    // Units: Powers
+    // units: powers
     else if ( name == KiloWatts::getFactoryName() ) {
         obj = new KiloWatts();
     }
@@ -323,7 +336,7 @@ Object* factory(const std::string& name)
         obj = new DecibelMilliWatts();
     }
 
-    // Units: Time
+    // units: time
     else if ( name == Seconds::getFactoryName() ) {
         obj = new Seconds();
     }
@@ -346,7 +359,7 @@ Object* factory(const std::string& name)
         obj = new Days();
     }
 
-    // Units: Velocities
+    // units: velocities
     else if ( name == AngularVelocity::getFactoryName() ) {
         obj = new AngularVelocity();
     }
@@ -354,7 +367,7 @@ Object* factory(const std::string& name)
         obj = new LinearVelocity();
     }
 
-    // Colors
+    // colors
     else if ( name == Color::getFactoryName() ) {
         obj = new Color();
     }
@@ -383,7 +396,7 @@ Object* factory(const std::string& name)
         obj = new Yiq();
     }
 
-    // Network handlers
+    // network handlers
     else if ( name == TcpClient::getFactoryName() ) {
         obj = new TcpClient();
     }
@@ -403,12 +416,12 @@ Object* factory(const std::string& name)
         obj = new UdpUnicastHandler();
     }
 
-    // Earth models
+    // earth models
     else if ( name == EarthModel::getFactoryName() ) {
         obj = new EarthModel();
     }
 
-    // Ubf
+    // ubf
     else if ( name == ubf::Agent::getFactoryName() ) {
         obj = new ubf::Agent();
     }

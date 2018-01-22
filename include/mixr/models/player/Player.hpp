@@ -17,7 +17,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Integer; class LatLon; class List;
+namespace base { class Angle; class Boolean; class Distance; class Integer; class Latitude; class List; class Longitude;
                  class Time; class Vec2d; class Vec3d;}
 namespace simulation { class AbstractNib; }
 namespace models {
@@ -78,11 +78,11 @@ class Track;
 //
 //    ! 2: Player's initial geodetic position
 //
-//    initLatitude   <base::LatLon>      ! Latitude (default: 0)
+//    initLatitude   <base::Latitude>    ! Latitude (default: 0)
 //    initLatitude   <base::Angle>       ! Latitude
 //    initLatitude   <base::Number>      ! Latitude (degs)
 //
-//    initLongitude  <base::LatLon>      ! Longitude (default: 0)
+//    initLongitude  <base::Longitude>   ! Longitude (default: 0)
 //    initLongitude  <base::Angle>       ! Longitude
 //    initLongitude  <base::Number>      ! Longitude (degs)
 //
@@ -1085,10 +1085,10 @@ private:
    bool setSlotInitAlt(const base::Number* const);
    bool setSlotInitPosition(const base::List* const);
 
-   bool setSlotInitLat(const base::LatLon* const);
+   bool setSlotInitLat(const base::Latitude* const);
    bool setSlotInitLat(const base::Angle* const);
    bool setSlotInitLat(const base::Number* const);
-   bool setSlotInitLon(const base::LatLon* const);
+   bool setSlotInitLon(const base::Longitude* const);
    bool setSlotInitLon(const base::Angle* const);
    bool setSlotInitLon(const base::Number* const);
 

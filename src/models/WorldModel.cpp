@@ -3,9 +3,11 @@
 
 #include "mixr/base/EarthModel.hpp"
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/LatLon.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+
+#include "mixr/base/Latitude.hpp"
+#include "mixr/base/Longitude.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -42,10 +44,10 @@ BEGIN_SLOTTABLE(WorldModel)
 END_SLOTTABLE(WorldModel)
 
 BEGIN_SLOT_MAP(WorldModel)
-    ON_SLOT( 1, setSlotRefLatitude,          base::LatLon)
+    ON_SLOT( 1, setSlotRefLatitude,          base::Latitude)
     ON_SLOT( 1, setSlotRefLatitude,          base::Number)
 
-    ON_SLOT( 2, setSlotRefLongitude,         base::LatLon)
+    ON_SLOT( 2, setSlotRefLongitude,         base::Longitude)
     ON_SLOT( 2, setSlotRefLongitude,         base::Number)
 
     ON_SLOT( 3, setSlotGamingAreaRange,      base::Distance)
@@ -262,7 +264,7 @@ bool WorldModel::setMaxRefRange(const double v)
 // Set Slot routines
 //------------------------------------------------------------------------------
 
-bool WorldModel::setSlotRefLatitude(const base::LatLon* const msg)
+bool WorldModel::setSlotRefLatitude(const base::Latitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -280,7 +282,7 @@ bool WorldModel::setSlotRefLatitude(const base::Number* const msg)
     return ok;
 }
 
-bool WorldModel::setSlotRefLongitude(const base::LatLon* const msg)
+bool WorldModel::setSlotRefLongitude(const base::Longitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

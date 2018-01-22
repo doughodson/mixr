@@ -6,8 +6,8 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Identifier; class Integer; class LatLon;
-                 class List; class Identifier; class Number; class String; class Time; }
+namespace base { class Angle; class Distance; class Identifier; class Integer; class Latitude;
+                 class List; class Longitude; class Identifier; class Number; class String; class Time; }
 namespace terrain { class Terrain; }
 namespace models {
 class Navigation;
@@ -24,10 +24,10 @@ class Action;
 //   stptType  <base::Identifier>     ! Steerpoint type; default: DEST
 //                                    ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
 //
-//   latitude  <base::LatLon>         ! Steerpoint latitude  (default: 0)
+//   latitude  <base::Latitude>       ! Steerpoint latitude  (default: 0)
 //             <base::Number>         ! (or as degrees decimal)
 //
-//   longitude <base::LatLon>         ! Steerpoint longitude (default: 0)
+//   longitude <base::Longitude>      ! Steerpoint longitude (default: 0)
 //             <base::Number>         ! (or as degrees decimal)
 //
 //   xPos      <base::Distance>       ! X (north) distance from gaming area reference point
@@ -233,9 +233,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotSteerpointType(const base::Identifier* const);
-   bool setSlotLatitude(const base::LatLon* const);
+   bool setSlotLatitude(const base::Latitude* const);
    bool setSlotLatitude(const base::Number* const);
-   bool setSlotLongitude(const base::LatLon* const);
+   bool setSlotLongitude(const base::Longitude* const);
    bool setSlotLongitude(const base::Number* const);
    bool setSlotXPos(const base::Distance* const);
    bool setSlotYPos(const base::Distance* const);
