@@ -1,8 +1,10 @@
 
 #include "mixr/base/units/AngularVelocity.hpp"
+
 #include "mixr/base/units/Angles.hpp"
 #include "mixr/base/units/Times.hpp"
-#include "mixr/base/SlotTable.hpp"
+
+#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -17,13 +19,12 @@ END_SLOTTABLE(AngularVelocity)
 
 BEGIN_SLOT_MAP(AngularVelocity)
     ON_SLOT(1, setSlotAngle, Angle)
-    ON_SLOT(2, setSlotTime, Time)
+    ON_SLOT(2, setSlotTime,  Time)
 END_SLOT_MAP()
 
 AngularVelocity::AngularVelocity()
 {
     STANDARD_CONSTRUCTOR()
-    val = 1;
 }
 
 AngularVelocity::AngularVelocity(const double newAngularVelocityRadiansPerSec)
@@ -46,8 +47,8 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
     val = 1;
 
     //Set Checks to false:
-    bool okAngle {};
-    bool okTime {};
+    bool okAngle{};
+    bool okTime{};
 
     //Check and convert the angle to radians
     if ( newAngle != nullptr ) {
@@ -82,9 +83,9 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
 {
 
     //Init a num to -1 as a check:
-    double desiredAngle = -1.0f;
-    double desiredTime = -1.0f;
-    double desiredResult = -1.0f;
+    double desiredAngle{-1.0};
+    double desiredTime{-1.0};
+    double desiredResult{-1.0};
 
     //Set input opject's internal value to 1 as a precaution:
     newAngleUnit->setValue(1);
@@ -94,27 +95,20 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     const auto internalRadians = new Radians(static_cast<double>(angle));
 
     //Find out what units the angle is in:
-    if (dynamic_cast<Degrees*>(newAngleUnit) != nullptr)
-    {
+    if (dynamic_cast<Degrees*>(newAngleUnit) != nullptr) {
         //New angle is in degrees:
         const auto degrees = new Degrees;
         desiredAngle = static_cast<double>(degrees->convert(*internalRadians));
         degrees->unref();
-    }
-    else if (dynamic_cast<Radians*>(newAngleUnit) != nullptr)
-    {
+    } else if (dynamic_cast<Radians*>(newAngleUnit) != nullptr) {
         //New angle is in radians:
         desiredAngle = angle;
-    }
-    else if (dynamic_cast<Semicircles*>(newAngleUnit) != nullptr)
-    {
+    } else if (dynamic_cast<Semicircles*>(newAngleUnit) != nullptr) {
         //New angle is in semicircles:
         const auto semicircles = new Semicircles;
         desiredAngle = static_cast<double>(semicircles->convert(*internalRadians));
         semicircles->unref();
-    }
-    else
-    {
+    } else {
         //Give Error - Not sure what type it is:
         std::cerr << "Angle Conversion Type Not Found." << std::endl;
     }

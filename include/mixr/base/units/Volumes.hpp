@@ -1,19 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes:  Volume, CubicMeters, CubicFeet, CubicInches, Liters
-//
-// Base class:  Object -> Number -> Volume
-//              Object -> Number -> Volume -> CubicMeters
-//              Object -> Number -> Volume -> CubicFeet
-//              Object -> Number -> Volume -> CubicInches
-//              Object -> Number -> Volume -> Liters
 //------------------------------------------------------------------------------
 
 #ifndef __mixr_base_Volumes_H__
 #define __mixr_base_Volumes_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/volume_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -49,20 +43,21 @@ namespace base {
 //    into the units of a specific Volume derived class.
 //
 //------------------------------------------------------------------------------
-class Volume : public Number
+class Volume : public Unit
 {
-    DECLARE_SUBCLASS(Volume, Number)
+    DECLARE_SUBCLASS(Volume, Unit)
 
 public:
     Volume();
-    Volume(const double value);
+    Volume(const double);
 
     void set(const double v)  { val = v; }
     void set(const Volume& n) { val = fromVolume(n.toVolume()); }
 
+    double convert(const Volume& n) const  { return fromVolume(n.toVolume()); }
+
     virtual double toVolume() const = 0;
     virtual double fromVolume(const double a) const = 0;
-    double convert(const Volume& n) const  { return fromVolume(n.toVolume()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Volume& n)
@@ -74,36 +69,38 @@ inline std::ostream& operator<<(std::ostream& sout, const Volume& n)
 // Description: An instance of CubicMeters with its value equal to 1.0 is one
 // base unit for volume.
 //------------------------------------------------------------------------------
-class CubicMeters : public Volume
+class CubicMeters final: public Volume
 {
     DECLARE_SUBCLASS(CubicMeters, Volume)
 
 public:
     CubicMeters();
-    CubicMeters(const double value);
-    CubicMeters(const Volume& value);
+    CubicMeters(const double);
+    CubicMeters(const Volume&);
 
     static double convertStatic(const Volume &n)      { return n.toVolume(); }
-    double toVolume() const override                  { return static_cast<double>(val); }
-    double fromVolume(const double a) const override  { return a; }
+
+    double toVolume() const final                     { return val; }
+    double fromVolume(const double a) const final     { return a; }
 };
 
 //------------------------------------------------------------------------------
 // Class: CubicFeet
 // Description: Cubic Meters * 35.31467
 //------------------------------------------------------------------------------
-class CubicFeet : public Volume
+class CubicFeet final: public Volume
 {
     DECLARE_SUBCLASS(CubicFeet, Volume)
 
 public:
     CubicFeet();
-    CubicFeet(const double value);
-    CubicFeet(const Volume& value);
+    CubicFeet(const double);
+    CubicFeet(const Volume&);
 
     static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2CFT; }
-    double toVolume() const override                 { return static_cast<double>(val * volume::CFT2CM); }
-    double fromVolume(const double a) const override { return a * volume::CM2CFT; }
+
+    double toVolume() const final                    { return (val * volume::CFT2CM); }
+    double fromVolume(const double a) const final    { return a * volume::CM2CFT; }
 };
 
 
@@ -111,18 +108,19 @@ public:
 // Class: CubicInches
 // Description: Cubic Meters * 61023.74
 //------------------------------------------------------------------------------
-class CubicInches : public Volume
+class CubicInches final: public Volume
 {
     DECLARE_SUBCLASS(CubicInches, Volume)
 
 public:
     CubicInches();
-    CubicInches(const double value);
-    CubicInches(const Volume& value);
+    CubicInches(const double);
+    CubicInches(const Volume&);
 
     static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2CIN; }
-    double toVolume() const override                 { return static_cast<double>(val * volume::CIN2CM); }
-    double fromVolume(const double a) const override { return a * volume::CM2CIN; }
+
+    double toVolume() const final                    { return (val * volume::CIN2CM); }
+    double fromVolume(const double a) const final    { return a * volume::CM2CIN; }
 };
 
 
@@ -130,18 +128,19 @@ public:
 // Class: Liters
 // Description: Cubic Meters * 1000
 //------------------------------------------------------------------------------
-class Liters : public Volume
+class Liters final: public Volume
 {
     DECLARE_SUBCLASS(Liters, Volume)
 
 public:
     Liters();
-    Liters(const double value);
-    Liters(const Volume& value);
+    Liters(const double);
+    Liters(const Volume&);
 
     static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2L; }
-    double toVolume() const override                 { return static_cast<double>(val * volume::L2CM); }
-    double fromVolume(const double a) const override { return a * volume::CM2L; }
+
+    double toVolume() const                          { return (val * volume::L2CM); }
+    double fromVolume(const double a) const          { return a * volume::CM2L; }
 };
 
 }

@@ -2,9 +2,9 @@
 #ifndef __mixr_base_Distance_H__
 #define __mixr_base_Distance_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/distance_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -46,9 +46,9 @@ namespace base {
 //       class.
 //
 //------------------------------------------------------------------------------
-class Distance : public Number
+class Distance : public Unit
 {
-    DECLARE_SUBCLASS(Distance, Number)
+    DECLARE_SUBCLASS(Distance, Unit)
 
 public:
     Distance();
@@ -57,9 +57,10 @@ public:
     void set(const double v)                      { val = v; }
     void set(const Distance& n)                   { val = fromDistance(n.toDistance()); }
 
+    double convert(const Distance& n)             { return fromDistance(n.toDistance()); }
+
     virtual double toDistance() const = 0;
     virtual double fromDistance(const double) const = 0;
-    double convert(const Distance& n)             { return fromDistance(n.toDistance()); }
 };
 
 
@@ -71,11 +72,10 @@ inline std::ostream& operator<<(std::ostream& sout, const Distance& n)
 
 //------------------------------------------------------------------------------
 // Class: Meters
-// Base class:  Object -> Number -> Distance -> Meters
 // Description:  An instance of Meters with its value equal to 1.0 is one
 //               base unit for distances.
 //------------------------------------------------------------------------------
-class Meters : public Distance
+class Meters final: public Distance
 {
     DECLARE_SUBCLASS(Meters, Distance)
 
@@ -85,17 +85,16 @@ public:
     Meters(const Distance& value);
 
     static double convertStatic(const Distance& n)                { return n.toDistance(); }
-    double toDistance() const override                            { return static_cast<double>(val); }
-    double fromDistance(const double a) const override            { return a; }
+
+    double toDistance() const final                               { return static_cast<double>(val); }
+    double fromDistance(const double a) const final               { return a; }
 };
 
-
 //------------------------------------------------------------------------------
-// Class:  CentiMeters
-// Base class:  Object -> Number -> Distance -> CentiMeters
+// Class: CentiMeters
 // Description:  Meters * 100.0
 //------------------------------------------------------------------------------
-class CentiMeters : public Distance
+class CentiMeters final: public Distance
 {
     DECLARE_SUBCLASS(CentiMeters, Distance)
 
@@ -105,18 +104,16 @@ public:
     CentiMeters(const Distance& value);
 
     static double convertStatic(const Distance& n)        { return n.toDistance() * distance::M2CM; }
-    double toDistance() const override                    { return static_cast<double>(val * distance::CM2M); }
-    double fromDistance(const double a) const override    { return a * distance::M2CM; }
+
+    double toDistance() const final                       { return (val * distance::CM2M); }
+    double fromDistance(const double a) const final       { return a * distance::M2CM; }
 };
 
-
-
 //------------------------------------------------------------------------------
-// Class:  MicroMeters
-// Base class:  Object -> Number -> Distance -> MicroMeters
+// Class: MicroMeters
 // Description:  Meters * 1,000,000.0
 //------------------------------------------------------------------------------
-class MicroMeters : public Distance
+class MicroMeters final: public Distance
 {
     DECLARE_SUBCLASS(MicroMeters, Distance)
 
@@ -126,16 +123,16 @@ public:
     MicroMeters(const Distance& value);
 
     static double convertStatic(const Distance& n)       { return n.toDistance() * distance::M2UM; }
-    double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
-    double fromDistance(const double a) const override   { return a * distance::M2UM; }
+
+    double toDistance() const final                      { return (val * distance::UM2M); }
+    double fromDistance(const double a) const final      { return a * distance::M2UM; }
 };
 
 //------------------------------------------------------------------------------
 // Class: Microns(Same as MicroMeters)
-// Base class:  Object -> Number -> Distance -> MicroMeters
 // Description:  Meters * 1,000,000.0
 //------------------------------------------------------------------------------
-class Microns : public Distance
+class Microns final: public Distance
 {
     DECLARE_SUBCLASS(Microns, Distance)
 
@@ -145,15 +142,15 @@ public:
     Microns(const Distance& value);
 
     static double convertStatic(const Distance& n)       { return n.toDistance() * distance::M2UM; }
-    double toDistance() const override                   { return static_cast<double>(val * distance::UM2M); }
-    double fromDistance(const double a) const override   { return a * distance::M2UM; }
+
+    double toDistance() const final                      { return (val * distance::UM2M); }
+    double fromDistance(const double a) const final      { return a * distance::M2UM; }
 };
 //------------------------------------------------------------------------------
-// Class:  KiloMeters
-// Base class:  Object -> Number -> Distance -> KiloMeters
+// Class: KiloMeters
 // Description:  Meters / 1000.0
 //------------------------------------------------------------------------------
-class KiloMeters : public Distance
+class KiloMeters final: public Distance
 {
     DECLARE_SUBCLASS(KiloMeters, Distance)
 
@@ -162,18 +159,18 @@ public:
     KiloMeters(const double value);
     KiloMeters(const Distance& value);
 
-    static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2KM; }
-    double toDistance() const override                  { return static_cast<double>(val * distance::KM2M); }
-    double fromDistance(const double a) const override  { return a * distance::M2KM; }
+    static double convertStatic(const Distance& n)       { return n.toDistance() * distance::M2KM; }
+
+    double toDistance() const final                      { return (val * distance::KM2M); }
+    double fromDistance(const double a) const final      { return a * distance::M2KM; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Inches
-// Base class:  Object -> Number -> Distance -> Inches
+// Class: Inches
 // Description:  Meters / 0.0254
 //------------------------------------------------------------------------------
-class Inches : public Distance
+class Inches final: public Distance
 {
     DECLARE_SUBCLASS(Inches, Distance)
 
@@ -183,17 +180,17 @@ public:
     Inches(const Distance& value);
 
     static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2IN; }
-    double toDistance() const override                  { return static_cast<double>(val * distance::IN2M); }
-    double fromDistance(const double a) const override  { return a * distance::M2IN; }
+
+    double toDistance() const final                     { return static_cast<double>(val * distance::IN2M); }
+    double fromDistance(const double a) const final     { return a * distance::M2IN; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Feet
-// Base class:  Object -> Number -> Distance -> Feet
+// Class: Feet
 // Description:  Meters / 0.3048
 //------------------------------------------------------------------------------
-class Feet : public Distance
+class Feet final: public Distance
 {
     DECLARE_SUBCLASS(Feet, Distance)
 
@@ -203,17 +200,17 @@ public:
     Feet(const Distance& value);
 
     static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2FT; }
-    double toDistance() const override                  { return static_cast<double>(val * distance::FT2M); }
-    double fromDistance(const double a) const override  { return a * distance::M2FT; }
+
+    double toDistance() const final                     { return (val * distance::FT2M); }
+    double fromDistance(const double a) const final     { return a * distance::M2FT; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  NauticalMiles
-// Base class:  Object -> Number -> Distance -> NauticalMiles
+// Class: NauticalMiles
 // Description:  Meters * 1851.999942
 //------------------------------------------------------------------------------
-class NauticalMiles : public Distance
+class NauticalMiles final: public Distance
 {
     DECLARE_SUBCLASS(NauticalMiles, Distance)
 
@@ -223,17 +220,17 @@ public:
     NauticalMiles(const Distance& value);
 
     static double convertStatic(const Distance& n)     { return n.toDistance() * distance::M2NM; }
-    double toDistance() const override                 { return static_cast<double>(val * distance::NM2M); }
-    double fromDistance(const double a) const override { return a * distance::M2NM; }
+
+    double toDistance() const final                    { return (val * distance::NM2M); }
+    double fromDistance(const double a) const final    { return a * distance::M2NM; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  StatuteMiles
-// Base class:  Object -> Number -> Distance -> StatuteMiles
+// Class: StatuteMiles
 // Description:  Meters * 1609.34313095
 //------------------------------------------------------------------------------
-class StatuteMiles : public Distance
+class StatuteMiles final: public Distance
 {
     DECLARE_SUBCLASS(StatuteMiles, Distance)
 
@@ -243,8 +240,9 @@ public:
     StatuteMiles(const Distance& value);
 
     static double convertStatic(const Distance& n)      { return n.toDistance() * distance::M2SM; }
-    double toDistance() const override                  { return static_cast<double>(val * distance::SM2M); }
-    double fromDistance(const double a) const override  { return a * distance::M2SM; }
+
+    double toDistance() const final                     { return (val * distance::SM2M); }
+    double fromDistance(const double a) const final     { return a * distance::M2SM; }
 };
 
 }

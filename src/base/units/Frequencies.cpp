@@ -3,8 +3,6 @@
 //------------------------------------------------------------------------------
 #include "mixr/base/units/Frequencies.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -15,12 +13,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Frequency, "AbstractFrequency")
 EMPTY_SLOTTABLE(Frequency)
 EMPTY_DELETEDATA(Frequency)
 
-Frequency::Frequency() : Number()
+Frequency::Frequency()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-Frequency::Frequency(const double value) : Number(value)
+Frequency::Frequency(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }

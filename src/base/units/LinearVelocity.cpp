@@ -1,13 +1,14 @@
 
 #include "mixr/base/units/LinearVelocity.hpp"
+
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Distances.hpp"
 #include "mixr/base/units/Times.hpp"
-#include "mixr/base/SlotTable.hpp"
 
 namespace mixr {
 namespace base {
 
-const double LinearVelocity::FPS2KTSCC {0.59248384864341771016513018598233};
+const double LinearVelocity::FPS2KTSCC{0.59248384864341771016513018598233};
 
 IMPLEMENT_SUBCLASS(LinearVelocity, "LinearVelocity")
 EMPTY_DELETEDATA(LinearVelocity)
@@ -76,6 +77,7 @@ void LinearVelocity::copyData(const LinearVelocity& org, const bool)
 {
     BaseClass::copyData(org);
 
+    val = org.val;
     distance = org.distance;
     time = org.time;
 }
@@ -143,7 +145,7 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     }
     internalMeters->unref();
 
-    double desiredTime {-1.0};
+    double desiredTime{-1.0};
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
     const auto q = dynamic_cast<Seconds*>(newTimeUnit);
@@ -183,7 +185,7 @@ bool LinearVelocity::setMetersPerSecond(const double newLinearVelocity)
 
 bool LinearVelocity::setSlotDistance(const Distance* const msg)
 {
-    bool ok {};
+    bool ok{};
 
     //Try to convert Number to a distance
     if ( msg != nullptr ) {
@@ -195,7 +197,7 @@ bool LinearVelocity::setSlotDistance(const Distance* const msg)
 
 bool LinearVelocity::setSlotTime(const Time* const msg)
 {
-    bool ok {};
+    bool ok{};
 
     //Try to convert Number to a distance
     if (msg != nullptr) {

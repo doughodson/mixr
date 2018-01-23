@@ -1,6 +1,8 @@
 
 #include "mixr/base/units/Density.hpp"
-#include "mixr/base/SlotTable.hpp"
+
+#include "mixr/base/units/Masses.hpp"
+#include "mixr/base/units/Volumes.hpp"
 
 namespace mixr {
 namespace base {
@@ -14,11 +16,11 @@ BEGIN_SLOTTABLE(Density)
 END_SLOTTABLE(Density)
 
 BEGIN_SLOT_MAP(Density)
-    ON_SLOT(1, setSlotMass, Mass)
+    ON_SLOT(1, setSlotMass,   Mass)
     ON_SLOT(2, setSlotVolume, Volume)
 END_SLOT_MAP()
 
-Density::Density(double value, const Mass* newMass, const Volume* newVolume) : Number()
+Density::Density(double value, const Mass* newMass, const Volume* newVolume) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -26,8 +28,7 @@ Density::Density(double value, const Mass* newMass, const Volume* newVolume) : N
         myMass = newMass;
         myVolume = newVolume;
         val = value;
-    }
-    else {
+    } else {
         std::cerr << "Density::Density() - missing a mass or volume object,"
                   << " density is default to 1.0 kilograms per cubic meter"
                   << std::endl;
@@ -40,7 +41,7 @@ Density::Density(double value, const Mass* newMass, const Volume* newVolume) : N
     }
 }
 
-Density::Density() : Number()
+Density::Density()
 {
     STANDARD_CONSTRUCTOR()
 
@@ -54,7 +55,7 @@ void Density::copyData(const Density& org, const bool)
 {
     BaseClass::copyData(org);
 
-    val = org.getReal();
+    val = org.val;
     myMass = org.getMass();
     myVolume = org.getVolume();
 }

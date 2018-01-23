@@ -2,16 +2,20 @@
 #ifndef __mixr_base_Density_H__
 #define __mixr_base_Density_H__
 
-#include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/safe_ptr.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/Masses.hpp"
 #include "mixr/base/units/Volumes.hpp"
 
+#include "mixr/base/safe_ptr.hpp"
+
 namespace mixr {
 namespace base {
+class Mass;
+class Volume;
 
 //------------------------------------------------------------------------------
-// Classes: Density
+// Class: Density
 //
 // Description:  Density as a function of mass and volume.
 //
@@ -41,12 +45,12 @@ namespace base {
 // NOTE: The = operator and copy constructor WILL change the units
 // of the target density object.  To perform a conversion, use set().
 //------------------------------------------------------------------------------
-class Density : public Number
+class Density final: public Unit
 {
-    DECLARE_SUBCLASS(Density, Number)
+    DECLARE_SUBCLASS(Density, Unit)
 
 public:
-    Density(double newDensity, const Mass* newMass, const Volume* newVolume);
+    Density(double newDensity, const Mass*, const Volume*);
     Density();
 
     double convert(const Density& n) const;
@@ -66,8 +70,8 @@ private:
 
 inline std::ostream& operator<<(std::ostream& sout, const Density& n)
 {
-    const Mass* m {n.getMass()};
-    const Volume* v {n.getVolume()};
+    const Mass* m{n.getMass()};
+    const Volume* v{n.getVolume()};
 
     sout << "( " << n.getFactoryName() << " " << n.getReal();
     if ( m != nullptr ) sout << " " << *m;

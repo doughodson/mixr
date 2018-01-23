@@ -1,8 +1,6 @@
 
 #include "mixr/base/units/Energies.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -18,7 +16,7 @@ Energy::Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-Energy::Energy(const double value) : Number(value)
+Energy::Energy(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -26,7 +24,7 @@ Energy::Energy(const double value) : Number(value)
 void Energy::copyData(const Energy& org, const bool)
 {
    BaseClass::copyData(org);
-   val = fromEnergy(org.toEnergy());;
+   val = fromEnergy(org.toEnergy());
 }
 
 //==============================================================================

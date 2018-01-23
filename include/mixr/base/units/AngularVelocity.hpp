@@ -2,7 +2,7 @@
 #ifndef __mixr_base_AngularVelocity_H__
 #define __mixr_base_AngularVelocity_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
 
 namespace mixr {
 namespace base {
@@ -77,12 +77,11 @@ class Time;
 //      will output the answer in degrees per millisecond)
 //
 //--------------------------------------------------------------------
-class AngularVelocity : public Number
+class AngularVelocity final: public Unit
 {
-    DECLARE_SUBCLASS(AngularVelocity, Number)
+    DECLARE_SUBCLASS(AngularVelocity, Unit)
 
 public:
-
     AngularVelocity();
     // constructor with input as radians per second
     AngularVelocity(const double newAngularVelocityRadiansPerSec);
@@ -102,8 +101,8 @@ public:
     bool setSeconds(const double);         // Input time in (seconds)
 
 private:
-    double angle {1.0};       // holds our angle (radians)
-    double time {1.0};        // holds our time (seconds)
+    double angle{1.0};       // holds our angle (radians)
+    double time{1.0};        // holds our time (seconds)
 
 private:
     // slot table helper methods

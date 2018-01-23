@@ -1,22 +1,14 @@
 //------------------------------------------------------------------------------
 // Classes:  Time, Seconds, MilliSeconds, MicroSeconds, NanoSeconds, Minutes, Hours, Days
-// Base class:  Object -> Number -> Time
-//              Object -> Number -> Time -> Seconds
-//              Object -> Number -> Time -> MilliSeconds
-//              Object -> Number -> Time -> MicroSeconds
-//              Object -> Number -> Time -> NanoSeconds
-//              Object -> Number -> Time -> Minutes
-//              Object -> Number -> Time -> Hours
-//              Object -> Number -> Time -> Days
 //------------------------------------------------------------------------------
 
 #ifndef __mixr_base_Times_H__
 #define __mixr_base_Times_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/units/time_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -52,20 +44,21 @@ namespace base {
 //        instance into the units of another Time derived instance.
 //
 //------------------------------------------------------------------------------
-class Time : public Number
+class Time : public Unit
 {
-    DECLARE_SUBCLASS(Time, Number)
+    DECLARE_SUBCLASS(Time, Unit)
 
 public:
     Time();
-    Time(const double value);
+    Time(const double);
 
     void set(const double v) { val = v; }
     void set(const Time& n)  { val = fromTime(n.toTime()); }
 
+    double convert(const Time& n)                        { return fromTime(n.toTime()); }
+
     virtual double toTime() const =0;
     virtual double fromTime(const double a) const =0;
-    double convert(const Time& n)                        { return fromTime(n.toTime()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Time& n)
@@ -73,25 +66,26 @@ inline std::ostream& operator<<(std::ostream& sout, const Time& n)
 
 //------------------------------------------------------------------------------
 // Class: Seconds
-// Description:  An instance of Seconds with its value equal to 1.0 is one base unit for times.
+// Description: An instance of Seconds with its value equal to 1.0 is one base unit for times.
 //------------------------------------------------------------------------------
-class Seconds : public Time
+class Seconds final: public Time
 {
     DECLARE_SUBCLASS(Seconds, Time)
 
 public:
     Seconds();
-    Seconds(const double value);
-    Seconds(const Time& org);
+    Seconds(const double);
+    Seconds(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime(); }
-    double toTime() const override                  { return static_cast<double>(val); }
-    double fromTime(const double a) const override  { return a; }
+
+    double toTime() const final                     { return val; }
+    double fromTime(const double a) const final     { return a; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  MilliSeconds
-// Description:  Seconds / 1000.0
+// Class: MilliSeconds
+// Description: Seconds / 1000.0
 //------------------------------------------------------------------------------
 class MilliSeconds : public Time
 {
@@ -99,103 +93,109 @@ class MilliSeconds : public Time
 
 public:
     MilliSeconds();
-    MilliSeconds(const double value);
-    MilliSeconds(const Time& org);
+    MilliSeconds(const double);
+    MilliSeconds(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime() * time::S2MS; }
-    double toTime() const override                  { return static_cast<double>(val * time::MS2S); }
-    double fromTime(const double a) const override  { return a * time::S2MS; }
+
+    double toTime() const final                     { return (val * time::MS2S); }
+    double fromTime(const double a) const final     { return a * time::S2MS; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  MicroSeconds
-// Description:  Seconds / 1000000.0
+// Class: MicroSeconds
+// Description: Seconds / 1000000.0
 //------------------------------------------------------------------------------
-class MicroSeconds : public Time
+class MicroSeconds final: public Time
 {
     DECLARE_SUBCLASS(MicroSeconds, Time)
 
 public:
     MicroSeconds();
-    MicroSeconds(const double value);
-    MicroSeconds(const Time& org);
+    MicroSeconds(const double);
+    MicroSeconds(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime() * time::S2US; }
-    double toTime() const override                  { return static_cast<double>(val * time::US2S); }
-    double fromTime(const double a) const override  { return a * time::S2US; }
+
+    double toTime() const final                     { return (val * time::US2S); }
+    double fromTime(const double a) const final     { return a * time::S2US; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  NanoSeconds
-// Description:  Seconds / 1000000000.0
+// Class: NanoSeconds
+// Description: Seconds / 1000000000.0
 //------------------------------------------------------------------------------
-class NanoSeconds : public Time
+class NanoSeconds final: public Time
 {
     DECLARE_SUBCLASS(NanoSeconds, Time)
 
 public:
     NanoSeconds();
-    NanoSeconds(const double value);
-    NanoSeconds(const Time& org);
+    NanoSeconds(const double);
+    NanoSeconds(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime() * time::S2NS; }
-    double toTime() const override                  { return static_cast<double>(val * time::NS2S); }
-    double fromTime(const double a) const override  { return a * time::S2NS; }
+
+    double toTime() const final                     { return (val * time::NS2S); }
+    double fromTime(const double a) const final     { return a * time::S2NS; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Minutes
-// Description:  Seconds * 60.0
+// Class: Minutes
+// Description: Seconds * 60.0
 //------------------------------------------------------------------------------
-class Minutes : public Time
+class Minutes final: public Time
 {
     DECLARE_SUBCLASS(Minutes, Time)
 
 public:
     Minutes();
-    Minutes(const double value);
-    Minutes(const Time& org);
+    Minutes(const double);
+    Minutes(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime() * time::S2M; }
-    double toTime() const override                  { return static_cast<double>(val * time::M2S); }
-    double fromTime(const double a) const override  { return a * time::S2M; }
+
+    double toTime() const final                     { return (val * time::M2S); }
+    double fromTime(const double a) const final     { return a * time::S2M; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  Hours
-// Description:  Seconds * 3600.0
+// Class: Hours
+// Description: Seconds * 3600.0
 //------------------------------------------------------------------------------
-class Hours : public Time
+class Hours final: public Time
 {
     DECLARE_SUBCLASS(Hours, Time)
 
 public:
     Hours();
-    Hours(const double value);
-    Hours(const Time& org);
+    Hours(const double);
+    Hours(const Time&);
 
     static double convertStatic(const Time &n)      { return n.toTime() * time::S2H; }
-    double toTime() const override                  { return static_cast<double>(val * time::H2S); }
-    double fromTime(const double a) const override  { return a * time::S2H; }
+
+    double toTime() const final                     { return (val * time::H2S); }
+    double fromTime(const double a) const final     { return a * time::S2H; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  Days
-// Description:  Seconds * 3600.0 * 24.0
+// Class: Days
+// Description: Seconds * 3600.0 * 24.0
 //------------------------------------------------------------------------------
-class Days : public Time
+class Days final: public Time
 {
     DECLARE_SUBCLASS(Days, Time)
 
 public:
     Days();
-    Days(const double value);
-    Days(const Time& org);
+    Days(const double);
+    Days(const Time&);
 
     static double convertStatic(const Time &n)     { return n.toTime() * time::S2D; }
-    double toTime() const override                 { return static_cast<double>(val * time::D2S); }
-    double fromTime(const double a) const override { return a * time::S2D; }
+
+    double toTime() const final                    { return (val * time::D2S); }
+    double fromTime(const double a) const final    { return a * time::S2D; }
 };
 
 }

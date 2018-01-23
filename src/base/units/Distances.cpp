@@ -3,7 +3,6 @@
 // StatuteMiles 
 //------------------------------------------------------------------------------
 #include "mixr/base/units/Distances.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -15,12 +14,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Distance, "AbstractDistance")
 EMPTY_SLOTTABLE(Distance)
 EMPTY_DELETEDATA(Distance)
 
-Distance::Distance() : Number()
+Distance::Distance()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-Distance::Distance(const double value) : Number(value)
+Distance::Distance(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -28,7 +27,7 @@ Distance::Distance(const double value) : Number(value)
 void Distance::copyData(const Distance& org, const bool)
 {
    BaseClass::copyData(org);
-   val = fromDistance(org.toDistance());;
+   val = fromDistance(org.toDistance());
 }
 
 //==============================================================================

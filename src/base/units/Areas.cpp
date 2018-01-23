@@ -7,8 +7,6 @@
 
 #include "mixr/base/units/Areas.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -24,7 +22,7 @@ Area::Area()
    STANDARD_CONSTRUCTOR()
 }
 
-Area::Area(const double value) : Number(value) 
+Area::Area(const double value) : Unit(value) 
 {
    STANDARD_CONSTRUCTOR()
 }

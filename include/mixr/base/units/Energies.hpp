@@ -1,26 +1,19 @@
 //------------------------------------------------------------------------------
 // Classes:  Energy, KiloWattHours, BTUs, Calories, FootPounds, Joules
-//
-// Base class:  Object -> Number -> Energy
-//              Object -> Number -> Energy -> KiloWattHours
-//              Object -> Number -> Energy -> BTUs
-//              Object -> Number -> Energy -> Calories
-//              Object -> Number -> Energy -> FootPounds
-//              Object -> Number -> Energy -> Joules
 //------------------------------------------------------------------------------
 
 #ifndef __mixr_Energies_H__
 #define __mixr_Energies_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/energy_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Energy
+// Class: Energy
 // Description:  Base class for energy.  Defined as a Joule which is
 //               equivalent to an instance of Joules with its value equal
 //               to 1.0.
@@ -52,117 +45,123 @@ namespace base {
 //        instance into the units of a specific Energy derived
 //        class.
 //------------------------------------------------------------------------------
-class Energy : public Number
+class Energy : public Unit
 {
-    DECLARE_SUBCLASS(Energy, Number)
+    DECLARE_SUBCLASS(Energy, Unit)
 
 public:
     Energy();
-    Energy(const double value);
+    Energy(const double);
 
     void set(const double v)                       { val = v; }
     void set(const Energy& n)                      { val = fromEnergy(n.toEnergy()); }
 
+    double convert(const Energy& n)                { return fromEnergy(n.toEnergy()); }
+
     virtual double toEnergy() const = 0;
     virtual double fromEnergy(const double a) const = 0;
-    double convert(const Energy& n)                { return fromEnergy(n.toEnergy()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Energy& n)
     { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
-// Class:  Joules
+// Class: Joules
 // Description: An instance of Joules with its value equal to 1.0 is one
 //              base unit for energy.
 //------------------------------------------------------------------------------
-class Joules : public Energy
+class Joules final: public Energy
 {
     DECLARE_SUBCLASS(Joules, Energy)
 
 public:
     Joules();
-    Joules(const double value);
-    Joules(const Energy& value);
+    Joules(const double);
+    Joules(const Energy&);
 
     static double convertStatic(const Energy& n)       { return n.toEnergy(); }
-    double toEnergy() const override                   { return static_cast<double>(val); }
-    double fromEnergy(const double a) const override   { return a; }
+
+    double toEnergy() const final                      { return val; }
+    double fromEnergy(const double a) const final      { return a; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  KiloWattHours
+// Class: KiloWattHours
 // Description: Joules * 0.000000277778
 //------------------------------------------------------------------------------
-class KiloWattHours : public Energy
+class KiloWattHours final: public Energy
 {
     DECLARE_SUBCLASS(KiloWattHours, Energy)
 
 public:
     KiloWattHours();
-    KiloWattHours(const double value);
-    KiloWattHours(const Energy& value);
+    KiloWattHours(const double);
+    KiloWattHours(const Energy&);
 
     static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2KWH; }
-    double toEnergy() const override                 { return static_cast<double>(val * energy::KWH2J); }
-    double fromEnergy(const double a) const override { return a * energy::J2KWH; }
+
+    double toEnergy() const final                    { return (val * energy::KWH2J); }
+    double fromEnergy(const double a) const final    { return a * energy::J2KWH; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  BTUs
+// Class: BTUs
 // Description:  Joules * 9.478 x 10 -04
 //------------------------------------------------------------------------------
-class BTUs : public Energy
+class BTUs final: public Energy
 {
     DECLARE_SUBCLASS(BTUs, Energy)
 
 public:
     BTUs();
-    BTUs(const double value);
-    BTUs(const Energy& value);
+    BTUs(const double);
+    BTUs(const Energy&);
 
     static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2BTU; }
-    double toEnergy() const override                 { return static_cast<double>(val * energy::BTU2J); }
-    double fromEnergy(const double a) const override { return a * energy::J2BTU; }
+
+    double toEnergy() const final                    { return (val * energy::BTU2J); }
+    double fromEnergy(const double a) const final    { return a * energy::J2BTU; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Calories
+// Class: Calories
 // Description:  Joules * 0.2388888888888888889
 //------------------------------------------------------------------------------
-class Calories : public Energy
+class Calories final: public Energy
 {
     DECLARE_SUBCLASS(Calories, Energy)
 
 public:
     Calories();
-    Calories(const double value);
-    Calories(const Energy& value);
+    Calories(const double);
+    Calories(const Energy&);
 
     static double convertStatic(const Energy& n)       { return n.toEnergy() * energy::J2C; }
-    double toEnergy() const override                   { return static_cast<double>(val * energy::C2J); }
-    double fromEnergy(const double a) const override   { return a * energy::J2C; }
+
+    double toEnergy() const final                      { return (val * energy::C2J); }
+    double fromEnergy(const double a) const final      { return a * energy::J2C; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  FootPounds
+// Class: FootPounds
 // Description:  Joules * 0.7376
 //------------------------------------------------------------------------------
-class FootPounds : public Energy
+class FootPounds final: public Energy
 {
     DECLARE_SUBCLASS(FootPounds, Energy)
 
 public:
     FootPounds();
-    FootPounds(const double value);
-    FootPounds(const Energy& value);
+    FootPounds(const double);
+    FootPounds(const Energy&);
 
     static double convertStatic(const Energy& n)      { return n.toEnergy() * energy::J2FP; }
-    double toEnergy() const override                  { return static_cast<double>(val * energy::FP2J); }
-    double fromEnergy(const double a) const override  { return a * energy::J2FP; }
+
+    double toEnergy() const final                     { return (val * energy::FP2J); }
+    double fromEnergy(const double a) const final     { return a * energy::J2FP; }
 };
 
 }

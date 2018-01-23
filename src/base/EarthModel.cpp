@@ -3,6 +3,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Distances.hpp"
 
 #include <cstring>

@@ -5,10 +5,10 @@
 #ifndef __mixr_base_Angles_H__
 #define __mixr_base_Angles_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/util/constants.hpp"
 #include "mixr/base/units/angle_utils.hpp"
-#include <iostream>
 
 #include <cmath>
 
@@ -16,7 +16,7 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Angle
+// Class: Angle
 // Description:  Base class for angles.  Defined as a semicircle which is
 //               equivalent to an instance of Semicircle with its value equal
 //               to 1.0.
@@ -47,20 +47,21 @@ namespace base {
 //        instance into the units of a specific Angle derived class.
 //
 //------------------------------------------------------------------------------
-class Angle : public Number
+class Angle : public Unit
 {
-    DECLARE_SUBCLASS(Angle, Number)
+    DECLARE_SUBCLASS(Angle, Unit)
 
 public:
     Angle();
-    Angle(const double value);
+    Angle(const double);
 
-    void set(const double v) { val = v; }
-    void set(const Angle& n) { val = fromAngle(n.toAngle()); }
+    void set(const double v)             { val = v; }
+    void set(const Angle& n)             { val = fromAngle(n.toAngle()); }
+
+    double convert(const Angle& n)       { return fromAngle(n.toAngle()); }
 
     virtual double toAngle() const = 0;
     virtual double fromAngle(const double a) const = 0;
-    double convert(const Angle& n) { return fromAngle(n.toAngle()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Angle& n)
@@ -71,36 +72,38 @@ inline std::ostream& operator<<(std::ostream& sout, const Angle& n)
 // Class: Degrees
 // Description: Angle * 180.0
 //------------------------------------------------------------------------------
-class Degrees : public Angle
+class Degrees final: public Angle
 {
     DECLARE_SUBCLASS(Degrees, Angle)
 
 public:
     Degrees();
-    Degrees(const double value);
-    Degrees(const Angle& value);
+    Degrees(const double);
+    Degrees(const Angle&);
 
-    static double convertStatic(const Angle& n)              { return n.toAngle() * angle::SC2D; }
-    double toAngle() const override                          { return static_cast<double>(val * angle::D2SC); }
-    double fromAngle(const double a) const override          { return a * angle::SC2D; }
+    static double convertStatic(const Angle& n)           { return n.toAngle() * angle::SC2D; }
+
+    double toAngle() const final                          { return static_cast<double>(val * angle::D2SC); }
+    double fromAngle(const double a) const final          { return a * angle::SC2D; }
 };
 
 //------------------------------------------------------------------------------
 // Class: Radians
 // Description: Angle * PI
 //------------------------------------------------------------------------------
-class Radians : public Angle
+class Radians final: public Angle
 {
     DECLARE_SUBCLASS(Radians, Angle)
 
 public:
     Radians();
-    Radians(const double value);
-    Radians(const Angle& value);
+    Radians(const double);
+    Radians(const Angle&);
 
     static double convertStatic(const Angle& n)      { return n.toAngle() * angle::SC2R; }
-    double toAngle() const override                  { return static_cast<double>(val * angle::R2SC); }
-    double fromAngle(const double a) const override  { return a * angle::SC2R; }
+
+    double toAngle() const final                     { return static_cast<double>(val * angle::R2SC); }
+    double fromAngle(const double a) const final     { return a * angle::SC2R; }
 };
 
 //------------------------------------------------------------------------------
@@ -108,18 +111,19 @@ public:
 // Description:  An instance of Semicircles with its value equal to 1.0 is
 //               one base unit for distances.
 //------------------------------------------------------------------------------
-class Semicircles : public Angle
+class Semicircles final: public Angle
 {
     DECLARE_SUBCLASS(Semicircles, Angle)
 
 public:
     Semicircles();
-    Semicircles(const double value);
-    Semicircles(const Angle& value);
+    Semicircles(const double);
+    Semicircles(const Angle&);
 
     static double convertStatic(const Angle& n)      { return n.toAngle(); }
-    double toAngle() const override                  { return static_cast<double>(val); }
-    double fromAngle(const double a) const override  { return a; }
+
+    double toAngle() const final                     { return static_cast<double>(val); }
+    double fromAngle(const double a) const final     { return a; }
 };
 
 }

@@ -1,6 +1,5 @@
 
 #include "mixr/base/units/Powers.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -17,7 +16,7 @@ Power::Power()
    STANDARD_CONSTRUCTOR()
 }
 
-Power::Power(const double value) : Number(value)
+Power::Power(const double value) : Unit(value)
 {
    STANDARD_CONSTRUCTOR()
 }

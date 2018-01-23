@@ -1,6 +1,5 @@
 
 #include "mixr/base/units/Volumes.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -17,7 +16,7 @@ Volume::Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-Volume::Volume(const double value) : Number(value)
+Volume::Volume(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -25,7 +24,7 @@ Volume::Volume(const double value) : Number(value)
 void Volume::copyData(const Volume& org, const bool)
 {
    BaseClass::copyData(org);
-   val = fromVolume(org.toVolume());;
+   val = fromVolume(org.toVolume());
 }
 
 //==============================================================================

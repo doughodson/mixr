@@ -1,8 +1,6 @@
 
 #include "mixr/base/units/Angles.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -13,12 +11,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Angle, "AbstractAngle")
 EMPTY_SLOTTABLE(Angle)
 EMPTY_DELETEDATA(Angle)
 
-Angle::Angle() : Number()
+Angle::Angle()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Angle::Angle(const double value) : Number(value)
+Angle::Angle(const double x) : Unit(x)
 {
    STANDARD_CONSTRUCTOR()
 }

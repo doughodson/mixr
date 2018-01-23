@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/adi/Adi.hpp"
 
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
@@ -23,9 +24,9 @@ END_SLOT_MAP()
 BEGIN_EVENT_HANDLER(Adi)
     // override the instrument event, since we need to use it ourself
     ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdatePitchAdi, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRollDegAdi, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRollRadAdi, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateMaxRateAdi, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRollDegAdi,     base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRollRadAdi,    base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateMaxRateAdi,    base::Number)
 END_EVENT_HANDLER()
 
 Adi::Adi()

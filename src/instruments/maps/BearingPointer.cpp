@@ -1,6 +1,7 @@
 
 #include "mixr/instruments/maps/BearingPointer.hpp"
 
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 
 namespace mixr {

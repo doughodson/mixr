@@ -1,6 +1,5 @@
 
 #include "mixr/base/units/FlowRate.hpp"
-#include "mixr/base/SlotTable.hpp"
 
 namespace mixr {
 namespace base {
@@ -16,6 +15,15 @@ BEGIN_SLOT_MAP(FlowRate)
     ON_SLOT(1, setSlotVolume, Volume)
     ON_SLOT(2, setSlotTime,   Time)
 END_SLOT_MAP()
+
+FlowRate::FlowRate()
+{
+    STANDARD_CONSTRUCTOR()
+    // default time, distance and flowRate
+    myVolume = new CubicFeet(1.0);
+    myTime = new Seconds(1.0);
+    flowRate = 1.0;
+}
 
 FlowRate::FlowRate(double newFlowRate, Volume* volume, Time* time)
 {
@@ -44,15 +52,6 @@ FlowRate::FlowRate(double newFlowRate, Volume* volume, Time* time)
     }
 }
 
-FlowRate::FlowRate()
-{
-    STANDARD_CONSTRUCTOR()
-    // default time, distance and flowRate
-    myVolume = new CubicFeet(1);
-    myTime = new Seconds(1);
-    flowRate = 1;
-}
-
 void FlowRate::copyData(const FlowRate& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -61,6 +60,7 @@ void FlowRate::copyData(const FlowRate& org, const bool cc)
        myTime = new Seconds(1);
     }
 
+    val = org.val;
     if (myVolume != nullptr) myVolume = org.myVolume;
     if (myTime != nullptr) myTime = org.myTime;
     flowRate = org.flowRate;
@@ -81,11 +81,11 @@ void FlowRate::deleteData()
 double FlowRate::convert(Volume* newVolume, Time* newTime)
 {
     // holds our converted flowRate
-    double tempFR {1.0};
+    double tempFR{1.0};
     // make sure we have a distance and a time to convert to
     if (newVolume != nullptr && newTime != nullptr) {
-        double newVolVal {1.0};
-        double newTimeVal {1.0};
+        double newVolVal{1.0};
+        double newTimeVal{1.0};
         // Again, we are only concerned about the type of Volume and Time we have, not the actual value
         newVolume->set(1);
         newTime->set(1);
@@ -109,11 +109,11 @@ double FlowRate::convert(Volume* newVolume, Time* newTime)
 //------------------------------------------------------------------------------
 bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
 {
-    bool ok {};
+    bool ok{};
     // make sure we have a distance and a time to convert to
     if (newVolume != nullptr && newTime != nullptr) {
-        double newVolVal {1.0};
-        double newTimeVal {1.0};
+        double newVolVal{1.0};
+        double newTimeVal{1.0};
         // we also have to set our units to 1 here, for conversion purposes
         newVolume->set(1);
         newTime->set(1);
@@ -123,7 +123,7 @@ bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
         if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = myTime->convert(*newTime);
 
         // find our new velocity from the new velocity value we are given * the conversion constants
-        double tempFR {newFlowRate * newVolVal};
+        double tempFR{newFlowRate * newVolVal};
         tempFR *= newTimeVal;
 
         ok = true;
@@ -138,7 +138,7 @@ bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
 
 bool FlowRate::setSlotVolume(Volume* newVol)
 {
-    bool ok {};
+    bool ok{};
     if (newVol != nullptr) {
         newVol->set(1);
         myVolume = newVol;
@@ -150,7 +150,7 @@ bool FlowRate::setSlotVolume(Volume* newVol)
 
 bool FlowRate::setSlotTime(Time* newTime)
 {
-    bool ok {};
+    bool ok{};
     if (newTime != nullptr) {
         newTime->set(1);
         myTime = newTime;

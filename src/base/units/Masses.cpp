@@ -1,8 +1,6 @@
 
 #include "mixr/base/units/Masses.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -18,7 +16,7 @@ Mass::Mass()
     STANDARD_CONSTRUCTOR()
 }
 
-Mass::Mass(const double value) : Number(value)
+Mass::Mass(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -26,7 +24,7 @@ Mass::Mass(const double value) : Number(value)
 void Mass::copyData(const Mass& org, const bool)
 {
     BaseClass::copyData(org);
-    val = fromMass(org.toMass());;
+    val = fromMass(org.toMass());
 }
 
 //==============================================================================

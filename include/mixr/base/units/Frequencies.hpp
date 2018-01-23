@@ -1,28 +1,18 @@
 //------------------------------------------------------------------------------
-// Classes:  Frequency, Hertz  // ADD MORE and find credible source
-// Base class:  Object -> Number -> Frequency
-//              Object -> Number -> Frequency -> Hertz
-//              Object -> Number -> Frequency -> MilliHertz
-//              Object -> Number -> Frequency -> MicroHertz
-//              Object -> Number -> Frequency -> NanoHertz
-//              Object -> Number -> Frequency -> KiloHertz
-//              Object -> Number -> Frequency -> MegaHertz
-//              Object -> Number -> Frequency -> GigaHertz
-//              Object -> Number -> Frequency -> TeraHertz
+// Classes:  Frequency, Hertz
 //------------------------------------------------------------------------------
 #ifndef __mixr_base_Frequencies_H__
 #define __mixr_base_Frequencies_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/frequency_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Frequency
-// Base class:  Object -> Number -> Frequency
 // Description:  Base class for frequencies.  Defined as a hertz which is
 //               equivalent to an instance of Hertz with its value equal
 //               to 1.0.
@@ -58,123 +48,124 @@ namespace base {
 //        class.
 //
 //------------------------------------------------------------------------------
-class Frequency : public Number
+class Frequency : public Unit
 {
-    DECLARE_SUBCLASS(Frequency, Number)
+    DECLARE_SUBCLASS(Frequency, Unit)
 
 public:
     Frequency();
-    Frequency(const double value);
+    Frequency(const double);
 
     void set(const double v)     { val = v; }
     void set(const Frequency& n) { val = fromFrequency(n.toFrequency()); }
 
+    double convert(const Frequency& n) { return fromFrequency(n.toFrequency()); }
+
     virtual double toFrequency() const = 0;
     virtual double fromFrequency(const double a) const = 0;
-    double convert(const Frequency& n) { return fromFrequency(n.toFrequency()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Frequency& n)
     { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
-// Class:  Hertz
-// Base class:  Object -> Number -> Frequency -> Hertz
+// Class: Hertz
 // Description:  Base unit for frequency, with a hertz being an instance of Hertz
 //               with its value equal to 1.0.
 //------------------------------------------------------------------------------
-class Hertz : public Frequency
+class Hertz final: public Frequency
 {
     DECLARE_SUBCLASS(Hertz, Frequency)
 
 public:
     Hertz();
-    Hertz(const double value);
-    Hertz(const Frequency& value);
+    Hertz(const double);
+    Hertz(const Frequency&);
 
     static double convertStatic(const Frequency &n)      { return n.toFrequency(); }
-    double toFrequency() const override                  { return static_cast<double>(val); }
-    double fromFrequency(const double a) const override  { return a; }
+
+    double toFrequency() const final                     { return val; }
+    double fromFrequency(const double a) const final     { return a; }
 };
 
 //------------------------------------------------------------------------------
-// Class:  KiloHertz
-// Base class:  Object -> Number -> Frequency -> KiloHertz
+// Class: KiloHertz
 // Description:  Hertz * 0.001
 //------------------------------------------------------------------------------
-class KiloHertz : public Frequency
+class KiloHertz final: public Frequency
 {
     DECLARE_SUBCLASS(KiloHertz, Frequency)
 
 public:
     KiloHertz();
-    KiloHertz(const double value);
-    KiloHertz(const Frequency& value);
+    KiloHertz(const double);
+    KiloHertz(const Frequency&);
 
 private:
     static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2KHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * frequency::KHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * frequency::Hz2KHz; }
+
+    double toFrequency() const final                     { return (val * frequency::KHz2Hz); }
+    double fromFrequency(const double a) const final     { return a * frequency::Hz2KHz; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  MegaHertz
-// Base class:  Object -> Number -> Frequency -> MegaHertz
+// Class: MegaHertz
 // Description:  Hertz * 0.000001
 //------------------------------------------------------------------------------
-class MegaHertz : public Frequency
+class MegaHertz final: public Frequency
 {
     DECLARE_SUBCLASS(MegaHertz, Frequency)
 
 public:
     MegaHertz();
-    MegaHertz(const double value);
-    MegaHertz(const Frequency& value);
+    MegaHertz(const double);
+    MegaHertz(const Frequency&);
 
     static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2MHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * frequency::MHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * frequency::Hz2MHz; }
+
+    double toFrequency() const final                     { return (val * frequency::MHz2Hz); }
+    double fromFrequency(const double a) const final     { return a * frequency::Hz2MHz; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  GigaHertz
-// Base class:  Object -> Number -> Frequency -> GigaHertz
+// Class: GigaHertz
 // Description:  Hertz * 0.000000001
 //------------------------------------------------------------------------------
-class GigaHertz : public Frequency
+class GigaHertz final: public Frequency
 {
     DECLARE_SUBCLASS(GigaHertz, Frequency)
 
 public:
     GigaHertz();
-    GigaHertz(const double value);
-    GigaHertz(const Frequency& value);
+    GigaHertz(const double);
+    GigaHertz(const Frequency&);
 
     static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2GHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * frequency::GHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * frequency::Hz2GHz; }
+
+    double toFrequency() const final                     { return (val * frequency::GHz2Hz); }
+    double fromFrequency(const double a) const final     { return a * frequency::Hz2GHz; }
 };
 
 
 //------------------------------------------------------------------------------
 // Class:  TeraHertz
-// Base class:  Object -> Number -> Frequency -> TeraHertz
 // Description:  Hertz * 0.000000000001
 //------------------------------------------------------------------------------
-class TeraHertz : public Frequency
+class TeraHertz final: public Frequency
 {
     DECLARE_SUBCLASS(TeraHertz, Frequency)
 
 public:
     TeraHertz();
-    TeraHertz(const double value);
-    TeraHertz(const Frequency& value);
+    TeraHertz(const double);
+    TeraHertz(const Frequency&);
 
     static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2THz; }
-    double toFrequency() const override                  { return static_cast<double>(val * frequency::THz2Hz); }
-    double fromFrequency(const double a) const override  { return a * frequency::Hz2THz; }
+
+    double toFrequency() const final                     { return static_cast<double>(val * frequency::THz2Hz); }
+    double fromFrequency(const double a) const final     { return a * frequency::Hz2THz; }
 };
 
 }

@@ -2,14 +2,16 @@
 #ifndef __mixr_base_FlowRate_H__
 #define __mixr_base_FlowRate_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/Volumes.hpp"
 #include "mixr/base/units/Times.hpp"
 
 namespace mixr {
 namespace base {
+
 //------------------------------------------------------------------------------
-// Classes: FlowRate
+// Class: FlowRate
 //
 // Description:  Flow Rate as a component of volume and time.
 // Factory name: FlowRate
@@ -33,9 +35,9 @@ namespace base {
 //     double FlowRate::convert(Volume* newVolume, Time* newTime)
 //
 //------------------------------------------------------------------------------
-class FlowRate : public Number
+class FlowRate : public Unit
 {
-    DECLARE_SUBCLASS(FlowRate, Number)
+    DECLARE_SUBCLASS(FlowRate, Unit)
 
 public:
     FlowRate(double newFlowRate, Volume* volume, Time* time);
@@ -49,9 +51,9 @@ public:
     bool set(const double newFlowRate, Volume*, Time*);
 
 private:
-    Volume* myVolume {};       // volume
-    Time*   myTime {};         // time
-    double  flowRate {1.0};    // flow rate
+    Volume* myVolume{};       // volume
+    Time*   myTime{};         // time
+    double  flowRate{1.0};    // flow rate
 
 private:
     // slot table helper methods

@@ -1,8 +1,6 @@
 
 #include "mixr/base/units/Forces.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -18,7 +16,7 @@ Force::Force()
     STANDARD_CONSTRUCTOR()
 }
 
-Force::Force(const double value) : Number(value)
+Force::Force(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }

@@ -13,6 +13,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"

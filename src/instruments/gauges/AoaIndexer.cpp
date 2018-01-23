@@ -1,6 +1,7 @@
 #include "mixr/instruments/gauges/AoaIndexer.hpp"
 
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/Angles.hpp"
 #include <GL/glu.h>
 

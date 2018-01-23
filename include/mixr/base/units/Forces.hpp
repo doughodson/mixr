@@ -1,25 +1,19 @@
 //------------------------------------------------------------------------------
 // Classes:  Force, PoundForces, Newtons, Poundals, KiloNewtons
-//
-// Base class:  Object -> Number -> Force
-//              Object -> Number -> Force -> Newtons
-//              Object -> Number -> Force -> KiloNewtons
-//              Object -> Number -> Force -> Poundals
-//              Object -> Number -> Force -> PoundForces
 //------------------------------------------------------------------------------
 
 #ifndef __mixr_base_Forces_H__
 #define __mixr_base_Forces_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
+
 #include "mixr/base/units/force_utils.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Force
+// Class: Force
 // Description:  Base class for forces.  Defined as a Newton which is
 //               equivalent to an instance of Newtons with its value equal
 //               to 1.0.
@@ -53,103 +47,104 @@ namespace base {
 //        static function to convert the given Force derived
 //        instance into the units of a specific Force derived class.
 //------------------------------------------------------------------------------
-class Force : public Number
+class Force : public Unit
 {
-    DECLARE_SUBCLASS(Force, Number)
+    DECLARE_SUBCLASS(Force, Unit)
 
 public:
     Force();
-    Force(const double value);
+    Force(const double);
 
     void set(const double v) { val = v; }
     void set(const Force& n) { val = fromForce(n.toForce()); }
 
+    double convert(const Force& n){ return fromForce(n.toForce()); }
+
     virtual double toForce() const = 0;
     virtual double fromForce(const double a) const = 0;
-    double convert(const Force& n){ return fromForce(n.toForce()); }
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Force& n)
    { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 //------------------------------------------------------------------------------
-// Class:  Newtons
-// Base class:  Object -> Number -> Force -> Newtons
+// Class: Newtons
 // Description:  An instance of Newtons with its value equal to 1.0 is one
 //               base unit for forces.
 //------------------------------------------------------------------------------
-class Newtons : public Force
+class Newtons final: public Force
 {
     DECLARE_SUBCLASS(Newtons, Force)
 
 public:
     Newtons();
-    Newtons(const double value);
-    Newtons(const Force& value);
+    Newtons(const double);
+    Newtons(const Force&);
 
     static double convertStatic(const Force& n)        { return n.toForce(); }
-    double toForce() const override                    { return static_cast<double>(val); }
-    double fromForce(const double a) const override    { return a; }
+
+    double toForce() const final                       { return val; }
+    double fromForce(const double a) const final       { return a; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  KiloNewtons
-// Base class:  Object -> Number -> Force -> KiloNewtons
+// Class: KiloNewtons
 // Description:  Newtons * 1000.0
 //------------------------------------------------------------------------------
-class KiloNewtons : public Force
+class KiloNewtons final: public Force
 {
     DECLARE_SUBCLASS(KiloNewtons, Force)
 
 public:
     KiloNewtons();
-    KiloNewtons(const double value);
-    KiloNewtons(const Force& value);
+    KiloNewtons(const double);
+    KiloNewtons(const Force&);
 
     static double convertStatic(const Force& n)        { return n.toForce() * force::N2KN; }
-    double toForce() const override                    { return static_cast<double>(val * force::KN2N); }
-    double fromForce(const double a) const override    { return a * force::N2KN; }
+
+    double toForce() const final                       { return (val * force::KN2N); }
+    double fromForce(const double a) const final       { return a * force::N2KN; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  PoundForces
-// Base class:  Object -> Number -> Force -> PoundForces
+// Class: PoundForces
 // Description:  Newtons * 0.224809
 //------------------------------------------------------------------------------
-class PoundForces : public Force
+class PoundForces final: public Force
 {
     DECLARE_SUBCLASS(PoundForces, Force)
 
 public:
     PoundForces();
-    PoundForces(const double value);
-    PoundForces(const Force& value);
+    PoundForces(const double);
+    PoundForces(const Force&);
 
     static double convertStatic(const Force& n)        { return n.toForce() * force::N2PF; }
-    double toForce() const override                    { return static_cast<double>(val * force::PF2N); }
-    double fromForce(const double a) const override    { return a * force::N2PF; }
+
+    double toForce() const final                       { return (val * force::PF2N); }
+    double fromForce(const double a) const final       { return a * force::N2PF; }
 };
 
 
 //------------------------------------------------------------------------------
-// Class:  Poundals
-// Base class:  Object -> Number -> Force -> Poundals
+// Class: Poundals
 // Description:  Newtons * 7.23301
 //------------------------------------------------------------------------------
-class Poundals : public Force
+class Poundals final: public Force
 {
     DECLARE_SUBCLASS(Poundals, Force)
 
 public:
     Poundals();
-    Poundals(const double value);
-    Poundals(const Force& value);
+    Poundals(const double);
+    Poundals(const Force&);
 
     static double convertStatic(const Force& n)        { return n.toForce() * force::N2PD; }
-    double toForce() const override                    { return static_cast<double>(val * force::PD2N); }
-    double fromForce(const double a) const override    { return a * force::N2PD; }
+
+    double toForce() const final                       { return (val * force::PD2N); }
+    double fromForce(const double a) const final       { return a * force::N2PD; }
 };
 
 }

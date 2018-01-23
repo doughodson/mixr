@@ -2,7 +2,7 @@
 #ifndef __mixr_base_LinearVelocity_H__
 #define __mixr_base_LinearVelocity_H__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/Unit.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,23 +11,9 @@ class Time;
 
 //---------------------------------------------------------------------
 // Class: LinearVelocity
-// Base class:  Object -> Number -> LinearVelocity
 //
 // Description: Linear velocity with internal units of meters/second.
 //              Will convert to desired units if needed.
-//              Distance: Object -> Number -> Distance -> Inches
-//                        Object -> Number -> Distance -> Inches
-//                        Object -> Number -> Distance -> Feet
-//                        Object -> Number -> Distance -> Meters
-//                        Object -> Number -> Distance -> CentiMeters
-//                        Object -> Number -> Distance -> KiloMeters
-//                        Object -> Number -> Distance -> NauticalMiles
-//                        Object -> Number -> Distance -> StatuteMiles
-//              Time: Object -> Number -> Time -> MilliSeconds
-//                    Object -> Number -> Time -> Seconds
-//                    Object -> Number -> Time -> Minutes
-//                    Object -> Number -> Time -> Hours
-//                    Object -> Number -> Time -> Days
 //
 //              Will convert input units to meters/second.
 //
@@ -91,23 +77,21 @@ class Time;
 //        will output the answer in degrees per millisecond)
 //
 //--------------------------------------------------------------------
-class LinearVelocity : public Number
+class LinearVelocity : public Unit
 {
-    DECLARE_SUBCLASS(LinearVelocity, Number)
+    DECLARE_SUBCLASS(LinearVelocity, Unit)
 
 public:
-
-    //Constructor for input parser:
     LinearVelocity();
     //Constructor with input as meters per second:
-    LinearVelocity(const double newLinearVelocityMetersPerSec);
+    LinearVelocity(const double);
     //Constructor with distance in units desired and time in units desired:
     LinearVelocity(const Distance* const newDistance, const Time* const newTime);
 
     //Returns in meters/second:
     double getMetersPerSecond() const;
     //Convert routine - converts Linear velocity and outputs in units specified:
-    double convert(Distance* newDistance, Time* newTime);
+    double convert(Distance*, Time*);
 
     bool setMetersPerSecond(const double newLinearVelocity);
 
@@ -117,7 +101,6 @@ public:
     //---------------------------------------------------------------------
     //Conversion Constants
     //---------------------------------------------------------------------
-
     static const double FPS2KTSCC;    // feet per second to knots (conversion constant)
 
 private:

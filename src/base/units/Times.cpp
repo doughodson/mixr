@@ -2,7 +2,6 @@
 // Time, Seconds, MilliSeconds, Minutes, Hours, Days
 //------------------------------------------------------------------------------
 #include "mixr/base/units/Times.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -14,12 +13,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Time, "AbstractTime")
 EMPTY_SLOTTABLE(Time)
 EMPTY_DELETEDATA(Time)
 
-Time::Time() : Number()
+Time::Time()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-Time::Time(const double value) : Number(value)
+Time::Time(const double value) : Unit(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -27,7 +26,7 @@ Time::Time(const double value) : Number(value)
 void Time::copyData(const Time& org, const bool)
 {
    BaseClass::copyData(org);
-   val = fromTime(org.toTime());;
+   val = fromTime(org.toTime());
 }
 
 //==============================================================================

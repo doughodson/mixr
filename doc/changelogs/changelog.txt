@@ -200,14 +200,14 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
 - Topic: Unit oriented classes
 
-  Units are no longer numbers; they are units.  Units represents magnitudes of a
+  Units are no longer Numbers; they are units.  Units represents magnitudes of a
   quantity. Obviously they are related to numbers; and can be considered a piece
   of meta-data.  Units themselves are not numbers, but because the naturally relate
-  to numbers, or a specific value, the unit classes within MIXR specify a number.
+  to numbers, or a specific value, the unit classes within MIXR contain a number.
   When parsing and reading in an EDL file, the numbers they contain are accessed
   in much the same way a number is.  The unit itself provides a context to understand
-  its intrinsic value relate to other units.  The unit classes and utility functions
-  provide the capability to translate from one unit to another.
+  its intrinsic measurement value.  The unit classes and utility functions provide
+  the capability to translate from one unit to another.
 
 - Topic: Character arrays, strings, and String class - moving to std::string
 
@@ -320,7 +320,6 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
    MIXR code is now be written using these (C++11) provided capabilities.
 
-
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -372,7 +371,7 @@ base library (mixr_base)
       2) Internally, ipAddr is now being stored as a std::string
 
    -------------------
-   - Other classes -
+   - Numeric classes -
    -------------------
 
    Boolean class
@@ -400,6 +399,42 @@ base library (mixr_base)
              zPow()  --> std::pow(std::complex)
              zConj() --> std::conj(std::complex)
              zInv()  --> 1.0/std::complex
+
+   Number class
+      1) Methods associated with processing of Boolean values have been removed,
+         please use the Boolean class instead
+      2) Deleted 'getInt64' method.  Unused, and probably returns the wrong
+         result on certain machines.  If you need it, do an explicit cast of
+         the value contained by Number instance to what you want:
+
+         Number x(4.0);
+         int64_t my64 = static_cast<int64_t>(x.getValue());
+
+   -------------------
+   - Unit classes -
+   -------------------
+
+   -- Unit classes are no longer based on Number.
+   -- As these classes were being updated, it appears that a number of rate
+      oriented units are unfinished and probably non-functional. At some point,
+      these will be improved.
+
+   Decibel class
+      1) This class is no longer a subclass of Number, it is a container
+         class that stores a number that is associated with that particular
+         quantity of measurement.
+
+   FlowRate class
+      1) This class appears to be broken.
+
+   Unit class
+      1) New abstract class that serves the role of storing a double
+         precision value that is managed (converted back and forth) by more
+         specific unit classes (e.g., Angle, Distance, Power, etc).
+
+   -------------------
+   - Other classes -
+   -------------------
 
    Component class
       1) Slot parameters 'enableTimingStats', 'printTimingStats', and
@@ -429,16 +464,6 @@ base library (mixr_base)
          correctly - this change helps avoid configuration input mistakes.
       2) Inputs for slot 'direction' is now an identifier for both classes that
          accept valid directions { north, south } or { east, west }.
-
-   Number class
-      1) Methods associated with processing of Boolean values have been removed,
-         please use the Boolean class instead
-      2) Deleted 'getInt64' method.  Unused, and probably returns the wrong
-         result on certain machines.  If you need it, do an explicit cast of
-         the value contained by Number instance to what you want:
-
-         Number x(4.0);
-         int64_t my64 = static_cast<int64_t>(x.getValue());
 
    String class
       1) Removal of 'virtual' from several methods that don't need it. String is a
@@ -635,7 +660,7 @@ ig library (mixr_ig_cigi)
       1) Internally 'federateName' is now being stored as an Identifier
       2) Slot parameter 'hideOwnshipModel' now accepts a Boolean
 
-- The move to storing a fererate name as an Identifier caused related code
+- The move to storing a federate name as an Identifier caused related code
   to change to use this datatype.
 
 --------------------------------------------------------------------------------
@@ -724,7 +749,7 @@ models library (mixr_models)
       3) Slot parameter 'disableQueries' now accepts a Boolean
 
    Gun class
-      1) Slot parameter 'unlimied' now accepts a Boolean
+      1) Slot parameter 'unlimited' now accepts a Boolean
 
    Player class
       1) The enumerated list of coordinate systems is now a class (i.e.,

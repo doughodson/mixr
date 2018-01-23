@@ -2,18 +2,18 @@
 #ifndef __mixr_base_Decibel_H__
 #define __mixr_base_Decibel_H__
 
-#include "mixr/base/numeric/Number.hpp"
-#include <iostream>
+#include "mixr/base/Object.hpp"
 
 namespace mixr {
 namespace base {
+class Number;
 
 //------------------------------------------------------------------------------
-// Class:  Decibel
+// Class: Decibel
 //
-// Description:  Decibel container class.    db = 10 * LOG10(value)
-//               Provides methods for handling and operating with decibels.
-//               All member functions handle the number in decibels.
+// Description: Decibel container class.    db = 10 * LOG10(value)
+//              Provides methods for handling and operating with decibels.
+//              All member functions handle the number in decibels.
 //
 // Factory name: dB
 //
@@ -41,16 +41,19 @@ namespace base {
 //      Input/Output stream operators: >>  <<
 //          Are C++ equivalents.  Values are in decibels.
 //------------------------------------------------------------------------------
-class Decibel : public Number
+class Decibel final: public Object
 {
-    DECLARE_SUBCLASS(Decibel, Number)
+    DECLARE_SUBCLASS(Decibel, Object)
 
 public:
-    Decibel(const double value);
+    Decibel(const double);
     Decibel();
 
+    void setValue(const double);
+    double getReal() const                             { return val; }
+
+    void setValueDB(const double);
     double getValueDB() const                          { return db; }
-    virtual void setValueDB(const double v);
 
     Decibel& operator=(const double);
 
@@ -60,14 +63,13 @@ public:
     void operator-=(const Decibel&);
     void operator-=(const double);
 
-    void setValue(const double nv) override;
-
 private:
-    double db{};    // value in dBs
+    double val{};
+    double db{};      // value in dBs
 
 private:
    // slot table helper methods
-   bool setSlotValue(const Number* const) override;
+   bool setSlotValue(const Number* const);
 };
 
 //------------------------------------------------------------------------------
@@ -240,20 +242,16 @@ inline bool operator>=(const Decibel& n1, const double n2)
    return n1.getValueDB() >= n2;
 }
 
-//------------------------------------------------------------------------------
-// input stream operator:  >>
-//------------------------------------------------------------------------------
+// input stream operator: >>
 inline std::istream& operator>>(std::istream& sin, Decibel& n)
 {
-    double tmp = 0;
+    double tmp{};
     sin >> tmp;
     n.setValueDB(tmp);
     return sin;
 }
 
-//------------------------------------------------------------------------------
-// output stream operator:  <<
-//------------------------------------------------------------------------------
+// output stream operator: <<
 inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
 {
    sout << n.getValueDB();

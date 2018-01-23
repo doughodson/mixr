@@ -94,6 +94,7 @@ OBJS =  \
 	units/Masses.o \
 	units/Powers.o \
 	units/Times.o \
+	units/Unit.o \
 	units/Volumes.o \
 	util/platform/system_linux.o \
 	util/lfi.o \
