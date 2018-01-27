@@ -1082,7 +1082,7 @@ bool DataRecorder::setSlotEventName(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      eventName = msg->str();
+      eventName = msg->to_string();
       ok = true;
    }
    return ok;
@@ -1092,7 +1092,7 @@ bool DataRecorder::setSlotApplication(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      application = msg->str();
+      application = msg->to_string();
       ok = true;
    }
    return ok;
@@ -1103,7 +1103,7 @@ bool DataRecorder::setSlotCaseNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      caseNum = msg->getInt();
+      caseNum = msg->toInt();
    }
    return ok;
 }
@@ -1113,7 +1113,7 @@ bool DataRecorder::setSlotMissionNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      missionNum = msg->getInt();
+      missionNum = msg->toInt();
    }
    return ok;
 }
@@ -1123,7 +1123,7 @@ bool DataRecorder::setSlotSubjectNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      subjectNum = msg->getInt();
+      subjectNum = msg->toInt();
    }
    return ok;
 }
@@ -1133,7 +1133,7 @@ bool DataRecorder::setSlotRunNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      runNum = msg->getInt();
+      runNum = msg->toInt();
    }
    return ok;
 }
@@ -1143,7 +1143,7 @@ bool DataRecorder::setSlotDay(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      day = msg->getInt();
+      day = msg->toInt();
    }
    return ok;
 }
@@ -1153,7 +1153,7 @@ bool DataRecorder::setSlotMonth(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      month = msg->getInt();
+      month = msg->toInt();
    }
    return ok;
 }
@@ -1164,7 +1164,7 @@ bool DataRecorder::setSlotYear(base::Integer* const msg)
 
    if (msg != nullptr) {
       ok = true;
-      year = msg->getInt();
+      year = msg->toInt();
    }
    return ok;
 }

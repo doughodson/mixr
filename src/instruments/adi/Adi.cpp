@@ -2,7 +2,7 @@
 #include "mixr/instruments/adi/Adi.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
 
@@ -93,7 +93,7 @@ bool Adi::setSlotMaxRate(const base::Angle* const newMR)
 bool Adi::setSlotMaxRate(const base::Number* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate(newMR->getReal());
+    if (newMR != nullptr) ok = setMaxRate(newMR->to_double());
     return ok;
 }
 
@@ -105,7 +105,7 @@ bool Adi::setSlotMaxRate(const base::Number* const newMR)
 bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 {
     bool ok = false;
-    if (newR != nullptr) ok = setRollDeg(newR->getReal());
+    if (newR != nullptr) ok = setRollDeg(newR->to_double());
     return ok;
 }
 
@@ -115,7 +115,7 @@ bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 {
     bool ok = false;
-    if (newR != nullptr) ok = setRollRad(newR->getReal());
+    if (newR != nullptr) ok = setRollRad(newR->to_double());
     return ok;
 }
 
@@ -125,7 +125,7 @@ bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 {
     bool ok = false;
-    if (newP != nullptr) ok = setPitch(newP->getReal());
+    if (newP != nullptr) ok = setPitch(newP->to_double());
     return ok;
 }
 
@@ -135,7 +135,7 @@ bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate(newMR->getReal());
+    if (newMR != nullptr) ok = setMaxRate(newMR->to_double());
     return ok;
 }
 

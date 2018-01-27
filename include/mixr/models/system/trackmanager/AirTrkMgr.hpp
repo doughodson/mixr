@@ -4,7 +4,7 @@
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 
-#include "mixr/base/units/distance_utils.hpp"
+#include "mixr/base/units/util/distance_utils.hpp"
 
 namespace mixr {
 namespace base { class Number; }

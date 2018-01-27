@@ -4,7 +4,7 @@
 
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
 #include "mixr/base/relations/Table1.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
@@ -85,7 +85,7 @@ bool Knob::setSlotValueTable(base::Table1* const x)
 bool Knob::setSlotEndless(const base::Boolean* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndless(x->getBoolean());
+    if (x != nullptr) ok = setEndless(x->to_bool());
     return ok;
 }
 
@@ -95,7 +95,7 @@ bool Knob::setSlotEndless(const base::Boolean* const x)
 bool Knob::setSlotEndlessStart(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndlessStart(x->getReal());
+    if (x != nullptr) ok = setEndlessStart(x->to_double());
     return ok;
 }
 
@@ -105,7 +105,7 @@ bool Knob::setSlotEndlessStart(const base::Number* const x)
 bool Knob::setSlotEndlessLimit(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndlessLimit(x->getReal());
+    if (x != nullptr) ok = setEndlessLimit(x->to_double());
     return ok;
 }
 

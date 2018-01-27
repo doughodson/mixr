@@ -21,7 +21,7 @@ MetaObject Object::metaObject(typeid(Object).name(), "Object", &Object::slottabl
 //    slots to be the first slots -- starting at slot number 1.
 // ---
 const char* Object::slotnames[] = { "" };
-const int Object::nslots {};
+const int Object::nslots{};
 const SlotTable Object::slottable(nullptr, 0);
 
 //------------------------------------------------------------------------------

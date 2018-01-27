@@ -18,9 +18,9 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -1398,7 +1398,7 @@ bool NetIO::setSlotVersion(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int v{num->getInt()};
+        const int v{num->toInt()};
         if (v >= 0 && v < VERSION_MAX) {
             setVersion(static_cast<unsigned char>(v));
             ok = true;
@@ -1693,7 +1693,7 @@ bool NetIO::setSlotSiteID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->getInt()};
+        int v {num->toInt()};
         if (v >= 0 && v <= 65535) {
             ok = setSiteID(static_cast<unsigned short>(v));
         } else {
@@ -1708,7 +1708,7 @@ bool NetIO::setSlotApplicationID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->getInt()};
+        int v {num->toInt()};
         if (v >= 0 && v <= 65535) {
             ok = setApplicationID(static_cast<unsigned short>(v));
         } else {
@@ -1723,7 +1723,7 @@ bool NetIO::setSlotExerciseID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->getInt()};
+        int v {num->toInt()};
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
         } else {

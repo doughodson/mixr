@@ -13,9 +13,9 @@ namespace base {
 // Class: Boolean
 //
 // Description: A data type that represents two values (true and false).  This
-//              class is defined to support the translation from an Extensible
-//              Description Language (EDL) input configuration Boolean value
-//              type to the equivalent C++ type (i.e., 'bool'). 
+//              class is defined to support the translation of Boolean type
+//              values from the Extensible Description Language (EDL) to C++
+//              code that consumes that specification.
 //
 // Factory name: Boolean
 // Slots:
@@ -27,13 +27,16 @@ class Boolean : public Object
    DECLARE_SUBCLASS(Boolean, Object)
 
 public:
-   Boolean(const bool x)               { STANDARD_CONSTRUCTOR() value = x; }
    Boolean()                           { STANDARD_CONSTRUCTOR()            }
+   explicit Boolean(const bool x)      { STANDARD_CONSTRUCTOR() value = x; }
 
-   operator bool() const               { return value;            }   // conversion
-   Boolean& operator=(const bool x)    { value = x; return *this; }   // assignment
+   explicit operator bool() const      { return value; }
 
-   bool getBoolean() const             { return value; }
+   void setValue(const bool x)         { value = x;    }
+   bool to_bool() const                { return value; }
+
+   // deprecated interface
+// bool getBoolean() const             { return value; }
 
 private:
    bool value{};

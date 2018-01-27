@@ -6,13 +6,13 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/signatures/IrSignature.hpp"
+#include "mixr/models/signature/IrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/units/Areas.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/areas.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cmath>
 
@@ -29,7 +29,7 @@ BEGIN_SLOTTABLE(IrShape)
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-   ON_SLOT(1, setSlotIrShapeArea, base::Number)
+   ON_SLOT(1, setSlotIrShapeArea, base::Area)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -45,17 +45,12 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-bool IrShape::setSlotIrShapeArea(const mixr::base::Number* const num)
+bool IrShape::setSlotIrShapeArea(const mixr::base::Area* const a)
 {
-   double value{};
-   const auto a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
-      value = static_cast<double>(sm.convert(*a));
-   } else if (num != nullptr) {
-      value = num->getReal();
+      area = sm.convert(*a);
    }
-   area = value;
    return true;
 }
 
@@ -66,15 +61,11 @@ double IrShape::getArea()
 
 double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   double angleOffBoresight{msg->getAngleOffBoresight()};
-
-   double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
-
+   const double angleOffBoresight{msg->getAngleOffBoresight()};
+   const double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
    if (angleOffBoresight > maxAngle) return 0;
-
    return getArea();
 }
-
 
 //==============================================================================
 // Class: IrSphere
@@ -110,7 +101,7 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
    } else if (s != nullptr) {
-      value = s->getReal();
+      value = s->to_double();
    }
    radius = value;
    return true;
@@ -128,6 +119,7 @@ double IrSphere::getArea()
 // Class: IrBox
 //==============================================================================
 IMPLEMENT_SUBCLASS(IrBox, "IrBox")
+EMPTY_DELETEDATA(IrBox)
 
 BEGIN_SLOTTABLE(IrBox)
    "x",
@@ -136,9 +128,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-   ON_SLOT(1, setSlotIrBoxX, base::Number)
-   ON_SLOT(2, setSlotIrBoxY, base::Number)
-   ON_SLOT(3, setSlotIrBoxZ, base::Number)
+   ON_SLOT(1, setSlotIrBoxX, base::Distance)
+   ON_SLOT(2, setSlotIrBoxY, base::Distance)
+   ON_SLOT(3, setSlotIrBoxZ, base::Distance)
 END_SLOT_MAP()
 
 IrBox::IrBox()
@@ -154,52 +146,30 @@ void IrBox::copyData(const IrBox& org, const bool)
    z = org.z;
 }
 
-void IrBox::deleteData()
+bool IrBox::setSlotIrBoxX(const mixr::base::Distance* const d)
 {
-}
-
-bool IrBox::setSlotIrBoxX(const mixr::base::Number* const s)
-{
-   double value{};
-
-   const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<double>(m.convert(*d));
-   } else if (s != nullptr) {
-      value = s->getReal();
+      x = m.convert(*d);
    }
-   x = value;
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const mixr::base::Number* const s)
+bool IrBox::setSlotIrBoxY(const mixr::base::Distance* const d)
 {
-   double value{};
-
-   const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<double>(m.convert(*d));
-   } else if (s != nullptr) {
-       value = s->getReal();
+      y = m.convert(*d);
    }
-   y = value;
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const mixr::base::Number* const s)
+bool IrBox::setSlotIrBoxZ(const mixr::base::Distance* const d)
 {
-   double value{};
-
-   const auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<double>(m.convert(*d));
-   } else if (s != nullptr) {
-       value = s->getReal();
+      z = m.convert(*d);
    }
-   z = value;
    return true;
 }
 
@@ -245,9 +215,8 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    return area;
 
 #else
-   double angleOffBoresight = msg->getAngleOffBoresight();
-
-   double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
+   const double angleOffBoresight = msg->getAngleOffBoresight();
+   const double maxAngle{msg->getSendingSensor()->getIFOVTheta()};
 
    if (angleOffBoresight > maxAngle)
       return area;

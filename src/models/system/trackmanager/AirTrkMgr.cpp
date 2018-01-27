@@ -6,14 +6,12 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
-
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/units/Times.hpp"
-
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/times.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -372,7 +370,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
    }
    else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->getReal();
+      value = num->to_double();
    }
 
    // Set the value if it's valid
@@ -401,7 +399,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::Number* const num)
    }
    else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->getReal();
+      value = num->to_double();
    }
 
    // Set the value if it's valid
@@ -424,7 +422,7 @@ bool AirTrkMgr::setSlotVelocityGate(const base::Number* const num)
    double value{};
    if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->getReal();
+      value = num->to_double();
    }
 
    // Set the value if it's valid

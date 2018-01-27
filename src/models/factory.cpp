@@ -101,15 +101,15 @@
 #include "mixr/models/system/System.hpp"
 
 // signatures
-#include "mixr/models/signatures/IrSignature.hpp"
-#include "mixr/models/signatures/AircraftIrSignature.hpp"
-#include "mixr/models/signatures/SigAzEl.hpp"
-#include "mixr/models/signatures/SigConstant.hpp"
-#include "mixr/models/signatures/SigDihedralCR.hpp"
-#include "mixr/models/signatures/SigPlate.hpp"
-#include "mixr/models/signatures/SigSphere.hpp"
-#include "mixr/models/signatures/SigSwitch.hpp"
-#include "mixr/models/signatures/SigTrihedralCR.hpp"
+#include "mixr/models/signature/IrSignature.hpp"
+#include "mixr/models/signature/AircraftIrSignature.hpp"
+#include "mixr/models/signature/SigAzEl.hpp"
+#include "mixr/models/signature/SigConstant.hpp"
+#include "mixr/models/signature/SigDihedralCR.hpp"
+#include "mixr/models/signature/SigPlate.hpp"
+#include "mixr/models/signature/SigSphere.hpp"
+#include "mixr/models/signature/SigSwitch.hpp"
+#include "mixr/models/signature/SigTrihedralCR.hpp"
 
 // misc
 #include "mixr/models/Actions.hpp"

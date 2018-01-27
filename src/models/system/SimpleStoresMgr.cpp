@@ -588,7 +588,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
 {
    // Weapon release follows the switch or by default is true
    bool wpnRel{true};
-   if (sw != nullptr) wpnRel = sw->getBoolean();
+   if (sw != nullptr) wpnRel = sw->to_bool();
 
    if ( wpnRel && (isWeaponDeliveryMode(A2A) || isWeaponDeliveryMode(A2G)) ) {
 
@@ -669,7 +669,7 @@ bool SimpleStoresMgr::onTriggerSwEvent(const base::Boolean* const sw)
       bool fire{};
       if ( isWeaponDeliveryMode(A2A) || isWeaponDeliveryMode(A2G) ) {
          if ( burst ) fire = true;
-         else fire = sw->getBoolean();
+         else fire = sw->to_bool();
       }
 
       // Pass the control to the gun

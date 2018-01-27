@@ -14,8 +14,7 @@
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Times.hpp"
-
+#include "mixr/base/units/times.hpp"
 #include "mixr/base/util/nav_utils.hpp"
 
 namespace mixr {
@@ -839,7 +838,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             } else {
-                                values[n++] = pNum->getReal();
+                                values[n++] = pNum->to_double();
                             }
                         }
                     }
@@ -855,7 +854,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             } else {
-                                values[n++] = pNum->getReal();
+                                values[n++] = pNum->to_double();
                             }
                         }
                     }

@@ -127,7 +127,7 @@ bool Table::setSlotExtrapolationEnabled(const Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setExtrapolationEnabled( msg->getBoolean() );
+      ok = setExtrapolationEnabled( msg->to_bool() );
    }
    return ok;
 }

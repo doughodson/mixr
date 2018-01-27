@@ -4,15 +4,13 @@
 
 #include "mixr/base/units/Unit.hpp"
 
-#include "mixr/base/units/Masses.hpp"
-#include "mixr/base/units/Volumes.hpp"
+#include "mixr/base/units/masses.hpp"
+#include "mixr/base/units/volumes.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
 namespace base {
-class Mass;
-class Volume;
 
 //------------------------------------------------------------------------------
 // Class: Density
@@ -73,7 +71,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     const Mass* m{n.getMass()};
     const Volume* v{n.getVolume()};
 
-    sout << "( " << n.getFactoryName() << " " << n.getReal();
+    sout << "( " << n.getFactoryName() << " " << n.getValue();
     if ( m != nullptr ) sout << " " << *m;
     if ( v != nullptr ) sout << " " << *v;
     sout << " )";

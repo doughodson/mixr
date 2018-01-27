@@ -1,10 +1,6 @@
 
 #include "mixr/models/player/Ship.hpp"
 
-#include "mixr/base/List.hpp"
-#include "mixr/base/osg/Matrixd"
-#include "mixr/base/units/Angles.hpp"
-
 namespace mixr {
 namespace models {
 

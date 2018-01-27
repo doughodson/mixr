@@ -24,14 +24,18 @@
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/relations/Table5.hpp"
 
-// Numbers
+// numeric classes and operators
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Complex.hpp"
+#include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/numeric/Operators.hpp"
+#include "mixr/base/numeric/operators/Add.hpp"
+#include "mixr/base/numeric/operators/Divide.hpp"
+#include "mixr/base/numeric/operators/Multiply.hpp"
+#include "mixr/base/numeric/operators/Subtract.hpp"
 
-// Network handlers
+// network handlers
 #include "mixr/base/network/TcpHandler.hpp"
 #include "mixr/base/network/TcpClient.hpp"
 #include "mixr/base/network/TcpServerMultiple.hpp"
@@ -40,7 +44,7 @@
 #include "mixr/base/network/UdpMulticastHandler.hpp"
 #include "mixr/base/network/UdpUnicastHandler.hpp"
 
-// Colors
+// colors
 #include "mixr/base/colors/Cie.hpp"
 #include "mixr/base/colors/Cmy.hpp"
 #include "mixr/base/colors/Hls.hpp"
@@ -50,21 +54,23 @@
 #include "mixr/base/colors/Rgba.hpp"
 #include "mixr/base/colors/Yiq.hpp"
 
-// Units
-#include "mixr/base/units/AngularVelocity.hpp"
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Areas.hpp"
-#include "mixr/base/units/Decibel.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Energies.hpp"
-#include "mixr/base/units/Forces.hpp"
-#include "mixr/base/units/Frequencies.hpp"
-#include "mixr/base/units/LinearVelocity.hpp"
-#include "mixr/base/units/Masses.hpp"
-#include "mixr/base/units/Powers.hpp"
-#include "mixr/base/units/Times.hpp"
+// units: rates
+#include "mixr/base/units/rate/AngularVelocity.hpp"
+#include "mixr/base/units/rate/LinearVelocity.hpp"
 
-// Others
+// units
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/areas.hpp"
+#include "mixr/base/units/Density.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/energies.hpp"
+#include "mixr/base/units/forces.hpp"
+#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/units/masses.hpp"
+#include "mixr/base/units/powers.hpp"
+#include "mixr/base/units/times.hpp"
+
+// other
 #include "mixr/base/EarthModel.hpp"
 
 // ubf
@@ -78,14 +84,17 @@ namespace base {
 
 Object* factory(const std::string& name)
 {
-    Object* obj {};
+    Object* obj{};
 
-    // numbers
-    if ( name == Number::getFactoryName() ) {
-        obj = new Number();
+    // numeric types
+    if ( name == Boolean::getFactoryName() ) {
+        obj = new Boolean();
     }
     else if ( name == Complex::getFactoryName() ) {
         obj = new Complex();
+    }
+    else if ( name == Decibel::getFactoryName() ) {
+        obj = new Decibel();
     }
     else if ( name == Integer::getFactoryName() ) {
         obj = new Integer();
@@ -93,27 +102,21 @@ Object* factory(const std::string& name)
     else if ( name == Float::getFactoryName() ) {
         obj = new Float();
     }
-
-    // operators
+    // numeric operators
     else if ( name == Add::getFactoryName() ) {
         obj = new Add();
-    }
-    else if ( name == Subtract::getFactoryName() ) {
-        obj = new Subtract();
-    }
-    else if ( name == Multiply::getFactoryName() ) {
-        obj = new Multiply();
     }
     else if ( name == Divide::getFactoryName() ) {
         obj = new Divide();
     }
-
-    //
-    else if ( name == Boolean::getFactoryName() ) {
-        obj = new Boolean();
+    else if ( name == Multiply::getFactoryName() ) {
+        obj = new Multiply();
+    }
+    else if ( name == Subtract::getFactoryName() ) {
+        obj = new Subtract();
     }
 
-    // position
+    // lat/long positional types
     else if ( name == Latitude::getFactoryName() ) {
         obj = new Latitude();
     }
@@ -121,7 +124,7 @@ Object* factory(const std::string& name)
         obj = new Longitude();
     }
 
-    // components
+    // utilities
     else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
     }
@@ -195,8 +198,16 @@ Object* factory(const std::string& name)
     }
 
     // units
-    else if ( name == Decibel::getFactoryName() ) {
-        obj = new Decibel();
+    else if ( name == Density::getFactoryName() ) {
+        obj = new Density();
+    }
+
+    // units: rates
+    else if ( name == AngularVelocity::getFactoryName() ) {
+        obj = new AngularVelocity();
+    }
+    else if ( name == LinearVelocity::getFactoryName() ) {
+        obj = new LinearVelocity();
     }
 
     // units: areas
@@ -357,14 +368,6 @@ Object* factory(const std::string& name)
     }
     else if ( name == Days::getFactoryName() ) {
         obj = new Days();
-    }
-
-    // units: velocities
-    else if ( name == AngularVelocity::getFactoryName() ) {
-        obj = new AngularVelocity();
-    }
-    else if ( name == LinearVelocity::getFactoryName() ) {
-        obj = new LinearVelocity();
     }
 
     // colors

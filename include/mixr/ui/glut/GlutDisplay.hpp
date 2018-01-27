@@ -80,8 +80,8 @@ public:
 
    // Gets/sets the idle sleep time in milliseconds.  This is used by
    // the idle time callback, idleCB(), to release the CPU.
-   unsigned int getIdleSleepTime() const;
-   virtual bool setIdleSleepTime(const unsigned int ms);
+   int getIdleSleepTime() const;
+   virtual bool setIdleSleepTime(const int ms);
 
    // Enable/disable resizing of our subwindows.
    virtual bool setResizeWindows(const bool flg);
@@ -158,8 +158,8 @@ private:
    bool okToResize {};                 // Ok to resize our subwindows (main windows only)
 
    // main window only data
-   bool fullScreenFlg {};              // Full screen flag (main window only)
-   unsigned int idleSleepTimeMS {};    // Idle callback sleep time (MS)
+   bool fullScreenFlg{};               // Full screen flag (main window only)
+   int idleSleepTimeMS{};              // Idle callback sleep time (MS)
 
    // Subwindow only data
    int mainWinId {-1};                 // Main window ID (sub-window only)
@@ -190,7 +190,7 @@ inline GLdouble GlutDisplay::getPickWidth() const                         { retu
 inline GLdouble GlutDisplay::getPickHeight() const                        { return pickHeight;      }
 inline bool GlutDisplay::isAccumBuff() const                              { return accumBuff;       }
 inline bool GlutDisplay::isStencilBuff() const                            { return stencilBuff;     }
-inline unsigned int GlutDisplay::getIdleSleepTime() const                 { return idleSleepTimeMS; }
+inline int GlutDisplay::getIdleSleepTime() const                          { return idleSleepTimeMS; }
 inline const base::Vec2d& GlutDisplay::getSubwindowPosition() const       { return swPosition;      }
 inline const base::Vec2d& GlutDisplay::getSubwindowSize() const           { return swSize;          }
 

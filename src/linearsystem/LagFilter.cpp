@@ -1,7 +1,8 @@
 
 #include "mixr/linearsystem/LagFilter.hpp"
+
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/times.hpp"
 
 namespace mixr {
 namespace linearsystem {
@@ -81,7 +82,7 @@ bool LagFilter::setSlotTau(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const double tsec {msg->getReal()};
+      const double tsec {msg->to_double()};
       if (tsec > 0) {
          setTau( tsec );
          ok = true;

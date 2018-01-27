@@ -15,13 +15,12 @@ class Identifier;
 // Class: Longitude
 //
 // Description: Stores a longitude coordinate expressed in terms of a direction
-//              {east or west} and degrees, minutes and seconds.  Provides
-//              a useful conversion of the coordinate expressed in this form
-//              a decimal representation (a signal value).
+//              {east or west}, degrees, minutes and seconds.  Can convert
+//              this representation into decimal degrees.
 //
 // Factory name: Longitude
 // Slots:
-//    direction <Identifier>  ! Set the direction { north, south, east, west } (default: none)
+//    direction <Identifier>  ! Set the direction { east, west } (default: none)
 //    degrees   <Number>      ! Set the degrees component (default: 0)
 //    minutes   <Number>      ! Set the minutes component (default: 0)
 //    seconds   <Number>      ! Set the seconds component (default: 0.0)
@@ -36,8 +35,7 @@ public:
 
    Longitude();
 
-   double getValue() const         { return val; }
-   double getDouble() const        { return val; }
+   double getDecimalDegrees() const         { return val; }
 
    Dir getDir() const              { return dir; }
    int getDeg() const              { return deg; }

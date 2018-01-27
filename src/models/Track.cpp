@@ -6,8 +6,8 @@
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/SensorMsg.hpp"
 
-#include "mixr/base/units/angle_utils.hpp"
-#include "mixr/base/units/distance_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/units/util/distance_utils.hpp"
 
 #include <cmath>
 

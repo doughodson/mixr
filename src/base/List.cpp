@@ -184,7 +184,7 @@ unsigned int List::getNumberList(double values[], const unsigned int max) const
         const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
-            values[n++] = pp->getDouble();
+            values[n++] = pp->to_double();
         } else {
             // when we do not have a number
             values[n++] = 0.0;
@@ -206,7 +206,7 @@ unsigned int List::getNumberList(float values[], const unsigned int max) const
         const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
-            values[n++] = pp->getFloat();
+            values[n++] = static_cast<float>(pp->to_double());
         } else {
             // when we do not have a number
             values[n++] = 0.0f;
@@ -230,7 +230,7 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
         if (pp != nullptr) {
             // when we have a number
             //values[n++] = pp->getInt(); - revised by DDH
-            values[n++] = static_cast<int>(pp->getDouble());
+            values[n++] = static_cast<int>(pp->to_double());
         } else {
             // when we do not have a number
             values[n++] = 0;

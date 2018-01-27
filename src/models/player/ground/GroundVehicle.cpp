@@ -4,8 +4,8 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include <cmath>
 

@@ -2,6 +2,7 @@
 #include "mixr/instruments/Instrument.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -20,7 +21,7 @@ END_SLOTTABLE(Instrument)
 
 BEGIN_SLOT_MAP(Instrument)
     ON_SLOT(1, setSlotScalingTable, base::Table1)
-    ON_SLOT(2, setSlotInstVal, base::Number)
+    ON_SLOT(2, setSlotInstVal,      base::Number)
     ON_SLOT(3, setSlotAllowValPass, base::Boolean)
 END_SLOT_MAP()
 
@@ -81,7 +82,7 @@ bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 bool Instrument::setSlotInstVal(const base::Number* const newVal)
 {
     bool ok = false;
-    if (newVal != nullptr) ok = setInstVal(newVal->getReal());
+    if (newVal != nullptr) ok = setInstVal(newVal->to_double());
     return ok;
 }
 
@@ -91,7 +92,7 @@ bool Instrument::setSlotInstVal(const base::Number* const newVal)
 bool Instrument::setSlotAllowValPass(const base::Boolean* const newAVP)
 {
     bool ok = false;
-    if (newAVP != nullptr) ok = setAllowValPass(newAVP->getBoolean());
+    if (newAVP != nullptr) ok = setAllowValPass(newAVP->to_bool());
     return ok;
 }
 
@@ -108,19 +109,17 @@ bool Instrument::setAllowValPass(const bool newVP)
 // EVENT
 // Update our gauge if necessary, then send the event down to all of our graphic components who need it
 //------------------------------------------------------------------------------
-// onUpdateInstVal() -- update our instrument value
+// update our instrument value
 //------------------------------------------------------------------------------
 bool Instrument::onUpdateInstVal(const base::Number* const newPos)
 {
     bool ok = false;
     // now call our set function
-    ok = setInstVal(newPos->getReal());
+    ok = setInstVal(newPos->to_double());
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// setInstVal() -- sets our instrument val
-//------------------------------------------------------------------------------
+// sets our instrument value
 bool Instrument::setInstVal(const double newPos)
 {
     // store our raw instrument value, in case some instruments need them
@@ -132,9 +131,6 @@ bool Instrument::setInstVal(const double newPos)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Instrument::updateData(const double dt)
 {
    // update our base class
@@ -155,7 +151,7 @@ void Instrument::updateData(const double dt)
             if (pair != nullptr) {
                // send the value down to all of our instrument components
                const auto myInst = dynamic_cast<Instrument*>(pair->object());
-               base::Number n = preScaleInstVal;
+               base::Float n(preScaleInstVal);
                if (myInst != nullptr) myInst->event(UPDATE_INSTRUMENTS, &n);
             }
             item = item->getNext();

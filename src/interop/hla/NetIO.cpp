@@ -764,7 +764,7 @@ bool NetIO::setSlotRegulatingTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      if (msg->getBoolean()) setRegulating(RTI::RTI_TRUE);
+      if (msg->to_bool()) setRegulating(RTI::RTI_TRUE);
       else setRegulating(RTI::RTI_FALSE);
       ok = true;
    }
@@ -775,7 +775,7 @@ bool NetIO::setSlotConstrainedTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      if (msg->getBoolean()) setConstrained(RTI::RTI_TRUE);
+      if (msg->to_bool()) setConstrained(RTI::RTI_TRUE);
       else setConstrained(RTI::RTI_FALSE);
       ok = true;
    }

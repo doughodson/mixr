@@ -9,7 +9,7 @@
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 namespace mixr {
 namespace linkage {
@@ -243,7 +243,7 @@ bool IoHandler::setSlotPriority(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double x{num->getReal()};
+        const double x{num->to_double()};
         if (x >= 0 && x <= 1.0) {
             pri = x;
             ok = true;

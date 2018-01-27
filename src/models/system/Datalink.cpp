@@ -13,8 +13,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Distances.hpp"
-
+#include "mixr/base/units/distances.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
 namespace mixr {
@@ -488,7 +487,7 @@ bool Datalink::setSlotRadioId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->getInt()};
+      const int v{msg->toInt()};
       if (v >= 0 && v <= 0xffff) {
          radioId = static_cast<unsigned short>(v);
          useRadioIdFlg = true;

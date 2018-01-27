@@ -646,7 +646,7 @@ void Component::processComponents(
             select(str);
             str->unref();
       } else {
-            const auto num = new Integer( static_cast<int>((static_cast<Number*>(selection))->getDouble()) );
+            const auto num = new Integer( static_cast<int>((static_cast<Number*>(selection))->to_double()) );
             select(num);
             num->unref();
       }
@@ -698,11 +698,11 @@ bool Component::select(const Integer* const num)
     setSelectionName(nullptr);
     if (num != nullptr) {
         setSelectionName(num);
-        Pair* p{findByIndex(num->getInt())};
+        Pair* p{findByIndex(num->toInt())};
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
         } else {
-           std::cerr << "Component::select: index out of range; num = " << num->getInt() << std::endl;
+           std::cerr << "Component::select: index out of range; num = " << num->toInt() << std::endl;
            ok = false;
         }
     }
@@ -751,7 +751,7 @@ bool Component::setSlotEnableTimingStats(const Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setTimingStatsEnabled(num->getBoolean());
+      ok = setTimingStatsEnabled(num->to_bool());
    }
    return ok;
 }
@@ -761,7 +761,7 @@ bool Component::setSlotPrintTimingStats(const Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setPrintTimingStats(num->getBoolean());
+      ok = setPrintTimingStats(num->to_bool());
    }
    return ok;
 }
@@ -771,7 +771,7 @@ bool Component::setSlotFreeze(const Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      freeze(num->getBoolean());
+      freeze(num->to_bool());
       ok = true;
    }
    return ok;
@@ -827,7 +827,7 @@ bool Component::setSlotEnableMsgType(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = enableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
+      ok = enableMessageTypes( static_cast<unsigned short>(msg->toInt()) );
    }
    return ok;
 }
@@ -858,7 +858,7 @@ bool Component::setSlotDisableMsgType(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = disableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
+      ok = disableMessageTypes( static_cast<unsigned short>(msg->toInt()) );
    }
    return ok;
 }
@@ -1143,7 +1143,7 @@ Object* Component::SendData::getValue(const double value)
         return past;
     }
 
-    if (num != nullptr && num->getDouble() != value) {
+    if (num != nullptr && num->to_double() != value) {
         num->setValue(value);
         return num;
     } else {
@@ -1193,8 +1193,8 @@ Object* Component::SendData::getValue(const bool value)
         past = new Boolean(value);
         return past;
     }
-    if (*num != value) {
-        *num = value;
+    if (static_cast<bool>(*num) != value) {
+        num->setValue(value);
         return num;
     } else {
         return nullptr;

@@ -134,7 +134,7 @@ bool Sar::setSlotChipSize(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int n{msg->getInt()};
+        const int n{msg->toInt()};
         if (n >= 0) {
             ok = setChipSize( n );
         }

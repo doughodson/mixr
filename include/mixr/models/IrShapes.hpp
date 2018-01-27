@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Area; class Distance; class Number; }
 namespace models {
 class IrQueryMsg;
 
@@ -30,7 +30,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotIrShapeArea(const base::Number* const);
+   bool setSlotIrShapeArea(const base::Area* const);
 };
 
 //------------------------------------------------------------------------------
@@ -65,9 +65,9 @@ private:
 //
 // Factory name: IrBox
 // Slots:
-//   x        < Number>         ! x dimension  (default is 10)
-//   y        < Number>         ! y dimension
-//   z        < Number>         ! z dimension
+//   x      <base::Distance>         ! x dimension (default is 10 meters)
+//   y      <base::Distance>         ! y dimension (default is 10 meters)
+//   z      <base::Distance>         ! z dimension (default is 10 meters)
 //------------------------------------------------------------------------------
 class IrBox : public IrShape
 {
@@ -81,12 +81,14 @@ public:
    double getReflectorAreaInFieldOfView(const IrQueryMsg* const) override;
 
 private:
-   double x{10.0}, y{10.0}, z{10.0};
+   double x{10.0};
+   double y{10.0};
+   double z{10.0};
 
 private:
-   bool setSlotIrBoxX(const base::Number* const);
-   bool setSlotIrBoxY(const base::Number* const);
-   bool setSlotIrBoxZ(const base::Number* const);
+   bool setSlotIrBoxX(const base::Distance* const);
+   bool setSlotIrBoxY(const base::Distance* const);
+   bool setSlotIrBoxZ(const base::Distance* const);
 };
 
 }

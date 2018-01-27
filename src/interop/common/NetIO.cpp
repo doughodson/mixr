@@ -19,10 +19,10 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Decibel.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/numeric/Decibel.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -1040,7 +1040,7 @@ bool NetIO::setSlotNetworkID(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int v{num->getInt()};
+        const int v{num->toInt()};
         if (v >= 1 && v <= static_cast<int>(MAX_NETWORD_ID)) {
             ok = setNetworkID(static_cast<unsigned short>(v));
         } else {
@@ -1068,7 +1068,7 @@ bool NetIO::setSlotEnableInput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        inputFlg = p->getBoolean();
+        inputFlg = p->to_bool();
         ok = true;
     }
     return ok;
@@ -1079,7 +1079,7 @@ bool NetIO::setSlotEnableOutput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        outputFlg = p->getBoolean();
+        outputFlg = p->to_bool();
         ok = true;
     }
     return ok;
@@ -1090,7 +1090,7 @@ bool NetIO::setSlotEnableRelay(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        relayFlg = p->getBoolean();
+        relayFlg = p->to_bool();
         ok = true;
     }
     return ok;

@@ -2,7 +2,7 @@
 #include "mixr/base/colors/Hsva.hpp"
 
 #include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 namespace mixr {
 namespace base {
@@ -63,7 +63,7 @@ bool Hsva::colorInterpolate(
 bool Hsva::setSlotAlpha(const Number* const msg)
 {
    if (msg == nullptr) return false;
-   double value = msg->getReal();
+   double value = msg->to_double();
    bool ok = (value >= 0 && value <= 1);
    if (ok) {
       hsv[ALPHA] = value;

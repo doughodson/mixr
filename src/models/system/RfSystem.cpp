@@ -10,10 +10,10 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Decibel.hpp"
-#include "mixr/base/units/Powers.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/powers.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 namespace mixr {
 namespace models {
@@ -22,8 +22,8 @@ IMPLEMENT_SUBCLASS(RfSystem, "RfSystem")
 
 BEGIN_SLOTTABLE(RfSystem)
    "antennaName",          //  1: Name of the requested Antenna  (base::Identifier)
-   "frequency",            //  2: Frequency     (Hz; def: 0)   (base::Number or base::Frequency)
-   "bandwidth",            //  3: Bandwidth     (Hz; def: 1)   (base::Number or base::Frequency)
+   "frequency",            //  2: Frequency     (Hz; def: 0)     (base::Frequency)
+   "bandwidth",            //  3: Bandwidth     (Hz; def: 1)     (base::Frequency)
    "powerPeak",            //  4: Peak Power (Watts; def: 0)
    "threshold",            //  5: RF: Receiver threshold above noise (dB, def: 0.0)
    "noiseFigure",          //  6: RF: Noise Figure (> 1)            (no units; def: 1.0)
@@ -32,14 +32,14 @@ BEGIN_SLOTTABLE(RfSystem)
    "lossRecv",             //  9: RF: Receive loss                  (dB or no units; def: 1.0)
    "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no units; def: 1.0)
    "disableEmissions",     // 11: Disable sending emission packets flag (default: false)
-   "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (base::Number or base::Frequency)
+   "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (base::Frequency)
 END_SLOTTABLE(RfSystem)
 
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,         base::Identifier)
-    ON_SLOT(2,  setSlotFrequency,           base::Number)
-    ON_SLOT(3,  setSlotBandwidth,           base::Number)
-    ON_SLOT(4,  setSlotPeakPower,           base::Number)
+    ON_SLOT(2,  setSlotFrequency,           base::Frequency)
+    ON_SLOT(3,  setSlotBandwidth,           base::Frequency)
+    ON_SLOT(4,  setSlotPeakPower,           base::Power)
     ON_SLOT(5,  setSlotRfThreshold,         base::Decibel)
     ON_SLOT(6,  setSlotRfNoiseFigure,       base::Number)
     ON_SLOT(7,  setSlotRfSysTemp,           base::Number)
@@ -47,7 +47,7 @@ BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(9,  setSlotRfReceiveLoss,       base::Number)
     ON_SLOT(10, setSlotRfSignalProcessLoss, base::Number)
     ON_SLOT(11, setSlotDisableEmissions,    base::Boolean)
-    ON_SLOT(12, setSlotBandwidthNoise,      base::Number)
+    ON_SLOT(12, setSlotBandwidthNoise,      base::Frequency)
 END_SLOT_MAP()
 
 RfSystem::RfSystem()
@@ -587,8 +587,7 @@ bool RfSystem::setSlotAntennaName(base::Identifier* const p)
    return true;
 }
 
-// setSlotFrequency() -- Set the Frequency (base::Number or base::Frequency)
-bool RfSystem::setSlotFrequency(base::Number* const v)
+bool RfSystem::setSlotFrequency(base::Frequency* const v)
 {
     bool ok{};
     double x{-1.0};
@@ -599,7 +598,7 @@ bool RfSystem::setSlotFrequency(base::Number* const v)
         x = base::Hertz::convertStatic(*p);
     } else if (v != nullptr) {
         // Just a Number
-        x = v->getReal();
+        x = v->getValue();
     }
 
     // Test and set the freq
@@ -612,77 +611,57 @@ bool RfSystem::setSlotFrequency(base::Number* const v)
     return ok;
 }
 
-// bandwidth: Bandwidth     (Hz)
-bool RfSystem::setSlotBandwidth(base::Number* const num)
+bool RfSystem::setSlotBandwidth(base::Frequency* const freq)
 {
     bool ok{};
-    if (num != nullptr) {
+    double bw{-1.0};
 
-        double bw{-1.0};
+    if (freq != nullptr) {
+        // convert frequency to hertz
+        bw = base::Hertz::convertStatic(*freq);
+    }
 
-        const auto p = dynamic_cast<const base::Frequency*>(num);
-        if (p != nullptr) {
-            // Has frequency and we need hertz
-            bw = base::Hertz::convertStatic(*p);
-        } else {
-            // Just a Number
-            bw = num->getReal();
-        }
-
-        if (bw >= 1.0) {
-            ok = setBandwidth(bw);
-        } else {
-            std::cerr << "RfSystem::setSlotBandwidth: Bandwidth must be greater than or equal to one!" << std::endl;
-        }
+    if (bw >= 1.0) {
+        ok = setBandwidth(bw);
+    } else {
+        std::cerr << "RfSystem::setSlotBandwidth: Bandwidth must be greater than or equal to one!" << std::endl;
     }
     return ok;
 }
 
-// bandwidthNoise: Bandwidth Noise  (Hz)
-bool RfSystem::setSlotBandwidthNoise(base::Number* const num)
+// bandwidthNoise: Bandwidth Noise (Hz)
+bool RfSystem::setSlotBandwidthNoise(base::Frequency* const freq)
 {
     bool ok{};
-    if (num != nullptr) {
+    double bw{-1.0};
 
-        double bw{-1.0};
+    if (freq != nullptr) {
+        // convert frequency to hertz
+        bw = base::Hertz::convertStatic(*freq);
+    }
 
-        const auto p = dynamic_cast<const base::Frequency*>(num);
-        if (p != nullptr) {
-            // Has frequency and we need hertz
-            bw = base::Hertz::convertStatic(*p);
-        } else {
-            // Just a Number
-            bw = num->getReal();
-        }
-
-        if (bw >= 1.0) {
-            ok = setBandwidthNoise(bw);
-        } else {
-            std::cerr << "RfSystem::setSlotBandwidthNoise: Bandwidth Noise must be greater than or equal to one!" << std::endl;
-        }
+    if (bw >= 1.0) {
+        ok = setBandwidthNoise(bw);
+    } else {
+        std::cerr << "RfSystem::setSlotBandwidthNoise: Bandwidth Noise must be greater than or equal to one!" << std::endl;
     }
     return ok;
 }
 
-// setSlotPeakPower() -- set the peak power (base::Number or base::Watts)
-bool RfSystem::setSlotPeakPower(base::Number* const v)
+bool RfSystem::setSlotPeakPower(base::Power* const power)
 {
     bool ok{};
-    double x{-1.0};
+    double peakPwr{-1.0};
 
-    const auto p = dynamic_cast<base::Power*>(v);
-    if (p != nullptr) {
+    if (power != nullptr) {
         // Has power units and we need watts
         base::Watts watts;
-        x = watts.convert(*p);
-    } else if (v != nullptr) {
-        // Just a Number
-        x = v->getReal();
+        peakPwr = watts.convert(*power);
     }
 
     // Test and set the power
-    if (x >= 0.0) {
-        ok = setPeakPower(x);
+    if (peakPwr >= 0.0) {
+        ok = setPeakPower(peakPwr);
     } else {
         std::cerr << "RfSystem::setPeakPower: Power must be greater than or equal zero!" << std::endl;
     }
@@ -705,7 +684,7 @@ bool RfSystem::setSlotRfNoiseFigure(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double fig{v->getReal()};
+        const double fig{v->to_double()};
         if (fig >= 1.0) {
             ok = setRfNoiseFigure( fig );
         } else {
@@ -720,7 +699,7 @@ bool RfSystem::setSlotRfSysTemp(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double tmp{v->getReal()};
+        const double tmp{v->to_double()};
         if (tmp > 0.0) {
             ok = setRfSysTemp( tmp );;
         } else {
@@ -735,7 +714,7 @@ bool RfSystem::setSlotRfTransmitLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->getReal()};
+        const double loss{v->to_double()};
         if (loss >= 1.0) {
             ok = setRfTransmitLoss(loss);
         } else {
@@ -750,7 +729,7 @@ bool RfSystem::setSlotRfReceiveLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->getReal()};
+        const double loss{v->to_double()};
         if (loss >= 1.0) {
             ok = setRfReceiveLoss(loss);
         } else {
@@ -765,7 +744,7 @@ bool RfSystem::setSlotRfSignalProcessLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->getReal()};
+        const double loss{v->to_double()};
         if (loss >= 1.0) {
             ok = setRfSignalProcessLoss(loss);
         } else {
@@ -780,7 +759,7 @@ bool RfSystem::setSlotDisableEmissions(base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDisableEmissionsFlag( msg->getBoolean() );
+      ok = setDisableEmissionsFlag( msg->to_bool() );
    }
    return ok;
 }

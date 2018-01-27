@@ -9,15 +9,15 @@
 #include "mixr/simulation/Simulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
+#include "mixr/base/Pair.hpp"
+#include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/Timers.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
-#include "mixr/base/Timers.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "StationTcPeriodicThread.hpp"
 #include "StationBgPeriodicThread.hpp"
@@ -1030,7 +1030,7 @@ bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->getReal()};
+        const double rate{num->to_double()};
         if (rate > 0) {
             tcRate = rate;
             ok = true;
@@ -1049,7 +1049,7 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->getReal()};
+        const double pri{num->to_double()};
         if (pri >= 0 && pri <= 1.0f) {
             tcPri = pri;
             ok = true;
@@ -1064,7 +1064,7 @@ bool Station::setSlotTimeCriticalStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->getInt()};
+        const int isize{num->toInt()};
         if (isize >= 0) {
             ok = setTimeCriticalStackSize(static_cast<unsigned int>(isize));
         }
@@ -1080,7 +1080,7 @@ bool Station::setSlotNetworkRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->getReal()};
+        const double rate{num->to_double()};
         if (rate > 0) {
             netRate = rate;
             ok = true;
@@ -1099,8 +1099,8 @@ bool Station::setSlotNetworkPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->getReal()};
-        if (pri >= 0 && pri <= 1.0) {
+        const double pri{num->to_double()};
+        if (pri >= 0.0 && pri <= 1.0) {
             netPri = pri;
             ok = true;
         } else {
@@ -1114,7 +1114,7 @@ bool Station::setSlotNetworkStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->getInt()};
+        const int isize{num->toInt()};
         if (isize >= 0) {
             ok = setNetworkStackSize(static_cast<unsigned int>(isize));
         }
@@ -1130,8 +1130,8 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->getReal()};
-        if (rate >= 0 ) {
+        const double rate{num->to_double()};
+        if (rate >= 0.0 ) {
             bgRate = rate;
             ok = true;
         } else {
@@ -1149,8 +1149,8 @@ bool Station::setSlotBackgroundPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->getReal()};
-        if (pri >= 0 && pri <= 1.0f) {
+        const double pri{num->to_double()};
+        if (pri >= 0 && pri <= 1.0) {
             bgPri = pri;
             ok = true;
         } else {
@@ -1164,7 +1164,7 @@ bool Station::setSlotBackgroundStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->getInt()};
+        const int isize{num->toInt()};
         if (isize >= 0) {
             ok = setBackgroundStackSize(static_cast<unsigned int>(isize));
         }
@@ -1208,7 +1208,7 @@ bool Station::setSlotFastForwardRate(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->getInt()};
+      const int ii{msg->toInt()};
       if (ii >= 0) {
          ok = setFastForwardRate( ii );
       }
@@ -1223,7 +1223,7 @@ bool Station::setSlotEnableUpdateTimers(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUpdateTimersEnable( msg->getBoolean() );
+      ok = setUpdateTimersEnable( msg->to_bool() );
    }
    return ok;
 }

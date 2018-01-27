@@ -16,7 +16,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cstdio>
 
@@ -686,7 +686,7 @@ bool Route::setSlotTo(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initToStptIdx = msg->getInt();
+        initToStptIdx = msg->toInt();
         ok = true;
     }
     return ok;
@@ -696,7 +696,7 @@ bool Route::setSlotAutoSequence(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        autoSeq = msg->getBoolean();
+        autoSeq = msg->to_bool();
         ok = true;
     }
     return ok;
@@ -716,7 +716,7 @@ bool Route::setSlotAutoSeqDistance(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // we are assuming nautical miles here
-        autoSeqDistNM = msg->getReal();
+        autoSeqDistNM = msg->to_double();
         ok = true;
     }
     return ok;
@@ -726,7 +726,7 @@ bool Route::setSlotWrap(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        wrap = msg->getBoolean();
+        wrap = msg->to_bool();
         ok = true;
     }
     return ok;

@@ -6,7 +6,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/time_utils.hpp"
+#include "mixr/base/units/util/time_utils.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Quat"

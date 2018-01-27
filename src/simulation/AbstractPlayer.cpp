@@ -130,7 +130,7 @@ bool AbstractPlayer::setNib(AbstractNib* const n)
    if (nib != nullptr) {
       // Ref() the new NIB and get the network ID
       nib->ref();
-      AbstractNetIO* netIO {nib->getNetIO()};
+      AbstractNetIO* netIO{nib->getNetIO()};
       if (netIO != nullptr) netID = netIO->getNetworkID();
    } else {
       netID = 0;
@@ -164,7 +164,7 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 bool AbstractPlayer::setSlotID(const base::Integer* const num)
 {
    bool ok{};
-   const int newID = num->getInt();
+   const int newID{num->toInt()};
    if (newID > 0 && newID <= 65535) {
       setID( static_cast<unsigned short>(newID)  );
       ok = true;

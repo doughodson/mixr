@@ -202,7 +202,7 @@ class SlSymbol : public base::Object
 
 public:
     // Max size of the symbol's ID
-    static const int MAX_ID_SIZE = 8;
+    static const int MAX_ID_SIZE{8};
 
 public:
    SlSymbol();
@@ -230,18 +230,18 @@ public:
    base::Degrees* getHdgAngleObj() const;    // base::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
-   void setVisible(const bool x);            // set our visibility
-   void setLatLonFlag(const bool flg);       // Sets the lat/lon flag (if true we're using lat/lon, else XY)
-   void setACCoordFlag(const bool flg);      // Sets the aircraft nose/wing flag (when using this instead of earth coordinates from aircraft)
-   void setScreenFlag(const bool flg);       // set the manual screen position override flag
-   void setType(const int t);                // Sets the user defined type (must match templates)
-   void setId(const char* const v);          // Sets the ID string
-   void setValue(base::Object* const v);     // Sets the user defined value, which is set to the graphical component
+   void setVisible(const bool);              // set our visibility
+   void setLatLonFlag(const bool);           // Sets the lat/lon flag (if true we're using lat/lon, else XY)
+   void setACCoordFlag(const bool);          // Sets the aircraft nose/wing flag (when using this instead of earth coordinates from aircraft)
+   void setScreenFlag(const bool);           // set the manual screen position override flag
+   void setType(const int);                  // Sets the user defined type (must match templates)
+   void setId(const char* const);            // Sets the ID string
+   void setValue(base::Object* const);       // Sets the user defined value, which is set to the graphical component
 
-   void setXPosition(const double v);        // Sets the X position ( latitude or NM north/south )
-   void setYPosition(const double v);        // Sets the Y position { longitude or NM east/west )
-   void setXScreenPos(const double v);       // Sets the X screen pos (inches)
-   void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
+   void setXPosition(const double);          // Sets the X position ( latitude or NM north/south )
+   void setYPosition(const double);          // Sets the Y position { longitude or NM east/west )
+   void setXScreenPos(const double);         // Sets the X screen pos (inches)
+   void setYScreenPos(const double);         // Sets the Y screen pos (inches) (does not include displacement)
 
    void setSymbolPair(base::Pair* const p);      // Sets the graphical component
    void setHeadingDeg(const double h);           // Sets the (optional) heading (degrees)
@@ -251,26 +251,26 @@ public:
 private:
    void initData();
 
-   bool visibility {true};    // our symbol's visibility
-   bool llFlg {};             // Position is Lat/lon (not X/Y)
-   bool acFlg {};             // aircraft nose/wing coordinate flag
-   bool scrnFlg {};           // using screen coordinates only
+   bool visibility{true};     // our symbol's visibility
+   bool llFlg{};              // Position is Lat/lon (not X/Y)
+   bool acFlg{};              // aircraft nose/wing coordinate flag
+   bool scrnFlg{};            // using screen coordinates only
 
-   int type {};               // numeric type (for looking up in slottable)
-   char id[MAX_ID_SIZE+1];    // ID (or name) sent to the '
-   base::Object* value {};    // optional value (sent to the symbol as an UPDATE_VALUE event)
-   base::Pair* pntr {};       // The graphical component
+   int type{};                // numeric type (for looking up in slottable)
+   char id[MAX_ID_SIZE+1];    // ID (or name)
+   base::Object* value{} ;    // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::Pair* pntr{};        // The graphical component
 
-   double xPos {};            // X position ( latitude or NM north/south )
-   double yPos {};            // Y position { longitude or NM east/west )
+   double xPos{};             // X position ( latitude or NM north/south )
+   double yPos{};             // Y position { longitude or NM east/west )
 
-   double xScreenPos {};      // x position: Screen
-   double yScreenPos {};      // y position: Screen
+   double xScreenPos{};       // x position: Screen
+   double yScreenPos{};       // y position: Screen
 
-   double hdg {};             // symbol heading (degrees)
-   bool hdgValid {};          // Heading valid flag
-   Graphic* phdg {};          // Object named 'hdg' to handle heading rotation
-   base::Degrees* hdgAng {};  // Value sent to the heading 'hdg' object
+   double hdg{};              // symbol heading (degrees)
+   bool hdgValid{};           // Heading valid flag
+   Graphic* phdg{};           // Object named 'hdg' to handle heading rotation
+   base::Degrees* hdgAng{};   // Value sent to the heading 'hdg' object
 };
 
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
@@ -278,9 +278,9 @@ inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; 
 
 inline SlSymbol* SymbolLoader::getSymbol(const int idx)
 {
-   SlSymbol* p = nullptr;
+   SlSymbol* p{};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
-      const int i = (idx - 1);
+      const int i{idx - 1};
       if (symbols[i] != nullptr) p = symbols[i];
    }
    return p;

@@ -170,7 +170,7 @@ bool Missile::setSlotVpMin(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      setVpMin(msg->getReal());
+      setVpMin(msg->to_double());
       ok = true;
    }
    return ok;
@@ -180,7 +180,7 @@ bool Missile::setSlotVpMax(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      setVpMax(msg->getReal());
+      setVpMax(msg->to_double());
       ok = true;
    }
    return ok;
@@ -190,7 +190,7 @@ bool Missile::setSlotVpMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      setVpMaxG(msg->getReal());
+      setVpMaxG(msg->to_double());
       ok = true;
    }
    return ok;
@@ -200,7 +200,7 @@ bool Missile::setSlotMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      setMaxG(msg->getReal());
+      setMaxG(msg->to_double());
       ok = true;
    }
    return ok;
@@ -210,7 +210,7 @@ bool Missile::setSlotMaxAccel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      setMaxAccel(msg->getReal());
+      setMaxAccel(msg->to_double());
       ok = true;
    }
    return ok;
@@ -220,7 +220,7 @@ bool Missile::setSlotCmdPitch(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      cmdPitch = msg->getReal();
+      cmdPitch = msg->to_double();
       ok = true;
    }
    return ok;
@@ -230,7 +230,7 @@ bool Missile::setSlotCmdHeading(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      cmdHeading = msg->getReal();
+      cmdHeading = msg->to_double();
       ok = true;
    }
    return ok;
@@ -240,7 +240,7 @@ bool Missile::setSlotCmdVelocity(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      cmdVelocity = msg->getReal();
+      cmdVelocity = msg->to_double();
       ok = true;
    }
    return ok;

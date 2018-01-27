@@ -259,7 +259,7 @@ bool UdpMulticastHandler::setSlotTTL(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        setTTL( msg->getInt() );
+        setTTL( msg->toInt() );
         ok = true;
     }
     return ok;
@@ -270,7 +270,7 @@ bool UdpMulticastHandler::setSlotLoopback(const Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        setLoopback( msg->getBoolean() );
+        setLoopback( msg->to_bool() );
         ok = true;
     }
     return ok;

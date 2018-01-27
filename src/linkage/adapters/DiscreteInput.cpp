@@ -67,7 +67,7 @@ bool DiscreteInput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setLocation(v);
       }
@@ -80,7 +80,7 @@ bool DiscreteInput::setSlotPort(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setPort(v);
       }
@@ -93,7 +93,7 @@ bool DiscreteInput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -106,7 +106,7 @@ bool DiscreteInput::setSlotInverted(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setInvert( msg->getBoolean() );
+      ok = setInvert( msg->to_bool() );
    }
    return ok;
 }

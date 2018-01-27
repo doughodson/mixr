@@ -4,7 +4,7 @@
 
 #include "Graphic.hpp"
 
-#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
 namespace base { class Angle; }
@@ -55,6 +55,7 @@ public:
     bool setYRotationDeg(const double angle);
     bool setZRotation(const double angle);
     bool setZRotationDeg(const double angle);
+
     bool setRotations(const double x, const double y = 0, const double z = 0);
     bool setRotationsDeg(const double x, const double y = 0, const double z = 0);
 

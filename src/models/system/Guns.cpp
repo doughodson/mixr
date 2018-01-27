@@ -14,7 +14,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 #include <cmath>
 
@@ -387,7 +387,7 @@ bool Gun::setSlotNumRounds(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setMaxRounds( num->getInt() );
+      ok = setMaxRounds( num->toInt() );
    }
    return ok;
 }
@@ -397,7 +397,7 @@ bool Gun::setSlotUnlimited(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setUnlimited( num->getBoolean() );
+      ok = setUnlimited( num->to_bool() );
    }
    return ok;
 }
@@ -407,7 +407,7 @@ bool Gun::setSlotRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setRoundsPerMinute( num->getInt() );
+      ok = setRoundsPerMinute( num->toInt() );
    }
    return ok;
 }
@@ -417,7 +417,7 @@ bool Gun::setSlotBurstRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const int rate{num->getInt()};
+      const int rate{num->toInt()};
       if (rate > 0 && rate <= 20) {
          burstFrameTime = 1.0f / static_cast<double>(rate);
          ok = true;
@@ -454,7 +454,7 @@ bool Gun::setSlotRoll(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->getDouble();
+      value = num->to_double();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -479,7 +479,7 @@ bool Gun::setSlotPitch(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->getDouble();
+      value = num->to_double();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -504,7 +504,7 @@ bool Gun::setSlotYaw(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->getDouble();
+      value = num->to_double();
    }
 
    if (value >= -base::PI && value <= 2.0f*base::PI) {

@@ -8,7 +8,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 #include <cmath>
 
@@ -275,7 +275,7 @@ bool Radio::setSlotNumChannels(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->getInt()};
+      const int v{msg->toInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setNumberOfChannels( static_cast<unsigned short>(v) );
       }
@@ -324,7 +324,7 @@ bool Radio::setSlotChannel(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->getInt()};
+      const int v{msg->toInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setChannel( static_cast<unsigned short>(v) );
       }
@@ -337,7 +337,7 @@ bool Radio::setSlotMaxDetectRange(base::Number* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      maxDetectRange = num->getReal();
+      maxDetectRange = num->to_double();
       ok = true;
    }
    return ok;
@@ -348,7 +348,7 @@ bool Radio::setSlotRadioId(base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const unsigned short num2{static_cast<unsigned short>(num->getInt())};
+      const unsigned short num2{static_cast<unsigned short>(num->toInt())};
       ok = setRadioId(num2);
    }
    return ok;

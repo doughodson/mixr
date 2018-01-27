@@ -131,7 +131,7 @@ bool AirVehicle::setSlotInitGearPos(const base::Number* const pos)
 {
    bool ok {};
    if (pos != nullptr) {
-      if (pos->getReal() == 0.0) {
+      if (pos->to_double() == 0.0) {
          initGearPos = 0.0;
          gearPos = 0.0;
          ok = true;

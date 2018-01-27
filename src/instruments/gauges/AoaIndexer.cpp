@@ -2,7 +2,7 @@
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 #include <GL/glu.h>
 
 namespace mixr {
@@ -254,7 +254,7 @@ void AoAIndexer::updateData(const double dt)
 bool AoAIndexer::setSlotAoaRedMax(const base::Number* const newRMax)
 {
     bool ok = false;
-    if (newRMax != nullptr) ok = setAoaRedMax(newRMax->getReal());
+    if (newRMax != nullptr) ok = setAoaRedMax(newRMax->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -263,7 +263,7 @@ bool AoAIndexer::setSlotAoaRedMax(const base::Number* const newRMax)
 bool AoAIndexer::setSlotAoaRedMin(const base::Number* const newRMin)
 {
     bool ok = false;
-    if (newRMin != nullptr) ok = setAoaRedMin(newRMin->getReal());
+    if (newRMin != nullptr) ok = setAoaRedMin(newRMin->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -272,7 +272,7 @@ bool AoAIndexer::setSlotAoaRedMin(const base::Number* const newRMin)
 bool AoAIndexer::setSlotAoaYellowMax(const base::Number* const newYMax)
 {
     bool ok = false;
-    if (newYMax != nullptr) ok = setAoaYellowMax(newYMax->getReal());
+    if (newYMax != nullptr) ok = setAoaYellowMax(newYMax->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -281,7 +281,7 @@ bool AoAIndexer::setSlotAoaYellowMax(const base::Number* const newYMax)
 bool AoAIndexer::setSlotAoaYellowMin(const base::Number* const newYMin)
 {
     bool ok = false;
-    if (newYMin != nullptr) ok = setAoaYellowMin(newYMin->getReal());
+    if (newYMin != nullptr) ok = setAoaYellowMin(newYMin->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ bool AoAIndexer::setSlotAoaYellowMin(const base::Number* const newYMin)
 bool AoAIndexer::setSlotAoaGreenMax(const base::Number* const newGMax)
 {
     bool ok = false;
-    if (newGMax != nullptr) ok = setAoaGreenMax(newGMax->getReal());
+    if (newGMax != nullptr) ok = setAoaGreenMax(newGMax->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ bool AoAIndexer::setSlotAoaGreenMax(const base::Number* const newGMax)
 bool AoAIndexer::setSlotAoaGreenMin(const base::Number* const newGMin)
 {
     bool ok = false;
-    if (newGMin != nullptr) ok = setAoaGreenMin(newGMin->getReal());
+    if (newGMin != nullptr) ok = setAoaGreenMin(newGMin->to_double());
     return ok;
 }
 

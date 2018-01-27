@@ -11,8 +11,8 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -1096,7 +1096,7 @@ bool Gimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setTerrainOccultingEnabled(msg->getBoolean());
+      ok = setTerrainOccultingEnabled(msg->to_bool());
    }
    return ok;
 }
@@ -1106,7 +1106,7 @@ bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setHorizonCheckEnabled(msg->getBoolean());
+      ok = setHorizonCheckEnabled(msg->to_bool());
    }
    return ok;
 }
@@ -1156,7 +1156,7 @@ bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setMaxPlayersOfInterest( msg->getInt() );
+      ok = setMaxPlayersOfInterest( msg->toInt() );
    }
    return ok;
 }
@@ -1188,7 +1188,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setLocalPlayersOfInterestOnly(msg->getBoolean());
+      ok = setLocalPlayersOfInterestOnly(msg->to_bool());
    }
    return ok;
 }
@@ -1198,7 +1198,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUseWorld(msg->getBoolean());
+      ok = setUseWorld(msg->to_bool());
    }
    return ok;
 }
@@ -1208,7 +1208,7 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setOwnHeadingOnly(msg->getBoolean());
+      ok = setOwnHeadingOnly(msg->to_bool());
    }
    return ok;
 }

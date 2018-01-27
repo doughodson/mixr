@@ -3,7 +3,7 @@
 #define __mixr_models_RfSensor_H__
 
 #include "mixr/models/system/RfSystem.hpp"
-#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
 
 #include <string>
 
@@ -64,33 +64,33 @@ class RfSensor : public RfSystem
 public:
     RfSensor();
 
-    virtual double getPRF() const;                       // Returns the PRF (hertz)
-    virtual bool setPRF(const double v);                 // Sets PRF (hertz; must be greater than 0)
+    virtual double getPRF() const;                           // Returns the PRF (hertz)
+    virtual bool setPRF(const double);                       // Sets PRF (hertz; must be greater than 0)
 
-    virtual double getPulseWidth() const;                // Returns the pulse width (seconds)
-    virtual bool setPulseWidth(const double v);          // Sets the pulse width (seconds; must be greater than 0)
+    virtual double getPulseWidth() const;                    // Returns the pulse width (seconds)
+    virtual bool setPulseWidth(const double);                // Sets the pulse width (seconds; must be greater than 0)
 
-    virtual double getBeamWidth() const;                 // (Deprecated: moved to Antenna) Returns the beam width (radians; must be greater than 0)
-    virtual bool setBeamWidth(const double v);           // (Deprecated: moved to Antenna) Sets the beam width (radians)
+    virtual double getBeamWidth() const;                     // (Deprecated: moved to Antenna) Returns the beam width (radians; must be greater than 0)
+    virtual bool setBeamWidth(const double);                 // (Deprecated: moved to Antenna) Sets the beam width (radians)
 
-    virtual const char* getTypeId() const;               // Returns the type ID
-    virtual bool setTypeId(const char* const str);       // Sets the type ID
+    virtual const char* getTypeId() const;                   // Returns the type ID
+    virtual bool setTypeId(const char* const);               // Sets the type ID
 
-    virtual double getRange() const;                     // Returns the current range (nm)
-    virtual bool setRange(const double v);               // Sets the current range (nm; must be greater than or equal 0)
+    virtual double getRange() const;                         // Returns the current range (nm)
+    virtual bool setRange(const double);                     // Sets the current range (nm; must be greater than or equal 0)
 
     virtual bool isScanOn() const;                           // Is the Sensor scanning
     virtual int getScanBar() const;                          // Returns the current bar number for a raster scan
 
     virtual const base::PairStream* getModes() const;        // Returns the list of sensor submodes
-    virtual bool setMasterMode(RfSensor* const m);           // Set our master mode (container)
+    virtual bool setMasterMode(RfSensor* const);             // Set our master mode (container)
 
     virtual const std::string& getTrackManagerName() const;  // Returns the requested track manager's name
     virtual bool setTrackManagerName(const std::string&);    // Sets the name of the track manager to use
 
-    virtual TrackManager* getTrackManager();             // Returns our current track manager
-    virtual const TrackManager* getTrackManager() const; // Returns our current track manager (const version)
-    virtual bool setTrackManager(TrackManager* const a); // Sets the track manager
+    virtual TrackManager* getTrackManager();                 // Returns our current track manager
+    virtual const TrackManager* getTrackManager() const;     // Returns our current track manager (const version)
+    virtual bool setTrackManager(TrackManager* const);       // Sets the track manager
 
     // Support for a list of sensor ranges
     virtual bool incRange();                                        // Increment range index; returns true if successful
@@ -108,7 +108,7 @@ public:
 protected:
     virtual base::PairStream* getModes();                              // Returns the list of submodes
 
-    // Event handler(s)
+    // event handlers
     virtual bool onStartScanEvent(const base::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
     virtual bool onEndScanEvent(const base::Integer* const bar);       // End of scan (SENSOR_RTS) event handler
     virtual bool onTgtDesignateEvent();                                // Target Designate (SCAN_START) event handler
@@ -119,19 +119,19 @@ protected:
 private:
     bool processModes();
 
-    base::PairStream* modes {};        // Our Submodes
-    double*        ranges {};           // List of ranges (nm)
-    int            nRanges {};          // Number of ranges
-    double         rng {50.0};          // Current range (nm)
-    int            rngIdx {1};          // Range index [ 1 .. nRanges ]
-    int            initRngIdx {1};      // Initial range [ 1 .. nRanges ]
-    bool           scanning {};         // Scanning flag (should be transmitting)
-    int            scanBar {};          // Scan (bar) number
-    bool           syncXmitWithScan {}; // Sync transmitter with antenna scan flag
+    base::PairStream* modes{};          // Our Submodes
+    double*        ranges{};            // List of ranges (nm)
+    int            nRanges{};           // Number of ranges
+    double         rng{50.0};           // Current range (nm)
+    int            rngIdx{1};           // Range index [ 1 .. nRanges ]
+    int            initRngIdx{1};       // Initial range [ 1 .. nRanges ]
+    bool           scanning{};          // Scanning flag (should be transmitting)
+    int            scanBar{};           // Scan (bar) number
+    bool           syncXmitWithScan{};  // Sync transmitter with antenna scan flag
 
     std::string tmName;                 // Name of our track manager
-    RfSensor*     masterModePtr {};     // Our Master (Parent) mode (e.g., Sensor)
-    TrackManager* trackManager {};      // Our Track manager -- managed by the onboard computer
+    RfSensor*     masterModePtr{};      // Our Master (Parent) mode (e.g., Sensor)
+    TrackManager* trackManager{};       // Our Track manager -- managed by the onboard computer
 
     static const int TYPE_ID_LENGTH{64};
     char typeId[TYPE_ID_LENGTH]{};      // R/F system type ID

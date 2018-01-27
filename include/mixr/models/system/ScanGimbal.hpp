@@ -3,7 +3,7 @@
 #define __mixr_models_ScanGimbal_H__
 
 #include "mixr/models/system/Gimbal.hpp"
-#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class Number; }

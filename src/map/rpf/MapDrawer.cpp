@@ -99,7 +99,7 @@ bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 {
     bool ok {};
     if (x != nullptr)
-        ok = setMapIntensity(x->getReal());
+        ok = setMapIntensity(x->to_double());
     return ok;
 }
 
@@ -110,7 +110,7 @@ bool MapDrawer::setSlotDrawGridMode(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr)
-      ok = setDrawGridMode(x->getBoolean());
+      ok = setDrawGridMode(x->to_bool());
    return ok;
 }
 
@@ -121,7 +121,7 @@ bool MapDrawer::setSlotShowMap(const base::Boolean* const x)
 {
    bool ok {};
    if (x != nullptr)
-      ok = setShowMap(x->getBoolean());
+      ok = setShowMap(x->to_bool());
    return ok;
 }
 

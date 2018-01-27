@@ -42,12 +42,16 @@ OBJS =  \
 	network/UdpBroadcastHandler.o \
 	network/UdpMulticastHandler.o \
 	network/UdpUnicastHandler.o \
+	numeric/operators/Add.o \
+	numeric/operators/Divide.o \
+	numeric/operators/Multiply.o \
+	numeric/operators/Subtract.o \
 	numeric/Boolean.o \
 	numeric/Complex.o \
+	numeric/Decibel.o \
 	numeric/Float.o \
 	numeric/Integer.o \
 	numeric/Number.o \
-	numeric/Operators.o \
 	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \
@@ -80,22 +84,76 @@ OBJS =  \
 	ubf/AbstractState.o \
 	ubf/Agent.o \
 	ubf/Arbiter.o \
-	units/Angles.o \
-	units/AngularVelocity.o \
-	units/Areas.o \
-	units/Decibel.o \
+	units/angle/Angle.o \
+	units/angle/Degrees.o \
+	units/angle/Radians.o \
+	units/angle/Semicircles.o \
+	units/area/Area.o \
+	units/area/DecibelSquareMeters.o \
+	units/area/SquareCentiMeters.o \
+	units/area/SquareFeet.o \
+	units/area/SquareInches.o \
+	units/area/SquareKiloMeters.o \
+	units/area/SquareMeters.o \
+	units/area/SquareMiles.o \
+	units/area/SquareMilliMeters.o \
+	units/area/SquareYards.o \
+	units/distance/CentiMeters.o \
+	units/distance/Distance.o \
+	units/distance/Feet.o \
+	units/distance/Inches.o \
+	units/distance/KiloMeters.o \
+	units/distance/Meters.o \
+	units/distance/MicroMeters.o \
+	units/distance/Microns.o \
+	units/distance/NauticalMiles.o \
+	units/distance/StatuteMiles.o \
+	units/energy/BTUs.o \
+	units/energy/Calories.o \
+	units/energy/Energy.o \
+	units/energy/FootPounds.o \
+	units/energy/Joules.o \
+	units/energy/KiloWattHours.o \
+	units/force/Force.o \
+	units/force/KiloNewtons.o \
+	units/force/Newtons.o \
+	units/force/Poundals.o \
+	units/force/PoundForces.o \
+	units/frequency/Frequency.o \
+	units/frequency/GigaHertz.o \
+	units/frequency/Hertz.o \
+	units/frequency/KiloHertz.o \
+	units/frequency/MegaHertz.o \
+	units/frequency/TeraHertz.o \
+	units/mass/Grams.o \
+	units/mass/KiloGrams.o \
+	units/mass/Mass.o \
+	units/mass/Slugs.o \
+	units/power/DecibelMilliWatts.o \
+	units/power/DecibelWatts.o \
+	units/power/Horsepower.o \
+	units/power/KiloWatts.o \
+	units/power/MilliWatts.o \
+	units/power/Power.o \
+	units/power/Watts.o \
+	units/rate/AngularVelocity.o \
+	units/rate/FlowRate.o \
+	units/rate/LinearVelocity.o \
+	units/time/Days.o \
+	units/time/Hours.o \
+	units/time/MicroSeconds.o \
+	units/time/MilliSeconds.o \
+	units/time/Minutes.o \
+	units/time/NanoSeconds.o \
+	units/time/Seconds.o \
+	units/time/Time.o \
+	units/volume/CubicFeet.o \
+	units/volume/CubicInches.o \
+	units/volume/CubicMeters.o \
+	units/volume/Liters.o \
+	units/volume/Volume.o \
 	units/Density.o \
-	units/Distances.o \
-	units/Energies.o \
-	units/FlowRate.o \
-	units/Forces.o \
-	units/Frequencies.o \
-	units/LinearVelocity.o \
-	units/Masses.o \
-	units/Powers.o \
-	units/Times.o \
 	units/Unit.o \
-	units/Volumes.o \
 	util/platform/system_linux.o \
 	util/lfi.o \
 	util/math_utils.o \
@@ -143,10 +201,22 @@ clean:
 	-rm -f edl/*.o
 	-rm -f io/*.o
 	-rm -f network/*.o
+	-rm -f numeric/operators/*.o
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
 	-rm -f relations/*.o
 	-rm -f ubf/*.o
+	-rm -f units/area/*.o
+	-rm -f units/angle/*.o
+	-rm -f units/distance/*.o
+	-rm -f units/energy/*.o
+	-rm -f units/force/*.o
+	-rm -f units/frequency/*.o
+	-rm -f units/mass/*.o
+	-rm -f units/power/*.o
+	-rm -f units/rate/*.o
+	-rm -f units/time/*.o
+	-rm -f units/volumne/*.o
 	-rm -f units/*.o
 	-rm -f util/platform/*.o
 	-rm -f util/*.o

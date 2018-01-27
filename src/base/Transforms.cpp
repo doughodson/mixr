@@ -1,8 +1,9 @@
 
 #include "mixr/base/Transforms.hpp"
+
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 namespace mixr {
 namespace base {
@@ -179,7 +180,7 @@ bool Transform::setSlotComputematrix1(const Number* const sc1obj)
 {
     bool ok = true;
     if (sc1obj != nullptr) {
-        v[nv++] = sc1obj->getReal();
+        v[nv++] = sc1obj->to_double();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix1:  Invalid Number type or input" << std::endl;
@@ -212,7 +213,7 @@ bool Transform::setSlotComputematrix2(const Number* const sc2obj)
 {
     bool ok = true;
     if (sc2obj != nullptr) {
-        v[nv++] = sc2obj->getReal();
+        v[nv++] = sc2obj->to_double();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix2:  Invalid Number type or input" << std::endl;
@@ -245,7 +246,7 @@ bool Transform::setSlotComputematrix3(const Number* const sc3obj)
 {
     bool ok = true;
     if (sc3obj != nullptr) {
-        v[nv++] = sc3obj->getReal();
+        v[nv++] = sc3obj->to_double();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix3:  Invalid Number type or input" << std::endl;
@@ -278,7 +279,7 @@ bool Transform::setSlotComputematrix4(const Number* const sc4obj)
 {
     bool ok = true;
     if (sc4obj != nullptr) {
-        v[nv++] = sc4obj->getReal();
+        v[nv++] = sc4obj->to_double();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix4:  Invalid Number type or input" << std::endl;

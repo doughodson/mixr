@@ -6,14 +6,13 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
-#include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Times.hpp"
-
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/times.hpp"
 
 namespace mixr {
 namespace models {
@@ -380,7 +379,7 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const int max{num->getInt()};
+      const int max{num->toInt()};
       if (max > 0 && max <= static_cast<int>(MAX_TRKS)) {
          maxTrks = static_cast<unsigned int>(max);
          ok = true;
@@ -404,7 +403,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
       age = seconds.convert(*p);
    } else if (num != nullptr) {
       // We have only a number, assume it's in seconds ...
-      age = num->getReal();
+      age = num->to_double();
    }
 
    // Set the value if it's valid
@@ -425,7 +424,7 @@ bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      int first{num->getInt()};
+      int first{num->toInt()};
       if (first >= 0) {
          firstTrkId = static_cast<unsigned int>(first);
          nextTrkId = firstTrkId;
@@ -445,7 +444,7 @@ bool TrackManager::setSlotAlpha(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      alpha = msg->getReal();
+      alpha = msg->to_double();
    }
    return ok;
 }
@@ -458,7 +457,7 @@ bool TrackManager::setSlotBeta(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      beta = msg->getReal();
+      beta = msg->to_double();
    }
    return ok;
 }
@@ -471,7 +470,7 @@ bool TrackManager::setSlotGamma(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      gamma = msg->getReal();
+      gamma = msg->to_double();
    }
    return ok;
 }
@@ -483,7 +482,7 @@ bool TrackManager::setSlotLogTrackUpdates(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setLogTrackUpdates( num->getBoolean() );
+      ok = setLogTrackUpdates( num->to_bool() );
    }
    return ok;
 }

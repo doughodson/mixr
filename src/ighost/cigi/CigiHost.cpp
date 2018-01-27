@@ -1355,7 +1355,7 @@ bool CigiHost::setSlotASyncMode(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setASyncMode(msg->getBoolean());
+      setASyncMode(msg->to_bool());
       ok = true;
    }
    return ok;
@@ -1366,7 +1366,7 @@ bool CigiHost::setSlotHideOwnshipModel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setHideOwnshipModel(msg->getBoolean());
+      setHideOwnshipModel(msg->to_bool());
       ok = true;
    }
    return ok;
@@ -1376,7 +1376,7 @@ bool CigiHost::setSlotOwnshipModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setOwnshipModelId(id);
          ok = true;
@@ -1389,7 +1389,7 @@ bool CigiHost::setSlotMslTrailModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setMslTrailModelId(id);
          ok = true;
@@ -1402,7 +1402,7 @@ bool CigiHost::setSlotSmokePlumeModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setSmokePlumeModelId(id);
          ok = true;
@@ -1415,7 +1415,7 @@ bool CigiHost::setSlotAirExplosionModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setAirExplosionModelId(id);
          ok = true;
@@ -1428,7 +1428,7 @@ bool CigiHost::setSlotGroundExplosionModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setGroundExplosionModelId(id);
          ok = true;
@@ -1441,7 +1441,7 @@ bool CigiHost::setSlotShipWakeModelId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int id{msg->getInt()};
+      const int id{msg->toInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setShipWakeModelId(id);
          ok = true;

@@ -19,9 +19,9 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -350,7 +350,7 @@ bool Steerpoint::setSlotLatitude(const base::Latitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLatitude = msg->getValue();
+        initLatitude = msg->getDecimalDegrees();
         haveInitLat = true;
         setLatitude( initLatitude );
         ok = true;
@@ -361,7 +361,7 @@ bool Steerpoint::setSlotLatitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLatitude = msg->getDouble();
+        initLatitude = msg->to_double();
         haveInitLat = true;
         setLatitude( initLatitude );
         ok = true;
@@ -372,7 +372,7 @@ bool Steerpoint::setSlotLongitude(const base::Longitude* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLongitude = msg->getValue();
+        initLongitude = msg->getDecimalDegrees();
         haveInitLon = true;
         setLongitude( initLongitude );
         ok = true;
@@ -383,7 +383,7 @@ bool Steerpoint::setSlotLongitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLongitude = msg->getDouble();
+        initLongitude = msg->to_double();
         haveInitLon = true;
         setLongitude( initLongitude );
         ok = true;
@@ -452,7 +452,7 @@ bool Steerpoint::setSlotElevation(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initElev = msg->getReal();
+        initElev = msg->to_double();
         elevation  = initElev;
         initPosVec[Player::IDOWN] = -initElev;
         posVec[Player::IDOWN] = -initElev;
@@ -476,7 +476,7 @@ bool Steerpoint::setSlotPTA(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes seconds
-        setPTA( msg->getFloat() );
+        setPTA( msg->to_double() );
         ok = true;
     }
     return ok;
@@ -495,7 +495,7 @@ bool Steerpoint::setSlotSCA(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes feet
-        setSCA( msg->getFloat() );
+        setSCA( msg->to_double() );
         ok = true;
     }
     return ok;
@@ -526,7 +526,7 @@ bool Steerpoint::setSlotMagVar(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes degrees
-        initMagVar = msg->getReal();
+        initMagVar = msg->to_double();
         haveInitMagVar = true;
         ok = true;
     }
@@ -549,7 +549,7 @@ bool Steerpoint::setSlotCmdAltitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initCmdAlt = msg->getReal();
+        initCmdAlt = msg->to_double();
         haveInitCmdAlt = true;
         setCmdAltitude(initCmdAlt);
         ok = true;
@@ -561,7 +561,7 @@ bool Steerpoint::setSlotCmdAirspeed(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initCmdAirspeed = msg->getReal();
+        initCmdAirspeed = msg->to_double();
         haveInitCmdAs = true;
         setCmdAirspeedKts(initCmdAirspeed);
         ok = true;
@@ -583,7 +583,7 @@ bool Steerpoint::setSlotNext(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initNextStptIdx = msg->getInt();
+        initNextStptIdx = msg->toInt();
         ok = true;
     }
     return ok;

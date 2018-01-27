@@ -85,7 +85,7 @@ void Tape::copyData(const Tape& org, const bool)
 bool Tape::setSlotRange(const base::Integer* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setRange(x->getInt());
+    if (x != nullptr) ok = setRange(x->toInt());
     return ok;
 }
 
@@ -95,7 +95,7 @@ bool Tape::setSlotRange(const base::Integer* const x)
 bool Tape::setSlotHeight(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setHeight(x->getReal());
+    if (x != nullptr) ok = setHeight(x->to_double());
     return ok;
 }
 
@@ -105,7 +105,7 @@ bool Tape::setSlotHeight(const base::Number* const x)
 bool Tape::setSlotIncrement(const base::Integer* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setIncrement(x->getInt());
+    if (x != nullptr) ok = setIncrement(x->toInt());
     return ok;
 }
 
@@ -115,7 +115,7 @@ bool Tape::setSlotIncrement(const base::Integer* const x)
 bool Tape::setSlotVertical(const base::Boolean* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setVertical(x->getBoolean());
+    if (x != nullptr) ok = setVertical(x->to_bool());
     return ok;
 }
 
@@ -125,7 +125,7 @@ bool Tape::setSlotVertical(const base::Boolean* const x)
 bool Tape::setSlotMaxNum(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setMaxNumber(x->getReal());
+    if (x != nullptr) ok = setMaxNumber(x->to_double());
     return ok;
 }
 
@@ -136,7 +136,7 @@ bool Tape::setSlotMaxNum(const base::Number* const x)
 bool Tape::setSlotMinNum(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setMinNumber(x->getReal());
+    if (x != nullptr) ok = setMinNumber(x->to_double());
     return ok;
 }
 
@@ -146,7 +146,7 @@ bool Tape::setSlotMinNum(const base::Number* const x)
 bool Tape::setSlotConvert(const base::Boolean* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setConvert(x->getBoolean());
+    if (x != nullptr) ok = setConvert(x->to_bool());
     return ok;
 }
 

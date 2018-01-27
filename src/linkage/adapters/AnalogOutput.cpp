@@ -113,7 +113,7 @@ bool AnalogOutput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setLocation(v);
       }
@@ -126,7 +126,7 @@ bool AnalogOutput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -139,7 +139,7 @@ bool AnalogOutput::setSlotOffset(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setOffset( msg->getFloat() );
+      ok = setOffset( msg->to_double() );
    }
    return ok;
 }
@@ -149,7 +149,7 @@ bool AnalogOutput::setSlotGain(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setGain( msg->getFloat() );
+      ok = setGain( msg->to_double() );
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
              std::cerr << "AnalogOutput::setSlotGain(): ERROR -- gain can not be zero." << std::endl;

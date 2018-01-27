@@ -6,8 +6,8 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Quat"
@@ -305,7 +305,7 @@ bool RacModel::setSlotMinSpeed(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       vpMin = msg->getReal();
+       vpMin = msg->to_double();
        ok = true;
     }
     return ok;
@@ -315,7 +315,7 @@ bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       vpMaxG = msg->getReal();
+       vpMaxG = msg->to_double();
        ok = true;
     }
     return ok;
@@ -325,7 +325,7 @@ bool RacModel::setSlotMaxG(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       gMax = msg->getReal();
+       gMax = msg->to_double();
        ok = true;
     }
     return ok;
@@ -335,7 +335,7 @@ bool RacModel::setSlotMaxAccel(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       maxAccel = msg->getReal();
+       maxAccel = msg->to_double();
        ok = true;
     }
     return ok;
@@ -367,7 +367,7 @@ bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       double value = msg->getReal();
+       double value = msg->to_double();
        cmdVelocity = value;
        ok = true;
     }

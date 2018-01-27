@@ -41,7 +41,7 @@ void Latitude::copyData(const Latitude& org, const bool)
    sec = org.sec;
 }
 
-// converts direction, degrees, minutes, and seconds to a lat/long value.
+// converts direction, degrees, minutes, and seconds to a latitude value
 void Latitude::computeVal()
 {
    val = deg + (static_cast<double>(min) + static_cast<double>(sec)/60.0) / 60.0;
@@ -59,7 +59,7 @@ bool Latitude::setDirection(const std::string& d)
 
     if (dir == Dir::NONE) {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Latitude::setDir: invalid lat/long direction, expected { north, south, east or west } " << d << std::endl;
+            std::cerr << "Latitude::setDirection: invalid latitude direction, expected { north or south } " << std::endl;
         }
     }
     return (dir != Dir::NONE);
@@ -142,7 +142,7 @@ bool Latitude::setSlotDirection(const Identifier* const x)
 {
    bool ok{};
    if (x != nullptr) {
-      ok = setDirection(x->str());
+      ok = setDirection(x->to_string());
    }
    return ok;
 }
@@ -151,7 +151,7 @@ bool Latitude::setSlotDirection(const Identifier* const x)
 bool Latitude::setSlotDegrees(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setDeg(x->getReal());
+   if (x != nullptr) ok = setDeg(x->to_double());
    return ok;
 }
 
@@ -159,14 +159,14 @@ bool Latitude::setSlotDegrees(const Number* const x)
 bool Latitude::setSlotMinutes(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setMin(x->getReal());
+   if (x != nullptr) ok = setMin(x->to_double());
    return ok;
 }
 
 bool Latitude::setSlotSeconds(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setSec(x->getReal());
+   if (x != nullptr) ok = setSec(x->to_double());
    return ok;
 }
 

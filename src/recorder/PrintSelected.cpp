@@ -3,12 +3,12 @@
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 #include "mixr/recorder/DataRecordHandle.hpp"
 
-#include "mixr/base/units/Times.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
@@ -72,7 +72,7 @@ bool PrintSelected::setSlotMsgToken(const base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      msgToken = msg->getInt();
+      msgToken = msg->toInt();
    }
    return ok;
 }
@@ -103,7 +103,7 @@ bool PrintSelected::setSlotCompareToNum(const base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      compareValI = msg->getInt();
+      compareValI = msg->toInt();
    }
    return ok;
 }
@@ -113,7 +113,7 @@ bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      compareValD = msg->getDouble();
+      compareValD = msg->to_double();
    }
    return ok;
 }
@@ -148,7 +148,7 @@ bool PrintSelected::setSlotTimeOnly(const base::Boolean* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      timeOnly = msg->getBoolean();
+      timeOnly = msg->to_bool();
    }
    return ok;
 }

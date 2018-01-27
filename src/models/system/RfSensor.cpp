@@ -16,10 +16,10 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Frequencies.hpp"
-#include "mixr/base/units/Powers.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/units/powers.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -170,7 +170,7 @@ void RfSensor::reset()
 bool RfSensor::onStartScanEvent(const base::Integer* const bar)
 {
     scanning = true;
-    scanBar = bar->getInt();
+    scanBar = bar->toInt();
     return true;
 }
 
@@ -428,7 +428,7 @@ bool RfSensor::setSlotInitRangeIdx(base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        ok = setInitRngIdx(num->getInt());
+        ok = setInitRngIdx(num->toInt());
     }
     return ok;
 }
@@ -473,7 +473,7 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 
    if (msg != nullptr) {
       // Standard base::Number
-      const double x{msg->getReal()};
+      const double x{msg->to_double()};
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -509,7 +509,7 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
    bool ok{};
 
    if (msg != nullptr) {
-      ok = setPulseWidth( msg->getReal() );
+      ok = setPulseWidth( msg->to_double() );
       if (!ok) {
          std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
       }
@@ -544,7 +544,7 @@ bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
    bool ok{};
 
    if (msg != nullptr) {
-      ok = setBeamWidth( msg->getReal() );
+      ok = setBeamWidth( msg->to_double() );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
@@ -571,7 +571,7 @@ bool RfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      syncXmitWithScan = msg->getBoolean();
+      syncXmitWithScan = msg->to_bool();
       ok = true;
    }
    return ok;
@@ -638,7 +638,7 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 // we'll lookup the actual track manager in reset() later
 bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v->str());
+    return setTrackManagerName(v->to_string());
 }
 
 //------------------------------------------------------------------------------

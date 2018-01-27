@@ -2,7 +2,7 @@
 #include "mixr/linearsystem/SaH.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 namespace mixr {
 namespace linearsystem {
@@ -147,7 +147,7 @@ bool SaH::setSlotSampleRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;

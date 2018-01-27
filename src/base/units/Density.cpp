@@ -1,8 +1,8 @@
 
 #include "mixr/base/units/Density.hpp"
 
-#include "mixr/base/units/Masses.hpp"
-#include "mixr/base/units/Volumes.hpp"
+#include "mixr/base/units/masses.hpp"
+#include "mixr/base/units/volumes.hpp"
 
 namespace mixr {
 namespace base {
@@ -27,7 +27,7 @@ Density::Density(double value, const Mass* newMass, const Volume* newVolume) : U
     if (newMass != nullptr && newVolume != nullptr) {
         myMass = newMass;
         myVolume = newVolume;
-        val = value;
+        setValue(value);
     } else {
         std::cerr << "Density::Density() - missing a mass or volume object,"
                   << " density is default to 1.0 kilograms per cubic meter"
@@ -37,7 +37,7 @@ Density::Density(double value, const Mass* newMass, const Volume* newVolume) : U
         // calling default constructor here doesn't seem to work
         myMass = new KiloGrams(1);
         myVolume = new CubicMeters(1);
-        val = 1;
+        setValue(1.0);
     }
 }
 
@@ -46,16 +46,16 @@ Density::Density()
     STANDARD_CONSTRUCTOR()
 
     // default mass, volume and density (1 Kilogram per Cubic Meter)
-    myMass = new KiloGrams(1);
-    myVolume = new CubicMeters(1);
-    val = 1;
+    myMass = new KiloGrams(1.0);
+    myVolume = new CubicMeters(1.0);
+    setValue(1.0);
 }
 
 void Density::copyData(const Density& org, const bool)
 {
     BaseClass::copyData(org);
 
-    val = org.val;
+    setValue(org.getValue());
     myMass = org.getMass();
     myVolume = org.getVolume();
 }
@@ -73,7 +73,7 @@ double Density::convert(const Density& n) const
 //------------------------------------------------------------------------------
 void Density::set(const Density& n)
 {
-    val = convert(n);
+    setValue(convert(n));
 }
 
 //------------------------------------------------------------------------------

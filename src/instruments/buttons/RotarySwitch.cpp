@@ -52,7 +52,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
             if (pair != nullptr) {
                 const auto n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
-                    angles[numAngs++] = n->getReal();
+                    angles[numAngs++] = n->to_double();
                 }
             }
             item = item->getNext();
@@ -67,7 +67,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
 bool RotarySwitch::setSlotStartPosition(const base::Integer* const x)
 {
     if (x != nullptr) {
-        startPosition = x->getInt();
+        startPosition = x->toInt();
         currentPosition = startPosition;
     }
     return true;

@@ -46,7 +46,7 @@ bool PushButton::setSlotFunction(const base::Boolean* const newFunction)
 {
    bool ok{};
    if (newFunction != nullptr) {
-      ok = setFunction(newFunction->getBoolean());
+      ok = setFunction(newFunction->to_bool());
    }
    return ok;
 }
@@ -58,7 +58,7 @@ bool PushButton::setSlotStartState(const base::Boolean* const newFunction)
 {
    bool ok{};
    if (newFunction != nullptr) {
-      initState = newFunction->getBoolean();
+      initState = newFunction->to_bool();
       // set our current state initially
       currentState = initState;
       ok = true;

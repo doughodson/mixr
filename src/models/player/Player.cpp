@@ -16,8 +16,8 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
-#include "mixr/models/signatures/RfSignature.hpp"
-#include "mixr/models/signatures/IrSignature.hpp"
+#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IrSignature.hpp"
 
 #include "mixr/models/Track.hpp"
 #include "mixr/models/Emission.hpp"
@@ -45,8 +45,8 @@
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/osg/Quat"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -3435,7 +3435,7 @@ bool Player::setSlotInitXPos(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[INORTH] = msg->getReal();
+      pos[INORTH] = msg->to_double();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3459,7 +3459,7 @@ bool Player::setSlotInitYPos(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[IEAST] = msg->getReal();
+      pos[IEAST] = msg->to_double();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3482,7 +3482,7 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      double value{msg->getReal()};
+      double value{msg->to_double()};
       setInitAltitude( value );
       ok = true;
    }
@@ -3508,7 +3508,7 @@ bool Player::setSlotInitLat(const base::Latitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->getDouble()};
+      const double val{msg->getDecimalDegrees()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3538,7 +3538,7 @@ bool Player::setSlotInitLat(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->getDouble()};
+      const double val{msg->to_double()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3553,7 +3553,7 @@ bool Player::setSlotInitLon(const base::Longitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->getDouble()};
+      const double val{msg->getDecimalDegrees()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3583,7 +3583,7 @@ bool Player::setSlotInitLon(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->getDouble()};
+      const double val{msg->to_double()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3628,7 +3628,7 @@ bool Player::setSlotInitRoll(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{msg->getDouble()};
+      const double value{msg->to_double()};
       if ( value >= -(2.0*base::PI) && value <= (2.0*base::PI) ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3662,7 +3662,7 @@ bool Player::setInitPitch(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{msg->getDouble()};
+      const double value{msg->to_double()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3697,7 +3697,7 @@ bool Player::setInitHeading(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      double value{msg->getDouble()};
+      double value{msg->to_double()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
@@ -3776,7 +3776,7 @@ bool Player::setSlotTestBodyAxis(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      testBodyAxis = msg->getBoolean();
+      testBodyAxis = msg->to_bool();
       ok = true;
    }
    return ok;
@@ -3788,7 +3788,7 @@ bool Player::setSlotInitVelocity(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      initVp = msg->getReal();
+      initVp = msg->to_double();
       ok = true;
    }
    return ok;
@@ -3799,7 +3799,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      initVp = (msg->getReal() * mixr::base::distance::NM2M) / 3600.0f;
+      initVp = (msg->to_double() * mixr::base::distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -3885,7 +3885,7 @@ bool Player::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->getInt()};
+      const int ii{msg->toInt()};
       if (ii >= 0) {
          ok = setCamouflageType( ii );
       }
@@ -3898,7 +3898,7 @@ bool Player::setSlotTerrainElevReq(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setTerrainElevationRequired(num->getBoolean());
+      ok = setTerrainElevationRequired(num->to_bool());
    }
    return ok;
 }
@@ -3908,7 +3908,7 @@ bool Player::setSlotInterpolateTerrain(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setInterpolateTerrain(msg->getBoolean());
+      ok = setInterpolateTerrain(msg->to_bool());
    }
    return ok;
 }
@@ -3928,7 +3928,7 @@ bool Player::setSlotPositionFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setPositionFreeze( num->getBoolean() );
+      ok = setPositionFreeze( num->to_bool() );
    }
    return ok;
 }
@@ -3938,7 +3938,7 @@ bool Player::setSlotAltitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setAltitudeFreeze( num->getBoolean() );
+      ok = setAltitudeFreeze( num->to_bool() );
    }
    return ok;
 }
@@ -3948,7 +3948,7 @@ bool Player::setSlotAttitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setAttitudeFreeze( num->getBoolean() );
+      ok = setAttitudeFreeze( num->to_bool() );
    }
    return ok;
 }
@@ -3958,7 +3958,7 @@ bool Player::setSlotFuelFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setFuelFreeze( num->getBoolean() );
+      ok = setFuelFreeze( num->to_bool() );
    }
    return ok;
 }
@@ -3968,7 +3968,7 @@ bool Player::setSlotCrashOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setCrashOverride( num->getBoolean() );
+      ok = setCrashOverride( num->to_bool() );
    }
    return ok;
 }
@@ -3978,7 +3978,7 @@ bool Player::setSlotKillOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setKillOverride( num->getBoolean() );
+      ok = setKillOverride( num->to_bool() );
    }
    return ok;
 }
@@ -3988,7 +3988,7 @@ bool Player::setSlotKillRemoval(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setKillRemoval( msg->getBoolean() );
+      ok = setKillRemoval( msg->to_bool() );
    }
    return ok;
 }
@@ -3998,17 +3998,17 @@ bool Player::setSlotEnableNetOutput(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setEnableNetOutput(msg->getBoolean());
+      ok = setEnableNetOutput(msg->to_bool());
    }
    return ok;
 }
 
 // dataLogTime: Time between player data samples to an optional data
-bool Player::setSlotDataLogTime(const base::Time* const num)
+bool Player::setSlotDataLogTime(const base::Time* const time)
 {
    bool ok{};
-   if (num != nullptr) {
-      dataLogTime = num->getReal();
+   if (time != nullptr) {
+      dataLogTime = time->getValue();
       ok = true;
    }
    return ok;

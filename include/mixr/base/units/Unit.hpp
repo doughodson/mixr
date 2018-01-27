@@ -13,7 +13,7 @@ class Number;
 // Description: Abstract base class for all units.  Provides storage for a
 //              double precision value and a slot method to set it.
 //
-// Factory name: Unit
+// Factory name: AbstractUnit
 //------------------------------------------------------------------------------
 class Unit : public Object
 {
@@ -23,10 +23,10 @@ public:
     Unit();
     Unit(const double);
 
-    void setValue(double x)    { val = x;    }
-    double getReal() const     { return val; }
+    void setValue(const double x)     { val = x;    }
+    double getValue() const           { return val; }
 
-protected:
+private:
     double val{};
 
 private:

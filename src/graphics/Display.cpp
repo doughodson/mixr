@@ -1446,7 +1446,7 @@ bool Display::setSlotNormalFont(const base::Identifier* const fontName)
 //------------------------------------------------------------------------------
 bool Display::setSlotLeftOrthoBound(const base::Number* const sloobj)
 {
-   if (sloobj != nullptr) oLeft = sloobj->getDouble();
+   if (sloobj != nullptr) oLeft = sloobj->to_double();
    return true;
 }
 
@@ -1486,7 +1486,7 @@ bool Display::setSlotMaterials(Material* const msg)
 bool Display::setSlotAntialias(const base::Boolean* const x)
 {
    bool ok {};
-   if (x != nullptr) ok = setAntialiasing(x->getBoolean());
+   if (x != nullptr) ok = setAntialiasing(x->to_bool());
    return ok;
 }
 
@@ -1495,7 +1495,7 @@ bool Display::setSlotAntialias(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 bool Display::setSlotRightOrthoBound(const base::Number* const sroobj)
 {
-   if (sroobj != nullptr) oRight = sroobj->getDouble();
+   if (sroobj != nullptr) oRight = sroobj->to_double();
    return true;
 }
 
@@ -1504,7 +1504,7 @@ bool Display::setSlotRightOrthoBound(const base::Number* const sroobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotBottomOrthoBound(const base::Number* const sbobobj)
 {
-   if (sbobobj != nullptr) oBottom = sbobobj->getDouble();  // set bottom ortho bound
+   if (sbobobj != nullptr) oBottom = sbobobj->to_double();  // set bottom ortho bound
    return true;
 }
 
@@ -1513,7 +1513,7 @@ bool Display::setSlotBottomOrthoBound(const base::Number* const sbobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotTopOrthoBound(const base::Number* const stobobj)
 {
-   if (stobobj != nullptr) oTop = stobobj->getDouble();  // set top ortho bound
+   if (stobobj != nullptr) oTop = stobobj->to_double();  // set top ortho bound
    return true;
 }
 
@@ -1522,7 +1522,7 @@ bool Display::setSlotTopOrthoBound(const base::Number* const stobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotNearOrthoBound(const base::Number* const snobobj)
 {
-   if (snobobj != nullptr) oNear = snobobj->getDouble();
+   if (snobobj != nullptr) oNear = snobobj->to_double();
    return true;
 }
 
@@ -1532,7 +1532,7 @@ bool Display::setSlotNearOrthoBound(const base::Number* const snobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotFarOrthoBound(const base::Number* const sfobobj)
 {
-   if (sfobobj != nullptr) oFar = sfobobj->getDouble();
+   if (sfobobj != nullptr) oFar = sfobobj->to_double();
    return true;
 }
 
@@ -1541,7 +1541,7 @@ bool Display::setSlotFarOrthoBound(const base::Number* const sfobobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportXOrigin(const base::Integer* const svxoobj)
 {
-   if (svxoobj != nullptr) vpX = svxoobj->getInt();
+   if (svxoobj != nullptr) vpX = svxoobj->toInt();
    return true;
 }
 
@@ -1550,7 +1550,7 @@ bool Display::setSlotViewportXOrigin(const base::Integer* const svxoobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportYOrigin(const base::Integer* const svyoobj)
 {
-   if (svyoobj) vpY = svyoobj->getInt();
+   if (svyoobj) vpY = svyoobj->toInt();
    return true;
 }
 
@@ -1559,7 +1559,7 @@ bool Display::setSlotViewportYOrigin(const base::Integer* const svyoobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportWidth(const base::Integer* const svwobj)
 {
-   if (svwobj != nullptr) vpWidth = svwobj->getInt();
+   if (svwobj != nullptr) vpWidth = svwobj->toInt();
    return true;
 }
 
@@ -1568,7 +1568,7 @@ bool Display::setSlotViewportWidth(const base::Integer* const svwobj)
 //------------------------------------------------------------------------------
 bool Display::setSlotViewportHeight(const base::Integer* const svhobj)
 {
-   if (svhobj != nullptr) vpHeight = svhobj->getInt();
+   if (svhobj != nullptr) vpHeight = svhobj->toInt();
    return true;
 }
 
@@ -1643,7 +1643,7 @@ bool Display::setSlotTexturesSingle(Texture* const obj)
 //------------------------------------------------------------------------------
 bool Display::setSlotStdLineWidth(const base::Number* const obj)
 {
-   if (obj != nullptr) setStdLineWidth( obj->getFloat() );
+   if (obj != nullptr) setStdLineWidth( static_cast<GLfloat>(obj->to_double()) );
    return true;
 }
 
@@ -1667,7 +1667,7 @@ bool Display::setSlotLeftBracketCharacter(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      int num {msg->getInt()};
+      int num {msg->toInt()};
       if (std::isalnum(num)) {
          setLeftBracketCharacter(char(num));
          ok = true;
@@ -1696,7 +1696,7 @@ bool Display::setSlotRightBracketCharacter(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      int num {msg->getInt()};
+      int num {msg->toInt()};
       if (std::isalnum(num)) {
          setRightBracketCharacter(char(num));
          ok = true;
@@ -1725,7 +1725,7 @@ bool Display::setSlotReverseVideoBrackets(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setReverseVideoBrackets(msg->getBoolean());
+      ok = setReverseVideoBrackets(msg->to_bool());
    }
    return ok;
 }
@@ -1737,7 +1737,7 @@ bool Display::setSlotClearDepth(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setClearDepth(msg->getReal());
+      setClearDepth(msg->to_double());
       ok = true;
    }
    return ok;

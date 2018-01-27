@@ -10,8 +10,8 @@
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/angles.hpp"
 
 namespace mixr {
 namespace models {
@@ -259,7 +259,7 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
    } else if (msg != nullptr) {
-      value = msg->getReal();
+      value = msg->to_double();
    }
    setAzimuthBin(value);
    return true;
@@ -274,7 +274,7 @@ bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
    } else if (msg != nullptr) {
-      value = msg->getReal();
+      value = msg->to_double();
    }
    setElevationBin(value);
    return true;

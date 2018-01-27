@@ -58,7 +58,7 @@ bool DiscreteInputFixed::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v = msg->toInt();
       if (v >= 0) {
          ok = setChannel(v);
       }

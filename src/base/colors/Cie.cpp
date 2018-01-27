@@ -88,7 +88,7 @@ void Cie::getCIE(Vec3d& hhh) const
 bool Cie::setSlotLuminance(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value{msg->to_double()};
     const bool ok = (value >= 0 && value <= 1);
     if (ok) {
         cie[LUMINANCE] = value;
@@ -105,7 +105,7 @@ bool Cie::setSlotLuminance(const Number* const msg)
 bool Cie::setSlotX(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value{msg->to_double()};
     const bool ok = (value >= 0 && value <= 1);
     if (ok) {
         cie[X] = value;
@@ -122,7 +122,7 @@ bool Cie::setSlotX(const Number* const msg)
 bool Cie::setSlotY(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value = msg->getReal();
+    const double value{msg->to_double()};
     const bool ok = (value >= 0 && value <= 1);
     if (ok) {
         cie[Y] = value;

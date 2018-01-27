@@ -43,12 +43,9 @@ class Float : public Number
     DECLARE_SUBCLASS(Float, Number)
 
 public:
-    Float()                                         { STANDARD_CONSTRUCTOR() }
-    Float(const double value) : Number(value)       { STANDARD_CONSTRUCTOR() }
-    Float(const float value)  : Number(value)       { STANDARD_CONSTRUCTOR() }
-
-    operator float() const;
-    operator double() const;
+    Float()                                                  { STANDARD_CONSTRUCTOR() }
+    explicit Float(const double value) : Number(value)       { STANDARD_CONSTRUCTOR() }
+    explicit Float(const float value)  : Number(value)       { STANDARD_CONSTRUCTOR() }
 
     Float& operator=(const double);
 
@@ -69,16 +66,17 @@ public:
 //------------------------------------------------------------------------------
 // Conversion operators:  float() and double()
 //------------------------------------------------------------------------------
+/*
 inline Float::operator float() const
 {
-    return Number::getFloat();
+    return static_cast<float>(Number::getValue());
 }
 
 inline Float::operator double() const
 {
-    return Number::getDouble();
+    return Number::getValue();
 }
-
+*/
 
 //------------------------------------------------------------------------------
 // Assignment operator:  =
@@ -107,19 +105,19 @@ inline void Float::operator+=(const double n)
 // Add vals of Float instances n1 & n2 and return the sum
 inline double operator+(const Float& n1, const Float& n2)
 {
-    return n1.getReal() + n2.getReal();
+    return n1.to_double() + n2.to_double();
 }
 
 // Add value n1 to val of Float n2 and return the sum
 inline double operator+(const double n1, const Float& n2)
 {
-    return n1 + n2.getReal();
+    return n1 + n2.to_double();
 }
 
 // Add value n2 to val of Float n1 and return the sum
 inline double operator+(const Float& n1, const double n2)
 {
-    return n1.getReal() + n2;
+    return n1.to_double() + n2;
 }
 
 
@@ -139,19 +137,19 @@ inline void Float::operator-=(const double n)
 // Subtract the vals of Float instances n1 & n2 and return the difference
 inline double operator-(const Float& n1, const Float& n2)
 {
-    return n1.getReal() - n2.getReal();
+    return n1.to_double() - n2.to_double();
 }
 
 // Subtract value n1 from val of Float n2 and return the difference
 inline double operator-(const double n1, const Float& n2)
 {
-    return n1 - n2.getReal();
+    return n1 - n2.to_double();
 }
 
 // Subtract value n2 from val of Float n1 and return the difference
 inline double operator-(const Float& n1, const double n2)
 {
-    return n1.getReal() - n2;
+    return n1.to_double() - n2;
 }
 
 
@@ -171,19 +169,19 @@ inline void Float::operator*=(const double n)
 // Multiply the vals of Float instances n1 & n2 and return the sum
 inline double operator*(const Float& n1, const Float& n2)
 {
-    return n1.getReal() * n2.getReal();
+    return n1.to_double() * n2.to_double();
 }
 
 // Multiply value n1 to val of Float n2 and return the sum
 inline double operator*(const double n1, const Float& n2)
 {
-    return n1 * n2.getReal();
+    return n1 * n2.to_double();
 }
 
 // Multiply value n2 to val of Float n1 and return the sum
 inline double operator*(const Float& n1, const double n2)
 {
-    return n1.getReal() * n2;
+    return n1.to_double() * n2;
 }
 
 
@@ -217,9 +215,9 @@ inline void Float::operator/=(const double n)
 // a zero and send an error message
 inline double operator/(const Float& n1, const Float& n2)
 {
-    double n = n1.getReal();
-    if (n2.getReal() != 0.0f) {
-        n /= n2.getReal();
+    double n = n1.to_double();
+    if (n2.to_double() != 0.0f) {
+        n /= n2.to_double();
     }
     else {
         std::cerr << "Float::operator/(): Divide by zero!" << std::endl;
@@ -234,8 +232,8 @@ inline double operator/(const Float& n1, const Float& n2)
 inline double operator/(const double n1, const Float& n2)
 {
     double n = n1;
-    if (n2.getReal() != 0.0f) {
-        n /= n2.getReal();
+    if (n2.to_double() != 0.0f) {
+        n /= n2.to_double();
     }
     else {
         std::cerr << "Float::operator/(): Divide by zero!" << std::endl;
@@ -248,7 +246,7 @@ inline double operator/(const double n1, const Float& n2)
 // unless val n2 is equal to zero, then return a zero and send an error message
 inline double operator/(const Float& n1, const double n2)
 {
-    double n = n1.getReal();
+    double n = n1.to_double();
     if (n2 != 0.0f) {
         n /= n2;
     }
@@ -267,93 +265,93 @@ inline double operator/(const Float& n1, const double n2)
 // Return a true or a false after comparing Float n1.val & n2.val
 inline bool operator==(const Float& n1, const Float& n2)
 {
-   return n1.getReal() == n2.getReal();
+   return n1.to_double() == n2.to_double();
 }
 
 // Return a true or a false after comparing value n1 and Float n2.val
 inline bool operator==(const double n1, const Float& n2)
 {
-   return n1 == n2.getReal();
+   return n1 == n2.to_double();
 }
 
 inline bool operator==(const Float& n1, const double n2)
 {
-   return n1.getReal() == n2;
+   return n1.to_double() == n2;
 }
 
 inline bool operator!=(const Float& n1, const Float& n2)
 {
-   return n1.getReal() != n2.getReal();
+   return n1.to_double() != n2.to_double();
 }
 
 inline bool operator!=(const double n1, const Float& n2)
 {
-   return n1 != n2.getReal();
+   return n1 != n2.to_double();
 }
 
 inline bool operator!=(const Float& n1, const double n2)
 {
-   return n1.getReal() != n2;
+   return n1.to_double() != n2;
 }
 
 inline bool operator<(const Float& n1, const Float& n2)
 {
-   return n1.getReal() < n2.getReal();
+   return n1.to_double() < n2.to_double();
 }
 
 inline bool operator<(const double n1, const Float& n2)
 {
-   return n1 < n2.getReal();
+   return n1 < n2.to_double();
 }
 
 inline bool operator<(const Float& n1, const double n2)
 {
-   return n1.getReal() < n2;
+   return n1.to_double() < n2;
 }
 
 inline bool operator<=(const Float& n1, const Float& n2)
 {
-   return n1.getReal() <= n2.getReal();
+   return n1.to_double() <= n2.to_double();
 }
 
 inline bool operator<=(const double n1, const Float& n2)
 {
-   return n1 <= n2.getReal();
+   return n1 <= n2.to_double();
 }
 
 inline bool operator<=(const Float& n1, const double n2)
 {
-   return n1.getReal() <= n2;
+   return n1.to_double() <= n2;
 }
 
 inline bool operator>(const Float& n1, const Float& n2)
 {
-   return n1.getReal() > n2.getReal();
+   return n1.to_double() > n2.to_double();
 }
 
 inline bool operator>(const double n1, const Float& n2)
 {
-   return n1 > n2.getReal();
+   return n1 > n2.to_double();
 }
 
 inline bool operator>(const Float& n1, const double n2)
 {
-   return n1.getReal() > n2;
+   return n1.to_double() > n2;
 }
 
 inline bool operator>=(const Float& n1, const Float& n2)
 {
-   return n1.getReal() >= n2.getReal();
+   return n1.to_double() >= n2.to_double();
 }
 
 inline bool operator>=(const double n1, const Float& n2)
 {
-   return n1 >= n2.getReal();
+   return n1 >= n2.to_double();
 }
 
 inline bool operator>=(const Float& n1, const double n2)
 {
-   return n1.getReal() >= n2;
+   return n1.to_double() >= n2;
 }
 
 //------------------------------------------------------------------------------
@@ -372,7 +370,7 @@ inline std::istream& operator>>(std::istream& sin, Float& n)
 //------------------------------------------------------------------------------
 inline std::ostream& operator<<(std::ostream& sout, const Float& n)
 {
-   sout << n.getReal();
+   sout << n.to_double();
    return sout;
 }
 

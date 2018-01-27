@@ -87,7 +87,7 @@ bool Eadi3DPage::onEventSetAltitude(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        altitudeFT = x->getReal();
+        altitudeFT = x->to_double();
     }
     return ok;
 }
@@ -100,7 +100,7 @@ bool Eadi3DPage::onEventSetAirspeed(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        airspeedKTS = x->getReal();
+        airspeedKTS = x->to_double();
     }
     return ok;
 }
@@ -113,7 +113,7 @@ bool Eadi3DPage::onEventSetHeading(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        headingDEG = x->getReal();
+        headingDEG = x->to_double();
     }
     return ok;
 }
@@ -126,7 +126,7 @@ bool Eadi3DPage::onEventSetAOA(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        aoaDEG = x->getReal();
+        aoaDEG = x->to_double();
     }
     return ok;
 }
@@ -139,7 +139,7 @@ bool Eadi3DPage::onEventSetMach(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        machNo = x->getReal();
+        machNo = x->to_double();
     }
     return ok;
 }
@@ -152,7 +152,7 @@ bool Eadi3DPage::onEventSetVVI(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        vviFPM = x->getReal();
+        vviFPM = x->to_double();
     }
     return ok;
 }
@@ -165,7 +165,7 @@ bool Eadi3DPage::onEventSetPitch(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        pitchDEG = x->getReal();
+        pitchDEG = x->to_double();
     }
     return ok;
 }
@@ -178,7 +178,7 @@ bool Eadi3DPage::onEventSetRoll(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        rollDEG = x->getReal();
+        rollDEG = x->to_double();
     }
     return ok;
 }
@@ -191,7 +191,7 @@ bool Eadi3DPage::onEventSetGLoad(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        Gload = x->getReal();
+        Gload = x->to_double();
     }
     return ok;
 }
@@ -204,7 +204,7 @@ bool Eadi3DPage::onEventSetLandingMode(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        landingMode = x->getReal() != 0.0;
+        landingMode = x->to_double() != 0.0;
     }
     return ok;
 }
@@ -217,7 +217,7 @@ bool Eadi3DPage::onEventSetPitchSteeringCmd(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        pitchSteeringCmd = x->getReal();
+        pitchSteeringCmd = x->to_double();
     }
     return ok;
 }
@@ -230,7 +230,7 @@ bool Eadi3DPage::onEventSetRollSteeringCmd(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        rollSteeringCmd = x->getReal();
+        rollSteeringCmd = x->to_double();
     }
     return ok;
 }
@@ -243,7 +243,7 @@ bool Eadi3DPage::onEventSetPitchSteeringValid(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        pitchSteeringValid = x->getReal() != 0.0;
+        pitchSteeringValid = x->to_double() != 0.0;
     }
     return ok;
 }
@@ -256,7 +256,7 @@ bool Eadi3DPage::onEventSetRollSteeringValid(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        rollSteeringValid = x->getReal() != 0.0;
+        rollSteeringValid = x->to_double() != 0.0;
     }
     return ok;
 }
@@ -269,7 +269,7 @@ bool Eadi3DPage::onEventSetGlideslopeDev(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        glideslopeDevDOTS = x->getReal();
+        glideslopeDevDOTS = x->to_double();
     }
     return ok;
 }
@@ -282,7 +282,7 @@ bool Eadi3DPage::onEventSetLocalizerDev(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        localizerDevDOTS = x->getReal();
+        localizerDevDOTS = x->to_double();
     }
     return ok;
 }
@@ -295,7 +295,7 @@ bool Eadi3DPage::onEventSetTurnRate(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        turnRateDOTS = x->getReal();
+        turnRateDOTS = x->to_double();
     }
     return ok;
 }
@@ -308,7 +308,7 @@ bool Eadi3DPage::onEventSetSlipInd(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        slipIndDOTS = x->getReal();
+        slipIndDOTS = x->to_double();
     }
     return ok;
 }
@@ -321,7 +321,7 @@ bool Eadi3DPage::onEventSetGlideslopeValid(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        glideslopeDevValid = x->getReal() != 0;
+        glideslopeDevValid = x->to_double() != 0;
     }
     return ok;
 }
@@ -334,7 +334,7 @@ bool Eadi3DPage::onEventSetLocalizerValid(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         ok = true;
-        localizerDevValid = x->getReal() != 0.0;
+        localizerDevValid = x->to_double() != 0.0;
     }
     return ok;
 }

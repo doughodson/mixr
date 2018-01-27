@@ -691,7 +691,7 @@ bool Graphic::setColor(const base::Number* const cnobj)
     // we have to have a color rotary to do this
     const auto cr = dynamic_cast<ColorRotary*>(color);
     if (cr != nullptr && cnobj != nullptr) {
-        cr->determineColor(cnobj->getReal());
+        cr->determineColor(cnobj->to_double());
     }
 
     return true;
@@ -706,7 +706,7 @@ bool Graphic::onSetTextureId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->getInt()};
+      const int v{msg->toInt()};
       if (v >= 0) {
          ok = setTexture(static_cast<GLuint>(v));
       }
@@ -731,7 +731,7 @@ bool Graphic::onSetVisibilityEvent(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setVisibility( msg->getBoolean() );
+      ok = setVisibility( msg->to_bool() );
    }
    return ok;
 
@@ -991,7 +991,7 @@ bool Graphic::setSlotTranslateLight(base::PairStream* const msg)
             if (pair != nullptr) {
                 const auto num = dynamic_cast<base::Number*>(pair->object());
                 if (num != nullptr) {
-                    temp[count++] = num->getReal();
+                    temp[count++] = num->to_double();
                 }
             }
             item = item->getNext();
@@ -1030,14 +1030,14 @@ bool Graphic::setSlotColor(const base::Identifier* const color)
 // setSlotLineWidth -- set this object's line width
 bool Graphic::setSlotLineWidth(const base::Number* const msg)
 {
-    if (msg != nullptr) return setLineWidth( msg->getFloat() );
+    if (msg != nullptr) return setLineWidth( static_cast<const GLfloat>(msg->to_double()));
     else return false;
 }
 
 // setSlotFlashRate -- set this object's flash rate
 bool Graphic::setSlotFlashRate(const base::Number* const msg)
 {
-    if (msg != nullptr) return setFlashRate(msg->getReal());
+    if (msg != nullptr) return setFlashRate(msg->to_double());
     else return false;
 }
 
@@ -1046,7 +1046,7 @@ bool Graphic::setSlotFlashRate(const base::Number* const msg)
 bool Graphic::setSlotNoDisplayList(const base::Boolean* const msg)
 {
     bool ok = (msg != nullptr);
-    if (ok) ok = setDisableDisplayList( msg->getBoolean() );
+    if (ok) ok = setDisableDisplayList( msg->to_bool() );
     return ok;
 }
 
@@ -1054,7 +1054,7 @@ bool Graphic::setSlotNoDisplayList(const base::Boolean* const msg)
 bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const scfobj)
 {
     bool ok = (scfobj != nullptr);
-    if (ok) postDraw = scfobj->getBoolean();
+    if (ok) postDraw = scfobj->to_bool();
     return ok;
 }
 
@@ -1063,7 +1063,7 @@ bool Graphic::setSlotSelectName(const base::Integer* const x)
 {
     bool ok = (x != nullptr);
     if (ok) {
-         const int name = x->getInt();
+         const int name = x->toInt();
          ok = setSelectName(static_cast<GLuint>(name));
     }
     return ok;
@@ -1074,7 +1074,7 @@ bool Graphic::setSlotScissorX(const base::Number* const newX)
 {
     bool ok = false;
     if (newX != nullptr) {
-        ok = setScissorX(newX->getReal());
+        ok = setScissorX(newX->to_double());
     }
     return ok;
 }
@@ -1084,7 +1084,7 @@ bool Graphic::setSlotScissorWidth(const base::Number* const newWidth)
 {
     bool ok = false;
     if (newWidth != nullptr) {
-        ok = setScissorWidth(newWidth->getReal());
+        ok = setScissorWidth(newWidth->to_double());
     }
     return ok;
 }
@@ -1094,7 +1094,7 @@ bool Graphic::setSlotScissorY(const base::Number* const newY)
 {
     bool ok = false;
     if (newY != nullptr) {
-        ok = setScissorY(newY->getReal());
+        ok = setScissorY(newY->to_double());
     }
     return ok;
 }
@@ -1104,7 +1104,7 @@ bool Graphic::setSlotScissorHeight(const base::Number* const newHeight)
 {
     bool ok = false;
     if (newHeight != nullptr) {
-        ok = setScissorHeight(newHeight->getReal());
+        ok = setScissorHeight(newHeight->to_double());
     }
     return ok;
 }
@@ -1113,7 +1113,7 @@ bool Graphic::setSlotScissorHeight(const base::Number* const newHeight)
 bool Graphic::setSlotStippling(const base::Boolean* const msg)
 {
    bool ok = false;
-   if (msg != nullptr) ok = setStippling(msg->getBoolean());
+   if (msg != nullptr) ok = setStippling(msg->to_bool());
    return ok;
 }
 
@@ -1122,7 +1122,7 @@ bool Graphic::setSlotStippleFactor(const base::Integer* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-       ok = setStippleFactor(static_cast<GLuint>(msg->getInt()));
+       ok = setStippleFactor(static_cast<GLuint>(msg->toInt()));
    }
    return ok;
 }
@@ -1132,7 +1132,7 @@ bool Graphic::setSlotStipplePattern(const base::Integer* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int v = msg->getInt();
+      int v = msg->toInt();
       if (v >= 0 && v <= 0xffff) {
          ok = setStipplePattern(static_cast<GLushort>(v));
       }
@@ -1147,7 +1147,7 @@ bool Graphic::setSlotStipplePattern(const base::Integer* const msg)
 bool Graphic::setSlotVisibility(const base::Boolean* const msg)
 {
    bool ok = false;
-   if (msg != nullptr) ok = setVisibility(msg->getBoolean());
+   if (msg != nullptr) ok = setVisibility(msg->to_bool());
    return ok;
 }
 // setSlotMask - determines if we turn off our color guns or not
@@ -1155,7 +1155,7 @@ bool Graphic::setSlotMask(const base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-        mask = msg->getBoolean();
+        mask = msg->to_bool();
         ok = true;
    }
    return ok;

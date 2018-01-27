@@ -155,7 +155,7 @@ void BitmapFont::loadFont()
 bool BitmapFont::setSlotReverse(const base::Boolean* const rnumber)
 {
     if (rnumber != nullptr)
-        reverse = rnumber->getBoolean();
+        reverse = rnumber->to_bool();
     return true;
 }
 

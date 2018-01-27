@@ -4,7 +4,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cstring>
 
@@ -170,7 +170,7 @@ bool EarthModel::setSlotA(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setA( msg->getDouble() );
+      ok = setA( msg->to_double() );
    }
    return ok;
 }
@@ -188,7 +188,7 @@ bool EarthModel::setSlotB(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setB( msg->getDouble() );
+      ok = setB( msg->to_double() );
    }
    return ok;
 }
@@ -197,7 +197,7 @@ bool EarthModel::setSlotF(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setF( msg->getDouble() );
+      ok = setF( msg->to_double() );
    }
    return ok;
 }

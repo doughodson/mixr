@@ -154,7 +154,7 @@ bool NetInput::setSlotNoWait(mixr::base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      noWaitFlag = msg->getBoolean();
+      noWaitFlag = msg->to_bool();
       ok = true;
    }
    return ok;

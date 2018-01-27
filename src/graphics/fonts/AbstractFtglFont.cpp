@@ -55,7 +55,7 @@ bool AbstractFtglFont::setSlotFaceSize(const base::Integer* const faceSize)
 {
     // get our new face size, else we return to a default face size
     if (faceSize != nullptr)
-        fSize = faceSize->getInt();
+        fSize = faceSize->toInt();
     else
         fSize = DEFAULT_FACE_SIZE;
     return true;

@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Decibel; class Identifier; class Number; }
+namespace base { class Boolean; class Decibel; class Frequency; class Identifier; class Number; class Power; }
 namespace models {
 class Antenna;
 class Emission;
@@ -31,32 +31,28 @@ class Emission;
 // Slots:
 //    antennaName        <base::Identifier>    ! Name of the requested Antenna
 //
-//    frequency          <base::Frequency>     ! Radio's Main Frequency (default: 0 hz)
-//                       <base::Number>        ! Radio's Main Frequency (hz)
+//    frequency          <base::Frequency>     ! Radio's Main Frequency         (default: 0 hz)
 //
-//    bandwidth          <base::Frequency>     ! Radio's Bandwidth (default: 1.0 hz)
-//                       <base::Number>        ! Radio's Bandwidth (Hz)
+//    bandwidth          <base::Frequency>     ! Radio's Bandwidth              (default: 1.0 hz)
 //
-//    bandwidthNoise     <base::Frequency>     ! Radio's Bandwidth Noise (default: 'bandwidth', 1.0)
-//                       <base::Number>        ! Radio's Bandwidth Noise (Hz)
+//    bandwidthNoise     <base::Frequency>     ! Radio's Bandwidth Noise        (default: 'bandwidth', 1.0)
 //
-//    powerPeak          <base::Watts>         ! Peak Power (default: 0.0)
-//                       <base::Number>        ! Peak Power in watts
+//    powerPeak          <base::Power>         ! Peak Power                     (default: 0.0 watts)
 //
 //    threshold          <base::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
 //
-//    noiseFigure        <base::Number>        ! Noise Figure (> 1)            (no units; def: 1.0)
+//    noiseFigure        <base::Number>        ! Noise Figure (> 1)             (no units; def: 1.0)
 //
-//    systemTemperature  <base::Number>        ! System Temperature            (Kelvin; def: 290.0)
+//    systemTemperature  <base::Number>        ! System Temperature             (Kelvin; def: 290.0)
 //
-//    lossXmit           <base::Number>        ! Transmit loss                 (no units; def: 1.0)
-//                       <base::Decibel>       ! Transmit loss                 (dB)
+//    lossXmit           <base::Number>        ! Transmit loss                  (no units; def: 1.0)
+//                       <base::Decibel>       ! Transmit loss                  (dB)
 //
-//    lossRecv           <base::Number>        ! Receive loss                  (no units; def: 1.0)
-//                       <base::Decibel>       ! Receive loss                  (dB)
+//    lossRecv           <base::Number>        ! Receive loss                   (no units; def: 1.0)
+//                       <base::Decibel>       ! Receive loss                   (dB)
 //
-//    lossSignalProcess  <base::Number>        ! Signal Processing loss        (no units; def: 1.0)
-//                       <base::Decibel>       ! Signal Processing loss        (dB)
+//    lossSignalProcess  <base::Number>        ! Signal Processing loss         (no units; def: 1.0)
+//                       <base::Decibel>       ! Signal Processing loss         (dB)
 //
 //    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
 //
@@ -84,7 +80,7 @@ public:
    virtual double getRfRecvNoise() const;                // Returns the receiver noise (watts)
    virtual double getRfThreshold() const;                // Returns the receiver threshold (over S/N) (dB)
    virtual double getRfTransmitLoss() const;             // Returns the transmit loss (no units)
-   virtual double getRfReceiveLoss() const;              // Returns the receive loss   (no units)
+   virtual double getRfReceiveLoss() const;              // Returns the receive loss (no units)
    virtual double getRfSignalProcessLoss() const;        // Returns the signal Processing loss (no units)
    virtual double getRfNoiseFigure() const;              // Returns the receiver noise figure (no units)
 
@@ -171,10 +167,10 @@ private:
 private:
    // slot table helper methods
    bool setSlotAntennaName(base::Identifier* const);
-   bool setSlotPeakPower(base::Number* const);
-   bool setSlotFrequency(base::Number* const);
-   bool setSlotBandwidth(base::Number* const);
-   bool setSlotBandwidthNoise(base::Number* const);
+   bool setSlotPeakPower(base::Power* const);
+   bool setSlotFrequency(base::Frequency* const);
+   bool setSlotBandwidth(base::Frequency* const);
+   bool setSlotBandwidthNoise(base::Frequency* const);
    bool setSlotRfThreshold(base::Decibel* const);
    bool setSlotRfNoiseFigure(base::Number* const);
    bool setSlotRfSysTemp(base::Number* const);

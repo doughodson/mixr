@@ -7,8 +7,8 @@
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 #include <cmath>
 #include <string>
@@ -115,7 +115,7 @@ bool AnalogSignalGen::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v = msg->getInt();
+      const int v = msg->toInt();
       if (v >= 0) {
          ok = setChannel(v);
       }

@@ -25,8 +25,8 @@ class Complex : public Object
 
 public:
    Complex();
-   Complex(const double r);
-   Complex(const double r, const double i);
+   explicit Complex(const double r);
+   explicit Complex(const double r, const double i);
 
    void setReal(const double x)             { value.real(x);       }
    double getReal() const                   { return value.real(); }
@@ -34,7 +34,7 @@ public:
    void setImag(const double x)             { value.imag(x);       }
    double getImag() const                   { return value.imag(); }
 
-   const std::complex<double>& getComplex() { return value; }
+   const std::complex<double>& to_complex() { return value; }
 
 private:
    std::complex<double> value{};

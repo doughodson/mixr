@@ -12,7 +12,7 @@
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cmath>
 

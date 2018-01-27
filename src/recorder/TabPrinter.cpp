@@ -6,7 +6,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -95,7 +95,7 @@ bool TabPrinter::setSlotMsgHdr(const base::Identifier* const msg)
       }
 
       if (!ok && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "TabPrinter::setSlotMsgHdr(): Invalid header option type: " << msg->str();
+         std::cerr << "TabPrinter::setSlotMsgHdr(): Invalid header option type: " << msg->to_string();
          std::cerr << ", specify one of the following identifiers: { no_hdr, all_msgs, new_msg, on_change }" << std::endl;
       }
    }

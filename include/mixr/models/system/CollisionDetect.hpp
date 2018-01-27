@@ -4,7 +4,7 @@
 
 #include "mixr/models/system/System.hpp"
 #include "mixr/config.hpp"
-#include "mixr/base/units/distance_utils.hpp"
+#include "mixr/base/units/util/distance_utils.hpp"
 
 namespace mixr {
 namespace base { class Angle; class Boolean; class Distance; class Integer; class Number; class PairStream; }

@@ -1,7 +1,8 @@
 
 #include "mixr/linearsystem/LowpassFilter.hpp"
+
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/frequencies.hpp"
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
@@ -77,7 +78,7 @@ bool LowpassFilter::setSlotWc(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      double rps = msg->getReal();
+      double rps = msg->to_double();
       if (rps > 0) {
          setWc( rps );
          ok = true;

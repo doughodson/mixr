@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Unit, "Unit")
+IMPLEMENT_ABSTRACT_SUBCLASS(Unit, "AbstractUnit")
 EMPTY_DELETEDATA(Unit)
 
 BEGIN_SLOTTABLE(Unit)
@@ -37,7 +37,7 @@ bool Unit::setSlotValue(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setValue( msg->getReal() );
+      setValue( msg->to_double() );
       ok = true;
    }
    return ok;

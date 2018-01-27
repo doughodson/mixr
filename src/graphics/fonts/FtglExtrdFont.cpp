@@ -42,7 +42,7 @@ void FtglExtrdFont::copyData(const FtglExtrdFont& org, const bool)
 bool FtglExtrdFont::setSlotDepth(const base::Number* const newDepth)
 {
     // set our depth
-    if (newDepth != nullptr) depth = newDepth->getFloat();
+    if (newDepth != nullptr) depth = static_cast<float>(newDepth->to_double());
     else depth = DEFAULT_DEPTH;
     return true;
 }

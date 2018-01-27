@@ -3,8 +3,8 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <iostream>
 

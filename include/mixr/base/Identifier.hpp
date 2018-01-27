@@ -35,7 +35,7 @@ public:
    void operator+=(const std::string&);
 
    const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
-   const std::string& str() const            { return id; }          // returns a standard string (std::string)
+   const std::string& to_string() const      { return id; }          // returns a standard string (std::string)
 
    void empty()                              { id = "";   }          // empty our string
    void setStr(const char* x)                { id = x;  replaceSpaces(); }
@@ -152,7 +152,7 @@ inline void Identifier::replaceSpaces()
 // comparison operator: ==
 inline bool operator==(const Identifier& s1, const Identifier& s2)
 {
-   if (s1.str() == s2.str()) {
+   if (s1.to_string() == s2.to_string()) {
       return true;
    }
    return false;
@@ -160,7 +160,7 @@ inline bool operator==(const Identifier& s1, const Identifier& s2)
 
 inline bool operator==(const char* s1, const Identifier& s2)
 {
-   if (s2.str() == std::string(s1)) {
+   if (s2.to_string() == std::string(s1)) {
       return true;
    }
    return false;
@@ -168,7 +168,7 @@ inline bool operator==(const char* s1, const Identifier& s2)
 
 inline bool operator==(const Identifier& s1, const char* s2)
 {
-   if (s1.str() == std::string(s2)) {
+   if (s1.to_string() == std::string(s2)) {
       return true;
    }
    return false;

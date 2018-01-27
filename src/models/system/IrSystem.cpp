@@ -209,7 +209,7 @@ bool IrSystem::setSeeker(IrSeeker* const p)
 bool IrSystem::setSlotSeekerName(base::Identifier* const p)
 {
    if (p == nullptr) return false;
-   seekerName = p->str();
+   seekerName = p->to_string();
    return true;
 }
 
@@ -218,7 +218,7 @@ bool IrSystem::setSlotDisableQueries(base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDisableQueriesFlag( msg->getBoolean() );
+      ok = setDisableQueriesFlag( msg->to_bool() );
    }
    return ok;
 }

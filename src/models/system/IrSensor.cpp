@@ -21,7 +21,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cmath>
 #include <string>
@@ -519,7 +519,7 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
        base::Meters m;
        value = static_cast<double>(m.convert(*d));
    } else if (msg != nullptr) {
-      value = msg->getReal();
+      value = msg->to_double();
    }
 
    setMaximumRange(value);
@@ -555,7 +555,7 @@ bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));
    } else if (msg != nullptr) {
-      value = msg->getReal();
+      value = msg->to_double();
    }
    ok = setLowerWavelength(value);
 
@@ -578,7 +578,7 @@ bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));
    } else if (msg != nullptr) {
-      value = msg->getReal();
+      value = msg->to_double();
    }
    ok = setUpperWavelength(value);
    if (!ok) {
@@ -594,7 +594,7 @@ bool IrSensor::setSlotNEI(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double x{msg->getReal()};
+      const double x{msg->to_double()};
       ok = setNEI(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -610,7 +610,7 @@ bool IrSensor::setSlotThreshold(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double x{msg->getReal()};
+      const double x{msg->to_double()};
       ok = setThreshold(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -626,7 +626,7 @@ bool IrSensor::setSlotIFOV(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double x{msg->getReal()};
+      const double x{msg->to_double()};
       ok = setIFOV(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -675,7 +675,7 @@ bool IrSensor::setSlotSensorType(const base::Identifier* const msg)
 // we'll lookup the actual track manager in reset() later
 bool IrSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v->str());
+    return setTrackManagerName(v->to_string());
 }
 
 bool IrSensor::setTrackManagerName(const std::string& name)

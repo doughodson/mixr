@@ -2,7 +2,7 @@
 #include "mixr/base/colors/Hsv.hpp"
 
 #include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
@@ -89,7 +89,7 @@ void Hsv::getHSVA(Vec4d& hhh) const
 bool Hsv::setSlotHue(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value{msg->getReal()};
+    double value{msg->to_double()};
     bool ok{value >= 0 && value <= 360};
     if (ok) {
         hsv[HUE] = value;
@@ -106,7 +106,7 @@ bool Hsv::setSlotHue(const Number* const msg)
 bool Hsv::setSlotSaturation(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value{msg->getReal()};
+    double value{msg->to_double()};
     bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[SATURATION] = value;
@@ -123,7 +123,7 @@ bool Hsv::setSlotSaturation(const Number* const msg)
 bool Hsv::setSlotValue(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value{msg->getReal()};
+    double value{msg->to_double()};
     bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[VALUE] = value;

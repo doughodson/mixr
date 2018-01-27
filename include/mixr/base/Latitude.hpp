@@ -15,9 +15,8 @@ class Identifier;
 // Class: Latitude
 //
 // Description: Stores a latitude coordinate expressed in terms of a direction
-//              {north or south} and degrees, minutes and seconds.  Provides
-//              a useful conversion of the coordinate expressed in this form
-//              a decimal representation (a signal value).
+//              {north or south}, degrees, minutes and seconds.  Can convert
+//              this represntation into decimal degrees.
 //
 // Factory name: Latitude
 // Slots:
@@ -36,8 +35,7 @@ public:
 
    Latitude();
 
-   double getValue() const         { return val; }
-   double getDouble() const        { return val; }
+   double getDecimalDegrees() const         { return val; }
 
    Dir getDir() const              { return dir; }
    int getDeg() const              { return deg; }

@@ -184,7 +184,7 @@ bool UdpUnicastHandler::setSlotIpAddress(const Identifier* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ipAddr = msg->str();
+        ipAddr = msg->to_string();
         ok = true;
     }
     return ok;

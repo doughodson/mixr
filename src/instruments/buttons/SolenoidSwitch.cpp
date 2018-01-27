@@ -73,7 +73,7 @@ void SolenoidSwitch::deleteData()
 bool SolenoidSwitch::setSlotHoldTimer(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setHoldTimer(x->getReal());
+    if (x != nullptr) ok = setHoldTimer(x->to_double());
     return ok;
 }
 
@@ -93,7 +93,7 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
         while (item != nullptr && count < 3) {
             const auto pair = static_cast<const base::Pair*>(item->getValue());
             const auto num = dynamic_cast<const base::Integer*>(pair->object());
-            if (num != nullptr) eventMap[count] = num->getInt();
+            if (num != nullptr) eventMap[count] = num->toInt();
             count++;
             item = item->getNext();
         }
@@ -108,7 +108,7 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
 bool SolenoidSwitch::selectLatch(const base::Boolean* const x)
 {
     if (x != nullptr) {
-        latched = x->getBoolean();
+        latched = x->to_bool();
     }
     return true;
 }

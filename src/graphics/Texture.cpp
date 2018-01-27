@@ -300,7 +300,7 @@ bool Texture::setMinFilter(const int v)
 bool Texture::setSlotWidth(const base::Integer* const size)
 {
     bool ok = false;
-    if (size != nullptr) ok = setWidth(size->getInt());
+    if (size != nullptr) ok = setWidth(size->toInt());
     return ok;
 }
 
@@ -310,7 +310,7 @@ bool Texture::setSlotWidth(const base::Integer* const size)
 bool Texture::setSlotHeight(const base::Integer* const size)
 {
     bool ok = false;
-    if (size != nullptr) ok = setHeight(size->getInt());
+    if (size != nullptr) ok = setHeight(size->toInt());
     return ok;
 }
 
@@ -320,7 +320,7 @@ bool Texture::setSlotHeight(const base::Integer* const size)
 bool Texture::setSlotRedScale(const base::Number* const s)
 {
     bool ok = false;
-    if (s != nullptr) ok = setRedScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setRedScale(static_cast<GLfloat>(s->to_double()));
     return ok;
 }
 
@@ -330,7 +330,7 @@ bool Texture::setSlotRedScale(const base::Number* const s)
 bool Texture::setSlotRedBias(const base::Number* const b)
 {
     bool ok = false;
-    if (b != nullptr) ok = setRedBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setRedBias(static_cast<GLfloat>(b->to_double()));
     return ok;
 }
 
@@ -340,7 +340,7 @@ bool Texture::setSlotRedBias(const base::Number* const b)
 bool Texture::setSlotGreenScale(const base::Number* const s)
 {
     bool ok = false;
-    if (s != nullptr) ok = setGreenScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setGreenScale(static_cast<GLfloat>(s->to_double()));
     return ok;
 }
 
@@ -350,7 +350,7 @@ bool Texture::setSlotGreenScale(const base::Number* const s)
 bool Texture::setSlotGreenBias(const base::Number* const b)
 {
     bool ok = false;
-    if (b != nullptr) ok = setGreenBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setGreenBias(static_cast<GLfloat>(b->to_double()));
     return ok;
 }
 
@@ -360,7 +360,7 @@ bool Texture::setSlotGreenBias(const base::Number* const b)
 bool Texture::setSlotBlueScale(const base::Number* const s)
 {
     bool ok = false;
-    if (s != nullptr) ok = setBlueScale(static_cast<GLfloat>(s->getReal()));
+    if (s != nullptr) ok = setBlueScale(static_cast<GLfloat>(s->to_double()));
     return ok;
 }
 
@@ -370,7 +370,7 @@ bool Texture::setSlotBlueScale(const base::Number* const s)
 bool Texture::setSlotBlueBias(const base::Number* const b)
 {
     bool ok = false;
-    if (b != nullptr) ok = setBlueBias(static_cast<GLfloat>(b->getReal()));
+    if (b != nullptr) ok = setBlueBias(static_cast<GLfloat>(b->to_double()));
     return ok;
 }
 

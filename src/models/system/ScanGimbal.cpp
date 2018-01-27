@@ -9,7 +9,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 #include <cmath>
 
@@ -865,7 +865,7 @@ bool ScanGimbal::setSlotLeftToRightScan(const base::Boolean* const newLeftToRigh
 {
     bool ok{};
     if (newLeftToRightScan != nullptr) {
-        const bool x{newLeftToRightScan->getBoolean()};
+        const bool x{newLeftToRightScan->to_bool()};
         ok = setLeftToRightScan(x);
     }
 
@@ -877,7 +877,7 @@ bool ScanGimbal::setSlotScanWidth(const base::Number* const newWidth)
 {
     bool ok{};
     if (newWidth != nullptr) {
-        const double x{newWidth->getDouble()};
+        const double x{newWidth->to_double()};
         ok = setScanWidth(x);
     }
     return ok;
@@ -912,7 +912,7 @@ bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
 {
     bool ok{};
     if (newSpacing != nullptr) {
-        const double x{newSpacing->getDouble()};
+        const double x{newSpacing->to_double()};
         ok = setBarSpacing(x);
     }
     return ok;
@@ -923,7 +923,7 @@ bool ScanGimbal::setSlotNumBars(const base::Integer* const newNumBars)
 {
     bool ok{};
     if (newNumBars != nullptr) {
-        const int temp{newNumBars->getInt()};
+        const int temp{newNumBars->toInt()};
         ok = setNumBars(temp);
     }
     return ok;
@@ -934,7 +934,7 @@ bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
 {
     bool ok{};
     if (newRevPerSec != nullptr) {
-        const double x{newRevPerSec->getDouble()};
+        const double x{newRevPerSec->to_double()};
         ok = setRevPerSec(x);
     }
     return ok;
@@ -945,7 +945,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
 {
     bool ok{};
     if (newScanRadius != nullptr) {
-        double x{newScanRadius->getDouble()};
+        double x{newScanRadius->to_double()};
         const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
             x = base::Radians::convertStatic(*aa);
@@ -999,7 +999,7 @@ bool ScanGimbal::setSlotMaxRevs(const base::Number* const newMaxRevs)
 {
     bool ok{};
     if (newMaxRevs != nullptr) {
-        const double x{newMaxRevs->getDouble()};
+        const double x{newMaxRevs->to_double()};
         ok = setMaxRevs(x);
     }
     return ok;

@@ -8,8 +8,8 @@
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
 
 #include <cmath>
 
@@ -541,7 +541,7 @@ bool CollisionDetect::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int n{msg->getInt()};
+      const int n{msg->toInt()};
       if (n >= 0) {
          ok = setMaxPlayers( static_cast<unsigned int>(n) );
       }
@@ -610,7 +610,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUseWorld( msg->getBoolean() );
+      ok = setUseWorld( msg->to_bool() );
    }
    return ok;
 }
@@ -619,7 +619,7 @@ bool CollisionDetect::setSlotLocalOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setLocalOnly( msg->getBoolean() );
+      ok = setLocalOnly( msg->to_bool() );
    }
    return ok;
 }
@@ -628,7 +628,7 @@ bool CollisionDetect::setSlotSendCrashEvents(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setSendCrashEventsEnabled( msg->getBoolean() );
+      ok = setSendCrashEventsEnabled( msg->to_bool() );
    }
    return ok;
 }

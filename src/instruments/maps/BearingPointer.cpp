@@ -2,7 +2,7 @@
 #include "mixr/instruments/maps/BearingPointer.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 namespace mixr {
 namespace instruments {
@@ -81,7 +81,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingRad(msg->getReal());  // radians
+        setBearingRad(msg->to_double());  // radians
         ok = true;
     }
     return ok;
@@ -94,7 +94,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingDeg(msg->getReal());  // degrees
+        setBearingDeg(msg->to_double());  // degrees
         ok = true;
     }
     return ok;

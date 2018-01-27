@@ -3,7 +3,7 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Frequencies.hpp"
+#include "mixr/base/units/frequencies.hpp"
 
 namespace mixr {
 namespace linearsystem {
@@ -165,7 +165,7 @@ bool ScalerFunc::setSlotRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -178,7 +178,7 @@ bool ScalerFunc::setSlotX0(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setX0( msg->getReal() );
+      setX0( msg->to_double() );
       ok = true;
    }
    return ok;
@@ -188,7 +188,7 @@ bool ScalerFunc::setSlotY0(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setY0( msg->getReal() );
+      setY0( msg->to_double() );
       ok = true;
    }
    return ok;

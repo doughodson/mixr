@@ -86,7 +86,7 @@ void AnalogGauge::drawFunc()
 bool AnalogGauge::setSlotLeftBoundary(const base::Number* const newLB)
 {
     bool ok = false;
-    if (newLB != nullptr) ok = setLeftBoundary(newLB->getReal());
+    if (newLB != nullptr) ok = setLeftBoundary(newLB->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ bool AnalogGauge::setSlotLeftBoundary(const base::Number* const newLB)
 bool AnalogGauge::setSlotRightBoundary(const base::Number* const newRB)
 {
     bool ok = false;
-    if (newRB != nullptr) ok = setRightBoundary(newRB->getReal());
+    if (newRB != nullptr) ok = setRightBoundary(newRB->to_double());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ bool AnalogGauge::setSlotRightBoundary(const base::Number* const newRB)
 bool AnalogGauge::setSlotIsOutlined(const base::Boolean* const newO)
 {
     bool ok{};
-    if (newO != nullptr) ok = setIsOutlined(newO->getBoolean());
+    if (newO != nullptr) ok = setIsOutlined(newO->to_bool());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ bool AnalogGauge::setSlotIsOutlined(const base::Boolean* const newO)
 bool AnalogGauge::setSlotIsVertical(const base::Boolean* const newV)
 {
     bool ok = false;
-    if (newV != nullptr) ok = setIsVertical(newV->getBoolean());
+    if (newV != nullptr) ok = setIsVertical(newV->to_bool());
     return ok;
 }
 

@@ -45,7 +45,7 @@ void Rgb::copyData(const Rgb& org, const bool)
 //------------------------------------------------------------------------------
 bool Rgb::setSlotRed(const Number* const msg)
 {
-    const double value{msg->getReal()};
+    const double value{msg->to_double()};
     const bool ok{setRed( value )};
     if (!ok) {
         std::cerr << "Rgb::setRed: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -55,7 +55,7 @@ bool Rgb::setSlotRed(const Number* const msg)
 
 bool Rgb::setSlotGreen(const Number* const msg)
 {
-    const double value{msg->getReal()};
+    const double value{msg->to_double()};
     const bool ok{setGreen( value )};
     if (!ok) {
         std::cerr << "Rgb::setGreen: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -65,7 +65,7 @@ bool Rgb::setSlotGreen(const Number* const msg)
 
 bool Rgb::setSlotBlue(const Number* const msg)
 {
-    const double value{msg->getReal()};
+    const double value{msg->to_double()};
     const bool ok{setBlue( value )};
     if (!ok) {
         std::cerr << "Rgb::setBlue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;

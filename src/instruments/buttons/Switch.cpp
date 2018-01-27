@@ -40,7 +40,7 @@ void Switch::copyData(const Switch& org, const bool)
 bool Switch::setSlotNumSelections(const base::Integer* const msg)
 {
     bool ok = false;
-    if (msg != nullptr) ok = setNumSelections(msg->getInt());
+    if (msg != nullptr) ok = setNumSelections(msg->toInt());
     return ok;
 }
 
@@ -50,7 +50,7 @@ bool Switch::setSlotNumSelections(const base::Integer* const msg)
 bool Switch::setSlotCurrentState(const base::Integer* const msg)
 {
     bool ok = false;
-    if (msg != nullptr) ok = setCurrentState(msg->getInt());
+    if (msg != nullptr) ok = setCurrentState(msg->toInt());
     return ok;
 }
 

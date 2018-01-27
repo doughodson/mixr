@@ -135,7 +135,7 @@ bool DtedFile::setSlotVerifyChecksum(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      verifyChecksum = msg->getBoolean();
+      verifyChecksum = msg->to_bool();
       ok = true;
    }
    return ok;

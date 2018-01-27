@@ -11,8 +11,8 @@
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/osg/Quat"
 
-#include "mixr/base/units/angle_utils.hpp"
-#include "mixr/base/units/distance_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/units/util/distance_utils.hpp"
 
 #include <array>
 
@@ -1063,9 +1063,9 @@ private:
    // ---
    // Reflected emissions
    // ---
-   static const int MAX_RF_REFLECTIONS{4};                        // Max number of reflected emissions we'll send (let's keep it small)
-   std::array<base::Component*, MAX_RF_REFLECTIONS> rfReflect{};  // Objects that are interested in the emissions hitting us
-   std::array<double, MAX_RF_REFLECTIONS> rfReflectTimer{};       // Request for reflected emissions will timeout
+   static const int MAX_RF_REFLECTIONS{4};                          // Max number of reflected emissions we'll send (let's keep it small)
+   std::array<base::Component*, MAX_RF_REFLECTIONS> rfReflect{};    // Objects that are interested in the emissions hitting us
+   std::array<double, MAX_RF_REFLECTIONS> rfReflectTimer{};         // Request for reflected emissions will timeout
 
    // ---
    // sync state changes

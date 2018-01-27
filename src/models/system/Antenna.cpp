@@ -14,13 +14,13 @@
 #include "mixr/base/relations/Func2.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Decibel.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Powers.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/powers.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
 
@@ -241,7 +241,7 @@ bool Antenna::setGain(const base::Number* const g)
    double value{-1.0};
 
    if (g != nullptr) {
-      value = g->getReal();
+      value = g->to_double();
    }
 
    if (value >= 0.0) {
@@ -273,7 +273,7 @@ bool Antenna::setGainPatternDeg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {
-        gainPatternDeg = msg->getBoolean();
+        gainPatternDeg = msg->to_bool();
         ok = true;
     }
     return ok;
@@ -286,7 +286,7 @@ bool Antenna::setRecycleFlg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {
-        ok = setEmissionRecycleFlag( msg->getBoolean() );
+        ok = setEmissionRecycleFlag( msg->to_bool() );
     }
     return ok;
 }
@@ -314,7 +314,7 @@ bool Antenna::setBeamWidth(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setBeamWidth( msg->getDouble() );
+      ok = setBeamWidth( msg->to_double() );
       if (!ok) {
          std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
       }

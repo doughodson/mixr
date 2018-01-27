@@ -15,8 +15,8 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/units/Times.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/times.hpp"
+#include "mixr/base/units/angles.hpp"
 
 #include <cmath>
 
@@ -31,8 +31,8 @@ BEGIN_SLOTTABLE(AngleOnlyTrackManager)
 END_SLOTTABLE(AngleOnlyTrackManager)
 
 BEGIN_SLOT_MAP(AngleOnlyTrackManager)
-    ON_SLOT(1, setSlotAzimuthBin,   base::Number)
-    ON_SLOT(2, setSlotElevationBin, base::Number)
+    ON_SLOT(1, setSlotAzimuthBin,   base::Angle)
+    ON_SLOT(2, setSlotElevationBin, base::Angle)
 END_SLOT_MAP()
 
 AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
@@ -168,41 +168,33 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Number* const msg)
+bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const angle)
 {
-    double value{};
+    bool ok{};
 
-    const auto a = dynamic_cast<const base::Angle*>(msg);
-    if (a != nullptr) {
+    if (angle != nullptr) {
         base::Radians r;
-        value = static_cast<double>(r.convert(*a));
-    } else if (msg != nullptr) {
-        value = msg->getReal();
+        double value{r.convert(*angle)};
+        azimuthBin = value;
+        ok = true;
     }
-
-    azimuthBin = value;
-
-    return true;
+    return ok;
 }
 
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotElevationBin(const base::Number* const msg)
+bool AngleOnlyTrackManager::setSlotElevationBin(const base::Angle* const angle)
 {
-    double value{};
+    bool ok{};
 
-    const auto a = dynamic_cast<const base::Angle*>(msg);
-    if (a != nullptr) {
+    if (angle != nullptr) {
         base::Radians r;
-        value = static_cast<double>(r.convert(*a));
-    } else if (msg != nullptr) {
-        value = msg->getReal();
+        double value{r.convert(*angle)};
+        azimuthBin = value;
+        ok = true;
     }
-
-    elevationBin = value;
-
-    return true;
+    return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -213,7 +205,7 @@ bool AngleOnlyTrackManager::setSlotAlpha(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         ok = true;
-        alpha = msg->getReal();
+        alpha = msg->to_double();
         oneMinusAlpha = 1.0 - alpha;
     }
     return ok;
@@ -227,7 +219,7 @@ bool AngleOnlyTrackManager::setSlotBeta(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         ok = true;
-        beta = msg->getReal();
+        beta = msg->to_double();
         oneMinusBeta = 1.0 - beta;
     }
     return ok;

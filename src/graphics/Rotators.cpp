@@ -2,7 +2,7 @@
 #include "mixr/graphics/Rotators.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Angles.hpp"
+#include "mixr/base/units/angles.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -119,7 +119,7 @@ bool Rotators::setRotationsDeg(const double x, const double y, const double z)
 //------------------------------------------------------------------------------
 bool Rotators::onXRotate(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setXRotation( rotation->getReal() );
+    if (rotation != nullptr) return setXRotation( rotation->to_double() );
     return false;
 }
 
@@ -138,7 +138,7 @@ bool Rotators::onXRotate(const base::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onXRotateDeg(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setXRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setXRotationDeg( rotation->to_double() );
     return false;
 }
 
@@ -147,7 +147,7 @@ bool Rotators::onXRotateDeg(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotate(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setYRotation( rotation->getReal() );
+    if (rotation != nullptr) return setYRotation( rotation->to_double() );
     return false;
 }
 
@@ -166,7 +166,7 @@ bool Rotators::onYRotate(const base::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotateDeg(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setYRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setYRotationDeg( rotation->to_double() );
     return false;
 }
 
@@ -175,7 +175,7 @@ bool Rotators::onYRotateDeg(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotate(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setZRotation( rotation->getReal() );
+    if (rotation != nullptr) return setZRotation( rotation->to_double() );
     return false;
 }
 
@@ -194,7 +194,7 @@ bool Rotators::onZRotate(const base::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotateDeg(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setZRotationDeg( rotation->getReal() );
+    if (rotation != nullptr) return setZRotationDeg( rotation->to_double() );
     return false;
 }
 

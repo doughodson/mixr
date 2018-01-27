@@ -16,9 +16,9 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/Angles.hpp"
-#include "mixr/base/units/Distances.hpp"
-#include "mixr/base/units/Times.hpp"
+#include "mixr/base/units/angles.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -1318,7 +1318,7 @@ bool Autopilot::setSlotNavMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setNavMode( msg->getBoolean() );
+       ok = setNavMode( msg->to_bool() );
     }
     return ok;
 }
@@ -1339,7 +1339,7 @@ bool Autopilot::setSlotAltitudeHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setAltitudeHoldMode( msg->getBoolean() );
+       ok = setAltitudeHoldMode( msg->to_bool() );
     }
     return ok;
 }
@@ -1349,7 +1349,7 @@ bool Autopilot::setSlotHoldVelocityKts(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setCommandedVelocityKts( msg->getReal() );
+       ok = setCommandedVelocityKts( msg->to_double() );
        holdSpdSet = ok;
     }
     return ok;
@@ -1360,7 +1360,7 @@ bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setVelocityHoldMode( msg->getBoolean() );
+       ok = setVelocityHoldMode( msg->to_bool() );
     }
     return ok;
 }
@@ -1382,7 +1382,7 @@ bool Autopilot::setSlotHeadingHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setHeadingHoldMode( msg->getBoolean() );
+       ok = setHeadingHoldMode( msg->to_bool() );
     }
     return ok;
 }
@@ -1392,7 +1392,7 @@ bool Autopilot::setSlotLoiterMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setLoiterMode( msg->getBoolean() );
+       ok = setLoiterMode( msg->to_bool() );
     }
     return ok;
 }
@@ -1413,7 +1413,7 @@ bool Autopilot::setSlotLoiterPatternLength(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLoiterPatternLengthNM( msg->getReal() );
+        ok = setLoiterPatternLengthNM( msg->to_double() );
     }
     return ok;
 }
@@ -1436,7 +1436,7 @@ bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLoiterPatternCounterClockwise( msg->getBoolean() );
+        ok = setLoiterPatternCounterClockwise( msg->to_bool() );
     }
     return ok;
 }
@@ -1457,7 +1457,7 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDistanceTrail( msg->getReal() );
+        ok = setLeadFollowingDistanceTrail( msg->to_double() );
     }
     return ok;
 }
@@ -1478,7 +1478,7 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDistanceRight( msg->getReal() );
+        ok = setLeadFollowingDistanceRight( msg->to_double() );
     }
     return ok;
 }
@@ -1499,7 +1499,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDeltaAltitude( msg->getReal() );
+        ok = setLeadFollowingDeltaAltitude( msg->to_double() );
     }
     return ok;
 }
@@ -1507,7 +1507,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 // Initial name of our lead player
 bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 {
-   leadName = p->str();
+   leadName = p->to_string();
    return true;
 }
 
@@ -1517,7 +1517,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const bool flg{msg->getBoolean()};
+        const bool flg{msg->to_bool()};
         ok = setFollowTheLeadMode( flg );
         if (flg && !ok) {
             if (isMessageEnabled(MSG_ERROR)) {
@@ -1532,7 +1532,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxTurnRateDps(msg->getDouble());
+   if (ok) ok = setMaxTurnRateDps(msg->to_double());
    return ok;
 }
 
@@ -1540,7 +1540,7 @@ bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
 bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxBankAngleDeg(msg->getDouble());
+   if (ok) ok = setMaxBankAngleDeg(msg->to_double());
    return ok;
 }
 
@@ -1548,7 +1548,7 @@ bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
 bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps((msg->getDouble() * base::distance::FT2M / base::time::M2S));
+   if (ok) ok = setMaxClimbRateMps((msg->to_double() * base::distance::FT2M / base::time::M2S));
    return ok;
 }
 
@@ -1556,7 +1556,7 @@ bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
 bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps(msg->getDouble());
+   if (ok) ok = setMaxClimbRateMps(msg->to_double());
    return ok;
 }
 
@@ -1564,7 +1564,7 @@ bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
 bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxPitchAngleDeg(msg->getDouble());
+   if (ok) ok = setMaxPitchAngleDeg(msg->to_double());
    return ok;
 }
 
@@ -1572,7 +1572,7 @@ bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
 bool Autopilot::setSlotMaxVelAccNps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxVelAccNps(msg->getDouble());
+   if (ok) ok = setMaxVelAccNps(msg->to_double());
    return ok;
 }
 

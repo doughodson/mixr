@@ -166,7 +166,7 @@ bool TcpServerMultiple::setSlotBacklog(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setBacklog(msg->getInt());
+      ok = setBacklog(msg->toInt());
    }
    return ok;
 }

@@ -67,7 +67,7 @@ bool DiscreteOutput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setLocation(v);
       }
@@ -80,7 +80,7 @@ bool DiscreteOutput::setSlotPort(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setPort(v);
       }
@@ -93,7 +93,7 @@ bool DiscreteOutput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->getInt()};
+      const int v {msg->toInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -106,7 +106,7 @@ bool DiscreteOutput::setSlotInverted(const base::Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setInvertFlag( msg->getBoolean() );
+      ok = setInvertFlag( msg->to_bool() );
    }
    return ok;
 }

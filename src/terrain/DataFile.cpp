@@ -2,8 +2,8 @@
 #include "mixr/terrain/DataFile.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
-#include "mixr/base/units/angle_utils.hpp"
-#include "mixr/base/units/distance_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/units/util/distance_utils.hpp"
 
 namespace mixr {
 namespace terrain {

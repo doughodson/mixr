@@ -198,7 +198,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Note: no configuration inputs were found to be incorrect or in error after this
   change was made.
 
-- Topic: Unit oriented classes
+- Topic: Unit classes
 
   Units are no longer Numbers; they are units.  Units represents magnitudes of a
   quantity. Obviously they are related to numbers; and can be considered a piece
@@ -224,56 +224,66 @@ General framework-wide changes/improvements/trends/philosophy/goals
   20 years, it's probably as good a time as any to reduce the complexity of
   the code base by using it, and try to avoid as many character-based
   C-style strings as possible.
-  
+
   MIXR, defines its own Object-based reference counted String class - it,
   along with the character-based (char*) representation has been used almost
-  exclusively as the way to manage and represent a string.  This is changing.
+  exclusively as the way to manage and represent strings.  This is changing.
 
-  Starting with this release, we are transitioning to the standard library
-  defined 'std::string' class as much as possible. We still need to retain
+  Starting with this release, we are transitioning to, and using the std library
+  provided 'std::string' class as much as possible. We still need to retain
   MIXR's String class because its an Object-based compatible class that
-  streamlines interactions with the EDL parser; but for places
+  streamlines interactions with the EDL parser.  But for places
   within the code base where this is not an issue, we are striving to replace
   String, String* and character-based representations with 'std::string'.
-  In other words, we are treating 'std::string' more like a C++ primitive
-  data type (int, double, bool, etc).
+  At this point in time, we consider and treat using 'std::string' much
+  like any other C++ primitive (int, double, bool, etc).
 
   Design goal:
 
-  In the end, we would like to use std::string as much as possible, and turn MIXR's
-  String class essentially into an Object-based wrapper of 'std::string'.
+  At the end of this transition, we would like to use std::string as much as
+  possible, and only use MIXR's String class when the role of a wrapper class
+  that marshalls it around as an Object-based representation is required. In
+  other words, String will eventually become an Object-based, reference counted
+  wrapper for std::string.
 
   Transition approach:
 
-  It's difficult to make the a transition away from MIXR Strings and char*
-  representations to std::string in one step.  Here is the series of steps we
-  are taking:
+  It's difficult to make the the transition away from MIXR Strings and char*
+  representations to std::string in one step.  Here are a series of steps we
+  are taking right now:
 
-  1) We are making / made MIXR's String class interface look more like (i.e., mimic)
-     std::string. We renamed the 'getString()' method to 'c_str()' - among C++
-     developers 'c_str' is universally understood to be a C-style string.
+  1) We are making MIXR's String class interface look more like (i.e., mimic)
+     std::string. We renamed the 'getString()' method to 'c_str()', as among C++
+     developers, 'c_str' is universally understood to be a C-style string.
 
-     Note: we also corrected a basic behavior of the String class to always
-     represent a valid String - or at least maintain a valid C string.  Previously,
+     Note: we corrected a basic behavior of the String class to always
+     represent a valid String by always maintaining a valid C string.  Previously,
      instantiating a String instance would create a 'shell' object which would
      return a null pointer when asked for its char* representation (i.e., getString(),
      implicit char* and const char* methods).  Now, every instance of String
-     will contain a valid string representation. A review of the code base indicated
-     it always initialized Strings with something - in other words, the behavior
-     of existing code did not rely on possible String instances returning null
-     pointers when asked for its char* pointer.  'std::string' always returns
-     a valid C string (via c_str()), even if it's empty; it never returns a nullptr -
-     we felt it important to mimic this behavior as well.
+     manages a valid string representation (in other words, a String really IS a
+     string!).
+
+     A review of the code base indicated it always initialized Strings with something
+     - in other words, the behavior of existing code did not rely on possible
+     String instances returning null pointers when asked for its char* pointer.
+     Because 'std::string' always returns a valid C string (via c_str()), even if
+     it's empty (it never returns a nullptr); we felt it important to mimic this
+     behavior.
 
   2) Eliminated the implicit conversions from String to either 'char*' or
      'const char*'. The standard library string class does not allow this, neither
      should we.  It did make a few places within code more verbose (as an extra
      '->c_str()' was occasionally added), but arguably, it did make the code more clear.
-     Also, later in this transition, it's easy to search for all those 'c_str()', and
-     view them as opportunities to streamline type mismatches by again, using std::string.
+     Also, later in this transition, it's easy to search for all those 'c_str()' method
+     calls and review them as opportunities to streamline type mismatches.
 
-  3) Much like 'c_str()', a 'str()' method has been added to the Identifier class -
-     it returns a const reference to the underlying std::string.
+  3) Separate the concepts of a String from an Identifier - in other words, we separated
+     the concept of what a string is (a data type), from how it's used.  Identifier
+     is no longer a subclass of String.
+
+  3) Much like 'c_str()', a 'str()' method has been added to this revamped Identifier
+     class - it returns a const reference to the underlying std::string.
 
 - Topic: User defined enumeration data types in C++11
 
@@ -293,30 +303,30 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   2) The identifiers (e.g., Green) can be used directly to set integer
      variables.  In this case, the enumeration carries a value that
-     has meaning.
+     has meaning.  Unfortunately, so does Working and Failed, which is 
+     less than obvious.
 
   In C++11, finer grained control over both aspects are available to avoid
-  possible confusion. Now, one would write the code as follows:
+  possible confusion. Now, one would write the equivalent desired code
+  as follows:
 
   enum class State {Working, Failed}
   enum class Color: int {Red = 0, Green = 1, Blue = 2};
 
   Now Working and Failed belong to the class 'State' and Red, Green and Blue
-  belong to the class 'Color'.  Additionally, Red, Green and Blue will (under
-  the hood) be stored using an integer with the value as defined.  It can
-  be extracted using an explicit cast.
-
-  For example:
+  belong to the class 'Color' - never to be confused.  Additionally, Red,
+  Green and Blue will (under the hood) be stored using an integer with
+  the value as defined.  The underlying values can be extracted using
+  an explicit cast as the example below shows:
 
    // extract the value for Red
    int x = static_cast<int>(Color::Red);
 
    - or -
 
-   // extract the value being stored by variable 'color'
-   Color color{Color::Red};
-   color = Color::Green;
-   int x = static_cast<int>(color);
+   Color color{Color::Red};          // color initialized to Red
+   color = Color::Green;             // now being reassigned
+   int x = static_cast<int>(color);  // underlying value extracted
 
    MIXR code is now be written using these (C++11) provided capabilities.
 
@@ -410,6 +420,13 @@ base library (mixr_base)
          Number x(4.0);
          int64_t my64 = static_cast<int64_t>(x.getValue());
 
+   Operator classes
+      1) These classes, while interesting, are not used, and are of limited value -
+         not a single 'use case' in the examples was found. They provided the
+         capability to add, subtract, multiply and divide the general purpose
+         Number types (Integer and Float). For now, they have been moved into the
+         testUnits example.
+
    -------------------
    - Unit classes -
    -------------------
@@ -418,6 +435,8 @@ base library (mixr_base)
    -- As these classes were being updated, it appears that a number of rate
       oriented units are unfinished and probably non-functional. At some point,
       these will be improved.
+   -- All rate oriented classes (AngularVelocity, FlowRate and LinearVelocity)
+      have been moved and grouped into the folder called 'rates'
 
    Decibel class
       1) This class is no longer a subclass of Number, it is a container
@@ -429,8 +448,7 @@ base library (mixr_base)
 
    Unit class
       1) New abstract class that serves the role of storing a double
-         precision value that is managed (converted back and forth) by more
-         specific unit classes (e.g., Angle, Distance, Power, etc).
+         precision value that is managed by specific concrete unit classes.
 
    -------------------
    - Other classes -
@@ -695,7 +713,7 @@ Models & general capabilities oriented libraries
 --------------------------------------------------------------------------------
 models library (mixr_models)
 
-- All signature classes (IR and RF) are now grouped within the 'signatures'
+- All signature classes (IR and RF) are now grouped within the 'signature'
   folder.  All the classes defined in previous Signatures (.hpp/.cpp) files
   have been extracted into their own class files.
 

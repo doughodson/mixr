@@ -4,7 +4,7 @@
 
 #include "mixr/graphics/MfdPage.hpp"
 
-#include "mixr/base/units/angle_utils.hpp"
+#include "mixr/base/units/util/angle_utils.hpp"
 
 #include <cmath>
 

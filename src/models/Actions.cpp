@@ -10,14 +10,12 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/util/nav_utils.hpp"
-
-#include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/Distances.hpp"
-
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/distances.hpp"
+#include "mixr/base/util/nav_utils.hpp"
 
 namespace mixr {
 namespace models {
@@ -354,7 +352,7 @@ bool ActionImagingSar::setSlotSarLat(const base::Latitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setSarLatitude(msg->getDouble());
+      ok = setSarLatitude(msg->getDecimalDegrees());
    }
    return ok;
 }
@@ -363,7 +361,7 @@ bool ActionImagingSar::setSlotSarLon(const base::Longitude* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setSarLongitude(msg->getDouble());
+      ok = setSarLongitude(msg->getDecimalDegrees());
    }
    return ok;
 }
@@ -392,10 +390,10 @@ bool ActionImagingSar::setSlotImageSize(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setImageSize( msg->getInt() );
+      ok = setImageSize( msg->toInt() );
       if (!ok) {
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << msg->getInt() << std::endl;
+         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << msg->toInt() << std::endl;
       }
    }
    }
@@ -525,7 +523,7 @@ bool ActionWeaponRelease::setSlotTargetLat(const base::Latitude* newLat)
 {
     bool ok{};
     if (newLat != nullptr) {
-        targetLatitude = newLat->getDouble();
+        targetLatitude = newLat->getDecimalDegrees();
         ok = true;
     }
     return ok;
@@ -534,7 +532,7 @@ bool ActionWeaponRelease::setSlotTargetLon(const base::Longitude* newLon)
 {
     bool ok{};
     if (newLon != nullptr) {
-        targetLongitude = newLon->getDouble();
+        targetLongitude = newLon->getDecimalDegrees();
         ok = true;
     }
     return ok;
@@ -543,7 +541,7 @@ bool ActionWeaponRelease::setSlotTargetElev(const base::Number* newElev)
 {
     bool ok{};
     if (newElev != nullptr) {
-        targetElevation = newElev->getReal();
+        targetElevation = newElev->to_double();
         ok = true;
     }
     return ok;
@@ -552,7 +550,7 @@ bool ActionWeaponRelease::setSlotStationNum(const base::Integer* newStation)
 {
     bool ok{};
     if (newStation != nullptr) {
-        station = newStation->getInt();
+        station = newStation->toInt();
         ok = true;
     }
     return ok;
@@ -667,7 +665,7 @@ bool ActionDecoyRelease::setSlotNumToLaunch(const base::Integer* x)
 {
     bool ok{};
     if (x != nullptr) {
-        ok = setNumToLaunch(x->getInt());
+        ok = setNumToLaunch(x->toInt());
     }
     return ok;
 }
@@ -675,7 +673,7 @@ bool ActionDecoyRelease::setSlotInterval(const base::Number* x)
 {
     bool ok{};
     if (x != nullptr) {
-        ok = setInterval(x->getReal());
+        ok = setInterval(x->to_double());
     }
     return ok;
 }
@@ -745,7 +743,7 @@ bool ActionCamouflageType::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->getInt()};
+      const int ii{msg->toInt()};
       if (ii >= 0) {
          ok = setCamouflageType( ii );
       }
