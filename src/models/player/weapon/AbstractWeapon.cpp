@@ -1295,42 +1295,42 @@ bool AbstractWeapon::setDummy(const bool f)
 // released:  Weapon has been released
 bool AbstractWeapon::setSlotReleased(const base::Boolean* const p)
 {
-    setReleased( p->to_bool() );
+    setReleased( p->asBool() );
     return true;
 }
 
 // failed: Weapon failed (e.g., reasonableness Test)
 bool AbstractWeapon::setSlotFailed(const base::Boolean* const p)
 {
-    setFailed( p->to_bool() );
+    setFailed( p->asBool() );
     return true;
 }
 
 // Power: weapon power flag
 bool AbstractWeapon::setSlotPower(const base::Boolean* const p)
 {
-    setPower( p->to_bool() );
+    setPower( p->asBool() );
     return true;
 }
 
 // hang: Will be a hung store
 bool AbstractWeapon::setSlotWillHang(const base::Boolean* const p)
 {
-    setWillHang( p->to_bool() );
+    setWillHang( p->asBool() );
     return true;
 }
 
 // hung: Hung store
 bool AbstractWeapon::setSlotHung(const base::Boolean* const p)
 {
-    setHung( p->to_bool() );
+    setHung( p->asBool() );
     return true;
 }
 
 // dummy: Dummy store
 bool AbstractWeapon::setSlotDummy(const base::Boolean* const p)
 {
-    setDummy( p->to_bool() );
+    setDummy( p->asBool() );
     return true;
 }
 
@@ -1347,7 +1347,7 @@ bool AbstractWeapon::setSlotMaxTOF(const base::Time* const p)
 // maxTOF:  max time of flight      (sec)
 bool AbstractWeapon::setSlotMaxTOF(const base::Number* const p)
 {
-    return setMaxTOF( p->to_double() );
+    return setMaxTOF( p->asDouble() );
 }
 
 // tsg: time to start guidance    (base::Time)
@@ -1363,7 +1363,7 @@ bool AbstractWeapon::setSlotTSG(const base::Time* const p)
 // tsg: time to start guidance    (sec)
 bool AbstractWeapon::setSlotTSG(const base::Number* const p)
 {
-    return setTSG( p->to_double() );
+    return setTSG( p->asDouble() );
 }
 
 // maxBurstRng: max burst range    (base::Distance)
@@ -1379,7 +1379,7 @@ bool AbstractWeapon::setSlotMaxBurstRng(const base::Distance* const p)
 // maxBurstRng: max burst range    (meters)
 bool AbstractWeapon::setSlotMaxBurstRng(const base::Number* const p)
 {
-    return setMaxBurstRng( p->to_double() );
+    return setMaxBurstRng( p->asDouble() );
 }
 
 
@@ -1396,7 +1396,7 @@ bool AbstractWeapon::setSlotLethalRange(const base::Distance* const p)
 // lethalRange: lethal range    (meters)
 bool AbstractWeapon::setSlotLethalRange(const base::Number* const p)
 {
-    return setLethalRange( p->to_double() );
+    return setLethalRange( p->asDouble() );
 }
 
 // sobt: start-of-burn time        (base::Time)
@@ -1412,7 +1412,7 @@ bool AbstractWeapon::setSlotSOBT(const base::Time* const p)
 // sobt: start-of-burn time        (sec)
 bool AbstractWeapon::setSlotSOBT(const base::Number* const p)
 {
-    setSOBT( p->to_double() );
+    setSOBT( p->asDouble() );
     return true;
 }
 
@@ -1429,7 +1429,7 @@ bool AbstractWeapon::setSlotEOBT(const base::Time* const p)
 // eobt: end-of-burn time        (sec)
 bool AbstractWeapon::setSlotEOBT(const base::Number* const p)
 {
-    setEOBT( p->to_double() );
+    setEOBT( p->asDouble() );
     return true;
 }
 
@@ -1457,14 +1457,14 @@ bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
 // weaponID: weapon type ID
 bool AbstractWeapon::setSlotWeaponID(const base::Integer* const p)
 {
-    setWeaponID( p->toInt() );
+    setWeaponID( p->asInt() );
     return true;
 }
 
 // jettisonable: weapon can be jettisoned
 bool AbstractWeapon::setSlotJettisonable(const base::Boolean* const p)
 {
-    setJettisonable( p->to_bool() );
+    setJettisonable( p->asBool() );
     return true;
 }
 

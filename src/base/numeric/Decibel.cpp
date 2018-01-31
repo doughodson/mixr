@@ -53,7 +53,7 @@ bool Decibel::setSlotValue(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setValueDB( msg->to_double() );
+      setValueDB( msg->asDouble() );
       ok = true;
    }
    return ok;

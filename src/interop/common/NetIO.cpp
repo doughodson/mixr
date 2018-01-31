@@ -1040,7 +1040,7 @@ bool NetIO::setSlotNetworkID(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int v{num->toInt()};
+        const int v{num->asInt()};
         if (v >= 1 && v <= static_cast<int>(MAX_NETWORD_ID)) {
             ok = setNetworkID(static_cast<unsigned short>(v));
         } else {
@@ -1068,7 +1068,7 @@ bool NetIO::setSlotEnableInput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        inputFlg = p->to_bool();
+        inputFlg = p->asBool();
         ok = true;
     }
     return ok;
@@ -1079,7 +1079,7 @@ bool NetIO::setSlotEnableOutput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        outputFlg = p->to_bool();
+        outputFlg = p->asBool();
         ok = true;
     }
     return ok;
@@ -1090,7 +1090,7 @@ bool NetIO::setSlotEnableRelay(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
-        relayFlg = p->to_bool();
+        relayFlg = p->asBool();
         ok = true;
     }
     return ok;

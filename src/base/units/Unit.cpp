@@ -37,7 +37,7 @@ bool Unit::setSlotValue(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setValue( msg->to_double() );
+      setValue( msg->asDouble() );
       ok = true;
    }
    return ok;

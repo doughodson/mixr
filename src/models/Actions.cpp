@@ -390,10 +390,10 @@ bool ActionImagingSar::setSlotImageSize(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setImageSize( msg->toInt() );
+      ok = setImageSize( msg->asInt() );
       if (!ok) {
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << msg->toInt() << std::endl;
+         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << msg->asInt() << std::endl;
       }
    }
    }
@@ -541,7 +541,7 @@ bool ActionWeaponRelease::setSlotTargetElev(const base::Number* newElev)
 {
     bool ok{};
     if (newElev != nullptr) {
-        targetElevation = newElev->to_double();
+        targetElevation = newElev->asDouble();
         ok = true;
     }
     return ok;
@@ -550,7 +550,7 @@ bool ActionWeaponRelease::setSlotStationNum(const base::Integer* newStation)
 {
     bool ok{};
     if (newStation != nullptr) {
-        station = newStation->toInt();
+        station = newStation->asInt();
         ok = true;
     }
     return ok;
@@ -665,7 +665,7 @@ bool ActionDecoyRelease::setSlotNumToLaunch(const base::Integer* x)
 {
     bool ok{};
     if (x != nullptr) {
-        ok = setNumToLaunch(x->toInt());
+        ok = setNumToLaunch(x->asInt());
     }
     return ok;
 }
@@ -673,7 +673,7 @@ bool ActionDecoyRelease::setSlotInterval(const base::Number* x)
 {
     bool ok{};
     if (x != nullptr) {
-        ok = setInterval(x->to_double());
+        ok = setInterval(x->asDouble());
     }
     return ok;
 }
@@ -743,7 +743,7 @@ bool ActionCamouflageType::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->toInt()};
+      const int ii{msg->asInt()};
       if (ii >= 0) {
          ok = setCamouflageType( ii );
       }

@@ -223,7 +223,7 @@ void CadrgMap::sortMaps(const int count)
 bool CadrgMap::setSlotMaxTableSize(const base::Integer* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setMaxTableSize(x->toInt());
+    if (x != nullptr) ok = setMaxTableSize(x->asInt());
     return ok;
 
 }

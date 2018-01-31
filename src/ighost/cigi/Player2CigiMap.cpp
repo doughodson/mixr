@@ -61,7 +61,7 @@ bool Player2CigiMap::setSlotEntityId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int i{msg->toInt()};
+      const int i{msg->asInt()};
       if (i >= 0) {
          ok = setEntityId(i);
       }

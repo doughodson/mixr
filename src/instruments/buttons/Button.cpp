@@ -39,7 +39,7 @@ bool Button::setSlotEventId(const base::Integer* const newEvent)
 {
     bool ok = false;
     if (newEvent != nullptr) {
-        int a = newEvent->toInt();
+        int a = newEvent->asInt();
         ok = setEventId(a);
     }
     return ok;

@@ -46,7 +46,7 @@ void DialArcSegment::copyData(const DialArcSegment& org, const bool)
 bool DialArcSegment::setSlotIsDynamic(const base::Boolean* const newD)
 {
     bool ok = false;
-    if (newD != nullptr) ok = setIsDynamic(newD->to_bool());
+    if (newD != nullptr) ok = setIsDynamic(newD->asBool());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ bool DialArcSegment::setSlotIsDynamic(const base::Boolean* const newD)
 bool DialArcSegment::setSlotOuterRadius(const base::Number* const x)
 {
     if (x != nullptr) {
-        return setOuterRadius(x->to_double());
+        return setOuterRadius(x->asDouble());
     }
     return false;
 }
@@ -66,7 +66,7 @@ bool DialArcSegment::setSlotOuterRadius(const base::Number* const x)
 bool DialArcSegment::setSlotFilled(const base::Boolean* const x)
 {
     if (x != nullptr) {
-        return setFilled(x->to_bool());
+        return setFilled(x->asBool());
     }
     return false;
 }
@@ -134,7 +134,7 @@ bool DialArcSegment::onUpdateRadius(const base::Number* const x)
     if (x != nullptr) {
         // first determine our ratio from inner to outer radius
         double diff = outerRadius - getRadius();
-        ok = setRadius(x->to_double());
+        ok = setRadius(x->asDouble());
         outerRadius = getRadius() + diff;
     }
     return ok;

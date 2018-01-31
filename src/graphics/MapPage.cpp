@@ -346,7 +346,7 @@ bool MapPage::latLon2Earth(const double lat, const double lon, double* const ear
 bool MapPage::onUpdateRange(const base::Number* const newR)
 {
    bool ok {};
-   if (newR != nullptr) ok = setRange(newR->to_double());
+   if (newR != nullptr) ok = setRange(newR->asDouble());
    return ok;
 }
 
@@ -356,7 +356,7 @@ bool MapPage::onUpdateRange(const base::Number* const newR)
 bool MapPage::onUpdateHeading(const base::Number* const newH)
 {
    bool ok {};
-   if (newH != nullptr) ok = setHeadingDeg(newH->to_double());
+   if (newH != nullptr) ok = setHeadingDeg(newH->asDouble());
    return ok;
 }
 
@@ -366,7 +366,7 @@ bool MapPage::onUpdateHeading(const base::Number* const newH)
 bool MapPage::onUpdateReferenceLat(const base::Number* const newOL)
 {
    bool ok {};
-   if (newOL != nullptr) ok = setReferenceLatDeg(newOL->to_double());
+   if (newOL != nullptr) ok = setReferenceLatDeg(newOL->asDouble());
    return ok;
 }
 
@@ -376,7 +376,7 @@ bool MapPage::onUpdateReferenceLat(const base::Number* const newOL)
 bool MapPage::onUpdateReferenceLon(const base::Number* const newOL)
 {
    bool ok {};
-   if (newOL != nullptr) ok = setReferenceLonDeg(newOL->to_double());
+   if (newOL != nullptr) ok = setReferenceLonDeg(newOL->asDouble());
    return ok;
 }
 
@@ -386,7 +386,7 @@ bool MapPage::onUpdateReferenceLon(const base::Number* const newOL)
 bool MapPage::onUpdateCentered(const base::Boolean* const newC)
 {
    bool ok {};
-   if (newC != nullptr) ok = setCentered(newC->to_bool());
+   if (newC != nullptr) ok = setCentered(newC->asBool());
    return ok;
 }
 
@@ -396,7 +396,7 @@ bool MapPage::onUpdateCentered(const base::Boolean* const newC)
 bool MapPage::onUpdateOuterRadius(const base::Number* const newR)
 {
    bool ok {};
-   if (newR != nullptr) ok = setOuterRadius(newR->to_double());
+   if (newR != nullptr) ok = setOuterRadius(newR->asDouble());
    return ok;
 }
 
@@ -406,7 +406,7 @@ bool MapPage::onUpdateOuterRadius(const base::Number* const newR)
 bool MapPage::onUpdateOuterRadiusDC(const base::Number* const newRDC)
 {
    bool ok {};
-   if (newRDC != nullptr) ok = setOuterRadiusDC(newRDC->to_double());
+   if (newRDC != nullptr) ok = setOuterRadiusDC(newRDC->asDouble());
    return ok;
 }
 
@@ -416,7 +416,7 @@ bool MapPage::onUpdateOuterRadiusDC(const base::Number* const newRDC)
 bool MapPage::onUpdateDisplacement(const base::Number* const newD)
 {
    bool ok {};
-   if (newD != nullptr) ok = setDisplacement(newD->to_double());
+   if (newD != nullptr) ok = setDisplacement(newD->asDouble());
    return ok;
 }
 
@@ -428,7 +428,7 @@ bool MapPage::onUpdateDisplacement(const base::Number* const newD)
 bool MapPage::setSlotOuterRadius(const base::Number* const newRadius)
 {
    bool ok {};
-   if (newRadius != nullptr) ok = setOuterRadius(newRadius->to_double());
+   if (newRadius != nullptr) ok = setOuterRadius(newRadius->asDouble());
    return ok;
 }
 
@@ -439,7 +439,7 @@ bool MapPage::setSlotOuterRadius(const base::Number* const newRadius)
 bool MapPage::setSlotOuterRadiusDC(const base::Number* const newDCRadius)
 {
    bool ok {};
-   if (newDCRadius != nullptr) ok = setOuterRadiusDC(newDCRadius->to_double());
+   if (newDCRadius != nullptr) ok = setOuterRadiusDC(newDCRadius->asDouble());
    return ok;
 }
 
@@ -449,7 +449,7 @@ bool MapPage::setSlotOuterRadiusDC(const base::Number* const newDCRadius)
 bool MapPage::setSlotRange(const base::Number* const newR)
 {
    bool ok {};
-   if (newR != nullptr) ok = setRange(newR->to_double());
+   if (newR != nullptr) ok = setRange(newR->asDouble());
    return ok;
 }
 
@@ -459,7 +459,7 @@ bool MapPage::setSlotRange(const base::Number* const newR)
 bool MapPage::setSlotDisplacement(const base::Number* const newD)
 {
    bool ok {};
-   if (newD != nullptr) ok = setDisplacement(newD->to_double());
+   if (newD != nullptr) ok = setDisplacement(newD->asDouble());
    return ok;
 }
 
@@ -469,7 +469,7 @@ bool MapPage::setSlotDisplacement(const base::Number* const newD)
 bool MapPage::setSlotCentered(const base::Boolean* const newC)
 {
    bool ok {};
-   if (newC != nullptr) ok = setCentered(newC->to_bool());
+   if (newC != nullptr) ok = setCentered(newC->asBool());
    return ok;
 }
 
@@ -479,7 +479,7 @@ bool MapPage::setSlotCentered(const base::Boolean* const newC)
 bool MapPage::setSlotRefLat(const base::Number* const x)
 {
    bool ok {};
-   if (x != nullptr) ok = setReferenceLatDeg(x->to_double());
+   if (x != nullptr) ok = setReferenceLatDeg(x->asDouble());
    return ok;
 }
 
@@ -489,7 +489,7 @@ bool MapPage::setSlotRefLat(const base::Number* const x)
 bool MapPage::setSlotRefLon(const base::Number* const x)
 {
    bool ok {};
-   if (x != nullptr) ok = setReferenceLonDeg(x->to_double());
+   if (x != nullptr) ok = setReferenceLonDeg(x->asDouble());
    return ok;
 }
 
@@ -499,7 +499,7 @@ bool MapPage::setSlotRefLon(const base::Number* const x)
 bool MapPage::setSlotRefHdg(const base::Number* const x)
 {
    bool ok {};
-   if (x != nullptr) ok = setHeadingDeg(x->to_double());
+   if (x != nullptr) ok = setHeadingDeg(x->asDouble());
    return ok;
 }
 
@@ -509,7 +509,7 @@ bool MapPage::setSlotRefHdg(const base::Number* const x)
 bool MapPage::setSlotNorthUp(const base::Boolean* const x)
 {
    bool ok {};
-   if (x != nullptr) ok = setNorthUp(x->to_bool());
+   if (x != nullptr) ok = setNorthUp(x->asBool());
    return ok;
 }
 

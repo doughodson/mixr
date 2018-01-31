@@ -144,7 +144,7 @@ bool FileReader::setSlotRecordLength(const Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setRecordLength( msg->toInt() );
+      ok = setRecordLength( msg->asInt() );
    }
    return ok;
 }

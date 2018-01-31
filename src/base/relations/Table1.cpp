@@ -3,8 +3,6 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 

@@ -305,7 +305,7 @@ bool RacModel::setSlotMinSpeed(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       vpMin = msg->to_double();
+       vpMin = msg->asDouble();
        ok = true;
     }
     return ok;
@@ -315,7 +315,7 @@ bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       vpMaxG = msg->to_double();
+       vpMaxG = msg->asDouble();
        ok = true;
     }
     return ok;
@@ -325,7 +325,7 @@ bool RacModel::setSlotMaxG(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       gMax = msg->to_double();
+       gMax = msg->asDouble();
        ok = true;
     }
     return ok;
@@ -335,7 +335,7 @@ bool RacModel::setSlotMaxAccel(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       maxAccel = msg->to_double();
+       maxAccel = msg->asDouble();
        ok = true;
     }
     return ok;
@@ -367,7 +367,7 @@ bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       double value = msg->to_double();
+       double value = msg->asDouble();
        cmdVelocity = value;
        ok = true;
     }

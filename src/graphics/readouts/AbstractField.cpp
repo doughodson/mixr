@@ -513,13 +513,13 @@ bool AbstractField::setPosition(const base::List* const spobj)
 
 bool AbstractField::onSetLine(const base::Integer* const oslobj)
 {
-    if (oslobj != nullptr) line(oslobj->toInt());
+    if (oslobj != nullptr) line(oslobj->asInt());
     return true;
 }
 
 bool AbstractField::onSetColumn(const base::Integer* const oscobj)
 {
-   if (oscobj != nullptr) column(oscobj->toInt());
+   if (oscobj != nullptr) column(oscobj->asInt());
    return true;
 }
 
@@ -531,7 +531,7 @@ bool AbstractField::setSlotPosition(const base::List* const spobj)
 bool AbstractField::setSlotWidth(const base::Integer* const swobj)
 {
 
-    if (swobj != nullptr) width(swobj->toInt());
+    if (swobj != nullptr) width(swobj->asInt());
     return true;
 }
 
@@ -539,7 +539,7 @@ bool AbstractField::setSlotHighlight(const base::Boolean* const shobj)
 {
     if (shobj != nullptr) {
         // Set our mode
-        if (shobj->to_bool()) {
+        if (shobj->asBool()) {
             setDisplayMode(highlight);
             setDisplayMode(highlight1);
         } else {
@@ -569,7 +569,7 @@ bool AbstractField::setSlotUnderline(const base::Boolean* const suobj)
     if (suobj != nullptr) {
 
         // Set our mode
-        if (suobj->to_bool()) {
+        if (suobj->asBool()) {
             setDisplayMode(underline);
             setDisplayMode(underline1);
         }
@@ -602,7 +602,7 @@ bool AbstractField::setSlotReversed(const base::Boolean* const srobj)
     if (srobj != nullptr) {
 
         // Set our mode
-        if (srobj->to_bool()) {
+        if (srobj->asBool()) {
             setDisplayMode(reversed);
             setDisplayMode(reversed1);
         }
@@ -634,7 +634,7 @@ bool AbstractField::setSlotVertical(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
-        if (ssobj->to_bool()) {
+        if (ssobj->asBool()) {
             setDisplayMode(vertical);
             setDisplayMode(vertical1);
         }
@@ -650,7 +650,7 @@ bool AbstractField::setSlotBrackets(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
-        if (ssobj->to_bool()) {
+        if (ssobj->asBool()) {
             setDisplayMode(brackets);
             setDisplayMode(brackets1);
         }
@@ -665,7 +665,7 @@ bool AbstractField::setSlotBrackets(const base::Boolean* const ssobj)
 bool AbstractField::setSlotLinked(const base::Boolean* const msg)
 {
     if (msg != nullptr) {
-        setLinked( msg->to_bool() );
+        setLinked( msg->asBool() );
     }
     return true;
 }
@@ -674,7 +674,7 @@ bool AbstractField::setSlotInheritColor(const base::Boolean* const ic)
 {
     bool ok {};
     if (ic != nullptr) {
-        ok = setInheritColor(ic->to_bool());
+        ok = setInheritColor(ic->asBool());
     }
     return ok;
 }
@@ -736,7 +736,7 @@ bool AbstractField::setSlotStartCharPos(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii > 0) {
            // come in as 1 based, convert to 0 based
            startCP = static_cast<unsigned int>(ii - 1);

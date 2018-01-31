@@ -486,7 +486,7 @@ bool PosixHandler::setSlotLocalIpAddress(const Identifier* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        localIpAddr = msg->to_string();
+        localIpAddr = msg->asString();
         ok = true;
     }
     return ok;
@@ -508,7 +508,7 @@ bool PosixHandler::setSlotPort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii >= 0x0 && ii <= 0xffff) {
             ok = setPort( static_cast<uint16_t>(ii) );
         }
@@ -521,7 +521,7 @@ bool PosixHandler::setSlotLocalPort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii >= 0x0 && ii <= 0xffff) {
             ok = setLocalPort( static_cast<uint16_t>(ii) );
         }
@@ -534,7 +534,7 @@ bool PosixHandler::setSlotShared(const Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        setSharedFlag( msg->to_bool() );
+        setSharedFlag( msg->asBool() );
         ok = true;
     }
     return ok;
@@ -545,7 +545,7 @@ bool PosixHandler::setSlotSendBuffSize(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii >= 0 && ii <= 1024) {
            sendBuffSizeKb = ii;
            ok = true;
@@ -559,7 +559,7 @@ bool PosixHandler::setSlotRecvBuffSize(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii >= 0 && ii <= 1024) {
            recvBuffSizeKb = ii;
            ok = true;
@@ -573,7 +573,7 @@ bool PosixHandler::setSlotIgnoreSourcePort(const Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const int ii{msg->toInt()};
+        const int ii{msg->asInt()};
         if (ii >= 0x0 && ii <= 0xffff) {
             ignoreSourcePort = uint16_t(ii);
             ok = true;

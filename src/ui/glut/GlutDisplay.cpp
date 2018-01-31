@@ -924,7 +924,7 @@ bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      fullScreenFlg = msg->to_bool();
+      fullScreenFlg = msg->asBool();
       ok = true;
    }
    return ok;
@@ -934,7 +934,7 @@ bool GlutDisplay::setSlotIdleSleepTime(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ms{msg->toInt()};
+      const int ms{msg->asInt()};
       if (ms >= 0) {
          ok = setIdleSleepTime(ms);
       }
@@ -946,7 +946,7 @@ bool GlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setResizeWindows(msg->to_bool());
+      ok = setResizeWindows(msg->asBool());
    }
    return ok;
 }
@@ -956,7 +956,7 @@ bool GlutDisplay::setSlotPickWidth(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      GLdouble s{static_cast<GLdouble>(msg->to_double())};
+      GLdouble s{static_cast<GLdouble>(msg->asDouble())};
       if (s > 0) {
          pickWidth = s;
          ok = true;
@@ -972,7 +972,7 @@ bool GlutDisplay::setSlotPickHeight(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      GLdouble s{static_cast<GLdouble>(msg->to_double())};
+      GLdouble s{static_cast<GLdouble>(msg->asDouble())};
       if (s > 0) {
          pickHeight = s;
          ok = true;
@@ -987,7 +987,7 @@ bool GlutDisplay::setSlotAccumBuff(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      accumBuff = msg->to_bool();
+      accumBuff = msg->asBool();
       ok = true;
    }
    return ok;
@@ -997,7 +997,7 @@ bool GlutDisplay::setSlotStencilBuff(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      stencilBuff = msg->to_bool();
+      stencilBuff = msg->asBool();
       ok = true;
    }
    return ok;

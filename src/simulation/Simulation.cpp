@@ -206,7 +206,7 @@ void Simulation::reset()
 
             // reinstated the container pointer and player name
             ip->container(this);
-            ip->setName((pair->slot()->to_string()));
+            ip->setName((pair->slot()->asString()));
 
             // Insert the player into the new list in sorted order
             insertPlayerSort(pair, newList);
@@ -229,7 +229,7 @@ void Simulation::reset()
 
                // reinstated the container pointer and player name
                ip->container(this);
-               ip->setName(pair->slot()->to_string());
+               ip->setName(pair->slot()->asString());
 
                // Insert the proxy player into the new list in sorted order
                insertPlayerSort(pair, newList);
@@ -918,7 +918,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          item = item->getNext();
          const auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
-         ip->setName(pair->slot()->to_string());
+         ip->setName(pair->slot()->asString());
       }
 
       // Set the original player list pointer
@@ -1020,7 +1020,7 @@ void Simulation::updatePlayerList()
 
             // Set container and name
             ip->container(this);
-            ip->setName(newPlayer->slot()->to_string());
+            ip->setName(newPlayer->slot()->asString());
 
             // Insert the new player into the new list in sorted order
             insertPlayerSort(newPlayer, newList);
@@ -1285,7 +1285,7 @@ bool Simulation::setSlotDay(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v >= 0 && v <= 31) {
          simDay0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1300,7 +1300,7 @@ bool Simulation::setSlotMonth(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 0 && v <= 12) {
          simMonth0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1315,7 +1315,7 @@ bool Simulation::setSlotYear(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if ((v >= 1970 && v <= 2099) || v == 0) {
          simYear0 = static_cast<unsigned short>(v);
          ok = true;
@@ -1330,7 +1330,7 @@ bool Simulation::setSlotFirstWeaponId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= MIN_WPN_ID && v <= 0xffff) {
          relWpnId = static_cast<unsigned short>(v);
          ok = true;
@@ -1353,7 +1353,7 @@ bool Simulation::setSlotNumTcThreads(const base::Integer* const msg)
       int maxT{1};
       if (np > 1) maxT = np - 1;
 
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 1 && v <= maxT) {
          reqTcThreads = v;
          ok = true;
@@ -1377,7 +1377,7 @@ bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
       int maxT{1};
       if (np > 1) maxT = np - 1;
 
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 1 && v <= maxT) {
          reqBgThreads = v;
          ok = true;

@@ -679,7 +679,7 @@ bool IgHost::setSlotMaxRange(const base::Number* const msg)
 
     if (msg != nullptr) {
         // We have a simple number, which should be meters!
-        ok = setMaxRange(msg->to_double());
+        ok = setMaxRange(msg->asDouble());
     }
 
     if (!ok) {
@@ -694,7 +694,7 @@ bool IgHost::setSlotMaxModels(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int n{num->toInt()};
+        const int n{num->asInt()};
         if (n >= 0) {
              ok = setMaxModels(n);
         }
@@ -709,7 +709,7 @@ bool IgHost::setSlotMaxElevations(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int n{num->toInt()};
+        const int n{num->asInt()};
         if (n >= 0) {
              ok = setMaxElevations(n);
         }

@@ -370,7 +370,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
    }
    else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    // Set the value if it's valid
@@ -399,7 +399,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::Number* const num)
    }
    else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    // Set the value if it's valid
@@ -422,7 +422,7 @@ bool AirTrkMgr::setSlotVelocityGate(const base::Number* const num)
    double value{};
    if (num != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    // Set the value if it's valid

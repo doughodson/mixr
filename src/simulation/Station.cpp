@@ -1030,7 +1030,7 @@ bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->to_double()};
+        const double rate{num->asDouble()};
         if (rate > 0) {
             tcRate = rate;
             ok = true;
@@ -1049,7 +1049,7 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->to_double()};
+        const double pri{num->asDouble()};
         if (pri >= 0 && pri <= 1.0f) {
             tcPri = pri;
             ok = true;
@@ -1064,7 +1064,7 @@ bool Station::setSlotTimeCriticalStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->toInt()};
+        const int isize{num->asInt()};
         if (isize >= 0) {
             ok = setTimeCriticalStackSize(static_cast<unsigned int>(isize));
         }
@@ -1080,7 +1080,7 @@ bool Station::setSlotNetworkRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->to_double()};
+        const double rate{num->asDouble()};
         if (rate > 0) {
             netRate = rate;
             ok = true;
@@ -1099,7 +1099,7 @@ bool Station::setSlotNetworkPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->to_double()};
+        const double pri{num->asDouble()};
         if (pri >= 0.0 && pri <= 1.0) {
             netPri = pri;
             ok = true;
@@ -1114,7 +1114,7 @@ bool Station::setSlotNetworkStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->toInt()};
+        const int isize{num->asInt()};
         if (isize >= 0) {
             ok = setNetworkStackSize(static_cast<unsigned int>(isize));
         }
@@ -1130,7 +1130,7 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double rate{num->to_double()};
+        const double rate{num->asDouble()};
         if (rate >= 0.0 ) {
             bgRate = rate;
             ok = true;
@@ -1149,7 +1149,7 @@ bool Station::setSlotBackgroundPri(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double pri{num->to_double()};
+        const double pri{num->asDouble()};
         if (pri >= 0 && pri <= 1.0) {
             bgPri = pri;
             ok = true;
@@ -1164,7 +1164,7 @@ bool Station::setSlotBackgroundStackSize(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int isize{num->toInt()};
+        const int isize{num->asInt()};
         if (isize >= 0) {
             ok = setBackgroundStackSize(static_cast<unsigned int>(isize));
         }
@@ -1208,7 +1208,7 @@ bool Station::setSlotFastForwardRate(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->toInt()};
+      const int ii{msg->asInt()};
       if (ii >= 0) {
          ok = setFastForwardRate( ii );
       }
@@ -1223,7 +1223,7 @@ bool Station::setSlotEnableUpdateTimers(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUpdateTimersEnable( msg->to_bool() );
+      ok = setUpdateTimersEnable( msg->asBool() );
    }
    return ok;
 }

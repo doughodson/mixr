@@ -911,7 +911,7 @@ void SymbolLoader::draw()
                         }
                      }
                      if (phdg != nullptr) {
-                        base::Degrees* angObj = symbols[i]->getHdgAngleObj();
+                        base::Degrees* angObj{symbols[i]->getHdgAngleObj()};
                         if (angObj == nullptr) {
                            angObj = new base::Degrees();
                            symbols[i]->setHdgAngleObj(angObj);
@@ -996,7 +996,7 @@ bool SymbolLoader::setSlotTemplates(base::PairStream* msg)
 bool SymbolLoader::setSlotShowInRangeOnly(const base::Boolean* const msg)
 {
    bool ok{};
-   if (msg != nullptr) ok = setShowInRangeOnly(msg->to_bool());
+   if (msg != nullptr) ok = setShowInRangeOnly(msg->asBool());
    return ok;
 }
 
@@ -1004,7 +1004,7 @@ bool SymbolLoader::setSlotShowInRangeOnly(const base::Boolean* const msg)
 bool SymbolLoader::setSlotInterconnect(const base::Boolean* const msg)
 {
    bool ok{};
-   if (msg != nullptr) ok = setInterconnect(msg->to_bool());
+   if (msg != nullptr) ok = setInterconnect(msg->asBool());
    return ok;
 }
 

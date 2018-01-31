@@ -44,7 +44,7 @@ bool Sz1::setSlotN1(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setN1( msg->to_double() );
+      setN1( msg->asDouble() );
       ok = true;
    }
    return ok;
@@ -54,7 +54,7 @@ bool Sz1::setSlotN2(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setN2( msg->to_double() );
+      setN2( msg->asDouble() );
       ok = true;
    }
    return ok;
@@ -64,7 +64,7 @@ bool Sz1::setSlotD1(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setD1( msg->to_double() );
+      setD1( msg->asDouble() );
       ok = true;
    }
    return ok;
@@ -74,7 +74,7 @@ bool Sz1::setSlotD2(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setD2( msg->to_double() );
+      setD2( msg->asDouble() );
       ok = true;
    }
    return ok;

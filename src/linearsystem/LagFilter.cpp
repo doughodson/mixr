@@ -82,7 +82,7 @@ bool LagFilter::setSlotTau(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const double tsec {msg->to_double()};
+      const double tsec {msg->asDouble()};
       if (tsec > 0) {
          setTau( tsec );
          ok = true;

@@ -165,7 +165,7 @@ bool ScalerFunc::setSlotRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -178,7 +178,7 @@ bool ScalerFunc::setSlotX0(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setX0( msg->to_double() );
+      setX0( msg->asDouble() );
       ok = true;
    }
    return ok;
@@ -188,7 +188,7 @@ bool ScalerFunc::setSlotY0(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setY0( msg->to_double() );
+      setY0( msg->asDouble() );
       ok = true;
    }
    return ok;

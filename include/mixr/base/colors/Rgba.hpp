@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class Number;
 
 //------------------------------------------------------------------------------
 // Class:  Rgba

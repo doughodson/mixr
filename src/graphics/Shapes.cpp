@@ -50,7 +50,7 @@ void Circle::copyData(const Circle& org, const bool)
 bool Circle::updateRadius(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setRadius(x->to_double());
+    if (x != nullptr) ok = setRadius(x->asDouble());
     return ok;
 }
 
@@ -74,21 +74,21 @@ void Circle::drawFunc()
 bool Circle::setSlotRadius(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setRadius(x->to_double());
+    if (x != nullptr) ok = setRadius(x->asDouble());
     return ok;
 }
 
 bool Circle::setSlotFilled(const base::Boolean* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setFilled(x->to_bool());
+    if (x != nullptr) ok = setFilled(x->asBool());
     return ok;
 }
 
 bool Circle::setSlotSlices(const base::Integer* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setSlices(x->toInt());
+    if (x != nullptr) ok = setSlices(x->asInt());
     return ok;
 }
 
@@ -139,7 +139,7 @@ void OcclusionCircle::drawFunc()
 bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setOuterRadius(x->to_double());
+    if (x != nullptr) ok = setOuterRadius(x->asDouble());
     return ok;
 }
 
@@ -200,21 +200,21 @@ void Arc::drawFunc()
 bool Arc::setSlotStartAngle(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setStartAngle(x->to_double());
+    if (x != nullptr) ok = setStartAngle(x->asDouble());
     return ok;
 }
 
 bool Arc::setSlotArcLength(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setArcLength(x->to_double());
+    if (x != nullptr) ok = setArcLength(x->asDouble());
     return ok;
 }
 
 bool Arc::setSlotIsConnected(const base::Boolean* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setIsConnected(x->to_bool());
+    if (x != nullptr) ok = setIsConnected(x->asBool());
     return ok;
 }
 
@@ -268,7 +268,7 @@ void OcclusionArc::drawFunc()
 bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setOuterRadius(x->to_double());
+    if (x != nullptr) ok = setOuterRadius(x->asDouble());
     return ok;
 }
 
@@ -378,7 +378,7 @@ void Line::drawFunc()
 bool Line::setSlotSegments(const base::Boolean* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setSegments(x->to_bool());
+    if (x != nullptr) ok = setSegments(x->asBool());
     return ok;
 }
 
@@ -412,7 +412,7 @@ bool Quad::setSlotStrip(const base::Boolean* const x)
 {
     bool ok = false;
     if (x != nullptr) {
-        ok = setStrip(x->to_bool());
+        ok = setStrip(x->asBool());
     }
     return ok;
 }
@@ -516,7 +516,7 @@ bool Triangle::setSlotFan(const base::Boolean* const x)
 {
     bool ok {};
     if (x != nullptr) {
-        ok = setFan(x->to_bool());
+        ok = setFan(x->asBool());
     }
     return ok;
 }

@@ -259,7 +259,7 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
    } else if (msg != nullptr) {
-      value = msg->to_double();
+      value = msg->asDouble();
    }
    setAzimuthBin(value);
    return true;
@@ -274,7 +274,7 @@ bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
    } else if (msg != nullptr) {
-      value = msg->to_double();
+      value = msg->asDouble();
    }
    setElevationBin(value);
    return true;

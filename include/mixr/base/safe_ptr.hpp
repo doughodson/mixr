@@ -61,7 +61,7 @@ public:
    // Returns a pre-ref()'d pointer to the object
    T* getRefPtr() {
       lock();
-      T* x = ptr;
+      T* x{ptr};
       if (x != nullptr) x->ref();
       unlock();
       return x;
@@ -70,7 +70,7 @@ public:
    // Returns a pre-ref()'d const pointer to the object
    const T* getRefPtr() const {
       lock();
-      const T* x = ptr;
+      const T* x{ptr};
       if (x != nullptr) x->ref();
       unlock();
       return x;
@@ -114,8 +114,8 @@ private:
       base::unlock( semaphore );
    }
 
-   T* ptr {};                  // the pointer being managed
-   mutable long semaphore {};  // spin-lock semaphore
+   T* ptr{};                  // the pointer being managed
+   mutable long semaphore{};  // spin-lock semaphore
 };
 
 }

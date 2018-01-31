@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Yiq.hpp"
 
-#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -74,7 +74,7 @@ void Yiq::getYIQ(Vec3d& hhh) const
 bool Yiq::setSlotY(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value {msg->to_double()};
+    const double value {msg->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         yiq[Y] = value;
@@ -91,7 +91,7 @@ bool Yiq::setSlotY(const Number* const msg)
 bool Yiq::setSlotI(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value{msg->to_double()};
+    const double value{msg->asDouble()};
     const bool ok{value >= -0.6 && value <= 0.6};
     if (ok) {
         yiq[I] = value;
@@ -108,7 +108,7 @@ bool Yiq::setSlotI(const Number* const msg)
 bool Yiq::setSlotQ(const Number* const msg)
 {
     if (msg == nullptr) return false;
-    const double value{msg->to_double()};
+    const double value{msg->asDouble()};
     const bool ok{value >= -0.52 && value <= 0.52};
     if (ok) {
         yiq[Q] = value;

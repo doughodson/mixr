@@ -1082,7 +1082,7 @@ bool DataRecorder::setSlotEventName(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      eventName = msg->to_string();
+      eventName = msg->asString();
       ok = true;
    }
    return ok;
@@ -1092,7 +1092,7 @@ bool DataRecorder::setSlotApplication(base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      application = msg->to_string();
+      application = msg->asString();
       ok = true;
    }
    return ok;
@@ -1103,7 +1103,7 @@ bool DataRecorder::setSlotCaseNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      caseNum = msg->toInt();
+      caseNum = msg->asInt();
    }
    return ok;
 }
@@ -1113,7 +1113,7 @@ bool DataRecorder::setSlotMissionNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      missionNum = msg->toInt();
+      missionNum = msg->asInt();
    }
    return ok;
 }
@@ -1123,7 +1123,7 @@ bool DataRecorder::setSlotSubjectNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      subjectNum = msg->toInt();
+      subjectNum = msg->asInt();
    }
    return ok;
 }
@@ -1133,7 +1133,7 @@ bool DataRecorder::setSlotRunNum(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      runNum = msg->toInt();
+      runNum = msg->asInt();
    }
    return ok;
 }
@@ -1143,7 +1143,7 @@ bool DataRecorder::setSlotDay(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      day = msg->toInt();
+      day = msg->asInt();
    }
    return ok;
 }
@@ -1153,7 +1153,7 @@ bool DataRecorder::setSlotMonth(base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      month = msg->toInt();
+      month = msg->asInt();
    }
    return ok;
 }
@@ -1164,7 +1164,7 @@ bool DataRecorder::setSlotYear(base::Integer* const msg)
 
    if (msg != nullptr) {
       ok = true;
-      year = msg->toInt();
+      year = msg->asInt();
    }
    return ok;
 }

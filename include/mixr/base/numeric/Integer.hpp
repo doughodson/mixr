@@ -39,7 +39,7 @@ namespace base {
 //      Input/Output stream operators: >>  <<
 //          Are C++ equivalents.
 //------------------------------------------------------------------------------
-class Integer : public Number
+class Integer final: public Number
 {
     DECLARE_SUBCLASS(Integer, Number)
 
@@ -47,9 +47,7 @@ public:
     Integer()                                                           { STANDARD_CONSTRUCTOR() }
     explicit Integer(const int num) : Number(static_cast<double>(num))  { STANDARD_CONSTRUCTOR() }
 
-
-
-    int toInt() const             { return static_cast<int>(val); }
+    int asInt() const                 { return static_cast<int>(val); }
 
     Integer& operator=(const int);
 
@@ -105,17 +103,17 @@ inline void Integer::operator+=(const int n)
 
 inline int operator+(const Integer& n1, const Integer& n2)
 {
-    return int(n1.toInt() + n2.toInt());
+    return int(n1.asInt() + n2.asInt());
 }
 
 inline int operator+(const int n1, const Integer& n2)
 {
-    return int(n1 + n2.toInt());
+    return int(n1 + n2.asInt());
 }
 
 inline int operator+(const Integer& n1, const int n2)
 {
-    return int(n1.toInt() + n2);
+    return int(n1.asInt() + n2);
 }
 
 //------------------------------------------------------------------------------
@@ -133,17 +131,17 @@ inline void Integer::operator-=(const int n)
 
 inline int operator-(const Integer& n1, const Integer& n2)
 {
-    return int(n1.toInt() - n2.toInt());
+    return int(n1.asInt() - n2.asInt());
 }
 
 inline int operator-(const int n1, const Integer& n2)
 {
-    return int(n1 - n2.toInt());
+    return int(n1 - n2.asInt());
 }
 
 inline int operator-(const Integer& n1, const int n2)
 {
-    return int(n1.toInt() - n2);
+    return int(n1.asInt() - n2);
 }
 
 
@@ -162,17 +160,17 @@ inline void Integer::operator*=(const int n)
 
 inline int operator*(const Integer& n1, const Integer& n2)
 {
-    return int(n1.toInt() * n2.toInt());
+    return int(n1.asInt() * n2.asInt());
 }
 
 inline int operator*(const int n1, const Integer& n2)
 {
-    return int(n1 * n2.toInt());
+    return int(n1 * n2.asInt());
 }
 
 inline int operator*(const Integer& n1, const int n2)
 {
-    return int(n1.toInt() * n2);
+    return int(n1.asInt() * n2);
 }
 
 
@@ -205,9 +203,9 @@ inline void Integer::operator/=(const int n)
 
 inline int operator/(const Integer& n1, const Integer& n2)
 {
-    int n = int(n1.toInt());
-    if (n2.toInt() != 0) {
-        n /= int(n2.toInt());
+    int n = int(n1.asInt());
+    if (n2.asInt() != 0) {
+        n /= int(n2.asInt());
     }
     else {
         std::cerr << "Integer::operator/(): Divide by zero!" << std::endl;
@@ -219,8 +217,8 @@ inline int operator/(const Integer& n1, const Integer& n2)
 inline int operator/(const int n1, const Integer& n2)
 {
     int n = n1;
-    if (n2.toInt() != 0) {
-        n /= int(n2.toInt());
+    if (n2.asInt() != 0) {
+        n /= int(n2.asInt());
     }
     else {
         std::cerr << "Integer::operator/(): Divide by zero!" << std::endl;
@@ -231,7 +229,7 @@ inline int operator/(const int n1, const Integer& n2)
 
 inline int operator/(const Integer& n1, const int n2)
 {
-    int n = int(n1.toInt());
+    int n = int(n1.asInt());
     if (n2 != 0) {
         n /= n2;
     }
@@ -276,9 +274,9 @@ inline void Integer::operator%=(const int n1)
 
 inline int operator%(const Integer& n1, const Integer& n2)
 {
-    int n = n1.toInt();
-    if (n2.toInt() != 0) {
-        n %= n2.toInt();
+    int n = n1.asInt();
+    if (n2.asInt() != 0) {
+        n %= n2.asInt();
     }
     else {
         std::cerr << "Modulus by zero!" << std::endl;
@@ -290,8 +288,8 @@ inline int operator%(const Integer& n1, const Integer& n2)
 inline int operator%(const int n1, const Integer& n2)
 {
     int n = n1;
-    if (n2.toInt() != 0) {
-        n %= n2.toInt();
+    if (n2.asInt() != 0) {
+        n %= n2.asInt();
     }
     else {
         std::cerr << "Modulus by zero!" << std::endl;
@@ -302,7 +300,7 @@ inline int operator%(const int n1, const Integer& n2)
 
 inline int operator%(const Integer& n1, const int n2)
 {
-    int n = n1.toInt();
+    int n = n1.asInt();
     if (n2 != 0) {
         n %= n2;
     }
@@ -319,92 +317,92 @@ inline int operator%(const Integer& n1, const int n2)
 //------------------------------------------------------------------------------
 inline bool operator==(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() == n2.toInt();
+   return n1.asInt() == n2.asInt();
 }
 
 inline bool operator==(const int n1, const Integer& n2)
 {
-   return n1 == n2.toInt();
+   return n1 == n2.asInt();
 }
 
 inline bool operator==(const Integer& n1, const int n2)
 {
-   return n1.toInt() == n2;
+   return n1.asInt() == n2;
 }
 
 inline bool operator!=(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() != n2.toInt();
+   return n1.asInt() != n2.asInt();
 }
 
 inline bool operator!=(const int n1, const Integer& n2)
 {
-   return n1 != n2.toInt();
+   return n1 != n2.asInt();
 }
 
 inline bool operator!=(const Integer& n1, const int n2)
 {
-   return n1.toInt() != n2;
+   return n1.asInt() != n2;
 }
 
 inline bool operator<(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() < n2.toInt();
+   return n1.asInt() < n2.asInt();
 }
 
 inline bool operator<(const int n1, const Integer& n2)
 {
-   return n1 < n2.toInt();
+   return n1 < n2.asInt();
 }
 
 inline bool operator<(const Integer& n1, const int n2)
 {
-   return n1.toInt() < n2;
+   return n1.asInt() < n2;
 }
 
 inline bool operator<=(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() <= n2.toInt();
+   return n1.asInt() <= n2.asInt();
 }
 
 inline bool operator<=(const int n1, const Integer& n2)
 {
-   return n1 <= n2.toInt();
+   return n1 <= n2.asInt();
 }
 
 inline bool operator<=(const Integer& n1, const int n2)
 {
-   return n1.toInt() <= n2;
+   return n1.asInt() <= n2;
 }
 
 inline bool operator>(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() > n2.toInt();
+   return n1.asInt() > n2.asInt();
 }
 
 inline bool operator>(const int n1, const Integer& n2)
 {
-   return n1 > n2.toInt();
+   return n1 > n2.asInt();
 }
 
 inline bool operator>(const Integer& n1, const int n2)
 {
-   return n1.toInt() > n2;
+   return n1.asInt() > n2;
 }
 
 inline bool operator>=(const Integer& n1, const Integer& n2)
 {
-   return n1.toInt() >= n2.toInt();
+   return n1.asInt() >= n2.asInt();
 }
 
 inline bool operator>=(const int n1, const Integer& n2)
 {
-   return n1 >= n2.toInt();
+   return n1 >= n2.asInt();
 }
 
 inline bool operator>=(const Integer& n1, const int n2)
 {
-   return n1.toInt() >= n2;
+   return n1.asInt() >= n2;
 }
 
 //------------------------------------------------------------------------------
@@ -423,7 +421,7 @@ inline std::istream& operator>>(std::istream& sin, Integer& n)
 //------------------------------------------------------------------------------
 inline std::ostream& operator<<(std::ostream& sout, const Integer& n)
 {
-   sout << n.toInt();
+   sout << n.asInt();
    return sout;
 }
 

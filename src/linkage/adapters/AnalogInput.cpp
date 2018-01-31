@@ -138,7 +138,7 @@ bool AnalogInput::setSlotLocation(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v >= 0) {
          ok = setLocation(v);
       }
@@ -151,7 +151,7 @@ bool AnalogInput::setSlotChannel(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -164,7 +164,7 @@ bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setDeadband( msg->to_double() );
+      ok = setDeadband( msg->asDouble() );
    }
    return ok;
 }
@@ -174,7 +174,7 @@ bool AnalogInput::setSlotOffset(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setOffset( msg->to_double() );
+      ok = setOffset( msg->asDouble() );
    }
    return ok;
 }
@@ -184,7 +184,7 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      ok = setGain( msg->to_double() );
+      ok = setGain( msg->asDouble() );
    }
    return ok;
 }

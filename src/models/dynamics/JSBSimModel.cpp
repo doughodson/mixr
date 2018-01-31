@@ -903,7 +903,7 @@ bool JSBSimModel::setSlotModel(const base::String* const mdl)
 bool JSBSimModel::setSlotDebugLevel(const base::Integer* const level)
 {
    if (level != nullptr) {
-      debugLevel = level->toInt();
+      debugLevel = level->asInt();
    }
    return true;
 }

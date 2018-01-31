@@ -81,7 +81,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingRad(msg->to_double());  // radians
+        setBearingRad(msg->asDouble());  // radians
         ok = true;
     }
     return ok;
@@ -94,7 +94,7 @@ bool BearingPointer::onUpdateDegBearingPointer(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingDeg(msg->to_double());  // degrees
+        setBearingDeg(msg->asDouble());  // degrees
         ok = true;
     }
     return ok;

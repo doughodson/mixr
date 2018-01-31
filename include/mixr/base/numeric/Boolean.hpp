@@ -19,10 +19,10 @@ namespace base {
 //
 // Factory name: Boolean
 // Slots:
-//     value  <Boolean>  ! Sets the value. (default: false)
+//     value  <Boolean>  ! Sets the value (default: false)
 //
 //------------------------------------------------------------------------------
-class Boolean : public Object
+class Boolean final: public Object
 {
    DECLARE_SUBCLASS(Boolean, Object)
 
@@ -33,10 +33,7 @@ public:
    explicit operator bool() const      { return value; }
 
    void setValue(const bool x)         { value = x;    }
-   bool to_bool() const                { return value; }
-
-   // deprecated interface
-// bool getBoolean() const             { return value; }
+   bool asBool() const                 { return value; }
 
 private:
    bool value{};

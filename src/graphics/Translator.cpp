@@ -50,7 +50,7 @@ void Translator::draw()
 bool Translator::onUpdateX(const base::Number* const newX)
 {
     bool ok {};
-    if (newX != nullptr) ok = setXPos(newX->to_double());
+    if (newX != nullptr) ok = setXPos(newX->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ bool Translator::onUpdateX(const base::Number* const newX)
 bool Translator::onUpdateY(const base::Number* const newY)
 {
     bool ok {};
-    if (newY != nullptr) ok = setYPos(newY->to_double());
+    if (newY != nullptr) ok = setYPos(newY->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ bool Translator::onUpdateY(const base::Number* const newY)
 bool Translator::onUpdateZ(const base::Number* const newZ)
 {
     bool ok {};
-    if (newZ != nullptr) ok = setZPos(newZ->to_double());
+    if (newZ != nullptr) ok = setZPos(newZ->asDouble());
     return ok;
 }
 

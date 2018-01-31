@@ -78,7 +78,7 @@ bool LowpassFilter::setSlotWc(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      double rps = msg->to_double();
+      double rps = msg->asDouble();
       if (rps > 0) {
          setWc( rps );
          ok = true;

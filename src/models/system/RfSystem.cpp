@@ -684,7 +684,7 @@ bool RfSystem::setSlotRfNoiseFigure(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double fig{v->to_double()};
+        const double fig{v->asDouble()};
         if (fig >= 1.0) {
             ok = setRfNoiseFigure( fig );
         } else {
@@ -699,7 +699,7 @@ bool RfSystem::setSlotRfSysTemp(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double tmp{v->to_double()};
+        const double tmp{v->asDouble()};
         if (tmp > 0.0) {
             ok = setRfSysTemp( tmp );;
         } else {
@@ -714,7 +714,7 @@ bool RfSystem::setSlotRfTransmitLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->to_double()};
+        const double loss{v->asDouble()};
         if (loss >= 1.0) {
             ok = setRfTransmitLoss(loss);
         } else {
@@ -729,7 +729,7 @@ bool RfSystem::setSlotRfReceiveLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->to_double()};
+        const double loss{v->asDouble()};
         if (loss >= 1.0) {
             ok = setRfReceiveLoss(loss);
         } else {
@@ -744,7 +744,7 @@ bool RfSystem::setSlotRfSignalProcessLoss(base::Number* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        const double loss{v->to_double()};
+        const double loss{v->asDouble()};
         if (loss >= 1.0) {
             ok = setRfSignalProcessLoss(loss);
         } else {
@@ -759,7 +759,7 @@ bool RfSystem::setSlotDisableEmissions(base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDisableEmissionsFlag( msg->to_bool() );
+      ok = setDisableEmissionsFlag( msg->asBool() );
    }
    return ok;
 }

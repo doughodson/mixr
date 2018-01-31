@@ -30,7 +30,7 @@ Rotary2::Rotary2()
 bool Rotary2::onSelect(const base::Boolean* const x)
 {
    if (x != nullptr) {
-      if (x->to_bool()){
+      if (x->asBool()){
          //if true, select the second component
          base::Integer two(2);
          select(&two);

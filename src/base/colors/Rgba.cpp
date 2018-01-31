@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Rgba.hpp"
 
-#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace base {
@@ -32,7 +32,7 @@ Rgba::Rgba()
 
 bool Rgba::setSlotAlpha(const Number* const msg)
 {
-    double value{msg->to_double()};
+    double value{msg->asDouble()};
     bool ok{setAlpha( value )};
     if (!ok) std::cerr << "Rgba::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;

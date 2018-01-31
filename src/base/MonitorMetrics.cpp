@@ -2,7 +2,6 @@
 #include "mixr/base/MonitorMetrics.hpp"
 
 #include "mixr/base/colors/Cie.hpp"
-#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include <cstdio>

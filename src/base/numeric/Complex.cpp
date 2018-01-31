@@ -42,13 +42,13 @@ void Complex::copyData(const Complex& org, const bool)
 
 bool Complex::setSlotReal(const Number* const msg)
 {
-    value.real(msg->to_double());
+    value.real(msg->asDouble());
     return true;
 }
 
 bool Complex::setSlotImaginary(const Number* const msg)
 {
-    value.imag(msg->to_double());
+    value.imag(msg->asDouble());
     return true;
 }
 

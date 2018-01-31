@@ -147,7 +147,7 @@ void Effect::weaponDynamics(const double dt)
 // dragIndex: drag index used by default dynamics
 bool Effect::setSlotDragIndex(base::Number* const p)
 {
-    setDragIndex( p->to_double() );
+    setDragIndex( p->asDouble() );
     return true;
 }
 

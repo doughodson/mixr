@@ -1318,7 +1318,7 @@ bool Autopilot::setSlotNavMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setNavMode( msg->to_bool() );
+       ok = setNavMode( msg->asBool() );
     }
     return ok;
 }
@@ -1339,7 +1339,7 @@ bool Autopilot::setSlotAltitudeHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setAltitudeHoldMode( msg->to_bool() );
+       ok = setAltitudeHoldMode( msg->asBool() );
     }
     return ok;
 }
@@ -1349,7 +1349,7 @@ bool Autopilot::setSlotHoldVelocityKts(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setCommandedVelocityKts( msg->to_double() );
+       ok = setCommandedVelocityKts( msg->asDouble() );
        holdSpdSet = ok;
     }
     return ok;
@@ -1360,7 +1360,7 @@ bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setVelocityHoldMode( msg->to_bool() );
+       ok = setVelocityHoldMode( msg->asBool() );
     }
     return ok;
 }
@@ -1382,7 +1382,7 @@ bool Autopilot::setSlotHeadingHoldMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setHeadingHoldMode( msg->to_bool() );
+       ok = setHeadingHoldMode( msg->asBool() );
     }
     return ok;
 }
@@ -1392,7 +1392,7 @@ bool Autopilot::setSlotLoiterMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       ok = setLoiterMode( msg->to_bool() );
+       ok = setLoiterMode( msg->asBool() );
     }
     return ok;
 }
@@ -1413,7 +1413,7 @@ bool Autopilot::setSlotLoiterPatternLength(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLoiterPatternLengthNM( msg->to_double() );
+        ok = setLoiterPatternLengthNM( msg->asDouble() );
     }
     return ok;
 }
@@ -1436,7 +1436,7 @@ bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLoiterPatternCounterClockwise( msg->to_bool() );
+        ok = setLoiterPatternCounterClockwise( msg->asBool() );
     }
     return ok;
 }
@@ -1457,7 +1457,7 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDistanceTrail( msg->to_double() );
+        ok = setLeadFollowingDistanceTrail( msg->asDouble() );
     }
     return ok;
 }
@@ -1478,7 +1478,7 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDistanceRight( msg->to_double() );
+        ok = setLeadFollowingDistanceRight( msg->asDouble() );
     }
     return ok;
 }
@@ -1499,7 +1499,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setLeadFollowingDeltaAltitude( msg->to_double() );
+        ok = setLeadFollowingDeltaAltitude( msg->asDouble() );
     }
     return ok;
 }
@@ -1507,7 +1507,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 // Initial name of our lead player
 bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 {
-   leadName = p->to_string();
+   leadName = p->asString();
    return true;
 }
 
@@ -1517,7 +1517,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const bool flg{msg->to_bool()};
+        const bool flg{msg->asBool()};
         ok = setFollowTheLeadMode( flg );
         if (flg && !ok) {
             if (isMessageEnabled(MSG_ERROR)) {
@@ -1532,7 +1532,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxTurnRateDps(msg->to_double());
+   if (ok) ok = setMaxTurnRateDps(msg->asDouble());
    return ok;
 }
 
@@ -1540,7 +1540,7 @@ bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
 bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxBankAngleDeg(msg->to_double());
+   if (ok) ok = setMaxBankAngleDeg(msg->asDouble());
    return ok;
 }
 
@@ -1548,7 +1548,7 @@ bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
 bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps((msg->to_double() * base::distance::FT2M / base::time::M2S));
+   if (ok) ok = setMaxClimbRateMps((msg->asDouble() * base::distance::FT2M / base::time::M2S));
    return ok;
 }
 
@@ -1556,7 +1556,7 @@ bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
 bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps(msg->to_double());
+   if (ok) ok = setMaxClimbRateMps(msg->asDouble());
    return ok;
 }
 
@@ -1564,7 +1564,7 @@ bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
 bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxPitchAngleDeg(msg->to_double());
+   if (ok) ok = setMaxPitchAngleDeg(msg->asDouble());
    return ok;
 }
 
@@ -1572,7 +1572,7 @@ bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
 bool Autopilot::setSlotMaxVelAccNps(const base::Number* const msg)
 {
    bool ok{msg != nullptr};
-   if (ok) ok = setMaxVelAccNps(msg->to_double());
+   if (ok) ok = setMaxVelAccNps(msg->asDouble());
    return ok;
 }
 

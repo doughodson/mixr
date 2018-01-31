@@ -72,7 +72,7 @@ bool PrintSelected::setSlotMsgToken(const base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      msgToken = msg->toInt();
+      msgToken = msg->asInt();
    }
    return ok;
 }
@@ -103,7 +103,7 @@ bool PrintSelected::setSlotCompareToNum(const base::Integer* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      compareValI = msg->toInt();
+      compareValI = msg->asInt();
    }
    return ok;
 }
@@ -113,7 +113,7 @@ bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      compareValD = msg->to_double();
+      compareValD = msg->asDouble();
    }
    return ok;
 }
@@ -148,7 +148,7 @@ bool PrintSelected::setSlotTimeOnly(const base::Boolean* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      timeOnly = msg->to_bool();
+      timeOnly = msg->asBool();
    }
    return ok;
 }

@@ -10,6 +10,7 @@ namespace mixr {
 namespace base {
 class Vec4d;
 class MonitorMetrics;
+class Number;
 class Table1;
 
 //------------------------------------------------------------------------------

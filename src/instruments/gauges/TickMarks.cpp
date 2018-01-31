@@ -114,7 +114,7 @@ void TickMarks::drawFunc()
 bool TickMarks::setSlotTickMarkLength(const base::Number* const newLength)
 {
     bool ok = true;
-    if (newLength != nullptr) ok = setTickMarkLength(newLength->to_double());
+    if (newLength != nullptr) ok = setTickMarkLength(newLength->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ bool TickMarks::setSlotTickMarkLength(const base::Number* const newLength)
 bool TickMarks::setSlotQuantity(const base::Integer* const newQ)
 {
     bool ok{true};
-    if (newQ != nullptr) ok = setQuantity(newQ->toInt());
+    if (newQ != nullptr) ok = setQuantity(newQ->asInt());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ bool TickMarks::setSlotQuantity(const base::Integer* const newQ)
 bool TickMarks::setSlotGaugeLength(const base::Number* const newL)
 {
     bool ok{true};
-    if (newL != nullptr) ok = setGaugeLength(newL->to_double());
+    if (newL != nullptr) ok = setGaugeLength(newL->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ bool TickMarks::setSlotGaugeLength(const base::Number* const newL)
 bool TickMarks::setSlotFlip(const base::Boolean* const x)
 {
     bool ok{true};
-    if (x != nullptr) ok = setFlip(x->to_bool());
+    if (x != nullptr) ok = setFlip(x->asBool());
     return ok;
 }
 //------------------------------------------------------------------------------

@@ -2,14 +2,14 @@
 #ifndef __mixr_base_numeric_Subtract_H__
 #define __mixr_base_numeric_Subtract_H__
 
-#include "mixr/base/numeric/operators/Add.hpp"
+#include "mixr/base/numeric/operators/Operator.hpp"
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Subtract
-// Description:  Class for subtracting Numbers.
+// Class: Subtract
+// Description: Class for subtracting Numbers
 //
 // Factory name: "-"
 //
@@ -21,13 +21,15 @@ namespace base {
 //      virtual void operation()
 //          Performs the numeric operation of the class ( - ).
 //------------------------------------------------------------------------------
-class Subtract : public Add
+class Subtract final: public Operator
 {
-    DECLARE_SUBCLASS(Subtract, Add)
+    DECLARE_SUBCLASS(Subtract, Operator)
 
 public:
     Subtract();
-    void operation() override;
+
+private:
+    void operation() final;
 };
 
 }

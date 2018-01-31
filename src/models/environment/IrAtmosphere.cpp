@@ -81,7 +81,7 @@ bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        skyRadiance = num->to_double();
+        skyRadiance = num->asDouble();
         ok = true;
     }
     return ok;
@@ -94,7 +94,7 @@ bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        earthRadiance = num->to_double();
+        earthRadiance = num->asDouble();
         ok = true;
     }
     return ok;

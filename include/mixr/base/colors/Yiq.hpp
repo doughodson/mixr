@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class Number;
 
 //------------------------------------------------------------------------------
 // Class:  Yiq
@@ -59,8 +60,8 @@ public:
     enum { Y, I, Q };
 
 public:
-    Yiq(const double y, const double i, const double q);
     Yiq();
+    Yiq(const double y, const double i, const double q);
 
     double y() const;
     double i() const;

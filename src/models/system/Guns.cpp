@@ -387,7 +387,7 @@ bool Gun::setSlotNumRounds(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setMaxRounds( num->toInt() );
+      ok = setMaxRounds( num->asInt() );
    }
    return ok;
 }
@@ -397,7 +397,7 @@ bool Gun::setSlotUnlimited(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setUnlimited( num->to_bool() );
+      ok = setUnlimited( num->asBool() );
    }
    return ok;
 }
@@ -407,7 +407,7 @@ bool Gun::setSlotRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setRoundsPerMinute( num->toInt() );
+      ok = setRoundsPerMinute( num->asInt() );
    }
    return ok;
 }
@@ -417,7 +417,7 @@ bool Gun::setSlotBurstRate(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const int rate{num->toInt()};
+      const int rate{num->asInt()};
       if (rate > 0 && rate <= 20) {
          burstFrameTime = 1.0f / static_cast<double>(rate);
          ok = true;
@@ -454,7 +454,7 @@ bool Gun::setSlotRoll(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -479,7 +479,7 @@ bool Gun::setSlotPitch(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -504,7 +504,7 @@ bool Gun::setSlotYaw(const base::Number* const num)
       base::Radians radian;
       value = radian.convert(*p);
    } else if (num != nullptr) {
-      value = num->to_double();
+      value = num->asDouble();
    }
 
    if (value >= -base::PI && value <= 2.0f*base::PI) {

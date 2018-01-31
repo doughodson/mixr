@@ -243,7 +243,7 @@ bool IoHandler::setSlotPriority(const base::Number* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const double x{num->to_double()};
+        const double x{num->asDouble()};
         if (x >= 0 && x <= 1.0) {
             pri = x;
             ok = true;

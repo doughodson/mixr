@@ -85,7 +85,7 @@ bool Knob::setSlotValueTable(base::Table1* const x)
 bool Knob::setSlotEndless(const base::Boolean* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndless(x->to_bool());
+    if (x != nullptr) ok = setEndless(x->asBool());
     return ok;
 }
 
@@ -95,7 +95,7 @@ bool Knob::setSlotEndless(const base::Boolean* const x)
 bool Knob::setSlotEndlessStart(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndlessStart(x->to_double());
+    if (x != nullptr) ok = setEndlessStart(x->asDouble());
     return ok;
 }
 
@@ -105,7 +105,7 @@ bool Knob::setSlotEndlessStart(const base::Number* const x)
 bool Knob::setSlotEndlessLimit(const base::Number* const x)
 {
     bool ok = false;
-    if (x != nullptr) ok = setEndlessLimit(x->to_double());
+    if (x != nullptr) ok = setEndlessLimit(x->asDouble());
     return ok;
 }
 

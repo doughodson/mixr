@@ -120,7 +120,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const double x{num->to_double()};
+      const double x{num->asDouble()};
       ok = setBaseHeatSignature(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -139,7 +139,7 @@ bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const double x{num->to_double()};
+      const double x{num->asDouble()};
       ok = setEmissivity(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {

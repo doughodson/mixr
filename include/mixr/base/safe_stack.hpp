@@ -32,7 +32,7 @@ public:
    ~safe_stack()                                                     { delete[] stack; }
 
    unsigned int entries() const   { return (SIZE - sp); }
-   bool isEmpty() const           { return (sp == SIZE); /* Empty when stack pointer equals stack size */ }
+   bool isEmpty() const           { return (sp == SIZE); } // empty when stack pointer equals stack size
    bool isNotEmpty() const        { return !isEmpty(); }
    bool isFull() const            { return (entries() >= SIZE); }
    bool isNotFull() const         { return !isFull(); }
@@ -40,7 +40,7 @@ public:
    // Pushes an item on to the stack
    bool push(T item) {
       lock( semaphore );
-      bool ok = false;
+      bool ok{};
       if (sp > 0) {
          stack[--sp] = item;
          ok = true;
@@ -67,10 +67,10 @@ public:
 
 private:
    safe_stack<T>& operator=(safe_stack<T>&) { return *this; }
-   T* stack {};                // The Stack
-   const unsigned int SIZE {}; // Max size of the stack
-   unsigned int sp {};         // Stack pointer
-   mutable long semaphore {};  // ref(), unref() semaphore
+   T* stack{};                 // The Stack
+   const unsigned int SIZE{};  // Max size of the stack
+   unsigned int sp{};          // Stack pointer
+   mutable long semaphore{};   // ref(), unref() semaphore
 };
 
 }

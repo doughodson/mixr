@@ -170,7 +170,7 @@ bool IoData::setSlotNumAI(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
-      const int num {msg->toInt()};
+      const int num {msg->asInt()};
       if (num >= 0) setNumAI(num);
       else ok = false;
    }
@@ -182,7 +182,7 @@ bool IoData::setSlotNumAO(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
-      const int num {msg->toInt()};
+      const int num {msg->asInt()};
       if (num >= 0) setNumAO(num);
       else ok = false;
    }
@@ -194,7 +194,7 @@ bool IoData::setSlotNumDI(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
-      const int num {msg->toInt()};
+      const int num {msg->asInt()};
       if (num >= 0) setNumDI(num);
       else ok = false;
    }
@@ -206,7 +206,7 @@ bool IoData::setSlotNumDO(const base::Integer* const msg)
 {
    bool ok {true};
    if (msg != nullptr) {
-      const int num {msg->toInt()};
+      const int num {msg->asInt()};
       if (num >= 0) setNumDO(num);
       else ok = false;
    }

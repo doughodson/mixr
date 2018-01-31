@@ -513,7 +513,7 @@ bool Page::setSlotPagingEvent(base::PairStream* const peobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotDrawSubpageFirst(const base::Boolean* const spfobj)
 {
-    if (spfobj != nullptr) postDraw1 = spfobj->to_bool();
+    if (spfobj != nullptr) postDraw1 = spfobj->asBool();
     return true;
 }
 
@@ -522,7 +522,7 @@ bool Page::setSlotDrawSubpageFirst(const base::Boolean* const spfobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotFocusSlavedToSubpage(const base::Boolean* const msg)
 {
-    if (msg != nullptr) setFocusSlavedToSubpage( msg->to_bool() );
+    if (msg != nullptr) setFocusSlavedToSubpage( msg->asBool() );
     return true;
 }
 

@@ -865,7 +865,7 @@ bool ScanGimbal::setSlotLeftToRightScan(const base::Boolean* const newLeftToRigh
 {
     bool ok{};
     if (newLeftToRightScan != nullptr) {
-        const bool x{newLeftToRightScan->to_bool()};
+        const bool x{newLeftToRightScan->asBool()};
         ok = setLeftToRightScan(x);
     }
 
@@ -877,7 +877,7 @@ bool ScanGimbal::setSlotScanWidth(const base::Number* const newWidth)
 {
     bool ok{};
     if (newWidth != nullptr) {
-        const double x{newWidth->to_double()};
+        const double x{newWidth->asDouble()};
         ok = setScanWidth(x);
     }
     return ok;
@@ -912,7 +912,7 @@ bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
 {
     bool ok{};
     if (newSpacing != nullptr) {
-        const double x{newSpacing->to_double()};
+        const double x{newSpacing->asDouble()};
         ok = setBarSpacing(x);
     }
     return ok;
@@ -923,7 +923,7 @@ bool ScanGimbal::setSlotNumBars(const base::Integer* const newNumBars)
 {
     bool ok{};
     if (newNumBars != nullptr) {
-        const int temp{newNumBars->toInt()};
+        const int temp{newNumBars->asInt()};
         ok = setNumBars(temp);
     }
     return ok;
@@ -934,7 +934,7 @@ bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
 {
     bool ok{};
     if (newRevPerSec != nullptr) {
-        const double x{newRevPerSec->to_double()};
+        const double x{newRevPerSec->asDouble()};
         ok = setRevPerSec(x);
     }
     return ok;
@@ -945,7 +945,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
 {
     bool ok{};
     if (newScanRadius != nullptr) {
-        double x{newScanRadius->to_double()};
+        double x{newScanRadius->asDouble()};
         const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
             x = base::Radians::convertStatic(*aa);
@@ -999,7 +999,7 @@ bool ScanGimbal::setSlotMaxRevs(const base::Number* const newMaxRevs)
 {
     bool ok{};
     if (newMaxRevs != nullptr) {
-        const double x{newMaxRevs->to_double()};
+        const double x{newMaxRevs->asDouble()};
         ok = setMaxRevs(x);
     }
     return ok;

@@ -89,7 +89,7 @@ void DialTickMarks::drawFunc()
 bool DialTickMarks::setSlotLength(const base::Number* const newLength)
 {
     bool ok = true;
-    if (newLength != nullptr) ok = setLength(newLength->to_double());
+    if (newLength != nullptr) ok = setLength(newLength->asDouble());
     return ok;
 }
 
@@ -99,7 +99,7 @@ bool DialTickMarks::setSlotLength(const base::Number* const newLength)
 bool DialTickMarks::setSlotQuantity(const base::Integer* const newQ)
 {
     bool ok = true;
-    if (newQ != nullptr) ok = setQuantity(newQ->toInt());
+    if (newQ != nullptr) ok = setQuantity(newQ->asInt());
     return ok;
 }
 

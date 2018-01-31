@@ -170,7 +170,7 @@ bool EarthModel::setSlotA(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setA( msg->to_double() );
+      ok = setA( msg->asDouble() );
    }
    return ok;
 }
@@ -188,7 +188,7 @@ bool EarthModel::setSlotB(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setB( msg->to_double() );
+      ok = setB( msg->asDouble() );
    }
    return ok;
 }
@@ -197,7 +197,7 @@ bool EarthModel::setSlotF(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setF( msg->to_double() );
+      ok = setF( msg->asDouble() );
    }
    return ok;
 }

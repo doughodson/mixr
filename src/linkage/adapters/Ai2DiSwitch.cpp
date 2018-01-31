@@ -68,7 +68,7 @@ bool Ai2DiSwitch::setSlotLocation(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v >= 0) {
          ok = setLocation(v);
       }
@@ -81,7 +81,7 @@ bool Ai2DiSwitch::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -94,7 +94,7 @@ bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setLevel( msg->to_double() );
+      ok = setLevel( msg->asDouble() );
    }
    return ok;
 }
@@ -104,7 +104,7 @@ bool Ai2DiSwitch::setSlotInverted(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setInvertFlag( msg->to_bool() );
+      ok = setInvertFlag( msg->asBool() );
    }
    return ok;
 }

@@ -26,7 +26,7 @@ bool Number::setSlotValue(const Number* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      val = num->to_double();
+      val = num->asDouble();
       ok = true;
    }
    return ok;

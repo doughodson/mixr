@@ -101,7 +101,7 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
    } else if (s != nullptr) {
-      value = s->to_double();
+      value = s->asDouble();
    }
    radius = value;
    return true;

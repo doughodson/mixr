@@ -142,7 +142,7 @@ bool Latitude::setSlotDirection(const Identifier* const x)
 {
    bool ok{};
    if (x != nullptr) {
-      ok = setDirection(x->to_string());
+      ok = setDirection(x->asString());
    }
    return ok;
 }
@@ -151,7 +151,7 @@ bool Latitude::setSlotDirection(const Identifier* const x)
 bool Latitude::setSlotDegrees(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setDeg(x->to_double());
+   if (x != nullptr) ok = setDeg(x->asDouble());
    return ok;
 }
 
@@ -159,14 +159,14 @@ bool Latitude::setSlotDegrees(const Number* const x)
 bool Latitude::setSlotMinutes(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setMin(x->to_double());
+   if (x != nullptr) ok = setMin(x->asDouble());
    return ok;
 }
 
 bool Latitude::setSlotSeconds(const Number* const x)
 {
    bool ok{};
-   if (x != nullptr) ok = setSec(x->to_double());
+   if (x != nullptr) ok = setSec(x->asDouble());
    return ok;
 }
 

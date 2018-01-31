@@ -93,7 +93,7 @@ bool Adi::setSlotMaxRate(const base::Angle* const newMR)
 bool Adi::setSlotMaxRate(const base::Number* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate(newMR->to_double());
+    if (newMR != nullptr) ok = setMaxRate(newMR->asDouble());
     return ok;
 }
 
@@ -105,7 +105,7 @@ bool Adi::setSlotMaxRate(const base::Number* const newMR)
 bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 {
     bool ok = false;
-    if (newR != nullptr) ok = setRollDeg(newR->to_double());
+    if (newR != nullptr) ok = setRollDeg(newR->asDouble());
     return ok;
 }
 
@@ -115,7 +115,7 @@ bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 {
     bool ok = false;
-    if (newR != nullptr) ok = setRollRad(newR->to_double());
+    if (newR != nullptr) ok = setRollRad(newR->asDouble());
     return ok;
 }
 
@@ -125,7 +125,7 @@ bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 {
     bool ok = false;
-    if (newP != nullptr) ok = setPitch(newP->to_double());
+    if (newP != nullptr) ok = setPitch(newP->asDouble());
     return ok;
 }
 
@@ -135,7 +135,7 @@ bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate(newMR->to_double());
+    if (newMR != nullptr) ok = setMaxRate(newMR->asDouble());
     return ok;
 }
 

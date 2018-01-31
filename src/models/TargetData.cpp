@@ -124,7 +124,7 @@ bool TargetData::setSlotEnabled(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setEnabled(msg->to_bool());
+      ok = setEnabled(msg->asBool());
    }
    return ok;
 }
@@ -134,7 +134,7 @@ bool TargetData::setSlotCompleted(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setCompleted(msg->to_bool());
+      ok = setCompleted(msg->asBool());
    }
    return ok;
 }
@@ -149,9 +149,9 @@ bool TargetData::setSlotQuantity(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 0) {
-         ok = setQuantity(static_cast<unsigned int>(msg->toInt()));
+         ok = setQuantity(static_cast<unsigned int>(msg->asInt()));
       }
    }
    return ok;
@@ -161,7 +161,7 @@ bool TargetData::setSlotManualAssign(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setManualAssign(msg->to_bool());
+      ok = setManualAssign(msg->asBool());
    }
    return ok;
 }
@@ -195,7 +195,7 @@ bool TargetData::setSlotStickDistance(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setStickDistance(msg->to_double());
+      ok = setStickDistance(msg->asDouble());
    }
    return ok;
 }
@@ -213,7 +213,7 @@ bool TargetData::setSlotInterval(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setInterval(msg->to_double());
+      ok = setInterval(msg->asDouble());
    }
    return ok;
 }
@@ -231,7 +231,7 @@ bool TargetData::setSlotMaxMissDistance(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setMaxMissDistance(msg->to_double());
+      ok = setMaxMissDistance(msg->asDouble());
    }
    return ok;
 }
@@ -249,7 +249,7 @@ bool TargetData::setSlotArmDelay(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setArmDelay(msg->to_double());
+      ok = setArmDelay(msg->asDouble());
    }
    return ok;
 }
@@ -267,7 +267,7 @@ bool TargetData::setSlotAngle(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setAngle(msg->to_double());
+      ok = setAngle(msg->asDouble());
    }
    return ok;
 }
@@ -285,7 +285,7 @@ bool TargetData::setSlotAzimuth(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setAzimuth(msg->to_double());
+      ok = setAzimuth(msg->asDouble());
    }
    return ok;
 }
@@ -294,7 +294,7 @@ bool TargetData::setSlotVelocity(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setVelocity(msg->to_double());
+      ok = setVelocity(msg->asDouble());
    }
    return ok;
 }

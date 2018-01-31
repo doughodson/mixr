@@ -83,7 +83,7 @@ bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
             if (pair != nullptr) {
                 const auto n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
-                    myValues[numVals] = n->to_double();
+                    myValues[numVals] = n->asDouble();
                     numVals++;
                 }
             }

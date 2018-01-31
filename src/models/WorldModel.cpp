@@ -277,7 +277,7 @@ bool WorldModel::setSlotRefLatitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setRefLatitude(msg->to_double());
+        ok = setRefLatitude(msg->asDouble());
     }
     return ok;
 }
@@ -295,7 +295,7 @@ bool WorldModel::setSlotRefLongitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ok = setRefLongitude(msg->to_double());
+        ok = setRefLongitude(msg->asDouble());
     }
     return ok;
 }
@@ -317,7 +317,7 @@ bool WorldModel::setSlotEarthModel(const base::EarthModel* const msg)
 bool WorldModel::setSlotEarthModel(const base::Identifier* const msg)
 {
    bool ok{};
-   if (msg != nullptr && msg->to_string().length() > 0) {
+   if (msg != nullptr && msg->asString().length() > 0) {
       const base::EarthModel* p{base::EarthModel::getEarthModel((*msg).c_str())};
       if (p != nullptr) {
          // found the earth model
@@ -337,7 +337,7 @@ bool WorldModel::setSlotGamingAreaEarthModel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setGamingAreaUseEarthModel(msg->to_bool());
+      ok = setGamingAreaUseEarthModel(msg->asBool());
    }
    return ok;
 }

@@ -303,7 +303,7 @@ void NumericReadout::reformat(const char* const example)
 bool NumericReadout::onUpdateValue(const base::Float* const ouvobj)
 {
    if (ouvobj != nullptr) {
-      setValue(ouvobj->to_double());
+      setValue(ouvobj->asDouble());
    }
    return true;
 }
@@ -312,7 +312,7 @@ bool NumericReadout::onUpdateValue(const base::Float* const ouvobj)
 bool NumericReadout::onUpdateValue(const base::Integer* const ouvobj)
 {
    if (ouvobj != nullptr) {
-      setValue(ouvobj->toInt());
+      setValue(ouvobj->asInt());
    }
    return true;
 }
@@ -321,7 +321,7 @@ bool NumericReadout::onUpdateValue(const base::Integer* const ouvobj)
 bool NumericReadout::onUpdateValue(const base::Number* const ouvobj)
 {
    if (ouvobj != nullptr) {
-      setValue(ouvobj->to_double());
+      setValue(ouvobj->asDouble());
    }
    return true;
 }
@@ -330,7 +330,7 @@ bool NumericReadout::setSlotFloatToBeDisplayed(const base::Float* const x)
 {
    bool ok{true};
    if (x != nullptr) {
-      setValue(x->to_double());
+      setValue(x->asDouble());
       ok = true;
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
@@ -345,7 +345,7 @@ bool NumericReadout::setSlotIntegerToBeDisplayed(const base::Integer* const x)
 {
    bool ok{true};
    if (x != nullptr) {
-      setValue(x->toInt());
+      setValue(x->asInt());
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setNumberToBeDisplayed: \"value\" must be a number!" << std::endl;
@@ -359,7 +359,7 @@ bool NumericReadout::setSlotFloatMaxValue(const base::Float* const x)
 {
    bool ok{true};
    if (x != nullptr) {
-      setMaxValue(x->to_double());
+      setMaxValue(x->asDouble());
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setFloatMaxValue: \"maxValue\" must be a number!" << std::endl;
@@ -373,7 +373,7 @@ bool NumericReadout::setSlotIntegerMaxValue(const base::Integer* const x)
 {
    bool ok{true};
    if (x != nullptr) {
-      setMaxValue(x->toInt());
+      setMaxValue(x->asInt());
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setNumberMaxValue: \"maxValue\" must be a number!" << std::endl;
@@ -471,7 +471,7 @@ bool NumericReadout::setSlotMaxValid(const base::Number* const msg)
 {
    bool ok{true};
    if (msg != nullptr) {
-      maxValid = msg->to_double();
+      maxValid = msg->asDouble();
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setSlotMaxValid: \"maxValid\" must be a number!" << std::endl;
@@ -486,7 +486,7 @@ bool NumericReadout::setSlotMinValid(const base::Number* const msg)
 {
    bool ok{true};
    if (msg != nullptr) {
-      minValid = msg->to_double();
+      minValid = msg->asDouble();
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setSlotMinValid: \"minValid\" must be a number!" << std::endl;
@@ -501,7 +501,7 @@ bool NumericReadout::setSlotBlankZero(const base::Boolean* const msg)
 {
    bool ok{true};
    if (msg != nullptr) {
-      blankZero = msg->to_bool();
+      blankZero = msg->asBool();
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "NumericReadout::setSlotMinValid: \"blankZero\" must be a number!" << std::endl;

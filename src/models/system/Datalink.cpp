@@ -487,7 +487,7 @@ bool Datalink::setSlotRadioId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 0 && v <= 0xffff) {
          radioId = static_cast<unsigned short>(v);
          useRadioIdFlg = true;

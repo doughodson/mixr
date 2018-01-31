@@ -63,7 +63,7 @@ bool SolenoidButton::onSingleClick()
 
 bool SolenoidButton::onPicked(const base::Boolean* const x)
 {
-    if (x != nullptr) pushed = x->to_bool();
+    if (x != nullptr) pushed = x->asBool();
     return true;
 }
 

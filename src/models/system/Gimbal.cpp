@@ -1096,7 +1096,7 @@ bool Gimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setTerrainOccultingEnabled(msg->to_bool());
+      ok = setTerrainOccultingEnabled(msg->asBool());
    }
    return ok;
 }
@@ -1106,7 +1106,7 @@ bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setHorizonCheckEnabled(msg->to_bool());
+      ok = setHorizonCheckEnabled(msg->asBool());
    }
    return ok;
 }
@@ -1156,7 +1156,7 @@ bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setMaxPlayersOfInterest( msg->toInt() );
+      ok = setMaxPlayersOfInterest( msg->asInt() );
    }
    return ok;
 }
@@ -1188,7 +1188,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setLocalPlayersOfInterestOnly(msg->to_bool());
+      ok = setLocalPlayersOfInterestOnly(msg->asBool());
    }
    return ok;
 }
@@ -1198,7 +1198,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUseWorld(msg->to_bool());
+      ok = setUseWorld(msg->asBool());
    }
    return ok;
 }
@@ -1208,7 +1208,7 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setOwnHeadingOnly(msg->to_bool());
+      ok = setOwnHeadingOnly(msg->asBool());
    }
    return ok;
 }

@@ -40,7 +40,7 @@ public:
    // Puts an item at the back of the queue.
    bool put(T item) {
       lock( semaphore );
-      bool ok = false;
+      bool ok{};
       if (n < SIZE) {
          // Put item in the queue
          queue[in++] = item;
@@ -55,13 +55,12 @@ public:
    // Gets an item from the front of the queue
    T get() {
       lock( semaphore );
-      T p = 0;
+      T p{};
       if (!isEmpty()) {
          // Get item out of the queue
          if (in >= n) {
             p = queue[in - n];
-         }
-         else {
+         } else {
             p = queue[SIZE + in - n];
          }
          n--;
@@ -75,14 +74,13 @@ public:
    // the queue (i.e. at the next get()).
    T peek0(unsigned int idx = 0) {
       lock( semaphore );
-      T p = 0;
+      T p{};
       if (idx < n) {
-         unsigned int j = n - idx;
+         unsigned int j{n - idx};
          // Get item out of the queue
          if (in >= j) {
             p = queue[in - j];
-         }
-         else {
+         } else {
             p = queue[SIZE + in - j];
          }
       }
@@ -100,11 +98,11 @@ public:
 
 private:
    safe_queue<T>& operator=(safe_queue<T>&) { return *this; }
-   T* queue {};                // The Queue
-   const unsigned int SIZE {}; // Max size of the queue
-   unsigned int in {};         // In (put) Index
-   unsigned int n {};          // Number of items in queue
-   mutable long semaphore {};  // semaphore
+   T* queue{};                 // The Queue
+   const unsigned int SIZE{};  // Max size of the queue
+   unsigned int in{};          // In (put) Index
+   unsigned int n{};           // Number of items in queue
+   mutable long semaphore{};   // semaphore
 };
 
 }

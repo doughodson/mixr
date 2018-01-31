@@ -193,7 +193,7 @@ int AbstractFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const 
 //------------------------------------------------------------------------------
 bool AbstractFont::setSlotFontWidth(const base::Number* const sfwobj)
 {
-    if (sfwobj != nullptr) setFontWidth( sfwobj->to_double() );
+    if (sfwobj != nullptr) setFontWidth( sfwobj->asDouble() );
     return true;
 }
 
@@ -202,7 +202,7 @@ bool AbstractFont::setSlotFontWidth(const base::Number* const sfwobj)
 //------------------------------------------------------------------------------
 bool AbstractFont::setSlotFontHeight (const base::Number* const sfhobj)
 {
-    if (sfhobj != nullptr) setFontHeight( sfhobj->to_double() );
+    if (sfhobj != nullptr) setFontHeight( sfhobj->asDouble() );
     return true;
 }
 
@@ -232,7 +232,7 @@ bool AbstractFont::setSlotFontPosition (const base::List* const sfpobj)
 //------------------------------------------------------------------------------
 bool AbstractFont::setSlotBitmapWidth(const base::Integer* const sbwobj)
 {
-    if (sbwobj != nullptr) setBitmapWidth( sbwobj->toInt() );
+    if (sbwobj != nullptr) setBitmapWidth( sbwobj->asInt() );
     return true;
 }
 
@@ -241,7 +241,7 @@ bool AbstractFont::setSlotBitmapWidth(const base::Integer* const sbwobj)
 //------------------------------------------------------------------------------
 bool AbstractFont::setSlotBitmapHeight(const base::Integer* const sbhobj)
 {
-    if (sbhobj != nullptr) setBitmapHeight( sbhobj->toInt() );
+    if (sbhobj != nullptr) setBitmapHeight( sbhobj->asInt() );
     return true;
 }
 
@@ -324,14 +324,14 @@ bool AbstractFont::setSlotLookupTable(const base::List* const sltobj)
 bool AbstractFont::setSlotCharacterSpacing(const base::Number* const newCharSpacing)
 {
     // set our character spacing
-    if (newCharSpacing != nullptr) setCharacterSpacing( newCharSpacing->to_double() );
+    if (newCharSpacing != nullptr) setCharacterSpacing( newCharSpacing->asDouble() );
     return true;
 }
 
 bool AbstractFont::setSlotLineSpacing(const base::Number* const newLineSpacing)
 {
     // set our line spacing
-    if (newLineSpacing != nullptr) setLineSpacing( newLineSpacing->to_double() );
+    if (newLineSpacing != nullptr) setLineSpacing( newLineSpacing->asDouble() );
     return true;
 }
 

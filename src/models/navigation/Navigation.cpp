@@ -838,7 +838,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             } else {
-                                values[n++] = pNum->to_double();
+                                values[n++] = pNum->asDouble();
                             }
                         }
                     }
@@ -854,7 +854,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             } else {
-                                values[n++] = pNum->to_double();
+                                values[n++] = pNum->asDouble();
                             }
                         }
                     }

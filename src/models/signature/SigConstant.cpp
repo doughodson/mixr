@@ -61,7 +61,7 @@ bool SigConstant::setRCS(const base::Number* const num)
         r = m2.convert(*d);
     } else if (num != nullptr) {
         // square meters (Number or Decibel)
-        r = num->to_double();
+        r = num->asDouble();
     }
 
     if (r >= 0.0) { rcs = r; ok = true; }

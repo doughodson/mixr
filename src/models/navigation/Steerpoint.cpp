@@ -361,7 +361,7 @@ bool Steerpoint::setSlotLatitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLatitude = msg->to_double();
+        initLatitude = msg->asDouble();
         haveInitLat = true;
         setLatitude( initLatitude );
         ok = true;
@@ -383,7 +383,7 @@ bool Steerpoint::setSlotLongitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initLongitude = msg->to_double();
+        initLongitude = msg->asDouble();
         haveInitLon = true;
         setLongitude( initLongitude );
         ok = true;
@@ -452,7 +452,7 @@ bool Steerpoint::setSlotElevation(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initElev = msg->to_double();
+        initElev = msg->asDouble();
         elevation  = initElev;
         initPosVec[Player::IDOWN] = -initElev;
         posVec[Player::IDOWN] = -initElev;
@@ -476,7 +476,7 @@ bool Steerpoint::setSlotPTA(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes seconds
-        setPTA( msg->to_double() );
+        setPTA( msg->asDouble() );
         ok = true;
     }
     return ok;
@@ -495,7 +495,7 @@ bool Steerpoint::setSlotSCA(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes feet
-        setSCA( msg->to_double() );
+        setSCA( msg->asDouble() );
         ok = true;
     }
     return ok;
@@ -526,7 +526,7 @@ bool Steerpoint::setSlotMagVar(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // assumes degrees
-        initMagVar = msg->to_double();
+        initMagVar = msg->asDouble();
         haveInitMagVar = true;
         ok = true;
     }
@@ -549,7 +549,7 @@ bool Steerpoint::setSlotCmdAltitude(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initCmdAlt = msg->to_double();
+        initCmdAlt = msg->asDouble();
         haveInitCmdAlt = true;
         setCmdAltitude(initCmdAlt);
         ok = true;
@@ -561,7 +561,7 @@ bool Steerpoint::setSlotCmdAirspeed(const base::Number* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initCmdAirspeed = msg->to_double();
+        initCmdAirspeed = msg->asDouble();
         haveInitCmdAs = true;
         setCmdAirspeedKts(initCmdAirspeed);
         ok = true;
@@ -583,7 +583,7 @@ bool Steerpoint::setSlotNext(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initNextStptIdx = msg->toInt();
+        initNextStptIdx = msg->asInt();
         ok = true;
     }
     return ok;

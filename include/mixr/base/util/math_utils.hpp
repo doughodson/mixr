@@ -36,7 +36,7 @@ inline int nintd(const double x)
 }
 
 // ---
-// Floating point equality functions
+// floating point equality functions
 // Returns true if two values differ by less than an (optional) epsilon.
 // ---
 const double _EPSILON_DOUBLE_ = 1e-12;

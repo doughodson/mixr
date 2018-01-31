@@ -170,7 +170,7 @@ void RfSensor::reset()
 bool RfSensor::onStartScanEvent(const base::Integer* const bar)
 {
     scanning = true;
-    scanBar = bar->toInt();
+    scanBar = bar->asInt();
     return true;
 }
 
@@ -428,7 +428,7 @@ bool RfSensor::setSlotInitRangeIdx(base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        ok = setInitRngIdx(num->toInt());
+        ok = setInitRngIdx(num->asInt());
     }
     return ok;
 }
@@ -473,7 +473,7 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 
    if (msg != nullptr) {
       // Standard base::Number
-      const double x{msg->to_double()};
+      const double x{msg->asDouble()};
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -509,7 +509,7 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
    bool ok{};
 
    if (msg != nullptr) {
-      ok = setPulseWidth( msg->to_double() );
+      ok = setPulseWidth( msg->asDouble() );
       if (!ok) {
          std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
       }
@@ -544,7 +544,7 @@ bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
    bool ok{};
 
    if (msg != nullptr) {
-      ok = setBeamWidth( msg->to_double() );
+      ok = setBeamWidth( msg->asDouble() );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
@@ -571,7 +571,7 @@ bool RfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      syncXmitWithScan = msg->to_bool();
+      syncXmitWithScan = msg->asBool();
       ok = true;
    }
    return ok;
@@ -638,7 +638,7 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 // we'll lookup the actual track manager in reset() later
 bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
-    return setTrackManagerName(v->to_string());
+    return setTrackManagerName(v->asString());
 }
 
 //------------------------------------------------------------------------------

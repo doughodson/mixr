@@ -47,7 +47,7 @@ bool AnalogInputFixed::setSlotChannel(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v = msg->toInt();
+      const int v = msg->asInt();
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -59,7 +59,7 @@ bool AnalogInputFixed::setSlotValue(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setValue(msg->to_double());
+      ok = setValue(msg->asDouble());
    }
    return ok;
 }

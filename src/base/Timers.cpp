@@ -182,7 +182,7 @@ bool Timer::setSlotTimerActive(const Boolean* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      active = msg->to_bool();
+      active = msg->asBool();
       ok = true;
    }
    return ok;

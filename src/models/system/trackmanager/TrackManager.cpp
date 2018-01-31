@@ -379,7 +379,7 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const int max{num->toInt()};
+      const int max{num->asInt()};
       if (max > 0 && max <= static_cast<int>(MAX_TRKS)) {
          maxTrks = static_cast<unsigned int>(max);
          ok = true;
@@ -403,7 +403,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
       age = seconds.convert(*p);
    } else if (num != nullptr) {
       // We have only a number, assume it's in seconds ...
-      age = num->to_double();
+      age = num->asDouble();
    }
 
    // Set the value if it's valid
@@ -424,7 +424,7 @@ bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      int first{num->toInt()};
+      int first{num->asInt()};
       if (first >= 0) {
          firstTrkId = static_cast<unsigned int>(first);
          nextTrkId = firstTrkId;
@@ -444,7 +444,7 @@ bool TrackManager::setSlotAlpha(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      alpha = msg->to_double();
+      alpha = msg->asDouble();
    }
    return ok;
 }
@@ -457,7 +457,7 @@ bool TrackManager::setSlotBeta(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      beta = msg->to_double();
+      beta = msg->asDouble();
    }
    return ok;
 }
@@ -470,7 +470,7 @@ bool TrackManager::setSlotGamma(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = true;
-      gamma = msg->to_double();
+      gamma = msg->asDouble();
    }
    return ok;
 }
@@ -482,7 +482,7 @@ bool TrackManager::setSlotLogTrackUpdates(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setLogTrackUpdates( num->to_bool() );
+      ok = setLogTrackUpdates( num->asBool() );
    }
    return ok;
 }

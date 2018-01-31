@@ -146,7 +146,7 @@ bool SigAzEl::setSlotSwapOrder(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setSwapOrder( msg->to_bool() );
+      ok = setSwapOrder( msg->asBool() );
    }
    return ok;
 }
@@ -155,7 +155,7 @@ bool SigAzEl::setSlotInDegrees(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setInDegrees( msg->to_bool() );
+      ok = setInDegrees( msg->asBool() );
    }
    return ok;
 }
@@ -164,7 +164,7 @@ bool SigAzEl::setSlotDecibel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDecibel( msg->to_bool() );
+      ok = setDecibel( msg->asBool() );
    }
    return ok;
 }

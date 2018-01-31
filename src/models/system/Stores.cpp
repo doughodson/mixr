@@ -511,7 +511,7 @@ bool Stores::setSlotNumStations(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 1 && v <= MAX_STATIONS) {
          ok = setNumberOfStations( static_cast<unsigned int>(v) );
       } else {
@@ -643,7 +643,7 @@ bool Stores::setSlotSelected(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 1 && v <= static_cast<int>(ns)) {
          ok = selectStation( static_cast<unsigned int>(v) );
       } else if (ns == 0) {

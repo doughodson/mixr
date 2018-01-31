@@ -541,7 +541,7 @@ bool CollisionDetect::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int n{msg->toInt()};
+      const int n{msg->asInt()};
       if (n >= 0) {
          ok = setMaxPlayers( static_cast<unsigned int>(n) );
       }
@@ -610,7 +610,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setUseWorld( msg->to_bool() );
+      ok = setUseWorld( msg->asBool() );
    }
    return ok;
 }
@@ -619,7 +619,7 @@ bool CollisionDetect::setSlotLocalOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setLocalOnly( msg->to_bool() );
+      ok = setLocalOnly( msg->asBool() );
    }
    return ok;
 }
@@ -628,7 +628,7 @@ bool CollisionDetect::setSlotSendCrashEvents(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setSendCrashEventsEnabled( msg->to_bool() );
+      ok = setSendCrashEventsEnabled( msg->asBool() );
    }
    return ok;
 }

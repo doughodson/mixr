@@ -219,7 +219,7 @@ bool EmissionPduHandler::setSlotEmitterName(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int i = msg->toInt();
+      const int i = msg->asInt();
       if (i >= 0 && i <= 0xffff) {
          ok = setEmitterName( static_cast<unsigned short>(i) );
       }
@@ -232,7 +232,7 @@ bool EmissionPduHandler::setSlotEmitterFunction(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int i = msg->toInt();
+      const int i = msg->asInt();
       if (i >= 0 && i <= 0xff) {
          ok = setEmitterFunction( static_cast<unsigned char>(i) );
       }
@@ -256,7 +256,7 @@ bool EmissionPduHandler::setSlotDefaultIn(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDefaultIn( msg->to_bool() );
+      ok = setDefaultIn( msg->asBool() );
    }
    return ok;
 }
@@ -265,7 +265,7 @@ bool EmissionPduHandler::setSlotDefaultOut(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setDefaultOut( msg->to_bool() );
+      ok = setDefaultOut( msg->asBool() );
    }
    return ok;
 }
@@ -411,7 +411,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
          // DPG ### Setting peak power to the effected radiated power from the PDU,
          // so our transmitter loss and antenna gain should both be set to 0 dB (real 1.0).
          base::Decibel db( bd->parameterData.effectiveRadiatedPower  );  // dBm (dB milliwatts)
-         rfSys->setPeakPower( db.to_double() / 1000.0 );
+         rfSys->setPeakPower( db.asDouble() / 1000.0 );
 
          rfSys->setPRF( bd->parameterData.pulseRepetitiveFrequency );
          rfSys->setPulseWidth( bd->parameterData.pulseWidth / 1000000.0f );

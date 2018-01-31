@@ -38,7 +38,7 @@ bool Limit::setSlotLowerLimit(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setLowerLimit( msg->to_double() );
+      setLowerLimit( msg->asDouble() );
       ok = true;
    }
    return ok;
@@ -48,7 +48,7 @@ bool Limit::setSlotUpperLimit(const base::Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      setUpperLimit( msg->to_double() );
+      setUpperLimit( msg->asDouble() );
       ok = true;
    }
    return ok;

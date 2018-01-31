@@ -62,7 +62,7 @@ bool SigSphere::setSlotRadius(base::Number* const num)
         r = meters.convert(*d);
     } else if (num != nullptr) {
         // Just a Number
-        r = num->to_double();
+        r = num->asDouble();
     }
 
     if (r >= 0.0) { setRadius(r); ok = true; }

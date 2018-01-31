@@ -533,7 +533,7 @@ bool Radar::setSlotIGain(base::Number* const v)
 {
    bool ok{};
    if (v != nullptr) {
-      const double g{v->to_double()};
+      const double g{v->asDouble()};
       if (g >= 1.0) {
          ok = setIGain(g);
       } else {

@@ -3435,7 +3435,7 @@ bool Player::setSlotInitXPos(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[INORTH] = msg->to_double();
+      pos[INORTH] = msg->asDouble();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3459,7 +3459,7 @@ bool Player::setSlotInitYPos(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[IEAST] = msg->to_double();
+      pos[IEAST] = msg->asDouble();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3482,7 +3482,7 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      double value{msg->to_double()};
+      double value{msg->asDouble()};
       setInitAltitude( value );
       ok = true;
    }
@@ -3538,7 +3538,7 @@ bool Player::setSlotInitLat(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->to_double()};
+      const double val{msg->asDouble()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3583,7 +3583,7 @@ bool Player::setSlotInitLon(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{msg->to_double()};
+      const double val{msg->asDouble()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3628,7 +3628,7 @@ bool Player::setSlotInitRoll(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{msg->to_double()};
+      const double value{msg->asDouble()};
       if ( value >= -(2.0*base::PI) && value <= (2.0*base::PI) ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3662,7 +3662,7 @@ bool Player::setInitPitch(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{msg->to_double()};
+      const double value{msg->asDouble()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3697,7 +3697,7 @@ bool Player::setInitHeading(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      double value{msg->to_double()};
+      double value{msg->asDouble()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
@@ -3776,7 +3776,7 @@ bool Player::setSlotTestBodyAxis(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      testBodyAxis = msg->to_bool();
+      testBodyAxis = msg->asBool();
       ok = true;
    }
    return ok;
@@ -3788,7 +3788,7 @@ bool Player::setSlotInitVelocity(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      initVp = msg->to_double();
+      initVp = msg->asDouble();
       ok = true;
    }
    return ok;
@@ -3799,7 +3799,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      initVp = (msg->to_double() * mixr::base::distance::NM2M) / 3600.0f;
+      initVp = (msg->asDouble() * mixr::base::distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -3885,7 +3885,7 @@ bool Player::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int ii{msg->toInt()};
+      const int ii{msg->asInt()};
       if (ii >= 0) {
          ok = setCamouflageType( ii );
       }
@@ -3898,7 +3898,7 @@ bool Player::setSlotTerrainElevReq(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setTerrainElevationRequired(num->to_bool());
+      ok = setTerrainElevationRequired(num->asBool());
    }
    return ok;
 }
@@ -3908,7 +3908,7 @@ bool Player::setSlotInterpolateTerrain(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setInterpolateTerrain(msg->to_bool());
+      ok = setInterpolateTerrain(msg->asBool());
    }
    return ok;
 }
@@ -3928,7 +3928,7 @@ bool Player::setSlotPositionFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setPositionFreeze( num->to_bool() );
+      ok = setPositionFreeze( num->asBool() );
    }
    return ok;
 }
@@ -3938,7 +3938,7 @@ bool Player::setSlotAltitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setAltitudeFreeze( num->to_bool() );
+      ok = setAltitudeFreeze( num->asBool() );
    }
    return ok;
 }
@@ -3948,7 +3948,7 @@ bool Player::setSlotAttitudeFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setAttitudeFreeze( num->to_bool() );
+      ok = setAttitudeFreeze( num->asBool() );
    }
    return ok;
 }
@@ -3958,7 +3958,7 @@ bool Player::setSlotFuelFreeze(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setFuelFreeze( num->to_bool() );
+      ok = setFuelFreeze( num->asBool() );
    }
    return ok;
 }
@@ -3968,7 +3968,7 @@ bool Player::setSlotCrashOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setCrashOverride( num->to_bool() );
+      ok = setCrashOverride( num->asBool() );
    }
    return ok;
 }
@@ -3978,7 +3978,7 @@ bool Player::setSlotKillOverride(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      ok = setKillOverride( num->to_bool() );
+      ok = setKillOverride( num->asBool() );
    }
    return ok;
 }
@@ -3988,7 +3988,7 @@ bool Player::setSlotKillRemoval(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setKillRemoval( msg->to_bool() );
+      ok = setKillRemoval( msg->asBool() );
    }
    return ok;
 }
@@ -3998,7 +3998,7 @@ bool Player::setSlotEnableNetOutput(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setEnableNetOutput(msg->to_bool());
+      ok = setEnableNetOutput(msg->asBool());
    }
    return ok;
 }

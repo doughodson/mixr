@@ -414,42 +414,42 @@ bool Bomb::setSlotArmingOption(base::Identifier* const p)
 // noseFuze: Nose fuze flag
 bool Bomb::setSlotNoseFuze(base::Boolean* const p)
 {
-    setNoseFuze( p->to_bool() );
+    setNoseFuze( p->asBool() );
     return true;
 }
 
 // midFuze: Middle fuze flag
 bool Bomb::setSlotMidFuze(base::Boolean* const p)
 {
-    setMidFuze( p->to_bool() );
+    setMidFuze( p->asBool() );
     return true;
 }
 
 // tailFuze: Tail fuze flag
 bool Bomb::setSlotTailFuze(base::Boolean* const p)
 {
-    setTailFuze( p->to_bool() );
+    setTailFuze( p->asBool() );
     return true;
 }
 
 // fuzeAltitude:  Fuze arming Altitude
 bool Bomb::setSlotFuzeAltitude(base::Number* const p)
 {
-    setFuzeAltitude( p->to_double() );
+    setFuzeAltitude( p->asDouble() );
     return true;
 }
 
 // fuzeTime:  Fuze Arming Time
 bool Bomb::setSlotFuzeTime(base::Number* const p)
 {
-    setFuzeTime( p->to_double() );
+    setFuzeTime( p->asDouble() );
     return true;
 }
 
 // dragIndex: drag index used by default dynamics
 bool Bomb::setSlotDragIndex(base::Number* const p)
 {
-    setDragIndex( p->to_double() );
+    setDragIndex( p->asDouble() );
     return true;
 }
 

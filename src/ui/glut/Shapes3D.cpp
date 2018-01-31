@@ -265,7 +265,7 @@ void Teapot::drawFunc()
 bool Sphere::setSlotStacks(const base::Integer* const x)
 {
     bool ok {};
-    if (x != nullptr) ok = setStacks(x->toInt());
+    if (x != nullptr) ok = setStacks(x->asInt());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ bool Sphere::setSlotStacks(const base::Integer* const x)
 bool Cylinder::setSlotTopRadius(const base::Number* const x)
 {
     bool ok {};
-    if (x != nullptr) ok = setTopRadius(x->to_double());
+    if (x != nullptr) ok = setTopRadius(x->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ bool Cylinder::setSlotTopRadius(const base::Number* const x)
 bool Cylinder::setSlotHeight(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setHeight(x->to_double());
+    if (x != nullptr) ok = setHeight(x->asDouble());
     return ok;
 }
 
@@ -293,7 +293,7 @@ bool Cylinder::setSlotHeight(const base::Number* const x)
 bool Cube::setSlotSize(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setSize(x->to_double());
+    if (x != nullptr) ok = setSize(x->asDouble());
     return ok;
 }
 
@@ -303,7 +303,7 @@ bool Cube::setSlotSize(const base::Number* const x)
 bool Torus::setSlotOuterRadius(const base::Number* const x)
 {
     bool ok{};
-    if (x != nullptr) ok = setOuterRadius(x->to_double());
+    if (x != nullptr) ok = setOuterRadius(x->asDouble());
     return ok;
 }
 

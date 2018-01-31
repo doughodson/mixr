@@ -184,7 +184,7 @@ bool TcpClient::setSlotIpAddress(const Identifier* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        ipAddr = msg->to_string();
+        ipAddr = msg->asString();
         ok = true;
     }
     return ok;

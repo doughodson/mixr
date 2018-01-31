@@ -9,7 +9,7 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Float
+// Class: Float
 //
 // Description:  Class for float numbers.
 //
@@ -38,7 +38,7 @@ namespace base {
 //      Input/Output stream operators: >>  <<
 //          Are C++ equivalents.
 //------------------------------------------------------------------------------
-class Float : public Number
+class Float final: public Number
 {
     DECLARE_SUBCLASS(Float, Number)
 
@@ -105,19 +105,19 @@ inline void Float::operator+=(const double n)
 // Add vals of Float instances n1 & n2 and return the sum
 inline double operator+(const Float& n1, const Float& n2)
 {
-    return n1.to_double() + n2.to_double();
+    return n1.asDouble() + n2.asDouble();
 }
 
 // Add value n1 to val of Float n2 and return the sum
 inline double operator+(const double n1, const Float& n2)
 {
-    return n1 + n2.to_double();
+    return n1 + n2.asDouble();
 }
 
 // Add value n2 to val of Float n1 and return the sum
 inline double operator+(const Float& n1, const double n2)
 {
-    return n1.to_double() + n2;
+    return n1.asDouble() + n2;
 }
 
 
@@ -137,19 +137,19 @@ inline void Float::operator-=(const double n)
 // Subtract the vals of Float instances n1 & n2 and return the difference
 inline double operator-(const Float& n1, const Float& n2)
 {
-    return n1.to_double() - n2.to_double();
+    return n1.asDouble() - n2.asDouble();
 }
 
 // Subtract value n1 from val of Float n2 and return the difference
 inline double operator-(const double n1, const Float& n2)
 {
-    return n1 - n2.to_double();
+    return n1 - n2.asDouble();
 }
 
 // Subtract value n2 from val of Float n1 and return the difference
 inline double operator-(const Float& n1, const double n2)
 {
-    return n1.to_double() - n2;
+    return n1.asDouble() - n2;
 }
 
 
@@ -169,19 +169,19 @@ inline void Float::operator*=(const double n)
 // Multiply the vals of Float instances n1 & n2 and return the sum
 inline double operator*(const Float& n1, const Float& n2)
 {
-    return n1.to_double() * n2.to_double();
+    return n1.asDouble() * n2.asDouble();
 }
 
 // Multiply value n1 to val of Float n2 and return the sum
 inline double operator*(const double n1, const Float& n2)
 {
-    return n1 * n2.to_double();
+    return n1 * n2.asDouble();
 }
 
 // Multiply value n2 to val of Float n1 and return the sum
 inline double operator*(const Float& n1, const double n2)
 {
-    return n1.to_double() * n2;
+    return n1.asDouble() * n2;
 }
 
 
@@ -192,8 +192,7 @@ inline void Float::operator/=(const Float& n)
 {
     if (n.val != 0.0f) {
         val /= n.val;
-    }
-    else {
+    } else {
         std::cerr << "Float::operator/=(): Divide by zero!" << std::endl;
         val = 0.0f;
     }
@@ -203,8 +202,7 @@ inline void Float::operator/=(const double n)
 {
     if (n != 0.0f) {
         val /= n;
-    }
-    else {
+    } else {
         std::cerr << "Float::operator/=(): Divide by zero!" << std::endl;
         val = 0.0f;
     }
@@ -215,11 +213,10 @@ inline void Float::operator/=(const double n)
 // a zero and send an error message
 inline double operator/(const Float& n1, const Float& n2)
 {
-    double n = n1.to_double();
-    if (n2.to_double() != 0.0f) {
-        n /= n2.to_double();
-    }
-    else {
+    double n{n1.asDouble()};
+    if (n2.asDouble() != 0.0f) {
+        n /= n2.asDouble();
+    } else {
         std::cerr << "Float::operator/(): Divide by zero!" << std::endl;
         n = 0.0f;
     }
@@ -231,11 +228,10 @@ inline double operator/(const Float& n1, const Float& n2)
 // error message
 inline double operator/(const double n1, const Float& n2)
 {
-    double n = n1;
-    if (n2.to_double() != 0.0f) {
-        n /= n2.to_double();
-    }
-    else {
+    double n{n1};
+    if (n2.asDouble() != 0.0f) {
+        n /= n2.asDouble();
+    } else {
         std::cerr << "Float::operator/(): Divide by zero!" << std::endl;
         n = 0.0f;
     }
@@ -246,11 +242,10 @@ inline double operator/(const double n1, const Float& n2)
 // unless val n2 is equal to zero, then return a zero and send an error message
 inline double operator/(const Float& n1, const double n2)
 {
-    double n = n1.to_double();
+    double n{n1.asDouble()};
     if (n2 != 0.0f) {
         n /= n2;
-    }
-    else {
+    } else {
         std::cerr << "Float::operator/(): Divide by zero!" << std::endl;
         n = 0.0f;
     }
@@ -265,93 +260,93 @@ inline double operator/(const Float& n1, const double n2)
 // Return a true or a false after comparing Float n1.val & n2.val
 inline bool operator==(const Float& n1, const Float& n2)
 {
-   return n1.to_double() == n2.to_double();
+   return n1.asDouble() == n2.asDouble();
 }
 
 // Return a true or a false after comparing value n1 and Float n2.val
 inline bool operator==(const double n1, const Float& n2)
 {
-   return n1 == n2.to_double();
+   return n1 == n2.asDouble();
 }
 
 inline bool operator==(const Float& n1, const double n2)
 {
-   return n1.to_double() == n2;
+   return n1.asDouble() == n2;
 }
 
 inline bool operator!=(const Float& n1, const Float& n2)
 {
-   return n1.to_double() != n2.to_double();
+   return n1.asDouble() != n2.asDouble();
 }
 
 inline bool operator!=(const double n1, const Float& n2)
 {
-   return n1 != n2.to_double();
+   return n1 != n2.asDouble();
 }
 
 inline bool operator!=(const Float& n1, const double n2)
 {
-   return n1.to_double() != n2;
+   return n1.asDouble() != n2;
 }
 
 inline bool operator<(const Float& n1, const Float& n2)
 {
-   return n1.to_double() < n2.to_double();
+   return n1.asDouble() < n2.asDouble();
 }
 
 inline bool operator<(const double n1, const Float& n2)
 {
-   return n1 < n2.to_double();
+   return n1 < n2.asDouble();
 }
 
 inline bool operator<(const Float& n1, const double n2)
 {
-   return n1.to_double() < n2;
+   return n1.asDouble() < n2;
 }
 
 inline bool operator<=(const Float& n1, const Float& n2)
 {
-   return n1.to_double() <= n2.to_double();
+   return n1.asDouble() <= n2.asDouble();
 }
 
 inline bool operator<=(const double n1, const Float& n2)
 {
-   return n1 <= n2.to_double();
+   return n1 <= n2.asDouble();
 }
 
 inline bool operator<=(const Float& n1, const double n2)
 {
-   return n1.to_double() <= n2;
+   return n1.asDouble() <= n2;
 }
 
 inline bool operator>(const Float& n1, const Float& n2)
 {
-   return n1.to_double() > n2.to_double();
+   return n1.asDouble() > n2.asDouble();
 }
 
 inline bool operator>(const double n1, const Float& n2)
 {
-   return n1 > n2.to_double();
+   return n1 > n2.asDouble();
 }
 
 inline bool operator>(const Float& n1, const double n2)
 {
-   return n1.to_double() > n2;
+   return n1.asDouble() > n2;
 }
 
 inline bool operator>=(const Float& n1, const Float& n2)
 {
-   return n1.to_double() >= n2.to_double();
+   return n1.asDouble() >= n2.asDouble();
 }
 
 inline bool operator>=(const double n1, const Float& n2)
 {
-   return n1 >= n2.to_double();
+   return n1 >= n2.asDouble();
 }
 
 inline bool operator>=(const Float& n1, const double n2)
 {
-   return n1.to_double() >= n2;
+   return n1.asDouble() >= n2;
 }
 
 //------------------------------------------------------------------------------
@@ -359,7 +354,7 @@ inline bool operator>=(const Float& n1, const double n2)
 //------------------------------------------------------------------------------
 inline std::istream& operator>>(std::istream& sin, Float& n)
 {
-    double tmp = 0;
+    double tmp{};
     sin >> tmp;
     n.setValue(tmp);
     return sin;
@@ -370,7 +365,7 @@ inline std::istream& operator>>(std::istream& sin, Float& n)
 //------------------------------------------------------------------------------
 inline std::ostream& operator<<(std::ostream& sout, const Float& n)
 {
-   sout << n.to_double();
+   sout << n.asDouble();
    return sout;
 }
 

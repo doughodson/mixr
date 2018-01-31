@@ -126,7 +126,7 @@ bool GhostHorizon::setSlotWidth(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) {
-        ok = setWidth(x->to_double());
+        ok = setWidth(x->asDouble());
     }
     return ok;
 }
@@ -138,7 +138,7 @@ bool GhostHorizon::setSlotHeight(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) {
-        ok = setHeight(x->to_double());
+        ok = setHeight(x->asDouble());
     }
     return ok;
 }

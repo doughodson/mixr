@@ -147,7 +147,7 @@ bool SaH::setSlotSampleRate(const base::Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {msg->toInt()};
+      const int v {msg->asInt()};
       if (v > 0) {
          setSampleRate( static_cast<unsigned int>(v) );
          ok = true;

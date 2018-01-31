@@ -2,14 +2,14 @@
 #ifndef __mixr_base_numeric_Multiply_H__
 #define __mixr_base_numeric_Multiply_H__
 
-#include "mixr/base/numeric/operators/Add.hpp"
+#include "mixr/base/numeric/operators/Operator.hpp"
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Multiply
-// Description:  Class for multiplying Numbers.
+// Class: Multiply
+// Description: Class for multiplying Numbers
 //
 // Factory name: "*"
 //
@@ -21,13 +21,15 @@ namespace base {
 //      virtual void operation()
 //          Performs the numeric operation of the class ( * ).
 //------------------------------------------------------------------------------
-class Multiply : public Add
+class Multiply final: public Operator
 {
-    DECLARE_SUBCLASS(Multiply, Add)
+    DECLARE_SUBCLASS(Multiply, Operator)
 
 public:
     Multiply();
-    void operation() override;
+
+private:
+    void operation() final;
 };
 
 }

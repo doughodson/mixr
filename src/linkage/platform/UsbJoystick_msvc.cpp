@@ -219,7 +219,7 @@ bool UsbJoystick::setSlotDeviceIndex(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      deviceIndex = msg->toInt();
+      deviceIndex = msg->asInt();
       ok = true;
    }
    return ok;

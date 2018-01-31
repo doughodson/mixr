@@ -69,9 +69,6 @@ void AbstractPlayer::deleteData()
    }
 }
 
-//------------------------------------------------------------------------------
-// shutdownNotification()
-//------------------------------------------------------------------------------
 bool AbstractPlayer::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
@@ -83,9 +80,7 @@ bool AbstractPlayer::shutdownNotification()
    return BaseClass::shutdownNotification();
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset parameters
-//------------------------------------------------------------------------------
+// reset parameters
 void AbstractPlayer::reset()
 {
    if (isLocalPlayer()) {
@@ -164,7 +159,7 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 bool AbstractPlayer::setSlotID(const base::Integer* const num)
 {
    bool ok{};
-   const int newID{num->toInt()};
+   const int newID{num->asInt()};
    if (newID > 0 && newID <= 65535) {
       setID( static_cast<unsigned short>(newID)  );
       ok = true;

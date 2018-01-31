@@ -1398,7 +1398,7 @@ bool NetIO::setSlotVersion(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
-        const int v{num->toInt()};
+        const int v{num->asInt()};
         if (v >= 0 && v < VERSION_MAX) {
             setVersion(static_cast<unsigned char>(v));
             ok = true;
@@ -1693,7 +1693,7 @@ bool NetIO::setSlotSiteID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->toInt()};
+        int v {num->asInt()};
         if (v >= 0 && v <= 65535) {
             ok = setSiteID(static_cast<unsigned short>(v));
         } else {
@@ -1708,7 +1708,7 @@ bool NetIO::setSlotApplicationID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->toInt()};
+        int v {num->asInt()};
         if (v >= 0 && v <= 65535) {
             ok = setApplicationID(static_cast<unsigned short>(v));
         } else {
@@ -1723,7 +1723,7 @@ bool NetIO::setSlotExerciseID(const base::Integer* const num)
 {
     bool ok {};
     if (num != nullptr) {
-        int v {num->toInt()};
+        int v {num->asInt()};
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
         } else {

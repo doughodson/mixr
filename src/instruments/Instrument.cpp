@@ -82,7 +82,7 @@ bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 bool Instrument::setSlotInstVal(const base::Number* const newVal)
 {
     bool ok = false;
-    if (newVal != nullptr) ok = setInstVal(newVal->to_double());
+    if (newVal != nullptr) ok = setInstVal(newVal->asDouble());
     return ok;
 }
 
@@ -92,7 +92,7 @@ bool Instrument::setSlotInstVal(const base::Number* const newVal)
 bool Instrument::setSlotAllowValPass(const base::Boolean* const newAVP)
 {
     bool ok = false;
-    if (newAVP != nullptr) ok = setAllowValPass(newAVP->to_bool());
+    if (newAVP != nullptr) ok = setAllowValPass(newAVP->asBool());
     return ok;
 }
 
@@ -115,7 +115,7 @@ bool Instrument::onUpdateInstVal(const base::Number* const newPos)
 {
     bool ok = false;
     // now call our set function
-    ok = setInstVal(newPos->to_double());
+    ok = setInstVal(newPos->asDouble());
     return ok;
 }
 

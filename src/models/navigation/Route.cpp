@@ -686,7 +686,7 @@ bool Route::setSlotTo(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initToStptIdx = msg->toInt();
+        initToStptIdx = msg->asInt();
         ok = true;
     }
     return ok;
@@ -696,7 +696,7 @@ bool Route::setSlotAutoSequence(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        autoSeq = msg->to_bool();
+        autoSeq = msg->asBool();
         ok = true;
     }
     return ok;
@@ -716,7 +716,7 @@ bool Route::setSlotAutoSeqDistance(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         // we are assuming nautical miles here
-        autoSeqDistNM = msg->to_double();
+        autoSeqDistNM = msg->asDouble();
         ok = true;
     }
     return ok;
@@ -726,7 +726,7 @@ bool Route::setSlotWrap(const base::Boolean* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        wrap = msg->to_bool();
+        wrap = msg->asBool();
         ok = true;
     }
     return ok;

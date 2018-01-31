@@ -119,7 +119,7 @@ bool ExternalStore::setSlotType(const base::String* const msg)
 // jettisonable: weapon can be jettisoned
 bool ExternalStore::setSlotJettisonable(base::Boolean* const p)
 {
-   setJettisonable( p->to_bool() );
+   setJettisonable( p->asBool() );
    return true;
 }
 

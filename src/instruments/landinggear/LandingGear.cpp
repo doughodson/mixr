@@ -46,7 +46,7 @@ void LandingGear::copyData(const LandingGear& org, const bool)
 bool LandingGear::setSlotGearDownValue(const base::Number* const newDV)
 {
     bool ok{};
-    if (newDV != nullptr) ok = setGearDownValue(newDV->to_double());
+    if (newDV != nullptr) ok = setGearDownValue(newDV->asDouble());
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ bool LandingGear::setSlotGearDownValue(const base::Number* const newDV)
 bool LandingGear::setSlotGearUpValue(const base::Number* const newUV)
 {
     bool ok{};
-    if (newUV != nullptr) ok = setGearUpValue(newUV->to_double());
+    if (newUV != nullptr) ok = setGearUpValue(newUV->asDouble());
     return ok;
 }
 

@@ -28,17 +28,19 @@ public:
    Identifier();
    Identifier(const char*);
 
+   void setStr(const char* x)                { id = x;  replaceSpaces(); }
+   const std::string& asString() const       { return id; }          // returns a standard string (std::string)
+
+   // convenience method
+   const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
+
    // operators
    Identifier& operator=(const char*);            // assignment operator =
    Identifier& operator=(const std::string&);
    void operator+=(const char*);
    void operator+=(const std::string&);
 
-   const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
-   const std::string& to_string() const      { return id; }          // returns a standard string (std::string)
-
    void empty()                              { id = "";   }          // empty our string
-   void setStr(const char* x)                { id = x;  replaceSpaces(); }
    bool isEmpty() const                      { return id == ""; }    // returns true if our string is empty
 
    // returns true if our string is the ascii form of a number
@@ -152,7 +154,7 @@ inline void Identifier::replaceSpaces()
 // comparison operator: ==
 inline bool operator==(const Identifier& s1, const Identifier& s2)
 {
-   if (s1.to_string() == s2.to_string()) {
+   if (s1.asString() == s2.asString()) {
       return true;
    }
    return false;
@@ -160,7 +162,7 @@ inline bool operator==(const Identifier& s1, const Identifier& s2)
 
 inline bool operator==(const char* s1, const Identifier& s2)
 {
-   if (s2.to_string() == std::string(s1)) {
+   if (s2.asString() == std::string(s1)) {
       return true;
    }
    return false;
@@ -168,7 +170,7 @@ inline bool operator==(const char* s1, const Identifier& s2)
 
 inline bool operator==(const Identifier& s1, const char* s2)
 {
-   if (s1.to_string() == std::string(s2)) {
+   if (s1.asString() == std::string(s2)) {
       return true;
    }
    return false;

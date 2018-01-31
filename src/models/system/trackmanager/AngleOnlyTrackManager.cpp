@@ -205,7 +205,7 @@ bool AngleOnlyTrackManager::setSlotAlpha(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         ok = true;
-        alpha = msg->to_double();
+        alpha = msg->asDouble();
         oneMinusAlpha = 1.0 - alpha;
     }
     return ok;
@@ -219,7 +219,7 @@ bool AngleOnlyTrackManager::setSlotBeta(const base::Number* const msg)
     bool ok{};
     if (msg != nullptr) {
         ok = true;
-        beta = msg->to_double();
+        beta = msg->asDouble();
         oneMinusBeta = 1.0 - beta;
     }
     return ok;

@@ -241,7 +241,7 @@ bool Antenna::setGain(const base::Number* const g)
    double value{-1.0};
 
    if (g != nullptr) {
-      value = g->to_double();
+      value = g->asDouble();
    }
 
    if (value >= 0.0) {
@@ -273,7 +273,7 @@ bool Antenna::setGainPatternDeg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {
-        gainPatternDeg = msg->to_bool();
+        gainPatternDeg = msg->asBool();
         ok = true;
     }
     return ok;
@@ -286,7 +286,7 @@ bool Antenna::setRecycleFlg(const base::Boolean* const msg)
 {
     bool ok{true};
     if (msg != nullptr) {
-        ok = setEmissionRecycleFlag( msg->to_bool() );
+        ok = setEmissionRecycleFlag( msg->asBool() );
     }
     return ok;
 }
@@ -314,7 +314,7 @@ bool Antenna::setBeamWidth(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      ok = setBeamWidth( msg->to_double() );
+      ok = setBeamWidth( msg->asDouble() );
       if (!ok) {
          std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
       }

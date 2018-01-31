@@ -45,6 +45,7 @@ OBJS =  \
 	numeric/operators/Add.o \
 	numeric/operators/Divide.o \
 	numeric/operators/Multiply.o \
+	numeric/operators/Operator.o \
 	numeric/operators/Subtract.o \
 	numeric/Boolean.o \
 	numeric/Complex.o \

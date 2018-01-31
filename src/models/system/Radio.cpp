@@ -275,7 +275,7 @@ bool Radio::setSlotNumChannels(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setNumberOfChannels( static_cast<unsigned short>(v) );
       }
@@ -324,7 +324,7 @@ bool Radio::setSlotChannel(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int v{msg->toInt()};
+      const int v{msg->asInt()};
       if (v >= 0 && v <= 0xFFFF) {
          ok = setChannel( static_cast<unsigned short>(v) );
       }
@@ -337,7 +337,7 @@ bool Radio::setSlotMaxDetectRange(base::Number* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      maxDetectRange = num->to_double();
+      maxDetectRange = num->asDouble();
       ok = true;
    }
    return ok;
@@ -348,7 +348,7 @@ bool Radio::setSlotRadioId(base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      const unsigned short num2{static_cast<unsigned short>(num->toInt())};
+      const unsigned short num2{static_cast<unsigned short>(num->asInt())};
       ok = setRadioId(num2);
    }
    return ok;

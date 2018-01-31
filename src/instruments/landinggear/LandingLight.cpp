@@ -51,7 +51,7 @@ bool LandingLight::setLightRadius(const double newLR)
 bool LandingLight::setSlotLightRadius(const base::Number* const newLR)
 {
     bool ok{};
-    if (newLR != nullptr) ok = setLightRadius(newLR->to_double());
+    if (newLR != nullptr) ok = setLightRadius(newLR->asDouble());
     return ok;
 }
 

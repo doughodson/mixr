@@ -29,7 +29,7 @@ AbstractBehavior::AbstractBehavior()
 bool AbstractBehavior::setSlotVote(const base::Integer* const num)
 {
    bool ok{};
-   const int vote{num->toInt()};
+   const int vote{num->asInt()};
    if (vote > 0 && vote <= 65535) {
       setVote(static_cast<unsigned int>(vote));
       ok = true;

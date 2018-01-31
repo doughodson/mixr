@@ -76,7 +76,7 @@ bool SigPlate::setA(base::Number* const num)
         v = meters.convert(*d);
     } else if (num != nullptr) {
         // Just a Number
-        v = num->to_double();
+        v = num->asDouble();
     }
 
     if (v >= 0.0) { a = v; ok = true; }
@@ -99,7 +99,7 @@ bool SigPlate::setB(base::Number* const num)
         v = meters.convert(*d);
     } else if (num != nullptr) {
         // Just a Number
-        v = num->to_double();
+        v = num->asDouble();
     }
 
     if (v >= 0.0) { b = v; ok = true; }
