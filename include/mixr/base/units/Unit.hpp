@@ -20,8 +20,8 @@ class Unit : public Object
     DECLARE_SUBCLASS(Unit, Object)
 
 public:
-    Unit();
-    Unit(const double);
+    explicit Unit();
+    explicit Unit(const double);
 
     void setValue(const double x)     { val = x;    }
     double getValue() const           { return val; }

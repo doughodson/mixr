@@ -23,13 +23,16 @@ namespace base {
 //------------------------------------------------------------------------------
 class Add final: public Operator
 {
-    DECLARE_SUBCLASS(Add, Operator)
+   DECLARE_SUBCLASS(Add, Operator)
 
 public:
-    Add();
+   Add();
 
 private:
-    void operation() final;
+   void operation() final;
+   double getValue() const final       { return val; }
+
+   double val{};
 };
 
 }

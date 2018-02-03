@@ -27,7 +27,7 @@ Decibel::Decibel()
 Decibel::Decibel(const double value)
 {
    STANDARD_CONSTRUCTOR()
-   setValueDB(value);
+   setValuedB(value);
 }
 
 void Decibel::copyData(const Decibel& org, const bool)
@@ -37,7 +37,7 @@ void Decibel::copyData(const Decibel& org, const bool)
    db = org.db;
 }
 
-void Decibel::setValueDB(const double v)
+void Decibel::setValuedB(const double v)
 {
    db = v;
    val = std::pow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
@@ -45,7 +45,8 @@ void Decibel::setValueDB(const double v)
 
 void Decibel::setValue(const double v)
 {
-   BaseClass::setValue(v);
+//   BaseClass::setValue(v);
+   val = v;
    db = std::log10(v) * 10.0;
 }
 
@@ -53,7 +54,7 @@ bool Decibel::setSlotValue(const Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      setValueDB( msg->asDouble() );
+      setValuedB( msg->asDouble() );
       ok = true;
    }
    return ok;

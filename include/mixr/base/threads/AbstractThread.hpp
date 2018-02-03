@@ -73,7 +73,7 @@ public:
    AbstractThread(Component* const parent);
    AbstractThread(const AbstractThread&) = delete;
    AbstractThread& operator=(const AbstractThread&) = delete;
-   ~AbstractThread();
+   virtual ~AbstractThread();
 
    bool isTerminated() const;
 

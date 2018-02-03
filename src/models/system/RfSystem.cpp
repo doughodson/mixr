@@ -674,7 +674,7 @@ bool RfSystem::setSlotRfThreshold(base::Decibel* const v)
 {
     bool ok{};
     if (v != nullptr) {
-        ok = setRfThreshold( v->getValueDB() );
+        ok = setRfThreshold( v->asdB() );
     }
     return ok;
 }

@@ -24,13 +24,16 @@ namespace base {
 //------------------------------------------------------------------------------
 class Divide final: public Operator
 {
-    DECLARE_SUBCLASS(Divide, Operator)
+   DECLARE_SUBCLASS(Divide, Operator)
 
 public:
-    Divide();
+   Divide();
 
 private:
-    void operation() final;
+   void operation() final;
+   double getValue() const final       { return val; }
+
+   double val{};
 };
 
 }

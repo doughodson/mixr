@@ -24,7 +24,6 @@
 #include <cstring>
 
 namespace mixr {
-
 namespace dis {
 
 IMPLEMENT_SUBCLASS(EmissionPduHandler, "EmissionPduHandler")
@@ -70,14 +69,14 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 
    setSensorModel(nullptr);
    if (org.getSensorModel() != nullptr) {
-      models::RfSensor* tmp = org.getSensorModel()->clone();
+      models::RfSensor* tmp{org.getSensorModel()->clone()};
       setSensorModel(tmp);
       tmp->unref();
    }
 
    setAntennaModel(nullptr);
    if (org.getAntennaModel() != nullptr) {
-      models::Antenna* tmp = org.getAntennaModel()->clone();
+      models::Antenna* tmp{org.getAntennaModel()->clone()};
       setAntennaModel(tmp);
       tmp->unref();
    }
@@ -219,7 +218,7 @@ bool EmissionPduHandler::setSlotEmitterName(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int i = msg->asInt();
+      const int i{msg->asInt()};
       if (i >= 0 && i <= 0xffff) {
          ok = setEmitterName( static_cast<unsigned short>(i) );
       }
@@ -232,7 +231,7 @@ bool EmissionPduHandler::setSlotEmitterFunction(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const int i = msg->asInt();
+      const int i{msg->asInt()};
       if (i >= 0 && i <= 0xff) {
          ok = setEmitterFunction( static_cast<unsigned char>(i) );
       }
@@ -469,7 +468,7 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
 
          // Out going Electromagnetic Emission PDU is just a buffer to be filled
          unsigned int packet[NetIO::MAX_PDU_SIZE / 4];
-         ElectromagneticEmissionPDU* pdu = reinterpret_cast<ElectromagneticEmissionPDU*>(&packet[0]);
+         ElectromagneticEmissionPDU* pdu{reinterpret_cast<ElectromagneticEmissionPDU*>(&packet[0])};
 
          // Standard header stuff
          pdu->header.protocolVersion = disIO->getVersion();
@@ -501,8 +500,8 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
          pdu->numberOfSystems = 1;
 
          // Pointer to emission system
-         unsigned char* p = (reinterpret_cast<unsigned char*>(pdu)) + sizeof(ElectromagneticEmissionPDU);
-         EmissionSystem* es = reinterpret_cast<EmissionSystem*>(p);
+         unsigned char* p{(reinterpret_cast<unsigned char*>(pdu)) + sizeof(ElectromagneticEmissionPDU)};
+         EmissionSystem* es{reinterpret_cast<EmissionSystem*>(p)};
 
          // ---
          // Add the emission system to the end of the PDU and send it
@@ -516,7 +515,7 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
             es = reinterpret_cast<EmissionSystem*>(p);
             //pdu->dumpData();
 
-            const int length = pdu->header.length;
+            const int length{pdu->header.length};
             if (base::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
             pduSent = disIO->sendData(reinterpret_cast<char*>(pdu), length);
 
@@ -542,7 +541,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
    if (nib == nullptr) return NO;
    NetIO* const disIO{static_cast<NetIO*>(nib->getNetIO())};
    if (disIO == nullptr) return NO;
-   models::RfSensor* beam = getSensor();
+   models::RfSensor* beam{getSensor()};
    if (beam == nullptr) return NO;
 
    // ---
@@ -557,10 +556,9 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
       if ( drTime < (disIO->getHbtPduEe() / 10.0f) ) {
          result = NO;
       }
-   }
-   else {
+   } else {
       if ( (result == UNSURE) ) {
-         double drTime = curExecTime - getEmPduExecTime();
+         double drTime{curExecTime - getEmPduExecTime()};
          if ( drTime < (disIO->getMaxTimeDR(nib) /10.0f) ) {
             result = NO;
          }
@@ -583,17 +581,17 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
       // ---
       // Simple radar with only one beam
       // ---
-      unsigned char numberOfBeams = 0;
-      unsigned char ib = 0;
+      unsigned char numberOfBeams{};
+      unsigned char ib{};
 
       // ---
       // If the transmitter is emitting then create the beam data
       // ---
-      bool playerOk = nib->getPlayer()->isActive() && !nib->getPlayer()->isDestroyed();
+      bool playerOk{nib->getPlayer()->isActive() && !nib->getPlayer()->isDestroyed()};
       if (playerOk && beam->isTransmitting()) {
 
          // Antenna (if any)
-         const models::Antenna* const ant = beam->getAntenna();
+         const models::Antenna* const ant{beam->getAntenna()};
 
          // Beam data
          numberOfBeams = 1;
@@ -610,15 +608,15 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          bd.parameterData.frequencyRange  = static_cast<float>(beam->getBandwidth());      // Hz
 
          // Compute effected radiated power (watts)
-         double power = beam->getPeakPower();
-         double loss = beam->getRfTransmitLoss();
+         double power{beam->getPeakPower()};
+         double loss{beam->getRfTransmitLoss()};
          if (ant != nullptr) power = (power * static_cast<double>(ant->getGain()));
          if (loss >= 1.0f) power = (power / loss);
 
          // Effected radiated power -- dBm (dB milliwatts)
          base::Decibel db;
-         db.setValue( power * 1000.0f );
-         bd.parameterData.effectiveRadiatedPower = static_cast<float>(db.getValueDB());
+         db.setValue( power * 1000.0 );
+         bd.parameterData.effectiveRadiatedPower = static_cast<float>(db.asdB());
 
          bd.parameterData.pulseRepetitiveFrequency = static_cast<float>(beam->getPRF());          // Hz (Average)
          bd.parameterData.pulseWidth = static_cast<float>(beam->getPulseWidth()) * 1000000.0f;    // uSec
@@ -628,8 +626,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
             bd.beamData.beamAzimuthSweep    = static_cast<float>(ant->getScanWidth()/2.0);   // Radians -- half angles
             bd.beamData.beamElevationCenter = static_cast<float>(ant->getRefElevation());    // Radians
             bd.beamData.beamElevationSweep  = static_cast<float>(ant->getScanHeight()/2.0);  // Radians -- half angles
-         }
-         else {
+         } else {
             // Default values
             bd.beamData.beamAzimuthCenter   = 0.0f;
             bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(base::angle::D2RCC);
@@ -644,8 +641,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
             bd.jammingTechnique.category = 0;
             bd.jammingTechnique.subcat = 0;
             bd.jammingTechnique.specific = 0;
-         }
-         else {
+         } else {
             bd.jammingTechnique.setJammingModeSequence(0);
          }
 
@@ -656,12 +652,10 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
                // ... full azimuth sweep?  assume searching
                bd.beamFunction = BF_SEARCH;
                es.emitterSystem.function = ESF_EW; // override emitter sys function to EW when searching
-            }
-            else
+            } else
                // ... limited az sweep?  assume acq/track
                bd.beamFunction = BF_ACQUISITION_AND_TRACKING;
-         }
-         else {
+         } else {
             // Jammer
             bd.beamFunction = BF_JAMMER;
             if (disIO->getVersion() >= NetIO::VERSION_7) {
@@ -677,32 +671,31 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          // Locate any targets that this emitter is tracking
          // ---
          TrackJamTargets tjt[MAX_TARGETS_IN_TJ_FIELD];
-         unsigned char numTJT = 0;
+         unsigned char numTJT{};
 
          // Get the track list
-         models::TrackManager* tm = beam->getTrackManager();
+         models::TrackManager* tm{beam->getTrackManager()};
          if (tm != nullptr) {
-            const int max1 = MAX_TARGETS_IN_TJ_FIELD + 1; // check for one more than the max (highDensityTracks)
+            const int max1{MAX_TARGETS_IN_TJ_FIELD + 1};   // check for one more than the max (highDensityTracks)
             base::safe_ptr<models::Track> trackList[max1];
-            int n = tm->getTrackList(trackList,max1);
+            int n{tm->getTrackList(trackList, max1)};
             if (n <= MAX_TARGETS_IN_TJ_FIELD) {
 
                // Locate players for these tracks and set the TrackJamTargets data for each ...
                for (int i = 0; i < n; i++) {
                   // Does the track have a target player that we can find the entity ID for?
-                  const models::Player* tgt = trackList[i]->getTarget();
+                  const models::Player* tgt{trackList[i]->getTarget()};
                   if (tgt != nullptr) {
-                     unsigned short  tjtPlayerID = 0;
-                     unsigned short  tjtSiteID = 0;
-                     unsigned short  tjtAppID = 0;
+                     unsigned short tjtPlayerID{};
+                     unsigned short tjtSiteID{};
+                     unsigned short tjtAppID{};
                      if (tgt->isLocalPlayer()) {
                         tjtPlayerID = tgt->getID();
                         // Local player so use our site and app IDs
                         tjtSiteID = disIO->getSiteID();
                         tjtAppID  = disIO->getApplicationID();
-                     }
-                     else {
-                        const Nib* const tjtNib = dynamic_cast<const Nib*>( tgt->getNib() );
+                     } else {
+                        const Nib* const tjtNib{dynamic_cast<const Nib*>( tgt->getNib() )};
                         if (tjtNib != nullptr) {
                            tjtPlayerID = tjtNib->getPlayerID();
                            tjtSiteID = tjtNib->getSiteID();
@@ -718,9 +711,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
                      numTJT++;
                   }
                }
-
-            }
-            else {
+            } else {
                // Lots of targets -- set the high density tracks flag
                bd.highDensityTracks = EmitterBeamData::SELECTED;
             }
@@ -738,9 +729,9 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          bd.numberOfTargetsInTrack = numTJT;
 
          // implement DISv7 parameter thresholds and other restrictions on parameters that could otherwise cause updated PDUs to be sent.
-         float tmpbeamSweepSync = 0;
-         float tmpbeamAzimuthCenter = 0;
-         float tmpbeamElevationCenter = 0;
+         float tmpbeamSweepSync{};
+         float tmpbeamAzimuthCenter{};
+         float tmpbeamElevationCenter{};
          if (disIO->getVersion() >= NetIO::VERSION_7) {
 
             // change in beamSweepSync should not force new PDU
@@ -774,7 +765,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
-         unsigned char lenB = sizeof(EmitterBeamData) + (numTJT * sizeof(TrackJamTargets));
+         unsigned char lenB{sizeof(EmitterBeamData) + (numTJT * sizeof(TrackJamTargets))};
          bd.beamDataLength = (lenB/4);
 
          // ---
@@ -811,7 +802,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
-         unsigned char lenB = sizeof(dis::EmitterBeamData);
+         unsigned char lenB{sizeof(dis::EmitterBeamData)};
          bd.beamDataLength = (lenB/4);
          // ---
          // compare & transfer the emitter beam data
@@ -847,7 +838,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
       // ---
       if (disIO->getVersion() >= NetIO::VERSION_7) {
          if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
-            double drTime = curExecTime - getEmPduExecTime();
+            double drTime{curExecTime - getEmPduExecTime()};
             if ( drTime >= disIO->getHbtPduEe() ) {
                result = YES;
                sc = true;
@@ -856,7 +847,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
       }
       else {
          if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer()) {
-            double drTime = curExecTime - getEmPduExecTime();
+            double drTime{curExecTime - getEmPduExecTime()};
             if ( drTime >= disIO->getMaxTimeDR(nib) ) {
                result = YES;
                sc = true;
@@ -891,28 +882,28 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
     *es = *( getSavedEmissionSystemData() );
 
     // total length in bytes
-    unsigned short totalLength = sizeof(EmissionSystem);
+    unsigned short totalLength{sizeof(EmissionSystem)};
 
     // ---
     // Copy the emitter beam data, plus the track/jam targets
     // ---
 
     // The EmitterBeamData structures follow the EmissionSystem structure
-    unsigned char* p = reinterpret_cast<unsigned char*>(es) + sizeof(EmissionSystem);
+    unsigned char* p{reinterpret_cast<unsigned char*>(es) + sizeof(EmissionSystem)};
 
     for (unsigned int ib = 0; ib < es->numberOfBeams && ib < MAX_EM_BEAMS; ib++) {
 
       // Copy emitter beam data
-      EmitterBeamData* eb = reinterpret_cast<EmitterBeamData*>(p);
+      EmitterBeamData* eb{reinterpret_cast<EmitterBeamData*>(p)};
       *eb = *getSavedEmitterBeamData(ib);
       p += sizeof(EmitterBeamData);
 
       // The TrackJamTargets structures follow their EmitterBeamData structure
-      int n = getSavedEmitterBeamData(ib)->numberOfTargetsInTrack;
+      int n{getSavedEmitterBeamData(ib)->numberOfTargetsInTrack};
       for (int it = 0; it < n && it < MAX_TARGETS_IN_TJ_FIELD; it++) {
 
          // Copy the Track/Jam target data
-         TrackJamTargets* tjt = reinterpret_cast<TrackJamTargets*>(p);
+         TrackJamTargets* tjt{reinterpret_cast<TrackJamTargets*>(p)};
          *tjt = *getSavedTrackJamTargetData(ib,it);
          p += sizeof(TrackJamTargets);
       }

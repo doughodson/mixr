@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Decibel_H__
-#define __mixr_base_Decibel_H__
+#ifndef __mixr_base_numeric_Decibel_H__
+#define __mixr_base_numeric_Decibel_H__
 
 #include "mixr/base/numeric/Number.hpp"
 
@@ -14,251 +14,37 @@ namespace base {
 //              the magnitude of a physical quantity (usually power or intensity)
 //              relative to a specified of implied reference level.  Since it
 //              expresses a ratio of two quantities of the same unit, it is a
-//              dimensionless unit. This class conveys that the value it contains
-//              should be treated as a scaled Number.
-//
-//              Provides methods for handling and operating with decibels.
-//              All member functions handle the number in decibels.
+//              dimensionless unit. This class conveys that the value it represents
+//              is a scaled number.
 //
 // Factory name: dB
 //
-// Public methods:
-//
-//      Decibel(const double value)
-//          Special constructor that initializes the object to 'value' dB.
-//
-//      double getNumber()
-//          Convert the value from Decibels into the original units.
-//
-//      Conversion operators: float() and double()
-//          Are C++ equivalents. Values are in decibels.
-//
-//      Assignment operators: = +=  -=
-//          Are C++ equivalents.  Values are in decibels.
-//
-//      Binary operators: +  -
-//          Are C++ equivalents.  Values are in decibels.
-//
-//      Comparison operators: ==  !=  <  <=  >  >=
-//          Are C++ equivalents.  Values are in decibels.
-//
-//      Input/Output stream operators: >>  <<
-//          Are C++ equivalents.  Values are in decibels.
+// Slots:
+//     value  <Number>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
 class Decibel final: public Number
 {
-    DECLARE_SUBCLASS(Decibel, Number)
+   DECLARE_SUBCLASS(Decibel, Number)
 
 public:
-    Decibel();
-    Decibel(const double);
+   explicit Decibel();
+   explicit Decibel(const double);
 
-    void setValueDB(const double);
-    double getValueDB() const                          { return db; }
+   void setValuedB(const double);
+   double asdB() const                          { return db; }
 
-    Decibel& operator=(const double);
-
-    void operator+=(const Decibel&);
-    void operator+=(const double);
-
-    void operator-=(const Decibel&);
-    void operator-=(const double);
-
-    void setValue(const double) override;
+   void setValue(const double);
 
 private:
-    double db{};      // value in dBs
+   double getValue() const final       { return val; }
+   double val{};
+
+   double db{};      // value in dBs
 
 private:
    // slot table helper methods
    bool setSlotValue(const Number* const);
 };
-
-//------------------------------------------------------------------------------
-// Assignment operator:  =
-//------------------------------------------------------------------------------
-// Assign value n to val and return pointer
-inline Decibel& Decibel::operator=(const double n)
-{
-   setValueDB(n);
-   return *this;
-}
-
-//------------------------------------------------------------------------------
-// Addition operators:  + and +=
-//------------------------------------------------------------------------------
-inline void Decibel::operator+=(const Decibel& n)
-{
-   setValueDB(db + n.getValueDB());
-}
-
-inline void Decibel::operator+=(const double n)
-{
-   setValueDB(db + n);
-}
-
-// Add vals of Decibel instances n1 & n2 and return the sum
-inline double operator+(const Decibel& n1, const Decibel& n2)
-{
-    return n1.getValueDB() + n2.getValueDB();
-}
-
-// Add value n1 to val of Decibel n2 and return the sum
-inline double operator+(const double n1, const Decibel& n2)
-{
-    return n1 + n2.getValueDB();
-}
-
-// Add value n2 to val of Decibel n1 and return the sum
-inline double operator+(const Decibel& n1, const double n2)
-{
-    return n1.getValueDB() + n2;
-}
-
-
-//------------------------------------------------------------------------------
-// Subtraction operators:  - and -=
-//------------------------------------------------------------------------------
-inline void Decibel::operator-=(const Decibel& n)
-{
-   setValueDB(db - n.getValueDB());
-}
-
-inline void Decibel::operator-=(const double n)
-{
-   setValueDB(db - n);
-}
-
-// Subtract the vals of Decibel instances n1 & n2 and return the difference
-inline double operator-(const Decibel& n1, const Decibel& n2)
-{
-    return n1.getValueDB() - n2.getValueDB();
-}
-
-// Subtract value n1 from val of Decibel n2 and return the difference
-inline double operator-(const double n1, const Decibel& n2)
-{
-    return n1 - n2.getValueDB();
-}
-
-// Subtract value n2 from val of Decibel n1 and return the difference
-inline double operator-(const Decibel& n1, const double n2)
-{
-    return n1.getValueDB() - n2;
-}
-
-
-//------------------------------------------------------------------------------
-// Comparison operators:  ==, !=, <, <=, >, and >=
-//------------------------------------------------------------------------------
-
-// Return a true or a false after comparing Decibel n1.val & n2.val
-inline bool operator==(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() == n2.getValueDB();
-}
-
-// Return a true or a false after comparing value n1 and Decibel n2.val
-inline bool operator==(const double n1, const Decibel& n2)
-{
-   return n1 == n2.getValueDB();
-}
-
-inline bool operator==(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() == n2;
-}
-
-inline bool operator!=(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() != n2.getValueDB();
-}
-
-inline bool operator!=(const double n1, const Decibel& n2)
-{
-   return n1 != n2.getValueDB();
-}
-
-inline bool operator!=(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() != n2;
-}
-
-inline bool operator<(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() < n2.getValueDB();
-}
-
-inline bool operator<(const double n1, const Decibel& n2)
-{
-   return n1 < n2.getValueDB();
-}
-
-inline bool operator<(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() < n2;
-}
-
-inline bool operator<=(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() <= n2.getValueDB();
-}
-
-inline bool operator<=(const double n1, const Decibel& n2)
-{
-   return n1 <= n2.getValueDB();
-}
-
-inline bool operator<=(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() <= n2;
-}
-
-inline bool operator>(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() > n2.getValueDB();
-}
-
-inline bool operator>(const double n1, const Decibel& n2)
-{
-   return n1 > n2.getValueDB();
-}
-
-inline bool operator>(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() > n2;
-}
-
-inline bool operator>=(const Decibel& n1, const Decibel& n2)
-{
-   return n1.getValueDB() >= n2.getValueDB();
-}
-
-inline bool operator>=(const double n1, const Decibel& n2)
-{
-   return n1 >= n2.getValueDB();
-}
-
-inline bool operator>=(const Decibel& n1, const double n2)
-{
-   return n1.getValueDB() >= n2;
-}
-
-// input stream operator: >>
-inline std::istream& operator>>(std::istream& sin, Decibel& n)
-{
-    double tmp{};
-    sin >> tmp;
-    n.setValueDB(tmp);
-    return sin;
-}
-
-// output stream operator: <<
-inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
-{
-   sout << n.getValueDB();
-   return sout;
-}
 
 }
 }

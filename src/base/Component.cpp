@@ -1107,8 +1107,8 @@ Object* Component::SendData::getValue(const int value)
         past = new Integer(value);
         return past;
     }
-    if (*num != value) {
-        *num = value;
+    if (num->asInt() != value) {
+        num->setValue(value);
         return num;
     } else {
         return nullptr;
@@ -1125,18 +1125,17 @@ Object* Component::SendData::getValue(const float value)
         past = new Float(value);
         return past;
     }
-    if (*num != static_cast<double>(value)) {
-        *num = value;
+    if (num->asDouble() != static_cast<double>(value)) {
+        num->setValue(value);
         return num;
-    }
-    else {
+    } else {
         return nullptr;
     }
 }
 
 Object* Component::SendData::getValue(const double value)
 {
-    const auto num = dynamic_cast<Number*>(past);
+    const auto num = dynamic_cast<Float*>(past);
     if (num == nullptr) {
         if (past != nullptr) past->unref();
         past = new Float(value);
@@ -1150,7 +1149,6 @@ Object* Component::SendData::getValue(const double value)
         return nullptr;
     }
 }
-
 
 // getValue() -- get an object containing the char string to send
 // or null(0) if the value hasn't changed.
@@ -1193,7 +1191,7 @@ Object* Component::SendData::getValue(const bool value)
         past = new Boolean(value);
         return past;
     }
-    if (static_cast<bool>(*num) != value) {
+    if (num->asBool() != value) {
         num->setValue(value);
         return num;
     } else {

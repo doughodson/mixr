@@ -23,13 +23,16 @@ namespace base {
 //------------------------------------------------------------------------------
 class Multiply final: public Operator
 {
-    DECLARE_SUBCLASS(Multiply, Operator)
+   DECLARE_SUBCLASS(Multiply, Operator)
 
 public:
-    Multiply();
+   Multiply();
 
 private:
-    void operation() final;
+   void operation() final;
+   double getValue() const final       { return val; }
+
+   double val{};
 };
 
 }

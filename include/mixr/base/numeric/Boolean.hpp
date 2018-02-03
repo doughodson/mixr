@@ -4,8 +4,6 @@
 
 #include "mixr/base/Object.hpp"
 
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -20,17 +18,14 @@ namespace base {
 // Factory name: Boolean
 // Slots:
 //     value  <Boolean>  ! Sets the value (default: false)
-//
 //------------------------------------------------------------------------------
 class Boolean final: public Object
 {
    DECLARE_SUBCLASS(Boolean, Object)
 
 public:
-   Boolean()                           { STANDARD_CONSTRUCTOR()            }
+   explicit Boolean()                  { STANDARD_CONSTRUCTOR()            }
    explicit Boolean(const bool x)      { STANDARD_CONSTRUCTOR() value = x; }
-
-   explicit operator bool() const      { return value; }
 
    void setValue(const bool x)         { value = x;    }
    bool asBool() const                 { return value; }

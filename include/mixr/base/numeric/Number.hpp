@@ -10,31 +10,20 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: Number
 //
-// Description:  Base class for number-based objects (Float, Integer) and 
+// Description:  Abstract class for number-based objects (Float, Integer) and 
 //               numerical operators (Add, Subtract, Multiply and Divide)
-//
-// Slots:
-//     value  <Number>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
 class Number : public Object
 {
    DECLARE_SUBCLASS(Number, Object)
 
 public:
-   Number()                                { STANDARD_CONSTRUCTOR() }
-   explicit Number(const double x)         { val = x; STANDARD_CONSTRUCTOR() }
+   explicit Number()                       { STANDARD_CONSTRUCTOR() }
 
-//   explicit operator double() const      { return val; }
-
-   virtual void setValue(const double x)   { val = x; }
-   double asDouble() const                 { return val; }
-
-protected:
-   double val{};
+   double asDouble() const                 { return getValue(); }
 
 private:
-   // slot table helper methods
-   virtual bool setSlotValue(const Number* const);
+   virtual double getValue() const = 0;
 };
 
 }

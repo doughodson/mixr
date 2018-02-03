@@ -23,13 +23,16 @@ namespace base {
 //------------------------------------------------------------------------------
 class Subtract final: public Operator
 {
-    DECLARE_SUBCLASS(Subtract, Operator)
+   DECLARE_SUBCLASS(Subtract, Operator)
 
 public:
-    Subtract();
+   Subtract();
 
 private:
-    void operation() final;
+   void operation() final;
+   double getValue() const final       { return val; }
+
+   double val{};
 };
 
 }

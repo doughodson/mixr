@@ -5,9 +5,12 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Number, "Number")
+IMPLEMENT_ABSTRACT_SUBCLASS(Number, "AbstractNumber")
+EMPTY_SLOTTABLE(Number)
 EMPTY_DELETEDATA(Number)
+EMPTY_COPYDATA(Number)
 
+/*
 BEGIN_SLOTTABLE(Number)
     "value",
 END_SLOTTABLE(Number)
@@ -15,13 +18,9 @@ END_SLOTTABLE(Number)
 BEGIN_SLOT_MAP(Number)
     ON_SLOT(1, setSlotValue, Number)
 END_SLOT_MAP()
+*/
 
-void Number::copyData(const Number& org, const bool)
-{
-   BaseClass::copyData(org);
-   val = org.val;
-}
-
+/*
 bool Number::setSlotValue(const Number* const num)
 {
    bool ok{};
@@ -31,6 +30,7 @@ bool Number::setSlotValue(const Number* const num)
    }
    return ok;
 }
+*/
 
 }
 }

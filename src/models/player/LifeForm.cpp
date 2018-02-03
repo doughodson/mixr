@@ -9,7 +9,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
@@ -90,8 +90,8 @@ void LifeForm::reset()
 
 void LifeForm::fire()
 {
-    const auto hdgObj = new base::Number(getHeadingR());
-    const auto pitchObj = new base::Number(lookAngle * base::angle::D2RCC);
+    const auto hdgObj = new base::Float(getHeadingR());
+    const auto pitchObj = new base::Float(lookAngle * base::angle::D2RCC);
     StoresMgr* mgr{getStoresManagement()};
     if (mgr != nullptr) {
         if (getWorldModel() != nullptr) {

@@ -24,7 +24,7 @@ class Complex final: public Object
    DECLARE_SUBCLASS(Complex, Object)
 
 public:
-   Complex();
+   explicit Complex();
    explicit Complex(const double r);
    explicit Complex(const double r, const double i);
 

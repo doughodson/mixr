@@ -494,7 +494,7 @@ void ScanGimbal::barScanController(const double)
         case 1: {
         // start state - slow slew and compute the end position
             if (isPositioned() || isAtLimits()) {
-                iBar = getBarNumber();
+                iBar.setValue(static_cast<int>(getBarNumber()));
                 // Trigger the SCAN_START event handler
                 onStartScanEvent(&iBar);
                 computeNewBarPos(getBarNumber(), Side::ENDING);
@@ -507,7 +507,7 @@ void ScanGimbal::barScanController(const double)
         case 2: {
         // end state - fast slew and compute the next bar's position (if any)
             if (isPositioned() || isAtLimits()) {
-                iBar = getBarNumber();
+                iBar.setValue(static_cast<int>(getBarNumber()));
                 // Trigger the SCAN_END event handler
                 onEndScanEvent(&iBar);
                 nextBar();
