@@ -25,8 +25,8 @@ EMPTY_DELETEDATA(LaeroModel)
 //----------------------------------------------------------
 // conversion constants
 //----------------------------------------------------------
-const double LaeroModel::HALF_PI    {base::PI / 2.0};
-const double LaeroModel::EPSILON    {1.0E-10};
+constexpr double HALF_PI{base::PI / 2.0};
+constexpr double EPSILON{1.0E-10};
 
 LaeroModel::LaeroModel()
 {
@@ -100,7 +100,7 @@ void LaeroModel::reset()
    const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    if (pPlr != nullptr) {
       const double initVel{pPlr->getInitVelocity()};
-      u = initVel * base::distance::NM2M / base::time::H2S;
+      u = initVel * base::length::NM2M / base::time::H2S;
    }
 }
 
@@ -559,7 +559,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
       //-------------------------------------------------------
       // define local constants
       //-------------------------------------------------------
-      const double KTS2MPS{base::distance::NM2M / base::time::H2S};
+      const double KTS2MPS{base::length::NM2M / base::time::H2S};
 
       //-------------------------------------------------------
       // convert argument units (deg -> rad)

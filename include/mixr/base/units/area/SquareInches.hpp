@@ -18,14 +18,11 @@ class SquareInches final: public Area
     DECLARE_SUBCLASS(SquareInches, Area)
 
 public:
-    SquareInches();
-    SquareInches(const double);
-    SquareInches(const Area&);
+    explicit SquareInches();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SIN; }
-
-    double toArea() const final                     { return getValue() * area::SIN2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SIN; }
+private:
+   // convert square inches to square meters (our base unit)
+   double convertToBaseUnit(const double x) final   { return x * area::SIN2SM; }
 };
 
 }

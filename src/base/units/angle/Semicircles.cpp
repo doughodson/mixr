@@ -8,21 +8,12 @@ IMPLEMENT_SUBCLASS(Semicircles, "Semicircles")
 EMPTY_SLOTTABLE(Semicircles)
 EMPTY_COPYDATA(Semicircles)
 EMPTY_DELETEDATA(Semicircles)
+EMPTY_CONSTRUCTOR(Semicircles)
 
-Semicircles::Semicircles() : Angle()
+Semicircles::Semicircles(const double x)
 {
     STANDARD_CONSTRUCTOR()
-}
-
-Semicircles::Semicircles(const double value) : Angle(value)
-{
-    STANDARD_CONSTRUCTOR()
-}
-
-Semicircles::Semicircles(const Angle& value) : Angle()
-{
-    STANDARD_CONSTRUCTOR()
-    BaseClass::copyData(value,true);
+    setValue(convertToBaseUnit(x));
 }
 
 }

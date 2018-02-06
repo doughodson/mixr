@@ -254,7 +254,7 @@ double Navigation::getLongitude() const
 // Returns system altitude (ft)
 double Navigation::getAltitudeFt() const
 {
-    return getAltitudeM() * base::distance::M2FT;
+    return getAltitudeM() * base::length::M2FT;
 }
 
 // Returns system altitude (m)
@@ -794,11 +794,11 @@ bool Navigation::setSlotRoute(const Route* const msg)
    return true;
 }
 
-bool Navigation::setSlotUtc(const base::Time* const msg)
+bool Navigation::setSlotUtc(const base::Time* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        initUTC = base::Seconds::convertStatic( *msg );
+    if (x != nullptr) {
+        initUTC = x->getValueInSeconds();
         ok = true;
     }
     return ok;
@@ -834,9 +834,9 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
 
                         if (pNum != nullptr) {
-                            const auto pDist = dynamic_cast<const base::Distance*>(pNum);
+                            const auto pDist = dynamic_cast<const base::Length*>(pNum);
                             if (pDist != nullptr) {
-                                values[n++] = base::NauticalMiles::convertStatic(*pDist);
+                                values[n++] = pDist->getValueInNauticalMiles();
                             } else {
                                 values[n++] = pNum->asDouble();
                             }
@@ -850,9 +850,9 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
 
                         if (pNum != nullptr) {
-                            const auto pDist = dynamic_cast<const base::Distance*>(pNum);
+                            const auto pDist = dynamic_cast<const base::Length*>(pNum);
                             if (pDist != nullptr) {
-                                values[n++] = base::NauticalMiles::convertStatic(*pDist);
+                                values[n++] = pDist->getValueInNauticalMiles();
                             } else {
                                 values[n++] = pNum->asDouble();
                             }

@@ -9,7 +9,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Integer; class NetHandler; }
+namespace base { class Angle; class Integer; class Length; class NetHandler; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }
 namespace dis {
@@ -66,7 +66,7 @@ struct ActionResponsePDU_R;
 //    maxTimeDR   <base::Time>           ! Max DR time (default: 5 seconds)
 //                <base::PairStream>     ! List of max DR times by kinds and domains (see note #4)
 //
-//    maxPositionError <base::Distance>      ! Max DR position error (default: 3 meters)
+//    maxPositionError <base::Length>        ! Max DR position error (default: 3 meters)
 //                     <base::PairStream>    ! List of max DR position errors by kinds and domains (see note #4)
 //
 //    maxOrientationError <base::Angle>      ! Max DR angular error (default: 3 degrees)
@@ -75,7 +75,7 @@ struct ActionResponsePDU_R;
 //    maxAge         <base::Time>        ! Max age (without update) (default: 12.5 seconds)
 //                   <base::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
 //
-//    maxEntityRange <base::Distance>    ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
+//    maxEntityRange <base::Length>      ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
 //                   <base::PairStream>  ! List of max entity ranges by kinds and domains (see note #4)
 //
 //    EmissionPduHandlers <base::PairStream> ! List of Electromagnetic-Emission PDU handlers
@@ -94,7 +94,7 @@ struct ActionResponsePDU_R;
 //       being order by player ID, site ID and app ID.
 //
 //    4) For the slots maxTimeDR, maxPositionError, maxOrientationError, maxAge and
-//       maxEntityRange, if the slot type is base::Time, base::Angle or base::Distance then that
+//       maxEntityRange, if the slot type is base::Time, base::Angle or base::Length then that
 //       parameter is set for entity types of all kinds and domains.  If a pair stream
 //       is given then individual entity kind/domain parameters can be set.  To set the
 //       parameters for individual entity kind/domain types, the slot name must have
@@ -328,13 +328,13 @@ protected:
    virtual bool setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxPositionErr(const double v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxPositionErr(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxPositionErr(const base::Length* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxOrientationErr(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxOrientationErr(const base::Angle* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxAge(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxAge(const base::Time* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxEntityRange(const double v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxEntityRange(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxEntityRange(const base::Length* const p, const unsigned char kind, const unsigned char domain);
 
    // NetIO Interface
    bool initNetwork() override;                                                   // Initialize the network
@@ -383,9 +383,9 @@ private:
    bool setSlotFederateName(const base::Identifier* const) final;     // Sets our federate name
    bool setSlotFederationName(const base::Identifier* const) final;   // Sets our federation name
    bool setSlotMaxTimeDR(const base::Time* const) final;              // Sets the max DR time(s) for all entity types
-   bool setSlotMaxPositionErr(const base::Distance* const) final;     // Sets the max positional error(s) for all entity types
+   bool setSlotMaxPositionErr(const base::Length* const) final;       // Sets the max positional error(s) for all entity types
    bool setSlotMaxOrientationErr(const base::Angle* const) final;     // Sets the max orientation error(s) for all entity types
-   bool setSlotMaxEntityRange(const base::Distance* const) final;     // Sets the max entity range(s) for all entity types
+   bool setSlotMaxEntityRange(const base::Length* const) final;       // Sets the max entity range(s) for all entity types
    bool setSlotMaxAge(const base::Time* const) final;                 // Sets the max age(s) for all entity types
 
    bool setSlotNetInput(base::NetHandler* const);                     // Network input handler

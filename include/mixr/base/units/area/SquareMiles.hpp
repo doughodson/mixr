@@ -18,14 +18,11 @@ class SquareMiles final: public Area
     DECLARE_SUBCLASS(SquareMiles, Area)
 
 public:
-    SquareMiles();
-    SquareMiles(const double);
-    SquareMiles(const Area&);
+    explicit SquareMiles();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SMI; }
-
-    double toArea() const final                     { return getValue() * area::SMI2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SMI; }
+private:
+   // convert square miles to square meters (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * area::SMI2SM; }
 };
 
 }

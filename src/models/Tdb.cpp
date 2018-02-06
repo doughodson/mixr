@@ -248,7 +248,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // If we're using ECEF coordinates then we compute the distance
    // to the earth horizon and the tangent of the angle from our
    // local level to the earth horizon
-   double hDist{1000000.0 * base::distance::NM2M};  // Distance to horizon (m) (default: really far away)
+   double hDist{1000000.0 * base::length::NM2M};  // Distance to horizon (m) (default: really far away)
    double hTanAng{};                                // Tangent of the angle to horizon (positive down)
    if (usingEcefFlg) {
       // Our vertical offset from our ownship is the inverse of the 'z'
@@ -362,7 +362,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
                         base::nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
 
                         // Set the distance to check to 60 nm
-                        double dist{60.0 * base::distance::NM2M};
+                        double dist{60.0 * base::length::NM2M};
 
                         // Terrain occulting check toward the space vehicle
                         occulted = terrain->targetOcculting2(osLat, osLon, osAlt, tbrg, dist, -tanTgtAng);

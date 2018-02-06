@@ -5,7 +5,7 @@
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Distance; class Number; }
+namespace base { class Angle; class Length; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ namespace models {
 //    speedMaxG      <Number>    ! Velocity we reach max G (kts)
 //    maxg           <Number>    ! Max G's (at "speedMaxG" or above)
 //    maxAccel       <Number>    ! Maximum Acceleration    (m/s/s)
-//    cmdAltitude    <Distance>  ! Command Altitude
+//    cmdAltitude    <Length>    ! Command Altitude
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <Number>    ! Command speed           (kts)
 //------------------------------------------------------------------------------
@@ -71,7 +71,7 @@ private:
    bool setSlotSpeedMaxG(const base::Number* const);
    bool setSlotMaxG(const base::Number* const);
    bool setSlotMaxAccel(const base::Number* const);
-   bool setSlotCmdAltitude(const base::Distance* const);
+   bool setSlotCmdAltitude(const base::Length* const);
    bool setSlotCmdHeading(const base::Angle* const);
    bool setSlotCmdVelocity(const base::Number* const);
 };

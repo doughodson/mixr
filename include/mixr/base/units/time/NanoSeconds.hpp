@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: NanoSeconds
-// Description: Seconds / 1000000000.0
+// Description: Concrete class to specify a time in nanoseconds
 //------------------------------------------------------------------------------
 class NanoSeconds final: public Time
 {
-    DECLARE_SUBCLASS(NanoSeconds, Time)
+   DECLARE_SUBCLASS(NanoSeconds, Time)
 
 public:
-    NanoSeconds();
-    NanoSeconds(const double);
-    NanoSeconds(const Time&);
+   explicit NanoSeconds();
 
-    static double convertStatic(const Time &n)      { return n.toTime() * time::S2NS; }
-
-    double toTime() const final                     { return getValue() * time::NS2S; }
-    double fromTime(const double a) const final     { return a * time::S2NS; }
+private:
+   // convert nanoseconds to seconds (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * time::NS2S; }
 };
 
 }

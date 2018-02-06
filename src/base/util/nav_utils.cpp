@@ -131,7 +131,7 @@ bool gbd2ll(
    const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA{distance::M2NM * pModel->getA()};
+   const double eemA{length::M2NM * pModel->getA()};
    //const double eemF  = pModel->getF();
    const double eemE2{pModel->getE2()};
 
@@ -269,7 +269,7 @@ bool gll2bd(
    const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA{distance::M2NM * pModel->getA()};
+   const double eemA{length::M2NM * pModel->getA()};
    //const double eemF  = pModel->getF();
    const double eemE2{pModel->getE2()};
 
@@ -408,7 +408,7 @@ bool glla2bd(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt{(dalt - salt) * distance::M2NM};
+   const double deltaAlt{(dalt - salt) * length::M2NM};
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon ) ) {
@@ -454,7 +454,7 @@ bool glla2bdS(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt{(dalt - salt) * distance::M2NM};
+   const double deltaAlt{(dalt - salt) * length::M2NM};
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon ) ) {
@@ -555,7 +555,7 @@ bool vbd2ll(
    //-----------------------------------
    // initialization
    //-----------------------------------
-   const double s{dist * distance::NM2M};  // geodesic distance in meters
+   const double s{dist * length::NM2M};  // geodesic distance in meters
    const double baseS{(s / eemB / a)};
    double sigma{baseS};
 
@@ -765,7 +765,7 @@ bool vll2bd(
    r = (b / 4.0) * (cosSigma * (-1.0 + 2.0 * cosSqr2SigmaM) - q);
    const double delSigma{b * sinSigma * (cos2SigmaM + r)};                   // Eq. 6
 
-   *dist = (eemB * a * (sigma - delSigma)) * distance::M2NM;
+   *dist = (eemB * a * (sigma - delSigma)) * length::M2NM;
 
    return true;
 }

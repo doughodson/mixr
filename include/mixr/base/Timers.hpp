@@ -27,7 +27,7 @@ class Timer : public Object
 public:
     enum class Type { UP, DOWN };        // Timer type/direction
 
-    static  const unsigned int MAX_TIMERS {MIXR_CONFIG_MAX_INTERVAL_TIMERS};
+    static const int MAX_TIMERS{MIXR_CONFIG_MAX_INTERVAL_TIMERS};
 
 public:
     Timer();
@@ -98,7 +98,7 @@ private:
 
     static bool frz;                   // Freeze all timers (freeze time)
     static Timer* timers[MAX_TIMERS];  // List of timers
-    static unsigned int nTimers;       // Number of timers in the list
+    static int nTimers;                // Number of timers in the list
     static long semaphore;             // Semaphore for the timer list
 
     static void addToTimerList(Timer*);

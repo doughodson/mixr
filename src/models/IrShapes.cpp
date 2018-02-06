@@ -12,7 +12,7 @@
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/units/areas.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cmath>
 
@@ -48,8 +48,7 @@ void IrShape::copyData(const IrShape& org, const bool)
 bool IrShape::setSlotIrShapeArea(const mixr::base::Area* const a)
 {
    if (a != nullptr) {
-      base::SquareMeters sm;
-      area = sm.convert(*a);
+      area = a->getValueInSquareMeters();
    }
    return true;
 }
@@ -96,10 +95,9 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
 {
    double value{};
 
-   const auto d = dynamic_cast<const base::Distance*>(s);
+   const auto d = dynamic_cast<const base::Length*>(s);
    if (d != nullptr) {
-      base::Meters m;
-      value = static_cast<double>(m.convert(*d));
+      value = d->getValueInMeters();
    } else if (s != nullptr) {
       value = s->asDouble();
    }
@@ -128,9 +126,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-   ON_SLOT(1, setSlotIrBoxX, base::Distance)
-   ON_SLOT(2, setSlotIrBoxY, base::Distance)
-   ON_SLOT(3, setSlotIrBoxZ, base::Distance)
+   ON_SLOT(1, setSlotIrBoxX, base::Length)
+   ON_SLOT(2, setSlotIrBoxY, base::Length)
+   ON_SLOT(3, setSlotIrBoxZ, base::Length)
 END_SLOT_MAP()
 
 IrBox::IrBox()
@@ -146,29 +144,26 @@ void IrBox::copyData(const IrBox& org, const bool)
    z = org.z;
 }
 
-bool IrBox::setSlotIrBoxX(const mixr::base::Distance* const d)
+bool IrBox::setSlotIrBoxX(const mixr::base::Length* const d)
 {
    if (d != nullptr) {
-      base::Meters m;
-      x = m.convert(*d);
+      x = d->getValueInMeters();
    }
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const mixr::base::Distance* const d)
+bool IrBox::setSlotIrBoxY(const mixr::base::Length* const d)
 {
    if (d != nullptr) {
-      base::Meters m;
-      y = m.convert(*d);
+      y = d->getValueInMeters();
    }
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const mixr::base::Distance* const d)
+bool IrBox::setSlotIrBoxZ(const mixr::base::Length* const d)
 {
    if (d != nullptr) {
-      base::Meters m;
-      z = m.convert(*d);
+      z = d->getValueInMeters();
    }
    return true;
 }

@@ -4,7 +4,7 @@
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
 namespace base { class Number; }
@@ -39,7 +39,7 @@ private:
    void initData();
 
    // Prediction parameters
-   double posGate {2.0 * base::distance::NM2M};   // Position Gate (meters)
+   double posGate {2.0 * base::length::NM2M};   // Position Gate (meters)
    double rngGate {500.0};   // Range Gate (meters)
    double velGate {10.0};    // Velocity Gate (m/s)
 

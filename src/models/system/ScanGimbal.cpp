@@ -948,7 +948,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
         double x{newScanRadius->asDouble()};
         const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
-            x = base::Radians::convertStatic(*aa);
+            x = aa->getValueInRadians();
         }
         ok = setScanRadius(x);
     }

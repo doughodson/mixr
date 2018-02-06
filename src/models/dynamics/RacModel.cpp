@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Quat"
@@ -35,7 +35,7 @@ BEGIN_SLOT_MAP(RacModel)
     ON_SLOT( 2, setSlotSpeedMaxG,   base::Number)
     ON_SLOT( 3, setSlotMaxG,        base::Number)
     ON_SLOT( 4, setSlotMaxAccel,    base::Number)
-    ON_SLOT( 5, setSlotCmdAltitude, base::Distance)
+    ON_SLOT( 5, setSlotCmdAltitude, base::Length)
     ON_SLOT( 6, setSlotCmdHeading,  base::Angle)
     ON_SLOT( 7, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
@@ -188,7 +188,7 @@ void RacModel::updateRAC(const double dt)
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   const double g{base::ETHG * base::distance::FT2M};
+   const double g{base::ETHG * base::length::FT2M};
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
@@ -204,7 +204,7 @@ void RacModel::updateRAC(const double dt)
    // ---
 
    // Max altitude rate 6000 ft /min converted to M/S
-   double maxAltRate{(3000.0 / 60.0) * base::distance::FT2M};
+   double maxAltRate{(3000.0 / 60.0) * base::length::FT2M};
 
    // commanded vertical velocity is delta altitude limited to max rate
    double cmdAltRate{(cmdAltitude - pp->getAltitudeM())};
@@ -277,7 +277,7 @@ void RacModel::updateRAC(const double dt)
    double newPhi{0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::angle::D2RCC * 60.0))};
 
    // Find Acceleration
-   double cmdVelMPS{cmdVelocity * (base::distance::NM2M / 3600.0)};
+   double cmdVelMPS{cmdVelocity * (base::length::NM2M / 3600.0)};
    double vpdot{(cmdVelMPS - pp->getTotalVelocity()) * 0.05};
    if (vpdot > maxAccel)  vpdot = maxAccel;
    if (vpdot < -maxAccel) vpdot = -maxAccel;
@@ -341,12 +341,11 @@ bool RacModel::setSlotMaxAccel(const base::Number* const msg)
     return ok;
 }
 
-bool RacModel::setSlotCmdAltitude(const base::Distance* const msg)
+bool RacModel::setSlotCmdAltitude(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       double value = base::Meters::convertStatic( *msg );
-       cmdAltitude = value;
+    if (x != nullptr) {
+       cmdAltitude = x->getValueInMeters();
        ok = true;
     }
     return ok;
@@ -356,8 +355,7 @@ bool RacModel::setSlotCmdHeading(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       double value  = base::Degrees::convertStatic( *msg );
-       cmdHeading = value;
+       cmdHeading = msg->getValueInDegrees();
        ok = true;
     }
     return ok;

@@ -64,11 +64,11 @@ void BearingPointer::draw()
 //------------------------------------------------------------------------------
 //  onUpdateRadBearingPointer() - update bearing angle
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateRadBearingPointer(const base::Angle* const msg)
+bool BearingPointer::onUpdateRadBearingPointer(const base::Angle* const x)
 {
     bool ok = false;
-    if (msg != nullptr) {
-        setBearingRad( static_cast<double>(base::Radians::convertStatic( *msg )) );
+    if (x != nullptr) {
+        setBearingRad(x->getValueInRadians());
         ok = true;
     }
     return ok;

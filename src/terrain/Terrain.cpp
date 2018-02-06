@@ -216,7 +216,7 @@ bool Terrain::targetOcculting(
    double brgDeg = 0.0;
    double distNM = 0.0;
    base::nav::fll2bd(refLat, refLon, tgtLat, tgtLon, &brgDeg, &distNM);
-   double dist = (distNM * base::distance::NM2M);
+   double dist = (distNM * base::length::NM2M);
 
    // Number of points (default: 100M data)
    unsigned int numPts = static_cast<unsigned int>((dist / 100.0f) + 0.5f);

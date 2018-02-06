@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Poundals
-// Description:  Newtons * 7.23301
+// Description: Concrete class to specify a force in Poundals
 //------------------------------------------------------------------------------
 class Poundals final: public Force
 {
-    DECLARE_SUBCLASS(Poundals, Force)
+   DECLARE_SUBCLASS(Poundals, Force)
 
 public:
-    Poundals();
-    Poundals(const double);
-    Poundals(const Force&);
+   explicit Poundals();
 
-    static double convertStatic(const Force& n)        { return n.toForce() * force::N2PD; }
-
-    double toForce() const final                       { return getValue() * force::PD2N; }
-    double fromForce(const double a) const final       { return a * force::N2PD; }
+private:
+   // convert poundals to newtons (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * force::PD2N; }
 };
 
 }

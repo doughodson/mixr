@@ -14,7 +14,7 @@
 #include "mixr/base/Longitude.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/util/nav_utils.hpp"
 
 namespace mixr {
@@ -155,16 +155,16 @@ IMPLEMENT_SUBCLASS(ActionImagingSar,"ActionImagingSar")
 BEGIN_SLOTTABLE(ActionImagingSar)
    "sarLatitude",    //  1) Target's latitude
    "sarLongitude",   //  2) Target's longitude
-   "sarElevation",   //  3) Target's elevation (Distance) (default: 0)
-   "resolution",     //  4) Image (pixel) resolution   (Distance) (default: 1 meter)
+   "sarElevation",   //  3) Target's elevation (Length) (default: 0)
+   "resolution",     //  4) Image (pixel) resolution   (Length) (default: 1 meter)
    "imageSize",      //  5) Image size: height & width (pixels) (default: 512)
 END_SLOTTABLE(ActionImagingSar)
 
 BEGIN_SLOT_MAP(ActionImagingSar)
     ON_SLOT(1, setSlotSarLat,     base::Latitude)
     ON_SLOT(2, setSlotSarLon,     base::Longitude)
-    ON_SLOT(3, setSlotSarElev,    base::Distance)
-    ON_SLOT(4, setSlotResolution, base::Distance)
+    ON_SLOT(3, setSlotSarElev,    base::Length)
+    ON_SLOT(4, setSlotResolution, base::Length)
     ON_SLOT(5, setSlotImageSize,  base::Integer)
 END_SLOT_MAP()
 
@@ -348,52 +348,50 @@ void ActionImagingSar::setSarSystem(Sar* const p)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool ActionImagingSar::setSlotSarLat(const base::Latitude* const msg)
+bool ActionImagingSar::setSlotSarLat(const base::Latitude* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setSarLatitude(msg->getDecimalDegrees());
+   if (x != nullptr) {
+      ok = setSarLatitude(x->getDecimalDegrees());
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarLon(const base::Longitude* const msg)
+bool ActionImagingSar::setSlotSarLon(const base::Longitude* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setSarLongitude(msg->getDecimalDegrees());
+   if (x != nullptr) {
+      ok = setSarLongitude(x->getDecimalDegrees());
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarElev(const base::Distance* const msg)
+bool ActionImagingSar::setSlotSarElev(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double elev{base::Meters::convertStatic( *msg )};
-      ok = setSarElevation( elev );
+   if (x != nullptr) {
+      ok = setSarElevation(x->getValueInMeters());
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotResolution(const base::Distance* const msg)
+bool ActionImagingSar::setSlotResolution(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double res{base::Meters::convertStatic( *msg )};
-      ok = setResolution( res );
+   if (x != nullptr) {
+      ok = setResolution(x->getValueInMeters());
    }
    return ok;
 }
 
-bool ActionImagingSar::setSlotImageSize(const base::Integer* const msg)
+bool ActionImagingSar::setSlotImageSize(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setImageSize( msg->asInt() );
+   if (x != nullptr) {
+      ok = setImageSize(x->asInt());
       if (!ok) {
          if (isMessageEnabled(MSG_INFO)) {
-         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << msg->asInt() << std::endl;
+         std::cout << "  ActionImagingSar::setSlotImageSize must be 512, 1024, 2048 or 4096, not " << x->asInt() << std::endl;
       }
    }
    }

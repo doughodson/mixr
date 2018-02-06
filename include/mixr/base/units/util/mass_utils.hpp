@@ -6,15 +6,15 @@ namespace mixr {
 namespace base {
 namespace mass {
 
-// conversion constant
-const double KG2G = 1000.0;            // KiloGrams => Grams
-const double G2KG = (1 / KG2G);        // Grams => KiloGrams
-const double KG2SL = 0.06852176585f;   // KiloGrams => Slugs
-const double SL2KG = (1 / KG2SL);      // Slugs => KiloGrams
-const double KG2PM = 2.2046f;          // KiloGrams => PoundsMass
-const double PM2KG = (1 / KG2PM);      // PoundsMass => KiloGrams
+// conversion constants
+constexpr double KG2G{1000.0};            // KiloGrams => Grams
+constexpr double G2KG{1.0 / KG2G};        // Grams => KiloGrams
+constexpr double KG2SL{0.06852176585};    // KiloGrams => Slugs
+constexpr double SL2KG{1.0 / KG2SL};      // Slugs => KiloGrams
+constexpr double KG2PM{2.2046};           // KiloGrams => PoundsMass
+constexpr double PM2KG{1.0 / KG2PM};      // PoundsMass => KiloGrams
 
-// conversions between Masss
+// conversion functions
 inline double gramsToKiloGrams(const double v) { return v * G2KG; }
 inline double gramsToSlugs(const double v)     { return (v * G2KG) * KG2SL; }
 inline double kiloGramsToGrams(const double v) { return v * KG2G; }

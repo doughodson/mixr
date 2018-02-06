@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Slugs
-// Description:  KiloGram * 0.06852176585
+// Description: Concrete class to specify a mass in Slugs
 //------------------------------------------------------------------------------
 class Slugs : public Mass
 {
-    DECLARE_SUBCLASS(Slugs, Mass)
+   DECLARE_SUBCLASS(Slugs, Mass)
 
 public:
-    Slugs();
-    Slugs(const double);
-    Slugs(const Mass&);
+   explicit Slugs();
 
-    static double convertStatic(const Mass &n)       { return n.toMass() * mass::KG2SL; }
-
-    double toMass() const final                      { return getValue() * mass::SL2KG; }
-    double fromMass(const double a) const final      { return a * mass::KG2SL; }
+private:
+   // convert Slugs to KiloGrams (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * mass::SL2KG; }
 };
 
 }

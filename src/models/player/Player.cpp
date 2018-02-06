@@ -115,13 +115,13 @@ END_SLOTTABLE(Player)
 
 BEGIN_SLOT_MAP(Player)
 
-   ON_SLOT( 1, setSlotInitXPos,           base::Distance)
+   ON_SLOT( 1, setSlotInitXPos,           base::Length)
    ON_SLOT( 1, setSlotInitXPos,           base::Number)
 
-   ON_SLOT( 2, setSlotInitYPos,           base::Distance)
+   ON_SLOT( 2, setSlotInitYPos,           base::Length)
    ON_SLOT( 2, setSlotInitYPos,           base::Number)
 
-   ON_SLOT( 3, setSlotInitAlt,            base::Distance)
+   ON_SLOT( 3, setSlotInitAlt,            base::Length)
    ON_SLOT( 3, setSlotInitAlt,            base::Number)
 
    ON_SLOT( 4, setSlotInitPosition,       base::List)
@@ -158,7 +158,7 @@ BEGIN_SLOT_MAP(Player)
 
    ON_SLOT(19, setSlotTerrainElevReq,     base::Boolean)
    ON_SLOT(20, setSlotInterpolateTerrain, base::Boolean)
-   ON_SLOT(21, setSlotTerrainOffset,      base::Distance)
+   ON_SLOT(21, setSlotTerrainOffset,      base::Length)
 
    ON_SLOT(22, setSlotPositionFreeze,     base::Boolean)
    ON_SLOT(23, setSlotAltitudeFreeze,     base::Boolean)
@@ -736,13 +736,13 @@ double Player::getCommandedVelocityKts() const
 // Commanded (true) velocity (Feet/Sec)
 double Player::getCommandedVelocityFps() const
 {
-   return getCommandedVelocityKts() * base::distance::NM2FT / base::time::H2S;
+   return getCommandedVelocityKts() * base::length::NM2FT / base::time::H2S;
 }
 
 // Commanded (true) velocity (Meters/Sec)
 double Player::getCommandedVelocityMps() const
 {
-   return getCommandedVelocityKts() * base::distance::NM2M / base::time::H2S;
+   return getCommandedVelocityKts() * base::length::NM2M / base::time::H2S;
 }
 
 // Return true if altitude-hold mode is on
@@ -772,7 +772,7 @@ double Player::getCommandedAltitudeM() const
 // Get commanded (HAE) altitude (feet)
 double Player::getCommandedAltitudeFt() const
 {
-   return getCommandedAltitude() * base::distance::M2FT;
+   return getCommandedAltitude() * base::length::M2FT;
 }
 
 // True if player is destroyed
@@ -784,7 +784,7 @@ bool Player::isDestroyed() const
 // Earth radius (meters)
 double Player::getEarthRadius() const
 {
-   double erad{base::nav::ERAD60 * base::distance::NM2M};  // (default)
+   double erad{base::nav::ERAD60 * base::length::NM2M};  // (default)
 
    const WorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
@@ -1756,7 +1756,7 @@ bool Player::setCommandedAltitudeM(const double a)
 // Sets commanded (HAE) altitude (feet)
 bool Player::setCommandedAltitudeFt(const double a)
 {
-   return setCommandedAltitude( a * base::distance::FT2M );
+   return setCommandedAltitude( a * base::length::FT2M );
 }
 
 // Sets the elevation of the terrain at this player's location (meters)
@@ -3413,17 +3413,13 @@ bool Player::setStoresMgr(base::Pair* const sys)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// Slot functions
-//------------------------------------------------------------------------------
-
 // initXPos: X position (+north)
-bool Player::setSlotInitXPos(const base::Distance* const msg)
+bool Player::setSlotInitXPos(const base::Length* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[INORTH] = base::Meters::convertStatic(*msg);
+      pos[INORTH] = msg->getValueInMeters();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3442,12 +3438,12 @@ bool Player::setSlotInitXPos(const base::Number* const msg)
 }
 
 // initYPos: Y position (+east)
-bool Player::setSlotInitYPos(const base::Distance* const msg)
+bool Player::setSlotInitYPos(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[IEAST] = base::Meters::convertStatic(*msg);
+      pos[IEAST] = x->getValueInMeters();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3466,12 +3462,11 @@ bool Player::setSlotInitYPos(const base::Number* const msg)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up)
-bool Player::setSlotInitAlt(const base::Distance* const msg)
+bool Player::setSlotInitAlt(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double value{base::Meters::convertStatic(*msg)};
-      setInitAltitude( value );
+   if (x != nullptr) {
+      setInitAltitude(x->getValueInMeters());
       ok = true;
    }
    return ok;
@@ -3523,7 +3518,7 @@ bool Player::setSlotInitLat(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{static_cast<double>(base::Degrees::convertStatic(*msg))};
+      const double val{msg->getValueInDegrees()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3568,7 +3563,7 @@ bool Player::setSlotInitLon(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double val{static_cast<double>(base::Degrees::convertStatic(*msg))};
+      const double val{msg->getValueInDegrees()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3611,7 +3606,7 @@ bool Player::setSlotInitRoll(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{base::Radians::convertStatic(*msg)};
+      const double value{msg->getValueInRadians()};
       if ( value >= -base::PI && value <= base::PI ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3645,7 +3640,7 @@ bool Player::setInitPitch(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{base::Radians::convertStatic(*msg)};
+      const double value{msg->getValueInRadians()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3679,7 +3674,7 @@ bool Player::setInitHeading(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      double value{base::Radians::convertStatic(*msg)};
+      double value{msg->getValueInRadians()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
@@ -3737,8 +3732,7 @@ bool Player::setSlotTestRollRate(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{base::Radians::convertStatic(*msg)};
-      testAngRates[IROLL] = value;
+      testAngRates[IROLL] = msg->getValueInRadians();
       ok = true;
    }
 
@@ -3750,8 +3744,7 @@ bool Player::setSlotTestPitchRate(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{base::Radians::convertStatic(*msg)};
-      testAngRates[IPITCH] = value;
+      testAngRates[IPITCH] = msg->getValueInRadians();
       ok = true;
    }
 
@@ -3763,8 +3756,7 @@ bool Player::setSlotTestYawRate(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double value{base::Radians::convertStatic(*msg)};
-      testAngRates[IYAW] = value;
+      testAngRates[IYAW] = msg->getValueInRadians();
       ok = true;
    }
 
@@ -3799,7 +3791,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      initVp = (msg->asDouble() * mixr::base::distance::NM2M) / 3600.0f;
+      initVp = (msg->asDouble() * mixr::base::length::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -3914,11 +3906,11 @@ bool Player::setSlotInterpolateTerrain(const base::Boolean* const msg)
 }
 
 // terrainOffset: Ground clamp offset from terrain to player's CG (base::Distance)
-bool Player::setSlotTerrainOffset(const base::Distance* const msg)
+bool Player::setSlotTerrainOffset(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setTerrainOffset( base::Meters::convertStatic( *msg ) );
+   if (x != nullptr) {
+      ok = setTerrainOffset(x->getValueInMeters());
    }
    return ok;
 }
@@ -4008,7 +4000,7 @@ bool Player::setSlotDataLogTime(const base::Time* const time)
 {
    bool ok{};
    if (time != nullptr) {
-      dataLogTime = time->getValue();
+      dataLogTime = time->getValueInSeconds();
       ok = true;
    }
    return ok;

@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Grams
-// Description:  KiloGrams * 1000
+// Description: Concrete class to specify a mass in Grams
 //------------------------------------------------------------------------------
 class Grams : public Mass
 {
-    DECLARE_SUBCLASS(Grams, Mass)
+   DECLARE_SUBCLASS(Grams, Mass)
 
 public:
-    Grams();
-    Grams(const double);
-    Grams(const Mass&);
+   explicit Grams();
 
-    static double convertStatic(const Mass &n)       { return n.toMass() * mass::KG2G; }
-
-    double toMass() const final                      { return getValue() * mass::G2KG; }
-    double fromMass(const double a) const final      { return a * mass::KG2G; }
+private:
+   // convert Grams to KiloGrams (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * mass::G2KG; }
 };
 
 }

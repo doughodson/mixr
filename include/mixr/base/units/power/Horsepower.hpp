@@ -11,21 +11,18 @@ namespace base {
 
 //----------------------------------------------------------------------------
 // Class: Horsepower
-// Description: Watts * 1341
+// Description: Concrete class to specify power in Horsepower
 //----------------------------------------------------------------------------
 class Horsepower final: public Power
 {
-    DECLARE_SUBCLASS(Horsepower, Power)
+   DECLARE_SUBCLASS(Horsepower, Power)
 
 public:
-    Horsepower();
-    Horsepower(const double);
-    Horsepower(const Power&);
+   explicit Horsepower();
 
-    static double convertStatic(const Power &n)      { return n.toPower() * power::W2HP; }
-
-    double toPower() const final                     { return getValue() * power::HP2W; }
-    double fromPower(const double a) const final     { return a * power::W2HP; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * power::HP2W; }
 };
 
 }

@@ -207,7 +207,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const base::Vec3d* losO2T{tdb0->getLosVectors()};
       const base::Vec3d* losT2O{tdb0->getTargetLosVectors()};
       Player** targets{tdb0->getTargets()};
-      const double maximumRange{irQuery->getMaxRangeNM()*base::distance::NM2M};
+      const double maximumRange{irQuery->getMaxRangeNM()*base::length::NM2M};
 
       // ---
       // Send query packets to the targets

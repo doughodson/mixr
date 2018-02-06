@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: CubicInches
-// Description: Cubic Meters * 61023.74
+// Description: Concrete class to specify a volume in cubit inches
 //------------------------------------------------------------------------------
 class CubicInches final: public Volume
 {
-    DECLARE_SUBCLASS(CubicInches, Volume)
+   DECLARE_SUBCLASS(CubicInches, Volume)
 
 public:
-    CubicInches();
-    CubicInches(const double);
-    CubicInches(const Volume&);
+   explicit CubicInches();
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2CIN; }
-
-    double toVolume() const final                    { return getValue() * volume::CIN2CM; }
-    double fromVolume(const double a) const final    { return a * volume::CM2CIN; }
+private:
+   // convert cubic inches to cubic meters (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * volume::CIN2CM; }
 };
 
 }

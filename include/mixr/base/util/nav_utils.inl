@@ -25,7 +25,7 @@ inline bool fbd2llE(
    const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  {distance::M2NM * pModel->getA()};   // semi-major axis
+   const double a  {length::M2NM * pModel->getA()};   // semi-major axis
    const double e2 {pModel->getE2()};  // eccentricity squared
 
    // Define Local Constants
@@ -73,7 +73,7 @@ inline bool fll2bdE(
    const EarthModel* pModel{em};
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a{distance::M2NM * pModel->getA()};   // semi-major axis
+   const double a{length::M2NM * pModel->getA()};   // semi-major axis
    const double e2{pModel->getE2()};  // eccentricity squared
 
    // Define Local Constants
@@ -655,10 +655,10 @@ inline bool convertPosVec2llS(
    bool ok{};
    if (lat != nullptr && lon != nullptr && alt != nullptr) {
 
-      *lat = (pos[INORTH] * distance::M2NM)/60.0 + slat;
+      *lat = (pos[INORTH] * length::M2NM)/60.0 + slat;
 
       if (cosSlat != 0.0)
-         *lon = angle::aepcdDeg( (pos[IEAST] * distance::M2NM)/(60.0 * cosSlat) + slon );
+         *lon = angle::aepcdDeg( (pos[IEAST] * length::M2NM)/(60.0 * cosSlat) + slon );
       else
          *lon = slon;
 
@@ -756,8 +756,8 @@ inline bool convertLL2PosVecS(
 {
    bool ok{};
    if (pos != nullptr) {
-      const double x{angle::aepcdDeg(lat - slat) * 60.0 * distance::NM2M};
-      const double y{angle::aepcdDeg(lon - slon) * 60.0 * distance::NM2M * cosSlat};
+      const double x{angle::aepcdDeg(lat - slat) * 60.0 * length::NM2M};
+      const double y{angle::aepcdDeg(lon - slon) * 60.0 * length::NM2M * cosSlat};
       const double z{-alt};
       pos->set(x, y, z);
       ok = true;

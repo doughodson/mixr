@@ -9,7 +9,7 @@
 #include "mixr/base/osg/Vec4d"
 
 #include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 #include <array>
 
@@ -160,8 +160,8 @@ public:
 
    // Track's estimated ground speed (m/s)
    double getGroundSpeed() const                   { return gndSpd; }
-   double getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2FT); }
-   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2NM * 3600.0); }
+   double getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<double>(base::length::M2FT); }
+   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::length::M2NM * 3600.0); }
 
    // Ground track angle, true north
    double getGroundTrack() const                   { return gndTrk; }

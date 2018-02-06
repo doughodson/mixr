@@ -4,29 +4,23 @@
 
 #include "mixr/base/units/mass/Mass.hpp"
 
-#include "mixr/base/units/util/mass_utils.hpp"
-
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: KiloGrams
-// Description:  An instance of KiloGrams with its value equal to 1.0 is one
-//               base unit for mass.
+// Description: Concrete class to specify a mass in KiloGrams
 //------------------------------------------------------------------------------
 class KiloGrams final: public Mass
 {
-    DECLARE_SUBCLASS(KiloGrams, Mass)
+   DECLARE_SUBCLASS(KiloGrams, Mass)
 
 public:
-    KiloGrams();
-    KiloGrams(const double);
-    KiloGrams(const Mass&);
+   explicit KiloGrams();
 
-    static double convertStatic(const Mass &n)       { return n.toMass(); }
-
-    double toMass() const final                      { return getValue(); }
-    double fromMass(const double a) const final      { return a; }
+private:
+   // convert KiloGrams to KiloGrams (our base unit)
+   double convertToBaseUnit(const double x) final     { return x; }
 };
 
 }

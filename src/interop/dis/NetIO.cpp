@@ -19,7 +19,7 @@
 #include "mixr/base/PairStream.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
@@ -123,7 +123,7 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(4, setSlotMaxTimeDR,           base::Time)
    ON_SLOT(4, setSlotMaxTimeDR,           base::PairStream)
 
-   ON_SLOT(5, setSlotMaxPositionErr,      base::Distance)
+   ON_SLOT(5, setSlotMaxPositionErr,      base::Length)
    ON_SLOT(5, setSlotMaxPositionErr,      base::PairStream)
 
    ON_SLOT(6, setSlotMaxOrientationErr,   base::Angle)
@@ -132,7 +132,7 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(7, setSlotMaxAge,              base::Time)
    ON_SLOT(7, setSlotMaxAge,              base::PairStream)
 
-   ON_SLOT(8, setSlotMaxEntityRange,      base::Distance)
+   ON_SLOT(8, setSlotMaxEntityRange,      base::Length)
    ON_SLOT(8, setSlotMaxEntityRange,      base::PairStream)
 
    ON_SLOT(9, setSlotEmissionPduHandlers, base::PairStream)
@@ -1217,13 +1217,11 @@ bool NetIO::setMaxAge(const double v, const unsigned char kind, const unsigned c
 //------------------------------------------------------------------------------
 
 // Sets max entity range for this entity kind/domain
-bool NetIO::setMaxEntityRange(const base::Distance* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxEntityRange(const base::Length* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok {};
     if (p != nullptr) {
-        base::Meters ref;
-        double meters {ref.convert(*p)};
-        ok = setMaxEntityRange(meters, kind, domain);
+        ok = setMaxEntityRange(p->getValueInMeters(), kind, domain);
     }
     return ok;
 }
@@ -1231,23 +1229,19 @@ bool NetIO::setMaxEntityRange(const base::Distance* const p, const unsigned char
 // Sets max DR time for this entity kind/domain
 bool NetIO::setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain)
 {
-    bool ok {};
+    bool ok{};
     if (p != nullptr) {
-        base::Seconds ref;
-        double sec {ref.convert(*p)};
-        ok = setMaxTimeDR(sec, kind, domain);
+        ok = setMaxTimeDR(p->getValueInSeconds(), kind, domain);
     }
     return ok;
 }
 
 // Sets max position error for this entity kind/domain
-bool NetIO::setMaxPositionErr(const base::Distance* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxPositionErr(const base::Length* const p, const unsigned char kind, const unsigned char domain)
 {
-    bool ok {};
+    bool ok{};
     if (p != nullptr) {
-        base::Meters ref;
-        double meters {ref.convert(*p)};
-        ok = setMaxPositionErr(meters, kind, domain);
+        ok = setMaxPositionErr(p->getValueInMeters(), kind, domain);
     }
     return ok;
 }
@@ -1255,10 +1249,9 @@ bool NetIO::setMaxPositionErr(const base::Distance* const p, const unsigned char
 // Sets max orientation error for this entity kind/domain
 bool NetIO::setMaxOrientationErr(const base::Angle* const p, const unsigned char kind, const unsigned char domain)
 {
-    bool ok {};
+    bool ok{};
     if (p != nullptr) {
-        base::Radians ref;
-        double radians {static_cast<double>(ref.convert(*p))};
+        const double radians{p->getValueInRadians()};
         ok = setMaxOrientationErr(radians, kind, domain);
     }
     return ok;
@@ -1267,11 +1260,9 @@ bool NetIO::setMaxOrientationErr(const base::Angle* const p, const unsigned char
 // Sets max age (without update) of a networked player of this entity kind/domain
 bool NetIO::setMaxAge(const base::Time* const p, const unsigned char kind, const unsigned char domain)
 {
-    bool ok {};
+    bool ok{};
     if (p != nullptr) {
-        base::Seconds ref;
-        double sec {ref.convert(*p)};
-        ok = setMaxAge(sec, kind, domain);
+        ok = setMaxAge(p->getValueInSeconds(), kind, domain);
     }
     return ok;
 }
@@ -1322,7 +1313,7 @@ void NetIO::clearEmissionPduHandlers()
 // By RfSensor data
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const models::RfSensor* const msg)
 {
-   const EmissionPduHandler* handler {};
+   const EmissionPduHandler* handler{};
    if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching R/F sensor ...
       for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
@@ -1343,7 +1334,7 @@ const EmissionPduHandler* NetIO::findEmissionPduHandler(const models::RfSensor* 
 // By Emission System PDU data
 const EmissionPduHandler* NetIO::findEmissionPduHandler(const EmissionSystem* const msg)
 {
-   const EmissionPduHandler* handler {};
+   const EmissionPduHandler* handler{};
    if (msg != nullptr && nEmissionHandlers > 0) {
       // Try to find one with a matching emitter name
       for (unsigned int i = 0; i < nEmissionHandlers && handler == nullptr; i++) {
@@ -1420,7 +1411,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{(*p->slot()).c_str()};
-            const auto pp = dynamic_cast<const base::Distance*>( p->object() );
+            const auto pp = dynamic_cast<const base::Length*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1445,7 +1436,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
 }
 
 // Sets the maximum range for all entity types
-bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
+bool NetIO::setSlotMaxEntityRange(const base::Length* const msg)
 {
    return setMaxEntityRange(msg, 255, 255);
 }
@@ -1504,7 +1495,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{(*p->slot()).c_str()};
-            const auto pp = dynamic_cast<const base::Distance*>( p->object() );
+            const auto pp = dynamic_cast<const base::Length*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1529,7 +1520,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
 }
 
 // Sets max position errors for all entity types
-bool NetIO::setSlotMaxPositionErr(const base::Distance* const msg)
+bool NetIO::setSlotMaxPositionErr(const base::Length* const msg)
 {
    return setMaxPositionErr(msg, 255, 255);
 }

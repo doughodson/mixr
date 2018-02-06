@@ -765,7 +765,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
-         unsigned char lenB{sizeof(EmitterBeamData) + (numTJT * sizeof(TrackJamTargets))};
+         unsigned char lenB{static_cast<unsigned char>(sizeof(EmitterBeamData) + (numTJT * sizeof(TrackJamTargets)))};
          bd.beamDataLength = (lenB/4);
 
          // ---

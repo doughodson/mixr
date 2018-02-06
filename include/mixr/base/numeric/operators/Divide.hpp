@@ -15,12 +15,6 @@ namespace base {
 //
 //        ( / val n2 ) gives val divided by n2.
 //
-//
-// Public method :
-//
-//      virtual void operation()
-//          Performs the numeric operation of the class ( / ).
-//          Note:  In Divide, a zero divisor causes operation() to do nothing.
 //------------------------------------------------------------------------------
 class Divide final: public Operator
 {
@@ -30,6 +24,8 @@ public:
    Divide();
 
 private:
+   // performs the numeric equivalent operation of a "/"
+   // a zero divisor is ignored and produces nothing
    void operation() final;
    double getValue() const final       { return val; }
 

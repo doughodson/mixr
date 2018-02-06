@@ -7,14 +7,14 @@ namespace base {
 namespace volume {
 
 // conversion constants
-const double CM2CFT = 35.3146667215f;   // CubicMeters => CubicFeet
-const double CFT2CM = (1 / CM2CFT);     // CubicFeet => CubicMeters
-const double CM2CIN = 61023.7440947f;   // CubicMeters => CubicInches
-const double CIN2CM = (1 / CM2CIN);     // CubicInches => CubicMeters
-const double CM2L = 1000.0f;            // CubicMeters => Liters
-const double L2CM = (1 / CM2L);         // Liters => CubicMeters
+constexpr double CM2CFT{35.3146667215};   // CubicMeters => CubicFeet
+constexpr double CFT2CM{1.0 / CM2CFT};    // CubicFeet => CubicMeters
+constexpr double CM2CIN{61023.7440947};   // CubicMeters => CubicInches
+constexpr double CIN2CM{1.0 / CM2CIN};    // CubicInches => CubicMeters
+constexpr double CM2L{1000.0};            // CubicMeters => Liters
+constexpr double L2CM{1.0 / CM2L};        // Liters => CubicMeters
 
-// conversion routines
+// conversion functions
 inline double cubicMetersToFeet(const double v)   { return v * CM2CFT; }
 inline double cubicFeetToMeters(const double v)   { return v * CFT2CM; }
 

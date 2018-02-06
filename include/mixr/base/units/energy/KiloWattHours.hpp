@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: KiloWattHours
-// Description: Joules * 0.000000277778
+// Description: Concrete class to specify energy in units of KiloWatt hours
 //------------------------------------------------------------------------------
 class KiloWattHours final: public Energy
 {
-    DECLARE_SUBCLASS(KiloWattHours, Energy)
+   DECLARE_SUBCLASS(KiloWattHours, Energy)
 
 public:
-    KiloWattHours();
-    KiloWattHours(const double);
-    KiloWattHours(const Energy&);
+   explicit KiloWattHours();
 
-    static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2KWH; }
-
-    double toEnergy() const final                    { return getValue() * energy::KWH2J; }
-    double fromEnergy(const double a) const final    { return a * energy::J2KWH; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final    { return x  * energy::KWH2J; }
 };
 
 }

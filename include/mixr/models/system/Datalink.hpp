@@ -7,7 +7,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Distance; class Integer; class Number; class String; }
+namespace base { class Integer; class Length; class Number; class String; }
 namespace models {
 class CommRadio;
 class TrackManager;
@@ -19,7 +19,7 @@ class TrackManager;
 // Factory name: Datalink
 // Slots:
 //    radioId           <Integer>    ! Radio ID (see note #1) (default: 0)
-//    maxRange          <Distance>   ! Max range of the datalink (w/o a radio model) (see note #2)
+//    maxRange          <Length>     ! Max range of the datalink (w/o a radio model) (see note #2)
 //                                   ! (default: 5000)
 //    radioName         <Identifier> ! Name of the (optional) communication radio model (see notes #1 and #2)
 //                                   ! (default: 0)
@@ -115,7 +115,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotRadioId(const base::Integer* const);
-   bool setSlotMaxRange(const base::Distance* const);
+   bool setSlotMaxRange(const base::Length* const);
    bool setSlotRadioName(const base::String* const x)                { return setRadioName(x); }
    bool setSlotTrackManagerName(const base::String* const x)         { return setTrackManagerName(x); }
 };

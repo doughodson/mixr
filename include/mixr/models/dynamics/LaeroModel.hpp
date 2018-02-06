@@ -4,6 +4,8 @@
 
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
+#include "mixr/base/util/constants.hpp"
+
 namespace mixr {
 namespace models {
 
@@ -42,8 +44,6 @@ protected:
    //bool flyTGS(const double tgsCmdKts) { return flyVel(tgsCmdKts); }
 
 private:
-   static const double HALF_PI;
-   static const double EPSILON;
    void update4DofModel(const double dt);
 
    double dT{};

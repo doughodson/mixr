@@ -57,7 +57,7 @@ void StrokeFont::outputText(const double x, const double y, const char* txt, con
 
     // output the text
     glPushMatrix();
-    GLfloat lw = 0;
+    GLfloat lw{};
     glGetFloatv(GL_LINE_WIDTH, &lw);
     glLineWidth(2.0f);
     glTranslated(x,y,0.0);
@@ -97,7 +97,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN];
-    const int nn = xferChars(cbuf,MSG_BUF_LEN,txt,n);
+    const int nn{xferChars(cbuf, MSG_BUF_LEN, txt, n)};
     if (nn <= 0) return;
 
     // Set the base
@@ -105,7 +105,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
 
     // output and scale the text
     glPushMatrix();
-    GLfloat lw = 0;
+    GLfloat lw{};
     glGetFloatv(GL_LINE_WIDTH, &lw);
     glLineWidth(2.0f);
     glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -113,7 +113,7 @@ void StrokeFont::outputText(const char* txt, const int n, const bool vf, const b
         // Vertical text
         char cc[2];
         cc[1] = '\0';
-        GLdouble dy = getLineSpacing();
+        GLdouble dy{getLineSpacing()};
         if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
         for (int i = 0; i < nn; i++) {
             cc[0] = cbuf[i];
@@ -193,12 +193,12 @@ enum {
     FONT_ADVANCE
 };
 
-static const unsigned int MAX_STROKES = 256;
-static const unsigned int END_OF_LIST = 256;
+static const unsigned int MAX_STROKES{256};
+static const unsigned int END_OF_LIST{256};
 
 // Displays so two (2) points on Y is our origin
-static const double XOFFSET = 0.0;
-static const double YOFFSET = 2.0;
+static const double XOFFSET{};
+static const double YOFFSET{2.0};
 
 
 static GLdouble strokeFont[][1+MAX_STROKES*3] = {

@@ -4,29 +4,23 @@
 
 #include "mixr/base/units/force/Force.hpp"
 
-#include "mixr/base/units/util/force_utils.hpp"
-
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Newtons
-// Description:  An instance of Newtons with its value equal to 1.0 is one
-//               base unit for forces.
+// Description: Concrete class to specify a force in Newtons
 //------------------------------------------------------------------------------
 class Newtons final: public Force
 {
-    DECLARE_SUBCLASS(Newtons, Force)
+   DECLARE_SUBCLASS(Newtons, Force)
 
 public:
-    Newtons();
-    Newtons(const double);
-    Newtons(const Force&);
+   explicit Newtons();
 
-    static double convertStatic(const Force& n)        { return n.toForce(); }
-
-    double toForce() const final                       { return getValue(); }
-    double fromForce(const double a) const final       { return a; }
+private:
+   // convert Newtons to Newtons (our base unit)
+   double convertToBaseUnit(const double x) final     { return x; }
 };
 
 }

@@ -59,7 +59,7 @@ bool LowpassFilter::setSlotWc(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      double hz = base::Hertz::convertStatic(*msg);
+      double hz = msg->getValueInHertz();
       double rps = static_cast<double>( hz * 2.0 * base::PI);
       if (rps > 0) {
          setWc( rps );

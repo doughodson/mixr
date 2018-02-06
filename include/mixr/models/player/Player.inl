@@ -255,7 +255,7 @@ inline double Player::getAltitudeM() const
 // Altitude HAE (ft)
 inline double Player::getAltitudeFt() const
 {
-   return getAltitude() * base::distance::M2FT;
+   return getAltitude() * base::length::M2FT;
 }
 
 // Altitude AGL (meters) 
@@ -273,7 +273,7 @@ inline double Player::getAltitudeAglM() const
 // Altitude AGL (ft)
 inline double Player::getAltitudeAglFt() const
 {
-   return getAltitudeAgl() * base::distance::M2FT;
+   return getAltitudeAgl() * base::length::M2FT;
 }
 
 // Player's total velocity (m/s)
@@ -285,13 +285,13 @@ inline double Player::getTotalVelocity() const
 // Player's total velocity (ft/s)
 inline double Player::getTotalVelocityFPS() const
 {
-   return getTotalVelocity() * base::distance::M2FT;
+   return getTotalVelocity() * base::length::M2FT;
 }
 
 // Player's total velocity (kts)
 inline double Player::getTotalVelocityKts() const
 {
-   return getTotalVelocity() * base::distance::M2NM * 3600.0f;
+   return getTotalVelocity() * base::length::M2NM * 3600.0f;
 }
 
 // Player's ground speed (m/s)
@@ -303,13 +303,13 @@ inline double Player::getGroundSpeed() const
 // Player's ground speed (ft/s)
 inline double Player::getGroundSpeedFPS() const
 {
-   return getGroundSpeed() * base::distance::M2FT;
+   return getGroundSpeed() * base::length::M2FT;
 }
 
 // Player's ground speed (kts)
 inline double Player::getGroundSpeedKts() const 
 {
-   return getGroundSpeed() * base::distance::M2NM * 3600.0f;
+   return getGroundSpeed() * base::length::M2NM * 3600.0f;
 }
 
 // Player's ground track (rad)
@@ -537,7 +537,7 @@ inline double Player::getTerrainElevationM() const
 // Returns terrain elevation (Feet)
 inline double Player::getTerrainElevationFt() const
 { 
-   return getTerrainElevation() * base::distance::M2FT;
+   return getTerrainElevation() * base::length::M2FT;
 }
 
 // Ground clamping offset from the terrain to our CG (meters)

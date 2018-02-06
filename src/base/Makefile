@@ -99,16 +99,6 @@ OBJS =  \
 	units/area/SquareMiles.o \
 	units/area/SquareMilliMeters.o \
 	units/area/SquareYards.o \
-	units/distance/CentiMeters.o \
-	units/distance/Distance.o \
-	units/distance/Feet.o \
-	units/distance/Inches.o \
-	units/distance/KiloMeters.o \
-	units/distance/Meters.o \
-	units/distance/MicroMeters.o \
-	units/distance/Microns.o \
-	units/distance/NauticalMiles.o \
-	units/distance/StatuteMiles.o \
 	units/energy/BTUs.o \
 	units/energy/Calories.o \
 	units/energy/Energy.o \
@@ -126,6 +116,16 @@ OBJS =  \
 	units/frequency/KiloHertz.o \
 	units/frequency/MegaHertz.o \
 	units/frequency/TeraHertz.o \
+	units/length/CentiMeters.o \
+	units/length/Feet.o \
+	units/length/Inches.o \
+	units/length/KiloMeters.o \
+	units/length/Length.o \
+	units/length/Meters.o \
+	units/length/MicroMeters.o \
+	units/length/Microns.o \
+	units/length/NauticalMiles.o \
+	units/length/StatuteMiles.o \
 	units/mass/Grams.o \
 	units/mass/KiloGrams.o \
 	units/mass/Mass.o \
@@ -137,9 +137,6 @@ OBJS =  \
 	units/power/MilliWatts.o \
 	units/power/Power.o \
 	units/power/Watts.o \
-	units/rate/AngularVelocity.o \
-	units/rate/FlowRate.o \
-	units/rate/LinearVelocity.o \
 	units/time/Days.o \
 	units/time/Hours.o \
 	units/time/MicroSeconds.o \
@@ -153,8 +150,7 @@ OBJS =  \
 	units/volume/CubicMeters.o \
 	units/volume/Liters.o \
 	units/volume/Volume.o \
-	units/Density.o \
-	units/Unit.o \
+	units/Quantity.o \
 	util/platform/system_linux.o \
 	util/lfi.o \
 	util/math_utils.o \

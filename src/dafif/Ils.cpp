@@ -4,7 +4,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <iostream>
 

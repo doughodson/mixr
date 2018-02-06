@@ -1271,7 +1271,7 @@ bool Simulation::setSlotSimulationTime(const base::Time* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-       const long t{static_cast<long>( base::osg::round(base::Seconds::convertStatic(*msg)) )};
+       const long t{static_cast<long>(base::osg::round(msg->getValueInSeconds()))};
        if (t >= -1 && t < (60*60*24)) {
           ok = setInitialSimulationTime(t);
        } else {

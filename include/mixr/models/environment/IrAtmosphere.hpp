@@ -86,7 +86,7 @@ public:
    virtual bool calculateAtmosphereContribution(IrQueryMsg* const msg, double* totalSignal, double* totalBackground);
 
    //Get the number of waveband bins
-   unsigned int getNumWaveBands() const              { return numWaveBands; }
+   int getNumWaveBands() const              { return numWaveBands; }
 
    // getWaveBandCenters() -- Return center frequency of all wave bands
    const double* getWaveBandCenters() const;
@@ -115,7 +115,7 @@ public:
    }
 
 protected:
-   double getTransmissivity(const unsigned int i, const double range) const;
+   double getTransmissivity(const int i, const double range) const;
    double getTransmissivity(const double waveBandCenter, const double range) const;
    double getSkyRadiance() const {return skyRadiance;}
    double getEarthRadiance() const {return earthRadiance;}

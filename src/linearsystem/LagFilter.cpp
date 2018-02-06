@@ -61,11 +61,11 @@ bool LagFilter::setTau(const double v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setSlotTau(const base::Time* const msg)
+bool LagFilter::setSlotTau(const base::Time* const x)
 {
-   bool ok {};
-   if (msg != nullptr) {
-      const double tsec {base::Seconds::convertStatic(*msg)};
+   bool ok{};
+   if (x != nullptr) {
+      const double tsec{x->getValueInSeconds()};
       if (tsec > 0) {
          setTau( tsec );
          ok = true;

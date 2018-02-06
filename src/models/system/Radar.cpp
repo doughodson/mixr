@@ -236,7 +236,7 @@ void Radar::receive(const double dt)
          signal *= rfIGain;
 
          // Range attenuation: we don't want the strong signal from short range targets
-         double maxRng{getRange() * base::distance::NM2M};
+         double maxRng{getRange() * base::length::NM2M};
          //double maxRng4 = (maxRng*maxRng*maxRng*maxRng);
          //double rng = (em->getRange());
 
@@ -517,7 +517,7 @@ unsigned int Radar::computeRangeIndex(const double rng)
    if (rng < 0) return 0;
 
    //double maxRng = 40000.0;
-   double maxRng{getRange() * base::distance::NM2M};
+   double maxRng{getRange() * base::length::NM2M};
    double rng1{rng / maxRng};
    unsigned int n{static_cast<unsigned int>(rng1 * static_cast<double>(PTRS_PER_SWEEP) + 0.5)};
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;

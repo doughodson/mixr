@@ -1186,7 +1186,7 @@ bool Station::setSlotStartupResetTime(const base::Time* const num)
     startupResetTimer0 = num;
     if (startupResetTimer0 != nullptr) {
         startupResetTimer0->ref();
-        startupResetTimer = base::Seconds::convertStatic(*startupResetTimer0);
+        startupResetTimer = startupResetTimer0->getValueInSeconds();
     }
     return true;
 }

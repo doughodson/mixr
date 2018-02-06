@@ -18,14 +18,11 @@ class SquareKiloMeters final: public Area
     DECLARE_SUBCLASS(SquareKiloMeters, Area)
 
 public:
-    SquareKiloMeters();
-    SquareKiloMeters(const double);
-    SquareKiloMeters(const Area&);
+    explicit SquareKiloMeters();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SKM; }
-
-    double toArea() const final                     { return getValue() * area::SKM2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SKM; }
+private:
+   // convert square kilometers to square meters (our base unit)
+   double convertToBaseUnit(const double x) final   { return x * area::SKM2SM; }
 };
 
 }

@@ -2,68 +2,33 @@
 #ifndef __mixr_base_Power_H__
 #define __mixr_base_Power_H__
 
-#include "mixr/base/units/Unit.hpp"
+#include "mixr/base/units/Quantity.hpp"
+
+#include "mixr/base/units/util/power_utils.hpp"
+#include <cmath>
 
 namespace mixr {
 namespace base {
 
 //----------------------------------------------------------------------------
 // Class: Power
-// Description:  Base class for powers.  Defined as a Watt which is
-//               equivalent to an instance of Watts with its value equal
-//               to 1.0.
-//
-//               Base unit for Power derivations are Watts.
-//
-// Public methods (Defined in Power, and inherited by all derived classes):
-//
-//     set(const double v)
-//        Sets a Power derived instance with an double.
-//
-//     set(const Power& n)
-//        Sets, and converts if necessary, a Power derived instance with
-//        another Power derived instance.
-//
-//     double convert(const Power& n)
-//        Converts the value of a Power derived instance into
-//        the units of another Power derived instance.
-//
-//     Output stream operator: >>
-//        ostream& operator<<(ostream& sout, const Power& n)
-//        Sends "( <the Power derived instance class name and value> )"
-//        to the output stream.
-//
-//
-// Public methods (For classes:  KiloWatts, Watts, Horsepower, DecibelWatts,
-//                 DecibelMilliWatts):
-//
-//     double convertStatic(const Power& n)
-//        Static function to convert the given Power derived
-//        instance into the units of another Power derived class.
-//
+// Description: Abstract class for power.  Base unit is Watts.
 //----------------------------------------------------------------------------
-class Power : public Unit
+class Power : public Quantity
 {
-    DECLARE_SUBCLASS(Power, Unit)
+   DECLARE_SUBCLASS(Power, Quantity)
 
 public:
-    Power();
-    Power(const double);
+   explicit Power();
 
-    void set(const double v)           { setValue(v); }
-    void set(const Power& n)           { setValue(fromPower(n.toPower())); }
-
-    double convert(const Power& n)     { return fromPower(n.toPower()); }
-
-    virtual double toPower() const =0;
-    virtual double fromPower(const double a) const =0;
+   // conversion methods
+   double getValueInDecibelMilliWatts() const  { return 10.0 * std::log10(getValue() * power::W2MW); }
+   double getValueInDecibelWatts() const       { return 10.0 * std::log10(getValue());               }
+   double getValueInHorsepower() const         { return getValue() * power::W2HP;                    }
+   double getValueInKiloWatts() const          { return getValue() * power::W2KW;                    }
+   double getValueInMilliWatts() const         { return getValue() * power::W2MW;                    }
+   double getValueInWatts() const              { return getValue();                                  }
 };
-
-inline std::ostream& operator<<(std::ostream& sout, const Power& n)
-{
-   sout << "( " << n.getFactoryName() << " " << n.getValue() << " )";
-   return sout;
-}
 
 }
 }

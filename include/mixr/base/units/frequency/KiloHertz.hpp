@@ -11,22 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: KiloHertz
-// Description:  Hertz * 0.001
+// Description: Concrete class to specify a frequency in KiloHertz
 //------------------------------------------------------------------------------
 class KiloHertz final: public Frequency
 {
     DECLARE_SUBCLASS(KiloHertz, Frequency)
 
 public:
-    KiloHertz();
-    KiloHertz(const double);
-    KiloHertz(const Frequency&);
+    explicit KiloHertz();
 
 private:
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2KHz; }
-
-    double toFrequency() const final                     { return getValue() * frequency::KHz2Hz; }
-    double fromFrequency(const double a) const final     { return a * frequency::Hz2KHz; }
+   // convert KiloHertz to Hertz (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * frequency::KHz2Hz; }
 };
 
 }

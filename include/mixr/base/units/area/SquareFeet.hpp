@@ -18,14 +18,11 @@ class SquareFeet final: public Area
     DECLARE_SUBCLASS(SquareFeet, Area)
 
 public:
-    SquareFeet();
-    SquareFeet(const double);
-    SquareFeet(const Area&);
+    explicit SquareFeet();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SFT; }
-
-    double toArea() const final                     { return getValue() * area::SFT2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SFT; }
+private:
+   // convert square feet to square meters (our base unit)
+   double convertToBaseUnit(const double x) final   { return x* area::SFT2SM; }
 };
 
 }

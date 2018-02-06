@@ -20,7 +20,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -58,14 +58,14 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 3, setSlotLongitude,      base::Longitude)
     ON_SLOT( 3, setSlotLongitude,      base::Number)
 
-    ON_SLOT( 4, setSlotXPos,           base::Distance)
+    ON_SLOT( 4, setSlotXPos,           base::Length)
 
-    ON_SLOT( 5, setSlotYPos,           base::Distance)
+    ON_SLOT( 5, setSlotYPos,           base::Length)
 
-    ON_SLOT( 6, setSlotElevation,      base::Distance)
+    ON_SLOT( 6, setSlotElevation,      base::Length)
     ON_SLOT( 6, setSlotElevation,      base::Number)
 
-    ON_SLOT( 7, setSlotCmdAltitude,    base::Distance)
+    ON_SLOT( 7, setSlotCmdAltitude,    base::Length)
     ON_SLOT( 7, setSlotCmdAltitude,    base::Number)
 
     ON_SLOT( 8, setSlotCmdAirspeed,    base::Number)
@@ -73,7 +73,7 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 9, setSlotPTA,            base::Time)
     ON_SLOT( 9, setSlotPTA,            base::Number)
 
-    ON_SLOT(10, setSlotSCA,            base::Distance)
+    ON_SLOT(10, setSlotSCA,            base::Length)
     ON_SLOT(10, setSlotSCA,            base::Number)
 
     ON_SLOT(11, setSlotDescription,    base::String)
@@ -216,7 +216,7 @@ void Steerpoint::reset()
 
 double Steerpoint::getElevationFt() const
 {
-    return getElevationM() * base::distance::M2FT;
+    return getElevationM() * base::length::M2FT;
 }
 
 const char* Steerpoint::getDescription() const
@@ -244,7 +244,7 @@ double Steerpoint::getLongitude() const
 
 double Steerpoint::getCmdAltitudeFt() const
 {
-    return getCmdAltitude() * base::distance::M2FT;
+    return getCmdAltitude() * base::length::M2FT;
 }
 
 //------------------------------------------------------------------------------
@@ -411,11 +411,11 @@ bool Steerpoint::setSlotPosition(const base::List* const msg)
 }
 */
 
-bool Steerpoint::setSlotXPos(const base::Distance* const msg)
+bool Steerpoint::setSlotXPos(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        initPosVec[Player::INORTH] = base::Meters::convertStatic(*msg);
+    if (x != nullptr) {
+        initPosVec[Player::INORTH] = x->getValueInMeters();
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -423,11 +423,11 @@ bool Steerpoint::setSlotXPos(const base::Distance* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotYPos(const base::Distance* const msg)
+bool Steerpoint::setSlotYPos(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        initPosVec[Player::IEAST] = base::Meters::convertStatic(*msg);
+    if (x != nullptr) {
+        initPosVec[Player::IEAST] = x->getValueInMeters();
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -435,11 +435,11 @@ bool Steerpoint::setSlotYPos(const base::Distance* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotElevation(const base::Distance* const msg)
+bool Steerpoint::setSlotElevation(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        initElev = base::Meters::convertStatic(*msg);
+    if (x != nullptr) {
+        initElev = x->getValueInMeters();
         elevation  = initElev;
         initPosVec[Player::IDOWN] = -initElev;
         posVec[Player::IDOWN] = -initElev;
@@ -462,11 +462,11 @@ bool Steerpoint::setSlotElevation(const base::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotPTA(const base::Time* const msg)
+bool Steerpoint::setSlotPTA(const base::Time* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        setPTA( base::Seconds::convertStatic(*msg) );
+    if (x != nullptr) {
+        setPTA(x->getValueInSeconds());
         ok = true;
     }
     return ok;
@@ -481,21 +481,21 @@ bool Steerpoint::setSlotPTA(const base::Number* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const base::Distance* const msg)
+bool Steerpoint::setSlotSCA(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        setSCA( base::Feet::convertStatic(*msg) );
+    if (x != nullptr) {
+        setSCA(x->getValueInFeet());
         ok = true;
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const base::Number* const msg)
+bool Steerpoint::setSlotSCA(const base::Number* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
+    if (x != nullptr) {
         // assumes feet
-        setSCA( msg->asDouble() );
+        setSCA(x->asDouble());
         ok = true;
     }
     return ok;
@@ -515,7 +515,7 @@ bool Steerpoint::setSlotMagVar(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        initMagVar = static_cast<double>(base::Degrees::convertStatic(*msg));
+        initMagVar = msg->getValueInDegrees();
         haveInitMagVar = true;
         ok = true;
     }
@@ -533,11 +533,11 @@ bool Steerpoint::setSlotMagVar(const base::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAltitude(const base::Distance* const msg)
+bool Steerpoint::setSlotCmdAltitude(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        initCmdAlt = base::Meters::convertStatic(*msg);
+    if (x != nullptr) {
+        initCmdAlt = x->getValueInMeters();
         haveInitCmdAlt = true;
         setCmdAltitude(initCmdAlt);
         ok = true;

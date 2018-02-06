@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Identifier; class Integer; class List; class Number; class PairStream; }
+namespace base { class Angle; class Boolean; class Identifier; class Integer; class Length; class List; class Number; class PairStream; }
 namespace models {
 class Emission;
 class SensorMsg;
@@ -96,7 +96,7 @@ class Tdb;
 //                                              ! Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //
 //    maxPlayersOfInterest         <Number>     ! Max number of players of interest (default: 200)
-//    maxRange2PlayersOfInterest   <Distance>   ! Max range to players of interest, or zero for all (default: 0)
+//    maxRange2PlayersOfInterest   <Length>     ! Max range to players of interest, or zero for all (default: 0)
 //    maxAngle2PlayersOfInterest   <Angle>      ! Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
 //    localPlayersOfInterestOnly   <Boolean>    ! Sets the local only players of interest flag (default: false)
 //
@@ -192,7 +192,7 @@ public:  // Public section
    double getCmdRollRate() const       { return cmdRate[ROLL_IDX]; } // Returns commanded roll rate (rad/sec)
 
    const base::Vec3d& getLocation() const  { return location; }      // Returns the location vector of the gimbal on its parent container  (meters)
-   const base::Matrixd& getRotMat() const { return tm; }             // Returns the gimbal's rotational matrix
+   const base::Matrixd& getRotMat() const  { return tm; }            // Returns the gimbal's rotational matrix
                                                                      //    body (nose/right/down) <== > this.gimbal(x,y,z)
                                                                      //    Usage:
                                                                      //       Vg = M * Vb
@@ -371,7 +371,7 @@ private:
    bool setSlotMaxPlayers(const base::Integer* const);              // Max number of players of interest (default: 0)
 
                                                                     // Max range to players of interest or zero for all (meters)
-   bool setSlotMaxRange2PlayersOfInterest(const base::Distance* const);
+   bool setSlotMaxRange2PlayersOfInterest(const base::Length* const);
 
    // Max angle of gimbal boresight to players of interest or zero for all (rad)
    bool setSlotMaxAngle2PlayersOfInterest(const base::Angle* const);

@@ -3,7 +3,7 @@
 
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
 namespace terrain {
@@ -147,8 +147,8 @@ unsigned int DataFile::getElevations(
    // Spacing between points (in each direction)
    double deltaPoint {maxRng / (n - 1)};
    double dirR {direction * base::angle::D2RCC};
-   double deltaNorth {deltaPoint * std::cos(dirR) * base::distance::M2NM};  // (NM)
-   double deltaEast {deltaPoint * std::sin(dirR) * base::distance::M2NM};
+   double deltaNorth {deltaPoint * std::cos(dirR) * base::length::M2NM};  // (NM)
+   double deltaEast {deltaPoint * std::sin(dirR) * base::length::M2NM};
    double deltaLat {deltaNorth/60.0};
    double deltaLon {deltaEast/(60.0 * std::cos(lat * base::angle::D2RCC))};
    double deltaPointsLat {deltaLat / latSpacing};

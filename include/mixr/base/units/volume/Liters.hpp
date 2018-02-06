@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Liters
-// Description: Cubic Meters * 1000
+// Description: Concrete class to specify a volume in liters
 //------------------------------------------------------------------------------
 class Liters final: public Volume
 {
-    DECLARE_SUBCLASS(Liters, Volume)
+   DECLARE_SUBCLASS(Liters, Volume)
 
 public:
-    Liters();
-    Liters(const double);
-    Liters(const Volume&);
+   explicit Liters();
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2L; }
-
-    double toVolume() const                          { return getValue() * volume::L2CM; }
-    double fromVolume(const double a) const          { return a * volume::CM2L; }
+private:
+   // convert liters to cubic meters (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * volume::L2CM; }
 };
 
 }

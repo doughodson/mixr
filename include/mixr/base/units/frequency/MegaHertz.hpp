@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: MegaHertz
-// Description:  Hertz * 0.000001
+// Description: Concrete class to specify a frequency in MegaHertz
 //------------------------------------------------------------------------------
 class MegaHertz final: public Frequency
 {
     DECLARE_SUBCLASS(MegaHertz, Frequency)
 
 public:
-    MegaHertz();
-    MegaHertz(const double);
-    MegaHertz(const Frequency&);
+    explicit MegaHertz();
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2MHz; }
-
-    double toFrequency() const final                     { return getValue() * frequency::MHz2Hz; }
-    double fromFrequency(const double a) const final     { return a * frequency::Hz2MHz; }
+private:
+   // convert MegaHertz to Hertz (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * frequency::MHz2Hz; }
 };
 
 }

@@ -7,7 +7,7 @@ namespace base {
 namespace rate {
 
 // conversion from ft/s to kt
-const double FPS2KTSCC{0.59248384864341771016513018598233};
+constexpr double FPS2KTSCC{0.59248384864341771016513018598233};
 
 }
 }

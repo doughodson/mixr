@@ -9,17 +9,12 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Add
-// Description: Class for adding Numbers.
+// Description: Class for adding Numbers
 //
 // Factory name: "+"
 //
 //        ( + val n2 ) gives val plus n2
 //
-//
-// Public method :
-//
-//      void operation()
-//          Performs the numeric operation of the class ( + )
 //------------------------------------------------------------------------------
 class Add final: public Operator
 {
@@ -29,6 +24,7 @@ public:
    Add();
 
 private:
+   // performs the numeric equivalent operation of a "+"
    void operation() final;
    double getValue() const final       { return val; }
 

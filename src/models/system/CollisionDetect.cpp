@@ -9,7 +9,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cmath>
 
@@ -30,10 +30,10 @@ BEGIN_SLOTTABLE(CollisionDetect)
 END_SLOTTABLE(CollisionDetect)
 
 BEGIN_SLOT_MAP(CollisionDetect)
-    ON_SLOT( 1,  setSlotCollisionRange,      base::Distance)
+    ON_SLOT( 1,  setSlotCollisionRange,      base::Length)
     ON_SLOT( 2,  setSlotMaxPlayers,          base::Integer)
     ON_SLOT( 3,  setSlotPlayerTypes,         base::PairStream)
-    ON_SLOT( 4,  setSlotMaxRange2Players,    base::Distance)
+    ON_SLOT( 4,  setSlotMaxRange2Players,    base::Length)
     ON_SLOT( 5,  setSlotMaxAngle2Players,    base::Angle)
     ON_SLOT( 6,  setSlotLocalOnly,           base::Boolean)
     ON_SLOT( 7,  setSlotUseWorldCoordinates, base::Boolean)
@@ -525,11 +525,11 @@ void CollisionDetect::clearPoiList()
 //------------------------------------------------------------------------------
 // Slot Functions
 //------------------------------------------------------------------------------
-bool CollisionDetect::setSlotCollisionRange(const base::Distance* const msg)
+bool CollisionDetect::setSlotCollisionRange(const base::Length* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double meters{base::Meters::convertStatic(*msg)};
+      const double meters{msg->getValueInMeters()};
       if (meters >= 0.0) {
          ok = setCollisionRange( meters );
       }
@@ -582,11 +582,11 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotMaxRange2Players(const base::Distance* const msg)
+bool CollisionDetect::setSlotMaxRange2Players(const base::Length* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double meters{base::Meters::convertStatic(*msg)};
+      const double meters{msg->getValueInMeters()};
       if (meters >= 0.0) {
          ok = setMaxRange2Players( meters );
       }
@@ -598,7 +598,7 @@ bool CollisionDetect::setSlotMaxAngle2Players(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double radians{base::Radians::convertStatic(*msg)};
+      const double radians{msg->getValueInRadians()};
       if (radians >= 0.0) {
          ok = setMaxAngle2Players( radians );
       }

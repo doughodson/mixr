@@ -12,12 +12,12 @@
 #include "mixr/base/osg/Quat"
 
 #include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Integer; class Latitude; class List; class Longitude;
+namespace base { class Angle; class Boolean; class Integer; class Latitude; class Length; class List; class Longitude;
                  class Time; class Vec2d; class Vec3d;}
 namespace simulation { class AbstractNib; }
 namespace models {
@@ -64,13 +64,13 @@ class Track;
 //
 //    ! 1: Player's initial position vector (NED) on the simulation's gaming area
 //
-//    initXPos       <base::Distance>    ! X position (+north) (default: 0)
+//    initXPos       <base::Length>      ! X position (+north) (default: 0)
 //    initXPos       <base::Number>      ! X position (+north) (meters)
 //
-//    initYPos       <base::Distance>    ! Y position (+east) (default: 0)
+//    initYPos       <base::Length>      ! Y position (+east) (default: 0)
 //    initYPos       <base::Number>      ! Y position (+east)(meters)
 //
-//    initAlt        <base::Distance>    ! Altitude (+up) (default: 0)
+//    initAlt        <base::Length>      ! Altitude (+up) (default: 0)
 //    initAlt        <base::Number>      ! Altitude (+up) (meters)
 //
 //    initPosition   <base::List>        ! Position Vector: meters [ north east down ]
@@ -86,7 +86,7 @@ class Track;
 //    initLongitude  <base::Angle>       ! Longitude
 //    initLongitude  <base::Number>      ! Longitude (degs)
 //
-//    initAlt        <base::Distance>    ! Altitude (HAE) (+up)  ### NES Is this being used?
+//    initAlt        <base::Length>      ! Altitude (HAE) (+up)  ### NES Is this being used?
 //    initAlt        <base::Number>      ! Altitude (HAE) (+up) (meters)
 //
 //
@@ -128,7 +128,7 @@ class Track;
 //
 //    terrainElevReq <base::Boolean>     ! Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
 //    interpolateTerrain <base::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
-//    terrainOffset  <base::Distance>    ! Ground clamp offset from terrain to player's CG (base::Distance)
+//    terrainOffset  <base::Length>      ! Ground clamp offset from terrain to player's CG (base::Length)
 //
 //    positionFreeze <base::Boolean>     ! Position freeze (default: false)
 //    altitudeFreeze <base::Boolean>     ! Altitude freeze (default: false)
@@ -1077,11 +1077,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotInitXPos(const base::Distance* const);
+   bool setSlotInitXPos(const base::Length* const);
    bool setSlotInitXPos(const base::Number* const);
-   bool setSlotInitYPos(const base::Distance* const);
+   bool setSlotInitYPos(const base::Length* const);
    bool setSlotInitYPos(const base::Number* const);
-   bool setSlotInitAlt(const base::Distance* const);
+   bool setSlotInitAlt(const base::Length* const);
    bool setSlotInitAlt(const base::Number* const);
    bool setSlotInitPosition(const base::List* const);
 
@@ -1114,7 +1114,7 @@ private:
 
    bool setSlotTerrainElevReq(const base::Boolean* const);
    bool setSlotInterpolateTerrain(const base::Boolean* const);
-   bool setSlotTerrainOffset(const base::Distance* const);
+   bool setSlotTerrainOffset(const base::Length* const);
 
    bool setSlotPositionFreeze(const base::Boolean* const);
    bool setSlotAltitudeFreeze(const base::Boolean* const);

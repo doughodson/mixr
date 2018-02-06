@@ -587,23 +587,18 @@ bool RfSystem::setSlotAntennaName(base::Identifier* const p)
    return true;
 }
 
-bool RfSystem::setSlotFrequency(base::Frequency* const v)
+bool RfSystem::setSlotFrequency(base::Frequency* const x)
 {
     bool ok{};
-    double x{-1.0};
+    double freq{-1.0};
 
-    const auto p = dynamic_cast<const base::Frequency*>(v);
-    if (p != nullptr) {
-        // Has frequency and we need hertz
-        x = base::Hertz::convertStatic(*p);
-    } else if (v != nullptr) {
-        // Just a Number
-        x = v->getValue();
+    if (x != nullptr) {
+        freq = x->getValueInHertz();
     }
 
     // Test and set the freq
-    if (x >= 0.0) {
-        ok = setFrequency(x);
+    if (freq >= 0.0) {
+        ok = setFrequency(freq);
     } else {
         std::cerr << "RfSystem::setFrequency: Frequency must be greater than or equal zero!" << std::endl;
     }
@@ -618,7 +613,7 @@ bool RfSystem::setSlotBandwidth(base::Frequency* const freq)
 
     if (freq != nullptr) {
         // convert frequency to hertz
-        bw = base::Hertz::convertStatic(*freq);
+        bw = freq->getValueInHertz();
     }
 
     if (bw >= 1.0) {
@@ -637,7 +632,7 @@ bool RfSystem::setSlotBandwidthNoise(base::Frequency* const freq)
 
     if (freq != nullptr) {
         // convert frequency to hertz
-        bw = base::Hertz::convertStatic(*freq);
+        bw = freq->getValueInHertz();
     }
 
     if (bw >= 1.0) {
@@ -654,9 +649,7 @@ bool RfSystem::setSlotPeakPower(base::Power* const power)
     double peakPwr{-1.0};
 
     if (power != nullptr) {
-        // Has power units and we need watts
-        base::Watts watts;
-        peakPwr = watts.convert(*power);
+        peakPwr = power->getValueInWatts();
     }
 
     // Test and set the power

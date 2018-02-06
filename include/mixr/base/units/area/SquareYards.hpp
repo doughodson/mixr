@@ -18,14 +18,11 @@ class SquareYards final: public Area
     DECLARE_SUBCLASS(SquareYards, Area)
 
 public:
-    SquareYards();
-    SquareYards(const double);
-    SquareYards(const Area&);
+    explicit SquareYards();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SYD; }
-
-    double toArea() const final                     { return getValue() * area::SYD2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SYD; }
+private:
+   // convert square yards to square meters (our base unit)
+   double convertToBaseUnit(const double x) final           { return x * area::SYD2SM; }
 };
 
 }

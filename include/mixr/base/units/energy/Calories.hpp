@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Calories
-// Description:  Joules * 0.2388888888888888889
+// Description: Concrete class to specify energy in units of Calories
 //------------------------------------------------------------------------------
 class Calories final: public Energy
 {
-    DECLARE_SUBCLASS(Calories, Energy)
+   DECLARE_SUBCLASS(Calories, Energy)
 
 public:
-    Calories();
-    Calories(const double);
-    Calories(const Energy&);
+   explicit Calories();
 
-    static double convertStatic(const Energy& n)       { return n.toEnergy() * energy::J2C; }
-
-    double toEnergy() const final                      { return getValue() * energy::C2J; }
-    double fromEnergy(const double a) const final      { return a * energy::J2C; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final      { return x * energy::C2J; }
 };
 
 }

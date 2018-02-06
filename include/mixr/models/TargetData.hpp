@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Identifier; class Integer;
+namespace base { class Angle; class Boolean; class Identifier; class Integer; class Length;
                  class Number; class String; class Time; }
 namespace models {
 
@@ -23,13 +23,13 @@ namespace models {
 //    manualAssign     <Boolean>        ! Manually assign weapon to target? (default: false)
 //    stickType        <Identifier>     ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
 //
-//    stickDistance    <Distance>       ! Weapon stick length (default: 0)
+//    stickDistance    <Length>         ! Weapon stick length (default: 0)
 //    stickDistance    <Number>         ! (feet)
 //
 //    interval         <Time>           ! Time between weapon releases (default: 0)
 //    interval         <Number>         ! (MSec)
 //
-//    maxMissDistance  <Distance>       ! Maximum miss distance (default: 0)
+//    maxMissDistance  <Length>         ! Maximum miss distance (default: 0)
 //    maxMissDistance  <Number>         ! (feet)
 // 
 //    armDelay         <Time>           ! Arming delay (default: 0)
@@ -49,8 +49,8 @@ class TargetData : public base::Object
 
 public:
    // 'Stick' types
-   static const unsigned int MIDPOINT = 0;
-   static const unsigned int LEADING_EDGE = 1;
+   static const unsigned int MIDPOINT{};
+   static const unsigned int LEADING_EDGE{1};
 
 public:
     TargetData();
@@ -108,11 +108,11 @@ private:
    bool setSlotQuantity(const base::Integer* const);
    bool setSlotManualAssign(const base::Boolean* const);
    bool setSlotStickType(const base::Identifier* const);
-   bool setSlotStickDistance(const base::Distance* const);
+   bool setSlotStickDistance(const base::Length* const);
    bool setSlotStickDistance(const base::Number* const);
    bool setSlotInterval(const base::Time* const);
    bool setSlotInterval(const base::Number* const);
-   bool setSlotMaxMissDistance(const base::Distance* const);
+   bool setSlotMaxMissDistance(const base::Length* const);
    bool setSlotMaxMissDistance(const base::Number* const);
    bool setSlotArmDelay(const base::Time* const);
    bool setSlotArmDelay(const base::Number* const);

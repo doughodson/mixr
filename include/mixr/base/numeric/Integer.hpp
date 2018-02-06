@@ -15,7 +15,7 @@ namespace base {
 // Factory name: Integer
 //
 // Slots:
-//     value  <Number>  ! Sets the value of this number (default: 0.0)
+//     value  <Integer>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
 class Integer final: public Number
 {

@@ -10,8 +10,8 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
-#include "mixr/base/units/distances.hpp"
 
 #include "mixr/simulation/AbstractDataRecorder.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -362,13 +362,11 @@ void AirTrkMgr::processTrackList(const double dt)
 bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
 {
    double value{};
-   const auto p = dynamic_cast<const base::Distance*>(num);
+   const auto p = dynamic_cast<const base::Length*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
-      base::Meters meters;
-      value = meters.convert(*p);
-   }
-   else if (num != nullptr) {
+      value = p->getValueInMeters();
+   } else if (num != nullptr) {
       // We have only a number, assume it's in meters ...
       value = num->asDouble();
    }
@@ -377,8 +375,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
    bool ok{true};
    if (value > 0.0) {
       posGate = value;
-   }
-   else {
+   } else {
       std::cerr << "TrackManager::setPositionGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
@@ -391,11 +388,10 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
 bool AirTrkMgr::setSlotRangeGate(const base::Number* const num)
 {
    double value{};
-   const auto p = dynamic_cast<const base::Distance*>(num);
+   const auto p = dynamic_cast<const base::Length*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
-      base::Meters meters;
-      value = meters.convert(*p);
+      value = p->getValueInMeters();
    }
    else if (num != nullptr) {
       // We have only a number, assume it's in meters ...

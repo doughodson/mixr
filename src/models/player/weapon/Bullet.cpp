@@ -162,7 +162,7 @@ bool Bullet::burstOfBullets(const base::Vec3d* const pos, const base::Vec3d* con
 //------------------------------------------------------------------------------
 void Bullet::updateBurstTrajectories(const double dt)
 {
-   static const double g{base::ETHG * base::distance::FT2M};      // Acceleration of Gravity (m/s/s)
+   static const double g{base::ETHG * base::length::FT2M};      // Acceleration of Gravity (m/s/s)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {

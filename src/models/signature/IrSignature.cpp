@@ -158,9 +158,7 @@ bool IrSignature::setSlotEffectiveArea(mixr::base::Area* const a)
    bool ok{};
 
    if (a != nullptr) {
-      base::SquareMeters sm;
-      const double value{sm.convert(*a)};
-      ok = setEffectiveArea(value);
+      ok = setEffectiveArea(a->getValueInSquareMeters());
    }
 
    if (!ok) {

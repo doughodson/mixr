@@ -85,12 +85,12 @@ void SensorMsg::setRange(const double r)
 
 double SensorMsg::getRangeRateFPS() const
 {
-   return getRangeRate() * base::distance::M2FT;
+   return getRangeRate() * base::length::M2FT;
 }
 
 double SensorMsg::getRangeRateKts() const
 {
-   return getRangeRate() * base::distance::M2NM * 3600.0f;
+   return getRangeRate() * base::length::M2NM * 3600.0f;
 }
 
 //------------------------------------------------------------------------------

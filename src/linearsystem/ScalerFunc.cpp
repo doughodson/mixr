@@ -152,7 +152,7 @@ bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const int v {static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f )};
+      const int v {static_cast<int>( msg->getValueInHertz() + 0.5 )};
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;

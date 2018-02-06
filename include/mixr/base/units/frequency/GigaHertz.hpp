@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: GigaHertz
-// Description:  Hertz * 0.000000001
+// Description: Concrete class to specify a frequency in GigaHertz
 //------------------------------------------------------------------------------
 class GigaHertz final: public Frequency
 {
     DECLARE_SUBCLASS(GigaHertz, Frequency)
 
 public:
-    GigaHertz();
-    GigaHertz(const double);
-    GigaHertz(const Frequency&);
+    explicit GigaHertz();
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2GHz; }
-
-    double toFrequency() const final                     { return getValue() * frequency::GHz2Hz; }
-    double fromFrequency(const double a) const final     { return a * frequency::Hz2GHz; }
+private:
+   // convert GigaHertz to Hz (our base unit)
+   double convertToBaseUnit(const double x) final        { return x * frequency::GHz2Hz; }
 };
 
 }

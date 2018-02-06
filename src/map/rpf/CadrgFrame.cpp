@@ -146,11 +146,12 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     // Parse our locations
     parseLocations(fin, loc, 6);
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
     // From index to physicalIdx
-    if (loc[0].physicalIdx == ~0 || loc[1].physicalIdx == ~0) {
-        std::cout << "CadrgFrame::load() : Can't find section in frame!" << std::endl;
-        return;
-    }
+//    if (loc[0].physicalIdx == ~0 || loc[1].physicalIdx == ~0) {
+//        std::cout << "CadrgFrame::load() : Can't find section in frame!" << std::endl;
+//        return;
+//    }
 
     // Read the compression tables
     fin.seekg(loc[0].physicalIdx, std::ios::beg);
@@ -159,15 +160,16 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     swap(reinterpret_cast<unsigned char*>(&compression.nOffRecs), sizeof(compression.nOffRecs));
     swap(reinterpret_cast<unsigned char*>(&compression.nParmOffRecs), sizeof(compression.nParmOffRecs));
 
-    if (loc[2].physicalIdx == ~0) {
-        std::cout << "CadrgFrame::load() : Warning: Can't find compression lookup subsection in FrameFile, using alternate computation!" << std::endl;
-        // Length of compr. sect. subhdr = 10
-        fin.seekg(loc[0].physicalIdx + 10, std::ios::beg);
-    }
-    else {
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
+//    if (loc[2].physicalIdx == ~0) {
+//        std::cout << "CadrgFrame::load() : Warning: Can't find compression lookup subsection in FrameFile, using alternate computation!" << std::endl;
+//        // Length of compr. sect. subhdr = 10
+//        fin.seekg(loc[0].physicalIdx + 10, std::ios::beg);
+//    }
+//    else {
         // DKS: Position at start of compression lookup table offset record
         fin.seekg(loc[2].physicalIdx, std::ios::beg);
-    }
+//    }
 
     // Read lookup offset table offset and record length
     fin.read(reinterpret_cast<char*>(&lookupOffTblOff), sizeof(lookupOffTblOff));
@@ -251,11 +253,12 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     // Read mask data
     if (!allSubframes) {
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
         // fseek to LOC_MASK_SUBSECTION, ID=138
-        if (loc[5].physicalIdx == ~0) {
-            std::cout << "CadrgFrame::load() : Can't find MASK_SUBSECTION in the frame file!" << std::endl;
-            return;
-        }
+//        if (loc[5].physicalIdx == ~0) {
+//            std::cout << "CadrgFrame::load() : Can't find MASK_SUBSECTION in the frame file!" << std::endl;
+//            return;
+//        }
         fin.seekg(loc[5].physicalIdx, std::ios::beg);
         // Go to offset: skip header
         fin.seekg(subframeMskTblOff, std::ios::cur);
@@ -273,26 +276,28 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     // Determine row bytes
     //int rowBytes = 256 / 4 * 3 / 2;
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
     // fseek to LOC_IMAGE_DISPLAY_PARAM_SUBHEADER, ID=137
-    if (loc[4].physicalIdx == ~0) {
-        std::cout << "CadrgFrame::load() : Can't find IMAGE_DISPLAY_PARAM_SUBHEADER section in the frame file!" << std::endl;
-        return;
-    }
+//    if (loc[4].physicalIdx == ~0) {
+//        std::cout << "CadrgFrame::load() : Can't find IMAGE_DISPLAY_PARAM_SUBHEADER section in the frame file!" << std::endl;
+//        return;
+//    }
 
     // Image Display Parameters Subheader
     fin.seekg(loc[4].physicalIdx, std::ios::beg);
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
     // No image parameters needed
     // Go to start of image spatial data subsection
-    if (loc[3].physicalIdx == ~0) {
-        std::cout << "CadrgFrame::load() : WARNING: Can't find Image spatial data subsection in FrameFile, using alternate computation!" << std::endl;
-        // Skip 14 bytes of image display parameters subheader instead
-        fin.seekg(14, std::ios::cur);
-    }
-    else {
+//    if (loc[3].physicalIdx == ~0) {
+//        std::cout << "CadrgFrame::load() : WARNING: Can't find Image spatial data subsection in FrameFile, using alternate computation!" << std::endl;
+//        // Skip 14 bytes of image display parameters subheader instead
+//        fin.seekg(14, std::ios::cur);
+//    }
+//    else {
         // Position at start of image spatial data subsection
         fin.seekg(loc[3].physicalIdx, std::ios::beg);
-    }
+//    }
 
     // Read subframes from top left, row-wise
     // Row

@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: CubicFeet
-// Description: Cubic Meters * 35.31467
+// Description: Concrete class to specify a volume in cubit feet
 //------------------------------------------------------------------------------
 class CubicFeet final: public Volume
 {
-    DECLARE_SUBCLASS(CubicFeet, Volume)
+   DECLARE_SUBCLASS(CubicFeet, Volume)
 
 public:
-    CubicFeet();
-    CubicFeet(const double);
-    CubicFeet(const Volume&);
+   explicit CubicFeet();
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * volume::CM2CFT; }
-
-    double toVolume() const final                    { return getValue() * volume::CFT2CM; }
-    double fromVolume(const double a) const final    { return a * volume::CM2CFT; }
+private:
+   // convert cubic feet to cubic meters (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * volume::CFT2CM; }
 };
 
 }

@@ -7,14 +7,14 @@ namespace base {
 namespace force {
 
 // conversion constants
-const double N2KN = 0.001f;       // Newtons => KiloNewtons
-const double KN2N = (1 / N2KN);   // KiloNewtons => Newtons
-const double N2PF = 0.224809f;    // Newtons => PoundForces
-const double PF2N = (1 / N2PF);   // PoundForces => Newtons
-const double N2PD = 7.23301f;     // Newtons => Poundals
-const double PD2N = (1 / N2PD);   // Poundals => Newtons
+constexpr double N2KN{0.001};        // Newtons => KiloNewtons
+constexpr double KN2N{1.0 / N2KN};   // KiloNewtons => Newtons
+constexpr double N2PF{0.224809};     // Newtons => PoundForces
+constexpr double PF2N{1.0 / N2PF};   // PoundForces => Newtons
+constexpr double N2PD{7.23301};      // Newtons => Poundals
+constexpr double PD2N{1.0 / N2PD};   // Poundals => Newtons
 
-// conversions between Forces
+// conversion functions
 inline double newtonsToKiloNewtons(const double v)     { return v * N2KN; }
 inline double newtonsToPoundForces(const double v)     { return v * N2PF; }
 inline double newtonsToPoundals(const double v)        { return v * N2PD; }

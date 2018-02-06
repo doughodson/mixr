@@ -11,21 +11,18 @@ namespace base {
 
 //----------------------------------------------------------------------------
 // Class: MilliWatts
-// Description: Watts * 0.01
+// Description: Concrete class to specify power in MilliWatts
 //----------------------------------------------------------------------------
 class MilliWatts final: public Power
 {
-    DECLARE_SUBCLASS(MilliWatts, Power)
+   DECLARE_SUBCLASS(MilliWatts, Power)
 
 public:
-    MilliWatts();
-    MilliWatts(const double);
-    MilliWatts(const Power&);
+   explicit MilliWatts();
 
-    static double convertStatic(const Power &n)      { return n.toPower() * power::W2MW; }
-
-    double toPower() const final                     { return getValue() * power::MW2W; }
-    double fromPower(const double a) const final     { return a * power::W2MW; }
+private:
+   // convert MilliWatts to Watts (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * power::MW2W; }
 };
 
 }

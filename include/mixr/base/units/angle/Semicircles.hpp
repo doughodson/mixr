@@ -4,27 +4,26 @@
 
 #include "mixr/base/units/angle/Angle.hpp"
 
+#include "mixr/base/units/util/angle_utils.hpp"
+
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Semicircles
-// Description:  An instance of Semicircles with its value equal to 1.0 is
-//               one base unit for distances.
+// Description: Concrete class to specify an angle in unit semicircles
 //------------------------------------------------------------------------------
 class Semicircles final: public Angle
 {
-    DECLARE_SUBCLASS(Semicircles, Angle)
+   DECLARE_SUBCLASS(Semicircles, Angle)
 
 public:
-    Semicircles();
-    Semicircles(const double);
-    Semicircles(const Angle&);
+   explicit Semicircles();
+   explicit Semicircles(const double);
 
-    static double convertStatic(const Angle& n)      { return n.toAngle(); }
-
-    double toAngle() const final                     { return getValue(); }
-    double fromAngle(const double a) const final     { return a; }
+private:
+   // convert semicircles to radians (our base unit)
+   double convertToBaseUnit(const double x) final      { return x * angle::SC2R; }
 };
 
 }

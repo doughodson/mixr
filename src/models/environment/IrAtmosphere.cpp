@@ -102,10 +102,10 @@ bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
 
 // Transmissivity table should have same wavebands defined as for waveBandTable.
 // Values in the table are coefficients of absorption
-double IrAtmosphere::getTransmissivity(const unsigned int i, const double range) const
+double IrAtmosphere::getTransmissivity(const int i, const double range) const
 {
     double trans{1.0};
-    if (transmissivityTable1 != nullptr && i < transmissivityTable1->tableSize()) {
+    if (transmissivityTable1 != nullptr && i < static_cast<int>(transmissivityTable1->tableSize())) {
         const double* transmissivities{transmissivityTable1->getDataTable()};
         trans = transmissivities[i];
         trans = std::exp(trans * -0.001 * range);
@@ -166,11 +166,11 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
 
         // FAB determine angle to horizon, positive angles are down
         {
-            double hDist{1000000.0 * base::distance::NM2M};  // Distance to horizon (m) (default: really far away)
+            double hDist{1000000.0 * base::length::NM2M};  // Distance to horizon (m) (default: really far away)
             double hTanAng{};
 
             // earth radius in meters
-            const double er{base::nav::ERAD60 * base::distance::NM2M};
+            const double er{base::nav::ERAD60 * base::length::NM2M};
 
             // distance from the center of the earth
             const double distEC{msg->getOwnship()->getAltitudeM() + er};
@@ -205,7 +205,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
         }
     }
 
-    for (unsigned int i=0; i<getNumWaveBands(); i++) {
+    for (int i=0; i<getNumWaveBands(); i++) {
         const double lowerBandBound{centerWavelengths[i] - (widths[i] / 2.0)};
         const double upperBandBound{lowerBandBound + widths[i]};
 

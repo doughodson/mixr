@@ -97,7 +97,7 @@ void Effect::updateTOF(const double dt)
 void Effect::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const double g{base::ETHG * base::distance::FT2M};      // Acceleration of Gravity (m/s/s)
+   static const double g{base::ETHG * base::length::FT2M};      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)

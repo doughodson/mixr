@@ -302,10 +302,9 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
          const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
          const base::Frequency* p{static_cast<const base::Frequency*>(pair->object())};
          if (p != nullptr) {
-            const double freq{base::Hertz::convertStatic( *p )};
-            const bool ok{setChannelFrequency(chan, freq)};
+            const bool ok{setChannelFrequency(chan, p->getValueInHertz())};
             if (!ok) {
-               std::cerr << "Radio::setSlotChannels() Error setting frequency for channel " << chan << "; with freq = " << *p << std::endl;
+               std::cerr << "Radio::setSlotChannels() Error setting frequency for channel " << chan << "; with freq = " << p->getValueInHertz() << std::endl;
             }
          } else {
             std::cerr << "Radio::setSlotChannels() channel# " << chan << " is not of type Frequency" << std::endl;

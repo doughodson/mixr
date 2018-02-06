@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: KiloNewtons
-// Description:  Newtons * 1000.0
+// Description: Concrete class to specify a force in KiloNewtons
 //------------------------------------------------------------------------------
 class KiloNewtons final: public Force
 {
-    DECLARE_SUBCLASS(KiloNewtons, Force)
+   DECLARE_SUBCLASS(KiloNewtons, Force)
 
 public:
-    KiloNewtons();
-    KiloNewtons(const double);
-    KiloNewtons(const Force&);
+   explicit KiloNewtons();
 
-    static double convertStatic(const Force& n)        { return n.toForce() * force::N2KN; }
-
-    double toForce() const final                       { return getValue() * force::KN2N; }
-    double fromForce(const double a) const final       { return a * force::N2KN; }
+private:
+   // convert KiloNewtons to Newtons (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * force::KN2N; }
 };
 
 }

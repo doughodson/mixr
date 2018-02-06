@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: FootPounds
-// Description:  Joules * 0.7376
+// Description: Concrete class to specify energy in units of foot pounds
 //------------------------------------------------------------------------------
 class FootPounds final: public Energy
 {
-    DECLARE_SUBCLASS(FootPounds, Energy)
+   DECLARE_SUBCLASS(FootPounds, Energy)
 
 public:
-    FootPounds();
-    FootPounds(const double);
-    FootPounds(const Energy&);
+   explicit FootPounds();
 
-    static double convertStatic(const Energy& n)      { return n.toEnergy() * energy::J2FP; }
-
-    double toEnergy() const final                     { return getValue() * energy::FP2J; }
-    double fromEnergy(const double a) const final     { return a * energy::J2FP; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * energy::FP2J;; }
 };
 
 }

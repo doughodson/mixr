@@ -8,21 +8,12 @@ IMPLEMENT_SUBCLASS(Degrees, "Degrees")
 EMPTY_SLOTTABLE(Degrees)
 EMPTY_COPYDATA(Degrees)
 EMPTY_DELETEDATA(Degrees)
+EMPTY_CONSTRUCTOR(Degrees)
 
-Degrees::Degrees() : Angle()
+Degrees::Degrees(const double x)
 {
     STANDARD_CONSTRUCTOR()
-}
-
-Degrees::Degrees(const double value) : Angle(value)
-{
-    STANDARD_CONSTRUCTOR()
-}
-
-Degrees::Degrees(const Angle& value) : Angle()
-{
-    STANDARD_CONSTRUCTOR()
-    BaseClass::copyData(value,true);
+    setValue(convertToBaseUnit(x));
 }
 
 }

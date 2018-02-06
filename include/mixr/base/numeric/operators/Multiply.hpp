@@ -15,11 +15,6 @@ namespace base {
 //
 //        ( * val n2 ) gives val multiplied by n2.
 //
-//
-// Public method :
-//
-//      virtual void operation()
-//          Performs the numeric operation of the class ( * ).
 //------------------------------------------------------------------------------
 class Multiply final: public Operator
 {
@@ -29,6 +24,7 @@ public:
    Multiply();
 
 private:
+   // performs the numeric equivalent operation of a "*"
    void operation() final;
    double getValue() const final       { return val; }
 

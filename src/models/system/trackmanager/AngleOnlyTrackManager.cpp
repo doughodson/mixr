@@ -168,14 +168,12 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const angle)
+bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const x)
 {
     bool ok{};
 
-    if (angle != nullptr) {
-        base::Radians r;
-        double value{r.convert(*angle)};
-        azimuthBin = value;
+    if (x != nullptr) {
+        azimuthBin = x->getValueInRadians();
         ok = true;
     }
     return ok;
@@ -184,14 +182,12 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const angle)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotElevationBin(const base::Angle* const angle)
+bool AngleOnlyTrackManager::setSlotElevationBin(const base::Angle* const x)
 {
     bool ok{};
 
-    if (angle != nullptr) {
-        base::Radians r;
-        double value{r.convert(*angle)};
-        azimuthBin = value;
+    if (x != nullptr) {
+        azimuthBin = x->getValueInRadians();
         ok = true;
     }
     return ok;

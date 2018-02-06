@@ -7,7 +7,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 namespace mixr {
 namespace terrain {

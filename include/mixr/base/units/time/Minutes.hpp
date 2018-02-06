@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Minutes
-// Description: Seconds * 60.0
+// Description: Concrete class to specify a time in minutes
 //------------------------------------------------------------------------------
 class Minutes final: public Time
 {
-    DECLARE_SUBCLASS(Minutes, Time)
+   DECLARE_SUBCLASS(Minutes, Time)
 
 public:
-    Minutes();
-    Minutes(const double);
-    Minutes(const Time&);
+   explicit Minutes();
 
-    static double convertStatic(const Time &n)      { return n.toTime() * time::S2M; }
-
-    double toTime() const final                     { return getValue() * time::M2S; }
-    double fromTime(const double a) const final     { return a * time::S2M; }
+private:
+   // convert minutes to seconds (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * time::M2S; }
 };
 
 }

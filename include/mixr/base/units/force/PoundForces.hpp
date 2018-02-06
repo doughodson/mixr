@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: PoundForces
-// Description:  Newtons * 0.224809
+// Description: Concrete class to specify a force in Pound Forces
 //------------------------------------------------------------------------------
 class PoundForces final: public Force
 {
-    DECLARE_SUBCLASS(PoundForces, Force)
+   DECLARE_SUBCLASS(PoundForces, Force)
 
 public:
-    PoundForces();
-    PoundForces(const double);
-    PoundForces(const Force&);
+   explicit PoundForces();
 
-    static double convertStatic(const Force& n)        { return n.toForce() * force::N2PF; }
-
-    double toForce() const final                       { return getValue() * force::PF2N; }
-    double fromForce(const double a) const final       { return a * force::N2PF; }
+private:
+   // convert pound force to newtons (our base unit)
+   double convertToBaseUnit(const double x) final      { return x * force::PF2N; }
 };
 
 }

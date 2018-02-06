@@ -451,13 +451,12 @@ bool RfSensor::setInitRngIdx(const int idx)
 //------------------------------------------------------------------------------
 
 // Sets PRF as a base::Frequency
-bool RfSensor::setSlotPrf(const base::Frequency* const msg)
+bool RfSensor::setSlotPrf(const base::Frequency* const x)
 {
    bool ok{};
 
-   if (msg != nullptr) {
-      const double x{base::Hertz::convertStatic(*msg)};
-      ok = setPRF( x );
+   if (x != nullptr) {
+      ok = setPRF(x->getValueInHertz());
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
       }
@@ -488,13 +487,12 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 //------------------------------------------------------------------------------
 
 // Sets pulse width using base::Time
-bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
+bool RfSensor::setSlotPulseWidth(const base::Time* const x)
 {
    bool ok{};
 
-   if (msg != nullptr) {
-      const double x{base::Seconds::convertStatic( *msg )};
-      ok = setPulseWidth( x );
+   if (x != nullptr) {
+      ok = setPulseWidth(x->getValueInSeconds());
       if (!ok) {
          std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
       }
@@ -523,13 +521,12 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 //------------------------------------------------------------------------------
 
 // Sets beam width as an base::Angle
-bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
+bool RfSensor::setSlotBeamWidth(const base::Angle* const x)
 {
    bool ok{};
 
-   if (msg != nullptr) {
-      const double x{static_cast<double>(base::Radians::convertStatic( *msg ))};
-      ok = setBeamWidth( x );
+   if (x != nullptr) {
+      ok = setBeamWidth( x->getValueInRadians() );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }

@@ -677,13 +677,13 @@ void JSBSimModel::dynamics(const double dt)
     // Set values for Player & AirVehicle interfaces
     //    (Note: Player::dynamics() computes the new position)
     // ---
-    p->setAltitude(base::distance::FT2M * Propagate->GetAltitudeASL(), true);
-    p->setVelocity(static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
-                   static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
-                   static_cast<double>(base::distance::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
-    p->setVelocityBody(static_cast<double>(base::distance::FT2M * Propagate->GetUVW(1)),
-                       static_cast<double>(base::distance::FT2M * Propagate->GetUVW(2)),
-                       static_cast<double>(base::distance::FT2M * Propagate->GetUVW(3)));
+    p->setAltitude(base::length::FT2M * Propagate->GetAltitudeASL(), true);
+    p->setVelocity(static_cast<double>(base::length::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
+                   static_cast<double>(base::length::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eEast)),
+                   static_cast<double>(base::length::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eDown)));
+    p->setVelocityBody(static_cast<double>(base::length::FT2M * Propagate->GetUVW(1)),
+                       static_cast<double>(base::length::FT2M * Propagate->GetUVW(2)),
+                       static_cast<double>(base::length::FT2M * Propagate->GetUVW(3)));
 //    double accX = base::Distance::FT2M * Propagate->GetUVWdot(1);
 //    double accY = base::Distance::FT2M * Propagate->GetUVWdot(2);
 //    double accZ = base::Distance::FT2M * Propagate->GetUVWdot(3);
@@ -698,9 +698,9 @@ void JSBSimModel::dynamics(const double dt)
                             static_cast<double>(Propagate->GetPQR(JSBSim::FGJSBBase::eR)));
 
     JSBSim::FGColumnVector3 vVeldot{Tb2l * vUVWdot};
-    p->setAcceleration(static_cast<double>(base::distance::FT2M * vVeldot(1)),
-                       static_cast<double>(base::distance::FT2M * vVeldot(2)),
-                       static_cast<double>(base::distance::FT2M * vVeldot(3)));
+    p->setAcceleration(static_cast<double>(base::length::FT2M * vVeldot(1)),
+                       static_cast<double>(base::length::FT2M * vVeldot(2)),
+                       static_cast<double>(base::length::FT2M * vVeldot(3)));
 
     //std::printf("(%6.1f, %6.1f, %6.1f)   vel=%8.1f   alt=%8.1f alt2=%8.1f\n", acData->phi, acData->theta, acData->psi, acData->vp, acData->hp, (M2FT*getAltitude()) );
     //std::printf("f=%6.1f p=%6.1f, qa=%6.1f, a=%6.1f, g=%6.1f\n", hotasIO->pitchForce, acData->theta, acData->qa, acData->alpha, acData->gamma );
@@ -757,7 +757,7 @@ void JSBSimModel::dynamics(const double dt)
             }
             if (hasAltitudeHold) {
                 propNode->SetBool("ap/altitude_hold", isAltitudeHoldOn());
-                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * base::distance::M2FT) );
+                propNode->SetDouble("ap/altitude_setpoint", (getCommandedAltitude() * base::length::M2FT) );
             }
         }
     }
@@ -831,7 +831,7 @@ void JSBSimModel::reset()
     JSBSim::FGInitialCondition* fgic{fdmex->GetIC()};
     if (fgic == nullptr) return;
 
-    fgic->SetAltitudeASLFtIC(base::distance::M2FT * p->getAltitude());
+    fgic->SetAltitudeASLFtIC(base::length::M2FT * p->getAltitude());
 
 #if 0
     fgic->SetTrueHeadingDegIC(base::Angle::R2DCC * p->getHeading());
@@ -842,7 +842,7 @@ void JSBSimModel::reset()
     fgic->SetPhiDegIC(base::angle::R2DCC * p->getRoll());
     fgic->SetThetaDegIC(base::angle::R2DCC * p->getPitch());
 #endif
-    fgic->SetVtrueKtsIC(base::distance::M2NM * p->getTotalVelocity() * 3600.0f);
+    fgic->SetVtrueKtsIC(base::length::M2NM * p->getTotalVelocity() * 3600.0f);
     fgic->SetLatitudeDegIC(p->getInitLatitude());
     fgic->SetLongitudeDegIC(p->getInitLongitude());
 
@@ -973,7 +973,7 @@ bool JSBSimModel::isAltitudeHoldOn() const
 
 double JSBSimModel::getCommandedAltitude() const
 {
-    return commandedAltitudeFt * base::distance::FT2M;
+    return commandedAltitudeFt * base::length::FT2M;
 }
 
 bool JSBSimModel::setAltitudeHoldOn(const bool b)
@@ -986,7 +986,7 @@ bool JSBSimModel::setAltitudeHoldOn(const bool b)
 
 bool JSBSimModel::setCommandedAltitude(const double a, const double, const double)
 {
-    commandedAltitudeFt = a * base::distance::M2FT;
+    commandedAltitudeFt = a * base::length::M2FT;
     return hasAltitudeHold;
 }
 

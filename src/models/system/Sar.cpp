@@ -241,7 +241,7 @@ void Sar::process(const double dt)
             std::cout << "Sar:: Generating test image: resolution: " << getResolution() << std::endl;
          }
          if (getResolution() > 0) p->setResolution( getResolution() );
-         else p->setResolution( 3.0 * base::distance::FT2M );
+         else p->setResolution( 3.0 * base::length::FT2M );
          const auto pp = new base::Pair("image", p);
          addImage(pp);
          // ### TEST

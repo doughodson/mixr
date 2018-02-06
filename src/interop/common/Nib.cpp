@@ -769,7 +769,7 @@ bool Nib::resetDeadReckoning(
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len{err.length()};
-      if (len < (2.0 * base::distance::KM2M) ) {
+      if (len < (2.0 * base::length::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
       }

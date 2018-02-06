@@ -19,7 +19,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/powers.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
@@ -222,9 +222,7 @@ bool Antenna::setPolarization(base::Identifier* const v)
 bool Antenna::setThreshold(base::Power* const p)
 {
    bool ok{};
-   // Has power units and we need watts
-   base::Watts watts;
-   const double x{watts.convert(*p)};
+   const double x{p->getValueInWatts()};
 
    // Test and set the threshold
    if (x >= 0.0) ok = setThreshold(x);
@@ -298,8 +296,7 @@ bool Antenna::setBeamWidth(const base::Angle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const double x{base::Radians::convertStatic( *msg )};
-      ok = setBeamWidth( x );
+      ok = setBeamWidth( msg->getValueInRadians() );
       if (!ok) {
          std::cerr << "Antenna::setSlotBeamWidth: Error setting beam width!" << std::endl;
       }

@@ -203,7 +203,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the User Header Label (UHL) record
     dtedUhlRecord uhl;
     in.read(reinterpret_cast<char*>(&uhl), sizeof(uhl));
-    if (in.fail() || in.gcount() < sizeof(uhl)) {
+    if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(uhl))) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: error reading UHL record." << std::endl;
         }
@@ -225,7 +225,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the Data Set Identification (DSI) record
     dtedDsiRecord dsi;
     in.read(reinterpret_cast<char*>(&dsi), sizeof(dsi));
-    if (in.fail() || in.gcount() < sizeof(dsi)) {
+    if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(dsi))) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: error reading DSI record." << std::endl;
         }
@@ -235,7 +235,7 @@ bool DtedFile::readDtedHeaders(std::istream& in)
     // Read in the Accuracy Description (ACC) record
     dtedAccRecord acc;
     in.read(reinterpret_cast<char*>(&acc), sizeof(acc));
-    if (in.fail() || in.gcount() < sizeof(acc)) {
+    if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(acc))) {
         if (isMessageEnabled(MSG_ERROR)) {
            std::cerr << "DtedFile::readDtedHeaders: error reading ACC record." << std::endl;
         }
@@ -304,7 +304,7 @@ bool DtedFile::readDtedData(std::istream& in)
         // read record header
         dtedColumnHeader head;
         in.read(reinterpret_cast<char*>(&head), sizeof(head));
-        if (in.fail() || in.gcount() < sizeof(head)) {
+        if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(head))) {
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "DtedFile::readDtedData: error reading column header." << std::endl;
             }
@@ -326,7 +326,7 @@ bool DtedFile::readDtedData(std::istream& in)
         for (unsigned int lat=0; lat<nptlat; lat++) {
             unsigned char values[2]{};
             in.read(reinterpret_cast<char*>(values), sizeof(values));
-            if (in.fail() || in.gcount() < sizeof(values)) {
+            if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(values))) {
                 if (isMessageEnabled(MSG_ERROR)) {
                     std::cerr << "DtedFile::readDtedData: error reading data value." << std::endl;
                 }
@@ -347,7 +347,7 @@ bool DtedFile::readDtedData(std::istream& in)
         // Read data record footer and verify checksum
         dtedColumnFooter foot;
         in.read(reinterpret_cast<char*>(&foot), sizeof(foot));
-        if (in.fail() || in.gcount() < sizeof(foot)) {
+        if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(foot))) {
             if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "DtedFile::readDtedData: error reading column footer." << std::endl;
             }

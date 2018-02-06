@@ -21,7 +21,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cmath>
 #include <string>
@@ -194,7 +194,7 @@ void IrSensor::transmit(const double dt)
          irQuery->setInstantaneousFieldOfView(getIFOV());
          irQuery->setSendingSensor(this);
          irQuery->setNEI(getNEI());
-         irQuery->setMaxRangeNM(getMaximumRange()* base::distance::M2NM);
+         irQuery->setMaxRangeNM(getMaximumRange()* base::length::M2NM);
          seeker->irRequestSignature(irQuery);
          irQuery->unref();
       } // If irQuery not null
@@ -514,10 +514,9 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 {
    double value{};
 
-   const auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Length*>(msg);
    if (d != nullptr) {
-       base::Meters m;
-       value = static_cast<double>(m.convert(*d));
+       value = d->getValueInMeters();
    } else if (msg != nullptr) {
       value = msg->asDouble();
    }
@@ -550,10 +549,9 @@ bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
    double value{};
    bool ok{};
 
-   const auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Length*>(msg);
    if (d != nullptr) {
-       base::MicroMeters mm;
-       value = static_cast<double>(mm.convert(*d));
+       value = d->getValueInMicroMeters();
    } else if (msg != nullptr) {
       value = msg->asDouble();
    }
@@ -573,10 +571,9 @@ bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
    bool ok{};
    double value{};
 
-   const auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Length*>(msg);
    if (d != nullptr) {
-       base::MicroMeters mm;
-       value = static_cast<double>(mm.convert(*d));
+       value = d->getValueInMicroMeters();
    } else if (msg != nullptr) {
       value = msg->asDouble();
    }

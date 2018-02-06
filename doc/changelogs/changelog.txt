@@ -790,6 +790,10 @@ models library (mixr_models)
    RfSystem class
       1) Slot parameter 'antennaName' now accepts an Identifier
       2) Slot parameter 'disableEmissions' now accepts a Boolean
+      3) Fixed bug in setSlotFrequency() in that it was dynamically casting a
+         Frequency provided input value into a Frequency value.  If the cast failed
+         (which is impossible), then treat the value as if it is a Number - which
+         it can't be.
 
    Route class
       1) Slot parameters 'autoSequence' and 'wrap' now accepts a Boolean

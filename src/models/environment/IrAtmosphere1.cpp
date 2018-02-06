@@ -12,7 +12,7 @@
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cmath>
 
@@ -128,7 +128,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, doubl
    *totalSignal = 0.0;
    *totalBackground = 0.0;
 
-   for (unsigned int i=0; i<getNumWaveBands(); i++) {
+   for (int i=0; i<getNumWaveBands(); i++) {
       const double lowerBandBound{centerWavelengths[i] - (widths[i] / 2.0)};
       const double upperBandBound{lowerBandBound + widths[i]};
 
@@ -326,7 +326,7 @@ void IrAtmosphere1::getSolarRadiationSignatures(
 {
    const double* centerWavelengths{this->getWaveBandCenters()};
    const double* widths{this->getWaveBandWidths()};
-   for (unsigned int i = 0; i < getNumWaveBands(); i++) {
+   for (int i = 0; i < getNumWaveBands(); i++) {
       const double centerWavelength{centerWavelengths[i]};
       const double lowerWavelength{centerWavelength - (widths[i] / 2.0)};
       const double upperWavelength{lowerWavelength + widths[i]};

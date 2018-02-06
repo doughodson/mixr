@@ -16,7 +16,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cstdio>
 
@@ -36,7 +36,7 @@ BEGIN_SLOT_MAP(Route)
     ON_SLOT(1, setSlotTo,              base::Identifier)
     ON_SLOT(1, setSlotTo,              base::Integer)
     ON_SLOT(2, setSlotAutoSequence,    base::Boolean)
-    ON_SLOT(3, setSlotAutoSeqDistance, base::Distance)
+    ON_SLOT(3, setSlotAutoSeqDistance, base::Length)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Number)
     ON_SLOT(4, setSlotWrap,            base::Boolean)
 END_SLOT_MAP()
@@ -702,11 +702,11 @@ bool Route::setSlotAutoSequence(const base::Boolean* const msg)
     return ok;
 }
 
-bool Route::setSlotAutoSeqDistance(const base::Distance* const msg)
+bool Route::setSlotAutoSeqDistance(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        autoSeqDistNM = base::NauticalMiles::convertStatic(*msg);
+    if (x != nullptr) {
+        autoSeqDistNM = x->getValueInNauticalMiles();
         ok = true;
     }
     return ok;

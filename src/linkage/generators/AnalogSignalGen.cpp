@@ -148,21 +148,21 @@ bool AnalogSignalGen::setSlotSignal(const base::String* const msg)
 }
 
 // frequency: frequency
-bool AnalogSignalGen::setSlotFrequency(const base::Frequency* const msg)
+bool AnalogSignalGen::setSlotFrequency(const base::Frequency* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setFrequency( base::Hertz::convertStatic(*msg) );
+   if (x != nullptr) {
+      ok = setFrequency(x->getValueInHertz());
    }
    return ok;
 }
 
 // phase: Phase shift
-bool AnalogSignalGen::setSlotPhase(const base::Angle* const msg)
+bool AnalogSignalGen::setSlotPhase(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setPhase( static_cast<double>(base::Radians::convertStatic(*msg)) );
+   if (x != nullptr) {
+      ok = setPhase(x->getValueInRadians());
    }
    return ok;
 }

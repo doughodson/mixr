@@ -18,14 +18,11 @@ class SquareCentiMeters final: public Area
     DECLARE_SUBCLASS(SquareCentiMeters, Area)
 
 public:
-    SquareCentiMeters();
-    SquareCentiMeters(const double);
-    SquareCentiMeters(const Area&);
+    explicit SquareCentiMeters();
 
-    static double convertStatic(const Area& n)      { return n.toArea() * area::SM2SCM; }
-
-    double toArea() const final                     { return getValue() * area::SCM2SM; }
-    double fromArea(const double a) const final     { return a * area::SM2SCM; }
+private:
+   // convert square centimeters to square meters (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * area::SCM2SM; }
 };
 
 }

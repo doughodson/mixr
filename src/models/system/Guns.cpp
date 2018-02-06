@@ -451,8 +451,7 @@ bool Gun::setSlotRoll(const base::Number* const num)
 
    const auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
-      base::Radians radian;
-      value = radian.convert(*p);
+      value = p->getValueInRadians();
    } else if (num != nullptr) {
       value = num->asDouble();
    }
@@ -476,8 +475,7 @@ bool Gun::setSlotPitch(const base::Number* const num)
 
    const auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
-      base::Radians radian;
-      value = radian.convert(*p);
+      value = p->getValueInRadians();
    } else if (num != nullptr) {
       value = num->asDouble();
    }
@@ -501,8 +499,7 @@ bool Gun::setSlotYaw(const base::Number* const num)
 
    const auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
-      base::Radians radian;
-      value = radian.convert(*p);
+      value = p->getValueInRadians();
    } else if (num != nullptr) {
       value = num->asDouble();
    }

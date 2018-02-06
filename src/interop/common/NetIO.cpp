@@ -21,7 +21,7 @@
 
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
@@ -81,10 +81,10 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(9,  setSlotOutputEntityTypes,  base::PairStream)
 
    ON_SLOT(10, setSlotMaxTimeDR,          base::Time)
-   ON_SLOT(11, setSlotMaxPositionErr,     base::Distance)
+   ON_SLOT(11, setSlotMaxPositionErr,     base::Length)
    ON_SLOT(12, setSlotMaxOrientationErr,  base::Angle)
    ON_SLOT(13, setSlotMaxAge,             base::Time)
-   ON_SLOT(14, setSlotMaxEntityRange,     base::Distance)
+   ON_SLOT(14, setSlotMaxEntityRange,     base::Length)
 END_SLOT_MAP()
 
 NetIO::NetIO()
@@ -1163,56 +1163,52 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 }
 
 // Sets the mac DR time(s)
-bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
+bool NetIO::setSlotMaxTimeDR(const base::Time* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double time{base::Seconds::convertStatic( *msg )};
-      ok = setMaxTimeDR( time );
+   if (x != nullptr) {
+      ok = setMaxTimeDR(x->getValueInSeconds());
    }
    return ok;
 }
 
 // Sets the max positional error(s)
-bool NetIO::setSlotMaxPositionErr(const base::Distance* const msg)
+bool NetIO::setSlotMaxPositionErr(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double err{base::Meters::convertStatic( *msg )};
-      ok = setMaxPositionErr( err );
+   if (x != nullptr) {
+      ok = setMaxPositionErr(x->getValueInMeters());
    }
    return ok;
 }
 
 // Sets the max orientation error(s)
-bool NetIO::setSlotMaxOrientationErr(const base::Angle* const msg)
+bool NetIO::setSlotMaxOrientationErr(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double err{static_cast<double>(base::Radians::convertStatic( *msg ))};
+   if (x != nullptr) {
+      const double err{x->getValueInRadians()};
       ok = setMaxOrientationErr( err );
    }
    return ok;
 }
 
 // Sets the max age(s)
-bool NetIO::setSlotMaxAge(const base::Time* const msg)
+bool NetIO::setSlotMaxAge(const base::Time* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double age{base::Seconds::convertStatic( *msg )};
-      ok = setMaxAge( age );
+   if (x != nullptr) {
+      ok = setMaxAge(x->getValueInSeconds());
    }
    return ok;
 }
 
 // Sets the max entity range(s)
-bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
+bool NetIO::setSlotMaxEntityRange(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double rng{base::Meters::convertStatic( *msg )};
-      ok = setMaxEntityRange( rng );
+   if (x != nullptr) {
+      ok = setMaxEntityRange(x->getValueInMeters());
    }
    return ok;
 }
@@ -1221,7 +1217,7 @@ bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
 // Class: NtmInputNode
 //==============================================================================
 
-IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmInputNode,"AbstractNtmInputNode")
+IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmInputNode, "AbstractNtmInputNode")
 EMPTY_SLOTTABLE(NetIO::NtmInputNode)
 EMPTY_COPYDATA(NetIO::NtmInputNode)
 EMPTY_DELETEDATA(NetIO::NtmInputNode)

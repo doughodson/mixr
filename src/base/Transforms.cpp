@@ -159,12 +159,11 @@ void Scale::computeMatrix()
 //------------------------------------------------------------------------------
 // setSlotComputematrix1 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setSlotComputematrix1(const Angle* const sc1obj)
+bool Transform::setSlotComputematrix1(const Angle* const x)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
-        Radians rad;
-        v[nv++] = static_cast<double>(rad.convert(*sc1obj));
+        v[nv++] = x->getValueInRadians();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix1: Invalid Angle type or input" << std::endl;
@@ -176,11 +175,11 @@ bool Transform::setSlotComputematrix1(const Angle* const sc1obj)
 //------------------------------------------------------------------------------
 // setSlotComputematrix1 () - for Number types
 //------------------------------------------------------------------------------
-bool Transform::setSlotComputematrix1(const Number* const sc1obj)
+bool Transform::setSlotComputematrix1(const Number* const x)
 {
     bool ok = true;
-    if (sc1obj != nullptr) {
-        v[nv++] = sc1obj->asDouble();
+    if (x != nullptr) {
+        v[nv++] = x->asDouble();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix1:  Invalid Number type or input" << std::endl;
@@ -192,12 +191,11 @@ bool Transform::setSlotComputematrix1(const Number* const sc1obj)
 //------------------------------------------------------------------------------
 // setSlotComputematrix2 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setSlotComputematrix2(const Angle* const sc2obj)
+bool Transform::setSlotComputematrix2(const Angle* const x)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
-        Radians rad;
-        v[nv++] = static_cast<double>(rad.convert(*sc2obj));
+        v[nv++] = x->getValueInRadians();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix2:  Invalid Angle type or input" << std::endl;
@@ -225,12 +223,11 @@ bool Transform::setSlotComputematrix2(const Number* const sc2obj)
 //------------------------------------------------------------------------------
 // setSlotComputematrix3 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setSlotComputematrix3(const Angle* const sc3obj)
+bool Transform::setSlotComputematrix3(const Angle* const x)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
-        Radians rad;
-        v[nv++] = static_cast<double>(rad.convert(*sc3obj));
+        v[nv++] = x->getValueInRadians();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix3:  Invalid Angle type or input" << std::endl;
@@ -258,12 +255,11 @@ bool Transform::setSlotComputematrix3(const Number* const sc3obj)
 //------------------------------------------------------------------------------
 // setSlotComputematrix4 () - for Angle types
 //------------------------------------------------------------------------------
-bool Transform::setSlotComputematrix4(const Angle* const sc4obj)
+bool Transform::setSlotComputematrix4(const Angle* const x)
 {
     bool ok = true;
     if (nv == 0 && isClassType(typeid(Rotation))) {
-        Radians rad;
-        v[nv++] = static_cast<double>(rad.convert(*sc4obj));
+        v[nv++] = x->getValueInRadians();
         computeMatrix();
     } else {
         std::cerr << "Transform::setComputematrix4:  Invalid Angle type or input" << std::endl;

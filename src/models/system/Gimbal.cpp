@@ -12,7 +12,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -115,7 +115,7 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
                                                                      //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
     ON_SLOT(31, setSlotMaxPlayers,                 base::Integer)    // Max number of players of interest (default: 0)
-    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Distance)   // Max range to players of interest or zero for all (default: 0)
+    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Length)     // Max range to players of interest or zero for all (default: 0)
     ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::Angle)      // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
     ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, base::Boolean)    // Sets the local only players of interest flag (default: false)
 
@@ -273,7 +273,7 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 //------------------------------------------------------------------------------
 double Gimbal::getEarthRadius() const
 {
-   double erad{base::nav::ERAD60 * base::distance::NM2M};
+   double erad{base::nav::ERAD60 * base::length::NM2M};
    const Player* own{getOwnship()};
    if (own != nullptr) {
       erad = own->getEarthRadius();
@@ -787,36 +787,33 @@ bool Gimbal::setSlotPosition(const base::List* const msg)
 }
 
 // setSlotPosAzimuth() - Initial azimuth positon
-bool Gimbal::setSlotPosAzimuth(const base::Angle* const msg)
+bool Gimbal::setSlotPosAzimuth(const base::Angle* const az)
 {
    bool ok{};
-   if (msg != nullptr) {
-       const double az{base::Radians::convertStatic(*msg)};
-       ok = setPosition(az, getElevation(), getRoll());
+   if (az != nullptr) {
+       ok = setPosition(az->getValueInRadians(), getElevation(), getRoll());
        if (ok) initPos = pos;
    }
-    return ok;
+   return ok;
 }
 
 // setSlotPosElevation() - Initial elevation positon
-bool Gimbal::setSlotPosElevation(const base::Angle* const msg)
+bool Gimbal::setSlotPosElevation(const base::Angle* const el)
 {
    bool ok{};
-   if (msg != nullptr) {
-       const double el{base::Radians::convertStatic(*msg)};
-       ok = setPosition(getAzimuth(), el, getRoll());
+   if (el != nullptr) {
+       ok = setPosition(getAzimuth(), el->getValueInRadians(), getRoll());
        if (ok) initPos = pos;
    }
    return ok;
 }
 
 // setSlotPosRoll() - Initial roll positon
-bool Gimbal::setSlotPosRoll(const base::Angle* const msg)
+bool Gimbal::setSlotPosRoll(const base::Angle* const roll)
 {
    bool ok{};
-   if (msg != nullptr) {
-       const double roll{base::Radians::convertStatic(*msg)};
-       ok = setPosition(getAzimuth(), getElevation(), roll);
+   if (roll != nullptr) {
+       ok = setPosition(getAzimuth(), getElevation(), roll->getValueInRadians());
        if (ok) initPos = pos;
    }
    return ok;
@@ -841,8 +838,7 @@ bool Gimbal::setSlotAzimuthLimitLeft(const base::Angle* const msg)
     if (msg != nullptr) {
         double leftLim{}, rightLim{};
         getAzimuthLimits(&leftLim, &rightLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setAzimuthLimits(value, rightLim);
+        ok = setAzimuthLimits(msg->getValueInRadians(), rightLim);
     }
     return ok;
 }
@@ -854,8 +850,7 @@ bool Gimbal::setSlotAzimuthLimitRight(const base::Angle* const msg)
     if (msg != nullptr) {
         double leftLim{}, rightLim{};
         getAzimuthLimits(&leftLim, &rightLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setAzimuthLimits(leftLim, value);
+        ok = setAzimuthLimits(leftLim, msg->getValueInRadians());
     }
     return ok;
 }
@@ -879,8 +874,7 @@ bool Gimbal::setSlotElevationLower(const base::Angle* const msg)
     if (msg != nullptr) {
         double lowerLim{}, upperLim{};
         getElevationLimits(&lowerLim, &upperLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setElevationLimits(value, upperLim);
+        ok = setElevationLimits(msg->getValueInRadians(), upperLim);
     }
     return ok;
 }
@@ -892,8 +886,7 @@ bool Gimbal::setSlotElevationUpper(const base::Angle* const msg)
     if (msg != nullptr) {
         double lowerLim{}, upperLim{};
         getElevationLimits(&lowerLim, &upperLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setElevationLimits(lowerLim, value);
+        ok = setElevationLimits(lowerLim, msg->getValueInRadians());
     }
     return ok;
 }
@@ -918,8 +911,7 @@ bool Gimbal::setSlotRollLimitLower(const base::Angle* const msg)
     if (msg != nullptr) {
         double lowerLim{}, upperLim{};
         getRollLimits(&lowerLim, &upperLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setRollLimits(value, upperLim);
+        ok = setRollLimits(msg->getValueInRadians(), upperLim);
     }
     return ok;
 }
@@ -931,8 +923,7 @@ bool Gimbal::setSlotRollLimitUpper(const base::Angle* const msg)
     if (msg != nullptr) {
         double lowerLim{}, upperLim{};
         getRollLimits(&lowerLim, &upperLim);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setRollLimits(lowerLim, value);
+        ok = setRollLimits(lowerLim, msg->getValueInRadians());
     }
     return ok;
 }
@@ -958,8 +949,7 @@ bool Gimbal::setSlotMaxRateAzimuth(const base::Angle* const msg)
     if (msg != nullptr) {
         double azMaxRate{}, ezMaxRate{}, rollMaxRate{};
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setMaxRates(value, ezMaxRate, rollMaxRate);
+        ok = setMaxRates(msg->getValueInRadians(), ezMaxRate, rollMaxRate);
     }
     return ok;
 }
@@ -971,8 +961,7 @@ bool Gimbal::setSlotMaxRateElevation(const base::Angle* const msg)
     if (msg != nullptr) {
         double azMaxRate{}, ezMaxRate{}, rollMaxRate{};
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setMaxRates(azMaxRate, value, rollMaxRate);
+        ok = setMaxRates(azMaxRate, msg->getValueInRadians(), rollMaxRate);
     }
     return ok;
 }
@@ -984,8 +973,7 @@ bool Gimbal::setSlotMaxRateRoll(const base::Angle* const msg)
     if (msg != nullptr) {
         double azMaxRate{}, ezMaxRate{}, rollMaxRate{};
         getMaxRates(&azMaxRate, &ezMaxRate, &rollMaxRate);
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setMaxRates(azMaxRate, ezMaxRate, value);
+        ok = setMaxRates(azMaxRate, ezMaxRate, msg->getValueInRadians());
     }
     return ok;
 }
@@ -1010,8 +998,7 @@ bool Gimbal::setSlotCmdPosAzimuth(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdPos(value, getCmdElev(), getCmdRoll());
+        ok = setCmdPos(msg->getValueInRadians(), getCmdElev(), getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
     return ok;
@@ -1022,8 +1009,7 @@ bool Gimbal::setSlotCmdPosElevation(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdPos(getCmdAz(), value, getCmdRoll());
+        ok = setCmdPos(getCmdAz(), msg->getValueInRadians(), getCmdRoll());
         if (ok) initCmdPos = cmdPos;
     }
     return ok;
@@ -1034,8 +1020,7 @@ bool Gimbal::setSlotCmdPosRoll(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdPos(getCmdAz(), getCmdElev(), value);
+        ok = setCmdPos(getCmdAz(), getCmdElev(), msg->getValueInRadians());
         if (ok) initCmdPos = cmdPos;
     }
     return ok;
@@ -1060,8 +1045,7 @@ bool Gimbal::setSlotCmdRateAzimuth(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdRate(value, getCmdElevRate(), getCmdRollRate());
+        ok = setCmdRate(msg->getValueInRadians(), getCmdElevRate(), getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
     return ok;
@@ -1072,8 +1056,7 @@ bool Gimbal::setSlotCmdRateElevation(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdRate(getCmdAzRate(), value, getCmdRollRate());
+        ok = setCmdRate(getCmdAzRate(), msg->getValueInRadians(), getCmdRollRate());
         if (ok) initCmdRate = cmdRate;
     }
     return ok;
@@ -1084,8 +1067,7 @@ bool Gimbal::setSlotCmdRateRoll(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setCmdRate(getCmdAzRate(), getCmdElevRate(), value);
+        ok = setCmdRate(getCmdAzRate(), getCmdElevRate(), msg->getValueInRadians());
         if (ok) initCmdRate = cmdRate;
     }
     return ok;
@@ -1162,12 +1144,11 @@ bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 }
 
 // Max range to players of interest or zero for all (meters)
-bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::Distance* const msg)
+bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::Length* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const double value{base::Meters::convertStatic(*msg)};
-        ok = setMaxRange2PlayersOfInterest(value);
+    if (x != nullptr) {
+        ok = setMaxRange2PlayersOfInterest(x->getValueInMeters());
     }
     return ok;
 }
@@ -1177,8 +1158,7 @@ bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::Angle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double value{base::Radians::convertStatic(*msg)};
-        ok = setMaxAngle2PlayersOfInterest(value);
+        ok = setMaxAngle2PlayersOfInterest(msg->getValueInRadians());
     }
     return ok;
 }

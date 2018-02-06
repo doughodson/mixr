@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Distance;
+class Length;
 class Number;
 
 //------------------------------------------------------------------------------
@@ -81,9 +81,9 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotA(const Distance* const);
+   bool setSlotA(const Length* const);
    bool setSlotA(const Number* const);
-   bool setSlotB(const Distance* const);
+   bool setSlotB(const Length* const);
    bool setSlotB(const Number* const);
    bool setSlotF(const Number* const);
 

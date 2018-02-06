@@ -10,10 +10,10 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(Timer, "Timer")
 
-bool Timer::frz {};                    // Freeze flag
-Timer* Timer::timers[MAX_TIMERS] {};   // List of timers
-unsigned int Timer::nTimers {};        // Number of timers in the list
-long Timer::semaphore {};              // Semaphore for the timer list
+bool Timer::frz{};                    // Freeze flag
+Timer* Timer::timers[MAX_TIMERS]{};   // List of timers
+int Timer::nTimers{};                 // Number of timers in the list
+long Timer::semaphore{};              // Semaphore for the timer list
 
 BEGIN_SLOTTABLE(Timer)
    "timerValue",         // 1: Timer interval (default: 0)
@@ -99,7 +99,7 @@ void Timer::updateTimers(const double dt)
 {
     if (!frz) {
       lock( semaphore );
-      for (unsigned int i = 0; i < nTimers; i++) {
+      for (int i = 0; i < nTimers; i++) {
          timers[i]->update(dt);
       }
       unlock( semaphore );
@@ -134,8 +134,8 @@ void Timer::removeFromTimerList(Timer* timer)
    lock( semaphore );
 
    // Find this timer in the list
-   unsigned int found {MAX_TIMERS};
-   for (unsigned int i = 0; i < nTimers && found == MAX_TIMERS; i++) {
+   int found{MAX_TIMERS};
+   for (int i = 0; i < nTimers && found == MAX_TIMERS; i++) {
       if (timers[i] == timer) found = i;
    }
 
@@ -143,7 +143,7 @@ void Timer::removeFromTimerList(Timer* timer)
    // beyond this timer down position
    if (found != MAX_TIMERS) {
       --nTimers;  // One less timer
-      for (unsigned int i = found; i < nTimers; i++) {
+      for (int i = found; i < nTimers; i++) {
          timers[i] = timers[i+1];
       }
    }
@@ -156,11 +156,11 @@ void Timer::removeFromTimerList(Timer* timer)
 // -----------------------------------------------------------------
 
 // Sets the timer value
-bool Timer::setSlotTimerValue(const Time* const msg)
+bool Timer::setSlotTimerValue(const Time* const x)
 {
    bool ok {};
-   if (msg != nullptr) {
-      double sec {Seconds::convertStatic(*msg)};
+   if (x != nullptr) {
+      double sec{x->getValueInSeconds()};
       ok = setTimerValue(sec);
       if (ok) setCurrentTime(sec);
    }
@@ -168,11 +168,11 @@ bool Timer::setSlotTimerValue(const Time* const msg)
 }
 
 // Sets the alarm value
-bool Timer::setSlotAlarmTime(const Time* const msg)
+bool Timer::setSlotAlarmTime(const Time* const x)
 {
    bool ok {};
-   if (msg != nullptr) {
-      ok = setAlarmTime( Seconds::convertStatic(*msg) );
+   if (x != nullptr) {
+      ok = setAlarmTime(x->getValueInSeconds());
     }
     return ok;
 }

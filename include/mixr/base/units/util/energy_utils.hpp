@@ -7,16 +7,16 @@ namespace base {
 namespace energy {
 
 // conversion constants
-const double J2KWH = 0.0000002777777778f;  // Joules => KiloWattHours
-const double KWH2J = (1 / J2KWH);          // KiloWattHours => Joules
-const double J2BTU = 0.0009478f;           // Joules => BTUs
-const double BTU2J = (1 / J2BTU);          // BTUs => Joules
-const double J2FP = 0.7376f;               // Joules => FootPounds
-const double FP2J = (1 / J2FP);            // FootPounds => Joules
-const double J2C = 0.2388888889f;          // Joules => Calories
-const double C2J = (1 / J2C);              // Calories => Joules
+constexpr double J2KWH{0.0000002777777778};  // Joules => KiloWattHours
+constexpr double KWH2J{1.0 / J2KWH};         // KiloWattHours => Joules
+constexpr double J2BTU{0.0009478};           // Joules => BTUs
+constexpr double BTU2J{1.0 / J2BTU};         // BTUs => Joules
+constexpr double J2FP{0.7376};               // Joules => FootPounds
+constexpr double FP2J{1.0 / J2FP};           // FootPounds => Joules
+constexpr double J2C{0.2388888889};          // Joules => Calories
+constexpr double C2J{1.0 / J2C};             // Calories => Joules
 
-// conversions between Energy
+// conversion functions
 inline double btusToFootPounds(const double v)          { return (v * BTU2J) * J2FP;  }
 inline double btusToJoules(const double v)              { return v * BTU2J;           }
 inline double btusToKiloWattHours(const double v)       { return (v * BTU2J) * J2KWH; }

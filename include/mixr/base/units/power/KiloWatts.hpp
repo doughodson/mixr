@@ -11,21 +11,18 @@ namespace base {
 
 //----------------------------------------------------------------------------
 // Class: KiloWatts
-// Description: Watts * 0.001
+// Description: Concrete class to specify power in KiloWatts
 //----------------------------------------------------------------------------
 class KiloWatts final: public Power
 {
    DECLARE_SUBCLASS(KiloWatts, Power)
 
 public:
-    KiloWatts();
-    KiloWatts(const double);
-    KiloWatts(const Power&);
+   explicit KiloWatts();
 
-    static double convertStatic(const Power &n)      { return n.toPower() * power::W2KW; }
-
-    double toPower() const final                     { return getValue() * power::KW2W; }
-    double fromPower(const double a) const final     { return a * power::W2KW; }
+private:
+   // convert KiloWatts to Watts (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * power::KW2W; }
 };
 
 }

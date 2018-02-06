@@ -11,21 +11,22 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Degrees
-// Description: Angle * 180.0
+// Description: Concrete class to specify an angle in unit degrees
 //------------------------------------------------------------------------------
 class Degrees final: public Angle
 {
-    DECLARE_SUBCLASS(Degrees, Angle)
+   DECLARE_SUBCLASS(Degrees, Angle)
 
 public:
-    Degrees();
-    Degrees(const double);
-    Degrees(const Angle&);
+   explicit Degrees();
+   explicit Degrees(const double);
 
-    static double convertStatic(const Angle& n)           { return n.toAngle() * angle::SC2D; }
+   // temp method to eventually be replaced by setValue() in Quantity class
+   void set(const double x)       { setValue(convertToBaseUnit(x)); }
 
-    double toAngle() const final                          { return getValue() * angle::D2SC; }
-    double fromAngle(const double a) const final          { return a * angle::SC2D; }
+private:
+   // convert degrees to radians (our base unit)
+   double convertToBaseUnit(const double x) final           { return x * angle::D2RCC; }
 };
 
 }

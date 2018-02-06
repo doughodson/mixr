@@ -11,21 +11,19 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: MilliSeconds
-// Description: Seconds / 1000.0
+// Description: Concrete class to specify a time in milliseconds
 //------------------------------------------------------------------------------
 class MilliSeconds : public Time
 {
-    DECLARE_SUBCLASS(MilliSeconds, Time)
+   DECLARE_SUBCLASS(MilliSeconds, Time)
 
 public:
-    MilliSeconds();
-    MilliSeconds(const double);
-    MilliSeconds(const Time&);
+   explicit MilliSeconds();
 
-    static double convertStatic(const Time &n)      { return n.toTime() * time::S2MS; }
 
-    double toTime() const final                     { return getValue() * time::MS2S; }
-    double fromTime(const double a) const final     { return a * time::S2MS; }
+private:
+   // convert milliseconds to seconds (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * time::MS2S; }
 };
 
 }

@@ -66,7 +66,7 @@ void AnalogInput::deleteData()
 // table: Shaping function table
 bool AnalogInput::setTable(const base::Table1* const msg)
 {
-    bool ok {true};
+    bool ok{true};
 
     // Unref() the old (if any)
     if (table != nullptr) {
@@ -103,7 +103,7 @@ void AnalogInput::processInputsImpl(const base::AbstractIoDevice* const device, 
    }
 
    // process the input value, as needed
-   double vout {convert(vin)};
+   double vout{convert(vin)};
 
    // Set the data to the input data handler
    if (inData != nullptr) {
@@ -117,16 +117,16 @@ void AnalogInput::processInputsImpl(const base::AbstractIoDevice* const device, 
 double AnalogInput::convert(const double vin)
 {
    // Deadband
-   double v1 {vin};
+   double v1{vin};
    if (deadband != 0 && vin < deadband && vin > -deadband) {
       v1 = 0;
    }
 
    // Offset & Gain
-   const double v2 {(v1 - offset) * gain};
+   const double v2{(v1 - offset) * gain};
 
    // Shaping function
-   double v3 {v2};
+   double v3{v2};
    if (table != nullptr) v3 = table->lfi(v2);
 
    // return final value
@@ -136,7 +136,7 @@ double AnalogInput::convert(const double vin)
 // ai: Analog Input location
 bool AnalogInput::setSlotLocation(const base::Integer* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       const int v {msg->asInt()};
       if (v >= 0) {
@@ -149,7 +149,7 @@ bool AnalogInput::setSlotLocation(const base::Integer* const msg)
 // channel: AI card's channel number
 bool AnalogInput::setSlotChannel(const base::Integer* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       const int v {msg->asInt()};
       if (v >= 0) {
@@ -162,7 +162,7 @@ bool AnalogInput::setSlotChannel(const base::Integer* const msg)
 // deadband: Deadband: [ 0 .. 1 ] (default: 0.0)
 bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       ok = setDeadband( msg->asDouble() );
    }
@@ -172,7 +172,7 @@ bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 // offset: Offset value
 bool AnalogInput::setSlotOffset(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       ok = setOffset( msg->asDouble() );
    }
@@ -182,7 +182,7 @@ bool AnalogInput::setSlotOffset(const base::Number* const msg)
 // gain: Gain value
 bool AnalogInput::setSlotGain(const base::Number* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       ok = setGain( msg->asDouble() );
    }

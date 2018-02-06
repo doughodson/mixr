@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Days
-// Description: Seconds * 3600.0 * 24.0
+// Description: Concrete class to specify a time in days
 //------------------------------------------------------------------------------
 class Days final: public Time
 {
-    DECLARE_SUBCLASS(Days, Time)
+   DECLARE_SUBCLASS(Days, Time)
 
 public:
-    Days();
-    Days(const double);
-    Days(const Time&);
+   explicit Days();
 
-    static double convertStatic(const Time &n)     { return n.toTime() * time::S2D; }
-
-    double toTime() const final                    { return getValue() * time::D2S; }
-    double fromTime(const double a) const final    { return a * time::S2D; }
+private:
+   // convert days to seconds (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * time::D2S; }
 };
 
 }

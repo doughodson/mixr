@@ -168,9 +168,9 @@ void PovHost::sendData()
       entityState.z_cg = 0;          // altitude
 
       const base::Vec3d pos{av->getPosition()};
-      entityState.pilot_eye_x = pos[0] * base::distance::M2FT;
-      entityState.pilot_eye_y = pos[1] * base::distance::M2FT;
-      entityState.pilot_eye_z = -pos[2] * base::distance::M2FT;   // altitude
+      entityState.pilot_eye_x = pos[0] * base::length::M2FT;
+      entityState.pilot_eye_y = pos[1] * base::length::M2FT;
+      entityState.pilot_eye_z = -pos[2] * base::length::M2FT;   // altitude
 
       entityState.alphad = av->getAngleOfAttackD();
       entityState.betad = av->getSideSlipD();

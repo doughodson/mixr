@@ -228,7 +228,7 @@ bool IoHandler::setSlotRate(const base::Frequency* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
-        const double x{base::Hertz::convertStatic(*msg)};
+        const double x{msg->getValueInHertz()};
         if (x > 0) {
             rate = x;
             ok = true;

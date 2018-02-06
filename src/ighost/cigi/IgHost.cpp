@@ -17,7 +17,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cstring>
 #include <cmath>
@@ -35,7 +35,7 @@ BEGIN_SLOTTABLE(IgHost)
 END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
-   ON_SLOT(1, setSlotMaxRange,      base::Distance)
+   ON_SLOT(1, setSlotMaxRange,      base::Length)
    ON_SLOT(1, setSlotMaxRange,      base::Number)
    ON_SLOT(2, setSlotMaxModels,     base::Integer)
    ON_SLOT(3, setSlotMaxElevations, base::Integer)
@@ -650,19 +650,13 @@ int IgHost::compareKey2Model(const void* key, const void* model)
    return result;
 }
 
-//------------------------------------------------------------------------------
-// Set Slot Functions
-//------------------------------------------------------------------------------
-
-// setSlotMaxRange() -- sets the maxRange slot
-bool IgHost::setSlotMaxRange(const base::Distance* const msg)
+bool IgHost::setSlotMaxRange(const base::Length* const msg)
 {
     bool ok{};
 
     if (msg != nullptr) {
-        // We have a distance which we can convert to meters
-        const double rng{base::Meters::convertStatic(*msg)};
-        ok = setMaxRange( rng );
+        // we need our length in meters
+        ok = setMaxRange(msg->getValueInMeters());
     }
 
     if (!ok) {
@@ -672,7 +666,6 @@ bool IgHost::setSlotMaxRange(const base::Distance* const msg)
     return ok;
 }
 
-// setSlotMaxRange() -- sets the maxRange slot
 bool IgHost::setSlotMaxRange(const base::Number* const msg)
 {
     bool ok{};

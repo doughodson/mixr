@@ -9,7 +9,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Identifier; class Integer; class Time; }
+namespace base { class Angle; class Boolean; class Identifier; class Integer; class Length; class Time; }
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {
@@ -41,11 +41,11 @@ class Ntm;
 //                                             !   (Ntm objects that map mixr player types to outgoing entity types)
 //
 //    maxTimeDR            <base::Time>        ! Max DR time (default: 5 seconds)
-//    maxPositionError     <base::Distance>    ! Max DR position error (default: 3 meters)
+//    maxPositionError     <base::Length>      ! Max DR position error (default: 3 meters)
 //    maxOrientationError  <base::Angle>       ! Max DR angular error (default: 3 degrees)
 //    maxAge               <base::Time>        ! Max age (without update) of networked players (default: 12.5 seconds)
 //
-//    maxEntityRange       <base::Distance>    ! Max entity range of networked players,
+//    maxEntityRange       <base::Length>      ! Max entity range of networked players,
 //                                             !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
@@ -463,9 +463,9 @@ private:
    virtual bool setSlotFederateName(const base::Identifier* const);    // Sets our federate name
    virtual bool setSlotFederationName(const base::Identifier* const);  // Sets our federation name
    virtual bool setSlotMaxTimeDR(const base::Time* const);             // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const base::Distance* const);    // Sets the max positional error(s)
+   virtual bool setSlotMaxPositionErr(const base::Length* const);      // Sets the max positional error(s)
    virtual bool setSlotMaxOrientationErr(const base::Angle* const);    // Sets the max orientation error(s)
-   virtual bool setSlotMaxEntityRange(const base::Distance* const);    // Sets the max entity range(s)
+   virtual bool setSlotMaxEntityRange(const base::Length* const);      // Sets the max entity range(s)
    virtual bool setSlotMaxAge(const base::Time* const);                // Sets the max age(s)
 
    bool setSlotNetworkID(const base::Integer* const);                  // Sets the network ID

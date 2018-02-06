@@ -5,7 +5,6 @@
 #include "mixr/base/units/area/Area.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
-
 #include <cmath>
 
 namespace mixr {
@@ -20,14 +19,11 @@ class DecibelSquareMeters final: public Area
     DECLARE_SUBCLASS(DecibelSquareMeters, Area)
 
 public:
-    DecibelSquareMeters();
-    DecibelSquareMeters(const double);
-    DecibelSquareMeters(const Area&);
+    explicit DecibelSquareMeters();
 
-    static double convertStatic(const Area& n)     { return 10.0f * std::log10( n.toArea() ); }
-
-    double toArea() const final                    { return std::pow(10.0, getValue()/10.0); }
-    double fromArea(const double a) const final    { return 10.0f * std::log10(a); }
+private:
+   // convert decibel square meters to square meters (our base unit)
+   double convertToBaseUnit(const double x) final    { return std::pow(10.0, x/10.0); }
 };
 
 }

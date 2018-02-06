@@ -234,7 +234,7 @@ bool SrtmHgtFile::readSrtmData(std::istream& in)
         for (unsigned int lon=0; lon<nptlong; lon++) {
             unsigned char values[2]{};
             in.read(reinterpret_cast<char*>(values), sizeof(values));
-            if (in.fail() || in.gcount() < sizeof(values)) {
+            if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(values))) {
                 if (isMessageEnabled(MSG_ERROR)) {
                     std::cerr << "SrtmHgtFile::readSrtmData: error reading data value." << std::endl;
                 }

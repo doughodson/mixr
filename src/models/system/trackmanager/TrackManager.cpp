@@ -398,9 +398,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
    double age{};
    const auto p = dynamic_cast<const base::Time*>(num);
    if (p != nullptr) {
-      // We have a time and we want it in seconds ...
-      base::Seconds seconds;
-      age = seconds.convert(*p);
+      age = p->getValueInSeconds();
    } else if (num != nullptr) {
       // We have only a number, assume it's in seconds ...
       age = num->asDouble();

@@ -7,14 +7,14 @@ namespace base {
 namespace power {
 
 // conversion constants
-const double W2KW = 0.001f;       // Watts => KiloWatts
-const double KW2W = (1 / W2KW);   // KiloWatts => Watts
-const double W2HP = 1341.0f;      // Watts => Horsepower
-const double HP2W = (1 / W2HP);   // Horsepower => Watts
-const double W2MW = 1000.0f;      // Watts => MilliWatts
-const double MW2W = (1 / W2MW);   // MilliWatts => Watts
+constexpr double W2KW{0.001};       // Watts => KiloWatts
+constexpr double KW2W{1.0 / W2KW};  // KiloWatts => Watts
+constexpr double W2HP{1341.0};      // Watts => Horsepower
+constexpr double HP2W{1.0 / W2HP};  // Horsepower => Watts
+constexpr double W2MW{1000.0};      // Watts => MilliWatts
+constexpr double MW2W{1.0 / W2MW};  // MilliWatts => Watts
 
-// conversions between Powers
+// conversion functions
 inline double kiloWattsToWatts(const double v)       { return v * KW2W; }
 inline double kiloWattsToHorsepower(const double v)  { return (v * KW2W) * W2HP; }
 inline double kiloWattsToMilliWatts( const double v) { return (v * KW2W) * W2MW; }

@@ -345,19 +345,20 @@ bool CadrgFile::initialize(const char* dir)
     // GO through and find the physical locations in the file of each one of our locations we need (see above).
     parseLocations(toc, locations, 4);
 
-    if (locations[0].physicalIdx == ~0) {
-        std::cout << "Can't find the LOC_BOUNDARY_SECTION_SUBHEADER in the TOC!" << std::endl;
-        return false;
-    } else if (locations[1].physicalIdx == ~0) {
-        std::cout << "Can't find the LOC_BOUNDARY_RECTANGLE_TABLE in the TOC!" << std::endl;
-        return false;
-    } else if (locations[2].physicalIdx == ~0) {
-        std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBHEADER in the TOC!" << std::endl;
-        return false;
-    } else if (locations[3].physicalIdx == ~0) {
-        std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBSECTION in the TOC!" << std::endl;
-        return false;
-    }
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
+//    if (locations[0].physicalIdx == ~0) {
+//        std::cout << "Can't find the LOC_BOUNDARY_SECTION_SUBHEADER in the TOC!" << std::endl;
+//        return false;
+//    } else if (locations[1].physicalIdx == ~0) {
+//        std::cout << "Can't find the LOC_BOUNDARY_RECTANGLE_TABLE in the TOC!" << std::endl;
+//        return false;
+//    } else if (locations[2].physicalIdx == ~0) {
+//        std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBHEADER in the TOC!" << std::endl;
+//        return false;
+//    } else if (locations[3].physicalIdx == ~0) {
+//        std::cout << "Can't find the LOC_FRAME_FILE_INDEX_SUBSECTION in the TOC!" << std::endl;
+//        return false;
+//    }
 
     // Our first location is the boundary rectangle section, which lays out the coverage area
     // Seek to the physical offset of the boundary rectangle section subheader

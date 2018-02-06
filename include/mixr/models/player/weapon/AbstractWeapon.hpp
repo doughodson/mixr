@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Integer; class Number; class String; class Time; }
+namespace base { class Angle; class Boolean; class Integer; class Length; class Number; class String; class Time; }
 namespace models {
 class Designator;
 class Stores;
@@ -29,11 +29,11 @@ class Track;
 //    tsg           <base::Time>       ! time to start guidance (seconds or base::Time) (default: 9999.0f)
 //    tsg           <base::Number>     ! time to start guidance (seconds or base::Time)
 //
-//    maxBurstRng   <base::Distance>   ! max burst range (meters or base::Distance) (default: 500.0f)
-//    maxBurstRng   <base::Number>     ! max burst range (meters or base::Distance)
+//    maxBurstRng   <base::Length>     ! max burst range (default: 500.0 meters)
+//    maxBurstRng   <base::Number>     ! max burst range
 //
-//    lethalRange   <base::Distance>   ! lethal range (meters or base::Distance) (default: 50.0f)
-//    lethalRange   <base::Number>     ! lethal range (meters or base::Distance)
+//    lethalRange   <base::Length>   ! lethal range (meters or base::Length) (default: 50.0f)
+//    lethalRange   <base::Number>     ! lethal range (meters or base::Length)
 //
 //    sobt          <base::Time>       ! start-of-burn time (seconds or base::Time) (default: 9999.0f)
 //    sobt          <base::Number>     ! start-of-burn time (seconds or base::Time)
@@ -383,9 +383,9 @@ private:
    bool setSlotMaxTOF(const base::Number* const);
    bool setSlotTSG(const base::Time* const);
    bool setSlotTSG(const base::Number* const);
-   bool setSlotMaxBurstRng(const base::Distance* const);
+   bool setSlotMaxBurstRng(const base::Length* const);
    bool setSlotMaxBurstRng(const base::Number* const);
-   bool setSlotLethalRange(const base::Distance* const);
+   bool setSlotLethalRange(const base::Length* const);
    bool setSlotLethalRange(const base::Number* const);
    bool setSlotSOBT(const base::Time* const);
    bool setSlotSOBT(const base::Number* const);

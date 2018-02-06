@@ -2,7 +2,7 @@
 #include "mixr/models/player/space/SpaceVehicle.hpp"
 #include "mixr/models/dynamics/SpaceDynamicsModel.hpp"
 
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 namespace mixr {
 namespace models {

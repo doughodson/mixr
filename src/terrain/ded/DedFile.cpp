@@ -153,7 +153,7 @@ bool DedFile::isDataLoaded() const
 bool DedFile::loadData()
 {
    std::string filename;
-   const char* p {getPathname()};
+   const char* p{getPathname()};
    if (p != nullptr) {
       filename += p;
       filename += '/';
@@ -196,7 +196,7 @@ bool DedFile::getFileHeaders( std::istream& in )
    // Read file header
    stdhdr = new DedStdHdr();
    in.read( reinterpret_cast<char*>(stdhdr), sizeof(DedStdHdr) );
-   if (in.fail() || in.gcount() < sizeof(DedStdHdr)) {
+   if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(DedStdHdr))) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid standard header.";
       }
@@ -257,7 +257,7 @@ bool DedFile::getFileHeaders( std::istream& in )
          // Read file header
          fstat = new DedStats();
          in.read( reinterpret_cast<char*>(fstat), sizeof(DedStats) );
-         if (in.fail() || in.gcount() < sizeof(DedStats)) {
+         if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(DedStats))) {
             if (isMessageEnabled(MSG_ERROR)) {
                std::cerr << "DedFile::getFileHeaders: invalid statistics header.";
             }
@@ -295,7 +295,7 @@ bool DedFile::getFileHeaders( std::istream& in )
             for (unsigned int i = 0; i < fstat->ncell && ok; i++) {
                cells[i] = new DedCellHdr();
                in.read( reinterpret_cast<char*>(cells[i]), sizeof(DedCellHdr) );
-               if (in.fail() || in.gcount() < sizeof(DedCellHdr)) {
+               if (in.fail() || in.gcount() < static_cast<std::streamsize>(sizeof(DedCellHdr))) {
                    if (isMessageEnabled(MSG_ERROR)) {
                        std::cerr << "DedFile::getFileHeaders: invalid cell headers.";
                        std::cerr << " in.fail:" << in.fail() << " in.gcount:" << in.gcount() << " < size?:" << sizeof(DedCellHdr) << std::endl;

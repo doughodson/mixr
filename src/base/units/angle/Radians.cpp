@@ -8,21 +8,12 @@ IMPLEMENT_SUBCLASS(Radians, "Radians")
 EMPTY_SLOTTABLE(Radians)
 EMPTY_COPYDATA(Radians)
 EMPTY_DELETEDATA(Radians)
+EMPTY_CONSTRUCTOR(Radians)
 
-Radians::Radians() : Angle()
+Radians::Radians(const double x)
 {
     STANDARD_CONSTRUCTOR()
-}
-
-Radians::Radians(const double value) : Angle(value)
-{
-    STANDARD_CONSTRUCTOR()
-}
-
-Radians::Radians(const Angle& value) : Angle()
-{
-    STANDARD_CONSTRUCTOR()
-    BaseClass::copyData(value,true);
+    setValue(convertToBaseUnit(x));
 }
 
 }

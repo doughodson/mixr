@@ -4,29 +4,23 @@
 
 #include "mixr/base/units/frequency/Frequency.hpp"
 
-#include "mixr/base/units/util/frequency_utils.hpp"
-
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Hertz
-// Description:  Base unit for frequency, with a hertz being an instance of Hertz
-//               with its value equal to 1.0.
+// Description: Concrete class to specify a frequency in Hertz
 //------------------------------------------------------------------------------
 class Hertz final: public Frequency
 {
     DECLARE_SUBCLASS(Hertz, Frequency)
 
 public:
-    Hertz();
-    Hertz(const double);
-    Hertz(const Frequency&);
+    explicit Hertz();
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency(); }
-
-    double toFrequency() const final                     { return getValue(); }
-    double fromFrequency(const double a) const final     { return a; }
+private:
+   // convert Hertz to Hertz (our base unit)
+   double convertToBaseUnit(const double x) final     { return x; }
 };
 
 }

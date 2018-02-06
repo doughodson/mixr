@@ -6,23 +6,9 @@ namespace base {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Energy, "AbstractEnergy")
 EMPTY_SLOTTABLE(Energy)
+EMPTY_COPYDATA(Energy)
 EMPTY_DELETEDATA(Energy)
-
-Energy::Energy()
-{
-    STANDARD_CONSTRUCTOR()
-}
-
-Energy::Energy(const double value) : Unit(value)
-{
-    STANDARD_CONSTRUCTOR()
-}
-
-void Energy::copyData(const Energy& org, const bool)
-{
-   BaseClass::copyData(org);
-   setValue(fromEnergy(org.toEnergy()));
-}
+EMPTY_CONSTRUCTOR(Energy)
 
 }
 }

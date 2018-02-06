@@ -56,9 +56,8 @@ bool SigConstant::setRCS(const base::Number* const num)
 
     const auto d = dynamic_cast<const base::Area*>(num);
     if (d != nullptr) {
-        // Has area units and we need square meters
-        base::SquareMeters m2;
-        r = m2.convert(*d);
+        // need area in terms of square meters
+        r = d->getValueInSquareMeters();
     } else if (num != nullptr) {
         // square meters (Number or Decibel)
         r = num->asDouble();

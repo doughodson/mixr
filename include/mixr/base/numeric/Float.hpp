@@ -15,7 +15,7 @@ namespace base {
 // Factory name: Float
 //
 // Slots:
-//     value  <Number>  ! Sets the value of this number (default: 0.0)
+//     value  <Float>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
 class Float final: public Number
 {

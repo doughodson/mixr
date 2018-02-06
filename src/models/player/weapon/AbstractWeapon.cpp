@@ -23,7 +23,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -70,10 +70,10 @@ BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT( 7,  setSlotTSG,         base::Time)
     ON_SLOT( 7,  setSlotTSG,         base::Number)
 
-    ON_SLOT( 8,  setSlotMaxBurstRng, base::Distance)
+    ON_SLOT( 8,  setSlotMaxBurstRng, base::Length)
     ON_SLOT( 8,  setSlotMaxBurstRng, base::Number)
 
-    ON_SLOT( 9, setSlotLethalRange,  base::Distance)
+    ON_SLOT( 9, setSlotLethalRange,  base::Length)
     ON_SLOT( 9, setSlotLethalRange,  base::Number)
 
     ON_SLOT(10, setSlotSOBT,         base::Time)
@@ -1339,7 +1339,7 @@ bool AbstractWeapon::setSlotMaxTOF(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setMaxTOF( base::Seconds::convertStatic( *p ) );
+      ok = setMaxTOF(p->getValueInSeconds());
    }
    return ok;
 }
@@ -1355,7 +1355,7 @@ bool AbstractWeapon::setSlotTSG(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setTSG( base::Seconds::convertStatic( *p ) );
+      ok = setTSG(p->getValueInSeconds());
    }
    return ok;
 }
@@ -1367,11 +1367,11 @@ bool AbstractWeapon::setSlotTSG(const base::Number* const p)
 }
 
 // maxBurstRng: max burst range    (base::Distance)
-bool AbstractWeapon::setSlotMaxBurstRng(const base::Distance* const p)
+bool AbstractWeapon::setSlotMaxBurstRng(const base::Length* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setMaxBurstRng( base::Meters::convertStatic( *p ) );
+      ok = setMaxBurstRng(p->getValueInMeters());
    }
    return ok;
 }
@@ -1384,11 +1384,11 @@ bool AbstractWeapon::setSlotMaxBurstRng(const base::Number* const p)
 
 
 // lethalRange: lethal range    (base::Distance)
-bool AbstractWeapon::setSlotLethalRange(const base::Distance* const p)
+bool AbstractWeapon::setSlotLethalRange(const base::Length* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setLethalRange( base::Meters::convertStatic( *p ) );
+      ok = setLethalRange(p->getValueInMeters());
    }
    return ok;
 }
@@ -1404,7 +1404,7 @@ bool AbstractWeapon::setSlotSOBT(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setSOBT( base::Seconds::convertStatic( *p ) );
+      ok = setSOBT(p->getValueInSeconds());
    }
    return ok;
 }
@@ -1412,7 +1412,7 @@ bool AbstractWeapon::setSlotSOBT(const base::Time* const p)
 // sobt: start-of-burn time        (sec)
 bool AbstractWeapon::setSlotSOBT(const base::Number* const p)
 {
-    setSOBT( p->asDouble() );
+    setSOBT(p->asDouble());
     return true;
 }
 
@@ -1421,7 +1421,7 @@ bool AbstractWeapon::setSlotEOBT(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
-      ok = setEOBT( base::Seconds::convertStatic( *p ) );
+      ok = setEOBT(p->getValueInSeconds());
    }
    return ok;
 }
@@ -1436,7 +1436,7 @@ bool AbstractWeapon::setSlotEOBT(const base::Number* const p)
 // maxBurstRng: max burst rng    (meters)
 bool AbstractWeapon::setSlotMaxGimbal(const base::Angle* const p)
 {
-    setMaxGimbalAngle( static_cast<double>(base::Radians::convertStatic(*p)) );
+    setMaxGimbalAngle(p->getValueInRadians());
     return true;
 }
 

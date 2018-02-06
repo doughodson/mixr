@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/areas.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 namespace mixr {
 namespace models {
@@ -69,11 +69,10 @@ bool SigPlate::setA(base::Number* const num)
     bool ok{};
     double v{-1.0};
 
-    const auto d = dynamic_cast<base::Distance*>(num);
+    const auto d = dynamic_cast<base::Length*>(num);
     if (d != nullptr) {
-        // Has distance units and we need meters
-        base::Meters meters;
-        v = meters.convert(*d);
+        // we need meters
+        v = d->getValueInMeters();
     } else if (num != nullptr) {
         // Just a Number
         v = num->asDouble();
@@ -92,11 +91,10 @@ bool SigPlate::setB(base::Number* const num)
     bool ok{};
     double v{-1.0};
 
-    const auto d = dynamic_cast<base::Distance*>(num);
+    const auto d = dynamic_cast<base::Length*>(num);
     if (d != nullptr) {
-        // Has distance units and we need meters
-        base::Meters meters;
-        v = meters.convert(*d);
+        // we need meters
+        v = d->getValueInMeters();
     } else if (num != nullptr) {
         // Just a Number
         v = num->asDouble();

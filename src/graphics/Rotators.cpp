@@ -129,7 +129,7 @@ bool Rotators::onXRotate(const base::Number* const rotation)
 bool Rotators::onXRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setXRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
+        return setXRotation(rotation->getValueInRadians());
     return false;
 }
 
@@ -147,7 +147,7 @@ bool Rotators::onXRotateDeg(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotate(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setYRotation( rotation->asDouble() );
+    if (rotation != nullptr) return setYRotation(rotation->asDouble());
     return false;
 }
 
@@ -157,7 +157,7 @@ bool Rotators::onYRotate(const base::Number* const rotation)
 bool Rotators::onYRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setYRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
+        return setYRotation(rotation->getValueInRadians());
     return false;
 }
 
@@ -166,7 +166,7 @@ bool Rotators::onYRotate(const base::Angle* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onYRotateDeg(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setYRotationDeg( rotation->asDouble() );
+    if (rotation != nullptr) return setYRotationDeg(rotation->asDouble());
     return false;
 }
 
@@ -175,7 +175,7 @@ bool Rotators::onYRotateDeg(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 bool Rotators::onZRotate(const base::Number* const rotation)
 {
-    if (rotation != nullptr) return setZRotation( rotation->asDouble() );
+    if (rotation != nullptr) return setZRotation(rotation->asDouble());
     return false;
 }
 
@@ -185,7 +185,7 @@ bool Rotators::onZRotate(const base::Number* const rotation)
 bool Rotators::onZRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setZRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
+        return setZRotation(rotation->getValueInRadians());
     return false;
 }
 

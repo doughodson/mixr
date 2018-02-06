@@ -54,18 +54,13 @@
 #include "mixr/base/colors/Rgba.hpp"
 #include "mixr/base/colors/Yiq.hpp"
 
-// units: rates
-#include "mixr/base/units/rate/AngularVelocity.hpp"
-#include "mixr/base/units/rate/LinearVelocity.hpp"
-
 // units
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/areas.hpp"
-#include "mixr/base/units/Density.hpp"
-#include "mixr/base/units/distances.hpp"
 #include "mixr/base/units/energies.hpp"
 #include "mixr/base/units/forces.hpp"
 #include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/masses.hpp"
 #include "mixr/base/units/powers.hpp"
 #include "mixr/base/units/times.hpp"
@@ -195,19 +190,6 @@ Object* factory(const std::string& name)
     }
     else if ( name == Semicircles::getFactoryName() ) {
         obj = new Semicircles();
-    }
-
-    // units
-    else if ( name == Density::getFactoryName() ) {
-        obj = new Density();
-    }
-
-    // units: rates
-    else if ( name == AngularVelocity::getFactoryName() ) {
-        obj = new AngularVelocity();
-    }
-    else if ( name == LinearVelocity::getFactoryName() ) {
-        obj = new LinearVelocity();
     }
 
     // units: areas

@@ -4,7 +4,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 #include <cstring>
 
@@ -47,10 +47,10 @@ BEGIN_SLOTTABLE(EarthModel)
 END_SLOTTABLE(EarthModel)
 
 BEGIN_SLOT_MAP(EarthModel)
-   ON_SLOT(1, setSlotA, Distance) /* always check units before numbers */
+   ON_SLOT(1, setSlotA, Length)
    ON_SLOT(1, setSlotA, Number)
 
-   ON_SLOT(2, setSlotB, Distance) /* always check units before numbers */
+   ON_SLOT(2, setSlotB, Length)
    ON_SLOT(2, setSlotB, Number)
 
    ON_SLOT(3, setSlotF, Number)
@@ -157,29 +157,29 @@ bool EarthModel::setF(const double f0)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool EarthModel::setSlotA(const Distance* const msg)
+bool EarthModel::setSlotA(const Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setA( Meters::convertStatic( *msg ) );
+   if (x != nullptr) {
+      ok = setA(x->getValueInMeters());
    }
    return ok;
 }
 
-bool EarthModel::setSlotA(const Number* const msg)
+bool EarthModel::setSlotA(const Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setA( msg->asDouble() );
+   if (x != nullptr) {
+      ok = setA( x->asDouble() );
    }
    return ok;
 }
 
-bool EarthModel::setSlotB(const Distance* const msg)
+bool EarthModel::setSlotB(const Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setB( Meters::convertStatic( *msg ) );
+   if (x != nullptr) {
+      ok = setB(x->getValueInMeters());
    }
    return ok;
 }

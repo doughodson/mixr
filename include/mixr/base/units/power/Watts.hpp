@@ -4,29 +4,23 @@
 
 #include "mixr/base/units/power/Power.hpp"
 
-#include "mixr/base/units/util/power_utils.hpp"
-
 namespace mixr {
 namespace base {
 
 //----------------------------------------------------------------------------
 // Class: Watts
-// Description: An instance of KiloWatts with its value equal to 1.0 is one base
-// unit for power.
+// Description: Concrete class to specify power in Watts
 //----------------------------------------------------------------------------
 class Watts final: public Power
 {
-    DECLARE_SUBCLASS(Watts, Power)
+   DECLARE_SUBCLASS(Watts, Power)
 
 public:
-    Watts();
-    Watts(const double);
-    Watts(const Power&);
+   explicit Watts();
 
-    static double convertStatic(const Power &n)      { return n.toPower(); }
-
-    double toPower() const final                     { return getValue(); }
-    double fromPower(const double a) const final     { return a; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final     { return x; }
 };
 
 }

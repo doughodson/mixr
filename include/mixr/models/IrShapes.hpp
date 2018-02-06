@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Area; class Distance; class Number; }
+namespace base { class Area; class Length; class Number; }
 namespace models {
 class IrQueryMsg;
 
@@ -65,9 +65,9 @@ private:
 //
 // Factory name: IrBox
 // Slots:
-//   x      <base::Distance>         ! x dimension (default is 10 meters)
-//   y      <base::Distance>         ! y dimension (default is 10 meters)
-//   z      <base::Distance>         ! z dimension (default is 10 meters)
+//   x      <base::Length>         ! x dimension (default is 10 meters)
+//   y      <base::Length>         ! y dimension (default is 10 meters)
+//   z      <base::Length>         ! z dimension (default is 10 meters)
 //------------------------------------------------------------------------------
 class IrBox : public IrShape
 {
@@ -86,9 +86,9 @@ private:
    double z{10.0};
 
 private:
-   bool setSlotIrBoxX(const base::Distance* const);
-   bool setSlotIrBoxY(const base::Distance* const);
-   bool setSlotIrBoxZ(const base::Distance* const);
+   bool setSlotIrBoxX(const base::Length* const);
+   bool setSlotIrBoxY(const base::Length* const);
+   bool setSlotIrBoxZ(const base::Length* const);
 };
 
 }

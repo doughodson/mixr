@@ -4,29 +4,23 @@
 
 #include "mixr/base/units/area/Area.hpp"
 
-#include "mixr/base/units/util/area_utils.hpp"
-
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: SquareMeters
-// Description: An instance of SquareMeters with its value equal to 1.0 is one
-//              base unit for area.
+// Description: Concrete class to specify an area in units of square meters (m^2)
 //------------------------------------------------------------------------------
 class SquareMeters final: public Area
 {
-    DECLARE_SUBCLASS(SquareMeters, Area)
+   DECLARE_SUBCLASS(SquareMeters, Area)
 
 public:
-    SquareMeters();
-    SquareMeters(const double);
-    SquareMeters(const Area&);
+   explicit SquareMeters();
 
-    static double convertStatic(const Area& n)              { return n.toArea(); }
-
-    double toArea() const final                             { return getValue(); }
-    double fromArea(const double a) const final             { return a; }
+private:
+   // convert square meters to square meters (our base unit)
+   double convertToBaseUnit(const double x) final           { return x; }
 };
 
 }

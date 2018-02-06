@@ -5,7 +5,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Number.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 
 namespace mixr {
 namespace models {
@@ -55,11 +55,10 @@ bool SigSphere::setSlotRadius(base::Number* const num)
     bool ok{};
     double r{-1.0};
 
-    const auto d = dynamic_cast<base::Distance*>(num);
+    const auto d = dynamic_cast<base::Length*>(num);
     if (d != nullptr) {
-        // Has distance units and we need meters
-        base::Meters meters;
-        r = meters.convert(*d);
+        // we need meters
+        r = d->getValueInMeters();
     } else if (num != nullptr) {
         // Just a Number
         r = num->asDouble();

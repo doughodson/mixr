@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: BTUs
-// Description:  Joules * 9.478 x 10 -04
+// Description: Concrete class to specify energy in units of BTU
 //------------------------------------------------------------------------------
 class BTUs final: public Energy
 {
-    DECLARE_SUBCLASS(BTUs, Energy)
+   DECLARE_SUBCLASS(BTUs, Energy)
 
 public:
-    BTUs();
-    BTUs(const double);
-    BTUs(const Energy&);
+   explicit BTUs();
 
-    static double convertStatic(const Energy& n)     { return n.toEnergy() * energy::J2BTU; }
-
-    double toEnergy() const final                    { return getValue() * energy::BTU2J; }
-    double fromEnergy(const double a) const final    { return a * energy::J2BTU; }
+private:
+   // convert X to Y (our base unit)
+   double convertToBaseUnit(const double x) final    { return x * energy::BTU2J; }
 };
 
 }

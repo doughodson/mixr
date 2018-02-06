@@ -4,10 +4,10 @@
 
 #include "mixr/models/system/System.hpp"
 #include "mixr/config.hpp"
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Distance; class Integer; class Number; class PairStream; }
+namespace base { class Angle; class Boolean; class Integer; class Length; class Number; class PairStream; }
 namespace models {
 class Player;
 
@@ -32,11 +32,11 @@ class Player;
 //
 // Factory name: CollisionDetect
 // Slots:
-//    collisionRange      <Distance>       ! Collision range (default: 4 Meters)
+//    collisionRange      <Length>         ! Collision range (default: 4 Meters)
 //    maxPlayers          <Integer>        ! Max number of players of interest (default: 20)
 //    playerTypes         <PairStream>     ! List of player of interest types (default: all types )
 //                                         !   Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
-//    maxRange2Players    <Distance>       ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
+//    maxRange2Players    <Length>         ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
 //    maxAngle2Players    <Angle>          ! Max angle off the 'nose' of our ownship to players of interest, or zero for all (default: 0)
 //    localOnly           <Boolean>        ! Only check for collisions with local players (default: false)
 //    useWorldCoordinates <Boolean>        ! Using world (ECEF) coordinate system; else NED on the simulation gaming area (default: true)
@@ -111,7 +111,7 @@ private:
    mutable long poiLock {};      // Semaphore to protect the POI list
 
    unsigned int playerTypes {0xFFFF};  // Player types mask (default: all types)
-   double maxRange2Players {1.0 * base::distance::NM2M};   // Max range from ownship to players of interest, or zero for all (meters) (default: 1.0 NM)
+   double maxRange2Players {1.0 * base::length::NM2M};   // Max range from ownship to players of interest, or zero for all (meters) (default: 1.0 NM)
    double maxAngle2Players {};         // Max angle off the 'nose' of our ownship to players of interest, or zero for all (radians)
    double collisionRange {4.0};        // Collision range (meters)
    bool useWorld {true};               // Using player of interest's world coordinates
@@ -123,10 +123,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotCollisionRange(const base::Distance* const);
+   bool setSlotCollisionRange(const base::Length* const);
    bool setSlotMaxPlayers(const base::Integer* const);
    bool setSlotPlayerTypes(const base::PairStream* const);
-   bool setSlotMaxRange2Players(const base::Distance* const);
+   bool setSlotMaxRange2Players(const base::Length* const);
    bool setSlotMaxAngle2Players(const base::Angle* const);
    bool setSlotUseWorldCoordinates(const base::Boolean* const);
    bool setSlotLocalOnly(const base::Boolean* const);

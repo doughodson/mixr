@@ -21,7 +21,7 @@ namespace instruments {
 // Inputs for the send command:
 //      UPDATE_INSTRUMENTS = updates pitch (this overrides the instrument function, because
 //      we want to drive the ADI towards pitch, not have real time pitch, always in degrees)
-//      UPDATE_VALUE = updates roll (degrees)
+//      UPDATE_VALUE  = updates roll (degrees)
 //      UPDATE_VALUE2 = updates roll (radians)
 //      UPDATE_VALUE3 = updates max rate (degrees/second)
 //------------------------------------------------------------------------------
@@ -55,13 +55,13 @@ private:
     bool onUpdateRollRadAdi(const base::Number* const);
     bool onUpdateMaxRateAdi(const base::Number* const);
 
-    double pitch {};         // actual pitch (degrees)
-    double scaledPitch {};   // our pitch value (inches)
-    double curTheta {};      // our current pitch value (degrees)
-    double curPhi {};        // our current roll value (radians)
-    double roll {};          // our roll value (radians)
-    double maxRate {500.0};  // maximum mechanical rate at which the adi can move pitch or roll
-                             // default set high degrees/second (for instantaneous movement)
+    double pitch{};         // actual pitch (degrees)
+    double scaledPitch{};   // our pitch value (inches)
+    double curTheta{};      // our current pitch value (degrees)
+    double curPhi{};        // our current roll value (radians)
+    double roll{};          // our roll value (radians)
+    double maxRate{500.0};  // maximum mechanical rate at which the adi can move pitch or roll
+                            // default set high degrees/second (for instantaneous movement)
 
 private:
     // slot table helper methods

@@ -13,21 +13,18 @@ namespace base {
 
 //----------------------------------------------------------------------------
 // Class: DecibelWatts
-// Description: 10 Log(Watts)
+// Description: Concrete class to specify power in Decibel Watts
 //----------------------------------------------------------------------------
 class DecibelWatts final: public Power
 {
-    DECLARE_SUBCLASS(DecibelWatts, Power)
+   DECLARE_SUBCLASS(DecibelWatts, Power)
 
 public:
-    DecibelWatts();
-    DecibelWatts(const double);
-    DecibelWatts(const Power&);
+   explicit DecibelWatts();
 
-    static double convertStatic(const Power &n)      { return (10.0 * std::log10(n.toPower())); }
-
-    double toPower() const final                     { return std::pow(10.0, (getValue()/10.0)); }
-    double fromPower(const double a) const final     { return 10.0 * std::log10(a) ; }
+private:
+   // convert Decibel Watts to Watts (our base unit)
+   double convertToBaseUnit(const double x) final     { return std::pow(10.0, x / 10.0); }
 };
 
 }

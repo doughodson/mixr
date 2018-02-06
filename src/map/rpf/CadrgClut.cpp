@@ -132,11 +132,12 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Parse our locations, just like the file.
     parseLocations(fin, loc, 3);
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
     // If we don't get a valid index, return
-    if (loc[0].physicalIdx == ~0) {
-        std::cout << "CadrgClut::load() : Can't find the color/gray section subheader (ID=134) location!" << std::endl;
-        return;
-    }
+//    if (loc[0].physicalIdx == ~0) {
+//        std::cout << "CadrgClut::load() : Can't find the color/gray section subheader (ID=134) location!" << std::endl;
+//        return;
+//    }
 
     // Go find the color table
     fin.seekg(loc[0].physicalIdx, std::ios::beg);
@@ -147,11 +148,13 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // Number of color convertor offset records: 3
     fin.read(reinterpret_cast<char*>(&numCCOffRecs), sizeof(numCCOffRecs));
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
     // Check for colormap subsection: id = 135
-    if (loc[1].physicalIdx == ~0) {
-        std::cout << "CadrgClut::load() : Can't find colormap subsection location ID = 135!" << std::endl;
-        return;
-    }
+//    if (loc[1].physicalIdx == ~0) {
+//        std::cout << "CadrgClut::load() : Can't find colormap subsection location ID = 135!" << std::endl;
+//        return;
+//    }
+
     // Read color/gray offset records (colormap subsection)
     fin.seekg(loc[1].physicalIdx, std::ios::beg);
 
@@ -224,12 +227,14 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
     // If clutSize != CLUT_216, a color convertor table is needed
     else {
 
+// the code below makes no sense, physicalIdx is an unsigned int, and ~0 => -1 (ddh)
         // Read Color Conversion Table first to find which color table we need to read
         // Check for Color converter subsection: id = 139
-        if (loc[2].physicalIdx == ~0) {
-            std::cout << "CadrgClut::load() : Can't find Color converter subsection location ID = 139!" << std::endl;
-            return;
-        }
+//        if (loc[2].physicalIdx == ~0) {
+//            std::cout << "CadrgClut::load() : Can't find Color converter subsection location ID = 139!" << std::endl;
+//            return;
+//        }
+
         // Read cct records
         fin.seekg(loc[2].physicalIdx, std::ios::beg);
 

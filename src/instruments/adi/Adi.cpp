@@ -62,13 +62,13 @@ void Adi::updateData(const double dt)
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
     {
-        const double delta = base::alim (base::angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+        const double delta{base::alim (base::angle::aepcdDeg(pitch - curTheta), maxRate * dt)};
         curTheta = base::angle::aepcdDeg(curTheta + delta);
     }
 
     // now do the same thing for roll
     {
-        const double delta = base::alim (base::angle::aepcdRad(roll - curPhi), maxRate * dt);
+        const double delta{base::alim (base::angle::aepcdRad(roll - curPhi), maxRate * dt)};
         curPhi = base::angle::aepcdRad(curPhi + delta);
     }
 
@@ -81,19 +81,20 @@ void Adi::updateData(const double dt)
 //------------------------------------------------------------------------------
 // setSlotMaxRate(base::Angle)
 //------------------------------------------------------------------------------
-bool Adi::setSlotMaxRate(const base::Angle* const newMR)
+bool Adi::setSlotMaxRate(const base::Angle* const x)
 {
-    bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate( static_cast<double>(base::Degrees::convertStatic(*newMR)) );
+    bool ok{};
+    if (x != nullptr) ok = setMaxRate(x->getValueInDegrees());
     return ok;
 }
+
 //------------------------------------------------------------------------------
 // setSlotMaxRate() -
 //------------------------------------------------------------------------------
-bool Adi::setSlotMaxRate(const base::Number* const newMR)
+bool Adi::setSlotMaxRate(const base::Number* const x)
 {
-    bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate(newMR->asDouble());
+    bool ok{};
+    if (x != nullptr) ok = setMaxRate(x->asDouble());
     return ok;
 }
 
@@ -104,7 +105,7 @@ bool Adi::setSlotMaxRate(const base::Number* const newMR)
 //------------------------------------------------------------------------------
 bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 {
-    bool ok = false;
+    bool ok{};
     if (newR != nullptr) ok = setRollDeg(newR->asDouble());
     return ok;
 }
@@ -114,7 +115,7 @@ bool Adi::onUpdateRollDegAdi(const base::Number* const newR)
 //------------------------------------------------------------------------------
 bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 {
-    bool ok = false;
+    bool ok{};
     if (newR != nullptr) ok = setRollRad(newR->asDouble());
     return ok;
 }
@@ -124,7 +125,7 @@ bool Adi::onUpdateRollRadAdi(const base::Number* const newR)
 //------------------------------------------------------------------------------
 bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 {
-    bool ok = false;
+    bool ok{};
     if (newP != nullptr) ok = setPitch(newP->asDouble());
     return ok;
 }
@@ -134,7 +135,7 @@ bool Adi::onUpdatePitchAdi(const base::Number* const newP)
 //------------------------------------------------------------------------------
 bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 {
-    bool ok = false;
+    bool ok{};
     if (newMR != nullptr) ok = setMaxRate(newMR->asDouble());
     return ok;
 }

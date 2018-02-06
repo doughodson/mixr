@@ -11,21 +11,18 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  TeraHertz
-// Description:  Hertz * 0.000000000001
+// Description: Concrete class to specify a frequency in TeraHertz
 //------------------------------------------------------------------------------
 class TeraHertz final: public Frequency
 {
     DECLARE_SUBCLASS(TeraHertz, Frequency)
 
 public:
-    TeraHertz();
-    TeraHertz(const double);
-    TeraHertz(const Frequency&);
+    explicit TeraHertz();
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * frequency::Hz2THz; }
-
-    double toFrequency() const final                     { return getValue() * frequency::THz2Hz; }
-    double fromFrequency(const double a) const final     { return a * frequency::Hz2THz; }
+private:
+   // convert TeraHertz to Hertz (our base unit)
+   double convertToBaseUnit(const double x) final     { return x * frequency::THz2Hz; }
 };
 
 }

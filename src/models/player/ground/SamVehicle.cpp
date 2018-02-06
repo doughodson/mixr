@@ -8,7 +8,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/distances.hpp"
+#include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
 namespace mixr {
@@ -29,8 +29,8 @@ BEGIN_SLOTTABLE(SamVehicle)
 END_SLOTTABLE(SamVehicle)
 
 BEGIN_SLOT_MAP(SamVehicle)
-    ON_SLOT(1, setSlotMinLaunchRange,    base::Distance)
-    ON_SLOT(2, setSlotMaxLaunchRange,    base::Distance)
+    ON_SLOT(1, setSlotMinLaunchRange,    base::Length)
+    ON_SLOT(2, setSlotMaxLaunchRange,    base::Length)
 END_SLOT_MAP()
 
 SamVehicle::SamVehicle()
@@ -136,21 +136,21 @@ bool SamVehicle::setMinLaunchRange(const double rng)
 //------------------------------------------------------------------------------
 
 // maxLaunchRange: Max launch range (base::Distance)
-bool SamVehicle::setSlotMaxLaunchRange(const base::Distance* const msg)
+bool SamVehicle::setSlotMaxLaunchRange(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setMaxLaunchRange( base::Meters::convertStatic( *msg ) );
+   if (x != nullptr) {
+      ok = setMaxLaunchRange(x->getValueInMeters());
    }
    return ok;
 }
 
 // minLaunchRange: Min launch range (base::Distance)
-bool SamVehicle::setSlotMinLaunchRange(const base::Distance* const msg)
+bool SamVehicle::setSlotMinLaunchRange(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setMinLaunchRange( base::Meters::convertStatic( *msg ) );
+   if (x != nullptr) {
+      ok = setMinLaunchRange(x->getValueInMeters());
    }
    return ok;
 }

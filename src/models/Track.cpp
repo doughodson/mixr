@@ -7,7 +7,7 @@
 #include "mixr/models/SensorMsg.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/distance_utils.hpp"
+#include "mixr/base/units/util/length_utils.hpp"
 
 #include <cmath>
 
