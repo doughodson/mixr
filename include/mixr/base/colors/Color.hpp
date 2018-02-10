@@ -12,40 +12,13 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Color
-//
 // Description: General Purpose Color class; used with RGB and HSV classes
-//
+//------------------------------------------------------------------------------
 // Factory name: Color
-//
-// Public methods:
-//
-//      double red()
-//      double green()
-//      double blue()
-//      double alpha()
-//          Data access routines.  Return the individual color components
-//          as floats with a range of 0.0 to 1.0.
-//
-//      double getDefaultAlpha()
-//          Returns defaultAlpha (the default alpha value).
-//
-//      void setDefaultAlpha(double alpha)
-//          Sets defaultAlpha (the default alpha value).
-//
-//      const Vec3d*()
-//      const Vec3d* getRGB()
-//          Convert a color to an Vec3d* RGB vector.
-//
-//      const Vec4d*()
-//      const Vec4d* getRGBA()
-//          Converts a color to an Vec4d* RGBA vector.
-//
-//      Comparison operators: ==  !=
-//          Are C++ equivalents.
-//
-// Enumerated:
-//      { RED, GREEN, BLUE, ALPHA }
-//          Used to index the Red, Green and Blue (RGB) color vectors
+//------------------------------------------------------------------------------
+// Notes:
+//   { RED, GREEN, BLUE, ALPHA } are used to index the Red, Green and
+//   Blue (RGB) color vectors
 //------------------------------------------------------------------------------
 class Color : public Object
 {
@@ -58,24 +31,31 @@ public:
 public:
     Color();
 
-    operator const Vec3d*() const;
-    operator const Vec4d*() const;
+    // convert a color to an Vec3d* RGB vector
+    explicit operator const Vec3d*() const;
+    // convert a color to an Vec4d* RGB vector
+    explicit operator const Vec4d*() const;
 
+    // data access routines.  Return the individual color components
+    // as doubles with a range of 0.0 to 1.0.
     double red() const;
     double green() const;
     double blue() const;
     double alpha() const;
 
-    virtual bool setRed(const double r);
-    virtual bool setGreen(const double g);
-    virtual bool setBlue(const double b);
-    virtual bool setAlpha(const double a);
+    virtual bool setRed(const double);
+    virtual bool setGreen(const double);
+    virtual bool setBlue(const double);
+    virtual bool setAlpha(const double);
 
+    // convert a color to a Vec3d* or Vec4d* RGB vector
     const Vec3d* getRGB() const;
     const Vec4d* getRGBA() const;
 
+    // returns default alpha value
     static double getDefaultAlpha();
-    static void setDefaultAlpha(const double alpha);
+    // sets the default alpha value
+    static void setDefaultAlpha(const double);
 
 protected:
     Vec4d color;                // RGBA color vector

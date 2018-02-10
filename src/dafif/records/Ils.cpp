@@ -1,11 +1,12 @@
 
-#include "mixr/dafif/Ils.hpp"
+#include "mixr/dafif/records/Ils.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
 
+#include <string>
 #include <iostream>
 
 namespace mixr {
@@ -37,7 +38,7 @@ Ils::Ils()
    ptbl = &ptable;
 }
 
-Ils::Ils(const char* const s) : Record(s)
+Ils::Ils(const std::string& s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
@@ -73,7 +74,7 @@ void Ils::getGlideSlopeData(const double aclat, const double aclon, const double
 //------------------------------------------------------------------------------
 // Printing functions
 //------------------------------------------------------------------------------
-void Ils::printRecord(std::ostream& sout) const
+void Ils::printRecordImpl(std::ostream& sout) const
 {
    char keyValue[ILS_KEY_LEN+1]{};
    key(keyValue);

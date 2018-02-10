@@ -20,11 +20,12 @@ class List;
 //    tables, and provides linear function interpolation of the dependent
 //    variable data.
 //
-//
+//------------------------------------------------------------------------------
 // Slots:
 //    data        <List>      ! Dependant variable data (default: 0)
 //    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: false)
 //
+//------------------------------------------------------------------------------
 // Notes:
 //    1) The isValid() function will return true only if all of the required
 //       dependent and independent data has been set.

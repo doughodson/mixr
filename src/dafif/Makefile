@@ -4,17 +4,17 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_dafif.a
 
 OBJS =  \
-	Airport.o \
-	AirportLoader.o \
-	Record.o \
-	Database.o \
-	factory.o \
-	Ils.o \
-	Navaid.o \
-	NavaidLoader.o \
-	Runway.o \
-	Waypoint.o \
-	WaypointLoader.o
+	loaders/AirportLoader.o \
+	loaders/Database.o \
+	loaders/NavaidLoader.o \
+	loaders/WaypointLoader.o \
+	records/Airport.o \
+	records/Record.o \
+	records/Ils.o \
+	records/Navaid.o \
+	records/Runway.o \
+	records/Waypoint.o \
+	factory.o
 
 .PHONY: all clean
 

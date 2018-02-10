@@ -13,11 +13,10 @@ namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: AbstractAction
-//
 // Description:
 //    Abstract base class for all Actions. They are responsible for
 //    their own execution.
-//
+//------------------------------------------------------------------------------
 // Factory name: UbfAction
 //------------------------------------------------------------------------------
 class AbstractAction : public base::Object
@@ -28,7 +27,7 @@ public:
    AbstractAction();
 
    int getVote() const;
-   void setVote(const int x);
+   void setVote(const int);
 
    // Execute the behavior
    virtual bool execute(base::Component* actor)=0;

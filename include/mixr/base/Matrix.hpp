@@ -15,14 +15,14 @@ class RVector; // Row vector
 //------------------------------------------------------------------------------
 // Class: Matrix
 // Description:  Generic NxM matrix class
-//
+//------------------------------------------------------------------------------
 // Factory name: Matrix
-//
-// References:
-// "Introduction to Numerical Analysis", 2ed, Kendall E. Atkinson, Wiley (1989)
-// "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
-// "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
-// "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
+//------------------------------------------------------------------------------
+// Notes: References
+//    "Introduction to Numerical Analysis", 2ed, Kendall E. Atkinson, Wiley (1989)
+//    "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
+//    "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
+//    "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
 //------------------------------------------------------------------------------
 class Matrix : public Object
 {

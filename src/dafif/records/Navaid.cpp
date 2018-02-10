@@ -1,10 +1,11 @@
 
-#include "mixr/dafif/Navaid.hpp"
+#include "mixr/dafif/records/Navaid.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/units/angles.hpp"
 
+#include <string>
 #include <iostream>
 
 namespace mixr {
@@ -36,7 +37,7 @@ Navaid::Navaid()
    ptbl = &ptable;
 }
 
-Navaid::Navaid(const char* const s) : Record(s)
+Navaid::Navaid(const std::string& s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
@@ -75,7 +76,7 @@ bool Navaid::isDirectionalType() const
 //------------------------------------------------------------------------------
 // Printing functions
 //------------------------------------------------------------------------------
-void Navaid::printRecord(std::ostream& sout) const
+void Navaid::printRecordImpl(std::ostream& sout) const
 {
    char icas[32];
    icaoCode(icas);

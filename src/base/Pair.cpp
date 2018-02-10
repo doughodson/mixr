@@ -41,16 +41,14 @@ void Pair::copyData(const Pair& pair1, const bool)
     // Copy slotname (already ref() by constructor in clone())
     if (pair1.slotname != nullptr) {
        slotname = static_cast<Identifier*>(pair1.slotname->clone());
-    }
-    else {
+    } else {
        slotname = nullptr;
     }
 
     // Copy the object (already ref() by constructor in clone())
     if (pair1.obj != nullptr) {
       obj = pair1.obj->clone();
-    }
-    else {
+    } else {
        obj = nullptr;
     }
 }

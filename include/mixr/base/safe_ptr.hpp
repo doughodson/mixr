@@ -9,10 +9,9 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Template: safe_ptr<T>
-//
 // Description: Thread-safe shared pointer to an object of type T.
 //              Provides automatic ref() and unref() of the object.
-//
+//------------------------------------------------------------------------------
 // Example #1
 //
 //    const auto ptr = new Object();      // New object; ref cnt is one

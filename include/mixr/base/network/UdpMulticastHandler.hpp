@@ -14,20 +14,10 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: UdpMulticastHandler
-//
 // Description: UDP multicast network handler.
-//
+//------------------------------------------------------------------------------
 // Factory name: UdpMulticastHandler
-//
-// multicast:
-// "A point-to-many networking model in which a packet is sent to a specific address,
-//  and only those computers that are set to receive information from this address
-//  receive the packet. On the Internet, the possible IP multicast addresses range
-//  from 224.0.0.0 through 239.255.255.255. Computer networks typically use a unicast
-//  model, in which a different version of the same packet is sent to each address
-//  that must receive it. The multicast model greatly reduces traffic and increases
-//  efficiency on such networks."
-//
+//------------------------------------------------------------------------------
 // Slots:
 //      multicastGroup  <String>    ! String containing the multicast IP address in
 //                                  ! the Internet standard "." (dotted) notation.
@@ -37,7 +27,17 @@ class String;
 //      ttl             <Integer>   ! Multicast Time-To-Live (TTL) value (default: 1)
 //
 //      loopback        <Boolean>   ! Multicast Loopback flag (default: true)
+//------------------------------------------------------------------------------
+// Notes:
 //
+// Multicast:
+// "A point-to-many networking model in which a packet is sent to a specific address,
+//  and only those computers that are set to receive information from this address
+//  receive the packet. On the Internet, the possible IP multicast addresses range
+//  from 224.0.0.0 through 239.255.255.255. Computer networks typically use a unicast
+//  model, in which a different version of the same packet is sent to each address
+//  that must receive it. The multicast model greatly reduces traffic and increases
+//  efficiency on such networks."
 //
 // From Windows documentation:
 //    "Note  The Winsock version of the IP_MULTICAST_LOOP option is semantically

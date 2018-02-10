@@ -8,7 +8,7 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// class FStorage
+// Class FStorage
 // Description: Generic storage class for past values of function calls.
 //              Use Function::storageFactory() to generate pre-ref()'d
 //              FStorage objects.

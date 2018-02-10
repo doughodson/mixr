@@ -2,58 +2,27 @@
 #ifndef __mixr_dafif_Ils_H__
 #define __mixr_dafif_Ils_H__
 
-#include "Record.hpp"
+#include "mixr/dafif/records/Record.hpp"
+
+#include <string>
 
 namespace mixr {
 namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: Ils
-//
 // Description: Access to the DAFIF ILS records.
-//
-//
-// Public member functions:
-//
-//    [all public members from the base classes]
-//
-//    Ils::IlsType ilsType() const
-//        Returns the ils type.
-//
-//    int isIlsType(Ils::IlsType type) const
-//        Returns true if 'type' is equal to the ils type.
-//
-//    float frequency() const
-//        Returns the frequency (MHz).
-//
-//    int channel() const
-//        Returns the channel number.
-//
-//    float glideSlopeAngle() const
-//        Returns the value of the Glide Slope Angle field.
-//
-//    airportKey(char apKey[]) const
-//        Gets the record key of the airport.
-//
-//    runwayIdent(char rwId[]) const
-//        Gets the runway identifier.
-//
-//    runwayEndIdent(char rwEndId[]) const
-//        Gets the runway end identifier.
-//
-//    Ils::recordLength
-//        Length of a DAFIF ILS record pair.
-//
 //------------------------------------------------------------------------------
-class Ils : public Record
+class Ils final: public Record
 {
    DECLARE_SUBCLASS(Ils,Record)
 
 public:
 
    Ils();
-   Ils(const char* const s);
+   Ils(const std::string&);
 
+   // length of an ILS record pair
    enum { RECORD_LENGTH = ILS_RECORD_LEN };
 
    enum IlsType { INVALID = -1, ANY = 'Y',
@@ -62,28 +31,32 @@ public:
           OUTER_MARKER = 'O', UNKNOWN = 'U'
    };
 
-   virtual IlsType ilsType() const;
-   virtual int isIlsType(const IlsType type) const;
+   // returns the ils type
+   IlsType ilsType() const;
+   // returns true if 'type' is equal to the ils type
+   int isIlsType(const IlsType type) const;
 
+   // returns the frequency (MHz)
    float frequency() const;
+   // returns the channel number
    int   channel() const;
+   // returns the value of the Glide Slope Angle field
    float glideSlopeAngle() const;
+   // gets the record key of the airport
    void  airportKey(char apKey[]) const;
+   // gets the runway identifier
    void  runwayIdent(char rwId[]) const;
+   // gets the runway end identifier
    void  runwayEndIdent(char rwEndId[]) const;
+
    void  getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope) const;
    void  printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
-
-   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
 
+   void printRecordImpl(std::ostream& sout) const final;
 };
-
-//------------------------------------------------------------------------------
-// inline member functions
-//------------------------------------------------------------------------------
 
 // frequency: returns the value of the frequency field
 inline float Ils::frequency() const
@@ -97,12 +70,10 @@ inline int Ils::channel() const
    return dsAtoln( makePointer(ILS_CHANNEL_POS), ILS_CHANNEL_LEN );
 }
 
-
 inline float Ils::glideSlopeAngle() const
 {
    return static_cast<float>(dsAtofn( makePointer(ILS_GSA_POS), ILS_GSA_LEN) / 100.0);
 }
-
 
 // airportKey: returns the value of the airport identifier
 inline void Ils::airportKey(char apKey[]) const
@@ -110,13 +81,11 @@ inline void Ils::airportKey(char apKey[]) const
    dsGetString( apKey, makePointer(ILS_APKEY_POS), AP_KEY_LEN );
 }
 
-
 // runwayIdent: returns the value of the runway identifier
 inline void Ils::runwayIdent(char rwKey[]) const
 {
    dsGetString( rwKey, makePointer(ILS_RW_ID_POS), ILS_RW_ID_LEN );
 }
-
 
 // runwayEndIdent: returns the value of the runway end identifier
 inline void Ils::runwayEndIdent(char rwEndKey[]) const

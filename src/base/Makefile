@@ -80,6 +80,10 @@ OBJS =  \
 	threads/OneShotThread.o \
 	threads/PeriodicThread.o \
 	threads/SyncThread.o \
+	transformations/Transform.o \
+	transformations/Translation.o \
+	transformations/Rotation.o \
+	transformations/Scale.o \
 	ubf/AbstractAction.o \
 	ubf/AbstractBehavior.o \
 	ubf/AbstractState.o \
@@ -180,7 +184,6 @@ OBJS =  \
 	StateMachine.o \
 	String.o \
 	Timers.o \
-	Transforms.o \
 	Vectors.o
 
 .PHONY: all clean
@@ -202,6 +205,7 @@ clean:
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
 	-rm -f relations/*.o
+	-rm -f transformations/*.o
 	-rm -f ubf/*.o
 	-rm -f units/area/*.o
 	-rm -f units/angle/*.o

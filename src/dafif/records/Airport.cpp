@@ -1,5 +1,7 @@
 
-#include "mixr/dafif/Airport.hpp"
+#include "mixr/dafif/records/Airport.hpp"
+
+#include <string>
 #include <iostream>
 
 namespace mixr {
@@ -31,7 +33,7 @@ Airport::Airport()
    ptbl = &ptable;
 }
 
-Airport::Airport(const char* const s) : Record(s)
+Airport::Airport(const std::string& s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
@@ -73,7 +75,7 @@ void Airport::ident(char id[]) const
 //------------------------------------------------------------------------------
 // Printing functions
 //------------------------------------------------------------------------------
-void Airport::printRecord(std::ostream& sout) const
+void Airport::printRecordImpl(std::ostream& sout) const
 {
    char key1[AP_KEY_LEN+1];
    key(key1);

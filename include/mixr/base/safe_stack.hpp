@@ -9,9 +9,8 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Template: safe_stack<T>
-//
 // Description: Thread-safe stack of items of type T
-//
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Use the constructor's 'ssize' parameter to set the max size of the stack.
 //    2) Use push() to add items and pop() to remove items.

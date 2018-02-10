@@ -1,8 +1,10 @@
 
-#include "mixr/dafif/WaypointLoader.hpp"
+#include "mixr/dafif/loaders/WaypointLoader.hpp"
+
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
+#include <string>
 #include <cstring>
 #include <cstdlib>
 #include <limits>
@@ -18,15 +20,12 @@ EMPTY_COPYDATA(WaypointLoader)
 WaypointLoader::WaypointLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
-   // default file
-   db->setPathname("/data/dafif/fullall/");
-   db->setFilename("file3");
 }
 
 WaypointLoader::WaypointLoader(
-                  const char* country,
-                  const char* file,
-                  const char* path)
+                  const std::string& country,
+                  const std::string& file,
+                  const std::string& path)
                : Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -39,7 +38,7 @@ WaypointLoader::WaypointLoader(
 //------------------------------------------------------------------------------
 // load() --
 //------------------------------------------------------------------------------
-bool WaypointLoader::load(const char* country)
+bool WaypointLoader::loadImpl(const std::string& country)
 {
    // ---
    // Make sure the database file is open
@@ -61,8 +60,8 @@ bool WaypointLoader::load(const char* country)
 
       waypoint.setRecord(r);
 
-      int inArea = true;
-      if ( country != nullptr ) inArea = waypoint.isCountryCode(country);
+      int inArea{true};
+      if ( country != "" ) inArea = waypoint.isCountryCode(country.c_str());
 
       if ( inArea ) {
 
@@ -96,7 +95,7 @@ bool WaypointLoader::load(const char* country)
 //------------------------------------------------------------------------------
 // getRecordLength()
 //------------------------------------------------------------------------------
-int WaypointLoader::getRecordLength()
+int WaypointLoader::getRecordLengthImpl()
 {
    return Waypoint::RECORD_LENGTH;
 }
@@ -104,7 +103,7 @@ int WaypointLoader::getRecordLength()
 //------------------------------------------------------------------------------
 // getMaxRecords()
 //------------------------------------------------------------------------------
-int WaypointLoader::getMaxRecords()
+int WaypointLoader::getMaxRecordsImpl()
 {
    return WAYPOINT_MAX_RECORDS;
 }
@@ -138,7 +137,7 @@ Waypoint* WaypointLoader::getWaypoint(const int n)
 // queryByRange() -- find waypoint record(s) less than maxRange from the
 // ref point (sorted by range)
 //------------------------------------------------------------------------------
-int WaypointLoader::queryByRange()
+int WaypointLoader::queryByRangeImpl()
 {
    double mr2(std::numeric_limits<float>::max());
    if (mrng > 0.0f) mr2 = mrng*mrng;
@@ -167,7 +166,7 @@ int WaypointLoader::queryByRange()
 //------------------------------------------------------------------------------
 // queryByIdent() -- find waypoint record(s) by identifier
 //------------------------------------------------------------------------------
-int WaypointLoader::queryByIdent(const char* id)
+int WaypointLoader::queryByIdentImpl(const char* id)
 {
    // Search for the waypoint record(s)
    WaypointKey key(id, nullptr);
@@ -179,7 +178,7 @@ int WaypointLoader::queryByIdent(const char* id)
 //------------------------------------------------------------------------------
 // queryByKey() -- find a waypoint record by the waypoint record key
 //------------------------------------------------------------------------------
-int WaypointLoader::queryByKey(const char* waypointkey)
+int WaypointLoader::queryByKeyImpl(const char* waypointkey)
 {
    WaypointKey key(waypointkey);
    Key* pkey = &key;
@@ -219,7 +218,7 @@ int WaypointLoader::il_cmp(const void* p1, const void* p2)
 //------------------------------------------------------------------------------
 // printing functions
 //------------------------------------------------------------------------------
-void WaypointLoader::printLoaded(std::ostream& sout)
+void WaypointLoader::printLoadedImpl(std::ostream& sout)
 {
    Waypoint waypoint;
    for (int i=0; i < nrl; i++) {
@@ -229,7 +228,7 @@ void WaypointLoader::printLoaded(std::ostream& sout)
 }
 
 
-void WaypointLoader::printResults(std::ostream& sout)
+void WaypointLoader::printResultsImpl(std::ostream& sout)
 {
    Waypoint waypoint;
    for (int i=0; i < nql; i++) {

@@ -17,14 +17,14 @@ class Identifier;
 // Description: Stores a latitude coordinate expressed in terms of a direction
 //              {north or south}, degrees, minutes and seconds.  Can convert
 //              this represntation into decimal degrees.
-//
+//------------------------------------------------------------------------------
 // Factory name: Latitude
+//------------------------------------------------------------------------------
 // Slots:
 //    direction <Identifier>  ! Set the direction { north, south } (default: none)
 //    degrees   <Number>      ! Set the degrees component (default: 0)
 //    minutes   <Number>      ! Set the minutes component (default: 0)
 //    seconds   <Number>      ! Set the seconds component (default: 0.0)
-//
 //------------------------------------------------------------------------------
 class Latitude : public Object
 {

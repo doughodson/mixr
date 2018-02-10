@@ -3,22 +3,23 @@
 #define __mixr_base_MonitorMetrics_H__
 
 #include "mixr/base/colors/Color.hpp"
-#include "mixr/base/osg/Matrixd"
+#include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/safe_ptr.hpp"
+#include "mixr/base/osg/Matrixd"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 
 namespace mixr {
 namespace base {
-class Table1;
 class List;
 
 //------------------------------------------------------------------------------
 // Class: MonitorMetrics
 //
 // Description:  Defines the characteristics of a monitor, needed to accurately match color.
-//
-// Factory name: monitorMetrics
+//------------------------------------------------------------------------------
+// Factory name: MonitorMetrics
+//------------------------------------------------------------------------------
 // Slots:
 //     red       <Table1>   ! Red luminance vs RGB level ( both luminance and RGB level range from 0..1 )
 //                          ! (Default: redLumTbl)
@@ -28,15 +29,12 @@ class List;
 //                          ! (default: phosphorCoordMatrix)
 //     whiteRGB  <List>     ! RGB value of reference white ( 3 element list ) (default: whiteRGB)
 //     whiteCIE  <List>     ! CIE coordinate of reference white ( 3 element list ) (default: whiteCIE)
-//
+//------------------------------------------------------------------------------
 // Events: None
 //
 //
 // Public methods: Base class public methods, plus ...
 //
-//     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-//                    const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
-//         Special constructor to initialize the object with the given values.
 //
 //     cie2rgb(Vec4d& rgba, const Vec3d& cie)
 //         Convert a CIE color into an RGB value for this monitor.
@@ -47,9 +45,11 @@ class MonitorMetrics : public Object
 
 public:
     MonitorMetrics();
+    // special constructor to initialize the object with the given values.
     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
                    const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
 
+    // convert a CIE color into an RGB value for this monitor.
     void cie2rgb(Vec4d& rgba, const Vec3d& cie) const;
 
 private:

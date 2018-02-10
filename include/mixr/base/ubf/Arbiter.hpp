@@ -14,17 +14,17 @@ class AbstractAction;
 
 //------------------------------------------------------------------------------
 // Class: Arbiter
-//
 // Description:
 //    A meta-behavior that generates a "complex action" based on the actions
 //    generated our list of behaviors.
-//
-// Note:
-//    The default is to select the Action with the highest vote value.
-//
+//------------------------------------------------------------------------------
 // Factory name: UbfArbiter
+//------------------------------------------------------------------------------
 // Slots:
 //    behaviors   <PairStream>      ! List of behaviors
+//------------------------------------------------------------------------------
+// Notes:
+//    The default is to select the Action with the highest vote value.
 //------------------------------------------------------------------------------
 class Arbiter : public AbstractBehavior
 {

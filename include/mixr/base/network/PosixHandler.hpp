@@ -15,13 +15,12 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: PosixHandler
-//
 // Description: General (connectionless) network handler: Can be used for UDP/IP,
 //              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
 //              and can be used to send data, receive data, or both.
 //
 // Windows: using Winsock2.h; link with Ws2_32.lib
-//
+//------------------------------------------------------------------------------
 // Slots:
 //    localIpAddress    ! IP address in Internet standard "." (dotted) notation
 //                      ! written as a string "127.0.0.1"
@@ -59,6 +58,7 @@ class String;
 //
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
 //
+//------------------------------------------------------------------------------
 // Notes:
 //
 // M$ WinSock has slightly different return types, some different calling, and
@@ -67,7 +67,6 @@ class String;
 // typedefs, defines, and constants that will make each convention match for
 // use later in the code.  This will save a lot of pre-processor intervention
 // and make the code that much more enjoyable to read!
-//
 //------------------------------------------------------------------------------
 class PosixHandler : public NetHandler
 {

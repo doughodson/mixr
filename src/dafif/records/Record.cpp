@@ -1,19 +1,21 @@
 
-#include "mixr/dafif/Record.hpp"
+#include "mixr/dafif/records/Record.hpp"
 
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
+#include <string>
 #include <iostream>
+
 #include <cstring>
 #include <cstdlib>
 
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_SUBCLASS(Record, "Record")
+IMPLEMENT_ABSTRACT_SUBCLASS(Record, "Record")
 EMPTY_SLOTTABLE(Record)
 
 Record::Record()
@@ -21,16 +23,18 @@ Record::Record()
    STANDARD_CONSTRUCTOR()
 }
 
-Record::Record(const char* const s)
+Record::Record(const std::string& s)
 {
    STANDARD_CONSTRUCTOR()
-   setStr(s);
+   data = s;
 }
 
 void Record::copyData(const Record& org, const bool)
 {
    BaseClass::copyData(org);
-   setStr( org.c_str() );
+   data = org.data;
+
+//   setStr( org.c_str() );
    ptbl = org.ptbl;
 }
 
@@ -44,24 +48,26 @@ void Record::deleteData()
 //------------------------------------------------------------------------------
 void Record::resetData()
 {
-   setStr( nullptr );
+//   setStr( nullptr );
+   data.empty();
 }
 
-//------------------------------------------------------------------------------
-// setRecord() -- set our record string to 's'.
-//------------------------------------------------------------------------------
-void Record::setRecord(base::String* const s)
+// set our record string to 's'.
+void Record::setRecord(const std::string& s)
 {
-   setStr( (*s).c_str() );
+   data = s;
+//   setStr( (*s).c_str() );
 }
 
 //------------------------------------------------------------------------------
 // setRecord() -- set our record string to 's'.
 //------------------------------------------------------------------------------
+/*
 void Record::setRecord(const char* const s)
 {
    setStr( s );
 }
+*/
 
 //------------------------------------------------------------------------------
 // data access functions
@@ -82,7 +88,7 @@ bool Record::isFormatCode(const int code) const
 // transactionCode: returns the Transaction Code field
 char Record::transactionCode() const
 {
-   const char* p = makePointer(TRANSACTION_CODE_POS);
+   const char* p{makePointer(TRANSACTION_CODE_POS)};
    if (p != nullptr)
       return *p;
    else
@@ -244,12 +250,22 @@ bool Record::isCycleDate(const char date[]) const
 //------------------------------------------------------------------------------
 const char* Record::makePointer(const std::size_t n) const
 {
-   const char* p {};
-   if (len() != 0) {
-      const char* rec {this->c_str()};
-      if (n > 0 && n <= len()) p = (rec + n - 1);
+   const char* p{};
+   if (!data.empty()) {
+      const char* rec {this->data.c_str()};
+      if (n > 0 && n <= data.length()) p = (rec + n - 1);
    }
+
    return p;
+}
+
+// get a specific character
+char Record::getChar(const std::size_t index) const
+{
+   if (index <= data.length()) {
+      return data.at(index);
+   }
+   return '\0';
 }
 
 //------------------------------------------------------------------------------
@@ -300,10 +316,10 @@ float Record::dsChan2freq(const int chan, const char type)
 //------------------------------------------------------------------------------
 double Record::dsAtofn(const char* const s, const int n)
 {
-   if (s == nullptr) return 0.0f;
-   if (*s == 'U') return 0.0f;
+   if (s == nullptr) return 0.0;
+   if (*s == 'U') return 0.0;
 
-   const std::size_t BUF_LENGTH = 256;
+   const std::size_t BUF_LENGTH{256};
    char buf[BUF_LENGTH];
 
    base::utStrncpy(buf, BUF_LENGTH, s, n);

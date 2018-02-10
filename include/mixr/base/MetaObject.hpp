@@ -21,10 +21,8 @@ public:
    MetaObject(const MetaObject&) = delete;
    MetaObject& operator=(const MetaObject&) = delete;
 
-   const char* getClassName() const        { return class_name.c_str(); }
-   const char* getFactoryName() const      { return factory_name.c_str(); }
-//   const std::string& getClassName() const        { return class_name; }
-//   const std::string& getFactoryName() const      { return factory_name; }
+   const char* getClassName() const             { return className.c_str(); }
+   const char* getFactoryName() const           { return factoryName.c_str(); }
 
    const SlotTable* const slottable {};         // pointer to the SlotTable
    const MetaObject* const baseMetaObject {};   // pointer to the base object's MetaObject
@@ -33,8 +31,8 @@ public:
    int tc {};                                   // total number of instances created
 
 private:
-   const std::string class_name;                // class name from 'type_info'
-   const std::string factory_name;              // factory name
+   const std::string className;                 // class name from 'type_info'
+   const std::string factoryName;               // factory name
 };
 
 }

@@ -4,6 +4,8 @@
 
 #include "mixr/base/Object.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
 class Integer;
@@ -11,70 +13,15 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: FileReader
-//
 // Description: Manages the reading of fixed record length files
-//
+//------------------------------------------------------------------------------
 // Factory name: FileReader
+//------------------------------------------------------------------------------
 // Slots:
-//     pathname     <String>      ! Path to the file (default: null string)
-//     filename     <String>      ! File name (appended to pathname) (default: null string)
+//     pathname     <String>      ! Path to the file (default: "")
+//     filename     <String>      ! File name (appended to pathname) (default: "")
 //     recordLength <Integer>     ! Length (in characters) of the records (default: 0)
-//
-//
-// Public member functions:
-//
-//    bool open()
-//       Opens 'filename' in directory 'pathname' with 'recordLength'
-//       characters per record.  If 'recordLength' is not provided, it
-//       must be set using setRecordLength() before the first access.
-//       Returns true of all is well.
-//
-//    bool isReady()
-//       Returns true if the file is open and ready to use.
-//
-//    bool setPathname(const char* path)
-//       Sets the path name to the file.  If provided, this string is used
-//       as a prefix to file name.
-//
-//    bool setFilename(const char* file)
-//       Sets the name of the file to be read.  If the path name is provided,
-//       the file name is appended to the path name.
-//
-//    int getRecordNumber() const
-//       Returns the current record number.
-//
-//    bool setRecordNumber(int num)
-//       Sets the current record number to 'num' and returns true if all is well.
-//
-//    int getRecordLength() const
-//       Returns the current record length.
-//
-//    bool setRecordLength(int len)
-//       Sets the current record length to 'len' and returns true if all is well.
-//
-//    const char* getRecord()
-//       Reads the current record.
-//
-//    const char* getRecord(int num)
-//       Reads record number 'num'.
-//
-//    const char* getRecord(int n, int len)
-//       Reads 'len' characters starting at record number 'num'.
-//       'Len' can be up to 4 times recordLength().
-//
-//    const char* getFirstRecord()
-//    const char* getNextRecord()
-//       Reads the first/next record.
-//
-//    backRecord()
-//    backRecord(int n)
-//       Decrements the current record by 'n' or 1.
-//
-//    skipRecord()
-//    skipRecord(int n)
-//       Increments the current record by 'n' or 1.
-//
-//
+//------------------------------------------------------------------------------
 // Notes:
 //
 //  1) Record numbers range from 1 to the number of records in the file.
@@ -87,7 +34,6 @@ class String;
 //     valid until the next read.
 //
 //  4) The file name and path names are limited to 255 characters.
-//
 //------------------------------------------------------------------------------
 class FileReader : public Object
 {
@@ -96,41 +42,56 @@ class FileReader : public Object
 public:
    FileReader();
 
+   // Opens 'filename' in directory 'pathname' with 'recordLength' characters per record.
+   // If 'recordLength' is not provided, it must be set using setRecordLength() before
+   // the first access. Returns true of all is well.
    bool open();
+   // Returns true if the file is open and ready to use.
    bool isReady();
 
-   const char* getPathname() const        { return pathname; }
-   bool setPathname(const char* path);
+   // Sets the path name to the file.  If provided, this string is used
+   // as a prefix to file name.
+   bool setPathname(const std::string&);
+   const std::string& getPathname() const        { return pathname; }
 
-   const char* getFilename() const        { return filename; }
-   bool setFilename(const char* file);
+   // Sets the name of the file to be read.  If the path name is provided,
+   // the file name is appended to the path name.
+   bool setFilename(const std::string&);
+   const std::string& getFilename() const        { return filename; }
 
-   int getRecordLength() const            { return rlen; }
+   // Sets the current record length to 'len' and returns true if all is well.
    bool setRecordLength(const int len);
+   // Returns the current record length.
+   int getRecordLength() const            { return rlen; }
 
-   int getRecordNumber() const            { return rnum; }
+   // Sets the current record number to 'num' and returns true if all is well.
    bool setRecordNumber(const int num);
+   // Returns the current record number.
+   int getRecordNumber() const            { return rnum; }
 
+   // Reads 'len' characters starting at record number 'num'.
+   // 'Len' can be up to 4 times recordLength().
    const char* getRecord(const int n = -1, const int len = 0);
 
+   // Decrements the current record by 'n' or 1.
    void backRecord(const int n = 1);
+   // Increments the current record by 'n' or 1.
    void skipRecord(const int n = 1);
 
+   // Reads the first/next record.
    const char* getFirstRecord();
    const char* getNextRecord();
 
 private:
-   std::ifstream* dbf {};
+   std::ifstream* dbf{};
 
    int   rnum {1};         // record number
    int   crnum {-1};       // current (in memory) record number
    int   rlen {};          // record length
    char* rec {};           // the (in memory) record
 
-   static const std::size_t FILENAME_LENGTH{256}; // Max length of file name
-   static const std::size_t PATHNAME_LENGTH{256}; // Max length of path name
-   char filename[FILENAME_LENGTH]{};         // file name
-   char pathname[PATHNAME_LENGTH]{};         // path name
+   std::string filename;
+   std::string pathname;
 
 private:
    // slot table helper methods
@@ -147,7 +108,7 @@ inline bool FileReader::setRecordNumber(const int num)
 
 inline void FileReader::backRecord(const int n)
 {
-   int i = rnum - n;
+   int i{rnum - n};
    if (i >= 0) rnum = i;
 }
 

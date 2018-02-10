@@ -10,7 +10,6 @@ class AbstractIoData;
 
 //------------------------------------------------------------------------------
 // Class: AbstractIoDevice
-//
 // Description: Abstract interface to an I/O device
 //
 //    I/O devices communicate with I/O hardware, usually via device drivers.
@@ -22,6 +21,7 @@ class AbstractIoData;
 //    which provides either synchronous or asynchronous movement of data to/from
 //    data buffers (AbstractIoData) and devices (AbstractIoDevice).
 //
+//------------------------------------------------------------------------------
 // Notes:
 //    1) All Channel (and port) numbers start with zero;
 //       example: AI channels range from 0 to (getNumAnalogInputs() - 1)
@@ -33,7 +33,6 @@ class AbstractIoData;
 //    3) Both processInputs() and processOutputs() are passed an I/O data
 //       buffer that are application (not device) specific.  This buffer
 //       should be passed to the I/O adapters.
-//
 //------------------------------------------------------------------------------
 class AbstractIoDevice : public Object
 {

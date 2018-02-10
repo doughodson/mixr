@@ -9,16 +9,15 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Decibel
-//
 // Description: The decibel (dB) is a logarithmic unit of measurement that expreses
 //              the magnitude of a physical quantity (usually power or intensity)
 //              relative to a specified of implied reference level.  Since it
 //              expresses a ratio of two quantities of the same unit, it is a
 //              dimensionless unit. This class conveys that the value it represents
 //              is a scaled number.
-//
+//------------------------------------------------------------------------------
 // Factory name: dB
-//
+//------------------------------------------------------------------------------
 // Slots:
 //     value  <Number>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------

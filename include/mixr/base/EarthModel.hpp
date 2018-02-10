@@ -13,17 +13,17 @@ class Number;
 // Class: EarthModel
 // Description: Contains the major axis, minor axis and flattening terms used to
 //              describe an ellipsoidal or a spherical earth model.
-//
+//------------------------------------------------------------------------------
 // Factory name: EarthModel
+//------------------------------------------------------------------------------
 // Slots:
-//     a    <Distance>  ! Semi major axis
+//     a    <Length>    ! Semi major axis
 //     a    <Number>    ! -- in meters
 //
-//     b    <Distance>  ! Semi minor axis
+//     b    <Length>    ! Semi minor axis
 //     b    <Number>    ! -- in meters
 //
 //     f    <Number>    ! Flattening
-//
 //------------------------------------------------------------------------------
 class EarthModel : public Object
 {

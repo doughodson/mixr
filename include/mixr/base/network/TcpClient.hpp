@@ -13,17 +13,17 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: TcpClient
-//
 // Description: Client side of a single TCP/IP connection.
-//
-//
+//------------------------------------------------------------------------------
 // Factory name: TcpClient
+//------------------------------------------------------------------------------
 // Slots:
 //      ipAddress  <String>     ! Destination IP address specified as a String (e.g., "111.122.133.144")
 //                              ! (default: found via local host name)
 //      ipAddress  <Identifier> ! Destination host name specified as an Identifier to be
 //                              ! used to look up a particular address
-//
+//------------------------------------------------------------------------------
+// Notes:
 //
 // Input File Example:
 //
@@ -33,7 +33,6 @@ class String;
 //        )
 //
 // Note: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
-//
 //------------------------------------------------------------------------------
 class TcpClient : public TcpHandler
 {

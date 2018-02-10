@@ -354,6 +354,21 @@ base library (mixr_base)
   an 'x', we get only and exactly one 'y').  Tables also implement relations.
 
    -------------------
+   - Color classes -
+   -------------------
+
+   Color class
+      1) Operators to convert a color to either Vec3d or Vec4d are now marked explicit.
+         For example:
+         // this (not completely obvious)
+         const base::Vec4d* p = *color;
+         // becomes (i.e., more obvious)
+         const base::Vec4d* p = static_cast<const base::Vec4d*>(*color);
+         // or even better (shorter, and still obvious)
+         const auto p = static_cast<const base::Vec4d*>(*color);
+
+
+   -------------------
    - Network classes -
    -------------------
 
@@ -435,6 +450,20 @@ base library (mixr_base)
          the foundation for operators more generally.
 
    -------------------
+   - Transformation classes -
+   -------------------
+
+   Transform-based classes
+      1) Transform is now abstract with several 'final' concretes 'Translate',
+         'Rotate' and 'Scale'
+      2) Transform and subclasses are designed to follow non-virtual public
+         interface pattern.  'computeMatrix()' is a private pure abstract in base
+         and implemented by subclasses.
+      3) Operator to return a const reference Matrixd is now marked explicit
+      4) A new directory 'transformations' has been created to contain all the
+         individual transformation classes
+
+   -------------------
    - Unit classes -
    -------------------
 
@@ -459,6 +488,10 @@ base library (mixr_base)
    Component class
       1) Slot parameters 'enableTimingStats', 'printTimingStats', and
          'freeze' now accept a Boolean
+
+   FileReader class
+      1) This class has been reworked to use std::string to represent
+         file and path names.
 
    Identifier class
       1) This class is no longer a subclass of String.  It provides a complete
@@ -500,11 +533,28 @@ base library (mixr_base)
          String x("hello");
          std::string y = x->c_str();   // properly copies the char*-based string
 
+      4) Now that the dafif library has been reworked, and the abstract Record
+         is no longer a subclass to String, this String class is now marked 'final'
+         to prevent subclassing of this type.
+
    Table class
       1) Slot parameter 'extrapolate' now accepts a Boolean
 
    Timer class
       1) Slot parameter 'active' now accepts a Boolean
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dafif library (mixr_dafif)
+
+- This library has been revised and updated in a few ways.
+  1) All database loader classes are now grouped within a 'loaders' directory.
+  2) All record oriented classes are now grouped within a 'records' directory.
+  3) All of the code has been revised to use std::string to represent strings
+     throughout.
+  4) The testDafif example program has also been revised to use and pass only
+     std::string's to/from this library.
 
 --------------------------------------------------------------------------------
 

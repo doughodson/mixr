@@ -9,7 +9,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Number
-//
 // Description:  Abstract class for number-based objects (Float, Integer) and 
 //               numerical operators (Add, Subtract, Multiply and Divide)
 //------------------------------------------------------------------------------

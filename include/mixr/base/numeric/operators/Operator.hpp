@@ -10,8 +10,9 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: Operator
 // Description: Abstract class to support operations on Numbers
-//
-// Factory name: "AbstractOperator"
+//------------------------------------------------------------------------------
+// Factory name: AbstractOperator
+//------------------------------------------------------------------------------
 // Slots:
 //    n2  <Number>  ! 2nd number (first number is from Number) (default: 0.0)
 //    n3  <Number>  ! 3rd number

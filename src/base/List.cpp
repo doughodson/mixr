@@ -65,9 +65,7 @@ void List::deleteData()
     clear();
 }
 
-//------------------------------------------------------------------------------
-// isValid() -- is this a valid List
-//------------------------------------------------------------------------------
+// is this a valid List
 bool List::isValid() const
 {
     bool ok{Object::isValid()};
@@ -82,9 +80,7 @@ bool List::isValid() const
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// clear() -- clear out (or empty) the list
-//------------------------------------------------------------------------------
+// clear out (or empty) the list
 void List::clear()
 {
     // Empty out the list ...
@@ -100,9 +96,7 @@ void List::clear()
 }
 
 
-//------------------------------------------------------------------------------
-// find(Object*) -- find object on the list
-//------------------------------------------------------------------------------
+// find object on the list
 unsigned int List::getIndex(const Object* const obj) const
 {
     const Item* p{};
@@ -117,9 +111,7 @@ unsigned int List::getIndex(const Object* const obj) const
     return ((p != nullptr) ? idx : 0);
 }
 
-//------------------------------------------------------------------------------
-// addHead(Object*) -- Adds object to the head of the list.
-//------------------------------------------------------------------------------
+// adds object to the head of the list.
 void List::addHead(Object* const obj)
 {
     if (obj == nullptr) return;
@@ -129,9 +121,7 @@ void List::addHead(Object* const obj)
     addHead(d);
 }
 
-//------------------------------------------------------------------------------
-// addTail(Object*) -- Adds object to the tail of the list.
-//------------------------------------------------------------------------------
+// adds object to the tail of the list.
 void List::addTail(Object* const obj)
 {
     if (obj == nullptr) return;
@@ -141,9 +131,7 @@ void List::addTail(Object* const obj)
     addTail(d);
 }
 
-//------------------------------------------------------------------------------
-// remove(Object*) -- Removes object from the list.
-//------------------------------------------------------------------------------
+// removes object from the list.
 bool List::remove(const Object* const obj)
 {
     bool ok{};
@@ -239,10 +227,7 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
     return n;
 }
 
-//------------------------------------------------------------------------------
-// removeHead() -- Removes the item at the head of the list.
-//                 (Ownership passed to caller -- does not unref())
-//------------------------------------------------------------------------------
+// removes the item at the head of the list. (Ownership is passed to caller -- does not unref())
 Object* List::removeHead()
 {
     Object* p{};
@@ -258,10 +243,7 @@ Object* List::removeHead()
     return p;
 }
 
-//------------------------------------------------------------------------------
-// removeTail() -- Removes the item at the tail of the list.
-//                 (Ownership passed to caller -- does not unref())
-//------------------------------------------------------------------------------
+// removes the item at the tail of the list. (Ownership passed to caller -- does not unref())
 Object* List::removeTail()
 {
     Object* p{};
@@ -277,10 +259,8 @@ Object* List::removeTail()
     return p;
 }
 
-//------------------------------------------------------------------------------
-// insert(Item*) -- insert a new item before 'refItem'.  If 'refItem' is
-//                  null(0), the new item is added to the tail of the list.
-//------------------------------------------------------------------------------
+// insert a new item before 'refItem'.  If 'refItem' is
+// nullptr, the new item is added to the tail of the list.
 bool List::insert(List::Item* newItem, List::Item* refItem)
 {
     bool ok{true};
@@ -300,10 +280,7 @@ bool List::insert(List::Item* newItem, List::Item* refItem)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// remove(Item*) -- Removes the Item from the list.
-//                 (Ownership passed to caller -- does not unref())
-//------------------------------------------------------------------------------
+// removes the Item from the list. (Ownership passed to caller -- does not unref())
 Object* List::remove(List::Item* item)
 {
     Object* value{};
@@ -323,9 +300,7 @@ Object* List::remove(List::Item* item)
     return value;
 }
 
-//------------------------------------------------------------------------------
-// addHead(Item*) -- Adds the Item to the head of the list.
-//------------------------------------------------------------------------------
+// adds the Item to the head of the list.
 void List::addHead(List::Item* item)
 {
     item->previous = nullptr;
@@ -336,9 +311,7 @@ void List::addHead(List::Item* item)
     num++;
 }
 
-//------------------------------------------------------------------------------
-// addTail(Item*) -- Adds the Item to the tail of the list.
-//------------------------------------------------------------------------------
+// adds the Item to the tail of the list.
 void List::addTail(List::Item* item)
 {
     item->next = nullptr;
@@ -349,9 +322,7 @@ void List::addTail(List::Item* item)
     num++;
 }
 
-//------------------------------------------------------------------------------
-// operator==    Returns true if two lists are equal.
-//------------------------------------------------------------------------------
+// returns true if two lists are equal.
 bool List::operator==(const List& l) const
 {
    if (entries() != l.entries()) return false;
@@ -366,18 +337,13 @@ bool List::operator==(const List& l) const
    return true;
 }
 
-//------------------------------------------------------------------------------
-// operator!=    Returns true if two lists are NOT equal.
-//------------------------------------------------------------------------------
+// returns true if two lists are NOT equal.
 bool List::operator!=(const List& l) const
 {
     return !(*this == l);
 }
 
-
-//------------------------------------------------------------------------------
-// getPosition1() -- Returns the object at the n'th position; w/o next pointer
-//------------------------------------------------------------------------------
+// returns the object at the n'th position; w/o next pointer
 const Object* List::getPosition1(const unsigned int n) const
 {
     if (n < 1 || n > num) return nullptr;

@@ -11,14 +11,14 @@ class Time;
 
 //------------------------------------------------------------------------------
 // Class: Timer
-//
 // Description: General purpose up/down timer.
-//
+//------------------------------------------------------------------------------
+// Factory name: Timer
+//------------------------------------------------------------------------------
 // Slots:
 //    timerValue  <Time>      ! Timer interval (default: 0)
 //    alarmTime   <Time>      ! Alarm time (default: 0)
 //    active      <Boolean>   ! Sets timer active (running) flag (default: false)
-//
 //------------------------------------------------------------------------------
 class Timer : public Object
 {
@@ -124,7 +124,7 @@ inline bool Timer::freeze() const               { return frz; }
 //------------------------------------------------------------------------------
 // Class: UpTimer
 // Description: General purpose UP timer; time counts in the positive direction.
-//
+//------------------------------------------------------------------------------
 // Factory name: UpTimer
 //------------------------------------------------------------------------------
 class UpTimer : public Timer
@@ -139,7 +139,7 @@ public:
 //------------------------------------------------------------------------------
 // Class: DownTimer
 // Description: General purpose DOWN timer; time counts in the negative direction.
-//
+//------------------------------------------------------------------------------
 // Factory name: DownTimer
 //------------------------------------------------------------------------------
 class DownTimer : public Timer

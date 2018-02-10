@@ -1,7 +1,8 @@
 
-#include "mixr/dafif/Database.hpp"
+#include "mixr/dafif/loaders/Database.hpp"
 
-#include "mixr/dafif/Record.hpp"
+#include "mixr/dafif/records/Record.hpp"
+
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
@@ -50,10 +51,10 @@ void Database::copyData(const Database& org, const bool cc)
    nql = 0;
    qlimit = 0;
 
-   refLat = 0.0f;
-   refLon = 0.0f;
-   coslat = 1.0f;
-   mrng = 0.0f;
+   refLat = 0.0;
+   refLon = 0.0;
+   coslat = 1.0;
+   mrng = 0.0;
    dbInUse = false;
    dbLoaded = false;
 }
@@ -66,17 +67,9 @@ void Database::deleteData()
    }
    dbInUse = false;
    dbLoaded = false;
-
-   //for (int i=0; i < nrl; i++)
-   //   delete rl[i];
-
-   //if (rl != 0) free(rl);
-   //if (ql != 0) delete[] ql;
 }
 
-//------------------------------------------------------------------------------
-// openDatabaseFile() -- creates and opens the database file
-//------------------------------------------------------------------------------
+// creates and opens the database file
 bool Database::openDatabaseFile()
 {
    // Close any old files and set the record length
@@ -119,10 +112,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
    mrng   = mr;
 }
 
-
-//------------------------------------------------------------------------------
-// getQueryLimit(), setQueryLimit() -- get/set query limit
-//------------------------------------------------------------------------------
+// get/set query limit
 void Database::setQueryLimit(const int mrec)
 {
    qlimit = mrec;
@@ -133,16 +123,13 @@ int Database::getQueryLimit()
    return qlimit;
 }
 
-
-//------------------------------------------------------------------------------
-// numberOfRecords() -- returns the number of records in this database
-// numberFound() -- returns the number of records found by last query
-//------------------------------------------------------------------------------
+// returns the number of records in this database
 int Database::numberOfRecords()
 {
    return nrl;
 }
 
+// returns the number of records found by last query
 int Database::numberFound()
 {
    return nql;
@@ -154,8 +141,8 @@ int Database::numberFound()
 //------------------------------------------------------------------------------
 double Database::range2(const double lat, const double lon) const
 {
-   const double x = (lat - refLat) * 60.0;
-   const double y = (lon - refLon) * coslat * 60.0;
+   const double x{(lat - refLat) * 60.0};
+   const double y{(lon - refLon) * coslat * 60.0};
    return (x * x + y * y);
 }
 
@@ -166,7 +153,7 @@ double Database::range2(const double lat, const double lon) const
 //------------------------------------------------------------------------------
 const char* Database::record(const int n, const int size)
 {
-   const char* p = nullptr;
+   const char* p{};
    if (n >= 0 && n < nrl) {
       p = dbGetRecord( rl[n], size );
    }
@@ -184,12 +171,12 @@ const char* Database::getRecord(const int n, const int size)
 
 
 // dbGetRecord() -- get record from the database
-const char* Database::dbGetRecord( const Key* key, const int size )
+const char* Database::dbGetRecord(const Key* key, const int size)
 {
-   const char* p = nullptr;
+   const char* p{};
 
    // size of record to read
-   int ssize = key->size;
+   int ssize{key->size};
    if (size != 0) ssize = size;
 
 #ifndef ALT_ILS_FILE
@@ -198,9 +185,9 @@ const char* Database::dbGetRecord( const Key* key, const int size )
 
 #else    /* Using Alternate ILS file */
 
-   if (key->idx != ALT_ILS_IDX || ssize != ILS_RECORD_LEN)
+   if (key->idx != ALT_ILS_IDX || ssize != ILS_RECORD_LEN) {
       p = db->getRecord( key->idx, ssize );
-   else {
+   } else {
       // must be an ILS record from an Airport loader
       DsAirportLoader* me = (DsAirportLoader*) this;
       p = me->createIlsRecord(key);
@@ -209,40 +196,38 @@ const char* Database::dbGetRecord( const Key* key, const int size )
 #endif
 
    return p;
-
 }
 
-// getPathname() -- get the path name from the database file reader
-const char* Database::getPathname() const
+// get the path name from the database file reader
+const std::string& Database::getPathname() const
 {
    return db->getPathname();
 }
 
-// getFilename() -- get the file name from the database file reader
-const char* Database::getFilename() const
+// get the file name from the database file reader
+const std::string& Database::getFilename() const
 {
    return db->getFilename();
 }
 
-// getPathname() -- get the pathname from the database file reader
-bool Database::setPathname(const char* path)
+// set the pathname for the database file reader
+bool Database::setPathname(const std::string& path)
 {
    return db->setPathname(path);
 }
 
-// getPathname() -- get the pathname from the database file reader
-bool Database::setFilename(const char* file)
+// set the pathname for the database file reader
+bool Database::setFilename(const std::string& file)
 {
    return db->setFilename(file);
 }
-
 
 //------------------------------------------------------------------------------
 // stripSpaces() -- strips spaces off end of the string
 //------------------------------------------------------------------------------
 void Database::stripSpaces(char buff[], const int n)
 {
-   int l = n-1;
+   int l{n-1};
    while (l >= 0 && buff[l] == ' ') buff[l--] = '\0';
 }
 
@@ -284,7 +269,7 @@ void Database::createIcaoList()
 //------------------------------------------------------------------------------
 bool Database::setSlotPathname(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setPathname( (*msg).c_str() );
    }
@@ -293,7 +278,7 @@ bool Database::setSlotPathname(const base::String* const msg)
 
 bool Database::setSlotFilename(const base::String* const msg)
 {
-   bool ok = false;
+   bool ok{};
    if (msg != nullptr) {
       ok = setFilename( (*msg).c_str() );
    }
@@ -313,7 +298,7 @@ int Database::sQuery(Key** key, Key** base,
    nql = 0;
    // search the record list for matches and sort by range
    if (n != 0) {
-      Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
+      Key** k{static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp))};
       if (k != nullptr) {
          ql[0] = *k;
          nql = 1;
@@ -332,7 +317,7 @@ int Database::mQuery(Key** key, Key** base,
 
    // search the record list for matches and sort by range
    if (n != 0) {
-      Key** k = static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp));
+      Key** k{static_cast<Key**>(bsearch(key, base, n, sizeof(Key*), cmp))};
       if (k != nullptr) {
          expandResults(key,k,cmp,base,n);
       }
@@ -354,7 +339,7 @@ int Database::mQuery(Key** key, Key** base,
 int Database::queryByIcao(const char* code)
 {
    Key key(code);
-   Key* pkey = &key;
+   Key* pkey{&key};
    return mQuery(&pkey, static_cast<Key**>(ol), nol, ol_cmp);
 }
 
@@ -370,8 +355,8 @@ void Database::expandResults(Key** key, Key** keyPtr,
                                     Key** base, std::size_t n)
 {
    // Look for the bottom end
-   Key** b = keyPtr - 1;
-   int rr = 0;
+   Key** b{keyPtr - 1};
+   int rr{};
    while (rr == 0 && b >= base) {
       rr = (*cmp)(key,b);
       if (rr == 0) --b;
@@ -379,8 +364,8 @@ void Database::expandResults(Key** key, Key** keyPtr,
    b++;
 
    // Look for the top end
-   Key** t = keyPtr + 1;
-   Key** vt = base + n;
+   Key** t{keyPtr + 1};
+   Key** vt{base + n};
    rr = 0;
    while (rr == 0 && t < vt) {
       rr = (*cmp)(key,t);
@@ -442,7 +427,7 @@ int Database::rlqs(const void* p1, const void* p2)
    const auto k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
    const auto k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
 
-   int result = 0;
+   int result{};
    if (k1->rng2 < k2->rng2)      result = -1;
    else if (k1->rng2 > k2->rng2) result =  1;
 
@@ -461,14 +446,14 @@ int Database::ol_cmp(const void* p1, const void* p2)
 //------------------------------------------------------------------------------
 // printing functions
 //------------------------------------------------------------------------------
-void Database::printLoaded(std::ostream& sout)
+void Database::printLoadedImpl(std::ostream& sout)
 {
    for (int i=0; i < nrl; i++) {
       rl[i]->serialize(sout);
    }
 }
 
-void Database::printResults(std::ostream& sout)
+void Database::printResultsImpl(std::ostream& sout)
 {
    for (int i=0; i < nql; i++) {
       ql[i]->serialize(sout);

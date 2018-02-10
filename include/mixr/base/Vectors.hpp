@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Classes:
-//    RVector  -- Row Vector
-//    CVector  -- Column Vector
+//    RVector -- Row Vector
+//    CVector -- Column Vector
 //------------------------------------------------------------------------------
-// References:
-// "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
-// "Introduction to Numerical Analysis", 2ed, Kendall E. Atkinson, Wiley (1989)
-// "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
-// "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
+// Notes: references
+//    "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
+//    "Introduction to Numerical Analysis", 2ed, Kendall E. Atkinson, Wiley (1989)
+//    "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
+//    "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 //------------------------------------------------------------------------------
 #ifndef __mixr_base_Vectors_H__
 #define __mixr_base_Vectors_H__
@@ -20,7 +20,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: RVector
 // Description: General purpose row vector
-//
+//------------------------------------------------------------------------------
 // Factory name: RVector
 //------------------------------------------------------------------------------
 class RVector : private Matrix
@@ -228,7 +228,7 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 //------------------------------------------------------------------------------
 // Class: CVector
 // Description: General purpose column vector
-//
+//------------------------------------------------------------------------------
 // Factory name: CVector
 //------------------------------------------------------------------------------
 class CVector : private Matrix
@@ -343,7 +343,6 @@ public:
    int getFldWidth() const {
       return Matrix::getFldWidth();
    }
-
 
    // overloaded "<<" operator
    friend std::ostream& operator<<(std::ostream& sout, const CVector& V);

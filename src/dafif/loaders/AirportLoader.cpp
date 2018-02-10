@@ -1,8 +1,10 @@
 
-#include "mixr/dafif/AirportLoader.hpp"
+#include "mixr/dafif/loaders/AirportLoader.hpp"
+
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
+#include <string>
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
@@ -14,19 +16,17 @@ namespace dafif {
 IMPLEMENT_SUBCLASS(AirportLoader, "AirportLoader")
 EMPTY_SLOTTABLE(AirportLoader)
 EMPTY_DELETEDATA(AirportLoader)
+EMPTY_COPYDATA(AirportLoader)
 
 AirportLoader::AirportLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
-   // default file
-   db->setPathname("/data/dafif/fullall/");
-   db->setFilename("file0");
 }
 
 AirportLoader::AirportLoader(
-                  const char* country,
-                  const char* file,
-                  const char* path)
+                  const std::string& country,
+                  const std::string& file,
+                  const std::string& path)
                : Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -36,19 +36,7 @@ AirportLoader::AirportLoader(
    load(country);
 }
 
-void AirportLoader::copyData(const AirportLoader& org, const bool cc)
-{
-   BaseClass::copyData(org);
-   if (cc) {
-      db->setPathname("/data/dafif/fullall/");
-      db->setFilename("file0");
-   }
-}
-
-//------------------------------------------------------------------------------
-// load() --
-//------------------------------------------------------------------------------
-bool AirportLoader::load(const char* country)
+bool AirportLoader::loadImpl(const std::string& country)
 {
    // ---
    // Make sure the database file is open
@@ -62,17 +50,17 @@ bool AirportLoader::load(const char* country)
    }
 
 
-// ---
-// first look for airport records
-// ---
+   // ---
+   // first look for airport records
+   // ---
    Airport airport;
-   const char* r = db->getFirstRecord();
+   const char* r{db->getFirstRecord()};
    airport.setRecord(r);
    while (r != nullptr && airport.formatCode() == 1) {
 
       // Is the airport in the correct country?
-      int inArea = true;
-      if ( country != nullptr ) inArea = airport.isCountryCode(country);
+      int inArea{true};
+      if ( country != "" ) inArea = airport.isCountryCode(country.c_str());
 
       if ( inArea ) {
 
@@ -100,9 +88,9 @@ bool AirportLoader::load(const char* country)
    }
 
 
-// ---
-// Create an array of Key pointers for the results of the queries
-// ---
+   // ---
+   // Create an array of Key pointers for the results of the queries
+   // ---
 
    nql = 0;
    if (nrl > 0) {
@@ -110,9 +98,9 @@ bool AirportLoader::load(const char* country)
    }
 
 
-// ---
-// Next look for runway records
-// ---
+   // ---
+   // Next look for runway records
+   // ---
    Runway runway;
    runway.setRecord(r);
    while (r != nullptr && runway.formatCode() == 2) {
@@ -163,9 +151,9 @@ bool AirportLoader::load(const char* country)
 
 #ifndef ALT_ILS_FILE    /* read ILS records from DAFIF file */
 
-// ---
-// Next skip arresting systems records
-// ---
+   // ---
+   // Next skip arresting systems records
+   // ---
 
    while (r != nullptr && runway.formatCode() == 4) {
       r = db->getNextRecord();
@@ -173,9 +161,9 @@ bool AirportLoader::load(const char* country)
    }
 
 
-// ---
-// Next look for ils records
-// ---
+   // ---
+   // Next look for ils records
+   // ---
    Ils ils;
    ils.setRecord(r);
    while (r != nullptr && ils.formatCode() == 5) {
@@ -462,7 +450,7 @@ bool AirportLoader::load(const char* country)
 //------------------------------------------------------------------------------
 // getRecordLength()
 //------------------------------------------------------------------------------
-int AirportLoader::getRecordLength()
+int AirportLoader::getRecordLengthImpl()
 {
    return Airport::RECORD_LENGTH;
 }
@@ -470,7 +458,7 @@ int AirportLoader::getRecordLength()
 //------------------------------------------------------------------------------
 // getMaxRecords()
 //------------------------------------------------------------------------------
-int AirportLoader::getMaxRecords()
+int AirportLoader::getMaxRecordsImpl()
 {
    return AIRPORT_MAX_RECORDS;
 }
@@ -535,7 +523,7 @@ Ils* AirportLoader::getIls(const int n)
 //------------------------------------------------------------------------------
 // queryByRange() -- find all airports within search area.
 //------------------------------------------------------------------------------
-int AirportLoader::queryByRange()
+int AirportLoader::queryByRangeImpl()
 {
    return queryAirport(Airport::Type::ANY, 0.0f);
 }
@@ -544,7 +532,7 @@ int AirportLoader::queryByRange()
 //------------------------------------------------------------------------------
 // queryByIdent() -- find airport(s) by identifier (same as key)
 //------------------------------------------------------------------------------
-int AirportLoader::queryByIdent(const char* id)
+int AirportLoader::queryByIdentImpl(const char* id)
 {
    return queryByKey(id);
 }
@@ -553,7 +541,7 @@ int AirportLoader::queryByIdent(const char* id)
 //------------------------------------------------------------------------------
 // queryByKey() -- find a airport by the airport record key
 //------------------------------------------------------------------------------
-int AirportLoader::queryByKey(const char* subkey)
+int AirportLoader::queryByKeyImpl(const char* subkey)
 {
    char apKey[AP_KEY_LEN+1];
    base::utStrncpy(apKey,AP_KEY_LEN+1,subkey,AP_KEY_LEN);
@@ -1261,7 +1249,7 @@ void AirportLoader::makeSimpleLinkedList()
 //------------------------------------------------------------------------------
 // printing functions
 //------------------------------------------------------------------------------
-void AirportLoader::printLoaded(std::ostream& sout)
+void AirportLoader::printLoadedImpl(std::ostream& sout)
 {
    Airport airport;
    Runway runway;
@@ -1293,7 +1281,7 @@ void AirportLoader::printLoaded(std::ostream& sout)
 }
 
 
-void AirportLoader::printResults(std::ostream& sout)
+void AirportLoader::printResultsImpl(std::ostream& sout)
 {
    Airport airport;
    Runway runway;
@@ -1507,16 +1495,16 @@ static void computeIlsLL(double* nlat, double* nlon, float* elev,
    if ( !runway.isIdent(rwEndId,we) ) we = Runway::lowEnd;
 
    // get the data we need
-   double lat = runway.latitude(we);
-   double lon = runway.longitude(we);
-   double thdg = runway.magHeading(we) + magvar;
-   double dist = static_cast<double>(loc);
+   double lat{runway.latitude(we)};
+   double lon{runway.longitude(we)};
+   double thdg{runway.magHeading(we) + magvar};
+   double dist{static_cast<double>(loc)};
 
    // compute delta latitude (degrees)
-   double dlat = dist * std::cos(thdg*DEG2RAD) * FT2DEG;
+   double dlat{dist * std::cos(thdg*DEG2RAD) * FT2DEG};
 
    // compute delta longitude (degrees)
-   double dlon = dist * std::sin(thdg*DEG2RAD) * FT2DEG * cos(lat*DEG2RAD);
+   double dlon{dist * std::sin(thdg*DEG2RAD) * FT2DEG * cos(lat*DEG2RAD)};
 
    // compute new latitude/longitude/elevation
    *nlat = lat + dlat;
@@ -1528,10 +1516,10 @@ static void computeIlsLL(double* nlat, double* nlon, float* elev,
 //------------------------------------------------------------------- ## alt ILS
 // printLatitude() -- converts latitude to DAFIF format
 //------------------------------------------------------------------------------
-void printLatitude( char* buff, double lat )
+void printLatitude(char* buff, double lat)
 {
    buff[0] = 'N';
-   double dlat = lat;
+   double dlat{lat};
    if (dlat < 0.0) {
       dlat = -dlat;
       buff[0] = 'S';

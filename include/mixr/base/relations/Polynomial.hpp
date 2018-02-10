@@ -14,11 +14,12 @@ class List;
 // Class: Polynomial
 // Description: Polynomial function
 //                f(x) = a0 + a1*x + a2*x^2 + ... + aN*x^N
-//
-// Factory names: Polynomial
+//------------------------------------------------------------------------------
+// Factory name: Polynomial
+//------------------------------------------------------------------------------
 // Slots:
 //    coefficients   <base::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
-//
+//------------------------------------------------------------------------------
 // Notes
 //    1) The degree of the polynomial is determined by the size of the coefficients vector.
 //
@@ -31,7 +32,6 @@ class List;
 //              M             N = M-1     a0 + a1 * x + a2 * x^2 + ... + aN * x^N
 //
 //    2) Storage is not used.
-//
 //------------------------------------------------------------------------------
 class Polynomial : public Func1
 {

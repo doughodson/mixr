@@ -1,6 +1,10 @@
 
-#include "mixr/dafif/NavaidLoader.hpp"
+#include "mixr/dafif/loaders/NavaidLoader.hpp"
+
 #include "mixr/base/FileReader.hpp"
+#include "mixr/base/util/str_utils.hpp"
+
+#include <string>
 #include <cstring>
 #include <cstdlib>
 #include <limits>
@@ -10,34 +14,23 @@ namespace dafif {
 
 IMPLEMENT_SUBCLASS(NavaidLoader, "NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
+EMPTY_COPYDATA(NavaidLoader)
 
 NavaidLoader::NavaidLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
-   // default file
-   db->setPathname("/data/dafif/fullall/");
-   db->setFilename("file2");
 }
 
 NavaidLoader::NavaidLoader(
-                  const char* country,
-                  const char* file,
-                  const char* path)
+                  const std::string& country,
+                  const std::string& file,
+                  const std::string& path)
                : Database()
 {
    STANDARD_CONSTRUCTOR()
    db->setPathname(path);
    db->setFilename(file);
    load(country);
-}
-
-void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
-{
-   BaseClass::copyData(org);
-   if (cc) {
-      db->setPathname("/data/dafif/fullall/");
-      db->setFilename("file2");
-   }
 }
 
 void NavaidLoader::deleteData()
@@ -48,7 +41,7 @@ void NavaidLoader::deleteData()
    ncl = 0;
 }
 
-bool NavaidLoader::load(const char* country)
+bool NavaidLoader::loadImpl(const std::string& country)
 {
    // ---
    // Make sure the database file is open
@@ -70,7 +63,7 @@ bool NavaidLoader::load(const char* country)
       navaid.setRecord(r);
 
       int inArea = true;
-      if ( country != nullptr ) inArea = navaid.isCountryCode(country);
+      if ( country != "" ) inArea = navaid.isCountryCode(country.c_str());
 
       if ( inArea && nrl < ncache ) {
 
@@ -123,7 +116,7 @@ bool NavaidLoader::load(const char* country)
 //------------------------------------------------------------------------------
 // getRecordLength()
 //------------------------------------------------------------------------------
-int NavaidLoader::getRecordLength()
+int NavaidLoader::getRecordLengthImpl()
 {
    return Navaid::RECORD_LENGTH;
 }
@@ -131,7 +124,7 @@ int NavaidLoader::getRecordLength()
 //------------------------------------------------------------------------------
 // getMaxRecords()
 //------------------------------------------------------------------------------
-int NavaidLoader::getMaxRecords()
+int NavaidLoader::getMaxRecordsImpl()
 {
    return NAVAID_MAX_RECORDS;
 }
@@ -162,7 +155,7 @@ Navaid* NavaidLoader::getNavaid(const int n)
 // queryByRange() -- find NAVAID record(s) less than mrng from the
 // ref point (sorted by range)
 //------------------------------------------------------------------------------
-int NavaidLoader::queryByRange()
+int NavaidLoader::queryByRangeImpl()
 {
    return queryByType(Navaid::ANY);
 }
@@ -170,7 +163,7 @@ int NavaidLoader::queryByRange()
 //------------------------------------------------------------------------------
 // queryByIdent() -- find NAVAID record(s) by identifier
 //------------------------------------------------------------------------------
-int NavaidLoader::queryByIdent(const char* id)
+int NavaidLoader::queryByIdentImpl(const char* id)
 {
    // Search for the NAVAID record(s)
    NavaidKey key(id, nullptr);
@@ -181,7 +174,7 @@ int NavaidLoader::queryByIdent(const char* id)
 //------------------------------------------------------------------------------
 // queryByKey() -- find a NAVAID record by the NAVAID record key
 //------------------------------------------------------------------------------
-int NavaidLoader::queryByKey(const char* navaidkey)
+int NavaidLoader::queryByKeyImpl(const char* navaidkey)
 {
    NavaidKey key(navaidkey);
    Key* pkey = &key;
@@ -315,7 +308,7 @@ int NavaidLoader::cl_cmp(const void* p1, const void* p2)
 //------------------------------------------------------------------------------
 // printing functions
 //------------------------------------------------------------------------------
-void NavaidLoader::printLoaded(std::ostream& sout)
+void NavaidLoader::printLoadedImpl(std::ostream& sout)
 {
    Navaid navaid;
    for (int i=0; i < nrl; i++) {
@@ -342,7 +335,7 @@ void NavaidLoader::printChannelList(std::ostream& sout)
    }
 }
 
-void NavaidLoader::printResults(std::ostream& sout)
+void NavaidLoader::printResultsImpl(std::ostream& sout)
 {
    Navaid navaid;
    for (int i=0; i < nql; i++) {

@@ -17,6 +17,7 @@ namespace base {
 //    The main input and output data buffers are typically managed by an I/O
 //    handler class (see AbstractIoHander).
 //
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Inputs from hardware are called Analog Inputs (AI) and Discrete Inputs (DI)
 //
@@ -26,7 +27,6 @@ namespace base {
 //       numbering at one(1) and some may start at zero(0).
 //
 //    4) All functions return true if successful.
-//
 //------------------------------------------------------------------------------
 class AbstractIoData : public Object
 {

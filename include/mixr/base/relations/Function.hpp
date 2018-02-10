@@ -12,9 +12,13 @@ class Table;
 
 //------------------------------------------------------------------------------
 // Class: Function
-//
 // Description: Base for the derived, multi-dimensional function classes.
-//
+//------------------------------------------------------------------------------
+// Factory name: Function
+//------------------------------------------------------------------------------
+// Slots:
+//    table    <Table>     ! Optional LFI table
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Use the storageFactory() function to create the FStorage object that
 //       will maintain the previous function call values (i.e., integration).
@@ -23,10 +27,6 @@ class Table;
 //       Data storage factory (pre-ref()'d)
 //   virtual bool setSlotLfiTable(const Table* const msg);
 //       Set Slot Tables
-//
-// Slots:
-//    table    <Table>     ! Optional LFI table
-//
 //------------------------------------------------------------------------------
 class Function : public Object
 {

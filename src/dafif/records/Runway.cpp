@@ -1,7 +1,9 @@
 
-#include "mixr/dafif/Runway.hpp"
+#include "mixr/dafif/records/Runway.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
+
+#include <string>
 #include <iostream>
 
 namespace mixr {
@@ -33,7 +35,7 @@ Runway::Runway()
    ptbl = &ptable;
 }
 
-Runway::Runway(const char* const s) : Record(s)
+Runway::Runway(const std::string& s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
@@ -54,7 +56,7 @@ void Runway::getRunwayMagHeading(const double aclat, const double aclon, const d
 //------------------------------------------------------------------------------
 // Printing functions
 //------------------------------------------------------------------------------
-void Runway::printRecord(std::ostream& sout) const
+void Runway::printRecordImpl(std::ostream& sout) const
 {
    char key1[16]{};
    char id[12]{};

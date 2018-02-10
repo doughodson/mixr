@@ -8,19 +8,19 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: SlotTable
 // Description: Table of slot names (see Object.hpp)
+//------------------------------------------------------------------------------
+// Notes:
+//    Slot tables define the names of the slots (i.e., attributes) accepted by
+//    the class of objects and maps these slot names to slot index numbers.
 //
-// Slot tables define the names of the slots (i.e., attributes) accepted by
-// the class of objects and maps these slot names to slot index numbers.
+//    The mapping of slot names and index numbers includes all base class slot
+//    tables that may exist.  Therefore, the first slot of the first base class
+//    that contains a slot table is slot number one, and the last slot in this
+//    table is slot N, where N is the total number of slot in this table and all
+//    base class tables.  See function n() below.
 //
-// The mapping of slot names and index numbers includes all base class slot
-// tables that may exist.  Therefore, the first slot of the first base class
-// that contains a slot table is slot number one, and the last slot in this
-// table is slot N, where N is the total number of slot in this table and all
-// base class tables.  See function n() below.
-//
-// Slot tables are usually defined using the macros BEGIN_SLOTTABLE and
-// END_SLOTTABLE (see macros.hpp).
-//
+//    Slot tables are usually defined using the macros BEGIN_SLOTTABLE and
+//    END_SLOTTABLE (see macros.hpp).
 //------------------------------------------------------------------------------
 class SlotTable
 {

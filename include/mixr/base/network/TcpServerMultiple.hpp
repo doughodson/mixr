@@ -10,15 +10,17 @@ class Integer;
 
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
-//
 // Description: Server side that can support multiple TCP/IP connections.
 //              Our application must request each connection via acceptConnection(),
 //              which will return a new instance of a TcpHandler when a connection
 //              is made, or zero is return if no connection was made.
-//
+//------------------------------------------------------------------------------
 // Factory name: TcpServerMultiple
+//------------------------------------------------------------------------------
 // Slots:
 //      backlog   <Integer>    ! Listen socket's max backlog (default: 1)
+//------------------------------------------------------------------------------
+// Notes:
 //
 // Input File Example:
 //

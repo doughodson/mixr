@@ -4,7 +4,6 @@
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/graphics/Material.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Transforms.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -13,13 +12,15 @@
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
+#include "mixr/base/transformations/Transform.hpp"
+
 namespace mixr {
 namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
-double Graphic::fTimer {};
-GLuint Graphic::autoSelName {0x00800000};
+double Graphic::fTimer{};
+GLuint Graphic::autoSelName{0x00800000};
 
 BEGIN_SLOTTABLE(Graphic)
     "color",                //  1: color
@@ -413,7 +414,7 @@ void Graphic::draw()
         } else if (color != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
-            const base::Vec4d* p = *color;
+            const auto p = static_cast<const base::Vec4d*>(*color);
             display->setColor(*p);
         }
     }
@@ -637,7 +638,7 @@ void Graphic::setupMatrix()
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             const auto t = dynamic_cast<base::Transform*>(p->object());
             if (t != nullptr) {
-                m.preMult( *t );
+                m.preMult( static_cast<const base::Matrixd>(*t) );
                 haveMatrix = true;
             }
             item = item->getNext();

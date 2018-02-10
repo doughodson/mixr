@@ -10,9 +10,8 @@ namespace ubf {
 
 //------------------------------------------------------------------------------
 // Class: AbstractState
-//
 // Description: The actor's state vector, as seen by the Behaviors.
-//
+//------------------------------------------------------------------------------
 // Factory name: UbfState
 //------------------------------------------------------------------------------
 class AbstractState : public base::Component

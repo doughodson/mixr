@@ -13,13 +13,14 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: UdpBroadcastHandler
-//
 // Description: UDP broadcast network handler
-//
+//------------------------------------------------------------------------------
 // Factory name: UdpBroadcastHandler
-//
+//------------------------------------------------------------------------------
 // Slots:
 //       networkMask  <String>    ! host network mask  (e.g., "255.255.255.255")
+//------------------------------------------------------------------------------
+// Notes:
 //
 // Input File Example:
 //
@@ -28,7 +29,7 @@ class Number;
 //           networkMask: "255.255.255.0"   // Local host Network Mask
 //           port: 2010                     // Destination port
 //           localPort: 2011                // Port to send from
-//           shared: 1                      // Shared port
+//           shared: true                   // Shared port
 //        )
 //
 //------------------------------------------------------------------------------

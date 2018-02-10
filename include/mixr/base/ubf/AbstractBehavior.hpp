@@ -15,8 +15,9 @@ class AbstractAction;
 // Class: AbstractBehavior
 // Description: Abstract base class for all behaviors.  Generates an optional
 //              action based on our current state.
-//
+//------------------------------------------------------------------------------
 // Factory name: UbfBehavior
+//------------------------------------------------------------------------------
 // Slots:
 //    vote     <Integer>   ! default vote/weight value for actions generated
 //                         ! by this behavior
@@ -36,7 +37,7 @@ protected:
    virtual void setVote(const int x);
 
 private:
-   int vote {};
+   int vote{};
 
 private:
    // slot table helper methods

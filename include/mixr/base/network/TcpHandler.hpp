@@ -11,8 +11,7 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: TcpHandler
-//
-// Description: General TCP/IP support class.
+// Description: General TCP/IP support class
 //------------------------------------------------------------------------------
 class TcpHandler : public PosixHandler
 {

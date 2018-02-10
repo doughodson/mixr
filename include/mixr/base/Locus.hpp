@@ -9,11 +9,11 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Locus
-// Factory name: Locus
-//
 // Description: A line of evenly spaced data points in a specific direction and
 //              range from a reference point.  Or according to Webster, "Set of
 //              all points whose location is determined by stated conditions"
+//------------------------------------------------------------------------------
+// Factory name: Locus
 //------------------------------------------------------------------------------
 class Locus : public Object
 {

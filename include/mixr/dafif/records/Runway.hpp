@@ -2,88 +2,63 @@
 #ifndef __mixr_dafif_Runway_H__
 #define __mixr_dafif_Runway_H__
 
-#include "Record.hpp"
+#include "mixr/dafif/records/Record.hpp"
+
+#include <string>
 
 namespace mixr {
 namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: Runway
-// Base class: base::Object -> base::String -> Record -> Runway
-//
-// Description: Access to the DAFIF Airport/Runway records.
-//
-//
-// Public member functions:
-//
-//  [all public members from the base classes]
-//
-//  double latitude(WhichEnd whichEnd)
-//  double longitude(WhichEnd whichEnd)
-//  float elevation(WhichEnd whichEnd)
-//  float slope(WhichEnd whichEnd)
-//  float magHeading(WhichEnd whichEnd)
-//      Return the values of the latitude, longitude, elevation, slope
-//      and magnetic heading fields for 'whichEnd' of the runway.
-//      WhichEnd is Runway::HIGH_END or Runway::LOW_END.
-//
-//  ident(char id[], WhichEnd whichEnd)
-//      Returns the value of the runway's (end) identifier field in 'id'.
-//
-//  int isIdent(char id[], WhichEnd whichEnd)
-//      Returns true if 'id' is equal to the runway's (end) id field.
-//
-//  int width()
-//      Returns the width of the runway (feet).
-//
-//  int length()
-//      Returns the length of the runway (feet).
-//
-//  void airportKey(char apKey[])
-//      Returns the record key of the airport.
-//
-//  WhichEnd whichEnd(char rwEndId[])
-//      Returns which end of the runway matches the runway end id.
-//
-//  Runway::recordLength
-//       Length of a DAFIF Runway record pair.
-//
+// Description: Access to the DAFIF Airport/Runway records
 //------------------------------------------------------------------------------
-class Runway : public Record
+class Runway final: public Record
 {
    DECLARE_SUBCLASS(Runway, Record)
 
 public:
+   // length of a DAFIF Runway record pair
    enum { RECORD_LENGTH = RUNWAY_RECORD_LEN };
 
    enum WhichEnd { LOW_END = 0, HIGH_END = 1 };
 
 public:
    Runway();
-   Runway(const char* const);
+   Runway(const std::string&);
 
+   // Return the values of the latitude, longitude, elevation, slope
+   // and magnetic heading fields for 'whichEnd' of the runway.
+   // WhichEnd is Runway::HIGH_END or Runway::LOW_END.
    double latitude(const WhichEnd whichEnd) const;
    double longitude(const WhichEnd whichEnd) const;
    float elevation(const WhichEnd whichEnd) const;
    float magHeading(const WhichEnd whichEnd) const;
    float slope(const WhichEnd whichEnd) const;
 
+   // returns the value of the runway's (end) identifier field in 'id'
    void ident(char ident[], const WhichEnd whichEnd) const;
+   // returns true if 'id' is equal to the runway's (end) id field
    int isIdent(const char id[], const WhichEnd whichEnd) const;
 
+   // returns the width of the runway (feet)
    int width() const;
+   // returns the length of the runway (feet)
    int length() const;
+
+   // returns the record key of the airport
    void airportKey(char apKey[]) const;
+
    void getRunwayMagHeading(const double aclat, const double aclon, const double acelev, float* magHeading1, float* magHeading2, double* trueBearing1, double* trueBearing2) const;
    void printRunwayMagHeading(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 
+   // returns which end of the runway matches the runway end id
    WhichEnd whichEnd(const char rwEndId[]) const;
-
-   void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
 
+   void printRecordImpl(std::ostream& sout) const final;
 };
 
 // ident: returns the runway identifier field

@@ -10,7 +10,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Pair
-//
 // Description: Slot pair (or named object); i.e., an Identifier/Object pair.
 //
 //    Used to set object attributes, i.e., 'slots' (see Object::setSlotByName()).
@@ -19,10 +18,9 @@ namespace base {
 //    and since objects can be in more than one Pair, it can have more than one
 //    name (aliases).
 //
-//
-// EDL file syntax:
+//------------------------------------------------------------------------------
+// Notes: EDL syntax (an Identifier followed by a colon then Object)
 //      ident: <object>
-//
 //------------------------------------------------------------------------------
 class Pair : public Object
 {

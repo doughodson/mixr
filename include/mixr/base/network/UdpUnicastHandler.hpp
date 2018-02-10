@@ -13,7 +13,6 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: UdpUnicastHandler
-//
 // Description: UDP/IP unicast network handler.  Sends unicast packets to the
 //              destination IP and port.
 //
@@ -24,14 +23,16 @@ class String;
 //
 //              The local port must be defined if you're going to be changing
 //              the destination port.
-//
+//------------------------------------------------------------------------------
 // Factory name: UdpUnicastHandler
-//
+//------------------------------------------------------------------------------
 // Slots:
 //      ipAddress  <String>     ! Destination host name or IP address "111.122.133.144" string
 //                              ! (default: found via local host name)
 //      ipAddress  <Identifier> ! Destination host name identifier (e.g., 'localhost') to be
 //                              ! used to look up a particular address
+//------------------------------------------------------------------------------
+// Notes:
 //
 // Input File Example:
 //

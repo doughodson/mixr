@@ -9,13 +9,13 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Boolean
-//
 // Description: A data type that represents two values (true and false).  This
 //              class is defined to support the translation of Boolean type
 //              values from the Extensible Description Language (EDL) to C++
 //              code that consumes that specification.
-//
+//------------------------------------------------------------------------------
 // Factory name: Boolean
+//------------------------------------------------------------------------------
 // Slots:
 //     value  <Boolean>  ! Sets the value (default: false)
 //------------------------------------------------------------------------------

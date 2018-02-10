@@ -2,108 +2,82 @@
 #ifndef __mixr_dafif_AirportLoader_H__
 #define __mixr_dafif_AirportLoader_H__
 
-#include "Database.hpp"
-#include "Airport.hpp"
-#include "Runway.hpp"
-#include "Ils.hpp"
+#include "mixr/dafif/loaders/Database.hpp"
+
+#include "mixr/dafif/records/Airport.hpp"
+#include "mixr/dafif/records/Runway.hpp"
+#include "mixr/dafif/records/Ils.hpp"
 
 #ifdef ALT_ILS_FILE
 #include "AIParser.h"
 #endif
+
+#include <string>
 
 namespace mixr {
 namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: AirportLoader
-// Base class: Database -> AirportLoader
-//
-// Description: DAFIF Airport file class (file0)
-//
-// Note(s):
+// Description: Concrete DAFIF Airport file class (FILE0)
+//------------------------------------------------------------------------------
+// Notes:
 //
 //    Standard record length is set to airport format records (1), so after
 //    an airport query these records can be retrieved using getRecord(i).
 //    However, after a runway query, use getRecord(n, RUNWAY_RECORD_LEN),
 //    and after an ils query, use getRecord(n,ILS_RECORD_LEN).
-//
-//
-//
-// Public members:
-//
-//    [all public members from the base classes]
-//
-//    AirportLoader()
-//    AirportLoader(const char* country)
-//    AirportLoader(const char* country, const char* file)
-//    AirportLoader(const char* country, const char* file, const char* path)
-//       Constructors: Load only records with 'country' code from
-//       'file' in directory 'path'.
-//
-//    int queryByLength(float minRwLen)
-//       Find all records within the search area with a runway length
-//       of at least 'minRwLen' feet.
-//
-//    Airport* airport(int n)
-//       Returns the n'th airport loaded.
-//       Range: 0 .. numberOfRecords()-1
-//
-//    Airport* getAirport(int n)
-//       Get the n'th airport found by last query.
-//       Range: 0 .. numberFound()-1
-//
 //------------------------------------------------------------------------------
-class AirportLoader : public Database
+class AirportLoader final: public Database
 {
    DECLARE_SUBCLASS(AirportLoader, Database)
 
 public:
    AirportLoader();
    AirportLoader(
-      const char* country,
-      const char* file = "file0",
-      const char* path = "/dafif/fullall/"
+      const std::string& country,
+      const std::string& file = "FILE0",
+      const std::string& path = ""
    );
 
-   virtual Airport* airport(const int n);
-   virtual Airport* getAirport(const int n);
-   virtual Runway* getRunway(const int n);
-   virtual Ils* getIls(const int n);
+   // Returns the n'th airport loaded.
+   // Range: 0 .. numberOfRecords()-1
+   Airport* airport(const int n);
 
-   virtual int queryByLength(const float minRwLen);
-   virtual int queryByType(const Airport::Type);
-   virtual int queryByFreq(const float freq);
-   virtual int queryByChannel(const int chan);
+   // Get the n'th airport found by last query.
+   // Range: 0 .. numberFound()-1
+   Airport* getAirport(const int n);
 
-   virtual int getNumRunwayRecords(const char* key);
-   virtual int queryRunwayByNumber(const char* key, const int n);
-   virtual int queryRunwayByIdent(const char* id);
-   virtual int queryRunwayBySubkey(const char* subkey);
-   virtual int queryRunwayByRange();
-   virtual int queryRunwayByLength(const float length);
-   virtual int queryRunwayByFreq(const float freq);
-   virtual int queryRunwayByChannel(const int chan);
+   Runway* getRunway(const int n);
+   Ils* getIls(const int n);
 
-   virtual int getNumIlsRecords(const char* key);
-   virtual int queryIlsByNumber(const char* key, const int n);
-   virtual int queryIlsByIdent(const char* id);
-   virtual int queryIlsBySubkey(const char* subkey);
-   virtual int queryIlsByRange();
-   virtual int queryIlsByType(const Ils::IlsType type);
-   virtual int queryIlsByFreq(const float freq);
-   virtual int queryIlsByChannel(const int chan);
+   // find all records within the search area with a runway length
+   // of at least 'minRwLen' feet.
+   int queryByLength(const float minRwLen);
+   int queryByType(const Airport::Type);
+   int queryByFreq(const float freq);
+   int queryByChannel(const int chan);
+
+   int getNumRunwayRecords(const char* key);
+   int queryRunwayByNumber(const char* key, const int n);
+   int queryRunwayByIdent(const char* id);
+   int queryRunwayBySubkey(const char* subkey);
+   int queryRunwayByRange();
+   int queryRunwayByLength(const float length);
+   int queryRunwayByFreq(const float freq);
+   int queryRunwayByChannel(const int chan);
+
+   int getNumIlsRecords(const char* key);
+   int queryIlsByNumber(const char* key, const int n);
+   int queryIlsByIdent(const char* id);
+   int queryIlsBySubkey(const char* subkey);
+   int queryIlsByRange();
+   int queryIlsByType(const Ils::IlsType type);
+   int queryIlsByFreq(const float freq);
+   int queryIlsByChannel(const int chan);
 
    struct AirportKey;
    struct RunwayKey;
-
-   bool load(const char* code = nullptr) override;
-   int getRecordLength() override;
-   int getMaxRecords() override;
-   int queryByRange() override;
-   int queryByIdent(const char* id) override;
-   int queryByKey(const char* key) override;
-   void printLoaded(std::ostream& sout) override;
-   void printResults(std::ostream& sout) override;
 
    // Key used for quick ILS record lookup
    struct IlsKey : public Database::Key
@@ -172,7 +146,6 @@ public:
 #endif
 
 protected:
-
    enum { AIRPORT_MAX_RECORDS = 40000 };
 
    int queryAirport(const Airport::Type type, const float minRwLen);
@@ -194,6 +167,15 @@ protected:
    AirportKey* firstAirport {};  // first airport in linked-list
 
 private:
+   bool loadImpl(const std::string& code = "") final;
+   int getRecordLengthImpl() final;
+   int getMaxRecordsImpl() final;
+   int queryByRangeImpl() final;
+   int queryByIdentImpl(const char* id) final;
+   int queryByKeyImpl(const char* key) final;
+
+   void printLoadedImpl(std::ostream& sout) final;
+   void printResultsImpl(std::ostream& sout) final;
 
 #ifdef ALT_ILS_FILE    /* Alternate ILS File */
    char altIlsFile[256];

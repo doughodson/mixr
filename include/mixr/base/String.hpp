@@ -18,15 +18,18 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: String
 // Description: Character string class
-//
+//------------------------------------------------------------------------------
+// Factory name: String
+//------------------------------------------------------------------------------
+// Notes:
 //      Assignment Operators:     =
 //      Concatenation Operators:  +  +=
 //      Comparison Operators:     <  <=  ==  >=  >  !=
 //      iostream Operations:      <<  >>
 //
-// Factory name: String
+// EDL syntax: "strings are enclosed in quotes"
 //------------------------------------------------------------------------------
-class String : public Object
+class String final: public Object
 {
     DECLARE_SUBCLASS(String, Object)
 

@@ -9,9 +9,8 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Template: safe_queue<T>
-//
 // Description: Thread-safe queue of items of type T
-//
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Use the constructor's 'qsize' parameter to set the max size of the queue.
 //    2) Use put() to add items and get() to remove items.

@@ -23,7 +23,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Object
-//
 // Description: Our 'system' or top level base class for all framework objects.
 //
 //       Provides a common base class for type checking and support for factory names,
@@ -31,6 +30,7 @@ namespace base {
 //       be implemented by each derived class, and the macros in 'macros.hpp' provide
 //       an easy way to do this.
 //
+//------------------------------------------------------------------------------
 // Macros
 //
 //    Macros are provided to generate much of the boilerplate code that is required

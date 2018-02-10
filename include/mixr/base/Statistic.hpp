@@ -11,55 +11,14 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Statistic
-//
+// Class: Statistic
 // Description:  General statistics class: acts like a statistical calculator:
 //               Computes the mean, absolute mean, the variance, standard
 //               deviation, RMS, maximum and minimum values of all data points
 //               added to the statistic.  Use sigma() to add points and clear()
 //               to restart (or clear) the statistic.
-//
+//------------------------------------------------------------------------------
 // Factory name: Statistic
-//
-// Public member functions:
-//
-//    clear()
-//       Clears the statistics; it is now ready for new data points
-//
-//    sigma(double value)
-//       Adds one data point to the statistic
-//
-//    sigma(const double* const values, int size)
-//    sigma(const float* const values, int size)
-//       Adds an array of 'size' data points to the statistic
-//
-//    int getN() const
-//       Returns the number of data points that have been added to the statistic
-//
-//    double mean() const
-//       Returns the mean of the data points (or zero if there were no data points)
-//
-//    double absMean() const
-//       Returns the mean of the abs values (or zero)
-//
-//    double variance() const
-//       Returns the variance (or zero)
-//
-//    double stdDev() const
-//       Returns the standard deviation (or zero)
-//
-//    double rms() const
-//       Returns the Root-Mean-Squared of the data points (or zero)
-//
-//    double maxValue() const
-//       Returns the max data point (or the negative of max value for double if there were no data points)
-//
-//    double minValue() const
-//       Returns the min data point (or max value for double if there were no data points)
-//
-//    double ci() const
-//       Returns the confidence interval for the statistic given Z
-//
 //------------------------------------------------------------------------------
 class Statistic : public Object
 {
@@ -68,31 +27,35 @@ class Statistic : public Object
 public:
    Statistic();
 
-   void sigma(const double value);                                   // Adds a data point
-   void sigma(const double* const values, const unsigned int size);  // Adds an array of data points
-   void sigma(const float* const values, const unsigned int size);   // Adds an array of data points
+   void sigma(const double value);                          // Adds a data point
+   void sigma(const double* const values, const int size);  // Adds an array of data points
+   void sigma(const float* const values, const int size);   // Adds an array of data points
 
-   unsigned long getN() const  { return n; }        // Returns the number of data points
-   double mean() const;                             // Returns the mean of the data
-   double absMean() const;                          // Returns the mean of the abs values
-   double variance() const;                         // Returns the variance
-   double stdDev() const;                           // Returns the standard deviation
-   double maxValue() const     { return maximum; }  // Returns the max data point
-   double minValue() const     { return minimum; }  // Returns the min data point
-   double rms() const;                              // Returns the Root-Mean-Squared
-   double ci(const double) const;                   // Returns confidence interval given "Z"
-   double value() const        { return value1; }   // Returns the last values added by sigma()
+   int getN() const                  { return n; }       // Returns the number of data points
+   double mean() const;                                  // Returns the mean of the data (or zero if no data points)
+   double absMean() const;                               // Returns the mean of the abs values (or zero)
+   double variance() const;                              // Returns the variance (or zero)
+   double stdDev() const;                                // Returns the standard deviation (or zero)
+   // returns the max data point (or the negative of max value for double if there were no data points)
+   double maxValue() const           { return maximum; }
+   // returns the min data point (or max value for double if there were no data points)
+   double minValue() const           { return minimum; }
+   double rms() const;                                    // Returns the Root-Mean-Squared
+   // returns the confidence interval for the statistic given Z
+   double ci(const double) const;
+   double value() const              { return value1; }   // Returns the last values added by sigma()
 
-   void clear();             // clear statistics
+   // clears the statistics; it is now ready for new data points
+   void clear();
 
 private:
-   unsigned long n {};       // number of values
-   double   maximum {-std::numeric_limits<double>::max()};  // max value
-   double   minimum {std::numeric_limits<double>::max()};   // min value
-   double   sum {};          // sum of values
-   double   absSum {};       // sum of abs values
-   double   sumSq {};        // sum of the squares
-   double   value1 {};       // last value added
+   int n{};               // number of values
+   double maximum{-std::numeric_limits<double>::max()};  // max value
+   double minimum{std::numeric_limits<double>::max()};   // min value
+   double sum{};          // sum of values
+   double absSum{};       // sum of abs values
+   double sumSq{};        // sum of the squares
+   double value1{};       // last value added
 } ;
 
 // adds a data point
@@ -102,7 +65,7 @@ inline void Statistic::sigma(const double value)
    value1 = value;
 
    // Abs value
-   double avalue {value};
+   double avalue{value};
    if (avalue < 0.0) avalue = -avalue;
 
    // Max/Min value
@@ -123,20 +86,20 @@ inline void Statistic::sigma(const double value)
 }
 
 // adds an array of 'double' data points
-inline void Statistic::sigma(const double* const values, const unsigned int size)
+inline void Statistic::sigma(const double* const values, const int size)
 {
-   if (values != 0 && size > 0) {
-      for (unsigned int i = 0; i < size; i++) {
+   if (values != nullptr && size > 0) {
+      for (int i = 0; i < size; i++) {
          sigma( values[i] );
       }
    }
 }
 
 // adds an array of 'double' data points
-inline void Statistic::sigma(const float* const values, const unsigned int size)
+inline void Statistic::sigma(const float* const values, const int size)
 {
-   if (values != 0 && size > 0) {
-      for (unsigned int i = 0; i < size; i++) {
+   if (values != nullptr && size > 0) {
+      for (int i = 0; i < size; i++) {
          sigma( static_cast<double>(values[i]) );
       }
    }
@@ -163,10 +126,10 @@ inline double Statistic::absMean() const
 // returns the variance
 inline double Statistic::variance() const
 {
-   double var {};
-   unsigned long n1 {n - 1};
+   double var{};
+   int n1{n - 1};
    double sqTheSum {sum * sum};
-   double numer {(n * (sumSq )) - sqTheSum};
+   double numer{(n * (sumSq )) - sqTheSum};
    // due to round-off error, numerator can end up less than zero!
    // if so, variance is very, very small, therefore set to zero.
    if (numer < 0.0) {

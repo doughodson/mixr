@@ -17,14 +17,14 @@ class Identifier;
 // Description: Stores a longitude coordinate expressed in terms of a direction
 //              {east or west}, degrees, minutes and seconds.  Can convert
 //              this representation into decimal degrees.
-//
+//------------------------------------------------------------------------------
 // Factory name: Longitude
+//------------------------------------------------------------------------------
 // Slots:
 //    direction <Identifier>  ! Set the direction { east, west } (default: none)
 //    degrees   <Number>      ! Set the degrees component (default: 0)
 //    minutes   <Number>      ! Set the minutes component (default: 0)
 //    seconds   <Number>      ! Set the seconds component (default: 0.0)
-//
 //------------------------------------------------------------------------------
 class Longitude : public Object
 {

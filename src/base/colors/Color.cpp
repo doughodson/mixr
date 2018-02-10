@@ -4,9 +4,6 @@
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 
-#include "mixr/base/numeric/Number.hpp"
-#include <iostream>
-
 namespace mixr {
 namespace base {
 
@@ -14,7 +11,7 @@ IMPLEMENT_SUBCLASS(Color, "Color")
 EMPTY_SLOTTABLE(Color)
 EMPTY_DELETEDATA(Color)
 
-double Color::defaultAlpha {1.0};
+double Color::defaultAlpha{1.0};
 
 Color::Color()
 {
@@ -31,9 +28,6 @@ void Color::copyData(const Color& org, const bool)
    color = org.color; 
 }
 
-//------------------------------------------------------------------------------
-// data access functions
-//------------------------------------------------------------------------------
 Color::operator const Vec3d*() const
 {
     // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
@@ -84,10 +78,6 @@ const Vec4d* Color::getRGBA() const
     return &color;
 }
 
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
 bool Color::setRed(const double value)
 {
     bool ok{value >= 0 && value <= 1};
@@ -116,9 +106,6 @@ bool Color::setAlpha(const double value)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// Comparison operators: == and !=
-//------------------------------------------------------------------------------
 bool operator==(const Color& c1, const Color& c2)
 {
     return (c1.getRGBA() == c2.getRGBA());
@@ -129,17 +116,12 @@ bool operator!=(const Color& c1, const Color& c2)
     return (c1.getRGBA() != c2.getRGBA());
 }
 
-//------------------------------------------------------------------------------
-// getDefaultAlpha() -- returns the default alpha value
-//------------------------------------------------------------------------------
+// returns the default alpha value
 double Color::getDefaultAlpha()
 {
    return defaultAlpha;
 }
 
-//------------------------------------------------------------------------------
-// setDefaultAlpha()
-//------------------------------------------------------------------------------
 void Color::setDefaultAlpha(const double alpha)
 {
     defaultAlpha = alpha;

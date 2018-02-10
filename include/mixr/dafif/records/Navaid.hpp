@@ -2,7 +2,9 @@
 #ifndef __mixr_dafif_Navaid_H__
 #define __mixr_dafif_Navaid_H__
 
-#include "Record.hpp"
+#include "mixr/dafif/records/Record.hpp"
+
+#include <string>
 
 namespace mixr {
 namespace dafif {
@@ -11,7 +13,7 @@ namespace dafif {
 // Class: Navaid
 // Description: Access to the DAFIF NAVAID database.
 //------------------------------------------------------------------------------
-class Navaid : public Record
+class Navaid final: public Record
 {
    DECLARE_SUBCLASS(Navaid, Record)
 
@@ -25,7 +27,7 @@ public:
 
 public:
    Navaid();
-   Navaid(const char* const s);
+   Navaid(const std::string& s);
 
    // Returns the NAVAID type.
    NavaidType navaidType() const;
@@ -49,16 +51,13 @@ public:
    float range() const;             // Range field.
    float slaveVariance() const;     // Slave Variance field.
 
-   void printRecord(std::ostream& sout) const override;
-   void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const override;
+   void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const final;
 
 private:
    static const Ptbl ptable;
-};
 
-//------------------------------------------------------------------------------
-// inline member functions
-//------------------------------------------------------------------------------
+   void printRecordImpl(std::ostream& sout) const final;
+};
 
 // frequency: returns the value of the frequency field
 inline float Navaid::frequency() const

@@ -18,13 +18,13 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: Component
-//
 // Description: Base class for all components.  Components provide
 //              a common interface for time critical and non-time critical tasks,
 //              and for passing event messages.  Any component can be a container
 //              for a list of components.
-//
+//------------------------------------------------------------------------------
 // Factory name: Component
+//------------------------------------------------------------------------------
 // Slots:
 //    components           <Component>  ! Single child component (default: 0)
 //                         <PairStream> ! List of child components.
@@ -44,6 +44,7 @@ class String;
 //    disableMessageType   <Identifier> ! Disable message type { warning, info, debug, data, user }
 //                         <Integer>    ! Disable message type by number (e.g., 0x0100) (default: 0)
 //
+//------------------------------------------------------------------------------
 // Events:
 //    SELECT          <String>    ! Select a child component by name.
 //    SELECT          <Integer>   ! Select a child component by index.

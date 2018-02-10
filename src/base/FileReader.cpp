@@ -1,14 +1,14 @@
 
-#include <fstream>
-#include <cstring>
-
 #include "mixr/base/FileReader.hpp"
 
 #include "mixr/base/String.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/util/str_utils.hpp"
+
+#include <fstream>
+#include <string>
+#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -39,8 +39,8 @@ void FileReader::copyData(const FileReader& org, const bool)
    // Close the old file (we'll need to open() the new one)
    if (dbf != nullptr) dbf->close();
 
-   utStrcpy(pathname, PATHNAME_LENGTH, org.pathname);
-   utStrcpy(filename, FILENAME_LENGTH, org.filename);
+   pathname = org.pathname;
+   filename = org.filename;
 
    rnum = org.rnum;
    crnum = org.crnum;
@@ -64,9 +64,7 @@ void FileReader::deleteData()
    }
 }
 
-//------------------------------------------------------------------------------
-// isReady() -- Returns true we're ready to get records
-//------------------------------------------------------------------------------
+// Returns true we're ready to get records
 bool FileReader::isReady()
 {
    bool ready{};
@@ -76,35 +74,21 @@ bool FileReader::isReady()
    return ready;
 }
 
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
-// setPathname() -- sets the path name (limit to 255 chars)
-bool FileReader::setPathname(const char* const path)
+// sets the path name
+bool FileReader::setPathname(const std::string& path)
 {
-   bool ok{};
-   if (path != nullptr) {
-      utStrncpy(pathname, (PATHNAME_LENGTH-1), path, (PATHNAME_LENGTH-1));
-      pathname[PATHNAME_LENGTH-1] = '\0';
-      ok = true;
-   }
-   return ok;
+   pathname = path;
+   return true;
 }
 
-// setFilename() -- sets the file name (limit to 255 chars)
-bool FileReader::setFilename(const char* const file)
+// sets the file name
+bool FileReader::setFilename(const std::string& file)
 {
-   bool ok{};
-   if (file != nullptr) {
-      utStrncpy(filename, (FILENAME_LENGTH-1), file, (FILENAME_LENGTH-1));
-      filename[FILENAME_LENGTH-1] = '\0';
-      ok = true;
-   }
-   return ok;
+   filename = file;
+   return true;
 }
 
-// setRecordLength() -- sets the record length & creates the internal buffer
+// sets the record length & creates the internal buffer
 bool FileReader::setRecordLength(const int len)
 {
    if (rlen != len) {
@@ -119,9 +103,6 @@ bool FileReader::setRecordLength(const int len)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// Set slot functions
-//------------------------------------------------------------------------------
 bool FileReader::setSlotPathname(String* const msg)
 {
    bool ok{};
@@ -149,17 +130,10 @@ bool FileReader::setSlotRecordLength(const Integer* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// Open
-//------------------------------------------------------------------------------
 bool FileReader::open()
 {
    // Create the full file name
-   const std::size_t FILE_LENGTH {512}; // Max length of file
-   char file[FILE_LENGTH] {};
-   utStrcpy(file, FILE_LENGTH, pathname);
-   utStrcat(file, FILE_LENGTH, "/");
-   utStrcat(file, FILE_LENGTH, filename);
+   std::string file = pathname + "/" + filename;
 
    // Open the file ...
    if (dbf != nullptr) {
@@ -169,6 +143,10 @@ bool FileReader::open()
       // Create the input stream
       dbf = new std::ifstream();
    }
+
+   std::cout << "File being opened\n";
+   std::cout << "filename : " << file << std::endl;
+
    dbf->open(file);
    dbf->clear();
 
@@ -177,26 +155,22 @@ bool FileReader::open()
    return (dbf->is_open());
 }
 
-
-//------------------------------------------------------------------------------
-// getRecord() --
-//------------------------------------------------------------------------------
 const char* FileReader::getRecord(const int nn, const int ll)
 {
    // return nothing if we're not ready (e.g., the record length has not been set)
    if ( !isReady() ) return nullptr;
 
    // Set record number
-   int n {nn};
+   int n{nn};
    if (n == -1) n = rnum;
    else rnum = n;
 
    // Set length to read
-   int len {ll};
+   int len{ll};
    if (len == 0) len = rlen;
 
    // Read the record
-   bool ok {};
+   bool ok{};
    if (!dbf->seekg(rlen*(n-1), std::ios::beg).eof()) {
       dbf->read(rec, len);
       if (!dbf->eof() && !dbf->fail()) ok = true;
@@ -206,8 +180,7 @@ const char* FileReader::getRecord(const int nn, const int ll)
       crnum = rnum;
       rec[len] = '\0';
       return rec;
-   }
-   else {
+   } else {
       dbf->clear();
       crnum = -1;
       return nullptr;

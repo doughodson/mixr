@@ -13,8 +13,9 @@ class Number;
 //------------------------------------------------------------------------------
 // Class: Complex
 // Description: Generic complex number class
-//
+//------------------------------------------------------------------------------
 // Factory name: Complex
+//------------------------------------------------------------------------------
 // Slots:
 //     real  <Number>  ! real value (default: 0.0)
 //     imag  <Number>  ! imaginary value (default: 0.0)

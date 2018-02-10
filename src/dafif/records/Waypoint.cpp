@@ -1,4 +1,7 @@
-#include "mixr/dafif/Waypoint.hpp"
+
+#include "mixr/dafif/records/Waypoint.hpp"
+
+#include <string>
 #include <iostream>
 
 namespace mixr {
@@ -30,7 +33,7 @@ Waypoint::Waypoint()
    ptbl = &ptable;
 }
 
-Waypoint::Waypoint(const char* const s) : Record(s)
+Waypoint::Waypoint(const std::string& s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
@@ -39,7 +42,7 @@ Waypoint::Waypoint(const char* const s) : Record(s)
 //------------------------------------------------------------------------------
 // Printing functions
 //------------------------------------------------------------------------------
-void Waypoint::printRecord(std::ostream& sout) const
+void Waypoint::printRecordImpl(std::ostream& sout) const
 {
    char icas[32];
    icaoCode(icas);

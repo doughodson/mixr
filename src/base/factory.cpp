@@ -5,11 +5,15 @@
 
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/Statistic.hpp"
-#include "mixr/base/Transforms.hpp"
 #include "mixr/base/Timers.hpp"
 
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
+
+// transformations
+#include "mixr/base/transformations/Translation.hpp"
+#include "mixr/base/transformations/Rotation.hpp"
+#include "mixr/base/transformations/Scale.hpp"
 
 // relation classes (functions and tables)
 #include "mixr/base/relations/Func1.hpp"

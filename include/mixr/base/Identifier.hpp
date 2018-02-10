@@ -16,9 +16,9 @@ namespace base {
 // Description: A single unquoted word (usually from the input file), which
 //              can contain upper and lower case letters, numbers, special
 //              characters, but not spaces.
-//
-// Note: When setting the identifier, any spaces will be replaced
-//       with underscores.
+//------------------------------------------------------------------------------
+// Notes: When setting the identifier, any spaces will be replaced
+//        with underscores.
 //------------------------------------------------------------------------------
 class Identifier final: public Object
 {

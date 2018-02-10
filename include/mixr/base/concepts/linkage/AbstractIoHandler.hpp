@@ -10,12 +10,12 @@ class AbstractIoData;
 
 //------------------------------------------------------------------------------
 // Class: AbstractIoHandler
-//
 // Description: Handles the flow of data to/from devices.
 //
 //    Data flowing to/from devices is buffered using application specific
 //    data objects (AbstractIoData).
 //
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Data received from the hardware and sent to the simulation
 //       software is "input" data, and data received from the simulation
@@ -23,7 +23,6 @@ class AbstractIoData;
 //
 //    2) As an option, asynchronous processing of the flow of data to/from
 //       devices be started by calling the startAsyncProcessing() method
-//
 //------------------------------------------------------------------------------
 class AbstractIoHandler : public Component
 {

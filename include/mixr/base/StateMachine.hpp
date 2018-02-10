@@ -13,23 +13,23 @@ class PairStream;
 //------------------------------------------------------------------------------
 // Class: StateMachine
 // Description: Abstract State Machine class
-//
+//------------------------------------------------------------------------------
+// Slots:
+//    stateMachines   <PairStream>  ! List of state machines that are used to
+//                                  ! implement our states.
+//------------------------------------------------------------------------------
+// Events:
+//    ON_ENTRY    ! Entering the state machine
+//    ON_RETURN   ! Returning from a (sub) state machine.
+//    ON_EXIT     ! Exiting the state machine
+//------------------------------------------------------------------------------
+// Notes:
 //    Your finite state machines are implemented as derived classes.  States are
 //    identified by unique state numbers and are implemented using "state functions"
 //    or other state machines.  The state functions implement the state's actions,
 //    check input conditions, determine transitions, and perform the transition
 //    actions.  A "state table" is used to map state numbers to these state functions
 //    and macros (see macros.hpp) are used to define the state table.
-//
-// Slots:
-//    stateMachines   <PairStream>  ! List of state machines that are used to
-//                                  ! implement our states. (default: 0)
-//
-// Events:
-//    ON_ENTRY    ! Entering the state machine
-//    ON_RETURN   ! Returning from a (sub) state machine.
-//    ON_EXIT     ! Exiting the state machine
-//
 //
 // State numbers
 //
@@ -38,7 +38,6 @@ class PairStream;
 //    machine will transition to INIT_STATE with the previous state set
 //    to INVALID_STATE.  All other state numbers are user defined and
 //    are mapped to the state functions using the state table.
-//
 //
 // State functions:
 //
@@ -194,8 +193,7 @@ class PairStream;
 //    )
 //
 //
-// Examples of state machines can be found in the MIXR
-// example application 'testStateMach'.
+// Examples of state machines can be found in the MIXR example application 'testStateMach'.
 //------------------------------------------------------------------------------
 class StateMachine : public Component
 {
@@ -319,29 +317,29 @@ private:
    void initData();
 
    // Next state
-   unsigned short nState {INVALID_STATE};     // Next state number
-   unsigned short nSubstate {INVALID_STATE};  // Next substate number
+   unsigned short nState{INVALID_STATE};      // Next state number
+   unsigned short nSubstate{INVALID_STATE};   // Next substate number
    safe_ptr<Object> nArg;                     // Next argument
    Mode nMode {Mode::HOLD_STATE};             // Next mode
 
    // Current state
-   unsigned short state {INVALID_STATE};      // Current state number
-   unsigned short substate {INVALID_STATE};   // Current substate number
+   unsigned short state{INVALID_STATE};       // Current state number
+   unsigned short substate{INVALID_STATE};    // Current substate number
    Mode mode {Mode::HOLD_STATE};              // Current mode
    safe_ptr<Object> arg;                      // Current argument
-   StateMachine* stMach {};                   // Current state's state machine object
-   Identifier* stMachName {};                 // Current state's state machine name
+   StateMachine* stMach{};                    // Current state's state machine object
+   Identifier* stMachName{};                  // Current state's state machine name
 
    // Previous state
-   unsigned short pState {INVALID_STATE};     // Previous state number
-   unsigned short pSubstate {INVALID_STATE};  // Previous substate number
-   StateMachine* pStMach {};                  // Previous state's state machine object
+   unsigned short pState{INVALID_STATE};      // Previous state number
+   unsigned short pSubstate{INVALID_STATE};   // Previous substate number
+   StateMachine* pStMach{};                   // Previous state's state machine object
 
    // State stack and stack pointer
-   static const unsigned short STACK_SIZE = 10;
-   std::array<unsigned short, STACK_SIZE> stateStack {};     // State number stack
-   std::array<unsigned short, STACK_SIZE> substateStack {};  // Substate number stack
-   unsigned short sp {STACK_SIZE};                           // Stack pointer
+   static const unsigned short STACK_SIZE{10};
+   std::array<unsigned short, STACK_SIZE> stateStack{};     // State number stack
+   std::array<unsigned short, STACK_SIZE> substateStack{};  // Substate number stack
+   unsigned short sp{STACK_SIZE};                           // Stack pointer
 
    // List of state machines
    safe_ptr<PairStream> stMachList;

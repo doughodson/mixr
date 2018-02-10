@@ -11,13 +11,12 @@ class List;
 
 //------------------------------------------------------------------------------
 // Class: Table2
-//
 // Description: 2D LFI data table
-//
+//------------------------------------------------------------------------------
 // Factory name: Table2
+//------------------------------------------------------------------------------
 // Slots:
-//    y    <List>  Independent variable #2 (iv2) points
-//
+//    y    <List>  ! Independent variable #2 (iv2) points
 //------------------------------------------------------------------------------
 class Table2 : public Table1
 {
@@ -53,8 +52,8 @@ protected:
    bool loadData(const List& list, double* const table) override;
 
 private:
-   double* ytable {};    // Y Breakpoint Table
-   unsigned int ny {};   // Number of y breakpoints
+   double* ytable{};    // Y Breakpoint Table
+   unsigned int ny{};   // Number of y breakpoints
 };
 
 }
