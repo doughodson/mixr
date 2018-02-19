@@ -14,7 +14,10 @@ class Table;
 // Class: Func1
 // Description: Generic 1-Dimensional function; f(iv1)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Func1
+// Slots: none
 //------------------------------------------------------------------------------
 class Func1 : public Function
 {

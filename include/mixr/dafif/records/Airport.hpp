@@ -13,6 +13,11 @@ namespace dafif {
 // Class: Airport
 // Description: DAFIF Airport record class
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Airport
+// Slots: none
+//------------------------------------------------------------------------------
 class Airport final: public Record
 {
    DECLARE_SUBCLASS(Airport, Record)

@@ -13,12 +13,16 @@ namespace dafif {
 // Class: Ils
 // Description: Access to the DAFIF ILS records.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Ils
+// Slots: none
+//------------------------------------------------------------------------------
 class Ils final: public Record
 {
    DECLARE_SUBCLASS(Ils,Record)
 
 public:
-
    Ils();
    Ils(const std::string&);
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_NumericReadout_H__
 #define __mixr_graphics_NumericReadout_H__
 
-#include "mixr/graphics/readouts/AbstractField.hpp"
+#include "mixr/graphics/readouts/Readout.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -13,9 +13,10 @@ class ReformatScanner;
 
 //------------------------------------------------------------------------------
 // Class: NumericReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: NumericReadout
-//
 // Slots:
 //   value           <Float>     ! Value to be displayed (default: 0.0)
 //   value           <Integer>   ! Value to be displayed
@@ -30,7 +31,7 @@ class ReformatScanner;
 //   maxValid        <Number>    ! Maximum valid input (default: UNDEFINED_VALUE)
 //   minValid        <Number>    ! Minimum valid input (default: UNDEFINED_VALUE)
 //   blankIfZero     <Boolean>   ! Display blanks if value is zero
-//
+//------------------------------------------------------------------------------
 // Example formats:
 //
 //    ######    // Integer
@@ -41,48 +42,33 @@ class ReformatScanner;
 //    +##.##    // Float w/plus sign, 2 right of decimal point
 //    00#.##    // Float w/2 right of decimal point & leading zeros
 //    +0#.##    // Float w/plus sign, 2 right of decimal point, & leading zeros
-//
-// Public Member Functions:
-//  int getInt()
-//      Returns num as an int.
-//
-//  double getFloat()
-//      Returns num. (native)
-//
-//  setValue(int v)
-//  setValue(double v)
-//      Sets num to v as an double (in both cases) then redisplays the value.
-//
-//  setMaxValue(int v)
-//  setMaxValue(double v)
-//      Sets maxNum to v as an double (in both cases) then redisplays the value.
-//
-//  double getInputValue()
-//      Gets the input value.
-//
-//  bool isInputValueValid()
-//      Checks the input value and returns true if it is valid.
-//
 //------------------------------------------------------------------------------
-class NumericReadout : public AbstractField
+class NumericReadout : public Readout
 {
-   DECLARE_SUBCLASS(NumericReadout, AbstractField)
+   DECLARE_SUBCLASS(NumericReadout, Readout)
 
 public:
    NumericReadout();
 
+   // get num as an int
    int getInt() const                           { return static_cast<int>(num); }
+   // get num as a float
    double getFloat() const                      { return num; }
 
+   // sets num to v as an double (in both cases) then redisplays the value
    void setValue(const int v)                   { num = static_cast<double>(v); redisplay(); }
    void setValue(const double v)                { num = v; redisplay(); }
 
+   // sets maxNum to v as an double (in both cases) then redisplays the value
    void setMaxValue(const int v)                { maxNum = static_cast<double>(v); redisplay(); }
    void setMaxValue(const double v)             { maxNum = v; redisplay(); }
 
+   // gets the input value
    double getInputValue() const override;
+   // checks the input value and returns true if it is valid
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const int tc) override;
+
    bool event(const int key, base::Object* const obj = nullptr) override;
    void updateData(const double dt = 0.0) override;
 

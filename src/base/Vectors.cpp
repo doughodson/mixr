@@ -21,9 +21,9 @@ EMPTY_DELETEDATA(RVector)
 //------------------------------------------------------------------------------
 bool RVector::isZeroVector() const
 {
-   bool ok {true};
-   const unsigned int SIZE {getSize()};
-   unsigned int k {};
+   bool ok{true};
+   const unsigned int SIZE{getSize()};
+   unsigned int k{};
    while (ok && k < SIZE) {
       ok = ((*this)[k++] == 0.0);
    }
@@ -35,8 +35,8 @@ bool RVector::isZeroVector() const
 //------------------------------------------------------------------------------
 double RVector::getNorm() const
 {
-   double x {};
-   const unsigned SIZE {getSize()};
+   double x{};
+   const unsigned SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
       x += (*this)[i] * (*this)[i];
    }
@@ -50,7 +50,7 @@ bool RVector::normalize()
 {
    if (isZeroVector()) return false;
 
-   const double sf {1.0 / getNorm()};
+   const double sf{1.0 / getNorm()};
    multiply(sf);
    return true;
 }
@@ -63,7 +63,7 @@ bool RVector::fillWith(const double x)
    if (!isGoodVector())
       return false;
 
-   const unsigned int SIZE {getSize()};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
       (*this)[i] = x;
    }
@@ -75,12 +75,12 @@ bool RVector::fillWith(const double x)
 //------------------------------------------------------------------------------
 double RVector::getMaxMag() const
 {
-   double val {(*this)[0]};
-   double max {std::fabs(val)};
-   const unsigned int SIZE {getSize()};
+   double val{(*this)[0]};
+   double max{std::fabs(val)};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
-      const double t {(*this)[i]};
-      const double x {std::fabs(t)};
+      const double t{(*this)[i]};
+      const double x{std::fabs(t)};
       if (max < x) {
          max = x;
          val = t;
@@ -94,12 +94,12 @@ double RVector::getMaxMag() const
 //------------------------------------------------------------------------------
 double RVector::getMinMag() const
 {
-   double val {(*this)[0]};
-   double min {std::fabs(val)};
-   const unsigned int SIZE {getSize()};
+   double val{(*this)[0]};
+   double min{std::fabs(val)};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
-      const double t {(*this)[i]};
-      const double x {std::fabs(t)};
+      const double t{(*this)[i]};
+      const double x{std::fabs(t)};
       if (min > x) {
          min = x;
          val = t;
@@ -149,9 +149,9 @@ EMPTY_DELETEDATA(CVector)
 //------------------------------------------------------------------------------
 bool CVector::isZeroVector() const
 {
-   bool ok {true};
-   const unsigned int SIZE {getSize()};
-   unsigned int k {};
+   bool ok{true};
+   const unsigned int SIZE{getSize()};
+   unsigned int k{};
    while (ok && k < SIZE) {
       ok = ((*this)[k++] == 0.0);
    }
@@ -163,8 +163,8 @@ bool CVector::isZeroVector() const
 //------------------------------------------------------------------------------
 double CVector::getNorm() const
 {
-   double x {};
-   const unsigned int SIZE {getSize()};
+   double x{};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
       x += (*this)[i] * (*this)[i];
    }
@@ -178,7 +178,7 @@ bool CVector::normalize()
 {
    if (isZeroVector()) return false;
 
-   double sf {1.0 / getNorm()};
+   double sf{1.0 / getNorm()};
    multiply(sf);
    return true;
 }
@@ -191,7 +191,7 @@ bool CVector::fillWith(const double x)
    if (!isGoodVector())
       return false;
 
-   const unsigned int SIZE {getSize()};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
       (*this)[i] = x;
    }
@@ -203,12 +203,12 @@ bool CVector::fillWith(const double x)
 //------------------------------------------------------------------------------
 double CVector::getMaxMag() const
 {
-   double val {(*this)[0]};
-   double max {std::fabs(val)};
-   const unsigned int SIZE {getSize()};
+   double val{(*this)[0]};
+   double max{std::fabs(val)};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
-      double t {(*this)[i]};
-      double x {std::fabs(t)};
+      double t{(*this)[i]};
+      double x{std::fabs(t)};
       if (max < x) {
          max = x;
          val = t;
@@ -222,12 +222,12 @@ double CVector::getMaxMag() const
 //------------------------------------------------------------------------------
 double CVector::getMinMag() const
 {
-   double val {(*this)[0]};
-   double min {std::fabs(val)};
-   const unsigned int SIZE {getSize()};
+   double val{(*this)[0]};
+   double min{std::fabs(val)};
+   const unsigned int SIZE{getSize()};
    for (unsigned int i = 0; i < SIZE; i++) {
-      double t {(*this)[i]};
-      double x {std::fabs(t)};
+      double t{(*this)[i]};
+      double x{std::fabs(t)};
       if (min > x) {
          min = x;
          val = t;

@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/readouts/AbstractField.hpp"
+#include "mixr/graphics/readouts/Readout.hpp"
 
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Page.hpp"
@@ -16,9 +16,9 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(AbstractField, "AbstractField")
+IMPLEMENT_ABSTRACT_SUBCLASS(Readout, "AbstractReadout")
 
-BEGIN_SLOTTABLE(AbstractField)
+BEGIN_SLOTTABLE(Readout)
     "position",         // 1) Starting Position ( ln cp )
     "width",            // 2) Field width
     "highLight",        // 3) Highlight text flag
@@ -31,9 +31,9 @@ BEGIN_SLOTTABLE(AbstractField)
     "inheritColor",     //10) Inherit color of our container (instead of using default color)
     "font",             //11) Type of font to use before drawing
     "startCharPos",     //12) Our starting character position (we may want to skip!)
-END_SLOTTABLE(AbstractField)
+END_SLOTTABLE(Readout)
 
-BEGIN_SLOT_MAP(AbstractField)
+BEGIN_SLOT_MAP(Readout)
     ON_SLOT(1,  setSlotPosition,      base::List)
     ON_SLOT(2,  setSlotWidth,         base::Integer)
     ON_SLOT(3,  setSlotHighlight,     base::Boolean)
@@ -48,7 +48,7 @@ BEGIN_SLOT_MAP(AbstractField)
     ON_SLOT(12, setSlotStartCharPos,  base::Integer)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(AbstractField)
+BEGIN_EVENT_HANDLER(Readout)
     if (mode == Mode::INPUT) {
         bool kb {( _event >= 0x20 && _event <= 0x7f )};
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
@@ -75,13 +75,13 @@ BEGIN_EVENT_HANDLER(AbstractField)
     ON_EVENT_OBJ(SET_JUSTIFICATION, setSlotJustification, base::Identifier)
 END_EVENT_HANDLER()
 
-AbstractField::AbstractField()
+Readout::Readout()
 {
     STANDARD_CONSTRUCTOR()
     jmode = base::String::Justify::NONE;
 }
 
-void AbstractField::copyData(const AbstractField& org, const bool)
+void Readout::copyData(const Readout& org, const bool)
 {
     BaseClass::copyData(org);
     origStr = org.origStr;
@@ -102,7 +102,7 @@ void AbstractField::copyData(const AbstractField& org, const bool)
     setSlotFont(org.fontName);
 }
 
-void AbstractField::deleteData()
+void Readout::deleteData()
 {
     origStr.empty();
     inputExample.empty();
@@ -122,7 +122,7 @@ void AbstractField::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void AbstractField::updateData(const double dt)
+void Readout::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -153,33 +153,9 @@ void AbstractField::updateData(const double dt)
 }
 
 //------------------------------------------------------------------------------
-// line() -- set the line number
-// column() -- set the column number
-//------------------------------------------------------------------------------
-int AbstractField::line(const int ll)
-{
-    return (ln = ll);
-}
-
-int AbstractField::line() const
-{
-    return ln;
-}
-
-int AbstractField::column(const int cc)
-{
-    return (cp = cc);
-}
-
-int AbstractField::column() const
-{
-    return cp;
-}
-
-//------------------------------------------------------------------------------
 // withinField() -- Return True/False if cp,ln is in the field space
 //------------------------------------------------------------------------------
-bool AbstractField::withinField(const int l, const int c) const
+bool Readout::withinField(const int l, const int c) const
 {
     bool stat {};
     if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
@@ -189,7 +165,7 @@ bool AbstractField::withinField(const int l, const int c) const
 //------------------------------------------------------------------------------
 // setText() -- set the field's text string
 //------------------------------------------------------------------------------
-void AbstractField::setText(const char s[])
+void Readout::setText(const char s[])
 {
     origStr = s;
     if (mode == Mode::DISPLAY) {
@@ -200,12 +176,12 @@ void AbstractField::setText(const char s[])
 //------------------------------------------------------------------------------
 // justification() --
 //------------------------------------------------------------------------------
-base::String::Justify AbstractField::justification() const
+base::String::Justify Readout::justification() const
 {
     return jmode;
 }
 
-base::String::Justify AbstractField::justification(const base::String::Justify t)
+base::String::Justify Readout::justification(const base::String::Justify t)
 {
     jmode = t;
     if (mode == Mode::DISPLAY) adjust();
@@ -215,7 +191,7 @@ base::String::Justify AbstractField::justification(const base::String::Justify t
 //------------------------------------------------------------------------------
 // setMode() -- set the mode of the field (display, input)
 //------------------------------------------------------------------------------
-AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
+Readout::Mode Readout::setMode(const Readout::Mode nmode)
 {
     Mode omode = mode;
     mode = nmode;
@@ -231,8 +207,7 @@ AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
         if (startCP > 0 && startCP < w) icp = startCP;
         else icp = 0;
 
-    }
-    else if (nmode == Mode::DISPLAY && omode == Mode::INPUT) {
+    } else if (nmode == Mode::DISPLAY && omode == Mode::INPUT) {
 
         // When we're leaving the INPUT mode ...
 
@@ -258,14 +233,14 @@ AbstractField::Mode AbstractField::setMode(const AbstractField::Mode nmode)
 //------------------------------------------------------------------------------
 
 // isValidInputPosition() -- Makes sure the position is valid for input
-bool AbstractField::isValidInputPosition(const int tc)
+bool Readout::isValidInputPosition(const int tc)
 {
     return (tc == '+' || tc == '0' || tc == '#' ||
             tc == 'D' || tc == 'H' || tc == 'M' || tc == 'S');
 }
 
 // filterInputEvent() -- Filter input events using a template character (tc)
-char AbstractField::filterInputEvent(const int event, const int tc)
+char Readout::filterInputEvent(const int event, const int tc)
 {
     if (tc == '+') {
         // Default sign keys
@@ -290,13 +265,13 @@ char AbstractField::filterInputEvent(const int event, const int tc)
 
 }
 
-int AbstractField::setExample(const char* const example)
+int Readout::setExample(const char* const example)
 {
     inputExample = example;
     return static_cast<int>(inputExample.len());
 }
 
-void AbstractField::advanceSpace(const int ns)
+void Readout::advanceSpace(const int ns)
 {
     if (mode != Mode::INPUT) return;
     icp += ns;
@@ -308,7 +283,7 @@ void AbstractField::advanceSpace(const int ns)
     }
 }
 
-void AbstractField::backSpace(const int ns)
+void Readout::backSpace(const int ns)
 {
    if (mode != Mode::INPUT) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
@@ -326,7 +301,7 @@ void AbstractField::backSpace(const int ns)
    }
 }
 
-bool AbstractField::setInputCharacterPosition(const unsigned int ii)
+bool Readout::setInputCharacterPosition(const unsigned int ii)
 {
     if (startCP > 0) {
         if (ii >= startCP) icp = ii;
@@ -336,7 +311,7 @@ bool AbstractField::setInputCharacterPosition(const unsigned int ii)
 }
 
 
-char AbstractField::getChar()
+char Readout::getChar()
 {
     if (mode == Mode::INPUT)
         return str.getChar(icp);
@@ -344,37 +319,30 @@ char AbstractField::getChar()
         return '\0';
 }
 
-void AbstractField::setChar(const char c)
+void Readout::setChar(const char c)
 {
     if (mode != Mode::INPUT) return;
     str.setChar(icp,c);
     advanceSpace();
 }
 
-double AbstractField::getInputValue() const
+double Readout::getInputValue() const
 {
     return 0.0;
 }
 
-bool AbstractField::isInputValueValid() const
+bool Readout::isInputValueValid() const
 {
     return true;
 }
 
-
-//------------------------------------------------------------------------------
-// onForwardSpace() --
-//------------------------------------------------------------------------------
-bool AbstractField::onForwardSpace()
+bool Readout::onForwardSpace()
 {
     advanceSpace();
     return true;
 }
 
-//------------------------------------------------------------------------------
-// onBackSpace() --
-//------------------------------------------------------------------------------
-bool AbstractField::onBackSpace()
+bool Readout::onBackSpace()
 {
     backSpace();
     return true;
@@ -384,7 +352,7 @@ bool AbstractField::onBackSpace()
 // cursor() -- Returns true if text cursor should be seen within this
 //             object and the position of the cursor.
 //------------------------------------------------------------------------------
-bool AbstractField::cursor(int* l, int* c) const
+bool Readout::cursor(int* l, int* c) const
 {
     if (mode == Mode::INPUT) {
         *l = ln;
@@ -401,7 +369,7 @@ bool AbstractField::cursor(int* l, int* c) const
 //------------------------------------------------------------------------------
 // draw this text field
 //------------------------------------------------------------------------------
-void AbstractField::drawFunc()
+void Readout::drawFunc()
 {
     // Get a pointer to the current display
     graphics::Display* dsp {getDisplay()};
@@ -410,9 +378,9 @@ void AbstractField::drawFunc()
     // ---
     // When our container is also a Field, get a pointer to it.
     // ---
-    graphics::AbstractField* parent {};
+    Readout* parent {};
     if (container() != nullptr) {
-        const auto fp = dynamic_cast<graphics::AbstractField*>(container());
+        const auto fp = dynamic_cast<Readout*>(container());
         if (fp != nullptr) parent = fp;
     }
 
@@ -492,7 +460,7 @@ void AbstractField::drawFunc()
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
 //------------------------------------------------------------------------------
-bool AbstractField::setPosition(const base::List* const spobj)
+bool Readout::setPosition(const base::List* const spobj)
 {
     bool ok {true};
     if (spobj != nullptr) {
@@ -511,31 +479,31 @@ bool AbstractField::setPosition(const base::List* const spobj)
     return ok;
 }
 
-bool AbstractField::onSetLine(const base::Integer* const oslobj)
+bool Readout::onSetLine(const base::Integer* const oslobj)
 {
     if (oslobj != nullptr) line(oslobj->asInt());
     return true;
 }
 
-bool AbstractField::onSetColumn(const base::Integer* const oscobj)
+bool Readout::onSetColumn(const base::Integer* const oscobj)
 {
    if (oscobj != nullptr) column(oscobj->asInt());
    return true;
 }
 
-bool AbstractField::setSlotPosition(const base::List* const spobj)
+bool Readout::setSlotPosition(const base::List* const spobj)
 {
    return setPosition(spobj);
 }
 
-bool AbstractField::setSlotWidth(const base::Integer* const swobj)
+bool Readout::setSlotWidth(const base::Integer* const swobj)
 {
 
     if (swobj != nullptr) width(swobj->asInt());
     return true;
 }
 
-bool AbstractField::setSlotHighlight(const base::Boolean* const shobj)
+bool Readout::setSlotHighlight(const base::Boolean* const shobj)
 {
     if (shobj != nullptr) {
         // Set our mode
@@ -552,7 +520,7 @@ bool AbstractField::setSlotHighlight(const base::Boolean* const shobj)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractField*>(p->object());
+                const auto child = dynamic_cast<Readout*>(p->object());
                 if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
             }
@@ -564,7 +532,7 @@ bool AbstractField::setSlotHighlight(const base::Boolean* const shobj)
     return true;
 }
 
-bool AbstractField::setSlotUnderline(const base::Boolean* const suobj)
+bool Readout::setSlotUnderline(const base::Boolean* const suobj)
 {
     if (suobj != nullptr) {
 
@@ -585,7 +553,7 @@ bool AbstractField::setSlotUnderline(const base::Boolean* const suobj)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractField*>(p->object());
+                const auto child = dynamic_cast<Readout*>(p->object());
                 if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
             }
@@ -597,7 +565,7 @@ bool AbstractField::setSlotUnderline(const base::Boolean* const suobj)
     return true;
 }
 
-bool AbstractField::setSlotReversed(const base::Boolean* const srobj)
+bool Readout::setSlotReversed(const base::Boolean* const srobj)
 {
     if (srobj != nullptr) {
 
@@ -618,7 +586,7 @@ bool AbstractField::setSlotReversed(const base::Boolean* const srobj)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractField*>(p->object());
+                const auto child = dynamic_cast<Readout*>(p->object());
                 if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
             }
@@ -630,7 +598,7 @@ bool AbstractField::setSlotReversed(const base::Boolean* const srobj)
     return true;
 }
 
-bool AbstractField::setSlotVertical(const base::Boolean* const ssobj)
+bool Readout::setSlotVertical(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -646,7 +614,7 @@ bool AbstractField::setSlotVertical(const base::Boolean* const ssobj)
     return true;
 }
 
-bool AbstractField::setSlotBrackets(const base::Boolean* const ssobj)
+bool Readout::setSlotBrackets(const base::Boolean* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -662,7 +630,7 @@ bool AbstractField::setSlotBrackets(const base::Boolean* const ssobj)
     return true;
 }
 
-bool AbstractField::setSlotLinked(const base::Boolean* const msg)
+bool Readout::setSlotLinked(const base::Boolean* const msg)
 {
     if (msg != nullptr) {
         setLinked( msg->asBool() );
@@ -670,7 +638,7 @@ bool AbstractField::setSlotLinked(const base::Boolean* const msg)
     return true;
 }
 
-bool AbstractField::setSlotInheritColor(const base::Boolean* const ic)
+bool Readout::setSlotInheritColor(const base::Boolean* const ic)
 {
     bool ok {};
     if (ic != nullptr) {
@@ -679,7 +647,7 @@ bool AbstractField::setSlotInheritColor(const base::Boolean* const ic)
     return ok;
 }
 
-bool AbstractField::setSlotJustification(const base::Identifier* const sjobj)
+bool Readout::setSlotJustification(const base::Identifier* const sjobj)
 {
     bool ok {true};
     if (sjobj != nullptr) {
@@ -707,7 +675,7 @@ bool AbstractField::setSlotJustification(const base::Identifier* const sjobj)
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractField*>(p->object());
+                const auto child = dynamic_cast<Readout*>(p->object());
                 if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
             }
@@ -719,7 +687,7 @@ bool AbstractField::setSlotJustification(const base::Identifier* const sjobj)
     return ok;
 }
 
-bool AbstractField::setSlotFont(const base::Identifier* const font)
+bool Readout::setSlotFont(const base::Identifier* const font)
 {
     bool ok{};
     if (fontName != nullptr) fontName->unref();
@@ -732,7 +700,7 @@ bool AbstractField::setSlotFont(const base::Identifier* const font)
     return ok;
 }
 
-bool AbstractField::setSlotStartCharPos(const base::Integer* const msg)
+bool Readout::setSlotStartCharPos(const base::Integer* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

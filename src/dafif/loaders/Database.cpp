@@ -15,7 +15,7 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Database, "Database")
+IMPLEMENT_ABSTRACT_SUBCLASS(Database, "AbstractDatabase")
 
 BEGIN_SLOTTABLE(Database)
     "pathname",      // 1) Path to the file

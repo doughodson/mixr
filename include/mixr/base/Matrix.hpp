@@ -16,7 +16,10 @@ class RVector; // Row vector
 // Class: Matrix
 // Description:  Generic NxM matrix class
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Matrix
+// Slots: none
 //------------------------------------------------------------------------------
 // Notes: References
 //    "Introduction to Numerical Analysis", 2ed, Kendall E. Atkinson, Wiley (1989)

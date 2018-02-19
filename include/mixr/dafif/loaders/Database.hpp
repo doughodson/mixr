@@ -17,6 +17,13 @@ namespace dafif {
 // Description: Abstract class used to access DAFIF databases; both file
 //              loaders and network clients.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractDatabase
+// Slots:
+//    pathname  <String>   ! Path to location of file
+//    filename  <String>   ! Filename to open
+//------------------------------------------------------------------------------
 //  Notes:
 //
 //   1) Many of the member functions of this DAFIF database manager class and

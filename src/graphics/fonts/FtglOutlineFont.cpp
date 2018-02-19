@@ -1,9 +1,10 @@
 
 #include "mixr/graphics/fonts/FtglOutlineFont.hpp"
 
-#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/filesystem_utils.hpp"
 
 #include <iostream>
+#include <string>
 
 #include <FTGL/ftgl.h>
 
@@ -121,22 +122,8 @@ void FtglOutlineFont::loadFont()
 {
     if (isLoaded()) return;
 
-    // Check for required parameters
-    if( filename() == nullptr ) {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglOutlineFont::loadFont() - no ttf file" << std::endl;
-        }
-        return;
-    }
-
-    // Generate filename
-    const std::size_t FONTPATHNAME_LENGTH {256};
-    char fontPathname[FONTPATHNAME_LENGTH] {};
-    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-
-    const auto ftglFont = new FTGLOutlineFont(fontPathname);
+    std::string fontPathname{base::buildPath(fontDirectory(), filename())};
+    const auto ftglFont = new FTGLOutlineFont(fontPathname.c_str());
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());

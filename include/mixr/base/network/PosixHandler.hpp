@@ -15,12 +15,16 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: PosixHandler
-// Description: General (connectionless) network handler: Can be used for UDP/IP,
-//              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
-//              and can be used to send data, receive data, or both.
+// Description: Abstract (connectionless) network handler that include Posix
+//              oriented methods to support UDP/IP, TCP/IP, Multicast and Broadcast.
+//              Each handler manages a socket and can be used to send data, receive
+//              data, or both.
 //
 // Windows: using Winsock2.h; link with Ws2_32.lib
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractPosixHandler
 // Slots:
 //    localIpAddress    ! IP address in Internet standard "." (dotted) notation
 //                      ! written as a string "127.0.0.1"

@@ -45,14 +45,14 @@ const char* SlotTable::name(const int slotindex) const
    // early out if it's not between 1 .. n()
    if (slotindex == 0 || slotindex > n()) return nullptr;
 
-   const char* name {};
+   const char* name{};
 
    // check base table first
    if (baseTable != nullptr) name = baseTable->name(slotindex);
 
    // if not in baseTable, check our table
    if (name == nullptr) {
-      int i = static_cast<int>(slotindex);            // a) start with slotindex
+      int i{static_cast<int>(slotindex)};             // a) start with slotindex
       if (baseTable != nullptr) i -= baseTable->n();  // b) subt baseTable->n()
       --i;                                            // c) make it zero based
       if (i >= 0) name = slots1[i];                   // d) get the name
@@ -66,12 +66,12 @@ const char* SlotTable::name(const int slotindex) const
 //------------------------------------------------------------------------------
 int SlotTable::index(const char* const slotname) const
 {
-   int i {};
+   int i{};
 
    // First, check our slot names
    {
       // search our table
-      int j {};
+      int j{};
       for (j = 0; j < nslots1; j++) {
          if (std::strcmp(slotname, slots1[j]) == 0) break;
       }

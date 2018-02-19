@@ -29,7 +29,6 @@ OBJS =  \
 	fonts/FtglPolygonFont.o \
 	fonts/FtglTextureFont.o \
 	fonts/StrokeFont.o \
-	readouts/AbstractField.o \
 	readouts/AsciiText.o \
 	readouts/Cursor.o \
 	readouts/DirectionReadout.o \
@@ -38,6 +37,8 @@ OBJS =  \
 	readouts/LongitudeReadout.o \
 	readouts/NumericReadout.o \
 	readouts/OctalReadout.o \
+	readouts/readout_utils.o \
+	readouts/Readout.o \
 	readouts/ReformatScanner.o \
 	readouts/Rotary.o \
 	readouts/Rotary2.o \

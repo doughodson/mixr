@@ -64,7 +64,6 @@ TcpClient::TcpClient()
 void TcpClient::copyData(const TcpClient& org, const bool)
 {
     BaseClass::copyData(org);
-
     ipAddr = org.ipAddr;
 }
 
@@ -74,7 +73,7 @@ void TcpClient::copyData(const TcpClient& org, const bool)
 bool TcpClient::initNetwork(const bool noWaitFlag)
 {
     noWait = noWaitFlag;
-    bool ok {BaseClass::initNetwork(false)};
+    bool ok{BaseClass::initNetwork(false)};
     if (ok) {
         ok = connectToServer();
         if (!ok && isMessageEnabled(MSG_ERROR)) {
@@ -90,7 +89,7 @@ bool TcpClient::initNetwork(const bool noWaitFlag)
 bool TcpClient::init()
 {
    // Init the base class
-   bool success {BaseClass::init()};
+   bool success{BaseClass::init()};
    if (!success) return false;
 
    // Find our network address
@@ -109,7 +108,7 @@ bool TcpClient::bindSocket()
    // ---
    // Our base class will bind the socket
    // ---
-   bool ok {BaseClass::bindSocket()};
+   bool ok{BaseClass::bindSocket()};
 
    if (ok) {
       if (!setSendBuffSize()) return false;

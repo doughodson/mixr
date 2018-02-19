@@ -15,7 +15,7 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Record, "Record")
+IMPLEMENT_ABSTRACT_SUBCLASS(Record, "AbstractRecord")
 EMPTY_SLOTTABLE(Record)
 
 Record::Record()

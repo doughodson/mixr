@@ -14,7 +14,10 @@ class Table;
 // Class: Func3
 // Description: Generic 3-Dimensional function; f(iv1, iv2, iv3)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Func3
+// Slots: none
 //------------------------------------------------------------------------------
 class Func3 : public Function
 {

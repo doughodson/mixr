@@ -11,9 +11,11 @@ namespace base {
 // Class: Add
 // Description: Class for adding Numbers
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: "+"
-//------------------------------------------------------------------------------
-// Notes:
+// Slots: none
+// Example:
 //        ( + val n2 ) gives val plus n2
 //------------------------------------------------------------------------------
 class Add final: public Operator

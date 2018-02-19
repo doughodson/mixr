@@ -16,6 +16,11 @@ class AbstractIoData;
 //    data objects (AbstractIoData).
 //
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractIoHandler
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //    1) Data received from the hardware and sent to the simulation
 //       software is "input" data, and data received from the simulation

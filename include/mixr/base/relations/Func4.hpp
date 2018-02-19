@@ -14,7 +14,10 @@ class Table;
 // Class: Func4
 // Description: Generic 4-Dimensional function; f(iv1, iv2, iv3, iv4)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Func4
+// Slots: none
 //------------------------------------------------------------------------------
 class Func4 : public Function
 {

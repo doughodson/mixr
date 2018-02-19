@@ -14,8 +14,9 @@ namespace base {
 //              values from the Extensible Description Language (EDL) to C++
 //              code that consumes that specification.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Boolean
-//------------------------------------------------------------------------------
 // Slots:
 //     value  <Boolean>  ! Sets the value (default: false)
 //------------------------------------------------------------------------------

@@ -12,6 +12,11 @@ namespace base {
 // Description:  Abstract class for number-based objects (Float, Integer) and 
 //               numerical operators (Add, Subtract, Multiply and Divide)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractNumber
+// Slots: none
+//------------------------------------------------------------------------------
 class Number : public Object
 {
    DECLARE_SUBCLASS(Number, Object)

@@ -15,12 +15,13 @@ class String;
 // Class: FileReader
 // Description: Manages the reading of fixed record length files
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: FileReader
-//------------------------------------------------------------------------------
 // Slots:
-//     pathname     <String>      ! Path to the file (default: "")
-//     filename     <String>      ! File name (appended to pathname) (default: "")
-//     recordLength <Integer>     ! Length (in characters) of the records (default: 0)
+//     pathname      <String>      ! Path to the file (default: "")
+//     filename      <String>      ! File name (appended to pathname) (default: "")
+//     recordLength  <Integer>     ! Length (in characters) of the records (default: 0)
 //------------------------------------------------------------------------------
 // Notes:
 //

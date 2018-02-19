@@ -22,6 +22,11 @@ class AbstractIoData;
 //    data buffers (AbstractIoData) and devices (AbstractIoDevice).
 //
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractIoDevice
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //    1) All Channel (and port) numbers start with zero;
 //       example: AI channels range from 0 to (getNumAnalogInputs() - 1)

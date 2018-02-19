@@ -9,10 +9,12 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: LongitudeReadout
-// Base class:  Object > Graphic > Field > NumericReadout > DirectionReadout > LongitudeReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: LongitudeReadout
-//
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //    1) see the 'DirectionReadout' notes
 //    2) The '+ char is replaced with 'E', and the '-' char is replaced with 'W'
@@ -32,12 +34,12 @@ namespace graphics {
 //    0DD@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LongitudeReadout : public DirectionReadout
+class LongitudeReadout final: public DirectionReadout
 {
     DECLARE_SUBCLASS(LongitudeReadout, DirectionReadout)
 public:
     LongitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    char filterInputEvent(const int event, const int tc) final;
 protected:
    //virtual void makeText();
 };

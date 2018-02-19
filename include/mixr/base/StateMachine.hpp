@@ -12,8 +12,11 @@ class PairStream;
 
 //------------------------------------------------------------------------------
 // Class: StateMachine
-// Description: Abstract State Machine class
+// Description: Abstract state machine class
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractStateMachine
 // Slots:
 //    stateMachines   <PairStream>  ! List of state machines that are used to
 //                                  ! implement our states.

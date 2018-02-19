@@ -11,9 +11,11 @@ namespace base {
 // Class: Divide
 // Description: Class for dividing Numbers
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: "/"
-//------------------------------------------------------------------------------
-// Notes:
+// Slots: none
+// Example:
 //        ( / val n2 ) gives val divided by n2
 //------------------------------------------------------------------------------
 class Divide final: public Operator

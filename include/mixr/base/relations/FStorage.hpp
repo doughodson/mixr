@@ -13,6 +13,11 @@ namespace base {
 //              Use Function::storageFactory() to generate pre-ref()'d
 //              FStorage objects.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: FStorage
+// Slots: none
+//------------------------------------------------------------------------------
 class FStorage : public Object
 {
    DECLARE_SUBCLASS(FStorage, Object)

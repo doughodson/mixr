@@ -14,8 +14,9 @@ class Number;
 // Class: Table1
 // Description: 1D LFI data table
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Table1
-//------------------------------------------------------------------------------
 // Slots:
 //    x    <List>  ! Independent variable #1 (iv1) points
 //------------------------------------------------------------------------------
@@ -51,8 +52,8 @@ protected:
    bool loadData(const List& list, double* const table) override;
 
 private:
-   double* xtable {};    // X Breakpoint Table
-   unsigned int nx {};   // Number of x breakpoints
+   double* xtable{};    // X Breakpoint Table
+   unsigned int nx{};   // Number of x breakpoints
 };
 
 }

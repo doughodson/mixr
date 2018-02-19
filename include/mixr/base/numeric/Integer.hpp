@@ -11,8 +11,9 @@ namespace base {
 // Class: Integer
 // Description: Class that stores an EDL defined (regex) integer value as a C++ int
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Integer
-//------------------------------------------------------------------------------
 // Slots:
 //     value  <Integer>  ! Sets the value of this number (default: 0)
 //------------------------------------------------------------------------------

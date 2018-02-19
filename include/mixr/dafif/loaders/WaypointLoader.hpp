@@ -15,6 +15,11 @@ namespace dafif {
 // Class: WaypointLoader
 // Description: Concrete DAFIF Waypoint file class (FILE3)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: WaypointLoader
+// Slots: none
+//------------------------------------------------------------------------------
 class WaypointLoader final: public Database
 {
    DECLARE_SUBCLASS(WaypointLoader,Database)

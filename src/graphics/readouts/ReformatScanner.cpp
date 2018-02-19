@@ -1729,7 +1729,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 
 /*** Flex declarations and Options ***/
 /* generate a C++ scanner class */
-/* no calls to yywrap */
+/* no calls to yywrap - meaning do not call yywrap at end of scanning a specific file */
 /* suppress inclusion of unistd.h file */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "rfFlexLexer" */
@@ -1927,70 +1927,70 @@ case 3:
 YY_RULE_SETUP
 #line 48 "reformat_scanner.l"
 {   // HH:MM:SS (Hours, minutes and seconds)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::hhmmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 52 "reformat_scanner.l"
 {   // HH:MM (Hours and minutes)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hhmm, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::hhmm, yytext, yyleng);
                               }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 56 "reformat_scanner.l"
 {   // HH (Hours)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::hh, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::hh, yytext, yyleng);
                               }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 60 "reformat_scanner.l"
 {   // MM:SS (Minutes and seconds)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mmss, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::mmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 64 "reformat_scanner.l"
 {   // MM (Minutes)
-                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::mm, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::mm, yytext, yyleng);
                               }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 68 "reformat_scanner.l"
 {  // SS (Seconds)
-                                 return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeReadout::TimeMode::ss, yytext, yyleng);
+                                 return mixr::graphics::ReformatScanner::processTime(mixr::graphics::TimeMode::ss, yytext, yyleng);
                               }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 72 "reformat_scanner.l"
 {   // +DDMMSS (Degrees, minutes and seconds)
-                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmmss, yytext, yyleng);
+                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirMode::ddmmss, yytext, yyleng);
                                         }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 76 "reformat_scanner.l"
 {   // +DDMM (Degrees and minutes)
-                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::ddmm, yytext, yyleng);
+                                            return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirMode::ddmm, yytext, yyleng);
                                         }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 80 "reformat_scanner.l"
 {   // +DD (Degrees)
-                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirMode::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 84 "reformat_scanner.l"
 {   // +DD (Degrees)
-                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirectionReadout::DirMode::dd, yytext, yyleng);
+                                  return mixr::graphics::ReformatScanner::processDirection(mixr::graphics::DirMode::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 13:
@@ -3081,7 +3081,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
 // processTime() -- process a time format string
 //    Take in a format such as "0MSS.S" and return "%02d%04.1f".
 //------------------------------------------------------------------------------
-int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* text, const int len)
+int ReformatScanner::processTime(const TimeMode tm, const char* text, const int len)
 {
    // If not a time data type, exit with an error
    if (dataType != DataType::time)
@@ -3251,7 +3251,7 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
 //    Take in a format such as "+120@23'43.2"" and return
 //    "+%03d@%02d'%4.1f""
 //------------------------------------------------------------------------------
-int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const char* text, const int len)
+int ReformatScanner::processDirection(const DirMode dm, const char* text, const int len)
 {
    // If not a directional type, return error
    if (dataType != DataType::dir)
@@ -3497,12 +3497,12 @@ ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 // Explicitly convert a time value.  This expects a format such
 // as "0H:MM:SS.S" as input.  And returns "%02d:%02d:%04.1f" as
 // output.
-TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
+TimeMode ReformatScanner::convertTime(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return TimeReadout::TimeMode(yylex(DataType::time));
+   return TimeMode(yylex(DataType::time));
 
 // for flex 2.6.0
 // std::string str(s);
@@ -3517,12 +3517,12 @@ TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 // Explicitly convert a directional value. This expects a format
 // such as "+DDD@MM.M" as input.  And returns "+%03d@%04.1f" as
 // output.
-DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
+DirMode ReformatScanner::convertDirection(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return DirectionReadout::DirMode(yylex(DataType::dir));
+   return DirMode(yylex(DataType::dir));
 
 // for flex 2.6.0
 // std::string str(s);

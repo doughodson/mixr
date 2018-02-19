@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Color, "Color")
+IMPLEMENT_ABSTRACT_SUBCLASS(Color, "AbstractColor")
 EMPTY_SLOTTABLE(Color)
 EMPTY_DELETEDATA(Color)
 

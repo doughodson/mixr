@@ -15,6 +15,11 @@ namespace dafif {
 // Class: NavaidLoader
 // Description: Concrete DAFIF NAVAID file class (FILE2)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: NavaidLoader
+// Slots: none
+//------------------------------------------------------------------------------
 class NavaidLoader final: public Database
 {
    DECLARE_SUBCLASS(NavaidLoader, Database)

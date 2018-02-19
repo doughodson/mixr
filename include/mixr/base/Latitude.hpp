@@ -18,8 +18,9 @@ class Identifier;
 //              {north or south}, degrees, minutes and seconds.  Can convert
 //              this represntation into decimal degrees.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Latitude
-//------------------------------------------------------------------------------
 // Slots:
 //    direction <Identifier>  ! Set the direction { north, south } (default: none)
 //    degrees   <Number>      ! Set the degrees component (default: 0)

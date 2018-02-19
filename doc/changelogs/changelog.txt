@@ -366,6 +366,7 @@ base library (mixr_base)
          const base::Vec4d* p = static_cast<const base::Vec4d*>(*color);
          // or even better (shorter, and still obvious)
          const auto p = static_cast<const base::Vec4d*>(*color);
+      2) This class is now abstract
 
 
    -------------------
@@ -378,23 +379,31 @@ base library (mixr_base)
          (e.g., 'localhost')
       2) Internally, 'localIpAddress' is now stored as a std::string
       3) Slot parameter 'shared' now accepts a Boolean
+      4) This class is now abstract
 
    TcpClient class
       1) Slot parameter 'ipAddress' now accepts both a String and Identifier with
          the same functionality as PosixHandler class changes
       2) Internally, 'ipAddress' is now stored as a std::string
+      3) Class now marked final
+
+   TcpHandler class
+      1) Class is now abstract
 
    UdpBroadcastHandler class
       1) Internally, 'networkMask' is now being stored as a std::string
+      2) Class now marked final
    
    UdpMulticastHandler class
       1) Internally, 'multicastGroup' is now being stored as a std::string
       2) Slot parameter 'loopback' now accepts a Boolean
+      3) Class now marked final
 
    UdpUnicastHandler class
       1) Slot parameter 'ipAddress; now accepts both a String and Identifier with
          the same functionality as PosixHandler class changes
       2) Internally, ipAddr is now being stored as a std::string
+      3) Class now marked final
 
    -------------------
    - Numeric classes -
@@ -611,6 +620,23 @@ Graphics oriented libraries
 --------------------------------------------------------------------------------
 graphics library (mixr_graphics)
 
+   -------------------
+   - Font classes -
+   -------------------
+
+   AbstractFont class
+      1) Font file name and path information not stored as an std::string. All
+         subclasses that use this information (namely the loaders) have been
+         adjusted -- a significant amount of code associated with managing
+         null and non-null, variable length char*-based strings disappeared.
+
+   BitmapFont class
+      1) Slot parameter 'reverse' now accepts a Boolean
+
+   -------------------
+   - Readout classes -
+   -------------------
+
    AbstractField class
       1) Slot parameter 'justification' now accepts an Identifier
       2) Slot parameter 'font' now accepts an Identifier
@@ -618,9 +644,23 @@ graphics library (mixr_graphics)
          'brackets', 'linked' and 'inheritColor' now accepts a Boolean
       4) removed implicit conversion operators for both 'char*' and
          'const char*'
-   
-   BitmapFont class
-      1) Slot parameter 'reverse' now accepts a Boolean
+      5) Class renamed to 'Readout'
+
+   NumericReadout class
+      1) Slot parameter for 'blankIfZero' now accepts a Boolean
+
+   Readout class
+      1) This class is what was once named AbstractField.  It was renamed to
+         'Readout' as it's the root class for all readout classes
+      2) The methods line(const int) and column(const int) now returns void,
+         as opposed to the very value just set
+
+   Rotary2 class
+      1) Event handler for 'onSelect' now accepts a Boolean
+
+   -------------------
+   - Other classes -
+   -------------------
 
    Display class
       1) Slot parameters for 'normalFont' and 'orientation' now accept and correctly
@@ -633,10 +673,6 @@ graphics library (mixr_graphics)
       2) Slot parameters 'noDisplayList', 'subcomponentsFirst', 'stipple', 'visible'
          and 'mask' now accepts a Boolean
 
-
-   NumericReadout class
-      1) Slot parameter for 'blankIfZero' now accepts a Boolean
-
    MapPage class
       1) Event handler for 'onUpdateCentered' now accepts a Boolean
       2) Slot parameter 'centered' now accepts a Boolean
@@ -645,9 +681,6 @@ graphics library (mixr_graphics)
    Page class
       1) Slot parameter for 'subpagesFirst' and 'focusSlavedToSubpage' now
          accepts a Boolean 
-
-   Rotary2 class
-      1) Event handler for 'onSelect' now accepts a Boolean
 
    Shape classes
       1) Slot parameter for 'filled' in Cirle class now accepts Boolean
@@ -659,7 +692,6 @@ graphics library (mixr_graphics)
    SymbolLoader class
       1) Slot parameters 'showOnlyInRange' and 'interconnect' now accept a
          Boolean
-
 
 --------------------------------------------------------------------------------
 

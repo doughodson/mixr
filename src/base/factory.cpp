@@ -40,7 +40,6 @@
 #include "mixr/base/numeric/operators/Subtract.hpp"
 
 // network handlers
-#include "mixr/base/network/TcpHandler.hpp"
 #include "mixr/base/network/TcpClient.hpp"
 #include "mixr/base/network/TcpServerMultiple.hpp"
 #include "mixr/base/network/TcpServerSingle.hpp"

@@ -24,26 +24,24 @@ class String;
 //              The local port must be defined if you're going to be changing
 //              the destination port.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: UdpUnicastHandler
-//------------------------------------------------------------------------------
 // Slots:
 //      ipAddress  <String>     ! Destination host name or IP address "111.122.133.144" string
 //                              ! (default: found via local host name)
 //      ipAddress  <Identifier> ! Destination host name identifier (e.g., 'localhost') to be
 //                              ! used to look up a particular address
-//------------------------------------------------------------------------------
-// Notes:
 //
-// Input File Example:
+// Example:
 //
 //        ( UdpUnicastHandler
 //           ipAddress: hostname    // Destination host name
 //           port: 2010             // Destination port
 //           localPort: 2011        // Local port to send from
 //        )
-//
 //------------------------------------------------------------------------------
-class UdpUnicastHandler : public PosixHandler
+class UdpUnicastHandler final: public PosixHandler
 {
    DECLARE_SUBCLASS(UdpUnicastHandler, PosixHandler)
 
@@ -68,8 +66,8 @@ public:
       );
 
 protected:
-   bool init() override;
-   bool bindSocket() override;
+   bool init() final;
+   bool bindSocket() final;
 
 private:
    std::string ipAddr;   // host name or IP address

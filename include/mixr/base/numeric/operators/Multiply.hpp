@@ -11,9 +11,11 @@ namespace base {
 // Class: Multiply
 // Description: Class for multiplying Numbers
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: "*"
-//------------------------------------------------------------------------------
-// Notes:
+// Slots: none
+// Example:
 //        ( * val n2 ) gives val multiplied by n2
 //------------------------------------------------------------------------------
 class Multiply final: public Operator

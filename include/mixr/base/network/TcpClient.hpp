@@ -15,41 +15,39 @@ class String;
 // Class: TcpClient
 // Description: Client side of a single TCP/IP connection.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: TcpClient
-//------------------------------------------------------------------------------
 // Slots:
 //      ipAddress  <String>     ! Destination IP address specified as a String (e.g., "111.122.133.144")
 //                              ! (default: found via local host name)
 //      ipAddress  <Identifier> ! Destination host name specified as an Identifier to be
 //                              ! used to look up a particular address
-//------------------------------------------------------------------------------
-// Notes:
 //
-// Input File Example:
+// Example:
 //
 //        ( TcpClient
 //             ipAddress: hostname    // Server host name
 //             port: 2010             // Server port
 //        )
-//
-// Note: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
 //------------------------------------------------------------------------------
-class TcpClient : public TcpHandler
+// Notes: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
+//------------------------------------------------------------------------------
+class TcpClient final: public TcpHandler
 {
     DECLARE_SUBCLASS(TcpClient, TcpHandler)
 
 public:
     TcpClient();
 
-    bool initNetwork(const bool noWaitFlag) override;
+    bool initNetwork(const bool noWaitFlag) final;
 
 protected:
     const char* getIpAddress()  { return ipAddr.c_str(); }
     bool connectToServer();      // Connect to the server
 
-    bool init() override;
-
-    bool bindSocket() override;
+    bool init() final;
+    bool bindSocket() final;
 
 private:
     std::string ipAddr;    // host name or IP address

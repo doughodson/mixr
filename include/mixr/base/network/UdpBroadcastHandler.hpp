@@ -15,14 +15,13 @@ class Number;
 // Class: UdpBroadcastHandler
 // Description: UDP broadcast network handler
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: UdpBroadcastHandler
-//------------------------------------------------------------------------------
 // Slots:
 //       networkMask  <String>    ! host network mask  (e.g., "255.255.255.255")
-//------------------------------------------------------------------------------
-// Notes:
 //
-// Input File Example:
+// Example:
 //
 //        ( UdpBroadcastHandler
 //           localIpAddress: "224.0.0.251"  // Local host IP address
@@ -31,9 +30,8 @@ class Number;
 //           localPort: 2011                // Port to send from
 //           shared: true                   // Shared port
 //        )
-//
 //------------------------------------------------------------------------------
-class UdpBroadcastHandler : public PosixHandler
+class UdpBroadcastHandler final: public PosixHandler
 {
     DECLARE_SUBCLASS(UdpBroadcastHandler, PosixHandler)
 
@@ -41,8 +39,8 @@ public:
     UdpBroadcastHandler();
 
 protected:
-    bool init() override;
-    bool bindSocket() override;
+    bool init() final;
+    bool bindSocket() final;
 
 private:
     std::string networkMask;

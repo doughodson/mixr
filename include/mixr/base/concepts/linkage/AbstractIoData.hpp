@@ -16,7 +16,11 @@ namespace base {
 //
 //    The main input and output data buffers are typically managed by an I/O
 //    handler class (see AbstractIoHander).
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
+// Factory name: AbstractIoData
+// Slots: none
 //------------------------------------------------------------------------------
 // Notes:
 //    1) Inputs from hardware are called Analog Inputs (AI) and Discrete Inputs (DI)

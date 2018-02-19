@@ -18,8 +18,9 @@ class Identifier;
 //              {east or west}, degrees, minutes and seconds.  Can convert
 //              this representation into decimal degrees.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Longitude
-//------------------------------------------------------------------------------
 // Slots:
 //    direction <Identifier>  ! Set the direction { east, west } (default: none)
 //    degrees   <Number>      ! Set the degrees component (default: 0)

@@ -11,8 +11,9 @@ namespace base {
 // Class: Float
 // Description: Class that stores an EDL defined (regex) float point value as a C++ double
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Float
-//------------------------------------------------------------------------------
 // Slots:
 //     value  <Float>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------

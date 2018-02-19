@@ -80,7 +80,7 @@ bool Timer::setTimerValue(const double sec)  { timerValue = sec; return true; }
 
 bool Timer::freeze(const bool ff)
 {
-    bool f {frz};
+    bool f{frz};
     frz = ff;
     return f;
 }
@@ -112,7 +112,7 @@ void Timer::updateTimers(const double dt)
 // -----------------------------------------------------------------
 void Timer::addToTimerList(Timer* timer)
 {
-   bool ok {};
+   bool ok{};
    lock( semaphore );
    if (nTimers < MAX_TIMERS) {
       timers[nTimers++] = timer;
@@ -158,7 +158,7 @@ void Timer::removeFromTimerList(Timer* timer)
 // Sets the timer value
 bool Timer::setSlotTimerValue(const Time* const x)
 {
-   bool ok {};
+   bool ok{};
    if (x != nullptr) {
       double sec{x->getValueInSeconds()};
       ok = setTimerValue(sec);
@@ -170,7 +170,7 @@ bool Timer::setSlotTimerValue(const Time* const x)
 // Sets the alarm value
 bool Timer::setSlotAlarmTime(const Time* const x)
 {
-   bool ok {};
+   bool ok{};
    if (x != nullptr) {
       ok = setAlarmTime(x->getValueInSeconds());
     }
@@ -180,7 +180,7 @@ bool Timer::setSlotAlarmTime(const Time* const x)
 // Sets the timer active (running) flag
 bool Timer::setSlotTimerActive(const Boolean* const msg)
 {
-   bool ok {};
+   bool ok{};
    if (msg != nullptr) {
       active = msg->asBool();
       ok = true;

@@ -15,11 +15,11 @@ class List;
 
 //------------------------------------------------------------------------------
 // Class: MonitorMetrics
-//
 // Description:  Defines the characteristics of a monitor, needed to accurately match color.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: MonitorMetrics
-//------------------------------------------------------------------------------
 // Slots:
 //     red       <Table1>   ! Red luminance vs RGB level ( both luminance and RGB level range from 0..1 )
 //                          ! (Default: redLumTbl)
@@ -31,13 +31,6 @@ class List;
 //     whiteCIE  <List>     ! CIE coordinate of reference white ( 3 element list ) (default: whiteCIE)
 //------------------------------------------------------------------------------
 // Events: None
-//
-//
-// Public methods: Base class public methods, plus ...
-//
-//
-//     cie2rgb(Vec4d& rgba, const Vec3d& cie)
-//         Convert a CIE color into an RGB value for this monitor.
 //------------------------------------------------------------------------------
 class MonitorMetrics : public Object
 {

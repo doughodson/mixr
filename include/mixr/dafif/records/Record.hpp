@@ -15,6 +15,11 @@ namespace dafif {
 // Class: Record
 // Description: Abstract class used to access DAFIF record information
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AbstractRecord
+// Slots: none
+//------------------------------------------------------------------------------
 class Record : public base::Object
 {
    DECLARE_SUBCLASS(Record, base::Object)

@@ -4,13 +4,13 @@
 #include "mixr/graphics/Graphic.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-
-#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/filesystem_utils.hpp"
 
 #include "mixr/base/String.hpp"
 #include "mixr/base/colors/Color.hpp"
 
 #include <iostream>
+#include <string>
 
 #include <FTGL/ftgl.h>
 
@@ -56,7 +56,7 @@ void FtglHaloFont::deleteData()
 //------------------------------------------------------------------------------
 void FtglHaloFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool rf)
 {
-    GLfloat ocolor[4] {};
+    GLfloat ocolor[4]{};
     glGetFloatv(GL_CURRENT_COLOR, ocolor);
 
     // Make sure we have characters to print
@@ -69,7 +69,7 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
     }
 
     // Prepare the output text
-    char cbuf[MSG_BUF_LEN] {};
+    char cbuf[MSG_BUF_LEN]{};
     int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
@@ -121,9 +121,9 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
             // Vertical text
-            GLdouble dy {getLineSpacing()};
+            GLdouble dy{getLineSpacing()};
             if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
-            char cc[2] {};
+            char cc[2]{};
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
@@ -144,7 +144,7 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
 
 void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const bool rf)
 {
-    GLfloat ocolor[4] {};
+    GLfloat ocolor[4]{};
     glGetFloatv(GL_CURRENT_COLOR, ocolor);
 
     // Make sure we have characters to print
@@ -156,8 +156,8 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
         if (isNotLoaded()) throw new ExpInvalidFont();
     }
     // Prepare the output text
-    char cbuf[MSG_BUF_LEN] {};
-    int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
+    char cbuf[MSG_BUF_LEN]{};
+    int nn{xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
     if (haloColor != nullptr) Graphic::lcColor3(haloColor->red(), haloColor->green(), haloColor->blue());
@@ -169,16 +169,16 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
         if (outline != nullptr) {
             glPushMatrix();
             // get our current linewidth
-            GLfloat lw {};
+            GLfloat lw{};
             glGetFloatv(GL_LINE_WIDTH, &lw);
             glLineWidth(linewidth);
             glTranslatef(0,0,-0.01f);
             glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
             if (vf) {
                 // Vertical text
-                GLdouble dy {getLineSpacing()};
+                GLdouble dy{getLineSpacing()};
                 if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
-                char cc[2] {};
+                char cc[2]{};
                 cc[1] = '\0';
                 for (int i = 0; i < nn; i++) {
                     cc[0] = cbuf[i];
@@ -206,9 +206,9 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
             // Vertical text
-            GLdouble dy = getLineSpacing();
+            GLdouble dy{getLineSpacing()};
             if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
-            char cc[2] {};
+            char cc[2]{};
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
@@ -230,23 +230,8 @@ void FtglHaloFont::loadFont()
 {
     if (isLoaded()) return;
 
-    // Check for required parameters
-
-    if ( filename() == nullptr ) {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglHaloFont::loadFont() - no ttf file" << std::endl;
-        }
-        return;
-    }
-
-    // Generate filename
-    const std::size_t FONTPATHNAME_LENGTH {256};
-    char fontPathname[FONTPATHNAME_LENGTH] {};
-    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-
-    const auto ftglFont = new FTGLPolygonFont(fontPathname);
+    std::string fontPathname{base::buildPath(fontDirectory(), filename())};
+    const auto ftglFont = new FTGLPolygonFont(fontPathname.c_str());
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -262,7 +247,7 @@ void FtglHaloFont::loadFont()
     }
 
     // now create the outline font over it
-    outline = new FTGLOutlineFont(fontPathname);
+    outline = new FTGLOutlineFont(fontPathname.c_str());
     if (outline != nullptr && !outline->Error()) {
         // set the face size
         outline->FaceSize(getFaceSize());
@@ -291,7 +276,7 @@ bool FtglHaloFont::setSlotHaloColor(base::Color* x)
 
 bool FtglHaloFont::setSlotLinewidth(const base::Number* const x)
 {
-    bool ok {};
+    bool ok{};
     if (x != nullptr) {
         linewidth = static_cast<float>(x->asDouble());
         ok = true;

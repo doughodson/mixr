@@ -7,17 +7,16 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/util/str_utils.hpp"
-
 #include <cstring>
+#include <string>
 
 namespace mixr {
 namespace graphics {
 
 IMPLEMENT_PARTIAL_SUBCLASS(AbstractFont, "AbstractFont")
 
-const double defaultFontWidth {1.0};
-const double defaultFontHeight {1.0};
+const double defaultFontWidth{1.0};
+const double defaultFontHeight{1.0};
 
 BEGIN_SLOTTABLE(AbstractFont)
         "fontWidth",
@@ -107,20 +106,9 @@ void AbstractFont::copyData(const AbstractFont& org, const bool cc)
 
    pFTGL = org.pFTGL;
 
-   if (fontPath != nullptr) delete[] fontPath;
-   if (fontFile != nullptr) delete[] fontFile;
-   fontPath = nullptr;
-   fontFile = nullptr;
-   if (org.fontPath != nullptr) {
-      std::size_t len {std::strlen(org.fontPath)};
-      fontPath = new char[len+1];
-      base::utStrcpy(fontPath,len+1,org.fontPath);
-   }
-   if (org.fontFile != nullptr) {
-      std::size_t len {std::strlen(org.fontFile)};
-      fontFile = new char[len+1];
-      base::utStrcpy(fontFile,len+1,org.fontFile);
-   }
+   fontPath = org.fontPath;
+   fontFile = org.fontFile;
+
    loaded = org.loaded;
 
    charSpacing = org.charSpacing;
@@ -136,12 +124,6 @@ void AbstractFont::deleteData()
 {
    if (pLUT != nullptr) delete[] pLUT;
    pLUT = nullptr;
-
-   if (fontPath != nullptr) delete[] fontPath;
-   fontPath = nullptr;
-
-   if (fontFile != nullptr) delete[] fontFile;
-   fontFile = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -245,19 +227,17 @@ bool AbstractFont::setSlotBitmapHeight(const base::Integer* const sbhobj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-//  setSlotFontPath() - sets the path to the font directory
-//------------------------------------------------------------------------------
+// set font path
 bool AbstractFont::setSlotFontPath(const base::String* const str)
 {
-    bool ok = true;
+    bool ok{true};
     if (str != nullptr) {
-        std::size_t j {str->len()};
+        std::size_t j{str->len()};
         if (j > 0) {
-            fontPath = new char[j+1];
-            base::utStrcpy(fontPath, j+1, (*str).c_str());
-        }
-        else {
+            fontPath = str->c_str();
+//            fontPath = new char[j+1];
+//            base::utStrcpy(fontPath, j+1, (*str).c_str());
+        } else {
               if (isMessageEnabled(MSG_ERROR)) {
                   std::cerr << "Font::setFontPath: Invalid font path value" << std::endl;
               }
@@ -276,10 +256,10 @@ bool AbstractFont::setSlotFTGLFontFileName(const base::String* const str)
     if (str != nullptr) {
         std::size_t j = str->len();
         if (j > 0) {
-            fontFile = new char[j+1];
-            base::utStrcpy(fontFile, j+1, (*str).c_str());
-        }
-        else {
+            fontFile = str->c_str();
+//            fontFile = new char[j+1];
+//            base::utStrcpy(fontFile, j+1, (*str).c_str());
+        } else {
            if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Font::setFTGLFontFileName: File name invalid or missing" << std::endl;
            }

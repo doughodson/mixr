@@ -9,9 +9,12 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: LatitudeReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: LatitudeReadout
-//
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //    1) see the 'DirectionReadout' notes
 //    2) The '+ char is replaced with 'N', and the '-' char is replaced with 'S'
@@ -30,13 +33,13 @@ namespace graphics {
 //    0D@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LatitudeReadout : public DirectionReadout
+class LatitudeReadout final: public DirectionReadout
 {
     DECLARE_SUBCLASS(LatitudeReadout, DirectionReadout)
 
 public:
     LatitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    char filterInputEvent(const int event, const int tc) final;
 protected:
    //virtual void makeText();
 };

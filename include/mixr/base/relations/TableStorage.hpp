@@ -10,6 +10,11 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: TableStorage
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: TableStorage
+// Slots: none
+//------------------------------------------------------------------------------
 class TableStorage : public FStorage
 {
    DECLARE_SUBCLASS(TableStorage, FStorage)

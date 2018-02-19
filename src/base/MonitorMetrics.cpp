@@ -125,7 +125,7 @@ bool MonitorMetrics::setSlotBlue(const Table1* const blue)
 
 bool MonitorMetrics::setSlotPhosphors(const List* const phosphors)
 {
-    double listItems[6] {};
+    double listItems[6]{};
 
     if ( phosphors == nullptr ) return false;
     if ( phosphors->entries() != 6 ) return false;
@@ -141,7 +141,7 @@ bool MonitorMetrics::setSlotPhosphors(const List* const phosphors)
 
 bool MonitorMetrics::setSlotWhiteRGB(const List* const whiteRGB)
 {
-    double listItems[3] {};
+    double listItems[3]{};
 
     if ( whiteRGB == nullptr ) return false;
     if ( whiteRGB->entries() != 6 ) return false;
@@ -153,7 +153,7 @@ bool MonitorMetrics::setSlotWhiteRGB(const List* const whiteRGB)
 
 bool MonitorMetrics::setSlotWhiteCIE(const List* const whiteCIE)
 {
-    double listItems[3] {};
+    double listItems[3]{};
 
     if ( whiteCIE == nullptr ) return false;
     if ( whiteCIE->entries() != 6 ) return false;

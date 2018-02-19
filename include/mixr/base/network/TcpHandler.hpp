@@ -11,7 +11,12 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: TcpHandler
-// Description: General TCP/IP support class
+// Description: Abstract class to support TCP/IP connections
+//------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: TcpHandler
+// Slots: none
 //------------------------------------------------------------------------------
 class TcpHandler : public PosixHandler
 {
@@ -22,10 +27,10 @@ public:
 
    bool hasBeenTerminated()          { return connectionTerminated; }
 
-   bool sendData(const char* const packet, const int size) override;
-   unsigned int recvData(char* const packet, const int maxSize) override;
-   bool isConnected() const override;
-   bool closeConnection() override;
+   bool sendData(const char* const packet, const int size) final;
+   unsigned int recvData(char* const packet, const int maxSize) final;
+   bool isConnected() const final;
+   bool closeConnection() final;
 
    // "Socket Only" constructor that will be used by one of our derived classes;
    // The socket should be an AF_INET, SOCK_STREAM type socket that has been
@@ -35,10 +40,10 @@ public:
 protected:
    bool init() override;
 
-   bool connected {};              // true if we are connected
-   bool connectionTerminated {};   // true if we had a connection, then lost it (or terminated it ourselves)
+   bool connected{};              // true if we are connected
+   bool connectionTerminated{};   // true if we had a connection, then lost it (or terminated it ourselves)
 
-   bool  noWait {};                // TCP's no wait I/O flag
+   bool  noWait{};                // TCP's no wait I/O flag
 };
 
 }

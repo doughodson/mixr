@@ -11,6 +11,11 @@ namespace base {
 // Class: Stack
 // Description: Stacks of objects
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Stack
+// Slots: none
+//------------------------------------------------------------------------------
 class Stack : public List
 {
     DECLARE_SUBCLASS(Stack, List)

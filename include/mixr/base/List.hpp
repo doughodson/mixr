@@ -12,6 +12,11 @@ namespace base {
 // Description: General purpose list of objects.  The linked list and next-
 //              previous pointers are maintained using a List::Item structure.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: List
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes: Example of looping through the list:
 //
 //      List* list = <some list>

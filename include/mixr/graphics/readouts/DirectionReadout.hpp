@@ -4,14 +4,19 @@
 
 #include "NumericReadout.hpp"
 
+#include "mixr/graphics/readouts/readout_utils.hpp"
+
 namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: DirectionReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: DirectionReadout
-//
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //    1) The 'D' character is used to define the degrees field (required)
 //
@@ -48,7 +53,6 @@ class DirectionReadout : public NumericReadout
    DECLARE_SUBCLASS(DirectionReadout, NumericReadout)
 
 public:
-   enum class DirMode { invalid, ddmmss, ddmm, dd };
    DirectionReadout();
    char filterInputEvent(const int event, const int tc) override;
    double getInputValue() const override;

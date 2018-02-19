@@ -19,7 +19,10 @@ namespace base {
 // Class: String
 // Description: Character string class
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: String
+// Slots: none
 //------------------------------------------------------------------------------
 // Notes:
 //      Assignment Operators:     =

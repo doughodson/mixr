@@ -14,8 +14,9 @@ class Number;
 // Description: Contains the major axis, minor axis and flattening terms used to
 //              describe an ellipsoidal or a spherical earth model.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: EarthModel
-//------------------------------------------------------------------------------
 // Slots:
 //     a    <Length>    ! Semi major axis
 //     a    <Number>    ! -- in meters

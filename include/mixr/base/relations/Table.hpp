@@ -21,6 +21,9 @@ class List;
 //    variable data.
 //
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Table
 // Slots:
 //    data        <List>      ! Dependant variable data (default: 0)
 //    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: false)
@@ -38,20 +41,6 @@ class List;
 //    3) If a dependent variable exceeds a breakpoint table data then the lfi()
 //       result is clamped at the last known dependent value.  If the extrapolate
 //       flag is true, we'll extrapolate beyond the given data table.
-//
-// Exceptions:
-//      ExpInvalidTable
-//          Thrown by Table derived classes' lfi(), minX(), maxX(), minY(),
-//          maxY(), minZ(), maxZ(), minW(), and maxW() methods when the table's
-//          data set is invalid.
-//
-//      ExpInvalidVector
-//          Thrown by Table's method loadVector() when it's passed an invalid
-//          vector.
-//
-//      ExpInvalidFStorage
-//          Thrown by Table's storage class when the data in FStorage in incorrect.
-//
 //------------------------------------------------------------------------------
 class Table : public Object
 {
@@ -83,19 +72,24 @@ public:
    bool isValid() const override;
 
 public:
-    // Exceptions
+    // Thrown by Table derived classes' lfi(), minX(), maxX(), minY(),
+    // maxY(), minZ(), maxZ(), minW(), and maxW() methods when the table's
+    // data set is invalid.
     class ExpInvalidTable : public Object::Exception {
         public:
             ExpInvalidTable() : Exception() {}
             const char* getDescription() const override          { return "table is invalid"; }
     };
 
+    // Thrown by Table's method loadVector() when it's passed an invalid
+    // vector.
     class ExpInvalidVector : public Object::Exception {
         public:
             ExpInvalidVector() : Exception() {}
             const char* getDescription() const override          { return "table vector is invalid"; }
     };
 
+    // thrown by Table's storage class when the data in FStorage in incorrect
     class ExpInvalidFStorage : public Object::Exception {
         public:
             ExpInvalidFStorage() : Exception() {}

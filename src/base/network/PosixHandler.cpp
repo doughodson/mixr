@@ -35,7 +35,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")
+IMPLEMENT_ABSTRACT_SUBCLASS(PosixHandler, "AbstractPosixHandler")
 EMPTY_DELETEDATA(PosixHandler)
 
 BEGIN_SLOTTABLE(PosixHandler)

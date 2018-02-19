@@ -14,19 +14,15 @@ class Table;
 // Class: Function
 // Description: Base for the derived, multi-dimensional function classes.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Function
-//------------------------------------------------------------------------------
 // Slots:
 //    table    <Table>     ! Optional LFI table
 //------------------------------------------------------------------------------
 // Notes:
 //    1) Use the storageFactory() function to create the FStorage object that
 //       will maintain the previous function call values (i.e., integration).
-//
-//   virtual FStorage* storageFactory() const;
-//       Data storage factory (pre-ref()'d)
-//   virtual bool setSlotLfiTable(const Table* const msg);
-//       Set Slot Tables
 //------------------------------------------------------------------------------
 class Function : public Object
 {
@@ -35,6 +31,7 @@ class Function : public Object
 public:
    Function();
 
+   // data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;    // Data storage factory (pre-ref()'d)
 
 protected:

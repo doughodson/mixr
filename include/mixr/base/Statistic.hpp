@@ -18,7 +18,10 @@ namespace base {
 //               added to the statistic.  Use sigma() to add points and clear()
 //               to restart (or clear) the statistic.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Statistic
+// Slots: none
 //------------------------------------------------------------------------------
 class Statistic : public Object
 {

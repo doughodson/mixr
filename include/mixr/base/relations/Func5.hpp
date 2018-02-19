@@ -14,7 +14,10 @@ class Table;
 // Class: Func5
 // Description: Generic 5-Dimensional function; f(iv1, iv2, iv3, iv4, iv5)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory names: Func5
+// Slots: none
 //------------------------------------------------------------------------------
 class Func5 : public Function
 {

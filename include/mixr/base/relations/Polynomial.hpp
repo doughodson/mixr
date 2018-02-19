@@ -15,8 +15,9 @@ class List;
 // Description: Polynomial function
 //                f(x) = a0 + a1*x + a2*x^2 + ... + aN*x^N
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Polynomial
-//------------------------------------------------------------------------------
 // Slots:
 //    coefficients   <base::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
 //------------------------------------------------------------------------------

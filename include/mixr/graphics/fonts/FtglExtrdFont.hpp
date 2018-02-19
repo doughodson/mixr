@@ -11,42 +11,34 @@ namespace graphics {
 //------------------------------------------------------------------------------
 // Class: FtglExtrdFont
 // Description: Creates a Freetype Extruded Font type
+//------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: FTGLExtrdFonts
 // Slots:
-//   depth         <Number>    ! Depth (default: 5.0f)
-//
-// public member functions:
-//   setDepth(const base::Number* const newDepth)
-//   -- sets the depth of the extruded font
-//
-//   outputText(double x, double y, char* txt, int n, bool vf)
-//   outputText(double x, double y, char* txt, int n)
-//   -- Outputs n characters of txt at coords (x,y). Vertically if vf == true.
-//
-//   outputText(char* txt, int n, bool vf)
-//   outputText(char* Txt, int n)
-//   -- Outputs n characters of txt at the current position. Vertically if vf == true.
-//
-//   loadFont()
-//   -- Loads the font.
+//   depth         <Number>    ! Depth (default: 5.0)
 //------------------------------------------------------------------------------
-class FtglExtrdFont : public AbstractFtglFont
+class FtglExtrdFont final: public AbstractFtglFont
 {
     DECLARE_SUBCLASS(FtglExtrdFont, AbstractFtglFont)
 
 public:
     FtglExtrdFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    // outputs n characters of txt at coords (x,y). Vertically if vf == true.
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) final;
+    // outputs n characters of txt at the current position. Vertically if vf == true.
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) final;
 
 private:
+    void loadFont() final;
+
     static const float DEFAULT_DEPTH;
     float depth{DEFAULT_DEPTH};        // depth of the extruded font (for 3D purposes)
 
 private:
     // slot table helper methods
+    // sets the depth of the extruded font
     bool setSlotDepth(const base::Number* const);
 };
 

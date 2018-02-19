@@ -21,6 +21,11 @@ namespace dafif {
 // Class: AirportLoader
 // Description: Concrete DAFIF Airport file class (FILE0)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: AirportLoader
+// Slots: none
+//------------------------------------------------------------------------------
 // Notes:
 //
 //    Standard record length is set to airport format records (1), so after

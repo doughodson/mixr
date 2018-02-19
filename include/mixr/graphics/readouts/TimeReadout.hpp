@@ -4,14 +4,18 @@
 
 #include "NumericReadout.hpp"
 
+#include "mixr/graphics/readouts/readout_utils.hpp"
+
 namespace mixr {
 namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: TimeReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: TimeReadout
-//
+//------------------------------------------------------------------------------
 // Example formats:
 //
 //    HH:MM:SS      // Hours, minutes and seconds
@@ -27,19 +31,20 @@ namespace graphics {
 // number requires a zero, '0', to have leading zeros.
 //
 //------------------------------------------------------------------------------
-class TimeReadout : public NumericReadout
+class TimeReadout final: public NumericReadout
 {
    DECLARE_SUBCLASS(TimeReadout, NumericReadout)
 
 public:
-   enum class TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
    TimeReadout();
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   char filterInputEvent(const int event, const int tc) final;
+   double getInputValue() const final;
 
 protected:
-   void makeText() override;
-   void reformat(const char* const example) override;
+   void makeText() final;
+   void reformat(const char* const example) final;
+
+private:
    TimeMode tmode {TimeMode::hhmmss};
 };
 

@@ -10,23 +10,17 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class:  Rgb
-//
-// Description:  Defines a color by Red, Green, and Blue
+// Description: Defines a color by Red, Green, and Blue
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: rgb
 // Slots:
 //     red   <Number>  ! Red component (0.0 to 1.0) (default: 0)
 //     green <Number>  ! Green component (0.0 to 1.0) (default: 0)
 //     blue  <Number>  ! Blue component (0.0 to 1.0) (default: 0)
-//
+//------------------------------------------------------------------------------
 // Events: None
-//
-//
-// Public methods: Base class public methods, plus ...
-//
-//      Rgb(const double r, const double g, const double b)
-//          Special constructor what initializes the object to r, g, and b
-//
 //------------------------------------------------------------------------------
 class Rgb : public Color
 {

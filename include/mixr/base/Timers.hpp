@@ -13,8 +13,9 @@ class Time;
 // Class: Timer
 // Description: General purpose up/down timer.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Timer
-//------------------------------------------------------------------------------
 // Slots:
 //    timerValue  <Time>      ! Timer interval (default: 0)
 //    alarmTime   <Time>      ! Alarm time (default: 0)

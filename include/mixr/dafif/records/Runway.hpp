@@ -13,6 +13,11 @@ namespace dafif {
 // Class: Runway
 // Description: Access to the DAFIF Airport/Runway records
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Runway
+// Slots: none
+//------------------------------------------------------------------------------
 class Runway final: public Record
 {
    DECLARE_SUBCLASS(Runway, Record)

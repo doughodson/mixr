@@ -29,7 +29,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "NetHandler")
+IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "AbstractNetHandler")
 EMPTY_SLOTTABLE(NetHandler)
 EMPTY_COPYDATA(NetHandler)
 EMPTY_DELETEDATA(NetHandler)

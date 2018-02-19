@@ -15,10 +15,11 @@ class Table1;
 
 //------------------------------------------------------------------------------
 // Class: Cie
-// Description:  Defines a color by Luminance, X, Y, and monitor-specific data.
+// Description: Defines a color by Luminance, X, Y, and monitor-specific data.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: cie
-//------------------------------------------------------------------------------
 // Slots:
 //     luminance <Number>         ! Luminance component (0.0 to 1.0) (default: 0)
 //     x         <Number>         ! Green component     (0.0 to 1.0) (default: 0)
@@ -30,7 +31,7 @@ class Table1;
 //    return a const pointer to the RGBA color vector and not the
 //    CIE color vector.
 //------------------------------------------------------------------------------
-class Cie : public Color
+class Cie final: public Color
 {
     DECLARE_SUBCLASS(Cie, Color)
 

@@ -13,6 +13,11 @@ namespace dafif {
 // Class: Navaid
 // Description: Access to the DAFIF NAVAID database.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Navaid
+// Slots: none
+//------------------------------------------------------------------------------
 class Navaid final: public Record
 {
    DECLARE_SUBCLASS(Navaid, Record)

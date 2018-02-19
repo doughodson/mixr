@@ -22,8 +22,8 @@ PairStream::PairStream()
 //------------------------------------------------------------------------------
 Pair* PairStream::findByType(const std::type_info& type)
 {
-    Pair* p = nullptr;
-    const Item* item = getFirstItem();
+    Pair* p{};
+    const Item* item{getFirstItem()};
     while (item != nullptr && p == nullptr) {
         const auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
         if (pair->object()->isClassType(type)) p = pair;
@@ -34,8 +34,8 @@ Pair* PairStream::findByType(const std::type_info& type)
 
 const Pair* PairStream::findByType(const std::type_info& type) const
 {
-    const Pair* p = nullptr;
-    const Item* item = getFirstItem();
+    const Pair* p{};
+    const Item* item{getFirstItem()};
     while (item != nullptr && p == nullptr) {
         const auto pair = static_cast<const Pair*>(item->getValue());
         if (pair->object()->isClassType(type)) p = pair;
@@ -49,9 +49,9 @@ const Pair* PairStream::findByType(const std::type_info& type) const
 //------------------------------------------------------------------------------
 Pair* PairStream::findByName(const char* const slotname)
 {
-    Pair* p = nullptr;
+    Pair* p{};
     if (slotname != nullptr) {
-        const Item* item = getFirstItem();
+        const Item* item{getFirstItem()};
         while (item != nullptr && p == nullptr) {
             const auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
             if ( *(pair->slot()) == slotname ) p = pair;
@@ -63,9 +63,9 @@ Pair* PairStream::findByName(const char* const slotname)
 
 const Pair* PairStream::findByName(const char* const slotname) const
 {
-    const Pair* p = nullptr;
+    const Pair* p{};
     if (slotname != nullptr) {
-        const Item* item = getFirstItem();
+        const Item* item{getFirstItem()};
         while (item != nullptr && p == nullptr) {
             const auto pair = static_cast<const Pair*>(item->getValue());
             if ( *(pair->slot()) == slotname ) p = pair;
@@ -82,9 +82,9 @@ const Pair* PairStream::findByName(const char* const slotname) const
 //------------------------------------------------------------------------------
 const Identifier* PairStream::findName(const Object* const obj) const
 {
-    const Identifier* p = nullptr;
+    const Identifier* p{};
     if (obj != nullptr) {
-        const Item* item = getFirstItem();
+        const Item* item{getFirstItem()};
         while (item != nullptr && p == nullptr) {
             const auto pair = static_cast<const Pair*>(item->getValue());
             if (pair->object() == obj) {
@@ -102,15 +102,15 @@ const Identifier* PairStream::findName(const Object* const obj) const
 //------------------------------------------------------------------------------
 bool PairStream::operator==(const PairStream& stream) const
 {
-    const List* s1 = this;
-    const List* s2 = &stream;
+    const List* s1{this};
+    const List* s2{&stream};
     return *s1 == *s2;
 }
 
 bool PairStream::operator!=(const PairStream& stream) const
 {
-    const List* s1 = this;
-    const List* s2 = &stream;
+    const List* s1{this};
+    const List* s2{&stream};
     return *s1 != *s2;
 }
 

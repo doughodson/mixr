@@ -16,8 +16,9 @@ class String;
 // Class: UdpMulticastHandler
 // Description: UDP multicast network handler.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: UdpMulticastHandler
-//------------------------------------------------------------------------------
 // Slots:
 //      multicastGroup  <String>    ! String containing the multicast IP address in
 //                                  ! the Internet standard "." (dotted) notation.
@@ -27,6 +28,17 @@ class String;
 //      ttl             <Integer>   ! Multicast Time-To-Live (TTL) value (default: 1)
 //
 //      loopback        <Boolean>   ! Multicast Loopback flag (default: true)
+//
+// Example:
+//
+//        ( UdpMulticastHandler
+//           multicastGroup: "224.0.0.251"      // Multicast group
+//           port: 2010                         // Multicast port
+//           localPort: 2011                    // Port to send from
+//           shared: true                       // Shared socket
+//           ttl:    4                          // Time-to-live
+//           loopback: true                     // Loop back
+//        )
 //------------------------------------------------------------------------------
 // Notes:
 //
@@ -49,21 +61,8 @@ class String;
 //       option on, application OFF sets the IP_MULTICAST_LOOP option off. If ON and OFF are
 //       Winsock applications, OFF can send to ON, but ON cannot sent to OFF. In contrast,
 //       if ON and OFF are UNIX applications, ON can send to OFF, but OFF cannot send to ON."
-//
-//
-// Input File Example:
-//
-//        ( UdpMulticastHandler
-//           multicastGroup: "224.0.0.251"      // Multicast group
-//           port: 2010                         // Multicast port
-//           localPort: 2011                    // Port to send from
-//           shared: true                       // Shared socket
-//           ttl:    4                          // Time-to-live
-//           loopback: true                     // Loop back
-//        )
-//
 //------------------------------------------------------------------------------
-class UdpMulticastHandler : public PosixHandler
+class UdpMulticastHandler final: public PosixHandler
 {
     DECLARE_SUBCLASS(UdpMulticastHandler, PosixHandler)
 
@@ -76,15 +75,15 @@ public:
     bool getLoopback() const                { return loopback; }
     void setLoopback(const bool b)          { loopback = b; }
 
-    bool initNetwork(const bool noWaitFlag) override;
-    bool isConnected() const override;
-    bool closeConnection() override;
+    bool initNetwork(const bool noWaitFlag) final;
+    bool isConnected() const final;
+    bool closeConnection() final;
 
 protected:
     virtual bool joinTheGroup();
 
-    bool init() override;
-    bool bindSocket() override;
+    bool init() final;
+    bool bindSocket() final;
 
 private:
     std::string multicastGroup;      // Multicast Group Name

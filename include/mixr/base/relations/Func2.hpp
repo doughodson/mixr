@@ -14,7 +14,10 @@ class Table;
 // Class: Func2
 // Description: Generic 2-Dimensional function; f(iv1, iv2)
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Func2
+// Slots: none
 //------------------------------------------------------------------------------
 class Func2 : public Function
 {

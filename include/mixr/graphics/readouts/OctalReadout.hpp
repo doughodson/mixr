@@ -9,27 +9,29 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: OctalReadout
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: OctalReadout
-//
+//------------------------------------------------------------------------------
 // Example formats:
 //
 //    ######    // Octal number
 //    00000#    // Octal number w/leading zeros
 //
 //------------------------------------------------------------------------------
-class OctalReadout : public NumericReadout
+class OctalReadout final: public NumericReadout
 {
    DECLARE_SUBCLASS(OctalReadout, NumericReadout)
 
 public:
    OctalReadout();
-   void makeText() override;
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   void makeText() final;
+   char filterInputEvent(const int event, const int tc) final;
+   double getInputValue() const final;
 
 protected:
-   void reformat(const char* const example) override;
+   void reformat(const char* const example) final;
 };
 
 }

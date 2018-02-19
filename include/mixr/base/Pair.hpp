@@ -19,6 +19,10 @@ namespace base {
 //    name (aliases).
 //
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Pair
+// Slots: none
 // Notes: EDL syntax (an Identifier followed by a colon then Object)
 //      ident: <object>
 //------------------------------------------------------------------------------

@@ -2,10 +2,10 @@
 #include "mixr/graphics/fonts/FtglBitmapFont.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
-
-#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/filesystem_utils.hpp"
 
 #include <iostream>
+#include <string>
 
 #include <FTGL/ftgl.h>
 
@@ -15,16 +15,8 @@ namespace graphics {
 IMPLEMENT_SUBCLASS(FtglBitmapFont, "FTGLBitmapFonts")
 EMPTY_DELETEDATA(FtglBitmapFont)
 EMPTY_SLOTTABLE(FtglBitmapFont)
-
-FtglBitmapFont::FtglBitmapFont()
-{
-    STANDARD_CONSTRUCTOR();
-}
-
-void FtglBitmapFont::copyData(const FtglBitmapFont& org, const bool)
-{
-    BaseClass::copyData(org);
-}
+EMPTY_COPYDATA(FtglBitmapFont)
+EMPTY_CONSTRUCTOR(FtglBitmapFont)
 
 //------------------------------------------------------------------------------
 // BitmapFonts functions
@@ -118,23 +110,8 @@ void FtglBitmapFont::loadFont()
 {
     if (isLoaded()) return;
 
-    // Check for required parameters
-
-    if ( filename() == nullptr ) {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "No ttf file" << std::endl;
-        }
-        return;
-    }
-
-    // Generate filename
-    const std::size_t FONTPATHNAME_LENGTH {256};
-    char fontPathname[FONTPATHNAME_LENGTH] {};
-    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
-
-    const auto ftglFont = new FTGLBitmapFont(fontPathname);
+    std::string fontPathname{base::buildPath(fontDirectory(), filename())};
+    const auto ftglFont = new FTGLBitmapFont(fontPathname.c_str());
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());

@@ -14,8 +14,9 @@ class Number;
 // Class: Complex
 // Description: Generic complex number class
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Complex
-//------------------------------------------------------------------------------
 // Slots:
 //     real  <Number>  ! real value (default: 0.0)
 //     imag  <Number>  ! imaginary value (default: 0.0)

@@ -21,7 +21,10 @@ namespace base {
 // Class: RVector
 // Description: General purpose row vector
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: RVector
+// Slots: none
 //------------------------------------------------------------------------------
 class RVector : private Matrix
 {
@@ -229,7 +232,10 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 // Class: CVector
 // Description: General purpose column vector
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: CVector
+// Slots: none
 //------------------------------------------------------------------------------
 class CVector : private Matrix
 {

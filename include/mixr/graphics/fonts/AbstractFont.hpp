@@ -7,14 +7,17 @@
 #include "mixr/base/util/platform_api.hpp"
 #include <GL/gl.h>
 
+#include <string>
+
 namespace mixr {
 namespace base { class Integer; class Number; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: AbstractFont
-//
 // Description: Provides base functionality for all font classes
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
 // Factory name: AbstractFont
 // Slots:
@@ -23,160 +26,77 @@ namespace graphics {
 //      fontPosition     <List>     ! Upper/Left origin of the text field (default: 0, 0)
 //      bitmapWidth      <Integer>  ! Width of bit map font (default: 1)
 //      bitmapHeight     <Integer>  ! Height of bit map font (default: 1)
-//      path             <String>   ! Path to the font directory (default: 0)
-//      file             <String>   ! FTGL Font file name - will be altered in each instance of FTGLFont (default: 0)
+//      path             <String>   ! Path to the font directory (default: nullptr)
+//      file             <String>   ! FTGL Font file name - will be altered in each instance of FTGLFont (default: nullptr)
 //      lut              <List>     ! Lookup Table (default: 0)
 //      characterSpacing <Number>   ! spacing for each character (default: 0)
 //      lineSpacing      <Number>   ! spacing for each line (default: 0)
-//
-// public methods (member functions):
-//
-//      outputText(double x, double y, char* txt, int n)
-//      outputText(double x, double y, char* txt, int n, bool vf)
-//          Outputs the text at position (x, y).
-//          When 'vf' is true, text is drawn vertically
-//
-//      outputText(char* txt, int n)
-//      outputText(char* txt, int n, bool vf)
-//          Outputs the text with the (ln, cp) pair (line, column). (Current Position)
-//          When 'vf' is true, text is drawn vertically
-//
-//      position(const int ln, const int cp, GLdouble& px, GLdouble& py) const
-//          Computes the (X, Y) position of the (ln, cp) pair (line, column).
-//
-//      loadFont()
-//          Loads the font map.
-//
-//      bool isLoaded()
-//          Returns true if the font is loaded, else false.
-//
-//      bool isNotLoaded()
-//          Returns true if the font is not loaded, else false.
-//
-//      setTextOrigin(const GLdouble x, const GLdouble y)
-//          Sets the upper left corner.
-//
-//      double getCharacterSpacing()
-//        Returns the character spacing.
-//
-//      setCharacterSpacing(double v)
-//        Sets the character spacing to v.
-//
-//      double getLineSpacing()
-//        Returns the line spacing.
-//
-//      setLineSpacing(double v)
-//        Sets the line spacing to v.
-//
-//      GLdouble getFontWidth()
-//          Returns the font width.
-//
-//      setFontWidth(const GLdouble v)
-//          Sets the font width.
-//
-//      GLdouble getFontHeight()
-//          Returns the font height.
-//
-//      setFontHeight(const GLdouble v)
-//          Sets the font height.
-//
-//      GLuint getBase()
-//          Returns the base.
-//
-//      setBase(const GLuint nb)
-//          Sets the base.
-//
-//      GLuint getBitmapWidth()
-//          Returns the bitmap width.
-//
-//      setBitmapWidth(const GLuint v)
-//          Sets the bitmap width.
-//
-//      GLuint getBitmapHeight()
-//          Returns the bitmap height.
-//
-//      setBitmapHeight(const GLuint v)
-//          Sets the the bitmap height.
-//
-//      const unsigned char* lut()
-//          Returns pLUT (string pointer to the Look-Up-Table <character translations>).
-//
-//      bool isFTGL()
-//          Returns true if the font is an OpenGL TrueType Font (FTGL), else false.
-//
-//      void* FTGL()
-//          Returns a pointer to an OpenGL Freetype2 TrueType Font (FTGL).
-//
-//      const char* fontDirectory()
-//          Returns a string pointer to the font path directory.
-//
-//      const char* filename()
-//          Returns a string pointer to a font file name.
-//
-// Exceptions:
-//      ExpInvalidFont:
-//          Thrown by method outputText() when the font map is not valid and
-//          couldn't be loaded.
-//
-//
-// Protected functions:
-//      int xferChars(char* outp, std::size_t outpSize, char* inp, int n)
-//        Transfers n characters of inp to outp and returns the size of outp.
-//
-//      ftgl(void* p)
-//        Sets the pFTGL font pointer to p.
 //------------------------------------------------------------------------------
 class AbstractFont : public base::Object
 {
     DECLARE_SUBCLASS(AbstractFont, base::Object)
 
 public:
-    static const std::size_t MAX_MESSAGE_LENGTH {256}; // Max length of character buffers
+    static const std::size_t MAX_MESSAGE_LENGTH{256};  // Max length of character buffers
 
 public:
     AbstractFont();
 
+    // Outputs the text at position (x, y).
+    // When 'vf' is true, text is drawn vertically
     virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) =0;
+    // Outputs the text with the (ln, cp) pair (line, column). (Current Position)
+    // When 'vf' is true, text is drawn vertically
     virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) =0;
+    // computes the (X, Y) position of the (ln, cp) pair (line, column)
     virtual void position(const int ln, const int cp, GLdouble& px, GLdouble& py) const;
 
-    virtual void setTextOrigin(const GLdouble x, const GLdouble y);
+    // sets the upper left corner
+    void setTextOrigin(const GLdouble x, const GLdouble y);
 
-    double getCharacterSpacing() const                  { return charSpacing; }
+    // set/get character spacing
     void setCharacterSpacing(const double v)            { charSpacing = v; }
+    double getCharacterSpacing() const                  { return charSpacing; }
 
-    double getLineSpacing() const                       { return lineSpacing; }
+    // set/get line spacing
     void setLineSpacing(const double v)                 { lineSpacing = v; }
+    double getLineSpacing() const                       { return lineSpacing; }
 
-    GLdouble getFontWidth() const                       { return fWidth; }
     void setFontWidth(const GLdouble v)                 { fWidth = v; }
+    GLdouble getFontWidth() const                       { return fWidth; }
 
-    GLdouble getFontHeight() const                      { return fHeight; }
     void setFontHeight(const GLdouble v)                { fHeight = v; }
+    GLdouble getFontHeight() const                      { return fHeight; }
 
-    GLuint getBase() const                              { return b; }
     void setBase(const GLuint nb)                       { b = nb; }
+    GLuint getBase() const                              { return b; }
 
-    GLuint getBitmapWidth() const                       { return bWidth; }
     void setBitmapWidth(const GLuint v)                 { bWidth = v; }
+    GLuint getBitmapWidth() const                       { return bWidth; }
 
-    GLuint getBitmapHeight() const                      { return bHeight; }
     void setBitmapHeight(const GLuint v)                { bHeight = v; }
+    GLuint getBitmapHeight() const                      { return bHeight; }
 
-    virtual void loadFont() =0;
+    // returns true if the font is loaded, else false
     bool isLoaded() const                               { return loaded; }
+    // returns true if the font is not loaded, else false
     bool isNotLoaded() const                            { return !loaded; }
 
+    // returns pLUT (string pointer to the Look-Up-Table <character translations>)
     const unsigned char* lut() const                    { return pLUT; }
 
+    // returns true if the font is an OpenGL TrueType Font (FTGL), else false
     bool isFTGL() const                                 { return (pFTGL != nullptr); }
+    // returns a pointer to an OpenGL Freetype2 TrueType Font (FTGL)
     void* FTGL()                                        { return pFTGL; }
 
-    const char* fontDirectory() const                   { return fontPath; }
-    const char* filename() const                        { return fontFile; }
+    // returns the font directory and filename
+    const std::string& fontDirectory()                  { return fontPath; }
+    const std::string& filename()                       { return fontFile; }
 
 public:
-    // Exceptions
+    // exception: thrown by method outputText() when the font map is not valid and
+    // couldn't be loaded.
     class ExpInvalidFont : public base::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
@@ -186,14 +106,18 @@ public:
 protected:
 
     static const std::size_t MSG_BUF_LEN{MAX_MESSAGE_LENGTH+1}; // Max length of character buffers
+    // transfers n characters of inp to outp and returns the size of outp
     int xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const;
 
     GLdouble leftSide{}, topSide{};             // Origin: upper left corner of ln=1, cp=1
+
+    // sets the pFTGL font pointer to p
     void ftgl(void* p)                                  { pFTGL = p; }
     void setFontLoaded()                                { loaded = true; }
 
 private:
     void initData();
+    virtual void loadFont() =0;
 
     static const int LUT_SIZE{256};
     GLdouble  fWidth{}, fHeight{};       // Font size
@@ -201,11 +125,12 @@ private:
     GLuint    b{};                       // Font call list base
     unsigned char* pLUT{};               // Look-Up-Table (character translations)
     void*     pFTGL{};                   // OpenGL TrueType Font (FTGL)
-    char*     fontPath{};                // Path to font directory (FTGL & Bitmap fonts)
-    char*     fontFile{};                // Font filename (FTGL)
     bool      loaded{};                  // Font has been loaded
     double charSpacing{};                // holds our character spacing
     double lineSpacing{};                // holds our line spacing
+
+    std::string fontPath;                // Path to font directory (FTGL & Bitmap fonts)
+    std::string fontFile;                // Font filename (FTGL)
 
 private:
     // slot table helper methods

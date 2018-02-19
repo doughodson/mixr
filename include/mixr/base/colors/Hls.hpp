@@ -10,10 +10,11 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Hls
-// Description:  Defines a color by Hue, Saturation and Lightness.
+// Description: Defines a color by Hue, Saturation and Lightness
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: hls
-//------------------------------------------------------------------------------
 // Slots:
 //     hue         <Number>  ! hue component (0.0 to 360.0, default: 0.0)
 //     saturation  <Number>  ! saturation component (0.0 to 1.0, default: 0.0)
@@ -23,7 +24,7 @@ class Number;
 //        return a const pointer to the RGBA color vector and not the
 //        HLS color vector.
 //------------------------------------------------------------------------------
-class Hls : public Color
+class Hls final: public Color
 {
     DECLARE_SUBCLASS(Hls, Color)
 

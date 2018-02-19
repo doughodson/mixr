@@ -19,7 +19,6 @@ BEGIN_SLOT_MAP(StateMachine)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(StateMachine)
-
     ON_EVENT_OBJ(ON_ENTRY, onEntry, Object)     // always check w/Object first
     ON_EVENT(ON_ENTRY, onEntry)
 
@@ -68,7 +67,7 @@ void StateMachine::reset()
 
    // Reset our state machine list
    if (stMachList != nullptr) {
-      List::Item* item = stMachList->getFirstItem();
+      List::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
          const auto q = static_cast<Component*>(p->object());
@@ -188,8 +187,8 @@ void StateMachine::step(const double dt)
 
 bool StateMachine::next(Object* const arg)
 {
-   bool ok = false;
-   unsigned short newState = stateTable(state, StateTableCode::FIND_NEXT_STATE);
+   bool ok{};
+   unsigned short newState{stateTable(state, StateTableCode::FIND_NEXT_STATE)};
    if (newState != INVALID_STATE) {
       nState = newState;
       nSubstate = INIT_STATE;
@@ -202,8 +201,8 @@ bool StateMachine::next(Object* const arg)
 
 bool StateMachine::goTo(const unsigned short newState, Object* const arg)
 {
-   bool ok = false;
-   unsigned short test = stateTable(newState, StateTableCode::TEST_STATE);
+   bool ok{};
+   unsigned short test{stateTable(newState, StateTableCode::TEST_STATE)};
    if (test != INVALID_STATE) {
       nState = newState;
       nSubstate = INIT_STATE;
@@ -216,9 +215,9 @@ bool StateMachine::goTo(const unsigned short newState, Object* const arg)
 
 bool StateMachine::call(const unsigned short newState, Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    if (sp > 0) {
-      unsigned short test = stateTable(newState, StateTableCode::TEST_STATE);
+      unsigned short test{stateTable(newState, StateTableCode::TEST_STATE)};
       if (test != INVALID_STATE) {
          stateStack[--sp] = state;
          substateStack[sp] = substate;
@@ -234,7 +233,7 @@ bool StateMachine::call(const unsigned short newState, Object* const arg)
 
 bool StateMachine::rtn(Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    if (sp < STACK_SIZE) {
       nSubstate = substateStack[sp];
       nState = stateStack[sp++];
@@ -270,7 +269,7 @@ bool StateMachine::goToSubstate(const unsigned short newSubstate)
 
 bool StateMachine::nextState(Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->next(arg);
@@ -280,7 +279,7 @@ bool StateMachine::nextState(Object* const arg)
 
 bool StateMachine::goToState(const unsigned short newState, Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->goTo(newState,arg);
@@ -290,7 +289,7 @@ bool StateMachine::goToState(const unsigned short newState, Object* const arg)
 
 bool StateMachine::callState(const unsigned short newState, Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr && sp > 0) {
       ok = parent->call(newState,arg);
@@ -304,7 +303,7 @@ bool StateMachine::callState(const unsigned short newState, Object* const arg)
 
 bool StateMachine::rtnState(Object* const arg)
 {
-   bool ok = false;
+   bool ok{};
    const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->rtn(arg);
@@ -341,7 +340,7 @@ bool StateMachine::onExit()
 bool StateMachine::onReturn(Object* const msg)
 {
    // Try to return to our calling state
-   bool ok = rtn(msg);
+   bool ok{rtn(msg)};
 
    if (!ok) {
       // or just goto the reset state
@@ -374,7 +373,7 @@ void StateMachine::postStateProc(const double)
 //------------------------------------------------------------------------------
 Pair* StateMachine::findStMachByName(const char* const name)
 {
-    Pair* p = nullptr;
+    Pair* p{};
     if (stMachList != nullptr && name != nullptr) p = stMachList->findByName(name);
     return p;
 }
@@ -382,7 +381,7 @@ Pair* StateMachine::findStMachByName(const char* const name)
 
 Pair* StateMachine::findStMachByType(const std::type_info& type)
 {
-    Pair* p = nullptr;
+    Pair* p{};
     if (stMachList != nullptr) p = stMachList->findByType(type);
     return p;
 }
@@ -395,12 +394,12 @@ Pair* StateMachine::findStMachByType(const std::type_info& type)
 // -----------------------------------------------------------------
 bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 {
-   bool ok = false;
+   bool ok{};
 
    if (code == StateTableCode::CURR_STATE) {
 
       // Current state is now also the previous state
-      StateMachine* oldStMach = stMach;
+      StateMachine* oldStMach{stMach};
 
       // First, check to see if they're asking for the same state
       // as our current state.
@@ -412,14 +411,13 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
       // When they're not the same then we make a switch ...
       if (!ok) {
          if (name != nullptr) {
-            Pair* p = findStMachByName(name);
+            Pair* p{findStMachByName(name)};
             if (p != nullptr) {
                stMach = static_cast<StateMachine*>(p->object());
                stMachName = p->slot();
                ok = true;
             }
-         }
-         else {
+         } else {
             // 'name' is null, so set the new state to null.
             stMach = nullptr;
             stMachName = nullptr;
@@ -449,7 +447,7 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
    // First remove the old list; and make sure we tell the old stMachList
    // that we're no longer their container.
    if (stMachList != nullptr) {
-      List::Item* item = stMachList->getFirstItem();
+      List::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
          const auto q = static_cast<Component*>(p->object());
@@ -465,7 +463,7 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
 
       // For each object in the list; if it's a StateMachine (or derived from) then
       // clone the object and add it to the new list.
-      const List::Item* item = msg->getFirstItem();
+      const List::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<const Pair*>(item->getValue());
          const auto q = dynamic_cast<const StateMachine*>(p->object());
@@ -475,8 +473,7 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
             const auto cq = static_cast<StateMachine*>(cp->object());
             cq->container(this);
             newList->put(cp);
-         }
-         else {
+         } else {
             std::cerr << "StateMachine::setSlotStateMachines(): " << *p->slot() << " is not a StateMachine!" << std::endl;
          }
 
@@ -492,4 +489,3 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
 
 }
 }
-

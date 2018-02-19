@@ -12,44 +12,37 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: FtglHaloFont
-//
 // Description: Polygon font that also draws a halo around the font
+//------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: FTGLHaloFonts
 // Slots:
-//   halocolor      <Color>    ! Font halo color (default = 0)
+//   halocolor      <Color>    ! Font halo color (default = nullptr)
 //   linewidth      <Number>   ! Font line width (default = 1)
-//
-// Public member functions:
-//    outputText(double x, double y, char* txt, int n, bool vf)
-//    outputText(double x, double y, char* txt, int n)
-//       Outputs n characters of txt at coords (x,y). Vertically if vf == true.
-//
-//    outputText(char* txt, int n, bool vf)
-//    outputText(char* txt, int n)
-//       Outputs n characters of txt at the current position. Vertically if vf == true.
-//
-// loadFont()
-//    Loads the font.
 //------------------------------------------------------------------------------
-class FtglHaloFont : public AbstractFtglFont
+class FtglHaloFont final: public AbstractFtglFont
 {
     DECLARE_SUBCLASS(FtglHaloFont, AbstractFtglFont)
 
 public:
     FtglHaloFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    // outputs n characters of txt at coords (x,y). Vertically if vf == true.
+    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) final;
+    // outputs n characters of txt at the current position. Vertically if vf == true.
+    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) final;
 
     base::Color* getHaloColor()           { return haloColor; }
     float getHaloLineWidth()              { return linewidth; }
     FTOutlineFont* getOutline()           { return outline; }
 
 private:
-    FTOutlineFont* outline {};
-    base::Color* haloColor {};
-    float linewidth {1.0};
+    void loadFont() final;
+
+    FTOutlineFont* outline{};
+    base::Color* haloColor{};
+    float linewidth{1.0};
 
 private:
     // slot table helper methods

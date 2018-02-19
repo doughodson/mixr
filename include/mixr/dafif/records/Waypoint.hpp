@@ -13,6 +13,11 @@ namespace dafif {
 // Class: Waypoint
 // Description: Access to the DAFIF Waypoint records
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
+// Factory name: Waypoint
+// Slots: none
+//------------------------------------------------------------------------------
 class Waypoint final: public Record
 {
    DECLARE_SUBCLASS(Waypoint,Record)

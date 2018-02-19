@@ -16,8 +16,9 @@ namespace base {
 //              dimensionless unit. This class conveys that the value it represents
 //              is a scaled number.
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: dB
-//------------------------------------------------------------------------------
 // Slots:
 //     value  <Number>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------

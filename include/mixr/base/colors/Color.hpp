@@ -14,18 +14,17 @@ class Number;
 // Class: Color
 // Description: General Purpose Color class; used with RGB and HSV classes
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: Color
-//------------------------------------------------------------------------------
-// Notes:
-//   { RED, GREEN, BLUE, ALPHA } are used to index the Red, Green and
-//   Blue (RGB) color vectors
+// Slots: (none)
 //------------------------------------------------------------------------------
 class Color : public Object
 {
     DECLARE_SUBCLASS(Color, Object)
 
 public:
-    // Components of RGB color
+    // components of RGB color - used as an index
     enum { RED, GREEN, BLUE, ALPHA };
 
 public:
@@ -58,7 +57,7 @@ public:
     static void setDefaultAlpha(const double);
 
 protected:
-    Vec4d color;                // RGBA color vector
+    Vec4d color;                  // RGBA color vector
     static double defaultAlpha;
 };
 

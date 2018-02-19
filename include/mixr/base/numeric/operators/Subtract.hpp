@@ -11,9 +11,11 @@ namespace base {
 // Class: Subtract
 // Description: Class for subtracting Numbers
 //------------------------------------------------------------------------------
+// EDL Interface:
+//
 // Factory name: "-"
-//------------------------------------------------------------------------------
-// Notes:
+// Slots: none
+// Example:
 //        ( - val n2 ) gives val minus n2
 //------------------------------------------------------------------------------
 class Subtract final: public Operator

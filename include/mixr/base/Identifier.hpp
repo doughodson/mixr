@@ -17,8 +17,13 @@ namespace base {
 //              can contain upper and lower case letters, numbers, special
 //              characters, but not spaces.
 //------------------------------------------------------------------------------
-// Notes: When setting the identifier, any spaces will be replaced
-//        with underscores.
+// EDL Interface:
+//
+// Factory name: Identifier
+// Slots: none
+//------------------------------------------------------------------------------
+// Notes: Identifier is a 'native' type associated with the EDL parser.  It is
+//        created when a non-quoted sequence of characters are encountered.
 //------------------------------------------------------------------------------
 class Identifier final: public Object
 {
