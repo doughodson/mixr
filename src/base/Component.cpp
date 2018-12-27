@@ -524,32 +524,31 @@ Pair* Component::findByType(const std::type_info& type)
 //   2) Unref() the Identifier when finished.
 //   3) Zero(0) is returned if 'p' is not found.
 //------------------------------------------------------------------------------
-const Identifier* Component::findNameOfComponent(const Component* const p) const
+const std::string Component::findNameOfComponent(const Component* const p) const
 {
-    const Identifier* name{};
+    std::string name;
     const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
 
         // First check our component list ..
         name = subcomponents->findName(p);
 
-        if (name == nullptr) {
+        if (name.empty()) {
 
             // Not found, so check our children's components ...
 
             const List::Item* item{subcomponents->getFirstItem()};
-            while (item != nullptr && name == nullptr) {
+            while (item != nullptr && name.empty()) {
                 const auto pair = static_cast<const Pair*>(item->getValue());
                 const auto child = static_cast<const Component*>(pair->object());
-                const Identifier* name0{child->findNameOfComponent(p)};
-                if (name0 != nullptr) {
+                const std::string& name0{child->findNameOfComponent(p)};
+                if (!name0.empty()) {
                     // Found it, so prefix it with our child's name and
                     // return the full name.
-                    const auto fullname = static_cast<Identifier*>(pair->slot()->clone());
-                    *fullname += ".";
-                    *fullname += name0->c_str();
+                    std::string fullname{pair->slot()};
+                    fullname += ".";
+                    fullname += name0;
                     name = fullname;
-                    name0->unref();
                 }
                 item = item->getNext();
             }
@@ -662,7 +661,9 @@ void Component::processComponents(
 //------------------------------------------------------------------------------
 bool Component::setSelectionName(const Object* const s)
 {
-   if (selection != nullptr) selection->unref();
+   if (selection != nullptr) {
+       selection->unref();
+   }
    selection = nullptr;
    if (s != nullptr) {
       selection = s->clone();
@@ -684,7 +685,7 @@ bool Component::select(const String* const name)
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
         } else {
-            std::cerr << "Component::select: name not found!"  << std::endl;
+            std::cerr << "Component::select<String>: name not found!"  << std::endl;
             ok = false;
         }
     }
@@ -702,7 +703,7 @@ bool Component::select(const Integer* const num)
         if (p != nullptr) {
            selected = static_cast<Component*>(p->object());
         } else {
-           std::cerr << "Component::select: index out of range; num = " << num->asInt() << std::endl;
+           std::cerr << "Component::select<Integer>: index out of range; num = " << num->asInt() << std::endl;
            ok = false;
         }
     }

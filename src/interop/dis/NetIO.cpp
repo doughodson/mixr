@@ -155,7 +155,7 @@ void NetIO::initData()
    setMaxPositionErr(DRA_POS_THRST_DFLT, 255, 255);          //  (meters)
    setMaxOrientationErr(DRA_ORIENT_THRST_DFLT, 255, 255);    //  (radians)
    setMaxAge(HRT_BEAT_MPLIER*HRT_BEAT_TIMER, 255, 255);      //  (seconds)
-   setMaxEntityRange(static_cast<double>(0), 255, 255);      // no range filtering
+   setMaxEntityRange(0.0, 255, 255);                         // no range filtering
 }
 
 void NetIO::copyData(const NetIO& org, const bool cc)
@@ -210,7 +210,7 @@ bool NetIO::setVersion(const unsigned char v)
 
 bool NetIO::initNetwork()
 {
-    bool ok {true};
+    bool ok{true};
 
     // Initialize network input handler
     if (netInput != nullptr) {
@@ -237,7 +237,7 @@ bool NetIO::initNetwork()
 void NetIO::netInputHander()
 {
    // Read PDUs
-   unsigned int j0 {};
+   unsigned int j0{};
    while ( (j0 < MAX_PDUs) && (recvData(reinterpret_cast<char*>(&inputBuffer[j0]), MAX_PDU_SIZE) > 0) ) {
       j0++;
    }
@@ -245,9 +245,9 @@ void NetIO::netInputHander()
    while (j0 > 0) {
 
       // Process incoming PDUs
-      unsigned int j1 {};
+      unsigned int j1{};
       while (j1 < j0) {
-         PDUHeader* header {reinterpret_cast<PDUHeader*>(&inputBuffer[j1++][0])};
+         PDUHeader* header{reinterpret_cast<PDUHeader*>(&inputBuffer[j1++][0])};
 
          if (isInputEnabled()) {
 
@@ -261,7 +261,7 @@ void NetIO::netInputHander()
 
                   case PDU_ENTITY_STATE: {
                      //std::cout << "Entity State PDU." << std::endl;
-                     EntityStatePDU* pPdu {reinterpret_cast<EntityStatePDU*>(header)};
+                     EntityStatePDU* pPdu{reinterpret_cast<EntityStatePDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->entityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
@@ -271,7 +271,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_FIRE: {
-                     FirePDU* pPdu {reinterpret_cast<FirePDU*>(header)};
+                     FirePDU* pPdu{reinterpret_cast<FirePDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
@@ -281,7 +281,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DETONATION: {
-                     DetonationPDU* pPdu {reinterpret_cast<DetonationPDU*>(header)};
+                     DetonationPDU* pPdu{reinterpret_cast<DetonationPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
@@ -291,7 +291,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_SIGNAL: {
-                     SignalPDU* pPdu {reinterpret_cast<SignalPDU*>(header)};
+                     SignalPDU* pPdu{reinterpret_cast<SignalPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
@@ -301,7 +301,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_TRANSMITTER: {
-                     TransmitterPDU* pPdu {reinterpret_cast<TransmitterPDU*>(header)};
+                     TransmitterPDU* pPdu{reinterpret_cast<TransmitterPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
@@ -311,7 +311,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ELECTROMAGNETIC_EMISSION: {
-                     ElectromagneticEmissionPDU* pPdu {reinterpret_cast<ElectromagneticEmissionPDU*>(header)};
+                     ElectromagneticEmissionPDU* pPdu{reinterpret_cast<ElectromagneticEmissionPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
@@ -321,7 +321,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DATA_QUERY: {
-                     DataQueryPDU* pPdu {reinterpret_cast<DataQueryPDU*>(header)};
+                     DataQueryPDU* pPdu{reinterpret_cast<DataQueryPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -331,7 +331,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_DATA: {
-                     DataPDU* pPdu {reinterpret_cast<DataPDU*>(header)};
+                     DataPDU* pPdu{reinterpret_cast<DataPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -341,7 +341,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_COMMENT: {
-                     CommentPDU* pPdu {reinterpret_cast<CommentPDU*>(header)};
+                     CommentPDU* pPdu{reinterpret_cast<CommentPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -351,7 +351,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_START_RESUME: {
-                     StartPDU* pPdu {reinterpret_cast<StartPDU*>(header)};
+                     StartPDU* pPdu{reinterpret_cast<StartPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -361,7 +361,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_STOP_FREEZE: {
-                     StopPDU* pPdu {reinterpret_cast<StopPDU*>(header)};
+                     StopPDU* pPdu{reinterpret_cast<StopPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -371,7 +371,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACKNOWLEDGE: {
-                     AcknowledgePDU* pPdu {reinterpret_cast<AcknowledgePDU*>(header)};
+                     AcknowledgePDU* pPdu{reinterpret_cast<AcknowledgePDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -381,7 +381,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_REQUEST: {
-                     ActionRequestPDU* pPdu {reinterpret_cast<ActionRequestPDU*>(header)};
+                     ActionRequestPDU* pPdu{reinterpret_cast<ActionRequestPDU*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -391,7 +391,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_REQUEST_R: {
-                     ActionRequestPDU_R* pPdu {reinterpret_cast<ActionRequestPDU_R*>(header)};
+                     ActionRequestPDU_R* pPdu{reinterpret_cast<ActionRequestPDU_R*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -401,7 +401,7 @@ void NetIO::netInputHander()
                   break;
 
                   case PDU_ACTION_RESPONSE_R: {
-                     ActionResponsePDU_R* pPdu {reinterpret_cast<ActionResponsePDU_R*>(header)};
+                     ActionResponsePDU_R* pPdu{reinterpret_cast<ActionResponsePDU_R*>(header)};
                      if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
@@ -438,7 +438,7 @@ void NetIO::netInputHander()
 void NetIO::processInputList()
 {
    for (unsigned int idx = 0; idx < getInputListSize(); idx++) {
-      Nib* nib {static_cast<Nib*>(getInputNib(idx))};
+      Nib* nib{static_cast<Nib*>(getInputNib(idx))};
       if (nib != nullptr) nib->updateProxyPlayer();
    }
 
@@ -562,7 +562,7 @@ interop::Nib* NetIO::nibFactory(const interop::NetIO::IoType ioType)
 
 interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
-   Nib* nib {static_cast<Nib*>(nibFactory(OUTPUT_NIB))};
+   Nib* nib{static_cast<Nib*>(nibFactory(OUTPUT_NIB))};
    if (nib != nullptr) {
       nib->setNetIO(this);
       nib->setPlayer(player);
@@ -572,17 +572,17 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
       // Default DR: World, No rotation, 2nd order linear
       nib->setDeadReckoning(Nib::FVW_DRM);
 
-      bool ok {true};
-      const base::Identifier* fName {getFederateName()};
-      unsigned short site {getSiteID()};
-      unsigned short app  {getApplicationID()};
+      bool ok{true};
+      std::string fName{getFederateName()};
+      unsigned short site{getSiteID()};
+      unsigned short app{getApplicationID()};
       if (player->isProxyPlayer()) {
          const auto pNib = dynamic_cast<interop::Nib*>(player->getNib());
          fName = pNib->getFederateName();
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
          // more robust federate name to site/app ID map list.
-         if (fName != nullptr) ok = parseFederateName(&site, &app, (*fName).c_str());
+         if (!fName.empty()) ok = parseFederateName(&site, &app, fName.c_str());
          else ok = false;
       }
       nib->setFederateName(fName);
@@ -607,12 +607,11 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
 //------------------------------------------------------------------------------
 Nib* NetIO::findDisNib(const unsigned short playerID, const unsigned short site, const unsigned short app, const IoType ioType)
 {
-   Nib* nib {};
-   char cbuff[32] {};
-   bool ok {makeFederateName(cbuff, 32, site, app)};
+   Nib* nib{};
+   char fName[32]{};
+   bool ok{makeFederateName(fName, 32, site, app)};
    if (ok) {
-      base::Identifier fname(cbuff);
-      nib = dynamic_cast<Nib*>( findNib(playerID, &fname, ioType) );
+      nib = dynamic_cast<Nib*>( findNib(playerID, fName, ioType) );
    }
    return nib;
 }
@@ -626,9 +625,9 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
     // ---
     // Emitting Player's ID checks
     // ---
-    unsigned short ePlayerId {pdu->emittingEntityID.ID};
-    unsigned short eSiteId {pdu->emittingEntityID.simulationID.siteIdentification};
-    unsigned short eApplicationId {pdu->emittingEntityID.simulationID.applicationIdentification};
+    unsigned short ePlayerId{pdu->emittingEntityID.ID};
+    unsigned short eSiteId{pdu->emittingEntityID.simulationID.siteIdentification};
+    unsigned short eApplicationId{pdu->emittingEntityID.simulationID.applicationIdentification};
 
     // Ignore our own PDUs
     if (eSiteId == getSiteID() && eApplicationId == getApplicationID()) return;
@@ -652,7 +651,7 @@ void NetIO::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* 
 //------------------------------------------------------------------------------
 int NetIO::recvData(char* const packet, const int maxSize)
 {
-   int result {};
+   int result{};
    if (netInput != nullptr) {
       result = netInput->recvData(packet, maxSize);
    }
@@ -664,7 +663,7 @@ int NetIO::recvData(char* const packet, const int maxSize)
 //------------------------------------------------------------------------------
 bool NetIO::sendData(const char* const packet, const int size)
 {
-   bool result {};
+   bool result{};
    if (netOutput != nullptr) {
       result = netOutput->sendData( packet, size );
    }
@@ -676,7 +675,7 @@ bool NetIO::sendData(const char* const packet, const int size)
 //------------------------------------------------------------------------------
 unsigned int NetIO::timeStamp()
 {
-   unsigned int ts {};
+   unsigned int ts{};
    if (getTimeline() == UTC) {
       ts = makeTimeStamp( static_cast<double>(getSimulation()->getSysTimeOfDay()), true );
    } else {
@@ -691,8 +690,8 @@ unsigned int NetIO::timeStamp()
 unsigned int NetIO::makeTimeStamp(const double ctime, const bool absolute)
 {
     // compute seconds in this hour
-    const int hours {static_cast<int>(ctime / 3600.0)};
-    const double secondsThisHour {(ctime - static_cast<double>(hours*3600))};
+    const int hours{static_cast<int>(ctime / 3600.0)};
+    const double secondsThisHour{(ctime - static_cast<double>(hours*3600))};
 
     // 31 MSBs are for the 3600 seconds in this hour
     unsigned int ts {static_cast<unsigned int>((secondsThisHour/3600.0) * 0x7fffffff)};
@@ -711,16 +710,16 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
 {
    static const int p10[5] = { 10000, 1000, 100, 10, 1 };
 
-   bool ok {};
+   bool ok{};
    if (fedName != nullptr && len > 0 && site > 0 && app > 0) {
-      char cbuff[64] {};
-      unsigned int idx {};
+      char cbuff[64]{};
+      unsigned int idx{};
 
       // First the site number: Snnn
       cbuff[idx++] = 'S';
       {
-         int tmp {site};
-         bool digits {};
+         int tmp{site};
+         bool digits{};
          for (unsigned int i = 0; i < 5; i++) {
             int rr {tmp/p10[i]};
             if (rr > 0 || digits) {
@@ -734,8 +733,8 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
       // then the application number: Annn
       cbuff[idx++] = 'A';
       {
-         int tmp {app};
-         bool digits {};
+         int tmp{app};
+         bool digits{};
          for (unsigned int i = 0; i < 5; i++) {
             int rr {tmp/p10[i]};
             if (rr > 0 || digits) {
@@ -763,17 +762,17 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
 //------------------------------------------------------------------------------
 bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const app, const char* const fedName)
 {
-   bool ok {};
+   bool ok{};
    if (site != nullptr && app != nullptr && fedName != nullptr) {
-      unsigned short tSite {};
-      unsigned short tApp {};
-      unsigned int idx {};
+      unsigned short tSite{};
+      unsigned short tApp{};
+      unsigned int idx{};
 
       // First check and convert site number
       ok = ( std::toupper(fedName[idx++]) == 'S' );
       if (ok) {
-         unsigned int tmp {};
-         unsigned int cnt {};
+         unsigned int tmp{};
+         unsigned int cnt{};
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += static_cast<int>(fedName[idx++] - '0');
@@ -786,8 +785,8 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
       // Next check and convert application number
       ok = ( std::toupper(fedName[idx++]) == 'A' );
       if (ok) {
-         unsigned int tmp {};
-         unsigned int cnt {};
+         unsigned int tmp{};
+         unsigned int cnt{};
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += static_cast<int>(fedName[idx++] - '0');
@@ -815,15 +814,15 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
 {
    static const int p10[5] = { 10000, 1000, 100, 10, 1 };
 
-   bool ok {};
+   bool ok{};
    if (fedName != nullptr && len > 0 && exercise > 0) {
-      char cbuff[64] {};
-      unsigned int idx {};
+      char cbuff[64]{};
+      unsigned int idx{};
 
       cbuff[idx++] = 'E';
       {
-         int tmp {exercise};
-         bool digits {};
+         int tmp{exercise};
+         bool digits{};
          for (unsigned int i = 0; i < 5; i++) {
             int rr {tmp/p10[i]};
             if (rr > 0 || digits) {
@@ -851,15 +850,15 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
 //------------------------------------------------------------------------------
 bool NetIO::parseFederationName(unsigned short* const exercise, const char* const fedName)
 {
-   bool ok {};
+   bool ok{};
    if (exercise != nullptr && fedName != nullptr) {
-      unsigned short tExercise {};
-      unsigned int idx {};
+      unsigned short tExercise{};
+      unsigned int idx{};
 
       ok = ( std::toupper(fedName[idx++]) == 'E' );
       if (ok) {
-         unsigned int tmp {};
-         unsigned int cnt {};
+         unsigned int tmp{};
+         unsigned int cnt{};
          while (cnt < 5 && std::isdigit(fedName[idx])) {
             tmp *= 10;
             tmp += static_cast<int>(fedName[idx++] - '0');
@@ -890,7 +889,7 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const dis::Ntm* result {};
+   const dis::Ntm* result{};
 
    const auto disRoot = dynamic_cast<const dis::NtmInputNode*>( getRootNtmInputNode() );
    if (disRoot != nullptr) {
@@ -907,12 +906,12 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
 
 double NetIO::getMaxEntityRange(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxEntityRange[k][d] : 0;
       } else {
          value = BaseClass::getMaxEntityRange(nib);
@@ -923,12 +922,12 @@ double NetIO::getMaxEntityRange(const interop::Nib* const nib) const
 
 double NetIO::getMaxEntityRangeSquared(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxEntityRange2[k][d] : 0;
       } else {
          value = BaseClass::getMaxEntityRangeSquared(nib);
@@ -939,12 +938,12 @@ double NetIO::getMaxEntityRangeSquared(const interop::Nib* const nib) const
 
 double NetIO::getMaxTimeDR(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxTimeDR[k][d] : 0;
       } else {
          value = BaseClass::getMaxTimeDR(nib);
@@ -955,12 +954,12 @@ double NetIO::getMaxTimeDR(const interop::Nib* const nib) const
 
 double NetIO::getMaxPositionErr(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxPositionErr[k][d] : 0;
       } else {
          value = BaseClass::getMaxPositionErr(nib);
@@ -971,12 +970,12 @@ double NetIO::getMaxPositionErr(const interop::Nib* const nib) const
 
 double NetIO::getMaxOrientationErr(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxOrientationErr[k][d] : 0;
       } else {
          value = BaseClass::getMaxOrientationErr(nib);
@@ -987,12 +986,12 @@ double NetIO::getMaxOrientationErr(const interop::Nib* const nib) const
 
 double NetIO::getMaxAge(const interop::Nib* const nib) const
 {
-   double value {};
+   double value{};
    if (nib != nullptr) {
       const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
-         const unsigned char k {disNib->getEntityKind()};
-         const unsigned char d {disNib->getEntityDomain()};
+         const unsigned char k{disNib->getEntityKind()};
+         const unsigned char d{disNib->getEntityDomain()};
          value = (k < NUM_ENTITY_KINDS && d < MAX_ENTITY_DOMAINS) ? maxAge[k][d] : 0;
       } else {
          value = BaseClass::getMaxAge(nib);
@@ -1009,12 +1008,10 @@ double NetIO::getMaxAge(const interop::Nib* const nib) const
 void NetIO::defineFederateName()
 {
    if (siteID > 0 && appID > 0) {
-      char cbuff[32] {};
-      bool ok {makeFederateName(cbuff, 32, siteID, appID)};
+      char fName[32]{};
+      bool ok{makeFederateName(fName, 32, siteID, appID)};
       if (ok) {
-         const auto p = new base::Identifier(cbuff);
-         setFederateName(p);
-         p->unref();
+         setFederateName(fName);
       }
    } else {
       setFederateName(nullptr);
@@ -1025,12 +1022,10 @@ void NetIO::defineFederateName()
 void NetIO::defineFederationName()
 {
    if (exerciseID > 0) {
-      char cbuff[32] {};
-      bool ok {makeFederationName(cbuff, 32, exerciseID)};
+      char fName[32]{};
+      bool ok{makeFederationName(fName, 32, exerciseID)};
       if (ok) {
-         const auto p = new base::Identifier(cbuff);
-         setFederationName(p);
-         p->unref();
+         setFederationName(fName);
       }
    } else {
       setFederationName(nullptr);
@@ -1065,10 +1060,10 @@ bool NetIO::setExerciseID(const unsigned char v)
 bool NetIO::setMaxEntityRange(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
-   unsigned char imin {};
-   unsigned char imax {NUM_ENTITY_KINDS};
-   unsigned char jmin {};
-   unsigned char jmax {MAX_ENTITY_DOMAINS};
+   unsigned char imin{};
+   unsigned char imax{NUM_ENTITY_KINDS};
+   unsigned char jmin{};
+   unsigned char jmax{MAX_ENTITY_DOMAINS};
 
    // Clamp i to kind (if valid)
    if (kind < NUM_ENTITY_KINDS) {
@@ -1096,10 +1091,10 @@ bool NetIO::setMaxEntityRange(const double v, const unsigned char kind, const un
 bool NetIO::setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
-   unsigned char imin {};
-   unsigned char imax {NUM_ENTITY_KINDS};
-   unsigned char jmin {};
-   unsigned char jmax {MAX_ENTITY_DOMAINS};
+   unsigned char imin{};
+   unsigned char imax{NUM_ENTITY_KINDS};
+   unsigned char jmin{};
+   unsigned char jmax{MAX_ENTITY_DOMAINS};
 
    // Clamp i to kind (if valid)
    if (kind < NUM_ENTITY_KINDS) {
@@ -1126,10 +1121,10 @@ bool NetIO::setMaxTimeDR(const double v, const unsigned char kind, const unsigne
 bool NetIO::setMaxPositionErr(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
-   unsigned char imin {};
-   unsigned char imax {NUM_ENTITY_KINDS};
-   unsigned char jmin {};
-   unsigned char jmax {MAX_ENTITY_DOMAINS};
+   unsigned char imin{};
+   unsigned char imax{NUM_ENTITY_KINDS};
+   unsigned char jmin{};
+   unsigned char jmax{MAX_ENTITY_DOMAINS};
 
    // Clamp i to kind (if valid)
    if (kind < NUM_ENTITY_KINDS) {
@@ -1156,10 +1151,10 @@ bool NetIO::setMaxPositionErr(const double v, const unsigned char kind, const un
 bool NetIO::setMaxOrientationErr(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
-   unsigned char imin {};
-   unsigned char imax {NUM_ENTITY_KINDS};
-   unsigned char jmin {};
-   unsigned char jmax {MAX_ENTITY_DOMAINS};
+   unsigned char imin{};
+   unsigned char imax{NUM_ENTITY_KINDS};
+   unsigned char jmin{};
+   unsigned char jmax{MAX_ENTITY_DOMAINS};
 
    // Clamp i to kind (if valid)
    if (kind < NUM_ENTITY_KINDS) {
@@ -1186,10 +1181,10 @@ bool NetIO::setMaxOrientationErr(const double v, const unsigned char kind, const
 bool NetIO::setMaxAge(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
-   unsigned char imin {};
-   unsigned char imax {NUM_ENTITY_KINDS};
-   unsigned char jmin {};
-   unsigned char jmax {MAX_ENTITY_DOMAINS};
+   unsigned char imin{};
+   unsigned char imax{NUM_ENTITY_KINDS};
+   unsigned char jmin{};
+   unsigned char jmax{MAX_ENTITY_DOMAINS};
 
    // Clamp i to kind (if valid)
    if (kind < NUM_ENTITY_KINDS) {
@@ -1219,7 +1214,7 @@ bool NetIO::setMaxAge(const double v, const unsigned char kind, const unsigned c
 // Sets max entity range for this entity kind/domain
 bool NetIO::setMaxEntityRange(const base::Length* const p, const unsigned char kind, const unsigned char domain)
 {
-    bool ok {};
+    bool ok{};
     if (p != nullptr) {
         ok = setMaxEntityRange(p->getValueInMeters(), kind, domain);
     }
@@ -1410,7 +1405,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname{(*p->slot()).c_str()};
+            const char* const slotname{p->slot().c_str()};
             const auto pp = dynamic_cast<const base::Length*>( p->object() );
 
             if (pp != nullptr) {
@@ -1451,7 +1446,7 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname{(*p->slot()).c_str()};
+            const char* const slotname{p->slot().c_str()};
             const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {
@@ -1494,7 +1489,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname{(*p->slot()).c_str()};
+            const char* const slotname{p->slot().c_str()};
             const auto pp = dynamic_cast<const base::Length*>( p->object() );
 
             if (pp != nullptr) {
@@ -1535,7 +1530,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname{(*p->slot()).c_str()};
+            const char* const slotname{p->slot().c_str()};
             const auto pp = dynamic_cast<const base::Angle*>( p->object() );
 
             if (pp != nullptr) {
@@ -1577,7 +1572,7 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
 
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
-            const char* const slotname {(*p->slot()).c_str()};
+            const char* const slotname {p->slot().c_str()};
             const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {

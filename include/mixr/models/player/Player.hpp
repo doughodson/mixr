@@ -15,6 +15,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base { class Angle; class Boolean; class Integer; class Latitude; class Length; class List; class Longitude;
@@ -598,57 +599,57 @@ public:
 
    DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
-   const base::Identifier* getDynamicsModelName() const;              // Name of the player's dynamics model
+   const std::string& getDynamicsModelName() const;                   // Name of the player's dynamics model
 
    Pilot* getPilot();                                                 // Player's top level pilot model
    const Pilot* getPilot() const;                                     // Player's top level pilot model (const version)
-   const base::Identifier* getPilotName() const;                      // Name of the player's top level pilot model
+   const std::string& getPilotName() const;                           // Name of the player's top level pilot model
    Pilot* getPilotByName(const char* const);                          // Returns a pilot model by its name
    base::Pair* getPilotByType(const std::type_info& type);            // Returns a pilot model by its type
 
    StoresMgr* getStoresManagement();                                  // Player's stores (weapons, fuel, etc...) manager model
    const StoresMgr* getStoresManagement() const;                      // Player's stores (weapons, fuel, etc...) manager model (const version)
-   const base::Identifier* getStoresManagementName() const;           // Name of the player's stores (weapons, fuel, etc...) manager model
+   const std::string& getStoresManagementName() const;                // Name of the player's stores (weapons, fuel, etc...) manager model
 
    Datalink* getDatalink();                                           // Player's top level Datalink model
    const Datalink* getDatalink() const;                               // Player's top level Datalink (const version)
-   const base::Identifier* getDatalinkName() const;                   // Name of the player's top level Datalink model
+   const std::string& getDatalinkName() const;                        // Name of the player's top level Datalink model
    Datalink* getDatalinkByName(const char* const);                    // Returns a Datalink model by its name
    base::Pair* getDatalinkByType(const std::type_info& type);         // Returns a Datalink model by its type
 
    Gimbal* getGimbal();                                               // Player's top level Gimbal model
    const Gimbal* getGimbal() const;                                   // Player's top level Gimbal (const version)
-   const base::Identifier* getGimbalName() const;                     // Name of the player's top level Gimbal model
+   const std::string& getGimbalName() const;                          // Name of the player's top level Gimbal model
    Gimbal* getGimbalByName(const char* const);                        // Returns a Gimbal model by its name
    base::Pair* getGimbalByType(const std::type_info& type);           // Returns a Gimbal model by its type
 
    Navigation* getNavigation();                                       // Player's top level Navigation model
    const Navigation* getNavigation() const;                           // Player's top level Navigation (const version)
-   const base::Identifier* getNavigationName() const;                 // Name of the player's top level Navigation model
+   const std::string& getNavigationName() const;                      // Name of the player's top level Navigation model
    Navigation* getNavigationByName(const char* const);                // Returns a Navigation model by its name
    base::Pair* getNavigationByType(const std::type_info& type);       // Returns a Navigation model by its type
 
    OnboardComputer* getOnboardComputer();                             // Player's top level OnboardComputer model
    const OnboardComputer* getOnboardComputer() const;                 // Player's top level OnboardComputer (const version)
-   const base::Identifier* getOnboardComputerName() const;            // Name of the player's top level OnboardComputer model
+   const std::string& getOnboardComputerName() const;                 // Name of the player's top level OnboardComputer model
    OnboardComputer* getOnboardComputerByName(const char* const);      // Returns an OnboardComputer model by its name
    base::Pair* getOnboardComputerByType(const std::type_info& type);  // Returns an OnboardComputer model by its type
 
    Radio* getRadio();                                          // Player's top level Radio model
    const Radio* getRadio() const;                              // Player's top level Radio (const version)
-   const base::Identifier* getRadioName() const;               // Name of the player's top level Radio model
+   const std::string& getRadioName() const;                    // Name of the player's top level Radio model
    Radio* getRadioByName(const char* const);                   // Returns a Radio model by its name
    base::Pair* getRadioByType(const std::type_info& type);     // Returns a Radio model by its type
 
    RfSensor* getSensor();                                      // Player's top level R/F sensor model
    const RfSensor* getSensor() const;                          // Player's top level R/F sensor model (const version)
-   const base::Identifier* getSensorName() const;              // Name of the player's top level R/F sensor model
+   const std::string& getSensorName() const;                   // Name of the player's top level R/F sensor model
    RfSensor* getSensorByName(const char* const);               // Returns a R/F sensor model by its name
    base::Pair* getSensorByType(const std::type_info& type);    // Returns a R/F sensor model by its type
 
    IrSystem* getIrSystem();                                    // Player's top level IR sensor model
    const IrSystem* getIrSystem() const;                        // Player's top level IR sensor model (const version)
-   const base::Identifier* getIrSystemName() const;            // Name of the player's top level IR sensor model
+   const std::string& getIrSystemName() const;                 // Name of the player's top level IR sensor model
    IrSystem* getIrSystemByName(const char* const);             // Returns a IR sensor model by its name
    base::Pair* getIrSystemByType(const std::type_info& type);  // Returns a IR sensor model by its type
 

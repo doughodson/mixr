@@ -1,6 +1,7 @@
 
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
 

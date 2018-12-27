@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.4.  */
+/* A Bison parser, made by GNU Bison 3.2.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -40,11 +40,14 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
 /* Identify Bison output.  */
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.4"
+#define YYBISON_VERSION "3.2.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -61,8 +64,8 @@
 
 
 
-/* Copy the first part of user declarations.  */
-#line 19 "edl_parser.y" /* yacc.c:339  */
+/* First part of user prologue.  */
+#line 19 "edl_parser.y" /* yacc.c:338  */
 
 
 #include <cstdio>
@@ -128,9 +131,9 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
             mixr::base::List::Item* item{arg_list->getFirstItem()};
             while (item != nullptr) {
                 mixr::base::Pair* p{static_cast<mixr::base::Pair*>(item->getValue())};
-                bool ok{obj->setSlotByName(p->slot()->c_str(), p->object())};
+                bool ok{obj->setSlotByName(p->slot().c_str(), p->object())};
                 if (!ok) {
-                    std::string msg = "error while setting slot name: " + std::string( p->slot()->c_str() );
+                    std::string msg = "error while setting slot name: " + p->slot();
                     yyerror(msg.c_str());
                 }
                 item = item->getNext();
@@ -152,13 +155,16 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
 }
 
 
-#line 156 "EdlParser.cpp" /* yacc.c:339  */
-
+#line 159 "EdlParser.cpp" /* yacc.c:338  */
 # ifndef YY_NULLPTR
-#  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULLPTR nullptr
+#  if defined __cplusplus
+#   if 201103L <= __cplusplus
+#    define YY_NULLPTR nullptr
+#   else
+#    define YY_NULLPTR 0
+#   endif
 #  else
-#   define YY_NULLPTR 0
+#   define YY_NULLPTR ((void*)0)
 #  endif
 # endif
 
@@ -201,7 +207,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 110 "edl_parser.y" /* yacc.c:355  */
+#line 110 "edl_parser.y" /* yacc.c:353  */
 
    double                     dval;
    long                       lval;
@@ -213,7 +219,7 @@ union YYSTYPE
    mixr::base::List*          lvalp;
    mixr::base::Number*        nvalp;
 
-#line 217 "EdlParser.cpp" /* yacc.c:355  */
+#line 223 "EdlParser.cpp" /* yacc.c:353  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -228,9 +234,7 @@ int yyparse (void);
 
 #endif /* !YY_YY_EDLPARSER_HPP_INCLUDED  */
 
-/* Copy the second part of user declarations.  */
 
-#line 234 "EdlParser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -251,13 +255,13 @@ typedef signed char yytype_int8;
 #ifdef YYTYPE_UINT16
 typedef YYTYPE_UINT16 yytype_uint16;
 #else
-typedef unsigned short int yytype_uint16;
+typedef unsigned short yytype_uint16;
 #endif
 
 #ifdef YYTYPE_INT16
 typedef YYTYPE_INT16 yytype_int16;
 #else
-typedef short int yytype_int16;
+typedef short yytype_int16;
 #endif
 
 #ifndef YYSIZE_T
@@ -269,7 +273,7 @@ typedef short int yytype_int16;
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
-#  define YYSIZE_T unsigned int
+#  define YYSIZE_T unsigned
 # endif
 #endif
 
@@ -305,15 +309,6 @@ typedef short int yytype_int16;
 # define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
 #endif
 
-#if !defined _Noreturn \
-     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
-# if defined _MSC_VER && 1200 <= _MSC_VER
-#  define _Noreturn __declspec (noreturn)
-# else
-#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
-# endif
-#endif
-
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
 # define YYUSE(E) ((void) (E))
@@ -321,7 +316,7 @@ typedef short int yytype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
 # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
     _Pragma ("GCC diagnostic push") \
@@ -489,7 +484,7 @@ union yyalloc
 #define YYMAXUTOK   263
 
 #define YYTRANSLATE(YYX)                                                \
-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+  ((unsigned) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, without out-of-bounds checking.  */
@@ -711,37 +706,37 @@ do {                                                                      \
 } while (0)
 
 
-/*----------------------------------------.
-| Print this symbol's value on YYOUTPUT.  |
-`----------------------------------------*/
+/*-----------------------------------.
+| Print this symbol's value on YYO.  |
+`-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
-  FILE *yyo = yyoutput;
-  YYUSE (yyo);
+  FILE *yyoutput = yyo;
+  YYUSE (yyoutput);
   if (!yyvaluep)
     return;
 # ifdef YYPRINT
   if (yytype < YYNTOKENS)
-    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
+    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
 # endif
   YYUSE (yytype);
 }
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+/*---------------------------.
+| Print this symbol on YYO.  |
+`---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
-  YYFPRINTF (yyoutput, "%s %s (",
+  YYFPRINTF (yyo, "%s %s (",
              yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
 
-  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
-  YYFPRINTF (yyoutput, ")");
+  yy_symbol_value_print (yyo, yytype, yyvaluep);
+  YYFPRINTF (yyo, ")");
 }
 
 /*------------------------------------------------------------------.
@@ -775,7 +770,7 @@ do {                                                            \
 static void
 yy_reduce_print (yytype_int16 *yyssp, YYSTYPE *yyvsp, int yyrule)
 {
-  unsigned long int yylno = yyrline[yyrule];
+  unsigned long yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
   int yyi;
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
@@ -908,7 +903,7 @@ yytnamerr (char *yyres, const char *yystr)
   if (! yyres)
     return yystrlen (yystr);
 
-  return yystpcpy (yyres, yystr) - yyres;
+  return (YYSIZE_T) (yystpcpy (yyres, yystr) - yyres);
 }
 # endif
 
@@ -1001,6 +996,7 @@ yysyntax_error (YYSIZE_T *yymsg_alloc, char **yymsg,
       case N:                               \
         yyformat = S;                       \
       break
+    default: /* Avoid compiler warnings. */
       YYCASE_(0, YY_("syntax error"));
       YYCASE_(1, YY_("syntax error, unexpected %s"));
       YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
@@ -1149,12 +1145,12 @@ yyparse (void)
   yyssp++;
 
  yysetstate:
-  *yyssp = yystate;
+  *yyssp = (yytype_int16) yystate;
 
   if (yyss + yystacksize - 1 <= yyssp)
     {
       /* Get the current used size of the three stacks, in elements.  */
-      YYSIZE_T yysize = yyssp - yyss + 1;
+      YYSIZE_T yysize = (YYSIZE_T) (yyssp - yyss + 1);
 
 #ifdef yyoverflow
       {
@@ -1172,7 +1168,6 @@ yyparse (void)
                     &yyss1, yysize * sizeof (*yyssp),
                     &yyvs1, yysize * sizeof (*yyvsp),
                     &yystacksize);
-
         yyss = yyss1;
         yyvs = yyvs1;
       }
@@ -1206,7 +1201,7 @@ yyparse (void)
       yyvsp = yyvs + yysize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-                  (unsigned long int) yystacksize));
+                  (unsigned long) yystacksize));
 
       if (yyss + yystacksize - 1 <= yyssp)
         YYABORT;
@@ -1317,25 +1312,25 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 141 "edl_parser.y" /* yacc.c:1646  */
+#line 141 "edl_parser.y" /* yacc.c:1645  */
     { result = (yyvsp[0].ovalp); }
-#line 1323 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1318 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 3:
-#line 142 "edl_parser.y" /* yacc.c:1646  */
+#line 142 "edl_parser.y" /* yacc.c:1645  */
     { if ((yyvsp[0].ovalp) != 0) { result = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
-#line 1329 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1324 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 4:
-#line 145 "edl_parser.y" /* yacc.c:1646  */
+#line 145 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.svalp) = new mixr::base::PairStream(); }
-#line 1335 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1330 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 5:
-#line 147 "edl_parser.y" /* yacc.c:1646  */
+#line 147 "edl_parser.y" /* yacc.c:1645  */
     { if ((yyvsp[0].ovalp) != 0) {
                                         int i = (yyvsp[-1].svalp)->entries();
                                         char cbuf[20]{};
@@ -1347,11 +1342,11 @@ yyreduce:
                                         (yyval.svalp) = (yyvsp[-1].svalp);
                                       }
                                     }
-#line 1351 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1346 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 6:
-#line 159 "edl_parser.y" /* yacc.c:1646  */
+#line 159 "edl_parser.y" /* yacc.c:1645  */
     {
                                     int i = (yyvsp[-1].svalp)->entries();
                                     char cbuf[20]{};
@@ -1362,95 +1357,95 @@ yyreduce:
                                     p->unref();
                                     (yyval.svalp) = (yyvsp[-1].svalp);
                                     }
-#line 1366 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1361 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 7:
-#line 170 "edl_parser.y" /* yacc.c:1646  */
+#line 170 "edl_parser.y" /* yacc.c:1645  */
     { (yyvsp[-1].svalp)->put((yyvsp[0].pvalp)); (yyvsp[0].pvalp)->unref(); (yyval.svalp) = (yyvsp[-1].svalp); }
-#line 1372 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1367 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 8:
-#line 174 "edl_parser.y" /* yacc.c:1646  */
+#line 174 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = parse((yyvsp[-2].cvalp), (yyvsp[-1].svalp)); delete[] (yyvsp[-2].cvalp); (yyvsp[-1].svalp)->unref(); }
-#line 1378 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1373 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 9:
-#line 176 "edl_parser.y" /* yacc.c:1646  */
+#line 176 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = (mixr::base::Object*) (yyvsp[-1].svalp); }
-#line 1384 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1379 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 10:
-#line 180 "edl_parser.y" /* yacc.c:1646  */
+#line 180 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.pvalp) = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
-#line 1390 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1385 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 11:
-#line 181 "edl_parser.y" /* yacc.c:1646  */
+#line 181 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.pvalp) = new mixr::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
-#line 1396 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1391 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 12:
-#line 184 "edl_parser.y" /* yacc.c:1646  */
+#line 184 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = new mixr::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
-#line 1402 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1397 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 13:
-#line 185 "edl_parser.y" /* yacc.c:1646  */
+#line 185 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = new mixr::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
-#line 1408 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1403 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 14:
-#line 186 "edl_parser.y" /* yacc.c:1646  */
+#line 186 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = new mixr::base::Boolean((yyvsp[0].bval)); }
-#line 1414 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1409 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 15:
-#line 187 "edl_parser.y" /* yacc.c:1646  */
+#line 187 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = (yyvsp[-1].lvalp); }
-#line 1420 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1415 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 16:
-#line 188 "edl_parser.y" /* yacc.c:1646  */
+#line 188 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.ovalp) = (yyvsp[0].nvalp); }
-#line 1426 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1421 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 17:
-#line 191 "edl_parser.y" /* yacc.c:1646  */
+#line 191 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.lvalp) = new mixr::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
-#line 1432 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1427 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 18:
-#line 192 "edl_parser.y" /* yacc.c:1646  */
+#line 192 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.lvalp) = (yyvsp[-1].lvalp); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
-#line 1438 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1433 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 19:
-#line 195 "edl_parser.y" /* yacc.c:1646  */
+#line 195 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.nvalp) = new mixr::base::Integer((yyvsp[0].lval)); }
-#line 1444 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1439 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
   case 20:
-#line 196 "edl_parser.y" /* yacc.c:1646  */
+#line 196 "edl_parser.y" /* yacc.c:1645  */
     { (yyval.nvalp) = new mixr::base::Float((yyvsp[0].dval)); }
-#line 1450 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1445 "EdlParser.cpp" /* yacc.c:1645  */
     break;
 
 
-#line 1454 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1449 "EdlParser.cpp" /* yacc.c:1645  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1475,14 +1470,13 @@ yyreduce:
   /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
      number reduced by.  */
-
-  yyn = yyr1[yyn];
-
-  yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
-  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
-    yystate = yytable[yystate];
-  else
-    yystate = yydefgoto[yyn - YYNTOKENS];
+  {
+    const int yylhs = yyr1[yyn] - YYNTOKENS;
+    const int yyi = yypgoto[yylhs] + *yyssp;
+    yystate = (0 <= yyi && yyi <= YYLAST && yycheck[yyi] == *yyssp
+               ? yytable[yyi]
+               : yydefgoto[yylhs]);
+  }
 
   goto yynewstate;
 
@@ -1678,7 +1672,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 198 "edl_parser.y" /* yacc.c:1906  */
+#line 198 "edl_parser.y" /* yacc.c:1903  */
 
 
 namespace mixr {

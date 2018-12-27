@@ -579,7 +579,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 //------------------------------------------------------------------------------
 // findModel() -- find the model that matches ALL IDs.
 //------------------------------------------------------------------------------
-CigiModel* IgHost::findModel(const int playerID, const base::Identifier* const federateName, const TableType type)
+CigiModel* IgHost::findModel(const int playerID, const std::string& federateName, const TableType type)
 {
    // Define the key
    ModelKey key(playerID, federateName);
@@ -601,7 +601,7 @@ CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, con
    CigiModel* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::Identifier* fName{};
+      std::string fName;
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const simulation::AbstractNib* pNib{player->getNib()};
@@ -635,15 +635,15 @@ int IgHost::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const base::Identifier* pKeyFedName{pKey->fName};
-      const base::Identifier* pModelFedName{pModel->getFederateName()};
+      const std::string& pKeyFedName{pKey->fName};
+      const std::string& pModelFedName{pModel->getFederateName()};
 
-      if (pKeyFedName == nullptr && pModelFedName != nullptr) result = -1;
-
-      else if (pKeyFedName != nullptr && pModelFedName == nullptr) result = +1;
-
-      else if (pKeyFedName != nullptr && pModelFedName != nullptr) {
-         result = std::strcmp((*pKeyFedName).c_str(), (*pModelFedName).c_str());
+      if (pKeyFedName.empty() && pModelFedName .empty()) {
+         result = -1;
+      } else if (!pKeyFedName.empty() && pModelFedName.empty()) {
+         result = +1;
+      } else if (!pKeyFedName.empty() && !pModelFedName.empty()) {
+         result = (pKeyFedName == pModelFedName);
       }
    }
 
@@ -743,7 +743,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
 //==============================================================================
 // IgModel::ModelKey class
 //==============================================================================
-IgHost::ModelKey::ModelKey(const int pid, const base::Identifier* const federateName)
+IgHost::ModelKey::ModelKey(const int pid, const std::string& federateName)
 {
    playerID = pid;
    fName = federateName;

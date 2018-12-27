@@ -69,9 +69,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                nib->setApplicationID(app);
                char cbuff[32] {};
                makeFederateName(cbuff, 32, site, app);
-               const auto fname = new base::Identifier(cbuff);
-               nib->setFederateName(fname);
-               fname->unref();
+               nib->setFederateName(cbuff);
             }
 
             nib->setDeadReckoning( interop::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );

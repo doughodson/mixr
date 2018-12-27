@@ -5,6 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base {
@@ -331,7 +332,7 @@ private:
    Mode mode {Mode::HOLD_STATE};              // Current mode
    safe_ptr<Object> arg;                      // Current argument
    StateMachine* stMach{};                    // Current state's state machine object
-   Identifier* stMachName{};                  // Current state's state machine name
+   std::string stMachName;                    // Current state's state machine name
 
    // Previous state
    unsigned short pState{INVALID_STATE};      // Previous state number

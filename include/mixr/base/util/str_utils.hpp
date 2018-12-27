@@ -3,7 +3,7 @@
 #define __mixr_base_util_str_utils_H__
 
 //------------------------------------------------------------------------------
-// General purpose functions to manipulate c-style strings
+// General purpose functions to manipulate C (char arrays) strings
 //------------------------------------------------------------------------------
 
 #include <cstddef>

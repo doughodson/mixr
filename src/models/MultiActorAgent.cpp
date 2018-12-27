@@ -48,7 +48,7 @@ void MultiActorAgent::reset()
    if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
-         base::Component* c{sim->findPlayerByName(agentList[i].actorName->c_str())};
+         base::Component* c{sim->findPlayerByName(agentList[i].actorName.c_str())};
          if (c != nullptr) {
             agentList[i].actor = c;
             // send reset to each
@@ -147,7 +147,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(base::Identifier* name, base::ubf::AbstractBehavior* const b)
+bool MultiActorAgent::addAgent(const std::string& name, base::ubf::AbstractBehavior* const b)
 {
    bool ok{};
    if (nAgents < MAX_AGENTS) {

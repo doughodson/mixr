@@ -31,13 +31,13 @@ public:
    explicit Decibel(const double);
 
    void setValuedB(const double);
-   double asdB() const                          { return db; }
+   double asdB() const                 { return db; }
 
    void setValue(const double);
 
 private:
-   double getValue() const final       { return val; }
-   double val{};
+   double getValue() const final       { return value; }
+   double value{};
 
    double db{};      // value in dBs
 

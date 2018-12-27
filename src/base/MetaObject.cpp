@@ -7,8 +7,8 @@ namespace mixr {
 namespace base {
 
 MetaObject::MetaObject(
-      const char* const cname,
-      const char* const fname,
+      const std::string& cname,
+      const std::string& fname,
       const SlotTable* const slottbl,
       const MetaObject* const metaobj
    ) : slottable(slottbl), baseMetaObject(metaobj), className(cname), factoryName(fname)

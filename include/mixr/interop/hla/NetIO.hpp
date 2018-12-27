@@ -5,6 +5,7 @@
 #include "mixr/interop/common/NetIO.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/safe_ptr.hpp"
+
 #include <array>
 
 #include <RTI.hh>
@@ -53,7 +54,6 @@ public:
    static const int MAX_PARAMETERS{100};
 
 public:
-
     // HLA Object Class handles
     //    Note: index range [ 1 ... MAX_CLASSES ]
     unsigned int findObjectClassIndex(const RTI::ObjectClassHandle handle) const;

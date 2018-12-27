@@ -853,9 +853,10 @@ const DynamicsModel* Player::getDynamicsModel() const
 }
 
 // Name of the Player's dynamics model
-const base::Identifier* Player::getDynamicsModelName() const
+const std::string& Player::getDynamicsModelName() const
 {
-   return (dynamicsModel != nullptr) ? dynamicsModel->slot() : nullptr;
+   static const std::string empty = "";
+   return (dynamicsModel != nullptr) ? dynamicsModel->slot() : empty;
 }
 
 //------------------------------------------------------------------------------
@@ -875,9 +876,10 @@ const Pilot* Player::getPilot() const
 }
 
 // Name of the player's pilot model
-const base::Identifier* Player::getPilotName() const
+const std::string& Player::getPilotName() const
 {
-   return (pilot != nullptr) ? pilot->slot() : nullptr;
+   static const std::string empty = "";
+   return (pilot != nullptr) ? pilot->slot() : empty;
 }
 
 // Returns a Pilot model by its name
@@ -899,7 +901,7 @@ Pilot* Player::getPilotByName(const char* const name1)
 
       // Now compare the first name with the name of our top level system
       base::Pair* pair{};
-      if ( *getPilotName() == fname ) {
+      if ( getPilotName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -960,9 +962,10 @@ const StoresMgr* Player::getStoresManagement() const
 }
 
 // Name of the player's stores (weapons, fuel) manager model
-const base::Identifier* Player::getStoresManagementName() const
+const std::string& Player::getStoresManagementName() const
 {
-   return (sms != nullptr) ? sms->slot() : nullptr;
+   static const std::string empty = "";
+   return (sms != nullptr) ? sms->slot() : empty;
 }
 
 //------------------------------------------------------------------------------
@@ -982,9 +985,10 @@ const Datalink* Player::getDatalink() const
 }
 
 // Name of the player's top level Datalink model
-const base::Identifier* Player::getDatalinkName() const
+const std::string& Player::getDatalinkName() const
 {
-   return (datalink != nullptr) ? datalink->slot() : nullptr;
+   static const std::string empty = "";
+   return (datalink != nullptr) ? datalink->slot() : empty;
 }
 
 // Returns a Datalink model by its name
@@ -1006,7 +1010,7 @@ Datalink* Player::getDatalinkByName(const char* const name1)
 
       // Now compare the first name with the name of our top level system
       base::Pair* pair{};
-      if ( *getDatalinkName() == fname ) {
+      if ( getDatalinkName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1067,9 +1071,10 @@ const Gimbal* Player::getGimbal() const
 }
 
 // Name of the player's top level Gimbal model
-const base::Identifier* Player::getGimbalName() const
+const std::string& Player::getGimbalName() const
 {
-   return (gimbal != nullptr) ? gimbal->slot() : nullptr;
+   static const std::string empty = "";
+   return (gimbal != nullptr) ? gimbal->slot() : empty;
 }
 
 // Returns a Gimbal model by its name
@@ -1091,7 +1096,7 @@ Gimbal* Player::getGimbalByName(const char* const name1)
 
       // Now compare the first name with the name of our top level system
       base::Pair* pair{};
-      if ( *getGimbalName() == fname ) {
+      if ( getGimbalName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1152,9 +1157,10 @@ const Navigation* Player::getNavigation() const
 }
 
 // Name of the player's top level Navigation model
-const base::Identifier* Player::getNavigationName() const
+const std::string& Player::getNavigationName() const
 {
-   return (nav != nullptr) ? nav->slot() : nullptr;
+   static const std::string empty = "";
+   return (nav != nullptr) ? nav->slot() : empty;
 }
 
 // Returns a Navigation model by its name
@@ -1176,7 +1182,7 @@ Navigation* Player::getNavigationByName(const char* const name1)
 
       // Now compare the first name with the name of the root system
       base::Pair* pair{};
-      if ( *getNavigationName() == fname ) {
+      if ( getNavigationName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1237,9 +1243,10 @@ const OnboardComputer* Player::getOnboardComputer() const
 }
 
 // Name of the player's top level OnboardComputer model
-const base::Identifier* Player::getOnboardComputerName() const
+const std::string& Player::getOnboardComputerName() const
 {
-   return (obc != nullptr) ? obc->slot() : nullptr;
+   static const std::string empty = "";
+   return (obc != nullptr) ? obc->slot() : empty;
 }
 
 // Returns an OnboardComputer model by its name
@@ -1261,7 +1268,7 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 
       // Now compare the first name with the name of the root system
       base::Pair* pair{};
-      if ( *getOnboardComputerName() == fname ) {
+      if ( getOnboardComputerName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1322,9 +1329,10 @@ const Radio* Player::getRadio() const
 }
 
 // Name of the player's top level Radio model
-const base::Identifier* Player::getRadioName() const
+const std::string& Player::getRadioName() const
 {
-   return (radio != nullptr) ? radio->slot() : nullptr;
+   static const std::string empty = "";
+   return (radio != nullptr) ? radio->slot() : empty;
 }
 
 // Returns a Radio model by its name
@@ -1346,7 +1354,7 @@ Radio* Player::getRadioByName(const char* const name1)
 
       // Now compare the first name with the name of the root system
       base::Pair* pair{};
-      if ( *getRadioName() == fname ) {
+      if ( getRadioName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1407,9 +1415,10 @@ const RfSensor* Player::getSensor() const
 }
 
 // Name of the player's top level R/F sensor model
-const base::Identifier* Player::getSensorName() const
+const std::string& Player::getSensorName() const
 {
-   return (sensor != nullptr) ? sensor->slot() : nullptr;
+   static const std::string empty = "";
+   return (sensor != nullptr) ? sensor->slot() : empty;
 }
 
 // Returns a R/F sensor model by its name
@@ -1431,7 +1440,7 @@ RfSensor* Player::getSensorByName(const char* const name1)
 
       // Now compare the first name with the name of our top level system
       base::Pair* pair{};
-      if ( *getSensorName() == fname ) {
+      if ( getSensorName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down
@@ -1492,9 +1501,10 @@ const IrSystem* Player::getIrSystem() const
 }
 
 // Name of the player's top level IR sensor model
-const base::Identifier* Player::getIrSystemName() const
+const std::string& Player::getIrSystemName() const
 {
-   return (irSystem != nullptr) ? irSystem->slot() : nullptr;
+   static const std::string empty = "";
+   return (irSystem != nullptr) ? irSystem->slot() : empty;
 }
 
 // Returns a IR sensor model by its name
@@ -1516,7 +1526,7 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
 
       // Now compare the first name with the name of our top level system
       base::Pair* pair{};
-      if ( *getIrSystemName() == fname ) {
+      if ( getIrSystemName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
             // And this is a complex name (xxx.yyy), so pass the ".yyy" down

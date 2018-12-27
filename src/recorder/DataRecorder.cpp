@@ -805,8 +805,8 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
          // Networked player federation name
          if ( player->isProxyPlayer() ) {
             const simulation::AbstractNib* nib {player->getNib()};
-            const base::Identifier* fedName {nib->getFederateName()};
-            if (fedName != nullptr) id->set_fed_name( (*fedName).c_str() );
+            const std::string& fedName {nib->getFederateName()};
+            if (!fedName.empty()) id->set_fed_name( fedName.c_str() );
          }
       } else {
          // We don't have a player, set default values

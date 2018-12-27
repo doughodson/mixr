@@ -134,7 +134,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
          const auto b = dynamic_cast<AbstractBehavior*>( pair->object() );
          if (b == nullptr) {
             // Item is NOT a behavior
-            std::cerr << "setSlotBehaviors: slot: " << *pair->slot() << " is NOT of a Behavior type!" << std::endl;
+            std::cerr << "setSlotBehaviors: slot: " << (*pair).slot() << " is NOT of a Behavior type!" << std::endl;
             ok = false;
          }
       }

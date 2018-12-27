@@ -54,7 +54,7 @@ Pair* PairStream::findByName(const char* const slotname)
         const Item* item{getFirstItem()};
         while (item != nullptr && p == nullptr) {
             const auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
-            if ( *(pair->slot()) == slotname ) p = pair;
+            if ( pair->slot() == slotname ) p = pair;
             item = item->getNext();
         }
     }
@@ -68,7 +68,7 @@ const Pair* PairStream::findByName(const char* const slotname) const
         const Item* item{getFirstItem()};
         while (item != nullptr && p == nullptr) {
             const auto pair = static_cast<const Pair*>(item->getValue());
-            if ( *(pair->slot()) == slotname ) p = pair;
+            if ( pair->slot() == slotname ) p = pair;
             item = item->getNext();
         }
     }
@@ -80,15 +80,15 @@ const Pair* PairStream::findByName(const char* const slotname) const
 // findName() -- Finds the name associated with an object.
 // Returns a copy, so unref() the Identifier when finished.
 //------------------------------------------------------------------------------
-const Identifier* PairStream::findName(const Object* const obj) const
+const std::string PairStream::findName(const Object* const obj) const
 {
-    const Identifier* p{};
+    std::string p;
     if (obj != nullptr) {
         const Item* item{getFirstItem()};
-        while (item != nullptr && p == nullptr) {
+        while (item != nullptr && p.empty()) {
             const auto pair = static_cast<const Pair*>(item->getValue());
             if (pair->object() == obj) {
-                p = static_cast<Identifier*>(pair->slot()->clone());
+                return pair->slot();
             }
             item = item->getNext();
         }

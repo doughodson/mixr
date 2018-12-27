@@ -2,11 +2,12 @@
 #include "mixr/models/system/Stores.hpp"
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 
-#include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/util/string_utils.hpp"
 
 namespace mixr {
 namespace models {
@@ -570,9 +571,9 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
 
          // get the station number from the stores' slot name
          int stationNumber{};
-         const base::Identifier* stationName{pair->slot()};
-         if (stationName->isInteger()) {
-            stationNumber = stationName->getInteger();
+         const std::string& stationName{pair->slot()};
+         if (base::isInteger(stationName)) {
+            stationNumber = base::getInteger(stationName);
          }
 
          if (stationNumber > 0 && stationNumber <= static_cast<int>(ns)) {

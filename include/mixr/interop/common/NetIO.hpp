@@ -7,6 +7,7 @@
 #include "mixr/base/Identifier.hpp"
 
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base { class Angle; class Boolean; class Identifier; class Integer; class Length; class Time; }
@@ -17,7 +18,7 @@ class Nib;
 class Ntm;
 
 //------------------------------------------------------------------------------
-// Class:  NetIO
+// Class: NetIO
 // Description: Abstract interface class for interoperability Network I/O.
 //
 //    Defines the framework for interoperability networks (e.g., DIS, HLA,
@@ -173,10 +174,10 @@ public:
    unsigned short getNetworkID() const override { return netID; }
 
    // Federate name
-   virtual const base::Identifier* getFederateName() const;
+   virtual const std::string& getFederateName() const;
 
    // Federation name
-   virtual const base::Identifier* getFederationName() const;
+   virtual const std::string& getFederationName() const;
 
    // Current time (seconds: UTC or EXEC)
    double getCurrentTime();
@@ -242,15 +243,15 @@ protected:
    virtual void processOutputList();
 
    // Set functions
-   virtual bool setNetworkID(const unsigned short);               // Sets the Network's ID
-   virtual bool setTimeline(const TSource);                       // Sets the timeline (UTC or EXEC)
-   virtual bool setMaxTimeDR(const double);                       // Sets the max dead-rec time; forces next update (sec)
-   virtual bool setMaxPositionErr(const double);                  // Sets the max positional error (meters)
-   virtual bool setMaxOrientationErr(const double);               // Sets the max orientation error (rad)
-   virtual bool setMaxAge(const double);                          // Sets the max age; for removal (sec)
-   virtual bool setMaxEntityRange(const double);                  // Sets the max entity range (meters)
-   virtual bool setFederateName(const base::Identifier* const);   // Sets our federate name
-   virtual bool setFederationName(const base::Identifier* const); // Sets our federation name
+   virtual bool setNetworkID(const unsigned short);           // Sets the Network's ID
+   virtual bool setTimeline(const TSource);                   // Sets the timeline (UTC or EXEC)
+   virtual bool setMaxTimeDR(const double);                   // Sets the max dead-rec time; forces next update (sec)
+   virtual bool setMaxPositionErr(const double);              // Sets the max positional error (meters)
+   virtual bool setMaxOrientationErr(const double);           // Sets the max orientation error (rad)
+   virtual bool setMaxAge(const double);                      // Sets the max age; for removal (sec)
+   virtual bool setMaxEntityRange(const double);              // Sets the max entity range (meters)
+   virtual bool setFederateName(const std::string&);          // Sets our federate name
+   virtual bool setFederationName(const std::string&);        // Sets our federation name
 
    bool shutdownNotification() override;
 
@@ -266,7 +267,7 @@ public:
 
 public:
    // NIB support
-   virtual Nib* findNib(const unsigned short playerID, const base::Identifier* const federateName, const IoType);
+   virtual Nib* findNib(const unsigned short playerID, const std::string& federateName, const IoType);
    virtual Nib* findNib(const models::Player* const, const IoType);
    virtual bool addNibToList(Nib* const, const IoType);
    virtual void removeNibFromList(Nib* const, const IoType);
@@ -396,9 +397,9 @@ private:
    void cleanupInputList();                             // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID{1};                                 // Network ID
-   base::safe_ptr<const base::Identifier> federationName;   // Federation name
-   base::safe_ptr<const base::Identifier> federateName;     // Federate name
+   unsigned short netID{1};                             // Network ID
+   std::string federationName;                          // Federation name
+   std::string federateName;                            // Federate name
 
    base::safe_ptr<simulation::Station> station;         // Our station class
    base::safe_ptr<simulation::Simulation> simulation;   // Our simulation class
@@ -434,10 +435,10 @@ private: // Nib related private
 
    // NIB quick lookup key
    struct NibKey {
-      NibKey(const unsigned short playerId, const base::Identifier* const federateName): id(playerId), fName(federateName) {}
+      NibKey(const unsigned short playerId, const std::string& federateName): id(playerId), fName(federateName) {}
       // NIB IDs  -- Comparisons in this order --
-      unsigned short id{};                           // Player id
-      base::safe_ptr<const base::Identifier> fName;  // Federate name
+      unsigned short id{};     // Player id
+      std::string fName;       // Federate name
    };
 
    // Search callbacks: object name compare function --

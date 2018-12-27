@@ -33,20 +33,20 @@ Decibel::Decibel(const double value)
 void Decibel::copyData(const Decibel& org, const bool)
 {
    BaseClass::copyData(org);
-   val = org.val;
+   value = org.value;
    db = org.db;
 }
 
 void Decibel::setValuedB(const double v)
 {
    db = v;
-   val = std::pow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
+   value = std::pow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
 }
 
 void Decibel::setValue(const double v)
 {
 //   BaseClass::setValue(v);
-   val = v;
+   value = v;
    db = std::log10(v) * 10.0;
 }
 

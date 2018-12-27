@@ -321,8 +321,7 @@ bool Graphic::setTextureName(const char* newName)
         if (texName == nullptr)
             texName = new base::Identifier();
         texName->setStr(newName);
-    }
-    else {
+    } else {
         texName = nullptr;
     }
     texture = 0;

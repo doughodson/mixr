@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <string>
 
 namespace mixr {
 namespace base {
@@ -63,10 +64,10 @@ bool Object::isClassType(const std::type_info& type) const
 }
 
 // Check factory name
-bool Object::isFactoryName(const char name[]) const
+bool Object::isFactoryName(const std::string& name) const
 {
-    if (name == nullptr) return false;
-    if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;
+    if (name.empty()) return false;
+    if ( metaObject.getFactoryName() == name)  return true;
     else return false;
 }
 
@@ -77,10 +78,6 @@ void Object::copyData(const Object& org, const bool cc)
     slotTable = org.slotTable;
     enbMsgBits = org.enbMsgBits;
     disMsgBits = org.disMsgBits;
-//    if (cc) {
-//       refCount = 1;    // (start out ref() by the creator)
-//       semaphore = 0;
-//    }
 }
 
 // Delete object data -- derived classes should delete
@@ -96,7 +93,7 @@ bool Object::setSlotByIndex(const int, Object* const)
     return false;
 }
 
-const char* Object::getFactoryName()
+const std::string& Object::getFactoryName()
 {
     return metaObject.getFactoryName();
 }
@@ -111,7 +108,7 @@ const SlotTable& Object::getSlotTable()
 //------------------------------------------------------------------------------
 int Object::slotName2Index(const char* const slotname) const
 {
-   int slotindex {};
+   int slotindex{};
 
    // No 'slotname' then no slot index
    if (slotname == nullptr) {
@@ -119,10 +116,10 @@ int Object::slotName2Index(const char* const slotname) const
    }
 
    // How many slots do we have
-   int n {slotTable->n()};
+   int n{slotTable->n()};
 
    // a) check if 'slotname' is a number (e.g., "12")
-   bool isNum {true};
+   bool isNum{true};
    for (int i = 0; isNum && slotname[i] != '\0'; i++) {
       if ( !std::isdigit(slotname[i]) ) {
          isNum = false;
@@ -132,7 +129,7 @@ int Object::slotName2Index(const char* const slotname) const
    // b) convert 'slotname' to a slot index
    if (isNum) {
       // when the slotname is just a number (e.g., "12")
-      int j {std::atoi(slotname)};
+      int j{std::atoi(slotname)};
       if (j > 0 && j <= n) {
          slotindex = j;
       }
@@ -152,9 +149,9 @@ int Object::slotName2Index(const char* const slotname) const
 //------------------------------------------------------------------------------
 bool Object::setSlotByName(const char* const slotname, Object* const obj)
 {
-    bool ok {};
+    bool ok{};
     if (obj == nullptr) return ok;
-    const int slotindex {slotName2Index(slotname)};
+    const int slotindex{slotName2Index(slotname)};
     if (slotindex > 0) {
         ok = setSlotByIndex(slotindex,obj);
     }
@@ -183,7 +180,7 @@ bool Object::isValid() const
 
 bool Object::isMessageEnabled(const unsigned short msgType) const
 {
-   bool enabled {};
+   bool enabled{};
 
    if (msgType != 0) {
       if ((msgType & MSG_ERROR) != 0) {
@@ -199,7 +196,7 @@ bool Object::isMessageEnabled(const unsigned short msgType) const
 
 bool Object::isMessageDisabled(const unsigned short msgType) const
 {
-   bool disabled {};
+   bool disabled{};
 
    if (msgType != 0) {
       if ((msgType & MSG_ERROR) != 0) {

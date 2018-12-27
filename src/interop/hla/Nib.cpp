@@ -9,6 +9,7 @@
 #include "mixr/base/Pair.hpp"
 
 #include <cstdio>
+#include <string>
 
 namespace mixr {
 namespace hla {
@@ -83,8 +84,8 @@ void Nib::setObjectName(const char* s)
 void Nib::makeObjectName()
 {
    char name[256]{};
-   const char* fname {getFederateName()->c_str()};
-   std::sprintf(name, "P%d_%s", int(getPlayerID()), fname );
+   const std::string& fname{getFederateName()};
+   std::sprintf(name, "P%d_%s", static_cast<int>(getPlayerID()), fname.c_str() );
    setObjectName(name);
 }                            
 

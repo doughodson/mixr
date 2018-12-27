@@ -361,7 +361,7 @@ bool Page::onKeyHit(const int key)
         keyName[1] = '\0';
 
         // search for a page change event
-        base::Pair*pageEvent{pageChgEvents->findByName(keyName)};
+        base::Pair* pageEvent{pageChgEvents->findByName(keyName)};
         if (pageEvent != nullptr) {
             const auto id = dynamic_cast<base::Identifier*>(pageEvent->object());
             if (id != nullptr) {
@@ -444,7 +444,7 @@ bool Page::processSubpages()
             } else {
                 // Delete components that are not of Page type
                 if (isMessageEnabled(MSG_ERROR)) {
-                    std::cerr << "Page::processSubpages(): " << *p->slot() << " is not a Page!" << std::endl;
+                    std::cerr << "Page::processSubpages(): " << p->slot() << " is not a Page!" << std::endl;
                 }
                 ok = false;
             }

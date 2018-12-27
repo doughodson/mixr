@@ -19,6 +19,7 @@
 #include "mixr/simulation/Station.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/string_utils.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/Pair.hpp"
@@ -303,10 +304,10 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   if (stores != nullptr) {
                      base::List::Item* item {stores->getFirstItem()};
                      while (item != nullptr && wpn == nullptr) {
-                        unsigned int s {};
+                        unsigned int s{};
                         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-                        const base::Identifier* slot {pair->slot()};
-                        if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
+                        const std::string& slot{pair->slot()};
+                        if (base::isNumber(slot)) s = static_cast<unsigned int>(base::getNumber(slot));
                         if (s == sta) {
                            wpn = static_cast<models::AbstractWeapon*>(pair->object());  // Found it
                         }

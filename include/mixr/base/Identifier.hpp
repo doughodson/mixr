@@ -48,18 +48,6 @@ public:
    void empty()                              { id = "";   }          // empty our string
    bool isEmpty() const                      { return id == ""; }    // returns true if our string is empty
 
-   // returns true if our string is the ascii form of a number
-   bool isNumber() const;
-
-   // returns the value converted to a number or zero if isNumber() is false
-   double getNumber() const;
-
-   // returns true if our string is the ascii form of an integer number
-   bool isInteger() const;
-
-   // returns the value of this string converted to an integer value or zero if isInteger() is false
-   int getInteger() const;
-
 private:
    std::string id;
    void replaceSpaces();
@@ -91,63 +79,6 @@ inline std::ostream& operator<<(std::ostream& sout, const Identifier& s)
 {
    sout << s.c_str();
    return sout;
-}
-
-
-//------------------------------------------------------------------------------
-// isNumber() -- is this an a ascii number
-//------------------------------------------------------------------------------
-inline bool Identifier::isNumber() const
-{
-   if (isEmpty()) {
-      return false;
-   }
-
-   for (int i = 0; id[i] != '\0'; i++) {
-      if ( !std::isdigit(id[i]) && id[i] != '.' ) {
-         return false;
-      }
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// getNumber() -- convert a ascii number string to a number
-//------------------------------------------------------------------------------
-inline double Identifier::getNumber() const
-{
-   if (isNumber()) {
-      return std::atof(id.c_str());
-   }
-   return 0.0;
-}
-
-//------------------------------------------------------------------------------
-// isInteger() -- is this an a ascii integer
-//------------------------------------------------------------------------------
-inline bool Identifier::isInteger() const
-{
-   if (isEmpty()) {
-      return false;
-   }
-
-   for (int i = 0; id[i] != '\0'; i++) {
-      if ( !std::isdigit(id[i]) ) {
-         return false;
-      }
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// getInteger() -- convert a ascii number string to an integer
-//------------------------------------------------------------------------------
-inline int Identifier::getInteger() const
-{
-   if (isInteger()) {
-      return std::atoi(id.c_str());
-   }
-   return 0;
 }
 
 // replace spaces with underscore

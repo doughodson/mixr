@@ -5,6 +5,8 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 
+#include <iostream>
+
 namespace mixr {
 namespace graphics {
 

@@ -185,7 +185,7 @@ bool Nib::setPlayer(models::Player* const p)
 //------------------------------------------------------------------------------
 // return federate name
 //------------------------------------------------------------------------------
-const base::Identifier* Nib::getFederateName() const
+const std::string& Nib::getFederateName() const
 {
    return federateName;
 }
@@ -193,7 +193,7 @@ const base::Identifier* Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const base::Identifier* const msg)
+bool Nib::setFederateName(const std::string& msg)
 {
    federateName = msg;
    return true;

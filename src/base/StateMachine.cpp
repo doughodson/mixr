@@ -403,9 +403,9 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 
       // First, check to see if they're asking for the same state
       // as our current state.
-      ok = (stMachName == nullptr && name == nullptr);
-      if (!ok && stMachName != nullptr && name != nullptr) {
-         ok = *stMachName == name;
+      ok = (stMachName.empty() && name == nullptr);
+      if (!ok && !stMachName.empty() && name != nullptr) {
+         ok = (stMachName == name);
       }
 
       // When they're not the same then we make a switch ...
@@ -474,7 +474,7 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
             cq->container(this);
             newList->put(cp);
          } else {
-            std::cerr << "StateMachine::setSlotStateMachines(): " << *p->slot() << " is not a StateMachine!" << std::endl;
+            std::cerr << "StateMachine::setSlotStateMachines(): " << p->slot() << " is not a StateMachine!" << std::endl;
          }
 
          item = item->getNext();

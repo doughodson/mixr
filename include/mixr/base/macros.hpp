@@ -122,8 +122,8 @@
 // macros work.  Although a glorious endeavor, experience as proven that it's best
 // to treat these macros, at least initially, as 'black boxes'.
 
+#include <string>
 #include <typeinfo>   // need typeid()
-#include <cstring>    // need std::strcmp
 #include <iostream>   // need std::ostream
 
 #define DECLARE_SUBCLASS(ThisType, BaseType)                                                                                    \
@@ -137,8 +137,8 @@
     public: bool isClassType(const std::type_info& type) const override;                                                        \
     private: static ::mixr::base::MetaObject metaObject;                                                                        \
     public: static const ::mixr::base::MetaObject* getMetaObject();                                                             \
-    public: static const char* getFactoryName();                                                                                \
-    public: bool isFactoryName(const char name[]) const override;                                                               \
+    public: static const std::string& getFactoryName();                                                                         \
+    public: bool isFactoryName(const std::string&) const override;                                                              \
     protected: bool setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj) override;                              \
     public: static const ::mixr::base::SlotTable& getSlotTable();                                                               \
     protected: static const ::mixr::base::SlotTable slottable;                                                                  \
@@ -147,100 +147,100 @@
     private:
 
 
-#define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ::mixr::base::MetaObject ThisType::metaObject(                                     \
-      typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetaObject()                               \
-    );                                                                                 \
-    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
-    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
-    bool ThisType::isFactoryName(const char name[]) const                              \
-    {                                                                                  \
-        if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
-        else return ThisType::BaseClass::isFactoryName(name);                          \
-    }                                                                                  \
-    const ::mixr::base::SlotTable& ThisType::getSlotTable()  { return slottable; }     \
-    bool ThisType::isClassType(const std::type_info& type) const                       \
-    {                                                                                  \
-        if ( type == typeid(ThisType) ) return true;                                   \
-        else return ThisType::BaseClass::isClassType(type);                            \
-    }                                                                                  \
-    ThisType::~ThisType() {                                                            \
-        STANDARD_DESTRUCTOR()                                                          \
-    }                                                                                  \
-    ThisType* ThisType::clone() const                                                  \
-    {                                                                                  \
-        return new ThisType(*this);                                                    \
-    }                                                                                  \
-    ThisType::ThisType(const ThisType& org) : BaseClass()                              \
-    {                                                                                  \
-        STANDARD_CONSTRUCTOR()                                                         \
-        copyData(org,true);                                                            \
-    }                                                                                  \
-    ThisType& ThisType::operator=(const ThisType& org)                                 \
-    {                                                                                  \
-        if (this != &org) copyData(org,false);                                         \
-        return *this;                                                                  \
+#define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                           \
+    ::mixr::base::MetaObject ThisType::metaObject(                                          \
+      typeid(ThisType).name(), FACTORYNAME,                                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                                    \
+    );                                                                                      \
+    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }       \
+    const std::string& ThisType::getFactoryName() { return metaObject.getFactoryName(); }   \
+    bool ThisType::isFactoryName(const std::string& name) const                             \
+    {                                                                                       \
+        if (name.empty()) return false;                                                     \
+        if (metaObject.getFactoryName() == name) return true;                               \
+        else return ThisType::BaseClass::isFactoryName(name);                               \
+    }                                                                                       \
+    const ::mixr::base::SlotTable& ThisType::getSlotTable()  { return slottable; }          \
+    bool ThisType::isClassType(const std::type_info& type) const                            \
+    {                                                                                       \
+        if ( type == typeid(ThisType) ) return true;                                        \
+        else return ThisType::BaseClass::isClassType(type);                                 \
+    }                                                                                       \
+    ThisType::~ThisType() {                                                                 \
+        STANDARD_DESTRUCTOR()                                                               \
+    }                                                                                       \
+    ThisType* ThisType::clone() const                                                       \
+    {                                                                                       \
+        return new ThisType(*this);                                                         \
+    }                                                                                       \
+    ThisType::ThisType(const ThisType& org) : BaseClass()                                   \
+    {                                                                                       \
+        STANDARD_CONSTRUCTOR()                                                              \
+        copyData(org,true);                                                                 \
+    }                                                                                       \
+    ThisType& ThisType::operator=(const ThisType& org)                                      \
+    {                                                                                       \
+        if (this != &org) copyData(org,false);                                              \
+        return *this;                                                                       \
     }
 
 
-#define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ::mixr::base::MetaObject ThisType::metaObject(                                     \
-      typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetaObject()                               \
-    );                                                                                 \
-    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
-    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
-    bool ThisType::isFactoryName(const char name[]) const                              \
-    {                                                                                  \
-        if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
-        else return ThisType::BaseClass::isFactoryName(name);                          \
-    }                                                                                  \
-    const ::mixr::base::SlotTable& ThisType::getSlotTable() { return slottable; }      \
-    bool ThisType::isClassType(const std::type_info& type) const                       \
-    {                                                                                  \
-        if ( type == typeid(ThisType) ) return true;                                   \
-        else return ThisType::BaseClass::isClassType(type);                            \
+#define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                                   \
+    ::mixr::base::MetaObject ThisType::metaObject(                                          \
+      typeid(ThisType).name(), FACTORYNAME,                                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                                    \
+    );                                                                                      \
+    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }       \
+    const std::string& ThisType::getFactoryName() { return metaObject.getFactoryName(); }   \
+    bool ThisType::isFactoryName(const std::string& name) const                             \
+    {                                                                                       \
+        if (name.empty()) return false;                                                     \
+        if (metaObject.getFactoryName() == name) return true;                               \
+        else return ThisType::BaseClass::isFactoryName(name);                               \
+    }                                                                                       \
+    const ::mixr::base::SlotTable& ThisType::getSlotTable() { return slottable; }           \
+    bool ThisType::isClassType(const std::type_info& type) const                            \
+    {                                                                                       \
+        if ( type == typeid(ThisType) ) return true;                                        \
+        else return ThisType::BaseClass::isClassType(type);                                 \
     }
 
 
-#define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ::mixr::base::MetaObject ThisType::metaObject(                                     \
-      typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetaObject()                               \
-    );                                                                                 \
-    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }  \
-    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
-    bool ThisType::isFactoryName(const char name[]) const                              \
-    {                                                                                  \
-        if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
-        else return ThisType::BaseClass::isFactoryName(name);                          \
-    }                                                                                  \
-    const ::mixr::base::SlotTable& ThisType::getSlotTable() { return slottable; }      \
-    bool ThisType::isClassType(const std::type_info& type) const                       \
-    {                                                                                  \
-        if ( type == typeid(ThisType) ) return true;                                   \
-        else return ThisType::BaseClass::isClassType(type);                            \
-    }                                                                                  \
-    ThisType::~ThisType() {                                                            \
-        STANDARD_DESTRUCTOR()                                                          \
-    }                                                                                  \
-    ThisType* ThisType::clone() const                                                  \
-    {                                                                                  \
-        return nullptr;                                                                \
-    }                                                                                  \
-    ThisType::ThisType(const ThisType& org) : BaseClass()                              \
-    {                                                                                  \
-        STANDARD_CONSTRUCTOR()                                                         \
-        copyData(org,true);                                                            \
-    }                                                                                  \
-    ThisType& ThisType::operator=(const ThisType& org)                                 \
-    {                                                                                  \
-        if (this != &org) copyData(org,false);                                         \
-        return *this;                                                                  \
+#define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                                  \
+    ::mixr::base::MetaObject ThisType::metaObject(                                          \
+      typeid(ThisType).name(), FACTORYNAME,                                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                                    \
+    );                                                                                      \
+    const ::mixr::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }       \
+    const std::string& ThisType::getFactoryName() { return metaObject.getFactoryName(); }   \
+    bool ThisType::isFactoryName(const std::string& name) const                             \
+    {                                                                                       \
+        if (name.empty()) return false;                                                     \
+        if (metaObject.getFactoryName() == name) return true;                               \
+        else return ThisType::BaseClass::isFactoryName(name);                               \
+    }                                                                                       \
+    const ::mixr::base::SlotTable& ThisType::getSlotTable() { return slottable; }           \
+    bool ThisType::isClassType(const std::type_info& type) const                            \
+    {                                                                                       \
+        if ( type == typeid(ThisType) ) return true;                                        \
+        else return ThisType::BaseClass::isClassType(type);                                 \
+    }                                                                                       \
+    ThisType::~ThisType() {                                                                 \
+        STANDARD_DESTRUCTOR()                                                               \
+    }                                                                                       \
+    ThisType* ThisType::clone() const                                                       \
+    {                                                                                       \
+        return nullptr;                                                                     \
+    }                                                                                       \
+    ThisType::ThisType(const ThisType& org) : BaseClass()                                   \
+    {                                                                                       \
+        STANDARD_CONSTRUCTOR()                                                              \
+        copyData(org,true);                                                                 \
+    }                                                                                       \
+    ThisType& ThisType::operator=(const ThisType& org)                                      \
+    {                                                                                       \
+        if (this != &org) copyData(org,false);                                              \
+        return *this;                                                                       \
     }
 
 

@@ -3,14 +3,16 @@
 #define __mixr_base_Pair_H__
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Identifier.hpp"
+//#include "mixr/base/Identifier.hpp"
+
+#include <string>
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Pair
-// Description: Slot pair (or named object); i.e., an Identifier/Object pair.
+// Description: Slot pair (or named object); i.e., a std::string name/Object pair.
 //
 //    Used to set object attributes, i.e., 'slots' (see Object::setSlotByName()).
 //
@@ -33,10 +35,10 @@ class Pair : public Object
 public:
    // Constructor: the slot name and object pointer are both required!
    // -- the object is ref() by this constructor.
-   Pair(const char* slot, Object* object);
+   Pair(const std::string& slot, Object* object);
 
-   Identifier* slot()               { return slotname; } // The slot name
-   const Identifier* slot() const   { return slotname; } // The slot name (const version)
+   std::string& slot()              { return slotname; } // The slot name
+   const std::string& slot() const  { return slotname; } // The slot name (const version)
 
    Object* object()                 { return obj; }      // The object
    const Object* object() const     { return obj; }      // The object (const version)
@@ -44,7 +46,7 @@ public:
    bool isValid() const override;
 
 private:
-   Identifier* slotname{};   // Slot name
+   std::string slotname;     // Slot name
    Object* obj{};            // Object
 };
 

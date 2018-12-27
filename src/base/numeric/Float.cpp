@@ -5,7 +5,6 @@ namespace mixr {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Float, "Float")
-EMPTY_COPYDATA(Float)
 EMPTY_DELETEDATA(Float)
 
 BEGIN_SLOTTABLE(Float)
@@ -16,11 +15,17 @@ BEGIN_SLOT_MAP(Float)
     ON_SLOT(1, setSlotValue, Float)
 END_SLOT_MAP()
 
+void Float::copyData(const Float& org, const bool)
+{
+   BaseClass::copyData(org);
+   value = org.value;
+}
+
 bool Float::setSlotValue(const Float* const num)
 {
    bool ok{};
    if (num != nullptr) {
-      val = static_cast<double>(num->asDouble());
+      value = static_cast<double>(num->asDouble());
       ok = true;
    }
    return ok;

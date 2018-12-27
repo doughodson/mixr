@@ -3,7 +3,9 @@
 #define __mixr_ighost_cigi_IgHost_H__
 
 #include "mixr/simulation/AbstractIgHost.hpp"
+
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base { class Identifier; class Integer; class Length; class Number; class PairStream; }
@@ -58,7 +60,7 @@ protected:
    double computeRangeToPlayer(const models::Player* const) const;
 
    // find a player's model object in table 'type' by the player IDs
-   CigiModel* findModel(const int playerID, const base::Identifier* const federateName, const TableType type);
+   CigiModel* findModel(const int playerID, const std::string& federateName, const TableType type);
 
    // find a player's model object in table 'type' using a pointer to the player
    CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
@@ -131,10 +133,10 @@ private:
 
    // Model quick lookup key
    struct ModelKey {
-      ModelKey(const int pid, const base::Identifier* const federateName);
+      ModelKey(const int pid, const std::string& federateName);
       // IgModel IDs  -- Comparisons in this order --
-         int playerID;                                    // Player ID
-         base::safe_ptr<const base::Identifier> fName;    // Federate name
+      int playerID;                                  // Player ID
+      std::string fName;                             // Federate name
    };
 
    // IG model type table

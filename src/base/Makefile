@@ -2,7 +2,7 @@
 #----------------------------------------------------------------------------------------
 # To build parser and scanner:
 #
-# cd edl_parser
+# cd edl
 # dos2unix edl_parser.y
 # dos2unix edl_scanner.l
 # bison -d edl_parser.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
@@ -163,6 +163,7 @@ OBJS =  \
 	util/navDR_utils.o \
 	util/osg_utils.o \
 	util/str_utils.o \
+	util/string_utils.o \
 	util/system_utils.o \
 	Component.o \
 	EarthModel.o \

@@ -40,8 +40,7 @@ void CigiModel::copyData(const CigiModel& org, const bool)
 
     playerID = org.playerID;
 
-    const base::Identifier* pp = org.federateName;
-    federateName = pp;
+    federateName = org.federateName;
 }
 
 void CigiModel::deleteData()
@@ -67,7 +66,7 @@ void CigiModel::setPlayer(models::Player* const p)
    if (player != nullptr) {
       player->unref();
       playerID = 0;
-      federateName = nullptr;
+      federateName = "";
    }
 
    player = p;
@@ -79,7 +78,7 @@ void CigiModel::setPlayer(models::Player* const p)
       if (nib != nullptr) {
          federateName = nib->getFederateName();
       } else {
-         federateName = nullptr;
+         federateName.clear();
       }
    }
 }

@@ -1777,7 +1777,7 @@ bool Display::processSubdisplays()
          }
          else {
             if (isMessageEnabled(MSG_ERROR)) {
-               std::cerr << "Display::processSubdisplays(): " << *p->slot() << " is not a Display!" << std::endl;
+               std::cerr << "Display::processSubdisplays(): " << p->slot() << " is not a Display!" << std::endl;
             }
             ok = false;
          }
@@ -1802,7 +1802,7 @@ bool Display::processTextures()
          if (g == nullptr) {
             // It MUST be of type Texture
             if (isMessageEnabled(MSG_ERROR)) {
-               std::cerr << "Display::processTextures(): " << *p->slot() << " is not a Texture!" << std::endl;
+               std::cerr << "Display::processTextures(): " << p->slot() << " is not a Texture!" << std::endl;
             }
             ok = false;
          }
@@ -1827,7 +1827,7 @@ bool Display::processMaterials()
          if (g == nullptr) {
             // It MUST be of type Material
             if (isMessageEnabled(MSG_ERROR)) {
-               std::cerr << "Display::processMaterials(): " << *p->slot() << " is not a Material!" << std::endl;
+               std::cerr << "Display::processMaterials(): " << p->slot() << " is not a Material!" << std::endl;
             }
             ok = false;
          }

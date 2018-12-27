@@ -278,7 +278,7 @@ const char* Route::getSteerpointName() const
 {
     const char* name{};
     if (to != nullptr) {
-        name = (*to->slot()).c_str();
+        name = to->slot().c_str();
     }
     return name;
 }

@@ -258,7 +258,7 @@ namespace base {
 //
 // MetaObject
 //
-//    Each class has an associated 'MetaObject' object instance which is used
+//    Each class has an associated MetaObject instance which is used
 //    to store data related to class and object instances.  For example,
 //    the meta-object contains the number of instances of a particular class in
 //    existance, as well as the total number of objects that have ever been
@@ -284,9 +284,9 @@ class Object : public Referenced
    protected: void deleteData();
 
    // helper methods
-   public: virtual bool isClassType(const std::type_info& type) const;
-   public: virtual bool isFactoryName(const char name[]) const;
-   public: static const char* getFactoryName();
+   public: virtual bool isClassType(const std::type_info&) const;
+   public: virtual bool isFactoryName(const std::string&) const;
+   public: static const std::string& getFactoryName();
 
    // slot table
    protected: static const SlotTable slottable;    // class slot table
@@ -302,15 +302,15 @@ class Object : public Referenced
 
 public:
    // standard message types
-   static const unsigned short MSG_ERROR   = 0x0001;  // Error messages; ALWAYS ENABLED (use std::cerr)
-   static const unsigned short MSG_WARNING = 0x0002;  // Warning messages (use std::cerr)
-   static const unsigned short MSG_INFO    = 0x0004;  // Informational messages (use std::cout)
-   static const unsigned short MSG_DEBUG   = 0x0008;  // Debug/trace messages(use std::cout)
-   static const unsigned short MSG_DATA    = 0x0010;  // Data messages(use std::cout)
-   static const unsigned short MSG_USER    = 0x0020;  // User debug/trace messages(use std::cout)
-   static const unsigned short MSG_STD_ALL = 0x00FF;  // Standard message types mask
+   static const unsigned short MSG_ERROR   {0x0001};  // Error messages; ALWAYS ENABLED (use std::cerr)
+   static const unsigned short MSG_WARNING {0x0002};  // Warning messages (use std::cerr)
+   static const unsigned short MSG_INFO    {0x0004};  // Informational messages (use std::cout)
+   static const unsigned short MSG_DEBUG   {0x0008};  // Debug/trace messages(use std::cout)
+   static const unsigned short MSG_DATA    {0x0010};  // Data messages(use std::cout)
+   static const unsigned short MSG_USER    {0x0020};  // User debug/trace messages(use std::cout)
+   static const unsigned short MSG_STD_ALL {0x00FF};  // Standard message types mask
    // non-standard or user defined message are the high order bits (0xFF00)
-   static const unsigned short MSG_ALL     = 0xFFFF;  // All message types mask
+   static const unsigned short MSG_ALL     {0xFFFF};  // All message types mask
 
 public:
    virtual bool isValid() const;
@@ -324,14 +324,14 @@ public:
 
 protected:
    // slot table for this object (set to the object's class slot table)
-   const SlotTable* slotTable {};
+   const SlotTable* slotTable{};
 
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
 private:
-   unsigned short enbMsgBits { MSG_ERROR | MSG_WARNING };  // Enabled message bits
-   unsigned short disMsgBits {};                           // Disabled message bits
+   unsigned short enbMsgBits{ MSG_ERROR | MSG_WARNING };  // Enabled message bits
+   unsigned short disMsgBits{};                           // Disabled message bits
 
    static MetaObject metaObject;
 };

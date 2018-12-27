@@ -111,10 +111,8 @@ void NetIO::copyData(const NetIO& org, const bool)
 
    netID = org.netID;
 
-   const base::Identifier* p1 = org.federateName;
-   federateName = p1;
-   const base::Identifier* p2 = org.federationName;
-   federationName = p2;
+   federateName = org.federateName;
+   federationName = org.federationName;
 
    inputFlg = org.inputFlg;
    outputFlg = org.outputFlg;
@@ -245,14 +243,14 @@ double NetIO::getMaxAge(const Nib* const) const
    return maxAge;
 }
 
-// Federate name as String
-const base::Identifier* NetIO::getFederateName() const
+// Federate name
+const std::string& NetIO::getFederateName() const
 {
    return federateName;
 }
 
-// Federation name as String
-const base::Identifier* NetIO::getFederationName() const
+// Federation name
+const std::string& NetIO::getFederationName() const
 {
    return federationName;
 }
@@ -316,14 +314,14 @@ bool NetIO::setMaxEntityRange(const double v)
 }
 
 // Sets our federate name
-bool NetIO::setFederateName(const base::Identifier* const msg)
+bool NetIO::setFederateName(const std::string& msg)
 {
    federateName = msg;
    return true;
 }
 
 // Sets our federation name
-bool NetIO::setFederationName(const base::Identifier* const msg)
+bool NetIO::setFederationName(const std::string& msg)
 {
    federationName = msg;
    return true;
@@ -591,7 +589,7 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
       // Default DR: World, No rotation, 2nd order linear
       nib->setDeadReckoning(Nib::FVW_DRM);
 
-      const base::Identifier* fName{getFederateName()};
+      std::string fName{getFederateName()};
       if (player->isProxyPlayer()) {
          const auto pNib = dynamic_cast<Nib*>(player->getNib());
          fName = pNib->getFederateName();
@@ -744,7 +742,7 @@ bool NetIO::addNib2InputList(Nib* const nib)
 //------------------------------------------------------------------------------
 // findNib() -- find the NIB that matches ALL IDs.
 //------------------------------------------------------------------------------
-Nib* NetIO::findNib(const unsigned short playerID, const base::Identifier* const federateName, const IoType ioType)
+Nib* NetIO::findNib(const unsigned short playerID, const std::string& federateName, const IoType ioType)
 {
    // Define the key
    NibKey key(playerID, federateName);
@@ -766,7 +764,7 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
    Nib* found{};
    if (player != nullptr) {
       // Get the player's IDs
-      const base::Identifier* fName{getFederateName()};
+      std::string fName{getFederateName()};
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
          const auto pNib = dynamic_cast<const Nib*>(player->getNib());
@@ -879,7 +877,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 
    if (result == 0) {
       // If they're the same, compare the federate names
-      result = std::strcmp((*pKey->fName).c_str(), (*pNib->getFederateName()).c_str());
+      result = ( pKey->fName == pNib->getFederateName() );
    }
 
    return result;
@@ -1054,13 +1052,13 @@ bool NetIO::setSlotNetworkID(const base::Integer* const num)
 // Sets our federate name
 bool NetIO::setSlotFederateName(const base::Identifier* const msg)
 {
-   return setFederateName(msg);
+   return setFederateName(msg->asString());
 }
 
 // Sets our federation name
 bool NetIO::setSlotFederationName(const base::Identifier* const msg)
 {
-   return setFederationName(msg);
+   return setFederationName(msg->asString());
 }
 
 // Set input enable flag
@@ -1515,13 +1513,13 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
    if (tgtNtm != nullptr) {
 
       const models::Player* const tp{tgtNtm->getTemplatePlayer()};
-      const char* const tpfn{tp->getFactoryName()};
+      const std::string& tpfn{tp->getFactoryName()};
 
       // Case #1 : when the Ntm's template player has the same
       // factory name as this node then we just add it to the list
       // of Ntm objects assigned to this node.
       if (nodeFactoryName != nullptr) {
-         ok = (std::strcmp(tpfn, nodeFactoryName) == 0);
+         ok = ( tpfn == nodeFactoryName );
          if (ok) addNtmSorted(tgtNtm);
       }
 
@@ -1531,7 +1529,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
       // this Ntm object and add it to our list of subnodes.
       if (!ok) {
          // Create a new node and add the NTM
-         const auto newNode = new NtmOutputNodeStd(tp, tpfn);
+         const auto newNode = new NtmOutputNodeStd(tp, tpfn.c_str());
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.

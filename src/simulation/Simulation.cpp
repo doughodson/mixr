@@ -206,7 +206,7 @@ void Simulation::reset()
 
             // reinstated the container pointer and player name
             ip->container(this);
-            ip->setName((pair->slot()->asString()));
+            ip->setName((pair->slot()));
 
             // Insert the player into the new list in sorted order
             insertPlayerSort(pair, newList);
@@ -229,7 +229,7 @@ void Simulation::reset()
 
                // reinstated the container pointer and player name
                ip->container(this);
-               ip->setName(pair->slot()->asString());
+               ip->setName(pair->slot());
 
                // Insert the proxy player into the new list in sorted order
                insertPlayerSort(pair, newList);
@@ -853,7 +853,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
          if (ip == nullptr) {
             // Item is NOT a Player
-            std::cerr << "Simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
+            std::cerr << "Simulation::setSlotPlayers: slot: " << pair->slot() << " is NOT of a Player type!" << std::endl;
             ok = false;
          }
          else {
@@ -898,8 +898,8 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
                ok = false;
             }
 
-            if (*pair1->slot() == *pair2->slot()) {
-               std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << *pair1->slot() << std::endl;
+            if (pair1->slot() == pair2->slot()) {
+               std::cerr << "Simulation::setSlotPlayers: duplicate player name: " << pair1->slot() << std::endl;
                ok = false;
             }
 
@@ -918,7 +918,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          item = item->getNext();
          const auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
-         ip->setName(pair->slot()->asString());
+         ip->setName(pair->slot());
       }
 
       // Set the original player list pointer
@@ -1020,7 +1020,7 @@ void Simulation::updatePlayerList()
 
             // Set container and name
             ip->container(this);
-            ip->setName(newPlayer->slot()->asString());
+            ip->setName(newPlayer->slot());
 
             // Insert the new player into the new list in sorted order
             insertPlayerSort(newPlayer, newList);
@@ -1103,7 +1103,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
                const AbstractNib* rNib{refPlayer->getNib()};
 
                // Compare federate names
-               int result{std::strcmp((*nNib->getFederateName()).c_str(), (*rNib->getFederateName()).c_str())};
+               int result{nNib->getFederateName() == rNib->getFederateName()};
                if (result == 0) {
                   // Same federate name; compare player IDs
                   if (nNib->getPlayerID() > rNib->getPlayerID()) result = +1;

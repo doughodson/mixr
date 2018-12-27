@@ -3,7 +3,7 @@ Changes since v18.01
 ================================================================================
 
 --------------------------------------------------------------------------------
-General framework-wide changes/improvements/trends/philosophy/goals
+General framework-wide changes, improvements, trends, philosophy, and goals
 
 - Topic: Consistency in terminology with regard to represented Players discovered,
          created and/or managed by an interoperability interface.
@@ -11,67 +11,73 @@ General framework-wide changes/improvements/trends/philosophy/goals
   Within MIXR, different terms associated with interoperability discovered,
   created and/or managed players had been used.  For example, in some parts
   of the code, the term 'remote' player was used, in others, the terms 'networked',
-  'interoperability' and even 'surrogate' could be found. To further complicate
+  'interoperability' and even 'surrogate' could be found. To further confuse
   matters, the term 'ghost' is sometimes used in other simulation packages.
-  Each use of these terms implies the same thing; a stand-in representation of
+  The use of terms implies the same thing; a stand-in representation of
   a player being updated or managed by a different simulation (most likely executed
   on a different computer within a distributed environment).
 
-  To improve the consistency of terminology throughout the code base, we have
-  shifted references for this kind of stand-in representation, to a 'proxy' (or
-  proxy player in code).  Proxy's are updated and/or managed, etc., by a 'remote'
-  simulation, that is connected via a 'networked' interface, that share data through
-  some kind of 'interoperability' protocol or mechanism. In the end, this stand-in
-  representation (that is not being updated or managed by this simulation) is called
-  a proxy. We feel the term 'proxy' more fairly conveys what it is, as opposed to how
-  it comes about or where it comes from.
+  To improve the consistent use of terminology within MIXR, we have
+  shifted references for this kind of stand-in representation, to a 'proxy' (e.g.,
+  a proxy player).  Proxies are updated and/or managed, etc., by an 'remote, networked'
+  (i.e., different) simulation, that is connected via a 'networked' interface.  This
+  interaction is facilitated by some kind of 'interoperability' protocol or mechanism.
+
+  In the end, this stand-in representation (that is not being updated or managed by this
+  simulation) is called a proxy. We feel the term 'proxy' more fairly conveys what it
+  is, as opposed to how it comes about or where it comes from.
 
   We especially want to avoid using the term 'interoperability' player (or 'IPlayer'
-  as abbreviated in code), as the 'I' is often stylistically, in code, used to
-  imply interface, or more specifically an interface class (for a player in this
-  case).
+  as abbreviated in code), as the 'I' is often stylistically (in code) used to
+  imply interface, or more specifically an interface class; in this case, to a player.
 
-  Moving to a consistent and more specific terminology, also communicates that a
-  degree of uncertainty or difference (due to inconsistency of state and/or
+  Moving to a consistent and more specific terminology also communicates that a
+  degree of uncertainty or difference (due to the inconsistency of state and/or
   representation) between locally managed representations and stand-ins might exist.
   For example, from an analysis point of view, the outcomes (or results) from
-  interactions between locally managed players and proxy players might be
-  different than outcomes that do not include induced consistency or representation
-  differences.
+  interactions between locally managed players and proxy players (especially, if not
+  time-sync'd) might be different than outcomes that do not include induced consistency
+  or representation differences.
 
 - Topic: String verses Identifier
 
-  The Extensible Description Language (EDL) is enabled by a language parser
-  and code embedded within Object-based classes.  Within it, two important data
-  types, in this discussion, String and Identifier are of particular interest.
+  The processing of a Extensible Description Language (EDL) configuration file is
+  enabled by a language parser and code embedded within Object-based classes.  Within it,
+  two important data types (for this discussion), String and Identifier are of
+  particular interest.
 
   Strings are defined in the language as quoted sequences of characters (e.g.,
-  "Hello, World") as is common in many computer languages.  Identifiers are defined
-  as an unquoted sequence of characters (e.g., 'blue', 'localhost', etc.). (Note: We
-  use single quotes in the examples to indicate a particular character sequence for
-  an Identifier; they are not to be used in an actual configuration file.)
+  "Hello, World") as is common in many computer languages.  Identifiers are a bit differnt,
+  they are an unquoted sequence of characters (e.g., 'blue', 'localhost', etc.), in other
+  words, they are a sequence of printable characters without embedded spaces!
+  (Note: We use single quotes (') in the examples above to indicate a particular valid
+  character sequence for an Identifier; they are not to be used in an real configuration
+  files.)
 
-  Identifiers, like most computer language are defined using one or more deemed
+  Identifiers, like most computer languages, are defined using one or more deemed
   valid characters that excludes spaces; they are most commonly used to label
-  or name things such as objects and variables. In other words, they use a
-  string-based value (i.e., name) to identify things!  The value they provide
-  often defines some aspect of behavior within the code (e.g., the type of scan).
+  or name things such as objects and variables. They are stored as a string value,
+  and used to identify things!  Their value is used in several ways, for example,
+  from an input file parsing perspective, the value might be used to select a
+  specific behavior of interest within an object instance (e.g., the type of scan).
 
   Within MIXR, although not enforced, stylistically, we prefer and strive to keep
   all identifiers lower case.  We believe this improves the readability of
-  configuration input files, and avoids potential confusion with macros (which
+  configuration input files and avoids potential confusion with macros (which
   are often written in UPPER case).
 
-  Even though both Identifiers and Strings are created and defined by a sequence
+  Even though both Identifiers and Strings are created and defined as a sequence
   of characters, they are distinguished by the role they play within the language.
   Under the hood, their value is stored as a string, but they serve different
   purposes in terms of semantic meaning.  Identifiers can be viewed as value types
-  that have internal meaning to the application, such as specifying a mode
-  of some kind that maps to an enumeration.  Strings can be viewed as value
-  types that have external meaning, for example, a description of something
-  not terribly relevant to the executing application, a filename, or even
-  a network address for which no unique data type (think token) has been
-  defined.
+  that have internal meaning to the application (e.g., the mode for a sensor)
+  Strings can be viewed as value types that have external meaning, for example,
+  a description of something not terribly relevant to the executing application,
+  a filename, or even a network address for which no unique data type (think token)
+  has been defined.  Identifiers play the same role as symbols within a programming
+  language (e.g., x=10, 'x' is a symbol), strings are used to communicate information
+  to a user (e.g, "input>").  Note: It makes no sense for identifiers to be mutable
+  (e.g., it would like saying the value '5' is mutable, as '5' is a value).
 
   Internal to the EDL parser, Strings and Identifiers are distinguished by
   different tokens.  Within the C++ code base, they were confounded - namely,
@@ -80,16 +86,16 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Change:
 
-  The previous IS-A relationship within the C++ code base no longer exists;
+  The previous IS-A relationship within the C++ codebase no longer exists;
   Identifiers and Strings are now entirely different types. From an
   implementation point of view, they both use a string to store a particular
   value; but they are now unrelated types. This had an impact on the code base,
   but interestingly enough, little, in fact, almost no impact on the configuration
   files.  Configuration files mostly specified types completely consistent with
-  the EDL specification.  It was the C++ side, or Object-based classes that
+  the EDL specification.  It was the C++ side or Object-based classes that
   required some rework and tweaking.
 
-  In several cases, classes that defined slots to accept identifier-type value
+  In several cases, classes that defined slots to accept an identifier-type value
   information (such as Antenna with its slot to define polarization as either
   'none', 'vertical', 'horizontal', 'slant', etc.) was in fact accepting a
   String to process the same input value.  This worked because of the previous
@@ -109,22 +115,26 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Previously, within the C++ code base, the Boolean type (i.e., class) was defined
   as a subclass to Number (i.e., IS-A relationship).  This relationship allowed
-  for Boolean's to be a valid substitute for any Number, even though, as in many
-  computer languages, they are often considered to be a different types
-  (e.g., C++ 'bool' vs 'int').
+  for Boolean's to be a valid substitute for any Number, even though, both
+  mathematically and in many computer languages, they are often considered to
+  be different types (e.g., C++ 'bool' vs 'int'). Note: The C programming language
+  provides no primitive Boolean type, its properties has to be emulated using
+  an integer.
 
   Much like String and Identifiers, this can lead to some confusion.  For example,
-  configuration files settings for things like an 'asynchronous' mode,
-  (true/false type values) were, unfortunately, being set to a number (i.e., '5')
-  - somewhat disturbing. This 'worked' - as numbers were being interpreted
-  as Boolean values (e.g., true if positive).
+  configuration files settings for things things that are on/off, true/false, etc.
+  were, unfortunately conflated with other Number representations (e.g., '5');
+  somewhat disturbing this 'worked'. Worked in the sense that numbers were being
+  interpreted as Boolean values (e.g., true if positive), but misaligned
+  with the semantics for the kind of input that was expected.
 
-  To resolve any possible misunderstanding of input file settings, and to align
-  class documentation (which often indicated a desired Boolean value) with
-  code implementation, we have made reimplemented Boolean's and Number's as
-  different types (i.e., no IS-A relationship).  Number's no longer convert
-  to Boolean's, and Boolean's don't have a Number equivalent.  Such conversions
-  are, of course, available within the C++ domain as explicit type conversions.
+  To resolve any possible misunderstanding of input file settings, and to better
+  align the documentation of classes (which often indicates a desired Boolean value)
+  with code implementation, we have made reimplemented Boolean's and Number's as
+  different types (i.e., there is no longer an IS-A relationship between them).
+  Number's no longer convert to Boolean's, and Boolean's don't have a Number
+  equivalent.  Such conversions are, of course, available within the C++ domain
+  as explicit type conversions.
 
 - Topic: General refactoring of EDL -> C++ support classes
 
@@ -132,18 +142,20 @@ General framework-wide changes/improvements/trends/philosophy/goals
   bite size chunks called tokens.  The meaning of those tokens, and how they are
   organized determines its 'language.'
 
-  In the case of computer programs, this input language (i.e.,EDL) is 'spoken'
-  in the form of a ASCII-based file (which we call a configuration file). It is
+  In the case of computer programs, this input language (i.e., EDL) is 'spoken'
+  in the form of an ASCII-based file (which we call a configuration file). It is
   interpreted (i.e., translated) by reading it and building an Object tree which
   eventually is handed (returned) by to the C++-based program for use.
 
   Just like the EDL, C++ is a language as well. The software code that connects
-  these two languages is often referred to as 'binding' code.  Some software
-  projects will call this 'wrapper' code.  The purpose of the code is to smooth
-  the 'impedance mismatch' between two different languages.  For EDL based inputs,
-  this means the process of parsing and translating what was specified into
-  it's C++ equivalent.  (Technically, is not translating it to 'C++', but something
-  the C++-base code can understand and use.
+  (or streamlines their interaction with each other) between these languages is
+  referred to as 'binding' code.  Some software developers might call this code
+  'wrapper' code.  The purpose of the code is to provide a way to interface these
+  different languages (i.e., smooth the 'impedance mismatch' between them).  For
+  EDL based inputs, this means the process of parsing and translating what is
+  specified into it's C++ equivalent.  (Technically, is not translating EDL to
+  C+, but serving as a useful tool to help the developer create (i.e., configure)
+  the objects as the user desires.)
 
   The translation aspect of this process is supported by tokens as defined
   by the EDL scanner and C++ classes to represent that information.  The
@@ -151,32 +163,35 @@ General framework-wide changes/improvements/trends/philosophy/goals
   For example, in EDL land, a string is a series of characters surrounded by
   quotes ("hello world").  This is represented by a token with a particular value,
   which will be stored in a C++-defined class called String and eventually
-  be used by the C++-based code.  As another example, Boolean's are represented by
-  "true" and "false" strings as identified by the EDL scanner which are represented by
-  the C++ class called Boolean.  Once this translation happens, the C++ code will
-  probably translate it one more step to the primitive 'bool' for use internal to
-  the application.
+  be used by the C++-based code.  As another example, Boolean's in the EDL are
+  represented by "true" and "false" string values as identified by the scanner
+  which creates a C++ Boolean object.  Once this translation happens, the C++ code
+  might convert this representation to it's own primitive 'bool' type for internal use.
+  In this class the Boolean class exists to facilite this intereaction between languages
+  and can be considered part of the binding code.
 
   We could of exclusively used C++ primitive types for many of EDL's understood
   types, such as 'int', 'double' and 'float' but we wanted to lessen the burden
   on the user by being less picky (in terms of syntax) on how a number is written.
-  We only care if it's an integer or a float; unique, more specific variations from
-  that are not considered important.
+  From an EDL language perspective, the Number 5 can be written as 5, 5., 5.0, etc...
+  If we require (from the user) a more specific representation for an integer (e.g., '5')
+  or a float (5.0), those classes exist.
 
   For example, consider a slot parameter called 'range' - in which we want the user
-  to enter/input/specify a number.  If we used purely C++ number representations,
+  to enter (input or specify) a number.  If we used purely C++ number representations,
   the user would be forced to enter one of a number of possible variations of a number
-  (e.g., 1, 1.0, 1.0f, etc).  In C++ land, the value 1 is considered a C++ int, the
-  value 1.0 is considered a double and 1.0f is a float.  In other words, the C++ language
-  defines a more strict or finer resolution representation for numbers.  In EDL land,
-  we are willing to accept 1 or 1.0 as a reasonable input for 'range'.
+  (e.g., 1, 1.0, 1.0f, etc).  In the C++ language, the value 1 is considered to be an
+  integer, the value 1.0 is considered a double and 1.0f is a float.  In other words,
+  the C++ language (by default) defines a more strict or finer resolution representation
+  for a number.  In EDL land, if we don't care, we are perfectly willing to accept 1 or 1.0
+  as a reasonable value input, then we can just accept a Number.
 
   To enable this, the EDL language is purposely weakened, sometimes called weakly
   typed in the domain of numbers, when compared to C++.  It understands integers
   and floating point numbers, but that's about it.  To further weaken things,
   both of these types are considered just concrete variations of something more abstract
-  called a Number.  If we want the user to specify the 'range', an abstract Number
-  representation is probably good enough.
+  called a Number.  If we want the user to specify the parameter 'range', an abstract Number
+  representation is probably good enough for what's intended.
 
   Rules (or suggestions):
 
@@ -250,7 +265,7 @@ General framework-wide changes/improvements/trends/philosophy/goals
 
   Transition approach:
 
-  It's difficult to make the the transition from MIXR Strings and char*
+  It's difficult to make the transition from MIXR Strings and char*
   representations to std::string in one step.  Here are a series of steps we
   are taking right now:
 
@@ -342,7 +357,7 @@ base library (mixr_base)
 
 - All addresses in network handler classes have been updated to use type std::string
   as opposed to char*.  Also, all of the classes for which this matters also defines a
-  slot method to accept Identifiers for specific host names.  Strings are still used
+  slot method to accept Identifiers for specific hostnames.  Strings are still used
   to specify IP addresses.
 
 - The directory containing all the function and table classes (previously called
@@ -424,7 +439,7 @@ base library (mixr_base)
          unique data type.  Therefore, much of the infrastructure to do
          that has been removed.
       3) The accessor asComplex() has been added to return a reference to
-         the double valued std::complex representation (i.e., complex<double>&).
+         the double-valued std::complex representation (i.e., complex<double>&).
       4) The special functions listed below have been deleted as well, but
          are available within the standard library; a simple mapping is as
          follows:
@@ -449,7 +464,7 @@ base library (mixr_base)
          understood representation of a number (e.g., 1, 1.0), as opposed to
          the C++ perspective of simply being an integer or a double.  In other
          words, Number is a slightly weakened (less strongly typed) version
-         of a number.  It's quite useful for obtaining user defined numerical
+         of a number.  It's quite useful for obtaining user-defined numerical
          values from a configuration file.
 
    Operator and Operator-based classes
@@ -824,7 +839,7 @@ models library (mixr_models)
          now accepts a Boolean
 
    ExternalStore
-      1) Slot paramter 'jettisonable' now accepts a Boolean
+      1) Slot parameter 'jettisonable' now accepts a Boolean
 
    Gimbal class
       1) Slot parameter 'type' now accepts an Identifier
@@ -901,7 +916,7 @@ models library (mixr_models)
    WorldModel class
       1) Slot parameter 'gamingAreaUseEarthModel' now accepts a Boolean
 
-- Due to changes associated with 'enum's becoming full fledged 'enum class'es
+- Due to changes associated with 'enum's becoming full-fledged 'enum class'es
   more specificity was added in other related classes that used those
   enumerated values.
 

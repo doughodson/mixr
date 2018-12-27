@@ -13,6 +13,7 @@
 #include "mixr/base/util/system_utils.hpp"
 
 #include <cstring>
+#include <string>
 
 #ifndef WIN32
 #include <unistd.h>
@@ -115,36 +116,6 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 
    for (unsigned int i = 0; i < MAX_PARAMETERS; i++) {
       interactionParameterHandles[i] = org.interactionParameterHandles[i];
-   }
-
-   {
-      const base::Identifier* s{org.getFederationName()};
-      if (s != nullptr) {
-         setFederationName( static_cast<base::Identifier*>(s->clone()) );
-      }
-      else {
-         setFederationName(nullptr);
-      }
-   }
-
-   {
-      const base::Identifier* s{org.getFederateName()};
-      if (s != nullptr) {
-         setFederateName( static_cast<base::Identifier*>(s->clone()) );
-      }
-      else {
-         setFederateName(nullptr);
-      }
-   }
-
-   {
-      const base::Identifier* s{org.getFederateName()};
-      if (s != nullptr) {
-         setFederateName( static_cast<base::Identifier*>(s->clone()) );
-      }
-      else {
-         setFederateName(nullptr);
-      }
    }
 
    {
@@ -538,11 +509,11 @@ bool NetIO::initNetwork()
 bool NetIO::createAndJoinFederation()
 {
     bool ok{};
-    
-    const base::Identifier* federation{getFederationName()};
-    const base::Identifier* federate{getFederateName()};
+   
+    const std::string& federation{getFederationName()};
+    const std::string& federate{getFederateName()};
 
-    if (federation != nullptr && federate != nullptr) {
+    if ( !federation.empty() && !federate.empty() ) {
 
        ok = true; // default
 
@@ -550,7 +521,7 @@ bool NetIO::createAndJoinFederation()
        // Try to create the federation
        // ---
        try {
-           rtiAmb->createFederationExecution(federation->c_str(), getFedFileName());
+           rtiAmb->createFederationExecution(federation.c_str(), getFedFileName());
            std::cout << "*** Federation Created" << std::endl;
            base::msleep(1000);   // DDH: this was set to 2000 for linux?
        }
@@ -570,8 +541,8 @@ bool NetIO::createAndJoinFederation()
            int tries{10};
            while (tries--) {
                try {
-                   rtiAmb->joinFederationExecution(federate->c_str(), 
-                                                   federation->c_str(),
+                   rtiAmb->joinFederationExecution(federate.c_str(), 
+                                                   federation.c_str(),
                                                    fedAmb);
                    std::cout << "*** Joined Federation" << std::endl;
                    joined = RTI::RTI_TRUE;
@@ -599,9 +570,9 @@ bool NetIO::createAndJoinFederation()
 //------------------------------------------------------------------------------
 bool NetIO::resignAndDestroyFederation()
 {
-    const base::Identifier* federation{getFederationName()};
+    const std::string&  federation{getFederationName()};
 
-    if (federation != nullptr) {
+    if ( !federation.empty()) {
        try {
            rtiAmb->resignFederationExecution(
                RTI::DELETE_OBJECTS_AND_RELEASE_ATTRIBUTES);
@@ -613,7 +584,7 @@ bool NetIO::resignAndDestroyFederation()
        }
 
        try {
-           rtiAmb->destroyFederationExecution(federation->c_str());
+           rtiAmb->destroyFederationExecution(federation.c_str());
            std::cout << "*** Destroyed Federation" << std::endl;
        }
        catch(RTI::Exception& e) {

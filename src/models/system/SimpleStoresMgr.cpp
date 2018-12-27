@@ -85,7 +85,7 @@ void SimpleStoresMgr::updateData(const double dt)
                const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
                if (pair != nullptr) {
                   const auto s = dynamic_cast<const AbstractWeapon*>( pair->object() );
-                  if ( s != nullptr && s->isMode(Player::Mode::INACTIVE) && std::strcmp(s->getFactoryName(), wpn->getFactoryName()) == 0 ) {
+                  if ( s != nullptr && s->isMode(Player::Mode::INACTIVE) && (s->getFactoryName() == wpn->getFactoryName()) == true ) {
                      count++;
                   }
                }

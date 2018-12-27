@@ -9,7 +9,8 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Float
-// Description: Class that stores an EDL defined (regex) float point value as a C++ double
+// Description: Class that stores an EDL defined (regex) float point value as a
+//              C++ double
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -22,15 +23,15 @@ class Float final: public Number
    DECLARE_SUBCLASS(Float, Number)
 
 public:
-   explicit Float()                                         { STANDARD_CONSTRUCTOR() }
-   explicit Float(const double value) : val(value)          { STANDARD_CONSTRUCTOR() }
-   explicit Float(const float value)  : val(value)          { STANDARD_CONSTRUCTOR() }
+   explicit Float()                                   { STANDARD_CONSTRUCTOR() }
+   explicit Float(const double x) : value(x)          { STANDARD_CONSTRUCTOR() }
+   explicit Float(const float x)  : value(x)          { STANDARD_CONSTRUCTOR() }
 
-   void setValue(const double x)       { val = x; }
+   void setValue(const double x)       { value = x; }
 
 private:
-   double getValue() const final       { return val; }
-   double val{};
+   double getValue() const final       { return value; }
+   double value{};
 
 private:
    // slot table helper methods

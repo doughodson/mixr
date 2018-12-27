@@ -81,9 +81,9 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
             mixr::base::List::Item* item{arg_list->getFirstItem()};
             while (item != nullptr) {
                 mixr::base::Pair* p{static_cast<mixr::base::Pair*>(item->getValue())};
-                bool ok{obj->setSlotByName(p->slot()->c_str(), p->object())};
+                bool ok{obj->setSlotByName(p->slot().c_str(), p->object())};
                 if (!ok) {
-                    std::string msg = "error while setting slot name: " + std::string( p->slot()->c_str() );
+                    std::string msg = "error while setting slot name: " + p->slot();
                     yyerror(msg.c_str());
                 }
                 item = item->getNext();

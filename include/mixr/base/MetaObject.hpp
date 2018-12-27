@@ -17,12 +17,12 @@ class MetaObject
 {
 public:
    MetaObject() = default;
-   MetaObject(const char* const, const char* const, const SlotTable* const, const MetaObject* const);
+   MetaObject(const std::string&, const std::string&, const SlotTable* const, const MetaObject* const);
    MetaObject(const MetaObject&) = delete;
    MetaObject& operator=(const MetaObject&) = delete;
 
-   const char* getClassName() const             { return className.c_str(); }
-   const char* getFactoryName() const           { return factoryName.c_str(); }
+   const std::string& getClassName() const             { return className; }
+   const std::string& getFactoryName() const           { return factoryName; }
 
    const SlotTable* const slottable {};         // pointer to the SlotTable
    const MetaObject* const baseMetaObject {};   // pointer to the base object's MetaObject

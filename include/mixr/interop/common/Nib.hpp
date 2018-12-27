@@ -77,8 +77,8 @@ public:
    virtual void setPlayerID(const unsigned short);
    virtual void setPlayerName(const std::string& x)   { pname = x; }
 
-   const base::Identifier* getFederateName() const override;          // returns federate name
-   virtual bool setFederateName(const base::Identifier* const);       // sets our federate name
+   const std::string& getFederateName() const override;         // returns federate name
+   virtual bool setFederateName(const std::string&);            // sets our federate name
 
    // Mode
    bool isMode(const models::Player::Mode m) const            { return mode == m; }
@@ -279,11 +279,11 @@ private:
 
    NetIO::IoType ioType;               // Input/Output direction of this NIB
 
-   base::safe_ptr<const base::Identifier> federateName; // federate name
-   base::safe_ptr<models::Player> pPlayer;              // Our player
-   base::safe_ptr<NetIO> pNetIO;                        // Our Network
-   bool checked {};                                     // NIB was checked
-   unsigned short playerID{};                           // Player ID
+   std::string federateName;                     // federate name
+   base::safe_ptr<models::Player> pPlayer;       // Our player
+   base::safe_ptr<NetIO> pNetIO;                 // Our Network
+   bool checked{};                               // NIB was checked
+   unsigned short playerID{};                    // Player ID
 
    // Type mapper and type checked flags
    base::safe_ptr<const Ntm> ntm;      // Type mapper

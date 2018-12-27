@@ -5,6 +5,8 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
 class Identifier;
@@ -42,7 +44,7 @@ public:
    const Pair* findByName(const char* const slotname) const;
 
    // finds the name associated with an object
-   const Identifier* findName(const Object* const obj) const;
+   const std::string findName(const Object* const obj) const;
 
    // returns the n'th pair
    Pair* getPosition(const unsigned int n)    {

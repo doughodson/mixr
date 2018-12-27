@@ -9,7 +9,8 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Integer
-// Description: Class that stores an EDL defined (regex) integer value as a C++ int
+// Description: Class that stores an EDL defined (regex) integer value as a
+//              C++ integer
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -22,15 +23,15 @@ class Integer final: public Number
     DECLARE_SUBCLASS(Integer, Number)
 
 public:
-    explicit Integer()                         { STANDARD_CONSTRUCTOR() }
-    explicit Integer(const int x) : val(x)     { STANDARD_CONSTRUCTOR() }
+    explicit Integer()                           { STANDARD_CONSTRUCTOR() }
+    explicit Integer(const int x) : value(x)     { STANDARD_CONSTRUCTOR() }
 
-    void setValue(const int x)                 { val = x; }
-    int asInt() const                          { return val; }
+    void setValue(const int x)                   { value = x; }
+    int asInt() const                            { return value; }
 
 private:
-   double getValue() const final               { return static_cast<int>(val); }
-   int val{};
+   double getValue() const final                 { return static_cast<double>(value); }
+   int value{};
 
 private:
    // slot table helper methods

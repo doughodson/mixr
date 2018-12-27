@@ -3,7 +3,10 @@
 #define __mixr_models_MultiActorAgent_H__
 
 #include "mixr/base/Component.hpp"
+#include "mixr/base/Identifier.hpp"
+
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base {
@@ -54,14 +57,14 @@ protected:
 
    struct AgentItem
    {
-      base::safe_ptr<base::Identifier> actorName;
+      std::string actorName;
       base::safe_ptr<base::ubf::AbstractBehavior> behavior;
       base::safe_ptr<base::Component> actor;
    };
 
    static const int MAX_AGENTS{10};
    bool clearAgentList();
-   bool addAgent(base::Identifier* name, base::ubf::AbstractBehavior* const);
+   bool addAgent(const std::string& name, base::ubf::AbstractBehavior* const);
 
 private:
    base::Component* actor{};

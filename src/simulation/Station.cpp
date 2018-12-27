@@ -166,17 +166,15 @@ void Station::copyData(const Station& org, const bool)
    startupResetTimer = org.startupResetTimer;
 
    // Unref our old stuff (if any)
-   if (ownshipName != nullptr)      { ownshipName->unref(); ownshipName = nullptr; }
+   ownshipName.clear();
    if (ownship != nullptr)          { ownship->unref(); ownship = nullptr; }
 
    // Copy own ownship name
-   if (org.ownshipName != nullptr) {
-      ownshipName = org.ownshipName->clone();
-   }
+   ownshipName = org.ownshipName;
 
    // Attach our ownship
-   if (ownshipName != nullptr) {
-      setOwnshipByName( (*ownshipName).c_str() );
+   if (!ownshipName.empty()) {
+      setOwnshipByName( ownshipName.c_str() );
    }
 }
 
@@ -212,12 +210,12 @@ void Station::reset()
    // ---
    // Reset the ownship pointer
    // ---
-   if (ownshipName != nullptr) {
-      setOwnshipByName( (*ownshipName).c_str() );
+   if (!ownshipName.empty()) {
+      setOwnshipByName( ownshipName.c_str() );
       if (ownship == nullptr) {
          // Ok, we had a list of players and an ownship player name, but still
          // don't have an ownship pointer -- print an error message.
-         std::cerr << "Station::reset(): ownship not found: " << *ownshipName << std::endl;
+         std::cerr << "Station::reset(): ownship not found: " << ownshipName << std::endl;
       }
    }
 
@@ -610,7 +608,7 @@ const AbstractPlayer* Station::getOwnship() const
 }
 
 // Returns the ownship's name
-const base::Identifier* Station::getOwnshipName() const
+const std::string& Station::getOwnshipName() const
 {
    return ownshipName;
 }
@@ -848,7 +846,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
     // When we're just setting a null(0) ownship ...
     if (newOS == nullptr) {
         // Unref the old player
-        if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
+        if (!ownshipName.empty()) { ownshipName.clear(); }
         if (ownship != nullptr) {
             ownship->event(ON_OWNSHIP_DISCONNECT);
             ownship->unref();
@@ -868,7 +866,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
                 const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
                 if (ip == newOS && ip->isLocalPlayer()) {
                     // Unref the old stuff
-                    if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
+                    if (!ownshipName.empty()) { ownshipName.clear(); }
                     if (ownship != nullptr) {
                         ownship->event(ON_OWNSHIP_DISCONNECT);
                         ownship->unref();
@@ -878,7 +876,6 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
                     ownship = newOS;
                     ownship->ref();
                     ownshipName = pair->slot();
-                    ownshipName->ref();
                     ownship->event(ON_OWNSHIP_CONNECT);
                     set = true;
                 }
@@ -978,9 +975,7 @@ bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
 //------------------------------------------------------------------------------
 bool Station::setSlotOwnshipName(const base::Identifier* const newName)
 {
-   if (ownshipName != nullptr) ownshipName->unref();
-   ownshipName = newName;
-   if (ownshipName != nullptr) ownshipName->ref();
+   ownshipName = newName->asString();
    return true;
 }
 
