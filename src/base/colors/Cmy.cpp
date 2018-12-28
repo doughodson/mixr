@@ -21,21 +21,21 @@ BEGIN_SLOT_MAP(Cmy)
     ON_SLOT(3, setSlotYellow,  Number)
 END_SLOT_MAP()
 
+Cmy::Cmy()
+{
+   STANDARD_CONSTRUCTOR()
+   cmy[CYAN]    = 0.0;  // default to black
+   cmy[MAGENTA] = 0.0;
+   cmy[YELLOW]  = 0.0;
+   cmy2rgb(color,cmy);   // set the rgb values
+}
+
 Cmy::Cmy(const double c, const double m, const double y)
 {
    STANDARD_CONSTRUCTOR()
    cmy[CYAN]    = c;     // set the values
    cmy[MAGENTA] = m;
    cmy[YELLOW]  = y;
-   cmy2rgb(color,cmy);   // set the rgb values
-}
-
-Cmy::Cmy()
-{
-   STANDARD_CONSTRUCTOR()
-   cmy[CYAN]    = 0.0f;  // default to black
-   cmy[MAGENTA] = 0.0f;
-   cmy[YELLOW]  = 0.0f;
    cmy2rgb(color,cmy);   // set the rgb values
 }
 

@@ -64,7 +64,7 @@ BEGIN_SLOTTABLE(Display)
    "clearDepth",           // 22) clear depth; range: [ 0, 1 ] or negative for no depth buffer
    "orientation",          // 23) display orientation { normal, cw90, ccw90, inverted } default: normal
    "materials",            // 24) List of material objects
-   "antiAliasing",         // 25) Turn on/off anti-aliasing.
+   "antiAliasing",         // 25) Anti-aliasing flag (on/off)
 END_SLOTTABLE(Display)
 
 BEGIN_SLOT_MAP(Display)

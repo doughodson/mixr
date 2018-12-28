@@ -16,10 +16,20 @@ double Color::defaultAlpha{1.0};
 Color::Color()
 {
     STANDARD_CONSTRUCTOR()
-    color[RED]   = 0.0f;    // default to black
-    color[GREEN] = 0.0f;
-    color[BLUE]  = 0.0f;
+    // default color is black
+    color[RED]   = 0.0;
+    color[GREEN] = 0.0;
+    color[BLUE]  = 0.0;
     color[ALPHA] = defaultAlpha;
+}
+
+Color::Color(const double red, const double green, const double blue, const double alpha)
+{
+    STANDARD_CONSTRUCTOR()
+    color[RED]   = red;
+    color[GREEN] = green;
+    color[BLUE]  = blue;
+    color[ALPHA] = alpha;
 }
 
 void Color::copyData(const Color& org, const bool)
