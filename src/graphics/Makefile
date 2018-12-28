@@ -30,6 +30,7 @@ OBJS =  \
 	fonts/FtglTextureFont.o \
 	fonts/StrokeFont.o \
 	readouts/AsciiText.o \
+	readouts/BooleanReadout.o \
 	readouts/Cursor.o \
 	readouts/DirectionReadout.o \
 	readouts/HexReadout.o \

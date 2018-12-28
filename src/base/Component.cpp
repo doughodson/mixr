@@ -869,7 +869,7 @@ bool Component::setSlotDisableMsgType(const Integer* const msg)
 //           Return true of the message was received and used.
 //------------------------------------------------------------------------------
 
-// Send an event message to component 'id'
+// send an event message to component 'id'
 bool Component::send(const char* const id, const int event)
 {
     bool val{};
@@ -881,8 +881,7 @@ bool Component::send(const char* const id, const int event)
     return val;
 }
 
-
-// Send an event message with an int value to component 'id'
+// send an event message with an int value to component 'id'
 bool Component::send(const char* const id, const int event, const int value, SendData& sd)
 {
    bool val{};
@@ -894,7 +893,7 @@ bool Component::send(const char* const id, const int event, const int value, Sen
    return val;
 }
 
-// Send an event message with a float value to component 'id'
+// send an event message with a float value to component 'id'
 bool Component::send(const char* const id, const int event, const float value, SendData& sd)
 {
    bool val{};
@@ -906,7 +905,7 @@ bool Component::send(const char* const id, const int event, const float value, S
    return val;
 }
 
-// Send an event message with a double value to component 'id'
+// send an event message with a double value to component 'id'
 bool Component::send(const char* const id, const int event, const double value, SendData& sd)
 {
    bool val{};
@@ -918,7 +917,7 @@ bool Component::send(const char* const id, const int event, const double value, 
    return val;
 }
 
-// Send an event message with a character string to component 'id'
+// send an event message with a character string to component 'id'
 bool Component::send(const char* const id, const int event, const char* const value, SendData& sd)
 {
    bool val{};
@@ -930,7 +929,7 @@ bool Component::send(const char* const id, const int event, const char* const va
    return val;
 }
 
-// Send an event message with a boolean to component 'id'
+// send an event message with a boolean to component 'id'
 bool Component::send(const char* const id, const int event, const bool value, SendData& sd)
 {
    bool val{};

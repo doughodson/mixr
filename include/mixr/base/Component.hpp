@@ -138,7 +138,7 @@ public:
    virtual bool addComponent(Pair* const);
 
    //-----------------------------------------------------------------------------
-   // Container search interface
+   // Subcomponent search capabilities & interface
    //-----------------------------------------------------------------------------
 
    // finds one of our components by 'name'; returns a pointer to the
@@ -178,7 +178,7 @@ public:
    virtual const std::string findNameOfComponent(const Component* const) const;
 
    //-----------------------------------------------------------------------------
-   // Component code to be executed interface
+   // Component code execution interface
    //-----------------------------------------------------------------------------
 
    // time-critical update -- This routine will be called by our tcFrame()
@@ -216,15 +216,15 @@ public:
    bool isNotShutdown() const                 { return !shutdown; }
 
    //-----------------------------------------------------------------------------
-   // send() functions and SendData
+   // Event processing capabilities (SendData and associated send() methods)
    //
-   // Using the send() functions, a container component can send an event token,
+   // Using the send() methods, a container component can send an event token,
    // along with an optional argument, to one of its components named 'id'.
-   // The send() functions pass the token and argument to 'id' using the event()
+   // The send() methods pass the token and argument to 'id' using the event()
    // function.  As with event(), send() will return true if the event was
    // processed.
    //
-   // Send() locates the receiving component, 'id', from our components list,
+   // send() locates the receiving component, 'id', from our components list,
    // and it uses the SendData structure to save the pointer to the receiving
    // component.
    //
@@ -236,10 +236,10 @@ public:
    // have changed.
    //-----------------------------------------------------------------------------
 
-   // Standard Event Tokens
+   // event tokens
    #include "mixr/base/eventTokens.hpp"
 
-   // SendData class used by the send() member functions
+   // SendData class - used by the send() methods
    class SendData {
       public:  SendData() = default;
       public:  SendData(const SendData&) = delete;
@@ -274,7 +274,7 @@ public:
    bool send(const char* const id, const int event, const bool value, SendData&);
    bool send(const char* const id, const int event, Object* const value, SendData&);
 
-   // Sends the 'event' message to 'n' components with 'n' arguments from the
+   // sends the 'event' message to 'n' components with 'n' arguments from the
    // 'value' arrays.  This requires an array of 'n' SendData structures to
    // maintain the n-1 values and component pointers.  The component 'id' is
    // used in a format for sprintf() to determine the 'n' individual components.
@@ -346,18 +346,18 @@ public:
    const Component* getSelectedComponent() const                             { return selected; }
 
 protected:
-   // processComponents() -- process our new components list;
-   //   -- Add the components from the input list, 'list', to a new list
+   // process our new components list
+   //   -- add the components from the input list, 'list', to a new list
    //      make sure they are all of class Component (or derived from it)
    //      tell them that we are their container
-   //   -- Add an optional component to the end of the new list
-   //   -- Swap our 'components' list with this new list
-   //   -- Handle component selection.
+   //   -- add an optional component to the end of the new list
+   //   -- swap our 'components' list with this new list
+   //   -- handle component selection
    virtual void processComponents(
-         PairStream* const list,             // Source list of components
-         const std::type_info& filter,       // Type filter
-         Pair* const add = nullptr,          // Optional pair to add
-         Component* const remove = nullptr   // Optional component to remove
+         PairStream* const list,             // source list of components
+         const std::type_info& filter,       // type filter
+         Pair* const add = nullptr,          // optional pair to add
+         Component* const remove = nullptr   // optional component to remove
       );
 
 private:
@@ -374,17 +374,17 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotComponent(PairStream* const multiple);        // Sets the components list
-   bool setSlotComponent(Component* const single);           // Sets a single component
+   bool setSlotComponent(PairStream* const multiple);        // sets the components list
+   bool setSlotComponent(Component* const single);           // sets a single component
    bool setSlotSelect(const String* const name)              { return select(name); }
    bool setSlotSelect(const Integer* const num)              { return select(num);  }
-   bool setSlotEnableTimingStats(const Boolean* const);      // Sets the timing enabled flag
-   bool setSlotPrintTimingStats(const Boolean* const);       // Sets the print timing stats flag
-   bool setSlotFreeze(const Boolean* const);                 // Sets the freeze flag
-   bool setSlotEnableMsgType(const Identifier* const);       // Enables message types by name
-   bool setSlotEnableMsgType(const Integer* const);          // Enables message types by bit
-   bool setSlotDisableMsgType(const Identifier* const);      // Disables message types by name
-   bool setSlotDisableMsgType(const Integer* const);         // Disables message types by bit
+   bool setSlotEnableTimingStats(const Boolean* const);      // sets the timing enabled flag
+   bool setSlotPrintTimingStats(const Boolean* const);       // sets the print timing stats flag
+   bool setSlotFreeze(const Boolean* const);                 // sets the freeze flag
+   bool setSlotEnableMsgType(const Identifier* const);       // enables message types by name
+   bool setSlotEnableMsgType(const Integer* const);          // enables message types by bit
+   bool setSlotDisableMsgType(const Identifier* const);      // disables message types by name
+   bool setSlotDisableMsgType(const Integer* const);         // disables message types by bit
 };
 
 }

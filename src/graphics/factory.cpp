@@ -30,6 +30,7 @@
 #include "mixr/graphics/readouts/Cursor.hpp"
 #include "mixr/graphics/readouts/Rotary.hpp"
 #include "mixr/graphics/readouts/Rotary2.hpp"
+#include "mixr/graphics/readouts/BooleanReadout.hpp"
 #include "mixr/graphics/readouts/DirectionReadout.hpp"
 #include "mixr/graphics/readouts/HexReadout.hpp"
 #include "mixr/graphics/readouts/LatitudeReadout.hpp"
@@ -107,7 +108,7 @@ base::Object* factory(const std::string& name)
         obj = new Triangle();
     }
 
-    // Fields
+    // fields
     else if ( name == AsciiText::getFactoryName() ) {
         obj = new AsciiText();
     }
@@ -115,7 +116,10 @@ base::Object* factory(const std::string& name)
         obj = new Cursor();
     }
 
-    // Readouts
+    // readouts
+    else if ( name == BooleanReadout::getFactoryName() ) {
+        obj = new BooleanReadout();
+    }
     else if ( name == NumericReadout::getFactoryName() ) {
         obj = new NumericReadout();
     }

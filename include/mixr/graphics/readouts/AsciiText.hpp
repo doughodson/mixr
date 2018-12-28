@@ -19,17 +19,6 @@ namespace graphics {
 //    text   <List>       ! Text List
 //------------------------------------------------------------------------------
 
-// Public Member Functions:
-//      bool isValidInputPosition(int tc)
-//      Returns true if tc is a valid input position.
-//
-//      bool setTextString(String* stsobj)
-//      Returns true if the text string was set to stsobj.
-//
-//      bool setTextList(List* stlobj)
-//      Returns true if the text list was set to stlobj.
-//
-
 class AsciiText final: public Readout
 {
     DECLARE_SUBCLASS(AsciiText, Readout)
@@ -38,12 +27,16 @@ public:
    AsciiText();
 
    char filterInputEvent(const int event, const int tc) final;
+   // returns true if tc is a valid input position
    bool isValidInputPosition(const int) final;
+
    bool event(const int key, base::Object* const obj = nullptr) final;
 
-public:
-   bool setSlotTextString(const base::String* const);
-   bool setSlotTextList(const base::List* const);
+   // returns true if the text string was set to stsobj
+   bool setSlotTextString(const base::String* const stsobj);
+
+   // returns true if the text list was set to stlobj
+   bool setSlotTextList(const base::List* const stlobj);
 };
 
 }

@@ -29,6 +29,7 @@ public:
 
 public:
     Color();
+    Color(const double red, const double green, const double blue, const double alpha = defaultAlpha);
 
     // convert a color to an Vec3d* RGB vector
     explicit operator const Vec3d*() const;
