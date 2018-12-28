@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_BooleanReadout_H__
 #define __mixr_graphics_BooleanReadout_H__
 
-#include "mixr/graphics/readouts/Readout.hpp"
+#include "mixr/graphics/readouts/AbstractReadout.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -43,9 +43,9 @@ class ReformatScanner;
 //    00#.##    // Float w/2 right of decimal point & leading zeros
 //    +0#.##    // Float w/plus sign, 2 right of decimal point, & leading zeros
 //------------------------------------------------------------------------------
-class BooleanReadout : public Readout
+class BooleanReadout : public AbstractReadout
 {
-   DECLARE_SUBCLASS(BooleanReadout, Readout)
+   DECLARE_SUBCLASS(BooleanReadout, AbstractReadout)
 
 public:
    BooleanReadout();

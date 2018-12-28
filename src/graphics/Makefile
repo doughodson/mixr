@@ -29,6 +29,7 @@ OBJS =  \
 	fonts/FtglPolygonFont.o \
 	fonts/FtglTextureFont.o \
 	fonts/StrokeFont.o \
+	readouts/AbstractReadout.o \
 	readouts/AsciiText.o \
 	readouts/BooleanReadout.o \
 	readouts/Cursor.o \
@@ -39,7 +40,6 @@ OBJS =  \
 	readouts/NumericReadout.o \
 	readouts/OctalReadout.o \
 	readouts/readout_utils.o \
-	readouts/Readout.o \
 	readouts/ReformatScanner.o \
 	readouts/Rotary.o \
 	readouts/Rotary2.o \

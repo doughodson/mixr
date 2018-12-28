@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Cursor_H__
 #define __mixr_graphics_Cursor_H__
 
-#include "mixr/graphics/readouts/Readout.hpp"
+#include "mixr/graphics/readouts/AbstractReadout.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -15,9 +15,9 @@ namespace graphics {
 // Factory name: Cursor
 // Slots: none
 //------------------------------------------------------------------------------
-class Cursor final: public Readout
+class Cursor final: public AbstractReadout
 {
-    DECLARE_SUBCLASS(Cursor, Readout)
+    DECLARE_SUBCLASS(Cursor, AbstractReadout)
 
 public:
    Cursor();

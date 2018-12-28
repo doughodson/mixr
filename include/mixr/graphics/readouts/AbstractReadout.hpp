@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Readout_H__
-#define __mixr_graphics_Readout_H__
+#ifndef __mixr_graphics_AbstractReadout_H__
+#define __mixr_graphics_AbstractReadout_H__
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"
@@ -10,7 +10,7 @@ namespace base { class Identifier; class Integer; class List; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class: Readout
+// Class: AbstractReadout
 // Description: Abstract class for the readout classes
 //------------------------------------------------------------------------------
 // EDL Interface:
@@ -31,9 +31,9 @@ namespace graphics {
 //      font           <Identifier>  ! specific font name we wish to use (default: 0)
 //      startCharPos   <Integer>     ! Our starting character position (we may want to skip!) (default: 0)
 //------------------------------------------------------------------------------
-class Readout : public Graphic
+class AbstractReadout : public Graphic
 {
-   DECLARE_SUBCLASS(Readout, Graphic)
+   DECLARE_SUBCLASS(AbstractReadout, Graphic)
 
 public:
    enum class Mode { DISPLAY, INPUT };
@@ -57,7 +57,7 @@ public:
         };
 
 public:
-   Readout();
+   AbstractReadout();
 
    virtual void line(const int x)            { ln = x; return; }             // set line number
    virtual int line() const                  { return ln;      }             // return line number
