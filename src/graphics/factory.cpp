@@ -25,12 +25,14 @@
 #include "mixr/graphics/fonts/BitmapFont.hpp"
 #include "mixr/graphics/fonts/StrokeFont.hpp"
 
-// fields and readouts
+// fields
 #include "mixr/graphics/readouts/AsciiText.hpp"
+#include "mixr/graphics/readouts/BooleanText.hpp"
 #include "mixr/graphics/readouts/Cursor.hpp"
 #include "mixr/graphics/readouts/Rotary.hpp"
 #include "mixr/graphics/readouts/Rotary2.hpp"
-#include "mixr/graphics/readouts/BooleanReadout.hpp"
+
+// readouts
 #include "mixr/graphics/readouts/DirectionReadout.hpp"
 #include "mixr/graphics/readouts/HexReadout.hpp"
 #include "mixr/graphics/readouts/LatitudeReadout.hpp"
@@ -51,9 +53,9 @@ namespace graphics {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::Object* obj{};
 
-    // General graphics support
+    // general graphic classes
     if ( name == Graphic::getFactoryName() ) {
         obj = new Graphic();
     }
@@ -76,7 +78,7 @@ base::Object* factory(const std::string& name)
         obj = new ColorGradient();
     }
 
-    // Shapes
+    // shapes
     else if ( name == Circle::getFactoryName() ) {
         obj = new Circle();
     }
@@ -112,14 +114,14 @@ base::Object* factory(const std::string& name)
     else if ( name == AsciiText::getFactoryName() ) {
         obj = new AsciiText();
     }
+    else if ( name == BooleanText::getFactoryName() ) {
+        obj = new BooleanText();
+    }
     else if ( name == Cursor::getFactoryName() ) {
         obj = new Cursor();
     }
 
     // readouts
-    else if ( name == BooleanReadout::getFactoryName() ) {
-        obj = new BooleanReadout();
-    }
     else if ( name == NumericReadout::getFactoryName() ) {
         obj = new NumericReadout();
     }
@@ -148,17 +150,17 @@ base::Object* factory(const std::string& name)
         obj = new Rotary2();
     }
 
-    // Stroke Font
+    // stroke font
     else if ( name == StrokeFont::getFactoryName() ) {
         obj = new StrokeFont();
     }
 
-    // Bitmap Font
+    // bitmap font
     else if ( name == BitmapFont::getFactoryName() ) {
         obj = new BitmapFont();
     }
 
-    // FTGL Fonts
+    // FTGL fonts
     else if ( name == FtglBitmapFont::getFactoryName() ) {
         obj = new FtglBitmapFont();
     }
@@ -181,11 +183,11 @@ base::Object* factory(const std::string& name)
         obj = new FtglTextureFont();
     }
 
-    // Bitmap Textures
+    // bitmap textures
     else if ( name == BmpTexture::getFactoryName() ) {
         obj = new BmpTexture();
     }
-    // Material
+    // material
     else if ( name == Material::getFactoryName() ) {
         obj = new Material();
     }
@@ -196,7 +198,7 @@ base::Object* factory(const std::string& name)
     else if ( name == MapPage::getFactoryName() ) {
         obj = new MapPage();
     }
-    // Symbol loader
+    // symbol loader
     else if ( name == SymbolLoader::getFactoryName() ) {
         obj = new SymbolLoader();
     }

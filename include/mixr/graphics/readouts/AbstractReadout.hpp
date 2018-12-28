@@ -78,9 +78,9 @@ public:
    bool isVertical() const                   { return (dmode & vertical) != 0;  }  // vertical?
    bool areBracketsOn() const                { return (dmode & brackets) != 0;  }  // brackets on?
 
-   void setDisplayMode(const int t)          { dmode |= t;   }                     // set display mode
-   bool isDisplayMode(const int t) const     { return (dmode & t) != 0;         }  // is of display mode?
-   void clearDisplayMode(const int t)        { dmode &= ~t;  }                     // clear display mode
+   void setDisplayMode(const int x)          { dmode |= x;   }                     // set display mode
+   bool isDisplayMode(const int x) const     { return (dmode & x) != 0;         }  // is of display mode?
+   void clearDisplayMode(const int x)        { dmode &= ~x;  }                     // clear display mode
    void clearAllDisplayModes()               { dmode = 0;    }                     // clear all modes
 
    base::String::Justify justification() const;                        // returns current justification mode

@@ -31,7 +31,7 @@ OBJS =  \
 	fonts/StrokeFont.o \
 	readouts/AbstractReadout.o \
 	readouts/AsciiText.o \
-	readouts/BooleanReadout.o \
+	readouts/BooleanText.o \
 	readouts/Cursor.o \
 	readouts/DirectionReadout.o \
 	readouts/HexReadout.o \
