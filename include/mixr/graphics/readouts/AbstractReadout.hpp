@@ -79,7 +79,7 @@ public:
    bool areBracketsOn() const                { return (dmode & brackets) != 0;  }  // brackets on?
 
    void setDisplayMode(const int x)          { dmode |= x;   }                     // set display mode
-   bool isDisplayMode(const int x) const     { return (dmode & x) != 0;         }  // is of display mode?
+   bool isDisplayMode(const int x) const     { return (dmode & x) != 0;         }  // display mode?
    void clearDisplayMode(const int x)        { dmode &= ~x;  }                     // clear display mode
    void clearAllDisplayModes()               { dmode = 0;    }                     // clear all modes
 
@@ -90,9 +90,9 @@ public:
 
    // returns true if location specified is within the current field.
    virtual bool withinField(const int ln, const int cp) const;
-   virtual void setText(const char s[]);                               // sets text string.
+   virtual void setText(const char s[]);                               // sets text string
 
-   // sets the input example to example, and returns the length of example.
+   // sets the input example to example, and returns the length of example
    virtual int setExample(const char* const);
 
    virtual void setChar(const char);                 // set the character if in input mode
