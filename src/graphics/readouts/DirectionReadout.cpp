@@ -29,31 +29,32 @@ void DirectionReadout::copyData(const DirectionReadout& org, const bool)
 
 //------------------------------------------------------------------------------
 // input mode function --
-//   filterInputEvent() -- Filter input events using a template character (tc)
+//   filterInputEvent() -- Filter input events using a template character (x)
 //------------------------------------------------------------------------------
-char DirectionReadout::filterInputEvent(const int event, const int tc)
+char DirectionReadout::filterInputEvent(const int event, const char x)
 {
+   const char tc{static_cast<char>(x)};
    if (tc == '+') {
       // sign keys
-      if (event == '4' && minusChar != '\0')
+      if (event == '4' && minusChar != '\0') {
          return minusChar;
-      else if (event == '7')
+      } else if (event == '7') {
          return '-';
-      else if (event == '6' && plusChar != '\0')
+      } else if (event == '6' && plusChar != '\0') {
          return plusChar;
-      else if (event == '9')
+      } else if (event == '9') {
          return '+';
-      else
+      } else {
          return '\0';
-   }
-   else if (tc == '0' || tc == 'D' || tc == 'M' || tc == 'S') {
+      }
+   } else if (tc == '0' || tc == 'D' || tc == 'M' || tc == 'S') {
       // Default numeric keys
-      if ( event >= '0' && event <= '9' )
+      if ( event >= '0' && event <= '9' ) {
          return char(event);
-      else
+      } else {
          return '\0';
-   }
-   else {
+      }
+   } else {
       return BaseClass::filterInputEvent(event,tc);
    }
 }
@@ -153,7 +154,7 @@ void DirectionReadout::makeText()
    // then turn any '@' characters to degree symbols.
    {
       std::size_t len {std::strlen(cbuf)};
-      for (unsigned int i = 0; i < len; i++) {
+      for (std::size_t i{}; i < len; i++) {
          if (cbuf[i] == '@') cbuf[i] = static_cast<char>(0xB0);
       }
    }

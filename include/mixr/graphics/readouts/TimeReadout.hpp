@@ -37,7 +37,7 @@ class TimeReadout final: public NumericReadout
 
 public:
    TimeReadout();
-   char filterInputEvent(const int event, const int tc) final;
+   char filterInputEvent(const int event, const char) final;
    double getInputValue() const final;
 
 protected:

@@ -23,18 +23,19 @@ HexReadout::HexReadout()
 
 //------------------------------------------------------------------------------
 // input mode function --
-//   filterInputEvent() -- Filter input events using a template character (tc)
+//   filterInputEvent() -- Filter input events using a template character (x)
 //------------------------------------------------------------------------------
-char HexReadout::filterInputEvent(const int event, const int tc)
+char HexReadout::filterInputEvent(const int event, const char x)
 {
+   const char tc{static_cast<char>(x)};
    if (tc == '0' || tc == '#') {
       // Default numeric keys
-      if ( (event >= '0' && event <= '9') || (event >= 'A' && event <= 'F') )
+      if ( (event >= '0' && event <= '9') || (event >= 'A' && event <= 'F') ) {
          return char(event);
-      else
+      } else {
          return '\0';
-   }
-   else {
+      }
+   } else {
       return BaseClass::filterInputEvent(event,tc);
    }
 }

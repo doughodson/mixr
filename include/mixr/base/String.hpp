@@ -130,10 +130,11 @@ inline bool String::isEmpty() const
 //------------------------------------------------------------------------------
 inline char String::getChar(const unsigned int index) const
 {
-   if (cstr != nullptr && index <= len())
+   if (cstr != nullptr && index <= len()) {
       return cstr[index];
-   else
+   } else {
       return '\0';
+   }
 }
 
 

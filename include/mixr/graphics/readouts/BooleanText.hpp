@@ -26,7 +26,7 @@ class BooleanText final: public AbstractReadout
 public:
    BooleanText()                  { STANDARD_CONSTRUCTOR() }
 
-   char filterInputEvent(const int event, const int tc) final;
+   char filterInputEvent(const int event, const char) final;
    // returns true if tc is a valid input position
    bool isValidInputPosition(const int) final;
 

@@ -27,7 +27,7 @@ class OctalReadout final: public NumericReadout
 public:
    OctalReadout();
    void makeText() final;
-   char filterInputEvent(const int event, const int tc) final;
+   char filterInputEvent(const int event, const char tc) final;
    double getInputValue() const final;
 
 protected:

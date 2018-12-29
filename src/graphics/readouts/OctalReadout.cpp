@@ -27,14 +27,16 @@ OctalReadout::OctalReadout()
 // input mode function --
 //   filterInputEvent() -- Filter input events using a template character (tc)
 //------------------------------------------------------------------------------
-char OctalReadout::filterInputEvent(const int event, const int tc)
+char OctalReadout::filterInputEvent(const int event, const char x)
 {
+   const char tc{static_cast<int>(x)};
    if (tc == '0' || tc == '#') {
       // Default numeric keys
-      if ( event >= '0' && event <= '7' )
+      if ( event >= '0' && event <= '7' ) {
          return static_cast<char>(event);
-      else
+      } else {
          return '\0';
+      }
    } else {
       return BaseClass::filterInputEvent(event,tc);
    }

@@ -126,10 +126,11 @@ bool NumericReadout::isInputValueValid() const
 
 //------------------------------------------------------------------------------
 // input mode function --
-//   filterInputEvent() -- Filter input events using a template character (tc)
+//   filterInputEvent() -- Filter input events using a template character (x)
 //------------------------------------------------------------------------------
-char NumericReadout::filterInputEvent(const int event, const int tc)
+char NumericReadout::filterInputEvent(const int event, const char x)
 {
+   const char tc{static_cast<int>(x)};
    if (tc == '+') {
       // sign keys
       if (event == '7') {

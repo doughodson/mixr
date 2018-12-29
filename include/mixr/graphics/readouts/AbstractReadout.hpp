@@ -4,6 +4,7 @@
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"
+#include <string>
 
 namespace mixr {
 namespace base { class Identifier; class Integer; class List; }
@@ -85,7 +86,7 @@ public:
    virtual void setText(const char s[]);                               // sets text string
 
    // sets the input example to example, and returns the length of example
-   virtual int setExample(const char* const);
+   virtual std::size_t setExample(const char* const);
 
    virtual void setChar(const char);                 // set the character if in input mode
    virtual char getChar();                           // get character if in input mode
@@ -94,9 +95,9 @@ public:
    virtual bool onForwardSpace();                    // calls advanceSpace() and returns true
    virtual bool onBackSpace();                       // calls backspace() and returns true
 
-   // filters input event 'event' using template character 'tc'
-   virtual char filterInputEvent(const int event, const int tc);
-   // makes sure the current input position is valid.
+   // filters input event 'event' using template character 'x'
+   virtual char filterInputEvent(const int event, const char x);
+   // makes sure the current input position is valid
    virtual bool isValidInputPosition(const int);
 
    // returns 0.0 - this will need revision once the function does something
@@ -121,7 +122,7 @@ public:
    // sets the column number and returns true.
    virtual bool onSetColumn(const base::Integer* const);
 
-   const base::String& getInputExample() const           { return inputExample; }
+   const base::String& getInputExample() const           { return inputExample.c_str(); }
    int getCharacterPos() const                           { return icp; }
 
    // returns true if text cursor should be seen within this
@@ -134,8 +135,8 @@ public:
    void updateData(const double dt = 0.0) override;
 
 protected:
-   base::String origStr;              // original text saved by setText
-   base::String inputExample;         // input Template String
+   std::string origStr;               // original text saved by setText
+   std::string inputExample;          // input Template String
    base::String str;                  // text stored in field
    Mode mode {Mode::Display};         // current mode
    int icp{};                         // input character pointer
@@ -143,7 +144,7 @@ protected:
    bool inpModeHold{};                // hold input mode until after first input character
 
 private:
-   void adjust()                      { str.setString(origStr, w, jmode); }
+   void adjust()                      { str.setString(origStr.c_str(), w, jmode); }
 
    int ln{};                          // line this field is on
    int cp{};                          // starting character position of field

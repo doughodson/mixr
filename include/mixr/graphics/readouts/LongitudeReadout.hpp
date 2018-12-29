@@ -39,7 +39,7 @@ class LongitudeReadout final: public DirectionReadout
     DECLARE_SUBCLASS(LongitudeReadout, DirectionReadout)
 public:
     LongitudeReadout();
-    char filterInputEvent(const int event, const int tc) final;
+    char filterInputEvent(const int event, const char) final;
 protected:
    //virtual void makeText();
 };

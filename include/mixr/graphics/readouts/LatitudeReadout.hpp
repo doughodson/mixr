@@ -39,7 +39,7 @@ class LatitudeReadout final: public DirectionReadout
 
 public:
     LatitudeReadout();
-    char filterInputEvent(const int event, const int tc) final;
+    char filterInputEvent(const int event, const char) final;
 protected:
    //virtual void makeText();
 };

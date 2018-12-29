@@ -67,7 +67,7 @@ public:
    double getInputValue() const override;
    // checks the input value and returns true if it is valid
    bool isInputValueValid() const override;
-   char filterInputEvent(const int event, const int tc) override;
+   char filterInputEvent(const int event, const char tc) override;
 
    bool event(const int key, base::Object* const obj = nullptr) override;
    void updateData(const double dt = 0.0) override;

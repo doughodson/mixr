@@ -58,7 +58,7 @@ BEGIN_EVENT_HANDLER(AbstractReadout)
             // Filter the input event -- that is, let a virtual member
             // function filter the input event using the current template
             // character.
-            char nc {filterInputEvent(_event, inputExample.getChar(icp))};
+            char nc{filterInputEvent(_event, inputExample[icp])};
             if (nc != '\0') {
                 setChar(nc);
                 _used = true;
@@ -241,46 +241,45 @@ bool AbstractReadout::isValidInputPosition(const int tc)
             tc == 'D' || tc == 'H' || tc == 'M' || tc == 'S');
 }
 
-// filterInputEvent() -- Filter input events using a template character (tc)
-char AbstractReadout::filterInputEvent(const int event, const int tc)
+// filterInputEvent() -- Filter input events using a template character (x)
+char AbstractReadout::filterInputEvent(const int event, const char x)
 {
+    const char tc{static_cast<int>(x)};
     if (tc == '+') {
         // Default sign keys
-        if (event == '7')
+        if (event == '7') {
             return '-';
-        else if (event == '9')
+        } else if (event == '9') {
             return '+';
-        else
+        } else {
             return '\0';
-    }
-
-    else if (tc == '0' || tc == '#') {
+        }
+    } else if (tc == '0' || tc == '#') {
         // Default numeric keys
-        if (event >= '0' && event <= '9')
+        if (event >= '0' && event <= '9') {
             return char(event);
-        else
+        } else {
             return '\0';
-    }
-
-    else
+        }
+    } else {
         return '0';
-
+    }
 }
 
-int AbstractReadout::setExample(const char* const example)
+std::size_t AbstractReadout::setExample(const char* const example)
 {
     inputExample = example;
-    return static_cast<int>(inputExample.len());
+    return static_cast<int>(inputExample.length());
 }
 
 void AbstractReadout::advanceSpace(const int ns)
 {
     if (mode != Mode::Input) return;
     icp += ns;
-    while ( icp < static_cast<int>(w) && !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
+    while ( icp < static_cast<int>(w) && !isValidInputPosition(inputExample[icp]) ) icp++;
     if (icp >= static_cast<int>(w)) {
         icp = static_cast<int>(w)-1;
-        while ( !isValidInputPosition(inputExample.getChar(icp)) ) icp--;
+        while ( !isValidInputPosition(inputExample[icp]) ) icp--;
         event(INPUT_RIGHT_EDGE);
     }
 }
@@ -294,10 +293,10 @@ void AbstractReadout::backSpace(const int ns)
    }
    else {
       icp -= ns;
-      while ( icp >= 0 && !isValidInputPosition(inputExample.getChar(icp)) ) icp--;
+      while ( icp >= 0 && !isValidInputPosition(inputExample[icp]) ) icp--;
       if (icp < 0) {
          icp = 0;
-         while ( !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
+         while ( !isValidInputPosition(inputExample[icp]) ) icp++;
          event(INPUT_LEFT_EDGE);
       }
    }

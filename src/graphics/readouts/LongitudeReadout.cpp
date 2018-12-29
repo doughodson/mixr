@@ -25,20 +25,21 @@ LongitudeReadout::LongitudeReadout()
 
 //------------------------------------------------------------------------------
 // input mode function --
-//   filterInputEvent() -- Filter input events using a template character (tc)
+//   filterInputEvent() -- Filter input events using a template character (x)
 //------------------------------------------------------------------------------
-char LongitudeReadout::filterInputEvent(const int event, const int tc)
+char LongitudeReadout::filterInputEvent(const int event, const char x)
 {
+   const char tc{static_cast<int>(x)};
    if (tc == '+') {
       // sign keys
-      if (event == '4')
+      if (event == '4') {
          return 'W';
-      else if (event == '6')
+      } else if (event == '6') {
          return 'E';
-      else
+      } else {
          return '\0';
-   }
-   else {
+      }
+   } else {
       return BaseClass::filterInputEvent(event, tc);
    }
 }

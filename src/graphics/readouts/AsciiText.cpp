@@ -29,7 +29,7 @@ END_EVENT_HANDLER()
 //   filterInputEvent() -- Filter input events using a template character (tc)
 //   isValidInputPosition() -- Makes sure the position is valid for input
 //------------------------------------------------------------------------------
-char AsciiText::filterInputEvent(const int event, const int)
+char AsciiText::filterInputEvent(const int event, const char)
 {
    return static_cast<char>(event); // All characters are valid for AsciiText fields
 }

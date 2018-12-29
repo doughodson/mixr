@@ -54,7 +54,7 @@ class DirectionReadout : public NumericReadout
 
 public:
    DirectionReadout();
-   char filterInputEvent(const int event, const int tc) override;
+   char filterInputEvent(const int event, const char) override;
    double getInputValue() const override;
 
 protected:
