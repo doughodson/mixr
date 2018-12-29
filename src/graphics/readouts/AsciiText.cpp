@@ -24,11 +24,6 @@ BEGIN_EVENT_HANDLER(AsciiText)
    ON_EVENT_OBJ(UPDATE_VALUE, setSlotTextString, base::String)
 END_EVENT_HANDLER()
 
-AsciiText::AsciiText()
-{
-   STANDARD_CONSTRUCTOR()
-}
-
 //------------------------------------------------------------------------------
 // input mode functions --
 //   filterInputEvent() -- Filter input events using a template character (tc)
@@ -49,10 +44,11 @@ bool AsciiText::setSlotTextString(const base::String* const stsobj)
 {
    bool ok {true};
    if (stsobj != nullptr) {
-      if (width() == 0) width(stsobj->len());
+      if (width() == 0) {
+         width(stsobj->len());
+      }
       setText((*stsobj).c_str());
-   }
-   else {
+   } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "AsciiText::setTextString: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
       }
