@@ -19,12 +19,12 @@ namespace graphics {
 IMPLEMENT_ABSTRACT_SUBCLASS(AbstractReadout, "AbstractReadout")
 
 BEGIN_SLOTTABLE(AbstractReadout)
-    "position",         // 1) Starting Position ( ln cp )
+    "position",         // 1) Starting position ( ln cp )
     "width",            // 2) Field width
     "highLight",        // 3) Highlight text flag
     "underline",        // 4) Underlined text flag
     "reversed",         // 5) Reversed text flag
-    "justification",    // 6) "none", "left", "center", or "right"
+    "justification",    // 6) { none, left, center, right }
     "vertical",         // 7) vertical field flag (text displayed vertically)
     "brackets",         // 8) Bracket flag
     "linked",           // 9) Linked flag (auto step to next input field)
@@ -49,7 +49,7 @@ BEGIN_SLOT_MAP(AbstractReadout)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AbstractReadout)
-    if (mode == Mode::INPUT) {
+    if (mode == Mode::Input) {
         bool kb {( _event >= 0x20 && _event <= 0x7f )};
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
         ON_EVENT(BACK_SPACE,onBackSpace)
@@ -112,7 +112,7 @@ void AbstractReadout::deleteData()
     str.empty();
     dmode = 0;
     jmode = base::String::Justify::NONE;
-    mode  = Mode::DISPLAY;
+    mode  = Mode::Display;
     icp   = 0;
     inpDspMode = 0;
     inpModeHold = false;
@@ -131,12 +131,12 @@ void AbstractReadout::updateData(const double dt)
     // ---
     if (inpDspMode != 0) {
         // Auto switch ON input display mode?
-        if ( (mode == Mode::INPUT) &&  (icp > 0 || !inpModeHold) ) {
+        if ( (mode == Mode::Input) &&  (icp > 0 || !inpModeHold) ) {
             setDisplayMode( inpDspMode );
         }
 
         // Auto swtich OFF input display mode?
-        if ( (mode == Mode::DISPLAY) || (inpModeHold && icp == 0) ) {
+        if ( (mode == Mode::Display) || (inpModeHold && icp == 0) ) {
             // If it wasn't previously set by a setSlot() function then turn it off.
             if ( !isDisplayMode(0x1000 & inpDspMode) ) {
                 clearDisplayMode( inpDspMode );
@@ -147,7 +147,7 @@ void AbstractReadout::updateData(const double dt)
     // ---
     // Update readout during input mode?
     // ---
-    if ( (mode == Mode::INPUT) && inpModeHold && icp == 0 ) {
+    if ( (mode == Mode::Input) && inpModeHold && icp == 0 ) {
         adjust();
     }
 }
@@ -157,7 +157,7 @@ void AbstractReadout::updateData(const double dt)
 //------------------------------------------------------------------------------
 bool AbstractReadout::withinField(const int l, const int c) const
 {
-    bool stat {};
+    bool stat{};
     if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
     return stat;
 }
@@ -168,7 +168,7 @@ bool AbstractReadout::withinField(const int l, const int c) const
 void AbstractReadout::setText(const char s[])
 {
     origStr = s;
-    if (mode == Mode::DISPLAY) {
+    if (mode == Mode::Display) {
         adjust();
     }
 }
@@ -184,7 +184,9 @@ base::String::Justify AbstractReadout::justification() const
 base::String::Justify AbstractReadout::justification(const base::String::Justify t)
 {
     jmode = t;
-    if (mode == Mode::DISPLAY) adjust();
+    if (mode == Mode::Display) {
+        adjust();
+    }
     return jmode;
 }
 
@@ -196,7 +198,7 @@ AbstractReadout::Mode AbstractReadout::setMode(const AbstractReadout::Mode nmode
     Mode omode = mode;
     mode = nmode;
 
-    if (nmode == Mode::INPUT && omode == Mode::DISPLAY) {
+    if (nmode == Mode::Input && omode == Mode::Display) {
 
         // When we're entering the INPUT mode ...
 
@@ -207,7 +209,7 @@ AbstractReadout::Mode AbstractReadout::setMode(const AbstractReadout::Mode nmode
         if (startCP > 0 && startCP < w) icp = startCP;
         else icp = 0;
 
-    } else if (nmode == Mode::DISPLAY && omode == Mode::INPUT) {
+    } else if (nmode == Mode::Display && omode == Mode::Input) {
 
         // When we're leaving the INPUT mode ...
 
@@ -273,7 +275,7 @@ int AbstractReadout::setExample(const char* const example)
 
 void AbstractReadout::advanceSpace(const int ns)
 {
-    if (mode != Mode::INPUT) return;
+    if (mode != Mode::Input) return;
     icp += ns;
     while ( icp < static_cast<int>(w) && !isValidInputPosition(inputExample.getChar(icp)) ) icp++;
     if (icp >= static_cast<int>(w)) {
@@ -285,7 +287,7 @@ void AbstractReadout::advanceSpace(const int ns)
 
 void AbstractReadout::backSpace(const int ns)
 {
-   if (mode != Mode::INPUT) return;
+   if (mode != Mode::Input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
    if (startCP > 0 && icp == static_cast<int>(startCP)) {
       event(INPUT_LEFT_EDGE);
@@ -313,7 +315,7 @@ bool AbstractReadout::setInputCharacterPosition(const unsigned int ii)
 
 char AbstractReadout::getChar()
 {
-    if (mode == Mode::INPUT)
+    if (mode == Mode::Input)
         return str.getChar(icp);
     else
         return '\0';
@@ -321,7 +323,7 @@ char AbstractReadout::getChar()
 
 void AbstractReadout::setChar(const char c)
 {
-    if (mode != Mode::INPUT) return;
+    if (mode != Mode::Input) return;
     str.setChar(icp,c);
     advanceSpace();
 }
@@ -354,7 +356,7 @@ bool AbstractReadout::onBackSpace()
 //------------------------------------------------------------------------------
 bool AbstractReadout::cursor(int* l, int* c) const
 {
-    if (mode == Mode::INPUT) {
+    if (mode == Mode::Input) {
         *l = ln;
         *c = cp + icp;
         return true;
@@ -509,10 +511,8 @@ bool AbstractReadout::setSlotHighlight(const base::Boolean* const shobj)
         // Set our mode
         if (shobj->asBool()) {
             setDisplayMode(highlight);
-            setDisplayMode(highlight1);
         } else {
             clearDisplayMode(highlight);
-            clearDisplayMode(highlight1);
         }
 
         base::PairStream* subcomponents {getComponents()};
@@ -539,11 +539,8 @@ bool AbstractReadout::setSlotUnderline(const base::Boolean* const suobj)
         // Set our mode
         if (suobj->asBool()) {
             setDisplayMode(underline);
-            setDisplayMode(underline1);
-        }
-        else {
+        } else {
             clearDisplayMode(underline);
-            clearDisplayMode(underline1);
         }
 
         // Set our children's mode
@@ -572,11 +569,8 @@ bool AbstractReadout::setSlotReversed(const base::Boolean* const srobj)
         // Set our mode
         if (srobj->asBool()) {
             setDisplayMode(reversed);
-            setDisplayMode(reversed1);
-        }
-        else {
+        } else {
             clearDisplayMode(reversed);
-            clearDisplayMode(reversed1);
         }
 
         // Set our children's mode
@@ -604,11 +598,9 @@ bool AbstractReadout::setSlotVertical(const base::Boolean* const ssobj)
         // Set our mode
         if (ssobj->asBool()) {
             setDisplayMode(vertical);
-            setDisplayMode(vertical1);
         }
         else {
             clearDisplayMode(vertical);
-            clearDisplayMode(vertical1);
         }
     }
     return true;
@@ -620,11 +612,8 @@ bool AbstractReadout::setSlotBrackets(const base::Boolean* const ssobj)
         // Set our mode
         if (ssobj->asBool()) {
             setDisplayMode(brackets);
-            setDisplayMode(brackets1);
-        }
-        else {
+        } else {
             clearDisplayMode(brackets);
-            clearDisplayMode(brackets1);
         }
     }
     return true;
@@ -653,18 +642,18 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const sjobj)
     if (sjobj != nullptr) {
 
         // Set our justification
-        if ( *sjobj == "none" )
+        if ( *sjobj == "none" ) {
             justification(base::String::Justify::NONE);
-        else if ( *sjobj == "left" )
+        } else if ( *sjobj == "left" ) {
             justification(base::String::Justify::LEFT);
-        else if ( *sjobj == "center" )
+        } else if ( *sjobj == "center" ) {
             justification(base::String::Justify::CENTER);
-        else if ( *sjobj == "right" )
+        } else if ( *sjobj == "right" ) {
             justification(base::String::Justify::RIGHT);
-        else {
-              if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
-              }
+        } else {
+            if (isMessageEnabled(MSG_ERROR)) {
+                std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
+            }
             ok = false;
         }
 
@@ -672,7 +661,7 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const sjobj)
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
 
-            const base::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
                 const auto child = dynamic_cast<AbstractReadout*>(p->object());
@@ -690,7 +679,9 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const sjobj)
 bool AbstractReadout::setSlotFont(const base::Identifier* const font)
 {
     bool ok{};
-    if (fontName != nullptr) fontName->unref();
+    if (fontName != nullptr) {
+        fontName->unref();
+    }
     fontName = nullptr;
     if (font != nullptr) {
         fontName = font->clone();

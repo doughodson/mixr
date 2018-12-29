@@ -17,26 +17,26 @@ namespace graphics {
 //
 // Factory name: AbstractReadout
 // Slots:
-//      position       <List>        ! Starting position ( Line Column ) (default: 0)
-//      width          <Integer>     ! Field width (default: 0)
-//      highLight      <Boolean>     ! Highlight text flag  (Display mode = 0x1001, default: false)
-//      underline      <Boolean>     ! Underlined text flag  (Display mode = 0x1002, default: false)
-//      reversed       <Boolean>     ! Reversed video flag  (Display mode = 0x1004, default: false)
+//      position       <List>        ! starting position ( Line Column ) (default: 0)
+//      width          <Integer>     ! field width (default: 0)
+//      highLight      <Boolean>     ! highlight text flag  (display mode = 0x1001, default: false)
+//      underline      <Boolean>     ! underlined text flag  (display mode = 0x1002, default: false)
+//      reversed       <Boolean>     ! reversed video flag  (display mode = 0x1004, default: false)
 //      justification  <Identifier>  ! { none, left, center, right } (default: "none")
-//      vertical       <Boolean>     ! vertical field flag (text displayed vertically) (Display mode = 0x1010, default: false)
-//      brackets       <Boolean>     ! Bracket the field with a character just left
-//                                   ! and right of this field. (Display mode = 0x1020, default: false)
-//      linked         <Boolean>     ! Linked flag (auto step to next input field) (default: false)
+//      vertical       <Boolean>     ! vertical field flag (text displayed vertically) (display mode = 0x1010, default: false)
+//      brackets       <Boolean>     ! bracket the field with a character just left
+//                                   ! and right of this field. (display mode = 0x1020, default: false)
+//      linked         <Boolean>     ! linked flag (auto step to next input field) (default: false)
 //      inheritColor   <Boolean>     ! inherit color of our container (default: false)
 //      font           <Identifier>  ! specific font name we wish to use (default: 0)
-//      startCharPos   <Integer>     ! Our starting character position (we may want to skip!) (default: 0)
+//      startCharPos   <Integer>     ! our starting character position (we may want to skip!) (default: 0)
 //------------------------------------------------------------------------------
 class AbstractReadout : public Graphic
 {
    DECLARE_SUBCLASS(AbstractReadout, Graphic)
 
 public:
-   enum class Mode { DISPLAY, INPUT };
+   enum class Mode { Display, Input };
 
    enum {
           // display modes
@@ -46,14 +46,6 @@ public:
           special    = 0x0008,
           vertical   = 0x0010,
           brackets   = 0x0020,
-
-          // Internal use: display mode was set by the setSlotXXXX()
-          highlight1 = 0x1001,
-          underline1 = 0x1002,
-          reversed1  = 0x1004,
-          special1   = 0x1008,
-          vertical1  = 0x1010,
-          brackets1  = 0x1020
         };
 
 public:
@@ -69,17 +61,17 @@ public:
    std::size_t width() const                 { return w;                }    // return width
 
    Mode setMode(const Mode);
-   Mode getMode() const                      { return mode; }  // return mode of field
+   Mode getMode() const                      { return mode; }                // return mode of field
 
    bool isHighLighted() const                { return (dmode & highlight) != 0; }  // highlighted?
    bool isUnderlined() const                 { return (dmode & underline) != 0; }  // underlined?
-   bool isReversed() const                   { return (dmode & reversed) != 0;  }  // reversed?
-   bool isSpecial() const                    { return (dmode & special) != 0;   }  // special?
-   bool isVertical() const                   { return (dmode & vertical) != 0;  }  // vertical?
-   bool areBracketsOn() const                { return (dmode & brackets) != 0;  }  // brackets on?
+   bool isReversed() const                   { return (dmode & reversed)  != 0; }  // reversed?
+   bool isSpecial() const                    { return (dmode & special)   != 0; }  // special?
+   bool isVertical() const                   { return (dmode & vertical)  != 0; }  // vertical?
+   bool areBracketsOn() const                { return (dmode & brackets)  != 0; }  // brackets on?
 
    void setDisplayMode(const int x)          { dmode |= x;   }                     // set display mode
-   bool isDisplayMode(const int x) const     { return (dmode & x) != 0;         }  // display mode?
+   bool isDisplayMode(const int x) const     { return (dmode & x) != 0; }          // display mode?
    void clearDisplayMode(const int x)        { dmode &= ~x;  }                     // clear display mode
    void clearAllDisplayModes()               { dmode = 0;    }                     // clear all modes
 
@@ -142,26 +134,26 @@ public:
    void updateData(const double dt = 0.0) override;
 
 protected:
-   base::String origStr;              // Original text saved by setText
-   base::String inputExample;         // Input Template String
-   base::String str;                  // Text stored in field
-   Mode mode {Mode::DISPLAY};         // Current mode
-   int icp{};                         // Input character pointer
-   int inpDspMode{};                  // Auto switches to this display mode during input mode
-   bool inpModeHold{};                // Hold input mode until after first input character
+   base::String origStr;              // original text saved by setText
+   base::String inputExample;         // input Template String
+   base::String str;                  // text stored in field
+   Mode mode {Mode::Display};         // current mode
+   int icp{};                         // input character pointer
+   int inpDspMode{};                  // auto switches to this display mode during input mode
+   bool inpModeHold{};                // hold input mode until after first input character
 
 private:
-   void adjust()                                    { str.setString(origStr, w, jmode); }
+   void adjust()                      { str.setString(origStr, w, jmode); }
 
-   int          ln{};                 // Line this field is on
-   int          cp{};                 // Starting character position of field
-   std::size_t  w{};                  // Width of the field
-   bool         linked{};             // Linked field (on input)
+   int ln{};                          // line this field is on
+   int cp{};                          // starting character position of field
+   std::size_t w{};                   // width of the field
+   bool linked{};                     // linked field (on input)
    unsigned int startCP{};            // our starting character position that we "write" from
 
-   int      dmode{};                  // Display mode flags
-   base::String::Justify jmode{};     // Justification mode
-   bool     inheritColor{};           // Inherit color instead of using a default color
+   int dmode{};                       // display mode flags
+   base::String::Justify jmode{};     // justification mode
+   bool inheritColor{};               // inherit color instead of using a default color
    base::Identifier* fontName{};      // name of the font we want our display to use (if overridden)
 
 private:

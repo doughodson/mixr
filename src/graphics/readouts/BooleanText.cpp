@@ -22,24 +22,26 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 char BooleanText::filterInputEvent(const int event, const int)
 {
-   return static_cast<char>(event); // All characters are valid for AsciiText fields
+   return static_cast<char>(event);   // all characters are valid
 }
 
 bool BooleanText::isValidInputPosition(const int)
 {
-   return true;     // AsciiText fields do not have template characters
+   return true;     // no template characters
 }
 
 // takes in a base::Boolean and sets it
 bool BooleanText::setBooleanText(const base::Boolean* const x)
 {
    bool ok {true};
+
    if (x != nullptr) {
-      if (x->asBool()) {
-         setText("True");
-      } else {
-         setText("False");
+      std::string value{"T"};
+      if (!x->asBool()) {
+         value = "F";
       }
+      width(value.length());
+      setText(value.c_str());
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "BooleanText::setBooleanText: Invalid Boolean" << std::endl;
