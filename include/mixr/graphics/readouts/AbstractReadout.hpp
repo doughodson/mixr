@@ -4,6 +4,8 @@
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"
+
+#include "mixr/base/util/str_utils.hpp"
 #include <string>
 
 namespace mixr {
@@ -76,8 +78,8 @@ public:
    void clearDisplayMode(const int x)        { dmode &= ~x;  }                     // clear display mode
    void clearAllDisplayModes()               { dmode = 0;    }                     // clear all modes
 
-   base::String::Justify justification() const;                        // returns current justification mode
-   base::String::Justify justification(const base::String::Justify);   // sets justification
+   base::Justify justification() const;                                // returns current justification mode
+   base::Justify justification(const base::Justify);                   // sets justification
 
    virtual bool setPosition(const base::List* const);                  // set position to [Line Column]
 
@@ -153,7 +155,7 @@ private:
    unsigned int startCP{};            // our starting character position that we "write" from
 
    int dmode{};                       // display mode flags
-   base::String::Justify jmode{};     // justification mode
+   base::Justify jmode{};             // justification mode
    bool inheritColor{};               // inherit color instead of using a default color
    base::Identifier* fontName{};      // name of the font we want our display to use (if overridden)
 

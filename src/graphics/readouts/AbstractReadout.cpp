@@ -78,7 +78,7 @@ END_EVENT_HANDLER()
 AbstractReadout::AbstractReadout()
 {
     STANDARD_CONSTRUCTOR()
-    jmode = base::String::Justify::NONE;
+    jmode = base::Justify::None;
 }
 
 void AbstractReadout::copyData(const AbstractReadout& org, const bool)
@@ -111,7 +111,7 @@ void AbstractReadout::deleteData()
     w  = 0;
     str.empty();
     dmode = 0;
-    jmode = base::String::Justify::NONE;
+    jmode = base::Justify::None;
     mode  = Mode::Display;
     icp   = 0;
     inpDspMode = 0;
@@ -176,12 +176,12 @@ void AbstractReadout::setText(const char s[])
 //------------------------------------------------------------------------------
 // justification() --
 //------------------------------------------------------------------------------
-base::String::Justify AbstractReadout::justification() const
+base::Justify AbstractReadout::justification() const
 {
     return jmode;
 }
 
-base::String::Justify AbstractReadout::justification(const base::String::Justify t)
+base::Justify AbstractReadout::justification(const base::Justify t)
 {
     jmode = t;
     if (mode == Mode::Display) {
@@ -642,13 +642,13 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const sjobj)
 
         // Set our justification
         if ( *sjobj == "none" ) {
-            justification(base::String::Justify::NONE);
+            justification(base::Justify::None);
         } else if ( *sjobj == "left" ) {
-            justification(base::String::Justify::LEFT);
+            justification(base::Justify::Left);
         } else if ( *sjobj == "center" ) {
-            justification(base::String::Justify::CENTER);
+            justification(base::Justify::Center);
         } else if ( *sjobj == "right" ) {
-            justification(base::String::Justify::RIGHT);
+            justification(base::Justify::Right);
         } else {
             if (isMessageEnabled(MSG_ERROR)) {
                 std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;

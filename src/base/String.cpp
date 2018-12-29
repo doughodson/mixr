@@ -49,10 +49,11 @@ void String::deleteData()
 
 void String::setString(const String& origStr, const std::size_t w, const Justify j)
 {
-   char sbuf[MAX_STRING_LENGTH+1] {};  // Source buffer
-   char dbuf[MAX_STRING_LENGTH+1] {};  // Destination buffer
-   const char* ss {sbuf};              // Pointer to source buffer
+   const int MAX_STRING_LENGTH{512};
 
+   char sbuf[MAX_STRING_LENGTH+1] {};  // source buffer
+   char dbuf[MAX_STRING_LENGTH+1] {};  // destination buffer
+   const char* ss{sbuf};               // pointer to source buffer
 
    // ---
    // when w is zero or origStr is empty
@@ -69,7 +70,7 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
    // or trailing spaces.
    // ---
 
-   if (j != Justify::NONE) {
+   if (j != Justify::None) {
       // Justified:  copy without leading or trailing spaces
       const char* p {origStr.c_str()};
       char* q {sbuf};
@@ -97,9 +98,9 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
 
    switch (j) {
 
-      // NONE or LEFT justified
-      case Justify::NONE :
-      case Justify::LEFT :
+      // none or left justified
+      case Justify::None :
+      case Justify::Left :
       {
          if (d < 0) l1 += d;
          while (i1 < l1) { dbuf[i2++] = ss[i1++]; }
@@ -107,16 +108,16 @@ void String::setString(const String& origStr, const std::size_t w, const Justify
       }
       break;
 
-      // RIGHT justified
-      case Justify::RIGHT : {
+      // right justified
+      case Justify::Right : {
          if (d < 0) i1 = -d;
          while (i2 < d)  { dbuf[i2++] = ' '; }
          while (i1 < l1) { dbuf[i2++] = ss[i1++]; }
       }
       break;
 
-      // CENTER justified
-      case Justify::CENTER : {
+      // center justified
+      case Justify::Center : {
          int n1 = d/2;
          if (d < 0) { i1 = -n1; l1 += (d-n1); }
          while (i2 < n1) { dbuf[i2++] = ' '; }

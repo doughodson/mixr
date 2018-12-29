@@ -37,10 +37,6 @@ class String final: public Object
     DECLARE_SUBCLASS(String, Object)
 
 public:
-    enum class Justify { NONE, LEFT, RIGHT, CENTER };
-    static const int MAX_STRING_LENGTH{512};       // only by setString()
-
-public:
     String(const char*);
     String(const char* s1, const char* s2);
     String();
@@ -77,7 +73,7 @@ public:
 
     // Set to the first 'w' characters of 'str'.
     // If the length of 'str' is less than 'w', than justify as 'j'.
-    void setString(const String& str, const std::size_t w, const Justify j = Justify::NONE);
+    void setString(const String& str, const std::size_t w, const Justify j = Justify::None);
 
 private:
     char* cstr{};         // the character string
