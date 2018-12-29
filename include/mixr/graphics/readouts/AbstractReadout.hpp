@@ -86,7 +86,7 @@ public:
    base::String::Justify justification() const;                        // returns current justification mode
    base::String::Justify justification(const base::String::Justify);   // sets justification
 
-   virtual bool setPosition(const base::List* const);                  // set poition to [Line Column]
+   virtual bool setPosition(const base::List* const);                  // set position to [Line Column]
 
    // returns true if location specified is within the current field.
    virtual bool withinField(const int ln, const int cp) const;
