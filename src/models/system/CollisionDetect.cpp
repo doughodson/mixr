@@ -10,6 +10,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cmath>
 

@@ -1,6 +1,8 @@
 
 #include "mixr/base/String.hpp"
 
+#include "mixr/base/util/str_utils.hpp"
+
 #include <cstdlib>
 #include <cstring>
 

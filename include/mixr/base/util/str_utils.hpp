@@ -7,22 +7,9 @@
 //------------------------------------------------------------------------------
 
 #include <cstddef>
-#include <string>
 
 namespace mixr {
 namespace base {
-
-//
-// justification
-//
-
-enum class Justify { None, Left, Right, Center };
-// return a standard string aligned within a given width and justification
-std::string utAlign(const std::string& s, const Justify j = Justify::None);
-
-//
-// conversion utilities
-//
 
 // Converts the integer number, 'num', to a 'width' character ascii string
 // (this size of 'str' must be at least width+1 bytes to include the null termination)

@@ -9,21 +9,6 @@ namespace mixr {
 namespace base {
 
 //------------
-// return a standard string aligned within a given width and justification
-//------------
-std::string utAlign(const std::string& s, const Justify j)
-{
-   const int MAX_STRING_LENGTH{512};
-
-   char sbuf[MAX_STRING_LENGTH+1] {};  // source buffer
-   char dbuf[MAX_STRING_LENGTH+1] {};  // destination buffer
-   const char* ss{sbuf};               // pointer to source buffer
-
-   return "";
-}
-
-
-//------------
 // Converts the integer number, 'num', to an ascii string
 //------------
 void utInteger2Str(const int num, char* const str, int width)

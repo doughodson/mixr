@@ -6,6 +6,7 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <string>
@@ -164,7 +165,7 @@ int AbstractFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const 
       }
    }
    else {
-      base::utStrncpy(outp,BUF_SIZE,inp,n);
+      base::utStrncpy(outp, BUF_SIZE, inp, n);
    }
    outp[n] = '\0';
    return static_cast<int>(std::strlen(outp));

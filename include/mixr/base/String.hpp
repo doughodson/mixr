@@ -4,7 +4,7 @@
 
 #include "mixr/base/Object.hpp"
 
-#include "mixr/base/util/str_utils.hpp"
+#include "mixr/base/util/string_utils.hpp"
 
 #include <cstdlib>
 #include <cctype>

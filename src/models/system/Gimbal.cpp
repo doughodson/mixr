@@ -15,6 +15,7 @@
 #include "mixr/base/units/lengths.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 
 #include <cmath>
 
@@ -1106,23 +1107,17 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
          if (type != nullptr) {
             if ( base::utStrcasecmp(type->c_str(), "air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "ground") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "weapon") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "ship") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "ship") == 0 ) {
                mask = (mask | Player::SHIP);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "building") == 0 ) {
+            } else if ( base::utStrcasecmp(type->c_str(), "building") == 0 ) {
                mask = (mask | Player::BUILDING);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "lifeform") == 0 ) {
+            }  else if ( base::utStrcasecmp(type->c_str(), "lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
-            }
-            else if ( base::utStrcasecmp(type->c_str(), "space") == 0 ) {
+            }  else if ( base::utStrcasecmp(type->c_str(), "space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }
