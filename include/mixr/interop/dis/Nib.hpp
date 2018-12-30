@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_dis_Nib_H__
-#define __mixr_interop_dis_Nib_H__
+#ifndef __mixr_interop_dis_Nib_HPP__
+#define __mixr_interop_dis_Nib_HPP__
 
 #include "mixr/interop/common/Nib.hpp"
 #include "mixr/interop/dis/NetIO.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_AnalogInputFixed_H__
-#define __mixr_linkage_AnalogInputFixed_H__
+#ifndef __mixr_linkage_AnalogInputFixed_HPP__
+#define __mixr_linkage_AnalogInputFixed_HPP__
 
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 

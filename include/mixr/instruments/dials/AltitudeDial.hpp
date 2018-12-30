@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_AltitudeDial_H__
-#define __mixr_instruments_AltitudeDial_H__
+#ifndef __mixr_instruments_AltitudeDial_HPP__
+#define __mixr_instruments_AltitudeDial_HPP__
 
 #include "mixr/instruments/Instrument.hpp"
 

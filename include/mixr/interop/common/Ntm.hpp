@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_Ntm_H__
-#define __mixr_interop_common_Ntm_H__
+#ifndef __mixr_interop_common_Ntm_HPP__
+#define __mixr_interop_common_Ntm_HPP__
 
 #include "mixr/interop/common/NetIO.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_Calories_H__
-#define __mixr_Calories_H__
+#ifndef __mixr_Calories_HPP__
+#define __mixr_Calories_HPP__
 
 #include "mixr/base/units/energy/Energy.hpp"
 

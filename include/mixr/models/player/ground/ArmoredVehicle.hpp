@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_ArmoredVehicle_H__
-#define __mixr_models_ArmoredVehicle_H__
+#ifndef __mixr_models_ArmoredVehicle_HPP__
+#define __mixr_models_ArmoredVehicle_HPP__
 
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_GigaHertz_H__
-#define __mixr_base_GigaHertz_H__
+#ifndef __mixr_base_GigaHertz_HPP__
+#define __mixr_base_GigaHertz_HPP__
 
 #include "mixr/base/units/frequency/Frequency.hpp"
 

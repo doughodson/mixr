@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_DirectionReadout_H__
-#define __mixr_graphics_DirectionReadout_H__
+#ifndef __mixr_graphics_DirectionReadout_HPP__
+#define __mixr_graphics_DirectionReadout_HPP__
 
 #include "NumericReadout.hpp"
 

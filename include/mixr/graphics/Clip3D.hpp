@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Clip3D_H__
-#define __mixr_graphics_Clip3D_H__
+#ifndef __mixr_graphics_Clip3D_HPP__
+#define __mixr_graphics_Clip3D_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "Polygon.hpp"

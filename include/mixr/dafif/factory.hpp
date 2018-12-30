@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_factory_H__
-#define __mixr_dafif_factory_H__
+#ifndef __mixr_dafif_factory_HPP__
+#define __mixr_dafif_factory_HPP__
 
 #include <string>
 

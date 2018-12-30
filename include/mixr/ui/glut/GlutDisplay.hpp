@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ui_glut_GlutDisplay_H__
-#define __mixr_ui_glut_GlutDisplay_H__
+#ifndef __mixr_ui_glut_GlutDisplay_HPP__
+#define __mixr_ui_glut_GlutDisplay_HPP__
 
 #include "mixr/graphics/Display.hpp"
 

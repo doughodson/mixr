@@ -9,8 +9,8 @@
 //    "Numerical Methods", 1ed, Robert W. Hornbeck, Quantum (1975)
 //    "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 //------------------------------------------------------------------------------
-#ifndef __mixr_base_Vectors_H__
-#define __mixr_base_Vectors_H__
+#ifndef __mixr_base_Vectors_HPP__
+#define __mixr_base_Vectors_HPP__
 
 #include "mixr/base/Matrix.hpp"
 

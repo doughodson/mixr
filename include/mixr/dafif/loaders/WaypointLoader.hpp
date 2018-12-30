@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_WaypointLoader_H__
-#define __mixr_dafif_WaypointLoader_H__
+#ifndef __mixr_dafif_WaypointLoader_HPP__
+#define __mixr_dafif_WaypointLoader_HPP__
 
 #include "mixr/dafif/loaders/Database.hpp"
 

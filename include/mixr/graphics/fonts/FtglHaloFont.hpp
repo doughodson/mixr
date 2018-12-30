@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_FtglHaloFont_H__
-#define __mixr_graphics_FtglHaloFont_H__
+#ifndef __mixr_graphics_FtglHaloFont_HPP__
+#define __mixr_graphics_FtglHaloFont_HPP__
 
 #include "AbstractFtglFont.hpp"
 

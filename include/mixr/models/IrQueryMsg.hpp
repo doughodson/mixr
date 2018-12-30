@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_IrQueryMsg_H__
-#define __mixr_models_IrQueryMsg_H__
+#ifndef __mixr_models_IrQueryMsg_HPP__
+#define __mixr_models_IrQueryMsg_HPP__
 
 #include "mixr/models/SensorMsg.hpp"
 

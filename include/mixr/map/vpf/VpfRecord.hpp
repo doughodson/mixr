@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VpfRecord_H__
-#define __mixr_map_vpf_VpfRecord_H__
+#ifndef __mixr_map_vpf_VpfRecord_HPP__
+#define __mixr_map_vpf_VpfRecord_HPP__
 
 #include "mixr/base/Object.hpp"
 

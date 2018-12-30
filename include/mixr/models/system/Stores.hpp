@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Stores_H__
-#define __mixr_models_Stores_H__
+#ifndef __mixr_models_Stores_HPP__
+#define __mixr_models_Stores_HPP__
 
 #include "mixr/models/system/ExternalStore.hpp"
 #include <array>

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Forces_H__
-#define __mixr_base_Forces_H__
+#ifndef __mixr_base_Forces_HPP__
+#define __mixr_base_Forces_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available force related constants,

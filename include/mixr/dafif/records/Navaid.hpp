@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_Navaid_H__
-#define __mixr_dafif_Navaid_H__
+#ifndef __mixr_dafif_Navaid_HPP__
+#define __mixr_dafif_Navaid_HPP__
 
 #include "mixr/dafif/records/Record.hpp"
 

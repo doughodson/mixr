@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_TextureTable_H__
-#define __mixr_map_rpf_TextureTable_H__
+#ifndef __mixr_map_rpf_TextureTable_HPP__
+#define __mixr_map_rpf_TextureTable_HPP__
 
 #include "mixr/base/Object.hpp"
 

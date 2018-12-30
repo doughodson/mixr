@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_LandingGear_H__
-#define __mixr_instruments_LandingGear_H__
+#ifndef __mixr_instruments_LandingGear_HPP__
+#define __mixr_instruments_LandingGear_HPP__
 
 #include "mixr/instruments/Instrument.hpp"
 

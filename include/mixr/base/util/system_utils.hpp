@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_system_utils_H__
-#define __mixr_base_util_system_utils_H__
+#ifndef __mixr_base_util_system_utils_HPP__
+#define __mixr_base_util_system_utils_HPP__
 
 //------------------------------------------------------------------------------
 // General purpose OS system functions

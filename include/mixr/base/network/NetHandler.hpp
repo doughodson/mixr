@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_NetHandler_H__
-#define __mixr_base_NetHandler_H__
+#ifndef __mixr_base_NetHandler_HPP__
+#define __mixr_base_NetHandler_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/platform_api.hpp"

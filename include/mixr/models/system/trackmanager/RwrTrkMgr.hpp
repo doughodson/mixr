@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_RwrTrkMgr_H__
-#define __mixr_models_RwrTrkMgr_H__
+#ifndef __mixr_models_RwrTrkMgr_HPP__
+#define __mixr_models_RwrTrkMgr_HPP__
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 

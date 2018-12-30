@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_AbstractThread_H__
-#define __mixr_base_AbstractThread_H__
+#ifndef __mixr_base_AbstractThread_HPP__
+#define __mixr_base_AbstractThread_HPP__
 
 #include "mixr/base/Referenced.hpp"
 #include "mixr/base/util/platform_api.hpp"

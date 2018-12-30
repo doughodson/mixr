@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_IrAtmosphere_H__
-#define __mixr_models_IrAtmosphere_H__
+#ifndef __mixr_models_IrAtmosphere_HPP__
+#define __mixr_models_IrAtmosphere_HPP__
 
 #include "mixr/models/environment/AbstractAtmosphere.hpp"
 

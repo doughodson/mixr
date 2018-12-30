@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_Sz2_H__
-#define __mixr_linearsystem_Sz2_H__
+#ifndef __mixr_linearsystem_Sz2_HPP__
+#define __mixr_linearsystem_Sz2_HPP__
 
 #include "mixr/linearsystem/SecondOrderTf.hpp"
 

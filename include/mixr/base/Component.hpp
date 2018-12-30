@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Component_H__
-#define __mixr_base_Component_H__
+#ifndef __mixr_base_Component_HPP__
+#define __mixr_base_Component_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"

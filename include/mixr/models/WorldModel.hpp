@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_WorldModel_H__
-#define __mixr_models_WorldModel_H__
+#ifndef __mixr_models_WorldModel_HPP__
+#define __mixr_models_WorldModel_HPP__
 
 #include "mixr/simulation/Simulation.hpp"
 

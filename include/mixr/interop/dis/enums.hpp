@@ -3,8 +3,8 @@
 // Application Protocols - Enumerations for DIS PDU's
 // Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef __mixr_interop_dis_Enum_H__
-#define __mixr_interop_dis_Enum_H__
+#ifndef __mixr_interop_dis_Enum_HPP__
+#define __mixr_interop_dis_Enum_HPP__
 
 namespace mixr {
 namespace dis {

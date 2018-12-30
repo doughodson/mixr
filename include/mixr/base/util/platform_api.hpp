@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_platform_api_H__
-#define __mixr_base_util_platform_api_H__
+#ifndef __mixr_base_util_platform_api_HPP__
+#define __mixr_base_util_platform_api_HPP__
 
 //------------------------------------------------------------------------------
 // Operating system, compiler and window manager specific includes

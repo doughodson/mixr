@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_angle_H__
-#define __mixr_base_util_angle_H__
+#ifndef __mixr_base_util_angle_HPP__
+#define __mixr_base_util_angle_HPP__
 
 #include "mixr/base/util/constants.hpp"
 

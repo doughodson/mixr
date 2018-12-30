@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SimAgent_H__
-#define __mixr_models_SimAgent_H__
+#ifndef __mixr_models_SimAgent_HPP__
+#define __mixr_models_SimAgent_HPP__
 
 #include "mixr/base/ubf/Agent.hpp"
 

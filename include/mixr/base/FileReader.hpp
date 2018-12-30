@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_FileReader_H__
-#define __mixr_base_FileReader_H__
+#ifndef __mixr_base_FileReader_HPP__
+#define __mixr_base_FileReader_HPP__
 
 #include "mixr/base/Object.hpp"
 

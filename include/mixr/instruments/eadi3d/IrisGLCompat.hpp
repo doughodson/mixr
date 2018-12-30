@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_IrisGLCompat_H__
-#define __mixr_instruments_IrisGLCompat_H__
+#ifndef __mixr_instruments_IrisGLCompat_HPP__
+#define __mixr_instruments_IrisGLCompat_HPP__
 
 #include "mixr/base/Object.hpp"
 

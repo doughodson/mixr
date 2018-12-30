@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_TeraHertz_H__
-#define __mixr_base_TeraHertz_H__
+#ifndef __mixr_base_TeraHertz_HPP__
+#define __mixr_base_TeraHertz_HPP__
 
 #include "mixr/base/units/frequency/Frequency.hpp"
 

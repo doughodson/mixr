@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Sar_H__
-#define __mixr_models_Sar_H__
+#ifndef __mixr_models_Sar_HPP__
+#define __mixr_models_Sar_HPP__
 
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/base/osg/Vec3d"

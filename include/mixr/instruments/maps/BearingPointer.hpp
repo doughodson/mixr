@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_BearingPointer_H__
-#define __mixr_instruments_BearingPointer_H__
+#ifndef __mixr_instruments_BearingPointer_HPP__
+#define __mixr_instruments_BearingPointer_HPP__
 
 #include "mixr/instruments/maps/CompassRose.hpp"
 

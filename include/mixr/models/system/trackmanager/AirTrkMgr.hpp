@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_AirTrkMgr_H__
-#define __mixr_models_AirTrkMgr_H__
+#ifndef __mixr_models_AirTrkMgr_HPP__
+#define __mixr_models_AirTrkMgr_HPP__
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 

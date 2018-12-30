@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Rotators_H__
-#define __mixr_graphics_Rotators_H__
+#ifndef __mixr_graphics_Rotators_HPP__
+#define __mixr_graphics_Rotators_HPP__
 
 #include "Graphic.hpp"
 

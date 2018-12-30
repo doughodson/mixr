@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_DiscreteInput_H__
-#define __mixr_linkage_DiscreteInput_H__
+#ifndef __mixr_linkage_DiscreteInput_HPP__
+#define __mixr_linkage_DiscreteInput_HPP__
 
 #include "mixr/linkage/adapters/AbstractAdapter.hpp"
 

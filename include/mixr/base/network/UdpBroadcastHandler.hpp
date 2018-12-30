@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_UdpBroadcastHandler_H__
-#define __mixr_base_UdpBroadcastHandler_H__
+#ifndef __mixr_base_UdpBroadcastHandler_HPP__
+#define __mixr_base_UdpBroadcastHandler_HPP__
 
 #include "mixr/base/network/PosixHandler.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef __mixr_models_Gmti_H__
-#define __mixr_models_Gmti_H__
+#ifndef __mixr_models_Gmti_HPP__
+#define __mixr_models_Gmti_HPP__
 
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/base/osg/Vec3d"

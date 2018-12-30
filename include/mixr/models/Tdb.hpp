@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Tdb_H__
-#define __mixr_models_Tdb_H__
+#ifndef __mixr_models_Tdb_HPP__
+#define __mixr_models_Tdb_HPP__
 
 #include "mixr/models/system/System.hpp"
 #include "mixr/base/osg/Vec3d"

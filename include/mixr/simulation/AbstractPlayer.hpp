@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractPlayer_H__
-#define __mixr_simulation_AbstractPlayer_H__
+#ifndef __mixr_simulation_AbstractPlayer_HPP__
+#define __mixr_simulation_AbstractPlayer_HPP__
 
 #include "mixr/base/Component.hpp"
 

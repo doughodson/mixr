@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Designator_H__
-#define __mixr_models_Designator_H__
+#ifndef __mixr_models_Designator_HPP__
+#define __mixr_models_Designator_HPP__
 
 #include "mixr/base/Object.hpp"
 

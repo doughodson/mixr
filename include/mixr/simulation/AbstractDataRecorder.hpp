@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractDataRecorder_H__
-#define __mixr_simulation_AbstractDataRecorder_H__
+#ifndef __mixr_simulation_AbstractDataRecorder_HPP__
+#define __mixr_simulation_AbstractDataRecorder_HPP__
 
 #include "mixr/simulation/AbstractRecorderComponent.hpp"
 #include "mixr/simulation/recorder_macros.hpp"

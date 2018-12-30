@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_PushButton_H__
-#define __mixr_instruments_PushButton_H__
+#ifndef __mixr_instruments_PushButton_HPP__
+#define __mixr_instruments_PushButton_HPP__
 
 #include "mixr/instruments/buttons/Button.hpp"
 

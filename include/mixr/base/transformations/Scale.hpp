@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Scale_H__
-#define __mixr_base_Scale_H__
+#ifndef __mixr_base_Scale_HPP__
+#define __mixr_base_Scale_HPP__
 
 #include "mixr/base/transformations/Transform.hpp"
 

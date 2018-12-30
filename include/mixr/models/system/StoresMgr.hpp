@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_StoresMgr_H__
-#define __mixr_models_StoresMgr_H__
+#ifndef __mixr_models_StoresMgr_HPP__
+#define __mixr_models_StoresMgr_HPP__
 
 #include "mixr/models/system/Stores.hpp"
 

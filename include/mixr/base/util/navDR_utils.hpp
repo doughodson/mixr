@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_navDR_utils_H__
-#define __mixr_base_util_navDR_utils_H__
+#ifndef __mixr_base_util_navDR_utils_HPP__
+#define __mixr_base_util_navDR_utils_HPP__
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"

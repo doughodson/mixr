@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Autopilot_H__
-#define __mixr_models_Autopilot_H__
+#ifndef __mixr_models_Autopilot_HPP__
+#define __mixr_models_Autopilot_HPP__
 
 #include "mixr/models/system/Pilot.hpp"
 #include "mixr/base/osg/Vec3d"

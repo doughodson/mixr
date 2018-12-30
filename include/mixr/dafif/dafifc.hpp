@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // DAFIF Support Utilities and Data 
 //------------------------------------------------------------------------------
-#ifndef __mixr_dafif_dafifc_H__
-#define __mixr_dafif_dafifc_H__
+#ifndef __mixr_dafif_dafifc_HPP__
+#define __mixr_dafif_dafifc_HPP__
 
 namespace mixr {
 namespace dafif {

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_constants_H__
-#define __mixr_base_util_constants_H__
+#ifndef __mixr_base_util_constants_HPP__
+#define __mixr_base_util_constants_HPP__
 
 #include <limits>
 

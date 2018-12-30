@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractNetIO_H__
-#define __mixr_simulation_AbstractNetIO_H__
+#ifndef __mixr_simulation_AbstractNetIO_HPP__
+#define __mixr_simulation_AbstractNetIO_HPP__
 
 #include "mixr/base/Component.hpp"
 

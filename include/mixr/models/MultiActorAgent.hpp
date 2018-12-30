@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_MultiActorAgent_H__
-#define __mixr_models_MultiActorAgent_H__
+#ifndef __mixr_models_MultiActorAgent_HPP__
+#define __mixr_models_MultiActorAgent_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/base/Identifier.hpp"

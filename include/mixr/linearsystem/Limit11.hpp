@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_Limit11_H__
-#define __mixr_linearsystem_Limit11_H__
+#ifndef __mixr_linearsystem_Limit11_HPP__
+#define __mixr_linearsystem_Limit11_HPP__
 
 #include "mixr/linearsystem/LimitFunc.hpp"
 

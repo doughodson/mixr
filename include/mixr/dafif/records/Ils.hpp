@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_Ils_H__
-#define __mixr_dafif_Ils_H__
+#ifndef __mixr_dafif_Ils_HPP__
+#define __mixr_dafif_Ils_HPP__
 
 #include "mixr/dafif/records/Record.hpp"
 

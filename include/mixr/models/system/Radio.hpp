@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Radio_H__
-#define __mixr_models_Radio_H__
+#ifndef __mixr_models_Radio_HPP__
+#define __mixr_models_Radio_HPP__
 
 #include "mixr/models/system/RfSystem.hpp"
 

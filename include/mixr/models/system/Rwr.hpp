@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Rwr_H__
-#define __mixr_models_Rwr_H__
+#ifndef __mixr_models_Rwr_HPP__
+#define __mixr_models_Rwr_HPP__
 
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/base/safe_queue.hpp"

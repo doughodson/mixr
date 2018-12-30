@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Powers_H__
-#define __mixr_base_Powers_H__
+#ifndef __mixr_base_Powers_HPP__
+#define __mixr_base_Powers_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available power related constants,

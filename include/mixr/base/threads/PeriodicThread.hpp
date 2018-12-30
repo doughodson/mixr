@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_PeriodicThread_H__
-#define __mixr_base_PeriodicThread_H__
+#ifndef __mixr_base_PeriodicThread_HPP__
+#define __mixr_base_PeriodicThread_HPP__
 
 #include "mixr/base/threads/AbstractThread.hpp"
 #include "mixr/base/Statistic.hpp"

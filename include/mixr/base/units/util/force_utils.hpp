@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_force_H__
-#define __mixr_base_util_force_H__
+#ifndef __mixr_base_util_force_HPP__
+#define __mixr_base_util_force_HPP__
 
 namespace mixr {
 namespace base {

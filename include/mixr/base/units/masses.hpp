@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Masses_H__
-#define __mixr_base_Masses_H__
+#ifndef __mixr_base_Masses_HPP__
+#define __mixr_base_Masses_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available mass related constants,

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_TimeReadout_H__
-#define __mixr_graphics_TimeReadout_H__
+#ifndef __mixr_graphics_TimeReadout_HPP__
+#define __mixr_graphics_TimeReadout_HPP__
 
 #include "NumericReadout.hpp"
 

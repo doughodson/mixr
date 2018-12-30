@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_IoDevice_H__
-#define __mixr_linkage_IoDevice_H__
+#ifndef __mixr_linkage_IoDevice_HPP__
+#define __mixr_linkage_IoDevice_HPP__
 
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 

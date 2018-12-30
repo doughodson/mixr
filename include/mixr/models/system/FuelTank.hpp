@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_FuelTank_H__
-#define __mixr_models_FuelTank_H__
+#ifndef __mixr_models_FuelTank_HPP__
+#define __mixr_models_FuelTank_HPP__
 
 #include "mixr/models/system/ExternalStore.hpp"
 

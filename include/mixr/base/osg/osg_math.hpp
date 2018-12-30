@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_math_H__
-#define __mixr_base_osg_math_H__
+#ifndef __mixr_base_osg_math_HPP__
+#define __mixr_base_osg_math_HPP__
 
 #include <cmath>
 

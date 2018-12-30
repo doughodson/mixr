@@ -38,8 +38,8 @@
 //    7.6.2    EmissionSystem (part of Electromagnetic Emission PDU)
 //    7.6.2    EmitterBeamData (part of Electromagnetic Emission PDU)
 //--------------------------------------------------------------
-#ifndef __mixr_interop_dis_Struct_H__
-#define __mixr_interop_dis_Struct_H__
+#ifndef __mixr_interop_dis_Struct_HPP__
+#define __mixr_interop_dis_Struct_HPP__
 
 #include <iostream>
 #include <cstdint>

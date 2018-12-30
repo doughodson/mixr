@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Pair_H__
-#define __mixr_base_Pair_H__
+#ifndef __mixr_base_Pair_HPP__
+#define __mixr_base_Pair_HPP__
 
 #include "mixr/base/Object.hpp"
 //#include "mixr/base/Identifier.hpp"

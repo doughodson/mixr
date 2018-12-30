@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_StationBgPeriodicThread_H__
-#define __mixr_simulation_StationBgPeriodicThread_H__
+#ifndef __mixr_simulation_StationBgPeriodicThread_HPP__
+#define __mixr_simulation_StationBgPeriodicThread_HPP__
 
 #include "mixr/base/threads/PeriodicThread.hpp"
 

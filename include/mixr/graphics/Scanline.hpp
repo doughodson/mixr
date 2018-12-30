@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Scanline_H__
-#define __mixr_graphics_Scanline_H__
+#ifndef __mixr_graphics_Scanline_HPP__
+#define __mixr_graphics_Scanline_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Vec2d"

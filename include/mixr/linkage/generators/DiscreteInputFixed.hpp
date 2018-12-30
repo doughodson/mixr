@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_DiscreteInputFixed_H__
-#define __mixr_linkage_DiscreteInputFixed_H__
+#ifndef __mixr_linkage_DiscreteInputFixed_HPP__
+#define __mixr_linkage_DiscreteInputFixed_HPP__
 
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 

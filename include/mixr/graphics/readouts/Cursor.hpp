@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Cursor_H__
-#define __mixr_graphics_Cursor_H__
+#ifndef __mixr_graphics_Cursor_HPP__
+#define __mixr_graphics_Cursor_HPP__
 
 #include "mixr/graphics/readouts/AbstractReadout.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_NetInput_H__
-#define __mixr_recorder_NetInput_H__
+#ifndef __mixr_recorder_NetInput_HPP__
+#define __mixr_recorder_NetInput_HPP__
 
 #include "mixr/recorder/InputHandler.hpp"
 

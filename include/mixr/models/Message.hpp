@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Message_H__
-#define __mixr_models_Message_H__
+#ifndef __mixr_models_Message_HPP__
+#define __mixr_models_Message_HPP__
 
 #include "mixr/base/Object.hpp"
 

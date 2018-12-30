@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Pilot_H__
-#define __mixr_models_Pilot_H__
+#ifndef __mixr_models_Pilot_HPP__
+#define __mixr_models_Pilot_HPP__
 
 #include "mixr/models/system/System.hpp"
 

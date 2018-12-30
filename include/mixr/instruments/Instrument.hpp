@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Instrument_H__
-#define __mixr_instruments_Instrument_H__
+#ifndef __mixr_instruments_Instrument_HPP__
+#define __mixr_instruments_Instrument_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
 

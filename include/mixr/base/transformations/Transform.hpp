@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Transform_H__
-#define __mixr_base_Transform_H__
+#ifndef __mixr_base_Transform_HPP__
+#define __mixr_base_Transform_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Matrixd"

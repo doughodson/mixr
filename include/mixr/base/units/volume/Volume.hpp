@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Volume_H__
-#define __mixr_base_Volume_H__
+#ifndef __mixr_base_Volume_HPP__
+#define __mixr_base_Volume_HPP__
 
 #include "mixr/base/units/Quantity.hpp"
 

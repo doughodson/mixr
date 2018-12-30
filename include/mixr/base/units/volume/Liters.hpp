@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Liters_H__
-#define __mixr_base_Liters_H__
+#ifndef __mixr_base_Liters_HPP__
+#define __mixr_base_Liters_HPP__
 
 #include "mixr/base/units/volume/Volume.hpp"
 

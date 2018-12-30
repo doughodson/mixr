@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SpaceDynamicsModel_H__
-#define __mixr_models_SpaceDynamicsModel_H__
+#ifndef __mixr_models_SpaceDynamicsModel_HPP__
+#define __mixr_models_SpaceDynamicsModel_HPP__
 
 #include "mixr/models/dynamics/DynamicsModel.hpp"
 

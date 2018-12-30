@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_IrSystem_H__
-#define __mixr_models_IrSystem_H__
+#ifndef __mixr_models_IrSystem_HPP__
+#define __mixr_models_IrSystem_HPP__
 
 #include "mixr/models/system/System.hpp"
 

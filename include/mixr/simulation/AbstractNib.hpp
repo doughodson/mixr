@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractNib_H__
-#define __mixr_simulation_AbstractNib_H__
+#ifndef __mixr_simulation_AbstractNib_HPP__
+#define __mixr_simulation_AbstractNib_HPP__
 
 #include "mixr/base/Component.hpp"
 

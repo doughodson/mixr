@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_DynamicsModel_H__
-#define __mixr_models_DynamicsModel_H__
+#ifndef __mixr_models_DynamicsModel_HPP__
+#define __mixr_models_DynamicsModel_HPP__
 
 #include "mixr/base/Component.hpp"
 

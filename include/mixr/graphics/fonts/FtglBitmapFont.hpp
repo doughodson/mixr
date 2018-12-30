@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_FtglBitmapFont_H__
-#define __mixr_graphics_FtglBitmapFont_H__
+#ifndef __mixr_graphics_FtglBitmapFont_HPP__
+#define __mixr_graphics_FtglBitmapFont_HPP__
 
 #include "AbstractFtglFont.hpp"
 

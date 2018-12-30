@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_ScalerFunc_H__
-#define __mixr_linearsystem_ScalerFunc_H__
+#ifndef __mixr_linearsystem_ScalerFunc_HPP__
+#define __mixr_linearsystem_ScalerFunc_HPP__
 
 #include "mixr/base/Object.hpp"
 

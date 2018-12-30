@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_IoHandler_H__
-#define __mixr_linkage_IoHandler_H__
+#ifndef __mixr_linkage_IoHandler_HPP__
+#define __mixr_linkage_IoHandler_HPP__
 
 #include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
 

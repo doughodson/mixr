@@ -1,6 +1,6 @@
 
-#ifndef __mixr_terrain_Terrain_H__
-#define __mixr_terrain_Terrain_H__
+#ifndef __mixr_terrain_Terrain_HPP__
+#define __mixr_terrain_Terrain_HPP__
 
 #include "mixr/base/Component.hpp"
 

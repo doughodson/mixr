@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_MannedSpaceVehicle_H__
-#define __mixr_models_MannedSpaceVehicle_H__
+#ifndef __mixr_models_MannedSpaceVehicle_HPP__
+#define __mixr_models_MannedSpaceVehicle_HPP__
 
 #include "mixr/models/player/space/SpaceVehicle.hpp"
 

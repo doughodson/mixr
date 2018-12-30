@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_HexReadout_H__
-#define __mixr_graphics_HexReadout_H__
+#ifndef __mixr_graphics_HexReadout_HPP__
+#define __mixr_graphics_HexReadout_HPP__
 
 #include "NumericReadout.hpp"
 

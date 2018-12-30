@@ -1,6 +1,6 @@
 
-#ifndef __mixr_Joules_H__
-#define __mixr_Joules_H__
+#ifndef __mixr_Joules_HPP__
+#define __mixr_Joules_HPP__
 
 #include "mixr/base/units/energy/Energy.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Effect_H__
-#define __mixr_models_Effect_H__
+#ifndef __mixr_models_Effect_HPP__
+#define __mixr_models_Effect_HPP__
 
 #include "mixr/models/player/weapon/AbstractWeapon.hpp"
 

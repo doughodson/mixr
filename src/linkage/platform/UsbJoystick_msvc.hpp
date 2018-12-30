@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_windows_UsbJoystick_msvc_H__
-#define __mixr_linkage_windows_UsbJoystick_msvc_H__
+#ifndef __mixr_linkage_windows_UsbJoystick_msvc_HPP__
+#define __mixr_linkage_windows_UsbJoystick_msvc_HPP__
 
 #include "mixr/linkage/IoDevice.hpp"
 

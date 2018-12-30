@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_IgHost_H__
-#define __mixr_ighost_cigi_IgHost_H__
+#ifndef __mixr_ighost_cigi_IgHost_HPP__
+#define __mixr_ighost_cigi_IgHost_HPP__
 
 #include "mixr/simulation/AbstractIgHost.hpp"
 

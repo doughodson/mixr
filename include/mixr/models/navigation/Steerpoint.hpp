@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Steerpoint_H__
-#define __mixr_models_Steerpoint_H__
+#ifndef __mixr_models_Steerpoint_HPP__
+#define __mixr_models_Steerpoint_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/base/osg/Vec3d"

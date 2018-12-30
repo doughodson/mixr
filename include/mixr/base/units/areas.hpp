@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Areas_H__
-#define __mixr_base_Areas_H__
+#ifndef __mixr_base_Areas_HPP__
+#define __mixr_base_Areas_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available area related constants,

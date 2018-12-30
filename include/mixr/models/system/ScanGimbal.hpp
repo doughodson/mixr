@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_ScanGimbal_H__
-#define __mixr_models_ScanGimbal_H__
+#ifndef __mixr_models_ScanGimbal_HPP__
+#define __mixr_models_ScanGimbal_HPP__
 
 #include "mixr/models/system/Gimbal.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"

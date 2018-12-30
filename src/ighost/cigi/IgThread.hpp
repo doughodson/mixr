@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_IgThread_H__
-#define __mixr_ighost_cigi_IgThread_H__
+#ifndef __mixr_ighost_cigi_IgThread_HPP__
+#define __mixr_ighost_cigi_IgThread_HPP__
 
 #include "mixr/base/threads/OneShotThread.hpp"
 

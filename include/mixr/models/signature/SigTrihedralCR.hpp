@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SigTrihedralCR_H__
-#define __mixr_models_SigTrihedralCR_H__
+#ifndef __mixr_models_SigTrihedralCR_HPP__
+#define __mixr_models_SigTrihedralCR_HPP__
 
 #include "mixr/models/signature/SigDihedralCR.hpp"
 

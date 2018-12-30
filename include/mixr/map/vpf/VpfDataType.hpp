@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VpfDataType_H__
-#define __mixr_map_vpf_VpfDataType_H__
+#ifndef __mixr_map_vpf_VpfDataType_HPP__
+#define __mixr_map_vpf_VpfDataType_HPP__
 
 #include "mixr/base/Object.hpp"
 

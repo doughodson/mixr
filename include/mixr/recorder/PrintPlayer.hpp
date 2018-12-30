@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_PrintPlayer_H__
-#define __mixr_recorder_PrintPlayer_H__
+#ifndef __mixr_recorder_PrintPlayer_HPP__
+#define __mixr_recorder_PrintPlayer_HPP__
 
 #include "mixr/recorder/OutputHandler.hpp"
 #include "mixr/recorder/PrintHandler.hpp"

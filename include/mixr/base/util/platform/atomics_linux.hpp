@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_atomics_linux_H__
-#define __mixr_base_util_atomics_linux_H__
+#ifndef __mixr_base_util_atomics_linux_HPP__
+#define __mixr_base_util_atomics_linux_HPP__
 
 // ---
 // Simple semaphore spinlock and unlock functions: 

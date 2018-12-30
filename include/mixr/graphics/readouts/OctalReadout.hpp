@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_OctalReadout_H__
-#define __mixr_graphics_OctalReadout_H__
+#ifndef __mixr_graphics_OctalReadout_HPP__
+#define __mixr_graphics_OctalReadout_HPP__
 
 #include "NumericReadout.hpp"
 

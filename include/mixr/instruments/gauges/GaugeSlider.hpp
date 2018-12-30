@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_GuageSlider_H__
-#define __mixr_instruments_GuageSlider_H__
+#ifndef __mixr_instruments_GuageSlider_HPP__
+#define __mixr_instruments_GuageSlider_HPP__
 
 #include "mixr/instruments/gauges/AnalogGauge.hpp"
 

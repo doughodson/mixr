@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_AbstractReadout_H__
-#define __mixr_graphics_AbstractReadout_H__
+#ifndef __mixr_graphics_AbstractReadout_HPP__
+#define __mixr_graphics_AbstractReadout_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"

@@ -1,5 +1,5 @@
-#ifndef __mixr_base_util_filesystem_utils_H__
-#define __mixr_base_util_filesystem_utils_H__
+#ifndef __mixr_base_util_filesystem_utils_HPP__
+#define __mixr_base_util_filesystem_utils_HPP__
 
 //------------------------------------------------------------------------------
 // General purpose functions associated with the file system

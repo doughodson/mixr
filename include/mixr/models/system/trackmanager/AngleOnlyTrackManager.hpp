@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_AngleOnlyTrackManager_H__
-#define __mixr_models_AngleOnlyTrackManager_H__
+#ifndef __mixr_models_AngleOnlyTrackManager_HPP__
+#define __mixr_models_AngleOnlyTrackManager_HPP__
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/base/safe_queue.hpp"

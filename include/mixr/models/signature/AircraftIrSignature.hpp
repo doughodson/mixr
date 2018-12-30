@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_AircraftIrSignature_H__
-#define __mixr_models_AircraftIrSignature_H__
+#ifndef __mixr_models_AircraftIrSignature_HPP__
+#define __mixr_models_AircraftIrSignature_HPP__
 
 #include "mixr/models/signature/IrSignature.hpp"
 

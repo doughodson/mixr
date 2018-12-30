@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Eadi3DObjects_H__
-#define __mixr_instruments_Eadi3DObjects_H__
+#ifndef __mixr_instruments_Eadi3DObjects_HPP__
+#define __mixr_instruments_Eadi3DObjects_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/instruments/eadi3d/IrisGLCompat.hpp"

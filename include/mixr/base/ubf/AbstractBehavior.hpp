@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_ubf_AbstractBehavior_H__
-#define __mixr_base_ubf_AbstractBehavior_H__
+#ifndef __mixr_base_ubf_AbstractBehavior_HPP__
+#define __mixr_base_ubf_AbstractBehavior_HPP__
 
 #include "mixr/base/Component.hpp"
 

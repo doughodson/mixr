@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Shapes_H__
-#define __mixr_graphics_Shapes_H__
+#ifndef __mixr_graphics_Shapes_HPP__
+#define __mixr_graphics_Shapes_HPP__
 
 #include "Graphic.hpp"
 

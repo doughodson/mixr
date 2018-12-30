@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_SimulationBgSyncThread_H__
-#define __mixr_simulation_SimulationBgSyncThread_H__
+#ifndef __mixr_simulation_SimulationBgSyncThread_HPP__
+#define __mixr_simulation_SimulationBgSyncThread_HPP__
 
 #include "mixr/base/threads/SyncThread.hpp"
 

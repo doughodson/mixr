@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_IoPeriodicThread_H__
-#define __mixr_linkage_IoPeriodicThread_H__
+#ifndef __mixr_linkage_IoPeriodicThread_HPP__
+#define __mixr_linkage_IoPeriodicThread_HPP__
 
 #include "mixr/base/threads/PeriodicThread.hpp"
 

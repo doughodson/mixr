@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Knob_H__
-#define __mixr_instruments_Knob_H__
+#ifndef __mixr_instruments_Knob_HPP__
+#define __mixr_instruments_Knob_HPP__
 
 #include "mixr/instruments/buttons/Button.hpp"
 

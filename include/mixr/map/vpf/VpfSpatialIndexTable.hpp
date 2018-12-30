@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VpfSpatialIndexTable_H__
-#define __mixr_map_vpf_VpfSpatialIndexTable_H__
+#ifndef __mixr_map_vpf_VpfSpatialIndexTable_HPP__
+#define __mixr_map_vpf_VpfSpatialIndexTable_HPP__
 
 #include "mixr/base/Object.hpp"
 

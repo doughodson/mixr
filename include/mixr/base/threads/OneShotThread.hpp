@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_OneShotThread_H__
-#define __mixr_base_OneShotThread_H__
+#ifndef __mixr_base_OneShotThread_HPP__
+#define __mixr_base_OneShotThread_HPP__
 
 #include "mixr/base/threads/AbstractThread.hpp"
 

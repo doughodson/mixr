@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_MonitorMetrics_H__
-#define __mixr_base_MonitorMetrics_H__
+#ifndef __mixr_base_MonitorMetrics_HPP__
+#define __mixr_base_MonitorMetrics_HPP__
 
 #include "mixr/base/colors/Color.hpp"
 #include "mixr/base/relations/Table1.hpp"

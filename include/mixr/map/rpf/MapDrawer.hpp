@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_MapDrawer_H__
-#define __mixr_map_rpf_MapDrawer_H__
+#ifndef __mixr_map_rpf_MapDrawer_HPP__
+#define __mixr_map_rpf_MapDrawer_HPP__
 
 #include "mixr/graphics/MapPage.hpp"
 #include <array>

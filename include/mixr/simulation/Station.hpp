@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_Station_H__
-#define __mixr_simulation_Station_H__
+#ifndef __mixr_simulation_Station_HPP__
+#define __mixr_simulation_Station_HPP__
 
 #include "mixr/base/Component.hpp"
 

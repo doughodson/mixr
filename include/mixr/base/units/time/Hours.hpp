@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Hours_H__
-#define __mixr_base_Hours_H__
+#ifndef __mixr_base_Hours_HPP__
+#define __mixr_base_Hours_HPP__
 
 #include "mixr/base/units/time/Time.hpp"
 

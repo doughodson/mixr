@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_CubicMeters_H__
-#define __mixr_base_CubicMeters_H__
+#ifndef __mixr_base_CubicMeters_HPP__
+#define __mixr_base_CubicMeters_HPP__
 
 #include "mixr/base/units/volume/Volume.hpp"
 

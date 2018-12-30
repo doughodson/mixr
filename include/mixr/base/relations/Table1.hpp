@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Table1_H__
-#define __mixr_base_Table1_H__
+#ifndef __mixr_base_Table1_HPP__
+#define __mixr_base_Table1_HPP__
 
 #include "mixr/base/relations/Table.hpp"
 

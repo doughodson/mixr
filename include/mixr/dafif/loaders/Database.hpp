@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_Database_H__
-#define __mixr_dafif_Database_H__
+#ifndef __mixr_dafif_Database_HPP__
+#define __mixr_dafif_Database_HPP__
 
 #include "mixr/base/Object.hpp"
 

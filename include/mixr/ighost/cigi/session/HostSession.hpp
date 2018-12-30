@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_session_HostSession_H__
-#define __mixr_ighost_cigi_session_HostSession_H__
+#ifndef __mixr_ighost_cigi_session_HostSession_HPP__
+#define __mixr_ighost_cigi_session_HostSession_HPP__
 
 #include "mixr/base/Component.hpp"
 

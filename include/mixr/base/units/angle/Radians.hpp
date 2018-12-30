@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Radians_H__
-#define __mixr_base_Radians_H__
+#ifndef __mixr_base_Radians_HPP__
+#define __mixr_base_Radians_HPP__
 
 #include "mixr/base/units/angle/Angle.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_CadrgMap_H__
-#define __mixr_map_rpf_CadrgMap_H__
+#ifndef __mixr_map_rpf_CadrgMap_HPP__
+#define __mixr_map_rpf_CadrgMap_HPP__
 
 #include "mixr/graphics/MapPage.hpp"
 #include <array>

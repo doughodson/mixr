@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SigConstant_H__
-#define __mixr_models_SigConstant_H__
+#ifndef __mixr_models_SigConstant_HPP__
+#define __mixr_models_SigConstant_HPP__
 
 #include "mixr/models/signature/RfSignature.hpp"
 

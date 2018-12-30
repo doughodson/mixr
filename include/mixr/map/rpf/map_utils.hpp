@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __mixr_map_rpf_map_utils_H__
-#define __mixr_map_rpf_map_utils_H__
+#ifndef __mixr_map_rpf_map_utils_HPP__
+#define __mixr_map_rpf_map_utils_HPP__
 
 #include <fstream>
 

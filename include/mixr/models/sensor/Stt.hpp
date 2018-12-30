@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Stt_H__
-#define __mixr_models_Stt_H__
+#ifndef __mixr_models_Stt_HPP__
+#define __mixr_models_Stt_HPP__
 
 #include "mixr/models/system/Radar.hpp"
 

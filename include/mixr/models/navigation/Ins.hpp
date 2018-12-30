@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Ins_H__
-#define __mixr_models_Ins_H__
+#ifndef __mixr_models_Ins_HPP__
+#define __mixr_models_Ins_HPP__
 
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/base/osg/Vec3d"

@@ -15,8 +15,8 @@
 //       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for framework
 //       Event values above USER_EVENT are available for user events
 //------------------------------------------------------------------------------
-#ifndef __mixr_base_Event_Tokens_H__
-#define __mixr_base_Event_Tokens_H__
+#ifndef __mixr_base_Event_Tokens_HPP__
+#define __mixr_base_Event_Tokens_HPP__
 
 // ---
 // Key events -- Are passed up to an object's container if not used.

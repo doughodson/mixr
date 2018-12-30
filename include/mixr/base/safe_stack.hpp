@@ -1,8 +1,8 @@
 
 #include "mixr/base/util/atomics.hpp"
 
-#ifndef __mixr_base_safe_stack_H__
-#define __mixr_base_safe_stack_H__
+#ifndef __mixr_base_safe_stack_HPP__
+#define __mixr_base_safe_stack_HPP__
 
 namespace mixr {
 namespace base {

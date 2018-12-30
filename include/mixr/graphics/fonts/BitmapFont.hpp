@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_BitmapFont_H__
-#define __mixr_graphics_BitmapFont_H__
+#ifndef __mixr_graphics_BitmapFont_HPP__
+#define __mixr_graphics_BitmapFont_HPP__
 
 #include "AbstractFont.hpp"
 

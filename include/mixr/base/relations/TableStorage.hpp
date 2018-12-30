@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_TableStorage_H__
-#define __mixr_base_TableStorage_H__
+#ifndef __mixr_base_TableStorage_HPP__
+#define __mixr_base_TableStorage_HPP__
 
 #include "mixr/base/relations/FStorage.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Emission_H__
-#define __mixr_models_Emission_H__
+#ifndef __mixr_models_Emission_HPP__
+#define __mixr_models_Emission_HPP__
 
 #include "mixr/models/SensorMsg.hpp"
 #include "mixr/models/system/Antenna.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_MfdPage_H__
-#define __mixr_graphics_MfdPage_H__
+#ifndef __mixr_graphics_MfdPage_HPP__
+#define __mixr_graphics_MfdPage_HPP__
 
 #include "mixr/graphics/Page.hpp"
 

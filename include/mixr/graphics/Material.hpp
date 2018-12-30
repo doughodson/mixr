@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Material_H__
-#define __mixr_graphics_Material_H__
+#ifndef __mixr_graphics_Material_HPP__
+#define __mixr_graphics_Material_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/base/osg/Vec4d"

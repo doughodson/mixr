@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Frequencies_H__
-#define __mixr_base_Frequencies_H__
+#ifndef __mixr_base_Frequencies_HPP__
+#define __mixr_base_Frequencies_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available frequency related constants,

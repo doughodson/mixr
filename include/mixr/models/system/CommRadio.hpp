@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_CommRadio_H__
-#define __mixr_models_CommRadio_H__
+#ifndef __mixr_models_CommRadio_HPP__
+#define __mixr_models_CommRadio_HPP__
 
 #include "mixr/models/system/Radio.hpp"
 

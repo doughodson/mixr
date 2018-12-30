@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Aam_H__
-#define __mixr_models_Aam_H__
+#ifndef __mixr_models_Aam_HPP__
+#define __mixr_models_Aam_HPP__
 
 #include "mixr/models/player/weapon/Missile.hpp"
 

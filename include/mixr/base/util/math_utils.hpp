@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_math_utils_H__
-#define __mixr_base_util_math_utils_H__
+#ifndef __mixr_base_util_math_utils_HPP__
+#define __mixr_base_util_math_utils_HPP__
 
 //------------------------------------------------------------------------------
 // General purpose math functions

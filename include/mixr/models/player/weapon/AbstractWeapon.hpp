@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_AbstractWeapon_H__
-#define __mixr_models_AbstractWeapon_H__
+#ifndef __mixr_models_AbstractWeapon_HPP__
+#define __mixr_models_AbstractWeapon_HPP__
 
 #include "mixr/models/player/Player.hpp"
 

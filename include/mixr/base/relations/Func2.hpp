@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Func2_H__
-#define __mixr_base_Func2_H__
+#ifndef __mixr_base_Func2_HPP__
+#define __mixr_base_Func2_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/relations/Function.hpp"

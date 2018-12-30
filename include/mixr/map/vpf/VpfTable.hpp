@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VpfTable_H__
-#define __mixr_map_vpf_VpfTable_H__
+#ifndef __mixr_map_vpf_VpfTable_HPP__
+#define __mixr_map_vpf_VpfTable_HPP__
 
 #include "mixr/base/Object.hpp"
 

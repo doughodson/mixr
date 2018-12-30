@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SensorMsg_H__
-#define __mixr_models_SensorMsg_H__
+#ifndef __mixr_models_SensorMsg_HPP__
+#define __mixr_models_SensorMsg_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Vec3d"

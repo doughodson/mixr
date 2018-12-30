@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_colors_Hsv_H__
-#define __mixr_base_colors_Hsv_H__
+#ifndef __mixr_base_colors_Hsv_HPP__
+#define __mixr_base_colors_Hsv_HPP__
 
 #include "mixr/base/colors/Color.hpp"
 #include "mixr/base/osg/Vec3d"

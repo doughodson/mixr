@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_CadrgClut_H__
-#define __mixr_map_rpf_CadrgClut_H__
+#ifndef __mixr_map_rpf_CadrgClut_HPP__
+#define __mixr_map_rpf_CadrgClut_HPP__
 
 #include "mixr/base/Object.hpp"
 

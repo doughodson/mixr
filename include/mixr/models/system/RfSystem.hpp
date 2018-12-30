@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_RfSystem_H__
-#define __mixr_models_RfSystem_H__
+#ifndef __mixr_models_RfSystem_HPP__
+#define __mixr_models_RfSystem_HPP__
 
 #include "mixr/models/system/System.hpp"
 #include <array>

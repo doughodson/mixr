@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_AnalogInput_H__
-#define __mixr_linkage_AnalogInput_H__
+#ifndef __mixr_linkage_AnalogInput_HPP__
+#define __mixr_linkage_AnalogInput_HPP__
 
 #include "mixr/linkage/adapters/AbstractAdapter.hpp"
 

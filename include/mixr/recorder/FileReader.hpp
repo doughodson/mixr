@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_FileReader_H__
-#define __mixr_recorder_FileReader_H__
+#ifndef __mixr_recorder_FileReader_HPP__
+#define __mixr_recorder_FileReader_HPP__
 
 #include "mixr/recorder/InputHandler.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_energy_H__
-#define __mixr_base_util_energy_H__
+#ifndef __mixr_base_util_energy_HPP__
+#define __mixr_base_util_energy_HPP__
 
 namespace mixr {
 namespace base {

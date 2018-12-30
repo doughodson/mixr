@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_StationNetPeriodicThread_H__
-#define __mixr_simulation_StationNetPeriodicThread_H__
+#ifndef __mixr_simulation_StationNetPeriodicThread_HPP__
+#define __mixr_simulation_StationNetPeriodicThread_HPP__
 
 #include "mixr/base/threads/PeriodicThread.hpp"
 

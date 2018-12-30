@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_TargetData_H__
-#define __mixr_models_TargetData_H__
+#ifndef __mixr_models_TargetData_HPP__
+#define __mixr_models_TargetData_HPP__
 
 #include "mixr/base/Object.hpp"
 

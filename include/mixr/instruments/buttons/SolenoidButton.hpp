@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_SolenoidButton_H__
-#define __mixr_instruments_SolenoidButton_H__
+#ifndef __mixr_instruments_SolenoidButton_HPP__
+#define __mixr_instruments_SolenoidButton_HPP__
 
 #include "mixr/instruments/buttons/Button.hpp"
 

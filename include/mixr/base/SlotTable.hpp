@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_SlotTable_H__
-#define __mixr_base_SlotTable_H__
+#ifndef __mixr_base_SlotTable_HPP__
+#define __mixr_base_SlotTable_HPP__
 
 namespace mixr {
 namespace base {

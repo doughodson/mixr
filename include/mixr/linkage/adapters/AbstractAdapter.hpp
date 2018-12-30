@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_AbstractAdapter_H__
-#define __mixr_linkage_AbstractAdapter_H__
+#ifndef __mixr_linkage_AbstractAdapter_HPP__
+#define __mixr_linkage_AbstractAdapter_HPP__
 
 #include "mixr/base/Object.hpp"
 

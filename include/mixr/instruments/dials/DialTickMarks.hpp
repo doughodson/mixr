@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_DialTickMarks_H__
-#define __mixr_instruments_DialTickMarks_H__
+#ifndef __mixr_instruments_DialTickMarks_HPP__
+#define __mixr_instruments_DialTickMarks_HPP__
 
 #include "mixr/instruments/dials/AnalogDial.hpp"
 

@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Matrixf_H__
-#define __mixr_base_osg_Matrixf_H__
+#ifndef __mixr_base_osg_Matrixf_HPP__
+#define __mixr_base_osg_Matrixf_HPP__
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"

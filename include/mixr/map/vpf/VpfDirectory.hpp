@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VpfDirectory_H__
-#define __mixr_map_vpf_VpfDirectory_H__
+#ifndef __mixr_map_vpf_VpfDirectory_HPP__
+#define __mixr_map_vpf_VpfDirectory_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/map/vpf/VpfTable.hpp"

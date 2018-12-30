@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Flare_H__
-#define __mixr_models_Flare_H__
+#ifndef __mixr_models_Flare_HPP__
+#define __mixr_models_Flare_HPP__
 
 #include "mixr/models/player/effect/Effect.hpp"
 

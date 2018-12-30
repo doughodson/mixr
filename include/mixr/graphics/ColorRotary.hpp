@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_ColorRotary_H__
-#define __mixr_graphics_ColorRotary_H__
+#ifndef __mixr_graphics_ColorRotary_HPP__
+#define __mixr_graphics_ColorRotary_HPP__
 
 #include "mixr/base/colors/Color.hpp"
 

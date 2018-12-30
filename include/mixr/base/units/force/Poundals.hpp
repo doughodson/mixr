@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Poundals_H__
-#define __mixr_base_Poundals_H__
+#ifndef __mixr_base_Poundals_HPP__
+#define __mixr_base_Poundals_HPP__
 
 #include "mixr/base/units/force/Force.hpp"
 

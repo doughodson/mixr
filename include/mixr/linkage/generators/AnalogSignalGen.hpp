@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_AnalogSignalGen_H__
-#define __mixr_linkage_AnalogSignalGen_H__
+#ifndef __mixr_linkage_AnalogSignalGen_HPP__
+#define __mixr_linkage_AnalogSignalGen_HPP__
 
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 

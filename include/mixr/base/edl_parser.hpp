@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_edl_parser_H__
-#define __mixr_base_edl_parser_H__
+#ifndef __mixr_base_edl_parser_HPP__
+#define __mixr_base_edl_parser_HPP__
 
 #include <string>
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_numeric_Multiply_H__
-#define __mixr_base_numeric_Multiply_H__
+#ifndef __mixr_base_numeric_Multiply_HPP__
+#define __mixr_base_numeric_Multiply_HPP__
 
 #include "mixr/base/numeric/operators/Operator.hpp"
 

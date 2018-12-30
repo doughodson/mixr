@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_LowpassFilter_H__
-#define __mixr_linearsystem_LowpassFilter_H__
+#ifndef __mixr_linearsystem_LowpassFilter_HPP__
+#define __mixr_linearsystem_LowpassFilter_HPP__
 
 #include "mixr/linearsystem/FirstOrderTf.hpp"
 

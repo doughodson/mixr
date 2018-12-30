@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Readouts_H__
-#define __mixr_graphics_Readouts_H__
+#ifndef __mixr_graphics_Readouts_HPP__
+#define __mixr_graphics_Readouts_HPP__
 
 // fields
 #include "./readouts/AsciiText.hpp"

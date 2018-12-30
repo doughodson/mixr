@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_pov_EntityState_H__
-#define __mixr_ighost_pov_EntityState_H__
+#ifndef __mixr_ighost_pov_EntityState_HPP__
+#define __mixr_ighost_pov_EntityState_HPP__
 
 #include <cstdint>
 

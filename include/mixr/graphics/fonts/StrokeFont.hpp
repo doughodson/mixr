@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_StrokeFont_H__
-#define __mixr_graphics_StrokeFont_H__
+#ifndef __mixr_graphics_StrokeFont_HPP__
+#define __mixr_graphics_StrokeFont_HPP__
 
 #include "AbstractFont.hpp"
 

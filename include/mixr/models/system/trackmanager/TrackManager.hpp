@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_TrackManager_H__
-#define __mixr_models_TrackManager_H__
+#ifndef __mixr_models_TrackManager_HPP__
+#define __mixr_models_TrackManager_HPP__
 
 #include "mixr/models/system/System.hpp"
 #include "mixr/base/safe_queue.hpp"

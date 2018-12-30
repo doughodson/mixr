@@ -118,7 +118,7 @@ bool GlutDisplay::onEscKey()
       if (isMessageEnabled(MSG_INFO)) {
          std::cout<<"mixr::glut::GlutDisplay::onEscKey()Exit by the ESC key!"<<std::endl;
       }
-#ifdef __FREEGLUT_EXT_H__     /* freeglut only */
+#ifdef __FREEGLUT_EXT_HPP__     /* freeglut only */
       glutLeaveMainLoop();
       return true;
 #else
@@ -144,7 +144,7 @@ int GlutDisplay::createWindow()
 {
    winId = -1;
 
-#ifdef __FREEGLUT_EXT_H__     /* freeglut only */
+#ifdef __FREEGLUT_EXT_HPP__     /* freeglut only */
       glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
 

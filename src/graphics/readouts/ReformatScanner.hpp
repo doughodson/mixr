@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_ReformatScanner_H__
-#define __mixr_graphics_ReformatScanner_H__
+#ifndef __mixr_graphics_ReformatScanner_HPP__
+#define __mixr_graphics_ReformatScanner_HPP__
 
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer

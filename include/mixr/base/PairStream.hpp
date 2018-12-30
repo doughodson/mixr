@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_PairStream_H__
-#define __mixr_base_PairStream_H__
+#ifndef __mixr_base_PairStream_HPP__
+#define __mixr_base_PairStream_HPP__
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_AirportLoader_H__
-#define __mixr_dafif_AirportLoader_H__
+#ifndef __mixr_dafif_AirportLoader_HPP__
+#define __mixr_dafif_AirportLoader_HPP__
 
 #include "mixr/dafif/loaders/Database.hpp"
 

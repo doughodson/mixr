@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_StateMachine_H__
-#define __mixr_base_StateMachine_H__
+#ifndef __mixr_base_StateMachine_HPP__
+#define __mixr_base_StateMachine_HPP__
 
 #include "mixr/base/Component.hpp"
 

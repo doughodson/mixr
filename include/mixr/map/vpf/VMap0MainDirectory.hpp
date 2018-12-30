@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_vpf_VMap0MainDirectory_H__
-#define __mixr_map_vpf_VMap0MainDirectory_H__
+#ifndef __mixr_map_vpf_VMap0MainDirectory_HPP__
+#define __mixr_map_vpf_VMap0MainDirectory_HPP__
 
 #include "mixr/map/vpf/VpfDirectory.hpp"
 #include "mixr/map/vpf/VMap0LibDirectory.hpp"

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Grams_H__
-#define __mixr_base_Grams_H__
+#ifndef __mixr_base_Grams_HPP__
+#define __mixr_base_Grams_HPP__
 
 #include "mixr/base/units/mass/Mass.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Polynomial_H__
-#define __mixr_base_Polynomial_H__
+#ifndef __mixr_base_Polynomial_HPP__
+#define __mixr_base_Polynomial_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/relations/Func1.hpp"

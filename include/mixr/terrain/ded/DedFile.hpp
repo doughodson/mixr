@@ -1,6 +1,6 @@
 
-#ifndef __mixr_terrain_DedFile_H__
-#define __mixr_terrain_DedFile_H__
+#ifndef __mixr_terrain_DedFile_HPP__
+#define __mixr_terrain_DedFile_HPP__
 
 #include "../DataFile.hpp"
 

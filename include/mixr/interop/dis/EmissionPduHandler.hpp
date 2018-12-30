@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_dis_EmissionPduHandler_H__
-#define __mixr_interop_dis_EmissionPduHandler_H__
+#ifndef __mixr_interop_dis_EmissionPduHandler_HPP__
+#define __mixr_interop_dis_EmissionPduHandler_HPP__
 
 #include "mixr/interop/dis/NetIO.hpp"
 #include "mixr/interop/dis/structs.hpp"

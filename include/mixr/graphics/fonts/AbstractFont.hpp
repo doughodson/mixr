@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_AbstractFont_H__
-#define __mixr_graphics_AbstractFont_H__
+#ifndef __mixr_graphics_AbstractFont_HPP__
+#define __mixr_graphics_AbstractFont_HPP__
 
 #include "mixr/base/Object.hpp"
 

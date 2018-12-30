@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_EngPage_H__
-#define __mixr_instruments_EngPage_H__
+#ifndef __mixr_instruments_EngPage_HPP__
+#define __mixr_instruments_EngPage_HPP__
 
 #include "mixr/graphics/Page.hpp"
 #include <array>

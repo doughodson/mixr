@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_DialArcSegment_H__
-#define __mixr_instruments_DialArcSegment_H__
+#ifndef __mixr_instruments_DialArcSegment_HPP__
+#define __mixr_instruments_DialArcSegment_HPP__
 
 #include "mixr/instruments/dials/AnalogDial.hpp"
 

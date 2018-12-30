@@ -1,6 +1,6 @@
 
-#ifndef __mixr_terrain_QuadMap_H__
-#define __mixr_terrain_QuadMap_H__
+#ifndef __mixr_terrain_QuadMap_HPP__
+#define __mixr_terrain_QuadMap_HPP__
 
 #include "mixr/terrain/Terrain.hpp"
 #include <array>

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_mass_H__
-#define __mixr_base_util_mass_H__
+#ifndef __mixr_base_util_mass_HPP__
+#define __mixr_base_util_mass_HPP__
 
 namespace mixr {
 namespace base {

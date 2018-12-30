@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Eadi3DFont_H__
-#define __mixr_instruments_Eadi3DFont_H__
+#ifndef __mixr_instruments_Eadi3DFont_HPP__
+#define __mixr_instruments_Eadi3DFont_HPP__
 
 #include "mixr/graphics/fonts/AbstractFont.hpp"
 

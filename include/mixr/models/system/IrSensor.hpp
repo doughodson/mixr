@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_IrSensor_H__
-#define __mixr_models_IrSensor_H__
+#ifndef __mixr_models_IrSensor_HPP__
+#define __mixr_models_IrSensor_HPP__
 
 #include "mixr/models/system/IrSystem.hpp"
 #include "mixr/base/safe_queue.hpp"

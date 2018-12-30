@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Button_H__
-#define __mixr_instruments_Button_H__
+#ifndef __mixr_instruments_Button_HPP__
+#define __mixr_instruments_Button_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
 

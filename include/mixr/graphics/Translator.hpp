@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Translator_H__
-#define __mixr_graphics_Translator_H__
+#ifndef __mixr_graphics_Translator_HPP__
+#define __mixr_graphics_Translator_HPP__
 
 #include "Graphic.hpp"
 

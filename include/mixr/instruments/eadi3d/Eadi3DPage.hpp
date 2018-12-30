@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_Eadi3DPage_H__
-#define __mixr_instruments_Eadi3DPage_H__
+#ifndef __mixr_instruments_Eadi3DPage_HPP__
+#define __mixr_instruments_Eadi3DPage_HPP__
 
 #include "mixr/graphics/Page.hpp"
 #include "mixr/instruments/eadi3d/Eadi3DObjects.hpp"

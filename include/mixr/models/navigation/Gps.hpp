@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Gps_H__
-#define __mixr_models_Gps_H__
+#ifndef __mixr_models_Gps_HPP__
+#define __mixr_models_Gps_HPP__
 
 #include "mixr/models/navigation/Navigation.hpp"
 

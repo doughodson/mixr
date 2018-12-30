@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Semicircles_H__
-#define __mixr_base_Semicircles_H__
+#ifndef __mixr_base_Semicircles_HPP__
+#define __mixr_base_Semicircles_HPP__
 
 #include "mixr/base/units/angle/Angle.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_CadrgTocEntry_H__
-#define __mixr_map_rpf_CadrgTocEntry_H__
+#ifndef __mixr_map_rpf_CadrgTocEntry_HPP__
+#define __mixr_map_rpf_CadrgTocEntry_HPP__
 
 #include "mixr/map/rpf/CadrgFrameEntry.hpp"
 #include "mixr/base/Object.hpp"

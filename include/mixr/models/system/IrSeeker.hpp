@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_IrSeeker_H__
-#define __mixr_models_IrSeeker_H__
+#ifndef __mixr_models_IrSeeker_HPP__
+#define __mixr_models_IrSeeker_HPP__
 
 #include "mixr/models/system/ScanGimbal.hpp"
 

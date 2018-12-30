@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Route_H__
-#define __mixr_models_Route_H__
+#ifndef __mixr_models_Route_HPP__
+#define __mixr_models_Route_HPP__
 
 #include "mixr/base/Component.hpp"
 

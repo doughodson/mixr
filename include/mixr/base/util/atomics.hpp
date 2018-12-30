@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_atomics_H__
-#define __mixr_base_util_atomics_H__
+#ifndef __mixr_base_util_atomics_HPP__
+#define __mixr_base_util_atomics_HPP__
 
 #if defined(WIN32)
   #if defined(__MINGW32__)

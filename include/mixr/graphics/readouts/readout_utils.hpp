@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_readout_utils_H__
-#define __mixr_graphics_readout_utils_H__
+#ifndef __mixr_graphics_readout_utils_HPP__
+#define __mixr_graphics_readout_utils_HPP__
 
 #include <string>
 

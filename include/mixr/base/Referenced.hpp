@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Referenced_H__
-#define __mixr_base_Referenced_H__
+#ifndef __mixr_base_Referenced_HPP__
+#define __mixr_base_Referenced_HPP__
 
 // framework configuration file
 #include "mixr/config.hpp"

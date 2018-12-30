@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linkage_factory_H__
-#define __mixr_linkage_factory_H__
+#ifndef __mixr_linkage_factory_HPP__
+#define __mixr_linkage_factory_HPP__
 
 #include <string>
 

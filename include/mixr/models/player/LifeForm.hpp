@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_LifeForm_H__
-#define __mixr_models_LifeForm_H__
+#ifndef __mixr_models_LifeForm_HPP__
+#define __mixr_models_LifeForm_HPP__
 
 #include "mixr/models/player/Player.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_SquareMilliMeters_H__
-#define __mixr_base_SquareMilliMeters_H__
+#ifndef __mixr_base_SquareMilliMeters_HPP__
+#define __mixr_base_SquareMilliMeters_HPP__
 
 #include "mixr/base/units/area/Area.hpp"
 

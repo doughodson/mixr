@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_Nib_H__
-#define __mixr_interop_common_Nib_H__
+#ifndef __mixr_interop_common_Nib_HPP__
+#define __mixr_interop_common_Nib_HPP__
 
 #include "mixr/simulation/AbstractNib.hpp"
 

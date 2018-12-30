@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_Image_H__
-#define __mixr_graphics_Image_H__
+#ifndef __mixr_graphics_Image_HPP__
+#define __mixr_graphics_Image_HPP__
 
 #include "mixr/base/Object.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_SolenoidSwitch_H__
-#define __mixr_instruments_SolenoidSwitch_H__
+#ifndef __mixr_instruments_SolenoidSwitch_HPP__
+#define __mixr_instruments_SolenoidSwitch_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
 #include <array>

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Rotation_H__
-#define __mixr_base_Rotation_H__
+#ifndef __mixr_base_Rotation_HPP__
+#define __mixr_base_Rotation_HPP__
 
 #include "mixr/base/transformations/Transform.hpp"
 

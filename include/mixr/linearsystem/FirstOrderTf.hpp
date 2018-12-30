@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_FirstOrderTf_H__
-#define __mixr_linearsystem_FirstOrderTf_H__
+#ifndef __mixr_linearsystem_FirstOrderTf_HPP__
+#define __mixr_linearsystem_FirstOrderTf_HPP__
 
 #include "mixr/linearsystem/DiffEquation.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_GhostHorizon_H__
-#define __mixr_instruments_GhostHorizon_H__
+#ifndef __mixr_instruments_GhostHorizon_HPP__
+#define __mixr_instruments_GhostHorizon_HPP__
 
 #include "mixr/instruments/adi/Adi.hpp"
 

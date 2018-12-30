@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_MetaObject_H__
-#define __mixr_base_MetaObject_H__
+#ifndef __mixr_base_MetaObject_HPP__
+#define __mixr_base_MetaObject_HPP__
 
 #include <string>
 

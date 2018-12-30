@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Tank_H__
-#define __mixr_models_Tank_H__
+#ifndef __mixr_models_Tank_HPP__
+#define __mixr_models_Tank_HPP__
 
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_SymbolLoader_H__
-#define __mixr_graphics_SymbolLoader_H__
+#ifndef __mixr_graphics_SymbolLoader_HPP__
+#define __mixr_graphics_SymbolLoader_HPP__
 
 #include "mixr/graphics/MapPage.hpp"
 

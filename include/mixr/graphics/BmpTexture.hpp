@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_BmpTexture_H__
-#define __mixr_graphics_BmpTexture_H__
+#ifndef __mixr_graphics_BmpTexture_HPP__
+#define __mixr_graphics_BmpTexture_HPP__
 
 #include "mixr/graphics/Texture.hpp"
 #include <GL/gl.h>

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_instruments_AoAIndexer_H__
-#define __mixr_instruments_AoAIndexer_H__
+#ifndef __mixr_instruments_AoAIndexer_HPP__
+#define __mixr_instruments_AoAIndexer_HPP__
 
 #include "mixr/instruments/Instrument.hpp"
 

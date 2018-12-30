@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_SigDihedralCR_H__
-#define __mixr_models_SigDihedralCR_H__
+#ifndef __mixr_models_SigDihedralCR_HPP__
+#define __mixr_models_SigDihedralCR_HPP__
 
 #include "mixr/models/signature/SigPlate.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_FileWriter_H__
-#define __mixr_recorder_FileWriter_H__
+#ifndef __mixr_recorder_FileWriter_HPP__
+#define __mixr_recorder_FileWriter_HPP__
 
 #include "mixr/recorder/OutputHandler.hpp"
 

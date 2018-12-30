@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_util_platform_api_msvc_H__
-#define __mixr_base_util_platform_api_msvc_H__
+#ifndef __mixr_base_util_platform_api_msvc_HPP__
+#define __mixr_base_util_platform_api_msvc_HPP__
 
 //------------------------------------------------------------------------------
 // Visual Studio

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_DiffEquation_H__
-#define __mixr_linearsystem_DiffEquation_H__
+#ifndef __mixr_linearsystem_DiffEquation_HPP__
+#define __mixr_linearsystem_DiffEquation_HPP__
 
 #include "mixr/linearsystem/ScalerFunc.hpp"
 

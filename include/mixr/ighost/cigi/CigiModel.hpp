@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_CigiModel_H__
-#define __mixr_ighost_cigi_CigiModel_H__
+#ifndef __mixr_ighost_cigi_CigiModel_HPP__
+#define __mixr_ighost_cigi_CigiModel_HPP__
 
 #include "mixr/base/Object.hpp"
 

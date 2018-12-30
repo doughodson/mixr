@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_LagFilter_H__
-#define __mixr_linearsystem_LagFilter_H__
+#ifndef __mixr_linearsystem_LagFilter_HPP__
+#define __mixr_linearsystem_LagFilter_HPP__
 
 #include "mixr/linearsystem/FirstOrderTf.hpp"
 

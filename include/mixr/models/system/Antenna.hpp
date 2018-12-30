@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Antenna_H__
-#define __mixr_models_Antenna_H__
+#ifndef __mixr_models_Antenna_HPP__
+#define __mixr_models_Antenna_HPP__
 
 #include "mixr/models/system/ScanGimbal.hpp"
 

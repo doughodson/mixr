@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Volumes_H__
-#define __mixr_base_Volumes_H__
+#ifndef __mixr_base_Volumes_HPP__
+#define __mixr_base_Volumes_HPP__
 
 //------------------------------------------------------------------------------
 // Description: Convenience header to load all available volume related constants,

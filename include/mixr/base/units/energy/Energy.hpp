@@ -1,6 +1,6 @@
 
-#ifndef __mixr_Energy_H__
-#define __mixr_Energy_H__
+#ifndef __mixr_Energy_HPP__
+#define __mixr_Energy_HPP__
 
 #include "mixr/base/units/Quantity.hpp"
 

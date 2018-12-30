@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_GmtiTrkMgr_H__
-#define __mixr_models_GmtiTrkMgr_H__
+#ifndef __mixr_models_GmtiTrkMgr_HPP__
+#define __mixr_models_GmtiTrkMgr_HPP__
 
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 

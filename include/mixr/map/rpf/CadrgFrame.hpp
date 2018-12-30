@@ -1,6 +1,6 @@
 
-#ifndef __mixr_map_rpf_CadrgFrame_H__
-#define __mixr_map_rpf_CadrgFrame_H__
+#ifndef __mixr_map_rpf_CadrgFrame_HPP__
+#define __mixr_map_rpf_CadrgFrame_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/map/rpf/map_utils.hpp"

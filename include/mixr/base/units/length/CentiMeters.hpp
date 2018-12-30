@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_CentiMeters_H__
-#define __mixr_base_CentiMeters_H__
+#ifndef __mixr_base_CentiMeters_HPP__
+#define __mixr_base_CentiMeters_HPP__
 
 #include "mixr/base/units/length/Length.hpp"
 

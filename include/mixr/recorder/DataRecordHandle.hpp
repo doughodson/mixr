@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_DataRecordHandle_H__
-#define __mixr_recorder_DataRecordHandle_H__
+#ifndef __mixr_recorder_DataRecordHandle_HPP__
+#define __mixr_recorder_DataRecordHandle_HPP__
 
 #include "mixr/base/Object.hpp"
 

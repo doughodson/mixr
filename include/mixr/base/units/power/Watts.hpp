@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Watts_H__
-#define __mixr_base_Watts_H__
+#ifndef __mixr_base_Watts_HPP__
+#define __mixr_base_Watts_HPP__
 
 #include "mixr/base/units/power/Power.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_FtglOutlineFont_H__
-#define __mixr_graphics_FtglOutlineFont_H__
+#ifndef __mixr_graphics_FtglOutlineFont_HPP__
+#define __mixr_graphics_FtglOutlineFont_HPP__
 
 #include "AbstractFtglFont.hpp"
 

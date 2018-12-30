@@ -1,6 +1,6 @@
 
-#ifndef __mixr_BTUs_H__
-#define __mixr_BTUs_H__
+#ifndef __mixr_BTUs_HPP__
+#define __mixr_BTUs_HPP__
 
 #include "mixr/base/units/energy/Energy.hpp"
 

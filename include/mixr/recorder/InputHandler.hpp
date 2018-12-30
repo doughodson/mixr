@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_InputHandler_H__
-#define __mixr_recorder_InputHandler_H__
+#ifndef __mixr_recorder_InputHandler_HPP__
+#define __mixr_recorder_InputHandler_HPP__
 
 #include "mixr/simulation/AbstractRecorderComponent.hpp"
 
