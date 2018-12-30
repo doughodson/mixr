@@ -37,9 +37,9 @@ class String final: public Object
     DECLARE_SUBCLASS(String, Object)
 
 public:
+    String();
     String(const char*);
     String(const char* s1, const char* s2);
-    String();
 
     String& operator=(const char*);
     void operator+=(const char*);
@@ -49,11 +49,11 @@ public:
 
     const char* c_str() const;                     // Returns a pointer to a valid C-style string
 
-    char getChar(const unsigned int index) const;  // Gets a specific character
+    char getChar(const std::size_t index) const;   // Gets a specific character
 
     void empty();                                            // Empty this string.
-    void setStr(const char*);                                // Sets us to a copy of 'string'
-    void catStr(const char*);                                // Append a copy of 'string' to our text string
+    void setStr(const char*);                                // Sets us to a copy of "string"
+    void catStr(const char*);                                // Append a copy of "string" to our text string
     void setChar(const unsigned int index, const char c);    // Sets a specific character
 
     // Returns true if this string is the ascii form of a number
@@ -124,7 +124,7 @@ inline bool String::isEmpty() const
 //------------------------------------------------------------------------------
 // getChar() -- returns a character from the string.
 //------------------------------------------------------------------------------
-inline char String::getChar(const unsigned int index) const
+inline char String::getChar(const std::size_t index) const
 {
    if (cstr != nullptr && index <= len()) {
       return cstr[index];
@@ -145,7 +145,7 @@ inline const char* String::c_str() const
 inline bool String::isInteger() const
 {
     if (isEmpty()) return false;
-    for (int i = 0; cstr[i] != '\0'; i++) {
+    for (int i{}; cstr[i] != '\0'; i++) {
         if ( !std::isdigit(cstr[i]) ) return false;
     }
     return true;
@@ -158,7 +158,7 @@ inline bool String::isInteger() const
 inline bool String::isNumber() const
 {
     if (isEmpty()) return false;
-    for (int i = 0; cstr[i] != '\0'; i++) {
+    for (int i{}; cstr[i] != '\0'; i++) {
         if ( !std::isdigit(cstr[i]) && cstr[i] != '.' ) return false;
     }
     return true;
@@ -170,8 +170,11 @@ inline bool String::isNumber() const
 //------------------------------------------------------------------------------
 inline int String::getInteger() const
 {
-    if (isInteger()) return std::atoi(cstr);
-    else return 0;
+    if (isInteger()) {
+        return std::atoi(cstr);
+    } else {
+        return 0;
+    }
 }
 
 
@@ -180,8 +183,11 @@ inline int String::getInteger() const
 //------------------------------------------------------------------------------
 inline double String::getNumber() const
 {
-    if (isNumber()) return  std::atof(cstr);
-    else return 0.0;
+    if (isNumber()) {
+        return std::atof(cstr);
+    } else {
+        return 0.0;
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -225,9 +231,12 @@ inline bool operator!=(const String& s1, const String& s2)
    bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only one must be null to be not equal
-      if (!s1.isEmpty() || !s2.isEmpty()) ok = true;
+      if (!s1.isEmpty() || !s2.isEmpty()) {
+          ok = true;
+      }
+   } else {
+       ok = (std::strcmp(s1.c_str(), s2.c_str()) != 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2.c_str()) != 0);
    return ok;
 }
 
@@ -236,9 +245,12 @@ inline bool operator!=(const char* s1, const String& s2)
    bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only one must be null to be not equal
-      if (s1 != nullptr || !s2.isEmpty()) ok = true;
+      if (s1 != nullptr || !s2.isEmpty()) {
+          ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1, s2.c_str()) != 0);
    }
-   else ok = (std::strcmp(s1, s2.c_str()) != 0);
    return ok;
 }
 
@@ -247,9 +259,12 @@ inline bool operator!=(const String& s1, const char* s2)
    bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only one must be null to be not equal
-      if (!s1.isEmpty() || s2 != nullptr) ok = true;
+      if (!s1.isEmpty() || s2 != nullptr) {
+          ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1.c_str(), s2) != 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2) != 0);
    return ok;
 }
 
@@ -258,9 +273,12 @@ inline bool operator<(const String& s1, const String& s2)
    bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only s1 must be null to be less than s2
-      if (s1.isEmpty() && !s2.isEmpty()) ok = true;
+      if (s1.isEmpty() && !s2.isEmpty()) {
+         ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1.c_str(), s2.c_str()) < 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2.c_str()) < 0);
    return ok;
 }
 
@@ -269,9 +287,12 @@ inline bool operator<(const char* s1, const String& s2)
    bool ok {};
    if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only s1 must be null to be less than s2
-      if (s1 == nullptr && !s2.isEmpty()) ok = true;
+      if (s1 == nullptr && !s2.isEmpty()) {
+         ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1, s2.c_str()) < 0);
    }
-   else ok = (std::strcmp(s1, s2.c_str()) < 0);
    return ok;
 }
 
@@ -280,9 +301,12 @@ inline bool operator<(const String& s1, const char* s2)
    bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only s1 must be null to be less than s2
-      if (s1.isEmpty() && s2 != nullptr) ok = true;
+      if (s1.isEmpty() && s2 != nullptr) {
+         ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1.c_str(), s2) < 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2) < 0);
    return ok;
 }
 
@@ -291,9 +315,13 @@ inline bool operator<=(const String& s1, const String& s2)
    bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then s1 must be null to be less than or equal s2.
-      if (s1.isEmpty()) ok = true;
+      if (s1.isEmpty()) {
+         ok = true;
+      }
    }
-   else ok = (std::strcmp(s1.c_str(), s2.c_str()) <= 0);
+   else {
+      ok = (std::strcmp(s1.c_str(), s2.c_str()) <= 0);
+   }
    return ok;
 }
 
@@ -304,7 +332,9 @@ inline bool operator<=(const char* s1, const String& s2)
       // if a string is null, then s1 must be null to be less than or equal s2.
       if (s1 == nullptr) ok = true;
    }
-   else ok = (std::strcmp(s1, s2.c_str()) <= 0);
+   else {
+      ok = (std::strcmp(s1, s2.c_str()) <= 0);
+   }
    return ok;
 }
 
@@ -313,9 +343,12 @@ inline bool operator<=(const String& s1, const char* s2)
    bool ok {};
    if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then s1 must be null to be less than or equal s2.
-      if (s1.isEmpty()) ok = true;
+      if (s1.isEmpty()) {
+         ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1.c_str(), s2) <= 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2) <= 0);
    return ok;
 }
 
@@ -324,9 +357,12 @@ inline bool operator>(const String& s1, const String& s2)
    bool ok {};
    if (s1.isEmpty() || s2.isEmpty()) {
       // if a string is null, then only s2 must be null to be less than s1
-      if (!s1.isEmpty() && s2.isEmpty()) ok = true;
+      if (!s1.isEmpty() && s2.isEmpty()) {
+         ok = true;
+      }
+   } else {
+      ok = (std::strcmp(s1.c_str(), s2.c_str()) > 0);
    }
-   else ok = (std::strcmp(s1.c_str(), s2.c_str()) > 0);
    return ok;
 }
 

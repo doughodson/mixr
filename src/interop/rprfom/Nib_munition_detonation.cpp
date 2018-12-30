@@ -8,6 +8,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
+#include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 
 namespace mixr {
@@ -26,7 +27,9 @@ bool Nib::munitionDetonationMsgFactory(const double)
    std::cout << "rprfom::Nib::sendMunitionDetonation() HERE!!" << std::endl;
 
    // Early out -- we must be registered
-   if (!isRegistered()) return false;
+   if (!isRegistered()) {
+      return false;
+   }
 
    NetIO* netIO {static_cast<NetIO*>(getNetIO())};
 
@@ -50,7 +53,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
       reinterpret_cast<char*>(&eventIdentifier.issuingObjectIdentifier.id[0]),
       sizeof(eventIdentifier.issuingObjectIdentifier.id),
       getObjectName(),
-      RTIObjectIdStruct::ID_SIZE );    
+      RTIObjectIdStruct::ID_SIZE );
    pParams->add(
       netIO->getInteractionParameterHandle(NetIO::EVENT_IDENTIFIER_MD_PI),
       reinterpret_cast<char*>(&eventIdentifier),
@@ -70,18 +73,18 @@ bool Nib::munitionDetonationMsgFactory(const double)
       base::NetHandler::toNetOrder(&detonationLocation.y, geocPos[base::nav::IY]);
       base::NetHandler::toNetOrder(&detonationLocation.z, geocPos[base::nav::IZ]);
       pParams->add(
-         netIO->getInteractionParameterHandle(NetIO::DETONATION_LOCATION_MD_PI), 
-         reinterpret_cast<char*>(&detonationLocation), 
+         netIO->getInteractionParameterHandle(NetIO::DETONATION_LOCATION_MD_PI),
+         reinterpret_cast<char*>(&detonationLocation),
          sizeof(WorldLocationStruct) );
 
       // Velocity
-      VelocityVectorStruct finalVelocityVector; 
+      VelocityVectorStruct finalVelocityVector;
       base::NetHandler::toNetOrder(&finalVelocityVector.xVelocity, static_cast<float>(geocVel[base::nav::IX]));
       base::NetHandler::toNetOrder(&finalVelocityVector.yVelocity, static_cast<float>(geocVel[base::nav::IY]));
       base::NetHandler::toNetOrder(&finalVelocityVector.zVelocity, static_cast<float>(geocVel[base::nav::IZ]));
       pParams->add(
-         netIO->getInteractionParameterHandle(NetIO::FINAL_VELOCITY_VECTOR_MD_PI), 
-         reinterpret_cast<char*>(&finalVelocityVector), 
+         netIO->getInteractionParameterHandle(NetIO::FINAL_VELOCITY_VECTOR_MD_PI),
+         reinterpret_cast<char*>(&finalVelocityVector),
          sizeof(VelocityVectorStruct) );
    }
 
@@ -94,7 +97,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
          reinterpret_cast<char*>(&munitionObjectIdentifier.id[0]),
          sizeof(munitionObjectIdentifier.id),
          getObjectName(),
-         RTIObjectIdStruct::ID_SIZE );    
+         RTIObjectIdStruct::ID_SIZE );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::MUNITION_OBJECT_IDENTIFIER_MD_PI),
          reinterpret_cast<char*>(&munitionObjectIdentifier),
@@ -125,7 +128,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             reinterpret_cast<char*>(&firingObjectIdentifier.id[0]),
             sizeof(firingObjectIdentifier.id),
             fNib->getObjectName(),
-            RTIObjectIdStruct::ID_SIZE );    
+            RTIObjectIdStruct::ID_SIZE );
          pParams->add(
             netIO->getInteractionParameterHandle(NetIO::FIRING_OBJECT_IDENTIFIER_MD_PI),
             reinterpret_cast<char*>(&firingObjectIdentifier),
@@ -155,7 +158,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             reinterpret_cast<char*>(&targetObjectIdentifier.id[0]),
             sizeof(targetObjectIdentifier.id),
             tNib->getObjectName(),
-            RTIObjectIdStruct::ID_SIZE );    
+            RTIObjectIdStruct::ID_SIZE );
          pParams->add(
             netIO->getInteractionParameterHandle(NetIO::TARGET_OBJECT_IDENTIFIER_MD_PI),
             reinterpret_cast<char*>(&targetObjectIdentifier),
