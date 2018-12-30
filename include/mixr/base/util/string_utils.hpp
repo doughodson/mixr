@@ -17,7 +17,9 @@ namespace base {
 
 enum class Justify { None, Left, Right, Center };
 // return a standard string aligned within a given width and justification
-std::string utAlign(const std::string& s, const Justify j = Justify::None);
+// Set to the first 'w' characters of 'str'.
+// If the length of 'str' is less than 'w', than justify as 'j'.
+std::string align(const std::string&, const std::size_t, const Justify j = Justify::None);
 
 // returns true if our string is the ascii form of a number
 bool isNumber(const std::string&);
