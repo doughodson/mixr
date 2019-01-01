@@ -124,7 +124,7 @@ public:
    // sets the column number and returns true.
    virtual bool onSetColumn(const base::Integer* const);
 
-   const base::String& getInputExample() const           { return inputExample.c_str(); }
+   const std::string getInputExample() const             { return inputExample; }
    int getCharacterPos() const                           { return icp; }
 
    // returns true if text cursor should be seen within this

@@ -118,7 +118,7 @@ void Page::updateData(const double dt)
    // Prime the pump -- when we don't have a current subpage (cp) and we do
    // have a subpage name (cPageName) then make it our current subpage
    // ---
-   if (cPage == nullptr && !cPageName.isEmpty()) {
+   if (cPage == nullptr && (cPageName.length() != 0)) {
       base::Pair* p{};
       if (subpages != nullptr) {
          p = subpages->findByName(cPageName.c_str());
@@ -216,11 +216,13 @@ bool Page::newSubpage(Page* const np1, Page* theCaller, base::Object* theArg)
 //------------------------------------------------------------------------------
 // newSubpage() -- change subpages by name; returns true of page was found
 //------------------------------------------------------------------------------
-bool Page::newSubpage(const char* const name, Page* theCaller, base::Object* theArg)
+bool Page::newSubpage(const std::string& name, Page* theCaller, base::Object* theArg)
 {
    bool ok{};
    base::Pair* p{};
-   if (subpages != nullptr) p = subpages->findByName(name);
+   if (subpages != nullptr) {
+      p = subpages->findByName(name.c_str());
+   }
    if (p != nullptr) {
       cPageName = name;            // it's our page
       nPage = static_cast<Page*>(p->object());
@@ -244,13 +246,13 @@ bool Page::clearSubpageStack()
 //------------------------------------------------------------------------------
 // pushSubpage() -- push the current subpage and change to new subpage 'name'.
 //------------------------------------------------------------------------------
-bool Page::pushSubpage(const char* const name, Page* theCaller, base::Object* theArg)
+bool Page::pushSubpage(const std::string& name, Page* theCaller, base::Object* theArg)
 {
    bool ok{};
    if (subpageSP > 0) {
       Page* currPage{cPage};
       base::Pair* p{};
-      if (subpages != nullptr) p = subpages->findByName(name);
+      if (subpages != nullptr) p = subpages->findByName(name.c_str());
       if (p != nullptr) {
          cPageName = name;                   // it's our page
          nPage = static_cast<Page*>(p->object());
@@ -295,20 +297,22 @@ bool Page::newPage(Page* const newPage, Page* theCaller, base::Object* theArg)
 }
 
 // new page by name
-bool Page::newPage(const char* const name, Page* theCaller, base::Object* theArg)
+bool Page::newPage(const std::string& name, Page* theCaller, base::Object* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());
-   if (cc != nullptr) ok = cc->newSubpage(name,theCaller,theArg);
+   if (cc != nullptr) {
+      ok = cc->newSubpage(name, theCaller, theArg);
+   }
    return ok;
 }
 
 // push new page
-bool Page::pushPage(const char* const name, Page* theCaller, base::Object* theArg)
+bool Page::pushPage(const std::string& name, Page* theCaller, base::Object* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());
-   if (cc != nullptr) ok = cc->pushSubpage(name,theCaller,theArg);
+   if (cc != nullptr) ok = cc->pushSubpage(name, theCaller, theArg);
    return ok;
 }
 
@@ -473,11 +477,13 @@ bool Page::processSubpages()
 }
 
 //------------------------------------------------------------------------------
-// setSlotPage() -- sets the initial page
+// sets the initial page
 //------------------------------------------------------------------------------
 bool Page::setSlotPage(const base::Identifier* const x)
 {
-   if (x != nullptr) cPageName = *x;
+   if (x != nullptr) {
+      cPageName = x->asString();
+   }
    return true;
 }
 

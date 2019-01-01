@@ -15,10 +15,10 @@ Identifier::Identifier()
    STANDARD_CONSTRUCTOR()
 }
 
-Identifier::Identifier(const char* _string)
+Identifier::Identifier(const std::string& x)
 {
    STANDARD_CONSTRUCTOR()
-   setStr(_string);
+   setStr(x);
 }
 
 void Identifier::copyData(const Identifier& org, const bool cc)

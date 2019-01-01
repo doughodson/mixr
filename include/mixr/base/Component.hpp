@@ -5,6 +5,8 @@
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace base {
 class Boolean;
@@ -155,14 +157,14 @@ public:
    //                   of our children components then our grandchildren
    //                   components, etc. and if found, do a look for the
    //                   name '.yyy' as one of 'xxx's components.
-   virtual Pair* findByName(const char* const slotname);
-   virtual const Pair* findByName(const char* const slotname) const;
+   virtual Pair* findByName(const std::string&);
+   virtual const Pair* findByName(const std::string&) const;
 
    // finds a child component by list 'index' number; returns a pointer
    // to the child component Pair.
    // -- Component index number is one based
-   virtual Pair* findByIndex(const int slotindex);
-   virtual const Pair* findByIndex(const int slotindex) const;
+   virtual Pair* findByIndex(const int);
+   virtual const Pair* findByIndex(const int) const;
 
    // going down the component tree, finds one of our components by type;
    // returns a pointer to the component Pair.

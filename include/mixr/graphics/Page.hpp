@@ -6,6 +6,7 @@
 #include "mixr/base/Identifier.hpp"
 
 #include <array>
+#include <string>
 
 namespace mixr {
 namespace base { class Boolean; class Pair; class PairStream; class String; }
@@ -52,13 +53,13 @@ public:
 
    // returns true if the focus is slaved to a subpage
    bool isFocusSlavedToSubpage() const          { return focusSlavedToSubpage; }
-   void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
+   void setFocusSlavedToSubpage(const bool x)   { focusSlavedToSubpage = x; }
 
    // call new sub-page
    // changes subpages by page, returns true if page was found
    bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
    // changes subpages by name, returns true if the page was found
-   bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool newSubpage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
 
    // event handlers
    virtual bool onEntry();
@@ -86,20 +87,20 @@ protected:
 
    // manage our (sub)page stack
    bool clearSubpageStack();
-   bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool pushSubpage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
    bool popSubpage(Page* theCaller, base::Object* theArg = nullptr);
 
    // call/push/pop major pages (our container's pages, which we are a member of)
    bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
-   bool newPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
-   bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool newPage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
+   bool pushPage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
    bool popPage(Page* theCaller, base::Object* theArg = nullptr);
 
 private:
    bool processSubpages();
 
    Page* cPage{};                       // current subpage
-   base::Identifier cPageName;          // current subpage name
+   std::string cPageName;               // current subpage name
    Page* nPage{};                       // new subpage (requesting a page change)
 
    base::PairStream* subpages {};       // subpages
@@ -113,9 +114,9 @@ private:
    const Page* caller{};                     // calling page
 
    // subpage stack
-   static const int SUBPAGE_STACK_SIZE {50};
+   static const std::size_t SUBPAGE_STACK_SIZE {50};
    std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
-   int subpageSP {SUBPAGE_STACK_SIZE};       // stack pointer
+   std::size_t subpageSP {SUBPAGE_STACK_SIZE};           // stack pointer
 
 private:
    // slot table helper methods

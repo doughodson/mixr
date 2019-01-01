@@ -392,13 +392,13 @@ const Component* Component::findContainerByType(const std::type_info& type) cons
 //      .yyy    -- hard name, look for 'yyy' only as one of our
 //                 components.
 //------------------------------------------------------------------------------
-const Pair* Component::findByName(const char* const slotname) const
+const Pair* Component::findByName(const std::string& slotname) const
 {
     const Pair* q{};
     const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
 
-        const char* name{slotname};
+        const char* name{slotname.c_str()};
         if (slotname[0] == '.') name++;      // remove '.' from hard names
 
         // Copy the name up to a possible period.
@@ -448,7 +448,7 @@ const Pair* Component::findByName(const char* const slotname) const
     return q;
 }
 
-Pair* Component::findByName(const char* const slotname)
+Pair* Component::findByName(const std::string& slotname)
 {
    const Component* cThis{this};
    const Pair* p{cThis->findByName(slotname)};
@@ -1201,4 +1201,3 @@ Object* Component::SendData::getValue(const bool value)
 
 }
 }
-
