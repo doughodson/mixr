@@ -8,13 +8,13 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Pair; class PairStream;}
+namespace base { class Boolean; class Pair; class PairStream; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Page
-// Description: Page format. A list of graphic objects and methods to manage
-//              them as a page, also contains subpages and a background page.
+// Description: Page manages a list of graphic objects and methods to manage
+//              them - this includes subpages and a background page
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -40,15 +40,15 @@ class Page : public Graphic
 public:
    Page()                                       { STANDARD_CONSTRUCTOR() }
 
-   const char* subpageName() const              { return cpName.c_str(); }
-   Page* subpage() const                        { return cp; }
+   const char* subpageName() const              { return cPageName.c_str(); }
+   Page* subpage() const                        { return cPage; }
 
    bool isPostDrawSubpage() const               { return postDraw1; }
 
-   // returns a member from the slot name given, else nullptr
-   virtual base::Pair* findSubpageByName(const char* const slotname);
+   // returns a member from the name given, else nullptr
+   virtual base::Pair* findSubpageByName(const char* const);
    // returns a member of the given type, else nullptr
-   virtual base::Pair* findSubpageByType(const std::type_info& type);
+   virtual base::Pair* findSubpageByType(const std::type_info&);
 
    // returns true if the focus is slaved to a subpage
    bool isFocusSlavedToSubpage() const          { return focusSlavedToSubpage; }
@@ -64,7 +64,7 @@ public:
    virtual bool onEntry();
    virtual bool onExit();
    // handles the button hit as a page change event
-   virtual bool onButtonHit(const base::String* const obhobj);
+   virtual bool onButtonHit(const base::String* const);
    // handles the keyboard hit as a page change event
    virtual bool onKeyHit(const int key);
 
@@ -77,19 +77,19 @@ public:
    void reset() override;
 
 protected:
-   // Return our paging arguments
+   // returns our paging arguments
    base::Object* getArgument()               { return pageArg; }
    const Page* getCaller()                   { return caller; }
 
-   // Return our subpages
+   // returns our subpages
    base::PairStream* subPages()              { return subpages; }
 
-   // Manage our (sub)page stack
+   // manage our (sub)page stack
    bool clearSubpageStack();
    bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
    bool popSubpage(Page* theCaller, base::Object* theArg = nullptr);
 
-   // Call/push/pop major pages (our container's pages, which we are a member of)
+   // call/push/pop major pages (our container's pages, which we are a member of)
    bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
    bool newPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
    bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
@@ -98,9 +98,9 @@ protected:
 private:
    bool processSubpages();
 
-   Page* cp {};                         // current subpage
-   base::Identifier cpName;             // current subpage name
-   Page* np {};                         // new subpage (requesting a page change)
+   Page* cPage{};                       // current subpage
+   base::Identifier cPageName;          // current subpage name
+   Page* nPage{};                       // new subpage (requesting a page change)
 
    base::PairStream* subpages {};       // subpages
    base::PairStream* pageChgEvents {};  // page change events
@@ -108,11 +108,11 @@ private:
    bool postDraw1 {};                   // post draw component (child) graphic
    bool focusSlavedToSubpage {true};    // input event focus should follow subpage changes
 
-   // Passed by calling page
+   // passed by calling page
    base::safe_ptr<base::Object> pageArg;     // paging argument
-   const Page* caller {};                    // calling page
+   const Page* caller{};                     // calling page
 
-   // Subpage Stack
+   // subpage stack
    static const int SUBPAGE_STACK_SIZE {50};
    std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
    int subpageSP {SUBPAGE_STACK_SIZE};       // stack pointer
