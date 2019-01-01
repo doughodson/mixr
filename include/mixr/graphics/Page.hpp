@@ -13,86 +13,59 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Page
-//
 // Description: Page format. A list of graphic objects and methods to manage
 //              them as a page, also contains subpages and a background page.
-// Factory name: Page
+//------------------------------------------------------------------------------
+// EDL Interface:
 //
+// Factory name: Page
 // Slots:
-//  page                 <Identifier>   ! Initial subpage (default: 0)
-//  pages                <PairStream>   ! Subpages (default: 0)
+//  page                 <Identifier>   ! initial subpage (default: 0)
+//  pages                <PairStream>   ! subpages (default: 0)
 //  pages                <Page>
 //  pagingEvent          <PairStream>
-//  subpagesFirst        <Boolean>      ! Draw subpages first (default: draw our page graphics first)
-//  focusSlavedToSubpage <Boolean>      ! Slave the focus to the subpage (default: true)
-//
-// Events
-//  1. ON_ENTRY
-//  2. ON_EXIT
-//  3. BUTTON_HIT
-//  4. ON_ANYKEY
-//
-// Public member functions:
-//  char* subpageName()
-//    Returns cpName.
-//
-//  Page* subpage()
-//    Returns cp.
-//
-//  bool isPostDrawSubpage()
-//    Returns postDraw1
-//
-//  Pair* findSubpageByName(char* slotname)
-//    Returns a member from the slot name given, else 0.
-//
-//  Pair* findSubpageByType(std::type_info& type)
-//    Returns a member of the given type, else 0.
-//
-//  bool isFocusSlavedToSubpage()
-//    Returns true if the focus is slaved to a subpage.
-//
-//  void setFocusSlavedToSubpage(bool f)
-//    Sets focusSlavedToSubpage to f.
-//
-//  bool onButtonHit(String* obhobj)
-//    Handles the button hit as a page change event.
-//
-//  bool onKeyHit(int key)
-//    Handles the keyboard hit as a page change event.
-//
-// Call new sub-page
-//  bool newSubpage(Page* newPage, Page* theCaller, Object* theArg)
-//    Changes subpages by page. Returns true if page was found.
-//
-//  bool newSubpage(char* name, Page* theCaller, Object* theArg)
-//    Changes subpages by name. Returns true if the page was found.
+//  subpagesFirst        <Boolean>      ! draw subpages first (default: draw our page graphics first)
+//  focusSlavedToSubpage <Boolean>      ! slave the focus to the subpage (default: true)
+//------------------------------------------------------------------------------
+// Events:
+//  ON_ENTRY      <>        ! sets focus to our subpage, if we have one
+//  ON_EXIT       <>        !
+//  BUTTON_HIT    <String>  ! handle button hits (with button name) as page change requests
+//  ON_ANYKEY     <int>     ! handle keyboard inputs as page change requests
 //------------------------------------------------------------------------------
 class Page : public Graphic
 {
    DECLARE_SUBCLASS(Page, Graphic)
 
 public:
-   Page();
+   Page()                                       { STANDARD_CONSTRUCTOR() }
 
    const char* subpageName() const              { return cpName.c_str(); }
    Page* subpage() const                        { return cp; }
 
    bool isPostDrawSubpage() const               { return postDraw1; }
 
+   // returns a member from the slot name given, else nullptr
    virtual base::Pair* findSubpageByName(const char* const slotname);
+   // returns a member of the given type, else nullptr
    virtual base::Pair* findSubpageByType(const std::type_info& type);
 
+   // returns true if the focus is slaved to a subpage
    bool isFocusSlavedToSubpage() const          { return focusSlavedToSubpage; }
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
    // call new sub-page
+   // changes subpages by page, returns true if page was found
    bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   // changes subpages by name, returns true if the page was found
    bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
 
-   // event handler functions
+   // event handlers
    virtual bool onEntry();
    virtual bool onExit();
+   // handles the button hit as a page change event
    virtual bool onButtonHit(const base::String* const obhobj);
+   // handles the keyboard hit as a page change event
    virtual bool onKeyHit(const int key);
 
    void draw() override;
@@ -125,24 +98,24 @@ protected:
 private:
    bool processSubpages();
 
-   Page* cp {};                         // Current Subpage
-   base::Identifier cpName;             // Current Subpage Name
-   Page* np {};                         // New subpage (requesting a page change)
+   Page* cp {};                         // current subpage
+   base::Identifier cpName;             // current subpage name
+   Page* np {};                         // new subpage (requesting a page change)
 
-   base::PairStream* subpages {};       // Subpages
-   base::PairStream* pageChgEvents {};  // Page change events
+   base::PairStream* subpages {};       // subpages
+   base::PairStream* pageChgEvents {};  // page change events
 
-   bool postDraw1 {};                   // Post draw component (child) graphic
-   bool focusSlavedToSubpage {true};    // Input event focus should follow subpage changes
+   bool postDraw1 {};                   // post draw component (child) graphic
+   bool focusSlavedToSubpage {true};    // input event focus should follow subpage changes
 
    // Passed by calling page
-   base::safe_ptr<base::Object> pageArg;     // Paging argument
-   const Page* caller {};                    // Calling page
+   base::safe_ptr<base::Object> pageArg;     // paging argument
+   const Page* caller {};                    // calling page
 
    // Subpage Stack
    static const int SUBPAGE_STACK_SIZE {50};
    std::array<Page*, SUBPAGE_STACK_SIZE> subpageStack {};
-   int subpageSP {SUBPAGE_STACK_SIZE};       // Stack pointer
+   int subpageSP {SUBPAGE_STACK_SIZE};       // stack pointer
 
 private:
    // slot table helper methods

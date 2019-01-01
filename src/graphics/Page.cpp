@@ -14,11 +14,11 @@ namespace graphics {
 IMPLEMENT_SUBCLASS(Page, "Page")
 
 BEGIN_SLOTTABLE(Page)
-    "page",                 // 1: Initial subpage
-    "pages",                // 2: Subpages
-    "pagingEvent",          // 3: Page change event
-    "subpagesFirst",        // 4: Draw subpages first (default: draw our page graphics first)
-    "focusSlavedToSubpage", // 5: Slave the focus to the subpage (default: true)
+    "page",                 // 1: initial subpage
+    "pages",                // 2: subpages
+    "pagingEvent",          // 3: page change event
+    "subpagesFirst",        // 4: draw subpages first (default: draw our page graphics first)
+    "focusSlavedToSubpage", // 5: slave the focus to the subpage (default: true)
 END_SLOTTABLE(Page)
 
 BEGIN_SLOT_MAP(Page)
@@ -31,67 +31,70 @@ BEGIN_SLOT_MAP(Page)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Page)
-    ON_EVENT(ON_ENTRY,onEntry)
-    ON_EVENT(ON_EXIT,onExit)
+    ON_EVENT(ON_ENTRY, onEntry)
+    ON_EVENT(ON_EXIT,  onExit)
     ON_EVENT_OBJ(BUTTON_HIT, onButtonHit,   base::String)
     ON_ANYKEY(onKeyHit)
 END_EVENT_HANDLER()
 
-Page::Page()
-{
-   STANDARD_CONSTRUCTOR()
-}
-
 void Page::copyData(const Page& org, const bool cc)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
 
-    // Copy subpages
-    if (!cc && subpages != nullptr) { subpages->unref(); }
-    if (org.subpages != nullptr) {
-        subpages = org.subpages->clone();
-        processSubpages();
-    }
-    else subpages = nullptr;
+   // copy subpages
+   if (!cc && subpages != nullptr) { subpages->unref(); }
+   if (org.subpages != nullptr) {
+      subpages = org.subpages->clone();
+      processSubpages();
+   } else {
+      subpages = nullptr;
+   }
 
-    // Copy events
-    if (!cc && pageChgEvents != nullptr) { pageChgEvents->unref(); }
-    if (org.pageChgEvents != nullptr) {
-        pageChgEvents = org.pageChgEvents->clone();
-    }
-    else pageChgEvents = nullptr;
+   // copy events
+   if (!cc && pageChgEvents != nullptr) {
+      pageChgEvents->unref();
+   }
+   if (org.pageChgEvents != nullptr) {
+      pageChgEvents = org.pageChgEvents->clone();
+   } else {
+      pageChgEvents = nullptr;
+   }
 
-    // select the same pages
-    cpName = org.cpName;
-    cp = nullptr;
-    np = nullptr;
+   // select the same pages
+   cpName = org.cpName;
+   cp = nullptr;
+   np = nullptr;
 
-    // Clear the subpage stack
-    clearSubpageStack();
+   // clear the subpage stack
+   clearSubpageStack();
 
-    // Post draw flag
-    postDraw1 = org.postDraw1;
+   // post draw flag
+   postDraw1 = org.postDraw1;
 
    focusSlavedToSubpage = org.focusSlavedToSubpage;
 
-    // At this time we are not copying the paging arguments.
-    pageArg = nullptr;
-    caller = nullptr;
+   // at this time we are not copying the paging arguments.
+   pageArg = nullptr;
+   caller = nullptr;
 }
 
 void Page::deleteData()
 {
-    // De-select the current pages
-    cp = nullptr;
-    cpName.empty();
+   // De-select the current pages
+   cp = nullptr;
+   cpName.empty();
 
-    // Delete list of subpages
-    if (subpages != nullptr) subpages->unref();
-    subpages = nullptr;
+   // delete list of subpages
+   if (subpages != nullptr) {
+      subpages->unref();
+   }
+   subpages = nullptr;
 
-    // Delete list of events
-    if (pageChgEvents != nullptr) pageChgEvents->unref();
-    pageChgEvents = nullptr;
+   // delete list of events
+   if (pageChgEvents != nullptr) {
+      pageChgEvents->unref();
+   }
+   pageChgEvents = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -99,8 +102,10 @@ void Page::deleteData()
 //------------------------------------------------------------------------------
 void Page::updateTC(const double dt)
 {
-   // Update our subpage and base class
-   if (cp != nullptr) cp->tcFrame(dt);
+   // update our subpage and base class
+   if (cp != nullptr) {
+      cp->tcFrame(dt);
+   }
    BaseClass::updateTC(dt);
 }
 
@@ -154,17 +159,17 @@ void Page::updateData(const double dt)
 //------------------------------------------------------------------------------
 void Page::reset()
 {
-    BaseClass::reset();
-    if (subpages != nullptr) {
-        // Reset all of our sub-pages
-        base::List::Item* item{subpages->getFirstItem()};
-        while (item != nullptr) {
-            const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto obj = static_cast<Component*>(pair->object());
-            if (obj != nullptr) obj->reset();
-            item = item->getNext();
-        }
-    }
+   BaseClass::reset();
+   if (subpages != nullptr) {
+      // reset all of our sub-pages
+      base::List::Item* item{subpages->getFirstItem()};
+      while (item != nullptr) {
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto obj = static_cast<Component*>(pair->object());
+         if (obj != nullptr) obj->reset();
+         item = item->getNext();
+      }
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -173,14 +178,14 @@ void Page::reset()
 //------------------------------------------------------------------------------
 base::Pair* Page::findBySelectName(const GLuint name)
 {
-    // Use our base class's functions to check normal components
-    base::Pair* q{Graphic::findBySelectName(name)};
+   // use our base class's functions to check normal components
+   base::Pair* q{Graphic::findBySelectName(name)};
 
-    // If still not found, check our subpage ...
-    if (q == nullptr && cp != nullptr) {
-        q = cp->findBySelectName(name);
-    }
-    return q;
+   // If still not found, check our subpage ...
+   if (q == nullptr && cp != nullptr) {
+      q = cp->findBySelectName(name);
+   }
+   return q;
 }
 
 //------------------------------------------------------------------------------
@@ -188,16 +193,16 @@ base::Pair* Page::findBySelectName(const GLuint name)
 //------------------------------------------------------------------------------
 bool Page::newSubpage(Page* const np1, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    if (np1 != nullptr) {
-        cpName.empty();       // Unknown name
-        np = np1;
-        np->pageArg = theArg;
-        np->caller  = theCaller;
-        clearSubpageStack();
-        ok = true;
-    }
-    return ok;
+   bool ok{};
+   if (np1 != nullptr) {
+      cpName.empty();       // Unknown name
+      np = np1;
+      np->pageArg = theArg;
+      np->caller  = theCaller;
+      clearSubpageStack();
+      ok = true;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -205,18 +210,18 @@ bool Page::newSubpage(Page* const np1, Page* theCaller, base::Object* theArg)
 //------------------------------------------------------------------------------
 bool Page::newSubpage(const char* const name, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    base::Pair* p{};
-    if (subpages != nullptr) p = subpages->findByName(name);
-    if (p != nullptr) {
-        cpName = name;            // It's our page
-        np = static_cast<Page*>(p->object());
-        np->pageArg = theArg;
-        np->caller  = theCaller;
-        clearSubpageStack();
-        ok = true;
-    }
-    return ok;
+   bool ok{};
+   base::Pair* p{};
+   if (subpages != nullptr) p = subpages->findByName(name);
+   if (p != nullptr) {
+      cpName = name;            // It's our page
+      np = static_cast<Page*>(p->object());
+      np->pageArg = theArg;
+      np->caller  = theCaller;
+      clearSubpageStack();
+      ok = true;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -233,22 +238,22 @@ bool Page::clearSubpageStack()
 //------------------------------------------------------------------------------
 bool Page::pushSubpage(const char* const name, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    if (subpageSP > 0) {
-        Page* currPage{cp};
-        base::Pair* p = nullptr;
-        if (subpages != nullptr) p = subpages->findByName(name);
-        if (p != nullptr) {
-           cpName = name;            // It's our page
-           np = static_cast<Page*>(p->object());
-           np->pageArg = theArg;
-           np->caller  = theCaller;
-           ok = true;
-        }
-        //ok = newSubpage(name,theCaller,theArg);
-        if (ok) subpageStack[--subpageSP] = currPage;
-    }
-    return ok;
+   bool ok{};
+   if (subpageSP > 0) {
+      Page* currPage{cp};
+      base::Pair* p{};
+      if (subpages != nullptr) p = subpages->findByName(name);
+      if (p != nullptr) {
+         cpName = name;            // It's our page
+         np = static_cast<Page*>(p->object());
+         np->pageArg = theArg;
+         np->caller  = theCaller;
+         ok = true;
+      }
+      // ok = newSubpage(name,theCaller,theArg);
+      if (ok) subpageStack[--subpageSP] = currPage;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -275,37 +280,37 @@ bool Page::popSubpage(Page* theCaller, base::Object* theArg)
 // New page by pointer
 bool Page::newPage(Page* const newPage, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    const auto cc = dynamic_cast<Page*>(container());
-    if (cc != nullptr) ok = cc->newSubpage(newPage,theCaller,theArg);
-    return ok;
+   bool ok{};
+   const auto cc = dynamic_cast<Page*>(container());
+   if (cc != nullptr) ok = cc->newSubpage(newPage,theCaller,theArg);
+   return ok;
 }
 
 // New page by name
 bool Page::newPage(const char* const name, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    const auto cc = dynamic_cast<Page*>(container());
-    if (cc != nullptr) ok = cc->newSubpage(name,theCaller,theArg);
-    return ok;
+   bool ok{};
+   const auto cc = dynamic_cast<Page*>(container());
+   if (cc != nullptr) ok = cc->newSubpage(name,theCaller,theArg);
+   return ok;
 }
 
 // Push new page
 bool Page::pushPage(const char* const name, Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    const auto cc = dynamic_cast<Page*>(container());
-    if (cc != nullptr) ok = cc->pushSubpage(name,theCaller,theArg);
-    return ok;
+   bool ok{};
+   const auto cc = dynamic_cast<Page*>(container());
+   if (cc != nullptr) ok = cc->pushSubpage(name,theCaller,theArg);
+   return ok;
 }
 
 // Pop back to previous page
 bool Page::popPage(Page* theCaller, base::Object* theArg)
 {
-    bool ok{};
-    const auto cc = dynamic_cast<Page*>(container());
-    if (cc != nullptr) ok = cc->popSubpage(theCaller,theArg);
-    return ok;
+   bool ok{};
+   const auto cc = dynamic_cast<Page*>(container());
+   if (cc != nullptr) ok = cc->popSubpage(theCaller,theArg);
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -313,17 +318,20 @@ bool Page::popPage(Page* theCaller, base::Object* theArg)
 //------------------------------------------------------------------------------
 base::Pair* Page::findSubpageByName(const char* const slotname)
 {
-    base::Pair* p{};
-    if (subpages != nullptr) p = subpages->findByName(slotname);
-    return p;
+   base::Pair* p{};
+   if (subpages != nullptr) {
+      p = subpages->findByName(slotname);
+   }
+   return p;
 }
-
 
 base::Pair* Page::findSubpageByType(const std::type_info& type)
 {
-    base::Pair* p{};
-    if (subpages != nullptr) p = subpages->findByType(type);
-    return p;
+   base::Pair* p{};
+   if (subpages != nullptr) {
+      p = subpages->findByType(type);
+   }
+   return p;
 }
 
 
@@ -332,20 +340,20 @@ base::Pair* Page::findSubpageByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 bool Page::onButtonHit(const base::String* const obhobj)
 {
-    bool used{};
-    if (obhobj != nullptr && pageChgEvents != nullptr) {
-        used = true;
-        base::Pair* pageEvent{pageChgEvents->findByName((*obhobj).c_str())};
-        if (pageEvent != nullptr) {
-            const auto id = dynamic_cast<base::Identifier*>(pageEvent->object());
-            if (id != nullptr) {
-                // Find our container and the new page ID, then push
-                // current page and go to new page
-                newPage((*id).c_str(), this);
-            }
-        }
-    }
-    return used;
+   bool used{};
+   if (obhobj != nullptr && pageChgEvents != nullptr) {
+      used = true;
+      base::Pair* pageEvent{pageChgEvents->findByName((*obhobj).c_str())};
+      if (pageEvent != nullptr) {
+         const auto id = dynamic_cast<base::Identifier*>(pageEvent->object());
+         if (id != nullptr) {
+            // Find our container and the new page ID, then push
+            // current page and go to new page
+            newPage((*id).c_str(), this);
+         }
+      }
+   }
+   return used;
 }
 
 
@@ -354,25 +362,25 @@ bool Page::onButtonHit(const base::String* const obhobj)
 //------------------------------------------------------------------------------
 bool Page::onKeyHit(const int key)
 {
-    bool used{};
-    if (pageChgEvents != nullptr) {
-        char keyName[2]{};
-        keyName[0] = char(key);
-        keyName[1] = '\0';
+   bool used{};
+   if (pageChgEvents != nullptr) {
+      char keyName[2]{};
+      keyName[0] = static_cast<char>(key);
+      keyName[1] = '\0';
 
-        // search for a page change event
-        base::Pair* pageEvent{pageChgEvents->findByName(keyName)};
-        if (pageEvent != nullptr) {
-            const auto id = dynamic_cast<base::Identifier*>(pageEvent->object());
-            if (id != nullptr) {
-                // Find our container and the new page ID, then push
-                // current page and go to new page
-                newPage((*id).c_str(), this);
-                used = true;
-            }
-        }
-    }
-    return used;
+      // search for a page change event
+      base::Pair* pageEvent{pageChgEvents->findByName(keyName)};
+      if (pageEvent != nullptr) {
+         const auto id = dynamic_cast<base::Identifier*>(pageEvent->object());
+         if (id != nullptr) {
+            // Find our container and the new page ID, then push
+            // current page and go to new page
+            newPage((*id).c_str(), this);
+            used = true;
+          }
+      }
+   }
+   return used;
 }
 
 //------------------------------------------------------------------------------
@@ -398,7 +406,6 @@ bool Page::onExit()
    }
    return true;
 }
-
 
 //------------------------------------------------------------------------------
 // draw -- draw this object and its children
@@ -429,28 +436,28 @@ void Page::draw()
 //------------------------------------------------------------------------------
 bool Page::processSubpages()
 {
-    bool ok{true};
-    if (subpages != nullptr) {
-        // Make sure we have only Pages and tell all of the pages
-        // that we are their container.
-        const base::List::Item* item{subpages->getFirstItem()};
-        while (ok && item != nullptr) {
-            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            item = item->getNext();
-            const auto g = dynamic_cast<Page*>(p->object());
-            if (g != nullptr) {
-                // It MUST be of type Page
-                g->container(this);
-            } else {
-                // Delete components that are not of Page type
-                if (isMessageEnabled(MSG_ERROR)) {
-                    std::cerr << "Page::processSubpages(): " << p->slot() << " is not a Page!" << std::endl;
-                }
-                ok = false;
+   bool ok{true};
+   if (subpages != nullptr) {
+      // Make sure we have only Pages and tell all of the pages
+      // that we are their container.
+      const base::List::Item* item{subpages->getFirstItem()};
+      while (ok && item != nullptr) {
+         const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+         item = item->getNext();
+         const auto g = dynamic_cast<Page*>(p->object());
+         if (g != nullptr) {
+            // It MUST be of type Page
+            g->container(this);
+         } else {
+            // Delete components that are not of Page type
+            if (isMessageEnabled(MSG_ERROR)) {
+               std::cerr << "Page::processSubpages(): " << p->slot() << " is not a Page!" << std::endl;
             }
-        }
-    }
-    return ok;
+            ok = false;
+         }
+      }
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -458,8 +465,8 @@ bool Page::processSubpages()
 //------------------------------------------------------------------------------
 bool Page::setSlotPage(const base::Identifier* const pobj)
 {
-    if (pobj != nullptr) cpName = *pobj;
-    return true;
+   if (pobj != nullptr) cpName = *pobj;
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -467,16 +474,16 @@ bool Page::setSlotPage(const base::Identifier* const pobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotSubpageStream (base::PairStream* const psobj)
 {
-    bool ok{};
-    if (psobj != nullptr) {
-        // When a PairStream (i.e., more than one, a list) of pages
-        if (subpages != nullptr) subpages->unref();
-        subpages = psobj;
-        subpages->ref();
+   bool ok{};
+   if (psobj != nullptr) {
+      // When a PairStream (i.e., more than one, a list) of pages
+      if (subpages != nullptr) subpages->unref();
+      subpages = psobj;
+      subpages->ref();
 
-        ok = processSubpages();
-    }
-    return ok;
+      ok = processSubpages();
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -484,15 +491,15 @@ bool Page::setSlotSubpageStream (base::PairStream* const psobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotSubpageSingle(Page* const pobj)
 {
-    bool ok{};
-    if (pobj != nullptr) {
-        if (subpages != nullptr) subpages->unref();
+   bool ok{};
+   if (pobj != nullptr) {
+      if (subpages != nullptr) subpages->unref();
 
-        subpages = new base::PairStream();
-        subpages->put( new base::Pair("1",pobj) );
-        ok = processSubpages();
-    }
-    return ok;
+      subpages = new base::PairStream();
+      subpages->put( new base::Pair("1",pobj) );
+      ok = processSubpages();
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
@@ -500,12 +507,12 @@ bool Page::setSlotSubpageSingle(Page* const pobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotPagingEvent(base::PairStream* const peobj)
 {
-    if (peobj != nullptr) {
-        if (pageChgEvents != nullptr) pageChgEvents->unref();
-        pageChgEvents = peobj;
-        pageChgEvents->ref();
-    }
-    return true;
+   if (peobj != nullptr) {
+      if (pageChgEvents != nullptr) pageChgEvents->unref();
+      pageChgEvents = peobj;
+      pageChgEvents->ref();
+   }
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -513,8 +520,8 @@ bool Page::setSlotPagingEvent(base::PairStream* const peobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotDrawSubpageFirst(const base::Boolean* const spfobj)
 {
-    if (spfobj != nullptr) postDraw1 = spfobj->asBool();
-    return true;
+   if (spfobj != nullptr) postDraw1 = spfobj->asBool();
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -522,8 +529,8 @@ bool Page::setSlotDrawSubpageFirst(const base::Boolean* const spfobj)
 //------------------------------------------------------------------------------
 bool Page::setSlotFocusSlavedToSubpage(const base::Boolean* const msg)
 {
-    if (msg != nullptr) setFocusSlavedToSubpage( msg->asBool() );
-    return true;
+   if (msg != nullptr) setFocusSlavedToSubpage( msg->asBool() );
+   return true;
 }
 
 }
