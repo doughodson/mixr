@@ -111,17 +111,16 @@ public:
 
    bool setInputCharacterPosition(const unsigned int);
 
-   void setLinked(const bool f)                          { linked = f; }      // sets linked on/off
+   void setLinked(const bool x)                          { linked = x; }      // sets linked on/off
    bool isLinked() const                                 { return linked; }   // is linked?
 
-   // returns true if inheritColor is on
    bool isInheritColor() const                           { return inheritColor; }
-   // sets the inheritColor to i, then returns true
-   bool setInheritColor(const bool i)                    { inheritColor = i; return true; }
+   // sets the inheritColor, then returns true
+   bool setInheritColor(const bool x)                    { inheritColor = x; return true; }
 
-   // sets the line number and returns true.
+   // sets the line number and returns true
    virtual bool onSetLine(const base::Integer* const);
-   // sets the column number and returns true.
+   // sets the column number and returns true
    virtual bool onSetColumn(const base::Integer* const);
 
    const std::string getInputExample() const             { return inputExample; }
