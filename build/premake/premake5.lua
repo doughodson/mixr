@@ -3,9 +3,8 @@
 -- If premake command is not supplied an action (target compiler), exit!
 --
 -- Targets of interest:
---     vs2013     (Visual Studio 2013)
---     vs2015     (Visual Studio 2015)
 --     vs2017     (Visual Studio 2017)
+--     vs2019     (Visual Studio 2019)
 --
 if (_ACTION == nil) then
     return
@@ -45,6 +44,7 @@ workspace "mixr"
 
    -- C++ code in all projects
    language "C++"
+   cppdialect "C++14"
 
    -- common include directories (all configurations/all projects)
    includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
@@ -68,18 +68,19 @@ workspace "mixr"
    buildoptions( { "/wd4351", "/wd4996", "/wd4005", "/wd4100", "/Oi" } )
 
    -- common release configuration flags and symbols
-   filter { "Release" }
+   filter { "configurations:Release" }
       optimize "On"
       -- favor speed over size
       buildoptions { "/Ot" }
       defines { "WIN32", "_LIB", "NDEBUG" }
 
    -- common debug configuration flags and symbols
-   filter { "Debug" }
+   filter { "configurations:Debug" }
       targetsuffix "_d"
       symbols "On"
       -- enable compiler intrinsics
       defines { "WIN32", "_LIB", "_DEBUG" }
+
 
    --
    -- libraries
