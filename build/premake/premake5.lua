@@ -58,6 +58,7 @@ workspace "mixr"
    --     Debug          (Runtime library is Multi-threaded Debug DLL)
    --
    configurations { "Release", "Debug" }
+   platforms { "Win32", "Win64" }
 
    -- visual studio options and warnings
    -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
@@ -78,9 +79,15 @@ workspace "mixr"
    filter { "configurations:Debug" }
       targetsuffix "_d"
       symbols "On"
-      -- enable compiler intrinsics
       defines { "WIN32", "_LIB", "_DEBUG" }
 
+   filter { "platforms:Win32" }
+      system "Windows"
+      architecture "x32"
+
+   filter { "platforms:Win64" }
+      system "Windows"
+      architecture "x64"
 
    --
    -- libraries

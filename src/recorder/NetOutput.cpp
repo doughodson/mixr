@@ -101,7 +101,7 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
 
       // Write the serialized message to the network
       if (ok) {
-         netHandler->sendData( wireFormat.c_str(), wireFormat.length() );
+         netHandler->sendData( wireFormat.c_str(), static_cast<int>(wireFormat.length()) );
       }
 
       else if (isMessageEnabled(MSG_ERROR | MSG_WARNING)) {

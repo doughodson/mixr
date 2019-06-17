@@ -150,7 +150,7 @@ bool FileWriter::openFile()
       nameLength += 4;                         // add characters for possible version number, "_V99"
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      const auto fullname = new char[nameLength];
+      const auto fullname{new char[nameLength]};
       fullname[0] = '\0';
 
       //---
@@ -169,11 +169,11 @@ bool FileWriter::openFile()
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
-         const auto origname = new char[nameLength];
+         const auto origname{new char[nameLength]};
          base::utStrcpy(origname, nameLength, fullname);
 
          validName = false;
-         for (unsigned int i = 1; i <= 99 && !validName; i++) {
+         for (int i = 1; i <= 99 && !validName; i++) {
             std::sprintf(fullname, "%s_v%02d", origname, i);
             validName = !base::doesFileExist(fullname);
          }
@@ -255,7 +255,7 @@ void FileWriter::closeFile()
          time->set_utc_time(0);
 
          // get a handle
-         auto handle = new DataRecordHandle(lastMsg);
+         auto handle{new DataRecordHandle(lastMsg)};
 
          // write the message
          processRecordImp(handle);
@@ -277,7 +277,7 @@ void FileWriter::closeFile()
 //------------------------------------------------------------------------------
 void FileWriter::processRecordImp(const DataRecordHandle* const handle)
 {
-   bool thisIsEodMsg = false;
+   bool thisIsEodMsg{};
 
    // ---
    // Open the file, if it hasn't been already ...
@@ -291,15 +291,15 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
    if ( fileOpened ) {
 
       // The DataRecord to be sent
-      const pb::DataRecord* dataRecord = handle->getRecord();
+      const pb::DataRecord* dataRecord{handle->getRecord()};
 
       // Serialize the DataRecord
       std::string wireFormat;
-      bool ok = dataRecord->SerializeToString(&wireFormat);
+	   bool ok{dataRecord->SerializeToString(&wireFormat)};
 
       // Write the serialized DataRecord with its length to the file
       if (ok) {
-         unsigned int n = wireFormat.length();
+		  int n{static_cast<int>(wireFormat.length())};
 
          // Convert size to an integer string
          char nbuff[8];
@@ -365,7 +365,7 @@ bool FileWriter::setFilename(const base::String* const msg)
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
    if (msg != nullptr) filename = new base::String(*msg);
 
-    return true;
+   return true;
 }
 
 bool FileWriter::setPathName(const base::String* const msg)
