@@ -3,7 +3,7 @@
 #include "mixr/interop/common/Nib.hpp"
 #include "mixr/interop/common/Ntm.hpp"
 
-#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/system/Gun.hpp"
 
 #include "mixr/models/player/Player.hpp"
 

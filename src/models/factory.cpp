@@ -79,7 +79,7 @@
 #include "mixr/models/system/ExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
 #include "mixr/models/system/Gimbal.hpp"
-#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Iff.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
 #include "mixr/models/system/IrSensor.hpp"

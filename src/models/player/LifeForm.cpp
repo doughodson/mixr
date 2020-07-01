@@ -5,7 +5,7 @@
 #include "mixr/models/player/weapon/Missile.hpp"
 
 #include "mixr/models/system/StoresMgr.hpp"
-#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/system/Gun.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 

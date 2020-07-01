@@ -10,7 +10,7 @@
 
 #include "mixr/models/system/ExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
-#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/trackmanager/TrackManager.hpp"

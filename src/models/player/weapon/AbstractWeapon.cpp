@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Designator.hpp"
-#include "mixr/models/system/Guns.hpp"
+#include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Stores.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/WorldModel.hpp"
