@@ -225,6 +225,34 @@ General framework-wide changes, improvements, trends, philosophy, and goals
   number (not Number!).  Maintaining units as a distinct type provides the means
   understand the value presented in terms of its measurement.
 
+- Topic: Being explicit (Accepting Numbers vs Unit instance)
+
+  At many points in the code base, quantities (with an associated numerical value)
+  is needed. As an example, the EarthModel class exposes configurable parameters
+  for two lengths (a, b) and a flattening (f) value. It could accept parameters
+  'a' and 'b' as either a 'Length' (a unit instance) or simply as a 'Number'.  According
+  to the documentation (within source code), if a number is supplied, it would be
+  interpreted as a length in meters.  While this is convenient, it is certainly not
+  explicitly stated in the configuration file.
+
+  In other parts of the code, 'Number's were accepted as a valid configuration
+  parameter, only to be downcast to check if, for example, an 'Angle' was specifed
+  (see Gun class).  Since Angle used to be a subclass of Number, all of this worked.
+  While, again, this is convenient, it is not very explicit from a configuration
+  file perspective.
+
+  Arguments can be made between convenience, explicitness and correctness. Convenience
+  comes from allowing a 'user' or person that is writing the input configuration file
+  the flexibility to be less verbose - correctness will be based on the users knowledge
+  of how that input will be interpreted and used.  Explicitness causes configuration
+  files to become more verbose, but avoids the possibility of being incorrect, better
+  yet will help disallow a less knowledgable person from entering incorrect information.
+
+  We have decided on removing any ambiguity within the MIXR code base.  If a quantity
+  is expected, the slot/configuration parameter will be defined to be so.  New classes
+  built 'on top' of MIXR can define classes to accept parameters in a variety
+  of ways (numbers, angles, power, etc.).
+
 - Topic: Character arrays, the String class and std::string
 
   Many years ago, C++ (a superset of C) did not include much support for string handling.
