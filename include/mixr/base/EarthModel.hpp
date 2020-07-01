@@ -87,7 +87,6 @@ private:
    bool setSlotB(const Length* const);
    bool setSlotB(const Number* const);
    bool setSlotF(const Number* const);
-
 };
 
 inline double EarthModel::getA() const  { return a; }
