@@ -573,6 +573,10 @@ base library (mixr_base)
       2) Inputs for slot 'direction' is now an identifier for both classes that
          accept valid directions { north, south } or { east, west }.
 
+   List class
+      1) Updated return types for 'sizes' to be std::size_t as opposed to 'unsigned int' - this
+         keeps all the code as generic as possible for differnent architectures.
+
    String class
       1) Removal of 'virtual' from several methods that don't need it. String is a
          fully defined concrete class, so ideally, it should not serve as a base

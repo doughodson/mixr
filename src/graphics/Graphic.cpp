@@ -1124,48 +1124,43 @@ bool Graphic::setSlotMask(const base::Boolean* const x)
 //     vertices: { [ 1 2 3 ]  [ 4 5 6 ] [ 7 8 9 ] }
 // ---
 //------------------------------------------------------------------------------
-bool Graphic::setSlotVertices(const base::PairStream* const msg)
+bool Graphic::setSlotVertices(const base::PairStream* const x)
 {
-   bool ok = true;
+    bool ok{true};
 
-   if (msg != nullptr) {
+    // Clear any old vertices
+    setVertices(nullptr, 0);
 
-        // Clear any old vertices
-        setVertices(nullptr,0);
+    // allocate space for the vertices
+    std::size_t n{x->entries()};
+    vertices = new base::Vec3d[n];
 
-        // allocate space for the vertices
-        unsigned int n = msg->entries();
-        vertices = new base::Vec3d[n];
-
-        // Get the vertices from the pair stream
-        nv = 0;
-        const base::List::Item* item = msg->getFirstItem();
-        while (item != nullptr && nv < n) {
-            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
-            if (p != nullptr) {
-                const base::Object* obj2 = p->object();
-                const auto msg2 = dynamic_cast<const base::List*>(obj2);
-                if (msg2 != nullptr) {
-                    float values[3];
-                    int n = msg2->getNumberList(values, 3);
-                    if (n == 2) {
-                        vertices[nv].set(values[0],values[1],0.0f);
-                        nv++;
+    // Get the vertices from the pair stream
+    nv = 0;
+    const base::List::Item* item{x->getFirstItem()};
+    while (item != nullptr && nv < n) {
+        const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
+        if (p != nullptr) {
+            const base::Object* obj2{p->object()};
+            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            if (msg2 != nullptr) {
+                float values[3];
+                int n = msg2->getNumberList(values, 3);
+                if (n == 2) {
+                    vertices[nv].set(values[0],values[1],0.0f);
+                    nv++;
+                } else if (n == 3) {
+                    vertices[nv].set(values[0],values[1],values[2]);
+                    nv++;
+                } else {
+                    if (isMessageEnabled(MSG_WARNING)) {
+                        std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
                     }
-                    else if (n == 3) {
-                        vertices[nv].set(values[0],values[1],values[2]);
-                        nv++;
-                    }
-                    else {
-                        if (isMessageEnabled(MSG_WARNING)) {
-                            std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
-                         }
-                            ok = false;
-                    }
+                    ok = false;
                 }
             }
-            item = item->getNext();
         }
+        item = item->getNext();
     }
     return ok;
 }
@@ -1176,48 +1171,43 @@ bool Graphic::setSlotVertices(const base::PairStream* const msg)
 // example --
 //     normals: { [ 1 2 3 ]  [ 4 5 6 ] [ 7 8 9 ] }
 //------------------------------------------------------------------------------
-bool Graphic::setSlotNormals(const base::PairStream* const msg)
+bool Graphic::setSlotNormals(const base::PairStream* const x)
 {
-   bool ok = true;
+    bool ok{true};
 
-   if (msg != nullptr) {
+    // Clear any old normals
+    setNormals(nullptr, 0);
 
-        // Clear any old normals
-        setNormals(nullptr,0);
+    // allocate space for the vertices
+    std::size_t n{x->entries()};
+    norms = new base::Vec3d[n];
 
-        // allocate space for the vertices
-        unsigned int n = msg->entries();
-        norms = new base::Vec3d[n];
-
-        // Get the normals from the pair stream
-        nn = 0;
-        const base::List::Item* item = msg->getFirstItem();
-        while (item != nullptr && nn < n) {
-            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
-                if (p != nullptr) {
-                    const base::Object* obj2 = p->object();
-                    const auto msg2 = dynamic_cast<const base::List*>(obj2);
-                    if (msg2 != nullptr) {
-                        float values[3];
-                        int n = msg2->getNumberList(values, 3);
-                        if (n == 2) {
-                            norms[nn].set(values[0],values[1],0.0f);
-                            nn++;
-                        }
-                        else if (n == 3) {
-                                norms[nn].set(values[0],values[1],values[2]);
-                                nn++;
-                        }
-                        else {
-                              if (isMessageEnabled(MSG_ERROR)) {
-                                std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
-                              }
-                              ok = false;
-                        }
+    // Get the normals from the pair stream
+    nn = 0;
+    const base::List::Item* item{x->getFirstItem()};
+    while (item != nullptr && nn < n) {
+        const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
+        if (p != nullptr) {
+            const base::Object* obj2{p->object()};
+            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            if (msg2 != nullptr) {
+                float values[3]{};
+                std::size_t n{msg2->getNumberList(values, 3)};
+                if (n == 2) {
+                    norms[nn].set(values[0],values[1],0.0f);
+                    nn++;
+                } else if (n == 3) {
+                    norms[nn].set(values[0],values[1],values[2]);
+                    nn++;
+                }else {
+                    if (isMessageEnabled(MSG_ERROR)) {
+                        std::cerr << "Graphic::setVertices: Coordinates not in [ x y ] or [ x y z ] form!" << std::endl;
                     }
+                    ok = false;
                 }
-        item = item->getNext();
+            }
         }
+        item = item->getNext();
     }
     return ok;
 }
@@ -1229,44 +1219,40 @@ bool Graphic::setSlotNormals(const base::PairStream* const msg)
 //     texCoord: { [ 1 2 ]  [ 4 5 ] [ 7 8 ] }
 //
 //------------------------------------------------------------------------------
-bool Graphic::setSlotTexCoord(const base::PairStream* const msg)
+bool Graphic::setSlotTexCoord(const base::PairStream* const x)
 {
-   bool ok = true;
+    bool ok{true};
 
-   if (msg != nullptr) {
+    // Clear any old texture coords
+    setTextureCoord(nullptr,0);
 
-        // Clear any old texture coords
-        setTextureCoord(nullptr,0);
+    // allocate space for the vertices
+    std::size_t n{x->entries()};
+    texCoord = new base::Vec2d[n];
 
-        // allocate space for the vertices
-        unsigned int n = msg->entries();
-        texCoord = new base::Vec2d[n];
-
-        // Get the vertices from the pair stream
-        ntc = 0;
-        const base::List::Item* item = msg->getFirstItem();
-        while (item != nullptr && ntc < n) {
-            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
-                if (p != nullptr) {
-                    const base::Object* obj2 = p->object();
-                    const auto msg2 = dynamic_cast<const base::List*>(obj2);
-                    if (msg2 != nullptr) {
-                        float values[2];
-                        int n = msg2->getNumberList(values, 2);
-                        if (n == 2) {
-                            texCoord[ntc].set(values[0],values[1]);
-                            ntc++;
-                        }
-                        else {
-                            if (isMessageEnabled(MSG_ERROR)) {
-                                std::cerr << "Graphic::setTexCoord: Coordinates not in [ s t ] form!" << std::endl;
-                            }
-                            ok = false;
-                        }
+    // Get the vertices from the pair stream
+    ntc = 0;
+    const base::List::Item* item{x->getFirstItem()};
+    while (item != nullptr && ntc < n) {
+        const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
+        if (p != nullptr) {
+            const base::Object* obj2{p->object()};
+            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            if (msg2 != nullptr) {
+                float values[2];
+                std::size_t n{msg2->getNumberList(values, 2)};
+                if (n == 2) {
+                    texCoord[ntc].set(values[0],values[1]);
+                    ntc++;
+                } else {
+                    if (isMessageEnabled(MSG_ERROR)) {
+                        std::cerr << "Graphic::setTexCoord: Coordinates not in [ s t ] form!" << std::endl;
                     }
+                    ok = false;
                 }
+                }
+            }
         item = item->getNext();
-        }
     }
     return ok;
 }
@@ -1308,9 +1294,9 @@ bool Graphic::setMaterial(const graphics::Material* const msg)
 //------------------------------------------------------------------------------
 // setSlotTextureName() -- sets the name of the texture
 //------------------------------------------------------------------------------
-bool Graphic::setSlotTextureName(base::Identifier* obj)
+bool Graphic::setSlotTextureName(base::Identifier* x)
 {
-    texName = obj;
+    texName = x;
     return true;
 }
 
