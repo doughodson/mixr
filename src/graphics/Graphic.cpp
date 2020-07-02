@@ -935,6 +935,19 @@ bool Graphic::setTexture(const GLuint newTex)
    return true;
 }
 
+bool Graphic::setLightPosition(const double x, const double y, const double z, const double w)
+{
+    lightPos.set(x, y, z, w);
+    lightMoved = true;
+    return true;
+    }
+
+bool Graphic::setLightPosition(base::Vec4d& newPos)
+{
+    lightPos = newPos;
+    return true;
+}
+
 //------------------------------------------------------------------------------
 // Set Slot Functions
 //------------------------------------------------------------------------------
@@ -979,40 +992,25 @@ bool Graphic::setSlotSingleTransform(base::Transform* const sobj)
 }
 
 // setSlotTranslateLight() -- tell us where to translate our light
-bool Graphic::setSlotTranslateLight(base::PairStream* const msg)
+bool Graphic::setSlotTranslateLight(base::PairStream* const x)
 {
-    if (msg != nullptr) {
-        double temp[4] = { 0, 0, 1, 0 };
-        base::List::Item* item = msg->getFirstItem();
-        int count = 0;
-        while (item != nullptr && count < 4) {
-            const auto pair = static_cast<base::Pair*>(item->getValue());
-            if (pair != nullptr) {
-                const auto num = dynamic_cast<base::Number*>(pair->object());
-                if (num != nullptr) {
-                    temp[count++] = num->asDouble();
-                }
+    double temp[4] { 0.0, 0.0, 1.0, 0.0 };
+    base::List::Item* item{x->getFirstItem()};
+    int count{};
+    while (item != nullptr && count < 4) {
+        const auto pair{static_cast<base::Pair*>(item->getValue())};
+        if (pair != nullptr) {
+            const auto num{dynamic_cast<base::Number*>(pair->object())};
+            if (num != nullptr) {
+                temp[count++] = num->asDouble();
             }
-            item = item->getNext();
         }
-        // W value is always 0
-        temp[3] = 0;
-        setLightPosition(temp[0],temp[1], temp[2], temp[3]);
+        item = item->getNext();
     }
+    // W value is always 0
+    temp[3] = 0;
+    setLightPosition(temp[0],temp[1], temp[2], temp[3]);
 
-    return true;
-}
-
-bool Graphic::setLightPosition(const double x, const double y, const double z, const double w)
-{
-    lightPos.set(x, y, z, w);
-    lightMoved = true;
-    return true;
-    }
-
-bool Graphic::setLightPosition(base::Vec4d& newPos)
-{
-    lightPos = newPos;
     return true;
 }
 
@@ -1027,19 +1025,16 @@ bool Graphic::setSlotColor(const base::Identifier* const color)
 }
 
 // setSlotLineWidth -- set this object's line width
-bool Graphic::setSlotLineWidth(const base::Number* const msg)
+bool Graphic::setSlotLineWidth(const base::Number* const x)
 {
-    if (msg != nullptr) return setLineWidth( static_cast<const GLfloat>(msg->asDouble()));
-    else return false;
+    return setLineWidth( static_cast<const GLfloat>(x->asDouble()));
 }
 
 // setSlotFlashRate -- set this object's flash rate
-bool Graphic::setSlotFlashRate(const base::Number* const msg)
+bool Graphic::setSlotFlashRate(const base::Number* const x)
 {
-    if (msg != nullptr) return setFlashRate(msg->asDouble());
-    else return false;
+    return setFlashRate(x->asDouble());
 }
-
 
 // setSlotNoDisplayList() --  True to disable display list (default false)
 bool Graphic::setSlotNoDisplayList(const base::Boolean* const msg)
