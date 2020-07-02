@@ -949,7 +949,75 @@ bool Graphic::setLightPosition(base::Vec4d& newPos)
 }
 
 //------------------------------------------------------------------------------
-// Set Slot Functions
+// setMaterial() -- sets our material (by name)
+//------------------------------------------------------------------------------
+bool Graphic::setMaterial(const base::Identifier* const x)
+{
+    // Unref old materials
+    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
+    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
+
+    if (x != nullptr) {
+        // When we're being passed a name of a material from the material table...
+        materialName = x->clone();
+    }
+    return true;
+}
+
+//------------------------------------------------------------------------------
+// setMaterial() -- sets our material (by material object)
+//------------------------------------------------------------------------------
+bool Graphic::setMaterial(const graphics::Material* const x)
+{
+    // Unref old material
+    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
+    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
+
+    if (x != nullptr) {
+        // When we're being passed a material ...
+        materialObj = x->clone();
+    }
+
+    return true;
+}
+
+// setStippling() - set the stippling value
+bool Graphic::setStippling(const bool x)
+{
+   stipple = x;
+   return true;
+}
+
+// setStippleFactor() - set the stipple factor value
+bool Graphic::setStippleFactor(const GLuint x)
+{
+   stippleFactor = x;
+   return true;
+}
+
+// setStipplePattern() - set the stipple pattern value
+bool Graphic::setStipplePattern(const GLushort x)
+{
+   stipplePattern = x;
+   return true;
+}
+
+//------------------------------------------------------------------------------
+// processComponets() -- process our components; make sure the are all of
+// type Graphic (or derived); tell them that we are their container
+//------------------------------------------------------------------------------
+void Graphic::processComponents(
+      base::PairStream* const list,
+      const std::type_info&,
+      base::Pair* const add,
+      base::Component* const remove
+   )
+{
+   base::Component::processComponents(list, typeid(Graphic),add,remove);
+}
+
+//------------------------------------------------------------------------------
+// Slot Functions
 //------------------------------------------------------------------------------
 
 // setSlotTransformList() -- set the list of transformations
@@ -1258,81 +1326,12 @@ bool Graphic::setSlotTexCoord(const base::PairStream* const x)
 }
 
 //------------------------------------------------------------------------------
-// setMaterial() -- sets our material (by name)
-//------------------------------------------------------------------------------
-bool Graphic::setMaterial(const base::Identifier* const msg)
-{
-    // Unref old materials
-    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
-    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
-
-    if (msg != nullptr) {
-        // When we're being passed a name of a material from the material table...
-        materialName = msg->clone();
-    }
-    return true;
-}
-
-//------------------------------------------------------------------------------
-// setMaterial() -- sets our material (by material object)
-//------------------------------------------------------------------------------
-bool Graphic::setMaterial(const graphics::Material* const msg)
-{
-    // Unref old material
-    if (materialObj != nullptr) { materialObj->unref(); materialObj = nullptr; }
-    if (materialName != nullptr) { materialName->unref(); materialName = nullptr; }
-
-    if (msg != nullptr) {
-        // When we're being passed a material ...
-        materialObj = msg->clone();
-    }
-
-    return true;
-}
-
-
-//------------------------------------------------------------------------------
 // setSlotTextureName() -- sets the name of the texture
 //------------------------------------------------------------------------------
 bool Graphic::setSlotTextureName(base::Identifier* x)
 {
     texName = x;
     return true;
-}
-
-// setStippling() - set the stippling value
-bool Graphic::setStippling(const bool x)
-{
-   stipple = x;
-   return true;
-}
-
-// setStippleFactor() - set the stipple factor value
-bool Graphic::setStippleFactor(const GLuint x)
-{
-   stippleFactor = x;
-   return true;
-}
-
-// setStipplePattern() - set the stipple pattern value
-bool Graphic::setStipplePattern(const GLushort x)
-{
-   stipplePattern = x;
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// processComponets() -- process our components; make sure the are all of
-// type Graphic (or derived); tell them that we are their container
-//------------------------------------------------------------------------------
-void Graphic::processComponents(
-      base::PairStream* const list,
-      const std::type_info&,
-      base::Pair* const add,
-      base::Component* const remove
-   )
-{
-   base::Component::processComponents(list, typeid(Graphic),add,remove);
 }
 
 }
