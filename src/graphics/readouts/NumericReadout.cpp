@@ -138,18 +138,15 @@ char NumericReadout::filterInputEvent(const int event, const char x)
             return minusChar;
          else
             return '-';
-      }
-      else if (event == '9') {
+      } else if (event == '9') {
          if (plusChar != '\0')
             return plusChar;
          else
             return '+';
-      }
-      else {
+      } else {
          return '\0';
       }
-   }
-   else {
+   } else {
       return BaseClass::filterInputEvent(event,tc);
    }
 }
@@ -329,204 +326,99 @@ bool NumericReadout::onUpdateValue(const base::Number* const ouvobj)
 
 bool NumericReadout::setSlotFloatToBeDisplayed(const base::Float* const x)
 {
-   bool ok{true};
-   if (x != nullptr) {
-      setValue(x->asDouble());
-      ok = true;
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setFloatToBeDisplayed: \"value\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   setValue(x->asDouble());
+   return true;
 }
 
 bool NumericReadout::setSlotIntegerToBeDisplayed(const base::Integer* const x)
 {
-   bool ok{true};
-   if (x != nullptr) {
-      setValue(x->asInt());
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setNumberToBeDisplayed: \"value\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   setValue(x->asInt());
+   return true;
 }
 
 bool NumericReadout::setSlotFloatMaxValue(const base::Float* const x)
 {
-   bool ok{true};
-   if (x != nullptr) {
-      setMaxValue(x->asDouble());
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setFloatMaxValue: \"maxValue\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   setMaxValue(x->asDouble());
+   return true;
 }
 
 bool NumericReadout::setSlotIntegerMaxValue(const base::Integer* const x)
 {
-   bool ok{true};
-   if (x != nullptr) {
-      setMaxValue(x->asInt());
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setNumberMaxValue: \"maxValue\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   setMaxValue(x->asInt());
+   return true;
 }
 
-bool NumericReadout::setSlotExampleFormatText(const base::String* const seftobj)
+bool NumericReadout::setSlotExampleFormatText(const base::String* const x)
 {
-   bool ok{true};
-   if (seftobj != nullptr) {
-      if (width() == 0) width(seftobj->len());
-      reformat((*seftobj).c_str());
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setExampleFormatText: \"format\" must be a string!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   if (width() == 0) width(x->len());
+   reformat((*x).c_str());
+   return true;
 }
 
 //  setSlotPlusChar() -- positive value character
-bool NumericReadout::setSlotPlusChar(const base::String* const spcobj)
+bool NumericReadout::setSlotPlusChar(const base::String* const x)
 {
-   bool ok{true};
-   if (spcobj != nullptr) {
-      const char* str{(*spcobj).c_str()};
-      plusChar = str[0];
-      redisplay();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setPlusChar \"plusChar\" must be a character!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   const char* str{(*x).c_str()};
+   plusChar = str[0];
+   redisplay();
+   return true;
 }
 
 //  setSlotMinusChar() -- negative value character
-bool NumericReadout::setSlotMinusChar(const base::String* const smcobj)
+bool NumericReadout::setSlotMinusChar(const base::String* const x)
 {
-   bool ok{true};
-   if (smcobj != nullptr) {
-      const char* str{(*smcobj).c_str()};
-      minusChar = str[0];
-      redisplay();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setMinusChar \"minusChar\" must be a character!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   const char* str{(*x).c_str()};
+   minusChar = str[0];
+   redisplay();
+   return true;
 }
 
 //  setSlotDecimalPointChar() -- decimal point character
-bool NumericReadout::setSlotDecimalPointChar(const base::String* const sdpcobj)
+bool NumericReadout::setSlotDecimalPointChar(const base::String* const x)
 {
-   bool ok{true};
-   if (sdpcobj != nullptr) {
-      const char* str{(*sdpcobj).c_str()};
-      dpChar = str[0];
-      redisplay();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setDecimalPointChar \"dpChar\" must be a character!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   const char* str{(*x).c_str()};
+   dpChar = str[0];
+   redisplay();
+   return true;
 }
 
 //  setSlotUndefinedChar() -- undefined value character
-bool NumericReadout::setSlotUndefinedChar(const base::String* const sucobj)
+bool NumericReadout::setSlotUndefinedChar(const base::String* const x)
 {
-   bool ok{true};
-   if (sucobj != nullptr) {
-      const char* str{(*sucobj).c_str()};
-      undefinedChar = str[0];
-      redisplay();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setUndefinedChar \"undefinedChar\" must be a character!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   const char* str{(*x).c_str()};
+   undefinedChar = str[0];
+   redisplay();
+   return true;
 }
 
 //  setSlotMaxValid() -- Maximum valid value
-bool NumericReadout::setSlotMaxValid(const base::Number* const msg)
+bool NumericReadout::setSlotMaxValid(const base::Number* const x)
 {
-   bool ok{true};
-   if (msg != nullptr) {
-      maxValid = msg->asDouble();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setSlotMaxValid: \"maxValid\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   maxValid = x->asDouble();
+   return true;
 }
 
 //  setSlotMinValid() -- Minimum valid value
-bool NumericReadout::setSlotMinValid(const base::Number* const msg)
+bool NumericReadout::setSlotMinValid(const base::Number* const x)
 {
-   bool ok{true};
-   if (msg != nullptr) {
-      minValid = msg->asDouble();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setSlotMinValid: \"minValid\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   minValid = x->asDouble();
+   return true;
 }
 
 //  setSlotBlankZero() -- Display blank if value is zero
-bool NumericReadout::setSlotBlankZero(const base::Boolean* const msg)
+bool NumericReadout::setSlotBlankZero(const base::Boolean* const x)
 {
-   bool ok{true};
-   if (msg != nullptr) {
-      blankZero = msg->asBool();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setSlotMinValid: \"blankZero\" must be a number!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   blankZero = x->asBool();
+   return true;
 }
 
 //  setSlotOverflowChar() --overflow character
-bool NumericReadout::setSlotOverflowChar(const base::String* const socobj)
+bool NumericReadout::setSlotOverflowChar(const base::String* const x)
 {
-   bool ok{true};
-   if (socobj != nullptr) {
-      const char* str{(*socobj).c_str()};
-      overflowChar = str[0];
-      redisplay();
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "NumericReadout::setOverflowChar \"overflowChar\" must be a character!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   const char* str{(*x).c_str()};
+   overflowChar = str[0];
+   redisplay();
+   return true;
 }
 
 }

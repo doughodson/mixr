@@ -174,36 +174,36 @@ int AbstractFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const 
 //------------------------------------------------------------------------------
 // setSlotFontWidth () -- sets the font width
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontWidth(const base::Number* const sfwobj)
+bool AbstractFont::setSlotFontWidth(const base::Number* const x)
 {
-    if (sfwobj != nullptr) setFontWidth( sfwobj->asDouble() );
+    if (x != nullptr) setFontWidth( x->asDouble() );
     return true;
 }
 
 //------------------------------------------------------------------------------
 //  setSlotFontHeight() - sets the font height
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontHeight (const base::Number* const sfhobj)
+bool AbstractFont::setSlotFontHeight (const base::Number* const x)
 {
-    if (sfhobj != nullptr) setFontHeight( sfhobj->asDouble() );
+    if (x != nullptr) setFontHeight( x->asDouble() );
     return true;
 }
 
 //------------------------------------------------------------------------------
 //  setSlotFontPosition() - sets the font position
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontPosition (const base::List* const sfpobj)
+bool AbstractFont::setSlotFontPosition (const base::List* const x)
 {
-    bool ok = true;
-    if (sfpobj != nullptr) {
-        double values[2];
-        int n = sfpobj->getNumberList(values, 2);
+    bool ok{true};
+    if (x != nullptr) {
+        double values[2]{};
+        std::size_t n{x->getNumberList(values, 2)};
         ok = (n == 2);
-        if (ok) setTextOrigin(values[0],values[1]);
+        if (ok) setTextOrigin(values[0], values[1]);
         else {
-              if (isMessageEnabled(MSG_ERROR)) {
-                  std::cerr << "Font::setFontPosition: Values are invalid or missing" << std::endl;
-              }
+            if (isMessageEnabled(MSG_ERROR)) {
+                std::cerr << "Font::setFontPosition: Values are invalid or missing" << std::endl;
+            }
             ok = false;
         }
     }
@@ -213,29 +213,29 @@ bool AbstractFont::setSlotFontPosition (const base::List* const sfpobj)
 //------------------------------------------------------------------------------
 //  setSlotBitmapWidth() - sets the bitmap width
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapWidth(const base::Integer* const sbwobj)
+bool AbstractFont::setSlotBitmapWidth(const base::Integer* const x)
 {
-    if (sbwobj != nullptr) setBitmapWidth( sbwobj->asInt() );
+    if (x != nullptr) setBitmapWidth( x->asInt() );
     return true;
 }
 
 //------------------------------------------------------------------------------
 //  setBitmapHeight() - sets the bitmap height
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapHeight(const base::Integer* const sbhobj)
+bool AbstractFont::setSlotBitmapHeight(const base::Integer* const x)
 {
-    if (sbhobj != nullptr) setBitmapHeight( sbhobj->asInt() );
+    if (x != nullptr) setBitmapHeight( x->asInt() );
     return true;
 }
 
 // set font path
-bool AbstractFont::setSlotFontPath(const base::String* const str)
+bool AbstractFont::setSlotFontPath(const base::String* const x)
 {
     bool ok{true};
-    if (str != nullptr) {
-        std::size_t j{str->len()};
+    if (x != nullptr) {
+        std::size_t j{x->len()};
         if (j > 0) {
-            fontPath = str->c_str();
+            fontPath = x->c_str();
 //            fontPath = new char[j+1];
 //            base::utStrcpy(fontPath, j+1, (*str).c_str());
         } else {
@@ -251,13 +251,13 @@ bool AbstractFont::setSlotFontPath(const base::String* const str)
 //------------------------------------------------------------------------------
 //  setSlotFTGLFontFileName() - sets the FTGL Font File Name
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFTGLFontFileName(const base::String* const str)
+bool AbstractFont::setSlotFTGLFontFileName(const base::String* const x)
 {
-    bool ok = true;
-    if (str != nullptr) {
-        std::size_t j = str->len();
+    bool ok{true};
+    if (x != nullptr) {
+        std::size_t j = x->len();
         if (j > 0) {
-            fontFile = str->c_str();
+            fontFile = x->c_str();
 //            fontFile = new char[j+1];
 //            base::utStrcpy(fontFile, j+1, (*str).c_str());
         } else {
@@ -273,46 +273,37 @@ bool AbstractFont::setSlotFTGLFontFileName(const base::String* const str)
 //------------------------------------------------------------------------------
 //  setSlotLookupTable() - sets the lookup table
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotLookupTable(const base::List* const sltobj)
+bool AbstractFont::setSlotLookupTable(const base::List* const x)
 {
-    bool ok = true;
-    if (sltobj != nullptr) {
-        // Load the LUT
-        if (pLUT == nullptr) pLUT = new unsigned char[LUT_SIZE];
-        int values[LUT_SIZE];
-        int nn = sltobj->getNumberList(values, LUT_SIZE);
-        int ii = 0;
-        // Transfer the table
-        while (ii < nn) {
-            pLUT[ii] = ( (values[ii] >= 0 && values[ii] <= 255) ? char(values[ii]) : char(ii) );
-            ii++;
-        }
-        // Pad the end of the table
-        while (ii < LUT_SIZE) {
-            pLUT[ii] = char(ii);
-            ii++;
-        }
+    // Load the LUT
+    if (pLUT == nullptr) pLUT = new unsigned char[LUT_SIZE];
+    int values[LUT_SIZE];
+    int nn = x->getNumberList(values, LUT_SIZE);
+    int ii = 0;
+    // Transfer the table
+    while (ii < nn) {
+        pLUT[ii] = ( (values[ii] >= 0 && values[ii] <= 255) ? char(values[ii]) : char(ii) );
+        ii++;
     }
-    else {
-          if (isMessageEnabled(MSG_ERROR)) {
-             std::cerr << "Font::setLookupTable: Nothing in the lookup table." << std::endl;
-          }
-        ok = false;
+    // Pad the end of the table
+    while (ii < LUT_SIZE) {
+        pLUT[ii] = char(ii);
+        ii++;
     }
-    return ok;
-}
-
-bool AbstractFont::setSlotCharacterSpacing(const base::Number* const newCharSpacing)
-{
-    // set our character spacing
-    if (newCharSpacing != nullptr) setCharacterSpacing( newCharSpacing->asDouble() );
     return true;
 }
 
-bool AbstractFont::setSlotLineSpacing(const base::Number* const newLineSpacing)
+bool AbstractFont::setSlotCharacterSpacing(const base::Number* const x)
+{
+    // set our character spacing
+    setCharacterSpacing(x->asDouble());
+    return true;
+}
+
+bool AbstractFont::setSlotLineSpacing(const base::Number* const x)
 {
     // set our line spacing
-    if (newLineSpacing != nullptr) setLineSpacing( newLineSpacing->asDouble() );
+    setLineSpacing(x->asDouble());
     return true;
 }
 

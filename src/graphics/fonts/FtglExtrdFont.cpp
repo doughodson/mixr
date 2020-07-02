@@ -39,11 +39,9 @@ void FtglExtrdFont::copyData(const FtglExtrdFont& org, const bool)
 //------------------------------------------------------------------------------
 // FtglExtrdFont slot table methods
 //------------------------------------------------------------------------------
-bool FtglExtrdFont::setSlotDepth(const base::Number* const newDepth)
+bool FtglExtrdFont::setSlotDepth(const base::Number* const x)
 {
-    // set our depth
-    if (newDepth != nullptr) depth = static_cast<float>(newDepth->asDouble());
-    else depth = DEFAULT_DEPTH;
+    depth = static_cast<float>(x->asDouble());
     return true;
 }
 

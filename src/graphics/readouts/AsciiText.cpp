@@ -40,46 +40,34 @@ bool AsciiText::isValidInputPosition(const int)
 }
 
 // takes in a base::String and sets it
-bool AsciiText::setSlotTextString(const base::String* const stsobj)
+bool AsciiText::setSlotTextString(const base::String* const x)
 {
-   bool ok {true};
-   if (stsobj != nullptr) {
-      if (width() == 0) {
-         width(stsobj->len());
-      }
-      setText((*stsobj).c_str());
-   } else {
-      if (isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "AsciiText::setTextString: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
-      }
-      ok = false;
-   }
-   return ok;
+   if (width() == 0) width(x->len());
+   setText((*x).c_str());
+   return true;
 }
 
-// takes in alist of ascii numbers
-bool AsciiText::setSlotTextList(const base::List* const stlobj)
+// takes in a list of ascii numbers
+bool AsciiText::setSlotTextList(const base::List* const x)
 {
    bool ok {true};
-   if (stlobj != nullptr) {
-      float values[256] {};
-      int n {static_cast<int>(stlobj->getNumberList(values, 256))};
-      if (n > 0) {
-         char cbuf[258] {};
-         int j {};
-         for (j = 0; j < n; j++) {
-            cbuf[j] = char(values[j]);
-         }
-         cbuf[j] = '\0';
-         if (width() == 0) width(j);
-         setText(cbuf);
-         ok = true;
-      } else {
-         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AsciiText::setTextList: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
-         }
-         ok = false;
+   float values[256] {};
+   std::size_t n {x->getNumberList(values, 256)};
+   if (n > 0) {
+      char cbuf[258] {};
+      std::size_t j {};
+      for (j = 0; j < n; j++) {
+         cbuf[j] = char(values[j]);
       }
+      cbuf[j] = '\0';
+      if (width() == 0) width(j);
+      setText(cbuf);
+      ok = true;
+   } else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "AsciiText::setTextList: \"text\" must be a string or a list of (ASCII) numbers!" << std::endl;
+      }
+      ok = false;
    }
    return ok;
 }

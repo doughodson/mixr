@@ -13,10 +13,8 @@ namespace graphics {
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: text
-// Slots:
-//    text   <String>     ! Text String (default: " ")
-//    text   <List>       ! Text List
+// Factory name: BooleanText
+// Slots: none
 //------------------------------------------------------------------------------
 
 class BooleanText final: public AbstractReadout
@@ -33,7 +31,7 @@ public:
    bool event(const int key, base::Object* const obj = nullptr) final;
 
    // returns true if the text string was set to stsobj
-   bool setBooleanText(const base::Boolean* const stsobj);
+   bool setBooleanText(const base::Boolean* const);
 };
 
 }

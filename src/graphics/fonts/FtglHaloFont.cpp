@@ -276,12 +276,8 @@ bool FtglHaloFont::setSlotHaloColor(base::Color* x)
 
 bool FtglHaloFont::setSlotLinewidth(const base::Number* const x)
 {
-    bool ok{};
-    if (x != nullptr) {
-        linewidth = static_cast<float>(x->asDouble());
-        ok = true;
-    }
-    return ok;
+    linewidth = static_cast<float>(x->asDouble());
+    return true;
 }
 
 }

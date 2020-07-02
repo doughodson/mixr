@@ -32,11 +32,10 @@ public:
 
    bool event(const int key, base::Object* const obj = nullptr) final;
 
-   // returns true if the text string was set to stsobj
-   bool setSlotTextString(const base::String* const stsobj);
-
-   // returns true if the text list was set to stlobj
-   bool setSlotTextList(const base::List* const stlobj);
+private:
+   // slot table helper methods
+   bool setSlotTextString(const base::String* const);
+   bool setSlotTextList(const base::List* const);
 };
 
 }
