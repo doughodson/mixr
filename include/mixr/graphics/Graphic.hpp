@@ -254,12 +254,12 @@ public:
    base::Color* getColor()                                  { return color; }
    const base::Color* getColor() const                      { return color; }
    const base::Identifier* getColorName() const             { return colorName; }
-   virtual bool setColor(const base::Color* const msg);
-   virtual bool setColor(const base::Identifier* const msg);
-   virtual bool setColor(const base::Number* const msg);
+   virtual bool setColor(const base::Color* const);
+   virtual bool setColor(const base::Identifier* const);
+   virtual bool setColor(const base::Number* const);
 
    // material functions
-   const base::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
+   const base::Identifier* getMaterialName() const   { return materialName; } // returns a pointer to our material name
    graphics::Material* getMaterial()                 { return materialObj; }  // returns our material object!
    const graphics::Material* getMaterial() const     { return materialObj; }
    virtual bool setMaterial(const base::Identifier* const);
