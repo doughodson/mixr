@@ -3499,7 +3499,7 @@ bool Player::setSlotInitPosition(const base::List* const msg)
 {
    bool ok{};
    double values[3]{};
-   const unsigned int n{msg->getNumberList(values, 3)};
+   const std::size_t n{msg->getNumberList(values, 3)};
    if (n == 3) {
       setInitPosition(values[0], values[1]);
       setInitAltitude( -values[2] );
@@ -3603,7 +3603,7 @@ bool Player::setSlotInitGeocentric(const base::List* const msg)
 {
    bool ok{};
    double values[3]{};
-   const unsigned int n{msg->getNumberList(values, 3)};
+   const std::size_t n{msg->getNumberList(values, 3)};
    if (n == 3) {
       base::Vec3d pos(values[0], values[1], values[2]);
       ok = setInitGeocentricPosition(pos);
@@ -3720,7 +3720,7 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 {
    bool ok{};
    double values[3]{};
-   const unsigned int n{numList->getNumberList(values, 3)};
+   const std::size_t n{numList->getNumberList(values, 3)};
    if (n == 3) {
       if ( ( values[0] >= -(2.0f*base::PI) && values[0] <= (2.0f*base::PI) ) &&
          ( values[1] >= -base::PI && values[1] <= base::PI ) &&

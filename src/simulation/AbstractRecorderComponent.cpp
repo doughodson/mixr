@@ -97,11 +97,11 @@ bool AbstractRecorderComponent::setSlotEnabledList(const base::List* const list)
    unsigned int* p2{};
 
    // Items in the list ...
-   unsigned int n {list->entries()};
+   std::size_t n {list->entries()};
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
       auto p1 = new int[n];
-      unsigned int n1 {list->getNumberList(p1, n)};
+      std::size_t n1 {list->getNumberList(p1, n)};
       if (n1 > 0) {
          // Make sure they're positive
          p2 = new unsigned int[n1];
@@ -131,11 +131,11 @@ bool AbstractRecorderComponent::setSlotDisabledList(const base::List* const list
    unsigned int* p2{};
 
    // Items in the list ...
-   unsigned int n {list->entries()};
+   std::size_t n {list->entries()};
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
       auto p1 = new int[n];
-      unsigned int n1 {list->getNumberList(p1, n)};
+      std::size_t n1 {list->getNumberList(p1, n)};
       if (n1 > 0) {
          // Make sure they're positive
          p2 = new unsigned int[n1];

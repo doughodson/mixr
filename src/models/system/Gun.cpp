@@ -435,7 +435,7 @@ bool Gun::setSlotPosition(base::List* const numList)
 {
    bool ok{};
    double values[3]{};
-   const unsigned int n{numList->getNumberList(values, 3)};
+   const std::size_t n{numList->getNumberList(values, 3)};
    if (n == 3) {
       setPosition(values[0], values[1], values[2]);
       ok = true;

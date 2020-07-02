@@ -1037,122 +1037,83 @@ bool Graphic::setSlotFlashRate(const base::Number* const x)
 }
 
 // setSlotNoDisplayList() --  True to disable display list (default false)
-bool Graphic::setSlotNoDisplayList(const base::Boolean* const msg)
+bool Graphic::setSlotNoDisplayList(const base::Boolean* const x)
 {
-    bool ok = (msg != nullptr);
-    if (ok) ok = setDisableDisplayList( msg->asBool() );
-    return ok;
+    return setDisableDisplayList(x->asBool());
 }
 
 //  setSlotSubcomponentsFirst() --  Draw component graphics first (default: draw own graphics first)
-bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const scfobj)
+bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const x)
 {
-    bool ok = (scfobj != nullptr);
-    if (ok) postDraw = scfobj->asBool();
-    return ok;
+    postDraw = x->asBool();
+    return true;
 }
 
 // setSlotSelectName() -- GL Select Buffer name (e.g., glPushName())  (unsigned integer)
 bool Graphic::setSlotSelectName(const base::Integer* const x)
 {
-    bool ok = (x != nullptr);
-    if (ok) {
-         const int name = x->asInt();
-         ok = setSelectName(static_cast<GLuint>(name));
-    }
-    return ok;
+    return setSelectName(static_cast<GLuint>(x->asInt()));
 }
 
 // setSlotScissorX() - sets our x point for scissoring
-bool Graphic::setSlotScissorX(const base::Number* const newX)
+bool Graphic::setSlotScissorX(const base::Number* const x)
 {
-    bool ok = false;
-    if (newX != nullptr) {
-        ok = setScissorX(newX->asDouble());
-    }
-    return ok;
+    return setScissorX(x->asDouble());
 }
 
 // setSlotScissorWidth() - sets how far out we are going to scissor horizontally
-bool Graphic::setSlotScissorWidth(const base::Number* const newWidth)
+bool Graphic::setSlotScissorWidth(const base::Number* const x)
 {
-    bool ok = false;
-    if (newWidth != nullptr) {
-        ok = setScissorWidth(newWidth->asDouble());
-    }
-    return ok;
+    return setScissorWidth(x->asDouble());
 }
 
 // setSlotScissorY() - sets our y point for scissoring
-bool Graphic::setSlotScissorY(const base::Number* const newY)
+bool Graphic::setSlotScissorY(const base::Number* const x)
 {
-    bool ok = false;
-    if (newY != nullptr) {
-        ok = setScissorY(newY->asDouble());
-    }
-    return ok;
+    return setScissorY(x->asDouble());
 }
 
 // setSlotScissorHeight() - sets how far out we are going to scissor vertically
-bool Graphic::setSlotScissorHeight(const base::Number* const newHeight)
+bool Graphic::setSlotScissorHeight(const base::Number* const x)
 {
-    bool ok = false;
-    if (newHeight != nullptr) {
-        ok = setScissorHeight(newHeight->asDouble());
-    }
-    return ok;
+    return setScissorHeight(x->asDouble());
 }
 
 // setSlotStippling() - sets our stipple boolean value
-bool Graphic::setSlotStippling(const base::Boolean* const msg)
+bool Graphic::setSlotStippling(const base::Boolean* const x)
 {
-   bool ok = false;
-   if (msg != nullptr) ok = setStippling(msg->asBool());
-   return ok;
+    return setStippling(x->asBool());
 }
 
 // setSlotStippleFactor() - sets our stipple factor integer value
-bool Graphic::setSlotStippleFactor(const base::Integer* const msg)
+bool Graphic::setSlotStippleFactor(const base::Integer* const x)
 {
-   bool ok = false;
-   if (msg != nullptr) {
-       ok = setStippleFactor(static_cast<GLuint>(msg->asInt()));
-   }
-   return ok;
+    return setStippleFactor(static_cast<GLuint>(x->asInt()));
 }
 
 // setSlotStipplePattern() - sets our stipple pattern integer value
-bool Graphic::setSlotStipplePattern(const base::Integer* const msg)
+bool Graphic::setSlotStipplePattern(const base::Integer* const x)
 {
-   bool ok = false;
-   if (msg != nullptr) {
-      int v = msg->asInt();
-      if (v >= 0 && v <= 0xffff) {
-         ok = setStipplePattern(static_cast<GLushort>(v));
-      }
-      else {
-         std::cerr << "Graphic::setSlotStipplePattern() - invalid value: " << v << "; must be a 16 bit value; range 0x0000 (0) to 0xFFFF (65535)" << std::endl;
-      }
+   bool ok{};
+   int v{x->asInt()};
+   if (v >= 0 && v <= 0xffff) {
+      ok = setStipplePattern(static_cast<GLushort>(v));
+   } else {
+      std::cerr << "Graphic::setSlotStipplePattern() - invalid value: " << v << "; must be a 16 bit value; range 0x0000 (0) to 0xFFFF (65535)" << std::endl;
    }
    return ok;
 }
 
 // setSlotVisibility() - sets our visibility boolean value
-bool Graphic::setSlotVisibility(const base::Boolean* const msg)
+bool Graphic::setSlotVisibility(const base::Boolean* const x)
 {
-   bool ok = false;
-   if (msg != nullptr) ok = setVisibility(msg->asBool());
-   return ok;
+   return setVisibility(x->asBool());
 }
 // setSlotMask - determines if we turn off our color guns or not
-bool Graphic::setSlotMask(const base::Boolean* const msg)
+bool Graphic::setSlotMask(const base::Boolean* const x)
 {
-   bool ok = false;
-   if (msg != nullptr) {
-        mask = msg->asBool();
-        ok = true;
-   }
-   return ok;
+   mask = x->asBool();
+   return true;
 }
 
 

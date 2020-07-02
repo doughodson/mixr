@@ -244,7 +244,7 @@ bool AbstractReadout::isValidInputPosition(const int tc)
 // filterInputEvent() -- Filter input events using a template character (x)
 char AbstractReadout::filterInputEvent(const int event, const char x)
 {
-    const char tc{static_cast<int>(x)};
+    const char tc = static_cast<int>(x);
     if (tc == '+') {
         // Default sign keys
         if (event == '7') {

@@ -74,7 +74,7 @@ void Table3::deleteData()
 bool Table3::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    const unsigned int n1{list.entries()};
+    const std::size_t n1{list.entries()};
     bool ok{n1 > 0 && n1 == nz};
 
     // Process each item in the list

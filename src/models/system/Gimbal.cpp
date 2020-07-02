@@ -767,7 +767,7 @@ bool Gimbal::setSlotLocation(const base::List* const msg)
    bool ok{};
    if (msg != nullptr) {
       double values[3]{};
-      const unsigned int n{msg->getNumberList(values, 3)};
+      const std::size_t n{msg->getNumberList(values, 3)};
       if (n == 3) ok = setLocation(values[0], values[1], values[2]);
    }
    return ok;
@@ -779,7 +779,7 @@ bool Gimbal::setSlotPosition(const base::List* const msg)
    bool ok{};
    if (msg != nullptr) {
       double values[3]{};
-      const unsigned int n{msg->getNumberList(values, 3)};
+      const std::size_t n{msg->getNumberList(values, 3)};
       if (n == 2) ok = setPosition(values[0], values[1]);
       else if (n == 3) ok = setPosition(values[0], values[1], values[2]);
       if (ok) initPos = pos;
@@ -826,7 +826,7 @@ bool Gimbal::setSlotAzimuthLimits(const base::List* const msg)
     bool ok{};
     if (msg != nullptr) {
         double values[2]{};
-        const unsigned int n{msg->getNumberList(values, 2)};
+        const std::size_t n{msg->getNumberList(values, 2)};
         if (n == 2) ok = setAzimuthLimits(values[0], values[1]);  // (left, right)
     }
     return ok;
@@ -862,7 +862,7 @@ bool Gimbal::setSlotElevationLimits(const base::List* const numList)
     bool ok{};
     if (numList != nullptr) {
         double values[2]{};
-        const unsigned int n{numList->getNumberList(values, 2)};
+        const std::size_t n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setElevationLimits(values[0], values[1]);
     }
     return ok;
@@ -899,7 +899,7 @@ bool Gimbal::setSlotRollLimits(const base::List* const numList)
     bool ok{};
     if (numList != nullptr) {
         double values[2]{};
-        const unsigned int n{numList->getNumberList(values, 2)};
+        const std::size_t n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setRollLimits(values[0], values[1]);
     }
     return ok;
@@ -935,7 +935,7 @@ bool Gimbal::setSlotMaxRates(const base::List* const numList)
     bool ok{};
     if (numList != nullptr) {
         double values[3]{};
-        const unsigned int n{numList->getNumberList(values, 3)};
+        const std::size_t n{numList->getNumberList(values, 3)};
         if (n == 2) ok = setMaxRates(values[0], values[1]);
         else if (n == 3) ok = setMaxRates(values[0], values[1], values[2]);
     }
@@ -985,7 +985,7 @@ bool Gimbal::setSlotCmdPos(const base::List* const numList)
     bool ok{};
     if (numList != nullptr) {
       double values[3]{};
-      const unsigned int n{numList->getNumberList(values, 3)};
+      const std::size_t n{numList->getNumberList(values, 3)};
       if (n == 2) ok = setCmdPos(values[0],values[1]);
       else if (n == 3) ok = setCmdPos(values[0], values[1], values[2]);
       if (ok) initCmdPos = cmdPos;
@@ -1033,7 +1033,7 @@ bool Gimbal::setSlotCmdRate(const base::List* const numList)
    bool ok{};
    if (numList != nullptr) {
       double values[3]{};
-      const unsigned int n{numList->getNumberList(values, 3)};
+      const std::size_t n{numList->getNumberList(values, 3)};
       if (n == 2) ok = setCmdRate(values[0],values[1]);
       else if (n == 3) ok = setCmdRate(values[0],values[1],values[2]);
       if (ok) initCmdRate = cmdRate;

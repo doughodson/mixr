@@ -70,12 +70,12 @@ void Table1::deleteData()
 bool Table1::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
-    const unsigned int n1{list.entries()};
+    const std::size_t n1{list.entries()};
     if (n1 <= 0 || n1 != nx) return false;
 
     // Transfer numbers from the list to a temp table
     const auto p = new double[nx];
-    const unsigned int n2{list.getNumberList(p, nx)};
+    const std::size_t n2{list.getNumberList(p, nx)};
     bool ok{nx == n2};
     if (ok) {
         // all is well -- copy the data

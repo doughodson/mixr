@@ -811,7 +811,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
 
     if (msg != nullptr) {
         // allocate space for the points
-        const unsigned int max{msg->entries()};
+        const std::size_t max{msg->entries()};
         const auto tmpFeba = new base::Vec2d[max];
 
         // Get the points from the pair stream

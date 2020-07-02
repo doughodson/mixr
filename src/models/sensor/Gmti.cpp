@@ -110,7 +110,7 @@ bool Gmti::setSlotPoi(base::List* const numList)
 {
     bool ok{};
     double values[3]{};
-    const unsigned int n{numList->getNumberList(values, 3)};
+    const std::size_t n{numList->getNumberList(values, 3)};
     if (n == 3) {
         setPoi(values[0], values[1], values[2]);
         ok = true;

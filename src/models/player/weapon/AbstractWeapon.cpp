@@ -1445,7 +1445,7 @@ bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
 {
     bool ok{};
     double values[3]{};
-    const unsigned int n{numList->getNumberList(values, 3)};
+    const std::size_t n{numList->getNumberList(values, 3)};
     if (n == 3) {
       base::Vec3d tp(values[0], values[1], values[2]);
       setTargetPosition(tp);

@@ -28,7 +28,7 @@ LatitudeReadout::LatitudeReadout()
 //------------------------------------------------------------------------------
 char LatitudeReadout::filterInputEvent(const int event, const char x)
 {
-   const char tc{static_cast<int>(x)};
+   const char tc = static_cast<int>(x);
    if (tc == '+') {
       // sign keys
       if (event == '8') {

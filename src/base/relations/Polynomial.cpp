@@ -88,10 +88,10 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
    bool ok {};
 
    if (msg != nullptr) {
-      unsigned int entries {msg->entries()};
+      std::size_t entries {msg->entries()};
       if ( entries <= MAX_COEFF ) {
-         double  aa[MAX_COEFF] {};   // Constant coefficients vector
-         unsigned int mm {msg->getNumberList(aa, MAX_COEFF)};
+         double aa[MAX_COEFF] {};   // Constant coefficients vector
+         std::size_t mm {msg->getNumberList(aa, MAX_COEFF)};
          ok = setCoefficients( aa, mm );
       }
 

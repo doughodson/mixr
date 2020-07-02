@@ -236,7 +236,7 @@ bool Route::incStpt()
     bool ok{};
     const base::PairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr) {
-        unsigned int n{steerpoints->entries()};
+        std::size_t n{steerpoints->entries()};
         unsigned int idx{stptIdx + 1};
         if (idx > n) idx = (wrap ? 1 : n);
         ok = directTo(idx);
@@ -251,7 +251,7 @@ bool Route::decStpt()
     bool ok{};
     const base::PairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr) {
-        unsigned int n{steerpoints->entries()};
+        std::size_t n{steerpoints->entries()};
         unsigned int idx{stptIdx - 1};
         if (idx < 1) idx = (wrap ? n : 1);
         ok = directTo(idx);

@@ -29,7 +29,7 @@ OctalReadout::OctalReadout()
 //------------------------------------------------------------------------------
 char OctalReadout::filterInputEvent(const int event, const char x)
 {
-   const char tc{static_cast<int>(x)};
+   const char tc = static_cast<int>(x);
    if (tc == '0' || tc == '#') {
       // Default numeric keys
       if ( event >= '0' && event <= '7' ) {

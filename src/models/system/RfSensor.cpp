@@ -415,7 +415,7 @@ bool RfSensor::setSlotRanges(base::List* const list)
     bool ok{};
     if (list != nullptr) {
         double rngs[100]{};
-        const unsigned int n{list->getNumberList(rngs,100)};
+        const std::size_t n{list->getNumberList(rngs,100)};
         ok = setRanges(rngs, n);
     }
     return ok;

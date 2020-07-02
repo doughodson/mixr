@@ -35,7 +35,7 @@ void TimeReadout::copyData(const TimeReadout& org, const bool)
 //------------------------------------------------------------------------------
 char TimeReadout::filterInputEvent(const int event, const char x)
 {
-   const char tc{static_cast<int>(x)};
+   const char tc = static_cast<int>(x);
    if (tc == '0' || tc == 'H' || tc == 'M' || tc == 'S') {
       // Default numeric keys
       if ( event >= '0' && event <= '9' ) {

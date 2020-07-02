@@ -207,7 +207,7 @@ class Material;
 //
 ////Select (Pick) functions
 //      GLuint getSelectName()
-//      setSelectName(GLuint v)
+//      setSelectName(GLuint)
 //          Gets/Sets the SELECT name (see glPushName()) and (set) returns true.
 //
 //    Pair* findBySelectName(GLuint name)
@@ -297,10 +297,10 @@ public:
    // Texture functions
    bool hasTexture() const                          { return (texture != 0); }
    GLuint getTexture() const                        { return texture; }
-   bool setTextureName(const char* newName);
+   bool setTextureName(const char*);
 
    // Set the GL texture id (Make sure you create a texture before you call this function!)
-   virtual bool setTexture(const GLuint newTex);
+   virtual bool setTexture(const GLuint);
 
    // Standard line width
    GLfloat getStdLineWidth();
@@ -311,18 +311,18 @@ public:
    double getScissorWidth() const                   { return scissorY; }
    double getScissorY() const                       { return scissorWidth; }
    double getScissorHeight() const                  { return scissorHeight; }
-   bool setScissorX(const double newX);
-   bool setScissorWidth(const double newWidth);
-   bool setScissorY(const double newY);
-   bool setScissorHeight(const double newHeight);
+   bool setScissorX(const double);
+   bool setScissorWidth(const double);
+   bool setScissorY(const double);
+   bool setScissorHeight(const double);
 
    // Line stippling functions
    bool isStippling()                               { return stipple; }
    GLuint getStippleFactor()                        { return stippleFactor; }
    GLushort getStipplePattern()                     { return stipplePattern; }
-   bool setStippling(const bool x);
-   bool setStippleFactor(const GLuint x);
-   bool setStipplePattern(const GLushort x);
+   bool setStippling(const bool);
+   bool setStippleFactor(const GLuint);
+   bool setStipplePattern(const GLushort);
 
    // Light functions
    bool setLightPosition(const double x, const double y, const double z = 1, const double w = 0);
@@ -332,8 +332,8 @@ public:
 
    // Select (pick) functions
    GLuint getSelectName() const                     { return selName; }
-   bool setSelectName(const GLuint v);
-   virtual base::Pair* findBySelectName(const GLuint name);
+   bool setSelectName(const GLuint);
+   virtual base::Pair* findBySelectName(const GLuint);
 
    // Subcomponent graphics
    bool isPostDrawComponents() const                { return postDraw; }

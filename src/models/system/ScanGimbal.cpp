@@ -889,7 +889,7 @@ bool ScanGimbal::setSlotSearchVolume(base::List* const numList)
     bool ok{};
     double values[2]{};
     if (numList != nullptr) {
-        const unsigned int n{numList->getNumberList(values, 2)};
+        const std::size_t n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setSearchVolume(values[0], values[1]);
     }
     return ok;
@@ -901,7 +901,7 @@ bool ScanGimbal::setSlotRefPosition(const base::List* const numList)
     bool ok{};
     double values[2]{};
     if (numList != nullptr) {
-        const unsigned int n{numList->getNumberList(values, 2)};
+        const std::size_t n{numList->getNumberList(values, 2)};
         if (n == 2) ok = setRefPosition(values[0], values[1]);
     }
     return ok;
@@ -964,7 +964,7 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
 
    if (prObj != nullptr) {
         // find how many vertices we have
-        const unsigned int n{prObj->entries()};
+        const std::size_t n{prObj->entries()};
         // Get the vertices from the pair stream
         nprv = 0;
         const base::List::Item* item{prObj->getFirstItem()};
@@ -978,7 +978,7 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
                 const auto msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
                     double values[2]{};
-                    const unsigned int nl{msg2->getNumberList(values, 2)};
+                    const std::size_t nl{msg2->getNumberList(values, 2)};
 
                     if (nl == 2) {
                         // set our values in our vector array

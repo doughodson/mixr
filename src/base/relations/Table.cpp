@@ -155,11 +155,11 @@ void Table::findMinMax(double* minValue, double* maxValue) const
 //------------------------------------------------------------------------------
 bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 {
-    const unsigned int n {list.entries()};
+    const std::size_t n{list.entries()};
     if (n <= 0) return false;
 
     const auto p = new double[n];
-    const unsigned int n2{list.getNumberList(p, n)};
+    const std::size_t n2{list.getNumberList(p, n)};
     bool ok{(n == n2)};
     if (ok) {
         // Have the data!

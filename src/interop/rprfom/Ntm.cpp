@@ -87,7 +87,7 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
    bool ok {};
    if (msg != nullptr) {
       int values[7] {};
-      unsigned int n {msg->getNumberList(values, 7) };
+      std::size_t n {msg->getNumberList(values, 7) };
       if (n >= 4) {
          // Need at least Kind, domain, country & category
          ok = true;  // First, assume they're valid
