@@ -53,10 +53,13 @@ private:
    // "x" must be set before "y".
    bool setSlotComputematrix1(const Angle* const);
    bool setSlotComputematrix1(const Number* const);
+
    bool setSlotComputematrix2(const Angle* const);
    bool setSlotComputematrix2(const Number* const);
+
    bool setSlotComputematrix3(const Angle* const);
    bool setSlotComputematrix3(const Number* const);
+
    bool setSlotComputematrix4(const Angle* const);
    bool setSlotComputematrix4(const Number* const);
 };

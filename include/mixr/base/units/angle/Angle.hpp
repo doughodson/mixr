@@ -11,7 +11,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Angle
-// Description: Abstract class for plane angles.  Base unit is Radians.
+// Description: Abstract class for plane angles - base unit is Radians
 //------------------------------------------------------------------------------
 class Angle : public Quantity
 {

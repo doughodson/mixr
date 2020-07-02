@@ -11,7 +11,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Area
-// Description: Abstract class for area. Base unit is a square meter (m^2).
+// Description: Abstract class for area - base unit is a square meter (m^2)
 //------------------------------------------------------------------------------
 class Area : public Quantity
 {
