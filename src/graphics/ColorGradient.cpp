@@ -41,23 +41,9 @@ void ColorGradient::deleteData()
     }
 }
 
-// set our slot colors via a pairstream
-bool ColorGradient::setSlotColors(base::PairStream* const newStream)
-{
-    if (myColors != nullptr) {
-        myColors->unref();
-        myColors = nullptr;
-    }
-    if (newStream != nullptr) {
-        myColors = newStream;
-        myColors->ref();
-    }
-    return true;
-}
-
 base::Color* ColorGradient::getColorByIdx(const int idx)
 {
-    base::Color* fCol = nullptr;
+    base::Color* fCol{};
 
     if (myColors != nullptr) {
         base::Pair* pair = myColors->getPosition(idx);
@@ -66,6 +52,18 @@ base::Color* ColorGradient::getColorByIdx(const int idx)
         }
     }
     return fCol;
+}
+
+// set our slot colors via a pairstream
+bool ColorGradient::setSlotColors(base::PairStream* const x)
+{
+    if (myColors != nullptr) {
+        myColors->unref();
+        myColors = nullptr;
+    }
+    myColors = x;
+    myColors->ref();
+    return true;
 }
 
 }

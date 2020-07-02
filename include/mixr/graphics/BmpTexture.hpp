@@ -6,7 +6,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-    namespace base { class String; }
+namespace base { class String; }
 
 namespace graphics {
 
@@ -19,7 +19,6 @@ namespace graphics {
 // Slots:
 //    path    <String>     ! Path to the texture directory (default: 0)
 //    file    <String>     ! BmpTexture file name (default: 0)
-//
 //------------------------------------------------------------------------------
 class BmpTexture : public Texture
 {

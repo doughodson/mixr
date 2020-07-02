@@ -55,47 +55,6 @@ void ColorRotary::deleteData()
 }
 
 //------------------------------------------------------------------------------
-// SLOT FUNCTIONS
-//------------------------------------------------------------------------------
-
-// set our slot colors via a PairStream
-bool ColorRotary::setSlotColors(base::PairStream* const newStream)
-{
-    bool ok = false;
-    if (newStream != nullptr) {
-        myColors = newStream;
-        myColors->ref();
-        ok = true;
-    }
-    return ok;
-}
-
-// set our slot values via a pairstream
-bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
-{
-    bool ok = false;
-    numVals = 0;
-    if (newStream != nullptr) {
-        base::PairStream* a = newStream->clone();
-        base::List::Item* item = a->getFirstItem();
-        while (item != nullptr) {
-            const auto pair = static_cast<base::Pair*>(item->getValue());
-            if (pair != nullptr) {
-                const auto n = dynamic_cast<base::Number*>(pair->object());
-                if (n != nullptr) {
-                    myValues[numVals] = n->asDouble();
-                    numVals++;
-                }
-            }
-            item = item->getNext();
-        }
-        ok = true;
-        a->unref();
-    }
-    return ok;
-}
-
-//------------------------------------------------------------------------------
 // determineColors() - take our value, and look for a corresponding color
 // and breakpoint
 //------------------------------------------------------------------------------
@@ -129,6 +88,39 @@ bool ColorRotary::determineColor(const double value)
         }
     }
     return ok;
+}
+
+//------------------------------------------------------------------------------
+// slot functions
+//------------------------------------------------------------------------------
+
+// set our slot colors via a PairStream
+bool ColorRotary::setSlotColors(base::PairStream* const x)
+{
+    myColors = x;
+    myColors->ref();
+    return true;
+}
+
+// set our slot values via a pairstream
+bool ColorRotary::setSlotValues(const base::PairStream* const x)
+{
+    numVals = 0;
+    base::PairStream* a = x->clone();
+    base::List::Item* item = a->getFirstItem();
+    while (item != nullptr) {
+        const auto pair = static_cast<base::Pair*>(item->getValue());
+        if (pair != nullptr) {
+            const auto n = dynamic_cast<base::Number*>(pair->object());
+            if (n != nullptr) {
+                myValues[numVals] = n->asDouble();
+                numVals++;
+            }
+        }
+        item = item->getNext();
+    }
+    a->unref();
+    return true;
 }
 
 }
