@@ -477,13 +477,15 @@ bool Page::processSubpages()
 }
 
 //------------------------------------------------------------------------------
+// slot methods
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
 // sets the initial page
 //------------------------------------------------------------------------------
 bool Page::setSlotPage(const base::Identifier* const x)
 {
-   if (x != nullptr) {
-      cPageName = x->asString();
-   }
+   cPageName = x->asString();
    return true;
 }
 
@@ -492,16 +494,11 @@ bool Page::setSlotPage(const base::Identifier* const x)
 //------------------------------------------------------------------------------
 bool Page::setSlotSubpageStream (base::PairStream* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      // When a PairStream (i.e., more than one, a list) of pages
-      if (subpages != nullptr) subpages->unref();
-      subpages = x;
-      subpages->ref();
-
-      ok = processSubpages();
-   }
-   return ok;
+   // When a PairStream (i.e., more than one, a list) of pages
+   if (subpages != nullptr) subpages->unref();
+   subpages = x;
+   subpages->ref();
+   return processSubpages();
 }
 
 //------------------------------------------------------------------------------
@@ -509,15 +506,10 @@ bool Page::setSlotSubpageStream (base::PairStream* const x)
 //------------------------------------------------------------------------------
 bool Page::setSlotSubpageSingle(Page* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      if (subpages != nullptr) subpages->unref();
-
-      subpages = new base::PairStream();
-      subpages->put( new base::Pair("1", x) );
-      ok = processSubpages();
-   }
-   return ok;
+   if (subpages != nullptr) subpages->unref();
+   subpages = new base::PairStream();
+   subpages->put( new base::Pair("1", x) );
+   return processSubpages();
 }
 
 //------------------------------------------------------------------------------
@@ -525,13 +517,11 @@ bool Page::setSlotSubpageSingle(Page* const x)
 //------------------------------------------------------------------------------
 bool Page::setSlotPagingEvent(base::PairStream* const x)
 {
-   if (x != nullptr) {
-      if (pageChgEvents != nullptr) {
-         pageChgEvents->unref();
-      }
-      pageChgEvents = x;
-      pageChgEvents->ref();
+   if (pageChgEvents != nullptr) {
+      pageChgEvents->unref();
    }
+   pageChgEvents = x;
+   pageChgEvents->ref();
    return true;
 }
 
@@ -540,9 +530,7 @@ bool Page::setSlotPagingEvent(base::PairStream* const x)
 //------------------------------------------------------------------------------
 bool Page::setSlotDrawSubpageFirst(const base::Boolean* const x)
 {
-   if (x != nullptr) {
-      postDraw1 = x->asBool();
-   }
+   postDraw1 = x->asBool();
    return true;
 }
 
@@ -551,12 +539,7 @@ bool Page::setSlotDrawSubpageFirst(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 bool Page::setSlotFocusSlavedToSubpage(const base::Boolean* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      setFocusSlavedToSubpage( x->asBool() );
-   } else {
-      ok = false;
-   }
+   setFocusSlavedToSubpage( x->asBool() );
    return true;
 }
 
