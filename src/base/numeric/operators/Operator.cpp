@@ -38,10 +38,8 @@ void Operator::copyData(const Operator& org, const bool)
 
 bool Operator::setSecondNumber(const Number* const x)
 {
-    if (x != nullptr) {
-        n2 = x->asDouble();
-        operation();
-    }
+    n2 = x->asDouble();
+    operation();
     return true;
 }
 

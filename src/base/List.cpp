@@ -18,25 +18,25 @@ List::List()
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const double values[], const unsigned int nv)
+List::List(const double values[], const std::size_t nv)
 {
     STANDARD_CONSTRUCTOR()
 
     // Create Float's for each value and add to the list.
-    for (unsigned int i = 0; i < nv; i++) {
-        const auto p = new Float(values[i]);
+    for (std::size_t i = 0; i < nv; i++) {
+        const auto p{new Float(values[i])};
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
 }
 
-List::List(const int values[], const unsigned int nv)
+List::List(const int values[], const std::size_t nv)
 {
     STANDARD_CONSTRUCTOR()
 
     // Create Integer's for each value and add to the list.
-    for (unsigned int i = 0; i < nv; i++) {
-        const auto p = new Integer(values[i]);
+    for (std::size_t i = 0; i < nv; i++) {
+        const auto p{new Integer(values[i])};
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
@@ -97,13 +97,13 @@ void List::clear()
 
 
 // find object on the list
-unsigned int List::getIndex(const Object* const obj) const
+std::size_t List::getIndex(const Object* const x) const
 {
     const Item* p{};
-    int idx{};
+    std::size_t idx{};
     for (const Item* d = headP; d != nullptr; d = d->getNext() ) {
         idx++;
-        if ( obj == d->getValue() )  {
+        if ( x == d->getValue() )  {
             p = d;
             break;
         }
@@ -159,9 +159,9 @@ bool List::remove(const Object* const obj)
 //      The number of values placed in 'values' is returned by
 //      getNumberList().
 //------------------------------------------------------------------------------
-unsigned int List::getNumberList(double values[], const unsigned int max) const
+std::size_t List::getNumberList(double values[], const std::size_t max) const
 {
-    unsigned int n{};
+    std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
@@ -181,9 +181,9 @@ unsigned int List::getNumberList(double values[], const unsigned int max) const
     return n;
 }
 
-unsigned int List::getNumberList(float values[], const unsigned int max) const
+std::size_t List::getNumberList(float values[], const std::size_t max) const
 {
-    unsigned int n{};
+    std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
@@ -204,9 +204,9 @@ unsigned int List::getNumberList(float values[], const unsigned int max) const
 }
 
 
-unsigned int List::getNumberList(int values[], const unsigned int max) const
+std::size_t List::getNumberList(int values[], const std::size_t max) const
 {
-    unsigned int n{};
+    std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
@@ -344,10 +344,10 @@ bool List::operator!=(const List& l) const
 }
 
 // returns the object at the n'th position; w/o next pointer
-const Object* List::getPosition1(const unsigned int n) const
+const Object* List::getPosition1(const std::size_t n) const
 {
     if (n < 1 || n > num) return nullptr;
-    unsigned int i{1};
+    std::size_t i{1};
     const Item* p{getFirstItem()};
     while (i < n && p != nullptr) {
         p = p->getNext();

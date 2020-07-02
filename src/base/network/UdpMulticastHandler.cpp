@@ -244,36 +244,24 @@ bool UdpMulticastHandler::closeConnection()
 //------------------------------------------------------------------------------
 
 // multicastGroup: String containing the multicast IP address
-bool UdpMulticastHandler::setSlotMulticastGroup(const String* const msg)
+bool UdpMulticastHandler::setSlotMulticastGroup(const String* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        multicastGroup = msg->c_str();
-        ok = true;
-    }
-    return ok;
+    multicastGroup = x->c_str();
+    return true;
 }
 
 // ttl: Time-To-Live value
-bool UdpMulticastHandler::setSlotTTL(const Integer* const msg)
+bool UdpMulticastHandler::setSlotTTL(const Integer* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        setTTL( msg->asInt() );
-        ok = true;
-    }
-    return ok;
+    setTTL(x->asInt());
+    return true;
 }
 
 // loopback: Loopback flag
-bool UdpMulticastHandler::setSlotLoopback(const Boolean* const msg)
+bool UdpMulticastHandler::setSlotLoopback(const Boolean* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        setLoopback( msg->asBool() );
-        ok = true;
-    }
-    return ok;
+    setLoopback(x->asBool());
+    return true;
 }
 
 }

@@ -50,14 +50,10 @@ void Decibel::setValue(const double v)
    db = std::log10(v) * 10.0;
 }
 
-bool Decibel::setSlotValue(const Number* const msg)
+bool Decibel::setSlotValue(const Number* const x)
 {
-   bool ok{};
-   if (msg != nullptr) {
-      setValuedB( msg->asDouble() );
-      ok = true;
-   }
-   return ok;
+   setValuedB(x->asDouble());
+   return true;
 }
 
 }

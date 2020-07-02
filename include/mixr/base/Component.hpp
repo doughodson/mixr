@@ -39,7 +39,7 @@ class String;
 //
 //    printTimingStats     <Boolean>    ! Enable/disable the printing of the timing statistics (default: false)
 //
-//    freeze               <Boolean>    ! Freeze flag: true- frozen, false- unfrozen; (default: false)
+//    freeze               <Boolean>    ! Freeze flag: true/frozen, false/unfrozen; (default: false)
 //
 //    enableMessageType    <Identifier> ! Enable message type { warning info debug user data }
 //                         <Integer>    ! Enable message type by number (e.g., 0x0100)

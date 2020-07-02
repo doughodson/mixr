@@ -48,11 +48,7 @@ END_SLOTTABLE(EarthModel)
 
 BEGIN_SLOT_MAP(EarthModel)
    ON_SLOT(1, setSlotA, Length)
-   ON_SLOT(1, setSlotA, Number)
-
    ON_SLOT(2, setSlotB, Length)
-   ON_SLOT(2, setSlotB, Number)
-
    ON_SLOT(3, setSlotF, Number)
 END_SLOT_MAP()
 
@@ -159,47 +155,17 @@ bool EarthModel::setF(const double f0)
 //------------------------------------------------------------------------------
 bool EarthModel::setSlotA(const Length* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      ok = setA(x->getValueInMeters());
-   }
-   return ok;
-}
-
-bool EarthModel::setSlotA(const Number* const x)
-{
-   bool ok{};
-   if (x != nullptr) {
-      ok = setA( x->asDouble() );
-   }
-   return ok;
+   return setA(x->getValueInMeters());
 }
 
 bool EarthModel::setSlotB(const Length* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      ok = setB(x->getValueInMeters());
-   }
-   return ok;
-}
-
-bool EarthModel::setSlotB(const Number* const msg)
-{
-   bool ok{};
-   if (msg != nullptr) {
-      ok = setB( msg->asDouble() );
-   }
-   return ok;
+   return setB(x->getValueInMeters());
 }
 
 bool EarthModel::setSlotF(const Number* const msg)
 {
-   bool ok{};
-   if (msg != nullptr) {
-      ok = setF( msg->asDouble() );
-   }
-   return ok;
+   return setF( msg->asDouble() );
 }
 
 }

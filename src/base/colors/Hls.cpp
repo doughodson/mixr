@@ -74,10 +74,9 @@ void Hls::getHLS(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotHue() -- set the hue value
 //------------------------------------------------------------------------------
-bool Hls::setSlotHue(const Number* const msg)
+bool Hls::setSlotHue(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 360};
     if (ok) {
         hls[HUE] = value;
@@ -91,10 +90,9 @@ bool Hls::setSlotHue(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotSaturation() -- set the saturation value
 //------------------------------------------------------------------------------
-bool Hls::setSlotSaturation(const Number* const msg)
+bool Hls::setSlotSaturation(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         hls[SATURATION] = value;
@@ -108,10 +106,9 @@ bool Hls::setSlotSaturation(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotLightness() -- set the lightness value
 //------------------------------------------------------------------------------
-bool Hls::setSlotLightness(const Number* const msg)
+bool Hls::setSlotLightness(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         hls[LIGHTNESS] = value;

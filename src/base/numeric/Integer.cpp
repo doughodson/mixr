@@ -21,14 +21,10 @@ void Integer::copyData(const Integer& org, const bool)
    value = org.value;
 }
 
-bool Integer::setSlotValue(const Integer* const num)
+bool Integer::setSlotValue(const Integer* const x)
 {
-   bool ok{};
-   if (num != nullptr) {
-      value = num->asInt();
-      ok = true;
-   }
-   return ok;
+   value = x->asInt();
+   return true;
 }
 
 }

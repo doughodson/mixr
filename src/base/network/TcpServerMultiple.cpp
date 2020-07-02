@@ -162,13 +162,9 @@ bool TcpServerMultiple::setBacklog(const unsigned int value)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool TcpServerMultiple::setSlotBacklog(const Integer* const msg)
+bool TcpServerMultiple::setSlotBacklog(const Integer* const x)
 {
-   bool ok{};
-   if (msg != nullptr) {
-      ok = setBacklog(msg->asInt());
-   }
-   return ok;
+   return setBacklog(x->asInt());
 }
 
 }

@@ -169,14 +169,10 @@ bool UdpBroadcastHandler::bindSocket()
 //------------------------------------------------------------------------------
 
 // networkMask: Host Net Mask   "255.255.255.255"
-bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
+bool UdpBroadcastHandler::setSlotNetworkMask(const String* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        networkMask = msg->c_str();
-        ok = true;
-    }
-    return ok;
+    networkMask = x->c_str();
+    return true;
 }
 
 }

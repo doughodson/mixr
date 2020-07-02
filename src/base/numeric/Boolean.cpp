@@ -23,12 +23,8 @@ void Boolean::copyData(const Boolean& org, const bool)
 
 bool Boolean::setSlotValue(const Boolean* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      value = x->value;
-      ok = true;
-   }
-   return ok;
+   value = x->value;
+   return true;
 }
 
 }

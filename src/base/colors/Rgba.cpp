@@ -30,11 +30,10 @@ Rgba::Rgba()
    STANDARD_CONSTRUCTOR()
 }
 
-bool Rgba::setSlotAlpha(const Number* const msg)
+bool Rgba::setSlotAlpha(const Number* const x)
 {
-    double value{msg->asDouble()};
-    bool ok{setAlpha( value )};
-    if (!ok) std::cerr << "Rgba::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+    bool ok{setAlpha(x->asDouble())};
+    if (!ok) std::cerr << "Rgba::setAlpha: invalid entry(" << x->asDouble() << "), valid range: 0 to 1" << std::endl;
     return ok;
 }
 

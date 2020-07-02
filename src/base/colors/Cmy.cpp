@@ -71,10 +71,9 @@ void Cmy::getCMY(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotCyan() -- set the cyan value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotCyan(const Number* const msg)
+bool Cmy::setSlotCyan(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    double value{msg->asDouble()};
+    double value{x->asDouble()};
     bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[CYAN] = value;
@@ -88,10 +87,9 @@ bool Cmy::setSlotCyan(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotMagenta() -- set the magenta value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotMagenta(const Number* const msg)
+bool Cmy::setSlotMagenta(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[MAGENTA] = value;
@@ -105,10 +103,9 @@ bool Cmy::setSlotMagenta(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotYellow() -- set the yellow value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotYellow(const Number* const msg)
+bool Cmy::setSlotYellow(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cmy[YELLOW] = value;

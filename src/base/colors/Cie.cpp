@@ -85,11 +85,10 @@ void Cie::getCIE(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotLuminance() -- set the luminance value
 //------------------------------------------------------------------------------
-bool Cie::setSlotLuminance(const Number* const msg)
+bool Cie::setSlotLuminance(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{x->asDouble()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cie[LUMINANCE] = value;
         cie2rgb(color,cie,monitor);
@@ -102,11 +101,10 @@ bool Cie::setSlotLuminance(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotX() -- set the X value
 //------------------------------------------------------------------------------
-bool Cie::setSlotX(const Number* const msg)
+bool Cie::setSlotX(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{x->asDouble()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cie[X] = value;
         cie2rgb(color,cie,monitor);
@@ -117,16 +115,15 @@ bool Cie::setSlotX(const Number* const msg)
 }
 
 //------------------------------------------------------------------------------
-// setSlotY() -- set the X value
+// setSlotY() -- set the Y value
 //------------------------------------------------------------------------------
-bool Cie::setSlotY(const Number* const msg)
+bool Cie::setSlotY(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
-    const bool ok = (value >= 0 && value <= 1);
+    const double value{x->asDouble()};
+    const bool ok{value >= 0 && value <= 1};
     if (ok) {
         cie[Y] = value;
-        cie2rgb(color,cie,monitor);
+        cie2rgb(color, cie, monitor);
     } else {
         std::cerr << "Cie::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     }
@@ -136,10 +133,9 @@ bool Cie::setSlotY(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotMonitor() -- set the monitor parameters
 //------------------------------------------------------------------------------
-bool Cie::setSlotMonitor(const MonitorMetrics* const msg)
+bool Cie::setSlotMonitor(const MonitorMetrics* const x)
 {
-    if (msg == nullptr) return false;
-    monitor = msg;
+    monitor = x;
     cie2rgb(color, cie, monitor);
     return true;
 }
@@ -149,9 +145,6 @@ bool Cie::setSlotMonitor(const MonitorMetrics* const msg)
 //------------------------------------------------------------------------------
 void Cie::cie2rgb(Vec4d& rgb, const Vec3d& cie, const MonitorMetrics* m)
 {
-   if ( m == nullptr )
-      return;
-
    m->cie2rgb(rgb, cie);
 }
 

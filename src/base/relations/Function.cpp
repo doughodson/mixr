@@ -62,9 +62,9 @@ FStorage* Function::storageFactory() const
    }
 }
 
-bool Function::setSlotLfiTable(const Table* const msg)
+bool Function::setSlotLfiTable(const Table* const x)
 {
-   table = msg;
+   table = x;
    return true;
 }
 

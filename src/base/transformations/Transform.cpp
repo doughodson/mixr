@@ -64,15 +64,9 @@ bool Transform::setSlotComputematrix1(const Angle* const x)
 
 bool Transform::setSlotComputematrix1(const Number* const x)
 {
-    bool ok{true};
-    if (x != nullptr) {
-        v[nv++] = x->asDouble();
-        computeMatrix();
-    } else {
-        std::cerr << "Transform::setComputematrix1:  Invalid Number type or input" << std::endl;
-        ok = false;
-    }
-    return ok;
+    v[nv++] = x->asDouble();
+    computeMatrix();
+    return true;
 }
 
 bool Transform::setSlotComputematrix2(const Angle* const x)
@@ -88,17 +82,11 @@ bool Transform::setSlotComputematrix2(const Angle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix2(const Number* const sc2obj)
+bool Transform::setSlotComputematrix2(const Number* const x)
 {
-    bool ok{true};
-    if (sc2obj != nullptr) {
-        v[nv++] = sc2obj->asDouble();
-        computeMatrix();
-    } else {
-        std::cerr << "Transform::setComputematrix2:  Invalid Number type or input" << std::endl;
-        ok = false;
-    }
-    return ok;
+    v[nv++] = x->asDouble();
+    computeMatrix();
+    return true;
 }
 
 bool Transform::setSlotComputematrix3(const Angle* const x)
@@ -114,17 +102,11 @@ bool Transform::setSlotComputematrix3(const Angle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix3(const Number* const sc3obj)
+bool Transform::setSlotComputematrix3(const Number* const x)
 {
-    bool ok{true};
-    if (sc3obj != nullptr) {
-        v[nv++] = sc3obj->asDouble();
-        computeMatrix();
-    } else {
-        std::cerr << "Transform::setComputematrix3:  Invalid Number type or input" << std::endl;
-        ok = false;
-    }
-    return ok;
+    v[nv++] = x->asDouble();
+    computeMatrix();
+    return true;
 }
 
 bool Transform::setSlotComputematrix4(const Angle* const x)
@@ -140,17 +122,11 @@ bool Transform::setSlotComputematrix4(const Angle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix4(const Number* const sc4obj)
+bool Transform::setSlotComputematrix4(const Number* const x)
 {
-    bool ok{true};
-    if (sc4obj != nullptr) {
-        v[nv++] = sc4obj->asDouble();
-        computeMatrix();
-    } else {
-        std::cerr << "Transform::setComputematrix4:  Invalid Number type or input" << std::endl;
-        ok = false;
-    }
-    return ok;
+    v[nv++] = x->asDouble();
+    computeMatrix();
+    return true;
 }
 
 }

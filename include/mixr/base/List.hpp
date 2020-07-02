@@ -4,6 +4,8 @@
 
 #include "mixr/base/Object.hpp"
 
+#include <cstddef>
+
 namespace mixr {
 namespace base {
 
@@ -59,8 +61,8 @@ public:
    List();
    // Constructors; construct a list of 'nv' Float (Integer)
    // objects each containing a value from 'values'.
-   List(const double values[], const unsigned int nv);
-   List(const int values[], const unsigned int nv);
+   List(const double values[], const std::size_t nv);
+   List(const int values[], const std::size_t nv);
 
 
    // Fills the array, values, with values from the list.  Positions
@@ -69,9 +71,9 @@ public:
    // have a value of zero.  The maximum number of values stored in
    // the array is set by 'max'.  getNumberList() returns the number
    // of values stored in the array.
-   unsigned int getNumberList(double values[], const unsigned int max) const;
-   unsigned int getNumberList(float values[], const unsigned int max) const;
-   unsigned int getNumberList(int values[], const unsigned int max) const;
+   std::size_t getNumberList(double values[], const std::size_t max) const;
+   std::size_t getNumberList(float values[], const std::size_t max) const;
+   std::size_t getNumberList(int values[], const std::size_t max) const;
 
    // operators to compare the List with other lists.
    bool operator==(const List&) const;
@@ -80,7 +82,7 @@ public:
    // returns true if entries() is zero
    bool isEmpty() const                            { return (num == 0); }
    // returns the number of entries in this list
-   unsigned int entries() const                    { return num; }
+   std::size_t entries() const                     { return num; }
    // clears or empties the list
    void clear();
 
@@ -97,28 +99,27 @@ public:
 
    // Finds the object 'obj' in the list and returns the position
    // index.  If the object is not found, zero is returned.
-   unsigned int getIndex(const Object* const obj) const;
+   std::size_t getIndex(const Object* const) const;
 
    // returns a pointer to the n'th object on the list.
-   Object* getPosition(const unsigned int n)              { return const_cast<Object*>(getPosition1(n)); }
-   const Object* getPosition(const unsigned int n) const  { return getPosition1(n); }
+   Object* getPosition(const std::size_t n)              { return const_cast<Object*>(getPosition1(n)); }
+   const Object* getPosition(const std::size_t n) const  { return getPosition1(n); }
 
    // Adds an object to the head (tail) of this list.
    // The Object is referenced, ref(), by these routines.
-   void addHead(Object* const obj);
-   void addTail(Object* const obj);
+   void addHead(Object* const);
+   void addTail(Object* const);
 
    // Removes 'obj' from this list and true is returned.  If the
    // object 'obj' is not found then false is returned.  The Object
    // is unref() and therefore possibly deleted.
-   bool remove(const Object* const obj);
+   bool remove(const Object* const);
 
    // Removes the object at the head (tail) of this list.  Ownership of
    // Object is passed to the caller (i.e., these routines do not
    // unref() the object and the caller should not ref() the object).
    Object* removeHead();
    Object* removeTail();
-
 
    // Return pointers to the first/last List::Item.  The List::Item
    // member functions below are used to traverse the list.
@@ -129,25 +130,25 @@ public:
 
    // Adds a List::Item to the first or last positions (head or tail)
    // of the list.
-   void addHead(Item* newItem);
-   void addTail(Item* newItem);
+   void addHead(Item*);
+   void addTail(Item*);
 
    // Inserts the new List::Item, newItem, before the reference
    // List::Item, refItem.
    bool insert(Item* newItem, Item* refItem);
 
-   // finds and removes the List::Item, oldItem, from the list.
-   Object* remove(Item* oldItem);
+   // finds and removes the Item from the list.
+   Object* remove(Item*);
 
    bool isValid() const override;
 
 private:
-   const Object* getPosition1(const unsigned int n) const;
+   const Object* getPosition1(const std::size_t) const;
 
    Item* headP{};       // Pointer to head object
    Item* tailP{};       // Pointer to last object
 
-   unsigned int num{};  // Number of list objects
+   std::size_t num{};   // Number of list objects
 };
 
 }

@@ -86,10 +86,9 @@ void Hsv::getHSVA(Vec4d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotHue() -- set the HSV hue
 //------------------------------------------------------------------------------
-bool Hsv::setSlotHue(const Number* const msg)
+bool Hsv::setSlotHue(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    double value{msg->asDouble()};
+    double value{x->asDouble()};
     bool ok{value >= 0 && value <= 360};
     if (ok) {
         hsv[HUE] = value;
@@ -103,10 +102,9 @@ bool Hsv::setSlotHue(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotSaturation() -- set the HSV saturation
 //------------------------------------------------------------------------------
-bool Hsv::setSlotSaturation(const Number* const msg)
+bool Hsv::setSlotSaturation(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    double value{msg->asDouble()};
+    double value{x->asDouble()};
     bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[SATURATION] = value;
@@ -120,10 +118,9 @@ bool Hsv::setSlotSaturation(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotValue() -- set the HSV value
 //------------------------------------------------------------------------------
-bool Hsv::setSlotValue(const Number* const msg)
+bool Hsv::setSlotValue(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    double value{msg->asDouble()};
+    double value{x->asDouble()};
     bool ok{value >= 0 && value <= 1};
     if (ok) {
         hsv[VALUE] = value;

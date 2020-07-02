@@ -38,13 +38,13 @@ void Arbiter::deleteData()
 AbstractAction* Arbiter::genAction(const AbstractState* const state, const double dt)
 {
    // create list for action set
-   const auto actionSet = new base::List();
+   const auto actionSet{new base::List()};
 
    // fill out list of recommended actions by behaviors
    base::List::Item* item{behaviors->getFirstItem()};
    while (item != nullptr) {
       // get a behavior
-      const auto behavior = static_cast<AbstractBehavior*>(item->getValue());
+      const auto behavior{static_cast<AbstractBehavior*>(item->getValue())};
       // generate action, we have reference
       AbstractAction* action{behavior->genAction(state, dt)};
       if (action != nullptr) {
@@ -129,9 +129,9 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    {
       base::List::Item* item{x->getFirstItem()};
       while (item != nullptr && ok) {
-         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
-         const auto b = dynamic_cast<AbstractBehavior*>( pair->object() );
+         const auto b{dynamic_cast<AbstractBehavior*>(pair->object())};
          if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << (*pair).slot() << " is NOT of a Behavior type!" << std::endl;

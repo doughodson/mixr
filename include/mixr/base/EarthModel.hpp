@@ -19,11 +19,7 @@ class Number;
 // Factory name: EarthModel
 // Slots:
 //     a    <Length>    ! Semi major axis
-//     a    <Number>    ! -- in meters
-//
 //     b    <Length>    ! Semi minor axis
-//     b    <Number>    ! -- in meters
-//
 //     f    <Number>    ! Flattening
 //------------------------------------------------------------------------------
 class EarthModel : public Object
@@ -83,9 +79,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotA(const Length* const);
-   bool setSlotA(const Number* const);
    bool setSlotB(const Length* const);
-   bool setSlotB(const Number* const);
    bool setSlotF(const Number* const);
 };
 

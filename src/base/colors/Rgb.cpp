@@ -43,32 +43,29 @@ void Rgb::copyData(const Rgb& org, const bool)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Rgb::setSlotRed(const Number* const msg)
+bool Rgb::setSlotRed(const Number* const x)
 {
-    const double value{msg->asDouble()};
-    const bool ok{setRed( value )};
+    const bool ok{setRed(x->asDouble())};
     if (!ok) {
-        std::cerr << "Rgb::setRed: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+        std::cerr << "Rgb::setRed: invalid entry(" << x->asDouble() << "), valid range: 0 to 1" << std::endl;
     }
     return ok;
 }
 
-bool Rgb::setSlotGreen(const Number* const msg)
+bool Rgb::setSlotGreen(const Number* const x)
 {
-    const double value{msg->asDouble()};
-    const bool ok{setGreen( value )};
+    const bool ok{setGreen(x->asDouble())};
     if (!ok) {
-        std::cerr << "Rgb::setGreen: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+        std::cerr << "Rgb::setGreen: invalid entry(" << x->asDouble() << "), valid range: 0 to 1" << std::endl;
     }
     return ok;
 }
 
-bool Rgb::setSlotBlue(const Number* const msg)
+bool Rgb::setSlotBlue(const Number* const x)
 {
-    const double value{msg->asDouble()};
-    const bool ok{setBlue( value )};
+    const bool ok{setBlue(x->asDouble())};
     if (!ok) {
-        std::cerr << "Rgb::setBlue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
+        std::cerr << "Rgb::setBlue: invalid entry(" << x->asDouble() << "), valid range: 0 to 1" << std::endl;
     }
     return ok;
 }

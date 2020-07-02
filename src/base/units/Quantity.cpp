@@ -26,12 +26,8 @@ void Quantity::copyData(const Quantity& org, const bool)
 
 bool Quantity::setSlotValue(const Number* const x)
 {
-   bool ok{};
-   if (x != nullptr) {
-      value = convertToBaseUnit(x->asDouble());
-      ok = true;
-   }
-   return ok;
+   value = convertToBaseUnit(x->asDouble());
+   return true;
 }
 
 }

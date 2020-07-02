@@ -169,25 +169,17 @@ bool UdpUnicastHandler::sendDataTo(
 //------------------------------------------------------------------------------
 
 // ipAddress: String containing the IP address
-bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
+bool UdpUnicastHandler::setSlotIpAddress(const String* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        ipAddr = msg->c_str();
-        ok = true;
-    }
-    return ok;
+    ipAddr = x->c_str();
+    return true;
 }
 
 // ipAddress: Identifier containing the IP address
-bool UdpUnicastHandler::setSlotIpAddress(const Identifier* const msg)
+bool UdpUnicastHandler::setSlotIpAddress(const Identifier* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        ipAddr = msg->asString();
-        ok = true;
-    }
-    return ok;
+    ipAddr = x->asString();
+    return true;
 }
 
 }

@@ -71,10 +71,9 @@ void Yiq::getYIQ(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotY() -- set the Y value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotY(const Number* const msg)
+bool Yiq::setSlotY(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value {msg->asDouble()};
+    const double value {x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
     if (ok) {
         yiq[Y] = value;
@@ -88,10 +87,9 @@ bool Yiq::setSlotY(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotI() -- set the I value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotI(const Number* const msg)
+bool Yiq::setSlotI(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= -0.6 && value <= 0.6};
     if (ok) {
         yiq[I] = value;
@@ -105,10 +103,9 @@ bool Yiq::setSlotI(const Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotQ() -- set the Q value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotQ(const Number* const msg)
+bool Yiq::setSlotQ(const Number* const x)
 {
-    if (msg == nullptr) return false;
-    const double value{msg->asDouble()};
+    const double value{x->asDouble()};
     const bool ok{value >= -0.52 && value <= 0.52};
     if (ok) {
         yiq[Q] = value;

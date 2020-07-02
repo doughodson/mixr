@@ -803,21 +803,19 @@ bool Component::setSlotComponent(Component* const single)
 }
 
 // enableMessageType --- Enable message type { warning info debug user data }
-bool Component::setSlotEnableMsgType(const Identifier* const msg)
+bool Component::setSlotEnableMsgType(const Identifier* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const Identifier* p{msg};
-      if (*p == "warning")    ok = enableMessageTypes(MSG_WARNING);
-      else if (*p == "info")  ok = enableMessageTypes(MSG_INFO);
-      else if (*p == "debug") ok = enableMessageTypes(MSG_DEBUG);
-      else if (*p == "user")  ok = enableMessageTypes(MSG_USER);
-      else if (*p == "data")  ok = enableMessageTypes(MSG_DATA);
-      else {
-         if (isMessageEnabled(MSG_ERROR)) {
-             std::cerr << "Object::setSlotEnableMsgType(): unknown message type: " << *p;
-             std::cerr << "; use: { warning info debug user data }" << std::endl;
-         }
+   const Identifier* p{x};
+   if (*p == "warning")    ok = enableMessageTypes(MSG_WARNING);
+   else if (*p == "info")  ok = enableMessageTypes(MSG_INFO);
+   else if (*p == "debug") ok = enableMessageTypes(MSG_DEBUG);
+   else if (*p == "user")  ok = enableMessageTypes(MSG_USER);
+   else if (*p == "data")  ok = enableMessageTypes(MSG_DATA);
+   else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Object::setSlotEnableMsgType(): unknown message type: " << *p;
+         std::cerr << "; use: { warning info debug user data }" << std::endl;
       }
    }
    return ok;

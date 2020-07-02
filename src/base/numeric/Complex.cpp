@@ -40,15 +40,15 @@ void Complex::copyData(const Complex& org, const bool)
    value = org.value;
 }
 
-bool Complex::setSlotReal(const Number* const msg)
+bool Complex::setSlotReal(const Number* const x)
 {
-    value.real(msg->asDouble());
+    value.real(x->asDouble());
     return true;
 }
 
-bool Complex::setSlotImaginary(const Number* const msg)
+bool Complex::setSlotImaginary(const Number* const x)
 {
-    value.imag(msg->asDouble());
+    value.imag(x->asDouble());
     return true;
 }
 

@@ -482,102 +482,80 @@ bool PosixHandler::setLocalAddr(const char* const hostname)
 //------------------------------------------------------------------------------
 
 // localIpAddress: String containing the local IP address
-bool PosixHandler::setSlotLocalIpAddress(const Identifier* const msg)
+bool PosixHandler::setSlotLocalIpAddress(const Identifier* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        localIpAddr = msg->asString();
-        ok = true;
-    }
-    return ok;
+    localIpAddr = x->asString();
+    return true;
 }
 
 // localIpAddress: String containing the local IP address
-bool PosixHandler::setSlotLocalIpAddress(const String* const msg)
+bool PosixHandler::setSlotLocalIpAddress(const String* const x)
 {
-    bool ok{};
-    if (msg != nullptr) {
-        localIpAddr = msg->c_str();
-        ok = true;
-    }
-    return ok;
+    localIpAddr = x->c_str();
+    return true;
 }
 
 // port: Port number
-bool PosixHandler::setSlotPort(const Integer* const msg)
+bool PosixHandler::setSlotPort(const Integer* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const int ii{msg->asInt()};
-        if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setPort( static_cast<uint16_t>(ii) );
-        }
+    const int ii{x->asInt()};
+    if (ii >= 0x0 && ii <= 0xffff) {
+        ok = setPort( static_cast<uint16_t>(ii) );
     }
     return ok;
 }
 
 // localPort: Local (source) port number
-bool PosixHandler::setSlotLocalPort(const Integer* const msg)
+bool PosixHandler::setSlotLocalPort(const Integer* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const int ii{msg->asInt()};
-        if (ii >= 0x0 && ii <= 0xffff) {
-            ok = setLocalPort( static_cast<uint16_t>(ii) );
-        }
+    const int ii{x->asInt()};
+    if (ii >= 0x0 && ii <= 0xffff) {
+        ok = setLocalPort( static_cast<uint16_t>(ii) );
     }
     return ok;
 }
 
 // shared: Reuse the port
-bool PosixHandler::setSlotShared(const Boolean* const msg)
+bool PosixHandler::setSlotShared(const Boolean* const x)
+{
+    setSharedFlag(x->asBool());
+    return true;
+}
+
+// sendBuffSizeKb: Send buffer size in KB's    (default:  32 Kb)
+bool PosixHandler::setSlotSendBuffSize(const Integer* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        setSharedFlag( msg->asBool() );
+    const int ii{x->asInt()};
+    if (ii >= 0 && ii <= 1024) {
+        sendBuffSizeKb = ii;
         ok = true;
     }
     return ok;
 }
 
-// sendBuffSizeKb: Send buffer size in KB's    (default:  32 Kb)
-bool PosixHandler::setSlotSendBuffSize(const Integer* const msg)
-{
-    bool ok{};
-    if (msg != nullptr) {
-        const int ii{msg->asInt()};
-        if (ii >= 0 && ii <= 1024) {
-           sendBuffSizeKb = ii;
-           ok = true;
-        }
-    }
-    return ok;
-}
-
 // recvBuffSizeKb: Receive buffer size in KB's (default: 128 Kb)
-bool PosixHandler::setSlotRecvBuffSize(const Integer* const msg)
+bool PosixHandler::setSlotRecvBuffSize(const Integer* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const int ii{msg->asInt()};
-        if (ii >= 0 && ii <= 1024) {
-           recvBuffSizeKb = ii;
-           ok = true;
-        }
+    const int ii{x->asInt()};
+    if (ii >= 0 && ii <= 1024) {
+        recvBuffSizeKb = ii;
+        ok = true;
     }
     return ok;
 }
 
 // setSlotIgnoreSourcePort: Ignore message from our this source port number
-bool PosixHandler::setSlotIgnoreSourcePort(const Integer* const msg)
+bool PosixHandler::setSlotIgnoreSourcePort(const Integer* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const int ii{msg->asInt()};
-        if (ii >= 0x0 && ii <= 0xffff) {
-            ignoreSourcePort = uint16_t(ii);
-            ok = true;
-        }
+    const int ii{x->asInt()};
+    if (ii >= 0x0 && ii <= 0xffff) {
+        ignoreSourcePort = uint16_t(ii);
+        ok = true;
     }
     return ok;
 }

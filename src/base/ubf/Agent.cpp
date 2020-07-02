@@ -132,24 +132,16 @@ void Agent::initActor()
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool Agent::setSlotState(AbstractState* const state)
+bool Agent::setSlotState(AbstractState* const x)
 {
-   bool ok{};
-   if (state != nullptr) {
-      setState(state);
-      ok = true;
-   }
-   return ok;
+   setState(x);
+   return true;
 }
 
 bool Agent::setSlotBehavior(AbstractBehavior* const x)
 {
-   bool ok{};
-   if ( x!=nullptr ) {
-      setBehavior(x);
-      ok = true;
-   }
-   return ok;
+   setBehavior(x);
+   return true;
 }
 
 //==============================================================================

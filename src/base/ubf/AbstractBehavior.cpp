@@ -26,12 +26,12 @@ AbstractBehavior::AbstractBehavior()
 }
 
 // [ 1 .. 65535 ]
-bool AbstractBehavior::setSlotVote(const base::Integer* const num)
+bool AbstractBehavior::setSlotVote(const base::Integer* const x)
 {
    bool ok{};
-   const int vote{num->asInt()};
+   const int vote{x->asInt()};
    if (vote > 0 && vote <= 65535) {
-      setVote(static_cast<unsigned int>(vote));
+      setVote(vote);
       ok = true;
    }
    return ok;

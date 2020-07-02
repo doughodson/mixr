@@ -21,14 +21,10 @@ void Float::copyData(const Float& org, const bool)
    value = org.value;
 }
 
-bool Float::setSlotValue(const Float* const num)
+bool Float::setSlotValue(const Float* const x)
 {
-   bool ok{};
-   if (num != nullptr) {
-      value = static_cast<double>(num->asDouble());
-      ok = true;
-   }
-   return ok;
+   value = x->asDouble();
+   return true;
 }
 
 }
