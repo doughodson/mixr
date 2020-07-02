@@ -68,7 +68,7 @@ class Material;
 //                                  ! If true, brackets are drawn with reversed video font,
 //                                  ! otherwise follow the field's drawing mode.  (default: false)
 //  fonts             <PairStream>  ! List of fonts (default: none)
-//  clearDepth        <number>      ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
+//  clearDepth        <Number>      ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
 //  orientation       <String>      ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
 //  materials         <Material>    ! List of material objects (default: 0)
 //  antiAliasing      <Boolean>     ! Turn on/off anti-aliasing (default: true)
