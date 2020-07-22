@@ -33,28 +33,41 @@ public:
    Identifier();
    Identifier(const std::string&);
 
-   void setStr(const std::string& x)            { id = x;  replaceSpaces(); }
-   const std::string& asString() const          { return id; }          // returns a standard string (std::string)
+   void setStr(const std::string& x)         { id = x;  replaceSpaces(); }
 
    // convenience method
-   const char* c_str() const                    { return id.c_str(); }  // returns a pointer to valid a C-style string
+   const std::string& asString() const       { return id; }          // returns a standard string (std::string)
+   const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
 
    // operators
+   Identifier& operator=(const char*);            // assignment operator =
    Identifier& operator=(const std::string&);
+   void operator+=(const char*);
    void operator+=(const std::string&);
 
-   void empty()                                 { id.empty();   }       // empty our string
-   bool isEmpty() const                         { return id == ""; }    // returns true if our string is empty
+   void empty()                              { id = "";   }          // empty our string
+   bool isEmpty() const                      { return id == ""; }    // returns true if our string is empty
 
 private:
    std::string id;
    void replaceSpaces();
 };
 
+inline Identifier& Identifier::operator=(const char* s)
+{
+   id = s;
+   return *this;
+}
+
 inline Identifier& Identifier::operator=(const std::string& s)
 {
    id = s;
    return *this;
+}
+
+inline void Identifier::operator+=(const char* s)
+{
+   id = id + std::string(s);
 }
 
 inline void Identifier::operator+=(const std::string& s)
@@ -83,17 +96,17 @@ inline bool operator==(const Identifier& s1, const Identifier& s2)
    return false;
 }
 
-inline bool operator==(const std::string& s1, const Identifier& s2)
+inline bool operator==(const char* s1, const Identifier& s2)
 {
-   if (s1 == s2.asString()) {
+   if (s2.asString() == std::string(s1)) {
       return true;
    }
    return false;
 }
 
-inline bool operator==(const Identifier& s1, const std::string& s2)
+inline bool operator==(const Identifier& s1, const char* s2)
 {
-   if (s1.asString() == s2) {
+   if (s1.asString() == std::string(s2)) {
       return true;
    }
    return false;
