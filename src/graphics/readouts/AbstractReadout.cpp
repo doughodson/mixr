@@ -244,7 +244,7 @@ bool AbstractReadout::isValidInputPosition(const int tc)
 // filterInputEvent() -- Filter input events using a template character (x)
 char AbstractReadout::filterInputEvent(const int event, const char x)
 {
-    const char tc = static_cast<int>(x);
+    const char tc{static_cast<int>(x)};
     if (tc == '+') {
         // Default sign keys
         if (event == '7') {
@@ -492,182 +492,217 @@ bool AbstractReadout::onSetColumn(const base::Integer* const oscobj)
    return true;
 }
 
-bool AbstractReadout::setSlotPosition(const base::List* const x)
+bool AbstractReadout::setSlotPosition(const base::List* const spobj)
 {
-   return setPosition(x);
+   return setPosition(spobj);
 }
 
-bool AbstractReadout::setSlotWidth(const base::Integer* const x)
+bool AbstractReadout::setSlotWidth(const base::Integer* const swobj)
 {
-    width(x->asInt());
+
+    if (swobj != nullptr) width(swobj->asInt());
     return true;
 }
 
-bool AbstractReadout::setSlotHighlight(const base::Boolean* const x)
+bool AbstractReadout::setSlotHighlight(const base::Boolean* const shobj)
 {
-    // Set our mode
-    if (x->asBool()) {
-        setDisplayMode(highlight);
-    } else {
-        clearDisplayMode(highlight);
-    }
-
-    base::PairStream* subcomponents {getComponents()};
-    if (subcomponents != nullptr) {
-        const base::List::Item* item {subcomponents->getFirstItem()};
-        while (item != nullptr) {
-            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            const auto child = dynamic_cast<AbstractReadout*>(p->object());
-            if (child != nullptr) child->setSlotHighlight(x); //changed from obj
-            item = item->getNext();
+    if (shobj != nullptr) {
+        // Set our mode
+        if (shobj->asBool()) {
+            setDisplayMode(highlight);
+        } else {
+            clearDisplayMode(highlight);
         }
 
-        subcomponents->unref();
-        subcomponents = nullptr;
+        base::PairStream* subcomponents {getComponents()};
+        if (subcomponents != nullptr) {
+            const base::List::Item* item {subcomponents->getFirstItem()};
+            while (item != nullptr) {
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
+                item = item->getNext();
+            }
+
+            subcomponents->unref();
+            subcomponents = nullptr;
+        }
     }
     return true;
 }
 
 bool AbstractReadout::setSlotUnderline(const base::Boolean* const suobj)
 {
-    // Set our mode
-    if (suobj->asBool()) {
-        setDisplayMode(underline);
-    } else {
-        clearDisplayMode(underline);
-    }
+    if (suobj != nullptr) {
 
-    // Set our children's mode
-    base::PairStream* subcomponents {getComponents()};
-    if (subcomponents != nullptr) {
-
-        const base::List::Item* item {subcomponents->getFirstItem()};
-        while (item != nullptr) {
-            const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-            const auto child{dynamic_cast<AbstractReadout*>(p->object())};
-            if (child != nullptr) child->setSlotUnderline(suobj);
-            item = item->getNext();
+        // Set our mode
+        if (suobj->asBool()) {
+            setDisplayMode(underline);
+        } else {
+            clearDisplayMode(underline);
         }
 
-        subcomponents->unref();
-        subcomponents = nullptr;
+        // Set our children's mode
+        base::PairStream* subcomponents {getComponents()};
+        if (subcomponents != nullptr) {
+
+            const base::List::Item* item {subcomponents->getFirstItem()};
+            while (item != nullptr) {
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                if (child != nullptr) child->setSlotUnderline(suobj);
+                item = item->getNext();
+            }
+
+            subcomponents->unref();
+            subcomponents = nullptr;
+        }
     }
     return true;
 }
 
-bool AbstractReadout::setSlotReversed(const base::Boolean* const x)
+bool AbstractReadout::setSlotReversed(const base::Boolean* const srobj)
 {
-    // Set our mode
-    if (x->asBool()) {
-        setDisplayMode(reversed);
-    } else {
-        clearDisplayMode(reversed);
-    }
+    if (srobj != nullptr) {
 
-    // Set our children's mode
-    base::PairStream* subcomponents {getComponents()};
-    if (subcomponents != nullptr) {
-
-        const base::List::Item* item {subcomponents->getFirstItem()};
-        while (item != nullptr) {
-            const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-            const auto child{dynamic_cast<AbstractReadout*>(p->object())};
-            if (child != nullptr) child->setSlotReversed(x);
-            item = item->getNext();
+        // Set our mode
+        if (srobj->asBool()) {
+            setDisplayMode(reversed);
+        } else {
+            clearDisplayMode(reversed);
         }
 
-        subcomponents->unref();
-        subcomponents = nullptr;
-    }
-    return true;
-}
+        // Set our children's mode
+        base::PairStream* subcomponents {getComponents()};
+        if (subcomponents != nullptr) {
 
-bool AbstractReadout::setSlotVertical(const base::Boolean* const x)
-{
-    // Set our mode
-    if (x->asBool()) {
-        setDisplayMode(vertical);
-    } else {
-        clearDisplayMode(vertical);
-    }
-    return true;
-}
+            const base::List::Item* item {subcomponents->getFirstItem()};
+            while (item != nullptr) {
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                if (child != nullptr) child->setSlotReversed(srobj);
+                item = item->getNext();
+            }
 
-bool AbstractReadout::setSlotBrackets(const base::Boolean* const x)
-{
-    // Set our mode
-    if (x->asBool()) {
-        setDisplayMode(brackets);
-    } else {
-        clearDisplayMode(brackets);
-    }
-    return true;
-}
-
-bool AbstractReadout::setSlotLinked(const base::Boolean* const x)
-{
-    setLinked( x->asBool() );
-    return true;
-}
-
-bool AbstractReadout::setSlotInheritColor(const base::Boolean* const x)
-{
-    return setInheritColor(x->asBool());
-}
-
-bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
-{
-    bool ok {true};
-
-    // Set our justification
-    if ( *x == "none" ) {
-        justification(base::Justify::None);
-    } else if ( *x == "left" ) {
-        justification(base::Justify::Left);
-    } else if ( *x == "center" ) {
-        justification(base::Justify::Center);
-    } else if ( *x == "right" ) {
-        justification(base::Justify::Right);
-    } else {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
+            subcomponents->unref();
+            subcomponents = nullptr;
         }
-        ok = false;
     }
+    return true;
+}
 
-    // Set our children's justification
-    base::PairStream* subcomponents {getComponents()};
-    if (subcomponents != nullptr) {
-        const base::List::Item* item{subcomponents->getFirstItem()};
-        while (item != nullptr) {
-            const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-            const auto child{dynamic_cast<AbstractReadout*>(p->object())};
-            if (child != nullptr) child->setSlotJustification(x);
-            item = item->getNext();
+bool AbstractReadout::setSlotVertical(const base::Boolean* const ssobj)
+{
+    if (ssobj != nullptr) {
+        // Set our mode
+        if (ssobj->asBool()) {
+            setDisplayMode(vertical);
         }
+        else {
+            clearDisplayMode(vertical);
+        }
+    }
+    return true;
+}
 
-        subcomponents->unref();
-        subcomponents = nullptr;
+bool AbstractReadout::setSlotBrackets(const base::Boolean* const ssobj)
+{
+    if (ssobj != nullptr) {
+        // Set our mode
+        if (ssobj->asBool()) {
+            setDisplayMode(brackets);
+        } else {
+            clearDisplayMode(brackets);
+        }
+    }
+    return true;
+}
+
+bool AbstractReadout::setSlotLinked(const base::Boolean* const msg)
+{
+    if (msg != nullptr) {
+        setLinked( msg->asBool() );
+    }
+    return true;
+}
+
+bool AbstractReadout::setSlotInheritColor(const base::Boolean* const ic)
+{
+    bool ok {};
+    if (ic != nullptr) {
+        ok = setInheritColor(ic->asBool());
     }
     return ok;
 }
 
-bool AbstractReadout::setSlotFont(const base::Identifier* const x)
+bool AbstractReadout::setSlotJustification(const base::Identifier* const sjobj)
 {
-    if (fontName != nullptr) fontName->unref();
-    fontName = x->clone();
-    return true;
+    bool ok {true};
+    if (sjobj != nullptr) {
+
+        // Set our justification
+        if ( *sjobj == "none" ) {
+            justification(base::Justify::None);
+        } else if ( *sjobj == "left" ) {
+            justification(base::Justify::Left);
+        } else if ( *sjobj == "center" ) {
+            justification(base::Justify::Center);
+        } else if ( *sjobj == "right" ) {
+            justification(base::Justify::Right);
+        } else {
+            if (isMessageEnabled(MSG_ERROR)) {
+                std::cerr << "AbstractField::setJustification: No proper inputs" << std::endl;
+            }
+            ok = false;
+        }
+
+        // Set our children's justification
+        base::PairStream* subcomponents {getComponents()};
+        if (subcomponents != nullptr) {
+
+            const base::List::Item* item{subcomponents->getFirstItem()};
+            while (item != nullptr) {
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                if (child != nullptr) child->setSlotJustification(sjobj);
+                item = item->getNext();
+            }
+
+            subcomponents->unref();
+            subcomponents = nullptr;
+        }
+    }
+    return ok;
 }
 
-bool AbstractReadout::setSlotStartCharPos(const base::Integer* const x)
+bool AbstractReadout::setSlotFont(const base::Identifier* const font)
 {
-    const int ii{x->asInt()};
-    if (ii > 0) {
-       // come in as 1 based, convert to 0 based
-       startCP = static_cast<unsigned int>(ii - 1);
+    bool ok{};
+    if (fontName != nullptr) {
+        fontName->unref();
+    }
+    fontName = nullptr;
+    if (font != nullptr) {
+        fontName = font->clone();
+        ok = true;
     }
 
-    return true;
+    return ok;
+}
+
+bool AbstractReadout::setSlotStartCharPos(const base::Integer* const msg)
+{
+    bool ok{};
+    if (msg != nullptr) {
+        const int ii{msg->asInt()};
+        if (ii > 0) {
+           // come in as 1 based, convert to 0 based
+           startCP = static_cast<unsigned int>(ii - 1);
+           ok = true;
+        }
+    }
+
+    return ok;
 }
 
 }
