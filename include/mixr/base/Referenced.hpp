@@ -12,14 +12,33 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Referenced
-// Description: Base class to enable reference counting mechanism for objects
+// Description: Abstract base class that provides reference counting
 //------------------------------------------------------------------------------
+// Reference counting:
+//
+//    Reference counting is a technique of counting the number of users of an
+//    instantiated object.  It is used to delete objects that are no
+//    longer referenced.  Two functions (ref(), unref() control the reference
+//    count of an object.
+//
+//    Using ref() increments the reference count, which indicates another user
+//    of the object.  When an object is created using 'new', a copy operator, copy
+//    constructor or the clone() function, the reference count is initialized to
+//    one (1) by the constructor (i.e., it's a pre-referenced object).
+//
+//    Using unref() decrements the reference count, which indicates one less
+//    user.  If the number of references becomes zero, the object is deleted.
+//    Beware - Do not use 'delete' to destroy an object; only use unref()!
+//
+//    Using getRefCount() returns the current value of the Object's reference count
+//------------------------------------------------------------------------------
+
 class Referenced
 {
 public:
    Referenced() =default;
-   Referenced(const Referenced&) = delete;
-   Referenced& operator=(const Referenced&) = delete;
+   Referenced(const Referenced&) =delete;
+   Referenced& operator=(const Referenced&) =delete;
    virtual ~Referenced() =0;
 
    int getRefCount() const       { return refCount; }

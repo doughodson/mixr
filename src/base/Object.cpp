@@ -51,11 +51,6 @@ Object& Object::operator=(const Object& org)
     return *this;
 }
 
-Object* Object::clone() const
-{
-   return new Object(*this);
-}
-
 // Check class type
 bool Object::isClassType(const std::type_info& type) const
 {

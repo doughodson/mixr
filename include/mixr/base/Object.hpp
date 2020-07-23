@@ -2,6 +2,7 @@
 #ifndef __mixr_base_Object_HPP__
 #define __mixr_base_Object_HPP__
 
+// defines reference counting system for objects
 #include "mixr/base/Referenced.hpp"
 
 // platform configuration file
@@ -23,12 +24,12 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Object
-// Description: Our 'system' or top level base class for all framework objects.
+// Description: Abstract top-level base class for all framework objects.
 //
-//       Provides a common base class for type checking and support for factory names,
-//       slot tables, exceptions and reference counting.  Most of this needs to
-//       be implemented by each derived class, and the macros in 'macros.hpp' provide
-//       an easy way to do this.
+//    Provides a common base class for type checking and support for factory names,
+//    slot tables, exceptions and reference counting.  Most of this needs to
+//    be implemented by each derived class, and the macros in 'macros.hpp' provide
+//    an easy way to do this.
 //
 //------------------------------------------------------------------------------
 // Macros
@@ -40,7 +41,6 @@ namespace base {
 //    for the implementation of abstract classes, and IMPLEMENT_PARTIAL_SUBCLASS()
 //    if you need to write your own destructor, copy constructor, assignment operator
 //    and clone function.
-//
 //
 // Constructors and general class functions:
 //
@@ -111,32 +111,11 @@ namespace base {
 //          have been properly set).  This function is called by the parser to inform
 //          the object that all calls to setSlotByName() have been completed.
 //
-//
 // 'BaseClass' type
 //
 //    The DECLARE_SUBCLASS macro defines the type 'BaseClass', which is the class'
 //    base class, and which should be used when calling base class member functions
 //    instead of calling the functions with explicit class names.
-//
-//
-// Reference counting:
-//
-//    Reference counting is a technique of counting the number of users of an
-//    instantiated object.  It is used to delete objects that are no
-//    longer referenced.  Two functions (ref(), unref() control the reference
-//    count of an object.
-//
-//    Using ref() increments the reference count, which indicates another user
-//    of the object.  When an object is created using 'new', a copy operator, copy
-//    constructor or the clone() function, the reference count is initialized to
-//    one (1) by the constructor (i.e., it's a pre-referenced object).
-//
-//    Using unref() decrements the reference count, which indicates one less
-//    user.  If the number of references becomes zero, the object is deleted.
-//    Beware - Do not use 'delete' to destroy an object; only use unref()!
-//
-//    Using getRefCount() returns the current value of the Object's reference count
-//
 //
 // Factory names:
 //
@@ -277,7 +256,7 @@ class Object : public Referenced
    public: Object();
    public: Object(const Object& org);
    public: Object& operator=(const Object& org);
-   public: virtual Object* clone() const;
+   public: virtual Object* clone() const =0;
    public: virtual ~Object();
 
    protected: void copyData(const Object& org, const bool cc = false);
