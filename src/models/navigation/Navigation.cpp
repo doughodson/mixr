@@ -753,7 +753,7 @@ bool Navigation::setFeba(base::Vec2d* const points, const std::size_t n)
     if (points != nullptr && n >= 2) { // Need at least two points
         nFeba = n;
         feba = new base::Vec2d[nFeba];
-        for (int i = 0; i < nFeba; i++) {
+        for (std::size_t i{}; i < nFeba; i++) {
             feba[i] = points[i];
         }
     }

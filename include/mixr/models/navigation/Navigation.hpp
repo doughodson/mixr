@@ -233,7 +233,7 @@ private:
 
    // FEBA Line
    base::Vec2d* feba {};  // FEBA Points;  [ North East ]   (nm)
-   int nFeba {};          // Number of FEBA points
+   std::size_t nFeba {};  // Number of FEBA points
 
    // Ref position
    double refLat {};      // Ref latitude (deg)
