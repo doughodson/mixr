@@ -723,9 +723,9 @@ bool Navigation::updateNavSteering()
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-int Navigation::getFeba(base::Vec2d* const points, const int max) const
+std::size_t Navigation::getFeba(base::Vec2d* const points, const std::size_t max) const
 {
-    int n{};
+    std::size_t n{};
     if (points != nullptr && max > 0 && feba != nullptr && nFeba > 0) {
 
         // Number of points; limited by 'max'
@@ -733,7 +733,7 @@ int Navigation::getFeba(base::Vec2d* const points, const int max) const
         if (n > max) n = max;
 
         // Copy the FEBA points
-        for (int i = 0; i < n; i++) {
+        for (std::size_t i{}; i < n; i++) {
             points[i] = feba[i];
         }
     }
@@ -743,7 +743,7 @@ int Navigation::getFeba(base::Vec2d* const points, const int max) const
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-bool Navigation::setFeba(base::Vec2d* const points, const int n)
+bool Navigation::setFeba(base::Vec2d* const points, const std::size_t n)
 {
     // First delete any old FEBA lines
     if (feba != nullptr) delete[] feba;
@@ -804,7 +804,7 @@ bool Navigation::setSlotUtc(const base::Time* const x)
     return ok;
 }
 
-// setSlotFeba() --- Sets the FEBA points
+// set the Forward Edge of the Battle Area (FEBA)
 bool Navigation::setSlotFeba(const base::PairStream* const msg)
 {
     bool ok{true};
@@ -815,9 +815,9 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
         const auto tmpFeba = new base::Vec2d[max];
 
         // Get the points from the pair stream
-        int np{};
+        std::size_t np{};
         const base::List::Item* item{msg->getFirstItem()};
-        while (item != nullptr && np < static_cast<int>(max) && ok) {
+        while (item != nullptr && np < max && ok) {
             bool validFlg{};
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
@@ -883,6 +883,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
 
     return ok;
 }
+
 bool Navigation::setSlotBullseye(Bullseye* const msg)
 {
    if (bull != nullptr) {

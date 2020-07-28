@@ -119,8 +119,8 @@ public:
    virtual const Bullseye* getBullseye() const;             // Returns the current bullseye (const version)
 
    // FEBA [ North East ] (Nautical Miles)
-   virtual int getFeba(base::Vec2d* const points, const int max) const;
-   virtual bool setFeba(base::Vec2d* const points, const int n);
+   virtual std::size_t getFeba(base::Vec2d* const points, const std::size_t max) const;
+   virtual bool setFeba(base::Vec2d* const points, const std::size_t n);
 
    // set/change the current route; does not change the initial route used by reset()
    virtual bool setRoute(Route* const msg);
