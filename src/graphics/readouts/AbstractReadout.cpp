@@ -443,8 +443,7 @@ void AbstractReadout::drawFunc()
             // Position for vertical text
             dsp->drawLeftBracket(ll-1, cc);
             dsp->drawRightBracket(ll + static_cast<int>(width()), cc);
-        }
-        else {
+        } else {
             // Position for normal text
             dsp->drawLeftBracket(ll, cc-1);
             dsp->drawRightBracket(ll, cc + static_cast<int>(width()));
@@ -454,8 +453,8 @@ void AbstractReadout::drawFunc()
     // ---
     // If we used default colors, restore the old value
     // ---
-    if (restoreColor) dsp->setColor(ocolor);
-
+    if (restoreColor)
+        dsp->setColor(ocolor);
 }
 
 //------------------------------------------------------------------------------
@@ -517,12 +516,11 @@ bool AbstractReadout::setSlotHighlight(const base::Boolean* const x)
         if (subcomponents != nullptr) {
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
-                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
+                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
                 if (child != nullptr) child->setSlotHighlight(x); //changed from obj
                 item = item->getNext();
             }
-
             subcomponents->unref();
             subcomponents = nullptr;
         }
@@ -544,11 +542,10 @@ bool AbstractReadout::setSlotUnderline(const base::Boolean* const x)
         // Set our children's mode
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
-                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
+                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
                 if (child != nullptr) child->setSlotUnderline(x);
                 item = item->getNext();
             }
@@ -574,15 +571,13 @@ bool AbstractReadout::setSlotReversed(const base::Boolean* const x)
         // Set our children's mode
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
-                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                const auto child = dynamic_cast<AbstractReadout*>(p->object());
+                const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
+                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
                 if (child != nullptr) child->setSlotReversed(x);
                 item = item->getNext();
             }
-
             subcomponents->unref();
             subcomponents = nullptr;
         }
@@ -657,7 +652,6 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
         // Set our children's justification
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-
             const base::List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
@@ -665,7 +659,6 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
                 if (child != nullptr) child->setSlotJustification(x);
                 item = item->getNext();
             }
-
             subcomponents->unref();
             subcomponents = nullptr;
         }
