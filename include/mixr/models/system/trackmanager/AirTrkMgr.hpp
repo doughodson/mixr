@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Number; class Length; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -51,7 +51,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotPositionGate(const base::Number* const);
+   bool setSlotPositionGate(const base::Length* const);
    bool setSlotRangeGate(const base::Number* const);
+   bool setSlotRangeGate(const base::Length* const);
    bool setSlotVelocityGate(const base::Number* const);
 };
 

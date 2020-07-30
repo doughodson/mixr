@@ -359,16 +359,31 @@ void AirTrkMgr::processTrackList(const double dt)
 //------------------------------------------------------------------------------
 // setPositionGate() -- Sets the size of the position gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
+bool AirTrkMgr::setSlotPositionGate(const base::Number* const x)
 {
    double value{};
-   const auto p = dynamic_cast<const base::Length*>(num);
-   if (p != nullptr) {
-      // We have a distance and we want it in meters ...
-      value = p->getValueInMeters();
-   } else if (num != nullptr) {
+   if (x != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->asDouble();
+      value = x->asDouble();
+   }
+
+   // Set the value if it's valid
+   bool ok{true};
+   if (value > 0.0) {
+      posGate = value;
+   } else {
+      std::cerr << "TrackManager::setPositionGate: invalid gate, must be greater than zero." << std::endl;
+      ok = true;
+   }
+   return ok;
+}
+
+bool AirTrkMgr::setSlotPositionGate(const base::Length* const x)
+{
+   double value{};
+   if (x != nullptr) {
+      // We have a distance and we want it in meters ...
+      value = x->getValueInMeters();
    }
 
    // Set the value if it's valid
@@ -385,17 +400,12 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const num)
 //------------------------------------------------------------------------------
 // setRangeGate() -- Sets the size of the range gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotRangeGate(const base::Number* const num)
+bool AirTrkMgr::setSlotRangeGate(const base::Number* const x)
 {
    double value{};
-   const auto p = dynamic_cast<const base::Length*>(num);
-   if (p != nullptr) {
-      // We have a distance and we want it in meters ...
-      value = p->getValueInMeters();
-   }
-   else if (num != nullptr) {
+   if (x != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->asDouble();
+      value = x->asDouble();
    }
 
    // Set the value if it's valid
@@ -410,15 +420,34 @@ bool AirTrkMgr::setSlotRangeGate(const base::Number* const num)
    return ok;
 }
 
+bool AirTrkMgr::setSlotRangeGate(const base::Length* const x)
+{
+   double value{};
+   if (x != nullptr) {
+      // We have a distance and we want it in meters ...
+      value = x->getValueInMeters();
+   }
+
+   // Set the value if it's valid
+   bool ok{ true };
+   if (value > 0.0) {
+      rngGate = value;
+   } else {
+      std::cerr << "TrackManager::setRangeGate: invalid gate, must be greater than zero." << std::endl;
+      ok = true;
+   }
+   return ok;
+}
+
 //------------------------------------------------------------------------------
 // setVelocityGate() -- Sets the size of the velocity gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotVelocityGate(const base::Number* const num)
+bool AirTrkMgr::setSlotVelocityGate(const base::Number* const x)
 {
    double value{};
-   if (num != nullptr) {
+   if (x != nullptr) {
       // We have only a number, assume it's in meters ...
-      value = num->asDouble();
+      value = x->asDouble();
    }
 
    // Set the value if it's valid

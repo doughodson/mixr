@@ -78,6 +78,7 @@ END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
    ON_SLOT(1, setSlotIrSphereRadius, base::Number)
+   ON_SLOT(1, setSlotIrSphereRadius, base::Length)
 END_SLOT_MAP()
 
 IrSphere::IrSphere()
@@ -91,15 +92,23 @@ void IrSphere::copyData(const IrSphere& org, const bool)
    radius = org.radius;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const x)
 {
    double value{};
 
-   const auto d = dynamic_cast<const base::Length*>(s);
-   if (d != nullptr) {
-      value = d->getValueInMeters();
-   } else if (s != nullptr) {
-      value = s->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
+   }
+   radius = value;
+   return true;
+}
+
+bool IrSphere::setSlotIrSphereRadius(const mixr::base::Length* const x)
+{
+   double value{};
+
+   if (x != nullptr) {
+      value = x->getValueInMeters();
    }
    radius = value;
    return true;

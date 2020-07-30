@@ -32,6 +32,7 @@ END_SLOTTABLE(TrackManager)
 BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(1, setSlotMaxTracks,       base::Integer)
    ON_SLOT(2, setSlotMaxTrackAge,     base::Number)
+   ON_SLOT(2, setSlotMaxTrackAge,     base::Time)
    ON_SLOT(3, setSlotFirstTrackId,    base::Integer)
    ON_SLOT(4, setSlotAlpha,           base::Number)
    ON_SLOT(5, setSlotBeta,            base::Number)
@@ -393,19 +394,34 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotMaxTrackAge() -- Sets the maximum age of tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
+bool TrackManager::setSlotMaxTrackAge(const base::Number* const x)
 {
    double age{};
-   const auto p = dynamic_cast<const base::Time*>(num);
-   if (p != nullptr) {
-      age = p->getValueInSeconds();
-   } else if (num != nullptr) {
+   if (x != nullptr) {
       // We have only a number, assume it's in seconds ...
-      age = num->asDouble();
+      age = x->asDouble();
    }
 
    // Set the value if it's valid
    bool ok{true};
+   if (age > 0.0) {
+      ok = setMaxTrackAge(age);
+   } else {
+      std::cerr << "TrackManager::setMaxTrackAge: invalid age, must be greater than zero." << std::endl;
+      ok = false;
+   }
+   return ok;
+}
+
+bool TrackManager::setSlotMaxTrackAge(const base::Time* const x)
+{
+   double age{};
+   if (x != nullptr) {
+      age = x->getValueInSeconds();
+   }
+
+   // Set the value if it's valid
+   bool ok{ true };
    if (age > 0.0) {
       ok = setMaxTrackAge(age);
    } else {

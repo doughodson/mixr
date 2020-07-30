@@ -47,7 +47,9 @@ END_SLOTTABLE(IrSensor)
 
 BEGIN_SLOT_MAP(IrSensor)
    ON_SLOT(1, setSlotLowerWavelength,  base::Number)
+   ON_SLOT(1, setSlotLowerWavelength,  base::Length)
    ON_SLOT(2, setSlotUpperWavelength,  base::Number)
+   ON_SLOT(2, setSlotUpperWavelength,  base::Length)
    ON_SLOT(3, setSlotNEI,              base::Number)
    ON_SLOT(4, setSlotThreshold,        base::Number)
    ON_SLOT(5, setSlotIFOV,             base::Number)
@@ -56,6 +58,7 @@ BEGIN_SLOT_MAP(IrSensor)
    //ON_SLOT(7, setSlotAzimuthBin,     base::Number)
    //ON_SLOT(8, setSlotElevationBin,   base::Number)
    ON_SLOT(7, setSlotMaximumRange,     base::Number)
+   ON_SLOT(7, setSlotMaximumRange,     base::Length)
    ON_SLOT(8, setSlotTrackManagerName, base::Identifier)
 END_SLOT_MAP()
 
@@ -510,15 +513,24 @@ bool IrSensor::setMaximumRange(const double w)
    return true;
 }
 
-bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
+bool IrSensor::setSlotMaximumRange(const base::Number* const x)
 {
    double value{};
 
-   const auto d = dynamic_cast<const base::Length*>(msg);
-   if (d != nullptr) {
-       value = d->getValueInMeters();
-   } else if (msg != nullptr) {
-      value = msg->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
+   }
+
+   setMaximumRange(value);
+   return true;
+}
+
+bool IrSensor::setSlotMaximumRange(const base::Length* const x)
+{
+   double value{};
+
+   if (x != nullptr) {
+      value = x->getValueInMeters();
    }
 
    setMaximumRange(value);
@@ -544,16 +556,31 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 //}
 
 // setSlotLowerWavelength() - Sets lower wavelength
-bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
+bool IrSensor::setSlotLowerWavelength(const base::Number* const x)
 {
    double value{};
    bool ok{};
 
-   const auto d = dynamic_cast<const base::Length*>(msg);
-   if (d != nullptr) {
-       value = d->getValueInMicroMeters();
-   } else if (msg != nullptr) {
-      value = msg->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
+   }
+   ok = setLowerWavelength(value);
+
+   if (!ok) {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "IrSensor::setSlotLowerWavelength: Error setting Lower Wavelength!" << std::endl;
+      }
+   }
+   return ok;
+}
+
+bool IrSensor::setSlotLowerWavelength(const base::Length* const x)
+{
+   double value{};
+   bool ok{};
+
+   if (x != nullptr) {
+      value = x->getValueInMicroMeters();
    }
    ok = setLowerWavelength(value);
 
@@ -566,16 +593,30 @@ bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
 }
 
 // setSlotUpperWavelength() - Sets upper wavelength
-bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
+bool IrSensor::setSlotUpperWavelength(const base::Number* const x)
 {
    bool ok{};
    double value{};
 
-   const auto d = dynamic_cast<const base::Length*>(msg);
-   if (d != nullptr) {
-       value = d->getValueInMicroMeters();
-   } else if (msg != nullptr) {
-      value = msg->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
+   }
+   ok = setUpperWavelength(value);
+   if (!ok) {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "IrSensor::setUpperWavelength: Error setting Upper Wavelength!" << std::endl;
+      }
+   }
+   return ok;
+}
+
+bool IrSensor::setSlotUpperWavelength(const base::Length* const x)
+{
+   bool ok{};
+   double value{};
+
+   if (x != nullptr) {
+      value = x->getValueInMicroMeters();
    }
    ok = setUpperWavelength(value);
    if (!ok) {

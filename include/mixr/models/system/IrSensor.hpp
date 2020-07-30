@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class Number; }
+namespace base { class Identifier; class Integer; class Number; class Length; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -27,19 +27,21 @@ class TrackManager;
 //
 // Slots:
 //
-//    lowerWavelength     <Real>        ! The lower wavelength limit in microns
+//    lowerWavelength     <Number>      ! The lower wavelength limit in microns
+//    lowerWavelength     <Length>
 //
-//    upperWavelength     <Real>        ! The upper wavelength limit in microns
+//    upperWavelength     <Number>      ! The upper wavelength limit in microns
+//    upperWavelength     <Length>
 //
-//    nei                 <Real>        ! The Noise Equivalent Irradiance in watts/str-cm^2
+//    nei                 <Number>      ! The Noise Equivalent Irradiance in watts/str-cm^2
 //
-//    threshold           <Real>        ! The Signal to Noise Threshold
+//    threshold           <Number>      ! The Signal to Noise Threshold
 //
-//    IFOV                <Real>        ! The Instantaneous Field of View in steradians
+//    IFOV                <Number>      ! The Instantaneous Field of View in steradians
 //
 //    sensorType          <Identifier>  ! The type of sensor { contrast, hotspot }
 //
-//    FOR                 <Real>        ! The Field of Regard in steradians
+//    FOR                 <Number>      ! The Field of Regard in steradians
 //
 // Events:
 //    bool irQueryReturnEvent(IrQueryMsg* const irQuery);
@@ -190,7 +192,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotLowerWavelength(const base::Number* const);   // Sets lower wavelength
+   bool setSlotLowerWavelength(const base::Length* const);
    bool setSlotUpperWavelength(const base::Number* const);   // Sets upper wavelength
+   bool setSlotUpperWavelength(const base::Length* const);
    bool setSlotNEI(const base::Number* const);               // Sets Noise Equivalent Irradiance
    bool setSlotThreshold(const base::Number* const);         // Sets Signal to Noise Threshold
    bool setSlotIFOV(const base::Number* const);              // Sets Instantaneous Field of View
@@ -199,6 +203,7 @@ private:
    //bool setSlotAzimuthBin(const base::Number* const);      // Sets the Azimuth Bin
    //bool setSlotElevationBin(const base::Number* const);    // Sets the Elevation Bin
    bool setSlotMaximumRange(const base::Number* const);      // Sets the Maximum Range
+   bool setSlotMaximumRange(const base::Length* const);
    bool setSlotTrackManagerName(base::Identifier* const);    // Sets our track manager by name
 };
 

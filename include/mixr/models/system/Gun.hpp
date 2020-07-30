@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class List; class Number; }
+namespace base { class Boolean; class Integer; class List; class Number; class Angle; }
 namespace models {
 class Bullet;
 
@@ -32,8 +32,11 @@ class Bullet;
 //    The following are used to position the gun on the ownship player
 //    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
 //    roll        <Number>   ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
+//    roll        <Angle>    ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
 //    pitch       <Number>   ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
+//    pitch       <Angle>    ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
 //    yaw         <Number>   ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
+//    yaw         <Angle>    ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
 //
 //------------------------------------------------------------------------------
 class Gun : public ExternalStore
@@ -124,9 +127,15 @@ private:
    bool setSlotRate(const base::Integer* const);       // Rate of fire (rds per min)
    bool setSlotBurstRate(const base::Integer* const);  // Burst rate
    bool setSlotPosition(base::List* const);            // Gun position relative to ownship
+
    bool setSlotRoll(const base::Number* const);        // Gun roll angle to ownship
+   bool setSlotRoll(const base::Angle* const);
+
    bool setSlotPitch(const base::Number* const);       // Gun pitch angle to ownship
+   bool setSlotPitch(const base::Angle* const);
+
    bool setSlotYaw(const base::Number* const);         // Gun heading angle to ownship
+   bool setSlotYaw(const base::Angle* const);
 };
 
 }

@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Area; class Length; class Number; }
+namespace base { class Area; class Length; class Number; class Length; }
 namespace models {
 class IrQueryMsg;
 
@@ -39,6 +39,7 @@ private:
 // Factory name: IrSphere
 // Slots:
 //   radius    <Number>   ! Radius of sphere (default is 10)
+//   radius    <Length>
 //------------------------------------------------------------------------------
 class IrSphere : public IrShape
 {
@@ -58,6 +59,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotIrSphereRadius(const base::Number* const);
+   bool setSlotIrSphereRadius(const mixr::base::Length* const);
 };
 
 //------------------------------------------------------------------------------

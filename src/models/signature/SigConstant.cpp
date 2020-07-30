@@ -19,6 +19,7 @@ END_SLOTTABLE(SigConstant)
 
 BEGIN_SLOT_MAP(SigConstant)
     ON_SLOT(1, setSlotRCS, base::Number)
+    ON_SLOT(1, setSlotRCS, base::Area)
 END_SLOT_MAP()
 
 SigConstant::SigConstant()
@@ -49,23 +50,38 @@ double SigConstant::getRCS(const Emission* const)
     return rcs;
 }
 
-bool SigConstant::setRCS(const base::Number* const num)
+bool SigConstant::setRCS(const base::Number* const x)
 {
     bool ok{};
     double r{-1.0};
 
-    const auto d = dynamic_cast<const base::Area*>(num);
-    if (d != nullptr) {
-        // need area in terms of square meters
-        r = d->getValueInSquareMeters();
-    } else if (num != nullptr) {
+    if (x != nullptr) {
         // square meters (Number or Decibel)
-        r = num->asDouble();
+        r = x->asDouble();
     }
 
-    if (r >= 0.0) { rcs = r; ok = true; }
-    else { std::cerr << "SigConstant::setRCS: invalid rcs; must be greater than or equal to zero!" << std::endl; }
+    if (r >= 0.0) {
+        rcs = r;
+        ok = true;
+    } else {
+        std::cerr << "SigConstant::setRCS: invalid rcs; must be greater than or equal to zero!" << std::endl;
+    }
     return ok;
+}
+
+bool SigConstant::setRCS(const base::Area* const x)
+{
+   bool ok{};
+   double r{-1.0};
+
+   if (x != nullptr) {
+      // need area in terms of square meters
+      r = x->getValueInSquareMeters();
+   }
+
+   if (r >= 0.0) { rcs = r; ok = true; }
+   else { std::cerr << "SigConstant::setRCS: invalid rcs; must be greater than or equal to zero!" << std::endl; }
+   return ok;
 }
 
 }

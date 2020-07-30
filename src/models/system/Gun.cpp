@@ -44,9 +44,15 @@ BEGIN_SLOT_MAP(Gun)
     ON_SLOT(4, setSlotRate,       base::Integer)
     ON_SLOT(5, setSlotBurstRate,  base::Integer)
     ON_SLOT(6, setSlotPosition,   base::List)
+
     ON_SLOT(7, setSlotRoll,       base::Number)
+    ON_SLOT(7, setSlotRoll,       base::Angle)
+
     ON_SLOT(8, setSlotPitch,      base::Number)
+    ON_SLOT(8, setSlotPitch,      base::Angle)
+
     ON_SLOT(9, setSlotYaw,        base::Number)
+    ON_SLOT(9, setSlotYaw,        base::Angle)
 END_SLOT_MAP()
 
 Gun::Gun()
@@ -444,16 +450,13 @@ bool Gun::setSlotPosition(base::List* const numList)
 }
 
 // Gun roll angle to ownship
-bool Gun::setSlotRoll(const base::Number* const num)
+bool Gun::setSlotRoll(const base::Number* const x)
 {
    bool ok{};
    double value{-1000.0};
 
-   const auto p = dynamic_cast<const base::Angle*>(num);
-   if (p != nullptr) {
-      value = p->getValueInRadians();
-   } else if (num != nullptr) {
-      value = num->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -467,17 +470,35 @@ bool Gun::setSlotRoll(const base::Number* const num)
    return ok;
 }
 
+// Gun roll angle to ownship
+bool Gun::setSlotRoll(const base::Angle* const x)
+{
+   bool ok{};
+   double value{ -1000.0 };
+
+   if (x != nullptr) {
+      value = x->getValueInRadians();
+   }
+
+   if (value >= -base::PI && value <= base::PI) {
+      setAngles(value, getPitch(), getYaw());
+      ok = true;
+   } else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [-pi ... +pi]" << std::endl;
+      }
+   }
+   return ok;
+}
+
 // Gun pitch angle to ownship
-bool Gun::setSlotPitch(const base::Number* const num)
+bool Gun::setSlotPitch(const base::Number* const x)
 {
    bool ok{};
    double value{-1000.0};
 
-   const auto p = dynamic_cast<const base::Angle*>(num);
-   if (p != nullptr) {
-      value = p->getValueInRadians();
-   } else if (num != nullptr) {
-      value = num->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
    }
 
    if (value >= -base::PI && value <= base::PI) {
@@ -491,21 +512,60 @@ bool Gun::setSlotPitch(const base::Number* const num)
    return ok;
 }
 
+// Gun pitch angle to ownship
+bool Gun::setSlotPitch(const base::Angle* const x)
+{
+   bool ok{};
+   double value{ -1000.0 };
+
+   if (x != nullptr) {
+      value = x->getValueInRadians();
+   }
+
+   if (value >= -base::PI && value <= base::PI) {
+      setAngles(getRoll(), value, getYaw());
+      ok = true;
+   } else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Gun::setSlotPitch: invalid pitch angle, valid range is [-pi ... +pi]" << std::endl;
+      }
+   }
+   return ok;
+}
+
 // Gun heading angle to ownship
-bool Gun::setSlotYaw(const base::Number* const num)
+bool Gun::setSlotYaw(const base::Number* const x)
 {
    bool ok{};
    double value{-1000.0};
 
-   const auto p = dynamic_cast<const base::Angle*>(num);
-   if (p != nullptr) {
-      value = p->getValueInRadians();
-   } else if (num != nullptr) {
-      value = num->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
    }
 
    if (value >= -base::PI && value <= 2.0f*base::PI) {
       setAngles( getRoll(), getPitch(), value );
+      ok = true;
+   } else {
+      if (isMessageEnabled(MSG_ERROR)) {
+         std::cerr << "Gun::setSlotYaw: invalid yaw angle, valid range is [-pi ... +2*pi]" << std::endl;
+      }
+   }
+   return ok;
+}
+
+// Gun heading angle to ownship
+bool Gun::setSlotYaw(const base::Angle* const x)
+{
+   bool ok{};
+   double value{ -1000.0 };
+
+   if (x != nullptr) {
+      value = x->getValueInRadians();
+   }
+
+   if (value >= -base::PI && value <= 2.0f*base::PI) {
+      setAngles(getRoll(), getPitch(), value);
       ok = true;
    } else {
       if (isMessageEnabled(MSG_ERROR)) {

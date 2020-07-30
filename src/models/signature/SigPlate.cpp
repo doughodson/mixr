@@ -64,45 +64,83 @@ double SigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool SigPlate::setA(base::Number* const num)
+bool SigPlate::setA(base::Number* const x)
 {
     bool ok{};
     double v{-1.0};
 
-    const auto d = dynamic_cast<base::Length*>(num);
-    if (d != nullptr) {
-        // we need meters
-        v = d->getValueInMeters();
-    } else if (num != nullptr) {
-        // Just a Number
-        v = num->asDouble();
+    if (x != nullptr) {
+        v = x->asDouble();
     }
 
-    if (v >= 0.0) { a = v; ok = true; }
-    else { std::cerr << "SigPlate::setWidthFromSlot: invalid: must be greater than or equal to zero!" << std::endl; }
+    if (v >= 0.0) {
+        a = v;
+        ok = true;
+    } else {
+        std::cerr << "SigPlate::setWidthFromSlot: invalid: must be greater than or equal to zero!" << std::endl;
+    }
     return ok;
+}
+
+bool SigPlate::setA(base::Length* const x)
+{
+   bool ok{};
+   double v{-1.0};
+
+   if (x != nullptr) {
+      // we need meters
+      v = x->getValueInMeters();
+   }
+
+   if (v >= 0.0) {
+      a = v;
+      ok = true;
+   }
+   else {
+      std::cerr << "SigPlate::setWidthFromSlot: invalid: must be greater than or equal to zero!" << std::endl;
+   }
+   return ok;
 }
 
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool SigPlate::setB(base::Number* const num)
+bool SigPlate::setB(base::Number* const x)
 {
     bool ok{};
     double v{-1.0};
 
-    const auto d = dynamic_cast<base::Length*>(num);
-    if (d != nullptr) {
-        // we need meters
-        v = d->getValueInMeters();
-    } else if (num != nullptr) {
+   if (x != nullptr) {
         // Just a Number
-        v = num->asDouble();
+        v = x->asDouble();
     }
 
-    if (v >= 0.0) { b = v; ok = true; }
-    else { std::cerr << "SigPlate::setHeightFromSlot: invalid: must be greater than or equal to zero!" << std::endl; }
+    if (v >= 0.0) {
+        b = v;
+        ok = true;
+    } else {
+        std::cerr << "SigPlate::setHeightFromSlot: invalid: must be greater than or equal to zero!" << std::endl;
+    }
     return ok;
+}
+
+bool SigPlate::setB(base::Length* const x)
+{
+   bool ok{};
+   double v{-1.0};
+
+   if (x != nullptr) {
+      // we need meters
+      v = x->getValueInMeters();
+   }
+
+   if (v >= 0.0) {
+      b = v;
+      ok = true;
+   } else {
+      std::cerr << "SigPlate::setHeightFromSlot: invalid: must be greater than or equal to zero!" << std::endl;
+   }
+   return ok;
 }
 
 }

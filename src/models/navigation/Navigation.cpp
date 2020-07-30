@@ -830,9 +830,11 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                     { // Get the north (first) distance
                         const base::Number* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
-                        if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
-                        else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
-
+                        if (pair2 != nullptr) {
+                            pNum = dynamic_cast<const base::Number*>(pair2->object());
+                        } else {
+                            pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
+                        }
                         if (pNum != nullptr) {
                             const auto pDist = dynamic_cast<const base::Length*>(pNum);
                             if (pDist != nullptr) {
@@ -846,9 +848,11 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                     { // Get the east (second) distance
                         const base::Number* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
-                        if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
-                        else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
-
+                        if (pair2 != nullptr) {
+                            pNum = dynamic_cast<const base::Number*>(pair2->object());
+                        } else {
+                            pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
+                        }
                         if (pNum != nullptr) {
                             const auto pDist = dynamic_cast<const base::Length*>(pNum);
                             if (pDist != nullptr) {

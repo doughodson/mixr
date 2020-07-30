@@ -19,6 +19,7 @@ END_SLOTTABLE(SigSphere)
 
 BEGIN_SLOT_MAP(SigSphere)
     ON_SLOT(1, setSlotRadius, base::Number)
+    ON_SLOT(1, setSlotRadius, base::Length)
 END_SLOT_MAP()
 
 SigSphere::SigSphere()
@@ -50,23 +51,42 @@ double SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setSlotRadius(base::Number* const num)
+bool SigSphere::setSlotRadius(base::Number* const x)
 {
-    bool ok{};
-    double r{-1.0};
+   bool ok{};
+   double r{-1.0};
 
-    const auto d = dynamic_cast<base::Length*>(num);
-    if (d != nullptr) {
-        // we need meters
-        r = d->getValueInMeters();
-    } else if (num != nullptr) {
-        // Just a Number
-        r = num->asDouble();
-    }
+   if (x != nullptr) {
+      // Just a Number
+      r = x->asDouble();
+   }
 
-    if (r >= 0.0) { setRadius(r); ok = true; }
-    else { std::cerr << "SigSphere::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl; }
-    return ok;
+   if (r >= 0.0) {
+      setRadius(r);
+      ok = true;
+   } else {
+      std::cerr << "SigSphere::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
+   }
+   return ok;
+}
+
+bool SigSphere::setSlotRadius(base::Length* const x)
+{
+   bool ok{};
+   double r{ -1.0 };
+
+   if (x != nullptr) {
+      // we need meters
+      r = x->getValueInMeters();
+   }
+
+   if (r >= 0.0) {
+      setRadius(r);
+      ok = true;
+   } else {
+      std::cerr << "SigSphere::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
+   }
+   return ok;
 }
 
 }

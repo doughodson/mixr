@@ -26,7 +26,9 @@ END_SLOTTABLE(MergingIrSensor)
 
 BEGIN_SLOT_MAP(MergingIrSensor)
    ON_SLOT(1, setSlotAzimuthBin,   base::Number)
+   ON_SLOT(1, setSlotAzimuthBin,   base::Angle)
    ON_SLOT(2, setSlotElevationBin, base::Number)
+   ON_SLOT(2, setSlotElevationBin, base::Angle)
 END_SLOT_MAP()
 
 MergingIrSensor::MergingIrSensor()
@@ -250,29 +252,45 @@ bool MergingIrSensor::setElevationBin(const double w)
    return true;
 }
 
-bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
+bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const x)
 {
    double value{};
 
-   const auto a = dynamic_cast<const base::Angle*>(msg);
-   if (a != nullptr) {
-       value = a->getValueInRadians();
-   } else if (msg != nullptr) {
-      value = msg->asDouble();
+   if (x != nullptr) {
+      value = x->asDouble();
    }
    setAzimuthBin(value);
    return true;
 }
 
-bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
+bool MergingIrSensor::setSlotAzimuthBin(const base::Angle* const x)
 {
    double value{};
 
-   const auto a = dynamic_cast<const base::Angle*>(msg);
-   if (a != nullptr) {
-       value = a->getValueInRadians();
-   } else if (msg != nullptr) {
-      value = msg->asDouble();
+   if (x != nullptr) {
+      value = x->getValueInRadians();
+   }
+   setAzimuthBin(value);
+   return true;
+}
+
+bool MergingIrSensor::setSlotElevationBin(const base::Number* const x)
+{
+   double value{};
+
+   if (x != nullptr) {
+      value = x->asDouble();
+   }
+   setElevationBin(value);
+   return true;
+}
+
+bool MergingIrSensor::setSlotElevationBin(const base::Angle* const x)
+{
+   double value{};
+
+   if (x != nullptr) {
+      value = x->getValueInRadians();
    }
    setElevationBin(value);
    return true;

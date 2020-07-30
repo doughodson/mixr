@@ -43,6 +43,7 @@ BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 7, setSlotNumBars,           base::Integer)
     ON_SLOT( 8, setSlotRevPerSec,         base::Number)
     ON_SLOT( 9, setSlotScanRadius,        base::Number)
+    ON_SLOT( 9, setSlotScanRadius,        base::Angle)
     ON_SLOT(10, setSlotPRVertices,        base::PairStream)
     ON_SLOT(11, setSlotMaxRevs,           base::Number)
 END_SLOT_MAP()
@@ -940,19 +941,23 @@ bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
     return ok;
 }
 
-// setSlotScanRadius() --
-bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
+// setSlotScanRadius()
+bool ScanGimbal::setSlotScanRadius(const base::Number* const x)
 {
-    bool ok{};
-    if (newScanRadius != nullptr) {
-        double x{newScanRadius->asDouble()};
-        const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
-        if (aa != nullptr) {
-            x = aa->getValueInRadians();
-        }
-        ok = setScanRadius(x);
-    }
-    return ok;
+   bool ok{};
+   if (x != nullptr) {
+      ok = setScanRadius(x->asDouble());
+   }
+   return ok;
+}
+
+bool ScanGimbal::setSlotScanRadius(const base::Angle* const x)
+{
+   bool ok{};
+   if (x != nullptr) {
+      ok = setScanRadius(x->getValueInRadians());
+   }
+   return ok;
 }
 
 // setSlotPRVertices() -- gets a pairstream and puts the vertices into an array

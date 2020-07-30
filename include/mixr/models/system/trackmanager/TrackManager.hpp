@@ -6,7 +6,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; }
+namespace base { class Boolean; class Integer; class Number; class Time; }
 namespace models {
 class Emission;
 class Player;
@@ -121,6 +121,7 @@ private:
 private:
    bool setSlotMaxTracks(const base::Integer* const);       // Sets the maximum number of track files
    bool setSlotMaxTrackAge(const base::Number* const);      // Sets the maximum age of tracks
+   bool setSlotMaxTrackAge(const base::Time* const);
    bool setSlotFirstTrackId(const base::Integer* const);    // Sets the first (starting) track id number
    virtual bool setSlotAlpha(const base::Number* const);    // Sets alpha
    virtual bool setSlotBeta(const base::Number* const);     // Sets beta

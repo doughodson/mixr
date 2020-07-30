@@ -6,7 +6,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class Number; class Length; }
 namespace models {
 class Emission;
 
@@ -16,6 +16,7 @@ class Emission;
 // Factory name: SigSphere
 // Slots:
 //    radius   <base::Number>    ! Radius of the sphere (default: 0)
+//    radius   <base::Length>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
 class SigSphere : public RfSignature
@@ -35,7 +36,8 @@ private:
 
 private:
    // slot table helper methods
-   virtual bool setSlotRadius(base::Number* const);
+   bool setSlotRadius(base::Number* const);
+   bool setSlotRadius(base::Length* const);
 };
 
 }
