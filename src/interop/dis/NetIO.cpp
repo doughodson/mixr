@@ -1421,7 +1421,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
                   std::cerr << "NetIO::setSlotMaxEntityRange(): slot: " << slotname << " is not a valid." << std::endl;
                }
             } else {
-               std::cerr << "NetIO::setSlotMaxEntityRange(): slot: " << slotname << " is not a valid base::Distance!" << std::endl;
+               std::cerr << "NetIO::setSlotMaxEntityRange(): slot: " << slotname << " is not a valid base::Length!" << std::endl;
             }
 
             item = item->getNext();
@@ -1505,7 +1505,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
                   std::cerr << "NetIO::setSlotMaxPositionErr(): slot: " << slotname << " is not a valid." << std::endl;
                }
             } else {
-               std::cerr << "NetIO::setSlotMaxPositionErr(): slot: " << slotname << " is not a valid base::Distance!" << std::endl;
+               std::cerr << "NetIO::setSlotMaxPositionErr(): slot: " << slotname << " is not a valid base::Length!" << std::endl;
             }
 
             item = item->getNext();
