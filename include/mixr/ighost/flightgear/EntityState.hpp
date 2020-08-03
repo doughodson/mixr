@@ -1,11 +1,11 @@
 
-#ifndef __mixr_ighost_pov_EntityState_HPP__
-#define __mixr_ighost_pov_EntityState_HPP__
+#ifndef __mixr_ighost_flightgear_EntityState_HPP__
+#define __mixr_ighost_flightgear_EntityState_HPP__
 
 #include <cstdint>
 
 namespace mixr {
-namespace pov {
+namespace flightgear {
 
 struct EntityState
 {

@@ -1,23 +1,23 @@
 
-#ifndef __mixr_ighost_pov_PovHost_HPP__
-#define __mixr_ighost_pov_PovHost_HPP__
+#ifndef __mixr_ighost_flightgear_FlightGearHost_HPP__
+#define __mixr_ighost_flightgear_FlightGearHost_HPP__
 
 #include "mixr/simulation/AbstractIgHost.hpp"
 
 namespace mixr {
 namespace base { class NetHandler; }
 namespace models { class Player; }
-namespace pov {
+namespace flightgear {
 
 //------------------------------------------------------------------------------
-// Class: PovHost
+// Class: FlightGearHost
 //------------------------------------------------------------------------------
-class PovHost final: public simulation::AbstractIgHost
+class FlightGearHost final: public simulation::AbstractIgHost
 {
-   DECLARE_SUBCLASS(PovHost, simulation::AbstractIgHost)
+   DECLARE_SUBCLASS(FlightGearHost, simulation::AbstractIgHost)
 
 public:
-   PovHost();
+   FlightGearHost();
 
    // sets our ownship and player list pointers, used by Station class
    void setOwnship(simulation::AbstractPlayer* const) final;

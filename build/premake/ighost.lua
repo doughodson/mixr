@@ -12,11 +12,11 @@
       }
       targetname "ighost_cigi"
 
-   -- Simple IG interface library
-   project "ighost_pov"
+   -- FlightGear IG interface library
+   project "ighost_flightgear"
       files {
-         "../../include/mixr/ighost/pov/**.h*",
-         "../../src/ighost/pov/**.h**",
-         "../../src/ighost/pov/**.cpp"
+         "../../include/mixr/ighost/flightgear/**.h*",
+         "../../src/ighost/flightgear/**.h**",
+         "../../src/ighost/flightgear/**.cpp"
       }
-      targetname "ighost_pov"
+      targetname "ighost_flightgear"

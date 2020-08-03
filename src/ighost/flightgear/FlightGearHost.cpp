@@ -1,7 +1,7 @@
 
-#include "mixr/ighost/pov/PovHost.hpp"
+#include "mixr/ighost/flightgear/FlightGearHost.hpp"
 
-#include "mixr/ighost/pov/EntityState.hpp"
+#include "mixr/ighost/flightgear/EntityState.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -12,24 +12,24 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace pov {
+namespace flightgear {
 
-IMPLEMENT_SUBCLASS(PovHost, "PovHost")
+IMPLEMENT_SUBCLASS(FlightGearHost, "FlightGearHost")
 
-BEGIN_SLOTTABLE(PovHost)
+BEGIN_SLOTTABLE(FlightGearHost)
    "netOutput",        // 1) Network output handler
-END_SLOTTABLE(PovHost)
+END_SLOTTABLE(FlightGearHost)
 
-BEGIN_SLOT_MAP(PovHost)
+BEGIN_SLOT_MAP(FlightGearHost)
    ON_SLOT(1, setSlotNetOutput, base::NetHandler)
 END_SLOT_MAP()
 
-PovHost::PovHost()
+FlightGearHost::FlightGearHost()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void PovHost::copyData(const PovHost& org, const bool cc)
+void FlightGearHost::copyData(const FlightGearHost& org, const bool cc)
 {
    BaseClass::copyData(org);
 
@@ -42,7 +42,7 @@ void PovHost::copyData(const PovHost& org, const bool cc)
    scnt = 0;
 }
 
-void PovHost::deleteData()
+void FlightGearHost::deleteData()
 {
    setOwnship(nullptr);
    setPlayerList(nullptr);
@@ -55,7 +55,7 @@ void PovHost::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset the visual system interface
 //------------------------------------------------------------------------------
-void PovHost::reset()
+void FlightGearHost::reset()
 {
    BaseClass::reset();
    setPlayerList(nullptr);
@@ -64,7 +64,7 @@ void PovHost::reset()
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void PovHost::setPlayerList(base::PairStream* const newPlayerList)
+void FlightGearHost::setPlayerList(base::PairStream* const newPlayerList)
 {
     // Nothing's changed, just return
     if (playerList == newPlayerList) return;
@@ -79,7 +79,7 @@ void PovHost::setPlayerList(base::PairStream* const newPlayerList)
 // Sets our ownship pointer; public version, which is usually called by
 // the Station class.
 //------------------------------------------------------------------------------
-void PovHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
+void FlightGearHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
 {
    const auto player = dynamic_cast<models::Player*>(newOwnship);
    if (player != nullptr) {
@@ -90,7 +90,7 @@ void PovHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
 //------------------------------------------------------------------------------
 // Sets our ownship player (for derived class control)
 //------------------------------------------------------------------------------
-void PovHost::setOwnship0(models::Player* const newOwnship)
+void FlightGearHost::setOwnship0(models::Player* const newOwnship)
 {
     // Nothing's changed, just return
     if (ownship == newOwnship) return;
@@ -104,7 +104,7 @@ void PovHost::setOwnship0(models::Player* const newOwnship)
 //------------------------------------------------------------------------------
 // Send state data for ownship to IG
 //------------------------------------------------------------------------------
-void PovHost::updateIg(const double)
+void FlightGearHost::updateIg(const double)
 {
    frameSync();
 
@@ -118,7 +118,7 @@ void PovHost::updateIg(const double)
 //------------------------------------------------------------------------------
 // triggers the frame update
 //------------------------------------------------------------------------------
-void PovHost::frameSync()
+void FlightGearHost::frameSync()
 {
    // initialization
    if (!isNetworkInitialized() && !didInitializationFail()) {
@@ -132,7 +132,7 @@ void PovHost::frameSync()
    }
 }
 
-bool PovHost::initNetwork()
+bool FlightGearHost::initNetwork()
 {
    bool ok{true};
 
@@ -153,7 +153,7 @@ bool PovHost::initNetwork()
    return ok;
 }
 
-void PovHost::sendData()
+void FlightGearHost::sendData()
 {
    //const double DEG2MR = (PI / 180.0f * 1000.0f);
 
@@ -219,7 +219,7 @@ void PovHost::sendData()
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool PovHost::setSlotNetOutput(base::NetHandler* const msg)
+bool FlightGearHost::setSlotNetOutput(base::NetHandler* const msg)
 {
    netOutput = msg;
    return true;

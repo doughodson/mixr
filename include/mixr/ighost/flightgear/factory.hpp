@@ -1,12 +1,12 @@
 
-#ifndef __mixr_ighost_pov_factory_HPP__
-#define __mixr_ighost_pov_factory_HPP__
+#ifndef __mixr_ighost_flightgear_factory_HPP__
+#define __mixr_ighost_flightgear_factory_HPP__
 
 #include <string>
 
 namespace mixr {
 namespace base { class Object; }
-namespace pov {
+namespace flightgear {
 base::Object* factory(const std::string&);
 }
 }
