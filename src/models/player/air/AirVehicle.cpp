@@ -128,11 +128,11 @@ bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
 }
 
 // Set initial gear position by number: zero is up, non-zero is down
-bool AirVehicle::setSlotInitGearPos(const base::Number* const pos)
+bool AirVehicle::setSlotInitGearPos(const base::Number* const x)
 {
    bool ok {};
-   if (pos != nullptr) {
-      if (pos->asDouble() == 0.0) {
+   if (x != nullptr) {
+      if (x->asDouble() == 0.0) {
          initGearPos = 0.0;
          gearPos = 0.0;
          ok = true;
