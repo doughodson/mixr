@@ -167,10 +167,10 @@ void FlightGearHost::sendData()
 
       FGNetFDM fgNetFDM;
 
-      const double D2R{3.14159 / 180.0};      // degrees to radians
-      const double latitude{ 45.59823 };      // degs
-      const double longitude{ -120.69202 };   // degs
-      const double altitude{ 150.0 };         // meters above sea level
+      const double D2R{3.14159 / 180.0};  // degrees to radians
+      const double latitude{37.0};        // degs
+      const double longitude{-116.0};     // degs
+      const double altitude{150.0};       // meters above sea level
 
       fgNetFDM.latitude = latitude * D2R;
       fgNetFDM.longitude = longitude * D2R;
@@ -200,12 +200,6 @@ void FlightGearHost::sendData()
          roll = 0.0;
       }
       std::cout << "Roll: " << roll << std::endl;
-
-
-//      const base::Vec3d pos{av->getPosition()};
-//      fgFdmState.pilot_eye_x = pos[0] * base::length::M2FT;
-//      fgFdmState.pilot_eye_y = pos[1] * base::length::M2FT;
-//      fgFdmState.pilot_eye_z = -pos[2] * base::length::M2FT;   // altitude
 
 //      entityState.x_cg = 0;
 //      entityState.y_cg = 0;
