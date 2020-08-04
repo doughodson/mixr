@@ -46,6 +46,11 @@ private:
    models::Player* ownship{};              // current ownship
    base::PairStream* playerList{};         // current player list
 
+   // test data
+   float roll{};    // degs
+   float pitch{};   // degs
+   float yaw{};     // degs
+
 private:
    // slot table helper methods
    bool setSlotNetOutput(base::NetHandler* const);
