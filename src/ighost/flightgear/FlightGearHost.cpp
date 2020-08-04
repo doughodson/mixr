@@ -2,8 +2,8 @@
 #include "mixr/ighost/flightgear/FlightGearHost.hpp"
 
 #include "mixr/base/util/endian_utils.hpp"
-
-#include "mixr/ighost/flightgear/FgFdmState.hpp"
+#include "mixr/ighost/flightgear/swap_endian.hpp"
+#include "mixr/ighost/flightgear/FGNetFDM.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -165,36 +165,34 @@ void FlightGearHost::sendData()
    const auto av = dynamic_cast<const models::AirVehicle*>(ownship);
    if (av != nullptr) {
 
-      FgFdmState fgFdmState;
-
-      fgFdmState.version = FgFdmState_Version;
+      FGNetFDM fgNetFDM;
 
       const double D2R{3.14159 / 180.0};      // degrees to radians
       const double latitude{ 45.59823 };      // degs
       const double longitude{ -120.69202 };   // degs
       const double altitude{ 150.0 };         // meters above sea level
 
-      fgFdmState.latitude = latitude * D2R;
-      fgFdmState.longitude = longitude * D2R;
-      fgFdmState.altitude = altitude;
+      fgNetFDM.latitude = latitude * D2R;
+      fgNetFDM.longitude = longitude * D2R;
+      fgNetFDM.altitude = altitude;
 
-      fgFdmState.phi = static_cast<float>(roll * D2R);
-      fgFdmState.theta = static_cast<float>(pitch * D2R);
-      fgFdmState.psi = static_cast<float>(yaw * D2R);
-      fgFdmState.num_engines = 1;
+      fgNetFDM.phi = static_cast<float>(roll * D2R);
+      fgNetFDM.theta = static_cast<float>(pitch * D2R);
+      fgNetFDM.psi = static_cast<float>(yaw * D2R);
+      fgNetFDM.num_engines = 1;
 
-      fgFdmState.num_tanks = 1;
-      fgFdmState.fuel_quantity[0] = 100.0;
+      fgNetFDM.num_tanks = 1;
+      fgNetFDM.fuel_quantity[0] = 100.0;
 
-      fgFdmState.num_wheels = 3;
+      fgNetFDM.num_wheels = 3;
 
-      fgFdmState.cur_time = static_cast<std::uint32_t>(std::time(nullptr));
-      fgFdmState.warp = 1;
+      fgNetFDM.cur_time = static_cast<std::uint32_t>(std::time(nullptr));
+      fgNetFDM.warp = 1;
 
-      fgFdmState.visibility = 5000.0;
+      fgNetFDM.visibility = 5000.0;
 
       if (!base::is_big_endian()) {
-         swapBytes(&fgFdmState);
+         swap_endian(&fgNetFDM);
       }
 
       roll += 1.0;      // increase roll in 1 degree increments
@@ -256,7 +254,7 @@ void FlightGearHost::sendData()
 //      entityState.target_vcas = 0;
 
       if (netOutput != nullptr) {
-         netOutput->sendData(reinterpret_cast<char*>(&fgFdmState), sizeof(fgFdmState));
+         netOutput->sendData(reinterpret_cast<char*>(&fgNetFDM), sizeof(fgNetFDM));
       }
    }
 }

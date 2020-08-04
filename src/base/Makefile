@@ -156,6 +156,7 @@ OBJS =  \
 	units/volume/Volume.o \
 	units/Quantity.o \
 	util/platform/system_linux.o \
+	util/endian_utils.o \
 	util/filesystem_utils.o \
 	util/lfi.o \
 	util/math_utils.o \
