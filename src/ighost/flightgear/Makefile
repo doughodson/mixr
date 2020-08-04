@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(MIXR_LIB_DIR)/libmixr_ighost_pov.a
+LIB = $(MIXR_LIB_DIR)/libmixr_ighost_flightgear.a
 
 OBJS =  \
 	FlightGearHost.o \
