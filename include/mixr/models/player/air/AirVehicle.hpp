@@ -5,6 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
+namespace base { class Identifier; }
 namespace models {
 class AerodynamicsModel;
 
@@ -14,7 +15,7 @@ class AerodynamicsModel;
 // Factory name: AirVehicle
 // Slots:
 //  initGearPos     ! Initial gear position (default: up),
-//                  !   <base::String>: "up" or "down"
+//                  !   <base::Identifer>: "up" or "down"
 //                  !   <base::Number>: zero(0) for up, non-zero for down
 //
 //
@@ -152,7 +153,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotInitGearPos(const base::String* const);
+   bool setSlotInitGearPos(const base::Identifier* const);
    bool setSlotInitGearPos(const base::Number* const);
 };
 

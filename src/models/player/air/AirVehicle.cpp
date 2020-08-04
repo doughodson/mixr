@@ -3,6 +3,7 @@
 
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 #include "mixr/base/List.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
@@ -18,7 +19,7 @@ BEGIN_SLOTTABLE(AirVehicle)
 END_SLOTTABLE(AirVehicle)
 
 BEGIN_SLOT_MAP(AirVehicle)
-    ON_SLOT(1, setSlotInitGearPos, base::String)
+    ON_SLOT(1, setSlotInitGearPos, base::Identifier)
     ON_SLOT(1, setSlotInitGearPos, base::Number)
 END_SLOT_MAP()
 
@@ -102,15 +103,15 @@ const AerodynamicsModel* AirVehicle::getAerodynamicsModel() const
 //-----------------------------------------------------------------------------
 
 // Set initial gear position by name: up, down
-bool AirVehicle::setSlotInitGearPos(const base::String* const pos)
+bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
 {
    bool ok {};
-   if (pos != nullptr) {
-      if (*pos == "up" || *pos == "UP") {
+   if (x != nullptr) {
+      if (*x == "up" || *x == "UP") {
          initGearPos = 0.0;
          gearPos = 0.0;
          ok = true;
-      } else if (*pos == "down" || *pos == "DOWN") {
+      } else if (*x == "down" || *x == "DOWN") {
          initGearPos = 1.0;
          gearPos = 100.0;
          ok = true;
