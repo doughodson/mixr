@@ -14,10 +14,7 @@ class AerodynamicsModel;
 //
 // Factory name: AirVehicle
 // Slots:
-//  initGearPos     ! Initial gear position (default: up),
-//                  !   <base::Identifer>: "up" or "down"
-//                  !   <base::Number>: zero(0) for up, non-zero for down
-//
+//  initGearPos     ! Initial gear position "up" or "down" (default: "down")
 //
 // Description: Generic Air Vehicles
 //
@@ -154,7 +151,6 @@ private:
 private:
    // slot table helper methods
    bool setSlotInitGearPos(const base::Identifier* const);
-   bool setSlotInitGearPos(const base::Number* const);
 };
 
 }

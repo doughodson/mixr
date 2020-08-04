@@ -13,14 +13,11 @@ IMPLEMENT_SUBCLASS(AirVehicle, "AirVehicle")
 EMPTY_DELETEDATA(AirVehicle)
 
 BEGIN_SLOTTABLE(AirVehicle)
-    "initGearPos",      // 1: initial gear position (default: up),
-                        //      string: "up" or "down"; or
-                        //      number: zero for up, non-zero for down
+    "initGearPos",      // 1: initial gear position (default: up)
 END_SLOTTABLE(AirVehicle)
 
 BEGIN_SLOT_MAP(AirVehicle)
     ON_SLOT(1, setSlotInitGearPos, base::Identifier)
-    ON_SLOT(1, setSlotInitGearPos, base::Number)
 END_SLOT_MAP()
 
 AirVehicle::AirVehicle()
@@ -29,11 +26,6 @@ AirVehicle::AirVehicle()
 
     static base::String generic("GenericAirVehicle");
     setType(&generic);
-
-    initGearPos = 0.0;
-    gearPos = 100.0;
-    wpnBayDoorPos = 100.0;
-    wingSweep = 0;
 }
 
 void AirVehicle::copyData(const AirVehicle& org, const bool)
@@ -124,25 +116,6 @@ bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
       std::cerr << "AirVehicle::setInitGearPos(): ERROR -- invalid position name; should be \"up\" or \"down\"" << std::endl;
       }
    }
-   return ok;
-}
-
-// Set initial gear position by number: zero is up, non-zero is down
-bool AirVehicle::setSlotInitGearPos(const base::Number* const x)
-{
-   bool ok {};
-   if (x != nullptr) {
-      if (x->asDouble() == 0.0) {
-         initGearPos = 0.0;
-         gearPos = 0.0;
-         ok = true;
-      } else {
-         initGearPos = 1.0;
-         gearPos = 100.0;
-         ok = true;
-      }
-   }
-   if (ok) setGearHandleSwitch(initGearPos);
    return ok;
 }
 
