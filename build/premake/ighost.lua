@@ -10,6 +10,7 @@
          "../../src/ighost/cigi/**.h**",
          "../../src/ighost/cigi/**.cpp"
       }
+      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "ighost_cigi"
 
    -- FlightGear IG interface library
@@ -19,4 +20,5 @@
          "../../src/ighost/flightgear/**.h**",
          "../../src/ighost/flightgear/**.cpp"
       }
+      includedirs { MIXR_IncPath }
       targetname "ighost_flightgear"

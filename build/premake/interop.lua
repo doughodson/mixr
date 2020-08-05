@@ -9,6 +9,7 @@
          "../../include/mixr/interop/common/**.h*",
          "../../src/interop/common/**.cpp"
       }
+      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "interop"
 
    -- IEEE DIS interface library
@@ -17,6 +18,7 @@
          "../../include/mixr/interop/dis/**.h*",
          "../../src/interop/dis/**.cpp"
       }
+      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "interop_dis"
 
 --[[
