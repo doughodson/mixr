@@ -7,7 +7,9 @@ The most current version of the mixed reality simulation platform can be found a
 Directories
 -----------
 
-* build: using premake for creating Visual Studio/C++ projects and solutions (See premake project for more information)
+* build: using premake for creating Visual Studio/C++ projects and solutions (see premake project for more information)
+
+* deps: contains all the source code for dependencies
 
 * doc: changeLogs, uml diagrams and doxygen configuration files
 
