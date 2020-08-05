@@ -75,7 +75,7 @@ class Track;
 //    initAlt        <base::Number>      ! Altitude (+up) (meters)
 //
 //    initPosition   <base::List>        ! Position Vector: meters [ north east down ]
-//                                        !   *** initPosition will be removed in later release (use below slots instead) ***
+//                                       !   *** initPosition will be removed in later release (use below slots instead) ***
 //
 //    ! 2: Player's initial geodetic position
 //

@@ -12,8 +12,10 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Vec3d"
+#include "mixr/base/units/util/angle_utils.hpp"
 
 #include <ctime>
+#include <iostream>
 
 namespace mixr {
 namespace flightgear {
@@ -159,93 +161,26 @@ bool FlightGearHost::initNetwork()
 
 void FlightGearHost::sendData()
 {
-   //const double DEG2MR = (PI / 180.0f * 1000.0f);
-
-   // Ownship type air vehicle?
+   // ownship type air vehicle?
    const auto av = dynamic_cast<const models::AirVehicle*>(ownship);
    if (av != nullptr) {
 
       FGNetFDM fgNetFDM;
 
-      const double D2R{3.14159 / 180.0};  // degrees to radians
-      const double latitude{37.0};        // degs
-      const double longitude{-116.0};     // degs
-      const double altitude{150.0};       // meters above sea level
-
-      fgNetFDM.latitude = latitude * D2R;
-      fgNetFDM.longitude = longitude * D2R;
-      fgNetFDM.altitude = altitude;
-
-      fgNetFDM.phi = static_cast<float>(roll * D2R);
-      fgNetFDM.theta = static_cast<float>(pitch * D2R);
-      fgNetFDM.psi = static_cast<float>(yaw * D2R);
-      fgNetFDM.num_engines = 1;
-
-      fgNetFDM.num_tanks = 1;
-      fgNetFDM.fuel_quantity[0] = 100.0;
-
-      fgNetFDM.num_wheels = 3;
-
-      fgNetFDM.cur_time = static_cast<std::uint32_t>(std::time(nullptr));
-      fgNetFDM.warp = 1;
-
-      fgNetFDM.visibility = 5000.0;
+      // positions
+      fgNetFDM.latitude = av->getLatitude() * base::angle::D2RCC;
+      fgNetFDM.longitude = av->getLongitude() * base::angle::D2RCC;
+      fgNetFDM.altitude = av->getAltitude();
+      fgNetFDM.agl - av->getAltitudeAgl();
+      fgNetFDM.phi   = static_cast<float>(av->getRollD() * base::angle::D2RCC);
+      fgNetFDM.theta = static_cast<float>(av->getPitchD() * base::angle::D2RCC);
+      fgNetFDM.psi   = static_cast<float>(av->getHeadingD() * base::angle::D2RCC);
+      fgNetFDM.alpha = static_cast<float>(av->getAngleOfAttackD() * base::angle::D2RCC);
+      fgNetFDM.beta  = static_cast<float>(av->getSideSlipD() * base::angle::D2RCC);
 
       if (!base::is_big_endian()) {
          swap_endian(&fgNetFDM);
       }
-
-      roll += 1.0;      // increase roll in 1 degree increments
-      if (roll > 50.0) {
-         roll = 0.0;
-      }
-      std::cout << "Roll: " << roll << std::endl;
-
-//      entityState.x_cg = 0;
-//      entityState.y_cg = 0;
-//      entityState.z_cg = 0;          // altitude
-
-//      const base::Vec3d pos{av->getPosition()};
-//      entityState.pilot_eye_x = pos[0] * base::length::M2FT;
-//      entityState.pilot_eye_y = pos[1] * base::length::M2FT;
-//      entityState.pilot_eye_z = -pos[2] * base::length::M2FT;   // altitude
-
-//      entityState.alphad = av->getAngleOfAttackD();
-//      entityState.betad = av->getSideSlipD();
-//      entityState.mach = av->getMach();
-//      entityState.runalt = 0.0;
-
-//      entityState.theta    = static_cast<float>(av->getPitchD());
-//      entityState.phi      = static_cast<float>(av->getRollD());
-//      entityState.psi      = static_cast<float>(av->getHeadingD());
-//      entityState.airspeed = static_cast<float>(av->getTotalVelocityKts());
-
-//      entityState.heading = static_cast<float>(av->getHeadingD());
-
-//      entityState.dlg = 0;           // landing gear position 90 is down (scaled to 0-1)
-//      entityState.dsb = static_cast<float>(av->getSpeedBrakePosition()/100.0f);   // speed break 60 is out (scaled to 0-1)
-//      entityState.nz  = static_cast<float>(av->getGload());
-
-//      entityState.aetrc = 0;         // Commanded throttle position
-//      entityState.afterburner = 0;   // logical, true in in A/B
-
-//      entityState.target_id = 0;
-
-//      entityState.id_self = 0;       // make use of a hole
-//      entityState.flags = 0;
-
-//      entityState.target_x = 0;
-//      entityState.target_y = 0;
-//      entityState.target_z = 0;
-
-//      entityState.target_theta = 0;
-//      entityState.target_phi = 0;
-//      entityState.target_psi = 0;
-
-//      entityState.target_uearth = 0;
-//      entityState.target_vearth = 0;
-//      entityState.target_wearth = 0;
-//      entityState.target_vcas = 0;
 
       if (netOutput != nullptr) {
          netOutput->sendData(reinterpret_cast<char*>(&fgNetFDM), sizeof(fgNetFDM));
