@@ -71,14 +71,6 @@ all: $(PROJECTS)
 $(PROJECTS):
 	$(MAKE) -C $@
 
-install: uninstall
-	-cp -r ../include/mixr /usr/local/include/mixr
-	-cp -r ../lib /usr/local/lib/mixr
-
-uninstall:
-	-rm -rf /usr/local/include/mixr
-	-rm -rf /usr/local/lib/mixr
-
 clean:
 	-for d in $(PROJECTS); do (cd $$d; $(MAKE) clean ); done
 
