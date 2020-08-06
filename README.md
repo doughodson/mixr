@@ -9,7 +9,7 @@ Directories
 
 * build: using premake for creating Visual Studio/C++ projects and solutions (see premake project for more information)
 
-* deps: contains all the source code for dependencies
+* deps: contains all the source code for dependencies that MIXR relies upon to build its libraries
 
 * doc: changeLogs, uml diagrams and doxygen configuration files
 
