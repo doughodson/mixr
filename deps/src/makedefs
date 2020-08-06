@@ -6,7 +6,7 @@
 # ---
 # library directories
 # ---
-MIXR_LIB_DIR = $(MIXR_ROOT)/lib
+DEPS_LIB_DIR = $(MIXR_ROOT)/deps/lib
 
 # ---
 # Optimize?
