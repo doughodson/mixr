@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(DEPS_LIB_DIR)/libmixr_deps.a
+LIB = $(DEPS_LIB_DIR)/libcigicl.a
 
 OBJS =  \
 	CigiAerosolRespV3.o \
