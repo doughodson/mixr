@@ -178,6 +178,18 @@ void FlightGearHost::sendData()
       fgNetFDM.alpha = static_cast<float>(av->getAngleOfAttackD() * base::angle::D2RCC);
       fgNetFDM.beta  = static_cast<float>(av->getSideSlipD() * base::angle::D2RCC);
 
+      fgNetFDM.num_engines = 1;
+
+      fgNetFDM.num_tanks = 1;
+      fgNetFDM.fuel_quantity[0] = 100.0;
+
+      fgNetFDM.num_wheels = 3;
+
+      fgNetFDM.cur_time = static_cast<std::uint32_t>(std::time(nullptr));
+      fgNetFDM.warp = 1;
+
+      fgNetFDM.visibility = 5000.0;      // 5000 meters
+
       if (!base::is_big_endian()) {
          swap_endian(&fgNetFDM);
       }
