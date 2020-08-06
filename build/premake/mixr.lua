@@ -90,9 +90,6 @@ workspace "mixr"
    -- core libraries
    dofile "core-libs.lua"
 
-   -- dependency library
-   dofile "deps.lua"
-
    -- interoperability libraries
    dofile "interop.lua"
 

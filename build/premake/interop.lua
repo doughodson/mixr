@@ -5,6 +5,7 @@
 
    -- Common interoperability code
    project "interop"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/common/**.h*",
          "../../src/interop/common/**.cpp"
@@ -14,6 +15,7 @@
 
    -- IEEE DIS interface library
    project "interop_dis"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/dis/**.h*",
          "../../src/interop/dis/**.cpp"
@@ -24,6 +26,7 @@
 --[[
    -- IEEE HLA interface library (common code)
    project "interop_hla"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/hla/**.h*",
          "../../src/interop/hla/**.cpp"
@@ -34,6 +37,7 @@
 
    -- IEEE HLA interface library for RPR FOM
    project "interop_rprfom"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/rprfom/**.h*",
          "../../src/interop/rprfom/**.cpp"

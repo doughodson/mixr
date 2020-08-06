@@ -5,6 +5,7 @@
 
    -- base library
    project "base"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/base/**.h*",
          "../../include/mixr/base/**.inl",
@@ -26,6 +27,7 @@
 
    -- OpenGL-based graphics library
    project "graphics"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/graphics/**.h*",
          "../../src/graphics/**.h*",
@@ -39,6 +41,7 @@
 
    -- DAFIF airport loader library
    project "dafif"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/dafif/**.h*",
          "../../src/dafif/**.cpp"
@@ -48,6 +51,7 @@
 
    -- graphical instruments library
    project "instruments"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/instruments/**.h*",
          "../../include/mixr/instruments/**.epp",
@@ -58,6 +62,7 @@
 
    -- linear systems library
    project "linearsystem"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/linearsystem/**.h*",
          "../../src/linearsystem/**.cpp"
@@ -67,6 +72,7 @@
 
    -- linkage library
    project "linkage"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/linkage/**.h*",
          "../../src/linkage/**.*",
@@ -78,6 +84,7 @@
 
    -- models library
    project "models"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/models/**.h*",
          "../../include/mixr/models/**.inl",
@@ -89,6 +96,7 @@
 
    -- data recorder library
    project "recorder"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/recorder/**.h*",
          "../../include/mixr/recorder/*.inl",
@@ -102,6 +110,7 @@
 
    -- simulation library
    project "simulation"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/simulation/**.h*",
          "../../include/mixr/simulation/**.inl",
@@ -113,6 +122,7 @@
 
    -- terrain library
    project "terrain"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/terrain/**.h*",
          "../../src/terrain/**.cpp"
@@ -122,6 +132,7 @@
 
    -- OpenGL GLUT interface library
    project "ui_glut"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/ui/glut/**.h*",
          "../../src/ui/glut/**.cpp"

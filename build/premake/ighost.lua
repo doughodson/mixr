@@ -5,6 +5,7 @@
 
    -- CIGI interface library
    project "ighost_cigi"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/ighost/cigi/**.h*",
          "../../src/ighost/cigi/**.h**",
@@ -15,6 +16,7 @@
 
    -- FlightGear IG interface library
    project "ighost_flightgear"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/ighost/flightgear/**.h*",
          "../../src/ighost/flightgear/**.h**",
