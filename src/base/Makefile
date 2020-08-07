@@ -33,6 +33,9 @@ OBJS =  \
 	concepts/linkage/AbstractIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
+	fmt/format.o \
+	fmt/os.o \
+	loguru/loguru.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -199,15 +202,16 @@ $(LIB) : $(OBJS)
 clean:
 	-rm -f colors/*.o
 	-rm -f concepts/linkage/*.o
-	-rm -f threads/platform/*.o
-	-rm -f threads/*.o
 	-rm -f edl/*.o
-	-rm -f io/*.o
+	-rm -f fmt/*.o
+	-rm -f loguru/*.o
 	-rm -f network/*.o
 	-rm -f numeric/operators/*.o
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
 	-rm -f relations/*.o
+	-rm -f threads/platform/*.o
+	-rm -f threads/*.o
 	-rm -f transformations/*.o
 	-rm -f ubf/*.o
 	-rm -f units/area/*.o

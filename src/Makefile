@@ -3,22 +3,22 @@ include makedefs
 
 # Platform library  : Dependency libraries
 # ------------------------------------------------------------------------
-# base              : deps
-# dafif             : deps
-# graphics          : deps, OpenGL, FTGL, freetype
-# gui_glut          : deps, freeglut
-# instruments       : deps
-# interop           : deps
-# interop_dis       : deps
-# interop_hla       : deps, HLA RTI
-# interop_rprfom    : deps, HLA RTI
-# linkage           : deps
-# linearsystem      : deps
-# map_rpf           : deps
-# models            : deps, JSBSim
-# ighost_cigi       : deps, CIGICL 3.x
-# ighost_flightgear : deps
-# recorder          : deps, Google protocol buffers
+# base              : -
+# dafif             : -
+# graphics          : OpenGL, FTGL, freetype
+# gui_glut          : freeglut
+# instruments       : -
+# interop           : -
+# interop_dis       : -
+# interop_hla       : HLA RTI
+# interop_rprfom    : HLA RTI
+# linkage           : -
+# linearsystem      : -
+# map_rpf           : -
+# models            : JSBSim
+# ighost_cigi       : CIGICL 3.x
+# ighost_flightgear : -
+# recorder          : Google protocol buffers
 # simulation        : -
 # terrain           : -
 #

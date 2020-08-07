@@ -1,2 +1,0 @@
-
-This is version 7.0.2 of fmt library  (installed 8/5/2020)

@@ -67,19 +67,6 @@ workspace "deps"
       system "Windows"
       architecture "x64"
 
-   -- platform-wide dependency library (needed by all mixr libraries)
-   project "deps"
-      location ("../" .. _ACTION .. "/projects/%{prj.name}")
-      files {
-         "../../deps/include/fmt/**.h*",
-         "../../deps/src/fmt/**.c**",
-         "../../deps/include/loguru/**.h*",
-         "../../deps/src/loguru/**.c**"
-      }
-      includedirs { DEPS_IncPath,
-                    DEPS_IncPath.."/loguru" }
-      targetname "deps"
-
    -- cigicl library
    project "ccl_lib"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
@@ -90,3 +77,4 @@ workspace "deps"
       includedirs { DEPS_IncPath.."/cigicl" }
       defines { "CIGI_LITTLE_ENDIAN" }
       targetname "ccl_lib"
+
