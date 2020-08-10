@@ -82,8 +82,7 @@ workspace "deps"
       includedirs { DEPS_IncPath }
       targetname "deps"
 
-   -- cigicl library
-   project "ccl_lib"
+   project "cigicl"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../deps/include/cigicl/**.h*",
@@ -91,5 +90,63 @@ workspace "deps"
       }
       includedirs { DEPS_IncPath.."/cigicl" }
       defines { "CIGI_LITTLE_ENDIAN" }
-      targetname "ccl_lib"
+      targetname "cigicl"
 
+   project "freetype2"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
+      files {
+         -- FT_MODULES
+         "../../deps/src/freetype2/base/ftbbox.c",
+         "../../deps/src/freetype2/base/ftgxval.c",
+         "../../deps/src/freetype2/base/ftlcdfil.c",
+         "../../deps/src/freetype2/base/ftmm.c",
+         "../../deps/src/freetype2/base/ftotval.c",
+         "../../deps/src/freetype2/base/ftpatent.c",
+         "../../deps/src/freetype2/base/ftpfr.c",
+         "../../deps/src/freetype2/base/ftsynth.c",
+         "../../deps/src/freetype2/base/fttype1.c",
+         "../../deps/src/freetype2/base/ftwinfnt.c",
+         "../../deps/src/freetype2/base/ftxf86.c",
+         "../../deps/src/freetype2/pcf/pcf.c",
+         "../../deps/src/freetype2/pfr/pfr.c",
+         "../../deps/src/freetype2/psaux/psaux.c",
+         "../../deps/src/freetype2/pshinter/pshinter.c",
+         "../../deps/src/freetype2/psnames/psmodule.c",
+         "../../deps/src/freetype2/raster/raster.c",
+         "../../deps/src/freetype2/sfnt/sfnt.c",
+         "../../deps/src/freetype2/truetype/truetype.c",
+         "../../deps/src/freetype2/type1/type1.c",
+         "../../deps/src/freetype2/cid/type1cid.c",
+         "../../deps/src/freetype2/type42/type42.c",
+         "../../deps/src/freetype2/winfonts/winfnt.c",
+         -- other
+         "../../deps/include/freetype2/f2build.h",
+         "../../deps/include/freetype2/freetype/config/*.h",
+         "../../deps/src/freetype2/autofit/autofit.c",
+         "../../deps/src/freetype2/bdf/bdf.c",
+         "../../deps/src/freetype2/cff/cff.c",
+         "../../deps/src/freetype2/base/ftbase.c",
+         "../../deps/src/freetype2/base/ftbitmap.c",
+         "../../deps/src/freetype2/cache/ftcache.c",
+         "../../deps/src/freetype2/builds/win32/ftdebug.c",
+         "../../deps/src/freetype2/base/ftfstype.c",
+         "../../deps/src/freetype2/base/ftgasp.c",
+         "../../deps/src/freetype2/base/ftglyph.c",
+         "../../deps/src/freetype2/gzip/ftgzip.c",
+         "../../deps/src/freetype2/base/ftinit.c",
+         "../../deps/src/freetype2/lzw/ftlzw.c",
+         "../../deps/src/freetype2/base/ftstroke.c",
+         "../../deps/src/freetype2/base/ftsystem.c",
+         "../../deps/src/freetype2/smooth/smooth.c"
+      }
+      includedirs { DEPS_IncPath .. "/freetype2" }
+      configuration "Release"
+         defines { "WIN32", "_LIB", "NDEBUG" }
+         defines { "_CRT_SECURE_NO_WARNINGS" }
+         defines { "FT2_BUILD_LIBRARY" }
+      configuration "Debug"
+         defines { "WIN32", "_LIB", "_DEBUG" }
+         defines { "_CRT_SECURE_NO_WARNINGS" }
+         defines { "FT_DEBUG_LEVEL_ERROR", "FT_DEBUG_LEVEL_TRACE" }
+         defines { "FT2_BUILD_LIBRARY", "_CRT_SECURE_NO_DEPRECATE" }
+      targetname "freetype2"
