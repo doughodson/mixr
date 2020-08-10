@@ -3,6 +3,10 @@ include ../makedefs
 
 LIB = $(DEPS_LIB_DIR)/libcigicl.a
 
+CPPFLAGS += -std=c++11
+CPPFLAGS += -I$(MIXR_ROOT)/deps/include/cigicl
+CPPFLAGS += -DCIGI_LITTLE_ENDIAN
+
 OBJS =  \
 	CigiAerosolRespV3.o \
 	CigiAnimationStopV3.o \

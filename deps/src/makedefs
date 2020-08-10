@@ -18,17 +18,10 @@ CPPFLAGS += -g -O2
 # ---
 CPPFLAGS += -fPIC
 CPPFLAGS += -I$(MIXR_ROOT)/deps/include
-CPPFLAGS += -I$(MIXR_ROOT)/deps/include/cigicl
-CPPFLAGS += -I$(MIXR_ROOT)/deps/include/loguru
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -pedantic
 #CPPFLAGS += -Wextra
-
-# ---
-# Compiler specific C++ version flags
-# ---
-CPPFLAGS += -std=c++11 
 
 # warn of old c-style casts, so they can be replaced
 #CPPFLAGS += -Wold-style-cast

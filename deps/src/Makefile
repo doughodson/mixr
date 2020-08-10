@@ -6,6 +6,7 @@
 PROJECTS = cigicl
 PROJECTS += loguru
 PROJECTS += osg
+PROJECTS += freetype2
 
 .PHONY: all clean $(PROJECTS)
 

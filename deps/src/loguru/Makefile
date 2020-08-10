@@ -3,6 +3,8 @@ include ../makedefs
 
 LIB = $(DEPS_LIB_DIR)/libdeps.a
 
+CPPFLAGS += -std=c++11
+
 OBJS =  \
 	loguru.o
 
