@@ -11,13 +11,11 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "mixr/base/osg/math.hpp"
+#include "osg/math.hpp"
 
 #include <cstring>
 #include <cmath>
 
-namespace mixr {
-namespace base {
 namespace osg {
 
 double asciiToDouble(const char* str)
@@ -135,6 +133,4 @@ double findAsciiToDouble(const char* str)
    return 0.0;
 }
 
-}
-}
 }

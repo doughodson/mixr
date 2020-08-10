@@ -11,13 +11,12 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Vec2f_HPP__
-#define __mixr_base_osg_Vec2f_HPP__
+#ifndef __osg_Vec2f_HPP__
+#define __osg_Vec2f_HPP__
 
-#include "mixr/base/osg/math.hpp"
+#include "osg/math.hpp"
 
-namespace mixr {
-namespace base {
+namespace osg {
 
 /** General purpose float pair. Uses include representation of
   * texture coordinates.
@@ -186,7 +185,6 @@ inline Vec2f componentDivide(const Vec2f& lhs, const Vec2f& rhs)
     return Vec2f(lhs[0]/rhs[0], lhs[1]/rhs[1]);
 }
 
-}
 }
 
 #endif

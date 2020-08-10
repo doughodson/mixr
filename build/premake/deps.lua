@@ -67,6 +67,21 @@ workspace "deps"
       system "Windows"
       architecture "x64"
 
+   -- deps library
+   project "deps"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
+      files {
+         "../../deps/include/loguru/**.h*",
+         "../../deps/include/osg/**",
+         "../../deps/src/loguru/**.c**",
+         "../../deps/src/osg/**.c**"
+      }
+      excludes {
+         "../../deps/src/osg/Matrix_implementation.cpp"
+      }
+      includedirs { DEPS_IncPath }
+      targetname "deps"
+
    -- cigicl library
    project "ccl_lib"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")

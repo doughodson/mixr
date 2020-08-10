@@ -33,9 +33,6 @@ OBJS =  \
 	concepts/linkage/AbstractIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
-	fmt/format.o \
-	fmt/os.o \
-	loguru/loguru.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -203,8 +200,6 @@ clean:
 	-rm -f colors/*.o
 	-rm -f concepts/linkage/*.o
 	-rm -f edl/*.o
-	-rm -f fmt/*.o
-	-rm -f loguru/*.o
 	-rm -f network/*.o
 	-rm -f numeric/operators/*.o
 	-rm -f numeric/*.o

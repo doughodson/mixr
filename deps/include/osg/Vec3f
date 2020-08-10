@@ -11,14 +11,13 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Vec3f_HPP__
-#define __mixr_base_osg_Vec3f_HPP__
+#ifndef __osg_Vec3f_HPP__
+#define __osg_Vec3f_HPP__
 
-#include "mixr/base/osg/Vec2f"
-#include "mixr/base/osg/math.hpp"
+#include "osg/Vec2f"
+#include "osg/math.hpp"
 
-namespace mixr {
-namespace base {
+namespace osg {
 
 /** General purpose float triple for use as vertices, vectors and normals.
   * Provides general math operations from addition through to cross products.
@@ -219,7 +218,6 @@ const Vec3f X_AXIS(1.0,0.0,0.0);
 const Vec3f Y_AXIS(0.0,1.0,0.0);
 const Vec3f Z_AXIS(0.0,0.0,1.0);
 
-}
 }
 
 #endif

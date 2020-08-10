@@ -11,15 +11,14 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Matrixd_HPP__
-#define __mixr_base_osg_Matrixd_HPP__
+#ifndef __osg_Matrixd_HPP__
+#define __osg_Matrixd_HPP__
 
-#include "mixr/base/osg/Vec3d"
-#include "mixr/base/osg/Vec4d"
-#include "mixr/base/osg/Quat"
+#include "osg/Vec3d"
+#include "osg/Vec4d"
+#include "osg/Quat"
 
-namespace mixr {
-namespace base {
+namespace osg {
 
 class Matrixf;
 
@@ -854,7 +853,6 @@ inline Matrixd operator * (const double s, const Matrixd& m)
   return (m * s);
 }
 
-}
 }
 
 #endif

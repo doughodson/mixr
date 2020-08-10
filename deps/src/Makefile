@@ -4,6 +4,8 @@
 # deps              : -
 #
 PROJECTS = cigicl
+PROJECTS += loguru
+PROJECTS += osg
 
 .PHONY: all clean $(PROJECTS)
 

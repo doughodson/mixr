@@ -11,61 +11,63 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Vec2f_HPP__
-#define __mixr_base_osg_Vec2f_HPP__
+#ifndef __osg_Vec2d_HPP__
+#define __osg_Vec2d_HPP__
 
-#include "mixr/base/osg/math.hpp"
+#include "osg/Vec2f"
 
-namespace mixr {
-namespace base {
+namespace osg {
 
-/** General purpose float pair. Uses include representation of
+/** General purpose double pair, uses include representation of
   * texture coordinates.
-  * No support yet added for float * Vec2f - is it necessary?
+  * No support yet added for double * Vec2d - is it necessary?
   * Need to define a non-member non-friend operator* etc.
-  * BTW: Vec2f * float is okay
+  * BTW: Vec2d * double is okay
 */
 
-class Vec2f
+class Vec2d
 {
     public:
 
         /** Data type of vector components.*/
-        typedef float value_type;
+        typedef double value_type;
 
         /** Number of vector components. */
         enum { num_components = 2 };
         
-        /** Vec member variable. */
         value_type _v[2];
-        
 
         /** Constructor that sets all components of the vector to zero */
-        Vec2f() {_v[0]=0.0; _v[1]=0.0;}
-        Vec2f(value_type x,value_type y) { _v[0]=x; _v[1]=y; }
+        Vec2d() {_v[0]=0.0; _v[1]=0.0;}
+
+        Vec2d(value_type x,value_type y) { _v[0]=x; _v[1]=y; }
+
+        inline Vec2d(const Vec2f& vec) { _v[0]=vec._v[0]; _v[1]=vec._v[1]; }
+        
+        inline operator Vec2f() const { return Vec2f(static_cast<float>(_v[0]),static_cast<float>(_v[1]));}
 
 
-        inline bool operator == (const Vec2f& v) const { return _v[0]==v._v[0] && _v[1]==v._v[1]; }
+        inline bool operator == (const Vec2d& v) const { return _v[0]==v._v[0] && _v[1]==v._v[1]; }
 
-        inline bool operator != (const Vec2f& v) const { return _v[0]!=v._v[0] || _v[1]!=v._v[1]; }
+        inline bool operator != (const Vec2d& v) const { return _v[0]!=v._v[0] || _v[1]!=v._v[1]; }
 
-        inline bool operator <  (const Vec2f& v) const
+        inline bool operator <  (const Vec2d& v) const
         {
             if (_v[0]<v._v[0]) return true;
             else if (_v[0]>v._v[0]) return false;
             else return (_v[1]<v._v[1]);
         }
 
-        inline value_type * ptr() { return _v; }
-        inline const value_type * ptr() const { return _v; }
+        inline value_type* ptr() { return _v; }
+        inline const value_type* ptr() const { return _v; }
 
         inline void set( value_type x, value_type y ) { _v[0]=x; _v[1]=y; }
 
-        inline value_type & operator [] (int i) { return _v[i]; }
+        inline value_type& operator [] (int i) { return _v[i]; }
         inline value_type operator [] (int i) const { return _v[i]; }
 
-        inline value_type & x() { return _v[0]; }
-        inline value_type & y() { return _v[1]; }
+        inline value_type& x() { return _v[0]; }
+        inline value_type& y() { return _v[1]; }
 
         inline value_type x() const { return _v[0]; }
         inline value_type y() const { return _v[1]; }
@@ -76,19 +78,19 @@ class Vec2f
         inline bool isNaN() const { return osg::isNaN(_v[0]) || osg::isNaN(_v[1]); }
 
         /** Dot product. */
-        inline value_type operator * (const Vec2f& rhs) const
+        inline value_type operator * (const Vec2d& rhs) const
         {
             return _v[0]*rhs._v[0]+_v[1]*rhs._v[1];
         }
 
         /** Multiply by scalar. */
-        inline const Vec2f operator * (value_type rhs) const
+        inline const Vec2d operator * (value_type rhs) const
         {
-            return Vec2f(_v[0]*rhs, _v[1]*rhs);
+            return Vec2d(_v[0]*rhs, _v[1]*rhs);
         }
 
         /** Unary multiply by scalar. */
-        inline Vec2f& operator *= (value_type rhs)
+        inline Vec2d& operator *= (value_type rhs)
         {
             _v[0]*=rhs;
             _v[1]*=rhs;
@@ -96,13 +98,13 @@ class Vec2f
         }
 
         /** Divide by scalar. */
-        inline const Vec2f operator / (value_type rhs) const
+        inline const Vec2d operator / (value_type rhs) const
         {
-            return Vec2f(_v[0]/rhs, _v[1]/rhs);
+            return Vec2d(_v[0]/rhs, _v[1]/rhs);
         }
 
         /** Unary divide by scalar. */
-        inline Vec2f& operator /= (value_type rhs)
+        inline Vec2d& operator /= (value_type rhs)
         {
             _v[0]/=rhs;
             _v[1]/=rhs;
@@ -110,15 +112,15 @@ class Vec2f
         }
 
         /** Binary vector add. */
-        inline const Vec2f operator + (const Vec2f& rhs) const
+        inline const Vec2d operator + (const Vec2d& rhs) const
         {
-            return Vec2f(_v[0]+rhs._v[0], _v[1]+rhs._v[1]);
+            return Vec2d(_v[0]+rhs._v[0], _v[1]+rhs._v[1]);
         }
 
         /** Unary vector add. Slightly more efficient because no temporary
           * intermediate object.
         */
-        inline Vec2f& operator += (const Vec2f& rhs)
+        inline Vec2d& operator += (const Vec2d& rhs)
         {
             _v[0] += rhs._v[0];
             _v[1] += rhs._v[1];
@@ -126,29 +128,29 @@ class Vec2f
         }
 
         /** Binary vector subtract. */
-        inline const Vec2f operator - (const Vec2f& rhs) const
+        inline const Vec2d operator - (const Vec2d& rhs) const
         {
-            return Vec2f(_v[0]-rhs._v[0], _v[1]-rhs._v[1]);
+            return Vec2d(_v[0]-rhs._v[0], _v[1]-rhs._v[1]);
         }
 
         /** Unary vector subtract. */
-        inline Vec2f& operator -= (const Vec2f& rhs)
+        inline Vec2d& operator -= (const Vec2d& rhs)
         {
             _v[0]-=rhs._v[0];
             _v[1]-=rhs._v[1];
             return *this;
         }
 
-        /** Negation operator. Returns the negative of the Vec2f. */
-        inline const Vec2f operator - () const
+        /** Negation operator. Returns the negative of the Vec2d. */
+        inline const Vec2d operator - () const
         {
-            return Vec2f (-_v[0], -_v[1]);
+            return Vec2d (-_v[0], -_v[1]);
         }
 
         /** Length of the vector = sqrt( vec . vec ) */
         inline value_type length() const
         {
-            return sqrtf( _v[0]*_v[0] + _v[1]*_v[1] );
+            return sqrt( _v[0]*_v[0] + _v[1]*_v[1] );
         }
 
         /** Length squared of the vector = vec . vec */
@@ -162,32 +164,31 @@ class Vec2f
         */
         inline value_type normalize()
         {
-            value_type norm = Vec2f::length();
+            value_type norm = Vec2d::length();
             if (norm>0.0)
             {
-                value_type inv = 1.0f/norm;
+                value_type inv = 1.0/norm;
                 _v[0] *= inv;
                 _v[1] *= inv;
             }
             return( norm );
         }
-        
-};    // end of class Vec2f
+
+};    // end of class Vec2d
+
 
 /** multiply by vector components. */
-inline Vec2f componentMultiply(const Vec2f& lhs, const Vec2f& rhs)
+inline Vec2d componentMultiply(const Vec2d& lhs, const Vec2d& rhs)
 {
-    return Vec2f(lhs[0]*rhs[0], lhs[1]*rhs[1]);
+    return Vec2d(lhs[0]*rhs[0], lhs[1]*rhs[1]);
 }
 
 /** divide rhs components by rhs vector components. */
-inline Vec2f componentDivide(const Vec2f& lhs, const Vec2f& rhs)
+inline Vec2d componentDivide(const Vec2d& lhs, const Vec2d& rhs)
 {
-    return Vec2f(lhs[0]/rhs[0], lhs[1]/rhs[1]);
+    return Vec2d(lhs[0]/rhs[0], lhs[1]/rhs[1]);
 }
 
-}
 }
 
 #endif
-

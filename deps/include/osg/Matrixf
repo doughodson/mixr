@@ -11,43 +11,42 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __mixr_base_osg_Matrixd_HPP__
-#define __mixr_base_osg_Matrixd_HPP__
+#ifndef __osg_Matrixf_HPP__
+#define __osg_Matrixf_HPP__
 
-#include "mixr/base/osg/Vec3d"
-#include "mixr/base/osg/Vec4d"
-#include "mixr/base/osg/Quat"
+#include "osg/Vec3d"
+#include "osg/Vec4d"
+#include "osg/Quat"
 
-namespace mixr {
-namespace base {
+namespace osg {
 
 class Matrixf;
 
-class Matrixd
+class Matrixf
 {
     public:
     
-        typedef double value_type;
+        typedef float value_type;
 
-        inline Matrixd() { makeIdentity(); }
-        inline Matrixd( const Matrixd& mat) { set(mat.ptr()); }
-        Matrixd( const Matrixf& mat );
-        inline explicit Matrixd( float const * const ptr ) { set(ptr); }
-        inline explicit Matrixd( double const * const ptr ) { set(ptr); }
-        inline explicit Matrixd( const Quat& quat ) { makeRotate(quat); }
+        inline Matrixf() { makeIdentity(); }
+        inline Matrixf( const Matrixf& mat) { set(mat.ptr()); }
+        Matrixf( const Matrixd& mat );
+        inline explicit Matrixf( float const * const ptr ) { set(ptr); }
+        inline explicit Matrixf( double const * const ptr ) { set(ptr); }
+        inline explicit Matrixf( const Quat& quat ) { makeRotate(quat); }
 
-        Matrixd(value_type a00, value_type a01, value_type a02, value_type a03,
-                value_type a10, value_type a11, value_type a12, value_type a13,
-                value_type a20, value_type a21, value_type a22, value_type a23,
-                value_type a30, value_type a31, value_type a32, value_type a33);
+        Matrixf( value_type a00, value_type a01, value_type a02, value_type a03,
+                 value_type a10, value_type a11, value_type a12, value_type a13,
+                 value_type a20, value_type a21, value_type a22, value_type a23,
+                 value_type a30, value_type a31, value_type a32, value_type a33);
 
-        ~Matrixd() {}
+        ~Matrixf() {}
 
-        int compare(const Matrixd& m) const;
+        int compare(const Matrixf& m) const;
 
-        bool operator < (const Matrixd& m) const { return compare(m)<0; }
-        bool operator == (const Matrixd& m) const { return compare(m)==0; }
-        bool operator != (const Matrixd& m) const { return compare(m)!=0; }
+        bool operator < (const Matrixf& m) const { return compare(m)<0; }
+        bool operator == (const Matrixf& m) const { return compare(m)==0; }
+        bool operator != (const Matrixf& m) const { return compare(m)!=0; }
 
         inline value_type& operator()(int row, int col) { return _mat[row][col]; }
         inline value_type operator()(int row, int col) const { return _mat[row][col]; }
@@ -58,18 +57,18 @@ class Matrixd
                                                  osg::isNaN(_mat[2][0]) || osg::isNaN(_mat[2][1]) || osg::isNaN(_mat[2][2]) || osg::isNaN(_mat[2][3]) ||
                                                  osg::isNaN(_mat[3][0]) || osg::isNaN(_mat[3][1]) || osg::isNaN(_mat[3][2]) || osg::isNaN(_mat[3][3]); }
 
-        inline Matrixd& operator = (const Matrixd& rhs)
+        inline Matrixf& operator = (const Matrixf& rhs)
         {
             if( &rhs == this ) return *this;
             set(rhs.ptr());
             return *this;
         }
         
-        Matrixd& operator = (const Matrixf& other);
+        Matrixf& operator = (const Matrixd& other);
 
-        inline void set(const Matrixd& rhs) { set(rhs.ptr()); }
+        inline void set(const Matrixf& rhs) { set(rhs.ptr()); }
 
-        void set(const Matrixf& rhs);
+        void set(const Matrixd& rhs);
 
         inline void set(float const * const ptr)
         {
@@ -93,10 +92,10 @@ class Matrixd
 
         bool isIdentity() const
         {
-            return _mat[0][0]==1.0 && _mat[0][1]==0.0 && _mat[0][2]==0.0 &&  _mat[0][3]==0.0 &&
-                   _mat[1][0]==0.0 && _mat[1][1]==1.0 && _mat[1][2]==0.0 &&  _mat[1][3]==0.0 &&
-                   _mat[2][0]==0.0 && _mat[2][1]==0.0 && _mat[2][2]==1.0 &&  _mat[2][3]==0.0 &&
-                   _mat[3][0]==0.0 && _mat[3][1]==0.0 && _mat[3][2]==0.0 &&  _mat[3][3]==1.0;
+            return _mat[0][0]==1.0f && _mat[0][1]==0.0f && _mat[0][2]==0.0f &&  _mat[0][3]==0.0f &&
+                   _mat[1][0]==0.0f && _mat[1][1]==1.0f && _mat[1][2]==0.0f &&  _mat[1][3]==0.0f &&
+                   _mat[2][0]==0.0f && _mat[2][1]==0.0f && _mat[2][2]==1.0f &&  _mat[2][3]==0.0f &&
+                   _mat[3][0]==0.0f && _mat[3][1]==0.0f && _mat[3][2]==0.0f &&  _mat[3][3]==1.0f;
         }
 
         void makeIdentity();
@@ -122,7 +121,7 @@ class Matrixd
                          value_type angle2, const Vec3d& axis2,
                          value_type angle3, const Vec3d& axis3);
 
-
+        
         /** decompose the matrix into translation, rotation, scale and scale orientation.*/        
         void decompose( Vec3f& translation,
                         Quat& rotation, 
@@ -214,60 +213,61 @@ class Matrixd
                        value_type lookDistance=1.0f) const;
 
         /** invert the matrix rhs, automatically select invert_4x3 or invert_4x4. */
-        inline bool invert( const Matrixd& rhs)
+        inline bool invert( const Matrixf& rhs)
         {
-            bool is_4x3 = (rhs._mat[0][3]==0.0 && rhs._mat[1][3]==0.0 &&  rhs._mat[2][3]==0.0 && rhs._mat[3][3]==1.0);
+            bool is_4x3 = (rhs._mat[0][3]==0.0f && rhs._mat[1][3]==0.0f &&  rhs._mat[2][3]==0.0f && rhs._mat[3][3]==1.0f);
             return is_4x3 ? invert_4x3(rhs) :  invert_4x4(rhs);
         }
 
         /** 4x3 matrix invert, not right hand column is assumed to be 0,0,0,1. */
-        bool invert_4x3( const Matrixd& rhs);
+        bool invert_4x3( const Matrixf& rhs);
 
         /** full 4x4 matrix invert. */
-        bool invert_4x4( const Matrixd& rhs);
+        bool invert_4x4( const Matrixf& rhs);
 
         /** ortho-normalize the 3x3 rotation & scale matrix */ 
-        void orthoNormalize(const Matrixd& rhs); 
+        void orthoNormalize(const Matrixf& rhs); 
 
-        // utility functions to create new matrices
-        inline static Matrixd identity( void );
-        inline static Matrixd scale( const Vec3f& sv);
-        inline static Matrixd scale( const Vec3d& sv);
-        inline static Matrixd scale( value_type sx, value_type sy, value_type sz);
-        inline static Matrixd translate( const Vec3f& dv);
-        inline static Matrixd translate( const Vec3d& dv);
-        inline static Matrixd translate( value_type x, value_type y, value_type z);
-        inline static Matrixd rotate( const Vec3f& from, const Vec3f& to);
-        inline static Matrixd rotate( const Vec3d& from, const Vec3d& to);
-        inline static Matrixd rotate( value_type angle, value_type x, value_type y, value_type z);
-        inline static Matrixd rotate( value_type angle, const Vec3f& axis);
-        inline static Matrixd rotate( value_type angle, const Vec3d& axis);
-        inline static Matrixd rotate( value_type angle1, const Vec3f& axis1, 
+        //basic utility functions to create new matrices
+        inline static Matrixf identity( void );
+        inline static Matrixf scale( const Vec3f& sv);
+        inline static Matrixf scale( const Vec3d& sv);
+        inline static Matrixf scale( value_type sx, value_type sy, value_type sz);
+        inline static Matrixf translate( const Vec3f& dv);
+        inline static Matrixf translate( const Vec3d& dv);
+        inline static Matrixf translate( value_type x, value_type y, value_type z);
+        inline static Matrixf rotate( const Vec3f& from, const Vec3f& to);
+        inline static Matrixf rotate( const Vec3d& from, const Vec3d& to);
+        inline static Matrixf rotate( value_type angle, value_type x, value_type y, value_type z);
+        inline static Matrixf rotate( value_type angle, const Vec3f& axis);
+        inline static Matrixf rotate( value_type angle, const Vec3d& axis);
+        inline static Matrixf rotate( value_type angle1, const Vec3f& axis1, 
                                       value_type angle2, const Vec3f& axis2,
                                       value_type angle3, const Vec3f& axis3);
-        inline static Matrixd rotate( value_type angle1, const Vec3d& axis1, 
+        inline static Matrixf rotate( value_type angle1, const Vec3d& axis1, 
                                       value_type angle2, const Vec3d& axis2,
                                       value_type angle3, const Vec3d& axis3);
-        inline static Matrixd rotate( const Quat& quat);
-        inline static Matrixd inverse( const Matrixd& matrix);
-        inline static Matrixd orthoNormal(const Matrixd& matrix); 
+        inline static Matrixf rotate( const Quat& quat);
+        inline static Matrixf inverse( const Matrixf& matrix);
+        inline static Matrixf orthoNormal(const Matrixf& matrix); 
+        
         /** Create an orthographic projection matrix.
           * See glOrtho for further details.
         */
-        inline static Matrixd ortho(double left,   double right,
+        inline static Matrixf ortho(double left,   double right,
                                     double bottom, double top,
                                     double zNear,  double zFar);
 
         /** Create a 2D orthographic projection.
           * See glOrtho for further details.
         */
-        inline static Matrixd ortho2D(double left,   double right,
+        inline static Matrixf ortho2D(double left,   double right,
                                       double bottom, double top);
 
         /** Create a perspective projection.
           * See glFrustum for further details.
         */
-        inline static Matrixd frustum(double left,   double right,
+        inline static Matrixf frustum(double left,   double right,
                                       double bottom, double top,
                                       double zNear,  double zFar);
 
@@ -275,20 +275,20 @@ class Matrixd
           * See gluPerspective for further details.
           * Aspect ratio is defined as width/height.
         */
-        inline static Matrixd perspective(double fovy,  double aspectRatio,
+        inline static Matrixf perspective(double fovy,  double aspectRatio,
                                           double zNear, double zFar);
 
         /** Create the position and orientation as per a camera,
           * using the same convention as gluLookAt.
         */
-        inline static Matrixd lookAt(const Vec3f& eye,
+        inline static Matrixf lookAt(const Vec3f& eye,
                                      const Vec3f& center,
                                      const Vec3f& up);
 
         /** Create the position and orientation as per a camera,
           * using the same convention as gluLookAt.
         */
-        inline static Matrixd lookAt(const Vec3d& eye,
+        inline static Matrixf lookAt(const Vec3d& eye,
                                      const Vec3d& center,
                                      const Vec3d& up);
 
@@ -305,12 +305,18 @@ class Matrixd
         inline Vec4f operator* ( const Vec4f& v ) const;
         inline Vec4d operator* ( const Vec4d& v ) const;
 
+#ifdef USE_DEPRECATED_API
+        inline void set(const Quat& q) { makeRotate(q); }
+        inline void get(Quat& q) const { q = getRotate(); }
+#endif
+
         void setRotate(const Quat& q);
         /** Get the matrix rotation as a Quat. Note that this function
           * assumes a non-scaled matrix and will return incorrect results
           * for scaled matrixces. Consider decompose() instead.
           */
         Quat getRotate() const;
+
 
         void setTrans( value_type tx, value_type ty, value_type tz );
         void setTrans( const Vec3f& v );
@@ -326,21 +332,21 @@ class Matrixd
         }
         
         /** apply a 3x3 transform of v*M[0..2,0..2]. */
-        inline static Vec3f transform3x3(const Vec3f& v,const Matrixd& m);
+        inline static Vec3f transform3x3(const Vec3f& v,const Matrixf& m);
 
         /** apply a 3x3 transform of v*M[0..2,0..2]. */
-        inline static Vec3d transform3x3(const Vec3d& v,const Matrixd& m);
+        inline static Vec3d transform3x3(const Vec3d& v,const Matrixf& m);
 
         /** apply a 3x3 transform of M[0..2,0..2]*v. */
-        inline static Vec3f transform3x3(const Matrixd& m,const Vec3f& v);
+        inline static Vec3f transform3x3(const Matrixf& m,const Vec3f& v);
 
         /** apply a 3x3 transform of M[0..2,0..2]*v. */
-        inline static Vec3d transform3x3(const Matrixd& m,const Vec3d& v);
+        inline static Vec3d transform3x3(const Matrixf& m,const Vec3d& v);
 
-        // basic Matrixd multiplication, our workhorse methods.
-        void mult( const Matrixd&, const Matrixd& );
-        void preMult( const Matrixd& );
-        void postMult( const Matrixd& );
+        // basic Matrixf multiplication, our workhorse methods.
+        void mult( const Matrixf&, const Matrixf& );
+        void preMult( const Matrixf& );
+        void postMult( const Matrixf& );
 
         /** Optimized version of preMult(translate(v)); */
         inline void preMultTranslate( const Vec3d& v );
@@ -361,67 +367,135 @@ class Matrixd
         /** Optimized version of postMult(rotate(q)); */
         inline void postMultRotate( const Quat& q );
 
-        inline void operator *= ( const Matrixd& other ) 
+        inline void operator *= ( const Matrixf& other ) 
         {    if( this == &other ) {
-                Matrixd temp(other);
+                Matrixf temp(other);
                 postMult( temp );
             }
             else postMult( other ); 
         }
 
-        inline Matrixd operator * ( const Matrixd &m ) const
+        inline Matrixf operator * ( const Matrixf &m ) const
         {
-            Matrixd r;
+            Matrixf r;
             r.mult(*this,m);
             return  r;
         }
 
-        /** MIXR: Binary scalar multiply */
-        inline Matrixd operator * (const value_type s) const
+        /** Multiply by scalar. */
+        inline Matrixf operator * (value_type rhs) const
         {
-           return Matrixd(
-              _mat[0][0] * s, _mat[0][1] * s, _mat[0][2] * s, _mat[0][3] * s,
-              _mat[1][0] * s, _mat[1][1] * s, _mat[1][2] * s, _mat[1][3] * s,
-              _mat[2][0] * s, _mat[2][1] * s, _mat[2][2] * s, _mat[2][3] * s,
-              _mat[3][0] * s, _mat[3][1] * s, _mat[3][2] * s, _mat[3][3] * s
-           );
+            return Matrixf(
+                _mat[0][0]*rhs, _mat[0][1]*rhs, _mat[0][2]*rhs, _mat[0][3]*rhs,
+                _mat[1][0]*rhs, _mat[1][1]*rhs, _mat[1][2]*rhs, _mat[1][3]*rhs,
+                _mat[2][0]*rhs, _mat[2][1]*rhs, _mat[2][2]*rhs, _mat[2][3]*rhs,
+                _mat[3][0]*rhs, _mat[3][1]*rhs, _mat[3][2]*rhs, _mat[3][3]*rhs);
         }
 
-        /** MIXR: Unary scalar multiply. */
-        inline Matrixd& operator *= (const value_type s)
+        /** Unary multiply by scalar. */
+        inline Matrixf& operator *= (value_type rhs)
         {
-           _mat[0][0] *= s; _mat[0][1] *= s; _mat[0][2] *= s; _mat[0][3] *= s;
-           _mat[1][0] *= s; _mat[1][1] *= s; _mat[1][2] *= s; _mat[1][3] *= s;
-           _mat[2][0] *= s; _mat[2][1] *= s; _mat[2][2] *= s; _mat[2][3] *= s;
-           _mat[3][0] *= s; _mat[3][1] *= s; _mat[3][2] *= s; _mat[3][3] *= s;
-           return *this;
+            _mat[0][0]*=rhs;
+            _mat[0][1]*=rhs;
+            _mat[0][2]*=rhs;
+            _mat[0][3]*=rhs;
+            _mat[1][0]*=rhs;
+            _mat[1][1]*=rhs;
+            _mat[1][2]*=rhs;
+            _mat[1][3]*=rhs;
+            _mat[2][0]*=rhs;
+            _mat[2][1]*=rhs;
+            _mat[2][2]*=rhs;
+            _mat[2][3]*=rhs;
+            _mat[3][0]*=rhs;
+            _mat[3][1]*=rhs;
+            _mat[3][2]*=rhs;
+            _mat[3][3]*=rhs;
+            return *this;
+        }  
+
+        /** Divide by scalar. */
+        inline Matrixf operator / (value_type rhs) const
+        {
+            return Matrixf(
+                _mat[0][0]/rhs, _mat[0][1]/rhs, _mat[0][2]/rhs, _mat[0][3]/rhs,
+                _mat[1][0]/rhs, _mat[1][1]/rhs, _mat[1][2]/rhs, _mat[1][3]/rhs,
+                _mat[2][0]/rhs, _mat[2][1]/rhs, _mat[2][2]/rhs, _mat[2][3]/rhs,
+                _mat[3][0]/rhs, _mat[3][1]/rhs, _mat[3][2]/rhs, _mat[3][3]/rhs);
         }
 
-        /** MIXR: Binary matrix add. */
-        inline Matrixd operator + (const Matrixd& m) const
+        /** Unary divide by scalar. */
+        inline Matrixf& operator /= (value_type rhs)
         {
-           return Matrixd(
-              _mat[0][0] + m._mat[0][0], _mat[0][1] + m._mat[0][1], _mat[0][2] + m._mat[0][2], _mat[0][3] + m._mat[0][3],
-              _mat[1][0] + m._mat[1][0], _mat[1][1] + m._mat[1][1], _mat[1][2] + m._mat[1][2], _mat[1][3] + m._mat[1][3],
-              _mat[2][0] + m._mat[2][0], _mat[2][1] + m._mat[2][1], _mat[2][2] + m._mat[2][2], _mat[2][3] + m._mat[2][3],
-              _mat[3][0] + m._mat[3][0], _mat[3][1] + m._mat[3][1], _mat[3][2] + m._mat[3][2], _mat[3][3] + m._mat[3][3]
-           );
+            _mat[0][0]/=rhs;
+            _mat[0][1]/=rhs;
+            _mat[0][2]/=rhs;
+            _mat[0][3]/=rhs;
+            _mat[1][0]/=rhs;
+            _mat[1][1]/=rhs;
+            _mat[1][2]/=rhs;
+            _mat[1][3]/=rhs;
+            _mat[2][0]/=rhs;
+            _mat[2][1]/=rhs;
+            _mat[2][2]/=rhs;
+            _mat[2][3]/=rhs;
+            _mat[3][0]/=rhs;
+            _mat[3][1]/=rhs;
+            _mat[3][2]/=rhs;
+            _mat[3][3]/=rhs;
+            return *this;
+        }          
+
+        /** Binary vector add. */
+        inline Matrixf operator + (const Matrixf& rhs) const
+        {
+            return Matrixf(
+                _mat[0][0] + rhs._mat[0][0],
+                _mat[0][1] + rhs._mat[0][1],
+                _mat[0][2] + rhs._mat[0][2],
+                _mat[0][3] + rhs._mat[0][3],
+                _mat[1][0] + rhs._mat[1][0],
+                _mat[1][1] + rhs._mat[1][1],
+                _mat[1][2] + rhs._mat[1][2],
+                _mat[1][3] + rhs._mat[1][3],
+                _mat[2][0] + rhs._mat[2][0],
+                _mat[2][1] + rhs._mat[2][1],
+                _mat[2][2] + rhs._mat[2][2],
+                _mat[2][3] + rhs._mat[2][3],
+                _mat[3][0] + rhs._mat[3][0],
+                _mat[3][1] + rhs._mat[3][1],
+                _mat[3][2] + rhs._mat[3][2],
+                _mat[3][3] + rhs._mat[3][3]);                         
         }
 
-        /** MIXR: Unary matrix add. */
-        inline Matrixd& operator += (const Matrixd& m)
+        /** Unary vector add. Slightly more efficient because no temporary
+        * intermediate object.
+        */
+        inline Matrixf& operator += (const Matrixf& rhs)
         {
-           _mat[0][0] += m._mat[0][0]; _mat[0][1] += m._mat[0][1]; _mat[0][2] += m._mat[0][2]; _mat[0][3] += m._mat[0][3];
-           _mat[1][0] += m._mat[1][0]; _mat[1][1] += m._mat[1][1]; _mat[1][2] += m._mat[1][2]; _mat[1][3] += m._mat[1][3];
-           _mat[2][0] += m._mat[2][0]; _mat[2][1] += m._mat[2][1]; _mat[2][2] += m._mat[2][2]; _mat[2][3] += m._mat[2][3];
-           _mat[3][0] += m._mat[3][0]; _mat[3][1] += m._mat[3][1]; _mat[3][2] += m._mat[3][2]; _mat[3][3] += m._mat[3][3];
-           return *this;
-        }
+            _mat[0][0] += rhs._mat[0][0];
+            _mat[0][1] += rhs._mat[0][1];
+            _mat[0][2] += rhs._mat[0][2];
+            _mat[0][3] += rhs._mat[0][3];
+            _mat[1][0] += rhs._mat[1][0];
+            _mat[1][1] += rhs._mat[1][1];
+            _mat[1][2] += rhs._mat[1][2];
+            _mat[1][3] += rhs._mat[1][3];
+            _mat[2][0] += rhs._mat[2][0];
+            _mat[2][1] += rhs._mat[2][1];
+            _mat[2][2] += rhs._mat[2][2];
+            _mat[2][3] += rhs._mat[2][3];
+            _mat[3][0] += rhs._mat[3][0];
+            _mat[3][1] += rhs._mat[3][1];
+            _mat[3][2] += rhs._mat[3][2];
+            _mat[3][3] += rhs._mat[3][3];
+            return *this;
+        }            
 
         /** MIXR: Binary matrix subtract. */
-        inline Matrixd operator - (const Matrixd& m) const
+        inline Matrixf operator - (const Matrixf& m) const
         {
-           return Matrixd(
+           return Matrixf(
               _mat[0][0] - m._mat[0][0], _mat[0][1] - m._mat[0][1], _mat[0][2] - m._mat[0][2], _mat[0][3] - m._mat[0][3],
               _mat[1][0] - m._mat[1][0], _mat[1][1] - m._mat[1][1], _mat[1][2] - m._mat[1][2], _mat[1][3] - m._mat[1][3],
               _mat[2][0] - m._mat[2][0], _mat[2][1] - m._mat[2][1], _mat[2][2] - m._mat[2][2], _mat[2][3] - m._mat[2][3],
@@ -430,7 +504,7 @@ class Matrixd
         }
 
         /** MIXR: Unary matrix subtract. */
-        inline Matrixd& operator -= (const Matrixd& m)
+        inline Matrixf& operator -= (const Matrixf& m)
         {
            _mat[0][0] -= m._mat[0][0]; _mat[0][1] -= m._mat[0][1]; _mat[0][2] -= m._mat[0][2]; _mat[0][3] -= m._mat[0][3];
            _mat[1][0] -= m._mat[1][0]; _mat[1][1] -= m._mat[1][1]; _mat[1][2] -= m._mat[1][2]; _mat[1][3] -= m._mat[1][3];
@@ -440,7 +514,7 @@ class Matrixd
        }
 
        /* MIXR: Transpose this matrix */
-       inline Matrixd& transpose()
+       inline Matrixf& transpose()
        {
            { value_type tmp = _mat[1][0]; _mat[1][0] = _mat[0][1];  _mat[0][1] = tmp; }
            { value_type tmp = _mat[2][0]; _mat[2][0] = _mat[0][2];  _mat[0][2] = tmp; }
@@ -459,205 +533,199 @@ class Matrixd
 };
 
 
-// static utility methods
-inline Matrixd Matrixd::identity(void)
+//static utility methods
+inline Matrixf Matrixf::identity(void)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeIdentity();
     return m;
 }
 
-inline Matrixd Matrixd::scale(value_type sx, value_type sy, value_type sz)
+inline Matrixf Matrixf::scale(value_type sx, value_type sy, value_type sz)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeScale(sx,sy,sz);
     return m;
 }
 
-inline Matrixd Matrixd::scale(const Vec3f& v )
+inline Matrixf Matrixf::scale(const Vec3f& v )
 {
     return scale(v.x(), v.y(), v.z() );
 }
 
-inline Matrixd Matrixd::scale(const Vec3d& v )
+inline Matrixf Matrixf::scale(const Vec3d& v )
 {
-    return scale(v.x(), v.y(), v.z() );
+    return scale( (Matrixf::value_type) v.x(), (Matrixf::value_type) v.y(), (Matrixf::value_type) v.z() );
 }
 
-inline Matrixd Matrixd::translate(value_type tx, value_type ty, value_type tz)
+inline Matrixf Matrixf::translate(value_type tx, value_type ty, value_type tz)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeTranslate(tx,ty,tz);
     return m;
 }
 
-inline Matrixd Matrixd::translate(const Vec3f& v )
+inline Matrixf Matrixf::translate(const Vec3f& v )
 {
     return translate(v.x(), v.y(), v.z() );
 }
 
-inline Matrixd Matrixd::translate(const Vec3d& v )
+inline Matrixf Matrixf::translate(const Vec3d& v )
 {
-    return translate(v.x(), v.y(), v.z() );
+    return translate( (Matrixf::value_type) v.x(), (Matrixf::value_type) v.y(), (Matrixf::value_type) v.z() );
 }
 
-inline Matrixd Matrixd::rotate( const Quat& q )
+inline Matrixf Matrixf::rotate( const Quat& q )
 {
-    return Matrixd(q);
+    return Matrixf(q);
 }
-inline Matrixd Matrixd::rotate(value_type angle, value_type x, value_type y, value_type z )
+inline Matrixf Matrixf::rotate(value_type angle, value_type x, value_type y, value_type z )
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(angle,x,y,z);
     return m;
 }
-inline Matrixd Matrixd::rotate(value_type angle, const Vec3f& axis )
+inline Matrixf Matrixf::rotate(value_type angle, const Vec3f& axis )
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(angle,axis);
     return m;
 }
-inline Matrixd Matrixd::rotate(value_type angle, const Vec3d& axis )
+inline Matrixf Matrixf::rotate(value_type angle, const Vec3d& axis )
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(angle,axis);
     return m;
 }
-inline Matrixd Matrixd::rotate( value_type angle1, const Vec3f& axis1, 
-                                value_type angle2, const Vec3f& axis2,
-                                value_type angle3, const Vec3f& axis3)
+inline Matrixf Matrixf::rotate( value_type angle1, const Vec3f& axis1, 
+                              value_type angle2, const Vec3f& axis2,
+                              value_type angle3, const Vec3f& axis3)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(angle1,axis1,angle2,axis2,angle3,axis3);
     return m;
 }
-inline Matrixd Matrixd::rotate( value_type angle1, const Vec3d& axis1, 
-                                value_type angle2, const Vec3d& axis2,
-                                value_type angle3, const Vec3d& axis3)
+inline Matrixf Matrixf::rotate( value_type angle1, const Vec3d& axis1, 
+                              value_type angle2, const Vec3d& axis2,
+                              value_type angle3, const Vec3d& axis3)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(angle1,axis1,angle2,axis2,angle3,axis3);
     return m;
 }
-inline Matrixd Matrixd::rotate(const Vec3f& from, const Vec3f& to )
+inline Matrixf Matrixf::rotate(const Vec3f& from, const Vec3f& to )
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(from,to);
     return m;
 }
-inline Matrixd Matrixd::rotate(const Vec3d& from, const Vec3d& to )
+inline Matrixf Matrixf::rotate(const Vec3d& from, const Vec3d& to )
 {
-    Matrixd m;
+    Matrixf m;
     m.makeRotate(from,to);
     return m;
 }
 
-inline Matrixd Matrixd::inverse( const Matrixd& matrix)
+inline Matrixf Matrixf::inverse( const Matrixf& matrix)
 {
-    Matrixd m;
+    Matrixf m;
     m.invert(matrix);
     return m;
 }
 
-inline Matrixd Matrixd::orthoNormal(const Matrixd& matrix)
+inline Matrixf Matrixf::orthoNormal(const Matrixf& matrix)
 {
-  Matrixd m;
+  Matrixf m;
   m.orthoNormalize(matrix);
   return m; 
 }
 
-inline Matrixd Matrixd::ortho(double left,   double right,
-                              double bottom, double top,
-                              double zNear,  double zFar)
+inline Matrixf Matrixf::ortho(double left, double right,
+                            double bottom, double top,
+                            double zNear, double zFar)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeOrtho(left,right,bottom,top,zNear,zFar);
     return m;
 }
 
-inline Matrixd Matrixd::ortho2D(double left,   double right,
-                                double bottom, double top)
+inline Matrixf Matrixf::ortho2D(double left, double right,
+                              double bottom, double top)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeOrtho2D(left,right,bottom,top);
     return m;
 }
 
-inline Matrixd Matrixd::frustum(double left,   double right,
-                                double bottom, double top,
-                                double zNear,  double zFar)
+inline Matrixf Matrixf::frustum(double left, double right,
+                              double bottom, double top,
+                              double zNear, double zFar)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeFrustum(left,right,bottom,top,zNear,zFar);
     return m;
 }
 
-inline Matrixd Matrixd::perspective(double fovy,  double aspectRatio,
-                                    double zNear, double zFar)
+inline Matrixf Matrixf::perspective(double fovy,double aspectRatio,
+                                  double zNear, double zFar)
 {
-    Matrixd m;
+    Matrixf m;
     m.makePerspective(fovy,aspectRatio,zNear,zFar);
     return m;
 }
 
-inline Matrixd Matrixd::lookAt(const Vec3f& eye,
-                               const Vec3f& center,
-                               const Vec3f& up)
+inline Matrixf Matrixf::lookAt(const Vec3f& eye,const Vec3f& center,const Vec3f& up)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeLookAt(eye,center,up);
     return m;
 }
 
-inline Matrixd Matrixd::lookAt(const Vec3d& eye,
-                               const Vec3d& center,
-                               const Vec3d& up)
+inline Matrixf Matrixf::lookAt(const Vec3d& eye,const Vec3d& center,const Vec3d& up)
 {
-    Matrixd m;
+    Matrixf m;
     m.makeLookAt(eye,center,up);
     return m;
 }
 
-inline Vec3f Matrixd::postMult( const Vec3f& v ) const
+inline Vec3f Matrixf::postMult( const Vec3f& v ) const
 {
     value_type d = 1.0f/(_mat[3][0]*v.x()+_mat[3][1]*v.y()+_mat[3][2]*v.z()+_mat[3][3]) ;
-    return Vec3f( (Vec3f::value_type) ((_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3])*d),
-        (Vec3f::value_type) ((_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3])*d),
-        (Vec3f::value_type) ((_mat[2][0]*v.x() + _mat[2][1]*v.y() + _mat[2][2]*v.z() + _mat[2][3])*d) ) ;
+    return Vec3f( (_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3])*d,
+        (_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3])*d,
+        (_mat[2][0]*v.x() + _mat[2][1]*v.y() + _mat[2][2]*v.z() + _mat[2][3])*d) ;
 }
-
-inline Vec3d Matrixd::postMult( const Vec3d& v ) const
+inline Vec3d Matrixf::postMult( const Vec3d& v ) const
 {
-    value_type d = 1.0f/(_mat[3][0]*v.x()+_mat[3][1]*v.y()+_mat[3][2]*v.z()+_mat[3][3]) ;
+    value_type d = value_type( 1.0f/(_mat[3][0]*v.x()+_mat[3][1]*v.y()+_mat[3][2]*v.z()+_mat[3][3]) );
     return Vec3d( (_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3])*d,
         (_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3])*d,
         (_mat[2][0]*v.x() + _mat[2][1]*v.y() + _mat[2][2]*v.z() + _mat[2][3])*d) ;
 }
 
-inline Vec3f Matrixd::preMult( const Vec3f& v ) const
+inline Vec3f Matrixf::preMult( const Vec3f& v ) const
 {
     value_type d = 1.0f/(_mat[0][3]*v.x()+_mat[1][3]*v.y()+_mat[2][3]*v.z()+_mat[3][3]) ;
-    return Vec3f( (Vec3f::value_type) ((_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0])*d),
-        (Vec3f::value_type) ((_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1])*d),
-        (Vec3f::value_type) ((_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2])*d) );
+    return Vec3f( (_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0])*d,
+        (_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1])*d,
+        (_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2])*d);
 }
-
-inline Vec3d Matrixd::preMult( const Vec3d& v ) const
+inline Vec3d Matrixf::preMult( const Vec3d& v ) const
 {
-    value_type d = 1.0f/(_mat[0][3]*v.x()+_mat[1][3]*v.y()+_mat[2][3]*v.z()+_mat[3][3]) ;
+    value_type d = value_type( 1.0f/(_mat[0][3]*v.x()+_mat[1][3]*v.y()+_mat[2][3]*v.z()+_mat[3][3]) );
     return Vec3d( (_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0])*d,
         (_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1])*d,
         (_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2])*d);
 }
 
-inline Vec4f Matrixd::postMult( const Vec4f& v ) const
+inline Vec4f Matrixf::postMult( const Vec4f& v ) const
 {
-    return Vec4f( (Vec4f::value_type) (_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3]*v.w()),
-        (Vec4f::value_type) (_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3]*v.w()),
-        (Vec4f::value_type) (_mat[2][0]*v.x() + _mat[2][1]*v.y() + _mat[2][2]*v.z() + _mat[2][3]*v.w()),
-        (Vec4f::value_type) (_mat[3][0]*v.x() + _mat[3][1]*v.y() + _mat[3][2]*v.z() + _mat[3][3]*v.w()) ) ;
+    return Vec4f( (_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3]*v.w()),
+        (_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3]*v.w()),
+        (_mat[2][0]*v.x() + _mat[2][1]*v.y() + _mat[2][2]*v.z() + _mat[2][3]*v.w()),
+        (_mat[3][0]*v.x() + _mat[3][1]*v.y() + _mat[3][2]*v.z() + _mat[3][3]*v.w())) ;
 }
-inline Vec4d Matrixd::postMult( const Vec4d& v ) const
+inline Vec4d Matrixf::postMult( const Vec4d& v ) const
 {
     return Vec4d( (_mat[0][0]*v.x() + _mat[0][1]*v.y() + _mat[0][2]*v.z() + _mat[0][3]*v.w()),
         (_mat[1][0]*v.x() + _mat[1][1]*v.y() + _mat[1][2]*v.z() + _mat[1][3]*v.w()),
@@ -665,63 +733,61 @@ inline Vec4d Matrixd::postMult( const Vec4d& v ) const
         (_mat[3][0]*v.x() + _mat[3][1]*v.y() + _mat[3][2]*v.z() + _mat[3][3]*v.w())) ;
 }
 
-inline Vec4f Matrixd::preMult( const Vec4f& v ) const
+inline Vec4f Matrixf::preMult( const Vec4f& v ) const
 {
-    return Vec4f( (Vec4f::value_type) (_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0]*v.w()),
-        (Vec4f::value_type) (_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1]*v.w()),
-        (Vec4f::value_type) (_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2]*v.w()),
-        (Vec4f::value_type) (_mat[0][3]*v.x() + _mat[1][3]*v.y() + _mat[2][3]*v.z() + _mat[3][3]*v.w()) );
+    return Vec4f( (_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0]*v.w()),
+        (_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1]*v.w()),
+        (_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2]*v.w()),
+        (_mat[0][3]*v.x() + _mat[1][3]*v.y() + _mat[2][3]*v.z() + _mat[3][3]*v.w()));
 }
-
-inline Vec4d Matrixd::preMult( const Vec4d& v ) const
+inline Vec4d Matrixf::preMult( const Vec4d& v ) const
 {
     return Vec4d( (_mat[0][0]*v.x() + _mat[1][0]*v.y() + _mat[2][0]*v.z() + _mat[3][0]*v.w()),
         (_mat[0][1]*v.x() + _mat[1][1]*v.y() + _mat[2][1]*v.z() + _mat[3][1]*v.w()),
         (_mat[0][2]*v.x() + _mat[1][2]*v.y() + _mat[2][2]*v.z() + _mat[3][2]*v.w()),
         (_mat[0][3]*v.x() + _mat[1][3]*v.y() + _mat[2][3]*v.z() + _mat[3][3]*v.w()));
 }
-
-inline Vec3f Matrixd::transform3x3(const Vec3f& v,const Matrixd& m)
+inline Vec3f Matrixf::transform3x3(const Vec3f& v,const Matrixf& m)
 {
-    return Vec3f( (Vec3f::value_type)(m._mat[0][0]*v.x() + m._mat[1][0]*v.y() + m._mat[2][0]*v.z()),
-                 (Vec3f::value_type)(m._mat[0][1]*v.x() + m._mat[1][1]*v.y() + m._mat[2][1]*v.z()),
-                 (Vec3f::value_type)(m._mat[0][2]*v.x() + m._mat[1][2]*v.y() + m._mat[2][2]*v.z()) );
+    return Vec3f( (m._mat[0][0]*v.x() + m._mat[1][0]*v.y() + m._mat[2][0]*v.z()),
+                 (m._mat[0][1]*v.x() + m._mat[1][1]*v.y() + m._mat[2][1]*v.z()),
+                 (m._mat[0][2]*v.x() + m._mat[1][2]*v.y() + m._mat[2][2]*v.z()));
 }
-inline Vec3d Matrixd::transform3x3(const Vec3d& v,const Matrixd& m)
+inline Vec3d Matrixf::transform3x3(const Vec3d& v,const Matrixf& m)
 {
     return Vec3d( (m._mat[0][0]*v.x() + m._mat[1][0]*v.y() + m._mat[2][0]*v.z()),
                  (m._mat[0][1]*v.x() + m._mat[1][1]*v.y() + m._mat[2][1]*v.z()),
                  (m._mat[0][2]*v.x() + m._mat[1][2]*v.y() + m._mat[2][2]*v.z()));
 }
 
-inline Vec3f Matrixd::transform3x3(const Matrixd& m,const Vec3f& v)
+inline Vec3f Matrixf::transform3x3(const Matrixf& m,const Vec3f& v)
 {
-    return Vec3f( (Vec3f::value_type)(m._mat[0][0]*v.x() + m._mat[0][1]*v.y() + m._mat[0][2]*v.z()),
-                 (Vec3f::value_type)(m._mat[1][0]*v.x() + m._mat[1][1]*v.y() + m._mat[1][2]*v.z()),
-                 (Vec3f::value_type)(m._mat[2][0]*v.x() + m._mat[2][1]*v.y() + m._mat[2][2]*v.z()) ) ;
+    return Vec3f( (m._mat[0][0]*v.x() + m._mat[0][1]*v.y() + m._mat[0][2]*v.z()),
+                 (m._mat[1][0]*v.x() + m._mat[1][1]*v.y() + m._mat[1][2]*v.z()),
+                 (m._mat[2][0]*v.x() + m._mat[2][1]*v.y() + m._mat[2][2]*v.z()) ) ;
 }
-inline Vec3d Matrixd::transform3x3(const Matrixd& m,const Vec3d& v)
+inline Vec3d Matrixf::transform3x3(const Matrixf& m,const Vec3d& v)
 {
     return Vec3d( (m._mat[0][0]*v.x() + m._mat[0][1]*v.y() + m._mat[0][2]*v.z()),
                  (m._mat[1][0]*v.x() + m._mat[1][1]*v.y() + m._mat[1][2]*v.z()),
                  (m._mat[2][0]*v.x() + m._mat[2][1]*v.y() + m._mat[2][2]*v.z()) ) ;
 }
 
-inline void Matrixd::preMultTranslate( const Vec3d& v )
+inline void Matrixf::preMultTranslate( const Vec3d& v )
 {
     for (unsigned i = 0; i < 3; ++i)
     {
         double tmp = v[i];
         if (tmp == 0)
             continue;
-        _mat[3][0] += tmp*_mat[i][0];
-        _mat[3][1] += tmp*_mat[i][1];
-        _mat[3][2] += tmp*_mat[i][2];
-        _mat[3][3] += tmp*_mat[i][3];
+        _mat[3][0] += (value_type)( tmp*_mat[i][0] );
+        _mat[3][1] += (value_type)( tmp*_mat[i][1] );
+        _mat[3][2] += (value_type)( tmp*_mat[i][2] );
+        _mat[3][3] += (value_type)( tmp*_mat[i][3] );
     }
 }
 
-inline void Matrixd::preMultTranslate( const Vec3f& v )
+inline void Matrixf::preMultTranslate( const Vec3f& v )
 {
     for (unsigned i = 0; i < 3; ++i)
     {
@@ -735,21 +801,21 @@ inline void Matrixd::preMultTranslate( const Vec3f& v )
     }
 }
 
-inline void Matrixd::postMultTranslate( const Vec3d& v )
+inline void Matrixf::postMultTranslate( const Vec3d& v )
 {
     for (unsigned i = 0; i < 3; ++i)
     {
         double tmp = v[i];
         if (tmp == 0)
             continue;
-        _mat[0][i] += tmp*_mat[0][3];
-        _mat[1][i] += tmp*_mat[1][3];
-        _mat[2][i] += tmp*_mat[2][3];
-        _mat[3][i] += tmp*_mat[3][3];
+        _mat[0][i] += (value_type)( tmp*_mat[0][3] );
+        _mat[1][i] += (value_type)( tmp*_mat[1][3] );
+        _mat[2][i] += (value_type)( tmp*_mat[2][3] );
+        _mat[3][i] += (value_type)( tmp*_mat[3][3] );
     }
 }
 
-inline void Matrixd::postMultTranslate( const Vec3f& v )
+inline void Matrixf::postMultTranslate( const Vec3f& v )
 {
     for (unsigned i = 0; i < 3; ++i)
     {
@@ -763,98 +829,112 @@ inline void Matrixd::postMultTranslate( const Vec3f& v )
     }
 }
 
-inline void Matrixd::preMultScale( const Vec3d& v )
+inline void Matrixf::preMultScale( const Vec3d& v )
+{
+   _mat[0][0] *= value_type(v[0]);
+   _mat[0][1] *= value_type(v[0]);
+   _mat[0][2] *= value_type(v[0]);
+   _mat[0][3] *= value_type(v[0]);
+   _mat[1][0] *= value_type(v[1]);
+   _mat[1][1] *= value_type(v[1]);
+   _mat[1][2] *= value_type(v[1]);
+   _mat[1][3] *= value_type(v[1]);
+   _mat[2][0] *= value_type(v[2]);
+   _mat[2][1] *= value_type(v[2]);
+   _mat[2][2] *= value_type(v[2]);
+   _mat[2][3] *= value_type(v[2]);
+}
+
+inline void Matrixf::preMultScale( const Vec3f& v )
 {
     _mat[0][0] *= v[0]; _mat[0][1] *= v[0]; _mat[0][2] *= v[0]; _mat[0][3] *= v[0];
     _mat[1][0] *= v[1]; _mat[1][1] *= v[1]; _mat[1][2] *= v[1]; _mat[1][3] *= v[1];
     _mat[2][0] *= v[2]; _mat[2][1] *= v[2]; _mat[2][2] *= v[2]; _mat[2][3] *= v[2];
 }
 
-inline void Matrixd::preMultScale( const Vec3f& v )
+inline void Matrixf::postMultScale( const Vec3d& v )
 {
-    _mat[0][0] *= v[0]; _mat[0][1] *= v[0]; _mat[0][2] *= v[0]; _mat[0][3] *= v[0];
-    _mat[1][0] *= v[1]; _mat[1][1] *= v[1]; _mat[1][2] *= v[1]; _mat[1][3] *= v[1];
-    _mat[2][0] *= v[2]; _mat[2][1] *= v[2]; _mat[2][2] *= v[2]; _mat[2][3] *= v[2];
+   _mat[0][0] *= value_type(v[0]);
+   _mat[1][0] *= value_type(v[0]);
+   _mat[2][0] *= value_type(v[0]);
+   _mat[3][0] *= value_type(v[0]);
+   _mat[0][1] *= value_type(v[1]);
+   _mat[1][1] *= value_type(v[1]);
+   _mat[2][1] *= value_type(v[1]);
+   _mat[3][1] *= value_type(v[1]);
+   _mat[0][2] *= value_type(v[2]);
+   _mat[1][2] *= value_type(v[2]);
+   _mat[2][2] *= value_type(v[2]);
+   _mat[3][2] *= value_type(v[2]);
 }
 
-inline void Matrixd::postMultScale( const Vec3d& v )
+inline void Matrixf::postMultScale( const Vec3f& v )
 {
     _mat[0][0] *= v[0]; _mat[1][0] *= v[0]; _mat[2][0] *= v[0]; _mat[3][0] *= v[0];
     _mat[0][1] *= v[1]; _mat[1][1] *= v[1]; _mat[2][1] *= v[1]; _mat[3][1] *= v[1];
     _mat[0][2] *= v[2]; _mat[1][2] *= v[2]; _mat[2][2] *= v[2]; _mat[3][2] *= v[2];
 }
 
-inline void Matrixd::postMultScale( const Vec3f& v )
-{
-    _mat[0][0] *= v[0]; _mat[1][0] *= v[0]; _mat[2][0] *= v[0]; _mat[3][0] *= v[0];
-    _mat[0][1] *= v[1]; _mat[1][1] *= v[1]; _mat[2][1] *= v[1]; _mat[3][1] *= v[1];
-    _mat[0][2] *= v[2]; _mat[1][2] *= v[2]; _mat[2][2] *= v[2]; _mat[3][2] *= v[2];
-}
 
-inline void Matrixd::preMultRotate( const Quat& q )
+inline void Matrixf::preMultRotate( const Quat& q )
 {
     if (q.zeroRotation())
         return;
-    Matrixd r;
+    Matrixf r;
     r.setRotate(q);
     preMult(r);
 }
 
-inline void Matrixd::postMultRotate( const Quat& q )
+inline void Matrixf::postMultRotate( const Quat& q )
 {
     if (q.zeroRotation())
         return;
-    Matrixd r;
+    Matrixf r;
     r.setRotate(q);
     postMult(r);
 }
 
-inline Vec3f operator* (const Vec3f& v, const Matrixd& m )
+inline Vec3f operator* (const Vec3f& v, const Matrixf& m )
+{
+    return m.preMult(v);
+}
+inline Vec3d operator* (const Vec3d& v, const Matrixf& m )
+{
+    return m.preMult(v);
+}
+inline Vec4f operator* (const Vec4f& v, const Matrixf& m )
+{
+    return m.preMult(v);
+}
+inline Vec4d operator* (const Vec4d& v, const Matrixf& m )
 {
     return m.preMult(v);
 }
 
-inline Vec3d operator* (const Vec3d& v, const Matrixd& m )
+inline Vec3f Matrixf::operator* (const Vec3f& v) const
 {
-    return m.preMult(v);
+    return postMult(v);
 }
-
-inline Vec4f operator* (const Vec4f& v, const Matrixd& m )
+inline Vec3d Matrixf::operator* (const Vec3d& v) const
 {
-    return m.preMult(v);
+    return postMult(v);
 }
-
-inline Vec4d operator* (const Vec4d& v, const Matrixd& m )
+inline Vec4f Matrixf::operator* (const Vec4f& v) const
 {
-    return m.preMult(v);
+    return postMult(v);
 }
-
-inline Vec3f Matrixd::operator* (const Vec3f& v) const
+inline Vec4d Matrixf::operator* (const Vec4d& v) const
 {
     return postMult(v);
 }
 
-inline Vec3d Matrixd::operator* (const Vec3d& v) const
-{
-    return postMult(v);
-}
 
-inline Vec4f Matrixd::operator* (const Vec4f& v) const
-{
-    return postMult(v);
-}
-
-inline Vec4d Matrixd::operator* (const Vec4d& v) const
-{
-    return postMult(v);
-}
-
-inline Matrixd operator * (const double s, const Matrixd& m)
+/** MIXR: Binary scalar multiply */
+inline Matrixf operator * (const float s, const Matrixf& m)
 {
   return (m * s);
 }
 
-}
 }
 
 #endif
