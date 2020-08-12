@@ -80,7 +80,7 @@ void StateMachine::reset()
    state = INVALID_STATE;
    substate = INVALID_STATE;
    stMach = nullptr;
-   stMachName = nullptr;
+   stMachName.clear();
    arg = nullptr;
 
    goTo(INIT_STATE);
