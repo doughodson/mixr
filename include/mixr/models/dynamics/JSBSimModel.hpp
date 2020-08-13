@@ -4,6 +4,8 @@
 
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
+#include <string>
+
 namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
 namespace mixr {
@@ -57,27 +59,25 @@ public:
 
     bool isHeadingHoldOn() const final;
     double getCommandedHeadingD() const final;
-    bool setHeadingHoldOn(const bool b) final;
-    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) final;
+    bool setHeadingHoldOn(const bool) final;
+    bool setCommandedHeadingD(const double h, const double hDps = 0.0, const double maxBank = 0.0) final;
 
     bool isVelocityHoldOn() const final;
     double getCommandedVelocityKts() const final;
-    bool setVelocityHoldOn(const bool b) final;
-    bool setCommandedVelocityKts(const double v, const double vNps = 0) final;
+    bool setVelocityHoldOn(const bool) final;
+    bool setCommandedVelocityKts(const double v, const double vNps = 0.0) final;
 
     bool isAltitudeHoldOn() const final;
     double getCommandedAltitude() const final;
-    bool setAltitudeHoldOn(const bool b) final;
-    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) final;
+    bool setAltitudeHoldOn(const bool) final;
+    bool setCommandedAltitude(const double a, const double aMps = 0.0, const double maxPitch = 0.0) final;
 
-protected:
-
+private:
     JSBSim::FGFDMExec* fdmex{};
     JSBSim::FGPropertyManager* propMgr{};
 
-private:
-    const base::String* rootDir{};  // root directory for JSBSim models
-    const base::String* model{};    // JSBSim model
+    std::string rootDir;            // root directory for JSBSim models
+    std::string model;              // JSBSim model
     int   debugLevel{};
 
     double pitchTrimPos{};          // +/- 1.0

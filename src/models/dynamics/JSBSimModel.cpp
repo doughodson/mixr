@@ -70,8 +70,8 @@ void JSBSimModel::copyData(const JSBSimModel& org, const bool)
     propMgr = nullptr;
 
     // slot parameters
-    setSlotRootDir( org.rootDir );
-    setSlotModel( org.model );
+    rootDir = org.rootDir;
+    model = org.model;
     debugLevel = org.debugLevel;
 
     pitchTrimPos    = org.pitchTrimPos;
@@ -168,8 +168,8 @@ double JSBSimModel::getFuelWt() const
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
     if (Propulsion == nullptr) return 0.0;
 
-    double fuelWt = 0.0;
-    for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
+    double fuelWt{};
+    for (unsigned int i{}; i < Propulsion->GetNumTanks(); i++) {
         JSBSim::FGTank* tank{Propulsion->GetTank(i)};
         fuelWt += static_cast<double>(tank->GetContents());
     }
@@ -182,8 +182,8 @@ double JSBSimModel::getFuelWtMax() const
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
     if (Propulsion == nullptr) return 0.0;
 
-    double maxFuelWt = 0.0;
-    for (unsigned int i = 0; i < Propulsion->GetNumTanks(); i++) {
+    double maxFuelWt{};
+    for (unsigned int i{}; i < Propulsion->GetNumTanks(); i++) {
         JSBSim::FGTank* tank{Propulsion->GetTank(i)};
         maxFuelWt += static_cast<double>(tank->GetContents() / tank->GetPctFull() * 100.0);
     }
@@ -220,11 +220,11 @@ int JSBSimModel::getEngThrust(double* const fn, const int max) const
     if (fn == nullptr || max <= 0) {
         return 0;
     }
-    int num = getNumberOfEngines();
+    int num{getNumberOfEngines()};
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGThruster* thruster{Propulsion->GetEngine(i)->GetThruster()};
         fn[i] = static_cast<double>(thruster->GetThrust());
     }
@@ -244,7 +244,7 @@ int JSBSimModel::getEngRPM(double* const rpm, const int max) const
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGEngine* eng{Propulsion->GetEngine(i)};
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etPiston:
@@ -295,7 +295,7 @@ int JSBSimModel::getEngFuelFlow(double* const ff, const int max) const
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGEngine* eng{Propulsion->GetEngine(i)};
         ff[i] = static_cast<double>(eng->getFuelFlow_pph());
     }
@@ -312,11 +312,11 @@ int JSBSimModel::getEngOilPressure(double* const oil, const int max) const
     if (oil == nullptr || max <= 0) {
         return 0;
     }
-    int num = getNumberOfEngines();
+    int num{getNumberOfEngines()};
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGEngine* eng{Propulsion->GetEngine(i)};
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etPiston:
@@ -375,7 +375,7 @@ int JSBSimModel::getEngPLA(double* const pla, const int max) const
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGEngine* eng{Propulsion->GetEngine(i)};
         const double t{FCS->GetThrottlePos(i)};
         const double tmin{eng->GetThrottleMin()};
@@ -396,11 +396,11 @@ int JSBSimModel::getEngNozzle(double* const pla, const int max) const
     if (pla == nullptr || max <= 0) {
         return 0;
     }
-    int num = getNumberOfEngines();
+    int num{getNumberOfEngines()};
     if (max < num) {
         num = max;
     }
-    for (int i = 0; i < num; i++) {
+    for (int i{}; i < num; i++) {
         JSBSim::FGEngine* eng{Propulsion->GetEngine(i)};
         switch (eng->GetType()) {
         case JSBSim::FGEngine::etTurbine:
@@ -475,12 +475,12 @@ int JSBSimModel::setThrottles(const double* const positions, const int num)
     if (positions == nullptr || num <= 0) {
         return 0;
     }
-    int n = getNumberOfEngines();
+    int n{getNumberOfEngines()};
     if (num < n) {
         n = num;
     }
-    for (int i = 0; i < n; i++) {
-        double pos = positions[i] * 0.5; // CGB * 100.0;
+    for (int i{}; i < n; i++) {
+        double pos{positions[i] * 0.5}; // CGB * 100.0;
         if (pos > 1.0) {
             pos = 1.0;
         }
@@ -784,7 +784,7 @@ void JSBSimModel::reset()
     if (p == nullptr) return;
 
     // must have strings set
-    if (rootDir == nullptr || model == nullptr) return;
+    if (rootDir.empty() || model.empty()) return;
 
     // Must also have the JSBSim object
     if (fdmex == nullptr) {
@@ -793,13 +793,12 @@ void JSBSimModel::reset()
             propMgr = new JSBSim::FGPropertyManager();
         }
         fdmex = new JSBSim::FGFDMExec(propMgr);
-        fdmex->SetDebugLevel(debugLevel);           // sets the verbosity of JSBSim model instance
-        std::string RootDir(rootDir->c_str());
-        fdmex->SetAircraftPath(RootDir + "aircraft");
-        fdmex->SetEnginePath(RootDir + "engine");
-        fdmex->SetSystemsPath(RootDir + "systems"); // JSBSim-1.0 or after only
+        fdmex->SetDebugLevel(debugLevel);             // sets the verbosity of JSBSim model instance
+        fdmex->SetAircraftPath(rootDir + "aircraft");
+        fdmex->SetEnginePath(rootDir + "engine");
+        fdmex->SetSystemsPath(rootDir + "systems");   // JSBSim-1.0 or after only
 
-        fdmex->LoadModel(model->c_str());
+        fdmex->LoadModel(model);
         JSBSim::FGPropertyManager* propMgr{fdmex->GetPropertyManager()};
         if (propMgr != nullptr) {
             hasHeadingHold = propMgr->HasNode("ap/heading_hold") && propMgr->HasNode("ap/heading_setpoint");
@@ -850,7 +849,7 @@ void JSBSimModel::reset()
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
     if (Propulsion != nullptr && FCS != nullptr) {
         Propulsion->SetMagnetos(3);
-        for (unsigned int i=0; i < Propulsion->GetNumEngines(); i++) {
+        for (unsigned int i{}; i < Propulsion->GetNumEngines(); i++) {
             FCS->SetMixtureCmd(i, 1.0);
             FCS->SetThrottleCmd(i, 1.0);
             FCS->SetPropAdvanceCmd(i, 1.0);
@@ -874,28 +873,16 @@ void JSBSimModel::reset()
 //------------------------------------------------------------------------------
 
 // Sets root directory for JSBSim models
-bool JSBSimModel::setSlotRootDir(const base::String* const dir)
+bool JSBSimModel::setSlotRootDir(const base::String* const x)
 {
-    if (rootDir != nullptr) {
-       rootDir->unref();
-       rootDir = nullptr;
-    }
-    if (dir != nullptr) {
-       rootDir = dir->clone();
-    }
+    rootDir = x->c_str();
     return true;
 }
 
 // Sets JSBSim model
-bool JSBSimModel::setSlotModel(const base::String* const mdl)
+bool JSBSimModel::setSlotModel(const base::String* const x)
 {
-    if (model != nullptr) {
-       model->unref();
-       model = nullptr;
-    }
-    if (mdl != nullptr) {
-       model = mdl->clone();
-    }
+    model = x->c_str();
     return true;
 }
 
