@@ -2,7 +2,6 @@
 #ifndef __mixr_instruments_Eadi3DObjects_HPP__
 #define __mixr_instruments_Eadi3DObjects_HPP__
 
-#include "mixr/base/Object.hpp"
 #include "mixr/instruments/eadi3d/IrisGLCompat.hpp"
 
 namespace mixr {
@@ -14,16 +13,11 @@ namespace instruments {
 // Description:  Eadi3D font
 //
 // public methods (member functions):
-//      (All of the classes derived from Objects have the same public methods.)
-//
 //      static GLenum createEadi3DObjects(GLuint fontBase)
-//          Produces the stroke font map.
-//
+//          Produces the stroke font map
 //------------------------------------------------------------------------------
-class Eadi3DObjects : public base::Object
+class Eadi3DObjects
 {
-    DECLARE_SUBCLASS(Eadi3DObjects, base::Object)
-
 public:
     Eadi3DObjects(const float radius = 1.625);
 
