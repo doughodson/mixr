@@ -56,7 +56,7 @@ void Hsv::copyData(const Hsv& org, const bool)
 }
 
 //------------------------------------------------------------------------------
-// Data access functions
+// data access functions
 //------------------------------------------------------------------------------
 double Hsv::hue() const
 {
@@ -88,8 +88,8 @@ void Hsv::getHSVA(Vec4d& hhh) const
 //------------------------------------------------------------------------------
 bool Hsv::setSlotHue(const Number* const x)
 {
-    double value{x->asDouble()};
-    bool ok{value >= 0 && value <= 360};
+    const double value{x->asDouble()};
+    const bool ok{value >= 0.0 && value <= 360.0};
     if (ok) {
         hsv[HUE] = value;
         hsv2rgb(color,hsv);
@@ -104,8 +104,8 @@ bool Hsv::setSlotHue(const Number* const x)
 //------------------------------------------------------------------------------
 bool Hsv::setSlotSaturation(const Number* const x)
 {
-    double value{x->asDouble()};
-    bool ok{value >= 0 && value <= 1};
+    const double value{x->asDouble()};
+    const bool ok{value >= 0.0 && value <= 1.0};
     if (ok) {
         hsv[SATURATION] = value;
         hsv2rgb(color,hsv);
@@ -120,8 +120,8 @@ bool Hsv::setSlotSaturation(const Number* const x)
 //------------------------------------------------------------------------------
 bool Hsv::setSlotValue(const Number* const x)
 {
-    double value{x->asDouble()};
-    bool ok{value >= 0 && value <= 1};
+    const double value{x->asDouble()};
+    const bool ok{value >= 0.0 && value <= 1.0};
     if (ok) {
         hsv[VALUE] = value;
         hsv2rgb(color,hsv);
@@ -152,7 +152,7 @@ bool Hsv::setHSVA(const Vec4d& vec)
 
 //------------------------------------------------------------------------------
 // hsv2rgb() -- converts a Hue, Saturation, Value (HSV) color value to an
-//              Red, Gree, Blue (RGB) value.
+//              Red, Green, Blue (RGB) value
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
@@ -171,12 +171,11 @@ void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
         h /= 60.0f;
 
         // computer some parameters
-        //int i = ffloor(h);
-        const auto i = static_cast<int>(h);
+        const int i{static_cast<int>(h)};
         const double f{h - static_cast<double>(i)};
-        double p{v * (1.0f - s)};
-        double q{v * (1.0f - (s * f))};
-        double t{v * (1.0f - (s * (1.0f - f)))};
+        const double p{v * (1.0f - s)};
+        const double q{v * (1.0f - (s * f))};
+        const double t{v * (1.0f - (s * (1.0f - f)))};
 
         switch (i) {
             case 0 : {
@@ -227,9 +226,8 @@ void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
             }
             break;
         }
-    }
-    else {
-        // when saturation is zero, the color is gray of intensity 'v'.
+    } else {
+        // when saturation is zero, the color is gray of intensity 'v'
         rgb[RED] = v;
         rgb[GREEN] = v;
         rgb[BLUE] = v;
@@ -242,12 +240,12 @@ void Hsv::hsv2rgb(Vec4d& rgb, const Vec4d& hsv)
    Vec3d rgb3;
    hsv2rgb(rgb3, hsv3);
 
-   // Copy to output
+   // copy to output
    rgb[RED]   = rgb3[RED];
    rgb[GREEN] = rgb3[GREEN];
    rgb[BLUE]  = rgb3[BLUE];
 
-   // Just pass alpha
+   // just pass alpha
    rgb[ALPHA] = hsv[ALPHA];
 }
 
@@ -259,20 +257,19 @@ void Hsv::hsv2rgb(Vec4d& rgb, const Vec4d& hsv)
 //------------------------------------------------------------------------------
 void Hsv::rgb2hsv(Vec3d& hsv, const Vec3d& rgb)
 {
-   double cmax{std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) )};
-   double cmin{std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) )};
-   double cdelta{cmax - cmin};
+   const double cmax{std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) )};
+   const double cmin{std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) )};
+   const double cdelta{cmax - cmin};
    double h{};
    double s{};
 
    if ( cmax != 0.0 )
       s = cdelta / cmax;
 
-   if ( s != 0.0 )
-   {
-      double rc{(cmax - rgb[RED]) / cdelta};
-      double gc{(cmax - rgb[GREEN]) / cdelta};
-      double bc{(cmax - rgb[BLUE]) / cdelta};
+   if ( s != 0.0 ) {
+      const double rc{(cmax - rgb[RED]) / cdelta};
+      const double gc{(cmax - rgb[GREEN]) / cdelta};
+      const double bc{(cmax - rgb[BLUE]) / cdelta};
 
       if ( rgb[RED] == cmax )
          h = bc - gc;
@@ -293,17 +290,17 @@ void Hsv::rgb2hsv(Vec3d& hsv, const Vec3d& rgb)
 
 void Hsv::rgb2hsv(Vec4d& hsv, const Vec4d& rgb)
 {
-   // Let the Vec3 version do the work
+   // let the Vec3 version do the work
    Vec3d hsv3;
    Vec3d rgb3(rgb[0], rgb[1], rgb[2]);
    rgb2hsv(hsv3,rgb3);
 
-   // Copy to output (just pass alpha)
+   // copy to output (just pass alpha)
    hsv[HUE]        = hsv3[HUE];
    hsv[VALUE]      = hsv3[VALUE];
    hsv[SATURATION] = hsv3[SATURATION];
 
-   // Just pass alpha
+   // just pass alpha
    hsv[ALPHA] = rgb[ALPHA];
 }
 

@@ -12,9 +12,12 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Hsv
-// Description:  Defines a color by Hue, Saturation and Value (see below).
 //
-// Hues: degrees around a color wheel
+// Description: Defines a color by the hue, saturation and value model which more
+//              closely aligns with the way human vision perceives color-making
+//              attributes
+//
+//  Hues: degrees around a color wheel
 //      red          0.0
 //      yellow      60.0
 //      green      120.0
@@ -23,15 +26,18 @@ class Number;
 //      magenta    300.0
 //      red        360.0
 //
-//  Saturation:  pure hue    1.0
-//         no hue (white)    0.0
+//  Saturation:
+//      pure hue       1.0
+//      no hue (white) 0.0
 //
-//  Value:  max intensity    1.0
-//    no intensity (black)   0.0
+//  Value:
+//      max intensity        1.0
+//      no intensity (black) 0.0
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: hsv
+//
 // Slots:
 //     hue        <Number>  ! Set the hue component (0.0 to 360.0, default: 0.0)
 //     saturation <Number>  ! Set the saturation component (0.0 to 1.0, default: 0.0)
@@ -61,7 +67,7 @@ public:
     void getHSV(Vec3d& vec) const;               // Returns the hsv vector
     bool setHSV(const Vec3d& vec);               // Sets the hsv vector
 
-    // static functions to convert HSVA colors to RGBA and visa versa
+    // static convenience functions to convert HSVA colors to RGBA and visa versa
     static void hsv2rgb(Vec4d& rgb, const Vec4d& hsv); // Converts an HSVA color vector to a RGBA color vector
     static void hsv2rgb(Vec3d& rgb, const Vec3d& hsv); // Converts an HSV color vector to a RGB color vector
 

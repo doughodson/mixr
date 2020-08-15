@@ -9,12 +9,14 @@ namespace base {
 class Number;
 
 //------------------------------------------------------------------------------
-// Class:  Rgb
+// Class: Rgb
+//
 // Description: Defines a color by Red, Green, and Blue
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: rgb
+//
 // Slots:
 //     red   <Number>  ! Red component (0.0 to 1.0) (default: 0)
 //     green <Number>  ! Green component (0.0 to 1.0) (default: 0)
