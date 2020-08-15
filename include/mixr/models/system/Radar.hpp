@@ -63,7 +63,7 @@ public:
    // Sets integration gain
    virtual bool setIGain(const double);
 
-   bool killedNotification(Player* const killedBy = 0) override;
+   bool killedNotification(Player* const killedBy = nullptr) override;
 
    void updateData(const double dt = 0.0) override;
    void reset() override;

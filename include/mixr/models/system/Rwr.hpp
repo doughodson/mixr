@@ -31,12 +31,12 @@ public:
     void clearRays(const int ibuff)
     {
        if (ibuff == 0 || ibuff == 1) {
-          int i = 0;
+          int i{};
           while (i < NUM_RAYS) rays[ibuff][i++] = 0.0;
        }
     }
 
-    bool killedNotification(Player* const killedBy = 0) override;
+    bool killedNotification(Player* const killedBy = nullptr) override;
 
 protected:
    static const int MAX_EMISSIONS{1000};

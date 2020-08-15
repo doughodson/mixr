@@ -73,7 +73,7 @@ public:
    virtual bool setPowerSwitch(const unsigned int p);    // Sets the system's master power switch setting (see power enumeration)
 
    // Event handler(s)
-   virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
+   virtual bool killedNotification(Player* const killedBy = nullptr); // Killed (KILL_EVENT) event handler
 
    virtual Player* getOwnship();                         // Returns a pointer to our ownship player
    virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)

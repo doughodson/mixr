@@ -72,7 +72,7 @@ public:
    // Add a new emission report (RF track managers only)
    virtual void newReport(Emission* em, double snDbl);
 
-   bool killedNotification(Player* const killedBy = 0) override;
+   bool killedNotification(Player* const killedBy = nullptr) override;
 
    void reset() override;
 

@@ -79,7 +79,6 @@ class AbstractAtmosphere;
 //    At shutdown, the parent object must send a SHUTDOWN_EVENT event to
 //    this object, environments and other components.
 //
-
 //------------------------------------------------------------------------------
 class WorldModel : public simulation::Simulation
 {
