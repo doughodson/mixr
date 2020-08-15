@@ -10,10 +10,14 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Yiq
-// Description: Defines a YIQ color as used in NTSC
 //
-// Y defines the luminance, for a black-and-white image,
-// I and Q determine the color
+// Description: YIQ is a color space used bt the NTSC color TV system
+//
+// Y: defines the luma information (i.e., luminance) and is the only
+//    component used in a black-and-white television receiver
+//
+// I (inphase) and Q (quadrature) represent the chrominance information
+// which can be thought of as an X/Y axis that determines the color
 //------------------------------------------------------------------------------
 // EDL Interface:
 //

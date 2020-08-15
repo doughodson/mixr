@@ -10,15 +10,17 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Hls
-// Description: Defines a color by Hue, Saturation and Lightness
+//
+// Description: Defines a color by Hue, Lightness and Saturation
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: hls
+//
 // Slots:
 //     hue         <Number>  ! hue component (0.0 to 360.0, default: 0.0)
-//     saturation  <Number>  ! saturation component (0.0 to 1.0, default: 0.0)
 //     lightness   <Number>  ! lightness component (0.0 to 1.0, default: 0.0)
+//     saturation  <Number>  ! saturation component (0.0 to 1.0, default: 0.0)
 //------------------------------------------------------------------------------
 // Notes: The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
