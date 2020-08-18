@@ -200,17 +200,17 @@ void Antenna::clearQueues()
    base::unlock(inUseEmLock);
 }
 
-bool Antenna::setPolarization(base::Identifier* const v)
+bool Antenna::setPolarization(base::Identifier* const x)
 {
-   if (v == nullptr) return false;
+   if (x == nullptr) return false;
 
    bool ok{true};
-   if (*v == "none") ok = setPolarization(Polarization::NONE);
-   else if (*v == "vertical") ok = setPolarization(Polarization::VERTICAL);
-   else if (*v == "horizontal") ok = setPolarization(Polarization::HORIZONTAL);
-   else if (*v == "slant") ok = setPolarization(Polarization::SLANT);
-   else if (*v == "RHC") ok = setPolarization(Polarization::RHC);
-   else if (*v == "LHC") ok = setPolarization(Polarization::LHC);
+   if (*x == "none")            ok = setPolarization(Polarization::NONE);
+   else if (*x == "vertical")   ok = setPolarization(Polarization::VERTICAL);
+   else if (*x == "horizontal") ok = setPolarization(Polarization::HORIZONTAL);
+   else if (*x == "slant")      ok = setPolarization(Polarization::SLANT);
+   else if (*x == "RHC")        ok = setPolarization(Polarization::RHC);
+   else if (*x == "LHC")        ok = setPolarization(Polarization::LHC);
    else ok = false;
 
    return ok;

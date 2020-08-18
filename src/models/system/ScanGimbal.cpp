@@ -844,18 +844,18 @@ bool ScanGimbal::setMaxRevs(const double newMaxRevs)
 //------------------------------------------------------------------------------
 
 // setSlotScanMode() -- calls setScanMode()
-bool ScanGimbal::setSlotScanMode(base::Identifier* const newMode)
+bool ScanGimbal::setSlotScanMode(base::Identifier* const x)
 {
     // set our scan mode
     bool ok{true};
-    if (newMode != nullptr) {
-        if (*newMode == "manual") ok = setScanMode(ScanMode::MANUAL_SCAN);
-        else if (*newMode == "horizontal") ok = setScanMode(ScanMode::HORIZONTAL_BAR_SCAN);
-        else if (*newMode == "vertical") ok = setScanMode(ScanMode::VERTICAL_BAR_SCAN);
-        else if (*newMode == "conical") ok = setScanMode(ScanMode::CONICAL_SCAN);
-        else if (*newMode == "circular") ok = setScanMode(ScanMode::CIRCULAR_SCAN);
-        else if (*newMode == "pseudorandom") ok = setScanMode(ScanMode::PSEUDO_RANDOM_SCAN);
-        else if (*newMode == "spiral") ok = setScanMode(ScanMode::SPIRAL_SCAN);
+    if (x != nullptr) {
+        if (*x == "manual")            ok = setScanMode(ScanMode::MANUAL_SCAN);
+        else if (*x == "horizontal")   ok = setScanMode(ScanMode::HORIZONTAL_BAR_SCAN);
+        else if (*x == "vertical")     ok = setScanMode(ScanMode::VERTICAL_BAR_SCAN);
+        else if (*x == "conical")      ok = setScanMode(ScanMode::CONICAL_SCAN);
+        else if (*x == "circular")     ok = setScanMode(ScanMode::CIRCULAR_SCAN);
+        else if (*x == "pseudorandom") ok = setScanMode(ScanMode::PSEUDO_RANDOM_SCAN);
+        else if (*x == "spiral")       ok = setScanMode(ScanMode::SPIRAL_SCAN);
         else ok = false;
     }
     return ok;

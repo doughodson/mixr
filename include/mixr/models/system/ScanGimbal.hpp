@@ -28,7 +28,7 @@ namespace models {
 //    searchVolume         <List>         ! Size of the search volume [ width  height ] (radians);
 //                                        ! (default scanHeight: 0)
 //                                        ! ... and sets the 'scanWidth'
-//                                        ! ... and sets the 'scanMode'  to "horizontal"
+//                                        ! ... and sets the 'scanMode'  to horizontal
 //
 //    reference            <List>         ! Reference angles; i.e., center of the search volume [ az el ] (radians) (default: 0, 0)
 //
