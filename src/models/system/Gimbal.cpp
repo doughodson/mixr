@@ -15,7 +15,6 @@
 #include "mixr/base/units/lengths.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
-#include "mixr/base/util/str_utils.hpp"
 
 #include <cmath>
 
@@ -25,7 +24,7 @@ namespace models {
 IMPLEMENT_SUBCLASS(Gimbal, "Gimbal")
 
 BEGIN_SLOTTABLE(Gimbal)
-    "type",                   //  1: Physical gimbal type: "mechanical" or "electronic"
+    "type",                   //  1: Physical gimbal type: mechanical or electronic
 
     "location",               //  2: Relative location vector         (meters) [ x y z ]
 
@@ -64,7 +63,7 @@ BEGIN_SLOTTABLE(Gimbal)
     "terrainOcculting",             // 28: Enable terrain occulting of tye players of interest (default: false)
     "checkHorizon",                 // 29:  Enable horizon masking check (default: true)
     "playerOfInterestTypes",        // 30: Player of interest types (default: 0 )
-                                    //     types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
+                                    //     valid identifiers: { air, ground, weapon, ship, building, lifeform, space }
     "maxPlayersOfInterest",         // 31: Max number of players of interest (default: 0)
     "maxRange2PlayersOfInterest",   // 32: Max range to players of interest or zero for all (default: 0)
     "maxAngle2PlayersOfInterest",   // 33: Max angle of gimbal boresight to players of interest or zero for all (default: 0)
@@ -75,7 +74,7 @@ END_SLOTTABLE(Gimbal)
 
 BEGIN_SLOT_MAP(Gimbal)
 
-    ON_SLOT(1, setSlotType,                        base::Identifier) // Physical gimbal type: "mechanical" or "electronic"
+    ON_SLOT(1, setSlotType,                        base::Identifier) // Physical gimbal type: mechanical or electronic
 
     ON_SLOT(2, setSlotLocation,                    base::List)       // Relative location vector (meters) [ x y z ]
 
@@ -112,9 +111,9 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(27, setSlotCmdRateRoll,                base::Angle)      // Commanded roll rate (sets RATE_SERVO)
 
     ON_SLOT(28, setSlotTerrainOcculting,           base::Boolean)    // Enable terrain occulting (default: false)
-    ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: true)
+    ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: all types)
     ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
-                                                                     //    types: { "air" "ground" "weapon" "ship" "building" "lifeform" }
+                                                                     //   Valid identifiers: { air, ground, weapon, ship, building, lifeform }
     ON_SLOT(31, setSlotMaxPlayers,                 base::Integer)    // Max number of players of interest (default: 0)
     ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Length)     // Max range to players of interest or zero for all (default: 0)
     ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::Angle)      // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
@@ -750,13 +749,13 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 // Slot functions ---
 //------------------------------------------------------------------------------
 
-bool Gimbal::setSlotType(const base::Identifier* const msg)
+bool Gimbal::setSlotType(const base::Identifier* const x)
 {
-    if (msg == nullptr) return false;
+    if (x == nullptr) return false;
 
     bool ok{true};
-    if (*msg == "mechanical") ok = setType(Type::MECHANICAL);
-    else if (*msg == "electronic") ok = setType(Type::ELECTRONIC);
+    if (*x == "mechanical") ok = setType(Type::MECHANICAL);
+    else if (*x == "electronic") ok = setType(Type::ELECTRONIC);
     else ok = false;
     return ok;
 }
@@ -1095,29 +1094,29 @@ bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 }
 
 // Player of interest types (default: 0 )
-bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
+bool Gimbal::setSlotPlayerTypes(const base::PairStream* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
       unsigned int mask{};
-      const base::List::Item* item{msg->getFirstItem()};
+      const base::List::Item* item{x->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<const base::Pair*>(item->getValue());
-         const auto type = dynamic_cast<const base::String*>( pair->object() );
+         const auto type = dynamic_cast<const base::Identifier*>( pair->object() );
          if (type != nullptr) {
-            if ( base::utStrcasecmp(type->c_str(), "air") == 0 ) {
+            if ( *type == "air") {
                mask = (mask | Player::AIR_VEHICLE);
-            } else if ( base::utStrcasecmp(type->c_str(), "ground") == 0 ) {
+            } else if ( *type == "ground" ) {
                mask = (mask | Player::GROUND_VEHICLE);
-            } else if ( base::utStrcasecmp(type->c_str(), "weapon") == 0 ) {
+            } else if ( *type == "weapon" ) {
                mask = (mask | Player::WEAPON);
-            } else if ( base::utStrcasecmp(type->c_str(), "ship") == 0 ) {
+            } else if ( *type == "ship" ) {
                mask = (mask | Player::SHIP);
-            } else if ( base::utStrcasecmp(type->c_str(), "building") == 0 ) {
+            } else if ( *type == "building" ) {
                mask = (mask | Player::BUILDING);
-            }  else if ( base::utStrcasecmp(type->c_str(), "lifeform") == 0 ) {
+            }  else if ( *type == "lifeform" ) {
                mask = (mask | Player::LIFE_FORM);
-            }  else if ( base::utStrcasecmp(type->c_str(), "space") == 0 ) {
+            }  else if ( *type == "space" ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }
@@ -1187,7 +1186,6 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
    }
    return ok;
 }
-
 
 //------------------------------------------------------------------------------
 // updateMatrix() -- update the A/C coord to gimbal's coord matrix

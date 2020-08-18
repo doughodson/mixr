@@ -53,7 +53,7 @@ class Tdb;
 // Factory name: Gimbal
 // Slots:
 //
-//    type                 <Identifier>   ! Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)
+//    type                 <Identifier>   ! Physical gimbal type: mechanical or electronic (default: ELECTRONIC)
 //
 //    location             <List>         ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
@@ -65,8 +65,8 @@ class Tdb;
 //    azimuthLimits        <List>         ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
 //    azimuthLimitLeft     <Angle>        ! Left azimuth limit[ range: -pi to pi; else unlimited ]
 //    azimuthLimitRight    <Angle>        ! Right azimuth limit[ range: -pi to pi; else unlimited ]
-//    elevationLimits      <List>         ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
 //
+//    elevationLimits      <List>         ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
 //    elevationLimitLower  <Angle>        ! Lower elevation limit[ range: -pi to pi; else unlimited ]
 //    elevationLimitUpper  <Angle>        ! Upper elevation limit[ range: -pi to pi; else unlimited ]
 //
@@ -93,7 +93,7 @@ class Tdb;
 //    checkHorizon         <Boolean>      ! Enable horizon masking check (default: true)
 //
 //    playerOfInterestTypes        <PairStream> ! List of player of interest types (default: all types )
-//                                              ! Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
+//                                              ! Valid identifiers: { air, ground, weapon, ship, building, lifeform, space }
 //
 //    maxPlayersOfInterest         <Number>     ! Max number of players of interest (default: 200)
 //    maxRange2PlayersOfInterest   <Length>     ! Max range to players of interest, or zero for all (default: 0)
@@ -329,7 +329,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotType(const base::Identifier* const);                 // Physical gimbal type: "mechanical" or "electronic"
+   bool setSlotType(const base::Identifier* const);                 // Physical gimbal type: mechanical or electronic
    bool setSlotLocation(const base::List* const);                   // Relative location vector (meters) [ x y z ]
 
    bool setSlotPosition(const base::List* const);                   // Initial position vector (radians) [ az el roll ]
