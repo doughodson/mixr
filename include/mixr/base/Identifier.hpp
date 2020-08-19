@@ -35,7 +35,7 @@ public:
 
    void setStr(const std::string& x)         { id = x;  replaceSpaces(); }
 
-   // convenience method
+   // convenience methods
    const std::string& asString() const       { return id; }          // returns a standard string (std::string)
    const char* c_str() const                 { return id.c_str(); }  // returns a pointer to valid a C-style string
 
