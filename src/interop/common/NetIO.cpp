@@ -146,13 +146,13 @@ void NetIO::copyData(const NetIO& org, const bool)
 
 void NetIO::deleteData()
 {
-   for (int i = 0; i < nInNibs; i++) {
+   for (int i{}; i < nInNibs; i++) {
       inputList[i]->unref();
       inputList[i] = nullptr;
    }
    nInNibs = 0;
 
-   for (int i = 0; i < nOutNibs; i++) {
+   for (int i{}; i < nOutNibs; i++) {
       outputList[i]->unref();
       outputList[i] = nullptr;
    }
@@ -163,8 +163,8 @@ void NetIO::deleteData()
 
    station = nullptr;
    simulation = nullptr;
-   federateName = nullptr;
-   federationName = nullptr;
+   //federateName = nullptr;
+   //federationName = nullptr;
 
    netInit = false;
    netInitFail = false;
@@ -172,7 +172,7 @@ void NetIO::deleteData()
 
 void NetIO::reset()
 {
-    // Initialization
+    // initialization
     if (!isNetworkInitialized() && !didInitializationFail()) {
         networkInitialization();
     }
