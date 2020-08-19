@@ -164,7 +164,7 @@ bool CadrgFile::checkForMap(const char* dir)
     if (toc.fail()) {
         // Clear out our input stream
         toc.clear();
-        string->empty();
+        string->clear();
         string->setStr(dir);
         string->catStr("a.toc");
         #if defined(WIN32)
@@ -246,7 +246,7 @@ bool CadrgFile::initialize(const char* dir)
     if (toc.fail()) {
         // Clear out our input stream
         toc.clear();
-        string->empty();
+        string->clear();
         string->setStr(dir);
         string->catStr("a.toc");
         #if defined(WIN32)

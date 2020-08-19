@@ -133,7 +133,7 @@ bool FileReader::setSlotRecordLength(const Integer* const msg)
 bool FileReader::open()
 {
    // Create the full file name
-   std::string file = pathname + "/" + filename;
+   std::string file{pathname + "/" + filename};
 
    // Open the file ...
    if (dbf != nullptr) {

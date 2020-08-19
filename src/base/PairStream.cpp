@@ -78,7 +78,6 @@ const Pair* PairStream::findByName(const char* const slotname) const
 
 //------------------------------------------------------------------------------
 // findName() -- Finds the name associated with an object.
-// Returns a copy, so unref() the Identifier when finished.
 //------------------------------------------------------------------------------
 const std::string PairStream::findName(const Object* const obj) const
 {

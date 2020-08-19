@@ -99,24 +99,24 @@ void AbstractReadout::copyData(const AbstractReadout& org, const bool)
     linked = org.linked;
     inheritColor = org.inheritColor;
     startCP = org.startCP;
-    setSlotFont(org.fontName);
+    fontName = org.fontName;
 }
 
 void AbstractReadout::deleteData()
 {
-    origStr.empty();
-    inputExample.empty();
+    origStr.clear();
+    inputExample.clear();
     ln = 0;
     cp = 0;
     w  = 0;
-    str.empty();
+    str.clear();
     dmode = 0;
     jmode = base::Justify::None;
     mode  = Mode::Display;
     icp   = 0;
     inpDspMode = 0;
     inpModeHold = false;
-    setSlotFont(nullptr);
+    fontName.clear();
 }
 
 //------------------------------------------------------------------------------
@@ -398,7 +398,7 @@ void AbstractReadout::drawFunc()
     // ---
     // Select the correct font based on font name if there is one, and if not, then do it normally
     // ---
-    if (fontName != nullptr) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName->c_str()));
+    if (!fontName.empty()) dsp->selectFont(isReversed(), isUnderlined(), dsp->getFont(fontName.c_str()));
     else dsp->selectFont(isReversed(), isUnderlined());
 
 
@@ -669,12 +669,11 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
 bool AbstractReadout::setSlotFont(const base::Identifier* const x)
 {
     bool ok{};
-    if (fontName != nullptr) {
-        fontName->unref();
+    if (x == nullptr) {
+        fontName.clear();
     }
-    fontName = nullptr;
     if (x != nullptr) {
-        fontName = x->clone();
+        fontName = x->asString();
         ok = true;
     }
 

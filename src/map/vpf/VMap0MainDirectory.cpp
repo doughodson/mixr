@@ -62,7 +62,7 @@ void VMap0MainDirectory::loadTables()
             int index {1};
             VpfRecord* record {table->getRecord(index)};
             while (record != nullptr) {
-                string->empty();
+                string->clear();
                 //std::cout << "LAT INFO = " << record->getData(1)
                 //          << ", " << record->getData(2) << ", "
                 //          << record->getData(3) << ", " << record->getData(4)

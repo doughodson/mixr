@@ -115,7 +115,7 @@ bool UdpBroadcastHandler::bindSocket()
     // ---
     if (ok) {
         ok = false;
-        if (networkMask != "") {
+        if (!networkMask.empty()) {
             // User defined broadcast address
             const uint32_t localNetAddr{getLocalAddr()};
             const uint32_t localNetMask{::inet_addr(networkMask.c_str())};

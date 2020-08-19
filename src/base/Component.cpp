@@ -1172,7 +1172,7 @@ Object* Component::SendData::getValue(const char* const value)
     // When our value is a null string, check if the past string was null
     else {
         if ( !str->isEmpty() ) {
-            str->empty();
+            str->clear();
             return str;
         }
         else return nullptr;

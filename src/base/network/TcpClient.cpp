@@ -127,7 +127,7 @@ bool TcpClient::connectToServer()
    connected = false;
    connectionTerminated = false;
 
-   if (ipAddr == "") return false;
+   if (ipAddr.empty()) return false;
 
    if (socketNum == INVALID_SOCKET) return false;
 

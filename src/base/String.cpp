@@ -218,16 +218,14 @@ void String::setChar(const unsigned int index, const char c)
       cstr[index] = c;
 }
 
-
 //------------------------------------------------------------------------------
-// empty() -- make this an empty string
+// clear() -- erases the contents of the string
 //------------------------------------------------------------------------------
-void String::empty()
+void String::clear()
 {
    if (cstr != nullptr) cstr[0] = 0;
    n = 0;
 }
-
 
 //------------------------------------------------------------------------------
 // Assignment operator =

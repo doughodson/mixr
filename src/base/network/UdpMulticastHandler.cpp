@@ -155,7 +155,7 @@ bool UdpMulticastHandler::init()
 bool UdpMulticastHandler::bindSocket()
 {
     // Must have a group
-    if (multicastGroup == "") return false;
+    if (multicastGroup.empty()) return false;
 
     // ---
     // Our base class will bind the socket
@@ -197,7 +197,7 @@ bool UdpMulticastHandler::joinTheGroup()
 
    // Find our network address
    uint32_t mg{htonl (INADDR_NONE)};
-   if (multicastGroup != "") mg = ::inet_addr(multicastGroup.c_str());
+   if (!multicastGroup.empty()) mg = ::inet_addr(multicastGroup.c_str());
    if (mg != INADDR_NONE) {
       setNetAddr(mg);
    } else {

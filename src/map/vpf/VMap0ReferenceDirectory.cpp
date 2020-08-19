@@ -106,7 +106,7 @@ void VMap0ReferenceDirectory::loadTables()
             int index {1};
             VpfRecord* record {table->getRecord(index)};
             while (record != nullptr) {
-                string->empty();
+                string->clear();
                 // column 2 is the column we need
                 char* x = const_cast<char*>(record->getData(2));
                 std::size_t size {std::strlen(x)};

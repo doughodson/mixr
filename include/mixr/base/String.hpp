@@ -51,8 +51,8 @@ public:
 
     char getChar(const std::size_t index) const;   // Gets a specific character
 
-    void empty();                                            // Empty this string.
-    void setStr(const char*);                                // Sets us to a copy of "string"
+    void clear();                                            // erases string contents
+    void setStr(const char*);                                // sets us to a copy of "string"
     void catStr(const char*);                                // Append a copy of "string" to our text string
     void setChar(const unsigned int index, const char c);    // Sets a specific character
 

@@ -156,7 +156,7 @@ private:
    int dmode{};                       // display mode flags
    base::Justify jmode{};             // justification mode
    bool inheritColor{};               // inherit color instead of using a default color
-   base::Identifier* fontName{};      // name of the font we want our display to use (if overridden)
+   std::string fontName;              // name of the font we want our display to use (if overridden)
 
 private:
    // slot table helper methods

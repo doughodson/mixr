@@ -595,6 +595,10 @@ base library (mixr_base)
       4) Now that the dafif library has been reworked, and the abstract Record
          is no longer a subclass to String, this String class is now marked 'final'
          to prevent subclassing of this type.
+      5) The method 'empty()' which erases the contents of the string has been renamed
+         to 'clear()' to more closely match std::string interface. For the time being,
+         the method 'isEmpty()' will remain - it is equivalent to the std::string
+         'empty()' method.
 
    Table class
       1) Slot parameter 'extrapolate' now accepts a Boolean

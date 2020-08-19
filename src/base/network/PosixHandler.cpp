@@ -130,7 +130,7 @@ bool PosixHandler::init()
     // ---
     // Set the local IP address
     // ---
-    if (localIpAddr != "") {
+    if (!localIpAddr.empty()) {
         setLocalAddr(localIpAddr.c_str());
     }
 
