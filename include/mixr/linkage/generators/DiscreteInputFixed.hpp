@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class String; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -16,8 +16,8 @@ namespace linkage {
 //
 // Factory name: DiscreteInputFixed
 // Slots:
-//      signal    <Identifier>   ! Signal type { ON, OFF }
-//                               !  (default: OFF )
+//      signal    <Identifier>   ! Type identifiers { on, off }
+//                               !  (default: off )
 //
 //      di        <Integer>      ! AbstractIoData's DI channel index
 //------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotChannel(const base::Integer* const);
-   bool setSlotSignal(const base::String* const);
+   bool setSlotSignal(const base::Identifier* const);
 };
 
 }

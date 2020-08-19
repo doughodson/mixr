@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/AbstractGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class String; }
+namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -25,8 +25,8 @@ namespace linkage {
 //
 // Factory name: AnalogSignalGen
 // Slots:
-//      signal    <Identifier>   ! Signal type { SINE, COSINE, SQUARE, SAW }
-//                               !  (default: SINE )
+//      signal    <Identifier>   ! Type identifiers { sine, cosine, square, saw }
+//                               !  (default: sine )
 //
 //      frequency <Frequency>    ! Signal frequency (should be <much> less
 //                               !   than 1/2 of our core update rate)
@@ -52,8 +52,8 @@ private:
    void processInputsImpl(const double dt, base::AbstractIoData* const) final;
 
    // AbstractIoData's AI channel index
-   int getChannel() const                              { return channel; }
-   bool setChannel(const int x)                        { channel = x; return true; }
+   int getChannel() const                      { return channel; }
+   bool setChannel(const int x)                { channel = x; return true; }
    int channel {};
 
    Signal signal {Signal::SINE};  // Signal type
@@ -61,20 +61,20 @@ private:
    double freq {};                // Frequency (rad/sec)
    double time {};                // Time since last reset
 
-   Signal getSignalType() const                        { return signal;   }
-   double getFrequency() const                         { return freq;     }     // Hz
-   double getPhase() const                             { return phase;    }     // Radians
+   Signal getSignalType() const                { return signal;   }
+   double getFrequency() const                 { return freq;     }     // Hz
+   double getPhase() const                     { return phase;    }     // Radians
 
-   bool setSignalType(const Signal x)                  { signal = x;   return true; }
-   bool setFrequency(const double x)                   { freq = x;     return true; }  // Hz
-   bool setPhase(const double x)                       { phase = x;    return true; }  // Radians
+   bool setSignalType(const Signal x)          { signal = x;   return true; }
+   bool setFrequency(const double x)           { freq = x;     return true; }  // Hz
+   bool setPhase(const double x)               { phase = x;    return true; }  // Radians
 
    double calc(const double dt);
 
 private:
    // slot table helper methods
    bool setSlotChannel(const base::Integer* const);
-   bool setSlotSignal(const base::String* const);
+   bool setSlotSignal(const base::Identifier* const);
    bool setSlotFrequency(const base::Frequency* const);
    bool setSlotPhase(const base::Angle* const);
 };

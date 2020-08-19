@@ -6,7 +6,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
-#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/frequencies.hpp"
 
@@ -22,14 +22,14 @@ EMPTY_DELETEDATA(AnalogSignalGen)
 
 BEGIN_SLOTTABLE(AnalogSignalGen)
     "ai",         // 1) Analog channel index
-    "signal",     // 2) Signal type { SINE, COSINE, SQUARE, SAW }
+    "signal",     // 2) Type identifier { sine, cosine, square, saw }
     "frequency",  // 3) Signal frequency
     "phase",      // 4) Phase shift
 END_SLOTTABLE(AnalogSignalGen)
 
 BEGIN_SLOT_MAP(AnalogSignalGen)
    ON_SLOT( 1, setSlotChannel,   base::Integer)
-   ON_SLOT( 2, setSlotSignal,    base::String)
+   ON_SLOT( 2, setSlotSignal,    base::Identifier)
    ON_SLOT( 3, setSlotFrequency, base::Frequency)
    ON_SLOT( 4, setSlotPhase,     base::Angle)
 END_SLOT_MAP()
@@ -111,11 +111,11 @@ double AnalogSignalGen::calc(const double dt)
 // Slot Functions
 //------------------------------------------------------------------------------
 
-bool AnalogSignalGen::setSlotChannel(const base::Integer* const msg)
+bool AnalogSignalGen::setSlotChannel(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int v = msg->asInt();
+   if (x != nullptr) {
+      const int v{x->asInt()};
       if (v >= 0) {
          ok = setChannel(v);
       }
@@ -124,12 +124,12 @@ bool AnalogSignalGen::setSlotChannel(const base::Integer* const msg)
 }
 
 // signal: Signal type { SINE, COSINE, SQUARE, SAW }
-bool AnalogSignalGen::setSlotSignal(const base::String* const msg)
+bool AnalogSignalGen::setSlotSignal(const base::Identifier* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
 
-      std::string signalType(msg->c_str());
+      std::string signalType{x->c_str()};
       // convert to lowercase
       std::transform(signalType.begin(), signalType.end(), signalType.begin(), ::tolower);
       // set the type
@@ -140,7 +140,7 @@ bool AnalogSignalGen::setSlotSignal(const base::String* const msg)
 
       if (!ok && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "AnalogSignalGen::setSlotSignal(): Invalid signal type: " << signalType;
-         std::cerr << ", use: { SINE, COSINE, SQUARE, SAW }" << std::endl;
+         std::cerr << ", use: { sine, cosine, square, saw }" << std::endl;
       }
 
    }

@@ -6,7 +6,7 @@
 #include "mixr/base/concepts/linkage/AbstractIoData.hpp"
 #include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
 
-#include "mixr/base/String.hpp"
+#include "mixr/base/Identifier.hpp"
 
 #include <cmath>
 #include <string>
@@ -20,12 +20,12 @@ EMPTY_DELETEDATA(DiscreteInputFixed)
 
 BEGIN_SLOTTABLE(DiscreteInputFixed)
     "di",         // 1) Discrete channel index
-    "signal",     // 2) Signal type { ON, OFF }
+    "signal",     // 2) Type identifier { on, off }
 END_SLOTTABLE(DiscreteInputFixed)
 
 BEGIN_SLOT_MAP(DiscreteInputFixed)
-   ON_SLOT( 1, setSlotChannel,   base::Integer)
-   ON_SLOT( 2, setSlotSignal,    base::String)
+   ON_SLOT( 1, setSlotChannel, base::Integer)
+   ON_SLOT( 2, setSlotSignal,  base::Identifier)
 END_SLOT_MAP()
 
 DiscreteInputFixed::DiscreteInputFixed()
@@ -66,13 +66,12 @@ bool DiscreteInputFixed::setSlotChannel(const base::Integer* const msg)
    return ok;
 }
 
-// signal: Signal type { ON, OFF }
-bool DiscreteInputFixed::setSlotSignal(const base::String* const msg)
+bool DiscreteInputFixed::setSlotSignal(const base::Identifier* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
 
-      std::string signalType(msg->c_str());
+      std::string signalType(x->c_str());
       // convert to lowercase
       std::transform(signalType.begin(), signalType.end(), signalType.begin(), ::tolower);
       // set the type
@@ -80,8 +79,8 @@ bool DiscreteInputFixed::setSlotSignal(const base::String* const msg)
       else if (signalType == "off")   ok = setSignalType(Signal::OFF);
 
       if (!ok && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "DiscreteSignalGen::setSlotSignal(): Invalid signal type: " << signalType;
-         std::cerr << ", use: { ON, OFF }" << std::endl;
+         std::cerr << "DiscreteInputFixed::setSlotSignal(): Invalid signal type: " << signalType;
+         std::cerr << ", use: { on, off }" << std::endl;
       }
 
    }
