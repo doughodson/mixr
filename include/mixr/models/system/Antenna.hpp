@@ -24,7 +24,7 @@ class RfSystem;
 // Factory name: Antenna
 // Slots:
 //      polarization    <base::Identifier>      ! Antenna polarization  { none, vertical, horizontal, slant, RHC, LHC }
-//                                              ! (default: NONE)
+//                                              ! (default: none)
 //
 //      threshold       <base::Power>           ! Antenna threshold  (default: 0.0)
 //
@@ -44,7 +44,7 @@ class RfSystem;
 // Note
 //    1) Other defaults:
 //          maxPlayersOfInterest: 200
-//          playerOfInterestTypes: { "air" "weapon" }
+//          playerOfInterestTypes: { air weapon }
 //
 //    2) When the Emission 'recycle' flag is enabled (default behavior), the
 //       system will try to reuse Emission objects, which removes the overhead

@@ -30,9 +30,9 @@ inline bool Player::isNotSide(const unsigned int tst) const
 }
 
 // True if player is of these (bit-wise or'd) major types
-inline bool Player::isMajorType(const unsigned int tst) const
+inline bool Player::isMajorType(const unsigned int x) const
 {
-   return ((tst & getMajorType()) != 0);
+   return ((x & getMajorType()) != 0);
 }
 
 // Roll Euler angle (Rad)

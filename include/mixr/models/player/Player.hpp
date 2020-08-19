@@ -119,7 +119,7 @@ class Track;
 //    ! Player's type, id and and other parameters
 //    ! ---
 //    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
-//    side           <base::Identifier>  ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
+//    side           <base::Identifier>  ! Which side? valid identifiers { blue, red, yellow, cyan, gray, white } (default: gray)
 //    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
 //                                       !   (default: based on the coord system used to set the initial position)
 //

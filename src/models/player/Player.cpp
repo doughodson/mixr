@@ -83,7 +83,7 @@ BEGIN_SLOTTABLE(Player)
 
    // Player's type and and other parameters
    "type",              // 14) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
-   "side",              // 15) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
+   "side",              // 15) Which side? valid identifiers { blue, red, yellow, cyan, gray, white }
 
    "signature",         // 16) Player's RCS signature
    "irSignature",       // 17) Player's IR Signature
@@ -1575,10 +1575,10 @@ base::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(const base::String* const msg)
+bool Player::setType(const base::String* const x)
 {
-   if (msg != nullptr) {
-      base::String* p{msg->clone()};
+   if (x != nullptr) {
+      base::String* p{x->clone()};
       type.set(p, false);
    } else {
       type = nullptr;
