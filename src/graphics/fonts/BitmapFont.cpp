@@ -472,8 +472,8 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
 
    std::string fontPathname{base::buildPath(fontDirectory(), fontMap[index])};
    // Open the font file
-   FILE* fp{};
-   if( (fp = std::fopen(fontPathname.c_str(), "r")) == nullptr ) {
+   FILE* fp{std::fopen(fontPathname.c_str(), "r")};
+   if (fp == nullptr) {
       if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "BitmapFont::loadTypeFace: unable to open font file: " << fontPathname << std::endl;
       }

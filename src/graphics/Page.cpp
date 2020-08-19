@@ -82,7 +82,6 @@ void Page::deleteData()
 {
    // De-select the current pages
    cPage = nullptr;
-   cPageName.empty();
 
    // delete list of subpages
    if (subpages != nullptr) {

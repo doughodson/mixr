@@ -117,8 +117,7 @@ void FtglBitmapFont::loadFont()
         ftglFont->FaceSize(getFaceSize());
         ftgl(ftglFont);
         setFontLoaded();
-    }
-    else {
+    } else {
         if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "FtglBitmapFont::loadFont() - font did not load correctly: file: \"";
             std::cerr << fontPathname << "\"";
