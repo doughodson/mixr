@@ -42,8 +42,7 @@ void Instrument::copyData(const Instrument& org, const bool)
         base::Table1* copy = org.myTable->clone();
         setSlotScalingTable( copy );
         copy->unref();
-    }
-    else {
+    } else {
         setSlotScalingTable(nullptr);
     }
 
@@ -66,7 +65,7 @@ void Instrument::deleteData()
 //------------------------------------------------------------------------------
 bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 {
-   bool ok = false;
+   bool ok{};
    if (newTable != nullptr) {
       if (myTable != nullptr) myTable->unref();
       myTable = newTable;
@@ -81,7 +80,7 @@ bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 //------------------------------------------------------------------------------
 bool Instrument::setSlotInstVal(const base::Number* const newVal)
 {
-    bool ok = false;
+    bool ok{};
     if (newVal != nullptr) ok = setInstVal(newVal->asDouble());
     return ok;
 }
@@ -91,7 +90,7 @@ bool Instrument::setSlotInstVal(const base::Number* const newVal)
 //------------------------------------------------------------------------------
 bool Instrument::setSlotAllowValPass(const base::Boolean* const newAVP)
 {
-    bool ok = false;
+    bool ok{};
     if (newAVP != nullptr) ok = setAllowValPass(newAVP->asBool());
     return ok;
 }
@@ -113,7 +112,7 @@ bool Instrument::setAllowValPass(const bool newVP)
 //------------------------------------------------------------------------------
 bool Instrument::onUpdateInstVal(const base::Number* const newPos)
 {
-    bool ok = false;
+    bool ok{};
     // now call our set function
     ok = setInstVal(newPos->asDouble());
     return ok;

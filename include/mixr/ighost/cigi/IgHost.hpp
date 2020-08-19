@@ -135,7 +135,7 @@ private:
    struct ModelKey {
       ModelKey(const int pid, const std::string& federateName);
       // IgModel IDs  -- Comparisons in this order --
-      int playerID;                                  // Player ID
+      int playerID{};                                // Player ID
       std::string fName;                             // Federate name
    };
 

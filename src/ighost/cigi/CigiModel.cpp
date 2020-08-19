@@ -47,7 +47,7 @@ void CigiModel::deleteData()
 {
     setPlayer(nullptr);
 
-   for (int i = 0; i < CigiHost::NUM_BUFFERS; i++) {
+   for (int i{}; i < CigiHost::NUM_BUFFERS; i++) {
       if (parentEC[i]    != nullptr) { delete parentEC[i];    parentEC[i]    = nullptr; }
       if (trailEC[i]     != nullptr) { delete trailEC[i];     trailEC[i]     = nullptr; }
       if (explosionEC[i] != nullptr) { delete explosionEC[i]; explosionEC[i] = nullptr; }
@@ -66,7 +66,7 @@ void CigiModel::setPlayer(models::Player* const p)
    if (player != nullptr) {
       player->unref();
       playerID = 0;
-      federateName = "";
+      federateName.clear();
    }
 
    player = p;
