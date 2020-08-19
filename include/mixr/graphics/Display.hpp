@@ -210,7 +210,6 @@ public:
    // Clears the temporary sub-viewport
    virtual void clearSubscreen();
 
-
    // ---
    // Mouse, keyboard and event functions
    // ---
@@ -241,7 +240,6 @@ public:
 
    // Event handlers for when the mouse exits our display
    virtual void onMouseExit();
-
 
    // ---
    // Text and font functions

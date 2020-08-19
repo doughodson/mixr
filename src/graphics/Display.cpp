@@ -110,14 +110,12 @@ Display::Display()
 
 void Display::initData()
 {
-   name = " ";
-
    // Colors
    color.set(1.0f,1.0f,1.0f,1.0f);
    clearColor.set(0.0f,0.0f,0.0f,0.0f);
 
    {
-      base::PairStream* p = defaultColors();
+      base::PairStream* p{defaultColors()};
       setColorTable(p);
       p->unref();
 
@@ -209,6 +207,7 @@ void Display::deleteData()
    if (textures != nullptr) { textures->unref(); textures = nullptr; }
    if (materials != nullptr) { materials->unref(); materials = nullptr; }
    if (colorTable != nullptr) { colorTable->unref(); colorTable = nullptr; }
+   if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
    if (normColor != nullptr) { normColor->unref(); normColor = nullptr; }
    if (hiColor != nullptr) { hiColor->unref(); hiColor = nullptr; }
    if (currentFont != nullptr) { currentFont->unref(); currentFont = nullptr; }
