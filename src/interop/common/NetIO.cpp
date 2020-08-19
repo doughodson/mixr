@@ -130,7 +130,7 @@ void NetIO::copyData(const NetIO& org, const bool)
    nOutNibs = 0;
 
    clearInputEntityTypes();
-   for (int i = 0; i < org.nInputEntityTypes; i++) {
+   for (int i{}; i < org.nInputEntityTypes; i++) {
       Ntm* cp = org.inputEntityTypes[i]->clone();
       addInputEntityType( cp );
       cp->unref();
@@ -163,8 +163,6 @@ void NetIO::deleteData()
 
    station = nullptr;
    simulation = nullptr;
-   //federateName = nullptr;
-   //federationName = nullptr;
 
    netInit = false;
    netInitFail = false;
@@ -186,11 +184,11 @@ void NetIO::reset()
 //------------------------------------------------------------------------------
 bool NetIO::shutdownNotification()
 {
-    for (int i = 0; i < nInNibs; i++) {
+    for (int i{}; i < nInNibs; i++) {
         inputList[i]->event(SHUTDOWN_EVENT);
     }
 
-    for (int i = 0; i < nOutNibs; i++) {
+    for (int i{}; i < nOutNibs; i++) {
         outputList[i]->event(SHUTDOWN_EVENT);
     }
     return BaseClass::shutdownNotification();
@@ -223,7 +221,7 @@ double NetIO::getMaxEntityRangeSquared(const Nib* const) const
 double NetIO::getMaxTimeDR(const Nib* const) const
 {
    return maxTimeDR;
-    }
+}
 
 // Dead-Reckoning: Returns max DR position error (meters)
 double NetIO::getMaxPositionErr(const Nib* const) const
@@ -314,16 +312,16 @@ bool NetIO::setMaxEntityRange(const double v)
 }
 
 // Sets our federate name
-bool NetIO::setFederateName(const std::string& msg)
+bool NetIO::setFederateName(const std::string& x)
 {
-   federateName = msg;
+   federateName = x;
    return true;
 }
 
 // Sets our federation name
-bool NetIO::setFederationName(const std::string& msg)
+bool NetIO::setFederationName(const std::string& x)
 {
-   federationName = msg;
+   federationName = x;
    return true;
 }
 
@@ -389,7 +387,7 @@ void NetIO::cleanupInputList()
    // Current exec time
    const double curExecTime{getSimulation()->getExecTimeSec()};
 
-   for (int idx = 0; idx < nInNibs; idx++) {
+   for (int idx{}; idx < nInNibs; idx++) {
       Nib* nib{inputList[idx]};
       if ( (nib->isTimeoutEnabled() && ((curExecTime - nib->getTimeExec()) > getMaxAge(nib)) )) {
             // We have one that's timed-out --
@@ -397,7 +395,7 @@ void NetIO::cleanupInputList()
 
             // 1) Shift the rest of the list down one
             nInNibs--;
-            for (int i = idx; i < nInNibs; i++) {
+            for (int i{idx}; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
             }
             inputList[nInNibs] = nullptr;
@@ -410,7 +408,7 @@ void NetIO::cleanupInputList()
 
             // 1) Shift the rest of the list down one
             nInNibs--;
-            for (int i = idx; i < nInNibs; i++) {
+            for (int i{idx}; i < nInNibs; i++) {
                inputList[i] = inputList[i+1];
             }
             inputList[nInNibs] = nullptr;
@@ -507,7 +505,7 @@ void NetIO::updateOutputList()
       // ---
       // Any NIB that was not checked needs to be removed
       // ---
-      for (int i = 0; i < nOutNibs; i++) {
+      for (int i{}; i < nOutNibs; i++) {
          if ( !outputList[i]->isChecked() ) {
             // Request removal;
             // (note: the network specific code now has one frame to cleanup its own code
@@ -528,7 +526,7 @@ void NetIO::processOutputList()
    // ---
    // Send player states
    // ---
-   for (unsigned int idx = 0; idx < getOutputListSize(); idx++) {
+   for (unsigned int idx{}; idx < getOutputListSize(); idx++) {
 
       Nib* nib{getOutputNib(idx)};
       const double curExecTime{getSimulation()->getExecTimeSec()};
@@ -643,7 +641,7 @@ models::Player* NetIO::createProxyPlayer(Nib* const nib)
       const simulation::Station* sta{getStation()};
       const auto own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
-         base::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
+         base::Vec3d delta{nib->getDrPosition() - own->getGeocPosition()};
          inRange = (delta.length2() <= maxRng2);
       }
    }
@@ -801,10 +799,10 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 
          if (n > 0) {
             // Now, 'bubble down' to its correct position
-            int idx = n-1;
+            int idx{n-1};
             while (idx >= 0 && compareKey2Nib(&key, &tbl[idx]) <= 0) {
                // Swap the table entries
-               Nib* tmp = tbl[idx];
+               Nib* tmp{tbl[idx]};
                tbl[idx] = tbl[idx+1];
                tbl[idx+1] = tmp;
                idx--;
@@ -835,7 +833,7 @@ void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 
    int found{-1};
    // Find the NIB
-   for (int i = 0; i < n && found < 0; i++) {
+   for (int i{}; i < n && found < 0; i++) {
       if (nib == tbl[i]) found = i;
    }
 
@@ -843,7 +841,7 @@ void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
    if (found >= 0) {
       tbl[found]->unref();
       int n1{n - 1};
-      for (int i = found; i < n1; i++) {
+      for (int i{found}; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
       tbl[n-1] = nullptr;
@@ -1050,15 +1048,15 @@ bool NetIO::setSlotNetworkID(const base::Integer* const num)
 }
 
 // Sets our federate name
-bool NetIO::setSlotFederateName(const base::Identifier* const msg)
+bool NetIO::setSlotFederateName(const base::Identifier* const x)
 {
-   return setFederateName(msg->asString());
+   return setFederateName(x->asString());
 }
 
 // Sets our federation name
-bool NetIO::setSlotFederationName(const base::Identifier* const msg)
+bool NetIO::setSlotFederationName(const base::Identifier* const x)
 {
-   return setFederationName(msg->asString());
+   return setFederationName(x->asString());
 }
 
 // Set input enable flag
@@ -1248,7 +1246,7 @@ NetIO::NtmInputNode* NetIO::NtmInputNode::clone() const
 // Class: NtmOutputNode
 //==============================================================================
 
-IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmOutputNode,"AbstractNtmOutputNode")
+IMPLEMENT_PARTIAL_SUBCLASS(NetIO::NtmOutputNode, "AbstractNtmOutputNode")
 EMPTY_SLOTTABLE(NetIO::NtmOutputNode)
 EMPTY_COPYDATA(NetIO::NtmOutputNode)
 EMPTY_DELETEDATA(NetIO::NtmOutputNode)

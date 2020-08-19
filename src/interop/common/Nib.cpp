@@ -113,7 +113,7 @@ void Nib::copyData(const Nib& org, const bool cc)
    apartLnchrElev = org.apartLnchrElev;
 
    // Need to clear attached missiles -- after clone these need to be found again
-   for (int i = 0; i < MAX_AMSL; i++) {
+   for (int i{}; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -134,7 +134,7 @@ void Nib::deleteData()
    setTypeMapper(nullptr);
 
    // Clear attached missiles
-   for (int i = 0; i < MAX_AMSL; i++) {
+   for (int i{}; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -155,7 +155,7 @@ bool Nib::shutdownNotification()
     setTypeMapper(nullptr);
 
     // Clear attached missiles
-   for (int i = 0; i < MAX_AMSL; i++) {
+   for (int i{}; i < MAX_AMSL; i++) {
       if (apartMsl[i] != nullptr) {
          apartMsl[i]->unref();
          apartMsl[i] = nullptr;
@@ -193,9 +193,9 @@ const std::string& Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const std::string& msg)
+bool Nib::setFederateName(const std::string& x)
 {
-   federateName = msg;
+   federateName = x;
    return true;
 }
 
@@ -382,7 +382,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
       //double drTime = curExecTime - getTimeExec();
-      models::SynchronizedState playerState = player->getSynchronizedState();
+      models::SynchronizedState playerState{player->getSynchronizedState()};
       const double drTime{static_cast<double>(playerState.getTimeExec()) - getTimeExec()};
 
       // 3-a) Freeze flag has changed
@@ -426,8 +426,8 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
             //base::Vec3d ppos = player->getGeocPosition();
-            const base::Vec3d ppos = playerState.getGeocPosition();
-            const base::Vec3d errPos = drPos - ppos;
+            const base::Vec3d ppos{playerState.getGeocPosition()};
+            const base::Vec3d errPos{drPos - ppos};
             if (errPos.length2() >= maxPosErr2) {
                result = YES;
             }
@@ -441,7 +441,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Compute angular error
             //base::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
-            base::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
+            base::Vec3d errAngles{drAngles - playerState.getGeocEulerAngles()};
 
             // Check if any angle error is greater than the max error
             errAngles[0] = std::fabs( base::angle::aepcdDeg(errAngles[0]) );
@@ -572,7 +572,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             }
 
             // Check all missiles for change in launched status
-            for (unsigned int i = 0; i < apartNumMissiles; i++) {
+            for (unsigned int i{}; i < apartNumMissiles; i++) {
                bool attached = !(apartMsl[i]->isMode(models::Player::Mode::LAUNCHED));
                if (attached != apartMslAttached[i]) {
                   // There's been a change in status
