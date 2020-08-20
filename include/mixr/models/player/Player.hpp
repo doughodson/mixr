@@ -118,7 +118,7 @@ class Track;
 //    ! ---
 //    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
 //    side           <base::Identifier>  ! Which side? valid identifiers { blue, red, yellow, cyan, gray, white } (default: gray)
-//    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
+//    useCoordSys    <base::Identifier>  ! Coord system to use for updating player position { world, geod, local }
 //                                       !   (default: based on the coord system used to set the initial position)
 //
 //    signature      <RfSignature>       ! Player's RCS signature (default: 0)
@@ -1129,7 +1129,7 @@ private:
    bool setSlotTestYawRate(const base::Angle* const);
    bool setSlotTestBodyAxis(const base::Boolean* const);
 
-   bool setSlotUseCoordSys(base::String* const);
+   bool setSlotUseCoordSys(base::Identifier* const);
 };
 
 #include "mixr/models/player/Player.inl"

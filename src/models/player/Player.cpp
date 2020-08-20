@@ -172,7 +172,7 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(32, setSlotTestYawRate,        base::Angle)
    ON_SLOT(33, setSlotTestBodyAxis,       base::Boolean)
 
-   ON_SLOT(34, setSlotUseCoordSys,        base::String)
+   ON_SLOT(34, setSlotUseCoordSys,        base::Identifier)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Player)
@@ -3836,7 +3836,7 @@ bool Player::setSlotInitMode(base::String* const msg)
 */
 
 // useCoordSys: Coord system to use for updating player position
-bool Player::setSlotUseCoordSys(base::String* const x)
+bool Player::setSlotUseCoordSys(base::Identifier* const x)
 {
    bool ok{};
    if (*x == "local" || *x == "LOCAL")      { setUseCoordSys(CoordSys::LOCAL); ok = true; }
