@@ -62,55 +62,54 @@ BEGIN_SLOTTABLE(Player)
    "initXPos",          //  1) Initial X position    (meters, base::Distance)
    "initYPos",          //  2) Initial Y position    (meters, base::Distance)
    "initAlt",           //  3) Initial Altitude      (meters, base::Distance)
-   "initPosition",      //  4) Initial Position Vector: meters [ north east down ]
 
    // Player's initial position in latitude, longitude and altitude (from initAlt above)
-   "initLatitude",      //  5) Initial latitude      (base::Angle, base::Latitude or degrees)
-   "initLongitude",     //  6) Initial longitude     (base::Angle, base::Longitude or degrees)
+   "initLatitude",      //  4) Initial latitude      (base::Angle, base::Latitude or degrees)
+   "initLongitude",     //  5) Initial longitude     (base::Angle, base::Longitude or degrees)
 
    // Player's initial geocentric position
-   "initGeocentric",    //  7) Initial geocentric position vector [ x y z ] (meters)
+   "initGeocentric",    //  6) Initial geocentric position vector [ x y z ] (meters)
 
    // Player's initial Euler angles
-   "initRoll",          //  8) Initial roll:    (radians, base::Angle) (or use initEuler)
-   "initPitch",         //  9) Initial pitch:   (radians, base::Angle) (or use initEuler)
-   "initHeading",       // 10) Initial heading: (radians, base::Angle) (or use initEuler)
-   "initEuler",         // 11) Initial Euler Angles: radians [ roll pitch yaw ] (or use below)
+   "initRoll",          //  7) Initial roll:    (radians, base::Angle) (or use initEuler)
+   "initPitch",         //  8) Initial pitch:   (radians, base::Angle) (or use initEuler)
+   "initHeading",       //  9) Initial heading: (radians, base::Angle) (or use initEuler)
+   "initEuler",         // 10) Initial Euler Angles: radians [ roll pitch yaw ] (or use below)
 
    // Player's initial velocity
-   "initVelocity",      // 12) Initial Velocity: meters/sec
-   "initVelocityKts",   // 13) Initial Velocity: knots
+   "initVelocity",      // 11) Initial Velocity: meters/sec
+   "initVelocityKts",   // 12) Initial Velocity: knots
 
    // Player's type and and other parameters
-   "type",              // 14) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
-   "side",              // 15) Which side? valid identifiers { blue, red, yellow, cyan, gray, white }
+   "type",              // 13) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
+   "side",              // 14) Which side? valid identifiers { blue, red, yellow, cyan, gray, white }
 
-   "signature",         // 16) Player's RCS signature
-   "irSignature",       // 17) Player's IR Signature
-   "camouflageType",    // 18) User defined camouflage type (positive integer or zero for none)
+   "signature",         // 15) Player's RCS signature
+   "irSignature",       // 16) Player's IR Signature
+   "camouflageType",    // 17) User defined camouflage type (positive integer or zero for none)
 
-   "terrainElevReq",    // 19) Terrain elevation update requested
-   "interpolateTerrain",// 20) Interpolate our terrain1 data
-   "terrainOffset",     // 21) Ground clamp offset from terrain to player's CG (base::Distance)
+   "terrainElevReq",    // 18) Terrain elevation update requested
+   "interpolateTerrain",// 19) Interpolate our terrain1 data
+   "terrainOffset",     // 20) Ground clamp offset from terrain to player's CG (base::Distance)
 
-   "positionFreeze",    // 22) Position freeze
-   "altitudeFreeze",    // 23) Altitude freeze
-   "attitudeFreeze",    // 24) Attitude freeze
-   "fuelFreeze",        // 25) Fuel freeze
-   "crashOverride",     // 26) Crash Override (i.e., ignore collision and crash events)
-   "killOverride",      // 27) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
-   "killRemoval",       // 28) If true destroyed players are set to KILLED and are eventually removed (default: false)
-   "enableNetOutput",   // 29) Enable the network output!
+   "positionFreeze",    // 21) Position freeze
+   "altitudeFreeze",    // 22) Altitude freeze
+   "attitudeFreeze",    // 23) Attitude freeze
+   "fuelFreeze",        // 24) Fuel freeze
+   "crashOverride",     // 25) Crash Override (i.e., ignore collision and crash events)
+   "killOverride",      // 26) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
+   "killRemoval",       // 27) If true destroyed players are set to KILLED and are eventually removed (default: false)
+   "enableNetOutput",   // 28) Enable the network output!
 
-   "dataLogTime",       // 30) Data logging time -- time between player data samples
+   "dataLogTime",       // 29) Data logging time -- time between player data samples
 
    // Player's test angular velocities
-   "testRollRate",      // 31) Test roll rate (units per second)
-   "testPitchRate",     // 32) Test pitch rate (units per second)
-   "testYawRate",       // 33) Test heading rate (units per second)
-   "testBodyAxis",      // 34) Test rates are in body coordinates else Euler rates (default: false)
+   "testRollRate",      // 30) Test roll rate (units per second)
+   "testPitchRate",     // 31) Test pitch rate (units per second)
+   "testYawRate",       // 32) Test heading rate (units per second)
+   "testBodyAxis",      // 33) Test rates are in body coordinates else Euler rates (default: false)
 
-   "useCoordSys"        // 35) Coord system to use for position updating { WORLD, GEOD, LOCAL }
+   "useCoordSys"        // 34) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
 
 BEGIN_SLOT_MAP(Player)
@@ -124,58 +123,56 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT( 3, setSlotInitAlt,            base::Length)
    ON_SLOT( 3, setSlotInitAlt,            base::Number)
 
-   ON_SLOT( 4, setSlotInitPosition,       base::List)
+   ON_SLOT( 4, setSlotInitLat,            base::Latitude)
+   ON_SLOT( 4, setSlotInitLat,            base::Angle)
+   ON_SLOT( 4, setSlotInitLat,            base::Number)
 
-   ON_SLOT( 5, setSlotInitLat,            base::Latitude)
-   ON_SLOT( 5, setSlotInitLat,            base::Angle)
-   ON_SLOT( 5, setSlotInitLat,            base::Number)
+   ON_SLOT( 5, setSlotInitLon,            base::Longitude)
+   ON_SLOT( 5, setSlotInitLon,            base::Angle)
+   ON_SLOT( 5, setSlotInitLon,            base::Number)
 
-   ON_SLOT( 6, setSlotInitLon,            base::Longitude)
-   ON_SLOT( 6, setSlotInitLon,            base::Angle)
-   ON_SLOT( 6, setSlotInitLon,            base::Number)
+   ON_SLOT( 6, setSlotInitGeocentric,     base::List)
 
-   ON_SLOT( 7, setSlotInitGeocentric,     base::List)
+   ON_SLOT( 7, setSlotInitRoll,           base::Angle)
+   ON_SLOT( 7, setSlotInitRoll,           base::Number)
 
-   ON_SLOT( 8, setSlotInitRoll,           base::Angle)
-   ON_SLOT( 8, setSlotInitRoll,           base::Number)
+   ON_SLOT( 8, setSlotInitPitch,          base::Angle)
+   ON_SLOT( 8, setSlotInitPitch,          base::Number)
 
-   ON_SLOT( 9, setSlotInitPitch,          base::Angle)
-   ON_SLOT( 9, setSlotInitPitch,          base::Number)
+   ON_SLOT( 9, setSlotInitHeading,        base::Angle)
+   ON_SLOT( 9, setSlotInitHeading,        base::Number)
 
-   ON_SLOT(10, setSlotInitHeading,        base::Angle)
-   ON_SLOT(10, setSlotInitHeading,        base::Number)
+   ON_SLOT(10, setSlotInitEulerAngles,    base::List)
+   ON_SLOT(11, setSlotInitVelocity,       base::Number)
+   ON_SLOT(12, setSlotInitVelocityKts,    base::Number)
 
-   ON_SLOT(11, setSlotInitEulerAngles,    base::List)
-   ON_SLOT(12, setSlotInitVelocity,       base::Number)
-   ON_SLOT(13, setSlotInitVelocityKts,    base::Number)
+   ON_SLOT(13, setSlotType,               base::String)
+   ON_SLOT(14, setSlotSide,               base::Identifier)
 
-   ON_SLOT(14, setSlotType,               base::String)
-   ON_SLOT(15, setSlotSide,               base::Identifier)
+   ON_SLOT(15, setSlotSignature,          RfSignature)
+   ON_SLOT(16, setSlotIrSignature,        IrSignature)
+   ON_SLOT(17, setSlotCamouflageType,     base::Integer)
 
-   ON_SLOT(16, setSlotSignature,          RfSignature)
-   ON_SLOT(17, setSlotIrSignature,        IrSignature)
-   ON_SLOT(18, setSlotCamouflageType,     base::Integer)
+   ON_SLOT(18, setSlotTerrainElevReq,     base::Boolean)
+   ON_SLOT(19, setSlotInterpolateTerrain, base::Boolean)
+   ON_SLOT(20, setSlotTerrainOffset,      base::Length)
 
-   ON_SLOT(19, setSlotTerrainElevReq,     base::Boolean)
-   ON_SLOT(20, setSlotInterpolateTerrain, base::Boolean)
-   ON_SLOT(21, setSlotTerrainOffset,      base::Length)
+   ON_SLOT(21, setSlotPositionFreeze,     base::Boolean)
+   ON_SLOT(22, setSlotAltitudeFreeze,     base::Boolean)
+   ON_SLOT(23, setSlotAttitudeFreeze,     base::Boolean)
+   ON_SLOT(24, setSlotFuelFreeze,         base::Boolean)
+   ON_SLOT(25, setSlotCrashOverride,      base::Boolean)
+   ON_SLOT(26, setSlotKillOverride,       base::Boolean)
+   ON_SLOT(27, setSlotKillRemoval,        base::Boolean)
+   ON_SLOT(28, setSlotEnableNetOutput,    base::Boolean)
+   ON_SLOT(29, setSlotDataLogTime,        base::Time)
 
-   ON_SLOT(22, setSlotPositionFreeze,     base::Boolean)
-   ON_SLOT(23, setSlotAltitudeFreeze,     base::Boolean)
-   ON_SLOT(24, setSlotAttitudeFreeze,     base::Boolean)
-   ON_SLOT(25, setSlotFuelFreeze,         base::Boolean)
-   ON_SLOT(26, setSlotCrashOverride,      base::Boolean)
-   ON_SLOT(27, setSlotKillOverride,       base::Boolean)
-   ON_SLOT(28, setSlotKillRemoval,        base::Boolean)
-   ON_SLOT(29, setSlotEnableNetOutput,    base::Boolean)
-   ON_SLOT(30, setSlotDataLogTime,        base::Time)
+   ON_SLOT(30, setSlotTestRollRate,       base::Angle)
+   ON_SLOT(31, setSlotTestPitchRate,      base::Angle)
+   ON_SLOT(32, setSlotTestYawRate,        base::Angle)
+   ON_SLOT(33, setSlotTestBodyAxis,       base::Boolean)
 
-   ON_SLOT(31, setSlotTestRollRate,       base::Angle)
-   ON_SLOT(32, setSlotTestPitchRate,      base::Angle)
-   ON_SLOT(33, setSlotTestYawRate,        base::Angle)
-   ON_SLOT(34, setSlotTestBodyAxis,       base::Boolean)
-
-   ON_SLOT(35, setSlotUseCoordSys,        base::String)
+   ON_SLOT(34, setSlotUseCoordSys,        base::String)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Player)
@@ -3494,20 +3491,6 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
    return ok;
 }
 
-// initPosition: Position Vector: meters [ north east down ]
-bool Player::setSlotInitPosition(const base::List* const msg)
-{
-   bool ok{};
-   double values[3]{};
-   const std::size_t n{msg->getNumberList(values, 3)};
-   if (n == 3) {
-      setInitPosition(values[0], values[1]);
-      setInitAltitude( -values[2] );
-      ok = true;
-   }
-   return ok;
-}
-
 // initLatitude: Latitude
 bool Player::setSlotInitLat(const base::Latitude* const msg)
 {
@@ -3853,12 +3836,12 @@ bool Player::setSlotInitMode(base::String* const msg)
 */
 
 // useCoordSys: Coord system to use for updating player position
-bool Player::setSlotUseCoordSys(base::String* const msg)
+bool Player::setSlotUseCoordSys(base::String* const x)
 {
    bool ok{};
-   if (*msg == "local" || *msg == "LOCAL") { setUseCoordSys(CoordSys::LOCAL); ok = true; }
-   else if (*msg == "geod" || *msg == "GEOD") { setUseCoordSys(CoordSys::GEOD); ok = true; }
-   else if (*msg == "world" || *msg == "WORLD") { setUseCoordSys(CoordSys::WORLD); ok = true; }
+   if (*x == "local" || *x == "LOCAL")      { setUseCoordSys(CoordSys::LOCAL); ok = true; }
+   else if (*x == "geod" || *x == "GEOD")   { setUseCoordSys(CoordSys::GEOD); ok = true; }
+   else if (*x == "world" || *x == "WORLD") { setUseCoordSys(CoordSys::WORLD); ok = true; }
    return ok;
 }
 

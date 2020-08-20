@@ -918,6 +918,7 @@ models library (mixr_models)
       2) Slot parameters 'terrainElevReq', 'interpolateTerrain', 'positionFreeze',
          'altitudeFreeze', 'attitudeFreeze', 'fuelFreeze', 'crashOverride', killOverride',
          'killRemoval'' 'enableNetOutput' and 'testBodyAxis' now accepts a Boolean
+      3) Removed slot parameter for initPosition with a base::List 
 
    RfSensor class
       1) Slot parameter 'trackManagerName' now accepts an Identifier

@@ -69,13 +69,11 @@ class Track;
 //    initXPos       <base::Number>      ! X position (+north) (meters)
 //
 //    initYPos       <base::Length>      ! Y position (+east) (default: 0)
-//    initYPos       <base::Number>      ! Y position (+east)(meters)
+//    initYPos       <base::Number>      ! Y position (+east) (meters)
 //
 //    initAlt        <base::Length>      ! Altitude (+up) (default: 0)
 //    initAlt        <base::Number>      ! Altitude (+up) (meters)
 //
-//    initPosition   <base::List>        ! Position Vector: meters [ north east down ]
-//                                       !   *** initPosition will be removed in later release (use below slots instead) ***
 //
 //    ! 2: Player's initial geodetic position
 //
@@ -831,7 +829,7 @@ public:
    virtual bool setInitPosition(const double north, const double east);
 
    // Initial position vector (after reset); north and east of simulation reference point (meters)
-   virtual bool setInitPosition(const base::Vec2d& newPos);
+   virtual bool setInitPosition(const base::Vec2d&);
 
    // ---
    // Roll Control Input
@@ -1084,7 +1082,6 @@ private:
    bool setSlotInitYPos(const base::Number* const);
    bool setSlotInitAlt(const base::Length* const);
    bool setSlotInitAlt(const base::Number* const);
-   bool setSlotInitPosition(const base::List* const);
 
    bool setSlotInitLat(const base::Latitude* const);
    bool setSlotInitLat(const base::Angle* const);
