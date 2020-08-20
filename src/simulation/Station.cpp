@@ -838,13 +838,13 @@ bool Station::setOwnshipByName(const char* const newOS)
 //------------------------------------------------------------------------------
 // setOwnshipPlayer() -- set this player as our ownship
 //------------------------------------------------------------------------------
-bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
+bool Station::setOwnshipPlayer(AbstractPlayer* const x)
 {
     // Is it already own ownship?  Yes, then nothing else to do.
-    if (newOS == ownship) return true;
+    if (x == ownship) return true;
 
     // When we're just setting a null(0) ownship ...
-    if (newOS == nullptr) {
+    if (x == nullptr) {
         // Unref the old player
         if (!ownshipName.empty()) { ownshipName.clear(); }
         if (ownship != nullptr) {
@@ -864,7 +864,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
                 const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
-                if (ip == newOS && ip->isLocalPlayer()) {
+                if (ip == x && ip->isLocalPlayer()) {
                     // Unref the old stuff
                     if (!ownshipName.empty()) { ownshipName.clear(); }
                     if (ownship != nullptr) {
@@ -873,7 +873,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
                         ownship = nullptr;
                     }
                     // Ok, we found the player -- make it our ownship
-                    ownship = newOS;
+                    ownship = x;
                     ownship->ref();
                     ownshipName = pair->slot();
                     ownship->event(ON_OWNSHIP_CONNECT);

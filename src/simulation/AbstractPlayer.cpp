@@ -52,7 +52,7 @@ void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
 
    // NIB pointers are not copied!
    setNib( nullptr );
-   for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+   for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
       setOutgoingNib(nullptr, i);
    }
 }
