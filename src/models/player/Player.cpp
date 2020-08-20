@@ -855,7 +855,7 @@ const DynamicsModel* Player::getDynamicsModel() const
 // Name of the Player's dynamics model
 const std::string& Player::getDynamicsModelName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (dynamicsModel != nullptr) ? dynamicsModel->slot() : empty;
 }
 
@@ -878,7 +878,7 @@ const Pilot* Player::getPilot() const
 // Name of the player's pilot model
 const std::string& Player::getPilotName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (pilot != nullptr) ? pilot->slot() : empty;
 }
 
@@ -964,7 +964,7 @@ const StoresMgr* Player::getStoresManagement() const
 // Name of the player's stores (weapons, fuel) manager model
 const std::string& Player::getStoresManagementName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (sms != nullptr) ? sms->slot() : empty;
 }
 
@@ -987,7 +987,7 @@ const Datalink* Player::getDatalink() const
 // Name of the player's top level Datalink model
 const std::string& Player::getDatalinkName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (datalink != nullptr) ? datalink->slot() : empty;
 }
 
@@ -1073,7 +1073,7 @@ const Gimbal* Player::getGimbal() const
 // Name of the player's top level Gimbal model
 const std::string& Player::getGimbalName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (gimbal != nullptr) ? gimbal->slot() : empty;
 }
 
@@ -1159,7 +1159,7 @@ const Navigation* Player::getNavigation() const
 // Name of the player's top level Navigation model
 const std::string& Player::getNavigationName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (nav != nullptr) ? nav->slot() : empty;
 }
 
@@ -1245,7 +1245,7 @@ const OnboardComputer* Player::getOnboardComputer() const
 // Name of the player's top level OnboardComputer model
 const std::string& Player::getOnboardComputerName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (obc != nullptr) ? obc->slot() : empty;
 }
 
@@ -1331,7 +1331,7 @@ const Radio* Player::getRadio() const
 // Name of the player's top level Radio model
 const std::string& Player::getRadioName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (radio != nullptr) ? radio->slot() : empty;
 }
 
@@ -1417,7 +1417,7 @@ const RfSensor* Player::getSensor() const
 // Name of the player's top level R/F sensor model
 const std::string& Player::getSensorName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (sensor != nullptr) ? sensor->slot() : empty;
 }
 
@@ -1503,7 +1503,7 @@ const IrSystem* Player::getIrSystem() const
 // Name of the player's top level IR sensor model
 const std::string& Player::getIrSystemName() const
 {
-   static const std::string empty = "";
+   static const std::string empty;
    return (irSystem != nullptr) ? irSystem->slot() : empty;
 }
 

@@ -139,7 +139,7 @@ bool MultiActorAgent::clearAgentList()
    // Clear our agent list
    while (nAgents > 0) {
       nAgents--;
-      agentList[nAgents].actorName = nullptr;
+      agentList[nAgents].actorName.clear();
       agentList[nAgents].behavior = nullptr;
       agentList[nAgents].actor = nullptr;
    }

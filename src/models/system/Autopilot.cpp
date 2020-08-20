@@ -1182,7 +1182,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 {
    // remove old lead information
    if (lead != nullptr) lead->unref();
-   leadName = "";
+   leadName.clear();
 
    // set our lead
    lead = p;
@@ -1198,7 +1198,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 }
 
 // set the lead player dynamically by name
-bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
+bool Autopilot::setLeadPlayerName(const base::Identifier* const x)
 {
    // find the player in the simulation
    const WorldModel* const sim{getWorldModel()};
@@ -1206,7 +1206,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
    if (sim != nullptr) {
       const base::PairStream* players{sim->getPlayers()};
       if (players != nullptr) {
-         const base::Pair* pair{players->findByName((*msg).c_str())};
+         const base::Pair* pair{players->findByName((*x).c_str())};
          if (pair != nullptr) {
             setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             found = true;
@@ -1297,7 +1297,7 @@ int Autopilot::setThrottles(const double* const positions, const unsigned int nu
 {
    unsigned int n{};
    if (positions != nullptr) {
-      for (unsigned int i = 0; i < num && i < MAX_THR; i++) {
+      for (unsigned int i{}; i < num && i < MAX_THR; i++) {
          const double pos{positions[i]};
          if (pos >= -1.0f && pos <= 2.0f) {
             thrPos[n++] = pos;
@@ -1345,54 +1345,54 @@ bool Autopilot::setSlotAltitudeHoldMode(const base::Boolean* const x)
 }
 
 // Hold velocity (kts)
-bool Autopilot::setSlotHoldVelocityKts(const base::Number* const msg)
+bool Autopilot::setSlotHoldVelocityKts(const base::Number* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       ok = setCommandedVelocityKts( msg->asDouble() );
+    if (x != nullptr) {
+       ok = setCommandedVelocityKts( x->asDouble() );
        holdSpdSet = ok;
     }
     return ok;
 }
 
 // Velocity hold mode flag
-bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const msg)
+bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       ok = setVelocityHoldMode( msg->asBool() );
+    if (x != nullptr) {
+       ok = setVelocityHoldMode( x->asBool() );
     }
     return ok;
 }
 
 
 // Hold heading
-bool Autopilot::setSlotHoldHeading(const base::Angle* const msg)
+bool Autopilot::setSlotHoldHeading(const base::Angle* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       ok = setCommandedHeadingD(msg->getValueInDegrees());
+    if (x != nullptr) {
+       ok = setCommandedHeadingD(x->getValueInDegrees());
        holdHdgSet = ok;
     }
     return ok;
 }
 
 // Heading altitude mode flag
-bool Autopilot::setSlotHeadingHoldMode(const base::Boolean* const msg)
+bool Autopilot::setSlotHeadingHoldMode(const base::Boolean* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       ok = setHeadingHoldMode( msg->asBool() );
+    if (x != nullptr) {
+       ok = setHeadingHoldMode( x->asBool() );
     }
     return ok;
 }
 
 // Loiter mode flag
-bool Autopilot::setSlotLoiterMode(const base::Boolean* const msg)
+bool Autopilot::setSlotLoiterMode(const base::Boolean* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-       ok = setLoiterMode( msg->asBool() );
+    if (x != nullptr) {
+       ok = setLoiterMode( x->asBool() );
     }
     return ok;
 }
@@ -1451,11 +1451,11 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Length* const x)
 }
 
 // Set slot: Desired distance (meters) behind(+) the lead
-bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        ok = setLeadFollowingDistanceTrail( msg->asDouble() );
+    if (x != nullptr) {
+        ok = setLeadFollowingDistanceTrail( x->asDouble() );
     }
     return ok;
 }
@@ -1471,11 +1471,11 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Length* const x)
 }
 
 // Set slot: Desired distance (meters) right(+) of the lead
-bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        ok = setLeadFollowingDistanceRight( msg->asDouble() );
+    if (x != nullptr) {
+        ok = setLeadFollowingDistanceRight( x->asDouble() );
     }
     return ok;
 }
@@ -1491,29 +1491,29 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Length* const x)
 }
 
 // Set slot: Desired delta altitude (meters) above(+) the lead
-bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        ok = setLeadFollowingDeltaAltitude( msg->asDouble() );
+    if (x != nullptr) {
+        ok = setLeadFollowingDeltaAltitude( x->asDouble() );
     }
     return ok;
 }
 
 // Initial name of our lead player
-bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
+bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const x)
 {
-   leadName = p->asString();
+   leadName = x->asString();
    return true;
 }
 
 
 // Set slot: "Follow the lead" mode flag
-bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
+bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
-        const bool flg{msg->asBool()};
+    if (x != nullptr) {
+        const bool flg{x->asBool()};
         ok = setFollowTheLeadMode( flg );
         if (flg && !ok) {
             if (isMessageEnabled(MSG_ERROR)) {
@@ -1525,50 +1525,50 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const msg)
 }
 
 // Set slot: Maximum turn rate - limits how fast (or slow) the pilot turns
-bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
+bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxTurnRateDps(msg->asDouble());
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxTurnRateDps(x->asDouble());
    return ok;
 }
 
 // Set slot: Maximum bank angle - limits how far the pilot can bank
-bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
+bool Autopilot::setSlotMaxBankAngle(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxBankAngleDeg(msg->asDouble());
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxBankAngleDeg(x->asDouble());
    return ok;
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
+bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps((msg->asDouble() * base::length::FT2M / base::time::M2S));
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxClimbRateMps((x->asDouble() * base::length::FT2M / base::time::M2S));
    return ok;
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
+bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxClimbRateMps(msg->asDouble());
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxClimbRateMps(x->asDouble());
    return ok;
 }
 
 // Set slot: Maximum pitch angle - limits how much pitch the pilot can climb/dive to
-bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
+bool Autopilot::setSlotMaxPitchAngle(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxPitchAngleDeg(msg->asDouble());
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxPitchAngleDeg(x->asDouble());
    return ok;
 }
 
 // Set slot: Maximum acceleration - limits how fast the pilot can accelerate
-bool Autopilot::setSlotMaxVelAccNps(const base::Number* const msg)
+bool Autopilot::setSlotMaxVelAccNps(const base::Number* const x)
 {
-   bool ok{msg != nullptr};
-   if (ok) ok = setMaxVelAccNps(msg->asDouble());
+   bool ok{x != nullptr};
+   if (ok) ok = setMaxVelAccNps(x->asDouble());
    return ok;
 }
 

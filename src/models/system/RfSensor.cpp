@@ -138,7 +138,7 @@ void RfSensor::reset()
     // ---
     // Do we need to find the track manager?
     // ---
-    if (getTrackManager() == nullptr && (tmName!="") && getOwnship() != nullptr) {
+    if (getTrackManager() == nullptr && !tmName.empty() && getOwnship() != nullptr) {
         // We have a name of the track manager, but not the track manager itself
         // Get the named track manager from the onboard computer
         OnboardComputer* obc{getOwnship()->getOnboardComputer()};
