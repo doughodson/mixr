@@ -22,8 +22,9 @@ class AbstractNib;
 //    ! ---
 //    ! Player's id and mode parameters
 //    ! ---
-//    id             <base::Integer>     ! player id  [ 1 .. 65535 ] (default: 0)
-//    mode           <base::Identifier>  ! initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
+//    id             <base::Integer>     ! id  [ 1 .. 65535 ] (default: 0)
+//    mode           <base::Identifier>  ! initial mode { inactive, active, killed, crashed, detonated, launched }
+//                                       !   (default: active)
 //------------------------------------------------------------------------------
 class AbstractPlayer : public base::Component
 {

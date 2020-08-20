@@ -3,6 +3,9 @@
 
 #include "mixr/base/Object.hpp"
 
+// Instrument component
+#include "mixr/instruments/Instrument.hpp"
+
 // Analog Dial components
 #include "mixr/instruments/dials/AnalogDial.hpp"
 #include "mixr/instruments/dials/DialArcSegment.hpp"
@@ -56,8 +59,13 @@ base::Object* factory(const std::string& name)
 {
     base::Object* obj {};
 
+    // Instrument
+    if (name == Instrument::getFactoryName()) {
+       obj = new Instrument;
+    }
+
     // Analog Dial
-    if ( name == AnalogDial::getFactoryName() ) {
+    else if ( name == AnalogDial::getFactoryName() ) {
         obj = new AnalogDial;
     }
     // Tick Marks for the analog dial

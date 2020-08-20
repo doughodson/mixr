@@ -53,7 +53,7 @@ class Tdb;
 // Factory name: Gimbal
 // Slots:
 //
-//    type                 <Identifier>   ! Physical gimbal type: mechanical or electronic (default: ELECTRONIC)
+//    type                 <Identifier>   ! Physical identifiers: { mechanical, electronic } (default: electronic)
 //
 //    location             <List>         ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
@@ -156,7 +156,7 @@ public:  // Public section
    ServoMode getServoMode() const                  { return servoMode; }
 
    // Returns the current position vector [ az el roll ] (radians)
-   const base::Vec3d& getPosition() const     { return pos; }
+   const base::Vec3d& getPosition() const          { return pos; }
 
    double getAzimuth() const     { return pos[AZ_IDX]; }    // Returns current azimuth position (rad)
    double getElevation() const   { return pos[ELEV_IDX]; }  // Returns current elevation position (rad)
@@ -224,19 +224,19 @@ public:  // Public section
    virtual bool setMaxRange2PlayersOfInterest(const double meters);        // Max range to players of interest or zero for all (meters)
    virtual bool setMaxAngle2PlayersOfInterest(const double radians);       // Max angle of gimbal boresight to players of interest or zero for all (rad)
    virtual bool setPlayerOfInterestTypes(const unsigned int typeMask);     // Player of interest types (Player::MajorType bit-wise or'd)
-   virtual bool setMaxPlayersOfInterest(const unsigned int n);             // Max number of players of interest (i.e., size of the arrays)
-   virtual bool setLocalPlayersOfInterestOnly(const bool flg);             // Sets the local only players of interest flag
-   virtual bool setTerrainOccultingEnabled(const bool flg);                // Sets the terrain occulting enabled flag
-   virtual bool setHorizonCheckEnabled(const bool flg);                    // Sets the horizon check enabled flag
-   virtual bool setUseWorld(const bool flg);                               // Sets the using world coordinates flag
-   virtual bool setOwnHeadingOnly(const bool flg);                         // Use only the ownship player's heading to when transforming between body and local NED
+   virtual bool setMaxPlayersOfInterest(const unsigned int);               // Max number of players of interest (i.e., size of the arrays)
+   virtual bool setLocalPlayersOfInterestOnly(const bool);                 // Sets the local only players of interest flag
+   virtual bool setTerrainOccultingEnabled(const bool);                    // Sets the terrain occulting enabled flag
+   virtual bool setHorizonCheckEnabled(const bool);                        // Sets the horizon check enabled flag
+   virtual bool setUseWorld(const bool);                                   // Sets the using world coordinates flag
+   virtual bool setOwnHeadingOnly(const bool);                             // Use only the ownship player's heading to when transforming between body and local NED
 
    // Process the Players-Of-Interest (POI) list
    virtual unsigned int processPlayersOfInterest(base::PairStream* const poi);
 
    // Sets the servo mode: { FREEZE_SERVO, RATE_SERVO, POSITION_SERVO }
    // Returns false if the mode could not be changed
-   virtual bool setServoMode(const ServoMode m);
+   virtual bool setServoMode(const ServoMode);
 
    virtual bool setPosition(const double azim, const double elev);                     // Sets the current az & el positions (rad)
    virtual bool setPosition(const double azim, const double elev, const double roll);  // Sets the current az, el and roll positions (rad)
@@ -259,7 +259,7 @@ public:  // Public section
 
    virtual bool setLocation(const double x, const double y, const double z);           // Sets the location vector of the gimbal on its parent container (meters)
 
-   virtual bool setFastSlewMode(const bool flg);                                       // Sets the servo 'fast' or 'slow' slewing mode
+   virtual bool setFastSlewMode(const bool);                                           // Sets the servo 'fast' or 'slow' slewing mode
 
 
    // Event handler(s)
@@ -282,7 +282,7 @@ protected:
    const Tdb* getCurrentTDB() const;   // Get the current TDB (pre-ref(); const version)
 
    // Set the current TDB
-   bool setCurrentTdb(Tdb* const newTdb);
+   bool setCurrentTdb(Tdb* const);
 
    // System Interface -- Callbacks by phase
    void dynamics(const double dt) override;    // Phase 0
@@ -299,21 +299,21 @@ private:
    ServoMode   servoMode{ServoMode::FREEZE};   // Gimbal's servo mode
    bool        fastSlew{true};                 // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
 
-   base::Matrixd tm;          // Transformation matrix (to/from the player's coordinate system)
-   base::Vec3d  pos;          // Current gimbal position      (rad)
-   base::Vec3d  rate;         // Current velocity             (rad/sec)
-   base::Vec3d  cmdPos;       // Commanded position           (rad)
-   base::Vec3d  cmdRate;      // Commanded rate               (rad/sec)
-   base::Vec3d  location;     // Gimbal's location on parent  (meters)
-   bool atLimit{};            // Gimbal is at a limit
+   base::Matrixd tm;                  // Transformation matrix (to/from the player's coordinate system)
+   base::Vec3d  pos;                  // Current gimbal position      (rad)
+   base::Vec3d  rate;                 // Current velocity             (rad/sec)
+   base::Vec3d  cmdPos;               // Commanded position           (rad)
+   base::Vec3d  cmdRate;              // Commanded rate               (rad/sec)
+   base::Vec3d  location;             // Gimbal's location on parent  (meters)
+   bool atLimit{};                    // Gimbal is at a limit
 
-   base::Vec3d  maxRate;      // Max mechanical rate of gimbal (rad/sec)
-   base::Vec3d  lowLimits;    // left/lower gimbal limits     (rad)
-   base::Vec3d  highLimits;   // right/upper gimbal limits    (rad)
+   base::Vec3d  maxRate;              // Max mechanical rate of gimbal (rad/sec)
+   base::Vec3d  lowLimits;            // left/lower gimbal limits     (rad)
+   base::Vec3d  highLimits;           // right/upper gimbal limits    (rad)
 
-   base::Vec3d  initPos;      // Initial gimbal position      (rad)
-   base::Vec3d  initCmdPos;   // Initial commanded position   (rad)
-   base::Vec3d  initCmdRate;  // Initial commanded rate       (rad/sec)
+   base::Vec3d  initPos;              // Initial gimbal position      (rad)
+   base::Vec3d  initCmdPos;           // Initial commanded position   (rad)
+   base::Vec3d  initCmdRate;          // Initial commanded rate       (rad/sec)
 
    double    maxRngPlayers{};         // Max range for players of interest or zero for all (meters)
    double    maxAnglePlayers{};       // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
@@ -325,64 +325,59 @@ private:
    bool     useWorld{true};           // Using player of interest's world coordinates
    bool     ownHeadingOnly{true};     // Whether only the ownship heading is used by the target data block
 
-   base::safe_ptr<Tdb> tdb;  // Current Target Data Block
+   base::safe_ptr<Tdb> tdb;           // Target Data Block
 
 private:
    // slot table helper methods
-   bool setSlotType(const base::Identifier* const);                 // Physical gimbal type: mechanical or electronic
-   bool setSlotLocation(const base::List* const);                   // Relative location vector (meters) [ x y z ]
+   bool setSlotType(const base::Identifier* const);
+   bool setSlotLocation(const base::List* const);
 
-   bool setSlotPosition(const base::List* const);                   // Initial position vector (radians) [ az el roll ]
-   bool setSlotPosAzimuth(const base::Angle* const);                // Initial azimuth position
-   bool setSlotPosElevation(const base::Angle* const);              // Initial elevation position
-   bool setSlotPosRoll(const base::Angle* const);                   // Initial roll position
+   bool setSlotPosition(const base::List* const);
+   bool setSlotPosAzimuth(const base::Angle* const);
+   bool setSlotPosElevation(const base::Angle* const);
+   bool setSlotPosRoll(const base::Angle* const);
 
-   bool setSlotAzimuthLimits(const base::List* const);              // Azimuth limit vector (radians) [ left right ]
-   bool setSlotAzimuthLimitLeft(const base::Angle* const);          // Left azimuth limit
-   bool setSlotAzimuthLimitRight(const base::Angle* const);         // Right azimuth limit
+   bool setSlotAzimuthLimits(const base::List* const);
+   bool setSlotAzimuthLimitLeft(const base::Angle* const);
+   bool setSlotAzimuthLimitRight(const base::Angle* const);
 
-   bool setSlotElevationLimits(const base::List* const);            // Elevation limit vector (radians) [ lower upper ]
-   bool setSlotElevationLower(const base::Angle* const);            // Lower elevation limit
-   bool setSlotElevationUpper(const base::Angle* const);            // Upper elevation limit
+   bool setSlotElevationLimits(const base::List* const);
+   bool setSlotElevationLower(const base::Angle* const);
+   bool setSlotElevationUpper(const base::Angle* const);
 
-   bool setSlotRollLimits(const base::List* const);                 // Roll limit vector (radians) [ lower upper ]
-   bool setSlotRollLimitLower(const base::Angle* const);            // Lower roll limit
-   bool setSlotRollLimitUpper(const base::Angle* const);            // Upper roll limit
+   bool setSlotRollLimits(const base::List* const);
+   bool setSlotRollLimitLower(const base::Angle* const);
+   bool setSlotRollLimitUpper(const base::Angle* const);
 
-   bool setSlotMaxRates(const base::List* const);                   // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-   bool setSlotMaxRateAzimuth(const base::Angle* const);            // Max "mechanical" azimuth rate (base::Angle/sec)
-   bool setSlotMaxRateElevation(const base::Angle* const);          // Max "mechanical" elevation rate (base::Angle/sec)
-   bool setSlotMaxRateRoll(const base::Angle* const);               // Max "mechanical" roll rate (base::Angle/sec)
+   bool setSlotMaxRates(const base::List* const);
+   bool setSlotMaxRateAzimuth(const base::Angle* const);
+   bool setSlotMaxRateElevation(const base::Angle* const);
+   bool setSlotMaxRateRoll(const base::Angle* const);
 
-   bool setSlotCmdPos(const base::List* const);                     // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-   bool setSlotCmdPosAzimuth(const base::Angle* const);             // Commanded azimuth position  (sets POSITION_SERVO)
-   bool setSlotCmdPosElevation(const base::Angle* const);           // Commanded elevation position (sets POSITION_SERVO)
-   bool setSlotCmdPosRoll(const base::Angle* const);                // Commanded roll position  (sets POSITION_SERVO)
+   bool setSlotCmdPos(const base::List* const);
+   bool setSlotCmdPosAzimuth(const base::Angle* const);
+   bool setSlotCmdPosElevation(const base::Angle* const);
+   bool setSlotCmdPosRoll(const base::Angle* const);
 
-   bool setSlotCmdRate(const base::List* const);                    // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-   bool setSlotCmdRateAzimuth(const base::Angle* const);            // Commanded azimuth rate (sets RATE_SERVO)
-   bool setSlotCmdRateElevation(const base::Angle* const);          // Commanded elevation rate (sets RATE_SERVO)
-   bool setSlotCmdRateRoll(const base::Angle* const);               // Commanded roll rate (sets RATE_SERVO)
+   bool setSlotCmdRate(const base::List* const);
+   bool setSlotCmdRateAzimuth(const base::Angle* const);
+   bool setSlotCmdRateElevation(const base::Angle* const);
+   bool setSlotCmdRateRoll(const base::Angle* const);
 
-   bool setSlotTerrainOcculting(const base::Boolean* const);        // Enable target terrain occulting (default: false)
-   bool setSlotCheckHorizon(const base::Boolean* const);            // Enable horizon masking check (default: true)
+   bool setSlotTerrainOcculting(const base::Boolean* const);
+   bool setSlotCheckHorizon(const base::Boolean* const);
 
-   bool setSlotPlayerTypes(const base::PairStream* const);          // Player of interest types (default: 0 )
-   bool setSlotMaxPlayers(const base::Integer* const);              // Max number of players of interest (default: 0)
+   bool setSlotPlayerTypes(const base::PairStream* const);
+   bool setSlotMaxPlayers(const base::Integer* const);
 
-                                                                    // Max range to players of interest or zero for all (meters)
    bool setSlotMaxRange2PlayersOfInterest(const base::Length* const);
 
-   // Max angle of gimbal boresight to players of interest or zero for all (rad)
    bool setSlotMaxAngle2PlayersOfInterest(const base::Angle* const);
 
-   // Sets the local only players of interest flag
    bool setSlotLocalPlayersOfInterestOnly(const base::Boolean* const);
 
-   // Using player of interest's world (ECEF) coordinate system
    bool setSlotUseWorldCoordinates(const base::Boolean* const);
 
-   // Use only the ownship player's heading to when transforming between body and local NED
    bool setSlotUseOwnHeadingOnly(const base::Boolean* const);
 };
 

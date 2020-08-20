@@ -31,7 +31,7 @@ AbstractPlayer::AbstractPlayer()
 void AbstractPlayer::initData()
 {
    nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORD_ID];
-   for (int i = 0; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
+   for (int i{}; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
       nibList[i] = nullptr;
    }
 }
@@ -61,7 +61,7 @@ void AbstractPlayer::deleteData()
 {
    setNib(nullptr);
    if (nibList != nullptr) {
-      for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
@@ -73,7 +73,7 @@ bool AbstractPlayer::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
    if (nibList != nullptr) {
-      for (int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
@@ -169,16 +169,16 @@ bool AbstractPlayer::setSlotID(const base::Integer* const num)
    return ok;
 }
 
-// mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
-bool AbstractPlayer::setSlotInitMode(base::Identifier* const msg)
+// initial player mode { inactive, active, killed, crashed, detonated, launched }
+bool AbstractPlayer::setSlotInitMode(base::Identifier* const x)
 {
    bool ok{};
-   if (*msg == "inactive" || *msg == "INACTIVE")        { setInitMode(Mode::INACTIVE);  ok = true; }
-   else if (*msg == "active" || *msg == "ACTIVE")       { setInitMode(Mode::ACTIVE);    ok = true; }
-   else if (*msg == "killed" || *msg == "KILLED")       { setInitMode(Mode::KILLED);    ok = true; }
-   else if (*msg == "crashed" || *msg == "CRASHED")     { setInitMode(Mode::CRASHED);   ok = true; }
-   else if (*msg == "detonated" || *msg == "DETONATED") { setInitMode(Mode::DETONATED); ok = true; }
-   else if (*msg == "launched" || *msg == "LAUNCHED")   { setInitMode(Mode::LAUNCHED);  ok = true; }
+   if (*x == "inactive" || *x == "INACTIVE")        { setInitMode(Mode::INACTIVE);  ok = true; }
+   else if (*x == "active" || *x == "ACTIVE")       { setInitMode(Mode::ACTIVE);    ok = true; }
+   else if (*x == "killed" || *x == "KILLED")       { setInitMode(Mode::KILLED);    ok = true; }
+   else if (*x == "crashed" || *x == "CRASHED")     { setInitMode(Mode::CRASHED);   ok = true; }
+   else if (*x == "detonated" || *x == "DETONATED") { setInitMode(Mode::DETONATED); ok = true; }
+   else if (*x == "launched" || *x == "LAUNCHED")   { setInitMode(Mode::LAUNCHED);  ok = true; }
    return ok;
 }
 

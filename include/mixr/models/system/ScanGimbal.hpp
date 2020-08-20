@@ -17,7 +17,7 @@ namespace models {
 //
 // Factory name: ScanGimbal
 // Slots:
-//    scanMode             <Identifier>   ! Sets the type of scan we desire ...(default: MANUAL_SCAN)
+//    scanMode             <Identifier>   ! Sets the type of scan we desire ...(default: manual)
 //                                        ! ... { manual, horizontal, vertical, conical, circular, pseudorandom }
 //
 //    leftToRightScan      <Boolean>      ! True to scan from left-to-right (else right-to-left) (Default: true)
