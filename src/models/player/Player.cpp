@@ -3807,16 +3807,16 @@ bool Player::setSlotID(const base::Number* const num)
 }
 */
 
-// side: Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
-bool Player::setSlotSide(base::Identifier* const msg)
+// side: Which side? { blue, red, yellow, cyan, gray, white }
+bool Player::setSlotSide(base::Identifier* const x)
 {
    bool ok{};
-   if (*msg == "blue" || *msg == "BLUE") { setSide(BLUE); ok = true; }
-   else if (*msg == "red" || *msg == "RED") { setSide(RED); ok = true; }
-   else if (*msg == "gray" || *msg == "GRAY") { setSide(GRAY); ok = true; }
-   else if (*msg == "white" || *msg == "WHITE") { setSide(WHITE); ok = true; }
-   else if (*msg == "yellow" || *msg == "YELLOW") { setSide(YELLOW); ok = true; }
-   else if (*msg == "cyan" || *msg == "CYAN") { setSide(CYAN); ok = true; }
+   if (*x == "blue" || *x == "BLUE") { setSide(BLUE); ok = true; }
+   else if (*x == "red" || *x == "RED") { setSide(RED); ok = true; }
+   else if (*x == "gray" || *x == "GRAY") { setSide(GRAY); ok = true; }
+   else if (*x == "white" || *x == "WHITE") { setSide(WHITE); ok = true; }
+   else if (*x == "yellow" || *x == "YELLOW") { setSide(YELLOW); ok = true; }
+   else if (*x == "cyan" || *x == "CYAN") { setSide(CYAN); ok = true; }
    return ok;
 }
 
@@ -3879,21 +3879,21 @@ bool Player::setSlotCamouflageType(const base::Integer* const msg)
 }
 
 // terrainElevReq: Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
-bool Player::setSlotTerrainElevReq(const base::Boolean* const num)
+bool Player::setSlotTerrainElevReq(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setTerrainElevationRequired(num->asBool());
+   if (x != nullptr) {
+      ok = setTerrainElevationRequired(x->asBool());
    }
    return ok;
 }
 
 // interpolateTerrain: Interpolate our DTED terrain elevation data (default: false)
-bool Player::setSlotInterpolateTerrain(const base::Boolean* const msg)
+bool Player::setSlotInterpolateTerrain(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setInterpolateTerrain(msg->asBool());
+   if (x != nullptr) {
+      ok = setInterpolateTerrain(x->asBool());
    }
    return ok;
 }
@@ -3909,91 +3909,91 @@ bool Player::setSlotTerrainOffset(const base::Length* const x)
 }
 
 // positionFreeze: Position freeze (default: false)
-bool Player::setSlotPositionFreeze(const base::Boolean* const num)
+bool Player::setSlotPositionFreeze(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setPositionFreeze( num->asBool() );
+   if (x != nullptr) {
+      ok = setPositionFreeze( x->asBool() );
    }
    return ok;
 }
 
 // altitudeFreeze: Altitude freeze (default: false)
-bool Player::setSlotAltitudeFreeze(const base::Boolean* const num)
+bool Player::setSlotAltitudeFreeze(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setAltitudeFreeze( num->asBool() );
+   if (x != nullptr) {
+      ok = setAltitudeFreeze( x->asBool() );
    }
    return ok;
 }
 
 // attitudeFreeze: Attitude freeze (default: false)
-bool Player::setSlotAttitudeFreeze(const base::Boolean* const num)
+bool Player::setSlotAttitudeFreeze(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setAttitudeFreeze( num->asBool() );
+   if (x != nullptr) {
+      ok = setAttitudeFreeze( x->asBool() );
    }
    return ok;
 }
 
 // fuelFreeze: Fuel freeze (default: false)
-bool Player::setSlotFuelFreeze(const base::Boolean* const num)
+bool Player::setSlotFuelFreeze(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setFuelFreeze( num->asBool() );
+   if (x != nullptr) {
+      ok = setFuelFreeze( x->asBool() );
    }
    return ok;
 }
 
 // crashOverride: Crash Override (i.e., ignore collision and crash events)(default: false)
-bool Player::setSlotCrashOverride(const base::Boolean* const num)
+bool Player::setSlotCrashOverride(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setCrashOverride( num->asBool() );
+   if (x != nullptr) {
+      ok = setCrashOverride( x->asBool() );
    }
    return ok;
 }
 
 // killOverride: Kill/Damage Override -- player can not be killed/damaged (default: false)
-bool Player::setSlotKillOverride(const base::Boolean* const num)
+bool Player::setSlotKillOverride(const base::Boolean* const x)
 {
    bool ok{};
-   if (num != nullptr) {
-      ok = setKillOverride( num->asBool() );
+   if (x != nullptr) {
+      ok = setKillOverride( x->asBool() );
    }
    return ok;
 }
 
 // killRemoval: If true destroyed players are set to KILLED and are eventually removed (default: false)
-bool Player::setSlotKillRemoval(const base::Boolean* const msg)
+bool Player::setSlotKillRemoval(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setKillRemoval( msg->asBool() );
+   if (x != nullptr) {
+      ok = setKillRemoval( x->asBool() );
    }
    return ok;
 }
 
 // enableNetOutput: Enable network output of this player (default: true)
-bool Player::setSlotEnableNetOutput(const base::Boolean* const msg)
+bool Player::setSlotEnableNetOutput(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      ok = setEnableNetOutput(msg->asBool());
+   if (x != nullptr) {
+      ok = setEnableNetOutput(x->asBool());
    }
    return ok;
 }
 
 // dataLogTime: Time between player data samples to an optional data
-bool Player::setSlotDataLogTime(const base::Time* const time)
+bool Player::setSlotDataLogTime(const base::Time* const x)
 {
    bool ok{};
-   if (time != nullptr) {
-      dataLogTime = time->getValueInSeconds();
+   if (x != nullptr) {
+      dataLogTime = x->getValueInSeconds();
       ok = true;
    }
    return ok;

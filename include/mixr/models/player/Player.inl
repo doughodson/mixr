@@ -5,7 +5,7 @@
 #ifndef __mixr_models_Player_Inline__
 #define __mixr_models_Player_Inline__
 
-// The player's type string (.e.g, "F-16C")
+// The player's type string (e.g., "F-16C")
 inline const base::String* Player::getType() const
 {
    return type;

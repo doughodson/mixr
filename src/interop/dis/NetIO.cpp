@@ -1705,11 +1705,11 @@ bool NetIO::setSlotApplicationID(const base::Integer* const num)
 }
 
 // Set Exercise ID
-bool NetIO::setSlotExerciseID(const base::Integer* const num)
+bool NetIO::setSlotExerciseID(const base::Integer* const x)
 {
     bool ok {};
-    if (num != nullptr) {
-        int v {num->asInt()};
+    if (x != nullptr) {
+        int v {x->asInt()};
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
         } else {
@@ -1727,10 +1727,10 @@ void NetIO::testInputEntityTypes(const int n)
    const NtmInputNode* root{getRootNtmInputNode()};
    const int maxTypes{getNumInputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (int i = 0; i < n; i++) {
-         int r {std::rand()};
-         double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
-         int idx {base::nint(nr * (maxTypes - 1))};
+      for (int i{}; i < n; i++) {
+         const int r {std::rand()};
+         const double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
+         const int idx {base::nint(nr * (maxTypes - 1))};
          const Ntm* origNtm {static_cast<const Ntm*>(getInputEntityType(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1787,10 +1787,10 @@ void NetIO::testOutputEntityTypes(const int n)
    const NtmOutputNode* root{getRootNtmOutputNode()};
    const int maxTypes{getNumOutputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (int i = 0; i < n; i++) {
-         int r{std::rand()};
-         double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
-         int idx{base::nint(nr * (maxTypes - 1))};
+      for (int i{}; i < n; i++) {
+         const int r{std::rand()};
+         const double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
+         const int idx{base::nint(nr * (maxTypes - 1))};
          const Ntm* origNtm{static_cast<const Ntm*>(getOutputEntityTypes(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
