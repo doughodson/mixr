@@ -36,8 +36,7 @@ END_SLOT_MAP()
 SamVehicle::SamVehicle()
 {
    STANDARD_CONSTRUCTOR()
-   static base::String generic("GenericSamSite");
-   setType(&generic);
+   setType("GenericSamSite");
 
    maxMslRng = DEFAULT_MAX_LAUNCH_RANGE;
    minMslRng = DEFAULT_MIN_LAUNCH_RANGE;

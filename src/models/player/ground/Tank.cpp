@@ -12,8 +12,7 @@ EMPTY_COPYDATA(Tank)
 Tank::Tank()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericTank");
-    setType(&generic);
+    setType("GenericTank");
 }
 
 }

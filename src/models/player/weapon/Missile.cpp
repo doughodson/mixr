@@ -52,8 +52,7 @@ Missile::Missile()
 {
    STANDARD_CONSTRUCTOR()
 
-   static base::String generic("GenericMissile");
-   setType(&generic);
+   setType("GenericMissile");
 
    setMaxTOF(60.0);
    setLethalRange(30.0f);

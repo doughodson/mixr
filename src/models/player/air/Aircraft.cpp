@@ -12,8 +12,7 @@ EMPTY_COPYDATA(Aircraft)
 Aircraft::Aircraft()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericAircraft");
-    setType(&generic);
+    setType("GenericAircraft");
 }
 
 }

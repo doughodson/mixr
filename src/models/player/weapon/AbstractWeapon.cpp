@@ -100,8 +100,7 @@ AbstractWeapon::AbstractWeapon()
 {
    STANDARD_CONSTRUCTOR()
 
-   static base::String generic("GenericWeapon");
-   setType(&generic);
+   setType("GenericWeapon");
    setMode(Mode::INACTIVE);
    setInitMode(Mode::INACTIVE);
 

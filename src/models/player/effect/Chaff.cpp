@@ -17,9 +17,7 @@ const char* Chaff::getNickname() const        { return "Chaff"; }
 Chaff::Chaff()
 {
     STANDARD_CONSTRUCTOR()
-
-    static base::String generic("Chaff");
-    setType(&generic);
+    setType("Chaff");
 }
 
 }

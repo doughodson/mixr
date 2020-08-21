@@ -10,8 +10,7 @@ EMPTY_SLOTTABLE(Ship)
 Ship::Ship()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericShip");
-    setType(&generic);
+    setType("GenericShip");
 }
 
 void Ship::copyData(const Ship& org, const bool)

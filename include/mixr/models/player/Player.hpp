@@ -47,13 +47,13 @@ class Track;
 //------------------------------------------------------------------------------
 // Class: Player
 //
-// Description: Abstract interface for all players (e.g., aircraft, ground vehicles, etc.)
-//              Provides interfaces for player IDs, types, status, state vectors,
+// Description: Interface for all players (e.g., aircraft, ground vehicles, etc.)
+//              Defines interfaces for player IDs, types, status, state vectors,
 //              control flags, subcomponent lists, event handling, etc.
 //
 //
 //------------------------------------------------------------------------------
-// Factory name: AbstractPlayer
+// Factory name: Player
 // Slots --
 //
 //    ! ---
@@ -65,91 +65,91 @@ class Track;
 //
 //    ! 1: Player's initial position vector (NED) on the simulation's gaming area
 //
-//    initXPos       <base::Length>      ! X position (+north) (default: 0)
-//    initXPos       <base::Number>      ! X position (+north) (meters)
+//    initXPos           <base::Length>      ! X position (+north) (default: 0)
+//    initXPos           <base::Number>      ! X position (+north) (meters)
 //
-//    initYPos       <base::Length>      ! Y position (+east) (default: 0)
-//    initYPos       <base::Number>      ! Y position (+east) (meters)
+//    initYPos           <base::Length>      ! Y position (+east) (default: 0)
+//    initYPos           <base::Number>      ! Y position (+east) (meters)
 //
-//    initAlt        <base::Length>      ! Altitude (+up) (default: 0)
-//    initAlt        <base::Number>      ! Altitude (+up) (meters)
+//    initAlt            <base::Length>      ! Altitude (+up) (default: 0)
+//    initAlt            <base::Number>      ! Altitude (+up) (meters)
 //
 //
 //    ! 2: Player's initial geodetic position
 //
-//    initLatitude   <base::Latitude>    ! Latitude (default: 0)
-//    initLatitude   <base::Angle>       ! Latitude
-//    initLatitude   <base::Number>      ! Latitude (degs)
+//    initLatitude       <base::Latitude>    ! Latitude (default: 0)
+//    initLatitude       <base::Angle>       ! Latitude
+//    initLatitude       <base::Number>      ! Latitude (degs)
 //
-//    initLongitude  <base::Longitude>   ! Longitude (default: 0)
-//    initLongitude  <base::Angle>       ! Longitude
-//    initLongitude  <base::Number>      ! Longitude (degs)
+//    initLongitude      <base::Longitude>   ! Longitude (default: 0)
+//    initLongitude      <base::Angle>       ! Longitude
+//    initLongitude      <base::Number>      ! Longitude (degs)
 //
-//    initAlt        <base::Length>      ! Altitude (HAE) (+up)  ### NES Is this being used?
-//    initAlt        <base::Number>      ! Altitude (HAE) (+up) (meters)
+//    initAlt            <base::Length>      ! Altitude (HAE) (+up)  ### NES Is this being used?
+//    initAlt            <base::Number>      ! Altitude (HAE) (+up) (meters)
 //
 //
 //    ! 3: Player's initial world position
 //
-//    initGeocentric <base::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
+//    initGeocentric     <base::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
 //
 //
 //    ! ---
 //    ! Player's initial Euler angles
 //    ! ---
-//    initRoll       <base::Angle>       ! Initial roll angle (default: 0)
-//    initRoll       <base::Number>      ! Initial roll angle (radians)
+//    initRoll           <base::Angle>       ! Initial roll angle (default: 0)
+//    initRoll           <base::Number>      ! Initial roll angle (radians)
 //
-//    initPitch      <base::Angle>       ! Initial pitch angle (default: 0)
-//    initPitch      <base::Number>      ! Initial pitch angle (radians)
+//    initPitch          <base::Angle>       ! Initial pitch angle (default: 0)
+//    initPitch          <base::Number>      ! Initial pitch angle (radians)
 //
-//    initHeading    <base::Angle>       ! Initial heading angle (default: 0)
-//    initHeading    <base::Number>      ! Initial heading angle (radians)
+//    initHeading        <base::Angle>       ! Initial heading angle (default: 0)
+//    initHeading        <base::Number>      ! Initial heading angle (radians)
 //
-//    initEuler      <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
+//    initEuler          <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
 //    ! ---
-//    initVelocity   <base::Number>      ! Initial Velocity: meters/sec (default: 0)
+//    initVelocity       <base::Number>      ! Initial Velocity: meters/sec (default: 0)
 //
 //    ! ---
 //    ! Player's type, id and and other parameters
 //    ! ---
-//    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
-//    side           <base::Identifier>  ! Which side? valid identifiers { blue, red, yellow, cyan, gray, white } (default: gray)
-//    useCoordSys    <base::Identifier>  ! Coord system to use for updating player position { world, geod, local }
-//                                       !   (default: based on the coord system used to set the initial position)
+//    type               <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
+//    side               <base::Identifier>  ! Which side? valid identifiers { blue, red, yellow, cyan, gray, white } (default: gray)
+//    useCoordSys        <base::Identifier>  ! Coord system to use for updating player position { world, geod, local }
+//                                           !   (default: based on the coord system used to set the initial position)
 //
-//    signature      <RfSignature>       ! Player's RCS signature (default: 0)
-//    irSignature    <IrSignature>       ! Player's IR signature (default: 0)
-//    camouflageType <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
+//    signature          <RfSignature>       ! Player's RCS signature (default: 0)
+//    irSignature        <IrSignature>       ! Player's IR signature (default: 0)
+//    camouflageType     <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
 //
-//    terrainElevReq <base::Boolean>     ! Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
-//    interpolateTerrain <base::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
-//    terrainOffset  <base::Length>      ! Ground clamp offset from terrain to player's CG (base::Length)
+//    terrainElevReq     <base::Boolean>     ! Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
+//    interpolateTerrain <base::Boolean>     ! Interpolate our DTED terrain elevation data (default: false)
+//    terrainOffset      <base::Length>      ! Ground clamp offset from terrain to player's CG (base::Length)
 //
-//    positionFreeze <base::Boolean>     ! Position freeze (default: false)
-//    altitudeFreeze <base::Boolean>     ! Altitude freeze (default: false)
-//    attitudeFreeze <base::Boolean>     ! Attitude freeze (default: false)
-//    fuelFreeze     <base::Boolean>     ! Fuel freeze (default: false)
-//    crashOverride  <base::Boolean>     ! Crash Override (i.e., ignore collision and crash events)(default: false)
-//    killOverride   <base::Boolean>     ! Kill/Damage Override -- player can not be killed/damaged (default: false)
-//    killRemoval    <base::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
-//    enableNetOutput <base::Boolean>    ! Enable network output of this player (default: true)
+//    positionFreeze     <base::Boolean>     ! Position freeze (default: false)
+//    altitudeFreeze     <base::Boolean>     ! Altitude freeze (default: false)
+//    attitudeFreeze     <base::Boolean>     ! Attitude freeze (default: false)
+//    fuelFreeze         <base::Boolean>     ! Fuel freeze (default: false)
+//    crashOverride      <base::Boolean>     ! Crash Override (i.e., ignore collision and crash events) (default: false)
+//    killOverride       <base::Boolean>     ! Kill/Damage Override -- player can not be killed/damaged (default: false)
+//    killRemoval        <base::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
+//    enableNetOutput    <base::Boolean>     ! Enable network output of this player (default: true)
 //
-//    dataLogTime    <base::Time>        ! Time between player data samples to an optional data
-//                                       ! logger, or zero if none (default: 0)
+//    dataLogTime        <base::Time>        ! Time between player data samples to an optional data
+//                                           ! logger, or zero if none (default: 0)
 //
 //    ! ---
 //    ! Angular test rates:
 //    !     If non-zero the Euler angles are updated using the body angular rates.
 //    !     For use only without a dynamics model.
 //    ! ---
-//    testRollRate   <base::Angle>       ! Test roll rate (body) (units per second) (default: 0)
-//    testPitchRate  <base::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
-//    testYawRate    <base::Angle>       ! Test heading rate (body) (units per second) (default: 0)
-//    testBodyAxis   <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
+//    testRollRate       <base::Angle>       ! Test roll rate (body) (units per second) (default: 0)
+//    testPitchRate      <base::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
+//    testYawRate        <base::Angle>       ! Test heading rate (body) (units per second) (default: 0)
+//    testBodyAxis       <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
 //
 //
 // --------------------
@@ -400,7 +400,7 @@ public:
    virtual unsigned int getMajorType() const;                             // The player's 'major type' enum
    virtual bool isMajorType(const unsigned int) const;                    // True if player is of these (bit-wise or'd) major types
 
-   virtual const base::String* getType() const;                           // The player's type string (.e.g, "F-16C")
+   virtual const std::string& getType() const;                            // The player's type string (e.g., "F-16C")
 
    virtual Side getSide() const;                                          // The 'side' that the player is on.
    virtual bool isSide(const unsigned int) const;                         // True if player is with one of these (bit-wise or'd) sides
@@ -655,7 +655,7 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(const base::String* const newTypeString);      // Sets the player's type string
+   virtual void setType(const std::string&);                           // Sets the player's type string
    virtual void setSide(const Side);                                   // Sets the player's side enum
    virtual bool setUseCoordSys(const CoordSys);                        // Sets the coord system to use for updating position
 
@@ -936,8 +936,8 @@ private:
    // ---
    // Player identity
    // ---
-   base::safe_ptr<base::String> type;    // Type of vehicle
-   Side side {GRAY};                     // Which side (see above)
+   std::string type{"GenericPlayer"};  // type of vehicle
+   Side side {GRAY};                   // Which side (see above)
 
    // ---
    // Player State
@@ -1103,8 +1103,8 @@ private:
    bool setSlotInitVelocity(const base::Number* const);
    bool setSlotInitVelocityKts(const base::Number* const);
 
-   bool setSlotType(const base::String* const x)             { return setType(x); }
-   bool setSlotSide(base::Identifier* const);
+   bool setSlotType(const base::String* const);
+   bool setSlotSide(const base::Identifier* const);
 
    bool setSlotSignature(RfSignature* const);
    bool setSlotIrSignature(IrSignature* const);

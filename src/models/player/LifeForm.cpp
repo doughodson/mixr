@@ -25,9 +25,7 @@ EMPTY_SLOTTABLE(LifeForm)
 LifeForm::LifeForm()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("LifeForm");
-    setType(&generic);
-
+    setType("LifeForm");
     setTerrainOffset(1.0);      // default offset from terrain to CG
 }
 

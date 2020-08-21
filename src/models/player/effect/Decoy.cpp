@@ -17,9 +17,7 @@ const char* Decoy::getNickname() const        { return "Decoy"; }
 Decoy::Decoy()
 {
     STANDARD_CONSTRUCTOR()
-
-    static base::String generic("Decoy");
-    setType(&generic);
+    setType("Decoy");
 }
 
 }

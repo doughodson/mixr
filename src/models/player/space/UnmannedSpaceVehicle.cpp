@@ -12,8 +12,7 @@ EMPTY_DELETEDATA(UnmannedSpaceVehicle)
 UnmannedSpaceVehicle::UnmannedSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericUnmannedSpaceVehicle");
-    setType(&generic);
+    setType("GenericUnmannedSpaceVehicle");
 }
 
 void UnmannedSpaceVehicle::dynamics(const double dt)

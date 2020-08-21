@@ -11,8 +11,7 @@ EMPTY_DELETEDATA(Building)
 Building::Building()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericBuilding");
-    setType(&generic);
+    setType("GenericBuilding");
 }
 
 void Building::copyData(const Building& org, const bool)

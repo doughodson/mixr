@@ -31,8 +31,7 @@ Effect::Effect()
 {
     STANDARD_CONSTRUCTOR()
 
-    static base::String generic("Effect");
-    setType(&generic);
+    setType("Effect");
 
     // Default: unguided, ballistic
     setMaxTOF(10.0);

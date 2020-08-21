@@ -28,6 +28,7 @@
 
 #include <cstring>
 #include <cmath>
+#include <string>
 
 #if !defined(WIN32)
 #include <arpa/inet.h>
@@ -1432,8 +1433,8 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
       if (result == nullptr && nodeFactoryName != nullptr) {
 
          // Target player's type string and length
-         const base::String* const pType{p->getType()};
-         const std::size_t pTypeLen{pType->len()};
+         const std::string& pType{p->getType()};
+         const std::size_t pTypeLen{pType.length()};
 
          // Search the NTM for a match with the most matching type string characters,
          // but not more than the target player's type string.
@@ -1443,11 +1444,11 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
             // Get the template player and its type string with length
             const Ntm* tstNtm{static_cast<const Ntm*>(item->getValue())};
             const models::Player* const tp{tstNtm->getTemplatePlayer()};
-            const base::String* const tpType{tp->getType()};
-            const std::size_t tpTypeLen{tpType->len()};
+            const std::string& tpType{tp->getType()};
+            const std::size_t tpTypeLen{tpType.length()};
 
             if (tpTypeLen <= pTypeLen) {
-               bool match{(std::strncmp( pType->c_str(), tpType->c_str(), tpTypeLen ) == 0)};
+               bool match{(std::strncmp( pType.c_str(), tpType.c_str(), tpTypeLen ) == 0)};
                if (match) {
                   result = tstNtm;
                }
@@ -1569,8 +1570,8 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
 
       // Get the template player's type string from the 'new' Ntm
       const models::Player* newP{newNtm->getTemplatePlayer()};
-      const base::String* newTypeStr{newP->getType()};
-      const std::size_t newTypeLen{newTypeStr->len()};
+      const std::string& newTypeStr{newP->getType()};
+      const std::size_t newTypeLen{newTypeStr.length()};
 
       bool inserted{};
       bool err{};
@@ -1580,14 +1581,14 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          // Get the ref player's string from the 'ref' Ntm.
          const Ntm* refNtm{static_cast<const Ntm*>(refItem->getValue())};
          const models::Player* refP{refNtm->getTemplatePlayer()};
-         const base::String* refTypeStr{refP->getType()};
-         const std::size_t refTypeLen{refTypeStr->len()};
+         const std::string& refTypeStr{refP->getType()};
+         const std::size_t refTypeLen{refTypeStr.length()};
 
          // compare to the shortest string length
          std::size_t len{newTypeLen};
          if (refTypeLen < len) len = refTypeLen;
 
-         int r{std::strncmp(newTypeStr->c_str(), refTypeStr->c_str(), len)};
+         int r{std::strncmp(newTypeStr.c_str(), refTypeStr.c_str(), len)};
          if ( r == 0 && refTypeLen < newTypeLen) {
             ntmList->insert(newItem, refItem);
             inserted = true;
@@ -1597,7 +1598,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          } else if ( r == 0 && refTypeLen == newTypeLen) {
             if (isMessageEnabled(MSG_WARNING)) {
                std::cerr << "Warning: duplicate outgoing NTM( ";
-               std::cerr << newP->getFactoryName() << " type: " << *newTypeStr;
+               std::cerr << newP->getFactoryName() << " type: " << newTypeStr;
                std::cerr << " ), second ignored" << std::endl;
                err = true;
             }

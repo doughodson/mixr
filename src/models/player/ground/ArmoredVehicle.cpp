@@ -12,8 +12,7 @@ EMPTY_COPYDATA(ArmoredVehicle)
 ArmoredVehicle::ArmoredVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericArmoredVehicle");
-    setType(&generic);
+    setType("GenericArmoredVehicle");
 }
 
 }

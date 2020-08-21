@@ -7,6 +7,8 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
+#include <string>
+
 namespace mixr {
 namespace cigi {
 
@@ -57,11 +59,11 @@ bool Player2CigiMap::setEntityId(const int id)
 }
 
 // Sets the IG entity type number
-bool Player2CigiMap::setSlotEntityId(const base::Integer* const msg)
+bool Player2CigiMap::setSlotEntityId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int i{msg->asInt()};
+   if (x != nullptr) {
+      const int i{x->asInt()};
       if (i >= 0) {
          ok = setEntityId(i);
       }
@@ -70,16 +72,16 @@ bool Player2CigiMap::setSlotEntityId(const base::Integer* const msg)
 }
 
 // Sets the player's factory name
-bool Player2CigiMap::setSlotRefFactoryName(const base::Identifier* const msg)
+bool Player2CigiMap::setSlotRefFactoryName(const base::Identifier* const x)
 {
-   refFactoryName = msg;
+   refFactoryName = x;
    return true;
 }
 
 // Sets the player's type name
-bool Player2CigiMap::setSlotRefTypeName(const base::String* const msg)
+bool Player2CigiMap::setSlotRefTypeName(const base::String* const x)
 {
-   refTypeName = msg;
+   refTypeName = x;
    return true;
 }
 
@@ -99,11 +101,11 @@ bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
          match = true;
 
          // Do we have both type names?
-         const base::String* ptype{p->getType()};
-         if ( refTypeName != nullptr && ptype != nullptr) {
+         const std::string& ptype{p->getType()};
+         if ( refTypeName != nullptr && !ptype.empty()) {
 
             // Then compare at most the length of our reference type name ...
-            match = std::strncmp( ptype->c_str(), refTypeName->c_str(), refTypeName->len() ) == 0;
+            match = std::strncmp( ptype.c_str(), refTypeName->c_str(), refTypeName->len() ) == 0;
 
          }
       }

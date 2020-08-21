@@ -12,8 +12,7 @@ EMPTY_COPYDATA(GroundStationRadar)
 GroundStationRadar::GroundStationRadar()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GroundStationRadar");
-    setType(&generic);
+    setType("GroundStationRadar");
 }
 
 }

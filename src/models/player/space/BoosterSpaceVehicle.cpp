@@ -12,8 +12,7 @@ EMPTY_DELETEDATA(BoosterSpaceVehicle)
 BoosterSpaceVehicle::BoosterSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericBoosterSpaceVehicle");
-    setType(&generic);
+    setType("GenericBoosterSpaceVehicle");
 }
 
 }

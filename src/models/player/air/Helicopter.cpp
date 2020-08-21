@@ -12,8 +12,7 @@ EMPTY_COPYDATA(Helicopter)
 Helicopter::Helicopter()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericHelicopter");
-    setType(&generic);
+    setType("GenericHelicopter");
 }
 
 }

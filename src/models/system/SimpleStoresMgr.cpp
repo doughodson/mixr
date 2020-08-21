@@ -401,8 +401,8 @@ Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileTy
             const auto p = dynamic_cast<Missile*>(pair->object());
             if (p != nullptr && p->isInactive()) {
                // Ok, we have a missile, but is it the type we want?
-               if (*p->getType() == *missileType) {
-                  p->ref();
+               if (p->getType() == missileType->c_str()) {
+                //  p->ref();
                   msl = p;
                }
             }
@@ -432,7 +432,7 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
             const auto p = dynamic_cast<Bomb*>(pair->object());
             if (p != nullptr && p->isInactive()) {
                // Ok, we have a bomb, but is it the type we want?
-               if (*p->getType() == *bombType) {
+               if (p->getType() == bombType->c_str()) {
                   p->ref();
                   bomb = p;
                }

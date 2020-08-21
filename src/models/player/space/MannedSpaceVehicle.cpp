@@ -12,8 +12,7 @@ EMPTY_DELETEDATA(MannedSpaceVehicle)
 MannedSpaceVehicle::MannedSpaceVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericMannedSpaceVehicle");
-    setType(&generic);
+    setType("GenericMannedSpaceVehicle");
 }
 
 }

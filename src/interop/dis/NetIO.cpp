@@ -1705,11 +1705,11 @@ bool NetIO::setSlotApplicationID(const base::Integer* const num)
 }
 
 // Set Exercise ID
-bool NetIO::setSlotExerciseID(const base::Integer* const num)
+bool NetIO::setSlotExerciseID(const base::Integer* const x)
 {
     bool ok {};
-    if (num != nullptr) {
-        int v {num->asInt()};
+    if (x != nullptr) {
+        const int v {x->asInt()};
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
         } else {
@@ -1727,10 +1727,10 @@ void NetIO::testInputEntityTypes(const int n)
    const NtmInputNode* root{getRootNtmInputNode()};
    const int maxTypes{getNumInputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (int i = 0; i < n; i++) {
-         int r {std::rand()};
-         double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
-         int idx {base::nint(nr * (maxTypes - 1))};
+      for (int i{}; i < n; i++) {
+         const int r {std::rand()};
+         const double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
+         const int idx {base::nint(nr * (maxTypes - 1))};
          const Ntm* origNtm {static_cast<const Ntm*>(getInputEntityType(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1761,8 +1761,8 @@ void NetIO::testInputEntityTypes(const int n)
             if (foundNtm != nullptr) {
                const models::Player* foundP {origNtm->getTemplatePlayer()};
                std::cout << "; form: " << foundP->getFactoryName();
-               base::safe_ptr<const base::String> foundType( static_cast<const base::String*>( foundP->getType() ) );
-               if (foundType != nullptr) std::cout << "; type: " << *foundType;
+               const std::string& foundType{foundP->getType()};
+               if (!foundType.empty()) std::cout << "; type: " << foundType;
             }
             if (origNtm == foundNtm) {
                std::cout << "; Match!!";
@@ -1787,10 +1787,10 @@ void NetIO::testOutputEntityTypes(const int n)
    const NtmOutputNode* root{getRootNtmOutputNode()};
    const int maxTypes{getNumOutputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
-      for (int i = 0; i < n; i++) {
-         int r{std::rand()};
-         double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
-         int idx{base::nint(nr * (maxTypes - 1))};
+      for (int i{}; i < n; i++) {
+         const int r{std::rand()};
+         const double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
+         const int idx{base::nint(nr * (maxTypes - 1))};
          const Ntm* origNtm{static_cast<const Ntm*>(getOutputEntityTypes(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1801,24 +1801,11 @@ void NetIO::testOutputEntityTypes(const int n)
             models::Player* origP1 {origP->clone()};
 
             std::cout << "; form: " << origP->getFactoryName();
-            base::safe_ptr<base::String> origType( (base::String*) origP->getType() );
-            if (origType != nullptr) {
-
-               char cbuff[64] {};
-               base::utStrcpy(cbuff, 64, origType->c_str());
-
-#if 0 /* optionally increment the last character to look for generic matches */
-               std::size_t ll{std::strlen(cbuff)};
-               if (ll > 1) {
-                  cbuff[ll-1]++;
-               }
-#endif
-
-               const auto newType = new base::String(cbuff);
-               origP1->setType(newType);
-
-               const auto origType1 = const_cast<base::String*>(static_cast<const base::String*>(origP1->getType()));
-               std::cout << "; type1: " << *origType1;
+            const std::string& origType{origP->getType()};
+            if (!origType.empty()) {
+               origP1->setType(origType);
+               const std::string origType1{origP1->getType()};
+               std::cout << "; type1: " << origType1;
             }
 
             const auto foundNtm = static_cast<const Ntm*>(root->findNetworkTypeMapper(origP1));

@@ -41,10 +41,7 @@ const char* Bomb::getNickname() const        { return "Bomb"; }
 Bomb::Bomb()
 {
    STANDARD_CONSTRUCTOR()
-
-   static base::String generic("Bomb");
-   setType(&generic);
-
+   setType("Bomb");
    initData();
 }
 

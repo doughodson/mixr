@@ -12,8 +12,7 @@ EMPTY_COPYDATA(GroundStation)
 GroundStation::GroundStation()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GroundStation");
-    setType(&generic);
+    setType("GroundStation");
 }
 
 }

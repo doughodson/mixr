@@ -12,8 +12,7 @@ EMPTY_COPYDATA(Artillery)
 Artillery::Artillery()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericArtillery");
-    setType(&generic);
+    setType("GenericArtillery");
 }
 
 }

@@ -24,10 +24,7 @@ const char* Bullet::getNickname() const       { return "Bullets"; }
 Bullet::Bullet()
 {
    STANDARD_CONSTRUCTOR()
-
-   static base::String generic("Bullet");
-   setType(&generic);
-
+   setType("Bullet");
    setMaxTOF( DEFAULT_MAX_TOF );
 }
 

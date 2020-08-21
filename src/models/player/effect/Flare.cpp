@@ -17,9 +17,7 @@ const char* Flare::getNickname() const        { return "Flare"; }
 Flare::Flare()
 {
     STANDARD_CONSTRUCTOR()
-
-    static base::String generic("Flare");
-    setType(&generic);
+    setType("Flare");
 }
 
 }

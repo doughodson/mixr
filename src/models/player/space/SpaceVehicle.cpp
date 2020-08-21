@@ -15,9 +15,7 @@ EMPTY_DELETEDATA(SpaceVehicle)
 SpaceVehicle::SpaceVehicle()
 {
    STANDARD_CONSTRUCTOR()
-
-   static base::String generic("GenericSpaceVehicle");
-   setType(&generic);
+   setType("GenericSpaceVehicle");
 }
 
 //-----------------------------------------------------------------------------

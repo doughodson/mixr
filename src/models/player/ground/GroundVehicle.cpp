@@ -37,8 +37,7 @@ END_SLOT_MAP()
 GroundVehicle::GroundVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericGroundVehicle");
-    setType(&generic);
+    setType("GenericGroundVehicle");
 
    lnchrDownAngle = DEFAULT_LAUNCHER_DOWN_ANGLE;
    lnchrUpAngle   = DEFAULT_LAUNCHER_UP_ANGLE;

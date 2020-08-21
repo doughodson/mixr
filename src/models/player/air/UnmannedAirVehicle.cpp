@@ -12,8 +12,7 @@ EMPTY_COPYDATA(UnmannedAirVehicle)
 UnmannedAirVehicle::UnmannedAirVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericUnmannedAirVehicle");
-    setType(&generic);
+    setType("GenericUnmannedAirVehicle");
 }
 
 }

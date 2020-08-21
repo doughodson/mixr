@@ -23,9 +23,7 @@ END_SLOT_MAP()
 AirVehicle::AirVehicle()
 {
     STANDARD_CONSTRUCTOR()
-
-    static base::String generic("GenericAirVehicle");
-    setType(&generic);
+    setType("GenericAirVehicle");
 }
 
 void AirVehicle::copyData(const AirVehicle& org, const bool)

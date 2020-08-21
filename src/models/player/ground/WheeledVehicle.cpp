@@ -12,8 +12,7 @@ EMPTY_COPYDATA(WheeledVehicle)
 WheeledVehicle::WheeledVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static base::String generic("GenericWheeledVehicle");
-    setType(&generic);
+    setType("GenericWheeledVehicle");
 }
 
 }
