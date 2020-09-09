@@ -187,14 +187,14 @@ void IgHost::mapPlayerList2ModelTable()
    //   -- As models are removed, the table above the model is shifted down.
    //   -- We're also clearing the model's 'checked' flag
    // ---
-   for (int i = getModelTableSize(); i > 0; --i) {
+   for (int i{getModelTableSize()}; i > 0; --i) {
       if ( modelTbl[i-1]->isState(CigiModel::State::CLEARED) ) {
          // Deleting this model
          //std::cout << "IgHost::mapPlayerList2ModelTable() cleanup: model = " << modelTbl[i] << std::endl;
          removeModelFromList( (i-1), TableType::MODEL);
       }
    }
-   for (int i = 0; i < getModelTableSize(); i++) {
+   for (int i{}; i < getModelTableSize(); i++) {
       modelTbl[i]->setCheckedFlag(false);
    }
 
@@ -218,10 +218,10 @@ void IgHost::mapPlayerList2ModelTable()
          if ( p != getOwnship() && !dummy ) {
 
             // Find the player's model entry (if any)
-            CigiModel* model = findModel(p, TableType::MODEL);
+            CigiModel* model{findModel(p, TableType::MODEL)};
 
             // Check if in-range
-            bool inRange {computeRangeToPlayer(p) <= maxRange};
+            bool inRange{computeRangeToPlayer(p) <= maxRange};
 
             // Check if this player is alive and within range.
             if (p->isActive() && inRange) {
@@ -258,7 +258,7 @@ void IgHost::mapPlayerList2ModelTable()
    // ---
    // Any models not checked needs to be removed
    // ---
-   for (int i = 0; i < getModelTableSize(); i++) {
+   for (int i{}; i < getModelTableSize(); i++) {
       if ( modelTbl[i]->isNotChecked() ) {
          // Request removal;
          // (note: the IG system specific code now has one frame to cleanup its own code
@@ -275,7 +275,7 @@ void IgHost::mapPlayerList2ModelTable()
 void IgHost::mapPlayers2ElevTable()
 {
    // Set all entries as unchecked
-   for (int i = 0; i < getElevationTableSize(); i++) {
+   for (int i{}; i < getElevationTableSize(); i++) {
       hotTbl[i]->setCheckedFlag(false);
    }
 
@@ -324,7 +324,7 @@ void IgHost::mapPlayers2ElevTable()
    // Remove unmatched model entries; their players are inactive or no longer
    // require terrain elevation
    // ---
-   for (int i = getElevationTableSize(); i > 0; --i) {
+   for (int i{getElevationTableSize()}; i > 0; --i) {
       if ( hotTbl[i-1]->isNotChecked() ) {
          // Deleting this entry
          removeModelFromList( (i-1), TableType::HOT);
@@ -392,7 +392,7 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
 // sets our ownship pointer, which is used by the Station class
 void IgHost::setOwnship(simulation::AbstractPlayer* const p)
 {
-   models::Player* const player = dynamic_cast<models::Player* const>(p);
+   models::Player* const player{dynamic_cast<models::Player* const>(p)};
 
     // nothing's changed, just return
     if (player == ownship) return;
@@ -524,7 +524,7 @@ void IgHost::removeModelFromList(const int idx, const TableType type)
 
       // Shift down all items above this index by one position
       int n1{n - 1};
-      for (int i = idx; i < n1; i++) {
+      for (int i{idx}; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
 
@@ -551,7 +551,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 
    int found{-1};
    // Find the model
-   for (int i = 0; i < n && found < 0; i++) {
+   for (int i{}; i < n && found < 0; i++) {
       if (model == tbl[i]) found = i;
    }
 
@@ -560,7 +560,7 @@ void IgHost::removeModelFromList(CigiModel* const model, const TableType type)
 
       // Shift down all items above this model by one position
       int n1{n - 1};
-      for (int i = found; i < n1; i++) {
+      for (int i{found}; i < n1; i++) {
          tbl[i] = tbl[i+1];
       }
 
@@ -650,13 +650,13 @@ int IgHost::compareKey2Model(const void* key, const void* model)
    return result;
 }
 
-bool IgHost::setSlotMaxRange(const base::Length* const msg)
+bool IgHost::setSlotMaxRange(const base::Length* const x)
 {
     bool ok{};
 
-    if (msg != nullptr) {
+    if (x != nullptr) {
         // we need our length in meters
-        ok = setMaxRange(msg->getValueInMeters());
+        ok = setMaxRange(x->getValueInMeters());
     }
 
     if (!ok) {
@@ -666,13 +666,13 @@ bool IgHost::setSlotMaxRange(const base::Length* const msg)
     return ok;
 }
 
-bool IgHost::setSlotMaxRange(const base::Number* const msg)
+bool IgHost::setSlotMaxRange(const base::Number* const x)
 {
     bool ok{};
 
-    if (msg != nullptr) {
+    if (x != nullptr) {
         // We have a simple number, which should be meters!
-        ok = setMaxRange(msg->asDouble());
+        ok = setMaxRange(x->asDouble());
     }
 
     if (!ok) {
@@ -683,11 +683,11 @@ bool IgHost::setSlotMaxRange(const base::Number* const msg)
 }
 
 // setSlotMaxModels() -- sets the max number of models slot
-bool IgHost::setSlotMaxModels(const base::Integer* const num)
+bool IgHost::setSlotMaxModels(const base::Integer* const x)
 {
     bool ok{};
-    if (num != nullptr) {
-        const int n{num->asInt()};
+    if (x != nullptr) {
+        const int n{x->asInt()};
         if (n >= 0) {
              ok = setMaxModels(n);
         }
@@ -698,11 +698,11 @@ bool IgHost::setSlotMaxModels(const base::Integer* const num)
     return ok;
 }
 
-bool IgHost::setSlotMaxElevations(const base::Integer* const num)
+bool IgHost::setSlotMaxElevations(const base::Integer* const x)
 {
     bool ok{};
-    if (num != nullptr) {
-        const int n{num->asInt()};
+    if (x != nullptr) {
+        const int n{x->asInt()};
         if (n >= 0) {
              ok = setMaxElevations(n);
         }
@@ -714,16 +714,16 @@ bool IgHost::setSlotMaxElevations(const base::Integer* const num)
 }
 
 // Sets the list of IG model type IDs (TypeMapper objects)
-bool IgHost::setSlotTypeMap(const base::PairStream* const msg)
+bool IgHost::setSlotTypeMap(const base::PairStream* const x)
 {
     bool ok{};
-    if (msg != nullptr) {
+    if (x != nullptr) {
        // First clear the old table
        clearIgModelTypes();
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
-       const base::List::Item* item{msg->getFirstItem()};
+       const base::List::Item* item{x->getFirstItem()};
        while (item != nullptr && nIgModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
           const auto igType = dynamic_cast<const Player2CigiMap*>( pair->object() );

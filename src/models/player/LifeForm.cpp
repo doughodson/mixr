@@ -26,7 +26,8 @@ LifeForm::LifeForm()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("LifeForm");
-    setType(&generic);
+    setType_old(&generic);
+    setType("LifeForm");
 
     setTerrainOffset(1.0);      // default offset from terrain to CG
 }

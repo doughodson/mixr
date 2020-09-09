@@ -18,7 +18,8 @@ Aam::Aam()
    STANDARD_CONSTRUCTOR()
 
    static base::String gaam(getDescription());
-   setType(&gaam);
+   setType_old(&gaam);
+   setType("AIM");
 
    // Default guidance & dynamics for generic A/A missile
    // (derived models will override these values)

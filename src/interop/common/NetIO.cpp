@@ -1432,7 +1432,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
       if (result == nullptr && nodeFactoryName != nullptr) {
 
          // Target player's type string and length
-         const base::String* const pType{p->getType()};
+         const base::String* const pType{p->getType_old()};
          const std::size_t pTypeLen{pType->len()};
 
          // Search the NTM for a match with the most matching type string characters,
@@ -1443,7 +1443,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
             // Get the template player and its type string with length
             const Ntm* tstNtm{static_cast<const Ntm*>(item->getValue())};
             const models::Player* const tp{tstNtm->getTemplatePlayer()};
-            const base::String* const tpType{tp->getType()};
+            const base::String* const tpType{tp->getType_old()};
             const std::size_t tpTypeLen{tpType->len()};
 
             if (tpTypeLen <= pTypeLen) {
@@ -1569,7 +1569,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
 
       // Get the template player's type string from the 'new' Ntm
       const models::Player* newP{newNtm->getTemplatePlayer()};
-      const base::String* newTypeStr{newP->getType()};
+      const base::String* newTypeStr{newP->getType_old()};
       const std::size_t newTypeLen{newTypeStr->len()};
 
       bool inserted{};
@@ -1580,7 +1580,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
          // Get the ref player's string from the 'ref' Ntm.
          const Ntm* refNtm{static_cast<const Ntm*>(refItem->getValue())};
          const models::Player* refP{refNtm->getTemplatePlayer()};
-         const base::String* refTypeStr{refP->getType()};
+         const base::String* refTypeStr{refP->getType_old()};
          const std::size_t refTypeLen{refTypeStr->len()};
 
          // compare to the shortest string length

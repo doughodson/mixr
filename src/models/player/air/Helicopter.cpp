@@ -13,7 +13,8 @@ Helicopter::Helicopter()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericHelicopter");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericHelicopter");
 }
 
 }

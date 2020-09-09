@@ -13,7 +13,8 @@ UnmannedAirVehicle::UnmannedAirVehicle()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericUnmannedAirVehicle");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericUnmannedAirVehicle");
 }
 
 }

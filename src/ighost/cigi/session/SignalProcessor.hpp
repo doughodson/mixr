@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_session_SignalProcessor_HPP__
-#define __mixr_ighost_cigi_session_SignalProcessor_HPP__
+#ifndef __mixr_ighost_cigi3_session_SignalProcessor_HPP__
+#define __mixr_ighost_cigi3_session_SignalProcessor_HPP__
 
 #include "cigicl/CigiBaseSignalProcessing.h"
 

@@ -25,7 +25,8 @@ AirVehicle::AirVehicle()
     STANDARD_CONSTRUCTOR()
 
     static base::String generic("GenericAirVehicle");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericAirVehicle");
 }
 
 void AirVehicle::copyData(const AirVehicle& org, const bool)
@@ -113,7 +114,7 @@ bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
       setGearHandleSwitch(initGearPos);
    } else {
       if (isMessageEnabled(MSG_ERROR)) {
-      std::cerr << "AirVehicle::setInitGearPos(): ERROR -- invalid position name; should be \"up\" or \"down\"" << std::endl;
+         std::cerr << "AirVehicle::setInitGearPos(): ERROR -- invalid position identifier; should be up or down" << std::endl;
       }
    }
    return ok;

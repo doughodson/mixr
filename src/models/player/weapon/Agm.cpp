@@ -16,10 +16,11 @@ const char* Agm::getNickname() const       { return "GenericAgm"; }
 
 Agm::Agm()
 {
-    STANDARD_CONSTRUCTOR()
+   STANDARD_CONSTRUCTOR()
 
-    static base::String generic("AGM");
-    setType(&generic);
+   static base::String generic("AGM");
+   setType_old(&generic);
+   setType("AGM");
 
    // Default guidance & dynamics for generic A/G missile
    // (derived models will override these values)

@@ -99,7 +99,7 @@ bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
          match = true;
 
          // Do we have both type names?
-         const base::String* ptype{p->getType()};
+         const base::String* ptype{p->getType_old()};
          if ( refTypeName != nullptr && ptype != nullptr) {
 
             // Then compare at most the length of our reference type name ...

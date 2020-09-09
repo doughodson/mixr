@@ -37,7 +37,8 @@ SamVehicle::SamVehicle()
 {
    STANDARD_CONSTRUCTOR()
    static base::String generic("GenericSamSite");
-   setType(&generic);
+   setType_old(&generic);
+   setType("GenericSamSite");
 
    maxMslRng = DEFAULT_MAX_LAUNCH_RANGE;
    minMslRng = DEFAULT_MIN_LAUNCH_RANGE;

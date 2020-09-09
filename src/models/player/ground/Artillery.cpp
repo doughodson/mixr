@@ -13,7 +13,8 @@ Artillery::Artillery()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericArtillery");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericArtillery");
 }
 
 }

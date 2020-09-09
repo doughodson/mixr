@@ -13,8 +13,9 @@ class AerodynamicsModel;
 // Class: AirVehicle
 //
 // Factory name: AirVehicle
+//
 // Slots:
-//  initGearPos     ! Initial gear position "up" or "down" (default: "down")
+//  initGearPos <Identifier>    ! Initial gear position {up or down} (default: down)
 //
 // Description: Generic Air Vehicles
 //
@@ -143,7 +144,7 @@ protected:
    const AerodynamicsModel* getAerodynamicsModel() const;
 
 private:
-   double initGearPos {};          // initial gear position
+   double initGearPos {1.0};       // initial gear position
    double gearPos {100.0};         // Percent Gear position (0 -> up; 100 -> down)
    double wpnBayDoorPos {100.0};   // Percent Weapon bay door position (0 -> closed; 100 -> open)
    double wingSweep {};            // Wing sweep angle (radians; zero for no wing sweep)

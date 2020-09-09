@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_factory_HPP__
-#define __mixr_ighost_cigi_factory_HPP__
+#ifndef __mixr_ighost_cigi3_factory_HPP__
+#define __mixr_ighost_cigi3_factory_HPP__
 
 #include <string>
 

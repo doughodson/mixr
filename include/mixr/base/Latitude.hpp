@@ -16,7 +16,7 @@ class Identifier;
 //
 // Description: Stores a latitude coordinate expressed in terms of a direction
 //              {north or south}, degrees, minutes and seconds.  Can convert
-//              this represntation into decimal degrees.
+//              this representation into decimal degrees.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //

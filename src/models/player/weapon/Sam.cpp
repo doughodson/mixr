@@ -11,14 +11,15 @@ EMPTY_DELETEDATA(Sam)
 
 int Sam::getCategory() const               { return (MISSILE | GUIDED); }
 const char* Sam::getDescription() const    { return "SAM"; }
-const char* Sam::getNickname() const       { return "GenericAam"; }
+const char* Sam::getNickname() const       { return "GenericSam"; }
 
 Sam::Sam()
 {
-    STANDARD_CONSTRUCTOR()
+   STANDARD_CONSTRUCTOR()
 
    static base::String gsam(getDescription());
-   setType(&gsam);
+   setType_old(&gsam);
+   setType("SAM");
 }
 
 }

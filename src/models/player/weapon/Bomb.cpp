@@ -43,7 +43,8 @@ Bomb::Bomb()
    STANDARD_CONSTRUCTOR()
 
    static base::String generic("Bomb");
-   setType(&generic);
+   setType_old(&generic);
+   setType("Bomb");
 
    initData();
 }

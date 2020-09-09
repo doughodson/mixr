@@ -13,7 +13,8 @@ ArmoredVehicle::ArmoredVehicle()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericArmoredVehicle");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericArmoredVehicle");
 }
 
 }

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_CigiHost_HPP__
-#define __mixr_ighost_cigi_CigiHost_HPP__
+#ifndef __mixr_ighost_cigi3_CigiHost_HPP__
+#define __mixr_ighost_cigi3_CigiHost_HPP__
 
 #include "mixr/ighost/cigi/IgHost.hpp"
 
@@ -46,7 +46,7 @@ class IgThread;
 // Factory name: CigiHost
 // Slots:
 //    session               <HostSession>   !  CIGI host session
-//    async                 <Number>        !  True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
+//    async                 <Boolean>       !  True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel      <Boolean>       !  True to hide the ownship's model (default: true - ownship's model is not seen)
 //    ownshipModel          <Integer>       !  Ownship's model ID
 //    mslTrailModel         <Integer>       !  "Missile Trail" effect model ID
@@ -61,7 +61,7 @@ class IgThread;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class CigiHost final: public IgHost
+class CigiHost : public IgHost
 {
    DECLARE_SUBCLASS(CigiHost, IgHost)
 
@@ -236,7 +236,7 @@ private:
 
    // messages
    std::array<CigiEntityCtrlV3*, NUM_BUFFERS> ownshipEC{}; // Ownship entity control
-   std::array<CigiCompCtrlV3*, NUM_BUFFERS> ownshipCC{};   // ownship component control
+   std::array<CigiCompCtrlV3*, NUM_BUFFERS> ownshipCC{};   // Ownship component control
    CigiIGCtrlV3*     igc{};               // IG control
    CigiLosVectReqV3* los{};               // LOS request
    CigiViewCtrlV3*   view{};              // View control (optional, set by derived classes)
@@ -244,7 +244,7 @@ private:
    CigiSensorCtrlV3* sensor{};            // Sensor control
 
    // special model IDs
-   int cmtOwnship{302};                   // Ownship's model ID
+   int cmtOwnship{118};                   // Ownship's model ID
    int cmtMslTrail{1100};                 // "Missile Trail" effect model ID
    int cmtSmokePlume{1101};               // "Smoke Plume" effect model ID
    int cmtAirExplosion{1102};             // "Air Explosion" effect model ID

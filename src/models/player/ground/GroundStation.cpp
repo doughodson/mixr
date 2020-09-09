@@ -13,7 +13,8 @@ GroundStation::GroundStation()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GroundStation");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GroundStation");
 }
 
 }

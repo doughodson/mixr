@@ -12,7 +12,8 @@ Building::Building()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericBuilding");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericBuilding");
 }
 
 void Building::copyData(const Building& org, const bool)

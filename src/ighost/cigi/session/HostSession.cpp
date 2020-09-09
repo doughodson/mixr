@@ -70,6 +70,8 @@ bool HostSession::initialize(CigiHost* const p)
 
    //session->SetCigiVersion(2);     // CGB only force this if necessary
    // CGBCGB ??? session->SetSynchronous(p->isSyncMode());
+   session->SetCigiVersion(3);
+   session->SetSynchronous(p->isSyncMode());
 
    // setup convenience pointers to message queues
    msgOut = &session->GetOutgoingMsgMgr();
@@ -78,7 +80,8 @@ bool HostSession::initialize(CigiHost* const p)
    // create signal processor object
    sigProcessor.reset(new SignalProcessor(parent));
 
-   msgIn->SetReaderCigiVersion(2);
+   msgIn->SetReaderCigiVersion(3,3);
+   //msgIn->SetReaderCigiVersion(2);
    msgIn->UsingIteration(false);
    msgIn->RegisterSignalProcessor(sigProcessor.get());
 
@@ -89,9 +92,9 @@ bool HostSession::initialize(CigiHost* const p)
       if (networkInitFailed) return false;
    }
 
-   if (isMessageEnabled(MSG_INFO)) {
+//   if (isMessageEnabled(MSG_INFO)) {
       std::cout << "HostSession::initialize(): CIGI host session initialized!" << std::endl;
-   }
+//   }
    return true;
 }
 

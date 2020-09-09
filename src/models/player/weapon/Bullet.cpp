@@ -26,7 +26,8 @@ Bullet::Bullet()
    STANDARD_CONSTRUCTOR()
 
    static base::String generic("Bullet");
-   setType(&generic);
+   setType_old(&generic);
+   setType("Bullet");
 
    setMaxTOF( DEFAULT_MAX_TOF );
 }

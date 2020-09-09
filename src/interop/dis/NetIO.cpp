@@ -1761,7 +1761,7 @@ void NetIO::testInputEntityTypes(const int n)
             if (foundNtm != nullptr) {
                const models::Player* foundP {origNtm->getTemplatePlayer()};
                std::cout << "; form: " << foundP->getFactoryName();
-               base::safe_ptr<const base::String> foundType( static_cast<const base::String*>( foundP->getType() ) );
+               base::safe_ptr<const base::String> foundType( static_cast<const base::String*>( foundP->getType_old() ) );
                if (foundType != nullptr) std::cout << "; type: " << *foundType;
             }
             if (origNtm == foundNtm) {
@@ -1801,7 +1801,7 @@ void NetIO::testOutputEntityTypes(const int n)
             models::Player* origP1 {origP->clone()};
 
             std::cout << "; form: " << origP->getFactoryName();
-            base::safe_ptr<base::String> origType( (base::String*) origP->getType() );
+            base::safe_ptr<base::String> origType( (base::String*) origP->getType_old() );
             if (origType != nullptr) {
 
                char cbuff[64] {};
@@ -1815,9 +1815,9 @@ void NetIO::testOutputEntityTypes(const int n)
 #endif
 
                const auto newType = new base::String(cbuff);
-               origP1->setType(newType);
+               origP1->setType_old(newType);
 
-               const auto origType1 = const_cast<base::String*>(static_cast<const base::String*>(origP1->getType()));
+               const auto origType1 = const_cast<base::String*>(static_cast<const base::String*>(origP1->getType_old()));
                std::cout << "; type1: " << *origType1;
             }
 

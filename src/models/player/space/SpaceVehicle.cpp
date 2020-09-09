@@ -17,7 +17,8 @@ SpaceVehicle::SpaceVehicle()
    STANDARD_CONSTRUCTOR()
 
    static base::String generic("GenericSpaceVehicle");
-   setType(&generic);
+   setType_old(&generic);
+   setType("GenericSpaceVehicle");
 }
 
 //-----------------------------------------------------------------------------

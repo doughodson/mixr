@@ -51,6 +51,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 #include <cmath>
+#include <string>
 
 namespace mixr {
 namespace models {
@@ -238,7 +239,8 @@ Player::Player()
 void Player::initData()
 {
    static base::String generic("GenericPlayer");
-   setType(&generic);
+   setType_old(&generic);
+   setType("GenericPlayer");
 
    base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
@@ -278,8 +280,8 @@ void Player::copyData(const Player& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   const base::String* tt{org.type};
-   setType( const_cast<base::String*>(static_cast<const base::String*>(tt)) );
+   const base::String* tt{org.type_old};
+   setType_old( const_cast<base::String*>(static_cast<const base::String*>(tt)) );
 
    side = org.side;
 
@@ -408,7 +410,7 @@ void Player::copyData(const Player& org, const bool cc)
 
 void Player::deleteData()
 {
-   type = nullptr;
+   type_old = nullptr;
    signature = nullptr;
    irSignature = nullptr;
    sim = nullptr;
@@ -425,7 +427,7 @@ void Player::deleteData()
    setSensor(nullptr);
    setStoresMgr(nullptr);
 
-   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+   for (unsigned int i{}; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
    }
 }
@@ -435,7 +437,7 @@ void Player::deleteData()
 //------------------------------------------------------------------------------
 bool Player::shutdownNotification()
 {
-   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
+   for (unsigned int i{}; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
    }
 
@@ -643,12 +645,6 @@ void Player::updateData(const double dt)
 //-----------------------------------------------------------------------------
 // Get functions
 //-----------------------------------------------------------------------------
-
-// getMajorType() -- Returns the player's major type
-unsigned int Player::getMajorType() const
-{
-   return GENERIC;
-}
 
 // Player's gross weight (lbs)
 double Player::getGrossWeight() const
@@ -1572,13 +1568,20 @@ base::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(const base::String* const x)
+bool Player::setType(const std::string& x)
+{
+   type = x;
+   return true;
+}
+
+// Sets player's type string ("F-16A", "Tank", "SA-6", etc)
+bool Player::setType_old(const base::String* const x)
 {
    if (x != nullptr) {
       base::String* p{x->clone()};
-      type.set(p, false);
+      type_old.set(p, false);
    } else {
-      type = nullptr;
+      type_old = nullptr;
    }
    return true;
 }
@@ -3290,16 +3293,16 @@ bool Player::setGimbal(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setNavigation() -- Set our navigation system
 //------------------------------------------------------------------------------
-bool Player::setNavigation(base::Pair* const sys)
+bool Player::setNavigation(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (nav != nullptr) nav->unref();
       nav = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(Navigation)) ) {
+   } else if ( x->object()->isClassType(typeid(Navigation)) ) {
       if (nav != nullptr) nav->unref();
-      nav = sys;
+      nav = x;
       nav->ref();
       ok = true;
    }
@@ -3309,16 +3312,16 @@ bool Player::setNavigation(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setOnboardComputer() -- Sets our onboard computer model
 //------------------------------------------------------------------------------
-bool Player::setOnboardComputer(base::Pair* const sys)
+bool Player::setOnboardComputer(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (obc != nullptr) obc->unref();
       obc = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(OnboardComputer)) ) {
+   } else if ( x->object()->isClassType(typeid(OnboardComputer)) ) {
       if (obc != nullptr) obc->unref();
-      obc = sys;
+      obc = x;
       obc->ref();
       ok = true;
    }
@@ -3328,16 +3331,16 @@ bool Player::setOnboardComputer(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setPilot() -- Set our pilot model
 //------------------------------------------------------------------------------
-bool Player::setPilot(base::Pair* const sys)
+bool Player::setPilot(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (pilot != nullptr) pilot->unref();
       pilot = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(Pilot)) ) {
+   } else if ( x->object()->isClassType(typeid(Pilot)) ) {
       if (pilot != nullptr) pilot->unref();
-      pilot = sys;
+      pilot = x;
       pilot->ref();
       ok = true;
    }
@@ -3347,16 +3350,16 @@ bool Player::setPilot(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setRadio() -- Sets our radio models
 //------------------------------------------------------------------------------
-bool Player::setRadio(base::Pair* const sys)
+bool Player::setRadio(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (radio != nullptr) radio->unref();
       radio = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(Radio)) ) {
+   } else if ( x->object()->isClassType(typeid(Radio)) ) {
       if (radio != nullptr) radio->unref();
-      radio = sys;
+      radio = x;
       radio->ref();
       ok = true;
    }
@@ -3366,16 +3369,16 @@ bool Player::setRadio(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setSensor() -- Sets our sensor models
 //------------------------------------------------------------------------------
-bool Player::setSensor(base::Pair* const sys)
+bool Player::setSensor(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (sensor != nullptr) sensor->unref();
       sensor = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(RfSensor)) ) {
+   } else if ( x->object()->isClassType(typeid(RfSensor)) ) {
       if (sensor != nullptr) sensor->unref();
-      sensor = sys;
+      sensor = x;
       sensor->ref();
       ok = true;
    }
@@ -3385,16 +3388,16 @@ bool Player::setSensor(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setIrSystem() -- Sets our IR sensor models
 //------------------------------------------------------------------------------
-bool Player::setIrSystem(base::Pair* const sys)
+bool Player::setIrSystem(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (irSystem != nullptr) irSystem->unref();
       irSystem = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(IrSystem)) ) {
+   } else if ( x->object()->isClassType(typeid(IrSystem)) ) {
       if (irSystem != nullptr) irSystem->unref();
-      irSystem = sys;
+      irSystem = x;
       irSystem->ref();
       ok = true;
    }
@@ -3404,16 +3407,16 @@ bool Player::setIrSystem(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setStoresMgr() -- Set our stores management system
 //------------------------------------------------------------------------------
-bool Player::setStoresMgr(base::Pair* const sys)
+bool Player::setStoresMgr(base::Pair* const x)
 {
    bool ok{};
-   if (sys == nullptr) {
+   if (x == nullptr) {
       if (sms != nullptr) sms->unref();
       sms = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(StoresMgr)) ) {
+   } else if ( x->object()->isClassType(typeid(StoresMgr)) ) {
       if (sms != nullptr) sms->unref();
-      sms = sys;
+      sms = x;
       sms->ref();
       ok = true;
    }
@@ -3421,24 +3424,24 @@ bool Player::setStoresMgr(base::Pair* const sys)
 }
 
 // initXPos: X position (+north)
-bool Player::setSlotInitXPos(const base::Length* const msg)
+bool Player::setSlotInitXPos(const base::Length* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[INORTH] = msg->getValueInMeters();
+      pos[INORTH] = x->getValueInMeters();
       ok = setInitPosition(pos);
    }
    return ok;
 }
 
 // initXPos: X position (+north) (meters)
-bool Player::setSlotInitXPos(const base::Number* const msg)
+bool Player::setSlotInitXPos(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[INORTH] = msg->asDouble();
+      pos[INORTH] = x->asDouble();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3456,13 +3459,13 @@ bool Player::setSlotInitYPos(const base::Length* const x)
    return ok;
 }
 
-// initYPos: Y position (+east)(meters)
-bool Player::setSlotInitYPos(const base::Number* const msg)
+// initYPos: Y position (+east) (meters)
+bool Player::setSlotInitYPos(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
+   if (x != nullptr) {
       base::Vec2d pos{getInitPosition()};
-      pos[IEAST] = msg->asDouble();
+      pos[IEAST] = x->asDouble();
       ok = setInitPosition(pos);
    }
    return ok;
@@ -3480,11 +3483,11 @@ bool Player::setSlotInitAlt(const base::Length* const x)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up) (meters)
-bool Player::setSlotInitAlt(const base::Number* const msg)
+bool Player::setSlotInitAlt(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      double value{msg->asDouble()};
+   if (x != nullptr) {
+      double value{x->asDouble()};
       setInitAltitude( value );
       ok = true;
    }
@@ -3492,11 +3495,11 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::Latitude* const msg)
+bool Player::setSlotInitLat(const base::Latitude* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->getDecimalDegrees()};
+   if (x != nullptr) {
+      const double val{x->getDecimalDegrees()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3507,11 +3510,11 @@ bool Player::setSlotInitLat(const base::Latitude* const msg)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::Angle* const msg)
+bool Player::setSlotInitLat(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->getValueInDegrees()};
+   if (x != nullptr) {
+      const double val{x->getValueInDegrees()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3522,11 +3525,11 @@ bool Player::setSlotInitLat(const base::Angle* const msg)
 }
 
 // initLatitude: Latitude (degrees)
-bool Player::setSlotInitLat(const base::Number* const msg)
+bool Player::setSlotInitLat(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->asDouble()};
+   if (x != nullptr) {
+      const double val{x->asDouble()};
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
@@ -3537,11 +3540,11 @@ bool Player::setSlotInitLat(const base::Number* const msg)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::Longitude* const msg)
+bool Player::setSlotInitLon(const base::Longitude* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->getDecimalDegrees()};
+   if (x != nullptr) {
+      const double val{x->getDecimalDegrees()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3552,11 +3555,11 @@ bool Player::setSlotInitLon(const base::Longitude* const msg)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::Angle* const msg)
+bool Player::setSlotInitLon(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->getValueInDegrees()};
+   if (x != nullptr) {
+      const double val{x->getValueInDegrees()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3567,11 +3570,11 @@ bool Player::setSlotInitLon(const base::Angle* const msg)
 }
 
 // initLongitude: Longitude (degrees)
-bool Player::setSlotInitLon(const base::Number* const msg)
+bool Player::setSlotInitLon(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double val{msg->asDouble()};
+   if (x != nullptr) {
+      const double val{x->asDouble()};
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
@@ -3582,11 +3585,11 @@ bool Player::setSlotInitLon(const base::Number* const msg)
 }
 
 // initGeocentric: Position vector [ x y z ] (meters)
-bool Player::setSlotInitGeocentric(const base::List* const msg)
+bool Player::setSlotInitGeocentric(const base::List* const x)
 {
    bool ok{};
    double values[3]{};
-   const std::size_t n{msg->getNumberList(values, 3)};
+   const std::size_t n{x->getNumberList(values, 3)};
    if (n == 3) {
       base::Vec3d pos(values[0], values[1], values[2]);
       ok = setInitGeocentricPosition(pos);
@@ -3595,11 +3598,11 @@ bool Player::setSlotInitGeocentric(const base::List* const msg)
 }
 
 // initRoll: Initial roll angle
-bool Player::setSlotInitRoll(const base::Angle* const msg)
+bool Player::setSlotInitRoll(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double value{msg->getValueInRadians()};
+   if (x != nullptr) {
+      const double value{x->getValueInRadians()};
       if ( value >= -base::PI && value <= base::PI ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3612,11 +3615,11 @@ bool Player::setSlotInitRoll(const base::Angle* const msg)
 }
 
 // initRoll: Initial roll angle (radians)
-bool Player::setSlotInitRoll(const base::Number* const msg)
+bool Player::setSlotInitRoll(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double value{msg->asDouble()};
+   if (x != nullptr) {
+      const double value{x->asDouble()};
       if ( value >= -(2.0*base::PI) && value <= (2.0*base::PI) ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3629,11 +3632,11 @@ bool Player::setSlotInitRoll(const base::Number* const msg)
 }
 
 // initPitch: Initial pitch angle
-bool Player::setInitPitch(const base::Angle* const msg)
+bool Player::setInitPitch(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double value{msg->getValueInRadians()};
+   if (x != nullptr) {
+      const double value{x->getValueInRadians()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3646,11 +3649,11 @@ bool Player::setInitPitch(const base::Angle* const msg)
 }
 
 // initPitch: Initial pitch angle (radians)
-bool Player::setInitPitch(const base::Number* const msg)
+bool Player::setInitPitch(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const double value{msg->asDouble()};
+   if (x != nullptr) {
+      const double value{x->asDouble()};
       if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3663,11 +3666,11 @@ bool Player::setInitPitch(const base::Number* const msg)
 }
 
 // initHeading: Initial heading angle
-bool Player::setInitHeading(const base::Angle* const msg)
+bool Player::setInitHeading(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      double value{msg->getValueInRadians()};
+   if (x != nullptr) {
+      double value{x->getValueInRadians()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
@@ -3681,11 +3684,11 @@ bool Player::setInitHeading(const base::Angle* const msg)
 }
 
 // initHeading: Initial heading angle (radians)
-bool Player::setInitHeading(const base::Number* const msg)
+bool Player::setInitHeading(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      double value{msg->asDouble()};
+   if (x != nullptr) {
+      double value{x->asDouble()};
       if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
          if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
@@ -3721,11 +3724,11 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 }
 
 // testRollRate: Test roll rate
-bool Player::setSlotTestRollRate(const base::Angle* const msg)
+bool Player::setSlotTestRollRate(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      testAngRates[IROLL] = msg->getValueInRadians();
+   if (x != nullptr) {
+      testAngRates[IROLL] = x->getValueInRadians();
       ok = true;
    }
 
@@ -3733,11 +3736,11 @@ bool Player::setSlotTestRollRate(const base::Angle* const msg)
 }
 
 // testPitchRate: Test pitch rate
-bool Player::setSlotTestPitchRate(const base::Angle* const msg)
+bool Player::setSlotTestPitchRate(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      testAngRates[IPITCH] = msg->getValueInRadians();
+   if (x != nullptr) {
+      testAngRates[IPITCH] = x->getValueInRadians();
       ok = true;
    }
 
@@ -3745,11 +3748,11 @@ bool Player::setSlotTestPitchRate(const base::Angle* const msg)
 }
 
 // testHeadingRate: Test heading rate
-bool Player::setSlotTestYawRate(const base::Angle* const msg)
+bool Player::setSlotTestYawRate(const base::Angle* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      testAngRates[IYAW] = msg->getValueInRadians();
+   if (x != nullptr) {
+      testAngRates[IYAW] = x->getValueInRadians();
       ok = true;
    }
 
@@ -3757,11 +3760,11 @@ bool Player::setSlotTestYawRate(const base::Angle* const msg)
 }
 
 // testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
-bool Player::setSlotTestBodyAxis(const base::Boolean* const msg)
+bool Player::setSlotTestBodyAxis(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      testBodyAxis = msg->asBool();
+   if (x != nullptr) {
+      testBodyAxis = x->asBool();
       ok = true;
    }
    return ok;
@@ -3769,71 +3772,45 @@ bool Player::setSlotTestBodyAxis(const base::Boolean* const msg)
 
 
 // initVelocity: Initial Velocity: meters/second
-bool Player::setSlotInitVelocity(const base::Number* const msg)
+bool Player::setSlotInitVelocity(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      initVp = msg->asDouble();
+   if (x != nullptr) {
+      initVp = x->asDouble();
       ok = true;
    }
    return ok;
 }
 
 // initVelocityKts: Initial Velocity: knots (NM/hour)
-bool Player::setSlotInitVelocityKts(const base::Number* const msg)
+bool Player::setSlotInitVelocityKts(const base::Number* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      initVp = (msg->asDouble() * mixr::base::length::NM2M) / 3600.0f;
+   if (x != nullptr) {
+      initVp = (x->asDouble() * mixr::base::length::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
 }
 
-
-// id: Player id  [ 1 .. 65535 ]
-/*
-bool Player::setSlotID(const base::Number* const num)
+bool Player::setSlotType(const base::String* const x)
 {
-   bool ok{};
-   int newID{num->getInt()};
-   if (newID > 0 && newID <= 65535) {
-      setID( static_cast<unsigned short>(newID)  );
-      ok = true;
-   } else {
-      std::cerr << "Player::setSlotID(): Invalid ID number: range 1 .. 65535" << std::endl;
-   }
-   return ok;
+   type = x->c_str();
+   return setType_old(x);
 }
-*/
 
 // side: Which side? { blue, red, yellow, cyan, gray, white }
-bool Player::setSlotSide(base::Identifier* const x)
+bool Player::setSlotSide(const base::Identifier* const x)
 {
    bool ok{};
-   if (*x == "blue" || *x == "BLUE") { setSide(BLUE); ok = true; }
-   else if (*x == "red" || *x == "RED") { setSide(RED); ok = true; }
-   else if (*x == "gray" || *x == "GRAY") { setSide(GRAY); ok = true; }
-   else if (*x == "white" || *x == "WHITE") { setSide(WHITE); ok = true; }
+   if (*x == "blue" || *x == "BLUE")          { setSide(BLUE); ok = true; }
+   else if (*x == "red" || *x == "RED")       { setSide(RED); ok = true; }
+   else if (*x == "gray" || *x == "GRAY")     { setSide(GRAY); ok = true; }
+   else if (*x == "white" || *x == "WHITE")   { setSide(WHITE); ok = true; }
    else if (*x == "yellow" || *x == "YELLOW") { setSide(YELLOW); ok = true; }
-   else if (*x == "cyan" || *x == "CYAN") { setSide(CYAN); ok = true; }
+   else if (*x == "cyan" || *x == "CYAN")     { setSide(CYAN); ok = true; }
    return ok;
 }
-
-// mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
-/*
-bool Player::setSlotInitMode(base::String* const msg)
-{
-   bool ok{};
-   if (*msg == "inactive" || *msg == "INACTIVE") { setInitMode(INACTIVE); ok = true; }
-   else if (*msg == "active" || *msg == "ACTIVE") { setInitMode(ACTIVE); ok = true; }
-   else if (*msg == "killed" || *msg == "KILLED") { setInitMode(KILLED); ok = true; }
-   else if (*msg == "crashed" || *msg == "CRASHED") { setInitMode(CRASHED); ok = true; }
-   else if (*msg == "detonated" || *msg == "DETONATED") { setInitMode(DETONATED); ok = true; }
-   else if (*msg == "launched" || *msg == "LAUNCHED") { setInitMode(LAUNCHED); ok = true; }
-   return ok;
-}
-*/
 
 // useCoordSys: Coord system to use for updating player position
 bool Player::setSlotUseCoordSys(base::Identifier* const x)

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ighost_cigi_IgHost_HPP__
-#define __mixr_ighost_cigi_IgHost_HPP__
+#ifndef __mixr_ighost_cigi3_IgHost_HPP__
+#define __mixr_ighost_cigi3_IgHost_HPP__
 
 #include "mixr/simulation/AbstractIgHost.hpp"
 
@@ -149,10 +149,10 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMaxRange(const base::Length* const);        // Sets the max range (Length) slot
-   bool setSlotMaxRange(const base::Number* const);        // Sets the max range (meters) slot
-   bool setSlotMaxModels(const base::Integer* const);      // Sets the max number of active, in-range player/models slot
-   bool setSlotMaxElevations(const base::Integer* const);  // Sets the max number of player terrain elevation requests slot
+   bool setSlotMaxRange(const base::Length* const);        // Sets the max range (Length)
+   bool setSlotMaxRange(const base::Number* const);        // Sets the max range (meters)
+   bool setSlotMaxModels(const base::Integer* const);      // Sets the max number of active, in-range player/models
+   bool setSlotMaxElevations(const base::Integer* const);  // Sets the max number of player terrain elevation requests
    bool setSlotTypeMap(const base::PairStream* const);     // Sets the list of IG model type IDs (TypeMapper objects)
 };
 

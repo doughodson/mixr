@@ -66,11 +66,11 @@ BEGIN_SLOTTABLE(CigiHost)
    "async",                // 2) True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
    "hideOwnshipModel",     // 3) True to hide the ownship's model (default: true - ownship's model is not seen)
    "ownshipModel",         // 4) Ownship's model ID
-   "mslTrailModel",        // 5) Missile Trail" effect model ID
-   "smokePlumeModel",      // 6) Smoke Plume" effect model ID
-   "airExplosionModel",    // 7) Air Explosion" effect model ID
-   "groundExplosionModel", // 8) Ground Explosion" effect model ID
-   "shipWakeModel",        // 9) Ship Wake" effect model ID
+   "mslTrailModel",        // 5) "Missile Trail" effect model ID
+   "smokePlumeModel",      // 6) "Smoke Plume" effect model ID
+   "airExplosionModel",    // 7) "Air Explosion" effect model ID
+   "groundExplosionModel", // 8) "Ground Explosion" effect model ID
+   "shipWakeModel"         // 9) "Ship Wake" effect model ID
 END_SLOTTABLE(CigiHost)
 
 BEGIN_SLOT_MAP(CigiHost)
@@ -95,7 +95,7 @@ CigiHost::CigiHost()
 {
    STANDARD_CONSTRUCTOR()
 
-   for (int i = 0; i < NUM_BUFFERS; i++) {
+   for (int i{}; i < NUM_BUFFERS; i++) {
       ownshipEC[i] = new CigiEntityCtrlV3();
       ownshipCC[i] = new CigiCompCtrlV3();
    }
@@ -110,7 +110,7 @@ void CigiHost::copyData(const CigiHost& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      for (int i = 0; i < NUM_BUFFERS; i++) {
+      for (int i{}; i < NUM_BUFFERS; i++) {
          ownshipEC[i] = new CigiEntityCtrlV3();
          ownshipCC[i] = new CigiCompCtrlV3();
       }
@@ -171,7 +171,7 @@ void CigiHost::deleteData()
       igThread = nullptr;
    }
 
-   for (int i = 0; i < NUM_BUFFERS; i++) {
+   for (int i{}; i < NUM_BUFFERS; i++) {
       if (ownshipEC[i] != nullptr) { delete ownshipEC[i]; ownshipEC[i] = nullptr; }
       if (ownshipCC[i] != nullptr) { delete ownshipCC[i]; ownshipCC[i] = nullptr; }
    }
@@ -401,7 +401,7 @@ int CigiHost::updateModels()
    if (table != nullptr && getModelTableSize() > 0) {
 
       // For all active models in the table ...
-      for (int i = 0; i < getModelTableSize(); i++) {
+      for (int i{}; i < getModelTableSize(); i++) {
          base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
          if (model != nullptr) {
 
@@ -620,13 +620,13 @@ bool CigiHost::setBuildingData(CigiModel* const m, const int entity, const model
 
       if (p->getDamage() > 0.0) {
          if (p->isDestroyed()) {
-            damage->SetCompState(3);    // 3 = DISTROYED
+            damage->SetCompState(3);    // 3 = DESTROYED
          } else {
             damage->SetCompState(2);    // 2 = DAMAGED
          }
          m->damageActive = true;
       } else {
-         damage->SetCompState(1);       // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DISTROYED
+         damage->SetCompState(1);       // 0 = DEFAULT, 1 = GOOD, 2 = DAMAGED, 3 = DESTROYED
       }
    } else {
       ec->SetEntityState(CigiEntityCtrlV3::Standby);
@@ -1344,39 +1344,39 @@ bool CigiHost::getLineOfSightData(
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool CigiHost::setSlotHostSession(HostSession* const msg)
+bool CigiHost::setSlotHostSession(HostSession* const x)
 {
-   session = msg;
+   session = x;
    return true;
 }
 
 // Set/clear the ASYNC mode
-bool CigiHost::setSlotASyncMode(const base::Boolean* const msg)
+bool CigiHost::setSlotASyncMode(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      setASyncMode(msg->asBool());
+   if (x != nullptr) {
+      setASyncMode(x->asBool());
       ok = true;
    }
    return ok;
 }
 
 // Set/clear the hide ownship model flag
-bool CigiHost::setSlotHideOwnshipModel(const base::Boolean* const msg)
+bool CigiHost::setSlotHideOwnshipModel(const base::Boolean* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      setHideOwnshipModel(msg->asBool());
+   if (x != nullptr) {
+      setHideOwnshipModel(x->asBool());
       ok = true;
    }
    return ok;
 }
 
-bool CigiHost::setSlotOwnshipModelId(const base::Integer* const msg)
+bool CigiHost::setSlotOwnshipModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setOwnshipModelId(id);
          ok = true;
@@ -1385,11 +1385,11 @@ bool CigiHost::setSlotOwnshipModelId(const base::Integer* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotMslTrailModelId(const base::Integer* const msg)
+bool CigiHost::setSlotMslTrailModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setMslTrailModelId(id);
          ok = true;
@@ -1398,11 +1398,11 @@ bool CigiHost::setSlotMslTrailModelId(const base::Integer* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotSmokePlumeModelId(const base::Integer* const msg)
+bool CigiHost::setSlotSmokePlumeModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setSmokePlumeModelId(id);
          ok = true;
@@ -1411,11 +1411,11 @@ bool CigiHost::setSlotSmokePlumeModelId(const base::Integer* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotAirExplosionModelId(const base::Integer* const msg)
+bool CigiHost::setSlotAirExplosionModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setAirExplosionModelId(id);
          ok = true;
@@ -1424,11 +1424,11 @@ bool CigiHost::setSlotAirExplosionModelId(const base::Integer* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotGroundExplosionModelId(const base::Integer* const msg)
+bool CigiHost::setSlotGroundExplosionModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setGroundExplosionModelId(id);
          ok = true;
@@ -1437,11 +1437,11 @@ bool CigiHost::setSlotGroundExplosionModelId(const base::Integer* const msg)
    return ok;
 }
 
-bool CigiHost::setSlotShipWakeModelId(const base::Integer* const msg)
+bool CigiHost::setSlotShipWakeModelId(const base::Integer* const x)
 {
    bool ok{};
-   if (msg != nullptr) {
-      const int id{msg->asInt()};
+   if (x != nullptr) {
+      const int id{x->asInt()};
       if (id >= 0 && id <= 0xFFFF) {
          setShipWakeModelId(id);
          ok = true;
@@ -1483,7 +1483,7 @@ bool CigiHost::sendCigiData()
    // And add an Entity Control packet for the "ownship."
    // ---
    session->addPacketEntityCtrl(getOwnshipEntityControlPacket(ir));
-   session->addPacketComponentCtrl(getOwnshipComponentControlPacket(ir));
+//   session->addPacketComponentCtrl(getOwnshipComponentControlPacket(ir));
 
    // ---
    // Send all entity controls from the model table
@@ -1502,7 +1502,7 @@ bool CigiHost::sendCigiData()
          // Add all of the models (that we can) to the buffer.
          int sendSize{session->getOutgoingBufferSize()};
          int maxAge{static_cast<int>(getModelTableSize())};
-         for (int i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
+         for (int i{}; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
             base::safe_ptr<CigiModel> model( static_cast<CigiModel*>(table[i]) );
             if (model != nullptr) {
 
@@ -1598,7 +1598,7 @@ bool CigiHost::sendCigiData()
          // -- look for the oldest request ---
          base::safe_ptr<CigiModel> oldest;
          base::safe_ptr<CigiModel> model;
-         for (int i = 0; i < getElevationTableSize(); i++) {
+         for (int i{}; i < getElevationTableSize(); i++) {
             model = table[i];
             if (model != nullptr) {
                // Must be active and haven't been requested for at least TBD frames ...
@@ -1613,7 +1613,7 @@ bool CigiHost::sendCigiData()
          if (oldest != nullptr) {
 
             int idx{-1};
-            for (int i = 0; idx < 0 && i < getElevationTableSize(); i++) {
+            for (int i{}; idx < 0 && i < getElevationTableSize(); i++) {
                if (table[i] == oldest) idx = i;
             }
 
@@ -1716,7 +1716,6 @@ bool CigiHost::sendCigiData()
       //}
 
    }
-
    // ---
    // End the message.
    // ---

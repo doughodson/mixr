@@ -13,7 +13,8 @@ WheeledVehicle::WheeledVehicle()
 {
     STANDARD_CONSTRUCTOR()
     static base::String generic("GenericWheeledVehicle");
-    setType(&generic);
+    setType_old(&generic);
+    setType("GenericWheeledVehicle");
 }
 
 }

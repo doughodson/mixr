@@ -397,65 +397,66 @@ public:
    // Type and ID
    // ---
 
-   virtual unsigned int getMajorType() const;                             // The player's 'major type' enum
-   virtual bool isMajorType(const unsigned int) const;                    // True if player is of these (bit-wise or'd) major types
+   virtual unsigned int getMajorType() const    { return GENERIC; }                      // The player's 'major type' enum
+   bool isMajorType(const unsigned int x) const { return ((x & getMajorType()) != 0); }  // True if player is of these (bit-wise or'd) major types
 
-   virtual const base::String* getType() const;                           // The player's type string (e.g., "F-16C")
+   const base::String* getType_old() const      { return type_old; }            // The player's type string (e.g., "F-16C")
+   const std::string& getType() const           { return type; }                // The player's type string (e.g., "F-16C")
 
-   virtual Side getSide() const;                                          // The 'side' that the player is on.
-   virtual bool isSide(const unsigned int) const;                         // True if player is with one of these (bit-wise or'd) sides
-   virtual bool isNotSide(const unsigned int) const;                      // True if player is not with one one of these (bit-wise or'd) sides
+   Side getSide() const                         { return side; }                // The 'side' that the player is on.
+   bool isSide(const unsigned int x) const      { return ((x & side) != 0); }   // True if player is with one of these (bit-wise or'd) sides
+   bool isNotSide(const unsigned int x) const   { return ((x & side) == 0); }   // True if player is not with one one of these (bit-wise or'd) sides
 
    // ---
    // State data
    // ---
 
-   virtual double getRoll() const;                                  // Roll Euler angle (radians) by default
-   virtual double getRollR() const;                                 // Roll Euler angle (radians)
-   virtual double getRollD() const;                                 // Roll Euler angle (degrees)
-   virtual double getSinRoll() const;                               // Sin of the Euler roll angle
-   virtual double getCosRoll() const;                               // Cos of the  Euler roll angle
+   virtual double getRoll() const       { return angles[IROLL]; }       // Roll Euler angle (radians) by default
+   virtual double getRollR() const      { return angles[IROLL]; }       // Roll Euler angle (radians)
+   virtual double getRollD() const      { return (base::angle::R2DCC * angles[IROLL]); } // Roll Euler angle (degrees)
+   virtual double getSinRoll() const    { return scPhi[0]; }            // sin of the Euler roll angle
+   virtual double getCosRoll() const    { return scPhi[1]; }            // cos of the Euler roll angle
 
-   virtual double getPitch() const;                                 // Pitch Euler angle (radians) by default
-   virtual double getPitchR() const;                                // Pitch Euler angle (radians)
-   virtual double getPitchD() const;                                // Pitch Euler angle (degrees)
-   virtual double getSinPitch() const;                              // Sin of the pitch Euler angle
-   virtual double getCosPitch() const;                              // Cos of the  pitch Euler angle
+   virtual double getPitch() const      { return angles[IPITCH]; }      // Pitch Euler angle (radians) by default
+   virtual double getPitchR() const     { return angles[IPITCH]; }      // Pitch Euler angle (radians)
+   virtual double getPitchD() const     { return (base::angle::R2DCC * angles[IPITCH]); } // Pitch Euler angle (degrees)
+   virtual double getSinPitch() const   { return scTheta[0]; }           // sin of the pitch Euler angle
+   virtual double getCosPitch() const   { return scTheta[1]; }           // cos of the  pitch Euler angle
 
-   virtual double getHeading() const;                               // Yaw Euler angle (radians) by default
-   virtual double getHeadingR() const;                              // Yaw Euler angle (radians)
-   virtual double getHeadingD() const;                              // Yaw Euler angle (degrees)
-   virtual double getSinHeading() const;                            // Sin of the yaw Euler angle
-   virtual double getCosHeading() const;                            // Cos of the  yaw Euler angle
+   virtual double getHeading() const    { return angles[IYAW]; }         // Yaw Euler angle (radians) by default
+   virtual double getHeadingR() const   { return angles[IYAW]; }         // Yaw Euler angle (radians)
+   virtual double getHeadingD() const   { return (base::angle::R2DCC * angles[IYAW]); }  // Yaw Euler angle (degrees)
+   virtual double getSinHeading() const { return scPsi[0]; }             // sin of the yaw Euler angle
+   virtual double getCosHeading() const { return scPsi[1]; }             // cos of the  yaw Euler angle
 
-   virtual const base::Vec3d& getEulerAngles() const;               // Euler angles (radians); geodetic (body/NED)
-   virtual const base::Quat& getQuaternions() const;                // Rotational Quaternions
+   virtual const base::Vec3d& getEulerAngles() const { return angles; }  // Euler angles (radians); geodetic (body/NED)
+   virtual const base::Quat& getQuaternions() const  { return q; }       // Rotational Quaternions
 
-   virtual const base::Matrixd& getRotMat() const;                  // Rotational Matrix: (directional cosines)
-                                                                    //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw]
-                                                                    //    Usage:
-                                                                    //       Vb = M * Vi
-                                                                    //       Vi  = Vb * M
-                                                                    //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
+   virtual const base::Matrixd& getRotMat() const    { return rm; }      // Rotational Matrix: (directional cosines)
+                                                                         //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw]
+                                                                         //    Usage:
+                                                                         //       Vb = M * Vi
+                                                                         //       Vi  = Vb * M
+                                                                         //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
 
-   virtual const base::Matrixd& getRotMatW2B() const;               // Rotational Matrix: world to body
-                                                                    //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw] * Ry[-(90+lat)] * Rz[lon]
-                                                                    //    Usage:
-                                                                    //       Vb = M * Vw
-                                                                    //       Vw  = Vb * M
-                                                                    //    Where: 'Vb' is a body vector; 'Vw' is a world (ECEF) vector
+   virtual const base::Matrixd& getRotMatW2B() const { return rmW2B; }   // Rotational Matrix: world to body
+                                                                         //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw] * Ry[-(90+lat)] * Rz[lon]
+                                                                         //    Usage:
+                                                                         //       Vb = M * Vw
+                                                                         //       Vw  = Vb * M
+                                                                         //    Where: 'Vb' is a body vector; 'Vw' is a world (ECEF) vector
 
-   virtual const base::Vec3d& getGeocEulerAngles() const;           // Geocentric (body/ECEF) Euler angles
+   virtual const base::Vec3d& getGeocEulerAngles() const { return anglesW; }      // Geocentric (body/ECEF) Euler angles
 
-   virtual const base::Vec3d& getAngularVelocities() const;         // Body angular rates (radians/second)
-   virtual const base::Vec3d& getGeocAngularVelocities() const;     // Geocentric angular rates (radians/second)
+   virtual const base::Vec3d& getAngularVelocities() const { return angularVel; }  // Body angular rates (radians/second)
+   virtual const base::Vec3d& getGeocAngularVelocities() const { return gcAngVel;} // Geocentric angular rates (radians/second)
 
    virtual const base::Vec3d& getGeocPosition() const;              // Geocentric (ECEF) position vector [ x y z ] (meters)
 
-   virtual double getLatitude() const;                              // Player's latitude (degrees)
-   virtual double getLongitude() const;                             // Player's longitude (degrees)
+   virtual double getLatitude() const { return latitude; }          // Player's latitude (degrees)
+   virtual double getLongitude() const { return longitude; }        // Player's longitude (degrees)
 
-   virtual const base::Matrixd& getWorldMat() const;                // World transformation matrix:
+   virtual const base::Matrixd& getWorldMat() const { return wm; }  // World transformation matrix:
                                                                     //    Local inertial tangent plane (NED) <==> World (ECEF)
                                                                     //    Matrix: M = Ry[-(90+lat)] * Rz[lon]
                                                                     //    Usage:
@@ -468,10 +469,10 @@ public:
    virtual bool getPositionLL(double* const lat, double* const lon) const;                     // Player's Lat/lon (degrees)
    virtual bool getPositionLLA(double* const lat, double* const lon, double* const alt) const; // Player's Lat/Lon (degrees) and altitude (meters)
 
-   virtual double getXPosition() const;                             // North(+) or south(-) of the sim reference point (meters)
-   virtual double getYPosition() const;                             // East(+) or west(-) of the sim reference point (meters)
-   virtual const base::Vec3d& getPosition() const;                  // Position vector; NED from sim reference point (meters)
-   virtual bool isPositionVectorValid() const;                      // Is the position vector valid
+   virtual double getXPosition() const { return posVecNED[INORTH]; }    // North(+) or south(-) of the sim reference point (meters)
+   virtual double getYPosition() const { return posVecNED[IEAST];  }    // East(+) or west(-) of the sim reference point (meters)
+   virtual const base::Vec3d& getPosition() const { return posVecNED; } // Position vector; NED from sim reference point (meters)
+   virtual bool isPositionVectorValid() const { return posVecValid; }   // Is the position vector valid
 
    virtual double getAltitude() const;                              // Altitude HAE (meters) default
    virtual double getAltitudeM() const;                             // Altitude HAE (meters)
@@ -655,9 +656,10 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(const base::String* const newTypeString);      // Sets the player's type string
-   virtual void setSide(const Side);                                   // Sets the player's side enum
-   virtual bool setUseCoordSys(const CoordSys);                        // Sets the coord system to use for updating position
+   bool setType(const std::string&);                           // Sets the player's type string
+   bool setType_old(const base::String* const);                // Sets the player's type string
+   void setSide(const Side);                                   // Sets the player's side enum
+   bool setUseCoordSys(const CoordSys);                        // Sets the coord system to use for updating position
 
    virtual bool setFuelFreeze(const bool);                             // Sets the player's fuel freeze flag
    virtual bool setCrashOverride(const bool);                          // Sets the player's crash override flag
@@ -936,8 +938,9 @@ private:
    // ---
    // Player identity
    // ---
-   base::safe_ptr<base::String> type;    // Type of vehicle
-   Side side {GRAY};                     // Which side (see above)
+   base::safe_ptr<base::String> type_old;  // type of vehicle
+   std::string type;                       // type of vehicle
+   Side side {GRAY};                       // side player associated with
 
    // ---
    // Player State
@@ -1103,8 +1106,8 @@ private:
    bool setSlotInitVelocity(const base::Number* const);
    bool setSlotInitVelocityKts(const base::Number* const);
 
-   bool setSlotType(const base::String* const x)             { return setType(x); }
-   bool setSlotSide(base::Identifier* const);
+   bool setSlotType(const base::String* const);
+   bool setSlotSide(const base::Identifier* const);
 
    bool setSlotSignature(RfSignature* const);
    bool setSlotIrSignature(IrSignature* const);

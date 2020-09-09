@@ -11,13 +11,13 @@ class AbstractPlayer;
 
 //------------------------------------------------------------------------------
 // Class: AbstractIgHost
-// Description: Abstract image genertor visual system host interface
+// Description: Abstract image generator visual system host interface
 //
 // Notes:
 //    1) Derived versions of this class are used to interface with various
-//       image generators.
+//       image generators
 //
-//    2) One or more IgHost objects can be attached to and managed by a Station object.
+//    2) One or more IgHost objects can be attached to and managed by a Station object
 //
 // Factory name: AbstractIgHost
 //------------------------------------------------------------------------------
