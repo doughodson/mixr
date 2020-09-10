@@ -4,8 +4,6 @@
 
 #include "mixr/simulation/AbstractNetIO.hpp"
 
-#include "mixr/base/Identifier.hpp"
-
 #include <array>
 #include <string>
 

@@ -4,12 +4,10 @@
 
 #include "mixr/interop/common/NetIO.hpp"
 
-#include "mixr/base/Identifier.hpp"
-
 #include <array>
 
 namespace mixr {
-namespace base { class Angle; class Integer; class Length; class NetHandler; }
+namespace base { class Angle; class Integer; class Length; class NetHandler; class Identifier; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }
 namespace dis {
