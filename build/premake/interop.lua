@@ -8,6 +8,7 @@
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/common/**.h*",
+         "../../src/interop/common/**.hpp",
          "../../src/interop/common/**.cpp"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
@@ -18,6 +19,7 @@
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/interop/dis/**.h*",
+         "../../src/interop/dis/**.hpp",
          "../../src/interop/dis/**.cpp"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }

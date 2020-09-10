@@ -20,9 +20,9 @@ namespace dis {
 //
 // Factory name: DisNtm
 // Slots:
-//    disEntityType  <vector>   ! DIS Entity type vector:
-//                              !  [ kind domain country category subcategory specific extra ]
-//                              !  example: [ 1 2 333 4 5 6 7 ]
+//    disEntityType  <base::List>  ! DIS Entity type vector:
+//                                 !  [ kind domain country category subcategory specific extra ]
+//                                 !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
 class Ntm : public interop::Ntm

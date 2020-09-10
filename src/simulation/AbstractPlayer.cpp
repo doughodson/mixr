@@ -30,8 +30,8 @@ AbstractPlayer::AbstractPlayer()
 
 void AbstractPlayer::initData()
 {
-   nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORD_ID];
-   for (int i{}; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
+   nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORK_ID];
+   for (int i{}; i < AbstractNetIO::MAX_NETWORK_ID; i++) {
       nibList[i] = nullptr;
    }
 }
@@ -52,7 +52,7 @@ void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
 
    // NIB pointers are not copied!
    setNib( nullptr );
-   for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+   for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
       setOutgoingNib(nullptr, i);
    }
 }
@@ -61,7 +61,7 @@ void AbstractPlayer::deleteData()
 {
    setNib(nullptr);
    if (nibList != nullptr) {
-      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
          setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
@@ -73,7 +73,7 @@ bool AbstractPlayer::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
    if (nibList != nullptr) {
-      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
+      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
          if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
@@ -99,7 +99,7 @@ void AbstractPlayer::reset()
 AbstractNib* AbstractPlayer::getLocalNib(const int netId)
 {
    AbstractNib* p{};
-   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
+   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORK_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -109,7 +109,7 @@ AbstractNib* AbstractPlayer::getLocalNib(const int netId)
 const AbstractNib* AbstractPlayer::getLocalNib(const int netId) const
 {
    const AbstractNib* p{};
-   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORD_ID) {
+   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORK_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -144,7 +144,7 @@ bool AbstractPlayer::setEnableNetOutput(const bool x)
 bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 {
    bool ok{};
-   if (nibList != nullptr && id >= 1 && id <= AbstractNetIO::MAX_NETWORD_ID) {
+   if (nibList != nullptr && id >= 1 && id <= AbstractNetIO::MAX_NETWORK_ID) {
       int idx{id - 1};
       if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;

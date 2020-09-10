@@ -16,6 +16,8 @@ namespace simulation { class Simulation; class Station; }
 namespace interop {
 class Nib;
 class Ntm;
+class NtmInputNode;
+class NtmOutputNode;
 
 //------------------------------------------------------------------------------
 // Class: NetIO
@@ -25,12 +27,13 @@ class Ntm;
 //    TENA, etc).  Derived classes will manage the network specific protocols.
 //
 // Factory name: NetIO
+//
 // Slots:
-//    networkID            <base::Integer>     ! Network ID number: [ 1 .. MAX_NETWORD_ID ] (default: 1)
+//    networkID            <base::Integer>     ! Network ID number: [ 1 .. MAX_NETWORK_ID ] (default: 1)
 //    federationName       <base::Identifier>  ! Federation name (default: 0)
 //    federateName         <base::Identifier>  ! Name of this federate (default: 0)
 //
-//    enableInput          <base::Boolean>     ! Input Enable  accept players from this network (default: true)
+//    enableInput          <base::Boolean>     ! Input Enable: accept players from this network (default: true)
 //    enableOutput         <base::Boolean>     ! Output enable: send players to this network (default: true)
 //    enableRelay          <base::Boolean>     ! Relay enable: send other network players to this network (default: true)
 //    timeline             <base::Identifier>  ! Source of the time line { UTC or EXEC } (default: UTC)
@@ -53,7 +56,7 @@ class Ntm;
 // NetIO class objects:
 //
 //    An mixr application, which is typically controlled by a Station class
-//    object, can have multiple (i.e., MAX_NETWORD_ID) NetIO objects.  Each NetIO
+//    object, can have multiple (i.e., MAX_NETWORK_ID) NetIO objects.  Each NetIO
 //    object handles a different interoperabiltiy network
 //
 //    Each NetIO object in the simulation has an unique, user defined network ID,
@@ -154,9 +157,6 @@ public:
        EXEC,         // Using our executive time
        UTC           // Using Coordinated Universal Time (UTC) from the Operating System
     };
-
-    // Max network ID
-//    static const unsigned int MAX_NETWORD_ID = 2;
 
     //  Max number of new, outgoing players published per frame
     static const unsigned int MAX_NEW_OUTGOING{MIXR_CONFIG_MAX_NETIO_NEW_OUTGOING};
@@ -342,25 +342,6 @@ public:
    // Finds the network type mapper by Player
    virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const;
 
-   // NTM input node
-   class NtmInputNode : public base::Object
-   {
-      DECLARE_SUBCLASS(NtmInputNode, base::Object)
-   public:
-      NtmInputNode();
-      virtual const Ntm* findNetworkTypeMapper(const Nib* const p) const =0;
-      virtual bool add2OurLists(Ntm* const ntm) =0;
-   };
-
-   // NTM output node
-   class NtmOutputNode : public base::Object
-   {
-      DECLARE_SUBCLASS(NtmOutputNode, base::Object)
-   public:
-      NtmOutputNode();
-      virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const =0;
-      virtual bool add2OurLists(Ntm* const ntm) =0;
-   };
 
 protected:
    virtual bool addOutputEntityType(Ntm* const item);          // Adds an item to the output entity type table

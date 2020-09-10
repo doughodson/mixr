@@ -31,7 +31,7 @@ public:
    AbstractNetIO();
 
    // Max network ID
-   static const int MAX_NETWORD_ID{2};
+   static const int MAX_NETWORK_ID{2};
 
    //
    // interface used by Station class

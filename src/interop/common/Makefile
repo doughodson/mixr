@@ -6,7 +6,10 @@ LIB = $(MIXR_LIB_DIR)/libmixr_interop.a
 OBJS =  \
 	NetIO.o \
 	Nib.o \
-	Ntm.o
+	Ntm.o \
+	NtmInputNode.o \
+	NtmOutputNode.o \
+	NtmOutputNodeStd.o
 
 .PHONY: all clean
 
