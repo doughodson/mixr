@@ -221,6 +221,7 @@ public:
    double getNetworkPriority() const;                        // Network thread priority
    unsigned int getNetworkStackSize() const;                 // Network thread stack size
    bool setNetworkStackSize(const unsigned int bytes);       // Network thread stack size (bytes or zero for default)
+   virtual void createNetworkProcess();                      // Creates a network thread
    bool doWeHaveTheNetThread() const;                        // Do we have a network thread?
 
    // ---
@@ -230,6 +231,7 @@ public:
    double getBackgroundPriority() const;                     // Background thread priority
    unsigned int getBackgroundStackSize() const;              // Background thread stack size
    bool setBackgroundStackSize(const unsigned int bytes);    // Background thread stack size (bytes or zero for default)
+   virtual void createBackgroundProcess();                   // Creates a B/G thread
    bool doWeHaveTheBgThread() const;                         // Do we have a background thread?
 
    void updateTC(const double dt = 0.0) override;
@@ -247,9 +249,6 @@ private:
    void setTcThread(StationTcPeriodicThread*);
    void setNetThread(StationNetPeriodicThread*);
    void setBgThread(StationBgPeriodicThread*);
-
-   virtual void createNetworkProcess();                      // Creates a network thread
-   virtual void createBackgroundProcess();                   // Creates a B/G thread
 
    Simulation* sim{};                                        // Executable simulation model
    base::safe_ptr<base::PairStream> networks;                // List of networks
