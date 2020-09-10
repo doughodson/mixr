@@ -1634,11 +1634,11 @@ bool NetIO::slot2KD(const char* const slotname, unsigned char* const kind, unsig
 }
 
 // Set Site ID
-bool NetIO::setSlotSiteID(const base::Integer* const num)
+bool NetIO::setSlotSiteID(const base::Integer* const x)
 {
     bool ok {};
-    if (num != nullptr) {
-        int v {num->asInt()};
+    if (x != nullptr) {
+        const int v {x->asInt()};
         if (v >= 0 && v <= 65535) {
             ok = setSiteID(static_cast<unsigned short>(v));
         } else {
@@ -1649,11 +1649,11 @@ bool NetIO::setSlotSiteID(const base::Integer* const num)
 }
 
 // Set Application ID
-bool NetIO::setSlotApplicationID(const base::Integer* const num)
+bool NetIO::setSlotApplicationID(const base::Integer* const x)
 {
     bool ok {};
-    if (num != nullptr) {
-        int v {num->asInt()};
+    if (x != nullptr) {
+        const int v {x->asInt()};
         if (v >= 0 && v <= 65535) {
             ok = setApplicationID(static_cast<unsigned short>(v));
         } else {
@@ -1668,7 +1668,7 @@ bool NetIO::setSlotExerciseID(const base::Integer* const x)
 {
     bool ok {};
     if (x != nullptr) {
-        int v {x->asInt()};
+        const int v {x->asInt()};
         if (v >= 0 && v <= 255) {
             ok = setExerciseID(static_cast<unsigned char>(v));
         } else {
