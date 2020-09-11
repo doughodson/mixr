@@ -37,7 +37,7 @@ class Vec2f
         enum { num_components = 2 };
         
         /** Vec member variable. */
-        value_type _v[2];
+        value_type _v[2]{};
         
 
         /** Constructor that sets all components of the vector to zero */

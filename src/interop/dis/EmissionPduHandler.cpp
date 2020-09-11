@@ -428,7 +428,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             antenna->setRefAzimuth( bd->beamData.beamAzimuthCenter );
             antenna->setRefElevation( bd->beamData.beamElevationCenter );
             // note that beamElevationSweep corresponds to scanHeight; setSearchVolume is expecting el component to be scanHeight+.5*barspacing
-            antenna->setSearchVolume( bd->beamData.beamAzimuthSweep * 2.0f, bd->beamData.beamElevationSweep * 2.0f);
+            antenna->setSearchVolume( bd->beamData.beamAzimuthSweep * 2.0, bd->beamData.beamElevationSweep * 2.0);
          }
 
          // proxy player's transmit (when they're active) but don't need to receive

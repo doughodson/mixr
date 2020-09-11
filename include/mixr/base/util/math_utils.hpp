@@ -14,11 +14,11 @@ namespace base {
 // nint -- nearest integer
 inline int nint(const double x)
 {
-   // int(-0.5f) equals 0 or -1, and int(-1000.5f) equals -1000 or -1001,
+   // int(-0.5) equals 0 or -1, and int(-1000.5) equals -1000 or -1001,
    // depending on platform.  So, make a negative valued 'x' positive,
-   // add 0.5f, then negate the truncated int() cast.
-   if (x < 0.0) return (-(static_cast<int>((-x) + 0.5f)));
-   else return static_cast<int>(x + 0.5f);
+   // add 0.5, then negate the truncated int() cast.
+   if (x < 0.0) return (-(static_cast<int>((-x) + 0.5)));
+   else return static_cast<int>(x + 0.5);
 }
 
 // nint -- nearest integer

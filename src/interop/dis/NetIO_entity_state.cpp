@@ -7,6 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/Ntm.hpp"
 #include "mixr/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/utils.hpp"
 
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/system/StoresMgr.hpp"

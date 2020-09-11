@@ -33,7 +33,7 @@ class Quat
 
         typedef double value_type;
 
-        value_type  _v[4];    // a four-vector
+        value_type  _v[4]{};    // a four-vector
 
         inline Quat() { _v[0]=0.0; _v[1]=0.0; _v[2]=0.0; _v[3]=1.0; }
 

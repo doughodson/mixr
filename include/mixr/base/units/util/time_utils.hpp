@@ -64,7 +64,7 @@ inline void getHHMMSS(const double sec, int* const hh, int* const mm, double* co
 // convert integer hours, minutes and seconds to time in seconds
 inline double putHHMMSS(const int hh, const int mm, const int ss)
 {
-    return static_cast<double>((3600.0f * hh) + (60.0f * mm) + ss);
+    return static_cast<double>((3600.0 * static_cast<double>(hh)) + (60.0 * static_cast<double>(mm)) + static_cast<double>(ss));
 }
 
 }

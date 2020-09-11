@@ -35,9 +35,9 @@ class BoundingBoxImpl
         typedef typename VT::value_type value_type;
     
         /** Minimum extent. (Smallest X, Y, and Z values of all coordinates.) */
-        vec_type _min;
+        vec_type _min{};
         /** Maximum extent. (Greatest X, Y, and Z values of all coordinates.) */
-        vec_type _max;
+        vec_type _max{};
 
         /** Creates an uninitialized bounding box. */
         inline BoundingBoxImpl() :

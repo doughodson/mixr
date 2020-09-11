@@ -242,17 +242,9 @@ public:
    const EmissionPduHandler* findEmissionPduHandler(const models::RfSensor* const);
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const);
 
-   // Generate a federate name from the site and application numbers:
-   //  "SnnAmm" -- where nn and mm are the site and app numbers.
-   static bool makeFederateName(char* const fedName, const unsigned int len, const unsigned short site, const unsigned short app);
-
    // Parse federate name for the site and application numbers
    //  (We're expecting "SnnAmm" where nn and mm are the site and app numbers.)
    static bool parseFederateName(unsigned short* const site, unsigned short* const app, const char* const fedName);
-
-   // Generate a federation name from the exercise numbers:
-   //  "Ennn" -- where nnn is the exercise number, which must be greater than zero
-   static bool makeFederationName(char* const fedName, const unsigned int len, const unsigned short exercise);
 
    // Parse federation name for the exercise number
    //  (We're expecting "Ennn" where nnn is the exercise.)

@@ -17,6 +17,7 @@ OBJS =  \
 	Nib_weapon_fire.o \
 	Ntm.o \
 	NtmInputNode.o \
+	utils.o
 
 .PHONY: all clean
 

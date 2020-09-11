@@ -36,8 +36,8 @@ class BoundingSphereImpl
         typedef VT vec_type;
         typedef typename VT::value_type value_type;        
 
-        vec_type    _center;
-        value_type  _radius;
+        vec_type    _center{};
+        value_type  _radius{};
 
         /** Construct a default bounding sphere with radius to -1.0f, representing an invalid/unset bounding sphere.*/ 
         BoundingSphereImpl() : _center(0.0,0.0,0.0),_radius(-1.0) {}

@@ -27,7 +27,7 @@ class Vec2s
         /** Number of vector components. */
         enum { num_components = 2 };
         
-        value_type _v[2];
+        value_type _v[2]{};
 
         /** Constructor that sets all components of the vector to zero */
         Vec2s() { _v[0]=0; _v[1]=0; }

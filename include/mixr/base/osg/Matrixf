@@ -529,7 +529,7 @@ class Matrixf
        }
 
     protected:
-        value_type _mat[4][4];
+        value_type _mat[4][4]{};
 
 };
 

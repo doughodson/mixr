@@ -7,6 +7,7 @@
 #include "NtmInputNode.hpp"
 #include "mixr/interop/dis/EmissionPduHandler.hpp"
 #include "mixr/interop/dis/pdu.hpp"
+#include "mixr/interop/dis/utils.hpp"
 
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -575,7 +576,6 @@ Nib* NetIO::findDisNib(const unsigned short playerID, const unsigned short site,
    return nib;
 }
 
-
 //------------------------------------------------------------------------------
 // processElectromagneticEmissionPDU() callback --
 //------------------------------------------------------------------------------
@@ -650,7 +650,7 @@ unsigned int NetIO::makeTimeStamp(const double ctime, const bool absolute)
 {
     // compute seconds in this hour
     const int hours{static_cast<int>(ctime / 3600.0)};
-    const double secondsThisHour{(ctime - static_cast<double>(hours*3600))};
+    const double secondsThisHour{(ctime - static_cast<double>(hours*3600.0))};
 
     // 31 MSBs are for the 3600 seconds in this hour
     unsigned int ts {static_cast<unsigned int>((secondsThisHour/3600.0) * 0x7fffffff)};
@@ -659,61 +659,6 @@ unsigned int NetIO::makeTimeStamp(const double ctime, const bool absolute)
 
     return ts;
 }
-
-
-//------------------------------------------------------------------------------
-// Generate a federate name from the site and application numbers:
-//  "SnnAmm" -- where nn and mm are the site and app numbers.
-//------------------------------------------------------------------------------
-bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const unsigned short site, const unsigned short app)
-{
-   static const int p10[5] = { 10000, 1000, 100, 10, 1 };
-
-   bool ok{};
-   if (fedName != nullptr && len > 0 && site > 0 && app > 0) {
-      char cbuff[64]{};
-      unsigned int idx{};
-
-      // First the site number: Snnn
-      cbuff[idx++] = 'S';
-      {
-         int tmp{site};
-         bool digits{};
-         for (unsigned int i = 0; i < 5; i++) {
-            int rr {tmp/p10[i]};
-            if (rr > 0 || digits) {
-               cbuff[idx++] = '0' + char(rr);
-               digits = true;
-            }
-            tmp -= (rr * p10[i]);
-         }
-      }
-
-      // then the application number: Annn
-      cbuff[idx++] = 'A';
-      {
-         int tmp{app};
-         bool digits{};
-         for (unsigned int i = 0; i < 5; i++) {
-            int rr {tmp/p10[i]};
-            if (rr > 0 || digits) {
-               cbuff[idx++] = '0' + char(rr);
-               digits = true;
-            }
-            tmp -= (rr * p10[i]);
-         }
-      }
-
-      cbuff[idx++] = 0;
-
-      if (idx <= len) {
-         base::utStrcpy(fedName,len,cbuff);
-         ok = true;
-      }
-   }
-   return ok;
-}
-
 
 //------------------------------------------------------------------------------
 // Parse federate name for the site and application numbers
@@ -763,45 +708,6 @@ bool NetIO::parseFederateName(unsigned short* const site, unsigned short* const 
    }
    return ok;
 }
-
-
-//------------------------------------------------------------------------------
-// Generate a federation name from the exercise numbers:
-//  "Ennn" -- where nnn is the exercise number, which must be greater than zero
-//------------------------------------------------------------------------------
-bool NetIO::makeFederationName(char* const fedName, const unsigned int len, const unsigned short exercise)
-{
-   static const int p10[5] = { 10000, 1000, 100, 10, 1 };
-
-   bool ok{};
-   if (fedName != nullptr && len > 0 && exercise > 0) {
-      char cbuff[64]{};
-      unsigned int idx{};
-
-      cbuff[idx++] = 'E';
-      {
-         int tmp{exercise};
-         bool digits{};
-         for (unsigned int i = 0; i < 5; i++) {
-            int rr {tmp/p10[i]};
-            if (rr > 0 || digits) {
-               cbuff[idx++] = '0' + char(rr);
-               digits = true;
-            }
-            tmp -= (rr * p10[i]);
-         }
-      }
-
-      cbuff[idx++] = 0;
-
-      if (idx <= len) {
-         base::utStrcpy(fedName,len,cbuff);
-         ok = true;
-      }
-   }
-   return ok;
-}
-
 
 //------------------------------------------------------------------------------
 // Parse federation name for the exercise number
@@ -973,7 +879,7 @@ void NetIO::defineFederateName()
          setFederateName(fName);
       }
    } else {
-      setFederateName(nullptr);
+      setFederateName("");
    }
 }
 
@@ -987,7 +893,7 @@ void NetIO::defineFederationName()
          setFederationName(fName);
       }
    } else {
-      setFederationName(nullptr);
+      setFederationName("");
    }
 }
 
@@ -1000,9 +906,9 @@ bool NetIO::setSiteID(const unsigned short v)
 }
 
 // Sets the network's application ID
-bool NetIO::setApplicationID(const unsigned short v)
+bool NetIO::setApplicationID(const unsigned short x)
 {
-    appID = v;
+    appID = x;
     defineFederateName();
     return true;
 }
@@ -1689,7 +1595,7 @@ void NetIO::testInputEntityTypes(const int n)
       for (int i{}; i < n; i++) {
          const int r {std::rand()};
          const double nr {(static_cast<double>(r) / static_cast<double>(RAND_MAX))};
-         const int idx {base::nint(nr * (maxTypes - 1))};
+         const int idx {base::nint(nr * static_cast<double>(maxTypes - 1))};
          const Ntm* origNtm {static_cast<const Ntm*>(getInputEntityType(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1749,7 +1655,7 @@ void NetIO::testOutputEntityTypes(const int n)
       for (int i{}; i < n; i++) {
          const int r{std::rand()};
          const double nr{static_cast<double>(r) / static_cast<double>(RAND_MAX)};
-         const int idx{base::nint(nr * (maxTypes - 1))};
+         const int idx{base::nint(nr * static_cast<double>(maxTypes - 1))};
          const Ntm* origNtm{static_cast<const Ntm*>(getOutputEntityTypes(idx))};
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;

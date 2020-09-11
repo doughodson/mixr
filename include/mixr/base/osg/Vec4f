@@ -36,7 +36,7 @@ class Vec4f
         enum { num_components = 4 };
         
         /** Vec member variable. */
-        value_type _v[4];
+        value_type _v[4]{};
 
         // Methods are defined here so that they are implicitly inlined
 

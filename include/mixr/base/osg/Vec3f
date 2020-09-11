@@ -36,7 +36,7 @@ class Vec3f
         /** Number of vector components. */
         enum { num_components = 3 };
         
-        value_type _v[3];
+        value_type _v[3]{};
 
         /** Constructor that sets all components of the vector to zero */
         Vec3f() { _v[0]=0.0f; _v[1]=0.0f; _v[2]=0.0f;}
