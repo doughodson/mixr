@@ -171,7 +171,7 @@ void FlightGearHost::sendData()
       fgNetFDM.latitude = av->getLatitude() * base::angle::D2RCC;
       fgNetFDM.longitude = av->getLongitude() * base::angle::D2RCC;
       fgNetFDM.altitude = av->getAltitude();
-      fgNetFDM.agl - av->getAltitudeAgl();
+      fgNetFDM.agl   = static_cast<float>(av->getAltitudeAgl());
       fgNetFDM.phi   = static_cast<float>(av->getRollD() * base::angle::D2RCC);
       fgNetFDM.theta = static_cast<float>(av->getPitchD() * base::angle::D2RCC);
       fgNetFDM.psi   = static_cast<float>(av->getHeadingD() * base::angle::D2RCC);
