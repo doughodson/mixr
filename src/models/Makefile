@@ -114,7 +114,6 @@ OBJS =  \
 	MultiActorAgent.o \
 	SensorMsg.o \
 	SimAgent.o \
-	SimAgent.o \
 	SynchronizedState.o \
 	TargetData.o \
 	Tdb.o \
