@@ -859,24 +859,23 @@ void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 //------------------------------------------------------------------------------
 int NetIO::compareKey2Nib(const void* key, const void* nib)
 {
-
-   // The Key
+   // the key
    const NibKey* pKey{static_cast<const NibKey*>(key)};
 
-   // The NIB
+   // the NIB
    const Nib* const* pp{static_cast<const Nib* const*>(nib)};
    const Nib* pNib{*pp};
 
-   // Default to equal
+   // default to equal
    int result{};
 
-   // First, compare the player IDs
+   // first, compare the player IDs
    if (pKey->id > pNib->getPlayerID()) result = +1;
    else if (pKey->id < pNib->getPlayerID()) result = -1;
 
    if (result == 0) {
-      // If they're the same, compare the federate names
-      result = ( pKey->fName == pNib->getFederateName() );
+      // if they're the same, compare the federate names
+      result = std::strcmp(pKey->fName.c_str(), pNib->getFederateName().c_str());
    }
 
    return result;

@@ -635,15 +635,12 @@ int IgHost::compareKey2Model(const void* key, const void* model)
 
    if (result == 0) {
       // If they're the same playr IDs, compare the federate names
-      const std::string& pKeyFedName{pKey->fName};
-      const std::string& pModelFedName{pModel->getFederateName()};
-
-      if (pKeyFedName.empty() && pModelFedName .empty()) {
+      if (pKey->fName.empty() && !pModel->getFederateName().empty()) {
          result = -1;
-      } else if (!pKeyFedName.empty() && pModelFedName.empty()) {
+      } else if (!pKey->fName.empty() && pModel->getFederateName().empty()) {
          result = +1;
-      } else if (!pKeyFedName.empty() && !pModelFedName.empty()) {
-         result = (pKeyFedName == pModelFedName);
+      } else if (!pKey->fName.empty() && !pModel->getFederateName().empty()) {
+         result = std::strcmp( pKey->fName.c_str(), pModel->getFederateName().c_str() );
       }
    }
 

@@ -2793,34 +2793,6 @@ void Player::dynamics(const double dt)
       // Update our position
       positionUpdate(dt);
 
-      if (getNib() != nullptr || true) {
-         if (!syncState1Ready) {
-            syncState1.setGeocPosition(getGeocPosition());
-            syncState1.setGeocVelocity(getGeocVelocity());
-            syncState1.setGeocAcceleration(getGeocAcceleration());
-            syncState1.setGeocEulerAngles(getGeocEulerAngles());
-            syncState1.setAngularVelocities(getAngularVelocities());
-            syncState1.setTimeExec(getWorldModel()->getExecTimeSec());
-            syncState1.setTimeUtc(getWorldModel()->getSysTimeOfDay());
-            syncState1.setValid(true);
-            syncState1Ready = true;
-            syncState2Ready = false;
-            //std::cout << "Set syncState1" << std::endl;
-         } else {
-            syncState2.setGeocPosition(getGeocPosition());
-            syncState2.setGeocVelocity(getGeocVelocity());
-            syncState2.setGeocAcceleration(getGeocAcceleration());
-            syncState2.setGeocEulerAngles(getGeocEulerAngles());
-            syncState2.setAngularVelocities(getAngularVelocities());
-            syncState2.setTimeExec(getWorldModel()->getExecTimeSec());
-            syncState2.setTimeUtc(getWorldModel()->getSysTimeOfDay());
-            syncState2.setValid(true);
-            syncState2Ready = true;
-            syncState1Ready = false;
-            //std::cout << "Set syncState2" << std::endl;
-         }
-      }
-
       // ---
       // Check for ground collisions
       // ---
@@ -2836,6 +2808,34 @@ void Player::dynamics(const double dt)
    else {
       // dead reckoning our position and orientation
       deadReckonPosition(dt);
+   }
+
+   if (getNib() != nullptr || true) {
+      if (!syncState1Ready) {
+         syncState1.setGeocPosition(getGeocPosition());
+         syncState1.setGeocVelocity(getGeocVelocity());
+         syncState1.setGeocAcceleration(getGeocAcceleration());
+         syncState1.setGeocEulerAngles(getGeocEulerAngles());
+         syncState1.setAngularVelocities(getAngularVelocities());
+         syncState1.setTimeExec(getWorldModel()->getExecTimeSec());
+         syncState1.setTimeUtc(getWorldModel()->getSysTimeOfDay());
+         syncState1.setValid(true);
+         syncState1Ready = true;
+         syncState2Ready = false;
+         //std::cout << "Set syncState1" << std::endl;
+      } else {
+         syncState2.setGeocPosition(getGeocPosition());
+         syncState2.setGeocVelocity(getGeocVelocity());
+         syncState2.setGeocAcceleration(getGeocAcceleration());
+         syncState2.setGeocEulerAngles(getGeocEulerAngles());
+         syncState2.setAngularVelocities(getAngularVelocities());
+         syncState2.setTimeExec(getWorldModel()->getExecTimeSec());
+         syncState2.setTimeUtc(getWorldModel()->getSysTimeOfDay());
+         syncState2.setValid(true);
+         syncState2Ready = true;
+         syncState1Ready = false;
+         //std::cout << "Set syncState2" << std::endl;
+      }
    }
 }
 
