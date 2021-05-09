@@ -21,7 +21,8 @@ BEGIN_SLOTTABLE(AnalogOutput)
     "channel",    // 2) Device channel number
     "offset",     // 3) Offset value (default: 0.0)
     "gain",       // 4) Gain value   (default: 1.0)
-    "table"       // 5) Shaping function table (default: none)
+    "table",      // 5) Shaping function table (default: none)
+    "value"       // 6) Initial value [ -1.0 ... 1.0 ] (default: 0.0)
 END_SLOTTABLE(AnalogOutput)
 
 BEGIN_SLOT_MAP(AnalogOutput)
@@ -29,7 +30,8 @@ BEGIN_SLOT_MAP(AnalogOutput)
     ON_SLOT( 2, setSlotChannel,  base::Integer)
     ON_SLOT( 3, setSlotOffset,   base::Number)
     ON_SLOT( 4, setSlotGain,     base::Number)
-    ON_SLOT( 5, setSlotTable,    base::Table1)
+    ON_SLOT( 5, setTable,        base::Table1)
+    ON_SLOT( 6, setSlotValue,    base::Number)
 END_SLOT_MAP()
 
 AnalogOutput::AnalogOutput()
@@ -43,8 +45,10 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool)
 
    location = org.location;
    channel = org.channel;
+   devEnb = org.devEnb;
    gain = org.gain;
    offset = org.offset;
+   value = org.value;
    {
       const base::Table1* copy {};
       if (org.table != nullptr) {
@@ -91,21 +95,35 @@ bool AnalogOutput::setTable(const base::Table1* const msg)
 
 void AnalogOutput::processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device)
 {
-   double value{};
-
-   // Get a value from the cockpit output handler
-   if (outData != nullptr) {
-      outData->getAnalogOutput(location, &value);
-   }
-
-   // Send the scaled data to the AO card
-   if (device != nullptr) {
-      double vout {};
-      if (gain != 0) {
-         vout = (value / gain ) + offset;
+   if (device != nullptr && devEnb) {
+      // Get a value from the cockpit output handler
+      if (outData != nullptr) {
+         outData->getAnalogOutput(location, &value);
       }
+
+      // Send the scaled data to the AO card
+      double vout {convert(value)};
       device->setAnalogOutput(vout, channel);
    }
+}
+
+//------------------------------------------------------------------------------
+// convert the value, as needed
+//------------------------------------------------------------------------------
+double AnalogOutput::convert(const double vin)
+{
+   // Offset & Gain
+   double v2{vin + offset};
+   if (gain != 0) {
+      v2 = (value / gain ) + offset;
+   }
+
+   // Shaping function
+   double v3{v2};
+   if (table != nullptr) v3 = table->lfi(v2);
+
+   // return final value
+   return v3;
 }
 
 // location: Output array index (location)
@@ -155,6 +173,16 @@ bool AnalogOutput::setSlotGain(const base::Number* const msg)
              std::cerr << "AnalogOutput::setSlotGain(): ERROR -- gain can not be zero." << std::endl;
          }
       }
+   }
+   return ok;
+}
+
+// value: Initial value (default: 0)
+bool AnalogOutput::setSlotValue(const base::Number* const msg)
+{
+   bool ok{};
+   if (msg != nullptr) {
+      ok = setValue( msg->asDouble() );
    }
    return ok;
 }

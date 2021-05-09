@@ -18,6 +18,12 @@ namespace linkage {
 //      channel      <Integer>   ! Device channel (bit) number on the port
 //      port         <Integer>   ! Device port number (default: 0)
 //      inverted     <Boolean>   ! Inverted bit flag (default: false)
+//      value        <Boolean>   ! Initial value (default: false)
+//      count        <Integer>   ! Number of DIs to manage starting at 'di' and
+//                               !   'channel'; port is unchanged (default: 1)
+//
+// Note: If 'count' is less than zero then the DIs are stored in reverse
+//       order (i.e., 'di' location is decremented)
 //------------------------------------------------------------------------------
 class DiscreteInput final: public AbstractAdapter
 {
@@ -30,11 +36,15 @@ public:
    int getPort() const                             { return port;      }
    int getChannel() const                          { return channel;   }
    bool getInvert() const                          { return invert;    }
+   bool getValue() const                           { return value;     }
+   int getCount() const                            { return count;     }
 
    bool setLocation(const int x)                   { location = x;     return true; }
-   bool setPort(const int x)                       { port = x;         return true; }
-   bool setChannel(const int x)                    { channel = x;      return true; }
+   bool setPort(const int x)                       { port = x;     devEnb = true;    return true; }
+   bool setChannel(const int x)                    { channel = x;  devEnb = true;    return true; }
    bool setInvert(const bool x)                    { invert = x;       return true; }
+   bool setValue(const bool x)                     { value = x;        return true; }
+   bool setCount(const int x)                      { count = x;        return true; }
 
 private:
    void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
@@ -43,7 +53,10 @@ private:
    int location {};      // AbstractIoData input bit location
    int port {};          // Port number
    int channel {};       // Port's channel (bit) number
+   bool devEnb {};       // Device enabled
    bool invert {};       // Inverted bit flag
+   bool value {};        // Initial value
+   int count {1};        // Number of DIs (neg for reverse order)
 
 private:
    // slot table helper methods
@@ -51,6 +64,8 @@ private:
    bool setSlotPort(const base::Integer* const);
    bool setSlotChannel(const base::Integer* const);
    bool setSlotInverted(const base::Boolean* const);
+   bool setSlotValue(const base::Boolean* const); 
+   bool setSlotCount(const base::Integer* const);
 };
 
 }

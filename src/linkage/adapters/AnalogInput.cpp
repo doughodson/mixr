@@ -22,7 +22,8 @@ BEGIN_SLOTTABLE(AnalogInput)
     "deadband",   // 3) Deadband: [ 0 .. 1 ] (default: 0.0)
     "offset",     // 4) Offset value (default: 0.0)
     "gain",       // 5) Gain value   (default: 1.0)
-    "table"       // 6) Shaping function table (default: none)
+    "table",      // 6) Shaping function table (default: none)
+    "value"       // 7) Initial value [ -1.0 ... 1.0 ] (default: 0.0)
 END_SLOTTABLE(AnalogInput)
 
 BEGIN_SLOT_MAP(AnalogInput)
@@ -32,6 +33,7 @@ BEGIN_SLOT_MAP(AnalogInput)
     ON_SLOT( 4, setSlotOffset,   base::Number)
     ON_SLOT( 5, setSlotGain,     base::Number)
     ON_SLOT( 6, setTable,        base::Table1)
+    ON_SLOT( 7, setSlotValue,    base::Number)
 END_SLOT_MAP()
 
 AnalogInput::AnalogInput()
@@ -45,9 +47,11 @@ void AnalogInput::copyData(const AnalogInput& org, const bool)
 
    location = org.location;
    channel = org.channel;
+   devEnb = org.devEnb;
    deadband = org.deadband;
    gain = org.gain;
    offset = org.offset;
+   value = org.value;
    {
       const base::Table1* copy{};
       if (org.table != nullptr) {
@@ -94,16 +98,13 @@ bool AnalogInput::setTable(const base::Table1* const msg)
 
 void AnalogInput::processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData)
 {
-   // Default is our initial value
-   double vin{};
-
    // Get data from the AI card
-   if (device != nullptr) {
-      device->getAnalogInput(&vin, channel);
+   if (device != nullptr && devEnb) {
+      device->getAnalogInput(&value, channel);
    }
 
    // process the input value, as needed
-   double vout{convert(vin)};
+   double vout{convert(value)};
 
    // Set the data to the input data handler
    if (inData != nullptr) {
@@ -185,6 +186,16 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
    bool ok{};
    if (msg != nullptr) {
       ok = setGain( msg->asDouble() );
+   }
+   return ok;
+}
+
+// value: Initial value (default: 0)
+bool AnalogInput::setSlotValue(const base::Number* const msg)
+{
+   bool ok{};
+   if (msg != nullptr) {
+      ok = setValue( msg->asDouble() );
    }
    return ok;
 }

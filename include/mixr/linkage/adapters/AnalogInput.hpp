@@ -42,6 +42,7 @@ namespace linkage {
 //      offset       <Number>    ! Offset value (default: 0.0)
 //      gain         <Number>    ! Gain value   (default: 1.0)
 //      table        <Table1>    ! Shaping function table (default: none)
+//      value        <Number>    ! Initial value [ -1.0 ... 1.0 ] (default: 0.0)
 //------------------------------------------------------------------------------
 class AnalogInput final: public AbstractAdapter
 {
@@ -55,13 +56,15 @@ public:
    double getDeadband() const                          { return deadband;   }
    double getOffset() const                            { return offset;     }
    double getGain() const                              { return gain;       }
+   double getValue() const                             { return value;      }
    const base::Table1* getTable() const                { return table;      }
 
    bool setLocation(const int x)                       { location = x;   return true; }
-   bool setChannel(const int x)                        { channel = x;    return true; }
+   bool setChannel(const int x)                        { channel = x;    devEnb = true;  return true; }
    bool setDeadband(const double x)                    { deadband = x;   return true; }
    bool setOffset(const double x)                      { offset = x;     return true; }
    bool setGain(const double x)                        { gain = x;       return true; }
+   bool setValue(const double x)                       { value = x;     return true; }
    bool setTable(const base::Table1* const);
 
 private:
@@ -70,10 +73,12 @@ private:
 
    int location{};              // AbstractIoData analog input channel number
    int channel{};               // Analog channel number
+   bool devEnb{};               // Device enabled
    double deadband{};           // Deadband value
    double offset{};             // Offset
    double gain{1.0};            // Gain
    const base::Table1* table{}; // Shaping table
+   double value{0.0};           // Initial value
 
 protected:
    virtual double convert(const double);
@@ -85,6 +90,7 @@ private:
    bool setSlotDeadband(const base::Number* const);
    bool setSlotOffset(const base::Number* const);
    bool setSlotGain(const base::Number* const);
+   bool setSlotValue(const base::Number* const);
 };
 
 }
