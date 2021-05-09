@@ -3,6 +3,7 @@
 #define __mixr_base_numeric_Divide_HPP__
 
 #include "mixr/base/numeric/operators/Operator.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
 namespace base {
@@ -30,6 +31,7 @@ private:
    // a zero divisor is ignored and produces nothing
    void operation() final;
    double getValue() const final       { return val; }
+   int getIntValue() const final       { return nint(val); }
 
    double val{};
 };

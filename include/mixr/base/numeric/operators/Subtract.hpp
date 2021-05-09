@@ -3,6 +3,7 @@
 #define __mixr_base_numeric_Subtract_HPP__
 
 #include "mixr/base/numeric/operators/Operator.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
 namespace base {
@@ -29,6 +30,7 @@ private:
    // performs the numeric equivalent operation of a "-"
    void operation() final;
    double getValue() const final       { return val; }
+   int getIntValue() const final       { return nint(val); }
 
    double val{};
 };

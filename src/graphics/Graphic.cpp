@@ -59,7 +59,7 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
     ON_SLOT( 8, setSlotNoDisplayList,      base::Boolean)
     ON_SLOT( 9, setSlotSubcomponentsFirst, base::Boolean)
-    ON_SLOT(10, setSlotSelectName,         base::Integer)
+    ON_SLOT(10, setSlotSelectName,         base::Number)
     ON_SLOT(11, setSlotTextureName,        base::Identifier)
     ON_SLOT(12, setSlotScissorX,           base::Number)
     ON_SLOT(13, setSlotScissorY,           base::Number)
@@ -1118,7 +1118,7 @@ bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const x)
 }
 
 // setSlotSelectName() -- GL Select Buffer name (e.g., glPushName())  (unsigned integer)
-bool Graphic::setSlotSelectName(const base::Integer* const x)
+bool Graphic::setSlotSelectName(const base::Number* const x)
 {
     return setSelectName(static_cast<GLuint>(x->asInt()));
 }

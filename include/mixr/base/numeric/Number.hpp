@@ -25,9 +25,11 @@ public:
    explicit Number()                       { STANDARD_CONSTRUCTOR() }
 
    double asDouble() const                 { return getValue(); }
+   int asInt() const                       { return getIntValue(); }
 
 private:
    virtual double getValue() const = 0;
+   virtual int getIntValue() const = 0;
 };
 
 }

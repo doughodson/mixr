@@ -3,6 +3,7 @@
 #define __mixr_base_numeric_Float_HPP__
 
 #include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
 namespace base {
@@ -31,6 +32,7 @@ public:
 
 private:
    double getValue() const final       { return value; }
+   int getIntValue() const final       { return nint(value); }
    double value{};
 
 private:

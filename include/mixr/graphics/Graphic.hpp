@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Boolean; class Color; class Identifier; class Integer; class Transform; }
+namespace base { class Boolean; class Color; class Identifier; class Integer; class Number; class Transform; }
 namespace graphics {
 class Display;
 class Material;
@@ -465,7 +465,7 @@ private:
    bool setSlotColor(const base::Identifier* const);
    bool setSlotFlashRate(const base::Number* const);
    bool setSlotLineWidth(const base::Number* const);
-   bool setSlotSelectName(const base::Integer* const);
+   bool setSlotSelectName(const base::Number* const);
    bool setSlotTransformList(base::PairStream*);      // Set the transformation list
    bool setSlotSingleTransform(base::Transform* const);
    bool setSlotNoDisplayList(const base::Boolean* const);

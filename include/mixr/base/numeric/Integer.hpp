@@ -27,10 +27,10 @@ public:
     explicit Integer(const int x) : value(x)     { STANDARD_CONSTRUCTOR() }
 
     void setValue(const int x)                   { value = x; }
-    int asInt() const                            { return value; }
 
 private:
    double getValue() const final                 { return static_cast<double>(value); }
+   int getIntValue() const final                 { return value; }
    int value{};
 
 private:
