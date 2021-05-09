@@ -14,6 +14,7 @@ class AbstractDataRecorder;
 class SimulationBgSyncThread;
 class SimulationTcSyncThread;
 class Station;
+class Statistic;
 class AbstractPlayer;
 
 //------------------------------------------------------------------------------
@@ -50,6 +51,9 @@ class AbstractPlayer;
 //                                            !   default: 1 -- no additional threads)
 //                                            !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
+//    enableFrameTiming <base:Boolean>        ! Enable/disable the frame timing statistics (default: false)
+//
+//    printFrameTimingStats <base:Boolean>    ! Enable/disable the printing of the frame timing statistics (default: false)
 //
 // The player list
 //
@@ -213,6 +217,11 @@ public:
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
+    // frame timing statistics
+    const base::Statistic* getFrameTimingStats() const;        // Returns the timing statistics for the frames
+    bool isFrameTimingEabled() const;                          // True if we're collecting frame timing
+    bool isPrintFrameTimingEnabled() const;                    // True if we're printing the frame timing statistics
+
     void updateTC(const double dt = 0.0) override;
     void updateData(const double dt = 0.0) override;
     void reset() override;
@@ -242,6 +251,10 @@ protected:
 
     virtual void setEventID(unsigned short id);       // Sets the simulation event ID counter
     virtual void setWeaponEventID(unsigned short id); // Sets the weapon ID event counter
+
+    virtual bool setFrameTimingEnabled(const bool);
+    virtual bool setPrintFrameTimingStats(const bool);
+    virtual void printFrameTimingStats();
 
     void printTimingStats() override;
     bool shutdownNotification() override;
@@ -298,6 +311,10 @@ private:
    int numBgThreads{};                                                // Number of threads in pool; should be (reqBgThreads - 1)
    bool bgThreadsFailed{};                                            // Failed to create threads.
 
+   base::Statistic* frameTimingStats{};                               // Frame timing statistics
+   double tcLastFrameTime{0.0};                                       // Previous frame time
+   bool pfts{};                                                       // Print frame timing statistics
+
 private:
    // slot table helper methods
    bool setSlotPlayers(base::PairStream* const);
@@ -311,7 +328,27 @@ private:
 
    bool setSlotNumTcThreads(const base::Integer* const);
    bool setSlotNumBgThreads(const base::Integer* const);
+   bool setSlotEnableFrameTiming(const base::Boolean* const);
+   bool setSlotPrintFrameTimingStats(const base::Boolean* const);
 };
+
+// Returns the timing statistics for the frames
+inline const base::Statistic* Simulation::getFrameTimingStats() const
+{
+   return frameTimingStats;
+}
+
+// True if we're collecting frame timing
+inline bool Simulation::isFrameTimingEabled() const
+{
+   return (frameTimingStats != nullptr);
+}
+
+// True if we're printing the frame timing statistics
+inline bool Simulation::isPrintFrameTimingEnabled() const
+{
+   return pfts;
+}
 
 }
 }

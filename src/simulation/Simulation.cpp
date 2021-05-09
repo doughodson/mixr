@@ -13,6 +13,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/Statistic.hpp"
+#include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/units/times.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -35,8 +36,10 @@ BEGIN_SLOTTABLE(Simulation)
    "firstWeaponId",  // 6) First Released Weapon ID (default: 10001)
 
    "numTcThreads",   // 7) Number of T/C threads to use with the player list
-   "numBgThreads"    // 8) Number of background threads to use with the player list
-END_SLOTTABLE(Simulation)
+   "numBgThreads",   // 8) Number of background threads to use with the player list
+   "enableFrameTiming",     // 9) Enable/disable the frame timing
+   "printFrameTimingStats"  //10) Enable/disable the printing of the frame timing statistics
+   END_SLOTTABLE(Simulation)
 
 BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
@@ -50,6 +53,8 @@ BEGIN_SLOT_MAP(Simulation)
 
     ON_SLOT( 7, setSlotNumTcThreads,    base::Integer)
     ON_SLOT( 8, setSlotNumBgThreads,    base::Integer)
+    ON_SLOT( 9, setSlotEnableFrameTiming,     base::Boolean)
+    ON_SLOT(10, setSlotPrintFrameTimingStats, base::Boolean)
 END_SLOT_MAP()
 
 Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
@@ -149,6 +154,17 @@ void Simulation::copyData(const Simulation& org, const bool)
    numBgThreads = 0;
    bgThreadsFailed = false;
    reqBgThreads = org.reqBgThreads;
+
+   // Timing statistics
+   if (frameTimingStats != nullptr) {
+      frameTimingStats->unref();
+      frameTimingStats = nullptr;
+   }
+   if (org.frameTimingStats != nullptr) {
+      frameTimingStats = org.frameTimingStats->clone();
+   }
+   pfts = org.pfts;
+   tcLastFrameTime = 0.0;
 }
 
 void Simulation::deleteData()
@@ -179,6 +195,11 @@ void Simulation::deleteData()
    bgThreadsFailed = false;
 
    station = nullptr;
+
+   if (frameTimingStats != nullptr) {
+      frameTimingStats->unref();
+      frameTimingStats = nullptr;
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -458,6 +479,40 @@ bool Simulation::shutdownNotification()
 void Simulation::updateTC(const double dt)
 {
    // ---
+   // Process frame timing
+   // ---
+   if (isFrameTimingEabled()) {
+
+      bool printIt{ false };
+
+#if defined(WIN32)
+      LARGE_INTEGER cFreq;
+      QueryPerformanceFrequency(&cFreq);
+      auto freq = static_cast<double>(cFreq.QuadPart);
+      LARGE_INTEGER fcnt;
+      QueryPerformanceCounter(&fcnt);
+      const auto endCnt = static_cast<double>(fcnt.QuadPart);
+      if (tcLastFrameTime > 0.0 && cycle() > 0) {
+         double dcnt(endCnt - tcLastFrameTime);
+         const auto dtime = (dcnt / freq) * 1000.0; // Delta time in MS
+         frameTimingStats->sigma(dtime);
+         printIt = isPrintFrameTimingEnabled();
+      }
+      tcLastFrameTime = endCnt;
+#else
+      double curTime{base::getComputerTime()};
+      if (tcLastFrameTime > 0.0 && cycle() > 0) {
+         const auto dtime =(curTime - tcLastFrameTime) * 1000.0; // delta time in ms
+         frameTimingStats->sigma(dtime);
+         printIt = isPrintFrameTimingEnabled();
+      }
+      tcLastFrameTime = curTime;
+#endif
+
+      if (printIt) printFrameTimingStats();
+   }
+
+   // ---
    // Update the executive time
    // ---
    execTime += dt;
@@ -687,6 +742,21 @@ void Simulation::updateBgPlayerList(
          item = item->getNext();
       }
    }
+}
+
+//------------------------------------------------------------------------------
+// printFrameTimingStats() --Print the time critical frame timing statistics
+//------------------------------------------------------------------------------
+void Simulation::printFrameTimingStats()
+{
+   const base::Statistic* ts{getFrameTimingStats()};
+   int c{static_cast<int>(cycle())};
+   int f{static_cast<int>(frame() - 1)};
+   if (f < 0) {
+      c--;
+      f = 15;
+   }
+   std::cout << "frame timing(" << c << "," << f << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << ", min=" << ts->minValue() << std::endl;
 }
 
 //------------------------------------------------------------------------------
@@ -1263,6 +1333,33 @@ void Simulation::setWeaponEventID(unsigned short id)
    eventWpnID = id;
 }
 
+bool Simulation::setFrameTimingEnabled(const bool b)
+{
+   if (b) {
+      // enable frame timing by creating a statistics object
+      if (frameTimingStats != nullptr) {
+         // already have one, just clear it
+         frameTimingStats->clear();
+      } else {
+         frameTimingStats = new base::Statistic();
+      }
+   } else {
+      // disable the frame timing
+      if (frameTimingStats != nullptr) {
+         frameTimingStats->unref();
+         frameTimingStats = nullptr;
+      }
+   }
+   tcLastFrameTime = 0.0;
+   return true;
+}
+
+bool Simulation::setPrintFrameTimingStats(const bool b)
+{
+   pfts = b;
+   return true;
+}
+
 //------------------------------------------------------------------------------
 // Set Slot routines
 //------------------------------------------------------------------------------
@@ -1386,6 +1483,24 @@ bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
          std::cerr << "; number of processors = " << np;
          std::cerr << "; use [ 1 ... " << maxT << " ];" << std::endl;
       }
+   }
+   return ok;
+}
+
+bool Simulation::setSlotEnableFrameTiming(const base::Boolean* const num)
+{
+   bool ok{};
+   if (num != nullptr) {
+      ok = setFrameTimingEnabled(num->asBool());
+   }
+   return ok;
+}
+
+bool Simulation::setSlotPrintFrameTimingStats(const base::Boolean* const num)
+{
+   bool ok{};
+   if (num != nullptr) {
+      ok = setPrintFrameTimingStats(num->asBool());
    }
    return ok;
 }
