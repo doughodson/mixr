@@ -36,9 +36,9 @@ class Number;
 //    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class ScalerFunc : public base::Object
+class ScalerFunc : public Object
 {
-   DECLARE_SUBCLASS(ScalerFunc, base::Object)
+   DECLARE_SUBCLASS(ScalerFunc, Object)
 
 public:
    ScalerFunc();
@@ -47,9 +47,9 @@ public:
    // one iteration of the system:  Y(n) = g(X(n))
    virtual double g(const double x1) =0;
 
-   double getX0() const          { return x0; }       // Returns X(0)
-   double getY0() const          { return y0; }       // Returns Y
-   unsigned int getRate() const  { return rate; } // hz
+   double getX0() const          { return x0; }    // Returns X(0)
+   double getY0() const          { return y0; }    // Returns Y
+   unsigned int getRate() const  { return rate; }  // hz
 
    // Sets the initial X value, X(0), and all past X values, X(-1), X(-2) ,, X(-k+1)
    virtual bool setX0(const double);
@@ -64,7 +64,7 @@ public:
 
 protected:
    // Allocate memory arrays -- removes old arrays, if any
-   virtual void allocateMemory(unsigned int n);
+   virtual void allocateMemory(const unsigned int n);
 
    // Clear the memory arrays
    virtual void clearMemory();
@@ -83,10 +83,10 @@ protected:
 
 private:
    // slot table helper methods
-   bool setSlotRate(const base::Frequency* const);
-   bool setSlotRate(const base::Integer* const);
-   bool setSlotX0(const base::Number* const);
-   bool setSlotY0(const base::Number* const);
+   bool setSlotRate(const Frequency* const);
+   bool setSlotRate(const Integer* const);
+   bool setSlotX0(const Number* const);
+   bool setSlotY0(const Number* const);
 };
 
 }

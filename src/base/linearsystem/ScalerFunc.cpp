@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc,"ScalerFunc")
+IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc, "ScalerFunc")
 
 BEGIN_SLOTTABLE(ScalerFunc)
     "rate",   //  1: Master update rate
@@ -17,10 +17,10 @@ BEGIN_SLOTTABLE(ScalerFunc)
 END_SLOTTABLE(ScalerFunc)
 
 BEGIN_SLOT_MAP(ScalerFunc)
-   ON_SLOT( 1, setSlotRate, base::Frequency)
-   ON_SLOT( 1, setSlotRate, base::Integer)
-   ON_SLOT( 2, setSlotX0,   base::Number)
-   ON_SLOT( 3, setSlotY0,   base::Number)
+   ON_SLOT( 1, setSlotRate, Frequency)
+   ON_SLOT( 1, setSlotRate, Integer)
+   ON_SLOT( 2, setSlotX0,   Number)
+   ON_SLOT( 3, setSlotY0,   Number)
 END_SLOT_MAP()
 
 ScalerFunc::ScalerFunc()
@@ -79,7 +79,7 @@ void ScalerFunc::initialize()
 //------------------------------------------------------------------------------
 // Allocate memory arrays and free any old arrays
 //------------------------------------------------------------------------------
-void ScalerFunc::allocateMemory(unsigned int n0)
+void ScalerFunc::allocateMemory(const unsigned int n0)
 {
    if (n0 != n) {
       // Free the old memory arrays
@@ -148,7 +148,7 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
+bool ScalerFunc::setSlotRate(const Frequency* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -161,7 +161,7 @@ bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotRate(const base::Integer* const msg)
+bool ScalerFunc::setSlotRate(const Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -174,7 +174,7 @@ bool ScalerFunc::setSlotRate(const base::Integer* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotX0(const base::Number* const msg)
+bool ScalerFunc::setSlotX0(const Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -184,7 +184,7 @@ bool ScalerFunc::setSlotX0(const base::Number* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotY0(const base::Number* const msg)
+bool ScalerFunc::setSlotY0(const Number* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

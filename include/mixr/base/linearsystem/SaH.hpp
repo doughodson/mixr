@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class Frequency;
-class Integer; }
+class Integer;
 
 //------------------------------------------------------------------------------
 // Class: SaH
