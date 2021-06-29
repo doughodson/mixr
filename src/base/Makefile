@@ -33,6 +33,19 @@ OBJS =  \
 	concepts/linkage/AbstractIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
+    linearsystem/DiffEquation.o \
+    linearsystem/FirstOrderTf.o \
+    linearsystem/LagFilter.o \
+    linearsystem/Limit.o \
+    linearsystem/Limit01.o \
+    linearsystem/Limit11.o \
+    linearsystem/LimitFunc.o \
+    linearsystem/LowpassFilter.o \
+    linearsystem/SaH.o \
+    linearsystem/ScalerFunc.o \
+    linearsystem/SecondOrderTf.o \
+    linearsystem/Sz1.o \
+    linearsystem/Sz2.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \

@@ -60,16 +60,6 @@
       includedirs { MIXR_IncPath }
       targetname "instruments"
 
-   -- linear systems library
-   project "linearsystem"
-      location ("../" .. _ACTION .. "/projects/%{prj.name}")
-      files {
-         "../../include/mixr/linearsystem/**.h*",
-         "../../src/linearsystem/**.cpp"
-      }
-      includedirs { MIXR_IncPath }
-      targetname "linearsystem"
-
    -- linkage library
    project "linkage"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")

@@ -1,2 +1,0 @@
-
-This is version 3.3.3a of CIGI CL library (installed 8/5/2020)

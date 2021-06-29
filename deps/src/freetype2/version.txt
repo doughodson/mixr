@@ -1,2 +1,0 @@
-
-This is version 2.5.0.1 of freetype2 library (installed 8/10/2020)
