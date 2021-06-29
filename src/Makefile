@@ -13,7 +13,6 @@ include makedefs
 # interop_hla       : HLA RTI
 # interop_rprfom    : HLA RTI
 # linkage           : -
-# linearsystem      : -
 # map_rpf           : -
 # models            : JSBSim
 # ighost_cigi       : CIGICL 3.x
@@ -25,7 +24,6 @@ include makedefs
 PROJECTS = base
 PROJECTS += dafif
 PROJECTS += linkage
-PROJECTS += linearsystem 
 PROJECTS += simulation terrain
 PROJECTS += models
 PROJECTS += recorder
