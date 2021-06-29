@@ -414,6 +414,12 @@ base library (mixr_base)
          const auto p = static_cast<const base::Vec4d*>(*color);
       2) This class is now abstract
 
+   --------------------------
+   - Linear Systems classes -
+   --------------------------
+
+   All the classes from the linearsystems library have been integrated into 'base' -
+   the linearsystems library no longer exists.
 
    -------------------
    - Network classes -
