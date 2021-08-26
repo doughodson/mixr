@@ -39,6 +39,7 @@
 #include <JSBSim/models/propulsion/FGNozzle.h>
 #include <JSBSim/models/propulsion/FGPropeller.h>
 #include <JSBSim/models/propulsion/FGTank.h>
+#include <JSBSim/simgear/misc/sg_path.hxx>
 
 namespace mixr {
 namespace models {
@@ -410,10 +411,10 @@ int JSBSimModel::getEngNozzle(double* const pla, const int max) const
             }
             break;
         case JSBSim::FGEngine::etTurboprop:
-            {
-                JSBSim::FGTurboProp* eng1{static_cast<JSBSim::FGTurboProp*>(eng)};
-                pla[i] = static_cast<double>(eng1->GetNozzle() * 100.0);
-            }
+//            {
+//                JSBSim::FGTurboProp* eng1{static_cast<JSBSim::FGTurboProp*>(eng)};
+//                pla[i] = static_cast<double>(eng1->GetNozzle() * 100.0);
+//            }
             break;
         case JSBSim::FGEngine::etPiston:
         case JSBSim::FGEngine::etRocket:
@@ -794,9 +795,12 @@ void JSBSimModel::reset()
         }
         fdmex = new JSBSim::FGFDMExec(propMgr);
         fdmex->SetDebugLevel(debugLevel);             // sets the verbosity of JSBSim model instance
-        fdmex->SetAircraftPath(rootDir + "aircraft");
-        fdmex->SetEnginePath(rootDir + "engine");
-        fdmex->SetSystemsPath(rootDir + "systems");   // JSBSim-1.0 or after only
+//        fdmex->SetAircraftPath(rootDir + "aircraft");
+//        fdmex->SetEnginePath(rootDir + "engine");
+//        fdmex->SetSystemsPath(rootDir + "systems");
+        fdmex->SetAircraftPath(SGPath::fromUtf8(rootDir + "aircraft"));
+        fdmex->SetEnginePath(SGPath::fromUtf8(rootDir + "engine"));
+        fdmex->SetSystemsPath(SGPath::fromUtf8(rootDir + "systems"));
 
         fdmex->LoadModel(model);
         JSBSim::FGPropertyManager* propMgr{fdmex->GetPropertyManager()};
