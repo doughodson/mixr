@@ -45,7 +45,7 @@ void ScalerFunc::copyData(const ScalerFunc& org, const bool)
    // to calling this copyData() function.
    allocateMemory( org.n );
    if (n > 0) {
-      for (unsigned int i = 0; i < n; i++) {
+      for (unsigned int i{}; i < n; i++) {
          px[i] = org.px[i];
          py[i] = org.py[i];
       }
@@ -102,7 +102,7 @@ void ScalerFunc::allocateMemory(const unsigned int n0)
 //------------------------------------------------------------------------------
 void ScalerFunc::clearMemory()
 {
-   for (unsigned int i = 0; i < n; i++) {
+   for (unsigned int i{}; i < n; i++) {
       px[i] = 0;
       py[i] = 0;
    }
@@ -116,7 +116,7 @@ bool ScalerFunc::setX0(const double v)
 {
    x0 = v;
    if (px != nullptr) {
-      for (unsigned int i = 0; i < n; i++) {
+      for (unsigned int i{}; i < n; i++) {
          px[i] = x0;
       }
    }
@@ -127,7 +127,7 @@ bool ScalerFunc::setY0(const double v)
 {
    y0 = v;
    if (py != nullptr) {
-      for (unsigned int i = 0; i < n; i++) {
+      for (unsigned int i{}; i < n; i++) {
          py[i] = y0;
       }
    }

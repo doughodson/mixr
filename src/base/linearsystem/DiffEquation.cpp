@@ -26,7 +26,7 @@ void DiffEquation::copyData(const DiffEquation& org, const bool)
    // copy data array -- derived classes must have called allocateMemory() prior
    // to calling this copyData() function.
    allocateMemory( org.n );
-   for (unsigned int i = 0; i < n; i++) {
+   for (unsigned int i{}; i < n; i++) {
       pa[i] = org.pa[i];
       pb[i] = org.pb[i];
    }
@@ -59,7 +59,7 @@ void DiffEquation::allocateMemory(unsigned int n0)
 //------------------------------------------------------------------------------
 void DiffEquation::clearMemory()
 {
-   for (unsigned int i = 0; i < n; i++) {
+   for (unsigned int i{}; i < n; i++) {
       pa[i] = 0;
       pa[i] = 0;
    }
@@ -73,7 +73,7 @@ double DiffEquation::g(const double xn)
    if (isValid()) {
 
       // Shift (age) the past input and output values
-      for (unsigned int k = (n-1); k > 0; k--) {
+      for (unsigned int k{(n-1)}; k > 0; k--) {
          px[k] = px[k-1];
          py[k] = py[k-1];
       }
@@ -83,11 +83,11 @@ double DiffEquation::g(const double xn)
 
       // The difference equation ... compute the current output
       py[0] = 0;
-      for (unsigned int k = 1; k < n; k++) {
+      for (unsigned int k{1}; k < n; k++) {
          // past outputs
          py[0] += pa[k]*py[k];
       }
-      for (unsigned int k = 0; k < n; k++) {
+      for (unsigned int k{}; k < n; k++) {
          // Inputs
          py[0] += pb[k]*px[k];
       }

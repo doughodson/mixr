@@ -15,6 +15,19 @@
 #include "mixr/base/transformations/Rotation.hpp"
 #include "mixr/base/transformations/Scale.hpp"
 
+// linear system
+#include "mixr/base/linearsystem/FirstOrderTf.hpp"
+#include "mixr/base/linearsystem/LagFilter.hpp"
+#include "mixr/base/linearsystem/Limit.hpp"
+#include "mixr/base/linearsystem/Limit01.hpp"
+#include "mixr/base/linearsystem/Limit11.hpp"
+#include "mixr/base/linearsystem/LimitFunc.hpp"
+#include "mixr/base/linearsystem/LowpassFilter.hpp"
+#include "mixr/base/linearsystem/SaH.hpp"
+#include "mixr/base/linearsystem/SecondOrderTf.hpp"
+#include "mixr/base/linearsystem/Sz1.hpp"
+#include "mixr/base/linearsystem/Sz2.hpp"
+
 // relation classes (functions and tables)
 #include "mixr/base/relations/Func1.hpp"
 #include "mixr/base/relations/Func2.hpp"
@@ -139,6 +152,41 @@ Object* factory(const std::string& name)
     }
     else if ( name == Scale::getFactoryName() ) {
         obj = new Scale();
+    }
+
+    // linear system
+    else if ( name == FirstOrderTf::getFactoryName() ) {
+        obj = new FirstOrderTf();
+    }
+    else if ( name == LagFilter::getFactoryName() ) {
+        obj = new LagFilter();
+    }
+    else if ( name == Limit::getFactoryName() ) {
+        obj = new Limit();
+    }
+    else if ( name == Limit01::getFactoryName() ) {
+        obj = new Limit01();
+    }
+    else if ( name == Limit11::getFactoryName() ) {
+        obj = new Limit11();
+    }
+    else if ( name == LimitFunc::getFactoryName() ) {
+        obj = new LimitFunc();
+    }
+    else if ( name == LowpassFilter::getFactoryName() ) {
+        obj = new LowpassFilter();
+    }
+    else if ( name == SaH::getFactoryName() ) {
+        obj = new SaH();
+    }
+    else if ( name == SecondOrderTf::getFactoryName() ) {
+        obj = new SecondOrderTf();
+    }
+    else if ( name == Sz1::getFactoryName() ) {
+        obj = new Sz1();
+    }
+    else if ( name == Sz2::getFactoryName() ) {
+        obj = new Sz2();
     }
 
     // relations

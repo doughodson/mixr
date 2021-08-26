@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(LagFilter,"LagFilter")
+IMPLEMENT_SUBCLASS(LagFilter, "LagFilter")
 EMPTY_DELETEDATA(LagFilter)
 
 BEGIN_SLOTTABLE(LagFilter)

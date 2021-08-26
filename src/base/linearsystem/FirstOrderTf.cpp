@@ -102,9 +102,9 @@ void FirstOrderTf::initialize()
       }
 
       if (isMessageEnabled(MSG_DEBUG)) {
-      std::cout << "a[1] = " << pa[1] << std::endl;
-      std::cout << "b[0] = " << pb[0] << std::endl;
-      std::cout << "b[1] = " << pb[1] << std::endl;
+         std::cout << "a[1] = " << pa[1] << std::endl;
+         std::cout << "b[0] = " << pb[0] << std::endl;
+         std::cout << "b[1] = " << pb[1] << std::endl;
       }
    }
 }
