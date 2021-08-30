@@ -20,7 +20,6 @@ MIXR_3RD_PARTY_ROOT = "../../../mixr-3rdparty"
 --
 MIXR_IncPath         = "../../include"
 MIXR_3rdPartyIncPath = MIXR_3RD_PARTY_ROOT.."/include"
-DEPS_IncPath         = "../../deps/include"
 
 --
 -- directory location for HLA include and library paths
@@ -56,7 +55,7 @@ workspace "mixr"
    --     Debug          (Runtime library is Multi-threaded Debug DLL)
    --
    configurations { "Release", "Debug" }
-   platforms { "Win32", "Win64" }
+   platforms { "x64" }
 
    -- visual studio options and warnings
    -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
@@ -68,10 +67,12 @@ workspace "mixr"
 
    -- common release configuration flags and symbols
    filter { "configurations:Release" }
+      symbols "Off"
       optimize "On"
-      -- favor speed over size
-      buildoptions { "/Ot" }
+      buildoptions { "/Ot" } -- favor speed over size
       defines { "WIN32", "_LIB", "NDEBUG" }
+
+   filter {}
 
    -- common debug configuration flags and symbols
    filter { "configurations:Debug" }
@@ -79,13 +80,11 @@ workspace "mixr"
       symbols "On"
       defines { "WIN32", "_LIB", "_DEBUG" }
 
-   filter { "platforms:Win32" }
+   filter { "platforms:x64" }
       system "Windows"
-      architecture "x32"
+      architecture "x86_64"
 
-   filter { "platforms:Win64" }
-      system "Windows"
-      architecture "x64"
+   filter {}
 
    -- core libraries
    dofile "core-libs.lua"
