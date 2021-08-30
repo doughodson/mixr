@@ -17,6 +17,7 @@ include makedefs
 # models            : JSBSim
 # ighost_cigi       : CIGICL 3.x
 # ighost_flightgear : -
+# ighost_pov        : -
 # recorder          : Google protocol buffers
 # simulation        : -
 # terrain           : -
@@ -52,6 +53,7 @@ PROJECTS += interop/rprfom
 #
 PROJECTS += ighost/cigi
 PROJECTS += ighost/flightgear
+PROJECTS += ighost/pov
 
 #
 # Map format reader libraries
