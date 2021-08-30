@@ -1,6 +1,8 @@
 
 #include "mixr/ighost/pov/PovHost.hpp"
 
+#include "mixr/base/util/endian_utils.hpp"
+#include "mixr/ighost/pov/swap_endian.hpp"
 #include "mixr/ighost/pov/Pov.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
@@ -10,6 +12,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Vec3d"
+#include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
 namespace pov {
@@ -164,10 +167,13 @@ void PovHost::sendData()
       Pov pov;
 
       const base::Vec3d pos{av->getPosition()};
-      pov.x = pos[0] * base::distance::M2FT;
-      pov.y = pos[1] * base::distance::M2FT;
-      pov.z = -pos[2] * base::distance::M2FT;   // altitude
+      pov.x = pos[0] * base::length::M2FT;
+      pov.y = pos[1] * base::length::M2FT;
+      pov.z = -pos[2] * base::length::M2FT;   // altitude
 
+      if (!base::is_big_endian()) {
+         swap_endian(&pov);
+      }
       if (netOutput != nullptr) {
          netOutput->sendData( reinterpret_cast<char*>(&pov), sizeof(pov) );
       }
