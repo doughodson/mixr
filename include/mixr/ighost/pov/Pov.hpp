@@ -10,9 +10,9 @@ struct Pov
   Pov() = default;
 
   // position
-  double x{};
-  double y{};
-  double z{};   // altitude
+  double latitude{};
+  double longitude{};
+  double altitude{};
 
   // orientation
   double theta{};

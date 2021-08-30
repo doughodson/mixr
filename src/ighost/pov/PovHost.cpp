@@ -158,18 +158,25 @@ bool PovHost::initNetwork()
 
 void PovHost::sendData()
 {
-   //const double DEG2MR = (PI / 180.0f * 1000.0f);
-
    // Ownship type air vehicle?
    const auto av = dynamic_cast<const models::AirVehicle*>(ownship);
    if (av != nullptr) {
 
       Pov pov;
 
-      const base::Vec3d pos{av->getPosition()};
-      pov.x = pos[0] * base::length::M2FT;
-      pov.y = pos[1] * base::length::M2FT;
-      pov.z = -pos[2] * base::length::M2FT;   // altitude
+      std::cout << "Latitude: " << av->getLatitude() << std::endl;
+      std::cout << "Longitude: " << av->getLongitude() << std::endl;
+      std::cout << "Altitude: " << av->getAltitudeAglM() << std::endl;
+      std::cout << std::endl;
+
+
+      pov.latitude = av->getLatitude();      // degrees
+      pov.longitude = av->getLongitude();    // degrees
+      pov.altitude = av->getAltitudeAglM();  // altitude (AGL) in meters
+
+      pov.phi = av->getRollD();
+      pov.theta = av->getPitchD();
+      pov.psi = av->getHeadingD();
 
       if (!base::is_big_endian()) {
          swap_endian(&pov);

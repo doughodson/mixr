@@ -7,7 +7,6 @@ namespace flightgear {
 
 struct FGNetFDM;
 struct FGNetCtrls;
-
 void swap_endian(FGNetFDM* const);
 void swap_endian(FGNetCtrls* const);
 

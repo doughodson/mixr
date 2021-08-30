@@ -11,9 +11,9 @@ namespace pov {
 void swap_endian(Pov* const x)
 {
    // position
-   base::swap_endian<double>(x->x);
-   base::swap_endian<double>(x->y);
-   base::swap_endian<double>(x->z);
+   base::swap_endian<double>(x->latitude);
+   base::swap_endian<double>(x->longitude);
+   base::swap_endian<double>(x->altitude);
    // orientation
    base::swap_endian<double>(x->theta);
    base::swap_endian<double>(x->phi);
