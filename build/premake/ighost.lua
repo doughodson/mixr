@@ -31,4 +31,4 @@
          "../../src/ighost/pov/**.cpp"
       }
       includedirs { MIXR_IncPath }
-      targetname "ighost_flightgear"
+      targetname "ighost_pov"
