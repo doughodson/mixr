@@ -10,15 +10,14 @@ struct Pov
   Pov() = default;
 
   // position
-  double latitude{};
-  double longitude{};
-  double altitude{};
+  double north{};       // meters
+  double east{};        // meters
+  double alt_agl{};     // meters
 
   // orientation
-  double theta{};
-  double phi{};
-  double psi{};
-
+  double roll{};        // (phi) degrees
+  double pitch{};       // (theta) degrees
+  double heading{};     // (psi) degrees
 };
 
 }
