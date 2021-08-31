@@ -164,19 +164,22 @@ void PovHost::sendData()
 
       Pov pov;
 
-      std::cout << "Latitude: " << av->getLatitude() << std::endl;
-      std::cout << "Longitude: " << av->getLongitude() << std::endl;
-      std::cout << "Altitude: " << av->getAltitudeAglM() << std::endl;
-      std::cout << std::endl;
+      const base::Vec3d pos{av->getPosition()};
+      pov.north = pos[0];
+      pov.east = pos[1];
+      pov.alt_agl = av->getAltitudeAgl();  // altitude (AGL) in meters
 
+      pov.roll = av->getRollD();
+      pov.pitch = av->getPitchD();
+      pov.heading = av->getHeadingD();
 
-      pov.latitude = av->getLatitude();      // degrees
-      pov.longitude = av->getLongitude();    // degrees
-      pov.altitude = av->getAltitudeAglM();  // altitude (AGL) in meters
-
-      pov.phi = av->getRollD();
-      pov.theta = av->getPitchD();
-      pov.psi = av->getHeadingD();
+      //std::cout << "north:   " << pov.north   << " meters" << std::endl;
+      //std::cout << "east:    " << pov.east    << " meters" << std::endl;
+      //std::cout << "alt_agl: " << pov.alt_agl << " meters" << std::endl;
+      //std::cout << "roll:    " << pov.roll    << " degrees" << std::endl;
+      //std::cout << "pitch:   " << pov.pitch   << " degrees" << std::endl;
+      //std::cout << "heading: " << pov.heading << " degrees" << std::endl;
+      //std::cout << std::endl;
 
       if (!base::is_big_endian()) {
          swap_endian(&pov);
