@@ -15,9 +15,9 @@ struct Pov
   double alt_agl{};     // meters
 
   // orientation
-  double roll{};        // (phi) degrees
-  double pitch{};       // (theta) degrees
-  double heading{};     // (psi) degrees
+  double roll{};        // degrees (phi)
+  double pitch{};       // degrees (theta)
+  double heading{};     // degrees (psi)
 };
 
 }
