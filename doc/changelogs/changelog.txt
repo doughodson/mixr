@@ -19,8 +19,8 @@ General framework-wide changes, improvements, trends, philosophy, and goals
 
   To improve the consistent use of terminology within MIXR, we have
   shifted all references for this kind of stand-in representation, to a 'proxy' (e.g.,
-  a proxy player).  Proxies are updated and/or managed, etc., by another 
-  (i.e., different, often networked) simulation, that is connected via a 'networked'
+  a proxy player).  Proxies are updated and/or managed, etc., by another
+  (i.e., different, often networked) simulation, that is connected via a 'network'
   interface.  This interaction is facilitated by some kind of 'interoperability'
   protocol or mechanism. In other words, this stand-in representation (that is not being
   updated or managed by this simulation) is called a proxy. We feel the term 'proxy'
@@ -88,7 +88,7 @@ General framework-wide changes, improvements, trends, philosophy, and goals
   Identifiers and Strings are now entirely different types. From an
   implementation point of view, they both use a string to store a particular
   value; but they are now unrelated types. This had an impact on the code base,
-  but interestingly enough, little, in fact, almost no impact on the configuration
+  but interestingly, very little, in fact, almost no impact on the configuration
   files.  Configuration files mostly specified types completely consistent with
   the EDL specification.  It was the C++ side or Object-based classes that
   required some rework and tweaking.
@@ -138,9 +138,9 @@ General framework-wide changes, improvements, trends, philosophy, and goals
 
 - Topic: General refactoring of EDL -> C++ support classes
 
-  The Extensible Description Language (EDL) parses character string into
+  The Extensible Description Language (EDL) parses character strings into
   bite size chunks called tokens.  The meaning of those tokens, and how they are
-  organized determines its 'language.'
+  organized defines the language.
 
   In the case of computer programs, this input language (i.e., EDL) is 'spoken'
   in the form of an ASCII-based file (which we call a configuration file). It is
@@ -183,7 +183,7 @@ General framework-wide changes, improvements, trends, philosophy, and goals
   (e.g., 1, 1.0, 1.0f, etc).  In the C++ language, the value 1 is considered to be an
   integer, the value 1.0 is considered a double and 1.0f is a float.  In other words,
   the C++ language (by default) defines a more strict or finer resolution representations
-  for a number.  In EDL land, if we don't care, we are perfectly willing to accept 1 or 1.0
+  for a number.  EDL doesn't care, we are perfectly willing to accept 1 or 1.0
   as a reasonable value input, then we can just accept a Number.
 
   From this perspective, the EDL language is purposely weakened (comparied to C++) in the
@@ -445,7 +445,7 @@ base library (mixr_base)
    UdpBroadcastHandler class
       1) Internally, 'networkMask' is now being stored as a std::string
       2) Class now marked final
-   
+
    UdpMulticastHandler class
       1) Internally, 'multicastGroup' is now being stored as a std::string
       2) Slot parameter 'loopback' now accepts a Boolean
@@ -740,7 +740,7 @@ graphics library (mixr_graphics)
 
    Page class
       1) Slot parameter for 'subpagesFirst' and 'focusSlavedToSubpage' now
-         accepts a Boolean 
+         accepts a Boolean
 
    Shape classes
       1) Slot parameter for 'filled' in Cirle class now accepts Boolean
