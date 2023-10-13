@@ -10,4 +10,5 @@ del ..\..\lib\*.lib
 rem
 rem create new solution/workspace files
 rem
-premake5-beta1.exe --os=windows --file=mixr.lua vs2019
+premake5-beta2.exe --os=windows --file=mixr.lua vs2019
+premake5-beta2.exe --os=windows --file=mixr.lua vs2022
