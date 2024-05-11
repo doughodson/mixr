@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 

@@ -5,7 +5,7 @@
 #include "mixr/simulation/AbstractNib.hpp"
 
 #include "mixr/interop/common/NetIO.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 #include <array>
 #include <string>
 

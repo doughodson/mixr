@@ -3,7 +3,7 @@
 #include "mixr/interop/hla/NetIO.hpp"
 #include "mixr/interop/hla/Nib.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 #include <iostream>
 

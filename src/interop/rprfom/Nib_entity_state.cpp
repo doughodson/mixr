@@ -4,8 +4,8 @@
 #include "mixr/interop/rprfom/Nib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/WorldModel.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/WorldModel.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

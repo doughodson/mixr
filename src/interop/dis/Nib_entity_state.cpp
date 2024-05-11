@@ -8,12 +8,12 @@
 #include "mixr/interop/dis/Ntm.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/common/player/air/AirVehicle.hpp"
+#include "mixr/models/common/player/ground/GroundVehicle.hpp"
+#include "mixr/models/common/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/common/player/weapon/Missile.hpp"
+#include "mixr/models/common/player/LifeForm.hpp"
+#include "mixr/models/common/system/StoresMgr.hpp"
 
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"

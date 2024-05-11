@@ -5,9 +5,9 @@
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
 #include "mixr/simulation/AbstractPlayer.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/common/player/weapon/AbstractWeapon.hpp"
 
 #include "mixr/simulation/AbstractNib.hpp"
 

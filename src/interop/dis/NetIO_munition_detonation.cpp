@@ -7,9 +7,9 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/common/player/Player.hpp"
+#include "mixr/models/common/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/common/WorldModel.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

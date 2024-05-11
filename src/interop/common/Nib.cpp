@@ -2,12 +2,12 @@
 #include "mixr/interop/common/Nib.hpp"
 #include "mixr/interop/common/Ntm.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/ground/Artillery.hpp"
-#include "mixr/models/player/ground/SamVehicle.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
-#include "mixr/models/SynchronizedState.hpp"
+#include "mixr/models/common/player/air/AirVehicle.hpp"
+#include "mixr/models/common/player/ground/Artillery.hpp"
+#include "mixr/models/common/player/ground/SamVehicle.hpp"
+#include "mixr/models/common/player/weapon/Missile.hpp"
+#include "mixr/models/common/system/StoresMgr.hpp"
+#include "mixr/models/common/SynchronizedState.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"

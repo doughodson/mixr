@@ -1,7 +1,7 @@
 
 #include "mixr/interop/common/Ntm.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 namespace mixr {
 namespace interop {

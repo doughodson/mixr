@@ -9,12 +9,12 @@
 #include "mixr/interop/rprfom/RprFom.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/Ship.hpp"
+#include "mixr/models/common/player/air/AirVehicle.hpp"
+#include "mixr/models/common/player/ground/GroundVehicle.hpp"
+#include "mixr/models/common/player/weapon/Missile.hpp"
+#include "mixr/models/common/player/LifeForm.hpp"
+#include "mixr/models/common/player/Player.hpp"
+#include "mixr/models/common/player/Ship.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

@@ -3,7 +3,7 @@
 
 #include "mixr/interop/common/Ntm.hpp"
 #include "mixr/base/util/str_utils.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 #include "mixr/base/List.hpp"
 
 namespace mixr {

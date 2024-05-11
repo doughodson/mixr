@@ -6,9 +6,9 @@
 #include "mixr/interop/common/NtmOutputNode.hpp"
 #include "NtmOutputNodeStd.hpp"
 
-#include "mixr/models/system/Gun.hpp"
+#include "mixr/models/common/system/Gun.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"

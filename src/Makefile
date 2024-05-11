@@ -26,7 +26,15 @@ PROJECTS = base
 PROJECTS += dafif
 PROJECTS += linkage
 PROJECTS += simulation terrain
-PROJECTS += models
+#
+# Models
+#
+PROJECTS += models/common
+PROJECTS += models/jsbsim
+
+#
+# Data recorder
+#
 PROJECTS += recorder
 
 #

@@ -7,9 +7,9 @@
 
 #include "mixr/interop/dis/Ntm.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/common/player/air/AirVehicle.hpp"
+#include "mixr/models/common/player/weapon/Missile.hpp"
+#include "mixr/models/common/player/Player.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
