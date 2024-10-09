@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_NtmInputNode_HPP__
 #define __mixr_interop_dis_NetInputNode_HPP__
 
-#include "mixr/interop/common/NtmInputNode.hpp"
+#include "mixr/interop/NtmInputNode.hpp"
 
 namespace mixr {
 namespace base { class List; }

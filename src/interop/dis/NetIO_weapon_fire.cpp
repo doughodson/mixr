@@ -7,7 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/common/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/Pair.hpp"

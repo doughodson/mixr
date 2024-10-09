@@ -9,9 +9,9 @@
 #include "mixr/interop/dis/pdu.hpp"
 #include "mixr/interop/dis/utils.hpp"
 
-#include "mixr/models/common/player/weapon/Missile.hpp"
-#include "mixr/models/common/system/StoresMgr.hpp"
-#include "mixr/models/common/WorldModel.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/Station.hpp"
 

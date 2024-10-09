@@ -6,14 +6,14 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/common/system/Antenna.hpp"
-#include "mixr/models/common/Track.hpp"
-#include "mixr/models/common/system/trackmanager/TrackManager.hpp"
-#include "mixr/models/common/system/Jammer.hpp"
-#include "mixr/models/common/system/Radar.hpp"
-#include "mixr/models/common/system/SensorMgr.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/Jammer.hpp"
+#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/SensorMgr.hpp"
 
-#include "mixr/models/common/WorldModel.hpp"
+#include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"

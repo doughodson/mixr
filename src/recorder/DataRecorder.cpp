@@ -5,12 +5,12 @@
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 
-#include "mixr/models/common/player/air/AirVehicle.hpp"
-#include "mixr/models/common/player/Player.hpp"
-#include "mixr/models/common/player/weapon/AbstractWeapon.hpp"
-#include "mixr/models/common/system/Antenna.hpp"
-#include "mixr/models/common/Track.hpp"
-#include "mixr/models/common/Emission.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/system/Antenna.hpp"
+#include "mixr/models/Track.hpp"
+#include "mixr/models/Emission.hpp"
 
 #include "mixr/simulation/AbstractNib.hpp"
 #include "mixr/simulation/Simulation.hpp"

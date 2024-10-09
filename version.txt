@@ -1,2 +1,2 @@
-Developmental version based on v24.05
+Stable version v24.10
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_Ntm_HPP__
 #define __mixr_interop_dis_Ntm_HPP__
 
-#include "mixr/interop/common/Ntm.hpp"
+#include "mixr/interop/Ntm.hpp"
 #include "mixr/interop/dis/NetIO.hpp"
 
 namespace mixr {

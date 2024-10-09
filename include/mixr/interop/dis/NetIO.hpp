@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_NetIO_HPP__
 #define __mixr_interop_dis_NetIO_HPP__
 
-#include "mixr/interop/common/NetIO.hpp"
+#include "mixr/interop/NetIO.hpp"
 
 #include <array>
 

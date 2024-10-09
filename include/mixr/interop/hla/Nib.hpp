@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_hla_Nib_H__
 #define __mixr_interop_hla_Nib_H__
 
-#include "mixr/interop/common/Nib.hpp"
+#include "mixr/interop/Nib.hpp"
 #include "mixr/interop/hla/NetIO.hpp"
 #include <array>
 

@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
-#include "mixr/models/common/player/Player.hpp"
+#include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"

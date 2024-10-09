@@ -13,8 +13,9 @@ include makedefs
 # interop_hla       : HLA RTI
 # interop_rprfom    : HLA RTI
 # linkage           : -
-# map_rpf           : -
-# models            : JSBSim
+# map               : -
+# models            : -
+# models_jsbsim     : JSBSim
 # ighost_cigi       : CIGICL 3.x
 # ighost_flightgear : -
 # ighost_pov        : -
@@ -25,12 +26,13 @@ include makedefs
 PROJECTS = base
 PROJECTS += dafif
 PROJECTS += linkage
-PROJECTS += simulation terrain
+PROJECTS += simulation
+PROJECTS += terrain
 #
 # Models
 #
-PROJECTS += models/common
-PROJECTS += models/jsbsim
+PROJECTS += models
+PROJECTS += models/dynamics/jsbsim
 
 #
 # Data recorder
@@ -51,10 +53,10 @@ PROJECTS += ui/glut
 #
 # Interoperability interfaces
 #
-PROJECTS += interop/common
+PROJECTS += interop
 PROJECTS += interop/dis
 PROJECTS += interop/hla
-PROJECTS += interop/rprfom
+PROJECTS += interop/hla/rprfom
 
 #
 # Image generator host interfaces

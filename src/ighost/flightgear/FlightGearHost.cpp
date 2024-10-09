@@ -5,8 +5,8 @@
 #include "mixr/ighost/flightgear/swap_endian.hpp"
 #include "mixr/ighost/flightgear/FGNetFDM.hpp"
 
-#include "mixr/models/common/player/air/AirVehicle.hpp"
-#include "mixr/models/common/player/Player.hpp"
+#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/Pair.hpp"

@@ -7,8 +7,8 @@
 
 #include "mixr/simulation/AbstractNib.hpp"
 
-#include "mixr/models/common/player/Player.hpp"
-#include "mixr/models/common/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/ground/GroundVehicle.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"

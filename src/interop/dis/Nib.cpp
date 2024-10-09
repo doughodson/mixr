@@ -4,9 +4,9 @@
 #include "mixr/interop/dis/EmissionPduHandler.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/common/system/Jammer.hpp"
-#include "mixr/models/common/system/Radar.hpp"
-#include "mixr/models/common/WorldModel.hpp"
+#include "mixr/models/system/Jammer.hpp"
+#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

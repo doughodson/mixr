@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_hla_NetIO_H__
 #define __mixr_interop_hla_NetIO_H__
 
-#include "mixr/interop/common/NetIO.hpp"
+#include "mixr/interop/NetIO.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
