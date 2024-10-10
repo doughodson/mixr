@@ -6,8 +6,8 @@ LIB = $(MIXR_LIB_DIR)/libmixr_models_jsbsim.a
 CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
 OBJS =  \
-	JSBSimModel.o \
-	factory.o
+	factory.o \
+	JSBSimModel.o
 
 .PHONY: all clean
 

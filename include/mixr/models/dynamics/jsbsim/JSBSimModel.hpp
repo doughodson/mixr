@@ -10,6 +10,10 @@ namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
 namespace mixr {
 namespace base { class String; class Integer; }
+}
+
+namespace mixr {
+namespace models {
 namespace jsbsim {
 
 //------------------------------------------------------------------------------
@@ -104,6 +108,7 @@ private:
    bool setSlotDebugLevel(const base::Integer* const);
 };
 
+}
 }
 }
 

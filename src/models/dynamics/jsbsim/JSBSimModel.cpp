@@ -42,6 +42,7 @@
 #include <JSBSim/simgear/misc/sg_path.hxx>
 
 namespace mixr {
+namespace models {
 namespace jsbsim {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
@@ -981,6 +982,7 @@ bool JSBSimModel::setCommandedAltitude(const double a, const double, const doubl
     return hasAltitudeHold;
 }
 
+}
 }
 }
 
