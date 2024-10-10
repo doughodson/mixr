@@ -1,2 +1,2 @@
-Stable version v24.10
+Stable version v24.10rc1
 

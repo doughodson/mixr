@@ -1,5 +1,5 @@
 
-#include "mixr/models-jsbsim/JSBSimModel.hpp"
+#include "mixr/models/dynamics/jsbsim/JSBSimModel.hpp"
 
 #include "mixr/models/player/Player.hpp"
 

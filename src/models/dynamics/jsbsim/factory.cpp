@@ -1,9 +1,9 @@
 
-#include "mixr/models-jsbsim/factory.hpp"
+#include "mixr/models/dynamics/jsbsim/factory.hpp"
 
 #include "mixr/base/Object.hpp"
 
-#include "mixr/models-jsbsim/JSBSimModel.hpp"
+#include "mixr/models/dynamics/jsbsim/JSBSimModel.hpp"
 
 #include <string>
 
