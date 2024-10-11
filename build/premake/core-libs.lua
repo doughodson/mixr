@@ -68,7 +68,7 @@
          "../../src/linkage/**.*",
          "../../src/linkage/**.h*"
       }
-      excludes { "../../src/linkage/platform/UsbJoystick_linux.*"   }
+      excludes { "../../src/linkage/platform/UsbJoystick_linux.*" }
       includedirs { MIXR_IncPath }
       targetname "linkage"
 
@@ -80,9 +80,24 @@
          "../../include/mixr/models/**.inl",
          "../../src/models/**.cpp"
       }
+      excludes { 
+                 "../../include/mixr/models/dynamics/jsbsim/**.hpp",
+                 "../../src/models/dynamics/jsbsim/**.cpp"
+      }
+      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
+      targetname "models"
+
+   -- models_jsbsim library
+   project "models_jsbsim"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
+      files {
+         "../../include/mixr/models/dynamics/jsbsim/**.h*",
+         "../../include/mixr/models/dynamics/jsbsim/**.inl",
+         "../../src/models/dynamics/jsbsim/**.cpp"
+      }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/JSBSim" }
-      targetname "models"
+      targetname "models_jsbsim"
 
    -- data recorder library
    project "recorder"

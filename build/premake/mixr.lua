@@ -3,8 +3,8 @@
 -- If premake command is not supplied an action (target compiler), exit!
 --
 -- Targets of interest:
---     vs2017     (Visual Studio 2017)
 --     vs2019     (Visual Studio 2019)
+--     vs2022     (Visual Studio 2022)
 --
 if (_ACTION == nil) then
     return
