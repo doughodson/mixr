@@ -16,7 +16,7 @@
          "../../src/base/**.y",
          "../../src/base/**.l"
       }
-      excludes {
+      removefiles {
          "../../src/base/osg/Matrix_implementation.cpp",
          "../../src/base/util/platform/system_linux.cpp",
          "../../src/base/util/platform/system_mingw.cpp",
@@ -68,7 +68,7 @@
          "../../src/linkage/**.*",
          "../../src/linkage/**.h*"
       }
-      excludes { "../../src/linkage/platform/UsbJoystick_linux.*" }
+      removefiles { "../../src/linkage/platform/UsbJoystick_linux.*" }
       includedirs { MIXR_IncPath }
       targetname "linkage"
 
@@ -80,7 +80,7 @@
          "../../include/mixr/models/**.inl",
          "../../src/models/**.cpp"
       }
-      excludes { 
+      removefiles { 
                  "../../include/mixr/models/dynamics/jsbsim/**.hpp",
                  "../../src/models/dynamics/jsbsim/**.cpp"
       }
