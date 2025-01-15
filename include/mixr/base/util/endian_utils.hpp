@@ -1,6 +1,7 @@
 #ifndef __mixr_base_util_endian_utils_HPP__
 #define __mixr_base_util_endian_utils_HPP__
 
+#include <cstdint>
 #include <array>
 #include <algorithm>
 
