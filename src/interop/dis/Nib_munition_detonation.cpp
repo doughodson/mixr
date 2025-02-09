@@ -8,7 +8,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 
@@ -27,7 +27,7 @@ namespace dis {
 bool Nib::munitionDetonationMsgFactory(const double)
 {
    // Dummy weapon?
-   const auto ww = dynamic_cast<const models::AbstractWeapon*>( getPlayer() );
+   const auto ww = dynamic_cast<const models::IWeapon*>( getPlayer() );
    if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
@@ -39,7 +39,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     const auto disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
-    const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+    const auto mPlayer = dynamic_cast<models::IWeapon*>(getPlayer());
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players

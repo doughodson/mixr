@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractNib_HPP__
-#define __mixr_simulation_AbstractNib_HPP__
+#ifndef __mixr_simulation_INib_HPP__
+#define __mixr_simulation_INib_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -9,12 +9,12 @@
 namespace mixr {
 namespace base { class Vec3d; }
 namespace simulation {
-class AbstractNetIO;
+class INetIO;
 
 //------------------------------------------------------------------------------
-// Class: AbstractNib
+// Class: INib
 //
-// Description: Abstract Network Interface Block (Nib)
+// Description: Interface Network Interface Block (Nib)
 //
 //    This class is used to manage the relationship between players and their
 //    corresponding entities on the interoperability networks (e.g., DIS, HLA).
@@ -34,20 +34,20 @@ class AbstractNetIO;
 //    is common data used by most interoperability network entities.  Additional
 //    entity data is added by the network specific classes derived from Nib.
 //
-// Factory name: AbstractNib
+// Factory name: INib
 //------------------------------------------------------------------------------
-class AbstractNib : public base::Component
+class INib : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractNib, base::Component)
+   DECLARE_SUBCLASS(INib, base::Component)
 
 public:
-   AbstractNib();
+   INib();
 
    virtual const std::string& getFederateName() const =0;    // federate name
 
    virtual unsigned short getPlayerID() const =0;
 
-   virtual AbstractNetIO* getNetIO() =0;
+   virtual INetIO* getNetIO() =0;
 
    // update incoming entity dead reckoning
    virtual bool updateDeadReckoning(

@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class Boolean; class Identifier; class Latitude; class Length; class Longitude; class Number; }
 namespace terrain { class Terrain; }
 namespace models {
-class AbstractAtmosphere;
+class IAtmosphere;
 
 //------------------------------------------------------------------------------
 // Class: WorldModel
@@ -109,8 +109,8 @@ public:
 
     // environmental interface
     const terrain::Terrain* getTerrain() const;            // returns the terrain elevation database
-    AbstractAtmosphere* getAtmosphere();                   // returns the atmosphere model
-    const AbstractAtmosphere* getAtmosphere() const;       // returns the atmosphere model (const version)
+    IAtmosphere* getAtmosphere();                          // returns the atmosphere model
+    const IAtmosphere* getAtmosphere() const;              // returns the atmosphere model (const version)
 
     void reset() override;
 
@@ -144,7 +144,7 @@ private:
                               //       ecef = wm; * earthNED
                               //       earthNED  = ecef * wm;
 
-   AbstractAtmosphere* atmosphere {};
+   IAtmosphere* atmosphere {};
    terrain::Terrain* terrain {};
 
 private:
@@ -161,7 +161,7 @@ private:
 
    // environmental interface
    bool setSlotTerrain(terrain::Terrain* const);
-   bool setSlotAtmosphere(AbstractAtmosphere* const);
+   bool setSlotAtmosphere(IAtmosphere* const);
 };
 
 }

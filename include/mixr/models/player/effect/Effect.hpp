@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Effect_HPP__
 #define __mixr_models_common_Effect_HPP__
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 namespace mixr {
 namespace models {
@@ -21,9 +21,9 @@ namespace models {
 //    dragIndex   <Number>   ! drag index used by default dynamics (default: 0.0006)
 //
 //------------------------------------------------------------------------------
-class Effect : public AbstractWeapon
+class Effect : public IWeapon
 {
-    DECLARE_SUBCLASS(Effect, AbstractWeapon)
+    DECLARE_SUBCLASS(Effect, IWeapon)
 
 public:
     Effect();

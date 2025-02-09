@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrAtmosphere_HPP__
 #define __mixr_models_common_IrAtmosphere_HPP__
 
-#include "mixr/models/environment/AbstractAtmosphere.hpp"
+#include "mixr/models/environment/IAtmosphere.hpp"
 
 namespace mixr {
 namespace base { class Number; class Table1; class Table2; class Table3;
@@ -75,9 +75,9 @@ class IrQueryMsg;
 //   )
 //
 //------------------------------------------------------------------------------
-class IrAtmosphere : public AbstractAtmosphere
+class IrAtmosphere : public IAtmosphere
 {
-   DECLARE_SUBCLASS(IrAtmosphere, AbstractAtmosphere)
+   DECLARE_SUBCLASS(IrAtmosphere, IAtmosphere)
 
 public:
    IrAtmosphere();

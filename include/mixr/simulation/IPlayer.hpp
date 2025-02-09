@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractPlayer_HPP__
-#define __mixr_simulation_AbstractPlayer_HPP__
+#ifndef __mixr_simulation_IPlayer_HPP__
+#define __mixr_simulation_IPlayer_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -9,13 +9,13 @@
 namespace mixr {
 namespace base { class Identifier; class Integer; }
 namespace simulation {
-class AbstractNib;
+class INib;
 
 //------------------------------------------------------------------------------
-// Class: AbstractPlayer
-// Description: Abstract interface for all players
+// Class: IPlayer
+// Description: Interface for all players
 //
-// Factory name: AbstractPlayer
+// Factory name: IPlayer
 //
 // Slots --
 //
@@ -26,12 +26,12 @@ class AbstractNib;
 //    mode           <base::Identifier>  ! initial mode { inactive, active, killed, crashed, detonated, launched }
 //                                       !   (default: active)
 //------------------------------------------------------------------------------
-class AbstractPlayer : public base::Component
+class IPlayer : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractPlayer, base::Component)
+   DECLARE_SUBCLASS(IPlayer, base::Component)
 
 public:
-   AbstractPlayer();
+   IPlayer();
 
    // player mode
    enum class Mode {
@@ -73,17 +73,17 @@ public:
    bool isLocalPlayer() const               { return nib == nullptr; }    // true if this is a local player
 
    int getNetworkID() const                 { return netID; }             // id of a proxy player's controlling network model
-   AbstractNib* getNib()                    { return nib;   }             // proxy player's Nib object
-   const AbstractNib* getNib() const        { return nib;   }             // proxy player's Nib object  (const version)
+   INib* getNib()                           { return nib;   }             // proxy player's Nib object
+   const INib* getNib() const               { return nib;   }             // proxy player's Nib object  (const version)
 
    bool isNetOutputEnabled() const          { return enableNetOutput; }   // is player output to the network enabled?
-   AbstractNib* getLocalNib(const int netId);                             // player's outgoing NIB(s)
-   const AbstractNib* getLocalNib(const int netId) const;                 // player's outgoing NIB(s)  (const version)
+   INib* getLocalNib(const int netId);                                    // player's outgoing NIB(s)
+   const INib* getLocalNib(const int netId) const;                        // player's outgoing NIB(s)  (const version)
 
    // helper methods
-   virtual bool setNib(AbstractNib* const);                           // Sets the proxy player's Nib object
+   virtual bool setNib(INib* const);                                  // Sets the proxy player's Nib object
    virtual bool setEnableNetOutput(const bool);                       // Sets the network output enabled flag
-   virtual bool setOutgoingNib(AbstractNib* const, const int id);     // Sets the outgoing NIB for network 'id'
+   virtual bool setOutgoingNib(INib* const, const int id);            // Sets the outgoing NIB for network 'id'
 
    void reset() override;
 
@@ -91,7 +91,7 @@ protected:
    bool shutdownNotification() override;
 
    Mode mode{Mode::ACTIVE};      // Player mode (see above)
-   AbstractNib* nib{};           // Network Interface Block (ref()'d)
+   INib* nib{};                  // Network Interface Block (ref()'d)
 
 private:
    void initData();
@@ -106,7 +106,7 @@ private:
    int netID{};                   // network id
 
    // outgoing network support data
-   AbstractNib** nibList{};       // pointer to a list of outgoing NIBs
+   INib** nibList{};              // pointer to a list of outgoing NIBs
    bool enableNetOutput{true};    // enable output to the network
 
 private:

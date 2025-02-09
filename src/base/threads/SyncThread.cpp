@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base {
 
-SyncThread::SyncThread(Component* const p) : AbstractThread(p)
+SyncThread::SyncThread(Component* const p) : IThread(p)
 {
 }
 
@@ -22,7 +22,7 @@ SyncThread::~SyncThread()
 //-----------------------------------------------------------------------------
 bool SyncThread::configThread()
 {
-   bool ok{AbstractThread::configThread()};
+   bool ok{IThread::configThread()};
 
    // Create the signals
    if (ok) ok = createSignals();
@@ -76,7 +76,7 @@ unsigned long SyncThread::mainThreadFunc()
 bool SyncThread::terminate()
 {
    signalCompleted();
-   return AbstractThread::terminate();
+   return IThread::terminate();
 }
 
 }

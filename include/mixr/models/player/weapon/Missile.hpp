@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Missile_HPP__
 #define __mixr_models_common_Missile_HPP__
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 namespace mixr {
 namespace base { class Number; }
@@ -26,9 +26,9 @@ class Track;
 //   cmdSpeed     <Number>  ! Command speed (m/s) (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class Missile : public AbstractWeapon
+class Missile : public IWeapon
 {
-    DECLARE_SUBCLASS(Missile, AbstractWeapon)
+    DECLARE_SUBCLASS(Missile, IWeapon)
 
 public:
     Missile();

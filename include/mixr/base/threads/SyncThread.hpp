@@ -2,7 +2,7 @@
 #ifndef __mixr_base_SyncTask_HPP__
 #define __mixr_base_SyncTask_HPP__
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,7 +11,7 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: SyncThread
 //
-// Description: Abstract synchronized (i.e., start/complete loop) thread;
+// Description: Synchronized (i.e., start/complete loop) thread;
 //              multiple calls to the user defined work function with
 //              start/complete signals.
 //
@@ -23,7 +23,7 @@ class Component;
 //    wait for several sync task threads.  Loop will end with the shutdown of
 //    the parent.
 //------------------------------------------------------------------------------
-class SyncThread : public AbstractThread
+class SyncThread : public IThread
 {
 public:
    SyncThread(Component* const parent);

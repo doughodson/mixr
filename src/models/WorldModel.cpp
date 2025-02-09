@@ -15,7 +15,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 // environment models
-#include "mixr/models/environment/AbstractAtmosphere.hpp"
+#include "mixr/models/environment/IAtmosphere.hpp"
 #include "mixr/terrain/Terrain.hpp"
 
 #include <cmath>
@@ -58,7 +58,7 @@ BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Boolean)
 
     ON_SLOT( 6, setSlotTerrain,              terrain::Terrain)
-    ON_SLOT( 7, setSlotAtmosphere,           AbstractAtmosphere)
+    ON_SLOT( 7, setSlotAtmosphere,           IAtmosphere)
 END_SLOT_MAP()
 
 WorldModel::WorldModel()
@@ -99,7 +99,7 @@ void WorldModel::copyData(const WorldModel& org, const bool cc)
    }
 
    if (org.atmosphere != nullptr) {
-      AbstractAtmosphere* copy = org.atmosphere->clone();
+      IAtmosphere* copy = org.atmosphere->clone();
       setSlotAtmosphere( copy );
       copy->unref();
    }
@@ -354,13 +354,13 @@ terrain::Terrain* WorldModel::getTerrain()
 }
 
 // returns the atmosphere model
-AbstractAtmosphere* WorldModel::getAtmosphere()
+IAtmosphere* WorldModel::getAtmosphere()
 {
    return atmosphere;
 }
 
 // returns the atmospheric model
-const AbstractAtmosphere* WorldModel::getAtmosphere() const
+const IAtmosphere* WorldModel::getAtmosphere() const
 {
    return atmosphere;
 }
@@ -373,7 +373,7 @@ bool WorldModel::setSlotTerrain(terrain::Terrain* const msg)
    return true;
 }
 
-bool WorldModel::setSlotAtmosphere(AbstractAtmosphere* const msg)
+bool WorldModel::setSlotAtmosphere(IAtmosphere* const msg)
 {
    if (atmosphere != nullptr) atmosphere->unref();
    atmosphere = msg;

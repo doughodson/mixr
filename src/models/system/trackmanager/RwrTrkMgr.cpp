@@ -4,7 +4,7 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 
@@ -14,7 +14,7 @@
 #include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 namespace mixr {

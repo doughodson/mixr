@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class Boolean; class String; }
 namespace models {
-class AbstractWeapon;
+class IWeapon;
 class Bomb;
 class Missile;
 class Track;
@@ -46,7 +46,7 @@ public:
    virtual Bomb* getSpecificBomb(const base::String* const bombType);
 
    // Get the first weapon by type from our weapons list (Pre-ref()'d)
-   virtual AbstractWeapon* getSpecificWeapon(const std::type_info& type);
+   virtual IWeapon* getSpecificWeapon(const std::type_info& type);
 
    // Get the target track
    virtual Track* getNextTarget();
@@ -56,8 +56,8 @@ public:
    bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
    bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
 
-   AbstractWeapon* getCurrentWeapon() override;
-   const AbstractWeapon* getCurrentWeapon() const override;
+   IWeapon* getCurrentWeapon() override;
+   const IWeapon* getCurrentWeapon() const override;
    bool isWeaponReleased() const override;
    Missile* getNextMissile() override;
    const Missile* getNextMissile() const override;

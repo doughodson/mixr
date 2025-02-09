@@ -9,7 +9,7 @@ OBJS =  \
 	dynamics/LaeroModel.o  \
 	dynamics/RacModel.o \
 	dynamics/SpaceDynamicsModel.o \
-	environment/AbstractAtmosphere.o \
+	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \
 	navigation/Bullseye.o \
@@ -40,7 +40,7 @@ OBJS =  \
 	player/space/SpaceVehicle.o \
 	player/space/UnmannedSpaceVehicle.o \
 	player/weapon/Aam.o \
-	player/weapon/AbstractWeapon.o \
+	player/weapon/IWeapon.o \
 	player/weapon/Agm.o \
 	player/weapon/Bomb.o \
 	player/weapon/Bullet.o \

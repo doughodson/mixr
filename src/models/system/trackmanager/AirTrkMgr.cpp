@@ -4,7 +4,7 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
@@ -13,7 +13,7 @@
 #include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 namespace mixr {
@@ -151,7 +151,7 @@ void AirTrkMgr::processTrackList(const double dt)
 
       bool dummy{};
       if (tgt->isMajorType(Player::WEAPON)) {
-         dummy = (static_cast<const AbstractWeapon*>(tgt))->isDummy();
+         dummy = (static_cast<const IWeapon*>(tgt))->isDummy();
       }
 
       if ( tgt->isMajorType(Player::AIR_VEHICLE) ||

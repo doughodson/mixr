@@ -1,11 +1,11 @@
 
 #include "mixr/simulation/Station.hpp"
 
-#include "mixr/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/IPlayer.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
-#include "mixr/simulation/AbstractNetIO.hpp"
-#include "mixr/simulation/AbstractIgHost.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
+#include "mixr/simulation/INetIO.hpp"
+#include "mixr/simulation/IIgHost.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -82,7 +82,7 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(16, setSlotStartupResetTime,      base::Time)
    ON_SLOT(17, setSlotEnableUpdateTimers,    base::Boolean)
 
-   ON_SLOT(18, setSlotDataRecorder,           AbstractDataRecorder)
+   ON_SLOT(18, setSlotDataRecorder,          IDataRecorder)
 END_SLOT_MAP()
 
 Station::Station()
@@ -134,7 +134,7 @@ void Station::copyData(const Station& org, const bool)
    }
 
    {  // clone the data recorder
-      AbstractDataRecorder* copy{};
+      IDataRecorder* copy{};
       if (org.dataRecorder != nullptr) copy = org.dataRecorder->clone();
       setDataRecorder(copy);
       if (copy != nullptr) copy->unref();
@@ -229,7 +229,7 @@ void Station::reset()
       base::List::Item* item {igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         const auto p = static_cast<AbstractIgHost*>(pair->object());
+         const auto p = static_cast<IIgHost*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -240,7 +240,7 @@ void Station::reset()
       base::List::Item* item {networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto p = static_cast<INetIO*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -285,7 +285,7 @@ void Station::updateTC(const double dt)
       while (item != nullptr) {
 
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractIgHost*>(pair->object());
+         const auto p = static_cast<IIgHost*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -533,7 +533,7 @@ void Station::processBackgroundTasks(const double dt)
       base::List::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractIgHost*>(pair->object());
+         const auto p = static_cast<IIgHost*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -551,7 +551,7 @@ void Station::processNetworkInputTasks(const double dt)
       base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto p = static_cast<INetIO*>(pair->object());
 
          p->inputFrame( dt );
 
@@ -570,7 +570,7 @@ void Station::processNetworkOutputTasks(const double dt)
       base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto p = static_cast<INetIO*>(pair->object());
 
          p->outputFrame( dt );
 
@@ -596,13 +596,13 @@ const Simulation* Station::getSimulation() const
 }
 
 // Returns the ownship (primary) player
-AbstractPlayer* Station::getOwnship()
+IPlayer* Station::getOwnship()
 {
    return ownship;
 }
 
 // Returns the ownship (primary) player (const version)
-const AbstractPlayer* Station::getOwnship() const
+const IPlayer* Station::getOwnship() const
 {
    return ownship;
 }
@@ -662,13 +662,13 @@ const base::AbstractIoHandler* Station::getIoHandler() const
 }
 
 // Returns the data recorder
-AbstractDataRecorder* Station::getDataRecorder()
+IDataRecorder* Station::getDataRecorder()
 {
    return dataRecorder;
 }
 
 // Returns the data recorder (const version)
-const AbstractDataRecorder* Station::getDataRecorder() const
+const IDataRecorder* Station::getDataRecorder() const
 {
    return dataRecorder;
 }
@@ -816,7 +816,7 @@ bool Station::setOwnshipByName(const char* const newOS)
       if (newOS != nullptr) {
          base::Pair* p{pl->findByName(newOS)};
          if (p != nullptr) {
-            const auto newOwnship = static_cast<AbstractPlayer*>(p->object());
+            const auto newOwnship = static_cast<IPlayer*>(p->object());
             if (newOwnship != ownship) {
                // Ok, we found the new ownship and it IS a different
                // player then the previous ownship ...
@@ -838,7 +838,7 @@ bool Station::setOwnshipByName(const char* const newOS)
 //------------------------------------------------------------------------------
 // setOwnshipPlayer() -- set this player as our ownship
 //------------------------------------------------------------------------------
-bool Station::setOwnshipPlayer(AbstractPlayer* const x)
+bool Station::setOwnshipPlayer(IPlayer* const x)
 {
     // Is it already own ownship?  Yes, then nothing else to do.
     if (x == ownship) return true;
@@ -863,7 +863,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const x)
         while (item != nullptr && !set) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
+                const auto ip = dynamic_cast<IPlayer*>( pair->object() );
                 if (ip == x && ip->isLocalPlayer()) {
                     // Unref the old stuff
                     if (!ownshipName.empty()) { ownshipName.clear(); }
@@ -892,7 +892,7 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const x)
 //------------------------------------------------------------------------------
 // Sets the data recorder
 //------------------------------------------------------------------------------
-bool Station::setDataRecorder(AbstractDataRecorder* const p)
+bool Station::setDataRecorder(IDataRecorder* const p)
 {
    if (dataRecorder != nullptr) { dataRecorder->container(nullptr); dataRecorder->unref(); }
    dataRecorder = p;
@@ -926,7 +926,7 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
    if (list != nullptr) {
       for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = dynamic_cast<AbstractIgHost*>(pair->object());
+         const auto p = dynamic_cast<IIgHost*>(pair->object());
          if (p != nullptr) {
             if (newList == nullptr) {
                newList = new base::PairStream();
@@ -991,7 +991,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
         // we are no longer the container for these networks
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = static_cast<AbstractNetIO*>(pair->object());
+            const auto p = static_cast<INetIO*>(pair->object());
             p->container(nullptr);
         }
     }
@@ -1003,7 +1003,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     if (networks != nullptr) {
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<AbstractNetIO*>(pair->object());
+            const auto p = dynamic_cast<INetIO*>(pair->object());
             if (p != nullptr) {
                 // We are this network's container
                 p->container(this);

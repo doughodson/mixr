@@ -1,17 +1,17 @@
 
-#ifndef __mixr_simulation_AbstractIgHost_HPP__
-#define __mixr_simulation_AbstractIgHost_HPP__
+#ifndef __mixr_simulation_IIgHost_HPP__
+#define __mixr_simulation_IIgHost_HPP__
 
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
 namespace base { class PairStream; }
 namespace simulation {
-class AbstractPlayer;
+class IPlayer;
 
 //------------------------------------------------------------------------------
-// Class: AbstractIgHost
-// Description: Abstract image generator visual system host interface
+// Class: IIgHost
+// Description: Interface to image generator visual system host
 //
 // Notes:
 //    1) Derived versions of this class are used to interface with various
@@ -21,15 +21,15 @@ class AbstractPlayer;
 //
 // Factory name: AbstractIgHost
 //------------------------------------------------------------------------------
-class AbstractIgHost : public base::Component
+class IIgHost : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractIgHost, base::Component)
+   DECLARE_SUBCLASS(IIgHost, base::Component)
 
 public:
-   AbstractIgHost();
+   IIgHost();
 
    // sets our ownship and player list pointers, used by Station class
-   virtual void setOwnship(AbstractPlayer* const) =0;
+   virtual void setOwnship(IPlayer* const) =0;
    virtual void setPlayerList(base::PairStream* const) =0; // Sets the player list that we're to use to generate player/models
 
    void updateTC(const double dt = 0.0) final {

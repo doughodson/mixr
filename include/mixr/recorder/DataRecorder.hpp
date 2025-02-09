@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_DataRecorder_HPP__
 #define __mixr_recorder_DataRecorder_HPP__
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 #include <string>
 
 namespace mixr {
@@ -51,9 +51,9 @@ class OutputHandler;
 //    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
 //
 //------------------------------------------------------------------------------
-class DataRecorder : public simulation::AbstractDataRecorder
+class DataRecorder : public simulation::IDataRecorder
 {
-   DECLARE_SUBCLASS(DataRecorder, simulation::AbstractDataRecorder)
+   DECLARE_SUBCLASS(DataRecorder, simulation::IDataRecorder)
 
 public:
    DataRecorder();

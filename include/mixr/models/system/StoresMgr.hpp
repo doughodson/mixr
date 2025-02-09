@@ -14,7 +14,7 @@ class Flare;
 class Gun;
 class Missile;
 class Sam;
-class AbstractWeapon;
+class IWeapon;
 
 //------------------------------------------------------------------------------
 // Class: StoresMgr
@@ -82,8 +82,8 @@ public:
    virtual bool isGunSelected() const;                                // Returns true when gun is selected
    virtual bool isWeaponReleased() const;                             // Are weapons being released?
 
-   virtual AbstractWeapon* getCurrentWeapon();                 // The current weapon (Pre-ref()'d)
-   virtual const AbstractWeapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
+   virtual IWeapon* getCurrentWeapon();                 // The current weapon (Pre-ref()'d)
+   virtual const IWeapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
 
    virtual bool setMasterArm(const unsigned int newMode);        // Sets the master arm mode
    virtual bool setWeaponDeliveryMode(const unsigned int mode);  // Sets the weapon delivery mode

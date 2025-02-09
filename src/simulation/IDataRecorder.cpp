@@ -1,5 +1,5 @@
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"
@@ -10,15 +10,15 @@
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(AbstractDataRecorder, "AbstractDataRecorder")
-EMPTY_SLOTTABLE(AbstractDataRecorder)
+IMPLEMENT_ABSTRACT_SUBCLASS(IDataRecorder, "IDataRecorder")
+EMPTY_SLOTTABLE(IDataRecorder)
 
-AbstractDataRecorder::AbstractDataRecorder()
+IDataRecorder::IDataRecorder()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void AbstractDataRecorder::copyData(const AbstractDataRecorder& org, const bool)
+void IDataRecorder::copyData(const IDataRecorder& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -26,7 +26,7 @@ void AbstractDataRecorder::copyData(const AbstractDataRecorder& org, const bool)
    sim = nullptr;
 }
 
-void AbstractDataRecorder::deleteData()
+void IDataRecorder::deleteData()
 {
    sta = nullptr;
    sim = nullptr;
@@ -35,13 +35,13 @@ void AbstractDataRecorder::deleteData()
 //------------------------------------------------------------------------------
 // Background thread processing of the data records
 //------------------------------------------------------------------------------
-void AbstractDataRecorder::processRecords()
+void IDataRecorder::processRecords()
 {
    // nothing to do at this level
 }
 
 // Our parent Station
-Station* AbstractDataRecorder::getStation()
+Station* IDataRecorder::getStation()
 {
    if (sta == nullptr) {
       getStationImp();
@@ -50,16 +50,16 @@ Station* AbstractDataRecorder::getStation()
 }
 
 // Our parent Station (const version)
-const Station* AbstractDataRecorder::getStation() const
+const Station* IDataRecorder::getStation() const
 {
    if (sta == nullptr) {
-      (const_cast<AbstractDataRecorder*>(this))->getStationImp();
+      (const_cast<IDataRecorder*>(this))->getStationImp();
    }
    return sta;
 }
 
 // Find our parent Station
-Station* AbstractDataRecorder::getStationImp()
+Station* IDataRecorder::getStationImp()
 {
    if (sta == nullptr) {
       sta = static_cast<Station*>(findContainerByType(typeid(Station)));
@@ -70,8 +70,8 @@ Station* AbstractDataRecorder::getStationImp()
    return sta;
 }
 
-// The simulation
-Simulation* AbstractDataRecorder::getSimulation()
+// the simulation
+Simulation* IDataRecorder::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -79,16 +79,16 @@ Simulation* AbstractDataRecorder::getSimulation()
    return sim;
 }
 
-const Simulation* AbstractDataRecorder::getSimulation() const
+const Simulation* IDataRecorder::getSimulation() const
 {
    if (sim == nullptr) {
-      (const_cast<AbstractDataRecorder*>(this))->getSimulationImp();
+      (const_cast<IDataRecorder*>(this))->getSimulationImp();
    }
    return sim;
 }
 
 // The simulation
-Simulation* AbstractDataRecorder::getSimulationImp()
+Simulation* IDataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
       Station* p = getStation();
@@ -98,7 +98,7 @@ Simulation* AbstractDataRecorder::getSimulationImp()
 }
 
 
-bool AbstractDataRecorder::recordDataImp(const unsigned int id, const base::Object* pObjects[4], const double values[4])
+bool IDataRecorder::recordDataImp(const unsigned int id, const base::Object* pObjects[4], const double values[4])
 {
    return true;
 }

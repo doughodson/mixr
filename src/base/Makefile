@@ -33,19 +33,19 @@ OBJS =  \
 	concepts/linkage/AbstractIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
-   linearsystem/DiffEquation.o \
-   linearsystem/FirstOrderTf.o \
-   linearsystem/LagFilter.o \
-   linearsystem/Limit.o \
-   linearsystem/Limit01.o \
-   linearsystem/Limit11.o \
-   linearsystem/LimitFunc.o \
-   linearsystem/LowpassFilter.o \
-   linearsystem/SaH.o \
-   linearsystem/ScalerFunc.o \
-   linearsystem/SecondOrderTf.o \
-   linearsystem/Sz1.o \
-   linearsystem/Sz2.o \
+    linearsystem/DiffEquation.o \
+    linearsystem/FirstOrderTf.o \
+    linearsystem/LagFilter.o \
+    linearsystem/Limit.o \
+    linearsystem/Limit01.o \
+    linearsystem/Limit11.o \
+    linearsystem/LimitFunc.o \
+    linearsystem/LowpassFilter.o \
+    linearsystem/SaH.o \
+    linearsystem/ScalerFunc.o \
+    linearsystem/SecondOrderTf.o \
+    linearsystem/Sz1.o \
+    linearsystem/Sz2.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -86,10 +86,10 @@ OBJS =  \
 	relations/Table4.o \
 	relations/Table5.o \
 	relations/TableStorage.o \
-	threads/platform/AbstractThread_linux.o \
+	threads/platform/IThread_linux.o \
 	threads/platform/PeriodicThread_linux.o \
 	threads/platform/SyncThread_linux.o \
-	threads/AbstractThread.o \
+	threads/IThread.o \
 	threads/OneShotThread.o \
 	threads/PeriodicThread.o \
 	threads/SyncThread.o \

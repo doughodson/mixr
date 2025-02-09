@@ -10,7 +10,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

@@ -482,7 +482,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
             }
 
             // Release the weapon and set the target
-            AbstractWeapon* flyout{sms->releaseOneBomb()};
+            IWeapon* flyout{sms->releaseOneBomb()};
             if (flyout != nullptr) {
                 flyout->setTargetPosition(tgtPos);
             }

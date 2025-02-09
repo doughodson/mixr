@@ -5,7 +5,7 @@
 
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/network/NetHandler.hpp"
@@ -41,7 +41,7 @@ bool Nib::weaponFireMsgFactory(const double)
    setMode(models::Player::Mode::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
-   const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+   const auto mPlayer = dynamic_cast<models::IWeapon*>(getPlayer());
    if (mPlayer == nullptr) return false;  // Early out -- it wasn't a weapon!
 
    // ---

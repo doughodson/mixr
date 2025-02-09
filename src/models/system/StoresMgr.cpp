@@ -184,10 +184,10 @@ bool StoresMgr::isGunSelected() const
 }
 
 // Default function to get the current weapon (Pre-ref()'d)
-AbstractWeapon* StoresMgr::getCurrentWeapon()
+IWeapon* StoresMgr::getCurrentWeapon()
 {
    // Get the selected station's weapon
-   AbstractWeapon* wpn{getWeapon()};
+   IWeapon* wpn{getWeapon()};
 
    if (wpn == nullptr) {
       // If not found then check to see if the selected station
@@ -204,10 +204,10 @@ AbstractWeapon* StoresMgr::getCurrentWeapon()
    return wpn;
 }
 
-const AbstractWeapon* StoresMgr::getCurrentWeapon() const
+const IWeapon* StoresMgr::getCurrentWeapon() const
 {
    // Get the selected station's weapon
-   const AbstractWeapon* wpn{getWeapon()};
+   const IWeapon* wpn{getWeapon()};
 
    if (wpn == nullptr) {
       // If not found then check to see if the selected station
@@ -362,7 +362,7 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
       // Create the new weapons list that contains all weapons
       {
          const auto newWeapons = new base::PairStream();
-         searchAndAdd(stores, typeid(AbstractWeapon), newWeapons);
+         searchAndAdd(stores, typeid(IWeapon), newWeapons);
          if (newWeapons->entries() > 0) weaponsList = newWeapons;
          newWeapons->unref();
       }

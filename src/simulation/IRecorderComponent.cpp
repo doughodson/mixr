@@ -1,5 +1,5 @@
 
-#include "mixr/simulation/AbstractRecorderComponent.hpp"
+#include "mixr/simulation/IRecorderComponent.hpp"
 
 #include "mixr/base/List.hpp"
 #include <iostream>
@@ -7,24 +7,24 @@
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(AbstractRecorderComponent, "AbstractRecorderComponent")
+IMPLEMENT_ABSTRACT_SUBCLASS(IRecorderComponent, "IRecorderComponent")
 
-BEGIN_SLOTTABLE(AbstractRecorderComponent)
+BEGIN_SLOTTABLE(IRecorderComponent)
     "enabledList",         // 1)  List of enabled data records
     "disabledList",        // 2)  List of disabled data records
-END_SLOTTABLE(AbstractRecorderComponent)
+END_SLOTTABLE(IRecorderComponent)
 
-BEGIN_SLOT_MAP(AbstractRecorderComponent)
+BEGIN_SLOT_MAP(IRecorderComponent)
     ON_SLOT( 1, setSlotEnabledList,  base::List)
     ON_SLOT( 2, setSlotDisabledList, base::List)
 END_SLOT_MAP()
 
-AbstractRecorderComponent::AbstractRecorderComponent()
+IRecorderComponent::IRecorderComponent()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void AbstractRecorderComponent::copyData(const AbstractRecorderComponent& org, const bool)
+void IRecorderComponent::copyData(const IRecorderComponent& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -32,7 +32,7 @@ void AbstractRecorderComponent::copyData(const AbstractRecorderComponent& org, c
    setDisabledList(org.disabledList, org.numDisabled);
 }
 
-void AbstractRecorderComponent::deleteData()
+void IRecorderComponent::deleteData()
 {
    setEnabledList(nullptr, 0);
    setDisabledList(nullptr, 0);
@@ -41,7 +41,7 @@ void AbstractRecorderComponent::deleteData()
 //------------------------------------------------------------------------------
 // Set a list of 'n' of data records enabled for processing
 //------------------------------------------------------------------------------
-bool AbstractRecorderComponent::setEnabledList(const unsigned int* const list, const unsigned int n)
+bool IRecorderComponent::setEnabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
    if (enabledList != nullptr) {
@@ -66,7 +66,7 @@ bool AbstractRecorderComponent::setEnabledList(const unsigned int* const list, c
 //------------------------------------------------------------------------------
 // Set a list of 'n' of data records disabled from being processed
 //------------------------------------------------------------------------------
-bool AbstractRecorderComponent::setDisabledList(const unsigned int* const list, const unsigned int n)
+bool IRecorderComponent::setDisabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
    if (disabledList != nullptr) {
@@ -91,7 +91,7 @@ bool AbstractRecorderComponent::setDisabledList(const unsigned int* const list, 
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool AbstractRecorderComponent::setSlotEnabledList(const base::List* const list)
+bool IRecorderComponent::setSlotEnabledList(const base::List* const list)
 {
    unsigned int n2{};
    unsigned int* p2{};
@@ -125,7 +125,7 @@ bool AbstractRecorderComponent::setSlotEnabledList(const base::List* const list)
    return true;
 }
 
-bool AbstractRecorderComponent::setSlotDisabledList(const base::List* const list)
+bool IRecorderComponent::setSlotDisabledList(const base::List* const list)
 {
    unsigned int n2{};
    unsigned int* p2{};

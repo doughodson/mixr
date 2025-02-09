@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Bullet_HPP__
 #define __mixr_models_common_Bullet_HPP__
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include <array>
 
 namespace mixr {
@@ -18,9 +18,9 @@ namespace models {
 //
 // Factory name: Bullet
 //------------------------------------------------------------------------------
-class Bullet : public AbstractWeapon
+class Bullet : public IWeapon
 {
-    DECLARE_SUBCLASS(Bullet, AbstractWeapon)
+    DECLARE_SUBCLASS(Bullet, IWeapon)
 
 public:
    static const double DEFAULT_MUZZLE_VEL;         // Meters / second

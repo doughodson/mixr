@@ -2,7 +2,7 @@
 #ifndef __mixr_ighost_flightgear_FlightGearHost_HPP__
 #define __mixr_ighost_flightgear_FlightGearHost_HPP__
 
-#include "mixr/simulation/AbstractIgHost.hpp"
+#include "mixr/simulation/IIgHost.hpp"
 
 namespace mixr {
 namespace base { class NetHandler; }
@@ -12,15 +12,15 @@ namespace flightgear {
 //------------------------------------------------------------------------------
 // Class: FlightGearHost
 //------------------------------------------------------------------------------
-class FlightGearHost final: public simulation::AbstractIgHost
+class FlightGearHost final: public simulation::IIgHost
 {
-   DECLARE_SUBCLASS(FlightGearHost, simulation::AbstractIgHost)
+   DECLARE_SUBCLASS(FlightGearHost, simulation::IIgHost)
 
 public:
    FlightGearHost();
 
    // sets our ownship and player list pointers, used by Station class
-   void setOwnship(simulation::AbstractPlayer* const) final;
+   void setOwnship(simulation::IPlayer* const) final;
    void setPlayerList(base::PairStream* const newPlayerList) final;
 
    void reset() final;

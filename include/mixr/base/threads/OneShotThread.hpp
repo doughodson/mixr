@@ -2,7 +2,7 @@
 #ifndef __mixr_base_OneShotThread_HPP__
 #define __mixr_base_OneShotThread_HPP__
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,13 +11,13 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: OneShotThread
 //
-// Description: Abstract thread class that executes a single task. Derived classes
+// Description: Thread class that executes a single task. Derived classes
 //              need to define the work function (i.e., userFunc()), which is
 //              called once. (Note: This class was named 'One Shot' to avoid
 //              confusion with a new class to be introduced called 'Thread' that
 //              will use std::thread functionality.)
 //------------------------------------------------------------------------------
-class OneShotThread : public AbstractThread
+class OneShotThread : public IThread
 {
 public:
    OneShotThread(Component* const parent);

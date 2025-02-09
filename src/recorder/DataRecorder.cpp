@@ -7,12 +7,12 @@
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/INib.hpp"
 #include "mixr/simulation/Simulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -547,7 +547,7 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
    if (wpn == nullptr) return false;
 
    const int intVal{static_cast<int>(values[0])};
-   const models::AbstractWeapon::Detonation detType = static_cast<models::AbstractWeapon::Detonation>(intVal);
+   const models::IWeapon::Detonation detType = static_cast<models::IWeapon::Detonation>(intVal);
 
    const double missDist{values[1]};
 
@@ -575,31 +575,31 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
 
    // Get detonation type
    switch (detType) {
-      case models::AbstractWeapon::Detonation::OTHER: {
+      case models::IWeapon::Detonation::OTHER: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
          break;
       }
-      case models::AbstractWeapon::Detonation::ENTITY_IMPACT: {
+      case models::IWeapon::Detonation::ENTITY_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
          break;
       }
-      case models::AbstractWeapon::Detonation::ENTITY_PROXIMATE_DETONATION: {
+      case models::IWeapon::Detonation::ENTITY_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::Detonation::GROUND_IMPACT: {
+      case models::IWeapon::Detonation::GROUND_IMPACT: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
          break;
       }
-      case models::AbstractWeapon::Detonation::GROUND_PROXIMATE_DETONATION: {
+      case models::IWeapon::Detonation::GROUND_PROXIMATE_DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::Detonation::DETONATION: {
+      case models::IWeapon::Detonation::DETONATION: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
          break;
       }
-      case models::AbstractWeapon::Detonation::NONE: {
+      case models::IWeapon::Detonation::NONE: {
          wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
          break;
       }
@@ -804,7 +804,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
 
          // Networked player federation name
          if ( player->isProxyPlayer() ) {
-            const simulation::AbstractNib* nib {player->getNib()};
+            const simulation::INib* nib {player->getNib()};
             const std::string& fedName {nib->getFederateName()};
             if (!fedName.empty()) id->set_fed_name( fedName.c_str() );
          }

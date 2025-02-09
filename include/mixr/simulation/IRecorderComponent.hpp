@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractRecorderComponent_HPP__
-#define __mixr_simulation_AbstractRecorderComponent_HPP__
+#ifndef __mixr_simulation_IRecorderComponent_HPP__
+#define __mixr_simulation_IRecorderComponent_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/simulation/dataRecorderTokens.hpp"
@@ -10,8 +10,8 @@ namespace base { class List; }
 namespace simulation {
 
 //------------------------------------------------------------------------------
-// Class: AbstractRecorderComponent
-// Description: Abstract base class for data recorder components
+// Class: IRecorderComponent
+// Description: Interface base class for data recorder components
 //
 // Notes:
 //    1) Use the setEnabledList() function to limit the processing to only
@@ -30,12 +30,12 @@ namespace simulation {
 //                               ! (default: no records are disabled)
 //
 //------------------------------------------------------------------------------
-class AbstractRecorderComponent : public base::Component
+class IRecorderComponent : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractRecorderComponent, base::Component)
+   DECLARE_SUBCLASS(IRecorderComponent, base::Component)
 
 public:
-   AbstractRecorderComponent();
+   IRecorderComponent();
 
    // Checks the data filters and returns true if the record should be processed.
    bool isDataEnabled(const unsigned int id) const;
@@ -62,7 +62,7 @@ private:
 
 
 // Data record enabled function
-inline bool AbstractRecorderComponent::isDataEnabled(const unsigned int id) const
+inline bool IRecorderComponent::isDataEnabled(const unsigned int id) const
 {
    bool ok{true};   // default is enabled
 

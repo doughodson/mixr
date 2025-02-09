@@ -7,7 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -35,7 +35,7 @@ bool Nib::weaponFireMsgFactory(const double)
     setMode(models::Player::Mode::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    const auto mPlayer = static_cast<models::AbstractWeapon*>(getPlayer());
+    const auto mPlayer = static_cast<models::IWeapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
     models::Player* tPlayer {mPlayer->getTargetPlayer()};

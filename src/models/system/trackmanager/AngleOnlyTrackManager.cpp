@@ -2,12 +2,12 @@
 #include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 

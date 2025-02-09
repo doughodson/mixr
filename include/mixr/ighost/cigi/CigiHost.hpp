@@ -31,7 +31,7 @@ namespace mixr {
 namespace base { class Boolean; class Integer; class NetHandler; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
-class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
+class Missile; class Player; class Ship; class SpaceVehicle; class IWeapon;
 }
 namespace cigi {
 class HostSession;
@@ -195,7 +195,7 @@ private:
    bool setMissileData(CigiModel* const, const int entity, const models::Missile* const);
    bool setShipData(CigiModel* const, const int entity, const models::Ship* const);
    bool setSpaceVehicleData(CigiModel* const, const int entity, const models::SpaceVehicle* const);
-   bool setWeaponData(CigiModel* const, const int entity, const models::AbstractWeapon* const);
+   bool setWeaponData(CigiModel* const, const int entity, const models::IWeapon* const);
 
    // creates a one shot task thread to process IG packets
    bool createProcessingThread();

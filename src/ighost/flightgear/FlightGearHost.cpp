@@ -85,7 +85,7 @@ void FlightGearHost::setPlayerList(base::PairStream* const newPlayerList)
 // Sets our ownship pointer; public version, which is usually called by
 // the Station class.
 //------------------------------------------------------------------------------
-void FlightGearHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
+void FlightGearHost::setOwnship(simulation::IPlayer* const newOwnship)
 {
    const auto player = dynamic_cast<models::Player*>(newOwnship);
    if (player != nullptr) {

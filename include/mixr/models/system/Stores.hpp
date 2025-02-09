@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base { class Integer; class PairStream; }
 namespace models {
-class AbstractWeapon;
+class IWeapon;
 
 //------------------------------------------------------------------------------
 // Class: Stores
@@ -28,7 +28,7 @@ class AbstractWeapon;
 //
 //
 // Events:
-//    JETTISON_EVENT <AbstractWeapon>  ! Jettison this weapon
+//    JETTISON_EVENT <IWeapon>         ! Jettison this weapon
 //    JETTISON_EVENT <ExternalStore>   ! Jettison this external store
 //
 //
@@ -134,8 +134,8 @@ public:
    // if 's' is zero then the 'selected' station's weapon is returned.
    // When the weapon is in release (or pre-released) mode, then the "flyout"
    // weapon is returned.
-   virtual AbstractWeapon* getWeapon(const unsigned int s = 0);
-   virtual const AbstractWeapon* getWeapon(const unsigned int s = 0) const; // const version
+   virtual IWeapon* getWeapon(const unsigned int s = 0);
+   virtual const IWeapon* getWeapon(const unsigned int s = 0) const; // const version
 
    // Returns a pre-ref()'d pointer to the external store at station 's', or
    // if 's' is zero then the 'selected' station's store is returned.
@@ -150,25 +150,25 @@ public:
    // Pre-release the weapon; that is, create the "flyout" and place it on the
    // player list.  Returns a pre-ref()'d pointer to the simulation's flyout
    // or zero if the weapon failed to pre-release.
-   virtual AbstractWeapon* prereleaseWeapon(AbstractWeapon* const wpn);
+   virtual IWeapon* prereleaseWeapon(IWeapon* const wpn);
 
    // Pre-release the weapon at station 's', or if 's' is zero then release
    // the selected station's weapon.
-   virtual AbstractWeapon* prereleaseWeapon(const unsigned int s = 0);
+   virtual IWeapon* prereleaseWeapon(const unsigned int s = 0);
 
    // Release the weapon; returns a pre-ref()'d pointer to the flyout weapon or zero if
    // the weapon failed to pre-release.
-   virtual AbstractWeapon* releaseWeapon(AbstractWeapon* const wpn);
+   virtual IWeapon* releaseWeapon(IWeapon* const wpn);
 
    // Release the weapon at station 's', or if 's' is zero then release
    // the selected weapon.
-   virtual AbstractWeapon* releaseWeapon(const unsigned int s = 0);
+   virtual IWeapon* releaseWeapon(const unsigned int s = 0);
 
    // Jettison all jettisonable stores
    virtual bool jettisonAll();
 
    // Event handlers
-   virtual bool onJettisonEvent(AbstractWeapon* const msg);
+   virtual bool onJettisonEvent(IWeapon* const msg);
    virtual bool onJettisonEvent(ExternalStore* const msg);
 
    void updateTC(const double dt = 0.0) override;
@@ -184,7 +184,7 @@ protected:
    virtual void updateBlockedFlags();
 
    // Assign a weapon to a station
-   virtual bool assignWeaponToStation(const unsigned int station, AbstractWeapon* const wpnPtr);
+   virtual bool assignWeaponToStation(const unsigned int station, IWeapon* const wpnPtr);
 
    // Assign a external store to a station
    virtual bool assignExtStoreToStation(const unsigned int station, ExternalStore* const esPtr);
@@ -201,7 +201,7 @@ private:
    base::safe_ptr<base::PairStream> storesList;
 
    // Station tables
-   std::array<base::safe_ptr<AbstractWeapon>, MAX_STATIONS> weaponTbl;  // Weapons by station
+   std::array<base::safe_ptr<IWeapon>, MAX_STATIONS> weaponTbl;  // Weapons by station
    unsigned int numWpn {};                                              // Number of weapons in table
 
    std::array<base::safe_ptr<ExternalStore>, MAX_STATIONS> esTbl;  // External store by station

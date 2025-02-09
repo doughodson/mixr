@@ -1,42 +1,42 @@
 
-#include "mixr/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/IPlayer.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Identifier.hpp"
 
-#include "mixr/simulation/AbstractNetIO.hpp"
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/INetIO.hpp"
+#include "mixr/simulation/INib.hpp"
 
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(AbstractPlayer, "AbstractPlayer")
+IMPLEMENT_ABSTRACT_SUBCLASS(IPlayer, "IPlayer")
 
-BEGIN_SLOTTABLE(AbstractPlayer)
+BEGIN_SLOTTABLE(IPlayer)
    "id",                // 01) Player id   [ 1 .. 65535 ]
    "mode",              // 02) Initial player mode ( INACTIVE, ACTIVE, DEAD )
-END_SLOTTABLE(AbstractPlayer)
+END_SLOTTABLE(IPlayer)
 
-BEGIN_SLOT_MAP(AbstractPlayer)
+BEGIN_SLOT_MAP(IPlayer)
    ON_SLOT(01, setSlotID,       base::Integer)
    ON_SLOT(02, setSlotInitMode, base::Identifier)
 END_SLOT_MAP()
 
-AbstractPlayer::AbstractPlayer()
+IPlayer::IPlayer()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void AbstractPlayer::initData()
+void IPlayer::initData()
 {
-   nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORK_ID];
-   for (int i{}; i < AbstractNetIO::MAX_NETWORK_ID; i++) {
+   nibList = new INib*[INetIO::MAX_NETWORK_ID];
+   for (int i{}; i < INetIO::MAX_NETWORK_ID; i++) {
       nibList[i] = nullptr;
    }
 }
 
-void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
+void IPlayer::copyData(const IPlayer& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -52,16 +52,16 @@ void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)
 
    // NIB pointers are not copied!
    setNib( nullptr );
-   for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
+   for (int i{}; i < simulation::INetIO::MAX_NETWORK_ID; i++) {
       setOutgoingNib(nullptr, i);
    }
 }
 
-void AbstractPlayer::deleteData()
+void IPlayer::deleteData()
 {
    setNib(nullptr);
    if (nibList != nullptr) {
-      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
+      for (int i{}; i < simulation::INetIO::MAX_NETWORK_ID; i++) {
          setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
@@ -69,11 +69,11 @@ void AbstractPlayer::deleteData()
    }
 }
 
-bool AbstractPlayer::shutdownNotification()
+bool IPlayer::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
    if (nibList != nullptr) {
-      for (int i{}; i < simulation::AbstractNetIO::MAX_NETWORK_ID; i++) {
+      for (int i{}; i < simulation::INetIO::MAX_NETWORK_ID; i++) {
          if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
@@ -81,7 +81,7 @@ bool AbstractPlayer::shutdownNotification()
 }
 
 // reset parameters
-void AbstractPlayer::reset()
+void IPlayer::reset()
 {
    if (isLocalPlayer()) {
       setMode(initMode);
@@ -96,20 +96,20 @@ void AbstractPlayer::reset()
 }
 
 // Player's outgoing NIB(s)
-AbstractNib* AbstractPlayer::getLocalNib(const int netId)
+INib* IPlayer::getLocalNib(const int netId)
 {
-   AbstractNib* p{};
-   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORK_ID) {
+   INib* p{};
+   if (nibList != nullptr && netId >= 1 && netId <= INetIO::MAX_NETWORK_ID) {
       p = nibList[netId-1];
    }
    return p;
 }
 
 // Player's outgoing NIB(s)  (const version)
-const AbstractNib* AbstractPlayer::getLocalNib(const int netId) const
+const INib* IPlayer::getLocalNib(const int netId) const
 {
-   const AbstractNib* p{};
-   if (nibList != nullptr && netId >= 1 && netId <= AbstractNetIO::MAX_NETWORK_ID) {
+   const INib* p{};
+   if (nibList != nullptr && netId >= 1 && netId <= INetIO::MAX_NETWORK_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -118,14 +118,14 @@ const AbstractNib* AbstractPlayer::getLocalNib(const int netId) const
 //-----------------------------------------------------------------------------
 
 // Sets a pointer to the Network Interface Block (NIB)
-bool AbstractPlayer::setNib(AbstractNib* const n)
+bool IPlayer::setNib(INib* const n)
 {
    if (nib != nullptr) nib->unref();
    nib = n;
    if (nib != nullptr) {
       // Ref() the new NIB and get the network ID
       nib->ref();
-      AbstractNetIO* netIO{nib->getNetIO()};
+      INetIO* netIO{nib->getNetIO()};
       if (netIO != nullptr) netID = netIO->getNetworkID();
    } else {
       netID = 0;
@@ -134,17 +134,17 @@ bool AbstractPlayer::setNib(AbstractNib* const n)
 }
 
 // Sets the network output enabled flag
-bool AbstractPlayer::setEnableNetOutput(const bool x)
+bool IPlayer::setEnableNetOutput(const bool x)
 {
    enableNetOutput = x;
    return true;
 }
 
 // Sets the outgoing NIB for network 'id'
-bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
+bool IPlayer::setOutgoingNib(INib* const p, const int id)
 {
    bool ok{};
-   if (nibList != nullptr && id >= 1 && id <= AbstractNetIO::MAX_NETWORK_ID) {
+   if (nibList != nullptr && id >= 1 && id <= INetIO::MAX_NETWORK_ID) {
       int idx{id - 1};
       if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;
@@ -156,7 +156,7 @@ bool AbstractPlayer::setOutgoingNib(AbstractNib* const p, const int id)
 //-----------------------------------------------------------------------------
 
 // id: Player id  [ 1 .. 65535 ]
-bool AbstractPlayer::setSlotID(const base::Integer* const num)
+bool IPlayer::setSlotID(const base::Integer* const num)
 {
    bool ok{};
    const int newID{num->asInt()};
@@ -170,7 +170,7 @@ bool AbstractPlayer::setSlotID(const base::Integer* const num)
 }
 
 // initial player mode { inactive, active, killed, crashed, detonated, launched }
-bool AbstractPlayer::setSlotInitMode(base::Identifier* const x)
+bool IPlayer::setSlotInitMode(base::Identifier* const x)
 {
    bool ok{};
    if (*x == "inactive" || *x == "INACTIVE")        { setInitMode(Mode::INACTIVE);  ok = true; }

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_PeriodicThread_HPP__
 #define __mixr_base_PeriodicThread_HPP__
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 #include "mixr/base/Statistic.hpp"
 
 namespace mixr {
@@ -12,14 +12,14 @@ class Component;
 //------------------------------------------------------------------------------
 // Class: PeriodicThread
 //
-// Description: Abstract periodic thread that calls the user supplied function
+// Description: Periodic thread that calls the user supplied function
 //              at a fixed rate. Derived classes define the work
 //              function (i.e., userFunc()), which will be called at a fixed
 //              rate of 'rate' Hz until the parent component is shutdown.
 //              A value of 1.0/rate is passed to userFunc() as the delta time
 //              parameter.
 //------------------------------------------------------------------------------
-class PeriodicThread : public AbstractThread
+class PeriodicThread : public IThread
 {
 public:
    PeriodicThread(Component* const parent, const double rate);

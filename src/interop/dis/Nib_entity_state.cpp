@@ -10,7 +10,7 @@
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/ground/GroundVehicle.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
@@ -297,7 +297,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                // either in INACTIVE mode (not launched) or LAUNCHED mode (kind == 0)
                if (sms != nullptr) {
 
-                  models::AbstractWeapon* wpn {};
+                  models::IWeapon* wpn {};
 
                   // find the weapon at station 'sta'
                   base::PairStream* stores {sms->getStores()};
@@ -309,7 +309,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                         const std::string& slot{pair->slot()};
                         if (base::isNumber(slot)) s = static_cast<unsigned int>(base::getNumber(slot));
                         if (s == sta) {
-                           wpn = static_cast<models::AbstractWeapon*>(pair->object());  // Found it
+                           wpn = static_cast<models::IWeapon*>(pair->object());  // Found it
                         }
                         item = item->getNext();
                      }
@@ -336,11 +336,11 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                            )};
                         if (ntm != nullptr) {
                            const models::Player* tp {ntm->getTemplatePlayer()};
-                           if (tp != nullptr && tp->isClassType(typeid(models::AbstractWeapon)) ) {
+                           if (tp != nullptr && tp->isClassType(typeid(models::IWeapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
                               // station number
-                              wpn = static_cast<models::AbstractWeapon*>(tp->clone());  // clone and cast to a Weapon
+                              wpn = static_cast<models::IWeapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20] {};
                               std::sprintf(cbuf,"%i",sta);
                               const auto pair = new base::Pair(cbuf, wpn);
@@ -385,7 +385,7 @@ bool Nib::entityStateManager(const double curExecTime)
    if (player == nullptr) return ok;
 
    // Dummy weapon?
-   const auto ww = dynamic_cast<const models::AbstractWeapon*>( player );
+   const auto ww = dynamic_cast<const models::IWeapon*>( player );
    if (ww != nullptr) {
       if (ww->isDummy()) return ok;
    }

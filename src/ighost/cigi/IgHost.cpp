@@ -4,12 +4,12 @@
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
-#include "mixr/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/IPlayer.hpp"
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/INib.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -212,7 +212,7 @@ void IgHost::mapPlayerList2ModelTable()
          const auto p = static_cast<models::Player*>(pair->object());
 
          bool dummy{};
-         const auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
+         const auto wpn = dynamic_cast<const models::IWeapon*>( p );
          if (wpn != nullptr) dummy = wpn->isDummy();
 
          if ( p != getOwnship() && !dummy ) {
@@ -390,7 +390,7 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
 }
 
 // sets our ownship pointer, which is used by the Station class
-void IgHost::setOwnship(simulation::AbstractPlayer* const p)
+void IgHost::setOwnship(simulation::IPlayer* const p)
 {
    models::Player* const player{dynamic_cast<models::Player* const>(p)};
 
@@ -596,7 +596,7 @@ CigiModel* IgHost::findModel(const int playerID, const std::string& federateName
    return found;
 }
 
-CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, const TableType type)
+CigiModel* IgHost::findModel(const simulation::IPlayer* const player, const TableType type)
 {
    CigiModel* found{};
    if (player != nullptr) {
@@ -604,7 +604,7 @@ CigiModel* IgHost::findModel(const simulation::AbstractPlayer* const player, con
       std::string fName;
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
-         const simulation::AbstractNib* pNib{player->getNib()};
+         const simulation::INib* pNib{player->getNib()};
          fName = pNib->getFederateName();
       }
       // Now find the model using the player's IDs

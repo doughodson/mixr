@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
@@ -21,7 +21,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 // Static thread function
 //-----------------------------------------------------------------------------
-DWORD WINAPI AbstractThread::staticThreadFunc(LPVOID lpParam)
+DWORD WINAPI IThread::staticThreadFunc(LPVOID lpParam)
 {
    const auto thread = static_cast<AbstractThread*>(lpParam);
    Component* parent{thread->getParent()};
@@ -44,7 +44,7 @@ DWORD WINAPI AbstractThread::staticThreadFunc(LPVOID lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-int AbstractThread::getNumProcessors()
+int IThread::getNumProcessors()
 {
    int num{};
 
@@ -67,7 +67,7 @@ int AbstractThread::getNumProcessors()
 //-----------------------------------------------------------------------------
 // Create the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::createThread()
+bool IThread::createThread()
 {
    // Creation flags
    DWORD dwCreationFlags{};
@@ -95,7 +95,7 @@ bool AbstractThread::createThread()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::configThread()
+bool IThread::configThread()
 {
    // Get handles
    HANDLE hProcess{GetCurrentProcess()};
@@ -173,7 +173,7 @@ bool AbstractThread::configThread()
 //-----------------------------------------------------------------------------
 // Close the thread
 //-----------------------------------------------------------------------------
-void AbstractThread::closeThread()
+void IThread::closeThread()
 {
    CloseHandle(theThread);
    parent = nullptr;
@@ -183,7 +183,7 @@ void AbstractThread::closeThread()
 //-----------------------------------------------------------------------------
 // Treminate the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::terminate()
+bool IThread::terminate()
 {
    if (theThread != nullptr && !killed) {
       if ( parent->isMessageEnabled(Object::MSG_INFO) ) {

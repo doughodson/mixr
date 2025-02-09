@@ -5,7 +5,7 @@
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/numeric/Number.hpp"

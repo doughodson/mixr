@@ -71,7 +71,7 @@ void SimpleStoresMgr::updateData(const double dt)
    // Get the current weapon data
    // ---
    {
-      auto wpn = static_cast<AbstractWeapon*>(getCurrentWeapon());
+      auto wpn = static_cast<IWeapon*>(getCurrentWeapon());
       if (wpn != nullptr) {
          // Weapon ID
          curWpnID = wpn->getWeaponID();
@@ -84,7 +84,7 @@ void SimpleStoresMgr::updateData(const double dt)
             while (item != nullptr) {
                const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
                if (pair != nullptr) {
-                  const auto s = dynamic_cast<const AbstractWeapon*>( pair->object() );
+                  const auto s = dynamic_cast<const IWeapon*>( pair->object() );
                   if ( s != nullptr && s->isMode(Player::Mode::INACTIVE) && (s->getFactoryName() == wpn->getFactoryName()) == true ) {
                      count++;
                   }
@@ -112,9 +112,9 @@ void SimpleStoresMgr::updateData(const double dt)
 //------------------------------------------------------------------------------
 
 // Default function to return the current weapon (Pre-ref()'d)
-AbstractWeapon* SimpleStoresMgr::getCurrentWeapon()
+IWeapon* SimpleStoresMgr::getCurrentWeapon()
 {
-   AbstractWeapon* wpn{};
+   IWeapon* wpn{};
    if ( isWeaponDeliveryMode(A2A) ) {
       wpn = getNextMissile();    // We need a missile
    } else {
@@ -123,9 +123,9 @@ AbstractWeapon* SimpleStoresMgr::getCurrentWeapon()
    return wpn;
 }
 
-const AbstractWeapon* SimpleStoresMgr::getCurrentWeapon() const
+const IWeapon* SimpleStoresMgr::getCurrentWeapon() const
 {
-   const AbstractWeapon* wpn{};
+   const IWeapon* wpn{};
    if ( isWeaponDeliveryMode(A2A) ) {
       wpn = getNextMissile();    // We need a missile
    } else {
@@ -448,16 +448,16 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
 }
 
 // Get the next free weapon of this 'type'
-AbstractWeapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
+IWeapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
 {
-   AbstractWeapon* wpn{};
+   IWeapon* wpn{};
    base::PairStream* list{getWeapons()};
    if (list != nullptr) {
       // Find the first free (inactive) bomb
       base::List::Item* item{list->getFirstItem()};
       while (item != nullptr && wpn == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = dynamic_cast<AbstractWeapon*>(pair->object());
+         const auto p = dynamic_cast<IWeapon*>(pair->object());
          if (p != nullptr && p->isInactive() && p->isClassType(type)) {
             p->ref();
             wpn = p;
@@ -594,12 +594,12 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
 
       // A/A missiles and A/G bombs only ...
 
-      AbstractWeapon* wpn{getCurrentWeapon()};
+      IWeapon* wpn{getCurrentWeapon()};
       if (wpn != nullptr) {
 
          // release the weapon ---
          //  if successful, returns a pre-ref()'d pointer to the flyout weapon.
-         AbstractWeapon* flyout{releaseWeapon(wpn)};
+         IWeapon* flyout{releaseWeapon(wpn)};
          if (flyout != nullptr) {
 
             if (isWeaponDeliveryMode(A2A)) {

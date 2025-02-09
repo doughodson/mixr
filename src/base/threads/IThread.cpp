@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 
 #include "mixr/base/Component.hpp"
 #include <iostream>
@@ -7,11 +7,11 @@
 namespace mixr {
 namespace base {
 
-AbstractThread::AbstractThread(Component* const p) : parent(p)
+IThread::IThread(Component* const p) : parent(p)
 {
 }
 
-AbstractThread::~AbstractThread()
+IThread::~IThread()
 {
    if (!isTerminated()) {
       terminate();
@@ -22,7 +22,7 @@ AbstractThread::~AbstractThread()
 //------------------------------------------------------------------------------
 // Create the thread
 //------------------------------------------------------------------------------
-bool AbstractThread::start(const double _priority)
+bool IThread::start(const double _priority)
 {
    bool ok{true};
 
@@ -54,23 +54,23 @@ bool AbstractThread::start(const double _priority)
 //-----------------------------------------------------------------------------
 // Get functions
 //-----------------------------------------------------------------------------
-bool AbstractThread::isTerminated() const
+bool IThread::isTerminated() const
 {
    return killed;
 }
 
-Component* AbstractThread::getParent()
+Component* IThread::getParent()
 {
    return parent;
 }
 
-const void* AbstractThread::getThreadHandle() const
+const void* IThread::getThreadHandle() const
 {
    return theThread;
 }
 
 // thread stack size in bytes (or zero if using the default stack size)
-std::size_t AbstractThread::getStackSize() const
+std::size_t IThread::getStackSize() const
 {
    return stackSize;
 }
@@ -80,14 +80,14 @@ std::size_t AbstractThread::getStackSize() const
 //-----------------------------------------------------------------------------
 
 // Set the thread's stack size in bytes (or zero to use the system default size)
-bool AbstractThread::setStackSize(const std::size_t size)
+bool IThread::setStackSize(const std::size_t size)
 {
    stackSize = size;
    return true;
 }
 
 // Set the terminated flag
-void AbstractThread::setTerminated()
+void IThread::setTerminated()
 {
    killed = true;
 }

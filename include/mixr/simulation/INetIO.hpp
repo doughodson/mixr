@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_AbstractNetIO_HPP__
-#define __mixr_simulation_AbstractNetIO_HPP__
+#ifndef __mixr_simulation_INetIO_HPP__
+#define __mixr_simulation_INetIO_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -8,13 +8,13 @@ namespace mixr {
 namespace simulation {
 
 //------------------------------------------------------------------------------
-// Class: AbstractNetIO
-// Description: Abstract interface class for interoperability Network I/O.
+// Class: INetIO
+// Description: Interface class for interoperability Network I/O.
 //
 //    Defines the framework for interoperability networks (e.g., DIS, HLA,
 //    TENA, etc).  Derived classes will manage the network specific protocols.
 //
-// Factory name: AbstractNetIO
+// Factory name: INetIO
 //
 // Input/Output frames:
 //
@@ -23,12 +23,12 @@ namespace simulation {
 //    going entities, respectively.  For DIS, these can be called by different
 //    threads, and for HLA they need to be called from the same thread.
 //------------------------------------------------------------------------------
-class AbstractNetIO : public base::Component
+class INetIO : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractNetIO, base::Component)
+   DECLARE_SUBCLASS(INetIO, base::Component)
 
 public:
-   AbstractNetIO();
+   INetIO();
 
    // Max network ID
    static const int MAX_NETWORK_ID{2};

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Bomb_HPP__
 #define __mixr_models_common_Bomb_HPP__
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Number; }
@@ -26,9 +26,9 @@ namespace models {
 //    dragIndex      <Number>      ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Bomb : public AbstractWeapon
+class Bomb : public IWeapon
 {
-   DECLARE_SUBCLASS(Bomb, AbstractWeapon)
+   DECLARE_SUBCLASS(Bomb, IWeapon)
 
 public:
    // Arming options

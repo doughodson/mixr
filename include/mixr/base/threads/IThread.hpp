@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_AbstractThread_HPP__
-#define __mixr_base_AbstractThread_HPP__
+#ifndef __mixr_base_IThread_HPP__
+#define __mixr_base_IThread_HPP__
 
 #include "mixr/base/Referenced.hpp"
 #include "mixr/base/util/platform_api.hpp"
@@ -12,9 +12,9 @@ namespace base {
 class Component;
 
 //------------------------------------------------------------------------------
-// Class: AbstractThread
+// Class: IThread
 //
-// Description: Abstract thread class - defines common functionality needed
+// Description: Interface to thread class - defines common functionality needed
 //              by more specific (althrough still abstract) thread classes.
 //              Thread objects and their parent objects are ref()'d as child
 //              threads start, and are unref()'d when the thread terminates.
@@ -67,13 +67,13 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class AbstractThread : public Referenced
+class IThread : public Referenced
 {
 public:
-   AbstractThread(Component* const parent);
-   AbstractThread(const AbstractThread&) = delete;
-   AbstractThread& operator=(const AbstractThread&) = delete;
-   virtual ~AbstractThread();
+   IThread(Component* const parent);
+   IThread(const IThread&) = delete;
+   IThread& operator=(const IThread&) = delete;
+   virtual ~IThread();
 
    bool isTerminated() const;
 

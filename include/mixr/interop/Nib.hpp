@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_common_Nib_HPP__
 #define __mixr_interop_common_Nib_HPP__
 
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/INib.hpp"
 
 #include "mixr/interop/NetIO.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -40,9 +40,9 @@ namespace interop {
 // Factory name: Nib
 //
 //------------------------------------------------------------------------------
-class Nib : public simulation::AbstractNib
+class Nib : public simulation::INib
 {
-   DECLARE_SUBCLASS(Nib, simulation::AbstractNib)
+   DECLARE_SUBCLASS(Nib, simulation::INib)
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]

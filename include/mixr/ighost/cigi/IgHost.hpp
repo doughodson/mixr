@@ -2,14 +2,14 @@
 #ifndef __mixr_ighost_cigi3_IgHost_HPP__
 #define __mixr_ighost_cigi3_IgHost_HPP__
 
-#include "mixr/simulation/AbstractIgHost.hpp"
+#include "mixr/simulation/IIgHost.hpp"
 
 #include <array>
 #include <string>
 
 namespace mixr {
 namespace base { class Identifier; class Integer; class Length; class Number; class PairStream; }
-namespace simulation { class AbstractPlayer; }
+namespace simulation { class IPlayer; }
 namespace models { class Player; }
 namespace cigi {
 class CigiModel;
@@ -31,15 +31,15 @@ class Player2CigiMap;
 //    typeMap        <PairStream>   ! IG's system model type IDs (list of TypeMapper objects) (default: 0)
 //
 //------------------------------------------------------------------------------
-class IgHost : public simulation::AbstractIgHost
+class IgHost : public simulation::IIgHost
 {
-   DECLARE_SUBCLASS(IgHost, simulation::AbstractIgHost)
+   DECLARE_SUBCLASS(IgHost, simulation::IIgHost)
 
 public:
    IgHost();
 
    // sets our ownship and player list pointers, used by Station class
-   void setOwnship(simulation::AbstractPlayer* const) final;
+   void setOwnship(simulation::IPlayer* const) final;
    void setPlayerList(base::PairStream* const) final;      // Sets the player list that we're to use to generate player/models
 
    void reset() override;
@@ -63,7 +63,7 @@ protected:
    CigiModel* findModel(const int playerID, const std::string& federateName, const TableType type);
 
    // find a player's model object in table 'type' using a pointer to the player
-   CigiModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
+   CigiModel* findModel(const simulation::IPlayer* const player, const TableType type);
 
    // add a player's model object to table 'type'
    bool addModelToList(CigiModel* const model, const TableType type);

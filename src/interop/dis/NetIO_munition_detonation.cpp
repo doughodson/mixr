@@ -8,7 +8,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -79,7 +79,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 3) Update the data of the munition's NIB and player
    // ---
-   models::AbstractWeapon* mPlayer {};
+   models::IWeapon* mPlayer {};
    if (mNib != nullptr) {
 
       // ---
@@ -114,7 +114,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       mNib->setMode(models::Player::Mode::DETONATED);
 
       // Find the munition player and set its mode, location and target position
-      mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
+      mPlayer = dynamic_cast<models::IWeapon*>(mNib->getPlayer());
       if (mPlayer != nullptr) {
 
          // Munition's mode
@@ -126,7 +126,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          mPlayer->setGeocAcceleration(geocAcc);
 
          // detonation results
-         mPlayer->setDetonationResults(models::AbstractWeapon::Detonation(pdu->detonationResult));
+         mPlayer->setDetonationResults(models::IWeapon::Detonation(pdu->detonationResult));
 
          // Munition's target player and the location of detonation relative to target
          mPlayer->setTargetPlayer(tPlayer,false);

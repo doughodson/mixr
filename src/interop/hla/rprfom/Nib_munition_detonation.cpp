@@ -5,7 +5,7 @@
 
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -41,7 +41,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    setMode(models::Player::Mode::DETONATED);
 
    // If our player just detonated, then it must be a weapon!
-   const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+   const auto mPlayer = dynamic_cast<models::IWeapon*>(getPlayer());
    if (mPlayer == nullptr) return false;   // Early out -- it wasn't a weapon
 
    // ---
@@ -262,25 +262,25 @@ bool Nib::munitionDetonationMsgFactory(const double)
    {
       DetonationResultCodeEnum8 detonationResultCode;
       switch ( mPlayer->getDetonationResults() ) {
-         case models::AbstractWeapon::Detonation::OTHER :
+         case models::IWeapon::Detonation::OTHER :
             detonationResultCode = DetonationResultCodeOther;
             break;
-         case models::AbstractWeapon::Detonation::ENTITY_IMPACT :
+         case models::IWeapon::Detonation::ENTITY_IMPACT :
             detonationResultCode = EntityImpact;
             break;
-         case models::AbstractWeapon::Detonation::ENTITY_PROXIMATE_DETONATION :
+         case models::IWeapon::Detonation::ENTITY_PROXIMATE_DETONATION :
             detonationResultCode = EntityProximateDetonation;
             break;
-         case models::AbstractWeapon::Detonation::GROUND_IMPACT :
+         case models::IWeapon::Detonation::GROUND_IMPACT :
             detonationResultCode = GroundImpact;
             break;
-         case models::AbstractWeapon::Detonation::GROUND_PROXIMATE_DETONATION :
+         case models::IWeapon::Detonation::GROUND_PROXIMATE_DETONATION :
             detonationResultCode = GroundProximateDetonation;
             break;
-         case models::AbstractWeapon::Detonation::DETONATION :
+         case models::IWeapon::Detonation::DETONATION :
             detonationResultCode = Detonation;
             break;
-         case models::AbstractWeapon::Detonation::NONE :
+         case models::IWeapon::Detonation::NONE :
             detonationResultCode = None;
             break;
          default :

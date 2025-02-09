@@ -82,7 +82,7 @@ void PovHost::setPlayerList(base::PairStream* const newPlayerList)
 // Sets our ownship pointer; public version, which is usually called by
 // the Station class.
 //------------------------------------------------------------------------------
-void PovHost::setOwnship(simulation::AbstractPlayer* const newOwnship)
+void PovHost::setOwnship(simulation::IPlayer* const newOwnship)
 {
    const auto player = dynamic_cast<models::Player*>(newOwnship);
    if (player != nullptr) {

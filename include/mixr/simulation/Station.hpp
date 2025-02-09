@@ -10,10 +10,10 @@ namespace mixr {
 namespace base { class AbstractIoHandler; class Boolean; class Identifier; class Integer;
                  class Number; class PairStream; class String; class Time; }
 namespace simulation {
-class AbstractDataRecorder;
+class IDataRecorder;
 class Simulation;
-class AbstractPlayer;
-class AbstractIgHost;
+class IPlayer;
+class IIgHost;
 class StationBgPeriodicThread;
 class StationTcPeriodicThread;
 class StationNetPeriodicThread;
@@ -162,11 +162,11 @@ public:
    base::PairStream* getPlayers();                                  // Player list; pre-ref()'d
    const base::PairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
 
-   AbstractPlayer* getOwnship();                                    // The ownship (primary) player
-   const AbstractPlayer* getOwnship() const;                        // The ownship (primary) player (const version)
+   IPlayer* getOwnship();                                           // The ownship (primary) player
+   const IPlayer* getOwnship() const;                               // The ownship (primary) player (const version)
 
    const std::string& getOwnshipName() const;                       // The ownship's name
-   virtual bool setOwnshipPlayer(AbstractPlayer* const newOS);      // Sets the ownship player
+   virtual bool setOwnshipPlayer(IPlayer* const newOS);             // Sets the ownship player
    virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
    base::PairStream* getIgHostList();                               // Image generator host interfaces
@@ -178,9 +178,9 @@ public:
    base::AbstractIoHandler* getIoHandler();                         // I/O handler
    const base::AbstractIoHandler* getIoHandler() const;             // I/O handler (const version)
 
-   AbstractDataRecorder* getDataRecorder();                         // Returns the data recorder
-   const AbstractDataRecorder* getDataRecorder() const;             // Returns the data recorder (const version)
-   virtual bool setDataRecorder(AbstractDataRecorder* const p);     // Sets the data recorder
+   IDataRecorder* getDataRecorder();                                // Returns the data recorder
+   const IDataRecorder* getDataRecorder() const;                    // Returns the data recorder (const version)
+   virtual bool setDataRecorder(IDataRecorder* const p);            // Sets the data recorder
 
    // Is Timer::updateTimers() being called from our updateTC()
    bool isUpdateTimersEnabled() const;
@@ -254,10 +254,10 @@ private:
    base::safe_ptr<base::PairStream> networks;                // List of networks
    base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
    base::safe_ptr<base::AbstractIoHandler> ioHandler;        // Input/Output (IO) data handler
-   AbstractPlayer* ownship{};                                // Ownship (primary) player
+   IPlayer* ownship{};                                       // Ownship (primary) player
    std::string ownshipName;                                  // Name of our ownship player
    bool tmrUpdateEnbl{};                                     // Enable base::Timers::updateTimers() call from updateTC()
-   AbstractDataRecorder* dataRecorder{};                     // Data Recorder
+   IDataRecorder* dataRecorder{};                            // Data Recorder
 
    double tcRate{50.0};                                      // Time-critical thread Rate (hz)
    double tcPri{DEFAULT_TC_THREAD_PRI};                      // Priority of the time-critical thread (0->lowest, 1->highest)
@@ -306,7 +306,7 @@ private:
    bool setSlotStartupResetTime(const base::Time* const);
    bool setSlotEnableUpdateTimers(const base::Boolean* const);
 
-   bool setSlotDataRecorder(AbstractDataRecorder* const x)              { return setDataRecorder(x); }
+   bool setSlotDataRecorder(IDataRecorder* const x)                     { return setDataRecorder(x); }
 };
 
 }

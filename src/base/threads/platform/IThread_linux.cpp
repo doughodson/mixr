@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/AbstractThread.hpp"
+#include "mixr/base/threads/IThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/Component.hpp"
@@ -18,9 +18,9 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 // Static thread function
 //-----------------------------------------------------------------------------
-void* AbstractThread::staticThreadFunc(void* lpParam)
+void* IThread::staticThreadFunc(void* lpParam)
 {
-   const auto thread = static_cast<AbstractThread*>(lpParam);
+   const auto thread = static_cast<IThread*>(lpParam);
    Component* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
@@ -41,7 +41,7 @@ void* AbstractThread::staticThreadFunc(void* lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-int AbstractThread::getNumProcessors()
+int IThread::getNumProcessors()
 {
    int num{};
 
@@ -60,7 +60,7 @@ int AbstractThread::getNumProcessors()
 //-----------------------------------------------------------------------------
 // Create the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::createThread()
+bool IThread::createThread()
 {
    // thread attributes
    pthread_attr_t attr;
@@ -123,7 +123,7 @@ bool AbstractThread::createThread()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::configThread()
+bool IThread::configThread()
 {
    // Nothing to do
    return true;
@@ -132,14 +132,14 @@ bool AbstractThread::configThread()
 //-----------------------------------------------------------------------------
 // Close the thread
 //-----------------------------------------------------------------------------
-void AbstractThread::closeThread()
+void IThread::closeThread()
 {
 }
 
 //-----------------------------------------------------------------------------
 // Treminate the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::terminate()
+bool IThread::terminate()
 {
    if (theThread != nullptr && !killed) {
       if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {

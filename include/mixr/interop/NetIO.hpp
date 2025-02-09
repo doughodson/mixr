@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_common_NetIO_HPP__
 #define __mixr_interop_common_NetIO_HPP__
 
-#include "mixr/simulation/AbstractNetIO.hpp"
+#include "mixr/simulation/INetIO.hpp"
 
 #include <array>
 #include <string>
@@ -145,9 +145,9 @@ class NtmOutputNode;
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public simulation::AbstractNetIO
+class NetIO : public simulation::INetIO
 {
-   DECLARE_SUBCLASS(NetIO, simulation::AbstractNetIO)
+   DECLARE_SUBCLASS(NetIO, simulation::INetIO)
 
 public:
     // Source of the time line

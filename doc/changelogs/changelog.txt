@@ -122,7 +122,7 @@ General framework-wide changes, improvements, trends, philosophy, and goals
   Much like String and Identifiers, this can lead to some confusion.  For example,
   configuration files settings for things things that are on/off, true/false, etc.
   were, unfortunately conflated with other Number representations (e.g., '5') -
-  which, somewhat disturbingly 'worked' where is used. Worked in the sense that
+  which, somewhat disturbingly 'worked' where it was used. Worked in the sense that
   numbers were being interpreted as Boolean values (e.g., true if positive), but
   misaligned with the semantics for the kind of input that was expected. (This is
   commonly referred to as "weak" typing.)
@@ -861,7 +861,7 @@ models library (mixr_models)
   folder.  All the classes defined in previous Signatures (.hpp/.cpp) files
   have been extracted into their own class files.
 
-   AbstractWeapon class
+   IWeapon class
       1) Slot parameters 'released', 'failed', 'power', 'hang', 'hung', 'dummy',
          'jettisonable' now accepts a Boolean
 
@@ -976,7 +976,7 @@ models library (mixr_models)
 --------------------------------------------------------------------------------
 simulation library (mixr_simulation)
 
-   AbstractPlayer class
+   IPlayer class
       1) Numerical player identifier (ID) was changed to be an 'int' as opposed
          to 'unsigned short'
       2) The enumerated list of modes is now a class (i.e., 'enum class Mode').

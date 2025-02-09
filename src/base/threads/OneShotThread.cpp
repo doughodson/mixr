@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base {
 
-OneShotThread::OneShotThread(Component* const p) : AbstractThread(p)
+OneShotThread::OneShotThread(Component* const p) : IThread(p)
 {
 }
 

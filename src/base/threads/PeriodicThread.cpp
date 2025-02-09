@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 
-PeriodicThread::PeriodicThread(Component* const p, const double rt) : AbstractThread(p), rate(rt)
+PeriodicThread::PeriodicThread(Component* const p, const double rt) : IThread(p), rate(rt)
 {
 }
 

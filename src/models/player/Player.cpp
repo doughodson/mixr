@@ -3,7 +3,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/dynamics/DynamicsModel.hpp"
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/system/Datalink.hpp"
@@ -25,9 +25,9 @@
 
 #include "mixr/terrain/Terrain.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
-#include "mixr/simulation/AbstractNetIO.hpp"
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
+#include "mixr/simulation/INetIO.hpp"
+#include "mixr/simulation/INib.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Latitude.hpp"
@@ -2328,7 +2328,7 @@ int Player::setThrottles(const double* const data, const int num)
 //------------------------------------------------------------------------------
 // Process weapon detonation
 //------------------------------------------------------------------------------
-void Player::processDetonation(const double detRange, AbstractWeapon* const wpn)
+void Player::processDetonation(const double detRange, IWeapon* const wpn)
 {
    if (!isKillOverride()) {
 

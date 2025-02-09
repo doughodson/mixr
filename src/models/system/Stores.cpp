@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/Stores.hpp"
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
@@ -27,7 +27,7 @@ BEGIN_SLOT_MAP(Stores)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Stores)
-    ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, AbstractWeapon )
+    ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, IWeapon )
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, ExternalStore )
 END_EVENT_HANDLER()
 
@@ -181,7 +181,7 @@ bool Stores::isWeaponAvailable(const unsigned int s) const
    // get the weapon
    bool isAvail{};
    if (idx >= 0 && weaponTbl[idx] != nullptr) {
-      const AbstractWeapon* wpn{weaponTbl[idx]->getPointer()};
+      const IWeapon* wpn{weaponTbl[idx]->getPointer()};
 
       // Reasons why the weapon may not be available ...
       bool notAvail{wpn->isReleased() || wpn->isBlocked() || wpn->isJettisoned() || wpn->isFailed() || wpn->isHung()};
@@ -195,13 +195,13 @@ bool Stores::isWeaponAvailable(const unsigned int s) const
 }
 
 // Return a weapon by station (const version)
-const AbstractWeapon* Stores::getWeapon(const unsigned int s) const
+const IWeapon* Stores::getWeapon(const unsigned int s) const
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
 
    // get the weapon
-   const AbstractWeapon* wpn = nullptr;
+   const IWeapon* wpn = nullptr;
    if (idx >= 0 && weaponTbl[idx] != nullptr) {
       wpn = weaponTbl[idx]->getPointer();
    }
@@ -209,13 +209,13 @@ const AbstractWeapon* Stores::getWeapon(const unsigned int s) const
 }
 
 // Return a weapon by station (const version)
-AbstractWeapon* Stores::getWeapon(const unsigned int s)
+IWeapon* Stores::getWeapon(const unsigned int s)
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
 
    // get the weapon
-   AbstractWeapon* wpn{};
+   IWeapon* wpn{};
    if (idx >= 0 && weaponTbl[idx] != nullptr) {
       wpn = weaponTbl[idx]->getPointer();
    }
@@ -276,9 +276,9 @@ bool Stores::selectStation(const unsigned int s)
 //------------------------------------------------------------------------------
 
 // By weapon
-AbstractWeapon* Stores::prereleaseWeapon(AbstractWeapon* const wpn)
+IWeapon* Stores::prereleaseWeapon(IWeapon* const wpn)
 {
-   AbstractWeapon* flyout{};
+   IWeapon* flyout{};
 
    Player* own{getOwnship()};
    if (wpn != nullptr && own != nullptr) {
@@ -293,11 +293,11 @@ AbstractWeapon* Stores::prereleaseWeapon(AbstractWeapon* const wpn)
 }
 
 // By station
-AbstractWeapon* Stores::prereleaseWeapon(const unsigned int s)
+IWeapon* Stores::prereleaseWeapon(const unsigned int s)
 {
-   AbstractWeapon* flyout{};
+   IWeapon* flyout{};
 
-   AbstractWeapon* wpn{getWeapon(s)};
+   IWeapon* wpn{getWeapon(s)};
    if (wpn != nullptr) {
       flyout = prereleaseWeapon(wpn);
       wpn->unref();
@@ -311,9 +311,9 @@ AbstractWeapon* Stores::prereleaseWeapon(const unsigned int s)
 //------------------------------------------------------------------------------
 
 // By weapon
-AbstractWeapon* Stores::releaseWeapon(AbstractWeapon* const wpn)
+IWeapon* Stores::releaseWeapon(IWeapon* const wpn)
 {
-   AbstractWeapon* flyout{};
+   IWeapon* flyout{};
 
    Player* own{getOwnship()};
    if (wpn != nullptr && own != nullptr) {
@@ -328,11 +328,11 @@ AbstractWeapon* Stores::releaseWeapon(AbstractWeapon* const wpn)
 }
 
 // By station
-AbstractWeapon* Stores::releaseWeapon(const unsigned int s)
+IWeapon* Stores::releaseWeapon(const unsigned int s)
 {
-   AbstractWeapon* flyout{};
+   IWeapon* flyout{};
 
-   AbstractWeapon* wpn{getWeapon(s)};
+   IWeapon* wpn{getWeapon(s)};
    if (wpn != nullptr) {
       flyout = releaseWeapon(wpn);
       wpn->unref();
@@ -373,7 +373,7 @@ bool Stores::jettisonAll()
 // assignWeaponToStation() --
 // Station numbers range from 1 to getNumberOfStations()
 //------------------------------------------------------------------------------
-bool Stores::assignWeaponToStation(const unsigned int s, AbstractWeapon* const wpnPtr)
+bool Stores::assignWeaponToStation(const unsigned int s, IWeapon* const wpnPtr)
 {
    bool ok{};
    if (s >= 1 && s <= ns) {
@@ -448,7 +448,7 @@ void Stores::resetStores(base::PairStream* const list)
 //------------------------------------------------------------------------------
 
 // Default weapon jettison event handler
-bool Stores::onJettisonEvent(AbstractWeapon* const wpn)
+bool Stores::onJettisonEvent(IWeapon* const wpn)
 {
    bool ok{};
    if (wpn != nullptr) {
@@ -579,7 +579,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
          if (stationNumber > 0 && stationNumber <= static_cast<int>(ns)) {
 
             // check the type of component
-            bool isWpn{p->isClassType(typeid(AbstractWeapon))};
+            bool isWpn{p->isClassType(typeid(IWeapon))};
             bool isEE{p->isClassType(typeid(ExternalStore))};
 
             if ( isWpn || isEE ) {
@@ -592,7 +592,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
                   // Weapon types ...
 
                   // Assign the weapon to the station
-                  const auto cwpn = static_cast<AbstractWeapon*>( cpair->object() );
+                  const auto cwpn = static_cast<IWeapon*>( cpair->object() );
                   assignWeaponToStation(stationNumber, cwpn);
 
                }

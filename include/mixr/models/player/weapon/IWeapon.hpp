@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_AbstractWeapon_HPP__
-#define __mixr_models_common_AbstractWeapon_HPP__
+#ifndef __mixr_models_common_IWeapon_HPP__
+#define __mixr_models_common_IWeapon_HPP__
 
 #include "mixr/models/player/Player.hpp"
 
@@ -12,10 +12,10 @@ class Stores;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class: AbstractWeapon
-// Description: Abstract class for all weapon types
+// Class: IWeapon
+// Description: Interface class for all weapon types
 //
-// Factory name: AbstractWeapon
+// Factory name: IWeapon
 // Slots:
 //    released      <base::Boolean>    ! Weapon has been released (default: false)
 //    failed        <base::Boolean>    ! Weapon failed (e.g., reasonableness Test) (default: false)
@@ -126,9 +126,9 @@ class Track;
 // 3) When a weapon is copied or cloned, the launcher and station are set to zero.
 //
 //------------------------------------------------------------------------------
-class AbstractWeapon : public Player
+class IWeapon : public Player
 {
-    DECLARE_SUBCLASS(AbstractWeapon, Player)
+    DECLARE_SUBCLASS(IWeapon, Player)
 
 public:
     // Weapon Categories (bits) These bits can be bitwise OR'd together
@@ -150,10 +150,10 @@ public:
     };
 
 public:
-   AbstractWeapon();
+   IWeapon();
 
-   AbstractWeapon* getPointer();                    // Pre-ref()'d pointer to the initial or fly-out based on mode
-   const AbstractWeapon* getPointer() const;        // Pre-ref()'d pointer to the initial or fly-out based on mode (const version)
+   IWeapon* getPointer();                    // Pre-ref()'d pointer to the initial or fly-out based on mode
+   const IWeapon* getPointer() const;        // Pre-ref()'d pointer to the initial or fly-out based on mode (const version)
 
    bool isWeaponID(const int n) const;              // True if weapon type IDs match
    int getWeaponID() const;                         // Weapon type ID number
@@ -205,11 +205,11 @@ public:
    Player* getTargetPlayer();                        // Our target player, if any
    const Player* getTargetPlayer() const;            // Our target player, if any (const version)
 
-   AbstractWeapon* getFlyoutWeapon();                // Pre-ref()'d pointer to the fly-out weapon
-   const AbstractWeapon* getFlyoutWeapon() const;    // Pre-ref()'d pointer to the fly-out weapon (const version)
+   IWeapon* getFlyoutWeapon();                // Pre-ref()'d pointer to the fly-out weapon
+   const IWeapon* getFlyoutWeapon() const;    // Pre-ref()'d pointer to the fly-out weapon (const version)
 
-   AbstractWeapon* getInitialWeapon();               // Pre-ref()'d pointer to the initial weapon
-   const AbstractWeapon* getInitialWeapon() const;   // Pre-ref()'d pointer to the initial weapon (const version)
+   IWeapon* getInitialWeapon();               // Pre-ref()'d pointer to the initial weapon
+   const IWeapon* getInitialWeapon() const;   // Pre-ref()'d pointer to the initial weapon (const version)
 
    unsigned short getReleaseEventID() const;         // Release event ID (to help match weapon launch and detonation events)
    bool isReleaseHold() const;                       // Is weapon is holding in PRE_RELEASE mode?
@@ -261,11 +261,11 @@ public:
    // prerelease() -- prerelease this weapon.
    //    Returns a point to the flyout weapon player, which is still
    //    in release hold.
-   virtual AbstractWeapon* prerelease();
+   virtual IWeapon* prerelease();
 
    // release() -- release this weapon
    //    Returns a pointer to the flyout weapon player
-   virtual AbstractWeapon* release();
+   virtual IWeapon* release();
 
    // Event handlers
    virtual bool onDesignatorEvent(const Designator* const msg);
@@ -306,10 +306,10 @@ protected:
    virtual bool setJettisoned(const bool f);
 
    // Sets a pointer to the fly-out weapon
-   virtual bool setFlyoutWeapon(AbstractWeapon* const p);
+   virtual bool setFlyoutWeapon(IWeapon* const p);
 
    // Sets a pointer to the initial weapon
-   virtual bool setInitialWeapon(AbstractWeapon* const p);
+   virtual bool setInitialWeapon(IWeapon* const p);
 
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
@@ -324,41 +324,41 @@ private:
     static const double DEFAULT_MAX_TGT_RNG;     // meters
     static const double DEFAULT_MAX_TGT_LOS_ERR; // radians
 
-    base::safe_ptr<AbstractWeapon> flyoutWpn;      // Initial weapon: points to the cloned flyout weapon
+    base::safe_ptr<IWeapon> flyoutWpn;             // Initial weapon: points to the cloned flyout weapon
                                                    // Cloned flyout: weapon: points to self
 
-    base::safe_ptr<AbstractWeapon> initialWpn;     // Initial weapon: points to self
+    base::safe_ptr<IWeapon> initialWpn;            // Initial weapon: points to self
                                                    // Cloned flyout: points to the initial weapon
 
-    base::Vec3d tgtPos;                     // Target Position -- platform coord (NED)
-    bool       tgtPosValid {};                 // If true, target position is valid
-    base::safe_ptr<Player> tgtPlayer;      // Target Player
-    base::safe_ptr<Track>  tgtTrack;       // Target Track
-    base::Vec3d    tgtVel {};                  // Target/Track Velocity (m/s) relative to ownship velocity
-    base::safe_ptr<Player> launchVehicle;  // Launching/Releasing Player
-    bool       posTrkEnb {};                   // If true, update tgtPos from the target/track
-    double     maxTgtRng {DEFAULT_MAX_TGT_RNG};                   // Max target range for default tgt selection      (meters)
-    double     maxTgtLosErr {DEFAULT_MAX_TGT_LOS_ERR};                // Max target LOS error for default tgt selection  (radians)
-    double     detonationRange {};             // Range to target at time of detonation           (meters)
-    base::Vec3d  tgtDetLoc;                 // Detonation location in target player's coord    (meters)
+    base::Vec3d tgtPos;                            // Target Position -- platform coord (NED)
+    bool       tgtPosValid {};                     // If true, target position is valid
+    base::safe_ptr<Player> tgtPlayer;              // Target Player
+    base::safe_ptr<Track>  tgtTrack;               // Target Track
+    base::Vec3d    tgtVel {};                      // Target/Track Velocity (m/s) relative to ownship velocity
+    base::safe_ptr<Player> launchVehicle;          // Launching/Releasing Player
+    bool       posTrkEnb {};                       // If true, update tgtPos from the target/track
+    double     maxTgtRng {DEFAULT_MAX_TGT_RNG};        // Max target range for default tgt selection      (meters)
+    double     maxTgtLosErr {DEFAULT_MAX_TGT_LOS_ERR}; // Max target LOS error for default tgt selection  (radians)
+    double     detonationRange {};                 // Range to target at time of detonation           (meters)
+    base::Vec3d  tgtDetLoc;                        // Detonation location in target player's coord    (meters)
 
-    base::safe_ptr<Stores> launcher;    // Launcher
-    int         station {};                // Station number (on launcher)
+    base::safe_ptr<Stores> launcher;               // Launcher
+    int         station {};                        // Station number (on launcher)
 
-    int         weaponID {};               // Weapon type ID (user defined)
-    unsigned short eventID {};             // Release event ID
-    bool        power {true};                  // Weapon power flag
-    bool        failed {};                 // Weapon failed flag
-    bool        released {};               // Released flag
-    bool        releaseHold {};            // Weapon is holding in PRE_RELEASE mode
-    bool        willHang {};               // Weapon will hang (or jam) on release.
-    bool        hung {};                   // Hung (or jammed) weapon flag
-    bool        blocked {};                // Weapon blocked flag
-    bool        canJettison {true};            // Weapon can be jettisioned.
-    bool        jettisoned {};             // Weapon has been jettisioned.
-    bool        dummyFlg {};               // Dummy (launch, but don't flyout or detonate)
-    Detonation  results {Detonation::NONE};       // Results of weapon detonation
-    base::safe_ptr<const base::String> tstTgtNam; // Test only: target player name
+    int         weaponID {};                       // Weapon type ID (user defined)
+    unsigned short eventID {};                     // Release event ID
+    bool        power {true};                      // Weapon power flag
+    bool        failed {};                         // Weapon failed flag
+    bool        released {};                       // Released flag
+    bool        releaseHold {};                    // Weapon is holding in PRE_RELEASE mode
+    bool        willHang {};                       // Weapon will hang (or jam) on release.
+    bool        hung {};                           // Hung (or jammed) weapon flag
+    bool        blocked {};                        // Weapon blocked flag
+    bool        canJettison {true};                // Weapon can be jettisioned.
+    bool        jettisoned {};                     // Weapon has been jettisioned.
+    bool        dummyFlg {};                       // Dummy (launch, but don't flyout or detonate)
+    Detonation  results {Detonation::NONE};        // Results of weapon detonation
+    base::safe_ptr<const base::String> tstTgtNam;  // Test only: target player name
 
     // ---
     // Default guidance & dynamics parameters

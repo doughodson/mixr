@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Player_HPP__
 #define __mixr_models_common_Player_HPP__
 
-#include "mixr/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/IPlayer.hpp"
 
 #include "mixr/models/SynchronizedState.hpp"
 
@@ -20,7 +20,7 @@
 namespace mixr {
 namespace base { class Angle; class Boolean; class Integer; class Latitude; class Length; class List; class Longitude;
                  class Time; class Vec2d; class Vec3d;}
-namespace simulation { class AbstractNib; }
+namespace simulation { class INib; }
 namespace models {
 class WorldModel;
 
@@ -35,7 +35,7 @@ class Pilot;
 class Radio;
 class RfSensor;
 class StoresMgr;
-class AbstractWeapon;
+class IWeapon;
 
 // Other item types
 class Emission;
@@ -47,8 +47,8 @@ class Track;
 //------------------------------------------------------------------------------
 // Class: Player
 //
-// Description: Interface for all players (e.g., aircraft, ground vehicles, etc.)
-//              Defines interfaces for player IDs, types, status, state vectors,
+// Description: Main player class (e.g., aircraft, ground vehicles, etc.)
+//              Defines core information for player IDs, types, status, state vectors,
 //              control flags, subcomponent lists, event handling, etc.
 //
 //
@@ -353,9 +353,9 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-class Player : public simulation::AbstractPlayer
+class Player : public simulation::IPlayer
 {
-   DECLARE_SUBCLASS(Player, simulation::AbstractPlayer)
+   DECLARE_SUBCLASS(Player, simulation::IPlayer)
 
 public:
    Player();
@@ -865,7 +865,7 @@ public:
    // ---
    // Process weapon detonation
    // ---
-   virtual void processDetonation(const double detRange, AbstractWeapon* const wpn = nullptr);
+   virtual void processDetonation(const double detRange, IWeapon* const wpn = nullptr);
 
    // ---
    // Event handler(s)

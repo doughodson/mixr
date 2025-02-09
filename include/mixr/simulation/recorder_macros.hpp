@@ -85,7 +85,7 @@
 
 #define BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)                                 \
 {                                                                                  \
-   ::mixr::simulation::AbstractDataRecorder* _p = pRecorder;                         \
+   ::mixr::simulation::IDataRecorder* _p = pRecorder;                         \
    if (pRecorder != nullptr)  {                                                    \
       unsigned int _token = token;                                                 \
       const ::mixr::base::Object* _obj[4] = { nullptr, nullptr, nullptr, nullptr };  \
@@ -94,12 +94,12 @@
 #define SAMPLE_1_OBJECT(P1)               _obj[0] = P1;
 #define SAMPLE_2_OBJECTS(P1, P2)          _obj[0] = P1; _obj[1] = P2;
 #define SAMPLE_3_OBJECTS(P1, P2, P3)      _obj[0] = P1; _obj[1] = P2; _obj[2] = P3;
-#define SAMPLE_4_OBJECTS(P1, P2, P3, P4)  _obj[0] = P1; _obj[1] = P2; _obj[2] = P3; _obj[3] = P4; 
+#define SAMPLE_4_OBJECTS(P1, P2, P3, P4)  _obj[0] = P1; _obj[1] = P2; _obj[2] = P3; _obj[3] = P4;
 
-#define SAMPLE_1_VALUE(V1)                _val[0] = V1; 
+#define SAMPLE_1_VALUE(V1)                _val[0] = V1;
 #define SAMPLE_2_VALUES(V1, V2)           _val[0] = V1; _val[1] = V2;
 #define SAMPLE_3_VALUES(V1, V2, V3)       _val[0] = V1; _val[1] = V2; _val[2] = V3;
-#define SAMPLE_4_VALUES(V1, V2, V3, V4)   _val[0] = V1; _val[1] = V2; _val[2] = V3; _val[3] = V4; 
+#define SAMPLE_4_VALUES(V1, V2, V3, V4)   _val[0] = V1; _val[1] = V2; _val[2] = V3; _val[3] = V4;
 
 #define END_RECORD_DATA_SAMPLE()                      \
       _p->recordData(_token, _obj, _val);             \

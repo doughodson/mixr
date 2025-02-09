@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/weapon/AbstractWeapon.hpp"
+#include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/models/dynamics/DynamicsModel.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -10,7 +10,7 @@
 #include "mixr/models/Track.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -31,13 +31,13 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(AbstractWeapon, "AbstractWeapon")
+IMPLEMENT_ABSTRACT_SUBCLASS(IWeapon, "IWeapon")
 
 // parameters
-const double AbstractWeapon::DEFAULT_MAX_TGT_RNG     {2000.0};    // meters
-const double AbstractWeapon::DEFAULT_MAX_TGT_LOS_ERR {1.0};       // radians
+const double IWeapon::DEFAULT_MAX_TGT_RNG     {2000.0};    // meters
+const double IWeapon::DEFAULT_MAX_TGT_LOS_ERR {1.0};       // radians
 
-BEGIN_SLOTTABLE(AbstractWeapon)
+BEGIN_SLOTTABLE(IWeapon)
     "released",         //  1: Weapon has been released
     "failed",           //  2: Weapon failed (e.g., reasonableness Test)
     "power",            //  3: Weapon power flag
@@ -55,9 +55,9 @@ BEGIN_SLOTTABLE(AbstractWeapon)
     "dummy",            // 15: Dummy store (launch, but don't flyout or detonate)
     "jettisonable",     // 16: Weapon can be jettisoned (default: true)
     "testTgtName"       // 17: TEST only: target player name
-END_SLOTTABLE(AbstractWeapon)
+END_SLOTTABLE(IWeapon)
 
-BEGIN_SLOT_MAP(AbstractWeapon)
+BEGIN_SLOT_MAP(IWeapon)
     ON_SLOT( 1,  setSlotReleased,    base::Boolean)
     ON_SLOT( 2,  setSlotFailed,      base::Boolean)
     ON_SLOT( 3,  setSlotPower,       base::Boolean)
@@ -91,12 +91,12 @@ BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT(17, setSlotTestTgtName,  base::String)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(AbstractWeapon)
+BEGIN_EVENT_HANDLER(IWeapon)
     ON_EVENT_OBJ(DESIGNATOR_EVENT, onDesignatorEvent, Designator)
     ON_EVENT( JETTISON_EVENT, onJettisonEvent)
 END_EVENT_HANDLER()
 
-AbstractWeapon::AbstractWeapon()
+IWeapon::IWeapon()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -110,7 +110,7 @@ AbstractWeapon::AbstractWeapon()
    initData();
 }
 
-void AbstractWeapon::initData()
+void IWeapon::initData()
 {
    tgtPos.set(0,0,0);
    tgtVel.set(0,0,0);
@@ -118,7 +118,7 @@ void AbstractWeapon::initData()
    setMaxGimbalAngle(30.0 * static_cast<double>(base::angle::D2RCC));
 }
 
-void AbstractWeapon::copyData(const AbstractWeapon& org, const bool cc)
+void IWeapon::copyData(const IWeapon& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -164,7 +164,7 @@ void AbstractWeapon::copyData(const AbstractWeapon& org, const bool cc)
    maxGimbal       = org.maxGimbal;
 }
 
-void AbstractWeapon::deleteData()
+void IWeapon::deleteData()
 {
    setFlyoutWeapon(nullptr);
    setInitialWeapon(nullptr);
@@ -177,11 +177,11 @@ void AbstractWeapon::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset vehicle
 //------------------------------------------------------------------------------
-void AbstractWeapon::reset()
+void IWeapon::reset()
 {
    BaseClass::reset();
 
-   AbstractWeapon* flyout{getFlyoutWeapon()};
+   IWeapon* flyout{getFlyoutWeapon()};
 
    // If there's a flyout weapon still in PRE_RELEASE then reset it
    if (flyout != nullptr && flyout != this && flyout->isMode(Mode::PRE_RELEASE) ) {
@@ -228,7 +228,7 @@ void AbstractWeapon::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void AbstractWeapon::updateTC(const double dt)
+void IWeapon::updateTC(const double dt)
 {
    BaseClass::updateTC(dt);
 
@@ -256,7 +256,7 @@ void AbstractWeapon::updateTC(const double dt)
 //------------------------------------------------------------------------------
 // dynamics() -- update vehicle dynamics
 //------------------------------------------------------------------------------
-void AbstractWeapon::dynamics(const double dt)
+void IWeapon::dynamics(const double dt)
 {
    if (isMode(Mode::PRE_RELEASE)) {
       // Weapon is on the same side as the launcher
@@ -305,7 +305,7 @@ void AbstractWeapon::dynamics(const double dt)
 //------------------------------------------------------------------------------
 // shutdownNotification() -- We're shutting down
 //------------------------------------------------------------------------------
-bool AbstractWeapon::shutdownNotification()
+bool IWeapon::shutdownNotification()
 {
    // Clear all of our pointers
    setFlyoutWeapon(nullptr);
@@ -321,7 +321,7 @@ bool AbstractWeapon::shutdownNotification()
 //-----------------------------------------------------------------------------
 // getMajorType() -- Returns the player's major type
 //-----------------------------------------------------------------------------
-unsigned int AbstractWeapon::getMajorType() const
+unsigned int IWeapon::getMajorType() const
 {
    return WEAPON;
 }
@@ -329,7 +329,7 @@ unsigned int AbstractWeapon::getMajorType() const
 //------------------------------------------------------------------------------
 // Default designator event handler
 //------------------------------------------------------------------------------
-bool AbstractWeapon::onDesignatorEvent(const Designator* const)
+bool IWeapon::onDesignatorEvent(const Designator* const)
 {
    // In the future, we'll want to pass this to our LASER detector
    // But we don't have any yet, so yet our derived classes override
@@ -342,7 +342,7 @@ bool AbstractWeapon::onDesignatorEvent(const Designator* const)
 //  -- We're setting the initial weapon's mode to LAUNCHED with the "we've been
 //  jettisoned" flag, and we're removing the pre-released flyout weapon, if any.
 //------------------------------------------------------------------------------
-bool AbstractWeapon::onJettisonEvent()
+bool IWeapon::onJettisonEvent()
 {
    bool ok{};
    if (!isReleased() && !isJettisoned() && isJettisonable()) {
@@ -350,8 +350,8 @@ bool AbstractWeapon::onJettisonEvent()
       // If we haven't already been release or jettisoned,
       // and we can be jettisoned ...
 
-      AbstractWeapon* flyout{getFlyoutWeapon()};
-      AbstractWeapon* initWpn{getInitialWeapon()};
+      IWeapon* flyout{getFlyoutWeapon()};
+      IWeapon* initWpn{getInitialWeapon()};
 
       // If there is a flyout weapon that's still in PRE_RELEASE mode
       // then call its jettison event handler.
@@ -386,7 +386,7 @@ bool AbstractWeapon::onJettisonEvent()
 //------------------------------------------------------------------------------
 // Check local players for the effects of the detonation -- did we hit anyone?
 //------------------------------------------------------------------------------
-void AbstractWeapon::checkDetonationEffect()
+void IWeapon::checkDetonationEffect()
 {
    WorldModel* s{getWorldModel()};
    if (s != nullptr) {
@@ -429,7 +429,7 @@ void AbstractWeapon::checkDetonationEffect()
 //------------------------------------------------------------------------------
 // collisionNotification() -- We just impacted with another player
 //------------------------------------------------------------------------------
-bool AbstractWeapon::collisionNotification(Player* const other)
+bool IWeapon::collisionNotification(Player* const other)
 {
    bool ok{};
 
@@ -460,7 +460,7 @@ bool AbstractWeapon::collisionNotification(Player* const other)
 //------------------------------------------------------------------------------
 // crashNotification() -- We just impacted the ground
 //------------------------------------------------------------------------------
-bool AbstractWeapon::crashNotification()
+bool IWeapon::crashNotification()
 {
    // ---
    // We've detonated because we've hit the ground
@@ -501,9 +501,9 @@ bool AbstractWeapon::crashNotification()
 //
 // Returns a point to the flyout weapon player, which is still in 'release hold'.
 //------------------------------------------------------------------------------
-AbstractWeapon* AbstractWeapon::prerelease()
+IWeapon* IWeapon::prerelease()
 {
-   AbstractWeapon* flyout{getFlyoutWeapon()};
+   IWeapon* flyout{getFlyoutWeapon()};
 
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
@@ -563,9 +563,9 @@ AbstractWeapon* AbstractWeapon::prerelease()
 //
 // Return a pointer to the flyout weapon player
 //------------------------------------------------------------------------------
-AbstractWeapon* AbstractWeapon::release()
+IWeapon* IWeapon::release()
 {
-   AbstractWeapon* flyout{};
+   IWeapon* flyout{};
 
    // When this weapon isn't already released, blocked or jettisoned.
    if ( !isReleased() && !isBlocked() && !isJettisoned() ) {
@@ -591,7 +591,7 @@ AbstractWeapon* AbstractWeapon::release()
                flyout->setReleaseHold(false);
 
                // Set the initial weapon's mode flags to fully released.
-               AbstractWeapon* initWpn{getInitialWeapon()};
+               IWeapon* initWpn{getInitialWeapon()};
                initWpn->setMode(Player::Mode::LAUNCHED);
                initWpn->setReleased(true);
                initWpn->setReleaseHold(false);
@@ -659,7 +659,7 @@ AbstractWeapon* AbstractWeapon::release()
 //------------------------------------------------------------------------------
 // atReleaseInit() -- Init weapon data at release
 //------------------------------------------------------------------------------
-void AbstractWeapon::atReleaseInit()
+void IWeapon::atReleaseInit()
 {
    // Set the release event
    if (eventID == 0) {
@@ -675,7 +675,7 @@ void AbstractWeapon::atReleaseInit()
 //------------------------------------------------------------------------------
 // setTOF() -- Set the time of flight
 //------------------------------------------------------------------------------
-void AbstractWeapon::setTOF(const double newTOF)
+void IWeapon::setTOF(const double newTOF)
 {
    tof = newTOF;
 }
@@ -683,21 +683,21 @@ void AbstractWeapon::setTOF(const double newTOF)
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance
 //------------------------------------------------------------------------------
-void AbstractWeapon::weaponGuidance(const double)
+void IWeapon::weaponGuidance(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics
 //------------------------------------------------------------------------------
-void AbstractWeapon::weaponDynamics(const double)
+void IWeapon::weaponDynamics(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // updateTOF -- default time of flight
 //------------------------------------------------------------------------------
-void AbstractWeapon::updateTOF(const double dt)
+void IWeapon::updateTOF(const double dt)
 {
    // As long as we're active ...
    if (isMode(Mode::ACTIVE)) {
@@ -724,7 +724,7 @@ void AbstractWeapon::updateTOF(const double dt)
 //------------------------------------------------------------------------------
 // positionTracking() -- update target position from target player position
 //------------------------------------------------------------------------------
-void AbstractWeapon::positionTracking()
+void IWeapon::positionTracking()
 {
     if (posTrkEnb) {
 
@@ -749,7 +749,7 @@ void AbstractWeapon::positionTracking()
 //------------------------------------------------------------------------------
 // Computes and sets 'loc' to our location relative to the target player, 'tgt'
 //------------------------------------------------------------------------------
-bool AbstractWeapon::computeTargetLocation(base::Vec3d* const loc, const Player* const tgt)
+bool IWeapon::computeTargetLocation(base::Vec3d* const loc, const Player* const tgt)
 {
    bool ok{};
    if (tgt != nullptr && loc != nullptr) {
@@ -764,7 +764,7 @@ bool AbstractWeapon::computeTargetLocation(base::Vec3d* const loc, const Player*
 //------------------------------------------------------------------------------
 // Compute the location of the detonation relative to the target player
 //------------------------------------------------------------------------------
-bool AbstractWeapon::setLocationOfDetonation()
+bool IWeapon::setLocationOfDetonation()
 {
    bool ok{};
 
@@ -789,7 +789,7 @@ bool AbstractWeapon::setLocationOfDetonation()
 //------------------------------------------------------------------------------
 
 // Returns pre-ref()'d pointer to the initial or fly-out based on modes
-AbstractWeapon* AbstractWeapon::getPointer()
+IWeapon* IWeapon::getPointer()
 {
    if (flyoutWpn != nullptr) {
       return flyoutWpn.getRefPtr();
@@ -800,7 +800,7 @@ AbstractWeapon* AbstractWeapon::getPointer()
 }
 
 // Returns pre-ref()'d pointer to the initial or fly-out based on modes (const version)
-const AbstractWeapon* AbstractWeapon::getPointer() const
+const IWeapon* IWeapon::getPointer() const
 {
    if (flyoutWpn != nullptr) {
       return flyoutWpn.getRefPtr();
@@ -811,253 +811,253 @@ const AbstractWeapon* AbstractWeapon::getPointer() const
 }
 
 // True if weapon type IDs match
-bool AbstractWeapon::isWeaponID(const int n) const
+bool IWeapon::isWeaponID(const int n) const
 {
    return (getWeaponID() == n);
 }
 
 // Weapon type ID number
-int AbstractWeapon::getWeaponID() const
+int IWeapon::getWeaponID() const
 {
    return weaponID;
 }
 
 // Returns true if the weapon is a member of the test category
-bool AbstractWeapon::isCategory(const int testCategory) const
+bool IWeapon::isCategory(const int testCategory) const
 {
    return (testCategory & getCategory()) != 0;
 }
 
 // Our launcher, if any
-Stores* AbstractWeapon::getLauncher()
+Stores* IWeapon::getLauncher()
 {
    return launcher;
 }
 
 // Our launcher, if any (const version)
-const Stores* AbstractWeapon::getLauncher() const
+const Stores* IWeapon::getLauncher() const
 {
    return launcher;
 }
 
 // Station index (number)
-unsigned int AbstractWeapon::getStation() const
+unsigned int IWeapon::getStation() const
 {
    return station;
 }
 
 // True if  the weapon has been released
-bool AbstractWeapon::isReleased() const
+bool IWeapon::isReleased() const
 {
    return released;
 }
 
 // Weapon power flag
-bool AbstractWeapon::isPowerOn() const
+bool IWeapon::isPowerOn() const
 {
    return power;
 }
 
 // Blocked weapon flag (can not be released if true)
-bool AbstractWeapon::isBlocked() const
+bool IWeapon::isBlocked() const
 {
    return blocked;
 }
 
 // True if the weapon can be jettisioned
-bool AbstractWeapon::isJettisonable() const
+bool IWeapon::isJettisonable() const
 {
    return canJettison;
 }
 
 // True if the weapon has been jettisioned
-bool AbstractWeapon::isJettisoned() const
+bool IWeapon::isJettisoned() const
 {
    return jettisoned;
 }
 
 // True if the weapon has failed
-bool AbstractWeapon::isFailed() const
+bool IWeapon::isFailed() const
 {
    return failed;
 }
 
 // True if the weapon is hung
-bool AbstractWeapon::isHung() const
+bool IWeapon::isHung() const
 {
    return hung;
 }
 
 // True if the weapon will hang on release
-bool AbstractWeapon::getWillHang() const
+bool IWeapon::getWillHang() const
 {
    return willHang;
 }
 
 // True if this is a dummy weapon (someone else with fly it out)
-bool AbstractWeapon::isDummy() const
+bool IWeapon::isDummy() const
 {
    return dummyFlg;
 }
 
 // Time Of Flight (seconds) since release
-double AbstractWeapon::getTOF() const
+double IWeapon::getTOF() const
 {
    return tof;
 }
 
 // Max TOF (seconds)
-double AbstractWeapon::getMaxTOF() const
+double IWeapon::getMaxTOF() const
 {
    return maxTOF;
 }
 
 // Time-to-Start guidance (seconds since release)
-double AbstractWeapon::getTSG() const
+double IWeapon::getTSG() const
 {
    return tsg;
 }
 
 // Start-Of-Burn time (seconds since release)
-double AbstractWeapon::getSOBT() const
+double IWeapon::getSOBT() const
 {
    return sobt;
 }
 
 // End-Of-Burn time (seconds since release)
-double AbstractWeapon::getEOBT() const
+double IWeapon::getEOBT() const
 {
    return eobt;
 }
 
 // is guidance system enabled (default check)
-bool AbstractWeapon::isGuidanceEnabled() const
+bool IWeapon::isGuidanceEnabled() const
 {
    return (getTOF() >= tsg) && ((getCategory() & GUIDED) != 0) && isTargetPositionValid();
 }
 
 // Weapon engine (rocket) on
-bool AbstractWeapon::isEngineBurnEnabled() const
+bool IWeapon::isEngineBurnEnabled() const
 {
    return (tof >= sobt && tof <= eobt);
 }
 
 // Max burst range (meters) -- most players will be damaged within this range
-double AbstractWeapon::getMaxBurstRng() const
+double IWeapon::getMaxBurstRng() const
 {
    return maxBurstRng;
 }
 
 // Lethal range (meters) -- most players will be killed within this range
-double AbstractWeapon::getLethalRange() const
+double IWeapon::getLethalRange() const
 {
    return lethalRange;
 }
 
 // Max gimbal angle (radians)
-double AbstractWeapon::getMaxGimbalAngle() const
+double IWeapon::getMaxGimbalAngle() const
 {
    return maxGimbal;
 }
 
 // Pointer to the player that launched us
-Player* AbstractWeapon::getLaunchVehicle()
+Player* IWeapon::getLaunchVehicle()
 {
    return launchVehicle;
 }
 
 // Pointer to the player that launched us (const version)
-const Player* AbstractWeapon::getLaunchVehicle() const
+const Player* IWeapon::getLaunchVehicle() const
 {
    return launchVehicle;
 }
 
 // True if we have the target position and is it valid
-bool AbstractWeapon::isTargetPositionValid() const
+bool IWeapon::isTargetPositionValid() const
 {
    return tgtPosValid;
 }
 
 // Returns the target position (meters -- NED from simulation ref point)
-const base::Vec3d& AbstractWeapon::getTargetPosition() const
+const base::Vec3d& IWeapon::getTargetPosition() const
 {
    return tgtPos;
 }
 
 // Our target track, if any
-Track* AbstractWeapon::getTargetTrack()
+Track* IWeapon::getTargetTrack()
 {
    return tgtTrack;
 }
 
 // Our target track, if any (const version)
-const Track* AbstractWeapon::getTargetTrack() const
+const Track* IWeapon::getTargetTrack() const
 {
    return tgtTrack;
 }
 
 // Our target player, if any
-Player* AbstractWeapon::getTargetPlayer()
+Player* IWeapon::getTargetPlayer()
 {
    return tgtPlayer;
 }
 
 // Our target player, if any (const version)
-const Player* AbstractWeapon::getTargetPlayer() const
+const Player* IWeapon::getTargetPlayer() const
 {
    return tgtPlayer;
 }
 
 // Pre-ref()'d pointer to the fly-out weapon
-AbstractWeapon* AbstractWeapon::getFlyoutWeapon()
+IWeapon* IWeapon::getFlyoutWeapon()
 {
    return flyoutWpn.getRefPtr();
 }
 
 // Pre-ref()'d pointer to the fly-out weapon (const version)
-const AbstractWeapon* AbstractWeapon::getFlyoutWeapon() const
+const IWeapon* IWeapon::getFlyoutWeapon() const
 {
    return flyoutWpn.getRefPtr();
 }
 
 // Pre-ref()'d pointer to the initial weapon
-AbstractWeapon* AbstractWeapon::getInitialWeapon()
+IWeapon* IWeapon::getInitialWeapon()
 {
    return initialWpn.getRefPtr();
 }
 
 // Pre-ref()'d pointer to the initial weapon (const version)
-const AbstractWeapon* AbstractWeapon::getInitialWeapon() const
+const IWeapon* IWeapon::getInitialWeapon() const
 {
    return initialWpn.getRefPtr();
 }
 
 // Release event ID (to help match weapon launch and detonation events)
-unsigned short AbstractWeapon::getReleaseEventID() const
+unsigned short IWeapon::getReleaseEventID() const
 {
    return eventID;
 }
 
 // Is weapon is holding in PRE_RELEASE mode?
-bool AbstractWeapon::isReleaseHold() const
+bool IWeapon::isReleaseHold() const
 {
    return releaseHold;
 }
 
 // Detonation result code (see 'Detonation' enum)
-AbstractWeapon::Detonation AbstractWeapon::getDetonationResults() const
+IWeapon::Detonation IWeapon::getDetonationResults() const
 {
    return results;
 }
 
 // Range to target at detonation (meters)
-double AbstractWeapon::getDetonationRange() const
+double IWeapon::getDetonationRange() const
 {
    return detonationRange;
 }
 
 // Location of detonation in target player's coord (meters)
-const base::Vec3d& AbstractWeapon::getDetonationLocation() const
+const base::Vec3d& IWeapon::getDetonationLocation() const
 {
    return tgtDetLoc;
 }
@@ -1067,7 +1067,7 @@ const base::Vec3d& AbstractWeapon::getDetonationLocation() const
 //------------------------------------------------------------------------------
 
 // setTargetPlayer() -- sets a pointer to the target player
-bool AbstractWeapon::setTargetPlayer(Player* const tgt, const bool pt)
+bool IWeapon::setTargetPlayer(Player* const tgt, const bool pt)
 {
     tgtPlayer = tgt;
     tgtTrack = nullptr;
@@ -1079,7 +1079,7 @@ bool AbstractWeapon::setTargetPlayer(Player* const tgt, const bool pt)
 }
 
 // setTargetTrack() -- sets a pointer to the target track
-bool AbstractWeapon::setTargetTrack(Track* const trk, const bool pt)
+bool IWeapon::setTargetTrack(Track* const trk, const bool pt)
 {
     tgtPlayer = nullptr;
     tgtTrack = trk;
@@ -1091,7 +1091,7 @@ bool AbstractWeapon::setTargetTrack(Track* const trk, const bool pt)
 }
 
 // setTargetPosition() -- set target position -- platform coord (NED)
-bool AbstractWeapon::setTargetPosition(const base::Vec3d& newTgtPos)
+bool IWeapon::setTargetPosition(const base::Vec3d& newTgtPos)
 {
     tgtPos = newTgtPos;
     setTargetPositionValid(true);
@@ -1099,77 +1099,77 @@ bool AbstractWeapon::setTargetPosition(const base::Vec3d& newTgtPos)
 }
 
 // setTargetPosition() -- set target velocity
-bool AbstractWeapon::setTargetVelocity(const base::Vec3d& newTgtVel)
+bool IWeapon::setTargetVelocity(const base::Vec3d& newTgtVel)
 {
    tgtVel = newTgtVel;
    return true;
 }
 
 // Sets the target position valid flag
-bool AbstractWeapon::setTargetPositionValid(const bool b)
+bool IWeapon::setTargetPositionValid(const bool b)
 {
    tgtPosValid = b;
    return true;
 }
 
 // setLaunchVehicle() -- sets a pointer to the launching player
-bool AbstractWeapon::setLaunchVehicle(Player* const lch)
+bool IWeapon::setLaunchVehicle(Player* const lch)
 {
     launchVehicle = lch;
     return true;
 }
 
 // Sets a weapon type player to release hold mode
-bool AbstractWeapon::setReleaseHold(const bool f)
+bool IWeapon::setReleaseHold(const bool f)
 {
     releaseHold = f;
     return true;
 }
 
 // Sets the weapon jettisoned flag
-bool AbstractWeapon::setJettisoned(const bool f)
+bool IWeapon::setJettisoned(const bool f)
 {
    jettisoned = f;
    return true;
 }
 
 // setFlyoutWeapon() -- sets a pointer to the "fly-out" weapon player
-bool AbstractWeapon::setFlyoutWeapon(AbstractWeapon* const p)
+bool IWeapon::setFlyoutWeapon(IWeapon* const p)
 {
     flyoutWpn = p;
     return true;
 }
 
 // setInitialWeapon() -- sets a pointer to the "initial" weapon
-bool AbstractWeapon::setInitialWeapon(AbstractWeapon* const p)
+bool IWeapon::setInitialWeapon(IWeapon* const p)
 {
     initialWpn = p;
     return true;
 }
 
 // setMaxTOF() -- Set max Time-Of-Flight (seconds)
-bool AbstractWeapon::setMaxTOF(const double v)
+bool IWeapon::setMaxTOF(const double v)
 {
     maxTOF =  v;
     return true;
 }
 
 // setTSG() -- Set Time-to-Start-Guidance (seconds)
-bool AbstractWeapon::setTSG(const double v)
+bool IWeapon::setTSG(const double v)
 {
     tsg = v;
     return true;
 }
 
 // Sets the detonation result code
-bool AbstractWeapon::setDetonationResults(const Detonation dr)
+bool IWeapon::setDetonationResults(const Detonation dr)
 {
    results = dr;
    return true;
 }
 
 // Sets the detonation location in target player's coord (meters)
-bool AbstractWeapon::setDetonationLocation(const base::Vec3d& loc)
+bool IWeapon::setDetonationLocation(const base::Vec3d& loc)
 {
    tgtDetLoc = loc;
    detonationRange = loc.length();
@@ -1177,49 +1177,49 @@ bool AbstractWeapon::setDetonationLocation(const base::Vec3d& loc)
 }
 
 // setMaxGimbalAngle() -- Set max gimbal angle (radians)
-bool AbstractWeapon::setMaxGimbalAngle(const double v)
+bool IWeapon::setMaxGimbalAngle(const double v)
 {
     maxGimbal =  v;
     return true;
 }
 
 // setMaxBurstRng() -- Set max Burst Range (meters)
-bool AbstractWeapon::setMaxBurstRng(const double v)
+bool IWeapon::setMaxBurstRng(const double v)
 {
     maxBurstRng =  v;
     return true;
 }
 
 // setLethalRange() -- Set max kill Range (meters)
-bool AbstractWeapon::setLethalRange(const double v)
+bool IWeapon::setLethalRange(const double v)
 {
     lethalRange =  v;
     return true;
 }
 
 // setSOBT() -- Set Start-Of-Burn-Time (seconds)
-bool AbstractWeapon::setSOBT(const double v)
+bool IWeapon::setSOBT(const double v)
 {
     sobt =  v;
     return true;
 }
 
 // setEOBT() -- Set End-Of-Burn-Time (seconds)
-bool AbstractWeapon::setEOBT(const double v)
+bool IWeapon::setEOBT(const double v)
 {
    eobt =  v;
    return true;
 }
 
 // Sets the weapon's type ID number
-bool AbstractWeapon::setWeaponID(const int n)
+bool IWeapon::setWeaponID(const int n)
 {
    weaponID = n;
    return true;
 }
 
 // Sets the release event ID
-bool AbstractWeapon::setReleaseEventID(const unsigned short n)
+bool IWeapon::setReleaseEventID(const unsigned short n)
 {
    eventID = n;
    return true;
@@ -1227,7 +1227,7 @@ bool AbstractWeapon::setReleaseEventID(const unsigned short n)
 
 
 // Sets our launcher and station number
-bool AbstractWeapon::setLauncher(Stores* const l, const unsigned int s)
+bool IWeapon::setLauncher(Stores* const l, const unsigned int s)
 {
    launcher = l;
    station = s;
@@ -1235,56 +1235,56 @@ bool AbstractWeapon::setLauncher(Stores* const l, const unsigned int s)
 }
 
 // Sets the weapon released flag
-bool AbstractWeapon::setReleased(const bool f)
+bool IWeapon::setReleased(const bool f)
 {
    released = f;
    return true;
 }
 
 // Sets the weapon power flag
-bool AbstractWeapon::setPower(const bool f)
+bool IWeapon::setPower(const bool f)
 {
    power = f;
    return true;
 }
 
 // Sets the weapon blocked flag
-bool AbstractWeapon::setBlocked(const bool b)
+bool IWeapon::setBlocked(const bool b)
 {
    blocked = b;
    return true;
 }
 
 // Sets the jettision enable flag
-bool AbstractWeapon::setJettisonable(const bool f)
+bool IWeapon::setJettisonable(const bool f)
 {
    canJettison = f;
    return true;
 }
 
 // Sets the weapon failed flag
-bool AbstractWeapon::setFailed(const bool f)
+bool IWeapon::setFailed(const bool f)
 {
    failed = f;
    return true;
 }
 
 // Sets the hung weapon flag
-bool AbstractWeapon::setHung(const bool f)
+bool IWeapon::setHung(const bool f)
 {
    hung = f;
    return true;
 }
 
 // Sets the 'will' hang flag
-bool AbstractWeapon::setWillHang(const bool f)
+bool IWeapon::setWillHang(const bool f)
 {
    willHang = f;
    return true;
 }
 
 // Sets the dummy weapon flag
-bool AbstractWeapon::setDummy(const bool f)
+bool IWeapon::setDummy(const bool f)
 {
    dummyFlg = f;
    return true;
@@ -1295,49 +1295,49 @@ bool AbstractWeapon::setDummy(const bool f)
 //------------------------------------------------------------------------------
 
 // released:  Weapon has been released
-bool AbstractWeapon::setSlotReleased(const base::Boolean* const p)
+bool IWeapon::setSlotReleased(const base::Boolean* const p)
 {
     setReleased( p->asBool() );
     return true;
 }
 
 // failed: Weapon failed (e.g., reasonableness Test)
-bool AbstractWeapon::setSlotFailed(const base::Boolean* const p)
+bool IWeapon::setSlotFailed(const base::Boolean* const p)
 {
     setFailed( p->asBool() );
     return true;
 }
 
 // Power: weapon power flag
-bool AbstractWeapon::setSlotPower(const base::Boolean* const p)
+bool IWeapon::setSlotPower(const base::Boolean* const p)
 {
     setPower( p->asBool() );
     return true;
 }
 
 // hang: Will be a hung store
-bool AbstractWeapon::setSlotWillHang(const base::Boolean* const p)
+bool IWeapon::setSlotWillHang(const base::Boolean* const p)
 {
     setWillHang( p->asBool() );
     return true;
 }
 
 // hung: Hung store
-bool AbstractWeapon::setSlotHung(const base::Boolean* const p)
+bool IWeapon::setSlotHung(const base::Boolean* const p)
 {
     setHung( p->asBool() );
     return true;
 }
 
 // dummy: Dummy store
-bool AbstractWeapon::setSlotDummy(const base::Boolean* const p)
+bool IWeapon::setSlotDummy(const base::Boolean* const p)
 {
     setDummy( p->asBool() );
     return true;
 }
 
 // maxTOF:  max time of flight      (base::Time)
-bool AbstractWeapon::setSlotMaxTOF(const base::Time* const p)
+bool IWeapon::setSlotMaxTOF(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1347,13 +1347,13 @@ bool AbstractWeapon::setSlotMaxTOF(const base::Time* const p)
 }
 
 // maxTOF:  max time of flight      (sec)
-bool AbstractWeapon::setSlotMaxTOF(const base::Number* const p)
+bool IWeapon::setSlotMaxTOF(const base::Number* const p)
 {
     return setMaxTOF( p->asDouble() );
 }
 
 // tsg: time to start guidance    (base::Time)
-bool AbstractWeapon::setSlotTSG(const base::Time* const p)
+bool IWeapon::setSlotTSG(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1363,13 +1363,13 @@ bool AbstractWeapon::setSlotTSG(const base::Time* const p)
 }
 
 // tsg: time to start guidance    (sec)
-bool AbstractWeapon::setSlotTSG(const base::Number* const p)
+bool IWeapon::setSlotTSG(const base::Number* const p)
 {
     return setTSG( p->asDouble() );
 }
 
 // maxBurstRng: max burst range    (base::Distance)
-bool AbstractWeapon::setSlotMaxBurstRng(const base::Length* const p)
+bool IWeapon::setSlotMaxBurstRng(const base::Length* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1379,14 +1379,14 @@ bool AbstractWeapon::setSlotMaxBurstRng(const base::Length* const p)
 }
 
 // maxBurstRng: max burst range    (meters)
-bool AbstractWeapon::setSlotMaxBurstRng(const base::Number* const p)
+bool IWeapon::setSlotMaxBurstRng(const base::Number* const p)
 {
     return setMaxBurstRng( p->asDouble() );
 }
 
 
 // lethalRange: lethal range    (base::Distance)
-bool AbstractWeapon::setSlotLethalRange(const base::Length* const p)
+bool IWeapon::setSlotLethalRange(const base::Length* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1396,13 +1396,13 @@ bool AbstractWeapon::setSlotLethalRange(const base::Length* const p)
 }
 
 // lethalRange: lethal range    (meters)
-bool AbstractWeapon::setSlotLethalRange(const base::Number* const p)
+bool IWeapon::setSlotLethalRange(const base::Number* const p)
 {
     return setLethalRange( p->asDouble() );
 }
 
 // sobt: start-of-burn time        (base::Time)
-bool AbstractWeapon::setSlotSOBT(const base::Time* const p)
+bool IWeapon::setSlotSOBT(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1412,14 +1412,14 @@ bool AbstractWeapon::setSlotSOBT(const base::Time* const p)
 }
 
 // sobt: start-of-burn time        (sec)
-bool AbstractWeapon::setSlotSOBT(const base::Number* const p)
+bool IWeapon::setSlotSOBT(const base::Number* const p)
 {
     setSOBT(p->asDouble());
     return true;
 }
 
 // eobt: end-of-burn time        (base::Time)
-bool AbstractWeapon::setSlotEOBT(const base::Time* const p)
+bool IWeapon::setSlotEOBT(const base::Time* const p)
 {
    bool ok{};
    if (p != nullptr) {
@@ -1429,21 +1429,21 @@ bool AbstractWeapon::setSlotEOBT(const base::Time* const p)
 }
 
 // eobt: end-of-burn time        (sec)
-bool AbstractWeapon::setSlotEOBT(const base::Number* const p)
+bool IWeapon::setSlotEOBT(const base::Number* const p)
 {
     setEOBT( p->asDouble() );
     return true;
 }
 
 // maxBurstRng: max burst rng    (meters)
-bool AbstractWeapon::setSlotMaxGimbal(const base::Angle* const p)
+bool IWeapon::setSlotMaxGimbal(const base::Angle* const p)
 {
     setMaxGimbalAngle(p->getValueInRadians());
     return true;
 }
 
 // tgtPos: TEST
-bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
+bool IWeapon::setSlotTgtPos(const base::List* const numList)
 {
     bool ok{};
     double values[3]{};
@@ -1457,21 +1457,21 @@ bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
 }
 
 // weaponID: weapon type ID
-bool AbstractWeapon::setSlotWeaponID(const base::Integer* const p)
+bool IWeapon::setSlotWeaponID(const base::Integer* const p)
 {
     setWeaponID( p->asInt() );
     return true;
 }
 
 // jettisonable: weapon can be jettisoned
-bool AbstractWeapon::setSlotJettisonable(const base::Boolean* const p)
+bool IWeapon::setSlotJettisonable(const base::Boolean* const p)
 {
     setJettisonable( p->asBool() );
     return true;
 }
 
 // testTgtName: TEST only: target player name
-bool AbstractWeapon::setSlotTestTgtName(const base::String* const p)
+bool IWeapon::setSlotTestTgtName(const base::String* const p)
 {
    tstTgtNam = p;
    return true;

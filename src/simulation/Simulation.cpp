@@ -1,13 +1,13 @@
 
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/simulation/AbstractPlayer.hpp"
+#include "mixr/simulation/IPlayer.hpp"
 
 #include "SimulationTcSyncThread.hpp"
 #include "SimulationBgSyncThread.hpp"
 
-#include "mixr/simulation/AbstractDataRecorder.hpp"
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/IDataRecorder.hpp"
+#include "mixr/simulation/INib.hpp"
 #include "mixr/simulation/Station.hpp"
 
 #include "mixr/base/PairStream.hpp"
@@ -223,7 +223,7 @@ void Simulation::reset()
          base::List::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-            AbstractPlayer* ip{static_cast<AbstractPlayer*>(pair->object())};
+            IPlayer* ip{static_cast<IPlayer*>(pair->object())};
 
             // reinstated the container pointer and player name
             ip->container(this);
@@ -245,7 +245,7 @@ void Simulation::reset()
          base::List::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
+            IPlayer* ip {static_cast<IPlayer*>(pair->object())};
             if (ip->isProxyPlayer()) {
 
                // reinstated the container pointer and player name
@@ -400,7 +400,7 @@ void Simulation::reset()
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
          if (pair != nullptr) {
-            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
+            IPlayer* ip {static_cast<IPlayer*>(pair->object())};
             if (ip != nullptr) ip->event(RESET_EVENT);
          }
          item = item->getNext();
@@ -662,7 +662,7 @@ void Simulation::updateTcPlayerList(
          count++;
          if (count == index) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-            AbstractPlayer* ip {static_cast<AbstractPlayer*>(pair->object())};
+            IPlayer* ip {static_cast<IPlayer*>(pair->object())};
             ip->tcFrame(dt);
             index += n;
          }
@@ -735,7 +735,7 @@ void Simulation::updateBgPlayerList(
          count++;
          if (count == index) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-            AbstractPlayer* ip{static_cast<AbstractPlayer*>(pair->object())};
+            IPlayer* ip{static_cast<IPlayer*>(pair->object())};
             ip->updateData(dt);
             index += n;
          }
@@ -861,9 +861,9 @@ unsigned short Simulation::getNewReleasedWeaponID()
 };
 
 // Returns the data recorder
-AbstractDataRecorder* Simulation::getDataRecorder()
+IDataRecorder* Simulation::getDataRecorder()
 {
-   AbstractDataRecorder* p{};
+   IDataRecorder* p{};
    Station* sta{getStation()};
    if (sta != nullptr) p = sta->getDataRecorder();
    return p;
@@ -920,7 +920,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr && ok) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
-         const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
+         const auto ip = dynamic_cast<IPlayer*>( pair->object() );
          if (ip == nullptr) {
             // Item is NOT a Player
             std::cerr << "Simulation::setSlotPlayers: slot: " << pair->slot() << " is NOT of a Player type!" << std::endl;
@@ -944,7 +944,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item1 != nullptr) {
          base::Pair* pair1{static_cast<base::Pair*>(item1->getValue())};
          item1 = item1->getNext();
-         AbstractPlayer* ip1{static_cast<AbstractPlayer*>(pair1->object())};
+         IPlayer* ip1{static_cast<IPlayer*>(pair1->object())};
 
          // unassigned ID
          if ( (ip1->getID() == 0) && (maxID < 65535) ) {
@@ -955,7 +955,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
          base::List::Item* item2{item1};
          while (item2 != nullptr) {
             base::Pair* pair2{static_cast<base::Pair*>(item2->getValue())};
-            AbstractPlayer* ip2{static_cast<AbstractPlayer*>(pair2->object())};
+            IPlayer* ip2{static_cast<IPlayer*>(pair2->object())};
 
             // unassigned ID
             if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
@@ -986,7 +986,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
-         const auto ip = static_cast<AbstractPlayer*>(pair->object());
+         const auto ip = static_cast<IPlayer*>(pair->object());
          ip->container(this);
          ip->setName(pair->slot());
       }
@@ -1037,8 +1037,8 @@ void Simulation::updatePlayerList()
         base::List::Item* item{pl->getFirstItem()};
         while (!yes && item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-            const auto p = static_cast<AbstractPlayer*>(pair->object());
-            yes = p->isMode(AbstractPlayer::Mode::DELETE_REQUEST);
+            const auto p = static_cast<IPlayer*>(pair->object());
+            yes = p->isMode(IPlayer::Mode::DELETE_REQUEST);
             item = item->getNext();
         }
     }
@@ -1061,8 +1061,8 @@ void Simulation::updatePlayerList()
         while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             item = item->getNext();
-            const auto p = static_cast<AbstractPlayer*>(pair->object());
-            if (p->isNotMode(AbstractPlayer::Mode::DELETE_REQUEST)) {
+            const auto p = static_cast<IPlayer*>(pair->object());
+            if (p->isNotMode(IPlayer::Mode::DELETE_REQUEST)) {
                 // Add the player to the new list
                 newList->put(pair);
             } else {
@@ -1082,7 +1082,7 @@ void Simulation::updatePlayerList()
         base::Pair* newPlayer{newPlayerQueue.get()};
         while (newPlayer != nullptr) {
             // get the player
-            const auto ip = static_cast<AbstractPlayer*>(newPlayer->object());
+            const auto ip = static_cast<IPlayer*>(newPlayer->object());
 
             BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_NEW_PLAYER )
                SAMPLE_1_OBJECT( ip )
@@ -1129,7 +1129,7 @@ bool Simulation::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(const char* const playerName, AbstractPlayer* const player)
+bool Simulation::addNewPlayer(const char* const playerName, IPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
@@ -1152,7 +1152,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     newItem->value = newPlayerPair;
 
     // Get the player
-    const auto newPlayer = static_cast<AbstractPlayer*>(newPlayerPair->object());
+    const auto newPlayer = static_cast<IPlayer*>(newPlayerPair->object());
 
     // Search the new player list and insert into the correct position --
     //  -- sorted by network ID and player ID
@@ -1160,7 +1160,7 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
     base::List::Item* refItem{newList->getFirstItem()};
     while (refItem != nullptr && !inserted) {
         base::Pair* refPair{static_cast<base::Pair*>(refItem->getValue())};
-        const auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
+        const auto refPlayer = static_cast<IPlayer*>(refPair->object());
 
         bool insert{};
         if (newPlayer->isProxyPlayer()) {
@@ -1169,8 +1169,8 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
             if (refPlayer->isProxyPlayer()) {
 
                // Get the NIBs
-               const AbstractNib* nNib{newPlayer->getNib()};
-               const AbstractNib* rNib{refPlayer->getNib()};
+               const INib* nNib{newPlayer->getNib()};
+               const INib* rNib{refPlayer->getNib()};
 
                // Compare federate names
                int result{nNib->getFederateName() == rNib->getFederateName()};
@@ -1211,28 +1211,28 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-AbstractPlayer* Simulation::findPlayer(const short id, const int netID)
+IPlayer* Simulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const AbstractPlayer* Simulation::findPlayer(const short id, const int netID) const
+const IPlayer* Simulation::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
+IPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
 
     // Find a Player that matches player ID and Sources
-    AbstractPlayer* player{};
+    IPlayer* player{};
     const base::List::Item* item{players->getFirstItem()};
     while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
+            const auto ip = const_cast<IPlayer*>(static_cast<const IPlayer*>(pair->object()));
             if (ip != nullptr) {
                 if (netID > 0) {
                     if ((ip->getID() == id) && (ip->getNetworkID() == netID)) {
@@ -1254,28 +1254,28 @@ AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) c
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-AbstractPlayer* Simulation::findPlayerByName(const char* const playerName)
+IPlayer* Simulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const AbstractPlayer* Simulation::findPlayerByName(const char* const playerName) const
+const IPlayer* Simulation::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-AbstractPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
+IPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
 
     // Find a Player named 'playerName'
-    AbstractPlayer* player{};
+    IPlayer* player{};
     const base::List::Item* item{players->getFirstItem()};
     while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            const auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
+            const auto ip = const_cast<IPlayer*>(static_cast<const IPlayer*>(pair->object()));
             if (ip != nullptr && ip->isName(playerName)) {
                player = ip;
             }
@@ -1446,7 +1446,7 @@ bool Simulation::setSlotNumTcThreads(const base::Integer* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const int np{base::AbstractThread::getNumProcessors()};
+      const int np{base::IThread::getNumProcessors()};
       int maxT{1};
       if (np > 1) maxT = np - 1;
 
@@ -1470,7 +1470,7 @@ bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const int np{base::AbstractThread::getNumProcessors()};
+      const int np{base::IThread::getNumProcessors()};
       int maxT{1};
       if (np > 1) maxT = np - 1;
 

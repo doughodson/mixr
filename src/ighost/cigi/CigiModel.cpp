@@ -5,7 +5,7 @@
 
 #include "mixr/base/String.hpp"
 
-#include "mixr/simulation/AbstractNib.hpp"
+#include "mixr/simulation/INib.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/ground/GroundVehicle.hpp"
@@ -74,7 +74,7 @@ void CigiModel::setPlayer(models::Player* const p)
    if (player != nullptr) {
       player->ref();
       playerID = player->getID();
-      const simulation::AbstractNib* nib = player->getNib();
+      const simulation::INib* nib = player->getNib();
       if (nib != nullptr) {
          federateName = nib->getFederateName();
       } else {

@@ -1,8 +1,8 @@
 
-#ifndef __mixr_simulation_AbstractDataRecorder_HPP__
-#define __mixr_simulation_AbstractDataRecorder_HPP__
+#ifndef __mixr_simulation_IDataRecorder_HPP__
+#define __mixr_simulation_IDataRecorder_HPP__
 
-#include "mixr/simulation/AbstractRecorderComponent.hpp"
+#include "mixr/simulation/IRecorderComponent.hpp"
 #include "mixr/simulation/recorder_macros.hpp"
 
 namespace mixr {
@@ -11,9 +11,9 @@ class Simulation;
 class Station;
 
 //------------------------------------------------------------------------------
-// Class: AbstractDataRecorder
-// Description: Abstract data recorder
-//    1) This as an abstract class for the data record that acts as a stub class
+// Class: IDataRecorder
+// Description: Interface to a data recorder
+//    1) This as an interface class for the data recorder that acts as a stub class
 //       for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
@@ -22,12 +22,12 @@ class Station;
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see mixr/simulation/dataRecorderTokens.hpp)
 //------------------------------------------------------------------------------
-class AbstractDataRecorder : public AbstractRecorderComponent
+class IDataRecorder : public IRecorderComponent
 {
-   DECLARE_SUBCLASS(AbstractDataRecorder, AbstractRecorderComponent)
+   DECLARE_SUBCLASS(IDataRecorder, IRecorderComponent)
 
 public:
-   AbstractDataRecorder();
+   IDataRecorder();
 
    Station* getStation();                     // Our parent station
    const Station* getStation() const;         // Our parent station (const version)
@@ -65,7 +65,7 @@ private:
 };
 
 // Record Data function
-inline bool AbstractDataRecorder::recordData(
+inline bool IDataRecorder::recordData(
       const unsigned int id,
       const base::Object* pObjects[4],
       const double values[4]
