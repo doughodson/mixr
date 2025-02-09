@@ -1,7 +1,7 @@
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/colors/Hsva.hpp"
 #include "mixr/base/colors/Rgba.hpp"
 
@@ -19,24 +19,24 @@
 namespace mixr {
 namespace terrain {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Terrain, "AbstractTerrain")
+IMPLEMENT_ABSTRACT_SUBCLASS(ITerrain, "ITerrain")
 
-BEGIN_SLOTTABLE(Terrain)
+BEGIN_SLOTTABLE(ITerrain)
    "file",        // 1) Data file name
    "path",        // 2) Data path name
-END_SLOTTABLE(Terrain)
+END_SLOTTABLE(ITerrain)
 
-BEGIN_SLOT_MAP(Terrain)
+BEGIN_SLOT_MAP(ITerrain)
    ON_SLOT(1, setSlotFilename, base::String)
    ON_SLOT(2, setSlotPathname, base::String)
 END_SLOT_MAP()
 
-Terrain::Terrain()
+ITerrain::ITerrain()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Terrain::copyData(const Terrain& org, const bool)
+void ITerrain::copyData(const ITerrain& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -63,7 +63,7 @@ void Terrain::copyData(const Terrain& org, const bool)
    maxElev = org.maxElev;
 }
 
-void Terrain::deleteData()
+void ITerrain::deleteData()
 {
    clearData();
 
@@ -71,7 +71,7 @@ void Terrain::deleteData()
    setFilename(nullptr);
 }
 
-void Terrain::reset()
+void ITerrain::reset()
 {
    if ( !isDataLoaded() ) {
       loadData();
@@ -80,7 +80,7 @@ void Terrain::reset()
    BaseClass::reset();
 }
 
-void Terrain::clearData()
+void ITerrain::clearData()
 {
 }
 
@@ -89,7 +89,7 @@ void Terrain::clearData()
 //------------------------------------------------------------------------------
 
 // Returns the name of the datafile
-const char* Terrain::getFilename() const
+const char* ITerrain::getFilename() const
 {
    const char* p = nullptr;
    if (file != nullptr) {
@@ -99,7 +99,7 @@ const char* Terrain::getFilename() const
 }
 
 // Returns the path to the datafiles
-const char* Terrain::getPathname() const
+const char* ITerrain::getPathname() const
 {
    const char* p = nullptr;
    if (path != nullptr) {
@@ -107,7 +107,7 @@ const char* Terrain::getPathname() const
       p = path->c_str();
    } else {
       // See if we have a contain "Terrain" object that has a path set
-      const Terrain* q = static_cast<const Terrain*>(findContainerByType(typeid(Terrain)));
+      const ITerrain* q = static_cast<const ITerrain*>(findContainerByType(typeid(ITerrain)));
       if (q != nullptr) p = q->getPathname();
    }
    return p;
@@ -118,7 +118,7 @@ const char* Terrain::getPathname() const
 //------------------------------------------------------------------------------
 
 // Sets the name of the datafile
-bool Terrain::setFilename(const base::String* const msg)
+bool ITerrain::setFilename(const base::String* const msg)
 {
    if (file != nullptr) file->unref();
    file = msg;
@@ -127,7 +127,7 @@ bool Terrain::setFilename(const base::String* const msg)
 }
 
 // Sets the path to the datafiles
-bool Terrain::setPathname(const base::String* const msg)
+bool ITerrain::setPathname(const base::String* const msg)
 {
    if (path != nullptr) path->unref();
    path = msg;
@@ -136,21 +136,21 @@ bool Terrain::setPathname(const base::String* const msg)
 }
 
 // Minimum elevation in this database (meters)
-bool Terrain::setMinElevation(const double v)
+bool ITerrain::setMinElevation(const double v)
 {
    minElev = v;
    return true;
 }
 
 // Maximum elevation in this database (meters)
-bool Terrain::setMaxElevation(const double v)
+bool ITerrain::setMaxElevation(const double v)
 {
    maxElev = v;
    return true;
 }
 
 // Southwest corner latitude of this database (degs)
-bool Terrain::setLatitudeSW(const double v)
+bool ITerrain::setLatitudeSW(const double v)
 {
    bool ok = false;
    if (v >= -90.0 && v <= 90.0) {
@@ -161,7 +161,7 @@ bool Terrain::setLatitudeSW(const double v)
 }
 
 // Southwest corner longitude of this database (degs)
-bool Terrain::setLongitudeSW(const double v)
+bool ITerrain::setLongitudeSW(const double v)
 {
    bool ok = false;
    if (v >= -180.0 && v <= 180.0) {
@@ -172,7 +172,7 @@ bool Terrain::setLongitudeSW(const double v)
 }
 
 // Northeast corner latitude of this database (degs)
-bool Terrain::setLatitudeNE(const double v)
+bool ITerrain::setLatitudeNE(const double v)
 {
    bool ok = false;
    if (v >= -90.0 && v <= 90.0) {
@@ -183,7 +183,7 @@ bool Terrain::setLatitudeNE(const double v)
 }
 
 // Northeast corner longitude of this database (degs)
-bool Terrain::setLongitudeNE(const double v)
+bool ITerrain::setLongitudeNE(const double v)
 {
    bool ok = false;
    if (v >= -180.0 && v <= 180.0) {
@@ -197,7 +197,7 @@ bool Terrain::setLongitudeNE(const double v)
 // Target occulting: returns true if a target point [ tgtLat tgtLon tgtAlt ] is
 // occulted by the terrain as seen from the ref point [ refLat refLon refAlt ].
 //------------------------------------------------------------------------------
-bool Terrain::targetOcculting(
+bool ITerrain::targetOcculting(
       const double refLat,    // Ref latitude (degs)
       const double refLon,    // Ref longitude (degs)
       const double refAlt,    // Ref altitude (meters)
@@ -250,7 +250,7 @@ bool Terrain::targetOcculting(
 // Target occulting #2: returns true if any terrain in the 'truBrg' direction
 // for 'dist' meters occults (or masks) a target with a look angle of atan(tanLookAng)
 //------------------------------------------------------------------------------
-bool Terrain::targetOcculting2(
+bool ITerrain::targetOcculting2(
       const double refLat,    // Ref latitude (degs)
       const double refLon,    // Ref longitude (degs)
       const double refAlt,    // Ref altitude (meters)
@@ -297,7 +297,7 @@ bool Terrain::targetOcculting2(
 // range 'range' is occulted by the elevation points as seen from the
 // reference altitude 'refAlt'.
 //------------------------------------------------------------------------------
-bool Terrain::occultCheck(
+bool ITerrain::occultCheck(
       const double* const elevations,  // The elevation array (meters)
       const bool* const validFlags,    // Valid elevation flag array (true if elevation was found)
       const unsigned int n,            // Size of the arrays
@@ -353,7 +353,7 @@ bool Terrain::occultCheck(
 // level) to each elevation point, as seen from the ref altitude, refAlt, is
 // greater than the tangent of the 'look' angle, 'tanLookAng'.
 //------------------------------------------------------------------------------
-bool Terrain::occultCheck2(
+bool ITerrain::occultCheck2(
       const double* const elevations, // The elevation array (meters)
       const bool* const validFlags, // Valid elevation flag array (true if elevation was found)
       const unsigned int n,         // Size of the arrays
@@ -405,7 +405,7 @@ bool Terrain::occultCheck2(
 // is masked (in shadow or out of beam) as seen from the reference
 // altitude over the first point.  Returns true if successful
 //------------------------------------------------------------------------------
-bool Terrain::vbwShadowChecker(
+bool ITerrain::vbwShadowChecker(
       bool* const maskFlags,          // The array of mask flags
       const double* const elevations, // The elevation array (meters)
       const bool* const validFlags,   // (Optional) Valid elevation flag array (true if elevation was found)
@@ -494,7 +494,7 @@ bool Terrain::vbwShadowChecker(
 // aac() -- Compute Aspect Angle Cosines; computes the cosine of the angle
 // inwhich the beam hits the terrain.
 //------------------------------------------------------------------------------
-bool Terrain::aac(
+bool ITerrain::aac(
       double* const aacData,        // The array for the aspect angle cosines
       const double* const elevData, // The elevation array (meters)
       const bool* const maskFlags,  // (Optional) The array of mask flags
@@ -573,7 +573,7 @@ bool Terrain::aac(
 //------------------------------------------------------------------------------
 // cLight() -- Computes the columnated lighting effect for each point
 //------------------------------------------------------------------------------
-bool Terrain::cLight(
+bool ITerrain::cLight(
       double* const ldata,          // The array for the lighting factors
       const double* const elevData, // The elevation array (meters)
       const bool* const maskFlags,  // (Optional) The array of mask flags
@@ -641,7 +641,7 @@ bool Terrain::cLight(
 //------------------------------------------------------------------------------
 // Converts an elevation to a color (or gray scale)
 //------------------------------------------------------------------------------
-bool Terrain::getElevationColor(
+bool ITerrain::getElevationColor(
       const double elevation,          // Elevation
       const double minz,               // Min elevation
       const double maxz,               // Max elevation

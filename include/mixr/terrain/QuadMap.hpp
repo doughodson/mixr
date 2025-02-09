@@ -2,7 +2,7 @@
 #ifndef __mixr_terrain_QuadMap_HPP__
 #define __mixr_terrain_QuadMap_HPP__
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 #include <array>
 
 namespace mixr {
@@ -14,16 +14,16 @@ class DataFile;
 // Description: Manage up to 4 elevation files in a 2x2 pattern
 // Factory name: QuadMap
 //------------------------------------------------------------------------------
-class QuadMap : public Terrain
+class QuadMap : public ITerrain
 {
-   DECLARE_SUBCLASS(QuadMap, Terrain)
+   DECLARE_SUBCLASS(QuadMap, ITerrain)
 
 public:
    QuadMap();
 
    unsigned int getNumDataFiles() const;
-   const Terrain* getDataFile(const unsigned int i) const;
-   bool setDataFile(const unsigned int i, Terrain* newDF);
+   const ITerrain* getDataFile(const unsigned int i) const;
+   bool setDataFile(const unsigned int i, ITerrain* newDF);
 
    // ---
    // simulation::Terrain interface
@@ -63,7 +63,7 @@ protected:
 private:
    static const unsigned int MAX_DATA_FILES{4};            // Only 4 files (as in Quad!)
 
-   std::array<const Terrain*, MAX_DATA_FILES> dataFiles{}; // Terrain data files
+   std::array<const ITerrain*, MAX_DATA_FILES> dataFiles{}; // Terrain data files
    unsigned int numDataFiles{};                            // Number of data files
 
    bool loadData() override;

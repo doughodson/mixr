@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_ColorRotary_HPP__
 #define __mixr_graphics_ColorRotary_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 #include <array>
 
@@ -46,9 +46,9 @@ namespace graphics {
 //       Set our slot values via a pairstream
 //
 //------------------------------------------------------------------------------
-class ColorRotary : public base::Color
+class ColorRotary : public base::IColor
 {
-    DECLARE_SUBCLASS(ColorRotary, base::Color)
+    DECLARE_SUBCLASS(ColorRotary, base::IColor)
 
 public:
     ColorRotary();

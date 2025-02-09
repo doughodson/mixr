@@ -661,7 +661,7 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const dou
 //------------------------------------------------------------------------------
 // update the symbol's color
 //------------------------------------------------------------------------------
-bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::Color* cobj)
+bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::IColor* cobj)
 {
    bool ok{};
 

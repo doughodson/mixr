@@ -195,12 +195,12 @@ void MonitorMetrics::cie2rgb(Vec4d& rgba, const Vec3d& cie) const
 
     ciexyz.set(cie[Cie::X], cie[Cie::Y], 1-cie[Cie::X]-cie[Cie::Y]);
     rgb = transform * ciexyz;
-    rgb *= cie[Cie::LUMINANCE]/(rgb[Color::RED]+rgb[Color::GREEN]+rgb[Color::BLUE]);
+    rgb *= cie[Cie::LUMINANCE]/(rgb[IColor::RED]+rgb[IColor::GREEN]+rgb[IColor::BLUE]);
 
-    rgba[Color::RED] = redLuminance->lfi( rgb[Color::RED] );
-    rgba[Color::GREEN] = redLuminance->lfi( rgb[Color::GREEN] );
-    rgba[Color::BLUE] = redLuminance->lfi( rgb[Color::BLUE] );
-    rgba[Color::ALPHA] = Color::getDefaultAlpha();
+    rgba[IColor::RED] = redLuminance->lfi( rgb[IColor::RED] );
+    rgba[IColor::GREEN] = redLuminance->lfi( rgb[IColor::GREEN] );
+    rgba[IColor::BLUE] = redLuminance->lfi( rgb[IColor::BLUE] );
+    rgba[IColor::ALPHA] = IColor::getDefaultAlpha();
 }
 
 }

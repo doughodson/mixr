@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Yiq_HPP__
 #define __mixr_base_colors_Yiq_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 namespace mixr {
 namespace base {
@@ -21,7 +21,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: yiq
+// Factory name: Yiq
 //
 // Slots:
 //       Y  <Number>  Y component (0.0 to 1.0) (default: 0.0)
@@ -34,9 +34,9 @@ class Number;
 //        return a const pointer to the RGBA color vector and not the
 //        YIQ color vector.
 //------------------------------------------------------------------------------
-class Yiq final: public Color
+class Yiq final: public IColor
 {
-    DECLARE_SUBCLASS(Yiq, Color)
+    DECLARE_SUBCLASS(Yiq, IColor)
 
 public:
     // components of YIQ color - used as an index into vector

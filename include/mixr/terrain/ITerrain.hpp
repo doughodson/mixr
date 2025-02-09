@@ -1,6 +1,6 @@
 
-#ifndef __mixr_terrain_Terrain_HPP__
-#define __mixr_terrain_Terrain_HPP__
+#ifndef __mixr_terrain_ITerrain_HPP__
+#define __mixr_terrain_ITerrain_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -12,9 +12,9 @@ namespace base { class Hsva; class String; }
 namespace terrain {
 
 //------------------------------------------------------------------------------
-// Class: Terrain
+// Class: ITerrain
 //
-// Description: Abstract class for managing the terrain elevation databases.
+// Description: Interface class for managing the terrain elevation databases.
 //              Database specific, derived classes will be used to handle the
 //              various database formats (e.g., DTED, DED, SRTM).
 //
@@ -27,12 +27,12 @@ namespace terrain {
 //    2) the final point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class Terrain : public base::Component
+class ITerrain : public base::Component
 {
-    DECLARE_SUBCLASS(Terrain, base::Component)
+    DECLARE_SUBCLASS(ITerrain, base::Component)
 
 public:
-   Terrain();
+   ITerrain();
 
    const char* getFilename() const;                            // Returns the name of the datafile
    virtual bool setFilename(const base::String* const msg);    // Sets the name of the datafile

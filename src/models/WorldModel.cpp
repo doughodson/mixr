@@ -16,7 +16,7 @@
 
 // environment models
 #include "mixr/models/environment/IAtmosphere.hpp"
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
 #include <cmath>
 
@@ -57,7 +57,7 @@ BEGIN_SLOT_MAP(WorldModel)
 
     ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Boolean)
 
-    ON_SLOT( 6, setSlotTerrain,              terrain::Terrain)
+    ON_SLOT( 6, setSlotTerrain,              terrain::ITerrain)
     ON_SLOT( 7, setSlotAtmosphere,           IAtmosphere)
 END_SLOT_MAP()
 
@@ -90,7 +90,7 @@ void WorldModel::copyData(const WorldModel& org, const bool cc)
 
 
    if (org.terrain != nullptr) {
-      terrain::Terrain* copy = org.terrain->clone();
+      terrain::ITerrain* copy = org.terrain->clone();
       setSlotTerrain( copy );
       copy->unref();
    }
@@ -343,12 +343,12 @@ bool WorldModel::setSlotGamingAreaEarthModel(const base::Boolean* const msg)
 }
 
 // returns the terrain elevation database
-const terrain::Terrain* WorldModel::getTerrain() const
+const terrain::ITerrain* WorldModel::getTerrain() const
 {
    return terrain;
 }
 
-terrain::Terrain* WorldModel::getTerrain()
+terrain::ITerrain* WorldModel::getTerrain()
 {
    return terrain;
 }
@@ -365,7 +365,7 @@ const IAtmosphere* WorldModel::getAtmosphere() const
    return atmosphere;
 }
 
-bool WorldModel::setSlotTerrain(terrain::Terrain* const msg)
+bool WorldModel::setSlotTerrain(terrain::ITerrain* const msg)
 {
    if (terrain != nullptr) terrain->unref();
    terrain = msg;

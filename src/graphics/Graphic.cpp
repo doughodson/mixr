@@ -48,7 +48,7 @@ BEGIN_SLOTTABLE(Graphic)
 END_SLOTTABLE(Graphic)
 
 BEGIN_SLOT_MAP(Graphic)
-    ON_SLOT( 1, setSlotColor,              base::Color)
+    ON_SLOT( 1, setSlotColor,              base::IColor)
     ON_SLOT( 1, setSlotColor,              base::Identifier)
     ON_SLOT( 2, setSlotLineWidth,          base::Number)
     ON_SLOT( 3, setSlotFlashRate,          base::Number)
@@ -76,9 +76,9 @@ BEGIN_SLOT_MAP(Graphic)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Graphic)
-    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Color)       // Color given as a base::Color object (e.g., rgb)
-    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Identifier)  // Color given as a string (e.g., "red")
-    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Number)      // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::IColor)       // Color given as a base::Color object (e.g., rgb)
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Identifier)   // Color given as a string (e.g., "red")
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Number)       // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          base::Identifier )
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          graphics::Material)
     ON_EVENT_OBJ(SET_TEXTURE,    onSetTextureId,       base::Integer)
@@ -646,9 +646,9 @@ void Graphic::setupMatrix()
 }
 
 //------------------------------------------------------------------------------
-// setColor() -- set this object's color (using an base::Color)
+// setColor() -- set this object's color (using an base::IColor)
 //------------------------------------------------------------------------------
-bool Graphic::setColor(const base::Color* cobj)
+bool Graphic::setColor(const base::IColor* cobj)
 {
     // Unref old colors
     if (color != nullptr)     { color->unref(); color = nullptr; }
@@ -1082,7 +1082,7 @@ bool Graphic::setSlotTranslateLight(base::PairStream* const x)
     return true;
 }
 
-bool Graphic::setSlotColor(const base::Color* const color)
+bool Graphic::setSlotColor(const base::IColor* const color)
 {
    return setColor(color);
 }

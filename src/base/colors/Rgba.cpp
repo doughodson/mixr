@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rgba, "rgba")
+IMPLEMENT_SUBCLASS(Rgba, "Rgba")
 EMPTY_COPYDATA(Rgba)
 EMPTY_DELETEDATA(Rgba)
 
@@ -22,7 +22,7 @@ Rgba::Rgba(const double r, const double g,
            const double b, const double a) : Rgb(r,g,b)
 {
    STANDARD_CONSTRUCTOR()
-   color[Color::ALPHA] = a;
+   color[IColor::ALPHA] = a;
 }
 
 Rgba::Rgba()

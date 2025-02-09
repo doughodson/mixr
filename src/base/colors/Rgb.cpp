@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rgb, "rgb")
+IMPLEMENT_SUBCLASS(Rgb, "Rgb")
 EMPTY_DELETEDATA(Rgb)
 
 BEGIN_SLOTTABLE(Rgb)
@@ -24,10 +24,10 @@ END_SLOT_MAP()
 Rgb::Rgb(const double r, const double g, const double b)
 {
    STANDARD_CONSTRUCTOR()
-   color[Color::RED]   = r;
-   color[Color::GREEN] = g;
-   color[Color::BLUE]  = b;
-   color[Color::ALPHA] = getDefaultAlpha();
+   color[IColor::RED]   = r;
+   color[IColor::GREEN] = g;
+   color[IColor::BLUE]  = b;
+   color[IColor::ALPHA] = getDefaultAlpha();
 }
 
 Rgb::Rgb()

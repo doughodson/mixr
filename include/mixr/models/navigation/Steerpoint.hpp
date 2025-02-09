@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base { class Angle; class Identifier; class Integer; class Length; class Latitude;
                  class List; class Longitude; class Identifier; class Number; class String; class Time; }
-namespace terrain { class Terrain; }
+namespace terrain { class ITerrain; }
 namespace models {
 class Navigation;
 class Action;
@@ -118,7 +118,7 @@ public:
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
     // Returns true if successful.
-    virtual bool setElevation(const terrain::Terrain* const terrain, const bool interp = false);
+    virtual bool setElevation(const terrain::ITerrain* const terrain, const bool interp = false);
 
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Cmy_HPP__
 #define __mixr_base_colors_Cmy_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 namespace mixr {
 namespace base {
@@ -24,9 +24,9 @@ class Number;
 //        return a const pointer to the RGBA color vector and not the
 //        CMY color vector.
 //------------------------------------------------------------------------------
-class Cmy final: public Color
+class Cmy final: public IColor
 {
-    DECLARE_SUBCLASS(Cmy, Color)
+    DECLARE_SUBCLASS(Cmy, IColor)
 
 public:
     // components of CMY color - used to index color vector

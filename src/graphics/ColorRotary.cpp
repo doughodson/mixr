@@ -26,10 +26,10 @@ ColorRotary::ColorRotary()
 {
     STANDARD_CONSTRUCTOR()
     // default gives us no colors, but just makes us black
-    color[Color::RED] = 0;
-    color[Color::GREEN] = 0;
-    color[Color::BLUE] = 0;
-    color[Color::ALPHA] = getDefaultAlpha();
+    color[IColor::RED] = 0;
+    color[IColor::GREEN] = 0;
+    color[IColor::BLUE] = 0;
+    color[IColor::ALPHA] = getDefaultAlpha();
 }
 
 void ColorRotary::copyData(const ColorRotary& org, const bool)
@@ -79,7 +79,7 @@ bool ColorRotary::determineColor(const double value)
     if (myColors != nullptr) {
         base::Pair* pair = myColors->getPosition(breakPoint);
         if (pair != nullptr) {
-            const auto listcolor = dynamic_cast<base::Color*>(pair->object());
+            const auto listcolor = dynamic_cast<base::IColor*>(pair->object());
             if (listcolor != nullptr) {
                const auto vec = static_cast<const base::Vec4d*>(listcolor->getRGBA());
                color = *vec;

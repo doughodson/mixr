@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hsva, "hsva")
+IMPLEMENT_SUBCLASS(Hsva, "Hsva")
 EMPTY_COPYDATA(Hsva)
 EMPTY_DELETEDATA(Hsva)
 
@@ -40,7 +40,7 @@ Hsva::Hsva()
 bool Hsva::colorInterpolate(
       const double value,      // Value
       const double minValue,   // Minimum Value
-      const double maxValue,   // Maximum Value 
+      const double maxValue,   // Maximum Value
       const Hsva& minColor,  // Minimum HSV color
       const Hsva& maxColor   // Minimum HSV color
  )

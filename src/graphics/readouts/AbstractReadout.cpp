@@ -411,7 +411,7 @@ void AbstractReadout::drawFunc()
 
     if (!isInheritColor()) {
         if (getColorName() == nullptr && getColor() == nullptr) {
-            const base::Color* cc = nullptr;
+            const base::IColor* cc = nullptr;
             if (isHighLighted()) cc = dsp->getHighlightColor();
             else cc = dsp->getNormColor();
             if (cc != nullptr) {

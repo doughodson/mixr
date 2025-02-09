@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hls, "hls")
+IMPLEMENT_SUBCLASS(Hls, "Hls")
 EMPTY_DELETEDATA(Hls)
 
 BEGIN_SLOTTABLE(Hls)

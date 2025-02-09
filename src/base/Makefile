@@ -21,7 +21,7 @@ LIB = $(MIXR_LIB_DIR)/libmixr_base.a
 OBJS =  \
 	colors/Cie.o \
 	colors/Cmy.o \
-	colors/Color.o \
+	colors/IColor.o \
 	colors/Hls.o \
 	colors/Hsva.o \
 	colors/Hsv.o \

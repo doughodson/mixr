@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Boolean; class Color; class Identifier; class Integer; class Number; class Transform; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class Number; class Transform; }
 namespace graphics {
 class Display;
 class Material;
@@ -251,10 +251,10 @@ public:
    bool setLineWidth(const GLfloat v);                                     // Sets the line width attribute.
 
    // Color functions
-   base::Color* getColor()                                  { return color; }
-   const base::Color* getColor() const                      { return color; }
-   const base::Identifier* getColorName() const             { return colorName; }
-   virtual bool setColor(const base::Color* const);
+   base::IColor* getColor()                                  { return color; }
+   const base::IColor* getColor() const                      { return color; }
+   const base::Identifier* getColorName() const              { return colorName; }
+   virtual bool setColor(const base::IColor* const);
    virtual bool setColor(const base::Identifier* const);
    virtual bool setColor(const base::Number* const);
 
@@ -424,7 +424,7 @@ private:
    GLuint  selName {};       // Select name
    double  fRate {};         // Flash rate
 
-   base::Color* color {};            // Color
+   base::IColor* color {};           // Color
    base::Identifier* colorName {};   // Color name (if from color table)
 
    base::Vec3d* vertices {};         // Vertices
@@ -461,7 +461,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotColor(const base::Color* const);
+   bool setSlotColor(const base::IColor* const);
    bool setSlotColor(const base::Identifier* const);
    bool setSlotFlashRate(const base::Number* const);
    bool setSlotLineWidth(const base::Number* const);

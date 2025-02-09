@@ -5,7 +5,7 @@
 
 #include "mixr/base/relations/Table1.hpp"
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/colors/Rgba.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -25,9 +25,9 @@ BEGIN_SLOTTABLE(GhostHorizon)
 END_SLOTTABLE(GhostHorizon)
 
 BEGIN_SLOT_MAP(GhostHorizon)
-    ON_SLOT(1, setSlotSkyColor,    base::Color)
+    ON_SLOT(1, setSlotSkyColor,    base::IColor)
     ON_SLOT(1, setSlotSkyColor,    base::Identifier)
-    ON_SLOT(2, setSlotGroundColor, base::Color)
+    ON_SLOT(2, setSlotGroundColor, base::IColor)
     ON_SLOT(2, setSlotGroundColor, base::Identifier)
     ON_SLOT(3, setSlotWidth,       base::Number)
     ON_SLOT(4, setSlotHeight,      base::Number)
@@ -64,7 +64,7 @@ void GhostHorizon::deleteData()
 //------------------------------------------------------------------------------
 // setSlotSkyColor() - set the color of our Ghost Horizon "sky" by a Color obj.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotSkyColor(const base::Color* const cobj)
+bool GhostHorizon::setSlotSkyColor(const base::IColor* const cobj)
 {
     bool ok = false;
     if (cobj != nullptr) {
@@ -108,7 +108,7 @@ bool GhostHorizon::setSlotGroundColor(const base::Identifier* const cname)
 //------------------------------------------------------------------------------
 // setSlotGroundColor() - set our "ground" color by Color obj.
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotGroundColor(const base::Color* const cobj)
+bool GhostHorizon::setSlotGroundColor(const base::IColor* const cobj)
 {
     bool ok = false;
     if (cobj != nullptr) {
@@ -217,7 +217,7 @@ void GhostHorizon::updateData(const double dt)
         if (sColorName != nullptr) {
             graphics::Display* d = getDisplay();
             if (d != nullptr) {
-                base::Color* c = d->getColor(sColorName->c_str());
+                base::IColor* c = d->getColor(sColorName->c_str());
                 if (c != nullptr) {
                     skyColor.set(c->red(), c->green(), c->blue());
                 }
@@ -230,7 +230,7 @@ void GhostHorizon::updateData(const double dt)
         if (gColorName != nullptr) {
             graphics::Display* d = getDisplay();
             if (d != nullptr) {
-                base::Color* c = d->getColor(gColorName->c_str());
+                base::IColor* c = d->getColor(gColorName->c_str());
                 if (c != nullptr) {
                     groundColor.set(c->red(), c->green(), c->blue());
                 }

@@ -7,7 +7,7 @@
 #include "mixr/base/util/filesystem_utils.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 #include <iostream>
 #include <string>
@@ -25,7 +25,7 @@ BEGIN_SLOTTABLE(FtglHaloFont)
 END_SLOTTABLE(FtglHaloFont)
 
 BEGIN_SLOT_MAP(FtglHaloFont)
-    ON_SLOT(1, setSlotHaloColor, base::Color)
+    ON_SLOT(1, setSlotHaloColor, base::IColor)
     ON_SLOT(2, setSlotLinewidth, base::Number)
 END_SLOT_MAP()
 
@@ -262,7 +262,7 @@ void FtglHaloFont::loadFont()
 
 }
 
-bool FtglHaloFont::setSlotHaloColor(base::Color* x)
+bool FtglHaloFont::setSlotHaloColor(base::IColor* x)
 {
     // set our halo color
     if (haloColor != nullptr) haloColor->unref();

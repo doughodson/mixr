@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Hsv_HPP__
 #define __mixr_base_colors_Hsv_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 
@@ -36,7 +36,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: hsv
+// Factory name: Hsv
 //
 // Slots:
 //     hue        <Number>  ! Set the hue component (0.0 to 360.0, default: 0.0)
@@ -47,9 +47,9 @@ class Number;
 //        return a const pointer to the RGBA color vector and not the
 //        HSVA color vector.
 //------------------------------------------------------------------------------
-class Hsv : public Color
+class Hsv : public IColor
 {
-    DECLARE_SUBCLASS(Hsv, Color)
+    DECLARE_SUBCLASS(Hsv, IColor)
 
 public:
     // components of HSV color - used as an index into a vector

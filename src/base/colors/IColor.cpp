@@ -1,5 +1,5 @@
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
@@ -7,13 +7,13 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Color, "AbstractColor")
-EMPTY_SLOTTABLE(Color)
-EMPTY_DELETEDATA(Color)
+IMPLEMENT_SUBCLASS(IColor, "IColor")
+EMPTY_SLOTTABLE(IColor)
+EMPTY_DELETEDATA(IColor)
 
-double Color::defaultAlpha{1.0};
+double IColor::defaultAlpha{1.0};
 
-Color::Color()
+IColor::IColor()
 {
     STANDARD_CONSTRUCTOR()
     // default color is black
@@ -23,7 +23,7 @@ Color::Color()
     color[ALPHA] = defaultAlpha;
 }
 
-Color::Color(const double red, const double green, const double blue, const double alpha)
+IColor::IColor(const double red, const double green, const double blue, const double alpha)
 {
     STANDARD_CONSTRUCTOR()
     color[RED]   = red;
@@ -32,50 +32,50 @@ Color::Color(const double red, const double green, const double blue, const doub
     color[ALPHA] = alpha;
 }
 
-void Color::copyData(const Color& org, const bool)
+void IColor::copyData(const IColor& org, const bool)
 {
    BaseClass::copyData(org);
-   color = org.color; 
+   color = org.color;
 }
 
-Color::operator const Vec3d*() const
+IColor::operator const Vec3d*() const
 {
     // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
     // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
     return reinterpret_cast<const Vec3d*>( &color );
 }
 
-Color::operator const Vec4d*() const
+IColor::operator const Vec4d*() const
 {
     return &color;
 }
 
 // Return the color vector of color array index PF_RED
-double Color::red() const
+double IColor::red() const
 {
     return color[RED];
 }
 
 // Return the color vector of color array index PF_GREEN
-double Color::green() const
+double IColor::green() const
 {
     return color[GREEN];
 }
 
 // Return the color vector of color array index PF_BLUE
-double Color::blue() const
+double IColor::blue() const
 {
     return color[BLUE];
 }
 
 // Return the color vector of color array index PF_ALPHA
-double Color::alpha() const
+double IColor::alpha() const
 {
     return color[ALPHA];
 }
 
 // Get the address of the color vector array(3)
-const Vec3d* Color::getRGB() const
+const Vec3d* IColor::getRGB() const
 {
     // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
     // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
@@ -83,56 +83,56 @@ const Vec3d* Color::getRGB() const
 }
 
 // Get the address of the color vector array(4)
-const Vec4d* Color::getRGBA() const
+const Vec4d* IColor::getRGBA() const
 {
     return &color;
 }
 
-bool Color::setRed(const double value)
+bool IColor::setRed(const double value)
 {
     bool ok{value >= 0 && value <= 1};
-    if (ok) color[Color::RED] = value;
+    if (ok) color[IColor::RED] = value;
     return ok;
 }
 
-bool Color::setGreen(const double value)
+bool IColor::setGreen(const double value)
 {
     bool ok{value >= 0 && value <= 1};
-    if (ok) color[Color::GREEN] = value;
+    if (ok) color[IColor::GREEN] = value;
     return ok;
 }
 
-bool Color::setBlue(const double value)
+bool IColor::setBlue(const double value)
 {
     bool ok{value >= 0 && value <= 1};
-    if (ok) color[Color::BLUE] = value;
+    if (ok) color[IColor::BLUE] = value;
     return ok;
 }
 
-bool Color::setAlpha(const double value)
+bool IColor::setAlpha(const double value)
 {
     bool ok{value >= 0 && value <= 1};
-    if (ok) color[Color::ALPHA] = value;
+    if (ok) color[IColor::ALPHA] = value;
     return ok;
 }
 
-bool operator==(const Color& c1, const Color& c2)
+bool operator==(const IColor& c1, const IColor& c2)
 {
     return (c1.getRGBA() == c2.getRGBA());
 }
 
-bool operator!=(const Color& c1, const Color& c2)
+bool operator!=(const IColor& c1, const IColor& c2)
 {
     return (c1.getRGBA() != c2.getRGBA());
 }
 
 // returns the default alpha value
-double Color::getDefaultAlpha()
+double IColor::getDefaultAlpha()
 {
    return defaultAlpha;
 }
 
-void Color::setDefaultAlpha(const double alpha)
+void IColor::setDefaultAlpha(const double alpha)
 {
     defaultAlpha = alpha;
 }

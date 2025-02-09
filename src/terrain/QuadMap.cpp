@@ -1,7 +1,7 @@
 
 #include "mixr/terrain/QuadMap.hpp"
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -63,7 +63,7 @@ unsigned int QuadMap::getNumDataFiles() const
     return numDataFiles;
 }
 
-const Terrain* QuadMap::getDataFile(const unsigned int i)  const
+const ITerrain* QuadMap::getDataFile(const unsigned int i)  const
 {
     if (i < MAX_DATA_FILES) return dataFiles[i];
     else return nullptr;
@@ -152,7 +152,7 @@ void QuadMap::findDataFiles()
          base::List::Item* item {subcomponents->getFirstItem()};
          while (item != nullptr && count < MAX_DATA_FILES) {
             const auto pair = static_cast<base::Pair*>( item->getValue() );
-            const auto dataFile = dynamic_cast<Terrain*>( pair->object() );
+            const auto dataFile = dynamic_cast<ITerrain*>( pair->object() );
             if (dataFile != nullptr && dataFile->isDataLoaded()) {
                dataFile->ref();
                dataFiles[count] = dataFile;
@@ -221,7 +221,7 @@ void QuadMap::findDataFiles()
 // data files it wishes to use, then will also override the
 // find data files so it this data does not get cleared out.
 //------------------------------------------------------------------------------
-bool QuadMap::setDataFile(const unsigned int i, Terrain* newDF)
+bool QuadMap::setDataFile(const unsigned int i, ITerrain* newDF)
 {
     if (i < MAX_DATA_FILES && newDF != nullptr ) {
         if (dataFiles[i] == nullptr) {

@@ -5,8 +5,6 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/colors/Color.hpp"
-
 #include "mixr/base/String.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -16,7 +14,6 @@
 #include <cstdlib>
 
 #include <GL/glut.h>
-//#include <GL/freeglut.h>
 
 #if !defined(WIN32)
 #include <sys/time.h>

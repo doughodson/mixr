@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Cie_HPP__
 #define __mixr_base_colors_Cie_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/safe_ptr.hpp"
 #include "mixr/base/osg/Vec3d"
 
@@ -19,7 +19,7 @@ class Table1;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: cie
+// Factory name: Cie
 // Slots:
 //     luminance <Number>         ! Luminance component (0.0 to 1.0) (default: 0)
 //     x         <Number>         ! Green component     (0.0 to 1.0) (default: 0)
@@ -31,9 +31,9 @@ class Table1;
 //    return a const pointer to the RGBA color vector and not the
 //    CIE color vector.
 //------------------------------------------------------------------------------
-class Cie final: public Color
+class Cie final: public IColor
 {
-    DECLARE_SUBCLASS(Cie, Color)
+    DECLARE_SUBCLASS(Cie, IColor)
 
 public:
     // components of CIE color - used to index the CIE color vector

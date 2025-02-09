@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Actions.hpp"
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
@@ -251,7 +251,7 @@ double Steerpoint::getCmdAltitudeFt() const
 // Set the ground elevation at the steerpoint from this terrain database
 // Returns true if successful.
 //------------------------------------------------------------------------------
-bool Steerpoint::setElevation(const terrain::Terrain* const terrain, const bool interp)
+bool Steerpoint::setElevation(const terrain::ITerrain* const terrain, const bool interp)
 {
    bool ok{};
    if (!needLL) {

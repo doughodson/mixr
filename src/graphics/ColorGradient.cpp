@@ -20,10 +20,10 @@ ColorGradient::ColorGradient()
 {
    STANDARD_CONSTRUCTOR()
    // default gives us no colors, but just makes us black
-   color[Color::RED] = 0;
-   color[Color::GREEN] = 0;
-   color[Color::BLUE] = 0;
-   color[Color::ALPHA] = getDefaultAlpha();
+   color[IColor::RED] = 0;
+   color[IColor::GREEN] = 0;
+   color[IColor::BLUE] = 0;
+   color[IColor::ALPHA] = getDefaultAlpha();
 }
 
 void ColorGradient::copyData(const ColorGradient& org, const bool)
@@ -41,14 +41,14 @@ void ColorGradient::deleteData()
     }
 }
 
-base::Color* ColorGradient::getColorByIdx(const int idx)
+base::IColor* ColorGradient::getColorByIdx(const int idx)
 {
-    base::Color* fCol{};
+    base::IColor* fCol{};
 
     if (myColors != nullptr) {
         base::Pair* pair = myColors->getPosition(idx);
         if (pair != nullptr) {
-            fCol = dynamic_cast<base::Color*>(pair->object());
+            fCol = dynamic_cast<base::IColor*>(pair->object());
         }
     }
     return fCol;

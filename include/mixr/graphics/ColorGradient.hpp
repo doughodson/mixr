@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_ColorGradient_HPP__
 #define __mixr_graphics_ColorGradient_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 namespace mixr {
 
@@ -16,14 +16,14 @@ namespace graphics {
 // This will be used by graphics to create a per-vertex color, which makes a
 // gradient.
 //------------------------------------------------------------------------------
-class ColorGradient : public base::Color
+class ColorGradient : public base::IColor
 {
-    DECLARE_SUBCLASS(ColorGradient, base::Color)
+    DECLARE_SUBCLASS(ColorGradient, base::IColor)
 
 public:
     ColorGradient();
 
-    base::Color* getColorByIdx(const int idx);
+    base::IColor* getColorByIdx(const int idx);
 
 private:
     static const int MAX_VALUES = 50;

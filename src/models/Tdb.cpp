@@ -5,7 +5,7 @@
 #include "mixr/models/system/Gimbal.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -183,7 +183,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // ---
    // Terrain occulting check setup
    // ---
-   const terrain::Terrain* terrain{};
+   const terrain::ITerrain* terrain{};
    if (gimbal->isTerrainOccultingEnabled()) {
       const WorldModel* const sim{ownship->getWorldModel()};
       terrain = sim->getTerrain();

@@ -14,20 +14,16 @@ namespace graphics {
 //
 // Based on the following and modifed to use Performer pfVec3 and C++
 //
-//  /*
-//   * Generic Convex Polygon Scan Conversion and Clipping
-//   * by Paul Heckbert
-//   * from "Graphics Gems", Academic Press, 1990
-//   */
+//    Generic Convex Polygon Scan Conversion and Clipping
+//    by Paul Heckbert
+//    from "Graphics Gems", Academic Press, 1990
 //
-//  /*
-//   * poly_clip.c: homogeneous 3-D convex polygon clipper
-//   *
-//   * Paul Heckbert 1985, Dec 1989
-//   */
+//    poly_clip.c: homogeneous 3-D convex polygon clipper
+//
+//    Paul Heckbert 1985, Dec 1989
+//
 //
 // Factory name: Clip3D
-//
 //------------------------------------------------------------------------------
 class Clip3D : public base::Object
 {
@@ -86,7 +82,7 @@ public:
       const unsigned int n,           // Number of vertices/normals
       const unsigned int index,       // Coordinate index: X -> 0; Y -> 1; and Z -> 2
       const double k,                 // Value of the clipping plane
-      const bool clipUpperPlane);     // if clipping against an upper plane, 
+      const bool clipUpperPlane);     // if clipping against an upper plane,
                                       //  else against a lower plane
 
 private:

@@ -28,14 +28,14 @@ bool IThread::start(const double _priority)
 
    // Check for a parent pointer
    if (parent == nullptr) {
-      std::cerr << "AbstractThread(" << this << ")::start() -- ERROR: Parent pointer is not set!" << std::endl;
+      std::cerr << "IThread(" << this << ")::start() -- ERROR: Parent pointer is not set!" << std::endl;
       ok = false;
    }
 
    // Check for valid priority
    priority = _priority;
    if (priority < 0.0f || priority > 1.0f) {
-      std::cerr << "AbstractThread(" << this << ")::start() -- ERROR: Invalid priority! Use [ 0.0 ... 1.0 ]" << std::endl;
+      std::cerr << "IThread(" << this << ")::start() -- ERROR: Invalid priority! Use [ 0.0 ... 1.0 ]" << std::endl;
       ok = false;
    }
 
@@ -43,7 +43,7 @@ bool IThread::start(const double _priority)
    if (ok) ok = createThread();
 
    if (!ok) {
-      std::cerr << "AbstractThread(" << this << ")::start() -- ERROR: Did NOT create the thread!" << std::endl;
+      std::cerr << "IThread(" << this << ")::start() -- ERROR: Did NOT create the thread!" << std::endl;
    }
 
    killed = !ok;

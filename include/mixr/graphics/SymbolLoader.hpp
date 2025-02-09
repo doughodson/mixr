@@ -156,7 +156,7 @@ public:
    virtual bool setSymbolFlashRate(const int idx, const char* name, const double flashRate);
 
    // Change the color of a symbol (if 'name' == 0) or its subcomponent
-   virtual bool setSymbolColor(const int idx, const char* name, const base::Color* cobj);
+   virtual bool setSymbolColor(const int idx, const char* name, const base::IColor* cobj);
 
    // Change the color of a symbol (if 'name' == 0) or its subcomponent
    virtual bool setSymbolColor(const int idx, const char* name, const base::Identifier* cobj);

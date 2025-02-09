@@ -7,7 +7,7 @@
 class FTOutlineFont;
 
 namespace mixr {
-namespace base { class Color; class Number; }
+namespace base { class IColor; class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ public:
     // outputs n characters of txt at the current position. Vertically if vf == true.
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) final;
 
-    base::Color* getHaloColor()           { return haloColor; }
+    base::IColor* getHaloColor()          { return haloColor; }
     float getHaloLineWidth()              { return linewidth; }
     FTOutlineFont* getOutline()           { return outline; }
 
@@ -41,12 +41,12 @@ private:
     void loadFont() final;
 
     FTOutlineFont* outline{};
-    base::Color* haloColor{};
+    base::IColor* haloColor{};
     float linewidth{1.0};
 
 private:
     // slot table helper methods
-    bool setSlotHaloColor(base::Color*);
+    bool setSlotHaloColor(base::IColor*);
     bool setSlotLinewidth(const base::Number* const);
 };
 

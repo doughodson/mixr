@@ -14,7 +14,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: hsva
+// Factory name: HSVA
 // Slots:
 //    alpha   <Number>  ! Set the alpha component (0.0 to 1.0) (default: 1.0)
 //------------------------------------------------------------------------------

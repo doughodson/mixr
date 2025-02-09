@@ -10,7 +10,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/colors/Rgba.hpp"
 #include "mixr/base/colors/Hsva.hpp"
 
@@ -87,7 +87,7 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT(15, setSlotStdLineWidth,          base::Number)
    ON_SLOT(16, setSlotTexturesStream,        base::PairStream)
    ON_SLOT(16, setSlotTexturesSingle,        Texture)
-   ON_SLOT(17, setSlotClearColor,            base::Color)
+   ON_SLOT(17, setSlotClearColor,            base::IColor)
    ON_SLOT(18, setSlotLeftBracketCharacter,  base::Integer)
    ON_SLOT(18, setSlotLeftBracketCharacter,  base::String)
    ON_SLOT(19, setSlotRightBracketCharacter, base::Integer)
@@ -413,7 +413,7 @@ void Display::clear()
    }
 
    base::Vec4f cc = getClearColor();
-   glClearColor(cc[base::Color::RED], cc[base::Color::GREEN], cc[base::Color::BLUE], cc[base::Color::ALPHA]);
+   glClearColor(cc[base::IColor::RED], cc[base::IColor::GREEN], cc[base::IColor::BLUE], cc[base::IColor::ALPHA]);
 
    if (clearDepth >= 0.0f)
       glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
@@ -752,7 +752,7 @@ void Display::setColor(const char* cname1)
    // Already set? Then leave
    if (*colorName == cname1) return;
 
-   base::Color* newColor{getColor(cname1)};
+   base::IColor* newColor{getColor(cname1)};
    if (newColor != nullptr) {
       colorName->setStr(cname1);
       color = *(newColor->getRGBA());
@@ -763,7 +763,7 @@ void Display::setColor(const char* cname1)
 //------------------------------------------------------------------------------
 // setClearColor() -- set the clear color (used by a screen clear)
 //------------------------------------------------------------------------------
-void Display::setClearColor(const base::Color& ccolor)
+void Display::setClearColor(const base::IColor& ccolor)
 {
    clearColor = *ccolor.getRGBA();
 }
@@ -814,14 +814,14 @@ Material* Display::getMaterial(const base::Identifier* name)
 //------------------------------------------------------------------------------
 // setNormColor() &  setHighlightColor() -- set default text colors
 //------------------------------------------------------------------------------
-void Display::setNormColor(const base::Color* const nc)
+void Display::setNormColor(const base::IColor* const nc)
 {
    if (normColor != nullptr) normColor->unref();
    normColor = nc;
    if (normColor != nullptr) normColor->ref();
 }
 
-void Display::setHighlightColor(const base::Color* const nc)
+void Display::setHighlightColor(const base::IColor* const nc)
 {
    if (hiColor != nullptr) hiColor->unref();
    hiColor = nc;
@@ -1281,22 +1281,22 @@ void Display::drawRightBracket(const int ln, const int cp)
 //------------------------------------------------------------------------------
 // getColor() -- get color by index or color name
 //------------------------------------------------------------------------------
-base::Color* Display::getColor(const char* const colorName)
+base::IColor* Display::getColor(const char* const colorName)
 {
-   base::Color* cc {};
+   base::IColor* cc {};
    if (colorTable != nullptr) {
       base::Pair* p = colorTable->findByName(colorName);
-      if (p != nullptr) cc = static_cast<base::Color*>(p->object());
+      if (p != nullptr) cc = static_cast<base::IColor*>(p->object());
    }
    return cc;
 }
 
-base::Color* Display::getColor(const int index)
+base::IColor* Display::getColor(const int index)
 {
-   base::Color* cc {};
+   base::IColor* cc {};
    if (colorTable != nullptr) {
       base::Pair* p = colorTable->getPosition(index+1);
-      if (p != nullptr) cc = static_cast<base::Color*>(p->object());
+      if (p != nullptr) cc = static_cast<base::IColor*>(p->object());
    }
    return cc;
 }
@@ -1304,7 +1304,7 @@ base::Color* Display::getColor(const int index)
 //-----------------------------------------------------------------------------
 // addColor() -- add a color to the color table.
 //-----------------------------------------------------------------------------
-void Display::addColor(base::Color* cc)
+void Display::addColor(base::IColor* cc)
 {
    if (cc != nullptr && colorTable != nullptr) {
       int i = colorTable->entries();
@@ -1318,7 +1318,7 @@ void Display::addColor(base::Pair* pp)
 {
    if (pp != nullptr && colorTable != nullptr) {
       base::Object* obj = pp->object();
-      if (obj->isClassType(typeid(base::Color))) {
+      if (obj->isClassType(typeid(base::IColor))) {
          colorTable->put( pp );
       }
    }
@@ -1611,7 +1611,7 @@ bool Display::setSlotStdLineWidth(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotClearColor() -- sets the clear color slot
 //------------------------------------------------------------------------------
-bool Display::setSlotClearColor(const base::Color* const x)
+bool Display::setSlotClearColor(const base::IColor* const x)
 {
    setClearColor(*x);
    return true;

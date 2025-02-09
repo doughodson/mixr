@@ -5,7 +5,7 @@
 #include "mixr/instruments/adi/Adi.hpp"
 
 namespace mixr {
-namespace base { class Color; class Identifier; class Number; }
+namespace base { class IColor; class Identifier; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -36,10 +36,10 @@ private:
     double height {20.0};             // height of our polygon
 
 private:
-    // slot table helper methods   
-    bool setSlotSkyColor(const base::Color* const);
+    // slot table helper methods
+    bool setSlotSkyColor(const base::IColor* const);
     bool setSlotSkyColor(const base::Identifier* const);
-    bool setSlotGroundColor(const base::Color* const);
+    bool setSlotGroundColor(const base::IColor* const);
     bool setSlotGroundColor(const base::Identifier* const);
     bool setSlotWidth(const base::Number* const);
     bool setSlotHeight(const base::Number* const);

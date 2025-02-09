@@ -467,7 +467,7 @@ void Quad::drawFunc()
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {
-                        base::Color* col = colGradient->getColorByIdx(i+1);
+                        base::IColor* col = colGradient->getColorByIdx(i+1);
                         if (col != nullptr)
                             glColor4f(static_cast<GLfloat>(col->red()),
                                       static_cast<GLfloat>(col->green()),
@@ -572,7 +572,7 @@ void Triangle::drawFunc()
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {
-                        base::Color* col = colGradient->getColorByIdx(i+1);
+                        base::IColor* col = colGradient->getColorByIdx(i+1);
                         if (col != nullptr)
                             glColor4f(static_cast<GLfloat>(col->red()),
                                       static_cast<GLfloat>(col->green()),

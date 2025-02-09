@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Hls_HPP__
 #define __mixr_base_colors_Hls_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,7 +15,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: hls
+// Factory name: HLS
 //
 // Slots:
 //     hue         <Number>  ! hue component (0.0 to 360.0, default: 0.0)
@@ -26,9 +26,9 @@ class Number;
 //        return a const pointer to the RGBA color vector and not the
 //        HLS color vector.
 //------------------------------------------------------------------------------
-class Hls final: public Color
+class Hls final: public IColor
 {
-    DECLARE_SUBCLASS(Hls, Color)
+    DECLARE_SUBCLASS(Hls, IColor)
 
 public:
     // components of HLS color - used to index the HLS color vectors

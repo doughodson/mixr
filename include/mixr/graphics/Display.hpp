@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Boolean; class Color; class Identifier; class Integer; class Number; class PairStream; class String; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class Number; class PairStream; class String; }
 namespace graphics {
 class AbstractFont;
 class Image;
@@ -113,7 +113,7 @@ public:
    virtual void reshapeIt(int w, int h);           // Resizes the displays's width and height
 
    const base::Vec4d& getClearColor() const;       // Returns the clear (background) color as a Vec4 vector (RGBA).
-   void setClearColor(const base::Color& ccolor);  // Set the display's clear (background) color
+   void setClearColor(const base::IColor& ccolor); // Set the display's clear (background) color
 
    GLclampd getClearDepth() const;                 // Returns the value that the depth buffer is cleared to.
    void setClearDepth(const GLclampd depth);       //  Sets the value that the depth buffer is cleared to (see notes)
@@ -135,11 +135,11 @@ public:
    void setColor(const base::Vec4d& color);           // Sets the current color by an RGBA vector.
    void setColor(const char* cname1);                 // Sets the current color by name (color table)
 
-   base::Color* getColor(const char* const name);     // Returns a color by name from the color table
-   base::Color* getColor(const int idx);              // Returns a color by index from the color table
+   base::IColor* getColor(const char* const name);    // Returns a color by name from the color table
+   base::IColor* getColor(const int idx);             // Returns a color by index from the color table
 
    bool setColorTable(base::PairStream* const list);  // Sets the color table to this list of colors
-   void addColor(base::Color*);                       // Adds a color to the color table
+   void addColor(base::IColor*);                      // Adds a color to the color table
    void addColor(base::Pair*);                        // Adds a color to the color table
 
    base::PairStream* defaultColors();                 // Generates a list of default colors; returns a pre-ref'ed() ptr
@@ -269,17 +269,17 @@ public:
    // Sets the current font) based on the font mode flags.
    void selectFont(const bool reversed, const bool underlined, AbstractFont* newFont = nullptr);
 
-   AbstractFont* getCurrentFont();                      // Returns a pointer to the current font
-   void setFont(AbstractFont*);                         // Sets the current font.
+   AbstractFont* getCurrentFont();                       // Returns a pointer to the current font
+   void setFont(AbstractFont*);                          // Sets the current font.
 
-   const base::Color* getNormColor() const;             // Returns the normal text color
-   void setNormColor(const base::Color* const nc);      // Sets the normal text color
+   const base::IColor* getNormColor() const;             // Returns the normal text color
+   void setNormColor(const base::IColor* const nc);      // Sets the normal text color
 
-   const base::Color* getHighlightColor() const;        // Returns the highlighted text color
-   void setHighlightColor(const base::Color* const nc); // Sets the highlighted text color
+   const base::IColor* getHighlightColor() const;        // Returns the highlighted text color
+   void setHighlightColor(const base::IColor* const nc); // Sets the highlighted text color
 
-   void drawLeftBracket(const int ln, const int cp);    // Draws the left bracket at ln, cp
-   void drawRightBracket(const int ln, const int cp);   // Draws the right bracket at ln, cp
+   void drawLeftBracket(const int ln, const int cp);     // Draws the left bracket at ln, cp
+   void drawRightBracket(const int ln, const int cp);    // Draws the right bracket at ln, cp
 
    char getLeftBracketCharacter() const;        // Returns the left bracket character
    bool setLeftBracketCharacter(const char c);  // Sets the left bracket character
@@ -359,8 +359,8 @@ private:
     base::Vec4d color;                    // Current Color
     base::Vec4d clearColor;               // Clear (background) color
     base::Identifier* colorName {};       // Current color name
-    const base::Color* normColor {};      // Color of a normal text field
-    const base::Color* hiColor {};        // Color of a high lighted text field.
+    const base::IColor* normColor {};     // Color of a normal text field
+    const base::IColor* hiColor {};       // Color of a high lighted text field.
 
     base::PairStream* fontList {};        // List of fonts
     AbstractFont* currentFont {};         // Current font
@@ -396,7 +396,7 @@ private:
     bool setSlotStdLineWidth(const base::Number* const);
     bool setSlotTexturesStream(base::PairStream* const);
     bool setSlotTexturesSingle(Texture* const);
-    bool setSlotClearColor(const base::Color* const);
+    bool setSlotClearColor(const base::IColor* const);
     bool setSlotLeftBracketCharacter(const base::Integer* const);
     bool setSlotLeftBracketCharacter(const base::String* const);
     bool setSlotRightBracketCharacter(const base::Integer* const);
@@ -432,8 +432,8 @@ inline AbstractFont* Display::getCurrentFont()                   { return curren
 inline bool Display::isFontReversed() const                      { return reversedFlg; }
 inline bool Display::isFontUnderlined() const                    { return underlinedFlg; }
 inline bool Display::isDefaultFont() const                       { return currentFont == nullptr; }
-inline const base::Color* Display::getNormColor() const          { return normColor; }
-inline const base::Color* Display::getHighlightColor() const     { return hiColor; }
+inline const base::IColor* Display::getNormColor() const         { return normColor; }
+inline const base::IColor* Display::getHighlightColor() const    { return hiColor; }
 inline char Display::getLeftBracketCharacter() const             { return leftBracketChar; }
 inline bool Display::setLeftBracketCharacter(const char c)       { leftBracketChar = c; return true; }
 inline char Display::getRightBracketCharacter() const            { return rightBracketChar; }

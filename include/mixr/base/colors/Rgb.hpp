@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_Rgb_HPP__
 #define __mixr_base_colors_Rgb_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,7 +15,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: rgb
+// Factory name: Rgb
 //
 // Slots:
 //     red   <Number>  ! Red component (0.0 to 1.0) (default: 0)
@@ -24,9 +24,9 @@ class Number;
 //------------------------------------------------------------------------------
 // Events: None
 //------------------------------------------------------------------------------
-class Rgb : public Color
+class Rgb : public IColor
 {
-    DECLARE_SUBCLASS(Rgb, Color)
+    DECLARE_SUBCLASS(Rgb, IColor)
 
 public:
     Rgb(const double r, const double g, const double b);

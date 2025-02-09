@@ -14,7 +14,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: rgba
+// Factory name: Rgba
 // Slots:
 //    alpha <Number>  ! Alpha component (0.0 to 1.0) (default: 1.0)
 //------------------------------------------------------------------------------

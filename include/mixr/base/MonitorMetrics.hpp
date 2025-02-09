@@ -2,7 +2,7 @@
 #ifndef __mixr_base_MonitorMetrics_HPP__
 #define __mixr_base_MonitorMetrics_HPP__
 
-#include "mixr/base/colors/Color.hpp"
+#include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/safe_ptr.hpp"
 #include "mixr/base/osg/Matrixd"
@@ -15,7 +15,7 @@ class List;
 
 //------------------------------------------------------------------------------
 // Class: MonitorMetrics
-// Description:  Defines the characteristics of a monitor, needed to accurately match color.
+// Description:  Defines the characteristics of a monitor, needed to accurately match color
 //------------------------------------------------------------------------------
 // EDL Interface:
 //

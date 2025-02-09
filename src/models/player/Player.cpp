@@ -23,7 +23,7 @@
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/terrain/Terrain.hpp"
+#include "mixr/terrain/ITerrain.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 #include "mixr/simulation/INetIO.hpp"
@@ -3215,7 +3215,7 @@ void Player::updateElevation()
    // elevation is from the IG system.
    const WorldModel* s{getWorldModel()};
    if (s != nullptr && !isTerrainElevationRequired()) {
-      const terrain::Terrain* terrain{s->getTerrain()};
+      const terrain::ITerrain* terrain{s->getTerrain()};
       if (terrain != nullptr) {
          double el{};
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());

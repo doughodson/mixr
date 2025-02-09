@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Latitude; class Length; class Longitude; class Number; }
-namespace terrain { class Terrain; }
+namespace terrain { class ITerrain; }
 namespace models {
 class IAtmosphere;
 
@@ -108,7 +108,7 @@ public:
 
 
     // environmental interface
-    const terrain::Terrain* getTerrain() const;            // returns the terrain elevation database
+    const terrain::ITerrain* getTerrain() const;           // returns the terrain elevation database
     IAtmosphere* getAtmosphere();                          // returns the atmosphere model
     const IAtmosphere* getAtmosphere() const;              // returns the atmosphere model (const version)
 
@@ -123,7 +123,7 @@ protected:
     virtual bool setMaxRefRange(const double);      // Sets the max range (meters) of the gaming area or zero if there's no limit.
 
    // environmental interface
-    terrain::Terrain* getTerrain();                        // returns the terrain elevation database
+    terrain::ITerrain* getTerrain();                       // returns the terrain elevation database
     bool shutdownNotification() override;
 
 private:
@@ -145,7 +145,7 @@ private:
                               //       earthNED  = ecef * wm;
 
    IAtmosphere* atmosphere {};
-   terrain::Terrain* terrain {};
+   terrain::ITerrain* terrain {};
 
 private:
    // slot table helper methods
@@ -160,7 +160,7 @@ private:
    bool setSlotGamingAreaEarthModel(const base::Boolean* const);
 
    // environmental interface
-   bool setSlotTerrain(terrain::Terrain* const);
+   bool setSlotTerrain(terrain::ITerrain* const);
    bool setSlotAtmosphere(IAtmosphere* const);
 };
 

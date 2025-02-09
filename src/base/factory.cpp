@@ -404,8 +404,8 @@ Object* factory(const std::string& name)
     }
 
     // colors
-    else if ( name == Color::getFactoryName() ) {
-        obj = new Color();
+    else if ( name == IColor::getFactoryName() ) {
+        obj = new IColor();
     }
     else if ( name == Cie::getFactoryName() ) {
         obj = new Cie();

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_colors_Color_HPP__
-#define __mixr_base_colors_Color_HPP__
+#ifndef __mixr_base_colors_IColor_HPP__
+#define __mixr_base_colors_IColor_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Vec4d"
@@ -11,25 +11,25 @@ class Vec3d;
 class Number;
 
 //------------------------------------------------------------------------------
-// Class: Color
-// Description: General Purpose Color class; used with RGB and HSV classes
+// Class: IColor
+// Description: Interface to a general purpose color
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: Color
 // Slots: (none)
 //------------------------------------------------------------------------------
-class Color : public Object
+class IColor : public Object
 {
-    DECLARE_SUBCLASS(Color, Object)
+    DECLARE_SUBCLASS(IColor, Object)
 
 public:
     // components of RGB color - used as an index
     enum { RED, GREEN, BLUE, ALPHA };
 
 public:
-    Color();
-    Color(const double red, const double green, const double blue, const double alpha = defaultAlpha);
+    IColor();
+    IColor(const double red, const double green, const double blue, const double alpha = defaultAlpha);
 
     // convert a color to an Vec3d* RGB vector
     explicit operator const Vec3d*() const;

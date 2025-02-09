@@ -14,7 +14,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hsv, "hsv")
+IMPLEMENT_SUBCLASS(Hsv, "Hsv")
 EMPTY_DELETEDATA(Hsv)
 
 BEGIN_SLOTTABLE(Hsv)
