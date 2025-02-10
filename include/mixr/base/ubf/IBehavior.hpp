@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_ubf_AbstractBehavior_HPP__
-#define __mixr_base_ubf_AbstractBehavior_HPP__
+#ifndef __mixr_base_ubf_IBehavior_HPP__
+#define __mixr_base_ubf_IBehavior_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -8,29 +8,29 @@ namespace mixr {
 namespace base {
 class Integer;
 namespace ubf {
-class AbstractState;
-class AbstractAction;
+class IState;
+class IAction;
 
 //------------------------------------------------------------------------------
-// Class: AbstractBehavior
-// Description: Abstract base class for all behaviors.  Generates an optional
+// Class: IBehavior
+// Description: Interface class for all behaviors.  Generates an optional
 //              action based on our current state.
 //------------------------------------------------------------------------------
-// Factory name: UbfBehavior
+// Factory name: IBehavior
 //------------------------------------------------------------------------------
 // Slots:
 //    vote     <Integer>   ! default vote/weight value for actions generated
 //                         ! by this behavior
 //------------------------------------------------------------------------------
-class AbstractBehavior : public base::Component
+class IBehavior : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractBehavior, base::Component)
+   DECLARE_SUBCLASS(IBehavior, base::Component)
 
 public:
-   AbstractBehavior();
+   IBehavior();
 
    // Returns a pre-ref'd Action (or zero if no action is generated)
-   virtual AbstractAction* genAction(const AbstractState* const state, const double dt) = 0;
+   virtual IAction* genAction(const IState* const state, const double dt) = 0;
 
 protected:
    int getVote() const;
@@ -44,8 +44,8 @@ private:
    bool setSlotVote(const base::Integer* const);
 };
 
-inline void AbstractBehavior::setVote(const int x)    { vote = x; }
-inline int AbstractBehavior::getVote() const          { return vote; }
+inline void IBehavior::setVote(const int x)    { vote = x; }
+inline int IBehavior::getVote() const          { return vote; }
 
 }
 }

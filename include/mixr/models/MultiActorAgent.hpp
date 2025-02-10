@@ -11,7 +11,7 @@
 namespace mixr {
 namespace base {
 class Identifier;
-namespace ubf { class AbstractBehavior; class AbstractState; }
+namespace ubf { class IBehavior; class IState; }
 }
 namespace simulation { class Station; }
 namespace models {
@@ -46,11 +46,11 @@ protected:
    // generic controller
    virtual void controller(const double dt = 0.0);
 
-   void setState(base::ubf::AbstractState* const);
-   base::ubf::AbstractState* getState() const                { return state; }
+   void setState(base::ubf::IState* const);
+   base::ubf::IState* getState() const                { return state; }
 
    void setActor(base::Component* c);
-   base::Component* getActor()                               { return actor;}
+   base::Component* getActor()                        { return actor;}
 
    simulation::Station* getStation();
    WorldModel* getWorldModel();
@@ -58,17 +58,17 @@ protected:
    struct AgentItem
    {
       std::string actorName;
-      base::safe_ptr<base::ubf::AbstractBehavior> behavior;
+      base::safe_ptr<base::ubf::IBehavior> behavior;
       base::safe_ptr<base::Component> actor;
    };
 
    static const int MAX_AGENTS{10};
    bool clearAgentList();
-   bool addAgent(const std::string& name, base::ubf::AbstractBehavior* const);
+   bool addAgent(const std::string& name, base::ubf::IBehavior* const);
 
 private:
    base::Component* actor{};
-   base::ubf::AbstractState* state{};
+   base::ubf::IState* state{};
    simulation::Station* myStation{};
 
    // agent/behavior list
@@ -77,7 +77,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotState(base::ubf::AbstractState* const);
+   bool setSlotState(base::ubf::IState* const);
    bool setSlotAgentList(base::PairStream* const);
 };
 

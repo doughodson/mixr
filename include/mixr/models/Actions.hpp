@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Action_HPP__
 #define __mixr_models_common_Action_HPP__
 
-#include "mixr/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -35,9 +35,9 @@ class Steerpoint;
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public base::ubf::AbstractAction
+class Action : public base::ubf::IAction
 {
-    DECLARE_SUBCLASS(Action, base::ubf::AbstractAction)
+    DECLARE_SUBCLASS(Action, base::ubf::IAction)
 
 public:
    Action();

@@ -27,9 +27,9 @@ class Bullseye;
 // Slots:
 //    route    <Route>              ! Primary route (default: 0)
 //
-//    utc      <base::Time>        ! initial UTC time (default: 0)
+//    utc      <base::Time>         ! initial UTC time (default: 0)
 //
-//    feba     <base::PairStream>  ! Forward edge battle area (FEBA):
+//    feba     <base::PairStream>   ! Forward edge battle area (FEBA):
 //                                  !   1) List of distance vectors [ North East ]
 //                                  !   from the gaming area reference point.
 //                                  !   2) Default unit is Nautical Miles

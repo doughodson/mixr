@@ -2,15 +2,15 @@
 #ifndef __mixr_base_ubf_Arbiter_HPP__
 #define __mixr_base_ubf_Arbiter_HPP__
 
-#include "AbstractBehavior.hpp"
+#include "IBehavior.hpp"
 
 namespace mixr {
 namespace base {
 class List;
 
 namespace ubf {
-class AbstractState;
-class AbstractAction;
+class IState;
+class IAction;
 
 //------------------------------------------------------------------------------
 // Class: Arbiter
@@ -18,7 +18,7 @@ class AbstractAction;
 //    A meta-behavior that generates a "complex action" based on the actions
 //    generated our list of behaviors.
 //------------------------------------------------------------------------------
-// Factory name: UbfArbiter
+// Factory name: Arbiter
 //------------------------------------------------------------------------------
 // Slots:
 //    behaviors   <PairStream>      ! List of behaviors
@@ -26,24 +26,24 @@ class AbstractAction;
 // Notes:
 //    The default is to select the Action with the highest vote value.
 //------------------------------------------------------------------------------
-class Arbiter : public AbstractBehavior
+class Arbiter : public IBehavior
 {
-   DECLARE_SUBCLASS(Arbiter, AbstractBehavior)
+   DECLARE_SUBCLASS(Arbiter, IBehavior)
 
 public:
    Arbiter();
 
-   AbstractAction* genAction(const AbstractState* const state, const double dt) override;
+   IAction* genAction(const IState* const state, const double dt) override;
 
 protected:
    base::List* getBehaviors();
 
    // evaluates a list of actions and return an optional "complex action"
    // (default: returns the action with the highest vote value)
-   virtual AbstractAction* genComplexAction(List* const actionSet);
+   virtual IAction* genComplexAction(List* const actionSet);
 
    // add new behavior to list
-   void addBehavior(AbstractBehavior* const);
+   void addBehavior(IBehavior* const);
 
 private:
    base::List* behaviors {};

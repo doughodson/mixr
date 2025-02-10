@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_ubf_AbstractState_HPP__
-#define __mixr_base_ubf_AbstractState_HPP__
+#ifndef __mixr_base_ubf_IState_HPP__
+#define __mixr_base_ubf_IState_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -9,21 +9,21 @@ namespace base {
 namespace ubf {
 
 //------------------------------------------------------------------------------
-// Class: AbstractState
+// Class: IState
 // Description: The actor's state vector, as seen by the Behaviors.
 //------------------------------------------------------------------------------
-// Factory name: UbfState
+// Factory name: IState
 //------------------------------------------------------------------------------
-class AbstractState : public base::Component
+class IState : public base::Component
 {
-   DECLARE_SUBCLASS(AbstractState, base::Component)
+   DECLARE_SUBCLASS(IState, base::Component)
 public:
-   AbstractState();
+   IState();
 
    virtual void updateGlobalState();
    virtual void updateState(const base::Component* const actor);
 
-   virtual const AbstractState* getUbfStateByType(const std::type_info& type) const;
+   virtual const IState* getUbfStateByType(const std::type_info& type) const;
 };
 
 }

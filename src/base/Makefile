@@ -97,9 +97,9 @@ OBJS =  \
 	transformations/Translation.o \
 	transformations/Rotation.o \
 	transformations/Scale.o \
-	ubf/AbstractAction.o \
-	ubf/AbstractBehavior.o \
-	ubf/AbstractState.o \
+	ubf/IAction.o \
+	ubf/IBehavior.o \
+	ubf/IState.o \
 	ubf/Agent.o \
 	ubf/Arbiter.o \
 	units/angle/Angle.o \

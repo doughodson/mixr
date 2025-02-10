@@ -1,6 +1,6 @@
 
 #include "mixr/base/ubf/Arbiter.hpp"
-#include "mixr/base/ubf/AbstractAction.hpp"
+#include "mixr/base/ubf/IAction.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -9,7 +9,7 @@ namespace mixr {
 namespace base {
 namespace ubf {
 
-IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
+IMPLEMENT_SUBCLASS(Arbiter, "Arbiter")
 EMPTY_COPYDATA(Arbiter)
 
 BEGIN_SLOTTABLE(Arbiter)
@@ -35,7 +35,7 @@ void Arbiter::deleteData()
 //------------------------------------------------------------------------------
 // genAction() - generate an action
 //------------------------------------------------------------------------------
-AbstractAction* Arbiter::genAction(const AbstractState* const state, const double dt)
+IAction* Arbiter::genAction(const IState* const state, const double dt)
 {
    // create list for action set
    const auto actionSet{new base::List()};
@@ -44,9 +44,9 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
    base::List::Item* item{behaviors->getFirstItem()};
    while (item != nullptr) {
       // get a behavior
-      const auto behavior{static_cast<AbstractBehavior*>(item->getValue())};
+      const auto behavior{static_cast<IBehavior*>(item->getValue())};
       // generate action, we have reference
-      AbstractAction* action{behavior->genAction(state, dt)};
+      IAction* action{behavior->genAction(state, dt)};
       if (action != nullptr) {
          // add to action set
          actionSet->addTail(action);
@@ -59,7 +59,7 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
 
    // given the set of recommended actions, the arbiter
    // decides what action to take
-   AbstractAction* complexAction{genComplexAction(actionSet)};
+   IAction* complexAction{genComplexAction(actionSet)};
 
    // done with action set
    actionSet->unref();
@@ -72,9 +72,9 @@ AbstractAction* Arbiter::genAction(const AbstractState* const state, const doubl
 //------------------------------------------------------------------------------
 // Default: select the action with the highest vote
 //------------------------------------------------------------------------------
-AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
+IAction* Arbiter::genComplexAction(base::List* const actionSet)
 {
-   AbstractAction* complexAction{};
+   IAction* complexAction{};
    int maxVote{};
 
    // process entire action set
@@ -82,7 +82,7 @@ AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
-      const auto action = static_cast<AbstractAction*>(item->getValue());
+      const auto action = static_cast<IAction*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...
@@ -111,7 +111,7 @@ AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
 //------------------------------------------------------------------------------
 // addBehavior() - add a new behavior
 //------------------------------------------------------------------------------
-void Arbiter::addBehavior(AbstractBehavior* const x)
+void Arbiter::addBehavior(IBehavior* const x)
 {
    behaviors->addTail(x);
    x->container(this);
@@ -131,7 +131,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
       while (item != nullptr && ok) {
          const auto pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
-         const auto b{dynamic_cast<AbstractBehavior*>(pair->object())};
+         const auto b{dynamic_cast<IBehavior*>(pair->object())};
          if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << (*pair).slot() << " is NOT of a Behavior type!" << std::endl;
@@ -146,7 +146,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         const auto b = static_cast<AbstractBehavior*>(pair->object());
+         const auto b = static_cast<IBehavior*>(pair->object());
          addBehavior(b);
       }
    }

@@ -6,9 +6,9 @@
 
 #include "mixr/simulation/Station.hpp"
 
-#include "mixr/base/ubf/AbstractAction.hpp"
-#include "mixr/base/ubf/AbstractBehavior.hpp"
-#include "mixr/base/ubf/AbstractState.hpp"
+#include "mixr/base/ubf/IAction.hpp"
+#include "mixr/base/ubf/IBehavior.hpp"
+#include "mixr/base/ubf/IState.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(MultiActorAgent)
 END_SLOTTABLE(MultiActorAgent)
 
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1, setSlotState,     base::ubf::AbstractState)
+   ON_SLOT(1, setSlotState,     base::ubf::IState)
    ON_SLOT(2, setSlotAgentList, base::PairStream)
 END_SLOT_MAP()
 
@@ -81,13 +81,13 @@ void MultiActorAgent::controller(const double dt)
          if (agentList[i].actor != nullptr) {
 
             setActor(agentList[i].actor);
-            base::ubf::AbstractBehavior* behavior{agentList[i].behavior};
+            base::ubf::IBehavior* behavior{agentList[i].behavior};
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            base::ubf::AbstractAction* action{behavior->genAction(getState(), dt)};
+            base::ubf::IAction* action{behavior->genAction(getState(), dt)};
             if (action) { // allow possibility of no action returned
                action->execute(getActor());
                action->unref();
@@ -98,7 +98,7 @@ void MultiActorAgent::controller(const double dt)
    }
 }
 
-void MultiActorAgent::setState(base::ubf::AbstractState* const x)
+void MultiActorAgent::setState(base::ubf::IState* const x)
 {
    if (x == nullptr)
       return;
@@ -147,7 +147,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(const std::string& name, base::ubf::AbstractBehavior* const b)
+bool MultiActorAgent::addAgent(const std::string& name, base::ubf::IBehavior* const b)
 {
    bool ok{};
    if (nAgents < MAX_AGENTS) {
@@ -166,7 +166,7 @@ bool MultiActorAgent::addAgent(const std::string& name, base::ubf::AbstractBehav
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(base::ubf::AbstractState* const state)
+bool MultiActorAgent::setSlotState(base::ubf::IState* const state)
 {
    bool ok{};
    if (state != nullptr) {
@@ -189,7 +189,7 @@ bool MultiActorAgent::setSlotAgentList(base::PairStream* const msg)
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          const auto b = dynamic_cast<base::ubf::AbstractBehavior*>( pair->object() );
+          const auto b = dynamic_cast<base::ubf::IBehavior*>( pair->object() );
           if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);

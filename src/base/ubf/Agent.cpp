@@ -1,8 +1,8 @@
 
 #include "mixr/base/ubf/Agent.hpp"
-#include "mixr/base/ubf/AbstractAction.hpp"
-#include "mixr/base/ubf/AbstractBehavior.hpp"
-#include "mixr/base/ubf/AbstractState.hpp"
+#include "mixr/base/ubf/IAction.hpp"
+#include "mixr/base/ubf/IBehavior.hpp"
+#include "mixr/base/ubf/IState.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
@@ -20,8 +20,8 @@ BEGIN_SLOTTABLE(Agent)
 END_SLOTTABLE(Agent)
 
 BEGIN_SLOT_MAP(Agent)
-   ON_SLOT(1, setSlotState,    AbstractState)
-   ON_SLOT(2, setSlotBehavior, AbstractBehavior)
+   ON_SLOT(1, setSlotState,    IState)
+   ON_SLOT(2, setSlotBehavior, IBehavior)
 END_SLOT_MAP()
 
 Agent::Agent()
@@ -71,7 +71,7 @@ void Agent::controller(const double dt)
       getState()->updateState(actor);
 
       // generate an action, but allow possibility of no action returned
-      AbstractAction* action{getBehavior()->genAction(state, dt)};
+      IAction* action{getBehavior()->genAction(state, dt)};
       if (action) {
          action->execute(actor);
          action->unref();
@@ -83,7 +83,7 @@ void Agent::controller(const double dt)
 //------------------------------------------------------------------------------
 // Set our behavior model
 //------------------------------------------------------------------------------
-void Agent::setBehavior(AbstractBehavior* const x)
+void Agent::setBehavior(IBehavior* const x)
 {
    if (x==nullptr)
       return;
@@ -98,7 +98,7 @@ void Agent::setBehavior(AbstractBehavior* const x)
 //------------------------------------------------------------------------------
 // Set our state model
 //------------------------------------------------------------------------------
-void Agent::setState(AbstractState* const x)
+void Agent::setState(IState* const x)
 {
    if (x==nullptr)
       return;
@@ -132,13 +132,13 @@ void Agent::initActor()
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool Agent::setSlotState(AbstractState* const x)
+bool Agent::setSlotState(IState* const x)
 {
    setState(x);
    return true;
 }
 
-bool Agent::setSlotBehavior(AbstractBehavior* const x)
+bool Agent::setSlotBehavior(IBehavior* const x)
 {
    setBehavior(x);
    return true;
@@ -150,7 +150,7 @@ bool Agent::setSlotBehavior(AbstractBehavior* const x)
 //              using TC thread to perform its activity (instead of BG thread)
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(AgentTC, "UbfAgentTC")
+IMPLEMENT_SUBCLASS(AgentTC, "AgentTC")
 EMPTY_SLOTTABLE(AgentTC)
 EMPTY_CONSTRUCTOR(AgentTC)
 EMPTY_COPYDATA(AgentTC)

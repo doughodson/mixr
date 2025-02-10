@@ -7,9 +7,9 @@
 namespace mixr {
 namespace base {
 namespace ubf {
-class AbstractBehavior;
-class AbstractState;
-class AbstractAction;
+class IBehavior;
+class IState;
+class IAction;
 
 //------------------------------------------------------------------------------
 // Class: Agent
@@ -17,11 +17,11 @@ class AbstractAction;
 //              It manages a component (the "actor") with a behavior (either a player, or
 //              a player's component)
 //------------------------------------------------------------------------------
-// Factory name: UbfAgent
+// Factory name: IAgent
 //------------------------------------------------------------------------------
 // Slots:
-//    state       <AbstractState>     ! The agent's state object
-//    behavior    <AbstractBehavior>  ! behavior
+//    state       <IState>     ! The agent's state object
+//    behavior    <IBehavior>  ! behavior
 //------------------------------------------------------------------------------
 // Notes:
 // 1) Use 'Agent' to update the behavior framework via updateData() and use
@@ -44,11 +44,11 @@ protected:
    // generic controller
    virtual void controller(const double dt = 0.0);
 
-   AbstractBehavior* getBehavior() const          { return behavior; }
-   void setBehavior(AbstractBehavior* const);
+   IBehavior* getBehavior() const          { return behavior; }
+   void setBehavior(IBehavior* const);
 
-   AbstractState* getState() const                { return state; }
-   void setState(AbstractState* const);
+   IState* getState() const                { return state; }
+   void setState(IState* const);
 
    virtual void initActor();
 
@@ -56,14 +56,14 @@ protected:
    void setActor(base::Component* const myActor);
 
 private:
-   AbstractBehavior* behavior{};
-   AbstractState* state{};
+   IBehavior* behavior{};
+   IState* state{};
    safe_ptr<base::Component> myActor;
 
 private:
    // slot table helper methods
-   bool setSlotBehavior(AbstractBehavior* const);
-   bool setSlotState(AbstractState* const);
+   bool setSlotBehavior(IBehavior* const);
+   bool setSlotState(IState* const);
 };
 
 inline void Agent::setActor(base::Component* const actor)      { myActor = actor; return; }

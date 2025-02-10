@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_ubf_AbstractAction_HPP__
-#define __mixr_base_ubf_AbstractAction_HPP__
+#ifndef __mixr_base_ubf_IAction_HPP__
+#define __mixr_base_ubf_IAction_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -12,19 +12,19 @@ class Component;
 namespace ubf {
 
 //------------------------------------------------------------------------------
-// Class: AbstractAction
+// Class: IAction
 // Description:
-//    Abstract base class for all Actions. They are responsible for
+//    Interface class for all Actions. They are responsible for
 //    their own execution.
 //------------------------------------------------------------------------------
-// Factory name: UbfAction
+// Factory name: IAction
 //------------------------------------------------------------------------------
-class AbstractAction : public base::Object
+class IAction : public base::Object
 {
-   DECLARE_SUBCLASS(AbstractAction, base::Object)
+   DECLARE_SUBCLASS(IAction, base::Object)
 
 public:
-   AbstractAction();
+   IAction();
 
    int getVote() const;
    void setVote(const int);
@@ -36,8 +36,8 @@ private:
    int vote{};
 };
 
-inline void AbstractAction::setVote(const int x)      { vote = x; return; }
-inline int AbstractAction::getVote() const            { return vote; }
+inline void IAction::setVote(const int x)      { vote = x; return; }
+inline int IAction::getVote() const            { return vote; }
 
 }
 }
