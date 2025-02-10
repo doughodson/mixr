@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/IGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
+namespace base { class IIoData; class IIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
