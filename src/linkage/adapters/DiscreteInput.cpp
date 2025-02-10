@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/adapters/DiscreteInput.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -16,7 +16,7 @@ IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")
 EMPTY_DELETEDATA(DiscreteInput)
 
 BEGIN_SLOTTABLE(DiscreteInput)
-    "di",         // 1) Discrete Input location (AbstractIoData's DI channel)
+    "di",         // 1) Discrete Input location (IIoData's DI channel)
     "port",       // 2) Device port number (default: 0)
     "channel",    // 3) Device channel (bit) number on the port
     "inverted",   // 4) Inverted bit flag (default: false)
@@ -51,7 +51,7 @@ void DiscreteInput::copyData(const DiscreteInput& org, const bool)
    count = org.count;
 }
 
-void DiscreteInput::processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData)
+void DiscreteInput::processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData)
 {
    if (inData != nullptr) {
       int chan = channel;

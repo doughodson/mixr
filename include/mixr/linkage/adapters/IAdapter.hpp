@@ -1,52 +1,52 @@
 
-#ifndef __mixr_linkage_AbstractAdapter_HPP__
-#define __mixr_linkage_AbstractAdapter_HPP__
+#ifndef __mixr_linkage_IAdapter_HPP__
+#define __mixr_linkage_IAdapter_HPP__
 
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; }
+namespace base { class IIoData; class IIoDevice; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
-// Class: AbstractIoAdapter
+// Class: IAdapter
 //
-// Description: Abstract class that manages the flow of individual I/O items
+// Description: Interface class that manages the flow of individual I/O items
 //              between the I/O devices (AbstractIoDevice) and the I/O data buffers
 //              (AbstractIoData). AbstractIoAdapter objects are owned and managed
 //              by I/O device objects (AbstractIoDevice).
 //
 //------------------------------------------------------------------------------
-class AbstractAdapter : public base::Object
+class IAdapter : public base::Object
 {
-   DECLARE_SUBCLASS(AbstractAdapter, base::Object)
+   DECLARE_SUBCLASS(IAdapter, base::Object)
 
 public:
-   AbstractAdapter();
+   IAdapter();
 
    // Process input data item(s) from the input device to the input buffer
    void processInputs(
-         const base::AbstractIoDevice* const device,
-         base::AbstractIoData* const inData
+         const base::IIoDevice* const device,
+         base::IIoData* const inData
       )                                        { processInputsImpl(device, inData); }
 
    // Process output data item(s) from the output buffer to the output device
    void processOutputs(
-         const base::AbstractIoData* const outData,
-         base::AbstractIoDevice* const device
+         const base::IIoData* const outData,
+         base::IIoDevice* const device
       )                                         { processOutputsImpl(outData, device); }
 
 private:
    // Process input data item(s) from the input device to the input buffer
    virtual void processInputsImpl(
-         const base::AbstractIoDevice* const device,
-         base::AbstractIoData* const inData
+         const base::IIoDevice* const device,
+         base::IIoData* const inData
       ) =0;
 
    // Process output data item(s) from the output buffer to the output device
    virtual void processOutputsImpl(
-         const base::AbstractIoData* const outData,
-         base::AbstractIoDevice* const device
+         const base::IIoData* const outData,
+         base::IIoDevice* const device
       ) =0;
 };
 

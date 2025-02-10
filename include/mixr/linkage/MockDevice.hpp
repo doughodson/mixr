@@ -2,12 +2,12 @@
 #ifndef __mixr_linkage_MockDevice_HPP__
 #define __mixr_linkage_MockDevice_HPP__
 
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class AbstractIoData; }
+namespace base { class PairStream; class IIoData; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -23,9 +23,9 @@ namespace linkage {
 // Slots:
 //    generators <PairStream>   : A list of generators
 //------------------------------------------------------------------------------
-class MockDevice final: public base::AbstractIoDevice
+class MockDevice final: public base::IIoDevice
 {
-    DECLARE_SUBCLASS(MockDevice, base::AbstractIoDevice)
+    DECLARE_SUBCLASS(MockDevice, base::IIoDevice)
 
 public:
    MockDevice();
@@ -52,9 +52,9 @@ public:
 
 private:
    // mock device executes all generators to create values to store in input data buffer
-   void processInputsImpl(const double dt, base::AbstractIoData* const inData) final;
+   void processInputsImpl(const double dt, base::IIoData* const inData) final;
    // mock device looks like a null device, it has no output
-   void processOutputsImpl(const double dt, const base::AbstractIoData* const outData) final       { }
+   void processOutputsImpl(const double dt, const base::IIoData* const outData) final       { }
 
    base::safe_ptr<base::PairStream> generators;   // list of adapters used to generate values
 

@@ -2,16 +2,16 @@
 #ifndef __mixr_linkage_DiscreteOutput_HPP__
 #define __mixr_linkage_DiscreteOutput_HPP__
 
-#include "mixr/linkage/adapters/AbstractAdapter.hpp"
+#include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class Integer; class NetHandler; }
+namespace base { class IIoData; class IIoDevice; class Boolean; class Integer; class NetHandler; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
-// Class:  DiscreteOutput
+// Class: DiscreteOutput
 //
-// Description:  Manage discrete outputs (DO).
+// Description: Manage discrete outputs (DO).
 //
 // Slots:
 //      do           <Integer>   ! Discrete Output location (IoData's DO channel)
@@ -25,9 +25,9 @@ namespace linkage {
 // Note: If 'count' is less than zero then the DOs are stored in reverse
 //       order (i.e., 'do' location is decremented)
 //------------------------------------------------------------------------------
-class DiscreteOutput final: public AbstractAdapter
+class DiscreteOutput final: public IAdapter
 {
-   DECLARE_SUBCLASS(DiscreteOutput, AbstractAdapter)
+   DECLARE_SUBCLASS(DiscreteOutput, IAdapter)
 
 public:
    DiscreteOutput();
@@ -47,10 +47,10 @@ public:
    bool setCount(const int x)                     { count = x;         return true; }
 
 private:
-   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final     {}
-   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final;
+   void processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData) final     {}
+   void processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device) final;
 
-   int location{};     // AbstractIoData output bit location
+   int location{};     // IIoData output bit location
    int port{};         // Port number
    int channel{};      // Port's channel (bit) number
    bool devEnb{};      // Device enabled
@@ -64,7 +64,7 @@ private:
    bool setSlotPort(const base::Integer* const);
    bool setSlotChannel(const base::Integer* const);
    bool setSlotInverted(const base::Boolean* const);
-   bool setSlotValue(const base::Boolean* const); 
+   bool setSlotValue(const base::Boolean* const);
    bool setSlotCount(const base::Integer* const);
 };
 

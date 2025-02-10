@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/adapters/AnalogInput.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -96,7 +96,7 @@ bool AnalogInput::setTable(const base::Table1* const msg)
     return ok;
 }
 
-void AnalogInput::processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData)
+void AnalogInput::processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData)
 {
    // Get data from the AI card
    if (device != nullptr && devEnb) {

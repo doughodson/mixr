@@ -2,10 +2,10 @@
 #ifndef __mixr_linkage_AnalogInputFixed_HPP__
 #define __mixr_linkage_AnalogInputFixed_HPP__
 
-#include "mixr/linkage/generators/AbstractGenerator.hpp"
+#include "mixr/linkage/generators/IGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class Integer; class Number; }
+namespace base { class IIoData; class Integer; class Number; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -18,9 +18,9 @@ namespace linkage {
 //      ai        <Integer>      ! AbstractIoData's AI channel index
 //      value     <Number>       ! Default is 0.0
 //------------------------------------------------------------------------------
-class AnalogInputFixed final: public AbstractGenerator
+class AnalogInputFixed final: public IGenerator
 {
-   DECLARE_SUBCLASS(AnalogInputFixed, AbstractGenerator)
+   DECLARE_SUBCLASS(AnalogInputFixed, IGenerator)
 
 public:
    AnalogInputFixed();
@@ -28,7 +28,7 @@ public:
    void reset() final    {}
 
 private:
-   void processInputsImpl(const double dt, base::AbstractIoData* const) final;
+   void processInputsImpl(const double dt, base::IIoData* const) final;
 
    // AbstractIoData's AI channel index
    int getChannel() const                              { return channel; }

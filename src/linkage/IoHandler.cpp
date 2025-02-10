@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/IoHandler.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "IoPeriodicThread.hpp"
 
@@ -14,7 +14,7 @@
 namespace mixr {
 namespace linkage {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(IoHandler, "BaseIoHandler")
+IMPLEMENT_ABSTRACT_SUBCLASS(IoHandler, "IoHandler")
 
 BEGIN_SLOTTABLE(IoHandler)
    "ioData",      // 1) Combined input/output data
@@ -26,9 +26,9 @@ BEGIN_SLOTTABLE(IoHandler)
 END_SLOTTABLE(IoHandler)
 
 BEGIN_SLOT_MAP(IoHandler)
-   ON_SLOT(1, setSlotIoData,     base::AbstractIoData)
-   ON_SLOT(2, setSlotInputData,  base::AbstractIoData)
-   ON_SLOT(3, setSlotOutputData, base::AbstractIoData)
+   ON_SLOT(1, setSlotIoData,     base::IIoData)
+   ON_SLOT(2, setSlotInputData,  base::IIoData)
+   ON_SLOT(3, setSlotOutputData, base::IIoData)
    ON_SLOT(4, setSlotDevices,    base::PairStream)
    ON_SLOT(5, setSlotRate,       base::Frequency)
    ON_SLOT(6, setSlotPriority,   base::Number)
@@ -52,18 +52,18 @@ void IoHandler::copyData(const IoHandler& org, const bool)
    // ---
    if (org.inData != nullptr && org.inData == org.outData) {
       // Common input/output buffer
-      const auto copy = static_cast<base::AbstractIoData*>(org.inData->clone());
+      const auto copy = static_cast<base::IIoData*>(org.inData->clone());
       setSlotIoData(copy);
       copy->unref();
    } else {
       // Separate input/output buffers
       if (org.inData != nullptr) {
-         const auto copy = static_cast<base::AbstractIoData*>(org.inData->clone());
+         const auto copy = static_cast<base::IIoData*>(org.inData->clone());
          setSlotInputData(copy);
          copy->unref();
       }
       if (org.outData != nullptr) {
-         const auto copy = static_cast<base::AbstractIoData*>(org.outData->clone());
+         const auto copy = static_cast<base::IIoData*>(org.outData->clone());
          setSlotOutputData(copy);
          copy->unref();
       }
@@ -108,7 +108,7 @@ void IoHandler::reset()
       base::List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<base::AbstractIoDevice*>(pair->object());
+         const auto p = static_cast<base::IIoDevice*>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -140,7 +140,7 @@ void IoHandler::readDeviceInputs(const double dt)
       base::List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<base::AbstractIoDevice*>(pair->object());
+         const auto p = static_cast<base::IIoDevice*>(pair->object());
          p->processInputs(dt, inData);
          item = item->getNext();
       }
@@ -154,7 +154,7 @@ void IoHandler::writeDeviceOutputs(const double dt)
       base::List::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<base::AbstractIoDevice*>(pair->object());
+         const auto p = static_cast<base::IIoDevice*>(pair->object());
          p->processOutputs(dt, outData);
          item = item->getNext();
       }
@@ -178,20 +178,20 @@ void IoHandler::startAsyncProcessingImpl()
    }
 }
 
-bool IoHandler::setSlotIoData(base::AbstractIoData* const msg)
+bool IoHandler::setSlotIoData(base::IIoData* const msg)
 {
    inData = msg;
    outData = msg;
    return true;
 }
 
-bool IoHandler::setSlotInputData(base::AbstractIoData* const msg)
+bool IoHandler::setSlotInputData(base::IIoData* const msg)
 {
    inData = msg;
    return true;
 }
 
-bool IoHandler::setSlotOutputData(base::AbstractIoData* const msg)
+bool IoHandler::setSlotOutputData(base::IIoData* const msg)
 {
    outData = msg;
    return true;
@@ -208,7 +208,7 @@ bool IoHandler::setSlotDevices(base::PairStream* const list)
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         ok = pair->object()->isClassType(typeid(base::AbstractIoDevice));
+         ok = pair->object()->isClassType(typeid(base::IIoDevice));
          if (ok) {
             //static_cast<AbstractIoDevice*>(pair->object())->container(this);
          } else {

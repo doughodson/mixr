@@ -4,13 +4,13 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_linkage.a
 
 OBJS =  \
-	adapters/AbstractAdapter.o \
+	adapters/IAdapter.o \
 	adapters/Ai2DiSwitch.o \
 	adapters/AnalogInput.o \
 	adapters/AnalogOutput.o \
 	adapters/DiscreteInput.o \
 	adapters/DiscreteOutput.o \
-	generators/AbstractGenerator.o \
+	generators/IGenerator.o \
 	generators/AnalogInputFixed.o \
 	generators/AnalogSignalGen.o \
 	generators/DiscreteInputFixed.o \

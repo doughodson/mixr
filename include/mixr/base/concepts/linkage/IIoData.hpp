@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_AbstractIoData_HPP__
-#define __mixr_base_AbstractIoData_HPP__
+#ifndef __mixr_base_IIoData_HPP__
+#define __mixr_base_IIoData_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -8,18 +8,18 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: AbstractIoData
+// Class: IIoData
 // Description: I/O data buffer
 //
-//    Abstract interface to I/O data organized as channels that flow to/from
+//    Interface to I/O data organized as channels that flow to/from
 //    devices.
 //
 //    The main input and output data buffers are typically managed by an I/O
-//    handler class (see AbstractIoHander).
+//    handler class (see IIoHander).
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractIoData
+// Factory name: IIoData
 // Slots: none
 //------------------------------------------------------------------------------
 // Notes:
@@ -32,12 +32,12 @@ namespace base {
 //
 //    4) All functions return true if successful.
 //------------------------------------------------------------------------------
-class AbstractIoData : public Object
+class IIoData : public Object
 {
-   DECLARE_SUBCLASS(AbstractIoData, Object)
+   DECLARE_SUBCLASS(IIoData, Object)
 
 public:
-   AbstractIoData();
+   IIoData();
 
    // ---
    // Input channels

@@ -3,8 +3,8 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/units/angles.hpp"
@@ -54,7 +54,7 @@ void AnalogSignalGen::reset()
    time = 0.0;
 }
 
-void AnalogSignalGen::processInputsImpl(const double dt, base::AbstractIoData* const inData)
+void AnalogSignalGen::processInputsImpl(const double dt, base::IIoData* const inData)
 {
    const double value{calc(dt)};
 

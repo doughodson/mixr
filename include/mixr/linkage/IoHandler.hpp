@@ -2,12 +2,12 @@
 #ifndef __mixr_linkage_IoHandler_HPP__
 #define __mixr_linkage_IoHandler_HPP__
 
-#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/IIoHandler.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class Frequency; class Number; class AbstractIoData; }
+namespace base { class PairStream; class Frequency; class Number; class IIoData; }
 namespace linkage {
 class IoPeriodicThread;
 
@@ -52,9 +52,9 @@ class IoPeriodicThread;
 //    priority    <Number>       ! Optional thread's priority: lowest(0.0) to highest(1.0)  (default: 0.5 )
 //
 //------------------------------------------------------------------------------
-class IoHandler : public base::AbstractIoHandler
+class IoHandler : public base::IIoHandler
 {
-   DECLARE_SUBCLASS(IoHandler, base::AbstractIoHandler)
+   DECLARE_SUBCLASS(IoHandler, base::IIoHandler)
 
 public:
    IoHandler();
@@ -74,12 +74,12 @@ private:
    bool async() override                                             { return periodicThread != nullptr; }
 
    // return input data buffer implementation
-   base::AbstractIoData* getInputDataImpl() override                 { return inData; }
-   const base::AbstractIoData* getInputDataImpl() const override     { return inData; }
+   base::IIoData* getInputDataImpl() override                 { return inData; }
+   const base::IIoData* getInputDataImpl() const override     { return inData; }
 
    // return output data buffer implementation
-   base::AbstractIoData* getOutputDataImpl() override                { return outData; }
-   const base::AbstractIoData* getOutputDataImpl() const override    { return outData; }
+   base::IIoData* getOutputDataImpl() override                { return outData; }
+   const base::IIoData* getOutputDataImpl() const override    { return outData; }
 
    // create thread(s) to process i/o asynchronous
    void startAsyncProcessingImpl() override;
@@ -89,8 +89,8 @@ private:
    double getRate() const         { return rate; }      // Thread rate (hz)
 
    // data i/o
-   base::safe_ptr<base::AbstractIoData> inData;         // "input" data received from the hardware
-   base::safe_ptr<base::AbstractIoData> outData;        // "output" data sent to the hardware
+   base::safe_ptr<base::IIoData> inData;                // "input" data received from the hardware
+   base::safe_ptr<base::IIoData> outData;               // "output" data sent to the hardware
    base::safe_ptr<base::PairStream> devices;            // Device list
 
    double rate {50};                                    // Thread Rate (hz)
@@ -99,9 +99,9 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotIoData(base::AbstractIoData* const);
-   bool setSlotInputData(base::AbstractIoData* const);
-   bool setSlotOutputData(base::AbstractIoData* const);
+   bool setSlotIoData(base::IIoData* const);
+   bool setSlotInputData(base::IIoData* const);
+   bool setSlotOutputData(base::IIoData* const);
    bool setSlotDevices(base::PairStream* const);
    bool setSlotRate(const base::Frequency* const);
    bool setSlotPriority(const base::Number* const);

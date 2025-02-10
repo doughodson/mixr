@@ -2,10 +2,10 @@
 #ifndef __mixr_linkage_AnalogInput_HPP__
 #define __mixr_linkage_AnalogInput_HPP__
 
-#include "mixr/linkage/adapters/AbstractAdapter.hpp"
+#include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Integer; class Number; class Table1; }
+namespace base { class IIoData; class IIoDevice; class Integer; class Number; class Table1; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -44,9 +44,9 @@ namespace linkage {
 //      table        <Table1>    ! Shaping function table (default: none)
 //      value        <Number>    ! Initial value [ -1.0 ... 1.0 ] (default: 0.0)
 //------------------------------------------------------------------------------
-class AnalogInput final: public AbstractAdapter
+class AnalogInput final: public IAdapter
 {
-   DECLARE_SUBCLASS(AnalogInput, AbstractAdapter)
+   DECLARE_SUBCLASS(AnalogInput, IAdapter)
 
 public:
    AnalogInput();
@@ -68,8 +68,8 @@ public:
    bool setTable(const base::Table1* const);
 
 private:
-   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
-   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
+   void processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData) final;
+   void processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device) final   {}
 
    int location{};              // AbstractIoData analog input channel number
    int channel{};               // Analog channel number

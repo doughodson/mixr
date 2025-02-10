@@ -1,7 +1,7 @@
 
 #include "mixr/linkage/MockDevice.hpp"
 
-#include "mixr/linkage/generators/AbstractGenerator.hpp"
+#include "mixr/linkage/generators/IGenerator.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
@@ -42,14 +42,14 @@ void MockDevice::copyData(const MockDevice& org, const bool)
 }
 
 // Process device input channels
-void MockDevice::processInputsImpl(const double dt, base::AbstractIoData* const inData)
+void MockDevice::processInputsImpl(const double dt, base::IIoData* const inData)
 {
    // process any input generators
    if (generators != nullptr) {
       base::List::Item* item{generators->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractGenerator*>(pair->object());
+         const auto p = static_cast<IGenerator*>(pair->object());
          p->processInputs(dt, inData);
          item = item->getNext();
       }
@@ -68,12 +68,12 @@ bool MockDevice::setSlotGenerators(base::PairStream* const list)
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         ok = pair->object()->isClassType(typeid(AbstractGenerator));
+         ok = pair->object()->isClassType(typeid(IGenerator));
          if (ok) {
 //            static_cast<AbstractIoAdapter*>(pair->object())->container(this);
          } else {
             std::cerr << "MockIoDevice::setSlotGenerators(): Item number " << cnt;
-            std::cerr << " on the list is a non-AbstractGenerator component!" << std::endl;
+            std::cerr << " on the list is a non-IGenerator component!" << std::endl;
          }
          item = item->getNext();
       }

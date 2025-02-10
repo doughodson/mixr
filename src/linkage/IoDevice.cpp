@@ -1,9 +1,9 @@
 
 #include "mixr/linkage/IoDevice.hpp"
 
-#include "mixr/linkage/adapters/AbstractAdapter.hpp"
+#include "mixr/linkage/adapters/IAdapter.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/IIoHandler.hpp"
 
 #include "mixr/base/List.hpp"
 
@@ -48,7 +48,7 @@ void IoDevice::copyData(const IoDevice& org, const bool)
    }
 }
 
-void IoDevice::processInputAdapters(base::AbstractIoData* const inData)
+void IoDevice::processInputAdapters(base::IIoData* const inData)
 {
    // ### Since we'll process all of the input adapters, our derived I/O device
    // classes should process their device inputs BEFORE calling this base
@@ -59,14 +59,14 @@ void IoDevice::processInputAdapters(base::AbstractIoData* const inData)
       base::List::Item* item{adapters->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<AbstractAdapter*>(pair->object());
+         const auto p = static_cast<IAdapter*>(pair->object());
          p->processInputs(this, inData);
          item = item->getNext();
       }
    }
 }
 
-void IoDevice::processOutputAdapters(const base::AbstractIoData* const outData)
+void IoDevice::processOutputAdapters(const base::IIoData* const outData)
 {
    // ### Since we'll process all of the output I/O adapters, our derived I/O
    // device classes should process their device outputs AFTER calling this
@@ -79,7 +79,7 @@ void IoDevice::processOutputAdapters(const base::AbstractIoData* const outData)
          base::List::Item* item{adapters->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = static_cast<AbstractAdapter*>(pair->object());
+            const auto p = static_cast<IAdapter*>(pair->object());
             p->processOutputs(outData, this);
             item = item->getNext();
          }
@@ -99,7 +99,7 @@ bool IoDevice::setSlotAdapters(base::PairStream* const list)
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         ok = pair->object()->isClassType(typeid(AbstractAdapter));
+         ok = pair->object()->isClassType(typeid(IAdapter));
          if (ok) {
 //            static_cast<AbstractIoAdapter*>(pair->object())->container(this);
          } else {

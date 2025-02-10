@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/adapters/DiscreteOutput.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -16,7 +16,7 @@ IMPLEMENT_SUBCLASS(DiscreteOutput, "DiscreteOutput")
 EMPTY_DELETEDATA(DiscreteOutput)
 
 BEGIN_SLOTTABLE(DiscreteOutput)
-    "do",         // 1) Discrete Output location (AbstractIoData's DO channel)
+    "do",         // 1) Discrete Output location (IIoData's DO channel)
     "port",       // 2) Device port number (default: 0)
     "channel",    // 3) Device channel (bit) number on the port
     "inverted",   // 4) Inverted bit flag (default: false)
@@ -51,7 +51,7 @@ void DiscreteOutput::copyData(const DiscreteOutput& org, const bool)
    count = org.count;
 }
 
-void DiscreteOutput::processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device)
+void DiscreteOutput::processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device)
 {
    if (device != nullptr && devEnb) {
       int chan = channel;

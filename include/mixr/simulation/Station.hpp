@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class AbstractIoHandler; class Boolean; class Identifier; class Integer;
+namespace base { class IIoHandler; class Boolean; class Identifier; class Integer;
                  class Number; class PairStream; class String; class Time; }
 namespace simulation {
 class IDataRecorder;
@@ -175,8 +175,8 @@ public:
    base::PairStream* getNetworks();                                 // Interoperability network handlers
    const base::PairStream* getNetworks() const;                     // Interoperability network handlers (const version)
 
-   base::AbstractIoHandler* getIoHandler();                         // I/O handler
-   const base::AbstractIoHandler* getIoHandler() const;             // I/O handler (const version)
+   base::IIoHandler* getIoHandler();                                // I/O handler
+   const base::IIoHandler* getIoHandler() const;                    // I/O handler (const version)
 
    IDataRecorder* getDataRecorder();                                // Returns the data recorder
    const IDataRecorder* getDataRecorder() const;                    // Returns the data recorder (const version)
@@ -253,7 +253,7 @@ private:
    Simulation* sim{};                                        // Executable simulation model
    base::safe_ptr<base::PairStream> networks;                // List of networks
    base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
-   base::safe_ptr<base::AbstractIoHandler> ioHandler;        // Input/Output (IO) data handler
+   base::safe_ptr<base::IIoHandler> ioHandler;               // Input/Output (IO) data handler
    IPlayer* ownship{};                                       // Ownship (primary) player
    std::string ownshipName;                                  // Name of our ownship player
    bool tmrUpdateEnbl{};                                     // Enable base::Timers::updateTimers() call from updateTC()
@@ -286,7 +286,7 @@ private:
 
    bool setSlotIgHosts(base::PairStream* const);
 
-   bool setSlotIoHandler(base::AbstractIoHandler* const);
+   bool setSlotIoHandler(base::IIoHandler* const);
 
    bool setSlotOwnshipName(const base::Identifier* const);
 

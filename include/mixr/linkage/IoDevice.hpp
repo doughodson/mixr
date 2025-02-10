@@ -2,7 +2,7 @@
 #ifndef __mixr_linkage_IoDevice_HPP__
 #define __mixr_linkage_IoDevice_HPP__
 
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/safe_ptr.hpp"
 
@@ -21,26 +21,26 @@ namespace linkage {
 // Slots:
 //    adapters <PairStream>   A list of adapters
 //------------------------------------------------------------------------------
-class IoDevice : public base::AbstractIoDevice
+class IoDevice : public base::IIoDevice
 {
-    DECLARE_SUBCLASS(IoDevice, base::AbstractIoDevice)
+    DECLARE_SUBCLASS(IoDevice, base::IIoDevice)
 
 public:
    IoDevice();
 
 private:
-   void processInputsImpl(const double, base::AbstractIoData* const inData) final {
+   void processInputsImpl(const double, base::IIoData* const inData) final {
       readInputs();
       processInputAdapters(inData);
    }
 
-   void processOutputsImpl(const double, const base::AbstractIoData* const outData) final {
+   void processOutputsImpl(const double, const base::IIoData* const outData) final {
       processOutputAdapters(outData);
       writeOutputs();
    }
 
-   void processInputAdapters(base::AbstractIoData* const);
-   void processOutputAdapters(const base::AbstractIoData* const);
+   void processInputAdapters(base::IIoData* const);
+   void processOutputAdapters(const base::IIoData* const);
 
    virtual void readInputs() = 0;
    virtual void writeOutputs() = 0;

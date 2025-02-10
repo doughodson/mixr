@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/adapters/Ai2DiSwitch.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -17,7 +17,7 @@ IMPLEMENT_SUBCLASS(Ai2DiSwitch, "Ai2DiSwitch")
 EMPTY_DELETEDATA(Ai2DiSwitch)
 
 BEGIN_SLOTTABLE(Ai2DiSwitch)
-    "di",         // 1) Discrete Input location (AbstractIoData's DI channel)
+    "di",         // 1) Discrete Input location (IIoData's DI channel)
     "channel",    // 2) Device's AI channel number
     "level",      // 3) Level to switch DI (default: 0)
     "inverted"    // 4) Inverted bit flag (default: false)
@@ -45,7 +45,7 @@ void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool)
    invert = org.invert;
 }
 
-void Ai2DiSwitch::processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData)
+void Ai2DiSwitch::processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData)
 {
    // Default is our initial value
    double vin {};

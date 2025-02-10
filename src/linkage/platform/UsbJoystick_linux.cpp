@@ -16,7 +16,7 @@
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 

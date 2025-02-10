@@ -13,7 +13,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Timers.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoHandler.hpp"
+#include "mixr/base/concepts/linkage/IIoHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -62,7 +62,7 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 3, setSlotIgHosts,               base::PairStream)
 
-   ON_SLOT( 4, setSlotIoHandler,             base::AbstractIoHandler)
+   ON_SLOT( 4, setSlotIoHandler,             base::IIoHandler)
 
    ON_SLOT( 5, setSlotOwnshipName,           base::Identifier)
 
@@ -128,7 +128,7 @@ void Station::copyData(const Station& org, const bool)
 
    // Copy the I/O handlers
    if (org.ioHandler != nullptr) {
-      base::AbstractIoHandler* copy = org.ioHandler->clone();
+      base::IIoHandler* copy = org.ioHandler->clone();
       setSlotIoHandler( copy );
       copy->unref();
    }
@@ -650,13 +650,13 @@ const base::PairStream* Station::getNetworks() const
 }
 
 // I/O handler
-base::AbstractIoHandler* Station::getIoHandler()
+base::IIoHandler* Station::getIoHandler()
 {
    return ioHandler;
 }
 
 // I/O handler (const version)
-const base::AbstractIoHandler* Station::getIoHandler() const
+const base::IIoHandler* Station::getIoHandler() const
 {
    return ioHandler;
 }
@@ -960,7 +960,7 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
    return true;
 }
 
-bool Station::setSlotIoHandler(base::AbstractIoHandler* const p)
+bool Station::setSlotIoHandler(base::IIoHandler* const p)
 {
    if (ioHandler != nullptr) {
       ioHandler->container(nullptr);

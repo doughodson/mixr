@@ -2,7 +2,7 @@
 #ifndef __mixr_linkage_IoData_HPP__
 #define __mixr_linkage_IoData_HPP__
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
 
 #include <vector>
 
@@ -28,9 +28,9 @@ namespace linkage {
 //    numDO    <Integer>   ! Number of discrete outputs (DOs)
 //
 //------------------------------------------------------------------------------
-class IoData : public base::AbstractIoData
+class IoData : public base::IIoData
 {
-   DECLARE_SUBCLASS(IoData, base::AbstractIoData)
+   DECLARE_SUBCLASS(IoData, base::IIoData)
 
 public:
    IoData();

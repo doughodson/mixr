@@ -2,7 +2,7 @@
 #ifndef __mixr_linkage_DiscreteInputFixed_HPP__
 #define __mixr_linkage_DiscreteInputFixed_HPP__
 
-#include "mixr/linkage/generators/AbstractGenerator.hpp"
+#include "mixr/linkage/generators/IGenerator.hpp"
 
 namespace mixr {
 namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
@@ -21,9 +21,9 @@ namespace linkage {
 //
 //      di        <Integer>      ! AbstractIoData's DI channel index
 //------------------------------------------------------------------------------
-class DiscreteInputFixed final: public AbstractGenerator
+class DiscreteInputFixed final: public IGenerator
 {
-   DECLARE_SUBCLASS(DiscreteInputFixed, AbstractGenerator)
+   DECLARE_SUBCLASS(DiscreteInputFixed, IGenerator)
 
 public:
    enum class Signal { ON, OFF };
@@ -34,7 +34,7 @@ public:
    void reset() final    {}
 
 private:
-   void processInputsImpl(const double dt, base::AbstractIoData* const) final;
+   void processInputsImpl(const double dt, base::IIoData* const) final;
 
    // AbstractIoData's AI channel index
    int getChannel() const                              { return channel; }

@@ -4,8 +4,8 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 namespace mixr {
 namespace linkage {
@@ -35,7 +35,7 @@ void AnalogInputFixed::copyData(const AnalogInputFixed& org, const bool)
    value = org.value;
 }
 
-void AnalogInputFixed::processInputsImpl(const double dt, base::AbstractIoData* const inData)
+void AnalogInputFixed::processInputsImpl(const double dt, base::IIoData* const inData)
 {
    // set the value in the input data buffer
    if (inData != nullptr) {

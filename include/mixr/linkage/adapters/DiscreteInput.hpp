@@ -2,16 +2,16 @@
 #ifndef __mixr_linkage_DiscreteInput_HPP__
 #define __mixr_linkage_DiscreteInput_HPP__
 
-#include "mixr/linkage/adapters/AbstractAdapter.hpp"
+#include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class Integer; }
+namespace base { class IIoData; class IIoDevice; class Boolean; class Integer; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
 // Class: DiscreteInput
 //
-// Description:  Manage discrete inputs (DI).
+// Description: Manage discrete inputs (DI).
 //
 // Slots:
 //      di           <Integer>   ! Discrete Input location (IoData's DI channel)
@@ -25,9 +25,9 @@ namespace linkage {
 // Note: If 'count' is less than zero then the DIs are stored in reverse
 //       order (i.e., 'di' location is decremented)
 //------------------------------------------------------------------------------
-class DiscreteInput final: public AbstractAdapter
+class DiscreteInput final: public IAdapter
 {
-   DECLARE_SUBCLASS(DiscreteInput, AbstractAdapter)
+   DECLARE_SUBCLASS(DiscreteInput, IAdapter)
 
 public:
    DiscreteInput();
@@ -47,8 +47,8 @@ public:
    bool setCount(const int x)                      { count = x;        return true; }
 
 private:
-   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
-   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
+   void processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData) final;
+   void processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device) final   {}
 
    int location {};      // AbstractIoData input bit location
    int port {};          // Port number
@@ -64,7 +64,7 @@ private:
    bool setSlotPort(const base::Integer* const);
    bool setSlotChannel(const base::Integer* const);
    bool setSlotInverted(const base::Boolean* const);
-   bool setSlotValue(const base::Boolean* const); 
+   bool setSlotValue(const base::Boolean* const);
    bool setSlotCount(const base::Integer* const);
 };
 

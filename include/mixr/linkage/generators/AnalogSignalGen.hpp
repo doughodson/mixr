@@ -2,10 +2,10 @@
 #ifndef __mixr_linkage_AnalogSignalGen_HPP__
 #define __mixr_linkage_AnalogSignalGen_HPP__
 
-#include "mixr/linkage/generators/AbstractGenerator.hpp"
+#include "mixr/linkage/generators/IGenerator.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
+namespace base { class IIoData; class IIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -36,9 +36,9 @@ namespace linkage {
 //
 //      ai        <Integer>    Integer  ! AbstractIoData's AI channel index
 //------------------------------------------------------------------------------
-class AnalogSignalGen final: public AbstractGenerator
+class AnalogSignalGen final: public IGenerator
 {
-   DECLARE_SUBCLASS(AnalogSignalGen, AbstractGenerator)
+   DECLARE_SUBCLASS(AnalogSignalGen, IGenerator)
 
 public:
    enum class Signal { SINE, COSINE, SQUARE, SAW };
@@ -49,7 +49,7 @@ public:
    void reset() final;
 
 private:
-   void processInputsImpl(const double dt, base::AbstractIoData* const) final;
+   void processInputsImpl(const double dt, base::IIoData* const) final;
 
    // AbstractIoData's AI channel index
    int getChannel() const                      { return channel; }

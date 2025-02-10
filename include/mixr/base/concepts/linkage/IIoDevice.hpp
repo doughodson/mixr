@@ -1,16 +1,16 @@
 
-#ifndef __mixr_base_AbstractIoDevice_HPP__
-#define __mixr_base_AbstractIoDevice_HPP__
+#ifndef __mixr_base_IIoDevice_HPP__
+#define __mixr_base_IIoDevice_HPP__
 
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
 namespace base {
-class AbstractIoData;
+class IIoData;
 
 //------------------------------------------------------------------------------
-// Class: AbstractIoDevice
-// Description: Abstract interface to an I/O device
+// Class: IIoDevice
+// Description: Interface to an I/O device
 //
 //    I/O devices communicate with I/O hardware, usually via device drivers.
 //    Most of the time, these drivers are operating specific.  This class
@@ -24,7 +24,7 @@ class AbstractIoData;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractIoDevice
+// Factory name: IIoDevice
 // Slots: none
 //------------------------------------------------------------------------------
 // Notes:
@@ -39,12 +39,12 @@ class AbstractIoData;
 //       buffer that are application (not device) specific.  This buffer
 //       should be passed to the I/O adapters.
 //------------------------------------------------------------------------------
-class AbstractIoDevice : public Object
+class IIoDevice : public Object
 {
-   DECLARE_SUBCLASS(AbstractIoDevice, Object)
+   DECLARE_SUBCLASS(IIoDevice, Object)
 
 public:
-   AbstractIoDevice();
+   IIoDevice();
 
    virtual void reset() =0;
 
@@ -67,13 +67,13 @@ public:
    virtual bool setAnalogOutput(const double value, const int channel) =0;
 
    // process device inputs
-   void processInputs(const double dt, AbstractIoData* const inData)                   { processInputsImpl(dt, inData);   }
+   void processInputs(const double dt, IIoData* const inData)                   { processInputsImpl(dt, inData);   }
    // process device outputs
-   void processOutputs(const double dt, const AbstractIoData* const outData)           { processOutputsImpl(dt, outData); }
+   void processOutputs(const double dt, const IIoData* const outData)           { processOutputsImpl(dt, outData); }
 
 private:
-   virtual void processInputsImpl(const double dt, AbstractIoData* const inData) =0;
-   virtual void processOutputsImpl(const double dt, const AbstractIoData* const outData) =0;
+   virtual void processInputsImpl(const double dt, IIoData* const inData) =0;
+   virtual void processOutputsImpl(const double dt, const IIoData* const outData) =0;
 };
 
 }

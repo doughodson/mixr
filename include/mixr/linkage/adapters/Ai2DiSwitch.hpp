@@ -2,10 +2,10 @@
 #ifndef __mixr_linkage_Ai2DiSwitch_HPP__
 #define __mixr_linkage_Ai2DiSwitch_HPP__
 
-#include "mixr/linkage/adapters/AbstractAdapter.hpp"
+#include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class AbstractIoData; class AbstractIoDevice; class Boolean; class Integer; class Number; }
+namespace base { class IIoData; class IIoDevice; class Boolean; class Integer; class Number; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -34,9 +34,9 @@ namespace linkage {
 //      inverted     <Boolean>   ! Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch final: public AbstractAdapter
+class Ai2DiSwitch final: public IAdapter
 {
-   DECLARE_SUBCLASS(Ai2DiSwitch, AbstractAdapter)
+   DECLARE_SUBCLASS(Ai2DiSwitch, IAdapter)
 
 public:
    Ai2DiSwitch();
@@ -52,8 +52,8 @@ public:
    bool setInvertFlag(const bool x)               { invert = x;      return true; }
 
 private:
-   void processInputsImpl(const base::AbstractIoDevice* const device, base::AbstractIoData* const inData) final;
-   void processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device) final   {}
+   void processInputsImpl(const base::IIoDevice* const device, base::IIoData* const inData) final;
+   void processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device) final   {}
 
    int location{};     // AbstractIoData input bit location
    int channel{};      // Port's channel (bit) number

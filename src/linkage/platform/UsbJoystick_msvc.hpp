@@ -7,7 +7,7 @@
 #include <vector>
 
 namespace mixr {
-namespace base { class Integer; class AbstractIoData; }
+namespace base { class Integer; class IIoData; }
 namespace linkage {
 
 //------------------------------------------------------------------------------

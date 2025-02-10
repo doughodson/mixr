@@ -1,8 +1,8 @@
 
 #include "mixr/linkage/adapters/AnalogOutput.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -93,7 +93,7 @@ bool AnalogOutput::setTable(const base::Table1* const msg)
     return ok;
 }
 
-void AnalogOutput::processOutputsImpl(const base::AbstractIoData* const outData, base::AbstractIoDevice* const device)
+void AnalogOutput::processOutputsImpl(const base::IIoData* const outData, base::IIoDevice* const device)
 {
    if (device != nullptr && devEnb) {
       // Get a value from the cockpit output handler

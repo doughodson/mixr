@@ -28,9 +28,9 @@ OBJS =  \
 	colors/Rgb.o \
 	colors/Rgba.o \
 	colors/Yiq.o \
-	concepts/linkage/AbstractIoData.o \
-	concepts/linkage/AbstractIoDevice.o \
-	concepts/linkage/AbstractIoHandler.o \
+	concepts/linkage/IIoData.o \
+	concepts/linkage/IIoDevice.o \
+	concepts/linkage/IIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
     linearsystem/DiffEquation.o \
