@@ -19,7 +19,7 @@ namespace linkage {
 //      signal    <Identifier>   ! Type identifiers { on, off }
 //                               !  (default: off )
 //
-//      di        <Integer>      ! AbstractIoData's DI channel index
+//      di        <Integer>      ! IIoData's DI channel index
 //------------------------------------------------------------------------------
 class DiscreteInputFixed final: public IGenerator
 {
@@ -36,7 +36,7 @@ public:
 private:
    void processInputsImpl(const double dt, base::IIoData* const) final;
 
-   // AbstractIoData's AI channel index
+   // IIoData's AI channel index
    int getChannel() const                              { return channel; }
    bool setChannel(const int x)                        { channel = x; return true; }
    int channel{};

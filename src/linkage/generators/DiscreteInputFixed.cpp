@@ -3,8 +3,8 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 
-#include "mixr/base/concepts/linkage/AbstractIoData.hpp"
-#include "mixr/base/concepts/linkage/AbstractIoDevice.hpp"
+#include "mixr/base/concepts/linkage/IIoData.hpp"
+#include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/Identifier.hpp"
 
@@ -39,7 +39,7 @@ void DiscreteInputFixed::copyData(const DiscreteInputFixed& org, const bool)
    signal = org.signal;
 }
 
-void DiscreteInputFixed::processInputsImpl(const double dt, base::AbstractIoData* const inData)
+void DiscreteInputFixed::processInputsImpl(const double dt, base::IIoData* const inData)
 {
    // Send the value to the input data buffer
    if (inData != nullptr) {
