@@ -21,14 +21,6 @@ OBJS =  \
 	fonts/IFont.o \
 	fonts/BitmapFont.o \
 	fonts/StrokeFont.o \
-	fonts/ftgl/IFtglFont.o \
-	fonts/ftgl/FtglBitmapFont.o \
-	fonts/ftgl/FtglExtrdFont.o \
-	fonts/ftgl/FtglHaloFont.o \
-	fonts/ftgl/FtglOutlineFont.o \
-	fonts/ftgl/FtglPixmapFont.o \
-	fonts/ftgl/FtglPolygonFont.o \
-	fonts/ftgl/FtglTextureFont.o \
 	readouts/IReadout.o \
 	readouts/AsciiText.o \
 	readouts/BooleanText.o \

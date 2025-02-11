@@ -5,7 +5,8 @@ include makedefs
 # ------------------------------------------------------------------------
 # base              : -
 # dafif             : -
-# graphics          : OpenGL, FTGL, freetype
+# graphics          : OpenGL
+# graphics_ftgl     : FTGL, freetype
 # gui_glut          : freeglut
 # instruments       : -
 # interop           : -
@@ -43,6 +44,7 @@ PROJECTS += recorder
 # OpenGL-based graphics libraries
 #
 PROJECTS += graphics
+PROJECTS += graphics/fonts/ftgl
 PROJECTS += instruments
 
 #
