@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/IFtglFont.hpp"
+#include "mixr/graphics/fonts/ftgl/IFtglFont.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 

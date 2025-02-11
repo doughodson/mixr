@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/FtglExtrdFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglExtrdFont.hpp"
 
 #include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/filesystem_utils.hpp"

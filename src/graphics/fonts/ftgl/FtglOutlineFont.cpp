@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/FtglPixmapFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglOutlineFont.hpp"
 
 #include "mixr/base/util/filesystem_utils.hpp"
 
@@ -11,25 +11,25 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(FtglPixmapFont, "FTGLPixmapFonts")
-EMPTY_DELETEDATA(FtglPixmapFont)
-EMPTY_SLOTTABLE(FtglPixmapFont)
+IMPLEMENT_SUBCLASS(FtglOutlineFont, "FTGLOutlineFonts")
+EMPTY_DELETEDATA(FtglOutlineFont)
+EMPTY_SLOTTABLE(FtglOutlineFont)
 
-FtglPixmapFont::FtglPixmapFont()
+FtglOutlineFont::FtglOutlineFont()
 {
     STANDARD_CONSTRUCTOR();
 }
 
-void FtglPixmapFont::copyData(const FtglPixmapFont& org, const bool)
+void FtglOutlineFont::copyData(const FtglOutlineFont& org, const bool)
 {
     BaseClass::copyData(org);
 }
 
 //------------------------------------------------------------------------------
-// Pixmap Font functions
-// FtglPixmapFont::outputText() -- FTGLPixmapFont output routines
+// Outline Font functions
+// FtglOutlineFont::outputText() -- FTGLOutlineFont output routines
 //------------------------------------------------------------------------------
-void FtglPixmapFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool)
+void FtglOutlineFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool)
 {
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -45,31 +45,36 @@ void FtglPixmapFont::outputText(const double x, const double y, const char* txt,
     int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
-    // output the text
-    const auto ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
+    // Output the text
+    const auto ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
     if (ftgl1 != nullptr) {
+        glPushMatrix();
+        glTranslated(x, y, 0.0);
+        glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
             // Vertical text
+            GLdouble dy {getLineSpacing()};
+            if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
             char cc[2] {};
             cc[1] = '\0';
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( x, (y - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
+                glTranslated(0.0, -dy, 0.0);
             }
         } else {
             // Normal text
-            glRasterPos2d(x,y);
             ftgl1->Render(cbuf);
         }
+        glPopMatrix();
     } else {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FTGLPixmapFont::outputText() - no Pixmap font available" << std::endl;
+            std::cerr << "FtglOutlineFont::outputText() - no outline font available" << std::endl;
         }
     }
 }
 
-void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, const bool)
+void FtglOutlineFont::outputText(const char* txt, const int n, const bool vf, const bool)
 {
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -85,37 +90,40 @@ void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, con
     int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
     if (nn <= 0) return;
 
-    // output the text
-    const auto ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
+    // Output the text
+    const auto ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
     if (ftgl1 != nullptr) {
+        glPushMatrix();
+        glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
         if (vf) {
             // Vertical text
+            GLdouble dy {getLineSpacing()};
+            if (getFontHeight() != 0.0) dy = getLineSpacing() / getFontHeight();
             char cc[2] {};
             cc[1] = '\0';
-            GLdouble rpos[4] {};
-            glGetDoublev(GL_CURRENT_RASTER_POSITION, rpos);
             for (int i = 0; i < nn; i++) {
                 cc[0] = cbuf[i];
-                glRasterPos2d( rpos[0], (rpos[1] - static_cast<float>(i)*getLineSpacing()) );
                 ftgl1->Render(cc);
+                glTranslated(0.0, -dy, 0.0);
             }
         } else {
             // Normal text
             ftgl1->Render(cbuf);
         }
+        glPopMatrix();
     } else {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglPixmapFont::outputText() - no pixmap font available" << std::endl;
+            std::cerr << "FtglOutlineFont::outputText() - no outline font available" << std::endl;
         }
     }
 }
 
-void FtglPixmapFont::loadFont()
+void FtglOutlineFont::loadFont()
 {
     if (isLoaded()) return;
 
     std::string fontPathname{base::buildPath(fontDirectory(), filename())};
-    const auto ftglFont = new FTGLPixmapFont(fontPathname.c_str());
+    const auto ftglFont = new FTGLOutlineFont(fontPathname.c_str());
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -123,7 +131,7 @@ void FtglPixmapFont::loadFont()
         setFontLoaded();
     } else {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglPixmapFont::loadFont() - font did not load correctly: file: \"";
+            std::cerr << "FtglOutlineFont::loadFont() - font did not load correctly: file: \"";
             std::cerr << fontPathname << "\"";
             std::cerr << std::endl;
         }
@@ -133,3 +141,4 @@ void FtglPixmapFont::loadFont()
 
 }
 }
+

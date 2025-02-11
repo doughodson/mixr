@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_IFtglFont_HPP__
 #define __mixr_graphics_IFtglFont_HPP__
 
-#include "IFont.hpp"
+#include "../IFont.hpp"
 
 namespace mixr {
 namespace base { class Integer; }

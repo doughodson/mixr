@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/FtglPolygonFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglTextureFont.hpp"
 
 #include "mixr/base/util/filesystem_utils.hpp"
 
@@ -11,25 +11,25 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(FtglPolygonFont, "FTGLPolygonFonts")
-EMPTY_DELETEDATA(FtglPolygonFont)
-EMPTY_SLOTTABLE(FtglPolygonFont)
+IMPLEMENT_SUBCLASS(FtglTextureFont, "FTGLTextureFont")
+EMPTY_SLOTTABLE(FtglTextureFont)
+EMPTY_DELETEDATA(FtglTextureFont)
 
-FtglPolygonFont::FtglPolygonFont()
+FtglTextureFont::FtglTextureFont()
 {
     STANDARD_CONSTRUCTOR();
 }
 
-void FtglPolygonFont::copyData(const FtglPolygonFont& org, const bool)
+void FtglTextureFont::copyData(const FtglTextureFont& org, const bool)
 {
     BaseClass::copyData(org);
 }
 
 //------------------------------------------------------------------------------
-// Polygon Font functions
-// FtglPolygonFont::outputText() -- FTGLPolygonFont output routines
+// Texture Font functions
+// FtglTextureFont::outputText() -- FTGLTextureFont output routines
 //------------------------------------------------------------------------------
-void FtglPolygonFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool)
+void FtglTextureFont::outputText(const double x, const double y, const char* txt, const int n, const bool vf, const bool)
 {
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -42,11 +42,11 @@ void FtglPolygonFont::outputText(const double x, const double y, const char* txt
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN] {};
-    int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
+    int nn {xferChars(cbuf, MSG_BUF_LEN, txt, n)};
     if (nn <= 0) return;
 
     // output the text
-    const auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    const auto ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -68,13 +68,13 @@ void FtglPolygonFont::outputText(const double x, const double y, const char* txt
         }
         glPopMatrix();
     } else {
-        if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglPolygonFont::outputText() - no Polygon font available" << std::endl;
-        }
+          if (isMessageEnabled(MSG_ERROR)) {
+              std::cerr << "FtglTextureFont::outputText() - no Texture font available" << std::endl;
+          }
     }
 }
 
-void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, const bool)
+void FtglTextureFont::outputText(const char* txt, const int n, const bool vf, const bool)
 {
     // Make sure we have characters to print
     if (n <= 0) return;
@@ -87,11 +87,11 @@ void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, co
 
     // Prepare the output text
     char cbuf[MSG_BUF_LEN] {};
-    int nn {xferChars(cbuf,MSG_BUF_LEN,txt,n)};
+    int nn {xferChars(cbuf, MSG_BUF_LEN, txt, n)};
     if (nn <= 0) return;
 
     // output the text
-    const auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    const auto ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -113,17 +113,17 @@ void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, co
         glPopMatrix();
     } else {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglPolygonFont::outputText() - no Polygon font available" << std::endl;
+             std::cerr << "FtglTextureFont::outputText() - no Texture font available" << std::endl;
         }
     }
 }
 
-void FtglPolygonFont::loadFont()
+void FtglTextureFont::loadFont()
 {
     if (isLoaded()) return;
 
     std::string fontPathname{base::buildPath(fontDirectory(), filename())};
-    const auto ftglFont = new FTGLPolygonFont(fontPathname.c_str());
+    const auto ftglFont = new FTGLTextureFont(fontPathname.c_str());
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -131,7 +131,7 @@ void FtglPolygonFont::loadFont()
         setFontLoaded();
     } else {
         if (isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "FtglPolygonFont::loadFont() - font did not load correctly: file: \"";
+            std::cerr << "FtglTextureFont::loadFont() - font did not load correctly: file: \"";
             std::cerr << fontPathname << "\"";
             std::cerr << std::endl;
         }
@@ -141,4 +141,3 @@ void FtglPolygonFont::loadFont()
 
 }
 }
-

@@ -19,16 +19,16 @@ LIB = $(MIXR_LIB_DIR)/libmixr_graphics.a
 
 OBJS =  \
 	fonts/IFont.o \
-	fonts/IFtglFont.o \
 	fonts/BitmapFont.o \
-	fonts/FtglBitmapFont.o \
-	fonts/FtglExtrdFont.o \
-	fonts/FtglHaloFont.o \
-	fonts/FtglOutlineFont.o \
-	fonts/FtglPixmapFont.o \
-	fonts/FtglPolygonFont.o \
-	fonts/FtglTextureFont.o \
 	fonts/StrokeFont.o \
+	fonts/ftgl/IFtglFont.o \
+	fonts/ftgl/FtglBitmapFont.o \
+	fonts/ftgl/FtglExtrdFont.o \
+	fonts/ftgl/FtglHaloFont.o \
+	fonts/ftgl/FtglOutlineFont.o \
+	fonts/ftgl/FtglPixmapFont.o \
+	fonts/ftgl/FtglPolygonFont.o \
+	fonts/ftgl/FtglTextureFont.o \
 	readouts/IReadout.o \
 	readouts/AsciiText.o \
 	readouts/BooleanText.o \

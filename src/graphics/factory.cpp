@@ -15,15 +15,15 @@
 #include "mixr/graphics/Material.hpp"
 
 // fonts
-#include "mixr/graphics/fonts/FtglBitmapFont.hpp"
-#include "mixr/graphics/fonts/FtglExtrdFont.hpp"
-#include "mixr/graphics/fonts/FtglHaloFont.hpp"
-#include "mixr/graphics/fonts/FtglOutlineFont.hpp"
-#include "mixr/graphics/fonts/FtglPixmapFont.hpp"
-#include "mixr/graphics/fonts/FtglPolygonFont.hpp"
-#include "mixr/graphics/fonts/FtglTextureFont.hpp"
 #include "mixr/graphics/fonts/BitmapFont.hpp"
 #include "mixr/graphics/fonts/StrokeFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglBitmapFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglExtrdFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglHaloFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglOutlineFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglPixmapFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglPolygonFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglTextureFont.hpp"
 
 // fields
 #include "mixr/graphics/readouts/AsciiText.hpp"

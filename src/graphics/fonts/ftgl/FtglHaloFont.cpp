@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/FtglHaloFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglHaloFont.hpp"
 
 #include "mixr/graphics/Graphic.hpp"
 
