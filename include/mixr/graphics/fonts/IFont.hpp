@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_AbstractFont_HPP__
-#define __mixr_graphics_AbstractFont_HPP__
+#ifndef __mixr_graphics_IFont_HPP__
+#define __mixr_graphics_IFont_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -14,12 +14,12 @@ namespace base { class Integer; class Number; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class: AbstractFont
-// Description: Provides base functionality for all font classes
+// Class: IFont
+// Description: Interface that defines base functionality for all font classes
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractFont
+// Factory name: IFont
 // Slots:
 //      fontWidth        <Number>   ! Font width (default: 1)
 //      fontHeight       <Number>   ! Font height (default: 1)
@@ -32,15 +32,15 @@ namespace graphics {
 //      characterSpacing <Number>   ! spacing for each character (default: 0)
 //      lineSpacing      <Number>   ! spacing for each line (default: 0)
 //------------------------------------------------------------------------------
-class AbstractFont : public base::Object
+class IFont : public base::Object
 {
-    DECLARE_SUBCLASS(AbstractFont, base::Object)
+    DECLARE_SUBCLASS(IFont, base::Object)
 
 public:
     static const std::size_t MAX_MESSAGE_LENGTH{256};  // Max length of character buffers
 
 public:
-    AbstractFont();
+    IFont();
 
     // Outputs the text at position (x, y).
     // When 'vf' is true, text is drawn vertically

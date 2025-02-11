@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_StrokeFont_HPP__
 #define __mixr_graphics_StrokeFont_HPP__
 
-#include "AbstractFont.hpp"
+#include "IFont.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -16,9 +16,9 @@ namespace graphics {
 // Factory name: StrokeFont
 // Slots: none
 //------------------------------------------------------------------------------
-class StrokeFont final: public AbstractFont
+class StrokeFont final: public IFont
 {
-    DECLARE_SUBCLASS(StrokeFont, AbstractFont)
+    DECLARE_SUBCLASS(StrokeFont, IFont)
 
 public:
     StrokeFont();

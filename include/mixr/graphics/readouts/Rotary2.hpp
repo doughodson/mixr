@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Rotary2_HPP__
 #define __mixr_graphics_Rotary2_HPP__
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Integer; }
@@ -18,12 +18,12 @@ namespace graphics {
 // Slots: none
 //------------------------------------------------------------------------------
 // Events:
-//    SELECT    <Boolean>   ! 
-//    SELECT    <Integer>   ! 
+//    SELECT    <Boolean>   !
+//    SELECT    <Integer>   !
 //------------------------------------------------------------------------------
-class Rotary2 final: public AbstractReadout
+class Rotary2 final: public IReadout
 {
-    DECLARE_SUBCLASS(Rotary2, AbstractReadout)
+    DECLARE_SUBCLASS(Rotary2, IReadout)
 
 public:
    Rotary2();

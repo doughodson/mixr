@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_FtglPolygonFont_HPP__
 #define __mixr_graphics_FtglPolygonFont_HPP__
 
-#include "AbstractFtglFont.hpp"
+#include "IFtglFont.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -16,9 +16,9 @@ namespace graphics {
 // Factory name: FTGLPolygonFonts
 // Slots: none
 //------------------------------------------------------------------------------
-class FtglPolygonFont final: public AbstractFtglFont
+class FtglPolygonFont final: public IFtglFont
 {
-    DECLARE_SUBCLASS(FtglPolygonFont, AbstractFtglFont)
+    DECLARE_SUBCLASS(FtglPolygonFont, IFtglFont)
 
 public:
     FtglPolygonFont();

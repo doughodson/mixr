@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_FtglOutlineFont_HPP__
 #define __mixr_graphics_FtglOutlineFont_HPP__
 
-#include "AbstractFtglFont.hpp"
+#include "IFtglFont.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -16,9 +16,9 @@ namespace graphics {
 // Factory name: FTGLOutlineFonts
 // Slots: none
 //------------------------------------------------------------------------------
-class FtglOutlineFont final: public AbstractFtglFont
+class FtglOutlineFont final: public IFtglFont
 {
-    DECLARE_SUBCLASS(FtglOutlineFont, AbstractFtglFont)
+    DECLARE_SUBCLASS(FtglOutlineFont, IFtglFont)
 
 public:
     FtglOutlineFont();

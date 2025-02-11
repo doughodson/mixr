@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_BooleanText_HPP__
 #define __mixr_graphics_BooleanText_HPP__
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
 namespace base { class Object; class List; class String; }
@@ -17,9 +17,9 @@ namespace graphics {
 // Slots: none
 //------------------------------------------------------------------------------
 
-class BooleanText final: public AbstractReadout
+class BooleanText final: public IReadout
 {
-    DECLARE_SUBCLASS(BooleanText, AbstractReadout)
+    DECLARE_SUBCLASS(BooleanText, IReadout)
 
 public:
    BooleanText()                  { STANDARD_CONSTRUCTOR() }

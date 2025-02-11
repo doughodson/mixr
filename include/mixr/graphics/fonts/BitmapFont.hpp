@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_BitmapFont_HPP__
 #define __mixr_graphics_BitmapFont_HPP__
 
-#include "AbstractFont.hpp"
+#include "IFont.hpp"
 
 namespace mixr {
 namespace base { class Boolean; }
@@ -18,9 +18,9 @@ namespace graphics {
 // Slots:
 //   reverse   <Boolean>    ! Reverse video (default: false)
 //------------------------------------------------------------------------------
-class BitmapFont final: public AbstractFont
+class BitmapFont final: public IFont
 {
-    DECLARE_SUBCLASS(BitmapFont, AbstractFont)
+    DECLARE_SUBCLASS(BitmapFont, IFont)
 
 public:
     BitmapFont();

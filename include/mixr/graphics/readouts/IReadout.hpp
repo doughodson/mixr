@@ -1,6 +1,6 @@
 
-#ifndef __mixr_graphics_AbstractReadout_HPP__
-#define __mixr_graphics_AbstractReadout_HPP__
+#ifndef __mixr_graphics_IReadout_HPP__
+#define __mixr_graphics_IReadout_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/base/String.hpp"
@@ -13,12 +13,12 @@ namespace base { class Identifier; class Integer; class List; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class: AbstractReadout
-// Description: Abstract class for the readout classes
+// Class: IReadout
+// Description: Interface class for the readout classes
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractReadout
+// Factory name: IReadout
 // Slots:
 //      position       <List>        ! starting position ( Line Column ) (default: 0)
 //      width          <Integer>     ! field width (default: 0)
@@ -34,9 +34,9 @@ namespace graphics {
 //      font           <Identifier>  ! specific font name we wish to use (default: 0)
 //      startCharPos   <Integer>     ! our starting character position (we may want to skip!) (default: 0)
 //------------------------------------------------------------------------------
-class AbstractReadout : public Graphic
+class IReadout : public Graphic
 {
-   DECLARE_SUBCLASS(AbstractReadout, Graphic)
+   DECLARE_SUBCLASS(IReadout, Graphic)
 
 public:
    enum class Mode { Display, Input };
@@ -52,7 +52,7 @@ public:
         };
 
 public:
-   AbstractReadout();
+   IReadout();
 
    virtual void line(const int x)            { ln = x; return; }             // set line number
    virtual int line() const                  { return ln;      }             // return line number

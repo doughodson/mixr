@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/fonts/AbstractFont.hpp"
+#include "mixr/graphics/fonts/IFont.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Number.hpp"
@@ -14,12 +14,12 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_PARTIAL_SUBCLASS(AbstractFont, "AbstractFont")
+IMPLEMENT_PARTIAL_SUBCLASS(IFont, "IFont")
 
 const double defaultFontWidth{1.0};
 const double defaultFontHeight{1.0};
 
-BEGIN_SLOTTABLE(AbstractFont)
+BEGIN_SLOTTABLE(IFont)
         "fontWidth",
         "fontHeight",
         "fontPosition",         // Upper/Left origin of the text field
@@ -30,9 +30,9 @@ BEGIN_SLOTTABLE(AbstractFont)
         "lut",                  // Lookup Table
         "characterSpacing",     // spacing for each character
         "lineSpacing",          // spacing for each line
-END_SLOTTABLE(AbstractFont)
+END_SLOTTABLE(IFont)
 
-BEGIN_SLOT_MAP(AbstractFont)
+BEGIN_SLOT_MAP(IFont)
     ON_SLOT(1, setSlotFontWidth,        base::Number)
     ON_SLOT(2, setSlotFontHeight,       base::Number)
     ON_SLOT(3, setSlotFontPosition,     base::List)
@@ -45,14 +45,14 @@ BEGIN_SLOT_MAP(AbstractFont)
     ON_SLOT(10, setSlotLineSpacing,     base::Number);
 END_SLOT_MAP()
 
-AbstractFont::AbstractFont()
+IFont::IFont()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-void AbstractFont::initData()
+void IFont::initData()
 {
    setFontWidth( defaultFontWidth );
    setFontHeight( defaultFontHeight );
@@ -61,29 +61,29 @@ void AbstractFont::initData()
    setBitmapHeight( static_cast<int>(defaultFontHeight) );
 }
 
-AbstractFont::AbstractFont(const AbstractFont& org)
+IFont::IFont(const IFont& org)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
 
-AbstractFont::~AbstractFont()
+IFont::~IFont()
 {
    STANDARD_DESTRUCTOR()
 }
 
-AbstractFont& AbstractFont::operator=(const AbstractFont& org)
+IFont& IFont::operator=(const IFont& org)
 {
    if (this != &org) copyData(org, false);
    return *this;
 }
 
-AbstractFont* AbstractFont::clone() const
+IFont* IFont::clone() const
 {
    return nullptr;
 }
 
-void AbstractFont::copyData(const AbstractFont& org, const bool cc)
+void IFont::copyData(const IFont& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -121,7 +121,7 @@ void AbstractFont::copyData(const AbstractFont& org, const bool cc)
    bHeight = org.bHeight;
 }
 
-void AbstractFont::deleteData()
+void IFont::deleteData()
 {
    if (pLUT != nullptr) delete[] pLUT;
    pLUT = nullptr;
@@ -130,7 +130,7 @@ void AbstractFont::deleteData()
 //------------------------------------------------------------------------------
 // position() -- computes the position of the (ln, cp) pair
 //------------------------------------------------------------------------------
-void AbstractFont::position(const int ln, const int cp, GLdouble& px, GLdouble& py) const
+void IFont::position(const int ln, const int cp, GLdouble& px, GLdouble& py) const
 {
    // Compute X position based on the one based character position (column)
    px = leftSide + charSpacing*(cp-1);
@@ -142,7 +142,7 @@ void AbstractFont::position(const int ln, const int cp, GLdouble& px, GLdouble& 
 //------------------------------------------------------------------------------
 // setTextOrigin() -- sets the upper left corner
 //------------------------------------------------------------------------------
-void AbstractFont::setTextOrigin(const GLdouble x, const GLdouble y)
+void IFont::setTextOrigin(const GLdouble x, const GLdouble y)
 {
     leftSide = x;
     topSide = y;
@@ -151,7 +151,7 @@ void AbstractFont::setTextOrigin(const GLdouble x, const GLdouble y)
 //------------------------------------------------------------------------------
 // xferChars() -- transfer characters
 //------------------------------------------------------------------------------
-int AbstractFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const
+int IFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const char* const inp, const unsigned int n) const
 {
     if (outp == nullptr || inp == nullptr) return 0;
     if (n >= BUF_SIZE) return 0;
@@ -174,7 +174,7 @@ int AbstractFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const 
 //------------------------------------------------------------------------------
 // setSlotFontWidth () -- sets the font width
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontWidth(const base::Number* const x)
+bool IFont::setSlotFontWidth(const base::Number* const x)
 {
     if (x != nullptr) setFontWidth( x->asDouble() );
     return true;
@@ -183,7 +183,7 @@ bool AbstractFont::setSlotFontWidth(const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotFontHeight() - sets the font height
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontHeight (const base::Number* const x)
+bool IFont::setSlotFontHeight (const base::Number* const x)
 {
     if (x != nullptr) setFontHeight( x->asDouble() );
     return true;
@@ -192,7 +192,7 @@ bool AbstractFont::setSlotFontHeight (const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotFontPosition() - sets the font position
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFontPosition (const base::List* const x)
+bool IFont::setSlotFontPosition (const base::List* const x)
 {
     bool ok{true};
     if (x != nullptr) {
@@ -213,7 +213,7 @@ bool AbstractFont::setSlotFontPosition (const base::List* const x)
 //------------------------------------------------------------------------------
 //  setSlotBitmapWidth() - sets the bitmap width
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapWidth(const base::Integer* const x)
+bool IFont::setSlotBitmapWidth(const base::Integer* const x)
 {
     if (x != nullptr) setBitmapWidth( x->asInt() );
     return true;
@@ -222,14 +222,14 @@ bool AbstractFont::setSlotBitmapWidth(const base::Integer* const x)
 //------------------------------------------------------------------------------
 //  setBitmapHeight() - sets the bitmap height
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotBitmapHeight(const base::Integer* const x)
+bool IFont::setSlotBitmapHeight(const base::Integer* const x)
 {
     if (x != nullptr) setBitmapHeight( x->asInt() );
     return true;
 }
 
 // set font path
-bool AbstractFont::setSlotFontPath(const base::String* const x)
+bool IFont::setSlotFontPath(const base::String* const x)
 {
     bool ok{true};
     if (x != nullptr) {
@@ -251,7 +251,7 @@ bool AbstractFont::setSlotFontPath(const base::String* const x)
 //------------------------------------------------------------------------------
 //  setSlotFTGLFontFileName() - sets the FTGL Font File Name
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotFTGLFontFileName(const base::String* const x)
+bool IFont::setSlotFTGLFontFileName(const base::String* const x)
 {
     bool ok{true};
     if (x != nullptr) {
@@ -273,7 +273,7 @@ bool AbstractFont::setSlotFTGLFontFileName(const base::String* const x)
 //------------------------------------------------------------------------------
 //  setSlotLookupTable() - sets the lookup table
 //------------------------------------------------------------------------------
-bool AbstractFont::setSlotLookupTable(const base::List* const x)
+bool IFont::setSlotLookupTable(const base::List* const x)
 {
     // Load the LUT
     if (pLUT == nullptr) pLUT = new unsigned char[LUT_SIZE];
@@ -293,14 +293,14 @@ bool AbstractFont::setSlotLookupTable(const base::List* const x)
     return true;
 }
 
-bool AbstractFont::setSlotCharacterSpacing(const base::Number* const x)
+bool IFont::setSlotCharacterSpacing(const base::Number* const x)
 {
     // set our character spacing
     setCharacterSpacing(x->asDouble());
     return true;
 }
 
-bool AbstractFont::setSlotLineSpacing(const base::Number* const x)
+bool IFont::setSlotLineSpacing(const base::Number* const x)
 {
     // set our line spacing
     setLineSpacing(x->asDouble());

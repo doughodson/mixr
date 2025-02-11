@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base { class Boolean; class IColor; class Identifier; class Integer; class Number; class PairStream; class String; }
 namespace graphics {
-class AbstractFont;
+class IFont;
 class Image;
 class Texture;
 class Material;
@@ -17,9 +17,9 @@ class Material;
 //------------------------------------------------------------------------------
 // Class: Display
 //
-// Description:  Display (MFD, CDU, HUD, etc) Manager;
-//               provides a OpenGL canvas and manages the textures, fonts,
-//               materials, colors, and other attributes use by the display.
+// Description: Display (MFD, CDU, HUD, etc) Manager;
+//              provides a OpenGL canvas and manages the textures, fonts,
+//              materials, colors, and other attributes use by the display.
 //
 // Notes:
 //
@@ -245,32 +245,32 @@ public:
    // Text and font functions
    // ---
 
-   AbstractFont* getFont(const char* const name);                          // Returns a font by name.
-   const AbstractFont* getFont(const char* const name) const;              // const version
+   IFont* getFont(const char* const name);                          // Returns a font by name.
+   const IFont* getFont(const char* const name) const;              // const version
 
-   AbstractFont* getFont(const base::Identifier* const name);              // Returns a font by name (using an Identifier)
-   const AbstractFont* getFont(const base::Identifier* const name) const;  // const version
+   IFont* getFont(const base::Identifier* const name);              // Returns a font by name (using an Identifier)
+   const IFont* getFont(const base::Identifier* const name) const;  // const version
 
-   AbstractFont* getFont(const int index);                 // Returns a font by its font table index.
-   const AbstractFont* getFont(const int index) const;     // const version
+   IFont* getFont(const int index);                 // Returns a font by its font table index.
+   const IFont* getFont(const int index) const;     // const version
 
-   AbstractFont* getNormalFont();                          // Returns the normal text font
-   const AbstractFont* getNormalFont() const;              // const version
+   IFont* getNormalFont();                          // Returns the normal text font
+   const IFont* getNormalFont() const;              // const version
 
    bool isDefaultFont() const;                  // Are we using the default font?
    bool isFontReversed() const;                 // Is the reversed video font selected?
    bool isFontUnderlined() const;               // Is the underline font selected?
 
    // Sets the normal text font
-   bool setNormalFont(AbstractFont* const);
+   bool setNormalFont(IFont* const);
    bool setNormalFont(const char* const fontName);
    bool setNormalFont(const base::Identifier* const fontName);
 
    // Sets the current font) based on the font mode flags.
-   void selectFont(const bool reversed, const bool underlined, AbstractFont* newFont = nullptr);
+   void selectFont(const bool reversed, const bool underlined, IFont* newFont = nullptr);
 
-   AbstractFont* getCurrentFont();                       // Returns a pointer to the current font
-   void setFont(AbstractFont*);                          // Sets the current font.
+   IFont* getCurrentFont();                              // Returns a pointer to the current font
+   void setFont(IFont*);                                 // Sets the current font.
 
    const base::IColor* getNormColor() const;             // Returns the normal text color
    void setNormColor(const base::IColor* const nc);      // Sets the normal text color
@@ -363,8 +363,8 @@ private:
     const base::IColor* hiColor {};       // Color of a high lighted text field.
 
     base::PairStream* fontList {};        // List of fonts
-    AbstractFont* currentFont {};         // Current font
-    AbstractFont* normalFont {};          // Normal font
+    IFont* currentFont {};                // Current font
+    IFont* normalFont {};                 // Normal font
     base::Identifier* normalFontName {};  // Normal font name
     bool reversedFlg {};                  // Current font setting
     bool underlinedFlg {};                // Current font setting
@@ -378,7 +378,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotName(const base::String* const);
-    bool setSlotNormalFont(AbstractFont* const);
+    bool setSlotNormalFont(IFont* const);
     bool setSlotNormalFont(const base::Identifier* const);
     bool setSlotColorTable(base::PairStream* const list);
     bool setSlotLeftOrthoBound(const base::Number* const);
@@ -428,7 +428,7 @@ inline const base::Vec4d& Display::getCurrentColor() const       { return color;
 
 inline void Display::getMouse(int* const x, int* const y) const  { *x = mx; *y = my; }
 
-inline AbstractFont* Display::getCurrentFont()                   { return currentFont; }
+inline IFont* Display::getCurrentFont()                          { return currentFont; }
 inline bool Display::isFontReversed() const                      { return reversedFlg; }
 inline bool Display::isFontUnderlined() const                    { return underlinedFlg; }
 inline bool Display::isDefaultFont() const                       { return currentFont == nullptr; }

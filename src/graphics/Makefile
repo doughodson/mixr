@@ -18,8 +18,8 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_graphics.a
 
 OBJS =  \
-	fonts/AbstractFont.o \
-	fonts/AbstractFtglFont.o \
+	fonts/IFont.o \
+	fonts/IFtglFont.o \
 	fonts/BitmapFont.o \
 	fonts/FtglBitmapFont.o \
 	fonts/FtglExtrdFont.o \
@@ -29,7 +29,7 @@ OBJS =  \
 	fonts/FtglPolygonFont.o \
 	fonts/FtglTextureFont.o \
 	fonts/StrokeFont.o \
-	readouts/AbstractReadout.o \
+	readouts/IReadout.o \
 	readouts/AsciiText.o \
 	readouts/BooleanText.o \
 	readouts/Cursor.o \

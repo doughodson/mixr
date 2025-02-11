@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_FtglPixmapFont_HPP__
 #define __mixr_graphics_FtglPixmapFont_HPP__
 
-#include "AbstractFtglFont.hpp"
+#include "IFtglFont.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -16,9 +16,9 @@ namespace graphics {
 // Factory name: FTGLPixmapFonts
 // Slots: none
 //------------------------------------------------------------------------------
-class FtglPixmapFont final: public AbstractFtglFont
+class FtglPixmapFont final: public IFtglFont
 {
-    DECLARE_SUBCLASS(FtglPixmapFont, AbstractFtglFont)
+    DECLARE_SUBCLASS(FtglPixmapFont, IFtglFont)
 
 public:
     FtglPixmapFont();

@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Display.hpp"
 
-#include "mixr/graphics/fonts/AbstractFont.hpp"
+#include "mixr/graphics/fonts/IFont.hpp"
 #include "mixr/graphics/Image.hpp"
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/graphics/Material.hpp"
@@ -70,7 +70,7 @@ END_SLOTTABLE(Display)
 BEGIN_SLOT_MAP(Display)
    ON_SLOT( 1, setSlotName,                  base::String)
    ON_SLOT( 2, setSlotColorTable,            base::PairStream)
-   ON_SLOT( 3, setSlotNormalFont,            AbstractFont)
+   ON_SLOT( 3, setSlotNormalFont,            IFont)
    ON_SLOT( 3, setSlotNormalFont,            base::Identifier)
    ON_SLOT( 4, setSlotLeftOrthoBound,        base::Number)
    ON_SLOT( 5, setSlotRightOrthoBound,       base::Number)
@@ -861,66 +861,66 @@ bool Display::setFontList(base::PairStream* const obj)
 }
 
 // getFont() -- by name
-AbstractFont* Display::getFont(const char* const fontName)
+IFont* Display::getFont(const char* const fontName)
 {
-   AbstractFont* ft{};
+   IFont* ft{};
    if (fontList != nullptr) {
       base::Pair* p{fontList->findByName(fontName)};
-      if (p != nullptr) ft = static_cast<AbstractFont*>(p->object());
+      if (p != nullptr) ft = static_cast<IFont*>(p->object());
    }
    return ft;
 }
 // getFont() -- by name (const version)
-const AbstractFont* Display::getFont(const char* const fontName) const
+const IFont* Display::getFont(const char* const fontName) const
 {
-   const AbstractFont* ft{};
+   const IFont* ft{};
    if (fontList != nullptr) {
       const base::Pair* p{fontList->findByName(fontName)};
-      if (p != nullptr) ft = static_cast<const AbstractFont*>(p->object());
+      if (p != nullptr) ft = static_cast<const IFont*>(p->object());
    }
    return ft;
 }
 
 // getFont() -- by name
-AbstractFont* Display::getFont(const base::Identifier* const fontName)
+IFont* Display::getFont(const base::Identifier* const fontName)
 {
    return getFont((*fontName).c_str());
 }
 
 // getFont() -- by name (const version)
-const AbstractFont* Display::getFont(const base::Identifier* const fontName) const
+const IFont* Display::getFont(const base::Identifier* const fontName) const
 {
    return getFont((*fontName).c_str());
 }
 
 // getFont() -- by index
-AbstractFont* Display::getFont(const int index)
+IFont* Display::getFont(const int index)
 {
-   AbstractFont* ft {};
+   IFont* ft {};
    if (fontList != nullptr) {
       base::Pair* p{fontList->getPosition(index+1)};
-      if (p != nullptr) ft = static_cast<AbstractFont*>(p->object());
+      if (p != nullptr) ft = static_cast<IFont*>(p->object());
    }
    return ft;
 }
 
 // getFont() -- by index (const version)
-const AbstractFont* Display::getFont(const int index) const
+const IFont* Display::getFont(const int index) const
 {
-   const AbstractFont* ft{};
+   const IFont* ft{};
    if (fontList != nullptr) {
       const base::Pair* p{fontList->getPosition(index+1)};
-      if (p != nullptr) ft = static_cast<const AbstractFont*>(p->object());
+      if (p != nullptr) ft = static_cast<const IFont*>(p->object());
    }
    return ft;
 }
 
 
 // selectFont() -- select the current font based on mode flags
-void Display::selectFont(const bool reversed, const bool underlined, AbstractFont* newFont)
+void Display::selectFont(const bool reversed, const bool underlined, IFont* newFont)
 {
    // set our font initially to the one given to us
-   AbstractFont* font{newFont};
+   IFont* font{newFont};
    if (font == nullptr) {
       // our font is default, since none was specified
       font = getNormalFont();
@@ -935,7 +935,7 @@ void Display::selectFont(const bool reversed, const bool underlined, AbstractFon
 }
 
 // setFont() -- change the current font
-void Display::setFont(AbstractFont* newFont)
+void Display::setFont(IFont* newFont)
 {
    if (currentFont != newFont) {
       if (currentFont != nullptr) currentFont->unref();
@@ -947,7 +947,7 @@ void Display::setFont(AbstractFont* newFont)
 }
 
 // getNormalFont() --- (look it up, if needed)
-AbstractFont* Display::getNormalFont()
+IFont* Display::getNormalFont()
 {
    if (normalFont == nullptr && normalFontName != nullptr) {
       normalFont = getFont(normalFontName);
@@ -965,13 +965,13 @@ AbstractFont* Display::getNormalFont()
 }
 
 // getNormalFont() --- (const version -- no lookup)
-const AbstractFont* Display::getNormalFont() const
+const IFont* Display::getNormalFont() const
 {
    return normalFont;
 }
 
 // setNormalFont() ---
-bool Display::setNormalFont(AbstractFont* const f)
+bool Display::setNormalFont(IFont* const f)
 {
    bool ok{true};
    if (normalFont != nullptr) normalFont->unref();
@@ -991,7 +991,7 @@ bool Display::setNormalFont(const char* const fontName)
       setNormalFont( getFont(fontName) );
    } else {
       if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
-      setNormalFont(static_cast<AbstractFont*>(nullptr));
+      setNormalFont(static_cast<IFont*>(nullptr));
    }
    return true;
 }
@@ -1007,7 +1007,7 @@ bool Display::setNormalFont(const base::Identifier* const fontName)
       setNormalFont( getFont(fontName) );
    } else {
       if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
-      setNormalFont(static_cast<AbstractFont*>(nullptr));
+      setNormalFont(static_cast<IFont*>(nullptr));
    }
    return true;
 }
@@ -1422,7 +1422,7 @@ bool Display::setSlotColorTable(base::PairStream* const x)
     return setColorTable(x);
 }
 
-bool Display::setSlotNormalFont(AbstractFont* const x)
+bool Display::setSlotNormalFont(IFont* const x)
 {
     return setNormalFont(x);
 }

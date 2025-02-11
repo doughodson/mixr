@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Rotary_HPP__
 #define __mixr_graphics_Rotary_HPP__
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -16,9 +16,9 @@ namespace graphics {
 // Factory name: Rotary
 // Slots: none
 //------------------------------------------------------------------------------
-class Rotary final: public AbstractReadout
+class Rotary final: public IReadout
 {
-    DECLARE_SUBCLASS(Rotary, AbstractReadout)
+    DECLARE_SUBCLASS(Rotary, IReadout)
 
 public:
    Rotary();

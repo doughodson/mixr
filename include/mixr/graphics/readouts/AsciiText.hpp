@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_AsciiText_HPP__
 #define __mixr_graphics_AsciiText_HPP__
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
 namespace base { class Object; class List; class String; }
@@ -19,9 +19,9 @@ namespace graphics {
 //    text   <List>       ! Text List
 //------------------------------------------------------------------------------
 
-class AsciiText final: public AbstractReadout
+class AsciiText final: public IReadout
 {
-    DECLARE_SUBCLASS(AsciiText, AbstractReadout)
+    DECLARE_SUBCLASS(AsciiText, IReadout)
 
 public:
    AsciiText()                  { STANDARD_CONSTRUCTOR() }

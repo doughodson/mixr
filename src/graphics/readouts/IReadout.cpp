@@ -1,5 +1,5 @@
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Page.hpp"
@@ -16,9 +16,9 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(AbstractReadout, "AbstractReadout")
+IMPLEMENT_ABSTRACT_SUBCLASS(IReadout, "IReadout")
 
-BEGIN_SLOTTABLE(AbstractReadout)
+BEGIN_SLOTTABLE(IReadout)
     "position",         // 1) Starting position ( ln cp )
     "width",            // 2) Field width
     "highLight",        // 3) Highlight text flag
@@ -31,9 +31,9 @@ BEGIN_SLOTTABLE(AbstractReadout)
     "inheritColor",     //10) Inherit color of our container (instead of using default color)
     "font",             //11) Type of font to use before drawing
     "startCharPos",     //12) Our starting character position (we may want to skip!)
-END_SLOTTABLE(AbstractReadout)
+END_SLOTTABLE(IReadout)
 
-BEGIN_SLOT_MAP(AbstractReadout)
+BEGIN_SLOT_MAP(IReadout)
     ON_SLOT(1,  setSlotPosition,      base::List)
     ON_SLOT(2,  setSlotWidth,         base::Integer)
     ON_SLOT(3,  setSlotHighlight,     base::Boolean)
@@ -48,7 +48,7 @@ BEGIN_SLOT_MAP(AbstractReadout)
     ON_SLOT(12, setSlotStartCharPos,  base::Integer)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(AbstractReadout)
+BEGIN_EVENT_HANDLER(IReadout)
     if (mode == Mode::Input) {
         bool kb {( _event >= 0x20 && _event <= 0x7f )};
         ON_EVENT(FORWARD_SPACE,onForwardSpace)
@@ -75,13 +75,13 @@ BEGIN_EVENT_HANDLER(AbstractReadout)
     ON_EVENT_OBJ(SET_JUSTIFICATION, setSlotJustification, base::Identifier)
 END_EVENT_HANDLER()
 
-AbstractReadout::AbstractReadout()
+IReadout::IReadout()
 {
     STANDARD_CONSTRUCTOR()
     jmode = base::Justify::None;
 }
 
-void AbstractReadout::copyData(const AbstractReadout& org, const bool)
+void IReadout::copyData(const IReadout& org, const bool)
 {
     BaseClass::copyData(org);
     origStr = org.origStr;
@@ -102,7 +102,7 @@ void AbstractReadout::copyData(const AbstractReadout& org, const bool)
     fontName = org.fontName;
 }
 
-void AbstractReadout::deleteData()
+void IReadout::deleteData()
 {
     origStr.clear();
     inputExample.clear();
@@ -122,7 +122,7 @@ void AbstractReadout::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void AbstractReadout::updateData(const double dt)
+void IReadout::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -155,7 +155,7 @@ void AbstractReadout::updateData(const double dt)
 //------------------------------------------------------------------------------
 // withinField() -- Return True/False if cp,ln is in the field space
 //------------------------------------------------------------------------------
-bool AbstractReadout::withinField(const int l, const int c) const
+bool IReadout::withinField(const int l, const int c) const
 {
     bool stat{};
     if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
@@ -165,7 +165,7 @@ bool AbstractReadout::withinField(const int l, const int c) const
 //------------------------------------------------------------------------------
 // setText() -- set the field's text string
 //------------------------------------------------------------------------------
-void AbstractReadout::setText(const char s[])
+void IReadout::setText(const char s[])
 {
     origStr = s;
     if (mode == Mode::Display) {
@@ -176,12 +176,12 @@ void AbstractReadout::setText(const char s[])
 //------------------------------------------------------------------------------
 // justification() --
 //------------------------------------------------------------------------------
-base::Justify AbstractReadout::justification() const
+base::Justify IReadout::justification() const
 {
     return jmode;
 }
 
-base::Justify AbstractReadout::justification(const base::Justify t)
+base::Justify IReadout::justification(const base::Justify t)
 {
     jmode = t;
     if (mode == Mode::Display) {
@@ -193,7 +193,7 @@ base::Justify AbstractReadout::justification(const base::Justify t)
 //------------------------------------------------------------------------------
 // setMode() -- set the mode of the field (display, input)
 //------------------------------------------------------------------------------
-AbstractReadout::Mode AbstractReadout::setMode(const AbstractReadout::Mode nmode)
+IReadout::Mode IReadout::setMode(const IReadout::Mode nmode)
 {
     Mode omode = mode;
     mode = nmode;
@@ -235,14 +235,14 @@ AbstractReadout::Mode AbstractReadout::setMode(const AbstractReadout::Mode nmode
 //------------------------------------------------------------------------------
 
 // isValidInputPosition() -- Makes sure the position is valid for input
-bool AbstractReadout::isValidInputPosition(const int tc)
+bool IReadout::isValidInputPosition(const int tc)
 {
     return (tc == '+' || tc == '0' || tc == '#' ||
             tc == 'D' || tc == 'H' || tc == 'M' || tc == 'S');
 }
 
 // filterInputEvent() -- Filter input events using a template character (x)
-char AbstractReadout::filterInputEvent(const int event, const char x)
+char IReadout::filterInputEvent(const int event, const char x)
 {
     const char tc{static_cast<int>(x)};
     if (tc == '+') {
@@ -266,13 +266,13 @@ char AbstractReadout::filterInputEvent(const int event, const char x)
     }
 }
 
-std::size_t AbstractReadout::setExample(const char* const example)
+std::size_t IReadout::setExample(const char* const example)
 {
     inputExample = example;
     return static_cast<int>(inputExample.length());
 }
 
-void AbstractReadout::advanceSpace(const int ns)
+void IReadout::advanceSpace(const int ns)
 {
     if (mode != Mode::Input) return;
     icp += ns;
@@ -284,7 +284,7 @@ void AbstractReadout::advanceSpace(const int ns)
     }
 }
 
-void AbstractReadout::backSpace(const int ns)
+void IReadout::backSpace(const int ns)
 {
    if (mode != Mode::Input) return;
    // if we are backspacing, and we are at the starting character position that was set, we stay there!
@@ -302,7 +302,7 @@ void AbstractReadout::backSpace(const int ns)
    }
 }
 
-bool AbstractReadout::setInputCharacterPosition(const unsigned int ii)
+bool IReadout::setInputCharacterPosition(const unsigned int ii)
 {
     if (startCP > 0) {
         if (ii >= startCP) icp = ii;
@@ -312,7 +312,7 @@ bool AbstractReadout::setInputCharacterPosition(const unsigned int ii)
 }
 
 
-char AbstractReadout::getChar()
+char IReadout::getChar()
 {
     if (mode == Mode::Input)
         return str.getChar(icp);
@@ -320,30 +320,30 @@ char AbstractReadout::getChar()
         return '\0';
 }
 
-void AbstractReadout::setChar(const char c)
+void IReadout::setChar(const char c)
 {
     if (mode != Mode::Input) return;
     str.setChar(icp,c);
     advanceSpace();
 }
 
-double AbstractReadout::getInputValue() const
+double IReadout::getInputValue() const
 {
     return 0.0;
 }
 
-bool AbstractReadout::isInputValueValid() const
+bool IReadout::isInputValueValid() const
 {
     return true;
 }
 
-bool AbstractReadout::onForwardSpace()
+bool IReadout::onForwardSpace()
 {
     advanceSpace();
     return true;
 }
 
-bool AbstractReadout::onBackSpace()
+bool IReadout::onBackSpace()
 {
     backSpace();
     return true;
@@ -353,7 +353,7 @@ bool AbstractReadout::onBackSpace()
 // cursor() -- Returns true if text cursor should be seen within this
 //             object and the position of the cursor.
 //------------------------------------------------------------------------------
-bool AbstractReadout::cursor(int* l, int* c) const
+bool IReadout::cursor(int* l, int* c) const
 {
     if (mode == Mode::Input) {
         *l = ln;
@@ -370,7 +370,7 @@ bool AbstractReadout::cursor(int* l, int* c) const
 //------------------------------------------------------------------------------
 // draw this text field
 //------------------------------------------------------------------------------
-void AbstractReadout::drawFunc()
+void IReadout::drawFunc()
 {
     // Get a pointer to the current display
     graphics::Display* dsp {getDisplay()};
@@ -379,9 +379,9 @@ void AbstractReadout::drawFunc()
     // ---
     // When our container is also a Field, get a pointer to it.
     // ---
-    AbstractReadout* parent {};
+    IReadout* parent {};
     if (container() != nullptr) {
-        const auto fp = dynamic_cast<AbstractReadout*>(container());
+        const auto fp = dynamic_cast<IReadout*>(container());
         if (fp != nullptr) parent = fp;
     }
 
@@ -460,7 +460,7 @@ void AbstractReadout::drawFunc()
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
 //------------------------------------------------------------------------------
-bool AbstractReadout::setPosition(const base::List* const x)
+bool IReadout::setPosition(const base::List* const x)
 {
     bool ok {true};
     if (x != nullptr) {
@@ -479,30 +479,30 @@ bool AbstractReadout::setPosition(const base::List* const x)
     return ok;
 }
 
-bool AbstractReadout::onSetLine(const base::Integer* const x)
+bool IReadout::onSetLine(const base::Integer* const x)
 {
     if (x != nullptr) line(x->asInt());
     return true;
 }
 
-bool AbstractReadout::onSetColumn(const base::Integer* const x)
+bool IReadout::onSetColumn(const base::Integer* const x)
 {
    if (x != nullptr) column(x->asInt());
    return true;
 }
 
-bool AbstractReadout::setSlotPosition(const base::List* const x)
+bool IReadout::setSlotPosition(const base::List* const x)
 {
    return setPosition(x);
 }
 
-bool AbstractReadout::setSlotWidth(const base::Integer* const x)
+bool IReadout::setSlotWidth(const base::Integer* const x)
 {
     if (x != nullptr) width(x->asInt());
     return true;
 }
 
-bool AbstractReadout::setSlotHighlight(const base::Boolean* const x)
+bool IReadout::setSlotHighlight(const base::Boolean* const x)
 {
     if (x != nullptr) {
         // Set our mode
@@ -517,7 +517,7 @@ bool AbstractReadout::setSlotHighlight(const base::Boolean* const x)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
+                const auto child{dynamic_cast<IReadout*>(p->object())};
                 if (child != nullptr) child->setSlotHighlight(x); //changed from obj
                 item = item->getNext();
             }
@@ -528,7 +528,7 @@ bool AbstractReadout::setSlotHighlight(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotUnderline(const base::Boolean* const x)
+bool IReadout::setSlotUnderline(const base::Boolean* const x)
 {
     if (x != nullptr) {
 
@@ -545,7 +545,7 @@ bool AbstractReadout::setSlotUnderline(const base::Boolean* const x)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
+                const auto child{dynamic_cast<IReadout*>(p->object())};
                 if (child != nullptr) child->setSlotUnderline(x);
                 item = item->getNext();
             }
@@ -557,7 +557,7 @@ bool AbstractReadout::setSlotUnderline(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotReversed(const base::Boolean* const x)
+bool IReadout::setSlotReversed(const base::Boolean* const x)
 {
     if (x != nullptr) {
 
@@ -574,7 +574,7 @@ bool AbstractReadout::setSlotReversed(const base::Boolean* const x)
             const base::List::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
+                const auto child{dynamic_cast<IReadout*>(p->object())};
                 if (child != nullptr) child->setSlotReversed(x);
                 item = item->getNext();
             }
@@ -585,7 +585,7 @@ bool AbstractReadout::setSlotReversed(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotVertical(const base::Boolean* const x)
+bool IReadout::setSlotVertical(const base::Boolean* const x)
 {
     if (x != nullptr) {
         // Set our mode
@@ -598,7 +598,7 @@ bool AbstractReadout::setSlotVertical(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotBrackets(const base::Boolean* const x)
+bool IReadout::setSlotBrackets(const base::Boolean* const x)
 {
     if (x != nullptr) {
         // Set our mode
@@ -611,7 +611,7 @@ bool AbstractReadout::setSlotBrackets(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotLinked(const base::Boolean* const x)
+bool IReadout::setSlotLinked(const base::Boolean* const x)
 {
     if (x != nullptr) {
         setLinked(x->asBool());
@@ -619,7 +619,7 @@ bool AbstractReadout::setSlotLinked(const base::Boolean* const x)
     return true;
 }
 
-bool AbstractReadout::setSlotInheritColor(const base::Boolean* const x)
+bool IReadout::setSlotInheritColor(const base::Boolean* const x)
 {
     bool ok {};
     if (x != nullptr) {
@@ -628,7 +628,7 @@ bool AbstractReadout::setSlotInheritColor(const base::Boolean* const x)
     return ok;
 }
 
-bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
+bool IReadout::setSlotJustification(const base::Identifier* const x)
 {
     bool ok {true};
     if (x != nullptr) {
@@ -655,7 +655,7 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
             const base::List::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
-                const auto child{dynamic_cast<AbstractReadout*>(p->object())};
+                const auto child{dynamic_cast<IReadout*>(p->object())};
                 if (child != nullptr) child->setSlotJustification(x);
                 item = item->getNext();
             }
@@ -666,7 +666,7 @@ bool AbstractReadout::setSlotJustification(const base::Identifier* const x)
     return ok;
 }
 
-bool AbstractReadout::setSlotFont(const base::Identifier* const x)
+bool IReadout::setSlotFont(const base::Identifier* const x)
 {
     bool ok{};
     if (x == nullptr) {
@@ -680,7 +680,7 @@ bool AbstractReadout::setSlotFont(const base::Identifier* const x)
     return ok;
 }
 
-bool AbstractReadout::setSlotStartCharPos(const base::Integer* const x)
+bool IReadout::setSlotStartCharPos(const base::Integer* const x)
 {
     bool ok{};
     if (x != nullptr) {

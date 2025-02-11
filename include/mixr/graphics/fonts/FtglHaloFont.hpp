@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_FtglHaloFont_HPP__
 #define __mixr_graphics_FtglHaloFont_HPP__
 
-#include "AbstractFtglFont.hpp"
+#include "IFtglFont.hpp"
 
 class FTOutlineFont;
 
@@ -21,9 +21,9 @@ namespace graphics {
 //   halocolor      <Color>    ! Font halo color (default = nullptr)
 //   linewidth      <Number>   ! Font line width (default = 1)
 //------------------------------------------------------------------------------
-class FtglHaloFont final: public AbstractFtglFont
+class FtglHaloFont final: public IFtglFont
 {
-    DECLARE_SUBCLASS(FtglHaloFont, AbstractFtglFont)
+    DECLARE_SUBCLASS(FtglHaloFont, IFtglFont)
 
 public:
     FtglHaloFont();

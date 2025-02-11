@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_NumericReadout_HPP__
 #define __mixr_graphics_NumericReadout_HPP__
 
-#include "mixr/graphics/readouts/AbstractReadout.hpp"
+#include "mixr/graphics/readouts/IReadout.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -43,9 +43,9 @@ class ReformatScanner;
 //    00#.##    // Float w/2 right of decimal point & leading zeros
 //    +0#.##    // Float w/plus sign, 2 right of decimal point, & leading zeros
 //------------------------------------------------------------------------------
-class NumericReadout : public AbstractReadout
+class NumericReadout : public IReadout
 {
-   DECLARE_SUBCLASS(NumericReadout, AbstractReadout)
+   DECLARE_SUBCLASS(NumericReadout, IReadout)
 
 public:
    NumericReadout();

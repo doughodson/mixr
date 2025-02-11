@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_FtglExtrdFont_HPP__
 #define __mixr_graphics_FtglExtrdFont_HPP__
 
-#include "AbstractFtglFont.hpp"
+#include "IFtglFont.hpp"
 
 namespace mixr {
 namespace base { class Number; }
@@ -18,9 +18,9 @@ namespace graphics {
 // Slots:
 //   depth         <Number>    ! Depth (default: 5.0)
 //------------------------------------------------------------------------------
-class FtglExtrdFont final: public AbstractFtglFont
+class FtglExtrdFont final: public IFtglFont
 {
-    DECLARE_SUBCLASS(FtglExtrdFont, AbstractFtglFont)
+    DECLARE_SUBCLASS(FtglExtrdFont, IFtglFont)
 
 public:
     FtglExtrdFont();

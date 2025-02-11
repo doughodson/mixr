@@ -1,21 +1,21 @@
 
-#ifndef __mixr_graphics_AbstractFtglFont_HPP__
-#define __mixr_graphics_AbstractFtglFont_HPP__
+#ifndef __mixr_graphics_IFtglFont_HPP__
+#define __mixr_graphics_IFtglFont_HPP__
 
-#include "AbstractFont.hpp"
+#include "IFont.hpp"
 
 namespace mixr {
 namespace base { class Integer; }
 namespace graphics {
 
 //----------------------------------------------------------------------------------------------------------------------------------
-// Class: AbstractFtglFont
-// Description: Abstract class for all Freetype2 font classes. This hierarchy of types
+// Class: IFtglFont
+// Description: Interface class for all Freetype2 font classes. This hierarchy of types
 //              depends upon freetype 2 and OpenGL libraries.
 //----------------------------------------------------------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractFTGLFont
+// Factory name: IFTGLFont
 //
 // Slots:
 //  faceSize      <Integer>    ! font face size (default: 1)
@@ -32,12 +32,12 @@ namespace graphics {
 // of X by Y).  You can both set the fontWidth and Height and faceSize, and that
 // will scale and then draw a font of certain facesize.
 //----------------------------------------------------------------------------------------------------------------------------------
-class AbstractFtglFont : public AbstractFont
+class IFtglFont : public IFont
 {
-    DECLARE_SUBCLASS(AbstractFtglFont, AbstractFont)
+    DECLARE_SUBCLASS(IFtglFont, IFont)
 
 public:
-    AbstractFtglFont();
+    IFtglFont();
 
     int getFaceSize()      { return fSize; };
 
