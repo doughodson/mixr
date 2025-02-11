@@ -10,7 +10,7 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: BitmapFont
-// Description: Creates and load bit map fonts
+// Description: Creates and loads bitmap fonts
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
