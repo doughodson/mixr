@@ -21,7 +21,7 @@ public:
    explicit Degrees();
    explicit Degrees(const double);
 
-   // temp method to eventually be replaced by setValue() in Quantity class
+   // temp method to eventually be replaced by setValue() in IQuantity class
    void set(const double x)       { setValue(convertToBaseUnit(x)); }
 
 private:

@@ -20,7 +20,7 @@ class Number;
 //              input values (for a given unit) from their use within a specific
 //              model.
 //
-// Factory name: AbstractQuantity
+// Factory name: IQuantity
 //------------------------------------------------------------------------------
 class IQuantity : public Object
 {

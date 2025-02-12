@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Cmy, "Cmy")
+IMPLEMENT_SUBCLASS(Cmy, "cmy")
 EMPTY_DELETEDATA(Cmy)
 
 BEGIN_SLOTTABLE(Cmy)

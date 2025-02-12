@@ -21,7 +21,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Yiq
+// Factory name: yiq
 //
 // Slots:
 //       Y  <Number>  Y component (0.0 to 1.0) (default: 0.0)

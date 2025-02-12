@@ -15,7 +15,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: HLS
+// Factory name: hls
 //
 // Slots:
 //     hue         <Number>  ! hue component (0.0 to 360.0, default: 0.0)

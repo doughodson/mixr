@@ -271,7 +271,7 @@ Object* factory(const std::string& name)
         obj = new DecibelSquareMeters();
     }
 
-    // units: distances
+    // units: length
     else if ( name == Meters::getFactoryName() ) {
         obj = new Meters();
     }

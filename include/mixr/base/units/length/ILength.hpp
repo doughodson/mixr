@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Distance_HPP__
-#define __mixr_base_Distance_HPP__
+#ifndef __mixr_base_ILength_HPP__
+#define __mixr_base_ILength_HPP__
 
 #include "mixr/base/units/IQuantity.hpp"
 

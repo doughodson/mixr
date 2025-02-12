@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Cie, "Cie")
+IMPLEMENT_SUBCLASS(Cie, "cie")
 
 BEGIN_SLOTTABLE(Cie)
     "luminance", // 1: ... Luminance component, range(0.0 to 1.0)

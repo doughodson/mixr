@@ -36,7 +36,7 @@ class Number;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Hsv
+// Factory name: hsv
 //
 // Slots:
 //     hue        <Number>  ! Set the hue component (0.0 to 360.0, default: 0.0)

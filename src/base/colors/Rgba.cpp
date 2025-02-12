@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rgba, "Rgba")
+IMPLEMENT_SUBCLASS(Rgba, "rgba")
 EMPTY_COPYDATA(Rgba)
 EMPTY_DELETEDATA(Rgba)
 

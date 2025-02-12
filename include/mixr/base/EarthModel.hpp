@@ -18,8 +18,8 @@ class Number;
 //
 // Factory name: EarthModel
 // Slots:
-//     a    <Length>    ! Semi major axis
-//     b    <Length>    ! Semi minor axis
+//     a    <ILength>    ! Semi major axis
+//     b    <ILength>    ! Semi minor axis
 //     f    <Number>    ! Flattening
 //------------------------------------------------------------------------------
 class EarthModel : public Object

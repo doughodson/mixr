@@ -6,7 +6,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rgb, "Rgb")
+IMPLEMENT_SUBCLASS(Rgb, "rgb")
 EMPTY_DELETEDATA(Rgb)
 
 BEGIN_SLOTTABLE(Rgb)

@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hsva, "Hsva")
+IMPLEMENT_SUBCLASS(Hsva, "hsva")
 EMPTY_COPYDATA(Hsva)
 EMPTY_DELETEDATA(Hsva)
 

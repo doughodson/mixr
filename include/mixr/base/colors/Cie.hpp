@@ -19,7 +19,7 @@ class Table1;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Cie
+// Factory name: cie
 // Slots:
 //     luminance <Number>         ! Luminance component (0.0 to 1.0) (default: 0)
 //     x         <Number>         ! Green component     (0.0 to 1.0) (default: 0)
