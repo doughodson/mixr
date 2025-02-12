@@ -233,7 +233,7 @@ clean:
 	-rm -f units/power/*.o
 	-rm -f units/rate/*.o
 	-rm -f units/time/*.o
-	-rm -f units/volumne/*.o
+	-rm -f units/volume/*.o
 	-rm -f units/*.o
 	-rm -f util/platform/*.o
 	-rm -f util/*.o
