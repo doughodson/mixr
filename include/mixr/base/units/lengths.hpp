@@ -12,7 +12,7 @@
 
 // unit classes
 #include "mixr/base/units/length/CentiMeters.hpp"
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 #include "mixr/base/units/length/Feet.hpp"
 #include "mixr/base/units/length/Inches.hpp"
 #include "mixr/base/units/length/KiloMeters.hpp"

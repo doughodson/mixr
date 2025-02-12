@@ -11,7 +11,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 // unit classes
-#include "mixr/base/units/angle/Angle.hpp"
+#include "mixr/base/units/angle/IAngle.hpp"
 #include "mixr/base/units/angle/Degrees.hpp"
 #include "mixr/base/units/angle/Radians.hpp"
 #include "mixr/base/units/angle/Semicircles.hpp"

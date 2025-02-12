@@ -11,7 +11,7 @@
 #include "mixr/base/units/util/force_utils.hpp"
 
 // unit classes
-#include "mixr/base/units/force/Force.hpp"
+#include "mixr/base/units/force/IForce.hpp"
 #include "mixr/base/units/force/KiloNewtons.hpp"
 #include "mixr/base/units/force/Newtons.hpp"
 #include "mixr/base/units/force/Poundals.hpp"

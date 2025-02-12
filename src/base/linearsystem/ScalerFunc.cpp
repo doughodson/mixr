@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(ScalerFunc)
 END_SLOTTABLE(ScalerFunc)
 
 BEGIN_SLOT_MAP(ScalerFunc)
-   ON_SLOT( 1, setSlotRate, Frequency)
+   ON_SLOT( 1, setSlotRate, IFrequency)
    ON_SLOT( 1, setSlotRate, Integer)
    ON_SLOT( 2, setSlotX0,   Number)
    ON_SLOT( 3, setSlotY0,   Number)
@@ -148,7 +148,7 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool ScalerFunc::setSlotRate(const Frequency* const msg)
+bool ScalerFunc::setSlotRate(const IFrequency* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

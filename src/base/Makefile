@@ -102,11 +102,11 @@ OBJS =  \
 	ubf/IState.o \
 	ubf/Agent.o \
 	ubf/Arbiter.o \
-	units/angle/Angle.o \
+	units/angle/IAngle.o \
 	units/angle/Degrees.o \
 	units/angle/Radians.o \
 	units/angle/Semicircles.o \
-	units/area/Area.o \
+	units/area/IArea.o \
 	units/area/DecibelSquareMeters.o \
 	units/area/SquareCentiMeters.o \
 	units/area/SquareFeet.o \
@@ -118,16 +118,16 @@ OBJS =  \
 	units/area/SquareYards.o \
 	units/energy/BTUs.o \
 	units/energy/Calories.o \
-	units/energy/Energy.o \
+	units/energy/IEnergy.o \
 	units/energy/FootPounds.o \
 	units/energy/Joules.o \
 	units/energy/KiloWattHours.o \
-	units/force/Force.o \
+	units/force/IForce.o \
 	units/force/KiloNewtons.o \
 	units/force/Newtons.o \
 	units/force/Poundals.o \
 	units/force/PoundForces.o \
-	units/frequency/Frequency.o \
+	units/frequency/IFrequency.o \
 	units/frequency/GigaHertz.o \
 	units/frequency/Hertz.o \
 	units/frequency/KiloHertz.o \
@@ -137,7 +137,7 @@ OBJS =  \
 	units/length/Feet.o \
 	units/length/Inches.o \
 	units/length/KiloMeters.o \
-	units/length/Length.o \
+	units/length/ILength.o \
 	units/length/Meters.o \
 	units/length/MicroMeters.o \
 	units/length/Microns.o \
@@ -145,14 +145,14 @@ OBJS =  \
 	units/length/StatuteMiles.o \
 	units/mass/Grams.o \
 	units/mass/KiloGrams.o \
-	units/mass/Mass.o \
+	units/mass/IMass.o \
 	units/mass/Slugs.o \
 	units/power/DecibelMilliWatts.o \
 	units/power/DecibelWatts.o \
 	units/power/Horsepower.o \
 	units/power/KiloWatts.o \
 	units/power/MilliWatts.o \
-	units/power/Power.o \
+	units/power/IPower.o \
 	units/power/Watts.o \
 	units/time/Days.o \
 	units/time/Hours.o \
@@ -161,13 +161,13 @@ OBJS =  \
 	units/time/Minutes.o \
 	units/time/NanoSeconds.o \
 	units/time/Seconds.o \
-	units/time/Time.o \
+	units/time/ITime.o \
 	units/volume/CubicFeet.o \
 	units/volume/CubicInches.o \
 	units/volume/CubicMeters.o \
 	units/volume/Liters.o \
-	units/volume/Volume.o \
-	units/Quantity.o \
+	units/volume/IVolume.o \
+	units/IQuantity.o \
 	util/platform/system_linux.o \
 	util/endian_utils.o \
 	util/filesystem_utils.o \

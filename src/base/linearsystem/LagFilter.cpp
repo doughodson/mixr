@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(LagFilter)
 END_SLOTTABLE(LagFilter)
 
 BEGIN_SLOT_MAP(LagFilter)
-   ON_SLOT( 1, setSlotTau, base::Time)
+   ON_SLOT( 1, setSlotTau, base::ITime)
    ON_SLOT( 1, setSlotTau, base::Number)
 END_SLOT_MAP()
 
@@ -61,7 +61,7 @@ bool LagFilter::setTau(const double v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setSlotTau(const base::Time* const x)
+bool LagFilter::setSlotTau(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

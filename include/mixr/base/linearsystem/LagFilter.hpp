@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Time;
+class ITime;
 
 //------------------------------------------------------------------------------
 // Class:  LagFilter
@@ -44,7 +44,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotTau(const base::Time* const);
+   bool setSlotTau(const base::ITime* const);
    bool setSlotTau(const base::Number* const);
 };
 

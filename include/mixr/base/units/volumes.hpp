@@ -15,6 +15,6 @@
 #include "mixr/base/units/volume/CubicInches.hpp"
 #include "mixr/base/units/volume/CubicMeters.hpp"
 #include "mixr/base/units/volume/Liters.hpp"
-#include "mixr/base/units/volume/Volume.hpp"
+#include "mixr/base/units/volume/IVolume.hpp"
 
 #endif

@@ -13,7 +13,7 @@
 // unit classes
 #include "mixr/base/units/energy/BTUs.hpp"
 #include "mixr/base/units/energy/Calories.hpp"
-#include "mixr/base/units/energy/Energy.hpp"
+#include "mixr/base/units/energy/IEnergy.hpp"
 #include "mixr/base/units/energy/FootPounds.hpp"
 #include "mixr/base/units/energy/Joules.hpp"
 #include "mixr/base/units/energy/KiloWattHours.hpp"

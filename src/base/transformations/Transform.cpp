@@ -17,13 +17,13 @@ BEGIN_SLOTTABLE(Transform)
 END_SLOTTABLE(Transform)
 
 BEGIN_SLOT_MAP(Transform)
-    ON_SLOT(1, setSlotComputematrix1, Angle)
+    ON_SLOT(1, setSlotComputematrix1, IAngle)
     ON_SLOT(1, setSlotComputematrix1, Number)
-    ON_SLOT(2, setSlotComputematrix2, Angle)
+    ON_SLOT(2, setSlotComputematrix2, IAngle)
     ON_SLOT(2, setSlotComputematrix2, Number)
-    ON_SLOT(3, setSlotComputematrix3, Angle)
+    ON_SLOT(3, setSlotComputematrix3, IAngle)
     ON_SLOT(3, setSlotComputematrix3, Number)
-    ON_SLOT(4, setSlotComputematrix4, Angle)
+    ON_SLOT(4, setSlotComputematrix4, IAngle)
     ON_SLOT(4, setSlotComputematrix4, Number)
 END_SLOT_MAP()
 
@@ -49,7 +49,7 @@ void Transform::deleteData()
    nv = 0;
 }
 
-bool Transform::setSlotComputematrix1(const Angle* const x)
+bool Transform::setSlotComputematrix1(const IAngle* const x)
 {
     bool ok{true};
     if (nv == 0 && isClassType(typeid(Rotation))) {
@@ -69,7 +69,7 @@ bool Transform::setSlotComputematrix1(const Number* const x)
     return true;
 }
 
-bool Transform::setSlotComputematrix2(const Angle* const x)
+bool Transform::setSlotComputematrix2(const IAngle* const x)
 {
     bool ok{true};
     if (nv == 0 && isClassType(typeid(Rotation))) {
@@ -89,7 +89,7 @@ bool Transform::setSlotComputematrix2(const Number* const x)
     return true;
 }
 
-bool Transform::setSlotComputematrix3(const Angle* const x)
+bool Transform::setSlotComputematrix3(const IAngle* const x)
 {
     bool ok{true};
     if (nv == 0 && isClassType(typeid(Rotation))) {
@@ -109,7 +109,7 @@ bool Transform::setSlotComputematrix3(const Number* const x)
     return true;
 }
 
-bool Transform::setSlotComputematrix4(const Angle* const x)
+bool Transform::setSlotComputematrix4(const IAngle* const x)
 {
     bool ok{true};
     if (nv == 0 && isClassType(typeid(Rotation))) {

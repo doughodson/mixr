@@ -18,6 +18,6 @@
 #include "mixr/base/units/time/Minutes.hpp"
 #include "mixr/base/units/time/NanoSeconds.hpp"
 #include "mixr/base/units/time/Seconds.hpp"
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 #endif

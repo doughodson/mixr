@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Frequency;
+class IFrequency;
 class Integer;
 
 //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotSampleRate(const base::Frequency* const);
+   bool setSlotSampleRate(const base::IFrequency* const);
    bool setSlotSampleRate(const base::Integer* const);
 };
 

@@ -16,7 +16,7 @@
 #include "mixr/base/units/power/Horsepower.hpp"
 #include "mixr/base/units/power/KiloWatts.hpp"
 #include "mixr/base/units/power/MilliWatts.hpp"
-#include "mixr/base/units/power/Power.hpp"
+#include "mixr/base/units/power/IPower.hpp"
 #include "mixr/base/units/power/Watts.hpp"
 
 #endif

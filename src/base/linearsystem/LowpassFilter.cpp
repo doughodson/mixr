@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(LowpassFilter)
 END_SLOTTABLE(LowpassFilter)
 
 BEGIN_SLOT_MAP(LowpassFilter)
-   ON_SLOT( 1, setSlotWc, base::Frequency)
+   ON_SLOT( 1, setSlotWc, base::IFrequency)
    ON_SLOT( 1, setSlotWc, base::Number)
 END_SLOT_MAP()
 
@@ -55,7 +55,7 @@ bool LowpassFilter::setWc(const double v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LowpassFilter::setSlotWc(const base::Frequency* const msg)
+bool LowpassFilter::setSlotWc(const base::IFrequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

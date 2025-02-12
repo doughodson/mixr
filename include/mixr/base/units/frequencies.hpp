@@ -11,7 +11,7 @@
 #include "mixr/base/units/util/frequency_utils.hpp"
 
 // unit classes
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 #include "mixr/base/units/frequency/GigaHertz.hpp"
 #include "mixr/base/units/frequency/Hertz.hpp"
 #include "mixr/base/units/frequency/KiloHertz.hpp"

@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(SaH)
 END_SLOTTABLE(SaH)
 
 BEGIN_SLOT_MAP(SaH)
-   ON_SLOT( 1, setSlotSampleRate, base::Frequency)
+   ON_SLOT( 1, setSlotSampleRate, base::IFrequency)
    ON_SLOT( 1, setSlotSampleRate, base::Integer)
 END_SLOT_MAP()
 
@@ -130,7 +130,7 @@ bool SaH::setSampleRate(const unsigned int v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool SaH::setSlotSampleRate(const base::Frequency* const msg)
+bool SaH::setSlotSampleRate(const base::IFrequency* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

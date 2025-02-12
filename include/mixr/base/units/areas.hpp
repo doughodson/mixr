@@ -11,7 +11,7 @@
 #include "mixr/base/units/util/area_utils.hpp"
 
 // unit classes
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 #include "mixr/base/units/area/DecibelSquareMeters.hpp"
 #include "mixr/base/units/area/SquareCentiMeters.hpp"
 #include "mixr/base/units/area/SquareFeet.hpp"

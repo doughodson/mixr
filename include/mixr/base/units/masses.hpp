@@ -13,7 +13,7 @@
 // unit classes
 #include "mixr/base/units/mass/Grams.hpp"
 #include "mixr/base/units/mass/KiloGrams.hpp"
-#include "mixr/base/units/mass/Mass.hpp"
+#include "mixr/base/units/mass/IMass.hpp"
 #include "mixr/base/units/mass/Slugs.hpp"
 
 #endif

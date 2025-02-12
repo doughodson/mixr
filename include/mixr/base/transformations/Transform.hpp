@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base {
-class Angle;
+class IAngle;
 class Number;
 
 //------------------------------------------------------------------------------
@@ -51,16 +51,16 @@ private:
    // and create the transformation matrix.  Returns true if the matrix
    // is valid.  These functions must be called in order.  For example,
    // "x" must be set before "y".
-   bool setSlotComputematrix1(const Angle* const);
+   bool setSlotComputematrix1(const IAngle* const);
    bool setSlotComputematrix1(const Number* const);
 
-   bool setSlotComputematrix2(const Angle* const);
+   bool setSlotComputematrix2(const IAngle* const);
    bool setSlotComputematrix2(const Number* const);
 
-   bool setSlotComputematrix3(const Angle* const);
+   bool setSlotComputematrix3(const IAngle* const);
    bool setSlotComputematrix3(const Number* const);
 
-   bool setSlotComputematrix4(const Angle* const);
+   bool setSlotComputematrix4(const IAngle* const);
    bool setSlotComputematrix4(const Number* const);
 };
 
