@@ -2,7 +2,7 @@
 #ifndef __mixr_Energy_HPP__
 #define __mixr_Energy_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/energy_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Energy
-// Description: Abstract class for power. Base unit is a Joule.
+// Class: IEnergy
+// Description: Interface class for power. Base unit is a Joule.
 //------------------------------------------------------------------------------
-class Energy : public Quantity
+class IEnergy : public IQuantity
 {
-   DECLARE_SUBCLASS(Energy, Quantity)
+   DECLARE_SUBCLASS(IEnergy, IQuantity)
 
 public:
-   explicit Energy();
+   explicit IEnergy();
 
    // conversion methods
    double getValueInBTUs() const            { return getValue() * energy::BTU2J; }

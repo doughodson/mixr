@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Volume_HPP__
 #define __mixr_base_Volume_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/volume_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Volume
-// Description: Abstract class for volume.  Base unit is cubic meters (m^3).
+// Class: IVolume
+// Description: Interface class for volume.  Base unit is cubic meters (m^3).
 //------------------------------------------------------------------------------
-class Volume : public Quantity
+class IVolume : public IQuantity
 {
-   DECLARE_SUBCLASS(Volume, Quantity)
+   DECLARE_SUBCLASS(IVolume, IQuantity)
 
 public:
-   explicit Volume();
+   explicit IVolume();
 
    // conversion methods
    double getValueInCubicFeet() const      { return getValue() * volume::CM2CFT;  }

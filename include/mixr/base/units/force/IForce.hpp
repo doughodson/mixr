@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Force_HPP__
-#define __mixr_base_Force_HPP__
+#ifndef __mixr_base_IForce_HPP__
+#define __mixr_base_IForce_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/force_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Force
-// Description: Abstract class for force.  Base unit is Newton.
+// Class: IForce
+// Description: Interface class for force.  Base unit is Newton.
 //------------------------------------------------------------------------------
-class Force : public Quantity
+class IForce : public IQuantity
 {
-   DECLARE_SUBCLASS(Force, Quantity)
+   DECLARE_SUBCLASS(IForce, IQuantity)
 
 public:
-   explicit Force();
+   explicit IForce();
 
    // conversion methods
    double getValueInKiloNewtons() const     { return getValue() * force::N2KN; }

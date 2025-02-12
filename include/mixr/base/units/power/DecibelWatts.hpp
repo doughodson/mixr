@@ -2,7 +2,7 @@
 #ifndef __mixr_base_DecibelWatts_HPP__
 #define __mixr_base_DecibelWatts_HPP__
 
-#include "mixr/base/units/power/Power.hpp"
+#include "mixr/base/units/power/IPower.hpp"
 
 #include "mixr/base/units/util/power_utils.hpp"
 
@@ -15,9 +15,9 @@ namespace base {
 // Class: DecibelWatts
 // Description: Concrete class to specify power in Decibel Watts
 //----------------------------------------------------------------------------
-class DecibelWatts final: public Power
+class DecibelWatts final: public IPower
 {
-   DECLARE_SUBCLASS(DecibelWatts, Power)
+   DECLARE_SUBCLASS(DecibelWatts, IPower)
 
 public:
    explicit DecibelWatts();

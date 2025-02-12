@@ -2,7 +2,7 @@
 #ifndef __mixr_BTUs_HPP__
 #define __mixr_BTUs_HPP__
 
-#include "mixr/base/units/energy/Energy.hpp"
+#include "mixr/base/units/energy/IEnergy.hpp"
 
 #include "mixr/base/units/util/energy_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: BTUs
 // Description: Concrete class to specify energy in units of BTU
 //------------------------------------------------------------------------------
-class BTUs final: public Energy
+class BTUs final: public IEnergy
 {
-   DECLARE_SUBCLASS(BTUs, Energy)
+   DECLARE_SUBCLASS(BTUs, IEnergy)
 
 public:
    explicit BTUs();

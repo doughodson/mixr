@@ -2,7 +2,7 @@
 #ifndef __mixr_base_NanoSeconds_HPP__
 #define __mixr_base_NanoSeconds_HPP__
 
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 #include "mixr/base/units/util/time_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: NanoSeconds
 // Description: Concrete class to specify a time in nanoseconds
 //------------------------------------------------------------------------------
-class NanoSeconds final: public Time
+class NanoSeconds final: public ITime
 {
-   DECLARE_SUBCLASS(NanoSeconds, Time)
+   DECLARE_SUBCLASS(NanoSeconds, ITime)
 
 public:
    explicit NanoSeconds();

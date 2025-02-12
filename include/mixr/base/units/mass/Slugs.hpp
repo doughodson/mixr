@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Slugs_HPP__
 #define __mixr_base_Slugs_HPP__
 
-#include "mixr/base/units/mass/Mass.hpp"
+#include "mixr/base/units/mass/IMass.hpp"
 
 #include "mixr/base/units/util/mass_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Slugs
 // Description: Concrete class to specify a mass in Slugs
 //------------------------------------------------------------------------------
-class Slugs : public Mass
+class Slugs : public IMass
 {
-   DECLARE_SUBCLASS(Slugs, Mass)
+   DECLARE_SUBCLASS(Slugs, IMass)
 
 public:
    explicit Slugs();

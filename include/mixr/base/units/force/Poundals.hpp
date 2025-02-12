@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Poundals_HPP__
 #define __mixr_base_Poundals_HPP__
 
-#include "mixr/base/units/force/Force.hpp"
+#include "mixr/base/units/force/IForce.hpp"
 
 #include "mixr/base/units/util/force_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Poundals
 // Description: Concrete class to specify a force in Poundals
 //------------------------------------------------------------------------------
-class Poundals final: public Force
+class Poundals final: public IForce
 {
-   DECLARE_SUBCLASS(Poundals, Force)
+   DECLARE_SUBCLASS(Poundals, IForce)
 
 public:
    explicit Poundals();

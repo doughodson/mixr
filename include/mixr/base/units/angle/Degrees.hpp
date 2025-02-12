@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Degrees_HPP__
 #define __mixr_base_Degrees_HPP__
 
-#include "mixr/base/units/angle/Angle.hpp"
+#include "mixr/base/units/angle/IAngle.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Degrees
 // Description: Concrete class to specify an angle in unit degrees
 //------------------------------------------------------------------------------
-class Degrees final: public Angle
+class Degrees final: public IAngle
 {
-   DECLARE_SUBCLASS(Degrees, Angle)
+   DECLARE_SUBCLASS(Degrees, IAngle)
 
 public:
    explicit Degrees();

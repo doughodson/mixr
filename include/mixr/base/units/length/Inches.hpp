@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Inches_HPP__
 #define __mixr_base_Inches_HPP__
 
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Inches
 // Description: Concrete class to specify length in terms of inches
 //------------------------------------------------------------------------------
-class Inches final: public Length
+class Inches final: public ILength
 {
-   DECLARE_SUBCLASS(Inches, Length)
+   DECLARE_SUBCLASS(Inches, ILength)
 
 public:
    explicit Inches();

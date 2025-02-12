@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Time_HPP__
 #define __mixr_base_Time_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/time_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Time
-// Description: Abstract class for time.  Base unit is seconds.
+// Class: ITime
+// Description: Interface class for time.  Base unit is seconds.
 //------------------------------------------------------------------------------
-class Time : public Quantity
+class ITime : public IQuantity
 {
-   DECLARE_SUBCLASS(Time, Quantity)
+   DECLARE_SUBCLASS(ITime, IQuantity)
 
 public:
-   explicit Time();
+   explicit ITime();
 
    // conversion methods
    double getValueInDays() const          { return getValue() * time::S2D;  }

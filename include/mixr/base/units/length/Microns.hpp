@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Microns_HPP__
 #define __mixr_base_Microns_HPP__
 
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Microns (same as MicroMeters)
 // Description: Concrete class to specify length in terms of microns
 //------------------------------------------------------------------------------
-class Microns final: public Length
+class Microns final: public ILength
 {
-   DECLARE_SUBCLASS(Microns, Length)
+   DECLARE_SUBCLASS(Microns, ILength)
 
 public:
    explicit Microns();

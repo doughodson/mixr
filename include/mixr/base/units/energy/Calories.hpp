@@ -2,7 +2,7 @@
 #ifndef __mixr_Calories_HPP__
 #define __mixr_Calories_HPP__
 
-#include "mixr/base/units/energy/Energy.hpp"
+#include "mixr/base/units/energy/IEnergy.hpp"
 
 #include "mixr/base/units/util/energy_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Calories
 // Description: Concrete class to specify energy in units of Calories
 //------------------------------------------------------------------------------
-class Calories final: public Energy
+class Calories final: public IEnergy
 {
-   DECLARE_SUBCLASS(Calories, Energy)
+   DECLARE_SUBCLASS(Calories, IEnergy)
 
 public:
    explicit Calories();

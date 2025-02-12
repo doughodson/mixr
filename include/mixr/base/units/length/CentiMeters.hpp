@@ -2,7 +2,7 @@
 #ifndef __mixr_base_CentiMeters_HPP__
 #define __mixr_base_CentiMeters_HPP__
 
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: CentiMeters
 // Description: Concrete class to specify length in terms of centimeters
 //------------------------------------------------------------------------------
-class CentiMeters final: public Length
+class CentiMeters final: public ILength
 {
-   DECLARE_SUBCLASS(CentiMeters, Length)
+   DECLARE_SUBCLASS(CentiMeters, ILength)
 
 public:
    explicit CentiMeters();

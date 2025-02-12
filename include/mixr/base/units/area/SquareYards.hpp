@@ -2,7 +2,7 @@
 #ifndef __mixr_base_SquareYards_HPP__
 #define __mixr_base_SquareYards_HPP__
 
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: SquareYards
 // Description: Square Meters * 1.19599
 //------------------------------------------------------------------------------
-class SquareYards final: public Area
+class SquareYards final: public IArea
 {
-    DECLARE_SUBCLASS(SquareYards, Area)
+    DECLARE_SUBCLASS(SquareYards, IArea)
 
 public:
     explicit SquareYards();

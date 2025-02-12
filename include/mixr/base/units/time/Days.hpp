@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Days_HPP__
 #define __mixr_base_Days_HPP__
 
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 #include "mixr/base/units/util/time_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Days
 // Description: Concrete class to specify a time in days
 //------------------------------------------------------------------------------
-class Days final: public Time
+class Days final: public ITime
 {
-   DECLARE_SUBCLASS(Days, Time)
+   DECLARE_SUBCLASS(Days, ITime)
 
 public:
    explicit Days();

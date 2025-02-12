@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Area_HPP__
-#define __mixr_base_Area_HPP__
+#ifndef __mixr_base_IArea_HPP__
+#define __mixr_base_IArea_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Area
-// Description: Abstract class for area - base unit is a square meter (m^2)
+// Class: IArea
+// Description: Interface class for area - base unit is a square meter (m^2)
 //------------------------------------------------------------------------------
-class Area : public Quantity
+class IArea : public IQuantity
 {
-   DECLARE_SUBCLASS(Area, Quantity)
+   DECLARE_SUBCLASS(IArea, IQuantity)
 
 public:
-   explicit Area();
+   explicit IArea();
 
    // conversion methods
    double getValueInDecibelSquareMeters() const  { return 10.0 * std::log10(getValue()); }

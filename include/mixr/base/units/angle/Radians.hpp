@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Radians_HPP__
 #define __mixr_base_Radians_HPP__
 
-#include "mixr/base/units/angle/Angle.hpp"
+#include "mixr/base/units/angle/IAngle.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: Radians
 // Description: Concrete class to specify an angle in unit radians
 //------------------------------------------------------------------------------
-class Radians final: public Angle
+class Radians final: public IAngle
 {
-   DECLARE_SUBCLASS(Radians, Angle)
+   DECLARE_SUBCLASS(Radians, IAngle)
 
 public:
    explicit Radians();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Distance_HPP__
 #define __mixr_base_Distance_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Length
-// Description: Abstract class for length.  Base unit is meters.
+// Class: ILength
+// Description: Interface class for length.  Base unit is meters.
 //------------------------------------------------------------------------------
-class Length : public Quantity
+class ILength : public IQuantity
 {
-   DECLARE_SUBCLASS(Length, Quantity)
+   DECLARE_SUBCLASS(ILength, IQuantity)
 
 public:
-   explicit Length();
+   explicit ILength();
 
    // conversion methods
    double getValueInCentiMeters() const    { return getValue() * length::M2CM; }

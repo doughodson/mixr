@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TeraHertz_HPP__
 #define __mixr_base_TeraHertz_HPP__
 
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 
 #include "mixr/base/units/util/frequency_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class:  TeraHertz
 // Description: Concrete class to specify a frequency in TeraHertz
 //------------------------------------------------------------------------------
-class TeraHertz final: public Frequency
+class TeraHertz final: public IFrequency
 {
-    DECLARE_SUBCLASS(TeraHertz, Frequency)
+    DECLARE_SUBCLASS(TeraHertz, IFrequency)
 
 public:
     explicit TeraHertz();

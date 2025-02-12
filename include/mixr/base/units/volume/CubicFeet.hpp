@@ -2,7 +2,7 @@
 #ifndef __mixr_base_CubicFeet_HPP__
 #define __mixr_base_CubicFeet_HPP__
 
-#include "mixr/base/units/volume/Volume.hpp"
+#include "mixr/base/units/volume/IVolume.hpp"
 
 #include "mixr/base/units/util/volume_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: CubicFeet
 // Description: Concrete class to specify a volume in cubit feet
 //------------------------------------------------------------------------------
-class CubicFeet final: public Volume
+class CubicFeet final: public IVolume
 {
-   DECLARE_SUBCLASS(CubicFeet, Volume)
+   DECLARE_SUBCLASS(CubicFeet, IVolume)
 
 public:
    explicit CubicFeet();

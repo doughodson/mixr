@@ -2,7 +2,7 @@
 #ifndef __mixr_base_SquareFeet_HPP__
 #define __mixr_base_SquareFeet_HPP__
 
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: SquareFeet
 // Description: Square Meters * 10.76391
 //------------------------------------------------------------------------------
-class SquareFeet final: public Area
+class SquareFeet final: public IArea
 {
-    DECLARE_SUBCLASS(SquareFeet, Area)
+    DECLARE_SUBCLASS(SquareFeet, IArea)
 
 public:
     explicit SquareFeet();

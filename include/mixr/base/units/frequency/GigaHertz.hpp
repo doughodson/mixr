@@ -2,7 +2,7 @@
 #ifndef __mixr_base_GigaHertz_HPP__
 #define __mixr_base_GigaHertz_HPP__
 
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 
 #include "mixr/base/units/util/frequency_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: GigaHertz
 // Description: Concrete class to specify a frequency in GigaHertz
 //------------------------------------------------------------------------------
-class GigaHertz final: public Frequency
+class GigaHertz final: public IFrequency
 {
-    DECLARE_SUBCLASS(GigaHertz, Frequency)
+    DECLARE_SUBCLASS(GigaHertz, IFrequency)
 
 public:
     explicit GigaHertz();

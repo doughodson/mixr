@@ -2,7 +2,7 @@
 #ifndef __mixr_base_DecibelSquareMeters_HPP__
 #define __mixr_base_DecibelSquareMeters_HPP__
 
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
 #include <cmath>
@@ -14,9 +14,9 @@ namespace base {
 // Class: DecibelSquareMeters
 // Description: 10 * Log(Square Meters)
 //------------------------------------------------------------------------------
-class DecibelSquareMeters final: public Area
+class DecibelSquareMeters final: public IArea
 {
-    DECLARE_SUBCLASS(DecibelSquareMeters, Area)
+    DECLARE_SUBCLASS(DecibelSquareMeters, IArea)
 
 public:
     explicit DecibelSquareMeters();

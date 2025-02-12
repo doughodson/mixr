@@ -2,7 +2,7 @@
 #ifndef __mixr_base_MegaHertz_HPP__
 #define __mixr_base_MegaHertz_HPP__
 
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 
 #include "mixr/base/units/util/frequency_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: MegaHertz
 // Description: Concrete class to specify a frequency in MegaHertz
 //------------------------------------------------------------------------------
-class MegaHertz final: public Frequency
+class MegaHertz final: public IFrequency
 {
-    DECLARE_SUBCLASS(MegaHertz, Frequency)
+    DECLARE_SUBCLASS(MegaHertz, IFrequency)
 
 public:
     explicit MegaHertz();

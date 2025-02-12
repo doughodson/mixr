@@ -9,11 +9,18 @@
 
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
+// other
+#include "mixr/base/EarthModel.hpp"
 
-// transformations
-#include "mixr/base/transformations/Translation.hpp"
-#include "mixr/base/transformations/Rotation.hpp"
-#include "mixr/base/transformations/Scale.hpp"
+// colors
+#include "mixr/base/colors/Cie.hpp"
+#include "mixr/base/colors/Cmy.hpp"
+#include "mixr/base/colors/Hls.hpp"
+#include "mixr/base/colors/Hsv.hpp"
+#include "mixr/base/colors/Hsva.hpp"
+#include "mixr/base/colors/Rgb.hpp"
+#include "mixr/base/colors/Rgba.hpp"
+#include "mixr/base/colors/Yiq.hpp"
 
 // linear system
 #include "mixr/base/linearsystem/FirstOrderTf.hpp"
@@ -28,6 +35,25 @@
 #include "mixr/base/linearsystem/Sz1.hpp"
 #include "mixr/base/linearsystem/Sz2.hpp"
 
+// network handlers
+#include "mixr/base/network/TcpClient.hpp"
+#include "mixr/base/network/TcpServerMultiple.hpp"
+#include "mixr/base/network/TcpServerSingle.hpp"
+#include "mixr/base/network/UdpBroadcastHandler.hpp"
+#include "mixr/base/network/UdpMulticastHandler.hpp"
+#include "mixr/base/network/UdpUnicastHandler.hpp"
+
+// numeric classes and operators
+#include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/Complex.hpp"
+#include "mixr/base/numeric/Decibel.hpp"
+#include "mixr/base/numeric/Integer.hpp"
+#include "mixr/base/numeric/Float.hpp"
+#include "mixr/base/numeric/operators/Add.hpp"
+#include "mixr/base/numeric/operators/Divide.hpp"
+#include "mixr/base/numeric/operators/Multiply.hpp"
+#include "mixr/base/numeric/operators/Subtract.hpp"
+
 // relation classes (functions and tables)
 #include "mixr/base/relations/Func1.hpp"
 #include "mixr/base/relations/Func2.hpp"
@@ -41,34 +67,14 @@
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/relations/Table5.hpp"
 
-// numeric classes and operators
-#include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Complex.hpp"
-#include "mixr/base/numeric/Decibel.hpp"
-#include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/numeric/operators/Add.hpp"
-#include "mixr/base/numeric/operators/Divide.hpp"
-#include "mixr/base/numeric/operators/Multiply.hpp"
-#include "mixr/base/numeric/operators/Subtract.hpp"
+// transformations
+#include "mixr/base/transformations/Translation.hpp"
+#include "mixr/base/transformations/Rotation.hpp"
+#include "mixr/base/transformations/Scale.hpp"
 
-// network handlers
-#include "mixr/base/network/TcpClient.hpp"
-#include "mixr/base/network/TcpServerMultiple.hpp"
-#include "mixr/base/network/TcpServerSingle.hpp"
-#include "mixr/base/network/UdpBroadcastHandler.hpp"
-#include "mixr/base/network/UdpMulticastHandler.hpp"
-#include "mixr/base/network/UdpUnicastHandler.hpp"
-
-// colors
-#include "mixr/base/colors/Cie.hpp"
-#include "mixr/base/colors/Cmy.hpp"
-#include "mixr/base/colors/Hls.hpp"
-#include "mixr/base/colors/Hsv.hpp"
-#include "mixr/base/colors/Hsva.hpp"
-#include "mixr/base/colors/Rgb.hpp"
-#include "mixr/base/colors/Rgba.hpp"
-#include "mixr/base/colors/Yiq.hpp"
+// ubf
+#include "mixr/base/ubf/Agent.hpp"
+#include "mixr/base/ubf/Arbiter.hpp"
 
 // units
 #include "mixr/base/units/angles.hpp"
@@ -80,13 +86,6 @@
 #include "mixr/base/units/masses.hpp"
 #include "mixr/base/units/powers.hpp"
 #include "mixr/base/units/times.hpp"
-
-// other
-#include "mixr/base/EarthModel.hpp"
-
-// ubf
-#include "mixr/base/ubf/Agent.hpp"
-#include "mixr/base/ubf/Arbiter.hpp"
 
 #include <string>
 

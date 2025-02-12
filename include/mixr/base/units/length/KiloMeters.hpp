@@ -2,7 +2,7 @@
 #ifndef __mixr_base_KiloMeters_HPP__
 #define __mixr_base_KiloMeters_HPP__
 
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: KiloMeters
 // Description: Concrete class to specify length in terms of kilometers
 //------------------------------------------------------------------------------
-class KiloMeters final: public Length
+class KiloMeters final: public ILength
 {
-   DECLARE_SUBCLASS(KiloMeters, Length)
+   DECLARE_SUBCLASS(KiloMeters, ILength)
 
 public:
    explicit KiloMeters();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Minutes_HPP__
 #define __mixr_base_Minutes_HPP__
 
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 #include "mixr/base/units/util/time_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Minutes
 // Description: Concrete class to specify a time in minutes
 //------------------------------------------------------------------------------
-class Minutes final: public Time
+class Minutes final: public ITime
 {
-   DECLARE_SUBCLASS(Minutes, Time)
+   DECLARE_SUBCLASS(Minutes, ITime)
 
 public:
    explicit Minutes();

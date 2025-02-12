@@ -2,7 +2,7 @@
 #ifndef __mixr_base_KiloNewtons_HPP__
 #define __mixr_base_KiloNewtons_HPP__
 
-#include "mixr/base/units/force/Force.hpp"
+#include "mixr/base/units/force/IForce.hpp"
 
 #include "mixr/base/units/util/force_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: KiloNewtons
 // Description: Concrete class to specify a force in KiloNewtons
 //------------------------------------------------------------------------------
-class KiloNewtons final: public Force
+class KiloNewtons final: public IForce
 {
-   DECLARE_SUBCLASS(KiloNewtons, Force)
+   DECLARE_SUBCLASS(KiloNewtons, IForce)
 
 public:
    explicit KiloNewtons();

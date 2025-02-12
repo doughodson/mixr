@@ -2,7 +2,7 @@
 #ifndef __mixr_base_KiloGrams_HPP__
 #define __mixr_base_KiloGrams_HPP__
 
-#include "mixr/base/units/mass/Mass.hpp"
+#include "mixr/base/units/mass/IMass.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: KiloGrams
 // Description: Concrete class to specify a mass in KiloGrams
 //------------------------------------------------------------------------------
-class KiloGrams final: public Mass
+class KiloGrams final: public IMass
 {
-   DECLARE_SUBCLASS(KiloGrams, Mass)
+   DECLARE_SUBCLASS(KiloGrams, IMass)
 
 public:
    explicit KiloGrams();

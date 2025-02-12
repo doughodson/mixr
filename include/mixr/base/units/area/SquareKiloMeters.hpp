@@ -2,7 +2,7 @@
 #ifndef __mixr_base_SquareKiloMeters_HPP__
 #define __mixr_base_SquareKiloMeters_HPP__
 
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 
 #include "mixr/base/units/util/area_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: SquareKiloMeters
 // Description: Square Meters * 0.000001
 //------------------------------------------------------------------------------
-class SquareKiloMeters final: public Area
+class SquareKiloMeters final: public IArea
 {
-    DECLARE_SUBCLASS(SquareKiloMeters, Area)
+    DECLARE_SUBCLASS(SquareKiloMeters, IArea)
 
 public:
     explicit SquareKiloMeters();

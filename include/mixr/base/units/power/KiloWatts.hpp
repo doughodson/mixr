@@ -2,7 +2,7 @@
 #ifndef __mixr_base_KiloWatts_HPP__
 #define __mixr_base_KiloWatts_HPP__
 
-#include "mixr/base/units/power/Power.hpp"
+#include "mixr/base/units/power/IPower.hpp"
 
 #include "mixr/base/units/util/power_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: KiloWatts
 // Description: Concrete class to specify power in KiloWatts
 //----------------------------------------------------------------------------
-class KiloWatts final: public Power
+class KiloWatts final: public IPower
 {
-   DECLARE_SUBCLASS(KiloWatts, Power)
+   DECLARE_SUBCLASS(KiloWatts, IPower)
 
 public:
    explicit KiloWatts();

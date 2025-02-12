@@ -2,7 +2,7 @@
 #ifndef __mixr_base_CubicInches_HPP__
 #define __mixr_base_CubicInches_HPP__
 
-#include "mixr/base/units/volume/Volume.hpp"
+#include "mixr/base/units/volume/IVolume.hpp"
 
 #include "mixr/base/units/util/volume_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: CubicInches
 // Description: Concrete class to specify a volume in cubit inches
 //------------------------------------------------------------------------------
-class CubicInches final: public Volume
+class CubicInches final: public IVolume
 {
-   DECLARE_SUBCLASS(CubicInches, Volume)
+   DECLARE_SUBCLASS(CubicInches, IVolume)
 
 public:
    explicit CubicInches();

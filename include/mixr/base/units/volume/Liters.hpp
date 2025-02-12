@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Liters_HPP__
 #define __mixr_base_Liters_HPP__
 
-#include "mixr/base/units/volume/Volume.hpp"
+#include "mixr/base/units/volume/IVolume.hpp"
 
 #include "mixr/base/units/util/volume_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Liters
 // Description: Concrete class to specify a volume in liters
 //------------------------------------------------------------------------------
-class Liters final: public Volume
+class Liters final: public IVolume
 {
-   DECLARE_SUBCLASS(Liters, Volume)
+   DECLARE_SUBCLASS(Liters, IVolume)
 
 public:
    explicit Liters();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Semicircles_HPP__
 #define __mixr_base_Semicircles_HPP__
 
-#include "mixr/base/units/angle/Angle.hpp"
+#include "mixr/base/units/angle/IAngle.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: Semicircles
 // Description: Concrete class to specify an angle in unit semicircles
 //------------------------------------------------------------------------------
-class Semicircles final: public Angle
+class Semicircles final: public IAngle
 {
-   DECLARE_SUBCLASS(Semicircles, Angle)
+   DECLARE_SUBCLASS(Semicircles, IAngle)
 
 public:
    explicit Semicircles();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_CubicMeters_HPP__
 #define __mixr_base_CubicMeters_HPP__
 
-#include "mixr/base/units/volume/Volume.hpp"
+#include "mixr/base/units/volume/IVolume.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: CubicMeters
 // Description: Concrete class to specify a volume in cubic meters (m^3).
 //------------------------------------------------------------------------------
-class CubicMeters final: public Volume
+class CubicMeters final: public IVolume
 {
-   DECLARE_SUBCLASS(CubicMeters, Volume)
+   DECLARE_SUBCLASS(CubicMeters, IVolume)
 
 public:
    explicit CubicMeters();

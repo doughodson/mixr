@@ -2,7 +2,7 @@
 #ifndef __mixr_base_SquareMeters_HPP__
 #define __mixr_base_SquareMeters_HPP__
 
-#include "mixr/base/units/area/Area.hpp"
+#include "mixr/base/units/area/IArea.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: SquareMeters
 // Description: Concrete class to specify an area in units of square meters (m^2)
 //------------------------------------------------------------------------------
-class SquareMeters final: public Area
+class SquareMeters final: public IArea
 {
-   DECLARE_SUBCLASS(SquareMeters, Area)
+   DECLARE_SUBCLASS(SquareMeters, IArea)
 
 public:
    explicit SquareMeters();

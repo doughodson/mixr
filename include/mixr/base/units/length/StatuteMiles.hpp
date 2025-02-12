@@ -2,7 +2,7 @@
 #ifndef __mixr_base_StatuteMiles_HPP__
 #define __mixr_base_StatuteMiles_HPP__
 
-#include "mixr/base/units/length/Length.hpp"
+#include "mixr/base/units/length/ILength.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: StatuteMiles
 // Description: Concrete class to specify length in terms of statute miles
 //------------------------------------------------------------------------------
-class StatuteMiles final: public Length
+class StatuteMiles final: public ILength
 {
-   DECLARE_SUBCLASS(StatuteMiles, Length)
+   DECLARE_SUBCLASS(StatuteMiles, ILength)
 
 public:
    explicit StatuteMiles();

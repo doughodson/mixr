@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Quantity_HPP__
-#define __mixr_base_Quantity_HPP__
+#ifndef __mixr_base_IQuantity_HPP__
+#define __mixr_base_IQuantity_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -9,8 +9,8 @@ namespace base {
 class Number;
 
 //------------------------------------------------------------------------------
-// Class: Quantity
-// Description: Abstract base class for all quantities (i.e., a numerical value
+// Class: IQuantity
+// Description: Interface class for all quantities (i.e., a numerical value
 //              with an associated unit).  The numerical value is stored as a
 //              double precision value and a slot method is available set it.
 //              The class hierarchy is used to organize a taxonomy of different
@@ -22,12 +22,12 @@ class Number;
 //
 // Factory name: AbstractQuantity
 //------------------------------------------------------------------------------
-class Quantity : public Object
+class IQuantity : public Object
 {
-   DECLARE_SUBCLASS(Quantity, Object)
+   DECLARE_SUBCLASS(IQuantity, Object)
 
 public:
-   explicit Quantity();
+   explicit IQuantity();
 
 protected:
    void setValue(const double x)     { value = x;    }

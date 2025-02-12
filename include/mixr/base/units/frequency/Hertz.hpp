@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Hertz_HPP__
 #define __mixr_base_Hertz_HPP__
 
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: Hertz
 // Description: Concrete class to specify a frequency in Hertz
 //------------------------------------------------------------------------------
-class Hertz final: public Frequency
+class Hertz final: public IFrequency
 {
-    DECLARE_SUBCLASS(Hertz, Frequency)
+    DECLARE_SUBCLASS(Hertz, IFrequency)
 
 public:
     explicit Hertz();

@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Angle_HPP__
-#define __mixr_base_Angle_HPP__
+#ifndef __mixr_base_IAngle_HPP__
+#define __mixr_base_IAngle_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Angle
-// Description: Abstract class for plane angles - base unit is Radians
+// Class: IAngle
+// Description: Interface class for plane angles - base unit is Radians
 //------------------------------------------------------------------------------
-class Angle : public Quantity
+class IAngle : public IQuantity
 {
-   DECLARE_SUBCLASS(Angle, Quantity)
+   DECLARE_SUBCLASS(IAngle, IQuantity)
 
 public:
-   explicit Angle();
+   explicit IAngle();
 
    // conversion methods
    double getValueInDegrees() const            { return getValue() * angle::R2DCC; }

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Watts_HPP__
 #define __mixr_base_Watts_HPP__
 
-#include "mixr/base/units/power/Power.hpp"
+#include "mixr/base/units/power/IPower.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: Watts
 // Description: Concrete class to specify power in Watts
 //----------------------------------------------------------------------------
-class Watts final: public Power
+class Watts final: public IPower
 {
-   DECLARE_SUBCLASS(Watts, Power)
+   DECLARE_SUBCLASS(Watts, IPower)
 
 public:
    explicit Watts();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_KiloHertz_HPP__
 #define __mixr_base_KiloHertz_HPP__
 
-#include "mixr/base/units/frequency/Frequency.hpp"
+#include "mixr/base/units/frequency/IFrequency.hpp"
 
 #include "mixr/base/units/util/frequency_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: KiloHertz
 // Description: Concrete class to specify a frequency in KiloHertz
 //------------------------------------------------------------------------------
-class KiloHertz final: public Frequency
+class KiloHertz final: public IFrequency
 {
-    DECLARE_SUBCLASS(KiloHertz, Frequency)
+    DECLARE_SUBCLASS(KiloHertz, IFrequency)
 
 public:
     explicit KiloHertz();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Seconds_HPP__
 #define __mixr_base_Seconds_HPP__
 
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 namespace mixr {
 namespace base {
@@ -11,9 +11,9 @@ namespace base {
 // Class: Seconds
 // Description: Concrete class to specify a time in seconds
 //------------------------------------------------------------------------------
-class Seconds final: public Time
+class Seconds final: public ITime
 {
-   DECLARE_SUBCLASS(Seconds, Time)
+   DECLARE_SUBCLASS(Seconds, ITime)
 
 public:
    explicit Seconds();

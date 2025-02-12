@@ -1,8 +1,8 @@
 
-#ifndef __mixr_base_Frequency_HPP__
-#define __mixr_base_Frequency_HPP__
+#ifndef __mixr_base_IFrequency_HPP__
+#define __mixr_base_IFrequency_HPP__
 
-#include "mixr/base/units/Quantity.hpp"
+#include "mixr/base/units/IQuantity.hpp"
 
 #include "mixr/base/units/util/frequency_utils.hpp"
 
@@ -10,15 +10,15 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Frequency
-// Description: Abstract class for frequency. Base unit is Hertz.
+// Class: IFrequency
+// Description: Interface class for frequency. Base unit is Hertz.
 //------------------------------------------------------------------------------
-class Frequency : public Quantity
+class IFrequency : public IQuantity
 {
-   DECLARE_SUBCLASS(Frequency, Quantity)
+   DECLARE_SUBCLASS(IFrequency, IQuantity)
 
 public:
-   explicit Frequency();
+   explicit IFrequency();
 
    // conversion methods
    double getValueInGigaHertz() const   { return getValue() * frequency::Hz2GHz;  }

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_MilliSeconds_HPP__
 #define __mixr_base_MilliSeconds_HPP__
 
-#include "mixr/base/units/time/Time.hpp"
+#include "mixr/base/units/time/ITime.hpp"
 
 #include "mixr/base/units/util/time_utils.hpp"
 
@@ -13,9 +13,9 @@ namespace base {
 // Class: MilliSeconds
 // Description: Concrete class to specify a time in milliseconds
 //------------------------------------------------------------------------------
-class MilliSeconds : public Time
+class MilliSeconds : public ITime
 {
-   DECLARE_SUBCLASS(MilliSeconds, Time)
+   DECLARE_SUBCLASS(MilliSeconds, ITime)
 
 public:
    explicit MilliSeconds();
