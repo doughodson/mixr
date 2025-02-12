@@ -4,6 +4,7 @@
 
 // ftgl fonts
 #include "mixr/graphics/fonts/ftgl/FtglBitmapFont.hpp"
+#include "mixr/graphics/fonts/ftgl/FtglExtrdFont.hpp"
 
 #include <string>
 
@@ -18,6 +19,9 @@ base::Object* factory(const std::string& name)
    //
    if ( name == FtglBitmapFont::getFactoryName() ) {
       obj = new FtglBitmapFont();
+   }
+   else if ( name == FtglExtrdFont::getFactoryName() ) {
+      obj = new FtglExtrdFont();
    }
 
    return obj;
