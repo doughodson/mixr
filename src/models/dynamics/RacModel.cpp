@@ -35,8 +35,8 @@ BEGIN_SLOT_MAP(RacModel)
     ON_SLOT( 2, setSlotSpeedMaxG,   base::Number)
     ON_SLOT( 3, setSlotMaxG,        base::Number)
     ON_SLOT( 4, setSlotMaxAccel,    base::Number)
-    ON_SLOT( 5, setSlotCmdAltitude, base::Length)
-    ON_SLOT( 6, setSlotCmdHeading,  base::Angle)
+    ON_SLOT( 5, setSlotCmdAltitude, base::ILength)
+    ON_SLOT( 6, setSlotCmdHeading,  base::IAngle)
     ON_SLOT( 7, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
@@ -341,7 +341,7 @@ bool RacModel::setSlotMaxAccel(const base::Number* const msg)
     return ok;
 }
 
-bool RacModel::setSlotCmdAltitude(const base::Length* const x)
+bool RacModel::setSlotCmdAltitude(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -351,7 +351,7 @@ bool RacModel::setSlotCmdAltitude(const base::Length* const x)
     return ok;
 }
 
-bool RacModel::setSlotCmdHeading(const base::Angle* const msg)
+bool RacModel::setSlotCmdHeading(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

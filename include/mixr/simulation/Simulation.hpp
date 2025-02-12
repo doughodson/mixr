@@ -8,7 +8,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Distance; class EarthModel; class Integer; class LatLon; class Pair; class Time; }
+namespace base { class EarthModel; class Integer; class LatLon; class Pair; class ITime; }
 namespace simulation {
 class IDataRecorder;
 class SimulationBgSyncThread;
@@ -319,7 +319,7 @@ private:
    // slot table helper methods
    bool setSlotPlayers(base::PairStream* const);
 
-   bool setSlotSimulationTime(const base::Time* const);
+   bool setSlotSimulationTime(const base::ITime* const);
    bool setSlotDay(const base::Integer* const);
    bool setSlotMonth(const base::Integer* const);
    bool setSlotYear(const base::Integer* const);

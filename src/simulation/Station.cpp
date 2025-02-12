@@ -79,7 +79,7 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(14, setSlotBackgroundPri,         base::Number)
    ON_SLOT(15, setSlotBackgroundStackSize,   base::Integer)
 
-   ON_SLOT(16, setSlotStartupResetTime,      base::Time)
+   ON_SLOT(16, setSlotStartupResetTime,      base::ITime)
    ON_SLOT(17, setSlotEnableUpdateTimers,    base::Boolean)
 
    ON_SLOT(18, setSlotDataRecorder,          IDataRecorder)
@@ -156,7 +156,7 @@ void Station::copyData(const Station& org, const bool)
    tmrUpdateEnbl = org.tmrUpdateEnbl;
 
    if (org.startupResetTimer0!= nullptr) {
-      base::Time* copy = org.startupResetTimer0->clone();
+      base::ITime* copy = org.startupResetTimer0->clone();
       setSlotStartupResetTime( copy );
       copy->unref();
    } else {
@@ -1171,7 +1171,7 @@ bool Station::setSlotBackgroundStackSize(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotStartupResetTime() -- Sets the startup RESET pulse timer
 //------------------------------------------------------------------------------
-bool Station::setSlotStartupResetTime(const base::Time* const num)
+bool Station::setSlotStartupResetTime(const base::ITime* const num)
 {
     if (startupResetTimer0 != nullptr) {
         startupResetTimer0->unref();

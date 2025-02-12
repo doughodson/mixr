@@ -82,7 +82,7 @@ bool SigPlate::setA(base::Number* const x)
     return ok;
 }
 
-bool SigPlate::setA(base::Length* const x)
+bool SigPlate::setA(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};
@@ -124,7 +124,7 @@ bool SigPlate::setB(base::Number* const x)
     return ok;
 }
 
-bool SigPlate::setB(base::Length* const x)
+bool SigPlate::setB(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};

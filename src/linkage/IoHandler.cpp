@@ -30,7 +30,7 @@ BEGIN_SLOT_MAP(IoHandler)
    ON_SLOT(2, setSlotInputData,  base::IIoData)
    ON_SLOT(3, setSlotOutputData, base::IIoData)
    ON_SLOT(4, setSlotDevices,    base::PairStream)
-   ON_SLOT(5, setSlotRate,       base::Frequency)
+   ON_SLOT(5, setSlotRate,       base::IFrequency)
    ON_SLOT(6, setSlotPriority,   base::Number)
 END_SLOT_MAP()
 
@@ -224,7 +224,7 @@ bool IoHandler::setSlotDevices(base::PairStream* const list)
    return ok;
 }
 
-bool IoHandler::setSlotRate(const base::Frequency* const msg)
+bool IoHandler::setSlotRate(const base::IFrequency* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

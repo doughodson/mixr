@@ -29,9 +29,9 @@ END_SLOTTABLE(GroundVehicle)
 
 BEGIN_SLOT_MAP(GroundVehicle)
     ON_SLOT(1, setSlotCommandedPosition, base::Identifier)
-    ON_SLOT(2, setSlotLauncherDownAngle, base::Angle)
-    ON_SLOT(3, setSlotLauncherUpAngle,   base::Angle)
-    ON_SLOT(4, setSlotLauncherMoveTime,  base::Time)
+    ON_SLOT(2, setSlotLauncherDownAngle, base::IAngle)
+    ON_SLOT(3, setSlotLauncherUpAngle,   base::IAngle)
+    ON_SLOT(4, setSlotLauncherMoveTime,  base::ITime)
 END_SLOT_MAP()
 
 GroundVehicle::GroundVehicle()
@@ -210,7 +210,7 @@ bool GroundVehicle::setSlotCommandedPosition(const base::Identifier* const msg)
 }
 
 // launcherDownAngle: Min (down) Launcher angle (base::Angle)
-bool GroundVehicle::setSlotLauncherDownAngle(const base::Angle* const msg)
+bool GroundVehicle::setSlotLauncherDownAngle(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -221,7 +221,7 @@ bool GroundVehicle::setSlotLauncherDownAngle(const base::Angle* const msg)
 }
 
 // launcherUpAngle: Max (up) Launcher angle (base::Angle)
-bool GroundVehicle::setSlotLauncherUpAngle(const base::Angle* const msg)
+bool GroundVehicle::setSlotLauncherUpAngle(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -232,7 +232,7 @@ bool GroundVehicle::setSlotLauncherUpAngle(const base::Angle* const msg)
 }
 
 // launcherMoveTime: Max time to move between 'down' and 'up' positions (base::Time)
-bool GroundVehicle::setSlotLauncherMoveTime(const base::Time* const x)
+bool GroundVehicle::setSlotLauncherMoveTime(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

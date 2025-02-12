@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Integer; class Length; class Number; class String; class Time; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class Number; class String; class ITime; }
 namespace models {
 class Designator;
 class Stores;
@@ -379,19 +379,19 @@ private:
    bool setSlotPower(const base::Boolean* const);
    bool setSlotWillHang(const base::Boolean* const);
    bool setSlotHung(const base::Boolean* const);
-   bool setSlotMaxTOF(const base::Time* const);
+   bool setSlotMaxTOF(const base::ITime* const);
    bool setSlotMaxTOF(const base::Number* const);
-   bool setSlotTSG(const base::Time* const);
+   bool setSlotTSG(const base::ITime* const);
    bool setSlotTSG(const base::Number* const);
-   bool setSlotMaxBurstRng(const base::Length* const);
+   bool setSlotMaxBurstRng(const base::ILength* const);
    bool setSlotMaxBurstRng(const base::Number* const);
-   bool setSlotLethalRange(const base::Length* const);
+   bool setSlotLethalRange(const base::ILength* const);
    bool setSlotLethalRange(const base::Number* const);
-   bool setSlotSOBT(const base::Time* const);
+   bool setSlotSOBT(const base::ITime* const);
    bool setSlotSOBT(const base::Number* const);
-   bool setSlotEOBT(const base::Time* const);
+   bool setSlotEOBT(const base::ITime* const);
    bool setSlotEOBT(const base::Number* const);
-   bool setSlotMaxGimbal(const base::Angle* const);
+   bool setSlotMaxGimbal(const base::IAngle* const);
    bool setSlotTgtPos(const base::List* const);
    bool setSlotWeaponID(const base::Integer* const);
    bool setSlotDummy(const base::Boolean* const);

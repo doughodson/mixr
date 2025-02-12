@@ -6,8 +6,8 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class Angle; class Identifier; class Integer; class Length; class Latitude;
-                 class List; class Longitude; class Identifier; class Number; class String; class Time; }
+namespace base { class IAngle; class Identifier; class Integer; class ILength; class Latitude;
+                 class List; class Longitude; class Identifier; class Number; class String; class ITime; }
 namespace terrain { class ITerrain; }
 namespace models {
 class Navigation;
@@ -30,21 +30,21 @@ class Action;
 //   longitude <base::Longitude>      ! Steerpoint longitude (default: 0)
 //             <base::Number>         ! (or as degrees decimal)
 //
-//   xPos      <base::Length>         ! X (north) distance from gaming area reference point
-//   yPos      <base::Length>         ! Y (east) distance from gaming area reference point
+//   xPos      <base::ILength>        ! X (north) distance from gaming area reference point
+//   yPos      <base::ILength>        ! Y (east) distance from gaming area reference point
 //                                    ! (default: 0, 0)
-//   elevation <base::Length>         ! Terrain elevation at steerpoint (default: 0)
+//   elevation <base::ILength>        ! Terrain elevation at steerpoint (default: 0)
 //             <base::Number>         ! (or as meters)
 //
-//   altitude  <base::Length>         ! Commanded altitude to steerpoint (default: 0)
+//   altitude  <base::ILength>        ! Commanded altitude to steerpoint (default: 0)
 //             <base::Number>         ! (or as meters)
 //
 //   airspeed  <base::Number>         ! Commanded true airspeed (Kts) (default: 0)
 //
-//   pta       <base::Length>         ! Planned Time of Arrival (PTA)  (default: 0)
+//   pta       <base::ILength>        ! Planned Time of Arrival (PTA)  (default: 0)
 //             <base::Number>         ! (or as seconds)
 //
-//   sca       <base::Length>         ! Safe Clearance Altitude (SCA) (default: 0)
+//   sca       <base::ILength>        ! Safe Clearance Altitude (SCA) (default: 0)
 //             <base::Number>         ! (or as feet)
 //
 //   description <base::String>       ! Description of steerpoint (default: 0)
@@ -237,19 +237,19 @@ private:
    bool setSlotLatitude(const base::Number* const);
    bool setSlotLongitude(const base::Longitude* const);
    bool setSlotLongitude(const base::Number* const);
-   bool setSlotXPos(const base::Length* const);
-   bool setSlotYPos(const base::Length* const);
-   bool setSlotElevation(const base::Length* const);
+   bool setSlotXPos(const base::ILength* const);
+   bool setSlotYPos(const base::ILength* const);
+   bool setSlotElevation(const base::ILength* const);
    bool setSlotElevation(const base::Number* const);
-   bool setSlotCmdAltitude(const base::Length* const);
+   bool setSlotCmdAltitude(const base::ILength* const);
    bool setSlotCmdAltitude(const base::Number* const);
    bool setSlotCmdAirspeed(const base::Number* const);
-   bool setSlotPTA(const base::Time* const);
+   bool setSlotPTA(const base::ITime* const);
    bool setSlotPTA(const base::Number* const);
-   bool setSlotSCA(const base::Length* const);
+   bool setSlotSCA(const base::ILength* const);
    bool setSlotSCA(const base::Number* const);
    bool setSlotDescription(const base::String* const);
-   bool setSlotMagVar(const base::Angle* const);
+   bool setSlotMagVar(const base::IAngle* const);
    bool setSlotMagVar(const base::Number* const);
    bool setSlotNext(const base::Identifier* const);
    bool setSlotNext(const base::Integer* const);

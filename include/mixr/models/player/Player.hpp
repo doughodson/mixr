@@ -18,8 +18,8 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Integer; class Latitude; class Length; class List; class Longitude;
-                 class Time; class Vec2d; class Vec3d;}
+namespace base { class IAngle; class Boolean; class Integer; class Latitude; class ILength; class List; class Longitude;
+                 class ITime; class Vec2d; class Vec3d;}
 namespace simulation { class INib; }
 namespace models {
 class WorldModel;
@@ -78,14 +78,14 @@ class Track;
 //    ! 2: Player's initial geodetic position
 //
 //    initLatitude       <base::Latitude>    ! Latitude (default: 0)
-//    initLatitude       <base::Angle>       ! Latitude
+//    initLatitude       <base::IAngle>      ! Latitude
 //    initLatitude       <base::Number>      ! Latitude (degs)
 //
 //    initLongitude      <base::Longitude>   ! Longitude (default: 0)
-//    initLongitude      <base::Angle>       ! Longitude
+//    initLongitude      <base::IAngle>      ! Longitude
 //    initLongitude      <base::Number>      ! Longitude (degs)
 //
-//    initAlt            <base::Length>      ! Altitude (HAE) (+up)  ### NES Is this being used?
+//    initAlt            <base::ILength>     ! Altitude (HAE) (+up)  ### NES Is this being used?
 //    initAlt            <base::Number>      ! Altitude (HAE) (+up) (meters)
 //
 //
@@ -97,13 +97,13 @@ class Track;
 //    ! ---
 //    ! Player's initial Euler angles
 //    ! ---
-//    initRoll           <base::Angle>       ! Initial roll angle (default: 0)
+//    initRoll           <base::IAngle>      ! Initial roll angle (default: 0)
 //    initRoll           <base::Number>      ! Initial roll angle (radians)
 //
-//    initPitch          <base::Angle>       ! Initial pitch angle (default: 0)
+//    initPitch          <base::IAngle>      ! Initial pitch angle (default: 0)
 //    initPitch          <base::Number>      ! Initial pitch angle (radians)
 //
-//    initHeading        <base::Angle>       ! Initial heading angle (default: 0)
+//    initHeading        <base::IAngle>      ! Initial heading angle (default: 0)
 //    initHeading        <base::Number>      ! Initial heading angle (radians)
 //
 //    initEuler          <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
@@ -138,7 +138,7 @@ class Track;
 //    killRemoval        <base::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
 //    enableNetOutput    <base::Boolean>     ! Enable network output of this player (default: true)
 //
-//    dataLogTime        <base::Time>        ! Time between player data samples to an optional data
+//    dataLogTime        <base::ITime>       ! Time between player data samples to an optional data
 //                                           ! logger, or zero if none (default: 0)
 //
 //    ! ---
@@ -146,9 +146,9 @@ class Track;
 //    !     If non-zero the Euler angles are updated using the body angular rates.
 //    !     For use only without a dynamics model.
 //    ! ---
-//    testRollRate       <base::Angle>       ! Test roll rate (body) (units per second) (default: 0)
-//    testPitchRate      <base::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
-//    testYawRate        <base::Angle>       ! Test heading rate (body) (units per second) (default: 0)
+//    testRollRate       <base::IAngle>      ! Test roll rate (body) (units per second) (default: 0)
+//    testPitchRate      <base::IAngle>      ! Test pitch rate (body) (units per second) (default: 0)
+//    testYawRate        <base::IAngle>      ! Test heading rate (body) (units per second) (default: 0)
 //    testBodyAxis       <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
 //
 //
@@ -752,9 +752,9 @@ public:
    // Sets the quaternions
    virtual bool setQuaternions(const base::Quat&);
 
-   virtual bool setInitPitch(const base::Angle* const);
+   virtual bool setInitPitch(const base::IAngle* const);
    virtual bool setInitPitch(const base::Number* const);
-   virtual bool setInitHeading(const base::Angle* const);
+   virtual bool setInitHeading(const base::IAngle* const);
    virtual bool setInitHeading(const base::Number* const);
 
    // ---
@@ -1079,27 +1079,27 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotInitXPos(const base::Length* const);
+   bool setSlotInitXPos(const base::ILength* const);
    bool setSlotInitXPos(const base::Number* const);
-   bool setSlotInitYPos(const base::Length* const);
+   bool setSlotInitYPos(const base::ILength* const);
    bool setSlotInitYPos(const base::Number* const);
-   bool setSlotInitAlt(const base::Length* const);
+   bool setSlotInitAlt(const base::ILength* const);
    bool setSlotInitAlt(const base::Number* const);
 
    bool setSlotInitLat(const base::Latitude* const);
-   bool setSlotInitLat(const base::Angle* const);
+   bool setSlotInitLat(const base::IAngle* const);
    bool setSlotInitLat(const base::Number* const);
    bool setSlotInitLon(const base::Longitude* const);
-   bool setSlotInitLon(const base::Angle* const);
+   bool setSlotInitLon(const base::IAngle* const);
    bool setSlotInitLon(const base::Number* const);
 
    bool setSlotInitGeocentric(const base::List* const);
 
-   bool setSlotInitRoll(const base::Angle* const);
+   bool setSlotInitRoll(const base::IAngle* const);
    bool setSlotInitRoll(const base::Number* const);
-   bool setSlotInitPitch(const base::Angle* const x)         { return setInitPitch(x);   }
+   bool setSlotInitPitch(const base::IAngle* const x)        { return setInitPitch(x);   }
    bool setSlotInitPitch(const base::Number* const x)        { return setInitPitch(x);   }
-   bool setSlotInitHeading(const base::Angle* const x)       { return setInitHeading(x); }
+   bool setSlotInitHeading(const base::IAngle* const x)      { return setInitHeading(x); }
    bool setSlotInitHeading(const base::Number* const x)      { return setInitHeading(x); }
 
    bool setSlotInitEulerAngles(const base::List* const);
@@ -1115,7 +1115,7 @@ private:
 
    bool setSlotTerrainElevReq(const base::Boolean* const);
    bool setSlotInterpolateTerrain(const base::Boolean* const);
-   bool setSlotTerrainOffset(const base::Length* const);
+   bool setSlotTerrainOffset(const base::ILength* const);
 
    bool setSlotPositionFreeze(const base::Boolean* const);
    bool setSlotAltitudeFreeze(const base::Boolean* const);
@@ -1125,11 +1125,11 @@ private:
    bool setSlotKillOverride(const base::Boolean* const);
    bool setSlotKillRemoval(const base::Boolean* const);
    bool setSlotEnableNetOutput(const base::Boolean* const);
-   bool setSlotDataLogTime(const base::Time* const);
+   bool setSlotDataLogTime(const base::ITime* const);
 
-   bool setSlotTestRollRate(const base::Angle* const);
-   bool setSlotTestPitchRate(const base::Angle* const);
-   bool setSlotTestYawRate(const base::Angle* const);
+   bool setSlotTestRollRate(const base::IAngle* const);
+   bool setSlotTestPitchRate(const base::IAngle* const);
+   bool setSlotTestYawRate(const base::IAngle* const);
    bool setSlotTestBodyAxis(const base::Boolean* const);
 
    bool setSlotUseCoordSys(base::Identifier* const);

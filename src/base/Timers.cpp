@@ -22,8 +22,8 @@ BEGIN_SLOTTABLE(Timer)
 END_SLOTTABLE(Timer)
 
 BEGIN_SLOT_MAP(Timer)
-   ON_SLOT(1, setSlotTimerValue,  Time)
-   ON_SLOT(2, setSlotAlarmTime,   Time)
+   ON_SLOT(1, setSlotTimerValue,  ITime)
+   ON_SLOT(2, setSlotAlarmTime,   ITime)
    ON_SLOT(3, setSlotTimerActive, Boolean)
 END_SLOT_MAP()
 
@@ -156,7 +156,7 @@ void Timer::removeFromTimerList(Timer* timer)
 // -----------------------------------------------------------------
 
 // Sets the timer value
-bool Timer::setSlotTimerValue(const Time* const x)
+bool Timer::setSlotTimerValue(const ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -168,7 +168,7 @@ bool Timer::setSlotTimerValue(const Time* const x)
 }
 
 // Sets the alarm value
-bool Timer::setSlotAlarmTime(const Time* const x)
+bool Timer::setSlotAlarmTime(const ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

@@ -36,7 +36,7 @@ END_SLOTTABLE(Navigation)
 
 BEGIN_SLOT_MAP(Navigation)
     ON_SLOT(1, setSlotRoute,    Route)
-    ON_SLOT(2, setSlotUtc,      base::Time)
+    ON_SLOT(2, setSlotUtc,      base::ITime)
     ON_SLOT(3, setSlotFeba,     base::PairStream)
     ON_SLOT(4, setSlotBullseye, Bullseye)
 END_SLOT_MAP()
@@ -794,7 +794,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
    return true;
 }
 
-bool Navigation::setSlotUtc(const base::Time* const x)
+bool Navigation::setSlotUtc(const base::ITime* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -836,7 +836,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
                         }
                         if (pNum != nullptr) {
-                            const auto pDist = dynamic_cast<const base::Length*>(pNum);
+                            const auto pDist = dynamic_cast<const base::ILength*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = pDist->getValueInNauticalMiles();
                             } else {
@@ -854,7 +854,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                             pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
                         }
                         if (pNum != nullptr) {
-                            const auto pDist = dynamic_cast<const base::Length*>(pNum);
+                            const auto pDist = dynamic_cast<const base::ILength*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = pDist->getValueInNauticalMiles();
                             } else {

@@ -58,27 +58,27 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 3, setSlotLongitude,      base::Longitude)
     ON_SLOT( 3, setSlotLongitude,      base::Number)
 
-    ON_SLOT( 4, setSlotXPos,           base::Length)
+    ON_SLOT( 4, setSlotXPos,           base::ILength)
 
-    ON_SLOT( 5, setSlotYPos,           base::Length)
+    ON_SLOT( 5, setSlotYPos,           base::ILength)
 
-    ON_SLOT( 6, setSlotElevation,      base::Length)
+    ON_SLOT( 6, setSlotElevation,      base::ILength)
     ON_SLOT( 6, setSlotElevation,      base::Number)
 
-    ON_SLOT( 7, setSlotCmdAltitude,    base::Length)
+    ON_SLOT( 7, setSlotCmdAltitude,    base::ILength)
     ON_SLOT( 7, setSlotCmdAltitude,    base::Number)
 
     ON_SLOT( 8, setSlotCmdAirspeed,    base::Number)
 
-    ON_SLOT( 9, setSlotPTA,            base::Time)
+    ON_SLOT( 9, setSlotPTA,            base::ITime)
     ON_SLOT( 9, setSlotPTA,            base::Number)
 
-    ON_SLOT(10, setSlotSCA,            base::Length)
+    ON_SLOT(10, setSlotSCA,            base::ILength)
     ON_SLOT(10, setSlotSCA,            base::Number)
 
     ON_SLOT(11, setSlotDescription,    base::String)
 
-    ON_SLOT(12, setSlotMagVar,         base::Angle)
+    ON_SLOT(12, setSlotMagVar,         base::IAngle)
     ON_SLOT(12, setSlotMagVar,         base::Number)
 
     ON_SLOT(13, setSlotNext,           base::Identifier)
@@ -411,7 +411,7 @@ bool Steerpoint::setSlotPosition(const base::List* const msg)
 }
 */
 
-bool Steerpoint::setSlotXPos(const base::Length* const x)
+bool Steerpoint::setSlotXPos(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -423,7 +423,7 @@ bool Steerpoint::setSlotXPos(const base::Length* const x)
     return ok;
 }
 
-bool Steerpoint::setSlotYPos(const base::Length* const x)
+bool Steerpoint::setSlotYPos(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -435,7 +435,7 @@ bool Steerpoint::setSlotYPos(const base::Length* const x)
     return ok;
 }
 
-bool Steerpoint::setSlotElevation(const base::Length* const x)
+bool Steerpoint::setSlotElevation(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -462,7 +462,7 @@ bool Steerpoint::setSlotElevation(const base::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotPTA(const base::Time* const x)
+bool Steerpoint::setSlotPTA(const base::ITime* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -481,7 +481,7 @@ bool Steerpoint::setSlotPTA(const base::Number* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const base::Length* const x)
+bool Steerpoint::setSlotSCA(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -511,7 +511,7 @@ bool Steerpoint::setSlotDescription(const base::String* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotMagVar(const base::Angle* const msg)
+bool Steerpoint::setSlotMagVar(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -533,7 +533,7 @@ bool Steerpoint::setSlotMagVar(const base::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAltitude(const base::Length* const x)
+bool Steerpoint::setSlotCmdAltitude(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {

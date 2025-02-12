@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Identifier; class Time; }
+namespace base { class IAngle; class Identifier; class ITime; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -73,9 +73,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotCommandedPosition(const base::Identifier* const);
-   bool setSlotLauncherDownAngle(const base::Angle* const);
-   bool setSlotLauncherUpAngle(const base::Angle* const);
-   bool setSlotLauncherMoveTime(const base::Time* const);
+   bool setSlotLauncherDownAngle(const base::IAngle* const);
+   bool setSlotLauncherUpAngle(const base::IAngle* const);
+   bool setSlotLauncherMoveTime(const base::ITime* const);
 };
 
 }

@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Time; }
+namespace base { class ITime; }
 namespace models {
 class Player;
 class Route;
@@ -242,7 +242,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotRoute(const Route* const);        // and the initial route used by reset()
-   bool setSlotUtc(const base::Time* const);
+   bool setSlotUtc(const base::ITime* const);
    bool setSlotFeba(const base::PairStream* const);
    bool setSlotBullseye(Bullseye* const);
 };

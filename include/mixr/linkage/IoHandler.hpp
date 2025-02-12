@@ -7,7 +7,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class Frequency; class Number; class IIoData; }
+namespace base { class PairStream; class IFrequency; class Number; class IIoData; }
 namespace linkage {
 class IoPeriodicThread;
 
@@ -103,7 +103,7 @@ private:
    bool setSlotInputData(base::IIoData* const);
    bool setSlotOutputData(base::IIoData* const);
    bool setSlotDevices(base::PairStream* const);
-   bool setSlotRate(const base::Frequency* const);
+   bool setSlotRate(const base::IFrequency* const);
    bool setSlotPriority(const base::Number* const);
 };
 

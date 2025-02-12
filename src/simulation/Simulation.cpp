@@ -44,7 +44,7 @@ BEGIN_SLOTTABLE(Simulation)
 BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
-    ON_SLOT( 2, setSlotSimulationTime,  base::Time)
+    ON_SLOT( 2, setSlotSimulationTime,  base::ITime)
     ON_SLOT( 3, setSlotDay,             base::Integer)
     ON_SLOT( 4, setSlotMonth,           base::Integer)
     ON_SLOT( 5, setSlotYear,            base::Integer)
@@ -1364,7 +1364,7 @@ bool Simulation::setPrintFrameTimingStats(const bool b)
 // Set Slot routines
 //------------------------------------------------------------------------------
 
-bool Simulation::setSlotSimulationTime(const base::Time* const msg)
+bool Simulation::setSlotSimulationTime(const base::ITime* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

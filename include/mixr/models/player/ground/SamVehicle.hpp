@@ -5,7 +5,7 @@
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 
 namespace mixr {
-namespace base { class Length; }
+namespace base { class ILength; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -48,8 +48,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMinLaunchRange(const base::Length* const);
-   bool setSlotMaxLaunchRange(const base::Length* const);
+   bool setSlotMinLaunchRange(const base::ILength* const);
+   bool setSlotMaxLaunchRange(const base::ILength* const);
 };
 
 }

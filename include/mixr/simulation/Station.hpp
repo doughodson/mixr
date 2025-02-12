@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class IIoHandler; class Boolean; class Identifier; class Integer;
-                 class Number; class PairStream; class String; class Time; }
+                 class Number; class PairStream; class String; class ITime; }
 namespace simulation {
 class IDataRecorder;
 class Simulation;
@@ -54,7 +54,7 @@ class StationNetPeriodicThread;
 //    bgPriority         <base::Number>             ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
 //    bgStackSize        <base::Integer>            ! Background thread stack size (default: <system default size>)
 //
-//    startupResetTime   <base::Time>               ! Startup (initial) RESET event timer value (default: no reset event)
+//    startupResetTime   <base::ITime>              ! Startup (initial) RESET event timer value (default: no reset event)
 //                                                  !  (some simulations may need this -- let it run a few initial frames then reset)
 //
 //    enableUpdateTimers <base::Boolean>            ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
@@ -276,7 +276,7 @@ private:
    base::safe_ptr<StationBgPeriodicThread> bgThread;         // The optional background thread
 
    double startupResetTimer{-1.0};                           // Startup RESET timer (sends a RESET_EVENT after timeout)
-   const base::Time* startupResetTimer0{};                   // Init value of the startup RESET timer
+   const base::ITime* startupResetTimer0{};                  // Init value of the startup RESET timer
 
 private:
    // slot table helper methods
@@ -303,7 +303,7 @@ private:
    bool setSlotBackgroundPri(const base::Number* const);
    bool setSlotBackgroundStackSize(const base::Integer* const);
 
-   bool setSlotStartupResetTime(const base::Time* const);
+   bool setSlotStartupResetTime(const base::ITime* const);
    bool setSlotEnableUpdateTimers(const base::Boolean* const);
 
    bool setSlotDataRecorder(IDataRecorder* const x)                     { return setDataRecorder(x); }

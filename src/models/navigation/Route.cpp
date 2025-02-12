@@ -36,7 +36,7 @@ BEGIN_SLOT_MAP(Route)
     ON_SLOT(1, setSlotTo,              base::Identifier)
     ON_SLOT(1, setSlotTo,              base::Integer)
     ON_SLOT(2, setSlotAutoSequence,    base::Boolean)
-    ON_SLOT(3, setSlotAutoSeqDistance, base::Length)
+    ON_SLOT(3, setSlotAutoSeqDistance, base::ILength)
     ON_SLOT(3, setSlotAutoSeqDistance, base::Number)
     ON_SLOT(4, setSlotWrap,            base::Boolean)
 END_SLOT_MAP()
@@ -702,7 +702,7 @@ bool Route::setSlotAutoSequence(const base::Boolean* const msg)
     return ok;
 }
 
-bool Route::setSlotAutoSeqDistance(const base::Length* const x)
+bool Route::setSlotAutoSeqDistance(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {

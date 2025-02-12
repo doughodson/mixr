@@ -30,7 +30,7 @@ BEGIN_SLOT_MAP(IrSignature)
    ON_SLOT(2, setSlotIrShapeSignature,  IrShape)
    ON_SLOT(3, setSlotBaseHeatSignature, base::Number)
    ON_SLOT(4, setSlotEmissivity,        base::Number)
-   ON_SLOT(5, setSlotEffectiveArea,     base::Area)
+   ON_SLOT(5, setSlotEffectiveArea,     base::IArea)
 END_SLOT_MAP()
 
 IrSignature::IrSignature()
@@ -153,7 +153,7 @@ bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(mixr::base::Area* const a)
+bool IrSignature::setSlotEffectiveArea(mixr::base::IArea* const a)
 {
    bool ok{};
 

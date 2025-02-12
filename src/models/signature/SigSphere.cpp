@@ -19,7 +19,7 @@ END_SLOTTABLE(SigSphere)
 
 BEGIN_SLOT_MAP(SigSphere)
     ON_SLOT(1, setSlotRadius, base::Number)
-    ON_SLOT(1, setSlotRadius, base::Length)
+    ON_SLOT(1, setSlotRadius, base::ILength)
 END_SLOT_MAP()
 
 SigSphere::SigSphere()
@@ -70,7 +70,7 @@ bool SigSphere::setSlotRadius(base::Number* const x)
    return ok;
 }
 
-bool SigSphere::setSlotRadius(base::Length* const x)
+bool SigSphere::setSlotRadius(base::ILength* const x)
 {
    bool ok{};
    double r{ -1.0 };

@@ -5,7 +5,7 @@
 #include "mixr/models/signature/RfSignature.hpp"
 
 namespace mixr {
-namespace base { class Number; class Length; }
+namespace base { class Number; class ILength; }
 namespace models {
 class Emission;
 
@@ -31,9 +31,9 @@ public:
     double getB() const                             { return b; }
 
     virtual bool setA(base::Number* const);
-    virtual bool setA(base::Length* const);
+    virtual bool setA(base::ILength* const);
     virtual bool setB(base::Number* const);
-    virtual bool setB(base::Length* const);
+    virtual bool setB(base::ILength* const);
 
     double getRCS(const Emission* const) override;
 

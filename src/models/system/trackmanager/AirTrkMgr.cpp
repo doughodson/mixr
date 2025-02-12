@@ -378,7 +378,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::Number* const x)
    return ok;
 }
 
-bool AirTrkMgr::setSlotPositionGate(const base::Length* const x)
+bool AirTrkMgr::setSlotPositionGate(const base::ILength* const x)
 {
    double value{};
    if (x != nullptr) {
@@ -420,7 +420,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::Number* const x)
    return ok;
 }
 
-bool AirTrkMgr::setSlotRangeGate(const base::Length* const x)
+bool AirTrkMgr::setSlotRangeGate(const base::ILength* const x)
 {
    double value{};
    if (x != nullptr) {

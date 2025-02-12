@@ -5,7 +5,7 @@
 #include "mixr/models/signature/RfSignature.hpp"
 
 namespace mixr {
-namespace base { class Number; class Area; }
+namespace base { class Number; class IArea; }
 namespace models {
 class Emission;
 
@@ -26,7 +26,7 @@ public:
     SigConstant(const base::Number* const);
 
     bool setRCS(const base::Number* const);
-    bool setRCS(const base::Area* const);
+    bool setRCS(const base::IArea* const);
 
     double getRCS(const Emission* const) override;
 
@@ -35,8 +35,8 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotRCS(const base::Number* const x)     { return setRCS(x); }
-    bool setSlotRCS(const base::Area* const x)       { return setRCS(x); }
+    bool setSlotRCS(const base::Number* const x)      { return setRCS(x); }
+    bool setSlotRCS(const base::IArea* const x)       { return setRCS(x); }
 };
 
 }

@@ -19,7 +19,7 @@ END_SLOTTABLE(SigConstant)
 
 BEGIN_SLOT_MAP(SigConstant)
     ON_SLOT(1, setSlotRCS, base::Number)
-    ON_SLOT(1, setSlotRCS, base::Area)
+    ON_SLOT(1, setSlotRCS, base::IArea)
 END_SLOT_MAP()
 
 SigConstant::SigConstant()
@@ -69,7 +69,7 @@ bool SigConstant::setRCS(const base::Number* const x)
     return ok;
 }
 
-bool SigConstant::setRCS(const base::Area* const x)
+bool SigConstant::setRCS(const base::IArea* const x)
 {
    bool ok{};
    double r{-1.0};

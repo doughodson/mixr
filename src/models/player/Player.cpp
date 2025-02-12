@@ -115,32 +115,32 @@ END_SLOTTABLE(Player)
 
 BEGIN_SLOT_MAP(Player)
 
-   ON_SLOT( 1, setSlotInitXPos,           base::Length)
+   ON_SLOT( 1, setSlotInitXPos,           base::ILength)
    ON_SLOT( 1, setSlotInitXPos,           base::Number)
 
-   ON_SLOT( 2, setSlotInitYPos,           base::Length)
+   ON_SLOT( 2, setSlotInitYPos,           base::ILength)
    ON_SLOT( 2, setSlotInitYPos,           base::Number)
 
-   ON_SLOT( 3, setSlotInitAlt,            base::Length)
+   ON_SLOT( 3, setSlotInitAlt,            base::ILength)
    ON_SLOT( 3, setSlotInitAlt,            base::Number)
 
    ON_SLOT( 4, setSlotInitLat,            base::Latitude)
-   ON_SLOT( 4, setSlotInitLat,            base::Angle)
+   ON_SLOT( 4, setSlotInitLat,            base::IAngle)
    ON_SLOT( 4, setSlotInitLat,            base::Number)
 
    ON_SLOT( 5, setSlotInitLon,            base::Longitude)
-   ON_SLOT( 5, setSlotInitLon,            base::Angle)
+   ON_SLOT( 5, setSlotInitLon,            base::IAngle)
    ON_SLOT( 5, setSlotInitLon,            base::Number)
 
    ON_SLOT( 6, setSlotInitGeocentric,     base::List)
 
-   ON_SLOT( 7, setSlotInitRoll,           base::Angle)
+   ON_SLOT( 7, setSlotInitRoll,           base::IAngle)
    ON_SLOT( 7, setSlotInitRoll,           base::Number)
 
-   ON_SLOT( 8, setSlotInitPitch,          base::Angle)
+   ON_SLOT( 8, setSlotInitPitch,          base::IAngle)
    ON_SLOT( 8, setSlotInitPitch,          base::Number)
 
-   ON_SLOT( 9, setSlotInitHeading,        base::Angle)
+   ON_SLOT( 9, setSlotInitHeading,        base::IAngle)
    ON_SLOT( 9, setSlotInitHeading,        base::Number)
 
    ON_SLOT(10, setSlotInitEulerAngles,    base::List)
@@ -156,7 +156,7 @@ BEGIN_SLOT_MAP(Player)
 
    ON_SLOT(18, setSlotTerrainElevReq,     base::Boolean)
    ON_SLOT(19, setSlotInterpolateTerrain, base::Boolean)
-   ON_SLOT(20, setSlotTerrainOffset,      base::Length)
+   ON_SLOT(20, setSlotTerrainOffset,      base::ILength)
 
    ON_SLOT(21, setSlotPositionFreeze,     base::Boolean)
    ON_SLOT(22, setSlotAltitudeFreeze,     base::Boolean)
@@ -166,11 +166,11 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(26, setSlotKillOverride,       base::Boolean)
    ON_SLOT(27, setSlotKillRemoval,        base::Boolean)
    ON_SLOT(28, setSlotEnableNetOutput,    base::Boolean)
-   ON_SLOT(29, setSlotDataLogTime,        base::Time)
+   ON_SLOT(29, setSlotDataLogTime,        base::ITime)
 
-   ON_SLOT(30, setSlotTestRollRate,       base::Angle)
-   ON_SLOT(31, setSlotTestPitchRate,      base::Angle)
-   ON_SLOT(32, setSlotTestYawRate,        base::Angle)
+   ON_SLOT(30, setSlotTestRollRate,       base::IAngle)
+   ON_SLOT(31, setSlotTestPitchRate,      base::IAngle)
+   ON_SLOT(32, setSlotTestYawRate,        base::IAngle)
    ON_SLOT(33, setSlotTestBodyAxis,       base::Boolean)
 
    ON_SLOT(34, setSlotUseCoordSys,        base::Identifier)
@@ -3424,7 +3424,7 @@ bool Player::setStoresMgr(base::Pair* const x)
 }
 
 // initXPos: X position (+north)
-bool Player::setSlotInitXPos(const base::Length* const x)
+bool Player::setSlotInitXPos(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3448,7 +3448,7 @@ bool Player::setSlotInitXPos(const base::Number* const x)
 }
 
 // initYPos: Y position (+east)
-bool Player::setSlotInitYPos(const base::Length* const x)
+bool Player::setSlotInitYPos(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3472,7 +3472,7 @@ bool Player::setSlotInitYPos(const base::Number* const x)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up)
-bool Player::setSlotInitAlt(const base::Length* const x)
+bool Player::setSlotInitAlt(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3510,7 +3510,7 @@ bool Player::setSlotInitLat(const base::Latitude* const x)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::Angle* const x)
+bool Player::setSlotInitLat(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3555,7 +3555,7 @@ bool Player::setSlotInitLon(const base::Longitude* const x)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::Angle* const x)
+bool Player::setSlotInitLon(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3598,7 +3598,7 @@ bool Player::setSlotInitGeocentric(const base::List* const x)
 }
 
 // initRoll: Initial roll angle
-bool Player::setSlotInitRoll(const base::Angle* const x)
+bool Player::setSlotInitRoll(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3632,7 +3632,7 @@ bool Player::setSlotInitRoll(const base::Number* const x)
 }
 
 // initPitch: Initial pitch angle
-bool Player::setInitPitch(const base::Angle* const x)
+bool Player::setInitPitch(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3666,7 +3666,7 @@ bool Player::setInitPitch(const base::Number* const x)
 }
 
 // initHeading: Initial heading angle
-bool Player::setInitHeading(const base::Angle* const x)
+bool Player::setInitHeading(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3724,7 +3724,7 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 }
 
 // testRollRate: Test roll rate
-bool Player::setSlotTestRollRate(const base::Angle* const x)
+bool Player::setSlotTestRollRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3736,7 +3736,7 @@ bool Player::setSlotTestRollRate(const base::Angle* const x)
 }
 
 // testPitchRate: Test pitch rate
-bool Player::setSlotTestPitchRate(const base::Angle* const x)
+bool Player::setSlotTestPitchRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3748,7 +3748,7 @@ bool Player::setSlotTestPitchRate(const base::Angle* const x)
 }
 
 // testHeadingRate: Test heading rate
-bool Player::setSlotTestYawRate(const base::Angle* const x)
+bool Player::setSlotTestYawRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3876,7 +3876,7 @@ bool Player::setSlotInterpolateTerrain(const base::Boolean* const x)
 }
 
 // terrainOffset: Ground clamp offset from terrain to player's CG (base::Distance)
-bool Player::setSlotTerrainOffset(const base::Length* const x)
+bool Player::setSlotTerrainOffset(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3966,7 +3966,7 @@ bool Player::setSlotEnableNetOutput(const base::Boolean* const x)
 }
 
 // dataLogTime: Time between player data samples to an optional data
-bool Player::setSlotDataLogTime(const base::Time* const x)
+bool Player::setSlotDataLogTime(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

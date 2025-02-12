@@ -5,7 +5,7 @@
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Length; class Number; }
+namespace base { class IAngle; class ILength; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -71,8 +71,8 @@ private:
    bool setSlotSpeedMaxG(const base::Number* const);
    bool setSlotMaxG(const base::Number* const);
    bool setSlotMaxAccel(const base::Number* const);
-   bool setSlotCmdAltitude(const base::Length* const);
-   bool setSlotCmdHeading(const base::Angle* const);
+   bool setSlotCmdAltitude(const base::ILength* const);
+   bool setSlotCmdHeading(const base::IAngle* const);
    bool setSlotCmdVelocity(const base::Number* const);
 };
 

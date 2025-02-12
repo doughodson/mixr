@@ -47,8 +47,8 @@ BEGIN_SLOTTABLE(EarthModel)
 END_SLOTTABLE(EarthModel)
 
 BEGIN_SLOT_MAP(EarthModel)
-   ON_SLOT(1, setSlotA, Length)
-   ON_SLOT(2, setSlotB, Length)
+   ON_SLOT(1, setSlotA, ILength)
+   ON_SLOT(2, setSlotB, ILength)
    ON_SLOT(3, setSlotF, Number)
 END_SLOT_MAP()
 
@@ -153,12 +153,12 @@ bool EarthModel::setF(const double f0)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool EarthModel::setSlotA(const Length* const x)
+bool EarthModel::setSlotA(const ILength* const x)
 {
    return setA(x->getValueInMeters());
 }
 
-bool EarthModel::setSlotB(const Length* const x)
+bool EarthModel::setSlotB(const ILength* const x)
 {
    return setB(x->getValueInMeters());
 }

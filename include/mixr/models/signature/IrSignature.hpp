@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class Area; class Number; class List; class Table1; }
+namespace base { class IArea; class Number; class List; class Table1; }
 namespace models {
 class IrQueryMsg;
 class IrShape;
@@ -22,13 +22,13 @@ class IrShape;
 //    baseHeatSignature   <Number>      ! Base heat signature - units: watts per steradian
 //    emissivity          <Number>      ! Emissivity - unitless, values range from
 //                                      !     0.0 (total reflection) to 1.0 (total absorption)
-//    effectiveArea       <base::Area>  ! Effective area - units: meters squared (m^2)
+//    effectiveArea       <base::IArea> ! Effective area - units: meters squared (m^2)
 //
 // Notes:
 //    1) Simple IR signature class, specifies player-specific properties related to IR modeling.
 //    2) If no signature area provided, signature is simply baseHeatSignature*emissivity/radius^2
 //    3) An irAtmosphere class is not required
-//    4) If signature area is specified and if irAtmosphere used can calculate background, 
+//    4) If signature area is specified and if irAtmosphere used can calculate background,
 //       then backgroundBlockedByTarget can be calculated (by irAtmosphere)
 //    5) Signature area can be specified either by effectiveArea or by irShapeSignature,
 //       where irShapeSignature is used if both are provided
@@ -41,7 +41,7 @@ class IrShape;
 // Example Input:
 //
 //   ( IrSignature
-//   
+//
 //      irShapeSignature:
 //         ( IrBox
 //            x: (Meters 1.0)        // dimensions of source shape
@@ -64,7 +64,7 @@ public:
 
    // IrSignature class interface
    virtual bool getIrSignature(IrQueryMsg* const);
-   virtual double getSignatureArea(IrQueryMsg*); 
+   virtual double getSignatureArea(IrQueryMsg*);
 
 protected:
 
@@ -77,17 +77,17 @@ protected:
    // get the waveband widths from each bin
    const double* getWaveBandWidths() const;
 
-   // return the lowest wavelength for which data for the atmosphere is required. 
+   // return the lowest wavelength for which data for the atmosphere is required.
    //        It is higher of the bottom sensor waveband and the lowest waveband represented by the atmosphere.
    double getLowerEndOfWavelengthOverlap(
       const double lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
       const double lowerSensorWaveband     // Lower end of the sensor waveband (microns)
-   ) const 
+   ) const
    {
      return ((lowerRadiationWaveband > lowerSensorWaveband) ? lowerRadiationWaveband : lowerSensorWaveband);
    }
 
-   // return the highest wavelength for which data for the atmosphere is required. 
+   // return the highest wavelength for which data for the atmosphere is required.
    //        It is lower of the top of the sensor waveband and the highest waveband represented by the atmosphere.
    double getUpperEndOfWavelengthOverlap(
       const double upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
@@ -107,7 +107,7 @@ protected:
    double getEmissivity() const                           { return emissivity; }
 
    // Set the emissivity for the player
-   bool setEmissivity(const double x)                     { emissivity = x; return true; } 
+   bool setEmissivity(const double x)                     { emissivity = x; return true; }
 
    // The effective area for heat calculations (m^2)
    double getEffectiveArea() const                        { return effectiveArea; }
@@ -129,12 +129,12 @@ private:
    double effectiveArea{1e-12};            // The effective area for heat calculations (m^2) (near zero, but non-zero)
 
 private:
-   // slot table helper methods 
+   // slot table helper methods
    bool setSlotWaveBandSizes(const base::Table1* const);
    bool setSlotIrShapeSignature(IrShape* const);
    bool setSlotBaseHeatSignature(base::Number* const);
    bool setSlotEmissivity(base::Number* const);
-   bool setSlotEffectiveArea(base::Area* const);
+   bool setSlotEffectiveArea(base::IArea* const);
 };
 
 }

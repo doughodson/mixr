@@ -29,8 +29,8 @@ BEGIN_SLOTTABLE(SamVehicle)
 END_SLOTTABLE(SamVehicle)
 
 BEGIN_SLOT_MAP(SamVehicle)
-    ON_SLOT(1, setSlotMinLaunchRange,    base::Length)
-    ON_SLOT(2, setSlotMaxLaunchRange,    base::Length)
+    ON_SLOT(1, setSlotMinLaunchRange,    base::ILength)
+    ON_SLOT(2, setSlotMaxLaunchRange,    base::ILength)
 END_SLOT_MAP()
 
 SamVehicle::SamVehicle()
@@ -136,8 +136,8 @@ bool SamVehicle::setMinLaunchRange(const double rng)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// maxLaunchRange: Max launch range (base::Distance)
-bool SamVehicle::setSlotMaxLaunchRange(const base::Length* const x)
+// maxLaunchRange: Max launch range
+bool SamVehicle::setSlotMaxLaunchRange(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -146,8 +146,8 @@ bool SamVehicle::setSlotMaxLaunchRange(const base::Length* const x)
    return ok;
 }
 
-// minLaunchRange: Min launch range (base::Distance)
-bool SamVehicle::setSlotMinLaunchRange(const base::Length* const x)
+// minLaunchRange: Min launch range
+bool SamVehicle::setSlotMinLaunchRange(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {

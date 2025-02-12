@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Number; class Length; }
+namespace base { class Number; class ILength; }
 namespace models {
 class Emission;
 
@@ -38,7 +38,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotRadius(base::Number* const);
-   bool setSlotRadius(base::Length* const);
+   bool setSlotRadius(base::ILength* const);
 };
 
 }
