@@ -300,7 +300,7 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
       while (chan <= nc && item != nullptr) {
 
          const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
-         const base::Frequency* p{static_cast<const base::Frequency*>(pair->object())};
+         const base::IFrequency* p{static_cast<const base::IFrequency*>(pair->object())};
          if (p != nullptr) {
             const bool ok{setChannelFrequency(chan, p->getValueInHertz())};
             if (!ok) {

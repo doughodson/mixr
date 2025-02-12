@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Angle; }
+namespace base { class IAngle; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class Rotators : public Graphic
 {
     DECLARE_SUBCLASS(Rotators, Graphic)
 
-public: 
+public:
     Rotators();
 
     // Get functions
@@ -64,13 +64,13 @@ public:
 
 private:
     // Event callbacks
-    bool onXRotate(const base::Angle* const);
+    bool onXRotate(const base::IAngle* const);
     bool onXRotate(const base::Number* const);
     bool onXRotateDeg(const base::Number* const);
-    bool onYRotate(const base::Angle* const);
+    bool onYRotate(const base::IAngle* const);
     bool onYRotate(const base::Number* const);
     bool onYRotateDeg(const base::Number* const);
-    bool onZRotate(const base::Angle* const);
+    bool onZRotate(const base::IAngle* const);
     bool onZRotate(const base::Number* const);
     bool onZRotateDeg(const base::Number* const);
 

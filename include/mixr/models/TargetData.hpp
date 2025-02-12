@@ -5,8 +5,8 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Identifier; class Integer; class Length;
-                 class Number; class String; class Time; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength;
+                 class Number; class String; class ITime; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -23,22 +23,22 @@ namespace models {
 //    manualAssign     <Boolean>        ! Manually assign weapon to target? (default: false)
 //    stickType        <Identifier>     ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
 //
-//    stickDistance    <Length>         ! Weapon stick length (default: 0)
+//    stickDistance    <ILength>        ! Weapon stick length (default: 0)
 //    stickDistance    <Number>         ! (feet)
 //
-//    interval         <Time>           ! Time between weapon releases (default: 0)
+//    interval         <ITime>          ! Time between weapon releases (default: 0)
 //    interval         <Number>         ! (MSec)
 //
-//    maxMissDistance  <Length>         ! Maximum miss distance (default: 0)
+//    maxMissDistance  <ILength>        ! Maximum miss distance (default: 0)
 //    maxMissDistance  <Number>         ! (feet)
-// 
-//    armDelay         <Time>           ! Arming delay (default: 0)
+//
+//    armDelay         <ITime>          ! Arming delay (default: 0)
 //    armDelay         <Number>         ! (0-99.9 sec)
 //
-//    angle            <Angle>          ! Impact angle (default: 0)
+//    angle            <IAngle>         ! Impact angle (default: 0)
 //    angle            <Number>         ! (degrees)
 //
-//    azimuth          <Angle>          ! Azimuth angle (default: 0)
+//    azimuth          <IAngle>         ! Azimuth angle (default: 0)
 //    azimuth          <Number>         ! (degrees)
 //
 //    velocity         <Number>         ! Impact velocity (ft/sec) (default: 0)
@@ -108,17 +108,17 @@ private:
    bool setSlotQuantity(const base::Integer* const);
    bool setSlotManualAssign(const base::Boolean* const);
    bool setSlotStickType(const base::Identifier* const);
-   bool setSlotStickDistance(const base::Length* const);
+   bool setSlotStickDistance(const base::ILength* const);
    bool setSlotStickDistance(const base::Number* const);
-   bool setSlotInterval(const base::Time* const);
+   bool setSlotInterval(const base::ITime* const);
    bool setSlotInterval(const base::Number* const);
-   bool setSlotMaxMissDistance(const base::Length* const);
+   bool setSlotMaxMissDistance(const base::ILength* const);
    bool setSlotMaxMissDistance(const base::Number* const);
-   bool setSlotArmDelay(const base::Time* const);
+   bool setSlotArmDelay(const base::ITime* const);
    bool setSlotArmDelay(const base::Number* const);
-   bool setSlotAngle(const base::Angle* const);
+   bool setSlotAngle(const base::IAngle* const);
    bool setSlotAngle(const base::Number* const);
-   bool setSlotAzimuth(const base::Angle* const);
+   bool setSlotAzimuth(const base::IAngle* const);
    bool setSlotAzimuth(const base::Number* const);
    bool setSlotVelocity(const base::Number* const);
 };

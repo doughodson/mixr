@@ -43,22 +43,22 @@ BEGIN_SLOT_MAP(TargetData)
    ON_SLOT( 5, setSlotManualAssign,    base::Boolean)
    ON_SLOT( 6, setSlotStickType,       base::Identifier)
 
-   ON_SLOT( 7, setSlotStickDistance,   base::Length)
+   ON_SLOT( 7, setSlotStickDistance,   base::ILength)
    ON_SLOT( 7, setSlotStickDistance,   base::Number)
 
-   ON_SLOT( 8, setSlotInterval,        base::Time)
+   ON_SLOT( 8, setSlotInterval,        base::ITime)
    ON_SLOT( 8, setSlotInterval,        base::Number)
 
-   ON_SLOT( 9, setSlotMaxMissDistance, base::Length)
+   ON_SLOT( 9, setSlotMaxMissDistance, base::ILength)
    ON_SLOT( 9, setSlotMaxMissDistance, base::Number)
 
-   ON_SLOT(10, setSlotArmDelay,        base::Time)
+   ON_SLOT(10, setSlotArmDelay,        base::ITime)
    ON_SLOT(10, setSlotArmDelay,        base::Number)
 
-   ON_SLOT(11, setSlotAngle,           base::Angle)
+   ON_SLOT(11, setSlotAngle,           base::IAngle)
    ON_SLOT(11, setSlotAngle,           base::Number)
 
-   ON_SLOT(12, setSlotAzimuth,         base::Angle)
+   ON_SLOT(12, setSlotAzimuth,         base::IAngle)
    ON_SLOT(12, setSlotAzimuth,         base::Number)
    ON_SLOT(13, setSlotVelocity,        base::Number)
 END_SLOT_MAP()
@@ -182,7 +182,7 @@ bool TargetData::setSlotStickType(const base::Identifier* const msg)
    return ok;
 }
 
-bool TargetData::setSlotStickDistance(const base::Length* const x)
+bool TargetData::setSlotStickDistance(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -200,7 +200,7 @@ bool TargetData::setSlotStickDistance(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotInterval(const base::Time* const x)
+bool TargetData::setSlotInterval(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -218,7 +218,7 @@ bool TargetData::setSlotInterval(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotMaxMissDistance(const base::Length* const x)
+bool TargetData::setSlotMaxMissDistance(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -236,7 +236,7 @@ bool TargetData::setSlotMaxMissDistance(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotArmDelay(const base::Time* const x)
+bool TargetData::setSlotArmDelay(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -254,7 +254,7 @@ bool TargetData::setSlotArmDelay(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotAngle(const base::Angle* const msg)
+bool TargetData::setSlotAngle(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -272,7 +272,7 @@ bool TargetData::setSlotAngle(const base::Number* const msg)
    return ok;
 }
 
-bool TargetData::setSlotAzimuth(const base::Angle* const msg)
+bool TargetData::setSlotAzimuth(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

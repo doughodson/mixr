@@ -29,7 +29,7 @@ BEGIN_SLOTTABLE(IrShape)
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-   ON_SLOT(1, setSlotIrShapeArea, base::Area)
+   ON_SLOT(1, setSlotIrShapeArea, base::IArea)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -45,7 +45,7 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-bool IrShape::setSlotIrShapeArea(const mixr::base::Area* const a)
+bool IrShape::setSlotIrShapeArea(const mixr::base::IArea* const a)
 {
    if (a != nullptr) {
       area = a->getValueInSquareMeters();
@@ -78,7 +78,7 @@ END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
    ON_SLOT(1, setSlotIrSphereRadius, base::Number)
-   ON_SLOT(1, setSlotIrSphereRadius, base::Length)
+   ON_SLOT(1, setSlotIrSphereRadius, base::ILength)
 END_SLOT_MAP()
 
 IrSphere::IrSphere()
@@ -103,7 +103,7 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const x)
    return true;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mixr::base::Length* const x)
+bool IrSphere::setSlotIrSphereRadius(const mixr::base::ILength* const x)
 {
    double value{};
 
@@ -135,9 +135,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-   ON_SLOT(1, setSlotIrBoxX, base::Length)
-   ON_SLOT(2, setSlotIrBoxY, base::Length)
-   ON_SLOT(3, setSlotIrBoxZ, base::Length)
+   ON_SLOT(1, setSlotIrBoxX, base::ILength)
+   ON_SLOT(2, setSlotIrBoxY, base::ILength)
+   ON_SLOT(3, setSlotIrBoxZ, base::ILength)
 END_SLOT_MAP()
 
 IrBox::IrBox()
@@ -153,7 +153,7 @@ void IrBox::copyData(const IrBox& org, const bool)
    z = org.z;
 }
 
-bool IrBox::setSlotIrBoxX(const mixr::base::Length* const d)
+bool IrBox::setSlotIrBoxX(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       x = d->getValueInMeters();
@@ -161,7 +161,7 @@ bool IrBox::setSlotIrBoxX(const mixr::base::Length* const d)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const mixr::base::Length* const d)
+bool IrBox::setSlotIrBoxY(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       y = d->getValueInMeters();
@@ -169,7 +169,7 @@ bool IrBox::setSlotIrBoxY(const mixr::base::Length* const d)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const mixr::base::Length* const d)
+bool IrBox::setSlotIrBoxZ(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       z = d->getValueInMeters();

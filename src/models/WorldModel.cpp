@@ -50,7 +50,7 @@ BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 2, setSlotRefLongitude,         base::Longitude)
     ON_SLOT( 2, setSlotRefLongitude,         base::Number)
 
-    ON_SLOT( 3, setSlotGamingAreaRange,      base::Length)
+    ON_SLOT( 3, setSlotGamingAreaRange,      base::ILength)
 
     ON_SLOT( 4, setSlotEarthModel,           base::EarthModel)
     ON_SLOT( 4, setSlotEarthModel,           base::Identifier)
@@ -300,7 +300,7 @@ bool WorldModel::setSlotRefLongitude(const base::Number* const msg)
     return ok;
 }
 
-bool WorldModel::setSlotGamingAreaRange(const base::Length* const x)
+bool WorldModel::setSlotGamingAreaRange(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {

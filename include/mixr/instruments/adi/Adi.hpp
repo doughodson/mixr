@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Number; class Angle; }
+namespace base { class Number; class IAngle; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotMaxRate(const base::Angle* const);
+    bool setSlotMaxRate(const base::IAngle* const);
     bool setSlotMaxRate(const base::Number* const);
 };
 

@@ -26,9 +26,9 @@ END_SLOTTABLE(MergingIrSensor)
 
 BEGIN_SLOT_MAP(MergingIrSensor)
    ON_SLOT(1, setSlotAzimuthBin,   base::Number)
-   ON_SLOT(1, setSlotAzimuthBin,   base::Angle)
+   ON_SLOT(1, setSlotAzimuthBin,   base::IAngle)
    ON_SLOT(2, setSlotElevationBin, base::Number)
-   ON_SLOT(2, setSlotElevationBin, base::Angle)
+   ON_SLOT(2, setSlotElevationBin, base::IAngle)
 END_SLOT_MAP()
 
 MergingIrSensor::MergingIrSensor()
@@ -263,7 +263,7 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const x)
    return true;
 }
 
-bool MergingIrSensor::setSlotAzimuthBin(const base::Angle* const x)
+bool MergingIrSensor::setSlotAzimuthBin(const base::IAngle* const x)
 {
    double value{};
 
@@ -285,7 +285,7 @@ bool MergingIrSensor::setSlotElevationBin(const base::Number* const x)
    return true;
 }
 
-bool MergingIrSensor::setSlotElevationBin(const base::Angle* const x)
+bool MergingIrSensor::setSlotElevationBin(const base::IAngle* const x)
 {
    double value{};
 

@@ -12,13 +12,13 @@ EMPTY_SLOTTABLE(Rotators)
 EMPTY_DELETEDATA(Rotators)
 
 BEGIN_EVENT_HANDLER(Rotators)
-    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    base::Angle)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    base::IAngle)
     ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onXRotateDeg, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    base::Angle)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    base::IAngle)
     ON_EVENT_OBJ(UPDATE_VALUE3, onYRotate,    base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE4, onYRotateDeg, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate,    base::Angle)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate,    base::IAngle)
     ON_EVENT_OBJ(UPDATE_VALUE5, onZRotate,    base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE6, onZRotateDeg, base::Number)
 END_EVENT_HANDLER()
@@ -126,7 +126,7 @@ bool Rotators::onXRotate(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 // onXRotate() -- updates the X rotation value (rad)
 //------------------------------------------------------------------------------
-bool Rotators::onXRotate(const base::Angle* const rotation)
+bool Rotators::onXRotate(const base::IAngle* const rotation)
 {
     if (rotation != nullptr)
         return setXRotation(rotation->getValueInRadians());
@@ -154,7 +154,7 @@ bool Rotators::onYRotate(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 // onYRotate() -- updates the Y rotation value (rad)
 //------------------------------------------------------------------------------
-bool Rotators::onYRotate(const base::Angle* const rotation)
+bool Rotators::onYRotate(const base::IAngle* const rotation)
 {
     if (rotation != nullptr)
         return setYRotation(rotation->getValueInRadians());
@@ -182,7 +182,7 @@ bool Rotators::onZRotate(const base::Number* const rotation)
 //------------------------------------------------------------------------------
 // onZRotate() -- updates the Z rotation value (rad)
 //------------------------------------------------------------------------------
-bool Rotators::onZRotate(const base::Angle* const rotation)
+bool Rotators::onZRotate(const base::IAngle* const rotation)
 {
     if (rotation != nullptr)
         return setZRotation(rotation->getValueInRadians());

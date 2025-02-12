@@ -80,19 +80,19 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(2, setSlotNetOutput,           base::NetHandler)
    ON_SLOT(3, setSlotVersion,             base::Integer)
 
-   ON_SLOT(4, setSlotMaxTimeDR,           base::Time)
+   ON_SLOT(4, setSlotMaxTimeDR,           base::ITime)
    ON_SLOT(4, setSlotMaxTimeDR,           base::PairStream)
 
-   ON_SLOT(5, setSlotMaxPositionErr,      base::Length)
+   ON_SLOT(5, setSlotMaxPositionErr,      base::ILength)
    ON_SLOT(5, setSlotMaxPositionErr,      base::PairStream)
 
-   ON_SLOT(6, setSlotMaxOrientationErr,   base::Angle)
+   ON_SLOT(6, setSlotMaxOrientationErr,   base::IAngle)
    ON_SLOT(6, setSlotMaxOrientationErr,   base::PairStream)
 
-   ON_SLOT(7, setSlotMaxAge,              base::Time)
+   ON_SLOT(7, setSlotMaxAge,              base::ITime)
    ON_SLOT(7, setSlotMaxAge,              base::PairStream)
 
-   ON_SLOT(8, setSlotMaxEntityRange,      base::Length)
+   ON_SLOT(8, setSlotMaxEntityRange,      base::ILength)
    ON_SLOT(8, setSlotMaxEntityRange,      base::PairStream)
 
    ON_SLOT(9, setSlotEmissionPduHandlers, base::PairStream)
@@ -996,7 +996,7 @@ bool NetIO::setMaxAge(const double v, const unsigned char kind, const unsigned c
 //------------------------------------------------------------------------------
 
 // Sets max entity range for this entity kind/domain
-bool NetIO::setMaxEntityRange(const base::Length* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxEntityRange(const base::ILength* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1006,7 +1006,7 @@ bool NetIO::setMaxEntityRange(const base::Length* const p, const unsigned char k
 }
 
 // Sets max DR time for this entity kind/domain
-bool NetIO::setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxTimeDR(const base::ITime* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1016,7 +1016,7 @@ bool NetIO::setMaxTimeDR(const base::Time* const p, const unsigned char kind, co
 }
 
 // Sets max position error for this entity kind/domain
-bool NetIO::setMaxPositionErr(const base::Length* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxPositionErr(const base::ILength* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1026,7 +1026,7 @@ bool NetIO::setMaxPositionErr(const base::Length* const p, const unsigned char k
 }
 
 // Sets max orientation error for this entity kind/domain
-bool NetIO::setMaxOrientationErr(const base::Angle* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxOrientationErr(const base::IAngle* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1037,7 +1037,7 @@ bool NetIO::setMaxOrientationErr(const base::Angle* const p, const unsigned char
 }
 
 // Sets max age (without update) of a networked player of this entity kind/domain
-bool NetIO::setMaxAge(const base::Time* const p, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxAge(const base::ITime* const p, const unsigned char kind, const unsigned char domain)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1190,7 +1190,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{p->slot().c_str()};
-            const auto pp = dynamic_cast<const base::Length*>( p->object() );
+            const auto pp = dynamic_cast<const base::ILength*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1215,7 +1215,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
 }
 
 // Sets the maximum range for all entity types
-bool NetIO::setSlotMaxEntityRange(const base::Length* const msg)
+bool NetIO::setSlotMaxEntityRange(const base::ILength* const msg)
 {
    return setMaxEntityRange(msg, 255, 255);
 }
@@ -1231,7 +1231,7 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{p->slot().c_str()};
-            const auto pp = dynamic_cast<const base::Time*>( p->object() );
+            const auto pp = dynamic_cast<const base::ITime*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1257,7 +1257,7 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
 
 
 // Sets max DR times for all entity types
-bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
+bool NetIO::setSlotMaxTimeDR(const base::ITime* const msg)
 {
    return setMaxTimeDR(msg, 255, 255);
 }
@@ -1274,7 +1274,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{p->slot().c_str()};
-            const auto pp = dynamic_cast<const base::Length*>( p->object() );
+            const auto pp = dynamic_cast<const base::ILength*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1299,7 +1299,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
 }
 
 // Sets max position errors for all entity types
-bool NetIO::setSlotMaxPositionErr(const base::Length* const msg)
+bool NetIO::setSlotMaxPositionErr(const base::ILength* const msg)
 {
    return setMaxPositionErr(msg, 255, 255);
 }
@@ -1315,7 +1315,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname{p->slot().c_str()};
-            const auto pp = dynamic_cast<const base::Angle*>( p->object() );
+            const auto pp = dynamic_cast<const base::IAngle*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1340,7 +1340,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
 }
 
 // Sets max orientation errors for all entity types
-bool NetIO::setSlotMaxOrientationErr(const base::Angle* const msg)
+bool NetIO::setSlotMaxOrientationErr(const base::IAngle* const msg)
 {
    return setMaxOrientationErr(msg, 255, 255);
 }
@@ -1357,7 +1357,7 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
             // get the slot and object from the pair
             const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname {p->slot().c_str()};
-            const auto pp = dynamic_cast<const base::Time*>( p->object() );
+            const auto pp = dynamic_cast<const base::ITime*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1382,7 +1382,7 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
 }
 
 // Sets max ages (without update) of all entity types
-bool NetIO::setSlotMaxAge(const base::Time* const msg)
+bool NetIO::setSlotMaxAge(const base::ITime* const msg)
 {
    return setMaxAge(msg, 255, 255);
 }

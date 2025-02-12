@@ -5,7 +5,7 @@
 #include "mixr/base/Object.hpp"
 
 namespace mixr {
-namespace base { class Area; class Length; class Number; class Length; }
+namespace base { class IArea; class ILength; class Number; }
 namespace models {
 class IrQueryMsg;
 
@@ -30,7 +30,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotIrShapeArea(const base::Area* const);
+   bool setSlotIrShapeArea(const base::IArea* const);
 };
 
 //------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ private:
 // Factory name: IrSphere
 // Slots:
 //   radius    <Number>   ! Radius of sphere (default is 10)
-//   radius    <Length>
+//   radius    <ILength>
 //------------------------------------------------------------------------------
 class IrSphere : public IrShape
 {
@@ -59,7 +59,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotIrSphereRadius(const base::Number* const);
-   bool setSlotIrSphereRadius(const mixr::base::Length* const);
+   bool setSlotIrSphereRadius(const mixr::base::ILength* const);
 };
 
 //------------------------------------------------------------------------------
@@ -67,9 +67,9 @@ private:
 //
 // Factory name: IrBox
 // Slots:
-//   x      <base::Length>         ! x dimension (default is 10 meters)
-//   y      <base::Length>         ! y dimension (default is 10 meters)
-//   z      <base::Length>         ! z dimension (default is 10 meters)
+//   x      <base::ILength>         ! x dimension (default is 10 meters)
+//   y      <base::ILength>         ! y dimension (default is 10 meters)
+//   z      <base::ILength>         ! z dimension (default is 10 meters)
 //------------------------------------------------------------------------------
 class IrBox : public IrShape
 {
@@ -88,9 +88,9 @@ private:
    double z{10.0};
 
 private:
-   bool setSlotIrBoxX(const base::Length* const);
-   bool setSlotIrBoxY(const base::Length* const);
-   bool setSlotIrBoxZ(const base::Length* const);
+   bool setSlotIrBoxX(const base::ILength* const);
+   bool setSlotIrBoxY(const base::ILength* const);
+   bool setSlotIrBoxZ(const base::ILength* const);
 };
 
 }

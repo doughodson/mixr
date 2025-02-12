@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class Length; class Number; class PairStream; }
+namespace base { class Identifier; class Integer; class ILength; class Number; class PairStream; }
 namespace simulation { class IPlayer; }
 namespace models { class Player; }
 namespace cigi {
@@ -21,7 +21,7 @@ class Player2CigiMap;
 //
 // Factory name: BaseIgHost
 // Slots:
-//    maxRange       <Length>       ! Max range of visual system (default: 20000.0)
+//    maxRange       <ILength>      ! Max range of visual system (default: 20000.0)
 //    maxRange       <Number>       ! Max range of visual system (meters)
 //
 //    maxModels      <Integer>      ! Max number of active, in-range player/models (default: 0)
@@ -149,7 +149,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMaxRange(const base::Length* const);        // Sets the max range (Length)
+   bool setSlotMaxRange(const base::ILength* const);       // Sets the max range (Length)
    bool setSlotMaxRange(const base::Number* const);        // Sets the max range (meters)
    bool setSlotMaxModels(const base::Integer* const);      // Sets the max number of active, in-range player/models
    bool setSlotMaxElevations(const base::Integer* const);  // Sets the max number of player terrain elevation requests

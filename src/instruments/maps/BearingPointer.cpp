@@ -20,7 +20,7 @@ BEGIN_SLOT_MAP(BearingPointer)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(BearingPointer)
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Angle)    // Sets bearing to this base::Angle
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::IAngle)    // Sets bearing to this base::Angle
     ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Number)   // Sets bearing to this angle in radians
     ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, base::Number)  // Sets bearing to this angle in degrees
 END_EVENT_HANDLER()
@@ -64,7 +64,7 @@ void BearingPointer::draw()
 //------------------------------------------------------------------------------
 //  onUpdateRadBearingPointer() - update bearing angle
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateRadBearingPointer(const base::Angle* const x)
+bool BearingPointer::onUpdateRadBearingPointer(const base::IAngle* const x)
 {
     bool ok = false;
     if (x != nullptr) {

@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Decibel; class Frequency; class Identifier; class Number; class Power; }
+namespace base { class Boolean; class Decibel; class IFrequency; class Identifier; class Number; class IPower; }
 namespace models {
 class Antenna;
 class Emission;
@@ -31,13 +31,13 @@ class Emission;
 // Slots:
 //    antennaName        <base::Identifier>    ! Name of the requested Antenna
 //
-//    frequency          <base::Frequency>     ! Radio's Main Frequency         (default: 0 hz)
+//    frequency          <base::IFrequency>    ! Radio's Main Frequency         (default: 0 hz)
 //
-//    bandwidth          <base::Frequency>     ! Radio's Bandwidth              (default: 1.0 hz)
+//    bandwidth          <base::IFrequency>    ! Radio's Bandwidth              (default: 1.0 hz)
 //
-//    bandwidthNoise     <base::Frequency>     ! Radio's Bandwidth Noise        (default: 'bandwidth', 1.0)
+//    bandwidthNoise     <base::IFrequency>    ! Radio's Bandwidth Noise        (default: 'bandwidth', 1.0)
 //
-//    powerPeak          <base::Power>         ! Peak Power                     (default: 0.0 watts)
+//    powerPeak          <base::IPower>        ! Peak Power                     (default: 0.0 watts)
 //
 //    threshold          <base::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
 //
@@ -167,10 +167,10 @@ private:
 private:
    // slot table helper methods
    bool setSlotAntennaName(base::Identifier* const);
-   bool setSlotPeakPower(base::Power* const);
-   bool setSlotFrequency(base::Frequency* const);
-   bool setSlotBandwidth(base::Frequency* const);
-   bool setSlotBandwidthNoise(base::Frequency* const);
+   bool setSlotPeakPower(base::IPower* const);
+   bool setSlotFrequency(base::IFrequency* const);
+   bool setSlotBandwidth(base::IFrequency* const);
+   bool setSlotBandwidthNoise(base::IFrequency* const);
    bool setSlotRfThreshold(base::Decibel* const);
    bool setSlotRfNoiseFigure(base::Number* const);
    bool setSlotRfSysTemp(base::Number* const);

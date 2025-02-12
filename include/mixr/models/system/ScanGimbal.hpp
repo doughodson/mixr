@@ -6,7 +6,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Integer; class Number; class Angle; }
+namespace base { class Boolean; class Identifier; class Integer; class Number; class IAngle; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ private:
    bool setSlotNumBars(const base::Integer* const);
    bool setSlotRevPerSec(const base::Number* const);
    bool setSlotScanRadius(const base::Number* const);
-   bool setSlotScanRadius(const base::Angle* const);
+   bool setSlotScanRadius(const base::IAngle* const);
    bool setSlotPRVertices(const base::PairStream* const);
    bool setSlotMaxRevs(const base::Number* const);
 };

@@ -35,7 +35,7 @@ BEGIN_SLOTTABLE(IgHost)
 END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
-   ON_SLOT(1, setSlotMaxRange,      base::Length)
+   ON_SLOT(1, setSlotMaxRange,      base::ILength)
    ON_SLOT(1, setSlotMaxRange,      base::Number)
    ON_SLOT(2, setSlotMaxModels,     base::Integer)
    ON_SLOT(3, setSlotMaxElevations, base::Integer)
@@ -647,7 +647,7 @@ int IgHost::compareKey2Model(const void* key, const void* model)
    return result;
 }
 
-bool IgHost::setSlotMaxRange(const base::Length* const x)
+bool IgHost::setSlotMaxRange(const base::ILength* const x)
 {
     bool ok{};
 

@@ -5,7 +5,7 @@
 #include "mixr/simulation/Simulation.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Latitude; class Length; class Longitude; class Number; }
+namespace base { class Boolean; class Identifier; class Latitude; class ILength; class Longitude; class Number; }
 namespace terrain { class ITerrain; }
 namespace models {
 class IAtmosphere;
@@ -27,7 +27,7 @@ class IAtmosphere;
 //    longitude      <base::Longitude>        ! reference (gaming area) longitude (default 0.0)
 //                   <base::Number>           ! reference (gaming area) longitude (deg)
 //
-//    gamingAreaRange <base::Length>          ! Max valid range of the simulation's gaming area or zero for unlimited
+//    gamingAreaRange <base::ILength>         ! Max valid range of the simulation's gaming area or zero for unlimited
 //                                            ! default: zero -- unlimited range
 //
 //    earthModel     <base::EarthModel>       ! Earth model for geodetic lat/lon (default is WGS-84)
@@ -154,7 +154,7 @@ private:
    bool setSlotRefLongitude(const base::Longitude* const);
    bool setSlotRefLongitude(const base::Number* const);
 
-   bool setSlotGamingAreaRange(const base::Length* const);
+   bool setSlotGamingAreaRange(const base::ILength* const);
    bool setSlotEarthModel(const base::EarthModel* const);
    bool setSlotEarthModel(const base::Identifier* const);
    bool setSlotGamingAreaEarthModel(const base::Boolean* const);

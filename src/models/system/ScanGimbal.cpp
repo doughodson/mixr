@@ -43,7 +43,7 @@ BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 7, setSlotNumBars,           base::Integer)
     ON_SLOT( 8, setSlotRevPerSec,         base::Number)
     ON_SLOT( 9, setSlotScanRadius,        base::Number)
-    ON_SLOT( 9, setSlotScanRadius,        base::Angle)
+    ON_SLOT( 9, setSlotScanRadius,        base::IAngle)
     ON_SLOT(10, setSlotPRVertices,        base::PairStream)
     ON_SLOT(11, setSlotMaxRevs,           base::Number)
 END_SLOT_MAP()
@@ -951,7 +951,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const x)
    return ok;
 }
 
-bool ScanGimbal::setSlotScanRadius(const base::Angle* const x)
+bool ScanGimbal::setSlotScanRadius(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {

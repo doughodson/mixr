@@ -5,7 +5,7 @@
 #include "mixr/instruments/maps/CompassRose.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Number; }
+namespace base { class IAngle; class Number; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ public:
 
 private:
     // event handlers
-    bool onUpdateRadBearingPointer(const base::Angle* const);
+    bool onUpdateRadBearingPointer(const base::IAngle* const);
     bool onUpdateRadBearingPointer(const base::Number* const);
     bool onUpdateDegBearingPointer(const base::Number* const);
 

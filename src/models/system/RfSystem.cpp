@@ -37,9 +37,9 @@ END_SLOTTABLE(RfSystem)
 
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,         base::Identifier)
-    ON_SLOT(2,  setSlotFrequency,           base::Frequency)
-    ON_SLOT(3,  setSlotBandwidth,           base::Frequency)
-    ON_SLOT(4,  setSlotPeakPower,           base::Power)
+    ON_SLOT(2,  setSlotFrequency,           base::IFrequency)
+    ON_SLOT(3,  setSlotBandwidth,           base::IFrequency)
+    ON_SLOT(4,  setSlotPeakPower,           base::IPower)
     ON_SLOT(5,  setSlotRfThreshold,         base::Decibel)
     ON_SLOT(6,  setSlotRfNoiseFigure,       base::Number)
     ON_SLOT(7,  setSlotRfSysTemp,           base::Number)
@@ -47,7 +47,7 @@ BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(9,  setSlotRfReceiveLoss,       base::Number)
     ON_SLOT(10, setSlotRfSignalProcessLoss, base::Number)
     ON_SLOT(11, setSlotDisableEmissions,    base::Boolean)
-    ON_SLOT(12, setSlotBandwidthNoise,      base::Frequency)
+    ON_SLOT(12, setSlotBandwidthNoise,      base::IFrequency)
 END_SLOT_MAP()
 
 RfSystem::RfSystem()
@@ -587,7 +587,7 @@ bool RfSystem::setSlotAntennaName(base::Identifier* const p)
    return true;
 }
 
-bool RfSystem::setSlotFrequency(base::Frequency* const x)
+bool RfSystem::setSlotFrequency(base::IFrequency* const x)
 {
     bool ok{};
     double freq{-1.0};
@@ -606,7 +606,7 @@ bool RfSystem::setSlotFrequency(base::Frequency* const x)
     return ok;
 }
 
-bool RfSystem::setSlotBandwidth(base::Frequency* const freq)
+bool RfSystem::setSlotBandwidth(base::IFrequency* const freq)
 {
     bool ok{};
     double bw{-1.0};
@@ -625,7 +625,7 @@ bool RfSystem::setSlotBandwidth(base::Frequency* const freq)
 }
 
 // bandwidthNoise: Bandwidth Noise (Hz)
-bool RfSystem::setSlotBandwidthNoise(base::Frequency* const freq)
+bool RfSystem::setSlotBandwidthNoise(base::IFrequency* const freq)
 {
     bool ok{};
     double bw{-1.0};
@@ -643,7 +643,7 @@ bool RfSystem::setSlotBandwidthNoise(base::Frequency* const freq)
     return ok;
 }
 
-bool RfSystem::setSlotPeakPower(base::Power* const power)
+bool RfSystem::setSlotPeakPower(base::IPower* const power)
 {
     bool ok{};
     double peakPwr{-1.0};

@@ -163,8 +163,8 @@ END_SLOTTABLE(ActionImagingSar)
 BEGIN_SLOT_MAP(ActionImagingSar)
     ON_SLOT(1, setSlotSarLat,     base::Latitude)
     ON_SLOT(2, setSlotSarLon,     base::Longitude)
-    ON_SLOT(3, setSlotSarElev,    base::Length)
-    ON_SLOT(4, setSlotResolution, base::Length)
+    ON_SLOT(3, setSlotSarElev,    base::ILength)
+    ON_SLOT(4, setSlotResolution, base::ILength)
     ON_SLOT(5, setSlotImageSize,  base::Integer)
 END_SLOT_MAP()
 
@@ -366,7 +366,7 @@ bool ActionImagingSar::setSlotSarLon(const base::Longitude* const x)
    return ok;
 }
 
-bool ActionImagingSar::setSlotSarElev(const base::Length* const x)
+bool ActionImagingSar::setSlotSarElev(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -375,7 +375,7 @@ bool ActionImagingSar::setSlotSarElev(const base::Length* const x)
    return ok;
 }
 
-bool ActionImagingSar::setSlotResolution(const base::Length* const x)
+bool ActionImagingSar::setSlotResolution(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {

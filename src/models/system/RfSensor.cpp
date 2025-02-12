@@ -48,11 +48,11 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(2, setSlotModeSingle,       RfSensor)
     ON_SLOT(3, setSlotRanges,           base::List)
     ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
-    ON_SLOT(5, setSlotPrf,              base::Frequency)      // Check for base::Frequency before base::Number
+    ON_SLOT(5, setSlotPrf,              base::IFrequency)      // Check for base::Frequency before base::Number
     ON_SLOT(5, setSlotPrf,              base::Number)
-    ON_SLOT(6, setSlotPulseWidth,       base::Time)           // Check for base::Time before base::Number
+    ON_SLOT(6, setSlotPulseWidth,       base::ITime)           // Check for base::Time before base::Number
     ON_SLOT(6, setSlotPulseWidth,       base::Number)
-    ON_SLOT(7, setSlotBeamWidth,        base::Angle)          // Check for base::Angle before base::Number
+    ON_SLOT(7, setSlotBeamWidth,        base::IAngle)          // Check for base::Angle before base::Number
     ON_SLOT(7, setSlotBeamWidth,        base::Number)
     ON_SLOT(8, setSlotTypeId,           base::String)
     ON_SLOT(9, setSlotSyncXmitWithScan, base::Boolean)
@@ -451,7 +451,7 @@ bool RfSensor::setInitRngIdx(const int idx)
 //------------------------------------------------------------------------------
 
 // Sets PRF as a base::Frequency
-bool RfSensor::setSlotPrf(const base::Frequency* const x)
+bool RfSensor::setSlotPrf(const base::IFrequency* const x)
 {
    bool ok{};
 
@@ -487,7 +487,7 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 //------------------------------------------------------------------------------
 
 // Sets pulse width using base::Time
-bool RfSensor::setSlotPulseWidth(const base::Time* const x)
+bool RfSensor::setSlotPulseWidth(const base::ITime* const x)
 {
    bool ok{};
 
@@ -521,7 +521,7 @@ bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
 //------------------------------------------------------------------------------
 
 // Sets beam width as an base::Angle
-bool RfSensor::setSlotBeamWidth(const base::Angle* const x)
+bool RfSensor::setSlotBeamWidth(const base::IAngle* const x)
 {
    bool ok{};
 

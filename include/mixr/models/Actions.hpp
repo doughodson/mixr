@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Latitude; class Length; class Longitude; class Number; }
+namespace base { class Integer; class Latitude; class ILength; class Longitude; class Number; }
 namespace models {
 class OnboardComputer;
 class Sar;
@@ -75,8 +75,8 @@ private:
 // Slots:
 //   sarLatitude   <Latitude>  ! Target's latitude (default: 0)
 //   sarLongitude  <Longitude> ! Target's longitude (default: 0)
-//   sarElevation  <Length>    ! Target's elevation (Length) (default: 0)
-//   resolution    <Length>    ! Image (pixel) resolution (default: 3)
+//   sarElevation  <ILength>   ! Target's elevation (Length) (default: 0)
+//   resolution    <ILength>   ! Image (pixel) resolution (default: 3)
 //   imageSize     <Integer>   ! Image size: height & width (pixels) (default: 512)
 //
 //------------------------------------------------------------------------------
@@ -127,8 +127,8 @@ private:
    // slot table helper methods
    bool setSlotSarLat(const base::Latitude* const);
    bool setSlotSarLon(const base::Longitude* const);
-   bool setSlotSarElev(const base::Length* const);
-   bool setSlotResolution(const base::Length* const);
+   bool setSlotSarElev(const base::ILength* const);
+   bool setSlotResolution(const base::ILength* const);
    bool setSlotImageSize(const base::Integer* const);
 };
 

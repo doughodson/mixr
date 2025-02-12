@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(Adi)
 END_SLOTTABLE(Adi)
 
 BEGIN_SLOT_MAP(Adi)
-    ON_SLOT(1, setSlotMaxRate, base::Angle)     // we can be sent an angle (degrees or radians) / per second
+    ON_SLOT(1, setSlotMaxRate, base::IAngle)    // we can be sent an angle (degrees or radians) / per second
     ON_SLOT(1, setSlotMaxRate, base::Number)    // or a number as degrees per second
 END_SLOT_MAP()
 
@@ -81,7 +81,7 @@ void Adi::updateData(const double dt)
 //------------------------------------------------------------------------------
 // setSlotMaxRate(base::Angle)
 //------------------------------------------------------------------------------
-bool Adi::setSlotMaxRate(const base::Angle* const x)
+bool Adi::setSlotMaxRate(const base::IAngle* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setMaxRate(x->getValueInDegrees());

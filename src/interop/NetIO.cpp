@@ -81,11 +81,11 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(8,  setSlotInputEntityTypes,   base::PairStream)
    ON_SLOT(9,  setSlotOutputEntityTypes,  base::PairStream)
 
-   ON_SLOT(10, setSlotMaxTimeDR,          base::Time)
-   ON_SLOT(11, setSlotMaxPositionErr,     base::Length)
-   ON_SLOT(12, setSlotMaxOrientationErr,  base::Angle)
-   ON_SLOT(13, setSlotMaxAge,             base::Time)
-   ON_SLOT(14, setSlotMaxEntityRange,     base::Length)
+   ON_SLOT(10, setSlotMaxTimeDR,          base::ITime)
+   ON_SLOT(11, setSlotMaxPositionErr,     base::ILength)
+   ON_SLOT(12, setSlotMaxOrientationErr,  base::IAngle)
+   ON_SLOT(13, setSlotMaxAge,             base::ITime)
+   ON_SLOT(14, setSlotMaxEntityRange,     base::ILength)
 END_SLOT_MAP()
 
 NetIO::NetIO()
@@ -1159,7 +1159,7 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 }
 
 // Sets the mac DR time(s)
-bool NetIO::setSlotMaxTimeDR(const base::Time* const x)
+bool NetIO::setSlotMaxTimeDR(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1169,7 +1169,7 @@ bool NetIO::setSlotMaxTimeDR(const base::Time* const x)
 }
 
 // Sets the max positional error(s)
-bool NetIO::setSlotMaxPositionErr(const base::Length* const x)
+bool NetIO::setSlotMaxPositionErr(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1179,7 +1179,7 @@ bool NetIO::setSlotMaxPositionErr(const base::Length* const x)
 }
 
 // Sets the max orientation error(s)
-bool NetIO::setSlotMaxOrientationErr(const base::Angle* const x)
+bool NetIO::setSlotMaxOrientationErr(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1190,7 +1190,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::Angle* const x)
 }
 
 // Sets the max age(s)
-bool NetIO::setSlotMaxAge(const base::Time* const x)
+bool NetIO::setSlotMaxAge(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1200,7 +1200,7 @@ bool NetIO::setSlotMaxAge(const base::Time* const x)
 }
 
 // Sets the max entity range(s)
-bool NetIO::setSlotMaxEntityRange(const base::Length* const x)
+bool NetIO::setSlotMaxEntityRange(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
