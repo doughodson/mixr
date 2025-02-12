@@ -32,7 +32,7 @@ END_SLOTTABLE(TrackManager)
 BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(1, setSlotMaxTracks,       base::Integer)
    ON_SLOT(2, setSlotMaxTrackAge,     base::Number)
-   ON_SLOT(2, setSlotMaxTrackAge,     base::Time)
+   ON_SLOT(2, setSlotMaxTrackAge,     base::ITime)
    ON_SLOT(3, setSlotFirstTrackId,    base::Integer)
    ON_SLOT(4, setSlotAlpha,           base::Number)
    ON_SLOT(5, setSlotBeta,            base::Number)
@@ -413,7 +413,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::Number* const x)
    return ok;
 }
 
-bool TrackManager::setSlotMaxTrackAge(const base::Time* const x)
+bool TrackManager::setSlotMaxTrackAge(const base::ITime* const x)
 {
    double age{};
    if (x != nullptr) {

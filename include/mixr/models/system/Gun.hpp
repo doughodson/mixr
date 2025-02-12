@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class List; class Number; class Angle; }
+namespace base { class Boolean; class Integer; class List; class Number; class IAngle; }
 namespace models {
 class Bullet;
 
@@ -129,13 +129,13 @@ private:
    bool setSlotPosition(base::List* const);            // Gun position relative to ownship
 
    bool setSlotRoll(const base::Number* const);        // Gun roll angle to ownship
-   bool setSlotRoll(const base::Angle* const);
+   bool setSlotRoll(const base::IAngle* const);
 
    bool setSlotPitch(const base::Number* const);       // Gun pitch angle to ownship
-   bool setSlotPitch(const base::Angle* const);
+   bool setSlotPitch(const base::IAngle* const);
 
    bool setSlotYaw(const base::Number* const);         // Gun heading angle to ownship
-   bool setSlotYaw(const base::Angle* const);
+   bool setSlotYaw(const base::IAngle* const);
 };
 
 }

@@ -30,7 +30,7 @@ END_SLOTTABLE(Datalink)
 
 BEGIN_SLOT_MAP(Datalink)
     ON_SLOT(1, setSlotRadioId,          base::Integer)
-    ON_SLOT(2, setSlotMaxRange,         base::Length)
+    ON_SLOT(2, setSlotMaxRange,         base::ILength)
     ON_SLOT(3, setSlotRadioName,        base::String)
     ON_SLOT(4, setSlotTrackManagerName, base::String)
 END_SLOT_MAP()
@@ -497,7 +497,7 @@ bool Datalink::setSlotRadioId(const base::Integer* const msg)
    return ok;
 }
 
-bool Datalink::setSlotMaxRange(const base::Length* const x)
+bool Datalink::setSlotMaxRange(const base::ILength* const x)
 {
    bool ok{};
    if(x != nullptr) {

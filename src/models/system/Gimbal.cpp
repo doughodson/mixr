@@ -79,44 +79,44 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(2, setSlotLocation,                    base::List)       // Relative location vector (meters) [ x y z ]
 
     ON_SLOT(3, setSlotPosition,                    base::List)       // Initial position vector (radians) [ az el roll ]
-    ON_SLOT(4, setSlotPosAzimuth,                  base::Angle)      // Initial azimuth position
-    ON_SLOT(5, setSlotPosElevation,                base::Angle)      // Initial elevation position
-    ON_SLOT(6, setSlotPosRoll,                     base::Angle)      // Initial roll position
+    ON_SLOT(4, setSlotPosAzimuth,                  base::IAngle)     // Initial azimuth position
+    ON_SLOT(5, setSlotPosElevation,                base::IAngle)     // Initial elevation position
+    ON_SLOT(6, setSlotPosRoll,                     base::IAngle)     // Initial roll position
 
     ON_SLOT(7, setSlotAzimuthLimits,               base::List)       // Azimuth limit vector (radians) [ left right ]
-    ON_SLOT(8, setSlotAzimuthLimitLeft,            base::Angle)      // Left azimuth limit
-    ON_SLOT(9, setSlotAzimuthLimitRight,           base::Angle)      // Right azimuth limit
+    ON_SLOT(8, setSlotAzimuthLimitLeft,            base::IAngle)     // Left azimuth limit
+    ON_SLOT(9, setSlotAzimuthLimitRight,           base::IAngle)     // Right azimuth limit
 
     ON_SLOT(10, setSlotElevationLimits,            base::List)       // Elevation limit vector (radians) [ lower upper ]
-    ON_SLOT(11, setSlotElevationLower,             base::Angle)      // Lower elevation limit
-    ON_SLOT(12, setSlotElevationUpper,             base::Angle)      // Upper elevation limit
+    ON_SLOT(11, setSlotElevationLower,             base::IAngle)     // Lower elevation limit
+    ON_SLOT(12, setSlotElevationUpper,             base::IAngle)     // Upper elevation limit
 
     ON_SLOT(13, setSlotRollLimits,                 base::List)       // Roll limit vector (radians) [ lower upper ]
-    ON_SLOT(14, setSlotRollLimitLower,             base::Angle)      // Lower roll limit
-    ON_SLOT(15, setSlotRollLimitUpper,             base::Angle)      // Upper roll limit
+    ON_SLOT(14, setSlotRollLimitLower,             base::IAngle)     // Lower roll limit
+    ON_SLOT(15, setSlotRollLimitUpper,             base::IAngle)     // Upper roll limit
 
     ON_SLOT(16, setSlotMaxRates,                   base::List)       // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-    ON_SLOT(17, setSlotMaxRateAzimuth,             base::Angle)      // Max "mechanical" azimuth rate (base::Angle/sec)
-    ON_SLOT(18, setSlotMaxRateElevation,           base::Angle)      // Max "mechanical" elevation rate (base::Angle/sec)
-    ON_SLOT(19, setSlotMaxRateRoll,                base::Angle)      // Max "mechanical" roll rate (base::Angle/sec)
+    ON_SLOT(17, setSlotMaxRateAzimuth,             base::IAngle)     // Max "mechanical" azimuth rate (base::Angle/sec)
+    ON_SLOT(18, setSlotMaxRateElevation,           base::IAngle)     // Max "mechanical" elevation rate (base::Angle/sec)
+    ON_SLOT(19, setSlotMaxRateRoll,                base::IAngle)     // Max "mechanical" roll rate (base::Angle/sec)
 
     ON_SLOT(20, setSlotCmdPos,                     base::List)       // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-    ON_SLOT(21, setSlotCmdPosAzimuth,              base::Angle)      // Commanded azimuth position  (sets POSITION_SERVO)
-    ON_SLOT(22, setSlotCmdPosElevation,            base::Angle)      // Commanded elevation position (sets POSITION_SERVO)
-    ON_SLOT(23, setSlotCmdPosRoll,                 base::Angle)      // Commanded roll position  (sets POSITION_SERVO)
+    ON_SLOT(21, setSlotCmdPosAzimuth,              base::IAngle)     // Commanded azimuth position  (sets POSITION_SERVO)
+    ON_SLOT(22, setSlotCmdPosElevation,            base::IAngle)     // Commanded elevation position (sets POSITION_SERVO)
+    ON_SLOT(23, setSlotCmdPosRoll,                 base::IAngle)     // Commanded roll position  (sets POSITION_SERVO)
 
     ON_SLOT(24, setSlotCmdRate,                    base::List)       // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-    ON_SLOT(25, setSlotCmdRateAzimuth,             base::Angle)      // Commanded azimuth rate (sets RATE_SERVO)
-    ON_SLOT(26, setSlotCmdRateElevation,           base::Angle)      // Commanded elevation rate (sets RATE_SERVO)
-    ON_SLOT(27, setSlotCmdRateRoll,                base::Angle)      // Commanded roll rate (sets RATE_SERVO)
+    ON_SLOT(25, setSlotCmdRateAzimuth,             base::IAngle)     // Commanded azimuth rate (sets RATE_SERVO)
+    ON_SLOT(26, setSlotCmdRateElevation,           base::IAngle)     // Commanded elevation rate (sets RATE_SERVO)
+    ON_SLOT(27, setSlotCmdRateRoll,                base::IAngle)     // Commanded roll rate (sets RATE_SERVO)
 
     ON_SLOT(28, setSlotTerrainOcculting,           base::Boolean)    // Enable terrain occulting (default: false)
     ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: all types)
     ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
                                                                      //   Valid identifiers: { air, ground, weapon, ship, building, lifeform }
     ON_SLOT(31, setSlotMaxPlayers,                 base::Integer)    // Max number of players of interest (default: 0)
-    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::Length)     // Max range to players of interest or zero for all (default: 0)
-    ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::Angle)      // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
+    ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::ILength)    // Max range to players of interest or zero for all (default: 0)
+    ON_SLOT(33, setSlotMaxAngle2PlayersOfInterest, base::IAngle)     // Max angle of gimbal boresight to players of interest or zero for all (default: 0)
     ON_SLOT(34, setSlotLocalPlayersOfInterestOnly, base::Boolean)    // Sets the local only players of interest flag (default: false)
 
     ON_SLOT(35, setSlotUseWorldCoordinates,        base::Boolean)    // Using player of interest's world (ECEF) coordinate system
@@ -787,7 +787,7 @@ bool Gimbal::setSlotPosition(const base::List* const msg)
 }
 
 // setSlotPosAzimuth() - Initial azimuth positon
-bool Gimbal::setSlotPosAzimuth(const base::Angle* const az)
+bool Gimbal::setSlotPosAzimuth(const base::IAngle* const az)
 {
    bool ok{};
    if (az != nullptr) {
@@ -798,7 +798,7 @@ bool Gimbal::setSlotPosAzimuth(const base::Angle* const az)
 }
 
 // setSlotPosElevation() - Initial elevation positon
-bool Gimbal::setSlotPosElevation(const base::Angle* const el)
+bool Gimbal::setSlotPosElevation(const base::IAngle* const el)
 {
    bool ok{};
    if (el != nullptr) {
@@ -809,7 +809,7 @@ bool Gimbal::setSlotPosElevation(const base::Angle* const el)
 }
 
 // setSlotPosRoll() - Initial roll positon
-bool Gimbal::setSlotPosRoll(const base::Angle* const roll)
+bool Gimbal::setSlotPosRoll(const base::IAngle* const roll)
 {
    bool ok{};
    if (roll != nullptr) {
@@ -832,7 +832,7 @@ bool Gimbal::setSlotAzimuthLimits(const base::List* const msg)
 }
 
 // setSlotAzimuthLimitLeft() - Left azimuth limit
-bool Gimbal::setSlotAzimuthLimitLeft(const base::Angle* const msg)
+bool Gimbal::setSlotAzimuthLimitLeft(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -844,7 +844,7 @@ bool Gimbal::setSlotAzimuthLimitLeft(const base::Angle* const msg)
 }
 
 // setSlotAzimuthLimitRight() - Right azimuth limit
-bool Gimbal::setSlotAzimuthLimitRight(const base::Angle* const msg)
+bool Gimbal::setSlotAzimuthLimitRight(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -868,7 +868,7 @@ bool Gimbal::setSlotElevationLimits(const base::List* const numList)
 }
 
 // setSlotElevationLower() - Lower elevation limit
-bool Gimbal::setSlotElevationLower(const base::Angle* const msg)
+bool Gimbal::setSlotElevationLower(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -880,7 +880,7 @@ bool Gimbal::setSlotElevationLower(const base::Angle* const msg)
 }
 
 // setSlotElevationUpper() - Upper elevation limit
-bool Gimbal::setSlotElevationUpper(const base::Angle* const msg)
+bool Gimbal::setSlotElevationUpper(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -905,7 +905,7 @@ bool Gimbal::setSlotRollLimits(const base::List* const numList)
 }
 
 // setSlotRollLimitLower() - Lower roll limit
-bool Gimbal::setSlotRollLimitLower(const base::Angle* const msg)
+bool Gimbal::setSlotRollLimitLower(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -917,7 +917,7 @@ bool Gimbal::setSlotRollLimitLower(const base::Angle* const msg)
 }
 
 // setSlotRollLimitUpper() - Upper roll limit
-bool Gimbal::setSlotRollLimitUpper(const base::Angle* const msg)
+bool Gimbal::setSlotRollLimitUpper(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -943,7 +943,7 @@ bool Gimbal::setSlotMaxRates(const base::List* const numList)
 }
 
 // setSlotMaxRateAzimuth() - Max "mechanical" azimuth rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateAzimuth(const base::Angle* const msg)
+bool Gimbal::setSlotMaxRateAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -955,7 +955,7 @@ bool Gimbal::setSlotMaxRateAzimuth(const base::Angle* const msg)
 }
 
 // setSlotMaxRateElevation() - Max "mechanical" elevation rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateElevation(const base::Angle* const msg)
+bool Gimbal::setSlotMaxRateElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -967,7 +967,7 @@ bool Gimbal::setSlotMaxRateElevation(const base::Angle* const msg)
 }
 
 // setSlotMaxRateRoll() - Max "mechanical" roll rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateRoll(const base::Angle* const msg)
+bool Gimbal::setSlotMaxRateRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -994,7 +994,7 @@ bool Gimbal::setSlotCmdPos(const base::List* const numList)
 }
 
 // setSlotCmdPosAzimuth - Commanded azimuth position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosAzimuth(const base::Angle* const msg)
+bool Gimbal::setSlotCmdPosAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1005,7 +1005,7 @@ bool Gimbal::setSlotCmdPosAzimuth(const base::Angle* const msg)
 }
 
 // setSlotCmdPosElevation() - Commanded elevation position (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosElevation(const base::Angle* const msg)
+bool Gimbal::setSlotCmdPosElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1016,7 +1016,7 @@ bool Gimbal::setSlotCmdPosElevation(const base::Angle* const msg)
 }
 
 // setSlotCmdPosRoll() - Commanded roll position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosRoll(const base::Angle* const msg)
+bool Gimbal::setSlotCmdPosRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1041,7 +1041,7 @@ bool Gimbal::setSlotCmdRate(const base::List* const numList)
 }
 
 // setSlotCmdRateAzimuth() - Commanded azimuth rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateAzimuth(const base::Angle* const msg)
+bool Gimbal::setSlotCmdRateAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1052,7 +1052,7 @@ bool Gimbal::setSlotCmdRateAzimuth(const base::Angle* const msg)
 }
 
 // setSlotCmdRateElevation() - Commanded elevation rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateElevation(const base::Angle* const msg)
+bool Gimbal::setSlotCmdRateElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1063,7 +1063,7 @@ bool Gimbal::setSlotCmdRateElevation(const base::Angle* const msg)
 }
 
 // setSlotCmdRateRoll() - Commanded roll rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateRoll(const base::Angle* const msg)
+bool Gimbal::setSlotCmdRateRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1138,7 +1138,7 @@ bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 }
 
 // Max range to players of interest or zero for all (meters)
-bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::Length* const x)
+bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1148,7 +1148,7 @@ bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::Length* const x)
 }
 
 // Max angle of gimbal boresight to players of interest or zero for all (rad)
-bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::Angle* const msg)
+bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

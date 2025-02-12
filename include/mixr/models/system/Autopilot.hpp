@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Identifier; class Length; class Number; class Time; }
+namespace base { class IAngle; class Boolean; class Identifier; class ILength; class Number; class ITime; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -19,28 +19,28 @@ namespace models {
 // Slots:
 //    navMode                    <Boolean>         ! Nav (route follow) mode flag (default: true)
 //
-//    holdAltitude               <Length>          ! Hold altitude (Length) (default: player's altitude)
+//    holdAltitude               <ILength>         ! Hold altitude (Length) (default: player's altitude)
 //    altitudeHoldMode           <Boolean>         ! Altitude hold mode flag (default: true)
 //
 //    holdVelocityKts            <Number>          ! Hold velocity (Kts) (Number) (default: player's velocity)
 //    velocityHoldMode           <Boolean>         ! Velocity hold mode flag (default: true)
 //
-//    holdHeading                <Angle>           ! Hold heading (AbstractAngle) (default: player's heading)
+//    holdHeading                <IAngle>          ! Hold heading (AbstractAngle) (default: player's heading)
 //    headingHoldMode            <Boolean>         ! Heading hold mode flag (default: true)
 //
 //    loiterMode                 <Number>          ! Loiter mode flag (default: false)
-//    loiterPatternLength        <Length>          ! Loiter pattern length (default: 10.0f)
+//    loiterPatternLength        <ILength>         ! Loiter pattern length (default: 10.0f)
 //    loiterPatternLength        <Number>          ! Loiter pattern length (nautical miles)
-//    loiterPatternTime          <Time>            ! Loiter pattern time (seconds on inbound / outbound course)
+//    loiterPatternTime          <ITime>           ! Loiter pattern time (seconds on inbound / outbound course)
 //    loiterPatternCcwFlag       <Boolean>         ! Loiter pattern counter-clockwise flag (default: false, clockwise)
 //
-//    leadFollowingDistanceTrail <Distance>        ! Desired distance behind(+) the lead (Default: 1 NM trail)
+//    leadFollowingDistanceTrail <ILength>         ! Desired distance behind(+) the lead (Default: 1 NM trail)
 //    leadFollowingDistanceTrail <Number>          ! Desired distance behind(+) the lead (meters)
 //
-//    leadFollowingDistanceRight <Length>          ! Desired distance right(+) of the lead (Default: 1 NM right)
+//    leadFollowingDistanceRight <ILength>         ! Desired distance right(+) of the lead (Default: 1 NM right)
 //    leadFollowingDistanceRight <Number>          ! Desired distance right(+) of the lead (meters)
 //
-//    leadFollowingDeltaAltitude <Length>          ! Desired delta altitude above(+) the lead (Default: 2000ft below)
+//    leadFollowingDeltaAltitude <ILength>         ! Desired delta altitude above(+) the lead (Default: 2000ft below)
 //    leadFollowingDeltaAltitude <Number>          ! Desired delta altitude above(+) the lead (meters)
 //
 //    leadPlayerName             <Identifier>      ! Name of our lead player (default: 0)
@@ -306,22 +306,22 @@ private:
 private:
    // slot table helper methods
    bool setSlotNavMode(const base::Boolean* const);                      // Nav (route follow) mode flag
-   bool setSlotHoldAltitude(const base::Length* const);                  // Hold altitude
+   bool setSlotHoldAltitude(const base::ILength* const);                  // Hold altitude
    bool setSlotAltitudeHoldMode(const base::Boolean* const);             // Altitude hold mode flag
    bool setSlotHoldVelocityKts(const base::Number* const);               // Hold velocity (kts)
    bool setSlotVelocityHoldMode(const base::Boolean* const);             // Velocity hold mode flag
-   bool setSlotHoldHeading(const base::Angle* const);                    // Hold heading
+   bool setSlotHoldHeading(const base::IAngle* const);                   // Hold heading
    bool setSlotHeadingHoldMode(const base::Boolean* const);              // Heading altitude mode flag
    bool setSlotLoiterMode(const base::Boolean* const);                   // Loiter mode flag
-   bool setSlotLoiterPatternLength(const base::Length* const);           // Loiter orbit pattern length
+   bool setSlotLoiterPatternLength(const base::ILength* const);           // Loiter orbit pattern length
    bool setSlotLoiterPatternLength(const base::Number* const);           // Loiter orbit pattern length (NM)
-   bool setSlotLoiterPatternTime(const base::Time* const);               // Loiter orbit pattern length (seconds)
+   bool setSlotLoiterPatternTime(const base::ITime* const);              // Loiter orbit pattern length (seconds)
    bool setSlotLoiterPatternCcwFlag(const base::Boolean* const);         // Loiter orbit pattern counter-clockwise flag
-   bool setSlotLeadFollowingDistanceTrail(const base::Length* const);    // Desired distance behind(+) the lead
+   bool setSlotLeadFollowingDistanceTrail(const base::ILength* const);   // Desired distance behind(+) the lead
    bool setSlotLeadFollowingDistanceTrail(const base::Number* const);    // Desired distance (meters) behind(+) the lead
-   bool setSlotLeadFollowingDistanceRight(const base::Length* const);    // Desired distance right(+) of the lead
+   bool setSlotLeadFollowingDistanceRight(const base::ILength* const);   // Desired distance right(+) of the lead
    bool setSlotLeadFollowingDistanceRight(const base::Number* const);    // Desired distance (meters) right(+) of the lead
-   bool setSlotLeadFollowingDeltaAltitude(const base::Length* const);    // Desired delta altitude above(+) the lead
+   bool setSlotLeadFollowingDeltaAltitude(const base::ILength* const);   // Desired delta altitude above(+) the lead
    bool setSlotLeadFollowingDeltaAltitude(const base::Number* const);    // Desired delta altitude (meters) above(+) the lead
    bool setSlotLeadPlayerName(const base::Identifier* const);            // Name of the player we are following
    bool setSlotFollowTheLeadMode(const base::Boolean* const);            // "Follow the lead" mode flag

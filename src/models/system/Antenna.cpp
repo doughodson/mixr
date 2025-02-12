@@ -43,12 +43,12 @@ END_SLOTTABLE(Antenna)
 
 BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(1,  setSlotPolarization,      base::Identifier)
-    ON_SLOT(2,  setSlotThreshold,         base::Power)
+    ON_SLOT(2,  setSlotThreshold,         base::IPower)
     ON_SLOT(3,  setSlotGain,              base::Number)
     ON_SLOT(4,  setSlotGainPattern,       base::Function)
     ON_SLOT(5,  setSlotGainPatternDeg,    base::Boolean)
     ON_SLOT(6,  setSlotRecycleFlg,        base::Boolean)
-    ON_SLOT(7,  setSlotBeamWidth,         base::Angle)      // Check for base::Angle before base::Number
+    ON_SLOT(7,  setSlotBeamWidth,         base::IAngle)      // Check for base::Angle before base::Number
     ON_SLOT(7,  setSlotBeamWidth,         base::Number)
 END_SLOT_MAP()
 
@@ -219,7 +219,7 @@ bool Antenna::setPolarization(base::Identifier* const x)
 //------------------------------------------------------------------------------
 // setSlotThreshold() -- converts a power to watts and sets our antenna threshold
 //------------------------------------------------------------------------------
-bool Antenna::setThreshold(base::Power* const p)
+bool Antenna::setThreshold(base::IPower* const p)
 {
    bool ok{};
    const double x{p->getValueInWatts()};
@@ -292,7 +292,7 @@ bool Antenna::setRecycleFlg(const base::Boolean* const msg)
 //------------------------------------------------------------------------------
 // Sets beam width as an base::Angle
 //------------------------------------------------------------------------------
-bool Antenna::setBeamWidth(const base::Angle* const msg)
+bool Antenna::setBeamWidth(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

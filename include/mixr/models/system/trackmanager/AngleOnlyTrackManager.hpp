@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Number; }
+namespace base { class IAngle; class Number; }
 namespace models {
 class IrQueryMsg;
 class Track;
@@ -49,8 +49,8 @@ private:
                                               //   TrackManager::queueLock semaphore)
 private:
    // slot table helper methods
-   bool setSlotAzimuthBin(const base::Angle* const);
-   bool setSlotElevationBin(const base::Angle* const);
+   bool setSlotAzimuthBin(const base::IAngle* const);
+   bool setSlotElevationBin(const base::IAngle* const);
    bool setSlotAlpha(const base::Number* const) override;
    bool setSlotBeta(const base::Number* const) override;
 };

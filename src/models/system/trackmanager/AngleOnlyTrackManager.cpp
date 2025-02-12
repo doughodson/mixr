@@ -31,8 +31,8 @@ BEGIN_SLOTTABLE(AngleOnlyTrackManager)
 END_SLOTTABLE(AngleOnlyTrackManager)
 
 BEGIN_SLOT_MAP(AngleOnlyTrackManager)
-    ON_SLOT(1, setSlotAzimuthBin,   base::Angle)
-    ON_SLOT(2, setSlotElevationBin, base::Angle)
+    ON_SLOT(1, setSlotAzimuthBin,   base::IAngle)
+    ON_SLOT(2, setSlotElevationBin, base::IAngle)
 END_SLOT_MAP()
 
 AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
@@ -168,7 +168,7 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const x)
+bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::IAngle* const x)
 {
     bool ok{};
 
@@ -182,7 +182,7 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Angle* const x)
 //------------------------------------------------------------------------------
 // Sets azimuth bin
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotElevationBin(const base::Angle* const x)
+bool AngleOnlyTrackManager::setSlotElevationBin(const base::IAngle* const x)
 {
     bool ok{};
 

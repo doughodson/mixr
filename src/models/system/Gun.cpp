@@ -46,13 +46,13 @@ BEGIN_SLOT_MAP(Gun)
     ON_SLOT(6, setSlotPosition,   base::List)
 
     ON_SLOT(7, setSlotRoll,       base::Number)
-    ON_SLOT(7, setSlotRoll,       base::Angle)
+    ON_SLOT(7, setSlotRoll,       base::IAngle)
 
     ON_SLOT(8, setSlotPitch,      base::Number)
-    ON_SLOT(8, setSlotPitch,      base::Angle)
+    ON_SLOT(8, setSlotPitch,      base::IAngle)
 
     ON_SLOT(9, setSlotYaw,        base::Number)
-    ON_SLOT(9, setSlotYaw,        base::Angle)
+    ON_SLOT(9, setSlotYaw,        base::IAngle)
 END_SLOT_MAP()
 
 Gun::Gun()
@@ -471,7 +471,7 @@ bool Gun::setSlotRoll(const base::Number* const x)
 }
 
 // Gun roll angle to ownship
-bool Gun::setSlotRoll(const base::Angle* const x)
+bool Gun::setSlotRoll(const base::IAngle* const x)
 {
    bool ok{};
    double value{ -1000.0 };
@@ -513,7 +513,7 @@ bool Gun::setSlotPitch(const base::Number* const x)
 }
 
 // Gun pitch angle to ownship
-bool Gun::setSlotPitch(const base::Angle* const x)
+bool Gun::setSlotPitch(const base::IAngle* const x)
 {
    bool ok{};
    double value{ -1000.0 };
@@ -555,7 +555,7 @@ bool Gun::setSlotYaw(const base::Number* const x)
 }
 
 // Gun heading angle to ownship
-bool Gun::setSlotYaw(const base::Angle* const x)
+bool Gun::setSlotYaw(const base::IAngle* const x)
 {
    bool ok{};
    double value{ -1000.0 };

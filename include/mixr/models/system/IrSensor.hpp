@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class Number; class Length; }
+namespace base { class Identifier; class Integer; class Number; class ILength; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -28,10 +28,10 @@ class TrackManager;
 // Slots:
 //
 //    lowerWavelength     <Number>      ! The lower wavelength limit in microns
-//    lowerWavelength     <Length>
+//    lowerWavelength     <ILength>
 //
 //    upperWavelength     <Number>      ! The upper wavelength limit in microns
-//    upperWavelength     <Length>
+//    upperWavelength     <ILength>
 //
 //    nei                 <Number>      ! The Noise Equivalent Irradiance in watts/str-cm^2
 //
@@ -192,9 +192,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotLowerWavelength(const base::Number* const);   // Sets lower wavelength
-   bool setSlotLowerWavelength(const base::Length* const);
+   bool setSlotLowerWavelength(const base::ILength* const);
    bool setSlotUpperWavelength(const base::Number* const);   // Sets upper wavelength
-   bool setSlotUpperWavelength(const base::Length* const);
+   bool setSlotUpperWavelength(const base::ILength* const);
    bool setSlotNEI(const base::Number* const);               // Sets Noise Equivalent Irradiance
    bool setSlotThreshold(const base::Number* const);         // Sets Signal to Noise Threshold
    bool setSlotIFOV(const base::Number* const);              // Sets Instantaneous Field of View
@@ -203,7 +203,7 @@ private:
    //bool setSlotAzimuthBin(const base::Number* const);      // Sets the Azimuth Bin
    //bool setSlotElevationBin(const base::Number* const);    // Sets the Elevation Bin
    bool setSlotMaximumRange(const base::Number* const);      // Sets the Maximum Range
-   bool setSlotMaximumRange(const base::Length* const);
+   bool setSlotMaximumRange(const base::ILength* const);
    bool setSlotTrackManagerName(base::Identifier* const);    // Sets our track manager by name
 };
 

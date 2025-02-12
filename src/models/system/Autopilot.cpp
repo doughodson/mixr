@@ -63,21 +63,21 @@ END_SLOTTABLE(Autopilot)
 
 BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT( 1, setSlotNavMode,                    base::Boolean)
-    ON_SLOT( 2, setSlotHoldAltitude,               base::Length)
+    ON_SLOT( 2, setSlotHoldAltitude,               base::ILength)
     ON_SLOT( 3, setSlotAltitudeHoldMode,           base::Boolean)
     ON_SLOT( 4, setSlotHoldVelocityKts,            base::Number)
     ON_SLOT( 5, setSlotVelocityHoldMode,           base::Boolean)
-    ON_SLOT( 6, setSlotHoldHeading,                base::Angle)
+    ON_SLOT( 6, setSlotHoldHeading,                base::IAngle)
     ON_SLOT( 7, setSlotHeadingHoldMode,            base::Boolean)
     ON_SLOT( 8, setSlotLoiterMode,                 base::Boolean)
-    ON_SLOT( 9, setSlotLoiterPatternLength,        base::Length)
+    ON_SLOT( 9, setSlotLoiterPatternLength,        base::ILength)
     ON_SLOT( 9, setSlotLoiterPatternLength,        base::Number)
     ON_SLOT(10, setSlotLoiterPatternCcwFlag,       base::Boolean)
-    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Length)
+    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::ILength)
     ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Number)
-    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Length)
+    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::ILength)
     ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Number)
-    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Length)
+    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::ILength)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Number)
     ON_SLOT(14, setSlotLeadPlayerName,             base::Identifier)
     ON_SLOT(15, setSlotFollowTheLeadMode,          base::Boolean)
@@ -86,7 +86,7 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(18, setSlotMaxClimbRateFpm,            base::Number)
     ON_SLOT(19, setSlotMaxClimbRateMps,            base::Number)
     ON_SLOT(20, setSlotMaxPitchAngle,              base::Number)
-    ON_SLOT(21, setSlotLoiterPatternTime,          base::Time)
+    ON_SLOT(21, setSlotLoiterPatternTime,          base::ITime)
     ON_SLOT(22, setSlotMaxVelAccNps,               base::Number)
 END_SLOT_MAP()
 
@@ -1324,7 +1324,7 @@ bool Autopilot::setSlotNavMode(const base::Boolean* const msg)
 }
 
 // Hold altitude (alt hold mode)
-bool Autopilot::setSlotHoldAltitude(const base::Length* const x)
+bool Autopilot::setSlotHoldAltitude(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1367,7 +1367,7 @@ bool Autopilot::setSlotVelocityHoldMode(const base::Boolean* const x)
 
 
 // Hold heading
-bool Autopilot::setSlotHoldHeading(const base::Angle* const x)
+bool Autopilot::setSlotHoldHeading(const base::IAngle* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1398,7 +1398,7 @@ bool Autopilot::setSlotLoiterMode(const base::Boolean* const x)
 }
 
 // Set slot: Loiter orbit pattern length
-bool Autopilot::setSlotLoiterPatternLength(const base::Length* const x)
+bool Autopilot::setSlotLoiterPatternLength(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1418,7 +1418,7 @@ bool Autopilot::setSlotLoiterPatternLength(const base::Number* const msg)
 }
 
 // Set slot: Loiter orbit pattern time
-bool Autopilot::setSlotLoiterPatternTime(const base::Time* const x)
+bool Autopilot::setSlotLoiterPatternTime(const base::ITime* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1441,7 +1441,7 @@ bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Boolean* const msg)
 }
 
 // Set slot: Desired distance behind(+) the lead
-bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Length* const x)
+bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1461,7 +1461,7 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const x)
 }
 
 // Set slot: Desired distance right(+) of the lead
-bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Length* const x)
+bool Autopilot::setSlotLeadFollowingDistanceRight(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1481,7 +1481,7 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const x)
 }
 
 // Set slot: Desired delta altitude above(+) the lead
-bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Length* const x)
+bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {

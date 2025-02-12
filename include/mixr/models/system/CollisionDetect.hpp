@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class Angle; class Boolean; class Integer; class Length; class Number; class PairStream; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class Number; class PairStream; }
 namespace models {
 class Player;
 
@@ -123,11 +123,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotCollisionRange(const base::Length* const);
+   bool setSlotCollisionRange(const base::ILength* const);
    bool setSlotMaxPlayers(const base::Integer* const);
    bool setSlotPlayerTypes(const base::PairStream* const);
-   bool setSlotMaxRange2Players(const base::Length* const);
-   bool setSlotMaxAngle2Players(const base::Angle* const);
+   bool setSlotMaxRange2Players(const base::ILength* const);
+   bool setSlotMaxAngle2Players(const base::IAngle* const);
    bool setSlotUseWorldCoordinates(const base::Boolean* const);
    bool setSlotLocalOnly(const base::Boolean* const);
    bool setSlotSendCrashEvents(const base::Boolean* const);
