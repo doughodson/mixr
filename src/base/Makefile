@@ -225,7 +225,7 @@ clean:
 	-rm -f ubf/*.o
 	-rm -f units/area/*.o
 	-rm -f units/angle/*.o
-	-rm -f units/distance/*.o
+	-rm -f units/length/*.o
 	-rm -f units/energy/*.o
 	-rm -f units/force/*.o
 	-rm -f units/frequency/*.o
