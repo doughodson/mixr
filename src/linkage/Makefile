@@ -31,6 +31,7 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f adapters/*.o
+	-rm -f generators/*.o
 	-rm -f platform/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
