@@ -5,7 +5,7 @@
 #include "mixr/linkage/generators/IGenerator.hpp"
 
 namespace mixr {
-namespace base { class IIoData; class IIoDevice; class Angle; class Frequency; class Integer; class Identifier; }
+namespace base { class IIoData; class IIoDevice; class IAngle; class IFrequency; class Integer; class Identifier; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -75,8 +75,8 @@ private:
    // slot table helper methods
    bool setSlotChannel(const base::Integer* const);
    bool setSlotSignal(const base::Identifier* const);
-   bool setSlotFrequency(const base::Frequency* const);
-   bool setSlotPhase(const base::Angle* const);
+   bool setSlotFrequency(const base::IFrequency* const);
+   bool setSlotPhase(const base::IAngle* const);
 };
 
 }

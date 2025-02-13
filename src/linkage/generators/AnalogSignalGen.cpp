@@ -30,8 +30,8 @@ END_SLOTTABLE(AnalogSignalGen)
 BEGIN_SLOT_MAP(AnalogSignalGen)
    ON_SLOT( 1, setSlotChannel,   base::Integer)
    ON_SLOT( 2, setSlotSignal,    base::Identifier)
-   ON_SLOT( 3, setSlotFrequency, base::Frequency)
-   ON_SLOT( 4, setSlotPhase,     base::Angle)
+   ON_SLOT( 3, setSlotFrequency, base::IFrequency)
+   ON_SLOT( 4, setSlotPhase,     base::IAngle)
 END_SLOT_MAP()
 
 AnalogSignalGen::AnalogSignalGen()
@@ -148,7 +148,7 @@ bool AnalogSignalGen::setSlotSignal(const base::Identifier* const x)
 }
 
 // frequency: frequency
-bool AnalogSignalGen::setSlotFrequency(const base::Frequency* const x)
+bool AnalogSignalGen::setSlotFrequency(const base::IFrequency* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -158,7 +158,7 @@ bool AnalogSignalGen::setSlotFrequency(const base::Frequency* const x)
 }
 
 // phase: Phase shift
-bool AnalogSignalGen::setSlotPhase(const base::Angle* const x)
+bool AnalogSignalGen::setSlotPhase(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
