@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class List; class Number; class IAngle; }
+namespace base { class Boolean; class Integer; class List; class INumber; class IAngle; }
 namespace models {
 class Bullet;
 
@@ -31,11 +31,11 @@ class Bullet;
 //
 //    The following are used to position the gun on the ownship player
 //    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
-//    roll        <Number>   ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
+//    roll        <INumber>  ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
 //    roll        <Angle>    ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
-//    pitch       <Number>   ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
+//    pitch       <INumber>  ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
 //    pitch       <Angle>    ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
-//    yaw         <Number>   ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
+//    yaw         <INumber>  ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
 //    yaw         <Angle>    ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
 //
 //------------------------------------------------------------------------------
@@ -128,13 +128,13 @@ private:
    bool setSlotBurstRate(const base::Integer* const);  // Burst rate
    bool setSlotPosition(base::List* const);            // Gun position relative to ownship
 
-   bool setSlotRoll(const base::Number* const);        // Gun roll angle to ownship
+   bool setSlotRoll(const base::INumber* const);       // Gun roll angle to ownship
    bool setSlotRoll(const base::IAngle* const);
 
-   bool setSlotPitch(const base::Number* const);       // Gun pitch angle to ownship
+   bool setSlotPitch(const base::INumber* const);      // Gun pitch angle to ownship
    bool setSlotPitch(const base::IAngle* const);
 
-   bool setSlotYaw(const base::Number* const);         // Gun heading angle to ownship
+   bool setSlotYaw(const base::INumber* const);        // Gun heading angle to ownship
    bool setSlotYaw(const base::IAngle* const);
 };
 

@@ -3,7 +3,6 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"

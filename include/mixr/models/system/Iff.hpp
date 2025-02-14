@@ -5,7 +5,7 @@
 #include "mixr/models/system/Radio.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; }
+namespace base { class Boolean; class Integer; }
 namespace models {
 
 //------------------------------------------------------------------------------

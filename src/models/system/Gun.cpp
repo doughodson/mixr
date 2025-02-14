@@ -8,7 +8,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
@@ -45,13 +45,13 @@ BEGIN_SLOT_MAP(Gun)
     ON_SLOT(5, setSlotBurstRate,  base::Integer)
     ON_SLOT(6, setSlotPosition,   base::List)
 
-    ON_SLOT(7, setSlotRoll,       base::Number)
+    ON_SLOT(7, setSlotRoll,       base::INumber)
     ON_SLOT(7, setSlotRoll,       base::IAngle)
 
-    ON_SLOT(8, setSlotPitch,      base::Number)
+    ON_SLOT(8, setSlotPitch,      base::INumber)
     ON_SLOT(8, setSlotPitch,      base::IAngle)
 
-    ON_SLOT(9, setSlotYaw,        base::Number)
+    ON_SLOT(9, setSlotYaw,        base::INumber)
     ON_SLOT(9, setSlotYaw,        base::IAngle)
 END_SLOT_MAP()
 
@@ -450,7 +450,7 @@ bool Gun::setSlotPosition(base::List* const numList)
 }
 
 // Gun roll angle to ownship
-bool Gun::setSlotRoll(const base::Number* const x)
+bool Gun::setSlotRoll(const base::INumber* const x)
 {
    bool ok{};
    double value{-1000.0};
@@ -492,7 +492,7 @@ bool Gun::setSlotRoll(const base::IAngle* const x)
 }
 
 // Gun pitch angle to ownship
-bool Gun::setSlotPitch(const base::Number* const x)
+bool Gun::setSlotPitch(const base::INumber* const x)
 {
    bool ok{};
    double value{-1000.0};
@@ -534,7 +534,7 @@ bool Gun::setSlotPitch(const base::IAngle* const x)
 }
 
 // Gun heading angle to ownship
-bool Gun::setSlotYaw(const base::Number* const x)
+bool Gun::setSlotYaw(const base::INumber* const x)
 {
    bool ok{};
    double value{-1000.0};
