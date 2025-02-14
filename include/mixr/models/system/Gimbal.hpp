@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class List; class Number; class PairStream; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class List; class PairStream; }
 namespace models {
 class Emission;
 class SensorMsg;

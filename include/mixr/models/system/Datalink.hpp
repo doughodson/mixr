@@ -7,7 +7,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Integer; class ILength; class Number; class String; }
+namespace base { class Integer; class ILength; class String; }
 namespace models {
 class CommRadio;
 class TrackManager;

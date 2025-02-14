@@ -14,8 +14,8 @@ namespace models {
 //
 // Factory name: FuelTank
 // Slots:
-//    fuelWt      <Number>  ! Fuel wt (lb) (default: -1)
-//    capacity    <Number>  ! Tank capacity (lb) (default: -1)
+//    fuelWt      <INumber>  ! Fuel wt (lb) (default: -1)
+//    capacity    <INumber>  ! Tank capacity (lb) (default: -1)
 //
 //------------------------------------------------------------------------------
 class FuelTank : public ExternalStore
@@ -44,8 +44,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotFuelWt(const base::Number* const);
-   bool setSlotCapacity(const base::Number* const);
+   bool setSlotFuelWt(const base::INumber* const);
+   bool setSlotCapacity(const base::INumber* const);
 };
 
 }

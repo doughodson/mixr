@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class ILength; class Number; class PairStream; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class PairStream; }
 namespace models {
 class Player;
 
