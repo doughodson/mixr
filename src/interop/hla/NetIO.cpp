@@ -4,7 +4,6 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
@@ -54,7 +53,7 @@ NetIO::NetIO()
 }
 
 NetIO::NetIO(const NetIO& org)
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
@@ -149,7 +148,7 @@ void NetIO::deleteData()
    fedFileName = nullptr;
 }
 
-    
+
 //------------------------------------------------------------------------------
 // HLA Object Class handles
 //    Note: class indexes range [ 1 ... MAX_CLASSES ]
@@ -178,7 +177,7 @@ bool NetIO::setObjectClassSubscribed(const unsigned int idx, const bool flag)
 unsigned int NetIO::findObjectClassIndex(const RTI::ObjectClassHandle handle) const
 {
     unsigned int index = 0;
-    unsigned int max = getNumberOfObjectClasses(); 
+    unsigned int max = getNumberOfObjectClasses();
     if (max > MAX_CLASSES) max = MAX_CLASSES;
     for (unsigned int i = 1; i <= max && index == 0; i++) {
         if (handle == objectClassHandles[i-1]) index = i;
@@ -223,7 +222,7 @@ bool NetIO::setInteractionClassSubscribed(const unsigned int idx, const bool fla
 unsigned int NetIO::findAttributeIndex(const RTI::AttributeHandle handle) const
 {
     unsigned int index = 0;
-    unsigned int max = getNumberOfObjectAttributes(); 
+    unsigned int max = getNumberOfObjectAttributes();
     if (max > MAX_ATTRIBUTES) max = MAX_ATTRIBUTES;
     for (unsigned int i = 1; i <= max && index == 0; i++) {
         if (handle == objectAttributeHandles[i-1]) index = i;
@@ -253,7 +252,7 @@ bool NetIO::setInteractionClassHandle(const unsigned int idx, const RTI::Interac
 unsigned int NetIO::findInteractionClassIndex(const RTI::InteractionClassHandle handle) const
 {
     unsigned int index = 0;
-    unsigned int max = getNumberOfOInteractionClasses(); 
+    unsigned int max = getNumberOfOInteractionClasses();
     if (max > MAX_INTERACTIONS) max = MAX_INTERACTIONS;
     for (unsigned int i = 1; i <= max && index == 0; i++) {
         if (handle == interactionClassHandles[i-1]) index = i;
@@ -284,7 +283,7 @@ bool NetIO::setInteractionParameterHandle(const unsigned int idx, const RTI::Par
 unsigned int NetIO::findParameterIndex(const RTI::ParameterHandle handle) const
 {
     unsigned int index = 0;
-    unsigned int max = getNumberOfInteractionParameters(); 
+    unsigned int max = getNumberOfInteractionParameters();
     if (max > MAX_PARAMETERS) max = MAX_PARAMETERS;
     for (unsigned int i = 1; i <= max && index == 0; i++) {
         if (handle == interactionParameterHandles[i-1]) index = i;
@@ -340,7 +339,7 @@ bool NetIO::unregisterAllObjects()
 {
    // Stop Registration For Object Classes
    clearAllObjectClassRegistrationFlags();
-    
+
    // Unregister all of our output objects ...
    for (unsigned int idx = 0; idx < nOutObjects; idx++) {
       Nib* nib = outHandleTbl[idx];
@@ -493,12 +492,12 @@ bool NetIO::initNetwork()
     //    initializeTimeManagement();
     //    doTick();
     //}
-  
+
     if (ok) {
         ok = publishAndSubscribe();
         doTick();
     }
-    
+
     return true;
 }
 
@@ -509,7 +508,7 @@ bool NetIO::initNetwork()
 bool NetIO::createAndJoinFederation()
 {
     bool ok{};
-   
+
     const std::string& federation{getFederationName()};
     const std::string& federate{getFederateName()};
 
@@ -534,14 +533,14 @@ bool NetIO::createAndJoinFederation()
        }
 
        // ---
-       // Try to join the federation.  
+       // Try to join the federation.
        // ---
        if (ok) {
            RTI::Boolean joined{RTI::RTI_FALSE};
            int tries{10};
            while (tries--) {
                try {
-                   rtiAmb->joinFederationExecution(federate.c_str(), 
+                   rtiAmb->joinFederationExecution(federate.c_str(),
                                                    federation.c_str(),
                                                    fedAmb);
                    std::cout << "*** Joined Federation" << std::endl;
@@ -601,14 +600,14 @@ bool NetIO::resignAndDestroyFederation()
 bool NetIO::initializeTimeManagement()
 {
    bool ok = true;
-   
+
    // When not regulating or constrained, it the default so just leave
    if ( !getRegulating() && !getConstrained() ) {
       std::cout << "*** Time Regulation Turned Off" << std::endl;
       std::cout << "*** Time Constraint Turned Off" << std::endl;
    }
 
-   // If this federate is regulating and not constrained, then we 
+   // If this federate is regulating and not constrained, then we
    // want to set cTime to the FederateTime.  Otherwise, we
    // will throw exceptions when posting messages.
    else if ( getRegulating() && !getConstrained() ) {
@@ -631,7 +630,7 @@ bool NetIO::initializeTimeManagement()
    // want to set cTime to the LBTS.  While the only requirement
    // is that the federate not advance past the LBTS, we want this
    // federate to start with the others.  If the LBTS is positive infinity,
-   // then there are no regulating federates.  We should then set 
+   // then there are no regulating federates.  We should then set
    // cTime to 0 to avoid hanging in while advancing time.
    else if ( !getRegulating() && getConstrained() ) {
       try {
@@ -698,7 +697,7 @@ bool NetIO::advanceTime()
       //catch ( RTI::Exception& e) {
       //   std::cout << "Time advance error: " << &e << std::endl;
       //   return false;
-      //} 
+      //}
    }
    return true;
 }
@@ -945,7 +944,7 @@ int NetIO::compareObjNames(const void* p1, const void* p2)
    return result;
 }
 
-// compareObjHandles() --  object handle compare function -- 
+// compareObjHandles() --  object handle compare function --
 //   True types are (const RTI::ObjectClassHandle* p1, const Nib** p2)
 int NetIO::compareObjHandles(const void* p1, const void* p2)
 {
@@ -956,9 +955,9 @@ int NetIO::compareObjHandles(const void* p1, const void* p2)
    const Nib* pNib = *((const Nib**) p2);
    const RTI::ObjectClassHandle h2 = pNib->getObjectHandle();
 
-   // Compare the handles 
+   // Compare the handles
    int result = 0;
-   if (h1 > h2) result = +1; 
+   if (h1 > h2) result = +1;
    else if (h1 < h2) result = -1;
 
    return result;

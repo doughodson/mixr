@@ -3,8 +3,6 @@
 #include "mixr/interop/hla/NetIO.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
-
 #include "mixr/base/String.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -27,7 +25,7 @@ Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
 }
 
 Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())
-{ 
+{
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
@@ -87,7 +85,7 @@ void Nib::makeObjectName()
    const std::string& fname{getFederateName()};
    std::sprintf(name, "P%d_%s", static_cast<int>(getPlayerID()), fname.c_str() );
    setObjectName(name);
-}                            
+}
 
 //------------------------------------------------------------------------------
 // reflectAttributeValues() -- (Input support)

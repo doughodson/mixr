@@ -15,7 +15,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/units/lengths.hpp"
 
@@ -36,7 +36,7 @@ END_SLOTTABLE(IgHost)
 
 BEGIN_SLOT_MAP(IgHost)
    ON_SLOT(1, setSlotMaxRange,      base::ILength)
-   ON_SLOT(1, setSlotMaxRange,      base::Number)
+   ON_SLOT(1, setSlotMaxRange,      base::INumber)
    ON_SLOT(2, setSlotMaxModels,     base::Integer)
    ON_SLOT(3, setSlotMaxElevations, base::Integer)
    ON_SLOT(4, setSlotTypeMap,       base::PairStream)
@@ -663,7 +663,7 @@ bool IgHost::setSlotMaxRange(const base::ILength* const x)
     return ok;
 }
 
-bool IgHost::setSlotMaxRange(const base::Number* const x)
+bool IgHost::setSlotMaxRange(const base::INumber* const x)
 {
     bool ok{};
 

@@ -8,7 +8,7 @@
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <cmath>
 
@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(MapDrawer)
 END_SLOTTABLE(MapDrawer)
 
 BEGIN_SLOT_MAP(MapDrawer)
-    ON_SLOT(1, setSlotMapIntensity, base::Number)
+    ON_SLOT(1, setSlotMapIntensity, base::INumber)
     ON_SLOT(2, setSlotDrawGridMode, base::Boolean)
     ON_SLOT(3, setSlotShowMap,      base::Boolean)
 END_SLOT_MAP()
@@ -95,7 +95,7 @@ void MapDrawer::deleteData()
 //------------------------------------------------------------------------------
 // setSlotMapIntensity() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
+bool MapDrawer::setSlotMapIntensity(const base::INumber* const x)
 {
     bool ok {};
     if (x != nullptr)

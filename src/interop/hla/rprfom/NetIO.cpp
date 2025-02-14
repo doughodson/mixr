@@ -20,7 +20,6 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/network/NetHandler.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace rprfom {

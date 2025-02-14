@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Number; class String; }
+namespace base { class Boolean; class INumber; class String; }
 namespace rpf {
 class TexturePager;
 class CadrgMap;
@@ -22,13 +22,13 @@ class CadrgMap;
 // Subroutines:
 //
 // setSlotMapIntensity() -
-//      bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
+//      bool MapDrawer::setSlotMapIntensity(const base::INumber* const x)
 //
 // setSlotDrawGridMode() -
-//      bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
+//      bool MapDrawer::setSlotDrawGridMode(const base::INumber* const x)
 //
 // setSlotShowMap() -
-//      bool MapDrawer::setSlotShowMap(const base::Number* const x)
+//      bool MapDrawer::setSlotShowMap(const base::INumber* const x)
 //
 // setGridSize() - does our initial setup.
 //      bool MapDrawer::setGridSize(const int aGridSize)
@@ -115,7 +115,7 @@ private:
     std::array<float, MAX_PAGERS> originCol {};    // Pixel + texture col of the textures to draw
 
 private:
-   bool setSlotMapIntensity(const base::Number* const);
+   bool setSlotMapIntensity(const base::INumber* const);
    bool setSlotDrawGridMode(const base::Boolean* const);
    bool setSlotShowMap(const base::Boolean* const);
 };
