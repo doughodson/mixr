@@ -5,7 +5,7 @@
 #include "mixr/models/system/IrSensor.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Number; class String; class IAngle; }
+namespace base { class Integer; class INumber; class String; class IAngle; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -48,9 +48,9 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotAzimuthBin(const base::Number* const);     // Sets the Azimuth Bin
+   bool setSlotAzimuthBin(const base::INumber* const);     // Sets the Azimuth Bin
    bool setSlotAzimuthBin(const base::IAngle* const);
-   bool setSlotElevationBin(const base::Number* const);   // Sets the Elevation Bin
+   bool setSlotElevationBin(const base::INumber* const);   // Sets the Elevation Bin
    bool setSlotElevationBin(const base::IAngle* const);
 };
 

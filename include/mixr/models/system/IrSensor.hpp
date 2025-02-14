@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class Number; class ILength; }
+namespace base { class Identifier; class Integer; class INumber; class ILength; }
 namespace models {
 class IrSeeker;
 class IrQueryMsg;
@@ -27,21 +27,21 @@ class TrackManager;
 //
 // Slots:
 //
-//    lowerWavelength     <Number>      ! The lower wavelength limit in microns
+//    lowerWavelength     <INumber>     ! The lower wavelength limit in microns
 //    lowerWavelength     <ILength>
 //
-//    upperWavelength     <Number>      ! The upper wavelength limit in microns
+//    upperWavelength     <INumber>     ! The upper wavelength limit in microns
 //    upperWavelength     <ILength>
 //
-//    nei                 <Number>      ! The Noise Equivalent Irradiance in watts/str-cm^2
+//    nei                 <INumber>     ! The Noise Equivalent Irradiance in watts/str-cm^2
 //
-//    threshold           <Number>      ! The Signal to Noise Threshold
+//    threshold           <INumber>     ! The Signal to Noise Threshold
 //
-//    IFOV                <Number>      ! The Instantaneous Field of View in steradians
+//    IFOV                <INumber>     ! The Instantaneous Field of View in steradians
 //
 //    sensorType          <Identifier>  ! The type of sensor { contrast, hotspot }
 //
-//    FOR                 <Number>      ! The Field of Regard in steradians
+//    FOR                 <INumber>     ! The Field of Regard in steradians
 //
 // Events:
 //    bool irQueryReturnEvent(IrQueryMsg* const irQuery);
@@ -191,18 +191,18 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotLowerWavelength(const base::Number* const);   // Sets lower wavelength
+   bool setSlotLowerWavelength(const base::INumber* const);   // Sets lower wavelength
    bool setSlotLowerWavelength(const base::ILength* const);
-   bool setSlotUpperWavelength(const base::Number* const);   // Sets upper wavelength
+   bool setSlotUpperWavelength(const base::INumber* const);   // Sets upper wavelength
    bool setSlotUpperWavelength(const base::ILength* const);
-   bool setSlotNEI(const base::Number* const);               // Sets Noise Equivalent Irradiance
-   bool setSlotThreshold(const base::Number* const);         // Sets Signal to Noise Threshold
-   bool setSlotIFOV(const base::Number* const);              // Sets Instantaneous Field of View
-   bool setSlotSensorType(const base::Identifier* const);    // Sets the Sensor Type
-   //bool setSlotFieldOfRegard(const base::Number* const);   // Sets the field of regard
-   //bool setSlotAzimuthBin(const base::Number* const);      // Sets the Azimuth Bin
-   //bool setSlotElevationBin(const base::Number* const);    // Sets the Elevation Bin
-   bool setSlotMaximumRange(const base::Number* const);      // Sets the Maximum Range
+   bool setSlotNEI(const base::INumber* const);               // Sets Noise Equivalent Irradiance
+   bool setSlotThreshold(const base::INumber* const);         // Sets Signal to Noise Threshold
+   bool setSlotIFOV(const base::INumber* const);              // Sets Instantaneous Field of View
+   bool setSlotSensorType(const base::Identifier* const);     // Sets the Sensor Type
+   //bool setSlotFieldOfRegard(const base::INumber* const);   // Sets the field of regard
+   //bool setSlotAzimuthBin(const base::INumber* const);      // Sets the Azimuth Bin
+   //bool setSlotElevationBin(const base::INumber* const);    // Sets the Elevation Bin
+   bool setSlotMaximumRange(const base::INumber* const);      // Sets the Maximum Range
    bool setSlotMaximumRange(const base::ILength* const);
    bool setSlotTrackManagerName(base::Identifier* const);    // Sets our track manager by name
 };

@@ -6,7 +6,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Integer; class Number; class IAngle; }
+namespace base { class Boolean; class Identifier; class Integer; class INumber; class IAngle; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ namespace models {
 //    leftToRightScan      <Boolean>      ! True to scan from left-to-right (else right-to-left) (Default: true)
 //                                        ! ... and, true for from top-to-bottom (else from bottom-to-up)
 //
-//    scanWidth            <Number>       ! Width of the scan (radians) (default: 0.0)
+//    scanWidth            <INumber>      ! Width of the scan (radians) (default: 0.0)
 //
 //    searchVolume         <List>         ! Size of the search volume [ width  height ] (radians);
 //                                        ! (default scanHeight: 0)
@@ -32,18 +32,18 @@ namespace models {
 //
 //    reference            <List>         ! Reference angles; i.e., center of the search volume [ az el ] (radians) (default: 0, 0)
 //
-//    barSpacing           <Number>       ! Scan bar width spacing (radians) (default: 0.0)
+//    barSpacing           <INumber>      ! Scan bar width spacing (radians) (default: 0.0)
 //
 //    numBars              <Integer>      ! Sets the number of bars (default: 1)
 //
-//    revolutionsPerSec    <Number>       ! Revolutions per second for conical and circular scans (hz) (default: 5)
+//    revolutionsPerSec    <INumber>      ! Revolutions per second for conical and circular scans (hz) (default: 5)
 //
-//    scanRadius           <Number>       ! Radius of the circle we are using for conical scans (radians or base::Angle} (spiral scan too)
+//    scanRadius           <INumber>      ! Radius of the circle we are using for conical scans (radians or base::Angle} (spiral scan too)
 //                                        ! (default: 2.0 * base::Angle::D2RCC, 2 degree radius)
 //
 //    pseudoRandomPattern  <PairStream>   ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
 //
-//    maxRevolutions       <Number>       ! Spiral Scan - Maximum number of revolutions (default: 1.0)
+//    maxRevolutions       <INumber>      ! Spiral Scan - Maximum number of revolutions (default: 1.0)
 //
 //
 // Events:
@@ -258,16 +258,16 @@ private:
    // slot table helper methods
    bool setSlotScanMode(base::Identifier* const);
    bool setSlotLeftToRightScan(const base::Boolean* const);
-   bool setSlotScanWidth(const base::Number* const);
+   bool setSlotScanWidth(const base::INumber* const);
    bool setSlotSearchVolume(base::List* const);
    bool setSlotRefPosition(const base::List* const);
-   bool setSlotBarSpacing(const base::Number* const);
+   bool setSlotBarSpacing(const base::INumber* const);
    bool setSlotNumBars(const base::Integer* const);
-   bool setSlotRevPerSec(const base::Number* const);
-   bool setSlotScanRadius(const base::Number* const);
+   bool setSlotRevPerSec(const base::INumber* const);
+   bool setSlotScanRadius(const base::INumber* const);
    bool setSlotScanRadius(const base::IAngle* const);
    bool setSlotPRVertices(const base::PairStream* const);
-   bool setSlotMaxRevs(const base::Number* const);
+   bool setSlotMaxRevs(const base::INumber* const);
 };
 
 }

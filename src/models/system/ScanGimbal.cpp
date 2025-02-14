@@ -8,7 +8,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/angles.hpp"
 
 #include <cmath>
@@ -36,16 +36,16 @@ END_SLOTTABLE(ScanGimbal)
 BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 1, setSlotScanMode,          base::Identifier)
     ON_SLOT( 2, setSlotLeftToRightScan,   base::Boolean)
-    ON_SLOT( 3, setSlotScanWidth,         base::Number)
+    ON_SLOT( 3, setSlotScanWidth,         base::INumber)
     ON_SLOT( 4, setSlotSearchVolume,      base::List)
     ON_SLOT( 5, setSlotRefPosition,       base::List)
-    ON_SLOT( 6, setSlotBarSpacing,        base::Number)
+    ON_SLOT( 6, setSlotBarSpacing,        base::INumber)
     ON_SLOT( 7, setSlotNumBars,           base::Integer)
-    ON_SLOT( 8, setSlotRevPerSec,         base::Number)
-    ON_SLOT( 9, setSlotScanRadius,        base::Number)
+    ON_SLOT( 8, setSlotRevPerSec,         base::INumber)
+    ON_SLOT( 9, setSlotScanRadius,        base::INumber)
     ON_SLOT( 9, setSlotScanRadius,        base::IAngle)
     ON_SLOT(10, setSlotPRVertices,        base::PairStream)
-    ON_SLOT(11, setSlotMaxRevs,           base::Number)
+    ON_SLOT(11, setSlotMaxRevs,           base::INumber)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(ScanGimbal)
@@ -874,7 +874,7 @@ bool ScanGimbal::setSlotLeftToRightScan(const base::Boolean* const newLeftToRigh
 }
 
 // setSlotScanWidth() -- calls setScanWidth()
-bool ScanGimbal::setSlotScanWidth(const base::Number* const newWidth)
+bool ScanGimbal::setSlotScanWidth(const base::INumber* const newWidth)
 {
     bool ok{};
     if (newWidth != nullptr) {
@@ -909,7 +909,7 @@ bool ScanGimbal::setSlotRefPosition(const base::List* const numList)
 }
 
 // setSlotBarSpacing() --
-bool ScanGimbal::setSlotBarSpacing(const base::Number* const newSpacing)
+bool ScanGimbal::setSlotBarSpacing(const base::INumber* const newSpacing)
 {
     bool ok{};
     if (newSpacing != nullptr) {
@@ -931,7 +931,7 @@ bool ScanGimbal::setSlotNumBars(const base::Integer* const newNumBars)
 }
 
 // setSlotRevPerSec() --
-bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
+bool ScanGimbal::setSlotRevPerSec(const base::INumber* const newRevPerSec)
 {
     bool ok{};
     if (newRevPerSec != nullptr) {
@@ -942,7 +942,7 @@ bool ScanGimbal::setSlotRevPerSec(const base::Number* const newRevPerSec)
 }
 
 // setSlotScanRadius()
-bool ScanGimbal::setSlotScanRadius(const base::Number* const x)
+bool ScanGimbal::setSlotScanRadius(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1000,7 +1000,7 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
 }
 
 // setSlotMaxRevs() --
-bool ScanGimbal::setSlotMaxRevs(const base::Number* const newMaxRevs)
+bool ScanGimbal::setSlotMaxRevs(const base::INumber* const newMaxRevs)
 {
     bool ok{};
     if (newMaxRevs != nullptr) {

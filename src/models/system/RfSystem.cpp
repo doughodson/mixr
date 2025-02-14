@@ -11,7 +11,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/powers.hpp"
 #include "mixr/base/units/frequencies.hpp"
 
@@ -41,11 +41,11 @@ BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(3,  setSlotBandwidth,           base::IFrequency)
     ON_SLOT(4,  setSlotPeakPower,           base::IPower)
     ON_SLOT(5,  setSlotRfThreshold,         base::Decibel)
-    ON_SLOT(6,  setSlotRfNoiseFigure,       base::Number)
-    ON_SLOT(7,  setSlotRfSysTemp,           base::Number)
-    ON_SLOT(8,  setSlotRfTransmitLoss,      base::Number)
-    ON_SLOT(9,  setSlotRfReceiveLoss,       base::Number)
-    ON_SLOT(10, setSlotRfSignalProcessLoss, base::Number)
+    ON_SLOT(6,  setSlotRfNoiseFigure,       base::INumber)
+    ON_SLOT(7,  setSlotRfSysTemp,           base::INumber)
+    ON_SLOT(8,  setSlotRfTransmitLoss,      base::INumber)
+    ON_SLOT(9,  setSlotRfReceiveLoss,       base::INumber)
+    ON_SLOT(10, setSlotRfSignalProcessLoss, base::INumber)
     ON_SLOT(11, setSlotDisableEmissions,    base::Boolean)
     ON_SLOT(12, setSlotBandwidthNoise,      base::IFrequency)
 END_SLOT_MAP()
@@ -673,7 +673,7 @@ bool RfSystem::setSlotRfThreshold(base::Decibel* const v)
 }
 
 // setSlotRfNoiseFigure() -- set the noise figure (no units)
-bool RfSystem::setSlotRfNoiseFigure(base::Number* const v)
+bool RfSystem::setSlotRfNoiseFigure(base::INumber* const v)
 {
     bool ok{};
     if (v != nullptr) {
@@ -688,7 +688,7 @@ bool RfSystem::setSlotRfNoiseFigure(base::Number* const v)
 }
 
 // setSlotRfSysTemp() -- set the system temperature (kelvin)
-bool RfSystem::setSlotRfSysTemp(base::Number* const v)
+bool RfSystem::setSlotRfSysTemp(base::INumber* const v)
 {
     bool ok{};
     if (v != nullptr) {
@@ -703,7 +703,7 @@ bool RfSystem::setSlotRfSysTemp(base::Number* const v)
 }
 
 // setSlotRfTransmitLoss() -- set the transmit loss
-bool RfSystem::setSlotRfTransmitLoss(base::Number* const v)
+bool RfSystem::setSlotRfTransmitLoss(base::INumber* const v)
 {
     bool ok{};
     if (v != nullptr) {
@@ -718,7 +718,7 @@ bool RfSystem::setSlotRfTransmitLoss(base::Number* const v)
 }
 
 // setSlotRfReceiveLoss() -- set the receive loss
-bool RfSystem::setSlotRfReceiveLoss(base::Number* const v)
+bool RfSystem::setSlotRfReceiveLoss(base::INumber* const v)
 {
     bool ok{};
     if (v != nullptr) {
@@ -733,7 +733,7 @@ bool RfSystem::setSlotRfReceiveLoss(base::Number* const v)
 }
 
 // setSlotRfSignalProcessLoss() -- set signal processing loss
-bool RfSystem::setSlotRfSignalProcessLoss(base::Number* const v)
+bool RfSystem::setSlotRfSignalProcessLoss(base::INumber* const v)
 {
     bool ok{};
     if (v != nullptr) {

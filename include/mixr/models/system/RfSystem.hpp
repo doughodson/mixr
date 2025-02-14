@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Decibel; class IFrequency; class Identifier; class Number; class IPower; }
+namespace base { class Boolean; class Decibel; class IFrequency; class Identifier; class INumber; class IPower; }
 namespace models {
 class Antenna;
 class Emission;
@@ -41,17 +41,17 @@ class Emission;
 //
 //    threshold          <base::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
 //
-//    noiseFigure        <base::Number>        ! Noise Figure (> 1)             (no units; def: 1.0)
+//    noiseFigure        <base::INumber>       ! Noise Figure (> 1)             (no units; def: 1.0)
 //
-//    systemTemperature  <base::Number>        ! System Temperature             (Kelvin; def: 290.0)
+//    systemTemperature  <base::INumber>       ! System Temperature             (Kelvin; def: 290.0)
 //
-//    lossXmit           <base::Number>        ! Transmit loss                  (no units; def: 1.0)
+//    lossXmit           <base::INumber>       ! Transmit loss                  (no units; def: 1.0)
 //                       <base::Decibel>       ! Transmit loss                  (dB)
 //
-//    lossRecv           <base::Number>        ! Receive loss                   (no units; def: 1.0)
+//    lossRecv           <base::INumber>       ! Receive loss                   (no units; def: 1.0)
 //                       <base::Decibel>       ! Receive loss                   (dB)
 //
-//    lossSignalProcess  <base::Number>        ! Signal Processing loss         (no units; def: 1.0)
+//    lossSignalProcess  <base::INumber>       ! Signal Processing loss         (no units; def: 1.0)
 //                       <base::Decibel>       ! Signal Processing loss         (dB)
 //
 //    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
@@ -172,11 +172,11 @@ private:
    bool setSlotBandwidth(base::IFrequency* const);
    bool setSlotBandwidthNoise(base::IFrequency* const);
    bool setSlotRfThreshold(base::Decibel* const);
-   bool setSlotRfNoiseFigure(base::Number* const);
-   bool setSlotRfSysTemp(base::Number* const);
-   bool setSlotRfTransmitLoss(base::Number* const);
-   bool setSlotRfReceiveLoss(base::Number* const);
-   bool setSlotRfSignalProcessLoss(base::Number* const);
+   bool setSlotRfNoiseFigure(base::INumber* const);
+   bool setSlotRfSysTemp(base::INumber* const);
+   bool setSlotRfTransmitLoss(base::INumber* const);
+   bool setSlotRfReceiveLoss(base::INumber* const);
+   bool setSlotRfSignalProcessLoss(base::INumber* const);
    bool setSlotDisableEmissions(base::Boolean* const);
 };
 

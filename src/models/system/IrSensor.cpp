@@ -46,18 +46,18 @@ BEGIN_SLOTTABLE(IrSensor)
 END_SLOTTABLE(IrSensor)
 
 BEGIN_SLOT_MAP(IrSensor)
-   ON_SLOT(1, setSlotLowerWavelength,  base::Number)
+   ON_SLOT(1, setSlotLowerWavelength,  base::INumber)
    ON_SLOT(1, setSlotLowerWavelength,  base::ILength)
-   ON_SLOT(2, setSlotUpperWavelength,  base::Number)
+   ON_SLOT(2, setSlotUpperWavelength,  base::INumber)
    ON_SLOT(2, setSlotUpperWavelength,  base::ILength)
-   ON_SLOT(3, setSlotNEI,              base::Number)
-   ON_SLOT(4, setSlotThreshold,        base::Number)
-   ON_SLOT(5, setSlotIFOV,             base::Number)
+   ON_SLOT(3, setSlotNEI,              base::INumber)
+   ON_SLOT(4, setSlotThreshold,        base::INumber)
+   ON_SLOT(5, setSlotIFOV,             base::INumber)
    ON_SLOT(6, setSlotSensorType,       base::Identifier)
-   //ON_SLOT(7, setSlotFieldOfRegard,  base::Number)
-   //ON_SLOT(7, setSlotAzimuthBin,     base::Number)
-   //ON_SLOT(8, setSlotElevationBin,   base::Number)
-   ON_SLOT(7, setSlotMaximumRange,     base::Number)
+   //ON_SLOT(7, setSlotFieldOfRegard,  base::INumber)
+   //ON_SLOT(7, setSlotAzimuthBin,     base::INumber)
+   //ON_SLOT(8, setSlotElevationBin,   base::INumber)
+   ON_SLOT(7, setSlotMaximumRange,     base::INumber)
    ON_SLOT(7, setSlotMaximumRange,     base::ILength)
    ON_SLOT(8, setSlotTrackManagerName, base::Identifier)
 END_SLOT_MAP()
@@ -513,7 +513,7 @@ bool IrSensor::setMaximumRange(const double w)
    return true;
 }
 
-bool IrSensor::setSlotMaximumRange(const base::Number* const x)
+bool IrSensor::setSlotMaximumRange(const base::INumber* const x)
 {
    double value{};
 
@@ -556,7 +556,7 @@ bool IrSensor::setSlotMaximumRange(const base::ILength* const x)
 //}
 
 // setSlotLowerWavelength() - Sets lower wavelength
-bool IrSensor::setSlotLowerWavelength(const base::Number* const x)
+bool IrSensor::setSlotLowerWavelength(const base::INumber* const x)
 {
    double value{};
    bool ok{};
@@ -593,7 +593,7 @@ bool IrSensor::setSlotLowerWavelength(const base::ILength* const x)
 }
 
 // setSlotUpperWavelength() - Sets upper wavelength
-bool IrSensor::setSlotUpperWavelength(const base::Number* const x)
+bool IrSensor::setSlotUpperWavelength(const base::INumber* const x)
 {
    bool ok{};
    double value{};
@@ -628,7 +628,7 @@ bool IrSensor::setSlotUpperWavelength(const base::ILength* const x)
 }
 
 // setSlotNEI() - Sets Noise Equivalent Irradiance
-bool IrSensor::setSlotNEI(const base::Number* const msg)
+bool IrSensor::setSlotNEI(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -644,7 +644,7 @@ bool IrSensor::setSlotNEI(const base::Number* const msg)
 }
 
 // setSlotThreshold() - Sets Signal to Noise Threshold
-bool IrSensor::setSlotThreshold(const base::Number* const msg)
+bool IrSensor::setSlotThreshold(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -660,7 +660,7 @@ bool IrSensor::setSlotThreshold(const base::Number* const msg)
 }
 
 // setSlotIFOV() - Sets Instantaneous Field of View
-bool IrSensor::setSlotIFOV(const base::Number* const msg)
+bool IrSensor::setSlotIFOV(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

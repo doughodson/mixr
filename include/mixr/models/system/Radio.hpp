@@ -5,7 +5,7 @@
 #include "mixr/models/system/RfSystem.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Number; class PairStream; }
+namespace base { class Integer; class INumber; class PairStream; }
 namespace models {
 class Datalink;
 class Emission;
@@ -52,7 +52,7 @@ class Emission;
 //
 //    channel        <base::Integer>     ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
 //
-//    maxDetectRange <base::Number>      ! Maximum detection capability (NM) (default: 120NM)
+//    maxDetectRange <base::INumber>     ! Maximum detection capability (NM) (default: 120NM)
 //
 //    radioID        <base::Integer>     ! ID number used by DIS (default: 0)
 //
@@ -138,7 +138,7 @@ private:
    bool setSlotNumChannels(base::Integer* const);
    bool setSlotChannels(const base::PairStream* const);
    bool setSlotChannel(base::Integer* const);
-   bool setSlotMaxDetectRange(base::Number* const);
+   bool setSlotMaxDetectRange(base::INumber* const);
    bool setSlotRadioId(base::Integer* const);
 };
 

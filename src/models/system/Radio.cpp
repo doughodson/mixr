@@ -6,7 +6,7 @@
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/frequencies.hpp"
 
@@ -29,7 +29,7 @@ BEGIN_SLOT_MAP(Radio)
     ON_SLOT(1, setSlotNumChannels,    base::Integer)
     ON_SLOT(2, setSlotChannels,       base::PairStream)
     ON_SLOT(3, setSlotChannel,        base::Integer)
-    ON_SLOT(4, setSlotMaxDetectRange, base::Number)
+    ON_SLOT(4, setSlotMaxDetectRange, base::INumber)
     ON_SLOT(5, setSlotRadioId,        base::Integer)
 END_SLOT_MAP()
 
@@ -332,7 +332,7 @@ bool Radio::setSlotChannel(base::Integer* const msg)
 }
 
 // maxDetectRange: maximum detection capability (NM)
-bool Radio::setSlotMaxDetectRange(base::Number* const num)
+bool Radio::setSlotMaxDetectRange(base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {

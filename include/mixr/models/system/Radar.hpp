@@ -19,7 +19,7 @@ namespace models {
 //
 // Factory name: Radar
 // Slots:
-//    igain    <base::Number>     ! Integrator gain (no units; default: 1.0f)
+//    igain    <base::INumber>    ! Integrator gain (no units; default: 1.0f)
 //             <base::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotIGain(base::Number* const);
+   bool setSlotIGain(base::INumber* const);
 };
 
 }

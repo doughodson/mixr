@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class IFrequency; class Identifier; class Integer;
-                 class List; class Number; class String; class ITime; }
+                 class List; class INumber; class String; class ITime; }
 namespace models {
 class Antenna;
 class Player;
@@ -33,14 +33,14 @@ class TrackManager;
 //
 //    PRF                  <IFrequency>  ! Pulse Repetition Frequency (PRF) (must be greater than zero) (default: 0.0)
 // ### NES: Initial value not greater than 0)
-//                         <Number>      ! PRF in hertz
+//                         <INumber>     ! PRF in hertz
 //
 //    pulseWidth           <ITime>       ! Pulse Width (must be greater than zero) (default: 0)
 // ### NES: Initial value not greater than 0)
 //                         <Number>      ! Pulse width in seconds
 //
 //    beamWidth            <IAngle>      ! (Deprecated: moved to Antenna) Beam Width  (must be greater than zero) (default: D2RCC * 3.5f)
-//                         <Number>      ! (Deprecated: moved to Antenna) Beam width in radians
+//                         <INumber>     ! (Deprecated: moved to Antenna) Beam width in radians
 //
 //    typeId               <String>      ! R/F system type id (default: '\0')
 //
@@ -148,12 +148,12 @@ private:
    bool setSlotModeSingle(RfSensor* const);                   // Sets a single (only) R/F sensor submode
    bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)
    bool setSlotInitRangeIdx(base::Integer* const);            // Sets out initial range index [ 1 .. nRanges ]
-   bool setSlotPrf(const base::IFrequency* const);             // Sets PRF as a base::Frequency
-   bool setSlotPrf(const base::Number* const);                // Sets PRF in hertz
-   bool setSlotPulseWidth(const base::ITime* const);           // Sets pulse width using base::Time
-   bool setSlotPulseWidth(const base::Number* const);         // Sets pulse width in seconds
-   bool setSlotBeamWidth(const base::IAngle* const);           // Sets beam width as a base::Angle
-   bool setSlotBeamWidth(const base::Number* const);          // Sets beam width in radians
+   bool setSlotPrf(const base::IFrequency* const);            // Sets PRF as a base::Frequency
+   bool setSlotPrf(const base::INumber* const);               // Sets PRF in hertz
+   bool setSlotPulseWidth(const base::ITime* const);          // Sets pulse width using base::Time
+   bool setSlotPulseWidth(const base::INumber* const);        // Sets pulse width in seconds
+   bool setSlotBeamWidth(const base::IAngle* const);          // Sets beam width as a base::Angle
+   bool setSlotBeamWidth(const base::INumber* const);         // Sets beam width in radians
    bool setSlotTypeId(const base::String* const);             // Sets the type ID
    bool setSlotSyncXmitWithScan(const base::Boolean* const);  // Sets sync transmitter with antenna scan flag
 };

@@ -14,7 +14,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/frequencies.hpp"
@@ -49,11 +49,11 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(3, setSlotRanges,           base::List)
     ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
     ON_SLOT(5, setSlotPrf,              base::IFrequency)      // Check for base::Frequency before base::Number
-    ON_SLOT(5, setSlotPrf,              base::Number)
+    ON_SLOT(5, setSlotPrf,              base::INumber)
     ON_SLOT(6, setSlotPulseWidth,       base::ITime)           // Check for base::Time before base::Number
-    ON_SLOT(6, setSlotPulseWidth,       base::Number)
+    ON_SLOT(6, setSlotPulseWidth,       base::INumber)
     ON_SLOT(7, setSlotBeamWidth,        base::IAngle)          // Check for base::Angle before base::Number
-    ON_SLOT(7, setSlotBeamWidth,        base::Number)
+    ON_SLOT(7, setSlotBeamWidth,        base::INumber)
     ON_SLOT(8, setSlotTypeId,           base::String)
     ON_SLOT(9, setSlotSyncXmitWithScan, base::Boolean)
 END_SLOT_MAP()
@@ -466,7 +466,7 @@ bool RfSensor::setSlotPrf(const base::IFrequency* const x)
 }
 
 // Sets PRF in hertz
-bool RfSensor::setSlotPrf(const base::Number* const msg)
+bool RfSensor::setSlotPrf(const base::INumber* const msg)
 {
    bool ok{};
 
@@ -502,7 +502,7 @@ bool RfSensor::setSlotPulseWidth(const base::ITime* const x)
 }
 
 // Sets pulse width in seconds
-bool RfSensor::setSlotPulseWidth(const base::Number* const msg)
+bool RfSensor::setSlotPulseWidth(const base::INumber* const msg)
 {
    bool ok{};
 
@@ -536,7 +536,7 @@ bool RfSensor::setSlotBeamWidth(const base::IAngle* const x)
 }
 
 // Sets beam width in radians
-bool RfSensor::setSlotBeamWidth(const base::Number* const msg)
+bool RfSensor::setSlotBeamWidth(const base::INumber* const msg)
 {
    bool ok{};
 

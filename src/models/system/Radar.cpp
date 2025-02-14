@@ -6,6 +6,7 @@
 #include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -22,7 +23,7 @@ BEGIN_SLOTTABLE(Radar)
 END_SLOTTABLE(Radar)
 
 BEGIN_SLOT_MAP(Radar)
-    ON_SLOT(1,  setSlotIGain, base::Number)
+    ON_SLOT(1,  setSlotIGain, base::INumber)
 END_SLOT_MAP()
 
 Radar::Radar()
@@ -529,7 +530,7 @@ unsigned int Radar::computeRangeIndex(const double rng)
 //------------------------------------------------------------------------------
 
 // igain: Integrator gain (dB or no units; def: 1.0)
-bool Radar::setSlotIGain(base::Number* const v)
+bool Radar::setSlotIGain(base::INumber* const v)
 {
    bool ok{};
    if (v != nullptr) {
