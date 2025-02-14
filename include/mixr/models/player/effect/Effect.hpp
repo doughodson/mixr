@@ -18,7 +18,7 @@ namespace models {
 //
 // Factory name: Effect
 // Slots:
-//    dragIndex   <Number>   ! drag index used by default dynamics (default: 0.0006)
+//    dragIndex   <INumber>   ! drag index used by default dynamics (default: 0.0006)
 //
 //------------------------------------------------------------------------------
 class Effect : public IWeapon
@@ -47,7 +47,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotDragIndex(base::Number* const);
+   bool setSlotDragIndex(base::INumber* const);
 };
 
 }

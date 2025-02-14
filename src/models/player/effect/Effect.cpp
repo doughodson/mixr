@@ -4,7 +4,7 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <cmath>
 
@@ -19,7 +19,7 @@ BEGIN_SLOTTABLE(Effect)
 END_SLOTTABLE(Effect)
 
 BEGIN_SLOT_MAP(Effect)
-    ON_SLOT(1, setSlotDragIndex, base::Number)
+    ON_SLOT(1, setSlotDragIndex, base::INumber)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -146,7 +146,7 @@ void Effect::weaponDynamics(const double dt)
 //------------------------------------------------------------------------------
 
 // dragIndex: drag index used by default dynamics
-bool Effect::setSlotDragIndex(base::Number* const p)
+bool Effect::setSlotDragIndex(base::INumber* const p)
 {
     setDragIndex( p->asDouble() );
     return true;

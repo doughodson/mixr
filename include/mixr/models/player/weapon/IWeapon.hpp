@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class ILength; class Number; class String; class ITime; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class INumber; class String; class ITime; }
 namespace models {
 class Designator;
 class Stores;
@@ -24,22 +24,22 @@ class Track;
 //    hung          <base::Boolean>    ! Hung store flag (default: false)
 //
 //    maxTOF        <base::Time>       ! max time of flight (seconds or base::Time) (default: 60.0f)
-//    maxTOF        <base::Number>     ! max time of flight (seconds or base::Time)
+//    maxTOF        <base::INumber>    ! max time of flight (seconds or base::Time)
 //
 //    tsg           <base::Time>       ! time to start guidance (seconds or base::Time) (default: 9999.0f)
-//    tsg           <base::Number>     ! time to start guidance (seconds or base::Time)
+//    tsg           <base::INumber>    ! time to start guidance (seconds or base::Time)
 //
 //    maxBurstRng   <base::Length>     ! max burst range (default: 500.0 meters)
-//    maxBurstRng   <base::Number>     ! max burst range
+//    maxBurstRng   <base::INumber>    ! max burst range
 //
-//    lethalRange   <base::Length>   ! lethal range (meters or base::Length) (default: 50.0f)
-//    lethalRange   <base::Number>     ! lethal range (meters or base::Length)
+//    lethalRange   <base::Length>     ! lethal range (meters or base::Length) (default: 50.0f)
+//    lethalRange   <base::INumber>    ! lethal range (meters or base::Length)
 //
 //    sobt          <base::Time>       ! start-of-burn time (seconds or base::Time) (default: 9999.0f)
-//    sobt          <base::Number>     ! start-of-burn time (seconds or base::Time)
+//    sobt          <base::INumber>    ! start-of-burn time (seconds or base::Time)
 //
 //    eobt          <base::Time>       ! end-of-burn time (seconds or base::Time) (default: 0.0f)
-//    eobt          <base::Number>     ! end-of-burn time (seconds or base::Time)
+//    eobt          <base::INumber>    ! end-of-burn time (seconds or base::Time)
 //
 //    maxGimbal     <base::Angle>      ! max gimbal angle (default: 30.0f * D2RCC)
 //    tgtPos        <base::List>       ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
@@ -380,17 +380,17 @@ private:
    bool setSlotWillHang(const base::Boolean* const);
    bool setSlotHung(const base::Boolean* const);
    bool setSlotMaxTOF(const base::ITime* const);
-   bool setSlotMaxTOF(const base::Number* const);
+   bool setSlotMaxTOF(const base::INumber* const);
    bool setSlotTSG(const base::ITime* const);
-   bool setSlotTSG(const base::Number* const);
+   bool setSlotTSG(const base::INumber* const);
    bool setSlotMaxBurstRng(const base::ILength* const);
-   bool setSlotMaxBurstRng(const base::Number* const);
+   bool setSlotMaxBurstRng(const base::INumber* const);
    bool setSlotLethalRange(const base::ILength* const);
-   bool setSlotLethalRange(const base::Number* const);
+   bool setSlotLethalRange(const base::INumber* const);
    bool setSlotSOBT(const base::ITime* const);
-   bool setSlotSOBT(const base::Number* const);
+   bool setSlotSOBT(const base::INumber* const);
    bool setSlotEOBT(const base::ITime* const);
-   bool setSlotEOBT(const base::Number* const);
+   bool setSlotEOBT(const base::INumber* const);
    bool setSlotMaxGimbal(const base::IAngle* const);
    bool setSlotTgtPos(const base::List* const);
    bool setSlotWeaponID(const base::Integer* const);

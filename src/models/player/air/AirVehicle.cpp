@@ -4,7 +4,6 @@
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace models {

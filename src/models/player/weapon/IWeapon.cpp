@@ -20,7 +20,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -65,22 +65,22 @@ BEGIN_SLOT_MAP(IWeapon)
     ON_SLOT( 5,  setSlotHung,        base::Boolean)
 
     ON_SLOT( 6,  setSlotMaxTOF,      base::ITime)
-    ON_SLOT( 6,  setSlotMaxTOF,      base::Number)
+    ON_SLOT( 6,  setSlotMaxTOF,      base::INumber)
 
     ON_SLOT( 7,  setSlotTSG,         base::ITime)
-    ON_SLOT( 7,  setSlotTSG,         base::Number)
+    ON_SLOT( 7,  setSlotTSG,         base::INumber)
 
     ON_SLOT( 8,  setSlotMaxBurstRng, base::ILength)
-    ON_SLOT( 8,  setSlotMaxBurstRng, base::Number)
+    ON_SLOT( 8,  setSlotMaxBurstRng, base::INumber)
 
     ON_SLOT( 9, setSlotLethalRange,  base::ILength)
-    ON_SLOT( 9, setSlotLethalRange,  base::Number)
+    ON_SLOT( 9, setSlotLethalRange,  base::INumber)
 
     ON_SLOT(10, setSlotSOBT,         base::ITime)
-    ON_SLOT(10, setSlotSOBT,         base::Number)
+    ON_SLOT(10, setSlotSOBT,         base::INumber)
 
     ON_SLOT(11, setSlotEOBT,         base::ITime)
-    ON_SLOT(11, setSlotEOBT,         base::Number)
+    ON_SLOT(11, setSlotEOBT,         base::INumber)
 
     ON_SLOT(12, setSlotMaxGimbal,    base::IAngle)
 
@@ -1347,7 +1347,7 @@ bool IWeapon::setSlotMaxTOF(const base::ITime* const p)
 }
 
 // maxTOF:  max time of flight      (sec)
-bool IWeapon::setSlotMaxTOF(const base::Number* const p)
+bool IWeapon::setSlotMaxTOF(const base::INumber* const p)
 {
     return setMaxTOF( p->asDouble() );
 }
@@ -1363,7 +1363,7 @@ bool IWeapon::setSlotTSG(const base::ITime* const p)
 }
 
 // tsg: time to start guidance    (sec)
-bool IWeapon::setSlotTSG(const base::Number* const p)
+bool IWeapon::setSlotTSG(const base::INumber* const p)
 {
     return setTSG( p->asDouble() );
 }
@@ -1379,7 +1379,7 @@ bool IWeapon::setSlotMaxBurstRng(const base::ILength* const p)
 }
 
 // maxBurstRng: max burst range    (meters)
-bool IWeapon::setSlotMaxBurstRng(const base::Number* const p)
+bool IWeapon::setSlotMaxBurstRng(const base::INumber* const p)
 {
     return setMaxBurstRng( p->asDouble() );
 }
@@ -1396,7 +1396,7 @@ bool IWeapon::setSlotLethalRange(const base::ILength* const p)
 }
 
 // lethalRange: lethal range    (meters)
-bool IWeapon::setSlotLethalRange(const base::Number* const p)
+bool IWeapon::setSlotLethalRange(const base::INumber* const p)
 {
     return setLethalRange( p->asDouble() );
 }
@@ -1412,7 +1412,7 @@ bool IWeapon::setSlotSOBT(const base::ITime* const p)
 }
 
 // sobt: start-of-burn time        (sec)
-bool IWeapon::setSlotSOBT(const base::Number* const p)
+bool IWeapon::setSlotSOBT(const base::INumber* const p)
 {
     setSOBT(p->asDouble());
     return true;
@@ -1429,7 +1429,7 @@ bool IWeapon::setSlotEOBT(const base::ITime* const p)
 }
 
 // eobt: end-of-burn time        (sec)
-bool IWeapon::setSlotEOBT(const base::Number* const p)
+bool IWeapon::setSlotEOBT(const base::INumber* const p)
 {
     setEOBT( p->asDouble() );
     return true;
