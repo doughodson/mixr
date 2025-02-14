@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -31,13 +31,13 @@ BEGIN_SLOTTABLE(RacModel)
 END_SLOTTABLE(RacModel)
 
 BEGIN_SLOT_MAP(RacModel)
-    ON_SLOT( 1, setSlotMinSpeed,    base::Number)
-    ON_SLOT( 2, setSlotSpeedMaxG,   base::Number)
-    ON_SLOT( 3, setSlotMaxG,        base::Number)
-    ON_SLOT( 4, setSlotMaxAccel,    base::Number)
+    ON_SLOT( 1, setSlotMinSpeed,    base::INumber)
+    ON_SLOT( 2, setSlotSpeedMaxG,   base::INumber)
+    ON_SLOT( 3, setSlotMaxG,        base::INumber)
+    ON_SLOT( 4, setSlotMaxAccel,    base::INumber)
     ON_SLOT( 5, setSlotCmdAltitude, base::ILength)
     ON_SLOT( 6, setSlotCmdHeading,  base::IAngle)
-    ON_SLOT( 7, setSlotCmdVelocity, base::Number)
+    ON_SLOT( 7, setSlotCmdVelocity, base::INumber)
 END_SLOT_MAP()
 
 RacModel::RacModel()
@@ -301,7 +301,7 @@ void RacModel::updateRAC(const double dt)
 // slot methods
 //------------------------------------------------------------------------------
 
-bool RacModel::setSlotMinSpeed(const base::Number* const msg)
+bool RacModel::setSlotMinSpeed(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -311,7 +311,7 @@ bool RacModel::setSlotMinSpeed(const base::Number* const msg)
     return ok;
 }
 
-bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
+bool RacModel::setSlotSpeedMaxG(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -321,7 +321,7 @@ bool RacModel::setSlotSpeedMaxG(const base::Number* const msg)
     return ok;
 }
 
-bool RacModel::setSlotMaxG(const base::Number* const msg)
+bool RacModel::setSlotMaxG(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -331,7 +331,7 @@ bool RacModel::setSlotMaxG(const base::Number* const msg)
     return ok;
 }
 
-bool RacModel::setSlotMaxAccel(const base::Number* const msg)
+bool RacModel::setSlotMaxAccel(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -361,7 +361,7 @@ bool RacModel::setSlotCmdHeading(const base::IAngle* const msg)
     return ok;
 }
 
-bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
+bool RacModel::setSlotCmdVelocity(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Number; class Table1; class Table2; class Table3;
-                 class Table4; class Number; }
+                 class Table4; class INumber; }
 namespace models {
 class IrQueryMsg;
 

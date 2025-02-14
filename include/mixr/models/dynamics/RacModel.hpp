@@ -5,7 +5,7 @@
 #include "mixr/models/dynamics/AerodynamicsModel.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class ILength; class Number; }
+namespace base { class IAngle; class ILength; class INumber; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -16,13 +16,13 @@ namespace models {
 //
 // Factory name: RacModel
 // Slots:
-//    minSpeed       <Number>    ! Minimum Velocity        (kts)
-//    speedMaxG      <Number>    ! Velocity we reach max G (kts)
-//    maxg           <Number>    ! Max G's (at "speedMaxG" or above)
-//    maxAccel       <Number>    ! Maximum Acceleration    (m/s/s)
+//    minSpeed       <INumber>   ! Minimum Velocity        (kts)
+//    speedMaxG      <INumber>   ! Velocity we reach max G (kts)
+//    maxg           <INumber>   ! Max G's (at "speedMaxG" or above)
+//    maxAccel       <INumber>   ! Maximum Acceleration    (m/s/s)
 //    cmdAltitude    <Length>    ! Command Altitude
 //    cmdHeading     <Angle>     ! Command Heading
-//    cmdSpeed       <Number>    ! Command speed           (kts)
+//    cmdSpeed       <INumber>   ! Command speed           (kts)
 //------------------------------------------------------------------------------
 class RacModel final: public AerodynamicsModel
 {
@@ -67,13 +67,13 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotMinSpeed(const base::Number* const);
-   bool setSlotSpeedMaxG(const base::Number* const);
-   bool setSlotMaxG(const base::Number* const);
-   bool setSlotMaxAccel(const base::Number* const);
+   bool setSlotMinSpeed(const base::INumber* const);
+   bool setSlotSpeedMaxG(const base::INumber* const);
+   bool setSlotMaxG(const base::INumber* const);
+   bool setSlotMaxAccel(const base::INumber* const);
    bool setSlotCmdAltitude(const base::ILength* const);
    bool setSlotCmdHeading(const base::IAngle* const);
-   bool setSlotCmdVelocity(const base::Number* const);
+   bool setSlotCmdVelocity(const base::INumber* const);
 };
 
 }

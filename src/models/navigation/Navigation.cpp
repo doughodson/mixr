@@ -13,7 +13,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/times.hpp"
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -828,12 +828,12 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                     int n{};
 
                     { // Get the north (first) distance
-                        const base::Number* pNum{};
+                        const base::INumber* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
                         if (pair2 != nullptr) {
-                            pNum = dynamic_cast<const base::Number*>(pair2->object());
+                            pNum = dynamic_cast<const base::INumber*>(pair2->object());
                         } else {
-                            pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
+                            pNum = dynamic_cast<const base::INumber*>(msg2->getPosition(1));
                         }
                         if (pNum != nullptr) {
                             const auto pDist = dynamic_cast<const base::ILength*>(pNum);
@@ -846,12 +846,12 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                     }
 
                     { // Get the east (second) distance
-                        const base::Number* pNum{};
+                        const base::INumber* pNum{};
                         const auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
                         if (pair2 != nullptr) {
-                            pNum = dynamic_cast<const base::Number*>(pair2->object());
+                            pNum = dynamic_cast<const base::INumber*>(pair2->object());
                         } else {
-                            pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
+                            pNum = dynamic_cast<const base::INumber*>(msg2->getPosition(2));
                         }
                         if (pNum != nullptr) {
                             const auto pDist = dynamic_cast<const base::ILength*>(pNum);

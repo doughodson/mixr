@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class ILength; class NauticalMiles;
-                 class Number; class Pair; class PairStream; }
+                 class INumber; class Pair; class PairStream; }
 namespace models {
 class Navigation;
 class Steerpoint;
@@ -36,7 +36,7 @@ class Steerpoint;
 //    autoSequence      <base::Boolean>     ! Auto sequence flag (default: true)
 //
 //    autoSeqDistance   <base::ILength>     ! Distance to auto sequence by distance unit
-//                      <base::Number>      ! or by nautical miles (default: 2.0NM)
+//                      <base::INumber>     ! or by nautical miles (default: 2.0NM)
 //
 //    wrap              <base::Boolean>     ! Route wrap flag (wrap back to the beginning when past the end)
 //                                          ! (default: true)
@@ -146,7 +146,7 @@ private:
    bool setSlotTo(const base::Integer* const);
    bool setSlotAutoSequence(const base::Boolean* const);
    bool setSlotAutoSeqDistance(const base::ILength* const);
-   bool setSlotAutoSeqDistance(const base::Number* const);
+   bool setSlotAutoSeqDistance(const base::INumber* const);
    bool setSlotWrap(const base::Boolean* const);
 };
 

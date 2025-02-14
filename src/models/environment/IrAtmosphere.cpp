@@ -8,7 +8,7 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/relations/Table1.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -30,8 +30,8 @@ END_SLOTTABLE(IrAtmosphere)
 BEGIN_SLOT_MAP(IrAtmosphere)
    ON_SLOT(1, setSlotWaveBands,            base::Table1)
    ON_SLOT(2, setSlotTransmissivityTable1, base::Table1)
-   ON_SLOT(3, setSlotSkyRadiance,          base::Number)
-   ON_SLOT(4, setSlotEarthRadiance,        base::Number)
+   ON_SLOT(3, setSlotSkyRadiance,          base::INumber)
+   ON_SLOT(4, setSlotEarthRadiance,        base::INumber)
 END_SLOT_MAP()
 
 IrAtmosphere::IrAtmosphere()
@@ -77,7 +77,7 @@ bool IrAtmosphere::setSlotTransmissivityTable1(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotSkyRadiance() -- sky radiance
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
+bool IrAtmosphere::setSlotSkyRadiance(mixr::base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -90,7 +90,7 @@ bool IrAtmosphere::setSlotSkyRadiance(mixr::base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEarthRadiance() -- set background radiance for ground
 //------------------------------------------------------------------------------
-bool IrAtmosphere::setSlotEarthRadiance(mixr::base::Number* const num)
+bool IrAtmosphere::setSlotEarthRadiance(mixr::base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {

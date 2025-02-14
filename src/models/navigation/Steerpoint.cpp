@@ -17,7 +17,7 @@
 #include "mixr/base/Longitude.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -53,33 +53,33 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 1, setSlotSteerpointType, base::Identifier)
 
     ON_SLOT( 2, setSlotLatitude,       base::Latitude)
-    ON_SLOT( 2, setSlotLatitude,       base::Number)
+    ON_SLOT( 2, setSlotLatitude,       base::INumber)
 
     ON_SLOT( 3, setSlotLongitude,      base::Longitude)
-    ON_SLOT( 3, setSlotLongitude,      base::Number)
+    ON_SLOT( 3, setSlotLongitude,      base::INumber)
 
     ON_SLOT( 4, setSlotXPos,           base::ILength)
 
     ON_SLOT( 5, setSlotYPos,           base::ILength)
 
     ON_SLOT( 6, setSlotElevation,      base::ILength)
-    ON_SLOT( 6, setSlotElevation,      base::Number)
+    ON_SLOT( 6, setSlotElevation,      base::INumber)
 
     ON_SLOT( 7, setSlotCmdAltitude,    base::ILength)
-    ON_SLOT( 7, setSlotCmdAltitude,    base::Number)
+    ON_SLOT( 7, setSlotCmdAltitude,    base::INumber)
 
-    ON_SLOT( 8, setSlotCmdAirspeed,    base::Number)
+    ON_SLOT( 8, setSlotCmdAirspeed,    base::INumber)
 
     ON_SLOT( 9, setSlotPTA,            base::ITime)
-    ON_SLOT( 9, setSlotPTA,            base::Number)
+    ON_SLOT( 9, setSlotPTA,            base::INumber)
 
     ON_SLOT(10, setSlotSCA,            base::ILength)
-    ON_SLOT(10, setSlotSCA,            base::Number)
+    ON_SLOT(10, setSlotSCA,            base::INumber)
 
     ON_SLOT(11, setSlotDescription,    base::String)
 
     ON_SLOT(12, setSlotMagVar,         base::IAngle)
-    ON_SLOT(12, setSlotMagVar,         base::Number)
+    ON_SLOT(12, setSlotMagVar,         base::INumber)
 
     ON_SLOT(13, setSlotNext,           base::Identifier)
     ON_SLOT(13, setSlotNext,           base::Integer)
@@ -357,7 +357,7 @@ bool Steerpoint::setSlotLatitude(const base::Latitude* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLatitude(const base::Number* const msg)
+bool Steerpoint::setSlotLatitude(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -379,7 +379,7 @@ bool Steerpoint::setSlotLongitude(const base::Longitude* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotLongitude(const base::Number* const msg)
+bool Steerpoint::setSlotLongitude(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -448,7 +448,7 @@ bool Steerpoint::setSlotElevation(const base::ILength* const x)
     }
     return ok;
 }
-bool Steerpoint::setSlotElevation(const base::Number* const msg)
+bool Steerpoint::setSlotElevation(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -471,7 +471,7 @@ bool Steerpoint::setSlotPTA(const base::ITime* const x)
     }
     return ok;
 }
-bool Steerpoint::setSlotPTA(const base::Number* const msg)
+bool Steerpoint::setSlotPTA(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -490,7 +490,7 @@ bool Steerpoint::setSlotSCA(const base::ILength* const x)
     }
     return ok;
 }
-bool Steerpoint::setSlotSCA(const base::Number* const x)
+bool Steerpoint::setSlotSCA(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -521,7 +521,7 @@ bool Steerpoint::setSlotMagVar(const base::IAngle* const msg)
     }
     return ok;
 }
-bool Steerpoint::setSlotMagVar(const base::Number* const msg)
+bool Steerpoint::setSlotMagVar(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -545,7 +545,7 @@ bool Steerpoint::setSlotCmdAltitude(const base::ILength* const x)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAltitude(const base::Number* const msg)
+bool Steerpoint::setSlotCmdAltitude(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -557,7 +557,7 @@ bool Steerpoint::setSlotCmdAltitude(const base::Number* const msg)
     return ok;
 }
 
-bool Steerpoint::setSlotCmdAirspeed(const base::Number* const msg)
+bool Steerpoint::setSlotCmdAirspeed(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

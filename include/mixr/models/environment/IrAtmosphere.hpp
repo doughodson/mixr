@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Number; class Table1; class Table2; class Table3;
-                 class Table4; class Number; }
+                 class Table4; class INumber; }
 namespace models {
 class IrQueryMsg;
 
@@ -132,8 +132,8 @@ private:
    // slot operations
    bool setSlotWaveBands(const base::Table1* const);
    bool setSlotTransmissivityTable1(const base::Table1* const);
-   bool setSlotSkyRadiance(base::Number* const);
-   bool setSlotEarthRadiance(base::Number* const);
+   bool setSlotSkyRadiance(base::INumber* const);
+   bool setSlotEarthRadiance(base::INumber* const);
 };
 
 }

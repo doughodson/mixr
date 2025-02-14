@@ -66,27 +66,27 @@ class Track;
 //    ! 1: Player's initial position vector (NED) on the simulation's gaming area
 //
 //    initXPos           <base::Length>      ! X position (+north) (default: 0)
-//    initXPos           <base::Number>      ! X position (+north) (meters)
+//    initXPos           <base::INumber>     ! X position (+north) (meters)
 //
 //    initYPos           <base::Length>      ! Y position (+east) (default: 0)
-//    initYPos           <base::Number>      ! Y position (+east) (meters)
+//    initYPos           <base::INumber>     ! Y position (+east) (meters)
 //
 //    initAlt            <base::Length>      ! Altitude (+up) (default: 0)
-//    initAlt            <base::Number>      ! Altitude (+up) (meters)
+//    initAlt            <base::INumber>     ! Altitude (+up) (meters)
 //
 //
 //    ! 2: Player's initial geodetic position
 //
 //    initLatitude       <base::Latitude>    ! Latitude (default: 0)
 //    initLatitude       <base::IAngle>      ! Latitude
-//    initLatitude       <base::Number>      ! Latitude (degs)
+//    initLatitude       <base::INumber>     ! Latitude (degs)
 //
 //    initLongitude      <base::Longitude>   ! Longitude (default: 0)
 //    initLongitude      <base::IAngle>      ! Longitude
-//    initLongitude      <base::Number>      ! Longitude (degs)
+//    initLongitude      <base::INumber>     ! Longitude (degs)
 //
 //    initAlt            <base::ILength>     ! Altitude (HAE) (+up)  ### NES Is this being used?
-//    initAlt            <base::Number>      ! Altitude (HAE) (+up) (meters)
+//    initAlt            <base::INumber>     ! Altitude (HAE) (+up) (meters)
 //
 //
 //    ! 3: Player's initial world position
@@ -98,13 +98,13 @@ class Track;
 //    ! Player's initial Euler angles
 //    ! ---
 //    initRoll           <base::IAngle>      ! Initial roll angle (default: 0)
-//    initRoll           <base::Number>      ! Initial roll angle (radians)
+//    initRoll           <base::INumber>     ! Initial roll angle (radians)
 //
 //    initPitch          <base::IAngle>      ! Initial pitch angle (default: 0)
-//    initPitch          <base::Number>      ! Initial pitch angle (radians)
+//    initPitch          <base::INumber>     ! Initial pitch angle (radians)
 //
 //    initHeading        <base::IAngle>      ! Initial heading angle (default: 0)
-//    initHeading        <base::Number>      ! Initial heading angle (radians)
+//    initHeading        <base::INumber>     ! Initial heading angle (radians)
 //
 //    initEuler          <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
@@ -753,9 +753,9 @@ public:
    virtual bool setQuaternions(const base::Quat&);
 
    virtual bool setInitPitch(const base::IAngle* const);
-   virtual bool setInitPitch(const base::Number* const);
+   virtual bool setInitPitch(const base::INumber* const);
    virtual bool setInitHeading(const base::IAngle* const);
-   virtual bool setInitHeading(const base::Number* const);
+   virtual bool setInitHeading(const base::INumber* const);
 
    // ---
    // Set the player's angular velocities:
@@ -1080,31 +1080,31 @@ private:
 private:
    // slot table helper methods
    bool setSlotInitXPos(const base::ILength* const);
-   bool setSlotInitXPos(const base::Number* const);
+   bool setSlotInitXPos(const base::INumber* const);
    bool setSlotInitYPos(const base::ILength* const);
-   bool setSlotInitYPos(const base::Number* const);
+   bool setSlotInitYPos(const base::INumber* const);
    bool setSlotInitAlt(const base::ILength* const);
-   bool setSlotInitAlt(const base::Number* const);
+   bool setSlotInitAlt(const base::INumber* const);
 
    bool setSlotInitLat(const base::Latitude* const);
    bool setSlotInitLat(const base::IAngle* const);
-   bool setSlotInitLat(const base::Number* const);
+   bool setSlotInitLat(const base::INumber* const);
    bool setSlotInitLon(const base::Longitude* const);
    bool setSlotInitLon(const base::IAngle* const);
-   bool setSlotInitLon(const base::Number* const);
+   bool setSlotInitLon(const base::INumber* const);
 
    bool setSlotInitGeocentric(const base::List* const);
 
    bool setSlotInitRoll(const base::IAngle* const);
-   bool setSlotInitRoll(const base::Number* const);
-   bool setSlotInitPitch(const base::IAngle* const x)        { return setInitPitch(x);   }
-   bool setSlotInitPitch(const base::Number* const x)        { return setInitPitch(x);   }
-   bool setSlotInitHeading(const base::IAngle* const x)      { return setInitHeading(x); }
-   bool setSlotInitHeading(const base::Number* const x)      { return setInitHeading(x); }
+   bool setSlotInitRoll(const base::INumber* const);
+   bool setSlotInitPitch(const base::IAngle* const x)         { return setInitPitch(x);   }
+   bool setSlotInitPitch(const base::INumber* const x)        { return setInitPitch(x);   }
+   bool setSlotInitHeading(const base::IAngle* const x)       { return setInitHeading(x); }
+   bool setSlotInitHeading(const base::INumber* const x)      { return setInitHeading(x); }
 
    bool setSlotInitEulerAngles(const base::List* const);
-   bool setSlotInitVelocity(const base::Number* const);
-   bool setSlotInitVelocityKts(const base::Number* const);
+   bool setSlotInitVelocity(const base::INumber* const);
+   bool setSlotInitVelocityKts(const base::INumber* const);
 
    bool setSlotType(const base::String* const);
    bool setSlotSide(const base::Identifier* const);

@@ -14,7 +14,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/lengths.hpp"
 
@@ -37,7 +37,7 @@ BEGIN_SLOT_MAP(Route)
     ON_SLOT(1, setSlotTo,              base::Integer)
     ON_SLOT(2, setSlotAutoSequence,    base::Boolean)
     ON_SLOT(3, setSlotAutoSeqDistance, base::ILength)
-    ON_SLOT(3, setSlotAutoSeqDistance, base::Number)
+    ON_SLOT(3, setSlotAutoSeqDistance, base::INumber)
     ON_SLOT(4, setSlotWrap,            base::Boolean)
 END_SLOT_MAP()
 
@@ -711,7 +711,7 @@ bool Route::setSlotAutoSeqDistance(const base::ILength* const x)
     }
     return ok;
 }
-bool Route::setSlotAutoSeqDistance(const base::Number* const msg)
+bool Route::setSlotAutoSeqDistance(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

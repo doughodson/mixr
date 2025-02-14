@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Identifier; class Integer; class ILength; class Latitude;
-                 class List; class Longitude; class Identifier; class Number; class String; class ITime; }
+                 class List; class Longitude; class Identifier; class INumber; class String; class ITime; }
 namespace terrain { class ITerrain; }
 namespace models {
 class Navigation;
@@ -25,32 +25,32 @@ class Action;
 //                                    ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
 //
 //   latitude  <base::Latitude>       ! Steerpoint latitude  (default: 0)
-//             <base::Number>         ! (or as degrees decimal)
+//             <base::INumber>        ! (or as degrees decimal)
 //
 //   longitude <base::Longitude>      ! Steerpoint longitude (default: 0)
-//             <base::Number>         ! (or as degrees decimal)
+//             <base::INumber>        ! (or as degrees decimal)
 //
 //   xPos      <base::ILength>        ! X (north) distance from gaming area reference point
 //   yPos      <base::ILength>        ! Y (east) distance from gaming area reference point
 //                                    ! (default: 0, 0)
 //   elevation <base::ILength>        ! Terrain elevation at steerpoint (default: 0)
-//             <base::Number>         ! (or as meters)
+//             <base::INumber>        ! (or as meters)
 //
 //   altitude  <base::ILength>        ! Commanded altitude to steerpoint (default: 0)
-//             <base::Number>         ! (or as meters)
+//             <base::INumber>        ! (or as meters)
 //
-//   airspeed  <base::Number>         ! Commanded true airspeed (Kts) (default: 0)
+//   airspeed  <base::INumber>        ! Commanded true airspeed (Kts) (default: 0)
 //
 //   pta       <base::ILength>        ! Planned Time of Arrival (PTA)  (default: 0)
-//             <base::Number>         ! (or as seconds)
+//             <base::INumber>        ! (or as seconds)
 //
 //   sca       <base::ILength>        ! Safe Clearance Altitude (SCA) (default: 0)
-//             <base::Number>         ! (or as feet)
+//             <base::INumber>        ! (or as feet)
 //
 //   description <base::String>       ! Description of steerpoint (default: 0)
 //
 //   magvar    <base::Angle>          ! Magnetic Var at steerpoint (default: 0)
-//             <base::Number>         ! (or as degrees)
+//             <base::INumber>        ! (or as degrees)
 //
 //   next      <base::Integer>        ! "Next" steerpoint number (default: 0)
 //             <base::Identifier>     ! or by steerpoint name
@@ -234,23 +234,23 @@ private:
    // slot table helper methods
    bool setSlotSteerpointType(const base::Identifier* const);
    bool setSlotLatitude(const base::Latitude* const);
-   bool setSlotLatitude(const base::Number* const);
+   bool setSlotLatitude(const base::INumber* const);
    bool setSlotLongitude(const base::Longitude* const);
-   bool setSlotLongitude(const base::Number* const);
+   bool setSlotLongitude(const base::INumber* const);
    bool setSlotXPos(const base::ILength* const);
    bool setSlotYPos(const base::ILength* const);
    bool setSlotElevation(const base::ILength* const);
-   bool setSlotElevation(const base::Number* const);
+   bool setSlotElevation(const base::INumber* const);
    bool setSlotCmdAltitude(const base::ILength* const);
-   bool setSlotCmdAltitude(const base::Number* const);
-   bool setSlotCmdAirspeed(const base::Number* const);
+   bool setSlotCmdAltitude(const base::INumber* const);
+   bool setSlotCmdAirspeed(const base::INumber* const);
    bool setSlotPTA(const base::ITime* const);
-   bool setSlotPTA(const base::Number* const);
+   bool setSlotPTA(const base::INumber* const);
    bool setSlotSCA(const base::ILength* const);
-   bool setSlotSCA(const base::Number* const);
+   bool setSlotSCA(const base::INumber* const);
    bool setSlotDescription(const base::String* const);
    bool setSlotMagVar(const base::IAngle* const);
-   bool setSlotMagVar(const base::Number* const);
+   bool setSlotMagVar(const base::INumber* const);
    bool setSlotNext(const base::Identifier* const);
    bool setSlotNext(const base::Integer* const);
    bool setSlotAction(Action* const x)                   { return setAction(x); }

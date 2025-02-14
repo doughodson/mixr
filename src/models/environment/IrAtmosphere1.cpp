@@ -10,7 +10,6 @@
 #include "mixr/base/relations/Table2.hpp"
 #include "mixr/base/relations/Table3.hpp"
 #include "mixr/base/relations/Table4.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 #include "mixr/base/units/lengths.hpp"
 

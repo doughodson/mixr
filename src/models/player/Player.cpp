@@ -116,36 +116,36 @@ END_SLOTTABLE(Player)
 BEGIN_SLOT_MAP(Player)
 
    ON_SLOT( 1, setSlotInitXPos,           base::ILength)
-   ON_SLOT( 1, setSlotInitXPos,           base::Number)
+   ON_SLOT( 1, setSlotInitXPos,           base::INumber)
 
    ON_SLOT( 2, setSlotInitYPos,           base::ILength)
-   ON_SLOT( 2, setSlotInitYPos,           base::Number)
+   ON_SLOT( 2, setSlotInitYPos,           base::INumber)
 
    ON_SLOT( 3, setSlotInitAlt,            base::ILength)
-   ON_SLOT( 3, setSlotInitAlt,            base::Number)
+   ON_SLOT( 3, setSlotInitAlt,            base::INumber)
 
    ON_SLOT( 4, setSlotInitLat,            base::Latitude)
    ON_SLOT( 4, setSlotInitLat,            base::IAngle)
-   ON_SLOT( 4, setSlotInitLat,            base::Number)
+   ON_SLOT( 4, setSlotInitLat,            base::INumber)
 
    ON_SLOT( 5, setSlotInitLon,            base::Longitude)
    ON_SLOT( 5, setSlotInitLon,            base::IAngle)
-   ON_SLOT( 5, setSlotInitLon,            base::Number)
+   ON_SLOT( 5, setSlotInitLon,            base::INumber)
 
    ON_SLOT( 6, setSlotInitGeocentric,     base::List)
 
    ON_SLOT( 7, setSlotInitRoll,           base::IAngle)
-   ON_SLOT( 7, setSlotInitRoll,           base::Number)
+   ON_SLOT( 7, setSlotInitRoll,           base::INumber)
 
    ON_SLOT( 8, setSlotInitPitch,          base::IAngle)
-   ON_SLOT( 8, setSlotInitPitch,          base::Number)
+   ON_SLOT( 8, setSlotInitPitch,          base::INumber)
 
    ON_SLOT( 9, setSlotInitHeading,        base::IAngle)
-   ON_SLOT( 9, setSlotInitHeading,        base::Number)
+   ON_SLOT( 9, setSlotInitHeading,        base::INumber)
 
    ON_SLOT(10, setSlotInitEulerAngles,    base::List)
-   ON_SLOT(11, setSlotInitVelocity,       base::Number)
-   ON_SLOT(12, setSlotInitVelocityKts,    base::Number)
+   ON_SLOT(11, setSlotInitVelocity,       base::INumber)
+   ON_SLOT(12, setSlotInitVelocityKts,    base::INumber)
 
    ON_SLOT(13, setSlotType,               base::String)
    ON_SLOT(14, setSlotSide,               base::Identifier)
@@ -3436,7 +3436,7 @@ bool Player::setSlotInitXPos(const base::ILength* const x)
 }
 
 // initXPos: X position (+north) (meters)
-bool Player::setSlotInitXPos(const base::Number* const x)
+bool Player::setSlotInitXPos(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3460,7 +3460,7 @@ bool Player::setSlotInitYPos(const base::ILength* const x)
 }
 
 // initYPos: Y position (+east) (meters)
-bool Player::setSlotInitYPos(const base::Number* const x)
+bool Player::setSlotInitYPos(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3483,7 +3483,7 @@ bool Player::setSlotInitAlt(const base::ILength* const x)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up) (meters)
-bool Player::setSlotInitAlt(const base::Number* const x)
+bool Player::setSlotInitAlt(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3525,7 +3525,7 @@ bool Player::setSlotInitLat(const base::IAngle* const x)
 }
 
 // initLatitude: Latitude (degrees)
-bool Player::setSlotInitLat(const base::Number* const x)
+bool Player::setSlotInitLat(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3570,7 +3570,7 @@ bool Player::setSlotInitLon(const base::IAngle* const x)
 }
 
 // initLongitude: Longitude (degrees)
-bool Player::setSlotInitLon(const base::Number* const x)
+bool Player::setSlotInitLon(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3615,7 +3615,7 @@ bool Player::setSlotInitRoll(const base::IAngle* const x)
 }
 
 // initRoll: Initial roll angle (radians)
-bool Player::setSlotInitRoll(const base::Number* const x)
+bool Player::setSlotInitRoll(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3649,7 +3649,7 @@ bool Player::setInitPitch(const base::IAngle* const x)
 }
 
 // initPitch: Initial pitch angle (radians)
-bool Player::setInitPitch(const base::Number* const x)
+bool Player::setInitPitch(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3684,7 +3684,7 @@ bool Player::setInitHeading(const base::IAngle* const x)
 }
 
 // initHeading: Initial heading angle (radians)
-bool Player::setInitHeading(const base::Number* const x)
+bool Player::setInitHeading(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3772,7 +3772,7 @@ bool Player::setSlotTestBodyAxis(const base::Boolean* const x)
 
 
 // initVelocity: Initial Velocity: meters/second
-bool Player::setSlotInitVelocity(const base::Number* const x)
+bool Player::setSlotInitVelocity(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3783,7 +3783,7 @@ bool Player::setSlotInitVelocity(const base::Number* const x)
 }
 
 // initVelocityKts: Initial Velocity: knots (NM/hour)
-bool Player::setSlotInitVelocityKts(const base::Number* const x)
+bool Player::setSlotInitVelocityKts(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
