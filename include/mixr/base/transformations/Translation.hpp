@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Translation_HPP__
 #define __mixr_base_Translation_HPP__
 
-#include "mixr/base/transformations/Transform.hpp"
+#include "mixr/base/transformations/ITransform.hpp"
 
 namespace mixr {
 namespace base {
@@ -23,9 +23,9 @@ class Number;
 //    2. y  (Number)  y translation.
 //    3. z  (Number)  z translation (optional).
 //------------------------------------------------------------------------------
-class Translation final: public Transform
+class Translation final: public ITransform
 {
-   DECLARE_SUBCLASS(Translation, Transform)
+   DECLARE_SUBCLASS(Translation, ITransform)
 public:
    Translation();
 

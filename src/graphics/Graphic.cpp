@@ -12,7 +12,7 @@
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
-#include "mixr/base/transformations/Transform.hpp"
+#include "mixr/base/transformations/ITransform.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -53,7 +53,7 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 2, setSlotLineWidth,          base::INumber)
     ON_SLOT( 3, setSlotFlashRate,          base::INumber)
     ON_SLOT( 4, setSlotTransformList,      base::PairStream)
-    ON_SLOT( 4, setSlotSingleTransform,    base::Transform)
+    ON_SLOT( 4, setSlotSingleTransform,    base::ITransform)
     ON_SLOT( 5, setSlotVertices,           base::PairStream)
     ON_SLOT( 6, setSlotNormals,            base::PairStream)
     ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
@@ -635,7 +635,7 @@ void Graphic::setupMatrix()
         const base::List::Item* item{transforms->getFirstItem()};
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-            const auto t = dynamic_cast<base::Transform*>(p->object());
+            const auto t = dynamic_cast<base::ITransform*>(p->object());
             if (t != nullptr) {
                 m.preMult( static_cast<const base::Matrixd>(*t) );
                 haveMatrix = true;
@@ -1031,7 +1031,7 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
         base::List::Item* item = transforms->getFirstItem();
         while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto ip = dynamic_cast<base::Transform*>( pair->object() );
+            const auto ip = dynamic_cast<base::ITransform*>( pair->object() );
             if (ip == nullptr) {
                 // It's not a base::Transform!!!
                 if (isMessageEnabled(MSG_WARNING)) {
@@ -1048,7 +1048,7 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
 }
 
 // setSlotSingleTransform() -- makes a list out of a single base::Transform
-bool Graphic::setSlotSingleTransform(base::Transform* const sobj)
+bool Graphic::setSlotSingleTransform(base::ITransform* const sobj)
 {
     const auto list = new base::PairStream();
     const auto pair = new base::Pair("1", sobj);

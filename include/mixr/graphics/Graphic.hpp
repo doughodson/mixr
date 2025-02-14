@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class Transform; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class ITransform; }
 namespace graphics {
 class Display;
 class Material;
@@ -45,7 +45,7 @@ class Material;
 //    linewidth          <INumber>      ! Linewidth (default: 0.0f)
 //    flashRate          <INumber>      ! Flash rate (default: 0.0f)
 //    transform          <PairStream>   ! List of coordinate transformations (default: 0)
-//    transform          <Transform>    ! Single coordinate transformation (default: 0)
+//    transform          <ITransform>    ! Single coordinate transformation (default: 0)
 //    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
 //    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
 //    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
@@ -467,7 +467,7 @@ private:
    bool setSlotLineWidth(const base::INumber* const);
    bool setSlotSelectName(const base::INumber* const);
    bool setSlotTransformList(base::PairStream*);      // Set the transformation list
-   bool setSlotSingleTransform(base::Transform* const);
+   bool setSlotSingleTransform(base::ITransform* const);
    bool setSlotNoDisplayList(const base::Boolean* const);
    bool setSlotSubcomponentsFirst(const base::Boolean* const);
    bool setSlotVertices(const base::PairStream* const);

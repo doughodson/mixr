@@ -93,7 +93,7 @@ OBJS =  \
 	threads/OneShotThread.o \
 	threads/PeriodicThread.o \
 	threads/SyncThread.o \
-	transformations/Transform.o \
+	transformations/ITransform.o \
 	transformations/Translation.o \
 	transformations/Rotation.o \
 	transformations/Scale.o \

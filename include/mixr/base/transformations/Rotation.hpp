@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Rotation_HPP__
 #define __mixr_base_Rotation_HPP__
 
-#include "mixr/base/transformations/Transform.hpp"
+#include "mixr/base/transformations/ITransform.hpp"
 
 namespace mixr {
 namespace base {
@@ -23,9 +23,9 @@ namespace base {
 //    One parameter: Rotate "w" radians about the Z axis.
 //    Four parameters: Rotate "w" radians about the vector (x,y,z).
 //------------------------------------------------------------------------------
-class Rotation final: public Transform
+class Rotation final: public ITransform
 {
-   DECLARE_SUBCLASS(Rotation, Transform)
+   DECLARE_SUBCLASS(Rotation, ITransform)
 public:
    Rotation();
 private:

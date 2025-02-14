@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Transform_HPP__
-#define __mixr_base_Transform_HPP__
+#ifndef __mixr_base_ITransform_HPP__
+#define __mixr_base_ITransform_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/osg/Matrixd"
@@ -28,12 +28,12 @@ class INumber;
 //  w    <Number>   ! w transform (default: identity)
 //  w    <Angle>    ! w transform (default: identity)
 //------------------------------------------------------------------------------
-class Transform : public Object
+class ITransform : public Object
 {
-   DECLARE_SUBCLASS(Transform, Object)
+   DECLARE_SUBCLASS(ITransform, Object)
 
 public:
-   Transform();
+   ITransform();
    // returns a copy of the transformation matrix
    explicit operator const Matrixd&()              { return m; }
 
