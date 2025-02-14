@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Hsv.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -24,9 +24,9 @@ BEGIN_SLOTTABLE(Hsv)
 END_SLOTTABLE(Hsv)
 
 BEGIN_SLOT_MAP(Hsv)
-    ON_SLOT(1, setSlotHue,        Number)
-    ON_SLOT(2, setSlotSaturation, Number)
-    ON_SLOT(3, setSlotValue,      Number)
+    ON_SLOT(1, setSlotHue,        INumber)
+    ON_SLOT(2, setSlotSaturation, INumber)
+    ON_SLOT(3, setSlotValue,      INumber)
 END_SLOT_MAP()
 
 Hsv::Hsv(const double h, const double s, const double v)
@@ -86,7 +86,7 @@ void Hsv::getHSVA(Vec4d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotHue() -- set the HSV hue
 //------------------------------------------------------------------------------
-bool Hsv::setSlotHue(const Number* const x)
+bool Hsv::setSlotHue(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0.0 && value <= 360.0};
@@ -102,7 +102,7 @@ bool Hsv::setSlotHue(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotSaturation() -- set the HSV saturation
 //------------------------------------------------------------------------------
-bool Hsv::setSlotSaturation(const Number* const x)
+bool Hsv::setSlotSaturation(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0.0 && value <= 1.0};
@@ -118,7 +118,7 @@ bool Hsv::setSlotSaturation(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotValue() -- set the HSV value
 //------------------------------------------------------------------------------
-bool Hsv::setSlotValue(const Number* const x)
+bool Hsv::setSlotValue(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0.0 && value <= 1.0};

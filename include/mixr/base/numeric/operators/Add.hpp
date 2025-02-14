@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Add_HPP__
 #define __mixr_base_numeric_Add_HPP__
 
-#include "mixr/base/numeric/operators/Operator.hpp"
+#include "mixr/base/numeric/operators/IOperator.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ namespace base {
 // Example:
 //        ( + val n2 ) gives val plus n2
 //------------------------------------------------------------------------------
-class Add final: public Operator
+class Add final: public IOperator
 {
-   DECLARE_SUBCLASS(Add, Operator)
+   DECLARE_SUBCLASS(Add, IOperator)
 
 public:
    Add();

@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Yiq.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Yiq)
 END_SLOTTABLE(Yiq)
 
 BEGIN_SLOT_MAP(Yiq)
-    ON_SLOT(1, setSlotY, Number)
-    ON_SLOT(2, setSlotI, Number)
-    ON_SLOT(3, setSlotQ, Number)
+    ON_SLOT(1, setSlotY, INumber)
+    ON_SLOT(2, setSlotI, INumber)
+    ON_SLOT(3, setSlotQ, INumber)
 END_SLOT_MAP()
 
 Yiq::Yiq(const double y, const double i, const double q)
@@ -71,7 +71,7 @@ void Yiq::getYIQ(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotY() -- set the Y value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotY(const Number* const x)
+bool Yiq::setSlotY(const INumber* const x)
 {
     const double value {x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
@@ -87,7 +87,7 @@ bool Yiq::setSlotY(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotI() -- set the I value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotI(const Number* const x)
+bool Yiq::setSlotI(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= -0.6 && value <= 0.6};
@@ -103,7 +103,7 @@ bool Yiq::setSlotI(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotQ() -- set the Q value
 //------------------------------------------------------------------------------
-bool Yiq::setSlotQ(const Number* const x)
+bool Yiq::setSlotQ(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= -0.52 && value <= 0.52};

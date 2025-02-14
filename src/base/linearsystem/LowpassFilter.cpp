@@ -1,7 +1,7 @@
 
 #include "mixr/base/linearsystem/LowpassFilter.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/frequencies.hpp"
 #include "mixr/base/util/constants.hpp"
 
@@ -19,7 +19,7 @@ END_SLOTTABLE(LowpassFilter)
 
 BEGIN_SLOT_MAP(LowpassFilter)
    ON_SLOT( 1, setSlotWc, base::IFrequency)
-   ON_SLOT( 1, setSlotWc, base::Number)
+   ON_SLOT( 1, setSlotWc, base::INumber)
 END_SLOT_MAP()
 
 LowpassFilter::LowpassFilter()
@@ -74,7 +74,7 @@ bool LowpassFilter::setSlotWc(const base::IFrequency* const msg)
    return ok;
 }
 
-bool LowpassFilter::setSlotWc(const base::Number* const msg)
+bool LowpassFilter::setSlotWc(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {

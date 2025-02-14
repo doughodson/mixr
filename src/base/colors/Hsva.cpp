@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Hsva.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/angles.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Hsva)
 END_SLOTTABLE(Hsva)
 
 BEGIN_SLOT_MAP(Hsva)
-    ON_SLOT(1, setSlotAlpha, Number)
+    ON_SLOT(1, setSlotAlpha, INumber)
 END_SLOT_MAP()
 
 Hsva::Hsva(const double h, const double s,
@@ -60,7 +60,7 @@ bool Hsva::colorInterpolate(
 //------------------------------------------------------------------------------
 // setSlotAlpha() -- set the ALPHA value
 //------------------------------------------------------------------------------
-bool Hsva::setSlotAlpha(const Number* const x)
+bool Hsva::setSlotAlpha(const INumber* const x)
 {
    double value{x->asDouble()};
    bool ok{value >= 0 && value <= 1};

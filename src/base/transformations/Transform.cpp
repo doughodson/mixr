@@ -1,7 +1,7 @@
 
 #include "mixr/base/transformations/Transform.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/transformations/Rotation.hpp"
@@ -18,13 +18,13 @@ END_SLOTTABLE(Transform)
 
 BEGIN_SLOT_MAP(Transform)
     ON_SLOT(1, setSlotComputematrix1, IAngle)
-    ON_SLOT(1, setSlotComputematrix1, Number)
+    ON_SLOT(1, setSlotComputematrix1, INumber)
     ON_SLOT(2, setSlotComputematrix2, IAngle)
-    ON_SLOT(2, setSlotComputematrix2, Number)
+    ON_SLOT(2, setSlotComputematrix2, INumber)
     ON_SLOT(3, setSlotComputematrix3, IAngle)
-    ON_SLOT(3, setSlotComputematrix3, Number)
+    ON_SLOT(3, setSlotComputematrix3, INumber)
     ON_SLOT(4, setSlotComputematrix4, IAngle)
-    ON_SLOT(4, setSlotComputematrix4, Number)
+    ON_SLOT(4, setSlotComputematrix4, INumber)
 END_SLOT_MAP()
 
 Transform::Transform()
@@ -62,7 +62,7 @@ bool Transform::setSlotComputematrix1(const IAngle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix1(const Number* const x)
+bool Transform::setSlotComputematrix1(const INumber* const x)
 {
     v[nv++] = x->asDouble();
     computeMatrix();
@@ -82,7 +82,7 @@ bool Transform::setSlotComputematrix2(const IAngle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix2(const Number* const x)
+bool Transform::setSlotComputematrix2(const INumber* const x)
 {
     v[nv++] = x->asDouble();
     computeMatrix();
@@ -102,7 +102,7 @@ bool Transform::setSlotComputematrix3(const IAngle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix3(const Number* const x)
+bool Transform::setSlotComputematrix3(const INumber* const x)
 {
     v[nv++] = x->asDouble();
     computeMatrix();
@@ -122,7 +122,7 @@ bool Transform::setSlotComputematrix4(const IAngle* const x)
     return ok;
 }
 
-bool Transform::setSlotComputematrix4(const Number* const x)
+bool Transform::setSlotComputematrix4(const INumber* const x)
 {
     v[nv++] = x->asDouble();
     computeMatrix();

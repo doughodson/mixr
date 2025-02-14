@@ -58,14 +58,14 @@ OBJS =  \
 	numeric/operators/Add.o \
 	numeric/operators/Divide.o \
 	numeric/operators/Multiply.o \
-	numeric/operators/Operator.o \
+	numeric/operators/IOperator.o \
 	numeric/operators/Subtract.o \
 	numeric/Boolean.o \
 	numeric/Complex.o \
 	numeric/Decibel.o \
 	numeric/Float.o \
 	numeric/Integer.o \
-	numeric/Number.o \
+	numeric/INumber.o \
 	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \

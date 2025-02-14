@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Hls
@@ -57,9 +57,9 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotHue(const Number* const);
-   bool setSlotLightness(const Number* const);
-   bool setSlotSaturation(const Number* const);
+   bool setSlotHue(const INumber* const);
+   bool setSlotLightness(const INumber* const);
+   bool setSlotSaturation(const INumber* const);
 };
 
 }

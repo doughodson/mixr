@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 class Identifier;
 
 //------------------------------------------------------------------------------
@@ -23,9 +23,9 @@ class Identifier;
 // Factory name: Longitude
 // Slots:
 //    direction <Identifier>  ! Set the direction { east, west } (default: none)
-//    degrees   <Number>      ! Set the degrees component (default: 0)
-//    minutes   <Number>      ! Set the minutes component (default: 0)
-//    seconds   <Number>      ! Set the seconds component (default: 0.0)
+//    degrees   <INumber>     ! Set the degrees component (default: 0)
+//    minutes   <INumber>     ! Set the minutes component (default: 0)
+//    seconds   <INumber>     ! Set the seconds component (default: 0.0)
 //------------------------------------------------------------------------------
 class Longitude : public Object
 {
@@ -60,9 +60,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotDirection(const Identifier* const);
-   bool setSlotDegrees(const Number* const);
-   bool setSlotMinutes(const Number* const);
-   bool setSlotSeconds(const Number* const);
+   bool setSlotDegrees(const INumber* const);
+   bool setSlotMinutes(const INumber* const);
+   bool setSlotSeconds(const INumber* const);
 };
 
 }

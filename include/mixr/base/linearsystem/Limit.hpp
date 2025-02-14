@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Limit
@@ -28,8 +29,8 @@ public:
 
 private:
    // slot table helper methods
-   bool setSlotLowerLimit(const base::Number* const);
-   bool setSlotUpperLimit(const base::Number* const);
+   bool setSlotLowerLimit(const base::INumber* const);
+   bool setSlotUpperLimit(const base::INumber* const);
 };
 
 }

@@ -1,6 +1,6 @@
 
 #include "mixr/base/linearsystem/Limit.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -16,8 +16,8 @@ BEGIN_SLOTTABLE(Limit)
 END_SLOTTABLE(Limit)
 
 BEGIN_SLOT_MAP(Limit)
-   ON_SLOT( 1, setSlotLowerLimit, base::Number)
-   ON_SLOT( 2, setSlotUpperLimit, base::Number)
+   ON_SLOT( 1, setSlotLowerLimit, base::INumber)
+   ON_SLOT( 2, setSlotUpperLimit, base::INumber)
 END_SLOT_MAP()
 
 Limit::Limit()
@@ -34,7 +34,7 @@ Limit::Limit(const double ll, const double uu) : LimitFunc(ll,uu)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Limit::setSlotLowerLimit(const base::Number* const msg)
+bool Limit::setSlotLowerLimit(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -44,7 +44,7 @@ bool Limit::setSlotLowerLimit(const base::Number* const msg)
    return ok;
 }
 
-bool Limit::setSlotUpperLimit(const base::Number* const msg)
+bool Limit::setSlotUpperLimit(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

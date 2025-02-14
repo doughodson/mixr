@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Cie.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/MonitorMetrics.hpp"
 #include <cstdio>
@@ -19,9 +19,9 @@ BEGIN_SLOTTABLE(Cie)
 END_SLOTTABLE(Cie)
 
 BEGIN_SLOT_MAP(Cie)
-    ON_SLOT(1, setSlotLuminance, Number)
-    ON_SLOT(2, setSlotX, Number)
-    ON_SLOT(3, setSlotY, Number)
+    ON_SLOT(1, setSlotLuminance, INumber)
+    ON_SLOT(2, setSlotX, INumber)
+    ON_SLOT(3, setSlotY, INumber)
     ON_SLOT(4, setSlotMonitor, MonitorMetrics)
 END_SLOT_MAP()
 
@@ -85,7 +85,7 @@ void Cie::getCIE(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotLuminance() -- set the luminance value
 //------------------------------------------------------------------------------
-bool Cie::setSlotLuminance(const Number* const x)
+bool Cie::setSlotLuminance(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
@@ -101,7 +101,7 @@ bool Cie::setSlotLuminance(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotX() -- set the X value
 //------------------------------------------------------------------------------
-bool Cie::setSlotX(const Number* const x)
+bool Cie::setSlotX(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
@@ -117,7 +117,7 @@ bool Cie::setSlotX(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotY() -- set the Y value
 //------------------------------------------------------------------------------
-bool Cie::setSlotY(const Number* const x)
+bool Cie::setSlotY(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};

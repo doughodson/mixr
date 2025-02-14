@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Divide_HPP__
 #define __mixr_base_numeric_Divide_HPP__
 
-#include "mixr/base/numeric/operators/Operator.hpp"
+#include "mixr/base/numeric/operators/IOperator.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ namespace base {
 // Example:
 //        ( / val n2 ) gives val divided by n2
 //------------------------------------------------------------------------------
-class Divide final: public Operator
+class Divide final: public IOperator
 {
-   DECLARE_SUBCLASS(Divide, Operator)
+   DECLARE_SUBCLASS(Divide, IOperator)
 
 public:
    Divide();

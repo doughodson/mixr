@@ -1,7 +1,7 @@
 
 #include "mixr/base/numeric/Complex.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,8 +15,8 @@ BEGIN_SLOTTABLE(Complex)
 END_SLOTTABLE(Complex)
 
 BEGIN_SLOT_MAP(Complex)
-   ON_SLOT(1, setSlotReal,      Number)
-   ON_SLOT(2, setSlotImaginary, Number)
+   ON_SLOT(1, setSlotReal,      INumber)
+   ON_SLOT(2, setSlotImaginary, INumber)
 END_SLOT_MAP()
 
 Complex::Complex()
@@ -40,13 +40,13 @@ void Complex::copyData(const Complex& org, const bool)
    value = org.value;
 }
 
-bool Complex::setSlotReal(const Number* const x)
+bool Complex::setSlotReal(const INumber* const x)
 {
     value.real(x->asDouble());
     return true;
 }
 
-bool Complex::setSlotImaginary(const Number* const x)
+bool Complex::setSlotImaginary(const INumber* const x)
 {
     value.imag(x->asDouble());
     return true;

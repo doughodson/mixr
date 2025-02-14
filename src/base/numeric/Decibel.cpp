@@ -1,7 +1,7 @@
 
 #include "mixr/base/numeric/Decibel.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <cmath>
 
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Decibel)
 END_SLOTTABLE(Decibel)
 
 BEGIN_SLOT_MAP(Decibel)
-    ON_SLOT(1, setSlotValue, Number)      // set the dB value
+    ON_SLOT(1, setSlotValue, INumber)      // set the dB value
 END_SLOT_MAP()
 
 Decibel::Decibel()
@@ -50,7 +50,7 @@ void Decibel::setValue(const double v)
    db = std::log10(v) * 10.0;
 }
 
-bool Decibel::setSlotValue(const Number* const x)
+bool Decibel::setSlotValue(const INumber* const x)
 {
    setValuedB(x->asDouble());
    return true;

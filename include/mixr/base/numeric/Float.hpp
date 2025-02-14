@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Float_HPP__
 #define __mixr_base_numeric_Float_HPP__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ namespace base {
 // Slots:
 //     value  <Float>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
-class Float final: public Number
+class Float final: public INumber
 {
-   DECLARE_SUBCLASS(Float, Number)
+   DECLARE_SUBCLASS(Float, INumber)
 
 public:
    explicit Float()                                   { STANDARD_CONSTRUCTOR() }

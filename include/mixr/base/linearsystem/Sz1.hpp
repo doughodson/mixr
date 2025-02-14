@@ -41,10 +41,10 @@ public:
 
 private:
    // slot table helper methods
-   bool setSlotN1(const base::Number* const);
-   bool setSlotN2(const base::Number* const);
-   bool setSlotD1(const base::Number* const);
-   bool setSlotD2(const base::Number* const);
+   bool setSlotN1(const base::INumber* const);
+   bool setSlotN2(const base::INumber* const);
+   bool setSlotD1(const base::INumber* const);
+   bool setSlotD2(const base::INumber* const);
 };
 
 }

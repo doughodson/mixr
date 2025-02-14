@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Rgba.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(Rgba)
 END_SLOTTABLE(Rgba)
 
 BEGIN_SLOT_MAP(Rgba)
-    ON_SLOT(1, setSlotAlpha, Number)
+    ON_SLOT(1, setSlotAlpha, INumber)
 END_SLOT_MAP()
 
 Rgba::Rgba(const double r, const double g,
@@ -30,7 +30,7 @@ Rgba::Rgba()
    STANDARD_CONSTRUCTOR()
 }
 
-bool Rgba::setSlotAlpha(const Number* const x)
+bool Rgba::setSlotAlpha(const INumber* const x)
 {
     bool ok{setAlpha(x->asDouble())};
     if (!ok) std::cerr << "Rgba::setAlpha: invalid entry(" << x->asDouble() << "), valid range: 0 to 1" << std::endl;

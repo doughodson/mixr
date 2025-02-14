@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Rgba
@@ -30,7 +30,7 @@ public:
 
 private:
     // slot table helper methods
-    bool setSlotAlpha(const Number* const);
+    bool setSlotAlpha(const INumber* const);
 };
 
 }

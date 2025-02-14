@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: IQuantity
@@ -39,7 +39,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotValue(const Number* const);
+   bool setSlotValue(const INumber* const);
 };
 
 }

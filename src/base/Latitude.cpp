@@ -2,7 +2,7 @@
 #include "mixr/base/Latitude.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <cmath>
 #include <string>
@@ -22,9 +22,9 @@ END_SLOTTABLE(Latitude)
 
 BEGIN_SLOT_MAP(Latitude)
     ON_SLOT(1, setSlotDirection, Identifier)
-    ON_SLOT(2, setSlotDegrees,   Number)
-    ON_SLOT(3, setSlotMinutes,   Number)
-    ON_SLOT(4, setSlotSeconds,   Number)
+    ON_SLOT(2, setSlotDegrees,   INumber)
+    ON_SLOT(3, setSlotMinutes,   INumber)
+    ON_SLOT(4, setSlotSeconds,   INumber)
 END_SLOT_MAP()
 
 Latitude::Latitude()
@@ -148,7 +148,7 @@ bool Latitude::setSlotDirection(const Identifier* const x)
 }
 
 // sets the degrees
-bool Latitude::setSlotDegrees(const Number* const x)
+bool Latitude::setSlotDegrees(const INumber* const x)
 {
    bool ok{};
    if (x != nullptr) ok = setDeg(x->asDouble());
@@ -156,14 +156,14 @@ bool Latitude::setSlotDegrees(const Number* const x)
 }
 
 // sets the minutes
-bool Latitude::setSlotMinutes(const Number* const x)
+bool Latitude::setSlotMinutes(const INumber* const x)
 {
    bool ok{};
    if (x != nullptr) ok = setMin(x->asDouble());
    return ok;
 }
 
-bool Latitude::setSlotSeconds(const Number* const x)
+bool Latitude::setSlotSeconds(const INumber* const x)
 {
    bool ok{};
    if (x != nullptr) ok = setSec(x->asDouble());

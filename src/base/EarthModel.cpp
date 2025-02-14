@@ -3,7 +3,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/lengths.hpp"
 
 #include <cstring>
@@ -49,7 +49,7 @@ END_SLOTTABLE(EarthModel)
 BEGIN_SLOT_MAP(EarthModel)
    ON_SLOT(1, setSlotA, ILength)
    ON_SLOT(2, setSlotB, ILength)
-   ON_SLOT(3, setSlotF, Number)
+   ON_SLOT(3, setSlotF, INumber)
 END_SLOT_MAP()
 
 EarthModel::EarthModel(const double a0, const double f0)
@@ -163,7 +163,7 @@ bool EarthModel::setSlotB(const ILength* const x)
    return setB(x->getValueInMeters());
 }
 
-bool EarthModel::setSlotF(const Number* const msg)
+bool EarthModel::setSlotF(const INumber* const msg)
 {
    return setF( msg->asDouble() );
 }

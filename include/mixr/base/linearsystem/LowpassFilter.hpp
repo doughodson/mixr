@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class IFrequency;
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class:  LowpassFilter
@@ -43,7 +43,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotWc(const base::IFrequency* const);
-   bool setSlotWc(const base::Number* const);
+   bool setSlotWc(const base::INumber* const);
 };
 
 }

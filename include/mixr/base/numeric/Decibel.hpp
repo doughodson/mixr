@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Decibel_HPP__
 #define __mixr_base_numeric_Decibel_HPP__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
@@ -23,9 +23,9 @@ namespace base {
 // Slots:
 //     value  <Number>  ! Sets the value of this number (default: 0.0)
 //------------------------------------------------------------------------------
-class Decibel final: public Number
+class Decibel final: public INumber
 {
-   DECLARE_SUBCLASS(Decibel, Number)
+   DECLARE_SUBCLASS(Decibel, INumber)
 
 public:
    explicit Decibel();
@@ -45,7 +45,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotValue(const Number* const);
+   bool setSlotValue(const INumber* const);
 };
 
 }

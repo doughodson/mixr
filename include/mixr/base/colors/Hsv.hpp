@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Hsv
@@ -81,9 +81,9 @@ protected:
     Vec4d hsv;
 
 private:
-    bool setSlotHue(const Number* const);
-    bool setSlotSaturation(const Number* const);
-    bool setSlotValue(const Number* const);
+    bool setSlotHue(const INumber* const);
+    bool setSlotSaturation(const INumber* const);
+    bool setSlotValue(const INumber* const);
 };
 
 }

@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Rgb.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Rgb)
 END_SLOTTABLE(Rgb)
 
 BEGIN_SLOT_MAP(Rgb)
-    ON_SLOT(1, setSlotRed,   Number)
-    ON_SLOT(2, setSlotGreen, Number)
-    ON_SLOT(3, setSlotBlue,  Number)
+    ON_SLOT(1, setSlotRed,   INumber)
+    ON_SLOT(2, setSlotGreen, INumber)
+    ON_SLOT(3, setSlotBlue,  INumber)
 END_SLOT_MAP()
 
 Rgb::Rgb(const double r, const double g, const double b)
@@ -43,7 +43,7 @@ void Rgb::copyData(const Rgb& org, const bool)
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Rgb::setSlotRed(const Number* const x)
+bool Rgb::setSlotRed(const INumber* const x)
 {
     const bool ok{setRed(x->asDouble())};
     if (!ok) {
@@ -52,7 +52,7 @@ bool Rgb::setSlotRed(const Number* const x)
     return ok;
 }
 
-bool Rgb::setSlotGreen(const Number* const x)
+bool Rgb::setSlotGreen(const INumber* const x)
 {
     const bool ok{setGreen(x->asDouble())};
     if (!ok) {
@@ -61,7 +61,7 @@ bool Rgb::setSlotGreen(const Number* const x)
     return ok;
 }
 
-bool Rgb::setSlotBlue(const Number* const x)
+bool Rgb::setSlotBlue(const INumber* const x)
 {
     const bool ok{setBlue(x->asDouble())};
     if (!ok) {

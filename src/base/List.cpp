@@ -169,7 +169,7 @@ std::size_t List::getNumberList(double values[], const std::size_t max) const
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const INumber*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->asDouble();
@@ -191,7 +191,7 @@ std::size_t List::getNumberList(float values[], const std::size_t max) const
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const INumber*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = static_cast<float>(pp->asDouble());
@@ -214,7 +214,7 @@ std::size_t List::getNumberList(int values[], const std::size_t max) const
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        const auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const INumber*>(p1);
         if (pp != nullptr) {
             // when we have a number
             //values[n++] = pp->getInt(); - revised by DDH

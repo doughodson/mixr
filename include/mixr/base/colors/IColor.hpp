@@ -8,7 +8,6 @@
 namespace mixr {
 namespace base {
 class Vec3d;
-class Number;
 
 //------------------------------------------------------------------------------
 // Class: IColor

@@ -1,7 +1,7 @@
 
 #include "mixr/base/colors/Cmy.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -16,9 +16,9 @@ BEGIN_SLOTTABLE(Cmy)
 END_SLOTTABLE(Cmy)
 
 BEGIN_SLOT_MAP(Cmy)
-    ON_SLOT(1, setSlotCyan,    Number)
-    ON_SLOT(2, setSlotMagenta, Number)
-    ON_SLOT(3, setSlotYellow,  Number)
+    ON_SLOT(1, setSlotCyan,    INumber)
+    ON_SLOT(2, setSlotMagenta, INumber)
+    ON_SLOT(3, setSlotYellow,  INumber)
 END_SLOT_MAP()
 
 Cmy::Cmy()
@@ -71,7 +71,7 @@ void Cmy::getCMY(Vec3d& hhh) const
 //------------------------------------------------------------------------------
 // setSlotCyan() -- set the cyan value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotCyan(const Number* const x)
+bool Cmy::setSlotCyan(const INumber* const x)
 {
     double value{x->asDouble()};
     bool ok{value >= 0 && value <= 1};
@@ -87,7 +87,7 @@ bool Cmy::setSlotCyan(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMagenta() -- set the magenta value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotMagenta(const Number* const x)
+bool Cmy::setSlotMagenta(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};
@@ -103,7 +103,7 @@ bool Cmy::setSlotMagenta(const Number* const x)
 //------------------------------------------------------------------------------
 // setSlotYellow() -- set the yellow value
 //------------------------------------------------------------------------------
-bool Cmy::setSlotYellow(const Number* const x)
+bool Cmy::setSlotYellow(const INumber* const x)
 {
     const double value{x->asDouble()};
     const bool ok{value >= 0 && value <= 1};

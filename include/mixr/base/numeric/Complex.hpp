@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Complex
@@ -44,8 +44,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotReal(const Number* const);
-   bool setSlotImaginary(const Number* const);
+   bool setSlotReal(const INumber* const);
+   bool setSlotImaginary(const INumber* const);
 };
 
 }

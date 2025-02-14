@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Integer_HPP__
 #define __mixr_base_numeric_Integer_HPP__
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -18,9 +18,9 @@ namespace base {
 // Slots:
 //     value  <Integer>  ! Sets the value of this number (default: 0)
 //------------------------------------------------------------------------------
-class Integer final: public Number
+class Integer final: public INumber
 {
-    DECLARE_SUBCLASS(Integer, Number)
+    DECLARE_SUBCLASS(Integer, INumber)
 
 public:
     explicit Integer()                           { STANDARD_CONSTRUCTOR() }

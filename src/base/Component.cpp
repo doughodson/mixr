@@ -4,7 +4,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -645,7 +645,7 @@ void Component::processComponents(
             select(str);
             str->unref();
       } else {
-            const auto num = new Integer( static_cast<int>((static_cast<Number*>(selection))->asDouble()) );
+            const auto num = new Integer( static_cast<int>((static_cast<INumber*>(selection))->asDouble()) );
             select(num);
             num->unref();
       }

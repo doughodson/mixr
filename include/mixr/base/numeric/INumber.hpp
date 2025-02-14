@@ -8,21 +8,21 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Number
-// Description:  Abstract class for number-based objects (Float, Integer) and 
+// Class: INumber
+// Description:  Interface for number-based objects (Float, Integer) and
 //               numerical operators (Add, Subtract, Multiply and Divide)
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractNumber
+// Factory name: INumber
 // Slots: none
 //------------------------------------------------------------------------------
-class Number : public Object
+class INumber : public Object
 {
-   DECLARE_SUBCLASS(Number, Object)
+   DECLARE_SUBCLASS(INumber, Object)
 
 public:
-   explicit Number()                       { STANDARD_CONSTRUCTOR() }
+   explicit INumber()                       { STANDARD_CONSTRUCTOR() }
 
    double asDouble() const                 { return getValue(); }
    int asInt() const                       { return getIntValue(); }

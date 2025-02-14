@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Rgb
@@ -18,9 +18,9 @@ class Number;
 // Factory name: rgb
 //
 // Slots:
-//     red   <Number>  ! Red component (0.0 to 1.0) (default: 0)
-//     green <Number>  ! Green component (0.0 to 1.0) (default: 0)
-//     blue  <Number>  ! Blue component (0.0 to 1.0) (default: 0)
+//     red   <INumber>  ! Red component (0.0 to 1.0) (default: 0)
+//     green <INumber>  ! Green component (0.0 to 1.0) (default: 0)
+//     blue  <INumber>  ! Blue component (0.0 to 1.0) (default: 0)
 //------------------------------------------------------------------------------
 // Events: None
 //------------------------------------------------------------------------------
@@ -34,9 +34,9 @@ public:
 
 private:
     // slot table helper methods
-    bool setSlotRed(const Number* const);
-    bool setSlotGreen(const Number* const);
-    bool setSlotBlue(const Number* const);
+    bool setSlotRed(const INumber* const);
+    bool setSlotGreen(const INumber* const);
+    bool setSlotBlue(const INumber* const);
 };
 
 }

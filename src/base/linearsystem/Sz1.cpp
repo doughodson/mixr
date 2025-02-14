@@ -1,6 +1,6 @@
 
 #include "mixr/base/linearsystem/Sz1.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -21,14 +21,14 @@ BEGIN_SLOTTABLE(Sz1)
 END_SLOTTABLE(Sz1)
 
 BEGIN_SLOT_MAP(Sz1)
-   ON_SLOT( 1, setSlotN1,   base::Number)
-   ON_SLOT( 2, setSlotN1,   base::Number)
-   ON_SLOT( 3, setSlotN2,   base::Number)
-   ON_SLOT( 4, setSlotN2,   base::Number)
-   ON_SLOT( 5, setSlotD1,   base::Number)
-   ON_SLOT( 6, setSlotD1,   base::Number)
-   ON_SLOT( 7, setSlotD2,   base::Number)
-   ON_SLOT( 8, setSlotD2,   base::Number)
+   ON_SLOT( 1, setSlotN1,   base::INumber)
+   ON_SLOT( 2, setSlotN1,   base::INumber)
+   ON_SLOT( 3, setSlotN2,   base::INumber)
+   ON_SLOT( 4, setSlotN2,   base::INumber)
+   ON_SLOT( 5, setSlotD1,   base::INumber)
+   ON_SLOT( 6, setSlotD1,   base::INumber)
+   ON_SLOT( 7, setSlotD2,   base::INumber)
+   ON_SLOT( 8, setSlotD2,   base::INumber)
 END_SLOT_MAP()
 
 Sz1::Sz1()
@@ -40,7 +40,7 @@ Sz1::Sz1()
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Sz1::setSlotN1(const base::Number* const msg)
+bool Sz1::setSlotN1(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -50,7 +50,7 @@ bool Sz1::setSlotN1(const base::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotN2(const base::Number* const msg)
+bool Sz1::setSlotN2(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -60,7 +60,7 @@ bool Sz1::setSlotN2(const base::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotD1(const base::Number* const msg)
+bool Sz1::setSlotD1(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -70,7 +70,7 @@ bool Sz1::setSlotD1(const base::Number* const msg)
    return ok;
 }
 
-bool Sz1::setSlotD2(const base::Number* const msg)
+bool Sz1::setSlotD2(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class ILength;
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: EarthModel
@@ -20,7 +20,7 @@ class Number;
 // Slots:
 //     a    <ILength>    ! Semi major axis
 //     b    <ILength>    ! Semi minor axis
-//     f    <Number>    ! Flattening
+//     f    <INumber>    ! Flattening
 //------------------------------------------------------------------------------
 class EarthModel : public Object
 {
@@ -80,7 +80,7 @@ private:
    // slot table helper methods
    bool setSlotA(const ILength* const);
    bool setSlotB(const ILength* const);
-   bool setSlotF(const Number* const);
+   bool setSlotF(const INumber* const);
 };
 
 inline double EarthModel::getA() const  { return a; }

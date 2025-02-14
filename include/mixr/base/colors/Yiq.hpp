@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Yiq
@@ -24,9 +24,9 @@ class Number;
 // Factory name: yiq
 //
 // Slots:
-//       Y  <Number>  Y component (0.0 to 1.0) (default: 0.0)
-//       I  <Number>  I component (-0.6 to 0.6) (default: 0.0)
-//       Q  <Number>  Q component (-0.52.0 to 0.52) (default: 0.0)
+//       Y  <INumber>  Y component (0.0 to 1.0) (default: 0.0)
+//       I  <INumber>  I component (-0.6 to 0.6) (default: 0.0)
+//       Q  <INumber>  Q component (-0.52.0 to 0.52) (default: 0.0)
 //------------------------------------------------------------------------------
 // Events: None
 //------------------------------------------------------------------------------
@@ -61,9 +61,9 @@ protected:
 
 private:
    // slot table helper methods
-   bool setSlotY(const Number* const);
-   bool setSlotI(const Number* const);
-   bool setSlotQ(const Number* const);
+   bool setSlotY(const INumber* const);
+   bool setSlotI(const INumber* const);
+   bool setSlotQ(const INumber* const);
 };
 
 }

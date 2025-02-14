@@ -10,7 +10,7 @@ namespace mixr {
 namespace base {
 class Vec4d;
 class MonitorMetrics;
-class Number;
+class INumber;
 class Table1;
 
 //------------------------------------------------------------------------------
@@ -21,9 +21,9 @@ class Table1;
 //
 // Factory name: cie
 // Slots:
-//     luminance <Number>         ! Luminance component (0.0 to 1.0) (default: 0)
-//     x         <Number>         ! Green component     (0.0 to 1.0) (default: 0)
-//     y         <Number>         ! Blue component      (0.0 to 1.0, x+y<=1) (default: 0)
+//     luminance <INumber>        ! Luminance component (0.0 to 1.0) (default: 0)
+//     x         <INumber>        ! Green component     (0.0 to 1.0) (default: 0)
+//     y         <INumber>        ! Blue component      (0.0 to 1.0, x+y<=1) (default: 0)
 //     monitor   <MonitorMetrics> ! Monitor characteristics
 //------------------------------------------------------------------------------
 // Notes:
@@ -59,9 +59,9 @@ protected:
 private:
    // slot table helper methods
    bool setSlotMonitor(const MonitorMetrics* const);
-   bool setSlotLuminance(const Number* const);
-   bool setSlotX(const Number* const);
-   bool setSlotY(const Number* const);
+   bool setSlotLuminance(const INumber* const);
+   bool setSlotX(const INumber* const);
+   bool setSlotY(const INumber* const);
 };
 
 }

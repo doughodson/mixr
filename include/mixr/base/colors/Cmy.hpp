@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Cmy
@@ -16,9 +16,9 @@ class Number;
 //
 // Factory name: cmy
 // Slots:
-//    cyan     <Number>  ! Cyan component (0.0 to 1.0) (default: 0)
-//    magenta  <Number>  ! Magenta component (0.0 to 1.0) (default: 0)
-//    yellow   <Number>  ! Yellow component (0.0 to 1.0) (default: 0)
+//    cyan     <INumber>  ! Cyan component (0.0 to 1.0) (default: 0)
+//    magenta  <INumber>  ! Magenta component (0.0 to 1.0) (default: 0)
+//    yellow   <INumber>  ! Yellow component (0.0 to 1.0) (default: 0)
 //------------------------------------------------------------------------------
 // Notes: The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
@@ -53,9 +53,9 @@ protected:
 
 private:
    // slot table helper methods
-   bool setSlotCyan(const Number* const);
-   bool setSlotMagenta(const Number* const);
-   bool setSlotYellow(const Number* const);
+   bool setSlotCyan(const INumber* const);
+   bool setSlotMagenta(const INumber* const);
+   bool setSlotYellow(const INumber* const);
 };
 
 }

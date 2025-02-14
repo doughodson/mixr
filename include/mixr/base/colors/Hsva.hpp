@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class: Hsva
@@ -16,7 +16,7 @@ class Number;
 //
 // Factory name: hsva
 // Slots:
-//    alpha   <Number>  ! Set the alpha component (0.0 to 1.0) (default: 1.0)
+//    alpha   <INumber>  ! Set the alpha component (0.0 to 1.0) (default: 1.0)
 //------------------------------------------------------------------------------
 // Notes: The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
@@ -48,7 +48,7 @@ public:
 
 private:
    // slot table helper methods
-   bool setSlotAlpha(const Number* const);
+   bool setSlotAlpha(const INumber* const);
 };
 
 }

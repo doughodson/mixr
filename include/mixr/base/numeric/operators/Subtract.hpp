@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Subtract_HPP__
 #define __mixr_base_numeric_Subtract_HPP__
 
-#include "mixr/base/numeric/operators/Operator.hpp"
+#include "mixr/base/numeric/operators/IOperator.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ namespace base {
 // Example:
 //        ( - val n2 ) gives val minus n2
 //------------------------------------------------------------------------------
-class Subtract final: public Operator
+class Subtract final: public IOperator
 {
-   DECLARE_SUBCLASS(Subtract, Operator)
+   DECLARE_SUBCLASS(Subtract, IOperator)
 
 public:
    Subtract();

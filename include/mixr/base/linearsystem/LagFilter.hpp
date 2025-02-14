@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace base {
+class INumber;
 class ITime;
 
 //------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotTau(const base::ITime* const);
-   bool setSlotTau(const base::Number* const);
+   bool setSlotTau(const base::INumber* const);
 };
 
 }

@@ -24,7 +24,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Object
-// Description: Abstract top-level base class for all framework objects.
+// Description: Top-level base class for all framework objects.
 //
 //    Provides a common base class for type checking and support for factory names,
 //    slot tables, exceptions and reference counting.  Most of this needs to

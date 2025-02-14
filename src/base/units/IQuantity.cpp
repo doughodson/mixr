@@ -1,7 +1,7 @@
 
 #include "mixr/base/units/IQuantity.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(IQuantity)
 END_SLOTTABLE(IQuantity)
 
 BEGIN_SLOT_MAP(IQuantity)
-    ON_SLOT(1, setSlotValue, Number)
+    ON_SLOT(1, setSlotValue, INumber)
 END_SLOT_MAP()
 
 void IQuantity::copyData(const IQuantity& org, const bool)
@@ -24,7 +24,7 @@ void IQuantity::copyData(const IQuantity& org, const bool)
    value = org.value;
 }
 
-bool IQuantity::setSlotValue(const Number* const x)
+bool IQuantity::setSlotValue(const INumber* const x)
 {
    value = convertToBaseUnit(x->asDouble());
    return true;

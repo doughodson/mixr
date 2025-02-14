@@ -8,7 +8,7 @@ namespace mixr {
 namespace base {
 class IFrequency;
 class Integer;
-class Number;
+class INumber;
 
 //------------------------------------------------------------------------------
 // Class:  ScalerFunc
@@ -32,8 +32,8 @@ class Number;
 // Slots:
 //    rate  <Frequency>  Master rate
 //    rate  <Integer>    Master rate Hz
-//    x0    <Number>     Initial (previous) input value: X(0) (default: 0)
-//    y0    <Number>     Initial (previous) output value: Y(0) (default: 0)
+//    x0    <INumber>    Initial (previous) input value: X(0) (default: 0)
+//    y0    <INumber>    Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
 class ScalerFunc : public Object
@@ -85,8 +85,8 @@ private:
    // slot table helper methods
    bool setSlotRate(const IFrequency* const);
    bool setSlotRate(const Integer* const);
-   bool setSlotX0(const Number* const);
-   bool setSlotY0(const Number* const);
+   bool setSlotX0(const INumber* const);
+   bool setSlotY0(const INumber* const);
 };
 
 }

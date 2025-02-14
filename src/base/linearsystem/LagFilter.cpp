@@ -1,7 +1,7 @@
 
 #include "mixr/base/linearsystem/LagFilter.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/times.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ END_SLOTTABLE(LagFilter)
 
 BEGIN_SLOT_MAP(LagFilter)
    ON_SLOT( 1, setSlotTau, base::ITime)
-   ON_SLOT( 1, setSlotTau, base::Number)
+   ON_SLOT( 1, setSlotTau, base::INumber)
 END_SLOT_MAP()
 
 LagFilter::LagFilter()
@@ -78,7 +78,7 @@ bool LagFilter::setSlotTau(const base::ITime* const x)
    return ok;
 }
 
-bool LagFilter::setSlotTau(const base::Number* const msg)
+bool LagFilter::setSlotTau(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

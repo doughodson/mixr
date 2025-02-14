@@ -12,7 +12,7 @@ namespace base {
 class Boolean;
 class Identifier;
 class Integer;
-class Number;
+class INumber;
 class Pair;
 class PairStream;
 class Statistic;
