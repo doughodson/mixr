@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Referenced_HPP__
-#define __mixr_base_Referenced_HPP__
+#ifndef __mixr_base_IReferenced_HPP__
+#define __mixr_base_IReferenced_HPP__
 
 // framework configuration file
 #include "mixr/config.hpp"
@@ -11,8 +11,8 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Referenced
-// Description: Abstract base class that provides reference counting
+// Class: IReferenced
+// Description: Interface that provides reference counting
 //------------------------------------------------------------------------------
 // Reference counting:
 //
@@ -33,13 +33,13 @@ namespace base {
 //    Using getRefCount() returns the current value of the Object's reference count
 //------------------------------------------------------------------------------
 
-class Referenced
+class IReferenced
 {
 public:
-   Referenced() =default;
-   Referenced(const Referenced&) =delete;
-   Referenced& operator=(const Referenced&) =delete;
-   virtual ~Referenced() =0;
+   IReferenced() =default;
+   IReferenced(const IReferenced&) =delete;
+   IReferenced& operator=(const IReferenced&) =delete;
+   virtual ~IReferenced() =0;
 
    int getRefCount() const       { return refCount; }
 
@@ -91,9 +91,9 @@ private:
    mutable int refCount{1};   // reference count
 };
 
-inline Referenced::~Referenced() {}
+inline IReferenced::~IReferenced() {}
 
-inline void Referenced::ref() const
+inline void IReferenced::ref() const
 {
    lock(semaphore);
    if (++(refCount) <= 1) throw new ExpInvalidRefCount();
@@ -107,7 +107,7 @@ inline void Referenced::ref() const
    #endif
 }
 
-inline void Referenced::unref() const
+inline void IReferenced::unref() const
 {
    lock(semaphore);
    if (--refCount == 0) delete this;

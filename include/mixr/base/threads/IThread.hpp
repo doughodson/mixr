@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IThread_HPP__
 #define __mixr_base_IThread_HPP__
 
-#include "mixr/base/Referenced.hpp"
+#include "mixr/base/IReferenced.hpp"
 #include "mixr/base/util/platform_api.hpp"
 
 #include <cstddef>
@@ -67,7 +67,7 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class IThread : public Referenced
+class IThread : public IReferenced
 {
 public:
    IThread(Component* const parent);

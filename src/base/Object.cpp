@@ -29,12 +29,12 @@ const SlotTable Object::slottable(nullptr, 0);
 // Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.hpp
 //------------------------------------------------------------------------------
 
-Object::Object():Referenced()
+Object::Object():IReferenced()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Object::Object(const Object& org):Referenced()
+Object::Object(const Object& org):IReferenced()
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);

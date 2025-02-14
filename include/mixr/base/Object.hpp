@@ -3,7 +3,7 @@
 #define __mixr_base_Object_HPP__
 
 // defines reference counting system for objects
-#include "mixr/base/Referenced.hpp"
+#include "mixr/base/IReferenced.hpp"
 
 // platform configuration file
 #include "mixr/config.hpp"
@@ -247,7 +247,7 @@ namespace base {
 //    to spot potential memory leaks.
 //
 //------------------------------------------------------------------------------
-class Object : public Referenced
+class Object : public IReferenced
 {
    // -------------------------------------------------------------------------
    // Standard object stuff --
