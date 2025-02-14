@@ -5,7 +5,7 @@
 #include "IFtglFont.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class INumber; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ namespace graphics {
 //
 // Factory name: FTGLExtrdFonts
 // Slots:
-//   depth         <Number>    ! Depth (default: 5.0)
+//   depth         <INumber>    ! Depth (default: 5.0)
 //------------------------------------------------------------------------------
 class FtglExtrdFont final: public IFtglFont
 {
@@ -39,7 +39,7 @@ private:
 private:
     // slot table helper methods
     // sets the depth of the extruded font
-    bool setSlotDepth(const base::Number* const);
+    bool setSlotDepth(const base::INumber* const);
 };
 
 }

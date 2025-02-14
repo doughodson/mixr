@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/fonts/ftgl/FtglExtrdFont.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/util/filesystem_utils.hpp"
 
 #include <iostream>
@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(FtglExtrdFont)
 END_SLOTTABLE(FtglExtrdFont)
 
 BEGIN_SLOT_MAP(FtglExtrdFont)
-    ON_SLOT(1, setSlotDepth, base::Number)
+    ON_SLOT(1, setSlotDepth, base::INumber)
 END_SLOT_MAP()
 
 FtglExtrdFont::FtglExtrdFont()
@@ -39,7 +39,7 @@ void FtglExtrdFont::copyData(const FtglExtrdFont& org, const bool)
 //------------------------------------------------------------------------------
 // FtglExtrdFont slot table methods
 //------------------------------------------------------------------------------
-bool FtglExtrdFont::setSlotDepth(const base::Number* const x)
+bool FtglExtrdFont::setSlotDepth(const base::INumber* const x)
 {
     depth = static_cast<float>(x->asDouble());
     return true;

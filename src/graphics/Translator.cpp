@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/Translator.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -12,9 +12,9 @@ EMPTY_SLOTTABLE(Translator)
 EMPTY_DELETEDATA(Translator)
 
 BEGIN_EVENT_HANDLER(Translator)
-    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateX, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateX, base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, base::INumber)
 END_EVENT_HANDLER()
 
 Translator::Translator()
@@ -47,7 +47,7 @@ void Translator::draw()
 //------------------------------------------------------------------------------
 // onUpdateX() - update our x position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateX(const base::Number* const newX)
+bool Translator::onUpdateX(const base::INumber* const newX)
 {
     bool ok {};
     if (newX != nullptr) ok = setXPos(newX->asDouble());
@@ -56,7 +56,7 @@ bool Translator::onUpdateX(const base::Number* const newX)
 //------------------------------------------------------------------------------
 // onUpdateY() - update our y position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateY(const base::Number* const newY)
+bool Translator::onUpdateY(const base::INumber* const newY)
 {
     bool ok {};
     if (newY != nullptr) ok = setYPos(newY->asDouble());
@@ -65,7 +65,7 @@ bool Translator::onUpdateY(const base::Number* const newY)
 //------------------------------------------------------------------------------
 // onUpdateY() - update our z position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateZ(const base::Number* const newZ)
+bool Translator::onUpdateZ(const base::INumber* const newZ)
 {
     bool ok {};
     if (newZ != nullptr) ok = setZPos(newZ->asDouble());

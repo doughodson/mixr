@@ -3,7 +3,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
 #include <GL/glu.h>
@@ -24,13 +24,13 @@ BEGIN_SLOTTABLE(Circle)
 END_SLOTTABLE(Circle)
 
 BEGIN_SLOT_MAP(Circle)
-    ON_SLOT(1, setSlotRadius, base::Number)
+    ON_SLOT(1, setSlotRadius, base::INumber)
     ON_SLOT(2, setSlotFilled, base::Boolean)
     ON_SLOT(3, setSlotSlices, base::Integer)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Circle)
-    ON_EVENT_OBJ(UPDATE_VALUE, updateRadius, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE, updateRadius, base::INumber)
 END_EVENT_HANDLER()
 
 Circle::Circle()
@@ -47,7 +47,7 @@ void Circle::copyData(const Circle& org, const bool)
 }
 
 // Update the circle's radius
-bool Circle::updateRadius(const base::Number* const x)
+bool Circle::updateRadius(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setRadius(x->asDouble());
@@ -71,7 +71,7 @@ void Circle::drawFunc()
 }
 
 // Set slot functions
-bool Circle::setSlotRadius(const base::Number* const x)
+bool Circle::setSlotRadius(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setRadius(x->asDouble());
@@ -103,7 +103,7 @@ BEGIN_SLOTTABLE(OcclusionCircle)
 END_SLOTTABLE(OcclusionCircle)
 
 BEGIN_SLOT_MAP(OcclusionCircle)
-    ON_SLOT(1, setSlotOuterRadius, base::Number)
+    ON_SLOT(1, setSlotOuterRadius, base::INumber)
 END_SLOT_MAP()
 
 OcclusionCircle::OcclusionCircle()
@@ -136,7 +136,7 @@ void OcclusionCircle::drawFunc()
 }
 
 // Set slot functions
-bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
+bool OcclusionCircle::setSlotOuterRadius(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setOuterRadius(x->asDouble());
@@ -157,8 +157,8 @@ BEGIN_SLOTTABLE(Arc)
 END_SLOTTABLE(Arc)
 
 BEGIN_SLOT_MAP(Arc)
-    ON_SLOT(1, setSlotStartAngle, base::Number)
-    ON_SLOT(2, setSlotArcLength, base::Number)
+    ON_SLOT(1, setSlotStartAngle, base::INumber)
+    ON_SLOT(2, setSlotArcLength, base::INumber)
     ON_SLOT(3, setSlotIsConnected, base::Boolean)
 END_SLOT_MAP()
 
@@ -197,14 +197,14 @@ void Arc::drawFunc()
 }
 
 // Set slot functions
-bool Arc::setSlotStartAngle(const base::Number* const x)
+bool Arc::setSlotStartAngle(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setStartAngle(x->asDouble());
     return ok;
 }
 
-bool Arc::setSlotArcLength(const base::Number* const x)
+bool Arc::setSlotArcLength(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setArcLength(x->asDouble());
@@ -230,7 +230,7 @@ BEGIN_SLOTTABLE(OcclusionArc)
 END_SLOTTABLE(OcclusionArc)
 
 BEGIN_SLOT_MAP(OcclusionArc)
-    ON_SLOT(1, setSlotOuterRadius, base::Number)
+    ON_SLOT(1, setSlotOuterRadius, base::INumber)
 END_SLOT_MAP()
 
 OcclusionArc::OcclusionArc()
@@ -265,7 +265,7 @@ void OcclusionArc::drawFunc()
 }
 
 // Set slot functions
-bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
+bool OcclusionArc::setSlotOuterRadius(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setOuterRadius(x->asDouble());

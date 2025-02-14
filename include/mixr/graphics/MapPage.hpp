@@ -9,7 +9,7 @@
 #include <cmath>
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class INumber; }
 namespace graphics {
 
 // -------------------------------------------------------------------------------
@@ -56,17 +56,17 @@ namespace graphics {
 // Factory name: MapPage
 // Slots:
 //
-//   outerRadius           <Number> ! Radius (centered) of our outer circle (units) (default: 1.0)
-//   outerRadiusDecentered <Number> ! Radius (de-centered) of our outer arc (units)
+//   outerRadius           <INumber> ! Radius (centered) of our outer circle (units) (default: 1.0)
+//   outerRadiusDecentered <INumber> ! Radius (de-centered) of our outer arc (units)
 //
-//   range        <Number>    ! our range, in nautical miles, of our map (default: 1.0)
-//   displacement <Number>    ! how far to translate when we are decentered (default: 0.0)
+//   range        <INumber>   ! our range, in nautical miles, of our map (default: 1.0)
+//   displacement <INumber>   ! how far to translate when we are decentered (default: 0.0)
 //   centered     <Boolean>   ! are we centered (true), or de-centered (false) (default: true)
 //
-//   refLat       <Number>    ! reference latitude (degs) (default: 0)
-//   refLon       <Number>    ! reference longitude (degs) (default: 0)
+//   refLat       <INumber>   ! reference latitude (degs) (default: 0)
+//   refLon       <INumber>   ! reference longitude (degs) (default: 0)
 //
-//   refHdg       <Number>    ! reference heading (degs) (default: 0)
+//   refHdg       <INumber>   ! reference heading (degs) (default: 0)
 //   northUp      <Boolean>   ! north up mode (default: true)
 //
 //
@@ -148,14 +148,14 @@ public:
 protected:
 
    // event functions
-   virtual bool onUpdateRange(const base::Number* const newR);
-   virtual bool onUpdateHeading(const base::Number* const newH);
-   virtual bool onUpdateReferenceLat(const base::Number* const newOL);
-   virtual bool onUpdateReferenceLon(const base::Number* const newOL);
+   virtual bool onUpdateRange(const base::INumber* const newR);
+   virtual bool onUpdateHeading(const base::INumber* const newH);
+   virtual bool onUpdateReferenceLat(const base::INumber* const newOL);
+   virtual bool onUpdateReferenceLon(const base::INumber* const newOL);
    virtual bool onUpdateCentered(const base::Boolean* const newC);
-   virtual bool onUpdateOuterRadius(const base::Number* const newR);
-   virtual bool onUpdateOuterRadiusDC(const base::Number* const newRDC);
-   virtual bool onUpdateDisplacement(const base::Number* const newD);
+   virtual bool onUpdateOuterRadius(const base::INumber* const newR);
+   virtual bool onUpdateOuterRadiusDC(const base::INumber* const newRDC);
+   virtual bool onUpdateDisplacement(const base::INumber* const newD);
 
 private:
    double referenceLat {};           // our latitude from center reference point (degs)
@@ -178,16 +178,16 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotOuterRadius(const base::Number* const);
-   bool setSlotOuterRadiusDC(const base::Number* const);
-   bool setSlotRange(const base::Number* const);
-   bool setSlotDisplacement(const base::Number* const);
+   bool setSlotOuterRadius(const base::INumber* const);
+   bool setSlotOuterRadiusDC(const base::INumber* const);
+   bool setSlotRange(const base::INumber* const);
+   bool setSlotDisplacement(const base::INumber* const);
    bool setSlotCentered(const base::Boolean* const);
    bool setSlotNorthUp(const base::Boolean* const);
    // ref lat/lon heading
-   bool setSlotRefLat(const base::Number* const);
-   bool setSlotRefLon(const base::Number* const);
-   bool setSlotRefHdg(const base::Number* const);
+   bool setSlotRefLat(const base::INumber* const);
+   bool setSlotRefLon(const base::INumber* const);
+   bool setSlotRefHdg(const base::INumber* const);
 };
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }

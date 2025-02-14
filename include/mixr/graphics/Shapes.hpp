@@ -5,7 +5,7 @@
 #include "Graphic.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class INumber; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace graphics {
 //
 // Factory name: Circle
 // Slots:
-//  radius    <Number>    ! Radius of the circle (default: 1 )
+//  radius    <INumber>   ! Radius of the circle (default: 1 )
 //  filled    <Boolean>   ! True if circle is filled (default: false)
 //  slices    <Integer>   ! Number of slices in the circle (i.e. number of sides)
 //                        ! (default: 16)
@@ -42,7 +42,7 @@ public:
 
 protected:
     // event functions
-    bool updateRadius(const base::Number* const x);
+    bool updateRadius(const base::INumber* const x);
 
 private:
     double radius {1.0};
@@ -51,7 +51,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotRadius(const base::Number* const);
+    bool setSlotRadius(const base::INumber* const);
     bool setSlotFilled(const base::Boolean* const);
     bool setSlotSlices(const base::Integer* const);
 };
@@ -61,7 +61,7 @@ private:
 //
 // Factory name: OcclusionCircle
 // Slots:
-//  outerRadius   <Number>    ! Outer radius of our circle (default: 1.1 )
+//  outerRadius   <INumber>   ! Outer radius of our circle (default: 1.1 )
 //
 // Draws a nice doughnut type circle, based on inner and outer radius
 //------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ private:
     double outerRadius {1.1};        // portion that is occluded (just a bit bigger than inner radius)
 
 private:
-    bool setSlotOuterRadius(const base::Number* const);
+    bool setSlotOuterRadius(const base::INumber* const);
 };
 
 
@@ -91,20 +91,20 @@ private:
 //
 // Factory name: Arc
 // Slots:
-//  startAngle   <Number>    ! Start angle of the arc in degrees (default: 0 )
-//  arcLength    <Number>    ! length of the arc in degrees (default: 90)
+//  startAngle   <INumber>   ! Start angle of the arc in degrees (default: 0 )
+//  arcLength    <INumber>   ! length of the arc in degrees (default: 90)
 //  connect      <Boolean>   ! if true, we connect the lines (so the circle looks like a piece of pie,
 //                           ! instead of an open ended arc) (default: false)
 //
 // Public member functions:
 //
-//  bool setStartAngle(Number* ssaobj)
+//  bool setStartAngle(INumber* ssaobj)
 //      Sets the start angle to ssaobj and returns true if successful.
 //
-//  bool setArcLength(Number* seaobj)
+//  bool setArcLength(INumber* seaobj)
 //      Sets the arc length te seaobj and returns true if successful.
 //
-//  bool setIsConnected(Number* iscobj)
+//  bool setIsConnected(INumber* iscobj)
 //      Sets isConnected (boolean) and returns true if successful.
 //
 //------------------------------------------------------------------------------
@@ -130,9 +130,9 @@ private:
     bool connected {};
 
 private:
-    // slot table helper methods   
-    bool setSlotStartAngle(const base::Number* const);
-    bool setSlotArcLength(const base::Number* const);
+    // slot table helper methods
+    bool setSlotStartAngle(const base::INumber* const);
+    bool setSlotArcLength(const base::INumber* const);
     bool setSlotIsConnected(const base::Boolean* const);
 };
 
@@ -164,7 +164,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotOuterRadius(const base::Number* const);
+    bool setSlotOuterRadius(const base::INumber* const);
 };
 
 
@@ -236,7 +236,7 @@ private:
     bool segment {};         // True if line segments
 
 private:
-    // slot table helper methods      
+    // slot table helper methods
     bool setSlotSegments(const base::Boolean* const);
 };
 

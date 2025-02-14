@@ -40,9 +40,9 @@ public:
 
 private:
     // event functions
-    bool onUpdateX(const base::Number* const);
-    bool onUpdateY(const base::Number* const);
-    bool onUpdateZ(const base::Number* const);
+    bool onUpdateX(const base::INumber* const);
+    bool onUpdateY(const base::INumber* const);
+    bool onUpdateZ(const base::INumber* const);
 
     double myXPos{};
     double myYPos{};

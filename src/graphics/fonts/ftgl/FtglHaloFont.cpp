@@ -3,7 +3,7 @@
 
 #include "mixr/graphics/Graphic.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/util/filesystem_utils.hpp"
 
 #include "mixr/base/String.hpp"
@@ -26,7 +26,7 @@ END_SLOTTABLE(FtglHaloFont)
 
 BEGIN_SLOT_MAP(FtglHaloFont)
     ON_SLOT(1, setSlotHaloColor, base::IColor)
-    ON_SLOT(2, setSlotLinewidth, base::Number)
+    ON_SLOT(2, setSlotLinewidth, base::INumber)
 END_SLOT_MAP()
 
 FtglHaloFont::FtglHaloFont()
@@ -274,7 +274,7 @@ bool FtglHaloFont::setSlotHaloColor(base::IColor* x)
     return true;
 }
 
-bool FtglHaloFont::setSlotLinewidth(const base::Number* const x)
+bool FtglHaloFont::setSlotLinewidth(const base::INumber* const x)
 {
     linewidth = static_cast<float>(x->asDouble());
     return true;

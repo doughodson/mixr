@@ -7,7 +7,7 @@
 class FTOutlineFont;
 
 namespace mixr {
-namespace base { class IColor; class Number; }
+namespace base { class IColor; class INumber; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotHaloColor(base::IColor*);
-    bool setSlotLinewidth(const base::Number* const);
+    bool setSlotLinewidth(const base::INumber* const);
 };
 
 }

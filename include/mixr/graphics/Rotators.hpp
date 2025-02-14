@@ -65,14 +65,14 @@ public:
 private:
     // Event callbacks
     bool onXRotate(const base::IAngle* const);
-    bool onXRotate(const base::Number* const);
-    bool onXRotateDeg(const base::Number* const);
+    bool onXRotate(const base::INumber* const);
+    bool onXRotateDeg(const base::INumber* const);
     bool onYRotate(const base::IAngle* const);
-    bool onYRotate(const base::Number* const);
-    bool onYRotateDeg(const base::Number* const);
+    bool onYRotate(const base::INumber* const);
+    bool onYRotateDeg(const base::INumber* const);
     bool onZRotate(const base::IAngle* const);
-    bool onZRotate(const base::Number* const);
-    bool onZRotateDeg(const base::Number* const);
+    bool onZRotate(const base::INumber* const);
+    bool onZRotateDeg(const base::INumber* const);
 
     double xRot{-1.0};   // x axis rotation
     double yRot{-1.0};   // y axis rotation

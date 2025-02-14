@@ -1,7 +1,6 @@
 
 #include "mixr/graphics/fonts/ftgl/FtglBitmapFont.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/util/filesystem_utils.hpp"
 
 #include <iostream>
