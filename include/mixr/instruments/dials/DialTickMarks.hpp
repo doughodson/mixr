@@ -5,7 +5,7 @@
 #include "mixr/instruments/dials/AnalogDial.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Number; }
+namespace base { class Integer; class INumber; }
 namespace graphics { class Graphic; }
 namespace instruments {
 
@@ -47,7 +47,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotLength(const base::Number* const);
+    bool setSlotLength(const base::INumber* const);
     bool setSlotQuantity(const base::Integer* const);
     bool setSlotTickGraphic(const graphics::Graphic* const);
 };

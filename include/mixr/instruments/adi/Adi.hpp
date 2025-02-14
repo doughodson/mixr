@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Number; class IAngle; }
+namespace base { class INumber; class IAngle; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -50,10 +50,10 @@ public:
 
 private:
     // event function
-    bool onUpdatePitchAdi(const base::Number* const);
-    bool onUpdateRollDegAdi(const base::Number* const);
-    bool onUpdateRollRadAdi(const base::Number* const);
-    bool onUpdateMaxRateAdi(const base::Number* const);
+    bool onUpdatePitchAdi(const base::INumber* const);
+    bool onUpdateRollDegAdi(const base::INumber* const);
+    bool onUpdateRollRadAdi(const base::INumber* const);
+    bool onUpdateMaxRateAdi(const base::INumber* const);
 
     double pitch{};         // actual pitch (degrees)
     double scaledPitch{};   // our pitch value (inches)
@@ -66,7 +66,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotMaxRate(const base::IAngle* const);
-    bool setSlotMaxRate(const base::Number* const);
+    bool setSlotMaxRate(const base::INumber* const);
 };
 
 }

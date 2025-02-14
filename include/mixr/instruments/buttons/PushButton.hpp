@@ -5,7 +5,7 @@
 #include "mixr/instruments/buttons/Button.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 class PushButton : public Button
 {
-    DECLARE_SUBCLASS(PushButton,Button)
+    DECLARE_SUBCLASS(PushButton, Button)
 
 public:
     PushButton();

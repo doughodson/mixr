@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/adi/GhostHorizon.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/relations/Table1.hpp"
 
@@ -29,8 +29,8 @@ BEGIN_SLOT_MAP(GhostHorizon)
     ON_SLOT(1, setSlotSkyColor,    base::Identifier)
     ON_SLOT(2, setSlotGroundColor, base::IColor)
     ON_SLOT(2, setSlotGroundColor, base::Identifier)
-    ON_SLOT(3, setSlotWidth,       base::Number)
-    ON_SLOT(4, setSlotHeight,      base::Number)
+    ON_SLOT(3, setSlotWidth,       base::INumber)
+    ON_SLOT(4, setSlotHeight,      base::INumber)
 END_SLOT_MAP()
 
 GhostHorizon::GhostHorizon()
@@ -122,7 +122,7 @@ bool GhostHorizon::setSlotGroundColor(const base::IColor* const cobj)
 //------------------------------------------------------------------------------
 // setSlotWidth() - set the width of our horizon
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotWidth(const base::Number* const x)
+bool GhostHorizon::setSlotWidth(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -134,7 +134,7 @@ bool GhostHorizon::setSlotWidth(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotHeight() - set the height of our horizon
 //------------------------------------------------------------------------------
-bool GhostHorizon::setSlotHeight(const base::Number* const x)
+bool GhostHorizon::setSlotHeight(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {

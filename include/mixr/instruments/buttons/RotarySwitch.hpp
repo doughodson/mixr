@@ -12,7 +12,7 @@ namespace instruments {
 //------------------------------------------------------------------------------
 // Class:       RotarySwitch
 // Description: Generic multi-position selector switch that knows when it is left or right
-//                mouse clicked and moves to next or previous switch position.
+//              mouse clicked and moves to next or previous switch position.
 //------------------------------------------------------------------------------
 class RotarySwitch : public Button
 {

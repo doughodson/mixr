@@ -5,7 +5,7 @@
 #include "mixr/instruments/buttons/Button.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; class Table1; }
+namespace base { class Boolean; class INumber; class Table1; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -67,8 +67,8 @@ private:
     // slot table helper methods
     bool setSlotValueTable(base::Table1* const);
     bool setSlotEndless(const base::Boolean* const);
-    bool setSlotEndlessStart(const base::Number* const);
-    bool setSlotEndlessLimit(const base::Number* const);
+    bool setSlotEndlessStart(const base::INumber* const);
+    bool setSlotEndlessLimit(const base::INumber* const);
 };
 
 }

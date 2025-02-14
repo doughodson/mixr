@@ -5,7 +5,7 @@
 #include "mixr/instruments/adi/Adi.hpp"
 
 namespace mixr {
-namespace base { class IColor; class Identifier; class Number; }
+namespace base { class IColor; class Identifier; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -41,8 +41,8 @@ private:
     bool setSlotSkyColor(const base::Identifier* const);
     bool setSlotGroundColor(const base::IColor* const);
     bool setSlotGroundColor(const base::Identifier* const);
-    bool setSlotWidth(const base::Number* const);
-    bool setSlotHeight(const base::Number* const);
+    bool setSlotWidth(const base::INumber* const);
+    bool setSlotHeight(const base::INumber* const);
 };
 
 }

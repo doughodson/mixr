@@ -5,7 +5,7 @@
 #include "mixr/instruments/dials/AnalogDial.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ public:
     void updateData(const double dt = 0.0) override;
 
 protected:
-    bool onUpdateRadius(const base::Number* const) override;
+    bool onUpdateRadius(const base::INumber* const) override;
 
 private:
     bool isDynamic {};          // are we setting sweep angle based on value?
@@ -42,7 +42,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotIsDynamic(const base::Boolean* const);
-    bool setSlotOuterRadius(const base::Number* const);
+    bool setSlotOuterRadius(const base::INumber* const);
     bool setSlotFilled(const base::Boolean* const);
 };
 

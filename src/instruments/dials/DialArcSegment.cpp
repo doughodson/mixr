@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/dials/DialArcSegment.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 #include <GL/glu.h>
@@ -21,7 +21,7 @@ END_SLOTTABLE(DialArcSegment)
 
 BEGIN_SLOT_MAP(DialArcSegment)
     ON_SLOT(1, setSlotIsDynamic,   base::Boolean)
-    ON_SLOT(2, setSlotOuterRadius, base::Number)
+    ON_SLOT(2, setSlotOuterRadius, base::INumber)
     ON_SLOT(3, setSlotFilled,      base::Boolean)
 END_SLOT_MAP()
 
@@ -52,7 +52,7 @@ bool DialArcSegment::setSlotIsDynamic(const base::Boolean* const newD)
 //------------------------------------------------------------------------------
 // setSlotOuterRadius() - sets the OUTER dial radius
 //------------------------------------------------------------------------------
-bool DialArcSegment::setSlotOuterRadius(const base::Number* const x)
+bool DialArcSegment::setSlotOuterRadius(const base::INumber* const x)
 {
     if (x != nullptr) {
         return setOuterRadius(x->asDouble());
@@ -128,7 +128,7 @@ void DialArcSegment::drawFunc()
 //------------------------------------------------------------------------------
 // onUpdateRadius() - event function to update our radius value
 //------------------------------------------------------------------------------
-bool DialArcSegment::onUpdateRadius(const base::Number* const x)
+bool DialArcSegment::onUpdateRadius(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {

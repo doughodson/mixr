@@ -5,7 +5,7 @@
 #include "mixr/instruments/Instrument.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; }
+namespace base { class Boolean; class Integer; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ public:
 
 protected:
     // event function
-    virtual bool onUpdateRadius(const base::Number* const);
+    virtual bool onUpdateRadius(const base::INumber* const);
 
 private:
     double originAngle {};     // angle we start drawing ticks from (degrees, default is 0)
@@ -58,10 +58,10 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotOriginAngle(const base::Number* const);
+    bool setSlotOriginAngle(const base::INumber* const);
     bool setSlotMobile(const base::Boolean* const);
-    bool setSlotSweepAngle(const base::Number* const);
-    bool setSlotRadius(const base::Number* const);
+    bool setSlotSweepAngle(const base::INumber* const);
+    bool setSlotRadius(const base::INumber* const);
     bool setSlotSlices(const base::Integer* const);
 };
 

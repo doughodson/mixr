@@ -5,7 +5,7 @@
 #include "mixr/graphics/Graphic.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotEventId(const base::Number* const);
+    bool setSlotEventId(const base::INumber* const);
 };
 
 }

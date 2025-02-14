@@ -2,6 +2,7 @@
 #include "mixr/instruments/buttons/RotarySwitch.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
@@ -50,7 +51,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
         while(item != nullptr) {
             base::Pair* pair = (base::Pair*)item->getValue();
             if (pair != nullptr) {
-                const auto n = dynamic_cast<base::Number*>(pair->object());
+                const auto n = dynamic_cast<base::INumber*>(pair->object());
                 if (n != nullptr) {
                     angles[numAngs++] = n->asDouble();
                 }

@@ -2,7 +2,7 @@
 #include "mixr/instruments/dials/DialTickMarks.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(DialTickMarks)
 END_SLOTTABLE(DialTickMarks)
 
 BEGIN_SLOT_MAP(DialTickMarks)
-    ON_SLOT(1, setSlotLength,       base::Number)
+    ON_SLOT(1, setSlotLength,       base::INumber)
     ON_SLOT(2, setSlotQuantity,     base::Integer)
     ON_SLOT(3, setSlotTickGraphic,  graphics::Graphic)
 END_SLOT_MAP()
@@ -86,7 +86,7 @@ void DialTickMarks::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotLength() -- sets our tick mark length
 //------------------------------------------------------------------------------
-bool DialTickMarks::setSlotLength(const base::Number* const newLength)
+bool DialTickMarks::setSlotLength(const base::INumber* const newLength)
 {
     bool ok = true;
     if (newLength != nullptr) ok = setLength(newLength->asDouble());

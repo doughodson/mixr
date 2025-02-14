@@ -4,6 +4,7 @@
 #include "mixr/graphics/Display.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -20,7 +21,7 @@ BEGIN_SLOTTABLE(SolenoidSwitch)
 END_SLOTTABLE(SolenoidSwitch)
 
 BEGIN_SLOT_MAP(SolenoidSwitch)
-    ON_SLOT(1, setSlotHoldTimer, base::Number)
+    ON_SLOT(1, setSlotHoldTimer, base::INumber)
     ON_SLOT(2, setSlotEventMap,  base::PairStream)
 END_SLOT_MAP()
 
@@ -70,7 +71,7 @@ void SolenoidSwitch::deleteData()
 //------------------------------------------------------------------------------
 // setSlotHoldTimer() - set how long to hold our button before state change
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::setSlotHoldTimer(const base::Number* const x)
+bool SolenoidSwitch::setSlotHoldTimer(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setHoldTimer(x->asDouble());

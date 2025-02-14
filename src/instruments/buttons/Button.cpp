@@ -1,5 +1,5 @@
 #include "mixr/instruments/buttons/Button.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/graphics/Display.hpp"
 
 namespace mixr {
@@ -13,7 +13,7 @@ BEGIN_SLOTTABLE(Button)
 END_SLOTTABLE(Button)
 
 BEGIN_SLOT_MAP(Button)
-    ON_SLOT(1, setSlotEventId, base::Number)
+    ON_SLOT(1, setSlotEventId, base::INumber)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Button)
@@ -35,7 +35,7 @@ void Button::copyData(const Button& org, const bool)
 //------------------------------------------------------------------------------
 // setSlotEventId() - sets our slot event Id
 //------------------------------------------------------------------------------
-bool Button::setSlotEventId(const base::Number* const newEvent)
+bool Button::setSlotEventId(const base::INumber* const newEvent)
 {
     bool ok = false;
     if (newEvent != nullptr) {

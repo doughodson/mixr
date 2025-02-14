@@ -2,13 +2,11 @@
 #include "mixr/instruments/buttons/Knob.hpp"
 #include "mixr/graphics/Display.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
-
 #include "mixr/base/units/util/angle_utils.hpp"
 #include "mixr/base/relations/Table1.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <GL/glu.h>
 #include <cmath>
@@ -29,8 +27,8 @@ END_SLOTTABLE(Knob)
 BEGIN_SLOT_MAP(Knob)
     ON_SLOT(1, setSlotValueTable,   base::Table1)
     ON_SLOT(2, setSlotEndless,      base::Boolean)
-    ON_SLOT(3, setSlotEndlessStart, base::Number)
-    ON_SLOT(4, setSlotEndlessLimit, base::Number)
+    ON_SLOT(3, setSlotEndlessStart, base::INumber)
+    ON_SLOT(4, setSlotEndlessLimit, base::INumber)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Knob)
@@ -92,7 +90,7 @@ bool Knob::setSlotEndless(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessStart() - start value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessStart(const base::Number* const x)
+bool Knob::setSlotEndlessStart(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessStart(x->asDouble());
@@ -102,7 +100,7 @@ bool Knob::setSlotEndlessStart(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessLimit() - limit value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessLimit(const base::Number* const x)
+bool Knob::setSlotEndlessLimit(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessLimit(x->asDouble());
