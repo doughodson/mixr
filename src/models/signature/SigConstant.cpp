@@ -3,7 +3,7 @@
 
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/areas.hpp"
 
 namespace mixr {
@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(SigConstant)
 END_SLOTTABLE(SigConstant)
 
 BEGIN_SLOT_MAP(SigConstant)
-    ON_SLOT(1, setSlotRCS, base::Number)
+    ON_SLOT(1, setSlotRCS, base::INumber)
     ON_SLOT(1, setSlotRCS, base::IArea)
 END_SLOT_MAP()
 
@@ -33,7 +33,7 @@ SigConstant::SigConstant(const double r)
     rcs = r;
 }
 
-SigConstant::SigConstant(const base::Number* const c)
+SigConstant::SigConstant(const base::INumber* const c)
 {
     STANDARD_CONSTRUCTOR()
     setRCS(c);
@@ -50,7 +50,7 @@ double SigConstant::getRCS(const Emission* const)
     return rcs;
 }
 
-bool SigConstant::setRCS(const base::Number* const x)
+bool SigConstant::setRCS(const base::INumber* const x)
 {
     bool ok{};
     double r{-1.0};

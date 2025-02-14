@@ -5,7 +5,7 @@
 #include "mixr/base/Component.hpp"
 
 namespace mixr {
-namespace base { class IArea; class Number; class List; class Table1; }
+namespace base { class IArea; class INumber; class List; class Table1; }
 namespace models {
 class IrQueryMsg;
 class IrShape;
@@ -19,8 +19,8 @@ class IrShape;
 // Slots:
 //    binSizes            <Table1>      ! The size of the wavelength bins used in the tables
 //    irShapeSignature    <IrShape>     ! Shape of radiation source
-//    baseHeatSignature   <Number>      ! Base heat signature - units: watts per steradian
-//    emissivity          <Number>      ! Emissivity - unitless, values range from
+//    baseHeatSignature   <INumber>     ! Base heat signature - units: watts per steradian
+//    emissivity          <INumber>     ! Emissivity - unitless, values range from
 //                                      !     0.0 (total reflection) to 1.0 (total absorption)
 //    effectiveArea       <base::IArea> ! Effective area - units: meters squared (m^2)
 //
@@ -132,8 +132,8 @@ private:
    // slot table helper methods
    bool setSlotWaveBandSizes(const base::Table1* const);
    bool setSlotIrShapeSignature(IrShape* const);
-   bool setSlotBaseHeatSignature(base::Number* const);
-   bool setSlotEmissivity(base::Number* const);
+   bool setSlotBaseHeatSignature(base::INumber* const);
+   bool setSlotEmissivity(base::INumber* const);
    bool setSlotEffectiveArea(base::IArea* const);
 };
 

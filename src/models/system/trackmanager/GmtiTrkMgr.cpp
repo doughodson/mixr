@@ -6,8 +6,6 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
-
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

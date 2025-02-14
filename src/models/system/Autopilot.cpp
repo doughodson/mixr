@@ -14,7 +14,7 @@
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -65,29 +65,29 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT( 1, setSlotNavMode,                    base::Boolean)
     ON_SLOT( 2, setSlotHoldAltitude,               base::ILength)
     ON_SLOT( 3, setSlotAltitudeHoldMode,           base::Boolean)
-    ON_SLOT( 4, setSlotHoldVelocityKts,            base::Number)
+    ON_SLOT( 4, setSlotHoldVelocityKts,            base::INumber)
     ON_SLOT( 5, setSlotVelocityHoldMode,           base::Boolean)
     ON_SLOT( 6, setSlotHoldHeading,                base::IAngle)
     ON_SLOT( 7, setSlotHeadingHoldMode,            base::Boolean)
     ON_SLOT( 8, setSlotLoiterMode,                 base::Boolean)
     ON_SLOT( 9, setSlotLoiterPatternLength,        base::ILength)
-    ON_SLOT( 9, setSlotLoiterPatternLength,        base::Number)
+    ON_SLOT( 9, setSlotLoiterPatternLength,        base::INumber)
     ON_SLOT(10, setSlotLoiterPatternCcwFlag,       base::Boolean)
     ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::ILength)
-    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Number)
+    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::INumber)
     ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::ILength)
-    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Number)
+    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::INumber)
     ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::ILength)
-    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Number)
+    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::INumber)
     ON_SLOT(14, setSlotLeadPlayerName,             base::Identifier)
     ON_SLOT(15, setSlotFollowTheLeadMode,          base::Boolean)
-    ON_SLOT(16, setSlotMaxRateOfTurnDps,           base::Number)
-    ON_SLOT(17, setSlotMaxBankAngle,               base::Number)
-    ON_SLOT(18, setSlotMaxClimbRateFpm,            base::Number)
-    ON_SLOT(19, setSlotMaxClimbRateMps,            base::Number)
-    ON_SLOT(20, setSlotMaxPitchAngle,              base::Number)
+    ON_SLOT(16, setSlotMaxRateOfTurnDps,           base::INumber)
+    ON_SLOT(17, setSlotMaxBankAngle,               base::INumber)
+    ON_SLOT(18, setSlotMaxClimbRateFpm,            base::INumber)
+    ON_SLOT(19, setSlotMaxClimbRateMps,            base::INumber)
+    ON_SLOT(20, setSlotMaxPitchAngle,              base::INumber)
     ON_SLOT(21, setSlotLoiterPatternTime,          base::ITime)
-    ON_SLOT(22, setSlotMaxVelAccNps,               base::Number)
+    ON_SLOT(22, setSlotMaxVelAccNps,               base::INumber)
 END_SLOT_MAP()
 
 Autopilot::Autopilot()
@@ -1345,7 +1345,7 @@ bool Autopilot::setSlotAltitudeHoldMode(const base::Boolean* const x)
 }
 
 // Hold velocity (kts)
-bool Autopilot::setSlotHoldVelocityKts(const base::Number* const x)
+bool Autopilot::setSlotHoldVelocityKts(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1408,7 +1408,7 @@ bool Autopilot::setSlotLoiterPatternLength(const base::ILength* const x)
 }
 
 // Set slot: Loiter orbit pattern length (NM)
-bool Autopilot::setSlotLoiterPatternLength(const base::Number* const msg)
+bool Autopilot::setSlotLoiterPatternLength(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1451,7 +1451,7 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::ILength* const x)
 }
 
 // Set slot: Desired distance (meters) behind(+) the lead
-bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const x)
+bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1471,7 +1471,7 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::ILength* const x)
 }
 
 // Set slot: Desired distance (meters) right(+) of the lead
-bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const x)
+bool Autopilot::setSlotLeadFollowingDistanceRight(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1491,7 +1491,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::ILength* const x)
 }
 
 // Set slot: Desired delta altitude (meters) above(+) the lead
-bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const x)
+bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1525,7 +1525,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const base::Boolean* const x)
 }
 
 // Set slot: Maximum turn rate - limits how fast (or slow) the pilot turns
-bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const x)
+bool Autopilot::setSlotMaxRateOfTurnDps(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxTurnRateDps(x->asDouble());
@@ -1533,7 +1533,7 @@ bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const x)
 }
 
 // Set slot: Maximum bank angle - limits how far the pilot can bank
-bool Autopilot::setSlotMaxBankAngle(const base::Number* const x)
+bool Autopilot::setSlotMaxBankAngle(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxBankAngleDeg(x->asDouble());
@@ -1541,7 +1541,7 @@ bool Autopilot::setSlotMaxBankAngle(const base::Number* const x)
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const x)
+bool Autopilot::setSlotMaxClimbRateFpm(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxClimbRateMps((x->asDouble() * base::length::FT2M / base::time::M2S));
@@ -1549,7 +1549,7 @@ bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const x)
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const x)
+bool Autopilot::setSlotMaxClimbRateMps(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxClimbRateMps(x->asDouble());
@@ -1557,7 +1557,7 @@ bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const x)
 }
 
 // Set slot: Maximum pitch angle - limits how much pitch the pilot can climb/dive to
-bool Autopilot::setSlotMaxPitchAngle(const base::Number* const x)
+bool Autopilot::setSlotMaxPitchAngle(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxPitchAngleDeg(x->asDouble());
@@ -1565,7 +1565,7 @@ bool Autopilot::setSlotMaxPitchAngle(const base::Number* const x)
 }
 
 // Set slot: Maximum acceleration - limits how fast the pilot can accelerate
-bool Autopilot::setSlotMaxVelAccNps(const base::Number* const x)
+bool Autopilot::setSlotMaxVelAccNps(const base::INumber* const x)
 {
    bool ok{x != nullptr};
    if (ok) ok = setMaxVelAccNps(x->asDouble());

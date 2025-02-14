@@ -5,9 +5,6 @@
 
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
-
 namespace mixr {
 namespace models {
 

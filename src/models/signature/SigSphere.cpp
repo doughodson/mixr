@@ -4,7 +4,7 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/lengths.hpp"
 
 namespace mixr {
@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(SigSphere)
 END_SLOTTABLE(SigSphere)
 
 BEGIN_SLOT_MAP(SigSphere)
-    ON_SLOT(1, setSlotRadius, base::Number)
+    ON_SLOT(1, setSlotRadius, base::INumber)
     ON_SLOT(1, setSlotRadius, base::ILength)
 END_SLOT_MAP()
 
@@ -51,7 +51,7 @@ double SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setSlotRadius(base::Number* const x)
+bool SigSphere::setSlotRadius(base::INumber* const x)
 {
    bool ok{};
    double r{-1.0};

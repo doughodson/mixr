@@ -9,7 +9,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Function; class Identifier; class Number; class IPower; }
+namespace base { class IAngle; class Boolean; class Function; class Identifier; class INumber; class IPower; }
 namespace models {
 class Player;
 class RfSystem;
@@ -28,7 +28,7 @@ class RfSystem;
 //
 //      threshold       <base::IPower>          ! Antenna threshold  (default: 0.0)
 //
-//      gain            <base::Number>          ! Gain (default: 1.0)              (no units)
+//      gain            <base::INumber>         ! Gain (default: 1.0)              (no units)
 //
 //      gainPattern     <base::Function>        ! Gain pattern (base::Func1 or base::Func2) (db)
 //                                              ! (default: 0)
@@ -38,7 +38,7 @@ class RfSystem;
 //      recycle         <base::Boolean>         ! Recycle emissions flag (default: true)
 //
 //      beamWidth       <base::IAngle>          ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
-//                      <base::Number>          ! Beam width in radians
+//                      <base::INumber>         ! Beam width in radians
 //
 //
 // Note
@@ -104,12 +104,12 @@ public:
 
    virtual bool setPolarization(base::Identifier* const);
    virtual bool setThreshold(base::IPower* const);
-   virtual bool setGain(const base::Number* const);
+   virtual bool setGain(const base::INumber* const);
    virtual bool setGainPattern(base::Function* const);
    virtual bool setGainPatternDeg(const base::Boolean* const);
    virtual bool setRecycleFlg(const base::Boolean* const);
    virtual bool setBeamWidth(const base::IAngle* const);
-   virtual bool setBeamWidth(const base::Number* const);
+   virtual bool setBeamWidth(const base::INumber* const);
 
    // event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
@@ -158,12 +158,12 @@ private:
    // slot table helper methods
    bool setSlotPolarization(base::Identifier* const x)              { return setPolarization(x);   }
    bool setSlotThreshold(base::IPower* const x)                     { return setThreshold(x);      }
-   bool setSlotGain(const base::Number* const x)                    { return setGain(x);           }
+   bool setSlotGain(const base::INumber* const x)                   { return setGain(x);           }
    bool setSlotGainPattern(base::Function* const x)                 { return setGainPattern(x);    }
    bool setSlotGainPatternDeg(const base::Boolean* const x)         { return setGainPatternDeg(x); }
    bool setSlotRecycleFlg(const base::Boolean* const x)             { return setRecycleFlg(x);     }
    bool setSlotBeamWidth(const base::IAngle* const x)               { return setBeamWidth(x);      }
-   bool setSlotBeamWidth(const base::Number* const x)               { return setBeamWidth(x);      }
+   bool setSlotBeamWidth(const base::INumber* const x)              { return setBeamWidth(x);      }
 };
 
 }

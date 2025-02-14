@@ -3,7 +3,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <cmath>
 
@@ -28,9 +28,9 @@ BEGIN_SLOT_MAP(Bomb)
    ON_SLOT( 2, setSlotNoseFuze,     base::Boolean)
    ON_SLOT( 3, setSlotMidFuze,      base::Boolean)
    ON_SLOT( 4, setSlotTailFuze,     base::Boolean)
-   ON_SLOT( 5, setSlotFuzeAltitude, base::Number)
-   ON_SLOT( 6, setSlotFuzeTime,     base::Number)
-   ON_SLOT( 7, setSlotDragIndex,    base::Number)
+   ON_SLOT( 5, setSlotFuzeAltitude, base::INumber)
+   ON_SLOT( 6, setSlotFuzeTime,     base::INumber)
+   ON_SLOT( 7, setSlotDragIndex,    base::INumber)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
@@ -434,21 +434,21 @@ bool Bomb::setSlotTailFuze(base::Boolean* const p)
 }
 
 // fuzeAltitude:  Fuze arming Altitude
-bool Bomb::setSlotFuzeAltitude(base::Number* const p)
+bool Bomb::setSlotFuzeAltitude(base::INumber* const p)
 {
     setFuzeAltitude( p->asDouble() );
     return true;
 }
 
 // fuzeTime:  Fuze Arming Time
-bool Bomb::setSlotFuzeTime(base::Number* const p)
+bool Bomb::setSlotFuzeTime(base::INumber* const p)
 {
     setFuzeTime( p->asDouble() );
     return true;
 }
 
 // dragIndex: drag index used by default dynamics
-bool Bomb::setSlotDragIndex(base::Number* const p)
+bool Bomb::setSlotDragIndex(base::INumber* const p)
 {
     setDragIndex( p->asDouble() );
     return true;

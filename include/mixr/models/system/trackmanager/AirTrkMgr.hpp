@@ -7,7 +7,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class Number; class ILength; }
+namespace base { class INumber; class ILength; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -16,9 +16,9 @@ namespace models {
 // Description: Track Manager for A/A modes (e.g., TWS, ACM, SST)
 // Factory name: AirTrkMgr
 // Slots:
-//   positionGate   <base::Number>  ! Position Gate (meters) (default: 2.0f * NM2M)
-//   rangeGate      <base::Number>  ! Range Gate (meters) (default: 500.0f)
-//   velocityGate   <base::Number>  ! Velocity Gate (m/s) (default: 10.0f)
+//   positionGate   <base::INumber>  ! Position Gate (meters) (default: 2.0f * NM2M)
+//   rangeGate      <base::INumber>  ! Range Gate (meters) (default: 500.0f)
+//   velocityGate   <base::INumber>  ! Velocity Gate (m/s) (default: 10.0f)
 //
 //------------------------------------------------------------------------------
 class AirTrkMgr : public TrackManager
@@ -50,11 +50,11 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotPositionGate(const base::Number* const);
+   bool setSlotPositionGate(const base::INumber* const);
    bool setSlotPositionGate(const base::ILength* const);
-   bool setSlotRangeGate(const base::Number* const);
+   bool setSlotRangeGate(const base::INumber* const);
    bool setSlotRangeGate(const base::ILength* const);
-   bool setSlotVelocityGate(const base::Number* const);
+   bool setSlotVelocityGate(const base::INumber* const);
 };
 
 }

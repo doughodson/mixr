@@ -5,7 +5,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Number; }
+namespace base { class Boolean; class Identifier; class INumber; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -21,9 +21,9 @@ namespace models {
 //    noseFuze       <Boolean>     ! Nose fuze flag (default: false)
 //    midFuze        <Boolean>     ! Middle fuze flag (default: false)
 //    tailFuze       <Boolean>     ! Tail fuze flag (default: false)
-//    fuzeAltitude   <Number>      ! Fuze arming Altitude (default: 0.0f)
-//    fuzeTime       <Number>      ! Fuze Arming Time (default: 0.0f)
-//    dragIndex      <Number>      ! drag index used by default dynamics (default: 0.0006f)
+//    fuzeAltitude   <INumber>     ! Fuze arming Altitude (default: 0.0f)
+//    fuzeTime       <INumber>     ! Fuze Arming Time (default: 0.0f)
+//    dragIndex      <INumber>     ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
 class Bomb : public IWeapon
@@ -118,9 +118,9 @@ private:
    bool setSlotNoseFuze(base::Boolean* const);
    bool setSlotMidFuze(base::Boolean* const);
    bool setSlotTailFuze(base::Boolean* const);
-   bool setSlotFuzeAltitude(base::Number* const);
-   bool setSlotFuzeTime(base::Number* const);
-   bool setSlotDragIndex(base::Number* const);
+   bool setSlotFuzeAltitude(base::INumber* const);
+   bool setSlotFuzeTime(base::INumber* const);
+   bool setSlotDragIndex(base::INumber* const);
 };
 
 }

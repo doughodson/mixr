@@ -9,7 +9,7 @@
 
 #include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/areas.hpp"
 
 namespace mixr {
@@ -28,8 +28,8 @@ END_SLOTTABLE(IrSignature)
 BEGIN_SLOT_MAP(IrSignature)
    ON_SLOT(1, setSlotWaveBandSizes,     base::Table1)
    ON_SLOT(2, setSlotIrShapeSignature,  IrShape)
-   ON_SLOT(3, setSlotBaseHeatSignature, base::Number)
-   ON_SLOT(4, setSlotEmissivity,        base::Number)
+   ON_SLOT(3, setSlotBaseHeatSignature, base::INumber)
+   ON_SLOT(4, setSlotEmissivity,        base::INumber)
    ON_SLOT(5, setSlotEffectiveArea,     base::IArea)
 END_SLOT_MAP()
 
@@ -116,7 +116,7 @@ bool IrSignature::setSlotIrShapeSignature(IrShape* const s)
 //------------------------------------------------------------------------------
 // setSlotBaseHeatSignature() -- set base heat signature
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
+bool IrSignature::setSlotBaseHeatSignature(base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -135,7 +135,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(mixr::base::Number* const num)
+bool IrSignature::setSlotEmissivity(mixr::base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {

@@ -6,7 +6,7 @@
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; class ITime; }
+namespace base { class Boolean; class Integer; class INumber; class ITime; }
 namespace models {
 class Emission;
 class Player;
@@ -22,13 +22,13 @@ class Track;
 //    maxTracks       <Integer>  ! Maximum number of tracks (default: MAX_TRKS)
 //
 //    maxTrackAge     <Time>     ! Maximum track age (default: 3) ### NES: the comment in the src says 2 sec
-//    maxTrackAge     <Number>   ! Maximum track age (seconds)
+//    maxTrackAge     <INumber>  ! Maximum track age (seconds)
 //
 //    firstTrackId    <Integer>  ! First track ID (default: 1000)
 //
-//    alpha           <Number>   ! Alpha (default: 1.0)
-//    beta            <Number>   ! Beta  (default: 0.0)
-//    gamma           <Number>   ! Gamma (default: 0.0)
+//    alpha           <INumber>  ! Alpha (default: 1.0)
+//    beta            <INumber>  ! Beta  (default: 0.0)
+//    gamma           <INumber>  ! Gamma (default: 0.0)
 //
 //    logTrackUpdates <Boolean>  ! True to log all updates to tracks (default: true)
 //
@@ -120,12 +120,12 @@ private:
 
 private:
    bool setSlotMaxTracks(const base::Integer* const);       // Sets the maximum number of track files
-   bool setSlotMaxTrackAge(const base::Number* const);      // Sets the maximum age of tracks
+   bool setSlotMaxTrackAge(const base::INumber* const);      // Sets the maximum age of tracks
    bool setSlotMaxTrackAge(const base::ITime* const);
    bool setSlotFirstTrackId(const base::Integer* const);    // Sets the first (starting) track id number
-   virtual bool setSlotAlpha(const base::Number* const);    // Sets alpha
-   virtual bool setSlotBeta(const base::Number* const);     // Sets beta
-   bool setSlotGamma(const base::Number* const);            // Sets gamma
+   virtual bool setSlotAlpha(const base::INumber* const);    // Sets alpha
+   virtual bool setSlotBeta(const base::INumber* const);     // Sets beta
+   bool setSlotGamma(const base::INumber* const);            // Sets gamma
    bool setSlotLogTrackUpdates(const base::Boolean* const); // Sets logTrackUpdates
 };
 

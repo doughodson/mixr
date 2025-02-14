@@ -7,19 +7,19 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Number; }
+namespace base { class IAngle; class INumber; }
 namespace models {
 class IrQueryMsg;
 class Track;
 
 //------------------------------------------------------------------------------
 // Class: AngleOnlyTrackManager
-// Description: Abstract class for Angle Only Track Managers
+// Description: Interface class for Angle Only Track Managers
 //
 // Factory name: AngleOnlyTrackManager
 // Slots:
-//    azimuthBin    <base::Angle>   ! Azimuth Bin (default: PI)
-//    elevationBin  <base::Angle>   ! Elevation Bin (default: PI)
+//    azimuthBin    <base::IAngle>   ! Azimuth Bin (default: PI)
+//    elevationBin  <base::IAngle>   ! Elevation Bin (default: PI)
 //------------------------------------------------------------------------------
 class AngleOnlyTrackManager : public TrackManager
 {
@@ -51,8 +51,8 @@ private:
    // slot table helper methods
    bool setSlotAzimuthBin(const base::IAngle* const);
    bool setSlotElevationBin(const base::IAngle* const);
-   bool setSlotAlpha(const base::Number* const) override;
-   bool setSlotBeta(const base::Number* const) override;
+   bool setSlotAlpha(const base::INumber* const) override;
+   bool setSlotBeta(const base::INumber* const) override;
 };
 
 }

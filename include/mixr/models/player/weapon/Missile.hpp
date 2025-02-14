@@ -5,7 +5,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 namespace mixr {
-namespace base { class Number; }
+namespace base { class INumber; }
 namespace models {
 class Player;
 class Track;
@@ -16,14 +16,14 @@ class Track;
 //
 // Factory name: Missile
 // Slots:
-//   minSpeed     <Number>  ! Minimum Velocity (m/s)  (default: 0.0)
-//   maxSpeed     <Number>  ! Maximum Velocity (m/s)  (default: 800.0)
-//   speedMaxG    <Number>  ! Velocity we reach max G (default: 800.0)
-//   maxg         <Number>  ! Max G's (at "speedMaxG" or above) (default: 4.0)
-//   maxAccel     <Number>  ! Maximum Acceleration (m/s/s) (default: 50.0)
-//   cmdPitch     <Number>  ! Command Pitch (rad) (default: 0.0)
-//   cmdHeading   <Number>  ! Command Heading (rad) (default: 0.0)
-//   cmdSpeed     <Number>  ! Command speed (m/s) (default: 0.0)
+//   minSpeed     <INumber>  ! Minimum Velocity (m/s)  (default: 0.0)
+//   maxSpeed     <INumber>  ! Maximum Velocity (m/s)  (default: 800.0)
+//   speedMaxG    <INumber>  ! Velocity we reach max G (default: 800.0)
+//   maxg         <INumber>  ! Max G's (at "speedMaxG" or above) (default: 4.0)
+//   maxAccel     <INumber>  ! Maximum Acceleration (m/s/s) (default: 50.0)
+//   cmdPitch     <INumber>  ! Command Pitch (rad) (default: 0.0)
+//   cmdHeading   <INumber>  ! Command Heading (rad) (default: 0.0)
+//   cmdSpeed     <INumber>  ! Command speed (m/s) (default: 0.0)
 //
 //------------------------------------------------------------------------------
 class Missile : public IWeapon
@@ -63,14 +63,14 @@ public:
     void reset() override;
 
 protected:
-   virtual bool setSlotVpMin(const base::Number* const msg);
-   virtual bool setSlotVpMax(const base::Number* const msg);
-   virtual bool setSlotVpMaxG(const base::Number* const msg);
-   virtual bool setSlotMaxG(const base::Number* const msg);
-   virtual bool setSlotMaxAccel(const base::Number* const msg);
-   virtual bool setSlotCmdPitch(const base::Number* const msg);
-   virtual bool setSlotCmdHeading(const base::Number* const msg);
-   virtual bool setSlotCmdVelocity(const base::Number* const msg);
+   virtual bool setSlotVpMin(const base::INumber* const msg);
+   virtual bool setSlotVpMax(const base::INumber* const msg);
+   virtual bool setSlotVpMaxG(const base::INumber* const msg);
+   virtual bool setSlotMaxG(const base::INumber* const msg);
+   virtual bool setSlotMaxAccel(const base::INumber* const msg);
+   virtual bool setSlotCmdPitch(const base::INumber* const msg);
+   virtual bool setSlotCmdHeading(const base::INumber* const msg);
+   virtual bool setSlotCmdVelocity(const base::INumber* const msg);
 
    // Weapon interface
    void weaponGuidance(const double dt) override;

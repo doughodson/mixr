@@ -12,7 +12,7 @@
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/relations/Table5.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/areas.hpp"
 
 namespace mixr {

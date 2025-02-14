@@ -3,8 +3,7 @@
 
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/areas.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -21,8 +20,8 @@ BEGIN_SLOTTABLE(SigPlate)
 END_SLOTTABLE(SigPlate)
 
 BEGIN_SLOT_MAP(SigPlate)
-    ON_SLOT(1,setA,base::Number)
-    ON_SLOT(2,setB,base::Number)
+    ON_SLOT(1,setA,base::INumber)
+    ON_SLOT(2,setB,base::INumber)
 END_SLOT_MAP()
 
 SigPlate::SigPlate()
@@ -64,7 +63,7 @@ double SigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool SigPlate::setA(base::Number* const x)
+bool SigPlate::setA(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};
@@ -105,7 +104,7 @@ bool SigPlate::setA(base::ILength* const x)
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool SigPlate::setB(base::Number* const x)
+bool SigPlate::setB(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};

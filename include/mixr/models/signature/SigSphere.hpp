@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Number; class ILength; }
+namespace base { class INumber; class ILength; }
 namespace models {
 class Emission;
 
@@ -16,7 +16,7 @@ class Emission;
 // Descriptions: RfSignature of a simple sphere based on radius
 // Factory name: SigSphere
 // Slots:
-//    radius   <base::Number>    ! Radius of the sphere (default: 0)
+//    radius   <base::INumber>   ! Radius of the sphere (default: 0)
 //    radius   <base::Length>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotRadius(base::Number* const);
+   bool setSlotRadius(base::INumber* const);
    bool setSlotRadius(base::ILength* const);
 };
 

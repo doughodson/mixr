@@ -9,7 +9,7 @@
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/lengths.hpp"
 #include "mixr/base/units/times.hpp"
 
@@ -28,9 +28,9 @@ BEGIN_SLOTTABLE(AirTrkMgr)
 END_SLOTTABLE(AirTrkMgr)
 
 BEGIN_SLOT_MAP(AirTrkMgr)
-   ON_SLOT(1, setSlotPositionGate, base::Number)
-   ON_SLOT(2, setSlotRangeGate,    base::Number)
-   ON_SLOT(3, setSlotVelocityGate, base::Number)
+   ON_SLOT(1, setSlotPositionGate, base::INumber)
+   ON_SLOT(2, setSlotRangeGate,    base::INumber)
+   ON_SLOT(3, setSlotVelocityGate, base::INumber)
 END_SLOT_MAP()
 
 AirTrkMgr::AirTrkMgr()
@@ -359,7 +359,7 @@ void AirTrkMgr::processTrackList(const double dt)
 //------------------------------------------------------------------------------
 // setPositionGate() -- Sets the size of the position gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotPositionGate(const base::Number* const x)
+bool AirTrkMgr::setSlotPositionGate(const base::INumber* const x)
 {
    double value{};
    if (x != nullptr) {
@@ -400,7 +400,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::ILength* const x)
 //------------------------------------------------------------------------------
 // setRangeGate() -- Sets the size of the range gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotRangeGate(const base::Number* const x)
+bool AirTrkMgr::setSlotRangeGate(const base::INumber* const x)
 {
    double value{};
    if (x != nullptr) {
@@ -442,7 +442,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::ILength* const x)
 //------------------------------------------------------------------------------
 // setVelocityGate() -- Sets the size of the velocity gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setSlotVelocityGate(const base::Number* const x)
+bool AirTrkMgr::setSlotVelocityGate(const base::INumber* const x)
 {
    double value{};
    if (x != nullptr) {

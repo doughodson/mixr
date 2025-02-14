@@ -9,7 +9,7 @@
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
@@ -196,7 +196,7 @@ bool AngleOnlyTrackManager::setSlotElevationBin(const base::IAngle* const x)
 //------------------------------------------------------------------------------
 // Sets alpha
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotAlpha(const base::Number* const msg)
+bool AngleOnlyTrackManager::setSlotAlpha(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -210,7 +210,7 @@ bool AngleOnlyTrackManager::setSlotAlpha(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets beta
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::setSlotBeta(const base::Number* const msg)
+bool AngleOnlyTrackManager::setSlotBeta(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

@@ -16,7 +16,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/units/angles.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -44,12 +44,12 @@ END_SLOTTABLE(Antenna)
 BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(1,  setSlotPolarization,      base::Identifier)
     ON_SLOT(2,  setSlotThreshold,         base::IPower)
-    ON_SLOT(3,  setSlotGain,              base::Number)
+    ON_SLOT(3,  setSlotGain,              base::INumber)
     ON_SLOT(4,  setSlotGainPattern,       base::Function)
     ON_SLOT(5,  setSlotGainPatternDeg,    base::Boolean)
     ON_SLOT(6,  setSlotRecycleFlg,        base::Boolean)
     ON_SLOT(7,  setSlotBeamWidth,         base::IAngle)      // Check for base::Angle before base::Number
-    ON_SLOT(7,  setSlotBeamWidth,         base::Number)
+    ON_SLOT(7,  setSlotBeamWidth,         base::INumber)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Antenna)
@@ -233,7 +233,7 @@ bool Antenna::setThreshold(base::IPower* const p)
 //------------------------------------------------------------------------------
 // setSlotGain() -- calls setGain()
 //------------------------------------------------------------------------------
-bool Antenna::setGain(const base::Number* const g)
+bool Antenna::setGain(const base::INumber* const g)
 {
    bool ok{};
    double value{-1.0};
@@ -307,7 +307,7 @@ bool Antenna::setBeamWidth(const base::IAngle* const msg)
 //------------------------------------------------------------------------------
 // Sets beam width in radians
 //------------------------------------------------------------------------------
-bool Antenna::setBeamWidth(const base::Number* const msg)
+bool Antenna::setBeamWidth(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

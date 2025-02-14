@@ -11,7 +11,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/times.hpp"
 
 namespace mixr {
@@ -31,12 +31,12 @@ END_SLOTTABLE(TrackManager)
 
 BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(1, setSlotMaxTracks,       base::Integer)
-   ON_SLOT(2, setSlotMaxTrackAge,     base::Number)
+   ON_SLOT(2, setSlotMaxTrackAge,     base::INumber)
    ON_SLOT(2, setSlotMaxTrackAge,     base::ITime)
    ON_SLOT(3, setSlotFirstTrackId,    base::Integer)
-   ON_SLOT(4, setSlotAlpha,           base::Number)
-   ON_SLOT(5, setSlotBeta,            base::Number)
-   ON_SLOT(6, setSlotGamma,           base::Number)
+   ON_SLOT(4, setSlotAlpha,           base::INumber)
+   ON_SLOT(5, setSlotBeta,            base::INumber)
+   ON_SLOT(6, setSlotGamma,           base::INumber)
    ON_SLOT(7, setSlotLogTrackUpdates, base::Boolean)
 END_SLOT_MAP()
 
@@ -394,7 +394,7 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotMaxTrackAge() -- Sets the maximum age of tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTrackAge(const base::Number* const x)
+bool TrackManager::setSlotMaxTrackAge(const base::INumber* const x)
 {
    double age{};
    if (x != nullptr) {
@@ -453,7 +453,7 @@ bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // Sets alpha
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotAlpha(const base::Number* const msg)
+bool TrackManager::setSlotAlpha(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -466,7 +466,7 @@ bool TrackManager::setSlotAlpha(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets beta
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotBeta(const base::Number* const msg)
+bool TrackManager::setSlotBeta(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -479,7 +479,7 @@ bool TrackManager::setSlotBeta(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets gamma
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotGamma(const base::Number* const msg)
+bool TrackManager::setSlotGamma(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
