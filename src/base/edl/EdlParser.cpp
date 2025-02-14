@@ -88,7 +88,7 @@
 
 static mixr::base::Object* result{};          // result of all our work (i.e., an Object)
 static mixr::base::EdlScanner* scanner{};     // EDL scanner
-static mixr::base::factory_func factory{};    // factory function 
+static mixr::base::factory_func factory{};    // factory function
 static int err_count{};                       // error count
 
 //------------------------------------------------------------------------------
@@ -1507,7 +1507,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Returns an Object* that was constructed from parsing an EDL file.
-// factory is the name of the Object creation function  
+// factory is the name of the Object creation function
 //------------------------------------------------------------------------------
 Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
 {
