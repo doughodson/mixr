@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class IIoHandler; class Boolean; class Identifier; class Integer;
-                 class Number; class PairStream; class String; class ITime; }
+                 class INumber; class PairStream; class String; class ITime; }
 namespace simulation {
 class IDataRecorder;
 class Simulation;
@@ -38,20 +38,20 @@ class StationNetPeriodicThread;
 //
 //    ownship            <base::String>             ! Player name of our ownship (primary) player (default: nullptr)
 //
-//    tcRate             <base::Number>             ! Time-critical thread rate (Hz) (default: 50hz)
-//    tcPriority         <base::Number>             ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
+//    tcRate             <base::INumber>            ! Time-critical thread rate (Hz) (default: 50hz)
+//    tcPriority         <base::INumber>            ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
 //    tcStackSize        <base::Integer>            ! Time-critical thread stack size (default: <system default size>)
 //
 //    fastForwardRate    <base::Integer>            ! Fast forward rate for time critical functions
 //                                                  ! (i.e., the number of times updateTC() is called per frame).
 //                                                  ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
-//    netRate            <base::Number>             ! Network thread rate (Hz) (default: 0hz)
-//    netPriority        <base::Number>             ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
+//    netRate            <base::INumber>            ! Network thread rate (Hz) (default: 0hz)
+//    netPriority        <base::INumber>            ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
 //    netStackSize       <base::Integer>            ! Network thread stack size (default: <system default size>)
 //
-//    bgRate             <base::Number>             ! Background thread rate (Hz) (default: 0 -- no thread)
-//    bgPriority         <base::Number>             ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
+//    bgRate             <base::INumber>            ! Background thread rate (Hz) (default: 0 -- no thread)
+//    bgPriority         <base::INumber>            ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
 //    bgStackSize        <base::Integer>            ! Background thread stack size (default: <system default size>)
 //
 //    startupResetTime   <base::ITime>              ! Startup (initial) RESET event timer value (default: no reset event)
@@ -290,17 +290,17 @@ private:
 
    bool setSlotOwnshipName(const base::Identifier* const);
 
-   bool setSlotTimeCriticalRate(const base::Number* const hz);
-   bool setSlotTimeCriticalPri(const base::Number* const);
+   bool setSlotTimeCriticalRate(const base::INumber* const hz);
+   bool setSlotTimeCriticalPri(const base::INumber* const);
    bool setSlotTimeCriticalStackSize(const base::Integer* const);
    bool setSlotFastForwardRate(const base::Integer* const);
 
-   bool setSlotNetworkRate(const base::Number* const hz);
-   bool setSlotNetworkPri(const base::Number* const);
+   bool setSlotNetworkRate(const base::INumber* const hz);
+   bool setSlotNetworkPri(const base::INumber* const);
    bool setSlotNetworkStackSize(const base::Integer* const);
 
-   bool setSlotBackgroundRate(const base::Number* const hz);
-   bool setSlotBackgroundPri(const base::Number* const);
+   bool setSlotBackgroundRate(const base::INumber* const hz);
+   bool setSlotBackgroundPri(const base::INumber* const);
    bool setSlotBackgroundStackSize(const base::Integer* const);
 
    bool setSlotStartupResetTime(const base::ITime* const);

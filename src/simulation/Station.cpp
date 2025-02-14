@@ -16,7 +16,7 @@
 #include "mixr/base/concepts/linkage/IIoHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "StationTcPeriodicThread.hpp"
@@ -66,17 +66,17 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 5, setSlotOwnshipName,           base::Identifier)
 
-   ON_SLOT( 6, setSlotTimeCriticalRate,      base::Number)
-   ON_SLOT( 7, setSlotTimeCriticalPri,       base::Number)
+   ON_SLOT( 6, setSlotTimeCriticalRate,      base::INumber)
+   ON_SLOT( 7, setSlotTimeCriticalPri,       base::INumber)
    ON_SLOT( 8, setSlotTimeCriticalStackSize, base::Integer)
    ON_SLOT( 9, setSlotFastForwardRate,       base::Integer)
 
-   ON_SLOT(10, setSlotNetworkRate,           base::Number)
-   ON_SLOT(11, setSlotNetworkPri,            base::Number)
+   ON_SLOT(10, setSlotNetworkRate,           base::INumber)
+   ON_SLOT(11, setSlotNetworkPri,            base::INumber)
    ON_SLOT(12, setSlotNetworkStackSize,      base::Integer)
 
-   ON_SLOT(13, setSlotBackgroundRate,        base::Number)
-   ON_SLOT(14, setSlotBackgroundPri,         base::Number)
+   ON_SLOT(13, setSlotBackgroundRate,        base::INumber)
+   ON_SLOT(14, setSlotBackgroundPri,         base::INumber)
    ON_SLOT(15, setSlotBackgroundStackSize,   base::Integer)
 
    ON_SLOT(16, setSlotStartupResetTime,      base::ITime)
@@ -1021,7 +1021,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
 //------------------------------------------------------------------------------
 // setSlotTimeCriticalRate() -- Sets the T/C thread rate (hz)
 //------------------------------------------------------------------------------
-bool Station::setSlotTimeCriticalRate(const base::Number* const num)
+bool Station::setSlotTimeCriticalRate(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1040,7 +1040,7 @@ bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotTimeCriticalPri() -- Sets the T/C thread priority
 //------------------------------------------------------------------------------
-bool Station::setSlotTimeCriticalPri(const base::Number* const num)
+bool Station::setSlotTimeCriticalPri(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1071,7 +1071,7 @@ bool Station::setSlotTimeCriticalStackSize(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotNetworkRate() -- Sets the network thread rate (hz)
 //------------------------------------------------------------------------------
-bool Station::setSlotNetworkRate(const base::Number* const num)
+bool Station::setSlotNetworkRate(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1090,7 +1090,7 @@ bool Station::setSlotNetworkRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotNetworkPri() -- Sets the network thread priority
 //------------------------------------------------------------------------------
-bool Station::setSlotNetworkPri(const base::Number* const num)
+bool Station::setSlotNetworkPri(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1121,7 +1121,7 @@ bool Station::setSlotNetworkStackSize(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotBackgroundRate() -- Sets the background thread rate (hz)
 //------------------------------------------------------------------------------
-bool Station::setSlotBackgroundRate(const base::Number* const num)
+bool Station::setSlotBackgroundRate(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1140,7 +1140,7 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotBackgroundPri() -- Sets the background thread priority
 //------------------------------------------------------------------------------
-bool Station::setSlotBackgroundPri(const base::Number* const num)
+bool Station::setSlotBackgroundPri(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {

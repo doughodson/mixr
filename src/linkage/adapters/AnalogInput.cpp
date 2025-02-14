@@ -5,7 +5,7 @@
 #include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/relations/Table1.hpp"
 
@@ -29,11 +29,11 @@ END_SLOTTABLE(AnalogInput)
 BEGIN_SLOT_MAP(AnalogInput)
     ON_SLOT( 1, setSlotLocation, base::Integer)
     ON_SLOT( 2, setSlotChannel,  base::Integer)
-    ON_SLOT( 3, setSlotDeadband, base::Number)
-    ON_SLOT( 4, setSlotOffset,   base::Number)
-    ON_SLOT( 5, setSlotGain,     base::Number)
+    ON_SLOT( 3, setSlotDeadband, base::INumber)
+    ON_SLOT( 4, setSlotOffset,   base::INumber)
+    ON_SLOT( 5, setSlotGain,     base::INumber)
     ON_SLOT( 6, setTable,        base::Table1)
-    ON_SLOT( 7, setSlotValue,    base::Number)
+    ON_SLOT( 7, setSlotValue,    base::INumber)
 END_SLOT_MAP()
 
 AnalogInput::AnalogInput()
@@ -161,7 +161,7 @@ bool AnalogInput::setSlotChannel(const base::Integer* const msg)
 }
 
 // deadband: Deadband: [ 0 .. 1 ] (default: 0.0)
-bool AnalogInput::setSlotDeadband(const base::Number* const msg)
+bool AnalogInput::setSlotDeadband(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -171,7 +171,7 @@ bool AnalogInput::setSlotDeadband(const base::Number* const msg)
 }
 
 // offset: Offset value
-bool AnalogInput::setSlotOffset(const base::Number* const msg)
+bool AnalogInput::setSlotOffset(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -181,7 +181,7 @@ bool AnalogInput::setSlotOffset(const base::Number* const msg)
 }
 
 // gain: Gain value
-bool AnalogInput::setSlotGain(const base::Number* const msg)
+bool AnalogInput::setSlotGain(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -191,7 +191,7 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
 }
 
 // value: Initial value (default: 0)
-bool AnalogInput::setSlotValue(const base::Number* const msg)
+bool AnalogInput::setSlotValue(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

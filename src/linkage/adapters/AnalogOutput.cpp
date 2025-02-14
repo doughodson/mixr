@@ -5,7 +5,7 @@
 #include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/relations/Table1.hpp"
 
@@ -28,10 +28,10 @@ END_SLOTTABLE(AnalogOutput)
 BEGIN_SLOT_MAP(AnalogOutput)
     ON_SLOT( 1, setSlotLocation, base::Integer)
     ON_SLOT( 2, setSlotChannel,  base::Integer)
-    ON_SLOT( 3, setSlotOffset,   base::Number)
-    ON_SLOT( 4, setSlotGain,     base::Number)
+    ON_SLOT( 3, setSlotOffset,   base::INumber)
+    ON_SLOT( 4, setSlotGain,     base::INumber)
     ON_SLOT( 5, setTable,        base::Table1)
-    ON_SLOT( 6, setSlotValue,    base::Number)
+    ON_SLOT( 6, setSlotValue,    base::INumber)
 END_SLOT_MAP()
 
 AnalogOutput::AnalogOutput()
@@ -153,7 +153,7 @@ bool AnalogOutput::setSlotChannel(const base::Integer* const msg)
 }
 
 // offset: Offset value
-bool AnalogOutput::setSlotOffset(const base::Number* const msg)
+bool AnalogOutput::setSlotOffset(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -163,7 +163,7 @@ bool AnalogOutput::setSlotOffset(const base::Number* const msg)
 }
 
 // gain: Gain value
-bool AnalogOutput::setSlotGain(const base::Number* const msg)
+bool AnalogOutput::setSlotGain(const base::INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -178,7 +178,7 @@ bool AnalogOutput::setSlotGain(const base::Number* const msg)
 }
 
 // value: Initial value (default: 0)
-bool AnalogOutput::setSlotValue(const base::Number* const msg)
+bool AnalogOutput::setSlotValue(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

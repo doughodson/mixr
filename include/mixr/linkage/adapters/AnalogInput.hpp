@@ -5,7 +5,7 @@
 #include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class IIoData; class IIoDevice; class Integer; class Number; class Table1; }
+namespace base { class IIoData; class IIoDevice; class Integer; class INumber; class Table1; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -38,11 +38,11 @@ namespace linkage {
 // Slots:
 //      ai           <Integer>   ! Analog Input location (IoData's AI channel)
 //      channel      <Integer>   ! Device channel number
-//      deadband     <Number>    ! Deadband: [ 0 .. 1 ] (default: 0.0)
-//      offset       <Number>    ! Offset value (default: 0.0)
-//      gain         <Number>    ! Gain value   (default: 1.0)
+//      deadband     <INumber>   ! Deadband: [ 0 .. 1 ] (default: 0.0)
+//      offset       <INumber>   ! Offset value (default: 0.0)
+//      gain         <INumber>   ! Gain value   (default: 1.0)
 //      table        <Table1>    ! Shaping function table (default: none)
-//      value        <Number>    ! Initial value [ -1.0 ... 1.0 ] (default: 0.0)
+//      value        <INumber>   ! Initial value [ -1.0 ... 1.0 ] (default: 0.0)
 //------------------------------------------------------------------------------
 class AnalogInput final: public IAdapter
 {
@@ -87,10 +87,10 @@ private:
    // slot table helper methods
    bool setSlotLocation(const base::Integer* const);
    bool setSlotChannel(const base::Integer* const);
-   bool setSlotDeadband(const base::Number* const);
-   bool setSlotOffset(const base::Number* const);
-   bool setSlotGain(const base::Number* const);
-   bool setSlotValue(const base::Number* const);
+   bool setSlotDeadband(const base::INumber* const);
+   bool setSlotOffset(const base::INumber* const);
+   bool setSlotGain(const base::INumber* const);
+   bool setSlotValue(const base::INumber* const);
 };
 
 }

@@ -5,7 +5,7 @@
 #include "../DataFile.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; }
 namespace terrain {
 
 //------------------------------------------------------------------------------

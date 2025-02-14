@@ -5,7 +5,7 @@
 #include "mixr/linkage/adapters/IAdapter.hpp"
 
 namespace mixr {
-namespace base { class IIoData; class IIoDevice; class Boolean; class Integer; class Number; }
+namespace base { class IIoData; class IIoDevice; class Boolean; class Integer; class INumber; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ namespace linkage {
 // Slots:
 //      di           <Integer>   ! Discrete Input location (IoData's DI channel)
 //      channel      <Integer>   ! Device's AI channel number
-//      level        <Number>    ! Level to switch DI (default: 0.0)
+//      level        <INumber>   ! Level to switch DI (default: 0.0)
 //      inverted     <Boolean>   ! Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ private:
    // slot table helper methods
    bool setSlotLocation(const base::Integer* const);
    bool setSlotChannel(const base::Integer* const);
-   bool setSlotLevel(const base::Number* const);
+   bool setSlotLevel(const base::INumber* const);
    bool setSlotInverted(const base::Boolean* const);
 };
 

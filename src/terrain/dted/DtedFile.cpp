@@ -35,7 +35,6 @@
 
 #include "mixr/terrain/dted/DtedFile.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 #include <fstream>
 #include <cstdio>

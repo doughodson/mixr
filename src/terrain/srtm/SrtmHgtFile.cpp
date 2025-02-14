@@ -56,7 +56,6 @@
 //==============================================================================
 
 #include "mixr/terrain/srtm/SrtmHgtFile.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 #include <string>
 #include <fstream>

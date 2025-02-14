@@ -2,7 +2,7 @@
 #include "mixr/linkage/generators/AnalogInputFixed.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/concepts/linkage/IIoData.hpp"
 #include "mixr/base/concepts/linkage/IIoDevice.hpp"
@@ -20,7 +20,7 @@ END_SLOTTABLE(AnalogInputFixed)
 
 BEGIN_SLOT_MAP(AnalogInputFixed)
    ON_SLOT( 1, setSlotChannel, base::Integer)
-   ON_SLOT( 2, setSlotValue,   base::Number)
+   ON_SLOT( 2, setSlotValue,   base::INumber)
 END_SLOT_MAP()
 
 AnalogInputFixed::AnalogInputFixed()
@@ -55,7 +55,7 @@ bool AnalogInputFixed::setSlotChannel(const base::Integer* const msg)
    return ok;
 }
 
-bool AnalogInputFixed::setSlotValue(const base::Number* const msg)
+bool AnalogInputFixed::setSlotValue(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

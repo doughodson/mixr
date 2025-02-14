@@ -7,7 +7,6 @@
 #include <iostream>
 
 namespace mixr {
-namespace base { class Number; }
 namespace terrain {
 
 //------------------------------------------------------------------------------

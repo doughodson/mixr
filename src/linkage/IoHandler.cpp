@@ -6,7 +6,7 @@
 
 #include "IoPeriodicThread.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/units/frequencies.hpp"
@@ -31,7 +31,7 @@ BEGIN_SLOT_MAP(IoHandler)
    ON_SLOT(3, setSlotOutputData, base::IIoData)
    ON_SLOT(4, setSlotDevices,    base::PairStream)
    ON_SLOT(5, setSlotRate,       base::IFrequency)
-   ON_SLOT(6, setSlotPriority,   base::Number)
+   ON_SLOT(6, setSlotPriority,   base::INumber)
 END_SLOT_MAP()
 
 IoHandler::IoHandler()
@@ -239,7 +239,7 @@ bool IoHandler::setSlotRate(const base::IFrequency* const msg)
     return ok;
 }
 
-bool IoHandler::setSlotPriority(const base::Number* const num)
+bool IoHandler::setSlotPriority(const base::INumber* const num)
 {
     bool ok{};
     if (num != nullptr) {

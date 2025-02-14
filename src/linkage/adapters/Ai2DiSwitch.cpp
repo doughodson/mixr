@@ -6,7 +6,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <iostream>
 
@@ -26,7 +26,7 @@ END_SLOTTABLE(Ai2DiSwitch)
 BEGIN_SLOT_MAP(Ai2DiSwitch)
     ON_SLOT( 1, setSlotLocation, base::Integer)
     ON_SLOT( 2, setSlotChannel,  base::Integer)
-    ON_SLOT( 3, setSlotLevel,    base::Number)
+    ON_SLOT( 3, setSlotLevel,    base::INumber)
     ON_SLOT( 4, setSlotInverted, base::Boolean)
 END_SLOT_MAP()
 
@@ -90,7 +90,7 @@ bool Ai2DiSwitch::setSlotChannel(const base::Integer* const msg)
 }
 
 // level: Level to switch DI (default: 0)
-bool Ai2DiSwitch::setSlotLevel(const base::Number* const msg)
+bool Ai2DiSwitch::setSlotLevel(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
