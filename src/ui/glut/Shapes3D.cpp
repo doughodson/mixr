@@ -4,7 +4,7 @@
 #include "mixr/ui/glut/Shapes3D.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include <GL/glut.h>
 #include <GL/glu.h>
@@ -68,16 +68,16 @@ BEGIN_SLOT_MAP(Sphere)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Cylinder)
-    ON_SLOT(1, setSlotTopRadius, base::Number)
-    ON_SLOT(2, setSlotHeight,    base::Number)
+    ON_SLOT(1, setSlotTopRadius, base::INumber)
+    ON_SLOT(2, setSlotHeight,    base::INumber)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Cube)
-    ON_SLOT(1, setSlotSize, base::Number)
+    ON_SLOT(1, setSlotSize, base::INumber)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Torus)
-    ON_SLOT(1, setSlotOuterRadius, base::Number)
+    ON_SLOT(1, setSlotOuterRadius, base::INumber)
 END_SLOT_MAP()
 
 Sphere::Sphere()
@@ -271,7 +271,7 @@ bool Sphere::setSlotStacks(const base::Integer* const x)
 //------------------------------------------------------------------------------
 //  setSlotTopRadius() -- for Cylinder
 //------------------------------------------------------------------------------
-bool Cylinder::setSlotTopRadius(const base::Number* const x)
+bool Cylinder::setSlotTopRadius(const base::INumber* const x)
 {
     bool ok {};
     if (x != nullptr) ok = setTopRadius(x->asDouble());
@@ -280,7 +280,7 @@ bool Cylinder::setSlotTopRadius(const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotHeight() -- for Cylinder
 //------------------------------------------------------------------------------
-bool Cylinder::setSlotHeight(const base::Number* const x)
+bool Cylinder::setSlotHeight(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setHeight(x->asDouble());
@@ -290,7 +290,7 @@ bool Cylinder::setSlotHeight(const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotSize() -- for Cube
 //------------------------------------------------------------------------------
-bool Cube::setSlotSize(const base::Number* const x)
+bool Cube::setSlotSize(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setSize(x->asDouble());
@@ -300,7 +300,7 @@ bool Cube::setSlotSize(const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotOuterRadius() -- for Torus
 //------------------------------------------------------------------------------
-bool Torus::setSlotOuterRadius(const base::Number* const x)
+bool Torus::setSlotOuterRadius(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setOuterRadius(x->asDouble());

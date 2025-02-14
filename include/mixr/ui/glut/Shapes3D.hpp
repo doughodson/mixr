@@ -9,7 +9,7 @@
 #include "mixr/graphics/Shapes.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Number; }
+namespace base { class Integer; class INumber; }
 namespace glut {
 
 //------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace glut {
 //
 // Factory name: Sphere
 // Slots:
-//    stacks   <Number>    ! Number of stacks on the circle (default: 10)
+//    stacks   <INumber>    ! Number of stacks on the circle (default: 10)
 //
 // Note - all sphere and derived classes are automatically normalized at
 // rendering (GLU does it)
@@ -48,8 +48,8 @@ private:
 //
 // Factory name: Cylinder
 // Slots:
-//    topRadius  <Number>  ! Radius at the top of the cylinder (default: 1)
-//    height     <Number>  ! Height of the cylinder (default: 1)
+//    topRadius  <INumber>  ! Radius at the top of the cylinder (default: 1)
+//    height     <INumber>  ! Height of the cylinder (default: 1)
 //
 //------------------------------------------------------------------------------
 class Cylinder : public Sphere
@@ -70,8 +70,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotTopRadius(const base::Number* const);
-   bool setSlotHeight(const base::Number* const);
+   bool setSlotTopRadius(const base::INumber* const);
+   bool setSlotHeight(const base::INumber* const);
 };
 
 //------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ public:
 //
 // Factory name: Cube
 // Slots:
-//    size    <Number>    ! Size you want the cube to be (default: 1)
+//    size    <INumber>    ! Size you want the cube to be (default: 1)
 //
 //------------------------------------------------------------------------------
 class Cube : public graphics::Circle
@@ -114,7 +114,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotSize(const base::Number* const);
+   bool setSlotSize(const base::INumber* const);
 };
 
 //------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ private:
 //
 // Factory name: Torus
 // Slots:
-//   outerRadius    <Number>          ! Radius of the outer ring (default: 2)
+//   outerRadius    <INumber>          ! Radius of the outer ring (default: 2)
 //
 //------------------------------------------------------------------------------
 class Torus : public Sphere
@@ -142,7 +142,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotOuterRadius(const base::Number* const);
+   bool setSlotOuterRadius(const base::INumber* const);
 };
 
 

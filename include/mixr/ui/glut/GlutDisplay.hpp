@@ -5,7 +5,7 @@
 #include "mixr/graphics/Display.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; }
+namespace base { class Boolean; class Integer; class INumber; }
 namespace glut {
 
 //------------------------------------------------------------------------------
@@ -37,8 +37,8 @@ namespace glut {
 //    fullScreen        <Boolean>   ! Flag to set full screen mode  -- Main windows only -- (default: false)
 //    idleSleepTime     <Integer>   ! Idle callback sleep time (MS) -- Main windows only -- (default: 40)
 //    resizeSubwindows  <Boolean>   ! Resize our subwindows on a reshape (default: false)
-//    pickWidth         <Number>    ! Width of the pick area in screen coordinates(default: 10)
-//    pickHeight        <Number>    ! Height of the pick area in screen coordinates(default: 10)
+//    pickWidth         <INumber>   ! Width of the pick area in screen coordinates(default: 10)
+//    pickHeight        <INumber>   ! Height of the pick area in screen coordinates(default: 10)
 //    accumBuff         <Boolean>   ! Enable the accumulation buffer (default: false)
 //    stencilBuff       <Boolean>   ! Enable the stencil buffer (default: false)
 //
@@ -177,8 +177,8 @@ private:
    bool setSlotFullScreen(const base::Boolean* const);
    bool setSlotIdleSleepTime(const base::Integer* const);
    bool setSlotResizeWindows(const base::Boolean* const);
-   bool setSlotPickWidth(const base::Number* const);
-   bool setSlotPickHeight(const base::Number* const);
+   bool setSlotPickWidth(const base::INumber* const);
+   bool setSlotPickHeight(const base::INumber* const);
    bool setSlotAccumBuff(const base::Boolean* const);
    bool setSlotStencilBuff(const base::Boolean* const);
 };
