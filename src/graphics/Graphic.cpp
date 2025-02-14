@@ -9,7 +9,7 @@
 #include "mixr/base/PairStream.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/transformations/Transform.hpp"
@@ -50,8 +50,8 @@ END_SLOTTABLE(Graphic)
 BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 1, setSlotColor,              base::IColor)
     ON_SLOT( 1, setSlotColor,              base::Identifier)
-    ON_SLOT( 2, setSlotLineWidth,          base::Number)
-    ON_SLOT( 3, setSlotFlashRate,          base::Number)
+    ON_SLOT( 2, setSlotLineWidth,          base::INumber)
+    ON_SLOT( 3, setSlotFlashRate,          base::INumber)
     ON_SLOT( 4, setSlotTransformList,      base::PairStream)
     ON_SLOT( 4, setSlotSingleTransform,    base::Transform)
     ON_SLOT( 5, setSlotVertices,           base::PairStream)
@@ -59,12 +59,12 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
     ON_SLOT( 8, setSlotNoDisplayList,      base::Boolean)
     ON_SLOT( 9, setSlotSubcomponentsFirst, base::Boolean)
-    ON_SLOT(10, setSlotSelectName,         base::Number)
+    ON_SLOT(10, setSlotSelectName,         base::INumber)
     ON_SLOT(11, setSlotTextureName,        base::Identifier)
-    ON_SLOT(12, setSlotScissorX,           base::Number)
-    ON_SLOT(13, setSlotScissorY,           base::Number)
-    ON_SLOT(14, setSlotScissorWidth,       base::Number)
-    ON_SLOT(15, setSlotScissorHeight,      base::Number)
+    ON_SLOT(12, setSlotScissorX,           base::INumber)
+    ON_SLOT(13, setSlotScissorY,           base::INumber)
+    ON_SLOT(14, setSlotScissorWidth,       base::INumber)
+    ON_SLOT(15, setSlotScissorHeight,      base::INumber)
     ON_SLOT(16, setSlotStippling,          base::Boolean)
     ON_SLOT(17, setSlotStippleFactor,      base::Integer)
     ON_SLOT(18, setSlotStipplePattern,     base::Integer)
@@ -78,12 +78,12 @@ END_SLOT_MAP()
 BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,      setColor,             base::IColor)       // Color given as a base::Color object (e.g., rgb)
     ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Identifier)   // Color given as a string (e.g., "red")
-    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::Number)       // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
+    ON_EVENT_OBJ(SET_COLOR,      setColor,             base::INumber)       // Color given as a value (for a color rotary, e.g., 4 is the fourth color in the rotary list)
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          base::Identifier )
     ON_EVENT_OBJ(SET_MATERIAL,   setMaterial,          graphics::Material)
     ON_EVENT_OBJ(SET_TEXTURE,    onSetTextureId,       base::Integer)
-    ON_EVENT_OBJ(SET_LINEWIDTH,  onSetLineWidthEvent,  base::Number)
-    ON_EVENT_OBJ(SET_FLASHRATE,  onSetFlashRateEvent,  base::Number)
+    ON_EVENT_OBJ(SET_LINEWIDTH,  onSetLineWidthEvent,  base::INumber)
+    ON_EVENT_OBJ(SET_FLASHRATE,  onSetFlashRateEvent,  base::INumber)
     ON_EVENT_OBJ(SET_VISIBILITY, onSetVisibilityEvent, base::Boolean)
 END_EVENT_HANDLER()
 
@@ -679,10 +679,10 @@ bool Graphic::setColor(const base::Identifier* cnobj)
 }
 
 //------------------------------------------------------------------------------
-// setColor() -- set this object's color (using an base::Number)
+// setColor() -- set this object's color (using an base::INumber)
 // This is used with a color rotary
 //------------------------------------------------------------------------------
-bool Graphic::setColor(const base::Number* const cnobj)
+bool Graphic::setColor(const base::INumber* const cnobj)
 {
     // Unref our color name (if we have one)
     if (colorName != nullptr) { colorName->unref(); colorName = nullptr; }
@@ -714,13 +714,13 @@ bool Graphic::onSetTextureId(const base::Integer* const msg)
 }
 
 // onSetLineWidthEvent -- handle the SET_LINEWIDTH event
-bool Graphic::onSetLineWidthEvent(const base::Number* const msg)
+bool Graphic::onSetLineWidthEvent(const base::INumber* const msg)
 {
     return setSlotLineWidth(msg);
 }
 
 // onSetFlashRateEvent -- handle the SET_FLASHRATE event
-bool Graphic::onSetFlashRateEvent(const base::Number* const msg)
+bool Graphic::onSetFlashRateEvent(const base::INumber* const msg)
 {
     return setSlotFlashRate(msg);
 }
@@ -1068,7 +1068,7 @@ bool Graphic::setSlotTranslateLight(base::PairStream* const x)
     while (item != nullptr && count < 4) {
         const auto pair{static_cast<base::Pair*>(item->getValue())};
         if (pair != nullptr) {
-            const auto num{dynamic_cast<base::Number*>(pair->object())};
+            const auto num{dynamic_cast<base::INumber*>(pair->object())};
             if (num != nullptr) {
                 temp[count++] = num->asDouble();
             }
@@ -1093,13 +1093,13 @@ bool Graphic::setSlotColor(const base::Identifier* const color)
 }
 
 // setSlotLineWidth -- set this object's line width
-bool Graphic::setSlotLineWidth(const base::Number* const x)
+bool Graphic::setSlotLineWidth(const base::INumber* const x)
 {
     return setLineWidth( static_cast<const GLfloat>(x->asDouble()));
 }
 
 // setSlotFlashRate -- set this object's flash rate
-bool Graphic::setSlotFlashRate(const base::Number* const x)
+bool Graphic::setSlotFlashRate(const base::INumber* const x)
 {
     return setFlashRate(x->asDouble());
 }
@@ -1118,31 +1118,31 @@ bool Graphic::setSlotSubcomponentsFirst(const base::Boolean* const x)
 }
 
 // setSlotSelectName() -- GL Select Buffer name (e.g., glPushName())  (unsigned integer)
-bool Graphic::setSlotSelectName(const base::Number* const x)
+bool Graphic::setSlotSelectName(const base::INumber* const x)
 {
     return setSelectName(static_cast<GLuint>(x->asInt()));
 }
 
 // setSlotScissorX() - sets our x point for scissoring
-bool Graphic::setSlotScissorX(const base::Number* const x)
+bool Graphic::setSlotScissorX(const base::INumber* const x)
 {
     return setScissorX(x->asDouble());
 }
 
 // setSlotScissorWidth() - sets how far out we are going to scissor horizontally
-bool Graphic::setSlotScissorWidth(const base::Number* const x)
+bool Graphic::setSlotScissorWidth(const base::INumber* const x)
 {
     return setScissorWidth(x->asDouble());
 }
 
 // setSlotScissorY() - sets our y point for scissoring
-bool Graphic::setSlotScissorY(const base::Number* const x)
+bool Graphic::setSlotScissorY(const base::INumber* const x)
 {
     return setScissorY(x->asDouble());
 }
 
 // setSlotScissorHeight() - sets how far out we are going to scissor vertically
-bool Graphic::setSlotScissorHeight(const base::Number* const x)
+bool Graphic::setSlotScissorHeight(const base::INumber* const x)
 {
     return setScissorHeight(x->asDouble());
 }

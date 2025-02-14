@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/times.hpp"
 
 #include "google/protobuf/descriptor.h"
@@ -37,7 +37,7 @@ BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 2, setSlotFieldName,       base::String)
    ON_SLOT( 3, setSlotCompareToStr,    base::String)
    ON_SLOT( 4, setSlotCompareToNum,    base::Integer)
-   ON_SLOT( 5, setSlotCompareToDbl,    base::Number)
+   ON_SLOT( 5, setSlotCompareToDbl,    base::INumber)
    ON_SLOT( 6, setSlotCondition,       base::String)
    ON_SLOT( 7, setSlotTimeOnly,        base::Boolean)
 END_SLOT_MAP()
@@ -108,7 +108,7 @@ bool PrintSelected::setSlotCompareToNum(const base::Integer* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
+bool PrintSelected::setSlotCompareToDbl(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/ColorRotary.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -111,7 +111,7 @@ bool ColorRotary::setSlotValues(const base::PairStream* const x)
     while (item != nullptr) {
         const auto pair = static_cast<base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            const auto n = dynamic_cast<base::Number*>(pair->object());
+            const auto n = dynamic_cast<base::INumber*>(pair->object());
             if (n != nullptr) {
                 myValues[numVals] = n->asDouble();
                 numVals++;

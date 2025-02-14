@@ -13,7 +13,7 @@
 #include "google/protobuf/message.h"
 
 namespace mixr {
-namespace base { class Boolean; class Float; class Integer; class Number; }
+namespace base { class Boolean; class Float; class Integer; class INumber; }
 namespace recorder {
 namespace pb {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -34,7 +34,7 @@ class TrackData; class EmissionData;
 //   fieldName       <base::String>   ! Full field name (e.g., mixr.Recorder.Pb.PlayerId.name)
 //   compareToValS   <base::String>   ! value to compare (string)
 //   compareToValI   <base::Integer>  ! value to compare (num)
-//   compareToValD   <base::Number>   ! value to compare (dbl)
+//   compareToValD   <base::INumber>  ! value to compare (dbl)
 //   condition       <base::String>   ! EQ, LT, or GT (ignored for bool and strings)
 //   timeOnly        <base::Boolean>  ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ private:
    bool setSlotFieldName(const base::String* const);
    bool setSlotCompareToStr(const base::String* const);
    bool setSlotCompareToNum(const base::Integer* const);
-   bool setSlotCompareToDbl(const base::Number* const);
+   bool setSlotCompareToDbl(const base::INumber* const);
    bool setSlotCondition(const base::String* const);
    bool setSlotTimeOnly(const base::Boolean* const);
 };

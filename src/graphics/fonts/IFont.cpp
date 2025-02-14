@@ -2,7 +2,7 @@
 #include "mixr/graphics/fonts/IFont.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/String.hpp"
@@ -33,16 +33,16 @@ BEGIN_SLOTTABLE(IFont)
 END_SLOTTABLE(IFont)
 
 BEGIN_SLOT_MAP(IFont)
-    ON_SLOT(1, setSlotFontWidth,        base::Number)
-    ON_SLOT(2, setSlotFontHeight,       base::Number)
+    ON_SLOT(1, setSlotFontWidth,        base::INumber)
+    ON_SLOT(2, setSlotFontHeight,       base::INumber)
     ON_SLOT(3, setSlotFontPosition,     base::List)
     ON_SLOT(4, setSlotBitmapWidth,      base::Integer)
     ON_SLOT(5, setSlotBitmapHeight,     base::Integer)
     ON_SLOT(6, setSlotFontPath,         base::String)
     ON_SLOT(7, setSlotFTGLFontFileName, base::String)
     ON_SLOT(8, setSlotLookupTable,      base::List)
-    ON_SLOT(9, setSlotCharacterSpacing, base::Number);
-    ON_SLOT(10, setSlotLineSpacing,     base::Number);
+    ON_SLOT(9, setSlotCharacterSpacing, base::INumber);
+    ON_SLOT(10, setSlotLineSpacing,     base::INumber);
 END_SLOT_MAP()
 
 IFont::IFont()
@@ -174,7 +174,7 @@ int IFont::xferChars(char* const outp, const std::size_t BUF_SIZE, const char* c
 //------------------------------------------------------------------------------
 // setSlotFontWidth () -- sets the font width
 //------------------------------------------------------------------------------
-bool IFont::setSlotFontWidth(const base::Number* const x)
+bool IFont::setSlotFontWidth(const base::INumber* const x)
 {
     if (x != nullptr) setFontWidth( x->asDouble() );
     return true;
@@ -183,7 +183,7 @@ bool IFont::setSlotFontWidth(const base::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotFontHeight() - sets the font height
 //------------------------------------------------------------------------------
-bool IFont::setSlotFontHeight (const base::Number* const x)
+bool IFont::setSlotFontHeight (const base::INumber* const x)
 {
     if (x != nullptr) setFontHeight( x->asDouble() );
     return true;
@@ -293,14 +293,14 @@ bool IFont::setSlotLookupTable(const base::List* const x)
     return true;
 }
 
-bool IFont::setSlotCharacterSpacing(const base::Number* const x)
+bool IFont::setSlotCharacterSpacing(const base::INumber* const x)
 {
     // set our character spacing
     setCharacterSpacing(x->asDouble());
     return true;
 }
 
-bool IFont::setSlotLineSpacing(const base::Number* const x)
+bool IFont::setSlotLineSpacing(const base::INumber* const x)
 {
     // set our line spacing
     setLineSpacing(x->asDouble());

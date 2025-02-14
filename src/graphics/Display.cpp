@@ -8,7 +8,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/colors/Rgba.hpp"
@@ -55,8 +55,8 @@ BEGIN_SLOTTABLE(Display)
    "stdLineWidth",         // 15) Standard Line width
    "textures",             // 16) Texture(s)
    "clearColor",           // 17) Clear (Background) color; base::Color
-   "leftBracketChar",      // 18) Left bracket character;  base::String or base::Number; default: '['
-   "rightBracketChar",     // 19) Right bracket character; base::String or base::Number; default: ']'
+   "leftBracketChar",      // 18) Left bracket character;  base::String or base::INumber; default: '['
+   "rightBracketChar",     // 19) Right bracket character; base::String or base::INumber; default: ']'
    "reverseVideoBrackets", // 20) Reverse video brackets flag:
                            //     If true, brackets are drawn with reversed video font,
                            //     otherwise follow the field's drawing mode.  default: false
@@ -72,19 +72,19 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT( 2, setSlotColorTable,            base::PairStream)
    ON_SLOT( 3, setSlotNormalFont,            IFont)
    ON_SLOT( 3, setSlotNormalFont,            base::Identifier)
-   ON_SLOT( 4, setSlotLeftOrthoBound,        base::Number)
-   ON_SLOT( 5, setSlotRightOrthoBound,       base::Number)
-   ON_SLOT( 6, setSlotBottomOrthoBound,      base::Number)
-   ON_SLOT( 7, setSlotTopOrthoBound,         base::Number)
-   ON_SLOT( 8, setSlotNearOrthoBound,        base::Number)
-   ON_SLOT( 9, setSlotFarOrthoBound,         base::Number)
+   ON_SLOT( 4, setSlotLeftOrthoBound,        base::INumber)
+   ON_SLOT( 5, setSlotRightOrthoBound,       base::INumber)
+   ON_SLOT( 6, setSlotBottomOrthoBound,      base::INumber)
+   ON_SLOT( 7, setSlotTopOrthoBound,         base::INumber)
+   ON_SLOT( 8, setSlotNearOrthoBound,        base::INumber)
+   ON_SLOT( 9, setSlotFarOrthoBound,         base::INumber)
    ON_SLOT(10, setSlotViewportXOrigin,       base::Integer)
    ON_SLOT(11, setSlotViewportYOrigin,       base::Integer)
    ON_SLOT(12, setSlotViewportWidth,         base::Integer)
    ON_SLOT(13, setSlotViewportHeight,        base::Integer)
    ON_SLOT(14, setSlotSubdisplayStream,      base::PairStream)
    ON_SLOT(14, setSlotSubdisplaySingle,      Display)
-   ON_SLOT(15, setSlotStdLineWidth,          base::Number)
+   ON_SLOT(15, setSlotStdLineWidth,          base::INumber)
    ON_SLOT(16, setSlotTexturesStream,        base::PairStream)
    ON_SLOT(16, setSlotTexturesSingle,        Texture)
    ON_SLOT(17, setSlotClearColor,            base::IColor)
@@ -94,7 +94,7 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT(19, setSlotRightBracketCharacter, base::String)
    ON_SLOT(20, setSlotReverseVideoBrackets,  base::Boolean)
    ON_SLOT(21, setFontList,                  base::PairStream)
-   ON_SLOT(22, setSlotClearDepth,            base::Number)
+   ON_SLOT(22, setSlotClearDepth,            base::INumber)
    ON_SLOT(23, setSlotDisplayOrientation,    base::Identifier)
    ON_SLOT(24, setSlotMaterials,             base::PairStream)
    ON_SLOT(24, setSlotMaterials,             Material)
@@ -1435,7 +1435,7 @@ bool Display::setSlotNormalFont(const base::Identifier* const x)
 //------------------------------------------------------------------------------
 // setLeftOrthoBound() -- set left orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotLeftOrthoBound(const base::Number* const x)
+bool Display::setSlotLeftOrthoBound(const base::INumber* const x)
 {
    oLeft = x->asDouble();
    return true;
@@ -1474,7 +1474,7 @@ bool Display::setSlotAntialias(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 // setRightOrthoBound() -- set right orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotRightOrthoBound(const base::Number* const x)
+bool Display::setSlotRightOrthoBound(const base::INumber* const x)
 {
    oRight = x->asDouble();
    return true;
@@ -1483,7 +1483,7 @@ bool Display::setSlotRightOrthoBound(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setBottomOrthoBound() -- set bottom orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotBottomOrthoBound(const base::Number* const x)
+bool Display::setSlotBottomOrthoBound(const base::INumber* const x)
 {
    oBottom = x->asDouble();  // set bottom ortho bound
    return true;
@@ -1492,7 +1492,7 @@ bool Display::setSlotBottomOrthoBound(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setTopOrthoBound() --  set top orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotTopOrthoBound(const base::Number* const x)
+bool Display::setSlotTopOrthoBound(const base::INumber* const x)
 {
    oTop = x->asDouble();  // set top ortho bound
    return true;
@@ -1501,7 +1501,7 @@ bool Display::setSlotTopOrthoBound(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setNearOrthoBound() -- set near orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotNearOrthoBound(const base::Number* const x)
+bool Display::setSlotNearOrthoBound(const base::INumber* const x)
 {
    oNear = x->asDouble();
    return true;
@@ -1511,7 +1511,7 @@ bool Display::setSlotNearOrthoBound(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setFarOrthoBound() -- set far orthogonal bound
 //------------------------------------------------------------------------------
-bool Display::setSlotFarOrthoBound(const base::Number* const x)
+bool Display::setSlotFarOrthoBound(const base::INumber* const x)
 {
    oFar = x->asDouble();
    return true;
@@ -1602,7 +1602,7 @@ bool Display::setSlotTexturesSingle(Texture* const x)
 //------------------------------------------------------------------------------
 //  setSlotStdLineWidth() -- sets the standard line width for the display
 //------------------------------------------------------------------------------
-bool Display::setSlotStdLineWidth(const base::Number* const x)
+bool Display::setSlotStdLineWidth(const base::INumber* const x)
 {
    setStdLineWidth( static_cast<GLfloat>(x->asDouble()) );
    return true;
@@ -1670,7 +1670,7 @@ bool Display::setSlotReverseVideoBrackets(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 // setSlotClearDepth() -- sets the clear depth buffer slot
 //------------------------------------------------------------------------------
-bool Display::setSlotClearDepth(const base::Number* const x)
+bool Display::setSlotClearDepth(const base::INumber* const x)
 {
    setClearDepth(x->asDouble());
    return true;

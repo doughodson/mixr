@@ -1,7 +1,6 @@
 
 #include "mixr/graphics/BmpTexture.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"

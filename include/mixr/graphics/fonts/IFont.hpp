@@ -10,7 +10,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Integer; class Number; class List; class String; }
+namespace base { class Integer; class INumber; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -21,16 +21,16 @@ namespace graphics {
 //
 // Factory name: IFont
 // Slots:
-//      fontWidth        <Number>   ! Font width (default: 1)
-//      fontHeight       <Number>   ! Font height (default: 1)
+//      fontWidth        <INumber>  ! Font width (default: 1)
+//      fontHeight       <INumber>  ! Font height (default: 1)
 //      fontPosition     <List>     ! Upper/Left origin of the text field (default: 0, 0)
 //      bitmapWidth      <Integer>  ! Width of bit map font (default: 1)
 //      bitmapHeight     <Integer>  ! Height of bit map font (default: 1)
 //      path             <String>   ! Path to the font directory (default: nullptr)
 //      file             <String>   ! FTGL Font file name - will be altered in each instance of FTGLFont (default: nullptr)
 //      lut              <List>     ! Lookup Table (default: 0)
-//      characterSpacing <Number>   ! spacing for each character (default: 0)
-//      lineSpacing      <Number>   ! spacing for each line (default: 0)
+//      characterSpacing <INumber>  ! spacing for each character (default: 0)
+//      lineSpacing      <INumber>  ! spacing for each line (default: 0)
 //------------------------------------------------------------------------------
 class IFont : public base::Object
 {
@@ -134,16 +134,16 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotFontWidth(const base::Number* const);
-    bool setSlotFontHeight(const base::Number* const);
+    bool setSlotFontWidth(const base::INumber* const);
+    bool setSlotFontHeight(const base::INumber* const);
     bool setSlotFontPosition(const base::List* const);
     bool setSlotBitmapWidth(const base::Integer* const);
     bool setSlotBitmapHeight(const base::Integer* const);
     bool setSlotFontPath(const base::String* const);
     bool setSlotFTGLFontFileName(const base::String* const);
     bool setSlotLookupTable(const base::List* const);
-    bool setSlotCharacterSpacing(const base::Number* const);
-    bool setSlotLineSpacing(const base::Number* const);
+    bool setSlotCharacterSpacing(const base::INumber* const);
+    bool setSlotLineSpacing(const base::INumber* const);
 };
 
 }

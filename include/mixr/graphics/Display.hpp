@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Boolean; class IColor; class Identifier; class Integer; class Number; class PairStream; class String; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class PairStream; class String; }
 namespace graphics {
 class IFont;
 class Image;
@@ -44,19 +44,19 @@ class Material;
 //  colorTable       <PairStream>   ! Color table (default: 0)
 //  normalFont       <AbstractFont> ! Normal font; Font (default: 0)
 //  normalFont       <Identifier>   ! Normal font; base::Identifier (default: 0)
-//  left             <Number>       ! Left ortho bound (default: -0.5)
-//  right            <Number>       ! Right ortho bound (default: 640.5)
-//  bottom           <Number>       ! Bottom ortho bound (default: -0.5)
-//  top              <Number>       ! Top ortho bound (default: 480.5)
-//  near             <Number>       ! Near ortho bound (default: -1)
-//  far              <Number>       ! Far ortho bound (default: 1)
+//  left             <INumber>      ! Left ortho bound (default: -0.5)
+//  right            <INumber>      ! Right ortho bound (default: 640.5)
+//  bottom           <INumber>      ! Bottom ortho bound (default: -0.5)
+//  top              <INumber>      ! Top ortho bound (default: 480.5)
+//  near             <INumber>      ! Near ortho bound (default: -1)
+//  far              <INumber>      ! Far ortho bound (default: 1)
 //  vpX              <Integer>      ! Viewport x origin (default: -1)
 //  vpY              <Integer>      ! Viewport y origin (default: -1)
 //  vpWidth          <Integer>      ! Viewport width (default: 300)
 //  vpHeight         <Integer>      ! Viewport height (default: 300)
 //  displays         <PairStream>   ! Sub-displays, stream (default: 0)
 //  displays         <Display>      ! Sub-displays, single (default: 0)
-//  stdLineWidth     <Number>       ! Standard Line width (default: 1)
+//  stdLineWidth     <INumber>      ! Standard Line width (default: 1)
 //  textures         <PairStream>   ! Texture, stream (default: 0)
 //  textures         <Texture>      ! Texture, single (default: 0)
 //  clearColor       <Color>        ! Clear (Background) color (default: 0.0f,0.0f,0.0f,0.0f)
@@ -64,11 +64,11 @@ class Material;
 //  leftBracketChar  <String>       ! Left bracket character (default: '[')
 //  rightBracketChar <Integer>      ! Right bracket character (default: ']')
 //  rightBracketChar <String>       ! Right bracket character (default: ']')
-//  reverseVideoBrackets  <Number>  ! Reverse video brackets flag:
+//  reverseVideoBrackets  <INumber> ! Reverse video brackets flag:
 //                                  ! If true, brackets are drawn with reversed video font,
 //                                  ! otherwise follow the field's drawing mode.  (default: false)
 //  fonts             <PairStream>  ! List of fonts (default: none)
-//  clearDepth        <Number>      ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
+//  clearDepth        <INumber>     ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
 //  orientation       <String>      ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
 //  materials         <Material>    ! List of material objects (default: 0)
 //  antiAliasing      <Boolean>     ! Turn on/off anti-aliasing (default: true)
@@ -381,19 +381,19 @@ private:
     bool setSlotNormalFont(IFont* const);
     bool setSlotNormalFont(const base::Identifier* const);
     bool setSlotColorTable(base::PairStream* const list);
-    bool setSlotLeftOrthoBound(const base::Number* const);
-    bool setSlotRightOrthoBound(const base::Number* const);
-    bool setSlotBottomOrthoBound(const base::Number* const);
-    bool setSlotTopOrthoBound(const base::Number* const);
-    bool setSlotNearOrthoBound(const base::Number* const);
-    bool setSlotFarOrthoBound(const base::Number* const);
+    bool setSlotLeftOrthoBound(const base::INumber* const);
+    bool setSlotRightOrthoBound(const base::INumber* const);
+    bool setSlotBottomOrthoBound(const base::INumber* const);
+    bool setSlotTopOrthoBound(const base::INumber* const);
+    bool setSlotNearOrthoBound(const base::INumber* const);
+    bool setSlotFarOrthoBound(const base::INumber* const);
     bool setSlotViewportXOrigin(const base::Integer* const);
     bool setSlotViewportYOrigin(const base::Integer* const);
     bool setSlotViewportWidth(const base::Integer* const);
     bool setSlotViewportHeight(const base::Integer* const);
     bool setSlotSubdisplayStream(base::PairStream* const);
     bool setSlotSubdisplaySingle(Display* const);
-    bool setSlotStdLineWidth(const base::Number* const);
+    bool setSlotStdLineWidth(const base::INumber* const);
     bool setSlotTexturesStream(base::PairStream* const);
     bool setSlotTexturesSingle(Texture* const);
     bool setSlotClearColor(const base::IColor* const);
@@ -403,7 +403,7 @@ private:
     bool setSlotRightBracketCharacter(const base::String* const);
     bool setSlotReverseVideoBrackets(const base::Boolean* const);
     bool setFontList(base::PairStream* const);
-    bool setSlotClearDepth(const base::Number* const);
+    bool setSlotClearDepth(const base::INumber* const);
     bool setSlotDisplayOrientation(const base::Identifier* const);
     bool setSlotMaterials(base::PairStream* const);
     bool setSlotMaterials(Material* const);

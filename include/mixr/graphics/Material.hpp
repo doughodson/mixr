@@ -25,18 +25,18 @@ namespace graphics {
 // Factory name: Material
 // Slots
 //    ambientColor   <Pairstream>  ! List of numbers for the ambient values
-//    ambientColor   <Number>      ! Ambient color - light coming from material scattered in all directions equally
+//    ambientColor   <INumber>     ! Ambient color - light coming from material scattered in all directions equally
 //                                 (default: (0,0,0,1))
 //    diffuseColor   <Pairstream>  ! List of numbers for the diffuse values
-//    diffuseColor   <Number>      ! Diffuse color - light coming from the material after light hits it (main color)
+//    diffuseColor   <INumber>     ! Diffuse color - light coming from the material after light hits it (main color)
 //                                 (default: (1,1,1,1))
 //    emissiveColor  <Pairstream>  ! List of numbers for the emissive values
-//    emissiveColor  <Number>      ! Emissive color - light emanating from the material
+//    emissiveColor  <INumber>     ! Emissive color - light emanating from the material
 //                                 (default: (0,0,0,1))
 //    specularColor  <Pairstream>  ! List of numbers for the specular values
-//    specularColor  <Number>      ! Specular color - mirror reflecting color of the material (shiny highlights)
+//    specularColor  <INumber>     ! Specular color - mirror reflecting color of the material (shiny highlights)
 //                                 (default: (0,0,0,1))
-//    shininess      <Number>      ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
+//    shininess      <INumber>     ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
 //------------------------------------------------------------------------------
 class Material : public base::Component
 {
@@ -73,14 +73,14 @@ private:
 private:
     // slot table helper methods
     bool setSlotAmbientColor(const base::PairStream* const);
-    bool setSlotAmbientColor(const base::Number* const);
+    bool setSlotAmbientColor(const base::INumber* const);
     bool setSlotDiffuseColor(const base::PairStream* const);
-    bool setSlotDiffuseColor(const base::Number* const);
+    bool setSlotDiffuseColor(const base::INumber* const);
     bool setSlotEmissiveColor(const base::PairStream* const);
-    bool setSlotEmissiveColor(const base::Number* const);
+    bool setSlotEmissiveColor(const base::INumber* const);
     bool setSlotSpecularColor(const base::PairStream* const);
-    bool setSlotSpecularColor(const base::Number* const);
-    bool setSlotShininess(const base::Number*const);
+    bool setSlotSpecularColor(const base::INumber* const);
+    bool setSlotShininess(const base::INumber*const);
 };
 
 }

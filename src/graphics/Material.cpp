@@ -1,6 +1,6 @@
 
 #include "mixr/graphics/Material.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -20,14 +20,14 @@ END_SLOTTABLE(Material)
 
 BEGIN_SLOT_MAP(Material)
     ON_SLOT( 1, setSlotAmbientColor,  base::PairStream )
-    ON_SLOT( 1, setSlotAmbientColor,  base::Number)
+    ON_SLOT( 1, setSlotAmbientColor,  base::INumber)
     ON_SLOT( 2, setSlotDiffuseColor,  base::PairStream )
-    ON_SLOT( 2, setSlotDiffuseColor,  base::Number)
+    ON_SLOT( 2, setSlotDiffuseColor,  base::INumber)
     ON_SLOT( 3, setSlotEmissiveColor, base::PairStream )
-    ON_SLOT( 3, setSlotEmissiveColor, base::Number)
+    ON_SLOT( 3, setSlotEmissiveColor, base::INumber)
     ON_SLOT( 4, setSlotSpecularColor, base::PairStream )
-    ON_SLOT( 4, setSlotSpecularColor, base::Number)
-    ON_SLOT( 5, setSlotShininess,     base::Number)
+    ON_SLOT( 4, setSlotSpecularColor, base::INumber)
+    ON_SLOT( 5, setSlotShininess,     base::INumber)
 END_SLOT_MAP()
 
 Material::Material()
@@ -63,7 +63,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
         while (item != nullptr && count < 4) {
             const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                const auto num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::INumber*>(pair->object());
                 if (num != nullptr) temp[count++] = num->asDouble();
             }
             item = item->getNext();
@@ -81,7 +81,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
-bool Material::setSlotAmbientColor(const base::Number* const x)
+bool Material::setSlotAmbientColor(const base::INumber* const x)
 {
     if (x != nullptr) {
         const double temp{x->asDouble()};
@@ -104,7 +104,7 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
         while (item != nullptr && count < 4) {
             const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                const auto num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::INumber*>(pair->object());
                 if (num != nullptr) temp[count++] = num->asDouble();
             }
             item = item->getNext();
@@ -121,7 +121,7 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
-bool Material::setSlotDiffuseColor(const base::Number* const x)
+bool Material::setSlotDiffuseColor(const base::INumber* const x)
 {
     if (x != nullptr) {
         double temp{x->asDouble()};
@@ -144,7 +144,7 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
         while (item != nullptr && count < 4) {
             const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                const auto num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::INumber*>(pair->object());
                 if (num != nullptr) temp[count++] = num->asDouble();
             }
             item = item->getNext();
@@ -161,7 +161,7 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
-bool Material::setSlotEmissiveColor(const base::Number* const x)
+bool Material::setSlotEmissiveColor(const base::INumber* const x)
 {
     if (x != nullptr) {
         const double temp{x->asDouble()};
@@ -184,7 +184,7 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
         while (item != nullptr && count < 4) {
             const auto pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
-                const auto num = dynamic_cast<base::Number*>(pair->object());
+                const auto num = dynamic_cast<base::INumber*>(pair->object());
                 if (num != nullptr) temp[count++] = num->asDouble();
             }
             item = item->getNext();
@@ -201,7 +201,7 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
 // given (ie - 1 would be white, 0 black, 0.5 somewhere in between)
 // ALPHA here is always 1.
 //------------------------------------------------------------------------------
-bool Material::setSlotSpecularColor(const base::Number* const x)
+bool Material::setSlotSpecularColor(const base::INumber* const x)
 {
     if (x != nullptr) {
         const double temp{x->asDouble()};
@@ -212,7 +212,7 @@ bool Material::setSlotSpecularColor(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotShininess() - sets the shininess of our material
 //------------------------------------------------------------------------------
-bool Material::setSlotShininess(const base::Number* const x)
+bool Material::setSlotShininess(const base::INumber* const x)
 {
     if (x != nullptr) {
         shininess = x->asDouble();

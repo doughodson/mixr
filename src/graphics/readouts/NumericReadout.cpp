@@ -3,7 +3,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/String.hpp"
@@ -49,15 +49,15 @@ BEGIN_SLOT_MAP(NumericReadout)
    ON_SLOT(6, setSlotDecimalPointChar,     base::String)
    ON_SLOT(7, setSlotUndefinedChar,        base::String)
    ON_SLOT(8, setSlotOverflowChar,         base::String)
-   ON_SLOT(9, setSlotMaxValid,             base::Number)
-   ON_SLOT(10, setSlotMinValid,            base::Number)
+   ON_SLOT(9, setSlotMaxValid,             base::INumber)
+   ON_SLOT(10, setSlotMinValid,            base::INumber)
    ON_SLOT(11, setSlotBlankZero,           base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(NumericReadout)
    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateValue, base::Float)
    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateValue, base::Integer)
-   ON_EVENT_OBJ(UPDATE_VALUE, onUpdateValue, base::Number)
+   ON_EVENT_OBJ(UPDATE_VALUE, onUpdateValue, base::INumber)
 END_EVENT_HANDLER()
 
 NumericReadout::NumericReadout()
@@ -316,7 +316,7 @@ bool NumericReadout::onUpdateValue(const base::Integer* const ouvobj)
 }
 
 // onUpdateValue() - for base::Number
-bool NumericReadout::onUpdateValue(const base::Number* const ouvobj)
+bool NumericReadout::onUpdateValue(const base::INumber* const ouvobj)
 {
    if (ouvobj != nullptr) {
       setValue(ouvobj->asDouble());
@@ -392,14 +392,14 @@ bool NumericReadout::setSlotUndefinedChar(const base::String* const x)
 }
 
 //  setSlotMaxValid() -- Maximum valid value
-bool NumericReadout::setSlotMaxValid(const base::Number* const x)
+bool NumericReadout::setSlotMaxValid(const base::INumber* const x)
 {
    maxValid = x->asDouble();
    return true;
 }
 
 //  setSlotMinValid() -- Minimum valid value
-bool NumericReadout::setSlotMinValid(const base::Number* const x)
+bool NumericReadout::setSlotMinValid(const base::INumber* const x)
 {
    minValid = x->asDouble();
    return true;

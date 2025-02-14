@@ -28,8 +28,8 @@ class ReformatScanner;
 //   dpChar          <String>    ! Decimal Point character (default: '\0')
 //   undefinedChar   <String>    ! Undefined value character (default: '-')
 //   overflowChar    <String>    ! Overflow character (default: '+')
-//   maxValid        <Number>    ! Maximum valid input (default: UNDEFINED_VALUE)
-//   minValid        <Number>    ! Minimum valid input (default: UNDEFINED_VALUE)
+//   maxValid        <INumber>   ! Maximum valid input (default: UNDEFINED_VALUE)
+//   minValid        <INumber>   ! Minimum valid input (default: UNDEFINED_VALUE)
 //   blankIfZero     <Boolean>   ! Display blanks if value is zero
 //------------------------------------------------------------------------------
 // Example formats:
@@ -75,7 +75,7 @@ public:
    // event handler methods
    virtual bool onUpdateValue(const base::Float* const);
    virtual bool onUpdateValue(const base::Integer* const);
-   virtual bool onUpdateValue(const base::Number* const);
+   virtual bool onUpdateValue(const base::INumber* const);
 
 protected:
    virtual void makeText();
@@ -116,8 +116,8 @@ private:
    bool setSlotDecimalPointChar(const base::String* const);
    bool setSlotUndefinedChar(const base::String* const);
    bool setSlotOverflowChar(const base::String* const);
-   bool setSlotMaxValid(const base::Number* const);
-   bool setSlotMinValid(const base::Number* const);
+   bool setSlotMaxValid(const base::INumber* const);
+   bool setSlotMinValid(const base::INumber* const);
    bool setSlotBlankZero(const base::Boolean* const);
 };
 
