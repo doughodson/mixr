@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Latitude; class ILength; class Longitude; class Number; }
+namespace base { class Integer; class Latitude; class ILength; class Longitude; class INumber; }
 namespace models {
 class OnboardComputer;
 class Sar;
@@ -141,8 +141,8 @@ private:
 // Slots:
 //   targetLatitude   <Latitude>  ! Target's latitude (default: 0)
 //   targetLongitude  <Longitude> ! Target's longitude (default: 0)
-//   targetElevation  <Number>    ! Target's elevation (feet) (default: 0)
-//   station          <Number>    ! Station number to use (default: 0)
+//   targetElevation  <INumber>   ! Target's elevation (feet) (default: 0)
+//   station          <INumber>   ! Station number to use (default: 0)
 //
 //------------------------------------------------------------------------------
 class ActionWeaponRelease : public Action
@@ -174,7 +174,7 @@ private:
 private:
    bool setSlotTargetLat(const base::Latitude*);
    bool setSlotTargetLon(const base::Longitude*);
-   bool setSlotTargetElev(const base::Number*);
+   bool setSlotTargetElev(const base::INumber*);
    bool setSlotStationNum(const base::Integer*);
 };
 
@@ -184,8 +184,8 @@ private:
 //
 // Factory name: ActionDecoyRelease
 // Slots:
-//   numToLaunch  <Number>  ! number of decoys to launch (default: 1)
-//   interval     <Number>  ! time, in seconds, between launches (default: 0)
+//   numToLaunch  <Integer>  ! number of decoys to launch (default: 1)
+//   interval     <INumber>  ! time, in seconds, between launches (default: 0)
 //
 //------------------------------------------------------------------------------
 class ActionDecoyRelease : public Action
@@ -209,7 +209,7 @@ private:
     double startTOD {};    // our starting tod (that way we know when we've elapsed so far)
 
 private:
-   bool setSlotInterval(const base::Number*);
+   bool setSlotInterval(const base::INumber*);
    bool setSlotNumToLaunch(const base::Integer*);
 };
 
@@ -220,8 +220,8 @@ private:
 //
 // Factory name: ActionCamouflageType
 // Slots:
-//   camouflageType  <Number>  ! User-defined camouflage type (positive integer or zero for none)
-//                             ! (default: 0)
+//   camouflageType  <Integer>  ! User-defined camouflage type (positive integer or zero for none)
+//                              ! (default: 0)
 //
 //------------------------------------------------------------------------------
 class ActionCamouflageType : public Action

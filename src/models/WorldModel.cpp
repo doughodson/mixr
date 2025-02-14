@@ -10,7 +10,7 @@
 #include "mixr/base/Longitude.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -45,10 +45,10 @@ END_SLOTTABLE(WorldModel)
 
 BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 1, setSlotRefLatitude,          base::Latitude)
-    ON_SLOT( 1, setSlotRefLatitude,          base::Number)
+    ON_SLOT( 1, setSlotRefLatitude,          base::INumber)
 
     ON_SLOT( 2, setSlotRefLongitude,         base::Longitude)
-    ON_SLOT( 2, setSlotRefLongitude,         base::Number)
+    ON_SLOT( 2, setSlotRefLongitude,         base::INumber)
 
     ON_SLOT( 3, setSlotGamingAreaRange,      base::ILength)
 
@@ -273,7 +273,7 @@ bool WorldModel::setSlotRefLatitude(const base::Latitude* const msg)
     return ok;
 }
 
-bool WorldModel::setSlotRefLatitude(const base::Number* const msg)
+bool WorldModel::setSlotRefLatitude(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -291,7 +291,7 @@ bool WorldModel::setSlotRefLongitude(const base::Longitude* const msg)
     return ok;
 }
 
-bool WorldModel::setSlotRefLongitude(const base::Number* const msg)
+bool WorldModel::setSlotRefLongitude(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

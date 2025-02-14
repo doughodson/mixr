@@ -3,7 +3,6 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/Statistic.hpp"

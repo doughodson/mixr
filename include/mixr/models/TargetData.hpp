@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength;
-                 class Number; class String; class ITime; }
+                 class INumber; class String; class ITime; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -24,24 +24,24 @@ namespace models {
 //    stickType        <Identifier>     ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
 //
 //    stickDistance    <ILength>        ! Weapon stick length (default: 0)
-//    stickDistance    <Number>         ! (feet)
+//    stickDistance    <INumber>        ! (feet)
 //
 //    interval         <ITime>          ! Time between weapon releases (default: 0)
-//    interval         <Number>         ! (MSec)
+//    interval         <INumber>        ! (MSec)
 //
 //    maxMissDistance  <ILength>        ! Maximum miss distance (default: 0)
-//    maxMissDistance  <Number>         ! (feet)
+//    maxMissDistance  <INumber>        ! (feet)
 //
 //    armDelay         <ITime>          ! Arming delay (default: 0)
-//    armDelay         <Number>         ! (0-99.9 sec)
+//    armDelay         <INumber>        ! (0-99.9 sec)
 //
 //    angle            <IAngle>         ! Impact angle (default: 0)
-//    angle            <Number>         ! (degrees)
+//    angle            <INumber>        ! (degrees)
 //
 //    azimuth          <IAngle>         ! Azimuth angle (default: 0)
-//    azimuth          <Number>         ! (degrees)
+//    azimuth          <INumber>        ! (degrees)
 //
-//    velocity         <Number>         ! Impact velocity (ft/sec) (default: 0)
+//    velocity         <INumber>        ! Impact velocity (ft/sec) (default: 0)
 //------------------------------------------------------------------------------
 class TargetData : public base::Object
 {
@@ -109,18 +109,18 @@ private:
    bool setSlotManualAssign(const base::Boolean* const);
    bool setSlotStickType(const base::Identifier* const);
    bool setSlotStickDistance(const base::ILength* const);
-   bool setSlotStickDistance(const base::Number* const);
+   bool setSlotStickDistance(const base::INumber* const);
    bool setSlotInterval(const base::ITime* const);
-   bool setSlotInterval(const base::Number* const);
+   bool setSlotInterval(const base::INumber* const);
    bool setSlotMaxMissDistance(const base::ILength* const);
-   bool setSlotMaxMissDistance(const base::Number* const);
+   bool setSlotMaxMissDistance(const base::INumber* const);
    bool setSlotArmDelay(const base::ITime* const);
-   bool setSlotArmDelay(const base::Number* const);
+   bool setSlotArmDelay(const base::INumber* const);
    bool setSlotAngle(const base::IAngle* const);
-   bool setSlotAngle(const base::Number* const);
+   bool setSlotAngle(const base::INumber* const);
    bool setSlotAzimuth(const base::IAngle* const);
-   bool setSlotAzimuth(const base::Number* const);
-   bool setSlotVelocity(const base::Number* const);
+   bool setSlotAzimuth(const base::INumber* const);
+   bool setSlotVelocity(const base::INumber* const);
 };
 
 inline bool TargetData::isEnabled() const                    { return enabled; }

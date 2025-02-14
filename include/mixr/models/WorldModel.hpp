@@ -5,7 +5,7 @@
 #include "mixr/simulation/Simulation.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Latitude; class ILength; class Longitude; class Number; }
+namespace base { class Boolean; class Identifier; class Latitude; class ILength; class Longitude; class INumber; }
 namespace terrain { class ITerrain; }
 namespace models {
 class IAtmosphere;
@@ -22,10 +22,10 @@ class IAtmosphere;
 // Slots --
 //
 //    latitude       <base::Latitude>         ! Reference (gaming area) latitude (default: 0.0)
-//                   <base::Number>           ! Reference (gaming area) latitude (deg)
+//                   <base::INumber>          ! Reference (gaming area) latitude (deg)
 //
 //    longitude      <base::Longitude>        ! reference (gaming area) longitude (default 0.0)
-//                   <base::Number>           ! reference (gaming area) longitude (deg)
+//                   <base::INumber>          ! reference (gaming area) longitude (deg)
 //
 //    gamingAreaRange <base::ILength>         ! Max valid range of the simulation's gaming area or zero for unlimited
 //                                            ! default: zero -- unlimited range
@@ -150,9 +150,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotRefLatitude(const base::Latitude* const);
-   bool setSlotRefLatitude(const base::Number* const);
+   bool setSlotRefLatitude(const base::INumber* const);
    bool setSlotRefLongitude(const base::Longitude* const);
-   bool setSlotRefLongitude(const base::Number* const);
+   bool setSlotRefLongitude(const base::INumber* const);
 
    bool setSlotGamingAreaRange(const base::ILength* const);
    bool setSlotEarthModel(const base::EarthModel* const);

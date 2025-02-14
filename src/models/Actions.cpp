@@ -13,7 +13,7 @@
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/lengths.hpp"
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -432,7 +432,7 @@ END_SLOTTABLE(ActionWeaponRelease)
 BEGIN_SLOT_MAP(ActionWeaponRelease)
     ON_SLOT(1, setSlotTargetLat,  base::Latitude)
     ON_SLOT(2, setSlotTargetLon,  base::Longitude)
-    ON_SLOT(3, setSlotTargetElev, base::Number)
+    ON_SLOT(3, setSlotTargetElev, base::INumber)
     ON_SLOT(4, setSlotStationNum, base::Integer)
 END_SLOT_MAP()
 
@@ -535,7 +535,7 @@ bool ActionWeaponRelease::setSlotTargetLon(const base::Longitude* newLon)
     }
     return ok;
 }
-bool ActionWeaponRelease::setSlotTargetElev(const base::Number* newElev)
+bool ActionWeaponRelease::setSlotTargetElev(const base::INumber* newElev)
 {
     bool ok{};
     if (newElev != nullptr) {
@@ -567,7 +567,7 @@ END_SLOTTABLE(ActionDecoyRelease)
 
 BEGIN_SLOT_MAP(ActionDecoyRelease)
     ON_SLOT(1, setSlotNumToLaunch, base::Integer)
-    ON_SLOT(2, setSlotInterval,    base::Number)
+    ON_SLOT(2, setSlotInterval,    base::INumber)
 END_SLOT_MAP()
 
 ActionDecoyRelease::ActionDecoyRelease()
@@ -667,7 +667,7 @@ bool ActionDecoyRelease::setSlotNumToLaunch(const base::Integer* x)
     }
     return ok;
 }
-bool ActionDecoyRelease::setSlotInterval(const base::Number* x)
+bool ActionDecoyRelease::setSlotInterval(const base::INumber* x)
 {
     bool ok{};
     if (x != nullptr) {

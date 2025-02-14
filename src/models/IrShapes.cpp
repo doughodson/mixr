@@ -9,7 +9,7 @@
 #include "mixr/models/signature/IrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/units/areas.hpp"
 #include "mixr/base/units/lengths.hpp"
@@ -77,7 +77,7 @@ BEGIN_SLOTTABLE(IrSphere)
 END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
-   ON_SLOT(1, setSlotIrSphereRadius, base::Number)
+   ON_SLOT(1, setSlotIrSphereRadius, base::INumber)
    ON_SLOT(1, setSlotIrSphereRadius, base::ILength)
 END_SLOT_MAP()
 
@@ -92,7 +92,7 @@ void IrSphere::copyData(const IrSphere& org, const bool)
    radius = org.radius;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mixr::base::Number* const x)
+bool IrSphere::setSlotIrSphereRadius(const mixr::base::INumber* const x)
 {
    double value{};
 
