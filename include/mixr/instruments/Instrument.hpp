@@ -5,7 +5,7 @@
 #include "mixr/graphics/Graphic.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; class Table1; }
+namespace base { class Boolean; class INumber; class Table1; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ public:
 
 protected:
     // event functions
-    bool onUpdateInstVal(const base::Number* const);
+    bool onUpdateInstVal(const base::INumber* const);
 
 private:
     // member variables
@@ -56,7 +56,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotScalingTable(const base::Table1* const);
-    bool setSlotInstVal(const base::Number* const);
+    bool setSlotInstVal(const base::INumber* const);
     bool setSlotAllowValPass(const base::Boolean* const);
 };
 

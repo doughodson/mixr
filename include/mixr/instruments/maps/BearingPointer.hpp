@@ -5,7 +5,7 @@
 #include "mixr/instruments/maps/CompassRose.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Number; }
+namespace base { class IAngle; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -46,8 +46,8 @@ public:
 private:
     // event handlers
     bool onUpdateRadBearingPointer(const base::IAngle* const);
-    bool onUpdateRadBearingPointer(const base::Number* const);
-    bool onUpdateDegBearingPointer(const base::Number* const);
+    bool onUpdateRadBearingPointer(const base::INumber* const);
+    bool onUpdateDegBearingPointer(const base::INumber* const);
 
     double bearing {};     // used for bearing pointer, or if anyone else needs it for calculations (radians)
     double myRotation {};  // how much we are going to rotate the compass

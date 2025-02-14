@@ -40,7 +40,7 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotLightRadius(const base::Number* const);
+    bool setSlotLightRadius(const base::INumber* const);
 };
 
 }

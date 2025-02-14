@@ -2,7 +2,7 @@
 #include "mixr/instruments/maps/CompassRose.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 namespace mixr {
 namespace instruments {
@@ -14,20 +14,20 @@ BEGIN_SLOTTABLE(CompassRose)
     "centeredRad",      // our centered radius
     "decenteredRad",    // decentered radius
     "displacement",     // how far to translate
-END_SLOTTABLE(CompassRose)       
+END_SLOTTABLE(CompassRose)
 
 BEGIN_SLOT_MAP(CompassRose)
-    ON_SLOT(1, setSlotCenteredRadius,   base::Number)
-    ON_SLOT(2, setSlotDeCenteredRadius, base::Number)
-    ON_SLOT(3, setSlotDisplacement,     base::Number)
+    ON_SLOT(1, setSlotCenteredRadius,   base::INumber)
+    ON_SLOT(2, setSlotDeCenteredRadius, base::INumber)
+    ON_SLOT(3, setSlotDisplacement,     base::INumber)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(CompassRose)
-    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRotDeg,       base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius,       base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateCenRad,       base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateDecRadius,    base::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateDisplacement, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRotDeg,       base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius,       base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateCenRad,       base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE4, onUpdateDecRadius,    base::INumber)
+    ON_EVENT_OBJ(UPDATE_VALUE5, onUpdateDisplacement, base::INumber)
     ON_EVENT_OBJ(UPDATE_VALUE6, onUpdateCentered,     base::Boolean)
 END_EVENT_HANDLER()
 
@@ -42,7 +42,7 @@ CompassRose::CompassRose()
 void CompassRose::copyData(const CompassRose& org, const bool)
 {
     BaseClass::copyData(org);
-    
+
     centered = org.centered;
     cenRadius = org.cenRadius;
     decRadius = org.decRadius;
@@ -57,7 +57,7 @@ void CompassRose::copyData(const CompassRose& org, const bool)
 //------------------------------------------------------------------------------
 // setSlotCenteredRadius() - sets our radius
 //------------------------------------------------------------------------------
-bool CompassRose::setSlotCenteredRadius(const base::Number* const newR)
+bool CompassRose::setSlotCenteredRadius(const base::INumber* const newR)
 {
     bool ok = false;
     if (newR != nullptr) ok = setCenteredRadius(newR->asDouble());
@@ -67,7 +67,7 @@ bool CompassRose::setSlotCenteredRadius(const base::Number* const newR)
 //------------------------------------------------------------------------------
 // setSlotDeCenteredRadius() - sets our decentered radius
 //------------------------------------------------------------------------------
-bool CompassRose::setSlotDeCenteredRadius(const base::Number* const newR)
+bool CompassRose::setSlotDeCenteredRadius(const base::INumber* const newR)
 {
     bool ok = false;
     if (newR != nullptr) ok = setDeCenteredRadius(newR->asDouble());
@@ -77,7 +77,7 @@ bool CompassRose::setSlotDeCenteredRadius(const base::Number* const newR)
 //------------------------------------------------------------------------------
 // setSlotDisplacement() - how far to displace when we decenter
 //------------------------------------------------------------------------------
-bool CompassRose::setSlotDisplacement(const base::Number* const newD)
+bool CompassRose::setSlotDisplacement(const base::INumber* const newD)
 {
     bool ok = false;
     if (newD != nullptr) ok = setDisplacement(newD->asDouble());
@@ -86,7 +86,7 @@ bool CompassRose::setSlotDisplacement(const base::Number* const newD)
 
 // Set functions
 //------------------------------------------------------------------------------
-// setRotationDeg() - 
+// setRotationDeg() -
 //------------------------------------------------------------------------------
 bool CompassRose::setRotationDeg(const double newR)
 {
@@ -95,7 +95,7 @@ bool CompassRose::setRotationDeg(const double newR)
 }
 
 //------------------------------------------------------------------------------
-// setRotationRad() - 
+// setRotationRad() -
 //------------------------------------------------------------------------------
 bool CompassRose::setRotationRad(const double newR)
 {
@@ -104,7 +104,7 @@ bool CompassRose::setRotationRad(const double newR)
 }
 
 //------------------------------------------------------------------------------
-// setCenteredRadius() - 
+// setCenteredRadius() -
 //------------------------------------------------------------------------------
 bool CompassRose::setCenteredRadius(const double newR)
 {
@@ -113,25 +113,25 @@ bool CompassRose::setCenteredRadius(const double newR)
 }
 
 //------------------------------------------------------------------------------
-// seDeCenteredRadius() - 
+// seDeCenteredRadius() -
 //------------------------------------------------------------------------------
 bool CompassRose::setDeCenteredRadius(const double newDR)
 {
     decRadius = newDR;
-    return true; 
+    return true;
 }
 
 //------------------------------------------------------------------------------
-// setDisplacement() - 
+// setDisplacement() -
 //------------------------------------------------------------------------------
 bool CompassRose::setDisplacement(const double newD)
 {
     displacement = newD;
-    return true; 
+    return true;
 }
 
 //------------------------------------------------------------------------------
-// setCentered() - 
+// setCentered() -
 //------------------------------------------------------------------------------
 bool CompassRose::setCentered(const bool newC)
 {
@@ -143,9 +143,9 @@ bool CompassRose::setCentered(const bool newC)
 //------------------------------------------------------------------------------
 // onUpdateRotDeg() - update rotation (degrees)
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateRotDeg(const base::Number* const x)
+bool CompassRose::onUpdateRotDeg(const base::INumber* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setRotationDeg(x->asDouble());
     return ok;
 }
@@ -153,19 +153,19 @@ bool CompassRose::onUpdateRotDeg(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onUpdateRadius() - change our radius
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateRadius(const base::Number* const x)
+bool CompassRose::onUpdateRadius(const base::INumber* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setRotationRad(x->asDouble());
     return ok;
 }
 
 //------------------------------------------------------------------------------
-// onUpdateCenRad() - change our centered radius 
+// onUpdateCenRad() - change our centered radius
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateCenRad(const base::Number* const x)
+bool CompassRose::onUpdateCenRad(const base::INumber* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setCenteredRadius(x->asDouble());
     return ok;
 }
@@ -173,9 +173,9 @@ bool CompassRose::onUpdateCenRad(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onUpdateDecRadius() - change our decentered radius
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateDecRadius(const base::Number* const x)
+bool CompassRose::onUpdateDecRadius(const base::INumber* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setDeCenteredRadius(x->asDouble());
     return ok;
 }
@@ -183,9 +183,9 @@ bool CompassRose::onUpdateDecRadius(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onUpdateDisplacement() - change our displacement
 //------------------------------------------------------------------------------
-bool CompassRose::onUpdateDisplacement(const base::Number* const x)
+bool CompassRose::onUpdateDisplacement(const base::INumber* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setDisplacement(x->asDouble());
     return ok;
 }
@@ -195,7 +195,7 @@ bool CompassRose::onUpdateDisplacement(const base::Number* const x)
 //------------------------------------------------------------------------------
 bool CompassRose::onUpdateCentered(const base::Boolean* const x)
 {
-    bool ok = false; 
+    bool ok = false;
     if (x != nullptr) ok = setCentered(x->asBool());
     return ok;
 }
@@ -207,7 +207,7 @@ bool CompassRose::onUpdateCentered(const base::Boolean* const x)
 void CompassRose::draw()
 {
     lcSaveMatrix();
-        if (!centered) lcTranslate(0, displacement);    
+        if (!centered) lcTranslate(0, displacement);
         lcRotate(rot);
         graphics::Graphic::draw();
     lcRestoreMatrix();

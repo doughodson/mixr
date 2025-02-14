@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/Instrument.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/base/relations/Table1.hpp"
@@ -21,12 +21,12 @@ END_SLOTTABLE(Instrument)
 
 BEGIN_SLOT_MAP(Instrument)
     ON_SLOT(1, setSlotScalingTable, base::Table1)
-    ON_SLOT(2, setSlotInstVal,      base::Number)
+    ON_SLOT(2, setSlotInstVal,      base::INumber)
     ON_SLOT(3, setSlotAllowValPass, base::Boolean)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Instrument)
-    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdateInstVal, base::Number)
+    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdateInstVal, base::INumber)
 END_EVENT_HANDLER()
 
 Instrument::Instrument()
@@ -78,7 +78,7 @@ bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 //------------------------------------------------------------------------------
 // setSlotInstVal() -- sets our instrument value slot
 //------------------------------------------------------------------------------
-bool Instrument::setSlotInstVal(const base::Number* const newVal)
+bool Instrument::setSlotInstVal(const base::INumber* const newVal)
 {
     bool ok{};
     if (newVal != nullptr) ok = setInstVal(newVal->asDouble());
@@ -110,7 +110,7 @@ bool Instrument::setAllowValPass(const bool newVP)
 //------------------------------------------------------------------------------
 // update our instrument value
 //------------------------------------------------------------------------------
-bool Instrument::onUpdateInstVal(const base::Number* const newPos)
+bool Instrument::onUpdateInstVal(const base::INumber* const newPos)
 {
     bool ok{};
     // now call our set function

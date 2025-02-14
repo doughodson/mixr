@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/landinggear/LandingLight.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <GL/glu.h>
 #include <iostream>
 
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(LandingLight)
 END_SLOTTABLE(LandingLight)
 
 BEGIN_SLOT_MAP(LandingLight)
-    ON_SLOT(1, setSlotLightRadius, base::Number)
+    ON_SLOT(1, setSlotLightRadius, base::INumber)
 END_SLOT_MAP()
 
 LandingLight::LandingLight()
@@ -48,7 +48,7 @@ bool LandingLight::setLightRadius(const double newLR)
 //------------------------------------------------------------------------------
 // setSlotLightRadius() - sets our light radius to be drawn
 //------------------------------------------------------------------------------
-bool LandingLight::setSlotLightRadius(const base::Number* const newLR)
+bool LandingLight::setSlotLightRadius(const base::INumber* const newLR)
 {
     bool ok{};
     if (newLR != nullptr) ok = setLightRadius(newLR->asDouble());

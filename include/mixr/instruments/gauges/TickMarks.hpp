@@ -5,7 +5,7 @@
 #include "mixr/instruments/gauges/AnalogGauge.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class Number; }
+namespace base { class Boolean; class Integer; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -42,9 +42,9 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotTickMarkLength(const base::Number* const);
+    bool setSlotTickMarkLength(const base::INumber* const);
     bool setSlotQuantity(const base::Integer* const);
-    bool setSlotGaugeLength(const base::Number* const);
+    bool setSlotGaugeLength(const base::INumber* const);
     bool setSlotFlip(const base::Boolean* const);
 };
 

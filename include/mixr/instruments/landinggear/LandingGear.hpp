@@ -49,8 +49,8 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotGearDownValue(const base::Number* const);
-    bool setSlotGearUpValue(const base::Number* const);
+    bool setSlotGearDownValue(const base::INumber* const);
+    bool setSlotGearUpValue(const base::INumber* const);
 };
 
 }

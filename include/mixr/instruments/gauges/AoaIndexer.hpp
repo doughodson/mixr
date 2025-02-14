@@ -69,12 +69,12 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotAoaRedMin(const base::Number* const);
-    bool setSlotAoaRedMax(const base::Number* const);
-    bool setSlotAoaYellowMin(const base::Number* const);
-    bool setSlotAoaYellowMax(const base::Number* const);
-    bool setSlotAoaGreenMax(const base::Number* const);
-    bool setSlotAoaGreenMin(const base::Number* const);
+    bool setSlotAoaRedMin(const base::INumber* const);
+    bool setSlotAoaRedMax(const base::INumber* const);
+    bool setSlotAoaYellowMin(const base::INumber* const);
+    bool setSlotAoaYellowMax(const base::INumber* const);
+    bool setSlotAoaGreenMax(const base::INumber* const);
+    bool setSlotAoaGreenMin(const base::INumber* const);
 };
 
 }

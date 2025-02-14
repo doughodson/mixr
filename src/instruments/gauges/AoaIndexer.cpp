@@ -1,7 +1,7 @@
 #include "mixr/instruments/gauges/AoaIndexer.hpp"
 
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/angles.hpp"
 #include <GL/glu.h>
 
@@ -20,12 +20,12 @@ BEGIN_SLOTTABLE(AoAIndexer)
 END_SLOTTABLE(AoAIndexer)
 
 BEGIN_SLOT_MAP(AoAIndexer)
-    ON_SLOT(1, setSlotAoaRedMax,    base::Number)
-    ON_SLOT(2, setSlotAoaRedMin,    base::Number)
-    ON_SLOT(3, setSlotAoaGreenMax,  base::Number)
-    ON_SLOT(4, setSlotAoaGreenMin,  base::Number)
-    ON_SLOT(5, setSlotAoaYellowMax, base::Number)
-    ON_SLOT(6, setSlotAoaYellowMin, base::Number)
+    ON_SLOT(1, setSlotAoaRedMax,    base::INumber)
+    ON_SLOT(2, setSlotAoaRedMin,    base::INumber)
+    ON_SLOT(3, setSlotAoaGreenMax,  base::INumber)
+    ON_SLOT(4, setSlotAoaGreenMin,  base::INumber)
+    ON_SLOT(5, setSlotAoaYellowMax, base::INumber)
+    ON_SLOT(6, setSlotAoaYellowMin, base::INumber)
 END_SLOT_MAP()
 
 AoAIndexer::AoAIndexer()
@@ -251,7 +251,7 @@ void AoAIndexer::updateData(const double dt)
 //------------------------------------------------------------------------------
 // setSlotAoaRedMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaRedMax(const base::Number* const newRMax)
+bool AoAIndexer::setSlotAoaRedMax(const base::INumber* const newRMax)
 {
     bool ok = false;
     if (newRMax != nullptr) ok = setAoaRedMax(newRMax->asDouble());
@@ -260,7 +260,7 @@ bool AoAIndexer::setSlotAoaRedMax(const base::Number* const newRMax)
 //------------------------------------------------------------------------------
 // setSlotAoaRedMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaRedMin(const base::Number* const newRMin)
+bool AoAIndexer::setSlotAoaRedMin(const base::INumber* const newRMin)
 {
     bool ok = false;
     if (newRMin != nullptr) ok = setAoaRedMin(newRMin->asDouble());
@@ -269,7 +269,7 @@ bool AoAIndexer::setSlotAoaRedMin(const base::Number* const newRMin)
 //------------------------------------------------------------------------------
 // setSlotAoaYellowMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaYellowMax(const base::Number* const newYMax)
+bool AoAIndexer::setSlotAoaYellowMax(const base::INumber* const newYMax)
 {
     bool ok = false;
     if (newYMax != nullptr) ok = setAoaYellowMax(newYMax->asDouble());
@@ -278,7 +278,7 @@ bool AoAIndexer::setSlotAoaYellowMax(const base::Number* const newYMax)
 //------------------------------------------------------------------------------
 // setSlotAoaYellowMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaYellowMin(const base::Number* const newYMin)
+bool AoAIndexer::setSlotAoaYellowMin(const base::INumber* const newYMin)
 {
     bool ok = false;
     if (newYMin != nullptr) ok = setAoaYellowMin(newYMin->asDouble());
@@ -287,7 +287,7 @@ bool AoAIndexer::setSlotAoaYellowMin(const base::Number* const newYMin)
 //------------------------------------------------------------------------------
 // setSlotAoaGreenMax()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaGreenMax(const base::Number* const newGMax)
+bool AoAIndexer::setSlotAoaGreenMax(const base::INumber* const newGMax)
 {
     bool ok = false;
     if (newGMax != nullptr) ok = setAoaGreenMax(newGMax->asDouble());
@@ -296,7 +296,7 @@ bool AoAIndexer::setSlotAoaGreenMax(const base::Number* const newGMax)
 //------------------------------------------------------------------------------
 // setSlotAoaGreenMin()
 //------------------------------------------------------------------------------
-bool AoAIndexer::setSlotAoaGreenMin(const base::Number* const newGMin)
+bool AoAIndexer::setSlotAoaGreenMin(const base::INumber* const newGMin)
 {
     bool ok = false;
     if (newGMin != nullptr) ok = setAoaGreenMin(newGMin->asDouble());

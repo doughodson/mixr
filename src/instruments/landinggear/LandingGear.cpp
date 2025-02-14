@@ -1,6 +1,6 @@
 
 #include "mixr/instruments/landinggear/LandingGear.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -17,8 +17,8 @@ BEGIN_SLOTTABLE(LandingGear)
 END_SLOTTABLE(LandingGear)
 
 BEGIN_SLOT_MAP(LandingGear)
-    ON_SLOT(1, setSlotGearDownValue, base::Number)
-    ON_SLOT(2, setSlotGearUpValue,   base::Number)
+    ON_SLOT(1, setSlotGearDownValue, base::INumber)
+    ON_SLOT(2, setSlotGearUpValue,   base::INumber)
 END_SLOT_MAP()
 
 LandingGear::LandingGear()
@@ -43,7 +43,7 @@ void LandingGear::copyData(const LandingGear& org, const bool)
 //------------------------------------------------------------------------------
 // setSlotGearDownValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearDownValue(const base::Number* const newDV)
+bool LandingGear::setSlotGearDownValue(const base::INumber* const newDV)
 {
     bool ok{};
     if (newDV != nullptr) ok = setGearDownValue(newDV->asDouble());
@@ -52,7 +52,7 @@ bool LandingGear::setSlotGearDownValue(const base::Number* const newDV)
 //------------------------------------------------------------------------------
 // setSlotGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setSlotGearUpValue(const base::Number* const newUV)
+bool LandingGear::setSlotGearUpValue(const base::INumber* const newUV)
 {
     bool ok{};
     if (newUV != nullptr) ok = setGearUpValue(newUV->asDouble());

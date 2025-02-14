@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/gauges/AnalogGauge.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -18,8 +18,8 @@ BEGIN_SLOTTABLE(AnalogGauge)
 END_SLOTTABLE(AnalogGauge)
 
 BEGIN_SLOT_MAP(AnalogGauge)
-    ON_SLOT(1, setSlotLeftBoundary,  base::Number)
-    ON_SLOT(2, setSlotRightBoundary, base::Number)
+    ON_SLOT(1, setSlotLeftBoundary,  base::INumber)
+    ON_SLOT(2, setSlotRightBoundary, base::INumber)
     ON_SLOT(3, setSlotIsOutlined,    base::Boolean)
     ON_SLOT(4, setSlotIsVertical,    base::Boolean)
 END_SLOT_MAP()
@@ -83,7 +83,7 @@ void AnalogGauge::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotLeftBoundary() -- sets the left side of the gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotLeftBoundary(const base::Number* const newLB)
+bool AnalogGauge::setSlotLeftBoundary(const base::INumber* const newLB)
 {
     bool ok = false;
     if (newLB != nullptr) ok = setLeftBoundary(newLB->asDouble());
@@ -92,7 +92,7 @@ bool AnalogGauge::setSlotLeftBoundary(const base::Number* const newLB)
 //------------------------------------------------------------------------------
 // setSlotRightBoundary() -- sets the right side of the gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotRightBoundary(const base::Number* const newRB)
+bool AnalogGauge::setSlotRightBoundary(const base::INumber* const newRB)
 {
     bool ok = false;
     if (newRB != nullptr) ok = setRightBoundary(newRB->asDouble());

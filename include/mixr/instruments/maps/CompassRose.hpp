@@ -6,7 +6,7 @@
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Number; }
+namespace base { class Boolean; class INumber; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -50,11 +50,11 @@ public:
 
 protected:
     // event functions
-    bool onUpdateRotDeg(const base::Number* const);
-    bool onUpdateRadius(const base::Number* const);
-    bool onUpdateCenRad(const base::Number* const);
-    bool onUpdateDecRadius(const base::Number* const);
-    bool onUpdateDisplacement(const base::Number* const);
+    bool onUpdateRotDeg(const base::INumber* const);
+    bool onUpdateRadius(const base::INumber* const);
+    bool onUpdateCenRad(const base::INumber* const);
+    bool onUpdateDecRadius(const base::INumber* const);
+    bool onUpdateDisplacement(const base::INumber* const);
     bool onUpdateCentered(const base::Boolean* const);
 
 private:
@@ -70,9 +70,9 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotCenteredRadius(const base::Number* const);
-    bool setSlotDeCenteredRadius(const base::Number* const);
-    bool setSlotDisplacement(const base::Number* const);
+    bool setSlotCenteredRadius(const base::INumber* const);
+    bool setSlotDeCenteredRadius(const base::INumber* const);
+    bool setSlotDisplacement(const base::INumber* const);
 };
 
 }

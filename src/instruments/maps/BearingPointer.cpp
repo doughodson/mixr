@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/maps/BearingPointer.hpp"
 
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/angles.hpp"
 
 namespace mixr {
@@ -21,8 +21,8 @@ END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(BearingPointer)
     ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::IAngle)    // Sets bearing to this base::Angle
-    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Number)   // Sets bearing to this angle in radians
-    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, base::Number)  // Sets bearing to this angle in degrees
+    ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::INumber)   // Sets bearing to this angle in radians
+    ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDegBearingPointer, base::INumber)  // Sets bearing to this angle in degrees
 END_EVENT_HANDLER()
 
 BearingPointer::BearingPointer()
@@ -77,7 +77,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const base::IAngle* const x)
 //------------------------------------------------------------------------------
 //  onUpdateRadBearingPointer() - update bearing angle by number
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateRadBearingPointer(const base::Number* const msg)
+bool BearingPointer::onUpdateRadBearingPointer(const base::INumber* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -90,7 +90,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const base::Number* const msg)
 //------------------------------------------------------------------------------
 //  onUpdateDegBearingPointer() - update bearing angle (degrees)
 //------------------------------------------------------------------------------
-bool BearingPointer::onUpdateDegBearingPointer(const base::Number* const msg)
+bool BearingPointer::onUpdateDegBearingPointer(const base::INumber* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {

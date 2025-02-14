@@ -2,7 +2,7 @@
 #include "mixr/instruments/gauges/Tape.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include <iostream>
 
@@ -25,11 +25,11 @@ END_SLOTTABLE(Tape)
 
 BEGIN_SLOT_MAP(Tape)
     ON_SLOT(1, setSlotRange,     base::Integer)
-    ON_SLOT(2, setSlotHeight,    base::Number)
+    ON_SLOT(2, setSlotHeight,    base::INumber)
     ON_SLOT(3, setSlotIncrement, base::Integer)
     ON_SLOT(4, setSlotVertical,  base::Boolean)
-    ON_SLOT(5, setSlotMaxNum,    base::Number)
-    ON_SLOT(6, setSlotMinNum,    base::Number)
+    ON_SLOT(5, setSlotMaxNum,    base::INumber)
+    ON_SLOT(6, setSlotMinNum,    base::INumber)
     ON_SLOT(7, setSlotConvert,   base::Boolean)
 END_SLOT_MAP()
 
@@ -92,7 +92,7 @@ bool Tape::setSlotRange(const base::Integer* const x)
 //------------------------------------------------------------------------------
 // setSlotHeight() - set the height of our viewable tape area
 //------------------------------------------------------------------------------
-bool Tape::setSlotHeight(const base::Number* const x)
+bool Tape::setSlotHeight(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setHeight(x->asDouble());
@@ -122,7 +122,7 @@ bool Tape::setSlotVertical(const base::Boolean* const x)
 //------------------------------------------------------------------------------
 // setSlotMaxNum() - set the tape's maximum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMaxNum(const base::Number* const x)
+bool Tape::setSlotMaxNum(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setMaxNumber(x->asDouble());
@@ -133,7 +133,7 @@ bool Tape::setSlotMaxNum(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMinNum() - set the tape's minimum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMinNum(const base::Number* const x)
+bool Tape::setSlotMinNum(const base::INumber* const x)
 {
     bool ok{};
     if (x != nullptr) ok = setMinNumber(x->asDouble());

@@ -2,7 +2,7 @@
 #include "mixr/instruments/eadi3d/Eadi3DPage.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/numeric/Number.hpp"
+#include "mixr/base/numeric/INumber.hpp"
 
 // setup local variables and static variables
 #define RADIUS_180  1.625                   /* 180 in view */
@@ -24,26 +24,26 @@ EMPTY_SLOTTABLE(Eadi3DPage)
 EMPTY_DELETEDATA(Eadi3DPage)
 
 BEGIN_EVENT_HANDLER(Eadi3DPage)
-    ON_EVENT_OBJ(USER_EVENTS+100, onEventSetAltitude,           base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+101, onEventSetAirspeed,           base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+102, onEventSetHeading,            base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+103, onEventSetAOA,                base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+104, onEventSetVVI,                base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+105, onEventSetPitch,              base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+106, onEventSetRoll,               base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+107, onEventSetMach,               base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+108, onEventSetGLoad,              base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+109, onEventSetLandingMode,        base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+110, onEventSetPitchSteeringCmd,   base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+111, onEventSetRollSteeringCmd,    base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+112, onEventSetPitchSteeringValid, base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+113, onEventSetRollSteeringValid,  base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+114, onEventSetGlideslopeDev,      base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+115, onEventSetLocalizerDev,       base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+116, onEventSetTurnRate,           base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+117, onEventSetSlipInd,            base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+118, onEventSetGlideslopeValid,    base::Number)
-    ON_EVENT_OBJ(USER_EVENTS+119, onEventSetLocalizerValid,     base::Number)
+    ON_EVENT_OBJ(USER_EVENTS+100, onEventSetAltitude,           base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+101, onEventSetAirspeed,           base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+102, onEventSetHeading,            base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+103, onEventSetAOA,                base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+104, onEventSetVVI,                base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+105, onEventSetPitch,              base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+106, onEventSetRoll,               base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+107, onEventSetMach,               base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+108, onEventSetGLoad,              base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+109, onEventSetLandingMode,        base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+110, onEventSetPitchSteeringCmd,   base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+111, onEventSetRollSteeringCmd,    base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+112, onEventSetPitchSteeringValid, base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+113, onEventSetRollSteeringValid,  base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+114, onEventSetGlideslopeDev,      base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+115, onEventSetLocalizerDev,       base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+116, onEventSetTurnRate,           base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+117, onEventSetSlipInd,            base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+118, onEventSetGlideslopeValid,    base::INumber)
+    ON_EVENT_OBJ(USER_EVENTS+119, onEventSetLocalizerValid,     base::INumber)
 END_EVENT_HANDLER()
 
 Eadi3DPage::Eadi3DPage() : radius(RADIUS_180), eadiObjs(RADIUS_180)
@@ -82,7 +82,7 @@ void Eadi3DPage::copyData(const Eadi3DPage& org, const bool)
 //------------------------------------------------------------------------------
 // onEventSetAltitude() - set altitude
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetAltitude(const base::Number* const x)
+bool Eadi3DPage::onEventSetAltitude(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -95,7 +95,7 @@ bool Eadi3DPage::onEventSetAltitude(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetAirspeed() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetAirspeed(const base::Number* const x)
+bool Eadi3DPage::onEventSetAirspeed(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -108,7 +108,7 @@ bool Eadi3DPage::onEventSetAirspeed(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetHeading() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetHeading(const base::Number* const x)
+bool Eadi3DPage::onEventSetHeading(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -121,7 +121,7 @@ bool Eadi3DPage::onEventSetHeading(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetAOA() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetAOA(const base::Number* const x)
+bool Eadi3DPage::onEventSetAOA(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -134,7 +134,7 @@ bool Eadi3DPage::onEventSetAOA(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetMach() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetMach(const base::Number* const x)
+bool Eadi3DPage::onEventSetMach(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -147,7 +147,7 @@ bool Eadi3DPage::onEventSetMach(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetVVI() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetVVI(const base::Number* const x)
+bool Eadi3DPage::onEventSetVVI(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -160,7 +160,7 @@ bool Eadi3DPage::onEventSetVVI(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetPitch() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetPitch(const base::Number* const x)
+bool Eadi3DPage::onEventSetPitch(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -173,7 +173,7 @@ bool Eadi3DPage::onEventSetPitch(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetRoll() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetRoll(const base::Number* const x)
+bool Eadi3DPage::onEventSetRoll(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -186,7 +186,7 @@ bool Eadi3DPage::onEventSetRoll(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetGLoad() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetGLoad(const base::Number* const x)
+bool Eadi3DPage::onEventSetGLoad(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -199,7 +199,7 @@ bool Eadi3DPage::onEventSetGLoad(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetLandingMode() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetLandingMode(const base::Number* const x)
+bool Eadi3DPage::onEventSetLandingMode(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -212,7 +212,7 @@ bool Eadi3DPage::onEventSetLandingMode(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetPitchSteeringCmd() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetPitchSteeringCmd(const base::Number* const x)
+bool Eadi3DPage::onEventSetPitchSteeringCmd(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -225,7 +225,7 @@ bool Eadi3DPage::onEventSetPitchSteeringCmd(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetRollSteeringCmd() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetRollSteeringCmd(const base::Number* const x)
+bool Eadi3DPage::onEventSetRollSteeringCmd(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -238,7 +238,7 @@ bool Eadi3DPage::onEventSetRollSteeringCmd(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetPitchSteeringValid() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetPitchSteeringValid(const base::Number* const x)
+bool Eadi3DPage::onEventSetPitchSteeringValid(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -251,7 +251,7 @@ bool Eadi3DPage::onEventSetPitchSteeringValid(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetRollSteeringValid() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetRollSteeringValid(const base::Number* const x)
+bool Eadi3DPage::onEventSetRollSteeringValid(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -264,7 +264,7 @@ bool Eadi3DPage::onEventSetRollSteeringValid(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetGlideslopeDev() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetGlideslopeDev(const base::Number* const x)
+bool Eadi3DPage::onEventSetGlideslopeDev(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -277,7 +277,7 @@ bool Eadi3DPage::onEventSetGlideslopeDev(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetLocalizerDev() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetLocalizerDev(const base::Number* const x)
+bool Eadi3DPage::onEventSetLocalizerDev(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -290,7 +290,7 @@ bool Eadi3DPage::onEventSetLocalizerDev(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetTurnRate() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetTurnRate(const base::Number* const x)
+bool Eadi3DPage::onEventSetTurnRate(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -303,7 +303,7 @@ bool Eadi3DPage::onEventSetTurnRate(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetSlipInd() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetSlipInd(const base::Number* const x)
+bool Eadi3DPage::onEventSetSlipInd(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -316,7 +316,7 @@ bool Eadi3DPage::onEventSetSlipInd(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetGlideslopeValid() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetGlideslopeValid(const base::Number* const x)
+bool Eadi3DPage::onEventSetGlideslopeValid(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
@@ -329,7 +329,7 @@ bool Eadi3DPage::onEventSetGlideslopeValid(const base::Number* const x)
 //------------------------------------------------------------------------------
 // onEventSetLocalizerValid() -
 //------------------------------------------------------------------------------
-bool Eadi3DPage::onEventSetLocalizerValid(const base::Number* const x)
+bool Eadi3DPage::onEventSetLocalizerValid(const base::INumber* const x)
 {
     bool ok = false;
     if (x != nullptr) {
