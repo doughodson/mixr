@@ -5,7 +5,7 @@
 #include "mixr/recorder/OutputHandler.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class NetHandler; class Number; }
+namespace base { class Boolean; class NetHandler; }
 namespace recorder {
 
 //------------------------------------------------------------------------------

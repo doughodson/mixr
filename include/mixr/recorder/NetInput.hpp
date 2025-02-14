@@ -5,7 +5,7 @@
 #include "mixr/recorder/InputHandler.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class NetHandler; class Number; }
+namespace base { class Boolean; class NetHandler; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace recorder {
 // Factory name: NetInput
 // Slots:
 //      netHandler  <NetHandler>    Network input handler
-//      noWait      <Number>        No wait (unblocked) I/O flag (default: false -- blocked I/O)
+//      noWait      <Boolean>       No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
 class NetInput : public InputHandler
 {

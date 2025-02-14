@@ -4,7 +4,6 @@
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/numeric/Number.hpp"
 
 namespace mixr {
 namespace recorder {
