@@ -13,20 +13,20 @@ class IAngle;
 class INumber;
 
 //------------------------------------------------------------------------------
-// Class: Transform
-// Description: Abstract class for coordinate transformations (e.g., translate, rotate, scale)
+// Class: ITransform
+// Description: Interface for coordinate transformations (e.g., translate, rotate, scale)
 //------------------------------------------------------------------------------
-// Factory name: Transform
+// Factory name: ITransform
 //------------------------------------------------------------------------------
 // Slots:
-//  x    <Number>   ! x transform (default: identity)
-//  x    <Angle>    ! x transform (default: identity)
-//  y    <Number>   ! y transform (default: identity)
-//  y    <Angle>    ! y transform (default: identity)
-//  z    <Number>   ! z transform (default: identity)
-//  z    <Angle>    ! z transform (default: identity)
-//  w    <Number>   ! w transform (default: identity)
-//  w    <Angle>    ! w transform (default: identity)
+//  x    <INumber>   ! x transform (default: identity)
+//  x    <IAngle>    ! x transform (default: identity)
+//  y    <INumber>   ! y transform (default: identity)
+//  y    <IAngle>    ! y transform (default: identity)
+//  z    <INumber>   ! z transform (default: identity)
+//  z    <IAngle>    ! z transform (default: identity)
+//  w    <INumber>   ! w transform (default: identity)
+//  w    <IAngle>    ! w transform (default: identity)
 //------------------------------------------------------------------------------
 class ITransform : public Object
 {
