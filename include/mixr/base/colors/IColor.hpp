@@ -15,7 +15,7 @@ class Vec3d;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Color
+// Factory name: IColor
 // Slots: (none)
 //------------------------------------------------------------------------------
 class IColor : public Object
