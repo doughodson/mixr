@@ -1,6 +1,6 @@
 
 #include "mixr/terrain/ded/DedFile.hpp"
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
 #include <fstream>
@@ -269,11 +269,11 @@ bool DedFile::getFileHeaders( std::istream& in )
                // Byte-swap
                uint32_t lTemp{};
                int16_t sTemp{};
-               base::NetHandler::fromNetOrder(&lTemp, fstat->ncell);
+               base::INetHandler::fromNetOrder(&lTemp, fstat->ncell);
                fstat->ncell = lTemp;
-               base::NetHandler::fromNetOrder(&sTemp, fstat->maxz);
+               base::INetHandler::fromNetOrder(&sTemp, fstat->maxz);
                fstat->maxz = sTemp;
-               base::NetHandler::fromNetOrder(&sTemp, fstat->minz);
+               base::INetHandler::fromNetOrder(&sTemp, fstat->minz);
                fstat->minz = sTemp;
             }
 
@@ -306,26 +306,26 @@ bool DedFile::getFileHeaders( std::istream& in )
                // Byte-swap
                if (ok) {
                   float fTemp{};
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->latstart);
                   cells[i]->latstart = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->latend);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->latend);
                   cells[i]->latend = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->longstart);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->longstart);
                   cells[i]->longstart = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->longend);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->longend);
                   cells[i]->longend = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalat);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->deltalat);
                   cells[i]->deltalat = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltalong);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->deltalong);
                   cells[i]->deltalong = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlat);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->nptlat);
                   cells[i]->nptlat = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->nptlong);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->nptlong);
                   cells[i]->nptlong = fTemp;
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltax);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->deltax);
                   cells[i]->deltax = fTemp;
 
-                  base::NetHandler::fromNetOrder(&fTemp, cells[i]->deltay);
+                  base::INetHandler::fromNetOrder(&fTemp, cells[i]->deltay);
                   cells[i]->deltay = fTemp;
 
                   #ifdef PRINT
@@ -418,7 +418,7 @@ bool DedFile::getData( std::istream& in )
             // Successful: Byte-swap
             short sTemp{};
             for (unsigned int j = 0; j < N; j++ ) {
-               base::NetHandler::fromNetOrder(&sTemp, columns[i][j]);
+               base::INetHandler::fromNetOrder(&sTemp, columns[i][j]);
                columns[i][j] = sTemp;
 
                // Check for min/max

@@ -8,7 +8,7 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -24,7 +24,7 @@ BEGIN_SLOTTABLE(PovHost)
 END_SLOTTABLE(PovHost)
 
 BEGIN_SLOT_MAP(PovHost)
-   ON_SLOT(1, setSlotNetOutput, base::NetHandler)
+   ON_SLOT(1, setSlotNetOutput, base::INetHandler)
 END_SLOT_MAP()
 
 PovHost::PovHost()
@@ -194,7 +194,7 @@ void PovHost::sendData()
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool PovHost::setSlotNetOutput(base::NetHandler* const x)
+bool PovHost::setSlotNetOutput(base::INetHandler* const x)
 {
    netOutput = x;
    return true;

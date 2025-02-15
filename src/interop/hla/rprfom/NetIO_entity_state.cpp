@@ -6,8 +6,6 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
-
 namespace mixr {
 namespace rprfom {
 

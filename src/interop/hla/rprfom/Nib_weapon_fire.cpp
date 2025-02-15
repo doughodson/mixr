@@ -8,7 +8,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/str_utils.hpp"
@@ -49,7 +49,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    unsigned short fireEvent {mPlayer->getReleaseEventID()};
    EventIdentifierStruct eventIdentifier;
-   base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
+   base::INetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
    base::utStrncpy(
       reinterpret_cast<char*>(&eventIdentifier.issuingObjectIdentifier.id[0]),
       sizeof(eventIdentifier.issuingObjectIdentifier.id),
@@ -71,9 +71,9 @@ bool Nib::weaponFireMsgFactory(const double)
 
       // World Coordinates
       WorldLocationStruct firingLocation;
-      base::NetHandler::toNetOrder(&firingLocation.x, geocPos[base::nav::IX]);
-      base::NetHandler::toNetOrder(&firingLocation.y, geocPos[base::nav::IY]);
-      base::NetHandler::toNetOrder(&firingLocation.z, geocPos[base::nav::IZ]);
+      base::INetHandler::toNetOrder(&firingLocation.x, geocPos[base::nav::IX]);
+      base::INetHandler::toNetOrder(&firingLocation.y, geocPos[base::nav::IY]);
+      base::INetHandler::toNetOrder(&firingLocation.z, geocPos[base::nav::IZ]);
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRING_LOCATION_WF_PI),
          reinterpret_cast<char*>(&firingLocation),
@@ -81,9 +81,9 @@ bool Nib::weaponFireMsgFactory(const double)
 
       // Velocity
       VelocityVectorStruct initialVelocityVector;
-      base::NetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[base::nav::IX]));
-      base::NetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[base::nav::IY]));
-      base::NetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[base::nav::IZ]));
+      base::INetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[base::nav::IX]));
+      base::INetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[base::nav::IY]));
+      base::INetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[base::nav::IZ]));
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::INITIAL_VELOCITY_VECTOR_WF_PI),
          reinterpret_cast<char*>(&initialVelocityVector),
@@ -174,7 +174,7 @@ bool Nib::weaponFireMsgFactory(const double)
       EntityTypeStruct munitionType;
       munitionType.entityKind = getEntityKind();
       munitionType.domain = getEntityDomain();
-      base::NetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
+      base::INetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
       munitionType.category  = getEntityCategory();
       munitionType.subcategory = getEntitySubcategory();
       munitionType.specific   = getEntitySpecific();
@@ -191,7 +191,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    {
       float fireControlSolutionRange {};
-      base::NetHandler::toNetOrder(&fireControlSolutionRange, 0 );
+      base::INetHandler::toNetOrder(&fireControlSolutionRange, 0 );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_CONTROL_SOLUTION_RANGE_WF_PI),
          reinterpret_cast<char*>(&fireControlSolutionRange),
@@ -204,7 +204,7 @@ bool Nib::weaponFireMsgFactory(const double)
    {
       uint32_t fireMissionIndex {};
       uint32_t netBuffer {};
-      base::NetHandler::toNetOrder(&netBuffer, fireMissionIndex );
+      base::INetHandler::toNetOrder(&netBuffer, fireMissionIndex );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_MISSION_INDEX_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -217,7 +217,7 @@ bool Nib::weaponFireMsgFactory(const double)
    {
       FuseTypeEnum16 fuseType {FuseTypeOther};
       unsigned short netBuffer {};
-      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
+      base::INetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FUSE_TYPE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -230,7 +230,7 @@ bool Nib::weaponFireMsgFactory(const double)
    {
       unsigned short quantityFired {1};
       unsigned short netBuffer {};
-      base::NetHandler::toNetOrder(&netBuffer, quantityFired );
+      base::INetHandler::toNetOrder(&netBuffer, quantityFired );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::QUANTITY_FIRED_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -243,7 +243,7 @@ bool Nib::weaponFireMsgFactory(const double)
    {
       unsigned short rateOfFire {};
       unsigned short netBuffer {};
-      base::NetHandler::toNetOrder(&netBuffer, rateOfFire );
+      base::INetHandler::toNetOrder(&netBuffer, rateOfFire );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RATE_OF_FIRE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -256,7 +256,7 @@ bool Nib::weaponFireMsgFactory(const double)
    {
       WarheadTypeEnum16 warheadType {WarheadTypeOther};
       unsigned short netBuffer {};
-      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
+      base::INetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::WARHEAD_TYPE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),

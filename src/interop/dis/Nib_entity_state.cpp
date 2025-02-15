@@ -21,7 +21,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/string_utils.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -707,7 +707,7 @@ bool Nib::entityStateManager(const double curExecTime)
       unsigned short length {static_cast<unsigned short>(sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(VpArticulatedPart)))};
       pdu->header.length = length;
 
-      if (base::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
+      if (base::INetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
       ok = disIO->sendData( reinterpret_cast<char*>(pdu), length );
    }
    return ok;

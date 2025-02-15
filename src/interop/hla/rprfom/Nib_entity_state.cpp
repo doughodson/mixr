@@ -10,7 +10,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 
 namespace mixr {
 namespace rprfom {
@@ -48,9 +48,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
             case NetIO::ENTITY_IDENTIFIER_AI : {
                EntityIdentifierStruct* net {reinterpret_cast<EntityIdentifierStruct*>(&netBuffer)};
 
-               base::NetHandler::fromNetOrder(&baseEntity->entityIdentifier.federateIdentifier.applicationID, net->federateIdentifier.applicationID );
-               base::NetHandler::fromNetOrder(&baseEntity->entityIdentifier.federateIdentifier.siteID, net->federateIdentifier.siteID );
-               base::NetHandler::fromNetOrder(&baseEntity->entityIdentifier.entityNumber, net->entityNumber );
+               base::INetHandler::fromNetOrder(&baseEntity->entityIdentifier.federateIdentifier.applicationID, net->federateIdentifier.applicationID );
+               base::INetHandler::fromNetOrder(&baseEntity->entityIdentifier.federateIdentifier.siteID, net->federateIdentifier.siteID );
+               base::INetHandler::fromNetOrder(&baseEntity->entityIdentifier.entityNumber, net->entityNumber );
 
                setAttributeUpdateRequiredFlag(NetIO::ENTITY_IDENTIFIER_AI, true);
             }
@@ -62,7 +62,7 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
 
                // All bytes except for country
                baseEntity->entityType = *net;
-               base::NetHandler::fromNetOrder(&baseEntity->entityType.countryCode, net->countryCode);
+               base::INetHandler::fromNetOrder(&baseEntity->entityType.countryCode, net->countryCode);
 
                setAttributeUpdateRequiredFlag(NetIO::ENTITY_TYPE_AI, true);
             }
@@ -145,9 +145,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
                }  // end dead rec switch
 
                if (netWorldLocation != nullptr) {
-                  base::NetHandler::fromNetOrder(&worldLocation->x, netWorldLocation->x);
-                  base::NetHandler::fromNetOrder(&worldLocation->y, netWorldLocation->y);
-                  base::NetHandler::fromNetOrder(&worldLocation->z, netWorldLocation->z);
+                  base::INetHandler::fromNetOrder(&worldLocation->x, netWorldLocation->x);
+                  base::INetHandler::fromNetOrder(&worldLocation->y, netWorldLocation->y);
+                  base::INetHandler::fromNetOrder(&worldLocation->z, netWorldLocation->z);
                }
                else {
                   worldLocation->x = 0;
@@ -156,9 +156,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
                }
 
                if (netOrientation != nullptr) {
-                  base::NetHandler::fromNetOrder(&orientation->phi, netOrientation->phi);
-                  base::NetHandler::fromNetOrder(&orientation->theta, netOrientation->theta);
-                  base::NetHandler::fromNetOrder(&orientation->psi, netOrientation->psi);
+                  base::INetHandler::fromNetOrder(&orientation->phi, netOrientation->phi);
+                  base::INetHandler::fromNetOrder(&orientation->theta, netOrientation->theta);
+                  base::INetHandler::fromNetOrder(&orientation->psi, netOrientation->psi);
                }
                else {
                   orientation->phi = 0;
@@ -167,9 +167,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
                }
 
                if (netVelocityVector != nullptr) {
-                  base::NetHandler::fromNetOrder(&velocityVector->xVelocity, netVelocityVector->xVelocity);
-                  base::NetHandler::fromNetOrder(&velocityVector->yVelocity, netVelocityVector->yVelocity);
-                  base::NetHandler::fromNetOrder(&velocityVector->zVelocity, netVelocityVector->zVelocity);
+                  base::INetHandler::fromNetOrder(&velocityVector->xVelocity, netVelocityVector->xVelocity);
+                  base::INetHandler::fromNetOrder(&velocityVector->yVelocity, netVelocityVector->yVelocity);
+                  base::INetHandler::fromNetOrder(&velocityVector->zVelocity, netVelocityVector->zVelocity);
                }
                else {
                   velocityVector->xVelocity = 0;
@@ -178,9 +178,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
                }
 
                if (netAccelerationVector != nullptr) {
-                  base::NetHandler::fromNetOrder(&accelerationVector->xAcceleration, netAccelerationVector->xAcceleration);
-                  base::NetHandler::fromNetOrder(&accelerationVector->yAcceleration, netAccelerationVector->yAcceleration);
-                  base::NetHandler::fromNetOrder(&accelerationVector->zAcceleration, netAccelerationVector->zAcceleration);
+                  base::INetHandler::fromNetOrder(&accelerationVector->xAcceleration, netAccelerationVector->xAcceleration);
+                  base::INetHandler::fromNetOrder(&accelerationVector->yAcceleration, netAccelerationVector->yAcceleration);
+                  base::INetHandler::fromNetOrder(&accelerationVector->zAcceleration, netAccelerationVector->zAcceleration);
                }
                else {
                   accelerationVector->xAcceleration = 0;
@@ -189,9 +189,9 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
                }
 
                if (netAngularVelocity != nullptr) {
-                  base::NetHandler::fromNetOrder(&angularVelocity->xAngularVelocity, netAngularVelocity->xAngularVelocity);
-                  base::NetHandler::fromNetOrder(&angularVelocity->yAngularVelocity, netAngularVelocity->yAngularVelocity);
-                  base::NetHandler::fromNetOrder(&angularVelocity->zAngularVelocity, netAngularVelocity->zAngularVelocity);
+                  base::INetHandler::fromNetOrder(&angularVelocity->xAngularVelocity, netAngularVelocity->xAngularVelocity);
+                  base::INetHandler::fromNetOrder(&angularVelocity->yAngularVelocity, netAngularVelocity->yAngularVelocity);
+                  base::INetHandler::fromNetOrder(&angularVelocity->zAngularVelocity, netAngularVelocity->zAngularVelocity);
                }
                else {
                   angularVelocity->xAngularVelocity = 0;
@@ -425,9 +425,9 @@ void Nib::updateBasicEntity(
          //std::cout << "Send Federate ID: (" << entityId->entityNumber << "," << entityId->federateIdentifier.applicationID << "," << entityId->federateIdentifier.siteID << ")" << std::endl;
 
          EntityIdentifierStruct netBuffer;
-         base::NetHandler::toNetOrder(&netBuffer.federateIdentifier.applicationID, entityId->federateIdentifier.applicationID );
-         base::NetHandler::toNetOrder(&netBuffer.federateIdentifier.siteID, entityId->federateIdentifier.siteID );
-         base::NetHandler::toNetOrder(&netBuffer.entityNumber, entityId->entityNumber );
+         base::INetHandler::toNetOrder(&netBuffer.federateIdentifier.applicationID, entityId->federateIdentifier.applicationID );
+         base::INetHandler::toNetOrder(&netBuffer.federateIdentifier.siteID, entityId->federateIdentifier.siteID );
+         base::INetHandler::toNetOrder(&netBuffer.entityNumber, entityId->entityNumber );
          attrs->add(netIO->getObjectAttributeHandle(
                NetIO::ENTITY_IDENTIFIER_AI),
                reinterpret_cast<char*>(&netBuffer),
@@ -451,7 +451,7 @@ void Nib::updateBasicEntity(
 
          // Network byte order: all bytes except country code which is unsigned short.
          EntityTypeStruct netBuffer {*entityType};
-         base::NetHandler::toNetOrder(&netBuffer.countryCode, entityType->countryCode );
+         base::INetHandler::toNetOrder(&netBuffer.countryCode, entityType->countryCode );
          attrs->add(netIO->getObjectAttributeHandle(
                NetIO::ENTITY_TYPE_AI),
                reinterpret_cast<char*>(&netBuffer),
@@ -533,9 +533,9 @@ void Nib::updateBasicEntity(
             worldLocation->y = geocPos[base::nav::IY];
             worldLocation->z = geocPos[base::nav::IZ];
 
-            base::NetHandler::toNetOrder(&netWorldLocation->x, worldLocation->x);
-            base::NetHandler::toNetOrder(&netWorldLocation->y, worldLocation->y);
-            base::NetHandler::toNetOrder(&netWorldLocation->z, worldLocation->z);
+            base::INetHandler::toNetOrder(&netWorldLocation->x, worldLocation->x);
+            base::INetHandler::toNetOrder(&netWorldLocation->y, worldLocation->y);
+            base::INetHandler::toNetOrder(&netWorldLocation->z, worldLocation->z);
          }
 
          // Velocity vector
@@ -547,9 +547,9 @@ void Nib::updateBasicEntity(
             velocityVector->yVelocity = static_cast<RTI::Float>(geocVel[base::nav::IY]);
             velocityVector->zVelocity = static_cast<RTI::Float>(geocVel[base::nav::IZ]);
 
-            base::NetHandler::toNetOrder(&netVelocityVector->xVelocity, velocityVector->xVelocity);
-            base::NetHandler::toNetOrder(&netVelocityVector->yVelocity, velocityVector->yVelocity);
-            base::NetHandler::toNetOrder(&netVelocityVector->zVelocity, velocityVector->zVelocity);
+            base::INetHandler::toNetOrder(&netVelocityVector->xVelocity, velocityVector->xVelocity);
+            base::INetHandler::toNetOrder(&netVelocityVector->yVelocity, velocityVector->yVelocity);
+            base::INetHandler::toNetOrder(&netVelocityVector->zVelocity, velocityVector->zVelocity);
          }
 
          // Acceleration vector
@@ -561,9 +561,9 @@ void Nib::updateBasicEntity(
             accelerationVector->yAcceleration = static_cast<RTI::Float>(geocAcc[base::nav::IY]);
             accelerationVector->zAcceleration = static_cast<RTI::Float>(geocAcc[base::nav::IZ]);
 
-            base::NetHandler::toNetOrder(&netAccelerationVector->xAcceleration, accelerationVector->xAcceleration);
-            base::NetHandler::toNetOrder(&netAccelerationVector->yAcceleration, accelerationVector->yAcceleration);
-            base::NetHandler::toNetOrder(&netAccelerationVector->zAcceleration, accelerationVector->zAcceleration);
+            base::INetHandler::toNetOrder(&netAccelerationVector->xAcceleration, accelerationVector->xAcceleration);
+            base::INetHandler::toNetOrder(&netAccelerationVector->yAcceleration, accelerationVector->yAcceleration);
+            base::INetHandler::toNetOrder(&netAccelerationVector->zAcceleration, accelerationVector->zAcceleration);
          }
 
          // Orientation
@@ -579,9 +579,9 @@ void Nib::updateBasicEntity(
             orientation->theta = static_cast<RTI::Float>(geocAngles[base::nav::ITHETA]);
             orientation->psi   = static_cast<RTI::Float>(geocAngles[base::nav::IPSI]);
 
-            base::NetHandler::toNetOrder(&netOrientation->phi, orientation->phi);
-            base::NetHandler::toNetOrder(&netOrientation->theta, orientation->theta);
-            base::NetHandler::toNetOrder(&netOrientation->psi, orientation->psi);
+            base::INetHandler::toNetOrder(&netOrientation->phi, orientation->phi);
+            base::INetHandler::toNetOrder(&netOrientation->theta, orientation->theta);
+            base::INetHandler::toNetOrder(&netOrientation->psi, orientation->psi);
          }
 
          // Angular velocity vector (all zeros for now)
@@ -593,9 +593,9 @@ void Nib::updateBasicEntity(
             angularVelocityVector->yAngularVelocity = 0;
             angularVelocityVector->zAngularVelocity = 0;
 
-            base::NetHandler::toNetOrder(&netAngularVelocityVector->xAngularVelocity, angularVelocityVector->xAngularVelocity);
-            base::NetHandler::toNetOrder(&netAngularVelocityVector->yAngularVelocity, angularVelocityVector->yAngularVelocity);
-            base::NetHandler::toNetOrder(&netAngularVelocityVector->zAngularVelocity, angularVelocityVector->zAngularVelocity);
+            base::INetHandler::toNetOrder(&netAngularVelocityVector->xAngularVelocity, angularVelocityVector->xAngularVelocity);
+            base::INetHandler::toNetOrder(&netAngularVelocityVector->yAngularVelocity, angularVelocityVector->yAngularVelocity);
+            base::INetHandler::toNetOrder(&netAngularVelocityVector->zAngularVelocity, angularVelocityVector->zAngularVelocity);
          }
 
          attrs->add(

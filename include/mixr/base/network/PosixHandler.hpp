@@ -2,7 +2,7 @@
 #ifndef __mixr_base_PosixHandler_HPP__
 #define __mixr_base_PosixHandler_HPP__
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 
 #include <string>
 
@@ -72,9 +72,9 @@ class String;
 // use later in the code.  This will save a lot of pre-processor intervention
 // and make the code that much more enjoyable to read!
 //------------------------------------------------------------------------------
-class PosixHandler : public NetHandler
+class PosixHandler : public INetHandler
 {
-   DECLARE_SUBCLASS(PosixHandler, NetHandler)
+   DECLARE_SUBCLASS(PosixHandler, INetHandler)
 
 public:
    PosixHandler();

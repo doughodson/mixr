@@ -14,7 +14,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -161,7 +161,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     // ---
     // Send the PDU
     // ---
-    if (base::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+    if (base::INetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
     ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
     // Set the detonation message sent flag so that we don't do this again.

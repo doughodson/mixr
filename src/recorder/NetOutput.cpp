@@ -2,7 +2,7 @@
 #include "mixr/recorder/NetOutput.hpp"
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 #include "mixr/recorder/DataRecordHandle.hpp"
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(NetOutput)
 END_SLOTTABLE(NetOutput)
 
 BEGIN_SLOT_MAP(NetOutput)
-    ON_SLOT(1, setSlotNetwork,   mixr::base::NetHandler)
+    ON_SLOT(1, setSlotNetwork,   mixr::base::INetHandler)
     ON_SLOT(2, setSlotNoWait,    mixr::base::Boolean)
 END_SLOT_MAP()
 
@@ -127,7 +127,7 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetOutput::setSlotNetwork(mixr::base::NetHandler* const msg)
+bool NetOutput::setSlotNetwork(mixr::base::INetHandler* const msg)
 {
    netHandler = msg;
    return true;

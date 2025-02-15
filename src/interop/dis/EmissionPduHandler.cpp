@@ -15,7 +15,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -516,7 +516,7 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
             //pdu->dumpData();
 
             const int length{pdu->header.length};
-            if (base::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
+            if (base::INetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
             pduSent = disIO->sendData(reinterpret_cast<char*>(pdu), length);
 
             setEmPduExecTime(curExecTime);

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_NetHandler_HPP__
-#define __mixr_base_NetHandler_HPP__
+#ifndef __mixr_base_INetHandler_HPP__
+#define __mixr_base_INetHandler_HPP__
 
 #include "mixr/base/Component.hpp"
 #include "mixr/base/util/platform_api.hpp"
@@ -10,8 +10,8 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: NetHandler
-// Description: Abstract (connectionless) network handler: Can be used for UDP/IP,
+// Class: INetHandler
+// Description: Interface that defines network handlers: Can be used for UDP/IP,
 //              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
 //              and can be used to send data, receive data, or both.
 //
@@ -19,12 +19,12 @@ namespace base {
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractNetHandler
+// Factory name: INetHandler
 // Slots: none
 //------------------------------------------------------------------------------
-class NetHandler : public Component
+class INetHandler : public Component
 {
-   DECLARE_SUBCLASS(NetHandler, Component)
+   DECLARE_SUBCLASS(INetHandler, Component)
 
 public:  // Define the Windows vs Unix socket type
    #if defined(WIN32)
@@ -38,7 +38,7 @@ public:  // Define the Windows vs Unix socket type
    #endif
 
 public:
-   NetHandler();
+   INetHandler();
 
    // Initialize the network handler -- 'noWaitFlag' is true for unblocked I/O
    // Note: all parameters (slots) need to be set before calling this function.
@@ -102,7 +102,7 @@ private:
 // ---
 // Convert to network byte order
 // ---
-inline void NetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
+inline void INetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -112,7 +112,7 @@ inline void NetHandler::toNetOrder(int16_t* const vout, const int16_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
+inline void INetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -122,7 +122,7 @@ inline void NetHandler::toNetOrder(uint16_t* const vout, const uint16_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
+inline void INetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -134,7 +134,7 @@ inline void NetHandler::toNetOrder(int32_t* const vout, const int32_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
+inline void INetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -146,7 +146,7 @@ inline void NetHandler::toNetOrder(uint32_t* const vout, const uint32_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
+inline void INetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -162,7 +162,7 @@ inline void NetHandler::toNetOrder(int64_t* const vout, const int64_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
+inline void INetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -178,7 +178,7 @@ inline void NetHandler::toNetOrder(uint64_t* const vout, const uint64_t vin)
     }
 }
 
-inline void NetHandler::toNetOrder(float* const vout, const float vin)
+inline void INetHandler::toNetOrder(float* const vout, const float vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -190,7 +190,7 @@ inline void NetHandler::toNetOrder(float* const vout, const float vin)
     }
 }
 
-inline void NetHandler::toNetOrder(double* const vout, const double vin)
+inline void INetHandler::toNetOrder(double* const vout, const double vin)
 {
     if (isNotNetworkByteOrder()) {
         auto p = const_cast<unsigned char*>(reinterpret_cast<const unsigned char*>(&vin));
@@ -210,49 +210,49 @@ inline void NetHandler::toNetOrder(double* const vout, const double vin)
 // ---
 // convert from network byte order
 // ---
-inline void NetHandler::fromNetOrder(int16_t* const vout, const int16_t vin)
+inline void INetHandler::fromNetOrder(int16_t* const vout, const int16_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(uint16_t* const vout, const uint16_t vin)
+inline void INetHandler::fromNetOrder(uint16_t* const vout, const uint16_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(int32_t* const vout, const int32_t vin)
+inline void INetHandler::fromNetOrder(int32_t* const vout, const int32_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(uint32_t* const vout, const uint32_t vin)
+inline void INetHandler::fromNetOrder(uint32_t* const vout, const uint32_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(int64_t* const vout, const int64_t vin)
+inline void INetHandler::fromNetOrder(int64_t* const vout, const int64_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(uint64_t* const vout, const uint64_t vin)
+inline void INetHandler::fromNetOrder(uint64_t* const vout, const uint64_t vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(float* const vout, const float vin)
+inline void INetHandler::fromNetOrder(float* const vout, const float vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);
 }
 
-inline void NetHandler::fromNetOrder(double* const vout, const double vin)
+inline void INetHandler::fromNetOrder(double* const vout, const double vin)
 {
     // Same as the 'to' function
     return toNetOrder(vout,vin);

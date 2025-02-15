@@ -8,8 +8,6 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
-
 #include "mixr/base/util/str_utils.hpp"
 
 #include <iostream>

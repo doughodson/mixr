@@ -7,7 +7,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class IAngle; class Integer; class ILength; class NetHandler; class Identifier; }
+namespace base { class IAngle; class Integer; class ILength; class INetHandler; class Identifier; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }
 namespace dis {
@@ -44,8 +44,8 @@ struct ActionResponsePDU_R;
 // Description: Distributed-Interactive-Simulation (DIS) protocol manager.
 //
 // Slots:
-//    netInput    <base::NetHandler>         ! Network input handler
-//    netOutput   <base::NetHandler>         ! Network output handler
+//    netInput    <base::INetHandler>        ! Network input handler
+//    netOutput   <base::INetHandler>        ! Network output handler
 //
 //    version     <base::Integer>            ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
 //                                           !   0 => Other
@@ -330,8 +330,8 @@ protected:
 private:
     void initData();
 
-    base::safe_ptr<base::NetHandler> netInput;    // Input network handler
-    base::safe_ptr<base::NetHandler> netOutput;   // Output network handler
+    base::safe_ptr<base::INetHandler> netInput;    // Input network handler
+    base::safe_ptr<base::INetHandler> netOutput;   // Output network handler
     unsigned char version{VERSION_1278_1A};       // Version number [ 0 .. 6 ]
 
    // Network Model IDs
@@ -364,14 +364,14 @@ private:
    // slot table helper methods
    bool setSlotFederateName(const base::Identifier* const) final;     // Sets our federate name
    bool setSlotFederationName(const base::Identifier* const) final;   // Sets our federation name
-   bool setSlotMaxTimeDR(const base::ITime* const) final;              // Sets the max DR time(s) for all entity types
-   bool setSlotMaxPositionErr(const base::ILength* const) final;       // Sets the max positional error(s) for all entity types
-   bool setSlotMaxOrientationErr(const base::IAngle* const) final;     // Sets the max orientation error(s) for all entity types
-   bool setSlotMaxEntityRange(const base::ILength* const) final;       // Sets the max entity range(s) for all entity types
-   bool setSlotMaxAge(const base::ITime* const) final;                 // Sets the max age(s) for all entity types
+   bool setSlotMaxTimeDR(const base::ITime* const) final;             // Sets the max DR time(s) for all entity types
+   bool setSlotMaxPositionErr(const base::ILength* const) final;      // Sets the max positional error(s) for all entity types
+   bool setSlotMaxOrientationErr(const base::IAngle* const) final;    // Sets the max orientation error(s) for all entity types
+   bool setSlotMaxEntityRange(const base::ILength* const) final;      // Sets the max entity range(s) for all entity types
+   bool setSlotMaxAge(const base::ITime* const) final;                // Sets the max age(s) for all entity types
 
-   bool setSlotNetInput(base::NetHandler* const);                     // Network input handler
-   bool setSlotNetOutput(base::NetHandler* const);                    // Network output handler
+   bool setSlotNetInput(base::INetHandler* const);                    // Network input handler
+   bool setSlotNetOutput(base::INetHandler* const);                   // Network output handler
    bool setSlotVersion(const base::Integer* const);                   // DIS version
    bool setSlotMaxTimeDR(const base::PairStream* const);              // Sets the max DR time(s) for selected entity types
    bool setSlotMaxPositionErr(const base::PairStream* const);         // Sets the max positional error(s) for selected entity types

@@ -31,7 +31,7 @@ OBJS =  \
     linearsystem/SecondOrderTf.o \
     linearsystem/Sz1.o \
     linearsystem/Sz2.o \
-	network/NetHandler.o \
+	network/INetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
 	network/TcpHandler.o \

@@ -5,7 +5,7 @@
 #include "mixr/simulation/IIgHost.hpp"
 
 namespace mixr {
-namespace base { class NetHandler; }
+namespace base { class INetHandler; }
 namespace models { class Player; }
 namespace pov {
 
@@ -35,7 +35,7 @@ private:
    void sendData();                        // send data block
    bool initNetwork();                     // initialize network connection
 
-   base::safe_ptr<base::NetHandler> netOutput;  // output network handler
+   base::safe_ptr<base::INetHandler> netOutput; // output network handler
    bool netInit{};                              // network has been initialized
    bool netInitFail{};                          // initialization attempt failed
    int scnt{};                                  // send timer
@@ -48,7 +48,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNetOutput(base::NetHandler* const);
+   bool setSlotNetOutput(base::INetHandler* const);
 };
 
 }

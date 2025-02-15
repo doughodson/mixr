@@ -11,7 +11,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -154,7 +154,7 @@ bool Nib::weaponFireMsgFactory(const double)
     //std::cout << "," << pdu.munitionID.simulationID.siteIdentification;
     //std::cout << ")" << std::endl;
 
-    if (base::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+    if (base::INetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
     ok = disIO->sendData(reinterpret_cast<char*>(&pdu),sizeof(pdu));
 
     return ok;

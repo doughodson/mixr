@@ -7,7 +7,7 @@
 
 #include "mixr/ighost/cigi/CigiHost.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"
 
@@ -49,8 +49,8 @@ BEGIN_SLOTTABLE(HostSession)
 END_SLOTTABLE(HostSession)
 
 BEGIN_SLOT_MAP(HostSession)
-   ON_SLOT(1, setSlotNetInput,  base::NetHandler)
-   ON_SLOT(2, setSlotNetOutput, base::NetHandler)
+   ON_SLOT(1, setSlotNetInput,  base::INetHandler)
+   ON_SLOT(2, setSlotNetOutput, base::INetHandler)
 END_SLOT_MAP()
 
 HostSession::HostSession()
@@ -261,13 +261,13 @@ void HostSession::processIgMessages()
    }
 }
 
-bool HostSession::setSlotNetInput(base::NetHandler* const msg)
+bool HostSession::setSlotNetInput(base::INetHandler* const msg)
 {
    netInput = msg;
    return true;
 }
 
-bool HostSession::setSlotNetOutput(base::NetHandler* const msg)
+bool HostSession::setSlotNetOutput(base::INetHandler* const msg)
 {
    netOutput = msg;
    return true;

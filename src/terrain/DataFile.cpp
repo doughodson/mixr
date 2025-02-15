@@ -1,7 +1,6 @@
 
 #include "mixr/terrain/DataFile.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
 #include "mixr/base/units/util/length_utils.hpp"
 

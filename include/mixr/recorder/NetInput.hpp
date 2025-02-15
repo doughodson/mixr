@@ -5,7 +5,7 @@
 #include "mixr/recorder/InputHandler.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class NetHandler; }
+namespace base { class Boolean; class INetHandler; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ namespace recorder {
 //
 // Factory name: NetInput
 // Slots:
-//      netHandler  <NetHandler>    Network input handler
+//      netHandler  <INetHandler>   Network input handler
 //      noWait      <Boolean>       No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
 class NetInput : public InputHandler
@@ -39,7 +39,7 @@ protected:
 private:
    void initData();
 
-    base::safe_ptr<mixr::base::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    base::safe_ptr<mixr::base::INetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool networkInitialized {};        // Network has been initialized
     bool networkInitFailed {};         // Network initialization has failed
     bool noWaitFlag {};                // No wait (unblocked) I/O flag
@@ -49,7 +49,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNetwork(base::NetHandler* const);
+   bool setSlotNetwork(base::INetHandler* const);
    bool setSlotNoWait(base::Boolean* const);
 };
 

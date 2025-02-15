@@ -14,7 +14,7 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/List.hpp"
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -76,8 +76,8 @@ BEGIN_SLOTTABLE(NetIO)
 END_SLOTTABLE(NetIO)
 
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1, setSlotNetInput,            base::NetHandler)
-   ON_SLOT(2, setSlotNetOutput,           base::NetHandler)
+   ON_SLOT(1, setSlotNetInput,            base::INetHandler)
+   ON_SLOT(2, setSlotNetOutput,           base::INetHandler)
    ON_SLOT(3, setSlotVersion,             base::Integer)
 
    ON_SLOT(4, setSlotMaxTimeDR,           base::ITime)
@@ -222,7 +222,7 @@ void NetIO::netInputHander()
                   case PDU_ENTITY_STATE: {
                      //std::cout << "Entity State PDU." << std::endl;
                      EntityStatePDU* pPdu{reinterpret_cast<EntityStatePDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->entityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->entityID.simulationID.applicationIdentification) {
                            processEntityStatePDU(pPdu);
@@ -232,7 +232,7 @@ void NetIO::netInputHander()
 
                   case PDU_FIRE: {
                      FirePDU* pPdu{reinterpret_cast<FirePDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
                            processFirePDU(pPdu);
@@ -242,7 +242,7 @@ void NetIO::netInputHander()
 
                   case PDU_DETONATION: {
                      DetonationPDU* pPdu{reinterpret_cast<DetonationPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->firingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->firingEntityID.simulationID.applicationIdentification) {
                            processDetonationPDU(pPdu);
@@ -252,7 +252,7 @@ void NetIO::netInputHander()
 
                   case PDU_SIGNAL: {
                      SignalPDU* pPdu{reinterpret_cast<SignalPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
                            processSignalPDU(pPdu);
@@ -262,7 +262,7 @@ void NetIO::netInputHander()
 
                   case PDU_TRANSMITTER: {
                      TransmitterPDU* pPdu{reinterpret_cast<TransmitterPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->radioRefID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->radioRefID.simulationID.applicationIdentification) {
                            processTransmitterPDU(pPdu);
@@ -272,7 +272,7 @@ void NetIO::netInputHander()
 
                   case PDU_ELECTROMAGNETIC_EMISSION: {
                      ElectromagneticEmissionPDU* pPdu{reinterpret_cast<ElectromagneticEmissionPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->emittingEntityID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->emittingEntityID.simulationID.applicationIdentification) {
                            processElectromagneticEmissionPDU(pPdu);
@@ -282,7 +282,7 @@ void NetIO::netInputHander()
 
                   case PDU_DATA_QUERY: {
                      DataQueryPDU* pPdu{reinterpret_cast<DataQueryPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processDataQueryPDU(pPdu);
@@ -292,7 +292,7 @@ void NetIO::netInputHander()
 
                   case PDU_DATA: {
                      DataPDU* pPdu{reinterpret_cast<DataPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processDataPDU(pPdu);
@@ -302,7 +302,7 @@ void NetIO::netInputHander()
 
                   case PDU_COMMENT: {
                      CommentPDU* pPdu{reinterpret_cast<CommentPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processCommentPDU(pPdu);
@@ -312,7 +312,7 @@ void NetIO::netInputHander()
 
                   case PDU_START_RESUME: {
                      StartPDU* pPdu{reinterpret_cast<StartPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processStartPDU(pPdu);
@@ -322,7 +322,7 @@ void NetIO::netInputHander()
 
                   case PDU_STOP_FREEZE: {
                      StopPDU* pPdu{reinterpret_cast<StopPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processStopPDU(pPdu);
@@ -332,7 +332,7 @@ void NetIO::netInputHander()
 
                   case PDU_ACKNOWLEDGE: {
                      AcknowledgePDU* pPdu{reinterpret_cast<AcknowledgePDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processAcknowledgePDU(pPdu);
@@ -342,7 +342,7 @@ void NetIO::netInputHander()
 
                   case PDU_ACTION_REQUEST: {
                      ActionRequestPDU* pPdu{reinterpret_cast<ActionRequestPDU*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processActionRequestPDU(pPdu);
@@ -352,7 +352,7 @@ void NetIO::netInputHander()
 
                   case PDU_ACTION_REQUEST_R: {
                      ActionRequestPDU_R* pPdu{reinterpret_cast<ActionRequestPDU_R*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processActionRequestPDU_R(pPdu);
@@ -362,7 +362,7 @@ void NetIO::netInputHander()
 
                   case PDU_ACTION_RESPONSE_R: {
                      ActionResponsePDU_R* pPdu{reinterpret_cast<ActionResponsePDU_R*>(header)};
-                     if (base::NetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
+                     if (base::INetHandler::isNotNetworkByteOrder()) pPdu->swapBytes();
                      if (getSiteID() != pPdu->originatingID.simulationID.siteIdentification ||
                         getApplicationID() != pPdu->originatingID.simulationID.applicationIdentification) {
                            processActionResponsePDU_R(pPdu);
@@ -1150,14 +1150,14 @@ bool NetIO::setSlotFederationName(const base::Identifier* const)
 }
 
 // Set Network Input Handler
-bool NetIO::setSlotNetInput(base::NetHandler* const msg)
+bool NetIO::setSlotNetInput(base::INetHandler* const msg)
 {
     netInput = msg;
     return true;
 }
 
 // Net Network Output Handler
-bool NetIO::setSlotNetOutput(base::NetHandler* const msg)
+bool NetIO::setSlotNetOutput(base::INetHandler* const msg)
 {
     netOutput = msg;
     return true;

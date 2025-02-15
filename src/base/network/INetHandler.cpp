@@ -22,22 +22,22 @@
 //    static const int SOCKET_ERROR{-1};
 #endif
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "AbstractNetHandler")
-EMPTY_SLOTTABLE(NetHandler)
-EMPTY_COPYDATA(NetHandler)
-EMPTY_DELETEDATA(NetHandler)
+IMPLEMENT_ABSTRACT_SUBCLASS(INetHandler, "INetHandler")
+EMPTY_SLOTTABLE(INetHandler)
+EMPTY_COPYDATA(INetHandler)
+EMPTY_DELETEDATA(INetHandler)
 
 // Byte order
-bool NetHandler::netByteOrder {checkByteOrder()};
+bool INetHandler::netByteOrder {checkByteOrder()};
 
-NetHandler::NetHandler()
+INetHandler::INetHandler()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -45,7 +45,7 @@ NetHandler::NetHandler()
 //------------------------------------------------------------------------------
 // Initialize the network handler --
 //------------------------------------------------------------------------------
-bool NetHandler::initNetwork(const bool noWaitFlag)
+bool INetHandler::initNetwork(const bool noWaitFlag)
 {
     // initialize socket
     bool ok {init()};
@@ -59,7 +59,7 @@ bool NetHandler::initNetwork(const bool noWaitFlag)
 //------------------------------------------------------------------------------
 // init() -- initialize the network
 //------------------------------------------------------------------------------
-bool NetHandler::init()
+bool INetHandler::init()
 {
     bool ok {true};
 
@@ -83,7 +83,7 @@ bool NetHandler::init()
 //            of 'nl' int (4 byte) words followed by 'ns' short (2 byte) words.
 //            The parameters 'nl' and 'ns' can be zero.
 //------------------------------------------------------------------------------
-void NetHandler::toNet(const void* const hostData, void* const netData, const int nl, const int ns)
+void INetHandler::toNet(const void* const hostData, void* const netData, const int nl, const int ns)
 {
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
@@ -113,7 +113,7 @@ void NetHandler::toNet(const void* const hostData, void* const netData, const in
 //            of 'nl' int (4 byte) words followed by 'ns' short (2 byte) words.
 //            The parameters 'nl' and 'ns' can be zero.
 //------------------------------------------------------------------------------
-void NetHandler::toHost(const void* const netData, void* const hostData, const int nl, const int ns)
+void INetHandler::toHost(const void* const netData, void* const hostData, const int nl, const int ns)
 {
    // Compute pointers to the int word (4 byte) and short
    // short word (2 byte) areas of the source (this).
@@ -136,7 +136,7 @@ void NetHandler::toHost(const void* const netData, void* const hostData, const i
 //------------------------------------------------------------------------------
 // checkByteOrder() -- Checks byte order and returns true if in network byte order
 //------------------------------------------------------------------------------
-bool NetHandler::checkByteOrder()
+bool INetHandler::checkByteOrder()
 {
     unsigned short n1 {1};
     unsigned short n2 = htons(n1);

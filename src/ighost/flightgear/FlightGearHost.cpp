@@ -8,7 +8,7 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/base/network/NetHandler.hpp"
+#include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -27,7 +27,7 @@ BEGIN_SLOTTABLE(FlightGearHost)
 END_SLOTTABLE(FlightGearHost)
 
 BEGIN_SLOT_MAP(FlightGearHost)
-   ON_SLOT(1, setSlotNetOutput, base::NetHandler)
+   ON_SLOT(1, setSlotNetOutput, base::INetHandler)
 END_SLOT_MAP()
 
 FlightGearHost::FlightGearHost()
@@ -204,7 +204,7 @@ void FlightGearHost::sendData()
 // Set Slot Functions
 //------------------------------------------------------------------------------
 
-bool FlightGearHost::setSlotNetOutput(base::NetHandler* const msg)
+bool FlightGearHost::setSlotNetOutput(base::INetHandler* const msg)
 {
    netOutput = msg;
    return true;

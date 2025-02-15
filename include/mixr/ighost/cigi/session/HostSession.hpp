@@ -23,7 +23,7 @@ class CigiIncomingMsg;
 class CigiOutgoingMsg;
 
 namespace mixr {
-namespace base { class NetHandler; }
+namespace base { class INetHandler; }
 namespace cigi {
 class CigiHost;
 class SignalProcessor;
@@ -38,8 +38,8 @@ class SignalProcessor;
 //
 // Factory name: CigiHostSession
 // Slots:
-//    netInput       (NetHandler)   Network input handler
-//    netOutput      (NetHandler)   Network output handler
+//    netInput       (INetHandler)   Network input handler
+//    netOutput      (INetHandler)   Network output handler
 //------------------------------------------------------------------------------
 class HostSession : public base::Component
 {
@@ -77,8 +77,8 @@ private:
 
    bool initNetworkConnections();
 
-   base::safe_ptr<base::NetHandler> netInput;   // input network handler
-   base::safe_ptr<base::NetHandler> netOutput;  // output network handler
+   base::safe_ptr<base::INetHandler> netInput;   // input network handler
+   base::safe_ptr<base::INetHandler> netOutput;  // output network handler
 
    bool networkInitialized{};                   // CIGI has been initialized
    bool networkInitFailed{};                    // CIGI initialization has failed
@@ -87,8 +87,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotNetInput(base::NetHandler* const);
-   bool setSlotNetOutput(base::NetHandler* const);
+   bool setSlotNetInput(base::INetHandler* const);
+   bool setSlotNetOutput(base::INetHandler* const);
 };
 
 }

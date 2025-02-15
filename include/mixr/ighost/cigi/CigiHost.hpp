@@ -28,7 +28,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 //class CigiOutgoingMsg;
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class NetHandler; }
+namespace base { class Boolean; class Integer; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class IWeapon;
