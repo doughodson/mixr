@@ -182,7 +182,7 @@ OBJS =  \
 	SlotTable.o \
 	Stack.o \
 	Statistic.o \
-	StateMachine.o \
+	IStateMachine.o \
 	String.o \
 	Timers.o \
 	Vectors.o

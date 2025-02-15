@@ -1,5 +1,5 @@
 
-#include "mixr/base/StateMachine.hpp"
+#include "mixr/base/IStateMachine.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -8,17 +8,17 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine, "AbstractStateMachine")
+IMPLEMENT_ABSTRACT_SUBCLASS(IStateMachine, "IStateMachine")
 
-BEGIN_SLOTTABLE(StateMachine)
+BEGIN_SLOTTABLE(IStateMachine)
     "stateMachines",  // 1: List of state machine objects (StateMachine class)
-END_SLOTTABLE(StateMachine)
+END_SLOTTABLE(IStateMachine)
 
-BEGIN_SLOT_MAP(StateMachine)
+BEGIN_SLOT_MAP(IStateMachine)
     ON_SLOT(1, setSlotStateMachines, PairStream)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(StateMachine)
+BEGIN_EVENT_HANDLER(IStateMachine)
     ON_EVENT_OBJ(ON_ENTRY, onEntry, Object)     // always check w/Object first
     ON_EVENT(ON_ENTRY, onEntry)
 
@@ -32,19 +32,19 @@ BEGIN_EVENT_HANDLER(StateMachine)
    if (stMach != nullptr && !_used) _used = stMach->event(_event,_obj);
 END_EVENT_HANDLER()
 
-StateMachine::StateMachine()
+IStateMachine::IStateMachine()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void StateMachine::initData()
+void IStateMachine::initData()
 {
    stateStack.fill(INVALID_STATE);
    substateStack.fill(INVALID_STATE);
 }
 
-void StateMachine::copyData(const StateMachine& org, const bool cc)
+void IStateMachine::copyData(const IStateMachine& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -52,7 +52,7 @@ void StateMachine::copyData(const StateMachine& org, const bool cc)
    setSlotStateMachines(org.stMachList);
 }
 
-void StateMachine::deleteData()
+void IStateMachine::deleteData()
 {
    setStMach(nullptr, StateTableCode::CURR_STATE);
    setSlotStateMachines(nullptr);
@@ -61,7 +61,7 @@ void StateMachine::deleteData()
 // -----------------------------------------------------------------
 // reset() -- Resets the state machine
 // -----------------------------------------------------------------
-void StateMachine::reset()
+void IStateMachine::reset()
 {
    BaseClass::reset();
 
@@ -89,7 +89,7 @@ void StateMachine::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void StateMachine::updateData(const double dt)
+void IStateMachine::updateData(const double dt)
 {
    if (stMach != nullptr) stMach->updateData(dt);
    BaseClass::updateData(dt);
@@ -98,7 +98,7 @@ void StateMachine::updateData(const double dt)
 // -----------------------------------------------------------------
 // updateTC() -- one iteration step of the state machine
 // -----------------------------------------------------------------
-void StateMachine::updateTC(const double dt)
+void IStateMachine::updateTC(const double dt)
 {
    // Step state machine
    step(dt);
@@ -110,7 +110,7 @@ void StateMachine::updateTC(const double dt)
 // -----------------------------------------------------------------
 // One iteration step of the state machine
 // -----------------------------------------------------------------
-void StateMachine::step(const double dt)
+void IStateMachine::step(const double dt)
 {
    // ---
    // 1) If requested, step into a new state
@@ -185,7 +185,7 @@ void StateMachine::step(const double dt)
 // Transition functions -- these control movement between our states
 // -----------------------------------------------------------------
 
-bool StateMachine::next(Object* const arg)
+bool IStateMachine::next(Object* const arg)
 {
    bool ok{};
    unsigned short newState{stateTable(state, StateTableCode::FIND_NEXT_STATE)};
@@ -199,7 +199,7 @@ bool StateMachine::next(Object* const arg)
    return ok;
 }
 
-bool StateMachine::goTo(const unsigned short newState, Object* const arg)
+bool IStateMachine::goTo(const unsigned short newState, Object* const arg)
 {
    bool ok{};
    unsigned short test{stateTable(newState, StateTableCode::TEST_STATE)};
@@ -213,7 +213,7 @@ bool StateMachine::goTo(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool StateMachine::call(const unsigned short newState, Object* const arg)
+bool IStateMachine::call(const unsigned short newState, Object* const arg)
 {
    bool ok{};
    if (sp > 0) {
@@ -231,7 +231,7 @@ bool StateMachine::call(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool StateMachine::rtn(Object* const arg)
+bool IStateMachine::rtn(Object* const arg)
 {
    bool ok{};
    if (sp < STACK_SIZE) {
@@ -249,13 +249,13 @@ bool StateMachine::rtn(Object* const arg)
 // Substate Transition functions -- these control movement between our substates
 // -----------------------------------------------------------------
 
-bool StateMachine::nextSubstate()
+bool IStateMachine::nextSubstate()
 {
    nSubstate = (substate+1);
    return true;
 }
 
-bool StateMachine::goToSubstate(const unsigned short newSubstate)
+bool IStateMachine::goToSubstate(const unsigned short newSubstate)
 {
    nSubstate = newSubstate;
    return true;
@@ -267,30 +267,30 @@ bool StateMachine::goToSubstate(const unsigned short newSubstate)
 // between our parent state machine's states.
 // -----------------------------------------------------------------
 
-bool StateMachine::nextState(Object* const arg)
+bool IStateMachine::nextState(Object* const arg)
 {
    bool ok{};
-   const auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<IStateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->next(arg);
    }
    return ok;
 }
 
-bool StateMachine::goToState(const unsigned short newState, Object* const arg)
+bool IStateMachine::goToState(const unsigned short newState, Object* const arg)
 {
    bool ok{};
-   const auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<IStateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->goTo(newState,arg);
    }
    return ok;
 }
 
-bool StateMachine::callState(const unsigned short newState, Object* const arg)
+bool IStateMachine::callState(const unsigned short newState, Object* const arg)
 {
    bool ok{};
-   const auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<IStateMachine*>( container() );
    if (parent != nullptr && sp > 0) {
       ok = parent->call(newState,arg);
       if (ok) {
@@ -301,10 +301,10 @@ bool StateMachine::callState(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool StateMachine::rtnState(Object* const arg)
+bool IStateMachine::rtnState(Object* const arg)
 {
    bool ok{};
-   const auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<IStateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->rtn(arg);
    }
@@ -315,7 +315,7 @@ bool StateMachine::rtnState(Object* const arg)
 // -----------------------------------------------------------------
 // Default event handlers
 // -----------------------------------------------------------------
-bool StateMachine::onEntry(Object* const msg)
+bool IStateMachine::onEntry(Object* const msg)
 {
    nState = INIT_STATE;
    nArg = msg;
@@ -324,7 +324,7 @@ bool StateMachine::onEntry(Object* const msg)
    return true;
 }
 
-bool StateMachine::onExit()
+bool IStateMachine::onExit()
 {
    state = INVALID_STATE;
    stMach = nullptr;
@@ -337,7 +337,7 @@ bool StateMachine::onExit()
    return true;
 }
 
-bool StateMachine::onReturn(Object* const msg)
+bool IStateMachine::onReturn(Object* const msg)
 {
    // Try to return to our calling state
    bool ok{rtn(msg)};
@@ -356,7 +356,7 @@ bool StateMachine::onReturn(Object* const msg)
 // Default procedure that's called by stepState just before
 // the state specific procedure
 // -----------------------------------------------------------------
-void StateMachine::preStateProc(const double)
+void IStateMachine::preStateProc(const double)
 {
 }
 
@@ -364,14 +364,14 @@ void StateMachine::preStateProc(const double)
 // Default procedure that's called by stepState just after
 // the state specific procedure
 // -----------------------------------------------------------------
-void StateMachine::postStateProc(const double)
+void IStateMachine::postStateProc(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // findStMachByName(), findStMachByType() -- find a state machine
 //------------------------------------------------------------------------------
-Pair* StateMachine::findStMachByName(const char* const name)
+Pair* IStateMachine::findStMachByName(const char* const name)
 {
     Pair* p{};
     if (stMachList != nullptr && name != nullptr) p = stMachList->findByName(name);
@@ -379,7 +379,7 @@ Pair* StateMachine::findStMachByName(const char* const name)
 }
 
 
-Pair* StateMachine::findStMachByType(const std::type_info& type)
+Pair* IStateMachine::findStMachByType(const std::type_info& type)
 {
     Pair* p{};
     if (stMachList != nullptr) p = stMachList->findByType(type);
@@ -392,14 +392,14 @@ Pair* StateMachine::findStMachByType(const std::type_info& type)
 // then we do NOT actually set the stMach, but we only check to
 // see if the stMach 'name' exists.
 // -----------------------------------------------------------------
-bool StateMachine::setStMach(const char* const name, const StateTableCode code)
+bool IStateMachine::setStMach(const char* const name, const StateTableCode code)
 {
    bool ok{};
 
    if (code == StateTableCode::CURR_STATE) {
 
       // Current state is now also the previous state
-      StateMachine* oldStMach{stMach};
+      IStateMachine* oldStMach{stMach};
 
       // First, check to see if they're asking for the same state
       // as our current state.
@@ -413,7 +413,7 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
          if (name != nullptr) {
             Pair* p{findStMachByName(name)};
             if (p != nullptr) {
-               stMach = static_cast<StateMachine*>(p->object());
+               stMach = static_cast<IStateMachine*>(p->object());
                stMachName = p->slot();
                ok = true;
             }
@@ -442,7 +442,7 @@ bool StateMachine::setStMach(const char* const name, const StateTableCode code)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool StateMachine::setSlotStateMachines(const PairStream* const msg)
+bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
 {
    // First remove the old list; and make sure we tell the old stMachList
    // that we're no longer their container.
@@ -466,11 +466,11 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
       const List::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<const Pair*>(item->getValue());
-         const auto q = dynamic_cast<const StateMachine*>(p->object());
+         const auto q = dynamic_cast<const IStateMachine*>(p->object());
 
          if (q != nullptr) {
             const auto cp = static_cast<Pair*>(p->clone());
-            const auto cq = static_cast<StateMachine*>(cp->object());
+            const auto cq = static_cast<IStateMachine*>(cp->object());
             cq->container(this);
             newList->put(cp);
          } else {

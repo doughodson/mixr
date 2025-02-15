@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_StateMachine_HPP__
-#define __mixr_base_StateMachine_HPP__
+#ifndef __mixr_base_IStateMachine_HPP__
+#define __mixr_base_IStateMachine_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -13,11 +13,11 @@ class PairStream;
 
 //------------------------------------------------------------------------------
 // Class: StateMachine
-// Description: Abstract state machine class
+// Description: Interface that defines a state machine
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractStateMachine
+// Factory name: IStateMachine
 // Slots:
 //    stateMachines   <PairStream>  ! List of state machines that are used to
 //                                  ! implement our states.
@@ -199,16 +199,16 @@ class PairStream;
 //
 // Examples of state machines can be found in the MIXR example application 'testStateMach'.
 //------------------------------------------------------------------------------
-class StateMachine : public Component
+class IStateMachine : public Component
 {
-   DECLARE_SUBCLASS(StateMachine, Component)
+   DECLARE_SUBCLASS(IStateMachine, Component)
 
 public:
    static const unsigned short INIT_STATE = 0;         // Standard initial state
    static const unsigned short INVALID_STATE = 0xFFFF; // Invalid state number
 
 public:
-   StateMachine();
+   IStateMachine();
 
    // Current state numbers
    unsigned short getState() const     { return state; }
@@ -331,13 +331,13 @@ private:
    unsigned short substate{INVALID_STATE};    // Current substate number
    Mode mode {Mode::HOLD_STATE};              // Current mode
    safe_ptr<Object> arg;                      // Current argument
-   StateMachine* stMach{};                    // Current state's state machine object
+   IStateMachine* stMach{};                   // Current state's state machine object
    std::string stMachName;                    // Current state's state machine name
 
    // Previous state
    unsigned short pState{INVALID_STATE};      // Previous state number
    unsigned short pSubstate{INVALID_STATE};   // Previous substate number
-   StateMachine* pStMach{};                   // Previous state's state machine object
+   IStateMachine* pStMach{};                  // Previous state's state machine object
 
    // State stack and stack pointer
    static const unsigned short STACK_SIZE{10};
