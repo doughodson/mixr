@@ -2,7 +2,7 @@
 #ifndef __mixr_base_UdpBroadcastHandler_HPP__
 #define __mixr_base_UdpBroadcastHandler_HPP__
 
-#include "mixr/base/network/PosixHandler.hpp"
+#include "mixr/base/network/IPosixHandler.hpp"
 
 #include <string>
 
@@ -31,9 +31,9 @@ class Number;
 //           shared: true                   // Shared port
 //        )
 //------------------------------------------------------------------------------
-class UdpBroadcastHandler final: public PosixHandler
+class UdpBroadcastHandler final: public IPosixHandler
 {
-    DECLARE_SUBCLASS(UdpBroadcastHandler, PosixHandler)
+    DECLARE_SUBCLASS(UdpBroadcastHandler, IPosixHandler)
 
 public:
     UdpBroadcastHandler();

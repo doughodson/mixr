@@ -32,7 +32,7 @@ OBJS =  \
     linearsystem/Sz1.o \
     linearsystem/Sz2.o \
 	network/INetHandler.o \
-	network/PosixHandler.o \
+	network/IPosixHandler.o \
 	network/TcpClient.o \
 	network/TcpHandler.o \
 	network/TcpServerMultiple.o \

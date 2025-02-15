@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TcpHandler_HPP__
 #define __mixr_base_TcpHandler_HPP__
 
-#include "mixr/base/network/PosixHandler.hpp"
+#include "mixr/base/network/IPosixHandler.hpp"
 
 namespace mixr {
 namespace base {
@@ -18,9 +18,9 @@ class String;
 // Factory name: TcpHandler
 // Slots: none
 //------------------------------------------------------------------------------
-class TcpHandler : public PosixHandler
+class TcpHandler : public IPosixHandler
 {
-   DECLARE_SUBCLASS(TcpHandler, PosixHandler)
+   DECLARE_SUBCLASS(TcpHandler, IPosixHandler)
 
 public:
    TcpHandler();

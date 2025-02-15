@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_PosixHandler_HPP__
-#define __mixr_base_PosixHandler_HPP__
+#ifndef __mixr_base_IPosixHandler_HPP__
+#define __mixr_base_IPosixHandler_HPP__
 
 #include "mixr/base/network/INetHandler.hpp"
 
@@ -14,8 +14,8 @@ class Integer;
 class String;
 
 //------------------------------------------------------------------------------
-// Class: PosixHandler
-// Description: Abstract (connectionless) network handler that include Posix
+// Class: IPosixHandler
+// Description: Interface network handler that include Posix
 //              oriented methods to support UDP/IP, TCP/IP, Multicast and Broadcast.
 //              Each handler manages a socket and can be used to send data, receive
 //              data, or both.
@@ -24,7 +24,7 @@ class String;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractPosixHandler
+// Factory name: IPosixHandler
 // Slots:
 //    localIpAddress    ! IP address in Internet standard "." (dotted) notation
 //                      ! written as a string "127.0.0.1"
@@ -72,12 +72,12 @@ class String;
 // use later in the code.  This will save a lot of pre-processor intervention
 // and make the code that much more enjoyable to read!
 //------------------------------------------------------------------------------
-class PosixHandler : public INetHandler
+class IPosixHandler : public INetHandler
 {
-   DECLARE_SUBCLASS(PosixHandler, INetHandler)
+   DECLARE_SUBCLASS(IPosixHandler, INetHandler)
 
 public:
-   PosixHandler();
+   IPosixHandler();
 
    uint16_t getPort() const;                    // Port#
    uint16_t getLocalPort() const;               // Local port #
@@ -159,47 +159,47 @@ private:
 };
 
 // Port#
-inline uint16_t PosixHandler::getPort() const
+inline uint16_t IPosixHandler::getPort() const
 {
    return port;
 }
 
 // Local port #
-inline uint16_t PosixHandler::getLocalPort() const
+inline uint16_t IPosixHandler::getLocalPort() const
 {
    return localPort;
 }
 
 // Ignore source port #
-inline uint16_t PosixHandler::getIgnoreSourcePort() const
+inline uint16_t IPosixHandler::getIgnoreSourcePort() const
 {
    return ignoreSourcePort;
 }
 
 // Gets the local host IP address
-inline uint32_t PosixHandler::getLocalAddr() const
+inline uint32_t IPosixHandler::getLocalAddr() const
 {
    return localAddr;
 }
 
 // Gets the network (remote) host IP address
-inline uint32_t PosixHandler::getNetAddr() const
+inline uint32_t IPosixHandler::getNetAddr() const
 {
    return netAddr;
 }
 
 // Shared flag
-inline bool PosixHandler::getSharedFlag() const
+inline bool IPosixHandler::getSharedFlag() const
 {
    return sharedFlg;
 }
 
-inline uint32_t PosixHandler::getLastFromAddr() const
+inline uint32_t IPosixHandler::getLastFromAddr() const
 {
    return fromAddr1;
 }
 
-inline uint16_t PosixHandler::getLastFromPort() const
+inline uint16_t IPosixHandler::getLastFromPort() const
 {
    return fromPort1;
 }

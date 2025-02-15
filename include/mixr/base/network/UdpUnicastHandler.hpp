@@ -2,7 +2,7 @@
 #ifndef __mixr_base_UdpUnicastHandler_HPP__
 #define __mixr_base_UdpUnicastHandler_HPP__
 
-#include "mixr/base/network/PosixHandler.hpp"
+#include "mixr/base/network/IPosixHandler.hpp"
 
 #include <string>
 
@@ -41,9 +41,9 @@ class String;
 //           localPort: 2011        // Local port to send from
 //        )
 //------------------------------------------------------------------------------
-class UdpUnicastHandler final: public PosixHandler
+class UdpUnicastHandler final: public IPosixHandler
 {
-   DECLARE_SUBCLASS(UdpUnicastHandler, PosixHandler)
+   DECLARE_SUBCLASS(UdpUnicastHandler, IPosixHandler)
 
 public:
    UdpUnicastHandler();

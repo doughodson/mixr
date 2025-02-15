@@ -2,7 +2,7 @@
 #ifndef __mixr_base_UdpMulticastHandler_HPP__
 #define __mixr_base_UdpMulticastHandler_HPP__
 
-#include "mixr/base/network/PosixHandler.hpp"
+#include "mixr/base/network/IPosixHandler.hpp"
 
 #include <string>
 
@@ -62,9 +62,9 @@ class String;
 //       Winsock applications, OFF can send to ON, but ON cannot sent to OFF. In contrast,
 //       if ON and OFF are UNIX applications, ON can send to OFF, but OFF cannot send to ON."
 //------------------------------------------------------------------------------
-class UdpMulticastHandler final: public PosixHandler
+class UdpMulticastHandler final: public IPosixHandler
 {
-    DECLARE_SUBCLASS(UdpMulticastHandler, PosixHandler)
+    DECLARE_SUBCLASS(UdpMulticastHandler, IPosixHandler)
 
 public:
     UdpMulticastHandler();
