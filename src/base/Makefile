@@ -34,7 +34,7 @@ OBJS =  \
 	network/INetHandler.o \
 	network/IPosixHandler.o \
 	network/TcpClient.o \
-	network/TcpHandler.o \
+	network/ITcpHandler.o \
 	network/TcpServerMultiple.o \
 	network/TcpServerSingle.o \
 	network/UdpBroadcastHandler.o \

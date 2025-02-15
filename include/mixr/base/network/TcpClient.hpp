@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TcpClient_HPP__
 #define __mixr_base_TcpClient_HPP__
 
-#include "mixr/base/network/TcpHandler.hpp"
+#include "mixr/base/network/ITcpHandler.hpp"
 
 #include <string>
 
@@ -33,9 +33,9 @@ class String;
 //------------------------------------------------------------------------------
 // Notes: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
 //------------------------------------------------------------------------------
-class TcpClient final: public TcpHandler
+class TcpClient final: public ITcpHandler
 {
-    DECLARE_SUBCLASS(TcpClient, TcpHandler)
+    DECLARE_SUBCLASS(TcpClient, ITcpHandler)
 
 public:
     TcpClient();

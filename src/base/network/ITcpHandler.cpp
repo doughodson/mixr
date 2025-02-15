@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Class: TcpHandler
+// Class: ITcpHandler
 //------------------------------------------------------------------------------
 //
 // M$ WinSock has slightly different return types, some different calling, and
@@ -27,7 +27,7 @@
     static const int SOCKET_ERROR{-1};
 #endif
 
-#include "mixr/base/network/TcpHandler.hpp"
+#include "mixr/base/network/ITcpHandler.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Pair.hpp"
@@ -39,16 +39,16 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(TcpHandler, "TcpHandler")
-EMPTY_SLOTTABLE(TcpHandler)
-EMPTY_DELETEDATA(TcpHandler)
+IMPLEMENT_ABSTRACT_SUBCLASS(ITcpHandler, "ITcpHandler")
+EMPTY_SLOTTABLE(ITcpHandler)
+EMPTY_DELETEDATA(ITcpHandler)
 
-TcpHandler::TcpHandler()
+ITcpHandler::ITcpHandler()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-TcpHandler::TcpHandler(const LcSocket sn)
+ITcpHandler::ITcpHandler(const LcSocket sn)
 {
    STANDARD_CONSTRUCTOR()
    socketNum = sn;
@@ -56,7 +56,7 @@ TcpHandler::TcpHandler(const LcSocket sn)
    setRecvBuffSize();
 }
 
-void TcpHandler::copyData(const TcpHandler& org, const bool)
+void ITcpHandler::copyData(const ITcpHandler& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -68,7 +68,7 @@ void TcpHandler::copyData(const TcpHandler& org, const bool)
 //------------------------------------------------------------------------------
 // init() -- init the network, the socket and the network address
 //------------------------------------------------------------------------------
-bool TcpHandler::init()
+bool ITcpHandler::init()
 {
     // ---
     // Init the base class
@@ -92,7 +92,7 @@ bool TcpHandler::init()
 // -------------------------------------------------------------
 // Returns true if the network handler has been initialized and connected.
 // -------------------------------------------------------------
-bool TcpHandler::isConnected() const
+bool ITcpHandler::isConnected() const
 {
     return connected && BaseClass::isConnected();
 }
@@ -100,7 +100,7 @@ bool TcpHandler::isConnected() const
 //------------------------------------------------------------------------------
 // closeConnection() -- request that the connection is closed (shutdown)
 //------------------------------------------------------------------------------
-bool TcpHandler::closeConnection()
+bool ITcpHandler::closeConnection()
 {
     bool success {true};
 
@@ -122,7 +122,7 @@ bool TcpHandler::closeConnection()
 // -------------------------------------------------------------
 // sendData() -- Send data to our connected TCP socket
 // -------------------------------------------------------------
-bool TcpHandler::sendData(const char* const packet, const int size)
+bool ITcpHandler::sendData(const char* const packet, const int size)
 {
     if (!isConnected() || hasBeenTerminated()) return false;
 
@@ -151,7 +151,7 @@ bool TcpHandler::sendData(const char* const packet, const int size)
 // -------------------------------------------------------------
 // recvData() -- Receive data from our connected TCP socket
 // -------------------------------------------------------------
-unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
+unsigned int ITcpHandler::recvData(char* const packet, const int maxSize)
 {
    if (!isConnected() || hasBeenTerminated()) return 0;
    if (socketNum == INVALID_SOCKET) return 0;

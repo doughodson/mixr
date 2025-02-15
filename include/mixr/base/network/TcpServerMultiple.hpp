@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TcpServerMultiple_HPP__
 #define __mixr_base_TcpServerMultiple_HPP__
 
-#include "mixr/base/network/TcpHandler.hpp"
+#include "mixr/base/network/ITcpHandler.hpp"
 
 namespace mixr {
 namespace base {
@@ -32,14 +32,14 @@ class Integer;
 //       The functions initNetwork() and acceptConnection() are unblocked (or no
 //       wait) I/O functions.
 //------------------------------------------------------------------------------
-class TcpServerMultiple final: public TcpHandler
+class TcpServerMultiple final: public ITcpHandler
 {
-   DECLARE_SUBCLASS(TcpServerMultiple, TcpHandler)
+   DECLARE_SUBCLASS(TcpServerMultiple, ITcpHandler)
 
 public:
    TcpServerMultiple();
 
-   virtual TcpHandler* acceptConnection();
+   virtual ITcpHandler* acceptConnection();
 
    unsigned int getBacklog() const        { return backlog; }
 

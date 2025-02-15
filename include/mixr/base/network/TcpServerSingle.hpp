@@ -2,7 +2,7 @@
 #ifndef __mixr_base_TcpServerSingle_HPP__
 #define __mixr_base_TcpServerSingle_HPP__
 
-#include "mixr/base/network/TcpHandler.hpp"
+#include "mixr/base/network/ITcpHandler.hpp"
 
 namespace mixr {
 namespace base {
@@ -24,9 +24,9 @@ namespace base {
 //------------------------------------------------------------------------------
 // Notes: initNetwork() will wait on a connection even if the 'noWaitFlag' is true.
 //------------------------------------------------------------------------------
-class TcpServerSingle final: public TcpHandler
+class TcpServerSingle final: public ITcpHandler
 {
-   DECLARE_SUBCLASS(TcpServerSingle, TcpHandler)
+   DECLARE_SUBCLASS(TcpServerSingle, ITcpHandler)
 
 public:
    TcpServerSingle();

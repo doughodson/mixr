@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_TcpHandler_HPP__
-#define __mixr_base_TcpHandler_HPP__
+#ifndef __mixr_base_ITcpHandler_HPP__
+#define __mixr_base_ITcpHandler_HPP__
 
 #include "mixr/base/network/IPosixHandler.hpp"
 
@@ -10,20 +10,20 @@ namespace base {
 class String;
 
 //------------------------------------------------------------------------------
-// Class: TcpHandler
-// Description: Abstract class to support TCP/IP connections
+// Class: ITcpHandler
+// Description: Interface to support TCP/IP connections
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: TcpHandler
+// Factory name: ITcpHandler
 // Slots: none
 //------------------------------------------------------------------------------
-class TcpHandler : public IPosixHandler
+class ITcpHandler : public IPosixHandler
 {
-   DECLARE_SUBCLASS(TcpHandler, IPosixHandler)
+   DECLARE_SUBCLASS(ITcpHandler, IPosixHandler)
 
 public:
-   TcpHandler();
+   ITcpHandler();
 
    bool hasBeenTerminated()          { return connectionTerminated; }
 
@@ -35,7 +35,7 @@ public:
    // "Socket Only" constructor that will be used by one of our derived classes;
    // The socket should be an AF_INET, SOCK_STREAM type socket that has been
    // initialized, bound, connected, and is ready for use.
-   TcpHandler(const LcSocket socketNum);
+   ITcpHandler(const LcSocket socketNum);
 
 protected:
    bool init() override;

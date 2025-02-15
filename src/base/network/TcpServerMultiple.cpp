@@ -26,6 +26,7 @@
     static const int SOCKET_ERROR{-1};
 #endif
 
+#include "mixr/base/network/ITcpHandler.hpp"
 #include "mixr/base/network/TcpServerMultiple.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
@@ -124,7 +125,7 @@ bool TcpServerMultiple::listenForConnections()
 //------------------------------------------------------------------------------
 // listenForConnections() -- puts the socket into listen mode
 //------------------------------------------------------------------------------
-TcpHandler* TcpServerMultiple::acceptConnection()
+ITcpHandler* TcpServerMultiple::acceptConnection()
 {
    struct sockaddr_in clientAddr;
 
@@ -138,9 +139,9 @@ TcpHandler* TcpServerMultiple::acceptConnection()
    // Since INVALID_SOCKET is defined as -1 for POSIX, ::accept will return
    // INVALID_SOCKET as the error condition (see MSDN help and POSIX man pages
    // for more information).
-   TcpHandler* newHandler{};
+   ITcpHandler* newHandler{};
    if (newSocket != INVALID_SOCKET) {
-      newHandler = new TcpHandler(newSocket);
+      newHandler = new ITcpHandler(newSocket);
 
       // Set blocked or no-wait
       if (noWait) newHandler->setNoWait();
