@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_NavaidLoader_HPP__
 #define __mixr_dafif_NavaidLoader_HPP__
 
-#include "mixr/dafif/loaders/Database.hpp"
+#include "mixr/dafif/loaders/IDatabase.hpp"
 
 #include "mixr/dafif/records/Navaid.hpp"
 
@@ -20,9 +20,9 @@ namespace dafif {
 // Factory name: NavaidLoader
 // Slots: none
 //------------------------------------------------------------------------------
-class NavaidLoader final: public Database
+class NavaidLoader final: public IDatabase
 {
-   DECLARE_SUBCLASS(NavaidLoader, Database)
+   DECLARE_SUBCLASS(NavaidLoader, IDatabase)
 
 public:
    NavaidLoader();
@@ -54,7 +54,7 @@ protected:
    enum { NAVAID_MAX_RECORDS = 80000 };
 
    // Memory key used for quick Navaid record lookup
-   struct NavaidKey : public Database::Key
+   struct NavaidKey : public IDatabase::Key
    {
       NavaidKey(const long idx, const Navaid& navaid);
       NavaidKey(const char* key);

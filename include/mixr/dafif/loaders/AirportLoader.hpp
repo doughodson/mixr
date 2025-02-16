@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_AirportLoader_HPP__
 #define __mixr_dafif_AirportLoader_HPP__
 
-#include "mixr/dafif/loaders/Database.hpp"
+#include "mixr/dafif/loaders/IDatabase.hpp"
 
 #include "mixr/dafif/records/Airport.hpp"
 #include "mixr/dafif/records/Runway.hpp"
@@ -33,9 +33,9 @@ namespace dafif {
 //    However, after a runway query, use getRecord(n, RUNWAY_RECORD_LEN),
 //    and after an ils query, use getRecord(n,ILS_RECORD_LEN).
 //------------------------------------------------------------------------------
-class AirportLoader final: public Database
+class AirportLoader final: public IDatabase
 {
-   DECLARE_SUBCLASS(AirportLoader, Database)
+   DECLARE_SUBCLASS(AirportLoader, IDatabase)
 
 public:
    AirportLoader();
@@ -85,7 +85,7 @@ public:
    struct RunwayKey;
 
    // Key used for quick ILS record lookup
-   struct IlsKey : public Database::Key
+   struct IlsKey : public IDatabase::Key
    {
       RunwayKey* parent {};
       char key[ILS_KEY_LEN+1] {};    // DAFIF Key Code
@@ -114,7 +114,7 @@ public:
    };
 
    // Key used for quick Runway record lookup
-   struct RunwayKey : public Database::Key
+   struct RunwayKey : public IDatabase::Key
    {
       AirportKey* parent {};
       char key[RW_KEY_LEN+1] {}; // DAFIF Key Code
@@ -131,7 +131,7 @@ public:
    };
 
    // Key used for quick Airport record lookup
-   struct AirportKey : public Database::Key
+   struct AirportKey : public IDatabase::Key
    {
       AirportKey(const long idx, const Airport& airport);
       AirportKey(const char* key);

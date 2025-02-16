@@ -17,7 +17,7 @@ EMPTY_SLOTTABLE(WaypointLoader)
 EMPTY_DELETEDATA(WaypointLoader)
 EMPTY_COPYDATA(WaypointLoader)
 
-WaypointLoader::WaypointLoader() : Database()
+WaypointLoader::WaypointLoader() : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -26,7 +26,7 @@ WaypointLoader::WaypointLoader(
                   const std::string& country,
                   const std::string& file,
                   const std::string& path)
-               : Database()
+               : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -171,7 +171,7 @@ int WaypointLoader::queryByIdentImpl(const char* id)
    // Search for the waypoint record(s)
    WaypointKey key(id, nullptr);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, rl, nrl, il_cmp);
+   return IDatabase::mQuery(&pkey, rl, nrl, il_cmp);
 }
 
 
@@ -182,7 +182,7 @@ int WaypointLoader::queryByKeyImpl(const char* waypointkey)
 {
    WaypointKey key(waypointkey);
    Key* pkey = &key;
-   return Database::sQuery(&pkey, rl, nrl, kl_cmp);
+   return IDatabase::sQuery(&pkey, rl, nrl, kl_cmp);
 }
 
 //------------------------------------------------------------------------------
@@ -272,9 +272,9 @@ WaypointLoader::WaypointKey::WaypointKey(const char* id, const char* ccode) : Ke
 WaypointLoader::WaypointKey::WaypointKey(const char* key1) : Key(0)
 {
    size = WAYPOINT_RECORD_LEN;
-   Record::dsGetString(key,key1,WP_KEY_LEN);
-   Record::dsGetString(ident,key1,8);
-   Record::dsGetString(countryCode,&key1[8],2);
+   IRecord::dsGetString(key,key1,WP_KEY_LEN);
+   IRecord::dsGetString(ident,key1,8);
+   IRecord::dsGetString(countryCode,&key1[8],2);
 }
 
 WaypointLoader::WaypointKey::~WaypointKey()

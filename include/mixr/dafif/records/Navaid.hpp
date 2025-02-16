@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_Navaid_HPP__
 #define __mixr_dafif_Navaid_HPP__
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include <string>
 
@@ -18,9 +18,9 @@ namespace dafif {
 // Factory name: Navaid
 // Slots: none
 //------------------------------------------------------------------------------
-class Navaid final: public Record
+class Navaid final: public IRecord
 {
-   DECLARE_SUBCLASS(Navaid, Record)
+   DECLARE_SUBCLASS(Navaid, IRecord)
 
 public:
    enum { RECORD_LENGTH = NAVAID_RECORD_LEN };

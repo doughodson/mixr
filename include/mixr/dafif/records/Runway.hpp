@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_Runway_HPP__
 #define __mixr_dafif_Runway_HPP__
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include <string>
 
@@ -18,9 +18,9 @@ namespace dafif {
 // Factory name: Runway
 // Slots: none
 //------------------------------------------------------------------------------
-class Runway final: public Record
+class Runway final: public IRecord
 {
-   DECLARE_SUBCLASS(Runway, Record)
+   DECLARE_SUBCLASS(Runway, IRecord)
 
 public:
    // length of a DAFIF Runway record pair

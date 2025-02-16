@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_Airport_HPP__
 #define __mixr_dafif_Airport_HPP__
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include <string>
 
@@ -18,9 +18,9 @@ namespace dafif {
 // Factory name: Airport
 // Slots: none
 //------------------------------------------------------------------------------
-class Airport final: public Record
+class Airport final: public IRecord
 {
-   DECLARE_SUBCLASS(Airport, Record)
+   DECLARE_SUBCLASS(Airport, IRecord)
 
 public:
 

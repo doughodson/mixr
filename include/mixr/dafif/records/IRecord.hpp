@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_Record_HPP__
-#define __mixr_dafif_Record_HPP__
+#ifndef __mixr_dafif_IRecord_HPP__
+#define __mixr_dafif_IRecord_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -12,17 +12,17 @@ namespace mixr {
 namespace dafif {
 
 //------------------------------------------------------------------------------
-// Class: Record
-// Description: Abstract class used to access DAFIF record information
+// Class: IRecord
+// Description: Interface used to access DAFIF record information
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractRecord
+// Factory name: IRecord
 // Slots: none
 //------------------------------------------------------------------------------
-class Record : public base::Object
+class IRecord : public base::Object
 {
-   DECLARE_SUBCLASS(Record, base::Object)
+   DECLARE_SUBCLASS(IRecord, base::Object)
 
 public:
    // record types
@@ -32,8 +32,8 @@ public:
    };
 
 public:
-   Record();
-   Record(const std::string&);
+   IRecord();
+   IRecord(const std::string&);
 
    // sets this object's record string to 'string' (does not make a copy of 'string')
    void setRecord(const std::string&);

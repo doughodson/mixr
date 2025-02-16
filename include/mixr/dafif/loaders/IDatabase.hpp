@@ -1,6 +1,6 @@
 
-#ifndef __mixr_dafif_Database_HPP__
-#define __mixr_dafif_Database_HPP__
+#ifndef __mixr_dafif_IDatabase_HPP__
+#define __mixr_dafif_IDatabase_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -13,13 +13,13 @@ namespace base { class FileReader; class String; }
 namespace dafif {
 
 //------------------------------------------------------------------------------
-// Class: Database
-// Description: Abstract class used to access DAFIF databases; both file
+// Class: IDatabase
+// Description: Interface used to access DAFIF databases; both file
 //              loaders and network clients.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: AbstractDatabase
+// Factory name: IDatabase
 // Slots:
 //    pathname  <String>   ! Path to location of file
 //    filename  <String>   ! Filename to open
@@ -45,12 +45,12 @@ namespace dafif {
 //               clearDbInUse();         // free the database
 //           }
 //------------------------------------------------------------------------------
-class Database : public base::Object
+class IDatabase : public base::Object
 {
-   DECLARE_SUBCLASS(Database, base::Object)
+   DECLARE_SUBCLASS(IDatabase, base::Object)
 
 public:
-   Database();
+   IDatabase();
 
    // --
    // extension points

@@ -38,7 +38,7 @@ Ils::Ils()
    ptbl = &ptable;
 }
 
-Ils::Ils(const std::string& s) : Record(s)
+Ils::Ils(const std::string& s) : IRecord(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

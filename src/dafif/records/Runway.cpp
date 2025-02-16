@@ -35,7 +35,7 @@ Runway::Runway()
    ptbl = &ptable;
 }
 
-Runway::Runway(const std::string& s) : Record(s)
+Runway::Runway(const std::string& s) : IRecord(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

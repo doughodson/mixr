@@ -37,7 +37,7 @@ Navaid::Navaid()
    ptbl = &ptable;
 }
 
-Navaid::Navaid(const std::string& s) : Record(s)
+Navaid::Navaid(const std::string& s) : IRecord(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

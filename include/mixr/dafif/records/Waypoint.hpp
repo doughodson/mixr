@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_Waypoint_HPP__
 #define __mixr_dafif_Waypoint_HPP__
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include <string>
 
@@ -18,9 +18,9 @@ namespace dafif {
 // Factory name: Waypoint
 // Slots: none
 //------------------------------------------------------------------------------
-class Waypoint final: public Record
+class Waypoint final: public IRecord
 {
-   DECLARE_SUBCLASS(Waypoint,Record)
+   DECLARE_SUBCLASS(Waypoint, IRecord)
 
 public:
    // length of a DAFIF Waypoint record

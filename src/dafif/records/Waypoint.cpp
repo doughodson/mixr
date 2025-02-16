@@ -33,7 +33,7 @@ Waypoint::Waypoint()
    ptbl = &ptable;
 }
 
-Waypoint::Waypoint(const std::string& s) : Record(s)
+Waypoint::Waypoint(const std::string& s) : IRecord(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;

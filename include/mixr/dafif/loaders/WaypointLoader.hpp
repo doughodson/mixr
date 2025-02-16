@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_WaypointLoader_HPP__
 #define __mixr_dafif_WaypointLoader_HPP__
 
-#include "mixr/dafif/loaders/Database.hpp"
+#include "mixr/dafif/loaders/IDatabase.hpp"
 
 #include "mixr/dafif/records/Waypoint.hpp"
 
@@ -20,9 +20,9 @@ namespace dafif {
 // Factory name: WaypointLoader
 // Slots: none
 //------------------------------------------------------------------------------
-class WaypointLoader final: public Database
+class WaypointLoader final: public IDatabase
 {
-   DECLARE_SUBCLASS(WaypointLoader,Database)
+   DECLARE_SUBCLASS(WaypointLoader, IDatabase)
 
 public:
    WaypointLoader();
@@ -42,7 +42,7 @@ protected:
    enum { WAYPOINT_MAX_RECORDS = 140000 };
 
    // Memory key used for quick Waypoint record lookup
-   struct WaypointKey : public Database::Key
+   struct WaypointKey : public IDatabase::Key
    {
       WaypointKey(const long idx, const Waypoint& waypoint);
       WaypointKey(const char* id, const char* country);

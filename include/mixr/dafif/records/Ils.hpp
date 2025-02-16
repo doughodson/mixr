@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_Ils_HPP__
 #define __mixr_dafif_Ils_HPP__
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include <string>
 
@@ -18,9 +18,9 @@ namespace dafif {
 // Factory name: Ils
 // Slots: none
 //------------------------------------------------------------------------------
-class Ils final: public Record
+class Ils final: public IRecord
 {
-   DECLARE_SUBCLASS(Ils,Record)
+   DECLARE_SUBCLASS(Ils, IRecord)
 
 public:
    Ils();

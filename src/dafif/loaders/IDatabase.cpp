@@ -1,7 +1,7 @@
 
-#include "mixr/dafif/loaders/Database.hpp"
+#include "mixr/dafif/loaders/IDatabase.hpp"
 
-#include "mixr/dafif/records/Record.hpp"
+#include "mixr/dafif/records/IRecord.hpp"
 
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/String.hpp"
@@ -15,25 +15,25 @@
 namespace mixr {
 namespace dafif {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Database, "AbstractDatabase")
+IMPLEMENT_ABSTRACT_SUBCLASS(IDatabase, "AbstractDatabase")
 
-BEGIN_SLOTTABLE(Database)
+BEGIN_SLOTTABLE(IDatabase)
     "pathname",      // 1) Path to the file
     "filename",      // 2) File name (appended to pathname)
-END_SLOTTABLE(Database)
+END_SLOTTABLE(IDatabase)
 
-BEGIN_SLOT_MAP(Database)
+BEGIN_SLOT_MAP(IDatabase)
     ON_SLOT(1, setSlotPathname, base::String)
     ON_SLOT(2, setSlotFilename, base::String)
 END_SLOT_MAP()
 
-Database::Database()
+IDatabase::IDatabase()
 {
    STANDARD_CONSTRUCTOR()
    db = new base::FileReader();
 }
 
-void Database::copyData(const Database& org, const bool cc)
+void IDatabase::copyData(const IDatabase& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
@@ -59,7 +59,7 @@ void Database::copyData(const Database& org, const bool cc)
    dbLoaded = false;
 }
 
-void Database::deleteData()
+void IDatabase::deleteData()
 {
    if (db != nullptr) {
       db->unref();
@@ -70,7 +70,7 @@ void Database::deleteData()
 }
 
 // creates and opens the database file
-bool Database::openDatabaseFile()
+bool IDatabase::openDatabaseFile()
 {
    // Close any old files and set the record length
    db->setRecordLength(getRecordLength());
@@ -91,20 +91,20 @@ bool Database::openDatabaseFile()
 //------------------------------------------------------------------------------
 // getArea(), setArea() -- get/set the search area (ref point)
 //------------------------------------------------------------------------------
-void Database::getArea(double* const lat, double* const lon)
+void IDatabase::getArea(double* const lat, double* const lon)
 {
    *lat = refLat;
    *lon = refLon;
 }
 
-void Database::getArea(double* const lat, double* const lon, double* const mr)
+void IDatabase::getArea(double* const lat, double* const lon, double* const mr)
 {
    *lat = refLat;
    *lon = refLon;
    *mr  = mrng;
 }
 
-void Database::setArea(const double lat, const double lon, const double mr)
+void IDatabase::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
@@ -113,24 +113,24 @@ void Database::setArea(const double lat, const double lon, const double mr)
 }
 
 // get/set query limit
-void Database::setQueryLimit(const int mrec)
+void IDatabase::setQueryLimit(const int mrec)
 {
    qlimit = mrec;
 }
 
-int Database::getQueryLimit()
+int IDatabase::getQueryLimit()
 {
    return qlimit;
 }
 
 // returns the number of records in this database
-int Database::numberOfRecords()
+int IDatabase::numberOfRecords()
 {
    return nrl;
 }
 
 // returns the number of records found by last query
-int Database::numberFound()
+int IDatabase::numberFound()
 {
    return nql;
 }
@@ -139,7 +139,7 @@ int Database::numberFound()
 // range2() -- returns the square of the range between lat,lon and
 // the reference point.
 //------------------------------------------------------------------------------
-double Database::range2(const double lat, const double lon) const
+double IDatabase::range2(const double lat, const double lon) const
 {
    const double x{(lat - refLat) * 60.0};
    const double y{(lon - refLon) * coslat * 60.0};
@@ -151,7 +151,7 @@ double Database::range2(const double lat, const double lon) const
 // access.  The user should make a copy of the string if the record is to
 // be saved.
 //------------------------------------------------------------------------------
-const char* Database::record(const int n, const int size)
+const char* IDatabase::record(const int n, const int size)
 {
    const char* p{};
    if (n >= 0 && n < nrl) {
@@ -160,7 +160,7 @@ const char* Database::record(const int n, const int size)
    return p;
 }
 
-const char* Database::getRecord(const int n, const int size)
+const char* IDatabase::getRecord(const int n, const int size)
 {
    const char* p = nullptr;
    if (n >= 0 && n < nql) {
@@ -171,7 +171,7 @@ const char* Database::getRecord(const int n, const int size)
 
 
 // dbGetRecord() -- get record from the database
-const char* Database::dbGetRecord(const Key* key, const int size)
+const char* IDatabase::dbGetRecord(const Key* key, const int size)
 {
    const char* p{};
 
@@ -199,25 +199,25 @@ const char* Database::dbGetRecord(const Key* key, const int size)
 }
 
 // get the path name from the database file reader
-const std::string& Database::getPathname() const
+const std::string& IDatabase::getPathname() const
 {
    return db->getPathname();
 }
 
 // get the file name from the database file reader
-const std::string& Database::getFilename() const
+const std::string& IDatabase::getFilename() const
 {
    return db->getFilename();
 }
 
 // set the pathname for the database file reader
-bool Database::setPathname(const std::string& path)
+bool IDatabase::setPathname(const std::string& path)
 {
    return db->setPathname(path);
 }
 
 // set the pathname for the database file reader
-bool Database::setFilename(const std::string& file)
+bool IDatabase::setFilename(const std::string& file)
 {
    return db->setFilename(file);
 }
@@ -225,7 +225,7 @@ bool Database::setFilename(const std::string& file)
 //------------------------------------------------------------------------------
 // stripSpaces() -- strips spaces off end of the string
 //------------------------------------------------------------------------------
-void Database::stripSpaces(char buff[], const int n)
+void IDatabase::stripSpaces(char buff[], const int n)
 {
    int l{n-1};
    while (l >= 0 && buff[l] == ' ') buff[l--] = '\0';
@@ -235,7 +235,7 @@ void Database::stripSpaces(char buff[], const int n)
 // fillSpaces() -- add spaces to the end of the string to make it n characters
 // long plus a null character.
 //------------------------------------------------------------------------------
-void Database::fillSpaces(char buff[], const int n)
+void IDatabase::fillSpaces(char buff[], const int n)
 {
    for (int i = static_cast<int>(std::strlen(buff)); i < n; buff[i++] = ' ');
    buff[n] = '\0';
@@ -244,7 +244,7 @@ void Database::fillSpaces(char buff[], const int n)
 //------------------------------------------------------------------------------
 // createIcaoList() -- creates a list in ICAO code order from the record list.
 //------------------------------------------------------------------------------
-void Database::createIcaoList()
+void IDatabase::createIcaoList()
 {
    nol = 0;
    if (nrl > 0) {
@@ -267,7 +267,7 @@ void Database::createIcaoList()
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Database::setSlotPathname(const base::String* const msg)
+bool IDatabase::setSlotPathname(const base::String* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -276,7 +276,7 @@ bool Database::setSlotPathname(const base::String* const msg)
    return ok;
 }
 
-bool Database::setSlotFilename(const base::String* const msg)
+bool IDatabase::setSlotFilename(const base::String* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -292,7 +292,7 @@ bool Database::setSlotFilename(const base::String* const msg)
 
 // Single query -- when you want only a single instance of a record that
 // matches the key.
-int Database::sQuery(Key** key, Key** base,
+int IDatabase::sQuery(Key** key, Key** base,
                             std::size_t n, int (*cmp)(const void*, const void*))
 {
    nql = 0;
@@ -310,7 +310,7 @@ int Database::sQuery(Key** key, Key** base,
 
 
 // Multi-query -- when you want the full range of records that match the key.
-int Database::mQuery(Key** key, Key** base,
+int IDatabase::mQuery(Key** key, Key** base,
                             std::size_t n, int (*cmp)(const void*, const void*))
 {
    nql = 0;
@@ -336,7 +336,7 @@ int Database::mQuery(Key** key, Key** base,
 //------------------------------------------------------------------------------
 // queryByIcao() -- find a record by the ICAO code
 //------------------------------------------------------------------------------
-int Database::queryByIcao(const char* code)
+int IDatabase::queryByIcao(const char* code)
 {
    Key key(code);
    Key* pkey{&key};
@@ -350,7 +350,7 @@ int Database::queryByIcao(const char* code)
 // search pattern; this function looks above and below 'keyPtr' for more
 // records and put the final results in 'ql'.
 //------------------------------------------------------------------------------
-void Database::expandResults(Key** key, Key** keyPtr,
+void IDatabase::expandResults(Key** key, Key** keyPtr,
                                     int (*cmp)(const void*, const void*),
                                     Key** base, std::size_t n)
 {
@@ -387,7 +387,7 @@ void Database::expandResults(Key** key, Key** keyPtr,
 //------------------------------------------------------------------------------
 
 // rangeSort2: sort results by range; range must have already been computed.
-int Database::rangeSort2()
+int IDatabase::rangeSort2()
 {
    // if more than one key, sort them by range
    if (nql > 1) std::qsort(ql, nql, sizeof(Key*), rlqs);
@@ -407,7 +407,7 @@ int Database::rangeSort2()
 }
 
 // rangeSort: first compute range and then uses rangeSort2() to sort.
-int Database::rangeSort()
+int IDatabase::rangeSort()
 {
    // compute ranges
    for (int i = 0; i < nql; i++) {
@@ -422,7 +422,7 @@ int Database::rangeSort()
 //------------------------------------------------------------------------------
 // bsearch and qsort callbacks
 //------------------------------------------------------------------------------
-int Database::rlqs(const void* p1, const void* p2)
+int IDatabase::rlqs(const void* p1, const void* p2)
 {
    const auto k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
    const auto k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
@@ -434,7 +434,7 @@ int Database::rlqs(const void* p1, const void* p2)
    return result;
 }
 
-int Database::ol_cmp(const void* p1, const void* p2)
+int IDatabase::ol_cmp(const void* p1, const void* p2)
 {
    const auto k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
    const auto k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
@@ -446,21 +446,21 @@ int Database::ol_cmp(const void* p1, const void* p2)
 //------------------------------------------------------------------------------
 // printing functions
 //------------------------------------------------------------------------------
-void Database::printLoadedImpl(std::ostream& sout)
+void IDatabase::printLoadedImpl(std::ostream& sout)
 {
    for (int i=0; i < nrl; i++) {
       rl[i]->serialize(sout);
    }
 }
 
-void Database::printResultsImpl(std::ostream& sout)
+void IDatabase::printResultsImpl(std::ostream& sout)
 {
    for (int i=0; i < nql; i++) {
       ql[i]->serialize(sout);
    }
 }
 
-void Database::printIcaoList(std::ostream& sout)
+void IDatabase::printIcaoList(std::ostream& sout)
 {
    std::cout << "printIcaoList: nol = " << nol << std::endl;
    for (int i = 0; i < nol; i++) {
@@ -471,24 +471,24 @@ void Database::printIcaoList(std::ostream& sout)
 //------------------------------------------------------------------------------
 // Database::Key
 //------------------------------------------------------------------------------
-Database::Key::Key(const int idx1): idx(idx1)
+IDatabase::Key::Key(const int idx1): idx(idx1)
 {
 }
 
-Database::Key::Key(const float lat1, const float lon1): lat(lat1), lon(lon1)
+IDatabase::Key::Key(const float lat1, const float lon1): lat(lat1), lon(lon1)
 {
 }
 
-Database::Key::Key(const char* code)
+IDatabase::Key::Key(const char* code)
 {
-   Record::dsGetString(icao,code,ICAO_CODE_LEN);
+   IRecord::dsGetString(icao,code,ICAO_CODE_LEN);
 }
 
-Database::Key::~Key()
+IDatabase::Key::~Key()
 {
 }
 
-void Database::Key::serialize(std::ostream& sout) const
+void IDatabase::Key::serialize(std::ostream& sout) const
 {
    sout << idx << ": ";
 

@@ -18,7 +18,7 @@ EMPTY_SLOTTABLE(AirportLoader)
 EMPTY_DELETEDATA(AirportLoader)
 EMPTY_COPYDATA(AirportLoader)
 
-AirportLoader::AirportLoader() : Database()
+AirportLoader::AirportLoader() : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -27,7 +27,7 @@ AirportLoader::AirportLoader(
                   const std::string& country,
                   const std::string& file,
                   const std::string& path)
-               : Database()
+               : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -485,7 +485,7 @@ Airport* AirportLoader::getAirport(const int n)
    Airport* ap = nullptr;
    const char* s = getRecord(n);
    if (s != nullptr) {
-      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 1 ) {
+      if ( IRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 1 ) {
          // when we have an airport record
          ap = new Airport(s);
       }
@@ -498,7 +498,7 @@ Runway* AirportLoader::getRunway(const int n)
    Runway* rw = nullptr;
    const char* s = getRecord(n);
    if (s != nullptr) {
-      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 2 ) {
+      if ( IRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 2 ) {
          // when we have a runway record
          rw = new Runway(s);
       }
@@ -511,7 +511,7 @@ Ils* AirportLoader::getIls(const int n)
    Ils* ils = nullptr;
    const char* s = getRecord(n);
    if (s != nullptr) {
-      if ( Record::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 5 ) {
+      if ( IRecord::dsAtoln( &s[FORMAT_CODE_POS-1], FORMAT_CODE_LEN ) == 5 ) {
          // when we have an ILS record
          ils = new Ils(s);
       }
@@ -549,7 +549,7 @@ int AirportLoader::queryByKeyImpl(const char* subkey)
 
    AirportKey key(apKey);
    Key* pkey = &key;
-   return Database::sQuery(&pkey, rl, nrl, kl_cmp);
+   return IDatabase::sQuery(&pkey, rl, nrl, kl_cmp);
 }
 
 
@@ -1335,7 +1335,7 @@ AirportLoader::IlsKey::IlsKey(const long idx, const Ils& ils) : Key(idx)
 AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
 {
    size = ILS_RECORD_LEN;
-   Record::dsGetString(key, key1, ILS_KEY_LEN);
+   IRecord::dsGetString(key, key1, ILS_KEY_LEN);
    id[0] = '\0';
    parent = nullptr;
    next = nullptr;
@@ -1393,7 +1393,7 @@ AirportLoader::RunwayKey::RunwayKey(const long idx, const Runway& runway) : Key(
 AirportLoader::RunwayKey::RunwayKey(const char* key1) : Key(0)
 {
    size = RUNWAY_RECORD_LEN;
-   Record::dsGetString(key,key1,RW_KEY_LEN);
+   IRecord::dsGetString(key,key1,RW_KEY_LEN);
    rwlen = 0;
    parent = nullptr;
    next = nullptr;
@@ -1450,7 +1450,7 @@ AirportLoader::AirportKey::AirportKey(const long idx,
 AirportLoader::AirportKey::AirportKey(const char* key1) : Key(0)
 {
    size = AIRPORT_RECORD_LEN;
-   Record::dsGetString(key,key1,AP_KEY_LEN);
+   IRecord::dsGetString(key,key1,AP_KEY_LEN);
    runways = nullptr;
    next = nullptr;
    type = Airport::Type::ANY;

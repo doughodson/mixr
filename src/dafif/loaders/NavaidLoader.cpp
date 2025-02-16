@@ -16,7 +16,7 @@ IMPLEMENT_SUBCLASS(NavaidLoader, "NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
 EMPTY_COPYDATA(NavaidLoader)
 
-NavaidLoader::NavaidLoader() : Database()
+NavaidLoader::NavaidLoader() : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -25,7 +25,7 @@ NavaidLoader::NavaidLoader(
                   const std::string& country,
                   const std::string& file,
                   const std::string& path)
-               : Database()
+               : IDatabase()
 {
    STANDARD_CONSTRUCTOR()
    db->setPathname(path);
@@ -168,7 +168,7 @@ int NavaidLoader::queryByIdentImpl(const char* id)
    // Search for the NAVAID record(s)
    NavaidKey key(id, nullptr);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, rl, nrl, il_cmp);
+   return IDatabase::mQuery(&pkey, rl, nrl, il_cmp);
 }
 
 //------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ int NavaidLoader::queryByKeyImpl(const char* navaidkey)
 {
    NavaidKey key(navaidkey);
    Key* pkey = &key;
-   return Database::sQuery(&pkey, rl, nrl, kl_cmp);
+   return IDatabase::sQuery(&pkey, rl, nrl, kl_cmp);
 }
 
 //------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ int NavaidLoader::queryByFreq(const float freq)
    // Search for the NAVAID record(s)
    NavaidKey key(freq);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, reinterpret_cast<Key**>(fl), nfl, fl_cmp);
+   return IDatabase::mQuery(&pkey, reinterpret_cast<Key**>(fl), nfl, fl_cmp);
 }
 
 //------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ int NavaidLoader::queryByChannel(const long chan, const char band)
    if (band == 'Y') chan1 = -chan1;
    NavaidKey key(chan1);
    Key* pkey = &key;
-   return Database::mQuery(&pkey, reinterpret_cast<Key**>(cl), ncl, cl_cmp);
+   return IDatabase::mQuery(&pkey, reinterpret_cast<Key**>(cl), ncl, cl_cmp);
 }
 
 //------------------------------------------------------------------------------
@@ -379,7 +379,7 @@ NavaidLoader::NavaidKey::NavaidKey(const char* id, const char* ccode) : Key(0)
    key[0] = '\0';
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0), freq(freq1) 
+NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0), freq(freq1)
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
@@ -387,7 +387,7 @@ NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0), freq(freq1)
    key[0] = '\0';
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0), channel(chan) 
+NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0), channel(chan)
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
@@ -399,10 +399,10 @@ NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0), channel(chan)
 NavaidLoader::NavaidKey::NavaidKey(const char* key1) : Key(0)
 {
    size = NAVAID_RECORD_LEN;
-   Record::dsGetString(ident,key1,4);
+   IRecord::dsGetString(ident,key1,4);
    type = Navaid::NavaidType(key1[4]);
-   Record::dsGetString(countryCode, &key1[5],2);
-   Record::dsGetString(key, key1, NA_KEY_LEN);
+   IRecord::dsGetString(countryCode, &key1[5],2);
+   IRecord::dsGetString(key, key1, NA_KEY_LEN);
 }
 
 

@@ -33,7 +33,7 @@ Airport::Airport()
    ptbl = &ptable;
 }
 
-Airport::Airport(const std::string& s) : Record(s)
+Airport::Airport(const std::string& s) : IRecord(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
