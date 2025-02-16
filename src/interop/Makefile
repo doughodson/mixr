@@ -4,7 +4,7 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_interop.a
 
 OBJS =  \
-	NetIO.o \
+	INetIO.o \
 	Nib.o \
 	Ntm.o \
 	NtmInputNode.o \

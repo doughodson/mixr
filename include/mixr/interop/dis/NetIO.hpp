@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_NetIO_HPP__
 #define __mixr_interop_dis_NetIO_HPP__
 
-#include "mixr/interop/NetIO.hpp"
+#include "mixr/interop/INetIO.hpp"
 
 #include <array>
 
@@ -112,9 +112,9 @@ struct ActionResponsePDU_R;
 //       is matched with the EmissionPduHandler's "emitterName" value.
 //
 //------------------------------------------------------------------------------
-class NetIO : public interop::NetIO
+class NetIO : public interop::INetIO
 {
-    DECLARE_SUBCLASS(NetIO, interop::NetIO)
+    DECLARE_SUBCLASS(NetIO, interop::INetIO)
 
 public:
    // Max PDU buffer size

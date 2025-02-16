@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_hla_NetIO_H__
 #define __mixr_interop_hla_NetIO_H__
 
-#include "mixr/interop/NetIO.hpp"
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
@@ -29,9 +29,9 @@ class Nib;
 //      constrainedTime:    <base::Boolean>   ! constrained time flag
 //
 //------------------------------------------------------------------------------
-class NetIO : public interop::NetIO
+class NetIO : public interop::INetIO
 {
-   DECLARE_SUBCLASS(NetIO, interop::NetIO)
+   DECLARE_SUBCLASS(NetIO, interop::INetIO)
 
 public:
 

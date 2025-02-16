@@ -1,5 +1,5 @@
 
-#include "mixr/interop/NetIO.hpp"
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/Nib.hpp"
 #include "mixr/interop/Ntm.hpp"
 #include "mixr/interop/NtmInputNode.hpp"
@@ -37,7 +37,7 @@
 namespace mixr {
 namespace interop {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")
+IMPLEMENT_ABSTRACT_SUBCLASS(INetIO, "INetIO")
 
 //------------------------------------------------------------------------------
 // Parameters
@@ -47,7 +47,7 @@ const double NET_UPDATE_RATE      {5.0};                   //  seconds
 const double NET_THRESHOLD_MTR    {3.0};                   //  meters
 const double NET_THRESHOLD_RAD    {3.0 * base::PI/180.0};  //  radians
 
-BEGIN_SLOTTABLE(NetIO)
+BEGIN_SLOTTABLE(INetIO)
    "networkID",            //  1: Network ID (this interface)
    "federationName",       //  2: Federation name
    "federateName",         //  3: Name of this federate
@@ -66,9 +66,9 @@ BEGIN_SLOTTABLE(NetIO)
    "maxOrientationError",  // 12: Max DR angular error
    "maxAge",               // 13: Max age (without update) of networked players
    "maxEntityRange",       // 14: Max entity range of networked players
-END_SLOTTABLE(NetIO)
+END_SLOTTABLE(INetIO)
 
-BEGIN_SLOT_MAP(NetIO)
+BEGIN_SLOT_MAP(INetIO)
    ON_SLOT(1,  setSlotNetworkID,          base::Integer)
    ON_SLOT(2,  setSlotFederationName,     base::Identifier)
    ON_SLOT(3,  setSlotFederateName,       base::Identifier)
@@ -88,7 +88,7 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(14, setSlotMaxEntityRange,     base::ILength)
 END_SLOT_MAP()
 
-NetIO::NetIO()
+INetIO::INetIO()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -100,7 +100,7 @@ NetIO::NetIO()
    setMaxAge(NET_TIMEOUT);                     //  (seconds)
 }
 
-void NetIO::copyData(const NetIO& org, const bool)
+void INetIO::copyData(const INetIO& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -145,7 +145,7 @@ void NetIO::copyData(const NetIO& org, const bool)
     }
 }
 
-void NetIO::deleteData()
+void INetIO::deleteData()
 {
    for (int i{}; i < nInNibs; i++) {
       inputList[i]->unref();
@@ -169,7 +169,7 @@ void NetIO::deleteData()
    netInitFail = false;
 }
 
-void NetIO::reset()
+void INetIO::reset()
 {
     // initialization
     if (!isNetworkInitialized() && !didInitializationFail()) {
@@ -183,7 +183,7 @@ void NetIO::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool NetIO::shutdownNotification()
+bool INetIO::shutdownNotification()
 {
     for (int i{}; i < nInNibs; i++) {
         inputList[i]->event(SHUTDOWN_EVENT);
@@ -200,56 +200,56 @@ bool NetIO::shutdownNotification()
 //------------------------------------------------------------------------------
 
 // getCurrentTime() -- Returns the current time from the selected source
-double NetIO::getCurrentTime()
+double INetIO::getCurrentTime()
 {
     if (getTimeline() == UTC) return getSimulation()->getSysTimeOfDay();
     else return getSimulation()->getExecTimeSec();
 }
 
 // Entity filter: Returns max entity ranged (meters)
-double NetIO::getMaxEntityRange(const Nib* const) const
+double INetIO::getMaxEntityRange(const Nib* const) const
 {
    return maxEntityRange;
 }
 
 // Entity filter: Returns max entity ranged squared (meters^2)
-double NetIO::getMaxEntityRangeSquared(const Nib* const) const
+double INetIO::getMaxEntityRangeSquared(const Nib* const) const
 {
    return maxEntityRange2;
 }
 
 // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-double NetIO::getMaxTimeDR(const Nib* const) const
+double INetIO::getMaxTimeDR(const Nib* const) const
 {
    return maxTimeDR;
 }
 
 // Dead-Reckoning: Returns max DR position error (meters)
-double NetIO::getMaxPositionErr(const Nib* const) const
+double INetIO::getMaxPositionErr(const Nib* const) const
 {
    return maxPositionErr;
 }
 
 // Dead-Reckoning: Returns max DR orientation error (radians)
-double NetIO::getMaxOrientationErr(const Nib* const) const
+double INetIO::getMaxOrientationErr(const Nib* const) const
 {
    return maxOrientationErr;
 }
 
 // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-double NetIO::getMaxAge(const Nib* const) const
+double INetIO::getMaxAge(const Nib* const) const
 {
    return maxAge;
 }
 
 // Federate name
-const std::string& NetIO::getFederateName() const
+const std::string& INetIO::getFederateName() const
 {
    return federateName;
 }
 
 // Federation name
-const std::string& NetIO::getFederationName() const
+const std::string& INetIO::getFederationName() const
 {
    return federationName;
 }
@@ -259,7 +259,7 @@ const std::string& NetIO::getFederationName() const
 //------------------------------------------------------------------------------
 
 // Sets the Network's ID
-bool NetIO::setNetworkID(const unsigned short v)
+bool INetIO::setNetworkID(const unsigned short v)
 {
    bool ok{};
    if (v >= 1 && v <= MAX_NETWORK_ID) {
@@ -270,42 +270,42 @@ bool NetIO::setNetworkID(const unsigned short v)
 }
 
 // Sets the timeline (UTC or EXEC)
-bool NetIO::setTimeline(const TSource ts)
+bool INetIO::setTimeline(const TSource ts)
 {
     timeline = ts;
     return true;
 }
 
 // Sets the max dead-rec time; forces next update (sec)
-bool NetIO::setMaxTimeDR(const double v)
+bool INetIO::setMaxTimeDR(const double v)
 {
    maxTimeDR = v;
    return true;
 }
 
 // Sets the max positional error (meters)
-bool NetIO::setMaxPositionErr(const double v)
+bool INetIO::setMaxPositionErr(const double v)
 {
    maxPositionErr = v;
    return true;
 }
 
 // Sets the max orientation error (rad)
-bool NetIO::setMaxOrientationErr(const double v)
+bool INetIO::setMaxOrientationErr(const double v)
 {
    maxOrientationErr = v;
    return true;
 }
 
 // Sets the max age; for removal (sec)
-bool NetIO::setMaxAge(const double v)
+bool INetIO::setMaxAge(const double v)
 {
    maxAge = v;
    return true;
 }
 
 // Sets the max entity range (meters)
-bool NetIO::setMaxEntityRange(const double v)
+bool INetIO::setMaxEntityRange(const double v)
 {
    maxEntityRange = v;
    maxEntityRange2 = (v*v);
@@ -313,14 +313,14 @@ bool NetIO::setMaxEntityRange(const double v)
 }
 
 // Sets our federate name
-bool NetIO::setFederateName(const std::string& x)
+bool INetIO::setFederateName(const std::string& x)
 {
    federateName = x;
    return true;
 }
 
 // Sets our federation name
-bool NetIO::setFederationName(const std::string& x)
+bool INetIO::setFederationName(const std::string& x)
 {
    federationName = x;
    return true;
@@ -329,7 +329,7 @@ bool NetIO::setFederationName(const std::string& x)
 //------------------------------------------------------------------------------
 // inputFrame() -- input side of the network
 //------------------------------------------------------------------------------
-void NetIO::inputFrame(const double)
+void INetIO::inputFrame(const double)
 {
    if (isNetworkInitialized()) {
       netInputHander();     // Input handler
@@ -341,7 +341,7 @@ void NetIO::inputFrame(const double)
 //------------------------------------------------------------------------------
 // outputFrame() -- output side of the network
 //------------------------------------------------------------------------------
-void NetIO::outputFrame(const double)
+void INetIO::outputFrame(const double)
 {
    if (isNetworkInitialized()) {
       updateOutputList();   // Update the Output-List from the simulation player list
@@ -353,7 +353,7 @@ void NetIO::outputFrame(const double)
 // networkInitialization() -- Main network initialization routine
 //                            (usually called by updateData())
 //------------------------------------------------------------------------------
-bool NetIO::networkInitialization()
+bool INetIO::networkInitialization()
 {
     // reset flags
     netInit = false;
@@ -383,7 +383,7 @@ bool NetIO::networkInitialization()
 //------------------------------------------------------------------------------
 // cleanupInputList() -- Cleanup the Input-List (remove out of date items)
 //------------------------------------------------------------------------------
-void NetIO::cleanupInputList()
+void INetIO::cleanupInputList()
 {
    // Current exec time
    const double curExecTime{getSimulation()->getExecTimeSec()};
@@ -424,7 +424,7 @@ void NetIO::cleanupInputList()
 // updateOutputList() --
 //   Update the Output-List from the simulation player list (Background thread)
 //------------------------------------------------------------------------------
-void NetIO::updateOutputList()
+void INetIO::updateOutputList()
 {
 
    if (isNetworkInitialized()) {
@@ -522,7 +522,7 @@ void NetIO::updateOutputList()
 //------------------------------------------------------------------------------
 // processOutputList() -- Process the output-list entities
 //------------------------------------------------------------------------------
-void NetIO::processOutputList()
+void INetIO::processOutputList()
 {
    // ---
    // Send player states
@@ -569,14 +569,14 @@ void NetIO::processOutputList()
 //------------------------------------------------------------------------------
 // Create a new NIBs
 //------------------------------------------------------------------------------
-Nib* NetIO::createNewInputNib()
+Nib* INetIO::createNewInputNib()
 {
     Nib* nib{nibFactory(INPUT_NIB)};
     nib->setNetIO(this);
     return nib;
 }
 
-Nib* NetIO::createNewOutputNib(models::Player* const player)
+Nib* INetIO::createNewOutputNib(models::Player* const player)
 {
    Nib* nib{nibFactory(OUTPUT_NIB)};
    if (nib != nullptr) {
@@ -609,7 +609,7 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
 //------------------------------------------------------------------------------
 // Destroy the NIBs
 //------------------------------------------------------------------------------
-void NetIO::destroyInputNib(Nib* const nib)
+void INetIO::destroyInputNib(Nib* const nib)
 {
    if (nib->getPlayer() != nullptr) {
       // all we really need do is request deletion of the proxy player
@@ -619,7 +619,7 @@ void NetIO::destroyInputNib(Nib* const nib)
    nib->unref();
 }
 
-void NetIO::destroyOutputNib(Nib* const nib)
+void INetIO::destroyOutputNib(Nib* const nib)
 {
    models::Player* p{nib->getPlayer()};
    if (p != nullptr) p->setOutgoingNib(nullptr, netID);
@@ -631,7 +631,7 @@ void NetIO::destroyOutputNib(Nib* const nib)
 //------------------------------------------------------------------------------
 // create a new proxy player
 //------------------------------------------------------------------------------
-models::Player* NetIO::createProxyPlayer(Nib* const nib)
+models::Player* INetIO::createProxyPlayer(Nib* const nib)
 {
    models::Player* player{};
 
@@ -710,7 +710,7 @@ models::Player* NetIO::createProxyPlayer(Nib* const nib)
 //    Create a new Network Interface Block (NIB) for 'player' and insert it
 //    in the output list.  Returns a pointer to the new NIB or 0.
 //------------------------------------------------------------------------------
-Nib* NetIO::insertNewOutputNib(models::Player* const player)
+Nib* INetIO::insertNewOutputNib(models::Player* const player)
 {
     Nib* newNib{};
     if (player != nullptr) {
@@ -730,7 +730,7 @@ Nib* NetIO::insertNewOutputNib(models::Player* const player)
 // addNib2InputList() --
 //    Adds a new NIB to the input-list
 //------------------------------------------------------------------------------
-bool NetIO::addNib2InputList(Nib* const nib)
+bool INetIO::addNib2InputList(Nib* const nib)
 {
     // Only if we allow inputs
     if (!isInputEnabled()) return false;
@@ -741,7 +741,7 @@ bool NetIO::addNib2InputList(Nib* const nib)
 //------------------------------------------------------------------------------
 // findNib() -- find the NIB that matches ALL IDs.
 //------------------------------------------------------------------------------
-Nib* NetIO::findNib(const unsigned short playerID, const std::string& federateName, const IoType ioType)
+Nib* INetIO::findNib(const unsigned short playerID, const std::string& federateName, const IoType ioType)
 {
    // Define the key
    NibKey key(playerID, federateName);
@@ -758,7 +758,7 @@ Nib* NetIO::findNib(const unsigned short playerID, const std::string& federateNa
    return found;
 }
 
-Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
+Nib* INetIO::findNib(const models::Player* const player, const IoType ioType)
 {
    Nib* found{};
    if (player != nullptr) {
@@ -778,7 +778,7 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
 //------------------------------------------------------------------------------
 // addNibToList() -- adds a NIB to the quick access table
 //------------------------------------------------------------------------------
-bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
+bool INetIO::addNibToList(Nib* const nib, const IoType ioType)
 {
    bool ok{};
    if (nib != nullptr) {
@@ -823,7 +823,7 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 //------------------------------------------------------------------------------
 // removeNibFromList() -- removes a NIB from the quick access table
 //------------------------------------------------------------------------------
-void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
+void INetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 {
    Nib** tbl{inputList.data()};
    int n{nInNibs};
@@ -857,7 +857,7 @@ void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 // bsearch callbacks: object name compare function --
 //   True types are (const NibKey* key, const Nib** nib)
 //------------------------------------------------------------------------------
-int NetIO::compareKey2Nib(const void* key, const void* nib)
+int INetIO::compareKey2Nib(const void* key, const void* nib)
 {
    // the key
    const NibKey* pKey{static_cast<const NibKey*>(key)};
@@ -886,7 +886,7 @@ int NetIO::compareKey2Nib(const void* key, const void* nib)
 //------------------------------------------------------------------------------
 
 // Finds the network type mapper by NIB type codes
-const Ntm* NetIO::findNetworkTypeMapper(const Nib* const nib) const
+const Ntm* INetIO::findNetworkTypeMapper(const Nib* const nib) const
 {
    const Ntm* result{};
    if (inputNtmTree != nullptr && nib != nullptr) {
@@ -896,7 +896,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const Nib* const nib) const
 }
 
 // Finds the network type mapper by Player
-const Ntm* NetIO::findNetworkTypeMapper(const models::Player* const p) const
+const Ntm* INetIO::findNetworkTypeMapper(const models::Player* const p) const
 {
    const Ntm* result{};
    if (outputNtmTree != nullptr && p != nullptr) {
@@ -906,7 +906,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const models::Player* const p) const
 }
 
 // Adds an item to the input entity type table
-bool NetIO::addInputEntityType(Ntm* const ntm)
+bool INetIO::addInputEntityType(Ntm* const ntm)
 {
    bool ok{};
    if (nInputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
@@ -930,7 +930,7 @@ bool NetIO::addInputEntityType(Ntm* const ntm)
 }
 
 // Adds an item to the output entity type table
-bool NetIO::addOutputEntityType(Ntm* const ntm)
+bool INetIO::addOutputEntityType(Ntm* const ntm)
 {
    bool ok{};
    if (nOutputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
@@ -954,7 +954,7 @@ bool NetIO::addOutputEntityType(Ntm* const ntm)
 }
 
 // Clears the input entity type table
-bool NetIO::clearInputEntityTypes()
+bool INetIO::clearInputEntityTypes()
 {
    // Unref() the root node of the quick look tree
    if (inputNtmTree != nullptr) {
@@ -973,7 +973,7 @@ bool NetIO::clearInputEntityTypes()
 }
 
 // Clears the output entity type table
-bool NetIO::clearOutputEntityTypes()
+bool INetIO::clearOutputEntityTypes()
 {
    // Unref() the root node of the quick look tree
    if (outputNtmTree != nullptr) {
@@ -992,37 +992,37 @@ bool NetIO::clearOutputEntityTypes()
 }
 
 // Return the quick look root node for incoming entity types
-const NtmInputNode* NetIO::getRootNtmInputNode() const
+const NtmInputNode* INetIO::getRootNtmInputNode() const
 {
    return inputNtmTree;
 }
 
 // Return the quick look root node for outgoing entity types
-const NtmOutputNode* NetIO::getRootNtmOutputNode() const
+const NtmOutputNode* INetIO::getRootNtmOutputNode() const
 {
    return outputNtmTree;
 }
 
 // Return a incoming entity type by index
-const Ntm* NetIO::getInputEntityType(const int idx) const
+const Ntm* INetIO::getInputEntityType(const int idx) const
 {
    return (idx < nInputEntityTypes) ? inputEntityTypes[idx] : nullptr;
 }
 
 // Return a outgoing entity type by index
-const Ntm* NetIO::getOutputEntityTypes(const int idx) const
+const Ntm* INetIO::getOutputEntityTypes(const int idx) const
 {
    return (idx < nOutputEntityTypes) ? outputEntityTypes[idx] : nullptr;
 }
 
 // Number of output types
-int NetIO::getNumInputEntityTypes() const
+int INetIO::getNumInputEntityTypes() const
 {
    return nInputEntityTypes;
 }
 
 // Number of input types
-int NetIO::getNumOutputEntityTypes() const
+int INetIO::getNumOutputEntityTypes() const
 {
    return nOutputEntityTypes;
 }
@@ -1032,7 +1032,7 @@ int NetIO::getNumOutputEntityTypes() const
 //------------------------------------------------------------------------------
 
 // Set networkID
-bool NetIO::setSlotNetworkID(const base::Integer* const num)
+bool INetIO::setSlotNetworkID(const base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -1048,19 +1048,19 @@ bool NetIO::setSlotNetworkID(const base::Integer* const num)
 }
 
 // Sets our federate name
-bool NetIO::setSlotFederateName(const base::Identifier* const x)
+bool INetIO::setSlotFederateName(const base::Identifier* const x)
 {
    return setFederateName(x->asString());
 }
 
 // Sets our federation name
-bool NetIO::setSlotFederationName(const base::Identifier* const x)
+bool INetIO::setSlotFederationName(const base::Identifier* const x)
 {
    return setFederationName(x->asString());
 }
 
 // Set input enable flag
-bool NetIO::setSlotEnableInput(const base::Boolean* const p)
+bool INetIO::setSlotEnableInput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1071,7 +1071,7 @@ bool NetIO::setSlotEnableInput(const base::Boolean* const p)
 }
 
 // Set output enable flag
-bool NetIO::setSlotEnableOutput(const base::Boolean* const p)
+bool INetIO::setSlotEnableOutput(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1082,7 +1082,7 @@ bool NetIO::setSlotEnableOutput(const base::Boolean* const p)
 }
 
 // Set relay enable flag
-bool NetIO::setSlotEnableRelay(const base::Boolean* const p)
+bool INetIO::setSlotEnableRelay(const base::Boolean* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1093,7 +1093,7 @@ bool NetIO::setSlotEnableRelay(const base::Boolean* const p)
 }
 
 // Sets the source of the time ( UTC or EXEC )
-bool NetIO::setSlotTimeline(const base::Identifier* const p)
+bool INetIO::setSlotTimeline(const base::Identifier* const p)
 {
     bool ok{};
     if (p != nullptr) {
@@ -1109,7 +1109,7 @@ bool NetIO::setSlotTimeline(const base::Identifier* const p)
 }
 
 // Sets the table of input entity to player mapper objects
-bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
+bool INetIO::setSlotInputEntityTypes(base::PairStream* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1134,7 +1134,7 @@ bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
 }
 
 // Sets the table of output entity to player mapper objects
-bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
+bool INetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1159,7 +1159,7 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
 }
 
 // Sets the mac DR time(s)
-bool NetIO::setSlotMaxTimeDR(const base::ITime* const x)
+bool INetIO::setSlotMaxTimeDR(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1169,7 +1169,7 @@ bool NetIO::setSlotMaxTimeDR(const base::ITime* const x)
 }
 
 // Sets the max positional error(s)
-bool NetIO::setSlotMaxPositionErr(const base::ILength* const x)
+bool INetIO::setSlotMaxPositionErr(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1179,7 +1179,7 @@ bool NetIO::setSlotMaxPositionErr(const base::ILength* const x)
 }
 
 // Sets the max orientation error(s)
-bool NetIO::setSlotMaxOrientationErr(const base::IAngle* const x)
+bool INetIO::setSlotMaxOrientationErr(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1190,7 +1190,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::IAngle* const x)
 }
 
 // Sets the max age(s)
-bool NetIO::setSlotMaxAge(const base::ITime* const x)
+bool INetIO::setSlotMaxAge(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1200,7 +1200,7 @@ bool NetIO::setSlotMaxAge(const base::ITime* const x)
 }
 
 // Sets the max entity range(s)
-bool NetIO::setSlotMaxEntityRange(const base::ILength* const x)
+bool INetIO::setSlotMaxEntityRange(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1209,16 +1209,13 @@ bool NetIO::setSlotMaxEntityRange(const base::ILength* const x)
    return ok;
 }
 
-
-
 //------------------------------------------------------------------------------
 // root outgoing NTM node factory
 //------------------------------------------------------------------------------
-NtmOutputNode* NetIO::rootNtmOutputNodeFactory() const
+NtmOutputNode* INetIO::rootNtmOutputNodeFactory() const
 {
    return new NtmOutputNodeStd(nullptr, nullptr);   // root node has no factory name
 }
-
 
 }
 }

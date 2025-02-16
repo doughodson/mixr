@@ -4,7 +4,7 @@
 
 #include "mixr/simulation/INib.hpp"
 
-#include "mixr/interop/NetIO.hpp"
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/models/player/Player.hpp"
 #include <array>
 #include <string>
@@ -24,15 +24,15 @@ namespace interop {
 //
 //    Each Nib object manages either an incoming network entity to player
 //    relationship or an outgoing player to network entity relationship.
-//    The I/O type, which is either NetIO::INPUT_NIB or NetIO::OUTPUT_NIB, is
+//    The I/O type, which is either INetIO::INPUT_NIB or INetIO::OUTPUT_NIB, is
 //    set by the constructor and is accessed using the getIoType() function.
 //
-//    The parent NetIO class object maintains two lists of Nib objects: one to
+//    The parent INetIO interface maintains two lists of Nib objects: one to
 //    manage the incoming entities and a second to manage the outgoing players.
-//    To create Nib objects, NetIO uses a NIB factory function, nibFactory(),
-//    which is implemented by the NetIO network specific derived class.
+//    To create Nib objects, INetIO uses a NIB factory function, nibFactory(),
+//    which is implemented by the INetIO network specific derived class.
 //
-//    Each Nib maintains pointers to their parent NetIO object and to the Player
+//    Each Nib maintains pointers to their parent INetIO interface and to the Player
 //    object that they're managing.  The remainder of the data in this Nib class
 //    is common data used by most interoperability network entities.  Additional
 //    entity data is added by the network specific classes derived from Nib.
@@ -60,13 +60,13 @@ public:
    };
 
 public:
-   Nib(const NetIO::IoType ioType);
+   Nib(const INetIO::IoType ioType);
 
-   NetIO::IoType getIoType() const                    { return ioType; }
+   INetIO::IoType getIoType() const                    { return ioType; }
 
-   NetIO* getNetIO() override                         { return pNetIO; }  // Controlling Network I/O
-   const NetIO* getNetIO() const                      { return pNetIO; }  // Controlling Network I/O (const version)
-   virtual bool setNetIO(NetIO* const);                                   // Sets our Network I/O controller
+   INetIO* getNetIO() override                        { return pNetIO; }  // Controlling Network I/O
+   const INetIO* getNetIO() const                     { return pNetIO; }  // Controlling Network I/O (const version)
+   virtual bool setNetIO(INetIO* const);                                  // Sets our Network I/O controller
 
    // The player, its name and ID
    models::Player* getPlayer()                        { return pPlayer; }
@@ -277,11 +277,11 @@ private:
 private:
    void initData();
 
-   NetIO::IoType ioType;               // Input/Output direction of this NIB
+   INetIO::IoType ioType;               // Input/Output direction of this NIB
 
    std::string federateName;                     // federate name
    base::safe_ptr<models::Player> pPlayer;       // Our player
-   base::safe_ptr<NetIO> pNetIO;                 // Our Network
+   base::safe_ptr<INetIO> pNetIO;                // Our Network
    bool checked{};                               // NIB was checked
    unsigned short playerID{};                    // Player ID
 

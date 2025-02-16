@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_NetIO_HPP__
-#define __mixr_interop_common_NetIO_HPP__
+#ifndef __mixr_interop_common_INetIO_HPP__
+#define __mixr_interop_common_INetIO_HPP__
 
 #include "mixr/simulation/INetIO.hpp"
 
@@ -18,13 +18,13 @@ class NtmInputNode;
 class NtmOutputNode;
 
 //------------------------------------------------------------------------------
-// Class: NetIO
-// Description: Abstract interface class for interoperability Network I/O.
+// Class: INetIO
+// Description: Interface for interoperability Network I/O.
 //
 //    Defines the framework for interoperability networks (e.g., DIS, HLA,
 //    TENA, etc).  Derived classes will manage the network specific protocols.
 //
-// Factory name: NetIO
+// Factory name: INetIO
 //
 // Slots:
 //    networkID            <base::Integer>     ! Network ID number: [ 1 .. MAX_NETWORK_ID ] (default: 1)
@@ -51,14 +51,14 @@ class NtmOutputNode;
 //                                             !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
-// NetIO class objects:
+// INetIO interface:
 //
 //    An mixr application, which is typically controlled by a Station class
 //    object, can have multiple (i.e., MAX_NETWORK_ID) NetIO objects.  Each NetIO
 //    object handles a different interoperabiltiy network
 //
-//    Each NetIO object in the simulation has an unique, user defined network ID,
-//    which is set using the 'networkID' slot.  The NetIO objects are also
+//    Each INetIO object in the simulation has an unique, user defined network ID,
+//    which is set using the 'networkID' slot.  The INetIO objects are also
 //    identified by their federation and federate names, which are based on HLA.
 //    (see "dis/NetIO.hpp" for functions that will map the DIS exercise number to
 //    a federation name, and the DIS site and application numbers to the federate
@@ -145,9 +145,9 @@ class NtmOutputNode;
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public simulation::INetIO
+class INetIO : public simulation::INetIO
 {
-   DECLARE_SUBCLASS(NetIO, simulation::INetIO)
+   DECLARE_SUBCLASS(INetIO, simulation::INetIO)
 
 public:
     // Source of the time line
@@ -160,7 +160,7 @@ public:
     static const unsigned int MAX_NEW_OUTGOING{MIXR_CONFIG_MAX_NETIO_NEW_OUTGOING};
 
 public:
-   NetIO();
+   INetIO();
 
    // Updates the 'input' side of the network
    void inputFrame(const double dt) override;
@@ -282,7 +282,7 @@ protected:
    static const int MAX_OBJECTS{MIXR_CONFIG_MAX_NETIO_ENTITIES};
 
    // Create NIB unique to protocol (pure functions!)
-   virtual Nib* nibFactory(const NetIO::IoType ioType) =0;
+   virtual Nib* nibFactory(const INetIO::IoType ioType) =0;
 
    // Create a new Network Interface Block (NIB) for 'player' and insert it
    // in the output list.  Returns a pointer to the new NIB or 0.

@@ -26,7 +26,7 @@ public:
     enum { MAX_EM_SYSTEMS = 16 };
 
 public:
-    Nib(const interop::NetIO::IoType ioType);
+    Nib(const interop::INetIO::IoType ioType);
 
    // Site & App IDs
    unsigned short getSiteID() const                           { return siteID; }

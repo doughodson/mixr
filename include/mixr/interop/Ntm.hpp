@@ -2,8 +2,6 @@
 #ifndef __mixr_interop_common_Ntm_HPP__
 #define __mixr_interop_common_Ntm_HPP__
 
-#include "mixr/interop/NetIO.hpp"
-
 namespace mixr {
 namespace models { class Player; }
 namespace interop {
@@ -23,10 +21,10 @@ class Nib;
 //    Network specific classes, which are derived from this class, are used to
 //    define the network specific entity types.
 //
-//    The NetIO class will manage two lists of these Ntm objects; one to map
+//    The INetIO interface will manage two lists of these Ntm objects; one to map
 //    incoming entity type codes to player types, and a second to map outgoing
 //    player types to network entity codes.  These lists are provided as inputs
-//    to the NetIO object using the 'inputEntityTypes' and 'outputEntityTypes'
+//    to the INetIO object using the 'inputEntityTypes' and 'outputEntityTypes'
 //    slots.  For examples of these lists, see  the files 'DisIncomingEntityTypes.epp'
 //    and 'DisOutgoingEntityTypes.epp' in the "mixr-data" directory.
 //
