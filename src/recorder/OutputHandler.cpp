@@ -9,7 +9,7 @@
 namespace mixr {
 namespace recorder {
 
-IMPLEMENT_SUBCLASS(OutputHandler, "RecorderOutputHandler")
+IMPLEMENT_SUBCLASS(OutputHandler, "OutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
 
 OutputHandler::OutputHandler()

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_InputHandler_HPP__
-#define __mixr_recorder_InputHandler_HPP__
+#ifndef __mixr_recorder_IInputHandler_HPP__
+#define __mixr_recorder_IInputHandler_HPP__
 
 #include "mixr/simulation/IRecorderComponent.hpp"
 
@@ -9,15 +9,15 @@ namespace recorder {
 class DataRecordHandle;
 
 //------------------------------------------------------------------------------
-// Class: InputHandler
-// Description: Read and parse data records from an input source
+// Class: IInputHandler
+// Description: Interface to read and parse data records from an input source
 //------------------------------------------------------------------------------
-class InputHandler : public simulation::IRecorderComponent
+class IInputHandler : public simulation::IRecorderComponent
 {
-    DECLARE_SUBCLASS(InputHandler, simulation::IRecorderComponent)
+    DECLARE_SUBCLASS(IInputHandler, simulation::IRecorderComponent)
 
 public:
-   InputHandler();
+   IInputHandler();
 
    // Read one data record; returns zero if no record is available
    const DataRecordHandle* readRecord();

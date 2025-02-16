@@ -10,7 +10,7 @@ OBJS =  \
 	factory.o \
 	FileReader.o \
 	FileWriter.o \
-	InputHandler.o \
+	IInputHandler.o \
 	NetInput.o \
 	NetOutput.o \
 	OutputHandler.o \

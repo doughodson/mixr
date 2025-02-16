@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_FileReader_HPP__
 #define __mixr_recorder_FileReader_HPP__
 
-#include "mixr/recorder/InputHandler.hpp"
+#include "mixr/recorder/IInputHandler.hpp"
 
 namespace mixr {
 namespace base { class String; }
@@ -23,9 +23,9 @@ namespace recorder {
 //    in bytes.  The 4 bytes are stored as an ascii string with leading spaces
 //    (e.g., " 123")
 //------------------------------------------------------------------------------
-class FileReader : public InputHandler
+class FileReader : public IInputHandler
 {
-    DECLARE_SUBCLASS(FileReader, InputHandler)
+    DECLARE_SUBCLASS(FileReader, IInputHandler)
 
 public:
    static const unsigned int MAX_INPUT_BUFFER_SIZE = 2000;

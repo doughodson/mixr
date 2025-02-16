@@ -1,21 +1,21 @@
 
-#include "mixr/recorder/InputHandler.hpp"
+#include "mixr/recorder/IInputHandler.hpp"
 #include "mixr/recorder/DataRecordHandle.hpp"
 #include "mixr/recorder/protobuf/DataRecord.pb.h"
 
 namespace mixr {
 namespace recorder {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(InputHandler, "RecorderInputHandler")
-EMPTY_SLOTTABLE(InputHandler)
-EMPTY_CONSTRUCTOR(InputHandler)
-EMPTY_COPYDATA(InputHandler)
-EMPTY_DELETEDATA(InputHandler)
+IMPLEMENT_ABSTRACT_SUBCLASS(IInputHandler, "IInputHandler")
+EMPTY_SLOTTABLE(IInputHandler)
+EMPTY_CONSTRUCTOR(IInputHandler)
+EMPTY_COPYDATA(IInputHandler)
+EMPTY_DELETEDATA(IInputHandler)
 
 //------------------------------------------------------------------------------
 // Read one data record; returns zero if no record is available
 //------------------------------------------------------------------------------
-const DataRecordHandle* InputHandler::readRecord()
+const DataRecordHandle* IInputHandler::readRecord()
 {
    const DataRecordHandle* p{};
    bool finished{};

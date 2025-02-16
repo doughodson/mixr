@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_NetInput_HPP__
 #define __mixr_recorder_NetInput_HPP__
 
-#include "mixr/recorder/InputHandler.hpp"
+#include "mixr/recorder/IInputHandler.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class INetHandler; }
@@ -17,9 +17,9 @@ namespace recorder {
 //      netHandler  <INetHandler>   Network input handler
 //      noWait      <Boolean>       No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
-class NetInput : public InputHandler
+class NetInput : public IInputHandler
 {
-    DECLARE_SUBCLASS(NetInput, InputHandler)
+    DECLARE_SUBCLASS(NetInput, IInputHandler)
 
 public:
    static const unsigned int MAX_INPUT_BUFFER_SIZE = 2000;
