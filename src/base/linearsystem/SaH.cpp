@@ -26,7 +26,7 @@ SaH::SaH()
    initData();
 }
 
-SaH::SaH(const unsigned int r, const unsigned int sr) : ScalerFunc(r)
+SaH::SaH(const unsigned int r, const unsigned int sr) : IScalerFunc(r)
 {
    STANDARD_CONSTRUCTOR()
 

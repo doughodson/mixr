@@ -1,14 +1,14 @@
 
-#ifndef __mixr_linearsystem_DiffEquation_HPP__
-#define __mixr_linearsystem_DiffEquation_HPP__
+#ifndef __mixr_linearsystem_IDiffEquation_HPP__
+#define __mixr_linearsystem_IDiffEquation_HPP__
 
-#include "mixr/base/linearsystem/ScalerFunc.hpp"
+#include "mixr/base/linearsystem/IScalerFunc.hpp"
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  DiffEquation
+// Class:  IDiffEquation
 //
 // Description: Abstract difference equation
 // Description: Base class for various Discrete z-domain Transfer Functions.  Core
@@ -16,13 +16,13 @@ namespace base {
 //              by the various derived classes.
 //
 //------------------------------------------------------------------------------
-class DiffEquation : public ScalerFunc
+class IDiffEquation : public IScalerFunc
 {
-    DECLARE_SUBCLASS(DiffEquation, ScalerFunc)
+    DECLARE_SUBCLASS(IDiffEquation, IScalerFunc)
 
 public:
-   DiffEquation();
-   DiffEquation(const unsigned int rate);
+   IDiffEquation();
+   IDiffEquation(const unsigned int rate);
 
    double g(const double x) override;
 

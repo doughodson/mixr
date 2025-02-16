@@ -16,7 +16,7 @@ LimitFunc::LimitFunc()
    initData();
 }
 
-LimitFunc::LimitFunc(const double ll, const double uu) : ScalerFunc()
+LimitFunc::LimitFunc(const double ll, const double uu) : IScalerFunc()
 {
    STANDARD_CONSTRUCTOR()
 

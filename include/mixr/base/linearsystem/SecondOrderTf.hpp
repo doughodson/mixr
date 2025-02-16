@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_SecondOrderTf_HPP__
 #define __mixr_linearsystem_SecondOrderTf_HPP__
 
-#include "mixr/base/linearsystem/DiffEquation.hpp"
+#include "mixr/base/linearsystem/IDiffEquation.hpp"
 
 namespace mixr {
 namespace base {
@@ -20,9 +20,9 @@ namespace base {
 //       D1*s*s + D2*s + D3
 //
 //------------------------------------------------------------------------------
-class SecondOrderTf : public DiffEquation
+class SecondOrderTf : public IDiffEquation
 {
-   DECLARE_SUBCLASS(SecondOrderTf, DiffEquation)
+   DECLARE_SUBCLASS(SecondOrderTf, IDiffEquation)
 
 public:
    SecondOrderTf();

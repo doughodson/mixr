@@ -8,7 +8,7 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Sz2
+// Class: Sz2
 // ##### IN-WORK #####
 //
 // Description: Models a second order continuous transfer function in the discrete

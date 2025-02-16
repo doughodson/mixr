@@ -18,7 +18,7 @@ OBJS =  \
 	concepts/linkage/IIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
-    linearsystem/DiffEquation.o \
+    linearsystem/IDiffEquation.o \
     linearsystem/FirstOrderTf.o \
     linearsystem/LagFilter.o \
     linearsystem/Limit.o \
@@ -27,7 +27,7 @@ OBJS =  \
     linearsystem/LimitFunc.o \
     linearsystem/LowpassFilter.o \
     linearsystem/SaH.o \
-    linearsystem/ScalerFunc.o \
+    linearsystem/IScalerFunc.o \
     linearsystem/SecondOrderTf.o \
     linearsystem/Sz1.o \
     linearsystem/Sz2.o \

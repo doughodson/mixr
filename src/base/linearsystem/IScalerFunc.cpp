@@ -1,5 +1,5 @@
 
-#include "mixr/base/linearsystem/ScalerFunc.hpp"
+#include "mixr/base/linearsystem/IScalerFunc.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
@@ -8,32 +8,32 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc, "ScalerFunc")
+IMPLEMENT_ABSTRACT_SUBCLASS(IScalerFunc, "IScalerFunc")
 
-BEGIN_SLOTTABLE(ScalerFunc)
+BEGIN_SLOTTABLE(IScalerFunc)
     "rate",   //  1: Master update rate
     "x0",     //  2: Initial (previous) input value: X(0)
     "y0",     //  3: Initial (previous) output value: Y(0)
-END_SLOTTABLE(ScalerFunc)
+END_SLOTTABLE(IScalerFunc)
 
-BEGIN_SLOT_MAP(ScalerFunc)
+BEGIN_SLOT_MAP(IScalerFunc)
    ON_SLOT( 1, setSlotRate, IFrequency)
    ON_SLOT( 1, setSlotRate, Integer)
    ON_SLOT( 2, setSlotX0,   INumber)
    ON_SLOT( 3, setSlotY0,   INumber)
 END_SLOT_MAP()
 
-ScalerFunc::ScalerFunc()
+IScalerFunc::IScalerFunc()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-ScalerFunc::ScalerFunc(const unsigned int r): rate(r)
+IScalerFunc::IScalerFunc(const unsigned int r): rate(r)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void ScalerFunc::copyData(const ScalerFunc& org, const bool)
+void IScalerFunc::copyData(const IScalerFunc& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -55,7 +55,7 @@ void ScalerFunc::copyData(const ScalerFunc& org, const bool)
 //------------------------------------------------------------------------------
 //deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void ScalerFunc::deleteData()
+void IScalerFunc::deleteData()
 {
    // We clean up memory so that our derived classes don't need to.
    allocateMemory(0);
@@ -64,7 +64,7 @@ void ScalerFunc::deleteData()
 //------------------------------------------------------------------------------
 // isValid() -- is this a valid List
 //------------------------------------------------------------------------------
-bool ScalerFunc::isValid() const
+bool IScalerFunc::isValid() const
 {
    return (px != nullptr && py != nullptr && n > 0 && BaseClass::isValid());
 }
@@ -72,14 +72,14 @@ bool ScalerFunc::isValid() const
 //------------------------------------------------------------------------------
 // Initialize this control/filter
 //------------------------------------------------------------------------------
-void ScalerFunc::initialize()
+void IScalerFunc::initialize()
 {
 }
 
 //------------------------------------------------------------------------------
 // Allocate memory arrays and free any old arrays
 //------------------------------------------------------------------------------
-void ScalerFunc::allocateMemory(const unsigned int n0)
+void IScalerFunc::allocateMemory(const unsigned int n0)
 {
    if (n0 != n) {
       // Free the old memory arrays
@@ -100,7 +100,7 @@ void ScalerFunc::allocateMemory(const unsigned int n0)
 //------------------------------------------------------------------------------
 // Clear the memory arrays
 //------------------------------------------------------------------------------
-void ScalerFunc::clearMemory()
+void IScalerFunc::clearMemory()
 {
    for (unsigned int i{}; i < n; i++) {
       px[i] = 0;
@@ -112,7 +112,7 @@ void ScalerFunc::clearMemory()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool ScalerFunc::setX0(const double v)
+bool IScalerFunc::setX0(const double v)
 {
    x0 = v;
    if (px != nullptr) {
@@ -123,7 +123,7 @@ bool ScalerFunc::setX0(const double v)
    return true;
 }
 
-bool ScalerFunc::setY0(const double v)
+bool IScalerFunc::setY0(const double v)
 {
    y0 = v;
    if (py != nullptr) {
@@ -134,7 +134,7 @@ bool ScalerFunc::setY0(const double v)
    return true;
 }
 
-bool ScalerFunc::setRate(const unsigned int v)
+bool IScalerFunc::setRate(const unsigned int v)
 {
    bool ok {};
    if (v > 0) {
@@ -148,7 +148,7 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool ScalerFunc::setSlotRate(const IFrequency* const msg)
+bool IScalerFunc::setSlotRate(const IFrequency* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -161,7 +161,7 @@ bool ScalerFunc::setSlotRate(const IFrequency* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotRate(const Integer* const msg)
+bool IScalerFunc::setSlotRate(const Integer* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -174,7 +174,7 @@ bool ScalerFunc::setSlotRate(const Integer* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotX0(const INumber* const msg)
+bool IScalerFunc::setSlotX0(const INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -184,7 +184,7 @@ bool ScalerFunc::setSlotX0(const INumber* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotY0(const INumber* const msg)
+bool IScalerFunc::setSlotY0(const INumber* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

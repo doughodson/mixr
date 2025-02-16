@@ -10,7 +10,7 @@ class IFrequency;
 class INumber;
 
 //------------------------------------------------------------------------------
-// Class:  LowpassFilter
+// Class: LowpassFilter
 //
 // Description: Models a first order low pass filter with cutoff frequency of Wc radians/sec
 //

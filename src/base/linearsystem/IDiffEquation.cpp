@@ -1,25 +1,25 @@
 
-#include "mixr/base/linearsystem/DiffEquation.hpp"
+#include "mixr/base/linearsystem/IDiffEquation.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation, "DiffEquation")
-EMPTY_SLOTTABLE(DiffEquation)
-EMPTY_DELETEDATA(DiffEquation)
+IMPLEMENT_ABSTRACT_SUBCLASS(IDiffEquation, "IDiffEquation")
+EMPTY_SLOTTABLE(IDiffEquation)
+EMPTY_DELETEDATA(IDiffEquation)
 
-DiffEquation::DiffEquation()
+IDiffEquation::IDiffEquation()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-DiffEquation::DiffEquation(const unsigned int r) : ScalerFunc(r)
+IDiffEquation::IDiffEquation(const unsigned int r) : IScalerFunc(r)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void DiffEquation::copyData(const DiffEquation& org, const bool)
+void IDiffEquation::copyData(const IDiffEquation& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -35,7 +35,7 @@ void DiffEquation::copyData(const DiffEquation& org, const bool)
 //------------------------------------------------------------------------------
 // Allocate memory arrays and free any old arrays
 //------------------------------------------------------------------------------
-void DiffEquation::allocateMemory(unsigned int n0)
+void IDiffEquation::allocateMemory(unsigned int n0)
 {
    if (n0 != n) {
       // Free the old memory arrays
@@ -57,7 +57,7 @@ void DiffEquation::allocateMemory(unsigned int n0)
 //------------------------------------------------------------------------------
 // Clear the memory arrays
 //------------------------------------------------------------------------------
-void DiffEquation::clearMemory()
+void IDiffEquation::clearMemory()
 {
    for (unsigned int i{}; i < n; i++) {
       pa[i] = 0;
@@ -68,7 +68,7 @@ void DiffEquation::clearMemory()
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-double DiffEquation::g(const double xn)
+double IDiffEquation::g(const double xn)
 {
    if (isValid()) {
 

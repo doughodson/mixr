@@ -8,7 +8,7 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Sz1
+// Class: Sz1
 //
 // Description: Models a first order continuous transfer function (see FirstOrderTf)
 //

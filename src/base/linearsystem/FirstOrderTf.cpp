@@ -19,7 +19,7 @@ FirstOrderTf::FirstOrderTf()
 FirstOrderTf::FirstOrderTf(const unsigned int ir,
          const double in1, const double in2,
          const double id1, const double id2
-         ) : DiffEquation(ir)
+         ) : IDiffEquation(ir)
 
 {
    STANDARD_CONSTRUCTOR()

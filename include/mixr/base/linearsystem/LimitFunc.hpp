@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_LimitFunc_HPP__
 #define __mixr_linearsystem_LimitFunc_HPP__
 
-#include "mixr/base/linearsystem/ScalerFunc.hpp"
+#include "mixr/base/linearsystem/IScalerFunc.hpp"
 
 namespace mixr {
 namespace base {
@@ -12,9 +12,9 @@ namespace base {
 //
 // Description: Generic limits function: limits X to the upper and lower boundaries.
 //------------------------------------------------------------------------------
-class LimitFunc : public ScalerFunc
+class LimitFunc : public IScalerFunc
 {
-   DECLARE_SUBCLASS(LimitFunc, ScalerFunc)
+   DECLARE_SUBCLASS(LimitFunc, IScalerFunc)
 
 public:
    LimitFunc();

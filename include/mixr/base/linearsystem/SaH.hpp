@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_SaH_HPP__
 #define __mixr_linearsystem_SaH_HPP__
 
-#include "mixr/base/linearsystem/ScalerFunc.hpp"
+#include "mixr/base/linearsystem/IScalerFunc.hpp"
 
 namespace mixr {
 namespace base {
@@ -23,9 +23,9 @@ class Integer;
 //    rate  <Integer>    Sample rate Hz
 //
 //------------------------------------------------------------------------------
-class SaH : public ScalerFunc
+class SaH : public IScalerFunc
 {
-    DECLARE_SUBCLASS(SaH, ScalerFunc)
+    DECLARE_SUBCLASS(SaH, IScalerFunc)
 
 public:
    SaH();

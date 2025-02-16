@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_ScalerFunc_HPP__
-#define __mixr_linearsystem_ScalerFunc_HPP__
+#ifndef __mixr_linearsystem_IScalerFunc_HPP__
+#define __mixr_linearsystem_IScalerFunc_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -11,9 +11,9 @@ class Integer;
 class INumber;
 
 //------------------------------------------------------------------------------
-// Class:  ScalerFunc
+// Class: IScalerFunc
 //
-// Description: Abstract base class for various scaler functions
+// Description: Interface to scaler functions
 //             (e.g., z-domain difference equations, sample&hold, limits, etc).
 //
 // Notes:
@@ -36,13 +36,13 @@ class INumber;
 //    y0    <INumber>    Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class ScalerFunc : public Object
+class IScalerFunc : public Object
 {
-   DECLARE_SUBCLASS(ScalerFunc, Object)
+   DECLARE_SUBCLASS(IScalerFunc, Object)
 
 public:
-   ScalerFunc();
-   ScalerFunc(const unsigned int rate);
+   IScalerFunc();
+   IScalerFunc(const unsigned int rate);
 
    // one iteration of the system:  Y(n) = g(X(n))
    virtual double g(const double x1) =0;

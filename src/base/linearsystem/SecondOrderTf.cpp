@@ -18,7 +18,7 @@ SecondOrderTf::SecondOrderTf()
 SecondOrderTf::SecondOrderTf(const unsigned int ir,
          const double in1, const double in2, const double in3,
          const double id1, const double id2, const double id3
-         ) : DiffEquation(ir)
+         ) : IDiffEquation(ir)
 
 {
    STANDARD_CONSTRUCTOR()

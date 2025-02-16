@@ -10,7 +10,7 @@ class INumber;
 class ITime;
 
 //------------------------------------------------------------------------------
-// Class:  LagFilter
+// Class: LagFilter
 //
 // Description: Models a first order lag filter with a time constant 'tau' seconds
 //
