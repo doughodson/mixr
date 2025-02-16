@@ -41,7 +41,7 @@ class IWeapon;
 class Emission;
 class IrQueryMsg;
 class IrSignature;
-class RfSignature;
+class IRfSignature;
 class Track;
 
 //------------------------------------------------------------------------------
@@ -1011,7 +1011,7 @@ private:
    // ---
    // Appearance
    // ---
-   base::safe_ptr<RfSignature> signature;    // Player's RCS signature
+   base::safe_ptr<IRfSignature> signature;   // Player's RCS signature
    base::safe_ptr<IrSignature> irSignature;  // Player's IR signature
    unsigned int camouflage{};                // Camouflage type (0 is none)
    double      damage{};                     // Damage state from no damage(0.0) to destroyed (1.0)
@@ -1109,7 +1109,7 @@ private:
    bool setSlotType(const base::String* const);
    bool setSlotSide(const base::Identifier* const);
 
-   bool setSlotSignature(RfSignature* const);
+   bool setSlotSignature(IRfSignature* const);
    bool setSlotIrSignature(IrSignature* const);
    bool setSlotCamouflageType(const base::Integer* const);
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_RfSignature_HPP__
-#define __mixr_models_common_RfSignature_HPP__
+#ifndef __mixr_models_common_IRfSignature_HPP__
+#define __mixr_models_common_IRfSignature_HPP__
 
 #include "mixr/base/Component.hpp"
 
@@ -9,14 +9,14 @@ namespace models {
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: RfSignature
-// Descriptions: Abstract class for signatures
+// Class: IRfSignature
+// Descriptions: Interface for signatures
 //------------------------------------------------------------------------------
-class RfSignature : public base::Component
+class IRfSignature : public base::Component
 {
-    DECLARE_SUBCLASS(RfSignature, base::Component)
+    DECLARE_SUBCLASS(IRfSignature, base::Component)
 public:
-    RfSignature();
+    IRfSignature();
 
     // computes the Radar Cross Section for the emission
     virtual double getRCS(const Emission* const em) =0;

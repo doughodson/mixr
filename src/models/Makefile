@@ -55,7 +55,7 @@ OBJS =  \
 	sensor/Tws.o \
 	signature/AircraftIrSignature.o \
 	signature/IrSignature.o \
-	signature/RfSignature.o \
+	signature/IRfSignature.o \
 	signature/SigAzEl.o \
 	signature/SigConstant.o \
 	signature/SigDihedralCR.o \

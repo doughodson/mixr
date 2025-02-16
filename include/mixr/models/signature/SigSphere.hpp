@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigSphere_HPP__
 #define __mixr_models_common_SigSphere_HPP__
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -20,9 +20,9 @@ class Emission;
 //    radius   <base::Length>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
-class SigSphere : public RfSignature
+class SigSphere : public IRfSignature
 {
-    DECLARE_SUBCLASS(SigSphere, RfSignature)
+    DECLARE_SUBCLASS(SigSphere, IRfSignature)
 public:
     SigSphere();
     SigSphere(const double r);

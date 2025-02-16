@@ -37,10 +37,10 @@ double SigSwitch::getRCS(const Emission* const em)
       // find a RfSignature with this index
       base::Pair* pair{findByIndex(camouflage)};
       if (pair != nullptr) {
-         const auto sig = dynamic_cast<RfSignature*>( pair->object() );
+         const auto sig = dynamic_cast<IRfSignature*>( pair->object() );
          if (sig != nullptr) {
 
-            // OK -- we've found the correct RfSignature subcomponent
+            // OK -- we've found the correct IRfSignature subcomponent
             // now let it do all of the work
             rcs = sig->getRCS(em);
 

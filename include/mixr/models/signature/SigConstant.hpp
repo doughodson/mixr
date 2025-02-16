@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigConstant_HPP__
 #define __mixr_models_common_SigConstant_HPP__
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 
 namespace mixr {
 namespace base { class INumber; class IArea; }
@@ -17,9 +17,9 @@ class Emission;
 //    rcs   <base::INumber> ! Constant Radar Cross Section value (default: 0.0)
 //                          !  base::Number(square meters) or base::Decibel(square meters) or base::Area()
 //------------------------------------------------------------------------------
-class SigConstant : public RfSignature
+class SigConstant : public IRfSignature
 {
-    DECLARE_SUBCLASS(SigConstant, RfSignature)
+    DECLARE_SUBCLASS(SigConstant, IRfSignature)
 public:
     SigConstant();
     SigConstant(const double);

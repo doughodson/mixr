@@ -16,7 +16,7 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 #include "mixr/models/signature/IrSignature.hpp"
 
 #include "mixr/models/Track.hpp"
@@ -150,7 +150,7 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(13, setSlotType,               base::String)
    ON_SLOT(14, setSlotSide,               base::Identifier)
 
-   ON_SLOT(15, setSlotSignature,          RfSignature)
+   ON_SLOT(15, setSlotSignature,          IRfSignature)
    ON_SLOT(16, setSlotIrSignature,        IrSignature)
    ON_SLOT(17, setSlotCamouflageType,     base::Integer)
 
@@ -341,7 +341,7 @@ void Player::copyData(const Player& org, const bool cc)
    tOffset = org.tOffset;
 
    if (org.signature != nullptr) {
-      RfSignature* copy = org.signature->clone();
+      IRfSignature* copy = org.signature->clone();
       setSlotSignature( copy );
       copy->unref();
    } else {
@@ -3823,7 +3823,7 @@ bool Player::setSlotUseCoordSys(base::Identifier* const x)
 }
 
 // signature: Player's RCS signature
-bool Player::setSlotSignature(RfSignature* const s)
+bool Player::setSlotSignature(IRfSignature* const s)
 {
    if (signature != nullptr) {
       signature->container(nullptr);

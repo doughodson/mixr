@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigPlate_HPP__
 #define __mixr_models_common_SigPlate_HPP__
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 
 namespace mixr {
 namespace base { class INumber; class ILength; }
@@ -19,9 +19,9 @@ class Emission;
 //    b    <base::INumber>    ! width of the plate (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class SigPlate : public RfSignature
+class SigPlate : public IRfSignature
 {
-    DECLARE_SUBCLASS(SigPlate, RfSignature)
+    DECLARE_SUBCLASS(SigPlate, IRfSignature)
 
 public:
     SigPlate();

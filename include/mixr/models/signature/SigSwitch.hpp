@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigSwitch_HPP__
 #define __mixr_models_common_SigSwitch_HPP__
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 
 namespace mixr {
 namespace models {
@@ -15,9 +15,9 @@ class Emission;
 // Note:
 //  1) First pair (1:) is camouflage type 0, the second (2:) is camouflage type 1, etc.
 //------------------------------------------------------------------------------
-class SigSwitch : public RfSignature
+class SigSwitch : public IRfSignature
 {
-   DECLARE_SUBCLASS(SigSwitch, RfSignature)
+   DECLARE_SUBCLASS(SigSwitch, IRfSignature)
 public:
    SigSwitch();
 

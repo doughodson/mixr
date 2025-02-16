@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigAzEl_HPP__
 #define __mixr_models_common_SigAzEl_HPP__
 
-#include "mixr/models/signature/RfSignature.hpp"
+#include "mixr/models/signature/IRfSignature.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Table2; }
@@ -42,9 +42,9 @@ class Emission;
 //  4) If 'inDecibel' is set true then the dependent data is in decibel meters
 //     squared instead of the default meters squared
 //------------------------------------------------------------------------------
-class SigAzEl : public RfSignature
+class SigAzEl : public IRfSignature
 {
-    DECLARE_SUBCLASS(SigAzEl, RfSignature)
+    DECLARE_SUBCLASS(SigAzEl, IRfSignature)
 public:
    SigAzEl();
    SigAzEl(const base::Table2* const);
