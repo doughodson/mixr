@@ -2,7 +2,7 @@
 #include "mixr/base/threads/IThread.hpp"
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/system_utils.hpp"
 #include <iostream>
 

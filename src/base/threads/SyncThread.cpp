@@ -2,13 +2,13 @@
 #include "mixr/base/threads/SyncThread.hpp"
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-SyncThread::SyncThread(Component* const p) : IThread(p)
+SyncThread::SyncThread(IComponent* const p) : IThread(p)
 {
 }
 

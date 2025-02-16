@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IIoHandler_HPP__
 #define __mixr_base_IIoHandler_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base {
@@ -10,7 +10,7 @@ class IIoData;
 
 //------------------------------------------------------------------------------
 // Class: IIoHandler
-// Description: Handles the flow of data to/from devices.
+// Description: Interface that defines the flow of data to/from devices.
 //
 //    Data flowing to/from devices is buffered using application specific
 //    data objects (IIoData).
@@ -29,9 +29,9 @@ class IIoData;
 //    2) As an option, asynchronous processing of the flow of data to/from
 //       devices be started by calling the startAsyncProcessing() method
 //------------------------------------------------------------------------------
-class IIoHandler : public Component
+class IIoHandler : public IComponent
 {
-   DECLARE_SUBCLASS(IIoHandler, Component)
+   DECLARE_SUBCLASS(IIoHandler, IComponent)
 
 public:
    IIoHandler();

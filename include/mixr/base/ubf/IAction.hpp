@@ -7,7 +7,7 @@
 namespace mixr {
 
 namespace base {
-class Component;
+class IComponent;
 
 namespace ubf {
 
@@ -30,7 +30,7 @@ public:
    void setVote(const int);
 
    // Execute the behavior
-   virtual bool execute(base::Component* actor)=0;
+   virtual bool execute(base::IComponent* actor)=0;
 
 private:
    int vote{};

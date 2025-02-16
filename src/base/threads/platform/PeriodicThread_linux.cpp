@@ -2,7 +2,7 @@
 #include "mixr/base/threads/PeriodicThread.hpp"
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
 

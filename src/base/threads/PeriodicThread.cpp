@@ -1,13 +1,13 @@
 
 #include "mixr/base/threads/PeriodicThread.hpp"
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-PeriodicThread::PeriodicThread(Component* const p, const double rt) : IThread(p), rate(rt)
+PeriodicThread::PeriodicThread(IComponent* const p, const double rt) : IThread(p), rate(rt)
 {
 }
 

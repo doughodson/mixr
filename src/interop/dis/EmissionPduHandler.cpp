@@ -98,13 +98,13 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 
 void EmissionPduHandler::deleteData()
 {
-   if (sensor != nullptr) { sensor->event(mixr::base::Component::SHUTDOWN_EVENT); }
+   if (sensor != nullptr) { sensor->event(mixr::base::IComponent::SHUTDOWN_EVENT); }
    setSensor(nullptr);
 
-   if (sensorModel != nullptr) { sensorModel->event(mixr::base::Component::SHUTDOWN_EVENT); }
+   if (sensorModel != nullptr) { sensorModel->event(mixr::base::IComponent::SHUTDOWN_EVENT); }
    setSensorModel(nullptr);
 
-   if (antennaModel != nullptr) { antennaModel->event(mixr::base::Component::SHUTDOWN_EVENT); }
+   if (antennaModel != nullptr) { antennaModel->event(mixr::base::IComponent::SHUTDOWN_EVENT); }
    setAntennaModel(nullptr);
 }
 

@@ -9,7 +9,7 @@ namespace cigi {
 
 class IgThread final : public base::OneShotThread
 {
-   public: IgThread(base::Component* const parent);
+   public: IgThread(base::IComponent* const parent);
    private: unsigned long userFunc() final;
 };
 

@@ -743,10 +743,10 @@ void Steerpoint::processComponents(
       base::PairStream* const list,
       const std::type_info&,
       base::Pair* const add,
-      base::Component* const remove
+      base::IComponent* const remove
    )
 {
-   base::Component::processComponents(list,typeid(Steerpoint),add,remove);
+   base::IComponent::processComponents(list,typeid(Steerpoint),add,remove);
 }
 
 }

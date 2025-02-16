@@ -2,7 +2,7 @@
 #ifndef __mixr_map_vpf_VpfDirectory_HPP__
 #define __mixr_map_vpf_VpfDirectory_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/map/vpf/VpfTable.hpp"
 
 #include <array>
@@ -17,9 +17,9 @@ class VPFTable;
 // Description: Directory object which will understand it's VPFTables
 // Vector Product Format
 // -------------------------------------------------------------------------------
-class VpfDirectory : public base::Component
+class VpfDirectory : public base::IComponent
 {
-   DECLARE_SUBCLASS(VpfDirectory, base::Component)
+   DECLARE_SUBCLASS(VpfDirectory, base::IComponent)
 
 public:
     VpfDirectory();

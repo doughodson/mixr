@@ -3,13 +3,13 @@
 
 #include "mixr/simulation/Simulation.hpp"
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
 namespace simulation {
 
-SimulationTcSyncThread::SimulationTcSyncThread(base::Component* const parent): base::SyncThread(parent)
+SimulationTcSyncThread::SimulationTcSyncThread(base::IComponent* const parent): base::SyncThread(parent)
 {
 }
 

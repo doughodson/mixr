@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base {
-class Component;
+class IComponent;
 
 //------------------------------------------------------------------------------
 // Class: PeriodicThread
@@ -22,7 +22,7 @@ class Component;
 class PeriodicThread : public IThread
 {
 public:
-   PeriodicThread(Component* const parent, const double rate);
+   PeriodicThread(IComponent* const parent, const double rate);
    PeriodicThread(const PeriodicThread&) = delete;
    PeriodicThread& operator=(const PeriodicThread&) = delete;
 

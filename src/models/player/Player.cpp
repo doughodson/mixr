@@ -36,6 +36,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/String.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -194,13 +195,13 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEventPlayer, Emission)
 
    // Another player is requesting reflection of the R/F emission hitting us
-   ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, base::Component)
+   ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, base::IComponent)
 
    // We were just hit by a reflected R/F emission
    ON_EVENT_OBJ(RF_REFLECTED_EMISSION, onRfReflectedEmissionEventPlayer, Emission)
 
    // Another player is cancelling its request for reflected R/F emissions
-   ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::Component)
+   ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::IComponent)
 
    // Data link message event
    ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,base::Object)
@@ -2391,7 +2392,7 @@ bool Player::killedNotification(Player* const p)
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-               base::Component* sc{static_cast<base::Component*>(pair->object())};
+               base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2437,7 +2438,7 @@ bool Player::collisionNotification(Player* const p)
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-               base::Component* sc{static_cast<base::Component*>(pair->object())};
+               base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2476,7 +2477,7 @@ bool Player::crashNotification()
          if (subcomponents != nullptr) {
             for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-               base::Component* sc{static_cast<base::Component*>(pair->object())};
+               base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT);
             }
             subcomponents->unref();
@@ -2648,7 +2649,7 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 // onReflectionsRequest() -- request reflected R/F emissions
 //                           (must continue to request once per second)
 //------------------------------------------------------------------------------
-bool Player::onReflectionsRequest(base::Component* const p)
+bool Player::onReflectionsRequest(base::IComponent* const p)
 {
    bool ok{};               // Did we succeed?
    unsigned int idx{};      // Empty slot index
@@ -2682,7 +2683,7 @@ bool Player::onReflectionsRequest(base::Component* const p)
 //------------------------------------------------------------------------------
 // onReflectionsCancel() -- cancel a request for reflected R/F emissions
 //------------------------------------------------------------------------------
-bool Player::onReflectionsCancel(const base::Component* const p)
+bool Player::onReflectionsCancel(const base::IComponent* const p)
 {
    bool ok{};        // Did we succeed?
 
@@ -3180,11 +3181,11 @@ void Player::processComponents(
    base::PairStream* const list,
    const std::type_info& filter,
    base::Pair* const add,
-   base::Component* const remove
+   base::IComponent* const remove
    )
 {
    // Set the 'load system pointers' flag if anything changes
-   base::Component::processComponents(list,filter,add,remove);
+   base::IComponent::processComponents(list,filter,add,remove);
    loadSysPtrs = true;
 }
 

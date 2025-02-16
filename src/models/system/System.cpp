@@ -5,6 +5,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/PairStream.hpp"
 
 namespace mixr {
@@ -157,7 +158,7 @@ bool System::killedNotification(Player* const p)
    if(subcomponents != nullptr) {
       for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* sc{static_cast<base::Component*>(pair->object())};
+         base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();

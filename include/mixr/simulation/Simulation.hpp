@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_Simulation_HPP__
 #define __mixr_simulation_Simulation_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/safe_queue.hpp"
 #include "mixr/base/osg/Matrixd"
 #include <array>
@@ -163,9 +163,9 @@ class IPlayer;
 //    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public base::Component
+class Simulation : public base::IComponent
 {
-    DECLARE_SUBCLASS(Simulation, base::Component)
+    DECLARE_SUBCLASS(Simulation, base::IComponent)
 
 public:
    // Minimum released weapon ID

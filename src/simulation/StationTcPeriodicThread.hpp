@@ -12,7 +12,7 @@ namespace simulation {
 // ---
 class StationTcPeriodicThread final : public base::PeriodicThread
 {
-   public: StationTcPeriodicThread(base::Component* const parent, const double rate);
+   public: StationTcPeriodicThread(base::IComponent* const parent, const double rate);
    private: unsigned long userFunc(const double dt) final;
 };
 

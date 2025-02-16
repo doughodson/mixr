@@ -2,13 +2,13 @@
 #include "mixr/base/threads/OneShotThread.hpp"
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-OneShotThread::OneShotThread(Component* const p) : IThread(p)
+OneShotThread::OneShotThread(IComponent* const p) : IThread(p)
 {
 }
 

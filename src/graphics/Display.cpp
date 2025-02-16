@@ -247,7 +247,7 @@ void Display::reset()
       base::List::Item* item{subdisplays->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto obj = static_cast<Component*>(pair->object());
+         const auto obj = static_cast<IComponent*>(pair->object());
          if (obj != nullptr) obj->reset();
          item = item->getNext();
       }

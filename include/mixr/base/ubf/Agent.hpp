@@ -2,7 +2,7 @@
 #ifndef __mixr_base_ubf_Agent_HPP__
 #define __mixr_base_ubf_Agent_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base {
@@ -30,9 +30,9 @@ class IAction;
 // 2) The updateData() and updateTC() calls are only processed by this Agent
 //    class and are not passed to the rest of the behavior framework.
 //------------------------------------------------------------------------------
-class Agent : public base::Component
+class Agent : public base::IComponent
 {
-   DECLARE_SUBCLASS(Agent, base::Component)
+   DECLARE_SUBCLASS(Agent, base::IComponent)
 
 public:
    Agent();
@@ -52,13 +52,13 @@ protected:
 
    virtual void initActor();
 
-   base::Component* getActor();
-   void setActor(base::Component* const myActor);
+   base::IComponent* getActor();
+   void setActor(base::IComponent* const myActor);
 
 private:
    IBehavior* behavior{};
    IState* state{};
-   safe_ptr<base::Component> myActor;
+   safe_ptr<base::IComponent> myActor;
 
 private:
    // slot table helper methods
@@ -66,8 +66,8 @@ private:
    bool setSlotState(IState* const);
 };
 
-inline void Agent::setActor(base::Component* const actor)      { myActor = actor; return; }
-inline base::Component* Agent::getActor()                      { return myActor; }
+inline void Agent::setActor(base::IComponent* const actor)      { myActor = actor; return; }
+inline base::IComponent* Agent::getActor()                      { return myActor; }
 
 
 //------------------------------------------------------------------------------

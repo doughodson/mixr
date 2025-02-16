@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Component;
+class IComponent;
 
 //------------------------------------------------------------------------------
 // Class: OneShotThread
@@ -20,7 +20,7 @@ class Component;
 class OneShotThread : public IThread
 {
 public:
-   OneShotThread(Component* const parent);
+   OneShotThread(IComponent* const parent);
    OneShotThread(const OneShotThread&) = delete;
    OneShotThread& operator=(const OneShotThread&) = delete;
 

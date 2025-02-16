@@ -487,7 +487,7 @@ void Graphic::draw()
     // Draw my children
     base::PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
-        Component* s{getSelectedComponent()};
+        IComponent* s{getSelectedComponent()};
         if (s != nullptr) {
             // When we've selected only one
             const auto selected0 = dynamic_cast<Graphic*>(s);
@@ -1010,10 +1010,10 @@ void Graphic::processComponents(
       base::PairStream* const list,
       const std::type_info&,
       base::Pair* const add,
-      base::Component* const remove
+      base::IComponent* const remove
    )
 {
-   base::Component::processComponents(list, typeid(Graphic),add,remove);
+   base::IComponent::processComponents(list, typeid(Graphic),add,remove);
 }
 
 //------------------------------------------------------------------------------

@@ -546,7 +546,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
             // swap our current steerpoint (components) list for this new one
             if (ok) {
-               base::Component::processComponents(tempList,typeid(Steerpoint));
+               base::IComponent::processComponents(tempList,typeid(Steerpoint));
             }
 
             tempList->unref();
@@ -556,7 +556,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
         // if we have no components, we need to start a new component list
         else {
-            base::Component::processComponents(nullptr, typeid(Steerpoint), p);
+            base::IComponent::processComponents(nullptr, typeid(Steerpoint), p);
             ok = true;
         }
 
@@ -596,7 +596,7 @@ bool Route::replaceAllSteerpoints(base::PairStream* const newSteerpointList, uns
 
    if (newSteerpointList != nullptr) {
 
-      base::Component::processComponents(newSteerpointList, typeid(Steerpoint));
+      base::IComponent::processComponents(newSteerpointList, typeid(Steerpoint));
 
       // Try to force a 'Direct to' the new 'stptIdx' or default to stpt #1
       directTo(static_cast<unsigned int>(0));
@@ -618,7 +618,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 
    // remove the steerpoint
    base::PairStream* steerpoints{getComponents()};
-   base::Component::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
+   base::IComponent::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
    if (steerpoints != nullptr) {
       steerpoints->unref();
       steerpoints = nullptr;
@@ -647,7 +647,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 bool Route::deleteAllSteerpoints()
 {
    // This will create a new null(0) steerpoint (components) list
-   base::Component::processComponents(nullptr, typeid(Steerpoint));
+   base::IComponent::processComponents(nullptr, typeid(Steerpoint));
 
    // No steerpoints, so we're going nowhere
    directTo(static_cast<unsigned int>(0));
@@ -663,10 +663,10 @@ void Route::processComponents(
       base::PairStream* const list,
       const std::type_info&,
       base::Pair* const add,
-      base::Component* const remove
+      base::IComponent* const remove
    )
 {
-   base::Component::processComponents(list, typeid(Steerpoint), add, remove);
+   base::IComponent::processComponents(list, typeid(Steerpoint), add, remove);
 }
 
 //------------------------------------------------------------------------------

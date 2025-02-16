@@ -60,7 +60,7 @@ protected:
       base::PairStream* const list,             // Source list of components
       const std::type_info& filter,             // Type filter
       base::Pair* const add = nullptr,          // Optional pair to add
-      base::Component* const remove = nullptr   // Optional subcomponent to remove
+      base::IComponent* const remove = nullptr  // Optional subcomponent to remove
    ) override;
 
    bool shutdownNotification() override;

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_ubf_IBehavior_HPP__
 #define __mixr_base_ubf_IBehavior_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base {
@@ -22,9 +22,9 @@ class IAction;
 //    vote     <Integer>   ! default vote/weight value for actions generated
 //                         ! by this behavior
 //------------------------------------------------------------------------------
-class IBehavior : public base::Component
+class IBehavior : public base::IComponent
 {
-   DECLARE_SUBCLASS(IBehavior, base::Component)
+   DECLARE_SUBCLASS(IBehavior, base::IComponent)
 
 public:
    IBehavior();

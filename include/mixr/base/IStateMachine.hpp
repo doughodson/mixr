@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IStateMachine_HPP__
 #define __mixr_base_IStateMachine_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include <array>
 #include <string>
@@ -12,7 +12,7 @@ namespace base {
 class PairStream;
 
 //------------------------------------------------------------------------------
-// Class: StateMachine
+// Class: IStateMachine
 // Description: Interface that defines a state machine
 //------------------------------------------------------------------------------
 // EDL Interface:
@@ -199,9 +199,9 @@ class PairStream;
 //
 // Examples of state machines can be found in the MIXR example application 'testStateMach'.
 //------------------------------------------------------------------------------
-class IStateMachine : public Component
+class IStateMachine : public IComponent
 {
-   DECLARE_SUBCLASS(IStateMachine, Component)
+   DECLARE_SUBCLASS(IStateMachine, IComponent)
 
 public:
    static const unsigned short INIT_STATE = 0;         // Standard initial state

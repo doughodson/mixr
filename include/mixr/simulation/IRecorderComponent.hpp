@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_IRecorderComponent_HPP__
 #define __mixr_simulation_IRecorderComponent_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/simulation/dataRecorderTokens.hpp"
 
 namespace mixr {
@@ -30,9 +30,9 @@ namespace simulation {
 //                               ! (default: no records are disabled)
 //
 //------------------------------------------------------------------------------
-class IRecorderComponent : public base::Component
+class IRecorderComponent : public base::IComponent
 {
-   DECLARE_SUBCLASS(IRecorderComponent, base::Component)
+   DECLARE_SUBCLASS(IRecorderComponent, base::IComponent)
 
 public:
    IRecorderComponent();

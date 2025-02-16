@@ -2,7 +2,7 @@
 #include "mixr/base/threads/IThread.hpp"
 
 #include "mixr/base/Object.hpp"
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
@@ -21,7 +21,7 @@ static const int MAX_CPUS{32};
 void* IThread::staticThreadFunc(void* lpParam)
 {
    const auto thread = static_cast<IThread*>(lpParam);
-   Component* parent{thread->getParent()};
+   IComponent* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
    thread->ref();

@@ -430,7 +430,7 @@ bool Simulation::shutdownNotification()
       base::List::Item* item{plist->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>(pair->object())};
+         base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -446,7 +446,7 @@ bool Simulation::shutdownNotification()
    // ---
    base::Pair* newPlayer{newPlayerQueue.get()};
    while (newPlayer != nullptr) {
-      base::Component* p{static_cast<base::Component*>(newPlayer->object())};
+      base::IComponent* p{static_cast<base::IComponent*>(newPlayer->object())};
       p->event(SHUTDOWN_EVENT);
       newPlayer->unref();
       newPlayer = newPlayerQueue.get();

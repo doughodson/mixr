@@ -9,12 +9,12 @@
 
 namespace mixr {
 namespace base {
-class Component;
+class IComponent;
 
 //------------------------------------------------------------------------------
 // Class: IThread
 //
-// Description: Interface to thread class - defines common functionality needed
+// Description: Interface that defines threading - defines common functionality needed
 //              by more specific (althrough still abstract) thread classes.
 //              Thread objects and their parent objects are ref()'d as child
 //              threads start, and are unref()'d when the thread terminates.
@@ -70,7 +70,7 @@ class Component;
 class IThread : public IReferenced
 {
 public:
-   IThread(Component* const parent);
+   IThread(IComponent* const parent);
    IThread(const IThread&) = delete;
    IThread& operator=(const IThread&) = delete;
    virtual ~IThread();
@@ -94,7 +94,7 @@ public:
    static int getNumProcessors();
 
 protected:
-   Component* getParent();
+   IComponent* getParent();
    const void* getThreadHandle() const;
 
    virtual void setTerminated(); // Indicate that the thread has terminated natually
@@ -116,7 +116,7 @@ private:
    #endif
 
 private:
-   Component* parent{};        // Our parent component that created us.
+   IComponent* parent{};        // Our parent component that created us.
    double priority{};          // Thread priority (0->lowest, 1->highest)
    bool killed{};              // Are we terminated?
    std::size_t stackSize{};    // Stack size in bytes (zero to use the system default stack size)

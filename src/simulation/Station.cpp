@@ -364,7 +364,7 @@ bool Station::shutdownNotification()
       base::List::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>(pair->object())};
+         base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -388,7 +388,7 @@ bool Station::shutdownNotification()
       base::List::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>(pair->object())};
+         base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -949,7 +949,7 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
       // we are no longer the container for these old image generator host interfaces
       for (base::List::Item* item = oldList->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Component* p = static_cast<Component*>(pair->object());
+         IComponent* p = static_cast<IComponent*>(pair->object());
          p->container(nullptr);
       }
    }

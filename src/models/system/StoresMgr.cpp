@@ -81,7 +81,7 @@ bool StoresMgr::shutdownNotification()
       base::List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>(pair->object())};
+         base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -317,7 +317,7 @@ void StoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_i
       while (item != nullptr) {
 
          const auto pair = static_cast<const base::Pair*>(item->getValue());
-         const auto p = static_cast<const base::Component*>(pair->object());
+         const auto p = static_cast<const base::IComponent*>(pair->object());
 
          // Check the type and add to the list
          bool isType{p->isClassType(type)};

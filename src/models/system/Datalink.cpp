@@ -8,6 +8,7 @@
 #include "mixr/models/Message.hpp"
 #include "mixr/models/WorldModel.hpp"
 
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -473,7 +474,7 @@ bool Datalink::onDatalinkMessageEvent(base::Object* const msg)
    if (subcomponents != nullptr) {
       for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* sc{static_cast<base::Component*>(pair->object())};
+         base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
          sc->event(DATALINK_MESSAGE, msg);
       }
       subcomponents->unref();

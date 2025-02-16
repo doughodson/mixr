@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Material_HPP__
 #define __mixr_graphics_Material_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/osg/Vec4d"
 
 #include "mixr/base/util/platform_api.hpp"
@@ -38,9 +38,9 @@ namespace graphics {
 //                                 (default: (0,0,0,1))
 //    shininess      <INumber>     ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
 //------------------------------------------------------------------------------
-class Material : public base::Component
+class Material : public base::IComponent
 {
-    DECLARE_SUBCLASS(Material, base::Component)
+    DECLARE_SUBCLASS(Material, base::IComponent)
 
 public:
     Material();

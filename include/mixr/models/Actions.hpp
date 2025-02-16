@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class Integer; class Latitude; class ILength; class Longitude; class INumber; }
+namespace base { class Integer; class Latitude; class ILength; class Longitude; class INumber; class IComponent; }
 namespace models {
 class OnboardComputer;
 class Sar;
@@ -53,7 +53,7 @@ public:
    int getRefId() const                  { return refId; }      // Message Ref ID
    virtual void setRefId(const int);                            // Sets the message ref ID
 
-   bool execute(base::Component* actor) override;
+   bool execute(base::IComponent* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; }          // Our manager

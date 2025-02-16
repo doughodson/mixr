@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class Component;
+class IComponent;
 
 //------------------------------------------------------------------------------
 // Class: SyncThread
@@ -26,7 +26,7 @@ class Component;
 class SyncThread : public IThread
 {
 public:
-   SyncThread(Component* const parent);
+   SyncThread(IComponent* const parent);
    SyncThread(const SyncThread&) = delete;
    SyncThread& operator=(const SyncThread&) = delete;
    ~SyncThread();

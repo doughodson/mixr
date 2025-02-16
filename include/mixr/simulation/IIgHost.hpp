@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_IIgHost_HPP__
 #define __mixr_simulation_IIgHost_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base { class PairStream; }
@@ -21,9 +21,9 @@ class IPlayer;
 //
 // Factory name: AbstractIgHost
 //------------------------------------------------------------------------------
-class IIgHost : public base::Component
+class IIgHost : public base::IComponent
 {
-   DECLARE_SUBCLASS(IIgHost, base::Component)
+   DECLARE_SUBCLASS(IIgHost, base::IComponent)
 
 public:
    IIgHost();

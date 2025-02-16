@@ -71,7 +71,7 @@ protected:
 
 private:
    // return state of asynchronous periodic i/o processing
-   bool async() override                                             { return periodicThread != nullptr; }
+   bool async() override                                      { return periodicThread != nullptr; }
 
    // return input data buffer implementation
    base::IIoData* getInputDataImpl() override                 { return inData; }

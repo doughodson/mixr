@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_MultiActorAgent_HPP__
 #define __mixr_models_common_MultiActorAgent_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/Identifier.hpp"
 
 #include <array>
@@ -32,9 +32,9 @@ class WorldModel;
 //    state       <State>           ! state
 //    agentList   <PairStream>      ! behavior pairstream
 //------------------------------------------------------------------------------
-class MultiActorAgent : public base::Component
+class MultiActorAgent : public base::IComponent
 {
-   DECLARE_SUBCLASS(MultiActorAgent, base::Component)
+   DECLARE_SUBCLASS(MultiActorAgent, base::IComponent)
 
 public:
    MultiActorAgent();
@@ -49,8 +49,8 @@ protected:
    void setState(base::ubf::IState* const);
    base::ubf::IState* getState() const                { return state; }
 
-   void setActor(base::Component* c);
-   base::Component* getActor()                        { return actor;}
+   void setActor(base::IComponent* c);
+   base::IComponent* getActor()                        { return actor;}
 
    simulation::Station* getStation();
    WorldModel* getWorldModel();
@@ -59,7 +59,7 @@ protected:
    {
       std::string actorName;
       base::safe_ptr<base::ubf::IBehavior> behavior;
-      base::safe_ptr<base::Component> actor;
+      base::safe_ptr<base::IComponent> actor;
    };
 
    static const int MAX_AGENTS{10};
@@ -67,7 +67,7 @@ protected:
    bool addAgent(const std::string& name, base::ubf::IBehavior* const);
 
 private:
-   base::Component* actor{};
+   base::IComponent* actor{};
    base::ubf::IState* state{};
    simulation::Station* myStation{};
 
@@ -81,7 +81,7 @@ private:
    bool setSlotAgentList(base::PairStream* const);
 };
 
-inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
+inline void MultiActorAgent::setActor(base::IComponent* c) { actor=c; }
 
 }
 }

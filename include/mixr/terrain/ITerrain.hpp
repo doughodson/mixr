@@ -2,7 +2,7 @@
 #ifndef __mixr_terrain_ITerrain_HPP__
 #define __mixr_terrain_ITerrain_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include "mixr/base/osg/Vec2d"
 #include "mixr/base/osg/Vec3d"
@@ -27,9 +27,9 @@ namespace terrain {
 //    2) the final point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class ITerrain : public base::Component
+class ITerrain : public base::IComponent
 {
-    DECLARE_SUBCLASS(ITerrain, base::Component)
+    DECLARE_SUBCLASS(ITerrain, base::IComponent)
 
 public:
    ITerrain();

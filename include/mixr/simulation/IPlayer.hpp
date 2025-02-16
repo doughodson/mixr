@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_IPlayer_HPP__
 #define __mixr_simulation_IPlayer_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include <string>
 
@@ -26,9 +26,9 @@ class INib;
 //    mode           <base::Identifier>  ! initial mode { inactive, active, killed, crashed, detonated, launched }
 //                                       !   (default: active)
 //------------------------------------------------------------------------------
-class IPlayer : public base::Component
+class IPlayer : public base::IComponent
 {
-   DECLARE_SUBCLASS(IPlayer, base::Component)
+   DECLARE_SUBCLASS(IPlayer, base::IComponent)
 
 public:
    IPlayer();

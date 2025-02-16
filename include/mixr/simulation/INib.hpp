@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_INib_HPP__
 #define __mixr_simulation_INib_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include <string>
 
@@ -36,9 +36,9 @@ class INetIO;
 //
 // Factory name: INib
 //------------------------------------------------------------------------------
-class INib : public base::Component
+class INib : public base::IComponent
 {
-   DECLARE_SUBCLASS(INib, base::Component)
+   DECLARE_SUBCLASS(INib, base::IComponent)
 
 public:
    INib();

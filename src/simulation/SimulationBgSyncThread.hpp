@@ -5,7 +5,7 @@
 #include "mixr/base/threads/SyncThread.hpp"
 
 namespace mixr {
-namespace base { class Component; class PairStream; }
+namespace base { class IComponent; class PairStream; }
 namespace simulation {
 
 //------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ namespace simulation {
 class SimulationBgSyncThread final : public base::SyncThread
 {
 public:
-   SimulationBgSyncThread(base::Component* const parent);
+   SimulationBgSyncThread(base::IComponent* const parent);
 
    // Parent thread signals start to this child thread with these parameters.
    void start0(

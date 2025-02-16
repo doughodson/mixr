@@ -3,6 +3,7 @@
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base {
@@ -31,7 +32,7 @@ void IState::updateGlobalState()
          base::List::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto obj = static_cast<base::Component*>(pair->object());
+            const auto obj = static_cast<base::IComponent*>(pair->object());
             const auto state = dynamic_cast<IState*>(obj);
             if (state != nullptr)
                state->updateGlobalState();
@@ -43,7 +44,7 @@ void IState::updateGlobalState()
    }
 }
 
-void IState::updateState(const base::Component* const actor)
+void IState::updateState(const base::IComponent* const actor)
 {
    // Update all my children
    base::PairStream* subcomponents{getComponents()};
@@ -60,7 +61,7 @@ void IState::updateState(const base::Component* const actor)
          base::List::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto obj = static_cast<base::Component*>(pair->object());
+            const auto obj = static_cast<base::IComponent*>(pair->object());
             const auto state = dynamic_cast<IState*>(obj);
             if (state != nullptr)
                state->updateState(actor);

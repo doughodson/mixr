@@ -150,7 +150,7 @@ void OutputHandler::processComponents(
       base::PairStream* const list,
       const std::type_info&,
       base::Pair* const add,
-      base::Component* const remove
+      base::IComponent* const remove
    )
 {
    BaseClass::processComponents(list, typeid(OutputHandler), add, remove);

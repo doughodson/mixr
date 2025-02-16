@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_Station_HPP__
 #define __mixr_simulation_Station_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include <string>
 
@@ -142,9 +142,9 @@ class StationNetPeriodicThread;
 //    to this object.
 //
 //------------------------------------------------------------------------------
-class Station : public base::Component
+class Station : public base::IComponent
 {
-   DECLARE_SUBCLASS(Station, base::Component)
+   DECLARE_SUBCLASS(Station, base::IComponent)
 
 public:
    // Default priorities and rates

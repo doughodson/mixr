@@ -6,7 +6,7 @@
 namespace mixr {
 namespace simulation {
 
-StationBgPeriodicThread::StationBgPeriodicThread(base::Component* const parent, const double rate): base::PeriodicThread(parent, rate)
+StationBgPeriodicThread::StationBgPeriodicThread(base::IComponent* const parent, const double rate): base::PeriodicThread(parent, rate)
 {
 }
 

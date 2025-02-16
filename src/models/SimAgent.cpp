@@ -73,14 +73,14 @@ void SimAgent::initActor()
       } else {
          WorldModel* sim{getWorldModel()};
          if ( sim != nullptr ) {
-            base::Component* player{sim->findPlayerByName(actorPlayerName->c_str())};
+            base::IComponent* player{sim->findPlayerByName(actorPlayerName->c_str())};
             if (actorComponentName == nullptr) {
                // no player component specified, so the player is the actor
                setActor(player);
             } else if (player != nullptr) {
                base::Pair* pair{player->findByName(actorComponentName->c_str())};
                if (pair != nullptr) {
-                  setActor(dynamic_cast<base::Component*>( pair->object() ));
+                  setActor(dynamic_cast<base::IComponent*>( pair->object() ));
                }
             }
          }

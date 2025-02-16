@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_INetIO_HPP__
 #define __mixr_simulation_INetIO_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace simulation {
@@ -23,9 +23,9 @@ namespace simulation {
 //    going entities, respectively.  For DIS, these can be called by different
 //    threads, and for HLA they need to be called from the same thread.
 //------------------------------------------------------------------------------
-class INetIO : public base::Component
+class INetIO : public base::IComponent
 {
-   DECLARE_SUBCLASS(INetIO, base::Component)
+   DECLARE_SUBCLASS(INetIO, base::IComponent)
 
 public:
    INetIO();

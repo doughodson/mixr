@@ -70,7 +70,7 @@ void IStateMachine::reset()
       List::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
-         const auto q = static_cast<Component*>(p->object());
+         const auto q = static_cast<IComponent*>(p->object());
          q->reset();
          item = item->getNext();
       }
@@ -450,7 +450,7 @@ bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
       List::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
-         const auto q = static_cast<Component*>(p->object());
+         const auto q = static_cast<IComponent*>(p->object());
          q->container(nullptr);
          item = item->getNext();
       }

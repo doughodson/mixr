@@ -359,7 +359,7 @@ bool Stores::jettisonAll()
       base::List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>( pair->object() )};
+         base::IComponent* p{static_cast<base::IComponent*>( pair->object() )};
          p->event(JETTISON_EVENT);
          item = item->getNext();
       }
@@ -436,7 +436,7 @@ void Stores::resetStores(base::PairStream* const list)
       base::List::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-         base::Component* p{static_cast<base::Component*>( pair->object() )};
+         base::IComponent* p{static_cast<base::IComponent*>( pair->object() )};
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -566,7 +566,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
    while (item != nullptr) {
 
       const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
-      const base::Component* p{static_cast<const base::Component*>(pair->object())};
+      const base::IComponent* p{static_cast<const base::IComponent*>(pair->object())};
       if (p != nullptr) {
 
          // get the station number from the stores' slot name
@@ -585,7 +585,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
             if ( isWpn || isEE ) {
                // Clone the weapon pair and set us as its container
                base::Pair* cpair{pair->clone()};
-               Component* cp{static_cast<Component*>(cpair->object())};
+               IComponent* cp{static_cast<IComponent*>(cpair->object())};
                cp->container(this);
 
                if ( isWpn ) {

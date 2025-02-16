@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Graphic_HPP__
 #define __mixr_graphics_Graphic_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/osg/Vec2d"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
@@ -32,7 +32,7 @@ class Material;
 
 //------------------------------------------------------------------------------
 // Class:       Graphic
-// Base class:  Object -> Component -> Graphic
+// Base class:  Object -> IComponent -> Graphic
 //
 // Description: Base class for the graphic objects.  Provides list of vertices,
 //              transformation matrix, color, linewidth, etc.
@@ -221,9 +221,9 @@ class Material;
 //      lower than this, so there is no confusion in the pick() routine.
 //
 //------------------------------------------------------------------------------
-class Graphic : public base::Component
+class Graphic : public base::IComponent
 {
-   DECLARE_SUBCLASS(Graphic, base::Component)
+   DECLARE_SUBCLASS(Graphic, base::IComponent)
 
 public:
    Graphic();
@@ -400,7 +400,7 @@ protected:
         base::PairStream* const list,               // Source list of components
         const std::type_info& filter,               // Type filter
         base::Pair* const add = nullptr,            // Optional pair to add
-        base::Component* const remove = nullptr     // Optional subcomponent to remove
+        base::IComponent* const remove = nullptr    // Optional subcomponent to remove
    ) override;
 
 private:

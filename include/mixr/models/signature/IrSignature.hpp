@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrSignature_HPP__
 #define __mixr_models_common_IrSignature_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base { class IArea; class INumber; class List; class Table1; }
@@ -54,9 +54,9 @@ class IrShape;
 //   )
 //
 //------------------------------------------------------------------------------
-class IrSignature : public base::Component
+class IrSignature : public base::IComponent
 {
-    DECLARE_SUBCLASS(IrSignature, base::Component)
+    DECLARE_SUBCLASS(IrSignature, base::IComponent)
 
 public:
 

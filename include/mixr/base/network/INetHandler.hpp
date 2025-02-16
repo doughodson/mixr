@@ -2,7 +2,7 @@
 #ifndef __mixr_base_INetHandler_HPP__
 #define __mixr_base_INetHandler_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/platform_api.hpp"
 #include <cstdint>
 
@@ -22,9 +22,9 @@ namespace base {
 // Factory name: INetHandler
 // Slots: none
 //------------------------------------------------------------------------------
-class INetHandler : public Component
+class INetHandler : public IComponent
 {
-   DECLARE_SUBCLASS(INetHandler, Component)
+   DECLARE_SUBCLASS(INetHandler, IComponent)
 
 public:  // Define the Windows vs Unix socket type
    #if defined(WIN32)

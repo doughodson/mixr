@@ -164,7 +164,7 @@ OBJS =  \
 	util/str_utils.o \
 	util/string_utils.o \
 	util/system_utils.o \
-	Component.o \
+	IComponent.o \
 	EarthModel.o \
 	factory.o \
 	FileReader.o \

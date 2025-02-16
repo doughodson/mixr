@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Steerpoint_HPP__
 #define __mixr_models_common_Steerpoint_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
@@ -60,9 +60,9 @@ class Action;
 //                                    !  next steerpoint when action is triggered. (default: 0)
 //
 //------------------------------------------------------------------------------
-class Steerpoint : public base::Component
+class Steerpoint : public base::IComponent
 {
-   DECLARE_SUBCLASS(Steerpoint, base::Component)
+   DECLARE_SUBCLASS(Steerpoint, base::IComponent)
 
 public:
    enum class StptType { DEST, MARK, FIX, OAP, IP, TGT, TGT_GRP };
@@ -168,7 +168,7 @@ protected:
          base::PairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
          base::Pair* const add = nullptr,           // Optional pair to add
-         base::Component* const remove = nullptr    // Optional subcomponent to remove
+         base::IComponent* const remove = nullptr   // Optional subcomponent to remove
        ) override;
 
 private:

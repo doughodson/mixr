@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/SyncThread.hpp"
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
 //-----------------------------------------------------------------

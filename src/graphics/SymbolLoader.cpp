@@ -216,7 +216,7 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
                   // Add the symbol's graphical component to our component list.
                   {
                      base::PairStream* comp{getComponents()};
-                     base::Component::processComponents(comp, typeid(graphics::Graphic), newPair);
+                     base::IComponent::processComponents(comp, typeid(graphics::Graphic), newPair);
                      if (comp != nullptr) comp->unref();
                   }
 
@@ -275,7 +275,7 @@ bool SymbolLoader::setSymbolType(const int idx, const int nType)
                   // Add the new and remove the old components from our subcomponent list
                   {
                      base::PairStream* comp = getComponents();
-                     base::Component::processComponents(comp, typeid(graphics::Graphic), newPair, oldG);
+                     base::IComponent::processComponents(comp, typeid(graphics::Graphic), newPair, oldG);
                      if (comp != nullptr) comp->unref();
                   }
 
@@ -318,7 +318,7 @@ bool SymbolLoader::removeSymbol(const int idx)
             const auto g = static_cast<graphics::Graphic*>(pair->object());
 
             base::PairStream* x = getComponents();
-            base::Component::processComponents(x, typeid(graphics::Graphic), nullptr, g);
+            base::IComponent::processComponents(x, typeid(graphics::Graphic), nullptr, g);
             x->unref();
          }
 

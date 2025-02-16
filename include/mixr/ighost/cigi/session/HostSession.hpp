@@ -2,7 +2,7 @@
 #ifndef __mixr_ighost_cigi3_session_HostSession_HPP__
 #define __mixr_ighost_cigi3_session_HostSession_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 #include <memory>
 
@@ -41,9 +41,9 @@ class SignalProcessor;
 //    netInput       (INetHandler)   Network input handler
 //    netOutput      (INetHandler)   Network output handler
 //------------------------------------------------------------------------------
-class HostSession : public base::Component
+class HostSession : public base::IComponent
 {
-   DECLARE_SUBCLASS(HostSession, base::Component)
+   DECLARE_SUBCLASS(HostSession, base::IComponent)
 
 public:
    HostSession();

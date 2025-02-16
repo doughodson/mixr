@@ -878,8 +878,8 @@ public:
    virtual bool onTgtStepEvent();                                             // Handles the TGT_STEP_EVENT event
    virtual bool onRfEmissionEventPlayer(Emission* const);                     // Handles the RF_EMISSION event
    virtual bool onRfReflectedEmissionEventPlayer(Emission* const);            // Handles the RF_EMISSION event reflected to a 3rd party
-   virtual bool onReflectionsRequest(base::Component* const);                 // Handles the RF_REFLECTIONS_REQUEST event
-   virtual bool onReflectionsCancel(const base::Component* const);            // Handles the RF_REFLECTIONS_CANCEL event
+   virtual bool onReflectionsRequest(base::IComponent* const);                // Handles the RF_REFLECTIONS_REQUEST event
+   virtual bool onReflectionsCancel(const base::IComponent* const);           // Handles the RF_REFLECTIONS_CANCEL event
    virtual bool onIrMsgEventPlayer(IrQueryMsg* const);                        // Handle IR_QUERY_MSG event
    virtual bool onDatalinkMessageEventPlayer(base::Object* const);            // Handles the DATALINK_MESSAGE event
    virtual bool onDeEmissionEvent(base::Object* const);                       // Handles the DE_EMISSION event
@@ -928,7 +928,7 @@ protected:
       base::PairStream* const list,             // Source list of components
       const std::type_info& filter,             // Type filter
       base::Pair* const add = nullptr,          // Optional pair to add
-      base::Component* const remove = nullptr   // Optional subcomponent to remove
+      base::IComponent* const remove = nullptr  // Optional subcomponent to remove
       ) override;
 
 private:
@@ -1066,7 +1066,7 @@ private:
    // Reflected emissions
    // ---
    static const int MAX_RF_REFLECTIONS{4};                          // Max number of reflected emissions we'll send (let's keep it small)
-   std::array<base::Component*, MAX_RF_REFLECTIONS> rfReflect{};    // Objects that are interested in the emissions hitting us
+   std::array<base::IComponent*, MAX_RF_REFLECTIONS> rfReflect{};   // Objects that are interested in the emissions hitting us
    std::array<double, MAX_RF_REFLECTIONS> rfReflectTimer{};         // Request for reflected emissions will timeout
 
    // ---

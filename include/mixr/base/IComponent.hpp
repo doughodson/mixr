@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Component_HPP__
-#define __mixr_base_Component_HPP__
+#ifndef __mixr_base_IComponent_HPP__
+#define __mixr_base_IComponent_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -19,17 +19,16 @@ class Statistic;
 class String;
 
 //------------------------------------------------------------------------------
-// Class: Component
-// Description: Base class for all components.  Components provide
-//              a common interface for time critical and non-time critical tasks,
+// Class: IComponent
+// Description: Interface that defines time critical and non-time critical tasks,
 //              and for passing event messages.  Any component can be a container
 //              for a list of components.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Component
+// Factory name: IComponent
 // Slots:
-//    components           <Component>  ! Single child component (default: 0)
+//    components           <IComponent> ! Single child component (default: 0)
 //                         <PairStream> ! List of child components.
 //
 //    select               <String>     ! Selects a child component by name (default: 0)
@@ -100,12 +99,12 @@ class String;
 //    this Component class.  'Key' events (see eventTokens.hpp) that are not processed by
 //    this Component class are passed up to the container object.
 //------------------------------------------------------------------------------
-class Component : public Object
+class IComponent : public Object
 {
-   DECLARE_SUBCLASS(Component, Object)
+   DECLARE_SUBCLASS(IComponent, Object)
 
 public:
-   Component();
+   IComponent();
 
    //-----------------------------------------------------------------------------
    // Container interface
@@ -119,16 +118,16 @@ public:
    //-----------------------------------------------------------------------------
 
    // pointer to our container (i.e., we are a component of our container)
-   Component* container()                                                    { return containerPtr; }
-   const Component* container() const                                        { return containerPtr; }
+   IComponent* container()                                                   { return containerPtr; }
+   const IComponent* container() const                                       { return containerPtr; }
 
    // going up the component tree, finds the first of our containers that
    // is of class type 'foo'
-   Component* findContainerByType(const std::type_info&);
-   const Component* findContainerByType(const std::type_info&) const;
+   IComponent* findContainerByType(const std::type_info&);
+   const IComponent* findContainerByType(const std::type_info&) const;
 
    // sets our container pointer; returns 'p'
-   Component* container(Component* const p)                                  { return (containerPtr = p); }
+   IComponent* container(IComponent* const p)                                { return (containerPtr = p); }
 
    // returns the number of child components
    unsigned int getNumberOfComponents() const;
@@ -177,7 +176,7 @@ public:
    // -- For children components, a clone of the name (Identifier) is returned.
    // -- For grandchildren, a new Identifier is created containing the full name
    //    of the component (i.e., "xxx.yyy.zzz")
-   virtual const std::string findNameOfComponent(const Component* const) const;
+   virtual const std::string findNameOfComponent(const IComponent* const) const;
 
    //-----------------------------------------------------------------------------
    // Component code execution interface
@@ -248,14 +247,14 @@ public:
       public:  SendData& operator=(const SendData&) = delete;
       public:  ~SendData()                                         { empty(); }
       public:  void empty();
-      public:  Component* getObject(Component* p, const char* const id, const int n = 0);
-      public:  void setObject(Component* p);
+      public:  IComponent* getObject(IComponent* p, const char* const id, const int n = 0);
+      public:  void setObject(IComponent* p);
       public:  Object* getValue(const int);
       public:  Object* getValue(const float);
       public:  Object* getValue(const double);
       public:  Object* getValue(const char* const);
       public:  Object* getValue(const bool);
-      private: Component* obj{};    // Object to send to
+      private: IComponent* obj{};   // Object to send to
       private: Object* past{};      // Old value
    };
 
@@ -341,11 +340,11 @@ public:
    // the 'select()' function above (even if the selected index or name
    // wasn't found).
    bool isComponentSelected() const                                          { return (selection != nullptr); }
-   Component* getSelectedComponent()                                         { return selected; }
+   IComponent* getSelectedComponent()                                        { return selected; }
 
    // returns a pointer to the selected component, or zero if no component
    // is selected or the selected component wasn't found.
-   const Component* getSelectedComponent() const                             { return selected; }
+   const IComponent* getSelectedComponent() const                            { return selected; }
 
 protected:
    // process our new components list
@@ -359,14 +358,14 @@ protected:
          PairStream* const list,             // source list of components
          const std::type_info& filter,       // type filter
          Pair* const add = nullptr,          // optional pair to add
-         Component* const remove = nullptr   // optional component to remove
+         IComponent* const remove = nullptr  // optional component to remove
       );
 
 private:
    safe_ptr<PairStream> components;    // Child components
-   Component* containerPtr{};          // We are a component of this container
+   IComponent* containerPtr{};         // We are a component of this container
 
-   Component* selected{};              // Selected child (process only this one)
+   IComponent* selected{};             // Selected child (process only this one)
    Object* selection{};                // Name of selected child
 
    Statistic* timingStats{};           // Timing statistics
@@ -377,7 +376,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotComponent(PairStream* const multiple);        // sets the components list
-   bool setSlotComponent(Component* const single);           // sets a single component
+   bool setSlotComponent(IComponent* const single);          // sets a single component
    bool setSlotSelect(const String* const name)              { return select(name); }
    bool setSlotSelect(const Integer* const num)              { return select(num);  }
    bool setSlotEnableTimingStats(const Boolean* const);      // sets the timing enabled flag

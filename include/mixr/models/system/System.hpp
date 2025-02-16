@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_System_HPP__
 #define __mixr_models_common_System_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base { class String; }
@@ -53,9 +53,9 @@ class Player;
 //       (e.g., circular references).  (see Component::shutdownNotification())
 //
 //------------------------------------------------------------------------------
-class System : public base::Component
+class System : public base::IComponent
 {
-   DECLARE_SUBCLASS(System, base::Component)
+   DECLARE_SUBCLASS(System, base::IComponent)
 
 public:
    // Power switch enumerations (can be expanded by derived classes)

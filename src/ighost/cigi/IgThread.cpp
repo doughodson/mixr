@@ -7,7 +7,7 @@
 namespace mixr {
 namespace cigi {
 
-IgThread::IgThread(base::Component* const parent): base::OneShotThread(parent)
+IgThread::IgThread(base::IComponent* const parent): base::OneShotThread(parent)
 {
 }
 

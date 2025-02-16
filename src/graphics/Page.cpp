@@ -2,6 +2,7 @@
 #include "mixr/graphics/Page.hpp"
 #include "mixr/graphics/Display.hpp"
 
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -172,7 +173,7 @@ void Page::reset()
       base::List::Item* item{subpages->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto obj = static_cast<Component*>(pair->object());
+         const auto obj = static_cast<IComponent*>(pair->object());
          if (obj != nullptr) obj->reset();
          item = item->getNext();
       }

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_dynamics_DynamicsModel_HPP__
 #define __mixr_models_common_dynamics_DynamicsModel_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace models {
@@ -31,9 +31,9 @@ namespace models {
 // Factory name: DynamicsModel
 //
 //------------------------------------------------------------------------------
-class DynamicsModel : public base::Component
+class DynamicsModel : public base::IComponent
 {
-    DECLARE_SUBCLASS(DynamicsModel, base::Component)
+    DECLARE_SUBCLASS(DynamicsModel, base::IComponent)
 
 public:
     DynamicsModel();

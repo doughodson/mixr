@@ -10,6 +10,7 @@
 
 #include "mixr/models/WorldModel.hpp"
 
+#include "mixr/base/IComponent.hpp"
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -120,7 +121,7 @@ void Action::process(const double)
 // Execute as an UBF action
 // -- Use the 'actor' to find our OBC and 'trigger' this action.
 //------------------------------------------------------------------------------
-bool Action::execute(base::Component* actor)
+bool Action::execute(base::IComponent* actor)
 {
    bool ok{};
    if (actor != nullptr) {

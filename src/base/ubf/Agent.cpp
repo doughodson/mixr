@@ -63,7 +63,7 @@ void Agent::updateData(const double dt)
 
 void Agent::controller(const double dt)
 {
-   base::Component* actor{getActor()};
+   base::IComponent* actor{getActor()};
 
    if ( (actor!=nullptr) && (getState()!=nullptr) && (getBehavior()!=nullptr) ) {
 

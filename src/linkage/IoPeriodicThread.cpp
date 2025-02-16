@@ -3,12 +3,12 @@
 
 #include "mixr/linkage/IoHandler.hpp"
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace linkage {
 
-IoPeriodicThread::IoPeriodicThread(base::Component* const parent, const double rate): PeriodicThread(parent, rate)
+IoPeriodicThread::IoPeriodicThread(base::IComponent* const parent, const double rate): PeriodicThread(parent, rate)
 {
 }
 

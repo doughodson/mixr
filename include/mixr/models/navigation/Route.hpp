@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Route_HPP__
 #define __mixr_models_common_Route_HPP__
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class ILength; class NauticalMiles;
@@ -42,9 +42,9 @@ class Steerpoint;
 //                                          ! (default: true)
 //
 //------------------------------------------------------------------------------
-class Route : public base::Component
+class Route : public base::IComponent
 {
-   DECLARE_SUBCLASS(Route, base::Component)
+   DECLARE_SUBCLASS(Route, base::IComponent)
 
 public:
    Route();
@@ -123,7 +123,7 @@ protected:
          base::PairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
          base::Pair* const add = nullptr,           // Optional pair to add
-         base::Component* const remove = nullptr    // Optional subcomponent to remove
+         base::IComponent* const remove = nullptr   // Optional subcomponent to remove
        ) override;
 
 private:

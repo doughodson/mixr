@@ -1,13 +1,13 @@
 
 #include "mixr/base/threads/IThread.hpp"
 
-#include "mixr/base/Component.hpp"
+#include "mixr/base/IComponent.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IThread::IThread(Component* const p) : parent(p)
+IThread::IThread(IComponent* const p) : parent(p)
 {
 }
 
@@ -59,7 +59,7 @@ bool IThread::isTerminated() const
    return killed;
 }
 
-Component* IThread::getParent()
+IComponent* IThread::getParent()
 {
    return parent;
 }
