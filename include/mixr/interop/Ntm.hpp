@@ -2,6 +2,9 @@
 #ifndef __mixr_interop_common_Ntm_HPP__
 #define __mixr_interop_common_Ntm_HPP__
 
+#include "mixr/base/Object.hpp"
+#include "mixr/base/safe_ptr.hpp"
+
 namespace mixr {
 namespace models { class Player; }
 namespace interop {
@@ -9,7 +12,7 @@ class Nib;
 
 //------------------------------------------------------------------------------
 // Class: Ntm
-// Description: Abstract Network Type Mapper (NTM) class
+// Description: Interface Network Type Mapper (NTM)
 //
 //    This class is used to map mixr player types to the entity type codes
 //    that are unique to an interoperability network (i.e., DIS, HLA/FOM, etc).

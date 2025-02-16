@@ -348,7 +348,7 @@ bool Nib::entityStateManager(const double curExecTime)
             RTI::ObjectClassHandle theClassHandle {netIO->getObjectClassHandle( getClassIndex() )};
             makeObjectName();
             setObjectHandle( rtiAmb->registerObjectInstance( theClassHandle, getObjectName() ) );
-            netIO->addNibToObjectTables(this, interop::NetIO::OUTPUT_NIB);
+            netIO->addNibToObjectTables(this, interop::INetIO::OUTPUT_NIB);
             std::cout << "rprfom::Nib::updateEntity(): Register entity: " << getObjectName() << " handle = " << getObjectHandle() << std::endl;
          }
          catch (RTI::Exception& e) {

@@ -1009,7 +1009,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
                 p->container(this);
             } else {
                 // Not of the proper type
-                std::cerr << "Player::setSlotNetworks: network at slot \"" << pair->slot() << "\" is not of class type NetIO" << std::endl;
+                std::cerr << "Player::setSlotNetworks: network at slot \"" << pair->slot() << "\" is not of interface type INetIO" << std::endl;
                 ok = false;
             }
         }

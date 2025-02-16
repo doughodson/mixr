@@ -2,6 +2,7 @@
 #ifndef __mixr_interop_rprfom_Nib_H__
 #define __mixr_interop_rprfom_Nib_H__
 
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/hla/Nib.hpp"
 
 namespace mixr {
@@ -24,7 +25,7 @@ public:
    static const unsigned int MAX_EMITTER_BEAMS = 6;
 
 public:
-   Nib(const interop::NetIO::IoType ioType);
+   Nib(const interop::INetIO::IoType ioType);
 
    unsigned short getWeaponFireEvent() const                  { return fireEvent; }
    virtual void setWeaponFireEvent(const unsigned short e);

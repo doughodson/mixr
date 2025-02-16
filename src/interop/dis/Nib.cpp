@@ -17,7 +17,7 @@ namespace dis {
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")
 EMPTY_SLOTTABLE(Nib)
 
-Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType)
+Nib::Nib(const interop::INetIO::IoType ioType) : interop::Nib(ioType)
 {
    STANDARD_CONSTRUCTOR()
 }

@@ -1,4 +1,5 @@
 
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/hla/Nib.hpp"
 #include "mixr/interop/hla/NetIO.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
@@ -16,7 +17,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_DELETEDATA(Nib)
 
-Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
+Nib::Nib(const interop::INetIO::IoType ioType) : interop::Nib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
    setTimeoutEnabled(true);

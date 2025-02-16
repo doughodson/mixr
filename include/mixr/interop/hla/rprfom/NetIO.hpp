@@ -220,7 +220,7 @@ protected:
     // Update players/systems from the Input-list
     void processInputList() override;
     // Create a new rprfom::Nib
-    interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;
+    interop::Nib* nibFactory(const interop::INetIO::IoType ioType) override;
 };
 
 }

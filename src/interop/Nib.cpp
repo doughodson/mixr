@@ -1,4 +1,5 @@
 
+#include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/Nib.hpp"
 #include "mixr/interop/Ntm.hpp"
 
@@ -25,7 +26,7 @@ namespace interop {
 IMPLEMENT_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 
-Nib::Nib(const NetIO::IoType t) : ioType(t)
+Nib::Nib(const INetIO::IoType t) : ioType(t)
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -270,7 +271,7 @@ bool Nib::setTypeMapper(const Ntm* const p)
 //------------------------------------------------------------------------------
 // setNetIO() -- sets a pointer to the network model
 //------------------------------------------------------------------------------
-bool Nib::setNetIO(NetIO* const p)
+bool Nib::setNetIO(INetIO* const p)
 {
     pNetIO = p;
     return true;
@@ -697,7 +698,7 @@ bool Nib::updateDeadReckoning(
       base::Vec3d* const pNewAngles
    )
 {
-   bool ok{ioType == NetIO::INPUT_NIB};
+   bool ok{ioType == INetIO::INPUT_NIB};
    if (ok) {
       double time{updateDrTime(dt)};
 
@@ -766,7 +767,7 @@ bool Nib::resetDeadReckoning(
    smoothTime = 0; // default is off
    smoothVel.set(0,0,0);
    base::Vec3d err;
-   if (ioType == NetIO::INPUT_NIB && drTime > 0) {
+   if (ioType == INetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len{err.length()};
       if (len < (2.0 * base::length::KM2M) ) {

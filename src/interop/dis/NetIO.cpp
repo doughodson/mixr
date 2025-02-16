@@ -510,7 +510,7 @@ bool NetIO::processUserPDU(const PDUHeader* const)
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new Nib
 //------------------------------------------------------------------------------
-interop::Nib* NetIO::nibFactory(const interop::NetIO::IoType ioType)
+interop::Nib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 {
    return new Nib(ioType);
 }

@@ -896,7 +896,7 @@ void NetIO::destroyInputNib(interop::Nib* const nib)
    std::cout << "NetIO::destroyInputNib(" << nib << ")" << std::endl;
    if (nib != nullptr) {
       // Remove it from our object name and handle tables
-      removeNibFromObjectTables(nib, interop::NetIO::INPUT_NIB);
+      removeNibFromObjectTables(nib, interop::INetIO::INPUT_NIB);
       // Let our base class handle the rest
       BaseClass::destroyInputNib(nib);
    }

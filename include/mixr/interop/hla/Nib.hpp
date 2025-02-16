@@ -26,7 +26,7 @@ class Nib : public interop::Nib
    DECLARE_SUBCLASS(Nib, interop::Nib)
 
 public:
-   Nib(const interop::NetIO::IoType ioType);
+   Nib(const interop::INetIO::IoType ioType);
 
    // Returns true if the object has been registered
    bool isRegistered() const                                { return (handle != 0); }

@@ -21,7 +21,7 @@ namespace rprfom {
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 
-Nib::Nib(const interop::NetIO::IoType ioType) : hla::Nib(ioType)
+Nib::Nib(const interop::INetIO::IoType ioType) : hla::Nib(ioType)
 {
    STANDARD_CONSTRUCTOR()
 }

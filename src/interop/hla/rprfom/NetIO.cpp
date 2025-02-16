@@ -112,7 +112,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
     // ---
     Nib* nib {};
     if (baseEntity != nullptr) {
-        nib = static_cast<Nib*>(nibFactory(interop::NetIO::OUTPUT_NIB));
+        nib = static_cast<Nib*>(nibFactory(interop::INetIO::OUTPUT_NIB));
         if (nib != nullptr) {
            nib->setBaseEntity(baseEntity);
            nib->setNetIO(this);
@@ -171,7 +171,7 @@ void NetIO::processInputList()
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new NIB
 //------------------------------------------------------------------------------
-interop::Nib* NetIO::nibFactory(const interop::NetIO::IoType ioType)
+interop::Nib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 {
     return new Nib(ioType);
 }

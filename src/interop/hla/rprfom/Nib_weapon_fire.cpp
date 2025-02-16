@@ -120,7 +120,7 @@ bool Nib::weaponFireMsgFactory(const double)
          if (fPlayer->isProxyPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
          } else {
-            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::NetIO::OUTPUT_NIB) );
+            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::INetIO::OUTPUT_NIB) );
          }
       }
 
@@ -150,7 +150,7 @@ bool Nib::weaponFireMsgFactory(const double)
       models::Player* tPlayer {mPlayer->getTargetPlayer()};
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
-         if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, interop::NetIO::OUTPUT_NIB) );
+         if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, interop::INetIO::OUTPUT_NIB) );
       }
 
       if (tNib != nullptr) {
