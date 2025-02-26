@@ -41,7 +41,7 @@ void Ntm::copyData(const Ntm& org, const bool)
 //------------------------------------------------------------------------------
 // This function will copy our DIS type codes to the target NIB, 'targetNib', object.
 //------------------------------------------------------------------------------
-bool Ntm::copyEntityType(interop::Nib* const targetNib) const
+bool Ntm::copyEntityType(interop::INib* const targetNib) const
 {
    bool ok {};
    const auto tgtNib = dynamic_cast<Nib*>(targetNib);

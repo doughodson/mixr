@@ -134,8 +134,8 @@ public:
     // NIB lookup/search support
     Nib* findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType);
     Nib* findNibByObjectName(const char* name, const IoType ioType);
-    virtual void addNibToObjectTables(interop::Nib* const nib, const IoType ioType);
-    virtual void removeNibFromObjectTables(interop::Nib* const nib, const IoType ioType);
+    virtual void addNibToObjectTables(interop::INib* const nib, const IoType ioType);
+    virtual void removeNibFromObjectTables(interop::INib* const nib, const IoType ioType);
 
     // ---
     // Other RTI functions
@@ -168,8 +168,8 @@ public:
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
     // interop::NetIO Interface
-    void destroyInputNib(interop::Nib* const) override;
-    void destroyOutputNib(interop::Nib* const) override;
+    void destroyInputNib(interop::INib* const) override;
+    void destroyOutputNib(interop::INib* const) override;
 
 protected:
     virtual void clearAllObjectClassHandles();

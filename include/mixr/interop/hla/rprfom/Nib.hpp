@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace models { class Player; }
-namespace interop { class NetIO; }
+namespace interop { class INetIO; }
 namespace rprfom {
 class BaseEntity;
 
@@ -71,7 +71,7 @@ public:
    const BaseEntity* getBaseEntity() const              { return baseEntity; }
    virtual void setBaseEntity(BaseEntity* const p);
 
-   // interop::Nib Interface
+   // interop::INib Interface
    bool isPlayerStateUpdateRequired(const double curExecTime) override;
    bool entityStateManager(const double curExecTime) override;
    virtual bool emitterBeamsManager(const double curExecTime);

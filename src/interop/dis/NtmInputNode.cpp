@@ -68,7 +68,7 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* const nib) const
+const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::INib* const nib) const
 {
    const interop::Ntm* result{};
 

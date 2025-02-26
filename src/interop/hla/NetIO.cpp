@@ -755,7 +755,7 @@ bool NetIO::setSlotConstrainedTime(base::Boolean* const msg)
 //------------------------------------------------------------------------------
 // addNibToObjectTables() -- adds a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::addNibToObjectTables(interop::Nib* const nib, const IoType ioType)
+void NetIO::addNibToObjectTables(interop::INib* const nib, const IoType ioType)
 {
    const auto hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -816,7 +816,7 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 // removeNibFromObjectTables() -- removes a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::removeNibFromObjectTables(interop::Nib* const nib, const IoType ioType)
+void NetIO::removeNibFromObjectTables(interop::INib* const nib, const IoType ioType)
 {
    const auto hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -891,7 +891,7 @@ Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
 //------------------------------------------------------------------------------
 // Destroy the NIB s
 //------------------------------------------------------------------------------
-void NetIO::destroyInputNib(interop::Nib* const nib)
+void NetIO::destroyInputNib(interop::INib* const nib)
 {
    std::cout << "NetIO::destroyInputNib(" << nib << ")" << std::endl;
    if (nib != nullptr) {
@@ -902,7 +902,7 @@ void NetIO::destroyInputNib(interop::Nib* const nib)
    }
 }
 
-void NetIO::destroyOutputNib(interop::Nib* const nib0)
+void NetIO::destroyOutputNib(interop::INib* const nib0)
 {
    std::cout << "NetIO::destroyOutputNib(" << nib0 << ")" << std::endl;
    const auto nib = dynamic_cast<Nib*>(nib0);

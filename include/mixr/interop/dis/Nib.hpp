@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_Nib_HPP__
 #define __mixr_interop_dis_Nib_HPP__
 
-#include "mixr/interop/Nib.hpp"
+#include "mixr/interop/INib.hpp"
 #include "mixr/interop/dis/NetIO.hpp"
 #include <array>
 
@@ -18,9 +18,9 @@ class Ntm;
 //    the relationship between players and their corresponding DIS entities.
 //
 //------------------------------------------------------------------------------
-class Nib : public interop::Nib
+class Nib : public interop::INib
 {
-    DECLARE_SUBCLASS(Nib, interop::Nib)
+    DECLARE_SUBCLASS(Nib, interop::INib)
 
 public:
     enum { MAX_EM_SYSTEMS = 16 };

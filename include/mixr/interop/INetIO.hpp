@@ -12,7 +12,7 @@ namespace base { class IAngle; class Boolean; class Identifier; class Integer; c
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {
-class Nib;
+class INib;
 class Ntm;
 class NtmInputNode;
 class NtmOutputNode;
@@ -193,22 +193,22 @@ public:
    bool isRelayEnabled() const  { return (relayFlg && isInputEnabled() && isOutputEnabled()); }
 
    // Entity filter: Returns max entity ranged (meters)
-   virtual double getMaxEntityRange(const Nib* const nib = nullptr) const;
+   virtual double getMaxEntityRange(const INib* const nib = nullptr) const;
 
    // Entity filter: Returns max entity ranged squared (meters^2)
-   virtual double getMaxEntityRangeSquared(const Nib* const nib = nullptr) const;
+   virtual double getMaxEntityRangeSquared(const INib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-   virtual double getMaxTimeDR(const Nib* const nib = nullptr) const;
+   virtual double getMaxTimeDR(const INib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR position error (meters)
-   virtual double getMaxPositionErr(const Nib* const nib = nullptr) const;
+   virtual double getMaxPositionErr(const INib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR orientation error (radians)
-   virtual double getMaxOrientationErr(const Nib* const nib = nullptr) const;
+   virtual double getMaxOrientationErr(const INib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-   virtual double getMaxAge(const Nib* const nib = nullptr) const;
+   virtual double getMaxAge(const INib* const nib = nullptr) const;
 
    // Network initialization
    bool isNetworkInitialized() const                      { return netInit; }
@@ -227,7 +227,7 @@ public:
    unsigned short getNewEmissionEventID()                 { return ++emEventID; }
 
    // proxy player factory: creates a proxy player based on NIB data
-   virtual models::Player* createProxyPlayer(Nib* const nib);
+   virtual models::Player* createProxyPlayer(INib* const nib);
 
    void reset() override;
 
@@ -265,28 +265,28 @@ public:
 
 public:
    // NIB support
-   virtual Nib* findNib(const unsigned short playerID, const std::string& federateName, const IoType);
-   virtual Nib* findNib(const models::Player* const, const IoType);
-   virtual bool addNibToList(Nib* const, const IoType);
-   virtual void removeNibFromList(Nib* const, const IoType);
+   virtual INib* findNib(const unsigned short playerID, const std::string& federateName, const IoType);
+   virtual INib* findNib(const models::Player* const, const IoType);
+   virtual bool addNibToList(INib* const, const IoType);
+   virtual void removeNibFromList(INib* const, const IoType);
 
    // More NIB support
-   virtual Nib* createNewInputNib();
-   virtual Nib* createNewOutputNib(models::Player* const);
-   virtual void destroyInputNib(Nib* const);
-   virtual void destroyOutputNib(Nib* const);
-   virtual bool addNib2InputList(Nib* const);
+   virtual INib* createNewInputNib();
+   virtual INib* createNewOutputNib(models::Player* const);
+   virtual void destroyInputNib(INib* const);
+   virtual void destroyOutputNib(INib* const);
+   virtual bool addNib2InputList(INib* const);
 
 protected:
    // Maximum number of active objects
    static const int MAX_OBJECTS{MIXR_CONFIG_MAX_NETIO_ENTITIES};
 
    // Create NIB unique to protocol (pure functions!)
-   virtual Nib* nibFactory(const INetIO::IoType ioType) =0;
+   virtual INib* nibFactory(const INetIO::IoType ioType) =0;
 
    // Create a new Network Interface Block (NIB) for 'player' and insert it
    // in the output list.  Returns a pointer to the new NIB or 0.
-   Nib* insertNewOutputNib(models::Player* const player);
+   INib* insertNewOutputNib(models::Player* const player);
 
    // Number of NIBs on the input list
    unsigned int getInputListSize() const {
@@ -294,17 +294,17 @@ protected:
    }
 
    // Returns the idx'th NIB from the input list
-   Nib* getInputNib(const int idx) {
+   INib* getInputNib(const int idx) {
       return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the input list (const version)
-   const Nib* getInputNib(const int idx) const  {
+   const INib* getInputNib(const int idx) const  {
       return (idx < nInNibs) ? inputList[idx] : 0;
    }
 
    // Returns the input list
-   Nib** getInputList() {
+   INib** getInputList() {
       return inputList.data();
    }
 
@@ -314,17 +314,17 @@ protected:
    }
 
    // Returns the input list
-   Nib** getOutputList() {
+   INib** getOutputList() {
       return outputList.data();
    }
 
    // Returns the idx'th NIB from the output list
-   Nib* getOutputNib(const int idx) {
+   INib* getOutputNib(const int idx) {
       return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
    // Returns the idx'th NIB from the output list (const version)
-   const Nib* getOutputNib(const int idx) const {
+   const INib* getOutputNib(const int idx) const {
       return (idx < nOutNibs) ? outputList[idx] : 0;
    }
 
@@ -335,7 +335,7 @@ protected:
 public:
 
    // Finds the network type mapper by NIB type codes
-   virtual const Ntm* findNetworkTypeMapper(const Nib* const nib) const;
+   virtual const Ntm* findNetworkTypeMapper(const INib* const nib) const;
 
    // Finds the network type mapper by Player
    virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const;
@@ -405,12 +405,12 @@ private:
 
 private: // Nib related private
    // input tables
-   std::array<Nib*, MAX_OBJECTS> inputList{};  // Table of input objects in name order
-   int nInNibs{};                              // Number of input objects in both tables
+   std::array<INib*, MAX_OBJECTS> inputList{};  // Table of input objects in name order
+   int nInNibs{};                               // Number of input objects in both tables
 
    // output tables
-   std::array<Nib*, MAX_OBJECTS> outputList{}; // Table of output objects in name order
-   int nOutNibs{};                             // Number of output objects in both tables
+   std::array<INib*, MAX_OBJECTS> outputList{}; // Table of output objects in name order
+   int nOutNibs{};                              // Number of output objects in both tables
 
    // NIB quick lookup key
    struct NibKey {

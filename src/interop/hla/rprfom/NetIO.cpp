@@ -72,7 +72,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 //------------------------------------------------------------------------------
 // Create a new output NIB
 //------------------------------------------------------------------------------
-interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
+interop::INib* NetIO::createNewOutputNib(models::Player* const player)
 {
     // ---
     // Check if we are enabled to register this class of objects and
@@ -171,7 +171,7 @@ void NetIO::processInputList()
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new NIB
 //------------------------------------------------------------------------------
-interop::Nib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
+interop::INib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 {
     return new Nib(ioType);
 }

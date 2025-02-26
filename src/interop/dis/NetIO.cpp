@@ -510,7 +510,7 @@ bool NetIO::processUserPDU(const PDUHeader* const)
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new Nib
 //------------------------------------------------------------------------------
-interop::Nib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
+interop::INib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 {
    return new Nib(ioType);
 }
@@ -520,7 +520,7 @@ interop::Nib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 // Create a new NIBs
 //------------------------------------------------------------------------------
 
-interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
+interop::INib* NetIO::createNewOutputNib(models::Player* const player)
 {
    Nib* nib{static_cast<Nib*>(nibFactory(OUTPUT_NIB))};
    if (nib != nullptr) {
@@ -537,7 +537,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
       unsigned short site{getSiteID()};
       unsigned short app{getApplicationID()};
       if (player->isProxyPlayer()) {
-         const auto pNib = dynamic_cast<interop::Nib*>(player->getNib());
+         const auto pNib = dynamic_cast<interop::INib*>(player->getNib());
          fName = pNib->getFederateName();
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
@@ -688,7 +688,7 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
 // Data access (get) routines
 //------------------------------------------------------------------------------
 
-double NetIO::getMaxEntityRange(const interop::Nib* const nib) const
+double NetIO::getMaxEntityRange(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {
@@ -704,7 +704,7 @@ double NetIO::getMaxEntityRange(const interop::Nib* const nib) const
    return value;
 }
 
-double NetIO::getMaxEntityRangeSquared(const interop::Nib* const nib) const
+double NetIO::getMaxEntityRangeSquared(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {
@@ -720,7 +720,7 @@ double NetIO::getMaxEntityRangeSquared(const interop::Nib* const nib) const
    return value;
 }
 
-double NetIO::getMaxTimeDR(const interop::Nib* const nib) const
+double NetIO::getMaxTimeDR(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {
@@ -736,7 +736,7 @@ double NetIO::getMaxTimeDR(const interop::Nib* const nib) const
    return value;
 }
 
-double NetIO::getMaxPositionErr(const interop::Nib* const nib) const
+double NetIO::getMaxPositionErr(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {
@@ -752,7 +752,7 @@ double NetIO::getMaxPositionErr(const interop::Nib* const nib) const
    return value;
 }
 
-double NetIO::getMaxOrientationErr(const interop::Nib* const nib) const
+double NetIO::getMaxOrientationErr(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {
@@ -768,7 +768,7 @@ double NetIO::getMaxOrientationErr(const interop::Nib* const nib) const
    return value;
 }
 
-double NetIO::getMaxAge(const interop::Nib* const nib) const
+double NetIO::getMaxAge(const interop::INib* const nib) const
 {
    double value{};
    if (nib != nullptr) {

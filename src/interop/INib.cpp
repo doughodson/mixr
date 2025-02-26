@@ -1,6 +1,6 @@
 
 #include "mixr/interop/INetIO.hpp"
-#include "mixr/interop/Nib.hpp"
+#include "mixr/interop/INib.hpp"
 #include "mixr/interop/Ntm.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
@@ -23,16 +23,16 @@
 namespace mixr {
 namespace interop {
 
-IMPLEMENT_SUBCLASS(Nib, "Nib")
-EMPTY_SLOTTABLE(Nib)
+IMPLEMENT_SUBCLASS(INib, "INib")
+EMPTY_SLOTTABLE(INib)
 
-Nib::Nib(const INetIO::IoType t) : ioType(t)
+INib::INib(const INetIO::IoType t) : ioType(t)
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void Nib::initData()
+void INib::initData()
 {
    pname = "MIXR";
    side = models::Player::BLUE;
@@ -53,7 +53,7 @@ void Nib::initData()
    smoothVel.set(0,0,0);
 }
 
-void Nib::copyData(const Nib& org, const bool cc)
+void INib::copyData(const INib& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -128,7 +128,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 }
 
 
-void Nib::deleteData()
+void INib::deleteData()
 {
    setPlayer(nullptr);
    setNetIO(nullptr);
@@ -149,7 +149,7 @@ void Nib::deleteData()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool Nib::shutdownNotification()
+bool INib::shutdownNotification()
 {
     setPlayer(nullptr);
     setNetIO(nullptr);
@@ -172,7 +172,7 @@ bool Nib::shutdownNotification()
 //------------------------------------------------------------------------------
 // setPlayer() -- sets a pointer to a player
 //------------------------------------------------------------------------------
-bool Nib::setPlayer(models::Player* const p)
+bool INib::setPlayer(models::Player* const p)
 {
     pPlayer = p;
     if (pPlayer != nullptr) {
@@ -186,7 +186,7 @@ bool Nib::setPlayer(models::Player* const p)
 //------------------------------------------------------------------------------
 // return federate name
 //------------------------------------------------------------------------------
-const std::string& Nib::getFederateName() const
+const std::string& INib::getFederateName() const
 {
    return federateName;
 }
@@ -194,7 +194,7 @@ const std::string& Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const std::string& x)
+bool INib::setFederateName(const std::string& x)
 {
    federateName = x;
    return true;
@@ -203,7 +203,7 @@ bool Nib::setFederateName(const std::string& x)
 //------------------------------------------------------------------------------
 // entityStateManager() -- default entity state manager
 //------------------------------------------------------------------------------
-bool Nib::entityStateManager(const double)
+bool INib::entityStateManager(const double)
 {
    return true;
 }
@@ -211,7 +211,7 @@ bool Nib::entityStateManager(const double)
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- default weapon fire message factory
 //------------------------------------------------------------------------------
-bool Nib::weaponFireMsgFactory(const double)
+bool INib::weaponFireMsgFactory(const double)
 {
    return true;
 }
@@ -219,7 +219,7 @@ bool Nib::weaponFireMsgFactory(const double)
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- default munition detonation message factory
 //------------------------------------------------------------------------------
-bool Nib::munitionDetonationMsgFactory(const double)
+bool INib::munitionDetonationMsgFactory(const double)
 {
    return true;
 }
@@ -227,7 +227,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
 //------------------------------------------------------------------------------
 // networkOutputManagers() --  default networkOutputManagers()
 //------------------------------------------------------------------------------
-bool Nib::networkOutputManagers(const double)
+bool INib::networkOutputManagers(const double)
 {
     return true;
 }
@@ -235,7 +235,7 @@ bool Nib::networkOutputManagers(const double)
 //------------------------------------------------------------------------------
 // setOutputPlayerType() -- sets the kind, country, ... variables
 //------------------------------------------------------------------------------
-bool Nib::setOutputPlayerType(const models::Player* const p)
+bool INib::setOutputPlayerType(const models::Player* const p)
 {
    bool ok{};
 
@@ -262,7 +262,7 @@ bool Nib::setOutputPlayerType(const models::Player* const p)
 //------------------------------------------------------------------------------
 // setTypeMapper() -- sets a pointer to the entity type mapper (Ntm) object
 //------------------------------------------------------------------------------
-bool Nib::setTypeMapper(const Ntm* const p)
+bool INib::setTypeMapper(const Ntm* const p)
 {
     ntm = p;
     return true;
@@ -271,7 +271,7 @@ bool Nib::setTypeMapper(const Ntm* const p)
 //------------------------------------------------------------------------------
 // setNetIO() -- sets a pointer to the network model
 //------------------------------------------------------------------------------
-bool Nib::setNetIO(INetIO* const p)
+bool INib::setNetIO(INetIO* const p)
 {
     pNetIO = p;
     return true;
@@ -281,38 +281,38 @@ bool Nib::setNetIO(INetIO* const p)
 // Player data set functions
 //------------------------------------------------------------------------------
 
-void Nib::setTimeExec(const double t)
+void INib::setTimeExec(const double t)
 {
     execTime = t;
 }
 
-void Nib::setTimeUtc(const double t)
+void INib::setTimeUtc(const double t)
 {
     utcTime = t;
 }
 
-void Nib::setPlayerID(const unsigned short v)
+void INib::setPlayerID(const unsigned short v)
 {
     playerID = v;
 }
 
-void Nib::setMode(const models::Player::Mode m)
+void INib::setMode(const models::Player::Mode m)
 {
     mode = m;
 }
 
-void Nib::setSide(const models::Player::Side s)
+void INib::setSide(const models::Player::Side s)
 {
     side = s;
 }
 
-void Nib::setEntityTypeChecked(const bool f)
+void INib::setEntityTypeChecked(const bool f)
 {
     entityTypeChecked = f;
 }
 
 // Sets the damage for this player
-bool Nib::setDamage(const double v)
+bool INib::setDamage(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -322,7 +322,7 @@ bool Nib::setDamage(const double v)
 }
 
 // Sets the smoke for this player
-bool Nib::setSmoke(const double v)
+bool INib::setSmoke(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -332,7 +332,7 @@ bool Nib::setSmoke(const double v)
 }
 
 // Sets the flames for this player
-bool Nib::setFlames(const double v)
+bool INib::setFlames(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -342,14 +342,14 @@ bool Nib::setFlames(const double v)
 }
 
 // Sets the camouflage type for this player
-bool Nib::setCamouflageType(const unsigned int v)
+bool INib::setCamouflageType(const unsigned int v)
 {
    camouflage = v;
    return true;
 }
 
 // Sets the detonation message sent flag
-bool Nib::setDetonationMessageSent(const bool flg)
+bool INib::setDetonationMessageSent(const bool flg)
 {
    detMsgSent = flg;
    return true;
@@ -359,7 +359,7 @@ bool Nib::setDetonationMessageSent(const bool flg)
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequired() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
+bool INib::isPlayerStateUpdateRequired(const double curExecTime)
 {
    enum { NO, YES, UNSURE } result = UNSURE;
 
@@ -593,7 +593,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    //    last input (player's NIB) is different that our exec time.
    // ---
    if ( (result == UNSURE) && player->isProxyPlayer() ) {
-      const auto playerNib = dynamic_cast<const Nib*>(player->getNib());
+      const auto playerNib = dynamic_cast<const INib*>(player->getNib());
       if (playerNib->getTimeExec() != getTimeExec()) {
          result = YES;
       }
@@ -605,7 +605,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 // playerState2Nib() -- Sets this NIB's player data
 //------------------------------------------------------------------------------
-void Nib::playerState2Nib()
+void INib::playerState2Nib()
 {
    const models::Player* player{getPlayer()};
    if (player != nullptr) {
@@ -669,7 +669,7 @@ void Nib::playerState2Nib()
 // nib2PlayerState() --
 //   Called by our processInputList() to update the state of networked player.
 //------------------------------------------------------------------------------
-void Nib::nib2PlayerState()
+void INib::nib2PlayerState()
 {
    models::Player* player{getPlayer()};
    if (player != nullptr) {
@@ -692,7 +692,7 @@ void Nib::nib2PlayerState()
 //------------------------------------------------------------------------------
 // update entity dead reckoning (incoming entities only)
 //------------------------------------------------------------------------------
-bool Nib::updateDeadReckoning(
+bool INib::updateDeadReckoning(
       const double dt,
       base::Vec3d* const pNewPos,
       base::Vec3d* const pNewAngles
@@ -730,7 +730,7 @@ bool Nib::updateDeadReckoning(
 //------------------------------------------------------------------------------
 // (re)initialize the dead reckoning function
 //------------------------------------------------------------------------------
-bool Nib::resetDeadReckoning(
+bool INib::resetDeadReckoning(
       const unsigned char dr,       // Dead-Reckoning algorithm number
       const base::Vec3d& p,         // Position vector @ T0 (meters) (ECEF)
       const base::Vec3d& v,         // Velocity vector @ T0 (m/sec)  (ECEF or body based on DR algorithm)
@@ -810,7 +810,7 @@ bool Nib::resetDeadReckoning(
 //------------------------------------------------------------------------------
 // Main Dead Reckoning Function
 //------------------------------------------------------------------------------
-bool Nib::mainDeadReckoning(
+bool INib::mainDeadReckoning(
       const double dT,                 // DR time (seconds)
       base::Vec3d* const pNewP0,       // DR Position vector @ time = 'dT' (meters) (ECEF)
       base::Vec3d* const pNewRPY       // DR Euler angles @ time = 'dT' (rad) [ phi theta psi ] (Body/ECEF)
@@ -941,7 +941,7 @@ bool Nib::mainDeadReckoning(
 //------------------------------------------------------------------------------
 // drComputeMatrixR0
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixR0(
+bool INib::drComputeMatrixR0(
       const base::Vec3d& RPY,      // [radians]
       base::Matrixd* const pR0     // Rotational matrix R0
    )
@@ -983,7 +983,7 @@ bool Nib::drComputeMatrixR0(
 //------------------------------------------------------------------------------
 // Compute wwT matrix
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixWwT(
+bool INib::drComputeMatrixWwT(
       const base::Vec3d& av,       // angular velocities [rps]
       base::Matrixd* const pwwT    // matrix
    )
@@ -1015,7 +1015,7 @@ bool Nib::drComputeMatrixWwT(
 //------------------------------------------------------------------------------
 // Compute the Omega matrix
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixOmega(
+bool INib::drComputeMatrixOmega(
       const base::Vec3d& av,       // angular velocities [rps]
       base::Matrixd* const pOmega  // matrix
    )
@@ -1047,7 +1047,7 @@ bool Nib::drComputeMatrixOmega(
 //------------------------------------------------------------------------------
 // drComputeMatrixDR
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixDR(
+bool INib::drComputeMatrixDR(
       const double dT,            // DR time [sec]
       const base::Vec3d& av,      // angular velocities [rps]
       const base::Matrixd& wwT,   // wwT matrix
@@ -1094,7 +1094,7 @@ bool Nib::drComputeMatrixDR(
 //------------------------------------------------------------------------------
 // drComputeMatrixR1
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixR1(
+bool INib::drComputeMatrixR1(
       const double dT,            // DR time [sec]
       const base::Vec3d& av,      // angular velocities [rps]
       const base::Matrixd& wwT,   // wwT matrix
@@ -1141,7 +1141,7 @@ bool Nib::drComputeMatrixR1(
 //------------------------------------------------------------------------------
 // drComputeMatrixR2
 //------------------------------------------------------------------------------
-bool Nib::drComputeMatrixR2(
+bool INib::drComputeMatrixR2(
       const double dT,                 // DR time [sec]
       const base::Vec3d& av,      // angular velocities [rps]
       const base::Matrixd& wwT,   // wwT matrix

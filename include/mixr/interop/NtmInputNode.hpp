@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace interop {
-class Nib;
+class INib;
 class Ntm;
 
 //------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class NtmInputNode : public base::Object
    DECLARE_SUBCLASS(NtmInputNode, base::Object)
 public:
    NtmInputNode();
-   virtual const Ntm* findNetworkTypeMapper(const Nib* const) const =0;
+   virtual const Ntm* findNetworkTypeMapper(const INib* const) const =0;
    virtual bool add2OurLists(Ntm* const) =0;
 };
 

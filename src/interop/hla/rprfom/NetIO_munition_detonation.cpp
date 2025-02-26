@@ -253,7 +253,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     // ---
     models::Player* tPlayer {};
     if ( std::strlen(reinterpret_cast<const char*>(targetObjectIdentifier.id)) > 0 ) {
-        interop::Nib* tNib {findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB)};
+        interop::INib* tNib {findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB)};
         if (tNib != nullptr) tPlayer = tNib->getPlayer();
     }
 
@@ -266,8 +266,8 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // ---
         // 2) Find the firing player and munitions (networked) IPlayers
         // ---
-        interop::Nib* fNib {};
-        interop::Nib* mNib {};
+        interop::INib* fNib {};
+        interop::INib* mNib {};
         if ( std::strlen(reinterpret_cast<const char*>(firingObjectIdentifier.id)) > 0 ) {
             fNib = findNibByObjectName( reinterpret_cast<char*>(firingObjectIdentifier.id), INPUT_NIB);
         }

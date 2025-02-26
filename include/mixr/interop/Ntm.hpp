@@ -8,7 +8,7 @@
 namespace mixr {
 namespace models { class Player; }
 namespace interop {
-class Nib;
+class INib;
 
 //------------------------------------------------------------------------------
 // Class: Ntm
@@ -70,7 +70,7 @@ public:
 
    // This network specific function is used to copy the entity
    // type codes to a target NIB object.
-   virtual bool copyEntityType(Nib* const targetNib) const =0;
+   virtual bool copyEntityType(INib* const targetNib) const =0;
 
 private:
    base::safe_ptr<const models::Player> tPlayer; // Template player

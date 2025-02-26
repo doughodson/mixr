@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_Nib_HPP__
-#define __mixr_interop_common_Nib_HPP__
+#ifndef __mixr_interop_common_INib_HPP__
+#define __mixr_interop_common_INib_HPP__
 
 #include "mixr/simulation/INib.hpp"
 
@@ -15,11 +15,11 @@ namespace models { class Missile; }
 namespace interop {
 
 //------------------------------------------------------------------------------
-// Class: Nib
+// Class: INib
 //
 // Description: Network Interface Block (Nib)
 //
-//    This class is used to manage the relationship between players and their
+//    Interface used to manage the relationship between players and their
 //    corresponding entities on the interoperability networks (e.g., DIS, HLA).
 //
 //    Each Nib object manages either an incoming network entity to player
@@ -37,12 +37,12 @@ namespace interop {
 //    is common data used by most interoperability network entities.  Additional
 //    entity data is added by the network specific classes derived from Nib.
 //
-// Factory name: Nib
+// Factory name: INib
 //
 //------------------------------------------------------------------------------
-class Nib : public simulation::INib
+class INib : public simulation::INib
 {
-   DECLARE_SUBCLASS(Nib, simulation::INib)
+   DECLARE_SUBCLASS(INib, simulation::INib)
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]
@@ -60,7 +60,7 @@ public:
    };
 
 public:
-   Nib(const INetIO::IoType ioType);
+   INib(const INetIO::IoType ioType);
 
    INetIO::IoType getIoType() const                    { return ioType; }
 

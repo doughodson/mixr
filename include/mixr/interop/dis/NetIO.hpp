@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base { class IAngle; class Integer; class ILength; class INetHandler; class Identifier; }
 namespace models { class Iff; class RfSensor; }
-namespace interop { class Nib; }
+namespace interop { class INib; }
 namespace dis {
 class Nib;
 class Ntm;
@@ -256,13 +256,13 @@ public:
          const unsigned char  extra = 0
       ) const;
 
-   double getMaxEntityRange(const interop::Nib* const nib) const final;
-   double getMaxEntityRangeSquared(const interop::Nib* const nib) const final;
-   double getMaxTimeDR(const interop::Nib* const nib) const final;
-   double getMaxPositionErr(const interop::Nib* const nib) const final;
-   double getMaxOrientationErr(const interop::Nib* const nib) const final;
-   double getMaxAge(const interop::Nib* const nib) const final;
-   interop::Nib* createNewOutputNib(models::Player* const player) final;
+   double getMaxEntityRange(const interop::INib* const nib) const final;
+   double getMaxEntityRangeSquared(const interop::INib* const nib) const final;
+   double getMaxTimeDR(const interop::INib* const nib) const final;
+   double getMaxPositionErr(const interop::INib* const nib) const final;
+   double getMaxOrientationErr(const interop::INib* const nib) const final;
+   double getMaxAge(const interop::INib* const nib) const final;
+   interop::INib* createNewOutputNib(models::Player* const player) final;
 
    // DIS v7 additions
    virtual double getHbtPduEe() const;
@@ -322,7 +322,7 @@ protected:
    bool initNetwork() override;                                                   // Initialize the network
    void netInputHander() override;                                                // Network input handler
    void processInputList() override;                                              // Update players/systems from the Input-list
-   interop::Nib* nibFactory(const interop::INetIO::IoType ioType) override;       // Create a new Nib
+   interop::INib* nibFactory(const interop::INetIO::IoType ioType) override;      // Create a new Nib
    interop::NtmInputNode* rootNtmInputNodeFactory() const override;
    void testOutputEntityTypes(const int) final;                                   // Test quick lookup of outgoing entity types
    void testInputEntityTypes(const int) final;                                    // Test quick lookup of incoming entity types

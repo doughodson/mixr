@@ -50,7 +50,7 @@ public:
    );
 
    // Simulation::Ntm class functions
-   bool copyEntityType(interop::Nib* const targetNib) const override;
+   bool copyEntityType(interop::INib* const targetNib) const override;
 
 private:
    // Standard type codes

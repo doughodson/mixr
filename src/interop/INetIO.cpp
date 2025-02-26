@@ -1,6 +1,6 @@
 
 #include "mixr/interop/INetIO.hpp"
-#include "mixr/interop/Nib.hpp"
+#include "mixr/interop/INib.hpp"
 #include "mixr/interop/Ntm.hpp"
 #include "mixr/interop/NtmInputNode.hpp"
 #include "mixr/interop/NtmOutputNode.hpp"
@@ -207,37 +207,37 @@ double INetIO::getCurrentTime()
 }
 
 // Entity filter: Returns max entity ranged (meters)
-double INetIO::getMaxEntityRange(const Nib* const) const
+double INetIO::getMaxEntityRange(const INib* const) const
 {
    return maxEntityRange;
 }
 
 // Entity filter: Returns max entity ranged squared (meters^2)
-double INetIO::getMaxEntityRangeSquared(const Nib* const) const
+double INetIO::getMaxEntityRangeSquared(const INib* const) const
 {
    return maxEntityRange2;
 }
 
 // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-double INetIO::getMaxTimeDR(const Nib* const) const
+double INetIO::getMaxTimeDR(const INib* const) const
 {
    return maxTimeDR;
 }
 
 // Dead-Reckoning: Returns max DR position error (meters)
-double INetIO::getMaxPositionErr(const Nib* const) const
+double INetIO::getMaxPositionErr(const INib* const) const
 {
    return maxPositionErr;
 }
 
 // Dead-Reckoning: Returns max DR orientation error (radians)
-double INetIO::getMaxOrientationErr(const Nib* const) const
+double INetIO::getMaxOrientationErr(const INib* const) const
 {
    return maxOrientationErr;
 }
 
 // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-double INetIO::getMaxAge(const Nib* const) const
+double INetIO::getMaxAge(const INib* const) const
 {
    return maxAge;
 }
@@ -389,7 +389,7 @@ void INetIO::cleanupInputList()
    const double curExecTime{getSimulation()->getExecTimeSec()};
 
    for (int idx{}; idx < nInNibs; idx++) {
-      Nib* nib{inputList[idx]};
+      INib* nib{inputList[idx]};
       if ( (nib->isTimeoutEnabled() && ((curExecTime - nib->getTimeExec()) > getMaxAge(nib)) )) {
             // We have one that's timed-out --
             //std::cout << "REMOVED(TO): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
@@ -479,7 +479,7 @@ void INetIO::updateOutputList()
                   //         (2) an active networked player to relay ...
 
                   // Find the output NIB for this player
-                  Nib* nib{findNib(player, OUTPUT_NIB)};
+                  INib* nib{findNib(player, OUTPUT_NIB)};
                   if (nib == nullptr && newCount < MAX_NEW_OUTGOING) {
                      // Not Found then create a new output NIB for this player
                      nib = insertNewOutputNib( player );
@@ -529,7 +529,7 @@ void INetIO::processOutputList()
    // ---
    for (unsigned int idx{}; idx < getOutputListSize(); idx++) {
 
-      Nib* nib{getOutputNib(idx)};
+      INib* nib{getOutputNib(idx)};
       const double curExecTime{getSimulation()->getExecTimeSec()};
 
       if (nib->isEntityTypeValid()) {
@@ -569,16 +569,16 @@ void INetIO::processOutputList()
 //------------------------------------------------------------------------------
 // Create a new NIBs
 //------------------------------------------------------------------------------
-Nib* INetIO::createNewInputNib()
+INib* INetIO::createNewInputNib()
 {
-    Nib* nib{nibFactory(INPUT_NIB)};
+    INib* nib{nibFactory(INPUT_NIB)};
     nib->setNetIO(this);
     return nib;
 }
 
-Nib* INetIO::createNewOutputNib(models::Player* const player)
+INib* INetIO::createNewOutputNib(models::Player* const player)
 {
-   Nib* nib{nibFactory(OUTPUT_NIB)};
+   INib* nib{nibFactory(OUTPUT_NIB)};
    if (nib != nullptr) {
       nib->setNetIO(this);
       nib->setPlayer(player);
@@ -586,11 +586,11 @@ Nib* INetIO::createNewOutputNib(models::Player* const player)
       nib->setSide(player->getSide());
 
       // Default DR: World, No rotation, 2nd order linear
-      nib->setDeadReckoning(Nib::FVW_DRM);
+      nib->setDeadReckoning(INib::FVW_DRM);
 
       std::string fName{getFederateName()};
       if (player->isProxyPlayer()) {
-         const auto pNib = dynamic_cast<Nib*>(player->getNib());
+         const auto pNib = dynamic_cast<INib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       nib->setFederateName(fName);
@@ -609,7 +609,7 @@ Nib* INetIO::createNewOutputNib(models::Player* const player)
 //------------------------------------------------------------------------------
 // Destroy the NIBs
 //------------------------------------------------------------------------------
-void INetIO::destroyInputNib(Nib* const nib)
+void INetIO::destroyInputNib(INib* const nib)
 {
    if (nib->getPlayer() != nullptr) {
       // all we really need do is request deletion of the proxy player
@@ -619,7 +619,7 @@ void INetIO::destroyInputNib(Nib* const nib)
    nib->unref();
 }
 
-void INetIO::destroyOutputNib(Nib* const nib)
+void INetIO::destroyOutputNib(INib* const nib)
 {
    models::Player* p{nib->getPlayer()};
    if (p != nullptr) p->setOutgoingNib(nullptr, netID);
@@ -631,7 +631,7 @@ void INetIO::destroyOutputNib(Nib* const nib)
 //------------------------------------------------------------------------------
 // create a new proxy player
 //------------------------------------------------------------------------------
-models::Player* INetIO::createProxyPlayer(Nib* const nib)
+models::Player* INetIO::createProxyPlayer(INib* const nib)
 {
    models::Player* player{};
 
@@ -710,9 +710,9 @@ models::Player* INetIO::createProxyPlayer(Nib* const nib)
 //    Create a new Network Interface Block (NIB) for 'player' and insert it
 //    in the output list.  Returns a pointer to the new NIB or 0.
 //------------------------------------------------------------------------------
-Nib* INetIO::insertNewOutputNib(models::Player* const player)
+INib* INetIO::insertNewOutputNib(models::Player* const player)
 {
-    Nib* newNib{};
+    INib* newNib{};
     if (player != nullptr) {
         newNib = createNewOutputNib(player);
         if (newNib != nullptr) {
@@ -730,7 +730,7 @@ Nib* INetIO::insertNewOutputNib(models::Player* const player)
 // addNib2InputList() --
 //    Adds a new NIB to the input-list
 //------------------------------------------------------------------------------
-bool INetIO::addNib2InputList(Nib* const nib)
+bool INetIO::addNib2InputList(INib* const nib)
 {
     // Only if we allow inputs
     if (!isInputEnabled()) return false;
@@ -741,32 +741,32 @@ bool INetIO::addNib2InputList(Nib* const nib)
 //------------------------------------------------------------------------------
 // findNib() -- find the NIB that matches ALL IDs.
 //------------------------------------------------------------------------------
-Nib* INetIO::findNib(const unsigned short playerID, const std::string& federateName, const IoType ioType)
+INib* INetIO::findNib(const unsigned short playerID, const std::string& federateName, const IoType ioType)
 {
    // Define the key
    NibKey key(playerID, federateName);
 
    // Binary search the table for the NIB
-   Nib* found{};
+   INib* found{};
    if (ioType == INPUT_NIB) {
-      Nib** k{static_cast<Nib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib))};
+      INib** k{static_cast<INib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
    } else {
-      Nib** k{static_cast<Nib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib))};
+      INib** k{static_cast<INib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
    }
    return found;
 }
 
-Nib* INetIO::findNib(const models::Player* const player, const IoType ioType)
+INib* INetIO::findNib(const models::Player* const player, const IoType ioType)
 {
-   Nib* found{};
+   INib* found{};
    if (player != nullptr) {
       // Get the player's IDs
       std::string fName{getFederateName()};
       if (player->isProxyPlayer()) {
          // If networked, used original IDs
-         const auto pNib = dynamic_cast<const Nib*>(player->getNib());
+         const auto pNib = dynamic_cast<const INib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       // Now find the NIB using the player's IDs
@@ -778,11 +778,11 @@ Nib* INetIO::findNib(const models::Player* const player, const IoType ioType)
 //------------------------------------------------------------------------------
 // addNibToList() -- adds a NIB to the quick access table
 //------------------------------------------------------------------------------
-bool INetIO::addNibToList(Nib* const nib, const IoType ioType)
+bool INetIO::addNibToList(INib* const nib, const IoType ioType)
 {
    bool ok{};
    if (nib != nullptr) {
-      Nib** tbl{inputList.data()};
+      INib** tbl{inputList.data()};
       int n{nInNibs};
       if (ioType == OUTPUT_NIB) {
          tbl = outputList.data();
@@ -803,7 +803,7 @@ bool INetIO::addNibToList(Nib* const nib, const IoType ioType)
             int idx{n-1};
             while (idx >= 0 && compareKey2Nib(&key, &tbl[idx]) <= 0) {
                // Swap the table entries
-               Nib* tmp{tbl[idx]};
+               INib* tmp{tbl[idx]};
                tbl[idx] = tbl[idx+1];
                tbl[idx+1] = tmp;
                idx--;
@@ -823,9 +823,9 @@ bool INetIO::addNibToList(Nib* const nib, const IoType ioType)
 //------------------------------------------------------------------------------
 // removeNibFromList() -- removes a NIB from the quick access table
 //------------------------------------------------------------------------------
-void INetIO::removeNibFromList(Nib* const nib, const IoType ioType)
+void INetIO::removeNibFromList(INib* const nib, const IoType ioType)
 {
-   Nib** tbl{inputList.data()};
+   INib** tbl{inputList.data()};
    int n{nInNibs};
    if (ioType == OUTPUT_NIB) {
       tbl = outputList.data();
@@ -863,8 +863,8 @@ int INetIO::compareKey2Nib(const void* key, const void* nib)
    const NibKey* pKey{static_cast<const NibKey*>(key)};
 
    // the NIB
-   const Nib* const* pp{static_cast<const Nib* const*>(nib)};
-   const Nib* pNib{*pp};
+   const INib* const* pp{static_cast<const INib* const*>(nib)};
+   const INib* pNib{*pp};
 
    // default to equal
    int result{};
@@ -886,7 +886,7 @@ int INetIO::compareKey2Nib(const void* key, const void* nib)
 //------------------------------------------------------------------------------
 
 // Finds the network type mapper by NIB type codes
-const Ntm* INetIO::findNetworkTypeMapper(const Nib* const nib) const
+const Ntm* INetIO::findNetworkTypeMapper(const INib* const nib) const
 {
    const Ntm* result{};
    if (inputNtmTree != nullptr && nib != nullptr) {

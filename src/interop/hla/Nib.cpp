@@ -17,7 +17,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_DELETEDATA(Nib)
 
-Nib::Nib(const interop::INetIO::IoType ioType) : interop::Nib(ioType), oname()
+Nib::Nib(const interop::INetIO::IoType ioType) : interop::INib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
    setTimeoutEnabled(true);
@@ -25,7 +25,7 @@ Nib::Nib(const interop::INetIO::IoType ioType) : interop::Nib(ioType), oname()
    clearAllAttributeUpdateRequiredFlags();
 }
 
-Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : interop::INib(org.getIoType())
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);

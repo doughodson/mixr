@@ -7,7 +7,7 @@
 namespace mixr {
 namespace models { class Player; }
 namespace hla { class Ambassador; }
-namespace interop { class NetIO; class Nib; class NtmInputNode; }
+namespace interop { class INetIO; class INib; class NtmInputNode; }
 namespace rprfom {
 class BaseEntity;
 class EmitterBeam;
@@ -199,7 +199,7 @@ public:
     ) override;
 
     // interop::NetIO interface
-    interop::Nib* createNewOutputNib(models::Player* const player) override;
+    interop::INib* createNewOutputNib(models::Player* const player) override;
     interop::NtmInputNode* rootNtmInputNodeFactory() const override;
 
    void testOutputEntityTypes(const int) final  {};           // Test rig for outgoing quick lookup
@@ -216,11 +216,11 @@ protected:
     // NetIO interface (callbacks)
     bool publishAndSubscribe() override;
 
-    // interop::NetIO Interface (Callbacks)
+    // interop::INetIO Interface (Callbacks)
     // Update players/systems from the Input-list
     void processInputList() override;
     // Create a new rprfom::Nib
-    interop::Nib* nibFactory(const interop::INetIO::IoType ioType) override;
+    interop::INib* nibFactory(const interop::INetIO::IoType ioType) override;
 };
 
 }

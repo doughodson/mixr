@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_hla_Nib_H__
 #define __mixr_interop_hla_Nib_H__
 
-#include "mixr/interop/Nib.hpp"
+#include "mixr/interop/INib.hpp"
 #include "mixr/interop/hla/NetIO.hpp"
 #include <array>
 
@@ -21,9 +21,9 @@ class Ambassador;
 //        -- (input)  an attribute has received a value (via reflectAttributeValues())
 //        -- (output) an attribute update is required (via provideAttributeValueUpdate())
 //------------------------------------------------------------------------------
-class Nib : public interop::Nib
+class Nib : public interop::INib
 {
-   DECLARE_SUBCLASS(Nib, interop::Nib)
+   DECLARE_SUBCLASS(Nib, interop::INib)
 
 public:
    Nib(const interop::INetIO::IoType ioType);
@@ -65,7 +65,7 @@ public:
    bool isAttributeUpdateRequired(const unsigned int attribIndex) const
       { return (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) ? updateRequired[attribIndex-1] : 0; }
 
-   // interop::Nib Interface
+   // interop::INib Interface
    bool isPlayerStateUpdateRequired(const double curExecTime) override;
 
 protected:

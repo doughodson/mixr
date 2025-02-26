@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class List; }
-namespace interop { class Ntm; class Nib; }
+namespace interop { class Ntm; class INib; }
 namespace dis {
 class Ntm;
 
@@ -36,7 +36,7 @@ public:
       ) const;
 
    // inherited methods
-   const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
+   const interop::Ntm* findNetworkTypeMapper(const interop::INib* const nib) const override;
    bool add2OurLists(interop::Ntm* const ntm) override;
 
 private:

@@ -41,7 +41,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     if (site == getSiteID() &&  app == getApplicationID()) return;
 
     // Search test (reject PDUs from players on our output list)
-    interop::Nib* testNib {findDisNib(playerId, site, app, OUTPUT_NIB)};
+    interop::INib* testNib {findDisNib(playerId, site, app, OUTPUT_NIB)};
     if (testNib != nullptr) return;
 
     // ---
@@ -72,7 +72,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                nib->setFederateName(cbuff);
             }
 
-            nib->setDeadReckoning( interop::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
+            nib->setDeadReckoning( interop::INib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
 
             nib->setEntityType(
                pdu->entityType.kind,

@@ -17,12 +17,12 @@ namespace dis {
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")
 EMPTY_SLOTTABLE(Nib)
 
-Nib::Nib(const interop::INetIO::IoType ioType) : interop::Nib(ioType)
+Nib::Nib(const interop::INetIO::IoType ioType) : interop::INib(ioType)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : interop::INib(org.getIoType())
 {
     STANDARD_CONSTRUCTOR()
     copyData(org,true);
