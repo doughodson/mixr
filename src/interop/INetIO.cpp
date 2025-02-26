@@ -749,10 +749,10 @@ INib* INetIO::findNib(const unsigned short playerID, const std::string& federate
    // Binary search the table for the NIB
    INib* found{};
    if (ioType == INPUT_NIB) {
-      INib** k{static_cast<INib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib))};
+      INib** k{static_cast<INib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(INib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
    } else {
-      INib** k{static_cast<INib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib))};
+      INib** k{static_cast<INib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(INib*), compareKey2Nib))};
       if (k != nullptr) found = *k;
    }
    return found;
