@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_rprfom_NetIO_H__
 #define __mixr_interop_rprfom_NetIO_H__
 
-#include "mixr/interop/hla/NetIO.hpp"
+#include "mixr/interop/hla/INetIO.hpp"
 
 namespace mixr {
 namespace models { class Player; }
@@ -21,9 +21,9 @@ class Ntm;
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-class NetIO : public hla::NetIO
+class NetIO : public hla::INetIO
 {
-    DECLARE_SUBCLASS(NetIO, hla::NetIO)
+    DECLARE_SUBCLASS(NetIO, hla::INetIO)
 
 public:
     // Object Class Indexes

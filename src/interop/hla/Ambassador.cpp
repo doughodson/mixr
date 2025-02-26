@@ -1,7 +1,7 @@
 
 #include "mixr/interop/hla/Ambassador.hpp"
-#include "mixr/interop/hla/NetIO.hpp"
-#include "mixr/interop/hla/Nib.hpp"
+#include "mixr/interop/hla/INetIO.hpp"
+#include "mixr/interop/hla/INib.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -10,7 +10,7 @@
 namespace mixr {
 namespace hla {
 
-Ambassador::Ambassador(NetIO* netIO): hlaIo(netIO)
+Ambassador::Ambassador(INetIO* netIO): hlaIo(netIO)
 {}
 
 Ambassador::~Ambassador() throw(RTI::FederateInternalError)
@@ -20,7 +20,7 @@ void Ambassador::startRegistrationForObjectClass (RTI::ObjectClassHandle theClas
    throw (RTI::ObjectClassNotPublished, RTI::FederateInternalError)
 {
    //std::cout << "Ambassador::startRegistrationForObjectClass(): " ;
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int classIndex {netIO->findObjectClassIndex(theClass)};
    if (classIndex != 0 && netIO->isObjectClassPublished(classIndex)) {
       // It's an object class that we publish, so we can start to
@@ -35,7 +35,7 @@ void Ambassador::stopRegistrationForObjectClass(RTI::ObjectClassHandle theClass)
    throw (RTI::ObjectClassNotPublished, RTI::FederateInternalError)
 {
    //std::cout << "Ambassador::stopRegistrationForObjectClass(): ";
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int classIndex {netIO->findObjectClassIndex(theClass)};
    if (classIndex != 0 ) {
       //std::cout << classIndex;
@@ -50,8 +50,8 @@ void Ambassador::turnUpdatesOnForObjectInstance(RTI::ObjectHandle theObject, con
    //std::cout << "Ambassador:turnUpdatesOnForObjectInstance(): theObject = " << theObject;
 
    // Find the output object
-   NetIO* netIO {getNetIO()};
-   Nib* nib {static_cast<Nib*>(netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB))};
+   INetIO* netIO {getNetIO()};
+   INib* nib {static_cast<INib*>(netIO->findNibByObjectHandle(theObject, INetIO::OUTPUT_NIB))};
 
    if (nib != nullptr) nib->turnUpdatesOn(theAttributes);
    //else std::cout << " NOT FOUND";
@@ -64,8 +64,8 @@ void Ambassador::turnUpdatesOffForObjectInstance(RTI::ObjectHandle theObject, co
    //std::cout << "Ambassador:turnUpdatesOffForObjectInstance(): ";
 
    // Find the output object
-   NetIO* netIO {getNetIO()};
-   Nib* nib {static_cast<Nib*>(netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB))};
+   INetIO* netIO {getNetIO()};
+   INib* nib {static_cast<INib*>(netIO->findNibByObjectHandle(theObject, INetIO::OUTPUT_NIB))};
 
    if (nib != nullptr) nib->turnUpdatesOff(theAttributes);
    //std::cout << std::endl;
@@ -76,8 +76,8 @@ void Ambassador::provideAttributeValueUpdate(RTI::ObjectHandle theObject, const 
 {
    //std::cout << "Ambassador:provideAttributeValueUpdate(): ";
    // Find the output object
-   NetIO* netIO {getNetIO()};
-   Nib* nib {static_cast<Nib*>( netIO->findNibByObjectHandle(theObject, NetIO::OUTPUT_NIB) )};
+   INetIO* netIO {getNetIO()};
+   INib* nib {static_cast<INib*>( netIO->findNibByObjectHandle(theObject, INetIO::OUTPUT_NIB) )};
 
    if (nib != nullptr) nib->provideAttributeValueUpdate(theAttrs);
    //std::cout << std::endl;
@@ -87,7 +87,7 @@ void Ambassador::discoverObjectInstance(RTI::ObjectHandle theObject, RTI::Object
    throw (RTI::CouldNotDiscover, RTI::ObjectClassNotKnown, RTI::FederateInternalError)
 {
    std::cout << "Ambassador::discoverObjectInstance(): " << theObjectName << ", handle = " << theObject << std::endl;
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int classIndex {netIO->findObjectClassIndex(theObjectClass)};
    if (classIndex != 0 && netIO->isObjectClassSubscribed(classIndex)) {
       // It's an object class that we've subscribed to ...
@@ -110,8 +110,8 @@ void Ambassador::removeObjectInstance(RTI::ObjectHandle theObject, const char* t
    std::cout << "Ambassador::removeObjectInstance(): remove object = " << theObject << ", theTag=" << theTag << std::endl;
 
    // find the input object
-   NetIO* netIO {getNetIO()};
-   Nib* nib {netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB)};
+   INetIO* netIO {getNetIO()};
+   INib* nib {netIO->findNibByObjectHandle(theObject, INetIO::INPUT_NIB)};
    if (nib != nullptr) {
       // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
       nib->setMode(models::Player::Mode::DELETE_REQUEST);
@@ -131,8 +131,8 @@ void Ambassador::reflectAttributeValues(RTI::ObjectHandle theObject, const RTI::
 {
    //std::cout << "Ambassador::reflectAttributeValues(): object = " << theObject << ", theTag=" << theTag << std::endl;
    // find the input object
-   NetIO* netIO {getNetIO()};
-   Nib* nib {static_cast<Nib*>( netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB) )};
+   INetIO* netIO {getNetIO()};
+   INib* nib {static_cast<INib*>( netIO->findNibByObjectHandle(theObject, INetIO::INPUT_NIB) )};
    if (nib != nullptr) nib->reflectAttributeValues(theAttrs);
 }
 
@@ -140,7 +140,7 @@ void Ambassador::turnInteractionsOn(RTI::InteractionClassHandle theInteraction)
    throw (RTI::InteractionClassNotPublished, RTI::FederateInternalError)
 {
    std::cout << "Ambassador::turnInteractionsOn(): " ;
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int idx {netIO->findInteractionClassIndex(theInteraction)};
    if (idx != 0 && netIO->isInteractionClassPublished(idx)) {
       // It's an interaction that we publish, so we can start
@@ -155,7 +155,7 @@ void Ambassador::turnInteractionsOff(RTI::InteractionClassHandle theInteraction)
    throw (RTI::InteractionClassNotPublished, RTI::FederateInternalError)
 {
    std::cout << "Ambassador::turnInteractionsOff(): " ;
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int idx {netIO->findInteractionClassIndex(theInteraction)};
    if (idx != 0) {
       std::cout << idx;
@@ -175,7 +175,7 @@ void Ambassador::receiveInteraction(RTI::InteractionClassHandle theInteraction, 
    throw (RTI::InteractionClassNotKnown, RTI::InteractionParameterNotKnown, RTI::FederateInternalError)
 {
    std::cout << "Ambassador::receiveInteraction(): " << theInteraction << std::endl;
-   NetIO* netIO {getNetIO()};
+   INetIO* netIO {getNetIO()};
    const unsigned int idx {netIO->findInteractionClassIndex(theInteraction)};
    if (idx != 0 && netIO->isInteractionClassSubscribed(idx)) {
       // It's an interaction that we subscribe to, so ...

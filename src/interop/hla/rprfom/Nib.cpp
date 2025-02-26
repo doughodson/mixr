@@ -21,12 +21,12 @@ namespace rprfom {
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 
-Nib::Nib(const interop::INetIO::IoType ioType) : hla::Nib(ioType)
+Nib::Nib(const interop::INetIO::IoType ioType) : hla::INib(ioType)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Nib::Nib(const Nib& org) : hla::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : hla::INib(org.getIoType())
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);

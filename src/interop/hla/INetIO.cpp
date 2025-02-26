@@ -1,6 +1,6 @@
 
-#include "mixr/interop/hla/NetIO.hpp"
-#include "mixr/interop/hla/Nib.hpp"
+#include "mixr/interop/hla/INetIO.hpp"
+#include "mixr/interop/hla/INib.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
@@ -21,21 +21,21 @@
 namespace mixr {
 namespace hla {
 
-IMPLEMENT_PARTIAL_SUBCLASS(NetIO, "HlaNetIO")
+IMPLEMENT_PARTIAL_SUBCLASS(INetIO, "HlaNetIO")
 
-BEGIN_SLOTTABLE(NetIO)
+BEGIN_SLOTTABLE(INetIO)
    "fedFile",          // 1) FED file name
    "regulatingTime",   // 2) Regulating time flag
    "constrainedTime",  // 3) constrained time flag
-END_SLOTTABLE(NetIO)
+END_SLOTTABLE(INetIO)
 
-BEGIN_SLOT_MAP(NetIO)
+BEGIN_SLOT_MAP(INetIO)
    ON_SLOT(1, setSlotFedFile,         base::String)
    ON_SLOT(2, setSlotRegulatingTime,  base::Boolean)
    ON_SLOT(3, setSlotConstrainedTime, base::Boolean)
 END_SLOT_MAP()
 
-NetIO::NetIO()
+INetIO::INetIO()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -52,30 +52,30 @@ NetIO::NetIO()
    rtiAmb = new RTI::RTIambassador();
 }
 
-NetIO::NetIO(const NetIO& org)
+INetIO::INetIO(const INetIO& org)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
 
-NetIO::~NetIO()
+INetIO::~INetIO()
 {
    STANDARD_DESTRUCTOR()
 }
 
-NetIO& NetIO::operator=(const NetIO& org)
+INetIO& INetIO::operator=(const INetIO& org)
 {
    deleteData();
    copyData(org, false);
    return *this;
 }
 
-NetIO* NetIO::clone() const
+INetIO* INetIO::clone() const
 {
    return nullptr;
 }
 
-void NetIO::copyData(const NetIO& org, const bool cc)
+void INetIO::copyData(const INetIO& org, const bool cc)
 {
    BaseClass::copyData(org);
 
@@ -133,7 +133,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    cFlag = org.cFlag;
 }
 
-void NetIO::deleteData()
+void INetIO::deleteData()
 {
    if (isNetworkInitialized()) {
       unregisterAllObjects();
@@ -153,28 +153,28 @@ void NetIO::deleteData()
 // HLA Object Class handles
 //    Note: class indexes range [ 1 ... MAX_CLASSES ]
 //------------------------------------------------------------------------------
-bool NetIO::setObjectClassHandle(const unsigned int idx, const RTI::ObjectClassHandle handle)
+bool INetIO::setObjectClassHandle(const unsigned int idx, const RTI::ObjectClassHandle handle)
 {
     bool ok = (idx >= 1 && idx <= MAX_CLASSES);
     if (ok) objectClassHandles[idx-1] = handle;
     return ok;
 }
 
-bool NetIO::setObjectClassPublished(const unsigned int idx, const bool flag)
+bool INetIO::setObjectClassPublished(const unsigned int idx, const bool flag)
 {
     bool ok = (idx >= 1 && idx <= MAX_CLASSES);
     if (ok) objectClassPublished[idx-1] = flag;
     return ok;
 }
 
-bool NetIO::setObjectClassSubscribed(const unsigned int idx, const bool flag)
+bool INetIO::setObjectClassSubscribed(const unsigned int idx, const bool flag)
 {
     bool ok = (idx >= 1 && idx <= MAX_CLASSES);
     if (ok) objectClassSubscribed[idx-1] = flag;
     return ok;
 }
 
-unsigned int NetIO::findObjectClassIndex(const RTI::ObjectClassHandle handle) const
+unsigned int INetIO::findObjectClassIndex(const RTI::ObjectClassHandle handle) const
 {
     unsigned int index = 0;
     unsigned int max = getNumberOfObjectClasses();
@@ -185,7 +185,7 @@ unsigned int NetIO::findObjectClassIndex(const RTI::ObjectClassHandle handle) co
     return index;
 }
 
-void NetIO::clearAllObjectClassHandles()
+void INetIO::clearAllObjectClassHandles()
 {
     for (unsigned int i = 1; i <= MAX_CLASSES; i++) {
         setObjectClassHandle(i,0);
@@ -198,28 +198,28 @@ void NetIO::clearAllObjectClassHandles()
 // HLA Object attribute handles
 //    Note: attribute indexes range [ 1 ... MAX_ATTRIBUTES ]
 //------------------------------------------------------------------------------
-bool NetIO::setObjectAttributeHandle(const unsigned int idx, const RTI::AttributeHandle handle)
+bool INetIO::setObjectAttributeHandle(const unsigned int idx, const RTI::AttributeHandle handle)
 {
     bool ok = (idx >= 1 && idx <= MAX_ATTRIBUTES);
     if (ok) objectAttributeHandles[idx-1] = handle;
     return ok;
 }
 
-bool NetIO::setInteractionClassPublished(const unsigned int idx, const bool flag)
+bool INetIO::setInteractionClassPublished(const unsigned int idx, const bool flag)
 {
     bool ok = (idx >= 1 && idx <= MAX_INTERACTIONS);
     if (ok) interactionClassPublished[idx-1] = flag;
     return ok;
 }
 
-bool NetIO::setInteractionClassSubscribed(const unsigned int idx, const bool flag)
+bool INetIO::setInteractionClassSubscribed(const unsigned int idx, const bool flag)
 {
     bool ok = (idx >= 1 && idx <= MAX_INTERACTIONS);
     if (ok) interactionClassSubscribed[idx-1] = flag;
     return ok;
 }
 
-unsigned int NetIO::findAttributeIndex(const RTI::AttributeHandle handle) const
+unsigned int INetIO::findAttributeIndex(const RTI::AttributeHandle handle) const
 {
     unsigned int index = 0;
     unsigned int max = getNumberOfObjectAttributes();
@@ -230,7 +230,7 @@ unsigned int NetIO::findAttributeIndex(const RTI::AttributeHandle handle) const
     return index;
 }
 
-void NetIO::clearAllObjectAttributeHandles()
+void INetIO::clearAllObjectAttributeHandles()
 {
     for (unsigned int i = 1; i <= MAX_ATTRIBUTES; i++) {
         setObjectAttributeHandle(i,0);
@@ -242,14 +242,14 @@ void NetIO::clearAllObjectAttributeHandles()
 // HLA Interaction Class handles
 //    Note: class indexes range [ 1 ... MAX_INTERACTIONS ]
 //------------------------------------------------------------------------------
-bool NetIO::setInteractionClassHandle(const unsigned int idx, const RTI::InteractionClassHandle handle)
+bool INetIO::setInteractionClassHandle(const unsigned int idx, const RTI::InteractionClassHandle handle)
 {
     bool ok = (idx >= 1 && idx <= MAX_INTERACTIONS);
     if (ok) interactionClassHandles[idx-1] = handle;
     return ok;
 }
 
-unsigned int NetIO::findInteractionClassIndex(const RTI::InteractionClassHandle handle) const
+unsigned int INetIO::findInteractionClassIndex(const RTI::InteractionClassHandle handle) const
 {
     unsigned int index = 0;
     unsigned int max = getNumberOfOInteractionClasses();
@@ -260,7 +260,7 @@ unsigned int NetIO::findInteractionClassIndex(const RTI::InteractionClassHandle 
     return index;
 }
 
-void NetIO::clearAllInteractionClassHandles()
+void INetIO::clearAllInteractionClassHandles()
 {
     for (unsigned int i = 1; i <= MAX_INTERACTIONS; i++) {
         setInteractionClassHandle(i,0);
@@ -273,14 +273,14 @@ void NetIO::clearAllInteractionClassHandles()
 // HLA Interaction parameter handles
 //    Note: range [ 1 ... MAX_PARAMETERS ]
 //------------------------------------------------------------------------------
-bool NetIO::setInteractionParameterHandle(const unsigned int idx, const RTI::ParameterHandle handle)
+bool INetIO::setInteractionParameterHandle(const unsigned int idx, const RTI::ParameterHandle handle)
 {
     bool ok = (idx >= 1 && idx <= MAX_PARAMETERS);
     if (ok) interactionParameterHandles[idx-1] = handle;
     return ok;
 }
 
-unsigned int NetIO::findParameterIndex(const RTI::ParameterHandle handle) const
+unsigned int INetIO::findParameterIndex(const RTI::ParameterHandle handle) const
 {
     unsigned int index = 0;
     unsigned int max = getNumberOfInteractionParameters();
@@ -291,7 +291,7 @@ unsigned int NetIO::findParameterIndex(const RTI::ParameterHandle handle) const
     return index;
 }
 
-void NetIO::clearAllInteractionParameterHandles()
+void INetIO::clearAllInteractionParameterHandles()
 {
     for (unsigned int i = 1; i <= MAX_PARAMETERS; i++) {
         setInteractionParameterHandle(i,0);
@@ -301,14 +301,14 @@ void NetIO::clearAllInteractionParameterHandles()
 //------------------------------------------------------------------------------
 // HLA Object Class registration enabled flags
 //------------------------------------------------------------------------------
-bool NetIO::setObjectClassRegistrationFlag(const unsigned int idx, const bool flg)
+bool INetIO::setObjectClassRegistrationFlag(const unsigned int idx, const bool flg)
 {
    bool ok = (idx >= 1 && idx <= MAX_CLASSES);
    if (ok) regEnbl[idx-1] = flg;
    return ok;
 }
 
-void NetIO::clearAllObjectClassRegistrationFlags()
+void INetIO::clearAllObjectClassRegistrationFlags()
 {
    for (unsigned int i = 1; i <= MAX_CLASSES; i++) {
       setObjectClassRegistrationFlag(i,false);
@@ -318,14 +318,14 @@ void NetIO::clearAllObjectClassRegistrationFlags()
 //------------------------------------------------------------------------------
 // HLA Interaction Class enabled flags
 //------------------------------------------------------------------------------
-bool NetIO::setInteractionEnabledFlag(const unsigned int idx, const bool flg)
+bool INetIO::setInteractionEnabledFlag(const unsigned int idx, const bool flg)
 {
    bool ok = (idx >= 1 && idx <= MAX_INTERACTIONS);
    if (ok) interactEnbl[idx-1] = flg;
    return ok;
 }
 
-void NetIO::clearAllInteractionEnabledFlags()
+void INetIO::clearAllInteractionEnabledFlags()
 {
    for (unsigned int i = 1; i <= MAX_INTERACTIONS; i++) {
       setInteractionEnabledFlag(i,false);
@@ -335,14 +335,14 @@ void NetIO::clearAllInteractionEnabledFlags()
 //------------------------------------------------------------------------------
 // unregisterAllObjects() --
 //------------------------------------------------------------------------------
-bool NetIO::unregisterAllObjects()
+bool INetIO::unregisterAllObjects()
 {
    // Stop Registration For Object Classes
    clearAllObjectClassRegistrationFlags();
 
    // Unregister all of our output objects ...
    for (unsigned int idx = 0; idx < nOutObjects; idx++) {
-      Nib* nib = outHandleTbl[idx];
+      INib* nib = outHandleTbl[idx];
       if (nib->isRegistered()) {
          getRTIambassador()->deleteObjectInstance(nib->getObjectHandle(),0);
          nib->setObjectHandle(0);
@@ -355,7 +355,7 @@ bool NetIO::unregisterAllObjects()
 //------------------------------------------------------------------------------
 // unPublishAndSubscribe()
 //------------------------------------------------------------------------------
-bool NetIO::unPublishAndSubscribe()
+bool INetIO::unPublishAndSubscribe()
 {
    bool ok = true;
    try {
@@ -399,7 +399,7 @@ bool NetIO::unPublishAndSubscribe()
 //------------------------------------------------------------------------------
 // createFederateAmbassador() -- Create our ambassador
 //------------------------------------------------------------------------------
-Ambassador* NetIO::createFederateAmbassador()
+Ambassador* INetIO::createFederateAmbassador()
 {
     return new Ambassador(this);
 }
@@ -407,7 +407,7 @@ Ambassador* NetIO::createFederateAmbassador()
 //------------------------------------------------------------------------------
 // getFedFileName() -- Return a pointer to the FED filename
 //------------------------------------------------------------------------------
-const char* NetIO::getFedFileName() const
+const char* INetIO::getFedFileName() const
 {
     const char* s{};
     if (fedFileName != nullptr) {
@@ -419,7 +419,7 @@ const char* NetIO::getFedFileName() const
 //------------------------------------------------------------------------------
 // updateAttributeValues() -- Send attributes to the RTI
 //------------------------------------------------------------------------------
-bool NetIO::updateAttributeValues(const RTI::ObjectHandle handle, RTI::AttributeHandleValuePairSet* attrs, const char* theTag)
+bool INetIO::updateAttributeValues(const RTI::ObjectHandle handle, RTI::AttributeHandleValuePairSet* attrs, const char* theTag)
 {
     bool ok = true;
     if ( attrs->size() > 0) {
@@ -443,7 +443,7 @@ bool NetIO::updateAttributeValues(const RTI::ObjectHandle handle, RTI::Attribute
 //------------------------------------------------------------------------------
 // sendInteraction() -- Send the interaction via the RTI ambassador
 //------------------------------------------------------------------------------
-bool NetIO::sendInteraction(const RTI::InteractionClassHandle handle, RTI::ParameterHandleValuePairSet* pParams, const char* theTag)
+bool INetIO::sendInteraction(const RTI::InteractionClassHandle handle, RTI::ParameterHandleValuePairSet* pParams, const char* theTag)
 {
     bool ok = true;
     try {
@@ -459,7 +459,7 @@ bool NetIO::sendInteraction(const RTI::InteractionClassHandle handle, RTI::Param
 //------------------------------------------------------------------------------
 // netInputHander() -- Network input handler
 //------------------------------------------------------------------------------
-void NetIO::netInputHander()
+void INetIO::netInputHander()
 {
     doTick();
 }
@@ -467,7 +467,7 @@ void NetIO::netInputHander()
 //------------------------------------------------------------------------------
 // initNetwork() -- Initialize the multicast network
 //------------------------------------------------------------------------------
-bool NetIO::initNetwork()
+bool INetIO::initNetwork()
 {
     // ---
     // Create the federate unique ambassador
@@ -505,7 +505,7 @@ bool NetIO::initNetwork()
 //------------------------------------------------------------------------------
 // createAndJoinFederation()
 //------------------------------------------------------------------------------
-bool NetIO::createAndJoinFederation()
+bool INetIO::createAndJoinFederation()
 {
     bool ok{};
 
@@ -567,7 +567,7 @@ bool NetIO::createAndJoinFederation()
 //------------------------------------------------------------------------------
 // resignAndDestroyFederation()
 //------------------------------------------------------------------------------
-bool NetIO::resignAndDestroyFederation()
+bool INetIO::resignAndDestroyFederation()
 {
     const std::string&  federation{getFederationName()};
 
@@ -597,7 +597,7 @@ bool NetIO::resignAndDestroyFederation()
 //------------------------------------------------------------------------------
 // initializeTimeManagement() -- DPG -- Need to finish this code!!
 //------------------------------------------------------------------------------
-bool NetIO::initializeTimeManagement()
+bool INetIO::initializeTimeManagement()
 {
    bool ok = true;
 
@@ -677,7 +677,7 @@ bool NetIO::initializeTimeManagement()
 //------------------------------------------------------------------------------
 // advanceTime() -- DPG -- Need to finish this code!!
 //------------------------------------------------------------------------------
-bool NetIO::advanceTime()
+bool INetIO::advanceTime()
 {
    // When not regulating or constrained, just leave
    if ( !getRegulating() && !getConstrained() ) return true;
@@ -706,7 +706,7 @@ bool NetIO::advanceTime()
 //------------------------------------------------------------------------------
 // doTick()
 //------------------------------------------------------------------------------
-bool NetIO::doTick()
+bool INetIO::doTick()
 {
    bool ok = true;
    //  std::cout << "*** Ticking..." << std::endl;
@@ -724,13 +724,13 @@ bool NetIO::doTick()
 //------------------------------------------------------------------------------
 // Set slot routines
 //------------------------------------------------------------------------------
-bool NetIO::setSlotFedFile(base::String* const msg)
+bool INetIO::setSlotFedFile(base::String* const msg)
 {
    fedFileName = msg;
    return true;
 }
 
-bool NetIO::setSlotRegulatingTime(base::Boolean* const msg)
+bool INetIO::setSlotRegulatingTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -741,7 +741,7 @@ bool NetIO::setSlotRegulatingTime(base::Boolean* const msg)
    return ok;
 }
 
-bool NetIO::setSlotConstrainedTime(base::Boolean* const msg)
+bool INetIO::setSlotConstrainedTime(base::Boolean* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -755,9 +755,9 @@ bool NetIO::setSlotConstrainedTime(base::Boolean* const msg)
 //------------------------------------------------------------------------------
 // addNibToObjectTables() -- adds a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::addNibToObjectTables(interop::INib* const nib, const IoType ioType)
+void INetIO::addNibToObjectTables(interop::INib* const nib, const IoType ioType)
 {
-   const auto hlaNib = dynamic_cast<Nib*>(nib);
+   const auto hlaNib = dynamic_cast<INib*>(nib);
 
    if (hlaNib != nullptr && nInObjects < MAX_OBJECTS) {
       // Add to the 'by object name' and 'by object handle' tables
@@ -774,7 +774,7 @@ void NetIO::addNibToObjectTables(interop::INib* const nib, const IoType ioType)
    }
 }
 
-void NetIO::addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n)
+void INetIO::addNibToNameTable(INib* const nib, INib** tbl, const unsigned int n)
 {
    // Put the NIB on the top of the table
    nib->ref();
@@ -785,7 +785,7 @@ void NetIO::addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n)
       unsigned int idx = n-1;
       while (idx >= 0 && compareObjNames(nib->getObjectName(), &tbl[idx]) <= 0) {
          // Swap the table entries
-         Nib* tmp = tbl[idx];
+         INib* tmp = tbl[idx];
          tbl[idx] = tbl[idx+1];
          tbl[idx+1] = tmp;
          idx--;
@@ -793,7 +793,7 @@ void NetIO::addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n)
    }
 }
 
-void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
+void INetIO::addNibToHandleTable(INib* const nib, INib** tbl, const unsigned int n)
 {
    // Put the NIB on the top of the table
    nib->ref();
@@ -805,7 +805,7 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
       unsigned int idx = n-1;
       while (idx >= 0 && compareObjHandles(&handle, &tbl[idx]) <= 0) {
          // Swap the table entries
-         Nib* tmp = tbl[idx];
+         INib* tmp = tbl[idx];
          tbl[idx] = tbl[idx+1];
          tbl[idx+1] = tmp;
          idx--;
@@ -816,9 +816,9 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 // removeNibFromObjectTables() -- removes a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::removeNibFromObjectTables(interop::INib* const nib, const IoType ioType)
+void INetIO::removeNibFromObjectTables(interop::INib* const nib, const IoType ioType)
 {
-   const auto hlaNib = dynamic_cast<Nib*>(nib);
+   const auto hlaNib = dynamic_cast<INib*>(nib);
 
    if (hlaNib != nullptr && nInObjects > 0) {
       // Remove from the 'by object name' and 'by object handle' tables
@@ -835,7 +835,7 @@ void NetIO::removeNibFromObjectTables(interop::INib* const nib, const IoType ioT
    }
 }
 
-void NetIO::removeNibFromTable(Nib* const nib, Nib** tbl, const unsigned int n)
+void INetIO::removeNibFromTable(INib* const nib, INib** tbl, const unsigned int n)
 {
    int found = -1;
    // Find the NIB
@@ -857,15 +857,15 @@ void NetIO::removeNibFromTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 // findNibByObjectHandle() -- find the NIB that matches the Object Handle
 //------------------------------------------------------------------------------
-Nib* NetIO::findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType)
+INib* INetIO::findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType)
 {
-   Nib* found = nullptr;
+   INib* found = nullptr;
    if (ioType == INPUT_NIB) {
-      Nib** k = static_cast<Nib**>(bsearch(&handle, inHandleTbl.data(), nInObjects, sizeof(Nib*), compareObjHandles));
+      INib** k = static_cast<INib**>(bsearch(&handle, inHandleTbl.data(), nInObjects, sizeof(INib*), compareObjHandles));
       if (k != nullptr) found = *k;
    }
    else {
-      Nib** k = static_cast<Nib**>(bsearch(&handle, outHandleTbl.data(), nOutObjects, sizeof(Nib*), compareObjHandles));
+      INib** k = static_cast<INib**>(bsearch(&handle, outHandleTbl.data(), nOutObjects, sizeof(INib*), compareObjHandles));
       if (k != nullptr) found = *k;
    }
    return found;
@@ -874,15 +874,15 @@ Nib* NetIO::findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType)
 //------------------------------------------------------------------------------
 // findNibByObjectName() -- find the NIB that matches the Object's fed name
 //------------------------------------------------------------------------------
-Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
+INib* INetIO::findNibByObjectName(const char* name, const IoType ioType)
 {
-   Nib* found = nullptr;
+   INib* found = nullptr;
    if (ioType == INPUT_NIB) {
-      Nib** k = static_cast<Nib**>(bsearch(name, inNameTbl.data(), nInObjects, sizeof(Nib*), compareObjNames));
+      INib** k = static_cast<INib**>(bsearch(name, inNameTbl.data(), nInObjects, sizeof(INib*), compareObjNames));
       if (k != nullptr) found = *k;
    }
    else {
-      Nib** k = static_cast<Nib**>(bsearch(name, outNameTbl.data(), nOutObjects, sizeof(Nib*), compareObjNames));
+      INib** k = static_cast<INib**>(bsearch(name, outNameTbl.data(), nOutObjects, sizeof(INib*), compareObjNames));
       if (k != nullptr) found = *k;
    }
    return found;
@@ -891,7 +891,7 @@ Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
 //------------------------------------------------------------------------------
 // Destroy the NIB s
 //------------------------------------------------------------------------------
-void NetIO::destroyInputNib(interop::INib* const nib)
+void INetIO::destroyInputNib(interop::INib* const nib)
 {
    std::cout << "NetIO::destroyInputNib(" << nib << ")" << std::endl;
    if (nib != nullptr) {
@@ -902,10 +902,10 @@ void NetIO::destroyInputNib(interop::INib* const nib)
    }
 }
 
-void NetIO::destroyOutputNib(interop::INib* const nib0)
+void INetIO::destroyOutputNib(interop::INib* const nib0)
 {
    std::cout << "NetIO::destroyOutputNib(" << nib0 << ")" << std::endl;
-   const auto nib = dynamic_cast<Nib*>(nib0);
+   const auto nib = dynamic_cast<INib*>(nib0);
    if (nib != nullptr) {
       if (nib->isRegistered()) {
          // When this output NIB was registered as an HLA object ...
@@ -930,13 +930,13 @@ void NetIO::destroyOutputNib(interop::INib* const nib0)
 
 // compareObjNames() -- object name compare function --
 //   True types are (const char* p1, const Nib** p2)
-int NetIO::compareObjNames(const void* p1, const void* p2)
+int INetIO::compareObjNames(const void* p1, const void* p2)
 {
    // Key's name
    const char* name1 = static_cast<const char*>(p1);
 
    // NIB's name
-   const Nib* pNib = *((const Nib**) p2);
+   const INib* pNib = *((const INib**) p2);
    const char* name2 = pNib->getObjectName();
 
    // compare the names
@@ -946,13 +946,13 @@ int NetIO::compareObjNames(const void* p1, const void* p2)
 
 // compareObjHandles() --  object handle compare function --
 //   True types are (const RTI::ObjectClassHandle* p1, const Nib** p2)
-int NetIO::compareObjHandles(const void* p1, const void* p2)
+int INetIO::compareObjHandles(const void* p1, const void* p2)
 {
    // Key's handle
    const RTI::ObjectClassHandle h1 = *static_cast<const RTI::ObjectClassHandle*>(p1);
 
    // NIB's handle
-   const Nib* pNib = *((const Nib**) p2);
+   const INib* pNib = *((const INib**) p2);
    const RTI::ObjectClassHandle h2 = pNib->getObjectHandle();
 
    // Compare the handles

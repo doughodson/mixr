@@ -62,7 +62,7 @@ public:
 public:
    INib(const INetIO::IoType ioType);
 
-   INetIO::IoType getIoType() const                    { return ioType; }
+   INetIO::IoType getIoType() const                   { return ioType; }
 
    INetIO* getNetIO() override                        { return pNetIO; }  // Controlling Network I/O
    const INetIO* getNetIO() const                     { return pNetIO; }  // Controlling Network I/O (const version)

@@ -1,9 +1,9 @@
 
-#ifndef __mixr_interop_hla_Nib_H__
-#define __mixr_interop_hla_Nib_H__
+#ifndef __mixr_interop_hla_INib_H__
+#define __mixr_interop_hla_INib_H__
 
 #include "mixr/interop/INib.hpp"
-#include "mixr/interop/hla/NetIO.hpp"
+#include "mixr/interop/hla/INetIO.hpp"
 #include <array>
 
 #include <RTI.hh>
@@ -14,19 +14,19 @@ namespace hla {
 class Ambassador;
 
 //------------------------------------------------------------------------------
-// Class: hla::Nib
-// Description: Unique NIB for HLA support.
+// Class: hla::INib
+// Description: Interface for HLA support.
 //
 // Note: updateRequired[] flags are used ...
 //        -- (input)  an attribute has received a value (via reflectAttributeValues())
 //        -- (output) an attribute update is required (via provideAttributeValueUpdate())
 //------------------------------------------------------------------------------
-class Nib : public interop::INib
+class INib : public interop::INib
 {
-   DECLARE_SUBCLASS(Nib, interop::INib)
+   DECLARE_SUBCLASS(INib, interop::INib)
 
 public:
-   Nib(const interop::INetIO::IoType ioType);
+   INib(const interop::INetIO::IoType ioType);
 
    // Returns true if the object has been registered
    bool isRegistered() const                                { return (handle != 0); }
@@ -56,14 +56,14 @@ public:
    virtual void turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes);
    virtual void turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes);
    bool isAttributeUpdateEnabled(const unsigned int attribIndex) const
-      { return (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) ? updateEnabled[attribIndex-1] : 0; }
+      { return (attribIndex >= 1 && attribIndex <= INetIO::MAX_ATTRIBUTES) ? updateEnabled[attribIndex-1] : 0; }
 
    // HLA attribute update required flags
    virtual void setAttributeUpdateRequiredFlag(const unsigned int attribIndex, const bool flg);
    virtual void setAllAttributeUpdateRequiredFlags();
    virtual void provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttrs);
    bool isAttributeUpdateRequired(const unsigned int attribIndex) const
-      { return (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) ? updateRequired[attribIndex-1] : 0; }
+      { return (attribIndex >= 1 && attribIndex <= INetIO::MAX_ATTRIBUTES) ? updateRequired[attribIndex-1] : 0; }
 
    // interop::INib Interface
    bool isPlayerStateUpdateRequired(const double curExecTime) override;
@@ -77,8 +77,8 @@ private:
     RTI::ObjectHandle handle{0};                 // Our object handle
     unsigned int objectClassIndex{};             // We are of this FOM object class
 
-    std::array<bool, NetIO::MAX_ATTRIBUTES> updateEnabled{};   // If true, an attribute update is enabled
-    std::array<bool, NetIO::MAX_ATTRIBUTES> updateRequired{};  // If true, an attribute update is required (see note above)
+    std::array<bool, INetIO::MAX_ATTRIBUTES> updateEnabled{};   // If true, an attribute update is enabled
+    std::array<bool, INetIO::MAX_ATTRIBUTES> updateRequired{};  // If true, an attribute update is required (see note above)
 };
 
 }

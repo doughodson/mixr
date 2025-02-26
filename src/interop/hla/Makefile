@@ -9,8 +9,8 @@ CPPFLAGS += -Wno-deprecated
 
 OBJS =  \
 	Ambassador.o \
-	NetIO.o \
-	Nib.o
+	INetIO.o \
+	INib.o
 
 .PHONY: all clean
 

@@ -3,7 +3,7 @@
 #define __mixr_interop_rprfom_Nib_H__
 
 #include "mixr/interop/INetIO.hpp"
-#include "mixr/interop/hla/Nib.hpp"
+#include "mixr/interop/hla/INib.hpp"
 
 namespace mixr {
 namespace models { class Player; }
@@ -17,9 +17,9 @@ class BaseEntity;
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-class Nib : public hla::Nib
+class Nib : public hla::INib
 {
-   DECLARE_SUBCLASS(Nib, hla::Nib)
+   DECLARE_SUBCLASS(Nib, hla::INib)
 
 public:
    static const unsigned int MAX_EMITTER_BEAMS = 6;

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_hla_NetIO_H__
-#define __mixr_interop_hla_NetIO_H__
+#ifndef __mixr_interop_hla_INetIO_H__
+#define __mixr_interop_hla_INetIO_H__
 
 #include "mixr/interop/INetIO.hpp"
 #include "mixr/base/String.hpp"
@@ -15,11 +15,11 @@ namespace mixr {
 namespace base { class Boolean; class Number; class String; }
 namespace hla {
 class Ambassador;
-class Nib;
+class INib;
 
 //------------------------------------------------------------------------------
-// Class: hla::NetIO
-// Description: Abstract High-Level Architecture (HLA) protocol manager.
+// Class: hla::INetIO
+// Description: Interface code for High-Level Architecture (HLA) protocol manager.
 //              Unique Federations are managed by derived classes.
 //
 // Factory Name: HlaNetIO
@@ -29,13 +29,13 @@ class Nib;
 //      constrainedTime:    <base::Boolean>   ! constrained time flag
 //
 //------------------------------------------------------------------------------
-class NetIO : public interop::INetIO
+class INetIO : public interop::INetIO
 {
-   DECLARE_SUBCLASS(NetIO, interop::INetIO)
+   DECLARE_SUBCLASS(INetIO, interop::INetIO)
 
 public:
 
-   NetIO();
+   INetIO();
 
    // Max active HLA object classes
    // Note: the class handle indexes range from 1 to MAX_CLASSES
@@ -132,8 +132,8 @@ public:
     virtual const char* getFedFileName() const;
 
     // NIB lookup/search support
-    Nib* findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType);
-    Nib* findNibByObjectName(const char* name, const IoType ioType);
+    INib* findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType);
+    INib* findNibByObjectName(const char* name, const IoType ioType);
     virtual void addNibToObjectTables(interop::INib* const nib, const IoType ioType);
     virtual void removeNibFromObjectTables(interop::INib* const nib, const IoType ioType);
 
@@ -167,7 +167,7 @@ public:
     const RTI::Boolean getConstrained() const               { return cFlag; }
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
-    // interop::NetIO Interface
+    // interop::INetIO Interface
     void destroyInputNib(interop::INib* const) override;
     void destroyOutputNib(interop::INib* const) override;
 
@@ -185,7 +185,7 @@ protected:
     virtual bool unregisterAllObjects();
     virtual Ambassador* createFederateAmbassador();
 
-    // Simulation::NetIO Interface (Callbacks)
+    // Simulation::INetIO Interface (Callbacks)
     bool initNetwork() override;             // Initialize the network
     void netInputHander() override;          // Network input handler
 
@@ -224,26 +224,26 @@ private:
    // Quick lookup tables
    // ---
    // input tables
-   std::array<Nib*, MAX_OBJECTS> inNameTbl{};    // Table of input objects in name order
-   std::array<Nib*, MAX_OBJECTS> inHandleTbl{};  // Table of input objects in handle order
+   std::array<INib*, MAX_OBJECTS> inNameTbl{};    // Table of input objects in name order
+   std::array<INib*, MAX_OBJECTS> inHandleTbl{};  // Table of input objects in handle order
    unsigned int nInObjects{};                    // Number of input objects in both tables
 
    // output tables
-   std::array<Nib*, MAX_OBJECTS> outNameTbl{};    // Table of output objects in name order
-   std::array<Nib*, MAX_OBJECTS> outHandleTbl{};  // Table of output objects in handle order
+   std::array<INib*, MAX_OBJECTS> outNameTbl{};    // Table of output objects in name order
+   std::array<INib*, MAX_OBJECTS> outHandleTbl{};  // Table of output objects in handle order
    unsigned int nOutObjects{};                    // Number of output objects in both tables
 
    // Support functions
-   void addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n);
-   void addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n);
-   void removeNibFromTable(Nib* const nib, Nib** tbl, const unsigned int n);
+   void addNibToNameTable(INib* const nib, INib** tbl, const unsigned int n);
+   void addNibToHandleTable(INib* const nib, INib** tbl, const unsigned int n);
+   void removeNibFromTable(INib* const nib, INib** tbl, const unsigned int n);
 
    // bsearch callbacks: object name compare function --
-   //   True types are (const char* key, const Nib** nib)
+   //   True types are (const char* key, const INib** nib)
    static int compareObjNames(const void* key, const void* nib);
 
    // bsearch callbacks: object handle compare function --
-   //   True types are (const RTI::ObjectClassHandle* key, const Nib** nib)
+   //   True types are (const RTI::ObjectClassHandle* key, const INib** nib)
    static int compareObjHandles(const void* key, const void* nib);
 
 private:

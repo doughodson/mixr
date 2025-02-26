@@ -1,7 +1,7 @@
 
 #include "mixr/interop/INetIO.hpp"
-#include "mixr/interop/hla/Nib.hpp"
-#include "mixr/interop/hla/NetIO.hpp"
+#include "mixr/interop/hla/INib.hpp"
+#include "mixr/interop/hla/INetIO.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/base/String.hpp"
@@ -13,11 +13,11 @@
 namespace mixr {
 namespace hla {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
-EMPTY_SLOTTABLE(Nib)
-EMPTY_DELETEDATA(Nib)
+IMPLEMENT_PARTIAL_SUBCLASS(INib, "HlaNib")
+EMPTY_SLOTTABLE(INib)
+EMPTY_DELETEDATA(INib)
 
-Nib::Nib(const interop::INetIO::IoType ioType) : interop::INib(ioType), oname()
+INib::INib(const interop::INetIO::IoType ioType) : interop::INib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
    setTimeoutEnabled(true);
@@ -25,37 +25,37 @@ Nib::Nib(const interop::INetIO::IoType ioType) : interop::INib(ioType), oname()
    clearAllAttributeUpdateRequiredFlags();
 }
 
-Nib::Nib(const Nib& org) : interop::INib(org.getIoType())
+INib::INib(const INib& org) : interop::INib(org.getIoType())
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
-Nib::~Nib()
+INib::~INib()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Nib& Nib::operator=(const Nib& org)
+INib& INib::operator=(const INib& org)
 {
    deleteData();
    copyData(org,false);
    return *this;
 }
 
-Nib* Nib::clone() const
+INib* INib::clone() const
 {
-   return new Nib(*this);
+   return new INib(*this);
 }
 
-void Nib::copyData(const Nib& org, const bool)
+void INib::copyData(const INib& org, const bool)
 {
    BaseClass::copyData(org);
    oname = org.oname;
    handle = org.handle;
    objectClassIndex = org.objectClassIndex;
 
-   for (unsigned int i = 0; i < NetIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 0; i < INetIO::MAX_ATTRIBUTES; i++) {
       updateEnabled[i] = org.updateEnabled[i];
       updateRequired[i] = org.updateRequired[i];
    }
@@ -64,23 +64,23 @@ void Nib::copyData(const Nib& org, const bool)
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-void Nib::setObjectHandle(RTI::ObjectHandle h)
+void INib::setObjectHandle(RTI::ObjectHandle h)
 {
    handle = h;
 }
 
-void Nib::setClassIndex(const unsigned int idx)
+void INib::setClassIndex(const unsigned int idx)
 {
    objectClassIndex = idx;
 }
 
-void Nib::setObjectName(const char* s)
+void INib::setObjectName(const char* s)
 {
    oname = s;
 }
 
 // Makes a default RTI name
-void Nib::makeObjectName()
+void INib::makeObjectName()
 {
    char name[256]{};
    const std::string& fname{getFederateName()};
@@ -93,7 +93,7 @@ void Nib::makeObjectName()
 //  Called by our FederateAmbassador to update the attribute values for
 //  this object instance.
 //------------------------------------------------------------------------------
-void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet&)
+void INib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet&)
 {
    //std::cout << "Nib::reflectAttributeValues() here!" << std::endl;
 }
@@ -101,21 +101,21 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet&)
 //------------------------------------------------------------------------------
 // HLA attribute update required flags
 //------------------------------------------------------------------------------
-void Nib::setAttributeUpdateRequiredFlag(const unsigned int attribIndex, const bool flg)
+void INib::setAttributeUpdateRequiredFlag(const unsigned int attribIndex, const bool flg)
 {
-   if (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) updateRequired[attribIndex-1] = flg;
+   if (attribIndex >= 1 && attribIndex <= INetIO::MAX_ATTRIBUTES) updateRequired[attribIndex-1] = flg;
 }
 
-void Nib::setAllAttributeUpdateRequiredFlags()
+void INib::setAllAttributeUpdateRequiredFlags()
 {
-   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= INetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateRequiredFlag(i, true);
    }
 }
 
-void Nib::clearAllAttributeUpdateRequiredFlags()
+void INib::clearAllAttributeUpdateRequiredFlags()
 {
-   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= INetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateRequiredFlag(i, false);
    }
 }
@@ -123,14 +123,14 @@ void Nib::clearAllAttributeUpdateRequiredFlags()
 //------------------------------------------------------------------------------
 // HLA attribute update enabled flags
 //------------------------------------------------------------------------------
-void Nib::setAttributeUpdateEnabledFlag(const unsigned int attribIndex, const bool flg)
+void INib::setAttributeUpdateEnabledFlag(const unsigned int attribIndex, const bool flg)
 {
-   if (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) updateEnabled[attribIndex-1] = flg;
+   if (attribIndex >= 1 && attribIndex <= INetIO::MAX_ATTRIBUTES) updateEnabled[attribIndex-1] = flg;
 }
 
-void Nib::clearAllAttributeUpdateEnabledFlags()
+void INib::clearAllAttributeUpdateEnabledFlags()
 {
-   for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
+   for (unsigned int i = 1; i <= INetIO::MAX_ATTRIBUTES; i++) {
       setAttributeUpdateEnabledFlag(i, false);
    }
 }
@@ -138,7 +138,7 @@ void Nib::clearAllAttributeUpdateEnabledFlags()
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequiredForOutput() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
+bool INib::isPlayerStateUpdateRequired(const double curExecTime)
 {
     if (!isRegistered()) return true;
     else return BaseClass::isPlayerStateUpdateRequired(curExecTime);
@@ -149,9 +149,9 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //  Called by our FederateAmbassador to handle the turnUpdatesOnForObjectInstance()
 //  callbacks for this object instance.
 //------------------------------------------------------------------------------
-void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
+void INib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
+   INetIO* hlaIO {static_cast<INetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " ON ( ";
@@ -174,9 +174,9 @@ void Nib::turnUpdatesOn(const RTI::AttributeHandleSet& theAttributes)
 //  Called by our FederateAmbassador to handle the turnUpdatesOffForObjectInstance()
 //  callbacks for this object instance.
 //------------------------------------------------------------------------------
-void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
+void INib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
+   INetIO* hlaIO {static_cast<INetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " OFF ( ";
@@ -198,9 +198,9 @@ void Nib::turnUpdatesOff(const RTI::AttributeHandleSet& theAttributes)
 // provideAttributeValueUpdate() -- (Output support)
 //  Called by our FederateAmbassador to request attribute value updates
 //------------------------------------------------------------------------------
-void Nib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttributes)
+void INib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttributes)
 {
-   NetIO* hlaIO {static_cast<NetIO*>(getNetIO())};
+   INetIO* hlaIO {static_cast<INetIO*>(getNetIO())};
    if (hlaIO != nullptr) {
       //std::cout << getObjectName();
       //std::cout << " Update ( ";
