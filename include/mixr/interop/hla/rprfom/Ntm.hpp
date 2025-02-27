@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_rprfom_Ntm_H__
 #define __mixr_interop_rprfom_Ntm_H__
 
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 #include "mixr/interop/hla/rprfom/NetIO.hpp"
 
 namespace mixr {
@@ -23,9 +23,9 @@ namespace rprfom {
 //                            !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
-class Ntm : public interop::Ntm
+class Ntm : public interop::INtm
 {
-    DECLARE_SUBCLASS(Ntm, interop::Ntm)
+    DECLARE_SUBCLASS(Ntm, interop::INtm)
 
 public:
    Ntm();

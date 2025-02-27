@@ -121,9 +121,9 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::INib* const nib) const
+const interop::INtm* NtmInputNode::findNetworkTypeMapper(const interop::INib* const nib) const
 {
-   const interop::Ntm* result {};
+   const interop::INtm* result {};
 
    const auto rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
@@ -143,7 +143,7 @@ const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::INib* con
 //------------------------------------------------------------------------------
 // Add the NTM to our sublist of nodes.
 //------------------------------------------------------------------------------
-bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
+bool NtmInputNode::add2OurLists(interop::INtm* const ntm)
 {
    bool ok {};
 
