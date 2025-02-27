@@ -1,7 +1,7 @@
 
 #include "NtmOutputNodeStd.hpp"
 
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/base/List.hpp"
@@ -107,9 +107,9 @@ void NtmOutputNodeStd::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM node for the target player, 'p'.
 //------------------------------------------------------------------------------
-const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p) const
+const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p) const
 {
-   const Ntm* result{};
+   const INtm* result{};
 
    // Using factory names, is the target player either the same or derived from
    // our node?  (the root node, which has no factory name, will always match)
@@ -138,7 +138,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
          while (item != nullptr && result == nullptr) {
 
             // Get the template player and its type string with length
-            const Ntm* tstNtm{static_cast<const Ntm*>(item->getValue())};
+            const INtm* tstNtm{static_cast<const INtm*>(item->getValue())};
             const models::Player* const tp{tstNtm->getTemplatePlayer()};
             const base::String* const tpType{tp->getType_old()};
             const std::size_t tpTypeLen{tpType->len()};
@@ -166,7 +166,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p
 //  2) if the target factory is derived from this factory then a new node is created
 //  3) if there's not match then nothing changes and false is returned.
 //------------------------------------------------------------------------------
-bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
+bool NtmOutputNodeStd::add2OurLists(INtm* const tgtNtm)
 {
    bool ok{};
 
@@ -202,7 +202,7 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
 //------------------------------------------------------------------------------
 // Add the target NTM to either (#1) the NTM list or (#2) our list of subnodes.
 //------------------------------------------------------------------------------
-bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
+bool NtmOutputNodeStd::checkAndAddNtm(INtm* const tgtNtm)
 {
    bool ok{};
    if (tgtNtm != nullptr) {
@@ -254,7 +254,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
 //------------------------------------------------------------------------------
 // Add a NTM to the list in sorted order
 //------------------------------------------------------------------------------
-bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
+bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
 {
    bool ok{};
    if (newNtm != nullptr) {
@@ -275,7 +275,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       while (refItem != nullptr && !inserted && !err) {
 
          // Get the ref player's string from the 'ref' Ntm.
-         const Ntm* refNtm{static_cast<const Ntm*>(refItem->getValue())};
+         const INtm* refNtm{static_cast<const INtm*>(refItem->getValue())};
          const models::Player* refP{refNtm->getTemplatePlayer()};
          const base::String* refTypeStr{refP->getType_old()};
          const std::size_t refTypeLen{refTypeStr->len()};

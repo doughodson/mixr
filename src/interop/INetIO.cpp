@@ -1,7 +1,7 @@
 
 #include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/INib.hpp"
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 #include "mixr/interop/NtmInputNode.hpp"
 #include "mixr/interop/NtmOutputNode.hpp"
 #include "NtmOutputNodeStd.hpp"
@@ -132,14 +132,14 @@ void INetIO::copyData(const INetIO& org, const bool)
 
    clearInputEntityTypes();
    for (int i{}; i < org.nInputEntityTypes; i++) {
-      Ntm* cp = org.inputEntityTypes[i]->clone();
+      INtm* cp = org.inputEntityTypes[i]->clone();
       addInputEntityType( cp );
       cp->unref();
    }
 
     clearOutputEntityTypes();
     for (int i = 0; i < org.nOutputEntityTypes; i++) {
-      Ntm* cp = org.outputEntityTypes[i]->clone();
+      INtm* cp = org.outputEntityTypes[i]->clone();
       addOutputEntityType( cp );
       cp->unref();
     }
@@ -656,7 +656,7 @@ models::Player* INetIO::createProxyPlayer(INib* const nib)
       nib->setEntityTypeChecked( true );
 
       // Find "by NIB type codes" on the input list
-      const Ntm* typeMapper{findNetworkTypeMapper(nib)};
+      const INtm* typeMapper{findNetworkTypeMapper(nib)};
 
       // ---
       // Clone the 'template' player object (if any)
@@ -886,9 +886,9 @@ int INetIO::compareKey2Nib(const void* key, const void* nib)
 //------------------------------------------------------------------------------
 
 // Finds the network type mapper by NIB type codes
-const Ntm* INetIO::findNetworkTypeMapper(const INib* const nib) const
+const INtm* INetIO::findNetworkTypeMapper(const INib* const nib) const
 {
-   const Ntm* result{};
+   const INtm* result{};
    if (inputNtmTree != nullptr && nib != nullptr) {
       result = inputNtmTree->findNetworkTypeMapper(nib);
    }
@@ -896,9 +896,9 @@ const Ntm* INetIO::findNetworkTypeMapper(const INib* const nib) const
 }
 
 // Finds the network type mapper by Player
-const Ntm* INetIO::findNetworkTypeMapper(const models::Player* const p) const
+const INtm* INetIO::findNetworkTypeMapper(const models::Player* const p) const
 {
-   const Ntm* result{};
+   const INtm* result{};
    if (outputNtmTree != nullptr && p != nullptr) {
       result = outputNtmTree->findNetworkTypeMapper(p);
    }
@@ -906,7 +906,7 @@ const Ntm* INetIO::findNetworkTypeMapper(const models::Player* const p) const
 }
 
 // Adds an item to the input entity type table
-bool INetIO::addInputEntityType(Ntm* const ntm)
+bool INetIO::addInputEntityType(INtm* const ntm)
 {
    bool ok{};
    if (nInputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
@@ -930,7 +930,7 @@ bool INetIO::addInputEntityType(Ntm* const ntm)
 }
 
 // Adds an item to the output entity type table
-bool INetIO::addOutputEntityType(Ntm* const ntm)
+bool INetIO::addOutputEntityType(INtm* const ntm)
 {
    bool ok{};
    if (nOutputEntityTypes < MAX_ENTITY_TYPES && ntm != nullptr) {
@@ -1004,13 +1004,13 @@ const NtmOutputNode* INetIO::getRootNtmOutputNode() const
 }
 
 // Return a incoming entity type by index
-const Ntm* INetIO::getInputEntityType(const int idx) const
+const INtm* INetIO::getInputEntityType(const int idx) const
 {
    return (idx < nInputEntityTypes) ? inputEntityTypes[idx] : nullptr;
 }
 
 // Return a outgoing entity type by index
-const Ntm* INetIO::getOutputEntityTypes(const int idx) const
+const INtm* INetIO::getOutputEntityTypes(const int idx) const
 {
    return (idx < nOutputEntityTypes) ? outputEntityTypes[idx] : nullptr;
 }
@@ -1120,7 +1120,7 @@ bool INetIO::setSlotInputEntityTypes(base::PairStream* const msg)
        base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
-          const auto ntm = dynamic_cast<Ntm*>( pair->object() );
+          const auto ntm = dynamic_cast<INtm*>( pair->object() );
           if (ntm != nullptr) {
              // We have an Ntm object, so put it in the table
              addInputEntityType(ntm);
@@ -1145,7 +1145,7 @@ bool INetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
        base::List::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
-          const auto ntm = dynamic_cast<Ntm*>( pair->object() );
+          const auto ntm = dynamic_cast<INtm*>( pair->object() );
           if (ntm != nullptr) {
             // We have an Ntm object, so put it in the table
             addOutputEntityType(ntm);

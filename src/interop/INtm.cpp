@@ -1,34 +1,34 @@
 
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
 namespace mixr {
 namespace interop {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Ntm, "Ntm")
+IMPLEMENT_ABSTRACT_SUBCLASS(INtm, "INtm")
 
-BEGIN_SLOTTABLE(Ntm)
+BEGIN_SLOTTABLE(INtm)
    "template",       // 1) Template player
-END_SLOTTABLE(Ntm)
+END_SLOTTABLE(INtm)
 
-BEGIN_SLOT_MAP(Ntm)
+BEGIN_SLOT_MAP(INtm)
     ON_SLOT(1, setSlotTemplatePlayer, models::Player)
 END_SLOT_MAP()
 
-Ntm::Ntm()
+INtm::INtm()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Ntm::copyData(const Ntm& org, const bool)
+void INtm::copyData(const INtm& org, const bool)
 {
    BaseClass::copyData(org);
 
    setSlotTemplatePlayer( org.tPlayer );
 }
 
-void Ntm::deleteData()
+void INtm::deleteData()
 {
    setSlotTemplatePlayer( nullptr );
 }
@@ -38,7 +38,7 @@ void Ntm::deleteData()
 //------------------------------------------------------------------------------
 
 // Sets the template player
-bool Ntm::setSlotTemplatePlayer(const models::Player* const msg)
+bool INtm::setSlotTemplatePlayer(const models::Player* const msg)
 {
    tPlayer = msg;
    return true;

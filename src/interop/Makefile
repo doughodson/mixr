@@ -6,7 +6,7 @@ LIB = $(MIXR_LIB_DIR)/libmixr_interop.a
 OBJS =  \
 	INetIO.o \
 	INib.o \
-	Ntm.o \
+	INtm.o \
 	NtmInputNode.o \
 	NtmOutputNode.o \
 	NtmOutputNodeStd.o

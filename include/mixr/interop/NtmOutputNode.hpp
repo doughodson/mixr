@@ -6,7 +6,7 @@
 namespace mixr {
 namespace models { class Player; }
 namespace interop {
-class Ntm;
+class INtm;
 
 //------------------------------------------------------------------------------
 // Class: NtmOutputNode
@@ -16,8 +16,8 @@ class NtmOutputNode : public base::Object
    DECLARE_SUBCLASS(NtmOutputNode, base::Object)
 public:
    NtmOutputNode();
-   virtual const Ntm* findNetworkTypeMapper(const models::Player* const) const =0;
-   virtual bool add2OurLists(Ntm* const) =0;
+   virtual const INtm* findNetworkTypeMapper(const models::Player* const) const =0;
+   virtual bool add2OurLists(INtm* const) =0;
 };
 
 }

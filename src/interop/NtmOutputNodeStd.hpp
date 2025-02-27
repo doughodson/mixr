@@ -6,7 +6,7 @@ namespace mixr {
 namespace base { class List; }
 namespace models { class Player; }
 namespace interop {
-class Ntm;
+class INtm;
 
 //------------------------------------------------------------------------------
 // Class: NtmOutputStd
@@ -19,12 +19,12 @@ class NtmOutputNodeStd : public NtmOutputNode
 public:
    NtmOutputNodeStd(const models::Player* const, const char* const factoryName);
 
-   const Ntm* findNetworkTypeMapper(const models::Player* const) const override;
-   bool add2OurLists(Ntm* const) override;
+   const INtm* findNetworkTypeMapper(const models::Player* const) const override;
+   bool add2OurLists(INtm* const) override;
 
 private:
-   bool checkAndAddNtm(Ntm* const);
-   bool addNtmSorted(Ntm* const);
+   bool checkAndAddNtm(INtm* const);
+   bool addNtmSorted(INtm* const);
 
    char* nodeFactoryName{};     // Factory name for this node
    const models::Player* tp{};  // Template player for this node

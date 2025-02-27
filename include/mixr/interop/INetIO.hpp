@@ -13,7 +13,7 @@ namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {
 class INib;
-class Ntm;
+class INtm;
 class NtmInputNode;
 class NtmOutputNode;
 
@@ -335,15 +335,15 @@ protected:
 public:
 
    // Finds the network type mapper by NIB type codes
-   virtual const Ntm* findNetworkTypeMapper(const INib* const nib) const;
+   virtual const INtm* findNetworkTypeMapper(const INib* const nib) const;
 
    // Finds the network type mapper by Player
-   virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const;
+   virtual const INtm* findNetworkTypeMapper(const models::Player* const p) const;
 
 
 protected:
-   virtual bool addOutputEntityType(Ntm* const item);          // Adds an item to the output entity type table
-   virtual bool addInputEntityType(Ntm* const item);           // Adds an item to the input entity type table
+   virtual bool addOutputEntityType(INtm* const item);         // Adds an item to the output entity type table
+   virtual bool addInputEntityType(INtm* const item);          // Adds an item to the input entity type table
    virtual bool clearOutputEntityTypes();                      // Clears the output entity type table
    virtual bool clearInputEntityTypes();                       // Clears the input entity type table
 
@@ -359,8 +359,8 @@ protected:
    // ---
    // Raw lists
    // ---
-   const Ntm* getOutputEntityTypes(const int) const;           // Return a outgoing entity type by index
-   const Ntm* getInputEntityType(const int) const;             // Return a incoming entity type by index
+   const INtm* getOutputEntityTypes(const int) const;          // Return a outgoing entity type by index
+   const INtm* getInputEntityType(const int) const;            // Return a incoming entity type by index
    int getNumOutputEntityTypes() const;                        // Number of input types
    int getNumInputEntityTypes() const;                         // Number of output types
 
@@ -431,11 +431,11 @@ private:  // Ntm related private
    NtmOutputNode* outputNtmTree{}; // Output NTM quick lookup tree
 
    // Input entity type table
-   std::array<const Ntm*, MAX_ENTITY_TYPES> inputEntityTypes{};  // Table of pointers to input entity type mappers; Ntm objects
+   std::array<const INtm*, MAX_ENTITY_TYPES> inputEntityTypes{}; // Table of pointers to input entity type mappers; Ntm objects
    int nInputEntityTypes {};                                     // Number of input entity mappers (Ntm objects) in the table, 'inputEntityTypes'
 
    // Output entity type table
-   std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes{};  // Table of pointers to output entity type mappers; Ntm objects
+   std::array<const INtm*, MAX_ENTITY_TYPES> outputEntityTypes{}; // Table of pointers to output entity type mappers; Ntm objects
    int nOutputEntityTypes {};                                     // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
 
 private:

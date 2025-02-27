@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_Ntm_HPP__
-#define __mixr_interop_common_Ntm_HPP__
+#ifndef __mixr_interop_common_INtm_HPP__
+#define __mixr_interop_common_INtm_HPP__
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -11,10 +11,10 @@ namespace interop {
 class INib;
 
 //------------------------------------------------------------------------------
-// Class: Ntm
+// Class: INtm
 // Description: Interface Network Type Mapper (NTM)
 //
-//    This class is used to map mixr player types to the entity type codes
+//    Interface to map mixr player types to the entity type codes
 //    that are unique to an interoperability network (i.e., DIS, HLA/FOM, etc).
 //
 //    The mixr player type is defined by providing an example Player using
@@ -58,12 +58,12 @@ class INib;
 //          Best match is returned: #1 (best), #2, #5 and #6 (worst)
 //
 //------------------------------------------------------------------------------
-class Ntm : public base::Object
+class INtm : public base::Object
 {
-    DECLARE_SUBCLASS(Ntm, base::Object)
+    DECLARE_SUBCLASS(INtm, base::Object)
 
 public:
-   Ntm();
+   INtm();
 
    // Template player
    const models::Player* getTemplatePlayer() const    { return tPlayer; }

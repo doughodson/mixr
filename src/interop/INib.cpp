@@ -1,7 +1,7 @@
 
 #include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/INib.hpp"
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/ground/Artillery.hpp"
@@ -245,7 +245,7 @@ bool INib::setOutputPlayerType(const models::Player* const p)
       setEntityTypeChecked( true );
 
       // Find "by player" on the output list
-      const Ntm* typeMapper{getNetIO()->findNetworkTypeMapper(p)};
+      const INtm* typeMapper{getNetIO()->findNetworkTypeMapper(p)};
 
       // If we found a type mapper for this Player type,
       // then set the mapper and copy the unique type codes
@@ -262,7 +262,7 @@ bool INib::setOutputPlayerType(const models::Player* const p)
 //------------------------------------------------------------------------------
 // setTypeMapper() -- sets a pointer to the entity type mapper (Ntm) object
 //------------------------------------------------------------------------------
-bool INib::setTypeMapper(const Ntm* const p)
+bool INib::setTypeMapper(const INtm* const p)
 {
     ntm = p;
     return true;

@@ -135,12 +135,12 @@ public:
    void setCheckedFlag(const bool flg)                { checked = flg; }
 
    // Standard player (entity) type codes
-   const Ntm* getTypeMapper() const                   { return ntm; }
+   const INtm* getTypeMapper() const                  { return ntm; }
    bool isEntityTypeChecked() const                   { return entityTypeChecked; }
    bool isEntityTypeUnchecked() const                 { return !entityTypeChecked; }
    bool isEntityTypeValid() const                     { return (ntm != nullptr); }
    bool isEntityTypeInvalid() const                   { return (ntm == nullptr); }
-   virtual bool setTypeMapper(const Ntm* const p);
+   virtual bool setTypeMapper(const INtm* const p);
    virtual void setEntityTypeChecked(const bool f);
 
    // Appearance
@@ -286,7 +286,7 @@ private:
    unsigned short playerID{};                    // Player ID
 
    // Type mapper and type checked flags
-   base::safe_ptr<const Ntm> ntm;      // Type mapper
+   base::safe_ptr<const INtm> ntm;     // Type mapper
    bool entityTypeChecked{};           // Entity type has been checked
 
    // player data
