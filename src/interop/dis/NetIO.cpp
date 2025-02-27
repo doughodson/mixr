@@ -1,5 +1,5 @@
 
-#include "mixr/interop/NtmOutputNode.hpp"
+#include "mixr/interop/INtmOutputNode.hpp"
 
 #include "mixr/interop/dis/NetIO.hpp"
 #include "mixr/interop/dis/Nib.hpp"
@@ -1508,7 +1508,7 @@ bool NetIO::setSlotExerciseID(const base::Integer* const x)
 //------------------------------------------------------------------------------
 void NetIO::testInputEntityTypes(const int n)
 {
-   const interop::NtmInputNode* root{getRootNtmInputNode()};
+   const interop::INtmInputNode* root{getRootNtmInputNode()};
    const int maxTypes{getNumInputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
       for (int i{}; i < n; i++) {
@@ -1568,7 +1568,7 @@ void NetIO::testInputEntityTypes(const int n)
 //------------------------------------------------------------------------------
 void NetIO::testOutputEntityTypes(const int n)
 {
-   const interop::NtmOutputNode* root{getRootNtmOutputNode()};
+   const interop::INtmOutputNode* root{getRootNtmOutputNode()};
    const int maxTypes{getNumOutputEntityTypes()};
    if (n > 0 && root != nullptr && maxTypes > 0) {
       for (int i{}; i < n; i++) {
@@ -1632,7 +1632,7 @@ void NetIO::testOutputEntityTypes(const int n)
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
 //------------------------------------------------------------------------------
-interop::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
+interop::INtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
    return new dis::NtmInputNode(dis::NtmInputNode::ROOT_LVL, 0); // root level
 }

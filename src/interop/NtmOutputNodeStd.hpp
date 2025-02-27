@@ -1,6 +1,6 @@
 
 
-#include "mixr/interop/NtmOutputNode.hpp"
+#include "mixr/interop/INtmOutputNode.hpp"
 
 namespace mixr {
 namespace base { class List; }
@@ -12,9 +12,9 @@ class INtm;
 // Class: NtmOutputStd
 // Description: Standard outgoing NTM node
 //------------------------------------------------------------------------------
-class NtmOutputNodeStd : public NtmOutputNode
+class NtmOutputNodeStd : public INtmOutputNode
 {
-   DECLARE_SUBCLASS(NtmOutputNodeStd, NtmOutputNode)
+   DECLARE_SUBCLASS(NtmOutputNodeStd, INtmOutputNode)
 
 public:
    NtmOutputNodeStd(const models::Player* const, const char* const factoryName);

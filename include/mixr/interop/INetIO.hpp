@@ -14,8 +14,8 @@ namespace simulation { class Simulation; class Station; }
 namespace interop {
 class INib;
 class INtm;
-class NtmInputNode;
-class NtmOutputNode;
+class INtmInputNode;
+class INtmOutputNode;
 
 //------------------------------------------------------------------------------
 // Class: INetIO
@@ -350,11 +350,11 @@ protected:
    // ---
    // Quick look trees
    // ---
-   const NtmOutputNode* getRootNtmOutputNode() const;          // Return the quick look root node for outgoing entity types
-   virtual NtmOutputNode* rootNtmOutputNodeFactory() const;    // Outgoing quick look root node factory
+   const INtmOutputNode* getRootNtmOutputNode() const;          // Return the quick look root node for outgoing entity types
+   virtual INtmOutputNode* rootNtmOutputNodeFactory() const;    // Outgoing quick look root node factory
 
-   const NtmInputNode* getRootNtmInputNode() const;            // Return the quick look root node for incoming entity types
-   virtual NtmInputNode* rootNtmInputNodeFactory() const =0;   // Incoming quick look root node factory
+   const INtmInputNode* getRootNtmInputNode() const;            // Return the quick look root node for incoming entity types
+   virtual INtmInputNode* rootNtmInputNodeFactory() const =0;   // Incoming quick look root node factory
 
    // ---
    // Raw lists
@@ -427,8 +427,8 @@ private: // Nib related private
 private:  // Ntm related private
    static const int MAX_ENTITY_TYPES{MIXR_CONFIG_MAX_NETIO_ENTITY_TYPES};
 
-   NtmInputNode* inputNtmTree{};   // Input NTM quick lookup tree
-   NtmOutputNode* outputNtmTree{}; // Output NTM quick lookup tree
+   INtmInputNode* inputNtmTree{};   // Input NTM quick lookup tree
+   INtmOutputNode* outputNtmTree{}; // Output NTM quick lookup tree
 
    // Input entity type table
    std::array<const INtm*, MAX_ENTITY_TYPES> inputEntityTypes{}; // Table of pointers to input entity type mappers; Ntm objects

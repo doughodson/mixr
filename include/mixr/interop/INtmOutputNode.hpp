@@ -1,5 +1,5 @@
-#ifndef __mixr_interop_common_NtmOutputNode_HPP__
-#define __mixr_interop_common_NtmOutputNode_HPP__
+#ifndef __mixr_interop_common_INtmOutputNode_HPP__
+#define __mixr_interop_common_INtmOutputNode_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -9,13 +9,13 @@ namespace interop {
 class INtm;
 
 //------------------------------------------------------------------------------
-// Class: NtmOutputNode
+// Class: INtmOutputNode
 //------------------------------------------------------------------------------
-class NtmOutputNode : public base::Object
+class INtmOutputNode : public base::Object
 {
-   DECLARE_SUBCLASS(NtmOutputNode, base::Object)
+   DECLARE_SUBCLASS(INtmOutputNode, base::Object)
 public:
-   NtmOutputNode();
+   INtmOutputNode();
    virtual const INtm* findNetworkTypeMapper(const models::Player* const) const =0;
    virtual bool add2OurLists(INtm* const) =0;
 };

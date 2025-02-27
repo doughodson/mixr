@@ -1,7 +1,7 @@
 
 #include "mixr/interop/hla/rprfom/NetIO.hpp"
 
-#include "mixr/interop/NtmInputNode.hpp"
+#include "mixr/interop/INtmInputNode.hpp"
 
 #include "mixr/interop/hla/rprfom/Nib.hpp"
 #include "mixr/interop/hla/rprfom/Ntm.hpp"
@@ -266,7 +266,7 @@ const Ntm* NetIO::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
 //------------------------------------------------------------------------------
-interop::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
+interop::INtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
    return new rprfom::NtmInputNode(rprfom::NtmInputNode::ROOT_LVL, 0); // root level
 }

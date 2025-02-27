@@ -323,7 +323,7 @@ protected:
    void netInputHander() override;                                                // Network input handler
    void processInputList() override;                                              // Update players/systems from the Input-list
    interop::INib* nibFactory(const interop::INetIO::IoType ioType) override;      // Create a new Nib
-   interop::NtmInputNode* rootNtmInputNodeFactory() const override;
+   interop::INtmInputNode* rootNtmInputNodeFactory() const override;
    void testOutputEntityTypes(const int) final;                                   // Test quick lookup of outgoing entity types
    void testInputEntityTypes(const int) final;                                    // Test quick lookup of incoming entity types
 

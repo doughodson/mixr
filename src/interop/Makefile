@@ -7,8 +7,8 @@ OBJS =  \
 	INetIO.o \
 	INib.o \
 	INtm.o \
-	NtmInputNode.o \
-	NtmOutputNode.o \
+	INtmInputNode.o \
+	INtmOutputNode.o \
 	NtmOutputNodeStd.o
 
 .PHONY: all clean

@@ -7,7 +7,7 @@
 namespace mixr {
 namespace models { class Player; }
 namespace hla { class Ambassador; }
-namespace interop { class INetIO; class INib; class NtmInputNode; }
+namespace interop { class INetIO; class INib; class INtmInputNode; }
 namespace rprfom {
 class BaseEntity;
 class EmitterBeam;
@@ -198,9 +198,9 @@ public:
         const RTI::ParameterHandleValuePairSet& theParameters
     ) override;
 
-    // interop::NetIO interface
+    // interop::INetIO interface
     interop::INib* createNewOutputNib(models::Player* const player) override;
-    interop::NtmInputNode* rootNtmInputNodeFactory() const override;
+    interop::INtmInputNode* rootNtmInputNodeFactory() const override;
 
    void testOutputEntityTypes(const int) final  {};           // Test rig for outgoing quick lookup
    void testInputEntityTypes(const int) final   {};           // Test rig for incoming quick lookup

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_interop_common_NtmInputNode_HPP__
-#define __mixr_interop_common_NtmInputNode_HPP__
+#ifndef __mixr_interop_common_INtmInputNode_HPP__
+#define __mixr_interop_common_INtmInputNode_HPP__
 
 #include "mixr/base/Object.hpp"
 
@@ -10,13 +10,13 @@ class INib;
 class INtm;
 
 //------------------------------------------------------------------------------
-// Class: NtmInputNode
+// Class: INtmInputNode
 //------------------------------------------------------------------------------
-class NtmInputNode : public base::Object
+class INtmInputNode : public base::Object
 {
-   DECLARE_SUBCLASS(NtmInputNode, base::Object)
+   DECLARE_SUBCLASS(INtmInputNode, base::Object)
 public:
-   NtmInputNode();
+   INtmInputNode();
    virtual const INtm* findNetworkTypeMapper(const INib* const) const =0;
    virtual bool add2OurLists(INtm* const) =0;
 };

@@ -1,7 +1,7 @@
 #ifndef __mixr_interop_rprfom_NtmInputNode_HPP__
 #define __mixr_interop_rprfom_NetInputNode_HPP__
 
-#include "mixr/interop/NtmInputNode.hpp"
+#include "mixr/interop/INtmInputNode.hpp"
 
 namespace mixr {
 namespace base { class List; }
@@ -12,9 +12,9 @@ class Ntm;
 // Class: rprfom::NtmInputNode
 // Description: RPR FOM incoming NTM class
 //------------------------------------------------------------------------------
-class NtmInputNode : public interop::NtmInputNode
+class NtmInputNode : public interop::INtmInputNode
 {
-   DECLARE_SUBCLASS(NtmInputNode, interop::NtmInputNode)
+   DECLARE_SUBCLASS(NtmInputNode, interop::INtmInputNode)
 
 public:
    enum { ROOT_LVL, KIND_LVL, DOMAIN_LVL, COUNTRYCODE_LVL,

@@ -2,8 +2,8 @@
 #include "mixr/interop/INetIO.hpp"
 #include "mixr/interop/INib.hpp"
 #include "mixr/interop/INtm.hpp"
-#include "mixr/interop/NtmInputNode.hpp"
-#include "mixr/interop/NtmOutputNode.hpp"
+#include "mixr/interop/INtmInputNode.hpp"
+#include "mixr/interop/INtmOutputNode.hpp"
 #include "NtmOutputNodeStd.hpp"
 
 #include "mixr/models/system/Gun.hpp"
@@ -992,13 +992,13 @@ bool INetIO::clearOutputEntityTypes()
 }
 
 // Return the quick look root node for incoming entity types
-const NtmInputNode* INetIO::getRootNtmInputNode() const
+const INtmInputNode* INetIO::getRootNtmInputNode() const
 {
    return inputNtmTree;
 }
 
 // Return the quick look root node for outgoing entity types
-const NtmOutputNode* INetIO::getRootNtmOutputNode() const
+const INtmOutputNode* INetIO::getRootNtmOutputNode() const
 {
    return outputNtmTree;
 }
@@ -1212,7 +1212,7 @@ bool INetIO::setSlotMaxEntityRange(const base::ILength* const x)
 //------------------------------------------------------------------------------
 // root outgoing NTM node factory
 //------------------------------------------------------------------------------
-NtmOutputNode* INetIO::rootNtmOutputNodeFactory() const
+INtmOutputNode* INetIO::rootNtmOutputNodeFactory() const
 {
    return new NtmOutputNodeStd(nullptr, nullptr);   // root node has no factory name
 }
