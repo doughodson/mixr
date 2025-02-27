@@ -36,8 +36,8 @@ public:
       ) const;
 
    // inherited methods
-   const interop::Ntm* findNetworkTypeMapper(const interop::INib* const nib) const override;
-   bool add2OurLists(interop::Ntm* const ntm) override;
+   const interop::INtm* findNetworkTypeMapper(const interop::INib* const nib) const override;
+   bool add2OurLists(interop::INtm* const ntm) override;
 
 private:
    unsigned int level {};        // Level

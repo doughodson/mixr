@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_dis_Ntm_HPP__
 #define __mixr_interop_dis_Ntm_HPP__
 
-#include "mixr/interop/Ntm.hpp"
+#include "mixr/interop/INtm.hpp"
 #include "mixr/interop/dis/NetIO.hpp"
 
 namespace mixr {
@@ -25,9 +25,9 @@ namespace dis {
 //                                 !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
-class Ntm : public interop::Ntm
+class Ntm : public interop::INtm
 {
-    DECLARE_SUBCLASS(Ntm, interop::Ntm)
+    DECLARE_SUBCLASS(Ntm, interop::INtm)
 
 public:
    Ntm();

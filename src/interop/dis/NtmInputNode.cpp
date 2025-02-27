@@ -68,9 +68,9 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::INib* const nib) const
+const interop::INtm* NtmInputNode::findNetworkTypeMapper(const interop::INib* const nib) const
 {
-   const interop::Ntm* result{};
+   const interop::INtm* result{};
 
    const auto disNib = dynamic_cast<const dis::Nib*>( nib );
    if (disNib != nullptr) {
@@ -148,7 +148,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // Add the NTM to our sublist of nodes.
 //------------------------------------------------------------------------------
-bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
+bool NtmInputNode::add2OurLists(interop::INtm* const ntm)
 {
    bool ok {};
 
