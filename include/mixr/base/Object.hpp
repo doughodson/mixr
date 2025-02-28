@@ -140,11 +140,11 @@ namespace base {
 //
 //    Factory name support functions --
 //
-//       bool isFactoryName(char* name)
+//       bool isFactoryName(std::string& name)
 //          Returns true if this object's factory name is 'name' or if it is
 //          derived from a factory named 'name'.
 //
-//       const char* Foo::getFactoryName()
+//       const std::string& Foo::getFactoryName()
 //          Static function that returns the factory name of class Foo.
 //
 //    (For examples of factory functions, see base/factory.cpp, graphics/factory.cpp,
