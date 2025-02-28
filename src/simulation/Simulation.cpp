@@ -622,8 +622,8 @@ void Simulation::updateTC(const double dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0), reqTcThreads, reqTcThreads);
 
             // Now wait for the other thread(s) to complete
-            base::SyncThread** pp {reinterpret_cast<base::SyncThread**>(&tcThreads[0])};
-            base::SyncThread::waitForAllCompleted(pp, numTcThreads);
+            base::ISyncThread** pp {reinterpret_cast<base::ISyncThread**>(&tcThreads[0])};
+            base::ISyncThread::waitForAllCompleted(pp, numTcThreads);
 
          } else if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "simulation::updateTC() ERROR, invalid T/C thread setup";
@@ -705,8 +705,8 @@ void Simulation::updateData(const double dt)
             updateBgPlayerList(currentPlayerList, dt0, reqBgThreads, reqBgThreads);
 
             // Now wait for the other thread(s) to complete
-            base::SyncThread** pp = reinterpret_cast<base::SyncThread**>(&bgThreads[0]);
-            base::SyncThread::waitForAllCompleted(pp, numBgThreads);
+            base::ISyncThread** pp = reinterpret_cast<base::ISyncThread**>(&bgThreads[0]);
+            base::ISyncThread::waitForAllCompleted(pp, numBgThreads);
 
          } else if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Simulation::updateData() ERROR, invalid background thread setup";

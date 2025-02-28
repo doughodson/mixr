@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/PeriodicThread.hpp"
+#include "mixr/base/threads/IPeriodicThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/IComponent.hpp"
@@ -22,7 +22,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long PeriodicThread::mainThreadFunc()
+unsigned long IPeriodicThread::mainThreadFunc()
 {
    unsigned long rtn{};
 

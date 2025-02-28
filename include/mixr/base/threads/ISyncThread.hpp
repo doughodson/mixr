@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_SyncTask_HPP__
-#define __mixr_base_SyncTask_HPP__
+#ifndef __mixr_base_ISyncTask_HPP__
+#define __mixr_base_ISyncTask_HPP__
 
 #include "mixr/base/threads/IThread.hpp"
 
@@ -9,9 +9,9 @@ namespace base {
 class IComponent;
 
 //------------------------------------------------------------------------------
-// Class: SyncThread
+// Class: ISyncThread
 //
-// Description: Synchronized (i.e., start/complete loop) thread;
+// Description: Interface that defines a synchronized (i.e., start/complete loop) thread;
 //              multiple calls to the user defined work function with
 //              start/complete signals.
 //
@@ -23,20 +23,20 @@ class IComponent;
 //    wait for several sync task threads.  Loop will end with the shutdown of
 //    the parent.
 //------------------------------------------------------------------------------
-class SyncThread : public IThread
+class ISyncThread : public IThread
 {
 public:
-   SyncThread(IComponent* const parent);
-   SyncThread(const SyncThread&) = delete;
-   SyncThread& operator=(const SyncThread&) = delete;
-   ~SyncThread();
+   ISyncThread(IComponent* const parent);
+   ISyncThread(const ISyncThread&) = delete;
+   ISyncThread& operator=(const ISyncThread&) = delete;
+   ~ISyncThread();
 
    void signalStart();
    void waitForCompleted();
-   static void waitForAllCompleted(SyncThread** threads, const int num);
+   static void waitForAllCompleted(ISyncThread** threads, const int num);
 
    //Returns the index of the first thread that is completed, or -1 if an error
-   static int waitForAnyCompleted(SyncThread** threads, const int num);
+   static int waitForAnyCompleted(ISyncThread** threads, const int num);
 
    bool terminate() override;
 

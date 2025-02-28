@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/SyncThread.hpp"
+#include "mixr/base/threads/ISyncThread.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -19,7 +19,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 // create the signals
 //-----------------------------------------------------------------------------
-bool SyncThread::createSignals()
+bool ISyncThread::createSignals()
 {
    // create the start semaphore already set, signalStart() will release it.
    startSig = CreateSemaphore(NULL, 0, 1, NULL);
@@ -33,7 +33,7 @@ bool SyncThread::createSignals()
 //-----------------------------------------------------------------------------
 // Close the signals
 //-----------------------------------------------------------------------------
-void SyncThread::closeSignals()
+void ISyncThread::closeSignals()
 {
    CloseHandle(startSig);
    startSig = 0;
@@ -45,7 +45,7 @@ void SyncThread::closeSignals()
 //-----------------------------------------------------------------------------
 // Signal 'start'
 //-----------------------------------------------------------------------------
-void SyncThread::signalStart()
+void ISyncThread::signalStart()
 {
    ReleaseSemaphore(static_cast<HANDLE>(startSig),1,NULL);
 }
@@ -53,7 +53,7 @@ void SyncThread::signalStart()
 //-----------------------------------------------------------------------------
 // Wait for the 'start' signal
 //-----------------------------------------------------------------------------
-void SyncThread::waitForStart()
+void ISyncThread::waitForStart()
 {
    WaitForSingleObject(static_cast<HANDLE>(startSig), INFINITE);
 }
@@ -61,7 +61,7 @@ void SyncThread::waitForStart()
 //-----------------------------------------------------------------------------
 // Signal 'completed'
 //-----------------------------------------------------------------------------
-void SyncThread::signalCompleted()
+void ISyncThread::signalCompleted()
 {
    ReleaseSemaphore(static_cast<HANDLE>(completedSig), 1, NULL);
 }
@@ -69,7 +69,7 @@ void SyncThread::signalCompleted()
 //-----------------------------------------------------------------------------
 // Wait for the 'completed' signal
 //-----------------------------------------------------------------------------
-void SyncThread::waitForCompleted()
+void ISyncThread::waitForCompleted()
 {
    WaitForSingleObject(static_cast<HANDLE>(completedSig), INFINITE);
 }
@@ -77,7 +77,7 @@ void SyncThread::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void SyncThread::waitForAllCompleted(SyncThread** threads, const int num)
+void ISyncThread::waitForAllCompleted(SyncThread** threads, const int num)
 {
    if (threads != 0 && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
@@ -97,7 +97,7 @@ void SyncThread::waitForAllCompleted(SyncThread** threads, const int num)
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int SyncThread::waitForAnyCompleted(SyncThread** threads, const int num)
+int ISyncThread::waitForAnyCompleted(SyncThread** threads, const int num)
 {
    if (threads != nullptr && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];

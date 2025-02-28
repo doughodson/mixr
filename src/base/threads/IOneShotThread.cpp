@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/OneShotThread.hpp"
+#include "mixr/base/threads/IOneShotThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/IComponent.hpp"
@@ -8,14 +8,14 @@
 namespace mixr {
 namespace base {
 
-OneShotThread::OneShotThread(IComponent* const p) : IThread(p)
+IOneShotThread::IOneShotThread(IComponent* const p) : IThread(p)
 {
 }
 
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long OneShotThread::mainThreadFunc()
+unsigned long IOneShotThread::mainThreadFunc()
 {
    unsigned long rtn {};
 

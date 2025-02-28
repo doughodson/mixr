@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/SyncThread.hpp"
+#include "mixr/base/threads/ISyncThread.hpp"
 
 #include "mixr/base/Object.hpp"
 #include "mixr/base/IComponent.hpp"
@@ -8,11 +8,11 @@
 namespace mixr {
 namespace base {
 
-SyncThread::SyncThread(IComponent* const p) : IThread(p)
+ISyncThread::ISyncThread(IComponent* const p) : IThread(p)
 {
 }
 
-SyncThread::~SyncThread()
+ISyncThread::~ISyncThread()
 {
    closeSignals();
 }
@@ -20,7 +20,7 @@ SyncThread::~SyncThread()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool SyncThread::configThread()
+bool ISyncThread::configThread()
 {
    bool ok{IThread::configThread()};
 
@@ -37,7 +37,7 @@ bool SyncThread::configThread()
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long SyncThread::mainThreadFunc()
+unsigned long ISyncThread::mainThreadFunc()
 {
    unsigned long rtn{};
 
@@ -73,7 +73,7 @@ unsigned long SyncThread::mainThreadFunc()
 //-----------------------------------------------------------------------------
 // Terminate the thread
 //-----------------------------------------------------------------------------
-bool SyncThread::terminate()
+bool ISyncThread::terminate()
 {
    signalCompleted();
    return IThread::terminate();

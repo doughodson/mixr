@@ -9,7 +9,7 @@
 namespace mixr {
 namespace simulation {
 
-SimulationBgSyncThread::SimulationBgSyncThread(base::IComponent* const parent): base::SyncThread(parent)
+SimulationBgSyncThread::SimulationBgSyncThread(base::IComponent* const parent): base::ISyncThread(parent)
 {
 }
 

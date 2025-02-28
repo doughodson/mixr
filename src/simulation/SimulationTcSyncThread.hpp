@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_SimulationTcSyncThread_HPP__
 #define __mixr_simulation_SimulationTcSyncThread_HPP__
 
-#include "mixr/base/threads/SyncThread.hpp"
+#include "mixr/base/threads/ISyncThread.hpp"
 
 namespace mixr {
 namespace base { class IComponent; class PairStream; }
@@ -12,7 +12,7 @@ namespace simulation {
 // Class: SimulationTcSyncThread
 // Description: Simulation time critical synchronized thread
 //------------------------------------------------------------------------------
-class SimulationTcSyncThread final : public base::SyncThread
+class SimulationTcSyncThread final : public base::ISyncThread
 {
 public:
    SimulationTcSyncThread(base::IComponent* const parent);

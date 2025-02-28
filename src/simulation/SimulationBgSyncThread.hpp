@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_SimulationBgSyncThread_HPP__
 #define __mixr_simulation_SimulationBgSyncThread_HPP__
 
-#include "mixr/base/threads/SyncThread.hpp"
+#include "mixr/base/threads/ISyncThread.hpp"
 
 namespace mixr {
 namespace base { class IComponent; class PairStream; }
@@ -12,7 +12,7 @@ namespace simulation {
 // Class: SimulationBgSyncThread
 // Description: Simulation background synchronized thread
 //------------------------------------------------------------------------------
-class SimulationBgSyncThread final : public base::SyncThread
+class SimulationBgSyncThread final : public base::ISyncThread
 {
 public:
    SimulationBgSyncThread(base::IComponent* const parent);

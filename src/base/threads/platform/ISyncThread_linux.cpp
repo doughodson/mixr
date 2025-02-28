@@ -1,5 +1,5 @@
 
-#include "mixr/base/threads/SyncThread.hpp"
+#include "mixr/base/threads/ISyncThread.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -16,7 +16,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 // create the signals
 //-----------------------------------------------------------------------------
-bool SyncThread::createSignals()
+bool ISyncThread::createSignals()
 {
    // create the start mutex already set, signalStart() will release it.
    {
@@ -40,7 +40,7 @@ bool SyncThread::createSignals()
 //-----------------------------------------------------------------------------
 // Close the signals
 //-----------------------------------------------------------------------------
-void SyncThread::closeSignals()
+void ISyncThread::closeSignals()
 {
    {
       pthread_mutex_t* mutex{static_cast<pthread_mutex_t*>(startSig)};
@@ -58,7 +58,7 @@ void SyncThread::closeSignals()
 //-----------------------------------------------------------------------------
 // Signal 'start'
 //-----------------------------------------------------------------------------
-void SyncThread::signalStart()
+void ISyncThread::signalStart()
 {
    pthread_mutex_t* mutex{static_cast<pthread_mutex_t*>(startSig)};
    pthread_mutex_unlock(mutex);
@@ -67,7 +67,7 @@ void SyncThread::signalStart()
 //-----------------------------------------------------------------------------
 // Wait for the 'start' signal
 //-----------------------------------------------------------------------------
-void SyncThread::waitForStart()
+void ISyncThread::waitForStart()
 {
    pthread_mutex_t* mutex{static_cast<pthread_mutex_t*>(startSig)};
    pthread_mutex_lock(mutex);
@@ -76,7 +76,7 @@ void SyncThread::waitForStart()
 //-----------------------------------------------------------------------------
 // Signal 'completed'
 //-----------------------------------------------------------------------------
-void SyncThread::signalCompleted()
+void ISyncThread::signalCompleted()
 {
    pthread_mutex_t* mutex{static_cast<pthread_mutex_t*>(completedSig)};
    pthread_mutex_unlock(mutex);
@@ -85,7 +85,7 @@ void SyncThread::signalCompleted()
 //-----------------------------------------------------------------------------
 // Wait for the 'completed' signal
 //-----------------------------------------------------------------------------
-void SyncThread::waitForCompleted()
+void ISyncThread::waitForCompleted()
 {
    pthread_mutex_t* mutex{static_cast<pthread_mutex_t*>(completedSig)};
    pthread_mutex_lock(mutex);
@@ -94,7 +94,7 @@ void SyncThread::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void SyncThread::waitForAllCompleted(SyncThread** threads, const int num)
+void ISyncThread::waitForAllCompleted(ISyncThread** threads, const int num)
 {
    if (threads != nullptr && num > 0) {
       for (int i = 0; i < num; i++) {
@@ -108,7 +108,7 @@ void SyncThread::waitForAllCompleted(SyncThread** threads, const int num)
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int SyncThread::waitForAnyCompleted(SyncThread** threads, const int num)
+int ISyncThread::waitForAnyCompleted(ISyncThread** threads, const int num)
 {
    if (threads != nullptr && num > 0) {
       //Make sure we have at least one valid thread (since we'll enter an infinite loop and deadlock otherwise)

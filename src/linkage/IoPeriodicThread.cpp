@@ -8,7 +8,7 @@
 namespace mixr {
 namespace linkage {
 
-IoPeriodicThread::IoPeriodicThread(base::IComponent* const parent, const double rate): PeriodicThread(parent, rate)
+IoPeriodicThread::IoPeriodicThread(base::IComponent* const parent, const double rate): IPeriodicThread(parent, rate)
 {
 }
 

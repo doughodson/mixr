@@ -72,12 +72,12 @@ OBJS =  \
 	relations/Table5.o \
 	relations/TableStorage.o \
 	threads/platform/IThread_linux.o \
-	threads/platform/PeriodicThread_linux.o \
-	threads/platform/SyncThread_linux.o \
+	threads/platform/IPeriodicThread_linux.o \
+	threads/platform/ISyncThread_linux.o \
 	threads/IThread.o \
-	threads/OneShotThread.o \
-	threads/PeriodicThread.o \
-	threads/SyncThread.o \
+	threads/IOneShotThread.o \
+	threads/IPeriodicThread.o \
+	threads/ISyncThread.o \
 	transformations/ITransform.o \
 	transformations/Translation.o \
 	transformations/Rotation.o \

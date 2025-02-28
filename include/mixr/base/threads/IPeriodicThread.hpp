@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_PeriodicThread_HPP__
-#define __mixr_base_PeriodicThread_HPP__
+#ifndef __mixr_base_IPeriodicThread_HPP__
+#define __mixr_base_IPeriodicThread_HPP__
 
 #include "mixr/base/threads/IThread.hpp"
 #include "mixr/base/Statistic.hpp"
@@ -10,21 +10,21 @@ namespace base {
 class IComponent;
 
 //------------------------------------------------------------------------------
-// Class: PeriodicThread
+// Class: IPeriodicThread
 //
-// Description: Periodic thread that calls the user supplied function
+// Description: Interface that defines a periodic thread that calls the user supplied function
 //              at a fixed rate. Derived classes define the work
 //              function (i.e., userFunc()), which will be called at a fixed
 //              rate of 'rate' Hz until the parent component is shutdown.
 //              A value of 1.0/rate is passed to userFunc() as the delta time
 //              parameter.
 //------------------------------------------------------------------------------
-class PeriodicThread : public IThread
+class IPeriodicThread : public IThread
 {
 public:
-   PeriodicThread(IComponent* const parent, const double rate);
-   PeriodicThread(const PeriodicThread&) = delete;
-   PeriodicThread& operator=(const PeriodicThread&) = delete;
+   IPeriodicThread(IComponent* const parent, const double rate);
+   IPeriodicThread(const IPeriodicThread&) = delete;
+   IPeriodicThread& operator=(const IPeriodicThread&) = delete;
 
    double getRate() const;                // Update rate (must be greater than zero)
    int getTotalFrameCount() const;        // Total frame count
