@@ -3,7 +3,7 @@
 #define __mixr_interop_rprfom_H__
 
 #include <RTI.hh>
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace rprfom {
@@ -730,9 +730,9 @@ struct VectoringNozzleSystemDataStruct
 // section 6.1 of the GRIM)")
 //
 // ---
-class BaseEntity : public base::Object
+class BaseEntity : public base::IObject
 {
-   DECLARE_SUBCLASS(BaseEntity, base::Object)
+   DECLARE_SUBCLASS(BaseEntity, base::IObject)
 public:
    BaseEntity() = default;
 

@@ -41,7 +41,7 @@ public:
     void draw() override;
 
     void updateData(const double dt = 0) override;
-    bool event(const int key, base::Object* const obj = nullptr) override;
+    bool event(const int key, base::IObject* const obj = nullptr) override;
 
 private:
     // event handlers

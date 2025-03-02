@@ -100,7 +100,7 @@ public:
    void mouseEvent(const int button, const int state, const int x, const int y) override;
 
    void reset() override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)

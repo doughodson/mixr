@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 // Instrument component
 #include "mixr/instruments/Instrument.hpp"
@@ -43,7 +43,7 @@
 
 // Adi
 #include "mixr/instruments/adi/Adi.hpp"
- 
+
 // Ghost Horizon
 #include "mixr/instruments/adi/GhostHorizon.hpp"
 
@@ -55,9 +55,9 @@
 namespace mixr {
 namespace instruments {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     // Instrument
     if (name == Instrument::getFactoryName()) {
@@ -95,7 +95,7 @@ base::Object* factory(const std::string& name)
     // GMeterDial
     else if ( name == GMeterDial::getFactoryName() ) {
         obj = new GMeterDial;
-    }    
+    }
     // Here is the analog gauge and its pieces
     // AnalogGauge
     else if ( name == AnalogGauge::getFactoryName() ) {

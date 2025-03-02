@@ -46,7 +46,7 @@ public:
     base::UpTimer* getTimer() { return timer; }
 
     void updateData(const double dt = 0.0) override;
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    bool event(const int event, base::IObject* const obj = nullptr) override;
 
 protected:
     // event function

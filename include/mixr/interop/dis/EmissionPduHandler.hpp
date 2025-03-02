@@ -34,9 +34,9 @@ namespace dis {
 //    )
 //
 //------------------------------------------------------------------------------
-class EmissionPduHandler : public base::Object
+class EmissionPduHandler : public base::IObject
 {
-    DECLARE_SUBCLASS(EmissionPduHandler, base::Object)
+    DECLARE_SUBCLASS(EmissionPduHandler, base::IObject)
 
 public:
    enum { MAX_EM_BEAMS   = 6 };

@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_common_INtm_HPP__
 #define __mixr_interop_common_INtm_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -58,9 +58,9 @@ class INib;
 //          Best match is returned: #1 (best), #2, #5 and #6 (worst)
 //
 //------------------------------------------------------------------------------
-class INtm : public base::Object
+class INtm : public base::IObject
 {
-    DECLARE_SUBCLASS(INtm, base::Object)
+    DECLARE_SUBCLASS(INtm, base::IObject)
 
 public:
    INtm();

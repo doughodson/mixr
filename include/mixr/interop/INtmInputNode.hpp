@@ -2,7 +2,7 @@
 #ifndef __mixr_interop_common_INtmInputNode_HPP__
 #define __mixr_interop_common_INtmInputNode_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace interop {
@@ -12,9 +12,9 @@ class INtm;
 //------------------------------------------------------------------------------
 // Class: INtmInputNode
 //------------------------------------------------------------------------------
-class INtmInputNode : public base::Object
+class INtmInputNode : public base::IObject
 {
-   DECLARE_SUBCLASS(INtmInputNode, base::Object)
+   DECLARE_SUBCLASS(INtmInputNode, base::IObject)
 public:
    INtmInputNode();
    virtual const INtm* findNetworkTypeMapper(const INib* const) const =0;

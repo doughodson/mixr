@@ -7,9 +7,9 @@
 namespace mixr {
 namespace rprfom {
 
-base::Object* formFunc(const std::string& name)
+base::IObject* formFunc(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     if ( name == NetIO::getFactoryName() ) {
         obj = new NetIO();

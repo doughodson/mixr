@@ -1,7 +1,7 @@
 
 #include "mixr/interop/dis/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/interop/dis/NetIO.hpp"
 #include "mixr/interop/dis/Ntm.hpp"
@@ -13,9 +13,9 @@ namespace mixr {
 
 namespace dis {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     if ( name == NetIO::getFactoryName() ) {
         obj = new NetIO();

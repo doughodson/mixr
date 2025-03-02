@@ -1,7 +1,7 @@
 
 #include "mixr/ui/glut/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/ui/glut/GlutDisplay.hpp"
 #include "mixr/ui/glut/Shapes3D.hpp"
@@ -11,9 +11,9 @@
 namespace mixr {
 namespace glut {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     // General graphics support
     if ( name == GlutDisplay::getFactoryName() ) {
