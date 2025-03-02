@@ -2,7 +2,7 @@
 #ifndef __mixr_ighost_cigi3_CigiModel_HPP__
 #define __mixr_ighost_cigi3_CigiModel_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/ighost/cigi/CigiHost.hpp"
 
@@ -31,9 +31,9 @@ class Player2CigiMap;
 //
 // Factory name: CigiModel
 //------------------------------------------------------------------------------
-class CigiModel : public base::Object
+class CigiModel : public base::IObject
 {
-   DECLARE_SUBCLASS(CigiModel, base::Object)
+   DECLARE_SUBCLASS(CigiModel, base::IObject)
 
 public:
    enum class State {

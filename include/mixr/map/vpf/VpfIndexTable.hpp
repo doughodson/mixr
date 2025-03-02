@@ -2,7 +2,7 @@
 #ifndef __mixr_map_vpf_VpfIndexTable_HPP__
 #define __mixr_map_vpf_VpfIndexTable_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class String; }
@@ -14,9 +14,9 @@ class VpfDataType;
 // Description: Associated Index table with all tables which have
 // variable length text or coordinate strings
 // ------------------------------------------------------------
-class VpfIndexTable : public base::Object
+class VpfIndexTable : public base::IObject
 {
-   DECLARE_SUBCLASS(VpfIndexTable, base::Object)
+   DECLARE_SUBCLASS(VpfIndexTable, base::IObject)
 
 public:
     VpfIndexTable();

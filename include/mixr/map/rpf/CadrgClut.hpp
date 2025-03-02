@@ -2,7 +2,7 @@
 #ifndef __mixr_map_rpf_CadrgClut_HPP__
 #define __mixr_map_rpf_CadrgClut_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <array>
 
@@ -22,9 +22,9 @@ class CadrgFrameEntry;
 //     const CadrgClut::Rgb& getColor(unsigned int index) const;
 //
 //------------------------------------------------------------------------------
-class CadrgClut: public base::Object
+class CadrgClut: public base::IObject
 {
-    DECLARE_SUBCLASS(CadrgClut, base::Object)
+    DECLARE_SUBCLASS(CadrgClut, base::IObject)
 
 public:
     CadrgClut();

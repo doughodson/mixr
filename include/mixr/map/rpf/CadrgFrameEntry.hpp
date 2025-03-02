@@ -3,7 +3,7 @@
 #define __mixr_map_rpf_CadrgFrameEntry_HPP__
 
 #include "mixr/map/rpf/CadrgClut.hpp"
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace rpf {
@@ -29,9 +29,9 @@ class CadrgFrame;
 //    void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
 //
 //------------------------------------------------------------------------------
-class CadrgFrameEntry : public base::Object
+class CadrgFrameEntry : public base::IObject
 {
-    DECLARE_SUBCLASS(CadrgFrameEntry, base::Object)
+    DECLARE_SUBCLASS(CadrgFrameEntry, base::IObject)
 
 public:
     CadrgFrameEntry();

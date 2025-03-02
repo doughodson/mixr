@@ -3,7 +3,7 @@
 #define __mixr_map_rpf_CadrgTocEntry_HPP__
 
 #include "mixr/map/rpf/CadrgFrameEntry.hpp"
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace rpf {
@@ -34,9 +34,9 @@ namespace rpf {
 // isInZone() - Takes in a lat lon and returns true if that point falls in our entry
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
 //------------------------------------------------------------------------------
-class CadrgTocEntry : public base::Object
+class CadrgTocEntry : public base::IObject
 {
-    DECLARE_SUBCLASS(CadrgTocEntry, base::Object)
+    DECLARE_SUBCLASS(CadrgTocEntry, base::IObject)
 
 public:
     CadrgTocEntry();

@@ -2,7 +2,7 @@
 #ifndef __mixr_map_vpf_VMap0FeatureClass_HPP__
 #define __mixr_map_vpf_VMap0FeatureClass_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 #include <array>
@@ -13,12 +13,12 @@ namespace vpf {
 // ------------------------------------------------------------
 // Class: VMap0FeatureClass
 //
-// Description: Defines relationships between feature tables and 
+// Description: Defines relationships between feature tables and
 // primitives.
 // ------------------------------------------------------------
-class VMap0FeatureClass : public base::Object
+class VMap0FeatureClass : public base::IObject
 {
-    DECLARE_SUBCLASS(VMap0FeatureClass, base::Object)
+    DECLARE_SUBCLASS(VMap0FeatureClass, base::IObject)
 
 public:
     VMap0FeatureClass();

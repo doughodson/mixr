@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
@@ -13,9 +13,9 @@
 namespace mixr {
 namespace cigi {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     // Common Image Generation Interface (CIGI)
     if ( name == CigiHost::getFactoryName() ) {

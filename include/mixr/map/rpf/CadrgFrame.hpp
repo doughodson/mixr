@@ -2,7 +2,7 @@
 #ifndef __mixr_map_rpf_CadrgFrame_HPP__
 #define __mixr_map_rpf_CadrgFrame_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/map/rpf/map_utils.hpp"
 
 namespace mixr {
@@ -23,9 +23,9 @@ class CadrgFrameEntry;
 //        virtual int decompressSubframe(const int x, const int y, Subframe& subFrame);
 //
 //------------------------------------------------------------------------------
-class CadrgFrame : public base::Object
+class CadrgFrame : public base::IObject
 {
-    DECLARE_SUBCLASS(CadrgFrame, base::Object)
+    DECLARE_SUBCLASS(CadrgFrame, base::IObject)
 
 public:
     CadrgFrame();

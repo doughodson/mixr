@@ -1,5 +1,5 @@
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/map/rpf/factory.hpp"
 #include "mixr/map/rpf/MapDrawer.hpp"
@@ -10,9 +10,9 @@
 namespace mixr {
 namespace rpf  {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     // Map Drawer
     if ( name == MapDrawer::getFactoryName() )     { obj = new MapDrawer(); }

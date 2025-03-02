@@ -2,7 +2,7 @@
 #ifndef __mixr_ighost_cigi3_Player2CigiMap_HPP__
 #define __mixr_ighost_cigi3_Player2CigiMap_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -50,9 +50,9 @@ namespace cigi {
 //          (e.g., Test player's general "F-16" type would not match our "F-16C")
 //
 //------------------------------------------------------------------------------
-class Player2CigiMap : public base::Object
+class Player2CigiMap : public base::IObject
 {
-    DECLARE_SUBCLASS(Player2CigiMap, base::Object)
+    DECLARE_SUBCLASS(Player2CigiMap, base::IObject)
 
 public:
     Player2CigiMap();

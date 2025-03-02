@@ -2,7 +2,7 @@
 #ifndef __mixr_map_vpf_VpfSpatialIndexTable_HPP__
 #define __mixr_map_vpf_VpfSpatialIndexTable_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class String; }
@@ -10,13 +10,13 @@ namespace vpf {
 
 // --------------------------------------------------------------
 // Class: VpfSpatialIndexTable
-// Description: Spatial index file which contains the minimum bounding 
+// Description: Spatial index file which contains the minimum bounding
 // rectangle (mbr) information about each primitive.  This allows
 // for quick referencing of primitives by area
 // ---------------------------------------------------------------
-class VpfSpatialIndexTable : public base::Object
+class VpfSpatialIndexTable : public base::IObject
 {
-   DECLARE_SUBCLASS(VpfSpatialIndexTable, base::Object)
+   DECLARE_SUBCLASS(VpfSpatialIndexTable, base::IObject)
 
 public:
     VpfSpatialIndexTable();
