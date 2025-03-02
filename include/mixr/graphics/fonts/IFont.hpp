@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_IFont_HPP__
 #define __mixr_graphics_IFont_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/base/util/platform_api.hpp"
 #include <GL/gl.h>
@@ -32,9 +32,9 @@ namespace graphics {
 //      characterSpacing <INumber>  ! spacing for each character (default: 0)
 //      lineSpacing      <INumber>  ! spacing for each line (default: 0)
 //------------------------------------------------------------------------------
-class IFont : public base::Object
+class IFont : public base::IObject
 {
-    DECLARE_SUBCLASS(IFont, base::Object)
+    DECLARE_SUBCLASS(IFont, base::IObject)
 
 public:
     static const std::size_t MAX_MESSAGE_LENGTH{256};  // Max length of character buffers
@@ -97,7 +97,7 @@ public:
 public:
     // exception: thrown by method outputText() when the font map is not valid and
     // couldn't be loaded.
-    class ExpInvalidFont : public base::Object::Exception {
+    class ExpInvalidFont : public base::IObject::Exception {
         public:
             ExpInvalidFont() : Exception() {}
             const char* getDescription() const override     { return "font is invalid"; }

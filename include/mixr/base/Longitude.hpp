@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Longitude_HPP__
 #define __mixr_base_Longitude_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 
@@ -27,9 +27,9 @@ class Identifier;
 //    minutes   <INumber>     ! Set the minutes component (default: 0)
 //    seconds   <INumber>     ! Set the seconds component (default: 0.0)
 //------------------------------------------------------------------------------
-class Longitude : public Object
+class Longitude : public IObject
 {
-   DECLARE_SUBCLASS(Longitude, Object)
+   DECLARE_SUBCLASS(Longitude, IObject)
 
 public:
    enum class Dir { NONE, EAST, WEST };

@@ -2001,7 +2001,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"

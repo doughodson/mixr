@@ -178,7 +178,7 @@ bool DataRecorder::shutdownNotification()
 //    value[0] => marker ID
 //    value[1] => marker source ID
 //------------------------------------------------------------------------------
-bool DataRecorder::recordMarker(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordMarker(const base::IObject* objs[4], const double values[4])
 {
    const auto msg = new pb::DataRecord();
 
@@ -203,7 +203,7 @@ bool DataRecorder::recordMarker(const base::Object* objs[4], const double values
 //    value[1] => input source ID
 //    value[2] => value
 //------------------------------------------------------------------------------
-bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordAI(const base::IObject* objs[4], const double values[4])
 {
    const auto msg = new pb::DataRecord();
 
@@ -230,7 +230,7 @@ bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
 //    value[1] => input source ID
 //    value[2] => value
 //------------------------------------------------------------------------------
-bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordDI(const base::IObject* objs[4], const double values[4])
 {
    const auto msg = new pb::DataRecord();
 
@@ -255,7 +255,7 @@ bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
 // New player event handler
 //    objs[0] => the new player
 //------------------------------------------------------------------------------
-bool DataRecorder::recordNewPlayer(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordNewPlayer(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -282,7 +282,7 @@ bool DataRecorder::recordNewPlayer(const base::Object* objs[4], const double val
 // Player removed event handler
 //    objs[0] => the player being removed
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerRemoved(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerRemoved(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -309,7 +309,7 @@ bool DataRecorder::recordPlayerRemoved(const base::Object* objs[4], const double
 // Record player's data handler
 //    objs[0] => the player being recorded
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerData(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -343,7 +343,7 @@ bool DataRecorder::recordPlayerData(const base::Object* objs[4], const double va
 // Player damaged event handler
 //    objs[0] => the player damaged
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerDamaged(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerDamaged(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -370,7 +370,7 @@ bool DataRecorder::recordPlayerDamaged(const base::Object* objs[4], const double
 //    objs[0] => the player in the collision
 //    objs[1] => the other player in the collision
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerCollision(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -402,7 +402,7 @@ bool DataRecorder::recordPlayerCollision(const base::Object* objs[4], const doub
 // Player crashed event handler
 //    objs[0] => the player crashed
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerCrash(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerCrash(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -429,7 +429,7 @@ bool DataRecorder::recordPlayerCrash(const base::Object* objs[4], const double v
 //    objs[0] => the player killed
 //    objs[1] => the shooter player
 //------------------------------------------------------------------------------
-bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordPlayerKilled(const base::IObject* objs[4], const double values[4])
 {
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
@@ -462,7 +462,7 @@ bool DataRecorder::recordPlayerKilled(const base::Object* objs[4], const double 
 //    objs[1] => the shooter
 //    objs[2] => the target
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponReleased(const base::IObject* objs[4], const double values[4])
 {
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -501,7 +501,7 @@ bool DataRecorder::recordWeaponReleased(const base::Object* objs[4], const doubl
 //    objs[1] => the shooter
 //    objs[2] => the target
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponHung(const base::IObject* objs[4], const double values[4])
 {
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -541,7 +541,7 @@ bool DataRecorder::recordWeaponHung(const base::Object* objs[4], const double va
 //    values[0] => detonation type
 //    values[1] => miss distance
 //------------------------------------------------------------------------------
-bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordWeaponDetonation(const base::IObject* objs[4], const double values[4])
 {
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
@@ -622,7 +622,7 @@ bool DataRecorder::recordWeaponDetonation(const base::Object* objs[4], const dou
 //    objs[0] => the shooter
 //    values[0] => rounds
 //------------------------------------------------------------------------------
-bool DataRecorder::recordGunFired(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordGunFired(const base::IObject* objs[4], const double values[4])
 {
    const auto shooter = dynamic_cast<const models::Player*>( objs[0] );
    if (shooter == nullptr) return false;
@@ -650,7 +650,7 @@ bool DataRecorder::recordGunFired(const base::Object* objs[4], const double valu
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double values[4])
 {
    // objects
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
@@ -706,7 +706,7 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordTrackRemoved(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordTrackRemoved(const base::IObject* objs[4], const double values[4])
 {
    // objects
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
@@ -739,7 +739,7 @@ bool DataRecorder::recordTrackRemoved(const base::Object* objs[4], const double 
 //    objs[0] => the player (ownship)
 //    objs[1] => the track
 //------------------------------------------------------------------------------
-bool DataRecorder::recordTrackData(const base::Object* objs[4], const double values[4])
+bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double values[4])
 {
    // objects
    const auto player = dynamic_cast<const models::Player*>( objs[0] );

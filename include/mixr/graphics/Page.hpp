@@ -57,9 +57,9 @@ public:
 
    // call new sub-page
    // changes subpages by page, returns true if page was found
-   bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   bool newSubpage(Page* const newPage, Page* theCaller, base::IObject* theArg = nullptr);
    // changes subpages by name, returns true if the page was found
-   bool newSubpage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
+   bool newSubpage(const std::string& name, Page* theCaller, base::IObject* theArg = nullptr);
 
    // event handlers
    virtual bool onEntry();
@@ -71,7 +71,7 @@ public:
 
    void draw() override;
    base::Pair* findBySelectName(const GLuint name) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
 
    void updateTC(const double dt = 0.0) override;
    void updateData(const double dt = 0.0) override;
@@ -79,7 +79,7 @@ public:
 
 protected:
    // returns our paging arguments
-   base::Object* getArgument()               { return pageArg; }
+   base::IObject* getArgument()              { return pageArg; }
    const Page* getCaller()                   { return caller; }
 
    // returns our subpages
@@ -87,14 +87,14 @@ protected:
 
    // manage our (sub)page stack
    bool clearSubpageStack();
-   bool pushSubpage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
-   bool popSubpage(Page* theCaller, base::Object* theArg = nullptr);
+   bool pushSubpage(const std::string& name, Page* theCaller, base::IObject* theArg = nullptr);
+   bool popSubpage(Page* theCaller, base::IObject* theArg = nullptr);
 
    // call/push/pop major pages (our container's pages, which we are a member of)
-   bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
-   bool newPage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
-   bool pushPage(const std::string& name, Page* theCaller, base::Object* theArg = nullptr);
-   bool popPage(Page* theCaller, base::Object* theArg = nullptr);
+   bool newPage(Page* const newPage, Page* theCaller, base::IObject* theArg = nullptr);
+   bool newPage(const std::string& name, Page* theCaller, base::IObject* theArg = nullptr);
+   bool pushPage(const std::string& name, Page* theCaller, base::IObject* theArg = nullptr);
+   bool popPage(Page* theCaller, base::IObject* theArg = nullptr);
 
 private:
    bool processSubpages();
@@ -110,7 +110,7 @@ private:
    bool focusSlavedToSubpage {true};    // input event focus should follow subpage changes
 
    // passed by calling page
-   base::safe_ptr<base::Object> pageArg;     // paging argument
+   base::safe_ptr<base::IObject> pageArg;     // paging argument
    const Page* caller{};                     // calling page
 
    // subpage stack

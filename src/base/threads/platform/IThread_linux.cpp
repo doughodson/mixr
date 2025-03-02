@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/IThread.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -142,7 +142,7 @@ void IThread::closeThread()
 bool IThread::terminate()
 {
    if (theThread != nullptr && !killed) {
-      if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+      if ( getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
          std::cout << "AbstractThread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Designator_HPP__
 #define __mixr_models_common_Designator_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace models {
@@ -12,9 +12,9 @@ namespace models {
 //
 // Description: General designator (e.g., laser)
 //------------------------------------------------------------------------------
-class Designator : public base::Object
+class Designator : public base::IObject
 {
-    DECLARE_SUBCLASS(Designator, base::Object)
+    DECLARE_SUBCLASS(Designator, base::IObject)
 
 public:
 

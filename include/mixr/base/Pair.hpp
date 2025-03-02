@@ -2,8 +2,7 @@
 #ifndef __mixr_base_Pair_HPP__
 #define __mixr_base_Pair_HPP__
 
-#include "mixr/base/Object.hpp"
-//#include "mixr/base/Identifier.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 
@@ -28,26 +27,26 @@ namespace base {
 // Notes: EDL syntax (an Identifier followed by a colon then Object)
 //      ident: <object>
 //------------------------------------------------------------------------------
-class Pair : public Object
+class Pair : public IObject
 {
-   DECLARE_SUBCLASS(Pair, Object)
+   DECLARE_SUBCLASS(Pair, IObject)
 
 public:
    // Constructor: the slot name and object pointer are both required!
    // -- the object is ref() by this constructor.
-   Pair(const std::string& slot, Object* object);
+   Pair(const std::string& slot, IObject* object);
 
    std::string& slot()              { return slotname; } // The slot name
    const std::string& slot() const  { return slotname; } // The slot name (const version)
 
-   Object* object()                 { return obj; }      // The object
-   const Object* object() const     { return obj; }      // The object (const version)
+   IObject* object()                { return obj; }      // The object
+   const IObject* object() const    { return obj; }      // The object (const version)
 
    bool isValid() const override;
 
 private:
    std::string slotname;     // Slot name
-   Object* obj{};            // Object
+   IObject* obj{};           // Object
 };
 
 }

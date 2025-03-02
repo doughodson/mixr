@@ -56,7 +56,7 @@ bool CommRadio::setDatalink(Datalink* const p)
 // transmitDataMessage() -- send a data message emission;
 // returns true if the data emission was sent.
 //------------------------------------------------------------------------------
-bool CommRadio::transmitDataMessage(base::Object* const msg)
+bool CommRadio::transmitDataMessage(base::IObject* const msg)
 {
    bool sent{};
    // Transmitting, scanning and have an antenna?
@@ -94,7 +94,7 @@ void CommRadio::receivedEmissionReport(Emission* const em)
    if (em != nullptr && datalink != nullptr) {
       // If we have a datalink and this emission contains a message, then it
       // must be a datalink message.
-      base::Object* msg{em->getDataMessage()};
+      base::IObject* msg{em->getDataMessage()};
       if (msg != nullptr) datalink->event(DATALINK_MESSAGE, msg);
    }
 }

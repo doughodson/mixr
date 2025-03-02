@@ -2,7 +2,7 @@
 #ifndef __mixr_base_ubf_IAction_HPP__
 #define __mixr_base_ubf_IAction_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 
@@ -19,9 +19,9 @@ namespace ubf {
 //------------------------------------------------------------------------------
 // Factory name: IAction
 //------------------------------------------------------------------------------
-class IAction : public base::Object
+class IAction : public base::IObject
 {
-   DECLARE_SUBCLASS(IAction, base::Object)
+   DECLARE_SUBCLASS(IAction, base::IObject)
 
 public:
    IAction();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Table_HPP__
 #define __mixr_base_Table_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -42,9 +42,9 @@ class List;
 //       result is clamped at the last known dependent value.  If the extrapolate
 //       flag is true, we'll extrapolate beyond the given data table.
 //------------------------------------------------------------------------------
-class Table : public Object
+class Table : public IObject
 {
-    DECLARE_SUBCLASS(Table, Object)
+    DECLARE_SUBCLASS(Table, IObject)
 
 public:
    Table();
@@ -75,7 +75,7 @@ public:
     // Thrown by Table derived classes' lfi(), minX(), maxX(), minY(),
     // maxY(), minZ(), maxZ(), minW(), and maxW() methods when the table's
     // data set is invalid.
-    class ExpInvalidTable : public Object::Exception {
+    class ExpInvalidTable : public IObject::Exception {
         public:
             ExpInvalidTable() : Exception() {}
             const char* getDescription() const override          { return "table is invalid"; }
@@ -83,14 +83,14 @@ public:
 
     // Thrown by Table's method loadVector() when it's passed an invalid
     // vector.
-    class ExpInvalidVector : public Object::Exception {
+    class ExpInvalidVector : public IObject::Exception {
         public:
             ExpInvalidVector() : Exception() {}
             const char* getDescription() const override          { return "table vector is invalid"; }
     };
 
     // thrown by Table's storage class when the data in FStorage in incorrect
-    class ExpInvalidFStorage : public Object::Exception {
+    class ExpInvalidFStorage : public IObject::Exception {
         public:
             ExpInvalidFStorage() : Exception() {}
             const char* getDescription() const override          { return "Incorrect type of FStorage"; }

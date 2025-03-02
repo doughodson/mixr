@@ -27,17 +27,17 @@ public:
     int operator!=(const Stack& list) const;
 
     // pushes the 'object' to the top of the stack.
-    void push(Object* object);
+    void push(IObject* object);
     // pops the object off the top of the stack.  Empty stack will return nullptr.
-    Object* pop();
+    IObject* pop();
 };
 
-inline void Stack::push(Object* object)
+inline void Stack::push(IObject* object)
 {
     List::addHead(object);
 }
 
-inline Object* Stack::pop()
+inline IObject* Stack::pop()
 {
     return List::removeHead();
 }

@@ -8,7 +8,7 @@ inline const OutputHandler* DataRecorder::getOutputHandler() const    { return o
 //------------------------------------------------------------------------------
 // DataRecorder Macros
 //
-//    BEGIN_RECORDER_HANDLER_TABLE(ThisType) and END_RECORDER_HANDLER_TABLE() 
+//    BEGIN_RECORDER_HANDLER_TABLE(ThisType) and END_RECORDER_HANDLER_TABLE()
 //       Implement the beginning and ending sections of the recordDataImp() function.
 //
 //    ON_RECORDER_EVENT_ID( id, func )
@@ -20,7 +20,7 @@ inline const OutputHandler* DataRecorder::getOutputHandler() const    { return o
 #define BEGIN_RECORDER_HANDLER_TABLE(ThisType)                 \
 bool ThisType::recordDataImp(                                  \
       const unsigned int _id,                                  \
-      const mixr::base::Object* _obj[4],                   \
+      const mixr::base::IObject* _obj[4],                      \
       const double _val[4] )                                   \
 {                                                              \
    bool _recorded = false;                                     \

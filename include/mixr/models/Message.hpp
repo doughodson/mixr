@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Message_HPP__
 #define __mixr_models_common_Message_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class List; class String; }
@@ -12,9 +12,9 @@ namespace models {
 // Class: Message
 // Description: Base message class
 //----------------------------------------------------------------------------------
-class Message : public base::Object
+class Message : public base::IObject
 {
-   DECLARE_SUBCLASS(Message, base::Object)
+   DECLARE_SUBCLASS(Message, base::IObject)
 
 public:
    //left as enum for future use

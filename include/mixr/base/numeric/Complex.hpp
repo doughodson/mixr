@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Complex_HPP__
 #define __mixr_base_numeric_Complex_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <complex>
 
@@ -21,9 +21,9 @@ class INumber;
 //     real  <Number>  ! real value (default: 0.0)
 //     imag  <Number>  ! imaginary value (default: 0.0)
 //------------------------------------------------------------------------------
-class Complex final: public Object
+class Complex final: public IObject
 {
-   DECLARE_SUBCLASS(Complex, Object)
+   DECLARE_SUBCLASS(Complex, IObject)
 
 public:
    explicit Complex();

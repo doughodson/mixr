@@ -165,7 +165,7 @@ class Track;
 //    TRIGGER_SW_EVENT        <base::Boolean>      ! Trigger switch with position
 //    TRIGGER_SW_EVENT        (none)               ! Trigger switch (single shot)
 //    TGT_STEP_EVENT          (none)               ! Target step switch
-//    DATALINK_MESSAGE        <base::Object>       ! Hit with a datalink message
+//    DATALINK_MESSAGE        <base::IObject>      ! Hit with a datalink message
 //    IR_QUERY_MSG            <IrQueryMsg>         ! IR seeker requests signature
 //
 //
@@ -881,15 +881,15 @@ public:
    virtual bool onReflectionsRequest(base::IComponent* const);                // Handles the RF_REFLECTIONS_REQUEST event
    virtual bool onReflectionsCancel(const base::IComponent* const);           // Handles the RF_REFLECTIONS_CANCEL event
    virtual bool onIrMsgEventPlayer(IrQueryMsg* const);                        // Handle IR_QUERY_MSG event
-   virtual bool onDatalinkMessageEventPlayer(base::Object* const);            // Handles the DATALINK_MESSAGE event
-   virtual bool onDeEmissionEvent(base::Object* const);                       // Handles the DE_EMISSION event
+   virtual bool onDatalinkMessageEventPlayer(base::IObject* const);           // Handles the DATALINK_MESSAGE event
+   virtual bool onDeEmissionEvent(base::IObject* const);                      // Handles the DE_EMISSION event
 
    // Component methods
    bool isFrozen() const override;
    void reset() override;
    void updateTC(const double dt = 0.0) override;
    void updateData(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
 
 protected:
 
@@ -1066,7 +1066,7 @@ private:
    // Reflected emissions
    // ---
    static const int MAX_RF_REFLECTIONS{4};                          // Max number of reflected emissions we'll send (let's keep it small)
-   std::array<base::IComponent*, MAX_RF_REFLECTIONS> rfReflect{};   // Objects that are interested in the emissions hitting us
+   std::array<base::IComponent*, MAX_RF_REFLECTIONS> rfReflect{};   // IObjects that are interested in the emissions hitting us
    std::array<double, MAX_RF_REFLECTIONS> rfReflectTimer{};         // Request for reflected emissions will timeout
 
    // ---

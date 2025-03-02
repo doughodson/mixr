@@ -2,7 +2,7 @@
 #ifndef __mixr_base_colors_IColor_HPP__
 #define __mixr_base_colors_IColor_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Vec4d"
 
 namespace mixr {
@@ -18,9 +18,9 @@ class Vec3d;
 // Factory name: IColor
 // Slots: (none)
 //------------------------------------------------------------------------------
-class IColor : public Object
+class IColor : public IObject
 {
-    DECLARE_SUBCLASS(IColor, Object)
+    DECLARE_SUBCLASS(IColor, IObject)
 
 public:
     // components of RGB color - used as an index

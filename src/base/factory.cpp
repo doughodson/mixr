@@ -1,7 +1,7 @@
 
 #include "mixr/base/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/Statistic.hpp"
@@ -92,9 +92,9 @@
 namespace mixr {
 namespace base {
 
-Object* factory(const std::string& name)
+IObject* factory(const std::string& name)
 {
-    Object* obj{};
+    IObject* obj{};
 
     // numeric types
     if ( name == Boolean::getFactoryName() ) {

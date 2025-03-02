@@ -3,7 +3,7 @@
 #define __mixr_base_macros__
 
 //------------------------------------------------------------------------------
-// Object class macros:
+// IObject class macros:
 //
 //    DECLARE_SUBCLASS(ThisType, BaseType)
 //       Macro to declare all of the required member functions and member
@@ -20,7 +20,7 @@
 //       functions, the slot table, and any constructors that the user
 //       has declared.
 //
-//    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "factoryName") 
+//    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "factoryName")
 //       Macro to implement an abstract class.  Same as IMPLEMENT_SUBCLASS()
 //       except that the clone function always returns a null pointer.
 //
@@ -52,16 +52,16 @@
 //       'ObjType', to a member function, 'setSlotFunc', that will
 //       process the slot.
 //
-//    EMPTY_SLOTTABLE(ThisType) 
+//    EMPTY_SLOTTABLE(ThisType)
 //       Implements an empty slotTable for the class 'ThisType'
 //
-//    EMPTY_CONSTRUCTOR(ThisType) 
+//    EMPTY_CONSTRUCTOR(ThisType)
 //       Implements an empty default constructor for the class 'ThisType' (e.g., Foo())
 //
 //    EMPTY_COPYDATA(ThisType)
 //       Implements an empty copy data function for the class 'ThisType'
 //
-//    EMPTY_DELETEDATA(ThisType) 
+//    EMPTY_DELETEDATA(ThisType)
 //       Implements an empty delete data function for the class 'ThisType'
 //
 //    IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, "factoryName")
@@ -71,7 +71,7 @@
 //
 // Component class macros:
 //
-//    BEGIN_EVENT_HANDLER(ThisType) and END_EVENT_HANDLER() 
+//    BEGIN_EVENT_HANDLER(ThisType) and END_EVENT_HANDLER()
 //       These macros, along with the ON_EVENT() and ON_ANYKEY() macros
 //       below, implement an event dispatch table, which is actually the
 //       event() function for class 'ThisType'.
@@ -86,7 +86,7 @@
 //    ON_EVENT(token,onEvent)  (see eventTokens.hpp)
 //       Maps an event token, 'token', to the "on event" member function, 'onEvent'.
 //
-//    ON_EVENT_OBJ(token,onEvent,ObjType) 
+//    ON_EVENT_OBJ(token,onEvent,ObjType)
 //       Maps an event token, 'token', with an argument of type 'ObjType' to the
 //       "on event" member function, 'onEvent'.
 //
@@ -108,12 +108,12 @@
 //       Maps a state number, 'state', to the member function, 'stateFunc', which
 //       implements the state.
 //
-//    STATE_MACH(state,"name") 
+//    STATE_MACH(state,"name")
 //       Maps a state number, 'state', to the name of child state machine that
 //       implements the state.  The child state machines are defined for this
 //       state machine using the 'stateMachines' slot.
 //
-//    ANY_STATE_FUNC(stateFunc) 
+//    ANY_STATE_FUNC(stateFunc)
 //       Maps any state number to the member function, 'stateFunc'.
 //
 //------------------------------------------------------------------------------
@@ -139,7 +139,7 @@
     public: static const ::mixr::base::MetaObject* getMetaObject();                                                             \
     public: static const std::string& getFactoryName();                                                                         \
     public: bool isFactoryName(const std::string&) const override;                                                              \
-    protected: bool setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj) override;                              \
+    protected: bool setSlotByIndex(const int slotindex, ::mixr::base::IObject* const obj) override;                             \
     public: static const ::mixr::base::SlotTable& getSlotTable();                                                               \
     protected: static const ::mixr::base::SlotTable slottable;                                                                  \
     private: static const char* slotnames[];                                                                                    \
@@ -258,7 +258,7 @@
     const char* ThisType::slotnames[] = { "" };                                            \
     const int ThisType::nslots {};                                                         \
     const ::mixr::base::SlotTable ThisType::slottable(0, 0, BaseClass::getSlotTable());    \
-    bool ThisType::setSlotByIndex(const int si, ::mixr::base::Object* const obj)           \
+    bool ThisType::setSlotByIndex(const int si, ::mixr::base::IObject* const obj)          \
     {                                                                                      \
         return BaseClass::setSlotByIndex(si,obj);                                          \
     }
@@ -300,7 +300,7 @@
 
 
 #define BEGIN_SLOT_MAP(ThisType)                                                           \
-    bool ThisType::setSlotByIndex(const int slotindex, ::mixr::base::Object* const obj)    \
+    bool ThisType::setSlotByIndex(const int slotindex, ::mixr::base::IObject* const obj)   \
     {                                                                                      \
         const int _n {BaseClass::getSlotTable().n()};                                      \
         if (slotindex <= _n) {                                                             \
@@ -325,7 +325,7 @@
 
 
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
-    bool ThisType::event(const int _event, ::mixr::base::Object* const _obj)           \
+    bool ThisType::event(const int _event, ::mixr::base::IObject* const _obj)          \
     {                                                                                  \
         bool _used {};
 

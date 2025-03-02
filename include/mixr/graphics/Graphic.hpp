@@ -378,11 +378,11 @@ public:
    static void lcTexCoord4v(const double* v)    { glTexCoord4dv(v); }
 
 
-   bool event(const int event, Object* const obj = nullptr) override;
+   bool event(const int event, IObject* const obj = nullptr) override;
 
 public:
    // Exceptions
-   class ExpInvalidDisplayPtr : public Object::Exception {
+   class ExpInvalidDisplayPtr : public IObject::Exception {
       public:
          ExpInvalidDisplayPtr() : Exception() {}
          const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }

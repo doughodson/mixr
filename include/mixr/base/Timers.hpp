@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Timer_HPP__
 #define __mixr_base_Timer_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -21,9 +21,9 @@ class ITime;
 //    alarmTime   <Time>      ! Alarm time (default: 0)
 //    active      <Boolean>   ! Sets timer active (running) flag (default: false)
 //------------------------------------------------------------------------------
-class Timer : public Object
+class Timer : public IObject
 {
-    DECLARE_SUBCLASS(Timer, Object)
+    DECLARE_SUBCLASS(Timer, IObject)
 
 public:
     enum class Type { UP, DOWN };        // Timer type/direction

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_FStorage_HPP__
 #define __mixr_base_FStorage_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -18,9 +18,9 @@ namespace base {
 // Factory name: FStorage
 // Slots: none
 //------------------------------------------------------------------------------
-class FStorage : public Object
+class FStorage : public IObject
 {
-   DECLARE_SUBCLASS(FStorage, Object)
+   DECLARE_SUBCLASS(FStorage, IObject)
 public:
    FStorage();
 };

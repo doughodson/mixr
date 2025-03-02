@@ -2,7 +2,7 @@
 #ifndef __mixr_base_List_HPP__
 #define __mixr_base_List_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <cstddef>
 
@@ -24,15 +24,15 @@ namespace base {
 //      List* list = <some list>
 //      List::Item* item = list->getFirstItem();
 //      while (item != nullptr) {
-//          Object* obj = item->getValue();
+//          IObject* obj = item->getValue();
 //          <... code to use the object ...>
 //          item = item->getNext();
 //      }
 //
 //------------------------------------------------------------------------------
-class List : public Object
+class List : public IObject
 {
-   DECLARE_SUBCLASS(List, Object)
+   DECLARE_SUBCLASS(List, IObject)
 
 public:
    struct Item {
@@ -49,12 +49,12 @@ public:
       const Item* getPrevious() const  { return previous; }
 
       // returns the item's value: a pointer to the Object.
-      Object* getValue()               { return value; }
-      const Object* getValue() const   { return value; }
+      IObject* getValue()              { return value; }
+      const IObject* getValue() const  { return value; }
 
       Item* next{};                   // Pointer to next entry
       Item* previous{};               // Pointer to previous entry
-      Object* value{};                // Data
+      IObject* value{};               // Data
    };
 
 public:
@@ -91,35 +91,35 @@ public:
    // nullptr.  Ownership of Object is passed to the caller
    // (i.e., this routine does not unref() the object and the
    // caller should not ref() the object).
-   Object* get()                                   { return removeHead(); }
+   IObject* get()                                  { return removeHead(); }
 
    // Put 'obj' at the end of the list.  The Object, obj, is referenced,
    // ref(), by this routine.
-   void put(Object* obj)                           { if (obj == nullptr) return;  addTail(obj); }
+   void put(IObject* obj)                          { if (obj == nullptr) return;  addTail(obj); }
 
    // Finds the object 'obj' in the list and returns the position
    // index.  If the object is not found, zero is returned.
-   std::size_t getIndex(const Object* const) const;
+   std::size_t getIndex(const IObject* const) const;
 
    // returns a pointer to the n'th object on the list.
-   Object* getPosition(const std::size_t n)              { return const_cast<Object*>(getPosition1(n)); }
-   const Object* getPosition(const std::size_t n) const  { return getPosition1(n); }
+   IObject* getPosition(const std::size_t n)              { return const_cast<IObject*>(getPosition1(n)); }
+   const IObject* getPosition(const std::size_t n) const  { return getPosition1(n); }
 
    // Adds an object to the head (tail) of this list.
    // The Object is referenced, ref(), by these routines.
-   void addHead(Object* const);
-   void addTail(Object* const);
+   void addHead(IObject* const);
+   void addTail(IObject* const);
 
    // Removes 'obj' from this list and true is returned.  If the
    // object 'obj' is not found then false is returned.  The Object
    // is unref() and therefore possibly deleted.
-   bool remove(const Object* const);
+   bool remove(const IObject* const);
 
    // Removes the object at the head (tail) of this list.  Ownership of
    // Object is passed to the caller (i.e., these routines do not
    // unref() the object and the caller should not ref() the object).
-   Object* removeHead();
-   Object* removeTail();
+   IObject* removeHead();
+   IObject* removeTail();
 
    // Return pointers to the first/last List::Item.  The List::Item
    // member functions below are used to traverse the list.
@@ -138,12 +138,12 @@ public:
    bool insert(Item* newItem, Item* refItem);
 
    // finds and removes the Item from the list.
-   Object* remove(Item*);
+   IObject* remove(Item*);
 
    bool isValid() const override;
 
 private:
-   const Object* getPosition1(const std::size_t) const;
+   const IObject* getPosition1(const std::size_t) const;
 
    Item* headP{};       // Pointer to head object
    Item* tailP{};       // Pointer to last object

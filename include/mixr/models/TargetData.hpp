@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_TargetData_HPP__
 #define __mixr_models_common_TargetData_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength;
@@ -43,9 +43,9 @@ namespace models {
 //
 //    velocity         <INumber>        ! Impact velocity (ft/sec) (default: 0)
 //------------------------------------------------------------------------------
-class TargetData : public base::Object
+class TargetData : public base::IObject
 {
-   DECLARE_SUBCLASS(TargetData, base::Object)
+   DECLARE_SUBCLASS(TargetData, base::IObject)
 
 public:
    // 'Stick' types

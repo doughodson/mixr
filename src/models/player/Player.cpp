@@ -204,7 +204,7 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::IComponent)
 
    // Data link message event
-   ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,base::Object)
+   ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,base::IObject)
 
    // Weapon release button event (with switch state)
    ON_EVENT_OBJ(WPN_REL_EVENT, onWpnRelEvent, base::Boolean)
@@ -225,7 +225,7 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(IR_QUERY, onIrMsgEventPlayer, IrQueryMsg)
 
    // We were just hit with a directed energy emission
-   ON_EVENT_OBJ(DE_EMISSION, onDeEmissionEvent, base::Object)
+   ON_EVENT_OBJ(DE_EMISSION, onDeEmissionEvent, base::IObject)
 
 END_EVENT_HANDLER()
 
@@ -2760,7 +2760,7 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 }
 
 // onDatalinkMessageEventPlayer() -- process datalink message events
-bool Player::onDatalinkMessageEventPlayer(base::Object* const msg)
+bool Player::onDatalinkMessageEventPlayer(base::IObject* const msg)
 {
    // Just pass it down to all of our datalink system
    if (getDatalink() != nullptr) {
@@ -2770,7 +2770,7 @@ bool Player::onDatalinkMessageEventPlayer(base::Object* const msg)
 }
 
 // Handles the DE_EMISSION event
-bool Player::onDeEmissionEvent(base::Object* const)
+bool Player::onDeEmissionEvent(base::IObject* const)
 {
    return false;
 }

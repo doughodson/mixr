@@ -36,7 +36,7 @@ public:
     bool setZPos(const double);                    // Sets the Z position (world coord)
 
     void draw() override;
-    bool event(const int event, Object* const obj = nullptr) override;
+    bool event(const int event, IObject* const obj = nullptr) override;
 
 private:
     // event functions

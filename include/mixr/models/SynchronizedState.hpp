@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SynchronizedState_HPP__
 #define __mixr_models_common_SynchronizedState_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
@@ -13,9 +13,9 @@ namespace models {
 //
 // Description: A snapshot of position state at a given time
 //------------------------------------------------------------------------------
-class SynchronizedState : public base::Object
+class SynchronizedState : public base::IObject
 {
-   DECLARE_SUBCLASS(SynchronizedState, base::Object)
+   DECLARE_SUBCLASS(SynchronizedState, base::IObject)
 
 public:
    SynchronizedState();

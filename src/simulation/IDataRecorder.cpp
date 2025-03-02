@@ -98,7 +98,7 @@ Simulation* IDataRecorder::getSimulationImp()
 }
 
 
-bool IDataRecorder::recordDataImp(const unsigned int id, const base::Object* pObjects[4], const double values[4])
+bool IDataRecorder::recordDataImp(const unsigned int id, const base::IObject* pObjects[4], const double values[4])
 {
    return true;
 }

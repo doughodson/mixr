@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Matrix_HPP__
 #define __mixr_base_Matrix_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/base/osg/Matrixf"
 #include "mixr/base/osg/Matrixd"
@@ -27,9 +27,9 @@ class RVector; // Row vector
 //    "Applied Numerical Methods for Digital Computation", 4ed, James-Smith-Wolford, Harper Collins (1993)
 //    "Applied Numerical Analysis Using Matlab", 1ed, Laurene V. Fausett, Prentice Hall (1999)
 //------------------------------------------------------------------------------
-class Matrix : public Object
+class Matrix : public IObject
 {
-   DECLARE_SUBCLASS(Matrix, Object)
+   DECLARE_SUBCLASS(Matrix, IObject)
 
 public:
    static const unsigned int DEF_FLDWIDTH{8};

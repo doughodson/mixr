@@ -2,7 +2,7 @@
 #ifndef __mixr_base_EarthModel_HPP__
 #define __mixr_base_EarthModel_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -22,9 +22,9 @@ class INumber;
 //     b    <ILength>    ! Semi minor axis
 //     f    <INumber>    ! Flattening
 //------------------------------------------------------------------------------
-class EarthModel : public Object
+class EarthModel : public IObject
 {
-   DECLARE_SUBCLASS(EarthModel, Object)
+   DECLARE_SUBCLASS(EarthModel, IObject)
 
 public:
    // Some pre-defined earth models             -- getEarthModel() by name list

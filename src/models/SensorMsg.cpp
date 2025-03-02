@@ -49,8 +49,8 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     const Player* pp{org.target};
     setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
 
-    const base::Object* msg{org.dataMsg};
-    setDataMessage( const_cast<base::Object*>(static_cast<const base::Object*>(msg)) );
+    const base::IObject* msg{org.dataMsg};
+    setDataMessage( const_cast<base::IObject*>(static_cast<const base::IObject*>(msg)) );
 
     returnReq = org.returnReq;
     localOnly = org.localOnly;
@@ -120,7 +120,7 @@ void SensorMsg::setTarget(Player* const p)
 //------------------------------------------------------------------------------
 // setDataMessage() -- Sets a pointer to an optional data message
 //------------------------------------------------------------------------------
-void SensorMsg::setDataMessage(base::Object* const msg)
+void SensorMsg::setDataMessage(base::IObject* const msg)
 {
    dataMsg = msg;
 }

@@ -28,7 +28,7 @@ public:
    virtual bool setDatalink(Datalink* const);
 
    // Transmit a datalink message
-   virtual bool transmitDataMessage(base::Object* const);
+   virtual bool transmitDataMessage(base::IObject* const);
 
 protected:
    void receivedEmissionReport(Emission* const) override;

@@ -44,7 +44,7 @@ public:
    const Pair* findByName(const char* const slotname) const;
 
    // finds the name associated with an object
-   const std::string findName(const Object* const obj) const;
+   const std::string findName(const IObject* const obj) const;
 
    // returns the n'th pair
    Pair* getPosition(const unsigned int n)    {
@@ -64,13 +64,13 @@ public:
 
    // Put 'pair' at the tail of the stream.  The Pair is referenced, ref(), by this routine.
    void put(Pair* pair1) {
-      List::put(static_cast<Object*>(pair1));
+      List::put(static_cast<IObject*>(pair1));
    }
 
    // removes 'pair' from this list and true is returned.  If 'pair' 'obj' is not found
    // then false is returned.  (Note: The Pair is unref() and therefore possible to delete)
    bool remove(Pair* pair1) {
-      return List::remove(static_cast<Object*>(pair1));
+      return List::remove(static_cast<IObject*>(pair1));
    }
 
 };

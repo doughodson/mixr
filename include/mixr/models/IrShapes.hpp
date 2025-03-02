@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrShape_HPP__
 #define __mixr_models_common_IrShape_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class IArea; class ILength; class INumber; }
@@ -14,9 +14,9 @@ class IrQueryMsg;
 // Description: Base class for infrared shape
 // Factory name: IrShape
 //------------------------------------------------------------------------------
-class IrShape : public base::Object
+class IrShape : public base::IObject
 {
-   DECLARE_SUBCLASS(IrShape, base::Object)
+   DECLARE_SUBCLASS(IrShape, base::IObject)
 
 public:
    IrShape();

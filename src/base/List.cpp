@@ -52,7 +52,7 @@ void List::copyData(const List& org, const bool)
     // Copy the new list
     const Item* d{org.getFirstItem()};
     for ( ; d != nullptr; d = d->getNext() ) {
-        Object* p{d->getValue()->clone()};
+        IObject* p{d->getValue()->clone()};
         if (p != nullptr) {
             addTail(p);
             p->unref();     // p is ref() by addTail(), so we can unref();
@@ -68,9 +68,9 @@ void List::deleteData()
 // is this a valid List
 bool List::isValid() const
 {
-    bool ok{Object::isValid()};
+    bool ok{IObject::isValid()};
     for (const Item* d = headP; ok && d != nullptr; d = d->getNext() ) {
-        const Object* obj{d->getValue()};
+        const IObject* obj{d->getValue()};
         if (obj != nullptr) {
             if (!obj->isValid()) ok = false;
         } else {
@@ -85,7 +85,7 @@ void List::clear()
 {
     // Empty out the list ...
     while (!isEmpty()) {
-        Object* p{removeHead()}; // First remove them
+        IObject* p{removeHead()}; // First remove them
         if (p != nullptr) {
             p->unref();     // and unref() them
         }
@@ -97,7 +97,7 @@ void List::clear()
 
 
 // find object on the list
-std::size_t List::getIndex(const Object* const x) const
+std::size_t List::getIndex(const IObject* const x) const
 {
     const Item* p{};
     std::size_t idx{};
@@ -112,7 +112,7 @@ std::size_t List::getIndex(const Object* const x) const
 }
 
 // adds object to the head of the list.
-void List::addHead(Object* const obj)
+void List::addHead(IObject* const obj)
 {
     if (obj == nullptr) return;
     const auto d = new Item;
@@ -122,7 +122,7 @@ void List::addHead(Object* const obj)
 }
 
 // adds object to the tail of the list.
-void List::addTail(Object* const obj)
+void List::addTail(IObject* const obj)
 {
     if (obj == nullptr) return;
     const auto d = new Item;
@@ -132,7 +132,7 @@ void List::addTail(Object* const obj)
 }
 
 // removes object from the list.
-bool List::remove(const Object* const obj)
+bool List::remove(const IObject* const obj)
 {
     bool ok{};
     if (obj != nullptr) {
@@ -163,7 +163,7 @@ std::size_t List::getNumberList(double values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
-        const Object* p1{p->getValue()};
+        const IObject* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
@@ -185,7 +185,7 @@ std::size_t List::getNumberList(float values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
-        const Object* p1{p->getValue()};
+        const IObject* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
@@ -208,7 +208,7 @@ std::size_t List::getNumberList(int values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
-        const Object* p1{p->getValue()};
+        const IObject* p1{p->getValue()};
         const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
@@ -228,9 +228,9 @@ std::size_t List::getNumberList(int values[], const std::size_t max) const
 }
 
 // removes the item at the head of the list. (Ownership is passed to caller -- does not unref())
-Object* List::removeHead()
+IObject* List::removeHead()
 {
-    Object* p{};
+    IObject* p{};
     if (headP != nullptr) {
         Item* d{headP};
         headP = headP->next;
@@ -244,9 +244,9 @@ Object* List::removeHead()
 }
 
 // removes the item at the tail of the list. (Ownership passed to caller -- does not unref())
-Object* List::removeTail()
+IObject* List::removeTail()
 {
-    Object* p{};
+    IObject* p{};
     if (tailP != nullptr) {
         Item *d{tailP};
         tailP = tailP->previous;
@@ -281,9 +281,9 @@ bool List::insert(List::Item* newItem, List::Item* refItem)
 }
 
 // removes the Item from the list. (Ownership passed to caller -- does not unref())
-Object* List::remove(List::Item* item)
+IObject* List::remove(List::Item* item)
 {
-    Object* value{};
+    IObject* value{};
     if (headP == item)
         value = removeHead();
     else if (tailP == item)
@@ -344,7 +344,7 @@ bool List::operator!=(const List& l) const
 }
 
 // returns the object at the n'th position; w/o next pointer
-const Object* List::getPosition1(const std::size_t n) const
+const IObject* List::getPosition1(const std::size_t n) const
 {
     if (n < 1 || n > num) return nullptr;
     std::size_t i{1};

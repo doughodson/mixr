@@ -459,7 +459,7 @@ bool SymbolLoader::updateSymbolHeading(const int idx, const double hdg)
 //------------------------------------------------------------------------------
 // Update the symbol's value
 //------------------------------------------------------------------------------
-bool SymbolLoader::updateSymbolValue(const int idx, base::Object* const value)
+bool SymbolLoader::updateSymbolValue(const int idx, base::IObject* const value)
 {
    bool ok{};
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
@@ -1052,7 +1052,7 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
    setHdgAngleObj(nullptr);
 
    {
-      base::Object* copy{};
+      base::IObject* copy{};
       if (org.value != nullptr) copy = org.value->clone();
       setValue(copy);
       if (copy != nullptr) copy->unref();
@@ -1094,7 +1094,7 @@ void SlSymbol::setId(const char* const v)
    }
 }
 
-void SlSymbol::setValue(base::Object* const v)
+void SlSymbol::setValue(base::IObject* const v)
 {
    if (value != nullptr) value->unref();
    value = v;

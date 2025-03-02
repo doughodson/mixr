@@ -3,11 +3,11 @@
 //
 // Factory function:
 //
-//    Object* (*factory_func)(const std::string& name)
+//    IObject* (*factory_func)(const std::string& name)
 //
 //       This is a user supplied function, via our constructor, that is
 //       used by the parser to create objects using their 'factory' names
-//       (see Object.hpp).  The object's factory name is passed to
+//       (see IObject.hpp).  The object's factory name is passed to
 //       the function.  The function will construct a default object and
 //       return a pointer to the new object.  If the name is not
 //       recognized then no object is created and nullptr is returned.
@@ -23,7 +23,7 @@
 #include <fstream>
 
 #include "mixr/base/edl_parser.hpp"
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -34,7 +34,7 @@
 #include "mixr/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mixr::base::Object* result{};          // result of all our work (i.e., an Object)
+static mixr::base::IObject* result{};         // result of all our work (i.e., an IObject)
 static mixr::base::EdlScanner* scanner{};     // EDL scanner
 static mixr::base::factory_func factory{};    // factory function
 static int err_count{};                       // error count
@@ -67,9 +67,9 @@ inline void yyerror(const char* s)
 // parse() -- returns an object with factory 'name' with its slots set to
 //            values in 'arg_list'
 //------------------------------------------------------------------------------
-static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream* arg_list)
+static mixr::base::IObject* parse(const std::string& name, mixr::base::PairStream* arg_list)
 {
-    mixr::base::Object* obj{};
+    mixr::base::IObject* obj{};
 
     if (factory != nullptr) {
 
@@ -112,7 +112,7 @@ static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   mixr::base::Object*        ovalp;
+   mixr::base::IObject*       ovalp;
    mixr::base::Pair*          pvalp;
    mixr::base::PairStream*    svalp;
    mixr::base::List*          lvalp;
@@ -173,7 +173,7 @@ arglist :                           { $$ = new mixr::base::PairStream(); }
 
 form    : '(' IDENT arglist ')'     { $$ = parse($2, $3); delete[] $2; $3->unref(); }
 
-        | '{' arglist '}'           { $$ = (mixr::base::Object*) $2; }
+        | '{' arglist '}'           { $$ = (mixr::base::IObject*) $2; }
         ;
 
 
@@ -201,10 +201,10 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Returns an Object* that was constructed from parsing an EDL file.
-// factory is the name of the Object creation function
+// Returns an IObject* that was constructed from parsing an EDL file.
+// factory is the name of the IObject creation function
 //------------------------------------------------------------------------------
-Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
+IObject* edl_parser(const std::string& filename, factory_func f, int* num_errors)
 {
     // set the global file scope static variables
     factory = f;
@@ -217,7 +217,7 @@ Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
-    Object* obj{};
+    IObject* obj{};
     if (yyparse() == 0) {    // returns 0 on success
         obj = result;
     }

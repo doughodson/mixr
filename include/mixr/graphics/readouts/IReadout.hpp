@@ -131,7 +131,7 @@ public:
    bool cursor(int* ln, int* cp) const override;
 
    void drawFunc() override;
-   bool event(const int event, Object* const obj = nullptr) override;
+   bool event(const int event, IObject* const obj = nullptr) override;
 
    void updateData(const double dt = 0.0) override;
 

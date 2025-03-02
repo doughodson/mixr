@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Scanline_HPP__
 #define __mixr_graphics_Scanline_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Vec2d"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Matrixd"
@@ -20,9 +20,9 @@ class Polygon;
 // Description:  (Abstract) 2D scan line engine
 // Factory name: Scanline
 //------------------------------------------------------------------------------
-class Scanline : public base::Object
+class Scanline : public base::IObject
 {
-   DECLARE_SUBCLASS(Scanline, base::Object)
+   DECLARE_SUBCLASS(Scanline, base::IObject)
 
 public:
    Scanline();
@@ -46,9 +46,9 @@ public:
 
 protected:
    // PolyData Description
-   class PolyData : public base::Object
+   class PolyData : public base::IObject
    {
-      DECLARE_SUBCLASS(PolyData, base::Object)
+      DECLARE_SUBCLASS(PolyData, base::IObject)
    public:
       PolyData();
       void getNorm(base::Vec3d& lnorm, const double x) const;
@@ -63,9 +63,9 @@ protected:
 
 protected:
    // Edge Description
-   class Edge : public base::Object
+   class Edge : public base::IObject
    {
-      DECLARE_SUBCLASS(Edge,base::Object)
+      DECLARE_SUBCLASS(Edge,base::IObject)
    public:
       Edge();
       Edge(const double v0[2], const base::Vec3d& vn0, const double v1[2], const base::Vec3d& vn1, PolyData* const p);

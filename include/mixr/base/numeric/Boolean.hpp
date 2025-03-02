@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Boolean_HPP__
 #define __mixr_base_numeric_Boolean_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -20,9 +20,9 @@ namespace base {
 // Slots:
 //     value  <Boolean>  ! Sets the value (default: false)
 //------------------------------------------------------------------------------
-class Boolean final: public Object
+class Boolean final: public IObject
 {
-   DECLARE_SUBCLASS(Boolean, Object)
+   DECLARE_SUBCLASS(Boolean, IObject)
 
 public:
    explicit Boolean()                  { STANDARD_CONSTRUCTOR()            }

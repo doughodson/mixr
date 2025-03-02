@@ -1,7 +1,7 @@
 
 #include "mixr/models/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 // dynamics models
 #include "mixr/models/dynamics/RacModel.hpp"
@@ -125,9 +125,9 @@
 namespace mixr {
 namespace models {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-   base::Object* obj {};
+   base::IObject* obj {};
 
    // dynamics models
    if ( name == RacModel::getFactoryName() ) {              // RAC

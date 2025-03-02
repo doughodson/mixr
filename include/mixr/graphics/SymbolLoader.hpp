@@ -141,7 +141,7 @@ public:
    virtual bool updateSymbolHeading(const int idx, const double hdg);
 
    // Updates the symbol's value
-   virtual bool updateSymbolValue(const int idx, base::Object* const value);
+   virtual bool updateSymbolValue(const int idx, base::IObject* const value);
 
    // Updates the text of the named AsciiText type subcomponent
    virtual bool updateSymbolText(const int idx, const char* name, const char newString[]);
@@ -196,9 +196,9 @@ private:
 // Class: SlSymbol
 // Description: General symbol used by SymbolLoader
 //------------------------------------------------------------------------------
-class SlSymbol : public base::Object
+class SlSymbol : public base::IObject
 {
-    DECLARE_SUBCLASS(SlSymbol, base::Object)
+    DECLARE_SUBCLASS(SlSymbol, base::IObject)
 
 public:
     // Max size of the symbol's ID
@@ -211,7 +211,7 @@ public:
    int getType() const;                      // Type code
    const char* getId() const;                // ID sting
    base::Pair* getSymbolPair() const;        // Graphical component
-   base::Object* getValue() const;           // Returns user defined data item
+   base::IObject* getValue() const;           // Returns user defined data item
 
    bool isPositionLL() const;                // Returns true if using at lat/lon position
    bool isPositionAC() const;                // Returns true if using at aircraft nose/wing position
@@ -236,7 +236,7 @@ public:
    void setScreenFlag(const bool);           // set the manual screen position override flag
    void setType(const int);                  // Sets the user defined type (must match templates)
    void setId(const char* const);            // Sets the ID string
-   void setValue(base::Object* const);       // Sets the user defined value, which is set to the graphical component
+   void setValue(base::IObject* const);      // Sets the user defined value, which is set to the graphical component
 
    void setXPosition(const double);          // Sets the X position ( latitude or NM north/south )
    void setYPosition(const double);          // Sets the Y position { longitude or NM east/west )
@@ -258,7 +258,7 @@ private:
 
    int type{};                // numeric type (for looking up in slottable)
    char id[MAX_ID_SIZE+1];    // ID (or name)
-   base::Object* value{} ;    // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::IObject* value{} ;   // optional value (sent to the symbol as an UPDATE_VALUE event)
    base::Pair* pntr{};        // The graphical component
 
    double xPos{};             // X position ( latitude or NM north/south )
@@ -305,7 +305,7 @@ inline bool SlSymbol::isPositionScreen() const           { return scrnFlg; }
 
 inline int SlSymbol::getType() const                     { return type; }
 inline const char* SlSymbol::getId() const               { return id; }
-inline base::Object* SlSymbol::getValue() const          { return value; }
+inline base::IObject* SlSymbol::getValue() const         { return value; }
 inline base::Pair* SlSymbol::getSymbolPair() const       { return pntr; }
 
 inline double SlSymbol::getXPosition() const             { return xPos; }

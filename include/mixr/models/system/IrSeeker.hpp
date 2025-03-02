@@ -45,7 +45,7 @@ public:
    virtual unsigned int processPlayersOfInterest(base::PairStream* const poi);
 #endif
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
    void reset() override;
 
 protected:

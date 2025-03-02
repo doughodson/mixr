@@ -15,7 +15,7 @@ namespace base {
 IMPLEMENT_SUBCLASS(Pair, "Pair")
 EMPTY_SLOTTABLE(Pair)
 
-Pair::Pair(const std::string& slot, Object* object)
+Pair::Pair(const std::string& slot, IObject* object)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -58,7 +58,7 @@ void Pair::deleteData()
 //------------------------------------------------------------------------------
 bool Pair::isValid() const
 {
-    if (!Object::isValid()) return false;
+    if (!IObject::isValid()) return false;
     if (!slotname.empty() || obj == nullptr) return false;
     return obj->isValid();
 }

@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/ISyncThread.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/IComponent.hpp"
 #include <iostream>
 
@@ -44,7 +44,7 @@ unsigned long ISyncThread::mainThreadFunc()
    // Configure this thread
    bool ok{configThread()};
 
-   if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if ( getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "SyncThread(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
    }
 

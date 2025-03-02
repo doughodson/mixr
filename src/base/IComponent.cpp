@@ -43,7 +43,7 @@ BEGIN_SLOT_MAP(IComponent)
     ON_SLOT( 7, setSlotDisableMsgType,    Integer)
 END_SLOT_MAP()
 
-bool IComponent::event(const int _event, ::mixr::base::Object* const _obj)
+bool IComponent::event(const int _event, ::mixr::base::IObject* const _obj)
 {
     bool _used {};
 
@@ -659,7 +659,7 @@ void IComponent::processComponents(
 //------------------------------------------------------------------------------
 // setSelectionName() -- Name (or number) of component to selected
 //------------------------------------------------------------------------------
-bool IComponent::setSelectionName(const Object* const s)
+bool IComponent::setSelectionName(const IObject* const s)
 {
    if (selection != nullptr) {
        selection->unref();
@@ -883,7 +883,7 @@ bool IComponent::send(const char* const id, const int event)
 bool IComponent::send(const char* const id, const int event, const int value, SendData& sd)
 {
    bool val{};
-   Object* vv{sd.getValue(value)};
+   IObject* vv{sd.getValue(value)};
    if (vv != nullptr) {
       IComponent* g{sd.getObject(this,id)};
       if (g != nullptr) val = g->event(event,vv);
@@ -895,7 +895,7 @@ bool IComponent::send(const char* const id, const int event, const int value, Se
 bool IComponent::send(const char* const id, const int event, const float value, SendData& sd)
 {
    bool val{};
-   Object* vv{sd.getValue(static_cast<double>(value))};
+   IObject* vv{sd.getValue(static_cast<double>(value))};
    if (vv != nullptr) {
       IComponent* g{sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
@@ -907,7 +907,7 @@ bool IComponent::send(const char* const id, const int event, const float value, 
 bool IComponent::send(const char* const id, const int event, const double value, SendData& sd)
 {
    bool val{};
-   Object* vv{sd.getValue(static_cast<double>(value))};
+   IObject* vv{sd.getValue(static_cast<double>(value))};
    if (vv != nullptr) {
       IComponent* g{sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
@@ -919,7 +919,7 @@ bool IComponent::send(const char* const id, const int event, const double value,
 bool IComponent::send(const char* const id, const int event, const char* const value, SendData& sd)
 {
    bool val{};
-   Object* vv{sd.getValue(value)};
+   IObject* vv{sd.getValue(value)};
    if (vv != nullptr) {
       IComponent* g{sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
@@ -931,7 +931,7 @@ bool IComponent::send(const char* const id, const int event, const char* const v
 bool IComponent::send(const char* const id, const int event, const bool value, SendData& sd)
 {
    bool val{};
-   Object* vv{sd.getValue(value)};
+   IObject* vv{sd.getValue(value)};
    if (vv != nullptr) {
       IComponent* g{sd.getObject(this, id)};
       if (g != nullptr) val = g->event(event,vv);
@@ -940,7 +940,7 @@ bool IComponent::send(const char* const id, const int event, const bool value, S
 }
 
 // Send an event message with an Object value to component 'id'
-bool IComponent::send(const char* const id, const int event, Object* const value, SendData& sd)
+bool IComponent::send(const char* const id, const int event, IObject* const value, SendData& sd)
 {
     // we don't check past values here, because it would be tedious and more overhead
     // to go through each object and see if any data has changed.  So we take a smaller
@@ -963,7 +963,7 @@ bool IComponent::send(const char* const id, const int event, const int value[], 
 {
    bool val{};
    for (int i = 0; i < n; i++) {
-      Object* vv{sd[i].getValue(value[i])};
+      IObject* vv{sd[i].getValue(value[i])};
       if (vv != nullptr) {
          IComponent* g{sd[i].getObject(this, id, (i+1))};
          if (g != nullptr) val = g->event(event,vv);
@@ -981,7 +981,7 @@ bool IComponent::send(const char* const id, const int event, const float value[]
 {
    bool val{};
    for (int i = 0; i < n; i++) {
-      Object* vv{sd[i].getValue(value[i])};
+      IObject* vv{sd[i].getValue(value[i])};
       if (vv != nullptr) {
          IComponent* g{sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
@@ -999,7 +999,7 @@ bool IComponent::send(const char* const id, const int event, const double value[
 {
    bool val{};
    for (int i = 0; i < n; i++) {
-      Object* vv{sd[i].getValue(value[i])};
+      IObject* vv{sd[i].getValue(value[i])};
       if (vv != nullptr) {
          IComponent* g{sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
@@ -1012,7 +1012,7 @@ bool IComponent::send(const char* const id, const int event, const bool value[],
 {
    bool val{};
    for (int i = 0; i < n; i++) {
-      Object* vv{sd[i].getValue(value[i])};
+      IObject* vv{sd[i].getValue(value[i])};
       if (vv != nullptr) {
          IComponent* g{sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
@@ -1025,7 +1025,7 @@ bool IComponent::send(const char* const id, const int event, const char* const v
 {
    bool val{};
    for (int i = 0; i < n; i++) {
-      Object* vv{sd[i].getValue(value[i])};
+      IObject* vv{sd[i].getValue(value[i])};
       if (vv != nullptr) {
          IComponent* g{sd[i].getObject(this,id,(i+1))};
          if (g != nullptr) val = g->event(event,vv);
@@ -1034,7 +1034,7 @@ bool IComponent::send(const char* const id, const int event, const char* const v
    return val;
 }
 
-bool IComponent::send(const char* const id, const int event, Object* const value[], SendData sd[], const int n)
+bool IComponent::send(const char* const id, const int event, IObject* const value[], SendData sd[], const int n)
 {
    bool val{};
    for (int i = 0; i < n; i++) {
@@ -1097,7 +1097,7 @@ IComponent* IComponent::SendData::getObject(IComponent* gobj, const char* const 
 
 // getValue() -- get an object containing the int value to send
 // or null(0) if the value hasn't changed.
-Object* IComponent::SendData::getValue(const int value)
+IObject* IComponent::SendData::getValue(const int value)
 {
     const auto num = dynamic_cast<Integer*>(past);
     if (num == nullptr) {
@@ -1115,7 +1115,7 @@ Object* IComponent::SendData::getValue(const int value)
 
 // getValue() -- get an object containing the real value to send
 // or null(0) if the value hasn't changed.
-Object* IComponent::SendData::getValue(const float value)
+IObject* IComponent::SendData::getValue(const float value)
 {
     const auto num = dynamic_cast<Float*>(past);
     if (num == nullptr) {
@@ -1131,7 +1131,7 @@ Object* IComponent::SendData::getValue(const float value)
     }
 }
 
-Object* IComponent::SendData::getValue(const double value)
+IObject* IComponent::SendData::getValue(const double value)
 {
     const auto num = dynamic_cast<Float*>(past);
     if (num == nullptr) {
@@ -1150,7 +1150,7 @@ Object* IComponent::SendData::getValue(const double value)
 
 // getValue() -- get an object containing the char string to send
 // or null(0) if the value hasn't changed.
-Object* IComponent::SendData::getValue(const char* const value)
+IObject* IComponent::SendData::getValue(const char* const value)
 {
     // get our past string
     const auto str = dynamic_cast<String*>(past);
@@ -1181,7 +1181,7 @@ Object* IComponent::SendData::getValue(const char* const value)
 
 // getValue() -- get an object containing the boolean value to send
 // or null(0) if the value hasn't changed.
-Object* IComponent::SendData::getValue(const bool value)
+IObject* IComponent::SendData::getValue(const bool value)
 {
     const auto num = dynamic_cast<Boolean*>(past);
     if (num == nullptr) {

@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_IRecord_HPP__
 #define __mixr_dafif_IRecord_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/dafif/dafifc.hpp"
 
@@ -20,9 +20,9 @@ namespace dafif {
 // Factory name: IRecord
 // Slots: none
 //------------------------------------------------------------------------------
-class IRecord : public base::Object
+class IRecord : public base::IObject
 {
-   DECLARE_SUBCLASS(IRecord, base::Object)
+   DECLARE_SUBCLASS(IRecord, base::IObject)
 
 public:
    // record types

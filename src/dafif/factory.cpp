@@ -1,7 +1,7 @@
 
 #include "mixr/dafif/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/dafif/loaders/AirportLoader.hpp"
 #include "mixr/dafif/loaders/NavaidLoader.hpp"
@@ -12,9 +12,9 @@
 namespace mixr {
 namespace dafif {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     if ( name == AirportLoader::getFactoryName() ) {
         obj = new AirportLoader();

@@ -2,7 +2,7 @@
 #ifndef __mixr_dafif_IDatabase_HPP__
 #define __mixr_dafif_IDatabase_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/dafif/dafifc.hpp"
 
@@ -45,9 +45,9 @@ namespace dafif {
 //               clearDbInUse();         // free the database
 //           }
 //------------------------------------------------------------------------------
-class IDatabase : public base::Object
+class IDatabase : public base::IObject
 {
-   DECLARE_SUBCLASS(IDatabase, base::Object)
+   DECLARE_SUBCLASS(IDatabase, base::IObject)
 
 public:
    IDatabase();

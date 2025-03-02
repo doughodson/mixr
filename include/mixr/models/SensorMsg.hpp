@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SensorMsg_HPP__
 #define __mixr_models_common_SensorMsg_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 #include "mixr/base/safe_ptr.hpp"
@@ -19,9 +19,9 @@ class Gimbal;
 //
 // Factory name: SensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public base::Object
+class SensorMsg : public base::IObject
 {
-   DECLARE_SUBCLASS(SensorMsg, base::Object)
+   DECLARE_SUBCLASS(SensorMsg, base::IObject)
 
 public:
    SensorMsg();
@@ -140,8 +140,8 @@ public:
    const Player* getTarget() const              { return target; }
 
    // Optional: data message attached to sensor message
-   base::Object* getDataMessage()              { return dataMsg; }
-   const base::Object* getDataMessage() const  { return dataMsg; }
+   base::IObject* getDataMessage()              { return dataMsg; }
+   const base::IObject* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
    void setGimbal(Gimbal* const);
@@ -153,7 +153,7 @@ public:
    void setTarget(Player* const);
 
    // Sets the optional data message attached to sensor message
-   void setDataMessage(base::Object* const);
+   void setDataMessage(base::IObject* const);
 
    // Clear data
    virtual void clear();
@@ -174,7 +174,7 @@ private:
    Gimbal* gimbal {};        // The gimbal that transmitted the message
    base::safe_ptr<Player> ownship;         // The originating (ownship) player
    base::safe_ptr<Player> target;          // The Target player
-   base::safe_ptr<base::Object> dataMsg;   // Embedded data message (e.g., datalink, etc)
+   base::safe_ptr<base::IObject> dataMsg;  // Embedded data message (e.g., datalink, etc)
    bool returnReq {};        // Return Request
    bool localOnly {};        // Local players only flag
 };

@@ -2,7 +2,7 @@
 #ifndef __mixr_linkage_IGenerator_HPP__
 #define __mixr_linkage_IGenerator_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class IIoData; class IIoDevice; }
@@ -14,9 +14,9 @@ namespace linkage {
 // Description: Interface class that is used to generate both analog or signal
 //              values to be stored into the applications i/o data buffer.
 //------------------------------------------------------------------------------
-class IGenerator : public base::Object
+class IGenerator : public base::IObject
 {
-   DECLARE_SUBCLASS(IGenerator, base::Object)
+   DECLARE_SUBCLASS(IGenerator, base::IObject)
 
 public:
    IGenerator();

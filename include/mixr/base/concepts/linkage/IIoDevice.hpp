@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IIoDevice_HPP__
 #define __mixr_base_IIoDevice_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -39,9 +39,9 @@ class IIoData;
 //       buffer that are application (not device) specific.  This buffer
 //       should be passed to the I/O adapters.
 //------------------------------------------------------------------------------
-class IIoDevice : public Object
+class IIoDevice : public IObject
 {
-   DECLARE_SUBCLASS(IIoDevice, Object)
+   DECLARE_SUBCLASS(IIoDevice, IObject)
 
 public:
    IIoDevice();

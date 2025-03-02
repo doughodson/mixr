@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Func5_HPP__
 #define __mixr_base_Func5_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/relations/Function.hpp"
 
 namespace mixr {

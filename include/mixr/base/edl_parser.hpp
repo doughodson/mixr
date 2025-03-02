@@ -7,19 +7,19 @@
 namespace mixr {
 namespace base {
 
-class Object;
+class IObject;
 
 //
 // factory function signature (e.g., factory(const std::string& name); )
 // -- the user defines this function
 //
-typedef Object* (*factory_func)(const std::string& name);
+typedef IObject* (*factory_func)(const std::string& name);
 
 //
 // edl_parser( text filename to parse, user supplied factory function to create objects,
 //             pointer to variable for num of errors found )
 //
-extern Object* edl_parser(const std::string& filename, factory_func f, int* num_errors = nullptr);
+extern IObject* edl_parser(const std::string& filename, factory_func f, int* num_errors = nullptr);
 
 }
 }

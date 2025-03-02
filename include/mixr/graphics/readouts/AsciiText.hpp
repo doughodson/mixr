@@ -5,7 +5,7 @@
 #include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
-namespace base { class Object; class List; class String; }
+namespace base { class IObject; class List; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ public:
    // returns true if tc is a valid input position
    bool isValidInputPosition(const int) final;
 
-   bool event(const int key, base::Object* const obj = nullptr) final;
+   bool event(const int key, base::IObject* const obj = nullptr) final;
 
 private:
    // slot table helper methods

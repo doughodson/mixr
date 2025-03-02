@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Latitude_HPP__
 #define __mixr_base_Latitude_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 
@@ -27,9 +27,9 @@ class Identifier;
 //    minutes   <INumber>     ! Set the minutes component (default: 0)
 //    seconds   <INumber>     ! Set the seconds component (default: 0.0)
 //------------------------------------------------------------------------------
-class Latitude : public Object
+class Latitude : public IObject
 {
-   DECLARE_SUBCLASS(Latitude, Object)
+   DECLARE_SUBCLASS(Latitude, IObject)
 
 public:
    enum class Dir { NONE, NORTH, SOUTH };

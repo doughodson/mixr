@@ -29,7 +29,7 @@ public:
    Rotary2();
 
    void draw() final;
-   bool event(const int key, base::Object* const obj = nullptr) final;
+   bool event(const int key, base::IObject* const obj = nullptr) final;
 
    // event handler methods
    bool onSelect(const base::Boolean* const);

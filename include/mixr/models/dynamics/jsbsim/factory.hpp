@@ -5,10 +5,10 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Object; }
+namespace base { class IObject; }
 namespace models {
 namespace jsbsim {
-base::Object* factory(const std::string&);
+base::IObject* factory(const std::string&);
 }
 }
 }

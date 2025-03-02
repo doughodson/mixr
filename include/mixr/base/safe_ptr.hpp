@@ -16,12 +16,12 @@ namespace base {
 //
 //    const auto ptr = new Object();      // New object; ref cnt is one
 //
-//    base::safe_ptr<Object> sp1( ptr );  // ref cnt is two
+//    base::safe_ptr<IObject> sp1( ptr ); // ref cnt is two
 //
-//    base::safe_ptr<Object> sp2();       // 'sp2' is null
+//    base::safe_ptr<IObject> sp2();      // 'sp2' is null
 //    sp2 = ptr;                          // ref cnt is three
 //
-//    base::safe_ptr<Object> sp3(sp2);    // ref cnt is four
+//    base::safe_ptr<IObject> sp3(sp2);   // ref cnt is four
 //
 //    ptr->unref();              // ref cnt is three
 //    sp3 = 0;                   // ref cnt is two
@@ -31,13 +31,13 @@ namespace base {
 //
 // Example #2
 //
-//    base::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
+//    base::safe_ptr<IObject> sp1( new IObject(), false );  // new object; ref cnt stays at one
 //
 //
 // Example #3
 //
-//    base::safe_ptr<Object> sp1();    // 'sp1' is null
-//    sp1.set( new Object(), false );  // new object; ref cnt stays at one
+//    base::safe_ptr<IObject> sp1();    // 'sp1' is null
+//    sp1.set( new IObject(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------
 template <class T> class safe_ptr
@@ -87,7 +87,7 @@ public:
       return *this;
    }
    safe_ptr<T>& operator=(safe_ptr<T>& x) {
-      if (this != &x) { 
+      if (this != &x) {
          x.lock();
          operator=(x.ptr);
          x.unlock();

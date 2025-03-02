@@ -1,7 +1,7 @@
 
 #include "mixr/recorder/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/recorder/DataRecorder.hpp"
 #include "mixr/recorder/FileWriter.hpp"
@@ -18,9 +18,9 @@
 namespace mixr {
 namespace recorder {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     if ( name == FileWriter::getFactoryName() ) {
         obj = new FileWriter();

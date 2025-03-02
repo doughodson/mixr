@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/IOneShotThread.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/IComponent.hpp"
 #include <iostream>
 
@@ -22,7 +22,7 @@ unsigned long IOneShotThread::mainThreadFunc()
    // Configure this thread
    configThread();
 
-   if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if ( getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "OneShotThread (" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
    }
 

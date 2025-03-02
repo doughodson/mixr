@@ -74,7 +74,7 @@ union YYSTYPE
    long                       lval;
    bool                       bval;
    char*                      cvalp;
-   mixr::base::Object*        ovalp;
+   mixr::base::IObject*       ovalp;
    mixr::base::Pair*          pvalp;
    mixr::base::PairStream*    svalp;
    mixr::base::List*          lvalp;

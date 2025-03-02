@@ -1,5 +1,5 @@
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <cctype>
 #include <cstdlib>
@@ -13,53 +13,53 @@ namespace base {
 // ---
 // Class and object metadata
 // ---
-MetaObject Object::metaObject(typeid(Object).name(), "Object", &Object::slottable, nullptr);
+MetaObject IObject::metaObject(typeid(IObject).name(), "IObject", &IObject::slottable, nullptr);
 
 // ---
-// Object's SlotTable
+// IObject's SlotTable
 //    Note: Keep our slot table empty.  There are several light weight classes derived
 //    from Object (e.g., the classes for colors, numbers and units) that expect their
 //    slots to be the first slots -- starting at slot number 1.
 // ---
-const char* Object::slotnames[] = { "" };
-const int Object::nslots{};
-const SlotTable Object::slottable(nullptr, 0);
+const char* IObject::slotnames[] = { "" };
+const int IObject::nslots{};
+const SlotTable IObject::slottable(nullptr, 0);
 
 //------------------------------------------------------------------------------
 // Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.hpp
 //------------------------------------------------------------------------------
 
-Object::Object():IReferenced()
+IObject::IObject():IReferenced()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Object::Object(const Object& org):IReferenced()
+IObject::IObject(const IObject& org):IReferenced()
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
 
-Object::~Object()
+IObject::~IObject()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Object& Object::operator=(const Object& org)
+IObject& IObject::operator=(const IObject& org)
 {
     if (this != &org) copyData(org);
     return *this;
 }
 
 // Check class type
-bool Object::isClassType(const std::type_info& type) const
+bool IObject::isClassType(const std::type_info& type) const
 {
-    if ( type == typeid(Object) ) return true;
+    if ( type == typeid(IObject) ) return true;
     else return false;
 }
 
 // Check factory name
-bool Object::isFactoryName(const std::string& name) const
+bool IObject::isFactoryName(const std::string& name) const
 {
     if (name.empty()) return false;
     if ( metaObject.getFactoryName() == name)  return true;
@@ -68,7 +68,7 @@ bool Object::isFactoryName(const std::string& name) const
 
 // Copy object data -- derived classes should call
 // BaseClass::copyData() first and then copy their data.
-void Object::copyData(const Object& org, const bool cc)
+void IObject::copyData(const IObject& org, const bool cc)
 {
     slotTable = org.slotTable;
     enbMsgBits = org.enbMsgBits;
@@ -77,23 +77,23 @@ void Object::copyData(const Object& org, const bool cc)
 
 // Delete object data -- derived classes should delete
 // or unref() their own data
-void Object::deleteData()
+void IObject::deleteData()
 {
 }
 
 // set slots by index
-bool Object::setSlotByIndex(const int, Object* const)
+bool IObject::setSlotByIndex(const int, IObject* const)
 {
     // We have no slots, so we shouldn't ever be here!
     return false;
 }
 
-const std::string& Object::getFactoryName()
+const std::string& IObject::getFactoryName()
 {
     return metaObject.getFactoryName();
 }
 
-const SlotTable& Object::getSlotTable()
+const SlotTable& IObject::getSlotTable()
 {
    return slottable;
 }
@@ -101,7 +101,7 @@ const SlotTable& Object::getSlotTable()
 //------------------------------------------------------------------------------
 // slotName2Index() -- returns the index of the slot named 'slotname'
 //------------------------------------------------------------------------------
-int Object::slotName2Index(const char* const slotname) const
+int IObject::slotName2Index(const char* const slotname) const
 {
    int slotindex{};
 
@@ -142,7 +142,7 @@ int Object::slotName2Index(const char* const slotname) const
 //                 true if the slot and object were processed; returns
 //                 false if there was an error.
 //------------------------------------------------------------------------------
-bool Object::setSlotByName(const char* const slotname, Object* const obj)
+bool IObject::setSlotByName(const char* const slotname, IObject* const obj)
 {
     bool ok{};
     if (obj == nullptr) return ok;
@@ -156,7 +156,7 @@ bool Object::setSlotByName(const char* const slotname, Object* const obj)
 //------------------------------------------------------------------------------
 // slotIndex2Name() -- returns the name of the slot at 'slotindex'
 //------------------------------------------------------------------------------
-const char* Object::slotIndex2Name(const int slotindex) const
+const char* IObject::slotIndex2Name(const int slotindex) const
 {
    return slotTable->name(slotindex);
 }
@@ -164,7 +164,7 @@ const char* Object::slotIndex2Name(const int slotindex) const
 //------------------------------------------------------------------------------
 // isValid() -- is this a valid object
 //------------------------------------------------------------------------------
-bool Object::isValid() const
+bool IObject::isValid() const
 {
    return true;
 }
@@ -173,7 +173,7 @@ bool Object::isValid() const
 // Message types
 //------------------------------------------------------------------------------
 
-bool Object::isMessageEnabled(const unsigned short msgType) const
+bool IObject::isMessageEnabled(const unsigned short msgType) const
 {
    bool enabled{};
 
@@ -189,7 +189,7 @@ bool Object::isMessageEnabled(const unsigned short msgType) const
    return enabled;
 }
 
-bool Object::isMessageDisabled(const unsigned short msgType) const
+bool IObject::isMessageDisabled(const unsigned short msgType) const
 {
    bool disabled{};
 
@@ -206,7 +206,7 @@ bool Object::isMessageDisabled(const unsigned short msgType) const
    return disabled;
 }
 
-bool Object::enableMessageTypes(const unsigned short msgTypeBits)
+bool IObject::enableMessageTypes(const unsigned short msgTypeBits)
 {
    // Set the enabled bits
    enbMsgBits |= msgTypeBits;
@@ -217,7 +217,7 @@ bool Object::enableMessageTypes(const unsigned short msgTypeBits)
    return true;
 }
 
-bool Object::disableMessageTypes(const unsigned short msgTypeBits)
+bool IObject::disableMessageTypes(const unsigned short msgTypeBits)
 {
    // Set the disabled bits
    disMsgBits |= msgTypeBits;
@@ -231,7 +231,7 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
 //------------------------------------------------------------------------------
 // return object and class metadata
 //------------------------------------------------------------------------------
-const MetaObject* Object::getMetaObject()
+const MetaObject* IObject::getMetaObject()
 {
    return &metaObject;
 }

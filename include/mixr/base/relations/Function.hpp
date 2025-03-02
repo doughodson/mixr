@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Function_HPP__
 #define __mixr_base_Function_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -24,9 +24,9 @@ class Table;
 //    1) Use the storageFactory() function to create the FStorage object that
 //       will maintain the previous function call values (i.e., integration).
 //------------------------------------------------------------------------------
-class Function : public Object
+class Function : public IObject
 {
-   DECLARE_SUBCLASS(Function, Object)
+   DECLARE_SUBCLASS(Function, IObject)
 
 public:
    Function();

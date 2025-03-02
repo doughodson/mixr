@@ -2,6 +2,7 @@
 #ifndef __mixr_base_MonitorMetrics_HPP__
 #define __mixr_base_MonitorMetrics_HPP__
 
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/colors/IColor.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -32,9 +33,9 @@ class List;
 //------------------------------------------------------------------------------
 // Events: None
 //------------------------------------------------------------------------------
-class MonitorMetrics : public Object
+class MonitorMetrics : public IObject
 {
-    DECLARE_SUBCLASS(MonitorMetrics, Object)
+    DECLARE_SUBCLASS(MonitorMetrics, IObject)
 
 public:
     MonitorMetrics();

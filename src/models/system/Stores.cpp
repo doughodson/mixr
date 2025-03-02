@@ -38,7 +38,7 @@ Stores::Stores()
 
 void Stores::copyData(const Stores& org, const bool)
 {
-   Object::copyData(org);
+   IObject::copyData(org);
 
    ns = org.ns;
    selected = org.selected;

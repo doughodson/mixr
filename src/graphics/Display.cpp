@@ -1317,7 +1317,7 @@ void Display::addColor(base::IColor* cc)
 void Display::addColor(base::Pair* pp)
 {
    if (pp != nullptr && colorTable != nullptr) {
-      base::Object* obj = pp->object();
+      base::IObject* obj = pp->object();
       if (obj->isClassType(typeid(base::IColor))) {
          colorTable->put( pp );
       }

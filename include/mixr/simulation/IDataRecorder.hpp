@@ -38,7 +38,7 @@ public:
    // Record Data function
    bool recordData(
       const unsigned int id,                  // Recorder event Id
-      const base::Object* pObjects[4],        // Sample objects
+      const base::IObject* pObjects[4],       // Sample objects
       const double values[4]                  // Sample values
    );
 
@@ -49,7 +49,7 @@ protected:
    // Implementation of the record data function
    virtual bool recordDataImp(
       const unsigned int id,                  // Recorder event Id
-      const base::Object* pObjects[4],        // Sample objects
+      const base::IObject* pObjects[4],       // Sample objects
       const double values[4]                  // Sample values
    );
 
@@ -67,7 +67,7 @@ private:
 // Record Data function
 inline bool IDataRecorder::recordData(
       const unsigned int id,
-      const base::Object* pObjects[4],
+      const base::IObject* pObjects[4],
       const double values[4]
    )
 {

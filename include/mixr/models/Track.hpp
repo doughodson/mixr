@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Track_HPP__
 #define __mixr_models_common_Track_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -24,9 +24,9 @@ class Player;
 // Factory name: Track
 // Description: Generic Target Track
 //------------------------------------------------------------------------------
-class Track : public base::Object
+class Track : public base::IObject
 {
-    DECLARE_SUBCLASS(Track, base::Object)
+    DECLARE_SUBCLASS(Track, base::IObject)
 
 public:
     enum TypeBits {

@@ -118,7 +118,7 @@ public:
    virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
 
 protected:
    void process(const double dt) override;

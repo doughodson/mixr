@@ -1,5 +1,5 @@
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/models/dynamics/jsbsim/factory.hpp"
 #include "mixr/models/dynamics/jsbsim/JSBSimModel.hpp"
 
@@ -9,9 +9,9 @@ namespace mixr {
 namespace models {
 namespace jsbsim {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-   base::Object* obj {};
+   base::IObject* obj {};
 
    //
    if ( name == JSBSimModel::getFactoryName() ) {      // JSBSim

@@ -79,7 +79,7 @@ const Pair* PairStream::findByName(const char* const slotname) const
 //------------------------------------------------------------------------------
 // findName() -- Finds the name associated with an object.
 //------------------------------------------------------------------------------
-const std::string PairStream::findName(const Object* const obj) const
+const std::string PairStream::findName(const IObject* const obj) const
 {
     std::string p;
     if (obj != nullptr) {

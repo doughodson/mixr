@@ -36,7 +36,7 @@ BEGIN_SLOT_MAP(Datalink)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Datalink)
-    ON_EVENT_OBJ(DATALINK_MESSAGE, onDatalinkMessageEvent, base::Object)
+    ON_EVENT_OBJ(DATALINK_MESSAGE, onDatalinkMessageEvent, base::IObject)
 END_EVENT_HANDLER()
 
 Datalink::Datalink()
@@ -47,8 +47,8 @@ Datalink::Datalink()
 
 void Datalink::initData()
 {
-   inQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
-   outQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
+   inQueue = new base::safe_queue<base::IObject*>(MAX_MESSAGES);
+   outQueue = new base::safe_queue<base::IObject*>(MAX_MESSAGES);
 }
 
 void Datalink::copyData(const Datalink& org, const bool cc)
@@ -263,11 +263,11 @@ void Datalink::reset()
 void Datalink::dynamics(const double)
 {
     //age queues
-    mixr::base::Object* tempInQueue[MAX_MESSAGES]{};
+    mixr::base::IObject* tempInQueue[MAX_MESSAGES]{};
     int numIn{};
     Message* msg{};
     while ((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
-        mixr::base::Object* tempObj{inQueue->get()};
+        mixr::base::IObject* tempObj{inQueue->get()};
         msg = dynamic_cast<Message*>(tempObj);
         if (msg != nullptr) {
             if (base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -286,11 +286,11 @@ void Datalink::dynamics(const double)
         }
     }
 
-    mixr::base::Object* tempOutQueue[MAX_MESSAGES]{};
+    mixr::base::IObject* tempOutQueue[MAX_MESSAGES]{};
     int numOut{};
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
-        mixr::base::Object* tempObj{outQueue->get()};
+        mixr::base::IObject* tempObj{outQueue->get()};
         msg = dynamic_cast<Message*>(tempObj);
         if(msg != nullptr) {
             if(base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -313,7 +313,7 @@ void Datalink::dynamics(const double)
 //------------------------------------------------------------------------------
 // sendMessage() -- send the datalink message out to the world.
 //------------------------------------------------------------------------------
-bool Datalink::sendMessage(base::Object* const msg)
+bool Datalink::sendMessage(base::IObject* const msg)
 {
    bool sent{};
 
@@ -381,7 +381,7 @@ bool Datalink::sendMessage(base::Object* const msg)
 //------------------------------------------------------------------------------
 // receiveMessage() --
 //------------------------------------------------------------------------------
-base::Object* Datalink::receiveMessage()
+base::IObject* Datalink::receiveMessage()
 {
    // Get the next one off of the incoming message queue.
    return inQueue->get();
@@ -390,7 +390,7 @@ base::Object* Datalink::receiveMessage()
 //------------------------------------------------------------------------------
 // queueIncomingMessage() -- Queue up an incoming message
 //------------------------------------------------------------------------------
-bool Datalink::queueIncomingMessage(base::Object* const msg)
+bool Datalink::queueIncomingMessage(base::IObject* const msg)
 {
    // Only queue message if Ownship is local.  Networked player messages are processed on their local systems
    if ((getOwnship() == nullptr) || !(getOwnship()->isLocalPlayer())) {
@@ -407,7 +407,7 @@ bool Datalink::queueIncomingMessage(base::Object* const msg)
       }
 
       for(int i = 0; i < 10; i++) {
-         base::Object* obj{inQueue->get()};
+         base::IObject* obj{inQueue->get()};
          obj->unref();
       } //clear out 10 oldest messages
    }
@@ -421,7 +421,7 @@ bool Datalink::queueIncomingMessage(base::Object* const msg)
 //------------------------------------------------------------------------------
 // queueOutgoingMessage() -- Queue up an out going message --
 //------------------------------------------------------------------------------
-bool Datalink::queueOutgoingMessage(base::Object* const msg)
+bool Datalink::queueOutgoingMessage(base::IObject* const msg)
 {
     //if (isMessageEnabled(MSG_INFO)) {
     //std::cout << getOwnship()->getID() << "\tOutgoing QQueue Size: " << outQueue->entries() << std::endl;
@@ -433,7 +433,7 @@ bool Datalink::queueOutgoingMessage(base::Object* const msg)
         }
 
         for(int i = 0; i < 10; i++) {
-            base::Object* obj{outQueue->get()};
+            base::IObject* obj{outQueue->get()};
             if (obj != nullptr) obj->unref();
         } //clear out 10 oldest messages
     }
@@ -449,7 +449,7 @@ bool Datalink::queueOutgoingMessage(base::Object* const msg)
 //------------------------------------------------------------------------------
 void Datalink::clearQueues()
 {
-   base::Object* msg{inQueue->get()};
+   base::IObject* msg{inQueue->get()};
    while (msg != nullptr) {
       msg->unref();
       msg = inQueue->get();
@@ -467,7 +467,7 @@ void Datalink::clearQueues()
 //------------------------------------------------------------------------------
 
 // DATALINK_MESSAGE event handler
-bool Datalink::onDatalinkMessageEvent(base::Object* const msg)
+bool Datalink::onDatalinkMessageEvent(base::IObject* const msg)
 {
    // Just pass it down to all of our subcomponents
    base::PairStream* subcomponents{getComponents()};

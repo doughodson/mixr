@@ -2,7 +2,7 @@
 #ifndef __mixr_base_String_HPP__
 #define __mixr_base_String_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/base/util/string_utils.hpp"
 
@@ -32,9 +32,9 @@ namespace base {
 //
 // EDL syntax: "strings are enclosed in quotes"
 //------------------------------------------------------------------------------
-class String final: public Object
+class String final: public IObject
 {
-    DECLARE_SUBCLASS(String, Object)
+    DECLARE_SUBCLASS(String, IObject)
 
 public:
     String();

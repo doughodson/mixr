@@ -2,7 +2,7 @@
 #ifndef __mixr_graphics_Clip3D_HPP__
 #define __mixr_graphics_Clip3D_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "Polygon.hpp"
 #include <limits>
 
@@ -25,9 +25,9 @@ namespace graphics {
 //
 // Factory name: Clip3D
 //------------------------------------------------------------------------------
-class Clip3D : public base::Object
+class Clip3D : public base::IObject
 {
-    DECLARE_SUBCLASS(Clip3D, base::Object)
+    DECLARE_SUBCLASS(Clip3D, base::IObject)
 
 public:
    Clip3D();

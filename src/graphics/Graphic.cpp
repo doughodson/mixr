@@ -1209,7 +1209,7 @@ bool Graphic::setSlotVertices(const base::PairStream* const x)
     while (item != nullptr && nv < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
-            const base::Object* obj2{p->object()};
+            const base::IObject* obj2{p->object()};
             const auto msg2{dynamic_cast<const base::List*>(obj2)};
             if (msg2 != nullptr) {
                 float values[3];
@@ -1256,7 +1256,7 @@ bool Graphic::setSlotNormals(const base::PairStream* const x)
     while (item != nullptr && nn < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
-            const base::Object* obj2{p->object()};
+            const base::IObject* obj2{p->object()};
             const auto msg2{dynamic_cast<const base::List*>(obj2)};
             if (msg2 != nullptr) {
                 float values[3]{};
@@ -1304,7 +1304,7 @@ bool Graphic::setSlotTexCoord(const base::PairStream* const x)
     while (item != nullptr && ntc < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
-            const base::Object* obj2{p->object()};
+            const base::IObject* obj2{p->object()};
             const auto msg2{dynamic_cast<const base::List*>(obj2)};
             if (msg2 != nullptr) {
                 float values[2];

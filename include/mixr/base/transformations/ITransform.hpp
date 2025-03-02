@@ -2,7 +2,7 @@
 #ifndef __mixr_base_ITransform_HPP__
 #define __mixr_base_ITransform_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Matrixd"
 
 #include <array>
@@ -28,9 +28,9 @@ class INumber;
 //  w    <INumber>   ! w transform (default: identity)
 //  w    <IAngle>    ! w transform (default: identity)
 //------------------------------------------------------------------------------
-class ITransform : public Object
+class ITransform : public IObject
 {
-   DECLARE_SUBCLASS(ITransform, Object)
+   DECLARE_SUBCLASS(ITransform, IObject)
 
 public:
    ITransform();

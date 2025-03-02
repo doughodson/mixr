@@ -19,10 +19,10 @@ BEGIN_SLOT_MAP(IStateMachine)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(IStateMachine)
-    ON_EVENT_OBJ(ON_ENTRY, onEntry, Object)     // always check w/Object first
+    ON_EVENT_OBJ(ON_ENTRY, onEntry, IObject)     // always check w/IObject first
     ON_EVENT(ON_ENTRY, onEntry)
 
-    ON_EVENT_OBJ(ON_RETURN, onReturn, Object)   // always check w/Object first
+    ON_EVENT_OBJ(ON_RETURN, onReturn, IObject)   // always check w/IObject first
     ON_EVENT(ON_RETURN, onReturn)
 
     ON_EVENT(ON_EXIT, onExit)
@@ -185,7 +185,7 @@ void IStateMachine::step(const double dt)
 // Transition functions -- these control movement between our states
 // -----------------------------------------------------------------
 
-bool IStateMachine::next(Object* const arg)
+bool IStateMachine::next(IObject* const arg)
 {
    bool ok{};
    unsigned short newState{stateTable(state, StateTableCode::FIND_NEXT_STATE)};
@@ -199,7 +199,7 @@ bool IStateMachine::next(Object* const arg)
    return ok;
 }
 
-bool IStateMachine::goTo(const unsigned short newState, Object* const arg)
+bool IStateMachine::goTo(const unsigned short newState, IObject* const arg)
 {
    bool ok{};
    unsigned short test{stateTable(newState, StateTableCode::TEST_STATE)};
@@ -213,7 +213,7 @@ bool IStateMachine::goTo(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool IStateMachine::call(const unsigned short newState, Object* const arg)
+bool IStateMachine::call(const unsigned short newState, IObject* const arg)
 {
    bool ok{};
    if (sp > 0) {
@@ -231,7 +231,7 @@ bool IStateMachine::call(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool IStateMachine::rtn(Object* const arg)
+bool IStateMachine::rtn(IObject* const arg)
 {
    bool ok{};
    if (sp < STACK_SIZE) {
@@ -267,7 +267,7 @@ bool IStateMachine::goToSubstate(const unsigned short newSubstate)
 // between our parent state machine's states.
 // -----------------------------------------------------------------
 
-bool IStateMachine::nextState(Object* const arg)
+bool IStateMachine::nextState(IObject* const arg)
 {
    bool ok{};
    const auto parent = dynamic_cast<IStateMachine*>( container() );
@@ -277,7 +277,7 @@ bool IStateMachine::nextState(Object* const arg)
    return ok;
 }
 
-bool IStateMachine::goToState(const unsigned short newState, Object* const arg)
+bool IStateMachine::goToState(const unsigned short newState, IObject* const arg)
 {
    bool ok{};
    const auto parent = dynamic_cast<IStateMachine*>( container() );
@@ -287,7 +287,7 @@ bool IStateMachine::goToState(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool IStateMachine::callState(const unsigned short newState, Object* const arg)
+bool IStateMachine::callState(const unsigned short newState, IObject* const arg)
 {
    bool ok{};
    const auto parent = dynamic_cast<IStateMachine*>( container() );
@@ -301,7 +301,7 @@ bool IStateMachine::callState(const unsigned short newState, Object* const arg)
    return ok;
 }
 
-bool IStateMachine::rtnState(Object* const arg)
+bool IStateMachine::rtnState(IObject* const arg)
 {
    bool ok{};
    const auto parent = dynamic_cast<IStateMachine*>( container() );
@@ -315,7 +315,7 @@ bool IStateMachine::rtnState(Object* const arg)
 // -----------------------------------------------------------------
 // Default event handlers
 // -----------------------------------------------------------------
-bool IStateMachine::onEntry(Object* const msg)
+bool IStateMachine::onEntry(IObject* const msg)
 {
    nState = INIT_STATE;
    nArg = msg;
@@ -337,7 +337,7 @@ bool IStateMachine::onExit()
    return true;
 }
 
-bool IStateMachine::onReturn(Object* const msg)
+bool IStateMachine::onReturn(IObject* const msg)
 {
    // Try to return to our calling state
    bool ok{rtn(msg)};

@@ -7,7 +7,7 @@
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Object; class String; class Float; class Integer; }
+namespace base { class Boolean; class IObject; class String; class Float; class Integer; }
 namespace graphics {
 class ReformatScanner;
 
@@ -69,7 +69,7 @@ public:
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const char tc) override;
 
-   bool event(const int key, base::Object* const obj = nullptr) override;
+   bool event(const int key, base::IObject* const obj = nullptr) override;
    void updateData(const double dt = 0.0) override;
 
    // event handler methods

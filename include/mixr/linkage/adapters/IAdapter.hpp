@@ -2,7 +2,7 @@
 #ifndef __mixr_linkage_IAdapter_HPP__
 #define __mixr_linkage_IAdapter_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base { class IIoData; class IIoDevice; }
@@ -17,9 +17,9 @@ namespace linkage {
 //              by I/O device objects (AbstractIoDevice).
 //
 //------------------------------------------------------------------------------
-class IAdapter : public base::Object
+class IAdapter : public base::IObject
 {
-   DECLARE_SUBCLASS(IAdapter, base::Object)
+   DECLARE_SUBCLASS(IAdapter, base::IObject)
 
 public:
    IAdapter();

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Identifier_HPP__
 #define __mixr_base_Identifier_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 #include <algorithm>
@@ -25,9 +25,9 @@ namespace base {
 // Notes: Identifier is a 'native' type associated with the EDL parser.  It is
 //        created when a non-quoted sequence of characters are encountered.
 //------------------------------------------------------------------------------
-class Identifier final: public Object
+class Identifier final: public IObject
 {
-   DECLARE_SUBCLASS(Identifier, Object)
+   DECLARE_SUBCLASS(Identifier, IObject)
 
 public:
    Identifier();

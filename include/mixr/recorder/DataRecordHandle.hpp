@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_DataRecordHandle_HPP__
 #define __mixr_recorder_DataRecordHandle_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace recorder {
@@ -14,7 +14,7 @@ namespace pb { class DataRecord; }
 // Description: Handle to a DataRecord, so we can ref count it.
 //
 // Notes:
-// 
+//
 //    1) This handle will 'own' the DataRecord ...
 //
 //    2) When this handle is destroyed, the DataRecord will be deleted.
@@ -23,9 +23,9 @@ namespace pb { class DataRecord; }
 //       of handle2's DataRecord will be copied into handle1's DataRecord.
 //
 //------------------------------------------------------------------------------
-class DataRecordHandle : public base::Object
+class DataRecordHandle : public base::IObject
 {
-    DECLARE_SUBCLASS(DataRecordHandle, base::Object)
+    DECLARE_SUBCLASS(DataRecordHandle, base::IObject)
 
 public:
    DataRecordHandle(pb::DataRecord* const record);

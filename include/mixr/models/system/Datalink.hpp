@@ -42,8 +42,8 @@ class Datalink : public System
 public:
    Datalink();
 
-   virtual bool sendMessage(base::Object* const msg);
-   virtual base::Object* receiveMessage();
+   virtual bool sendMessage(base::IObject* const msg);
+   virtual base::IObject* receiveMessage();
 
    unsigned short getRadioID() const;
 
@@ -67,7 +67,7 @@ public:
    virtual bool setNetworkQueueEnabled(const bool flg);
 
    // For network handler to get to the messages
-   base::safe_queue<base::Object*>* getOutputQueue()                   { return outQueue; }
+   base::safe_queue<base::IObject*>* getOutputQueue()                  { return outQueue; }
 
    TrackManager* getTrackManager()                                     { return trackManager; }
    const TrackManager* getTrackManager() const                         { return trackManager; }
@@ -77,14 +77,14 @@ public:
    bool setTrackManagerName(const base::String* const);
 
    // Event handler(s)
-   virtual bool onDatalinkMessageEvent(base::Object* const);
+   virtual bool onDatalinkMessageEvent(base::IObject* const);
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
    void reset() override;
 
 protected:
-   virtual bool queueIncomingMessage(base::Object* const);  // Queue up an incoming message
-   virtual bool queueOutgoingMessage(base::Object* const);  // Queue up an outgoing message
+   virtual bool queueIncomingMessage(base::IObject* const);  // Queue up an incoming message
+   virtual bool queueOutgoingMessage(base::IObject* const);  // Queue up an outgoing message
    virtual void clearQueues(); // Clear all queues
 
    void dynamics(const double dt) override;
@@ -96,8 +96,8 @@ private:
 
    static const int MAX_MESSAGES{1000};    // Max number of messages in queues
 
-   base::safe_queue<base::Object*>* inQueue {};   // Received message queue
-   base::safe_queue<base::Object*>* outQueue {};  // Queue for messages going out over the network/DIS
+   base::safe_queue<base::IObject*>* inQueue {};  // Received message queue
+   base::safe_queue<base::IObject*>* outQueue {}; // Queue for messages going out over the network/DIS
    double noRadioMaxRange {5000.0};               // Max range of our datalink (NM)
 
    const base::String* radioName {};     // Name of our radio

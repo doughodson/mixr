@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Locus_HPP__
 #define __mixr_base_Locus_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -18,9 +18,9 @@ namespace base {
 // Factory name: Locus
 // Slots: none
 //------------------------------------------------------------------------------
-class Locus : public Object
+class Locus : public IObject
 {
-    DECLARE_SUBCLASS(Locus, Object)
+    DECLARE_SUBCLASS(Locus, IObject)
 
 public:
     static const int MAX_SIZE{2048};     // Max size of the data array

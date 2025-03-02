@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_IScalerFunc_HPP__
 #define __mixr_linearsystem_IScalerFunc_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -36,9 +36,9 @@ class INumber;
 //    y0    <INumber>    Initial (previous) output value: Y(0) (default: 0)
 //
 //------------------------------------------------------------------------------
-class IScalerFunc : public Object
+class IScalerFunc : public IObject
 {
-   DECLARE_SUBCLASS(IScalerFunc, Object)
+   DECLARE_SUBCLASS(IScalerFunc, IObject)
 
 public:
    IScalerFunc();

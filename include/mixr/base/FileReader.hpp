@@ -2,7 +2,7 @@
 #ifndef __mixr_base_FileReader_HPP__
 #define __mixr_base_FileReader_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <string>
 
@@ -36,9 +36,9 @@ class String;
 //
 //  4) The file name and path names are limited to 255 characters.
 //------------------------------------------------------------------------------
-class FileReader : public Object
+class FileReader : public IObject
 {
-   DECLARE_SUBCLASS(FileReader, Object)
+   DECLARE_SUBCLASS(FileReader, IObject)
 
 public:
    FileReader();

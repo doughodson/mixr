@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Statistic_HPP__
 #define __mixr_base_Statistic_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include <cmath>
 #include <limits>
@@ -23,9 +23,9 @@ namespace base {
 // Factory name: Statistic
 // Slots: none
 //------------------------------------------------------------------------------
-class Statistic : public Object
+class Statistic : public IObject
 {
-    DECLARE_SUBCLASS(Statistic, Object)
+    DECLARE_SUBCLASS(Statistic, IObject)
 
 public:
    Statistic();

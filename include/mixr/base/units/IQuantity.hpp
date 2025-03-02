@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IQuantity_HPP__
 #define __mixr_base_IQuantity_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -22,9 +22,9 @@ class INumber;
 //
 // Factory name: IQuantity
 //------------------------------------------------------------------------------
-class IQuantity : public Object
+class IQuantity : public IObject
 {
-   DECLARE_SUBCLASS(IQuantity, Object)
+   DECLARE_SUBCLASS(IQuantity, IObject)
 
 public:
    explicit IQuantity();

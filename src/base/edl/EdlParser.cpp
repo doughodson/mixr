@@ -75,7 +75,7 @@
 #include <fstream>
 
 #include "mixr/base/edl_parser.hpp"
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -86,7 +86,7 @@
 #include "mixr/base/List.hpp"
 #include "EdlScanner.hpp"
 
-static mixr::base::Object* result{};          // result of all our work (i.e., an Object)
+static mixr::base::IObject* result{};         // result of all our work (i.e., an IObject)
 static mixr::base::EdlScanner* scanner{};     // EDL scanner
 static mixr::base::factory_func factory{};    // factory function
 static int err_count{};                       // error count
@@ -119,9 +119,9 @@ inline void yyerror(const char* s)
 // parse() -- returns an object with factory 'name' with its slots set to
 //            values in 'arg_list'
 //------------------------------------------------------------------------------
-static mixr::base::Object* parse(const std::string& name, mixr::base::PairStream* arg_list)
+static mixr::base::IObject* parse(const std::string& name, mixr::base::PairStream* arg_list)
 {
-    mixr::base::Object* obj{};
+    mixr::base::IObject* obj{};
 
     if (factory != nullptr) {
 
@@ -1235,7 +1235,7 @@ yyreduce:
 
   case 9: /* form: '{' arglist '}'  */
 #line 176 "edl_parser.y"
-                                    { (yyval.ovalp) = (mixr::base::Object*) (yyvsp[-1].svalp); }
+                                    { (yyval.ovalp) = (mixr::base::IObject*) (yyvsp[-1].svalp); }
 #line 1240 "EdlParser.cpp"
     break;
 
@@ -1509,7 +1509,7 @@ namespace base {
 // Returns an Object* that was constructed from parsing an EDL file.
 // factory is the name of the Object creation function
 //------------------------------------------------------------------------------
-Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
+IObject* edl_parser(const std::string& filename, factory_func f, int* num_errors)
 {
     // set the global file scope static variables
     factory = f;
@@ -1522,7 +1522,7 @@ Object* edl_parser(const std::string& filename, factory_func f, int* num_errors)
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
-    Object* obj{};
+    IObject* obj{};
     if (yyparse() == 0) {    // returns 0 on success
         obj = result;
     }

@@ -176,7 +176,7 @@ OBJS =  \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \
-	Object.o \
+	IObject.o \
 	Pair.o \
 	PairStream.o \
 	SlotTable.o \

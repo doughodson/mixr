@@ -60,7 +60,7 @@ public:
     bool setRotationsDeg(const double x, const double y = 0, const double z = 0);
 
     void draw() override;
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    bool event(const int event, base::IObject* const obj = nullptr) override;
 
 private:
     // Event callbacks

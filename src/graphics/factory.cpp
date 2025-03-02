@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/graphics/Graphic.hpp"
 #include "mixr/graphics/Display.hpp"
@@ -44,9 +44,9 @@
 namespace mixr {
 namespace graphics {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj{};
+    base::IObject* obj{};
 
     // general graphic classes
     if ( name == Graphic::getFactoryName() ) {

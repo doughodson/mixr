@@ -821,7 +821,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
             bool validFlg{};
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
-                const base::Object* obj2{p->object()};
+                const base::IObject* obj2{p->object()};
                 const auto msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
                     double values[2]{};

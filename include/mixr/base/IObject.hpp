@@ -23,10 +23,10 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: Object
-// Description: Top-level base class for all framework objects.
+// Class: IObject
+// Description: Top-level interface for all framework objects.
 //
-//    Provides a common base class for type checking and support for factory names,
+//    Provides a common interface for type checking and support for factory names,
 //    slot tables, exceptions and reference counting.  Most of this needs to
 //    be implemented by each derived class, and the macros in 'macros.hpp' provide
 //    an easy way to do this.
@@ -92,7 +92,7 @@ namespace base {
 //       Foo::~Foo()
 //          Class destructor provided by the macros and uses deleteData().
 //
-//       Object* clone()
+//       IObject* clone()
 //          Returns a copy of this object.  Provided by the macros and uses
 //          the copy constructor.
 //
@@ -224,13 +224,13 @@ namespace base {
 //
 // Exception:
 //    Exception
-//       Object's general exception class which returns a description.
+//       IObject's general exception class which returns a description.
 //       The default description is "Unknown".
 //
 //
 // Variables:
 //    protected: const SlotTable* slotTable
-//       Object slot table.  The Object constructor sets this variable to zero.
+//       IObject slot table.  The IObject constructor sets this variable to zero.
 //       Class constructors must set this variable to their <class>::slottable.
 //       (See macro STANDARD_CONSTRUCTOR())
 //
@@ -247,19 +247,19 @@ namespace base {
 //    to spot potential memory leaks.
 //
 //------------------------------------------------------------------------------
-class Object : public IReferenced
+class IObject : public IReferenced
 {
    // -------------------------------------------------------------------------
    // Standard object stuff --
    //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.hpp
    // -------------------------------------------------------------------------
-   public: Object();
-   public: Object(const Object& org);
-   public: Object& operator=(const Object& org);
-   public: virtual Object* clone() const =0;
-   public: virtual ~Object();
+   public: IObject();
+   public: IObject(const IObject& org);
+   public: IObject& operator=(const IObject& org);
+   public: virtual IObject* clone() const =0;
+   public: virtual ~IObject();
 
-   protected: void copyData(const Object& org, const bool cc = false);
+   protected: void copyData(const IObject& org, const bool cc = false);
    protected: void deleteData();
 
    // helper methods
@@ -274,8 +274,8 @@ class Object : public IReferenced
 
    // slot table functions
    public: static const SlotTable& getSlotTable();
-   protected: virtual bool setSlotByIndex(const int slotindex, Object* const obj);
-   public: bool setSlotByName(const char* const slotname, Object* const obj);
+   protected: virtual bool setSlotByIndex(const int slotindex, IObject* const obj);
+   public: bool setSlotByName(const char* const slotname, IObject* const obj);
    public: const char* slotIndex2Name(const int slotindex) const;
    public: int slotName2Index(const char* const slotname) const;
 

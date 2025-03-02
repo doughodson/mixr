@@ -54,9 +54,9 @@ class Player;
 //       Z+ is the cross product of X into Y
 //
 //------------------------------------------------------------------------------
-class Tdb : public base::Object
+class Tdb : public base::IObject
 {
-   DECLARE_SUBCLASS(Tdb, base::Object)
+   DECLARE_SUBCLASS(Tdb, base::IObject)
 
 public:
    Tdb() = delete;

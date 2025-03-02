@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IComponent_HPP__
 #define __mixr_base_IComponent_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 #include <string>
@@ -99,9 +99,9 @@ class String;
 //    this Component class.  'Key' events (see eventTokens.hpp) that are not processed by
 //    this Component class are passed up to the container object.
 //------------------------------------------------------------------------------
-class IComponent : public Object
+class IComponent : public IObject
 {
-   DECLARE_SUBCLASS(IComponent, Object)
+   DECLARE_SUBCLASS(IComponent, IObject)
 
 public:
    IComponent();
@@ -249,19 +249,19 @@ public:
       public:  void empty();
       public:  IComponent* getObject(IComponent* p, const char* const id, const int n = 0);
       public:  void setObject(IComponent* p);
-      public:  Object* getValue(const int);
-      public:  Object* getValue(const float);
-      public:  Object* getValue(const double);
-      public:  Object* getValue(const char* const);
-      public:  Object* getValue(const bool);
+      public:  IObject* getValue(const int);
+      public:  IObject* getValue(const float);
+      public:  IObject* getValue(const double);
+      public:  IObject* getValue(const char* const);
+      public:  IObject* getValue(const bool);
       private: IComponent* obj{};   // Object to send to
-      private: Object* past{};      // Old value
+      private: IObject* past{};     // Old value
    };
 
    // sends the 'event' token with an optional argument 'obj' to this component.
    // Returns true if the 'event' has received and processed this component.
    // Typically implemented using the event macros (see above).
-   virtual bool event(const int event, Object* const obj = nullptr);
+   virtual bool event(const int event, IObject* const obj = nullptr);
 
    // send the 'event' message to our component named 'id' with an optional
    // argument, 'value',  The SendData structure maintains the n-1 value
@@ -273,7 +273,7 @@ public:
    bool send(const char* const id, const int event, const double value, SendData&);
    bool send(const char* const id, const int event, const char* const value, SendData&);
    bool send(const char* const id, const int event, const bool value, SendData&);
-   bool send(const char* const id, const int event, Object* const value, SendData&);
+   bool send(const char* const id, const int event, IObject* const value, SendData&);
 
    // sends the 'event' message to 'n' components with 'n' arguments from the
    // 'value' arrays.  This requires an array of 'n' SendData structures to
@@ -287,7 +287,7 @@ public:
    bool send(const char* const id, const int event, const double value[], SendData sd[], const int n);
    bool send(const char* const id, const int event, const char* const value[], SendData sd[], const int n);
    bool send(const char* const id, const int event, const bool value[], SendData sd[], const int n);
-   bool send(const char* const id, const int event, Object* const value[], SendData sd[], const int n);
+   bool send(const char* const id, const int event, IObject* const value[], SendData sd[], const int n);
 
    //-----------------------------------------------------------------------------
    // time-critical statistics (managed by the tcFrame() function)
@@ -324,7 +324,7 @@ protected:
    // Component selection interface
    //-----------------------------------------------------------------------------
 
-   virtual bool setSelectionName(const Object* const);   // name (or number) of component to select
+   virtual bool setSelectionName(const IObject* const);   // name (or number) of component to select
 
    // selects a component for processing.  By default, all of our components
    // are called by updateTC() and updateData().  If a component is selected,
@@ -366,7 +366,7 @@ private:
    IComponent* containerPtr{};         // We are a component of this container
 
    IComponent* selected{};             // Selected child (process only this one)
-   Object* selection{};                // Name of selected child
+   IObject* selection{};               // Name of selected child
 
    Statistic* timingStats{};           // Timing statistics
    bool pts{};                         // Print timing statistics

@@ -2,7 +2,7 @@
 #ifndef __mixr_base_numeric_Number_HPP__
 #define __mixr_base_numeric_Number_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -17,9 +17,9 @@ namespace base {
 // Factory name: INumber
 // Slots: none
 //------------------------------------------------------------------------------
-class INumber : public Object
+class INumber : public IObject
 {
-   DECLARE_SUBCLASS(INumber, Object)
+   DECLARE_SUBCLASS(INumber, IObject)
 
 public:
    explicit INumber()                       { STANDARD_CONSTRUCTOR() }

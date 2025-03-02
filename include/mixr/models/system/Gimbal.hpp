@@ -270,7 +270,7 @@ public:  // Public section
    static void limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul);
    static void limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d& ul);
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   bool event(const int event, base::IObject* const obj = nullptr) override;
    void reset() override;
 
 protected:

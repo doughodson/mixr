@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/IPeriodicThread.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -20,7 +20,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 unsigned long IPeriodicThread::mainThreadFunc()
 {
-   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::mainLoopFunc(): Parent = " << getParent() << std::endl;
       std::cout << "Thread(" << this << ")::mainLoopFunc(): Starting main loop ..." << std::endl;
    }
@@ -72,7 +72,7 @@ unsigned long IPeriodicThread::mainThreadFunc()
 
    pthread_mutex_unlock(&mutex);
 
-   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "Thread(" << this << ")::mainLoopFunc(): ... end of main loop." << std::endl;
    }
 

@@ -7,8 +7,8 @@
 namespace mixr {
 namespace base {
 
-class Object;
-Object* factory(const std::string&);
+class IObject;
+IObject* factory(const std::string&);
 }
 }
 

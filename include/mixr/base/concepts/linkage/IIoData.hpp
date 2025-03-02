@@ -2,7 +2,7 @@
 #ifndef __mixr_base_IIoData_HPP__
 #define __mixr_base_IIoData_HPP__
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
 namespace base {
@@ -32,9 +32,9 @@ namespace base {
 //
 //    4) All functions return true if successful.
 //------------------------------------------------------------------------------
-class IIoData : public Object
+class IIoData : public IObject
 {
-   DECLARE_SUBCLASS(IIoData, Object)
+   DECLARE_SUBCLASS(IIoData, IObject)
 
 public:
    IIoData();

@@ -1,7 +1,7 @@
 
 #include "mixr/terrain/factory.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 
 #include "mixr/terrain/QuadMap.hpp"
 #include "mixr/terrain/ded/DedFile.hpp"
@@ -13,9 +13,9 @@
 namespace mixr {
 namespace terrain {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-    base::Object* obj {};
+    base::IObject* obj {};
 
     if ( name == QuadMap::getFactoryName() ) {
         obj = new QuadMap();

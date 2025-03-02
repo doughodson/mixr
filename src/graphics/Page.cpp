@@ -199,7 +199,7 @@ base::Pair* Page::findBySelectName(const GLuint name)
 //------------------------------------------------------------------------------
 // newSubpage() -- change subpages
 //------------------------------------------------------------------------------
-bool Page::newSubpage(Page* const np1, Page* theCaller, base::Object* theArg)
+bool Page::newSubpage(Page* const np1, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    if (np1 != nullptr) {
@@ -216,7 +216,7 @@ bool Page::newSubpage(Page* const np1, Page* theCaller, base::Object* theArg)
 //------------------------------------------------------------------------------
 // newSubpage() -- change subpages by name; returns true of page was found
 //------------------------------------------------------------------------------
-bool Page::newSubpage(const std::string& name, Page* theCaller, base::Object* theArg)
+bool Page::newSubpage(const std::string& name, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    base::Pair* p{};
@@ -246,7 +246,7 @@ bool Page::clearSubpageStack()
 //------------------------------------------------------------------------------
 // pushSubpage() -- push the current subpage and change to new subpage 'name'.
 //------------------------------------------------------------------------------
-bool Page::pushSubpage(const std::string& name, Page* theCaller, base::Object* theArg)
+bool Page::pushSubpage(const std::string& name, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    if (subpageSP > 0) {
@@ -269,7 +269,7 @@ bool Page::pushSubpage(const std::string& name, Page* theCaller, base::Object* t
 //------------------------------------------------------------------------------
 // popSubpage() -- pop to the previous subpage on the stack
 //------------------------------------------------------------------------------
-bool Page::popSubpage(Page* theCaller, base::Object* theArg)
+bool Page::popSubpage(Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    if (subpageSP < SUBPAGE_STACK_SIZE) {
@@ -288,7 +288,7 @@ bool Page::popSubpage(Page* theCaller, base::Object* theArg)
 //------------------------------------------------------------------------------
 
 // new page by pointer
-bool Page::newPage(Page* const newPage, Page* theCaller, base::Object* theArg)
+bool Page::newPage(Page* const newPage, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());
@@ -297,7 +297,7 @@ bool Page::newPage(Page* const newPage, Page* theCaller, base::Object* theArg)
 }
 
 // new page by name
-bool Page::newPage(const std::string& name, Page* theCaller, base::Object* theArg)
+bool Page::newPage(const std::string& name, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());
@@ -308,7 +308,7 @@ bool Page::newPage(const std::string& name, Page* theCaller, base::Object* theAr
 }
 
 // push new page
-bool Page::pushPage(const std::string& name, Page* theCaller, base::Object* theArg)
+bool Page::pushPage(const std::string& name, Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());
@@ -317,7 +317,7 @@ bool Page::pushPage(const std::string& name, Page* theCaller, base::Object* theA
 }
 
 // pop back to previous page
-bool Page::popPage(Page* theCaller, base::Object* theArg)
+bool Page::popPage(Page* theCaller, base::IObject* theArg)
 {
    bool ok{};
    const auto cc = dynamic_cast<Page*>(container());

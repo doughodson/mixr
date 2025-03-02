@@ -1,5 +1,5 @@
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/graphics/fonts/ftgl/factory.hpp"
 
 // ftgl fonts
@@ -17,9 +17,9 @@ namespace mixr {
 namespace graphics {
 namespace ftgl {
 
-base::Object* factory(const std::string& name)
+base::IObject* factory(const std::string& name)
 {
-   base::Object* obj {};
+   base::IObject* obj {};
 
    //
    if ( name == FtglBitmapFont::getFactoryName() ) {
