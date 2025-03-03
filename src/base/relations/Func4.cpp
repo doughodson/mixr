@@ -14,7 +14,7 @@ EMPTY_CONSTRUCTOR(Func4)
 EMPTY_COPYDATA(Func4)
 EMPTY_DELETEDATA(Func4)
 
-double Func4::f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s) const
+double Func4::f(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const s) const
 {
    double value {};
 

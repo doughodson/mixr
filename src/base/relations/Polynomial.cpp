@@ -37,7 +37,7 @@ void Polynomial::deleteData()
 //------------------------------------------------------------------------------
 // The polynomial function
 //------------------------------------------------------------------------------
-double Polynomial::f(const double x, FStorage* const) const
+double Polynomial::f(const double x, IFStorage* const) const
 {
    double result {};
    if (m > 0) {

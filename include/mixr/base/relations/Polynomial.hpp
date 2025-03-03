@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class List;
 
 //------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ public:
    int getDegree() const                  { return (m-1); }
    const double* getCoefficients() const  { return a; }
 
-   double f(const double x, FStorage* const s = nullptr) const override;
+   double f(const double x, IFStorage* const s = nullptr) const override;
 
 protected:
    bool setCoefficients(const double* const coeff, const int n);

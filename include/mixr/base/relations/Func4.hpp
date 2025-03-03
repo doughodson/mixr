@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class ITable;
 
 //------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ class Func4 : public IFunction
 public:
    Func4();
 
-   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const;
+   virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const s = nullptr) const;
 
 protected:
    // slot table helper methods

@@ -25,7 +25,7 @@ class Func1 : public IFunction
 public:
    Func1();
 
-   virtual double f(const double iv1, FStorage* const s = nullptr) const;
+   virtual double f(const double iv1, IFStorage* const s = nullptr) const;
 
 protected:
    // slot table helper methods
