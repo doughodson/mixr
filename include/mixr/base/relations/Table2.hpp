@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class List;
 
 //------------------------------------------------------------------------------
@@ -39,12 +39,12 @@ public:
    double getMaxY() const;    // Max value of the Y (iv2) breakpoints
 
    // 2D Linear Function Interpolator: returns the result of f(x,y) using linear interpolation
-   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, IFStorage* const s = nullptr) const;
 
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, IFStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;

@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class List;
 
 //------------------------------------------------------------------------------
@@ -41,15 +41,15 @@ public:
    double getMinV() const;    // Min value of the V (iv5) breakpoints
    double getMaxV() const;    // Max value of the V (iv5) breakpoints
 
-   virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, IFStorage* const s = nullptr) const;
 
    // Loads the V (iv5) breakpoints
    virtual bool setVBreakpoints5(const List* const bkpts);
 
-   double lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, const double iv3, IFStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, IFStorage* const s = nullptr) const override;
+   double lfi(const double iv1, IFStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;

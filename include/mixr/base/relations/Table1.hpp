@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class List;
 class Number;
 
@@ -39,7 +39,7 @@ public:
    double getMaxX() const;    // Max value of the X (iv1) breakpoints
 
    // 1D Linear Function Interpolator: returns the result of f(x) using linear interpolation
-   virtual double lfi(const double iv1, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, IFStorage* const s = nullptr) const;
 
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);

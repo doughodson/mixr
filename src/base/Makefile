@@ -56,7 +56,7 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
-	relations/FStorage.o \
+	relations/IFStorage.o \
 	relations/Func1.o \
 	relations/Func2.o \
 	relations/Func3.o \

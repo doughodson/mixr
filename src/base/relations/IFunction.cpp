@@ -2,7 +2,7 @@
 #include "mixr/base/relations/IFunction.hpp"
 
 #include "mixr/base/relations/ITable.hpp"
-#include "mixr/base/relations/FStorage.hpp"
+#include "mixr/base/relations/IFStorage.hpp"
 #include "mixr/base/List.hpp"
 
 #include <iostream>
@@ -50,15 +50,15 @@ void IFunction::deleteData()
 //------------------------------------------------------------------------------
 // Storage factory
 //------------------------------------------------------------------------------
-FStorage* IFunction::storageFactory() const
+IFStorage* IFunction::storageFactory() const
 {
    // Since no derived class handled this ...
    if (table != nullptr) {
       // then we're going to let the table handle it, if any
       return table->storageFactory();
    } else {
-      // or we're just going to return a standard FStorage object.
-      return new FStorage();
+      // or we're just going to return a standard IFStorage object.
+      return new IFStorage();
    }
 }
 

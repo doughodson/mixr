@@ -1,7 +1,7 @@
 
 #include "mixr/base/relations/ITable.hpp"
 
-#include "mixr/base/relations/FStorage.hpp"
+#include "mixr/base/relations/IFStorage.hpp"
 #include "mixr/base/relations/TableStorage.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
@@ -109,7 +109,7 @@ bool ITable::isValid() const
 //------------------------------------------------------------------------------
 // Storage factory
 //------------------------------------------------------------------------------
-FStorage* ITable::storageFactory() const
+IFStorage* ITable::storageFactory() const
 {
    return new TableStorage();
 }

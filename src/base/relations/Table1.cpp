@@ -126,7 +126,7 @@ double Table1::getMaxX() const
 //------------------------------------------------------------------------------
 //  1D LFI
 //------------------------------------------------------------------------------
-double Table1::lfi(const double iv1, FStorage* const f) const
+double Table1::lfi(const double iv1, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 

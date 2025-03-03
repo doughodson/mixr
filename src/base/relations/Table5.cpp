@@ -138,7 +138,7 @@ double Table5::getMaxV() const
 //------------------------------------------------------------------------------
 //  5D LFIs
 //------------------------------------------------------------------------------
-double Table5::lfi(const double iv1, FStorage* const f) const
+double Table5::lfi(const double iv1, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -164,7 +164,7 @@ double Table5::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -189,7 +189,7 @@ double Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
    }
 }
 
-double Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -213,7 +213,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, FStorag
    }
 }
 
-double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -236,7 +236,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, const d
    }
 }
 
-double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const f) const
+double Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 

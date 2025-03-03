@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class Boolean;
-class FStorage;
+class IFStorage;
 class List;
 
 //------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ public:
    bool setExtrapolationEnabled(const bool);
 
    // Data storage factory (pre-ref()'d)
-   virtual FStorage* storageFactory() const;
+   virtual IFStorage* storageFactory() const;
 
    bool isValid() const override;
 

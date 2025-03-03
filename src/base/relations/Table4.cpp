@@ -150,7 +150,7 @@ double Table4::getMaxW() const
 //------------------------------------------------------------------------------
 //  4D LFIs
 //------------------------------------------------------------------------------
-double Table4::lfi(const double iv1, FStorage* const f) const
+double Table4::lfi(const double iv1, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -174,7 +174,7 @@ double Table4::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -196,7 +196,7 @@ double Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
    }
 }
 
-double Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, const double iv3, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -217,7 +217,7 @@ double Table4::lfi(const double iv1, const double iv2, const double iv3, FStorag
    }
 }
 
-double Table4::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
+double Table4::lfi(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 

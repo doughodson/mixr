@@ -133,7 +133,7 @@ double Table2::getMaxY() const
 //------------------------------------------------------------------------------
 //  2D LFIs
 //------------------------------------------------------------------------------
-double Table2::lfi(const double iv1, FStorage* const f) const
+double Table2::lfi(const double iv1, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -152,7 +152,7 @@ double Table2::lfi(const double iv1, FStorage* const f) const
    }
 }
 
-double Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
+double Table2::lfi(const double iv1, const double iv2, IFStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 

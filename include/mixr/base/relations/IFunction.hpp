@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base {
-class FStorage;
+class IFStorage;
 class ITable;
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ public:
    IFunction();
 
    // data storage factory (pre-ref()'d)
-   virtual FStorage* storageFactory() const;    // Data storage factory (pre-ref()'d)
+   virtual IFStorage* storageFactory() const;    // Data storage factory (pre-ref()'d)
 
 protected:
    const ITable* getTable() const {  return table; }
