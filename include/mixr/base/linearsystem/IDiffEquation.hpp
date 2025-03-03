@@ -10,8 +10,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class:  IDiffEquation
 //
-// Description: Abstract difference equation
-// Description: Base class for various Discrete z-domain Transfer Functions.  Core
+// Description: Interface for discrete z-domain transfer functions.  Core
 //              engine is a difference equation that has its coefficients initialized
 //              by the various derived classes.
 //

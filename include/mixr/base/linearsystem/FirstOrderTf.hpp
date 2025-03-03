@@ -9,7 +9,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  FirstOrderTf
-// Base class:  base::Object -> ScalerFunc-> DiffEquation -> FirstOrderTf
+// Base class:  base::IObject -> ScalerFunc-> DiffEquation -> FirstOrderTf
 //
 // Description: Models a first order continuous transfer function in the discrete
 //              z-domain using a difference equation with Tustin coefficients.
