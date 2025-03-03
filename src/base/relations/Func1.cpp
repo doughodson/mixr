@@ -29,7 +29,7 @@ double Func1::f(const double iv1, FStorage* const s) const
    return value;
 }
 
-bool Func1::setSlotLfiTable(const Table* const msg)
+bool Func1::setSlotLfiTable(const ITable* const msg)
 {
    bool ok {};
    if (msg == nullptr) {

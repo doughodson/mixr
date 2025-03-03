@@ -1,5 +1,5 @@
 
-#include "mixr/base/relations/Table.hpp"
+#include "mixr/base/relations/ITable.hpp"
 
 #include "mixr/base/relations/FStorage.hpp"
 #include "mixr/base/relations/TableStorage.hpp"
@@ -12,24 +12,24 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Table, "Table")
+IMPLEMENT_PARTIAL_SUBCLASS(ITable, "ITable")
 
-BEGIN_SLOTTABLE(Table)
+BEGIN_SLOTTABLE(ITable)
     "data",          // Data table
     "extrapolate",   // Extrapolate beyond data
-END_SLOTTABLE(Table)
+END_SLOTTABLE(ITable)
 
-BEGIN_SLOT_MAP(Table)
+BEGIN_SLOT_MAP(ITable)
     ON_SLOT(1, setSlotDataTable, List)
     ON_SLOT(2, setSlotExtrapolationEnabled, Boolean)
 END_SLOT_MAP()
 
-Table::Table()
+ITable::ITable()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Table::Table(const double* dtbl, const unsigned int dsize)
+ITable::ITable(const double* dtbl, const unsigned int dsize)
 {
     STANDARD_CONSTRUCTOR()
     if (dtbl != nullptr && dsize > 0) {   // copy the data table
@@ -43,7 +43,7 @@ Table::Table(const double* dtbl, const unsigned int dsize)
     }
 }
 
-Table::Table(const Table& org) : valid(false), extFlg(false)
+ITable::ITable(const ITable& org) : valid(false), extFlg(false)
 {
     STANDARD_CONSTRUCTOR()
     dtable = nullptr;
@@ -51,23 +51,23 @@ Table::Table(const Table& org) : valid(false), extFlg(false)
     copyData(org,true);
 }
 
-Table::~Table()
+ITable::~ITable()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Table& Table::operator=(const Table& org)
+ITable& ITable::operator=(const ITable& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
 
-Table* Table::clone() const
+ITable* ITable::clone() const
 {
     return nullptr;
 }
 
-void Table::copyData(const Table& org, const bool cc)
+void ITable::copyData(const ITable& org, const bool cc)
 {
     BaseClass::copyData(org);
 
@@ -91,7 +91,7 @@ void Table::copyData(const Table& org, const bool cc)
     extFlg = org.extFlg;
 }
 
-void Table::deleteData()
+void ITable::deleteData()
 {
     if (dtable != nullptr) delete[] dtable;
     dtable = nullptr;
@@ -101,7 +101,7 @@ void Table::deleteData()
 //------------------------------------------------------------------------------
 // isValid() -- Returns true if the data table and breakpoint tables are valid.
 //------------------------------------------------------------------------------
-bool Table::isValid() const
+bool ITable::isValid() const
 {
    return (nd >= 1) && (dtable != nullptr) && (tableSize() == nd) && BaseClass::isValid();
 }
@@ -109,7 +109,7 @@ bool Table::isValid() const
 //------------------------------------------------------------------------------
 // Storage factory
 //------------------------------------------------------------------------------
-FStorage* Table::storageFactory() const
+FStorage* ITable::storageFactory() const
 {
    return new TableStorage();
 }
@@ -117,13 +117,13 @@ FStorage* Table::storageFactory() const
 //------------------------------------------------------------------------------
 // setExtrapolationEnabled() -- set the extrapolation enabled flag
 //------------------------------------------------------------------------------
-bool Table::setExtrapolationEnabled(const bool flg)
+bool ITable::setExtrapolationEnabled(const bool flg)
 {
    extFlg = flg;
    return true;
 }
 
-bool Table::setSlotExtrapolationEnabled(const Boolean* const msg)
+bool ITable::setSlotExtrapolationEnabled(const Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -135,7 +135,7 @@ bool Table::setSlotExtrapolationEnabled(const Boolean* const msg)
 //------------------------------------------------------------------------------
 // findMinMax() -- find the minimum and maximum values of the table
 //------------------------------------------------------------------------------
-void Table::findMinMax(double* minValue, double* maxValue) const
+void ITable::findMinMax(double* minValue, double* maxValue) const
 {
     if (nd > 0) {
         double minv {dtable[0]};
@@ -153,7 +153,7 @@ void Table::findMinMax(double* minValue, double* maxValue) const
 //------------------------------------------------------------------------------
 // loadVector() --
 //------------------------------------------------------------------------------
-bool Table::loadVector(const List& list, double** table, unsigned int* nn)
+bool ITable::loadVector(const List& list, double** table, unsigned int* nn)
 {
     const std::size_t n{list.entries()};
     if (n <= 0) return false;
@@ -176,7 +176,7 @@ bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 //------------------------------------------------------------------------------
 //  setDataTable() -- for Table
 //------------------------------------------------------------------------------
-bool Table::setDataTable(const List* const sdtobj)
+bool ITable::setDataTable(const List* const sdtobj)
 {
     bool ok {true};
     if (sdtobj != nullptr) {

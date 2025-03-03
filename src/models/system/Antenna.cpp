@@ -45,7 +45,7 @@ BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(1,  setSlotPolarization,      base::Identifier)
     ON_SLOT(2,  setSlotThreshold,         base::IPower)
     ON_SLOT(3,  setSlotGain,              base::INumber)
-    ON_SLOT(4,  setSlotGainPattern,       base::Function)
+    ON_SLOT(4,  setSlotGainPattern,       base::IFunction)
     ON_SLOT(5,  setSlotGainPatternDeg,    base::Boolean)
     ON_SLOT(6,  setSlotRecycleFlg,        base::Boolean)
     ON_SLOT(7,  setSlotBeamWidth,         base::IAngle)      // Check for base::Angle before base::Number
@@ -94,7 +94,7 @@ void Antenna::copyData(const Antenna& org, const bool)
    gainPatternDeg = org.gainPatternDeg;
 
    if (org.gainPattern != nullptr) {
-      base::Function* copy{org.gainPattern->clone()};
+      base::IFunction* copy{org.gainPattern->clone()};
       setSlotGainPattern( copy );
       copy->unref();
    } else {
@@ -255,7 +255,7 @@ bool Antenna::setGain(const base::INumber* const g)
 //------------------------------------------------------------------------------
 // setSlotGainPattern() -- sets our gain pattern
 //------------------------------------------------------------------------------
-bool Antenna::setGainPattern(base::Function* const tbl)
+bool Antenna::setGainPattern(base::IFunction* const tbl)
 {
     bool ok{true};
     if (gainPattern != nullptr) gainPattern->unref();

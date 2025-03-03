@@ -2,7 +2,7 @@
 #ifndef __mixr_base_Table1_HPP__
 #define __mixr_base_Table1_HPP__
 
-#include "mixr/base/relations/Table.hpp"
+#include "mixr/base/relations/ITable.hpp"
 
 namespace mixr {
 namespace base {
@@ -20,9 +20,9 @@ class Number;
 // Slots:
 //    x    <List>  ! Independent variable #1 (iv1) points
 //------------------------------------------------------------------------------
-class Table1 : public Table
+class Table1 : public ITable
 {
-    DECLARE_SUBCLASS(Table1, Table)
+    DECLARE_SUBCLASS(Table1, ITable)
 
 public:
    Table1();

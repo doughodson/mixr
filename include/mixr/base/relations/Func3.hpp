@@ -3,12 +3,12 @@
 #define __mixr_base_Func3_HPP__
 
 #include "mixr/base/IObject.hpp"
-#include "mixr/base/relations/Function.hpp"
+#include "mixr/base/relations/IFunction.hpp"
 
 namespace mixr {
 namespace base {
 class FStorage;
-class Table;
+class ITable;
 
 //------------------------------------------------------------------------------
 // Class: Func3
@@ -19,9 +19,9 @@ class Table;
 // Factory name: Func3
 // Slots: none
 //------------------------------------------------------------------------------
-class Func3 : public Function
+class Func3 : public IFunction
 {
-   DECLARE_SUBCLASS(Func3, Function)
+   DECLARE_SUBCLASS(Func3, IFunction)
 public:
    Func3();
 
@@ -29,7 +29,7 @@ public:
 
 protected:
    // slot table helper methods
-   bool setSlotLfiTable(const Table* const) override;
+   bool setSlotLfiTable(const ITable* const) override;
 };
 
 }

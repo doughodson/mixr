@@ -19,14 +19,14 @@ BEGIN_SLOT_MAP(Table1)
     ON_SLOT(1, setXBreakpoints1, List)
 END_SLOT_MAP()
 
-Table1::Table1() : Table()
+Table1::Table1() : ITable()
 {
    STANDARD_CONSTRUCTOR()
 }
 
 Table1::Table1(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize)
-                   : Table(dtbl, dsize)
+                   : ITable(dtbl, dsize)
 {
     STANDARD_CONSTRUCTOR()
     if (xtbl != nullptr && xsize > 0) {   /* Copy the x breakpoints */

@@ -1,7 +1,7 @@
 
-#include "mixr/base/relations/Function.hpp"
+#include "mixr/base/relations/IFunction.hpp"
 
-#include "mixr/base/relations/Table.hpp"
+#include "mixr/base/relations/ITable.hpp"
 #include "mixr/base/relations/FStorage.hpp"
 #include "mixr/base/List.hpp"
 
@@ -10,39 +10,39 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Function, "Function")
+IMPLEMENT_SUBCLASS(IFunction, "IFunction")
 
-BEGIN_SLOTTABLE(Function)
+BEGIN_SLOTTABLE(IFunction)
     "table",          // Optional LFI table
-END_SLOTTABLE(Function)
+END_SLOTTABLE(IFunction)
 
-BEGIN_SLOT_MAP(Function)
-    ON_SLOT( 1, setSlotLfiTable, Table)
+BEGIN_SLOT_MAP(IFunction)
+    ON_SLOT( 1, setSlotLfiTable, ITable)
 END_SLOT_MAP()
 
-Function::Function()
+IFunction::IFunction()
 {
    STANDARD_CONSTRUCTOR()
 
    table = nullptr;
 }
 
-void Function::copyData(const Function& org, const bool cc)
+void IFunction::copyData(const IFunction& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) table = nullptr;
 
    {
-      const Table* copy{};
+      const ITable* copy{};
       if (org.table != nullptr) {
-         copy = static_cast<const Table*>(org.table->clone());
+         copy = static_cast<const ITable*>(org.table->clone());
       }
       setSlotLfiTable(copy);
       if (copy != nullptr) copy->unref();
    }
 }
 
-void Function::deleteData()
+void IFunction::deleteData()
 {
    setSlotLfiTable(nullptr);
 }
@@ -50,7 +50,7 @@ void Function::deleteData()
 //------------------------------------------------------------------------------
 // Storage factory
 //------------------------------------------------------------------------------
-FStorage* Function::storageFactory() const
+FStorage* IFunction::storageFactory() const
 {
    // Since no derived class handled this ...
    if (table != nullptr) {
@@ -62,7 +62,7 @@ FStorage* Function::storageFactory() const
    }
 }
 
-bool Function::setSlotLfiTable(const Table* const x)
+bool IFunction::setSlotLfiTable(const ITable* const x)
 {
    table = x;
    return true;

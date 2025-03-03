@@ -62,9 +62,9 @@ OBJS =  \
 	relations/Func3.o \
 	relations/Func4.o \
 	relations/Func5.o \
-	relations/Function.o \
+	relations/IFunction.o \
 	relations/Polynomial.o \
-	relations/Table.o \
+	relations/ITable.o \
 	relations/Table1.o \
 	relations/Table2.o \
 	relations/Table3.o \

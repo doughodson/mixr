@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Table_HPP__
-#define __mixr_base_Table_HPP__
+#ifndef __mixr_base_ITable_HPP__
+#define __mixr_base_ITable_HPP__
 
 #include "mixr/base/IObject.hpp"
 
@@ -11,11 +11,11 @@ class FStorage;
 class List;
 
 //------------------------------------------------------------------------------
-// Class: Table
+// Class: ITable
 //
-// Description: Abstract Table
+// Description: Table interface
 //
-//    Used as a base for derived table classes that maintain multi-dimensional,
+//    Interface for derived table classes that maintain multi-dimensional,
 //    dependent data tables, along with their independent variable breakpoint
 //    tables, and provides linear function interpolation of the dependent
 //    variable data.
@@ -23,7 +23,7 @@ class List;
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Table
+// Factory name: ITable
 // Slots:
 //    data        <List>      ! Dependant variable data (default: 0)
 //    extrapolate <Boolean>   ! Extrapolate beyond the given data table limits (default: false)
@@ -42,13 +42,13 @@ class List;
 //       result is clamped at the last known dependent value.  If the extrapolate
 //       flag is true, we'll extrapolate beyond the given data table.
 //------------------------------------------------------------------------------
-class Table : public IObject
+class ITable : public IObject
 {
-    DECLARE_SUBCLASS(Table, IObject)
+    DECLARE_SUBCLASS(ITable, IObject)
 
 public:
-   Table();
-   Table(const double* dtbl, const unsigned int dsize);
+   ITable();
+   ITable(const double* dtbl, const unsigned int dsize);
 
    // Returns a pointer to the dependent variable data table.
    const double* getDataTable() const                            { return dtable; }
