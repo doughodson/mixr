@@ -41,8 +41,8 @@ class IAtmosphere;
 //                                            ! or zero to use current year (default: 0)
 //
 //
-//    terrain        <terrain:Terrain>        ! Terrain elevation database (default: nullptr)
-//    atmosphere     <Atmosphere>             ! Atmosphere
+//    terrain        <terrain:ITerrain>       ! Terrain elevation database (default: nullptr)
+//    atmosphere     <IAtmosphere>            ! Atmosphere
 //
 
 // Gaming area reference point:
