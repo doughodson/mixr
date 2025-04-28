@@ -1,7 +1,7 @@
 
 #include "mixr/base/threads/IPeriodicThread.hpp"
 
-#include "mixr/base/Object.hpp"
+#include "mixr/base/IObject.hpp"
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/math_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -29,7 +29,7 @@ unsigned long IPeriodicThread::mainThreadFunc()
    // Configure this thread
    bool ok{configThread()};
 
-   if ( getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if ( getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "PeriodicThread(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
       std::cout << "PeriodicThread(" << this << ")::mainThreadFunc(): Parent = " << getParent() << std::endl;
       std::cout << "PeriodicThread(" << this << ")::mainThreadFunc(): Starting main loop ..." << std::endl;

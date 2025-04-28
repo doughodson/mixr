@@ -1,7 +1,6 @@
 
 #include "mixr/base/threads/IThread.hpp"
 
-#include "mixr/base/Object.hpp"
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/util/system_utils.hpp"
 #include <iostream>
@@ -24,7 +23,7 @@ static const int MAX_CPUS{32};
 DWORD WINAPI IThread::staticThreadFunc(LPVOID lpParam)
 {
    const auto thread = static_cast<AbstractThread*>(lpParam);
-   Component* parent{thread->getParent()};
+   IComponent* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
    thread->ref();
@@ -83,7 +82,7 @@ bool IThread::createThread()
          NULL              // returns the thread identifier
       );
 
-   if ( hnd != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
+   if ( hnd != 0 && parent->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "AbstractThread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
    }
 
@@ -101,7 +100,7 @@ bool IThread::configThread()
    HANDLE hProcess{GetCurrentProcess()};
    HANDLE hThread{GetCurrentThread()};
 
-   if (parent->isMessageEnabled(Object::MSG_INFO)) {
+   if (parent->isMessageEnabled(IObject::MSG_INFO)) {
       std::cout << "AbstractThread(" << this << ")::configThread(): process handle = " << hProcess << std::endl;
       std::cout << "AbstractThread(" << this << ")::configThread(): thread handle = " << hThread  << std::endl;
    }
@@ -119,10 +118,10 @@ bool IThread::configThread()
       if (GetPriorityClass(hProcess) != pclass) {
          BOOL stat{SetPriorityClass(hProcess, pclass)};
 
-         if (stat == 0 && parent->isMessageEnabled(Object::MSG_ERROR)) {
+         if (stat == 0 && parent->isMessageEnabled(IObject::MSG_ERROR)) {
             std::cerr << "AbstractThread(" << this << ")::configThread(): Error: SetPriorityClass() failed! ";
             std::cerr << GetLastError() << std::endl;
-         } else if (stat != 0 && parent->isMessageEnabled(Object::MSG_INFO)) {
+         } else if (stat != 0 && parent->isMessageEnabled(IObject::MSG_INFO)) {
             std::cout << "AbstractThread(" << this << ")::configThread(): SetPriorityClass() set!" << std::endl;
          }
       }
