@@ -35,7 +35,8 @@
          "../../src/graphics/**.l"
       }
       removefiles {
-         "../../src/graphics/fonts/**.cpp"
+         "../../include/mixr/graphics/fonts/ftgl/*.h*",
+         "../../src/graphics/fonts/ftgl/*.cpp"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "graphics"
@@ -44,10 +45,8 @@
    project "graphics_fonts_ftgl"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/graphics/fonts/ftgl/**.h*",
-         "../../src/graphics/fonts/ftgl/**.h*",
-         "../../src/graphics/fonts/ftgl/**.cpp",
-         "../../src/graphics/fonts/ftgl/**.l"
+         "../../include/mixr/graphics/fonts/ftgl/*.h*",
+         "../../src/graphics/fonts/ftgl/*.c*",
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/freetype2" }
@@ -59,7 +58,7 @@
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/dafif/**.h*",
-         "../../src/dafif/**.cpp"
+         "../../src/dafif/**.c*"
       }
       includedirs { MIXR_IncPath }
       targetname "dafif"
@@ -95,9 +94,9 @@
          "../../include/mixr/models/**.inl",
          "../../src/models/**.cpp"
       }
-      removefiles { 
-                 "../../include/mixr/models/dynamics/jsbsim/**.hpp",
-                 "../../src/models/dynamics/jsbsim/**.cpp"
+      removefiles {
+                 "../../include/mixr/models/dynamics/jsbsim/*.h*",
+                 "../../src/models/dynamics/jsbsim/*.c*"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "models"
@@ -106,9 +105,9 @@
    project "models_jsbsim"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/models/dynamics/jsbsim/**.h*",
-         "../../include/mixr/models/dynamics/jsbsim/**.inl",
-         "../../src/models/dynamics/jsbsim/**.cpp"
+         "../../include/mixr/models/dynamics/jsbsim/*.h*",
+         "../../include/mixr/models/dynamics/jsbsim/*.inl",
+         "../../src/models/dynamics/jsbsim/*.c*"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/JSBSim" }
@@ -132,12 +131,11 @@
    project "simulation"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/simulation/**.h*",
-         "../../include/mixr/simulation/**.inl",
-         "../../src/simulation/**.h*",
-         "../../src/simulation/**.cpp"
+         "../../include/mixr/simulation/*.h*",
+         "../../src/simulation/*.h*",
+         "../../src/simulation/*.cpp"
       }
-      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
+      includedirs { MIXR_IncPath }
       targetname "simulation"
 
    -- terrain library
