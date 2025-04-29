@@ -35,9 +35,21 @@
          "../../src/graphics/**.l"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
+      targetname "graphics"
+
+   -- OpenGL-based FTGL Fonts
+   project "graphics_fonts_ftgl"
+      location ("../" .. _ACTION .. "/projects/%{prj.name}")
+      files {
+         "../../include/mixr/graphics/fonts/ftgl/**.h*",
+         "../../src/graphics/fonts/ftgl/**.h*",
+         "../../src/graphics/fonts/ftgl/**.cpp",
+         "../../src/graphics/fonts/ftgl/**.l"
+      }
+      includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
-      targetname "graphics"
+      targetname "graphics_fonts_ftgl"
 
    -- DAFIF airport loader library
    project "dafif"
