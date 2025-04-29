@@ -114,7 +114,7 @@
       targetname "models_jsbsim"
 
    -- data recorder library
-   project "recorder"
+   project "recorder_protobuf_v2"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/recorder/**.h*",
@@ -125,7 +125,7 @@
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
-      targetname "recorder"
+      targetname "recorder_protobuf_v2"
 
    -- simulation library
    project "simulation"

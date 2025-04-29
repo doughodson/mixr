@@ -1,10 +1,10 @@
 #
 include ../makedefs
 
-LIB = $(MIXR_LIB_DIR)/libmixr_recorder.a
+LIB = $(MIXR_LIB_DIR)/libmixr_recorder_protobuf_v2.a
 
 OBJS =  \
-	protobuf/DataRecord.pb.o \
+	proto/DataRecord.pb.o \
 	DataRecorder.o \
 	DataRecordHandle.o \
 	factory.o \
