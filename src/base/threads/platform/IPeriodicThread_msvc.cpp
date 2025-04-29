@@ -84,7 +84,7 @@ unsigned long IPeriodicThread::mainThreadFunc()
       }
    }
 
-   if (getParent()->isMessageEnabled(Object::MSG_INFO) ) {
+   if (getParent()->isMessageEnabled(IObject::MSG_INFO) ) {
       std::cout << "PeriodicThread(" << this << ")::mainThreadFunc(): ... end of main loop." << std::endl;
    }
 

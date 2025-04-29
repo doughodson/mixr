@@ -22,7 +22,7 @@ static const int MAX_CPUS{32};
 //-----------------------------------------------------------------------------
 DWORD WINAPI IThread::staticThreadFunc(LPVOID lpParam)
 {
-   const auto thread = static_cast<AbstractThread*>(lpParam);
+   const auto thread = static_cast<IThread*>(lpParam);
    IComponent* parent{thread->getParent()};
 
    // Make sure that our Thread class and its parent are not going to go a way.
@@ -158,10 +158,10 @@ bool IThread::configThread()
 
       BOOL stat{SetThreadPriority(hThread,value)};
 
-      if (stat == 0 && parent->isMessageEnabled(Object::MSG_ERROR)) {
+      if (stat == 0 && parent->isMessageEnabled(IObject::MSG_ERROR)) {
          std::cerr << "AbstractThread(" << this << ")::configThread(): Error: SetThreadPriority(" << value << ") failed! ";
          std::cerr << GetLastError()  << std::endl;
-      } else if (stat != 0 && parent->isMessageEnabled(Object::MSG_INFO)) {
+      } else if (stat != 0 && parent->isMessageEnabled(IObject::MSG_INFO)) {
          std::cout << "AbstractThread(" << this << ")::configThread(): SetThreadPriority(" << value << ") set!" << std::endl;
       }
    }
@@ -185,7 +185,7 @@ void IThread::closeThread()
 bool IThread::terminate()
 {
    if (theThread != nullptr && !killed) {
-      if ( parent->isMessageEnabled(Object::MSG_INFO) ) {
+      if ( parent->isMessageEnabled(IObject::MSG_INFO) ) {
          std::cout << "AbstractThread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 

@@ -77,7 +77,7 @@ void ISyncThread::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void ISyncThread::waitForAllCompleted(SyncThread** threads, const int num)
+void ISyncThread::waitForAllCompleted(ISyncThread** threads, const int num)
 {
    if (threads != 0 && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
@@ -97,7 +97,7 @@ void ISyncThread::waitForAllCompleted(SyncThread** threads, const int num)
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int ISyncThread::waitForAnyCompleted(SyncThread** threads, const int num)
+int ISyncThread::waitForAnyCompleted(ISyncThread** threads, const int num)
 {
    if (threads != nullptr && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
