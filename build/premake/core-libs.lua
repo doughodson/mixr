@@ -34,6 +34,9 @@
          "../../src/graphics/**.cpp",
          "../../src/graphics/**.l"
       }
+      removefiles {
+         "../../src/graphics/fonts/**.cpp"
+      }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "graphics"
 
