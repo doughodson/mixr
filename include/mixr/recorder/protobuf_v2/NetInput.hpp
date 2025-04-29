@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_NetInput_HPP__
 #define __mixr_recorder_NetInput_HPP__
 
-#include "mixr/recorder/IInputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IInputHandler.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class INetHandler; }

@@ -1,5 +1,5 @@
 #
-include ../makedefs
+include ../../makedefs
 
 LIB = $(MIXR_LIB_DIR)/libmixr_recorder_protobuf_v2.a
 

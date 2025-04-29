@@ -2,7 +2,7 @@
 // source: include/mixr/recorder/protobuf/DataRecord.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
 #include <algorithm>
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_PrintHandler_HPP__
 #define __mixr_recorder_PrintHandler_HPP__
 
-#include "mixr/recorder/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
 #include <string>
 #include <sstream>
 #include <fstream>

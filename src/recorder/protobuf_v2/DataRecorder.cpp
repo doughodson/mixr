@@ -1,9 +1,9 @@
 
-#include "mixr/recorder/DataRecorder.hpp"
+#include "mixr/recorder/protobuf_v2/DataRecorder.hpp"
 
-#include "mixr/recorder/OutputHandler.hpp"
-#include "mixr/recorder/DataRecordHandle.hpp"
-#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/Player.hpp"

@@ -1,7 +1,7 @@
 
-#include "mixr/recorder/OutputHandler.hpp"
-#include "mixr/recorder/DataRecordHandle.hpp"
-#include "mixr/recorder/protobuf/DataRecord.pb.h"
+#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"

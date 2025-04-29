@@ -1,5 +1,5 @@
 
-#include "mixr/recorder/PrintHandler.hpp"
+#include "mixr/recorder/protobuf_v2/PrintHandler.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"

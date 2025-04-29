@@ -152,7 +152,7 @@ private:
    bool setSlotYear(base::Integer* const);
 };
 
-#include "mixr/recorder/DataRecorder.inl"
+#include "mixr/recorder/protobuf_v2/DataRecorder.inl"
 
 }
 }

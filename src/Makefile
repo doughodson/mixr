@@ -3,26 +3,26 @@ include makedefs
 
 # Platform library  : Dependency libraries
 # ------------------------------------------------------------------------
-# base              : -
-# dafif             : -
-# graphics          : OpenGL
-# graphics_ftgl     : FTGL, freetype
-# gui_glut          : freeglut
-# instruments       : -
-# interop           : -
-# interop_dis       : -
-# interop_hla       : HLA RTI
-# interop_rprfom    : HLA RTI
-# linkage           : -
-# map               : -
-# models            : -
-# models_jsbsim     : JSBSim
-# ighost_cigi       : CIGICL 3.x
-# ighost_flightgear : -
-# ighost_pov        : -
-# recorder          : Google protocol buffers
-# simulation        : -
-# terrain           : -
+# base                 : -
+# dafif                : -
+# graphics             : OpenGL
+# graphics_ftgl        : FTGL, freetype
+# gui_glut             : freeglut
+# instruments          : -
+# interop              : -
+# interop_dis          : -
+# interop_hla          : HLA RTI
+# interop_rprfom       : HLA RTI
+# linkage              : -
+# map                  : -
+# models               : -
+# models_jsbsim        : JSBSim
+# ighost_cigi          : CIGICL 3.x
+# ighost_flightgear    : -
+# ighost_pov           : -
+# recorder_protobuf_v2 : Google protocol buffers, version 2
+# simulation           : -
+# terrain              : -
 #
 PROJECTS = base
 PROJECTS += dafif
@@ -38,7 +38,7 @@ PROJECTS += models/dynamics/jsbsim
 #
 # Data recorder
 #
-PROJECTS += recorder
+PROJECTS += recorder/protobuf_v2
 
 #
 # OpenGL-based graphics libraries

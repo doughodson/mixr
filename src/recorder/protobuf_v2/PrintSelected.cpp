@@ -1,7 +1,7 @@
 
-#include "mixr/recorder/PrintSelected.hpp"
-#include "mixr/recorder/protobuf/DataRecord.pb.h"
-#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf_v2/PrintSelected.hpp"
+#include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
+#include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
 
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Boolean.hpp"

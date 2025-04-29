@@ -1,7 +1,7 @@
 
-#include "mixr/recorder/FileReader.hpp"
-#include "mixr/recorder/protobuf/DataRecord.pb.h"
-#include "mixr/recorder/DataRecordHandle.hpp"
+#include "mixr/recorder/protobuf_v2/FileReader.hpp"
+#include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
+#include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"

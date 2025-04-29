@@ -1,17 +1,17 @@
 
-#include "mixr/recorder/factory.hpp"
+#include "mixr/recorder/protobuf_v2/factory.hpp"
 
 #include "mixr/base/IObject.hpp"
 
-#include "mixr/recorder/DataRecorder.hpp"
-#include "mixr/recorder/FileWriter.hpp"
-#include "mixr/recorder/FileReader.hpp"
-#include "mixr/recorder/OutputHandler.hpp"
-#include "mixr/recorder/NetInput.hpp"
-#include "mixr/recorder/NetOutput.hpp"
-#include "mixr/recorder/TabPrinter.hpp"
-#include "mixr/recorder/PrintPlayer.hpp"
-#include "mixr/recorder/PrintSelected.hpp"
+#include "mixr/recorder/protobuf_v2/DataRecorder.hpp"
+#include "mixr/recorder/protobuf_v2/FileWriter.hpp"
+#include "mixr/recorder/protobuf_v2/FileReader.hpp"
+#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/NetInput.hpp"
+#include "mixr/recorder/protobuf_v2/NetOutput.hpp"
+#include "mixr/recorder/protobuf_v2/TabPrinter.hpp"
+#include "mixr/recorder/protobuf_v2/PrintPlayer.hpp"
+#include "mixr/recorder/protobuf_v2/PrintSelected.hpp"
 
 #include <string>
 
