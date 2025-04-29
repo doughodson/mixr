@@ -7,9 +7,9 @@
    project "interop"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/common/**.h*",
-         "../../src/interop/common/**.hpp",
-         "../../src/interop/common/**.cpp"
+         "../../include/mixr/interop/**.h*",
+         "../../src/interop/**.hpp",
+         "../../src/interop/**.cpp"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "interop"
