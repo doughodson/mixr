@@ -117,11 +117,10 @@
    project "recorder_protobuf_v2"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/recorder/**.h*",
-         "../../include/mixr/recorder/*.inl",
-         "../../include/mixr/recorder/**.proto",
-         "../../src/recorder/**.cpp",
-         "../../src/recorder/**.cc"
+         "../../include/mixr/recorder/protobuf_v2/*.h*",
+         "../../include/mixr/recorder/protobuf_v2/*.inl",
+         "../../include/mixr/recorder/protobuf_v2/proto/*.proto",
+         "../../src/recorder/protobuf_v2/*.c*"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
@@ -133,7 +132,7 @@
       files {
          "../../include/mixr/simulation/*.h*",
          "../../src/simulation/*.h*",
-         "../../src/simulation/*.cpp"
+         "../../src/simulation/*.c*"
       }
       includedirs { MIXR_IncPath }
       targetname "simulation"
@@ -143,7 +142,7 @@
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
          "../../include/mixr/terrain/**.h*",
-         "../../src/terrain/**.cpp"
+         "../../src/terrain/**.c*"
       }
       includedirs { MIXR_IncPath }
       targetname "terrain"
@@ -152,8 +151,8 @@
    project "ui_glut"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/ui/glut/**.h*",
-         "../../src/ui/glut/**.cpp"
+         "../../include/mixr/ui/glut/*.h*",
+         "../../src/ui/glut/*.c*"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "ui_glut"
