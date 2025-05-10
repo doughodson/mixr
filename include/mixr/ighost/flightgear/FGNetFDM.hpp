@@ -4,6 +4,7 @@
 #include <cstdint>
 
 namespace mixr {
+namespace ighost {
 namespace flightgear {
 
 const std::uint32_t FG_NET_FDM_VERSION{24};
@@ -62,7 +63,7 @@ struct FGNetFDM
    float v_east{};       // east velocity in local/body frame, fps
    float v_down{};       // down/vertical velocity in local/body frame, fps
    float v_body_u{};     // ECEF velocity in body frame
-   float v_body_v{};     // ECEF velocity in body frame 
+   float v_body_v{};     // ECEF velocity in body frame
    float v_body_w{};     // ECEF velocity in body frame
 
    // accelerations
@@ -117,6 +118,7 @@ struct FGNetFDM
    float spoilers{};
 };
 
+}
 }
 }
 

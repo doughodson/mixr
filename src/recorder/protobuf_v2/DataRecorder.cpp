@@ -13,7 +13,7 @@
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/simulation/INib.hpp"
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"

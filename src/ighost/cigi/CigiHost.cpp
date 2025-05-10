@@ -56,6 +56,7 @@
 #include <iostream>
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 IMPLEMENT_SUBCLASS(CigiHost, "CigiHost")
@@ -1868,5 +1869,6 @@ void CigiHost::igResponse(const CigiIGMsgV3* const p)
    }
 }
 
+}
 }
 }

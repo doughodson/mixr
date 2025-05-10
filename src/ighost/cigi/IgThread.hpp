@@ -5,6 +5,7 @@
 #include "mixr/base/threads/IOneShotThread.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 class IgThread final : public base::IOneShotThread
@@ -13,6 +14,7 @@ class IgThread final : public base::IOneShotThread
    private: unsigned long userFunc() final;
 };
 
+}
 }
 }
 

@@ -18,6 +18,7 @@
 #include <iostream>
 
 namespace mixr {
+namespace ighost {
 namespace flightgear {
 
 IMPLEMENT_SUBCLASS(FlightGearHost, "FlightGearHost")
@@ -210,6 +211,7 @@ bool FlightGearHost::setSlotNetOutput(base::INetHandler* const msg)
    return true;
 }
 
+}
 }
 }
 

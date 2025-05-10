@@ -23,6 +23,7 @@
 #include <cmath>
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IgHost, "BaseIgHost")
@@ -746,5 +747,6 @@ IgHost::ModelKey::ModelKey(const int pid, const std::string& federateName)
    fName = federateName;
 }
 
+}
 }
 }

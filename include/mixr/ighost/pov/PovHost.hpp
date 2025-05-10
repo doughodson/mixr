@@ -7,6 +7,7 @@
 namespace mixr {
 namespace base { class INetHandler; }
 namespace models { class Player; }
+namespace ighost {
 namespace pov {
 
 //------------------------------------------------------------------------------
@@ -51,6 +52,7 @@ private:
    bool setSlotNetOutput(base::INetHandler* const);
 };
 
+}
 }
 }
 

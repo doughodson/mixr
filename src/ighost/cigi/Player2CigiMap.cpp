@@ -8,6 +8,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 IMPLEMENT_SUBCLASS(Player2CigiMap, "Player2CigiMap")
@@ -111,5 +112,6 @@ bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
    return match;
 }
 
+}
 }
 }

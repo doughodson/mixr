@@ -32,6 +32,7 @@
 #include "cigicl/CigiSensorCtrlV3.h"
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 //------------------------------------------------------------------------------
@@ -273,5 +274,6 @@ bool HostSession::setSlotNetOutput(base::INetHandler* const msg)
    return true;
 }
 
+}
 }
 }

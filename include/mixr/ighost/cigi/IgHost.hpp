@@ -11,6 +11,7 @@ namespace mixr {
 namespace base { class Identifier; class Integer; class ILength; class INumber; class PairStream; }
 namespace simulation { class IPlayer; }
 namespace models { class Player; }
+namespace ighost {
 namespace cigi {
 class CigiModel;
 class Player2CigiMap;
@@ -156,6 +157,7 @@ private:
    bool setSlotTypeMap(const base::PairStream* const);     // Sets the list of IG model type IDs (TypeMapper objects)
 };
 
+}
 }
 }
 

@@ -8,6 +8,7 @@
 namespace mixr {
 namespace base { class Identifier; class Integer; class String; }
 namespace models { class Player; }
+namespace ighost {
 namespace cigi {
 
 //------------------------------------------------------------------------------
@@ -79,6 +80,7 @@ private:
     bool setSlotRefTypeName(const base::String* const);         // Sets the Reference type name
 };
 
+}
 }
 }
 

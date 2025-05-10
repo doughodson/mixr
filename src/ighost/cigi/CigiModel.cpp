@@ -15,6 +15,7 @@
 #include "cigicl/CigiArtPartCtrlV3.h"
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 IMPLEMENT_SUBCLASS(CigiModel, "CigiModel")
@@ -136,5 +137,6 @@ void CigiModel::clear()
    federateName = nullptr;
 }
 
+}
 }
 }

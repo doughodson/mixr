@@ -15,6 +15,7 @@
 #include "mixr/base/units/util/length_utils.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace pov {
 
 IMPLEMENT_SUBCLASS(PovHost, "PovHost")
@@ -200,6 +201,7 @@ bool PovHost::setSlotNetOutput(base::INetHandler* const x)
    return true;
 }
 
+}
 }
 }
 

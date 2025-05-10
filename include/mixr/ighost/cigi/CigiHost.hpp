@@ -33,6 +33,7 @@ namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
 class Missile; class Player; class Ship; class SpaceVehicle; class IWeapon;
 }
+namespace ighost {
 namespace cigi {
 class HostSession;
 class CigiModel;
@@ -264,6 +265,7 @@ private:
    bool setSlotShipWakeModelId(const base::Integer* const);
 };
 
+}
 }
 }
 

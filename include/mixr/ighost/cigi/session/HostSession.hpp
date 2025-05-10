@@ -24,6 +24,7 @@ class CigiOutgoingMsg;
 
 namespace mixr {
 namespace base { class INetHandler; }
+namespace ighost {
 namespace cigi {
 class CigiHost;
 class SignalProcessor;
@@ -91,6 +92,7 @@ private:
    bool setSlotNetOutput(base::INetHandler* const);
 };
 
+}
 }
 }
 

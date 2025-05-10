@@ -7,6 +7,7 @@
 #include "mixr/ighost/flightgear/FGNetCtrls.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace flightgear {
 
 void swap_endian(FGNetFDM* const x)
@@ -112,6 +113,7 @@ void swap_endian(FGNetCtrls* const x)
 
 }
 
+}
 }
 }
 

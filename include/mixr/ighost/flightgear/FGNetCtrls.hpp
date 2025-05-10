@@ -5,6 +5,7 @@
 #include <cstdint>
 
 namespace mixr {
+namespace ighost {
 namespace flightgear {
 
 const std::size_t RESERVED_SPACE{25};
@@ -102,7 +103,7 @@ struct FGNetCtrls
    double copilot_brake_left{};
    double copilot_brake_right{};
    double brake_parking{};
-    
+
    // landing gear
    std::uint32_t gear_handle{}; // true=gear handle down; false= gear handle up
 
@@ -145,6 +146,7 @@ struct FGNetCtrls
    std::uint32_t reserved[RESERVED_SPACE]{};  // 100 bytes reserved for future use
 };
 
+}
 }
 }
 

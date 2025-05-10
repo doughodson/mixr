@@ -8,6 +8,7 @@
 #include <string>
 
 namespace mixr {
+namespace ighost {
 namespace flightgear {
 
 base::IObject* factory(const std::string& name)
@@ -20,5 +21,6 @@ base::IObject* factory(const std::string& name)
     return obj;
 }
 
+}
 }
 }

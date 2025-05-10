@@ -3,6 +3,7 @@
 #define __mixr_ighost_pov_Pov_H__
 
 namespace mixr {
+namespace ighost {
 namespace pov {
 
 struct Pov
@@ -20,6 +21,7 @@ struct Pov
   double heading{};     // degrees (psi)
 };
 
+}
 }
 }
 

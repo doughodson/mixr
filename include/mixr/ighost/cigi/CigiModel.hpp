@@ -15,6 +15,7 @@ class CigiArtPartCtrlV3;
 
 namespace mixr {
 namespace models { class Player; }
+namespace ighost {
 namespace cigi {
 class Player2CigiMap;
 
@@ -128,6 +129,7 @@ private:
    std::string federateName;       // federate name
 };
 
+}
 }
 }
 

@@ -6,8 +6,10 @@
 
 namespace mixr {
 namespace base { class IObject; }
+namespace ighost {
 namespace cigi {
 base::IObject* factory(const std::string&);
+}
 }
 }
 

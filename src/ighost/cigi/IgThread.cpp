@@ -5,6 +5,7 @@
 #include "mixr/ighost/cigi/session/HostSession.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace cigi {
 
 IgThread::IgThread(base::IComponent* const parent): base::IOneShotThread(parent)
@@ -24,5 +25,6 @@ unsigned long IgThread::userFunc()
    return 0;
 }
 
+}
 }
 }

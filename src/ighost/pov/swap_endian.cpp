@@ -6,6 +6,7 @@
 #include "mixr/ighost/pov/Pov.hpp"
 
 namespace mixr {
+namespace ighost {
 namespace pov {
 
 void swap_endian(Pov* const x)
@@ -21,6 +22,7 @@ void swap_endian(Pov* const x)
    base::swap_endian<double>(x->heading);
 }
 
+}
 }
 }
 
