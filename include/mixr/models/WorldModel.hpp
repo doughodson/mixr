@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_WorldModel_HPP__
 #define __mixr_models_common_WorldModel_HPP__
 
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Latitude; class ILength; class Longitude; class INumber; }
@@ -80,9 +80,9 @@ class IAtmosphere;
 //    this object, environments and other components.
 //
 //------------------------------------------------------------------------------
-class WorldModel : public simulation::Simulation
+class WorldModel : public simulation::ISimulation
 {
-    DECLARE_SUBCLASS(WorldModel, simulation::Simulation)
+    DECLARE_SUBCLASS(WorldModel, simulation::ISimulation)
 
 public:
     WorldModel();

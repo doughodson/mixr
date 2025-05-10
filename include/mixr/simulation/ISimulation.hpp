@@ -18,13 +18,13 @@ class Statistic;
 class IPlayer;
 
 //------------------------------------------------------------------------------
-// Class: Simulation
+// Class: ISimulation
 //
-// Description: Simulation executive, a class to manage the execution of a world
+// Description: Interface that defines an executive, a class to manage the execution of a world
 //              model that contains a list of players
 //
 //
-// Factory name: Simulation
+// Factory name: ISimulation
 //
 // Slots --
 //    players        <base::PairStream>       ! Local player list (base::PairStream of IPlayer) (default: nullptr)
@@ -163,9 +163,9 @@ class IPlayer;
 //    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public base::IComponent
+class ISimulation : public base::IComponent
 {
-    DECLARE_SUBCLASS(Simulation, base::IComponent)
+    DECLARE_SUBCLASS(ISimulation, base::IComponent)
 
 public:
    // Minimum released weapon ID
@@ -176,7 +176,7 @@ public:
    static const int MAX_NEW_PLAYERS{1000};
 
 public:
-    Simulation();
+    ISimulation();
 
     base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
     const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
@@ -333,19 +333,19 @@ private:
 };
 
 // Returns the timing statistics for the frames
-inline const base::Statistic* Simulation::getFrameTimingStats() const
+inline const base::Statistic* ISimulation::getFrameTimingStats() const
 {
    return frameTimingStats;
 }
 
 // True if we're collecting frame timing
-inline bool Simulation::isFrameTimingEabled() const
+inline bool ISimulation::isFrameTimingEabled() const
 {
    return (frameTimingStats != nullptr);
 }
 
 // True if we're printing the frame timing statistics
-inline bool Simulation::isPrintFrameTimingEnabled() const
+inline bool ISimulation::isPrintFrameTimingEnabled() const
 {
    return pfts;
 }

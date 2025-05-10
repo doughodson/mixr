@@ -6,7 +6,7 @@
 #include "mixr/simulation/IDataRecorder.hpp"
 #include "mixr/simulation/INetIO.hpp"
 #include "mixr/simulation/IIgHost.hpp"
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -56,7 +56,7 @@ BEGIN_SLOTTABLE(Station)
 END_SLOTTABLE(Station)
 
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1, setSlotSimulation,            Simulation)
+   ON_SLOT( 1, setSlotSimulation,            ISimulation)
 
    ON_SLOT( 2, setSlotNetworks,              base::PairStream)
 
@@ -101,7 +101,7 @@ void Station::copyData(const Station& org, const bool)
 
    // Set the simulation exec
    if (org.sim != nullptr) {
-      Simulation* copy = org.sim->clone();
+      ISimulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    } else {
@@ -377,7 +377,7 @@ bool Station::shutdownNotification()
    }
 
    // Tell our simulation executive to shut down
-   Simulation* s{getSimulation()};
+   ISimulation* s{getSimulation()};
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -584,13 +584,13 @@ void Station::processNetworkOutputTasks(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the simulation executive
-Simulation* Station::getSimulation()
+ISimulation* Station::getSimulation()
 {
    return sim;
 }
 
 // Returns the simulation executive (const version)
-const Simulation* Station::getSimulation() const
+const ISimulation* Station::getSimulation() const
 {
    return sim;
 }
@@ -904,7 +904,7 @@ bool Station::setDataRecorder(IDataRecorder* const p)
 //-----------------------------------------------------------------------------
 // setSlotSimExec() -- Sets a pointer to our simulation executive
 //-----------------------------------------------------------------------------
-bool Station::setSlotSimulation(Simulation* const p)
+bool Station::setSlotSimulation(ISimulation* const p)
 {
     if (sim != nullptr) {
         sim->container(nullptr);

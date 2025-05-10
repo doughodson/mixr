@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace simulation {
-class Simulation;
+class ISimulation;
 class Station;
 
 //------------------------------------------------------------------------------
@@ -32,8 +32,8 @@ public:
    Station* getStation();                     // Our parent station
    const Station* getStation() const;         // Our parent station (const version)
 
-   Simulation* getSimulation();               // The executable simulation
-   const Simulation* getSimulation() const;   // The executable simulation (const version)
+   ISimulation* getSimulation();               // The executable simulation
+   const ISimulation* getSimulation() const;   // The executable simulation (const version)
 
    // Record Data function
    bool recordData(
@@ -58,10 +58,10 @@ protected:
 
 private:
    Station* getStationImp();
-   Simulation* getSimulationImp();
+   ISimulation* getSimulationImp();
 
    Station* sta{};         // The station that owns us (not ref()'d)
-   Simulation* sim{};      // The simulation system (not ref()'d)
+   ISimulation* sim{};      // The simulation system (not ref()'d)
 };
 
 // Record Data function

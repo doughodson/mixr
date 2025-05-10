@@ -1,7 +1,7 @@
 
 #include "SimulationBgSyncThread.hpp"
 
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -33,7 +33,7 @@ unsigned long SimulationBgSyncThread::userFunc()
    // Make sure we've a player list and our index is valid ...
    if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
       // then call the simulation executives update TC player list functions
-      Simulation* sim{static_cast<Simulation*>(getParent())};
+      ISimulation* sim{static_cast<ISimulation*>(getParent())};
       sim->updateBgPlayerList(pl0, dt0, idx0, n0);
    }
 

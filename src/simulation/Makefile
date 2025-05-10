@@ -10,7 +10,7 @@ OBJS =  \
 	INib.o \
 	IPlayer.o \
 	IRecorderComponent.o \
-	Simulation.o \
+	ISimulation.o \
 	SimulationBgSyncThread.o \
 	SimulationTcSyncThread.o \
 	Station.o \

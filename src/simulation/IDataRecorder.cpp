@@ -1,7 +1,7 @@
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 #include "mixr/simulation/Station.hpp"
 
 #include "mixr/base/List.hpp"
@@ -71,7 +71,7 @@ Station* IDataRecorder::getStationImp()
 }
 
 // the simulation
-Simulation* IDataRecorder::getSimulation()
+ISimulation* IDataRecorder::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -79,7 +79,7 @@ Simulation* IDataRecorder::getSimulation()
    return sim;
 }
 
-const Simulation* IDataRecorder::getSimulation() const
+const ISimulation* IDataRecorder::getSimulation() const
 {
    if (sim == nullptr) {
       (const_cast<IDataRecorder*>(this))->getSimulationImp();
@@ -88,7 +88,7 @@ const Simulation* IDataRecorder::getSimulation() const
 }
 
 // The simulation
-Simulation* IDataRecorder::getSimulationImp()
+ISimulation* IDataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
       Station* p = getStation();

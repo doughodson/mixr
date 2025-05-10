@@ -11,7 +11,7 @@ namespace base { class IIoHandler; class Boolean; class Identifier; class Intege
                  class INumber; class PairStream; class String; class ITime; }
 namespace simulation {
 class IDataRecorder;
-class Simulation;
+class ISimulation;
 class IPlayer;
 class IIgHost;
 class StationBgPeriodicThread;
@@ -28,7 +28,7 @@ class StationNetPeriodicThread;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <Simulation>               ! Executable simulation model (default: nullptr)
+//    simulation         <ISimulation>              ! Executable simulation model (default: nullptr)
 //
 //    networks           <base::PairStream>         ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
@@ -156,8 +156,8 @@ public:
 public:
    Station();
 
-   Simulation* getSimulation();                                     // Simulation executive
-   const Simulation* getSimulation() const;                         // Simulation executive (const version)
+   ISimulation* getSimulation();                                    // Simulation executive
+   const ISimulation* getSimulation() const;                        // Simulation executive (const version)
 
    base::PairStream* getPlayers();                                  // Player list; pre-ref()'d
    const base::PairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
@@ -250,7 +250,7 @@ private:
    void setNetThread(StationNetPeriodicThread*);
    void setBgThread(StationBgPeriodicThread*);
 
-   Simulation* sim{};                                        // Executable simulation model
+   ISimulation* sim{};                                       // Executable simulation model
    base::safe_ptr<base::PairStream> networks;                // List of networks
    base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
    base::safe_ptr<base::IIoHandler> ioHandler;               // Input/Output (IO) data handler
@@ -280,7 +280,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotSimulation(Simulation* const);
+   bool setSlotSimulation(ISimulation* const);
 
    bool setSlotNetworks(base::PairStream* const);
 

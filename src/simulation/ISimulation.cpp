@@ -1,5 +1,5 @@
 
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 
 #include "mixr/simulation/IPlayer.hpp"
 
@@ -24,9 +24,9 @@
 namespace mixr {
 namespace simulation {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")
+IMPLEMENT_PARTIAL_SUBCLASS(ISimulation, "ISimulation")
 
-BEGIN_SLOTTABLE(Simulation)
+BEGIN_SLOTTABLE(ISimulation)
    "players",        // 1) All players
    "simulationTime", // 2) Simulation time
    "day",            // 3) Initial simulated day of month [ 1 .. 31 ]
@@ -39,9 +39,9 @@ BEGIN_SLOTTABLE(Simulation)
    "numBgThreads",   // 8) Number of background threads to use with the player list
    "enableFrameTiming",     // 9) Enable/disable the frame timing
    "printFrameTimingStats"  //10) Enable/disable the printing of the frame timing statistics
-   END_SLOTTABLE(Simulation)
+   END_SLOTTABLE(ISimulation)
 
-BEGIN_SLOT_MAP(Simulation)
+BEGIN_SLOT_MAP(ISimulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
     ON_SLOT( 2, setSlotSimulationTime,  base::ITime)
@@ -57,34 +57,34 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT(10, setSlotPrintFrameTimingStats, base::Boolean)
 END_SLOT_MAP()
 
-Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
+ISimulation::ISimulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
+ISimulation::ISimulation(const ISimulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
 
-Simulation::~Simulation()
+ISimulation::~ISimulation()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Simulation& Simulation::operator=(const Simulation& org)
+ISimulation& ISimulation::operator=(const ISimulation& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
 
-Simulation* Simulation::clone() const
+ISimulation* ISimulation::clone() const
 {
-   return new Simulation(*this);
+   return new ISimulation(*this);
 }
 
-void Simulation::copyData(const Simulation& org, const bool)
+void ISimulation::copyData(const ISimulation& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -167,7 +167,7 @@ void Simulation::copyData(const Simulation& org, const bool)
    tcLastFrameTime = 0.0;
 }
 
-void Simulation::deleteData()
+void ISimulation::deleteData()
 {
    if (origPlayers != nullptr) { origPlayers = nullptr; }
    if (players != nullptr)     { players = nullptr; }
@@ -205,7 +205,7 @@ void Simulation::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset the simulation & players
 //------------------------------------------------------------------------------
-void Simulation::reset()
+void ISimulation::reset()
 {
    // ---
    // Something old and something new ...
@@ -413,7 +413,7 @@ void Simulation::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool Simulation::shutdownNotification()
+bool ISimulation::shutdownNotification()
 {
    // ---
    // Shutdown our baseclass, which will notify our components
@@ -476,7 +476,7 @@ bool Simulation::shutdownNotification()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateTC(const double dt)
+void ISimulation::updateTC(const double dt)
 {
    // ---
    // Process frame timing
@@ -648,7 +648,7 @@ void Simulation::updateTC(const double dt)
 // Time critical thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void Simulation::updateTcPlayerList(
+void ISimulation::updateTcPlayerList(
    base::PairStream* const playerList,
    const double dt,
    const unsigned int idx,
@@ -674,7 +674,7 @@ void Simulation::updateTcPlayerList(
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateData(const double dt)
+void ISimulation::updateData(const double dt)
 {
     // Delta-Time (Frozen?)
     double dt0{dt};
@@ -721,7 +721,7 @@ void Simulation::updateData(const double dt)
 // Background thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void Simulation::updateBgPlayerList(
+void ISimulation::updateBgPlayerList(
          base::PairStream* const playerList,
          const double dt,
          const unsigned int idx,
@@ -747,7 +747,7 @@ void Simulation::updateBgPlayerList(
 //------------------------------------------------------------------------------
 // printFrameTimingStats() --Print the time critical frame timing statistics
 //------------------------------------------------------------------------------
-void Simulation::printFrameTimingStats()
+void ISimulation::printFrameTimingStats()
 {
    const base::Statistic* ts{getFrameTimingStats()};
    int c{static_cast<int>(cycle())};
@@ -762,7 +762,7 @@ void Simulation::printFrameTimingStats()
 //------------------------------------------------------------------------------
 // printTimingStats() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::printTimingStats()
+void ISimulation::printTimingStats()
 {
    const base::Statistic* ts{getTimingStats()};
    int c{static_cast<int>(cycle())};
@@ -779,61 +779,61 @@ void Simulation::printTimingStats()
 //------------------------------------------------------------------------------
 
 // Returns the player list
-base::PairStream* Simulation::getPlayers()
+base::PairStream* ISimulation::getPlayers()
 {
    return players.getRefPtr();
 }
 
 // Returns the player list (const version)
-const base::PairStream* Simulation::getPlayers() const
+const base::PairStream* ISimulation::getPlayers() const
 {
    return players.getRefPtr();
 }
 
 // Real-time cycle counter
-unsigned int Simulation::cycle() const
+unsigned int ISimulation::cycle() const
 {
    return cycleCnt;
 }
 
 // Real-time frame counter [0 .. 15]
-unsigned int Simulation::frame() const
+unsigned int ISimulation::frame() const
 {
    return frameCnt;
 }
 
 // Real-time phase counter [0 .. 3]
-unsigned int Simulation::phase() const
+unsigned int ISimulation::phase() const
 {
    return phaseCnt;
 }
 
 // Returns the exec counter (R/T phases since start)
-unsigned int Simulation::getExecCounter() const
+unsigned int ISimulation::getExecCounter() const
 {
    return ((cycleCnt << 6) + (frameCnt << 2) + phaseCnt);
 }
 
 // Returns executive time, which is time since start (sec)
-double Simulation::getExecTimeSec() const
+double ISimulation::getExecTimeSec() const
 {
    return execTime;
 }
 
 // Returns computer systems time of day (UTC -- seconds since midnight)
-double Simulation::getSysTimeOfDay() const
+double ISimulation::getSysTimeOfDay() const
 {
    return pcTime;
 }
 
 // Returns the simulated time of day (UTC -- seconds since midnight)
-double Simulation::getSimTimeOfDay() const
+double ISimulation::getSimTimeOfDay() const
 {
    return simTime;
 }
 
 // Simulated time (UTC) values, where ...
-void Simulation::getSimTimeValues(
+void ISimulation::getSimTimeValues(
       unsigned long* const simSec,  // (OUT) The whole seconds since midnight (00:00:00), January 1, 1970
       unsigned long* const simUSec  // (OUT) The number of microseconds in the current second.
    ) const
@@ -843,25 +843,25 @@ void Simulation::getSimTimeValues(
 }
 
 // Generates an unique major simulation event ID [1 .. 65535]
-unsigned short Simulation::getNewEventID()
+unsigned short ISimulation::getNewEventID()
 {
    return ++eventID;
 }
 
 // Generates a unique weapon event ID [1 .. 65535]
-unsigned short Simulation::getNewWeaponEventID()
+unsigned short ISimulation::getNewWeaponEventID()
 {
    return ++eventWpnID;
 }
 
 // Generates a unique ID number for released weapons
-unsigned short Simulation::getNewReleasedWeaponID()
+unsigned short ISimulation::getNewReleasedWeaponID()
 {
    return relWpnId++;
 };
 
 // Returns the data recorder
-IDataRecorder* Simulation::getDataRecorder()
+IDataRecorder* ISimulation::getDataRecorder()
 {
    IDataRecorder* p{};
    Station* sta{getStation()};
@@ -870,7 +870,7 @@ IDataRecorder* Simulation::getDataRecorder()
 }
 
 // Our Station
-Station* Simulation::getStation()
+Station* ISimulation::getStation()
 {
    if (station == nullptr) {
       getStationImp();
@@ -879,20 +879,20 @@ Station* Simulation::getStation()
 }
 
 // Our Station (const version)
-const Station* Simulation::getStation() const
+const Station* ISimulation::getStation() const
 {
    if (station == nullptr) {
-      (const_cast<Simulation*>(this))->getStationImp();
+      (const_cast<ISimulation*>(this))->getStationImp();
    }
    return station;
 }
 
-Station* Simulation::getStationImp()
+Station* ISimulation::getStationImp()
 {
    if (station == nullptr) {
       station = static_cast<Station*>(findContainerByType(typeid(Station)));
       if (station == nullptr && isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Simulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
+         std::cerr << "ISimulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
       }
    }
    return station;
@@ -902,7 +902,7 @@ Station* Simulation::getStationImp()
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
 //------------------------------------------------------------------------------
-bool Simulation::setSlotPlayers(base::PairStream* const pl)
+bool ISimulation::setSlotPlayers(base::PairStream* const pl)
 {
    // Early out if we're just zeroing the player lists
    if (pl == nullptr) {
@@ -1021,7 +1021,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
 //                       1) remove 'deleteRequest' mode players
 //                       2) add new players
 //------------------------------------------------------------------------------
-void Simulation::updatePlayerList()
+void ISimulation::updatePlayerList()
 {
     // ---
     // Do we need to swap player lists?  Only if a player
@@ -1113,7 +1113,7 @@ void Simulation::updatePlayerList()
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(base::Pair* const player)
+bool ISimulation::addNewPlayer(base::Pair* const player)
 {
     if (player == nullptr) return false;
     player->ref();
@@ -1129,7 +1129,7 @@ bool Simulation::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(const char* const playerName, IPlayer* const player)
+bool ISimulation::addNewPlayer(const char* const playerName, IPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
@@ -1142,7 +1142,7 @@ bool Simulation::addNewPlayer(const char* const playerName, IPlayer* const playe
 //------------------------------------------------------------------------------
 // insertPlayerSort() -- Insert the new player into the new list in sorted order
 //------------------------------------------------------------------------------
-bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
+bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
 {
     newList->ref();
 
@@ -1211,17 +1211,17 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-IPlayer* Simulation::findPlayer(const short id, const int netID)
+IPlayer* ISimulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const IPlayer* Simulation::findPlayer(const short id, const int netID) const
+const IPlayer* ISimulation::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-IPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
+IPlayer* ISimulation::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
@@ -1254,17 +1254,17 @@ IPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-IPlayer* Simulation::findPlayerByName(const char* const playerName)
+IPlayer* ISimulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const IPlayer* Simulation::findPlayerByName(const char* const playerName) const
+const IPlayer* ISimulation::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-IPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
+IPlayer* ISimulation::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
@@ -1291,49 +1291,49 @@ IPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 //------------------------------------------------------------------------------
 
 // Sets the initial simulation time (sec; or less than zero to slave to UTC)
-bool Simulation::setInitialSimulationTime(const long time)
+bool ISimulation::setInitialSimulationTime(const long time)
 {
    simTime0 = time;
    return true;
 }
 
 // Increment the cycle counter
-void Simulation::incCycle()
+void ISimulation::incCycle()
 {
    cycleCnt++;
 }
 
 // Sets the cycle counter
-void Simulation::setCycle(const unsigned int c)
+void ISimulation::setCycle(const unsigned int c)
 {
    cycleCnt = c;
 }
 
 // Sets the frame counter
-void Simulation::setFrame(const unsigned int f)
+void ISimulation::setFrame(const unsigned int f)
 {
    frameCnt = f;
 }
 
 // Sets the phase counter
-void Simulation::setPhase(const unsigned int c)
+void ISimulation::setPhase(const unsigned int c)
 {
    phaseCnt = c;
 }
 
 // Sets the simulation event ID counter
-void Simulation::setEventID(unsigned short id)
+void ISimulation::setEventID(unsigned short id)
 {
    eventID = id;
 }
 
 // Sets the weapon ID event counter
-void Simulation::setWeaponEventID(unsigned short id)
+void ISimulation::setWeaponEventID(unsigned short id)
 {
    eventWpnID = id;
 }
 
-bool Simulation::setFrameTimingEnabled(const bool b)
+bool ISimulation::setFrameTimingEnabled(const bool b)
 {
    if (b) {
       // enable frame timing by creating a statistics object
@@ -1354,7 +1354,7 @@ bool Simulation::setFrameTimingEnabled(const bool b)
    return true;
 }
 
-bool Simulation::setPrintFrameTimingStats(const bool b)
+bool ISimulation::setPrintFrameTimingStats(const bool b)
 {
    pfts = b;
    return true;
@@ -1364,7 +1364,7 @@ bool Simulation::setPrintFrameTimingStats(const bool b)
 // Set Slot routines
 //------------------------------------------------------------------------------
 
-bool Simulation::setSlotSimulationTime(const base::ITime* const msg)
+bool ISimulation::setSlotSimulationTime(const base::ITime* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1378,7 +1378,7 @@ bool Simulation::setSlotSimulationTime(const base::ITime* const msg)
     return ok;
 }
 
-bool Simulation::setSlotDay(const base::Integer* const msg)
+bool ISimulation::setSlotDay(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1393,7 +1393,7 @@ bool Simulation::setSlotDay(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotMonth(const base::Integer* const msg)
+bool ISimulation::setSlotMonth(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1408,7 +1408,7 @@ bool Simulation::setSlotMonth(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotYear(const base::Integer* const msg)
+bool ISimulation::setSlotYear(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1423,7 +1423,7 @@ bool Simulation::setSlotYear(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotFirstWeaponId(const base::Integer* const msg)
+bool ISimulation::setSlotFirstWeaponId(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1439,7 +1439,7 @@ bool Simulation::setSlotFirstWeaponId(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumTcThreads(const base::Integer* const msg)
+bool ISimulation::setSlotNumTcThreads(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1463,7 +1463,7 @@ bool Simulation::setSlotNumTcThreads(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
+bool ISimulation::setSlotNumBgThreads(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1487,7 +1487,7 @@ bool Simulation::setSlotNumBgThreads(const base::Integer* const msg)
    return ok;
 }
 
-bool Simulation::setSlotEnableFrameTiming(const base::Boolean* const num)
+bool ISimulation::setSlotEnableFrameTiming(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -1496,7 +1496,7 @@ bool Simulation::setSlotEnableFrameTiming(const base::Boolean* const num)
    return ok;
 }
 
-bool Simulation::setSlotPrintFrameTimingStats(const base::Boolean* const num)
+bool ISimulation::setSlotPrintFrameTimingStats(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
