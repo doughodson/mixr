@@ -10,7 +10,7 @@
 
 #include "mixr/models/player/Player.hpp"
 
-#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/ISimulation.hpp"
 #include "mixr/simulation/Station.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
