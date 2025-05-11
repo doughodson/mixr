@@ -9,7 +9,7 @@ OBJS =  \
 	INetIO.o \
 	INib.o \
 	IPlayer.o \
-	IRecorderComponent.o \
+	IRecorder.o \
 	ISimulation.o \
 	SimulationBgSyncThread.o \
 	SimulationTcSyncThread.o \

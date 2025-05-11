@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_OutputHandler_HPP__
 #define __mixr_recorder_OutputHandler_HPP__
 
-#include "mixr/simulation/IRecorderComponent.hpp"
+#include "mixr/simulation/IRecorder.hpp"
 #include "mixr/base/List.hpp"
 
 namespace mixr {
@@ -34,9 +34,9 @@ class DataRecordHandle;
 //    components     ! Must contain only 'OutputHandler' type objects
 //
 //------------------------------------------------------------------------------
-class OutputHandler : public simulation::IRecorderComponent
+class OutputHandler : public simulation::IRecorder
 {
-   DECLARE_SUBCLASS(OutputHandler, simulation::IRecorderComponent)
+   DECLARE_SUBCLASS(OutputHandler, simulation::IRecorder)
 
 public:
    OutputHandler();

@@ -2,7 +2,7 @@
 #ifndef __mixr_simulation_IDataRecorder_HPP__
 #define __mixr_simulation_IDataRecorder_HPP__
 
-#include "mixr/simulation/IRecorderComponent.hpp"
+#include "mixr/simulation/IRecorder.hpp"
 #include "mixr/simulation/recorder_macros.hpp"
 
 namespace mixr {
@@ -17,14 +17,13 @@ class Station;
 //       for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//       mixr::recorder::DataRecorder (see "mixr/recorder/DataRecorder.hpp")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see mixr/simulation/dataRecorderTokens.hpp)
 //------------------------------------------------------------------------------
-class IDataRecorder : public IRecorderComponent
+class IDataRecorder : public IRecorder
 {
-   DECLARE_SUBCLASS(IDataRecorder, IRecorderComponent)
+   DECLARE_SUBCLASS(IDataRecorder, IRecorder)
 
 public:
    IDataRecorder();

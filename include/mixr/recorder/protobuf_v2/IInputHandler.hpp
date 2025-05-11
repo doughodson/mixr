@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_IInputHandler_HPP__
 #define __mixr_recorder_IInputHandler_HPP__
 
-#include "mixr/simulation/IRecorderComponent.hpp"
+#include "mixr/simulation/IRecorder.hpp"
 
 namespace mixr {
 namespace recorder {
@@ -13,9 +13,9 @@ class DataRecordHandle;
 // Class: IInputHandler
 // Description: Interface to read and parse data records from an input source
 //------------------------------------------------------------------------------
-class IInputHandler : public simulation::IRecorderComponent
+class IInputHandler : public simulation::IRecorder
 {
-    DECLARE_SUBCLASS(IInputHandler, simulation::IRecorderComponent)
+    DECLARE_SUBCLASS(IInputHandler, simulation::IRecorder)
 
 public:
    IInputHandler();

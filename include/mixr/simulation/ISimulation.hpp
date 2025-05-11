@@ -1,6 +1,6 @@
 
-#ifndef __mixr_simulation_Simulation_HPP__
-#define __mixr_simulation_Simulation_HPP__
+#ifndef __mixr_simulation_ISimulation_HPP__
+#define __mixr_simulation_ISimulation_HPP__
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/safe_queue.hpp"
