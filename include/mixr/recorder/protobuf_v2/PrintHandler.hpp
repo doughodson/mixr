@@ -9,6 +9,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: PrintHandler
@@ -76,6 +77,7 @@ private:
    bool setSlotPathName(const base::String* const x)             { return setPathName(x); }
 };
 
+}
 }
 }
 

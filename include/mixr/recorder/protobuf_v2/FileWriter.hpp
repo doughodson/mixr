@@ -7,6 +7,7 @@
 namespace mixr {
 namespace base { class String; }
 namespace recorder {
+namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: FileWriter
@@ -81,6 +82,7 @@ private:
    bool setSlotPathName(const base::String* const x)                { return setPathName(x); }
 };
 
+}
 }
 }
 

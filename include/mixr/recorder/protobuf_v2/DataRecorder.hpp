@@ -9,8 +9,9 @@ namespace mixr {
 namespace base { class Identifier; class Integer; }
 namespace models { class Player; class Track; class Emission; }
 namespace recorder {
-namespace pb { class DataRecord; class PlayerId; class PlayerState;
-               class TrackData; class EmissionData; }
+namespace protobuf_v2 {
+namespace proto { class DataRecord; class PlayerId; class PlayerState;
+                  class TrackData; class EmissionData; }
 class DataRecordHandle;
 class OutputHandler;
 
@@ -82,12 +83,12 @@ protected:
    bool setOutputHandler(OutputHandler* const);
 
    // data filler functions
-   virtual void genPlayerId( pb::PlayerId* const id, const models::Player* const player );
-   virtual void genPlayerState( pb::PlayerState* const state, const models::Player* const player );
-   virtual void genTrackData( pb::TrackData* const trkMsg, const models::Track* const track );
-   virtual void genEmissionData( pb::EmissionData* const emMsg, const models::Emission* const emData);
-   virtual void sendDataRecord(pb::DataRecord* const msg);       // Send the DataRecord to our output handler
-   virtual void timeStamp(pb::DataRecord* const msg);            // Time stamp the DataRecord
+   virtual void genPlayerId(proto::PlayerId* const id, const models::Player* const player );
+   virtual void genPlayerState(proto::PlayerState* const state, const models::Player* const player );
+   virtual void genTrackData(proto::TrackData* const trkMsg, const models::Track* const track );
+   virtual void genEmissionData(proto::EmissionData* const emMsg, const models::Emission* const emData);
+   virtual void sendDataRecord(proto::DataRecord* const msg);       // Send the DataRecord to our output handler
+   virtual void timeStamp(proto::DataRecord* const msg);            // Time stamp the DataRecord
    virtual std::string genTrackId(const models::Track* const track);
    void setFirstPass(const bool f);
 
@@ -154,6 +155,7 @@ private:
 
 #include "mixr/recorder/protobuf_v2/DataRecorder.inl"
 
+}
 }
 }
 

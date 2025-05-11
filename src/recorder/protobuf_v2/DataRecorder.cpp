@@ -24,6 +24,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")
 
@@ -118,10 +119,10 @@ void DataRecorder::processRecords()
 //------------------------------------------------------------------------------
 bool DataRecorder::processUnhandledId(const unsigned int id)
 {
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // Record the unknown ID
-   pb::UnknownIdMsg* unknownIdMsg {msg->mutable_unknown_id_msg()};
+   proto::UnknownIdMsg* unknownIdMsg {msg->mutable_unknown_id_msg()};
    unknownIdMsg->set_id(id);
 
    // DataRecord header
@@ -142,7 +143,7 @@ void DataRecorder::reset()
 {
    BaseClass::reset();
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
    timeStamp(msg);
    msg->set_id( REID_RESET_EVENT );
    sendDataRecord(msg);
@@ -157,7 +158,7 @@ bool DataRecorder::shutdownNotification()
    if (outputHandler != nullptr) {
 
       // Send an end-of-data message
-      const auto msg = new pb::DataRecord();
+      const auto msg = new proto::DataRecord();
       timeStamp(msg);
       msg->set_id( REID_END_OF_DATA );
       sendDataRecord(msg);
@@ -180,14 +181,14 @@ bool DataRecorder::shutdownNotification()
 //------------------------------------------------------------------------------
 bool DataRecorder::recordMarker(const base::IObject* objs[4], const double values[4])
 {
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_MARKER );
 
    // new Marker message
-   pb::MarkerMsg* markerMsg = msg->mutable_marker_msg();
+   proto::MarkerMsg* markerMsg = msg->mutable_marker_msg();
    markerMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
    markerMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
 
@@ -205,14 +206,14 @@ bool DataRecorder::recordMarker(const base::IObject* objs[4], const double value
 //------------------------------------------------------------------------------
 bool DataRecorder::recordAI(const base::IObject* objs[4], const double values[4])
 {
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_AI_EVENT );
 
    // new Input Device message
-   pb::InputDeviceMsg* aiMsg {msg->mutable_input_device_msg()};
+   proto::InputDeviceMsg* aiMsg {msg->mutable_input_device_msg()};
    aiMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
    aiMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    aiMsg->set_value( static_cast<float>(values[2]) );
@@ -232,14 +233,14 @@ bool DataRecorder::recordAI(const base::IObject* objs[4], const double values[4]
 //------------------------------------------------------------------------------
 bool DataRecorder::recordDI(const base::IObject* objs[4], const double values[4])
 {
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_DI_EVENT );
 
    // new Input Device message
-   pb::InputDeviceMsg* diMsg {msg->mutable_input_device_msg()};
+   proto::InputDeviceMsg* diMsg {msg->mutable_input_device_msg()};
    diMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
    diMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    diMsg->set_value( static_cast<float>(values[2]) );
@@ -260,14 +261,14 @@ bool DataRecorder::recordNewPlayer(const base::IObject* objs[4], const double va
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_NEW_PLAYER );
 
    // new player message
-   pb::NewPlayerEventMsg* newPlayerMsg {msg->mutable_new_player_event_msg()};
+   proto::NewPlayerEventMsg* newPlayerMsg {msg->mutable_new_player_event_msg()};
 
    genPlayerId( newPlayerMsg->mutable_id(), player );
    genPlayerState( newPlayerMsg->mutable_state(), player );
@@ -287,14 +288,14 @@ bool DataRecorder::recordPlayerRemoved(const base::IObject* objs[4], const doubl
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_REMOVED );
 
    // removed player message
-   pb::PlayerRemovedEventMsg* removedEventMsg {msg->mutable_player_removed_event_msg()};
+   proto::PlayerRemovedEventMsg* removedEventMsg {msg->mutable_player_removed_event_msg()};
 
    genPlayerId( removedEventMsg->mutable_id(), player );
    genPlayerState( removedEventMsg->mutable_state(), player );
@@ -314,14 +315,14 @@ bool DataRecorder::recordPlayerData(const base::IObject* objs[4], const double v
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_DATA );
 
    // player data
-   pb::PlayerDataMsg* playerDataMsg {msg->mutable_player_data_msg()};
+   proto::PlayerDataMsg* playerDataMsg {msg->mutable_player_data_msg()};
 
    genPlayerId( playerDataMsg->mutable_id(), player );
    genPlayerState( playerDataMsg->mutable_state(), player );
@@ -348,14 +349,14 @@ bool DataRecorder::recordPlayerDamaged(const base::IObject* objs[4], const doubl
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_DAMAGED );
 
    // player damaged message
-   pb::PlayerDamagedEventMsg* playerDamagedMsg {msg->mutable_player_damaged_event_msg()};
+   proto::PlayerDamagedEventMsg* playerDamagedMsg {msg->mutable_player_damaged_event_msg()};
 
    genPlayerId( playerDamagedMsg->mutable_id(), player );
    genPlayerState( playerDamagedMsg->mutable_state(), player );
@@ -375,14 +376,14 @@ bool DataRecorder::recordPlayerCollision(const base::IObject* objs[4], const dou
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_COLLISION );
 
    // player collision message
-   pb::PlayerCollisionEventMsg* playerCollisionMsg {msg->mutable_player_collision_event_msg()};
+   proto::PlayerCollisionEventMsg* playerCollisionMsg {msg->mutable_player_collision_event_msg()};
 
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
@@ -407,14 +408,14 @@ bool DataRecorder::recordPlayerCrash(const base::IObject* objs[4], const double 
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_CRASH );
 
    // player crashed message
-   pb::PlayerCrashEventMsg* playerCrashMsg {msg->mutable_player_crash_event_msg()};
+   proto::PlayerCrashEventMsg* playerCrashMsg {msg->mutable_player_crash_event_msg()};
 
    genPlayerId( playerCrashMsg->mutable_id(), player );
    genPlayerState( playerCrashMsg->mutable_state(), player );
@@ -434,14 +435,14 @@ bool DataRecorder::recordPlayerKilled(const base::IObject* objs[4], const double
    const auto player = dynamic_cast<const models::Player*>( objs[0] );
    if (player == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_PLAYER_KILLED );
 
    // player killed message
-   pb::PlayerKilledEventMsg* playerKilledMsg {msg->mutable_player_killed_event_msg()};
+   proto::PlayerKilledEventMsg* playerKilledMsg {msg->mutable_player_killed_event_msg()};
 
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
@@ -467,14 +468,14 @@ bool DataRecorder::recordWeaponReleased(const base::IObject* objs[4], const doub
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_WEAPON_RELEASED );
 
    // Weapon Released message
-   pb::WeaponReleaseEventMsg* wpnRelMsg {msg->mutable_weapon_release_event_msg()};
+   proto::WeaponReleaseEventMsg* wpnRelMsg {msg->mutable_weapon_release_event_msg()};
 
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
@@ -506,14 +507,14 @@ bool DataRecorder::recordWeaponHung(const base::IObject* objs[4], const double v
    const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
    if (wpn == nullptr) return false;
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_WEAPON_HUNG );
 
    // Weapon Hung message
-   pb::WeaponHungEventMsg* wpnHungMsg {msg->mutable_weapon_hung_event_msg()};
+   proto::WeaponHungEventMsg* wpnHungMsg {msg->mutable_weapon_hung_event_msg()};
 
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
@@ -551,56 +552,56 @@ bool DataRecorder::recordWeaponDetonation(const base::IObject* objs[4], const do
 
    const double missDist{values[1]};
 
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_WEAPON_DETONATION );
 
    // Weapon Hung message
-   pb::WeaponDetonationEventMsg* wpnDetMsg = msg->mutable_weapon_detonation_event_msg();
+   proto::WeaponDetonationEventMsg* wpnDetMsg = msg->mutable_weapon_detonation_event_msg();
 
-   genPlayerId( wpnDetMsg->mutable_wpn_id(), wpn );
-   genPlayerState( wpnDetMsg->mutable_wpn_state(), wpn );
+   genPlayerId(wpnDetMsg->mutable_wpn_id(), wpn );
+   genPlayerState(wpnDetMsg->mutable_wpn_state(), wpn );
 
    const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
    if (shooter != nullptr) {
-      genPlayerId( wpnDetMsg->mutable_shooter_id(), shooter );
+      genPlayerId(wpnDetMsg->mutable_shooter_id(), shooter );
    }
 
    const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
    if (tgt != nullptr) {
-      genPlayerId( wpnDetMsg->mutable_tgt_id(), tgt );
+      genPlayerId(wpnDetMsg->mutable_tgt_id(), tgt );
    }
 
    // Get detonation type
    switch (detType) {
       case models::IWeapon::Detonation::OTHER: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_OTHER);
          break;
       }
       case models::IWeapon::Detonation::ENTITY_IMPACT: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_IMPACT);
          break;
       }
       case models::IWeapon::Detonation::ENTITY_PROXIMATE_DETONATION: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_ENTITY_PROXIMATE_DETONATION);
          break;
       }
       case models::IWeapon::Detonation::GROUND_IMPACT: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_IMPACT);
          break;
       }
       case models::IWeapon::Detonation::GROUND_PROXIMATE_DETONATION: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_GROUND_PROXIMATE_DETONATION);
          break;
       }
       case models::IWeapon::Detonation::DETONATION: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_DETONATION);
          break;
       }
       case models::IWeapon::Detonation::NONE: {
-         wpnDetMsg->set_det_type(pb::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
+         wpnDetMsg->set_det_type(proto::WeaponDetonationEventMsg_DetonationType_DETONATE_NONE);
          break;
       }
       default: {
@@ -628,16 +629,16 @@ bool DataRecorder::recordGunFired(const base::IObject* objs[4], const double val
    if (shooter == nullptr) return false;
 
    const auto rounds = static_cast<const unsigned int>( values[0] );
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_GUN_FIRED );
 
    // Gun Fired message
-   pb::GunFiredEventMsg* gunFiredMsg {msg->mutable_gun_fired_event_msg()};
+   proto::GunFiredEventMsg* gunFiredMsg {msg->mutable_gun_fired_event_msg()};
 
-   genPlayerId( gunFiredMsg->mutable_shooter_id(), shooter );
+   genPlayerId(gunFiredMsg->mutable_shooter_id(), shooter );
    gunFiredMsg->set_rounds(rounds);
 
    // Send the message for processing
@@ -658,18 +659,18 @@ bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double val
    if (player == nullptr || newTrack == nullptr) return false;
 
    // message
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_NEW_TRACK );
 
    // New Track message
-   pb::NewTrackEventMsg* newTrackMsg {msg->mutable_new_track_event_msg()};
+   proto::NewTrackEventMsg* newTrackMsg {msg->mutable_new_track_event_msg()};
 
    // player ID and state
-   genPlayerId( newTrackMsg->mutable_player_id(), player );
-   genPlayerState( newTrackMsg->mutable_player_state(), player );
+   genPlayerId(newTrackMsg->mutable_player_id(), player );
+   genPlayerState(newTrackMsg->mutable_player_state(), player );
 
    // Track ID
    newTrackMsg->set_track_id(genTrackId(newTrack));
@@ -714,14 +715,14 @@ bool DataRecorder::recordTrackRemoved(const base::IObject* objs[4], const double
    if (player == nullptr || track == nullptr) return false;
 
    // message
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_TRACK_REMOVED );
 
    // Track Removed message
-   pb::TrackRemovedEventMsg* trackRemovedMsg {msg->mutable_track_removed_event_msg()};
+   proto::TrackRemovedEventMsg* trackRemovedMsg {msg->mutable_track_removed_event_msg()};
 
    genPlayerId(trackRemovedMsg->mutable_player_id(), player);
 
@@ -747,18 +748,18 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
    if (player == nullptr || trackData == nullptr) return false;
 
    // message
-   const auto msg = new pb::DataRecord();
+   const auto msg = new proto::DataRecord();
 
    // DataRecord header
    timeStamp(msg);
    msg->set_id( REID_TRACK_DATA );
 
    // Track Data message
-   pb::TrackDataMsg* trackDataMsg{msg->mutable_track_data_msg()};
+   proto::TrackDataMsg* trackDataMsg{msg->mutable_track_data_msg()};
 
    // player ID and state
-   genPlayerId( trackDataMsg->mutable_player_id(), player );
-   genPlayerState( trackDataMsg->mutable_player_state(), player );
+   genPlayerId(trackDataMsg->mutable_player_id(), player );
+   genPlayerState(trackDataMsg->mutable_player_state(), player );
 
    // Track ID
    trackDataMsg->set_track_id(genTrackId(trackData));
@@ -791,7 +792,7 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
 //------------------------------------------------------------------------------
 // Generate the Player ID data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* const player)
+void DataRecorder::genPlayerId(proto::PlayerId* const id, const models::Player* const player)
 {
    // Check for valid message pointer
    if (id != nullptr) {
@@ -818,7 +819,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
 //------------------------------------------------------------------------------
 // Generate the player state data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerState(pb::PlayerState* const state, const models::Player* const player)
+void DataRecorder::genPlayerState(proto::PlayerState* const state, const models::Player* const player)
 {
    if (state != nullptr) {
       if (player != nullptr) {
@@ -876,7 +877,7 @@ std::string DataRecorder::genTrackId(const models::Track* const track)
 //------------------------------------------------------------------------------
 // Generate the Track data
 //------------------------------------------------------------------------------
-void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track* const track)
+void DataRecorder::genTrackData(proto::TrackData* const trkMsg, const models::Track* const track)
 {
    if (trkMsg != nullptr) {
       if (track != nullptr) {
@@ -923,7 +924,7 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track
 //------------------------------------------------------------------------------
 // Generate the Emission data
 //------------------------------------------------------------------------------
-void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::Emission* const emData)
+void DataRecorder::genEmissionData(proto::EmissionData* const emMsg, const models::Emission* const emData)
 {
    if (emMsg != nullptr) {
       if (emData != nullptr) {
@@ -941,7 +942,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
          {
             const models::Player* p {emData->getOwnship()};
             if (p != nullptr) {
-               genPlayerId( emMsg->mutable_origin_id(), p );
+               genPlayerId(emMsg->mutable_origin_id(), p);
             }
          }
 
@@ -949,7 +950,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
          {
             const models::Player* p {emData->getTarget()};
             if (p != nullptr) {
-               genPlayerId( emMsg->mutable_target_id(), p );
+               genPlayerId(emMsg->mutable_target_id(), p);
             }
          }
 
@@ -957,27 +958,27 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
          models::Antenna::Polarization polarization = emData->getPolarization();
          switch (polarization) {
             case models::Antenna::Polarization::NONE: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_NONE);
+               emMsg->set_polarization(proto::EmissionData_Polarization_NONE);
                break;
             }
             case models::Antenna::Polarization::VERTICAL: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_VERTICAL);
+               emMsg->set_polarization(proto::EmissionData_Polarization_VERTICAL);
                break;
             }
             case models::Antenna::Polarization::HORIZONTAL: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_HORIZONTAL);
+               emMsg->set_polarization(proto::EmissionData_Polarization_HORIZONTAL);
                break;
             }
             case models::Antenna::Polarization::SLANT: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_SLANT);
+               emMsg->set_polarization(proto::EmissionData_Polarization_SLANT);
                break;
             }
             case models::Antenna::Polarization::RHC: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_RHC);
+               emMsg->set_polarization(proto::EmissionData_Polarization_RHC);
                break;
             }
             case models::Antenna::Polarization::LHC: {
-               emMsg->set_polarization(pb::EmissionData_Polarization_LHC);
+               emMsg->set_polarization(proto::EmissionData_Polarization_LHC);
                break;
             }
             default: {
@@ -992,7 +993,7 @@ void DataRecorder::genEmissionData(pb::EmissionData* const emMsg, const models::
 //------------------------------------------------------------------------------
 // Time stamp and send the DataRecord to our output handler
 //------------------------------------------------------------------------------
-void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
+void DataRecorder::sendDataRecord(proto::DataRecord* const msg)
 {
    if (msg != nullptr && outputHandler != nullptr) {
 
@@ -1003,14 +1004,14 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
          setFirstPass(false);
 
          // create and send File ID
-         const auto msg = new pb::DataRecord();
+         const auto msg = new proto::DataRecord();
 
          // DataRecord header
          timeStamp(msg);
          msg->set_id( REID_FILE_ID );
 
          // File ID message
-         pb::FileIdMsg* fileIdMsg {msg->mutable_file_id_msg()};
+         proto::FileIdMsg* fileIdMsg {msg->mutable_file_id_msg()};
 
          // from slot data:
          fileIdMsg->set_application(getApplication());
@@ -1041,19 +1042,19 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 //------------------------------------------------------------------------------
 // Time stamp the DataRecord
 //------------------------------------------------------------------------------
-void DataRecorder::timeStamp(pb::DataRecord* const msg)
+void DataRecorder::timeStamp(proto::DataRecord* const msg)
 {
    if (msg != nullptr) {
-      simulation::Simulation* sim {getSimulation()};
+      simulation::ISimulation* sim {getSimulation()};
       if (sim != nullptr) {
-         pb::Time* time {msg->mutable_time()};
+         proto::Time* time {msg->mutable_time()};
          time->set_exec_time( sim->getExecTimeSec() );
          time->set_sim_time( sim->getSimTimeOfDay() );
          time->set_utc_time( sim->getSysTimeOfDay() );
       }
       else {
          // unknown time
-         pb::Time* time {msg->mutable_time()};
+         proto::Time* time {msg->mutable_time()};
          time->set_exec_time( -1.0 );
          time->set_sim_time( -1.0 );
          time->set_utc_time( -1.0 );
@@ -1169,5 +1170,6 @@ bool DataRecorder::setSlotYear(base::Integer* const msg)
    return ok;
 }
 
+}
 }
 }

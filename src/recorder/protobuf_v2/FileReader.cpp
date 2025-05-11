@@ -11,6 +11,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(FileReader, "RecorderFileReader")
 
@@ -244,7 +245,7 @@ const DataRecordHandle* FileReader::readRecordImp()
 
             // Parse the DataRecord
             std::string wireFormat(ibuf, n);
-            auto dataRecord = new pb::DataRecord();
+            auto dataRecord = new proto::DataRecord();
             bool ok{dataRecord->ParseFromString(wireFormat)};
 
             // Create a handle for the DataRecord (it now has ownership)
@@ -295,5 +296,6 @@ bool FileReader::setPathName(const base::String* const msg)
    return true;
 }
 
+}
 }
 }

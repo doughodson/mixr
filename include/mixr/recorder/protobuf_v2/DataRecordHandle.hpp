@@ -6,8 +6,9 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 // Main (protocol buffer) data record
-namespace pb { class DataRecord; }
+namespace proto { class DataRecord; }
 
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
@@ -28,19 +29,20 @@ class DataRecordHandle : public base::IObject
     DECLARE_SUBCLASS(DataRecordHandle, base::IObject)
 
 public:
-   DataRecordHandle(pb::DataRecord* const record);
+   DataRecordHandle(proto::DataRecord* const record);
 
-   const pb::DataRecord* getRecord() const;
+   const proto::DataRecord* getRecord() const;
 
 protected:
    DataRecordHandle();  // Default Constructor
 
 private:
-   pb::DataRecord* record {};
+   proto::DataRecord* record {};
 };
 
-inline const pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
+inline const proto::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
+}
 }
 }
 

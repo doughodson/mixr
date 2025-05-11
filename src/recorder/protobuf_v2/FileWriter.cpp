@@ -11,6 +11,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(FileWriter, "RecorderFileWriter")
 
@@ -242,14 +243,14 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         const auto lastMsg = new pb::DataRecord();
+         const auto lastMsg = new proto::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages
          lastMsg->set_id(REID_END_OF_DATA);
 
          // Time is also required, although not used:
-         pb::Time* time {lastMsg->mutable_time()};
+         proto::Time* time {lastMsg->mutable_time()};
          time->set_exec_time(0);
          time->set_sim_time(0);
          time->set_utc_time(0);
@@ -291,7 +292,7 @@ void FileWriter::processRecordImp(const DataRecordHandle* const handle)
    if ( fileOpened ) {
 
       // The DataRecord to be sent
-      const pb::DataRecord* dataRecord{handle->getRecord()};
+      const proto::DataRecord* dataRecord{handle->getRecord()};
 
       // Serialize the DataRecord
       std::string wireFormat;
@@ -376,5 +377,6 @@ bool FileWriter::setPathName(const base::String* const msg)
    return true;
 }
 
+}
 }
 }

@@ -8,6 +8,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(OutputHandler, "OutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
@@ -156,5 +157,6 @@ void OutputHandler::processComponents(
    BaseClass::processComponents(list, typeid(OutputHandler), add, remove);
 }
 
+}
 }
 }

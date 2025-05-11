@@ -6,6 +6,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 class DataRecordHandle;
 
 //------------------------------------------------------------------------------
@@ -28,6 +29,7 @@ protected:
    virtual const DataRecordHandle* readRecordImp() =0;
 };
 
+}
 }
 }
 

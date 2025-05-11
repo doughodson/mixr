@@ -7,6 +7,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(NetInput, "RecorderNetInput")
 
@@ -117,7 +118,7 @@ const DataRecordHandle* NetInput::readRecordImp()
       if (n > 0) {
          // Parse the data record
          std::string wireFormat(ibuf, n);
-         auto dataRecord = new pb::DataRecord();
+         auto dataRecord = new proto::DataRecord();
          bool ok{dataRecord->ParseFromString(wireFormat)};
 
          if (ok) {
@@ -159,5 +160,6 @@ bool NetInput::setSlotNoWait(mixr::base::Boolean* const msg)
    return ok;
 }
 
+}
 }
 }

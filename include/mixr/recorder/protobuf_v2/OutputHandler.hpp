@@ -8,6 +8,7 @@
 namespace mixr {
 namespace base { class List; }
 namespace recorder {
+namespace protobuf_v2 {
 class DataRecordHandle;
 
 //------------------------------------------------------------------------------
@@ -70,6 +71,7 @@ private:
    mutable long semaphore {};
 };
 
+}
 }
 }
 

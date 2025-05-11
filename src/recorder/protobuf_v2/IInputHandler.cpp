@@ -5,6 +5,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IInputHandler, "IInputHandler")
 EMPTY_SLOTTABLE(IInputHandler)
@@ -44,5 +45,6 @@ const DataRecordHandle* IInputHandler::readRecord()
    return p;
 }
 
+}
 }
 }

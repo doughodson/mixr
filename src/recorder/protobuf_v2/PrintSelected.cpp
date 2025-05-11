@@ -19,6 +19,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")
 
@@ -159,7 +160,7 @@ bool PrintSelected::setSlotTimeOnly(const base::Boolean* const msg)
 void PrintSelected::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const pb::DataRecord* dataRecord{handle->getRecord()};
+   const proto::DataRecord* dataRecord{handle->getRecord()};
    if (dataRecord == nullptr) return;  // cannot continue
 
    // using reflection:
@@ -747,5 +748,6 @@ std::string PrintSelected::printTimeMsg(double time)
     return timeStr;
 }
 
+}
 }
 }

@@ -8,6 +8,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")
 
@@ -299,5 +300,6 @@ void PrintHandler::processRecordImp(const DataRecordHandle* const handle)
    // baseclass
 }
 
+}
 }
 }

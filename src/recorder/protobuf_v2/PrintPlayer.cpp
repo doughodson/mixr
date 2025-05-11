@@ -10,6 +10,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(PrintPlayer,"PrintPlayer")
 
@@ -60,7 +61,7 @@ bool PrintPlayer::setName(const base::String* const msg)
 void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const pb::DataRecord* dataRecord{handle->getRecord()};
+   const proto::DataRecord* dataRecord{handle->getRecord()};
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
@@ -75,8 +76,8 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    MsgType msgType{UNKNOWN};
    std::string msgTypeStr{""};
 
-   const pb::PlayerId* playerIdMsg{};
-   const pb::PlayerState* playerStMsg{};
+   const proto::PlayerId* playerIdMsg{};
+   const proto::PlayerState* playerStMsg{};
 
    switch (messageId) {
 
@@ -85,7 +86,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_player_event_msg()) {
             msgType = NEW;
             msgTypeStr = "NEW";
-            const pb::NewPlayerEventMsg* msg{&dataRecord->new_player_event_msg()};
+            const proto::NewPlayerEventMsg* msg{&dataRecord->new_player_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
             std::string playerName = playerIdMsg->name();  // example
@@ -97,7 +98,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_removed_event_msg()) {
             msgType = REMOVED;
             msgTypeStr = "REMOVED";
-            const pb::PlayerRemovedEventMsg* msg{&dataRecord->player_removed_event_msg()};
+            const proto::PlayerRemovedEventMsg* msg{&dataRecord->player_removed_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -108,7 +109,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_data_msg()) {
             msgType = DATA;
             msgTypeStr = "DATA";
-            const pb::PlayerDataMsg* msg{&dataRecord->player_data_msg()};
+            const proto::PlayerDataMsg* msg{&dataRecord->player_data_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -118,7 +119,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_damaged_event_msg()) {
             msgType = DAMAGE;
             msgTypeStr = "DAMAGE";
-            const pb::PlayerDamagedEventMsg* msg{&dataRecord->player_damaged_event_msg()};
+            const proto::PlayerDamagedEventMsg* msg{&dataRecord->player_damaged_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -128,7 +129,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_collision_event_msg()) {
             msgType = COLLISION;
             msgTypeStr = "COLLISION";
-            const pb::PlayerCollisionEventMsg* msg{&dataRecord->player_collision_event_msg()};
+            const proto::PlayerCollisionEventMsg* msg{&dataRecord->player_collision_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -138,7 +139,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_crash_event_msg()) {
             msgType = CRASH;
             msgTypeStr = "CRASH";
-            const pb::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
+            const proto::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -148,7 +149,7 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_killed_event_msg()) {
             msgType = KILL;
             msgTypeStr = "KILL";
-            const pb::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
+            const proto::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
             playerIdMsg = &msg->id();
             playerStMsg = &msg->state();
          }
@@ -223,5 +224,6 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 }
 
 
+}
 }
 }

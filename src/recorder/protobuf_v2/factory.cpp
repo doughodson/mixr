@@ -17,6 +17,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 base::IObject* factory(const std::string& name)
 {
@@ -53,5 +54,6 @@ base::IObject* factory(const std::string& name)
     return obj;
 }
 
+}
 }
 }

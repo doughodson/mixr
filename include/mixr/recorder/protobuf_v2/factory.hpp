@@ -7,7 +7,9 @@
 namespace mixr {
 namespace base { class IObject; }
 namespace recorder {
+namespace protobuf_v2 {
 base::IObject* factory(const std::string&);
+}
 }
 }
 

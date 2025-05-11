@@ -7,6 +7,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(NetOutput, "RecorderNetOutput")
 
@@ -92,7 +93,7 @@ void NetOutput::processRecordImp(const DataRecordHandle* const handle)
    if (handle != nullptr && networkInitialized && netHandler->isConnected()) {
 
       // The DataRecord to be sent
-      const pb::DataRecord* dataRecord{handle->getRecord()};
+      const proto::DataRecord* dataRecord{handle->getRecord()};
 
       // Serialize the DataRecord
       std::string wireFormat;
@@ -144,5 +145,6 @@ bool NetOutput::setSlotNoWait(mixr::base::Boolean* const msg)
    return ok;
 }
 
+}
 }
 }

@@ -15,7 +15,8 @@
 namespace mixr {
 namespace base { class Boolean; class Float; class Integer; class INumber; }
 namespace recorder {
-namespace pb {
+namespace protobuf_v2 {
+namespace proto {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
 class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
 class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
@@ -114,6 +115,7 @@ inline bool PrintSelected::getCompareToBool() const
    else return true;
 }
 
+}
 }
 }
 

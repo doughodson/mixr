@@ -12,6 +12,7 @@
 
 namespace mixr {
 namespace recorder {
+namespace protobuf_v2 {
 
 IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
 EMPTY_DELETEDATA(TabPrinter)
@@ -123,11 +124,11 @@ bool TabPrinter::setSlotDivider(const base::String* const msg)
 void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 {
    if (handle == nullptr) return;  // cannot continue
-   const pb::DataRecord* dataRecord{handle->getRecord()};
+   const proto::DataRecord* dataRecord{handle->getRecord()};
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const pb::Time* timeMsg{};
+   const proto::Time* timeMsg{};
    if (dataRecord->has_time()) {
       timeMsg = &dataRecord->time();
    }
@@ -167,7 +168,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_file_id_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (fileIdHdr)) printHeader = true;
             fileIdHdr = false;
-            const pb::FileIdMsg* msg{&dataRecord->file_id_msg()};
+            const proto::FileIdMsg* msg{&dataRecord->file_id_msg()};
             printFileIdMsg(timeMsg, msg);
          }
          break;
@@ -178,7 +179,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_player_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::NewPlayerEventMsg* msg{&dataRecord->new_player_event_msg()};
+            const proto::NewPlayerEventMsg* msg{&dataRecord->new_player_event_msg()};
             printNewPlayerEventMsg(timeMsg, msg);
          }
          break;
@@ -188,7 +189,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_removed_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerRemovedEventMsg* msg{&dataRecord->player_removed_event_msg()};
+            const proto::PlayerRemovedEventMsg* msg{&dataRecord->player_removed_event_msg()};
             printPlayerRemovedEventMsg(timeMsg, msg);
          }
          break;
@@ -198,7 +199,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_data_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerDataMsg* msg{&dataRecord->player_data_msg()};
+            const proto::PlayerDataMsg* msg{&dataRecord->player_data_msg()};
             printPlayerDataMsg(timeMsg, msg);
          }
          break;
@@ -207,7 +208,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
         if (dataRecord->has_player_damaged_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerDamagedEventMsg* msg{&dataRecord->player_damaged_event_msg()};
+            const proto::PlayerDamagedEventMsg* msg{&dataRecord->player_damaged_event_msg()};
             printPlayerDamagedEventMsg(timeMsg, msg);
          }
          break;
@@ -216,7 +217,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_collision_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerCollisionEventMsg* msg{&dataRecord->player_collision_event_msg()};
+            const proto::PlayerCollisionEventMsg* msg{&dataRecord->player_collision_event_msg()};
             printPlayerCollisionEventMsg(timeMsg, msg);
          }
          break;
@@ -225,7 +226,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_crash_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
+            const proto::PlayerCrashEventMsg* msg{&dataRecord->player_crash_event_msg()};
             printPlayerCrashEventMsg(timeMsg, msg);
          }
          break;
@@ -234,7 +235,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_player_killed_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
-            const pb::PlayerKilledEventMsg* msg{&dataRecord->player_killed_event_msg()};
+            const proto::PlayerKilledEventMsg* msg{&dataRecord->player_killed_event_msg()};
             printPlayerKilledEventMsg(timeMsg, msg);
          }
          break;
@@ -243,7 +244,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_release_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const pb::WeaponReleaseEventMsg* msg{&dataRecord->weapon_release_event_msg()};
+            const proto::WeaponReleaseEventMsg* msg{&dataRecord->weapon_release_event_msg()};
             printWeaponReleaseEventMsg(timeMsg, msg);
          }
          break;
@@ -252,7 +253,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_hung_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const pb::WeaponHungEventMsg* msg{&dataRecord->weapon_hung_event_msg()};
+            const proto::WeaponHungEventMsg* msg{&dataRecord->weapon_hung_event_msg()};
             printWeaponHungEventMsg(timeMsg, msg);
          }
          break;
@@ -261,7 +262,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_weapon_detonation_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
-            const pb::WeaponDetonationEventMsg* msg{&dataRecord->weapon_detonation_event_msg()};
+            const proto::WeaponDetonationEventMsg* msg{&dataRecord->weapon_detonation_event_msg()};
             printWeaponDetonationEventMsg(timeMsg, msg);
          }
          break;
@@ -270,7 +271,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_gun_fired_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (gunFiredHdr)) printHeader = true;
             gunFiredHdr = false;
-            const pb::GunFiredEventMsg* msg{&dataRecord->gun_fired_event_msg()};
+            const proto::GunFiredEventMsg* msg{&dataRecord->gun_fired_event_msg()};
             printGunFiredEventMsg(timeMsg, msg);
          }
          break;
@@ -279,7 +280,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_new_track_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const pb::NewTrackEventMsg* msg{&dataRecord->new_track_event_msg()};
+            const proto::NewTrackEventMsg* msg{&dataRecord->new_track_event_msg()};
             printNewTrackEventMsg(timeMsg, msg);
          }
          break;
@@ -288,7 +289,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_track_removed_event_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const pb::TrackRemovedEventMsg* msg{&dataRecord->track_removed_event_msg()};
+            const proto::TrackRemovedEventMsg* msg{&dataRecord->track_removed_event_msg()};
             printTrackRemovedEventMsg(timeMsg, msg);
          }
          break;
@@ -297,7 +298,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_track_data_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
-            const pb::TrackDataMsg* msg{&dataRecord->track_data_msg()};
+            const proto::TrackDataMsg* msg{&dataRecord->track_data_msg()};
             printTrackDataMsg(timeMsg, msg);
          }
          break;
@@ -312,7 +313,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_marker_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (markerHdr)) printHeader = true;
             markerHdr = false;
-            const pb::MarkerMsg* msg{&dataRecord->marker_msg()};
+            const proto::MarkerMsg* msg{&dataRecord->marker_msg()};
             printMarkerMsg(timeMsg, msg);
          }
          break;
@@ -322,7 +323,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_input_device_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
-            const pb::InputDeviceMsg* msg{&dataRecord->input_device_msg()};
+            const proto::InputDeviceMsg* msg{&dataRecord->input_device_msg()};
             printInputDeviceMsg(timeMsg, msg, messageId);
          }
          break;
@@ -332,7 +333,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
          if (dataRecord->has_input_device_msg()) {
             if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
-            const pb::InputDeviceMsg* msg{&dataRecord->input_device_msg()};
+            const proto::InputDeviceMsg* msg{&dataRecord->input_device_msg()};
             printInputDeviceMsg(timeMsg, msg, messageId);
          }
          break;
@@ -366,7 +367,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 //------------------------------------------------------------------------------
 // printFileIdMsg
 //-----------------------------------------------------------------------------
-void TabPrinter::printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdMsg* const msg)
+void TabPrinter::printFileIdMsg(const proto::Time* const timeMsg, const proto::FileIdMsg* const msg)
 {
    std::stringstream sout;
 
@@ -447,7 +448,7 @@ void TabPrinter::printFileIdMsg(const pb::Time* const timeMsg, const pb::FileIdM
 //------------------------------------------------------------------------------
 // printNewPlayerEventMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb::NewPlayerEventMsg* const msg)
+void TabPrinter::printNewPlayerEventMsg(const proto::Time* const timeMsg, const proto::NewPlayerEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -487,7 +488,7 @@ void TabPrinter::printNewPlayerEventMsg(const pb::Time* const timeMsg, const pb:
 //------------------------------------------------------------------------------
 // printPlayerRemovedEventMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printPlayerRemovedEventMsg(const pb::Time* const timeMsg, const pb::PlayerRemovedEventMsg* const msg)
+void TabPrinter::printPlayerRemovedEventMsg(const proto::Time* const timeMsg, const proto::PlayerRemovedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -527,7 +528,7 @@ void TabPrinter::printPlayerRemovedEventMsg(const pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printPlayerDataMsg
 //--------------------------------------------------------------------------
-void TabPrinter::printPlayerDataMsg(const pb::Time* const timeMsg, const pb::PlayerDataMsg* const msg)
+void TabPrinter::printPlayerDataMsg(const proto::Time* const timeMsg, const proto::PlayerDataMsg* const msg)
 {
    std::stringstream sout;
 
@@ -588,7 +589,7 @@ void TabPrinter::printPlayerDataMsg(const pb::Time* const timeMsg, const pb::Pla
 //------------------------------------------------------------------------------
 // printPlayerDamagedEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerDamagedEventMsg(const pb::Time* const timeMsg, const pb::PlayerDamagedEventMsg* const msg)
+void TabPrinter::printPlayerDamagedEventMsg(const proto::Time* const timeMsg, const proto::PlayerDamagedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -630,7 +631,7 @@ void TabPrinter::printPlayerDamagedEventMsg(const pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printPlayerCollisionEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerCollisionEventMsg(const pb::Time* const timeMsg, const pb::PlayerCollisionEventMsg* const msg)
+void TabPrinter::printPlayerCollisionEventMsg(const proto::Time* const timeMsg, const proto::PlayerCollisionEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -680,7 +681,7 @@ void TabPrinter::printPlayerCollisionEventMsg(const pb::Time* const timeMsg, con
 //------------------------------------------------------------------------------
 // printPlayerCrashEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerCrashEventMsg(const pb::Time* const timeMsg, const pb::PlayerCrashEventMsg* const msg)
+void TabPrinter::printPlayerCrashEventMsg(const proto::Time* const timeMsg, const proto::PlayerCrashEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -721,7 +722,7 @@ void TabPrinter::printPlayerCrashEventMsg(const pb::Time* const timeMsg, const p
 //------------------------------------------------------------------------------
 // printPlayerKilledEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerKilledEventMsg(const pb::Time* const timeMsg, const pb::PlayerKilledEventMsg* const msg)
+void TabPrinter::printPlayerKilledEventMsg(const proto::Time* const timeMsg, const proto::PlayerKilledEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -770,7 +771,7 @@ void TabPrinter::printPlayerKilledEventMsg(const pb::Time* const timeMsg, const 
 //------------------------------------------------------------------------------
 // printWeaponReleaseEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponReleaseEventMsg(const pb::Time* const timeMsg, const pb::WeaponReleaseEventMsg* const msg)
+void TabPrinter::printWeaponReleaseEventMsg(const proto::Time* const timeMsg, const proto::WeaponReleaseEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -823,7 +824,7 @@ void TabPrinter::printWeaponReleaseEventMsg(const pb::Time* const timeMsg, const
 //------------------------------------------------------------------------------
 // printWeaponHungEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponHungEventMsg(const pb::Time* const timeMsg, const pb::WeaponHungEventMsg* const msg)
+void TabPrinter::printWeaponHungEventMsg(const proto::Time* const timeMsg, const proto::WeaponHungEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -875,7 +876,7 @@ void TabPrinter::printWeaponHungEventMsg(const pb::Time* const timeMsg, const pb
 //------------------------------------------------------------------------------
 // printWeaponDetonationEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printWeaponDetonationEventMsg(const pb::Time* const timeMsg, const pb::WeaponDetonationEventMsg* const msg)
+void TabPrinter::printWeaponDetonationEventMsg(const proto::Time* const timeMsg, const proto::WeaponDetonationEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -944,7 +945,7 @@ void TabPrinter::printWeaponDetonationEventMsg(const pb::Time* const timeMsg, co
 //------------------------------------------------------------------------------
 // printGunFiredEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printGunFiredEventMsg(const pb::Time* const timeMsg, const pb::GunFiredEventMsg* const msg)
+void TabPrinter::printGunFiredEventMsg(const proto::Time* const timeMsg, const proto::GunFiredEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -986,7 +987,7 @@ void TabPrinter::printGunFiredEventMsg(const pb::Time* const timeMsg, const pb::
 //------------------------------------------------------------------------------
 // printNewTrackEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printNewTrackEventMsg(const pb::Time* const timeMsg, const pb::NewTrackEventMsg* const msg)
+void TabPrinter::printNewTrackEventMsg(const proto::Time* const timeMsg, const proto::NewTrackEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1064,7 +1065,7 @@ void TabPrinter::printNewTrackEventMsg(const pb::Time* const timeMsg, const pb::
 //------------------------------------------------------------------------------
 // printTrackRemovedEventMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printTrackRemovedEventMsg(const pb::Time* const timeMsg, const pb::TrackRemovedEventMsg* const msg)
+void TabPrinter::printTrackRemovedEventMsg(const proto::Time* const timeMsg, const proto::TrackRemovedEventMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1108,7 +1109,7 @@ void TabPrinter::printTrackRemovedEventMsg(const pb::Time* const timeMsg, const 
 //------------------------------------------------------------------------------
 // printTrackDataMsg (event)
 //------------------------------------------------------------------------------
-void TabPrinter::printTrackDataMsg(const pb::Time* const timeMsg, const pb::TrackDataMsg* const msg)
+void TabPrinter::printTrackDataMsg(const proto::Time* const timeMsg, const proto::TrackDataMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1209,7 +1210,7 @@ void TabPrinter::printTrackMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printTimeMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printTimeMsg(std::ostream& sout, const pb::Time* const timeMsg)
+void TabPrinter::printTimeMsg(std::ostream& sout, const proto::Time* const timeMsg)
 {
    // print time message values:
    if (timeMsg != nullptr) {
@@ -1250,7 +1251,7 @@ void TabPrinter::printTimeMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printPlayerIdMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerIdMsg(std::ostream& sout, const pb::PlayerId* const msg)
+void TabPrinter::printPlayerIdMsg(std::ostream& sout, const proto::PlayerId* const msg)
 {
    // values
    if (msg != nullptr) {
@@ -1309,7 +1310,7 @@ void TabPrinter::printPlayerIdSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printPlayerStateMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* const msg)
+void TabPrinter::printPlayerStateMsg(std::ostream& sout, const proto::PlayerState* const msg)
 {
    // Player State
    if (msg != nullptr) {
@@ -1440,7 +1441,7 @@ void TabPrinter::printWeaponMsgHdr(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printCommonTrackDataMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData* const msg)
+void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const proto::TrackData* const msg)
 {
    // Track Data
 
@@ -1582,7 +1583,7 @@ void TabPrinter::printTrackDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printEmissionDataMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printEmissionDataMsg(std::ostream& sout, const pb::EmissionData* const msg)
+void TabPrinter::printEmissionDataMsg(std::ostream& sout, const proto::EmissionData* const msg)
 {
    if (msg != nullptr) {
       // emission data values
@@ -1665,7 +1666,7 @@ void TabPrinter::printEmissionDataSpacer(std::ostream& sout)
 //------------------------------------------------------------------------------
 // printMarkerMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printMarkerMsg(const pb::Time* const timeMsg, const pb::MarkerMsg* const msg)
+void TabPrinter::printMarkerMsg(const proto::Time* const timeMsg, const proto::MarkerMsg* const msg)
 {
    std::stringstream sout;
 
@@ -1706,7 +1707,7 @@ void TabPrinter::printMarkerMsg(const pb::Time* const timeMsg, const pb::MarkerM
 //------------------------------------------------------------------------------
 // printInputDeviceMsg
 //------------------------------------------------------------------------------
-void TabPrinter::printInputDeviceMsg(const pb::Time* const timeMsg, const pb::InputDeviceMsg* const msg, const unsigned int msgId)
+void TabPrinter::printInputDeviceMsg(const proto::Time* const timeMsg, const proto::InputDeviceMsg* const msg, const unsigned int msgId)
 {
    std::stringstream sout;
    std::string inputType{""};
@@ -1759,7 +1760,7 @@ void TabPrinter::printInputDeviceMsg(const pb::Time* const timeMsg, const pb::In
 //------------------------------------------------------------------------------
 // printEndOfData
 //------------------------------------------------------------------------------
-void TabPrinter::printEndOfData(const pb::Time* const timeMsg)
+void TabPrinter::printEndOfData(const proto::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1780,7 +1781,7 @@ void TabPrinter::printEndOfData(const pb::Time* const timeMsg)
 //------------------------------------------------------------------------------
 // printUnhandledIdToken
 //------------------------------------------------------------------------------
-void TabPrinter::printUnhandledIdToken(const pb::Time* const timeMsg)
+void TabPrinter::printUnhandledIdToken(const proto::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1801,7 +1802,7 @@ void TabPrinter::printUnhandledIdToken(const pb::Time* const timeMsg)
 //------------------------------------------------------------------------------
 // printResetEvent
 //------------------------------------------------------------------------------
-void TabPrinter::printResetEvent(const pb::Time* const timeMsg)
+void TabPrinter::printResetEvent(const proto::Time* const timeMsg)
 {
    std::stringstream sout;
 
@@ -1867,5 +1868,6 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     sout << cbuf;
 }
 
+}
 }
 }

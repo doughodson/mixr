@@ -7,6 +7,7 @@
 namespace mixr {
 namespace base { class Boolean; class INetHandler; }
 namespace recorder {
+namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: NetOutput
@@ -43,6 +44,7 @@ private:
    bool setSlotNoWait(base::Boolean* const);
 };
 
+}
 }
 }
 

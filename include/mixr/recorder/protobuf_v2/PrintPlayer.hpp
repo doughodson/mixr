@@ -10,7 +10,8 @@
 
 namespace mixr {
 namespace recorder {
-namespace pb {
+namespace protobuf_v2 {
+namespace proto {
 class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
 class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
 class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
@@ -49,6 +50,7 @@ private:
    bool setSlotName(const base::String* const x)           { return setName(x); }
 };
 
+}
 }
 }
 
