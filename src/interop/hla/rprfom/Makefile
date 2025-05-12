@@ -1,7 +1,7 @@
 #
 include ../../../makedefs
 
-LIB = $(MIXR_LIB_DIR)/libmixr_interop_rprfom.a
+LIB = $(MIXR_LIB_DIR)/libmixr_interop_hla_rprfom.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM
