@@ -7,8 +7,8 @@
    project "base"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/base/**.*",
-         "../../src/base/**.*"
+         "../../include/mixr/base/**",
+         "../../src/base/**"
       }
       removefiles {
          "../../src/base/osg/Matrix_implementation.cpp",
@@ -23,12 +23,12 @@
    project "graphics"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/graphics/**.*",
-         "../../src/graphics/**.*"
+         "../../include/mixr/graphics/**",
+         "../../src/graphics/**"
       }
       removefiles {
-         "../../include/mixr/graphics/fonts/ftgl/**.*",
-         "../../src/graphics/fonts/ftgl/**.*"
+         "../../include/mixr/graphics/fonts/ftgl/**",
+         "../../src/graphics/fonts/ftgl/**"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "graphics"
@@ -37,8 +37,8 @@
    project "graphics_ftgl"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/graphics/fonts/ftgl/**.*",
-         "../../src/graphics/fonts/ftgl/**.*",
+         "../../include/mixr/graphics/fonts/ftgl/**",
+         "../../src/graphics/fonts/ftgl/**",
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/freetype2" }
@@ -49,8 +49,8 @@
    project "dafif"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/dafif/**.*",
-         "../../src/dafif/**.*"
+         "../../include/mixr/dafif/**",
+         "../../src/dafif/**"
       }
       includedirs { MIXR_IncPath }
       targetname "dafif"
@@ -59,8 +59,8 @@
    project "instruments"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/instruments/**.*",
-         "../../src/instruments/**.*"
+         "../../include/mixr/instruments/**",
+         "../../src/instruments/**"
       }
       includedirs { MIXR_IncPath }
       targetname "instruments"
@@ -69,8 +69,8 @@
    project "linkage"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/linkage/**.*",
-         "../../src/linkage/**.*"
+         "../../include/mixr/linkage/**",
+         "../../src/linkage/**"
       }
       removefiles { "../../src/linkage/platform/UsbJoystick_linux.*" }
       includedirs { MIXR_IncPath }
@@ -80,12 +80,12 @@
    project "models"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/models/**.*",
-         "../../src/models/**.*"
+         "../../include/mixr/models/**",
+         "../../src/models/**"
       }
       removefiles {
-                 "../../include/mixr/models/dynamics/jsbsim/**.*",
-                 "../../src/models/dynamics/jsbsim/**.*"
+                 "../../include/mixr/models/dynamics/jsbsim/**",
+                 "../../src/models/dynamics/jsbsim/**"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "models"
@@ -94,8 +94,8 @@
    project "models_jsbsim"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/models/dynamics/jsbsim/**.*",
-         "../../src/models/dynamics/jsbsim/**.*"
+         "../../include/mixr/models/dynamics/jsbsim/**",
+         "../../src/models/dynamics/jsbsim/**"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       includedirs { MIXR_3rdPartyIncPath.."/JSBSim" }
@@ -105,8 +105,8 @@
    project "recorder_protobuf_v2"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/recorder/protobuf_v2/**.*",
-         "../../src/recorder/protobuf_v2/**.*"
+         "../../include/mixr/recorder/protobuf_v2/**",
+         "../../src/recorder/protobuf_v2/**"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
@@ -116,8 +116,8 @@
    project "simulation"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/simulation/**.*",
-         "../../src/simulation/**.*"
+         "../../include/mixr/simulation/**",
+         "../../src/simulation/**"
       }
       includedirs { MIXR_IncPath }
       targetname "simulation"
@@ -126,8 +126,8 @@
    project "terrain"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/terrain/**.*",
-         "../../src/terrain/**.*"
+         "../../include/mixr/terrain/**",
+         "../../src/terrain/**"
       }
       includedirs { MIXR_IncPath }
       targetname "terrain"
@@ -136,8 +136,8 @@
    project "ui_glut"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/ui/glut/**.*",
-         "../../src/ui/glut/**.*"
+         "../../include/mixr/ui/glut/**",
+         "../../src/ui/glut/**"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       targetname "ui_glut"

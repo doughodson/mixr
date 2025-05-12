@@ -7,8 +7,14 @@
    project "interop"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/*.h*",
-         "../../src/interop/*.c*"
+         "../../include/mixr/interop/**",
+         "../../src/interop/**"
+      }
+      removefiles {
+         "../../include/mixr/interop/dis/**",
+         "../../src/interop/dis/**",
+         "../../include/mixr/interop/hla/**",
+         "../../src/interop/hla/**"
       }
       includedirs { MIXR_IncPath }
       targetname "interop"
@@ -17,8 +23,8 @@
    project "interop_dis"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/dis/**.*",
-         "../../src/interop/dis/**.*"
+         "../../include/mixr/interop/dis/**",
+         "../../src/interop/dis/**"
       }
       includedirs { MIXR_IncPath }
       targetname "interop_dis"
@@ -27,8 +33,12 @@
    project "interop_hla"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/hla/*.h*",
-         "../../src/interop/hla/*.c*"
+         "../../include/mixr/interop/hla/**",
+         "../../src/interop/hla/**"
+      }
+      removefiles {
+         "../../include/mixr/interop/hla/rprfom/**",
+         "../../src/interop/hla/rprfom/**"
       }
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
@@ -38,8 +48,8 @@
    project "interop_hla_rprfom"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/hla/rprfom/**.*",
-         "../../src/interop/hla/rprfom/**.*"
+         "../../include/mixr/interop/hla/rprfom/**",
+         "../../src/interop/hla/rprfom/**"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
