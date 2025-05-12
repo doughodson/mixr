@@ -117,10 +117,10 @@
    project "recorder_protobuf_v2"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/recorder/protobuf_v2/*.h*",
+         "../../include/mixr/recorder/protobuf_v2/**.h*",
          "../../include/mixr/recorder/protobuf_v2/*.inl",
          "../../include/mixr/recorder/protobuf_v2/proto/*.proto",
-         "../../src/recorder/protobuf_v2/*.c*"
+         "../../src/recorder/protobuf_v2/**.c*"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       includedirs { MIXR_IncPath, MIXR_3rdPartyIncPath }
