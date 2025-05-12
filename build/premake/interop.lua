@@ -17,8 +17,8 @@
    project "interop_dis"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/dis/*.h*",
-         "../../src/interop/dis/*.c*"
+         "../../include/mixr/interop/dis/**.*",
+         "../../src/interop/dis/**.*"
       }
       includedirs { MIXR_IncPath }
       targetname "interop_dis"
@@ -38,8 +38,8 @@
    project "interop_hla_rprfom"
       location ("../" .. _ACTION .. "/projects/%{prj.name}")
       files {
-         "../../include/mixr/interop/hla/rprfom/*.h*",
-         "../../src/interop/hla/rprfom/*.c*"
+         "../../include/mixr/interop/hla/rprfom/**.*",
+         "../../src/interop/hla/rprfom/**.*"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
