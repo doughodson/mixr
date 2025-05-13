@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_dynamics_IDynamicsModel_HPP__
-#define __mixr_models_common_dynamics_IDynamicsModel_HPP__
+#ifndef __mixr_models_common_dynamics_IDynamics_HPP__
+#define __mixr_models_common_dynamics_IDynamics_HPP__
 
 #include "mixr/base/IComponent.hpp"
 
@@ -8,9 +8,9 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: IDynamicsModel
+// Class: IDynamics
 //
-// Description:  Interface class for all dynamics models
+// Description: Interface class for all dynamics models
 //
 // Note --
 //
@@ -28,15 +28,15 @@ namespace models {
 //    4) This class is one of the "top level" systems attached to a Player
 //       class (see Player.hpp).
 //
-// Factory name: DynamicsModel
+// Factory name: IDynamics
 //
 //------------------------------------------------------------------------------
-class IDynamicsModel : public base::IComponent
+class IDynamics : public base::IComponent
 {
-    DECLARE_SUBCLASS(IDynamicsModel, base::IComponent)
+    DECLARE_SUBCLASS(IDynamics, base::IComponent)
 
 public:
-    IDynamicsModel();
+    IDynamics();
 
     virtual void atReleaseInit();
     virtual void dynamics(const double dt);

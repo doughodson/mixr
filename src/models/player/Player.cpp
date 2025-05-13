@@ -4,7 +4,7 @@
 #include "mixr/models/WorldModel.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/dynamics/IDynamicsModel.hpp"
+#include "mixr/models/dynamics/IDynamics.hpp"
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/system/IGimbal.hpp"
@@ -834,16 +834,16 @@ WorldModel* Player::getSimulationImp()
 // Dynamics model access functions
 //------------------------------------------------------------------------------
 
-// Player's dynamics model
-IDynamicsModel* Player::getDynamicsModel()
+// Player's dynamics
+IDynamics* Player::getDynamicsModel()
 {
-   return (dynamicsModel != nullptr) ? (static_cast<IDynamicsModel*>(dynamicsModel->object())) : nullptr;
+   return (dynamicsModel != nullptr) ? (static_cast<IDynamics*>(dynamicsModel->object())) : nullptr;
 }
 
-// Player's dynamics model (const version)
-const IDynamicsModel* Player::getDynamicsModel() const
+// Player's dynamics (const version)
+const IDynamics* Player::getDynamicsModel() const
 {
-   return (dynamicsModel != nullptr) ? (static_cast<IDynamicsModel*>(dynamicsModel->object())) : nullptr;
+   return (dynamicsModel != nullptr) ? (static_cast<IDynamics*>(dynamicsModel->object())) : nullptr;
 }
 
 // Name of the Player's dynamics model
@@ -3161,7 +3161,7 @@ void Player::updateSystemPointers()
    // Set base::Pair pointers for our primary systems located in our list of subcomponents
    // ---
    loadSysPtrs = false;
-   setDynamicsModel( findByType(typeid(IDynamicsModel)) );
+   setDynamicsModel( findByType(typeid(IDynamics)) );
    setDatalink( findByType(typeid(Datalink)) );
    setGimbal( findByType(typeid(IGimbal)) );
    setIrSystem( findByType(typeid(IrSystem)) );
@@ -3244,7 +3244,7 @@ bool Player::setDynamicsModel(base::Pair* const sys)
       if (dynamicsModel != nullptr) dynamicsModel->unref();
       dynamicsModel = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(IDynamicsModel)) ) {
+   } else if ( sys->object()->isClassType(typeid(IDynamics)) ) {
       if (dynamicsModel != nullptr) dynamicsModel->unref();
       dynamicsModel = sys;
       dynamicsModel->ref();
