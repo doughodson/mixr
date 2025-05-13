@@ -12,7 +12,7 @@ namespace models {
 
 class Action;
 class Track;
-class TrackManager;
+class ITrackMgr;
 
 //------------------------------------------------------------------------------
 // Class: OnboardComputer
@@ -38,10 +38,10 @@ public:
    OnboardComputer();
 
    // Track managers
-   virtual TrackManager* getTrackManagerByType(const std::type_info& type);
-   virtual const TrackManager* getTrackManagerByType(const std::type_info& type) const;
-   virtual TrackManager* getTrackManagerByName(const char* const name);
-   virtual const TrackManager* getTrackManagerByName(const char* const) const;
+   virtual ITrackMgr* getTrackManagerByType(const std::type_info& type);
+   virtual const ITrackMgr* getTrackManagerByType(const std::type_info& type) const;
+   virtual ITrackMgr* getTrackManagerByName(const char* const name);
+   virtual const ITrackMgr* getTrackManagerByName(const char* const) const;
 
    // Air to Air functions
    virtual Track* getNextTarget();                                      // Get the target track

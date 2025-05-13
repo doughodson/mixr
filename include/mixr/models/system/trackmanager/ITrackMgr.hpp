@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_TrackManager_HPP__
-#define __mixr_models_common_TrackManager_HPP__
+#ifndef __mixr_models_common_ITrackMgr_HPP__
+#define __mixr_models_common_ITrackMgr_HPP__
 
 #include "mixr/models/system/System.hpp"
 #include "mixr/base/safe_queue.hpp"
@@ -13,11 +13,11 @@ class Player;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class: TrackManager
+// Class: ITrackMgr
 //
-// Description: Abstract class for Track Managers
+// Description: Interface class for all track managers
 //
-// Factory name: TrackManager
+// Factory name: ITrackMgr
 // Slots:
 //    maxTracks       <Integer>  ! Maximum number of tracks (default: MAX_TRKS)
 //
@@ -33,12 +33,12 @@ class Track;
 //    logTrackUpdates <Boolean>  ! True to log all updates to tracks (default: true)
 //
 //------------------------------------------------------------------------------
-class TrackManager : public System
+class ITrackMgr : public System
 {
-   DECLARE_SUBCLASS(TrackManager, System)
+   DECLARE_SUBCLASS(ITrackMgr, System)
 
 public:
-   TrackManager();
+   ITrackMgr();
 
    virtual double getMaxTrackAge() const;
    virtual bool setMaxTrackAge(const double sec);

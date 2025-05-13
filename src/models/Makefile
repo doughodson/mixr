@@ -69,7 +69,7 @@ OBJS =  \
 	system/trackmanager/AngleOnlyTrackManager.o \
 	system/trackmanager/GmtiTrkMgr.o \
 	system/trackmanager/RwrTrkMgr.o \
-	system/trackmanager/TrackManager.o \
+	system/trackmanager/ITrackMgr.o \
 	system/Antenna.o \
 	system/Autopilot.o \
 	system/AvionicsPod.o \

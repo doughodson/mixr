@@ -4,7 +4,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/ScanGimbal.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Track.hpp"
 
 namespace mixr {
@@ -34,7 +34,7 @@ void Stt::dynamics(const double dt)
     // ---
     // Update the antenna's Reference position
     // ---
-    TrackManager* tm{getTrackManager()};
+    ITrackMgr* tm{getTrackManager()};
     if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
         base::safe_ptr<Track> trackList[2];

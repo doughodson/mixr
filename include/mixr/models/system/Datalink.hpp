@@ -10,7 +10,7 @@ namespace mixr {
 namespace base { class Integer; class ILength; class String; }
 namespace models {
 class CommRadio;
-class TrackManager;
+class ITrackMgr;
 
 //------------------------------------------------------------------------------
 // Class: Datalink
@@ -69,9 +69,9 @@ public:
    // For network handler to get to the messages
    base::safe_queue<base::IObject*>* getOutputQueue()                  { return outQueue; }
 
-   TrackManager* getTrackManager()                                     { return trackManager; }
-   const TrackManager* getTrackManager() const                         { return trackManager; }
-   virtual bool setTrackManager(TrackManager* const tm);
+   ITrackMgr* getTrackManager()                                        { return trackManager; }
+   const ITrackMgr* getTrackManager() const                            { return trackManager; }
+   virtual bool setTrackManager(ITrackMgr* const tm);
 
    const base::String* getTrackManagerName() const                     { return tmName; }
    bool setTrackManagerName(const base::String* const);
@@ -109,7 +109,7 @@ private:
    bool sendLocal {true};                // Send to local players flag; direct or via the radio
    bool queueForNetwork {true};          // Send the message to the network output queue
 
-   TrackManager* trackManager {};        // Track manager
+   ITrackMgr* trackManager {};           // Track manager
    const base::String* tmName {};        // Track manager name
 
 private:

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_AirTrkMgr_HPP__
 #define __mixr_models_common_AirTrkMgr_HPP__
 
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -21,9 +21,9 @@ namespace models {
 //   velocityGate   <base::INumber>  ! Velocity Gate (m/s) (default: 10.0f)
 //
 //------------------------------------------------------------------------------
-class AirTrkMgr : public TrackManager
+class AirTrkMgr : public ITrackMgr
 {
-   DECLARE_SUBCLASS(AirTrkMgr, TrackManager)
+   DECLARE_SUBCLASS(AirTrkMgr, ITrackMgr)
 
 public:
    AirTrkMgr();

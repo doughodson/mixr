@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
@@ -17,9 +17,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_PARTIAL_SUBCLASS(TrackManager, "TrackManager")
+IMPLEMENT_PARTIAL_SUBCLASS(ITrackMgr, "ITrackMgr")
 
-BEGIN_SLOTTABLE(TrackManager)
+BEGIN_SLOTTABLE(ITrackMgr)
    "maxTracks",        // 1: Maximum number of tracks
    "maxTrackAge",      // 2: Maximum track age (time: sec)
    "firstTrackId",     // 3: First track ID
@@ -27,9 +27,9 @@ BEGIN_SLOTTABLE(TrackManager)
    "beta",             // 5: Beta
    "gamma",            // 6: Gamma
    "logTrackUpdates",  // 7: whether to log all updates to tracks (default: true)
-END_SLOTTABLE(TrackManager)
+END_SLOTTABLE(ITrackMgr)
 
-BEGIN_SLOT_MAP(TrackManager)
+BEGIN_SLOT_MAP(ITrackMgr)
    ON_SLOT(1, setSlotMaxTracks,       base::Integer)
    ON_SLOT(2, setSlotMaxTrackAge,     base::INumber)
    ON_SLOT(2, setSlotMaxTrackAge,     base::ITime)
@@ -40,34 +40,34 @@ BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(7, setSlotLogTrackUpdates, base::Boolean)
 END_SLOT_MAP()
 
-TrackManager::TrackManager()
+ITrackMgr::ITrackMgr()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-TrackManager::TrackManager(const TrackManager& org)
+ITrackMgr::ITrackMgr(const ITrackMgr& org)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org, true);
 }
 
-TrackManager::~TrackManager()
+ITrackMgr::~ITrackMgr()
 {
    STANDARD_DESTRUCTOR()
 }
 
-TrackManager& TrackManager::operator=(const TrackManager& org)
+ITrackMgr& ITrackMgr::operator=(const ITrackMgr& org)
 {
    if (this != &org) copyData(org,false);
    return *this;
 }
 
-TrackManager* TrackManager::clone() const
+ITrackMgr* ITrackMgr::clone() const
 {
    return nullptr;
 }
 
-void TrackManager::copyData(const TrackManager& org, const bool)
+void ITrackMgr::copyData(const ITrackMgr& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -94,7 +94,7 @@ void TrackManager::copyData(const TrackManager& org, const bool)
    gamma   = org.gamma;
 }
 
-void TrackManager::deleteData()
+void ITrackMgr::deleteData()
 {
    clearTracksAndQueues();
 }
@@ -102,7 +102,7 @@ void TrackManager::deleteData()
 //------------------------------------------------------------------------------
 // clearTracksAndQueues() -- Clear all tracks and queues
 //------------------------------------------------------------------------------
-void TrackManager::clearTracksAndQueues()
+void ITrackMgr::clearTracksAndQueues()
 {
    // ---
    // Clear out the queue(s)
@@ -133,7 +133,7 @@ void TrackManager::clearTracksAndQueues()
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void TrackManager::reset()
+void ITrackMgr::reset()
 {
    BaseClass::reset();
 
@@ -144,7 +144,7 @@ void TrackManager::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool TrackManager::shutdownNotification()
+bool ITrackMgr::shutdownNotification()
 {
    clearTracksAndQueues();
 
@@ -154,7 +154,7 @@ bool TrackManager::shutdownNotification()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void TrackManager::process(const double dt)
+void ITrackMgr::process(const double dt)
 {
    processTrackList(dt);
    BaseClass::process(dt);
@@ -163,47 +163,47 @@ void TrackManager::process(const double dt)
 //------------------------------------------------------------------------------
 // Get track manager attributes
 //------------------------------------------------------------------------------
-double TrackManager::getMaxTrackAge() const
+double ITrackMgr::getMaxTrackAge() const
 {
    return maxTrackAge;
 }
 
-unsigned int TrackManager::getMaxTracks() const
+unsigned int ITrackMgr::getMaxTracks() const
 {
    return maxTrks;
 }
 
-unsigned int TrackManager::getNumTracks() const
+unsigned int ITrackMgr::getNumTracks() const
 {
    return nTrks;
 }
 
-bool TrackManager::isType(const short t) const
+bool ITrackMgr::isType(const short t) const
 {
    return ((type & t) != 0);
 }
 
-short TrackManager::getType() const
+short ITrackMgr::getType() const
 {
    return type;
 }
 
-void TrackManager::setType(const short t)
+void ITrackMgr::setType(const short t)
 {
    type = t;
 }
 
-void TrackManager::setSubtype(const short t)
+void ITrackMgr::setSubtype(const short t)
 {
    type = (t | type);
 }
 
-bool TrackManager::getLogTrackUpdates() const
+bool ITrackMgr::getLogTrackUpdates() const
 {
    return logTrackUpdates;
 }
 
-bool TrackManager::setMaxTrackAge(const double s)
+bool ITrackMgr::setMaxTrackAge(const double s)
 {
    bool ok{};
    if (s > 0) {
@@ -217,7 +217,7 @@ bool TrackManager::setMaxTrackAge(const double s)
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(base::safe_ptr<Track>* const tlist, const unsigned int max) const
+int ITrackMgr::getTrackList(base::safe_ptr<Track>* const tlist, const unsigned int max) const
 {
    int n{};
 
@@ -236,7 +236,7 @@ int TrackManager::getTrackList(base::safe_ptr<Track>* const tlist, const unsigne
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(base::safe_ptr<const Track>* const tlist, const unsigned int max) const
+int ITrackMgr::getTrackList(base::safe_ptr<const Track>* const tlist, const unsigned int max) const
 {
    int n{};
 
@@ -254,7 +254,7 @@ int TrackManager::getTrackList(base::safe_ptr<const Track>* const tlist, const u
 //------------------------------------------------------------------------------
 // getTrackList() -- returns the track list as an array of pointers
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(Track* tlist[], const unsigned int max)
+int ITrackMgr::getTrackList(Track* tlist[], const unsigned int max)
 {
    int n{};
 
@@ -271,7 +271,7 @@ int TrackManager::getTrackList(Track* tlist[], const unsigned int max)
    return n;
 }
 
-int TrackManager::getTrackList(const Track* tlist[], const unsigned int max) const
+int ITrackMgr::getTrackList(const Track* tlist[], const unsigned int max) const
 {
    int n{};
 
@@ -291,7 +291,7 @@ int TrackManager::getTrackList(const Track* tlist[], const unsigned int max) con
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by player 'p'
 //------------------------------------------------------------------------------
-bool TrackManager::killedNotification(Player* const p)
+bool ITrackMgr::killedNotification(Player* const p)
 {
    clearTracksAndQueues();
    return BaseClass::killedNotification(p);
@@ -300,7 +300,7 @@ bool TrackManager::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // newReport() -- Accept a new emission report
 //------------------------------------------------------------------------------
-void TrackManager::newReport(Emission* em, double sn)
+void ITrackMgr::newReport(Emission* em, double sn)
 {
    // Queue up emissions reports
    if (em != nullptr) {
@@ -317,7 +317,7 @@ void TrackManager::newReport(Emission* em, double sn)
 //------------------------------------------------------------------------------
 // getReport() -- Get the next 'new' report of the queue
 //------------------------------------------------------------------------------
-Emission* TrackManager::getReport(double* const sn)
+Emission* ITrackMgr::getReport(double* const sn)
 {
    Emission* em{};
 
@@ -334,7 +334,7 @@ Emission* TrackManager::getReport(double* const sn)
 //------------------------------------------------------------------------------
 // addTrack() -- Add a track to the list
 //------------------------------------------------------------------------------
-bool TrackManager::addTrack(Track* const t)
+bool ITrackMgr::addTrack(Track* const t)
 {
    bool ok{};
 
@@ -352,7 +352,7 @@ bool TrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // makeMatrixA() -- make standard A matrix
 //------------------------------------------------------------------------------
-void TrackManager::makeMatrixA(double dt)
+void ITrackMgr::makeMatrixA(double dt)
 {
    // Delta time (default: 50 hz)
    double t{dt};
@@ -376,7 +376,7 @@ void TrackManager::makeMatrixA(double dt)
 //------------------------------------------------------------------------------
 // setMaxTracks() -- Sets the maximum number of active tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
+bool ITrackMgr::setSlotMaxTracks(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -385,7 +385,7 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
          maxTrks = static_cast<unsigned int>(max);
          ok = true;
       } else {
-         std::cerr << "TrackManager::setMaxTracks: maxTracks is invalid, range: [1 .. " << MAX_TRKS << "]" << std::endl;
+         std::cerr << "ITrackMgr::setMaxTracks: maxTracks is invalid, range: [1 .. " << MAX_TRKS << "]" << std::endl;
       }
    }
    return ok;
@@ -394,7 +394,7 @@ bool TrackManager::setSlotMaxTracks(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // setSlotMaxTrackAge() -- Sets the maximum age of tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTrackAge(const base::INumber* const x)
+bool ITrackMgr::setSlotMaxTrackAge(const base::INumber* const x)
 {
    double age{};
    if (x != nullptr) {
@@ -407,13 +407,13 @@ bool TrackManager::setSlotMaxTrackAge(const base::INumber* const x)
    if (age > 0.0) {
       ok = setMaxTrackAge(age);
    } else {
-      std::cerr << "TrackManager::setMaxTrackAge: invalid age, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setMaxTrackAge: invalid age, must be greater than zero." << std::endl;
       ok = false;
    }
    return ok;
 }
 
-bool TrackManager::setSlotMaxTrackAge(const base::ITime* const x)
+bool ITrackMgr::setSlotMaxTrackAge(const base::ITime* const x)
 {
    double age{};
    if (x != nullptr) {
@@ -425,7 +425,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::ITime* const x)
    if (age > 0.0) {
       ok = setMaxTrackAge(age);
    } else {
-      std::cerr << "TrackManager::setMaxTrackAge: invalid age, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setMaxTrackAge: invalid age, must be greater than zero." << std::endl;
       ok = false;
    }
    return ok;
@@ -434,7 +434,7 @@ bool TrackManager::setSlotMaxTrackAge(const base::ITime* const x)
 //------------------------------------------------------------------------------
 // setSlotFirstTrackId() -- Sets the first (starting) track id number
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
+bool ITrackMgr::setSlotFirstTrackId(const base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -444,7 +444,7 @@ bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
          nextTrkId = firstTrkId;
          ok = true;
       } else {
-         std::cerr << "TrackManager::setSlotFirstTrackId: firstTrackId is invalid: must be >= 0" << std::endl;
+         std::cerr << "ITrackMgr::setSlotFirstTrackId: firstTrackId is invalid: must be >= 0" << std::endl;
       }
    }
    return ok;
@@ -453,7 +453,7 @@ bool TrackManager::setSlotFirstTrackId(const base::Integer* const num)
 //------------------------------------------------------------------------------
 // Sets alpha
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotAlpha(const base::INumber* const msg)
+bool ITrackMgr::setSlotAlpha(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -466,7 +466,7 @@ bool TrackManager::setSlotAlpha(const base::INumber* const msg)
 //------------------------------------------------------------------------------
 // Sets beta
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotBeta(const base::INumber* const msg)
+bool ITrackMgr::setSlotBeta(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -479,7 +479,7 @@ bool TrackManager::setSlotBeta(const base::INumber* const msg)
 //------------------------------------------------------------------------------
 // Sets gamma
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotGamma(const base::INumber* const msg)
+bool ITrackMgr::setSlotGamma(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -492,7 +492,7 @@ bool TrackManager::setSlotGamma(const base::INumber* const msg)
 //------------------------------------------------------------------------------
 // Sets logTrackUpdates
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotLogTrackUpdates(const base::Boolean* const num)
+bool ITrackMgr::setSlotLogTrackUpdates(const base::Boolean* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -504,7 +504,7 @@ bool TrackManager::setSlotLogTrackUpdates(const base::Boolean* const num)
 //------------------------------------------------------------------------------
 // Sets logTrackUpdates; controls output
 //------------------------------------------------------------------------------
-bool TrackManager::setLogTrackUpdates (const bool b)
+bool ITrackMgr::setLogTrackUpdates (const bool b)
 {
    logTrackUpdates = b;
    return true;

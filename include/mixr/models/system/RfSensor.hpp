@@ -13,7 +13,7 @@ namespace base { class IAngle; class Boolean; class IFrequency; class Identifier
 namespace models {
 class Antenna;
 class Player;
-class TrackManager;
+class ITrackMgr;
 
 //------------------------------------------------------------------------------
 // Class: RfSensor
@@ -88,9 +88,9 @@ public:
     virtual const std::string& getTrackManagerName() const;  // Returns the requested track manager's name
     virtual bool setTrackManagerName(const std::string&);    // Sets the name of the track manager to use
 
-    virtual TrackManager* getTrackManager();                 // Returns our current track manager
-    virtual const TrackManager* getTrackManager() const;     // Returns our current track manager (const version)
-    virtual bool setTrackManager(TrackManager* const);       // Sets the track manager
+    virtual ITrackMgr* getTrackManager();                    // Returns our current track manager
+    virtual const ITrackMgr* getTrackManager() const;        // Returns our current track manager (const version)
+    virtual bool setTrackManager(ITrackMgr* const);          // Sets the track manager
 
     // Support for a list of sensor ranges
     virtual bool incRange();                                        // Increment range index; returns true if successful
@@ -131,7 +131,7 @@ private:
 
     std::string tmName;                 // Name of our track manager
     RfSensor*     masterModePtr{};      // Our Master (Parent) mode (e.g., Sensor)
-    TrackManager* trackManager{};       // Our Track manager -- managed by the onboard computer
+    ITrackMgr* trackManager{};          // Our Track manager -- managed by the onboard computer
 
     static const int TYPE_ID_LENGTH{64};
     char typeId[TYPE_ID_LENGTH]{};      // R/F system type ID

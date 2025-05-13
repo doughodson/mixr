@@ -3,7 +3,6 @@
 
 #include "mixr/models/dynamics/IDynamics.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Designator.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Stores.hpp"

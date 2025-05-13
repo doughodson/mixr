@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_RwrTrkMgr_HPP__
 #define __mixr_models_common_RwrTrkMgr_HPP__
 
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 
 namespace mixr {
 namespace models {
@@ -14,9 +14,9 @@ namespace models {
 // Factory name: RwrTrkMgr
 //
 //------------------------------------------------------------------------------
-class RwrTrkMgr : public TrackManager
+class RwrTrkMgr : public ITrackMgr
 {
-   DECLARE_SUBCLASS(RwrTrkMgr, TrackManager)
+   DECLARE_SUBCLASS(RwrTrkMgr, ITrackMgr)
 
 public:
    RwrTrkMgr();

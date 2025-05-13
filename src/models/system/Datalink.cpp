@@ -3,7 +3,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/CommRadio.hpp"
 #include "mixr/models/system/Radio.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Message.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -178,7 +178,7 @@ bool Datalink::setRadioName(const base::String* const p)
 }
 
 // set the track manager
-bool Datalink::setTrackManager(TrackManager* const tm)
+bool Datalink::setTrackManager(ITrackMgr* const tm)
 {
     if (trackManager != nullptr) {
         trackManager->unref();

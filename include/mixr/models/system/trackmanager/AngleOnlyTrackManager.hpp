@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_AngleOnlyTrackManager_HPP__
 #define __mixr_models_common_AngleOnlyTrackManager_HPP__
 
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/base/safe_queue.hpp"
 #include "mixr/base/util/constants.hpp"
 
@@ -21,9 +21,9 @@ class Track;
 //    azimuthBin    <base::IAngle>   ! Azimuth Bin (default: PI)
 //    elevationBin  <base::IAngle>   ! Elevation Bin (default: PI)
 //------------------------------------------------------------------------------
-class AngleOnlyTrackManager : public TrackManager
+class AngleOnlyTrackManager : public ITrackMgr
 {
-   DECLARE_SUBCLASS(AngleOnlyTrackManager, TrackManager)
+   DECLARE_SUBCLASS(AngleOnlyTrackManager, ITrackMgr)
 
 public:
    AngleOnlyTrackManager();

@@ -6,7 +6,6 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 

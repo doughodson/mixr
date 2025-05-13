@@ -66,7 +66,6 @@
 #include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 #include "mixr/models/system/trackmanager/GmtiTrkMgr.hpp"
 #include "mixr/models/system/trackmanager/RwrTrkMgr.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
 
 // system models
 #include "mixr/models/system/Antenna.hpp"

@@ -204,9 +204,9 @@ void OnboardComputer::updateShootList(const bool step)
    base::safe_ptr<Track> trackList[MAX_TRKS];
 
    int n{};
-   TrackManager* tm{getTrackManagerByType(typeid(AirTrkMgr))};
+   ITrackMgr* tm{getTrackManagerByType(typeid(AirTrkMgr))};
    // fall back to whatever TM we have, if we don't have an AirTrkMgr
-   if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
+   if (tm == nullptr) tm = getTrackManagerByType(typeid(ITrackMgr));
    if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
 
    if (n > 0) {
@@ -294,9 +294,9 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
       base::safe_ptr<Track> trackList[MAX_TRKS];
 
       int n{};
-      TrackManager* tm{getTrackManagerByType(typeid(AirTrkMgr))};
+      ITrackMgr* tm{getTrackManagerByType(typeid(AirTrkMgr))};
       // fall back to whatever TM we have, if we don't have an AirTrkMgr
-      if (tm == nullptr) tm = getTrackManagerByType(typeid(TrackManager));
+      if (tm == nullptr) tm = getTrackManagerByType(typeid(ITrackMgr));
       if (tm != nullptr) n = tm->getTrackList(trackList,MAX_TRKS);
 
       if (n > 0) {
@@ -343,22 +343,22 @@ void OnboardComputer::setNextToShoot(Track* const p)
 //------------------------------------------------------------------------------
 // getTrackManagerByType() -- return the first track manager of type
 //------------------------------------------------------------------------------
-TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type)
+ITrackMgr* OnboardComputer::getTrackManagerByType(const std::type_info& type)
 {
-   TrackManager* p{};
+   ITrackMgr* p{};
    base::Pair* pair{findByType(type)};
    if (pair != nullptr) {
-      p = dynamic_cast<TrackManager*>( pair->object() );
+      p = dynamic_cast<ITrackMgr*>( pair->object() );
    }
    return p;
 }
 
-const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info& type) const
+const ITrackMgr* OnboardComputer::getTrackManagerByType(const std::type_info& type) const
 {
-   const TrackManager* p{};
+   const ITrackMgr* p{};
    const base::Pair* pair{findByType(type)};
    if (pair != nullptr) {
-      p = dynamic_cast<const TrackManager*>( pair->object() );
+      p = dynamic_cast<const ITrackMgr*>( pair->object() );
    }
    return p;
 }
@@ -366,22 +366,22 @@ const TrackManager* OnboardComputer::getTrackManagerByType(const std::type_info&
 //------------------------------------------------------------------------------
 // getTrackManagerByName() -- return a track manager by name
 //------------------------------------------------------------------------------
-TrackManager* OnboardComputer::getTrackManagerByName(const char* const name)
+ITrackMgr* OnboardComputer::getTrackManagerByName(const char* const name)
 {
-   TrackManager* p{};
+   ITrackMgr* p{};
    base::Pair* pair{findByName(name)};
    if (pair != nullptr) {
-      p = dynamic_cast<TrackManager*>( pair->object() );
+      p = dynamic_cast<ITrackMgr*>( pair->object() );
    }
    return p;
 }
 
-const TrackManager* OnboardComputer::getTrackManagerByName(const char* const name) const
+const ITrackMgr* OnboardComputer::getTrackManagerByName(const char* const name) const
 {
-   const TrackManager* p{};
+   const ITrackMgr* p{};
    const base::Pair* pair{findByName(name)};
    if (pair != nullptr) {
-      p = dynamic_cast<const TrackManager*>( pair->object() );
+      p = dynamic_cast<const ITrackMgr*>( pair->object() );
    }
    return p;
 }

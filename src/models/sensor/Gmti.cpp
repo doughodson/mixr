@@ -3,7 +3,6 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
