@@ -1,21 +1,21 @@
 
-#include "mixr/models/dynamics/AerodynamicsModel.hpp"
+#include "mixr/models/dynamics/IAerodynamics.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(AerodynamicsModel, "AerodynamicsModel")
-EMPTY_SLOTTABLE(AerodynamicsModel)
-EMPTY_DELETEDATA(AerodynamicsModel)
+IMPLEMENT_SUBCLASS(IAerodynamics, "IAerodynamics")
+EMPTY_SLOTTABLE(IAerodynamics)
+EMPTY_DELETEDATA(IAerodynamics)
 
-AerodynamicsModel::AerodynamicsModel()
+IAerodynamics::IAerodynamics()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void AerodynamicsModel::copyData(const AerodynamicsModel& org, const bool)
+void IAerodynamics::copyData(const IAerodynamics& org, const bool)
 {
    BaseClass::copyData(org);
 }
@@ -24,32 +24,32 @@ void AerodynamicsModel::copyData(const AerodynamicsModel& org, const bool)
 // Data access functions that need conversion
 //------------------------------------------------------------------------------
 
-double AerodynamicsModel::getAngleOfAttackR() const
+double IAerodynamics::getAngleOfAttackR() const
 {
    return getAngleOfAttack();
 }
 
-double AerodynamicsModel::getAngleOfAttackD() const
+double IAerodynamics::getAngleOfAttackD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getAngleOfAttack() );
 }
 
-double AerodynamicsModel::getFlightPathR() const
+double IAerodynamics::getFlightPathR() const
 {
    return getFlightPath();
 }
 
-double AerodynamicsModel::getFlightPathD() const
+double IAerodynamics::getFlightPathD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getFlightPath() );
 }
 
-double AerodynamicsModel::getSideSlipR() const
+double IAerodynamics::getSideSlipR() const
 {
    return getSideSlip();
 }
 
-double AerodynamicsModel::getSideSlipD() const
+double IAerodynamics::getSideSlipD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getSideSlip() );
 }
@@ -57,42 +57,42 @@ double AerodynamicsModel::getSideSlipD() const
 //------------------------------------------------------------------------------
 // Get Vehicle data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
-double AerodynamicsModel::getGload() const
+double IAerodynamics::getGload() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getMach() const
+double IAerodynamics::getMach() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getAngleOfAttack() const
+double IAerodynamics::getAngleOfAttack() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getSideSlip() const
+double IAerodynamics::getSideSlip() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getFlightPath() const
+double IAerodynamics::getFlightPath() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getCalibratedAirspeed() const
+double IAerodynamics::getCalibratedAirspeed() const
 {
     return 0.0;
 }
 
-double AerodynamicsModel::getAmbientPressureRatio() const
+double IAerodynamics::getAmbientPressureRatio() const
 {
    return 1.0;
 }
 
-double AerodynamicsModel::getWingSweepAngle() const
+double IAerodynamics::getWingSweepAngle() const
 {
    return 0.0;
 }
@@ -101,7 +101,7 @@ double AerodynamicsModel::getWingSweepAngle() const
 // setTrimSwitchRollInput(RollTrim) --  Sets the trim switch positions:
 //      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setTrimSwitchRollInput(const double)
+void IAerodynamics::setTrimSwitchRollInput(const double)
 {
 }
 
@@ -109,7 +109,7 @@ void AerodynamicsModel::setTrimSwitchRollInput(const double)
 // setTrimSwitchPitchInput(PitchTrim) --  Sets the trim switch positions:
 //      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setTrimSwitchPitchInput(const double)
+void IAerodynamics::setTrimSwitchPitchInput(const double)
 {
 }
 
@@ -117,7 +117,7 @@ void AerodynamicsModel::setTrimSwitchPitchInput(const double)
 // setRudderPedalInput(pedal) -- Pedal inputs: normalized
 //          pedal:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setRudderPedalInput(const double)
+void IAerodynamics::setRudderPedalInput(const double)
 {
 }
 
@@ -125,7 +125,7 @@ void AerodynamicsModel::setRudderPedalInput(const double)
 // setFlaps() --
 //      Commanded flap position from retracted (0.0) to fully extended (1.0)
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setFlaps(const double)
+void IAerodynamics::setFlaps(const double)
 {
 }
 
@@ -133,7 +133,7 @@ void AerodynamicsModel::setFlaps(const double)
 // getLandingGearPosition() --   Returns the landing gear position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double AerodynamicsModel::getLandingGearPosition() const
+double IAerodynamics::getLandingGearPosition() const
 {
     return 0.0;
 }
@@ -142,7 +142,7 @@ double AerodynamicsModel::getLandingGearPosition() const
 // getWeaponBayDoorPosition() --   Returns the weapon bay door position (percent)
 //      0-> closed;  100.0 -> Fully Open
 //------------------------------------------------------------------------------
-double AerodynamicsModel::getWeaponBayDoorPosition() const
+double IAerodynamics::getWeaponBayDoorPosition() const
 {
     return 0.0;
 }
@@ -150,7 +150,7 @@ double AerodynamicsModel::getWeaponBayDoorPosition() const
 //------------------------------------------------------------------------------
 // isWeightOnWheels() --   Returns true if there is weight on the wheels.
 //------------------------------------------------------------------------------
-bool AerodynamicsModel::isWeightOnWheels() const
+bool IAerodynamics::isWeightOnWheels() const
 {
     return false;
 }
@@ -159,7 +159,7 @@ bool AerodynamicsModel::isWeightOnWheels() const
 // setGearHandleSwitch() -- Set Gear handle switch position
 //                          0 -> Handle up;  1 -> hande down
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setGearHandleSwitch(const double)
+void IAerodynamics::setGearHandleSwitch(const double)
 {
 }
 
@@ -167,7 +167,7 @@ void AerodynamicsModel::setGearHandleSwitch(const double)
 // getSpeedBrakesSwitch() --   Returns the speed brake position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double AerodynamicsModel::getSpeedBrakePosition() const
+double IAerodynamics::getSpeedBrakePosition() const
 {
     return 0.0;
 }
@@ -176,7 +176,7 @@ double AerodynamicsModel::getSpeedBrakePosition() const
 // setSpeedBrakesSwitch() --   Sets the speed brake switch position:
 //      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setSpeedBrakesSwitch(const double)
+void IAerodynamics::setSpeedBrakesSwitch(const double)
 {
 }
 
@@ -184,66 +184,66 @@ void AerodynamicsModel::setSpeedBrakesSwitch(const double)
 // setWeaponBayDoorSwitch() --   Sets the weapon bay door switch position:
 //        0.0 -> closed; 1.0 -> open
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setWeaponBayDoorSwitch(const double)
+void IAerodynamics::setWeaponBayDoorSwitch(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // Sets the commanded wing sweep angle (radians)
 //------------------------------------------------------------------------------
-void AerodynamicsModel::setCmdWingSweepAngle(const double)
+void IAerodynamics::setCmdWingSweepAngle(const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // Get engine data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
-int AerodynamicsModel::getEngRPM(double* const, const int) const
+int IAerodynamics::getEngRPM(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngN1(double* const, const int) const
+int IAerodynamics::getEngN1(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngPLA(double* const, const int) const
+int IAerodynamics::getEngPLA(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngFuelFlow(double* const, const int) const
+int IAerodynamics::getEngFuelFlow(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngOilPressure(double* const, const int) const
+int IAerodynamics::getEngOilPressure(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngInletTemp(double* const, const int) const
+int IAerodynamics::getEngInletTemp(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngNozzle(double* const, const int) const
+int IAerodynamics::getEngNozzle(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngThrustIdle(double* const, const int) const
+int IAerodynamics::getEngThrustIdle(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngThrustMil(double* const, const int) const
+int IAerodynamics::getEngThrustMil(double* const, const int) const
 {
     return 0;
 }
 
-int AerodynamicsModel::getEngThrustAb(double* const, const int) const
+int IAerodynamics::getEngThrustAb(double* const, const int) const
 {
     return 0;
 }

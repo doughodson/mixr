@@ -4,11 +4,11 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_models.a
 
 OBJS =  \
-	dynamics/AerodynamicsModel.o \
+	dynamics/IAerodynamics.o \
 	dynamics/IDynamics.o \
 	dynamics/LaeroModel.o  \
 	dynamics/RacModel.o \
-	dynamics/SpaceDynamicsModel.o \
+	dynamics/ISpaceDynamics.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \

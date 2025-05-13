@@ -2,7 +2,7 @@
 #ifndef __mixr_models_jsbsim_JSBSimModel_HPP__
 #define __mixr_models_jsbsim_JSBSimModel_HPP__
 
-#include "mixr/models/dynamics/AerodynamicsModel.hpp"
+#include "mixr/models/dynamics/IAerodynamics.hpp"
 
 #include <string>
 
@@ -20,9 +20,9 @@ namespace jsbsim {
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-class JSBSimModel final: public models::AerodynamicsModel
+class JSBSimModel final: public models::IAerodynamics
 {
-    DECLARE_SUBCLASS(JSBSimModel, AerodynamicsModel)
+    DECLARE_SUBCLASS(JSBSimModel, IAerodynamics)
 
 public:
     JSBSimModel();

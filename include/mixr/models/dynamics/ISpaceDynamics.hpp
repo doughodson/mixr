@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SpaceDynamicsModel_HPP__
-#define __mixr_models_common_SpaceDynamicsModel_HPP__
+#ifndef __mixr_models_common_ISpaceDynamics_HPP__
+#define __mixr_models_common_ISpaceDynamics_HPP__
 
 #include "mixr/models/dynamics/IDynamics.hpp"
 
@@ -8,8 +8,8 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class SpaceDynamicsModel
-// Description:  External player dynamics model
+// Class ISpaceDynamics
+// Description: Interface to all space dynamics
 //
 // Note --
 //    1) updateTC() and updateData() are called by Component::updateTC() and
@@ -18,14 +18,14 @@ namespace models {
 //    2) computer model dynamics in DynamicsModel::dynamics(), which is called
 //    from Player::dynamics() to be synchronized.
 //
-// Factory name: SpaceDynamicsModel
+// Factory name: ISpaceDynamics
 //------------------------------------------------------------------------------
-class SpaceDynamicsModel : public IDynamics
+class ISpaceDynamics : public IDynamics
 {
-   DECLARE_SUBCLASS(SpaceDynamicsModel, IDynamics)
+   DECLARE_SUBCLASS(ISpaceDynamics, IDynamics)
 
 public:
-   SpaceDynamicsModel();
+   ISpaceDynamics();
 
    // Rotation Stick Input Positions (Roll and Pitch in BaseClass)
    virtual bool setControlStickYawInput(const double);
