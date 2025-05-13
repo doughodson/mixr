@@ -8,7 +8,6 @@
 
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
-#include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/effect/Decoy.hpp"
 #include "mixr/models/player/effect/Effect.hpp"
