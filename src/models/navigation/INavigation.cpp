@@ -1,5 +1,5 @@
 
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/navigation/Bullseye.hpp"
@@ -20,9 +20,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Navigation, "Navigation")
+IMPLEMENT_SUBCLASS(INavigation, "INavigation")
 
-BEGIN_SLOTTABLE(Navigation)
+BEGIN_SLOTTABLE(INavigation)
     "route",            // 1) Primary route
     "utc",              // 2) initial UTC time
     "feba",             // 3) FEBA: List of distance vectors [ North East ];
@@ -32,29 +32,29 @@ BEGIN_SLOTTABLE(Navigation)
                         //      [ ( Kilometers 20 ) ( NauticalMiles -15 ) ]
                         //    }
     "bullseye",         // 4) Bullseye (just one for now)
-END_SLOTTABLE(Navigation)
+END_SLOTTABLE(INavigation)
 
-BEGIN_SLOT_MAP(Navigation)
+BEGIN_SLOT_MAP(INavigation)
     ON_SLOT(1, setSlotRoute,    Route)
     ON_SLOT(2, setSlotUtc,      base::ITime)
     ON_SLOT(3, setSlotFeba,     base::PairStream)
     ON_SLOT(4, setSlotBullseye, Bullseye)
 END_SLOT_MAP()
 
-Navigation::Navigation() : rm()
+INavigation::INavigation() : rm()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-void Navigation::initData()
+void INavigation::initData()
 {
    velVec.set(0,0,0);
    accelVec.set(0,0,0);
 }
 
-void Navigation::copyData(const Navigation& org, const bool cc)
+void INavigation::copyData(const INavigation& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -123,7 +123,7 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    setFeba(org.feba, org.nFeba);
 }
 
-void Navigation::deleteData()
+void INavigation::deleteData()
 {
     priRoute = nullptr;
     initRoute = nullptr;
@@ -133,7 +133,7 @@ void Navigation::deleteData()
     setFeba(nullptr, 0);
 }
 
-void Navigation::reset()
+void INavigation::reset()
 {
    BaseClass::reset();
 
@@ -176,7 +176,7 @@ void Navigation::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
-void Navigation::updateData(const double dt)
+void INavigation::updateData(const double dt)
 {
    // ---
    // Update the BaseClass and our primary route
@@ -187,7 +187,7 @@ void Navigation::updateData(const double dt)
 //------------------------------------------------------------------------------
 // Process phase
 //------------------------------------------------------------------------------
-void Navigation::process(const double dt)
+void INavigation::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -234,235 +234,235 @@ void Navigation::process(const double dt)
 //------------------------------------------------------------------------------
 
 // Is system position valid?
-bool Navigation::isPositionDataValid() const
+bool INavigation::isPositionDataValid() const
 {
    return posValid;
 }
 
 // Returns system latitude (degs)
-double Navigation::getLatitude() const
+double INavigation::getLatitude() const
 {
    return latitude;
 }
 
 // Returns system longitude (degs)
-double Navigation::getLongitude() const
+double INavigation::getLongitude() const
 {
    return longitude;
 }
 
 // Returns system altitude (ft)
-double Navigation::getAltitudeFt() const
+double INavigation::getAltitudeFt() const
 {
     return getAltitudeM() * base::length::M2FT;
 }
 
 // Returns system altitude (m)
-double Navigation::getAltitudeM() const
+double INavigation::getAltitudeM() const
 {
    return altitude;
 }
 
 // Is system attitude valid?
-bool Navigation::isAttitudeDataValid() const
+bool INavigation::isAttitudeDataValid() const
 {
    return attValid;
 }
 
 // Returns system pitch (degs)
-double Navigation::getPitchDeg() const
+double INavigation::getPitchDeg() const
 {
    return pitch;
 }
 
 // Returns system roll  (degs)
-double Navigation::getRollDeg() const
+double INavigation::getRollDeg() const
 {
    return roll;
 }
 
 // Returns system true heading (degs)
-double Navigation::getHeadingDeg() const
+double INavigation::getHeadingDeg() const
 {
    return heading;
 }
 
 // Returns directional cosines
-const base::Matrixd& Navigation::getRotMat() const
+const base::Matrixd& INavigation::getRotMat() const
 {
    return rm;
 }
 
 // Is the magnetic variation valid?
-bool Navigation::isMagVarValid() const
+bool INavigation::isMagVarValid() const
 {
    return magVarValid;
 }
 
 // Returns the magnetic variation
-double Navigation::getMagVarDeg() const
+double INavigation::getMagVarDeg() const
 {
    return magvar;
 }
 
 // Returns the mag heading
-double Navigation::getMagHeadingD() const
+double INavigation::getMagHeadingD() const
 {
    return base::angle::aepcdDeg(getHeadingDeg() + getMagVarDeg());
 }
 
 // Are the winds valid?
-bool Navigation::areWindsValid() const
+bool INavigation::areWindsValid() const
 {
    return windsValid;
 }
 
 // Returns the wind 'from' direction (degs)
-double Navigation::getWindDirD() const
+double INavigation::getWindDirD() const
 {
    return windDirD;
 }
 
 // Returns the wind speed (kts)
-double Navigation::getWindSpeedKts() const
+double INavigation::getWindSpeedKts() const
 {
    return windSpdKts;
 }
 
 // Is the UTC time valid?
-bool Navigation::isUtcDataValid() const
+bool INavigation::isUtcDataValid() const
 {
    return utcValid;
 }
 
 // Returns UTC time (sec)
-double Navigation::getUTC() const
+double INavigation::getUTC() const
 {
    return utc;
 }
 
 // Is system velocity valid?
-bool Navigation::isVelocityDataValid() const
+bool INavigation::isVelocityDataValid() const
 {
    return velValid;
 }
 
 // Returns ground speed (kts)
-double Navigation::getGroundSpeedKts() const
+double INavigation::getGroundSpeedKts() const
 {
    return gs;
 }
 
 // Returns true airspeed (kts)
-double Navigation::getTrueAirspeedKts() const
+double INavigation::getTrueAirspeedKts() const
 {
    return tas;
 }
 
 // Returns true ground track (degs)
-double Navigation::getGroundTrackDeg() const
+double INavigation::getGroundTrackDeg() const
 {
    return tk;
 }
 
 // Returns velocity vector (m/s)
-const base::Vec3d& Navigation::getVelocity() const
+const base::Vec3d& INavigation::getVelocity() const
 {
    return velVec;
 }
 
 // Returns acceleration vector (m/s/s)
-const base::Vec3d& Navigation::getAcceleration() const
+const base::Vec3d& INavigation::getAcceleration() const
 {
    return accelVec;
 }
 
 // Is system steering data valid?
-bool Navigation::isNavSteeringValid() const
+bool INavigation::isNavSteeringValid() const
 {
    return navStrValid;
 }
 
 // Returns true bearing to dest (degs)
-double Navigation::getTrueBrgDeg() const
+double INavigation::getTrueBrgDeg() const
 {
    return tbrg;
 }
 
 // Returns mag bearing to dest (degs)
-double Navigation::getMagBrgDeg() const
+double INavigation::getMagBrgDeg() const
 {
    return mbrg;
 }
 
 // Returns distance to dest (NM)
-double Navigation::getDistNM() const
+double INavigation::getDistNM() const
 {
    return dst;
 }
 
 // Returns true course to dest (degs)
-double Navigation::getTrueCrsDeg() const
+double INavigation::getTrueCrsDeg() const
 {
    return tcrs;
 }
 
 // Returns mag course to dest (degs)
-double Navigation::getMagCrsDeg() const
+double INavigation::getMagCrsDeg() const
 {
    return mcrs;
 }
 
 // Returns cross track error (NM)
-double Navigation::getCrossTrackErrorNM() const
+double INavigation::getCrossTrackErrorNM() const
 {
    return xte;
 }
 
 // Returns Time-To-Go to dest (sec)
-double Navigation::getTTG() const
+double INavigation::getTTG() const
 {
    return ttg;
 }
 
 // Returns Est-Time-of-Arrival at dest (sec)
-double Navigation::getETA() const
+double INavigation::getETA() const
 {
    return eta;
 }
 
 // Returns the ref latitude (degs)
-double Navigation::getRefLatitude() const
+double INavigation::getRefLatitude() const
 {
    return refLat;
 }
 
 // Returns the ref longitude (degs)
-double Navigation::getRefLongitude() const
+double INavigation::getRefLongitude() const
 {
    return refLon;
 }
 
 // Returns the primary route (non-const version)
-Route* Navigation::getPriRoute()
+Route* INavigation::getPriRoute()
 {
    return priRoute;
 }
 
 // Returns the primary route (const version)
-const Route* Navigation::getPriRoute() const
+const Route* INavigation::getPriRoute() const
 {
    return priRoute;
 }
 
 // Returns the current bullseye (non-const version)
-Bullseye* Navigation::getBullseye()
+Bullseye* INavigation::getBullseye()
 {
    return bull;
 }
 
 // Returns the current bullseye (const version)
-const Bullseye* Navigation::getBullseye() const
+const Bullseye* INavigation::getBullseye() const
 {
    return bull;
 }
@@ -472,7 +472,7 @@ const Bullseye* Navigation::getBullseye() const
 // Set functions
 //------------------------------------------------------------------------------
 
-bool Navigation::setPosition(const double lat, const double lon, const double alt)
+bool INavigation::setPosition(const double lat, const double lon, const double alt)
 {
    latitude  =  lat;
    longitude =  lon;
@@ -481,13 +481,13 @@ bool Navigation::setPosition(const double lat, const double lon, const double al
    return true;
 }
 
-bool Navigation::setPosition(const bool flg)
+bool INavigation::setPosition(const bool flg)
 {
    posValid  =  flg;
    return true;
 }
 
-bool Navigation::setAttitude(const double roll0, const double pitch0, const double thdg0)
+bool INavigation::setAttitude(const double roll0, const double pitch0, const double thdg0)
 {
    roll = roll0;
    pitch = pitch0;
@@ -502,13 +502,13 @@ bool Navigation::setAttitude(const double roll0, const double pitch0, const doub
    return true;
 }
 
-bool Navigation::setAttitude(const bool flg)
+bool INavigation::setAttitude(const bool flg)
 {
    attValid = flg;
    return true;
 }
 
-bool Navigation::setMagVar(const double mvDeg)
+bool INavigation::setMagVar(const double mvDeg)
 {
    magvar = mvDeg;
    if (attValid) mhdg = base::angle::aepcdDeg(heading - magvar);
@@ -516,13 +516,13 @@ bool Navigation::setMagVar(const double mvDeg)
    return true;
 }
 
-bool Navigation::setMagVar(const bool flg)
+bool INavigation::setMagVar(const bool flg)
 {
    magVarValid = flg;
    return true;
 }
 
-bool Navigation::setWinds(const double dirDeg, const double speedKts)
+bool INavigation::setWinds(const double dirDeg, const double speedKts)
 {
    windDirD = dirDeg;
    windSpdKts = speedKts;
@@ -530,110 +530,110 @@ bool Navigation::setWinds(const double dirDeg, const double speedKts)
    return true;
 }
 
-bool Navigation::setWinds(const bool flg)
+bool INavigation::setWinds(const bool flg)
 {
    windsValid = flg;
    return true;
 }
 
-bool Navigation::setUTC(const double time)
+bool INavigation::setUTC(const double time)
 {
    utc = time;
    utcValid = true;
    return true;
 }
 
-bool Navigation::setUTC(const bool flg)
+bool INavigation::setUTC(const bool flg)
 {
    utcValid = flg;
    return true;
 }
 
-bool Navigation::setGroundSpeedKts(const double kts)
+bool INavigation::setGroundSpeedKts(const double kts)
 {
    gs = kts;
    return true;
 }
 
-bool Navigation::setTrueAirspeedKts(const double kts)
+bool INavigation::setTrueAirspeedKts(const double kts)
 {
    tas = kts;
    return true;
 }
 
-bool Navigation::setGroundTrackDeg(const double degs)
+bool INavigation::setGroundTrackDeg(const double degs)
 {
    tk = degs;
    return true;
 }
 
-bool Navigation::setVelocity(const base::Vec3d& v)
+bool INavigation::setVelocity(const base::Vec3d& v)
 {
    velVec = v;
    return true;
 }
 
-bool Navigation::setAcceleration(const base::Vec3d& v)
+bool INavigation::setAcceleration(const base::Vec3d& v)
 {
    accelVec = v;
    return true;
 }
 
-bool Navigation::setVelocityDataValid(const bool flg)
+bool INavigation::setVelocityDataValid(const bool flg)
 {
    velValid = flg;
    return true;
 }
 
-bool Navigation::setTrueBrgDeg(const double v)
+bool INavigation::setTrueBrgDeg(const double v)
 {
    tbrg = v;
    return true;
 }
 
-bool Navigation::setMagBrgDeg(const double v)
+bool INavigation::setMagBrgDeg(const double v)
 {
    mbrg = v;
    return true;
 }
 
-bool Navigation::setDistNM(const double v)
+bool INavigation::setDistNM(const double v)
 {
    dst = v;
    return true;
 }
 
-bool Navigation::setTrueCrsDeg(const double v)
+bool INavigation::setTrueCrsDeg(const double v)
 {
    tcrs = v;
    return true;
 }
 
-bool Navigation::setMagCrsDeg(const double v)
+bool INavigation::setMagCrsDeg(const double v)
 {
    mcrs = v;
    return true;
 }
 
-bool Navigation::setCrossTrackErrorNM(const double v)
+bool INavigation::setCrossTrackErrorNM(const double v)
 {
    xte = v;
    return true;
 }
 
-bool Navigation::setTTG(const double v)
+bool INavigation::setTTG(const double v)
 {
    ttg = v;
    return true;
 }
 
-bool Navigation::setETA(const double v)
+bool INavigation::setETA(const double v)
 {
    eta = v;
    return true;
 }
 
-bool Navigation::setNavSteeringValid(const bool flg)
+bool INavigation::setNavSteeringValid(const bool flg)
 {
    navStrValid = flg;
    return true;
@@ -645,7 +645,7 @@ bool Navigation::setNavSteeringValid(const bool flg)
 //------------------------------------------------------------------------------
 
 // (default) System position (using truth data from ownship)
-bool Navigation::updateSysPosition()
+bool INavigation::updateSysPosition()
 {
     bool ok{};
     if (getOwnship() != nullptr) {
@@ -660,7 +660,7 @@ bool Navigation::updateSysPosition()
 }
 
 // (default) System attitude function  (using truth data from ownship)
-bool Navigation::updateSysAttitude()
+bool INavigation::updateSysAttitude()
 {
     bool ok{};
     if (getOwnship() != nullptr) {
@@ -671,7 +671,7 @@ bool Navigation::updateSysAttitude()
 }
 
 // Mag var data
-bool Navigation::updateMagVar()
+bool INavigation::updateMagVar()
 {
    // No default magnetic variation
    setMagVar(false);
@@ -679,7 +679,7 @@ bool Navigation::updateMagVar()
 }
 
 // (default) Velocity data function (using truth data from ownship)
-bool Navigation::updateSysVelocity()
+bool INavigation::updateSysVelocity()
 {
     bool ok{};
     if (getOwnship() != nullptr) {
@@ -697,7 +697,7 @@ bool Navigation::updateSysVelocity()
 }
 
 // (default) Nav steering function (pull data from the 'to' steerpoint)
-bool Navigation::updateNavSteering()
+bool INavigation::updateNavSteering()
 {
    if (getPriRoute() != nullptr) {
       const Steerpoint* to{getPriRoute()->getSteerpoint()};
@@ -723,7 +723,7 @@ bool Navigation::updateNavSteering()
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-std::size_t Navigation::getFeba(base::Vec2d* const points, const std::size_t max) const
+std::size_t INavigation::getFeba(base::Vec2d* const points, const std::size_t max) const
 {
     std::size_t n{};
     if (points != nullptr && max > 0 && feba != nullptr && nFeba > 0) {
@@ -743,7 +743,7 @@ std::size_t Navigation::getFeba(base::Vec2d* const points, const std::size_t max
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-bool Navigation::setFeba(base::Vec2d* const points, const std::size_t n)
+bool INavigation::setFeba(base::Vec2d* const points, const std::size_t n)
 {
     // First delete any old FEBA lines
     if (feba != nullptr) delete[] feba;
@@ -763,7 +763,7 @@ bool Navigation::setFeba(base::Vec2d* const points, const std::size_t n)
 //------------------------------------------------------------------------------
 // setRoute() - sets a new route on the fly
 //------------------------------------------------------------------------------
-bool Navigation::setRoute(Route* const msg)
+bool INavigation::setRoute(Route* const msg)
 {
    // we are a new route, but our last new route wasn't the original route
    if (priRoute != nullptr) priRoute->container(nullptr);
@@ -776,7 +776,7 @@ bool Navigation::setRoute(Route* const msg)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool Navigation::setSlotRoute(const Route* const msg)
+bool INavigation::setSlotRoute(const Route* const msg)
 {
    initRoute = msg;
 
@@ -794,7 +794,7 @@ bool Navigation::setSlotRoute(const Route* const msg)
    return true;
 }
 
-bool Navigation::setSlotUtc(const base::ITime* const x)
+bool INavigation::setSlotUtc(const base::ITime* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -805,7 +805,7 @@ bool Navigation::setSlotUtc(const base::ITime* const x)
 }
 
 // set the Forward Edge of the Battle Area (FEBA)
-bool Navigation::setSlotFeba(const base::PairStream* const msg)
+bool INavigation::setSlotFeba(const base::PairStream* const msg)
 {
     bool ok{true};
 
@@ -888,7 +888,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
     return ok;
 }
 
-bool Navigation::setSlotBullseye(Bullseye* const msg)
+bool INavigation::setSlotBullseye(Bullseye* const msg)
 {
    if (bull != nullptr) {
       bull->container(nullptr);

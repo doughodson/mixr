@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Navigation_HPP__
-#define __mixr_models_common_Navigation_HPP__
+#ifndef __mixr_models_common_INavigation_HPP__
+#define __mixr_models_common_INavigation_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 
@@ -15,8 +15,8 @@ class Route;
 class Bullseye;
 
 //------------------------------------------------------------------------------
-// Class: Navigation
-// Description: Generic Navigation System ...
+// Class: INavigation
+// Description: Interface to a navigation system ...
 //              Maintains present position; routes; steering cues;
 //              NAV subsystems (INS, GPS); NAVAIDS (TACAN, ILS)
 //
@@ -47,12 +47,12 @@ class Bullseye;
 //
 //
 //------------------------------------------------------------------------------
-class Navigation : public ISystem
+class INavigation : public ISystem
 {
-   DECLARE_SUBCLASS(Navigation, ISystem)
+   DECLARE_SUBCLASS(INavigation, ISystem)
 
 public:
-   Navigation();
+   INavigation();
 
    // Positional Data
    virtual bool isPositionDataValid() const;                // Is system position valid?

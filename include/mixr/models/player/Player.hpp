@@ -29,7 +29,7 @@ class Datalink;
 class IDynamics;
 class IGimbal;
 class IrSystem;
-class Navigation;
+class INavigation;
 class OnboardComputer;
 class Pilot;
 class Radio;
@@ -622,10 +622,10 @@ public:
    IGimbal* getGimbalByName(const char* const);                       // Returns a Gimbal model by its name
    base::Pair* getGimbalByType(const std::type_info& type);           // Returns a Gimbal model by its type
 
-   Navigation* getNavigation();                                       // Player's top level Navigation model
-   const Navigation* getNavigation() const;                           // Player's top level Navigation (const version)
+   INavigation* getNavigation();                                      // Player's top level Navigation model
+   const INavigation* getNavigation() const;                          // Player's top level Navigation (const version)
    const std::string& getNavigationName() const;                      // Name of the player's top level Navigation model
-   Navigation* getNavigationByName(const char* const);                // Returns a Navigation model by its name
+   INavigation* getNavigationByName(const char* const);               // Returns a Navigation model by its name
    base::Pair* getNavigationByType(const std::type_info& type);       // Returns a Navigation model by its type
 
    OnboardComputer* getOnboardComputer();                             // Player's top level OnboardComputer model

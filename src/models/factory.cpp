@@ -15,7 +15,6 @@
 #include "mixr/models/navigation/Bullseye.hpp"
 #include "mixr/models/navigation/Gps.hpp"
 #include "mixr/models/navigation/Ins.hpp"
-#include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
@@ -243,9 +242,6 @@ base::IObject* factory(const std::string& name)
    }
 
    // Navigation types
-   else if ( name == Navigation::getFactoryName() ) {
-      obj = new Navigation();
-   }
    else if ( name == Ins::getFactoryName() ) {
       obj = new Ins();
    }

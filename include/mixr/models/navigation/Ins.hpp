@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Ins_HPP__
 #define __mixr_models_common_Ins_HPP__
 
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
@@ -13,9 +13,9 @@ namespace models {
 // Description: Generic Inerial Navigation System (INS) Data
 // Factory name: Ins
 //------------------------------------------------------------------------------
-class Ins : public Navigation
+class Ins : public INavigation
 {
-    DECLARE_SUBCLASS(Ins, Navigation)
+    DECLARE_SUBCLASS(Ins, INavigation)
 
 public:
     // Alignment modes

@@ -10,7 +10,7 @@ namespace base { class IAngle; class Identifier; class Integer; class ILength; c
                  class List; class Longitude; class Identifier; class INumber; class String; class ITime; }
 namespace terrain { class ITerrain; }
 namespace models {
-class Navigation;
+class INavigation;
 class Action;
 
 //------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ public:
     virtual bool setAction(Action* const act);          // Sets the action to be performed
 
    // Compute have data 'to' this point
-   virtual bool compute(const Navigation* const nav, const Steerpoint* const from = nullptr);
+   virtual bool compute(const INavigation* const nav, const Steerpoint* const from = nullptr);
    virtual void clearNavData();
 
    void reset() override;

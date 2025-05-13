@@ -3,7 +3,7 @@
 
 #include "mixr/models/navigation/Steerpoint.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Actions.hpp"
 
@@ -125,7 +125,7 @@ void Route::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
-   const Navigation* nav{static_cast<const Navigation*>(findContainerByType(typeid(Navigation)))};
+   const INavigation* nav{static_cast<const INavigation*>(findContainerByType(typeid(INavigation)))};
    if (nav != nullptr) {
       computeSteerpointData(dt, nav);
       autoSequencer(dt, nav);
@@ -135,7 +135,7 @@ void Route::updateData(const double dt)
 //------------------------------------------------------------------------------
 // Compute nav steering data for each steerpoint.
 //------------------------------------------------------------------------------
-void Route::computeSteerpointData(const double, const Navigation* const nav)
+void Route::computeSteerpointData(const double, const INavigation* const nav)
 {
    if (nav != nullptr) {
       base::PairStream* steerpoints{getComponents()};
@@ -165,7 +165,7 @@ void Route::computeSteerpointData(const double, const Navigation* const nav)
 //------------------------------------------------------------------------------
 // Auto Sequence through Steerpoints
 //------------------------------------------------------------------------------
-void Route::autoSequencer(const double, const Navigation* const nav)
+void Route::autoSequencer(const double, const INavigation* const nav)
 {
    if (isAutoSequence() && to != nullptr && nav != nullptr) {
       Steerpoint* toSP{static_cast<Steerpoint*>(to->object())};

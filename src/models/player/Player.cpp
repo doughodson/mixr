@@ -5,7 +5,7 @@
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/dynamics/IDynamics.hpp"
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/system/IrSystem.hpp"
@@ -1139,15 +1139,15 @@ base::Pair* Player::getGimbalByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Navigation model
-Navigation* Player::getNavigation()
+INavigation* Player::getNavigation()
 {
-   return (nav != nullptr) ? (static_cast<Navigation*>(nav->object())) : nullptr;
+   return (nav != nullptr) ? (static_cast<INavigation*>(nav->object())) : nullptr;
 }
 
 // Player's top level Navigation (const version)
-const Navigation* Player::getNavigation() const
+const INavigation* Player::getNavigation() const
 {
-   return (nav != nullptr) ? (static_cast<Navigation*>(nav->object())) : nullptr;
+   return (nav != nullptr) ? (static_cast<INavigation*>(nav->object())) : nullptr;
 }
 
 // Name of the player's top level Navigation model
@@ -1158,9 +1158,9 @@ const std::string& Player::getNavigationName() const
 }
 
 // Returns a Navigation model by its name
-Navigation* Player::getNavigationByName(const char* const name1)
+INavigation* Player::getNavigationByName(const char* const name1)
 {
-   Navigation* p{};
+   INavigation* p{};
    if (nav != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
@@ -1195,7 +1195,7 @@ Navigation* Player::getNavigationByName(const char* const name1)
       // Did we find a match?
       if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
-         p = dynamic_cast<Navigation*>( pair->object() );
+         p = dynamic_cast<INavigation*>( pair->object() );
       }
    }
    return p;
@@ -1207,7 +1207,7 @@ base::Pair* Player::getNavigationByType(const std::type_info& type)
    base::Pair* p{};                 // Our return value
 
    if (nav != nullptr) {
-      Navigation* root{getNavigation()};    // Root node of the list
+      INavigation* root{getNavigation()};    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = nav;
@@ -3165,7 +3165,7 @@ void Player::updateSystemPointers()
    setDatalink( findByType(typeid(Datalink)) );
    setGimbal( findByType(typeid(IGimbal)) );
    setIrSystem( findByType(typeid(IrSystem)) );
-   setNavigation( findByType(typeid(Navigation)) );
+   setNavigation( findByType(typeid(INavigation)) );
    setOnboardComputer( findByType(typeid(OnboardComputer)) );
    setPilot( findByType(typeid(Pilot)) );
    setRadio( findByType(typeid(Radio)) );
@@ -3301,7 +3301,7 @@ bool Player::setNavigation(base::Pair* const x)
       if (nav != nullptr) nav->unref();
       nav = nullptr;
       ok = true;
-   } else if ( x->object()->isClassType(typeid(Navigation)) ) {
+   } else if ( x->object()->isClassType(typeid(INavigation)) ) {
       if (nav != nullptr) nav->unref();
       nav = x;
       nav->ref();

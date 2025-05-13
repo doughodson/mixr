@@ -15,7 +15,7 @@ OBJS =  \
 	navigation/Bullseye.o \
 	navigation/Gps.o \
 	navigation/Ins.o \
-	navigation/Navigation.o \
+	navigation/INavigation.o \
 	navigation/Route.o \
 	navigation/Steerpoint.o \
 	player/air/Aircraft.o \

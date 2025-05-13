@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Gps_HPP__
 #define __mixr_models_common_Gps_HPP__
 
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 
 namespace mixr {
 namespace models {
@@ -12,9 +12,9 @@ namespace models {
 // Description: Generic Global Positioning System (GPS) Data
 // Factory name: Gps
 //------------------------------------------------------------------------------
-class Gps : public Navigation
+class Gps : public INavigation
 {
-    DECLARE_SUBCLASS(Gps, Navigation)
+    DECLARE_SUBCLASS(Gps, INavigation)
 
 public:
 

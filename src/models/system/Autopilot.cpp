@@ -2,7 +2,7 @@
 #include "mixr/models/system/Autopilot.hpp"
 #include "mixr/models/dynamics/IDynamics.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -245,7 +245,7 @@ bool Autopilot::processModeNavigation()
 {
    bool ok{};
 
-   const Navigation* nav{getOwnship()->getNavigation()};
+   const INavigation* nav{getOwnship()->getNavigation()};
 
    if (nav != nullptr) {
       // Do we have valid NAV steering data?
@@ -298,7 +298,7 @@ bool Autopilot::flyLoiterEntry()
    bool ok{(pPlr != nullptr)};
    if (ok) {
 
-      Navigation* nav{pPlr->getNavigation()};
+      INavigation* nav{pPlr->getNavigation()};
       bool haveNav{(nav != nullptr)};
 
       //----------------------------------------------------

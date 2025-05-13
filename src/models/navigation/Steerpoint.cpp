@@ -1,7 +1,7 @@
 
 #include "mixr/models/navigation/Steerpoint.hpp"
 
-#include "mixr/models/navigation/Navigation.hpp"
+#include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Actions.hpp"
 
@@ -613,7 +613,7 @@ void Steerpoint::clearNavData()
 //------------------------------------------------------------------------------
 // compute() -- Compute steerpoint data
 //------------------------------------------------------------------------------
-bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const from)
+bool Steerpoint::compute(const INavigation* const nav, const Steerpoint* const from)
 {
     bool ok{};
     if (nav != nullptr) {

@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class ILength; class NauticalMiles;
                  class INumber; class Pair; class PairStream; }
 namespace models {
-class Navigation;
+class INavigation;
 class Steerpoint;
 
 //------------------------------------------------------------------------------
@@ -114,10 +114,10 @@ public:
 
 protected:
     // Compute nav steering data for each steerpoint.
-    virtual void computeSteerpointData(const double dt, const Navigation* const nav);
+    virtual void computeSteerpointData(const double dt, const INavigation* const nav);
 
     // Auto Sequence through Steerpoints
-    virtual void autoSequencer(const double dt, const  Navigation* const nav);
+    virtual void autoSequencer(const double dt, const  INavigation* const nav);
 
     void processComponents(
          base::PairStream* const list,              // Source list of components
