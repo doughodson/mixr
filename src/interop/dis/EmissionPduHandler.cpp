@@ -340,10 +340,10 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             // Give the antenna list to the proxy player
             {
                // First get the (top level) container gimbal
-               models::Gimbal* gimbal{player->getGimbal()};
+               models::IGimbal* gimbal{player->getGimbal()};
                if (gimbal == nullptr) {
                   // Create the container gimbal!
-                  gimbal = new models::Gimbal();
+                  gimbal = new models::IGimbal();
                   const auto pair = new base::Pair("gimbal", gimbal);
                   gimbal->unref();  // pair owns it
                   player->addComponent(pair);

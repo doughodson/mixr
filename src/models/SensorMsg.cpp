@@ -43,8 +43,8 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     const Player* oo{org.ownship};
     setOwnship( const_cast<Player*>(static_cast<const Player*>(oo)) );
 
-    const Gimbal* aa{org.gimbal};
-    setGimbal( const_cast<Gimbal*>(static_cast<const Gimbal*>(aa)) );
+    const IGimbal* aa{org.gimbal};
+    setGimbal( const_cast<IGimbal*>(static_cast<const IGimbal*>(aa)) );
 
     const Player* pp{org.target};
     setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
@@ -104,7 +104,7 @@ void SensorMsg::setOwnship(Player* const p)
 //------------------------------------------------------------------------------
 // setGimbal() -- Sets the pointer to the transmitting gimbal (seeker/antenna)
 //------------------------------------------------------------------------------
-void SensorMsg::setGimbal(Gimbal* const a)
+void SensorMsg::setGimbal(IGimbal* const a)
 {
    gimbal = a;
 }

@@ -1204,7 +1204,7 @@ void IGimbal::updateMatrix()
    // Is our parent (container) also a gimbal?
    // If so then post multiply by our container's matrix
    // ---
-   const auto p = dynamic_cast<const Gimbal*>( container() );
+   const auto p = dynamic_cast<const IGimbal*>( container() );
    if (p != nullptr) { mm1 *= p->getRotMat(); }
 
    // Set as the new matrix
