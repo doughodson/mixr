@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Navigation_HPP__
 #define __mixr_models_common_Navigation_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 #include "mixr/base/osg/Vec2d"
 #include "mixr/base/osg/Matrixd"
@@ -47,9 +47,9 @@ class Bullseye;
 //
 //
 //------------------------------------------------------------------------------
-class Navigation : public System
+class Navigation : public ISystem
 {
-   DECLARE_SUBCLASS(Navigation, System)
+   DECLARE_SUBCLASS(Navigation, ISystem)
 
 public:
    Navigation();

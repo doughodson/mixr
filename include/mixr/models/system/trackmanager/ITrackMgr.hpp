@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_ITrackMgr_HPP__
 #define __mixr_models_common_ITrackMgr_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
@@ -33,9 +33,9 @@ class Track;
 //    logTrackUpdates <Boolean>  ! True to log all updates to tracks (default: true)
 //
 //------------------------------------------------------------------------------
-class ITrackMgr : public System
+class ITrackMgr : public ISystem
 {
-   DECLARE_SUBCLASS(ITrackMgr, System)
+   DECLARE_SUBCLASS(ITrackMgr, ISystem)
 
 public:
    ITrackMgr();

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrSystem_HPP__
 #define __mixr_models_common_IrSystem_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 #include <string>
 
@@ -35,9 +35,9 @@ class OnboardComputer;
 //    disableQueries <Boolean>     ! Disable sending queries packets flag (default: false)
 //
 //------------------------------------------------------------------------------
-class IrSystem : public System
+class IrSystem : public ISystem
 {
-   DECLARE_SUBCLASS(IrSystem, System)
+   DECLARE_SUBCLASS(IrSystem, ISystem)
 
 public:
    IrSystem();

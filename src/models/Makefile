@@ -100,7 +100,7 @@ OBJS =  \
 	system/StabilizingGimbal.o \
 	system/Stores.o \
 	system/StoresMgr.o \
-	system/System.o \
+	system/ISystem.o \
 	Actions.o \
 	Designator.o \
 	Emission.o \

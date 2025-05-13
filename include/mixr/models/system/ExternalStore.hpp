@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_ExternalStore_HPP__
 #define __mixr_models_common_ExternalStore_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class String; }
@@ -31,9 +31,9 @@ namespace models {
 //       if jettisoned, it will no longer be updated.
 //
 //------------------------------------------------------------------------------
-class ExternalStore : public System
+class ExternalStore : public ISystem
 {
-   DECLARE_SUBCLASS(ExternalStore, System)
+   DECLARE_SUBCLASS(ExternalStore, ISystem)
 
 public:
    ExternalStore();

@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -11,27 +11,27 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(System, "System")
+IMPLEMENT_SUBCLASS(ISystem, "ISystem")
 
-BEGIN_SLOTTABLE(System)
+BEGIN_SLOTTABLE(ISystem)
    "powerSwitch",    //  1) Power switch position ("OFF", "STBY", "ON") (default: "ON")
-END_SLOTTABLE(System)
+END_SLOTTABLE(ISystem)
 
-BEGIN_SLOT_MAP(System)
+BEGIN_SLOT_MAP(ISystem)
    ON_SLOT( 1, setSlotPowerSwitch, base::String)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(System)
+BEGIN_EVENT_HANDLER(ISystem)
     ON_EVENT_OBJ(KILL_EVENT,killedNotification,Player)
     ON_EVENT(KILL_EVENT,killedNotification)
 END_EVENT_HANDLER()
 
-System::System()
+ISystem::ISystem()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void System::copyData(const System& org, const bool)
+void ISystem::copyData(const ISystem& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -41,7 +41,7 @@ void System::copyData(const System& org, const bool)
    pwrSw = org.pwrSw;
 }
 
-void System::deleteData()
+void ISystem::deleteData()
 {
    ownship = nullptr;
 }
@@ -49,7 +49,7 @@ void System::deleteData()
 //------------------------------------------------------------------------------
 // isFrozen() -- checks both the system's freeze flag and its ownship's freeze flag
 //------------------------------------------------------------------------------
-bool System::isFrozen() const
+bool ISystem::isFrozen() const
 {
    bool frz{BaseClass::isFrozen()};
    if (!frz && ownship != nullptr) frz = ownship->isFrozen();
@@ -59,7 +59,7 @@ bool System::isFrozen() const
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void System::reset()
+void ISystem::reset()
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -70,7 +70,7 @@ void System::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void System::updateData(const double dt)
+void ISystem::updateData(const double dt)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -81,7 +81,7 @@ void System::updateData(const double dt)
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void System::updateTC(const double dt0)
+void ISystem::updateTC(const double dt0)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -130,28 +130,9 @@ void System::updateTC(const double dt0)
 }
 
 //------------------------------------------------------------------------------
-// Default phase callbacks
-//------------------------------------------------------------------------------
-void System::dynamics(const double)
-{
-}
-
-void System::transmit(const double)
-{
-}
-
-void System::receive(const double)
-{
-}
-
-void System::process(const double)
-{
-}
-
-//------------------------------------------------------------------------------
 // killedNotification() -- Default killed notification handler
 //------------------------------------------------------------------------------
-bool System::killedNotification(Player* const p)
+bool ISystem::killedNotification(Player* const p)
 {
    // Just let all of our subcomponents know that we were just killed
    base::PairStream* subcomponents{getComponents()};
@@ -172,7 +153,7 @@ bool System::killedNotification(Player* const p)
 //-----------------------------------------------------------------------------
 
 // Returns a pointer to the world model
-WorldModel* System::getWorldModel()
+WorldModel* ISystem::getWorldModel()
 {
    WorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
@@ -180,7 +161,7 @@ WorldModel* System::getWorldModel()
 }
 
 // Returns a pointer to the world model (const version)
-const WorldModel* System::getWorldModel() const
+const WorldModel* ISystem::getWorldModel() const
 {
    const WorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
@@ -188,23 +169,23 @@ const WorldModel* System::getWorldModel() const
 }
 
 // Returns the system's master power switch setting (see power enumeration)
-unsigned int System::getPowerSwitch() const
+unsigned int ISystem::getPowerSwitch() const
 {
    return pwrSw;
 }
 
 // Returns a pointer to our ownship player
-Player* System::getOwnship()
+Player* ISystem::getOwnship()
 {
    if (ownship == nullptr) findOwnship();
    return ownship;
 }
 
 // Returns a pointer to our ownship player (const version)
-const Player* System::getOwnship() const
+const Player* ISystem::getOwnship() const
 {
    if (ownship == nullptr) {
-      (const_cast<System*>(this))->findOwnship();
+      (const_cast<ISystem*>(this))->findOwnship();
    }
    return ownship;
 }
@@ -214,14 +195,14 @@ const Player* System::getOwnship() const
 //-----------------------------------------------------------------------------
 
 // Sets the system's master power switch setting (see power enumeration)
-bool System::setPowerSwitch(const unsigned int p)
+bool ISystem::setPowerSwitch(const unsigned int p)
 {
    pwrSw = p;
    return true;
 }
 
 // find our ownship
-bool System::findOwnship()
+bool ISystem::findOwnship()
 {
    if (ownship == nullptr) {
       ownship = static_cast<Player*>(findContainerByType( typeid(Player) ));
@@ -233,7 +214,7 @@ bool System::findOwnship()
 //-----------------------------------------------------------------------------
 // Set functions
 //-----------------------------------------------------------------------------
-bool System::setSlotPowerSwitch(const base::String* const msg)
+bool ISystem::setSlotPowerSwitch(const base::String* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

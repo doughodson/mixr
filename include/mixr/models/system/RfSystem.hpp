@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_RfSystem_HPP__
 #define __mixr_models_common_RfSystem_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 #include <array>
 
 namespace mixr {
@@ -57,9 +57,9 @@ class Emission;
 //    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
-class RfSystem : public System
+class RfSystem : public ISystem
 {
-   DECLARE_SUBCLASS(RfSystem, System)
+   DECLARE_SUBCLASS(RfSystem, ISystem)
 
 public:
    RfSystem();

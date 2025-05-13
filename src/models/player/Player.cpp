@@ -2620,7 +2620,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // 6) Pass the emission to our antennas
    {
       IGimbal* g{getGimbal()};
-      if (g != nullptr && g->getPowerSwitch() != System::PWR_OFF) {
+      if (g != nullptr && g->getPowerSwitch() != ISystem::PWR_OFF) {
          g->event(RF_EMISSION,em);
       }
    }

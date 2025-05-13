@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Datalink_HPP__
 #define __mixr_models_common_Datalink_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 #include "mixr/base/safe_queue.hpp"
 
@@ -35,9 +35,9 @@ class ITrackMgr;
 //    3) This class is one of the "top level" systems attached to a Player
 //       class (see Player.hpp).
 //------------------------------------------------------------------------------
-class Datalink : public System
+class Datalink : public ISystem
 {
-   DECLARE_SUBCLASS(Datalink, System)
+   DECLARE_SUBCLASS(Datalink, ISystem)
 
 public:
    Datalink();

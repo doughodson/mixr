@@ -232,7 +232,7 @@ bool IGimbal::onRfEmissionEvent(Emission* const em)
    if (isComponentSelected()) {
       // Just pass it to our selected subcomponent
       const auto sc = dynamic_cast<IGimbal*>( getSelectedComponent() );
-      if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
+      if (sc != nullptr && sc->getPowerSwitch() != ISystem::PWR_OFF) sc->onRfEmissionEvent(em);
    } else {
       // Pass it down to all of our subcomponents
       base::PairStream* subcomponents = getComponents();
@@ -240,7 +240,7 @@ bool IGimbal::onRfEmissionEvent(Emission* const em)
          for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto sc = dynamic_cast<IGimbal*>( pair->object() );
-            if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
+            if (sc != nullptr && sc->getPowerSwitch() != ISystem::PWR_OFF) sc->onRfEmissionEvent(em);
          }
          subcomponents->unref();
          subcomponents = nullptr;

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_OnboardComputer_HPP__
 #define __mixr_models_common_OnboardComputer_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 namespace mixr {
    namespace base {
@@ -30,9 +30,9 @@ class ITrackMgr;
 //
 // Factory name: OnboardComputer
 //------------------------------------------------------------------------------
-class OnboardComputer : public System
+class OnboardComputer : public ISystem
 {
-    DECLARE_SUBCLASS(OnboardComputer, System)
+    DECLARE_SUBCLASS(OnboardComputer, ISystem)
 
 public:
    OnboardComputer();

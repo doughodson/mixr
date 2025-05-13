@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_CollisionDetect_HPP__
 #define __mixr_models_common_CollisionDetect_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 #include "mixr/config.hpp"
 #include "mixr/base/units/util/length_utils.hpp"
 
@@ -43,9 +43,9 @@ class Player;
 //    sendCrashEvents     <Boolean>        ! Send 'CRASH_EVENT' events on collisions (default: false)
 //
 //------------------------------------------------------------------------------
-class CollisionDetect : public System
+class CollisionDetect : public ISystem
 {
-   DECLARE_SUBCLASS(CollisionDetect, System)
+   DECLARE_SUBCLASS(CollisionDetect, ISystem)
 
 public:
    CollisionDetect();

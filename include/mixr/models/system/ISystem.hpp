@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_System_HPP__
-#define __mixr_models_common_System_HPP__
+#ifndef __mixr_models_common_ISystem_HPP__
+#define __mixr_models_common_ISystem_HPP__
 
 #include "mixr/base/IComponent.hpp"
 
@@ -11,12 +11,12 @@ class WorldModel;
 class Player;
 
 //------------------------------------------------------------------------------
-// Class: System
+// Class: ISystem
 //
 // Description: Base class for all models of system components that can be attached
 //              to a player.
 //
-// Factory name: System
+// Factory name: ISystem
 // Slots:
 //    powerSwitch    <base::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
 //
@@ -53,9 +53,9 @@ class Player;
 //       (e.g., circular references).  (see Component::shutdownNotification())
 //
 //------------------------------------------------------------------------------
-class System : public base::IComponent
+class ISystem : public base::IComponent
 {
-   DECLARE_SUBCLASS(System, base::IComponent)
+   DECLARE_SUBCLASS(ISystem, base::IComponent)
 
 public:
    // Power switch enumerations (can be expanded by derived classes)
@@ -67,7 +67,7 @@ public:
    };
 
 public:
-   System();
+   ISystem();
 
    virtual unsigned int getPowerSwitch() const;          // Returns the system's master power switch setting (see power enumeration)
    virtual bool setPowerSwitch(const unsigned int p);    // Sets the system's master power switch setting (see power enumeration)
@@ -90,10 +90,10 @@ protected:
 
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
-   virtual void dynamics(const double dt);    // Phase 0
-   virtual void transmit(const double dt);    // Phase 1
-   virtual void receive(const double dt);     // Phase 2
-   virtual void process(const double dt);     // Phase 3
+   virtual void dynamics(const double dt) {};    // Phase 0
+   virtual void transmit(const double dt) {};    // Phase 1
+   virtual void receive(const double dt)  {};    // Phase 2
+   virtual void process(const double dt)  {};    // Phase 3
 
 private:
    bool findOwnship();

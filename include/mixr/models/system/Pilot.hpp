@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Pilot_HPP__
 #define __mixr_models_common_Pilot_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 namespace mixr {
 namespace models {
@@ -19,9 +19,9 @@ namespace models {
 //
 // Factory name: Pilot
 //------------------------------------------------------------------------------
-class Pilot : public System
+class Pilot : public ISystem
 {
-   DECLARE_SUBCLASS(Pilot, System)
+   DECLARE_SUBCLASS(Pilot, ISystem)
 
 public:
     Pilot();

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IGimbal_HPP__
 #define __mixr_models_common_IGimbal_HPP__
 
-#include "mixr/models/system/System.hpp"
+#include "mixr/models/system/ISystem.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Matrixd"
@@ -114,9 +114,9 @@ class Tdb;
 //          Symmetrical and asymmetrical limit checks
 //
 //------------------------------------------------------------------------------
-class IGimbal : public System
+class IGimbal : public ISystem
 {
-   DECLARE_SUBCLASS(IGimbal, System)
+   DECLARE_SUBCLASS(IGimbal, ISystem)
 
 public:
 

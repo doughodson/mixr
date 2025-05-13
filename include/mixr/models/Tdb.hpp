@@ -2,10 +2,13 @@
 #ifndef __mixr_models_common_Tdb_HPP__
 #define __mixr_models_common_Tdb_HPP__
 
-#include "mixr/models/system/System.hpp"
-#include "mixr/base/osg/Vec3d"
+#include "mixr/base/IObject.hpp"
 
 namespace mixr {
+namespace base {
+class PairStream;
+class Vec3d;
+}
 namespace models {
 class IGimbal;
 class Player;
