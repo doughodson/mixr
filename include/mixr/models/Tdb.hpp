@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace models {
-class Gimbal;
+class IGimbal;
 class Player;
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ class Tdb : public base::IObject
 
 public:
    Tdb() = delete;
-   Tdb(const unsigned int maxTargets, const Gimbal* const gimbal);
+   Tdb(const unsigned int maxTargets, const IGimbal* const gimbal);
 
    //------------------------------------------------------------------------------
    // Process players-of-interest --- Scan the provided player list generates a
@@ -125,7 +125,7 @@ public:
 
 protected:
    // Sets our Gimbal
-   virtual void setGimbal(const Gimbal* const gimbal);
+   virtual void setGimbal(const IGimbal* const gimbal);
 
    // Clear the target data arrays
    virtual void clearArrays();
@@ -135,7 +135,7 @@ protected:
    virtual bool resizeArrays(const unsigned int newSize);
 
    const Player* ownship {};     // Our ownship player (set using setGimbal())
-   const Gimbal* gimbal {};      // Our gimbal (set in setGimbal())
+   const IGimbal* gimbal {};     // Our gimbal (set in setGimbal())
 
    bool usingEcefFlg {};         // Using ECEF flag --
                                  //   When gimbal's 'useWorld' is true or when our ownship's

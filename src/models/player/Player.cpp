@@ -7,7 +7,7 @@
 #include "mixr/models/dynamics/DynamicsModel.hpp"
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/system/Datalink.hpp"
-#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/system/IrSystem.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Pilot.hpp"

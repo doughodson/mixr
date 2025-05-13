@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/List.hpp"

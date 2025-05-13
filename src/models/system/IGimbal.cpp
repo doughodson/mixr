@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
@@ -20,9 +20,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Gimbal, "Gimbal")
+IMPLEMENT_SUBCLASS(IGimbal, "IGimbal")
 
-BEGIN_SLOTTABLE(Gimbal)
+BEGIN_SLOTTABLE(IGimbal)
     "type",                   //  1: Physical gimbal type: mechanical or electronic
 
     "location",               //  2: Relative location vector         (meters) [ x y z ]
@@ -69,9 +69,9 @@ BEGIN_SLOTTABLE(Gimbal)
     "localPlayersOfInterestOnly",   // 34: Sets the local only players of interest flag (default: false)
     "useWorldCoordinates",          // 35: Using player of interest's world (ECEF) coordinate system
     "ownHeadingOnly",               // 36: Whether only the ownship heading is used by the target data block
-END_SLOTTABLE(Gimbal)
+END_SLOTTABLE(IGimbal)
 
-BEGIN_SLOT_MAP(Gimbal)
+BEGIN_SLOT_MAP(IGimbal)
 
     ON_SLOT(1, setSlotType,                        base::Identifier) // Physical gimbal type: mechanical or electronic
 
@@ -122,20 +122,20 @@ BEGIN_SLOT_MAP(Gimbal)
     ON_SLOT(36, setSlotUseOwnHeadingOnly,          base::Boolean)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Gimbal)
+BEGIN_EVENT_HANDLER(IGimbal)
     ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEvent, Emission)
 END_EVENT_HANDLER()
 
-const double Gimbal::defaultTolerance{0.1 * (base::PI/180.0)};
+const double IGimbal::defaultTolerance{0.1 * (base::PI/180.0)};
 
-Gimbal::Gimbal()
+IGimbal::IGimbal()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-void Gimbal::initData()
+void IGimbal::initData()
 {
    pos.set(0,0,0);
    rate.set(0,0,0);
@@ -153,7 +153,7 @@ void Gimbal::initData()
    initCmdPos = cmdPos;
 }
 
-void Gimbal::copyData(const Gimbal& org, const bool cc)
+void IGimbal::copyData(const IGimbal& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -188,7 +188,7 @@ void Gimbal::copyData(const Gimbal& org, const bool cc)
    tdb = nullptr;
 }
 
-void Gimbal::deleteData()
+void IGimbal::deleteData()
 {
    tdb = nullptr;
 }
@@ -196,7 +196,7 @@ void Gimbal::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void Gimbal::reset()
+void IGimbal::reset()
 {
    pos = initPos;
    cmdRate = initCmdRate;
@@ -208,7 +208,7 @@ void Gimbal::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool Gimbal::shutdownNotification()
+bool IGimbal::shutdownNotification()
 {
     tdb = nullptr;
 
@@ -218,7 +218,7 @@ bool Gimbal::shutdownNotification()
 //------------------------------------------------------------------------------
 // dynamics() -- System class "Dynamics phase" call back
 //------------------------------------------------------------------------------
-void Gimbal::dynamics(const double dt)
+void IGimbal::dynamics(const double dt)
 {
    servoController(dt);
    BaseClass::dynamics(dt);
@@ -227,11 +227,11 @@ void Gimbal::dynamics(const double dt)
 //------------------------------------------------------------------------------
 // onRfEmissionEvent() -- process events for RF Emission not sent by us.
 //------------------------------------------------------------------------------
-bool Gimbal::onRfEmissionEvent(Emission* const em)
+bool IGimbal::onRfEmissionEvent(Emission* const em)
 {
    if (isComponentSelected()) {
       // Just pass it to our selected subcomponent
-      const auto sc = dynamic_cast<Gimbal*>( getSelectedComponent() );
+      const auto sc = dynamic_cast<IGimbal*>( getSelectedComponent() );
       if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
    } else {
       // Pass it down to all of our subcomponents
@@ -239,7 +239,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
       if (subcomponents != nullptr) {
          for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto sc = dynamic_cast<Gimbal*>( pair->object() );
+            const auto sc = dynamic_cast<IGimbal*>( pair->object() );
             if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
          subcomponents->unref();
@@ -252,7 +252,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
 //------------------------------------------------------------------------------
 // Returns true if this is a player of interest
 //------------------------------------------------------------------------------
-bool Gimbal::fromPlayerOfInterest(const Emission* const em)
+bool IGimbal::fromPlayerOfInterest(const Emission* const em)
 {
    bool ok{};
    if (em != nullptr) {
@@ -270,7 +270,7 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 //------------------------------------------------------------------------------
 // Returns earth radius (meters)
 //------------------------------------------------------------------------------
-double Gimbal::getEarthRadius() const
+double IGimbal::getEarthRadius() const
 {
    double erad{base::nav::ERAD60 * base::length::NM2M};
    const Player* own{getOwnship()};
@@ -284,7 +284,7 @@ double Gimbal::getEarthRadius() const
 //------------------------------------------------------------------------------
 // servoController() -- Gimbal's core servo model
 //------------------------------------------------------------------------------
-void Gimbal::servoController(const double dt)
+void IGimbal::servoController(const double dt)
 {
    // Only if we're not frozen ...
    if (servoMode != ServoMode::FREEZE) {
@@ -420,40 +420,40 @@ void Gimbal::servoController(const double dt)
 //------------------------------------------------------------------------------
 // Get functions
 //------------------------------------------------------------------------------
-double Gimbal::getAzimuthD() const
+double IGimbal::getAzimuthD() const
 {
    return pos[AZ_IDX] * base::angle::R2DCC;
 }
 
-double Gimbal::getElevationD() const
+double IGimbal::getElevationD() const
 {
    return pos[ELEV_IDX] * base::angle::R2DCC;
 }
 
-double Gimbal::getRollD() const
+double IGimbal::getRollD() const
 {
    return pos[ROLL_IDX] * base::angle::R2DCC;
 }
 
-void Gimbal::getAzimuthLimits(double* const leftLim, double* const rightLim) const
+void IGimbal::getAzimuthLimits(double* const leftLim, double* const rightLim) const
 {
     if (leftLim != nullptr) *leftLim = lowLimits[AZ_IDX];
     if (rightLim != nullptr) *rightLim = highLimits[AZ_IDX];
 }
 
-void Gimbal::getElevationLimits(double* const lowerLim, double* const upperLim) const
+void IGimbal::getElevationLimits(double* const lowerLim, double* const upperLim) const
 {
     if (lowerLim != nullptr) *lowerLim = lowLimits[ELEV_IDX];
     if (upperLim != nullptr) *upperLim = highLimits[ELEV_IDX];
 }
 
-void Gimbal::getRollLimits(double* const lowerLim, double* const upperLim) const
+void IGimbal::getRollLimits(double* const lowerLim, double* const upperLim) const
 {
     if (lowerLim != nullptr) *lowerLim = lowLimits[ROLL_IDX];
     if (upperLim != nullptr) *upperLim = highLimits[ROLL_IDX];
 }
 
-void Gimbal::getMaxRates(double* const azMaxRate, double* const ezMaxRate, double* const rollMaxRate) const
+void IGimbal::getMaxRates(double* const azMaxRate, double* const ezMaxRate, double* const rollMaxRate) const
 {
     if (azMaxRate != nullptr)   *azMaxRate = maxRate[AZ_IDX];
     if (ezMaxRate != nullptr)   *ezMaxRate = maxRate[ELEV_IDX];
@@ -465,84 +465,84 @@ void Gimbal::getMaxRates(double* const azMaxRate, double* const ezMaxRate, doubl
 //------------------------------------------------------------------------------
 
 // setType() -- sets our gimbal type
-bool Gimbal::setType(const Type rt)
+bool IGimbal::setType(const Type rt)
 {
     type = rt;
     return true;
 }
 
 // setServoMode() -- Set servo mode: RATE_SERVO, POSITION_SERVO, etc.
-bool Gimbal::setServoMode(const ServoMode m)
+bool IGimbal::setServoMode(const ServoMode m)
 {
     servoMode = m;
     return true;
 }
 
 // setFastSlewMode() -- Set the fast slew flag
-bool Gimbal::setFastSlewMode(const bool flg)
+bool IGimbal::setFastSlewMode(const bool flg)
 {
    fastSlew = flg;
    return true;
 }
 
 // Max range to players of interest or zero for all (meters)
-bool Gimbal::setMaxRange2PlayersOfInterest(const double meters)
+bool IGimbal::setMaxRange2PlayersOfInterest(const double meters)
 {
    maxRngPlayers = meters;
    return true;
 }
 
 // Max angle of gimbal boresight to players of interest or zero for all (rad)
-bool Gimbal::setMaxAngle2PlayersOfInterest(const double radians)
+bool IGimbal::setMaxAngle2PlayersOfInterest(const double radians)
 {
    maxAnglePlayers = radians;
    return true;
 }
 
 // Player of interest types (Player::MajorType bit-wise or'd)
-bool Gimbal::setPlayerOfInterestTypes(const unsigned int typeMask)
+bool IGimbal::setPlayerOfInterestTypes(const unsigned int typeMask)
 {
    playerTypes = typeMask;
    return true;
 }
 
 // Max number of players of interest (i.e., size of the arrays)
-bool Gimbal::setMaxPlayersOfInterest(const unsigned int n)
+bool IGimbal::setMaxPlayersOfInterest(const unsigned int n)
 {
    maxPlayers = n;
    return true;
 }
 
 // Sets the local only players of interest flag
-bool Gimbal::setLocalPlayersOfInterestOnly(const bool flg)
+bool IGimbal::setLocalPlayersOfInterestOnly(const bool flg)
 {
    localOnly = flg;
    return true;
 }
 
 // Sets the target terrain occulting enabled flag
-bool Gimbal::setTerrainOccultingEnabled(const bool flg)
+bool IGimbal::setTerrainOccultingEnabled(const bool flg)
 {
    terrainOcculting = flg;
    return true;
 }
 
 // Sets the horizon check enabled flag
-bool Gimbal::setHorizonCheckEnabled(const bool flg)
+bool IGimbal::setHorizonCheckEnabled(const bool flg)
 {
    checkHorizon = flg;
    return true;
 }
 
 // Sets the using world coordinates flag
-bool Gimbal::setUseWorld(const bool flg)
+bool IGimbal::setUseWorld(const bool flg)
 {
    useWorld = flg;
    return true;
 }
 
 // Sets the own heading only flag
-bool Gimbal::setOwnHeadingOnly(const bool flg)
+bool IGimbal::setOwnHeadingOnly(const bool flg)
 {
    ownHeadingOnly = flg;
    return true;
@@ -552,13 +552,13 @@ bool Gimbal::setOwnHeadingOnly(const bool flg)
 //------------------------------------------------------------------------------
 // setPosition() - sets the initial azimuth and elevation position
 //------------------------------------------------------------------------------
-bool Gimbal::setPosition(const double azim, const double elev, const double roll)
+bool IGimbal::setPosition(const double azim, const double elev, const double roll)
 {
     pos.set(azim, elev, roll);
     return true;
 }
 
-bool Gimbal::setPosition(const double azim, const double elev)
+bool IGimbal::setPosition(const double azim, const double elev)
 {
     return setPosition(azim, elev, 0);
 }
@@ -566,13 +566,13 @@ bool Gimbal::setPosition(const double azim, const double elev)
 //------------------------------------------------------------------------------
 // setMaxRates:  set az & el rate limits
 //------------------------------------------------------------------------------
-bool Gimbal::setMaxRates(const double azMaxRate, const double elMaxRate, const double rollMaxRate)
+bool IGimbal::setMaxRates(const double azMaxRate, const double elMaxRate, const double rollMaxRate)
 {
     maxRate.set( std::fabs(azMaxRate), std::fabs(elMaxRate), std::fabs(rollMaxRate) );
     return true;
 }
 
-bool Gimbal::setMaxRates(const double azMaxRate, const double elMaxRate)
+bool IGimbal::setMaxRates(const double azMaxRate, const double elMaxRate)
 {
     return setMaxRates( std::fabs(azMaxRate), std::fabs(elMaxRate), 0 );
 }
@@ -580,7 +580,7 @@ bool Gimbal::setMaxRates(const double azMaxRate, const double elMaxRate)
 //------------------------------------------------------------------------------
 // setAzimuthLimits() - sets our lower and upper azimuth limits
 //------------------------------------------------------------------------------
-bool Gimbal::setAzimuthLimits(const double leftLim, const double rightLim)
+bool IGimbal::setAzimuthLimits(const double leftLim, const double rightLim)
 {
     lowLimits[AZ_IDX]  = leftLim;
     highLimits[AZ_IDX] = rightLim;
@@ -590,7 +590,7 @@ bool Gimbal::setAzimuthLimits(const double leftLim, const double rightLim)
 //------------------------------------------------------------------------------
 // setElevationLimits:  set lower & upper elevation limits
 //------------------------------------------------------------------------------
-bool Gimbal::setElevationLimits(const double lowerLim, const double upperLim)
+bool IGimbal::setElevationLimits(const double lowerLim, const double upperLim)
 {
     lowLimits[ELEV_IDX]  = lowerLim;
     highLimits[ELEV_IDX] = upperLim;
@@ -600,7 +600,7 @@ bool Gimbal::setElevationLimits(const double lowerLim, const double upperLim)
 //------------------------------------------------------------------------------
 // setRollLimits:  set lower & upper roll limits
 //------------------------------------------------------------------------------
-bool Gimbal::setRollLimits(const double lowerLim, const double upperLim)
+bool IGimbal::setRollLimits(const double lowerLim, const double upperLim)
 {
     lowLimits[ROLL_IDX]  = lowerLim;
     highLimits[ROLL_IDX] = upperLim;
@@ -610,14 +610,14 @@ bool Gimbal::setRollLimits(const double lowerLim, const double upperLim)
 //------------------------------------------------------------------------------
 // setCmdRate() -- put the gimbal servo in rate mode and set the commanded rate.
 //------------------------------------------------------------------------------
-bool Gimbal::setCmdRate(const base::Vec3d& r)
+bool IGimbal::setCmdRate(const base::Vec3d& r)
 {
    cmdRate = r;
    setServoMode(ServoMode::RATE);
    return true;
 }
 
-bool Gimbal::setCmdRate(const base::Vec2d& r)
+bool IGimbal::setCmdRate(const base::Vec2d& r)
 {
    base::Vec3d t;
    t[AZ_IDX]   = r[AZ_IDX];
@@ -629,14 +629,14 @@ bool Gimbal::setCmdRate(const base::Vec2d& r)
 //------------------------------------------------------------------------------
 // setCmdRate() -- put the gimbal servo in rate mode and set the commanded rate.
 //------------------------------------------------------------------------------
-bool Gimbal::setCmdRate(const double azRate, const double elRate, const double rollRate)
+bool IGimbal::setCmdRate(const double azRate, const double elRate, const double rollRate)
 {
    cmdRate.set(azRate,elRate,rollRate);
    setServoMode(ServoMode::RATE);
    return true;
 }
 
-bool Gimbal::setCmdRate(const double azRate, const double elRate)
+bool IGimbal::setCmdRate(const double azRate, const double elRate)
 {
    return setCmdRate(azRate, elRate, 0);
 }
@@ -644,7 +644,7 @@ bool Gimbal::setCmdRate(const double azRate, const double elRate)
 //------------------------------------------------------------------------------
 // setCmdPos() -- put the gimbal servo in position mode and set the commanded position.
 //------------------------------------------------------------------------------
-bool Gimbal::setCmdPos(const base::Vec3d& p)
+bool IGimbal::setCmdPos(const base::Vec3d& p)
 {
    // ---
    // Limit range from -pi to pi
@@ -717,7 +717,7 @@ bool Gimbal::setCmdPos(const base::Vec3d& p)
    return true;
 }
 
-bool Gimbal::setCmdPos(const base::Vec2d& p)
+bool IGimbal::setCmdPos(const base::Vec2d& p)
 {
    base::Vec3d t;
    t[AZ_IDX]   = p[AZ_IDX];
@@ -726,7 +726,7 @@ bool Gimbal::setCmdPos(const base::Vec2d& p)
    return setCmdPos(t);
 }
 
-bool Gimbal::setCmdPos(const double az, const double el, const double roll)
+bool IGimbal::setCmdPos(const double az, const double el, const double roll)
 {
    base::Vec3d t;
    t[AZ_IDX]   = az;
@@ -738,7 +738,7 @@ bool Gimbal::setCmdPos(const double az, const double el, const double roll)
 //------------------------------------------------------------------------------
 // setLocation() -- set the location of the gimbal
 //------------------------------------------------------------------------------
-bool Gimbal::setLocation(const double x, const double y, const double z)
+bool IGimbal::setLocation(const double x, const double y, const double z)
 {
     location.set(x, y, z);
     return true;
@@ -748,7 +748,7 @@ bool Gimbal::setLocation(const double x, const double y, const double z)
 // Slot functions ---
 //------------------------------------------------------------------------------
 
-bool Gimbal::setSlotType(const base::Identifier* const x)
+bool IGimbal::setSlotType(const base::Identifier* const x)
 {
     if (x == nullptr) return false;
 
@@ -760,7 +760,7 @@ bool Gimbal::setSlotType(const base::Identifier* const x)
 }
 
 // setSlotLocation() -
-bool Gimbal::setSlotLocation(const base::List* const msg)
+bool IGimbal::setSlotLocation(const base::List* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -772,7 +772,7 @@ bool Gimbal::setSlotLocation(const base::List* const msg)
 }
 
 // setSlotPosition() - Initial positon vector (radians) [ az el roll ]
-bool Gimbal::setSlotPosition(const base::List* const msg)
+bool IGimbal::setSlotPosition(const base::List* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -786,7 +786,7 @@ bool Gimbal::setSlotPosition(const base::List* const msg)
 }
 
 // setSlotPosAzimuth() - Initial azimuth positon
-bool Gimbal::setSlotPosAzimuth(const base::IAngle* const az)
+bool IGimbal::setSlotPosAzimuth(const base::IAngle* const az)
 {
    bool ok{};
    if (az != nullptr) {
@@ -797,7 +797,7 @@ bool Gimbal::setSlotPosAzimuth(const base::IAngle* const az)
 }
 
 // setSlotPosElevation() - Initial elevation positon
-bool Gimbal::setSlotPosElevation(const base::IAngle* const el)
+bool IGimbal::setSlotPosElevation(const base::IAngle* const el)
 {
    bool ok{};
    if (el != nullptr) {
@@ -808,7 +808,7 @@ bool Gimbal::setSlotPosElevation(const base::IAngle* const el)
 }
 
 // setSlotPosRoll() - Initial roll positon
-bool Gimbal::setSlotPosRoll(const base::IAngle* const roll)
+bool IGimbal::setSlotPosRoll(const base::IAngle* const roll)
 {
    bool ok{};
    if (roll != nullptr) {
@@ -819,7 +819,7 @@ bool Gimbal::setSlotPosRoll(const base::IAngle* const roll)
 }
 
 // setSlotAzimuthLimits() - Azimuth limit vector (radians) [ left right ]
-bool Gimbal::setSlotAzimuthLimits(const base::List* const msg)
+bool IGimbal::setSlotAzimuthLimits(const base::List* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -831,7 +831,7 @@ bool Gimbal::setSlotAzimuthLimits(const base::List* const msg)
 }
 
 // setSlotAzimuthLimitLeft() - Left azimuth limit
-bool Gimbal::setSlotAzimuthLimitLeft(const base::IAngle* const msg)
+bool IGimbal::setSlotAzimuthLimitLeft(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -843,7 +843,7 @@ bool Gimbal::setSlotAzimuthLimitLeft(const base::IAngle* const msg)
 }
 
 // setSlotAzimuthLimitRight() - Right azimuth limit
-bool Gimbal::setSlotAzimuthLimitRight(const base::IAngle* const msg)
+bool IGimbal::setSlotAzimuthLimitRight(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -855,7 +855,7 @@ bool Gimbal::setSlotAzimuthLimitRight(const base::IAngle* const msg)
 }
 
 // setSlotElevationLimits() - calls setElevationLimits()
-bool Gimbal::setSlotElevationLimits(const base::List* const numList)
+bool IGimbal::setSlotElevationLimits(const base::List* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -867,7 +867,7 @@ bool Gimbal::setSlotElevationLimits(const base::List* const numList)
 }
 
 // setSlotElevationLower() - Lower elevation limit
-bool Gimbal::setSlotElevationLower(const base::IAngle* const msg)
+bool IGimbal::setSlotElevationLower(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -879,7 +879,7 @@ bool Gimbal::setSlotElevationLower(const base::IAngle* const msg)
 }
 
 // setSlotElevationUpper() - Upper elevation limit
-bool Gimbal::setSlotElevationUpper(const base::IAngle* const msg)
+bool IGimbal::setSlotElevationUpper(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -892,7 +892,7 @@ bool Gimbal::setSlotElevationUpper(const base::IAngle* const msg)
 
 
 // setSlotRollLimits() - calls setRollLimits()
-bool Gimbal::setSlotRollLimits(const base::List* const numList)
+bool IGimbal::setSlotRollLimits(const base::List* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -904,7 +904,7 @@ bool Gimbal::setSlotRollLimits(const base::List* const numList)
 }
 
 // setSlotRollLimitLower() - Lower roll limit
-bool Gimbal::setSlotRollLimitLower(const base::IAngle* const msg)
+bool IGimbal::setSlotRollLimitLower(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -916,7 +916,7 @@ bool Gimbal::setSlotRollLimitLower(const base::IAngle* const msg)
 }
 
 // setSlotRollLimitUpper() - Upper roll limit
-bool Gimbal::setSlotRollLimitUpper(const base::IAngle* const msg)
+bool IGimbal::setSlotRollLimitUpper(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -928,7 +928,7 @@ bool Gimbal::setSlotRollLimitUpper(const base::IAngle* const msg)
 }
 
 // setSlotMaxRates() -- calls setMaxRates()
-bool Gimbal::setSlotMaxRates(const base::List* const numList)
+bool IGimbal::setSlotMaxRates(const base::List* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -942,7 +942,7 @@ bool Gimbal::setSlotMaxRates(const base::List* const numList)
 }
 
 // setSlotMaxRateAzimuth() - Max "mechanical" azimuth rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateAzimuth(const base::IAngle* const msg)
+bool IGimbal::setSlotMaxRateAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -954,7 +954,7 @@ bool Gimbal::setSlotMaxRateAzimuth(const base::IAngle* const msg)
 }
 
 // setSlotMaxRateElevation() - Max "mechanical" elevation rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateElevation(const base::IAngle* const msg)
+bool IGimbal::setSlotMaxRateElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -966,7 +966,7 @@ bool Gimbal::setSlotMaxRateElevation(const base::IAngle* const msg)
 }
 
 // setSlotMaxRateRoll() - Max "mechanical" roll rate (base::Angle/sec)
-bool Gimbal::setSlotMaxRateRoll(const base::IAngle* const msg)
+bool IGimbal::setSlotMaxRateRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -978,7 +978,7 @@ bool Gimbal::setSlotMaxRateRoll(const base::IAngle* const msg)
 }
 
 // setSlotCmdPos() -- calls setCmdPos()
-bool Gimbal::setSlotCmdPos(const base::List* const numList)
+bool IGimbal::setSlotCmdPos(const base::List* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -993,7 +993,7 @@ bool Gimbal::setSlotCmdPos(const base::List* const numList)
 }
 
 // setSlotCmdPosAzimuth - Commanded azimuth position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosAzimuth(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdPosAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1004,7 +1004,7 @@ bool Gimbal::setSlotCmdPosAzimuth(const base::IAngle* const msg)
 }
 
 // setSlotCmdPosElevation() - Commanded elevation position (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosElevation(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdPosElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1015,7 +1015,7 @@ bool Gimbal::setSlotCmdPosElevation(const base::IAngle* const msg)
 }
 
 // setSlotCmdPosRoll() - Commanded roll position  (sets POSITION_SERVO)
-bool Gimbal::setSlotCmdPosRoll(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdPosRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1026,7 +1026,7 @@ bool Gimbal::setSlotCmdPosRoll(const base::IAngle* const msg)
 }
 
 // setSlotCmdRate() -- calls setCmdRate()
-bool Gimbal::setSlotCmdRate(const base::List* const numList)
+bool IGimbal::setSlotCmdRate(const base::List* const numList)
 {
    bool ok{};
    if (numList != nullptr) {
@@ -1040,7 +1040,7 @@ bool Gimbal::setSlotCmdRate(const base::List* const numList)
 }
 
 // setSlotCmdRateAzimuth() - Commanded azimuth rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateAzimuth(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdRateAzimuth(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1051,7 +1051,7 @@ bool Gimbal::setSlotCmdRateAzimuth(const base::IAngle* const msg)
 }
 
 // setSlotCmdRateElevation() - Commanded elevation rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateElevation(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdRateElevation(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1062,7 +1062,7 @@ bool Gimbal::setSlotCmdRateElevation(const base::IAngle* const msg)
 }
 
 // setSlotCmdRateRoll() - Commanded roll rate (sets RATE_SERVO)
-bool Gimbal::setSlotCmdRateRoll(const base::IAngle* const msg)
+bool IGimbal::setSlotCmdRateRoll(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1073,7 +1073,7 @@ bool Gimbal::setSlotCmdRateRoll(const base::IAngle* const msg)
 }
 
 // Enable target terrain occulting (default: false)
-bool Gimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
+bool IGimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1083,7 +1083,7 @@ bool Gimbal::setSlotTerrainOcculting(const base::Boolean* const msg)
 }
 
 // Enable horizon masking check (default: true)
-bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
+bool IGimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1093,7 +1093,7 @@ bool Gimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 }
 
 // Player of interest types (default: 0 )
-bool Gimbal::setSlotPlayerTypes(const base::PairStream* const x)
+bool IGimbal::setSlotPlayerTypes(const base::PairStream* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1127,7 +1127,7 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const x)
 }
 
 // Max number of players of interest (default: 0)
-bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
+bool IGimbal::setSlotMaxPlayers(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1137,7 +1137,7 @@ bool Gimbal::setSlotMaxPlayers(const base::Integer* const msg)
 }
 
 // Max range to players of interest or zero for all (meters)
-bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::ILength* const x)
+bool IGimbal::setSlotMaxRange2PlayersOfInterest(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -1147,7 +1147,7 @@ bool Gimbal::setSlotMaxRange2PlayersOfInterest(const base::ILength* const x)
 }
 
 // Max angle of gimbal boresight to players of interest or zero for all (rad)
-bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::IAngle* const msg)
+bool IGimbal::setSlotMaxAngle2PlayersOfInterest(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1157,7 +1157,7 @@ bool Gimbal::setSlotMaxAngle2PlayersOfInterest(const base::IAngle* const msg)
 }
 
 // Sets the local only players of interest flag
-bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
+bool IGimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1167,7 +1167,7 @@ bool Gimbal::setSlotLocalPlayersOfInterestOnly(const base::Boolean* const msg)
 }
 
 // Using player of interest's world (ECEF) coordinate system
-bool Gimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
+bool IGimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1177,7 +1177,7 @@ bool Gimbal::setSlotUseWorldCoordinates(const base::Boolean* const msg)
 }
 
 // Sets the own heading only flag
-bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
+bool IGimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1189,7 +1189,7 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const base::Boolean* const msg)
 //------------------------------------------------------------------------------
 // updateMatrix() -- update the A/C coord to gimbal's coord matrix
 //------------------------------------------------------------------------------
-void Gimbal::updateMatrix()
+void IGimbal::updateMatrix()
 {
    // Start with a rotational matrix
    base::Matrixd mm1;
@@ -1214,7 +1214,7 @@ void Gimbal::updateMatrix()
 //------------------------------------------------------------------------------
 // isPositioned() -- returns true of the gimbal has reached the commanded pos
 //------------------------------------------------------------------------------
-bool Gimbal::isPositioned(const double tol0) const
+bool IGimbal::isPositioned(const double tol0) const
 {
    double tol{tol0};
    if (tol < 0) tol = defaultTolerance;
@@ -1229,7 +1229,7 @@ bool Gimbal::isPositioned(const double tol0) const
 //------------------------------------------------------------------------------
 // isAtLimits() -- Returns true if the gimbal is at a 'physical' limit
 //------------------------------------------------------------------------------
-bool Gimbal::isAtLimits() const
+bool IGimbal::isAtLimits() const
 {
    return atLimit;
 }
@@ -1237,7 +1237,7 @@ bool Gimbal::isAtLimits() const
 //------------------------------------------------------------------------------
 // limitVec(Vec,lim) -- symmetrical limit of a vector
 //------------------------------------------------------------------------------
-void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& lim)
+void IGimbal::limitVec(base::Vec2d& vec, const base::Vec2d& lim)
 {
   double l0{std::fabs(lim[0])};
   if (vec[0] >  l0)  { vec[0] =  l0; }
@@ -1248,7 +1248,7 @@ void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& lim)
   if (vec[1] < -l1)  { vec[1] = -l1; }
 }
 
-void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& lim)
+void IGimbal::limitVec(base::Vec3d& vec, const base::Vec3d& lim)
 {
   double l0{std::fabs(lim[0])};
   if (vec[0] >  l0)  { vec[0] =  l0; }
@@ -1266,7 +1266,7 @@ void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& lim)
 //------------------------------------------------------------------------------
 // limitVec(vec,lower,upper) -- asymmetrical limit of a vector
 //------------------------------------------------------------------------------
-void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul)
+void IGimbal::limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul)
 {
   if (vec[0] > ul[0])  { vec[0] = ul[0]; }
   if (vec[0] < ll[0])  { vec[0] = ll[0]; }
@@ -1274,7 +1274,7 @@ void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d
   if (vec[1] < ll[1])  { vec[1] = ll[1]; }
 }
 
-void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d& ul)
+void IGimbal::limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d& ul)
 {
   if (vec[0] > ul[0])  { vec[0] = ul[0]; }
   if (vec[0] < ll[0])  { vec[0] = ll[0]; }
@@ -1287,7 +1287,7 @@ void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d
 //------------------------------------------------------------------------------
 // Process the Players-Of-Interest (POI) list
 //------------------------------------------------------------------------------
-unsigned int Gimbal::processPlayersOfInterest(base::PairStream* const poi)
+unsigned int IGimbal::processPlayersOfInterest(base::PairStream* const poi)
 {
    const auto tdb0 = new Tdb(maxPlayers, this);
 
@@ -1301,7 +1301,7 @@ unsigned int Gimbal::processPlayersOfInterest(base::PairStream* const poi)
 //------------------------------------------------------------------------------
 // Returns the current TDB (pre-ref())
 //------------------------------------------------------------------------------
-Tdb* Gimbal::getCurrentTDB()
+Tdb* IGimbal::getCurrentTDB()
 {
    return tdb.getRefPtr();
 }
@@ -1309,7 +1309,7 @@ Tdb* Gimbal::getCurrentTDB()
 //------------------------------------------------------------------------------
 // Returns the current TDB (pre-ref())
 //------------------------------------------------------------------------------
-const Tdb* Gimbal::getCurrentTDB() const
+const Tdb* IGimbal::getCurrentTDB() const
 {
    return tdb.getRefPtr();
 }
@@ -1317,7 +1317,7 @@ const Tdb* Gimbal::getCurrentTDB() const
 //------------------------------------------------------------------------------
 // Set the current TDB
 //------------------------------------------------------------------------------
-bool Gimbal::setCurrentTdb(Tdb* const newTdb)
+bool IGimbal::setCurrentTdb(Tdb* const newTdb)
 {
    tdb = newTdb;
    return true;

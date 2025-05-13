@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Gimbal_HPP__
-#define __mixr_models_common_Gimbal_HPP__
+#ifndef __mixr_models_common_IGimbal_HPP__
+#define __mixr_models_common_IGimbal_HPP__
 
 #include "mixr/models/system/System.hpp"
 
@@ -15,9 +15,9 @@ class SensorMsg;
 class Tdb;
 
 //------------------------------------------------------------------------------
-// Class: Gimbal
+// Class: IGimbal
 //
-// Description: Generic class for all gimbals, RF antennas, IR seekers, etc
+// Description: Interface for all gimbals, RF antennas, IR seekers, etc
 //
 // Notes:
 //    1) This class is one of the "top level" systems attached to a Player
@@ -50,7 +50,7 @@ class Tdb;
 //
 //
 //
-// Factory name: Gimbal
+// Factory name: IGimbal
 // Slots:
 //
 //    type                 <Identifier>   ! Physical identifiers: { mechanical, electronic } (default: electronic)
@@ -114,9 +114,9 @@ class Tdb;
 //          Symmetrical and asymmetrical limit checks
 //
 //------------------------------------------------------------------------------
-class Gimbal : public System
+class IGimbal : public System
 {
-   DECLARE_SUBCLASS(Gimbal, System)
+   DECLARE_SUBCLASS(IGimbal, System)
 
 public:
 
@@ -144,7 +144,7 @@ public:
    enum { MAX_PLAYERS = MIXR_CONFIG_MAX_PLAYERS_OF_INTEREST };
 
 public:  // Public section
-   Gimbal();
+   IGimbal();
 
    // Returns 'true' if servo is of type 'tt'.
    bool isGimbalType(const Type tt) const          { return (tt == type); }

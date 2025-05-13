@@ -78,7 +78,7 @@ OBJS =  \
 	system/Datalink.o \
 	system/ExternalStore.o \
 	system/FuelTank.o \
-	system/Gimbal.o \
+	system/IGimbal.o \
 	system/Gun.o \
 	system/Iff.o \
 	system/IrSeeker.o \

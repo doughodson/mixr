@@ -2,7 +2,7 @@
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/terrain/ITerrain.hpp"
@@ -22,7 +22,7 @@ namespace models {
 IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Gimbal_Tdb")
 EMPTY_SLOTTABLE(Tdb)
 
-Tdb::Tdb(const unsigned int mt, const Gimbal* const gp)
+Tdb::Tdb(const unsigned int mt, const IGimbal* const gp)
 {
    STANDARD_CONSTRUCTOR()
    setGimbal(gp);
@@ -111,7 +111,7 @@ void Tdb::clearArrays()
 bool Tdb::resizeArrays(const unsigned int newSize)
 {
    bool ok{};
-   if (newSize <= Gimbal::MAX_PLAYERS) {
+   if (newSize <= IGimbal::MAX_PLAYERS) {
 
       // Clear out the old data
       clearArrays();
@@ -531,7 +531,7 @@ unsigned int Tdb::computeBoresightData()
 //------------------------------------------------------------------------------
 // Sets our Gimbal
 //------------------------------------------------------------------------------
-void Tdb::setGimbal(const Gimbal* const newGimbal)
+void Tdb::setGimbal(const IGimbal* const newGimbal)
 {
    // Unref() the old, set and ref() the new
    if (ownship != nullptr) { ownship->unref(); ownship = nullptr; }

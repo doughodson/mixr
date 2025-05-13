@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_ScanGimbal_HPP__
 #define __mixr_models_common_ScanGimbal_HPP__
 
-#include "mixr/models/system/Gimbal.hpp"
+#include "mixr/models/system/IGimbal.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
 
 namespace mixr {
@@ -126,9 +126,9 @@ namespace models {
 //       the two, you're likely to get unexpected results.
 //
 //------------------------------------------------------------------------------
-class ScanGimbal : public Gimbal
+class ScanGimbal : public IGimbal
 {
-    DECLARE_SUBCLASS(ScanGimbal, Gimbal)
+    DECLARE_SUBCLASS(ScanGimbal, IGimbal)
 
 public:
     enum class ScanMode { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN,
