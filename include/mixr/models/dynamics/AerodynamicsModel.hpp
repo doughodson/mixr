@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_dynamics_AerodynamicsModel_HPP__
 #define __mixr_models_common_dynamics_AerodynamicsModel_HPP__
 
-#include "mixr/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/dynamics/IDynamicsModel.hpp"
 
 namespace mixr {
 namespace models {
@@ -14,9 +14,9 @@ namespace models {
 //
 // Factory name: AerodynamicsModel
 //------------------------------------------------------------------------------
-class AerodynamicsModel : public DynamicsModel
+class AerodynamicsModel : public IDynamicsModel
 {
-    DECLARE_SUBCLASS(AerodynamicsModel, DynamicsModel)
+    DECLARE_SUBCLASS(AerodynamicsModel, IDynamicsModel)
 
 public:
     AerodynamicsModel();

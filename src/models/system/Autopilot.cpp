@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/Autopilot.hpp"
-#include "mixr/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/dynamics/IDynamicsModel.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
@@ -886,7 +886,7 @@ bool Autopilot::headingController()
 
    Player* pv{getOwnship()};
    if (pv != nullptr) {
-      DynamicsModel* md{pv->getDynamicsModel()};
+      IDynamicsModel* md{pv->getDynamicsModel()};
       if (md != nullptr) {
          // why mess with the player?  All it does is send it to the dynamics model anyways!  Skip the middle man!
          if ( isHeadingHoldOn() || isNavModeOn() ) {
@@ -913,7 +913,7 @@ bool Autopilot::altitudeController()
    Player* pv{getOwnship()};
    if (pv != nullptr) {
       // skip the middle man
-      DynamicsModel* md{pv->getDynamicsModel()};
+      IDynamicsModel* md{pv->getDynamicsModel()};
       if (md != nullptr) {
          if ( isAltitudeHoldOn() || isNavModeOn() ) {
             md->setCommandedAltitude(getCommandedAltitudeFt() * base::length::FT2M,  maxClimbRateMps, maxPitchAngleDegs);
@@ -935,7 +935,7 @@ bool Autopilot::velocityController()
    Player* pv{getOwnship()};
    if (pv != nullptr) {
       // skip the middle man
-      DynamicsModel* md{pv->getDynamicsModel()};
+      IDynamicsModel* md{pv->getDynamicsModel()};
       if (md != nullptr) {
          if ( isVelocityHoldOn() ) {
             md->setCommandedVelocityKts( getCommandedVelocityKts(), maxVelAccNps );

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_dynamics_DynamicsModel_HPP__
-#define __mixr_models_common_dynamics_DynamicsModel_HPP__
+#ifndef __mixr_models_common_dynamics_IDynamicsModel_HPP__
+#define __mixr_models_common_dynamics_IDynamicsModel_HPP__
 
 #include "mixr/base/IComponent.hpp"
 
@@ -8,9 +8,9 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: DynamicsModel
+// Class: IDynamicsModel
 //
-// Description:  Base dynamics model class
+// Description:  Interface class for all dynamics models
 //
 // Note --
 //
@@ -31,12 +31,12 @@ namespace models {
 // Factory name: DynamicsModel
 //
 //------------------------------------------------------------------------------
-class DynamicsModel : public base::IComponent
+class IDynamicsModel : public base::IComponent
 {
-    DECLARE_SUBCLASS(DynamicsModel, base::IComponent)
+    DECLARE_SUBCLASS(IDynamicsModel, base::IComponent)
 
 public:
-    DynamicsModel();
+    IDynamicsModel();
 
     virtual void atReleaseInit();
     virtual void dynamics(const double dt);

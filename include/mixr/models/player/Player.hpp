@@ -26,7 +26,7 @@ class WorldModel;
 
 // Major component types
 class Datalink;
-class DynamicsModel;
+class IDynamicsModel;
 class IGimbal;
 class IrSystem;
 class Navigation;
@@ -314,7 +314,7 @@ class Track;
 //       'components' slot.  Examples:
 //
 //          datalink:      ( Datalink ...        )  // Datalink model
-//          dynamicsModel: ( DynamicsModel ...   )  // Dynamics model
+//          dynamicsModel: ( IDynamicsModel ...  )  // Dynamics model
 //          gimbals:       ( IGimbal ...         )  // Gimbal, antenna and/or seeker model
 //          nav:           ( Navigation ...      )  // Navigation model
 //          obc:           ( OnboardComputer ... )  // Onboard computer model
@@ -596,8 +596,8 @@ public:
    WorldModel* getWorldModel();
    const WorldModel* getWorldModel() const;
 
-   DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
-   const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
+   IDynamicsModel* getDynamicsModel();                                // Player's dynamics model
+   const IDynamicsModel* getDynamicsModel() const;                    // Player's dynamics model (const version)
    const std::string& getDynamicsModelName() const;                   // Name of the player's dynamics model
 
    Pilot* getPilot();                                                 // Player's top level pilot model

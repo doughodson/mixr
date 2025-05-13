@@ -1,20 +1,20 @@
 
-#include "mixr/models/dynamics/DynamicsModel.hpp"
+#include "mixr/models/dynamics/IDynamicsModel.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(DynamicsModel, "DynamicsModel")
-EMPTY_SLOTTABLE(DynamicsModel)
-EMPTY_DELETEDATA(DynamicsModel)
+IMPLEMENT_SUBCLASS(IDynamicsModel, "IDynamicsModel")
+EMPTY_SLOTTABLE(IDynamicsModel)
+EMPTY_DELETEDATA(IDynamicsModel)
 
-DynamicsModel::DynamicsModel()
+IDynamicsModel::IDynamicsModel()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void DynamicsModel::copyData(const DynamicsModel& org, const bool)
+void IDynamicsModel::copyData(const IDynamicsModel& org, const bool)
 {
    BaseClass::copyData(org);
 }
@@ -23,7 +23,7 @@ void DynamicsModel::copyData(const DynamicsModel& org, const bool)
 // dynamics() -- one pass update of this dynamics model
 //               (called from Player::dynamics)
 //------------------------------------------------------------------------------
-void DynamicsModel::dynamics(const double)
+void IDynamicsModel::dynamics(const double)
 {
 }
 
@@ -31,7 +31,7 @@ void DynamicsModel::dynamics(const double)
 // atReleaseInit() -- init the model at the transition from PRE_RELEASE to
 // ACTIVE mode.  Default is to call reset().  Used by Weapon players.
 //------------------------------------------------------------------------------
-void DynamicsModel::atReleaseInit()
+void IDynamicsModel::atReleaseInit()
 {
    reset();
 }
@@ -39,27 +39,27 @@ void DynamicsModel::atReleaseInit()
 //------------------------------------------------------------------------------
 // Access functions
 //------------------------------------------------------------------------------
-double DynamicsModel::getFuelWt() const
+double IDynamicsModel::getFuelWt() const
 {
     return 0.0;
 }
 
-double DynamicsModel::getFuelWtMax() const
+double IDynamicsModel::getFuelWtMax() const
 {
     return 0.0;
 }
 
-double DynamicsModel::getGrossWeight() const
+double IDynamicsModel::getGrossWeight() const
 {
     return 0.0;
 }
 
-int DynamicsModel::getNumberOfEngines() const
+int IDynamicsModel::getNumberOfEngines() const
 {
     return 0;
 }
 
-int DynamicsModel::getEngThrust(double* const, const int) const
+int IDynamicsModel::getEngThrust(double* const, const int) const
 {
     return 0;
 }
@@ -69,68 +69,68 @@ int DynamicsModel::getEngThrust(double* const, const int) const
 //------------------------------------------------------------------------------
 // Autopilot controls
 //------------------------------------------------------------------------------
-bool DynamicsModel::isHeadingHoldOn() const
+bool IDynamicsModel::isHeadingHoldOn() const
 {
    return false;
 }
 
-double DynamicsModel::getCommandedHeadingD() const
+double IDynamicsModel::getCommandedHeadingD() const
 {
    return 0;
 }
 
 // setHeadingHoldOn() --   Enable/Disable heading hold
-bool DynamicsModel::setHeadingHoldOn(const bool)
+bool IDynamicsModel::setHeadingHoldOn(const bool)
 {
    return false;
 }
 
 // setCommandedHeadingD() --   Sets commanded heading (true: degs)
-bool DynamicsModel::setCommandedHeadingD(const double, const double, const double)
+bool IDynamicsModel::setCommandedHeadingD(const double, const double, const double)
 {
    return false;
 }
 
-bool DynamicsModel::isVelocityHoldOn() const
+bool IDynamicsModel::isVelocityHoldOn() const
 {
    return false;
 }
 
-double DynamicsModel::getCommandedVelocityKts() const
+double IDynamicsModel::getCommandedVelocityKts() const
 {
    return 0;
 }
 
 // setVelocityHoldOn() --   Enable/Disable velocity hold
-bool DynamicsModel::setVelocityHoldOn(const bool)
+bool IDynamicsModel::setVelocityHoldOn(const bool)
 {
    return false;
 }
 
 // setCommandedVelocityKts() --   Sets commanded velocity (kts)
-bool DynamicsModel::setCommandedVelocityKts(const double, const double)
+bool IDynamicsModel::setCommandedVelocityKts(const double, const double)
 {
    return false;
 }
 
-bool DynamicsModel::isAltitudeHoldOn() const
+bool IDynamicsModel::isAltitudeHoldOn() const
 {
    return false;
 }
 
-double DynamicsModel::getCommandedAltitude() const
+double IDynamicsModel::getCommandedAltitude() const
 {
    return 0;
 }
 
 // setAltitudeHoldOn() --   Enable/Disable altitude hold
-bool DynamicsModel::setAltitudeHoldOn(const bool)
+bool IDynamicsModel::setAltitudeHoldOn(const bool)
 {
    return false;
 }
 
 // setCommandedAltitude() --   Sets commanded altitude (meters)
-bool DynamicsModel::setCommandedAltitude(const double, const double, const double)
+bool IDynamicsModel::setCommandedAltitude(const double, const double, const double)
 {
    return false;
 }
@@ -139,7 +139,7 @@ bool DynamicsModel::setCommandedAltitude(const double, const double, const doubl
 // setControlStickRollInput(Roll) --  Control inputs: normalized
 //   roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void DynamicsModel::setControlStickRollInput(const double)
+void IDynamicsModel::setControlStickRollInput(const double)
 {
 }
 
@@ -147,7 +147,7 @@ void DynamicsModel::setControlStickRollInput(const double)
 // setControlStickPitchInput(Pitch) --  Control inputs: normalized
 //  pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
 //------------------------------------------------------------------------------
-void DynamicsModel::setControlStickPitchInput(const double)
+void IDynamicsModel::setControlStickPitchInput(const double)
 {
 }
 
@@ -163,7 +163,7 @@ void DynamicsModel::setControlStickPitchInput(const double)
 //    num -> number of throttle positions to get/set
 //    returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int DynamicsModel::setThrottles(const double* const, const int)
+int IDynamicsModel::setThrottles(const double* const, const int)
 {
     return 0;
 }
@@ -173,14 +173,14 @@ int DynamicsModel::setThrottles(const double* const, const int)
 //               No brake force  -> 0.0
 //               Max brake force -> 1.0
 //------------------------------------------------------------------------------
-void DynamicsModel::setBrakes(const double, const double)
+void IDynamicsModel::setBrakes(const double, const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // Sets the fuel weight
 //------------------------------------------------------------------------------
-bool DynamicsModel::setFuelWt(const double)
+bool IDynamicsModel::setFuelWt(const double)
 {
    return false;
 }
