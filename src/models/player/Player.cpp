@@ -1053,15 +1053,15 @@ base::Pair* Player::getDatalinkByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Gimbal model
-Gimbal* Player::getGimbal()
+IGimbal* Player::getGimbal()
 {
-   return (gimbal != nullptr) ? ((Gimbal*) gimbal->object()) : nullptr;
+   return (gimbal != nullptr) ? ((IGimbal*) gimbal->object()) : nullptr;
 }
 
 // Player's top level Gimbal (const version)
-const Gimbal* Player::getGimbal() const
+const IGimbal* Player::getGimbal() const
 {
-   return (gimbal != nullptr) ? (static_cast<Gimbal*>(gimbal->object())) : nullptr;
+   return (gimbal != nullptr) ? (static_cast<IGimbal*>(gimbal->object())) : nullptr;
 }
 
 // Name of the player's top level Gimbal model
@@ -1072,9 +1072,9 @@ const std::string& Player::getGimbalName() const
 }
 
 // Returns a Gimbal model by its name
-Gimbal* Player::getGimbalByName(const char* const name1)
+IGimbal* Player::getGimbalByName(const char* const name1)
 {
-   Gimbal* p{};
+   IGimbal* p{};
    if (gimbal != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
@@ -1109,7 +1109,7 @@ Gimbal* Player::getGimbalByName(const char* const name1)
       // Did we find a match?
       if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
-         p = dynamic_cast<Gimbal*>( pair->object() );
+         p = dynamic_cast<IGimbal*>( pair->object() );
       }
    }
    return p;
@@ -1121,7 +1121,7 @@ base::Pair* Player::getGimbalByType(const std::type_info& type)
    base::Pair* p{};                // Our return value
 
    if (gimbal != nullptr) {
-      Gimbal* root{getGimbal()};   // Root node of the list
+      IGimbal* root{getGimbal()};  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = gimbal;
@@ -2619,7 +2619,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
 
    // 6) Pass the emission to our antennas
    {
-      Gimbal* g{getGimbal()};
+      IGimbal* g{getGimbal()};
       if (g != nullptr && g->getPowerSwitch() != System::PWR_OFF) {
          g->event(RF_EMISSION,em);
       }
@@ -3163,7 +3163,7 @@ void Player::updateSystemPointers()
    loadSysPtrs = false;
    setDynamicsModel( findByType(typeid(DynamicsModel)) );
    setDatalink( findByType(typeid(Datalink)) );
-   setGimbal( findByType(typeid(Gimbal)) );
+   setGimbal( findByType(typeid(IGimbal)) );
    setIrSystem( findByType(typeid(IrSystem)) );
    setNavigation( findByType(typeid(Navigation)) );
    setOnboardComputer( findByType(typeid(OnboardComputer)) );
@@ -3282,7 +3282,7 @@ bool Player::setGimbal(base::Pair* const sys)
       if (gimbal != nullptr) gimbal->unref();
       gimbal = nullptr;
       ok = true;
-   } else if ( sys->object()->isClassType(typeid(Gimbal)) ) {
+   } else if ( sys->object()->isClassType(typeid(IGimbal)) ) {
       if (gimbal != nullptr) gimbal->unref();
       gimbal = sys;
       gimbal->ref();

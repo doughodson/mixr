@@ -318,7 +318,7 @@ IMPLEMENT_SUBCLASS(TdbIr,"Seeker_TdbIr")
 EMPTY_SLOTTABLE(TdbIr)
 EMPTY_DELETEDATA(TdbIr)
 
-TdbIr::TdbIr(const unsigned int mt, const Gimbal* const gp) : Tdb(mt,gp)
+TdbIr::TdbIr(const unsigned int mt, const IGimbal* const gp) : Tdb(mt,gp)
 {
    STANDARD_CONSTRUCTOR()
 }

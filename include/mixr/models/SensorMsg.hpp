@@ -10,7 +10,7 @@
 namespace mixr {
 namespace models {
 class Player;
-class Gimbal;
+class IGimbal;
 
 //------------------------------------------------------------------------------
 // Class: SensorMsg
@@ -128,8 +128,8 @@ public:
    // ---
 
    // Pointer to the gimbal (seeker, antenna) that sent this message
-   Gimbal* getGimbal()                          { return gimbal; }
-   const Gimbal* getGimbal() const              { return gimbal; }
+   IGimbal* getGimbal()                         { return gimbal; }
+   const IGimbal* getGimbal() const             { return gimbal; }
 
    // Pointer to the player that sent this message
    Player* getOwnship()                         { return ownship; }
@@ -144,7 +144,7 @@ public:
    const base::IObject* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
-   void setGimbal(Gimbal* const);
+   void setGimbal(IGimbal* const);
 
    // Sets the player that sent this message
    void setOwnship(Player* const);
@@ -171,7 +171,7 @@ private:
    base::Vec3d losO2T;       // Normalized ownship to target LOS vector (ownship's NED)
    base::Vec3d losT2O;       // Normalized target to ownship LOS vector (target's NED)
    base::Vec3d aoi;          // Normalized target Angle Of Incidence (AOI) vector
-   Gimbal* gimbal {};        // The gimbal that transmitted the message
+   IGimbal* gimbal {};       // The gimbal that transmitted the message
    base::safe_ptr<Player> ownship;         // The originating (ownship) player
    base::safe_ptr<Player> target;          // The Target player
    base::safe_ptr<base::IObject> dataMsg;  // Embedded data message (e.g., datalink, etc)

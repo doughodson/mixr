@@ -27,7 +27,7 @@ class WorldModel;
 // Major component types
 class Datalink;
 class DynamicsModel;
-class Gimbal;
+class IGimbal;
 class IrSystem;
 class Navigation;
 class OnboardComputer;
@@ -315,7 +315,7 @@ class Track;
 //
 //          datalink:      ( Datalink ...        )  // Datalink model
 //          dynamicsModel: ( DynamicsModel ...   )  // Dynamics model
-//          gimbals:       ( Gimbal ...          )  // Gimbal, antenna and/or seeker model
+//          gimbals:       ( IGimbal ...         )  // Gimbal, antenna and/or seeker model
 //          nav:           ( Navigation ...      )  // Navigation model
 //          obc:           ( OnboardComputer ... )  // Onboard computer model
 //          pilot:         ( Pilot ...           )  // Pilot model
@@ -616,10 +616,10 @@ public:
    Datalink* getDatalinkByName(const char* const);                    // Returns a Datalink model by its name
    base::Pair* getDatalinkByType(const std::type_info& type);         // Returns a Datalink model by its type
 
-   Gimbal* getGimbal();                                               // Player's top level Gimbal model
-   const Gimbal* getGimbal() const;                                   // Player's top level Gimbal (const version)
+   IGimbal* getGimbal();                                              // Player's top level Gimbal model
+   const IGimbal* getGimbal() const;                                  // Player's top level Gimbal (const version)
    const std::string& getGimbalName() const;                          // Name of the player's top level Gimbal model
-   Gimbal* getGimbalByName(const char* const);                        // Returns a Gimbal model by its name
+   IGimbal* getGimbalByName(const char* const);                       // Returns a Gimbal model by its name
    base::Pair* getGimbalByType(const std::type_info& type);           // Returns a Gimbal model by its type
 
    Navigation* getNavigation();                                       // Player's top level Navigation model
