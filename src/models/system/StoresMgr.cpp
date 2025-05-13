@@ -13,7 +13,7 @@
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/RfSensor.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Track.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"

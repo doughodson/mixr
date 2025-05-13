@@ -8,7 +8,7 @@
 
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
@@ -674,7 +674,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          unsigned char numTJT{};
 
          // Get the track list
-         models::TrackManager* tm{beam->getTrackManager()};
+         models::ITrackMgr* tm{beam->getTrackManager()};
          if (tm != nullptr) {
             const int max1{MAX_TARGETS_IN_TJ_FIELD + 1};   // check for one more than the max (highDensityTracks)
             base::safe_ptr<models::Track> trackList[max1];

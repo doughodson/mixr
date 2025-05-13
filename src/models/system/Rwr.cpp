@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/PairStream.hpp"
@@ -86,7 +86,7 @@ void Rwr::receive(const double dt)
 #endif
 
    // Process received emissions
-   TrackManager* tm{getTrackManager()};
+   ITrackMgr* tm{getTrackManager()};
    Emission* em{};
    double signal{};
 

@@ -13,7 +13,7 @@
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/RfSensor.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Track.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
@@ -611,7 +611,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
                if (trk != nullptr) {
                   Player* tgt{trk->getTarget()};
 
-                  TrackManager* tm{};
+                  ITrackMgr* tm{};
                   RfSensor* sm{flyout->getSensor()};
                   if (sm != nullptr) tm = sm->getTrackManager();
 

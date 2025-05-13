@@ -372,7 +372,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::INumber* const x)
    if (value > 0.0) {
       posGate = value;
    } else {
-      std::cerr << "TrackManager::setPositionGate: invalid gate, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setPositionGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
    return ok;
@@ -391,7 +391,7 @@ bool AirTrkMgr::setSlotPositionGate(const base::ILength* const x)
    if (value > 0.0) {
       posGate = value;
    } else {
-      std::cerr << "TrackManager::setPositionGate: invalid gate, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setPositionGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
    return ok;
@@ -414,7 +414,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::INumber* const x)
       rngGate = value;
    }
    else {
-      std::cerr << "TrackManager::setRangeGate: invalid gate, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setRangeGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
    return ok;
@@ -433,7 +433,7 @@ bool AirTrkMgr::setSlotRangeGate(const base::ILength* const x)
    if (value > 0.0) {
       rngGate = value;
    } else {
-      std::cerr << "TrackManager::setRangeGate: invalid gate, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setRangeGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
    return ok;
@@ -456,7 +456,7 @@ bool AirTrkMgr::setSlotVelocityGate(const base::INumber* const x)
       velGate = value;
    }
    else {
-      std::cerr << "TrackManager::setVelocityGate: invalid gate, must be greater than zero." << std::endl;
+      std::cerr << "ITrackMgr::setVelocityGate: invalid gate, must be greater than zero." << std::endl;
       ok = true;
    }
    return ok;

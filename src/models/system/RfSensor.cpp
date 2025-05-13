@@ -273,13 +273,13 @@ const std::string& RfSensor::getTrackManagerName() const
 }
 
 // Returns our current track manager
-TrackManager* RfSensor::getTrackManager()
+ITrackMgr* RfSensor::getTrackManager()
 {
    return trackManager;
 }
 
 // Returns our current track manager (const version)
-const TrackManager* RfSensor::getTrackManager() const
+const ITrackMgr* RfSensor::getTrackManager() const
 {
    return trackManager;
 }
@@ -604,7 +604,7 @@ bool RfSensor::setTrackManagerName(const std::string& name)
 //------------------------------------------------------------------------------
 // setTrackManager() -- Sets the track manager
 //------------------------------------------------------------------------------
-bool RfSensor::setTrackManager(TrackManager* tm)
+bool RfSensor::setTrackManager(ITrackMgr* tm)
 {
     if (trackManager != nullptr) {
         trackManager->unref();

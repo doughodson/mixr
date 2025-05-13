@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/trackmanager/TrackManager.hpp"
+#include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
@@ -328,7 +328,7 @@ void Radar::process(const double dt)
    BaseClass::process(dt);
 
    // Find the track manager
-   TrackManager* tm{getTrackManager()};
+   ITrackMgr* tm{getTrackManager()};
    if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
       base::lock(myLock);

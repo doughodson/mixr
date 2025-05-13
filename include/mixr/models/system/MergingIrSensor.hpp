@@ -10,7 +10,7 @@ namespace models {
 class IrSeeker;
 class IrQueryMsg;
 class Player;
-class TrackManager;
+class ITrackMgr;
 
 //------------------------------------------------------------------------------
 // Class: MergingIrSensor

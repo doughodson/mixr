@@ -13,7 +13,7 @@ namespace models {
 class IrSeeker;
 class IrQueryMsg;
 class Player;
-class TrackManager;
+class ITrackMgr;
 
 //------------------------------------------------------------------------------
 // Class: IrSensor
@@ -135,9 +135,9 @@ public:
    virtual const std::string& getTrackManagerName() const;    // Returns the requested track manager's name
    virtual bool setTrackManagerName(const std::string&);      // Sets the name of the track manager to use
 
-   virtual TrackManager* getTrackManager();                  // Returns our current track manager
-   virtual const TrackManager* getTrackManager() const;      // Returns our current track manager (const version)
-   virtual bool setTrackManager(TrackManager* const);        // Sets the track manager
+   virtual ITrackMgr* getTrackManager();                      // Returns our current track manager
+   virtual const ITrackMgr* getTrackManager() const;          // Returns our current track manager (const version)
+   virtual bool setTrackManager(ITrackMgr* const);            // Sets the track manager
 
    // Store sensor reports until we are ready to pass on to track manager.
    void addStoredMessage(IrQueryMsg* msg);
@@ -179,7 +179,7 @@ private:
 
    // above results in a simple cone.
    std::string tmName;                 // Name of our track manager
-   TrackManager* trackManager{};       // Our Track manager -- managed by the onboard computer
+   ITrackMgr* trackManager{};          // Our Track manager -- managed by the onboard computer
 
    //double azimuthBin{};              // minimum azimuth we can distinguish -- two signals whose
                                        // azimuth differs by less than this will be merged

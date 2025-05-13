@@ -725,7 +725,7 @@ bool IrSensor::setTrackManagerName(const std::string& name)
 //------------------------------------------------------------------------------
 // setTrackManager() -- Sets the track manager
 //------------------------------------------------------------------------------
-bool IrSensor::setTrackManager(TrackManager* tm)
+bool IrSensor::setTrackManager(ITrackMgr* tm)
 {
     if (trackManager != nullptr) {
         trackManager->unref();
@@ -744,13 +744,13 @@ const std::string& IrSensor::getTrackManagerName() const
 }
 
 // Returns our current track manager
-TrackManager* IrSensor::getTrackManager()
+ITrackMgr* IrSensor::getTrackManager()
 {
    return trackManager;
 }
 
 // Returns our current track manager (const version)
-const TrackManager* IrSensor::getTrackManager() const
+const ITrackMgr* IrSensor::getTrackManager() const
 {
    return trackManager;
 }
