@@ -7,7 +7,7 @@ CPPFLAGS += -I$(JSBSIM_INC_DIR)
 
 OBJS =  \
 	factory.o \
-	JSBSimModel.o
+	JSBSimDynamics.o
 
 .PHONY: all clean
 
