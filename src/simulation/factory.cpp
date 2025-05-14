@@ -3,7 +3,7 @@
 
 #include "mixr/base/IObject.hpp"
 
-//#include "mixr/simulation/Simulation.hpp"
+#include "mixr/simulation/Simulation.hpp"
 #include "mixr/simulation/Station.hpp"
 
 #include <string>
@@ -15,8 +15,12 @@ base::IObject* factory(const std::string& name)
 {
     base::IObject* obj {};
 
-    //if ( name == Simulation::getFactoryName() )   { obj = new Simulation(); }
-    if ( name == Station::getFactoryName() ) { obj = new Station(); }
+    if ( name == Simulation::getFactoryName() ) {
+        obj = new Simulation();
+    }
+    else if ( name == Station::getFactoryName() ) {
+        obj = new Station();
+    }
 
     return obj;
 }
