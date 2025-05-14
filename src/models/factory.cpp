@@ -96,6 +96,7 @@
 #include "mixr/models/system/StabilizingGimbal.hpp"
 #include "mixr/models/system/Stores.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/System.hpp"
 
 // signatures
 #include "mixr/models/signature/IrSignature.hpp"
@@ -231,6 +232,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // Systems
+   else if ( name == System::getFactoryName() ) {
+      obj = new System();
+   }
    else if ( name == AvionicsPod::getFactoryName() ) {
       obj = new AvionicsPod();
    }

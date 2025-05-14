@@ -103,6 +103,7 @@ OBJS =  \
 	system/Stores.o \
 	system/StoresMgr.o \
 	system/ISystem.o \
+	system/System.o \
 	Actions.o \
 	Designator.o \
 	Emission.o \
