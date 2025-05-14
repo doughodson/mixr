@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SigPlate_HPP__
-#define __mixr_models_common_SigPlate_HPP__
+#ifndef __mixr_models_common_ISigPlate_HPP__
+#define __mixr_models_common_ISigPlate_HPP__
 
 #include "mixr/models/signature/IRfSignature.hpp"
 
@@ -10,7 +10,7 @@ namespace models {
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: SigPlate
+// Class: ISigPlate
 // Descriptions: RfSignature of a simple plate based on length & width, and always
 //               normal to the transmitter.
 // Factory name: SigPlate
@@ -19,13 +19,13 @@ class Emission;
 //    b    <base::INumber>    ! width of the plate (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class SigPlate : public IRfSignature
+class ISigPlate : public IRfSignature
 {
-    DECLARE_SUBCLASS(SigPlate, IRfSignature)
+    DECLARE_SUBCLASS(ISigPlate, IRfSignature)
 
 public:
-    SigPlate();
-    SigPlate(const double a, const double b);
+    ISigPlate();
+    ISigPlate(const double a, const double b);
 
     double getA() const                             { return a; }
     double getB() const                             { return b; }

@@ -17,7 +17,7 @@ class Emission;
 //    rcs   <base::INumber> ! Constant Radar Cross Section value (default: 0.0)
 //                          !  base::Number(square meters) or base::Decibel(square meters) or base::Area()
 //------------------------------------------------------------------------------
-class SigConstant : public IRfSignature
+class SigConstant final: public IRfSignature
 {
     DECLARE_SUBCLASS(SigConstant, IRfSignature)
 public:

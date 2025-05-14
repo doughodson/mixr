@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Autopilot_HPP__
 #define __mixr_models_common_Autopilot_HPP__
 
-#include "mixr/models/system/Pilot.hpp"
+#include "mixr/models/system/IPilot.hpp"
 #include "mixr/base/osg/Vec3d"
 
 #include <string>
@@ -73,9 +73,9 @@ namespace models {
 //      not "aircraft" limits.
 //
 //------------------------------------------------------------------------------
-class Autopilot : public Pilot
+class Autopilot final: public IPilot
 {
-   DECLARE_SUBCLASS(Autopilot, Pilot)
+   DECLARE_SUBCLASS(Autopilot, IPilot)
 
 public:
    Autopilot();

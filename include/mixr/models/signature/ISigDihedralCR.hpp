@@ -1,26 +1,26 @@
 
-#ifndef __mixr_models_common_SigDihedralCR_HPP__
-#define __mixr_models_common_SigDihedralCR_HPP__
+#ifndef __mixr_models_common_ISigDihedralCR_HPP__
+#define __mixr_models_common_ISigDihedralCR_HPP__
 
-#include "mixr/models/signature/SigPlate.hpp"
+#include "mixr/models/signature/ISigPlate.hpp"
 
 namespace mixr {
 namespace models {
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: SigDihedralCR
+// Class: ISigDihedralCR
 // Descriptions: RfSignature of a Dihedral Corner Reflector based on edge length,
 //               and always facing the transmitter.
 // Factory name: SigDihedralCR
 //------------------------------------------------------------------------------
-class SigDihedralCR : public SigPlate
+class ISigDihedralCR : public ISigPlate
 {
-    DECLARE_SUBCLASS(SigDihedralCR, SigPlate)
+    DECLARE_SUBCLASS(ISigDihedralCR, ISigPlate)
 
 public:
-    SigDihedralCR();
-    SigDihedralCR(const double);
+    ISigDihedralCR();
+    ISigDihedralCR(const double);
 
     double getRCS(const Emission* const) override;
 

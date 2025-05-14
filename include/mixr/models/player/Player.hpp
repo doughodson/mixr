@@ -31,7 +31,7 @@ class IGimbal;
 class IrSystem;
 class INavigation;
 class OnboardComputer;
-class Pilot;
+class IPilot;
 class Radio;
 class RfSensor;
 class StoresMgr;
@@ -318,7 +318,7 @@ class Track;
 //          gimbals:       ( IGimbal ...         )  // Gimbal, antenna and/or seeker model
 //          nav:           ( Navigation ...      )  // Navigation model
 //          obc:           ( OnboardComputer ... )  // Onboard computer model
-//          pilot:         ( Pilot ...           )  // Pilot model
+//          pilot:         ( IPilot ...          )  // Pilot model
 //          radios:        ( Radio ...           )  // Radio model
 //          sensors:       ( RfSensor ...        )  // R/F Sensor model
 //          irSystems:     ( IrSystem ...        )  // IR system model
@@ -600,10 +600,10 @@ public:
    const IDynamics* getDynamicsModel() const;                         // Player dynamics (const version)
    const std::string& getDynamicsModelName() const;                   // Name of the player dynamics
 
-   Pilot* getPilot();                                                 // Player's top level pilot model
-   const Pilot* getPilot() const;                                     // Player's top level pilot model (const version)
+   IPilot* getPilot();                                                // Player's top level pilot model
+   const IPilot* getPilot() const;                                    // Player's top level pilot model (const version)
    const std::string& getPilotName() const;                           // Name of the player's top level pilot model
-   Pilot* getPilotByName(const char* const);                          // Returns a pilot model by its name
+   IPilot* getPilotByName(const char* const);                         // Returns a pilot model by its name
    base::Pair* getPilotByType(const std::type_info& type);            // Returns a pilot model by its type
 
    StoresMgr* getStoresManagement();                                  // Player's stores (weapons, fuel, etc...) manager model

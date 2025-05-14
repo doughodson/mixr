@@ -1,28 +1,28 @@
 
-#include "mixr/models/signature/SigDihedralCR.hpp"
+#include "mixr/models/signature/ISigDihedralCR.hpp"
 
 #include "mixr/models/Emission.hpp"
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigDihedralCR, "SigDihedralCR")
-EMPTY_SLOTTABLE(SigDihedralCR)
-EMPTY_DELETEDATA(SigDihedralCR)
+IMPLEMENT_SUBCLASS(ISigDihedralCR, "ISigDihedralCR")
+EMPTY_SLOTTABLE(ISigDihedralCR)
+EMPTY_DELETEDATA(ISigDihedralCR)
 
-SigDihedralCR::SigDihedralCR()
+ISigDihedralCR::ISigDihedralCR()
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
 }
 
-SigDihedralCR::SigDihedralCR(const double a) : SigPlate(a, 0.0)
+ISigDihedralCR::ISigDihedralCR(const double a) : ISigPlate(a, 0.0)
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
 }
 
-void SigDihedralCR::copyData(const SigDihedralCR& org, const bool)
+void ISigDihedralCR::copyData(const ISigDihedralCR& org, const bool)
 {
     BaseClass::copyData(org);
     length = org.length;
@@ -31,7 +31,7 @@ void SigDihedralCR::copyData(const SigDihedralCR& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigDihedralCR::getRCS(const Emission* const em)
+double ISigDihedralCR::getRCS(const Emission* const em)
 {
     double rcs{};
     if (em != nullptr) {

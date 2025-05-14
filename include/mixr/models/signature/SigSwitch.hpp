@@ -15,7 +15,7 @@ class Emission;
 // Note:
 //  1) First pair (1:) is camouflage type 0, the second (2:) is camouflage type 1, etc.
 //------------------------------------------------------------------------------
-class SigSwitch : public IRfSignature
+class SigSwitch final: public IRfSignature
 {
    DECLARE_SUBCLASS(SigSwitch, IRfSignature)
 public:

@@ -10,7 +10,7 @@
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/system/IrSystem.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
-#include "mixr/models/system/Pilot.hpp"
+#include "mixr/models/system/IPilot.hpp"
 #include "mixr/models/system/Radio.hpp"
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
@@ -858,15 +858,15 @@ const std::string& Player::getDynamicsModelName() const
 //------------------------------------------------------------------------------
 
 // Player's pilot model
-Pilot* Player::getPilot()
+IPilot* Player::getPilot()
 {
-   return (pilot != nullptr) ? (static_cast<Pilot*>(pilot->object())) : nullptr;
+   return (pilot != nullptr) ? (static_cast<IPilot*>(pilot->object())) : nullptr;
 }
 
 // Player's pilot model (const version)
-const Pilot* Player::getPilot() const
+const IPilot* Player::getPilot() const
 {
-   return (pilot != nullptr) ? (static_cast<Pilot*>(pilot->object())) : nullptr;
+   return (pilot != nullptr) ? (static_cast<IPilot*>(pilot->object())) : nullptr;
 }
 
 // Name of the player's pilot model
@@ -877,9 +877,9 @@ const std::string& Player::getPilotName() const
 }
 
 // Returns a Pilot model by its name
-Pilot* Player::getPilotByName(const char* const name1)
+IPilot* Player::getPilotByName(const char* const name1)
 {
-   Pilot* p{};
+   IPilot* p{};
    if (pilot != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
@@ -914,7 +914,7 @@ Pilot* Player::getPilotByName(const char* const name1)
       // Did we find a match?
       if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
-         p = dynamic_cast<Pilot*>( pair->object() );
+         p = dynamic_cast<IPilot*>( pair->object() );
       }
    }
    return p;
@@ -926,7 +926,7 @@ base::Pair* Player::getPilotByType(const std::type_info& type)
    base::Pair* p{};  // Our return value
 
    if (pilot != nullptr) {
-      Pilot* root{getPilot()};  // Root node of the list
+      IPilot* root{getPilot()};  // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = pilot;
@@ -3167,7 +3167,7 @@ void Player::updateSystemPointers()
    setIrSystem( findByType(typeid(IrSystem)) );
    setNavigation( findByType(typeid(INavigation)) );
    setOnboardComputer( findByType(typeid(OnboardComputer)) );
-   setPilot( findByType(typeid(Pilot)) );
+   setPilot( findByType(typeid(IPilot)) );
    setRadio( findByType(typeid(Radio)) );
    setSensor( findByType(typeid(RfSensor)) );
    setStoresMgr( findByType(typeid(StoresMgr)) );
@@ -3339,7 +3339,7 @@ bool Player::setPilot(base::Pair* const x)
       if (pilot != nullptr) pilot->unref();
       pilot = nullptr;
       ok = true;
-   } else if ( x->object()->isClassType(typeid(Pilot)) ) {
+   } else if ( x->object()->isClassType(typeid(IPilot)) ) {
       if (pilot != nullptr) pilot->unref();
       pilot = x;
       pilot->ref();

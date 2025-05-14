@@ -57,10 +57,10 @@ OBJS =  \
 	signature/AircraftIrSignature.o \
 	signature/IrSignature.o \
 	signature/IRfSignature.o \
+	signature/ISigDihedralCR.o \
+	signature/ISigPlate.o \
 	signature/SigAzEl.o \
 	signature/SigConstant.o \
-	signature/SigDihedralCR.o \
-	signature/SigPlate.o \
 	signature/SigSphere.o \
 	signature/SigSwitch.o \
 	signature/SigTrihedralCR.o \
@@ -89,7 +89,7 @@ OBJS =  \
 	system/Jammer.o \
 	system/MergingIrSensor.o \
 	system/OnboardComputer.o \
-	system/Pilot.o \
+	system/IPilot.o \
 	system/Radar.o \
 	system/Radio.o \
 	system/RfSensor.o \

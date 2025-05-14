@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SigTrihedralCR_HPP__
 #define __mixr_models_common_SigTrihedralCR_HPP__
 
-#include "mixr/models/signature/SigDihedralCR.hpp"
+#include "mixr/models/signature/ISigDihedralCR.hpp"
 
 namespace mixr {
 namespace models {
@@ -14,9 +14,9 @@ class Emission;
 //               and always facing the transmitter.
 // Factory name: SigTrihedralCR
 //------------------------------------------------------------------------------
-class SigTrihedralCR : public SigDihedralCR
+class SigTrihedralCR final: public ISigDihedralCR
 {
-    DECLARE_SUBCLASS(SigTrihedralCR, SigDihedralCR)
+    DECLARE_SUBCLASS(SigTrihedralCR, ISigDihedralCR)
 public:
     SigTrihedralCR();
     SigTrihedralCR(const double);

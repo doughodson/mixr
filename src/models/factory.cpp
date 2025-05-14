@@ -84,7 +84,6 @@
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/MergingIrSensor.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
-#include "mixr/models/system/Pilot.hpp"
 #include "mixr/models/system/Radar.hpp"
 #include "mixr/models/system/Radio.hpp"
 #include "mixr/models/system/RfSensor.hpp"
@@ -102,8 +101,6 @@
 #include "mixr/models/signature/AircraftIrSignature.hpp"
 #include "mixr/models/signature/SigAzEl.hpp"
 #include "mixr/models/signature/SigConstant.hpp"
-#include "mixr/models/signature/SigDihedralCR.hpp"
-#include "mixr/models/signature/SigPlate.hpp"
 #include "mixr/models/signature/SigSphere.hpp"
 #include "mixr/models/signature/SigSwitch.hpp"
 #include "mixr/models/signature/SigTrihedralCR.hpp"
@@ -238,10 +235,7 @@ base::IObject* factory(const std::string& name)
       obj = new AvionicsPod();
    }
 
-   // Basic Pilot types
-   else if ( name == Pilot::getFactoryName() ) {
-      obj = new Pilot();
-   }
+   // Pilot types
    else if ( name == Autopilot::getFactoryName() ) {
       obj = new Autopilot();
    }
@@ -360,12 +354,6 @@ base::IObject* factory(const std::string& name)
    }
    else if ( name == SigSphere::getFactoryName() ) {
       obj = new SigSphere();
-   }
-   else if ( name == SigPlate::getFactoryName() ) {
-      obj = new SigPlate();
-   }
-   else if ( name == SigDihedralCR::getFactoryName() ) {
-      obj = new SigDihedralCR();
    }
    else if ( name == SigTrihedralCR::getFactoryName() ) {
       obj = new SigTrihedralCR();

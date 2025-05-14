@@ -18,7 +18,7 @@ SigTrihedralCR::SigTrihedralCR()
     STANDARD_CONSTRUCTOR()
 }
 
-SigTrihedralCR::SigTrihedralCR(const double a) : SigDihedralCR(a)
+SigTrihedralCR::SigTrihedralCR(const double a) : ISigDihedralCR(a)
 {
     STANDARD_CONSTRUCTOR()
 }

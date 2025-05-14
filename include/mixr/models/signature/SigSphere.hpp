@@ -20,7 +20,7 @@ class Emission;
 //    radius   <base::Length>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
-class SigSphere : public IRfSignature
+class SigSphere final: public IRfSignature
 {
     DECLARE_SUBCLASS(SigSphere, IRfSignature)
 public:

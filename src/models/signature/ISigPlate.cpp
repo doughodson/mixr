@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigPlate.hpp"
+#include "mixr/models/signature/ISigPlate.hpp"
 
 #include "mixr/models/Emission.hpp"
 
@@ -11,32 +11,32 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigPlate,"SigPlate")
-EMPTY_DELETEDATA(SigPlate)
+IMPLEMENT_SUBCLASS(ISigPlate,"ISigPlate")
+EMPTY_DELETEDATA(ISigPlate)
 
-BEGIN_SLOTTABLE(SigPlate)
+BEGIN_SLOTTABLE(ISigPlate)
     "a",        // 1 length of the plate
     "b",        // 2 width of the plate
-END_SLOTTABLE(SigPlate)
+END_SLOTTABLE(ISigPlate)
 
-BEGIN_SLOT_MAP(SigPlate)
+BEGIN_SLOT_MAP(ISigPlate)
     ON_SLOT(1,setA,base::INumber)
     ON_SLOT(2,setB,base::INumber)
 END_SLOT_MAP()
 
-SigPlate::SigPlate()
+ISigPlate::ISigPlate()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-SigPlate::SigPlate(const double a1, const double b1)
+ISigPlate::ISigPlate(const double a1, const double b1)
 {
     STANDARD_CONSTRUCTOR()
     a = a1;
     b = b1;
 }
 
-void SigPlate::copyData(const SigPlate& org, const bool)
+void ISigPlate::copyData(const ISigPlate& org, const bool)
 {
     BaseClass::copyData(org);
     a = org.a;
@@ -46,7 +46,7 @@ void SigPlate::copyData(const SigPlate& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigPlate::getRCS(const Emission* const em)
+double ISigPlate::getRCS(const Emission* const em)
 {
     double rcs{};
     if (em != nullptr) {
@@ -63,7 +63,7 @@ double SigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool SigPlate::setA(base::INumber* const x)
+bool ISigPlate::setA(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};
@@ -81,7 +81,7 @@ bool SigPlate::setA(base::INumber* const x)
     return ok;
 }
 
-bool SigPlate::setA(base::ILength* const x)
+bool ISigPlate::setA(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};
@@ -104,7 +104,7 @@ bool SigPlate::setA(base::ILength* const x)
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool SigPlate::setB(base::INumber* const x)
+bool ISigPlate::setB(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};
@@ -123,7 +123,7 @@ bool SigPlate::setB(base::INumber* const x)
     return ok;
 }
 
-bool SigPlate::setB(base::ILength* const x)
+bool ISigPlate::setB(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};
