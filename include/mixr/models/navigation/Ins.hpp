@@ -9,7 +9,7 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Classes: Ins
+// Class: Ins
 // Description: Generic Inerial Navigation System (INS) Data
 // Factory name: Ins
 //------------------------------------------------------------------------------

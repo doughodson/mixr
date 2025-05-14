@@ -6,8 +6,8 @@ LIB = $(MIXR_LIB_DIR)/libmixr_models.a
 OBJS =  \
 	dynamics/IAerodynamics.o \
 	dynamics/IDynamics.o \
-	dynamics/LaeroModel.o  \
-	dynamics/RacModel.o \
+	dynamics/LaeroDynamics.o  \
+	dynamics/RacDynamics.o \
 	dynamics/ISpaceDynamics.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
@@ -16,6 +16,7 @@ OBJS =  \
 	navigation/Gps.o \
 	navigation/Ins.o \
 	navigation/INavigation.o \
+	navigation/Navigation.o \
 	navigation/Route.o \
 	navigation/Steerpoint.o \
 	player/air/Aircraft.o \

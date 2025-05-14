@@ -1,5 +1,5 @@
 
-#include "mixr/models/dynamics/RacModel.hpp"
+#include "mixr/models/dynamics/RacDynamics.hpp"
 
 #include "mixr/models/player/Player.hpp"
 
@@ -17,10 +17,10 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(RacModel, "RacModel")
-EMPTY_DELETEDATA(RacModel)
+IMPLEMENT_SUBCLASS(RacDynamics, "RacDynamics")
+EMPTY_DELETEDATA(RacDynamics)
 
-BEGIN_SLOTTABLE(RacModel)
+BEGIN_SLOTTABLE(RacDynamics)
     "minSpeed",    // 1 Minimum Velocity        (kts)
     "speedMaxG",   // 2 Velocity we reach max G (kts)
     "maxg",        // 3 Max G's (at "speedMaxG" or above)
@@ -28,9 +28,9 @@ BEGIN_SLOTTABLE(RacModel)
     "cmdAltitude", // 5 Command Altitude
     "cmdHeading",  // 6 Command Heading
     "cmdSpeed",    // 7 Command speed
-END_SLOTTABLE(RacModel)
+END_SLOTTABLE(RacDynamics)
 
-BEGIN_SLOT_MAP(RacModel)
+BEGIN_SLOT_MAP(RacDynamics)
     ON_SLOT( 1, setSlotMinSpeed,    base::INumber)
     ON_SLOT( 2, setSlotSpeedMaxG,   base::INumber)
     ON_SLOT( 3, setSlotMaxG,        base::INumber)
@@ -40,12 +40,12 @@ BEGIN_SLOT_MAP(RacModel)
     ON_SLOT( 7, setSlotCmdVelocity, base::INumber)
 END_SLOT_MAP()
 
-RacModel::RacModel()
+RacDynamics::RacDynamics()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void RacModel::copyData(const RacModel& org, const bool)
+void RacDynamics::copyData(const RacDynamics& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -59,7 +59,7 @@ void RacModel::copyData(const RacModel& org, const bool)
    cmdVelocity = org.cmdVelocity;
 }
 
-void RacModel::reset()
+void RacDynamics::reset()
 {
    BaseClass::reset();
 }
@@ -67,39 +67,39 @@ void RacModel::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- update player's vehicle dynamics
 //------------------------------------------------------------------------------
-void RacModel::dynamics(const double dt)
+void RacDynamics::dynamics(const double dt)
 {
     updateRAC(dt);
 }
 
-double RacModel::getGload() const
+double RacDynamics::getGload() const
 {
    return -1;
 }
 
-double RacModel::getMach() const
+double RacDynamics::getMach() const
 {
    return 0.5;
 }
 
-double RacModel::getAngleOfAttack() const
+double RacDynamics::getAngleOfAttack() const
 {
    return 0.0;
 }
 
-double RacModel::getSideSlip() const
+double RacDynamics::getSideSlip() const
 {
    return 0.0;
 }
 
-double RacModel::getFlightPath() const
+double RacDynamics::getFlightPath() const
 {
    const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
-double RacModel::getCalibratedAirspeed() const
+double RacDynamics::getCalibratedAirspeed() const
 {
    const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
    if (pp == nullptr) return 0;
@@ -109,70 +109,70 @@ double RacModel::getCalibratedAirspeed() const
 //------------------------------------------------------------------------------
 // Autopilot controls
 //------------------------------------------------------------------------------
-bool RacModel::isHeadingHoldOn() const
+bool RacDynamics::isHeadingHoldOn() const
 {
    return true;
 }
 
-double RacModel::getCommandedHeadingD() const
+double RacDynamics::getCommandedHeadingD() const
 {
    return cmdHeading;
 }
 
 // setHeadingHoldOn() --   Enable/Disable heading hold
-bool RacModel::setHeadingHoldOn(const bool)
+bool RacDynamics::setHeadingHoldOn(const bool)
 {
    return true;
 }
 
 // setCommandedHeadingD() --   Sets commanded heading (true: degs)
-bool RacModel::setCommandedHeadingD(const double degs, const double, const double)
+bool RacDynamics::setCommandedHeadingD(const double degs, const double, const double)
 {
    cmdHeading = degs;
    return true;
 }
 
-bool RacModel::isVelocityHoldOn() const
+bool RacDynamics::isVelocityHoldOn() const
 {
    return true;
 }
 
-double RacModel::getCommandedVelocityKts() const
+double RacDynamics::getCommandedVelocityKts() const
 {
    return cmdVelocity;
 }
 
 // setVelocityHoldOn() --   Enable/Disable velocity hold
-bool RacModel::setVelocityHoldOn(const bool)
+bool RacDynamics::setVelocityHoldOn(const bool)
 {
    return true;
 }
 
 // setCommandedVelocityKts() --   Sets commanded velocity (kts)
-bool RacModel::setCommandedVelocityKts(const double v, const double vNps)
+bool RacDynamics::setCommandedVelocityKts(const double v, const double vNps)
 {
    cmdVelocity = v;
    return true;
 }
 
-bool RacModel::isAltitudeHoldOn() const
+bool RacDynamics::isAltitudeHoldOn() const
 {
    return true;
 }
 
-double RacModel::getCommandedAltitude() const
+double RacDynamics::getCommandedAltitude() const
 {
    return cmdAltitude;
 }
 
 // setAltitudeHoldOn() --   Enable/Disable altitude hold
-bool RacModel::setAltitudeHoldOn(const bool)
+bool RacDynamics::setAltitudeHoldOn(const bool)
 {
    return true;
 }
 
 // setCommandedAltitude() --   Sets commanded altitude (meters)
-bool RacModel::setCommandedAltitude(const double m, const double, const double)
+bool RacDynamics::setCommandedAltitude(const double m, const double, const double)
 {
    cmdAltitude = m;
    return false;
@@ -181,7 +181,7 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 //------------------------------------------------------------------------------
 // updateRAC -- update Robot Aircraft
 //------------------------------------------------------------------------------
-void RacModel::updateRAC(const double dt)
+void RacDynamics::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
    const auto pp = static_cast<models::Player*>( findContainerByType(typeid(models::Player)) );
@@ -301,7 +301,7 @@ void RacModel::updateRAC(const double dt)
 // slot methods
 //------------------------------------------------------------------------------
 
-bool RacModel::setSlotMinSpeed(const base::INumber* const msg)
+bool RacDynamics::setSlotMinSpeed(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -311,7 +311,7 @@ bool RacModel::setSlotMinSpeed(const base::INumber* const msg)
     return ok;
 }
 
-bool RacModel::setSlotSpeedMaxG(const base::INumber* const msg)
+bool RacDynamics::setSlotSpeedMaxG(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -321,7 +321,7 @@ bool RacModel::setSlotSpeedMaxG(const base::INumber* const msg)
     return ok;
 }
 
-bool RacModel::setSlotMaxG(const base::INumber* const msg)
+bool RacDynamics::setSlotMaxG(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -331,7 +331,7 @@ bool RacModel::setSlotMaxG(const base::INumber* const msg)
     return ok;
 }
 
-bool RacModel::setSlotMaxAccel(const base::INumber* const msg)
+bool RacDynamics::setSlotMaxAccel(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -341,7 +341,7 @@ bool RacModel::setSlotMaxAccel(const base::INumber* const msg)
     return ok;
 }
 
-bool RacModel::setSlotCmdAltitude(const base::ILength* const x)
+bool RacDynamics::setSlotCmdAltitude(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
@@ -351,7 +351,7 @@ bool RacModel::setSlotCmdAltitude(const base::ILength* const x)
     return ok;
 }
 
-bool RacModel::setSlotCmdHeading(const base::IAngle* const msg)
+bool RacDynamics::setSlotCmdHeading(const base::IAngle* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -361,7 +361,7 @@ bool RacModel::setSlotCmdHeading(const base::IAngle* const msg)
     return ok;
 }
 
-bool RacModel::setSlotCmdVelocity(const base::INumber* const msg)
+bool RacDynamics::setSlotCmdVelocity(const base::INumber* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

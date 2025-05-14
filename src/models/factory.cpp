@@ -4,8 +4,8 @@
 #include "mixr/base/IObject.hpp"
 
 // dynamics models
-#include "mixr/models/dynamics/RacModel.hpp"
-#include "mixr/models/dynamics/LaeroModel.hpp"
+#include "mixr/models/dynamics/RacDynamics.hpp"
+#include "mixr/models/dynamics/LaeroDynamics.hpp"
 
 // environment models
 #include "mixr/models/environment/IrAtmosphere.hpp"
@@ -15,6 +15,7 @@
 #include "mixr/models/navigation/Bullseye.hpp"
 #include "mixr/models/navigation/Gps.hpp"
 #include "mixr/models/navigation/Ins.hpp"
+#include "mixr/models/navigation/Navigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
@@ -125,12 +126,12 @@ base::IObject* factory(const std::string& name)
 {
    base::IObject* obj {};
 
-   // dynamics models
-   if ( name == RacModel::getFactoryName() ) {              // RAC
-      obj = new RacModel();
+   // dynamics
+   if ( name == RacDynamics::getFactoryName() ) {              // RAC
+      obj = new RacDynamics();
    }
-   else if ( name == LaeroModel::getFactoryName() ) {       // Laero
-      obj = new LaeroModel();
+   else if ( name == LaeroDynamics::getFactoryName() ) {       // Laero
+      obj = new LaeroDynamics();
    }
 
    // environment
@@ -242,6 +243,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // Navigation types
+   else if ( name == Navigation::getFactoryName() ) {
+      obj = new Navigation();
+   }
    else if ( name == Ins::getFactoryName() ) {
       obj = new Ins();
    }
