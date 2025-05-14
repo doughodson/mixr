@@ -11,8 +11,9 @@ class IrQueryMsg;
 
 //------------------------------------------------------------------------------
 // Class: IIrShape
-// Description: Base class for infrared shape
-// Factory name: IrShape
+// Description: Interface for infrared shapes
+//
+// Factory name: IIrShape
 //------------------------------------------------------------------------------
 class IIrShape : public base::IObject
 {

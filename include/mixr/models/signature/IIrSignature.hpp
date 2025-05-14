@@ -13,9 +13,9 @@ class IIrShape;
 //------------------------------------------------------------------------------
 // Class: IIrSignature
 //
-// Descriptions: Base class for IR signatures
+// Descriptions: Interface class for IR signatures
 //
-// Factory name: IrSignature
+// Factory name: IIrSignature
 // Slots:
 //    binSizes            <Table1>      ! The size of the wavelength bins used in the tables
 //    irShapeSignature    <IrShape>     ! Shape of radiation source

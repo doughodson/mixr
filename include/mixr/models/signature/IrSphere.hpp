@@ -10,10 +10,10 @@ namespace models {
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class: IIrSphere
-//   Description: Interace for all IR shapes
+// Class: IrSphere
+//   Description: Concrete IR shape
 //
-// Factory name: IIrSphere
+// Factory name: IrSphere
 // Slots:
 //   radius    <INumber>   ! Radius of sphere (default is 10)
 //   radius    <ILength>

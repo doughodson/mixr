@@ -11,6 +11,7 @@ class IrQueryMsg;
 
 //------------------------------------------------------------------------------
 // Class: IrBox
+//   Description: Concrete IR shape
 //
 // Factory name: IrBox
 // Slots:
