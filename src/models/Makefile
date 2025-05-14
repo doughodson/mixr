@@ -80,6 +80,7 @@ OBJS =  \
 	system/ExternalStore.o \
 	system/FuelTank.o \
 	system/IGimbal.o \
+	system/Gimbal.o \
 	system/Gun.o \
 	system/Iff.o \
 	system/IrSeeker.o \

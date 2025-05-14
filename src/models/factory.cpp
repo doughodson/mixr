@@ -76,6 +76,7 @@
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/system/ExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
+#include "mixr/models/system/Gimbal.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Iff.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
@@ -334,6 +335,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // Gimbals, Antennas and Optics
+   else if ( name == Gimbal::getFactoryName() ) {
+      obj = new Gimbal();
+   }
    else if ( name == ScanGimbal::getFactoryName() ) {
       obj = new ScanGimbal();
    }
