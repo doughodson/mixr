@@ -31,7 +31,7 @@ class IrShape;
 //      double getIrSignature(IrQueryMsg* msg)
 //          Computes the IR signature for the emission.
 //------------------------------------------------------------------------------
-class AircraftIrSignature : public IIrSignature
+class AircraftIrSignature final: public IIrSignature
 {
     DECLARE_SUBCLASS(AircraftIrSignature, IIrSignature)
 
