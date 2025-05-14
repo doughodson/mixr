@@ -2,7 +2,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
-#include "mixr/models/signature/IrSignature.hpp"
+#include "mixr/models/signature/IIrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"

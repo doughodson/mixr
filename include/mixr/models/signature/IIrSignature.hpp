@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IrSignature_HPP__
-#define __mixr_models_common_IrSignature_HPP__
+#ifndef __mixr_models_common_IIrSignature_HPP__
+#define __mixr_models_common_IIrSignature_HPP__
 
 #include "mixr/base/IComponent.hpp"
 
@@ -11,7 +11,7 @@ class IrQueryMsg;
 class IIrShape;
 
 //------------------------------------------------------------------------------
-// Class: IrSignature
+// Class: IIrSignature
 //
 // Descriptions: Base class for IR signatures
 //
@@ -54,13 +54,13 @@ class IIrShape;
 //   )
 //
 //------------------------------------------------------------------------------
-class IrSignature : public base::IComponent
+class IIrSignature : public base::IComponent
 {
-    DECLARE_SUBCLASS(IrSignature, base::IComponent)
+    DECLARE_SUBCLASS(IIrSignature, base::IComponent)
 
 public:
 
-   IrSignature();
+   IIrSignature();
 
    // IrSignature class interface
    virtual bool getIrSignature(IrQueryMsg* const);

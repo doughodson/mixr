@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_AircraftIrSignature_HPP__
 #define __mixr_models_common_AircraftIrSignature_HPP__
 
-#include "mixr/models/signature/IrSignature.hpp"
+#include "mixr/models/signature/IIrSignature.hpp"
 
 namespace mixr {
 namespace base { class Number; class List; class Table1; class Table2;
@@ -31,9 +31,9 @@ class IrShape;
 //      double getIrSignature(IrQueryMsg* msg)
 //          Computes the IR signature for the emission.
 //------------------------------------------------------------------------------
-class AircraftIrSignature : public IrSignature
+class AircraftIrSignature : public IIrSignature
 {
-    DECLARE_SUBCLASS(AircraftIrSignature, IrSignature)
+    DECLARE_SUBCLASS(AircraftIrSignature, IIrSignature)
 
 public:
    AircraftIrSignature();

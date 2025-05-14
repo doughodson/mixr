@@ -17,7 +17,7 @@
 #include "mixr/models/SynchronizedState.hpp"
 
 #include "mixr/models/signature/IRfSignature.hpp"
-#include "mixr/models/signature/IrSignature.hpp"
+#include "mixr/models/signature/IIrSignature.hpp"
 
 #include "mixr/models/Track.hpp"
 #include "mixr/models/Emission.hpp"
@@ -152,7 +152,7 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(14, setSlotSide,               base::Identifier)
 
    ON_SLOT(15, setSlotSignature,          IRfSignature)
-   ON_SLOT(16, setSlotIrSignature,        IrSignature)
+   ON_SLOT(16, setSlotIrSignature,        IIrSignature)
    ON_SLOT(17, setSlotCamouflageType,     base::Integer)
 
    ON_SLOT(18, setSlotTerrainElevReq,     base::Boolean)
@@ -350,7 +350,7 @@ void Player::copyData(const Player& org, const bool cc)
    }
 
    if (org.irSignature != nullptr) {
-      IrSignature* copy{org.irSignature->clone()};
+      IIrSignature* copy{org.irSignature->clone()};
       setSlotIrSignature( copy );
       copy->unref();
    } else {
@@ -3837,7 +3837,7 @@ bool Player::setSlotSignature(IRfSignature* const s)
 }
 
 // irSignature: Player's IR signature
-bool Player::setSlotIrSignature(IrSignature* const s)
+bool Player::setSlotIrSignature(IIrSignature* const s)
 {
    irSignature = s;
    return true;

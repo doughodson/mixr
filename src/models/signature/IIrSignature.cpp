@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/IrSignature.hpp"
+#include "mixr/models/signature/IIrSignature.hpp"
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 
@@ -15,17 +15,17 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(IrSignature, "IrSignature")
+IMPLEMENT_SUBCLASS(IIrSignature, "IIrSignature")
 
-BEGIN_SLOTTABLE(IrSignature)
+BEGIN_SLOTTABLE(IIrSignature)
    "binSizes",                // 1 The size of the wavelength bins used in the tables
    "irShapeSignature",        // 2 IR shape
    "baseHeatSignature",       // 3 Base heat signature in watts per steradian
    "emissivity",              // 4 Emissivity
    "effectiveArea",           // 5 Effective area
-END_SLOTTABLE(IrSignature)
+END_SLOTTABLE(IIrSignature)
 
-BEGIN_SLOT_MAP(IrSignature)
+BEGIN_SLOT_MAP(IIrSignature)
    ON_SLOT(1, setSlotWaveBandSizes,     base::Table1)
    ON_SLOT(2, setSlotIrShapeSignature,  IIrShape)
    ON_SLOT(3, setSlotBaseHeatSignature, base::INumber)
@@ -33,7 +33,7 @@ BEGIN_SLOT_MAP(IrSignature)
    ON_SLOT(5, setSlotEffectiveArea,     base::IArea)
 END_SLOT_MAP()
 
-IrSignature::IrSignature()
+IIrSignature::IIrSignature()
 {
    STANDARD_CONSTRUCTOR()
    // create a default waveband, middle infrared band : 3-5 micron (100 THz - 60 THz)
@@ -43,7 +43,7 @@ IrSignature::IrSignature()
    //numWaveBands=1;
 }
 
-void IrSignature::copyData(const IrSignature& org, const bool)
+void IIrSignature::copyData(const IIrSignature& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -68,7 +68,7 @@ void IrSignature::copyData(const IrSignature& org, const bool)
    }
 }
 
-void IrSignature::deleteData()
+void IIrSignature::deleteData()
 {
    if (irShapeSignature != nullptr)   { irShapeSignature->unref(); irShapeSignature = nullptr; }
 
@@ -82,7 +82,7 @@ void IrSignature::deleteData()
 //------------------------------------------------------------------------------
 // setSlotBinSizes() --  set number of separate bands
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotWaveBandSizes(const base::Table1* const tbl)
+bool IIrSignature::setSlotWaveBandSizes(const base::Table1* const tbl)
 {
    if (waveBandTable != nullptr) {
       waveBandTable->unref();
@@ -100,7 +100,7 @@ bool IrSignature::setSlotWaveBandSizes(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotIrShapeSignature() --  set IR shape of the signature
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotIrShapeSignature(IIrShape* const s)
+bool IIrSignature::setSlotIrShapeSignature(IIrShape* const s)
 {
    if (irShapeSignature != nullptr) {
       irShapeSignature->unref();
@@ -116,7 +116,7 @@ bool IrSignature::setSlotIrShapeSignature(IIrShape* const s)
 //------------------------------------------------------------------------------
 // setSlotBaseHeatSignature() -- set base heat signature
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotBaseHeatSignature(base::INumber* const num)
+bool IIrSignature::setSlotBaseHeatSignature(base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -135,7 +135,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::INumber* const num)
 //------------------------------------------------------------------------------
 // setSlotEmissivity() -- set emissivity
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEmissivity(mixr::base::INumber* const num)
+bool IIrSignature::setSlotEmissivity(mixr::base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -153,7 +153,7 @@ bool IrSignature::setSlotEmissivity(mixr::base::INumber* const num)
 //------------------------------------------------------------------------------
 // setSlotEffectiveArea() -- set effective area
 //------------------------------------------------------------------------------
-bool IrSignature::setSlotEffectiveArea(mixr::base::IArea* const a)
+bool IIrSignature::setSlotEffectiveArea(mixr::base::IArea* const a)
 {
    bool ok{};
 
@@ -169,7 +169,7 @@ bool IrSignature::setSlotEffectiveArea(mixr::base::IArea* const a)
    return ok;
 }
 
-bool IrSignature::getIrSignature(IrQueryMsg* const msg)
+bool IIrSignature::getIrSignature(IrQueryMsg* const msg)
 {
    bool ok{};
    //const auto msg = dynamic_cast<IrQueryMsg*>( msg0 );     // FAB - do we really need to cast away const?
@@ -190,7 +190,7 @@ bool IrSignature::getIrSignature(IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getSignatureArea() -- Determine target's surface area in the FOV (all or nothing)
 //------------------------------------------------------------------------------
-double IrSignature::getSignatureArea(IrQueryMsg* msg)
+double IIrSignature::getSignatureArea(IrQueryMsg* msg)
 {
    if (irShapeSignature == nullptr) {
       const double angleOffBoresight{msg->getAngleOffBoresight()};
@@ -206,7 +206,7 @@ double IrSignature::getSignatureArea(IrQueryMsg* msg)
 //------------------------------------------------------------------------------
 // getWaveBandCenters() -- Return center frequency of all wave bands
 //------------------------------------------------------------------------------
-const double* IrSignature::getWaveBandCenters() const
+const double* IIrSignature::getWaveBandCenters() const
 {
    return ((waveBandTable != nullptr) ? waveBandTable->getXData() : nullptr);
 }
@@ -214,7 +214,7 @@ const double* IrSignature::getWaveBandCenters() const
 //------------------------------------------------------------------------------
 // getWaveBandWidths() -- Return widths for all wave band frequencies
 //------------------------------------------------------------------------------
-const double* IrSignature::getWaveBandWidths() const
+const double* IIrSignature::getWaveBandWidths() const
 {
    return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }
