@@ -2,7 +2,7 @@
 #include "mixr/models/signature/AircraftIrSignature.hpp"
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
-#include "mixr/models/IrShapes.hpp"
+#include "mixr/models/signature/IIrShape.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/player/air/AirVehicle.hpp"
 

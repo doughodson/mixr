@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class IArea; class INumber; class List; class Table1; }
 namespace models {
 class IrQueryMsg;
-class IrShape;
+class IIrShape;
 
 //------------------------------------------------------------------------------
 // Class: IrSignature
@@ -121,7 +121,7 @@ private:
 
    int numWaveBands{};                     // Total number of wavebands
    const base::Table1* waveBandTable{};    // Table of waveband centers and widths
-   IrShape* irShapeSignature{};            // Shape of this IR signature
+   IIrShape* irShapeSignature{};           // Shape of this IR signature
    double baseHeatSignature{};             // The base heat signature   (Watts per steradian)
    double emissivity{};                    // The emissivity for the player, what part of incident radiation
                                            // is absorbed. The value ranges from 0.0 for total reflection to
@@ -131,7 +131,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotWaveBandSizes(const base::Table1* const);
-   bool setSlotIrShapeSignature(IrShape* const);
+   bool setSlotIrShapeSignature(IIrShape* const);
    bool setSlotBaseHeatSignature(base::INumber* const);
    bool setSlotEmissivity(base::INumber* const);
    bool setSlotEffectiveArea(base::IArea* const);

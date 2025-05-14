@@ -97,6 +97,8 @@
 #include "mixr/models/system/System.hpp"
 
 // signatures
+#include "mixr/models/signature/IrSphere.hpp"
+#include "mixr/models/signature/IrBox.hpp"
 #include "mixr/models/signature/IrSignature.hpp"
 #include "mixr/models/signature/AircraftIrSignature.hpp"
 #include "mixr/models/signature/SigAzEl.hpp"
@@ -107,7 +109,6 @@
 
 // misc
 #include "mixr/models/Actions.hpp"
-#include "mixr/models/IrShapes.hpp"
 
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"
@@ -370,9 +371,6 @@ base::IObject* factory(const std::string& name)
    }
    else if ( name == AircraftIrSignature::getFactoryName() ) {
       obj = new AircraftIrSignature;
-   }
-   else if ( name == IrShape::getFactoryName() ) {
-      obj = new IrShape();
    }
    else if ( name == IrSphere::getFactoryName() ) {
       obj = new IrSphere();

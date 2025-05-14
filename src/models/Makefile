@@ -54,6 +54,9 @@ OBJS =  \
 	sensor/Gmti.o \
 	sensor/Stt.o \
 	sensor/Tws.o \
+	signature/IIrShape.o \
+	signature/IrSphere.o \
+	signature/IrBox.o \
 	signature/AircraftIrSignature.o \
 	signature/IrSignature.o \
 	signature/IRfSignature.o \
@@ -109,7 +112,6 @@ OBJS =  \
 	Emission.o \
 	Image.o \
 	IrQueryMsg.o \
-	IrShapes.o \
 	Message.o \
 	MultiActorAgent.o \
 	SensorMsg.o \
