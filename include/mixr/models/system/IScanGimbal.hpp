@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_ScanGimbal_HPP__
-#define __mixr_models_common_ScanGimbal_HPP__
+#ifndef __mixr_models_common_IScanGimbal_HPP__
+#define __mixr_models_common_IScanGimbal_HPP__
 
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
@@ -10,12 +10,12 @@ namespace base { class Boolean; class Identifier; class Integer; class INumber; 
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: ScanGimbal
+// Class: IScanGimbal
 //
-// Description: Simple Gimbal model: provides rate & position servo
+// Description: Interface that define a rate & position servo
 //              control, as well as 1, 2 and 4 bar scans
 //
-// Factory name: ScanGimbal
+// Factory name: IScanGimbal
 // Slots:
 //    scanMode             <Identifier>   ! Sets the type of scan we desire ...(default: manual)
 //                                        ! ... { manual, horizontal, vertical, conical, circular, pseudorandom }
@@ -126,9 +126,9 @@ namespace models {
 //       the two, you're likely to get unexpected results.
 //
 //------------------------------------------------------------------------------
-class ScanGimbal : public IGimbal
+class IScanGimbal : public IGimbal
 {
-    DECLARE_SUBCLASS(ScanGimbal, IGimbal)
+    DECLARE_SUBCLASS(IScanGimbal, IGimbal)
 
 public:
     enum class ScanMode { MANUAL_SCAN, HORIZONTAL_BAR_SCAN, VERTICAL_BAR_SCAN,
@@ -137,7 +137,7 @@ public:
     enum class Side: int { BEGINNING = 0, ENDING = 1 };
 
 public:
-    ScanGimbal();
+    IScanGimbal();
 
     const base::Vec2d& getRefPosition() const   { return refAngle; }             // Returns the current reference position vector (rad)
     double getRefAzimuth() const                { return refAngle[AZ_IDX]; }     // Return the current reference azimuth (rad)

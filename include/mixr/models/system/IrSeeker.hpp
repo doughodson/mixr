@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrSeeker_HPP__
 #define __mixr_models_common_IrSeeker_HPP__
 
-#include "mixr/models/system/ScanGimbal.hpp"
+#include "mixr/models/system/IScanGimbal.hpp"
 
 #include "mixr/models/Tdb.hpp"
 
@@ -26,9 +26,9 @@ class IrQueryMsg;
 //
 // Factory name: IrSeeker
 //------------------------------------------------------------------------------
-class IrSeeker : public ScanGimbal
+class IrSeeker : public IScanGimbal
 {
-   DECLARE_SUBCLASS(IrSeeker, ScanGimbal)
+   DECLARE_SUBCLASS(IrSeeker, IScanGimbal)
 
 public:
    IrSeeker();

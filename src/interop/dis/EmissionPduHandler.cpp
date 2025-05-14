@@ -421,7 +421,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                // circular scan
                antenna->setRefAzimuth( 0 );
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
-               antenna->setScanMode( models::ScanGimbal::ScanMode::CIRCULAR_SCAN );
+               antenna->setScanMode( models::IScanGimbal::ScanMode::CIRCULAR_SCAN );
                antenna->setCmdRate( (24.0f * static_cast<double>(base::angle::D2RCC)), 0 );  // default rates
          } else {
             // Standard search volume parameters

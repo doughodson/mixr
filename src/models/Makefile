@@ -96,7 +96,7 @@ OBJS =  \
 	system/RfSystem.o \
 	system/Rwr.o \
 	system/Sar.o \
-	system/ScanGimbal.o \
+	system/IScanGimbal.o \
 	system/SensorMgr.o \
 	system/SimpleStoresMgr.o \
 	system/StabilizingGimbal.o \

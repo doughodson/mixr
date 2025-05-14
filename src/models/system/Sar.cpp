@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/ScanGimbal.hpp"
+#include "mixr/models/system/IScanGimbal.hpp"
 #include "mixr/models/Image.hpp"
 
 #include "mixr/models/WorldModel.hpp"
@@ -220,7 +220,7 @@ void Sar::process(const double dt)
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
-         ant->setScanMode(ScanGimbal::ScanMode::CONICAL_SCAN);
+         ant->setScanMode(IScanGimbal::ScanMode::CONICAL_SCAN);
       }
 
       // ---

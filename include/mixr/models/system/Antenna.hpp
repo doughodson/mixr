@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Antenna_HPP__
 #define __mixr_models_common_Antenna_HPP__
 
-#include "mixr/models/system/ScanGimbal.hpp"
+#include "mixr/models/system/IScanGimbal.hpp"
 
 #include "mixr/base/safe_queue.hpp"
 #include "mixr/base/safe_stack.hpp"
@@ -51,9 +51,9 @@ class RfSystem;
 //       of creating and deleting them.
 //
 //------------------------------------------------------------------------------
-class Antenna : public ScanGimbal
+class Antenna : public IScanGimbal
 {
-   DECLARE_SUBCLASS(Antenna, ScanGimbal)
+   DECLARE_SUBCLASS(Antenna, IScanGimbal)
 
 public:
    enum class Polarization: int { NONE, VERTICAL, HORIZONTAL, SLANT, RHC, LHC };

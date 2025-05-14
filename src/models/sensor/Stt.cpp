@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/system/ScanGimbal.hpp"
+#include "mixr/models/system/IScanGimbal.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Track.hpp"
 
@@ -75,14 +75,14 @@ void Stt::dynamics(const double dt)
             // Set the reference 'look' angles and conical scan mode
             getAntenna()->setRefAzimuth(az);
             getAntenna()->setRefElevation(el);
-            getAntenna()->setScanMode(ScanGimbal::ScanMode::CONICAL_SCAN);
+            getAntenna()->setScanMode(IScanGimbal::ScanMode::CONICAL_SCAN);
         } else {
             // ---
             // when we don't have any tracks, enter the default (from input file) search mode
             // ---
             getAntenna()->setRefAzimuth(0.0);
             getAntenna()->setRefElevation(0.0);
-            getAntenna()->setScanMode(ScanGimbal::ScanMode::HORIZONTAL_BAR_SCAN);
+            getAntenna()->setScanMode(IScanGimbal::ScanMode::HORIZONTAL_BAR_SCAN);
         }
     }
 }

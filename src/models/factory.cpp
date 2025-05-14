@@ -90,7 +90,6 @@
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/Rwr.hpp"
 #include "mixr/models/system/Sar.hpp"
-#include "mixr/models/system/ScanGimbal.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
 #include "mixr/models/system/SimpleStoresMgr.hpp"
 #include "mixr/models/system/StabilizingGimbal.hpp"
@@ -342,9 +341,9 @@ base::IObject* factory(const std::string& name)
    else if ( name == Gimbal::getFactoryName() ) {
       obj = new Gimbal();
    }
-   else if ( name == ScanGimbal::getFactoryName() ) {
-      obj = new ScanGimbal();
-   }
+//   else if ( name == ScanGimbal::getFactoryName() ) {
+//      obj = new ScanGimbal();
+//   }
    else if ( name == StabilizingGimbal::getFactoryName() ) {
       obj = new StabilizingGimbal();
    }
