@@ -18,7 +18,7 @@ namespace models {
 //
 // Factory name: Navigation
 //------------------------------------------------------------------------------
-class Navigation : public INavigation
+class Navigation final: public INavigation
 {
    DECLARE_SUBCLASS(Navigation, INavigation)
 
