@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Gun_HPP__
 #define __mixr_models_common_Gun_HPP__
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Matrixd"
@@ -39,9 +39,9 @@ class Bullet;
 //    yaw         <Angle>    ! heading; relative to ownship axis (radians, base::Angle) (default: 0)
 //
 //------------------------------------------------------------------------------
-class Gun : public ExternalStore
+class Gun final: public IExternalStore
 {
-   DECLARE_SUBCLASS(Gun, ExternalStore)
+   DECLARE_SUBCLASS(Gun, IExternalStore)
 
 public:
    // Default Parameters (based on GE M61A1)

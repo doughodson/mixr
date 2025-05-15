@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_ExternalStore_HPP__
-#define __mixr_models_common_ExternalStore_HPP__
+#ifndef __mixr_models_common_IExternalStore_HPP__
+#define __mixr_models_common_IExternalStore_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 
@@ -9,13 +9,13 @@ namespace base { class Boolean; class String; }
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: ExternalStore
+// Class: IExternalStore
 //
-// Description: Base class for non-Weapon class, external stores.  These may
+// Description: Interface class for non-Weapon class, external stores.  These may
 //              include bomb racks, missile launchers, fuel tanks, avionics pods,
 //              and gun pods.
 //
-// Factory name: ExternalStore
+// Factory name: IExternalStore
 // Slots:
 //    type         <base::String>  ! Type string (default: 0)
 //    jettisonable <Boolean>       ! Store can be jettisoned (default: true )
@@ -31,12 +31,12 @@ namespace models {
 //       if jettisoned, it will no longer be updated.
 //
 //------------------------------------------------------------------------------
-class ExternalStore : public ISystem
+class IExternalStore : public ISystem
 {
-   DECLARE_SUBCLASS(ExternalStore, ISystem)
+   DECLARE_SUBCLASS(IExternalStore, ISystem)
 
 public:
-   ExternalStore();
+   IExternalStore();
 
    const base::String* getType() const;
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Stores_HPP__
 #define __mixr_models_common_Stores_HPP__
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 #include <array>
 
 namespace mixr {
@@ -29,7 +29,7 @@ class IWeapon;
 //
 // Events:
 //    JETTISON_EVENT <IWeapon>         ! Jettison this weapon
-//    JETTISON_EVENT <ExternalStore>   ! Jettison this external store
+//    JETTISON_EVENT <IExternalStore>  ! Jettison this external store
 //
 //
 // Notes:
@@ -106,9 +106,9 @@ class IWeapon;
 //    )
 //
 //------------------------------------------------------------------------------
-class Stores : public ExternalStore
+class Stores : public IExternalStore
 {
-   DECLARE_SUBCLASS(Stores, ExternalStore)
+   DECLARE_SUBCLASS(Stores, IExternalStore)
 
 public:
    enum { MAX_STATIONS = 50 };
@@ -139,8 +139,8 @@ public:
 
    // Returns a pre-ref()'d pointer to the external store at station 's', or
    // if 's' is zero then the 'selected' station's store is returned.
-   virtual ExternalStore* getExternalStore(const unsigned int s = 0);
-   virtual const ExternalStore* getExternalStore(const unsigned int s = 0) const; // const version
+   virtual IExternalStore* getExternalStore(const unsigned int s = 0);
+   virtual const IExternalStore* getExternalStore(const unsigned int s = 0) const; // const version
 
    // Select station number 's'; even if its weapon is not available for
    // release.  If 's' is invalid then the station remains unchanged and
@@ -169,7 +169,7 @@ public:
 
    // Event handlers
    virtual bool onJettisonEvent(IWeapon* const msg);
-   virtual bool onJettisonEvent(ExternalStore* const msg);
+   virtual bool onJettisonEvent(IExternalStore* const msg);
 
    void updateTC(const double dt = 0.0) override;
    void updateData(const double dt = 0.0) override;
@@ -187,7 +187,7 @@ protected:
    virtual bool assignWeaponToStation(const unsigned int station, IWeapon* const wpnPtr);
 
    // Assign a external store to a station
-   virtual bool assignExtStoreToStation(const unsigned int station, ExternalStore* const esPtr);
+   virtual bool assignExtStoreToStation(const unsigned int station, IExternalStore* const esPtr);
 
    // Sends a Reset Event to all players
    void resetStores(base::PairStream* const list);
@@ -204,7 +204,7 @@ private:
    std::array<base::safe_ptr<IWeapon>, MAX_STATIONS> weaponTbl;  // Weapons by station
    unsigned int numWpn {};                                              // Number of weapons in table
 
-   std::array<base::safe_ptr<ExternalStore>, MAX_STATIONS> esTbl;  // External store by station
+   std::array<base::safe_ptr<IExternalStore>, MAX_STATIONS> esTbl;  // External store by station
    unsigned int numEs {};                                          // Number of external stores in table
 
    unsigned int ns {};         // Number of Stations

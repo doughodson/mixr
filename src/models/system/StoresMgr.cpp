@@ -8,7 +8,7 @@
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
@@ -193,7 +193,7 @@ IWeapon* StoresMgr::getCurrentWeapon()
       // If not found then check to see if the selected station
       // was really a Stores class object.  If so then ask it
       // for its selected station's weapon
-      ExternalStore* es{getExternalStore()};
+      IExternalStore* es{getExternalStore()};
       if (es != nullptr) {
          const auto ss = dynamic_cast<Stores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
@@ -213,7 +213,7 @@ const IWeapon* StoresMgr::getCurrentWeapon() const
       // If not found then check to see if the selected station
       // was really a Stores class object.  If so then ask it
       // for its selected station's weapon
-      const ExternalStore* es{getExternalStore()};
+      const IExternalStore* es{getExternalStore()};
       if (es != nullptr) {
          const auto ss = dynamic_cast<const Stores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
@@ -371,7 +371,7 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
       // non-weapon, external stores (e.g., fuel tanks, pods, guns)
       {
          const auto newExternal = new base::PairStream();
-         searchAndAdd(stores, typeid(ExternalStore), newExternal);
+         searchAndAdd(stores, typeid(IExternalStore), newExternal);
          if (newExternal->entries() > 0) externalList = newExternal;
          newExternal->unref();
       }

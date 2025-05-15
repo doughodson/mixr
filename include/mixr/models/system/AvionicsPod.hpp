@@ -2,20 +2,20 @@
 #ifndef __mixr_models_common_AvionicsPod_HPP__
 #define __mixr_models_common_AvionicsPod_HPP__
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 
 namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: AvionicsPod
-// Description: Generic avionics pod
+// Description: Avionics pod
 //
 // Factory name: AvionicsPod
 //------------------------------------------------------------------------------
-class AvionicsPod : public ExternalStore
+class AvionicsPod final: public IExternalStore
 {
-   DECLARE_SUBCLASS(AvionicsPod, ExternalStore)
+   DECLARE_SUBCLASS(AvionicsPod, IExternalStore)
 
 public:
    AvionicsPod();

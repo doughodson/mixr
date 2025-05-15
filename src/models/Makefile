@@ -80,7 +80,7 @@ OBJS =  \
 	system/CollisionDetect.o \
 	system/CommRadio.o \
 	system/Datalink.o \
-	system/ExternalStore.o \
+	system/IExternalStore.o \
 	system/FuelTank.o \
 	system/IGimbal.o \
 	system/Gimbal.o \

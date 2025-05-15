@@ -28,7 +28,7 @@ END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Stores)
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, IWeapon )
-    ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, ExternalStore )
+    ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, IExternalStore )
 END_EVENT_HANDLER()
 
 Stores::Stores()
@@ -91,7 +91,7 @@ void Stores::updateTC(const double dt)
          base::List::Item* item{list->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<ExternalStore*>( pair->object() );
+            const auto p = dynamic_cast<IExternalStore*>( pair->object() );
             if (p != nullptr) p->updateTC(dt);
             item = item->getNext();
          }
@@ -116,7 +116,7 @@ void Stores::updateData(const double dt)
          base::List::Item* item{list->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<ExternalStore*>( pair->object() );
+            const auto p = dynamic_cast<IExternalStore*>( pair->object() );
             if (p != nullptr) p->updateData(dt);
             item = item->getNext();
          }
@@ -223,24 +223,24 @@ IWeapon* Stores::getWeapon(const unsigned int s)
 }
 
 // Return a external store by station (const version)
-const ExternalStore* Stores::getExternalStore(const unsigned int s) const
+const IExternalStore* Stores::getExternalStore(const unsigned int s) const
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
 
-   const ExternalStore* p{};
+   const IExternalStore* p{};
    if (idx >= 0) p = esTbl[idx].getRefPtr();
 
    return p;
 }
 
 // Return a external store by station (const version)
-ExternalStore* Stores::getExternalStore(const unsigned int s)
+IExternalStore* Stores::getExternalStore(const unsigned int s)
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
 
-   ExternalStore* p{};
+   IExternalStore* p{};
    if (idx >= 0) p = esTbl[idx].getRefPtr();
 
    return p;
@@ -402,7 +402,7 @@ bool Stores::assignWeaponToStation(const unsigned int s, IWeapon* const wpnPtr)
 //------------------------------------------------------------------------------
 // assignExtStoreToStation() --
 //------------------------------------------------------------------------------
-bool Stores::assignExtStoreToStation(const unsigned int s, ExternalStore* const esPtr)
+bool Stores::assignExtStoreToStation(const unsigned int s, IExternalStore* const esPtr)
 {
    bool ok{};
    if (s >= 1 && s <= ns) {
@@ -478,7 +478,7 @@ bool Stores::onJettisonEvent(IWeapon* const wpn)
 }
 
 // Default external equipment jettison event handler
-bool Stores::onJettisonEvent(ExternalStore* const sys)
+bool Stores::onJettisonEvent(IExternalStore* const sys)
 {
    bool ok{};
    if (sys != nullptr) {
@@ -580,7 +580,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
 
             // check the type of component
             bool isWpn{p->isClassType(typeid(IWeapon))};
-            bool isEE{p->isClassType(typeid(ExternalStore))};
+            bool isEE{p->isClassType(typeid(IExternalStore))};
 
             if ( isWpn || isEE ) {
                // Clone the weapon pair and set us as its container
@@ -601,7 +601,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
                   // External stores types ...
 
                   // Assign the external store to the station
-                  ExternalStore* cwpn{static_cast<ExternalStore*>( cpair->object() )};
+                  IExternalStore* cwpn{static_cast<IExternalStore*>( cpair->object() )};
                   assignExtStoreToStation(stationNumber, cwpn);
                }
 

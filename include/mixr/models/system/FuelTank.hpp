@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_FuelTank_HPP__
 #define __mixr_models_common_FuelTank_HPP__
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 
 namespace mixr {
 namespace models {
@@ -18,9 +18,9 @@ namespace models {
 //    capacity    <INumber>  ! Tank capacity (lb) (default: -1)
 //
 //------------------------------------------------------------------------------
-class FuelTank : public ExternalStore
+class FuelTank final: public IExternalStore
 {
-   DECLARE_SUBCLASS(FuelTank, ExternalStore)
+   DECLARE_SUBCLASS(FuelTank, IExternalStore)
 
 public:
    FuelTank();

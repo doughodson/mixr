@@ -74,7 +74,6 @@
 #include "mixr/models/system/CollisionDetect.hpp"
 #include "mixr/models/system/CommRadio.hpp"
 #include "mixr/models/system/Datalink.hpp"
-#include "mixr/models/system/ExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
 #include "mixr/models/system/Gimbal.hpp"
 #include "mixr/models/system/Gun.hpp"

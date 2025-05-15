@@ -8,7 +8,7 @@
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 
-#include "mixr/models/system/ExternalStore.hpp"
+#include "mixr/models/system/IExternalStore.hpp"
 #include "mixr/models/system/FuelTank.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
