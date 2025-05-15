@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/AircraftIrSignature.hpp"
+#include "mixr/models/signature/IIrAircraftSignature.hpp"
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/signature/IIrShape.hpp"
@@ -18,9 +18,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(AircraftIrSignature, "AircraftIrSignature")
+IMPLEMENT_SUBCLASS(IIrAircraftSignature, "IIrAircraftSignature")
 
-BEGIN_SLOTTABLE(AircraftIrSignature)
+BEGIN_SLOTTABLE(IIrAircraftSignature)
    "airframeSignatureTable",  // mapping of
             // signature to  pla, where pla is in % from 0 - 100
             // x of this table is the pla
@@ -63,9 +63,9 @@ BEGIN_SLOTTABLE(AircraftIrSignature)
             // factor to get the plume energy in this particular waveband.
             // the different factors should all sum to 1.0  .
 
-END_SLOTTABLE(AircraftIrSignature)
+END_SLOTTABLE(IIrAircraftSignature)
 
-BEGIN_SLOT_MAP(AircraftIrSignature)
+BEGIN_SLOT_MAP(IIrAircraftSignature)
    ON_SLOT(1,setSlotAirframeSignatureTable,      base::Table4)
    ON_SLOT(2,setSlotAirframeWavebandFactorTable, base::Table2)
    ON_SLOT(3,setSlotPlumeSignatureTable,         base::Table5)
@@ -74,12 +74,12 @@ BEGIN_SLOT_MAP(AircraftIrSignature)
    ON_SLOT(6,setSlotHotPartsWavebandFactorTable, base::Table2)
 END_SLOT_MAP()
 
-AircraftIrSignature::AircraftIrSignature()
+IIrAircraftSignature::IIrAircraftSignature()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void AircraftIrSignature::copyData(const AircraftIrSignature& org, const bool)
+void IIrAircraftSignature::copyData(const IIrAircraftSignature& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -134,7 +134,7 @@ void AircraftIrSignature::copyData(const AircraftIrSignature& org, const bool)
     BaseClass::copyData(org);
 }
 
-void AircraftIrSignature::deleteData()
+void IIrAircraftSignature::deleteData()
 {
     if (airframeSignatureTable != nullptr) {
         airframeSignatureTable->unref();
@@ -185,7 +185,7 @@ void AircraftIrSignature::deleteData()
 //------------------------------------------------------------------------------
 // getIrSignature() - Computes the IR signature for this IR query message
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
+bool IIrAircraftSignature::getIrSignature(IrQueryMsg* const msg)
 {
     bool ok{};
     //const auto msg = dynamic_cast<IrQueryMsg*>( msg0 );
@@ -211,7 +211,7 @@ bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // setSlotAirframeSignatureTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotAirframeSignatureTable(const base::Table4* const tbl)
+bool IIrAircraftSignature::setSlotAirframeSignatureTable(const base::Table4* const tbl)
 {
    if (airframeSignatureTable != nullptr) {
       airframeSignatureTable->unref();
@@ -226,7 +226,7 @@ bool AircraftIrSignature::setSlotAirframeSignatureTable(const base::Table4* cons
 //------------------------------------------------------------------------------
 // setSlotPlumeSignatureTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotPlumeSignatureTable(const base::Table5* const tbl)
+bool IIrAircraftSignature::setSlotPlumeSignatureTable(const base::Table5* const tbl)
 {
    if (plumeSignatureTable != nullptr) {
       plumeSignatureTable->unref();
@@ -241,7 +241,7 @@ bool AircraftIrSignature::setSlotPlumeSignatureTable(const base::Table5* const t
 //------------------------------------------------------------------------------
 // setSlotAirframeWavebandFactorTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotAirframeWavebandFactorTable(const base::Table2* const tbl)
+bool IIrAircraftSignature::setSlotAirframeWavebandFactorTable(const base::Table2* const tbl)
 {
    if (airframeWavebandFactorTable != nullptr) {
       airframeWavebandFactorTable->unref();
@@ -256,7 +256,7 @@ bool AircraftIrSignature::setSlotAirframeWavebandFactorTable(const base::Table2*
 //------------------------------------------------------------------------------
 // setSlotPlumeWavebandFactorTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotPlumeWavebandFactorTable(const base::Table2* const tbl)
+bool IIrAircraftSignature::setSlotPlumeWavebandFactorTable(const base::Table2* const tbl)
 {
    if (plumeWavebandFactorTable != nullptr) {
       plumeWavebandFactorTable->unref();
@@ -271,7 +271,7 @@ bool AircraftIrSignature::setSlotPlumeWavebandFactorTable(const base::Table2* co
 //------------------------------------------------------------------------------
 // setSlotHotPartsSignatureTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotHotPartsSignatureTable(const base::Table5* const tbl)
+bool IIrAircraftSignature::setSlotHotPartsSignatureTable(const base::Table5* const tbl)
 {
    if (hotPartsSignatureTable != nullptr) {
       hotPartsSignatureTable->unref();
@@ -286,7 +286,7 @@ bool AircraftIrSignature::setSlotHotPartsSignatureTable(const base::Table5* cons
 //------------------------------------------------------------------------------
 // setSlotHotPartsWavebandFactorTable()
 //------------------------------------------------------------------------------
-bool AircraftIrSignature::setSlotHotPartsWavebandFactorTable(const base::Table2* const tbl)
+bool IIrAircraftSignature::setSlotHotPartsWavebandFactorTable(const base::Table2* const tbl)
 {
    if (hotPartsWavebandFactorTable != nullptr) {
       hotPartsWavebandFactorTable->unref();
@@ -301,7 +301,7 @@ bool AircraftIrSignature::setSlotHotPartsWavebandFactorTable(const base::Table2*
 //------------------------------------------------------------------------------
 // getAirframeSignature()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getAirframeSignature(double velocity, double altitude, double azimuth, double elevation)
+double IIrAircraftSignature::getAirframeSignature(double velocity, double altitude, double azimuth, double elevation)
 {
     return (airframeSignatureTable->lfi(velocity, altitude, azimuth, elevation));
 }
@@ -309,7 +309,7 @@ double AircraftIrSignature::getAirframeSignature(double velocity, double altitud
 //------------------------------------------------------------------------------
 // getAirframeWavebandFactor()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getAirframeWavebandFactor(double midpoint, double width)
+double IIrAircraftSignature::getAirframeWavebandFactor(double midpoint, double width)
 {
     return (airframeWavebandFactorTable->lfi(midpoint, width));
 }
@@ -317,7 +317,7 @@ double AircraftIrSignature::getAirframeWavebandFactor(double midpoint, double wi
 //------------------------------------------------------------------------------
 // getPlumeSignature()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getPlumeSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
+double IIrAircraftSignature::getPlumeSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
 {
     return (plumeSignatureTable->lfi(pla, velocity, altitude, azimuth, elevation));
 }
@@ -325,7 +325,7 @@ double AircraftIrSignature::getPlumeSignature(double pla, double velocity, doubl
 //------------------------------------------------------------------------------
 // getPlumeWavebandFactor()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getPlumeWavebandFactor(double midpoint, double width)
+double IIrAircraftSignature::getPlumeWavebandFactor(double midpoint, double width)
 {
     return (plumeWavebandFactorTable->lfi(midpoint, width));
 }
@@ -333,7 +333,7 @@ double AircraftIrSignature::getPlumeWavebandFactor(double midpoint, double width
 //------------------------------------------------------------------------------
 // getHotPartsSignature()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getHotPartsSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
+double IIrAircraftSignature::getHotPartsSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
 {
    return (hotPartsSignatureTable->lfi(pla, velocity, altitude, azimuth, elevation));
 }
@@ -341,7 +341,7 @@ double AircraftIrSignature::getHotPartsSignature(double pla, double velocity, do
 //------------------------------------------------------------------------------
 // getHotPartsWavebandFactor()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getHotPartsWavebandFactor(double midpoint, double width)
+double IIrAircraftSignature::getHotPartsWavebandFactor(double midpoint, double width)
 {
    return (hotPartsWavebandFactorTable->lfi(midpoint, width));
 }
@@ -349,7 +349,7 @@ double AircraftIrSignature::getHotPartsWavebandFactor(double midpoint, double wi
 //------------------------------------------------------------------------------
 // getCalculatedAirframeHeatSignature()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
+double IIrAircraftSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
     double irPower{};
     const auto targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
@@ -372,7 +372,7 @@ double AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg*
 //------------------------------------------------------------------------------
 // getAirframeSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
+void IIrAircraftSignature::getAirframeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (airframeWavebandFactorTable != nullptr && airframeSignatureTable != nullptr) {
         // find airframe factor.
@@ -402,7 +402,7 @@ void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, con
 //------------------------------------------------------------------------------
 // getPlumeRadiation()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
+double IIrAircraftSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 {
     double irPower{};
     const Player* targetAircraft{msg->getTarget()};
@@ -427,7 +427,7 @@ double AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getPlumeSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
+void IIrAircraftSignature::getPlumeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (plumeWavebandFactorTable != nullptr) {
         const double* centerWavelengths{plumeWavebandFactorTable->getXData()};
@@ -479,7 +479,7 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
 //    Mil Power, and 2.0 represents after burner
 //------------------------------------------------------------------------------
 
-double AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
+double IIrAircraftSignature::getPLA(const AirVehicle* const airModel) {
     // use only for air vehicles.
     double currentPla{};
     double idleValue{};
@@ -507,7 +507,7 @@ double AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
 //------------------------------------------------------------------------------
 // getHotPartsRadiation()
 //------------------------------------------------------------------------------
-double AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
+double IIrAircraftSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 {
     double currentPla{1.0};
     double targetAlt{};
@@ -533,7 +533,7 @@ double AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getHotPartsSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
+void IIrAircraftSignature::getHotPartsSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (hotPartsWavebandFactorTable != nullptr) {
         const double* centerWavelengths{hotPartsWavebandFactorTable->getXData()};
@@ -559,7 +559,7 @@ void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, con
 //------------------------------------------------------------------------------
 // getHeatSignature() - Get the heat signature
 //------------------------------------------------------------------------------
-double* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
+double* IIrAircraftSignature::getHeatSignature(IrQueryMsg* msg)
 {
     Player* target{msg->getTarget()};
     if (target != nullptr) {

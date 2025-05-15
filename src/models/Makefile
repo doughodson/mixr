@@ -57,7 +57,7 @@ OBJS =  \
 	signature/IIrShape.o \
 	signature/IrSphere.o \
 	signature/IrBox.o \
-	signature/AircraftIrSignature.o \
+	signature/IIrAircraftSignature.o \
 	signature/IIrSignature.o \
 	signature/IRfSignature.o \
 	signature/ISigDihedralCR.o \

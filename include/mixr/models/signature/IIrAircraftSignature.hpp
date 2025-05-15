@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_AircraftIrSignature_HPP__
-#define __mixr_models_common_AircraftIrSignature_HPP__
+#ifndef __mixr_models_common_IIrAircraftSignature_HPP__
+#define __mixr_models_common_IIrAircraftSignature_HPP__
 
 #include "mixr/models/signature/IIrSignature.hpp"
 
@@ -13,12 +13,12 @@ class IrQueryMsg;
 class IrShape;
 
 //------------------------------------------------------------------------------
-// Class: AircraftIrSignature
+// Class: IIrAircraftSignature
 //
-// Descriptions: Base class for an aircraft IR signature
+// Descriptions: Interface class for an aircraft IR signature
 //
 //
-// Factory name: AircraftIrSignature
+// Factory name: IIrAircraftSignature
 // Slots:
 //    airframeSignatureTable          <Table4>      !
 //    airframeWavebandFactorTable     <Table2>      !
@@ -31,12 +31,12 @@ class IrShape;
 //      double getIrSignature(IrQueryMsg* msg)
 //          Computes the IR signature for the emission.
 //------------------------------------------------------------------------------
-class AircraftIrSignature final: public IIrSignature
+class IIrAircraftSignature final: public IIrSignature
 {
-    DECLARE_SUBCLASS(AircraftIrSignature, IIrSignature)
+    DECLARE_SUBCLASS(IIrAircraftSignature, IIrSignature)
 
 public:
-   AircraftIrSignature();
+   IIrAircraftSignature();
 
    bool getIrSignature(IrQueryMsg* const) override;
 

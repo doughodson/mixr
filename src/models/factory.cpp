@@ -99,7 +99,6 @@
 // signatures
 #include "mixr/models/signature/IrSphere.hpp"
 #include "mixr/models/signature/IrBox.hpp"
-#include "mixr/models/signature/AircraftIrSignature.hpp"
 #include "mixr/models/signature/RfAzElSignature.hpp"
 #include "mixr/models/signature/RfConstantSignature.hpp"
 #include "mixr/models/signature/RfSphereSignature.hpp"
@@ -365,9 +364,6 @@ base::IObject* factory(const std::string& name)
       obj = new RfTrihedralCRSignature();
    }
    // IR Signatures
-   else if ( name == AircraftIrSignature::getFactoryName() ) {
-      obj = new AircraftIrSignature;
-   }
    else if ( name == IrSphere::getFactoryName() ) {
       obj = new IrSphere();
    }
