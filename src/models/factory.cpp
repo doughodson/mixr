@@ -100,9 +100,9 @@
 #include "mixr/models/signature/IrSphere.hpp"
 #include "mixr/models/signature/IrBox.hpp"
 #include "mixr/models/signature/AircraftIrSignature.hpp"
-#include "mixr/models/signature/SigAzEl.hpp"
-#include "mixr/models/signature/SigConstant.hpp"
-#include "mixr/models/signature/SigSphere.hpp"
+#include "mixr/models/signature/RfAzElSignature.hpp"
+#include "mixr/models/signature/RfConstantSignature.hpp"
+#include "mixr/models/signature/RfSphereSignature.hpp"
 #include "mixr/models/signature/SigSwitch.hpp"
 #include "mixr/models/signature/SigTrihedralCR.hpp"
 
@@ -349,11 +349,11 @@ base::IObject* factory(const std::string& name)
    }
 
    // R/F Signatures
-   else if ( name == SigConstant::getFactoryName() ) {
-      obj = new SigConstant();
+   else if ( name == RfConstantSignature::getFactoryName() ) {
+      obj = new RfConstantSignature();
    }
-   else if ( name == SigSphere::getFactoryName() ) {
-      obj = new SigSphere();
+   else if ( name == RfSphereSignature::getFactoryName() ) {
+      obj = new RfSphereSignature();
    }
    else if ( name == SigTrihedralCR::getFactoryName() ) {
       obj = new SigTrihedralCR();
@@ -361,8 +361,8 @@ base::IObject* factory(const std::string& name)
    else if ( name == SigSwitch::getFactoryName() ) {
       obj = new SigSwitch();
    }
-   else if ( name == SigAzEl::getFactoryName() ) {
-      obj = new SigAzEl();
+   else if ( name == RfAzElSignature::getFactoryName() ) {
+      obj = new RfAzElSignature();
    }
    // IR Signatures
    else if ( name == AircraftIrSignature::getFactoryName() ) {

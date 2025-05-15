@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SigSphere_HPP__
-#define __mixr_models_common_SigSphere_HPP__
+#ifndef __mixr_models_common_RfSphereSignature_HPP__
+#define __mixr_models_common_RfSphereSignature_HPP__
 
 #include "mixr/models/signature/IRfSignature.hpp"
 
@@ -12,20 +12,21 @@ namespace models {
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: SigSphere
-// Descriptions: RfSignature of a simple sphere based on radius
-// Factory name: SigSphere
+// Class: RfSphereSignature
+//    Descriptions: RF signature of a simple sphere based on radius
+//
+// Factory name: RfSphereSignature
 // Slots:
 //    radius   <base::INumber>   ! Radius of the sphere (default: 0)
 //    radius   <base::Length>    ! Radius of the sphere (default: 0)
 //
 //------------------------------------------------------------------------------
-class SigSphere final: public IRfSignature
+class RfSphereSignature final: public IRfSignature
 {
-    DECLARE_SUBCLASS(SigSphere, IRfSignature)
+    DECLARE_SUBCLASS(RfSphereSignature, IRfSignature)
 public:
-    SigSphere();
-    SigSphere(const double r);
+    RfSphereSignature();
+    RfSphereSignature(const double r);
     double computeRcs(const double r)                          { return static_cast<double>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 

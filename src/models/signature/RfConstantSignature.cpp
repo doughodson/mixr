@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigConstant.hpp"
+#include "mixr/models/signature/RfConstantSignature.hpp"
 
 #include "mixr/models/Emission.hpp"
 
@@ -9,48 +9,48 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigConstant, "SigConstant")
-EMPTY_DELETEDATA(SigConstant)
+IMPLEMENT_SUBCLASS(RfConstantSignature, "RfConstantSignature")
+EMPTY_DELETEDATA(RfConstantSignature)
 
-BEGIN_SLOTTABLE(SigConstant)
+BEGIN_SLOTTABLE(RfConstantSignature)
     "rcs",          // 1 Constant Radar Cross Section value
                     //   base::Number(square meters) or base::Decibel(square meters) or base::Area()
-END_SLOTTABLE(SigConstant)
+END_SLOTTABLE(RfConstantSignature)
 
-BEGIN_SLOT_MAP(SigConstant)
+BEGIN_SLOT_MAP(RfConstantSignature)
     ON_SLOT(1, setSlotRCS, base::INumber)
     ON_SLOT(1, setSlotRCS, base::IArea)
 END_SLOT_MAP()
 
-SigConstant::SigConstant()
+RfConstantSignature::RfConstantSignature()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-SigConstant::SigConstant(const double r)
+RfConstantSignature::RfConstantSignature(const double r)
 {
     STANDARD_CONSTRUCTOR()
     rcs = r;
 }
 
-SigConstant::SigConstant(const base::INumber* const c)
+RfConstantSignature::RfConstantSignature(const base::INumber* const c)
 {
     STANDARD_CONSTRUCTOR()
     setRCS(c);
 }
 
-void SigConstant::copyData(const SigConstant& org, const bool)
+void RfConstantSignature::copyData(const RfConstantSignature& org, const bool)
 {
     BaseClass::copyData(org);
     rcs = org.rcs;
 }
 
-double SigConstant::getRCS(const Emission* const)
+double RfConstantSignature::getRCS(const Emission* const)
 {
     return rcs;
 }
 
-bool SigConstant::setRCS(const base::INumber* const x)
+bool RfConstantSignature::setRCS(const base::INumber* const x)
 {
     bool ok{};
     double r{-1.0};
@@ -69,7 +69,7 @@ bool SigConstant::setRCS(const base::INumber* const x)
     return ok;
 }
 
-bool SigConstant::setRCS(const base::IArea* const x)
+bool RfConstantSignature::setRCS(const base::IArea* const x)
 {
    bool ok{};
    double r{-1.0};

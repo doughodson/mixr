@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigSphere.hpp"
+#include "mixr/models/signature/RfSphereSignature.hpp"
 
 #include "mixr/models/Emission.hpp"
 
@@ -10,31 +10,31 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigSphere, "SigSphere")
-EMPTY_DELETEDATA(SigSphere)
+IMPLEMENT_SUBCLASS(RfSphereSignature, "RfSphereSignature")
+EMPTY_DELETEDATA(RfSphereSignature)
 
-BEGIN_SLOTTABLE(SigSphere)
+BEGIN_SLOTTABLE(RfSphereSignature)
     "radius",       // 1 Radius of the sphere
-END_SLOTTABLE(SigSphere)
+END_SLOTTABLE(RfSphereSignature)
 
-BEGIN_SLOT_MAP(SigSphere)
+BEGIN_SLOT_MAP(RfSphereSignature)
     ON_SLOT(1, setSlotRadius, base::INumber)
     ON_SLOT(1, setSlotRadius, base::ILength)
 END_SLOT_MAP()
 
-SigSphere::SigSphere()
+RfSphereSignature::RfSphereSignature()
 {
     STANDARD_CONSTRUCTOR()
     setRadius(0);
 }
 
-SigSphere::SigSphere(const double r)
+RfSphereSignature::RfSphereSignature(const double r)
 {
     STANDARD_CONSTRUCTOR()
     setRadius(r);
 }
 
-void SigSphere::copyData(const SigSphere& org, const bool)
+void RfSphereSignature::copyData(const RfSphereSignature& org, const bool)
 {
     BaseClass::copyData(org);
     setRadius(org.radius);
@@ -43,7 +43,7 @@ void SigSphere::copyData(const SigSphere& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigSphere::getRCS(const Emission* const)
+double RfSphereSignature::getRCS(const Emission* const)
 {
     return rcs;
 }
@@ -51,7 +51,7 @@ double SigSphere::getRCS(const Emission* const)
 //------------------------------------------------------------------------------
 // setRadiusFromSlot() -- Set the radius from Slot table
 //------------------------------------------------------------------------------
-bool SigSphere::setSlotRadius(base::INumber* const x)
+bool RfSphereSignature::setSlotRadius(base::INumber* const x)
 {
    bool ok{};
    double r{-1.0};
@@ -65,12 +65,12 @@ bool SigSphere::setSlotRadius(base::INumber* const x)
       setRadius(r);
       ok = true;
    } else {
-      std::cerr << "SigSphere::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
+      std::cerr << "RfSphereSignature::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
    }
    return ok;
 }
 
-bool SigSphere::setSlotRadius(base::ILength* const x)
+bool RfSphereSignature::setSlotRadius(base::ILength* const x)
 {
    bool ok{};
    double r{ -1.0 };
@@ -84,7 +84,7 @@ bool SigSphere::setSlotRadius(base::ILength* const x)
       setRadius(r);
       ok = true;
    } else {
-      std::cerr << "SigSphere::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
+      std::cerr << "RfSphereSignature::setRadius: invalid radius; must be greater than or equal to zero!" << std::endl;
    }
    return ok;
 }

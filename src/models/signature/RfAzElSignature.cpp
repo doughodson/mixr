@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigAzEl.hpp"
+#include "mixr/models/signature/RfAzElSignature.hpp"
 
 #include "mixr/base/relations/Table2.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -9,9 +9,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigAzEl, "SigAzEl")
+IMPLEMENT_SUBCLASS(RfAzElSignature, "RfAzElSignature")
 
-BEGIN_SLOTTABLE(SigAzEl)
+BEGIN_SLOTTABLE(RfAzElSignature)
     "table",            // 1: Table of RCS by target Az/El angles  (base::Table2)
     "swapOrder",        // 2: True if elevation is the table's first independent
                         //    variable and azimuth is the second.
@@ -19,21 +19,21 @@ BEGIN_SLOTTABLE(SigAzEl)
                         //    el are in degrees instead of the default radians
     "inDecibel",        // 4: True if the dependent data is in decibel meters
                         //    squared instead of the default meters squared
-END_SLOTTABLE(SigAzEl)
+END_SLOTTABLE(RfAzElSignature)
 
-BEGIN_SLOT_MAP(SigAzEl)
+BEGIN_SLOT_MAP(RfAzElSignature)
     ON_SLOT(1, setSlotTable,        base::Table2)
     ON_SLOT(2, setSlotSwapOrder,    base::Boolean)
     ON_SLOT(3, setSlotInDegrees,    base::Boolean)
     ON_SLOT(4, setSlotDecibel,      base::Boolean)
 END_SLOT_MAP()
 
-SigAzEl::SigAzEl()
+RfAzElSignature::RfAzElSignature()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-SigAzEl::SigAzEl(const base::Table2* const tbl0)
+RfAzElSignature::RfAzElSignature(const base::Table2* const tbl0)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -42,7 +42,7 @@ SigAzEl::SigAzEl(const base::Table2* const tbl0)
    }
 }
 
-void SigAzEl::copyData(const SigAzEl& org, const bool)
+void RfAzElSignature::copyData(const RfAzElSignature& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -56,7 +56,7 @@ void SigAzEl::copyData(const SigAzEl& org, const bool)
    dbFlg = org.dbFlg;
 }
 
-void SigAzEl::deleteData()
+void RfAzElSignature::deleteData()
 {
     if (tbl != nullptr) { tbl->unref(); tbl = nullptr; }
 }
@@ -64,7 +64,7 @@ void SigAzEl::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigAzEl::getRCS(const Emission* const em)
+double RfAzElSignature::getRCS(const Emission* const em)
 {
    double rcs{};
    if (em != nullptr && tbl != nullptr) {
@@ -98,7 +98,7 @@ double SigAzEl::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // isTableValid() -- Returns true if this signature has a good az/el table
 //------------------------------------------------------------------------------
-bool SigAzEl::isTableValid() const
+bool RfAzElSignature::isTableValid() const
 {
    bool ok{};
    if (tbl != nullptr) {
@@ -111,26 +111,26 @@ bool SigAzEl::isTableValid() const
 // Set functions
 //------------------------------------------------------------------------------
 
-bool SigAzEl::setSwapOrder(const bool flg)
+bool RfAzElSignature::setSwapOrder(const bool flg)
 {
    swapOrderFlg = flg;
    return true;
 }
 
-bool SigAzEl::setInDegrees(const bool flg)
+bool RfAzElSignature::setInDegrees(const bool flg)
 {
    degFlg = flg;
    return true;
 }
 
-bool SigAzEl::setDecibel(const bool flg)
+bool RfAzElSignature::setDecibel(const bool flg)
 {
    dbFlg = flg;
    return true;
 }
 
 // Sets the signature table
-bool SigAzEl::setSlotTable(const base::Table2* const msg)
+bool RfAzElSignature::setSlotTable(const base::Table2* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -142,7 +142,7 @@ bool SigAzEl::setSlotTable(const base::Table2* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotSwapOrder(const base::Boolean* const msg)
+bool RfAzElSignature::setSlotSwapOrder(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -151,7 +151,7 @@ bool SigAzEl::setSlotSwapOrder(const base::Boolean* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotInDegrees(const base::Boolean* const msg)
+bool RfAzElSignature::setSlotInDegrees(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -160,7 +160,7 @@ bool SigAzEl::setSlotInDegrees(const base::Boolean* const msg)
    return ok;
 }
 
-bool SigAzEl::setSlotDecibel(const base::Boolean* const msg)
+bool RfAzElSignature::setSlotDecibel(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

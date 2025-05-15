@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SigAzEl_HPP__
-#define __mixr_models_common_SigAzEl_HPP__
+#ifndef __mixr_models_common_RfAzElSignature_HPP__
+#define __mixr_models_common_RfAzElSignature_HPP__
 
 #include "mixr/models/signature/IRfSignature.hpp"
 
@@ -10,10 +10,10 @@ namespace models {
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: SigAzEl
-// Descriptions: RfSignature by a table of RCS based on target's az/el angles
+// Class: RfAzElSignature
+// Descriptions: RF signature by a table of RCS based on target's az/el angles
 //
-// Factory name: SigAzEl
+// Factory name: RfAzElSignature
 // Slots:
 //
 //    table      <base::Table2>   ! Table of RCS by target Az/El angles (default: 0)
@@ -42,12 +42,12 @@ class Emission;
 //  4) If 'inDecibel' is set true then the dependent data is in decibel meters
 //     squared instead of the default meters squared
 //------------------------------------------------------------------------------
-class SigAzEl : public IRfSignature
+class RfAzElSignature final: public IRfSignature
 {
-    DECLARE_SUBCLASS(SigAzEl, IRfSignature)
+    DECLARE_SUBCLASS(RfAzElSignature, IRfSignature)
 public:
-   SigAzEl();
-   SigAzEl(const base::Table2* const);
+   RfAzElSignature();
+   RfAzElSignature(const base::Table2* const);
 
    virtual bool isTableValid() const;
 

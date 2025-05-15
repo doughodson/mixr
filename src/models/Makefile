@@ -62,9 +62,9 @@ OBJS =  \
 	signature/IRfSignature.o \
 	signature/ISigDihedralCR.o \
 	signature/ISigPlate.o \
-	signature/SigAzEl.o \
-	signature/SigConstant.o \
-	signature/SigSphere.o \
+	signature/RfAzElSignature.o \
+	signature/RfConstantSignature.o \
+	signature/RfSphereSignature.o \
 	signature/SigSwitch.o \
 	signature/SigTrihedralCR.o \
 	system/trackmanager/AirAngleOnlyTrkMgr.o \
