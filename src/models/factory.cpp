@@ -96,9 +96,10 @@
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/system/System.hpp"
 
-// signatures
+// signatures (IR)
 #include "mixr/models/signature/IrSphereSignature.hpp"
 #include "mixr/models/signature/IrBoxSignature.hpp"
+// signatures (RF)
 #include "mixr/models/signature/RfAzElSignature.hpp"
 #include "mixr/models/signature/RfConstantSignature.hpp"
 #include "mixr/models/signature/RfSphereSignature.hpp"
@@ -347,6 +348,14 @@ base::IObject* factory(const std::string& name)
       obj = new IrSeeker();
    }
 
+   // IR Signatures
+   else if ( name == IrSphereSignature::getFactoryName() ) {
+      obj = new IrSphereSignature();
+   }
+   else if ( name == IrBoxSignature::getFactoryName() ) {
+      obj = new IrBoxSignature();
+   }
+
    // R/F Signatures
    else if ( name == RfAzElSignature::getFactoryName() ) {
       obj = new RfAzElSignature();
@@ -363,14 +372,8 @@ base::IObject* factory(const std::string& name)
    else if ( name == RfTrihedralCRSignature::getFactoryName() ) {
       obj = new RfTrihedralCRSignature();
    }
-   // IR Signatures
-   else if ( name == IrSphereSignature::getFactoryName() ) {
-      obj = new IrSphereSignature();
-   }
-   else if ( name == IrBoxSignature::getFactoryName() ) {
-      obj = new IrBoxSignature();
-   }
-    // Onboard Computers
+
+   // Onboard Computers
    else if ( name == OnboardComputer::getFactoryName() ) {
       obj = new OnboardComputer();
    }

@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/ISigPlate.hpp"
+#include "mixr/models/signature/IRfPlateSignature.hpp"
 
 #include "mixr/models/Emission.hpp"
 
@@ -11,32 +11,32 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(ISigPlate,"ISigPlate")
-EMPTY_DELETEDATA(ISigPlate)
+IMPLEMENT_SUBCLASS(IRfPlateSignature,"IRfPlateSignature")
+EMPTY_DELETEDATA(IRfPlateSignature)
 
-BEGIN_SLOTTABLE(ISigPlate)
+BEGIN_SLOTTABLE(IRfPlateSignature)
     "a",        // 1 length of the plate
     "b",        // 2 width of the plate
-END_SLOTTABLE(ISigPlate)
+END_SLOTTABLE(IRfPlateSignature)
 
-BEGIN_SLOT_MAP(ISigPlate)
+BEGIN_SLOT_MAP(IRfPlateSignature)
     ON_SLOT(1,setA,base::INumber)
     ON_SLOT(2,setB,base::INumber)
 END_SLOT_MAP()
 
-ISigPlate::ISigPlate()
+IRfPlateSignature::IRfPlateSignature()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-ISigPlate::ISigPlate(const double a1, const double b1)
+IRfPlateSignature::IRfPlateSignature(const double a1, const double b1)
 {
     STANDARD_CONSTRUCTOR()
     a = a1;
     b = b1;
 }
 
-void ISigPlate::copyData(const ISigPlate& org, const bool)
+void IRfPlateSignature::copyData(const IRfPlateSignature& org, const bool)
 {
     BaseClass::copyData(org);
     a = org.a;
@@ -46,7 +46,7 @@ void ISigPlate::copyData(const ISigPlate& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double ISigPlate::getRCS(const Emission* const em)
+double IRfPlateSignature::getRCS(const Emission* const em)
 {
     double rcs{};
     if (em != nullptr) {
@@ -63,7 +63,7 @@ double ISigPlate::getRCS(const Emission* const em)
 //------------------------------------------------------------------------------
 // setA() -- Set the length
 //------------------------------------------------------------------------------
-bool ISigPlate::setA(base::INumber* const x)
+bool IRfPlateSignature::setA(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};
@@ -81,7 +81,7 @@ bool ISigPlate::setA(base::INumber* const x)
     return ok;
 }
 
-bool ISigPlate::setA(base::ILength* const x)
+bool IRfPlateSignature::setA(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};
@@ -104,7 +104,7 @@ bool ISigPlate::setA(base::ILength* const x)
 //------------------------------------------------------------------------------
 // setB() -- Set the width
 //------------------------------------------------------------------------------
-bool ISigPlate::setB(base::INumber* const x)
+bool IRfPlateSignature::setB(base::INumber* const x)
 {
     bool ok{};
     double v{-1.0};
@@ -123,7 +123,7 @@ bool ISigPlate::setB(base::INumber* const x)
     return ok;
 }
 
-bool ISigPlate::setB(base::ILength* const x)
+bool IRfPlateSignature::setB(base::ILength* const x)
 {
    bool ok{};
    double v{-1.0};

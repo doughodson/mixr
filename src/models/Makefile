@@ -55,13 +55,13 @@ OBJS =  \
 	sensor/Stt.o \
 	sensor/Tws.o \
 	signature/IIrShapeSignature.o \
-	signature/IrSphereSignature.o \
-	signature/IrBoxSignature.o \
 	signature/IIrAircraftSignature.o \
 	signature/IIrSignature.o \
+	signature/IrSphereSignature.o \
+	signature/IrBoxSignature.o \
 	signature/IRfSignature.o \
-	signature/IDihedralCRSignature.o \
-	signature/ISigPlate.o \
+	signature/IRfDihedralCRSignature.o \
+	signature/IRfPlateSignature.o \
 	signature/RfAzElSignature.o \
 	signature/RfConstantSignature.o \
 	signature/RfSphereSignature.o \

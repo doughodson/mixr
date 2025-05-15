@@ -1,28 +1,28 @@
 
-#include "mixr/models/signature/IDihedralCRSignature.hpp"
+#include "mixr/models/signature/IRfDihedralCRSignature.hpp"
 
 #include "mixr/models/Emission.hpp"
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(IDihedralCRSignature, "IDihedralCRSignature")
-EMPTY_SLOTTABLE(IDihedralCRSignature)
-EMPTY_DELETEDATA(IDihedralCRSignature)
+IMPLEMENT_SUBCLASS(IRfDihedralCRSignature, "IRfDihedralCRSignature")
+EMPTY_SLOTTABLE(IRfDihedralCRSignature)
+EMPTY_DELETEDATA(IRfDihedralCRSignature)
 
-IDihedralCRSignature::IDihedralCRSignature()
+IRfDihedralCRSignature::IRfDihedralCRSignature()
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
 }
 
-IDihedralCRSignature::IDihedralCRSignature(const double a) : ISigPlate(a, 0.0)
+IRfDihedralCRSignature::IRfDihedralCRSignature(const double a) : IRfPlateSignature(a, 0.0)
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
 }
 
-void IDihedralCRSignature::copyData(const IDihedralCRSignature& org, const bool)
+void IRfDihedralCRSignature::copyData(const IRfDihedralCRSignature& org, const bool)
 {
     BaseClass::copyData(org);
     length = org.length;
@@ -31,7 +31,7 @@ void IDihedralCRSignature::copyData(const IDihedralCRSignature& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double IDihedralCRSignature::getRCS(const Emission* const em)
+double IRfDihedralCRSignature::getRCS(const Emission* const em)
 {
     double rcs{};
     if (em != nullptr) {

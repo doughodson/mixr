@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_RfTrihedralCRSignature_HPP__
 #define __mixr_models_common_RfTrihedralCRSignature_HPP__
 
-#include "mixr/models/signature/IDihedralCRSignature.hpp"
+#include "mixr/models/signature/IRfDihedralCRSignature.hpp"
 
 namespace mixr {
 namespace models {
@@ -15,9 +15,9 @@ class Emission;
 //
 // Factory name: RfTrihedralCRSignature
 //------------------------------------------------------------------------------
-class RfTrihedralCRSignature final: public IDihedralCRSignature
+class RfTrihedralCRSignature final: public IRfDihedralCRSignature
 {
-    DECLARE_SUBCLASS(RfTrihedralCRSignature, IDihedralCRSignature)
+    DECLARE_SUBCLASS(RfTrihedralCRSignature, IRfDihedralCRSignature)
 public:
     RfTrihedralCRSignature();
     RfTrihedralCRSignature(const double);
