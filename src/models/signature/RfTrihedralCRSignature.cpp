@@ -18,7 +18,7 @@ RfTrihedralCRSignature::RfTrihedralCRSignature()
     STANDARD_CONSTRUCTOR()
 }
 
-RfTrihedralCRSignature::RfTrihedralCRSignature(const double a) : IDihedralCRSignature(a)
+RfTrihedralCRSignature::RfTrihedralCRSignature(const double a) : IRfDihedralCRSignature(a)
 {
     STANDARD_CONSTRUCTOR()
 }
