@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/IrSphere.hpp"
+#include "mixr/models/signature/IrSphereSignature.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
@@ -15,30 +15,30 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(IrSphere, "IrSphere")
-EMPTY_DELETEDATA(IrSphere)
+IMPLEMENT_SUBCLASS(IrSphereSignature, "IrSphereSignature")
+EMPTY_DELETEDATA(IrSphereSignature)
 
-BEGIN_SLOTTABLE(IrSphere)
+BEGIN_SLOTTABLE(IrSphereSignature)
    "radius",
-END_SLOTTABLE(IrSphere)
+END_SLOTTABLE(IrSphereSignature)
 
-BEGIN_SLOT_MAP(IrSphere)
+BEGIN_SLOT_MAP(IrSphereSignature)
    ON_SLOT(1, setSlotIrSphereRadius, base::INumber)
    ON_SLOT(1, setSlotIrSphereRadius, base::ILength)
 END_SLOT_MAP()
 
-IrSphere::IrSphere()
+IrSphereSignature::IrSphereSignature()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void IrSphere::copyData(const IrSphere& org, const bool)
+void IrSphereSignature::copyData(const IrSphereSignature& org, const bool)
 {
    BaseClass::copyData(org);
    radius = org.radius;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mixr::base::INumber* const x)
+bool IrSphereSignature::setSlotIrSphereRadius(const mixr::base::INumber* const x)
 {
    double value{};
 
@@ -49,7 +49,7 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::INumber* const x)
    return true;
 }
 
-bool IrSphere::setSlotIrSphereRadius(const mixr::base::ILength* const x)
+bool IrSphereSignature::setSlotIrSphereRadius(const mixr::base::ILength* const x)
 {
    double value{};
 
@@ -60,7 +60,7 @@ bool IrSphere::setSlotIrSphereRadius(const mixr::base::ILength* const x)
    return true;
 }
 
-double IrSphere::getArea()
+double IrSphereSignature::getArea()
 {
    //return (double) (radius * radius * 4.0 * PI);
    //Calculates the projected area of a sphere (projected area is a flat circle)

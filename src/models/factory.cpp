@@ -97,8 +97,8 @@
 #include "mixr/models/system/System.hpp"
 
 // signatures
-#include "mixr/models/signature/IrSphere.hpp"
-#include "mixr/models/signature/IrBox.hpp"
+#include "mixr/models/signature/IrSphereSignature.hpp"
+#include "mixr/models/signature/IrBoxSignature.hpp"
 #include "mixr/models/signature/RfAzElSignature.hpp"
 #include "mixr/models/signature/RfConstantSignature.hpp"
 #include "mixr/models/signature/RfSphereSignature.hpp"
@@ -364,11 +364,11 @@ base::IObject* factory(const std::string& name)
       obj = new RfTrihedralCRSignature();
    }
    // IR Signatures
-   else if ( name == IrSphere::getFactoryName() ) {
-      obj = new IrSphere();
+   else if ( name == IrSphereSignature::getFactoryName() ) {
+      obj = new IrSphereSignature();
    }
-   else if ( name == IrBox::getFactoryName() ) {
-      obj = new IrBox();
+   else if ( name == IrBoxSignature::getFactoryName() ) {
+      obj = new IrBoxSignature();
    }
     // Onboard Computers
    else if ( name == OnboardComputer::getFactoryName() ) {

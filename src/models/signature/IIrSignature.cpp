@@ -3,7 +3,7 @@
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mixr/models/signature/IIrShape.hpp"
+#include "mixr/models/signature/IIrShapeSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 
@@ -27,7 +27,7 @@ END_SLOTTABLE(IIrSignature)
 
 BEGIN_SLOT_MAP(IIrSignature)
    ON_SLOT(1, setSlotWaveBandSizes,     base::Table1)
-   ON_SLOT(2, setSlotIrShapeSignature,  IIrShape)
+   ON_SLOT(2, setSlotIrShapeSignature,  IIrShapeSignature)
    ON_SLOT(3, setSlotBaseHeatSignature, base::INumber)
    ON_SLOT(4, setSlotEmissivity,        base::INumber)
    ON_SLOT(5, setSlotEffectiveArea,     base::IArea)
@@ -60,7 +60,7 @@ void IIrSignature::copyData(const IIrSignature& org, const bool)
    }
 
    if (org.irShapeSignature != nullptr) {
-      IIrShape* copy{org.irShapeSignature->clone()};
+      IIrShapeSignature* copy{org.irShapeSignature->clone()};
       setSlotIrShapeSignature( copy );
       copy->unref();
    } else {
@@ -100,7 +100,7 @@ bool IIrSignature::setSlotWaveBandSizes(const base::Table1* const tbl)
 //------------------------------------------------------------------------------
 // setSlotIrShapeSignature() --  set IR shape of the signature
 //------------------------------------------------------------------------------
-bool IIrSignature::setSlotIrShapeSignature(IIrShape* const s)
+bool IIrSignature::setSlotIrShapeSignature(IIrShapeSignature* const s)
 {
    if (irShapeSignature != nullptr) {
       irShapeSignature->unref();

@@ -54,9 +54,9 @@ OBJS =  \
 	sensor/Gmti.o \
 	sensor/Stt.o \
 	sensor/Tws.o \
-	signature/IIrShape.o \
-	signature/IrSphere.o \
-	signature/IrBox.o \
+	signature/IIrShapeSignature.o \
+	signature/IrSphereSignature.o \
+	signature/IrBoxSignature.o \
 	signature/IIrAircraftSignature.o \
 	signature/IIrSignature.o \
 	signature/IRfSignature.o \

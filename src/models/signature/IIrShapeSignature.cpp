@@ -1,4 +1,4 @@
-#include "mixr/models/signature/IIrShape.hpp"
+#include "mixr/models/signature/IIrShapeSignature.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
@@ -15,30 +15,30 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(IIrShape, "IIrShape")
+IMPLEMENT_ABSTRACT_SUBCLASS(IIrShapeSignature, "IIrShapeSignature")
 
-BEGIN_SLOTTABLE(IIrShape)
+BEGIN_SLOTTABLE(IIrShapeSignature)
    "area",
-END_SLOTTABLE(IIrShape)
+END_SLOTTABLE(IIrShapeSignature)
 
-BEGIN_SLOT_MAP(IIrShape)
+BEGIN_SLOT_MAP(IIrShapeSignature)
    ON_SLOT(1, setSlotIrShapeArea, base::IArea)
 END_SLOT_MAP()
 
-EMPTY_DELETEDATA(IIrShape)
+EMPTY_DELETEDATA(IIrShapeSignature)
 
-IIrShape::IIrShape()
+IIrShapeSignature::IIrShapeSignature()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void IIrShape::copyData(const IIrShape& org, const bool)
+void IIrShapeSignature::copyData(const IIrShapeSignature& org, const bool)
 {
    BaseClass::copyData(org);
    area = org.area;
 }
 
-bool IIrShape::setSlotIrShapeArea(const mixr::base::IArea* const a)
+bool IIrShapeSignature::setSlotIrShapeArea(const mixr::base::IArea* const a)
 {
    if (a != nullptr) {
       area = a->getValueInSquareMeters();
@@ -46,12 +46,12 @@ bool IIrShape::setSlotIrShapeArea(const mixr::base::IArea* const a)
    return true;
 }
 
-double IIrShape::getArea()
+double IIrShapeSignature::getArea()
 {
    return area;
 }
 
-double IIrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IIrShapeSignature::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
    const double angleOffBoresight{msg->getAngleOffBoresight()};
    const double maxAngle{msg->getSendingSensor()->getIFOVTheta()};

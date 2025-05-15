@@ -1,8 +1,5 @@
 
-//------------------------------------------------------------------------------
-// Classes: IrShape, IrSphere, IrBox
-//------------------------------------------------------------------------------
-#include "mixr/models/signature/IrBox.hpp"
+#include "mixr/models/signature/IrBoxSignature.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/IrSensor.hpp"
@@ -18,27 +15,27 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(IrBox, "IrBox")
-EMPTY_DELETEDATA(IrBox)
+IMPLEMENT_SUBCLASS(IrBoxSignature, "IrBoxSignature")
+EMPTY_DELETEDATA(IrBoxSignature)
 
-BEGIN_SLOTTABLE(IrBox)
+BEGIN_SLOTTABLE(IrBoxSignature)
    "x",
    "y",
    "z",
-END_SLOTTABLE(IrBox)
+END_SLOTTABLE(IrBoxSignature)
 
-BEGIN_SLOT_MAP(IrBox)
+BEGIN_SLOT_MAP(IrBoxSignature)
    ON_SLOT(1, setSlotIrBoxX, base::ILength)
    ON_SLOT(2, setSlotIrBoxY, base::ILength)
    ON_SLOT(3, setSlotIrBoxZ, base::ILength)
 END_SLOT_MAP()
 
-IrBox::IrBox()
+IrBoxSignature::IrBoxSignature()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void IrBox::copyData(const IrBox& org, const bool)
+void IrBoxSignature::copyData(const IrBoxSignature& org, const bool)
 {
    BaseClass::copyData(org);
    x = org.x;
@@ -46,7 +43,7 @@ void IrBox::copyData(const IrBox& org, const bool)
    z = org.z;
 }
 
-bool IrBox::setSlotIrBoxX(const mixr::base::ILength* const d)
+bool IrBoxSignature::setSlotIrBoxX(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       x = d->getValueInMeters();
@@ -54,7 +51,7 @@ bool IrBox::setSlotIrBoxX(const mixr::base::ILength* const d)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const mixr::base::ILength* const d)
+bool IrBoxSignature::setSlotIrBoxY(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       y = d->getValueInMeters();
@@ -62,7 +59,7 @@ bool IrBox::setSlotIrBoxY(const mixr::base::ILength* const d)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const mixr::base::ILength* const d)
+bool IrBoxSignature::setSlotIrBoxZ(const mixr::base::ILength* const d)
 {
    if (d != nullptr) {
       z = d->getValueInMeters();
@@ -70,12 +67,12 @@ bool IrBox::setSlotIrBoxZ(const mixr::base::ILength* const d)
    return true;
 }
 
-double IrBox::getArea()
+double IrBoxSignature::getArea()
 {
    return static_cast<double>((x*y * 2) + (2*x*z) + (2*y*z));
 }
 
-double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IrBoxSignature::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
    double area{};
 #if 1

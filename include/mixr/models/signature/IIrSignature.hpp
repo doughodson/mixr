@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class IArea; class INumber; class List; class Table1; }
 namespace models {
 class IrQueryMsg;
-class IIrShape;
+class IIrShapeSignature;
 
 //------------------------------------------------------------------------------
 // Class: IIrSignature
@@ -17,12 +17,12 @@ class IIrShape;
 //
 // Factory name: IIrSignature
 // Slots:
-//    binSizes            <Table1>      ! The size of the wavelength bins used in the tables
-//    irShapeSignature    <IrShape>     ! Shape of radiation source
-//    baseHeatSignature   <INumber>     ! Base heat signature - units: watts per steradian
-//    emissivity          <INumber>     ! Emissivity - unitless, values range from
-//                                      !     0.0 (total reflection) to 1.0 (total absorption)
-//    effectiveArea       <base::IArea> ! Effective area - units: meters squared (m^2)
+//    binSizes            <Table1>             ! The size of the wavelength bins used in the tables
+//    irShapeSignature    <IIrShapeSignature>  ! Shape of radiation source
+//    baseHeatSignature   <INumber>            ! Base heat signature - units: watts per steradian
+//    emissivity          <INumber>            ! Emissivity - unitless, values range from
+//                                             !     0.0 (total reflection) to 1.0 (total absorption)
+//    effectiveArea       <base::IArea>        ! Effective area - units: meters squared (m^2)
 //
 // Notes:
 //    1) Simple IR signature class, specifies player-specific properties related to IR modeling.
@@ -43,7 +43,7 @@ class IIrShape;
 //   ( IrSignature
 //
 //      irShapeSignature:
-//         ( IrBox
+//         ( IrBoxSignature
 //            x: (Meters 1.0)        // dimensions of source shape
 //            y: (Meters 1.0)
 //            z: (Meters 1.0)
@@ -121,7 +121,7 @@ private:
 
    int numWaveBands{};                     // Total number of wavebands
    const base::Table1* waveBandTable{};    // Table of waveband centers and widths
-   IIrShape* irShapeSignature{};           // Shape of this IR signature
+   IIrShapeSignature* irShapeSignature{};  // Shape of this IR signature
    double baseHeatSignature{};             // The base heat signature   (Watts per steradian)
    double emissivity{};                    // The emissivity for the player, what part of incident radiation
                                            // is absorbed. The value ranges from 0.0 for total reflection to
@@ -131,7 +131,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotWaveBandSizes(const base::Table1* const);
-   bool setSlotIrShapeSignature(IIrShape* const);
+   bool setSlotIrShapeSignature(IIrShapeSignature* const);
    bool setSlotBaseHeatSignature(base::INumber* const);
    bool setSlotEmissivity(base::INumber* const);
    bool setSlotEffectiveArea(base::IArea* const);

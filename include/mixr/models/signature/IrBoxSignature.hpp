@@ -1,8 +1,8 @@
 
-#ifndef __mixr_models_common_IrBox_HPP__
-#define __mixr_models_common_IrBox_HPP__
+#ifndef __mixr_models_common_IrBoxSignature_HPP__
+#define __mixr_models_common_IrBoxSignature_HPP__
 
-#include "mixr/models/signature/IIrShape.hpp"
+#include "mixr/models/signature/IIrShapeSignature.hpp"
 
 namespace mixr {
 namespace base { class IArea; class ILength; class INumber; }
@@ -10,22 +10,22 @@ namespace models {
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class: IrBox
+// Class: IrBoxSignature
 //   Description: Concrete IR shape
 //
-// Factory name: IrBox
+// Factory name: IrBoxSignature
 // Slots:
 //   x      <base::ILength>         ! x dimension (default is 10 meters)
 //   y      <base::ILength>         ! y dimension (default is 10 meters)
 //   z      <base::ILength>         ! z dimension (default is 10 meters)
 //------------------------------------------------------------------------------
-class IrBox final: public IIrShape
+class IrBoxSignature final: public IIrShapeSignature
 {
-   DECLARE_SUBCLASS(IrBox, IIrShape)
+   DECLARE_SUBCLASS(IrBoxSignature, IIrShapeSignature)
 
 public:
 
-   IrBox();
+   IrBoxSignature();
 
    double getArea() override;
    double getReflectorAreaInFieldOfView(const IrQueryMsg* const) override;

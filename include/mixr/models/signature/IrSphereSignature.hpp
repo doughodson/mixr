@@ -1,8 +1,8 @@
 
-#ifndef __mixr_models_common_IrSphere_HPP__
-#define __mixr_models_common_IrSphere_HPP__
+#ifndef __mixr_models_common_IrSphereSignature_HPP__
+#define __mixr_models_common_IrSphereSignature_HPP__
 
-#include "mixr/models/signature/IIrShape.hpp"
+#include "mixr/models/signature/IIrShapeSignature.hpp"
 
 namespace mixr {
 namespace base { class IArea; class ILength; class INumber; }
@@ -10,21 +10,21 @@ namespace models {
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class: IrSphere
+// Class: IrSphereSignature
 //   Description: Concrete IR shape
 //
-// Factory name: IrSphere
+// Factory name: IrSphereSignature
 // Slots:
 //   radius    <INumber>   ! Radius of sphere (default is 10)
 //   radius    <ILength>
 //------------------------------------------------------------------------------
-class IrSphere final: public IIrShape
+class IrSphereSignature final: public IIrShapeSignature
 {
-   DECLARE_SUBCLASS(IrSphere, IIrShape)
+   DECLARE_SUBCLASS(IrSphereSignature, IIrShapeSignature)
 
 public:
 
-   IrSphere();
+   IrSphereSignature();
 
    double getArea() override;
 

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IIrShape_HPP__
-#define __mixr_models_common_IIrShape_HPP__
+#ifndef __mixr_models_common_IIrShapeSignature_HPP__
+#define __mixr_models_common_IIrShapeSignature_HPP__
 
 #include "mixr/base/IObject.hpp"
 
@@ -10,17 +10,17 @@ namespace models {
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
-// Class: IIrShape
+// Class: IIrShapeSignature
 // Description: Interface for infrared shapes
 //
-// Factory name: IIrShape
+// Factory name: IIrShapeSignature
 //------------------------------------------------------------------------------
-class IIrShape : public base::IObject
+class IIrShapeSignature : public base::IObject
 {
-   DECLARE_SUBCLASS(IIrShape, base::IObject)
+   DECLARE_SUBCLASS(IIrShapeSignature, base::IObject)
 
 public:
-   IIrShape();
+   IIrShapeSignature();
 
    virtual double getArea();            // returns the effective area as a number in square meters
 
