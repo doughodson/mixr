@@ -60,7 +60,7 @@ OBJS =  \
 	signature/IIrAircraftSignature.o \
 	signature/IIrSignature.o \
 	signature/IRfSignature.o \
-	signature/ISigDihedralCR.o \
+	signature/IDihedralCRSignature.o \
 	signature/ISigPlate.o \
 	signature/RfAzElSignature.o \
 	signature/RfConstantSignature.o \
