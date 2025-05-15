@@ -65,8 +65,8 @@ OBJS =  \
 	signature/RfAzElSignature.o \
 	signature/RfConstantSignature.o \
 	signature/RfSphereSignature.o \
-	signature/SigSwitch.o \
-	signature/SigTrihedralCR.o \
+	signature/RfSwitchSignature.o \
+	signature/RfTrihedralCRSignature.o \
 	system/trackmanager/AirAngleOnlyTrkMgr.o \
 	system/trackmanager/AirAngleOnlyTrkMgrPT.o \
 	system/trackmanager/AirTrkMgr.o \

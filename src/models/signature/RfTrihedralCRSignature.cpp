@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigTrihedralCR.hpp"
+#include "mixr/models/signature/RfTrihedralCRSignature.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -8,17 +8,17 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigTrihedralCR, "SigTrihedralCR")
-EMPTY_SLOTTABLE(SigTrihedralCR)
-EMPTY_DELETEDATA(SigTrihedralCR)
-EMPTY_COPYDATA(SigTrihedralCR)
+IMPLEMENT_SUBCLASS(RfTrihedralCRSignature, "RfTrihedralCRSignature")
+EMPTY_SLOTTABLE(RfTrihedralCRSignature)
+EMPTY_DELETEDATA(RfTrihedralCRSignature)
+EMPTY_COPYDATA(RfTrihedralCRSignature)
 
-SigTrihedralCR::SigTrihedralCR()
+RfTrihedralCRSignature::RfTrihedralCRSignature()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-SigTrihedralCR::SigTrihedralCR(const double a) : ISigDihedralCR(a)
+RfTrihedralCRSignature::RfTrihedralCRSignature(const double a) : ISigDihedralCR(a)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -26,7 +26,7 @@ SigTrihedralCR::SigTrihedralCR(const double a) : ISigDihedralCR(a)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigTrihedralCR::getRCS(const Emission* const em)
+double RfTrihedralCRSignature::getRCS(const Emission* const em)
 {
     double rcs{};
     if (em != nullptr) {

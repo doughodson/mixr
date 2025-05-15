@@ -1,5 +1,5 @@
 
-#include "mixr/models/signature/SigSwitch.hpp"
+#include "mixr/models/signature/RfSwitchSignature.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/Emission.hpp"
@@ -9,12 +9,12 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SigSwitch, "SigSwitch")
-EMPTY_SLOTTABLE(SigSwitch)
-EMPTY_DELETEDATA(SigSwitch)
-EMPTY_COPYDATA(SigSwitch)
+IMPLEMENT_SUBCLASS(RfSwitchSignature, "RfSwitchSignature")
+EMPTY_SLOTTABLE(RfSwitchSignature)
+EMPTY_DELETEDATA(RfSwitchSignature)
+EMPTY_COPYDATA(RfSwitchSignature)
 
-SigSwitch::SigSwitch()
+RfSwitchSignature::RfSwitchSignature()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -22,7 +22,7 @@ SigSwitch::SigSwitch()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double SigSwitch::getRCS(const Emission* const em)
+double RfSwitchSignature::getRCS(const Emission* const em)
 {
    double rcs{};
 
