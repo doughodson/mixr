@@ -15,12 +15,12 @@ class Player;
 
 //------------------------------------------------------------------------------
 // Class: Tdb
-// Description: Target Data Block (TDB) (i.e., players of interest) used by
-//              gimbals and sensors.
+// Description: Concrete class, the Target Data Block (TDB) (i.e., players of interest)
+//              is used by gimbals and sensors.
 //
 //    Contains a list of "players of interest" (i.e., targets) used by the gimbal,
 //    and the associated geometry data, as seen by the gimbal.
-// Factory name: Gimbal_Tdb
+// Factory name: Tdb
 //
 // Tasks:
 //
@@ -57,7 +57,7 @@ class Player;
 //       Z+ is the cross product of X into Y
 //
 //------------------------------------------------------------------------------
-class Tdb : public base::IObject
+class Tdb final: public base::IObject
 {
    DECLARE_SUBCLASS(Tdb, base::IObject)
 

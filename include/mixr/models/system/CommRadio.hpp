@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_CommRadio_HPP__
 #define __mixr_models_common_CommRadio_HPP__
 
-#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/IRadio.hpp"
 
 namespace mixr {
 namespace models {
@@ -15,9 +15,9 @@ class Emission;
 //
 // Factory name: CommRadio
 //------------------------------------------------------------------------------
-class CommRadio : public Radio
+class CommRadio : public IRadio
 {
-   DECLARE_SUBCLASS(CommRadio, Radio)
+   DECLARE_SUBCLASS(CommRadio, IRadio)
 
 public:
    CommRadio();

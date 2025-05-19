@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Radio_HPP__
-#define __mixr_models_common_Radio_HPP__
+#ifndef __mixr_models_common_IRadio_HPP__
+#define __mixr_models_common_IRadio_HPP__
 
 #include "mixr/models/system/RfSystem.hpp"
 
@@ -11,8 +11,8 @@ class Datalink;
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: Radio
-// Description: Base class for all radios (Comm, Nav, IFF, etc.)
+// Class: IRadio
+// Description: Interface class for all radios (Comm, Nav, IFF, etc.)
 //
 //    This class is one of the "top level" systems attached to a Player
 //    class (see Player.hpp).
@@ -71,15 +71,15 @@ class Emission;
 //       )
 //
 //------------------------------------------------------------------------------
-class Radio : public RfSystem
+class IRadio : public RfSystem
 {
-   DECLARE_SUBCLASS(Radio, RfSystem)
+   DECLARE_SUBCLASS(IRadio, RfSystem)
 
 public:
    enum { MAX_CHANNELS = 500 };
 
 public:
-   Radio();
+   IRadio();
 
    // Is the radio tuned to its current channel's frequency
    bool isChannelTuned() const;

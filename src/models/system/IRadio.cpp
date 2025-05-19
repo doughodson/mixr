@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/IRadio.hpp"
 
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/Emission.hpp"
@@ -15,17 +15,17 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Radio, "Radio")
+IMPLEMENT_SUBCLASS(IRadio, "IRadio")
 
-BEGIN_SLOTTABLE(Radio)
+BEGIN_SLOTTABLE(IRadio)
    "numChannels",       // 1: Number of channels (less than or equal MAX_CHANNELS)
    "channels",          // 2: Our channels (list of base::Frequency objects)
    "channel",           // 3: Channel number [ 1 .. numChanels ]
    "maxDetectRange",    // 4: maximum detection capability (NM) (def: 120NM)
    "radioID",           // 5: radioID used by DIS
-END_SLOTTABLE(Radio)
+END_SLOTTABLE(IRadio)
 
-BEGIN_SLOT_MAP(Radio)
+BEGIN_SLOT_MAP(IRadio)
     ON_SLOT(1, setSlotNumChannels,    base::Integer)
     ON_SLOT(2, setSlotChannels,       base::PairStream)
     ON_SLOT(3, setSlotChannel,        base::Integer)
@@ -33,12 +33,12 @@ BEGIN_SLOT_MAP(Radio)
     ON_SLOT(5, setSlotRadioId,        base::Integer)
 END_SLOT_MAP()
 
-Radio::Radio()
+IRadio::IRadio()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Radio::copyData(const Radio& org, const bool)
+void IRadio::copyData(const IRadio& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -58,7 +58,7 @@ void Radio::copyData(const Radio& org, const bool)
    maxDetectRange = org.maxDetectRange;
 }
 
-void Radio::deleteData()
+void IRadio::deleteData()
 {
    setNumberOfChannels(0);
 }
@@ -68,33 +68,33 @@ void Radio::deleteData()
 //------------------------------------------------------------------------------
 
 // Is the radio tuned to its current channel number
-bool Radio::isChannelTuned() const
+bool IRadio::isChannelTuned() const
 {
    return getChannelFrequency(channel) == getFrequency();
 }
 
 // Is the radio manually tuned (i.e., the current frequency
 // is not the same as the current channel's frequency)
-bool Radio::isManualTuned() const
+bool IRadio::isManualTuned() const
 {
    return getChannelFrequency(channel) != getFrequency();
 }
 
 // Returns the radio's channel number
-unsigned short Radio::getChannel() const
+unsigned short IRadio::getChannel() const
 {
    return channel;
 }
 
 // Number of channels
-unsigned short Radio::getNumberOfChannels() const
+unsigned short IRadio::getNumberOfChannels() const
 {
    return (chanFreqTbl != nullptr) ? numChan : 0;
 }
 
 // Get a channel's frequency (Hz)
 // Returns -1 if the channel is invalid
-double Radio::getChannelFrequency(const unsigned short chan) const
+double IRadio::getChannelFrequency(const unsigned short chan) const
 {
    const unsigned short nc{getNumberOfChannels()};
    double freq{-1.0};
@@ -105,13 +105,13 @@ double Radio::getChannelFrequency(const unsigned short chan) const
 }
 
 // Returns the radio's maximum detection range (NM)
-double Radio::getMaxDetectRange() const
+double IRadio::getMaxDetectRange() const
 {
    return maxDetectRange;
 }
 
 // DIS radio ID
-unsigned short Radio::getRadioId() const
+unsigned short IRadio::getRadioId() const
 {
    return radioId;
 }
@@ -122,7 +122,7 @@ unsigned short Radio::getRadioId() const
 //------------------------------------------------------------------------------
 
 // Sets the radio's channel number and changes the radio frequency
-bool Radio::setChannel(const unsigned short chan)
+bool IRadio::setChannel(const unsigned short chan)
 {
    bool ok{};
 
@@ -148,7 +148,7 @@ bool Radio::setChannel(const unsigned short chan)
 }
 
 // Set a channel's frequency; channel numbers [ 1 .. getNumberOfChannels() ]
-bool Radio::setChannelFrequency(const unsigned short chan, const double freq)
+bool IRadio::setChannelFrequency(const unsigned short chan, const double freq)
 {
    bool ok{};
 
@@ -162,7 +162,7 @@ bool Radio::setChannelFrequency(const unsigned short chan, const double freq)
 }
 
 // Sets the number of channels; previous channels are lost!
-bool Radio::setNumberOfChannels(const unsigned short n)
+bool IRadio::setNumberOfChannels(const unsigned short n)
 {
    bool ok{true};
 
@@ -194,14 +194,14 @@ bool Radio::setNumberOfChannels(const unsigned short n)
 }
 
 // setMaxDetectRange() -- set the max range (NM)
-bool Radio::setMaxDetectRange(const double num)
+bool IRadio::setMaxDetectRange(const double num)
 {
    maxDetectRange = num;
    return true;
 }
 
 // setRadioID() -- set Radio ID
-bool Radio::setRadioId(const unsigned short num)
+bool IRadio::setRadioId(const unsigned short num)
 {
    radioId = num;
    return true;
@@ -210,7 +210,7 @@ bool Radio::setRadioId(const unsigned short num)
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Radio::receive(const double dt)
+void IRadio::receive(const double dt)
 {
    BaseClass::receive(dt);
 
@@ -263,7 +263,7 @@ void Radio::receive(const double dt)
 // receivedEmissionReport() -- default (nothing to do)
 //  Handle reports of valid emission reports (signal/noise ratio above threshold).
 //------------------------------------------------------------------------------
-void Radio::receivedEmissionReport(Emission* const)
+void IRadio::receivedEmissionReport(Emission* const)
 {
 }
 
@@ -271,7 +271,7 @@ void Radio::receivedEmissionReport(Emission* const)
 // Slot Functions  (return 'true' if the slot was set, else 'false')
 //------------------------------------------------------------------------------
 
-bool Radio::setSlotNumChannels(base::Integer* const msg)
+bool IRadio::setSlotNumChannels(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -283,7 +283,7 @@ bool Radio::setSlotNumChannels(base::Integer* const msg)
    return ok;
 }
 
-bool Radio::setSlotChannels(const base::PairStream* const msg)
+bool IRadio::setSlotChannels(const base::PairStream* const msg)
 {
    // ---
    // Quick out if the number of channels hasn't been set.
@@ -319,7 +319,7 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
 }
 
 // channel: Channel the radio is set to
-bool Radio::setSlotChannel(base::Integer* const msg)
+bool IRadio::setSlotChannel(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -332,7 +332,7 @@ bool Radio::setSlotChannel(base::Integer* const msg)
 }
 
 // maxDetectRange: maximum detection capability (NM)
-bool Radio::setSlotMaxDetectRange(base::INumber* const num)
+bool IRadio::setSlotMaxDetectRange(base::INumber* const num)
 {
    bool ok{};
    if (num != nullptr) {
@@ -343,7 +343,7 @@ bool Radio::setSlotMaxDetectRange(base::INumber* const num)
 }
 
 // radio ID: the radio id used for DIS
-bool Radio::setSlotRadioId(base::Integer* const num)
+bool IRadio::setSlotRadioId(base::Integer* const num)
 {
    bool ok{};
    if (num != nullptr) {

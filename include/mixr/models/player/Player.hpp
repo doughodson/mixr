@@ -32,7 +32,7 @@ class IrSystem;
 class INavigation;
 class OnboardComputer;
 class IPilot;
-class Radio;
+class IRadio;
 class RfSensor;
 class StoresMgr;
 class IWeapon;
@@ -634,10 +634,10 @@ public:
    OnboardComputer* getOnboardComputerByName(const char* const);      // Returns an OnboardComputer model by its name
    base::Pair* getOnboardComputerByType(const std::type_info& type);  // Returns an OnboardComputer model by its type
 
-   Radio* getRadio();                                          // Player's top level Radio model
-   const Radio* getRadio() const;                              // Player's top level Radio (const version)
+   IRadio* getRadio();                                         // Player's top level Radio model
+   const IRadio* getRadio() const;                             // Player's top level Radio (const version)
    const std::string& getRadioName() const;                    // Name of the player's top level Radio model
-   Radio* getRadioByName(const char* const);                   // Returns a Radio model by its name
+   IRadio* getRadioByName(const char* const);                  // Returns a Radio model by its name
    base::Pair* getRadioByType(const std::type_info& type);     // Returns a Radio model by its type
 
    RfSensor* getSensor();                                      // Player's top level R/F sensor model

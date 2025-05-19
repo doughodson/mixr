@@ -51,7 +51,7 @@ class RfSystem;
 //       of creating and deleting them.
 //
 //------------------------------------------------------------------------------
-class Antenna : public IScanGimbal
+class Antenna final: public IScanGimbal
 {
    DECLARE_SUBCLASS(Antenna, IScanGimbal)
 

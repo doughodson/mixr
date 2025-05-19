@@ -11,7 +11,7 @@
 #include "mixr/models/system/IrSystem.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/IPilot.hpp"
-#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/IRadio.hpp"
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
@@ -1311,15 +1311,15 @@ base::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Radio model
-Radio* Player::getRadio()
+IRadio* Player::getRadio()
 {
-   return (radio != nullptr) ? (static_cast<Radio*>(radio->object())) : nullptr;
+   return (radio != nullptr) ? (static_cast<IRadio*>(radio->object())) : nullptr;
 }
 
 // Player's top level Radio (const version)
-const Radio* Player::getRadio() const
+const IRadio* Player::getRadio() const
 {
-   return (radio != nullptr) ? (static_cast<Radio*>(radio->object())) : nullptr;
+   return (radio != nullptr) ? (static_cast<IRadio*>(radio->object())) : nullptr;
 }
 
 // Name of the player's top level Radio model
@@ -1330,9 +1330,9 @@ const std::string& Player::getRadioName() const
 }
 
 // Returns a Radio model by its name
-Radio* Player::getRadioByName(const char* const name1)
+IRadio* Player::getRadioByName(const char* const name1)
 {
-   Radio* p{};
+   IRadio* p{};
    if (radio != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
@@ -1367,7 +1367,7 @@ Radio* Player::getRadioByName(const char* const name1)
       // Did we find a match?
       if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
-         p = dynamic_cast<Radio*>( pair->object() );
+         p = dynamic_cast<IRadio*>( pair->object() );
       }
    }
    return p;
@@ -1379,7 +1379,7 @@ base::Pair* Player::getRadioByType(const std::type_info& type)
    base::Pair* p{};                // Our return value
 
    if (radio != nullptr) {
-      Radio* root{getRadio()};    // Root node of the list
+      IRadio* root{getRadio()};    // Root node of the list
       if (root->isClassType(type)) {
          // Our root is the correct type.
          p = radio;
@@ -3168,7 +3168,7 @@ void Player::updateSystemPointers()
    setNavigation( findByType(typeid(INavigation)) );
    setOnboardComputer( findByType(typeid(OnboardComputer)) );
    setPilot( findByType(typeid(IPilot)) );
-   setRadio( findByType(typeid(Radio)) );
+   setRadio( findByType(typeid(IRadio)) );
    setSensor( findByType(typeid(RfSensor)) );
    setStoresMgr( findByType(typeid(StoresMgr)) );
 }
@@ -3358,7 +3358,7 @@ bool Player::setRadio(base::Pair* const x)
       if (radio != nullptr) radio->unref();
       radio = nullptr;
       ok = true;
-   } else if ( x->object()->isClassType(typeid(Radio)) ) {
+   } else if ( x->object()->isClassType(typeid(IRadio)) ) {
       if (radio != nullptr) radio->unref();
       radio = x;
       radio->ref();

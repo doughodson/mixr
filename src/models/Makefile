@@ -94,7 +94,7 @@ OBJS =  \
 	system/OnboardComputer.o \
 	system/IPilot.o \
 	system/Radar.o \
-	system/Radio.o \
+	system/IRadio.o \
 	system/RfSensor.o \
 	system/RfSystem.o \
 	system/Rwr.o \

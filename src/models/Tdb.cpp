@@ -19,7 +19,7 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Gimbal_Tdb")
+IMPLEMENT_PARTIAL_SUBCLASS(Tdb, "Tdb")
 EMPTY_SLOTTABLE(Tdb)
 
 Tdb::Tdb(const unsigned int mt, const IGimbal* const gp)

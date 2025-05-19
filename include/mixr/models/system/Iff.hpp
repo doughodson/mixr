@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Iff_HPP__
 #define __mixr_models_common_Iff_HPP__
 
-#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/IRadio.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Integer; }
@@ -30,9 +30,9 @@ namespace models {
 //   enableModeC   <Boolean>   ! Mode C on (default: false)
 //
 //------------------------------------------------------------------------------
-class Iff : public Radio
+class Iff : public IRadio
 {
-   DECLARE_SUBCLASS(Iff, Radio)
+   DECLARE_SUBCLASS(Iff, IRadio)
 
 public:
    enum {

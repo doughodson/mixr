@@ -84,7 +84,6 @@
 #include "mixr/models/system/MergingIrSensor.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Radar.hpp"
-#include "mixr/models/system/Radio.hpp"
 #include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/Rwr.hpp"
 #include "mixr/models/system/Sar.hpp"
@@ -377,9 +376,6 @@ base::IObject* factory(const std::string& name)
       obj = new OnboardComputer();
    }
    // Radios
-   else if ( name == Radio::getFactoryName() ) {
-      obj = new Radio();
-   }
    else if ( name == CommRadio::getFactoryName() ) {
       obj = new CommRadio();
    }

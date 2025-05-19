@@ -2,7 +2,7 @@
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/CommRadio.hpp"
-#include "mixr/models/system/Radio.hpp"
+#include "mixr/models/system/IRadio.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Message.hpp"
