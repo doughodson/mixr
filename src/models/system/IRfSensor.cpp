@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/IRfSensor.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
@@ -28,9 +28,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(RfSensor, "RfSensor")
+IMPLEMENT_SUBCLASS(IRfSensor, "IRfSensor")
 
-BEGIN_SLOTTABLE(RfSensor)
+BEGIN_SLOTTABLE(IRfSensor)
     "trackManagerName", // 1: Name of the requested Track Manager (base::String)
     "modes",            // 2: Submodes
     "ranges",           // 3: Sensor ranges (nm) [vector]
@@ -40,12 +40,12 @@ BEGIN_SLOTTABLE(RfSensor)
     "beamWidth",        // 7: (Deprecated: moved to Antenna) Beam Width (Angle) or (Number: Radian)
     "typeId",           // 8: R/F Sensor type ID      (String)
     "syncXmitWithScan", // 9: Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
-END_SLOTTABLE(RfSensor)
+END_SLOTTABLE(IRfSensor)
 
-BEGIN_SLOT_MAP(RfSensor)
+BEGIN_SLOT_MAP(IRfSensor)
     ON_SLOT(1, setSlotTrackManagerName, base::Identifier)
     ON_SLOT(2, setSlotModeStream,       base::PairStream)
-    ON_SLOT(2, setSlotModeSingle,       RfSensor)
+    ON_SLOT(2, setSlotModeSingle,       IRfSensor)
     ON_SLOT(3, setSlotRanges,           base::List)
     ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
     ON_SLOT(5, setSlotPrf,              base::IFrequency)      // Check for base::Frequency before base::Number
@@ -58,19 +58,19 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(9, setSlotSyncXmitWithScan, base::Boolean)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(RfSensor)
+BEGIN_EVENT_HANDLER(IRfSensor)
     ON_EVENT(TGT_DESIGNATE,onTgtDesignateEvent)
     ON_EVENT(SENSOR_RTS,onReturnToSearchEvent)
     ON_EVENT_OBJ(SCAN_START, onStartScanEvent, base::Integer)
     ON_EVENT_OBJ(SCAN_END, onEndScanEvent, base::Integer)
 END_EVENT_HANDLER()
 
-RfSensor::RfSensor()
+IRfSensor::IRfSensor()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void RfSensor::copyData(const RfSensor& org, const bool)
+void IRfSensor::copyData(const IRfSensor& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -100,7 +100,7 @@ void RfSensor::copyData(const RfSensor& org, const bool)
     setTypeId(org.typeId);
 }
 
-void RfSensor::deleteData()
+void IRfSensor::deleteData()
 {
     setRanges(nullptr,0);
     setTrackManager(nullptr);
@@ -115,7 +115,7 @@ void RfSensor::deleteData()
 //------------------------------------------------------------------------------
 // shutdownNotification()
 //------------------------------------------------------------------------------
-bool RfSensor::shutdownNotification()
+bool IRfSensor::shutdownNotification()
 {
    setTrackManager(nullptr);
    setMasterMode(nullptr);
@@ -131,7 +131,7 @@ bool RfSensor::shutdownNotification()
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void RfSensor::reset()
+void IRfSensor::reset()
 {
     BaseClass::reset();
 
@@ -167,7 +167,7 @@ void RfSensor::reset()
 //------------------------------------------------------------------------------
 // onStartScanEvent() -- process the start of a scan
 //------------------------------------------------------------------------------
-bool RfSensor::onStartScanEvent(const base::Integer* const bar)
+bool IRfSensor::onStartScanEvent(const base::Integer* const bar)
 {
     scanning = true;
     scanBar = bar->asInt();
@@ -177,7 +177,7 @@ bool RfSensor::onStartScanEvent(const base::Integer* const bar)
 //------------------------------------------------------------------------------
 // onEndScanEvent() -- process the end of a scan
 //------------------------------------------------------------------------------
-bool RfSensor::onEndScanEvent(const base::Integer* const)
+bool IRfSensor::onEndScanEvent(const base::Integer* const)
 {
     scanning = false;
     return true;
@@ -186,7 +186,7 @@ bool RfSensor::onEndScanEvent(const base::Integer* const)
 //------------------------------------------------------------------------------
 // isTransmitting() -- Returns true if the Radar is transmitting
 //------------------------------------------------------------------------------
-bool RfSensor::isTransmitting() const
+bool IRfSensor::isTransmitting() const
 {
     return BaseClass::isTransmitting() && (!syncXmitWithScan || isScanOn());
 }
@@ -194,7 +194,7 @@ bool RfSensor::isTransmitting() const
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void RfSensor::updateData(const double dt)
+void IRfSensor::updateData(const double dt)
 {
     // Proper range values
     if (nRanges > 0) {
@@ -211,37 +211,37 @@ void RfSensor::updateData(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the PRF (hertz)
-double RfSensor::getPRF() const
+double IRfSensor::getPRF() const
 {
    return prf;
 }
 
 // Returns the pulse width (seconds)
-double RfSensor::getPulseWidth() const
+double IRfSensor::getPulseWidth() const
 {
    return pulseWidth;
 }
 
 // Returns the beam width (radians)
-double RfSensor::getBeamWidth() const
+double IRfSensor::getBeamWidth() const
 {
    return beamWidth;
 }
 
 // Returns the type ID (e.g., "Emitter Name"; DIS Electromagnetic Emission PDU)
-const char* RfSensor::getTypeId() const
+const char* IRfSensor::getTypeId() const
 {
    return typeId;
 }
 
 // Returns the current range (nm)
-double RfSensor::getRange() const
+double IRfSensor::getRange() const
 {
    return rng;
 }
 
 // Returns a maximum of 'max' ranges in 'rngs' and returns actual number of ranges.
-int RfSensor::getRanges(double* const rngs, const int max)
+int IRfSensor::getRanges(double* const rngs, const int max)
 {
     // Do we have something to do?
     if (rngs == nullptr || max == 0 || nRanges == 0) return 0;
@@ -255,43 +255,43 @@ int RfSensor::getRanges(double* const rngs, const int max)
 }
 
 // Is the Sensor scanning
-bool RfSensor::isScanOn() const
+bool IRfSensor::isScanOn() const
 {
    return scanning;
 }
 
 // Returns the current bar number for a raster scan
-int RfSensor::getScanBar() const
+int IRfSensor::getScanBar() const
 {
    return scanBar;
 }
 
 // Returns the requested track manager's name
-const std::string& RfSensor::getTrackManagerName() const
+const std::string& IRfSensor::getTrackManagerName() const
 {
    return tmName;
 }
 
 // Returns our current track manager
-ITrackMgr* RfSensor::getTrackManager()
+ITrackMgr* IRfSensor::getTrackManager()
 {
    return trackManager;
 }
 
 // Returns our current track manager (const version)
-const ITrackMgr* RfSensor::getTrackManager() const
+const ITrackMgr* IRfSensor::getTrackManager() const
 {
    return trackManager;
 }
 
 // Returns the list of sensor submodes
-const base::PairStream* RfSensor::getModes() const
+const base::PairStream* IRfSensor::getModes() const
 {
    return modes;
 }
 
 // Returns the list of submodes
-base::PairStream* RfSensor::getModes()
+base::PairStream* IRfSensor::getModes()
 {
    return modes;
 }
@@ -301,7 +301,7 @@ base::PairStream* RfSensor::getModes()
 //------------------------------------------------------------------------------
 
 // setRanges() -- set the valid ranges for this sensor
-bool RfSensor::setRanges(const double* const rngs, const int n)
+bool IRfSensor::setRanges(const double* const rngs, const int n)
 {
     // Clear old ranges
     if (ranges != nullptr) delete[] ranges;
@@ -325,7 +325,7 @@ bool RfSensor::setRanges(const double* const rngs, const int n)
 }
 
 // Sets PRF (hertz; must be greater than 0)
-bool RfSensor::setPRF(const double v)
+bool IRfSensor::setPRF(const double v)
 {
    bool ok{};
    if (v > 0) {
@@ -336,7 +336,7 @@ bool RfSensor::setPRF(const double v)
 }
 
 // Sets the pulse width (seconds; must be greater than 0)
-bool RfSensor::setPulseWidth(const double v)
+bool IRfSensor::setPulseWidth(const double v)
 {
    bool ok{};
    if (v > 0) {
@@ -347,7 +347,7 @@ bool RfSensor::setPulseWidth(const double v)
 }
 
 // Sets the beam width (radians; must be greater than 0)
-bool RfSensor::setBeamWidth(const double v)
+bool IRfSensor::setBeamWidth(const double v)
 {
    bool ok{};
    if (v > 0) {
@@ -358,14 +358,14 @@ bool RfSensor::setBeamWidth(const double v)
 }
 
 // Sets the type ID
-bool RfSensor::setTypeId(const char* const str)
+bool IRfSensor::setTypeId(const char* const str)
 {
    base::utStrcpy(typeId, TYPE_ID_LENGTH, str);
    return true;
 }
 
 // Sets the current range (nm; must be greater than or equal 0)
-bool RfSensor::setRange(const double v)
+bool IRfSensor::setRange(const double v)
 {
    bool ok{};
    if (v >= 0) {
@@ -379,7 +379,7 @@ bool RfSensor::setRange(const double v)
 //------------------------------------------------------------------------------
 //  setSlotModeStream() -- takes a PairStream in and inits the mode list
 //------------------------------------------------------------------------------
-bool RfSensor::setSlotModeStream (base::PairStream* const obj)
+bool IRfSensor::setSlotModeStream (base::PairStream* const obj)
 {
     if (obj != nullptr) {
         // When a PairStream (i.e., more than one, a list) of pages
@@ -394,7 +394,7 @@ bool RfSensor::setSlotModeStream (base::PairStream* const obj)
 //------------------------------------------------------------------------------
 //  setSlotModeSingle() -- takes a single Mode and inits the mode list
 //------------------------------------------------------------------------------
-bool RfSensor::setSlotModeSingle(RfSensor* const obj)
+bool IRfSensor::setSlotModeSingle(IRfSensor* const obj)
 {
     if (modes != nullptr) modes->unref();
 
@@ -410,7 +410,7 @@ bool RfSensor::setSlotModeSingle(RfSensor* const obj)
 //------------------------------------------------------------------------------
 //  setSlotRanges() -- Our list of valid ranges (nm)
 //------------------------------------------------------------------------------
-bool RfSensor::setSlotRanges(base::List* const list)
+bool IRfSensor::setSlotRanges(base::List* const list)
 {
     bool ok{};
     if (list != nullptr) {
@@ -424,7 +424,7 @@ bool RfSensor::setSlotRanges(base::List* const list)
 //------------------------------------------------------------------------------
 //  setSlotInitRangeIdx() -- Our initial range index
 //------------------------------------------------------------------------------
-bool RfSensor::setSlotInitRangeIdx(base::Integer* const num)
+bool IRfSensor::setSlotInitRangeIdx(base::Integer* const num)
 {
     bool ok{};
     if (num != nullptr) {
@@ -436,7 +436,7 @@ bool RfSensor::setSlotInitRangeIdx(base::Integer* const num)
 //------------------------------------------------------------------------------
 // setInitRngIdx() -- set the initial range index for this sensor
 //------------------------------------------------------------------------------
-bool RfSensor::setInitRngIdx(const int idx)
+bool IRfSensor::setInitRngIdx(const int idx)
 {
     bool ok{};
     if (idx > 0) {
@@ -451,7 +451,7 @@ bool RfSensor::setInitRngIdx(const int idx)
 //------------------------------------------------------------------------------
 
 // Sets PRF as a base::Frequency
-bool RfSensor::setSlotPrf(const base::IFrequency* const x)
+bool IRfSensor::setSlotPrf(const base::IFrequency* const x)
 {
    bool ok{};
 
@@ -466,7 +466,7 @@ bool RfSensor::setSlotPrf(const base::IFrequency* const x)
 }
 
 // Sets PRF in hertz
-bool RfSensor::setSlotPrf(const base::INumber* const msg)
+bool IRfSensor::setSlotPrf(const base::INumber* const msg)
 {
    bool ok{};
 
@@ -487,7 +487,7 @@ bool RfSensor::setSlotPrf(const base::INumber* const msg)
 //------------------------------------------------------------------------------
 
 // Sets pulse width using base::Time
-bool RfSensor::setSlotPulseWidth(const base::ITime* const x)
+bool IRfSensor::setSlotPulseWidth(const base::ITime* const x)
 {
    bool ok{};
 
@@ -502,14 +502,14 @@ bool RfSensor::setSlotPulseWidth(const base::ITime* const x)
 }
 
 // Sets pulse width in seconds
-bool RfSensor::setSlotPulseWidth(const base::INumber* const msg)
+bool IRfSensor::setSlotPulseWidth(const base::INumber* const msg)
 {
    bool ok{};
 
    if (msg != nullptr) {
       ok = setPulseWidth( msg->asDouble() );
       if (!ok) {
-         std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
+         std::cerr << "IRfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
       }
    }
 
@@ -521,14 +521,14 @@ bool RfSensor::setSlotPulseWidth(const base::INumber* const msg)
 //------------------------------------------------------------------------------
 
 // Sets beam width as an base::Angle
-bool RfSensor::setSlotBeamWidth(const base::IAngle* const x)
+bool IRfSensor::setSlotBeamWidth(const base::IAngle* const x)
 {
    bool ok{};
 
    if (x != nullptr) {
       ok = setBeamWidth( x->getValueInRadians() );
       if (!ok) {
-         std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
+         std::cerr << "IRfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
    }
 
@@ -536,14 +536,14 @@ bool RfSensor::setSlotBeamWidth(const base::IAngle* const x)
 }
 
 // Sets beam width in radians
-bool RfSensor::setSlotBeamWidth(const base::INumber* const msg)
+bool IRfSensor::setSlotBeamWidth(const base::INumber* const msg)
 {
    bool ok{};
 
    if (msg != nullptr) {
       ok = setBeamWidth( msg->asDouble() );
       if (!ok) {
-         std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;
+         std::cerr << "IRfSensor::setBeamWidth: Error setting beam width!" << std::endl;
       }
 
    }
@@ -552,7 +552,7 @@ bool RfSensor::setSlotBeamWidth(const base::INumber* const msg)
 }
 
 // Sets the type ID
-bool RfSensor::setSlotTypeId(const base::String* const msg)
+bool IRfSensor::setSlotTypeId(const base::String* const msg)
 {
    bool ok{};
 
@@ -564,7 +564,7 @@ bool RfSensor::setSlotTypeId(const base::String* const msg)
 }
 
 // Sets sync transmitter with antenna scan flag
-bool RfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
+bool IRfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -577,7 +577,7 @@ bool RfSensor::setSlotSyncXmitWithScan(const base::Boolean* const msg)
 //------------------------------------------------------------------------------
 // onTgtDesignateEvent() -- Manage the target designate event
 //------------------------------------------------------------------------------
-bool RfSensor::onTgtDesignateEvent()
+bool IRfSensor::onTgtDesignateEvent()
 {
     return true;
 }
@@ -585,7 +585,7 @@ bool RfSensor::onTgtDesignateEvent()
 //------------------------------------------------------------------------------
 // onReturnToSearchEvent() -- Manage the sensor Return-To-Search event
 //------------------------------------------------------------------------------
-bool RfSensor::onReturnToSearchEvent()
+bool IRfSensor::onReturnToSearchEvent()
 {
     // Just reset the track manager ...
     if (trackManager != nullptr) trackManager->event(RESET_EVENT);
@@ -595,7 +595,7 @@ bool RfSensor::onReturnToSearchEvent()
 //------------------------------------------------------------------------------
 // setTrackManagerName() -- Sets the track manager's name
 //------------------------------------------------------------------------------
-bool RfSensor::setTrackManagerName(const std::string& name)
+bool IRfSensor::setTrackManagerName(const std::string& name)
 {
     tmName = name;
     return true;
@@ -604,7 +604,7 @@ bool RfSensor::setTrackManagerName(const std::string& name)
 //------------------------------------------------------------------------------
 // setTrackManager() -- Sets the track manager
 //------------------------------------------------------------------------------
-bool RfSensor::setTrackManager(ITrackMgr* tm)
+bool IRfSensor::setTrackManager(ITrackMgr* tm)
 {
     if (trackManager != nullptr) {
         trackManager->unref();
@@ -619,7 +619,7 @@ bool RfSensor::setTrackManager(ITrackMgr* tm)
 //------------------------------------------------------------------------------
 // setMasterMode() -- set our master mode
 //------------------------------------------------------------------------------
-bool RfSensor::setMasterMode(RfSensor* const m)
+bool IRfSensor::setMasterMode(IRfSensor* const m)
 {
     if (masterModePtr != nullptr) masterModePtr->unref();
     masterModePtr = m;
@@ -633,7 +633,7 @@ bool RfSensor::setMasterMode(RfSensor* const m)
 
 // setSlotTrackManagerName() -- sets the name of the track manager;
 // we'll lookup the actual track manager in reset() later
-bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
+bool IRfSensor::setSlotTrackManagerName(base::Identifier* const v)
 {
     return setTrackManagerName(v->asString());
 }
@@ -643,7 +643,7 @@ bool RfSensor::setSlotTrackManagerName(base::Identifier* const v)
 //  type Mode (or derived from it)and tell them that we are their
 //  master mode.
 //------------------------------------------------------------------------------
-bool RfSensor::processModes()
+bool IRfSensor::processModes()
 {
     bool ok{true};
     if (modes != nullptr) {
@@ -653,14 +653,14 @@ bool RfSensor::processModes()
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             item = item->getNext();
-            const auto m = dynamic_cast<RfSensor*>(p->object());
+            const auto m = dynamic_cast<IRfSensor*>(p->object());
             if (m != nullptr) {
                 // It MUST be of type Mode
                 m->setMasterMode(this);
                 m->container(this);
             } else {
                 ok = false;
-                std::cerr << "RfSensor::processModes(): object is not a RfSensor!" << std::endl;
+                std::cerr << "IRfSensor::processModes(): object is not a RfSensor!" << std::endl;
             }
         }
     }
@@ -670,7 +670,7 @@ bool RfSensor::processModes()
 //------------------------------------------------------------------------------
 // incRange() -- increase range
 //------------------------------------------------------------------------------
-bool RfSensor::incRange()
+bool IRfSensor::incRange()
 {
     bool ok{};
     if (rngIdx < nRanges) {
@@ -684,7 +684,7 @@ bool RfSensor::incRange()
 //------------------------------------------------------------------------------
 // decRange() -- decrement range
 //------------------------------------------------------------------------------
-bool RfSensor::decRange()
+bool IRfSensor::decRange()
 {
     bool ok{};
     if (rngIdx > 1) {

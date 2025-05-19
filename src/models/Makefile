@@ -95,7 +95,7 @@ OBJS =  \
 	system/IPilot.o \
 	system/Radar.o \
 	system/IRadio.o \
-	system/RfSensor.o \
+	system/IRfSensor.o \
 	system/IRfSystem.o \
 	system/Rwr.o \
 	system/Sar.o \

@@ -12,7 +12,7 @@
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/IPilot.hpp"
 #include "mixr/models/system/IRadio.hpp"
-#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
@@ -1397,15 +1397,15 @@ base::Pair* Player::getRadioByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level R/F sensor model
-RfSensor* Player::getSensor()
+IRfSensor* Player::getSensor()
 {
-   return (sensor != nullptr) ? (static_cast<RfSensor*>(sensor->object())) : nullptr;
+   return (sensor != nullptr) ? (static_cast<IRfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
-const RfSensor* Player::getSensor() const
+const IRfSensor* Player::getSensor() const
 {
-   return (sensor != nullptr) ? (static_cast<RfSensor*>(sensor->object())) : nullptr;
+   return (sensor != nullptr) ? (static_cast<IRfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
@@ -1416,9 +1416,9 @@ const std::string& Player::getSensorName() const
 }
 
 // Returns a R/F sensor model by its name
-RfSensor* Player::getSensorByName(const char* const name1)
+IRfSensor* Player::getSensorByName(const char* const name1)
 {
-   RfSensor* p{};
+   IRfSensor* p{};
    if (sensor != nullptr) {
 
       // Is this a complex (xxx.yyy name)?
@@ -1453,7 +1453,7 @@ RfSensor* Player::getSensorByName(const char* const name1)
       // Did we find a match?
       if (pair != nullptr) {
          // Yes, now make sure it's the correct type!
-         p = dynamic_cast<RfSensor*>( pair->object() );
+         p = dynamic_cast<IRfSensor*>( pair->object() );
       }
    }
    return p;
@@ -1465,7 +1465,7 @@ base::Pair* Player::getSensorByType(const std::type_info& type)
    base::Pair* p{};                // Our return value
 
    if (sensor != nullptr) {
-      RfSensor* root{getSensor()};   // Root node of the list
+      IRfSensor* root{getSensor()};   // Root node of the list
       if (root->isClassType(type)) {
          // Our root sensor is the correct type.
          p = sensor;
@@ -3169,7 +3169,7 @@ void Player::updateSystemPointers()
    setOnboardComputer( findByType(typeid(OnboardComputer)) );
    setPilot( findByType(typeid(IPilot)) );
    setRadio( findByType(typeid(IRadio)) );
-   setSensor( findByType(typeid(RfSensor)) );
+   setSensor( findByType(typeid(IRfSensor)) );
    setStoresMgr( findByType(typeid(StoresMgr)) );
 }
 
@@ -3377,7 +3377,7 @@ bool Player::setSensor(base::Pair* const x)
       if (sensor != nullptr) sensor->unref();
       sensor = nullptr;
       ok = true;
-   } else if ( x->object()->isClassType(typeid(RfSensor)) ) {
+   } else if ( x->object()->isClassType(typeid(IRfSensor)) ) {
       if (sensor != nullptr) sensor->unref();
       sensor = x;
       sensor->ref();

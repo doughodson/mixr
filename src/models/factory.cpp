@@ -84,7 +84,6 @@
 #include "mixr/models/system/MergingIrSensor.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Radar.hpp"
-#include "mixr/models/system/RfSensor.hpp"
 #include "mixr/models/system/Rwr.hpp"
 #include "mixr/models/system/Sar.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
@@ -383,9 +382,6 @@ base::IObject* factory(const std::string& name)
       obj = new Iff();
    }
    // Sensors
-   else if ( name == RfSensor::getFactoryName() ) {
-      obj = new RfSensor();
-   }
    else if ( name == SensorMgr::getFactoryName() ) {
       obj = new SensorMgr();
    }

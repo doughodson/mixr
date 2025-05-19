@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Rwr_HPP__
 #define __mixr_models_common_Rwr_HPP__
 
-#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/base/safe_queue.hpp"
 
 namespace mixr {
@@ -11,12 +11,12 @@ namespace models {
 //------------------------------------------------------------------------------
 // Class: Rwr
 //
-// Description: General Radar Warning Receiver (RWR) Model
+// Description: Concrete Radar Warning Receiver (RWR) Model
 // Factory name: Rwr
 //------------------------------------------------------------------------------
-class Rwr : public RfSensor
+class Rwr final: public IRfSensor
 {
-    DECLARE_SUBCLASS(Rwr, RfSensor)
+    DECLARE_SUBCLASS(Rwr, IRfSensor)
 
 public:
     Rwr();

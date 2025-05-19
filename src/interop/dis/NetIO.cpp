@@ -1089,8 +1089,8 @@ void NetIO::clearEmissionPduHandlers()
 // Find Emission PDU handlers
 //------------------------------------------------------------------------------
 
-// By RfSensor data
-const EmissionPduHandler* NetIO::findEmissionPduHandler(const models::RfSensor* const msg)
+// By IRfSensor data
+const EmissionPduHandler* NetIO::findEmissionPduHandler(const models::IRfSensor* const msg)
 {
    const EmissionPduHandler* handler{};
    if (msg != nullptr && nEmissionHandlers > 0) {

@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Integer; class ILength; class INetHandler; class Identifier; }
-namespace models { class Iff; class RfSensor; }
+namespace models { class Iff; class IRfSensor; }
 namespace interop { class INib; }
 namespace dis {
 class Nib;
@@ -106,7 +106,7 @@ struct ActionResponsePDU_R;
 //       will filter out all entities of that kind/domain type.
 //
 //    6) For outgoing emission PDUs, the list of EmissionPduHandlers are matched
-//       with RfSensors using the RfSensor::getTypeId().  That is, the type id
+//       with IRfSensors using the IRfSensor::getTypeId().  That is, the type id
 //       of the sensor is matched with the type id of the EmissionPduHandler's
 //       type id.  For incoming emission PDUs, the "emitter name" from the PDU
 //       is matched with the EmissionPduHandler's "emitterName" value.
@@ -239,7 +239,7 @@ public:
    virtual bool setVersion(const unsigned char v);                            // Sets the operating version number
 
    // Emission PDU handler
-   const EmissionPduHandler* findEmissionPduHandler(const models::RfSensor* const);
+   const EmissionPduHandler* findEmissionPduHandler(const models::IRfSensor* const);
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const);
 
    // Finds the Nib for 'ioType' by player, site and app IDs

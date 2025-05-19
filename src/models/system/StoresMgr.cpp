@@ -12,7 +12,7 @@
 #include "mixr/models/system/FuelTank.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
-#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Track.hpp"
 

@@ -40,7 +40,7 @@ END_SLOTTABLE(EmissionPduHandler)
 BEGIN_SLOT_MAP(EmissionPduHandler)
     ON_SLOT(1, setSlotEmitterName,     base::Integer )
     ON_SLOT(2, setSlotEmitterFunction, base::Integer )
-    ON_SLOT(3, setSlotSensorTemplate,  models::RfSensor )
+    ON_SLOT(3, setSlotSensorTemplate,  models::IRfSensor )
     ON_SLOT(4, setSlotAntennaTemplate, models::Antenna )
     ON_SLOT(5, setSlotDefaultIn,       base::Boolean )
     ON_SLOT(6, setSlotDefaultOut,      base::Boolean )
@@ -69,7 +69,7 @@ void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 
    setSensorModel(nullptr);
    if (org.getSensorModel() != nullptr) {
-      models::RfSensor* tmp{org.getSensorModel()->clone()};
+      models::IRfSensor* tmp{org.getSensorModel()->clone()};
       setSensorModel(tmp);
       tmp->unref();
    }
@@ -127,14 +127,14 @@ bool EmissionPduHandler::setEmitterFunction(const unsigned char num)
 }
 
 // Sets our R/F emitter system
-bool EmissionPduHandler::setSensor(models::RfSensor* const msg)
+bool EmissionPduHandler::setSensor(models::IRfSensor* const msg)
 {
    sensor = msg;
    return true;
 }
 
 // Sets our template sensor model
-bool EmissionPduHandler::setSensorModel(models::RfSensor* const msg)
+bool EmissionPduHandler::setSensorModel(models::IRfSensor* const msg)
 {
    sensorModel = msg;
    return true;
@@ -240,7 +240,7 @@ bool EmissionPduHandler::setSlotEmitterFunction(const base::Integer* const msg)
 }
 
 // Sets our template sensor model
-bool EmissionPduHandler::setSlotSensorTemplate(models::RfSensor* const msg)
+bool EmissionPduHandler::setSlotSensorTemplate(models::IRfSensor* const msg)
 {
    return setSensorModel(msg);
 }
@@ -272,8 +272,8 @@ bool EmissionPduHandler::setSlotDefaultOut(const base::Boolean* const msg)
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 
-// Returns true if RfSensor data matches our parameters
-bool EmissionPduHandler::isMatchingRfSystemType(const models::RfSensor* const p) const
+// Returns true if IRfSensor data matches our parameters
+bool EmissionPduHandler::isMatchingRfSystemType(const models::IRfSensor* const p) const
 {
    bool match{};
    if (p != nullptr && sensorModel != nullptr) {
@@ -299,7 +299,7 @@ bool EmissionPduHandler::isMatchingRfSystemType(const EmissionSystem* const p) c
 //------------------------------------------------------------------------------
 void EmissionPduHandler::setTimedOut()
 {
-   models::RfSensor* rfSys{getSensor()};
+   models::IRfSensor* rfSys{getSensor()};
    if (rfSys != nullptr) {
       rfSys->setTransmitterEnableFlag(false);
       rfSys->setReceiverEnabledFlag(false);
@@ -326,8 +326,8 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       // ---
       if (getSensor() == nullptr && !noTemplatesFound) {
 
-         models::RfSensor* rp{getSensorModel()};
-         models::Antenna*  ap{getAntennaModel()};
+         models::IRfSensor* rp{getSensorModel()};
+         models::Antenna*   ap{getAntennaModel()};
 
          // If we have both the RF system and antenna models ...
          if (rp != nullptr && ap != nullptr) {
@@ -360,7 +360,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
             // Give the sensor list to the proxy player
             {
                // First get the (top level) sensor manager
-               models::RfSensor* sm{player->getSensor()};
+               models::IRfSensor* sm{player->getSensor()};
                if (sm == nullptr) {
                   // Create the sensor manager
                   sm = new models::SensorMgr();
@@ -397,7 +397,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
       // ---
       // Update the proxy players sensor/antenna structures with the PDU data
       // ---
-      models::RfSensor* rfSys{getSensor()};
+      models::IRfSensor* rfSys{getSensor()};
       if (rfSys != nullptr && !noTemplatesFound) {
          models::Antenna* antenna{rfSys->getAntenna()};
 
@@ -444,7 +444,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 
    // No beam data -- turn off the transmitter and receiver
    else {
-      models::RfSensor* rfSys{getSensor()};
+      models::IRfSensor* rfSys{getSensor()};
       if (rfSys != nullptr) {
          rfSys->setTransmitterEnableFlag(false);
          rfSys->setReceiverEnabledFlag(false);
@@ -541,7 +541,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
    if (nib == nullptr) return NO;
    NetIO* const disIO{static_cast<NetIO*>(nib->getNetIO())};
    if (disIO == nullptr) return NO;
-   models::RfSensor* beam{getSensor()};
+   models::IRfSensor* beam{getSensor()};
    if (beam == nullptr) return NO;
 
    // ---

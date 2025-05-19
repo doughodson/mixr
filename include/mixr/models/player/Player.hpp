@@ -33,7 +33,7 @@ class INavigation;
 class OnboardComputer;
 class IPilot;
 class IRadio;
-class RfSensor;
+class IRfSensor;
 class StoresMgr;
 class IWeapon;
 
@@ -320,7 +320,7 @@ class Track;
 //          obc:           ( OnboardComputer ... )  // Onboard computer model
 //          pilot:         ( IPilot ...          )  // Pilot model
 //          radios:        ( Radio ...           )  // Radio model
-//          sensors:       ( RfSensor ...        )  // R/F Sensor model
+//          sensors:       ( IRfSensor ...       )  // R/F Sensor model
 //          irSystems:     ( IrSystem ...        )  // IR system model
 //          sms:           ( StoresMgr ...       )  // Stores management model
 //
@@ -640,10 +640,10 @@ public:
    IRadio* getRadioByName(const char* const);                  // Returns a Radio model by its name
    base::Pair* getRadioByType(const std::type_info& type);     // Returns a Radio model by its type
 
-   RfSensor* getSensor();                                      // Player's top level R/F sensor model
-   const RfSensor* getSensor() const;                          // Player's top level R/F sensor model (const version)
+   IRfSensor* getSensor();                                     // Player's top level R/F sensor model
+   const IRfSensor* getSensor() const;                         // Player's top level R/F sensor model (const version)
    const std::string& getSensorName() const;                   // Name of the player's top level R/F sensor model
-   RfSensor* getSensorByName(const char* const);               // Returns a R/F sensor model by its name
+   IRfSensor* getSensorByName(const char* const);              // Returns a R/F sensor model by its name
    base::Pair* getSensorByType(const std::type_info& type);    // Returns a R/F sensor model by its type
 
    IrSystem* getIrSystem();                                    // Player's top level IR sensor model

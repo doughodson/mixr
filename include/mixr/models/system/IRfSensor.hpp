@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_RfSensor_HPP__
-#define __mixr_models_common_RfSensor_HPP__
+#ifndef __mixr_models_common_IRfSensor_HPP__
+#define __mixr_models_common_IRfSensor_HPP__
 
 #include "mixr/models/system/IRfSystem.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
@@ -16,16 +16,16 @@ class Player;
 class ITrackMgr;
 
 //------------------------------------------------------------------------------
-// Class: RfSensor
-// Description: Base class for R/F Sensor Models.  Provides a common
+// Class: IRfSensor
+// Description: Interface class for R/F Sensor Models.  Provides a common
 //              interface, and some default behavior, for R/F sensors.
 //
-// Factory name: RfSensor
+// Factory name: IRfSensor
 // Slots:
 //    trackManagerName     <Identifier>  ! Name of the requested Track Manager (default: "")
 //
 //    modes                <PairStream>  ! List of submodes (default: 0)
-//                         <RfSensor>    ! Single (only) submode
+//                         <IRfSensor>   ! Single (only) submode
 //
 //    ranges               <List>        ! List of sensor ranges (nm) [vector] (default: 0)
 //
@@ -57,12 +57,12 @@ class ITrackMgr;
 //    class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
-class RfSensor : public IRfSystem
+class IRfSensor : public IRfSystem
 {
-    DECLARE_SUBCLASS(RfSensor, IRfSystem)
+    DECLARE_SUBCLASS(IRfSensor, IRfSystem)
 
 public:
-    RfSensor();
+    IRfSensor();
 
     virtual double getPRF() const;                           // Returns the PRF (hertz)
     virtual bool setPRF(const double);                       // Sets PRF (hertz; must be greater than 0)
@@ -83,7 +83,7 @@ public:
     virtual int getScanBar() const;                          // Returns the current bar number for a raster scan
 
     virtual const base::PairStream* getModes() const;        // Returns the list of sensor submodes
-    virtual bool setMasterMode(RfSensor* const);             // Set our master mode (container)
+    virtual bool setMasterMode(IRfSensor* const);            // Set our master mode (container)
 
     virtual const std::string& getTrackManagerName() const;  // Returns the requested track manager's name
     virtual bool setTrackManagerName(const std::string&);    // Sets the name of the track manager to use
@@ -130,7 +130,7 @@ private:
     bool           syncXmitWithScan{};  // Sync transmitter with antenna scan flag
 
     std::string tmName;                 // Name of our track manager
-    RfSensor*     masterModePtr{};      // Our Master (Parent) mode (e.g., Sensor)
+    IRfSensor*     masterModePtr{};     // Our Master (Parent) mode (e.g., Sensor)
     ITrackMgr* trackManager{};          // Our Track manager -- managed by the onboard computer
 
     static const int TYPE_ID_LENGTH{64};
@@ -145,7 +145,7 @@ private:
    // slot table helper methods
    bool setSlotTrackManagerName(base::Identifier* const);     // Sets our track manager by name
    bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
-   bool setSlotModeSingle(RfSensor* const);                   // Sets a single (only) R/F sensor submode
+   bool setSlotModeSingle(IRfSensor* const);                  // Sets a single (only) R/F sensor submode
    bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)
    bool setSlotInitRangeIdx(base::Integer* const);            // Sets out initial range index [ 1 .. nRanges ]
    bool setSlotPrf(const base::IFrequency* const);            // Sets PRF as a base::Frequency

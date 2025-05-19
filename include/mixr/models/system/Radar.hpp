@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Radar_HPP__
 #define __mixr_models_common_Radar_HPP__
 
-#include "mixr/models/system/RfSensor.hpp"
+#include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/base/safe_queue.hpp"
 
 #include <cmath>
@@ -13,7 +13,7 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Radar
-// Description: Generic Radar Model
+// Description: Interface for Radar models
 //
 // Default R/F sensor type ID is "RADAR"
 //
@@ -23,9 +23,9 @@ namespace models {
 //             <base::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
-class Radar : public RfSensor
+class Radar : public IRfSensor
 {
-   DECLARE_SUBCLASS(Radar, RfSensor)
+   DECLARE_SUBCLASS(Radar, IRfSensor)
 
 public:
    // Max number of reports (per scan)

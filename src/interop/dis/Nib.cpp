@@ -322,7 +322,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
 bool Nib::emitterBeamsManager(const double curExecTime)
 {
    // ---
-   // First, find all of our player's RfSensor systems and setup their handlers
+   // First, find all of our player's IRfSensor systems and setup their handlers
    // ---
    if ( numEmissionSystems == 0 ) {
 
@@ -331,7 +331,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
          // (DPG -- #### only a simple, single-beam Radar)
          const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::Radar));
          if (pair != nullptr) {
-            models::RfSensor* rs = (models::RfSensor*) pair->object();
+            models::IRfSensor* rs = (models::IRfSensor*) pair->object();
 
             // When we have a R/F sensor, create a handler for it
             EmissionPduHandler* handler = nullptr;
@@ -360,7 +360,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
       {
          const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::Jammer));
          if (pair != nullptr) {
-            models::RfSensor* js = (models::RfSensor*) pair->object();
+            models::IRfSensor* js = (models::IRfSensor*) pair->object();
 
             bool singleBeam = true;
             base::PairStream* subcomponents = js->getComponents();
