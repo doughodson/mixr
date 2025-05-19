@@ -5,7 +5,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 
 #include "mixr/models/system/Jammer.hpp"
-#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/IRadar.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/Pair.hpp"
@@ -329,7 +329,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
       // Check for the single-beam RADAR
       {
          // (DPG -- #### only a simple, single-beam Radar)
-         const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::Radar));
+         const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::IRadar));
          if (pair != nullptr) {
             models::IRfSensor* rs = (models::IRfSensor*) pair->object();
 

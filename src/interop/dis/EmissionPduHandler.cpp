@@ -10,7 +10,6 @@
 #include "mixr/models/Track.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/Jammer.hpp"
-#include "mixr/models/system/Radar.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
 
 #include "mixr/models/WorldModel.hpp"
