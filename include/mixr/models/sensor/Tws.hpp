@@ -2,18 +2,18 @@
 #ifndef __mixr_models_common_Tws_HPP__
 #define __mixr_models_common_Tws_HPP__
 
-#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/IRadar.hpp"
 
 namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Tws
-// Description: Simple, Track-While-Scan Mode Radar
+// Description: Concrete Simple, Track-While-Scan Mode Radar
 //------------------------------------------------------------------------------
-class Tws : public Radar
+class Tws : public IRadar
 {
-    DECLARE_SUBCLASS(Tws, Radar)
+    DECLARE_SUBCLASS(Tws, IRadar)
 
 public:
     Tws();

@@ -93,7 +93,7 @@ OBJS =  \
 	system/MergingIrSensor.o \
 	system/OnboardComputer.o \
 	system/IPilot.o \
-	system/Radar.o \
+	system/IRadar.o \
 	system/IRadio.o \
 	system/IRfSensor.o \
 	system/IRfSystem.o \

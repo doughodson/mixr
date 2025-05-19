@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Radar_HPP__
-#define __mixr_models_common_Radar_HPP__
+#ifndef __mixr_models_IRadar_HPP__
+#define __mixr_models_IRadar_HPP__
 
 #include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/base/safe_queue.hpp"
@@ -12,20 +12,20 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: Radar
+// Class: IRadar
 // Description: Interface for Radar models
 //
 // Default R/F sensor type ID is "RADAR"
 //
-// Factory name: Radar
+// Factory name: IRadar
 // Slots:
 //    igain    <base::INumber>    ! Integrator gain (no units; default: 1.0f)
 //             <base::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
-class Radar : public IRfSensor
+class IRadar : public IRfSensor
 {
-   DECLARE_SUBCLASS(Radar, IRfSensor)
+   DECLARE_SUBCLASS(IRadar, IRfSensor)
 
 public:
    // Max number of reports (per scan)
@@ -35,7 +35,7 @@ public:
    static const unsigned int PTRS_PER_SWEEP{128};      // Number of points per sweep in RB display
 
 public:
-   Radar();
+   IRadar();
 
    const double* getSweep(const unsigned int n) const     { return (n < NUM_SWEEPS ?  sweeps[n] : 0); }
    const double* getClosure(const unsigned int n) const   { return (n < NUM_SWEEPS ?  vclos[n]  : 0); }

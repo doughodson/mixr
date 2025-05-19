@@ -13,7 +13,7 @@ class Player;
 
 //------------------------------------------------------------------------------
 // Class: CollisionDetect
-// Description: Collision detection component -- when added as a component to
+// Description: Concrete collision detection component -- when added as a component to
 //              a player (i.e., our ownship), we will look for collisions with
 //              other players in the simulation player list.  When a collision
 //              is detected, 'CRASH_EVENT' events are sent to our ownship and the
@@ -43,7 +43,7 @@ class Player;
 //    sendCrashEvents     <Boolean>        ! Send 'CRASH_EVENT' events on collisions (default: false)
 //
 //------------------------------------------------------------------------------
-class CollisionDetect : public ISystem
+class CollisionDetect final: public ISystem
 {
    DECLARE_SUBCLASS(CollisionDetect, ISystem)
 

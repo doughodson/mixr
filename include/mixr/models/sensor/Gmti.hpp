@@ -1,7 +1,7 @@
 #ifndef __mixr_models_common_Gmti_HPP__
 #define __mixr_models_common_Gmti_HPP__
 
-#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/IRadar.hpp"
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
@@ -10,11 +10,11 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Gmti
-// Description: Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
+// Description: Concrete, Very simple, Ground-Moving-Target-Indication (GMTI) mode radar
 //------------------------------------------------------------------------------
-class Gmti : public Radar
+class Gmti final: public IRadar
 {
-   DECLARE_SUBCLASS(Gmti, Radar)
+   DECLARE_SUBCLASS(Gmti, IRadar)
 
 public:
    Gmti();

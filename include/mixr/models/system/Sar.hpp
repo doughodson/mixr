@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Sar_HPP__
 #define __mixr_models_common_Sar_HPP__
 
-#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/IRadar.hpp"
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
@@ -13,15 +13,15 @@ class Image;
 //------------------------------------------------------------------------------
 // Class: Sar
 //
-// Description: Generic SAR
+// Description: Concrete SAR class
 // Factory name: Sar
 // Slots:
 //    chipSize      <base::Integer>      ! Chip size (pixels) (default: 0)
 //
 //------------------------------------------------------------------------------
-class Sar : public Radar
+class Sar final: public IRadar
 {
-    DECLARE_SUBCLASS(Sar, Radar)
+    DECLARE_SUBCLASS(Sar, IRadar)
 
 public:
    Sar();

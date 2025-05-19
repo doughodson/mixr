@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/Radar.hpp"
+#include "mixr/models/system/IRadar.hpp"
 
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/system/Antenna.hpp"
@@ -16,17 +16,17 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Radar, "Radar")
+IMPLEMENT_PARTIAL_SUBCLASS(IRadar, "IRadar")
 
-BEGIN_SLOTTABLE(Radar)
+BEGIN_SLOTTABLE(IRadar)
    "igain",    //  1: RF: Integrator gain (dB or no units; def: 1.0)
-END_SLOTTABLE(Radar)
+END_SLOTTABLE(IRadar)
 
-BEGIN_SLOT_MAP(Radar)
+BEGIN_SLOT_MAP(IRadar)
     ON_SLOT(1,  setSlotIGain, base::INumber)
 END_SLOT_MAP()
 
-Radar::Radar()
+IRadar::IRadar()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -35,29 +35,29 @@ Radar::Radar()
    setTypeId("RADAR");
 }
 
-Radar::Radar(const Radar& org)
+IRadar::IRadar(const IRadar& org)
 {
     STANDARD_CONSTRUCTOR()
     copyData(org, true);
 }
 
-Radar::~Radar()
+IRadar::~IRadar()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Radar& Radar::operator=(const Radar& org)
+IRadar& IRadar::operator=(const IRadar& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
 
-Radar* Radar::clone() const
+IRadar* IRadar::clone() const
 {
-    return new Radar(*this);
+    return new IRadar(*this);
 }
 
-void Radar::copyData(const Radar& org, const bool)
+void IRadar::copyData(const IRadar& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -77,7 +77,7 @@ void Radar::copyData(const Radar& org, const bool)
    rfIGain = org.rfIGain;
 }
 
-void Radar::deleteData()
+void IRadar::deleteData()
 {
    clearTracksAndQueues();
 }
@@ -85,7 +85,7 @@ void Radar::deleteData()
 //------------------------------------------------------------------------------
 // shutdownNotification()
 //------------------------------------------------------------------------------
-bool Radar::shutdownNotification()
+bool IRadar::shutdownNotification()
 {
    clearTracksAndQueues();
 
@@ -95,7 +95,7 @@ bool Radar::shutdownNotification()
 //------------------------------------------------------------------------------
 // clearTracksAndQueues() -- clear out tracks and queues
 //------------------------------------------------------------------------------
-void Radar::clearTracksAndQueues()
+void IRadar::clearTracksAndQueues()
 {
    // Clear reports
    base::lock(myLock);
@@ -120,7 +120,7 @@ void Radar::clearTracksAndQueues()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void Radar::updateData(const double dt)
+void IRadar::updateData(const double dt)
 {
    ageSweeps();
 
@@ -131,7 +131,7 @@ void Radar::updateData(const double dt)
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void Radar::reset()
+void IRadar::reset()
 {
    BaseClass::reset();
    clearTracksAndQueues();
@@ -142,7 +142,7 @@ void Radar::reset()
 //------------------------------------------------------------------------------
 
 // Sets integration gain
-bool Radar::setIGain(const double g)
+bool IRadar::setIGain(const double g)
 {
    rfIGain = g;
    return true;
@@ -151,7 +151,7 @@ bool Radar::setIGain(const double g)
 //------------------------------------------------------------------------------
 // transmit() -- send radar emissions
 //------------------------------------------------------------------------------
-void Radar::transmit(const double dt)
+void IRadar::transmit(const double dt)
 {
    BaseClass::transmit(dt);
 
@@ -182,7 +182,7 @@ void Radar::transmit(const double dt)
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Radar::receive(const double dt)
+void IRadar::receive(const double dt)
 {
    BaseClass::receive(dt);
 
@@ -323,7 +323,7 @@ void Radar::receive(const double dt)
 //------------------------------------------------------------------------------
 // process() -- process the TWS reports
 //------------------------------------------------------------------------------
-void Radar::process(const double dt)
+void IRadar::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -423,7 +423,7 @@ void Radar::process(const double dt)
 //------------------------------------------------------------------------------
 // getReports() -- returns a list of prereferenced pointers to emission reports
 //------------------------------------------------------------------------------
-unsigned int Radar::getReports(const Emission** list, const unsigned int max) const
+unsigned int IRadar::getReports(const Emission** list, const unsigned int max) const
 {
    unsigned int num{};
    if (list != nullptr && max > 0 && numReports > 0) {
@@ -443,7 +443,7 @@ unsigned int Radar::getReports(const Emission** list, const unsigned int max) co
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by player 'p'
 //------------------------------------------------------------------------------
-bool Radar::killedNotification(Player* const p)
+bool IRadar::killedNotification(Player* const p)
 {
    clearTracksAndQueues();
 
@@ -457,7 +457,7 @@ bool Radar::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // onEndScanEvent() -- process the end of a scan
 //------------------------------------------------------------------------------
-bool Radar::onEndScanEvent(const base::Integer* const bar)
+bool IRadar::onEndScanEvent(const base::Integer* const bar)
 {
    endOfScanFlg = true;
    BaseClass::onEndScanEvent(bar);
@@ -467,7 +467,7 @@ bool Radar::onEndScanEvent(const base::Integer* const bar)
 //------------------------------------------------------------------------------
 // clearSweep -- Computer power at angle off center of beam
 //------------------------------------------------------------------------------
-void Radar::clearSweep(const unsigned int n)
+void IRadar::clearSweep(const unsigned int n)
 {
    if (n < NUM_SWEEPS) {
       for (unsigned int i = 0; i < PTRS_PER_SWEEP; i++) {
@@ -480,7 +480,7 @@ void Radar::clearSweep(const unsigned int n)
 //------------------------------------------------------------------------------
 // ageSweeps -- age the power in the sweeps
 //------------------------------------------------------------------------------
-void Radar::ageSweeps()
+void IRadar::ageSweeps()
 {
    const double aging{0.002};
    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
@@ -498,7 +498,7 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 // computeSweepIndex -- compute the sweep index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeSweepIndex(const double az)
+unsigned int IRadar::computeSweepIndex(const double az)
 {
    double s{static_cast<double>(NUM_SWEEPS-1)/60.0};      // sweeps per display scaling
 
@@ -512,7 +512,7 @@ unsigned int Radar::computeSweepIndex(const double az)
 //------------------------------------------------------------------------------
 // computeRangeIndex -- compute the range index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeRangeIndex(const double rng)
+unsigned int IRadar::computeRangeIndex(const double rng)
 {
    // range must be positive, if not, return return an index of 0
    if (rng < 0) return 0;
@@ -530,7 +530,7 @@ unsigned int Radar::computeRangeIndex(const double rng)
 //------------------------------------------------------------------------------
 
 // igain: Integrator gain (dB or no units; def: 1.0)
-bool Radar::setSlotIGain(base::INumber* const v)
+bool IRadar::setSlotIGain(base::INumber* const v)
 {
    bool ok{};
    if (v != nullptr) {
