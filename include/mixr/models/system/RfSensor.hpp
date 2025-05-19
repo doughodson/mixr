@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_RfSensor_HPP__
 #define __mixr_models_common_RfSensor_HPP__
 
-#include "mixr/models/system/RfSystem.hpp"
+#include "mixr/models/system/IRfSystem.hpp"
 #include "mixr/base/units/util/angle_utils.hpp"
 
 #include <string>
@@ -57,9 +57,9 @@ class ITrackMgr;
 //    class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
-class RfSensor : public RfSystem
+class RfSensor : public IRfSystem
 {
-    DECLARE_SUBCLASS(RfSensor, RfSystem)
+    DECLARE_SUBCLASS(RfSensor, IRfSystem)
 
 public:
     RfSensor();

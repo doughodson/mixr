@@ -1,7 +1,7 @@
 
 #include "mixr/models/Emission.hpp"
 
-#include "mixr/models/system/RfSystem.hpp"
+#include "mixr/models/system/IRfSystem.hpp"
 
 namespace mixr {
 namespace models {
@@ -33,8 +33,8 @@ void Emission::copyData(const Emission& org, const bool)
     lossXmit = org.lossXmit;
     rcs = org.rcs;
 
-    const RfSystem* mm = org.transmitter;
-    setTransmitter( const_cast<RfSystem*>(static_cast<const RfSystem*>(mm)) );
+    const IRfSystem* mm = org.transmitter;
+    setTransmitter( const_cast<IRfSystem*>(static_cast<const IRfSystem*>(mm)) );
 
     ecmFlag = org.ecmFlag;
 }
@@ -67,7 +67,7 @@ void Emission::setRange(const double r)
 //------------------------------------------------------------------------------
 // setTransmitter() -- Sets the pointer to the source
 //------------------------------------------------------------------------------
-void Emission::setTransmitter(RfSystem* const t)
+void Emission::setTransmitter(IRfSystem* const t)
 {
    //if (transmitter != nullptr) {
    //   transmitter->unref();

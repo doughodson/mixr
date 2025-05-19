@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IRadio_HPP__
 #define __mixr_models_common_IRadio_HPP__
 
-#include "mixr/models/system/RfSystem.hpp"
+#include "mixr/models/system/IRfSystem.hpp"
 
 namespace mixr {
 namespace base { class Integer; class INumber; class PairStream; }
@@ -71,9 +71,9 @@ class Emission;
 //       )
 //
 //------------------------------------------------------------------------------
-class IRadio : public RfSystem
+class IRadio : public IRfSystem
 {
-   DECLARE_SUBCLASS(IRadio, RfSystem)
+   DECLARE_SUBCLASS(IRadio, IRfSystem)
 
 public:
    enum { MAX_CHANNELS = 500 };

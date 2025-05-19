@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace models {
-class RfSystem;
+class IRfSystem;
 
 //------------------------------------------------------------------------------
 // Class: Emission
@@ -125,13 +125,13 @@ public:
    void setRCS(const double f)                                { rcs = f; }
 
    // Pointer to the R/F system that transmitted this emission
-   RfSystem* getTransmitter()                                 { return transmitter; }
+   IRfSystem* getTransmitter()                                 { return transmitter; }
 
    // Pointer to the R/F system that transmitted this emission
-   const RfSystem* getTransmitter() const                     { return transmitter; }
+   const IRfSystem* getTransmitter() const                     { return transmitter; }
 
    // Sets the pointer to the R/F system that transmitted this emission
-   void setTransmitter(RfSystem* const t);
+   void setTransmitter(IRfSystem* const t);
 
    // ECM emission flag (this is an ECM emission)
    bool isECM() const                                         { return (ecmFlag!=ECM_OFF); }
@@ -157,7 +157,7 @@ private:
    double lossXmit{1.0};    // Transmit loss (default: 1.0)     (no units)
    double rcs{};            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar{Antenna::Polarization::NONE};  // Antenna polarization   (enum)
-   RfSystem* transmitter{};          // The system that transmitted the emission
+   IRfSystem* transmitter{};          // The system that transmitted the emission
    unsigned int ecmFlag{ECM_OFF};    // ECM enumeration
 };
 

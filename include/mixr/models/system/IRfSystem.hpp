@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_RfSystem_HPP__
-#define __mixr_models_common_RfSystem_HPP__
+#ifndef __mixr_models_IRfSystem_HPP__
+#define __mixr_models_IRfSystem_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 #include <array>
@@ -12,9 +12,9 @@ class Antenna;
 class Emission;
 
 //------------------------------------------------------------------------------
-// Class: RfSystem
+// Class: IRfSystem
 //
-// Description: Generic class for all R/F type systems.  Provides a common
+// Description: Interface to all R/F type systems.  Provides a common
 //              interface, and some default behavior, for R/F systems.
 //
 // Notes
@@ -27,7 +27,7 @@ class Emission;
 //    various R/F systems to use or not use this gimbal function -- our default
 //    member function processPlayersOfInterest() does use the gimbal function.
 //
-// Factory name: RfSystem
+// Factory name: IRfSystem
 // Slots:
 //    antennaName        <base::Identifier>    ! Name of the requested Antenna
 //
@@ -57,12 +57,12 @@ class Emission;
 //    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
 //
 //------------------------------------------------------------------------------
-class RfSystem : public ISystem
+class IRfSystem : public ISystem
 {
-   DECLARE_SUBCLASS(RfSystem, ISystem)
+   DECLARE_SUBCLASS(IRfSystem, ISystem)
 
 public:
-   RfSystem();
+   IRfSystem();
 
    virtual bool isReceiverEnabled() const;               // Returns true if the R/F system's receiver is enabled
    virtual bool isTransmitterEnabled() const;            // Returns true if the R/F system's transmitter is enabled

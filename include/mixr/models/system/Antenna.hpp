@@ -12,7 +12,7 @@ namespace mixr {
 namespace base { class IAngle; class Boolean; class IFunction; class Identifier; class INumber; class IPower; }
 namespace models {
 class Player;
-class RfSystem;
+class IRfSystem;
 
 //------------------------------------------------------------------------------
 // Class: Antenna
@@ -63,9 +63,9 @@ public:
 
    virtual void rfTransmit(Emission* const em);
 
-   RfSystem* getSystem()                                 { return sys; }
-   const RfSystem* getSystem() const                     { return sys; }
-   virtual bool setSystem(RfSystem* const);
+   IRfSystem* getSystem()                                 { return sys; }
+   const IRfSystem* getSystem() const                     { return sys; }
+   virtual bool setSystem(IRfSystem* const);
 
    // System limits
    int getMaxEmissions() const                           { return MAX_EMISSIONS; }
@@ -138,7 +138,7 @@ protected:
 private:
    static const int MAX_EMISSIONS{10000};       // max size of emission queues and arrays
 
-   RfSystem* sys{};                             // assigned R/F system (e.g., sensor, radio)
+   IRfSystem* sys{};                            // assigned R/F system (e.g., sensor, radio)
 
    // antenna parameters
    Polarization polar{Polarization::NONE};      // polarization  (enum)

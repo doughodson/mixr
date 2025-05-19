@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/system/RfSystem.hpp"
+#include "mixr/models/system/IRfSystem.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
 
@@ -170,7 +170,7 @@ void Antenna::process(const double dt)
 //------------------------------------------------------------------------------
 // setSystem() -- Set pointer to our companion system
 //------------------------------------------------------------------------------
-bool Antenna::setSystem(RfSystem* const s)
+bool Antenna::setSystem(IRfSystem* const s)
 {
    if (sys != nullptr) sys->unref();
    sys = s;
@@ -565,7 +565,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 bool Antenna::onStartScanEvent(base::Integer* const bar)
 {
    // Pass the event to our system
-   RfSystem* p{getSystem()};
+   IRfSystem* p{getSystem()};
    if (p != nullptr) p->event(SCAN_START, bar);
    return true;
 }
@@ -576,7 +576,7 @@ bool Antenna::onStartScanEvent(base::Integer* const bar)
 bool Antenna::onEndScanEvent(base::Integer* const bar)
 {
    // Pass the event to our sensor
-   RfSystem* p{getSystem()};
+   IRfSystem* p{getSystem()};
    if (p != nullptr) p->event(SCAN_END, bar);
    return true;
 }
@@ -603,7 +603,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
    if (fromPlayerOfInterest(em)) {
 
       Player* ownship{getOwnship()};
-      RfSystem* sys1{getSystem()};
+      IRfSystem* sys1{getSystem()};
       if (ownship != nullptr && sys1 != nullptr) {
          sys1->ref();
 
@@ -695,7 +695,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
 {
     bool used{};
     // Pass all returned emissions to our sensor
-    RfSystem* sys1{getSystem()};
+    IRfSystem* sys1{getSystem()};
     if (sys1 != nullptr) {
         sys1->ref();
 
