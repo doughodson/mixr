@@ -4,7 +4,11 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_models.a
 
 OBJS =  \
-	action/Actions.o \
+	action/Action.o \
+	action/ActionCamuflageType.o \
+	action/ActionDecoyRelease.o \
+	action/ActionImagingSar.o \
+	action/ActionWeaponRelease.o \
 	dynamics/IAerodynamics.o \
 	dynamics/IDynamics.o \
 	dynamics/LaeroDynamics.o  \

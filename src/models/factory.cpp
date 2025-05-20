@@ -3,6 +3,12 @@
 
 #include "mixr/base/IObject.hpp"
 
+// actions
+#include "mixr/models/action/ActionCamouflageType.hpp"
+#include "mixr/models/action/ActionDecoyRelease.hpp"
+#include "mixr/models/action/ActionImagingSar.hpp"
+#include "mixr/models/action/ActionWeaponRelease.hpp"
+
 // dynamics models
 #include "mixr/models/dynamics/RacDynamics.hpp"
 #include "mixr/models/dynamics/LaeroDynamics.hpp"
@@ -103,8 +109,6 @@
 #include "mixr/models/signature/RfTrihedralCRSignature.hpp"
 
 // misc
-#include "mixr/models/action/Actions.hpp"
-
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"
 
