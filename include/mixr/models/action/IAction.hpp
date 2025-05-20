@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_Action_HPP__
-#define __mixr_models_Action_HPP__
+#ifndef __mixr_models_IAction_HPP__
+#define __mixr_models_IAction_HPP__
 
 #include "mixr/base/ubf/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
@@ -11,8 +11,8 @@ namespace models {
 class OnboardComputer;
 
 //------------------------------------------------------------------------------
-// Class: Action
-// Description: Actions that occur at steerpoints.
+// Class: IAction
+// Description: Interface for actions that occur at steerpoints.
 //
 // Notes:
 //
@@ -33,12 +33,12 @@ class OnboardComputer;
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public base::ubf::IAction
+class IAction : public base::ubf::IAction
 {
-    DECLARE_SUBCLASS(Action, base::ubf::IAction)
+    DECLARE_SUBCLASS(IAction, base::ubf::IAction)
 
 public:
-   Action();
+   IAction();
 
    virtual bool isReadyToStart();                               // True if action is ready to start
    virtual bool isInProgress();                                 // True if action is in progress

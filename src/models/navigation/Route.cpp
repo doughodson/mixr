@@ -5,7 +5,7 @@
 #include "mixr/models/player/Player.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"

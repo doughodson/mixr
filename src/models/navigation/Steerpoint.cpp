@@ -1,7 +1,7 @@
 
 #include "mixr/models/navigation/Steerpoint.hpp"
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/player/Player.hpp"
 
@@ -46,7 +46,7 @@ BEGIN_SLOTTABLE(Steerpoint)
     "description",      // 11) Description              (String)
     "magvar",           // 12) Magnetic Var @ point     (Angle)
     "next",             // 13) Next steerpoint number: by name (Identifier) or index (Number)
-    "action",           // 14) Steerpoint action        (Action)
+    "action",           // 14) Steerpoint action        (IAction)
 END_SLOTTABLE(Steerpoint)
 
 BEGIN_SLOT_MAP(Steerpoint)
@@ -84,7 +84,7 @@ BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT(13, setSlotNext,           base::Identifier)
     ON_SLOT(13, setSlotNext,           base::Integer)
 
-    ON_SLOT(14, setSlotAction,         Action)
+    ON_SLOT(14, setSlotAction,         IAction)
 END_SLOT_MAP()
 
 Steerpoint::Steerpoint()
@@ -118,7 +118,7 @@ void Steerpoint::copyData(const Steerpoint& org, const bool)
     }
 
     {
-       Action* aa{};
+       IAction* aa{};
        if (org.action != nullptr) aa = org.action->clone();
        action = aa;
        if (aa != nullptr) aa->unref();
@@ -317,7 +317,7 @@ void Steerpoint::setCmdAirspeedKts(const double x)
 }
 
 // Sets the action to be performed
-bool Steerpoint::setAction(Action* const aa)
+bool Steerpoint::setAction(IAction* const aa)
 {
    action = aa;
    return true;

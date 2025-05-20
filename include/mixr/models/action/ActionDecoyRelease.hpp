@@ -1,7 +1,7 @@
 #ifndef __mixr_models_ActionDecoyRelease_HPP__
 #define __mixr_models_ActionDecoyRelease_HPP__
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ class OnboardComputer;
 //   interval     <INumber>  ! time, in seconds, between launches (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionDecoyRelease final: public Action
+class ActionDecoyRelease final: public IAction
 {
-    DECLARE_SUBCLASS(ActionDecoyRelease, Action)
+    DECLARE_SUBCLASS(ActionDecoyRelease, IAction)
 
 public:
     ActionDecoyRelease();

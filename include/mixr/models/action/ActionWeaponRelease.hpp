@@ -1,7 +1,7 @@
 #ifndef __mixr_models_ActionWeaponRelease_HPP__
 #define __mixr_models_ActionWeaponRelease_HPP__
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -21,9 +21,9 @@ class OnboardComputer;
 //   station          <Integer>   ! Station number to use (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionWeaponRelease final: public Action
+class ActionWeaponRelease final: public IAction
 {
-    DECLARE_SUBCLASS(ActionWeaponRelease, Action)
+    DECLARE_SUBCLASS(ActionWeaponRelease, IAction)
 
 public:
    ActionWeaponRelease();

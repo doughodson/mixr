@@ -11,7 +11,7 @@ namespace base { class IAngle; class Identifier; class Integer; class ILength; c
 namespace terrain { class ITerrain; }
 namespace models {
 class INavigation;
-class Action;
+class IAction;
 
 //------------------------------------------------------------------------------
 // Class: Steerpoint
@@ -55,7 +55,7 @@ class Action;
 //   next      <base::Integer>        ! "Next" steerpoint number (default: 0)
 //             <base::Identifier>     ! or by steerpoint name
 //
-//   action    <Action>               ! Action to be triggered at steerpoint crossing (auto only)
+//   action    <IAction>              ! Action to be triggered at steerpoint crossing (auto only)
 //                                    !  Note: the "to" steerpoint will have sequenced to the
 //                                    !  next steerpoint when action is triggered. (default: 0)
 //
@@ -153,9 +153,9 @@ public:
     virtual void setInitLongitude(const double lon)   { initLongitude = lon; }
 
     // Get/set steerpoint action
-    Action* getAction() { return action; }              // Action to be performed
-    const Action* getAction() const { return action; }  // Action to be performed
-    virtual bool setAction(Action* const act);          // Sets the action to be performed
+    IAction* getAction() { return action; }              // Action to be performed
+    const IAction* getAction() const { return action; }  // Action to be performed
+    virtual bool setAction(IAction* const act);          // Sets the action to be performed
 
    // Compute have data 'to' this point
    virtual bool compute(const INavigation* const nav, const Steerpoint* const from = nullptr);
@@ -191,7 +191,7 @@ private:
     base::safe_ptr<base::Pair> next;        // "next" Steerpoint pair [ name steerpoint ]
 
     // Steerpoint action
-    base::safe_ptr<Action> action;    // Action to be performed at this steerpoint
+    base::safe_ptr<IAction> action;   // Action to be performed at this steerpoint
 
     // Initial (reset) data
     double      initLatitude{};       // latitude
@@ -253,7 +253,7 @@ private:
    bool setSlotMagVar(const base::INumber* const);
    bool setSlotNext(const base::Identifier* const);
    bool setSlotNext(const base::Integer* const);
-   bool setSlotAction(Action* const x)                   { return setAction(x); }
+   bool setSlotAction(IAction* const x)                   { return setAction(x); }
 
    //bool setSlotPosition(const base::List* const);
 };

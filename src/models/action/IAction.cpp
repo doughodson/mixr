@@ -1,5 +1,5 @@
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 
 #include "mixr/models/player/weapon/Bomb.hpp"
 #include "mixr/models/player/Player.hpp"
@@ -21,15 +21,15 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Action, "Action")
-EMPTY_SLOTTABLE(Action)
+IMPLEMENT_SUBCLASS(IAction, "IAction")
+EMPTY_SLOTTABLE(IAction)
 
-Action::Action()
+IAction::IAction()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Action::copyData(const Action& org, const bool)
+void IAction::copyData(const IAction& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -39,7 +39,7 @@ void Action::copyData(const Action& org, const bool)
    setManager(nullptr);
 }
 
-void Action::deleteData()
+void IAction::deleteData()
 {
    setManager(nullptr);
 }
@@ -49,19 +49,19 @@ void Action::deleteData()
 //------------------------------------------------------------------------------
 
 // True if action is ready to start
-bool Action::isReadyToStart()
+bool IAction::isReadyToStart()
 {
    return !isInProgress() && !isCompleted();
 }
 
 // True if action is in progress
-bool Action::isInProgress()
+bool IAction::isInProgress()
 {
    return (manager != nullptr);
 }
 
 // True if action has been completed
-bool Action::isCompleted()
+bool IAction::isCompleted()
 {
    return completed;
 }
@@ -71,20 +71,20 @@ bool Action::isCompleted()
 //------------------------------------------------------------------------------
 
 // Sets the completed flag
-void Action::setCompleted(const bool flg)
+void IAction::setCompleted(const bool flg)
 {
    if (flg) setManager(nullptr);
    completed = flg;
 }
 
 // Sets the message ref ID
-void Action::setRefId(const int id)
+void IAction::setRefId(const int id)
 {
    refId = id;
 }
 
 // Set our route manager
-bool Action::setManager(OnboardComputer* const mgr)
+bool IAction::setManager(OnboardComputer* const mgr)
 {
    manager = mgr;
    return true;
@@ -93,7 +93,7 @@ bool Action::setManager(OnboardComputer* const mgr)
 //------------------------------------------------------------------------------
 // Starts this action
 //------------------------------------------------------------------------------
-bool Action::trigger(OnboardComputer* const mgr)
+bool IAction::trigger(OnboardComputer* const mgr)
 {
    setManager(mgr);
    completed = false;
@@ -103,7 +103,7 @@ bool Action::trigger(OnboardComputer* const mgr)
 //------------------------------------------------------------------------------
 // Cancels this action
 //------------------------------------------------------------------------------
-bool Action::cancel()
+bool IAction::cancel()
 {
    completed = true;
    setManager(nullptr);
@@ -113,7 +113,7 @@ bool Action::cancel()
 //------------------------------------------------------------------------------
 // process() -- action processing
 //------------------------------------------------------------------------------
-void Action::process(const double)
+void IAction::process(const double)
 {
 }
 
@@ -121,7 +121,7 @@ void Action::process(const double)
 // Execute as an UBF action
 // -- Use the 'actor' to find our OBC and 'trigger' this action.
 //------------------------------------------------------------------------------
-bool Action::execute(base::IComponent* actor)
+bool IAction::execute(base::IComponent* actor)
 {
    bool ok{};
    if (actor != nullptr) {

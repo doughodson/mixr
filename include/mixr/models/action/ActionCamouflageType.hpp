@@ -1,7 +1,7 @@
 #ifndef __mixr_models_ActionCamouflageType_HPP__
 #define __mixr_models_ActionCamouflageType_HPP__
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -19,9 +19,9 @@ class OnboardComputer;
 //                              ! (default: 0)
 //
 //------------------------------------------------------------------------------
-class ActionCamouflageType final: public Action
+class ActionCamouflageType final: public IAction
 {
-    DECLARE_SUBCLASS(ActionCamouflageType, Action)
+    DECLARE_SUBCLASS(ActionCamouflageType, IAction)
 
 public:
    ActionCamouflageType();

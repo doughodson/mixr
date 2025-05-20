@@ -1,7 +1,7 @@
 #ifndef __mixr_models_ActionImagingSar_HPP__
 #define __mixr_models_ActionImagingSar_HPP__
 
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
@@ -23,9 +23,9 @@ class Steerpoint;
 //   imageSize     <Integer>   ! Image size: height & width (pixels) (default: 512)
 //
 //------------------------------------------------------------------------------
-class ActionImagingSar final: public Action
+class ActionImagingSar final: public IAction
 {
-    DECLARE_SUBCLASS(ActionImagingSar, Action)
+    DECLARE_SUBCLASS(ActionImagingSar, IAction)
 
 public:
    ActionImagingSar();
