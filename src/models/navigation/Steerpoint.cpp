@@ -1,9 +1,9 @@
 
 #include "mixr/models/navigation/Steerpoint.hpp"
 
+#include "mixr/models/action/Actions.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/Actions.hpp"
 
 #include "mixr/terrain/ITerrain.hpp"
 

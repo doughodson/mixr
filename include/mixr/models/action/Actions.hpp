@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Action_HPP__
-#define __mixr_models_common_Action_HPP__
+#ifndef __mixr_models_Action_HPP__
+#define __mixr_models_Action_HPP__
 
 #include "mixr/base/ubf/IAction.hpp"
 #include "mixr/base/safe_ptr.hpp"

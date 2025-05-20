@@ -103,7 +103,7 @@
 #include "mixr/models/signature/RfTrihedralCRSignature.hpp"
 
 // misc
-#include "mixr/models/Actions.hpp"
+#include "mixr/models/action/Actions.hpp"
 
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"

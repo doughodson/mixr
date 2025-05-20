@@ -4,6 +4,7 @@ include ../makedefs
 LIB = $(MIXR_LIB_DIR)/libmixr_models.a
 
 OBJS =  \
+	action/Actions.o \
 	dynamics/IAerodynamics.o \
 	dynamics/IDynamics.o \
 	dynamics/LaeroDynamics.o  \
@@ -107,7 +108,6 @@ OBJS =  \
 	system/StoresMgr.o \
 	system/ISystem.o \
 	system/System.o \
-	Actions.o \
 	Designator.o \
 	Emission.o \
 	Image.o \
@@ -131,6 +131,7 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f action/*.o
 	-rm -f dynamics/*.o
 	-rm -f environment/*.o
 	-rm -f navigation/*.o
