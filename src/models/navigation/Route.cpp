@@ -193,7 +193,7 @@ void Route::triggerAction()
    Player* own{static_cast<Player*>(findContainerByType(typeid(Player)))};
    if (to != nullptr && own != nullptr) {
       Steerpoint* toSP{static_cast<Steerpoint*>(to->object())};
-      Action* toAction{toSP->getAction()};
+      IAction* toAction{toSP->getAction()};
       if (toAction != nullptr) {
          OnboardComputer* obc{own->getOnboardComputer()};
          if (obc != nullptr) obc->triggerAction(toAction);
