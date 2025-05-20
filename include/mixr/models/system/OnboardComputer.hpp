@@ -10,7 +10,7 @@ namespace mixr {
    }
 namespace models {
 
-class Action;
+class IAction;
 class Track;
 class ITrackMgr;
 
@@ -51,7 +51,7 @@ public:
    virtual bool requestNextToShoot(const Track* const nts);            // Request a track to shoot next
 
    // Trigger an action
-   virtual void triggerAction(Action* const act);
+   virtual void triggerAction(IAction* const act);
 
    // Legacy function (will be removed in a future major release)
    virtual int getShootList(base::safe_ptr<Track>* const tlist, const int max);
@@ -71,7 +71,7 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   base::safe_ptr<Action> action;  // Current steerpoint action
+   base::safe_ptr<IAction> action; // Current steerpoint action
    Track* nextToShoot {};          // Next to shoot track
 };
 

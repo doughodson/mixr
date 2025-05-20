@@ -2,7 +2,7 @@
 #include "mixr/models/system/OnboardComputer.hpp"
 
 #include "mixr/models/player/Player.hpp"
-#include "mixr/models/action/Action.hpp"
+#include "mixr/models/action/IAction.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
@@ -90,7 +90,7 @@ void OnboardComputer::updateData(const double dt)
 //------------------------------------------------------------------------------
 // trigger the 'to' steerpoint's action (if any)
 //------------------------------------------------------------------------------
-void OnboardComputer::triggerAction(Action* const toAction)
+void OnboardComputer::triggerAction(IAction* const toAction)
 {
    // ---
    // Cancel any previous action
