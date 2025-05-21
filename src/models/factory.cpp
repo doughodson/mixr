@@ -10,8 +10,8 @@
 #include "mixr/models/action/ActionWeaponRelease.hpp"
 
 // dynamics models
-#include "mixr/models/dynamics/RacDynamics.hpp"
 #include "mixr/models/dynamics/DynamicsLaero.hpp"
+#include "mixr/models/dynamics/DynamicsRac.hpp"
 
 // environment models
 #include "mixr/models/environment/IrAtmosphere.hpp"
@@ -125,11 +125,11 @@ base::IObject* factory(const std::string& name)
    base::IObject* obj {};
 
    // dynamics
-   if ( name == RacDynamics::getFactoryName() ) {              // RAC
-      obj = new RacDynamics();
-   }
-   else if ( name == DynamicsLaero::getFactoryName() ) {       // Laero
+   if ( name == DynamicsLaero::getFactoryName() ) {       // Laero
       obj = new DynamicsLaero();
+   }
+   else if ( name == DynamicsRac::getFactoryName() ) {    // RAC
+      obj = new DynamicsRac();
    }
 
    // environment

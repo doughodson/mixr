@@ -13,7 +13,7 @@ OBJS =  \
 	dynamics/IDynamicsAero.o \
 	dynamics/IDynamicsSpace.o \
 	dynamics/DynamicsLaero.o  \
-	dynamics/RacDynamics.o \
+	dynamics/DynamicsRac.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \

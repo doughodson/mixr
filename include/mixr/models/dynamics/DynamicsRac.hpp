@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_RacDynamics_HPP__
-#define __mixr_models_common_RacDynamics_HPP__
+#ifndef __mixr_models_DynamicsRacHPP__
+#define __mixr_models_DynamicsRac_HPP__
 
 #include "mixr/models/dynamics/IDynamicsAero.hpp"
 
@@ -9,12 +9,12 @@ namespace base { class IAngle; class ILength; class INumber; }
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: RacDynamics
+// Class: DynamicsRac
 //
 // Description: Robot Aircraft (RAC) Air Vehicle Dynamics Model
 //                -- Very simple dynamics model
 //
-// Factory name: RacDynamics
+// Factory name: DynamicsRac
 // Slots:
 //    minSpeed       <INumber>   ! Minimum Velocity        (kts)
 //    speedMaxG      <INumber>   ! Velocity we reach max G (kts)
@@ -24,12 +24,12 @@ namespace models {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <INumber>   ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacDynamics final: public IDynamicsAero
+class DynamicsRac final: public IDynamicsAero
 {
-    DECLARE_SUBCLASS(RacDynamics, IDynamicsAero)
+    DECLARE_SUBCLASS(DynamicsRac, IDynamicsAero)
 
 public:
-    RacDynamics();
+    DynamicsRac();
 
     double getGload() const final;                   // G's (+up, one at level)
     double getMach() const final;                    // mach number
