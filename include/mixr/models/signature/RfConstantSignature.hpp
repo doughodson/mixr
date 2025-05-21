@@ -11,8 +11,8 @@ class Emission;
 
 //------------------------------------------------------------------------------
 // Class: RfConstantSignature
-// Descriptions: Constant RCS signature
-// Factory name: SigConstant
+// Descriptions: Concrete constant RCS signature
+// Factory name: RfConstantSignature
 // Slots:
 //    rcs   <base::INumber> ! Constant Radar Cross Section value (default: 0.0)
 //                          !  base::Number(square meters) or base::Decibel(square meters) or base::Area()

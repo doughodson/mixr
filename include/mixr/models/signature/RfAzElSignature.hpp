@@ -11,7 +11,7 @@ class Emission;
 
 //------------------------------------------------------------------------------
 // Class: RfAzElSignature
-// Descriptions: RF signature by a table of RCS based on target's az/el angles
+// Descriptions: Concrete RF signature by a table of RCS based on target's az/el angles
 //
 // Factory name: RfAzElSignature
 // Slots:

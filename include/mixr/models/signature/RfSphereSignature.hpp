@@ -13,7 +13,7 @@ class Emission;
 
 //------------------------------------------------------------------------------
 // Class: RfSphereSignature
-//    Descriptions: RF signature of a simple sphere based on radius
+//    Descriptions: Concrete RF signature of a simple sphere based on radius
 //
 // Factory name: RfSphereSignature
 // Slots:
