@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class String; }
 namespace models {
 class WorldModel;
-class Player;
+class IPlayer;
 
 //------------------------------------------------------------------------------
 // Class: ISystem
@@ -73,10 +73,10 @@ public:
    virtual bool setPowerSwitch(const unsigned int p);    // Sets the system's master power switch setting (see power enumeration)
 
    // Event handler(s)
-   virtual bool killedNotification(Player* const killedBy = nullptr); // Killed (KILL_EVENT) event handler
+   virtual bool killedNotification(IPlayer* const killedBy = nullptr); // Killed (KILL_EVENT) event handler
 
-   virtual Player* getOwnship();                         // Returns a pointer to our ownship player
-   virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
+   virtual IPlayer* getOwnship();                        // Returns a pointer to our ownship player
+   virtual const IPlayer* getOwnship() const;            // Returns a pointer to our ownship player (const version)
 
    void updateData(const double dt = 0.0) override;
    void updateTC(const double dt = 0.0) override;
@@ -98,7 +98,7 @@ protected:
 private:
    bool findOwnship();
 
-   Player* ownship {};           // Our player (not ref()'d because the own player owns us).
+   IPlayer* ownship {};          // Our player (not ref()'d because the own player owns us).
    unsigned int pwrSw {PWR_ON};  // System's master power switch
 
 private:

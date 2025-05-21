@@ -10,7 +10,7 @@
 namespace mixr {
 namespace base { class Identifier; class Integer; class ILength; class INumber; class PairStream; }
 namespace simulation { class IPlayer; }
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace ighost {
 namespace cigi {
 class CigiModel;
@@ -55,10 +55,10 @@ protected:
    int getMaxModels() const                              { return maxModels; }      // Max number of active, in-range player/models
    int getMaxElevations() const                          { return maxElevations; }  // Max number of terrain elevation requests
 
-   const models::Player* getOwnship() const              { return ownship; }        // Our ownship -- the player that we're following
+   const models::IPlayer* getOwnship() const             { return ownship; }        // Our ownship -- the player that we're following
 
    // computes the range (meters) from our ownship to this player.
-   double computeRangeToPlayer(const models::Player* const) const;
+   double computeRangeToPlayer(const models::IPlayer* const) const;
 
    // find a player's model object in table 'type' by the player IDs
    CigiModel* findModel(const int playerID, const std::string& federateName, const TableType type);
@@ -111,8 +111,8 @@ private:
    void clearIgModelTypes();                            // Clear the IG model types table
    void mapPlayerList2ModelTable();                     // Map the player list to the model table
    void mapPlayers2ElevTable();                         // Map player list to terrain elevation table
-   CigiModel* newModelEntry(models::Player* const ip);  // Create a new model entry for this player & return the table index
-   CigiModel* newElevEntry(models::Player* const ip);   // Create a new elevation entry for this player & return the table index
+   CigiModel* newModelEntry(models::IPlayer* const ip); // Create a new model entry for this player & return the table index
+   CigiModel* newElevEntry(models::IPlayer* const ip);  // Create a new elevation entry for this player & return the table index
 
    // Parameters
    double maxRange{20000.0};                            // Max range of visual system  (meters) (default: 20km)
@@ -120,7 +120,7 @@ private:
    int maxElevations{};                                 // Max number of terrain elevation requests (default: no requests)
 
    // Simulation inputs
-   models::Player* ownship{};                           // Current ownship
+   models::IPlayer* ownship{};                          // Current ownship
    base::PairStream* playerList{};                      // Current player list
    bool rstReq{};                                       // Reset request flag
 

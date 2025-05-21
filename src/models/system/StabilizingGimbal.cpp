@@ -6,7 +6,7 @@
 
 #include "mixr/models/system/StabilizingGimbal.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"

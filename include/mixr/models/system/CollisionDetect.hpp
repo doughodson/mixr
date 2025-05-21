@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_CollisionDetect_HPP__
-#define __mixr_models_common_CollisionDetect_HPP__
+#ifndef __mixr_models_CollisionDetect_HPP__
+#define __mixr_models_CollisionDetect_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 #include "mixr/config.hpp"
@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Integer; class ILength; class PairStream; }
 namespace models {
-class Player;
+class IPlayer;
 
 //------------------------------------------------------------------------------
 // Class: CollisionDetect
@@ -53,7 +53,7 @@ public:
    // Returns the current number of collisions, or zero if none.
    // -- Pre-ref()'d pointers to the players that we've collided with and the collision
    // distances (meters) are stored in the caller provided arrays 'list' and 'distances'.
-   unsigned int getCollisions(Player* list[], double distances[], const unsigned int arraySize);
+   unsigned int getCollisions(IPlayer* list[], double distances[], const unsigned int arraySize);
 
    double getCollisionRange() const;      // Collision range (meters)
    double getMaxRange2Players() const;    // Max range from ownship to players of interest, or zero for all (meters)
@@ -80,7 +80,7 @@ protected:
    virtual void clearPoiList();
 
    // Update the POI list with this target player
-   virtual void updatePoiList(Player* const target);
+   virtual void updatePoiList(IPlayer* const target);
 
    void process(const double dt) override;     // Phase 3
 
@@ -95,7 +95,7 @@ protected:
 
       void clear()        { player = nullptr; active = false; }
 
-      base::safe_ptr<Player> player;    // The player
+      base::safe_ptr<IPlayer> player;   // The player
       double range {};                  // Previous range (m)
       double rangeRate {};              // Previous range rate (m/s)
       double distance {};               // Distance at collision (m)

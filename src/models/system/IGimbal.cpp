@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/IGimbal.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
 
@@ -256,7 +256,7 @@ bool IGimbal::fromPlayerOfInterest(const Emission* const em)
 {
    bool ok{};
    if (em != nullptr) {
-      const Player* const p{em->getOwnship()};
+      const IPlayer* const p{em->getOwnship()};
       if (p != nullptr) {
          ok = ((playerTypes & p->getMajorType()) != 0);
          if (ok && localOnly) {
@@ -273,7 +273,7 @@ bool IGimbal::fromPlayerOfInterest(const Emission* const em)
 double IGimbal::getEarthRadius() const
 {
    double erad{base::nav::ERAD60 * base::length::NM2M};
-   const Player* own{getOwnship()};
+   const IPlayer* own{getOwnship()};
    if (own != nullptr) {
       erad = own->getEarthRadius();
    }
@@ -1104,19 +1104,19 @@ bool IGimbal::setSlotPlayerTypes(const base::PairStream* const x)
          const auto type = dynamic_cast<const base::Identifier*>( pair->object() );
          if (type != nullptr) {
             if ( *type == "air") {
-               mask = (mask | Player::AIR_VEHICLE);
+               mask = (mask | IPlayer::AIR_VEHICLE);
             } else if ( *type == "ground" ) {
-               mask = (mask | Player::GROUND_VEHICLE);
+               mask = (mask | IPlayer::GROUND_VEHICLE);
             } else if ( *type == "weapon" ) {
-               mask = (mask | Player::WEAPON);
+               mask = (mask | IPlayer::WEAPON);
             } else if ( *type == "ship" ) {
-               mask = (mask | Player::SHIP);
+               mask = (mask | IPlayer::SHIP);
             } else if ( *type == "building" ) {
-               mask = (mask | Player::BUILDING);
+               mask = (mask | IPlayer::BUILDING);
             }  else if ( *type == "lifeform" ) {
-               mask = (mask | Player::LIFE_FORM);
+               mask = (mask | IPlayer::LIFE_FORM);
             }  else if ( *type == "space" ) {
-               mask = (mask | Player::SPACE_VEHICLE);
+               mask = (mask | IPlayer::SPACE_VEHICLE);
             }
          }
          item = item->getNext();

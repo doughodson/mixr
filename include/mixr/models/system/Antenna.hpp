@@ -11,7 +11,7 @@
 namespace mixr {
 namespace base { class IAngle; class Boolean; class IFunction; class Identifier; class INumber; class IPower; }
 namespace models {
-class Player;
+class IPlayer;
 class IRfSystem;
 
 //------------------------------------------------------------------------------

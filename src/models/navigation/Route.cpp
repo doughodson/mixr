@@ -2,7 +2,7 @@
 #include "mixr/models/navigation/Route.hpp"
 
 #include "mixr/models/navigation/Steerpoint.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/action/IAction.hpp"
@@ -190,7 +190,7 @@ void Route::triggerAction()
    // ---
    // find and start the current 'to' steerpoint action
    // ---
-   Player* own{static_cast<Player*>(findContainerByType(typeid(Player)))};
+   IPlayer* own{static_cast<IPlayer*>(findContainerByType(typeid(IPlayer)))};
    if (to != nullptr && own != nullptr) {
       Steerpoint* toSP{static_cast<Steerpoint*>(to->object())};
       IAction* toAction{toSP->getAction()};

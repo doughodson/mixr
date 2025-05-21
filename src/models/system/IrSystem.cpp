@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/IrSystem.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Tdb.hpp"

@@ -1,7 +1,7 @@
 
 #include "mixr/models/player/LifeForm.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 
 #include "mixr/models/system/StoresMgr.hpp"
@@ -215,7 +215,7 @@ void LifeForm::look(const double up, const double sdws)
                     while (item != nullptr && !tgtAquired) {
                         const auto pair = static_cast<base::Pair*>(item->getValue());
                         if (pair != nullptr) {
-                            const auto player = dynamic_cast<Player*>(pair->object());
+                            const auto player = dynamic_cast<IPlayer*>(pair->object());
                             if (player != nullptr && player != this && !player->isMajorType(WEAPON) && !player->isDestroyed()) {
                                 // ok, calculate our position from this guy
                                 tgtPos = player->getPosition();

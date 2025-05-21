@@ -289,7 +289,7 @@ void Gun::burstFrame()
       rcount -= ibullets;
 
       // Log this event
-      Player* ownship{static_cast<Player*>( findContainerByType(typeid(Player)) )};
+      IPlayer* ownship{static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) )};
 
       if (ownship != nullptr) {
          BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_GUN_FIRED )
@@ -335,7 +335,7 @@ void Gun::burstFrame()
 base::Vec3d Gun::computeInitBulletPosition()
 {
    base::Vec3d pe1{posVec};
-   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    if (ownship != nullptr) {
       // Body position to earth (NED) position
       base::Vec3d gunPosE{posVec * ownship->getRotMat()};
@@ -350,7 +350,7 @@ base::Vec3d Gun::computeInitBulletPosition()
 base::Vec3d Gun::computeInitBulletVelocity()
 {
    base::Vec3d ve1(0,0,0);   // velocity -- earth (m/s)
-   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    if (ownship != nullptr) {
       // compute the earth (NED) to gun matrix
       base::Matrixd mm{getRotMat() * ownship->getRotMat()};

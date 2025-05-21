@@ -19,7 +19,7 @@
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/Building.hpp"
 #include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/Ship.hpp"
 #include "mixr/models/player/space/SpaceVehicle.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
@@ -323,16 +323,16 @@ bool CigiHost::updateOwnshipModel()
    // Ownship active and type air vehicle?
 //   bool active = false;
 //   if (getOwnship() != nullptr) {
-//      active = getOwnship()->isActive() || getOwnship()->isMode(simulation::Player::PRE_RELEASE);
+//      active = getOwnship()->isActive() || getOwnship()->isMode(simulation::IPlayer::PRE_RELEASE);
 //   }
 
-//   const simulation::Player* av = getOwnship();
+//   const simulation::IPlayer* av = getOwnship();
 
    // code above changed to this by DDH -- NOTE, this appears to be wrong, not AirVehicle!
    bool active{};
-   const auto av = dynamic_cast<const models::Player*>(getOwnship());
+   const auto av = dynamic_cast<const models::IPlayer*>(getOwnship());
    if (av != nullptr) {
-      active = av->isActive() || av->isMode(models::Player::Mode::PRE_RELEASE);
+      active = av->isActive() || av->isMode(models::IPlayer::Mode::PRE_RELEASE);
    }
 
    if (active && av != nullptr && getOwnshipEntityControlPacket(iw) != nullptr) {
@@ -413,22 +413,22 @@ int CigiHost::updateModels()
                //  (id*8+5) is attached part entity
 
                // Get the player
-               const auto player = dynamic_cast<const models::Player*>(model->getPlayer());  // DDH
+               const auto player = dynamic_cast<const models::IPlayer*>(model->getPlayer());  // DDH
 
                // Set the model data and ...
-               if (player->isMajorType(models::Player::AIR_VEHICLE)) {
+               if (player->isMajorType(models::IPlayer::AIR_VEHICLE)) {
                   setAirVehicleData(model, entity, static_cast<const models::AirVehicle*>(player));
-               } else if (player->isMajorType(models::Player::GROUND_VEHICLE)) {
+               } else if (player->isMajorType(models::IPlayer::GROUND_VEHICLE)) {
                   setGndVehicleData(model, entity, static_cast<const models::GroundVehicle*>(player));
-               } else if (player->isMajorType(models::Player::SHIP)) {
+               } else if (player->isMajorType(models::IPlayer::SHIP)) {
                   setShipData(model, entity, static_cast<const models::Ship*>(player));
-               } else if (player->isMajorType(models::Player::SPACE_VEHICLE)) {
+               } else if (player->isMajorType(models::IPlayer::SPACE_VEHICLE)) {
                   setSpaceVehicleData(model, entity, static_cast<const models::SpaceVehicle*>(player));
-               } else if (player->isMajorType(models::Player::LIFE_FORM)) {
+               } else if (player->isMajorType(models::IPlayer::LIFE_FORM)) {
                   setLifeFormData(model, entity, static_cast<const models::LifeForm*>(player));
-               } else if (player->isMajorType(models::Player::BUILDING)) {
+               } else if (player->isMajorType(models::IPlayer::BUILDING)) {
                   setBuildingData(model, entity, static_cast<const models::Building*>(player));
-               } else if (player->isMajorType(models::Player::WEAPON)) {
+               } else if (player->isMajorType(models::IPlayer::WEAPON)) {
                   const auto effect = dynamic_cast<const models::Effect*>(model->getPlayer());
                   const auto msl = dynamic_cast<const models::Missile*>(model->getPlayer());
                   const auto wpn = dynamic_cast<const models::IWeapon*>(model->getPlayer());
@@ -449,7 +449,7 @@ int CigiHost::updateModels()
 }
 
 // sets a CigiEntityCtrlV3 structure with common data entity data
-bool CigiHost::setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const p)
+bool CigiHost::setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::IPlayer* const p)
 {
    bool ok{ec != nullptr && p != nullptr};
 
@@ -1622,7 +1622,7 @@ bool CigiHost::sendCigiData()
 
                // Requested Position (lat/lon)
                double hotLat{}, hotLon{};
-               dynamic_cast<models::Player*>(oldest->getPlayer())->getPositionLL(&hotLat, &hotLon);
+               dynamic_cast<models::IPlayer*>(oldest->getPlayer())->getPositionLL(&hotLat, &hotLon);
                hotRequest.SetLat(hotLat);
                hotRequest.SetLon(hotLon);
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
@@ -1828,7 +1828,7 @@ void CigiHost::hatHotResp(const CigiHatHotRespV3* const p)
          if (model->isHotActive() && model->getPlayer() != nullptr) {
             // When the player and elevation table are still valid, store
             // the terrain elevation (meters)
-            dynamic_cast<models::Player*>(model->getPlayer())->setTerrainElevation(static_cast<double>(p->GetHot()));
+            dynamic_cast<models::IPlayer*>(model->getPlayer())->setTerrainElevation(static_cast<double>(p->GetHot()));
 
             //if (isMessageEnabled(MSG_DEBUG)) {
             //   std::cout << "hotResp: alt = --, pid = " << model->getPlayer()->getID() << std::endl;

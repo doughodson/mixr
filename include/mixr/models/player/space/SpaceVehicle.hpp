@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_SpaceVehicle_HPP__
 #define __mixr_models_common_SpaceVehicle_HPP__
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace models {
@@ -12,9 +12,9 @@ namespace models {
 // Description: Generic Space Vehicles
 // Factory name: SpaceVehicle
 //------------------------------------------------------------------------------
-class SpaceVehicle : public Player
+class SpaceVehicle : public IPlayer
 {
-   DECLARE_SUBCLASS(SpaceVehicle, Player)
+   DECLARE_SUBCLASS(SpaceVehicle, IPlayer)
 
 public:
    SpaceVehicle();

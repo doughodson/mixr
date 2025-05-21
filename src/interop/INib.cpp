@@ -35,8 +35,8 @@ INib::INib(const INetIO::IoType t) : ioType(t)
 void INib::initData()
 {
    pname = "MIXR";
-   side = models::Player::BLUE;
-   mode = models::Player::Mode::INACTIVE;
+   side = models::IPlayer::BLUE;
+   mode = models::IPlayer::Mode::INACTIVE;
 
    drP0.set(0,0,0);
    drV0.set(0,0,0);
@@ -60,8 +60,8 @@ void INib::copyData(const INib& org, const bool cc)
 
    ioType = org.ioType;
 
-   const models::Player* p{org.pPlayer};
-   setPlayer( const_cast<models::Player*>(p) );
+   const models::IPlayer* p{org.pPlayer};
+   setPlayer( const_cast<models::IPlayer*>(p) );
    setNetIO(nullptr);
    setTypeMapper(org.ntm);
 
@@ -172,7 +172,7 @@ bool INib::shutdownNotification()
 //------------------------------------------------------------------------------
 // setPlayer() -- sets a pointer to a player
 //------------------------------------------------------------------------------
-bool INib::setPlayer(models::Player* const p)
+bool INib::setPlayer(models::IPlayer* const p)
 {
     pPlayer = p;
     if (pPlayer != nullptr) {
@@ -235,7 +235,7 @@ bool INib::networkOutputManagers(const double)
 //------------------------------------------------------------------------------
 // setOutputPlayerType() -- sets the kind, country, ... variables
 //------------------------------------------------------------------------------
-bool INib::setOutputPlayerType(const models::Player* const p)
+bool INib::setOutputPlayerType(const models::IPlayer* const p)
 {
    bool ok{};
 
@@ -296,12 +296,12 @@ void INib::setPlayerID(const unsigned short v)
     playerID = v;
 }
 
-void INib::setMode(const models::Player::Mode m)
+void INib::setMode(const models::IPlayer::Mode m)
 {
     mode = m;
 }
 
-void INib::setSide(const models::Player::Side s)
+void INib::setSide(const models::IPlayer::Side s)
 {
     side = s;
 }
@@ -366,7 +366,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 1) Make sure that we have a valid player and entity type
    // ---
-   const models::Player* player{getPlayer()};
+   const models::IPlayer* player{getPlayer()};
    if (player == nullptr || isEntityTypeInvalid()) result = NO;
 
    // ---
@@ -375,7 +375,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    if ( (result == UNSURE) && isNotMode( player->getMode()) ) result = YES;
 
    // 2-a) NIB is being deleted, send one more update to deactivate the entity
-   if ( (result == UNSURE) && isMode( models::Player::Mode::DELETE_REQUEST ) ) result = YES;
+   if ( (result == UNSURE) && isMode( models::IPlayer::Mode::DELETE_REQUEST ) ) result = YES;
 
    // ---
    // 3) When we're a local player, check for one of the following ...
@@ -460,7 +460,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 4) Check for air vehicle articulated and attached parts (always check this)
    // ---
-   if ( player != nullptr && player->isMajorType(models::Player::AIR_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(models::IPlayer::AIR_VEHICLE) ) {
 
       const models::AirVehicle* av{static_cast<const models::AirVehicle*>(player)};
 
@@ -514,7 +514,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 5) Check for ground vehicle articulated and attached parts (always check this)
    // ---
-   if ( player != nullptr && player->isMajorType(models::Player::GROUND_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(models::IPlayer::GROUND_VEHICLE) ) {
 
       const models::GroundVehicle* gv{static_cast<const models::GroundVehicle*>(player)};
 
@@ -542,7 +542,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
                            // and up the missile count
                            msl->ref();
                            apartMsl[apartNumMissiles] = msl;
-                           apartMslAttached[apartNumMissiles] = !(msl->isMode(models::Player::Mode::LAUNCHED));
+                           apartMslAttached[apartNumMissiles] = !(msl->isMode(models::IPlayer::Mode::LAUNCHED));
                            apartMslCnt[apartNumMissiles] = 1;
                            apartNumMissiles++;
                         }
@@ -574,7 +574,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Check all missiles for change in launched status
             for (unsigned int i{}; i < apartNumMissiles; i++) {
-               bool attached = !(apartMsl[i]->isMode(models::Player::Mode::LAUNCHED));
+               bool attached = !(apartMsl[i]->isMode(models::IPlayer::Mode::LAUNCHED));
                if (attached != apartMslAttached[i]) {
                   // There's been a change in status
                   apartMslAttached[i] = attached;
@@ -607,7 +607,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void INib::playerState2Nib()
 {
-   const models::Player* player{getPlayer()};
+   const models::IPlayer* player{getPlayer()};
    if (player != nullptr) {
       // set player name
       const std::string cname{player->getName()};
@@ -615,7 +615,7 @@ void INib::playerState2Nib()
       else setPlayerName("MIXR");
 
       freeze( player->isFrozen() );
-      if (!isMode(models::Player::Mode::DELETE_REQUEST)) setMode( player->getMode() );
+      if (!isMode(models::IPlayer::Mode::DELETE_REQUEST)) setMode( player->getMode() );
       setDamage( player->getDamage() );
       setSmoke( player->getSmoke() );
       setFlames( player->getFlames() );
@@ -671,7 +671,7 @@ void INib::playerState2Nib()
 //------------------------------------------------------------------------------
 void INib::nib2PlayerState()
 {
-   models::Player* player{getPlayer()};
+   models::IPlayer* player{getPlayer()};
    if (player != nullptr) {
 
       // Drive modes

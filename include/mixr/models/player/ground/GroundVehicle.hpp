@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_GroundVehicle_HPP__
 #define __mixr_models_common_GroundVehicle_HPP__
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace base { class IAngle; class Identifier; class ITime; }
@@ -24,9 +24,9 @@ namespace models {
 //   (2) This launcher is a temp solution -- this will be removed.
 //
 //------------------------------------------------------------------------------
-class GroundVehicle : public Player
+class GroundVehicle : public IPlayer
 {
-   DECLARE_SUBCLASS(GroundVehicle, Player)
+   DECLARE_SUBCLASS(GroundVehicle, IPlayer)
 
 public:
    enum LauncherCommand { NONE, DOWN, UP };

@@ -10,7 +10,7 @@
 
 #include "mixr/models/system/IrSensor.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
 #include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
@@ -212,7 +212,7 @@ void IrSensor::transmit(const double dt)
 // this is called by the IrSeeker in the transmit frame, once for each target that returns a query
 bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 {
-   Player* ownship{getOwnship()};
+   IPlayer* ownship{getOwnship()};
    IrAtmosphere* atmos{};
    double totalSignal{};
    double totalBackground{};

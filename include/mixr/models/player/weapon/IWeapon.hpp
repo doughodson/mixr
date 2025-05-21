@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IWeapon_HPP__
 #define __mixr_models_common_IWeapon_HPP__
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Integer; class ILength; class INumber; class String; class ITime; }
@@ -126,9 +126,9 @@ class Track;
 // 3) When a weapon is copied or cloned, the launcher and station are set to zero.
 //
 //------------------------------------------------------------------------------
-class IWeapon : public Player
+class IWeapon : public IPlayer
 {
-    DECLARE_SUBCLASS(IWeapon, Player)
+    DECLARE_SUBCLASS(IWeapon, IPlayer)
 
 public:
     // Weapon Categories (bits) These bits can be bitwise OR'd together
@@ -188,8 +188,8 @@ public:
    double getLethalRange() const;                    // Lethal range (meters) -- most players will be killed within this range
    double getMaxGimbalAngle() const;                 // Max gimbal angle (radians)
 
-   Player* getLaunchVehicle();                       // Pointer to the player that launched us
-   const Player* getLaunchVehicle() const;           // Pointer to the player that launched us (const version)
+   IPlayer* getLaunchVehicle();                      // Pointer to the player that launched us
+   const IPlayer* getLaunchVehicle() const;          // Pointer to the player that launched us (const version)
 
    Detonation getDetonationResults() const;          // Detonation result code (see 'Detonation' enum)
    double getDetonationRange() const;                // Range to target at detonation (meters)
@@ -202,8 +202,8 @@ public:
    Track* getTargetTrack();                          // Our target track, if any
    const Track* getTargetTrack() const;              // Our target track, if any (const version)
 
-   Player* getTargetPlayer();                        // Our target player, if any
-   const Player* getTargetPlayer() const;            // Our target player, if any (const version)
+   IPlayer* getTargetPlayer();                       // Our target player, if any
+   const IPlayer* getTargetPlayer() const;           // Our target player, if any (const version)
 
    IWeapon* getFlyoutWeapon();                // Pre-ref()'d pointer to the fly-out weapon
    const IWeapon* getFlyoutWeapon() const;    // Pre-ref()'d pointer to the fly-out weapon (const version)
@@ -230,14 +230,14 @@ public:
 
    // Sets a pointer to the target player --
    // -- if 'posTrkEnb' is true, we'll follow the target player's position
-   virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
+   virtual bool setTargetPlayer(IPlayer* const tgt, const bool posTrkEnb);
 
    virtual bool setPower(const bool f);                           // Sets the weapon power flag
    virtual bool setBlocked(const bool b);                         // Sets the weapon blocked flag
    virtual bool setJettisonable(const bool f);                    // Sets the jettision enable flag
    virtual bool setWillHang(const bool f);                        // Sets the 'will' hang flag
    virtual bool setDummy(const bool f);                           // Sets the dummy weapon flag
-   virtual bool setLaunchVehicle(Player* const lch);              // Sets the pointer to the player that launched us
+   virtual bool setLaunchVehicle(IPlayer* const lch);             // Sets the pointer to the player that launched us
    virtual bool setDetonationResults(const Detonation dr);        // Sets the detonation result code (see 'Detonation' enum)
    virtual bool setDetonationLocation(const base::Vec3d&);        // Sets the detonation location in target player's coord (meters)
    virtual bool setMaxBurstRng(const double v);                   // Sets the max burst range (meters)
@@ -256,7 +256,7 @@ public:
    const base::Vec3d& getTargetVelocity() const { return tgtVel; }
 
    // Computes and sets 'loc' to our location relative to the target player, 'tgt'
-   virtual bool computeTargetLocation(base::Vec3d* const loc, const Player* const tgt);
+   virtual bool computeTargetLocation(base::Vec3d* const loc, const IPlayer* const tgt);
 
    // prerelease() -- prerelease this weapon.
    //    Returns a point to the flyout weapon player, which is still
@@ -272,7 +272,7 @@ public:
    virtual bool onJettisonEvent();
 
    unsigned int getMajorType() const override;
-   bool collisionNotification(Player* const p) override;
+   bool collisionNotification(IPlayer* const p) override;
    bool crashNotification() override;
 
    void updateTC(const double dt = 0.0) override;
@@ -332,10 +332,10 @@ private:
 
     base::Vec3d tgtPos;                            // Target Position -- platform coord (NED)
     bool       tgtPosValid {};                     // If true, target position is valid
-    base::safe_ptr<Player> tgtPlayer;              // Target Player
+    base::safe_ptr<IPlayer> tgtPlayer;             // Target Player
     base::safe_ptr<Track>  tgtTrack;               // Target Track
     base::Vec3d    tgtVel {};                      // Target/Track Velocity (m/s) relative to ownship velocity
-    base::safe_ptr<Player> launchVehicle;          // Launching/Releasing Player
+    base::safe_ptr<IPlayer> launchVehicle;         // Launching/Releasing Player
     bool       posTrkEnb {};                       // If true, update tgtPos from the target/track
     double     maxTgtRng {DEFAULT_MAX_TGT_RNG};        // Max target range for default tgt selection      (meters)
     double     maxTgtLosErr {DEFAULT_MAX_TGT_LOS_ERR}; // Max target LOS error for default tgt selection  (radians)

@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class INumber; }
 namespace models {
-class Player;
+class IPlayer;
 class Track;
 
 //------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ public:
     virtual void setCmdHdgD(const double x)    { cmdHeading = x * static_cast<double>(base::angle::D2RCC); }
 
     bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
-    bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
+    bool setTargetPlayer(IPlayer* const tgt, const bool posTrkEnb) override;
 
     bool event(const int event, base::IObject* const obj = nullptr) override;
     void reset() override;
@@ -77,7 +77,7 @@ protected:
    void weaponDynamics(const double dt) override;
 
 private:
-    virtual bool calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const;
+    virtual bool calculateVectors(const IPlayer* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const;
 
    // ---
    // Default guidance & dynamics parameters

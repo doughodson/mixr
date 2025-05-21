@@ -3,7 +3,7 @@
 
 #include "mixr/interop/INtm.hpp"
 #include "mixr/base/util/str_utils.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/base/List.hpp"
 
 namespace mixr {
@@ -12,7 +12,7 @@ namespace interop {
 IMPLEMENT_SUBCLASS(NtmOutputNodeStd, "NtmOutputNodeStd")
 EMPTY_SLOTTABLE(NtmOutputNodeStd)
 
-NtmOutputNodeStd::NtmOutputNodeStd(const models::Player* const p, const char* const name)
+NtmOutputNodeStd::NtmOutputNodeStd(const models::IPlayer* const p, const char* const name)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -107,7 +107,7 @@ void NtmOutputNodeStd::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM node for the target player, 'p'.
 //------------------------------------------------------------------------------
-const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p) const
+const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::IPlayer* const p) const
 {
    const INtm* result{};
 
@@ -139,7 +139,7 @@ const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const 
 
             // Get the template player and its type string with length
             const INtm* tstNtm{static_cast<const INtm*>(item->getValue())};
-            const models::Player* const tp{tstNtm->getTemplatePlayer()};
+            const models::IPlayer* const tp{tstNtm->getTemplatePlayer()};
             const base::String* const tpType{tp->getType_old()};
             const std::size_t tpTypeLen{tpType->len()};
 
@@ -176,7 +176,7 @@ bool NtmOutputNodeStd::add2OurLists(INtm* const tgtNtm)
       if (nodeFactoryName != nullptr) {
          // Using factory names, check if the target Ntm's
          // template player our form
-         const models::Player* const p{tgtNtm->getTemplatePlayer()};
+         const models::IPlayer* const p{tgtNtm->getTemplatePlayer()};
          ok = p->isFactoryName(nodeFactoryName);
       }
 
@@ -207,7 +207,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(INtm* const tgtNtm)
    bool ok{};
    if (tgtNtm != nullptr) {
 
-      const models::Player* const tp{tgtNtm->getTemplatePlayer()};
+      const models::IPlayer* const tp{tgtNtm->getTemplatePlayer()};
       const std::string& tpfn{tp->getFactoryName()};
 
       // Case #1 : when the Ntm's template player has the same
@@ -265,7 +265,7 @@ bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm
-      const models::Player* newP{newNtm->getTemplatePlayer()};
+      const models::IPlayer* newP{newNtm->getTemplatePlayer()};
       const base::String* newTypeStr{newP->getType_old()};
       const std::size_t newTypeLen{newTypeStr->len()};
 
@@ -276,7 +276,7 @@ bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
 
          // Get the ref player's string from the 'ref' Ntm.
          const INtm* refNtm{static_cast<const INtm*>(refItem->getValue())};
-         const models::Player* refP{refNtm->getTemplatePlayer()};
+         const models::IPlayer* refP{refNtm->getTemplatePlayer()};
          const base::String* refTypeStr{refP->getType_old()};
          const std::size_t refTypeLen{refTypeStr->len()};
 

@@ -6,7 +6,7 @@
 #include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Track.hpp"
@@ -258,7 +258,7 @@ bool DataRecorder::recordDI(const base::IObject* objs[4], const double values[4]
 //------------------------------------------------------------------------------
 bool DataRecorder::recordNewPlayer(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -285,7 +285,7 @@ bool DataRecorder::recordNewPlayer(const base::IObject* objs[4], const double va
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerRemoved(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -312,7 +312,7 @@ bool DataRecorder::recordPlayerRemoved(const base::IObject* objs[4], const doubl
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerData(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -346,7 +346,7 @@ bool DataRecorder::recordPlayerData(const base::IObject* objs[4], const double v
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerDamaged(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -373,7 +373,7 @@ bool DataRecorder::recordPlayerDamaged(const base::IObject* objs[4], const doubl
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCollision(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -388,7 +388,7 @@ bool DataRecorder::recordPlayerCollision(const base::IObject* objs[4], const dou
    genPlayerId( playerCollisionMsg->mutable_id(), player );
    genPlayerState( playerCollisionMsg->mutable_state(), player );
 
-   const auto otherPlayer = dynamic_cast<const models::Player*>( objs[1] );
+   const auto otherPlayer = dynamic_cast<const models::IPlayer*>( objs[1] );
    if (otherPlayer != nullptr) {
       genPlayerId( playerCollisionMsg->mutable_other_player_id(), otherPlayer );
    }
@@ -405,7 +405,7 @@ bool DataRecorder::recordPlayerCollision(const base::IObject* objs[4], const dou
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerCrash(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -432,7 +432,7 @@ bool DataRecorder::recordPlayerCrash(const base::IObject* objs[4], const double 
 //------------------------------------------------------------------------------
 bool DataRecorder::recordPlayerKilled(const base::IObject* objs[4], const double values[4])
 {
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (player == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -447,7 +447,7 @@ bool DataRecorder::recordPlayerKilled(const base::IObject* objs[4], const double
    genPlayerId( playerKilledMsg->mutable_id(), player );
    genPlayerState( playerKilledMsg->mutable_state(), player );
 
-   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::IPlayer*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( playerKilledMsg->mutable_shooter_id(), shooter );
    }
@@ -465,7 +465,7 @@ bool DataRecorder::recordPlayerKilled(const base::IObject* objs[4], const double
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponReleased(const base::IObject* objs[4], const double values[4])
 {
-   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (wpn == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -480,12 +480,12 @@ bool DataRecorder::recordWeaponReleased(const base::IObject* objs[4], const doub
    genPlayerId( wpnRelMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnRelMsg->mutable_wpn_state(), wpn );
 
-   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::IPlayer*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnRelMsg->mutable_shooter_id(), shooter );
    }
 
-   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::IPlayer*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnRelMsg->mutable_tgt_id(), tgt );
    }
@@ -504,7 +504,7 @@ bool DataRecorder::recordWeaponReleased(const base::IObject* objs[4], const doub
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponHung(const base::IObject* objs[4], const double values[4])
 {
-   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (wpn == nullptr) return false;
 
    const auto msg = new proto::DataRecord();
@@ -519,12 +519,12 @@ bool DataRecorder::recordWeaponHung(const base::IObject* objs[4], const double v
    genPlayerId( wpnHungMsg->mutable_wpn_id(), wpn );
    genPlayerState( wpnHungMsg->mutable_wpn_state(), wpn );
 
-   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::IPlayer*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId( wpnHungMsg->mutable_shooter_id(), shooter );
    }
 
-   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::IPlayer*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId( wpnHungMsg->mutable_tgt_id(), tgt );
    }
@@ -544,7 +544,7 @@ bool DataRecorder::recordWeaponHung(const base::IObject* objs[4], const double v
 //------------------------------------------------------------------------------
 bool DataRecorder::recordWeaponDetonation(const base::IObject* objs[4], const double values[4])
 {
-   const auto wpn = dynamic_cast<const models::Player*>( objs[0] );
+   const auto wpn = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (wpn == nullptr) return false;
 
    const int intVal{static_cast<int>(values[0])};
@@ -564,12 +564,12 @@ bool DataRecorder::recordWeaponDetonation(const base::IObject* objs[4], const do
    genPlayerId(wpnDetMsg->mutable_wpn_id(), wpn );
    genPlayerState(wpnDetMsg->mutable_wpn_state(), wpn );
 
-   const auto shooter = dynamic_cast<const models::Player*>( objs[1] );
+   const auto shooter = dynamic_cast<const models::IPlayer*>( objs[1] );
    if (shooter != nullptr) {
       genPlayerId(wpnDetMsg->mutable_shooter_id(), shooter );
    }
 
-   const auto tgt = dynamic_cast<const models::Player*>( objs[2] );
+   const auto tgt = dynamic_cast<const models::IPlayer*>( objs[2] );
    if (tgt != nullptr) {
       genPlayerId(wpnDetMsg->mutable_tgt_id(), tgt );
    }
@@ -625,7 +625,7 @@ bool DataRecorder::recordWeaponDetonation(const base::IObject* objs[4], const do
 //------------------------------------------------------------------------------
 bool DataRecorder::recordGunFired(const base::IObject* objs[4], const double values[4])
 {
-   const auto shooter = dynamic_cast<const models::Player*>( objs[0] );
+   const auto shooter = dynamic_cast<const models::IPlayer*>( objs[0] );
    if (shooter == nullptr) return false;
 
    const auto rounds = static_cast<const unsigned int>( values[0] );
@@ -654,7 +654,7 @@ bool DataRecorder::recordGunFired(const base::IObject* objs[4], const double val
 bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double values[4])
 {
    // objects
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    const auto newTrack = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || newTrack == nullptr) return false;
 
@@ -679,7 +679,7 @@ bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double val
    genTrackData(newTrackMsg->mutable_track_data(), newTrack);
 
    // Track player
-   const models::Player* trkPlayer {newTrack->getTarget()};
+   const models::IPlayer* trkPlayer {newTrack->getTarget()};
    if (trkPlayer != nullptr) {
       genPlayerId( newTrackMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( newTrackMsg->mutable_trk_player_state(), trkPlayer );
@@ -710,7 +710,7 @@ bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double val
 bool DataRecorder::recordTrackRemoved(const base::IObject* objs[4], const double values[4])
 {
    // objects
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    const auto track = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || track == nullptr) return false;
 
@@ -743,7 +743,7 @@ bool DataRecorder::recordTrackRemoved(const base::IObject* objs[4], const double
 bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double values[4])
 {
    // objects
-   const auto player = dynamic_cast<const models::Player*>( objs[0] );
+   const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
    const auto trackData = dynamic_cast<const models::Track*>( objs[1] );
    if (player == nullptr || trackData == nullptr) return false;
 
@@ -768,7 +768,7 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
    genTrackData(trackDataMsg->mutable_track_data(), trackData);
 
    // track player
-   const models::Player* trkPlayer{trackData->getTarget()};
+   const models::IPlayer* trkPlayer{trackData->getTarget()};
    if (trkPlayer != nullptr) {
       genPlayerId( trackDataMsg->mutable_trk_player_id(), trkPlayer);
       genPlayerState( trackDataMsg->mutable_trk_player_state(), trkPlayer );
@@ -792,7 +792,7 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
 //------------------------------------------------------------------------------
 // Generate the Player ID data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerId(proto::PlayerId* const id, const models::Player* const player)
+void DataRecorder::genPlayerId(proto::PlayerId* const id, const models::IPlayer* const player)
 {
    // Check for valid message pointer
    if (id != nullptr) {
@@ -819,7 +819,7 @@ void DataRecorder::genPlayerId(proto::PlayerId* const id, const models::Player* 
 //------------------------------------------------------------------------------
 // Generate the player state data
 //------------------------------------------------------------------------------
-void DataRecorder::genPlayerState(proto::PlayerState* const state, const models::Player* const player)
+void DataRecorder::genPlayerState(proto::PlayerState* const state, const models::IPlayer* const player)
 {
    if (state != nullptr) {
       if (player != nullptr) {
@@ -940,7 +940,7 @@ void DataRecorder::genEmissionData(proto::EmissionData* const emMsg, const model
 
          // transmitting player ID
          {
-            const models::Player* p {emData->getOwnship()};
+            const models::IPlayer* p {emData->getOwnship()};
             if (p != nullptr) {
                genPlayerId(emMsg->mutable_origin_id(), p);
             }
@@ -948,7 +948,7 @@ void DataRecorder::genEmissionData(proto::EmissionData* const emMsg, const model
 
          // target player ID
          {
-            const models::Player* p {emData->getTarget()};
+            const models::IPlayer* p {emData->getTarget()};
             if (p != nullptr) {
                genPlayerId(emMsg->mutable_target_id(), p);
             }

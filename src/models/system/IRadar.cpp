@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/IRadar.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Emission.hpp"
@@ -443,7 +443,7 @@ unsigned int IRadar::getReports(const Emission** list, const unsigned int max) c
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by player 'p'
 //------------------------------------------------------------------------------
-bool IRadar::killedNotification(Player* const p)
+bool IRadar::killedNotification(IPlayer* const p)
 {
    clearTracksAndQueues();
 

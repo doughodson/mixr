@@ -36,7 +36,7 @@ public:
        }
     }
 
-    bool killedNotification(Player* const killedBy = nullptr) override;
+    bool killedNotification(IPlayer* const killedBy = nullptr) override;
 
 protected:
    static const int MAX_EMISSIONS{1000};

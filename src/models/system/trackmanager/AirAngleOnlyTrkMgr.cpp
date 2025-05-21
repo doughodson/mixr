@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/trackmanager/AirAngleOnlyTrkMgr.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/Track.hpp"
@@ -42,7 +42,7 @@ void AirAngleOnlyTrkMgr::copyData(const AirAngleOnlyTrkMgr& org, const bool)
 void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 {
     // Make sure we have an ownship to work with
-    const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+    const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
     if (ownship == nullptr || dt == 0.0) return;
 
     // Make sure we have the A and B matrix
@@ -78,16 +78,16 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     double newAzimuth[MAX_REPORTS]{};
     double tmp{};
     for (IrQueryMsg* q = getQuery(&tmp); q != nullptr && nReports < MAX_REPORTS; q = getQuery(&tmp)) {
-        Player* tgt{q->getTarget()};
+        IPlayer* tgt{q->getTarget()};
 
         bool dummy{};
-        if (tgt->isMajorType(Player::WEAPON)) {
+        if (tgt->isMajorType(IPlayer::WEAPON)) {
             dummy = (static_cast<const IWeapon*>(tgt))->isDummy();
         }
 
-        if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
-            tgt->isMajorType(Player::SHIP) ||
-            (tgt->isMajorType(Player::WEAPON) && !dummy)
+        if ( tgt->isMajorType(IPlayer::AIR_VEHICLE) ||
+            tgt->isMajorType(IPlayer::SHIP) ||
+            (tgt->isMajorType(IPlayer::WEAPON) && !dummy)
             ) {
                 // Using only air vehicles
                 queryMessages[nReports] = q;
@@ -253,7 +253,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             //}
 
              // Object 1: player, Object 2: Track Data
-            Player* ownship{getOwnship()};
+            IPlayer* ownship{getOwnship()};
             BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
                SAMPLE_2_OBJECTS( ownship, trk )
             END_RECORD_DATA_SAMPLE()

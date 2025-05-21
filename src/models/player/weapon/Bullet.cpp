@@ -168,7 +168,7 @@ void Bullet::updateBurstTrajectories(const double dt)
    // For all active bursts
    for (int i = 0; i < nbt; i++) {
       if (bursts[i].bStatus == Burst::Status::ACTIVE) {
-         bursts[i].bVel[Player::IDOWN] = bursts[i].bVel[Player::IDOWN] + (g*dt);  // falling bullets
+         bursts[i].bVel[IPlayer::IDOWN] = bursts[i].bVel[IPlayer::IDOWN] + (g*dt);  // falling bullets
 
          bursts[i].bPos = bursts[i].bPos + (bursts[i].bVel * dt);
          bursts[i].bTof += dt;
@@ -181,8 +181,8 @@ void Bullet::updateBurstTrajectories(const double dt)
 //------------------------------------------------------------------------------
 bool Bullet::checkForTargetHit()
 {
-   Player* ownship{getLaunchVehicle()};
-   Player* tgt{getTargetPlayer()};
+   IPlayer* ownship{getLaunchVehicle()};
+   IPlayer* tgt{getTargetPlayer()};
    if (ownship != nullptr && tgt != nullptr) {
       base::Vec3d osPos{tgt->getPosition()};
 
@@ -224,7 +224,7 @@ bool Bullet::checkForTargetHit()
                 while (item != nullptr) {
                     const auto pair = static_cast<base::Pair*>(item->getValue());
                     if (pair != nullptr) {
-                        const auto player = dynamic_cast<Player*>(pair->object());
+                        const auto player = dynamic_cast<IPlayer*>(pair->object());
                         if (player != nullptr && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
                             // ok, calculate our position from this guy
                             tgtPos = player->getPosition();
@@ -252,7 +252,7 @@ bool Bullet::checkForTargetHit()
 //------------------------------------------------------------------------------
 // setHitPlayer() -- set a pointer to the player we just hit
 //------------------------------------------------------------------------------
-void Bullet::setHitPlayer(Player* p)
+void Bullet::setHitPlayer(IPlayer* p)
 {
    hitPlayer = p;
 }

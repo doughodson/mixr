@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IIrShapeSignature_HPP__
-#define __mixr_models_common_IIrShapeSignature_HPP__
+#ifndef __mixr_models_IIrShapeSignature_HPP__
+#define __mixr_models_IIrShapeSignature_HPP__
 
 #include "mixr/base/IObject.hpp"
 

@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/str_utils.hpp"
@@ -38,7 +38,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    RTI::ParameterHandleValuePairSet* pParams {RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER )};
 
    // Set our mode so that we don't do this again.
-   setMode(models::Player::Mode::DETONATED);
+   setMode(models::IPlayer::Mode::DETONATED);
 
    // If our player just detonated, then it must be a weapon!
    const auto mPlayer = dynamic_cast<models::IWeapon*>(getPlayer());
@@ -114,7 +114,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       Nib* fNib {};
-      models::Player* fPlayer {mPlayer->getLaunchVehicle()};
+      models::IPlayer* fPlayer {mPlayer->getLaunchVehicle()};
       if (fPlayer != nullptr) {
          if (fPlayer->isProxyPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
@@ -146,7 +146,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       Nib* tNib {};
-      models::Player* tPlayer {mPlayer->getTargetPlayer()};
+      models::IPlayer* tPlayer {mPlayer->getTargetPlayer()};
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr)

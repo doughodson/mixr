@@ -3,7 +3,7 @@
 
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/List.hpp"
@@ -291,7 +291,7 @@ int ITrackMgr::getTrackList(const Track* tlist[], const unsigned int max) const
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by player 'p'
 //------------------------------------------------------------------------------
-bool ITrackMgr::killedNotification(Player* const p)
+bool ITrackMgr::killedNotification(IPlayer* const p)
 {
    clearTracksAndQueues();
    return BaseClass::killedNotification(p);

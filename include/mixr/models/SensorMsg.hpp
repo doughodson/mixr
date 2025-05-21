@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace models {
-class Player;
+class IPlayer;
 class IGimbal;
 
 //------------------------------------------------------------------------------
@@ -132,12 +132,12 @@ public:
    const IGimbal* getGimbal() const             { return gimbal; }
 
    // Pointer to the player that sent this message
-   Player* getOwnship()                         { return ownship; }
-   const Player* getOwnship() const             { return ownship; }
+   IPlayer* getOwnship()                        { return ownship; }
+   const IPlayer* getOwnship() const            { return ownship; }
 
    // Pointer to the target of this message
-   Player* getTarget()                          { return target; }
-   const Player* getTarget() const              { return target; }
+   IPlayer* getTarget()                         { return target; }
+   const IPlayer* getTarget() const             { return target; }
 
    // Optional: data message attached to sensor message
    base::IObject* getDataMessage()              { return dataMsg; }
@@ -147,10 +147,10 @@ public:
    void setGimbal(IGimbal* const);
 
    // Sets the player that sent this message
-   void setOwnship(Player* const);
+   void setOwnship(IPlayer* const);
 
    // Sets the target player
-   void setTarget(Player* const);
+   void setTarget(IPlayer* const);
 
    // Sets the optional data message attached to sensor message
    void setDataMessage(base::IObject* const);
@@ -172,8 +172,8 @@ private:
    base::Vec3d losT2O;       // Normalized target to ownship LOS vector (target's NED)
    base::Vec3d aoi;          // Normalized target Angle Of Incidence (AOI) vector
    IGimbal* gimbal {};       // The gimbal that transmitted the message
-   base::safe_ptr<Player> ownship;         // The originating (ownship) player
-   base::safe_ptr<Player> target;          // The Target player
+   base::safe_ptr<IPlayer> ownship;        // The originating (ownship) player
+   base::safe_ptr<IPlayer> target;         // The Target player
    base::safe_ptr<base::IObject> dataMsg;  // Embedded data message (e.g., datalink, etc)
    bool returnReq {};        // Return Request
    bool localOnly {};        // Local players only flag

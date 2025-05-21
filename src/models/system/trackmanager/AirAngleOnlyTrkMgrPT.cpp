@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/trackmanager/AirAngleOnlyTrkMgrPT.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/Track.hpp"
@@ -79,7 +79,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
             //   std::cout << "Removed Aged AIR track[it] = [" << it << "] id = " << trk->getTrackID() << std::endl;
             //}
             // Object 1: player, Object 2: Track Data
-           Player* ownship{getOwnship()};
+           IPlayer* ownship{getOwnship()};
            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
               SAMPLE_2_OBJECTS( ownship, trk )
            END_RECORD_DATA_SAMPLE()
@@ -111,7 +111,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
 void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
 {
     // Make sure we have an ownship to work with
-    Player* ownship{getOwnship()};
+    IPlayer* ownship{getOwnship()};
     if (ownship == nullptr) return;
 
     IrQueryMsg* queryMessages[MAX_REPORTS]{};
@@ -130,16 +130,16 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
     // Get each new IR query message report from the queue
     double tmp{};
     for (IrQueryMsg* q = getQuery(&tmp); q != nullptr && nReports < MAX_REPORTS; q = getQuery(&tmp)) {
-        Player* tgt{q->getTarget()};
+        IPlayer* tgt{q->getTarget()};
 
         bool dummy{};
-        if (tgt->isMajorType(Player::WEAPON)) {
+        if (tgt->isMajorType(IPlayer::WEAPON)) {
             dummy = (static_cast<const IWeapon*>(tgt))->isDummy();
         }
 
-        if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
-            tgt->isMajorType(Player::SHIP) ||
-            (tgt->isMajorType(Player::WEAPON) && !dummy)
+        if ( tgt->isMajorType(IPlayer::AIR_VEHICLE) ||
+            tgt->isMajorType(IPlayer::SHIP) ||
+            (tgt->isMajorType(IPlayer::WEAPON) && !dummy)
             ) {
                 // Using only air vehicles
                 queryMessages[nReports] = q;
@@ -326,8 +326,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                 // a track's target can change w/o track changing - sync track target with target from most recent query return
                 const auto trk = dynamic_cast<IrTrack*>(tracks[it]);
                 if ( trk && (trk->getLastQuery()->getTarget() != trk->getTarget()) ) {
-                    const Player* tgt{trk->getLastQuery()->getTarget()};
-                    const auto ttgt = const_cast<Player*>(tgt);
+                    const IPlayer* tgt{trk->getLastQuery()->getTarget()};
+                    const auto ttgt = const_cast<IPlayer*>(tgt);
                     // if track contained merged targets, a track's target may change
                     tracks[it]->setTarget( ttgt );
                     if (isMessageEnabled(MSG_INFO))

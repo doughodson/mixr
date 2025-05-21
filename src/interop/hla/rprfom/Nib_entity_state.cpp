@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/WorldModel.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -306,23 +306,23 @@ void Nib::entityState2Nib()
          // Side: When mapping Force ID to Player Side ...
          if (physicalEntity->forceIdentifier == FRIENDLY) {
             // Friendly's are blue, ...
-            setSide(models::Player::BLUE);
+            setSide(models::IPlayer::BLUE);
          } else if (physicalEntity->forceIdentifier == OPPOSING) {
             // opposing side is red, ...
-            setSide(models::Player::RED);
+            setSide(models::IPlayer::RED);
          } else if (physicalEntity->forceIdentifier == NEUTRAL) {
             // Neutrals are white, ...
-            setSide(models::Player::WHITE);
+            setSide(models::IPlayer::WHITE);
          } else  {
             // and everyone else is gray.
-            setSide(models::Player::GRAY);
+            setSide(models::IPlayer::GRAY);
          }
          setAttributeUpdateRequiredFlag(NetIO::FORCE_IDENTIFIER_AI, false);
       }
 
    }
 
-   setMode(models::Player::Mode::ACTIVE);
+   setMode(models::IPlayer::Mode::ACTIVE);
    setTimeExec( static_cast<double>(getNetIO()->getCurrentTime()) );
 }
 
@@ -333,7 +333,7 @@ void Nib::entityState2Nib()
 bool Nib::entityStateManager(const double curExecTime)
 {
    bool ok {true};
-   if (getPlayer()->isMode(models::Player::Mode::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
+   if (getPlayer()->isMode(models::IPlayer::Mode::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
 
       // Need to update this entity object ...
 
@@ -635,13 +635,13 @@ void Nib::updatePhysicalEntity(
       if (isAttributeUpdateEnabled(NetIO::FORCE_IDENTIFIER_AI)) {
 
          // Force ID: When mapping Player side to force IDs ...
-         if (getSide() == models::Player::BLUE) {
+         if (getSide() == models::IPlayer::BLUE) {
             // blue's are friendly, ...
             physicalEntity->forceIdentifier = FRIENDLY;
-         } else if (getSide() == models::Player::RED) {
+         } else if (getSide() == models::IPlayer::RED) {
             // red's are not, ...
             physicalEntity->forceIdentifier = OPPOSING;
-         } else if (getSide() == models::Player::WHITE) {
+         } else if (getSide() == models::IPlayer::WHITE) {
             // white is neutral, ...
             physicalEntity->forceIdentifier = NEUTRAL;
          } else {

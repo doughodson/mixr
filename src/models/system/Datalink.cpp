@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/Datalink.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/CommRadio.hpp"
 #include "mixr/models/system/IRadio.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
@@ -216,7 +216,7 @@ void Datalink::reset()
         // We have a name of the track manager, but not the track manager itself
         const char* name{getTrackManagerName()->c_str()};
         // Get the named track manager from the onboard computer
-        const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+        const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
         if (ownship != nullptr) {
             OnboardComputer* obc{ownship->getOnboardComputer()};
             if (obc != nullptr) {
@@ -237,7 +237,7 @@ void Datalink::reset()
         // We have a name of the radio, but not the radio itself
         const char* name{getRadioName()->c_str()};
         // Get the named radio from the component list of radios
-        const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+        const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
         if (ownship != nullptr) {
             const auto cr = dynamic_cast<CommRadio*>(ownship->getRadioByName(name));
             setRadio(cr);
@@ -340,11 +340,11 @@ bool Datalink::sendMessage(base::IObject* const msg)
             while (playerItem != nullptr) {
 
                base::Pair* playerPair{static_cast<base::Pair*>(playerItem->getValue())};
-               Player* player{static_cast<Player*>(playerPair->object())};
+               IPlayer* player{static_cast<IPlayer*>(playerPair->object())};
 
                if (player->isLocalPlayer()) {
                   // Send to active, local players only (and not to ourself)
-                     if ((player->isActive() || player->isMode(Player::Mode::PRE_RELEASE)) && player != getOwnship() ) {
+                     if ((player->isActive() || player->isMode(IPlayer::Mode::PRE_RELEASE)) && player != getOwnship() ) {
                      player->event(DATALINK_MESSAGE, msg);
                   }
                   playerItem = playerItem->getNext();
@@ -367,7 +367,7 @@ bool Datalink::sendMessage(base::IObject* const msg)
    // and let any (optional) outgoing queue know about this.
    // ---
    if (queueForNetwork) {
-      Player* ownship{getOwnship()};
+      IPlayer* ownship{getOwnship()};
       if (ownship != nullptr) {
          if (ownship->isLocalPlayer()) {
             queueOutgoingMessage(msg);

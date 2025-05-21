@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/OnboardComputer.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/action/IAction.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"

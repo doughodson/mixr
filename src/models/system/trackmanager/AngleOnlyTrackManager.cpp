@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/Track.hpp"

@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/Rwr.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/Emission.hpp"
@@ -185,7 +185,7 @@ void Rwr::process(const double dt)
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by player 'p'
 //------------------------------------------------------------------------------
-bool Rwr::killedNotification(Player* const p)
+bool Rwr::killedNotification(IPlayer* const p)
 {
     // ---
     // Clear out the queues

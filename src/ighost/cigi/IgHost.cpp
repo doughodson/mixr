@@ -5,7 +5,7 @@
 #include "mixr/ighost/cigi/CigiModel.hpp"
 
 #include "mixr/simulation/IPlayer.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
@@ -210,7 +210,7 @@ void IgHost::mapPlayerList2ModelTable()
 
          // Get a pointer to the player, 'p'
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = static_cast<models::Player*>(pair->object());
+         const auto p = static_cast<models::IPlayer*>(pair->object());
 
          bool dummy{};
          const auto wpn = dynamic_cast<const models::IWeapon*>( p );
@@ -291,7 +291,7 @@ void IgHost::mapPlayers2ElevTable()
 
          // Get a pointer to the player, 'p'
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
-         models::Player* p {static_cast<models::Player*>(pair->object())};
+         models::IPlayer* p {static_cast<models::IPlayer*>(pair->object())};
 
          // Check if this player is alive and within range.
          if ( p->isActive() && p->isTerrainElevationRequired() ) {
@@ -336,7 +336,7 @@ void IgHost::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 // computeRangeToPlayer() -- Calculate range from ownship to player
 //------------------------------------------------------------------------------
-double IgHost::computeRangeToPlayer(const models::Player* const ip) const
+double IgHost::computeRangeToPlayer(const models::IPlayer* const ip) const
 {
     double rng{maxRange*2.0 + 1.0};  // Default is out-of-range
     if (ownship != nullptr) {
@@ -350,7 +350,7 @@ double IgHost::computeRangeToPlayer(const models::Player* const ip) const
 // newModelEntry() -- Generates a new model entry for this player.
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-CigiModel* IgHost::newModelEntry(models::Player* const ip)
+CigiModel* IgHost::newModelEntry(models::IPlayer* const ip)
 {
    CigiModel* model{};
 
@@ -372,7 +372,7 @@ CigiModel* IgHost::newModelEntry(models::Player* const ip)
 // newElevEntry() -- Generates a new elevation entry for this player
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-CigiModel* IgHost::newElevEntry(models::Player* const ip)
+CigiModel* IgHost::newElevEntry(models::IPlayer* const ip)
 {
    CigiModel* model{};
 
@@ -393,7 +393,7 @@ CigiModel* IgHost::newElevEntry(models::Player* const ip)
 // sets our ownship pointer, which is used by the Station class
 void IgHost::setOwnship(simulation::IPlayer* const p)
 {
-   models::Player* const player{dynamic_cast<models::Player* const>(p)};
+   models::IPlayer* const player{dynamic_cast<models::IPlayer* const>(p)};
 
     // nothing's changed, just return
     if (player == ownship) return;

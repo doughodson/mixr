@@ -3,7 +3,7 @@
 
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/List.hpp"
@@ -92,7 +92,7 @@ void GmtiTrkMgr::deleteData()
 void GmtiTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
-   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -124,8 +124,8 @@ void GmtiTrkMgr::processTrackList(const double dt)
    double tmp{};
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
-      Player* tgt{em->getTarget()};
-      if (tgt->isMajorType(Player::GROUND_VEHICLE)) {
+      IPlayer* tgt{em->getTarget()};
+      if (tgt->isMajorType(IPlayer::GROUND_VEHICLE)) {
          // Using only Ground vehicles
          emissions[nReports] = em;
          newSignal[nReports] = tmp;
@@ -151,7 +151,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
       const RfTrack* const trk{static_cast<const RfTrack*>(tracks[it])};  // we produce only RfTracks
-      const Player* const tgt{trk->getLastEmission()->getTarget()};
+      const IPlayer* const tgt{trk->getLastEmission()->getTarget()};
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getTarget() == tgt) {
             // We have a new report for the same target as this track ...

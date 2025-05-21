@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class ITime; }
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace simulation { class ISimulation; class Station; }
 namespace interop {
 class INib;
@@ -227,7 +227,7 @@ public:
    unsigned short getNewEmissionEventID()                 { return ++emEventID; }
 
    // proxy player factory: creates a proxy player based on NIB data
-   virtual models::Player* createProxyPlayer(INib* const nib);
+   virtual models::IPlayer* createProxyPlayer(INib* const nib);
 
    void reset() override;
 
@@ -266,13 +266,13 @@ public:
 public:
    // NIB support
    virtual INib* findNib(const unsigned short playerID, const std::string& federateName, const IoType);
-   virtual INib* findNib(const models::Player* const, const IoType);
+   virtual INib* findNib(const models::IPlayer* const, const IoType);
    virtual bool addNibToList(INib* const, const IoType);
    virtual void removeNibFromList(INib* const, const IoType);
 
    // More NIB support
    virtual INib* createNewInputNib();
-   virtual INib* createNewOutputNib(models::Player* const);
+   virtual INib* createNewOutputNib(models::IPlayer* const);
    virtual void destroyInputNib(INib* const);
    virtual void destroyOutputNib(INib* const);
    virtual bool addNib2InputList(INib* const);
@@ -286,7 +286,7 @@ protected:
 
    // Create a new Network Interface Block (NIB) for 'player' and insert it
    // in the output list.  Returns a pointer to the new NIB or 0.
-   INib* insertNewOutputNib(models::Player* const player);
+   INib* insertNewOutputNib(models::IPlayer* const player);
 
    // Number of NIBs on the input list
    unsigned int getInputListSize() const {
@@ -338,7 +338,7 @@ public:
    virtual const INtm* findNetworkTypeMapper(const INib* const nib) const;
 
    // Finds the network type mapper by Player
-   virtual const INtm* findNetworkTypeMapper(const models::Player* const p) const;
+   virtual const INtm* findNetworkTypeMapper(const models::IPlayer* const p) const;
 
 
 protected:

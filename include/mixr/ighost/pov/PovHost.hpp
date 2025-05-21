@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class INetHandler; }
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace ighost {
 namespace pov {
 
@@ -41,10 +41,10 @@ private:
    bool netInitFail{};                          // initialization attempt failed
    int scnt{};                                  // send timer
 
-   void setOwnship0(models::Player* const);     // sets our ownship player
+   void setOwnship0(models::IPlayer* const);     // sets our ownship player
 
    // simulation inputs
-   models::Player* ownship{};              // current ownship
+   models::IPlayer* ownship{};              // current ownship
    base::PairStream* playerList{};         // current player list
 
 private:

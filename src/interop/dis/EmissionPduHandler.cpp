@@ -311,7 +311,7 @@ void EmissionPduHandler::setTimedOut()
 //------------------------------------------------------------------------------
 bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const pdu, const EmissionSystem* const es, Nib* const nib)
 {
-   models::Player* player{nib->getPlayer()};
+   models::IPlayer* player{nib->getPlayer()};
    if (player == nullptr || noTemplatesFound) return false;
 
    // ---
@@ -683,7 +683,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
                // Locate players for these tracks and set the TrackJamTargets data for each ...
                for (int i = 0; i < n; i++) {
                   // Does the track have a target player that we can find the entity ID for?
-                  const models::Player* tgt{trackList[i]->getTarget()};
+                  const models::IPlayer* tgt{trackList[i]->getTarget()};
                   if (tgt != nullptr) {
                      unsigned short tjtPlayerID{};
                      unsigned short tjtSiteID{};

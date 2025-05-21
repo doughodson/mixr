@@ -2,7 +2,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/models/dynamics/IDynamics.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/Designator.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Stores.hpp"
@@ -207,14 +207,14 @@ void IWeapon::reset()
 
    // launch vehicle
    if ( ( getLaunchVehicle() == nullptr ) && ( flyout != this ) ) {
-      setLaunchVehicle( static_cast<Player*>(findContainerByType( typeid(Player) )) );
+      setLaunchVehicle( static_cast<IPlayer*>(findContainerByType( typeid(IPlayer) )) );
    }
 
    // Test player?
    if (tstTgtNam != nullptr) {
       WorldModel* s = getWorldModel();
       if (s != nullptr) {
-         const auto t = dynamic_cast<Player*>(s->findPlayerByName( (*tstTgtNam).c_str() ));   // added DDH
+         const auto t = dynamic_cast<IPlayer*>(s->findPlayerByName( (*tstTgtNam).c_str() ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
      }
    }
@@ -365,7 +365,7 @@ bool IWeapon::onJettisonEvent()
 
       // If this is initial weapon then set our mode to LAUNCHED
       if (initWpn == this) {
-         initWpn->setMode(Player::Mode::LAUNCHED);
+         initWpn->setMode(IPlayer::Mode::LAUNCHED);
       }
 
       // And set the 'jettisoned' and 'released' flags
@@ -393,7 +393,7 @@ void IWeapon::checkDetonationEffect()
       double maxRng{10.0 * getMaxBurstRng()};
 
       // Find our target (if any)
-      const Player* tgt{getTargetPlayer()};
+      const IPlayer* tgt{getTargetPlayer()};
       if (tgt == nullptr) {
          const Track* trk{getTargetTrack()};
          if (trk != nullptr) tgt = trk->getTarget();
@@ -407,7 +407,7 @@ void IWeapon::checkDetonationEffect()
          bool finished{};
          while (item != nullptr && !finished) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-            Player* p{static_cast<Player*>(pair->object())};
+            IPlayer* p{static_cast<IPlayer*>(pair->object())};
             finished = p->isProxyPlayer();  // local only
             if (!finished && (p != this) ) {
                base::Vec3d dpos{p->getPosition() - getPosition()};
@@ -428,7 +428,7 @@ void IWeapon::checkDetonationEffect()
 //------------------------------------------------------------------------------
 // collisionNotification() -- We just impacted with another player
 //------------------------------------------------------------------------------
-bool IWeapon::collisionNotification(Player* const other)
+bool IWeapon::collisionNotification(IPlayer* const other)
 {
    bool ok{};
 
@@ -507,7 +507,7 @@ IWeapon* IWeapon::prerelease()
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
    WorldModel* sim{static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) )};
-   Player* lplayer{getLaunchVehicle()};
+   IPlayer* lplayer{getLaunchVehicle()};
    if (!isReleased() && !isJettisoned() && flyout == nullptr && lplayer != nullptr && sim != nullptr) {
 
       // we'll get an event at the time of release.
@@ -573,7 +573,7 @@ IWeapon* IWeapon::release()
       if (!getWillHang()) {
 
          // and we have a launching player and a simulation ...
-         Player* lplayer{getLaunchVehicle()};
+         IPlayer* lplayer{getLaunchVehicle()};
          const auto sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
          if ( lplayer != nullptr && sim != nullptr) {
 
@@ -591,7 +591,7 @@ IWeapon* IWeapon::release()
 
                // Set the initial weapon's mode flags to fully released.
                IWeapon* initWpn{getInitialWeapon()};
-               initWpn->setMode(Player::Mode::LAUNCHED);
+               initWpn->setMode(IPlayer::Mode::LAUNCHED);
                initWpn->setReleased(true);
                initWpn->setReleaseHold(false);
                initWpn->unref();
@@ -624,7 +624,7 @@ IWeapon* IWeapon::release()
                // Set our mode flags to fully released.
                setFlyoutWeapon(flyout);
                setInitialWeapon(this);
-               setMode(Player::Mode::LAUNCHED);
+               setMode(IPlayer::Mode::LAUNCHED);
                setReleased(true);
                setReleaseHold(false);
 
@@ -748,7 +748,7 @@ void IWeapon::positionTracking()
 //------------------------------------------------------------------------------
 // Computes and sets 'loc' to our location relative to the target player, 'tgt'
 //------------------------------------------------------------------------------
-bool IWeapon::computeTargetLocation(base::Vec3d* const loc, const Player* const tgt)
+bool IWeapon::computeTargetLocation(base::Vec3d* const loc, const IPlayer* const tgt)
 {
    bool ok{};
    if (tgt != nullptr && loc != nullptr) {
@@ -768,7 +768,7 @@ bool IWeapon::setLocationOfDetonation()
    bool ok{};
 
    // Find our target (if any)
-   const Player* tgt{getTargetPlayer()};
+   const IPlayer* tgt{getTargetPlayer()};
    if (tgt == nullptr) {
       const Track* trk{getTargetTrack()};
       if (trk != nullptr) tgt = trk->getTarget();
@@ -960,13 +960,13 @@ double IWeapon::getMaxGimbalAngle() const
 }
 
 // Pointer to the player that launched us
-Player* IWeapon::getLaunchVehicle()
+IPlayer* IWeapon::getLaunchVehicle()
 {
    return launchVehicle;
 }
 
 // Pointer to the player that launched us (const version)
-const Player* IWeapon::getLaunchVehicle() const
+const IPlayer* IWeapon::getLaunchVehicle() const
 {
    return launchVehicle;
 }
@@ -996,13 +996,13 @@ const Track* IWeapon::getTargetTrack() const
 }
 
 // Our target player, if any
-Player* IWeapon::getTargetPlayer()
+IPlayer* IWeapon::getTargetPlayer()
 {
    return tgtPlayer;
 }
 
 // Our target player, if any (const version)
-const Player* IWeapon::getTargetPlayer() const
+const IPlayer* IWeapon::getTargetPlayer() const
 {
    return tgtPlayer;
 }
@@ -1066,7 +1066,7 @@ const base::Vec3d& IWeapon::getDetonationLocation() const
 //------------------------------------------------------------------------------
 
 // setTargetPlayer() -- sets a pointer to the target player
-bool IWeapon::setTargetPlayer(Player* const tgt, const bool pt)
+bool IWeapon::setTargetPlayer(IPlayer* const tgt, const bool pt)
 {
     tgtPlayer = tgt;
     tgtTrack = nullptr;
@@ -1112,7 +1112,7 @@ bool IWeapon::setTargetPositionValid(const bool b)
 }
 
 // setLaunchVehicle() -- sets a pointer to the launching player
-bool IWeapon::setLaunchVehicle(Player* const lch)
+bool IWeapon::setLaunchVehicle(IPlayer* const lch)
 {
     launchVehicle = lch;
     return true;

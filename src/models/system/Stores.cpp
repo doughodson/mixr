@@ -280,7 +280,7 @@ IWeapon* Stores::prereleaseWeapon(IWeapon* const wpn)
 {
    IWeapon* flyout{};
 
-   Player* own{getOwnship()};
+   IPlayer* own{getOwnship()};
    if (wpn != nullptr && own != nullptr) {
 
       // Release the weapon
@@ -315,7 +315,7 @@ IWeapon* Stores::releaseWeapon(IWeapon* const wpn)
 {
    IWeapon* flyout{};
 
-   Player* own{getOwnship()};
+   IPlayer* own{getOwnship()};
    if (wpn != nullptr && own != nullptr) {
 
       // Release the weapon

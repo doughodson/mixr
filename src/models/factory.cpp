@@ -54,7 +54,7 @@
 #include "mixr/models/player/weapon/Sam.hpp"
 #include "mixr/models/player/Building.hpp"
 #include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/player/Player.hpp"
+//#include "mixr/models/player/Player.hpp"
 #include "mixr/models/player/Ship.hpp"
 
 // sensor models
@@ -157,9 +157,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // Players
-   else if ( name == Player::getFactoryName() ) {
-      obj = new Player();
-   }
+//   else if ( name == Player::getFactoryName() ) {
+//      obj = new Player();
+//   }
    else if ( name == AirVehicle::getFactoryName() ) {
       obj = new AirVehicle();
    }

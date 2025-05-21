@@ -5,7 +5,7 @@
 #include "mixr/interop/hla/INetIO.hpp"
 
 namespace mixr {
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace hla { class Ambassador; }
 namespace interop { class INetIO; class INib; class INtmInputNode; }
 namespace rprfom {
@@ -199,7 +199,7 @@ public:
     ) override;
 
     // interop::INetIO interface
-    interop::INib* createNewOutputNib(models::Player* const player) override;
+    interop::INib* createNewOutputNib(models::IPlayer* const player) override;
     interop::INtmInputNode* rootNtmInputNodeFactory() const override;
 
    void testOutputEntityTypes(const int) final  {};           // Test rig for outgoing quick lookup

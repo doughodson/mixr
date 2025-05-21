@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_ITrackMgr_HPP__
-#define __mixr_models_common_ITrackMgr_HPP__
+#ifndef __mixr_models_ITrackMgr_HPP__
+#define __mixr_models_ITrackMgr_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 #include "mixr/base/safe_queue.hpp"
@@ -9,7 +9,7 @@ namespace mixr {
 namespace base { class Boolean; class Integer; class INumber; class ITime; }
 namespace models {
 class Emission;
-class Player;
+class IPlayer;
 class Track;
 
 //------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ public:
    // Add a new emission report (RF track managers only)
    virtual void newReport(Emission* em, double snDbl);
 
-   bool killedNotification(Player* const killedBy = nullptr) override;
+   bool killedNotification(IPlayer* const killedBy = nullptr) override;
 
    void reset() override;
 

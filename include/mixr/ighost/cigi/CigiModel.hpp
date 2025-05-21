@@ -14,7 +14,7 @@ class CigiCompCtrlV3;
 class CigiArtPartCtrlV3;
 
 namespace mixr {
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace ighost {
 namespace cigi {
 class Player2CigiMap;
@@ -55,8 +55,8 @@ public:
    State getState() const                      { return state; }          // Model's state  ( INACTIVE, ACTIVE, etc. }
    void setState(const State newState)         { state = newState; }      // Sets the model's state  ( INACTIVE, ACTIVE, etc. }
 
-   models::Player* getPlayer()                 { return player; }         // The player object associated with this model
-   const models::Player* getPlayer() const     { return player; }         // The player object associated with this model (const version)
+   models::IPlayer* getPlayer()                { return player; }         // The player object associated with this model
+   const models::IPlayer* getPlayer() const    { return player; }         // The player object associated with this model (const version)
 
    const Player2CigiMap* getTypeMapper() const { return typeMapper; }     // IG type mapper
 
@@ -81,7 +81,7 @@ public:
    // Initializes this model for player, 'p' (we're ACTIVE), and
    // looks up the IG model type ID in the model table, 'igModelTable'.
    // If the size of the IG model table is zero(0), then the model type ID is not set.
-   void initialize(models::Player* const p, const Player2CigiMap** const igModelTable = nullptr, const int numModels = 0);
+   void initialize(models::IPlayer* const p, const Player2CigiMap** const igModelTable = nullptr, const int numModels = 0);
 
    // Clear out this model (we're INACTIVE)
    void clear();
@@ -113,9 +113,9 @@ private:
    int entityId{};
 
    // Sets the player object, p, associated with this model
-   void setPlayer(models::Player* const);
+   void setPlayer(models::IPlayer* const);
 
-   models::Player* player{};             // This player
+   models::IPlayer* player{};            // This player
    State state{State::INACTIVE};         // Model Active flag
    int ageCount{};                       // Age counter (how many times have we've been overlooked)
    bool checked{};                       // Model was checked

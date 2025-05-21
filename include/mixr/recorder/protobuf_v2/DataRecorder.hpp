@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base { class Identifier; class Integer; }
-namespace models { class Player; class Track; class Emission; }
+namespace models { class IPlayer; class Track; class Emission; }
 namespace recorder {
 namespace protobuf_v2 {
 namespace proto { class DataRecord; class PlayerId; class PlayerState;
@@ -83,8 +83,8 @@ protected:
    bool setOutputHandler(OutputHandler* const);
 
    // data filler functions
-   virtual void genPlayerId(proto::PlayerId* const id, const models::Player* const player );
-   virtual void genPlayerState(proto::PlayerState* const state, const models::Player* const player );
+   virtual void genPlayerId(proto::PlayerId* const id, const models::IPlayer* const player );
+   virtual void genPlayerState(proto::PlayerState* const state, const models::IPlayer* const player );
    virtual void genTrackData(proto::TrackData* const trkMsg, const models::Track* const track );
    virtual void genEmissionData(proto::EmissionData* const emMsg, const models::Emission* const emData);
    virtual void sendDataRecord(proto::DataRecord* const msg);       // Send the DataRecord to our output handler

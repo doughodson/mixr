@@ -5,7 +5,7 @@
 #include "mixr/simulation/INib.hpp"
 
 #include "mixr/interop/INetIO.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include <array>
 #include <string>
 
@@ -69,11 +69,11 @@ public:
    virtual bool setNetIO(INetIO* const);                                  // Sets our Network I/O controller
 
    // The player, its name and ID
-   models::Player* getPlayer()                        { return pPlayer; }
+   models::IPlayer* getPlayer()                       { return pPlayer; }
    unsigned short getPlayerID() const override        { return playerID; }
    const std::string& getPlayerName() const           { return pname; }
 
-   virtual bool setPlayer(models::Player* const);
+   virtual bool setPlayer(models::IPlayer* const);
    virtual void setPlayerID(const unsigned short);
    virtual void setPlayerName(const std::string& x)   { pname = x; }
 
@@ -81,16 +81,16 @@ public:
    virtual bool setFederateName(const std::string&);            // sets our federate name
 
    // Mode
-   bool isMode(const models::Player::Mode m) const            { return mode == m; }
-   bool isNotMode(const models::Player::Mode m) const         { return mode != m; }
-   models::Player::Mode getMode() const                       { return mode; }
-   virtual void setMode(const models::Player::Mode m);
+   bool isMode(const models::IPlayer::Mode m) const           { return mode == m; }
+   bool isNotMode(const models::IPlayer::Mode m) const        { return mode != m; }
+   models::IPlayer::Mode getMode() const                      { return mode; }
+   virtual void setMode(const models::IPlayer::Mode m);
 
    // Side
-   bool isSide(const models::Player::Side s) const            { return (s == side); }
-   bool isNotSide(const models::Player::Side s) const         { return (s != side); }
-   models::Player::Side getSide() const                       { return side; }
-   virtual void setSide(const models::Player::Side s);
+   bool isSide(const models::IPlayer::Side s) const           { return (s == side); }
+   bool isNotSide(const models::IPlayer::Side s) const        { return (s != side); }
+   models::IPlayer::Side getSide() const                      { return side; }
+   virtual void setSide(const models::IPlayer::Side s);
 
    // Dead Reckoning (DR) algorithm (see enum DeadReckoning)
    bool isDeadReckoning(const unsigned char dr) const         { return (drNum == dr); }
@@ -205,7 +205,7 @@ public:
    double getTimeUtc() const                      { return utcTime; }
    virtual void setTimeUtc(const double);
 
-   virtual bool setOutputPlayerType(const models::Player* const p);
+   virtual bool setOutputPlayerType(const models::IPlayer* const p);
    virtual bool isPlayerStateUpdateRequired(const double curExecTime);
    virtual void playerState2Nib();
    virtual void nib2PlayerState();
@@ -280,7 +280,7 @@ private:
    INetIO::IoType ioType;               // Input/Output direction of this NIB
 
    std::string federateName;                     // federate name
-   base::safe_ptr<models::Player> pPlayer;       // Our player
+   base::safe_ptr<models::IPlayer> pPlayer;      // Our player
    base::safe_ptr<INetIO> pNetIO;                // Our Network
    bool checked{};                               // NIB was checked
    unsigned short playerID{};                    // Player ID
@@ -291,8 +291,8 @@ private:
 
    // player data
    std::string pname;                     // Name
-   models::Player::Side side;             // Side
-   models::Player::Mode mode;             // NIB Mode
+   models::IPlayer::Side side;            // Side
+   models::IPlayer::Mode mode;            // NIB Mode
    bool        timeoutEnbFlg{true};       // NIB can timeout flag
    double      damage{};                  // Damage state from no damage(0.0) to destroyed (1.0)
    double      smoking{};                 // Smoke state from no smoke (0.0) to maximum (1.0)

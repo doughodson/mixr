@@ -181,7 +181,7 @@ bool Nib::networkOutputManagers(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateProxyPlayer()
 {
-    models::Player* p{getPlayer()};
+    models::IPlayer* p{getPlayer()};
 
    // ---
    // If we haven't tried to create the proxy player yet ...

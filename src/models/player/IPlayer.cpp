@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
@@ -57,9 +57,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Player, "Player")
+IMPLEMENT_SUBCLASS(IPlayer, "IPlayer")
 
-BEGIN_SLOTTABLE(Player)
+BEGIN_SLOTTABLE(IPlayer)
    // Player's initial position relative to the simulation's reference point
    "initXPos",          //  1) Initial X position    (meters, base::Distance)
    "initYPos",          //  2) Initial Y position    (meters, base::Distance)
@@ -112,9 +112,9 @@ BEGIN_SLOTTABLE(Player)
    "testBodyAxis",      // 33) Test rates are in body coordinates else Euler rates (default: false)
 
    "useCoordSys"        // 34) Coord system to use for position updating { WORLD, GEOD, LOCAL }
-END_SLOTTABLE(Player)
+END_SLOTTABLE(IPlayer)
 
-BEGIN_SLOT_MAP(Player)
+BEGIN_SLOT_MAP(IPlayer)
 
    ON_SLOT( 1, setSlotInitXPos,           base::ILength)
    ON_SLOT( 1, setSlotInitXPos,           base::INumber)
@@ -177,16 +177,16 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(34, setSlotUseCoordSys,        base::Identifier)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Player)
+BEGIN_EVENT_HANDLER(IPlayer)
 
    // We're just killed by 'Player'
-   ON_EVENT_OBJ(KILL_EVENT, killedNotification, Player)
+   ON_EVENT_OBJ(KILL_EVENT, killedNotification, IPlayer)
 
    // We're just killed by unknown player
    ON_EVENT(KILL_EVENT, killedNotification)
 
    // We just collided 'Player'
-   ON_EVENT_OBJ(CRASH_EVENT, collisionNotification, Player)
+   ON_EVENT_OBJ(CRASH_EVENT, collisionNotification, IPlayer)
 
    // We just crashed
    ON_EVENT(CRASH_EVENT,crashNotification)
@@ -230,14 +230,14 @@ BEGIN_EVENT_HANDLER(Player)
 END_EVENT_HANDLER()
 
 
-Player::Player()
+IPlayer::IPlayer()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-void Player::initData()
+void IPlayer::initData()
 {
    static base::String generic("GenericPlayer");
    setType_old(&generic);
@@ -276,7 +276,7 @@ void Player::initData()
    syncState2.clear();
 }
 
-void Player::copyData(const Player& org, const bool cc)
+void IPlayer::copyData(const IPlayer& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -409,7 +409,7 @@ void Player::copyData(const Player& org, const bool cc)
    syncState2 = org.syncState2;
 }
 
-void Player::deleteData()
+void IPlayer::deleteData()
 {
    type_old = nullptr;
    signature = nullptr;
@@ -436,7 +436,7 @@ void Player::deleteData()
 //------------------------------------------------------------------------------
 // shutdownNotification()
 //------------------------------------------------------------------------------
-bool Player::shutdownNotification()
+bool IPlayer::shutdownNotification()
 {
    for (unsigned int i{}; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
@@ -448,7 +448,7 @@ bool Player::shutdownNotification()
 //------------------------------------------------------------------------------
 // isFrozen() -- checks both player's freeze flag and the simulation's freeze flag
 //------------------------------------------------------------------------------
-bool Player::isFrozen() const
+bool IPlayer::isFrozen() const
 {
    bool frz{BaseClass::isFrozen()};
    if (!frz && sim != nullptr) frz = sim->isFrozen();
@@ -458,7 +458,7 @@ bool Player::isFrozen() const
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters
 //------------------------------------------------------------------------------
-void Player::reset()
+void IPlayer::reset()
 {
    // ---
    // Update our system (component) pointers
@@ -531,7 +531,7 @@ void Player::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Player::updateTC(const double dt0)
+void IPlayer::updateTC(const double dt0)
 {
    // Make sure we've loaded our system pointers
    if (loadSysPtrs) {
@@ -622,7 +622,7 @@ void Player::updateTC(const double dt0)
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void Player::updateData(const double dt)
+void IPlayer::updateData(const double dt)
 {
    if (mode == Mode::ACTIVE || mode == Mode::PRE_RELEASE) {
 
@@ -648,13 +648,13 @@ void Player::updateData(const double dt)
 //-----------------------------------------------------------------------------
 
 // Player's gross weight (lbs)
-double Player::getGrossWeight() const
+double IPlayer::getGrossWeight() const
 {
    return 0.0;
 }
 
 // Default: mach number
-double Player::getMach() const
+double IPlayer::getMach() const
 {
    // Really only good up to around 30,000 feet, and
    // using standard air temp of 15 degrees Celsius
@@ -674,13 +674,13 @@ double Player::getMach() const
 }
 
 // Player's Center-of-Gravity (%)
-double Player::getCG() const
+double IPlayer::getCG() const
 {
    return 0.0;
 }
 
 // Return true if heading-hold mode is on
-bool Player::isHeadingHoldOn() const
+bool IPlayer::isHeadingHoldOn() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isHeadingHoldOn();
@@ -689,13 +689,13 @@ bool Player::isHeadingHoldOn() const
 }
 
 // Return commanded heading, default (radians)
-double Player::getCommandedHeading() const
+double IPlayer::getCommandedHeading() const
 {
    return getCommandedHeadingD() * static_cast<double>(base::angle::D2RCC);
 }
 
 // Return commanded heading (degrees)
-double Player::getCommandedHeadingD() const
+double IPlayer::getCommandedHeadingD() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedHeadingD();
@@ -704,13 +704,13 @@ double Player::getCommandedHeadingD() const
 }
 
 // Return commanded heading (radians)
-double Player::getCommandedHeadingR() const
+double IPlayer::getCommandedHeadingR() const
 {
    return getCommandedHeadingD() * static_cast<double>(base::angle::D2RCC);
 }
 
 // Return true if velocity-hold mode is on
-bool Player::isVelocityHoldOn() const
+bool IPlayer::isVelocityHoldOn() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isVelocityHoldOn();
@@ -719,7 +719,7 @@ bool Player::isVelocityHoldOn() const
 }
 
 // Commanded (true) velocity (knots)
-double Player::getCommandedVelocityKts() const
+double IPlayer::getCommandedVelocityKts() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedVelocityKts();
@@ -728,19 +728,19 @@ double Player::getCommandedVelocityKts() const
 }
 
 // Commanded (true) velocity (Feet/Sec)
-double Player::getCommandedVelocityFps() const
+double IPlayer::getCommandedVelocityFps() const
 {
    return getCommandedVelocityKts() * base::length::NM2FT / base::time::H2S;
 }
 
 // Commanded (true) velocity (Meters/Sec)
-double Player::getCommandedVelocityMps() const
+double IPlayer::getCommandedVelocityMps() const
 {
    return getCommandedVelocityKts() * base::length::NM2M / base::time::H2S;
 }
 
 // Return true if altitude-hold mode is on
-bool Player::isAltitudeHoldOn() const
+bool IPlayer::isAltitudeHoldOn() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->isAltitudeHoldOn();
@@ -749,7 +749,7 @@ bool Player::isAltitudeHoldOn() const
 }
 
 // Get commanded (HAE) altitude, default (meters)
-double Player::getCommandedAltitude() const
+double IPlayer::getCommandedAltitude() const
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->getCommandedAltitude();
@@ -758,25 +758,25 @@ double Player::getCommandedAltitude() const
 }
 
 // Get commanded (HAE) altitude (meters)
-double Player::getCommandedAltitudeM() const
+double IPlayer::getCommandedAltitudeM() const
 {
    return getCommandedAltitude();
 }
 
 // Get commanded (HAE) altitude (feet)
-double Player::getCommandedAltitudeFt() const
+double IPlayer::getCommandedAltitudeFt() const
 {
    return getCommandedAltitude() * base::length::M2FT;
 }
 
 // True if player is destroyed
-bool Player::isDestroyed() const
+bool IPlayer::isDestroyed() const
 {
    return (damage > 0.999f);
 }
 
 // Earth radius (meters)
-double Player::getEarthRadius() const
+double IPlayer::getEarthRadius() const
 {
    double erad{base::nav::ERAD60 * base::length::NM2M};  // (default)
 
@@ -801,7 +801,7 @@ double Player::getEarthRadius() const
 // World model access functions
 //------------------------------------------------------------------------------
 
-WorldModel* Player::getWorldModel()
+WorldModel* IPlayer::getWorldModel()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -809,16 +809,16 @@ WorldModel* Player::getWorldModel()
    return sim;
 }
 
-const WorldModel* Player::getWorldModel() const
+const WorldModel* IPlayer::getWorldModel() const
 {
    if (sim == nullptr) {
-      (const_cast<Player*>(this))->getSimulationImp();
+      (const_cast<IPlayer*>(this))->getSimulationImp();
    }
    return sim;
 }
 
 // Find our world model
-WorldModel* Player::getSimulationImp()
+WorldModel* IPlayer::getSimulationImp()
 {
    if (sim == nullptr) {
       sim = static_cast<WorldModel*>(findContainerByType(typeid(WorldModel)));
@@ -835,19 +835,19 @@ WorldModel* Player::getSimulationImp()
 //------------------------------------------------------------------------------
 
 // Player's dynamics
-IDynamics* Player::getDynamicsModel()
+IDynamics* IPlayer::getDynamicsModel()
 {
    return (dynamicsModel != nullptr) ? (static_cast<IDynamics*>(dynamicsModel->object())) : nullptr;
 }
 
 // Player's dynamics (const version)
-const IDynamics* Player::getDynamicsModel() const
+const IDynamics* IPlayer::getDynamicsModel() const
 {
    return (dynamicsModel != nullptr) ? (static_cast<IDynamics*>(dynamicsModel->object())) : nullptr;
 }
 
 // Name of the Player's dynamics model
-const std::string& Player::getDynamicsModelName() const
+const std::string& IPlayer::getDynamicsModelName() const
 {
    static const std::string empty;
    return (dynamicsModel != nullptr) ? dynamicsModel->slot() : empty;
@@ -858,26 +858,26 @@ const std::string& Player::getDynamicsModelName() const
 //------------------------------------------------------------------------------
 
 // Player's pilot model
-IPilot* Player::getPilot()
+IPilot* IPlayer::getPilot()
 {
    return (pilot != nullptr) ? (static_cast<IPilot*>(pilot->object())) : nullptr;
 }
 
 // Player's pilot model (const version)
-const IPilot* Player::getPilot() const
+const IPilot* IPlayer::getPilot() const
 {
    return (pilot != nullptr) ? (static_cast<IPilot*>(pilot->object())) : nullptr;
 }
 
 // Name of the player's pilot model
-const std::string& Player::getPilotName() const
+const std::string& IPlayer::getPilotName() const
 {
    static const std::string empty;
    return (pilot != nullptr) ? pilot->slot() : empty;
 }
 
 // Returns a Pilot model by its name
-IPilot* Player::getPilotByName(const char* const name1)
+IPilot* IPlayer::getPilotByName(const char* const name1)
 {
    IPilot* p{};
    if (pilot != nullptr) {
@@ -921,7 +921,7 @@ IPilot* Player::getPilotByName(const char* const name1)
 }
 
 // Returns a Pilot model by its type
-base::Pair* Player::getPilotByType(const std::type_info& type)
+base::Pair* IPlayer::getPilotByType(const std::type_info& type)
 {
    base::Pair* p{};  // Our return value
 
@@ -944,19 +944,19 @@ base::Pair* Player::getPilotByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's stores (weapons, fuel) manager model
-StoresMgr* Player::getStoresManagement()
+StoresMgr* IPlayer::getStoresManagement()
 {
    return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
 }
 
 // Player's stores (weapons, fuel) manager model (const version)
-const StoresMgr* Player::getStoresManagement() const
+const StoresMgr* IPlayer::getStoresManagement() const
 {
    return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
 }
 
 // Name of the player's stores (weapons, fuel) manager model
-const std::string& Player::getStoresManagementName() const
+const std::string& IPlayer::getStoresManagementName() const
 {
    static const std::string empty;
    return (sms != nullptr) ? sms->slot() : empty;
@@ -967,26 +967,26 @@ const std::string& Player::getStoresManagementName() const
 //------------------------------------------------------------------------------
 
 // Player's top level Datalink model
-Datalink* Player::getDatalink()
+Datalink* IPlayer::getDatalink()
 {
    return (datalink != nullptr) ? (static_cast<Datalink*>(datalink->object())) : nullptr;
 }
 
 // Player's top level Datalink (const version)
-const Datalink* Player::getDatalink() const
+const Datalink* IPlayer::getDatalink() const
 {
    return (datalink != nullptr) ? (static_cast<Datalink*>(datalink->object())) : nullptr;
 }
 
 // Name of the player's top level Datalink model
-const std::string& Player::getDatalinkName() const
+const std::string& IPlayer::getDatalinkName() const
 {
    static const std::string empty;
    return (datalink != nullptr) ? datalink->slot() : empty;
 }
 
 // Returns a Datalink model by its name
-Datalink* Player::getDatalinkByName(const char* const name1)
+Datalink* IPlayer::getDatalinkByName(const char* const name1)
 {
    Datalink* p{};
    if (datalink != nullptr) {
@@ -1030,7 +1030,7 @@ Datalink* Player::getDatalinkByName(const char* const name1)
 }
 
 // Returns a Datalink model by its type
-base::Pair* Player::getDatalinkByType(const std::type_info& type)
+base::Pair* IPlayer::getDatalinkByType(const std::type_info& type)
 {
    base::Pair* p{};                 // Our return value
 
@@ -1053,26 +1053,26 @@ base::Pair* Player::getDatalinkByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Gimbal model
-IGimbal* Player::getGimbal()
+IGimbal* IPlayer::getGimbal()
 {
    return (gimbal != nullptr) ? ((IGimbal*) gimbal->object()) : nullptr;
 }
 
 // Player's top level Gimbal (const version)
-const IGimbal* Player::getGimbal() const
+const IGimbal* IPlayer::getGimbal() const
 {
    return (gimbal != nullptr) ? (static_cast<IGimbal*>(gimbal->object())) : nullptr;
 }
 
 // Name of the player's top level Gimbal model
-const std::string& Player::getGimbalName() const
+const std::string& IPlayer::getGimbalName() const
 {
    static const std::string empty;
    return (gimbal != nullptr) ? gimbal->slot() : empty;
 }
 
 // Returns a Gimbal model by its name
-IGimbal* Player::getGimbalByName(const char* const name1)
+IGimbal* IPlayer::getGimbalByName(const char* const name1)
 {
    IGimbal* p{};
    if (gimbal != nullptr) {
@@ -1116,7 +1116,7 @@ IGimbal* Player::getGimbalByName(const char* const name1)
 }
 
 // Returns a Gimbal model by its type
-base::Pair* Player::getGimbalByType(const std::type_info& type)
+base::Pair* IPlayer::getGimbalByType(const std::type_info& type)
 {
    base::Pair* p{};                // Our return value
 
@@ -1139,26 +1139,26 @@ base::Pair* Player::getGimbalByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Navigation model
-INavigation* Player::getNavigation()
+INavigation* IPlayer::getNavigation()
 {
    return (nav != nullptr) ? (static_cast<INavigation*>(nav->object())) : nullptr;
 }
 
 // Player's top level Navigation (const version)
-const INavigation* Player::getNavigation() const
+const INavigation* IPlayer::getNavigation() const
 {
    return (nav != nullptr) ? (static_cast<INavigation*>(nav->object())) : nullptr;
 }
 
 // Name of the player's top level Navigation model
-const std::string& Player::getNavigationName() const
+const std::string& IPlayer::getNavigationName() const
 {
    static const std::string empty;
    return (nav != nullptr) ? nav->slot() : empty;
 }
 
 // Returns a Navigation model by its name
-INavigation* Player::getNavigationByName(const char* const name1)
+INavigation* IPlayer::getNavigationByName(const char* const name1)
 {
    INavigation* p{};
    if (nav != nullptr) {
@@ -1202,7 +1202,7 @@ INavigation* Player::getNavigationByName(const char* const name1)
 }
 
 // Returns a Navigation model by its type
-base::Pair* Player::getNavigationByType(const std::type_info& type)
+base::Pair* IPlayer::getNavigationByType(const std::type_info& type)
 {
    base::Pair* p{};                 // Our return value
 
@@ -1225,26 +1225,26 @@ base::Pair* Player::getNavigationByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level OnboardComputer model
-OnboardComputer* Player::getOnboardComputer()
+OnboardComputer* IPlayer::getOnboardComputer()
 {
    return (obc != nullptr) ? (static_cast<OnboardComputer*>(obc->object())) : nullptr;
 }
 
 // Player's top level OnboardComputer (const version)
-const OnboardComputer* Player::getOnboardComputer() const
+const OnboardComputer* IPlayer::getOnboardComputer() const
 {
    return (obc != nullptr) ? (static_cast<OnboardComputer*>(obc->object())) : nullptr;
 }
 
 // Name of the player's top level OnboardComputer model
-const std::string& Player::getOnboardComputerName() const
+const std::string& IPlayer::getOnboardComputerName() const
 {
    static const std::string empty;
    return (obc != nullptr) ? obc->slot() : empty;
 }
 
 // Returns an OnboardComputer model by its name
-OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
+OnboardComputer* IPlayer::getOnboardComputerByName(const char* const name1)
 {
    OnboardComputer* p{};
    if (obc != nullptr) {
@@ -1288,7 +1288,7 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 }
 
 // Returns an OnboardComputer model by its type
-base::Pair* Player::getOnboardComputerByType(const std::type_info& type)
+base::Pair* IPlayer::getOnboardComputerByType(const std::type_info& type)
 {
    base::Pair* p{};                // Our return value
 
@@ -1311,26 +1311,26 @@ base::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level Radio model
-IRadio* Player::getRadio()
+IRadio* IPlayer::getRadio()
 {
    return (radio != nullptr) ? (static_cast<IRadio*>(radio->object())) : nullptr;
 }
 
 // Player's top level Radio (const version)
-const IRadio* Player::getRadio() const
+const IRadio* IPlayer::getRadio() const
 {
    return (radio != nullptr) ? (static_cast<IRadio*>(radio->object())) : nullptr;
 }
 
 // Name of the player's top level Radio model
-const std::string& Player::getRadioName() const
+const std::string& IPlayer::getRadioName() const
 {
    static const std::string empty;
    return (radio != nullptr) ? radio->slot() : empty;
 }
 
 // Returns a Radio model by its name
-IRadio* Player::getRadioByName(const char* const name1)
+IRadio* IPlayer::getRadioByName(const char* const name1)
 {
    IRadio* p{};
    if (radio != nullptr) {
@@ -1374,7 +1374,7 @@ IRadio* Player::getRadioByName(const char* const name1)
 }
 
 // Returns a Radio model by its type
-base::Pair* Player::getRadioByType(const std::type_info& type)
+base::Pair* IPlayer::getRadioByType(const std::type_info& type)
 {
    base::Pair* p{};                // Our return value
 
@@ -1397,26 +1397,26 @@ base::Pair* Player::getRadioByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level R/F sensor model
-IRfSensor* Player::getSensor()
+IRfSensor* IPlayer::getSensor()
 {
    return (sensor != nullptr) ? (static_cast<IRfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
-const IRfSensor* Player::getSensor() const
+const IRfSensor* IPlayer::getSensor() const
 {
    return (sensor != nullptr) ? (static_cast<IRfSensor*>(sensor->object())) : nullptr;
 }
 
 // Name of the player's top level R/F sensor model
-const std::string& Player::getSensorName() const
+const std::string& IPlayer::getSensorName() const
 {
    static const std::string empty;
    return (sensor != nullptr) ? sensor->slot() : empty;
 }
 
 // Returns a R/F sensor model by its name
-IRfSensor* Player::getSensorByName(const char* const name1)
+IRfSensor* IPlayer::getSensorByName(const char* const name1)
 {
    IRfSensor* p{};
    if (sensor != nullptr) {
@@ -1460,7 +1460,7 @@ IRfSensor* Player::getSensorByName(const char* const name1)
 }
 
 // Returns a R/F sensor model by its type
-base::Pair* Player::getSensorByType(const std::type_info& type)
+base::Pair* IPlayer::getSensorByType(const std::type_info& type)
 {
    base::Pair* p{};                // Our return value
 
@@ -1483,26 +1483,26 @@ base::Pair* Player::getSensorByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's top level IR sensor model
-IrSystem* Player::getIrSystem()
+IrSystem* IPlayer::getIrSystem()
 {
    return (irSystem != nullptr) ? (static_cast<IrSystem*>(irSystem->object())) : nullptr;
 }
 
 // Name of the player's top level IR sensor model
-const IrSystem* Player::getIrSystem() const
+const IrSystem* IPlayer::getIrSystem() const
 {
    return (irSystem != nullptr) ? (static_cast<IrSystem*>(irSystem->object())) : nullptr;
 }
 
 // Name of the player's top level IR sensor model
-const std::string& Player::getIrSystemName() const
+const std::string& IPlayer::getIrSystemName() const
 {
    static const std::string empty;
    return (irSystem != nullptr) ? irSystem->slot() : empty;
 }
 
 // Returns a IR sensor model by its name
-IrSystem* Player::getIrSystemByName(const char* const name1)
+IrSystem* IPlayer::getIrSystemByName(const char* const name1)
 {
    IrSystem* p{};
    if (irSystem != nullptr) {
@@ -1546,7 +1546,7 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
 }
 
 // Returns a IR sensor model by its type
-base::Pair* Player::getIrSystemByType(const std::type_info& type)
+base::Pair* IPlayer::getIrSystemByType(const std::type_info& type)
 {
    base::Pair* p{};                // Our return value
 
@@ -1569,14 +1569,14 @@ base::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(const std::string& x)
+bool IPlayer::setType(const std::string& x)
 {
    type = x;
    return true;
 }
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType_old(const base::String* const x)
+bool IPlayer::setType_old(const base::String* const x)
 {
    if (x != nullptr) {
       base::String* p{x->clone()};
@@ -1588,54 +1588,54 @@ bool Player::setType_old(const base::String* const x)
 }
 
 // Sets the player's side (BLUE, RED, etc)
-void Player::setSide(const Side s)
+void IPlayer::setSide(const Side s)
 {
    side = s;
 }
 
 // Sets the coord system to use for updating position
-bool Player::setUseCoordSys(const CoordSys cs)
+bool IPlayer::setUseCoordSys(const CoordSys cs)
 {
    useCoordSys = cs;
    return true;
 }
 
 // Sets the player's fuel flag
-bool Player::setFuelFreeze(const bool f)
+bool IPlayer::setFuelFreeze(const bool f)
 {
    fuelFrz = f;
    return true;
 }
 
 // Sets the player's crash override flag
-bool Player::setCrashOverride(const bool f)
+bool IPlayer::setCrashOverride(const bool f)
 {
    crashOverride = f;
    return true;
 }
 
 // Sets the player's kill override flag
-bool Player::setKillOverride(const bool f)
+bool IPlayer::setKillOverride(const bool f)
 {
    killOverride = f;
    return true;
 }
 
 // Sets the player's kill removal flag
-bool Player::setKillRemoval(const bool f)
+bool IPlayer::setKillRemoval(const bool f)
 {
    killRemoval = f;
    return true;
 }
 
 // Resets the just killed flag
-void Player::resetJustKilled()
+void IPlayer::resetJustKilled()
 {
    justKilled = false;
 }
 
 // Sets the damage for this player
-bool Player::setDamage(const double v)
+bool IPlayer::setDamage(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -1645,7 +1645,7 @@ bool Player::setDamage(const double v)
 }
 
 // Sets the smoke for this player
-bool Player::setSmoke(const double v)
+bool IPlayer::setSmoke(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -1655,7 +1655,7 @@ bool Player::setSmoke(const double v)
 }
 
 // Sets the flames for this player
-bool Player::setFlames(const double v)
+bool IPlayer::setFlames(const double v)
 {
    double x{v};
    if (x < 0) x = 0.0;
@@ -1665,35 +1665,35 @@ bool Player::setFlames(const double v)
 }
 
 // Sets the camouflage type for this player
-bool Player::setCamouflageType(const unsigned int v)
+bool IPlayer::setCamouflageType(const unsigned int v)
 {
    camouflage = v;
    return true;
 }
 
 // Sets the player's position freeze flag
-bool Player::setPositionFreeze(const bool f)
+bool IPlayer::setPositionFreeze(const bool f)
 {
    posFrz  = f;
    return true;
 }
 
 // Sets the player's altitude freeze flag
-bool Player::setAltitudeFreeze(const bool f)
+bool IPlayer::setAltitudeFreeze(const bool f)
 {
    altFrz = f;
    return true;
 }
 
 // Sets the player's attitude freeze flag
-bool Player::setAttitudeFreeze(const bool f)
+bool IPlayer::setAttitudeFreeze(const bool f)
 {
    attFrz = f;
    return true;
 }
 
 // Enable/Disable heading hold
-bool Player::setHeadingHoldOn(const bool b)
+bool IPlayer::setHeadingHoldOn(const bool b)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setHeadingHoldOn(b);
@@ -1702,13 +1702,13 @@ bool Player::setHeadingHoldOn(const bool b)
 }
 
 // Sets the commanded (true) heading (radians)
-bool Player::setCommandedHeading(const double h)
+bool IPlayer::setCommandedHeading(const double h)
 {
    return setCommandedHeadingD( h * base::angle::R2DCC );
 }
 
 // Sets commanded (true) heading (true: degs)
-bool Player::setCommandedHeadingD(const double h)
+bool IPlayer::setCommandedHeadingD(const double h)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedHeadingD(h);
@@ -1717,13 +1717,13 @@ bool Player::setCommandedHeadingD(const double h)
 }
 
 // Sets the commanded (true) heading (radians)
-bool Player::setCommandedHeadingR(const double h)
+bool IPlayer::setCommandedHeadingR(const double h)
 {
    return setCommandedHeadingD( h * base::angle::R2DCC );
 }
 
 // Enable/Disable velocity hold
-bool Player::setVelocityHoldOn(const bool b)
+bool IPlayer::setVelocityHoldOn(const bool b)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setVelocityHoldOn(b);
@@ -1732,7 +1732,7 @@ bool Player::setVelocityHoldOn(const bool b)
 }
 
 // Sets the commanded (true) velocity (knots)
-bool Player::setCommandedVelocityKts(const double a)
+bool IPlayer::setCommandedVelocityKts(const double a)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedVelocityKts(a);
@@ -1741,7 +1741,7 @@ bool Player::setCommandedVelocityKts(const double a)
 }
 
 // Enable/Disable altitude hold
-bool Player::setAltitudeHoldOn(const bool b)
+bool IPlayer::setAltitudeHoldOn(const bool b)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setAltitudeHoldOn(b);
@@ -1750,7 +1750,7 @@ bool Player::setAltitudeHoldOn(const bool b)
 }
 
 // Sets commanded (HAE) altitude, default (meters)
-bool Player::setCommandedAltitude(const double a)
+bool IPlayer::setCommandedAltitude(const double a)
 {
    if (getDynamicsModel() != nullptr)
       return getDynamicsModel()->setCommandedAltitude(a);
@@ -1759,47 +1759,47 @@ bool Player::setCommandedAltitude(const double a)
 }
 
 // Sets commanded (HAE) altitude (meters)
-bool Player::setCommandedAltitudeM(const double a)
+bool IPlayer::setCommandedAltitudeM(const double a)
 {
    return setCommandedAltitude(a);
 }
 
 // Sets commanded (HAE) altitude (feet)
-bool Player::setCommandedAltitudeFt(const double a)
+bool IPlayer::setCommandedAltitudeFt(const double a)
 {
    return setCommandedAltitude( a * base::length::FT2M );
 }
 
 // Sets the elevation of the terrain at this player's location (meters)
-void Player::setTerrainElevation(const double v)
+void IPlayer::setTerrainElevation(const double v)
 {
    tElev = v;
    tElevValid = true;
 }
 
 // Sets the ground clamping offset (meters)
-bool Player::setTerrainOffset(const double v)
+bool IPlayer::setTerrainOffset(const double v)
 {
    tOffset = v;
    return true;
 }
 
 // sets the DTED terrain interpolation flag
-bool Player::setInterpolateTerrain(const bool x)
+bool IPlayer::setInterpolateTerrain(const bool x)
 {
    interpTrrn = x;
    return true;
 }
 
 // Sets IG terrain elevation request flag
-bool Player::setTerrainElevationRequired(const bool b)
+bool IPlayer::setTerrainElevationRequired(const bool b)
 {
    tElevReq = b;
    return true;
 }
 
 // Set the player's altitude (m)
-bool Player::setAltitude(const double alt, const bool slaved)
+bool IPlayer::setAltitude(const double alt, const bool slaved)
 {
    bool saved{posSlaved};
 
@@ -1819,7 +1819,7 @@ bool Player::setAltitude(const double alt, const bool slaved)
 }
 
 // Position relative to the simulation ref point (meters)
-bool Player::setPosition(const double n, const double e, const bool slaved)
+bool IPlayer::setPosition(const double n, const double e, const bool slaved)
 {
    bool saved{altSlaved};
    bool ok{setPosition(n, e, -getAltitudeM(), false)};
@@ -1831,7 +1831,7 @@ bool Player::setPosition(const double n, const double e, const bool slaved)
 }
 
 // Position relative to the simulation ref point (meters)
-bool Player::setPosition(const double n, const double e, const double d, const bool slaved)
+bool IPlayer::setPosition(const double n, const double e, const double d, const bool slaved)
 {
    WorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
@@ -1874,13 +1874,13 @@ bool Player::setPosition(const double n, const double e, const double d, const b
 }
 
 // Position vector; NED from simulation ref point (meters)
-bool Player::setPosition(const base::Vec3d& pos, const bool slaved)
+bool IPlayer::setPosition(const base::Vec3d& pos, const bool slaved)
 {
    return setPosition(pos[INORTH], pos[IEAST], pos[IDOWN], slaved);
 }
 
 // Sets present position using lat/long position; (degs)
-bool Player::setPositionLL(const double lat, const double lon, const bool slaved)
+bool IPlayer::setPositionLL(const double lat, const double lon, const bool slaved)
 {
    bool saved{altSlaved};
    bool ok{setPositionLLA(lat, lon, getAltitudeM(), false)};
@@ -1892,7 +1892,7 @@ bool Player::setPositionLL(const double lat, const double lon, const bool slaved
 }
 
 // Sets present position using lat/long position; (degs) and altitude (m)
-bool Player::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
+bool IPlayer::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
 {
    WorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
@@ -1938,7 +1938,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 
 
 // Geocentric position vector (meters)
-bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
+bool IPlayer::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 {
    WorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
@@ -1984,7 +1984,7 @@ bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 
 
 // Sets Euler angles: (rad) [ roll pitch yaw ]
-bool Player::setEulerAngles(const double r, const double p, const double y)
+bool IPlayer::setEulerAngles(const double r, const double p, const double y)
 {
    // Set angles
    angles.set(r, p, y);
@@ -2005,13 +2005,13 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
 }
 
 // Sets Euler angle vector: (rad) [ roll pitch yaw ]
-bool Player::setEulerAngles(const base::Vec3d& newAngles)
+bool IPlayer::setEulerAngles(const base::Vec3d& newAngles)
 {
    return setEulerAngles(newAngles.x(), newAngles.y(), newAngles.z());
 }
 
 // Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
-bool Player::setGeocEulerAngles(const base::Vec3d& newAngles)
+bool IPlayer::setGeocEulerAngles(const base::Vec3d& newAngles)
 {
    // Set the geocentric angles
    anglesW = newAngles;
@@ -2036,7 +2036,7 @@ bool Player::setGeocEulerAngles(const base::Vec3d& newAngles)
 }
 
 // Sets the rotational matrix
-bool Player::setRotMat(const base::Matrixd& rr)
+bool IPlayer::setRotMat(const base::Matrixd& rr)
 {
    // set the matrix
    rm = rr;
@@ -2057,7 +2057,7 @@ bool Player::setRotMat(const base::Matrixd& rr)
 }
 
 // Sets the quaternion
-bool Player::setQuaternions(const base::Quat& newQ)
+bool IPlayer::setQuaternions(const base::Quat& newQ)
 {
    // Set quaternions
    q = newQ;
@@ -2078,7 +2078,7 @@ bool Player::setQuaternions(const base::Quat& newQ)
 }
 
 // Sets the body angular velocities (radians/second)
-bool Player::setAngularVelocities(const double pa, const double qa, const double ra)
+bool IPlayer::setAngularVelocities(const double pa, const double qa, const double ra)
 {
    angularVel.set(pa,qa,ra);
 
@@ -2092,13 +2092,13 @@ bool Player::setAngularVelocities(const double pa, const double qa, const double
 }
 
 // Sets the body angular velocity vector (radians/second)
-bool Player::setAngularVelocities(const base::Vec3d& newAngVel)
+bool IPlayer::setAngularVelocities(const base::Vec3d& newAngVel)
 {
    return setAngularVelocities(newAngVel[0],newAngVel[1],newAngVel[2]);
 }
 
 // Sets the body angular velocities (radians/second)
-bool Player::setGeocAngularVelocities(const base::Vec3d& newAngVel)
+bool IPlayer::setGeocAngularVelocities(const base::Vec3d& newAngVel)
 {
    gcAngVel = newAngVel;
 
@@ -2116,7 +2116,7 @@ bool Player::setGeocAngularVelocities(const base::Vec3d& newAngVel)
 }
 
 // Sets local NED velocities; (m/s) [ ue -> north(+), ve -> east(+), we -> down(+) ]
-bool Player::setVelocity(const double ue, const double ve, const double we)
+bool IPlayer::setVelocity(const double ue, const double ve, const double we)
 {
    velVecNED.set(ue,ve,we);      // set local NED velocity vectors
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
@@ -2131,14 +2131,14 @@ bool Player::setVelocity(const double ue, const double ve, const double we)
 }
 
 // Sets local NED velocity vector; (meters/sec) NED
-bool Player::setVelocity(const base::Vec3d& newVel)
+bool IPlayer::setVelocity(const base::Vec3d& newVel)
 {
    setVelocity(newVel.x(), newVel.y(), newVel.z());
    return true;
 }
 
 // Sets local NED acceleration vector; (m/s/s) NED
-bool Player::setAcceleration(const double due, const double dve, const double dwe)
+bool IPlayer::setAcceleration(const double due, const double dve, const double dwe)
 {
    accelVecNED.set(due, dve, dwe);
    accelVecECEF = accelVecNED * wm;
@@ -2146,14 +2146,14 @@ bool Player::setAcceleration(const double due, const double dve, const double dw
    return true;
 }
 
-bool Player::setAcceleration(const base::Vec3d& newAccel)
+bool IPlayer::setAcceleration(const base::Vec3d& newAccel)
 {
    setAcceleration(newAccel.x(), newAccel.y(), newAccel.z());
    return true;
 }
 
 // Sets body velocities: (m/s) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
-bool Player::setVelocityBody(const double ua, const double va, const double wa)
+bool IPlayer::setVelocityBody(const double ua, const double va, const double wa)
 {
    velVecBody.set(ua,va,wa);
    velVecNED = velVecBody * rm;  // compute local NED velocity vector
@@ -2169,7 +2169,7 @@ bool Player::setVelocityBody(const double ua, const double va, const double wa)
    return true;
 }
 
-bool Player::setVelocityBody(const base::Vec3d& newVelBody)
+bool IPlayer::setVelocityBody(const base::Vec3d& newVelBody)
 {
    setVelocityBody(newVelBody.x(), newVelBody.y(), newVelBody.z());
    return true;
@@ -2177,7 +2177,7 @@ bool Player::setVelocityBody(const base::Vec3d& newVelBody)
 
 
 // Sets body acceleration vector; (meters/second / second) NED
-bool Player::setAccelerationBody(const double dua, const double dva, const double dwa)
+bool IPlayer::setAccelerationBody(const double dua, const double dva, const double dwa)
 {
    accelVecBody.set(dua,dva,dwa);
    accelVecNED = accelVecBody * rm;  // compute local NED acceleration vector
@@ -2185,14 +2185,14 @@ bool Player::setAccelerationBody(const double dua, const double dva, const doubl
    return true;
 }
 
-bool Player::setAccelerationBody(const base::Vec3d& newAccelBody)
+bool IPlayer::setAccelerationBody(const base::Vec3d& newAccelBody)
 {
    setAccelerationBody(newAccelBody.x(), newAccelBody.y(), newAccelBody.z());
    return true;
 }
 
 // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
+bool IPlayer::setGeocVelocity(const double vx, const double vy, const double vz)
 {
    velVecECEF.set(vx,vy,vz);
    velVecNED = wm * velVecECEF;
@@ -2208,14 +2208,14 @@ bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
    return true;
 }
 
-bool Player::setGeocVelocity(const base::Vec3d& newVelEcef)
+bool IPlayer::setGeocVelocity(const base::Vec3d& newVelEcef)
 {
    setGeocVelocity(newVelEcef.x(), newVelEcef.y(), newVelEcef.z());
    return true;
 }
 
 // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
-bool Player::setGeocAcceleration(const double dvx, const double dvy, const double dvz)
+bool IPlayer::setGeocAcceleration(const double dvx, const double dvy, const double dvz)
 {
    accelVecECEF.set(dvx,dvy,dvz);
    accelVecNED = wm * accelVecECEF;
@@ -2223,7 +2223,7 @@ bool Player::setGeocAcceleration(const double dvx, const double dvy, const doubl
    return true;
 }
 
-bool Player::setGeocAcceleration(const base::Vec3d& newAccelEcef)
+bool IPlayer::setGeocAcceleration(const base::Vec3d& newAccelEcef)
 {
    setGeocAcceleration(newAccelEcef.x(), newAccelEcef.y(), newAccelEcef.z());
    return true;
@@ -2231,7 +2231,7 @@ bool Player::setGeocAcceleration(const base::Vec3d& newAccelEcef)
 
 
 // Initial geocentric position vector
-bool Player::setInitGeocentricPosition(const base::Vec3d& pos)
+bool IPlayer::setInitGeocentricPosition(const base::Vec3d& pos)
 {
    initGeoPosVec = pos;
    initGeoPosFlg = true;
@@ -2239,7 +2239,7 @@ bool Player::setInitGeocentricPosition(const base::Vec3d& pos)
 }
 
 // Initial position (after reset) relative to the simulation reference point (meters)
-bool Player::setInitPosition(const double x, const double y)
+bool IPlayer::setInitPosition(const double x, const double y)
 {
    initPosVec.set(x, y);
    initPosFlg = true;
@@ -2247,13 +2247,13 @@ bool Player::setInitPosition(const double x, const double y)
 }
 
 // Initial position vector (after reset); North/East from simulation reference point (meters)
-bool Player::setInitPosition(const base::Vec2d& pos)
+bool IPlayer::setInitPosition(const base::Vec2d& pos)
 {
    return setInitPosition(pos.x(), pos.y());
 }
 
 // Sets the player's initial (reset) latitude (degrees)
-bool Player::setInitLat(const double x)
+bool IPlayer::setInitLat(const double x)
 {
    bool ok{};
    if (x >= -90.0 && x <= 90.0) {
@@ -2265,7 +2265,7 @@ bool Player::setInitLat(const double x)
 }
 
 // Sets the player's initial (reset) longitude (degrees)
-bool Player::setInitLon(const double x)
+bool IPlayer::setInitLon(const double x)
 {
    bool ok{};
    if (x >= -180.0 && x <= 180.0) {
@@ -2277,7 +2277,7 @@ bool Player::setInitLon(const double x)
 }
 
 // Initial altitude (HAE) (meters)
-bool Player::setInitAltitude(const double alt)
+bool IPlayer::setInitAltitude(const double alt)
 {
    initAlt = alt;
    return true;
@@ -2287,7 +2287,7 @@ bool Player::setInitAltitude(const double alt)
 // setControlStickRollInput(Roll) --  Control inputs: normalized
 //   roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void Player::setControlStickRollInput(const double value)
+void IPlayer::setControlStickRollInput(const double value)
 {
    if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickRollInput(value);
@@ -2298,7 +2298,7 @@ void Player::setControlStickRollInput(const double value)
 // setControlStickPitchInput(Pitch) --  Control inputs: normalized
 //  pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
 //------------------------------------------------------------------------------
-void Player::setControlStickPitchInput(const double value)
+void IPlayer::setControlStickPitchInput(const double value)
 {
    if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickPitchInput(value);
@@ -2317,7 +2317,7 @@ void Player::setControlStickPitchInput(const double value)
 //    num -> number of throttle positions to get/set
 //    returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int Player::setThrottles(const double* const data, const int num)
+int IPlayer::setThrottles(const double* const data, const int num)
 {
    int n{};
    if (getDynamicsModel() != nullptr) {
@@ -2329,12 +2329,12 @@ int Player::setThrottles(const double* const data, const int num)
 //------------------------------------------------------------------------------
 // Process weapon detonation
 //------------------------------------------------------------------------------
-void Player::processDetonation(const double detRange, IWeapon* const wpn)
+void IPlayer::processDetonation(const double detRange, IWeapon* const wpn)
 {
    if (!isKillOverride()) {
 
       // Weapon, launcher & range info
-      Player* launcher{};
+      IPlayer* launcher{};
       double rng{detRange};
       double blastRange{500.0};    // burst range (meters)
       double lethalRange{50.0};    // lethal range  (meters)
@@ -2381,7 +2381,7 @@ void Player::processDetonation(const double detRange, IWeapon* const wpn)
 //------------------------------------------------------------------------------
 // killedNotification() -- We were just killed by a weapon from player 'p'
 //------------------------------------------------------------------------------
-bool Player::killedNotification(Player* const p)
+bool IPlayer::killedNotification(IPlayer* const p)
 {
    if (!isKillOverride()) {
       // When not in 'kill override' mode ...
@@ -2427,7 +2427,7 @@ bool Player::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // collisionNotification() -- We were just killed by a collision with player 'p'
 //------------------------------------------------------------------------------
-bool Player::collisionNotification(Player* const p)
+bool IPlayer::collisionNotification(IPlayer* const p)
 {
    if (!isCrashOverride() && isLocalPlayer()) {
       // When not in 'crash override' mode ...
@@ -2465,7 +2465,7 @@ bool Player::collisionNotification(Player* const p)
 //------------------------------------------------------------------------------
 // crashNotification() -- We were just crashed into terrain
 //------------------------------------------------------------------------------
-bool Player::crashNotification()
+bool IPlayer::crashNotification()
 {
    if (!isCrashOverride() && isLocalPlayer()) {
       // When not in 'crash override' mode ...
@@ -2503,7 +2503,7 @@ bool Player::crashNotification()
 //------------------------------------------------------------------------------
 // onWpnRelEvent() -- Manage the Wpn Release event
 //------------------------------------------------------------------------------
-bool Player::onWpnRelEvent(const base::Boolean* const sw)
+bool IPlayer::onWpnRelEvent(const base::Boolean* const sw)
 {
    bool used{};
 
@@ -2525,7 +2525,7 @@ bool Player::onWpnRelEvent(const base::Boolean* const sw)
 //------------------------------------------------------------------------------
 // onTriggerSwEvent() -- Manage the trigger switch event
 //------------------------------------------------------------------------------
-bool Player::onTriggerSwEvent(const base::Boolean* const sw)
+bool IPlayer::onTriggerSwEvent(const base::Boolean* const sw)
 {
    bool used{};
 
@@ -2543,7 +2543,7 @@ bool Player::onTriggerSwEvent(const base::Boolean* const sw)
 //------------------------------------------------------------------------------
 // onTgtStepEvent() -- Manage the target step (reject) event
 //------------------------------------------------------------------------------
-bool Player::onTgtStepEvent()
+bool IPlayer::onTgtStepEvent()
 {
    if (obc != nullptr) {
       getOnboardComputer()->updateShootList(true);
@@ -2570,7 +2570,7 @@ bool Player::onTgtStepEvent()
 //
 // 7) Pass the emission to anyone requesting reflected emissions
 //------------------------------------------------------------------------------
-bool Player::onRfEmissionEventPlayer(Emission* const em)
+bool IPlayer::onRfEmissionEventPlayer(Emission* const em)
 {
    // Player must be active ...
    if (isNotMode(Mode::ACTIVE)) return false;
@@ -2639,7 +2639,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
 // onRfReflectedEmissionEventPlayer() -- process reflected R/F Emission events
 //
 //------------------------------------------------------------------------------
-bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
+bool IPlayer::onRfReflectedEmissionEventPlayer(Emission* const)
 {
    return true;
 }
@@ -2649,7 +2649,7 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 // onReflectionsRequest() -- request reflected R/F emissions
 //                           (must continue to request once per second)
 //------------------------------------------------------------------------------
-bool Player::onReflectionsRequest(base::IComponent* const p)
+bool IPlayer::onReflectionsRequest(base::IComponent* const p)
 {
    bool ok{};               // Did we succeed?
    unsigned int idx{};      // Empty slot index
@@ -2683,7 +2683,7 @@ bool Player::onReflectionsRequest(base::IComponent* const p)
 //------------------------------------------------------------------------------
 // onReflectionsCancel() -- cancel a request for reflected R/F emissions
 //------------------------------------------------------------------------------
-bool Player::onReflectionsCancel(const base::IComponent* const p)
+bool IPlayer::onReflectionsCancel(const base::IComponent* const p)
 {
    bool ok{};        // Did we succeed?
 
@@ -2715,7 +2715,7 @@ bool Player::onReflectionsCancel(const base::IComponent* const p)
 //
 // 5) Send the query response back to seeker
 //------------------------------------------------------------------------------
-bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
+bool IPlayer::onIrMsgEventPlayer(IrQueryMsg* const msg)
 {
    // Player must be active and have an IR signature ...
    if (isNotMode(Mode::ACTIVE) || irSignature == nullptr) {
@@ -2760,7 +2760,7 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 }
 
 // onDatalinkMessageEventPlayer() -- process datalink message events
-bool Player::onDatalinkMessageEventPlayer(base::IObject* const msg)
+bool IPlayer::onDatalinkMessageEventPlayer(base::IObject* const msg)
 {
    // Just pass it down to all of our datalink system
    if (getDatalink() != nullptr) {
@@ -2770,7 +2770,7 @@ bool Player::onDatalinkMessageEventPlayer(base::IObject* const msg)
 }
 
 // Handles the DE_EMISSION event
-bool Player::onDeEmissionEvent(base::IObject* const)
+bool IPlayer::onDeEmissionEvent(base::IObject* const)
 {
    return false;
 }
@@ -2778,7 +2778,7 @@ bool Player::onDeEmissionEvent(base::IObject* const)
 //------------------------------------------------------------------------------
 // The player's dynamics
 //------------------------------------------------------------------------------
-void Player::dynamics(const double dt)
+void IPlayer::dynamics(const double dt)
 {
    // ---
    // Local player ...
@@ -2849,7 +2849,7 @@ void Player::dynamics(const double dt)
 // Otherwise we'll integrate and set our position using ECEF coordinates and our
 // ECEF velocity.
 //------------------------------------------------------------------------------
-void Player::positionUpdate(const double dt)
+void IPlayer::positionUpdate(const double dt)
 {
    if ( !isLocalPlayer() ) return;
 
@@ -3098,7 +3098,7 @@ void Player::positionUpdate(const double dt)
 //------------------------------------------------------------------------------
 // Default player dead-reckoning function (networked I-players only)
 //------------------------------------------------------------------------------
-void Player::deadReckonPosition(const double dt)
+void IPlayer::deadReckonPosition(const double dt)
 {
    if ( !isProxyPlayer() ) return;
 
@@ -3155,7 +3155,7 @@ void Player::deadReckonPosition(const double dt)
 //------------------------------------------------------------------------------
 // updateSystemPointers() -- update all of our system (component) pointers
 //------------------------------------------------------------------------------
-void Player::updateSystemPointers()
+void IPlayer::updateSystemPointers()
 {
    // ---
    // Set base::Pair pointers for our primary systems located in our list of subcomponents
@@ -3177,7 +3177,7 @@ void Player::updateSystemPointers()
 // processComponents() -- process our components; make sure the are all of
 // type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
-void Player::processComponents(
+void IPlayer::processComponents(
    base::PairStream* const list,
    const std::type_info& filter,
    base::Pair* const add,
@@ -3210,7 +3210,7 @@ void Player::processComponents(
 //------------------------------------------------------------------------------
 // Get terrain elevation from the DTED database (if any)
 //------------------------------------------------------------------------------
-void Player::updateElevation()
+void IPlayer::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the IG system.
@@ -3228,16 +3228,16 @@ void Player::updateElevation()
 //------------------------------------------------------------------------------
 // printTimingStats() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Player::printTimingStats()
+void IPlayer::printTimingStats()
 {
    const base::Statistic* ts{getTimingStats()};
-   std::cout << "Player(" << getWorldModel()->cycle() << "," << getWorldModel()->frame() << "," << getWorldModel()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
+   std::cout << "IPlayer(" << getWorldModel()->cycle() << "," << getWorldModel()->frame() << "," << getWorldModel()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
 }
 
 //------------------------------------------------------------------------------
 // setDynamicsModel() -- Sets our dynamics models
 //------------------------------------------------------------------------------
-bool Player::setDynamicsModel(base::Pair* const sys)
+bool IPlayer::setDynamicsModel(base::Pair* const sys)
 {
    bool ok{};
    if (sys == nullptr) {
@@ -3256,7 +3256,7 @@ bool Player::setDynamicsModel(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setDatalink() -- Sets our Datalink models
 //------------------------------------------------------------------------------
-bool Player::setDatalink(base::Pair* const sys)
+bool IPlayer::setDatalink(base::Pair* const sys)
 {
    bool ok{};
    if (sys == nullptr) {
@@ -3275,7 +3275,7 @@ bool Player::setDatalink(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setGimbal() -- Sets our gimbal/antenna/optic models
 //------------------------------------------------------------------------------
-bool Player::setGimbal(base::Pair* const sys)
+bool IPlayer::setGimbal(base::Pair* const sys)
 {
    bool ok{};
    if (sys == nullptr) {
@@ -3294,7 +3294,7 @@ bool Player::setGimbal(base::Pair* const sys)
 //------------------------------------------------------------------------------
 // setNavigation() -- Set our navigation system
 //------------------------------------------------------------------------------
-bool Player::setNavigation(base::Pair* const x)
+bool IPlayer::setNavigation(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3313,7 +3313,7 @@ bool Player::setNavigation(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setOnboardComputer() -- Sets our onboard computer model
 //------------------------------------------------------------------------------
-bool Player::setOnboardComputer(base::Pair* const x)
+bool IPlayer::setOnboardComputer(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3332,7 +3332,7 @@ bool Player::setOnboardComputer(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setPilot() -- Set our pilot model
 //------------------------------------------------------------------------------
-bool Player::setPilot(base::Pair* const x)
+bool IPlayer::setPilot(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3351,7 +3351,7 @@ bool Player::setPilot(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setRadio() -- Sets our radio models
 //------------------------------------------------------------------------------
-bool Player::setRadio(base::Pair* const x)
+bool IPlayer::setRadio(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3370,7 +3370,7 @@ bool Player::setRadio(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setSensor() -- Sets our sensor models
 //------------------------------------------------------------------------------
-bool Player::setSensor(base::Pair* const x)
+bool IPlayer::setSensor(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3389,7 +3389,7 @@ bool Player::setSensor(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setIrSystem() -- Sets our IR sensor models
 //------------------------------------------------------------------------------
-bool Player::setIrSystem(base::Pair* const x)
+bool IPlayer::setIrSystem(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3408,7 +3408,7 @@ bool Player::setIrSystem(base::Pair* const x)
 //------------------------------------------------------------------------------
 // setStoresMgr() -- Set our stores management system
 //------------------------------------------------------------------------------
-bool Player::setStoresMgr(base::Pair* const x)
+bool IPlayer::setStoresMgr(base::Pair* const x)
 {
    bool ok{};
    if (x == nullptr) {
@@ -3425,7 +3425,7 @@ bool Player::setStoresMgr(base::Pair* const x)
 }
 
 // initXPos: X position (+north)
-bool Player::setSlotInitXPos(const base::ILength* const x)
+bool IPlayer::setSlotInitXPos(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3437,7 +3437,7 @@ bool Player::setSlotInitXPos(const base::ILength* const x)
 }
 
 // initXPos: X position (+north) (meters)
-bool Player::setSlotInitXPos(const base::INumber* const x)
+bool IPlayer::setSlotInitXPos(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3449,7 +3449,7 @@ bool Player::setSlotInitXPos(const base::INumber* const x)
 }
 
 // initYPos: Y position (+east)
-bool Player::setSlotInitYPos(const base::ILength* const x)
+bool IPlayer::setSlotInitYPos(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3461,7 +3461,7 @@ bool Player::setSlotInitYPos(const base::ILength* const x)
 }
 
 // initYPos: Y position (+east) (meters)
-bool Player::setSlotInitYPos(const base::INumber* const x)
+bool IPlayer::setSlotInitYPos(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3473,7 +3473,7 @@ bool Player::setSlotInitYPos(const base::INumber* const x)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up)
-bool Player::setSlotInitAlt(const base::ILength* const x)
+bool IPlayer::setSlotInitAlt(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3484,7 +3484,7 @@ bool Player::setSlotInitAlt(const base::ILength* const x)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up) (meters)
-bool Player::setSlotInitAlt(const base::INumber* const x)
+bool IPlayer::setSlotInitAlt(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3496,7 +3496,7 @@ bool Player::setSlotInitAlt(const base::INumber* const x)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::Latitude* const x)
+bool IPlayer::setSlotInitLat(const base::Latitude* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3504,14 +3504,14 @@ bool Player::setSlotInitLat(const base::Latitude* const x)
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
-         std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const base::IAngle* const x)
+bool IPlayer::setSlotInitLat(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3519,14 +3519,14 @@ bool Player::setSlotInitLat(const base::IAngle* const x)
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
-         std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initLatitude: Latitude (degrees)
-bool Player::setSlotInitLat(const base::INumber* const x)
+bool IPlayer::setSlotInitLat(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3534,14 +3534,14 @@ bool Player::setSlotInitLat(const base::INumber* const x)
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       } else {
-         std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::Longitude* const x)
+bool IPlayer::setSlotInitLon(const base::Longitude* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3549,14 +3549,14 @@ bool Player::setSlotInitLon(const base::Longitude* const x)
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
-         std::cerr << "Player::setSlotInitLon(): invalid longitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLon(): invalid longitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const base::IAngle* const x)
+bool IPlayer::setSlotInitLon(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3564,14 +3564,14 @@ bool Player::setSlotInitLon(const base::IAngle* const x)
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
-         std::cerr << "Player::setSlotInitLon(): invalid longitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLon(): invalid longitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initLongitude: Longitude (degrees)
-bool Player::setSlotInitLon(const base::INumber* const x)
+bool IPlayer::setSlotInitLon(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3579,14 +3579,14 @@ bool Player::setSlotInitLon(const base::INumber* const x)
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       } else {
-         std::cerr << "Player::setSlotInitLat(): invalid latitude: " << val << std::endl;
+         std::cerr << "IPlayer::setSlotInitLat(): invalid latitude: " << val << std::endl;
       }
    }
    return ok;
 }
 
 // initGeocentric: Position vector [ x y z ] (meters)
-bool Player::setSlotInitGeocentric(const base::List* const x)
+bool IPlayer::setSlotInitGeocentric(const base::List* const x)
 {
    bool ok{};
    double values[3]{};
@@ -3599,7 +3599,7 @@ bool Player::setSlotInitGeocentric(const base::List* const x)
 }
 
 // initRoll: Initial roll angle
-bool Player::setSlotInitRoll(const base::IAngle* const x)
+bool IPlayer::setSlotInitRoll(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3608,7 +3608,7 @@ bool Player::setSlotInitRoll(const base::IAngle* const x)
          initAngles[IROLL] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
+         std::cerr << "IPlayer::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
       }
    }
 
@@ -3616,7 +3616,7 @@ bool Player::setSlotInitRoll(const base::IAngle* const x)
 }
 
 // initRoll: Initial roll angle (radians)
-bool Player::setSlotInitRoll(const base::INumber* const x)
+bool IPlayer::setSlotInitRoll(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3625,7 +3625,7 @@ bool Player::setSlotInitRoll(const base::INumber* const x)
          initAngles[IROLL] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
+         std::cerr << "IPlayer::setSlotInitRoll: invalid roll angle, valid range is [ -pi ... +pi]" << std::endl;
       }
    }
 
@@ -3633,7 +3633,7 @@ bool Player::setSlotInitRoll(const base::INumber* const x)
 }
 
 // initPitch: Initial pitch angle
-bool Player::setInitPitch(const base::IAngle* const x)
+bool IPlayer::setInitPitch(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3642,7 +3642,7 @@ bool Player::setInitPitch(const base::IAngle* const x)
          initAngles[IPITCH] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
+         std::cerr << "IPlayer::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
       }
    }
 
@@ -3650,7 +3650,7 @@ bool Player::setInitPitch(const base::IAngle* const x)
 }
 
 // initPitch: Initial pitch angle (radians)
-bool Player::setInitPitch(const base::INumber* const x)
+bool IPlayer::setInitPitch(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3659,7 +3659,7 @@ bool Player::setInitPitch(const base::INumber* const x)
          initAngles[IPITCH] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
+         std::cerr << "IPlayer::setSlotInitPitch: invalid pitch angle, valid range is [ -pi/2 ... +pi/2 ]" << std::endl;
       }
    }
 
@@ -3667,7 +3667,7 @@ bool Player::setInitPitch(const base::INumber* const x)
 }
 
 // initHeading: Initial heading angle
-bool Player::setInitHeading(const base::IAngle* const x)
+bool IPlayer::setInitHeading(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3677,7 +3677,7 @@ bool Player::setInitHeading(const base::IAngle* const x)
          initAngles[IYAW] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi )" << std::endl;
+         std::cerr << "IPlayer::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi )" << std::endl;
       }
    }
 
@@ -3685,7 +3685,7 @@ bool Player::setInitHeading(const base::IAngle* const x)
 }
 
 // initHeading: Initial heading angle (radians)
-bool Player::setInitHeading(const base::INumber* const x)
+bool IPlayer::setInitHeading(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3695,7 +3695,7 @@ bool Player::setInitHeading(const base::INumber* const x)
          initAngles[IYAW] = value;
          ok = true;
       } else {
-         std::cerr << "Player::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi ]" << std::endl;
+         std::cerr << "IPlayer::setSlotInitHeading: invalid heading angle, valid range is [ -pi ... +2*pi ]" << std::endl;
       }
    }
 
@@ -3703,7 +3703,7 @@ bool Player::setInitHeading(const base::INumber* const x)
 }
 
 // initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
-bool Player::setSlotInitEulerAngles(const base::List* const numList)
+bool IPlayer::setSlotInitEulerAngles(const base::List* const numList)
 {
    bool ok{};
    double values[3]{};
@@ -3716,7 +3716,7 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
             initAngles.set(values[0], values[1], values[2]);
             ok = true;
       } else {
-         std::cerr << "Player::setSlotInitEulerAngles: invalid angle;";
+         std::cerr << "IPlayer::setSlotInitEulerAngles: invalid angle;";
          std::cerr << " valid roll & yaw are [-2*pi ... +2*pi], and valid pitch is [-pi ... +pi]";
          std::cerr << std::endl;
       }
@@ -3725,7 +3725,7 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
 }
 
 // testRollRate: Test roll rate
-bool Player::setSlotTestRollRate(const base::IAngle* const x)
+bool IPlayer::setSlotTestRollRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3737,7 +3737,7 @@ bool Player::setSlotTestRollRate(const base::IAngle* const x)
 }
 
 // testPitchRate: Test pitch rate
-bool Player::setSlotTestPitchRate(const base::IAngle* const x)
+bool IPlayer::setSlotTestPitchRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3749,7 +3749,7 @@ bool Player::setSlotTestPitchRate(const base::IAngle* const x)
 }
 
 // testHeadingRate: Test heading rate
-bool Player::setSlotTestYawRate(const base::IAngle* const x)
+bool IPlayer::setSlotTestYawRate(const base::IAngle* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3761,7 +3761,7 @@ bool Player::setSlotTestYawRate(const base::IAngle* const x)
 }
 
 // testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
-bool Player::setSlotTestBodyAxis(const base::Boolean* const x)
+bool IPlayer::setSlotTestBodyAxis(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3773,7 +3773,7 @@ bool Player::setSlotTestBodyAxis(const base::Boolean* const x)
 
 
 // initVelocity: Initial Velocity: meters/second
-bool Player::setSlotInitVelocity(const base::INumber* const x)
+bool IPlayer::setSlotInitVelocity(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3784,7 +3784,7 @@ bool Player::setSlotInitVelocity(const base::INumber* const x)
 }
 
 // initVelocityKts: Initial Velocity: knots (NM/hour)
-bool Player::setSlotInitVelocityKts(const base::INumber* const x)
+bool IPlayer::setSlotInitVelocityKts(const base::INumber* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3794,14 +3794,14 @@ bool Player::setSlotInitVelocityKts(const base::INumber* const x)
    return ok;
 }
 
-bool Player::setSlotType(const base::String* const x)
+bool IPlayer::setSlotType(const base::String* const x)
 {
    type = x->c_str();
    return setType_old(x);
 }
 
 // side: Which side? { blue, red, yellow, cyan, gray, white }
-bool Player::setSlotSide(const base::Identifier* const x)
+bool IPlayer::setSlotSide(const base::Identifier* const x)
 {
    bool ok{};
    if (*x == "blue" || *x == "BLUE")          { setSide(BLUE); ok = true; }
@@ -3814,7 +3814,7 @@ bool Player::setSlotSide(const base::Identifier* const x)
 }
 
 // useCoordSys: Coord system to use for updating player position
-bool Player::setSlotUseCoordSys(base::Identifier* const x)
+bool IPlayer::setSlotUseCoordSys(base::Identifier* const x)
 {
    bool ok{};
    if (*x == "local" || *x == "LOCAL")      { setUseCoordSys(CoordSys::LOCAL); ok = true; }
@@ -3824,7 +3824,7 @@ bool Player::setSlotUseCoordSys(base::Identifier* const x)
 }
 
 // signature: Player's RCS signature
-bool Player::setSlotSignature(IRfSignature* const s)
+bool IPlayer::setSlotSignature(IRfSignature* const s)
 {
    if (signature != nullptr) {
       signature->container(nullptr);
@@ -3837,14 +3837,14 @@ bool Player::setSlotSignature(IRfSignature* const s)
 }
 
 // irSignature: Player's IR signature
-bool Player::setSlotIrSignature(IIrSignature* const s)
+bool IPlayer::setSlotIrSignature(IIrSignature* const s)
 {
    irSignature = s;
    return true;
 }
 
 // camouflageType: User defined camouflage type (positive integer or zero for none)
-bool Player::setSlotCamouflageType(const base::Integer* const msg)
+bool IPlayer::setSlotCamouflageType(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -3857,7 +3857,7 @@ bool Player::setSlotCamouflageType(const base::Integer* const msg)
 }
 
 // terrainElevReq: Terrain elevation from the IG system is requested; otherwise use DTED (default: false)
-bool Player::setSlotTerrainElevReq(const base::Boolean* const x)
+bool IPlayer::setSlotTerrainElevReq(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3867,7 +3867,7 @@ bool Player::setSlotTerrainElevReq(const base::Boolean* const x)
 }
 
 // interpolateTerrain: Interpolate our DTED terrain elevation data (default: false)
-bool Player::setSlotInterpolateTerrain(const base::Boolean* const x)
+bool IPlayer::setSlotInterpolateTerrain(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3877,7 +3877,7 @@ bool Player::setSlotInterpolateTerrain(const base::Boolean* const x)
 }
 
 // terrainOffset: Ground clamp offset from terrain to player's CG (base::Distance)
-bool Player::setSlotTerrainOffset(const base::ILength* const x)
+bool IPlayer::setSlotTerrainOffset(const base::ILength* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3887,7 +3887,7 @@ bool Player::setSlotTerrainOffset(const base::ILength* const x)
 }
 
 // positionFreeze: Position freeze (default: false)
-bool Player::setSlotPositionFreeze(const base::Boolean* const x)
+bool IPlayer::setSlotPositionFreeze(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3897,7 +3897,7 @@ bool Player::setSlotPositionFreeze(const base::Boolean* const x)
 }
 
 // altitudeFreeze: Altitude freeze (default: false)
-bool Player::setSlotAltitudeFreeze(const base::Boolean* const x)
+bool IPlayer::setSlotAltitudeFreeze(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3907,7 +3907,7 @@ bool Player::setSlotAltitudeFreeze(const base::Boolean* const x)
 }
 
 // attitudeFreeze: Attitude freeze (default: false)
-bool Player::setSlotAttitudeFreeze(const base::Boolean* const x)
+bool IPlayer::setSlotAttitudeFreeze(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3917,7 +3917,7 @@ bool Player::setSlotAttitudeFreeze(const base::Boolean* const x)
 }
 
 // fuelFreeze: Fuel freeze (default: false)
-bool Player::setSlotFuelFreeze(const base::Boolean* const x)
+bool IPlayer::setSlotFuelFreeze(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3927,7 +3927,7 @@ bool Player::setSlotFuelFreeze(const base::Boolean* const x)
 }
 
 // crashOverride: Crash Override (i.e., ignore collision and crash events)(default: false)
-bool Player::setSlotCrashOverride(const base::Boolean* const x)
+bool IPlayer::setSlotCrashOverride(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3937,7 +3937,7 @@ bool Player::setSlotCrashOverride(const base::Boolean* const x)
 }
 
 // killOverride: Kill/Damage Override -- player can not be killed/damaged (default: false)
-bool Player::setSlotKillOverride(const base::Boolean* const x)
+bool IPlayer::setSlotKillOverride(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3947,7 +3947,7 @@ bool Player::setSlotKillOverride(const base::Boolean* const x)
 }
 
 // killRemoval: If true destroyed players are set to KILLED and are eventually removed (default: false)
-bool Player::setSlotKillRemoval(const base::Boolean* const x)
+bool IPlayer::setSlotKillRemoval(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3957,7 +3957,7 @@ bool Player::setSlotKillRemoval(const base::Boolean* const x)
 }
 
 // enableNetOutput: Enable network output of this player (default: true)
-bool Player::setSlotEnableNetOutput(const base::Boolean* const x)
+bool IPlayer::setSlotEnableNetOutput(const base::Boolean* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -3967,7 +3967,7 @@ bool Player::setSlotEnableNetOutput(const base::Boolean* const x)
 }
 
 // dataLogTime: Time between player data samples to an optional data
-bool Player::setSlotDataLogTime(const base::ITime* const x)
+bool IPlayer::setSlotDataLogTime(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

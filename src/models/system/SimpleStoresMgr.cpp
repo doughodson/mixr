@@ -85,7 +85,7 @@ void SimpleStoresMgr::updateData(const double dt)
                const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
                if (pair != nullptr) {
                   const auto s = dynamic_cast<const IWeapon*>( pair->object() );
-                  if ( s != nullptr && s->isMode(Player::Mode::INACTIVE) && (s->getFactoryName() == wpn->getFactoryName()) == true ) {
+                  if ( s != nullptr && s->isMode(IPlayer::Mode::INACTIVE) && (s->getFactoryName() == wpn->getFactoryName()) == true ) {
                      count++;
                   }
                }
@@ -609,7 +609,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
                // ---
                Track* trk{getNextTarget()};
                if (trk != nullptr) {
-                  Player* tgt{trk->getTarget()};
+                  IPlayer* tgt{trk->getTarget()};
 
                   ITrackMgr* tm{};
                   IRfSensor* sm{flyout->getSensor()};

@@ -352,7 +352,7 @@ double IIrAircraftSignature::getHotPartsWavebandFactor(double midpoint, double w
 double IIrAircraftSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
     double irPower{};
-    const auto targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
+    const auto targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const IPlayer*>(msg->getTarget()));
     if(targetAircraft != nullptr) {
         // this will need checks to ensure targetAircraft is , in fact,
         // an airvehicle and not something else.
@@ -405,7 +405,7 @@ void IIrAircraftSignature::getAirframeSignatures(const IrQueryMsg* const msg, co
 double IIrAircraftSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 {
     double irPower{};
-    const Player* targetAircraft{msg->getTarget()};
+    const IPlayer* targetAircraft{msg->getTarget()};
     if (targetAircraft != nullptr) {
         double currentPla{1.0};
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
@@ -513,7 +513,7 @@ double IIrAircraftSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
     double targetAlt{};
     double targetVel{};
 
-    const Player* targetAircraft{msg->getTarget()};
+    const IPlayer* targetAircraft{msg->getTarget()};
     if (targetAircraft != nullptr) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
@@ -561,7 +561,7 @@ void IIrAircraftSignature::getHotPartsSignatures(const IrQueryMsg* const msg, co
 //------------------------------------------------------------------------------
 double* IIrAircraftSignature::getHeatSignature(IrQueryMsg* msg)
 {
-    Player* target{msg->getTarget()};
+    IPlayer* target{msg->getTarget()};
     if (target != nullptr) {
         IrAtmosphere* atmos{};
         WorldModel* sim{target->getWorldModel()};

@@ -1,7 +1,7 @@
 
 #include "mixr/models/Track.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/SensorMsg.hpp"
@@ -360,7 +360,7 @@ bool Track::setRejected(const bool f)
 }
 
 // setTarget() -- set the target pointer
-bool Track::setTarget(Player* const p)
+bool Track::setTarget(IPlayer* const p)
 {
    if (tgt != nullptr) tgt->unref();
    tgt = p;

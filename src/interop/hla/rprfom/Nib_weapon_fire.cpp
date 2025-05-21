@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/network/INetHandler.hpp"
 
@@ -38,7 +38,7 @@ bool Nib::weaponFireMsgFactory(const double)
    RTI::ParameterHandleValuePairSet* pParams {RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER )};
 
    // Set our mode so that we don't do this again.
-   setMode(models::Player::Mode::ACTIVE);
+   setMode(models::IPlayer::Mode::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
    const auto mPlayer = dynamic_cast<models::IWeapon*>(getPlayer());
@@ -115,7 +115,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    {
       Nib* fNib {};
-      models::Player* fPlayer {mPlayer->getLaunchVehicle()};
+      models::IPlayer* fPlayer {mPlayer->getLaunchVehicle()};
       if (fPlayer != nullptr) {
          if (fPlayer->isProxyPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
@@ -147,7 +147,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    {
       Nib* tNib {};
-      models::Player* tPlayer {mPlayer->getTargetPlayer()};
+      models::IPlayer* tPlayer {mPlayer->getTargetPlayer()};
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, interop::INetIO::OUTPUT_NIB) );

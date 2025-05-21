@@ -11,7 +11,7 @@ class Vec3d;
 }
 namespace models {
 class IGimbal;
-class Player;
+class IPlayer;
 
 //------------------------------------------------------------------------------
 // Class: Tdb
@@ -85,10 +85,10 @@ public:
    unsigned int getNumberOfTargets() const            { return numTgts; }
 
    // The array of target pointer
-   Player** getTargets()                              { return targets; }
+   IPlayer** getTargets()                             { return targets; }
 
    // The array of target pointer (const version)
-   Player** const getTargets() const                  { return targets; }
+   IPlayer** const getTargets() const                 { return targets; }
 
    //------------------------------------------------------------------------------
    // Compute Boresight Data --- Scan the target list, which as been pre-processed by
@@ -137,14 +137,14 @@ protected:
    // -- old data is lost
    virtual bool resizeArrays(const unsigned int newSize);
 
-   const Player* ownship {};     // Our ownship player (set using setGimbal())
+   const IPlayer* ownship {};    // Our ownship player (set using setGimbal())
    const IGimbal* gimbal {};     // Our gimbal (set in setGimbal())
 
    bool usingEcefFlg {};         // Using ECEF flag --
                                  //   When gimbal's 'useWorld' is true or when our ownship's
                                  //   local gaming area position is not valid
 
-   Player**    targets {};       // Target pointer
+   IPlayer**    targets {};      // Target pointer
    unsigned int maxTargets {};   // Max number of targets (i.e., size of the arrays)
    unsigned int numTgts {};      // Number of targets
 

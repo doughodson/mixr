@@ -1,7 +1,7 @@
 
 #include "mixr/models/SimAgent.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/Station.hpp"

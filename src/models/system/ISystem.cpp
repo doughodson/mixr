@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/ISystem.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 
@@ -22,7 +22,7 @@ BEGIN_SLOT_MAP(ISystem)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(ISystem)
-    ON_EVENT_OBJ(KILL_EVENT,killedNotification,Player)
+    ON_EVENT_OBJ(KILL_EVENT,killedNotification, IPlayer)
     ON_EVENT(KILL_EVENT,killedNotification)
 END_EVENT_HANDLER()
 
@@ -132,7 +132,7 @@ void ISystem::updateTC(const double dt0)
 //------------------------------------------------------------------------------
 // killedNotification() -- Default killed notification handler
 //------------------------------------------------------------------------------
-bool ISystem::killedNotification(Player* const p)
+bool ISystem::killedNotification(IPlayer* const p)
 {
    // Just let all of our subcomponents know that we were just killed
    base::PairStream* subcomponents{getComponents()};
@@ -175,14 +175,14 @@ unsigned int ISystem::getPowerSwitch() const
 }
 
 // Returns a pointer to our ownship player
-Player* ISystem::getOwnship()
+IPlayer* ISystem::getOwnship()
 {
    if (ownship == nullptr) findOwnship();
    return ownship;
 }
 
 // Returns a pointer to our ownship player (const version)
-const Player* ISystem::getOwnship() const
+const IPlayer* ISystem::getOwnship() const
 {
    if (ownship == nullptr) {
       (const_cast<ISystem*>(this))->findOwnship();
@@ -205,7 +205,7 @@ bool ISystem::setPowerSwitch(const unsigned int p)
 bool ISystem::findOwnship()
 {
    if (ownship == nullptr) {
-      ownship = static_cast<Player*>(findContainerByType( typeid(Player) ));
+      ownship = static_cast<IPlayer*>(findContainerByType( typeid(IPlayer) ));
    }
 
    return (ownship != nullptr);

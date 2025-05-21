@@ -64,7 +64,7 @@ bool Effect::crashNotification()
 //------------------------------------------------------------------------------
 // collisionNotification() -- We just impacted with another player (need to check fusing and all that jazz)
 //------------------------------------------------------------------------------
-bool Effect::collisionNotification(Player* const p)
+bool Effect::collisionNotification(IPlayer* const p)
 {
     const bool ok{killedNotification(p)};
     setMode(Mode::DETONATED);

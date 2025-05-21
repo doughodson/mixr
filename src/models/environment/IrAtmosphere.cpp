@@ -1,7 +1,7 @@
 
 #include "mixr/models/environment/IrAtmosphere.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
@@ -161,7 +161,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
             // compute Geodetic orientation angles
             base::Vec3d angles;
             base::nav::computeEulerAngles(mm, &angles);
-            currentViewAngle = angles[Player::IPITCH];
+            currentViewAngle = angles[IPlayer::IPITCH];
         }
 
         // FAB determine angle to horizon, positive angles are down

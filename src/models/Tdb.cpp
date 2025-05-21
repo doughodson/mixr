@@ -9,7 +9,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/osg_utils.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/WorldModel.hpp"
 #include "mixr/terrain/ITerrain.hpp"
@@ -147,7 +147,7 @@ bool Tdb::resizeArrays(const unsigned int newSize)
             aar      = new double[newSize];
             aazr     = new double[newSize];
             aelr     = new double[newSize];
-            targets  = new Player*[newSize];
+            targets  = new IPlayer*[newSize];
             for (unsigned int i = 0; i < newSize; i++) {
                targets[i] = nullptr;
             }
@@ -271,7 +271,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    }
 
    // Are we a space vehicle?
-   const bool osSpaceVehicle{ownship->isMajorType(Player::SPACE_VEHICLE)};
+   const bool osSpaceVehicle{ownship->isMajorType(IPlayer::SPACE_VEHICLE)};
 
    // ---
    // 1) Scan the player list ---
@@ -281,7 +281,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
 
       // Get the pointer to the target player
       base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
-      Player* target{static_cast<Player*>(pair->object())};
+      IPlayer* target{static_cast<IPlayer*>(pair->object())};
 
       // Did we complete the local only players?
       finished = localOnly && target->isProxyPlayer();
@@ -356,7 +356,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
                      const double tgtAlt{target->getAltitudeM()};
 
                      // Is the target a space vehicle?
-                     if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
+                     if ( target->isMajorType(IPlayer::SPACE_VEHICLE) ) {
                         // Get the true, great-circle bearing to the target
                         double tbrg{}, distNM{};
                         base::nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);

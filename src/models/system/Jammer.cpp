@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/Jammer.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Emission.hpp"
 

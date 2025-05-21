@@ -1,7 +1,7 @@
 
 #include "mixr/models/SensorMsg.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace models {
@@ -40,14 +40,14 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     losO2T = org.losO2T;
     losT2O = org.losT2O;
 
-    const Player* oo{org.ownship};
-    setOwnship( const_cast<Player*>(static_cast<const Player*>(oo)) );
+    const IPlayer* oo{org.ownship};
+    setOwnship( const_cast<IPlayer*>(static_cast<const IPlayer*>(oo)) );
 
     const IGimbal* aa{org.gimbal};
     setGimbal( const_cast<IGimbal*>(static_cast<const IGimbal*>(aa)) );
 
-    const Player* pp{org.target};
-    setTarget( const_cast<Player*>(static_cast<const Player*>(pp)) );
+    const IPlayer* pp{org.target};
+    setTarget( const_cast<IPlayer*>(static_cast<const IPlayer*>(pp)) );
 
     const base::IObject* msg{org.dataMsg};
     setDataMessage( const_cast<base::IObject*>(static_cast<const base::IObject*>(msg)) );
@@ -96,7 +96,7 @@ double SensorMsg::getRangeRateKts() const
 //------------------------------------------------------------------------------
 // setOwnship() -- Sets the pointer to the originator (ownship)
 //------------------------------------------------------------------------------
-void SensorMsg::setOwnship(Player* const p)
+void SensorMsg::setOwnship(IPlayer* const p)
 {
    ownship = p;
 }
@@ -112,7 +112,7 @@ void SensorMsg::setGimbal(IGimbal* const a)
 //------------------------------------------------------------------------------
 // setTarget() -- Sets the pointer to the target
 //------------------------------------------------------------------------------
-void SensorMsg::setTarget(Player* const p)
+void SensorMsg::setTarget(IPlayer* const p)
 {
    target = p;
 }

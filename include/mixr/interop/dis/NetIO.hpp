@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Integer; class ILength; class INetHandler; class Identifier; }
-namespace models { class Iff; class IRfSensor; }
+namespace models { class Iff; class IRfSensor; class IPlayer; }
 namespace interop { class INib; }
 namespace dis {
 class Nib;
@@ -262,7 +262,7 @@ public:
    double getMaxPositionErr(const interop::INib* const nib) const final;
    double getMaxOrientationErr(const interop::INib* const nib) const final;
    double getMaxAge(const interop::INib* const nib) const final;
-   interop::INib* createNewOutputNib(models::Player* const player) final;
+   interop::INib* createNewOutputNib(models::IPlayer* const player) final;
 
    // DIS v7 additions
    virtual double getHbtPduEe() const;

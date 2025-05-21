@@ -1,7 +1,7 @@
 
 #include "mixr/models/environment/IrAtmosphere1.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
@@ -109,8 +109,8 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, doubl
    const double* centerWavelengths{getWaveBandCenters()};
    const double* widths{getWaveBandWidths()};
    const double* sigArray{msg->getSignatureByWaveband()};
-   const Player* ownship{msg->getOwnship()};
-   const Player* target{msg->getTarget()};
+   const IPlayer* ownship{msg->getOwnship()};
+   const IPlayer* target{msg->getTarget()};
 
    // FAB - this should be angle of gimbal, not angle to target. (see base class)
    // Determine the angle above the horizon to be used for background radiation lookup

@@ -35,7 +35,7 @@ public:
     const char* getNickname() const override;
     int getCategory() const override;
 
-    bool collisionNotification(Player* const p) override;
+    bool collisionNotification(IPlayer* const p) override;
     bool crashNotification() override;
 
 protected:

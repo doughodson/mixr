@@ -3,7 +3,7 @@
 #include "mixr/interop/hla/INetIO.hpp"
 #include "mixr/interop/hla/INib.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include <iostream>
 
@@ -114,7 +114,7 @@ void Ambassador::removeObjectInstance(RTI::ObjectHandle theObject, const char* t
    INib* nib {netIO->findNibByObjectHandle(theObject, INetIO::INPUT_NIB)};
    if (nib != nullptr) {
       // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
-      nib->setMode(models::Player::Mode::DELETE_REQUEST);
+      nib->setMode(models::IPlayer::Mode::DELETE_REQUEST);
    }
 }
 

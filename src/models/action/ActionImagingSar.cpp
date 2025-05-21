@@ -2,7 +2,7 @@
 #include "mixr/models/action/ActionImagingSar.hpp"
 
 #include "mixr/models/player/weapon/Bomb.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Sar.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
@@ -73,7 +73,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
    if (mgr != nullptr) {
 
       // Find our ownship player & SAR system
-      Player* ownship{static_cast<Player*>(mgr->findContainerByType(typeid(Player)))};
+      IPlayer* ownship{static_cast<IPlayer*>(mgr->findContainerByType(typeid(IPlayer)))};
       if (ownship != nullptr) {
          base::Pair* pair{ownship->getSensorByType(typeid(Sar))};
          if (isMessageEnabled(MSG_INFO)) {

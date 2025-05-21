@@ -138,12 +138,12 @@ void Missile::atReleaseInit()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
+bool Missile::calculateVectors(const IPlayer* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (trk != nullptr) {
       //los = trk->getPosition();
       //vel = trk->getVelocity();
-      const Player* tgt0 = trk->getTarget();
+      const IPlayer* tgt0 = trk->getTarget();
       base::Vec3d p0 = getPosition();
       if (los != nullptr) *los = tgt0->getPosition() - p0;
       if (vel != nullptr) *vel = tgt0->getVelocity();
@@ -248,7 +248,7 @@ bool Missile::setSlotCmdVelocity(const base::INumber* const msg)
 
 
 // setTargetPlayer() -- sets a pointer to the target player
-bool Missile::setTargetPlayer(Player* const tgt, const bool pt)
+bool Missile::setTargetPlayer(IPlayer* const tgt, const bool pt)
 {
    // if our tgt has changed, reset ground truth vals for weaponGuidance's fuzing logic
    if (tgt != nullptr && tgt != getTargetPlayer()) {
@@ -285,7 +285,7 @@ void Missile::weaponGuidance(const double dt)
    // If the target's already dead,
    //    then don't go away mad, just go away.
    // ---
-   const Player* tgt = getTargetPlayer();
+   const IPlayer* tgt = getTargetPlayer();
    const Track* trk = getTargetTrack();
    if (trk != nullptr) tgt = trk->getTarget();
 

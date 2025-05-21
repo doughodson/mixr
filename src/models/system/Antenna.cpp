@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IRfSystem.hpp"
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Tdb.hpp"
@@ -379,7 +379,7 @@ void Antenna::rfTransmit(Emission* const xmit)
 {
    // Need something to transmit and someone to send to
    Tdb* tdb{getCurrentTDB()};
-   Player* ownship{getOwnship()};
+   IPlayer* ownship{getOwnship()};
    if (xmit == nullptr || tdb == nullptr || ownship == nullptr) {
       // Clean up and leave
       if (tdb != nullptr) tdb->unref();
@@ -476,7 +476,7 @@ void Antenna::rfTransmit(Emission* const xmit)
       const double* rngRates{tdb->getTargetRangeRates()};
       const base::Vec3d* losO2T{tdb->getLosVectors()};
       const base::Vec3d* losT2O{tdb->getTargetLosVectors()};
-      Player** targets{tdb->getTargets()};
+      IPlayer** targets{tdb->getTargets()};
 
       // ---
       // Send emission packets to the targets
@@ -602,7 +602,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
    // Is this emission from a player of interest?
    if (fromPlayerOfInterest(em)) {
 
-      Player* ownship{getOwnship()};
+      IPlayer* ownship{getOwnship()};
       IRfSystem* sys1{getSystem()};
       if (ownship != nullptr && sys1 != nullptr) {
          sys1->ref();

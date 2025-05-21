@@ -17,7 +17,7 @@ namespace mixr {
 namespace models {
 class Emission;
 class IrQueryMsg;
-class Player;
+class IPlayer;
 
 //------------------------------------------------------------------------------
 // Class: Track
@@ -207,9 +207,9 @@ public:
    virtual void ownshipDynamics(const double gtrk, const base::Vec3d vel, const base::Vec3d accel, const double dt);
 
    // Optional pointer to the track target player
-   Player* getTarget()                             { return tgt; }
-   const Player* getTarget() const                 { return tgt; }
-   virtual bool setTarget(Player* const p);
+   IPlayer* getTarget()                            { return tgt; }
+   const IPlayer* getTarget() const                { return tgt; }
+   virtual bool setTarget(IPlayer* const p);
 
    // Clear track
    virtual void clear();
@@ -258,7 +258,7 @@ protected:
    base::Vec3d  osVel;            // Ownship velocity (NED)                   (m/s)
    base::Vec3d  osAccel;          // Ownship accel (NED)                      ((m/s)/s)
 
-   Player*     tgt {};            // (Optional) pointer to the Track Player
+   IPlayer*    tgt {};            // (Optional) pointer to the Track Player
 
    bool        mslWarn {};         // Missile warning flag
    static const int MAX_SIG{4};

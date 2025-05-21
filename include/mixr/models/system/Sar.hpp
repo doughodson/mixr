@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Sar_HPP__
-#define __mixr_models_common_Sar_HPP__
+#ifndef __mixr_models_Sar_HPP__
+#define __mixr_models_Sar_HPP__
 
 #include "mixr/models/system/IRadar.hpp"
 #include "mixr/base/osg/Vec3d"

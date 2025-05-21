@@ -6,7 +6,7 @@
 #include "mixr/ighost/flightgear/FGNetFDM.hpp"
 
 #include "mixr/models/player/air/AirVehicle.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
@@ -88,7 +88,7 @@ void FlightGearHost::setPlayerList(base::PairStream* const newPlayerList)
 //------------------------------------------------------------------------------
 void FlightGearHost::setOwnship(simulation::IPlayer* const newOwnship)
 {
-   const auto player = dynamic_cast<models::Player*>(newOwnship);
+   const auto player = dynamic_cast<models::IPlayer*>(newOwnship);
    if (player != nullptr) {
       setOwnship0(player);
    }
@@ -97,7 +97,7 @@ void FlightGearHost::setOwnship(simulation::IPlayer* const newOwnship)
 //------------------------------------------------------------------------------
 // Sets our ownship player (for derived class control)
 //------------------------------------------------------------------------------
-void FlightGearHost::setOwnship0(models::Player* const newOwnship)
+void FlightGearHost::setOwnship0(models::IPlayer* const newOwnship)
 {
     // Nothing's changed, just return
     if (ownship == newOwnship) return;

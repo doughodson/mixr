@@ -1,7 +1,7 @@
 
 #include "mixr/models/dynamics/RacDynamics.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/INumber.hpp"
@@ -94,14 +94,14 @@ double RacDynamics::getSideSlip() const
 
 double RacDynamics::getFlightPath() const
 {
-   const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
+   const auto pp = static_cast<const models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
 double RacDynamics::getCalibratedAirspeed() const
 {
-   const auto pp = static_cast<const models::Player*>( findContainerByType(typeid(models::Player)) );
+   const auto pp = static_cast<const models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -184,7 +184,7 @@ bool RacDynamics::setCommandedAltitude(const double m, const double, const doubl
 void RacDynamics::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
-   const auto pp = static_cast<models::Player*>( findContainerByType(typeid(models::Player)) );
+   const auto pp = static_cast<models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
@@ -242,8 +242,8 @@ void RacDynamics::updateRAC(const double dt)
    // ---
    const base::Vec3d oldRates{pp->getAngularVelocities()};
    //double pa1{oldRates[simulation::Player::IROLL]};
-   double qa1{oldRates[models::Player::IPITCH]};
-   double ra1{oldRates[models::Player::IYAW]};
+   double qa1{oldRates[models::IPlayer::IPITCH]};
+   double ra1{oldRates[models::IPlayer::IYAW]};
 
    // ---
    // Find pitch rate and update pitch

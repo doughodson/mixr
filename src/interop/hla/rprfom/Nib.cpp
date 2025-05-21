@@ -9,7 +9,7 @@
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -156,7 +156,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-   models::Player* p {getPlayer()};
+   models::IPlayer* p {getPlayer()};
 
    // ---
    // If we haven't tried to created the IPlayer yet and we have at least position,

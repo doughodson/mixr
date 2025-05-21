@@ -86,16 +86,16 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             // Side: When mapping Force ID to Player Side ...
             if (pdu->forceID == FRIENDLY_FORCE) {
                 // Friendly's are blue, ...
-                nib->setSide(models::Player::BLUE);
+                nib->setSide(models::IPlayer::BLUE);
             } else if (pdu->forceID == OPPOSING_FORCE) {
                 // opposing side is red, ...
-                nib->setSide(models::Player::RED);
+                nib->setSide(models::IPlayer::RED);
             } else if (pdu->forceID == NEUTRAL_FORCE) {
                 // Neutrals are white, ...
-                nib->setSide(models::Player::WHITE);
+                nib->setSide(models::IPlayer::WHITE);
             } else  {
                 // and everyone else is gray.
-                nib->setSide(models::Player::GRAY);
+                nib->setSide(models::IPlayer::GRAY);
             }
 
             addNib2InputList(nib);

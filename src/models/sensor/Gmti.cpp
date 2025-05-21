@@ -1,7 +1,7 @@
 
 #include "mixr/models/sensor/Gmti.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Emission.hpp"
 
@@ -53,9 +53,9 @@ void Gmti::dynamics(const double dt)
         // rotate to ownship heading
         double sinHdg{getOwnship()->getSinHeading()};
         double cosHdg{getOwnship()->getCosHeading()};
-        double x{dpoi[models::Player::INORTH] * cosHdg + dpoi[models::Player::IEAST] * sinHdg};
-        double y{-dpoi[models::Player::INORTH] * sinHdg + dpoi[models::Player::IEAST] * cosHdg};
-        double z{dpoi[models::Player::IDOWN]};
+        double x{dpoi[models::IPlayer::INORTH] * cosHdg + dpoi[models::IPlayer::IEAST] * sinHdg};
+        double y{-dpoi[models::IPlayer::INORTH] * sinHdg + dpoi[models::IPlayer::IEAST] * cosHdg};
+        double z{dpoi[models::IPlayer::IDOWN]};
 
         // Compute az & el to POI
         double grng{std::sqrt(x*x + y*y)};

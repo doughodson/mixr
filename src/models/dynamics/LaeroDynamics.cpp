@@ -1,7 +1,7 @@
 
 #include "mixr/models/dynamics/LaeroDynamics.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/String.hpp"
 
@@ -96,7 +96,7 @@ void LaeroDynamics::reset()
 {
    BaseClass::reset();
 
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    if (pPlr != nullptr) {
       const double initVel{pPlr->getInitVelocity()};
       u = initVel * base::length::NM2M / base::time::H2S;
@@ -111,7 +111,7 @@ void LaeroDynamics::update4DofModel(const double dt)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
 
    if (pPlr != nullptr) {
 
@@ -233,7 +233,7 @@ bool LaeroDynamics::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    bool ok{(pPlr != nullptr)};
    if (ok) {
 
@@ -277,7 +277,7 @@ bool LaeroDynamics::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    bool ok{(pPlr != nullptr)};
    if (ok) {
 
@@ -321,7 +321,7 @@ bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    bool ok{(pPlr != nullptr)};
    if (ok) {
 
@@ -366,7 +366,7 @@ bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   //-------------------------------------------------------
 //   // get data pointers
 //   //-------------------------------------------------------
-//   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+//   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
 //   bool ok = (pPlr != nullptr);
 //   if (ok) {
 //
@@ -416,7 +416,7 @@ bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   //-------------------------------------------------------
 //   // get data pointers
 //   //-------------------------------------------------------
-//   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+//   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
 //
 //   bool ok = (pPlr != nullptr);
 //   if (ok) {
@@ -446,7 +446,7 @@ bool LaeroDynamics::setCommandedHeadingD(const double h, const double hDps, cons
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -504,7 +504,7 @@ bool LaeroDynamics::setCommandedAltitude(const double a, const double aMps, cons
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -551,7 +551,7 @@ bool LaeroDynamics::setCommandedVelocityKts(const double v, const double vNps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    bool ok{(pPlr != nullptr)};
    if (ok) {
 

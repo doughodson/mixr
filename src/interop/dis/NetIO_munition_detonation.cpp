@@ -7,7 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/WorldModel.hpp"
 
@@ -45,7 +45,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 1) Find the target player
    // ---
-   models::Player* tPlayer {};
+   models::IPlayer* tPlayer {};
    if (tPlayerId != 0 && tSiteId != 0 && tApplicationId != 0) {
       interop::INib* tNib {findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB)};
       if (tNib != nullptr) {
@@ -57,14 +57,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 2) Find the firing player and munitions proxy players
    // ---
-   models::Player* fPlayer {};
+   models::IPlayer* fPlayer {};
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
       interop::INib* fNib {findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB)};
       if (fNib != nullptr) {
          fPlayer = fNib->getPlayer();
       } else {
          base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
-         fPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(fPlayerId));   // added DDH
+         fPlayer = dynamic_cast<models::IPlayer*>(getSimulation()->findPlayer(fPlayerId));   // added DDH
       }
    }
 
@@ -110,14 +110,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          arates);
 
       // Set the NIB's mode to DETONATED
-      mNib->setMode(models::Player::Mode::DETONATED);
+      mNib->setMode(models::IPlayer::Mode::DETONATED);
 
       // Find the munition player and set its mode, location and target position
       mPlayer = dynamic_cast<models::IWeapon*>(mNib->getPlayer());
       if (mPlayer != nullptr) {
 
          // Munition's mode
-         mPlayer->setMode(models::Player::Mode::DETONATED);
+         mPlayer->setMode(models::IPlayer::Mode::DETONATED);
 
          // munition's position, velocity and acceleration at the time of the detonation
          mPlayer->setGeocPosition(geocPos);

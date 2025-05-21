@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Player_HPP__
-#define __mixr_models_common_Player_HPP__
+#ifndef __mixr_models_IPlayer_HPP__
+#define __mixr_models_IPlayer_HPP__
 
 #include "mixr/simulation/IPlayer.hpp"
 
@@ -45,15 +45,15 @@ class IRfSignature;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class: Player
+// Class: IPlayer
 //
-// Description: Main player class (e.g., aircraft, ground vehicles, etc.)
+// Description: Interface to all player classes (e.g., aircraft, ground vehicles, etc.)
 //              Defines core information for player IDs, types, status, state vectors,
 //              control flags, subcomponent lists, event handling, etc.
 //
 //
 //------------------------------------------------------------------------------
-// Factory name: Player
+// Factory name: IPlayer
 // Slots --
 //
 //    ! ---
@@ -316,7 +316,7 @@ class Track;
 //          datalink:      ( Datalink ...        )  // Datalink model
 //          dynamicsModel: ( IDynamics ...       )  // Dynamics
 //          gimbals:       ( IGimbal ...         )  // Gimbal, antenna and/or seeker model
-//          nav:           ( Navigation ...      )  // Navigation model
+//          nav:           ( INavigation ...     )  // Navigation model
 //          obc:           ( OnboardComputer ... )  // Onboard computer model
 //          pilot:         ( IPilot ...          )  // Pilot model
 //          radios:        ( Radio ...           )  // Radio model
@@ -353,12 +353,12 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-class Player : public simulation::IPlayer
+class IPlayer : public simulation::IPlayer
 {
-   DECLARE_SUBCLASS(Player, simulation::IPlayer)
+   DECLARE_SUBCLASS(IPlayer, simulation::IPlayer)
 
 public:
-   Player();
+   IPlayer();
 
    // Major player type (bits)
    enum MajorType {
@@ -870,8 +870,8 @@ public:
    // ---
    // Event handler(s)
    // ---
-   virtual bool killedNotification(Player* const killedBy = nullptr);         // Handles the KILL_EVENT event
-   virtual bool collisionNotification(Player* const);                         // Handles the CRASH_EVENT event with another player
+   virtual bool killedNotification(IPlayer* const killedBy = nullptr);        // Handles the KILL_EVENT event
+   virtual bool collisionNotification(IPlayer* const);                        // Handles the CRASH_EVENT event with another player
    virtual bool crashNotification();                                          // Handles the CRASH_EVENT event
    virtual bool onWpnRelEvent(const base::Boolean* const msg = nullptr);      // Handles the WPN_REL_EVENT event
    virtual bool onTriggerSwEvent(const base::Boolean* const msg = nullptr);   // Handles the TRIGGER_SW_EVENT event
@@ -1135,7 +1135,7 @@ private:
    bool setSlotUseCoordSys(base::Identifier* const);
 };
 
-#include "./Player.inl"
+#include "./IPlayer.inl"
 
 }
 }

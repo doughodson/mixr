@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace rprfom {

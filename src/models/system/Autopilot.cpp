@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/Autopilot.hpp"
 #include "mixr/models/dynamics/IDynamics.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
@@ -175,7 +175,7 @@ void Autopilot::reset()
 {
    BaseClass::reset();
 
-   Player* pv{getOwnship()};
+   IPlayer* pv{getOwnship()};
    if (pv != nullptr) {
       // If heading, altitude or velocity hold modes are set and their
       // hold values were not set by a slot function, then use the player's
@@ -294,7 +294,7 @@ bool Autopilot::flyLoiterEntry()
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   Player* pPlr{getOwnship()};
+   IPlayer* pPlr{getOwnship()};
    bool ok{(pPlr != nullptr)};
    if (ok) {
 
@@ -473,7 +473,7 @@ bool Autopilot::flyLoiter()
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   Player* pPlr{getOwnship()};
+   IPlayer* pPlr{getOwnship()};
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -515,7 +515,7 @@ bool Autopilot::calcMirrorLatLon()
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   Player* pPlr{getOwnship()};
+   IPlayer* pPlr{getOwnship()};
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -576,7 +576,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
 
    // get data pointers
    //-------------------------------------------------------
-   Player* pPlr{getOwnship()};
+   IPlayer* pPlr{getOwnship()};
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -646,7 +646,7 @@ bool Autopilot::flySRT()
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   Player* pPlr{getOwnship()};
+   IPlayer* pPlr{getOwnship()};
 
    bool ok{(pPlr != nullptr)};
    if (ok) {
@@ -884,7 +884,7 @@ bool Autopilot::headingController()
    // Re-latch the mode
    setHeadingHoldMode( isHeadingHoldOn() );
 
-   Player* pv{getOwnship()};
+   IPlayer* pv{getOwnship()};
    if (pv != nullptr) {
       IDynamics* md{pv->getDynamicsModel()};
       if (md != nullptr) {
@@ -910,7 +910,7 @@ bool Autopilot::altitudeController()
 {
    setAltitudeHoldMode( isAltitudeHoldOn() );
 
-   Player* pv{getOwnship()};
+   IPlayer* pv{getOwnship()};
    if (pv != nullptr) {
       // skip the middle man
       IDynamics* md{pv->getDynamicsModel()};
@@ -932,7 +932,7 @@ bool Autopilot::altitudeController()
 //------------------------------------------------------------------------------
 bool Autopilot::velocityController()
 {
-   Player* pv{getOwnship()};
+   IPlayer* pv{getOwnship()};
    if (pv != nullptr) {
       // skip the middle man
       IDynamics* md{pv->getDynamicsModel()};
@@ -954,7 +954,7 @@ bool Autopilot::velocityController()
 //------------------------------------------------------------------------------
 
 // Attempt to get our lead player
-const Player* Autopilot::getLeadPlayer()
+const IPlayer* Autopilot::getLeadPlayer()
 {
    if (lead == nullptr && leadName == "") {
       // we have no lead player, but we have a lead name, let's try to get this player
@@ -965,7 +965,7 @@ const Player* Autopilot::getLeadPlayer()
          if (players != nullptr) {
             const base::Pair* pair{players->findByName(leadName.c_str())};
             if (pair != nullptr) {
-               setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+               setLeadPlayer( static_cast<const IPlayer*>( pair->object() ) );
             }
             players->unref();
             players = nullptr;
@@ -1053,7 +1053,7 @@ bool Autopilot::setNavMode(const bool flag)
    // If Nav mode was just turned off,
    // set commanded heading and altitude to our current values
    if ( !navModeOn && navModeOn1 ) {
-      Player* pv{getOwnship()};
+      IPlayer* pv{getOwnship()};
       if (pv != nullptr) {
         const double hdg{pv->getHeadingD()};
         setCommandedHeadingD(hdg);
@@ -1083,7 +1083,7 @@ bool Autopilot::setLoiterMode(const bool flag)
    // If loiter mode was just turned off ...
    // the set commanded heading to our current values
    if ( !loiterModeOn && loiterModeOn1 ) {
-      Player* pv{getOwnship()};
+      IPlayer* pv{getOwnship()};
       if (pv != nullptr) {
          const double hdg{pv->getHeadingD()};
          setCommandedHeadingD(hdg);
@@ -1178,7 +1178,7 @@ bool Autopilot::setLeadFollowingDeltaAltitude(const double above)
 }
 
 // Our lead player
-bool Autopilot::setLeadPlayer(const Player* const p)
+bool Autopilot::setLeadPlayer(const IPlayer* const p)
 {
    // remove old lead information
    if (lead != nullptr) lead->unref();
@@ -1208,7 +1208,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const x)
       if (players != nullptr) {
          const base::Pair* pair{players->findByName((*x).c_str())};
          if (pair != nullptr) {
-            setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+            setLeadPlayer( static_cast<const IPlayer*>( pair->object() ) );
             found = true;
          }
          players->unref();
@@ -1232,7 +1232,7 @@ bool Autopilot::setLeadPlayerName(const char* x)
       if (players != nullptr) {
          const base::Pair* pair{players->findByName(x)};
          if (pair != nullptr) {
-            setLeadPlayer( static_cast<const Player*>( pair->object() ) );
+            setLeadPlayer( static_cast<const IPlayer*>( pair->object() ) );
             found = true;
          }
          players->unref();

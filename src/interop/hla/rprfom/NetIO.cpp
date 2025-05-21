@@ -13,7 +13,7 @@
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/Ship.hpp"
 
 #include "mixr/base/Pair.hpp"
@@ -72,7 +72,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 //------------------------------------------------------------------------------
 // Create a new output NIB
 //------------------------------------------------------------------------------
-interop::INib* NetIO::createNewOutputNib(models::Player* const player)
+interop::INib* NetIO::createNewOutputNib(models::IPlayer* const player)
 {
     // ---
     // Check if we are enabled to register this class of objects and

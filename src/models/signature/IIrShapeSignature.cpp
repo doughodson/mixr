@@ -1,6 +1,6 @@
 #include "mixr/models/signature/IIrShapeSignature.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 #include "mixr/models/signature/IIrSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"

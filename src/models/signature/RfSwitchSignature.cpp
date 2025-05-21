@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/RfSwitchSignature.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/Emission.hpp"
 
 #include "mixr/base/Pair.hpp"
@@ -27,7 +27,7 @@ double RfSwitchSignature::getRCS(const Emission* const em)
    double rcs{};
 
    // Find our ownship player ...
-   const Player* ownship{static_cast<const Player*>(findContainerByType(typeid(Player)))};
+   const IPlayer* ownship{static_cast<const IPlayer*>(findContainerByType(typeid(IPlayer)))};
    if (ownship != nullptr) {
 
       // get our ownship's camouflage type

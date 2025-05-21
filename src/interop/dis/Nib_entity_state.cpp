@@ -178,7 +178,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Life form states
    {
       unsigned int bits {( (pdu->appearance >> 16) & 0x0000000f )};
-      if (getPlayer() != nullptr && getPlayer()->isMajorType(models::Player::LIFE_FORM)) {
+      if (getPlayer() != nullptr && getPlayer()->isMajorType(models::IPlayer::LIFE_FORM)) {
          const auto lf = dynamic_cast<models::LifeForm*>(getPlayer());
          if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
@@ -204,9 +204,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Active or inactive
    if ((pdu->appearance & DEACTIVATE_BIT) != 0) {
       // Player has just gone inactive
-      setMode(models::Player::Mode::INACTIVE);
+      setMode(models::IPlayer::Mode::INACTIVE);
    } else {
-      setMode(models::Player::Mode::ACTIVE);
+      setMode(models::IPlayer::Mode::ACTIVE);
    }
 
    // Process the articulated parameters and attached parts
@@ -218,7 +218,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 //------------------------------------------------------------------------------
 void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
-   models::Player* p {getPlayer()};
+   models::IPlayer* p {getPlayer()};
    if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
       const auto av = dynamic_cast<models::AirVehicle*>(p);
       const auto gv = dynamic_cast<models::GroundVehicle*>(p);
@@ -335,7 +335,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               ap->parameterValue.entityType.extra
                            )};
                         if (ntm != nullptr) {
-                           const models::Player* tp {ntm->getTemplatePlayer()};
+                           const models::IPlayer* tp {ntm->getTemplatePlayer()};
                            if (tp != nullptr && tp->isClassType(typeid(models::IWeapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
@@ -352,13 +352,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                      }
 
                      // If we have the weapon then set it INACTIVE (not launched)
-                     if (wpn != nullptr) wpn->setMode(models::Player::Mode::INACTIVE);
+                     if (wpn != nullptr) wpn->setMode(models::IPlayer::Mode::INACTIVE);
 
                   }
 
                   // No weapon attached, so set our weapon (if any) to launched!
                   else if (wpn != nullptr) {
-                     wpn->setMode(models::Player::Mode::LAUNCHED);
+                     wpn->setMode(models::IPlayer::Mode::LAUNCHED);
                   }
 
                } // end of SMS != 0 check
@@ -381,7 +381,7 @@ bool Nib::entityStateManager(const double curExecTime)
    bool ok {};
 
    // Get the player pointer
-   const models::Player* player {getPlayer()};
+   const models::IPlayer* player {getPlayer()};
    if (player == nullptr) return ok;
 
    // Dummy weapon?
@@ -461,13 +461,13 @@ bool Nib::entityStateManager(const double curExecTime)
       // ---
       // Force ID: When mapping Player side to force IDs ...
       // ---
-      if (getSide() == models::Player::BLUE) {
+      if (getSide() == models::IPlayer::BLUE) {
          // blue's are friendly, ...
          pdu->forceID = NetIO::FRIENDLY_FORCE;
-      } else if (getSide() == models::Player::RED) {
+      } else if (getSide() == models::IPlayer::RED) {
          // red's are not, ...
          pdu->forceID = NetIO::OPPOSING_FORCE;
-      } else if (getSide() == models::Player::WHITE) {
+      } else if (getSide() == models::IPlayer::WHITE) {
          // white is neutral, ...
          pdu->forceID = NetIO::NEUTRAL_FORCE;
       } else {
@@ -544,7 +544,7 @@ bool Nib::entityStateManager(const double curExecTime)
 
          // Deactive this entity?
          {
-            if (isMode(models::Player::Mode::DELETE_REQUEST) || player->isDead() )
+            if (isMode(models::IPlayer::Mode::DELETE_REQUEST) || player->isDead() )
                pdu->appearance |= DEACTIVATE_BIT;
          }
 
@@ -568,7 +568,7 @@ bool Nib::entityStateManager(const double curExecTime)
                pdu->appearance |= CAMOUFLAGE_BIT;
 
                // Land based camouflage bits
-               if (player->isMajorType(models::Player::GROUND_VEHICLE)) {
+               if (player->isMajorType(models::IPlayer::GROUND_VEHICLE)) {
                   // Subtract one to match DIS camouflage bits.
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
@@ -579,7 +579,7 @@ bool Nib::entityStateManager(const double curExecTime)
          }
 
          // Life forms appearance bits
-         if (player->isMajorType(models::Player::LIFE_FORM)) {
+         if (player->isMajorType(models::IPlayer::LIFE_FORM)) {
             const auto lf = dynamic_cast<const models::LifeForm*>(player);
             if (lf != nullptr) {
                // Health (aka damaged for other domains) same bits (3-4) - this is from the NIB, because it IS
@@ -728,7 +728,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Air Vehicle articulated parts and attachments
    // ---
-   if ( getPlayer()->isMajorType(models::Player::AIR_VEHICLE) ) {
+   if ( getPlayer()->isMajorType(models::IPlayer::AIR_VEHICLE) ) {
 
       // Check wing sweep angle.
       if (getAPartWingSweepCnt() > 0) {
@@ -792,7 +792,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Ground Vehicle articulated parts and attachments
    // ---
-   else if ( getPlayer()->isMajorType(models::Player::GROUND_VEHICLE) ) {
+   else if ( getPlayer()->isMajorType(models::IPlayer::GROUND_VEHICLE) ) {
 
       // Check launcher elevation angle
       if (getAPartLauncherElevationCnt() > 0) {
@@ -835,7 +835,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
             ap->changeIndicator = static_cast<unsigned char>(getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number
-            if (msl->isMode(models::Player::Mode::LAUNCHED)) {
+            if (msl->isMode(models::IPlayer::Mode::LAUNCHED)) {
                ap->parameterValue.entityType.kind = 0;
                ap->parameterValue.entityType.domain = 0;
                ap->parameterValue.entityType.country = 0;

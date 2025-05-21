@@ -3,7 +3,7 @@
 
 #include "mixr/models/action/IAction.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/terrain/ITerrain.hpp"
 
@@ -184,8 +184,8 @@ void Steerpoint::reset()
 {
     if (haveInitElev) {
         elevation  = initElev;
-        initPosVec[Player::IDOWN] = -initElev;
-        posVec[Player::IDOWN] = -initElev;
+        initPosVec[IPlayer::IDOWN] = -initElev;
+        posVec[IPlayer::IDOWN] = -initElev;
     }
 
     // ---
@@ -296,7 +296,7 @@ void Steerpoint::setLongitude(const double v)
 void Steerpoint::setElevation(const double x)
 {
     elevation = x;
-    posVec[Player::IDOWN] = -x;
+    posVec[IPlayer::IDOWN] = -x;
 }
 
 void Steerpoint::setDescription(const base::String* const d)
@@ -415,7 +415,7 @@ bool Steerpoint::setSlotXPos(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
-        initPosVec[Player::INORTH] = x->getValueInMeters();
+        initPosVec[IPlayer::INORTH] = x->getValueInMeters();
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -427,7 +427,7 @@ bool Steerpoint::setSlotYPos(const base::ILength* const x)
 {
     bool ok{};
     if (x != nullptr) {
-        initPosVec[Player::IEAST] = x->getValueInMeters();
+        initPosVec[IPlayer::IEAST] = x->getValueInMeters();
         haveInitPos = true;
         setPosition( initPosVec[0], initPosVec[1], initPosVec[2] );
         ok = true;
@@ -441,8 +441,8 @@ bool Steerpoint::setSlotElevation(const base::ILength* const x)
     if (x != nullptr) {
         initElev = x->getValueInMeters();
         elevation  = initElev;
-        initPosVec[Player::IDOWN] = -initElev;
-        posVec[Player::IDOWN] = -initElev;
+        initPosVec[IPlayer::IDOWN] = -initElev;
+        posVec[IPlayer::IDOWN] = -initElev;
         haveInitElev = true;
         ok = true;
     }
@@ -454,8 +454,8 @@ bool Steerpoint::setSlotElevation(const base::INumber* const msg)
     if (msg != nullptr) {
         initElev = msg->asDouble();
         elevation  = initElev;
-        initPosVec[Player::IDOWN] = -initElev;
-        posVec[Player::IDOWN] = -initElev;
+        initPosVec[IPlayer::IDOWN] = -initElev;
+        posVec[IPlayer::IDOWN] = -initElev;
         haveInitElev = true;
         ok = true;
     }

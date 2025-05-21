@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_AirVehicle_HPP__
 #define __mixr_models_common_AirVehicle_HPP__
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace base { class Identifier; }
@@ -59,9 +59,9 @@ class IAerodynamics;
 //          Sets the commanded wing sweep angle (radians; zero for none)
 //
 //------------------------------------------------------------------------------
-class AirVehicle : public Player
+class AirVehicle : public IPlayer
 {
-    DECLARE_SUBCLASS(AirVehicle, Player)
+    DECLARE_SUBCLASS(AirVehicle, IPlayer)
 
 public:
     AirVehicle();

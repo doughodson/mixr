@@ -8,7 +8,7 @@
 
 #include "mixr/models/system/Gun.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/simulation/ISimulation.hpp"
 #include "mixr/simulation/Station.hpp"
@@ -403,7 +403,7 @@ void INetIO::cleanupInputList()
 
             // 2) Destroy the NIB
             destroyInputNib(nib);
-      } else if (nib->isMode(models::Player::Mode::DELETE_REQUEST) ) {
+      } else if (nib->isMode(models::IPlayer::Mode::DELETE_REQUEST) ) {
             // We have one that has a DELETE_REQUEST
             //std::cout << "REMOVED(DR): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
@@ -440,7 +440,7 @@ void INetIO::updateOutputList()
          int i{};  // src index
          int j{};  // dest index
          while (i < nOutNibs) {
-            if (outputList[i]->isMode(models::Player::Mode::DELETE_REQUEST)) {
+            if (outputList[i]->isMode(models::IPlayer::Mode::DELETE_REQUEST)) {
                // Deleting this NIB
                //std::cout << "NetIO::updateOutputList() cleanup: nib = " << outputList[i] << std::endl;
                destroyOutputNib(outputList[i++]);
@@ -470,7 +470,7 @@ void INetIO::updateOutputList()
 
             // Get player list items
             base::Pair* playerPair{static_cast<base::Pair*>(playerItem->getValue())};
-            models::Player* player{static_cast<models::Player*>(playerPair->object())};
+            models::IPlayer* player{static_cast<models::IPlayer*>(playerPair->object())};
 
             if (player->isLocalPlayer() || (isRelayEnabled() && player->getNetworkID() != getNetworkID()) )  {
                if ( player->isActive() && player->isNetOutputEnabled()) {
@@ -511,7 +511,7 @@ void INetIO::updateOutputList()
             // Request removal;
             // (note: the network specific code now has one frame to cleanup its own code
             //  before the NIB is dropped from the output list next frame -- see above)
-            outputList[i]->setMode(models::Player::Mode::DELETE_REQUEST);
+            outputList[i]->setMode(models::IPlayer::Mode::DELETE_REQUEST);
          }
       }
 
@@ -540,12 +540,12 @@ void INetIO::processOutputList()
          // but its NIB state is still inactive, then we say the weapon has just
          // been fired. (delay until after the entity state PDU)
          bool fired{
-            (nib->isMode(models::Player::Mode::INACTIVE) || nib->isMode(models::Player::Mode::PRE_RELEASE)) &&
-            nib->getPlayer()->isMode(models::Player::Mode::ACTIVE) &&
-            nib->getPlayer()->isMajorType(models::Player::WEAPON)};
+            (nib->isMode(models::IPlayer::Mode::INACTIVE) || nib->isMode(models::IPlayer::Mode::PRE_RELEASE)) &&
+            nib->getPlayer()->isMode(models::IPlayer::Mode::ACTIVE) &&
+            nib->getPlayer()->isMajorType(models::IPlayer::WEAPON)};
 
          // Send a detonation message
-         if (nib->getPlayer()->isMode(models::Player::Mode::DETONATED) && !nib->wasDetonationMessageSent()) {
+         if (nib->getPlayer()->isMode(models::IPlayer::Mode::DETONATED) && !nib->wasDetonationMessageSent()) {
             nib->munitionDetonationMsgFactory(static_cast<double>(curExecTime));
          }
 
@@ -576,7 +576,7 @@ INib* INetIO::createNewInputNib()
     return nib;
 }
 
-INib* INetIO::createNewOutputNib(models::Player* const player)
+INib* INetIO::createNewOutputNib(models::IPlayer* const player)
 {
    INib* nib{nibFactory(OUTPUT_NIB)};
    if (nib != nullptr) {
@@ -613,7 +613,7 @@ void INetIO::destroyInputNib(INib* const nib)
 {
    if (nib->getPlayer() != nullptr) {
       // all we really need do is request deletion of the proxy player
-      nib->getPlayer()->setMode(models::Player::Mode::DELETE_REQUEST);
+      nib->getPlayer()->setMode(models::IPlayer::Mode::DELETE_REQUEST);
    }
    // Once no one has a reference to us, our destructor will be called
    nib->unref();
@@ -621,7 +621,7 @@ void INetIO::destroyInputNib(INib* const nib)
 
 void INetIO::destroyOutputNib(INib* const nib)
 {
-   models::Player* p{nib->getPlayer()};
+   models::IPlayer* p{nib->getPlayer()};
    if (p != nullptr) p->setOutgoingNib(nullptr, netID);
 
    // Once no one has a reference to us, our destructor will be called.
@@ -631,16 +631,16 @@ void INetIO::destroyOutputNib(INib* const nib)
 //------------------------------------------------------------------------------
 // create a new proxy player
 //------------------------------------------------------------------------------
-models::Player* INetIO::createProxyPlayer(INib* const nib)
+models::IPlayer* INetIO::createProxyPlayer(INib* const nib)
 {
-   models::Player* player{};
+   models::IPlayer* player{};
 
    // Range filter
    bool inRange{true};
    double maxRng2{getMaxEntityRangeSquared(nib)};
    if (nib != nullptr && maxRng2 > 0) {
       const simulation::Station* sta{getStation()};
-      const auto own = dynamic_cast<const models::Player*>(sta->getOwnship());
+      const auto own = dynamic_cast<const models::IPlayer*>(sta->getOwnship());
       if (own != nullptr) {
          base::Vec3d delta{nib->getDrPosition() - own->getGeocPosition()};
          inRange = (delta.length2() <= maxRng2);
@@ -662,7 +662,7 @@ models::Player* INetIO::createProxyPlayer(INib* const nib)
       // Clone the 'template' player object (if any)
       // ---
       if (typeMapper != nullptr) {
-         const models::Player* templatePlayer{typeMapper->getTemplatePlayer()};
+         const models::IPlayer* templatePlayer{typeMapper->getTemplatePlayer()};
          if (templatePlayer != nullptr) {
             player = templatePlayer->clone();
          }
@@ -679,7 +679,7 @@ models::Player* INetIO::createProxyPlayer(INib* const nib)
          player->setSide( nib->getSide() );
          player->setName( nib->getPlayerName() );
          player->setNib(nib);
-         player->setMode(models::Player::Mode::INACTIVE);
+         player->setMode(models::IPlayer::Mode::INACTIVE);
          player->setGeocPosition( nib->getDrPosition() );
          player->setGeocEulerAngles( nib->getDrEulerAngles() );
          player->setGeocVelocity( nib->getDrVelocity() );
@@ -710,7 +710,7 @@ models::Player* INetIO::createProxyPlayer(INib* const nib)
 //    Create a new Network Interface Block (NIB) for 'player' and insert it
 //    in the output list.  Returns a pointer to the new NIB or 0.
 //------------------------------------------------------------------------------
-INib* INetIO::insertNewOutputNib(models::Player* const player)
+INib* INetIO::insertNewOutputNib(models::IPlayer* const player)
 {
     INib* newNib{};
     if (player != nullptr) {
@@ -758,7 +758,7 @@ INib* INetIO::findNib(const unsigned short playerID, const std::string& federate
    return found;
 }
 
-INib* INetIO::findNib(const models::Player* const player, const IoType ioType)
+INib* INetIO::findNib(const models::IPlayer* const player, const IoType ioType)
 {
    INib* found{};
    if (player != nullptr) {
@@ -896,7 +896,7 @@ const INtm* INetIO::findNetworkTypeMapper(const INib* const nib) const
 }
 
 // Finds the network type mapper by Player
-const INtm* INetIO::findNetworkTypeMapper(const models::Player* const p) const
+const INtm* INetIO::findNetworkTypeMapper(const models::IPlayer* const p) const
 {
    const INtm* result{};
    if (outputNtmTree != nullptr && p != nullptr) {

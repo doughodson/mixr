@@ -51,9 +51,9 @@ protected:
    virtual void updateBurstTrajectories(const double dt);
    virtual bool checkForTargetHit();
 
-   Player* getHitPlayer()                 { return hitPlayer; }
-   const Player* getHitPlayer() const     { return hitPlayer; }
-   void setHitPlayer(Player*);
+   IPlayer* getHitPlayer()                 { return hitPlayer; }
+   const IPlayer* getHitPlayer() const     { return hitPlayer; }
+   void setHitPlayer(IPlayer*);
 
    void weaponDynamics(const double dt) override;
    void updateTOF(const double dt) override;
@@ -76,7 +76,7 @@ private:
    enum { MBT = 100 };         // Max number of burst trajectories
 
    double muzzleVel {DEFAULT_MUZZLE_VEL}; // Muzzle velocity (m/s)
-   base::safe_ptr<Player> hitPlayer;      // Player we hit (if any)
+   base::safe_ptr<IPlayer> hitPlayer;     // Player we hit (if any)
 
    // Bullet trajectories
    int nbt {};                     // Number of burst trajectories

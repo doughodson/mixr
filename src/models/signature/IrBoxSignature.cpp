@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/IrBoxSignature.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
@@ -116,8 +116,8 @@ double IrBoxSignature::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg
       return area;
    else {
 
-   const Player* sensorPlatform{msg->getOwnship()};
-   const Player* target{msg->getTarget()};
+   const IPlayer* sensorPlatform{msg->getOwnship()};
+   const IPlayer* target{msg->getTarget()};
    base::Vec3d targetVelocityVector{target->getVelocity()};
    base::Vec3d targetPosition{target->getPosition()};
    base::Vec3d sensorPosition{sensorPlatform->getPosition()};

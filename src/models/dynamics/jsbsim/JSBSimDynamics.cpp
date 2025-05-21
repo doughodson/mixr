@@ -1,7 +1,7 @@
 
 #include "mixr/models/dynamics/jsbsim/JSBSimDynamics.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 
@@ -620,7 +620,7 @@ void JSBSimDynamics::setBrakes(const double left, const double right)
 void JSBSimDynamics::dynamics(const double dt)
 {
     // Get our Player (must have one!)
-    const auto p = static_cast<models::Player*>( findContainerByType(typeid(models::Player)) );
+    const auto p = static_cast<models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
     if (p == nullptr) return;
 
     if (fdmex == nullptr) return;
@@ -676,7 +676,7 @@ void JSBSimDynamics::dynamics(const double dt)
 
     // ---
     // Set values for Player & AirVehicle interfaces
-    //    (Note: Player::dynamics() computes the new position)
+    //    (Note: IPlayer::dynamics() computes the new position)
     // ---
     p->setAltitude(base::length::FT2M * Propagate->GetAltitudeASL(), true);
     p->setVelocity(static_cast<double>(base::length::FT2M * Propagate->GetVel(JSBSim::FGJSBBase::eNorth)),
@@ -781,7 +781,7 @@ void JSBSimDynamics::reset()
     rollTrimSw    = 0.0;
 
     // Get our Player (must have one!)
-    const auto p = static_cast<models::Player*>( findContainerByType(typeid(models::Player)) );
+    const auto p = static_cast<models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
     if (p == nullptr) return;
 
     // must have strings set

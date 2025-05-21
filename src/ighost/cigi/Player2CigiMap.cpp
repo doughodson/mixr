@@ -1,7 +1,7 @@
 
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
@@ -87,7 +87,7 @@ bool Player2CigiMap::setSlotRefTypeName(const base::String* const x)
 //------------------------------------------------------------------------------
 // isMatchingPlayerType() -- Returns true if the factory & type names match
 //------------------------------------------------------------------------------
-bool Player2CigiMap::isMatchingPlayerType(const models::Player* const p) const
+bool Player2CigiMap::isMatchingPlayerType(const models::IPlayer* const p) const
 {
    bool match{};
    if (p != nullptr && refFactoryName != nullptr) {

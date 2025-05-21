@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/MergingIrSensor.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSeeker.hpp"
 #include "mixr/models/system/trackmanager/AngleOnlyTrackManager.hpp"
 #include "mixr/models/system/trackmanager/AirAngleOnlyTrkMgrPT.hpp"

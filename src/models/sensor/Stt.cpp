@@ -1,7 +1,7 @@
 
 #include "mixr/models/sensor/Stt.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/IScanGimbal.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
@@ -51,9 +51,9 @@ void Stt::dynamics(const double dt)
             // rotate to ownship heading
             double sinHdg{getOwnship()->getSinHeading()};
             double cosHdg{getOwnship()->getCosHeading()};
-            double x{dpoi[Player::INORTH] * cosHdg + dpoi[Player::IEAST] * sinHdg};
-            double y{-dpoi[Player::INORTH] * sinHdg + dpoi[Player::IEAST] * cosHdg};
-            double z{dpoi[Player::IDOWN]};
+            double x{dpoi[IPlayer::INORTH] * cosHdg + dpoi[IPlayer::IEAST] * sinHdg};
+            double y{-dpoi[IPlayer::INORTH] * sinHdg + dpoi[IPlayer::IEAST] * cosHdg};
+            double z{dpoi[IPlayer::IDOWN]};
 
             // Compute az & el to track
             double grng{std::sqrt(x*x + y*y)};

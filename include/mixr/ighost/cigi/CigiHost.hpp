@@ -31,7 +31,7 @@ namespace mixr {
 namespace base { class Boolean; class Integer; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
-class Missile; class Player; class Ship; class SpaceVehicle; class IWeapon;
+class Missile; class IPlayer; class Ship; class SpaceVehicle; class IWeapon;
 }
 namespace ighost {
 namespace cigi {
@@ -186,7 +186,7 @@ private:
    void setViewDefinitionPacket(CigiViewDefV3* const p)          { fov = p;    }
    void setSensorControlPacket(CigiSensorCtrlV3* const p)        { sensor = p; }
 
-   bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::Player* const);
+   bool setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, const models::IPlayer* const);
 
    bool setAirVehicleData(CigiModel* const, const int entity, const models::AirVehicle* const);
    bool setBuildingData(CigiModel* const, const int entity, const models::Building* const);

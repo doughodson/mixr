@@ -28,7 +28,7 @@ public:
     int getCategory() const override;             // returns MISSILE | GUIDED
 
 private:
-   virtual bool calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los,
+   virtual bool calculateVectors(const IPlayer* const tgt, const Track* const trk, base::Vec3d* const los,
           base::Vec3d* const vel, base::Vec3d* const posx) const override;
 };
 

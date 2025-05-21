@@ -519,7 +519,7 @@ interop::INib* NetIO::nibFactory(const interop::INetIO::IoType ioType)
 // Create a new NIBs
 //------------------------------------------------------------------------------
 
-interop::INib* NetIO::createNewOutputNib(models::Player* const player)
+interop::INib* NetIO::createNewOutputNib(models::IPlayer* const player)
 {
    Nib* nib{static_cast<Nib*>(nibFactory(OUTPUT_NIB))};
    if (nib != nullptr) {
@@ -1542,7 +1542,7 @@ void NetIO::testInputEntityTypes(const int n)
 
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != nullptr) {
-               const models::Player* foundP {origNtm->getTemplatePlayer()};
+               const models::IPlayer* foundP {origNtm->getTemplatePlayer()};
                std::cout << "; form: " << foundP->getFactoryName();
                base::safe_ptr<const base::String> foundType( static_cast<const base::String*>( foundP->getType_old() ) );
                if (foundType != nullptr) std::cout << "; type: " << *foundType;
@@ -1580,8 +1580,8 @@ void NetIO::testOutputEntityTypes(const int n)
          std::cout << "; origNtm= " << origNtm;
          if (origNtm != nullptr) {
 
-            const models::Player* origP {origNtm->getTemplatePlayer()};
-            models::Player* origP1 {origP->clone()};
+            const models::IPlayer* origP {origNtm->getTemplatePlayer()};
+            models::IPlayer* origP1 {origP->clone()};
 
             std::cout << "; form: " << origP->getFactoryName();
             base::safe_ptr<base::String> origType( (base::String*) origP->getType_old() );

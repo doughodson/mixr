@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base { class Identifier; class Integer; class String; }
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace ighost {
 namespace cigi {
 
@@ -66,7 +66,7 @@ public:
     const base::String* getRefTypeName() const               { return refTypeName; }     // Reference type name
 
     // True if player's factory & type names match our reference factory and type names.
-    virtual bool isMatchingPlayerType(const models::Player* const) const;
+    virtual bool isMatchingPlayerType(const models::IPlayer* const) const;
 
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name

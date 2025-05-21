@@ -3,7 +3,7 @@
 
 #include "mixr/models/Emission.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/List.hpp"
@@ -93,7 +93,7 @@ void RwrTrkMgr::deleteData()
 void RwrTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
-   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<IPlayer*>( findContainerByType(typeid(IPlayer)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -126,7 +126,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
          // save the report
-         Player* tgt{em->getOwnship()};  // The emissions ownship is our target!
+         IPlayer* tgt{em->getOwnship()};  // The emissions ownship is our target!
          emissions[nReports] = em;
          newSignal[nReports] = tmp;
          newRdot[nReports] = emissions[nReports]->getRangeRate();
@@ -146,7 +146,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
       const RfTrack* const trk{static_cast<const RfTrack*>(tracks[it])};        // we produce only RfTracks
-      const Player* const tgt{trk->getLastEmission()->getOwnship()};            // The emissions ownship is our target!
+      const IPlayer* const tgt{trk->getLastEmission()->getOwnship()};           // The emissions ownship is our target!
       for (unsigned int ir = 0; ir < nReports; ir++) {
          if (emissions[ir]->getOwnship() == tgt) {  // The emissions ownship is our target!
             // We have a new report for the same target as this track ...

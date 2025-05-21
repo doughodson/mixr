@@ -6,7 +6,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace models { class Player; }
+namespace models { class IPlayer; }
 namespace interop {
 class INib;
 
@@ -33,7 +33,7 @@ class INib;
 //
 //
 // Slots:
-//     template   <Player>   ! Template player (default: nullptr)
+//     template   <IPlayer>   ! Template player (default: nullptr)
 //
 //
 // Notes:
@@ -41,7 +41,7 @@ class INib;
 //       a) Using factory names, the target player's class is matched with the
 //          template player's class.
 //       b) Given a template player with a matching class (or base class), the
-//          template player's type string (see function Player::getType) is
+//          template player's type string (see function IPlayer::getType) is
 //          compared to the target player's type string and the template
 //          player's string will match as a substring of the target player.
 //
@@ -66,18 +66,18 @@ public:
    INtm();
 
    // Template player
-   const models::Player* getTemplatePlayer() const    { return tPlayer; }
+   const models::IPlayer* getTemplatePlayer() const    { return tPlayer; }
 
    // This network specific function is used to copy the entity
    // type codes to a target NIB object.
    virtual bool copyEntityType(INib* const targetNib) const =0;
 
 private:
-   base::safe_ptr<const models::Player> tPlayer; // Template player
+   base::safe_ptr<const models::IPlayer> tPlayer; // Template player
 
 private:
    // slot table helper methods
-   virtual bool setSlotTemplatePlayer(const models::Player* const);     // Sets the template player
+   virtual bool setSlotTemplatePlayer(const models::IPlayer* const);     // Sets the template player
 };
 
 }

@@ -7,7 +7,7 @@
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/pdu.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/models/WorldModel.hpp"
@@ -43,8 +43,8 @@ bool Nib::munitionDetonationMsgFactory(const double)
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
-    models::Player* tPlayer = mPlayer->getTargetPlayer();
-    models::Player* fPlayer = mPlayer->getLaunchVehicle();
+    models::IPlayer* tPlayer = mPlayer->getTargetPlayer();
+    models::IPlayer* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---

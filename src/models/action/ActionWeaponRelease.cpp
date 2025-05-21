@@ -1,7 +1,7 @@
 #include "mixr/models/action/ActionWeaponRelease.hpp"
 
 #include "mixr/models/player/weapon/Bomb.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Sar.hpp"
 #include "mixr/models/system/StoresMgr.hpp"
@@ -60,7 +60,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
    bool ok{};
 
    if (mgr != nullptr) {
-      Player* own{static_cast<Player*>(mgr->findContainerByType(typeid(Player)))};
+      IPlayer* own{static_cast<IPlayer*>(mgr->findContainerByType(typeid(IPlayer)))};
       if (own != nullptr) {
 
          StoresMgr* sms{own->getStoresManagement()};

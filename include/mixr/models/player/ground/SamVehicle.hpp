@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SamVehicle_HPP__
-#define __mixr_models_common_SamVehicle_HPP__
+#ifndef __mixr_models_SamVehicle_HPP__
+#define __mixr_models_SamVehicle_HPP__
 
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 

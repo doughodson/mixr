@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -251,7 +251,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     // ---
     // 1) Find the target (local) player
     // ---
-    models::Player* tPlayer {};
+    models::IPlayer* tPlayer {};
     if ( std::strlen(reinterpret_cast<const char*>(targetObjectIdentifier.id)) > 0 ) {
         interop::INib* tNib {findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB)};
         if (tNib != nullptr) tPlayer = tNib->getPlayer();
@@ -293,10 +293,10 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         if (mNib != nullptr) {
             const auto mPlayer = dynamic_cast<models::IWeapon*>(mNib->getPlayer());
             if (mPlayer != nullptr) {
-                mPlayer->setMode(models::Player::Mode::DETONATED);
+                mPlayer->setMode(models::IPlayer::Mode::DETONATED);
                 mPlayer->setDetonationResults(detonationResult);
             }
-            mNib->setMode(models::Player::Mode::DETONATED);
+            mNib->setMode(models::IPlayer::Mode::DETONATED);
         }
     }
 

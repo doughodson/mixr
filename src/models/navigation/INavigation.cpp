@@ -1,7 +1,7 @@
 
 #include "mixr/models/navigation/INavigation.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/navigation/Bullseye.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"

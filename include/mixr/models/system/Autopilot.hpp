@@ -135,7 +135,7 @@ public:
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
    virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
    virtual const std::string& getLeadPlayerName()       { return leadName; }
-   virtual const Player* getLeadPlayer();                                             // Our lead player
+   virtual const IPlayer* getLeadPlayer();                                            // Our lead player
 
    // get pilot limits
    double getMaxTurnRate() const;
@@ -150,7 +150,7 @@ public:
    virtual bool setFollowTheLeadMode(const bool f);                  // "Follow the lead" mode flag
    virtual bool setLeadPlayerName(const base::Identifier* const);    // Changes the name of our lead player
    virtual bool setLeadPlayerName(const char*);                      // set the lead player name by characters
-   virtual bool setLeadPlayer(const Player* const);                  // Our lead player
+   virtual bool setLeadPlayer(const IPlayer* const);                 // Our lead player
 
    virtual bool isRollSasOn() const { return rollSasOn; }
    virtual bool isPitchSasOn() const { return pitchSasOn; }
@@ -298,7 +298,7 @@ private:
 
    // Follow that lead mode data
    base::Vec3d leadOffset;                 // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
-   const Player* lead{};                   // Our lead player
+   const IPlayer* lead{};                  // Our lead player
    std::string leadName;                   // Name of our lead player
    double leadHdg{};                       // lead's heading (rad)
    bool   followLeadModeOn{};              // Follow the lead mode flag

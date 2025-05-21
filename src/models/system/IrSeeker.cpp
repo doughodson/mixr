@@ -4,7 +4,7 @@
 
 #include "mixr/models/system/IrSeeker.hpp"
 
-#include "mixr/models/player/Player.hpp"
+#include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IrSensor.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
@@ -178,7 +178,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
    // Need something to store the required data for the IR signatures and someone to send to
 
    Tdb* tdb0{getCurrentTDB()};
-   Player* ownship{getOwnship()};
+   IPlayer* ownship{getOwnship()};
    if (irQuery == nullptr || tdb0 == nullptr || ownship == nullptr) {
       // Clean up and leave
       if (tdb0 != nullptr) tdb0->unref();
@@ -205,7 +205,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const double* anglesOffBoresight{tdb0->getBoresightErrorAngles()};
       const base::Vec3d* losO2T{tdb0->getLosVectors()};
       const base::Vec3d* losT2O{tdb0->getTargetLosVectors()};
-      Player** targets{tdb0->getTargets()};
+      IPlayer** targets{tdb0->getTargets()};
       const double maximumRange{irQuery->getMaxRangeNM()*base::length::NM2M};
 
       // ---

@@ -54,7 +54,7 @@ OBJS =  \
 	player/weapon/Sam.o \
 	player/Building.o \
 	player/LifeForm.o \
-	player/Player.o \
+	player/IPlayer.o \
 	player/Ship.o \
 	sensor/Gmti.o \
 	sensor/Stt.o \
