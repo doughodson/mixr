@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_LaeroDynamics_HPP__
 #define __mixr_models_common_LaeroDynamics_HPP__
 
-#include "mixr/models/dynamics/IAerodynamics.hpp"
+#include "mixr/models/dynamics/IDynamicsAero.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -15,9 +15,9 @@ namespace models {
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
 //    written by Larry Buckner
 //------------------------------------------------------------------------------
-class LaeroDynamics final: public IAerodynamics
+class LaeroDynamics final: public IDynamicsAero
 {
-   DECLARE_SUBCLASS(LaeroDynamics, IAerodynamics )
+   DECLARE_SUBCLASS(LaeroDynamics, IDynamicsAero )
 
 public:
    LaeroDynamics();

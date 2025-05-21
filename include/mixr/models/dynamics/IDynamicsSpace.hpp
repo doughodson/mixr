@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_ISpaceDynamics_HPP__
-#define __mixr_models_common_ISpaceDynamics_HPP__
+#ifndef __mixr_models_common_IDynamicsSpace_HPP__
+#define __mixr_models_common_IDynamicsSpace_HPP__
 
 #include "mixr/models/dynamics/IDynamics.hpp"
 
@@ -8,7 +8,7 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class ISpaceDynamics
+// Class IDynamicsSpace
 // Description: Interface to all space dynamics
 //
 // Note --
@@ -18,14 +18,14 @@ namespace models {
 //    2) computer model dynamics in DynamicsModel::dynamics(), which is called
 //    from Player::dynamics() to be synchronized.
 //
-// Factory name: ISpaceDynamics
+// Factory name: IDynamicsSpace
 //------------------------------------------------------------------------------
-class ISpaceDynamics : public IDynamics
+class IDynamicsSpace : public IDynamics
 {
-   DECLARE_SUBCLASS(ISpaceDynamics, IDynamics)
+   DECLARE_SUBCLASS(IDynamicsSpace, IDynamics)
 
 public:
-   ISpaceDynamics();
+   IDynamicsSpace();
 
    // Rotation Stick Input Positions (Roll and Pitch in BaseClass)
    virtual bool setControlStickYawInput(const double);

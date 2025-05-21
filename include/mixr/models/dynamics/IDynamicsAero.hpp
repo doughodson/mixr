@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_dynamics_IAerodynamics_HPP__
-#define __mixr_models_common_dynamics_IAerodynamics_HPP__
+#ifndef __mixr_models_dynamics_IDynamicsAero_HPP__
+#define __mixr_models_dynamics_IDynamicsAero_HPP__
 
 #include "mixr/models/dynamics/IDynamics.hpp"
 
@@ -8,18 +8,18 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class IAerodynamics
+// Class IDynamicsAero
 //
-// Description:  Aerodynamics model for air vehicles and weapons
+// Description: Interface for aero dynamics, namely air vehicles and weapons
 //
-// Factory name: IAerodynamics
+// Factory name: IDynamicsAero
 //------------------------------------------------------------------------------
-class IAerodynamics : public IDynamics
+class IDynamicsAero : public IDynamics
 {
-    DECLARE_SUBCLASS(IAerodynamics, IDynamics)
+    DECLARE_SUBCLASS(IDynamicsAero, IDynamics)
 
 public:
-    IAerodynamics();
+    IDynamicsAero();
 
     // Vehicle data
     virtual double getGload() const;                    // G's (+up, one at level)

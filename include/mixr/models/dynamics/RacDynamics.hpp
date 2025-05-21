@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_RacDynamics_HPP__
 #define __mixr_models_common_RacDynamics_HPP__
 
-#include "mixr/models/dynamics/IAerodynamics.hpp"
+#include "mixr/models/dynamics/IDynamicsAero.hpp"
 
 namespace mixr {
 namespace base { class IAngle; class ILength; class INumber; }
@@ -24,9 +24,9 @@ namespace models {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <INumber>   ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacDynamics final: public IAerodynamics
+class RacDynamics final: public IDynamicsAero
 {
-    DECLARE_SUBCLASS(RacDynamics, IAerodynamics)
+    DECLARE_SUBCLASS(RacDynamics, IDynamicsAero)
 
 public:
     RacDynamics();

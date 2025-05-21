@@ -9,11 +9,11 @@ OBJS =  \
 	action/ActionDecoyRelease.o \
 	action/ActionImagingSar.o \
 	action/ActionWeaponRelease.o \
-	dynamics/IAerodynamics.o \
 	dynamics/IDynamics.o \
+	dynamics/IDynamicsAero.o \
+	dynamics/IDynamicsSpace.o \
 	dynamics/LaeroDynamics.o  \
 	dynamics/RacDynamics.o \
-	dynamics/ISpaceDynamics.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \

@@ -1,13 +1,13 @@
 
-#ifndef __mixr_models_common_AirVehicle_HPP__
-#define __mixr_models_common_AirVehicle_HPP__
+#ifndef __mixr_models_AirVehicle_HPP__
+#define __mixr_models_AirVehicle_HPP__
 
 #include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace base { class Identifier; }
 namespace models {
-class IAerodynamics;
+class IDynamicsAero;
 
 //------------------------------------------------------------------------------
 // Class: AirVehicle
@@ -140,8 +140,8 @@ public:
     void reset() override;
 
 protected:
-   IAerodynamics* getAerodynamicsModel();
-   const IAerodynamics* getAerodynamicsModel() const;
+   IDynamicsAero* getDynamics();
+   const IDynamicsAero* getDynamics() const;
 
 private:
    double initGearPos {1.0};       // initial gear position
