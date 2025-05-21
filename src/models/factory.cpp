@@ -11,7 +11,7 @@
 
 // dynamics models
 #include "mixr/models/dynamics/RacDynamics.hpp"
-#include "mixr/models/dynamics/LaeroDynamics.hpp"
+#include "mixr/models/dynamics/DynamicsLaero.hpp"
 
 // environment models
 #include "mixr/models/environment/IrAtmosphere.hpp"
@@ -128,8 +128,8 @@ base::IObject* factory(const std::string& name)
    if ( name == RacDynamics::getFactoryName() ) {              // RAC
       obj = new RacDynamics();
    }
-   else if ( name == LaeroDynamics::getFactoryName() ) {       // Laero
-      obj = new LaeroDynamics();
+   else if ( name == DynamicsLaero::getFactoryName() ) {       // Laero
+      obj = new DynamicsLaero();
    }
 
    // environment

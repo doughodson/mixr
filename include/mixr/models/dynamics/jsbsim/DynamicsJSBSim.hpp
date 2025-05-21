@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_JSBSimDynamics_HPP__
-#define __mixr_models_JSBSimDynamics_HPP__
+#ifndef __mixr_models_DynamicsJSBSim_HPP__
+#define __mixr_models_DynamicsJSBSim_HPP__
 
 #include "mixr/models/dynamics/IDynamicsAero.hpp"
 
@@ -17,15 +17,15 @@ namespace models {
 namespace jsbsim {
 
 //------------------------------------------------------------------------------
-// Class: JSBSimDynamics
+// Class: DynamicsJSBSim
 // Description: JSBSim flight model dynamics
 //------------------------------------------------------------------------------
-class JSBSimDynamics final: public models::IDynamicsAero
+class DynamicsJSBSim final: public models::IDynamicsAero
 {
-    DECLARE_SUBCLASS(JSBSimDynamics, IDynamicsAero)
+    DECLARE_SUBCLASS(DynamicsJSBSim, IDynamicsAero)
 
 public:
-    JSBSimDynamics();
+    DynamicsJSBSim();
 
     double getGload() const final;
     double getMach() const final;

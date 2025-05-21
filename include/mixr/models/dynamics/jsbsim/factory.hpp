@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_dynamics_jsbsim_factory_HPP__
-#define __mixr_models_dynamics_jsbsim_factory_HPP__
+#ifndef __mixr_models_DynamicsJSBSim_factory_HPP__
+#define __mixr_models_DynamicsJSBSim_factory_HPP__
 
 #include <string>
 

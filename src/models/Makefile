@@ -12,7 +12,7 @@ OBJS =  \
 	dynamics/IDynamics.o \
 	dynamics/IDynamicsAero.o \
 	dynamics/IDynamicsSpace.o \
-	dynamics/LaeroDynamics.o  \
+	dynamics/DynamicsLaero.o  \
 	dynamics/RacDynamics.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \

@@ -1,7 +1,7 @@
 
 #include "mixr/base/IObject.hpp"
 #include "mixr/models/dynamics/jsbsim/factory.hpp"
-#include "mixr/models/dynamics/jsbsim/JSBSimDynamics.hpp"
+#include "mixr/models/dynamics/jsbsim/DynamicsJSBSim.hpp"
 
 #include <string>
 
@@ -14,8 +14,8 @@ base::IObject* factory(const std::string& name)
    base::IObject* obj {};
 
    //
-   if ( name == JSBSimDynamics::getFactoryName() ) {      // JSBSim dynamics
-      obj = new JSBSimDynamics();
+   if ( name == DynamicsJSBSim::getFactoryName() ) {      // JSBSim dynamics
+      obj = new DynamicsJSBSim();
    }
 
    return obj;

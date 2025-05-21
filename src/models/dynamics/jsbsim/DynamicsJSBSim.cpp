@@ -1,5 +1,5 @@
 
-#include "mixr/models/dynamics/jsbsim/JSBSimDynamics.hpp"
+#include "mixr/models/dynamics/jsbsim/DynamicsJSBSim.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
 
@@ -44,26 +44,26 @@ namespace mixr {
 namespace models {
 namespace jsbsim {
 
-IMPLEMENT_SUBCLASS(JSBSimDynamics, "JSBSimDynamics")
+IMPLEMENT_SUBCLASS(DynamicsJSBSim, "DynamicsJSBSim")
 
-BEGIN_SLOTTABLE(JSBSimDynamics)
+BEGIN_SLOTTABLE(DynamicsJSBSim)
     "rootDir",      //  1: JSBSim root directory for models
     "model",        //  2: JSBSim model
     "debugLevel",   //  3: JSBSim debug level (controls verbosity)
-END_SLOTTABLE(JSBSimDynamics)
+END_SLOTTABLE(DynamicsJSBSim)
 
-BEGIN_SLOT_MAP(JSBSimDynamics)
+BEGIN_SLOT_MAP(DynamicsJSBSim)
     ON_SLOT(1, setSlotRootDir,    base::String)
     ON_SLOT(2, setSlotModel,      base::String)
     ON_SLOT(3, setSlotDebugLevel, base::Integer)
 END_SLOT_MAP()
 
-JSBSimDynamics::JSBSimDynamics()
+DynamicsJSBSim::DynamicsJSBSim()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void JSBSimDynamics::copyData(const JSBSimDynamics& org, const bool)
+void DynamicsJSBSim::copyData(const DynamicsJSBSim& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -94,7 +94,7 @@ void JSBSimDynamics::copyData(const JSBSimDynamics& org, const bool)
     hasAltitudeHold      = org.hasAltitudeHold;
 }
 
-void JSBSimDynamics::deleteData()
+void DynamicsJSBSim::deleteData()
 {
     if (fdmex != nullptr) {
         delete fdmex;
@@ -109,7 +109,7 @@ void JSBSimDynamics::deleteData()
 //------------------------------------------------------------------------------
 // Get Vehicle data
 //------------------------------------------------------------------------------
-double JSBSimDynamics::getGload() const
+double DynamicsJSBSim::getGload() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -118,7 +118,7 @@ double JSBSimDynamics::getGload() const
     return static_cast<double>(Auxiliary->GetNlf());
 }
 
-double JSBSimDynamics::getMach() const
+double DynamicsJSBSim::getMach() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -127,7 +127,7 @@ double JSBSimDynamics::getMach() const
     return static_cast<double>(Auxiliary->GetMach());
 }
 
-double JSBSimDynamics::getAngleOfAttack() const
+double DynamicsJSBSim::getAngleOfAttack() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -136,7 +136,7 @@ double JSBSimDynamics::getAngleOfAttack() const
     return static_cast<double>(Auxiliary->Getalpha());
 }
 
-double JSBSimDynamics::getSideSlip() const
+double DynamicsJSBSim::getSideSlip() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -145,7 +145,7 @@ double JSBSimDynamics::getSideSlip() const
     return static_cast<double>(Auxiliary->Getbeta());
 }
 
-double JSBSimDynamics::getFlightPath() const
+double DynamicsJSBSim::getFlightPath() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -154,7 +154,7 @@ double JSBSimDynamics::getFlightPath() const
     return static_cast<double>(Auxiliary->GetGamma());
 }
 
-double JSBSimDynamics::getGrossWeight() const
+double DynamicsJSBSim::getGrossWeight() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGMassBalance* MassBalance{fdmex->GetMassBalance()};
@@ -163,7 +163,7 @@ double JSBSimDynamics::getGrossWeight() const
     return static_cast<double>(MassBalance->GetWeight());
 }
 
-double JSBSimDynamics::getFuelWt() const
+double DynamicsJSBSim::getFuelWt() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -177,7 +177,7 @@ double JSBSimDynamics::getFuelWt() const
     return fuelWt;
 }
 
-double JSBSimDynamics::getFuelWtMax() const
+double DynamicsJSBSim::getFuelWtMax() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -191,7 +191,7 @@ double JSBSimDynamics::getFuelWtMax() const
     return maxFuelWt;
 }
 
-double JSBSimDynamics::getCalibratedAirspeed() const
+double DynamicsJSBSim::getCalibratedAirspeed() const
 {
     if (fdmex == nullptr) return 0.0;
     JSBSim::FGAuxiliary* Auxiliary{fdmex->GetAuxiliary()};
@@ -203,7 +203,7 @@ double JSBSimDynamics::getCalibratedAirspeed() const
 //------------------------------------------------------------------------------
 // Get engine parameters: num engines, thrust, fuel flow and pla
 //------------------------------------------------------------------------------
-int JSBSimDynamics::getNumberOfEngines() const
+int DynamicsJSBSim::getNumberOfEngines() const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -212,7 +212,7 @@ int JSBSimDynamics::getNumberOfEngines() const
     return Propulsion->GetNumEngines();
 }
 
-int JSBSimDynamics::getEngThrust(double* const fn, const int max) const
+int DynamicsJSBSim::getEngThrust(double* const fn, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -232,7 +232,7 @@ int JSBSimDynamics::getEngThrust(double* const fn, const int max) const
     return num;
 }
 
-int JSBSimDynamics::getEngRPM(double* const rpm, const int max) const
+int DynamicsJSBSim::getEngRPM(double* const rpm, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -282,7 +282,7 @@ int JSBSimDynamics::getEngRPM(double* const rpm, const int max) const
     return num;
 }
 
-int JSBSimDynamics::getEngFuelFlow(double* const ff, const int max) const
+int DynamicsJSBSim::getEngFuelFlow(double* const ff, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -303,7 +303,7 @@ int JSBSimDynamics::getEngFuelFlow(double* const ff, const int max) const
     return num;
 }
 
-int JSBSimDynamics::getEngOilPressure(double* const oil, const int max) const
+int DynamicsJSBSim::getEngOilPressure(double* const oil, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -349,7 +349,7 @@ int JSBSimDynamics::getEngOilPressure(double* const oil, const int max) const
     return num;
 }
 
-int JSBSimDynamics::getEngInletTemp(double* const tmp, const int max) const
+int DynamicsJSBSim::getEngInletTemp(double* const tmp, const int max) const
 {
     // return throttle PLA (degrees)
     int n{};
@@ -360,7 +360,7 @@ int JSBSimDynamics::getEngInletTemp(double* const tmp, const int max) const
     return n;
 }
 
-int JSBSimDynamics::getEngPLA(double* const pla, const int max) const
+int DynamicsJSBSim::getEngPLA(double* const pla, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -387,7 +387,7 @@ int JSBSimDynamics::getEngPLA(double* const pla, const int max) const
     return num;
 }
 
-int JSBSimDynamics::getEngNozzle(double* const pla, const int max) const
+int DynamicsJSBSim::getEngNozzle(double* const pla, const int max) const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGPropulsion* Propulsion{fdmex->GetPropulsion()};
@@ -432,7 +432,7 @@ int JSBSimDynamics::getEngNozzle(double* const pla, const int max) const
 // setControlStickRollInput(Roll) --  Control inputs: normalized
 //   roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setControlStickRollInput(const double roll)
+void DynamicsJSBSim::setControlStickRollInput(const double roll)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -446,7 +446,7 @@ void JSBSimDynamics::setControlStickRollInput(const double roll)
 // setControlStickPitchInput(Pitch) --  Control inputs: normalized
 //  pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setControlStickPitchInput(const double pitch)
+void DynamicsJSBSim::setControlStickPitchInput(const double pitch)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -467,7 +467,7 @@ void JSBSimDynamics::setControlStickPitchInput(const double pitch)
 //    num -> number of throttle positions to get/set
 //    returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int JSBSimDynamics::setThrottles(const double* const positions, const int num)
+int DynamicsJSBSim::setThrottles(const double* const positions, const int num)
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -494,7 +494,7 @@ int JSBSimDynamics::setThrottles(const double* const positions, const int num)
 // setTrimSwitchRollInput(RollTrim) --  Sets the trim switch positions:
 //      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setTrimSwitchRollInput(const double rollTrim)
+void DynamicsJSBSim::setTrimSwitchRollInput(const double rollTrim)
 {
     rollTrimSw = rollTrim;
 }
@@ -503,7 +503,7 @@ void JSBSimDynamics::setTrimSwitchRollInput(const double rollTrim)
 // setTrimSwitchPitchInput(PitchTrim) --  Sets the trim switch positions:
 //      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setTrimSwitchPitchInput(const double pitchTrim)
+void DynamicsJSBSim::setTrimSwitchPitchInput(const double pitchTrim)
 {
     pitchTrimSw = -pitchTrim;
 }
@@ -512,7 +512,7 @@ void JSBSimDynamics::setTrimSwitchPitchInput(const double pitchTrim)
 // setRudderPedalInput(pedal) -- Pedal inputs: normalized
 //          pedal:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setRudderPedalInput(const double pedal)
+void DynamicsJSBSim::setRudderPedalInput(const double pedal)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -525,7 +525,7 @@ void JSBSimDynamics::setRudderPedalInput(const double pedal)
 // getLandingGearPosition() --   Returns the landing gear position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double JSBSimDynamics::getLandingGearPosition() const
+double DynamicsJSBSim::getLandingGearPosition() const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -537,7 +537,7 @@ double JSBSimDynamics::getLandingGearPosition() const
 //------------------------------------------------------------------------------
 // isWeightOnWheels() --   Returns true if there is weight on the wheels.
 //------------------------------------------------------------------------------
-bool JSBSimDynamics::isWeightOnWheels() const
+bool DynamicsJSBSim::isWeightOnWheels() const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGGroundReactions* GroundReactions{fdmex->GetGroundReactions()};
@@ -558,7 +558,7 @@ bool JSBSimDynamics::isWeightOnWheels() const
 // setGearHandleSwitch() -- Set Gear handle switch position
 //                          0 -> handle up;  1 -> handle down
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setGearHandleSwitch(const double sw)
+void DynamicsJSBSim::setGearHandleSwitch(const double sw)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -571,7 +571,7 @@ void JSBSimDynamics::setGearHandleSwitch(const double sw)
 // getSpeedBrakesSwitch() --   Returns the speed brake position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double JSBSimDynamics::getSpeedBrakePosition() const
+double DynamicsJSBSim::getSpeedBrakePosition() const
 {
     if (fdmex == nullptr) return 0;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -584,7 +584,7 @@ double JSBSimDynamics::getSpeedBrakePosition() const
 // setSpeedBrakesSwitch() --   Sets the speed brake switch position:
 //      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setSpeedBrakesSwitch(const double sw)
+void DynamicsJSBSim::setSpeedBrakesSwitch(const double sw)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -603,7 +603,7 @@ void JSBSimDynamics::setSpeedBrakesSwitch(const double sw)
 //               No brake force  -> 0.0
 //               Max brake force -> 1.0
 //------------------------------------------------------------------------------
-void JSBSimDynamics::setBrakes(const double left, const double right)
+void DynamicsJSBSim::setBrakes(const double left, const double right)
 {
     if (fdmex == nullptr) return;
     JSBSim::FGFCS* FCS{fdmex->GetFCS()};
@@ -617,7 +617,7 @@ void JSBSimDynamics::setBrakes(const double left, const double right)
 //------------------------------------------------------------------------------
 // dynamics() -- update player's vehicle dynamics
 //------------------------------------------------------------------------------
-void JSBSimDynamics::dynamics(const double dt)
+void DynamicsJSBSim::dynamics(const double dt)
 {
     // Get our Player (must have one!)
     const auto p = static_cast<models::IPlayer*>( findContainerByType(typeid(models::IPlayer)) );
@@ -769,7 +769,7 @@ void JSBSimDynamics::dynamics(const double dt)
 //------------------------------------------------------------------------------
 // reset() --
 //------------------------------------------------------------------------------
-void JSBSimDynamics::reset()
+void DynamicsJSBSim::reset()
 {
     BaseClass::reset();
 
@@ -877,21 +877,21 @@ void JSBSimDynamics::reset()
 //------------------------------------------------------------------------------
 
 // Sets root directory for JSBSim models
-bool JSBSimDynamics::setSlotRootDir(const base::String* const x)
+bool DynamicsJSBSim::setSlotRootDir(const base::String* const x)
 {
     rootDir = x->c_str();
     return true;
 }
 
 // Sets JSBSim model
-bool JSBSimDynamics::setSlotModel(const base::String* const x)
+bool DynamicsJSBSim::setSlotModel(const base::String* const x)
 {
     model = x->c_str();
     return true;
 }
 
 // Sets JSBSim debug level
-bool JSBSimDynamics::setSlotDebugLevel(const base::Integer* const level)
+bool DynamicsJSBSim::setSlotDebugLevel(const base::Integer* const level)
 {
    if (level != nullptr) {
       debugLevel = level->asInt();
@@ -902,17 +902,17 @@ bool JSBSimDynamics::setSlotDebugLevel(const base::Integer* const level)
 //------------------------------------------------------------------------------
 // commanded heading
 //------------------------------------------------------------------------------
-bool JSBSimDynamics::isHeadingHoldOn() const
+bool DynamicsJSBSim::isHeadingHoldOn() const
 {
     return hasHeadingHold && headingHoldOn;
 }
 
-double JSBSimDynamics::getCommandedHeadingD() const
+double DynamicsJSBSim::getCommandedHeadingD() const
 {
     return commandedHeadingDeg;
 }
 
-bool JSBSimDynamics::setHeadingHoldOn(const bool b)
+bool DynamicsJSBSim::setHeadingHoldOn(const bool b)
 {
     if (hasHeadingHold) {
         headingHoldOn = b;
@@ -920,7 +920,7 @@ bool JSBSimDynamics::setHeadingHoldOn(const bool b)
     return hasHeadingHold;
 }
 
-bool JSBSimDynamics::setCommandedHeadingD(const double h, const double, const double)
+bool DynamicsJSBSim::setCommandedHeadingD(const double h, const double, const double)
 {
     commandedHeadingDeg = h;
     return hasHeadingHold;
@@ -930,17 +930,17 @@ bool JSBSimDynamics::setCommandedHeadingD(const double h, const double, const do
 //------------------------------------------------------------------------------
 // commanded velocity
 //------------------------------------------------------------------------------
-bool JSBSimDynamics::isVelocityHoldOn() const
+bool DynamicsJSBSim::isVelocityHoldOn() const
 {
     return hasVelocityHold && velocityHoldOn;
 }
 
-double JSBSimDynamics::getCommandedVelocityKts() const
+double DynamicsJSBSim::getCommandedVelocityKts() const
 {
     return commandedVelocityKts;
 }
 
-bool JSBSimDynamics::setVelocityHoldOn(const bool b)
+bool DynamicsJSBSim::setVelocityHoldOn(const bool b)
 {
     if (hasVelocityHold) {
         velocityHoldOn = b;
@@ -948,7 +948,7 @@ bool JSBSimDynamics::setVelocityHoldOn(const bool b)
     return hasVelocityHold;
 }
 
-bool JSBSimDynamics::setCommandedVelocityKts(const double v, const double vNps)
+bool DynamicsJSBSim::setCommandedVelocityKts(const double v, const double vNps)
 {
     commandedVelocityKts = v;
     return hasVelocityHold;
@@ -957,17 +957,17 @@ bool JSBSimDynamics::setCommandedVelocityKts(const double v, const double vNps)
 //------------------------------------------------------------------------------
 // commanded altitude
 //------------------------------------------------------------------------------
-bool JSBSimDynamics::isAltitudeHoldOn() const
+bool DynamicsJSBSim::isAltitudeHoldOn() const
 {
     return hasAltitudeHold && altitudeHoldOn;
 }
 
-double JSBSimDynamics::getCommandedAltitude() const
+double DynamicsJSBSim::getCommandedAltitude() const
 {
     return commandedAltitudeFt * base::length::FT2M;
 }
 
-bool JSBSimDynamics::setAltitudeHoldOn(const bool b)
+bool DynamicsJSBSim::setAltitudeHoldOn(const bool b)
 {
     if (hasAltitudeHold) {
         altitudeHoldOn = b;
@@ -975,7 +975,7 @@ bool JSBSimDynamics::setAltitudeHoldOn(const bool b)
     return hasAltitudeHold;
 }
 
-bool JSBSimDynamics::setCommandedAltitude(const double a, const double, const double)
+bool DynamicsJSBSim::setCommandedAltitude(const double a, const double, const double)
 {
     commandedAltitudeFt = a * base::length::M2FT;
     return hasAltitudeHold;
