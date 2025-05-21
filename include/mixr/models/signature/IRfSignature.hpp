@@ -10,7 +10,7 @@ class Emission;
 
 //------------------------------------------------------------------------------
 // Class: IRfSignature
-// Descriptions: Interface for signatures
+// Descriptions: Interface for RF signatures
 //------------------------------------------------------------------------------
 class IRfSignature : public base::IComponent
 {
