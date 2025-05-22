@@ -7,7 +7,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
@@ -676,7 +676,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          models::ITrackMgr* tm{beam->getTrackManager()};
          if (tm != nullptr) {
             const int max1{MAX_TARGETS_IN_TJ_FIELD + 1};   // check for one more than the max (highDensityTracks)
-            base::safe_ptr<models::Track> trackList[max1];
+            base::safe_ptr<models::ITrack> trackList[max1];
             int n{tm->getTrackList(trackList, max1)};
             if (n <= MAX_TARGETS_IN_TJ_FIELD) {
 

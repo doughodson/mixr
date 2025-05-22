@@ -9,7 +9,8 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
+#include "mixr/models/track/RfTrack.hpp"
 #include "mixr/models/RfEmission.hpp"
 
 #include "mixr/simulation/INib.hpp"
@@ -655,7 +656,7 @@ bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double val
 {
    // objects
    const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
-   const auto newTrack = dynamic_cast<const models::Track*>( objs[1] );
+   const auto newTrack = dynamic_cast<const models::ITrack*>( objs[1] );
    if (player == nullptr || newTrack == nullptr) return false;
 
    // message
@@ -711,7 +712,7 @@ bool DataRecorder::recordTrackRemoved(const base::IObject* objs[4], const double
 {
    // objects
    const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
-   const auto track = dynamic_cast<const models::Track*>( objs[1] );
+   const auto track = dynamic_cast<const models::ITrack*>( objs[1] );
    if (player == nullptr || track == nullptr) return false;
 
    // message
@@ -744,7 +745,7 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
 {
    // objects
    const auto player = dynamic_cast<const models::IPlayer*>( objs[0] );
-   const auto trackData = dynamic_cast<const models::Track*>( objs[1] );
+   const auto trackData = dynamic_cast<const models::ITrack*>( objs[1] );
    if (player == nullptr || trackData == nullptr) return false;
 
    // message
@@ -858,7 +859,7 @@ void DataRecorder::genPlayerState(proto::PlayerState* const state, const models:
 //------------------------------------------------------------------------------
 // Generate the Track ID
 //------------------------------------------------------------------------------
-std::string DataRecorder::genTrackId(const models::Track* const track)
+std::string DataRecorder::genTrackId(const models::ITrack* const track)
 {
    std::string trackIdStr = "";
    if (track != nullptr) {
@@ -877,7 +878,7 @@ std::string DataRecorder::genTrackId(const models::Track* const track)
 //------------------------------------------------------------------------------
 // Generate the Track data
 //------------------------------------------------------------------------------
-void DataRecorder::genTrackData(proto::TrackData* const trkMsg, const models::Track* const track)
+void DataRecorder::genTrackData(proto::TrackData* const trkMsg, const models::ITrack* const track)
 {
    if (trkMsg != nullptr) {
       if (track != nullptr) {
