@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IPilot_HPP__
-#define __mixr_models_common_IPilot_HPP__
+#ifndef __mixr_models_IPilot_HPP__
+#define __mixr_models_IPilot_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 

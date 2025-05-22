@@ -9,7 +9,7 @@ namespace base { class IAngle; class Boolean; class Integer; class ILength; clas
 namespace models {
 class Designator;
 class Stores;
-class Track;
+class ITrack;
 
 //------------------------------------------------------------------------------
 // Class: IWeapon
@@ -199,8 +199,8 @@ public:
 
    const base::Vec3d& getTargetPosition() const;     // Returns the target position (meters -- NED from world model ref point)
 
-   Track* getTargetTrack();                          // Our target track, if any
-   const Track* getTargetTrack() const;              // Our target track, if any (const version)
+   ITrack* getTargetTrack();                         // Our target track, if any
+   const ITrack* getTargetTrack() const;             // Our target track, if any (const version)
 
    IPlayer* getTargetPlayer();                       // Our target player, if any
    const IPlayer* getTargetPlayer() const;           // Our target player, if any (const version)
@@ -220,7 +220,7 @@ public:
 
    // Sets a pointer to the target track --
    // -- if 'posTrkEnb' is true, we'll follow the target track's position
-   virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
+   virtual bool setTargetTrack(ITrack* const trk, const bool posTrkEnb);
 
    // Sets the target position (meters -- NED from world model ref point)
    virtual bool setTargetPosition(const base::Vec3d& newTgtPos);
@@ -333,7 +333,7 @@ private:
     base::Vec3d tgtPos;                            // Target Position -- platform coord (NED)
     bool       tgtPosValid {};                     // If true, target position is valid
     base::safe_ptr<IPlayer> tgtPlayer;             // Target Player
-    base::safe_ptr<Track>  tgtTrack;               // Target Track
+    base::safe_ptr<ITrack>  tgtTrack;              // Target Track
     base::Vec3d    tgtVel {};                      // Target/Track Velocity (m/s) relative to ownship velocity
     base::safe_ptr<IPlayer> launchVehicle;         // Launching/Releasing Player
     bool       posTrkEnb {};                       // If true, update tgtPos from the target/track

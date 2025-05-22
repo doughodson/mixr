@@ -1,5 +1,5 @@
 
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/RfEmission.hpp"
@@ -14,16 +14,16 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Track, "Track")
-EMPTY_SLOTTABLE(Track)
+IMPLEMENT_SUBCLASS(ITrack, "ITrack")
+EMPTY_SLOTTABLE(ITrack)
 
-Track::Track()
+ITrack::ITrack()
 {
     STANDARD_CONSTRUCTOR()
     clear();
 }
 
-void Track::copyData(const Track& org, const bool)
+void ITrack::copyData(const ITrack& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -83,7 +83,7 @@ void Track::copyData(const Track& org, const bool)
    osAccel = org.osAccel;
 }
 
-void Track::deleteData()
+void ITrack::deleteData()
 {
    setTarget(nullptr);
    clear();
@@ -92,7 +92,7 @@ void Track::deleteData()
 //------------------------------------------------------------------------------
 // clear() -- clear the track
 //------------------------------------------------------------------------------
-void Track::clear()
+void ITrack::clear()
 {
    // General track ID and status
    id = 0;
@@ -151,7 +151,7 @@ void Track::clear()
 //------------------------------------------------------------------------------
 // ownshipDynamics() -- apply ownship dynamics to predicted track position
 //------------------------------------------------------------------------------
-void Track::ownshipDynamics(const double gtrk, const base::Vec3d velOS, const base::Vec3d accelOS, const double)
+void ITrack::ownshipDynamics(const double gtrk, const base::Vec3d velOS, const base::Vec3d accelOS, const double)
 {
    osGndTrk = gtrk;
    osVel = velOS;
@@ -163,7 +163,7 @@ void Track::ownshipDynamics(const double gtrk, const base::Vec3d velOS, const ba
 // and longitude are valid, and 'lat' and 'lon' are set; returns false if latitude
 // and longitude are not valid, and 'lat' and 'lon' are not changed.
 //------------------------------------------------------------------------------
-bool Track::getLatLonPosition(double* const lat, double* const lon) const
+bool ITrack::getLatLonPosition(double* const lat, double* const lon) const
 {
    bool ok{};
    if (llValid && lat != nullptr && lon != nullptr) {
@@ -179,55 +179,55 @@ bool Track::getLatLonPosition(double* const lat, double* const lon) const
 //------------------------------------------------------------------------------
 
 // setTrackID() -- set local track ID
-bool Track::setTrackID(const int v)
+bool ITrack::setTrackID(const int v)
 {
    id = v;
    return true;
 }
 // setType() -- set all of the track type bits to 't'
-bool Track::setType(const short t)
+bool ITrack::setType(const short t)
 {
    type = t;
    return true;
 }
 
 // setSubtype() -- bitwise-OR the type bits with 't'
-bool Track::setSubtype(const short t)
+bool ITrack::setSubtype(const short t)
 {
    type = (t | type);
    return true;
 }
 
 // setClass() -- set all of the track class with 'c'
-bool Track::setClass(const TrackClass c)
+bool ITrack::setClass(const TrackClass c)
 {
     trackClass = c;
     return true;
 }
 
 // updateTrackAge() -- Update the age of the track by delta time, dt (seconds)
-bool Track::updateTrackAge(const double dt)
+bool ITrack::updateTrackAge(const double dt)
 {
    age += dt;
    return true;
 }
 
 // resetTrackAge() -- Reset the age of the track to zero
-bool Track::resetTrackAge()
+bool ITrack::resetTrackAge()
 {
    age = 0.0;
    return true;
 }
 
 // setQuality() -- Sets the normalized track quality value
-bool Track::setQuality(const double v)
+bool ITrack::setQuality(const double v)
 {
    quality = v;
    return true;
 }
 
 // setLatLonPosition() -- set track's position vector
-bool Track::setLatLonPosition(const double lat, const double lon)
+bool ITrack::setLatLonPosition(const double lat, const double lon)
 {
    llValid = false;
    latitude = lat;
@@ -241,13 +241,13 @@ bool Track::setLatLonPosition(const double lat, const double lon)
 }
 
 // clearLatLonValid() -- clears the track's latitude/longitude position validity
-void Track::clearLatLonValid()
+void ITrack::clearLatLonValid()
 {
    llValid = false;
 }
 
 // setPosition() -- set track's position vector
-bool Track::setPosition(const base::Vec3d& p)
+bool ITrack::setPosition(const base::Vec3d& p)
 {
    // set position vector
    pos = p;
@@ -271,28 +271,28 @@ bool Track::setPosition(const base::Vec3d& p)
 
 
 // setPosition() -- set track's position vector with a 4D vector; use only x, y and z
-bool Track::setPosition(const base::Vec4d& p)
+bool ITrack::setPosition(const base::Vec4d& p)
 {
    base::Vec3d pos3(p.x(),p.y(),p.z());
    return setPosition(pos3);
 }
 
 // setCircularError() -- sets the track's estimated position error, meters,
-bool Track::setCircularError(const double err)
+bool ITrack::setCircularError(const double err)
 {
    cErr = err;
    return true;
 }
 
 // setVerticalError() -- sets the track's estimated altitude error, meters
-bool Track::setVerticalError(const double err)
+bool ITrack::setVerticalError(const double err)
 {
    vErr = err;
    return true;
 }
 
 // setVelocity() -- set track's velocity vector and compute ground speed & track
-bool Track::setVelocity(const base::Vec3d v)
+bool ITrack::setVelocity(const base::Vec3d v)
 {
    vel = v;
 
@@ -311,290 +311,61 @@ bool Track::setVelocity(const base::Vec3d v)
 }
 
 // setAcceleration() -- set track's acceleration vector
-bool Track::setAcceleration(const base::Vec3d a)
+bool ITrack::setAcceleration(const base::Vec3d a)
 {
    accel = a;
    return true;
 }
 
 // setRange() -- sets slant range to track, meters
-bool Track::setRange(const double r)
+bool ITrack::setRange(const double r)
 {
    rng = r;
    return true;
 }
 
 // setRangeRate() -- sets the rate of change of the slate range to target, m/s
-bool Track::setRangeRate(const double rr)
+bool ITrack::setRangeRate(const double rr)
 {
    rngRate = rr;
    return true;
 }
 
 // setIffCode() -- sets the IFF code
-bool Track::setIffCode(const IffCode s)
+bool ITrack::setIffCode(const IffCode s)
 {
    iffCode = s;
    return true;
 }
 
 // setShootListIndex() -- sets the track's shootlist index
-bool Track::setShootListIndex(const int idx)
+bool ITrack::setShootListIndex(const int idx)
 {
    shootList = idx;
    return true;
 }
 
 // setWeaponReleased() -- flags that we've released a weapon at this track
-bool Track::setWeaponReleased(const bool f)
+bool ITrack::setWeaponReleased(const bool f)
 {
    wpnRel = f;
    return true;
 }
 
 // setRejected() -- rejects this track from the shootlist
-bool Track::setRejected(const bool f)
+bool ITrack::setRejected(const bool f)
 {
    rejected = f;
    return true;
 }
 
 // setTarget() -- set the target pointer
-bool Track::setTarget(IPlayer* const p)
+bool ITrack::setTarget(IPlayer* const p)
 {
    if (tgt != nullptr) tgt->unref();
    tgt = p;
    if (tgt != nullptr) tgt->ref();
    return true;
-}
-
-//==============================================================================
-// Class: RfTrack
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(RfTrack, "RfTrack")
-EMPTY_SLOTTABLE(RfTrack)
-
-RfTrack::RfTrack() : lastEM(nullptr)
-{
-    STANDARD_CONSTRUCTOR()
-
-    clear();
-}
-
-void RfTrack::copyData(const RfTrack& org, const bool)
-{
-    BaseClass::copyData(org);
-
-    setLastEmission( org.lastEM );
-
-    mslWarn = org.mslWarn;
-
-    avgSig = org.avgSig;
-    maxSig = org.maxSig;
-    nSig = org.nSig;
-    iSig = org.iSig;
-    for (int i = 0; i < MAX_SIG; i++) {
-       lastSN[i] = org.lastSN[i];
-    }
-}
-
-void RfTrack::deleteData()
-{
-    setLastEmission(nullptr);
-}
-
-//------------------------------------------------------------------------------
-// setSignal() -- set the track's last signal
-//------------------------------------------------------------------------------
-bool RfTrack::setSignal(const double snDbl, const RfEmission* const em)
-{
-    // Save the emission
-    setLastEmission(em);
-
-    // Save the signal
-    lastSN[iSig++] = snDbl;
-    if (iSig >= MAX_SIG) iSig = 0;
-    if (nSig < MAX_SIG) nSig++;
-
-    // Compute average signal
-    double sum{};
-    double avg{};
-    double maxs{};
-    if (nSig > 0) {
-        for (int i = 0; i < nSig; i++) {
-            sum += lastSN[i];
-            if (lastSN[i] > maxs) maxs = lastSN[i];
-        }
-        avg = sum / static_cast<double>(nSig);
-    }
-    avgSig = avg;
-    maxSig = maxs;
-
-    return true;
-}
-
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
-// setLastEmission() -- set the last emission pointer
-bool RfTrack::setLastEmission(const RfEmission* const em)
-{
-   if (lastEM != nullptr) lastEM->unref();
-   lastEM = em;
-   if (lastEM != nullptr) lastEM->ref();
-   return true;
-}
-
-// Set missile warning flag
-bool RfTrack::setMissileWarning(const bool b)
-{
-   mslWarn = b;
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// clear() -- clear the track
-//------------------------------------------------------------------------------
-void RfTrack::clear()
-{
-   mslWarn = false;
-
-   setLastEmission(nullptr);
-   avgSig = 0;
-   maxSig = 0;
-   nSig = 0;
-   iSig = 0;
-
-   trackClass = RANGE_AND_ANGLE;
-
-   BaseClass::clear();
-}
-
-//==============================================================================
-// Class: IrTrack
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(IrTrack,"IrTrack")
-EMPTY_SLOTTABLE(IrTrack)
-
-IrTrack::IrTrack() : lastQuery(nullptr)
-{
-    STANDARD_CONSTRUCTOR()
-
-    clear();
-}
-
-void IrTrack::copyData(const IrTrack& org, const bool)
-{
-    BaseClass::copyData(org);
-
-    setLastQuery( org.lastQuery );
-
-    mslWarn = org.mslWarn;
-
-    avgSig = org.avgSig;
-    maxSig = org.maxSig;
-    nSig = org.nSig;
-    iSig = org.iSig;
-    for (int i = 0; i < MAX_SIG; i++) {
-       lastSN[i] = org.lastSN[i];
-    }
-}
-
-void IrTrack::deleteData()
-{
-    setLastQuery(nullptr);
-}
-
-//------------------------------------------------------------------------------
-// setSignal() -- set the track's last signal
-//------------------------------------------------------------------------------
-bool IrTrack::setSignal(const double snDbl, const IrQueryMsg* const q)
-{
-    // Save the emission
-    setLastQuery(q);
-
-    // Save the signal
-    lastSN[iSig++] = snDbl;
-    if (iSig >= MAX_SIG) iSig = 0;
-    if (nSig < MAX_SIG) nSig++;
-
-    // Compute average signal
-    double sum{};
-    double avg{};
-    double maxs{};
-    if (nSig > 0) {
-        for (int i = 0; i < nSig; i++) {
-            sum += lastSN[i];
-            if (lastSN[i] > maxs) maxs = lastSN[i];
-        }
-        avg = sum / static_cast<double>(nSig);
-    }
-    avgSig = avg;
-    maxSig = maxs;
-
-    return true;
-}
-
-// setPosition() -- set track's position vector - but do not set rel az or el
-bool IrTrack::setPosition(const base::Vec3d& p)
-{
-   // set position vector
-   pos = p;
-
-   // compute ranges
-   double gndRng2{pos.x()*pos.x() + pos.y()*pos.y()};
-   gndRng = std::sqrt(gndRng2);
-   rng = std::sqrt(gndRng2 +  pos.z()*pos.z());
-
-   // compute angles
-   taz = std::atan2(pos.y(),pos.x());
-
-   // Set LOS unit vector
-   if (rng > 0) los.set( pos.x()/rng, pos.y()/rng, pos.z()/rng );
-   else los.set(0,0,0);
-
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// Set functions
-//------------------------------------------------------------------------------
-
-// setLastQuery() -- set the last emission pointer
-bool IrTrack::setLastQuery(const IrQueryMsg* const q)
-{
-   if (lastQuery != nullptr) lastQuery->unref();
-   lastQuery = q;
-   if (lastQuery != nullptr) lastQuery->ref();
-   return true;
-}
-
-// Set missile warning flag
-bool IrTrack::setMissileWarning(const bool b)
-{
-   mslWarn = b;
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// clear() -- clear the track
-//------------------------------------------------------------------------------
-void IrTrack::clear()
-{
-   mslWarn = false;
-
-   setLastQuery(nullptr);
-   avgSig = 0;
-   maxSig = 0;
-   nSig = 0;
-   iSig = 0;
-
-   trackClass = ANGLE_ONLY;
-
-   BaseClass::clear();
 }
 
 }

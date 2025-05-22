@@ -2,7 +2,7 @@
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 
 #include "mixr/models/RfEmission.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
@@ -217,7 +217,7 @@ bool ITrackMgr::setMaxTrackAge(const double s)
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int ITrackMgr::getTrackList(base::safe_ptr<Track>* const tlist, const unsigned int max) const
+int ITrackMgr::getTrackList(base::safe_ptr<ITrack>* const tlist, const unsigned int max) const
 {
    int n{};
 
@@ -236,7 +236,7 @@ int ITrackMgr::getTrackList(base::safe_ptr<Track>* const tlist, const unsigned i
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int ITrackMgr::getTrackList(base::safe_ptr<const Track>* const tlist, const unsigned int max) const
+int ITrackMgr::getTrackList(base::safe_ptr<const ITrack>* const tlist, const unsigned int max) const
 {
    int n{};
 
@@ -254,7 +254,7 @@ int ITrackMgr::getTrackList(base::safe_ptr<const Track>* const tlist, const unsi
 //------------------------------------------------------------------------------
 // getTrackList() -- returns the track list as an array of pointers
 //------------------------------------------------------------------------------
-int ITrackMgr::getTrackList(Track* tlist[], const unsigned int max)
+int ITrackMgr::getTrackList(ITrack* tlist[], const unsigned int max)
 {
    int n{};
 
@@ -271,7 +271,7 @@ int ITrackMgr::getTrackList(Track* tlist[], const unsigned int max)
    return n;
 }
 
-int ITrackMgr::getTrackList(const Track* tlist[], const unsigned int max) const
+int ITrackMgr::getTrackList(const ITrack* tlist[], const unsigned int max) const
 {
    int n{};
 
@@ -334,7 +334,7 @@ RfEmission* ITrackMgr::getReport(double* const sn)
 //------------------------------------------------------------------------------
 // addTrack() -- Add a track to the list
 //------------------------------------------------------------------------------
-bool ITrackMgr::addTrack(Track* const t)
+bool ITrackMgr::addTrack(ITrack* const t)
 {
    bool ok{};
 

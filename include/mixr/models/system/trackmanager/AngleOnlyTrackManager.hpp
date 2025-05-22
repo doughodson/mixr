@@ -10,7 +10,7 @@ namespace mixr {
 namespace base { class IAngle; class INumber; }
 namespace models {
 class IrQueryMsg;
-class Track;
+class ITrack;
 
 //------------------------------------------------------------------------------
 // Class: AngleOnlyTrackManager
@@ -31,7 +31,7 @@ public:
    virtual void newReport(IrQueryMsg* q, double snDbl);
 
    void clearTracksAndQueues() override;
-   bool addTrack(Track* const t) override;
+   bool addTrack(ITrack* const t) override;
 
 protected:
    virtual IrQueryMsg* getQuery(double* const sn);                     // Get the next 'new' report from the queue

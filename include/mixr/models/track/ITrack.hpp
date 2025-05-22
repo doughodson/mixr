@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Track_HPP__
-#define __mixr_models_common_Track_HPP__
+#ifndef __mixr_models_ITrack_HPP__
+#define __mixr_models_ITrack_HPP__
 
 #include "mixr/base/IObject.hpp"
 
@@ -20,13 +20,13 @@ class IrQueryMsg;
 class IPlayer;
 
 //------------------------------------------------------------------------------
-// Class: Track
+// Class: ITrack
 // Factory name: Track
 // Description: Generic Target Track
 //------------------------------------------------------------------------------
-class Track : public base::IObject
+class ITrack : public base::IObject
 {
-    DECLARE_SUBCLASS(Track, base::IObject)
+    DECLARE_SUBCLASS(ITrack, base::IObject)
 
 public:
     enum TypeBits {
@@ -41,7 +41,7 @@ public:
     enum TrackClass { NOT_DEFINED, RANGE_AND_ANGLE, ANGLE_ONLY };
 
 public:
-   Track();
+   ITrack();
 
    // Local track ID
    int getTrackID() const                          { return id; }
@@ -267,73 +267,6 @@ protected:
    double      maxSig {};                // Max Signal                         (dB)
    int         nSig {};                  // Number of signals
    int         iSig {};                  // Signal index;
-};
-
-
-//------------------------------------------------------------------------------
-// Class: RfTrack
-// Factory name: RfTrack
-// Description: Generic R/F Target Track (onboard sensors)
-//------------------------------------------------------------------------------
-class RfTrack : public Track
-{
-   DECLARE_SUBCLASS(RfTrack, Track)
-
-public:
-   RfTrack();
-
-   // Signal strength and last emission for onboard R/F sensor tracks
-   double getAvgSignal() const                     { return avgSig; }
-   double getMaxSignal() const                     { return maxSig; }
-   int getNumSignals() const                       { return nSig; }
-   const RfEmission* getLastEmission() const       { return lastEM; }
-   virtual bool setSignal(const double snDbl, const RfEmission* const em);
-
-   // Missile warning (from an RWR)
-   bool isMissileWarning() const                   { return mslWarn; }
-   virtual bool setMissileWarning(const bool);
-
-   void clear() override;
-
-   virtual bool setLastEmission(const RfEmission* const);
-
-protected:
-   const RfEmission* lastEM{};      // Last emission
-
-};
-
-//------------------------------------------------------------------------------
-// Class: IrTrack
-// Factory name: IrTrack
-// Description: Generic IR Target Track (onboard sensors)
-//------------------------------------------------------------------------------
-class IrTrack : public Track
-{
-   DECLARE_SUBCLASS(IrTrack, Track)
-
-public:
-   IrTrack();
-
-   // Signal strength and last emission for onboard IR sensor tracks
-   double getAvgSignal() const                                             { return avgSig; }
-   double getMaxSignal() const                                             { return maxSig; }
-   int getNumSignals() const                                               { return nSig; }
-   const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
-   virtual bool setSignal(const double snDbl, const IrQueryMsg* const);
-   bool setPosition(const base::Vec3d&) override;
-
-   // Missile warning (from an RWR)
-   bool isMissileWarning() const                                           { return mslWarn; }
-   virtual bool setMissileWarning(const bool);
-
-   void clear() override;
-
-//protected:
-   virtual bool setLastQuery(const IrQueryMsg* const);
-
-protected:
-   const IrQueryMsg* lastQuery {}; // Last query
-
 };
 
 }

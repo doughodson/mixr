@@ -5,7 +5,7 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/IScanGimbal.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 
 namespace mixr {
 namespace models {
@@ -37,7 +37,7 @@ void Stt::dynamics(const double dt)
     ITrackMgr* tm{getTrackManager()};
     if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
-        base::safe_ptr<Track> trackList[2];
+        base::safe_ptr<ITrack> trackList[2];
         int n = tm->getTrackList(trackList,2);
 
         if (n > 0) {

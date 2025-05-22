@@ -1,7 +1,7 @@
 
 #include "mixr/models/player/weapon/Missile.hpp"
 
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
@@ -138,7 +138,7 @@ void Missile::atReleaseInit()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Missile::calculateVectors(const IPlayer* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
+bool Missile::calculateVectors(const IPlayer* const tgt, const ITrack* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (trk != nullptr) {
       //los = trk->getPosition();
@@ -259,7 +259,7 @@ bool Missile::setTargetPlayer(IPlayer* const tgt, const bool pt)
 }
 
 // setTargetTrack() -- sets a pointer to the target track
-bool Missile::setTargetTrack(Track* const trk, const bool pt)
+bool Missile::setTargetTrack(ITrack* const trk, const bool pt)
 {
    // if our track has changed, reset ground truth vals for weaponGuidance's fuzing logic
    if (trk != nullptr && trk != getTargetTrack()) {
@@ -286,7 +286,7 @@ void Missile::weaponGuidance(const double dt)
    //    then don't go away mad, just go away.
    // ---
    const IPlayer* tgt = getTargetPlayer();
-   const Track* trk = getTargetTrack();
+   const ITrack* trk = getTargetTrack();
    if (trk != nullptr) tgt = trk->getTarget();
 
    if (tgt != nullptr && !tgt->isActive()) return;

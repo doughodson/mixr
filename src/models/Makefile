@@ -112,6 +112,9 @@ OBJS =  \
 	system/StoresMgr.o \
 	system/ISystem.o \
 	system/System.o \
+	track/ITrack.o \
+	track/RfTrack.o \
+	track/IrTrack.o \
 	Designator.o \
 	Image.o \
 	IrQueryMsg.o \
@@ -123,7 +126,6 @@ OBJS =  \
 	SynchronizedState.o \
 	TargetData.o \
 	Tdb.o \
-	Track.o \
 	WorldModel.o \
 	factory.o
 

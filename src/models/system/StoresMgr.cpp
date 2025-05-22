@@ -14,7 +14,7 @@
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"

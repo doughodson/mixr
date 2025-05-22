@@ -4,7 +4,9 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
+#include "mixr/models/track/RfTrack.hpp"
+#include "mixr/models/track/IrTrack.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
@@ -28,7 +30,7 @@ EMPTY_DELETEDATA(AirAngleOnlyTrkMgr)
 AirAngleOnlyTrkMgr::AirAngleOnlyTrkMgr()
 {
     STANDARD_CONSTRUCTOR()
-    setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
+    setType( ITrack::ONBOARD_SENSOR_BIT | ITrack::AIR_TRACK_BIT );
 }
 
 void AirAngleOnlyTrkMgr::copyData(const AirAngleOnlyTrkMgr& org, const bool)
@@ -288,7 +290,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             IrTrack* newTrk{new IrTrack()};
             newTrk->setTrackID( getNewTrackID() );
             newTrk->setTarget( queryMessages[i]->getTarget() );
-            newTrk->setType(Track::AIR_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
+            newTrk->setType(ITrack::AIR_TRACK_BIT | ITrack::ONBOARD_SENSOR_BIT);
             newTrk->setPosition(queryMessages[i]->getTarget()->getPosition() - ownship->getPosition());
             newTrk->setVelocity(queryMessages[i]->getTarget()->getVelocity() - ownship->getVelocity());
             newTrk->setRelAzimuth(queryMessages[i]->getRelativeAzimuth());

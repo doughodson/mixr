@@ -19,7 +19,6 @@
 #include "mixr/models/signature/IRfSignature.hpp"
 #include "mixr/models/signature/IIrSignature.hpp"
 
-#include "mixr/models/Track.hpp"
 #include "mixr/models/RfEmission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 

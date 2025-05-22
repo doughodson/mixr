@@ -2,7 +2,8 @@
 #include "mixr/models/system/trackmanager/RwrTrkMgr.hpp"
 
 #include "mixr/models/RfEmission.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
+#include "mixr/models/track/RfTrack.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
@@ -30,7 +31,7 @@ RwrTrkMgr::RwrTrkMgr()
 
 void RwrTrkMgr::initData()
 {
-   setType( Track::ONBOARD_SENSOR_BIT | Track::RWR_TRACK_BIT );
+   setType( ITrack::ONBOARD_SENSOR_BIT | ITrack::RWR_TRACK_BIT );
 
    reportNumMatches = new unsigned int[MAX_REPORTS];
    trackNumMatches = new unsigned int[MAX_TRKS];
@@ -283,7 +284,7 @@ void RwrTrkMgr::processTrackList(const double dt)
          const auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getOwnship() );  // The emissions ownship is our target!
-         newTrk->setType(Track::RWR_TRACK_BIT  | Track::ONBOARD_SENSOR_BIT);
+         newTrk->setType(ITrack::RWR_TRACK_BIT  | ITrack::ONBOARD_SENSOR_BIT);
          newTrk->setPosition(tgtPos[i]);
          newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0f);
          newTrk->setRangeRate(newRdot[i]);

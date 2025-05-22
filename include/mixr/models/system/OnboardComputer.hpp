@@ -10,7 +10,7 @@ namespace mixr {
    }
 namespace models {
 class IAction;
-class Track;
+class ITrack;
 class ITrackMgr;
 
 //------------------------------------------------------------------------------
@@ -43,24 +43,24 @@ public:
    virtual const ITrackMgr* getTrackManagerByName(const char* const) const;
 
    // Air to Air functions
-   virtual Track* getNextTarget();                                      // Get the target track
-   virtual int getShootList(Track* tlist[], const int max);
-   virtual int getShootList(const Track* tlist[], const int max) const;
+   virtual ITrack* getNextTarget();                                    // Get the target track
+   virtual int getShootList(ITrack* tlist[], const int max);
+   virtual int getShootList(const ITrack* tlist[], const int max) const;
    virtual void updateShootList(const bool step = false);              // Updates the shoot list
-   virtual bool requestNextToShoot(const Track* const nts);            // Request a track to shoot next
+   virtual bool requestNextToShoot(const ITrack* const nts);           // Request a track to shoot next
 
    // Trigger an action
    virtual void triggerAction(IAction* const act);
 
    // Legacy function (will be removed in a future major release)
-   virtual int getShootList(base::safe_ptr<Track>* const tlist, const int max);
-   virtual int getShootList(base::safe_ptr<const Track>* const tlist, const int max) const;
+   virtual int getShootList(base::safe_ptr<ITrack>* const tlist, const int max);
+   virtual int getShootList(base::safe_ptr<const ITrack>* const tlist, const int max) const;
 
    void reset() override;
    void updateData(const double dt = 0.0) override;
 
 protected:
-   virtual void setNextToShoot(Track* const p);
+   virtual void setNextToShoot(ITrack* const p);
 
    // Manage the active action
    virtual void actionManager(const double dt);
@@ -71,7 +71,7 @@ protected:
 
 private:
    base::safe_ptr<IAction> action; // Current steerpoint action
-   Track* nextToShoot {};          // Next to shoot track
+   ITrack* nextToShoot {};          // Next to shoot track
 };
 
 }

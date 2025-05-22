@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/action/IAction.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
 #include "mixr/base/PairStream.hpp"
@@ -133,7 +133,7 @@ void OnboardComputer::actionManager(const double dt)
 // getShootList() -- returns the shoot list
 //------------------------------------------------------------------------------
 
-int OnboardComputer::getShootList(Track* tlist[], const int max)
+int OnboardComputer::getShootList(ITrack* tlist[], const int max)
 {
     int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -144,7 +144,7 @@ int OnboardComputer::getShootList(Track* tlist[], const int max)
     return n;
 }
 
-int OnboardComputer::getShootList(const Track* tlist[], const int max) const
+int OnboardComputer::getShootList(const ITrack* tlist[], const int max) const
 {
     int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -155,7 +155,7 @@ int OnboardComputer::getShootList(const Track* tlist[], const int max) const
     return n;
 }
 
-int OnboardComputer::getShootList(base::safe_ptr<Track>* const tlist, const int max)
+int OnboardComputer::getShootList(base::safe_ptr<ITrack>* const tlist, const int max)
 {
     int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -165,7 +165,7 @@ int OnboardComputer::getShootList(base::safe_ptr<Track>* const tlist, const int 
     return n;
 }
 
-int OnboardComputer::getShootList(base::safe_ptr<const Track>* const tlist, const int max) const
+int OnboardComputer::getShootList(base::safe_ptr<const ITrack>* const tlist, const int max) const
 {
     int n{};
     if (nextToShoot != nullptr && tlist != nullptr && max > 0) {
@@ -178,11 +178,11 @@ int OnboardComputer::getShootList(base::safe_ptr<const Track>* const tlist, cons
 //------------------------------------------------------------------------------
 // getNextTarget() -- Find the next target to shoot
 //------------------------------------------------------------------------------
-Track* OnboardComputer::getNextTarget()
+ITrack* OnboardComputer::getNextTarget()
 {
-    base::safe_ptr<Track> trackList[2];
+    base::safe_ptr<ITrack> trackList[2];
     int n{getShootList(trackList, 2)};
-    Track* trk{};
+    ITrack* trk{};
     if (n > 0) {
        trk = trackList[0];
     }
@@ -201,7 +201,7 @@ void OnboardComputer::updateShootList(const bool step)
 
    // First, let's get the active track list
    const unsigned int MAX_TRKS{20};
-   base::safe_ptr<Track> trackList[MAX_TRKS];
+   base::safe_ptr<ITrack> trackList[MAX_TRKS];
 
    int n{};
    ITrackMgr* tm{getTrackManagerByType(typeid(AirTrkMgr))};
@@ -214,7 +214,7 @@ void OnboardComputer::updateShootList(const bool step)
       // ---
       // Find the current next-to-shoot index
       // ---
-      Track* nts{nextToShoot};
+      ITrack* nts{nextToShoot};
       if (nextToShoot != nullptr) {
          for (int i = 0; i < n && cNTS < 0; i++) {
             if (nts == trackList[i]) cNTS = i;
@@ -284,14 +284,14 @@ void OnboardComputer::updateShootList(const bool step)
 // requestNextToShoot() -- Requests a specific track to be the next-to-shoot;
 //                         Returns true if successful
 //------------------------------------------------------------------------------
-bool OnboardComputer::requestNextToShoot(const Track* const nts)
+bool OnboardComputer::requestNextToShoot(const ITrack* const nts)
 {
    bool ok{};
    if (nts != nullptr) {
 
       // First, let's get the active track list
       const unsigned int MAX_TRKS{20};
-      base::safe_ptr<Track> trackList[MAX_TRKS];
+      base::safe_ptr<ITrack> trackList[MAX_TRKS];
 
       int n{};
       ITrackMgr* tm{getTrackManagerByType(typeid(AirTrkMgr))};
@@ -328,7 +328,7 @@ bool OnboardComputer::requestNextToShoot(const Track* const nts)
 //------------------------------------------------------------------------------
 // setNextToShoot() -- set the next to shoot track
 //------------------------------------------------------------------------------
-void OnboardComputer::setNextToShoot(Track* const p)
+void OnboardComputer::setNextToShoot(ITrack* const p)
 {
    if (nextToShoot != nullptr) {
       nextToShoot->unref();

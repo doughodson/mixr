@@ -14,7 +14,7 @@
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/IRfSensor.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
@@ -483,9 +483,9 @@ bool SimpleStoresMgr::setWeaponReleaseTimer(const double v)
 //------------------------------------------------------------------------------
 // Find the next target to shoot
 //------------------------------------------------------------------------------
-Track* SimpleStoresMgr::getNextTarget()
+ITrack* SimpleStoresMgr::getNextTarget()
 {
-   Track* trk{};
+   ITrack* trk{};
 
    if (getOwnship() != nullptr) {
 
@@ -494,7 +494,7 @@ Track* SimpleStoresMgr::getNextTarget()
 
          // Get the next to shoot
          int n{};
-         base::safe_ptr<Track> track;
+         base::safe_ptr<ITrack> track;
          n = obc->getShootList(&track,1);
          if (n > 0) trk = track;
 
@@ -607,7 +607,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
                // ---
                // Setup the guidance ...
                // ---
-               Track* trk{getNextTarget()};
+               ITrack* trk{getNextTarget()};
                if (trk != nullptr) {
                   IPlayer* tgt{trk->getTarget()};
 
@@ -617,7 +617,7 @@ bool SimpleStoresMgr::onWpnRelEvent(const base::Boolean* const sw)
 
                   if (tm != nullptr) {
                      // Give a copy of the track to the weapon's track manager
-                     Track* newTrk{trk->clone()};
+                     ITrack* newTrk{trk->clone()};
                      tm->clearTracksAndQueues();
                      tm->addTrack(newTrk);
                      flyout->setTargetTrack(newTrk,true);

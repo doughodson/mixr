@@ -10,7 +10,7 @@ namespace base { class Boolean; class Integer; class INumber; class ITime; }
 namespace models {
 class RfEmission;
 class IPlayer;
-class Track;
+class ITrack;
 
 //------------------------------------------------------------------------------
 // Class: ITrackMgr
@@ -46,15 +46,15 @@ public:
    virtual unsigned int getMaxTracks() const;
    virtual unsigned int getNumTracks() const;
 
-   virtual int getTrackList(base::safe_ptr<Track>* const slist, const unsigned int max) const;
-   virtual int getTrackList(base::safe_ptr<const Track>* const slist, const unsigned int max) const;
+   virtual int getTrackList(base::safe_ptr<ITrack>* const slist, const unsigned int max) const;
+   virtual int getTrackList(base::safe_ptr<const ITrack>* const slist, const unsigned int max) const;
 
    // Note: Tracks have been ref() before being returned and need to
    // be unref() by the user.
-   virtual int getTrackList(Track* tlist[], const unsigned int max);
-   virtual int getTrackList(const Track* tlist[], const unsigned int max) const;
+   virtual int getTrackList(ITrack* tlist[], const unsigned int max);
+   virtual int getTrackList(const ITrack* tlist[], const unsigned int max) const;
 
-   // Type of tracks managed (see enum TypeBits in Track.hpp)
+   // Type of tracks managed (see enum TypeBits in ITrack.hpp)
    virtual bool isType(const short t) const;
    virtual short getType() const;
    virtual void setType(const short t);
@@ -64,7 +64,7 @@ public:
    virtual bool setLogTrackUpdates(const bool b);
 
    // Add a track
-   virtual bool addTrack(Track* const t);
+   virtual bool addTrack(ITrack* const t);
 
    // Clear all tracks and queues
    virtual void clearTracksAndQueues();
@@ -87,7 +87,7 @@ protected:
    virtual RfEmission* getReport(double* const sn);                    // Get the next 'new' report from the queue
 
    // Track List
-   Track*       tracks[MAX_TRKS] {};   // Tracks
+   ITrack*      tracks[MAX_TRKS] {};   // Tracks
    unsigned int nTrks {};              // Number of tracks
    unsigned int maxTrks {MAX_TRKS};    // Max number of tracks (input)
    mutable long trkListLock {};        // Semaphore to protect the track list

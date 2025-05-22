@@ -1,6 +1,6 @@
 
 #include "mixr/models/player/weapon/Agm.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 
 namespace mixr {
 namespace models {
@@ -40,7 +40,7 @@ Agm::Agm()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Agm::calculateVectors(const IPlayer* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
+bool Agm::calculateVectors(const IPlayer* const tgt, const ITrack* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (isTargetPositionValid()) {
       base::Vec3d p0{getPosition()};

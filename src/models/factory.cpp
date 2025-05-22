@@ -108,12 +108,15 @@
 #include "mixr/models/signature/RfSwitchSignature.hpp"
 #include "mixr/models/signature/RfTrihedralCRSignature.hpp"
 
+// tracks
+#include "mixr/models/track/RfTrack.hpp"
+#include "mixr/models/track/IrTrack.hpp"
+
 // misc
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"
 
 #include "mixr/models/TargetData.hpp"
-#include "mixr/models/Track.hpp"
 
 #include <string>
 
@@ -405,8 +408,11 @@ base::IObject* factory(const std::string& name)
    }
 
    // Tracks
-   else if ( name == Track::getFactoryName() ) {
-      obj = new Track();
+   else if ( name == RfTrack::getFactoryName() ) {
+      obj = new RfTrack();
+   }
+   else if ( name == IrTrack::getFactoryName() ) {
+      obj = new IrAtmosphere();
    }
 
    // Track Managers

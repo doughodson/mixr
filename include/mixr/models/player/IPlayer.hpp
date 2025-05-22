@@ -42,7 +42,6 @@ class RfEmission;
 class IrQueryMsg;
 class IIrSignature;
 class IRfSignature;
-class Track;
 
 //------------------------------------------------------------------------------
 // Class: IPlayer

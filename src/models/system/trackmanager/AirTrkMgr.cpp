@@ -2,7 +2,8 @@
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
 #include "mixr/models/RfEmission.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
+#include "mixr/models/track/RfTrack.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
@@ -42,7 +43,7 @@ AirTrkMgr::AirTrkMgr()
 
 void AirTrkMgr::initData()
 {
-   setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
+   setType( ITrack::ONBOARD_SENSOR_BIT | ITrack::AIR_TRACK_BIT );
 
    reportNumMatches = new unsigned int[MAX_REPORTS];
    trackNumMatches = new unsigned int[MAX_TRKS];
@@ -334,7 +335,7 @@ void AirTrkMgr::processTrackList(const double dt)
          const auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getTarget() );
-         newTrk->setType(Track::AIR_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
+         newTrk->setType(ITrack::AIR_TRACK_BIT | ITrack::ONBOARD_SENSOR_BIT);
          newTrk->setPosition(tgtPos[i]);
          newTrk->ownshipDynamics(osGndTrk, osVel, osAccel, 0.0);
          newTrk->setRangeRate(newRdot[i]);

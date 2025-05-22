@@ -6,7 +6,7 @@
 #include "mixr/models/Designator.hpp"
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/Stores.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
@@ -395,7 +395,7 @@ void IWeapon::checkDetonationEffect()
       // Find our target (if any)
       const IPlayer* tgt{getTargetPlayer()};
       if (tgt == nullptr) {
-         const Track* trk{getTargetTrack()};
+         const ITrack* trk{getTargetTrack()};
          if (trk != nullptr) tgt = trk->getTarget();
       }
 
@@ -770,7 +770,7 @@ bool IWeapon::setLocationOfDetonation()
    // Find our target (if any)
    const IPlayer* tgt{getTargetPlayer()};
    if (tgt == nullptr) {
-      const Track* trk{getTargetTrack()};
+      const ITrack* trk{getTargetTrack()};
       if (trk != nullptr) tgt = trk->getTarget();
    }
 
@@ -984,13 +984,13 @@ const base::Vec3d& IWeapon::getTargetPosition() const
 }
 
 // Our target track, if any
-Track* IWeapon::getTargetTrack()
+ITrack* IWeapon::getTargetTrack()
 {
    return tgtTrack;
 }
 
 // Our target track, if any (const version)
-const Track* IWeapon::getTargetTrack() const
+const ITrack* IWeapon::getTargetTrack() const
 {
    return tgtTrack;
 }
@@ -1078,7 +1078,7 @@ bool IWeapon::setTargetPlayer(IPlayer* const tgt, const bool pt)
 }
 
 // setTargetTrack() -- sets a pointer to the target track
-bool IWeapon::setTargetTrack(Track* const trk, const bool pt)
+bool IWeapon::setTargetTrack(ITrack* const trk, const bool pt)
 {
     tgtPlayer = nullptr;
     tgtTrack = trk;

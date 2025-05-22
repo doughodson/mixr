@@ -10,7 +10,7 @@ namespace models {
 class IWeapon;
 class Bomb;
 class Missile;
-class Track;
+class ITrack;
 class Chaff;
 class Flare;
 class Decoy;
@@ -49,7 +49,7 @@ public:
    virtual IWeapon* getSpecificWeapon(const std::type_info& type);
 
    // Get the target track
-   virtual Track* getNextTarget();
+   virtual ITrack* getNextTarget();
 
    virtual bool setWeaponReleaseTimer(const double v);   // Sets the release timer
 

@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
-#include "mixr/models/Track.hpp"
+#include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
@@ -150,7 +150,7 @@ IrQueryMsg* AngleOnlyTrackManager::getQuery(double* const sn)
 //------------------------------------------------------------------------------
 // addTrack() -- Add a track to the list
 //------------------------------------------------------------------------------
-bool AngleOnlyTrackManager::addTrack(Track* const t)
+bool AngleOnlyTrackManager::addTrack(ITrack* const t)
 {
     bool ok{};
 
