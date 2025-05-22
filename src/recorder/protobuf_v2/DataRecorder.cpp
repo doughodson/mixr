@@ -10,7 +10,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/Track.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/simulation/INib.hpp"
 #include "mixr/simulation/ISimulation.hpp"
@@ -689,7 +689,7 @@ bool DataRecorder::recordNewTrack(const base::IObject* objs[4], const double val
    const auto rfTrk = dynamic_cast<const models::RfTrack*>(newTrack);
    if (rfTrk != nullptr) {
 
-      const models::Emission* emissionData {rfTrk->getLastEmission()};
+      const models::RfEmission* emissionData {rfTrk->getLastEmission()};
       if (emissionData != nullptr) {
          genEmissionData( newTrackMsg->mutable_emission_data(), emissionData);
       }
@@ -777,7 +777,7 @@ bool DataRecorder::recordTrackData(const base::IObject* objs[4], const double va
    // Emission Data
    const models::RfTrack* const rfTrk {dynamic_cast<const models::RfTrack*>(trackData)};
    if (rfTrk != nullptr) {
-      const models::Emission* emissionData = rfTrk->getLastEmission();
+      const models::RfEmission* emissionData = rfTrk->getLastEmission();
       if (emissionData != nullptr) {
          genEmissionData( trackDataMsg->mutable_emission_data(), emissionData);
       }
@@ -924,7 +924,7 @@ void DataRecorder::genTrackData(proto::TrackData* const trkMsg, const models::Tr
 //------------------------------------------------------------------------------
 // Generate the Emission data
 //------------------------------------------------------------------------------
-void DataRecorder::genEmissionData(proto::EmissionData* const emMsg, const models::Emission* const emData)
+void DataRecorder::genEmissionData(proto::EmissionData* const emMsg, const models::RfEmission* const emData)
 {
    if (emMsg != nullptr) {
       if (emData != nullptr) {
