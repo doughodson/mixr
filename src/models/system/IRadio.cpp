@@ -2,7 +2,7 @@
 #include "mixr/models/system/IRadio.hpp"
 
 #include "mixr/models/system/Datalink.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -221,7 +221,7 @@ void IRadio::receive(const double dt)
    // Process Emissions
    // ---
 
-   Emission* em = nullptr;
+   RfEmission* em = nullptr;
    double signal = 0;
 
    // Get an emission from the queue
@@ -263,7 +263,7 @@ void IRadio::receive(const double dt)
 // receivedEmissionReport() -- default (nothing to do)
 //  Handle reports of valid emission reports (signal/noise ratio above threshold).
 //------------------------------------------------------------------------------
-void IRadio::receivedEmissionReport(Emission* const)
+void IRadio::receivedEmissionReport(RfEmission* const)
 {
 }
 

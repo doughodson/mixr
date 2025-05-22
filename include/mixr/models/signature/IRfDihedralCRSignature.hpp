@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: IRfDihedralCRSignature
@@ -22,7 +22,7 @@ public:
     IRfDihedralCRSignature();
     IRfDihedralCRSignature(const double);
 
-    double getRCS(const Emission* const) override;
+    double getRCS(const RfEmission* const) override;
 
 private:
     double length{};      // Length dimension

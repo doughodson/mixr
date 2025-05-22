@@ -1,6 +1,6 @@
 
 #include "mixr/models/system/IScanGimbal.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"

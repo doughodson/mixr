@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: RfTrihedralCRSignature
@@ -22,7 +22,7 @@ public:
     RfTrihedralCRSignature();
     RfTrihedralCRSignature(const double);
 
-    double getRCS(const Emission* const) override;
+    double getRCS(const RfEmission* const) override;
 };
 
 }

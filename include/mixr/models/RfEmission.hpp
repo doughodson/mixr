@@ -1,8 +1,8 @@
 
-#ifndef __mixr_models_common_Emission_HPP__
-#define __mixr_models_common_Emission_HPP__
+#ifndef __mixr_models_RfEmission_HPP__
+#define __mixr_models_RfEmission_HPP__
 
-#include "mixr/models/SensorMsg.hpp"
+#include "mixr/models/ISensorMsg.hpp"
 #include "mixr/models/system/Antenna.hpp"
 
 namespace mixr {
@@ -10,15 +10,15 @@ namespace models {
 class IRfSystem;
 
 //------------------------------------------------------------------------------
-// Class: Emission
+// Class: RfEmission
 //
-// Description: Generic RF Emission class -- Used to pass RF emission data
+// Description: Concrete RF Emission class -- Used to pass RF emission data
 //              between antennas and players.
-// Factory name: Emission
+// Factory name: RfEmission
 //------------------------------------------------------------------------------
-class Emission : public SensorMsg
+class RfEmission final: public ISensorMsg
 {
-   DECLARE_SUBCLASS(Emission, SensorMsg)
+   DECLARE_SUBCLASS(RfEmission, ISensorMsg)
 
 public:
    // ECM enumerations (can be expanded by derived classes)
@@ -29,7 +29,7 @@ public:
    };
 
 public:
-   Emission();
+   RfEmission();
 
    // Frequency (hz)
    double getFrequency() const                                { return freq; }
@@ -157,7 +157,7 @@ private:
    double lossXmit{1.0};    // Transmit loss (default: 1.0)     (no units)
    double rcs{};            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar{Antenna::Polarization::NONE};  // Antenna polarization   (enum)
-   IRfSystem* transmitter{};          // The system that transmitted the emission
+   IRfSystem* transmitter{};         // The system that transmitted the emission
    unsigned int ecmFlag{ECM_OFF};    // ECM enumeration
 };
 

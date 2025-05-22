@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 
@@ -205,7 +205,7 @@ void IRfSystem::processPlayersOfInterest()
 //------------------------------------------------------------------------------
 // rfReceivedEmission() -- process returned RF Emission
 //------------------------------------------------------------------------------
-void IRfSystem::rfReceivedEmission(Emission* const em, Antenna* const, double raGain)
+void IRfSystem::rfReceivedEmission(RfEmission* const em, Antenna* const, double raGain)
 {
    // Queue up emissions for receive() to process
    if (em != nullptr && isReceiverEnabled()) {
@@ -233,7 +233,7 @@ void IRfSystem::rfReceivedEmission(Emission* const em, Antenna* const, double ra
          const double signal{em->getPower() * rl * raGain / losses};
 
          // Noise Jammer -- add this signal to the total interference signal (noise)
-         if ( em->isECMType(Emission::ECM_NOISE) ) {
+         if ( em->isECMType(RfEmission::ECM_NOISE) ) {
             // CGB part of the noise jamming equation says we're only affected by the ratio of the
             // transmitter and receiver bandwidths.
             // It's possible that we'll want to account for this in the signal calculation above.
@@ -396,7 +396,7 @@ const base::Identifier* IRfSystem::getAntennaName() const
 }
 
 // Returns true if the received emission is in-band
-bool IRfSystem::affectsRfSystem(Emission* const em) const
+bool IRfSystem::affectsRfSystem(RfEmission* const em) const
 {
    const double emFreq{em->getFrequency()};
    const double emBandwidth{em->getBandwidth()};

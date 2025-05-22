@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -123,7 +123,7 @@ BEGIN_SLOT_MAP(IGimbal)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(IGimbal)
-    ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEvent, Emission)
+    ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEvent, RfEmission)
 END_EVENT_HANDLER()
 
 const double IGimbal::defaultTolerance{0.1 * (base::PI/180.0)};
@@ -227,7 +227,7 @@ void IGimbal::dynamics(const double dt)
 //------------------------------------------------------------------------------
 // onRfEmissionEvent() -- process events for RF Emission not sent by us.
 //------------------------------------------------------------------------------
-bool IGimbal::onRfEmissionEvent(Emission* const em)
+bool IGimbal::onRfEmissionEvent(RfEmission* const em)
 {
    if (isComponentSelected()) {
       // Just pass it to our selected subcomponent
@@ -252,7 +252,7 @@ bool IGimbal::onRfEmissionEvent(Emission* const em)
 //------------------------------------------------------------------------------
 // Returns true if this is a player of interest
 //------------------------------------------------------------------------------
-bool IGimbal::fromPlayerOfInterest(const Emission* const em)
+bool IGimbal::fromPlayerOfInterest(const RfEmission* const em)
 {
    bool ok{};
    if (em != nullptr) {

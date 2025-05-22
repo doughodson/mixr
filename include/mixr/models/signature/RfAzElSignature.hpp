@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class Boolean; class Table2; }
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: RfAzElSignature
@@ -60,7 +60,7 @@ public:
    bool isDecibel() const                       { return dbFlg; }
    virtual bool setDecibel(const bool);
 
-   double getRCS(const Emission* const em) override;
+   double getRCS(const RfEmission* const em) override;
 
 protected:
    const base::Table2* tbl{};      // The table

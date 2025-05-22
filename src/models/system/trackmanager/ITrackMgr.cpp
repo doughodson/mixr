@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
@@ -108,7 +108,7 @@ void ITrackMgr::clearTracksAndQueues()
    // Clear out the queue(s)
    // ---
    base::lock(queueLock);
-   for (Emission* em = emQueue.get(); em != nullptr; em = emQueue.get()) {
+   for (RfEmission* em = emQueue.get(); em != nullptr; em = emQueue.get()) {
       em->unref();    // unref() the emission
       snQueue.get();  // and every emission had a S/N value
    }
@@ -300,7 +300,7 @@ bool ITrackMgr::killedNotification(IPlayer* const p)
 //------------------------------------------------------------------------------
 // newReport() -- Accept a new emission report
 //------------------------------------------------------------------------------
-void ITrackMgr::newReport(Emission* em, double sn)
+void ITrackMgr::newReport(RfEmission* em, double sn)
 {
    // Queue up emissions reports
    if (em != nullptr) {
@@ -317,9 +317,9 @@ void ITrackMgr::newReport(Emission* em, double sn)
 //------------------------------------------------------------------------------
 // getReport() -- Get the next 'new' report of the queue
 //------------------------------------------------------------------------------
-Emission* ITrackMgr::getReport(double* const sn)
+RfEmission* ITrackMgr::getReport(double* const sn)
 {
-   Emission* em{};
+   RfEmission* em{};
 
    base::lock(queueLock);
    em = emQueue.get();

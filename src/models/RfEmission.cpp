@@ -1,20 +1,20 @@
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/models/system/IRfSystem.hpp"
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Emission, "Emission")
-EMPTY_SLOTTABLE(Emission)
+IMPLEMENT_SUBCLASS(RfEmission, "RfEmission")
+EMPTY_SLOTTABLE(RfEmission)
 
-Emission::Emission()
+RfEmission::RfEmission()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-void Emission::copyData(const Emission& org, const bool)
+void RfEmission::copyData(const RfEmission& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -39,7 +39,7 @@ void Emission::copyData(const Emission& org, const bool)
     ecmFlag = org.ecmFlag;
 }
 
-void Emission::deleteData()
+void RfEmission::deleteData()
 {
    clear();
 }
@@ -47,7 +47,7 @@ void Emission::deleteData()
 //------------------------------------------------------------------------------
 // clear() -- clears out the emissions
 //------------------------------------------------------------------------------
-void Emission::clear()
+void RfEmission::clear()
 {
    BaseClass::clear();
    setTransmitter(nullptr);
@@ -56,7 +56,7 @@ void Emission::clear()
 //------------------------------------------------------------------------------
 // Sets the range to the target
 //------------------------------------------------------------------------------
-void Emission::setRange(const double r)
+void RfEmission::setRange(const double r)
 {
    BaseClass::setRange(r);
 
@@ -67,7 +67,7 @@ void Emission::setRange(const double r)
 //------------------------------------------------------------------------------
 // setTransmitter() -- Sets the pointer to the source
 //------------------------------------------------------------------------------
-void Emission::setTransmitter(IRfSystem* const t)
+void RfEmission::setTransmitter(IRfSystem* const t)
 {
    //if (transmitter != nullptr) {
    //   transmitter->unref();

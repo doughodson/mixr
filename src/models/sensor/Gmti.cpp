@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"

@@ -1,29 +1,29 @@
 
-#include "mixr/models/SensorMsg.hpp"
+#include "mixr/models/ISensorMsg.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SensorMsg, "SensorMsg")
-EMPTY_SLOTTABLE(SensorMsg)
+IMPLEMENT_SUBCLASS(ISensorMsg, "ISensorMsg")
+EMPTY_SLOTTABLE(ISensorMsg)
 
-SensorMsg::SensorMsg()
+ISensorMsg::ISensorMsg()
 {
     STANDARD_CONSTRUCTOR()
 
     initData();
 }
 
-void SensorMsg::initData()
+void ISensorMsg::initData()
 {
     losO2T.set(0,0,0);
     losT2O.set(0,0,0);
     aoi.set(0,0,0);
 }
 
-void SensorMsg::copyData(const SensorMsg& org, const bool cc)
+void ISensorMsg::copyData(const ISensorMsg& org, const bool cc)
 {
     BaseClass::copyData(org);
     if (cc) initData();
@@ -56,7 +56,7 @@ void SensorMsg::copyData(const SensorMsg& org, const bool cc)
     localOnly = org.localOnly;
 }
 
-void SensorMsg::deleteData()
+void ISensorMsg::deleteData()
 {
    clear();
 }
@@ -64,7 +64,7 @@ void SensorMsg::deleteData()
 //------------------------------------------------------------------------------
 // clear() -- clears out the emissions
 //------------------------------------------------------------------------------
-void SensorMsg::clear()
+void ISensorMsg::clear()
 {
    setOwnship(nullptr);
    setGimbal(nullptr);
@@ -74,7 +74,7 @@ void SensorMsg::clear()
 //------------------------------------------------------------------------------
 // Sets the range to the target
 //------------------------------------------------------------------------------
-void SensorMsg::setRange(const double r)
+void ISensorMsg::setRange(const double r)
 {
    rng = r;
 }
@@ -83,12 +83,12 @@ void SensorMsg::setRange(const double r)
 // Access functions
 //------------------------------------------------------------------------------
 
-double SensorMsg::getRangeRateFPS() const
+double ISensorMsg::getRangeRateFPS() const
 {
    return getRangeRate() * base::length::M2FT;
 }
 
-double SensorMsg::getRangeRateKts() const
+double ISensorMsg::getRangeRateKts() const
 {
    return getRangeRate() * base::length::M2NM * 3600.0f;
 }
@@ -96,7 +96,7 @@ double SensorMsg::getRangeRateKts() const
 //------------------------------------------------------------------------------
 // setOwnship() -- Sets the pointer to the originator (ownship)
 //------------------------------------------------------------------------------
-void SensorMsg::setOwnship(IPlayer* const p)
+void ISensorMsg::setOwnship(IPlayer* const p)
 {
    ownship = p;
 }
@@ -104,7 +104,7 @@ void SensorMsg::setOwnship(IPlayer* const p)
 //------------------------------------------------------------------------------
 // setGimbal() -- Sets the pointer to the transmitting gimbal (seeker/antenna)
 //------------------------------------------------------------------------------
-void SensorMsg::setGimbal(IGimbal* const a)
+void ISensorMsg::setGimbal(IGimbal* const a)
 {
    gimbal = a;
 }
@@ -112,7 +112,7 @@ void SensorMsg::setGimbal(IGimbal* const a)
 //------------------------------------------------------------------------------
 // setTarget() -- Sets the pointer to the target
 //------------------------------------------------------------------------------
-void SensorMsg::setTarget(IPlayer* const p)
+void ISensorMsg::setTarget(IPlayer* const p)
 {
    target = p;
 }
@@ -120,7 +120,7 @@ void SensorMsg::setTarget(IPlayer* const p)
 //------------------------------------------------------------------------------
 // setDataMessage() -- Sets a pointer to an optional data message
 //------------------------------------------------------------------------------
-void SensorMsg::setDataMessage(base::IObject* const msg)
+void ISensorMsg::setDataMessage(base::IObject* const msg)
 {
    dataMsg = msg;
 }

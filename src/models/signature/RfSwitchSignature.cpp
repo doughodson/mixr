@@ -2,7 +2,7 @@
 #include "mixr/models/signature/RfSwitchSignature.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/Pair.hpp"
 
@@ -22,7 +22,7 @@ RfSwitchSignature::RfSwitchSignature()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double RfSwitchSignature::getRCS(const Emission* const em)
+double RfSwitchSignature::getRCS(const RfEmission* const em)
 {
    double rcs{};
 

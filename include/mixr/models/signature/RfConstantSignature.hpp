@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class INumber; class IArea; }
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: RfConstantSignature
@@ -28,7 +28,7 @@ public:
     bool setRCS(const base::INumber* const);
     bool setRCS(const base::IArea* const);
 
-    double getRCS(const Emission* const) override;
+    double getRCS(const RfEmission* const) override;
 
 private:
     double rcs{};         // Constant RCS value

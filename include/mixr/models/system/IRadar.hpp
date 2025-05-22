@@ -47,7 +47,7 @@ public:
 
    // Returns the number of emission reports, up to 'max', that are loaded into the 'list'
    // Emission pointers are pre-ref()'d, so unref() when finished.
-   unsigned int getReports(const Emission** list, const unsigned int max) const;
+   unsigned int getReports(const RfEmission** list, const unsigned int max) const;
 
    // For debugging purposes
    // returns the amount of jamming signal to be considered, 0 if no jamming
@@ -83,13 +83,13 @@ protected: // (#temporary#) allow subclasses to access and use report queue
    mutable long myLock {};
 
    // Queues
-   base::safe_queue<Emission*> rptQueue {MAX_EMISSIONS};    // Reporting emission queue
+   base::safe_queue<RfEmission*> rptQueue {MAX_EMISSIONS};  // Reporting emission queue
    base::safe_queue<double> rptSnQueue {MAX_EMISSIONS};     // Reporting Signal/Nose queue  (dB)
 
    // Reports
-   std::array<Emission*, MAX_REPORTS> reports {};  // Best emission for this report
-   std::array<double, MAX_REPORTS> rptMaxSn {};    // Signal/Nose value (dB)
-   unsigned int numReports {};                     // Number of reports this sweep
+   std::array<RfEmission*, MAX_REPORTS> reports {};  // Best emission for this report
+   std::array<double, MAX_REPORTS> rptMaxSn {};      // Signal/Nose value (dB)
+   unsigned int numReports {};                       // Number of reports this sweep
 
 private:
    void clearTracksAndQueues();

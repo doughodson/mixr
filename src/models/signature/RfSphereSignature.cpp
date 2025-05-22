@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/RfSphereSignature.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/INumber.hpp"
@@ -43,7 +43,7 @@ void RfSphereSignature::copyData(const RfSphereSignature& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double RfSphereSignature::getRCS(const Emission* const)
+double RfSphereSignature::getRCS(const RfEmission* const)
 {
     return rcs;
 }

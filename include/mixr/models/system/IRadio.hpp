@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class Integer; class INumber; class PairStream; }
 namespace models {
 class Datalink;
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: IRadio
@@ -116,7 +116,7 @@ public:
    virtual bool setMaxDetectRange(const double num);
 
 protected:
-   virtual void receivedEmissionReport(Emission* const em);
+   virtual void receivedEmissionReport(RfEmission* const em);
 
    // Sets the number of channels; previous channels are lost!
    virtual bool setNumberOfChannels(const unsigned short n);

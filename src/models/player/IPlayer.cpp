@@ -20,7 +20,7 @@
 #include "mixr/models/signature/IIrSignature.hpp"
 
 #include "mixr/models/Track.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
 #include "mixr/terrain/ITerrain.hpp"
@@ -192,13 +192,13 @@ BEGIN_EVENT_HANDLER(IPlayer)
    ON_EVENT(CRASH_EVENT,crashNotification)
 
    // We were just hit by a R/F emission
-   ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEventPlayer, Emission)
+   ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEventPlayer, RfEmission)
 
    // Another player is requesting reflection of the R/F emission hitting us
    ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, base::IComponent)
 
    // We were just hit by a reflected R/F emission
-   ON_EVENT_OBJ(RF_REFLECTED_EMISSION, onRfReflectedEmissionEventPlayer, Emission)
+   ON_EVENT_OBJ(RF_REFLECTED_EMISSION, onRfReflectedEmissionEventPlayer, RfEmission)
 
    // Another player is cancelling its request for reflected R/F emissions
    ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::IComponent)
@@ -2570,7 +2570,7 @@ bool IPlayer::onTgtStepEvent()
 //
 // 7) Pass the emission to anyone requesting reflected emissions
 //------------------------------------------------------------------------------
-bool IPlayer::onRfEmissionEventPlayer(Emission* const em)
+bool IPlayer::onRfEmissionEventPlayer(RfEmission* const em)
 {
    // Player must be active ...
    if (isNotMode(Mode::ACTIVE)) return false;
@@ -2639,7 +2639,7 @@ bool IPlayer::onRfEmissionEventPlayer(Emission* const em)
 // onRfReflectedEmissionEventPlayer() -- process reflected R/F Emission events
 //
 //------------------------------------------------------------------------------
-bool IPlayer::onRfReflectedEmissionEventPlayer(Emission* const)
+bool IPlayer::onRfReflectedEmissionEventPlayer(RfEmission* const)
 {
    return true;
 }

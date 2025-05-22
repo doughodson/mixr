@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -112,7 +112,7 @@ void IRadar::clearTracksAndQueues()
    // Clear out the queues
    // ---
    base::lock(myLock);
-   for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
+   for (RfEmission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
    while (rptSnQueue.isNotEmpty()) { rptSnQueue.get(); }
    base::unlock(myLock);
 }
@@ -158,7 +158,7 @@ void IRadar::transmit(const double dt)
    // Transmitting, scanning and have an antenna?
    if ( !areEmissionsDisabled() && isTransmitting() ) {
       // Send the emission to the other player
-      const auto em = new Emission();
+      const auto em = new RfEmission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
       const double prf1{getPRF()};
@@ -207,7 +207,7 @@ void IRadar::receive(const double dt)
    // Process Returned Emissions
    // ---
 
-   Emission* em{};
+   RfEmission* em{};
    double signal{};
 
    // Get an emission from the queue
@@ -222,7 +222,7 @@ void IRadar::receive(const double dt)
    while (em != nullptr) {
 
       // exclude noise jammers (accounted for already in RfSystem::rfReceivedEmission)
-      if (em->getTransmitter() == this || (em->isECM() && !em->isECMType(Emission::ECM_NOISE)) ) {
+      if (em->getTransmitter() == this || (em->isECM() && !em->isECMType(RfEmission::ECM_NOISE)) ) {
 
          // compute the return trip loss ...
 
@@ -332,7 +332,7 @@ void IRadar::process(const double dt)
    if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
       base::lock(myLock);
-      for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
+      for (RfEmission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
          em->unref();
          rptSnQueue.get();
       }
@@ -371,7 +371,7 @@ void IRadar::process(const double dt)
    while (rptQueue.isNotEmpty()) {
 
       // Get the emission
-      Emission* em{rptQueue.get()};
+      RfEmission* em{rptQueue.get()};
       double snDbl{rptSnQueue.get()};
 
       if (em != nullptr) {
@@ -423,7 +423,7 @@ void IRadar::process(const double dt)
 //------------------------------------------------------------------------------
 // getReports() -- returns a list of prereferenced pointers to emission reports
 //------------------------------------------------------------------------------
-unsigned int IRadar::getReports(const Emission** list, const unsigned int max) const
+unsigned int IRadar::getReports(const RfEmission** list, const unsigned int max) const
 {
    unsigned int num{};
    if (list != nullptr && max > 0 && numReports > 0) {

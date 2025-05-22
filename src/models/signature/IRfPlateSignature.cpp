@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/IRfPlateSignature.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
 
@@ -46,7 +46,7 @@ void IRfPlateSignature::copyData(const IRfPlateSignature& org, const bool)
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double IRfPlateSignature::getRCS(const Emission* const em)
+double IRfPlateSignature::getRCS(const RfEmission* const em)
 {
     double rcs{};
     if (em != nullptr) {

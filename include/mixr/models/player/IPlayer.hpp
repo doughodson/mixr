@@ -38,7 +38,7 @@ class StoresMgr;
 class IWeapon;
 
 // Other item types
-class Emission;
+class RfEmission;
 class IrQueryMsg;
 class IIrSignature;
 class IRfSignature;
@@ -157,7 +157,7 @@ class Track;
 //    KILL_EVENT              <Player>             ! Killed by
 //    CRASH_EVENT             <Player>             ! Collision with
 //    CRASH_EVENT             (none)               ! Crashed
-//    RF_EMISSION             <Emission>           ! Hit by RF emission
+//    RF_EMISSION             <RfEmission>         ! Hit by RF emission
 //    RF_REFLECTIONS_REQUEST  <base::Component>    ! Requests for reflected R/F emissions (must re-request once a second)
 //    RF_REFLECTIONS_CANCEL   <base::Component>    ! Cancel requests for reflected R/F emissions
 //    WPN_REL_EVENT           <base::Boolean>      ! Weapon release switch with position
@@ -876,8 +876,8 @@ public:
    virtual bool onWpnRelEvent(const base::Boolean* const msg = nullptr);      // Handles the WPN_REL_EVENT event
    virtual bool onTriggerSwEvent(const base::Boolean* const msg = nullptr);   // Handles the TRIGGER_SW_EVENT event
    virtual bool onTgtStepEvent();                                             // Handles the TGT_STEP_EVENT event
-   virtual bool onRfEmissionEventPlayer(Emission* const);                     // Handles the RF_EMISSION event
-   virtual bool onRfReflectedEmissionEventPlayer(Emission* const);            // Handles the RF_EMISSION event reflected to a 3rd party
+   virtual bool onRfEmissionEventPlayer(RfEmission* const);                   // Handles the RF_EMISSION event
+   virtual bool onRfReflectedEmissionEventPlayer(RfEmission* const);          // Handles the RF_EMISSION event reflected to a 3rd party
    virtual bool onReflectionsRequest(base::IComponent* const);                // Handles the RF_REFLECTIONS_REQUEST event
    virtual bool onReflectionsCancel(const base::IComponent* const);           // Handles the RF_REFLECTIONS_CANCEL event
    virtual bool onIrMsgEventPlayer(IrQueryMsg* const);                        // Handle IR_QUERY_MSG event

@@ -61,28 +61,28 @@ public:
 public:
    Antenna();
 
-   virtual void rfTransmit(Emission* const em);
+   virtual void rfTransmit(RfEmission* const em);
 
    IRfSystem* getSystem()                                 { return sys; }
    const IRfSystem* getSystem() const                     { return sys; }
    virtual bool setSystem(IRfSystem* const);
 
    // System limits
-   int getMaxEmissions() const                           { return MAX_EMISSIONS; }
+   int getMaxEmissions() const                            { return MAX_EMISSIONS; }
 
    // Antenna polarization matching gain
    double getPolarizationGain(const Polarization) const;
-   Polarization getPolarization() const                  { return polar; }
+   Polarization getPolarization() const                   { return polar; }
 
    // Antenna gain
-   virtual double getGain() const                        { return gain; }
+   virtual double getGain() const                         { return gain; }
 
    // Gain pattern
-   const base::IFunction* gainPatternTable() const       { return gainPattern; }
-   bool isGainPatternDegrees() const                     { return gainPatternDeg; }
+   const base::IFunction* gainPatternTable() const        { return gainPattern; }
+   bool isGainPatternDegrees() const                      { return gainPatternDeg; }
 
    // Antenna threshold (watts)
-   double getTransmitThreshold() const                   { return threshold; }
+   double getTransmitThreshold() const                    { return threshold; }
 
    // Antenna effective area (m^2)
    static double getEffectiveArea(const double gain, const double lambda) {
@@ -112,12 +112,12 @@ public:
    virtual bool setBeamWidth(const base::INumber* const);
 
    // event handler(s)
-   virtual bool onRfEmissionReturnEventAntenna(Emission* const);
+   virtual bool onRfEmissionReturnEventAntenna(RfEmission* const);
 
    bool onStartScanEvent(base::Integer* const bar) override;
    bool onEndScanEvent(base::Integer* const bar) override;
 
-   bool onRfEmissionEvent(Emission* const) override;
+   bool onRfEmissionEvent(RfEmission* const) override;
 
    bool event(const int event, base::IObject* const obj = nullptr) override;
    void reset() override;
@@ -129,11 +129,11 @@ protected:
 
    bool shutdownNotification() override;
 
-   base::safe_stack<Emission*> freeEmStack{MAX_EMISSIONS};   // free emission stack
-   mutable long freeEmLock{};                                // semaphore to protect 'freeEmStack'
+   base::safe_stack<RfEmission*> freeEmStack{MAX_EMISSIONS};   // free emission stack
+   mutable long freeEmLock{};                                  // semaphore to protect 'freeEmStack'
 
-   base::safe_queue<Emission*> inUseEmQueue{MAX_EMISSIONS};  // in use emission queue
-   mutable long inUseEmLock{};                               // semaphore to protect 'inUseEmQueue'
+   base::safe_queue<RfEmission*> inUseEmQueue{MAX_EMISSIONS};  // in use emission queue
+   mutable long inUseEmLock{};                                 // semaphore to protect 'inUseEmQueue'
 
 private:
    static const int MAX_EMISSIONS{10000};       // max size of emission queues and arrays

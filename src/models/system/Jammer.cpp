@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/Antenna.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
@@ -38,7 +38,7 @@ void Jammer::transmit(const double)
 {
     // Send the emission to the other player
     if ( !areEmissionsDisabled() && isTransmitting() ) {
-        const auto em = new Emission();
+        const auto em = new RfEmission();
         em->setFrequency(getFrequency());
         const double p{getPeakPower()};
         em->setPower(p);
@@ -47,7 +47,7 @@ void Jammer::transmit(const double)
         em->setBandwidth(getBandwidth());
         em->setTransmitter(this);
         em->setReturnRequest(false);
-        em->setECM(Emission::ECM_NOISE);
+        em->setECM(RfEmission::ECM_NOISE);
         getAntenna()->rfTransmit(em);
         em->unref();
     }

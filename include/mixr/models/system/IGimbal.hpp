@@ -10,7 +10,7 @@
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class List; class PairStream; }
 namespace models {
-class Emission;
+class RfEmission;
 class SensorMsg;
 class Tdb;
 
@@ -105,7 +105,7 @@ class Tdb;
 //
 //
 // Events:
-//    RF_EMISSION                  <Emission>   ! Default handler: Pass emissions to subcomponents.
+//    RF_EMISSION                  <RfEmission> ! Default handler: Pass emissions to subcomponents.
 //
 //
 //  Handy support functions
@@ -219,17 +219,17 @@ public:  // Public section
    bool isUsingWorldCoordinates() const    { return useWorld; }             // Returns true if using player of interest's world coordinates
    bool isUsingHeadingOnly() const         { return ownHeadingOnly; }       // Returns true if using players heading only
    double getEarthRadius() const;                                           // Returns earth radius (meters)
-   virtual bool fromPlayerOfInterest(const Emission* const em);             // Returns true if this emission is from a player of interest
+   virtual bool fromPlayerOfInterest(const RfEmission* const em);           // Returns true if this emission is from a player of interest
 
-   virtual bool setMaxRange2PlayersOfInterest(const double meters);        // Max range to players of interest or zero for all (meters)
-   virtual bool setMaxAngle2PlayersOfInterest(const double radians);       // Max angle of gimbal boresight to players of interest or zero for all (rad)
-   virtual bool setPlayerOfInterestTypes(const unsigned int typeMask);     // Player of interest types (Player::MajorType bit-wise or'd)
-   virtual bool setMaxPlayersOfInterest(const unsigned int);               // Max number of players of interest (i.e., size of the arrays)
-   virtual bool setLocalPlayersOfInterestOnly(const bool);                 // Sets the local only players of interest flag
-   virtual bool setTerrainOccultingEnabled(const bool);                    // Sets the terrain occulting enabled flag
-   virtual bool setHorizonCheckEnabled(const bool);                        // Sets the horizon check enabled flag
-   virtual bool setUseWorld(const bool);                                   // Sets the using world coordinates flag
-   virtual bool setOwnHeadingOnly(const bool);                             // Use only the ownship player's heading to when transforming between body and local NED
+   virtual bool setMaxRange2PlayersOfInterest(const double meters);         // Max range to players of interest or zero for all (meters)
+   virtual bool setMaxAngle2PlayersOfInterest(const double radians);        // Max angle of gimbal boresight to players of interest or zero for all (rad)
+   virtual bool setPlayerOfInterestTypes(const unsigned int typeMask);      // Player of interest types (Player::MajorType bit-wise or'd)
+   virtual bool setMaxPlayersOfInterest(const unsigned int);                // Max number of players of interest (i.e., size of the arrays)
+   virtual bool setLocalPlayersOfInterestOnly(const bool);                  // Sets the local only players of interest flag
+   virtual bool setTerrainOccultingEnabled(const bool);                     // Sets the terrain occulting enabled flag
+   virtual bool setHorizonCheckEnabled(const bool);                         // Sets the horizon check enabled flag
+   virtual bool setUseWorld(const bool);                                    // Sets the using world coordinates flag
+   virtual bool setOwnHeadingOnly(const bool);                              // Use only the ownship player's heading to when transforming between body and local NED
 
    // Process the Players-Of-Interest (POI) list
    virtual unsigned int processPlayersOfInterest(base::PairStream* const poi);
@@ -263,7 +263,7 @@ public:  // Public section
 
 
    // Event handler(s)
-   virtual bool onRfEmissionEvent(Emission* const);                             // Handles R/F emission events
+   virtual bool onRfEmissionEvent(RfEmission* const);                                  // Handles R/F emission events
 
    static void limitVec(base::Vec2d& vec, const base::Vec2d& lim);
    static void limitVec(base::Vec3d& vec, const base::Vec3d& lim);

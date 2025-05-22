@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_IrQueryMsg_HPP__
 #define __mixr_models_common_IrQueryMsg_HPP__
 
-#include "mixr/models/SensorMsg.hpp"
+#include "mixr/models/ISensorMsg.hpp"
 
 namespace mixr {
 namespace base { class List; }
@@ -12,14 +12,14 @@ class IrSensor;
 //------------------------------------------------------------------------------
 // Class: IrQueryMsg
 //
-// Description: General IR query message -- Used to request an IR Signature
+// Description: Concrete IR query message -- Used to request an IR Signature
 //
 // Factory name: IrQueryMsg
 //
 //------------------------------------------------------------------------------
-class IrQueryMsg : public SensorMsg
+class IrQueryMsg final: public ISensorMsg
 {
-    DECLARE_SUBCLASS(IrQueryMsg, SensorMsg)
+    DECLARE_SUBCLASS(IrQueryMsg, ISensorMsg)
 
 public:
    IrQueryMsg();

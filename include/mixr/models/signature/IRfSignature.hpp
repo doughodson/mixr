@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: IRfSignature
@@ -19,7 +19,7 @@ public:
     IRfSignature();
 
     // computes the Radar Cross Section for the emission
-    virtual double getRCS(const Emission* const em) =0;
+    virtual double getRCS(const RfEmission* const em) =0;
 };
 
 }

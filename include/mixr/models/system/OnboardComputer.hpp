@@ -9,7 +9,6 @@ namespace mixr {
       class PairStream;
    }
 namespace models {
-
 class IAction;
 class Track;
 class ITrackMgr;

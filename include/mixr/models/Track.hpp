@@ -15,7 +15,7 @@
 
 namespace mixr {
 namespace models {
-class Emission;
+class RfEmission;
 class IrQueryMsg;
 class IPlayer;
 
@@ -286,8 +286,8 @@ public:
    double getAvgSignal() const                     { return avgSig; }
    double getMaxSignal() const                     { return maxSig; }
    int getNumSignals() const                       { return nSig; }
-   const Emission* getLastEmission() const         { return lastEM; }
-   virtual bool setSignal(const double snDbl, const Emission* const em);
+   const RfEmission* getLastEmission() const       { return lastEM; }
+   virtual bool setSignal(const double snDbl, const RfEmission* const em);
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                   { return mslWarn; }
@@ -295,10 +295,10 @@ public:
 
    void clear() override;
 
-   virtual bool setLastEmission(const Emission* const);
+   virtual bool setLastEmission(const RfEmission* const);
 
 protected:
-   const Emission* lastEM{};      // Last emission
+   const RfEmission* lastEM{};      // Last emission
 
 };
 

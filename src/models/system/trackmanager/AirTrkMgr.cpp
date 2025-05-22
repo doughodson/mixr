@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/Track.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
@@ -138,12 +138,12 @@ void AirTrkMgr::processTrackList(const double dt)
 
    // Get each new emission report from the queue
    unsigned int nReports{};
-   Emission* emissions[MAX_REPORTS]{};
+   RfEmission* emissions[MAX_REPORTS]{};
    double newSignal[MAX_REPORTS]{};
    double newRdot[MAX_REPORTS]{};
    base::Vec3d tgtPos[MAX_REPORTS]{};
    double tmp{};
-   for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
+   for (RfEmission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
 
       if (nReports < MAX_REPORTS) {
 

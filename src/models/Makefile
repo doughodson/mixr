@@ -113,12 +113,12 @@ OBJS =  \
 	system/ISystem.o \
 	system/System.o \
 	Designator.o \
-	Emission.o \
 	Image.o \
 	IrQueryMsg.o \
+	ISensorMsg.o \
 	Message.o \
 	MultiActorAgent.o \
-	SensorMsg.o \
+	RfEmission.o \
 	SimAgent.o \
 	SynchronizedState.o \
 	TargetData.o \

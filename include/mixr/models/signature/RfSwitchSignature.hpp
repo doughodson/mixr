@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: RfSwitchSignature
@@ -22,7 +22,7 @@ class RfSwitchSignature final: public IRfSignature
 public:
    RfSwitchSignature();
 
-   double getRCS(const Emission* const) override;
+   double getRCS(const RfEmission* const) override;
 };
 
 }

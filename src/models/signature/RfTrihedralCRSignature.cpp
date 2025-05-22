@@ -3,7 +3,7 @@
 
 #include "mixr/base/util/constants.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 namespace mixr {
 namespace models {
@@ -26,7 +26,7 @@ RfTrihedralCRSignature::RfTrihedralCRSignature(const double a) : IRfDihedralCRSi
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double RfTrihedralCRSignature::getRCS(const Emission* const em)
+double RfTrihedralCRSignature::getRCS(const RfEmission* const em)
 {
     double rcs{};
     if (em != nullptr) {

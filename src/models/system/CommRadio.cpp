@@ -2,7 +2,7 @@
 #include "mixr/models/system/CommRadio.hpp"
 
 #include "mixr/models/system/Datalink.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 namespace mixr {
 namespace models {
@@ -69,7 +69,7 @@ bool CommRadio::transmitDataMessage(base::IObject* const msg)
 
    if (msg != nullptr && isTransmitterEnabled() && getAntenna() != nullptr) {
       // Send the emission to the other player
-      const auto em = new Emission();
+      const auto em = new RfEmission();
       em->setDataMessage(msg);
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
@@ -89,7 +89,7 @@ bool CommRadio::transmitDataMessage(base::IObject* const msg)
 // receivedEmissionReport() -- Datalink messages --
 //  Handle reports of valid emission reports (signal/noise ratio above threshold).
 //------------------------------------------------------------------------------
-void CommRadio::receivedEmissionReport(Emission* const em)
+void CommRadio::receivedEmissionReport(RfEmission* const em)
 {
    if (em != nullptr && datalink != nullptr) {
       // If we have a datalink and this emission contains a message, then it

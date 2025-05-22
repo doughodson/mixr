@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class INumber; class ILength; }
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: IRfPlateSignature
@@ -35,7 +35,7 @@ public:
     virtual bool setB(base::INumber* const);
     virtual bool setB(base::ILength* const);
 
-    double getRCS(const Emission* const) override;
+    double getRCS(const RfEmission* const) override;
 
 private:
     double a{};       // Length dimension

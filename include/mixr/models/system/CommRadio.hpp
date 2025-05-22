@@ -7,7 +7,7 @@
 namespace mixr {
 namespace models {
 class Datalink;
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: CommRadio
@@ -31,7 +31,7 @@ public:
    virtual bool transmitDataMessage(base::IObject* const);
 
 protected:
-   void receivedEmissionReport(Emission* const) override;
+   void receivedEmissionReport(RfEmission* const) override;
 
 private:
    base::safe_ptr<Datalink> datalink;   // Our companion datalink system

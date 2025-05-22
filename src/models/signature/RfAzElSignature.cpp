@@ -4,7 +4,7 @@
 #include "mixr/base/relations/Table2.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 namespace mixr {
 namespace models {
@@ -64,7 +64,7 @@ void RfAzElSignature::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double RfAzElSignature::getRCS(const Emission* const em)
+double RfAzElSignature::getRCS(const RfEmission* const em)
 {
    double rcs{};
    if (em != nullptr && tbl != nullptr) {

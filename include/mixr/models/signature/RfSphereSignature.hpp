@@ -9,7 +9,7 @@
 namespace mixr {
 namespace base { class INumber; class ILength; }
 namespace models {
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: RfSphereSignature
@@ -30,7 +30,7 @@ public:
     double computeRcs(const double r)                          { return static_cast<double>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
-    double getRCS(const Emission* const) override;
+    double getRCS(const RfEmission* const) override;
 
 private:
     double radius {};      // Sphere radius

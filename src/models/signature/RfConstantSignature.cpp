@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/RfConstantSignature.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/areas.hpp"
@@ -45,7 +45,7 @@ void RfConstantSignature::copyData(const RfConstantSignature& org, const bool)
     rcs = org.rcs;
 }
 
-double RfConstantSignature::getRCS(const Emission* const)
+double RfConstantSignature::getRCS(const RfEmission* const)
 {
     return rcs;
 }

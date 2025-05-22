@@ -1,7 +1,7 @@
 
 #include "mixr/models/signature/IRfDihedralCRSignature.hpp"
 
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 namespace mixr {
 namespace models {
@@ -31,7 +31,7 @@ void IRfDihedralCRSignature::copyData(const IRfDihedralCRSignature& org, const b
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-double IRfDihedralCRSignature::getRCS(const Emission* const em)
+double IRfDihedralCRSignature::getRCS(const RfEmission* const em)
 {
     double rcs{};
     if (em != nullptr) {

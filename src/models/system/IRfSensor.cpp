@@ -5,7 +5,7 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/PairStream.hpp"

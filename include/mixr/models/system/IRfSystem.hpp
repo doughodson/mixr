@@ -9,7 +9,7 @@ namespace mixr {
 namespace base { class Boolean; class Decibel; class IFrequency; class Identifier; class INumber; class IPower; }
 namespace models {
 class Antenna;
-class Emission;
+class RfEmission;
 
 //------------------------------------------------------------------------------
 // Class: IRfSystem
@@ -92,7 +92,7 @@ public:
    virtual const base::Identifier* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
 
    // Tests if the received emission can affect the RfSystem and be processed by it.
-   virtual bool affectsRfSystem(Emission* const em) const;
+   virtual bool affectsRfSystem(RfEmission* const em) const;
 
    virtual bool setFrequency(const double hz);           // Sets the frequency (hertz)
    virtual bool setBandwidth(const double hz);           // Sets the bandwidth (hertz) (must be >= 1)
@@ -114,7 +114,7 @@ public:
    virtual double transmitPower(const double peakPwr) const;
 
    // Accepts an emission from an antenna
-   virtual void rfReceivedEmission(Emission* const, Antenna* const, const double raGain);
+   virtual void rfReceivedEmission(RfEmission* const, Antenna* const, const double raGain);
 
    void updateData(const double dt = 0.0) override;
    void reset() override;
@@ -127,11 +127,11 @@ protected:
    virtual bool computeReceiverNoise();
 
    // The following are filled by rfReceivedEmission() and consumed (emptied) by receive()
-   double jamSignal{};                              // Interference signal (from Jammer)
-   int np{};                                        // Number of emission packets being passed from rfReceivedEmission() to receive()
-   std::array<double, MAX_EMISSIONS> signals{};     // signals values being passed from rfReceivedEmission() to receive()
-   std::array<Emission*, MAX_EMISSIONS> packets{};  // emission packets being passed from rfReceivedEmission() to receive()
-   mutable long packetLock{};                       // Semaphore to protect 'signals' and 'xxpackets
+   double jamSignal{};                                // Interference signal (from Jammer)
+   int np{};                                          // Number of emission packets being passed from rfReceivedEmission() to receive()
+   std::array<double, MAX_EMISSIONS> signals{};       // signals values being passed from rfReceivedEmission() to receive()
+   std::array<RfEmission*, MAX_EMISSIONS> packets{};  // emission packets being passed from rfReceivedEmission() to receive()
+   mutable long packetLock{};                         // Semaphore to protect 'signals' and 'xxpackets
 
    // Process players of interest -- Called by our updateData() -- the background thread --
    // This function will create a filtered list of players that R/F systems will interact with.

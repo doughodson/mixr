@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SensorMsg_HPP__
-#define __mixr_models_common_SensorMsg_HPP__
+#ifndef __mixr_models_common_ISensorMsg_HPP__
+#define __mixr_models_common_ISensorMsg_HPP__
 
 #include "mixr/base/IObject.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -13,18 +13,18 @@ class IPlayer;
 class IGimbal;
 
 //------------------------------------------------------------------------------
-// Class: SensorMsg
-// Description: Generic sensor message class; used to pass requests data
+// Class: ISensorMsg
+// Description: Interface that defines a sensor message; used to pass requests data
 //              between sensors (i.e., antennas, IR seekers) and players
 //
-// Factory name: SensorMsg
+// Factory name: ISensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public base::IObject
+class ISensorMsg : public base::IObject
 {
-   DECLARE_SUBCLASS(SensorMsg, base::IObject)
+   DECLARE_SUBCLASS(ISensorMsg, base::IObject)
 
 public:
-   SensorMsg();
+   ISensorMsg();
 
    // ---
    // Normalized ownship to target LOS vector (ownship's NED)

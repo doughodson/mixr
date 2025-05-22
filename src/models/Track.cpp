@@ -2,9 +2,9 @@
 #include "mixr/models/Track.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
-#include "mixr/models/SensorMsg.hpp"
+#include "mixr/models/ISensorMsg.hpp"
 
 #include "mixr/base/units/util/angle_utils.hpp"
 #include "mixr/base/units/util/length_utils.hpp"
@@ -407,7 +407,7 @@ void RfTrack::deleteData()
 //------------------------------------------------------------------------------
 // setSignal() -- set the track's last signal
 //------------------------------------------------------------------------------
-bool RfTrack::setSignal(const double snDbl, const Emission* const em)
+bool RfTrack::setSignal(const double snDbl, const RfEmission* const em)
 {
     // Save the emission
     setLastEmission(em);
@@ -439,7 +439,7 @@ bool RfTrack::setSignal(const double snDbl, const Emission* const em)
 //------------------------------------------------------------------------------
 
 // setLastEmission() -- set the last emission pointer
-bool RfTrack::setLastEmission(const Emission* const em)
+bool RfTrack::setLastEmission(const RfEmission* const em)
 {
    if (lastEM != nullptr) lastEM->unref();
    lastEM = em;

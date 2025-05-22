@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base { class Boolean; class Integer; class INumber; class ITime; }
 namespace models {
-class Emission;
+class RfEmission;
 class IPlayer;
 class Track;
 
@@ -70,7 +70,7 @@ public:
    virtual void clearTracksAndQueues();
 
    // Add a new emission report (RF track managers only)
-   virtual void newReport(Emission* em, double snDbl);
+   virtual void newReport(RfEmission* em, double snDbl);
 
    bool killedNotification(IPlayer* const killedBy = nullptr) override;
 
@@ -82,9 +82,9 @@ protected:
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 
-   virtual void processTrackList(const double dt) =0;                   // Derived class unique
+   virtual void processTrackList(const double dt) =0;                  // Derived class unique
 
-   virtual Emission* getReport(double* const sn);                       // Get the next 'new' report from the queue
+   virtual RfEmission* getReport(double* const sn);                    // Get the next 'new' report from the queue
 
    // Track List
    Track*       tracks[MAX_TRKS] {};   // Tracks
@@ -103,9 +103,9 @@ protected:
    unsigned int nextTrkId {1000};          // Next track ID
    unsigned int firstTrkId {1000};         // First (starting) track ID
 
-   base::safe_queue<Emission*> emQueue {MAX_TRKS}; // Emission input queue
-   base::safe_queue<double>    snQueue {MAX_TRKS}; // S/N input queue.
-   mutable long queueLock {};                      // Semaphore to protect both emQueue and snQueue
+   base::safe_queue<RfEmission*> emQueue {MAX_TRKS}; // Emission input queue
+   base::safe_queue<double>    snQueue {MAX_TRKS};   // S/N input queue.
+   mutable long queueLock {};                        // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
    void process(const double dt) override;     // Phase 3

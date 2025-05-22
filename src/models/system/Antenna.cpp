@@ -2,7 +2,7 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IRfSystem.hpp"
-#include "mixr/models/Emission.hpp"
+#include "mixr/models/RfEmission.hpp"
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -53,7 +53,7 @@ BEGIN_SLOT_MAP(Antenna)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Antenna)
-    ON_EVENT_OBJ(RF_EMISSION_RETURN,onRfEmissionReturnEventAntenna,Emission)
+    ON_EVENT_OBJ(RF_EMISSION_RETURN,onRfEmissionReturnEventAntenna,RfEmission)
 END_EVENT_HANDLER()
 
 Antenna::Antenna()
@@ -147,7 +147,7 @@ void Antenna::process(const double dt)
       for (unsigned int i = 0; i < n; i++) {
 
          base::lock(inUseEmLock);
-         Emission* em{inUseEmQueue.get()};
+         RfEmission* em{inUseEmQueue.get()};
          base::unlock(inUseEmLock);
 
          if (em != nullptr && em->getRefCount() > 1) {
@@ -184,7 +184,7 @@ bool Antenna::setSystem(IRfSystem* const s)
 void Antenna::clearQueues()
 {
    base::lock(freeEmLock);
-   Emission* em{freeEmStack.pop()};
+   RfEmission* em{freeEmStack.pop()};
    while (em != nullptr) {
       em->unref();
       em = freeEmStack.pop();
@@ -375,7 +375,7 @@ bool Antenna::setBeamWidth(const double radians)
 //------------------------------------------------------------------------------
 // rfTransmit() -- Transmit a RF emission packet at all active players.
 //------------------------------------------------------------------------------
-void Antenna::rfTransmit(Emission* const xmit)
+void Antenna::rfTransmit(RfEmission* const xmit)
 {
    // Need something to transmit and someone to send to
    Tdb* tdb{getCurrentTDB()};
@@ -487,7 +487,7 @@ void Antenna::rfTransmit(Emission* const xmit)
          if (erp[i] > threshold) {
 
             // Get a free emission packet
-            Emission* em{};
+            RfEmission* em{};
             if (recycle) {
                base::lock(freeEmLock);
                em = freeEmStack.pop();
@@ -597,7 +597,7 @@ bool Antenna::onEndScanEvent(base::Integer* const bar)
 //
 // 6) Compute total receiving antenaa gain and send the emission to our sensor
 //------------------------------------------------------------------------------
-bool Antenna::onRfEmissionEvent(Emission* const em)
+bool Antenna::onRfEmissionEvent(RfEmission* const em)
 {
    // Is this emission from a player of interest?
    if (fromPlayerOfInterest(em)) {
@@ -691,7 +691,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
 //------------------------------------------------------------------------------
 // onRfEmissionReturnEventAntenna() -- process Returned RF Emission Events
 //------------------------------------------------------------------------------
-bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
+bool Antenna::onRfEmissionReturnEventAntenna(RfEmission* const em)
 {
     bool used{};
     // Pass all returned emissions to our sensor
