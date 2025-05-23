@@ -100,6 +100,7 @@
 
 // signatures (IR)
 #include "mixr/models/signature/IrSphereSignature.hpp"
+#include "mixr/models/signature/IrSignature.hpp"
 #include "mixr/models/signature/IrBoxSignature.hpp"
 // signatures (RF)
 #include "mixr/models/signature/RfAzElSignature.hpp"
@@ -352,6 +353,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // IR Signatures
+   else if ( name == IrSignature::getFactoryName() ) {
+      obj = new IrSignature();
+   }
    else if ( name == IrSphereSignature::getFactoryName() ) {
       obj = new IrSphereSignature();
    }

@@ -62,6 +62,7 @@ OBJS =  \
 	signature/IIrShapeSignature.o \
 	signature/IIrAircraftSignature.o \
 	signature/IIrSignature.o \
+	signature/IrSignature.o \
 	signature/IrSphereSignature.o \
 	signature/IrBoxSignature.o \
 	signature/IRfSignature.o \

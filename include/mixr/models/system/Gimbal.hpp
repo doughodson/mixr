@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Gimbal_HPP__
-#define __mixr_models_common_Gimbal_HPP__
+#ifndef __mixr_models_Gimbal_HPP__
+#define __mixr_models_Gimbal_HPP__
 
 #include "mixr/models/system/IGimbal.hpp"
 
