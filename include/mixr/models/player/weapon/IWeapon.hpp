@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class IAngle; class Boolean; class Integer; class ILength; class INumber; class String; class ITime; }
 namespace models {
 class Designator;
-class Stores;
+class IStores;
 class ITrack;
 
 //------------------------------------------------------------------------------
@@ -163,8 +163,8 @@ public:
    virtual const char* getDescription() const =0;   // Weapon's description
    virtual const char* getNickname() const =0;      // Weapon's nick name (short description)
 
-   Stores* getLauncher();                           // Our launcher, if any
-   const Stores* getLauncher() const;               // Our launcher, if any (const version)
+   IStores* getLauncher();                          // Our launcher, if any
+   const IStores* getLauncher() const;              // Our launcher, if any (const version)
    unsigned int getStation() const;                 // Station index (number)
 
    bool isReleased() const;                         // True if  the weapon has been released
@@ -216,7 +216,7 @@ public:
 
 
    // Sets a pointer to the launcher and our station number
-   virtual bool setLauncher(Stores* const launcher, const unsigned int station);
+   virtual bool setLauncher(IStores* const launcher, const unsigned int station);
 
    // Sets a pointer to the target track --
    // -- if 'posTrkEnb' is true, we'll follow the target track's position
@@ -342,7 +342,7 @@ private:
     double     detonationRange {};                 // Range to target at time of detonation           (meters)
     base::Vec3d  tgtDetLoc;                        // Detonation location in target player's coord    (meters)
 
-    base::safe_ptr<Stores> launcher;               // Launcher
+    base::safe_ptr<IStores> launcher;              // Launcher
     int         station {};                        // Station number (on launcher)
 
     int         weaponID {};                       // Weapon type ID (user defined)

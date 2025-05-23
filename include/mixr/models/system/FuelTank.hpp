@@ -10,7 +10,7 @@ namespace models {
 //------------------------------------------------------------------------------
 // Class: FuelTank
 //
-// Description: Generic fuel tank
+// Description: Concrete fuel tank
 //
 // Factory name: FuelTank
 // Slots:

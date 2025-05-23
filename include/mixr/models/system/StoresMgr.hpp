@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_StoresMgr_HPP__
 #define __mixr_models_common_StoresMgr_HPP__
 
-#include "mixr/models/system/Stores.hpp"
+#include "mixr/models/system/IStores.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class PairStream; }
@@ -50,9 +50,9 @@ class IWeapon;
 //       class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
-class StoresMgr : public Stores
+class StoresMgr : public IStores
 {
-    DECLARE_SUBCLASS(StoresMgr, Stores)
+    DECLARE_SUBCLASS(StoresMgr, IStores)
 
 public:
     enum Mode { NAV, A2A, A2G, NUM_MODES };

@@ -109,7 +109,7 @@ OBJS =  \
 	system/SensorMgr.o \
 	system/SimpleStoresMgr.o \
 	system/StabilizingGimbal.o \
-	system/Stores.o \
+	system/IStores.o \
 	system/StoresMgr.o \
 	system/ISystem.o \
 	system/System.o \

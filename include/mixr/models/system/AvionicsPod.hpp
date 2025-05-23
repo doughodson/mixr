@@ -9,7 +9,7 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: AvionicsPod
-// Description: Avionics pod
+// Description: Concrete avionics pod
 //
 // Factory name: AvionicsPod
 //------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/Stores.hpp"
+#include "mixr/models/system/IStores.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/String.hpp"
@@ -12,31 +12,31 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Stores, "Stores")
+IMPLEMENT_SUBCLASS(IStores, "IStores")
 
-BEGIN_SLOTTABLE(Stores)
+BEGIN_SLOTTABLE(IStores)
    "numStations",  //  1: Number of stations (less than or equal MAX_STATIONS)
    "stores",      //  2: Our weapons and other external stores
    "selected"     //  3: Selected weapon station number
-END_SLOTTABLE(Stores)
+END_SLOTTABLE(IStores)
 
-BEGIN_SLOT_MAP(Stores)
+BEGIN_SLOT_MAP(IStores)
    ON_SLOT( 1, setSlotNumStations, base::Integer)
    ON_SLOT( 2, setSlotStores,      base::PairStream)
    ON_SLOT( 3, setSlotSelected,    base::Integer)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Stores)
+BEGIN_EVENT_HANDLER(IStores)
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, IWeapon )
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, IExternalStore )
 END_EVENT_HANDLER()
 
-Stores::Stores()
+IStores::IStores()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void Stores::copyData(const Stores& org, const bool)
+void IStores::copyData(const IStores& org, const bool)
 {
    IObject::copyData(org);
 
@@ -45,7 +45,7 @@ void Stores::copyData(const Stores& org, const bool)
    setSlotStores(org.storesList); // setSlotStores() clones the stores
 }
 
-void Stores::deleteData()
+void IStores::deleteData()
 {
    setSlotStores(nullptr);
    setNumberOfStations(0);
@@ -54,7 +54,7 @@ void Stores::deleteData()
 //------------------------------------------------------------------------------
 // Reset()
 //------------------------------------------------------------------------------
-void Stores::reset()
+void IStores::reset()
 {
    BaseClass::reset();
 
@@ -70,7 +70,7 @@ void Stores::reset()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void Stores::process(const double dt)
+void IStores::process(const double dt)
 {
    // check our blocked flags
    updateBlockedFlags();
@@ -81,7 +81,7 @@ void Stores::process(const double dt)
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Stores::updateTC(const double dt)
+void IStores::updateTC(const double dt)
 {
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
@@ -106,7 +106,7 @@ void Stores::updateTC(const double dt)
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void Stores::updateData(const double dt)
+void IStores::updateData(const double dt)
 {
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
@@ -133,31 +133,31 @@ void Stores::updateData(const double dt)
 //------------------------------------------------------------------------------
 
 // Number of stations on the launcher
-unsigned int Stores::getNumberOfStations() const
+unsigned int IStores::getNumberOfStations() const
 {
    return ns;
 }
 
 // Returns the list of our external stores
-base::PairStream* Stores::getStores()
+base::PairStream* IStores::getStores()
 {
    return storesList.getRefPtr();
 }
 
 // Returns the list of our external stores (const version)
-const base::PairStream* Stores::getStores() const
+const base::PairStream* IStores::getStores() const
 {
    return storesList.getRefPtr();
 }
 
 // Number of weapons on the launcher
-unsigned int Stores::getNumberOfWeapons() const
+unsigned int IStores::getNumberOfWeapons() const
 {
    return numWpn;
 }
 
 // Returns the number of weapons available for launch
-unsigned int Stores::available() const
+unsigned int IStores::available() const
 {
    unsigned int n{};
    for (unsigned int s = 1; s <= ns; s++) {
@@ -167,13 +167,13 @@ unsigned int Stores::available() const
 }
 
 // Selected station number or zero if no station is selected
-unsigned int Stores::getSelectedStation() const
+unsigned int IStores::getSelectedStation() const
 {
    return selected;
 }
 
 // Default weapon availability function
-bool Stores::isWeaponAvailable(const unsigned int s) const
+bool IStores::isWeaponAvailable(const unsigned int s) const
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
@@ -195,7 +195,7 @@ bool Stores::isWeaponAvailable(const unsigned int s) const
 }
 
 // Return a weapon by station (const version)
-const IWeapon* Stores::getWeapon(const unsigned int s) const
+const IWeapon* IStores::getWeapon(const unsigned int s) const
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
@@ -209,7 +209,7 @@ const IWeapon* Stores::getWeapon(const unsigned int s) const
 }
 
 // Return a weapon by station (const version)
-IWeapon* Stores::getWeapon(const unsigned int s)
+IWeapon* IStores::getWeapon(const unsigned int s)
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
@@ -223,7 +223,7 @@ IWeapon* Stores::getWeapon(const unsigned int s)
 }
 
 // Return a external store by station (const version)
-const IExternalStore* Stores::getExternalStore(const unsigned int s) const
+const IExternalStore* IStores::getExternalStore(const unsigned int s) const
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
@@ -235,7 +235,7 @@ const IExternalStore* Stores::getExternalStore(const unsigned int s) const
 }
 
 // Return a external store by station (const version)
-IExternalStore* Stores::getExternalStore(const unsigned int s)
+IExternalStore* IStores::getExternalStore(const unsigned int s)
 {
    // Map 's' to a station array index
    int idx{mapSta2Idx(s)};
@@ -251,7 +251,7 @@ IExternalStore* Stores::getExternalStore(const unsigned int s)
 //------------------------------------------------------------------------------
 
 // Set the number of stations on this launcher
-bool Stores::setNumberOfStations(const unsigned int n)
+bool IStores::setNumberOfStations(const unsigned int n)
 {
    ns = n;
    return true;
@@ -261,7 +261,7 @@ bool Stores::setNumberOfStations(const unsigned int n)
 // Select station number 's'; even if its weapon is not available for
 // release.  If 's' is an invalid then the station remains unchanged and
 // false is returned.
-bool Stores::selectStation(const unsigned int s)
+bool IStores::selectStation(const unsigned int s)
 {
    bool ok{};
    if (s >= 1 && s <= ns) {
@@ -276,7 +276,7 @@ bool Stores::selectStation(const unsigned int s)
 //------------------------------------------------------------------------------
 
 // By weapon
-IWeapon* Stores::prereleaseWeapon(IWeapon* const wpn)
+IWeapon* IStores::prereleaseWeapon(IWeapon* const wpn)
 {
    IWeapon* flyout{};
 
@@ -293,7 +293,7 @@ IWeapon* Stores::prereleaseWeapon(IWeapon* const wpn)
 }
 
 // By station
-IWeapon* Stores::prereleaseWeapon(const unsigned int s)
+IWeapon* IStores::prereleaseWeapon(const unsigned int s)
 {
    IWeapon* flyout{};
 
@@ -311,7 +311,7 @@ IWeapon* Stores::prereleaseWeapon(const unsigned int s)
 //------------------------------------------------------------------------------
 
 // By weapon
-IWeapon* Stores::releaseWeapon(IWeapon* const wpn)
+IWeapon* IStores::releaseWeapon(IWeapon* const wpn)
 {
    IWeapon* flyout{};
 
@@ -328,7 +328,7 @@ IWeapon* Stores::releaseWeapon(IWeapon* const wpn)
 }
 
 // By station
-IWeapon* Stores::releaseWeapon(const unsigned int s)
+IWeapon* IStores::releaseWeapon(const unsigned int s)
 {
    IWeapon* flyout{};
 
@@ -344,14 +344,14 @@ IWeapon* Stores::releaseWeapon(const unsigned int s)
 //------------------------------------------------------------------------------
 // Default function to update the weapon blocked flags
 //------------------------------------------------------------------------------
-void Stores::updateBlockedFlags()
+void IStores::updateBlockedFlags()
 {
 }
 
 //------------------------------------------------------------------------------
 // Default function to jettison all jettisonable stores
 //------------------------------------------------------------------------------
-bool Stores::jettisonAll()
+bool IStores::jettisonAll()
 {
    // Notify the external stores that we're shutting down
    base::PairStream* list{getStores()};
@@ -373,7 +373,7 @@ bool Stores::jettisonAll()
 // assignWeaponToStation() --
 // Station numbers range from 1 to getNumberOfStations()
 //------------------------------------------------------------------------------
-bool Stores::assignWeaponToStation(const unsigned int s, IWeapon* const wpnPtr)
+bool IStores::assignWeaponToStation(const unsigned int s, IWeapon* const wpnPtr)
 {
    bool ok{};
    if (s >= 1 && s <= ns) {
@@ -402,7 +402,7 @@ bool Stores::assignWeaponToStation(const unsigned int s, IWeapon* const wpnPtr)
 //------------------------------------------------------------------------------
 // assignExtStoreToStation() --
 //------------------------------------------------------------------------------
-bool Stores::assignExtStoreToStation(const unsigned int s, IExternalStore* const esPtr)
+bool IStores::assignExtStoreToStation(const unsigned int s, IExternalStore* const esPtr)
 {
    bool ok{};
    if (s >= 1 && s <= ns) {
@@ -429,7 +429,7 @@ bool Stores::assignExtStoreToStation(const unsigned int s, IExternalStore* const
 //------------------------------------------------------------------------------
 // resetStores() -- Reset all stores
 //------------------------------------------------------------------------------
-void Stores::resetStores(base::PairStream* const list)
+void IStores::resetStores(base::PairStream* const list)
 {
    // Reset the external stores
    if (list != nullptr) {
@@ -448,7 +448,7 @@ void Stores::resetStores(base::PairStream* const list)
 //------------------------------------------------------------------------------
 
 // Default weapon jettison event handler
-bool Stores::onJettisonEvent(IWeapon* const wpn)
+bool IStores::onJettisonEvent(IWeapon* const wpn)
 {
    bool ok{};
    if (wpn != nullptr) {
@@ -478,7 +478,7 @@ bool Stores::onJettisonEvent(IWeapon* const wpn)
 }
 
 // Default external equipment jettison event handler
-bool Stores::onJettisonEvent(IExternalStore* const sys)
+bool IStores::onJettisonEvent(IExternalStore* const sys)
 {
    bool ok{};
    if (sys != nullptr) {
@@ -508,7 +508,7 @@ bool Stores::onJettisonEvent(IExternalStore* const sys)
 }
 
 // Number of station
-bool Stores::setSlotNumStations(base::Integer* const msg)
+bool IStores::setSlotNumStations(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -524,7 +524,7 @@ bool Stores::setSlotNumStations(base::Integer* const msg)
 }
 
 // Set the stores
-bool Stores::setSlotStores(const base::PairStream* const msg)
+bool IStores::setSlotStores(const base::PairStream* const msg)
 {
    // ---
    // Quick out if the number of stations hasn't been set.
@@ -640,7 +640,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
 }
 
 // Set the selected station number
-bool Stores::setSlotSelected(base::Integer* const msg)
+bool IStores::setSlotSelected(base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

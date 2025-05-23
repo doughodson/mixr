@@ -5,7 +5,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/Designator.hpp"
 #include "mixr/models/system/Gun.hpp"
-#include "mixr/models/system/Stores.hpp"
+#include "mixr/models/system/IStores.hpp"
 #include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/WorldModel.hpp"
 
@@ -828,13 +828,13 @@ bool IWeapon::isCategory(const int testCategory) const
 }
 
 // Our launcher, if any
-Stores* IWeapon::getLauncher()
+IStores* IWeapon::getLauncher()
 {
    return launcher;
 }
 
 // Our launcher, if any (const version)
-const Stores* IWeapon::getLauncher() const
+const IStores* IWeapon::getLauncher() const
 {
    return launcher;
 }
@@ -1226,7 +1226,7 @@ bool IWeapon::setReleaseEventID(const unsigned short n)
 
 
 // Sets our launcher and station number
-bool IWeapon::setLauncher(Stores* const l, const unsigned int s)
+bool IWeapon::setLauncher(IStores* const l, const unsigned int s)
 {
    launcher = l;
    station = s;

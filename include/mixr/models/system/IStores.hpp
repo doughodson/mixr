@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Stores_HPP__
-#define __mixr_models_common_Stores_HPP__
+#ifndef __mixr_models_IStores_HPP__
+#define __mixr_models_IStores_HPP__
 
 #include "mixr/models/system/IExternalStore.hpp"
 #include <array>
@@ -11,9 +11,9 @@ namespace models {
 class IWeapon;
 
 //------------------------------------------------------------------------------
-// Class: Stores
+// Class: IStores
 //
-// Description: Generic external stores container class (e.g., launcher, rack,
+// Description: Interface to external stores class (e.g., launcher, rack,
 //              ejector, pylon, etc).
 //
 // Factory name: Stores
@@ -106,15 +106,15 @@ class IWeapon;
 //    )
 //
 //------------------------------------------------------------------------------
-class Stores : public IExternalStore
+class IStores : public IExternalStore
 {
-   DECLARE_SUBCLASS(Stores, IExternalStore)
+   DECLARE_SUBCLASS(IStores, IExternalStore)
 
 public:
    enum { MAX_STATIONS = 50 };
 
 public:
-   Stores();
+   IStores();
 
    unsigned int getNumberOfStations() const;    // Number of stations on the launcher
 

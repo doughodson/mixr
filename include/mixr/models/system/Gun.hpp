@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Gun_HPP__
-#define __mixr_models_common_Gun_HPP__
+#ifndef __mixr_models_Gun_HPP__
+#define __mixr_models_Gun_HPP__
 
 #include "mixr/models/system/IExternalStore.hpp"
 
@@ -14,7 +14,7 @@ class Bullet;
 
 //------------------------------------------------------------------------------
 // Class: Gun
-// Description: Base class for guns; with a simple, default gun model
+// Description: Concrete class for guns; with a simple, default gun model
 //
 //    The Gun class is derived from the ExternalStore class because it's a system
 //    that's attached to the aircraft.  It is not released and can not become an

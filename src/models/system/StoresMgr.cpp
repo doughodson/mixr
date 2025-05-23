@@ -195,7 +195,7 @@ IWeapon* StoresMgr::getCurrentWeapon()
       // for its selected station's weapon
       IExternalStore* es{getExternalStore()};
       if (es != nullptr) {
-         const auto ss = dynamic_cast<Stores*>( es );
+         const auto ss = dynamic_cast<IStores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
          es->unref();
       }
@@ -215,7 +215,7 @@ const IWeapon* StoresMgr::getCurrentWeapon() const
       // for its selected station's weapon
       const IExternalStore* es{getExternalStore()};
       if (es != nullptr) {
-         const auto ss = dynamic_cast<const Stores*>( es );
+         const auto ss = dynamic_cast<const IStores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
          es->unref();
       }
@@ -324,7 +324,7 @@ void StoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_i
          if (isType) sublist->put(const_cast<base::Pair*>(pair));
 
          // If this is a Stores object then check its stores for 'type' objects as well
-         const auto sp = dynamic_cast<const Stores*>(p);
+         const auto sp = dynamic_cast<const IStores*>(p);
          if ( sp != nullptr ) {
             const base::PairStream* pstores{sp->getStores()};
             if (pstores != nullptr) {
