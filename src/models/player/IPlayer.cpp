@@ -13,7 +13,7 @@
 #include "mixr/models/system/IPilot.hpp"
 #include "mixr/models/system/IRadio.hpp"
 #include "mixr/models/system/IRfSensor.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
 #include "mixr/models/signature/IRfSignature.hpp"
@@ -943,15 +943,15 @@ base::Pair* IPlayer::getPilotByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Player's stores (weapons, fuel) manager model
-StoresMgr* IPlayer::getStoresManagement()
+IStoresMgr* IPlayer::getStoresManagement()
 {
-   return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
+   return (sms != nullptr) ? (static_cast<IStoresMgr*>(sms->object())) : nullptr;
 }
 
 // Player's stores (weapons, fuel) manager model (const version)
-const StoresMgr* IPlayer::getStoresManagement() const
+const IStoresMgr* IPlayer::getStoresManagement() const
 {
-   return (sms != nullptr) ? (static_cast<StoresMgr*>(sms->object())) : nullptr;
+   return (sms != nullptr) ? (static_cast<IStoresMgr*>(sms->object())) : nullptr;
 }
 
 // Name of the player's stores (weapons, fuel) manager model
@@ -2506,7 +2506,7 @@ bool IPlayer::onWpnRelEvent(const base::Boolean* const sw)
 {
    bool used{};
 
-   StoresMgr* p{getStoresManagement()};
+   IStoresMgr* p{getStoresManagement()};
    if (p != nullptr) {
       // When we have an SMS, let it handle this event ...
       used = p->onWpnRelEvent(sw);
@@ -3169,7 +3169,7 @@ void IPlayer::updateSystemPointers()
    setPilot( findByType(typeid(IPilot)) );
    setRadio( findByType(typeid(IRadio)) );
    setSensor( findByType(typeid(IRfSensor)) );
-   setStoresMgr( findByType(typeid(StoresMgr)) );
+   setStoresMgr( findByType(typeid(IStoresMgr)) );
 }
 
 //------------------------------------------------------------------------------
@@ -3414,7 +3414,7 @@ bool IPlayer::setStoresMgr(base::Pair* const x)
       if (sms != nullptr) sms->unref();
       sms = nullptr;
       ok = true;
-   } else if ( x->object()->isClassType(typeid(StoresMgr)) ) {
+   } else if ( x->object()->isClassType(typeid(IStoresMgr)) ) {
       if (sms != nullptr) sms->unref();
       sms = x;
       sms->ref();

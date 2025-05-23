@@ -5,7 +5,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Sar.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
 #include "mixr/models/WorldModel.hpp"
@@ -58,7 +58,7 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
    if (mgr != nullptr) {
       IPlayer* own{static_cast<IPlayer*>(mgr->findContainerByType(typeid(IPlayer)))};
       if (own != nullptr) {
-         StoresMgr* sms{own->getStoresManagement()};
+         IStoresMgr* sms{own->getStoresManagement()};
          if (sms != nullptr) {
          if (numToLaunch > 1) {
                 if (interval == 0.0) {
@@ -105,7 +105,7 @@ void ActionDecoyRelease::process(const double)
             tod = own->getWorldModel()->getSimTimeOfDay();
             if (interval < (tod - startTOD)) {
                 // we have hit our interval, release another decoy
-                StoresMgr* sms = own->getStoresManagement();
+                IStoresMgr* sms = own->getStoresManagement();
                 if (sms != nullptr) {
                     sms->releaseOneDecoy();
                     numToLaunch--;

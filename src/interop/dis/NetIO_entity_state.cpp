@@ -10,7 +10,7 @@
 #include "mixr/interop/dis/utils.hpp"
 
 #include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/Station.hpp"

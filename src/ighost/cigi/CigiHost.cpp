@@ -22,7 +22,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/Ship.hpp"
 #include "mixr/models/player/space/SpaceVehicle.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -752,7 +752,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
       int apartNumMissiles{};     // Number of attached missiles
 
       // find all attached missiles
-      const models::StoresMgr* sm{p->getStoresManagement()};
+      const models::IStoresMgr* sm{p->getStoresManagement()};
       if (sm != nullptr) {
          const base::PairStream* stores{sm->getStores()};
          if (stores != nullptr) {

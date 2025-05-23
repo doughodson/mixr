@@ -2,7 +2,7 @@
 #include "mixr/models/player/ground/SamVehicle.hpp"
 
 #include "mixr/models/player/weapon/Sam.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -64,7 +64,7 @@ void SamVehicle::updateData(const double dt)
    // Count the number of available SAM missiles
    // ---
    unsigned int count{};
-   const StoresMgr* sm{getStoresManagement()};
+   const IStoresMgr* sm{getStoresManagement()};
    if (sm != nullptr) {
 
       // We have a stores manager -- but do we have any available SAMs?

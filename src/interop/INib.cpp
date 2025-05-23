@@ -7,7 +7,7 @@
 #include "mixr/models/player/ground/Artillery.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -528,7 +528,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
          if (apartLnchrElevCnt == 0) {
 
             // find all missiles missiles
-            const models::StoresMgr* sm{gv->getStoresManagement()};
+            const models::IStoresMgr* sm{gv->getStoresManagement()};
             if (sm != nullptr) {
                const base::PairStream* stores{sm->getStores()};
                if (stores != nullptr) {

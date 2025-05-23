@@ -13,7 +13,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/simulation/ISimulation.hpp"
 #include "mixr/simulation/Station.hpp"
@@ -282,11 +282,11 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
             unsigned int sta = ap->parameterType; // station number
 
             if (sta >= 1 && sta <= MAX_AMSL) {
-               models::StoresMgr* sms {p->getStoresManagement()};
+               models::IStoresMgr* sms {p->getStoresManagement()};
 
                // If needed, create the stores manager
                if (sms == nullptr) {
-                  sms = new models::StoresMgr();
+                  sms = new models::IStoresMgr();
                   const auto pair = new base::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
                   p->addComponent(pair);

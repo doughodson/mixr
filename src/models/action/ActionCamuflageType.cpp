@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/system/Sar.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
 #include "mixr/models/WorldModel.hpp"

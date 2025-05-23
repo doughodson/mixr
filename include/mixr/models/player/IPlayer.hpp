@@ -34,7 +34,7 @@ class OnboardComputer;
 class IPilot;
 class IRadio;
 class IRfSensor;
-class StoresMgr;
+class IStoresMgr;
 class IWeapon;
 
 // Other item types
@@ -321,7 +321,7 @@ class IRfSignature;
 //          radios:        ( Radio ...           )  // Radio model
 //          sensors:       ( IRfSensor ...       )  // R/F Sensor model
 //          irSystems:     ( IrSystem ...        )  // IR system model
-//          sms:           ( StoresMgr ...       )  // Stores management model
+//          sms:           ( IStoresMgr ...      )  // Stores management model
 //
 //          Where 'datalink' is the name given to the top level datalink object,
 //          'dynamicsModel' is the name given to the dynamics model, etc.
@@ -605,8 +605,8 @@ public:
    IPilot* getPilotByName(const char* const);                         // Returns a pilot model by its name
    base::Pair* getPilotByType(const std::type_info& type);            // Returns a pilot model by its type
 
-   StoresMgr* getStoresManagement();                                  // Player's stores (weapons, fuel, etc...) manager model
-   const StoresMgr* getStoresManagement() const;                      // Player's stores (weapons, fuel, etc...) manager model (const version)
+   IStoresMgr* getStoresManagement();                                 // Player's stores (weapons, fuel, etc...) manager model
+   const IStoresMgr* getStoresManagement() const;                     // Player's stores (weapons, fuel, etc...) manager model (const version)
    const std::string& getStoresManagementName() const;                // Name of the player's stores (weapons, fuel, etc...) manager model
 
    Datalink* getDatalink();                                           // Player's top level Datalink model

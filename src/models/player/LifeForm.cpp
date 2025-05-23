@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/Missile.hpp"
 
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/system/Gun.hpp"
 
 #include "mixr/models/WorldModel.hpp"
@@ -93,7 +93,7 @@ void LifeForm::fire()
 {
     const auto hdgObj = new base::Float(getHeadingR());
     const auto pitchObj = new base::Float(lookAngle * base::angle::D2RCC);
-    StoresMgr* mgr{getStoresManagement()};
+    IStoresMgr* mgr{getStoresManagement()};
     if (mgr != nullptr) {
         if (getWorldModel() != nullptr) {
             if (weaponSel == LF_MISSILE) {
