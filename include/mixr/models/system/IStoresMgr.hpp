@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_StoresMgr_HPP__
-#define __mixr_models_common_StoresMgr_HPP__
+#ifndef __mixr_models_IStoresMgr_HPP__
+#define __mixr_models_IStoresMgr_HPP__
 
 #include "mixr/models/system/IStores.hpp"
 
@@ -17,13 +17,13 @@ class Sam;
 class IWeapon;
 
 //------------------------------------------------------------------------------
-// Class: StoresMgr
+// Class: IStoresMgr
 //
-// Description: Base class for stores management systems.  Manages the player's
+// Description: Interface class for stores management systems.  Manages the player's
 //              external stores, to include both weapons and external equipment.
 //              A player may be airborne, land-based, water-based or space-based.
 //
-// Factory name: BaseStoresMgr
+// Factory name: IStoresMgr
 //
 // Events:
 //    WPN_REL_EVENT  <base::Boolean>     ! Weapon release switch with position
@@ -50,16 +50,16 @@ class IWeapon;
 //       class (see Player.hpp).
 //
 //------------------------------------------------------------------------------
-class StoresMgr : public IStores
+class IStoresMgr : public IStores
 {
-    DECLARE_SUBCLASS(StoresMgr, IStores)
+    DECLARE_SUBCLASS(IStoresMgr, IStores)
 
 public:
     enum Mode { NAV, A2A, A2G, NUM_MODES };
     enum ArmMode { SAFE, ARMED, SIM, NUM_ARM_MODES };
 
 public:
-   StoresMgr();
+   IStoresMgr();
 
    base::PairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
    const base::PairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)

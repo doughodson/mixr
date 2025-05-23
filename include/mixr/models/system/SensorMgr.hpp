@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SensorMgr_HPP__
-#define __mixr_models_common_SensorMgr_HPP__
+#ifndef __mixr_models_SensorMgr_HPP__
+#define __mixr_models_SensorMgr_HPP__
 
 #include "mixr/models/system/IRfSensor.hpp"
 
@@ -11,7 +11,8 @@ namespace models {
 // Class: SensorMgr
 //
 // Description: Concrete class for managing a list of R/F sensors
-// Factory name: SensorMgr
+//
+// Factory name: ISensorMgr
 //------------------------------------------------------------------------------
 class SensorMgr : public IRfSensor
 {

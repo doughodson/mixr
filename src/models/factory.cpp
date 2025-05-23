@@ -94,7 +94,6 @@
 #include "mixr/models/system/SensorMgr.hpp"
 #include "mixr/models/system/SimpleStoresMgr.hpp"
 #include "mixr/models/system/StabilizingGimbal.hpp"
-#include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/system/System.hpp"
 
 // signatures (IR)
@@ -313,9 +312,6 @@ base::IObject* factory(const std::string& name)
    }
 
    // Stores, stores manager and external stores (FuelTank, Gun & Bullets (used by the Gun))
-   else if ( name == SimpleStoresMgr::getFactoryName() ) {
-      obj = new SimpleStoresMgr();
-   }
    else if ( name == FuelTank::getFactoryName() ) {
       obj = new FuelTank();
    }

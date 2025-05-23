@@ -1,8 +1,8 @@
 
-#ifndef __mixr_models_common_SimpleStoresMgr_HPP__
-#define __mixr_models_common_SimpleStoresMgr_HPP__
+#ifndef __mixr_models_SimpleStoresMgr_HPP__
+#define __mixr_models_SimpleStoresMgr_HPP__
 
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class String; }
@@ -17,7 +17,7 @@ class Decoy;
 
 //------------------------------------------------------------------------------
 // Class: SimpleStoresMgr
-// Description: Simple (example) external stores management systems
+// Description: Concrete, simple (example) external stores management systems
 //
 // Factory name: StoresMgr
 //
@@ -29,9 +29,9 @@ class Decoy;
 //       to the flyout weapon, or zero if unable to release a weapon.
 //
 //------------------------------------------------------------------------------
-class SimpleStoresMgr : public StoresMgr
+class SimpleStoresMgr final: public IStoresMgr
 {
-    DECLARE_SUBCLASS(SimpleStoresMgr, StoresMgr)
+    DECLARE_SUBCLASS(SimpleStoresMgr, IStoresMgr)
 
 public:
    SimpleStoresMgr();

@@ -1,5 +1,5 @@
 
-#include "mixr/models/system/StoresMgr.hpp"
+#include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/models/player/effect/Chaff.hpp"
 #include "mixr/models/player/effect/Decoy.hpp"
@@ -24,10 +24,10 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(StoresMgr, "BaseStoresMgr")
-EMPTY_SLOTTABLE(StoresMgr)
+IMPLEMENT_SUBCLASS(IStoresMgr, "IStoresMgr")
+EMPTY_SLOTTABLE(IStoresMgr)
 
-BEGIN_EVENT_HANDLER(StoresMgr)
+BEGIN_EVENT_HANDLER(IStoresMgr)
    ON_EVENT_OBJ(WPN_REL_EVENT,onWpnRelEvent,base::Boolean)
    ON_EVENT(WPN_REL_EVENT,onWpnRelEvent)
 
@@ -37,12 +37,12 @@ BEGIN_EVENT_HANDLER(StoresMgr)
    ON_EVENT(WPN_RELOAD, onWpnReload)
 END_EVENT_HANDLER()
 
-StoresMgr::StoresMgr()
+IStoresMgr::IStoresMgr()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void StoresMgr::copyData(const StoresMgr& org, const bool)
+void IStoresMgr::copyData(const IStoresMgr& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -51,7 +51,7 @@ void StoresMgr::copyData(const StoresMgr& org, const bool)
    masterArm = org.masterArm;
 }
 
-void StoresMgr::deleteData()
+void IStoresMgr::deleteData()
 {
    setSlotStores(nullptr);
 }
@@ -59,7 +59,7 @@ void StoresMgr::deleteData()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void StoresMgr::process(const double dt)
+void IStoresMgr::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -73,7 +73,7 @@ void StoresMgr::process(const double dt)
 //------------------------------------------------------------------------------
 // shutdownNotification() -- We're shutting down
 //------------------------------------------------------------------------------
-bool StoresMgr::shutdownNotification()
+bool IStoresMgr::shutdownNotification()
 {
    // Notify the external stores that we're shutting down
    base::PairStream* list{getStores()};
@@ -100,91 +100,91 @@ bool StoresMgr::shutdownNotification()
 //------------------------------------------------------------------------------
 
 // Is master arm mode == 'mode'
-bool StoresMgr::isMasterArm(const unsigned int mode) const
+bool IStoresMgr::isMasterArm(const unsigned int mode) const
 {
    return (masterArm == mode);
 }
 
 // Returns the master arm mode
-unsigned int StoresMgr::getMasterArm() const
+unsigned int IStoresMgr::getMasterArm() const
 {
    return masterArm;
 }
 
 // Is the delivery mode == 'testMode'
-bool StoresMgr::isWeaponDeliveryMode(const unsigned int testMode) const
+bool IStoresMgr::isWeaponDeliveryMode(const unsigned int testMode) const
 {
    return (mode == testMode);
 }
 
 // Returns the delivery mode
-unsigned int StoresMgr::getWeaponDeliveryMode() const
+unsigned int IStoresMgr::getWeaponDeliveryMode() const
 {
    return mode;
 }
 
 // Pre-ref()'d list of our weapons
-base::PairStream* StoresMgr::getWeapons()
+base::PairStream* IStoresMgr::getWeapons()
 {
    return weaponsList.getRefPtr();
 }
 
 // Pre-ref()'d list of our weapons (const version)
-const base::PairStream* StoresMgr::getWeapons() const
+const base::PairStream* IStoresMgr::getWeapons() const
 {
    return weaponsList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external equipment
-base::PairStream* StoresMgr::getExternalStores()
+base::PairStream* IStoresMgr::getExternalStores()
 {
    return externalList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external equipment (const version)
-const base::PairStream* StoresMgr::getExternalStores() const
+const base::PairStream* IStoresMgr::getExternalStores() const
 {
    return externalList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external fuel tanks
-base::PairStream* StoresMgr::getExtFuelTanks()
+base::PairStream* IStoresMgr::getExtFuelTanks()
 {
    return fuelList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external fuel tanks (const version)
-const base::PairStream* StoresMgr::getExtFuelTanks() const
+const base::PairStream* IStoresMgr::getExtFuelTanks() const
 {
    return fuelList.getRefPtr();
 }
 
 // Get the gun model
-Gun* StoresMgr::getGun()
+Gun* IStoresMgr::getGun()
 {
    return gunPtr;
 }
 
 // Get the gun model (const version)
-const Gun* StoresMgr::getGun() const
+const Gun* IStoresMgr::getGun() const
 {
    return gunPtr;
 }
 
 // Are weapons are being released (default function)
-bool StoresMgr::isWeaponReleased() const
+bool IStoresMgr::isWeaponReleased() const
 {
    return false;
 }
 
 // Is the gun selected
-bool StoresMgr::isGunSelected() const
+bool IStoresMgr::isGunSelected() const
 {
    return gunFlg && (gunPtr != nullptr);
 }
 
 // Default function to get the current weapon (Pre-ref()'d)
-IWeapon* StoresMgr::getCurrentWeapon()
+IWeapon* IStoresMgr::getCurrentWeapon()
 {
    // Get the selected station's weapon
    IWeapon* wpn{getWeapon()};
@@ -204,7 +204,7 @@ IWeapon* StoresMgr::getCurrentWeapon()
    return wpn;
 }
 
-const IWeapon* StoresMgr::getCurrentWeapon() const
+const IWeapon* IStoresMgr::getCurrentWeapon() const
 {
    // Get the selected station's weapon
    const IWeapon* wpn{getWeapon()};
@@ -229,21 +229,21 @@ const IWeapon* StoresMgr::getCurrentWeapon() const
 //------------------------------------------------------------------------------
 
 // Sets the master arming mode
-bool StoresMgr::setMasterArm(const unsigned int newMode)
+bool IStoresMgr::setMasterArm(const unsigned int newMode)
 {
    masterArm = newMode;
    return true;
 }
 
 // Sets the weapon delivery mode
-bool StoresMgr::setWeaponDeliveryMode(const unsigned int newMode)
+bool IStoresMgr::setWeaponDeliveryMode(const unsigned int newMode)
 {
    mode = newMode;
    return true;
 }
 
 // Selects the gun
-bool StoresMgr::setGunSelected(const bool flg)
+bool IStoresMgr::setGunSelected(const bool flg)
 {
    gunFlg = (flg && gunPtr != nullptr);
    return true;
@@ -253,38 +253,38 @@ bool StoresMgr::setGunSelected(const bool flg)
 // Empty "simple" get and release functions (derived classes can define these as needed)
 //------------------------------------------------------------------------------
 
-Missile* StoresMgr::getNextMissile()               { return nullptr; }
-const Missile* StoresMgr::getNextMissile() const   { return nullptr; }
-Sam* StoresMgr::getNextSam()                       { return nullptr; }
-const Sam* StoresMgr::getNextSam() const           { return nullptr; }
-Bomb* StoresMgr::getNextBomb()                     { return nullptr; }
-const Bomb* StoresMgr::getNextBomb() const         { return nullptr; }
-Chaff* StoresMgr::getNextChaff()                   { return nullptr; }
-const Chaff* StoresMgr::getNextChaff() const       { return nullptr; }
-Flare* StoresMgr::getNextFlare()                   { return nullptr; }
-const Flare* StoresMgr::getNextFlare() const       { return nullptr; }
-Decoy* StoresMgr::getNextDecoy()                   { return nullptr; }
-const Decoy* StoresMgr::getNextDecoy() const       { return nullptr; }
+Missile* IStoresMgr::getNextMissile()               { return nullptr; }
+const Missile* IStoresMgr::getNextMissile() const   { return nullptr; }
+Sam* IStoresMgr::getNextSam()                       { return nullptr; }
+const Sam* IStoresMgr::getNextSam() const           { return nullptr; }
+Bomb* IStoresMgr::getNextBomb()                     { return nullptr; }
+const Bomb* IStoresMgr::getNextBomb() const         { return nullptr; }
+Chaff* IStoresMgr::getNextChaff()                   { return nullptr; }
+const Chaff* IStoresMgr::getNextChaff() const       { return nullptr; }
+Flare* IStoresMgr::getNextFlare()                   { return nullptr; }
+const Flare* IStoresMgr::getNextFlare() const       { return nullptr; }
+Decoy* IStoresMgr::getNextDecoy()                   { return nullptr; }
+const Decoy* IStoresMgr::getNextDecoy() const       { return nullptr; }
 
-Missile* StoresMgr::releaseOneMissile()   { return nullptr; }
-Sam* StoresMgr::releaseOneSam()           { return nullptr; }
-Bomb* StoresMgr::releaseOneBomb()         { return nullptr; }
-Chaff* StoresMgr::releaseOneChaff()       { return nullptr; }
-Flare* StoresMgr::releaseOneFlare()       { return nullptr; }
-Decoy* StoresMgr::releaseOneDecoy()       { return nullptr; }
+Missile* IStoresMgr::releaseOneMissile()   { return nullptr; }
+Sam* IStoresMgr::releaseOneSam()           { return nullptr; }
+Bomb* IStoresMgr::releaseOneBomb()         { return nullptr; }
+Chaff* IStoresMgr::releaseOneChaff()       { return nullptr; }
+Flare* IStoresMgr::releaseOneFlare()       { return nullptr; }
+Decoy* IStoresMgr::releaseOneDecoy()       { return nullptr; }
 
 //------------------------------------------------------------------------------
 // Empty event handlers (derived classes can define these as needed)
 //------------------------------------------------------------------------------
 
 // Default function to manage the weapon release event
-bool StoresMgr::onWpnRelEvent(const base::Boolean* const)
+bool IStoresMgr::onWpnRelEvent(const base::Boolean* const)
 {
    return true;
 }
 
 // Default function to manage the trigger switch event
-bool StoresMgr::onTriggerSwEvent(const base::Boolean* const)
+bool IStoresMgr::onTriggerSwEvent(const base::Boolean* const)
 {
    return true;
 }
@@ -293,7 +293,7 @@ bool StoresMgr::onTriggerSwEvent(const base::Boolean* const)
 //------------------------------------------------------------------------------
 // Default weapons reload event handler
 //------------------------------------------------------------------------------
-bool StoresMgr::onWpnReload()
+bool IStoresMgr::onWpnReload()
 {
    // Reset the weapons only
    base::PairStream* list{getWeapons()};
@@ -309,7 +309,7 @@ bool StoresMgr::onWpnReload()
 // Search all of the objects in the main list for objects of 'type' and add
 // them to the sublist.  Also check all Stores type objects for any 'type' objects.
 //------------------------------------------------------------------------------
-void StoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_info& type, base::PairStream* sublist)
+void IStoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_info& type, base::PairStream* sublist)
 {
    if (mainList != nullptr && sublist != nullptr) {
 
@@ -341,7 +341,7 @@ void StoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_i
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool StoresMgr::setSlotStores(const base::PairStream* const msg)
+bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
 {
    // First let our base class do everything that it needs to.
    BaseClass::setSlotStores(msg);

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Bomb_HPP__
-#define __mixr_models_common_Bomb_HPP__
+#ifndef __mixr_models_Bomb_HPP__
+#define __mixr_models_Bomb_HPP__
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
 

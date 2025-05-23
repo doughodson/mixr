@@ -110,7 +110,7 @@ OBJS =  \
 	system/SimpleStoresMgr.o \
 	system/StabilizingGimbal.o \
 	system/IStores.o \
-	system/StoresMgr.o \
+	system/IStoresMgr.o \
 	system/ISystem.o \
 	system/System.o \
 	track/ITrack.o \
