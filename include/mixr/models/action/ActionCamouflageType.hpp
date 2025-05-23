@@ -11,7 +11,7 @@ class OnboardComputer;
 
 //------------------------------------------------------------------------------
 // Class: ActionCamouflageType
-// Description: Concrete - On trigger, switches our ownship's camouflage type
+// Description: Concrete - on trigger, switches our ownship's camouflage type
 //
 // Factory name: ActionCamouflageType
 // Slots:

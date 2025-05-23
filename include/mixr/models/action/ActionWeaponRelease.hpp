@@ -11,7 +11,7 @@ class OnboardComputer;
 
 //------------------------------------------------------------------------------
 // Class: ActionWeaponRelease
-// Description: Concrete - Launches a weapon
+// Description: Concrete - launches a weapon
 //
 // Factory name: ActionWeaponRelease
 // Slots:

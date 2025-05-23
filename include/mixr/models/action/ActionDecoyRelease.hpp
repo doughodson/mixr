@@ -11,7 +11,7 @@ class OnboardComputer;
 
 //------------------------------------------------------------------------------
 // Class: ActionDecoyRelease
-// Description:  Concrete - Releases a decoy
+// Description:  Concrete - releases a decoy
 //
 // Factory name: ActionDecoyRelease
 // Slots:
