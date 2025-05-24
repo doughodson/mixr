@@ -2,7 +2,7 @@
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -277,7 +277,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // 1) Scan the player list ---
    // ---
    bool finished{};
-   for (base::List::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
+   for (base::IList::Item* item = players->getFirstItem(); item != nullptr && numTgts < maxTargets && !finished; item = item->getNext()) {
 
       // Get the pointer to the target player
       base::Pair* pair{static_cast<base::Pair*>(item->getValue())};

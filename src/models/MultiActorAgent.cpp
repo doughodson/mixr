@@ -185,7 +185,7 @@ bool MultiActorAgent::setSlotAgentList(base::PairStream* const msg)
        clearAgentList();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item{msg->getFirstItem()};
+       base::IList::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;

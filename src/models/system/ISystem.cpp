@@ -137,7 +137,7 @@ bool ISystem::killedNotification(IPlayer* const p)
    // Just let all of our subcomponents know that we were just killed
    base::PairStream* subcomponents{getComponents()};
    if(subcomponents != nullptr) {
-      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+      for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
          sc->event(KILL_EVENT, p);

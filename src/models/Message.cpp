@@ -2,7 +2,7 @@
 #include "mixr/models/Message.hpp"
 
 #include "mixr/base/String.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 namespace mixr {
 namespace models {
@@ -75,7 +75,7 @@ bool Message::addDestName(base::String* const name)
    bool ret{};
    if(name != nullptr) {
       if (destNames == nullptr)
-         destNames = new base::List();
+         destNames = new base::IList();
       destNames->addTail(name);
       ret = true;
    }

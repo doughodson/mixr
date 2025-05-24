@@ -3,7 +3,7 @@
 
 #include "mixr/models/system/IrSensor.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include <iostream>
 
 namespace mixr {
