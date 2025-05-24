@@ -180,7 +180,7 @@ int GlutDisplay::createWindow()
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         base::List::Item* item = subDisplays()->getFirstItem();
+         base::IList::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
@@ -257,7 +257,7 @@ int GlutDisplay::createSubWindow(const int mainId)
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         base::List::Item* item = subDisplays()->getFirstItem();
+         base::IList::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
@@ -330,7 +330,7 @@ void GlutDisplay::reshapeIt(int w, int h)
       if (subDisplays() != nullptr && okToResize) {
 
          // go through and put our new numbers in
-         base::List::Item* item = subDisplays()->getFirstItem();
+         base::IList::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {

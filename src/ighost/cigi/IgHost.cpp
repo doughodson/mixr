@@ -205,7 +205,7 @@ void IgHost::mapPlayerList2ModelTable()
       // ---
       // Find players that are alive and within range of the visual system ...
       // ---
-      base::List::Item* item{playerList->getFirstItem()};
+      base::IList::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
@@ -286,7 +286,7 @@ void IgHost::mapPlayers2ElevTable()
       // ---
       // Find players that are alive and require terrain elevation from the visual system ...
       // ---
-      base::List::Item* item{playerList->getFirstItem()};
+      base::IList::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
@@ -721,7 +721,7 @@ bool IgHost::setSlotTypeMap(const base::PairStream* const x)
 
        // Now scan the pair stream and put all Otm objects
        // into the table.
-       const base::List::Item* item{x->getFirstItem()};
+       const base::IList::Item* item{x->getFirstItem()};
        while (item != nullptr && nIgModelTypes < MAX_MODELS_TYPES) {
           const auto pair = static_cast<const base::Pair*>(item->getValue());
           const auto igType = dynamic_cast<const Player2CigiMap*>( pair->object() );

@@ -12,11 +12,11 @@ IMPLEMENT_SUBCLASS(Ntm, "HlaNtm")
 EMPTY_DELETEDATA(Ntm)
 
 BEGIN_SLOTTABLE(Ntm)
-    "entityType", // 1) Entity type (base::List -- number vector)  [ kind domain country category ... ]
+    "entityType", // 1) Entity type (base::IList -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotEntityType, base::List)
+    ON_SLOT(1, setSlotEntityType, base::IList)
 END_SLOT_MAP()
 
 Ntm::Ntm()
@@ -82,7 +82,7 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 // Set entity type enumerations
 //------------------------------------------------------------------------------
-bool Ntm::setSlotEntityType(const base::List* const msg)
+bool Ntm::setSlotEntityType(const base::IList* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

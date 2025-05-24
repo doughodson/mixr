@@ -6,7 +6,7 @@
 #include "mixr/interop/hla/rprfom/NetIO.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace rprfom {
 
 //------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotEntityType(const base::List* const);         // Sets entity type enumerations
+   bool setSlotEntityType(const base::IList* const);         // Sets entity type enumerations
 };
 
 }
