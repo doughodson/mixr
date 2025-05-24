@@ -3,10 +3,10 @@
 #define __mixr_recorder_OutputHandler_HPP__
 
 #include "mixr/simulation/IRecorder.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace recorder {
 namespace protobuf_v2 {
 class DataRecordHandle;
@@ -67,7 +67,7 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   base::List queue;            // Data Record Queue
+   base::IList queue;            // Data Record Queue
    mutable long semaphore {};
 };
 

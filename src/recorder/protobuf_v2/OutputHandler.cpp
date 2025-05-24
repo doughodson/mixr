@@ -44,7 +44,7 @@ bool OutputHandler::shutdownNotification()
    // Pass the shutdown notification to our subcomponent recorders
    base::PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
-      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+      for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          OutputHandler* sc{static_cast<OutputHandler*>(pair->object())};
          sc->event(SHUTDOWN_EVENT);
@@ -73,7 +73,7 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
       // for further processing
       base::PairStream* subcomponents{getComponents()};
       if (subcomponents != nullptr) {
-         for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             OutputHandler* sc{static_cast<OutputHandler*>(pair->object())};
