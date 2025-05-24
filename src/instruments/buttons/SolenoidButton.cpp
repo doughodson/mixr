@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/Timers.hpp"
+#include "mixr/base/timers/ITimer.hpp"
 
 namespace mixr {
 namespace instruments {

@@ -12,7 +12,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/Timers.hpp"
+#include "mixr/base/timers/ITimer.hpp"
 #include "mixr/base/concepts/linkage/IIoHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -261,7 +261,7 @@ void Station::updateTC(const double dt)
 {
    // Update the base::Timers
    if (isUpdateTimersEnabled()) {
-      base::Timer::updateTimers(dt);
+      base::ITimer::updateTimers(dt);
    }
 
    // the I/O handler

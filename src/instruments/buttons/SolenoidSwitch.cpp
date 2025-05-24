@@ -8,7 +8,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/Timers.hpp"
+#include "mixr/base/timers/UpTimer.hpp"
 
 namespace mixr {
 namespace instruments {
