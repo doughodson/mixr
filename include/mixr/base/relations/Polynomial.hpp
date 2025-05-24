@@ -8,7 +8,7 @@
 namespace mixr {
 namespace base {
 class IFStorage;
-class List;
+class IList;
 
 //------------------------------------------------------------------------------
 // Class: Polynomial
@@ -19,7 +19,7 @@ class List;
 //
 // Factory name: Polynomial
 // Slots:
-//    coefficients   <base::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
+//    coefficients   <base::IList>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
 //------------------------------------------------------------------------------
 // Notes
 //    1) The degree of the polynomial is determined by the size of the coefficients vector.
@@ -61,7 +61,7 @@ private:
 
 protected:
    // slot table helper methods
-   virtual bool setSlotCoefficients(const List* const);
+   virtual bool setSlotCoefficients(const IList* const);
 };
 
 }

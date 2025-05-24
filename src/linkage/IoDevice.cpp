@@ -5,7 +5,7 @@
 
 #include "mixr/base/concepts/linkage/IIoHandler.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -56,7 +56,7 @@ void IoDevice::processInputAdapters(base::IIoData* const inData)
 
    // process any input adapters
    if (adapters != nullptr) {
-      base::List::Item* item{adapters->getFirstItem()};
+      base::IList::Item* item{adapters->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<IAdapter*>(pair->object());
@@ -76,7 +76,7 @@ void IoDevice::processOutputAdapters(const base::IIoData* const outData)
    if (adapters != nullptr) {
 
       if (outData != nullptr) {
-         base::List::Item* item{adapters->getFirstItem()};
+         base::IList::Item* item{adapters->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = static_cast<IAdapter*>(pair->object());
@@ -95,7 +95,7 @@ bool IoDevice::setSlotAdapters(base::PairStream* const list)
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O adapters
       int cnt{};
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());

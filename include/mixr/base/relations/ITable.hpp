@@ -8,7 +8,7 @@ namespace mixr {
 namespace base {
 class Boolean;
 class IFStorage;
-class List;
+class IList;
 
 //------------------------------------------------------------------------------
 // Class: ITable
@@ -55,7 +55,7 @@ public:
 
    // Returns the number of entries in the data table
    virtual unsigned int tableSize() const = 0;
-   virtual bool setDataTable(const List* const);
+   virtual bool setDataTable(const IList* const);
 
    // Returns the min and max values of the dependent variable data table
    virtual void findMinMax(double* minValue, double* maxValue) const;
@@ -98,8 +98,8 @@ public:
 
 
 protected:
-   virtual bool loadData(const List& list, double* const table) = 0;
-   static bool loadVector(const List& list, double** table, unsigned int* n);
+   virtual bool loadData(const IList& list, double* const table) = 0;
+   static bool loadVector(const IList& list, double** table, unsigned int* n);
 
    bool valid{};        // Table is valid
 
@@ -110,7 +110,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotDataTable(const List* const x)               { return setDataTable(x); }
+   bool setSlotDataTable(const IList* const x)               { return setDataTable(x); }
    bool setSlotExtrapolationEnabled(const Boolean* const);
 };
 

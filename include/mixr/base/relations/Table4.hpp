@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class IFStorage;
-class List;
+class IList;
 
 //------------------------------------------------------------------------------
 // Class: Table4
@@ -17,7 +17,7 @@ class List;
 //
 // Factory name: Table4
 // Slots:
-//    w    <List>  ! Independent variable #4 (iv4) points
+//    w    <IList>  ! Independent variable #4 (iv4) points
 //------------------------------------------------------------------------------
 class Table4 : public Table3
 {
@@ -44,7 +44,7 @@ public:
    virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, IFStorage* const s = nullptr) const;
 
    // Loads the W (iv4) breakpoints
-   virtual bool setWBreakpoints4(const List* const bkpts);
+   virtual bool setWBreakpoints4(const IList* const bkpts);
 
    double lfi(const double iv1, const double iv2, const double iv3, IFStorage* const s = nullptr) const override;
    double lfi(const double iv1, const double iv2, IFStorage* const s = nullptr) const override;
@@ -54,7 +54,7 @@ public:
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
+   bool loadData(const IList& list, double* const table) override;
 
 private:
    double* wtable {};    // W Breakpoint Table

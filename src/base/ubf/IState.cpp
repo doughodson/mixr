@@ -29,7 +29,7 @@ void IState::updateGlobalState()
          }
       } else {
          // When we should update them all
-         base::List::Item* item{subcomponents->getFirstItem()};
+         base::IList::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::IComponent*>(pair->object());
@@ -58,7 +58,7 @@ void IState::updateState(const base::IComponent* const actor)
          }
       } else {
          // When we should update them all
-         base::List::Item* item{subcomponents->getFirstItem()};
+         base::IList::Item* item{subcomponents->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::IComponent*>(pair->object());

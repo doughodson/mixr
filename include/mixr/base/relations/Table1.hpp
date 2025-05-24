@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base {
 class IFStorage;
-class List;
+class IList;
 class Number;
 
 //------------------------------------------------------------------------------
@@ -42,14 +42,14 @@ public:
    virtual double lfi(const double iv1, IFStorage* const s = nullptr) const;
 
    // Load the X (iv1) breakpoints
-   virtual bool setXBreakpoints1(const List* const bkpts);
+   virtual bool setXBreakpoints1(const IList* const bkpts);
 
    unsigned int tableSize() const override;
 
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
+   bool loadData(const IList& list, double* const table) override;
 
 private:
    double* xtable{};    // X Breakpoint Table

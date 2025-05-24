@@ -14,9 +14,9 @@ class Identifier;
 //------------------------------------------------------------------------------
 // Class: Longitude
 //
-// Description: Stores a longitude coordinate expressed in terms of a direction
-//              {east or west}, degrees, minutes and seconds.  Can convert
-//              this representation into decimal degrees.
+// Description: Concrete that stores a longitude coordinate expressed in terms
+//              of a direction {east or west}, degrees, minutes and seconds.
+//              Can convert this representation into decimal degrees.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -27,7 +27,7 @@ class Identifier;
 //    minutes   <INumber>     ! Set the minutes component (default: 0)
 //    seconds   <INumber>     ! Set the seconds component (default: 0.0)
 //------------------------------------------------------------------------------
-class Longitude : public IObject
+class Longitude final: public IObject
 {
    DECLARE_SUBCLASS(Longitude, IObject)
 

@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/ITable.hpp"
 #include "mixr/base/relations/IFStorage.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 #include <iostream>
 

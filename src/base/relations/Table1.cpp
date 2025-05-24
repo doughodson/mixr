@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Table1)
 END_SLOTTABLE(Table1)
 
 BEGIN_SLOT_MAP(Table1)
-    ON_SLOT(1, setXBreakpoints1, List)
+    ON_SLOT(1, setXBreakpoints1, IList)
 END_SLOT_MAP()
 
 Table1::Table1() : ITable()
@@ -67,7 +67,7 @@ void Table1::deleteData()
 // Load a 1D vector with nx values.
 // Example:  [ 1 2 3 ]
 //------------------------------------------------------------------------------
-bool Table1::loadData(const List& list, double* const table)
+bool Table1::loadData(const IList& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     const std::size_t n1{list.entries()};
@@ -143,7 +143,7 @@ double Table1::lfi(const double iv1, IFStorage* const f) const
 //------------------------------------------------------------------------------
 // setXBreakpoints1() -- for Table1
 //------------------------------------------------------------------------------
-bool Table1::setXBreakpoints1(const List* const sxb1obj)
+bool Table1::setXBreakpoints1(const IList* const sxb1obj)
 {
     if (sxb1obj != nullptr) {
         loadVector(*sxb1obj, &xtable, &nx);

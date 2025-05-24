@@ -101,15 +101,15 @@ const std::string PairStream::findName(const IObject* const obj) const
 //------------------------------------------------------------------------------
 bool PairStream::operator==(const PairStream& stream) const
 {
-    const List* s1{this};
-    const List* s2{&stream};
+    const IList* s1{this};
+    const IList* s2{&stream};
     return *s1 == *s2;
 }
 
 bool PairStream::operator!=(const PairStream& stream) const
 {
-    const List* s1{this};
-    const List* s2{&stream};
+    const IList* s1{this};
+    const IList* s2{&stream};
     return *s1 != *s2;
 }
 

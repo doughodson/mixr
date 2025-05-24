@@ -302,7 +302,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   // find the weapon at station 'sta'
                   base::PairStream* stores {sms->getStores()};
                   if (stores != nullptr) {
-                     base::List::Item* item {stores->getFirstItem()};
+                     base::IList::Item* item {stores->getFirstItem()};
                      while (item != nullptr && wpn == nullptr) {
                         unsigned int s{};
                         base::Pair* pair {static_cast<base::Pair*>(item->getValue())};

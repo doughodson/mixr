@@ -104,7 +104,7 @@ bool CadrgMap::setSlotPathnames(const base::PairStream* const x)
     int count = 0;
     if (x != nullptr) {
         // Go through and set up our files based on the path names given
-        base::List::Item* item = (base::List::Item*)x->getFirstItem();
+        base::IList::Item* item = (base::IList::Item*)x->getFirstItem();
         while (item != nullptr && count < MAX_FILES) {
             base::Pair* p = (base::Pair*)item->getValue();
             if (p != nullptr) {
@@ -273,7 +273,7 @@ bool CadrgMap::setMaxTableSize(const int x)
     int size = maxTableSize * 2;
     // Reset our list stack
     if (stack != nullptr) stack->unref();
-    stack = new base::List();
+    stack = new base::IList();
     for (int i = 0; i < size; i++) {
         const auto t = new CadrgFrame();
         stack->addHead(t);
@@ -622,7 +622,7 @@ void* CadrgMap::getPixels(const int row, const int column, TexturePager* tp)
                 CadrgFrame* frame = frameEntry->getFrame();
                 // If we don't have an entry, let's pull one from the stack
                 if (frame == nullptr) {
-                    base::List::Item* item = stack->getFirstItem();
+                    base::IList::Item* item = stack->getFirstItem();
                     if (item != nullptr) {
                         CadrgFrame* x = (CadrgFrame*)(item->getValue());
                         if (x != nullptr) {

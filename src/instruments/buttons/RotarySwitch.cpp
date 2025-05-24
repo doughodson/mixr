@@ -47,7 +47,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
     for (int i = 0; i < MAX_ANGLES; i++) angles[i] = 0;
     if (x != nullptr) {
         ok = true;
-        const base::List::Item* item = x->getFirstItem();
+        const base::IList::Item* item = x->getFirstItem();
         while(item != nullptr) {
             base::Pair* pair = (base::Pair*)item->getValue();
             if (pair != nullptr) {

@@ -12,7 +12,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Statistic
-// Description:  General statistics class: acts like a statistical calculator:
+// Description:  Concrete statistics class: acts like a statistical calculator:
 //               Computes the mean, absolute mean, the variance, standard
 //               deviation, RMS, maximum and minimum values of all data points
 //               added to the statistic.  Use sigma() to add points and clear()
@@ -23,7 +23,7 @@ namespace base {
 // Factory name: Statistic
 // Slots: none
 //------------------------------------------------------------------------------
-class Statistic : public IObject
+class Statistic final : public IObject
 {
     DECLARE_SUBCLASS(Statistic, IObject)
 

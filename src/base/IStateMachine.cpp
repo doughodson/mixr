@@ -67,7 +67,7 @@ void IStateMachine::reset()
 
    // Reset our state machine list
    if (stMachList != nullptr) {
-      List::Item* item{stMachList->getFirstItem()};
+      IList::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
          const auto q = static_cast<IComponent*>(p->object());
@@ -447,7 +447,7 @@ bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
    // First remove the old list; and make sure we tell the old stMachList
    // that we're no longer their container.
    if (stMachList != nullptr) {
-      List::Item* item{stMachList->getFirstItem()};
+      IList::Item* item{stMachList->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<Pair*>(item->getValue());
          const auto q = static_cast<IComponent*>(p->object());
@@ -463,7 +463,7 @@ bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
 
       // For each object in the list; if it's a StateMachine (or derived from) then
       // clone the object and add it to the new list.
-      const List::Item* item{msg->getFirstItem()};
+      const IList::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
          const auto p = static_cast<const Pair*>(item->getValue());
          const auto q = dynamic_cast<const IStateMachine*>(p->object());

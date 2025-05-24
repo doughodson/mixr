@@ -233,7 +233,7 @@ base::Pair* Graphic::findBySelectName(const GLuint name)
     base::Pair* q = nullptr;
     base::PairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
-        const base::List::Item* item = subcomponents->getFirstItem();
+        const base::IList::Item* item = subcomponents->getFirstItem();
         while (item != nullptr && q == nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             const auto gobj = dynamic_cast<Graphic*>(p->object());
@@ -497,7 +497,7 @@ void Graphic::draw()
         }
         else {
             // When we should draw them all
-            base::List::Item* item{subcomponents->getFirstItem()};
+            base::IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<base::Pair*>(item->getValue());
                 const auto obj = dynamic_cast<Graphic*>( pair->object() );
@@ -632,7 +632,7 @@ void Graphic::setupMatrix()
 
     // Modify the matrix with all our transformations.
     if (transforms != nullptr) {
-        const base::List::Item* item{transforms->getFirstItem()};
+        const base::IList::Item* item{transforms->getFirstItem()};
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             const auto t = dynamic_cast<base::ITransform*>(p->object());
@@ -1028,7 +1028,7 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
     transforms = list;
     if (transforms != nullptr) {
         transforms->ref();
-        base::List::Item* item = transforms->getFirstItem();
+        base::IList::Item* item = transforms->getFirstItem();
         while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto ip = dynamic_cast<base::ITransform*>( pair->object() );
@@ -1063,7 +1063,7 @@ bool Graphic::setSlotSingleTransform(base::ITransform* const sobj)
 bool Graphic::setSlotTranslateLight(base::PairStream* const x)
 {
     double temp[4] { 0.0, 0.0, 1.0, 0.0 };
-    base::List::Item* item{x->getFirstItem()};
+    base::IList::Item* item{x->getFirstItem()};
     int count{};
     while (item != nullptr && count < 4) {
         const auto pair{static_cast<base::Pair*>(item->getValue())};
@@ -1205,12 +1205,12 @@ bool Graphic::setSlotVertices(const base::PairStream* const x)
 
     // Get the vertices from the pair stream
     nv = 0;
-    const base::List::Item* item{x->getFirstItem()};
+    const base::IList::Item* item{x->getFirstItem()};
     while (item != nullptr && nv < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
             const base::IObject* obj2{p->object()};
-            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            const auto msg2{dynamic_cast<const base::IList*>(obj2)};
             if (msg2 != nullptr) {
                 float values[3];
                 int n = msg2->getNumberList(values, 3);
@@ -1252,12 +1252,12 @@ bool Graphic::setSlotNormals(const base::PairStream* const x)
 
     // Get the normals from the pair stream
     nn = 0;
-    const base::List::Item* item{x->getFirstItem()};
+    const base::IList::Item* item{x->getFirstItem()};
     while (item != nullptr && nn < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
             const base::IObject* obj2{p->object()};
-            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            const auto msg2{dynamic_cast<const base::IList*>(obj2)};
             if (msg2 != nullptr) {
                 float values[3]{};
                 std::size_t n{msg2->getNumberList(values, 3)};
@@ -1300,12 +1300,12 @@ bool Graphic::setSlotTexCoord(const base::PairStream* const x)
 
     // Get the vertices from the pair stream
     ntc = 0;
-    const base::List::Item* item{x->getFirstItem()};
+    const base::IList::Item* item{x->getFirstItem()};
     while (item != nullptr && ntc < n) {
         const auto p{dynamic_cast<const base::Pair*>(item->getValue())};
         if (p != nullptr) {
             const base::IObject* obj2{p->object()};
-            const auto msg2{dynamic_cast<const base::List*>(obj2)};
+            const auto msg2{dynamic_cast<const base::IList*>(obj2)};
             if (msg2 != nullptr) {
                 float values[2];
                 std::size_t n{msg2->getNumberList(values, 2)};

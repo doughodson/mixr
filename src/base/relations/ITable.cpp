@@ -5,7 +5,7 @@
 #include "mixr/base/relations/TableStorage.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 #include <iostream>
 
@@ -20,7 +20,7 @@ BEGIN_SLOTTABLE(ITable)
 END_SLOTTABLE(ITable)
 
 BEGIN_SLOT_MAP(ITable)
-    ON_SLOT(1, setSlotDataTable, List)
+    ON_SLOT(1, setSlotDataTable, IList)
     ON_SLOT(2, setSlotExtrapolationEnabled, Boolean)
 END_SLOT_MAP()
 
@@ -153,7 +153,7 @@ void ITable::findMinMax(double* minValue, double* maxValue) const
 //------------------------------------------------------------------------------
 // loadVector() --
 //------------------------------------------------------------------------------
-bool ITable::loadVector(const List& list, double** table, unsigned int* nn)
+bool ITable::loadVector(const IList& list, double** table, unsigned int* nn)
 {
     const std::size_t n{list.entries()};
     if (n <= 0) return false;
@@ -176,7 +176,7 @@ bool ITable::loadVector(const List& list, double** table, unsigned int* nn)
 //------------------------------------------------------------------------------
 //  setDataTable() -- for Table
 //------------------------------------------------------------------------------
-bool ITable::setDataTable(const List* const sdtobj)
+bool ITable::setDataTable(const IList* const sdtobj)
 {
     bool ok {true};
     if (sdtobj != nullptr) {

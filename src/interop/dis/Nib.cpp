@@ -367,7 +367,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
             if (subcomponents != nullptr) {
 
                // Check for multi-beam jammer (each beam is a subcomponent Jammer)
-               base::List::Item* item = subcomponents->getFirstItem();
+               base::IList::Item* item = subcomponents->getFirstItem();
                while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
                   const auto pair = static_cast<base::Pair*>( item->getValue() );

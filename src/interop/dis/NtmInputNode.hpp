@@ -5,7 +5,7 @@
 #include "mixr/interop/INtmInputNode.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace interop { class Ntm; class INib; }
 namespace dis {
 class Ntm;
@@ -43,7 +43,7 @@ private:
    unsigned int level {};        // Level
    unsigned int code {};         // Code for this level
    const Ntm* ourNtm {};         // Our default NTM
-   base::List* subnodeList {};   // List of NtmInputNode nodes below this level
+   base::IList* subnodeList {};  // List of NtmInputNode nodes below this level
 };
 
 }

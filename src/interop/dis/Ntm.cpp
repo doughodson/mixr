@@ -17,7 +17,7 @@ BEGIN_SLOTTABLE(Ntm)
 END_SLOTTABLE(Ntm)
 
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotDisEntityType, base::List)
+    ON_SLOT(1, setSlotDisEntityType, base::IList)
 END_SLOT_MAP()
 
 Ntm::Ntm()
@@ -83,7 +83,7 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 // Set DIS entity type enumerations
 //------------------------------------------------------------------------------
-bool Ntm::setSlotDisEntityType(const base::List* const msg)
+bool Ntm::setSlotDisEntityType(const base::IList* const msg)
 {
    bool ok {};
    if (msg != nullptr) {

@@ -1,7 +1,7 @@
 
 #include "mixr/base/relations/Func4.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/relations/Table4.hpp"
 #include <iostream>
 

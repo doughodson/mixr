@@ -14,9 +14,9 @@ class Identifier;
 //------------------------------------------------------------------------------
 // Class: Latitude
 //
-// Description: Stores a latitude coordinate expressed in terms of a direction
-//              {north or south}, degrees, minutes and seconds.  Can convert
-//              this representation into decimal degrees.
+// Description: Concrete class that stores a latitude coordinate expressed in
+//              terms of a direction {north or south}, degrees, minutes and
+//              seconds.  Can convert this representation into decimal degrees.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -27,7 +27,7 @@ class Identifier;
 //    minutes   <INumber>     ! Set the minutes component (default: 0)
 //    seconds   <INumber>     ! Set the seconds component (default: 0.0)
 //------------------------------------------------------------------------------
-class Latitude : public IObject
+class Latitude final : public IObject
 {
    DECLARE_SUBCLASS(Latitude, IObject)
 

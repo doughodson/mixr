@@ -31,7 +31,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "EdlScanner.hpp"
 
 static mixr::base::IObject* result{};         // result of all our work (i.e., an IObject)

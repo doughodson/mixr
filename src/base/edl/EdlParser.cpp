@@ -83,7 +83,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "EdlScanner.hpp"
 
 static mixr::base::IObject* result{};         // result of all our work (i.e., an IObject)
@@ -130,7 +130,7 @@ static mixr::base::IObject* parse(const std::string& name, mixr::base::PairStrea
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            mixr::base::List::Item* item{arg_list->getFirstItem()};
+            mixr::base::IList::Item* item{arg_list->getFirstItem()};
             while (item != nullptr) {
                 mixr::base::Pair* p{static_cast<mixr::base::Pair*>(item->getValue())};
                 bool ok{obj->setSlotByName(p->slot().c_str(), p->object())};
@@ -1283,7 +1283,7 @@ yyreduce:
 
   case 17: /* numlist: number  */
 #line 191 "edl_parser.y"
-                                    { (yyval.lvalp) = new mixr::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
+                                    { (yyval.lvalp) = new mixr::base::IList(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
 #line 1288 "EdlParser.cpp"
     break;
 

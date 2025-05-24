@@ -12,11 +12,12 @@
 
 namespace mixr {
 namespace base {
-class List;
+class IList;
 
 //------------------------------------------------------------------------------
 // Class: MonitorMetrics
-// Description:  Defines the characteristics of a monitor, needed to accurately match color
+// Description: Concrete class that defines the characteristics of a monitor,
+//              needed to accurately match color
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -26,14 +27,14 @@ class List;
 //                          ! (Default: redLumTbl)
 //     green     <Table1>   ! Green luminance vs RGB level (default: greenLumTbl)
 //     blue      <Table1>   ! Blue luminance vs RGB level (default: blueLumTbl)
-//     phosphors <List>     ! Phosphor coordinates ( 6 element list, 2 each for red, green, blue )
+//     phosphors <IList>    ! Phosphor coordinates ( 6 element list, 2 each for red, green, blue )
 //                          ! (default: phosphorCoordMatrix)
-//     whiteRGB  <List>     ! RGB value of reference white ( 3 element list ) (default: whiteRGB)
-//     whiteCIE  <List>     ! CIE coordinate of reference white ( 3 element list ) (default: whiteCIE)
+//     whiteRGB  <IList>    ! RGB value of reference white ( 3 element list ) (default: whiteRGB)
+//     whiteCIE  <IList>    ! CIE coordinate of reference white ( 3 element list ) (default: whiteCIE)
 //------------------------------------------------------------------------------
 // Events: None
 //------------------------------------------------------------------------------
-class MonitorMetrics : public IObject
+class MonitorMetrics final : public IObject
 {
     DECLARE_SUBCLASS(MonitorMetrics, IObject)
 
@@ -69,9 +70,9 @@ private:
     bool setSlotRed(const Table1* const);
     bool setSlotGreen(const Table1* const);
     bool setSlotBlue(const Table1* const);
-    bool setSlotPhosphors(const List* const);
-    bool setSlotWhiteRGB(const List* const);
-    bool setSlotWhiteCIE(const List* const);
+    bool setSlotPhosphors(const IList* const);
+    bool setSlotWhiteRGB(const IList* const);
+    bool setSlotWhiteCIE(const IList* const);
 };
 
 }

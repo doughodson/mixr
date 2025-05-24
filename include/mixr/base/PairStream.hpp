@@ -2,7 +2,7 @@
 #ifndef __mixr_base_PairStream_HPP__
 #define __mixr_base_PairStream_HPP__
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include <string>
@@ -25,9 +25,9 @@ class Identifier;
 //      ...
 //      ident: <object>
 //------------------------------------------------------------------------------
-class PairStream : public List
+class PairStream : public IList
 {
-    DECLARE_SUBCLASS(PairStream, List)
+    DECLARE_SUBCLASS(PairStream, IList)
 
 public:
    PairStream();
@@ -48,10 +48,10 @@ public:
 
    // returns the n'th pair
    Pair* getPosition(const unsigned int n)    {
-      return static_cast<Pair*>(List::getPosition(n));
+      return static_cast<Pair*>(IList::getPosition(n));
    }
    const Pair* getPosition(const unsigned int n) const {
-      return static_cast<const Pair*>(List::getPosition(n));
+      return static_cast<const Pair*>(IList::getPosition(n));
    }
 
    // Returns a pointer to the pair at the head of this stream and the pair IS REMOVED
@@ -59,18 +59,18 @@ public:
    // to the caller (i.e., this routine does not unref() the pair and the caller should
    // not ref() the pair).
    Pair* get() {
-      return static_cast<Pair*>(List::get());
+      return static_cast<Pair*>(IList::get());
    }
 
    // Put 'pair' at the tail of the stream.  The Pair is referenced, ref(), by this routine.
    void put(Pair* pair1) {
-      List::put(static_cast<IObject*>(pair1));
+      IList::put(static_cast<IObject*>(pair1));
    }
 
    // removes 'pair' from this list and true is returned.  If 'pair' 'obj' is not found
    // then false is returned.  (Note: The Pair is unref() and therefore possible to delete)
    bool remove(Pair* pair1) {
-      return List::remove(static_cast<IObject*>(pair1));
+      return IList::remove(static_cast<IObject*>(pair1));
    }
 
 };

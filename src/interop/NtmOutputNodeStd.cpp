@@ -4,7 +4,7 @@
 #include "mixr/interop/INtm.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 namespace mixr {
 namespace interop {
@@ -30,8 +30,8 @@ NtmOutputNodeStd::NtmOutputNodeStd(const models::IPlayer* const p, const char* c
       tp = p;
 }
 
-   ntmList = new base::List();
-   subnodeList = new base::List();
+   ntmList = new base::IList();
+   subnodeList = new base::IList();
 }
 
 void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
@@ -117,7 +117,7 @@ const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::IPlayer* const
 
       // First, we'll search our subnodes to see if they'll find a match
       // (i.e., if it's derived from our node then there may be a better match)
-      const base::List::Item* item{subnodeList->getFirstItem()};
+      const base::IList::Item* item{subnodeList->getFirstItem()};
       while (item != nullptr && result == nullptr) {
          const NtmOutputNodeStd* subnode{static_cast<const NtmOutputNodeStd*>(item->getValue())};
          result = subnode->findNetworkTypeMapper(p);
@@ -134,7 +134,7 @@ const INtm* NtmOutputNodeStd::findNetworkTypeMapper(const models::IPlayer* const
 
          // Search the NTM for a match with the most matching type string characters,
          // but not more than the target player's type string.
-         const base::List::Item* item{ntmList->getFirstItem()};
+         const base::IList::Item* item{ntmList->getFirstItem()};
          while (item != nullptr && result == nullptr) {
 
             // Get the template player and its type string with length
@@ -183,7 +183,7 @@ bool NtmOutputNodeStd::add2OurLists(INtm* const tgtNtm)
       if (ok) {
          // Yes -- check to see if it really belongs to one of our subnodes.
          bool found{};
-         base::List::Item* item{subnodeList->getFirstItem()};
+         base::IList::Item* item{subnodeList->getFirstItem()};
          while (item != nullptr && !found) {
             NtmOutputNodeStd* subnode{static_cast<NtmOutputNodeStd*>(item->getValue())};
             found = subnode->add2OurLists(tgtNtm);
@@ -228,7 +228,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(INtm* const tgtNtm)
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
-         base::List::Item* item{subnodeList->getFirstItem()};
+         base::IList::Item* item{subnodeList->getFirstItem()};
          while (item != nullptr) {
             const auto subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
@@ -261,7 +261,7 @@ bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
       newNtm->ref();
 
       // Create a new List::Item to contain this Ntm
-      const auto newItem = new base::List::Item();
+      const auto newItem = new base::IList::Item();
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm
@@ -271,7 +271,7 @@ bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
 
       bool inserted{};
       bool err{};
-      base::List::Item* refItem{ntmList->getFirstItem()};
+      base::IList::Item* refItem{ntmList->getFirstItem()};
       while (refItem != nullptr && !inserted && !err) {
 
          // Get the ref player's string from the 'ref' Ntm.

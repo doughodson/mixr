@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Integer; class String; class List; }
+namespace base { class Integer; class String; class IList; }
 namespace graphics { class Texture; }
 namespace rpf {
 class CadrgFile;
@@ -193,7 +193,7 @@ private:
     CadrgFile* curCadrgFile {};                 // The current CADRG file we are using
     base::PairStream* pathNames {};             // Holds our path names for the directories of our files
     int maxTableSize {};                        // Our max table size
-    base::List* stack {};                       // Stack of unused frames
+    base::IList* stack {};                      // Stack of unused frames
     ColorArray outTile;                         // Holds the tile color information
     base::String* mapLevel {};                  // Our map "level" we are ("1:500K", etc..)
     bool initLevelLoaded {};                    // Has our initial map level been loaded?

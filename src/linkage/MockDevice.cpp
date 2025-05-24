@@ -3,7 +3,7 @@
 
 #include "mixr/linkage/generators/IGenerator.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -46,7 +46,7 @@ void MockDevice::processInputsImpl(const double dt, base::IIoData* const inData)
 {
    // process any input generators
    if (generators != nullptr) {
-      base::List::Item* item{generators->getFirstItem()};
+      base::IList::Item* item{generators->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<IGenerator*>(pair->object());
@@ -64,7 +64,7 @@ bool MockDevice::setSlotGenerators(base::PairStream* const list)
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O adapters
       int cnt{};
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());

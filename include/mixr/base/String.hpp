@@ -17,7 +17,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: String
-// Description: Character string class
+// Description: Concrete character string class
 //------------------------------------------------------------------------------
 // EDL Interface:
 //

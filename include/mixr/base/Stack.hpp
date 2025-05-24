@@ -2,23 +2,23 @@
 #ifndef __mixr_base_Stack_HPP__
 #define __mixr_base_Stack_HPP__
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Stack
-// Description: Stacks of objects
+// Description: Concrete class that defines a stack of objects
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: Stack
 // Slots: none
 //------------------------------------------------------------------------------
-class Stack : public List
+class Stack final : public IList
 {
-    DECLARE_SUBCLASS(Stack, List)
+    DECLARE_SUBCLASS(Stack, IList)
 
 public:
     Stack();
@@ -34,25 +34,25 @@ public:
 
 inline void Stack::push(IObject* object)
 {
-    List::addHead(object);
+    IList::addHead(object);
 }
 
 inline IObject* Stack::pop()
 {
-    return List::removeHead();
+    return IList::removeHead();
 }
 
 inline int Stack::operator==(const Stack& list) const
 {
-    const List* s1 = this;
-    const List* s2 = &list;
+    const IList* s1 = this;
+    const IList* s2 = &list;
     return *s1 == *s2;
 }
 
 inline int Stack::operator!=(const Stack& list) const
 {
-    const List* s1 = this;
-    const List* s2 = &list;
+    const IList* s1 = this;
+    const IList* s2 = &list;
     return *s1 != *s2;
 }
 

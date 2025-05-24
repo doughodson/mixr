@@ -9,16 +9,17 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Locus
-// Description: A line of evenly spaced data points in a specific direction and
-//              range from a reference point.  Or according to Webster, "Set of
-//              all points whose location is determined by stated conditions"
+// Description: Concrete class that a line of evenly spaced data points in a
+//              specific direction and range from a reference point.  Or according
+//              to Webster, "Set of all points whose location is determined by
+//              stated conditions"
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
 // Factory name: Locus
 // Slots: none
 //------------------------------------------------------------------------------
-class Locus : public IObject
+class Locus final: public IObject
 {
     DECLARE_SUBCLASS(Locus, IObject)
 

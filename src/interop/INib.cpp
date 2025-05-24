@@ -532,7 +532,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
             if (sm != nullptr) {
                const base::PairStream* stores{sm->getStores()};
                if (stores != nullptr) {
-                  const base::List::Item* item{stores->getFirstItem()};
+                  const base::IList::Item* item{stores->getFirstItem()};
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
                      const auto pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {

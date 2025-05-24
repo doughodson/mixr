@@ -5,7 +5,7 @@
 #include "mixr/graphics/readouts/IReadout.hpp"
 
 namespace mixr {
-namespace base { class IObject; class List; class String; }
+namespace base { class IObject; class IList; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ public:
 private:
    // slot table helper methods
    bool setSlotTextString(const base::String* const);
-   bool setSlotTextList(const base::List* const);
+   bool setSlotTextList(const base::IList* const);
 };
 
 }

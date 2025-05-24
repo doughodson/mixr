@@ -166,7 +166,7 @@ void IComponent::reset()
             if (selected != nullptr) selected->reset();
         } else {
             // When we should reset them all
-            List::Item* item{subcomponents->getFirstItem()};
+            IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<IComponent*>(pair->object());
@@ -251,7 +251,7 @@ void IComponent::updateTC(const double dt)
             if (selected != nullptr) selected->tcFrame(dt);
         } else {
             // When we should update them all
-            List::Item* item{subcomponents->getFirstItem()};
+            IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<IComponent*>( pair->object() );
@@ -277,7 +277,7 @@ void IComponent::updateData(const double dt)
             if (selected != nullptr) selected->updateData(dt);
         } else {
             // When we should update them all
-            List::Item* item{subcomponents->getFirstItem()};
+            IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto pair = static_cast<Pair*>(item->getValue());
                 const auto obj = static_cast<IComponent*>(pair->object());
@@ -336,7 +336,7 @@ bool IComponent::shutdownNotification()
    // Tell all of our components
    PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
-      List::Item* item{subcomponents->getFirstItem()};
+      IList::Item* item{subcomponents->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto p = static_cast<IComponent*>(pair->object());
@@ -433,7 +433,7 @@ const Pair* IComponent::findByName(const std::string& slotname) const
         if (q == nullptr && slotname[0] != '.') {
             // No, its not one of our components and its not a hard name,
             //  so check our components' components
-            const List::Item* item {subcomponents->getFirstItem()};
+            const IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr && q == nullptr) {
                 const auto p = static_cast<const Pair*>(item->getValue());
                 const auto obj = static_cast<const IComponent*>(p->object());
@@ -496,7 +496,7 @@ const Pair* IComponent::findByType(const std::type_info& type) const
     const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
         q = subcomponents->findByType(type);
-        const List::Item* item{subcomponents->getFirstItem()};
+        const IList::Item* item{subcomponents->getFirstItem()};
         while (item != nullptr && q == nullptr) {
             const auto p = static_cast<const Pair*>(item->getValue());
             const auto obj = static_cast<const IComponent*>(p->object());
@@ -537,7 +537,7 @@ const std::string IComponent::findNameOfComponent(const IComponent* const p) con
 
             // Not found, so check our children's components ...
 
-            const List::Item* item{subcomponents->getFirstItem()};
+            const IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr && name.empty()) {
                 const auto pair = static_cast<const Pair*>(item->getValue());
                 const auto child = static_cast<const IComponent*>(pair->object());
@@ -604,7 +604,7 @@ void IComponent::processComponents(
    if (list != nullptr) {
 
       // Add the (filtered) components to the new list and set their container
-      List::Item* item{list->getFirstItem()};
+      IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<Pair*>(item->getValue());
          const auto cp = dynamic_cast<IComponent*>( pair->object() );

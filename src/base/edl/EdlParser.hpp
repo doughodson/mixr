@@ -77,7 +77,7 @@ union YYSTYPE
    mixr::base::IObject*       ovalp;
    mixr::base::Pair*          pvalp;
    mixr::base::PairStream*    svalp;
-   mixr::base::List*          lvalp;
+   mixr::base::IList*         lvalp;
    mixr::base::INumber*       nvalp;
 
 #line 84 "EdlParser.hpp"

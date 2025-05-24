@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Table4)
 END_SLOTTABLE(Table4)
 
 BEGIN_SLOT_MAP(Table4)
-    ON_SLOT(1, setWBreakpoints4, List)
+    ON_SLOT(1, setWBreakpoints4, IList)
 END_SLOT_MAP()
 
 Table4::Table4() : Table3()
@@ -84,7 +84,7 @@ void Table4::deleteData()
 //             { { [ 4211 4212 4213 ] [ 4221 4222 4223 ] [ 4231 4232 4233 ] } }
 //             { { [ 4311 4312 4313 ] [ 4321 4322 4323 ] [ 4331 4332 4333 ] } } }
 //------------------------------------------------------------------------------
-bool Table4::loadData(const List& list, double* const table)
+bool Table4::loadData(const IList& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     const std::size_t n1{list.entries()};
@@ -93,11 +93,11 @@ bool Table4::loadData(const List& list, double* const table)
     // Process each item in the list
     unsigned int i{};
     unsigned int k{BaseClass::tableSize()};
-    const List::Item* item{list.getFirstItem()};
+    const IList::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const IList*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -241,7 +241,7 @@ double Table4::lfi(const double iv1, const double iv2, const double iv3, const d
 //------------------------------------------------------------------------------
 // setWBreakpoints4() -- For Table4
 //------------------------------------------------------------------------------
-bool Table4::setWBreakpoints4(const List* const swb4obj)
+bool Table4::setWBreakpoints4(const IList* const swb4obj)
 {
     if (swb4obj != nullptr) {
         loadVector(*swb4obj, &wtable, &nw);

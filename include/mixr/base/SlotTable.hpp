@@ -7,7 +7,7 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: SlotTable
-// Description: Table of slot names (see Object.hpp)
+// Description: Concrete class that defines a table of slot names (see IObject.hpp)
 //------------------------------------------------------------------------------
 // Notes:
 //    Slot tables define the names of the slots (i.e., attributes) accepted by
@@ -22,7 +22,7 @@ namespace base {
 //    Slot tables are usually defined using the macros BEGIN_SLOTTABLE and
 //    END_SLOTTABLE (see macros.hpp).
 //------------------------------------------------------------------------------
-class SlotTable
+class SlotTable final
 {
 public:
    SlotTable() = default;

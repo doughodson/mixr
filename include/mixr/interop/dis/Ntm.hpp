@@ -6,7 +6,7 @@
 #include "mixr/interop/dis/NetIO.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ namespace dis {
 //
 // Factory name: DisNtm
 // Slots:
-//    disEntityType  <base::List>  ! DIS Entity type vector:
+//    disEntityType  <base::IList> ! DIS Entity type vector:
 //                                 !  [ kind domain country category subcategory specific extra ]
 //                                 !  example: [ 1 2 333 4 5 6 7 ]
 //
@@ -65,7 +65,7 @@ private:
 
 private:
    // slot table helper methods
-   virtual bool setSlotDisEntityType(const base::List* const);         // Sets DIS entity type enumerations
+   virtual bool setSlotDisEntityType(const base::IList* const);         // Sets DIS entity type enumerations
 };
 
 }

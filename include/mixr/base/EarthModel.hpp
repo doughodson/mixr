@@ -11,8 +11,9 @@ class INumber;
 
 //------------------------------------------------------------------------------
 // Class: EarthModel
-// Description: Contains the major axis, minor axis and flattening terms used to
-//              describe an ellipsoidal or a spherical earth model.
+// Description: Concrete class that contains the major axis, minor axis and
+//              flattening terms used to describe an ellipsoidal or a
+//              spherical earth model.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -22,7 +23,7 @@ class INumber;
 //     b    <ILength>    ! Semi minor axis
 //     f    <INumber>    ! Flattening
 //------------------------------------------------------------------------------
-class EarthModel : public IObject
+class EarthModel final: public IObject
 {
    DECLARE_SUBCLASS(EarthModel, IObject)
 

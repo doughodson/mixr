@@ -6,7 +6,7 @@
 #include "TextureTable.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace rpf {
 class CadrgMap;
 class CadrgTocEntry;
@@ -77,7 +77,7 @@ private:
     void reuseTextures();
     void loadNewTextures();
 
-    base::List* stack {};
+    base::IList* stack {};
 
     TextureTable table;
     int maxTableSize {};

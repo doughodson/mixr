@@ -1,7 +1,7 @@
 
 #include "NtmInputNode.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/Ntm.hpp"
 
@@ -20,7 +20,7 @@ NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm
       ourNtm = ntm;
       ourNtm->ref();
    }
-   subnodeList = new base::List();
+   subnodeList = new base::IList();
 }
 
 void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
@@ -123,7 +123,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // First, if we're not the last 'extra' level then search
          // our subnodes to see if they can find a match
          if (level < EXTRA_LVL) {
-            const base::List::Item* item{subnodeList->getFirstItem()};
+            const base::IList::Item* item{subnodeList->getFirstItem()};
             while (item != nullptr && result == nullptr) {
                const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
@@ -245,7 +245,7 @@ bool NtmInputNode::add2OurLists(interop::INtm* const ntm)
 
             // make sure the terminal node doesn't already exist.
             bool alreadyExists {};
-            const base::List::Item* item {subnodeList->getFirstItem()};
+            const base::IList::Item* item {subnodeList->getFirstItem()};
             while (item != nullptr && !alreadyExists) {
                //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                const NtmInputNode* csubnode {static_cast<const NtmInputNode*>(item->getValue())};
@@ -277,7 +277,7 @@ bool NtmInputNode::add2OurLists(interop::INtm* const ntm)
          // Case #3; if we're at a level less than the 'specific' level, so try
          // to add the NTM to one of our existing subnodes.
          if (!ok && !err && level < SPECIFIC_LVL) {
-            const base::List::Item* item {subnodeList->getFirstItem()};
+            const base::IList::Item* item {subnodeList->getFirstItem()};
             while (item != nullptr && !ok) {
                //NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                const NtmInputNode* csubnode = static_cast<const NtmInputNode*>(item->getValue());

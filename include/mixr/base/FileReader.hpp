@@ -13,7 +13,7 @@ class String;
 
 //------------------------------------------------------------------------------
 // Class: FileReader
-// Description: Manages the reading of fixed record length files
+// Description: Concrete class that manages the reading of fixed record length files
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
@@ -36,7 +36,7 @@ class String;
 //
 //  4) The file name and path names are limited to 255 characters.
 //------------------------------------------------------------------------------
-class FileReader : public IObject
+class FileReader final : public IObject
 {
    DECLARE_SUBCLASS(FileReader, IObject)
 

@@ -170,7 +170,7 @@ void Page::reset()
    BaseClass::reset();
    if (subpages != nullptr) {
       // reset all of our sub-pages
-      base::List::Item* item{subpages->getFirstItem()};
+      base::IList::Item* item{subpages->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto obj = static_cast<IComponent*>(pair->object());
@@ -456,7 +456,7 @@ bool Page::processSubpages()
    if (subpages != nullptr) {
       // Make sure we have only Pages and tell all of the pages
       // that we are their container.
-      const base::List::Item* item{subpages->getFirstItem()};
+      const base::IList::Item* item{subpages->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();

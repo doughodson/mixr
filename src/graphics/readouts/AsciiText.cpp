@@ -1,7 +1,7 @@
 
 #include "mixr/graphics/readouts/AsciiText.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {
@@ -17,7 +17,7 @@ END_SLOTTABLE(AsciiText)
 
 BEGIN_SLOT_MAP(AsciiText)
    ON_SLOT(1,setSlotTextString, base::String)
-   ON_SLOT(1,setSlotTextList,   base::List)
+   ON_SLOT(1,setSlotTextList,   base::IList)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(AsciiText)
@@ -48,7 +48,7 @@ bool AsciiText::setSlotTextString(const base::String* const x)
 }
 
 // takes in a list of ascii numbers
-bool AsciiText::setSlotTextList(const base::List* const x)
+bool AsciiText::setSlotTextList(const base::IList* const x)
 {
    bool ok {true};
    float values[256] {};

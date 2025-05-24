@@ -17,7 +17,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -465,7 +465,7 @@ void INetIO::updateOutputList()
          // For all players
          bool finished{};
          unsigned int newCount{};
-         base::List::Item* playerItem{players->getFirstItem()};
+         base::IList::Item* playerItem{players->getFirstItem()};
          while (playerItem != nullptr && !finished) {
 
             // Get player list items
@@ -1117,7 +1117,7 @@ bool INetIO::setSlotInputEntityTypes(base::PairStream* const msg)
        clearInputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item{msg->getFirstItem()};
+       base::IList::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           const auto ntm = dynamic_cast<INtm*>( pair->object() );
@@ -1142,7 +1142,7 @@ bool INetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
        clearOutputEntityTypes();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item{msg->getFirstItem()};
+       base::IList::Item* item{msg->getFirstItem()};
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           const auto ntm = dynamic_cast<INtm*>( pair->object() );

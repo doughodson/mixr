@@ -4,7 +4,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"
 
@@ -35,12 +35,12 @@ END_SLOTTABLE(IFont)
 BEGIN_SLOT_MAP(IFont)
     ON_SLOT(1, setSlotFontWidth,        base::INumber)
     ON_SLOT(2, setSlotFontHeight,       base::INumber)
-    ON_SLOT(3, setSlotFontPosition,     base::List)
+    ON_SLOT(3, setSlotFontPosition,     base::IList)
     ON_SLOT(4, setSlotBitmapWidth,      base::Integer)
     ON_SLOT(5, setSlotBitmapHeight,     base::Integer)
     ON_SLOT(6, setSlotFontPath,         base::String)
     ON_SLOT(7, setSlotFTGLFontFileName, base::String)
-    ON_SLOT(8, setSlotLookupTable,      base::List)
+    ON_SLOT(8, setSlotLookupTable,      base::IList)
     ON_SLOT(9, setSlotCharacterSpacing, base::INumber);
     ON_SLOT(10, setSlotLineSpacing,     base::INumber);
 END_SLOT_MAP()
@@ -192,7 +192,7 @@ bool IFont::setSlotFontHeight (const base::INumber* const x)
 //------------------------------------------------------------------------------
 //  setSlotFontPosition() - sets the font position
 //------------------------------------------------------------------------------
-bool IFont::setSlotFontPosition (const base::List* const x)
+bool IFont::setSlotFontPosition (const base::IList* const x)
 {
     bool ok{true};
     if (x != nullptr) {
@@ -273,7 +273,7 @@ bool IFont::setSlotFTGLFontFileName(const base::String* const x)
 //------------------------------------------------------------------------------
 //  setSlotLookupTable() - sets the lookup table
 //------------------------------------------------------------------------------
-bool IFont::setSlotLookupTable(const base::List* const x)
+bool IFont::setSlotLookupTable(const base::IList* const x)
 {
     // Load the LUT
     if (pLUT == nullptr) pLUT = new unsigned char[LUT_SIZE];

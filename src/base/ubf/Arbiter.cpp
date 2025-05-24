@@ -23,7 +23,7 @@ END_SLOT_MAP()
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
-   behaviors = new base::List();
+   behaviors = new base::IList();
 }
 
 void Arbiter::deleteData()
@@ -38,10 +38,10 @@ void Arbiter::deleteData()
 IAction* Arbiter::genAction(const IState* const state, const double dt)
 {
    // create list for action set
-   const auto actionSet{new base::List()};
+   const auto actionSet{new base::IList()};
 
    // fill out list of recommended actions by behaviors
-   base::List::Item* item{behaviors->getFirstItem()};
+   base::IList::Item* item{behaviors->getFirstItem()};
    while (item != nullptr) {
       // get a behavior
       const auto behavior{static_cast<IBehavior*>(item->getValue())};
@@ -72,13 +72,13 @@ IAction* Arbiter::genAction(const IState* const state, const double dt)
 //------------------------------------------------------------------------------
 // Default: select the action with the highest vote
 //------------------------------------------------------------------------------
-IAction* Arbiter::genComplexAction(base::List* const actionSet)
+IAction* Arbiter::genComplexAction(base::IList* const actionSet)
 {
    IAction* complexAction{};
    int maxVote{};
 
    // process entire action set
-   base::List::Item* item{actionSet->getFirstItem()};
+   base::IList::Item* item{actionSet->getFirstItem()};
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
@@ -127,7 +127,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
 
    // First, make sure they are all behaviors
    {
-      base::List::Item* item{x->getFirstItem()};
+      base::IList::Item* item{x->getFirstItem()};
       while (item != nullptr && ok) {
          const auto pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
@@ -142,7 +142,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
 
    // next, add behaviors to our list
    if (ok) {
-      base::List::Item* item{x->getFirstItem()};
+      base::IList::Item* item{x->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();

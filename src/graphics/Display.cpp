@@ -224,7 +224,7 @@ void Display::updateTC(const double dt)
 
    // Update any sub-displays ...
    if (subdisplays != nullptr) {
-      base::List::Item* item{subdisplays->getFirstItem()};
+      base::IList::Item* item{subdisplays->getFirstItem()};
       while (item != nullptr) {
          const auto pair = dynamic_cast<base::Pair*>(item->getValue());
          if (pair != nullptr) {
@@ -244,7 +244,7 @@ void Display::reset()
    BaseClass::reset();
    if (subdisplays != nullptr) {
       // Reset all of our sub-displays
-      base::List::Item* item{subdisplays->getFirstItem()};
+      base::IList::Item* item{subdisplays->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto obj = static_cast<IComponent*>(pair->object());
@@ -1699,7 +1699,7 @@ bool Display::processSubdisplays()
 {
    bool ok {true};
    if (subdisplays != nullptr) {
-      const base::List::Item* item {subdisplays->getFirstItem()};
+      const base::IList::Item* item {subdisplays->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1727,7 +1727,7 @@ bool Display::processTextures()
 {
    bool ok {true};
    if (textures != nullptr) {
-      const base::List::Item* item {textures->getFirstItem()};
+      const base::IList::Item* item {textures->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1752,7 +1752,7 @@ bool Display::processMaterials()
 {
    bool ok {true};
    if (materials != nullptr) {
-      const base::List::Item* item {materials->getFirstItem()};
+      const base::IList::Item* item {materials->getFirstItem()};
       while (ok && item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
@@ -1837,7 +1837,7 @@ void Display::configure()
 void Display::loadTextures()
 {
    if (textures != nullptr) {
-      const base::List::Item* item {textures->getFirstItem()};
+      const base::IList::Item* item {textures->getFirstItem()};
       while (item != nullptr) {
          const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();

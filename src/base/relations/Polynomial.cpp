@@ -1,7 +1,7 @@
 
 #include "mixr/base/relations/Polynomial.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -14,7 +14,7 @@ BEGIN_SLOTTABLE(Polynomial)
 END_SLOTTABLE(Polynomial)
 
 BEGIN_SLOT_MAP(Polynomial)
-    ON_SLOT( 1, setSlotCoefficients, List)
+    ON_SLOT( 1, setSlotCoefficients, IList)
 END_SLOT_MAP()
 
 Polynomial::Polynomial()
@@ -83,7 +83,7 @@ bool Polynomial::setCoefficients(const double* const aa, const int mm)
    return ok;
 }
 
-bool Polynomial::setSlotCoefficients(const List* const msg)
+bool Polynomial::setSlotCoefficients(const IList* const msg)
 {
    bool ok {};
 

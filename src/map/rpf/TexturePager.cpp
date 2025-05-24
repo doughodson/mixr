@@ -4,7 +4,7 @@
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/map/rpf/CadrgMap.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 namespace mixr {
 namespace rpf {
@@ -64,7 +64,7 @@ void TexturePager::setSize(int tableSize)
     if (stack != nullptr) {
         stack->clear();
     }
-    else stack = new base::List();
+    else stack = new base::IList();
 
     for (int i = 0; i < size; i++) {
         const auto t = new graphics::Texture();
@@ -225,7 +225,7 @@ void TexturePager::loadNewTextures()
                     graphics::Texture* texObj {table.getTexture(r, c)};
                     if (texObj == nullptr && map->isValidFrame(r + row, c + col, this)) {
                         if (stack != nullptr) {
-                            base::List::Item* item {stack->getFirstItem()};
+                            base::IList::Item* item {stack->getFirstItem()};
                             if (item != nullptr) {
                                 const auto obj = dynamic_cast<graphics::Texture*>(item->getValue());
                                 if (obj != nullptr) {

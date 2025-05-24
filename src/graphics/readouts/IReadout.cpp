@@ -6,7 +6,7 @@
 #include "mixr/graphics/Display.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/colors/Rgb.hpp"
@@ -34,7 +34,7 @@ BEGIN_SLOTTABLE(IReadout)
 END_SLOTTABLE(IReadout)
 
 BEGIN_SLOT_MAP(IReadout)
-    ON_SLOT(1,  setSlotPosition,      base::List)
+    ON_SLOT(1,  setSlotPosition,      base::IList)
     ON_SLOT(2,  setSlotWidth,         base::Integer)
     ON_SLOT(3,  setSlotHighlight,     base::Boolean)
     ON_SLOT(4,  setSlotUnderline,     base::Boolean)
@@ -65,7 +65,7 @@ BEGIN_EVENT_HANDLER(IReadout)
             }
         }
     }
-    ON_EVENT_OBJ(SET_POSITION,      setPosition,          base::List)
+    ON_EVENT_OBJ(SET_POSITION,      setPosition,          base::IList)
     ON_EVENT_OBJ(SET_LINE,          onSetLine,            base::Integer)
     ON_EVENT_OBJ(SET_COLUMN,        onSetColumn,          base::Integer)
     ON_EVENT_OBJ(SET_WIDTH,         setSlotWidth,         base::Integer)
@@ -460,7 +460,7 @@ void IReadout::drawFunc()
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
 //------------------------------------------------------------------------------
-bool IReadout::setPosition(const base::List* const x)
+bool IReadout::setPosition(const base::IList* const x)
 {
     bool ok {true};
     if (x != nullptr) {
@@ -491,7 +491,7 @@ bool IReadout::onSetColumn(const base::Integer* const x)
    return true;
 }
 
-bool IReadout::setSlotPosition(const base::List* const x)
+bool IReadout::setSlotPosition(const base::IList* const x)
 {
    return setPosition(x);
 }
@@ -514,7 +514,7 @@ bool IReadout::setSlotHighlight(const base::Boolean* const x)
 
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-            const base::List::Item* item {subcomponents->getFirstItem()};
+            const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
                 const auto child{dynamic_cast<IReadout*>(p->object())};
@@ -542,7 +542,7 @@ bool IReadout::setSlotUnderline(const base::Boolean* const x)
         // Set our children's mode
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-            const base::List::Item* item {subcomponents->getFirstItem()};
+            const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
                 const auto child{dynamic_cast<IReadout*>(p->object())};
@@ -571,7 +571,7 @@ bool IReadout::setSlotReversed(const base::Boolean* const x)
         // Set our children's mode
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-            const base::List::Item* item {subcomponents->getFirstItem()};
+            const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
                 const auto child{dynamic_cast<IReadout*>(p->object())};
@@ -652,7 +652,7 @@ bool IReadout::setSlotJustification(const base::Identifier* const x)
         // Set our children's justification
         base::PairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
-            const base::List::Item* item{subcomponents->getFirstItem()};
+            const base::IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
                 const auto p{const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()))};
                 const auto child{dynamic_cast<IReadout*>(p->object())};

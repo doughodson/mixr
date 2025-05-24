@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Table3)
 END_SLOTTABLE(Table3)
 
 BEGIN_SLOT_MAP(Table3)
-    ON_SLOT(1, setZBreakpoints3, List)
+    ON_SLOT(1, setZBreakpoints3, IList)
 END_SLOT_MAP()
 
 Table3::Table3() : Table2()
@@ -71,7 +71,7 @@ void Table3::deleteData()
 //             { [ 211 212 213 ] [ 221 222 223 ] [ 231 232 233 ] }
 //             { [ 311 312 313 ] [ 321 322 323 ] [ 331 332 333 ] } }
 //------------------------------------------------------------------------------
-bool Table3::loadData(const List& list, double* const table)
+bool Table3::loadData(const IList& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     const std::size_t n1{list.entries()};
@@ -80,11 +80,11 @@ bool Table3::loadData(const List& list, double* const table)
     // Process each item in the list
     unsigned int i{};
     unsigned int k{BaseClass::tableSize()};
-    const List::Item* item{list.getFirstItem()};
+    const IList::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const IList*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -197,7 +197,7 @@ double Table3::lfi(const double iv1, const double iv2, const double iv3, IFStora
 //------------------------------------------------------------------------------
 // setZBreakpoints3() -- for Table3
 //------------------------------------------------------------------------------
-bool Table3::setZBreakpoints3(const List* const szb3obj)
+bool Table3::setZBreakpoints3(const IList* const szb3obj)
 {
     if (szb3obj != nullptr) {
         loadVector(*szb3obj, &ztable, &nz);

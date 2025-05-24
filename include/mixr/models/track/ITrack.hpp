@@ -4,7 +4,7 @@
 
 #include "mixr/base/IObject.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Vec4d"
 

@@ -10,10 +10,11 @@ class SlotTable;
 
 //------------------------------------------------------------------------------
 // Class: MetaObject
-// Description: MetaObject about class attributes and object instances.  This includes its name,
-//              slot table, and even the number of them in existance
+// Description: Concrete class that defines attributes and object instances.
+//              This includes its name, slot table, and even the number of them
+//              in existance.
 //------------------------------------------------------------------------------
-class MetaObject
+class MetaObject final
 {
 public:
    MetaObject() = default;

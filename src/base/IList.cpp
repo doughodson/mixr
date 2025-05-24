@@ -1,5 +1,5 @@
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -10,15 +10,15 @@
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(List, "List")
-EMPTY_SLOTTABLE(List)
+IMPLEMENT_SUBCLASS(IList, "IList")
+EMPTY_SLOTTABLE(IList)
 
-List::List()
+IList::IList()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const double values[], const std::size_t nv)
+IList::IList(const double values[], const std::size_t nv)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -30,7 +30,7 @@ List::List(const double values[], const std::size_t nv)
     }
 }
 
-List::List(const int values[], const std::size_t nv)
+IList::IList(const int values[], const std::size_t nv)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -42,7 +42,7 @@ List::List(const int values[], const std::size_t nv)
     }
 }
 
-void List::copyData(const List& org, const bool)
+void IList::copyData(const IList& org, const bool)
 {
     BaseClass::copyData(org);
 
@@ -60,13 +60,13 @@ void List::copyData(const List& org, const bool)
     }
 }
 
-void List::deleteData()
+void IList::deleteData()
 {
     clear();
 }
 
 // is this a valid List
-bool List::isValid() const
+bool IList::isValid() const
 {
     bool ok{IObject::isValid()};
     for (const Item* d = headP; ok && d != nullptr; d = d->getNext() ) {
@@ -81,7 +81,7 @@ bool List::isValid() const
 }
 
 // clear out (or empty) the list
-void List::clear()
+void IList::clear()
 {
     // Empty out the list ...
     while (!isEmpty()) {
@@ -97,7 +97,7 @@ void List::clear()
 
 
 // find object on the list
-std::size_t List::getIndex(const IObject* const x) const
+std::size_t IList::getIndex(const IObject* const x) const
 {
     const Item* p{};
     std::size_t idx{};
@@ -112,7 +112,7 @@ std::size_t List::getIndex(const IObject* const x) const
 }
 
 // adds object to the head of the list.
-void List::addHead(IObject* const obj)
+void IList::addHead(IObject* const obj)
 {
     if (obj == nullptr) return;
     const auto d = new Item;
@@ -122,7 +122,7 @@ void List::addHead(IObject* const obj)
 }
 
 // adds object to the tail of the list.
-void List::addTail(IObject* const obj)
+void IList::addTail(IObject* const obj)
 {
     if (obj == nullptr) return;
     const auto d = new Item;
@@ -132,7 +132,7 @@ void List::addTail(IObject* const obj)
 }
 
 // removes object from the list.
-bool List::remove(const IObject* const obj)
+bool IList::remove(const IObject* const obj)
 {
     bool ok{};
     if (obj != nullptr) {
@@ -159,7 +159,7 @@ bool List::remove(const IObject* const obj)
 //      The number of values placed in 'values' is returned by
 //      getNumberList().
 //------------------------------------------------------------------------------
-std::size_t List::getNumberList(double values[], const std::size_t max) const
+std::size_t IList::getNumberList(double values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
@@ -181,7 +181,7 @@ std::size_t List::getNumberList(double values[], const std::size_t max) const
     return n;
 }
 
-std::size_t List::getNumberList(float values[], const std::size_t max) const
+std::size_t IList::getNumberList(float values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
@@ -204,7 +204,7 @@ std::size_t List::getNumberList(float values[], const std::size_t max) const
 }
 
 
-std::size_t List::getNumberList(int values[], const std::size_t max) const
+std::size_t IList::getNumberList(int values[], const std::size_t max) const
 {
     std::size_t n{};
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
@@ -228,7 +228,7 @@ std::size_t List::getNumberList(int values[], const std::size_t max) const
 }
 
 // removes the item at the head of the list. (Ownership is passed to caller -- does not unref())
-IObject* List::removeHead()
+IObject* IList::removeHead()
 {
     IObject* p{};
     if (headP != nullptr) {
@@ -244,7 +244,7 @@ IObject* List::removeHead()
 }
 
 // removes the item at the tail of the list. (Ownership passed to caller -- does not unref())
-IObject* List::removeTail()
+IObject* IList::removeTail()
 {
     IObject* p{};
     if (tailP != nullptr) {
@@ -261,7 +261,7 @@ IObject* List::removeTail()
 
 // insert a new item before 'refItem'.  If 'refItem' is
 // nullptr, the new item is added to the tail of the list.
-bool List::insert(List::Item* newItem, List::Item* refItem)
+bool IList::insert(IList::Item* newItem, IList::Item* refItem)
 {
     bool ok{true};
     if (refItem != nullptr) {
@@ -281,7 +281,7 @@ bool List::insert(List::Item* newItem, List::Item* refItem)
 }
 
 // removes the Item from the list. (Ownership passed to caller -- does not unref())
-IObject* List::remove(List::Item* item)
+IObject* IList::remove(IList::Item* item)
 {
     IObject* value{};
     if (headP == item)
@@ -301,7 +301,7 @@ IObject* List::remove(List::Item* item)
 }
 
 // adds the Item to the head of the list.
-void List::addHead(List::Item* item)
+void IList::addHead(IList::Item* item)
 {
     item->previous = nullptr;
     item->next = headP;
@@ -312,7 +312,7 @@ void List::addHead(List::Item* item)
 }
 
 // adds the Item to the tail of the list.
-void List::addTail(List::Item* item)
+void IList::addTail(IList::Item* item)
 {
     item->next = nullptr;
     item->previous = tailP;
@@ -323,7 +323,7 @@ void List::addTail(List::Item* item)
 }
 
 // returns true if two lists are equal.
-bool List::operator==(const List& l) const
+bool IList::operator==(const IList& l) const
 {
    if (entries() != l.entries()) return false;
 
@@ -338,13 +338,13 @@ bool List::operator==(const List& l) const
 }
 
 // returns true if two lists are NOT equal.
-bool List::operator!=(const List& l) const
+bool IList::operator!=(const IList& l) const
 {
     return !(*this == l);
 }
 
 // returns the object at the n'th position; w/o next pointer
-const IObject* List::getPosition1(const std::size_t n) const
+const IObject* IList::getPosition1(const std::size_t n) const
 {
     if (n < 1 || n > num) return nullptr;
     std::size_t i{1};

@@ -9,7 +9,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class List; }
+namespace base { class Identifier; class Integer; class IList; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ namespace graphics {
 //
 // Factory name: IReadout
 // Slots:
-//      position       <List>        ! starting position ( Line Column ) (default: 0)
+//      position       <IList>       ! starting position ( Line Column ) (default: 0)
 //      width          <Integer>     ! field width (default: 0)
 //      highLight      <Boolean>     ! highlight text flag  (display mode = 0x1001, default: false)
 //      underline      <Boolean>     ! underlined text flag  (display mode = 0x1002, default: false)
@@ -81,7 +81,7 @@ public:
    base::Justify justification() const;                                // returns current justification mode
    base::Justify justification(const base::Justify);                   // sets justification
 
-   virtual bool setPosition(const base::List* const);                  // set position to [Line Column]
+   virtual bool setPosition(const base::IList* const);                 // set position to [Line Column]
 
    // returns true if location specified is within the current field.
    virtual bool withinField(const int ln, const int cp) const;
@@ -160,7 +160,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotPosition(const base::List* const);
+   bool setSlotPosition(const base::IList* const);
    bool setSlotWidth(const base::Integer* const);
    bool setSlotHighlight(const base::Boolean* const);
    bool setSlotUnderline(const base::Boolean* const);

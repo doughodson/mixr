@@ -90,7 +90,7 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
     if (x != nullptr) {
         if (x->entries() != 3) std::cout << "SolenoidSwitch::setSlotEventMap() - Need 3 eventIds for the button, will not send eventIds for the ones without it" << std::endl;
         int count = 0;
-        const base::List::Item* item = x->getFirstItem();
+        const base::IList::Item* item = x->getFirstItem();
         while (item != nullptr && count < 3) {
             const auto pair = static_cast<const base::Pair*>(item->getValue());
             const auto num = dynamic_cast<const base::Integer*>(pair->object());

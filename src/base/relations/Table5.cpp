@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Table5)
 END_SLOTTABLE(Table5)
 
 BEGIN_SLOT_MAP(Table5)
-    ON_SLOT(1, setVBreakpoints5, List)
+    ON_SLOT(1, setVBreakpoints5, IList)
 END_SLOT_MAP()
 
 Table5::Table5() : Table4()
@@ -73,7 +73,7 @@ void Table5::deleteData()
 //------------------------------------------------------------------------------
 // 5D table is input as a list of 4D sub-tables.
 //------------------------------------------------------------------------------
-bool Table5::loadData(const List& list, double* const table)
+bool Table5::loadData(const IList& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     const std::size_t n1{list.entries()};
@@ -82,11 +82,11 @@ bool Table5::loadData(const List& list, double* const table)
     // Process each item in the list
     unsigned int i{};
     unsigned int k{BaseClass::tableSize()};
-    const List::Item* item{list.getFirstItem()};
+    const IList::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const IList*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -262,7 +262,7 @@ double Table5::lfi(const double iv1, const double iv2, const double iv3, const d
 //------------------------------------------------------------------------------
 // setVBreakpoints5() -- For Table5
 //------------------------------------------------------------------------------
-bool Table5::setVBreakpoints5(const List* const swb5obj)
+bool Table5::setVBreakpoints5(const IList* const swb5obj)
 {
     if (swb5obj != nullptr) {
         loadVector(*swb5obj, &vtable, &nv);

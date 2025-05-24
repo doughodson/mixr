@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class List;
+class IList;
 
 namespace ubf {
 class IState;
@@ -36,24 +36,24 @@ public:
    IAction* genAction(const IState* const state, const double dt) override;
 
 protected:
-   base::List* getBehaviors();
+   base::IList* getBehaviors();
 
    // evaluates a list of actions and return an optional "complex action"
    // (default: returns the action with the highest vote value)
-   virtual IAction* genComplexAction(List* const actionSet);
+   virtual IAction* genComplexAction(IList* const actionSet);
 
    // add new behavior to list
    void addBehavior(IBehavior* const);
 
 private:
-   base::List* behaviors {};
+   base::IList* behaviors {};
 
 private:
    // slot table helper methods
    bool setSlotBehaviors(base::PairStream* const);
 };
 
-inline base::List* Arbiter::getBehaviors()                 { return behaviors; }
+inline base::IList* Arbiter::getBehaviors()                 { return behaviors; }
 
 }
 }

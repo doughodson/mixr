@@ -2,7 +2,7 @@
 #include "mixr/base/MonitorMetrics.hpp"
 
 #include "mixr/base/colors/Cie.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include <cstdio>
 
@@ -24,9 +24,9 @@ BEGIN_SLOT_MAP(MonitorMetrics)
     ON_SLOT(1, setSlotRed,       Table1)
     ON_SLOT(2, setSlotGreen,     Table1)
     ON_SLOT(3, setSlotBlue,      Table1)
-    ON_SLOT(4, setSlotPhosphors, List)
-    ON_SLOT(5, setSlotWhiteRGB,  List)
-    ON_SLOT(6, setSlotWhiteCIE,  List)
+    ON_SLOT(4, setSlotPhosphors, IList)
+    ON_SLOT(5, setSlotWhiteRGB,  IList)
+    ON_SLOT(6, setSlotWhiteCIE,  IList)
 END_SLOT_MAP()
 
 MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl,
@@ -123,7 +123,7 @@ bool MonitorMetrics::setSlotBlue(const Table1* const blue)
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotPhosphors(const List* const phosphors)
+bool MonitorMetrics::setSlotPhosphors(const IList* const phosphors)
 {
     double listItems[6]{};
 
@@ -139,7 +139,7 @@ bool MonitorMetrics::setSlotPhosphors(const List* const phosphors)
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotWhiteRGB(const List* const whiteRGB)
+bool MonitorMetrics::setSlotWhiteRGB(const IList* const whiteRGB)
 {
     double listItems[3]{};
 
@@ -151,7 +151,7 @@ bool MonitorMetrics::setSlotWhiteRGB(const List* const whiteRGB)
     return computeMatrix();
 }
 
-bool MonitorMetrics::setSlotWhiteCIE(const List* const whiteCIE)
+bool MonitorMetrics::setSlotWhiteCIE(const IList* const whiteCIE)
 {
     double listItems[3]{};
 

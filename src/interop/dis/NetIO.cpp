@@ -12,7 +12,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
@@ -1183,7 +1183,7 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const base::List::Item* item {msg->getFirstItem()};
+      const base::IList::Item* item {msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
@@ -1224,7 +1224,7 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const base::List::Item* item {msg->getFirstItem()};
+      const base::IList::Item* item {msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
@@ -1267,7 +1267,7 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
-      const base::List::Item* item{msg->getFirstItem()};
+      const base::IList::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
@@ -1308,7 +1308,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const base::List::Item* item {msg->getFirstItem()};
+      const base::IList::Item* item {msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
@@ -1350,7 +1350,7 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
-      const base::List::Item* item {msg->getFirstItem()};
+      const base::IList::Item* item {msg->getFirstItem()};
       while (item != nullptr) {
 
             // get the slot and object from the pair
@@ -1395,7 +1395,7 @@ bool NetIO::setSlotEmissionPduHandlers(base::PairStream* const msg)
        clearEmissionPduHandlers();
 
        // Now scan the pair stream and put all Ntm objects into the table.
-       base::List::Item* item {msg->getFirstItem()};
+       base::IList::Item* item {msg->getFirstItem()};
        while (item != nullptr && nEmissionHandlers < MAX_EMISSION_HANDLERS) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           const auto handler = dynamic_cast<EmissionPduHandler*>( pair->object() );

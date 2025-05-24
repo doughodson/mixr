@@ -144,7 +144,7 @@ void Instrument::updateData(const double dt)
       // sort out the instruments from our components
       base::PairStream* ps = getComponents();
       if (ps != nullptr) {
-         base::List::Item* item = ps->getFirstItem();
+         base::IList::Item* item = ps->getFirstItem();
          while(item != nullptr) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {

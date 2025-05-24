@@ -3,7 +3,7 @@
 
 #include "mixr/base/relations/TableStorage.hpp"
 #include "mixr/base/util/lfi.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -16,7 +16,7 @@ BEGIN_SLOTTABLE(Table2)
 END_SLOTTABLE(Table2)
 
 BEGIN_SLOT_MAP(Table2)
-    ON_SLOT(1, setYBreakpoints2,List)
+    ON_SLOT(1, setYBreakpoints2, IList)
 END_SLOT_MAP()
 
 Table2::Table2() : Table1()
@@ -68,7 +68,7 @@ void Table2::deleteData()
 // 2D table is input as a list of 1D vectors.
 // Example:  { [ 11 12 13 ] [ 21 22 23 ] [ 31 32 33 ] }
 //------------------------------------------------------------------------------
-bool Table2::loadData(const List& list, double* const table)
+bool Table2::loadData(const IList& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     const std::size_t n1{list.entries()};
@@ -77,11 +77,11 @@ bool Table2::loadData(const List& list, double* const table)
     // Process each item in the list
     unsigned int i{};
     const unsigned int k{BaseClass::tableSize()};
-    const List::Item* item{list.getFirstItem()};
+    const IList::Item* item{list.getFirstItem()};
     while (ok && item != nullptr) {
         const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            const auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const IList*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -174,7 +174,7 @@ double Table2::lfi(const double iv1, const double iv2, IFStorage* const f) const
 //------------------------------------------------------------------------------
 // setYBreakpoints2() -- for Table2
 //------------------------------------------------------------------------------
-bool Table2::setYBreakpoints2(const List* const syb2obj)
+bool Table2::setYBreakpoints2(const IList* const syb2obj)
 {
     if (syb2obj != nullptr) {
         loadVector(*syb2obj, &ytable, &ny);

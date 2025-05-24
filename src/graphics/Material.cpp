@@ -57,7 +57,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
-        const base::List::Item* item = x->getFirstItem();
+        const base::IList::Item* item = x->getFirstItem();
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
@@ -98,7 +98,7 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
-        const base::List::Item* item{x->getFirstItem()};
+        const base::IList::Item* item{x->getFirstItem()};
         int count{};
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
@@ -138,7 +138,7 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
-        const base::List::Item* item{x->getFirstItem()};
+        const base::IList::Item* item{x->getFirstItem()};
         int count{};
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
@@ -178,7 +178,7 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
-        const base::List::Item* item = x->getFirstItem();
+        const base::IList::Item* item = x->getFirstItem();
         int count = 0;
         double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {

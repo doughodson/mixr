@@ -105,7 +105,7 @@ void IoHandler::reset()
 
    // Reset our I/O devices
    if (devices != nullptr) {
-      base::List::Item* item{devices->getFirstItem()};
+      base::IList::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<base::IIoDevice*>(pair->object());
@@ -137,7 +137,7 @@ void IoHandler::readDeviceInputs(const double dt)
 {
    // process our I/O devices
    if (devices != nullptr) {
-      base::List::Item* item{devices->getFirstItem()};
+      base::IList::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<base::IIoDevice*>(pair->object());
@@ -151,7 +151,7 @@ void IoHandler::writeDeviceOutputs(const double dt)
 {
    // process our I/O devices
    if (devices != nullptr) {
-      base::List::Item* item{devices->getFirstItem()};
+      base::IList::Item* item{devices->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<base::IIoDevice*>(pair->object());
@@ -204,7 +204,7 @@ bool IoHandler::setSlotDevices(base::PairStream* const list)
    if (list != nullptr) {
       // check to make sure all objects on the list are I/O Devices
       int cnt{};
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          cnt++;
          const auto pair = static_cast<base::Pair*>(item->getValue());
