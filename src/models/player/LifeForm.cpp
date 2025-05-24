@@ -10,7 +10,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/numeric/Float.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 
@@ -211,7 +211,7 @@ void LifeForm::look(const double up, const double sdws)
             if (sim != nullptr) {
                 base::PairStream* players{sim->getPlayers()};
                 if (players != nullptr) {
-                    base::List::Item* item{players->getFirstItem()};
+                    base::IList::Item* item{players->getFirstItem()};
                     while (item != nullptr && !tgtAquired) {
                         const auto pair = static_cast<base::Pair*>(item->getValue());
                         if (pair != nullptr) {

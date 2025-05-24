@@ -1,7 +1,7 @@
 
 #include "mixr/models/player/effect/Effect.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/numeric/INumber.hpp"

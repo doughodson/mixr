@@ -148,7 +148,7 @@ void QuadMap::findDataFiles()
       base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
          unsigned int count{};
-         base::List::Item* item {subcomponents->getFirstItem()};
+         base::IList::Item* item {subcomponents->getFirstItem()};
          while (item != nullptr && count < MAX_DATA_FILES) {
             const auto pair = static_cast<base::Pair*>( item->getValue() );
             const auto dataFile = dynamic_cast<ITerrain*>( pair->object() );

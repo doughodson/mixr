@@ -8,7 +8,7 @@
 #include "mixr/models/action/IAction.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -147,7 +147,7 @@ void Route::computeSteerpointData(const double, const INavigation* const nav)
          // pointer will help compute each from-to leg of the route.
          Steerpoint* from = nullptr;
 
-         base::List::Item* item{steerpoints->getFirstItem()};
+         base::IList::Item* item{steerpoints->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             Steerpoint* stpt{static_cast<Steerpoint*>(pair->object())};
@@ -368,7 +368,7 @@ const base::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
     const base::Pair* sp{};
     const base::PairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr && stpt != nullptr) {
-        const base::List::Item* item{steerpoints->getFirstItem()};
+        const base::IList::Item* item{steerpoints->getFirstItem()};
         while (item != nullptr && sp == nullptr) {
             const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
             const Steerpoint* p{static_cast<const Steerpoint*>(pair->object())};
@@ -424,7 +424,7 @@ unsigned int Route::getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, c
 
         // Find our 'to' steerpoint
         bool found{};
-        base::List::Item* item{steerpoints->getFirstItem()};
+        base::IList::Item* item{steerpoints->getFirstItem()};
         while (item != nullptr && !found) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             found = (pair == to);
@@ -460,7 +460,7 @@ unsigned int Route::getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList
     unsigned int i{};
     base::PairStream* steerpoints{getComponents()};
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
-        base::List::Item* item{steerpoints->getFirstItem()};
+        base::IList::Item* item{steerpoints->getFirstItem()};
         while (item != nullptr && i < max) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<Steerpoint*>(pair->object());
@@ -510,7 +510,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
             // Copy the current steerpoint list
             auto tempList = new base::PairStream();
             {
-               base::List::Item* item{steerpoints->getFirstItem()};
+               base::IList::Item* item{steerpoints->getFirstItem()};
                while (item != nullptr) {
                   base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
                   tempList->put(pair);
@@ -528,7 +528,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // count to our position, then insert it
                 int counter{1};
-                base::List::Item* item{tempList->getFirstItem()};
+                base::IList::Item* item{tempList->getFirstItem()};
                 while (counter < pos && item != nullptr) {
                     item = item->getNext();
                     counter++;
@@ -536,7 +536,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // now we should have the reference pair at the 'pos' position
                 if (item != nullptr) {
-                    const auto newItem = new base::List::Item;
+                    const auto newItem = new base::IList::Item;
                     newItem->value = p;
                     p->ref();
                     // insert 'newItem' just before 'item'

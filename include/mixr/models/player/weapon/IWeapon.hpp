@@ -5,7 +5,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class ILength; class INumber; class String; class ITime; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class INumber; class String; class ITime; class IList; }
 namespace models {
 class Designator;
 class IStores;
@@ -42,7 +42,7 @@ class ITrack;
 //    eobt          <base::INumber>    ! end-of-burn time (seconds or base::Time)
 //
 //    maxGimbal     <base::Angle>      ! max gimbal angle (default: 30.0f * D2RCC)
-//    tgtPos        <base::List>       ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
+//    tgtPos        <base::IList>      ! TEST target position [ n e d ] (meters) (default: 0, 0, 0)
 //    weaponID      <base::Integer>    ! Weapon type ID (optional: user defined number) (default: 0)
 //    dummy         <base::Boolean>    ! Dummy store (launch, but don't flyout or detonate) (default: false)
 //    jettisonable  <base::Boolean>    ! Weapon can be jettisoned (default: true)
@@ -392,7 +392,7 @@ private:
    bool setSlotEOBT(const base::ITime* const);
    bool setSlotEOBT(const base::INumber* const);
    bool setSlotMaxGimbal(const base::IAngle* const);
-   bool setSlotTgtPos(const base::List* const);
+   bool setSlotTgtPos(const base::IList* const);
    bool setSlotWeaponID(const base::Integer* const);
    bool setSlotDummy(const base::Boolean* const);
    bool setSlotJettisonable(const base::Boolean* const);

@@ -7,7 +7,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Identifier; class Integer; class ILength; class Latitude;
-                 class List; class Longitude; class Identifier; class INumber; class String; class ITime; }
+                 class IList; class Longitude; class Identifier; class INumber; class String; class ITime; }
 namespace terrain { class ITerrain; }
 namespace models {
 class INavigation;
@@ -255,7 +255,7 @@ private:
    bool setSlotNext(const base::Integer* const);
    bool setSlotAction(IAction* const x)                   { return setAction(x); }
 
-   //bool setSlotPosition(const base::List* const);
+   //bool setSlotPosition(const base::IList* const);
 };
 
 }

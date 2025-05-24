@@ -8,7 +8,7 @@
 #include "mixr/models/system/IrSensor.hpp"
 
 #include "mixr/base/relations/Table1.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/units/areas.hpp"
 

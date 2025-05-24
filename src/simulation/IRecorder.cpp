@@ -1,7 +1,7 @@
 
 #include "mixr/simulation/IRecorder.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include <iostream>
 
 namespace mixr {
@@ -15,8 +15,8 @@ BEGIN_SLOTTABLE(IRecorder)
 END_SLOTTABLE(IRecorder)
 
 BEGIN_SLOT_MAP(IRecorder)
-    ON_SLOT( 1, setSlotEnabledList,  base::List)
-    ON_SLOT( 2, setSlotDisabledList, base::List)
+    ON_SLOT( 1, setSlotEnabledList,  base::IList)
+    ON_SLOT( 2, setSlotDisabledList, base::IList)
 END_SLOT_MAP()
 
 IRecorder::IRecorder()
@@ -91,7 +91,7 @@ bool IRecorder::setDisabledList(const unsigned int* const list, const unsigned i
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool IRecorder::setSlotEnabledList(const base::List* const list)
+bool IRecorder::setSlotEnabledList(const base::IList* const list)
 {
    unsigned int n2{};
    unsigned int* p2{};
@@ -125,7 +125,7 @@ bool IRecorder::setSlotEnabledList(const base::List* const list)
    return true;
 }
 
-bool IRecorder::setSlotDisabledList(const base::List* const list)
+bool IRecorder::setSlotDisabledList(const base::IList* const list)
 {
    unsigned int n2{};
    unsigned int* p2{};

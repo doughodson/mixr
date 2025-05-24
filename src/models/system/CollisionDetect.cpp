@@ -193,7 +193,7 @@ void CollisionDetect::updateData(const double dt)
    base::PairStream* plist{sim->getPlayers()};
    if (plist != nullptr) {
 
-      base::List::Item* item{plist->getFirstItem()};
+      base::IList::Item* item{plist->getFirstItem()};
       bool finished{};
       while ( item != nullptr && !finished ) {
 
@@ -554,7 +554,7 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
    bool ok{};
    if (msg != nullptr) {
       unsigned int mask{};
-      const base::List::Item* item{msg->getFirstItem()};
+      const base::IList::Item* item{msg->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<const base::Pair*>(item->getValue());
          const auto type = dynamic_cast<const base::String*>( pair->object() );

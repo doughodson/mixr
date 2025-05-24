@@ -11,7 +11,7 @@
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
@@ -83,7 +83,7 @@ BEGIN_SLOT_MAP(IWeapon)
 
     ON_SLOT(12, setSlotMaxGimbal,    base::IAngle)
 
-    ON_SLOT(13, setSlotTgtPos,       base::List)
+    ON_SLOT(13, setSlotTgtPos,       base::IList)
     ON_SLOT(14, setSlotWeaponID,     base::Integer)
     ON_SLOT(15, setSlotDummy,        base::Boolean)
     ON_SLOT(16, setSlotJettisonable, base::Boolean)
@@ -401,7 +401,7 @@ void IWeapon::checkDetonationEffect()
 
       base::PairStream* plist{s->getPlayers()};
       if (plist != nullptr) {
-         base::List::Item* item{plist->getFirstItem()};
+         base::IList::Item* item{plist->getFirstItem()};
 
          // Process the detonation for all local, in-range players
          bool finished{};
@@ -1442,7 +1442,7 @@ bool IWeapon::setSlotMaxGimbal(const base::IAngle* const p)
 }
 
 // tgtPos: TEST
-bool IWeapon::setSlotTgtPos(const base::List* const numList)
+bool IWeapon::setSlotTgtPos(const base::IList* const numList)
 {
     bool ok{};
     double values[3]{};

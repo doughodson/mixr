@@ -2,7 +2,7 @@
 #include "mixr/models/player/weapon/Bullet.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 
 #include <cmath>
@@ -220,7 +220,7 @@ bool Bullet::checkForTargetHit()
         if (sim != nullptr) {
             base::PairStream* players{sim->getPlayers()};
             if (players != nullptr) {
-                base::List::Item* item{players->getFirstItem()};
+                base::IList::Item* item{players->getFirstItem()};
                 while (item != nullptr) {
                     const auto pair = static_cast<base::Pair*>(item->getValue());
                     if (pair != nullptr) {

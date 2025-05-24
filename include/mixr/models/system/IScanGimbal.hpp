@@ -25,12 +25,12 @@ namespace models {
 //
 //    scanWidth            <INumber>      ! Width of the scan (radians) (default: 0.0)
 //
-//    searchVolume         <List>         ! Size of the search volume [ width  height ] (radians);
+//    searchVolume         <IList>        ! Size of the search volume [ width  height ] (radians);
 //                                        ! (default scanHeight: 0)
 //                                        ! ... and sets the 'scanWidth'
 //                                        ! ... and sets the 'scanMode'  to horizontal
 //
-//    reference            <List>         ! Reference angles; i.e., center of the search volume [ az el ] (radians) (default: 0, 0)
+//    reference            <IList>        ! Reference angles; i.e., center of the search volume [ az el ] (radians) (default: 0, 0)
 //
 //    barSpacing           <INumber>      ! Scan bar width spacing (radians) (default: 0.0)
 //
@@ -259,8 +259,8 @@ private:
    bool setSlotScanMode(base::Identifier* const);
    bool setSlotLeftToRightScan(const base::Boolean* const);
    bool setSlotScanWidth(const base::INumber* const);
-   bool setSlotSearchVolume(base::List* const);
-   bool setSlotRefPosition(const base::List* const);
+   bool setSlotSearchVolume(base::IList* const);
+   bool setSlotRefPosition(const base::IList* const);
    bool setSlotBarSpacing(const base::INumber* const);
    bool setSlotNumBars(const base::Integer* const);
    bool setSlotRevPerSec(const base::INumber* const);

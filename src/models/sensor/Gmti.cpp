@@ -22,7 +22,7 @@ BEGIN_SLOTTABLE(Gmti)
 END_SLOTTABLE(Gmti)
 
 BEGIN_SLOT_MAP(Gmti)
-    ON_SLOT(1, setSlotPoi, base::List)
+    ON_SLOT(1, setSlotPoi, base::IList)
 END_SLOT_MAP()
 
 Gmti::Gmti()
@@ -105,7 +105,7 @@ void Gmti::setPoi(const base::Vec3d& newPoi)
 //------------------------------------------------------------------------------
 // setSlotPoi:  Set Slot POI Vector [ north east down ]
 //------------------------------------------------------------------------------
-bool Gmti::setSlotPoi(base::List* const numList)
+bool Gmti::setSlotPoi(base::IList* const numList)
 {
     bool ok{};
     double values[3]{};

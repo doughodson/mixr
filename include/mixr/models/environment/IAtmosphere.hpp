@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IAtmosphere_HPP__
-#define __mixr_models_common_IAtmosphere_HPP__
+#ifndef __mixr_models_IAtmosphere_HPP__
+#define __mixr_models_IAtmosphere_HPP__
 
 #include "mixr/base/IComponent.hpp"
 

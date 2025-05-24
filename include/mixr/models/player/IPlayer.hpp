@@ -18,7 +18,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class Latitude; class ILength; class List; class Longitude;
+namespace base { class IAngle; class Boolean; class Integer; class Latitude; class ILength; class IList; class Longitude;
                  class ITime; class Vec2d; class Vec3d;}
 namespace simulation { class INib; }
 namespace models {
@@ -90,7 +90,7 @@ class IRfSignature;
 //
 //    ! 3: Player's initial world position
 //
-//    initGeocentric     <base::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
+//    initGeocentric     <base::IList>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
 //
 //
 //    ! ---
@@ -105,7 +105,7 @@ class IRfSignature;
 //    initHeading        <base::IAngle>      ! Initial heading angle (default: 0)
 //    initHeading        <base::INumber>     ! Initial heading angle (radians)
 //
-//    initEuler          <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
+//    initEuler          <base::IList>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
@@ -1092,7 +1092,7 @@ private:
    bool setSlotInitLon(const base::IAngle* const);
    bool setSlotInitLon(const base::INumber* const);
 
-   bool setSlotInitGeocentric(const base::List* const);
+   bool setSlotInitGeocentric(const base::IList* const);
 
    bool setSlotInitRoll(const base::IAngle* const);
    bool setSlotInitRoll(const base::INumber* const);
@@ -1101,7 +1101,7 @@ private:
    bool setSlotInitHeading(const base::IAngle* const x)       { return setInitHeading(x); }
    bool setSlotInitHeading(const base::INumber* const x)      { return setInitHeading(x); }
 
-   bool setSlotInitEulerAngles(const base::List* const);
+   bool setSlotInitEulerAngles(const base::IList* const);
    bool setSlotInitVelocity(const base::INumber* const);
    bool setSlotInitVelocityKts(const base::INumber* const);
 

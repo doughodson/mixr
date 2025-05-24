@@ -78,7 +78,7 @@ bool IStoresMgr::shutdownNotification()
    // Notify the external stores that we're shutting down
    base::PairStream* list{getStores()};
    if (list != nullptr) {
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
@@ -313,7 +313,7 @@ void IStoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_
 {
    if (mainList != nullptr && sublist != nullptr) {
 
-      const base::List::Item* item{mainList->getFirstItem()};
+      const base::IList::Item* item{mainList->getFirstItem()};
       while (item != nullptr) {
 
          const auto pair = static_cast<const base::Pair*>(item->getValue());
@@ -385,7 +385,7 @@ bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
       }
 
       // Find the primary gun; i.e., the first gun found on our stores
-      base::List::Item* item{stores->getFirstItem()};
+      base::IList::Item* item{stores->getFirstItem()};
       while (item != nullptr && gunPtr == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Gun*>(pair->object());

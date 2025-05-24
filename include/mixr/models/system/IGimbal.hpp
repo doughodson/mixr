@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_IGimbal_HPP__
-#define __mixr_models_common_IGimbal_HPP__
+#ifndef __mixr_models_IGimbal_HPP__
+#define __mixr_models_IGimbal_HPP__
 
 #include "mixr/models/system/ISystem.hpp"
 
@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class List; class PairStream; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class IList; class PairStream; }
 namespace models {
 class RfEmission;
 class SensorMsg;
@@ -55,18 +55,18 @@ class Tdb;
 //
 //    type                 <Identifier>   ! Physical identifiers: { mechanical, electronic } (default: electronic)
 //
-//    location             <List>         ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
+//    location             <IList>        ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
-//    initPosition         <List>         ! Initial position vector (radians) [ az el roll ] (default: 0,0,0)
+//    initPosition         <IList>        ! Initial position vector (radians) [ az el roll ] (default: 0,0,0)
 //    initPosAzimuth       <IAngle>       ! Initial azimuth position (default: 0)
 //    initPosElevation     <IAngle>       ! Initial elevation position (default: 0)
 //    initPosRoll          <IAngle>       ! Initial roll position (default: 0)
 //
-//    azimuthLimits        <List>         ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
+//    azimuthLimits        <IList>        ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
 //    azimuthLimitLeft     <IAngle>       ! Left azimuth limit[ range: -pi to pi; else unlimited ]
 //    azimuthLimitRight    <IAngle>       ! Right azimuth limit[ range: -pi to pi; else unlimited ]
 //
-//    elevationLimits      <List>         ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
+//    elevationLimits      <IList>        ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
 //    elevationLimitLower  <IAngle>       ! Lower elevation limit[ range: -pi to pi; else unlimited ]
 //    elevationLimitUpper  <IAngle>       ! Upper elevation limit[ range: -pi to pi; else unlimited ]
 //
@@ -74,17 +74,17 @@ class Tdb;
 //    rollLimitLower       <IAngle>       ! Lower roll limit[ range: -pi to pi; else unlimited ]
 //    rollLimitUpper       <IAngle>       ! Upper roll limit[ range: -pi to pi; else unlimited ]
 //
-//    maxRates             <List>         ! Max mechanical rate vector (rad/sec) [ az el roll ]
+//    maxRates             <IList>        ! Max mechanical rate vector (rad/sec) [ az el roll ]
 //    maxRateAzimuth       <IAngle>       ! Max "mechanical" azimuth rate    (Angle/sec) (default: D2RCC * 120.0)
 //    maxRateElevation     <IAngle>       ! Max "mechanical" elevation rate  (Angle/sec) (default: D2RCC * 120.0)
 //    maxRateRoll          <IAngle>       ! Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
 //
-//    commandPosition      <List>         ! Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
+//    commandPosition      <IList>        ! Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
 //    commandPosAzimuth    <IAngle>       ! Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
 //    commandPosElevation  <IAngle>       ! Commanded elevation position  (sets POSITION_SERVO) (default: 0)
 //    commandPosRoll       <IAngle>       ! Commanded roll position       (sets POSITION_SERVO) (default: 0)
 //
-//    commandRates         <List>         ! Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+//    commandRates         <IList>        ! Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
 //    commandRateAzimuth   <IAngle>       ! Commanded azimuth rate     (Angle/sec) (sets RATE_SERVO)
 //    commandRateElevation <IAngle>       ! Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
 //    commandRateRoll      <IAngle>       ! Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
@@ -330,36 +330,36 @@ private:
 private:
    // slot table helper methods
    bool setSlotType(const base::Identifier* const);
-   bool setSlotLocation(const base::List* const);
+   bool setSlotLocation(const base::IList* const);
 
-   bool setSlotPosition(const base::List* const);
+   bool setSlotPosition(const base::IList* const);
    bool setSlotPosAzimuth(const base::IAngle* const);
    bool setSlotPosElevation(const base::IAngle* const);
    bool setSlotPosRoll(const base::IAngle* const);
 
-   bool setSlotAzimuthLimits(const base::List* const);
+   bool setSlotAzimuthLimits(const base::IList* const);
    bool setSlotAzimuthLimitLeft(const base::IAngle* const);
    bool setSlotAzimuthLimitRight(const base::IAngle* const);
 
-   bool setSlotElevationLimits(const base::List* const);
+   bool setSlotElevationLimits(const base::IList* const);
    bool setSlotElevationLower(const base::IAngle* const);
    bool setSlotElevationUpper(const base::IAngle* const);
 
-   bool setSlotRollLimits(const base::List* const);
+   bool setSlotRollLimits(const base::IList* const);
    bool setSlotRollLimitLower(const base::IAngle* const);
    bool setSlotRollLimitUpper(const base::IAngle* const);
 
-   bool setSlotMaxRates(const base::List* const);
+   bool setSlotMaxRates(const base::IList* const);
    bool setSlotMaxRateAzimuth(const base::IAngle* const);
    bool setSlotMaxRateElevation(const base::IAngle* const);
    bool setSlotMaxRateRoll(const base::IAngle* const);
 
-   bool setSlotCmdPos(const base::List* const);
+   bool setSlotCmdPos(const base::IList* const);
    bool setSlotCmdPosAzimuth(const base::IAngle* const);
    bool setSlotCmdPosElevation(const base::IAngle* const);
    bool setSlotCmdPosRoll(const base::IAngle* const);
 
-   bool setSlotCmdRate(const base::List* const);
+   bool setSlotCmdRate(const base::IList* const);
    bool setSlotCmdRateAzimuth(const base::IAngle* const);
    bool setSlotCmdRateElevation(const base::IAngle* const);
    bool setSlotCmdRateRoll(const base::IAngle* const);

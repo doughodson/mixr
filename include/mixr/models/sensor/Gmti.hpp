@@ -5,7 +5,7 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotPoi(base::List* const);
+   bool setSlotPoi(base::IList* const);
 };
 
 }

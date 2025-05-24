@@ -8,7 +8,7 @@
 #include "mixr/terrain/ITerrain.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -392,7 +392,7 @@ bool Steerpoint::setSlotLongitude(const base::INumber* const msg)
 }
 
 /*
-bool Steerpoint::setSlotPosition(const base::List* const msg)
+bool Steerpoint::setSlotPosition(const base::IList* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -712,7 +712,7 @@ bool Steerpoint::compute(const INavigation* const nav, const Steerpoint* const f
             // ---
             base::PairStream* steerpoints{getComponents()};
             if (steerpoints != nullptr) {
-                base::List::Item* item{steerpoints->getFirstItem()};
+                base::IList::Item* item{steerpoints->getFirstItem()};
                 while (item != nullptr) {
                     base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
                     Steerpoint* p{static_cast<Steerpoint*>(pair->object())};

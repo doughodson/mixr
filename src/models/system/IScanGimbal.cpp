@@ -3,7 +3,7 @@
 #include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -37,8 +37,8 @@ BEGIN_SLOT_MAP(IScanGimbal)
     ON_SLOT( 1, setSlotScanMode,          base::Identifier)
     ON_SLOT( 2, setSlotLeftToRightScan,   base::Boolean)
     ON_SLOT( 3, setSlotScanWidth,         base::INumber)
-    ON_SLOT( 4, setSlotSearchVolume,      base::List)
-    ON_SLOT( 5, setSlotRefPosition,       base::List)
+    ON_SLOT( 4, setSlotSearchVolume,      base::IList)
+    ON_SLOT( 5, setSlotRefPosition,       base::IList)
     ON_SLOT( 6, setSlotBarSpacing,        base::INumber)
     ON_SLOT( 7, setSlotNumBars,           base::Integer)
     ON_SLOT( 8, setSlotRevPerSec,         base::INumber)
@@ -885,7 +885,7 @@ bool IScanGimbal::setSlotScanWidth(const base::INumber* const newWidth)
 }
 
 // setSlotSearchVolume() -- calls setSearchVolume()
-bool IScanGimbal::setSlotSearchVolume(base::List* const numList)
+bool IScanGimbal::setSlotSearchVolume(base::IList* const numList)
 {
     bool ok{};
     double values[2]{};
@@ -897,7 +897,7 @@ bool IScanGimbal::setSlotSearchVolume(base::List* const numList)
 }
 
 // setSlotRefPosition() --  calls setRefPosition
-bool IScanGimbal::setSlotRefPosition(const base::List* const numList)
+bool IScanGimbal::setSlotRefPosition(const base::IList* const numList)
 {
     bool ok{};
     double values[2]{};
@@ -972,7 +972,7 @@ bool IScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
         const std::size_t n{prObj->entries()};
         // Get the vertices from the pair stream
         nprv = 0;
-        const base::List::Item* item{prObj->getFirstItem()};
+        const base::IList::Item* item{prObj->getFirstItem()};
         // holds our array values
         base::Vec2d tempVerts(0.0, 0.0);
 
@@ -980,7 +980,7 @@ bool IScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
                 const base::IObject* obj2{p->object()};
-                const auto msg2 = dynamic_cast<const base::List*>(obj2);
+                const auto msg2 = dynamic_cast<const base::IList*>(obj2);
                 if (msg2 != nullptr) {
                     double values[2]{};
                     const std::size_t nl{msg2->getNumberList(values, 2)};

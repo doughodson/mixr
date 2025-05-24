@@ -88,7 +88,7 @@ void IStores::updateTC(const double dt)
    {
       base::PairStream* list{getStores()};
       if (list != nullptr) {
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<IExternalStore*>( pair->object() );
@@ -113,7 +113,7 @@ void IStores::updateData(const double dt)
    {
       base::PairStream* list{getStores()};
       if (list != nullptr) {
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<IExternalStore*>( pair->object() );
@@ -356,7 +356,7 @@ bool IStores::jettisonAll()
    // Notify the external stores that we're shutting down
    base::PairStream* list{getStores()};
    if (list != nullptr) {
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>( pair->object() )};
@@ -433,7 +433,7 @@ void IStores::resetStores(base::PairStream* const list)
 {
    // Reset the external stores
    if (list != nullptr) {
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>( pair->object() )};
@@ -458,7 +458,7 @@ bool IStores::onJettisonEvent(IWeapon* const wpn)
 
          // First, make sure it's one of ours!
          bool found{};
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr && !found) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             found = (wpn == pair->object());  // is it a match?
@@ -488,7 +488,7 @@ bool IStores::onJettisonEvent(IExternalStore* const sys)
 
          // First, make sure it's one of ours!
          bool found{};
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr && !found) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             found = (sys == pair->object());  // is it a match?
@@ -562,7 +562,7 @@ bool IStores::setSlotStores(const base::PairStream* const msg)
    // ---
    const auto newStores = new base::PairStream();
 
-   const base::List::Item* item{msg->getFirstItem()};
+   const base::IList::Item* item{msg->getFirstItem()};
    while (item != nullptr) {
 
       const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};

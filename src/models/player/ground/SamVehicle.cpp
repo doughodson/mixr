@@ -4,7 +4,7 @@
 #include "mixr/models/player/weapon/Sam.hpp"
 #include "mixr/models/system/IStoresMgr.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/units/angles.hpp"
@@ -70,7 +70,7 @@ void SamVehicle::updateData(const double dt)
       // We have a stores manager -- but do we have any available SAMs?
       const base::PairStream* stores{sm->getStores()};
       if (stores != nullptr) {
-         const base::List::Item* item{stores->getFirstItem()};
+         const base::IList::Item* item{stores->getFirstItem()};
          while (item != nullptr) {
             const auto pair = static_cast<const base::Pair*>(item->getValue());
             if (pair != nullptr) {

@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class Boolean; class Integer; class List; class INumber; class IAngle; }
+namespace base { class Boolean; class Integer; class IList; class INumber; class IAngle; }
 namespace models {
 class Bullet;
 
@@ -30,7 +30,7 @@ class Bullet;
 //    burstRate   <Integer>  ! Rate to generate small bursts of bullets (default: 10)
 //
 //    The following are used to position the gun on the ownship player
-//    position    <List>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
+//    position    <IList>     ! Position vector; relative to ownship axis [ nose right down ]  (meters)
 //    roll        <INumber>  ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
 //    roll        <Angle>    ! roll angle; relative to ownship axis (radians, base::Angle) (default: 0)
 //    pitch       <INumber>  ! pitch; relative to ownship axis (radians, base::Angle) (default: 0)
@@ -126,7 +126,7 @@ private:
    bool setSlotUnlimited(const base::Boolean* const);  // Unlimited rounds flag
    bool setSlotRate(const base::Integer* const);       // Rate of fire (rds per min)
    bool setSlotBurstRate(const base::Integer* const);  // Burst rate
-   bool setSlotPosition(base::List* const);            // Gun position relative to ownship
+   bool setSlotPosition(base::IList* const);           // Gun position relative to ownship
 
    bool setSlotRoll(const base::INumber* const);       // Gun roll angle to ownship
    bool setSlotRoll(const base::IAngle* const);

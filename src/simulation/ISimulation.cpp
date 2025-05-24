@@ -220,7 +220,7 @@ void ISimulation::reset()
    {
       if (origPlayers != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
-         base::List::Item* item{origPlayerList->getFirstItem()};
+         base::IList::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             IPlayer* ip{static_cast<IPlayer*>(pair->object())};
@@ -242,7 +242,7 @@ void ISimulation::reset()
    {
       if (players != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = players;
-         base::List::Item* item{origPlayerList->getFirstItem()};
+         base::IList::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             IPlayer* ip {static_cast<IPlayer*>(pair->object())};
@@ -396,7 +396,7 @@ void ISimulation::reset()
    // ---
    if (players != nullptr) {
       base::safe_ptr<base::PairStream> pl = players;
-      base::List::Item* item{pl->getFirstItem()};
+      base::IList::Item* item{pl->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
          if (pair != nullptr) {
@@ -427,7 +427,7 @@ bool ISimulation::shutdownNotification()
    if (plist != nullptr) {
 
       // Send shutdown to all players
-      base::List::Item* item{plist->getFirstItem()};
+      base::IList::Item* item{plist->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
@@ -657,7 +657,7 @@ void ISimulation::updateTcPlayerList(
    if (playerList != nullptr) {
       unsigned int index{idx};
       unsigned int count{};
-      base::List::Item* item {playerList->getFirstItem()};
+      base::IList::Item* item {playerList->getFirstItem()};
       while (item != nullptr) {
          count++;
          if (count == index) {
@@ -730,7 +730,7 @@ void ISimulation::updateBgPlayerList(
    if (playerList != nullptr) {
       unsigned int index{idx};
       unsigned int count{};
-      base::List::Item* item{playerList->getFirstItem()};
+      base::IList::Item* item{playerList->getFirstItem()};
       while (item != nullptr) {
          count++;
          if (count == index) {
@@ -916,7 +916,7 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
 
    // First, make sure they are all Players.
    {
-      base::List::Item* item{pl->getFirstItem()};
+      base::IList::Item* item{pl->getFirstItem()};
       while (item != nullptr && ok) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
@@ -940,7 +940,7 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
    // Next, make sure we have unique player names and IDs
    if (ok) {
       // For all players ...
-      base::List::Item* item1{pl->getFirstItem()};
+      base::IList::Item* item1{pl->getFirstItem()};
       while (item1 != nullptr) {
          base::Pair* pair1{static_cast<base::Pair*>(item1->getValue())};
          item1 = item1->getNext();
@@ -952,7 +952,7 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
             ++maxID;
          }
 
-         base::List::Item* item2{item1};
+         base::IList::Item* item2{item1};
          while (item2 != nullptr) {
             base::Pair* pair2{static_cast<base::Pair*>(item2->getValue())};
             IPlayer* ip2{static_cast<IPlayer*>(pair2->object())};
@@ -982,7 +982,7 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
    // Next, set the container pointer, set the player's name
    // and setup the player lists.
    if (ok) {
-      base::List::Item* item{pl->getFirstItem()};
+      base::IList::Item* item{pl->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          item = item->getNext();
@@ -1000,7 +1000,7 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
       // Copy original players to the new list
       if (origPlayers != nullptr) {
          base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
-         base::List::Item* item {origPlayerList->getFirstItem()};
+         base::IList::Item* item {origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
             insertPlayerSort(pair, newList);
@@ -1034,7 +1034,7 @@ void ISimulation::updatePlayerList()
     // Second, check for delete requests
     if (!yes) {
         base::safe_ptr<base::PairStream> pl = players;
-        base::List::Item* item{pl->getFirstItem()};
+        base::IList::Item* item{pl->getFirstItem()};
         while (!yes && item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             const auto p = static_cast<IPlayer*>(pair->object());
@@ -1057,7 +1057,7 @@ void ISimulation::updatePlayerList()
         // Copy players to the new list; except 'deleteRequest' mode players
         // ---
         base::safe_ptr<base::PairStream> oldList = players;
-        base::List::Item* item{oldList->getFirstItem()};
+        base::IList::Item* item{oldList->getFirstItem()};
         while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
             item = item->getNext();
@@ -1147,7 +1147,7 @@ bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairSt
     newList->ref();
 
     // create a new base::List::Item to hold the player
-    base::List::Item* newItem{new base::List::Item};
+    base::IList::Item* newItem{new base::IList::Item};
     newPlayerPair->ref();
     newItem->value = newPlayerPair;
 
@@ -1157,7 +1157,7 @@ bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairSt
     // Search the new player list and insert into the correct position --
     //  -- sorted by network ID and player ID
     bool inserted{};
-    base::List::Item* refItem{newList->getFirstItem()};
+    base::IList::Item* refItem{newList->getFirstItem()};
     while (refItem != nullptr && !inserted) {
         base::Pair* refPair{static_cast<base::Pair*>(refItem->getValue())};
         const auto refPlayer = static_cast<IPlayer*>(refPair->object());
@@ -1228,7 +1228,7 @@ IPlayer* ISimulation::findPlayerPrivate(const short id, const int netID) const
 
     // Find a Player that matches player ID and Sources
     IPlayer* player{};
-    const base::List::Item* item{players->getFirstItem()};
+    const base::IList::Item* item{players->getFirstItem()};
     while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
@@ -1271,7 +1271,7 @@ IPlayer* ISimulation::findPlayerByNamePrivate(const char* const playerName) cons
 
     // Find a Player named 'playerName'
     IPlayer* player{};
-    const base::List::Item* item{players->getFirstItem()};
+    const base::IList::Item* item{players->getFirstItem()};
     while (player == nullptr && item != nullptr) {
         const auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {

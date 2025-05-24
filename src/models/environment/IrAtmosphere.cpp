@@ -6,7 +6,7 @@
 #include "mixr/models/system/IGimbal.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/relations/Table1.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 

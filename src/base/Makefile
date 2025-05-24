@@ -170,7 +170,7 @@ OBJS =  \
 	FileReader.o \
 	Identifier.o \
 	Latitude.o \
-	List.o \
+	IList.o \
 	Locus.o \
 	Longitude.o \
 	Matrix.o \

@@ -4,7 +4,7 @@
 #include "mixr/models/player/weapon/Bullet.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -43,7 +43,7 @@ BEGIN_SLOT_MAP(Gun)
     ON_SLOT(3, setSlotUnlimited,  base::Boolean)
     ON_SLOT(4, setSlotRate,       base::Integer)
     ON_SLOT(5, setSlotBurstRate,  base::Integer)
-    ON_SLOT(6, setSlotPosition,   base::List)
+    ON_SLOT(6, setSlotPosition,   base::IList)
 
     ON_SLOT(7, setSlotRoll,       base::INumber)
     ON_SLOT(7, setSlotRoll,       base::IAngle)
@@ -437,7 +437,7 @@ bool Gun::setSlotBurstRate(const base::Integer* const num)
 }
 
 // Gun position relative to ownship
-bool Gun::setSlotPosition(base::List* const numList)
+bool Gun::setSlotPosition(base::IList* const numList)
 {
    bool ok{};
    double values[3]{};

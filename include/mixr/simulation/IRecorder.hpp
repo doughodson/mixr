@@ -6,7 +6,7 @@
 #include "mixr/simulation/dataRecorderTokens.hpp"
 
 namespace mixr {
-namespace base { class List; }
+namespace base { class IList; }
 namespace simulation {
 
 //------------------------------------------------------------------------------
@@ -20,12 +20,12 @@ namespace simulation {
 //
 //
 // Slots:
-//    enabledList <base::List>   ! List of data records that are enabled for processing
+//    enabledList <base::IList>  ! List of data records that are enabled for processing
 //                               ! Overrides the disabledList!
 //                               ! (default: all records are enabled -- except those
 //                               !  listed in 'disabledList')
 //
-//    disabledList <base::List>  ! List of data records that are disabled from processing
+//    disabledList <base::IList> ! List of data records that are disabled from processing
 //                               ! Only valid if 'enabledList' is NOT set!
 //                               ! (default: no records are disabled)
 //
@@ -56,8 +56,8 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotEnabledList(const base::List* const);
-   bool setSlotDisabledList(const base::List* const);
+   bool setSlotEnabledList(const base::IList* const);
+   bool setSlotDisabledList(const base::IList* const);
 };
 
 

@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class IFrequency; class Identifier; class Integer;
-                 class List; class INumber; class String; class ITime; }
+                 class IList; class INumber; class String; class ITime; }
 namespace models {
 class Antenna;
 class Player;
@@ -27,7 +27,7 @@ class ITrackMgr;
 //    modes                <PairStream>  ! List of submodes (default: 0)
 //                         <IRfSensor>   ! Single (only) submode
 //
-//    ranges               <List>        ! List of sensor ranges (nm) [vector] (default: 0)
+//    ranges               <IList>       ! List of sensor ranges (nm) [vector] (default: 0)
 //
 //    initRangeIdx         <Integer>     ! Initial range index [ 1 ... nRanges ] (default: 1)
 //
@@ -146,7 +146,7 @@ private:
    bool setSlotTrackManagerName(base::Identifier* const);     // Sets our track manager by name
    bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
    bool setSlotModeSingle(IRfSensor* const);                  // Sets a single (only) R/F sensor submode
-   bool setSlotRanges(base::List* const);                     // Sets out list of valid ranges (nm)
+   bool setSlotRanges(base::IList* const);                     // Sets out list of valid ranges (nm)
    bool setSlotInitRangeIdx(base::Integer* const);            // Sets out initial range index [ 1 .. nRanges ]
    bool setSlotPrf(const base::IFrequency* const);            // Sets PRF as a base::Frequency
    bool setSlotPrf(const base::INumber* const);               // Sets PRF in hertz

@@ -12,7 +12,7 @@
 #include "mixr/models/environment/IrAtmosphere.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -369,7 +369,7 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
    // 1) Scan the player list --- compute the normalized Line-Of-Sight (LOS) vectors,
    // range, and range rate for each target.
    // ---
-   for (base::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
+   for (base::IList::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
 
       // Get the pointer to the target player
       base::Pair* pair = static_cast<base::Pair*>(item->getValue());

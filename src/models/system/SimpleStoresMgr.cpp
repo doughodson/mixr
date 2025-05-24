@@ -80,7 +80,7 @@ void SimpleStoresMgr::updateData(const double dt)
          int count{};
          base::PairStream* list{getStores()};
          if (list != nullptr) {
-            const base::List::Item* item{list->getFirstItem()};
+            const base::IList::Item* item{list->getFirstItem()};
             while (item != nullptr) {
                const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};
                if (pair != nullptr) {
@@ -173,7 +173,7 @@ Missile* SimpleStoresMgr::getNextMissileImp()
    if (list != nullptr) {
 
       // find the first free (inactive) missile
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && msl == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Missile*>(pair->object());
@@ -211,7 +211,7 @@ Sam* SimpleStoresMgr::getNextSamImp()
    if (list != nullptr) {
 
       // find the first free (inactive) SAM
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && msl == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Sam*>(pair->object());
@@ -250,7 +250,7 @@ Bomb* SimpleStoresMgr::getNextBombImp()
    if (list != nullptr) {
 
       // find the first free (inactive) bomb
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && bomb == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Bomb*>(pair->object());
@@ -289,7 +289,7 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
    if (list != nullptr) {
 
       // find the first free (inactive) chaff bundle
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && chaff == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Chaff*>(pair->object());
@@ -328,7 +328,7 @@ Flare* SimpleStoresMgr::getNextFlareImp()
    if (list != nullptr) {
 
       // find the first free (inactive) flare
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && flare == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Flare*>(pair->object());
@@ -367,7 +367,7 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
    if (list != nullptr) {
 
       // find the first free (inactive) decoy
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && decoy == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<Decoy*>( pair->object() );
@@ -395,7 +395,7 @@ Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileTy
       if (list != nullptr) {
 
          // Find the first free (inactive) missile of type weaponType
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr && msl == nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<Missile*>(pair->object());
@@ -426,7 +426,7 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
       if (list != nullptr)  {
 
          // Find the first free (inactive) bomb
-         base::List::Item* item{list->getFirstItem()};
+         base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr && bomb == nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<Bomb*>(pair->object());
@@ -454,7 +454,7 @@ IWeapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
    base::PairStream* list{getWeapons()};
    if (list != nullptr) {
       // Find the first free (inactive) bomb
-      base::List::Item* item{list->getFirstItem()};
+      base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && wpn == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<IWeapon*>(pair->object());

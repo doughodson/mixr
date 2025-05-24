@@ -5,7 +5,7 @@
 #include "mixr/models/Tdb.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -75,36 +75,36 @@ BEGIN_SLOT_MAP(IGimbal)
 
     ON_SLOT(1, setSlotType,                        base::Identifier) // Physical gimbal type: mechanical or electronic
 
-    ON_SLOT(2, setSlotLocation,                    base::List)       // Relative location vector (meters) [ x y z ]
+    ON_SLOT(2, setSlotLocation,                    base::IList)       // Relative location vector (meters) [ x y z ]
 
-    ON_SLOT(3, setSlotPosition,                    base::List)       // Initial position vector (radians) [ az el roll ]
+    ON_SLOT(3, setSlotPosition,                    base::IList)       // Initial position vector (radians) [ az el roll ]
     ON_SLOT(4, setSlotPosAzimuth,                  base::IAngle)     // Initial azimuth position
     ON_SLOT(5, setSlotPosElevation,                base::IAngle)     // Initial elevation position
     ON_SLOT(6, setSlotPosRoll,                     base::IAngle)     // Initial roll position
 
-    ON_SLOT(7, setSlotAzimuthLimits,               base::List)       // Azimuth limit vector (radians) [ left right ]
+    ON_SLOT(7, setSlotAzimuthLimits,               base::IList)       // Azimuth limit vector (radians) [ left right ]
     ON_SLOT(8, setSlotAzimuthLimitLeft,            base::IAngle)     // Left azimuth limit
     ON_SLOT(9, setSlotAzimuthLimitRight,           base::IAngle)     // Right azimuth limit
 
-    ON_SLOT(10, setSlotElevationLimits,            base::List)       // Elevation limit vector (radians) [ lower upper ]
+    ON_SLOT(10, setSlotElevationLimits,            base::IList)       // Elevation limit vector (radians) [ lower upper ]
     ON_SLOT(11, setSlotElevationLower,             base::IAngle)     // Lower elevation limit
     ON_SLOT(12, setSlotElevationUpper,             base::IAngle)     // Upper elevation limit
 
-    ON_SLOT(13, setSlotRollLimits,                 base::List)       // Roll limit vector (radians) [ lower upper ]
+    ON_SLOT(13, setSlotRollLimits,                 base::IList)       // Roll limit vector (radians) [ lower upper ]
     ON_SLOT(14, setSlotRollLimitLower,             base::IAngle)     // Lower roll limit
     ON_SLOT(15, setSlotRollLimitUpper,             base::IAngle)     // Upper roll limit
 
-    ON_SLOT(16, setSlotMaxRates,                   base::List)       // Max "mechanical" rate vector (rad/sec) [ az el roll ]
+    ON_SLOT(16, setSlotMaxRates,                   base::IList)       // Max "mechanical" rate vector (rad/sec) [ az el roll ]
     ON_SLOT(17, setSlotMaxRateAzimuth,             base::IAngle)     // Max "mechanical" azimuth rate (base::Angle/sec)
     ON_SLOT(18, setSlotMaxRateElevation,           base::IAngle)     // Max "mechanical" elevation rate (base::Angle/sec)
     ON_SLOT(19, setSlotMaxRateRoll,                base::IAngle)     // Max "mechanical" roll rate (base::Angle/sec)
 
-    ON_SLOT(20, setSlotCmdPos,                     base::List)       // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
+    ON_SLOT(20, setSlotCmdPos,                     base::IList)       // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
     ON_SLOT(21, setSlotCmdPosAzimuth,              base::IAngle)     // Commanded azimuth position  (sets POSITION_SERVO)
     ON_SLOT(22, setSlotCmdPosElevation,            base::IAngle)     // Commanded elevation position (sets POSITION_SERVO)
     ON_SLOT(23, setSlotCmdPosRoll,                 base::IAngle)     // Commanded roll position  (sets POSITION_SERVO)
 
-    ON_SLOT(24, setSlotCmdRate,                    base::List)       // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+    ON_SLOT(24, setSlotCmdRate,                    base::IList)       // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
     ON_SLOT(25, setSlotCmdRateAzimuth,             base::IAngle)     // Commanded azimuth rate (sets RATE_SERVO)
     ON_SLOT(26, setSlotCmdRateElevation,           base::IAngle)     // Commanded elevation rate (sets RATE_SERVO)
     ON_SLOT(27, setSlotCmdRateRoll,                base::IAngle)     // Commanded roll rate (sets RATE_SERVO)
@@ -237,7 +237,7 @@ bool IGimbal::onRfEmissionEvent(RfEmission* const em)
       // Pass it down to all of our subcomponents
       base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
-         for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto sc = dynamic_cast<IGimbal*>( pair->object() );
             if (sc != nullptr && sc->getPowerSwitch() != ISystem::PWR_OFF) sc->onRfEmissionEvent(em);
@@ -760,7 +760,7 @@ bool IGimbal::setSlotType(const base::Identifier* const x)
 }
 
 // setSlotLocation() -
-bool IGimbal::setSlotLocation(const base::List* const msg)
+bool IGimbal::setSlotLocation(const base::IList* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -772,7 +772,7 @@ bool IGimbal::setSlotLocation(const base::List* const msg)
 }
 
 // setSlotPosition() - Initial positon vector (radians) [ az el roll ]
-bool IGimbal::setSlotPosition(const base::List* const msg)
+bool IGimbal::setSlotPosition(const base::IList* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -819,7 +819,7 @@ bool IGimbal::setSlotPosRoll(const base::IAngle* const roll)
 }
 
 // setSlotAzimuthLimits() - Azimuth limit vector (radians) [ left right ]
-bool IGimbal::setSlotAzimuthLimits(const base::List* const msg)
+bool IGimbal::setSlotAzimuthLimits(const base::IList* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -855,7 +855,7 @@ bool IGimbal::setSlotAzimuthLimitRight(const base::IAngle* const msg)
 }
 
 // setSlotElevationLimits() - calls setElevationLimits()
-bool IGimbal::setSlotElevationLimits(const base::List* const numList)
+bool IGimbal::setSlotElevationLimits(const base::IList* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -892,7 +892,7 @@ bool IGimbal::setSlotElevationUpper(const base::IAngle* const msg)
 
 
 // setSlotRollLimits() - calls setRollLimits()
-bool IGimbal::setSlotRollLimits(const base::List* const numList)
+bool IGimbal::setSlotRollLimits(const base::IList* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -928,7 +928,7 @@ bool IGimbal::setSlotRollLimitUpper(const base::IAngle* const msg)
 }
 
 // setSlotMaxRates() -- calls setMaxRates()
-bool IGimbal::setSlotMaxRates(const base::List* const numList)
+bool IGimbal::setSlotMaxRates(const base::IList* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -978,7 +978,7 @@ bool IGimbal::setSlotMaxRateRoll(const base::IAngle* const msg)
 }
 
 // setSlotCmdPos() -- calls setCmdPos()
-bool IGimbal::setSlotCmdPos(const base::List* const numList)
+bool IGimbal::setSlotCmdPos(const base::IList* const numList)
 {
     bool ok{};
     if (numList != nullptr) {
@@ -1026,7 +1026,7 @@ bool IGimbal::setSlotCmdPosRoll(const base::IAngle* const msg)
 }
 
 // setSlotCmdRate() -- calls setCmdRate()
-bool IGimbal::setSlotCmdRate(const base::List* const numList)
+bool IGimbal::setSlotCmdRate(const base::IList* const numList)
 {
    bool ok{};
    if (numList != nullptr) {
@@ -1098,7 +1098,7 @@ bool IGimbal::setSlotPlayerTypes(const base::PairStream* const x)
    bool ok{};
    if (x != nullptr) {
       unsigned int mask{};
-      const base::List::Item* item{x->getFirstItem()};
+      const base::IList::Item* item{x->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<const base::Pair*>(item->getValue());
          const auto type = dynamic_cast<const base::Identifier*>( pair->object() );

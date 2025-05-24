@@ -46,7 +46,7 @@ BEGIN_SLOT_MAP(IRfSensor)
     ON_SLOT(1, setSlotTrackManagerName, base::Identifier)
     ON_SLOT(2, setSlotModeStream,       base::PairStream)
     ON_SLOT(2, setSlotModeSingle,       IRfSensor)
-    ON_SLOT(3, setSlotRanges,           base::List)
+    ON_SLOT(3, setSlotRanges,           base::IList)
     ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
     ON_SLOT(5, setSlotPrf,              base::IFrequency)      // Check for base::Frequency before base::Number
     ON_SLOT(5, setSlotPrf,              base::INumber)
@@ -410,7 +410,7 @@ bool IRfSensor::setSlotModeSingle(IRfSensor* const obj)
 //------------------------------------------------------------------------------
 //  setSlotRanges() -- Our list of valid ranges (nm)
 //------------------------------------------------------------------------------
-bool IRfSensor::setSlotRanges(base::List* const list)
+bool IRfSensor::setSlotRanges(base::IList* const list)
 {
     bool ok{};
     if (list != nullptr) {
@@ -649,7 +649,7 @@ bool IRfSensor::processModes()
     if (modes != nullptr) {
         // Make sure we have only Mode and tell all of the objects
         // that we are their master mode.
-        const base::List::Item* item{modes->getFirstItem()};
+        const base::IList::Item* item{modes->getFirstItem()};
         while (item != nullptr) {
             const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             item = item->getNext();

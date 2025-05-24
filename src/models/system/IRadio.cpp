@@ -296,7 +296,7 @@ bool IRadio::setSlotChannels(const base::PairStream* const msg)
 
    {
       unsigned short chan{1};
-      const base::List::Item* item{msg->getFirstItem()};
+      const base::IList::Item* item{msg->getFirstItem()};
       while (chan <= nc && item != nullptr) {
 
          const base::Pair* pair{static_cast<const base::Pair*>(item->getValue())};

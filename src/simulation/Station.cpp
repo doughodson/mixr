@@ -226,7 +226,7 @@ void Station::reset()
 
    // Reset image generator host interfaces
    if (igHosts != nullptr) {
-      base::List::Item* item {igHosts->getFirstItem()};
+      base::IList::Item* item {igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
          const auto p = static_cast<IIgHost*>(pair->object());
@@ -237,7 +237,7 @@ void Station::reset()
 
    // Reset the networks
    if (networks != nullptr) {
-      base::List::Item* item {networks->getFirstItem()};
+      base::IList::Item* item {networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<INetIO*>(pair->object());
@@ -281,7 +281,7 @@ void Station::updateTC(const double dt)
    // Our major subsystems
    if (sim != nullptr && igHosts != nullptr) {
       base::PairStream* playerList{sim->getPlayers()};
-      base::List::Item* item{igHosts->getFirstItem()};
+      base::IList::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
 
          const auto pair = static_cast<base::Pair*>(item->getValue());
@@ -361,7 +361,7 @@ bool Station::shutdownNotification()
 {
    // Tell the interoperability networks that we're shutting down
    if (networks != nullptr) {
-      base::List::Item* item{networks->getFirstItem()};
+      base::IList::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
@@ -385,7 +385,7 @@ bool Station::shutdownNotification()
 
    // Inform our image generator host interfaces
    if (igHosts != nullptr) {
-      base::List::Item* item{igHosts->getFirstItem()};
+      base::IList::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* p{static_cast<base::IComponent*>(pair->object())};
@@ -530,7 +530,7 @@ void Station::processBackgroundTasks(const double dt)
 
    // Our image generator host interfaces
    if (igHosts != nullptr) {
-      base::List::Item* item{igHosts->getFirstItem()};
+      base::IList::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<IIgHost*>(pair->object());
@@ -548,7 +548,7 @@ void Station::processNetworkInputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
-      base::List::Item* item{networks->getFirstItem()};
+      base::IList::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<INetIO*>(pair->object());
@@ -567,7 +567,7 @@ void Station::processNetworkOutputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
-      base::List::Item* item{networks->getFirstItem()};
+      base::IList::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = static_cast<INetIO*>(pair->object());
@@ -859,7 +859,7 @@ bool Station::setOwnshipPlayer(IPlayer* const x)
     bool set{};
     base::PairStream* pl{sim->getPlayers()};
     if (pl != nullptr) {
-        base::List::Item* item{pl->getFirstItem()};
+        base::IList::Item* item{pl->getFirstItem()};
         while (item != nullptr && !set) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
@@ -924,7 +924,7 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
 
    // Make sure the new list only has image generator host type objects
    if (list != nullptr) {
-      for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
+      for (base::IList::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          const auto p = dynamic_cast<IIgHost*>(pair->object());
          if (p != nullptr) {
@@ -947,7 +947,7 @@ bool Station::setSlotIgHosts(base::PairStream* const list)
       igHosts = nullptr;
 
       // we are no longer the container for these old image generator host interfaces
-      for (base::List::Item* item = oldList->getFirstItem(); item != nullptr; item = item->getNext()) {
+      for (base::IList::Item* item = oldList->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          IComponent* p = static_cast<IComponent*>(pair->object());
          p->container(nullptr);
@@ -989,7 +989,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     // Remove the old networks list
     if (networks != nullptr) {
         // we are no longer the container for these networks
-        for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
+        for (base::IList::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = static_cast<INetIO*>(pair->object());
             p->container(nullptr);
@@ -1001,7 +1001,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
 
     // Make sure the new network list is setup correctly
     if (networks != nullptr) {
-        for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
+        for (base::IList::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto p = dynamic_cast<INetIO*>(pair->object());
             if (p != nullptr) {

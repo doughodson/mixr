@@ -30,7 +30,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Latitude.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Longitude.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Statistic.hpp"
@@ -132,7 +132,7 @@ BEGIN_SLOT_MAP(IPlayer)
    ON_SLOT( 5, setSlotInitLon,            base::IAngle)
    ON_SLOT( 5, setSlotInitLon,            base::INumber)
 
-   ON_SLOT( 6, setSlotInitGeocentric,     base::List)
+   ON_SLOT( 6, setSlotInitGeocentric,     base::IList)
 
    ON_SLOT( 7, setSlotInitRoll,           base::IAngle)
    ON_SLOT( 7, setSlotInitRoll,           base::INumber)
@@ -143,7 +143,7 @@ BEGIN_SLOT_MAP(IPlayer)
    ON_SLOT( 9, setSlotInitHeading,        base::IAngle)
    ON_SLOT( 9, setSlotInitHeading,        base::INumber)
 
-   ON_SLOT(10, setSlotInitEulerAngles,    base::List)
+   ON_SLOT(10, setSlotInitEulerAngles,    base::IList)
    ON_SLOT(11, setSlotInitVelocity,       base::INumber)
    ON_SLOT(12, setSlotInitVelocityKts,    base::INumber)
 
@@ -2389,7 +2389,7 @@ bool IPlayer::killedNotification(IPlayer* const p)
       {
          base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
-            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+            for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
                base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT, p);
@@ -2435,7 +2435,7 @@ bool IPlayer::collisionNotification(IPlayer* const p)
       {
          base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
-            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+            for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
                base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT, p);
@@ -2474,7 +2474,7 @@ bool IPlayer::crashNotification()
       {
          base::PairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
-            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+            for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
                base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
                sc->event(KILL_EVENT);
@@ -3585,7 +3585,7 @@ bool IPlayer::setSlotInitLon(const base::INumber* const x)
 }
 
 // initGeocentric: Position vector [ x y z ] (meters)
-bool IPlayer::setSlotInitGeocentric(const base::List* const x)
+bool IPlayer::setSlotInitGeocentric(const base::IList* const x)
 {
    bool ok{};
    double values[3]{};
@@ -3702,7 +3702,7 @@ bool IPlayer::setInitHeading(const base::INumber* const x)
 }
 
 // initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
-bool IPlayer::setSlotInitEulerAngles(const base::List* const numList)
+bool IPlayer::setSlotInitEulerAngles(const base::IList* const numList)
 {
    bool ok{};
    double values[3]{};

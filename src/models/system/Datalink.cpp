@@ -336,7 +336,7 @@ bool Datalink::sendMessage(base::IObject* const msg)
             base::PairStream* players{sim->getPlayers()};
             if (players != nullptr) {
 
-            base::List::Item* playerItem{players->getFirstItem()};
+            base::IList::Item* playerItem{players->getFirstItem()};
             while (playerItem != nullptr) {
 
                base::Pair* playerPair{static_cast<base::Pair*>(playerItem->getValue())};
@@ -472,7 +472,7 @@ bool Datalink::onDatalinkMessageEvent(base::IObject* const msg)
    // Just pass it down to all of our subcomponents
    base::PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
-      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+      for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
          base::IComponent* sc{static_cast<base::IComponent*>(pair->object())};
          sc->event(DATALINK_MESSAGE, msg);

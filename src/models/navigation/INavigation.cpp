@@ -8,7 +8,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -816,13 +816,13 @@ bool INavigation::setSlotFeba(const base::PairStream* const msg)
 
         // Get the points from the pair stream
         std::size_t np{};
-        const base::List::Item* item{msg->getFirstItem()};
+        const base::IList::Item* item{msg->getFirstItem()};
         while (item != nullptr && np < max && ok) {
             bool validFlg{};
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
                 const base::IObject* obj2{p->object()};
-                const auto msg2 = dynamic_cast<const base::List*>(obj2);
+                const auto msg2 = dynamic_cast<const base::IList*>(obj2);
                 if (msg2 != nullptr) {
                     double values[2]{};
                     int n{};

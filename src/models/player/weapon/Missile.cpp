@@ -6,7 +6,7 @@
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Matrixd"

@@ -2,7 +2,7 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 
 #include "mixr/models/dynamics/IDynamicsAero.hpp"
-#include "mixr/base/List.hpp"
+#include "mixr/base/IList.hpp"
 #include "mixr/base/Identifier.hpp"
 
 namespace mixr {
