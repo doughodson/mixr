@@ -78,6 +78,9 @@ OBJS =  \
 	threads/IOneShotThread.o \
 	threads/IPeriodicThread.o \
 	threads/ISyncThread.o \
+	timers/ITimer.o \
+	timers/UpTimer.o \
+	timers/DownTimer.o \
 	transformations/ITransform.o \
 	transformations/Translation.o \
 	transformations/Rotation.o \
@@ -184,7 +187,6 @@ OBJS =  \
 	Statistic.o \
 	IStateMachine.o \
 	String.o \
-	Timers.o \
 	Vectors.o
 
 .PHONY: all clean
@@ -206,6 +208,7 @@ clean:
 	-rm -f relations/*.o
 	-rm -f threads/platform/*.o
 	-rm -f threads/*.o
+	-rm -f timers/*.o
 	-rm -f transformations/*.o
 	-rm -f ubf/*.o
 	-rm -f units/area/*.o

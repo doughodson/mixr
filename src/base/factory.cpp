@@ -5,7 +5,6 @@
 
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/Statistic.hpp"
-#include "mixr/base/Timers.hpp"
 
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/Longitude.hpp"
@@ -66,6 +65,10 @@
 #include "mixr/base/relations/Table3.hpp"
 #include "mixr/base/relations/Table4.hpp"
 #include "mixr/base/relations/Table5.hpp"
+
+// timers
+#include "mixr/base/timers/UpTimer.hpp"
+#include "mixr/base/timers/DownTimer.hpp"
 
 // transformations
 #include "mixr/base/transformations/Translation.hpp"

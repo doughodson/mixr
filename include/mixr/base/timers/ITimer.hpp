@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_Timer_HPP__
-#define __mixr_base_Timer_HPP__
+#ifndef __mixr_base_ITimer_HPP__
+#define __mixr_base_ITimer_HPP__
 
 #include "mixr/base/IObject.hpp"
 
@@ -10,20 +10,20 @@ class Boolean;
 class ITime;
 
 //------------------------------------------------------------------------------
-// Class: Timer
-// Description: General purpose up/down timer.
+// Class: ITimer
+// Description: Interface to general purpose timers
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: Timer
+// Factory name: ITimer
 // Slots:
 //    timerValue  <Time>      ! Timer interval (default: 0)
 //    alarmTime   <Time>      ! Alarm time (default: 0)
 //    active      <Boolean>   ! Sets timer active (running) flag (default: false)
 //------------------------------------------------------------------------------
-class Timer : public IObject
+class ITimer : public IObject
 {
-    DECLARE_SUBCLASS(Timer, IObject)
+    DECLARE_SUBCLASS(ITimer, IObject)
 
 public:
     enum class Type { UP, DOWN };        // Timer type/direction
@@ -31,8 +31,8 @@ public:
     static const int MAX_TIMERS{MIXR_CONFIG_MAX_INTERVAL_TIMERS};
 
 public:
-    Timer();
-    Timer(const Type direction, const double time = 0.0);
+    ITimer();
+    ITimer(const Type direction, const double time = 0.0);
 
     Type getType() const;            // Type of interval timer
     double getCurrentTime() const;   // Current value of this timer (seconds)
@@ -98,12 +98,12 @@ private:
     Type dir {Type::DOWN};     // Direction up/down.
 
     static bool frz;                   // Freeze all timers (freeze time)
-    static Timer* timers[MAX_TIMERS];  // List of timers
+    static ITimer* timers[MAX_TIMERS];  // List of timers
     static int nTimers;                // Number of timers in the list
     static long semaphore;             // Semaphore for the timer list
 
-    static void addToTimerList(Timer*);
-    static void removeFromTimerList(Timer*);
+    static void addToTimerList(ITimer*);
+    static void removeFromTimerList(ITimer*);
 
 private:
     // slot table helper methods
@@ -113,43 +113,13 @@ private:
 };
 
 //
-inline Timer::Type Timer::getType() const       { return dir; }
-inline double Timer::getCurrentTime() const     { return ctime; }
-inline double Timer::getAlarmTime() const       { return alarmTime; }
-inline double Timer::getTimerValue() const      { return timerValue; }
-inline bool Timer::isRunning() const            { return active; }
-inline bool Timer::isNotRunning() const         { return !active; }
-inline bool Timer::freeze() const               { return frz; }
-
-
-//------------------------------------------------------------------------------
-// Class: UpTimer
-// Description: General purpose UP timer; time counts in the positive direction.
-//------------------------------------------------------------------------------
-// Factory name: UpTimer
-//------------------------------------------------------------------------------
-class UpTimer : public Timer
-{
-    DECLARE_SUBCLASS(UpTimer, Timer)
-
-public:
-    UpTimer(const double rtime = 0.0);
-};
-
-
-//------------------------------------------------------------------------------
-// Class: DownTimer
-// Description: General purpose DOWN timer; time counts in the negative direction.
-//------------------------------------------------------------------------------
-// Factory name: DownTimer
-//------------------------------------------------------------------------------
-class DownTimer : public Timer
-{
-    DECLARE_SUBCLASS(DownTimer, Timer)
-
-public:
-    DownTimer(const double rtime = 0.0);
-};
+inline ITimer::Type ITimer::getType() const      { return dir; }
+inline double ITimer::getCurrentTime() const     { return ctime; }
+inline double ITimer::getAlarmTime() const       { return alarmTime; }
+inline double ITimer::getTimerValue() const      { return timerValue; }
+inline bool ITimer::isRunning() const            { return active; }
+inline bool ITimer::isNotRunning() const         { return !active; }
+inline bool ITimer::freeze() const               { return frz; }
 
 }
 }
