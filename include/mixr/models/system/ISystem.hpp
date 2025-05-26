@@ -13,7 +13,7 @@ class IPlayer;
 //------------------------------------------------------------------------------
 // Class: ISystem
 //
-// Description: Base class for all models of system components that can be attached
+// Description: Interface class for all models of system components that can be attached
 //              to a player.
 //
 // Factory name: ISystem
