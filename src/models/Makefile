@@ -70,6 +70,7 @@ OBJS =  \
 	signature/IRfPlateSignature.o \
 	signature/RfAzElSignature.o \
 	signature/RfConstantSignature.o \
+	signature/RfDihedralCRSignature.o \
 	signature/RfSphereSignature.o \
 	signature/RfSwitchSignature.o \
 	signature/RfTrihedralCRSignature.o \
@@ -103,10 +104,12 @@ OBJS =  \
 	system/IRadio.o \
 	system/IRfSensor.o \
 	system/IRfSystem.o \
+	system/Radar.o \
 	system/Rwr.o \
 	system/Sar.o \
 	system/IScanGimbal.o \
 	system/SensorMgr.o \
+	system/StoresMgr.o \
 	system/SimpleStoresMgr.o \
 	system/StabilizingGimbal.o \
 	system/IStores.o \

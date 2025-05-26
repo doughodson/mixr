@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Jammer_HPP__
-#define __mixr_models_common_Jammer_HPP__
+#ifndef __mixr_models_Jammer_HPP__
+#define __mixr_models_Jammer_HPP__
 
 #include "mixr/models/system/IRfSensor.hpp"
 

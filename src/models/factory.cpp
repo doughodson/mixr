@@ -89,11 +89,13 @@
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/MergingIrSensor.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
+#include "mixr/models/system/Radar.hpp"
 #include "mixr/models/system/Rwr.hpp"
 #include "mixr/models/system/Sar.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
 #include "mixr/models/system/SimpleStoresMgr.hpp"
 #include "mixr/models/system/StabilizingGimbal.hpp"
+#include "mixr/models/system/StoresMgr.hpp"
 #include "mixr/models/system/System.hpp"
 
 // signatures (IR)
@@ -103,6 +105,7 @@
 // signatures (RF)
 #include "mixr/models/signature/RfAzElSignature.hpp"
 #include "mixr/models/signature/RfConstantSignature.hpp"
+#include "mixr/models/signature/RfDihedralCRSignature.hpp"
 #include "mixr/models/signature/RfSphereSignature.hpp"
 #include "mixr/models/signature/RfSwitchSignature.hpp"
 #include "mixr/models/signature/RfTrihedralCRSignature.hpp"
@@ -362,6 +365,9 @@ base::IObject* factory(const std::string& name)
    else if ( name == RfConstantSignature::getFactoryName() ) {
       obj = new RfConstantSignature();
    }
+   else if ( name == RfDihedralCRSignature::getFactoryName() ) {
+      obj = new RfDihedralCRSignature();
+   }
    else if ( name == RfSphereSignature::getFactoryName() ) {
       obj = new RfSphereSignature();
    }
@@ -383,9 +389,15 @@ base::IObject* factory(const std::string& name)
    else if ( name == Iff::getFactoryName() ) {
       obj = new Iff();
    }
-   // Sensors
+   // Systems
    else if ( name == SensorMgr::getFactoryName() ) {
       obj = new SensorMgr();
+   }
+   else if ( name == StoresMgr::getFactoryName() ) {
+      obj = new StoresMgr();
+   }
+   else if ( name == Radar::getFactoryName() ) {
+      obj = new Radar();
    }
    else if ( name == Rwr::getFactoryName() ) {
       obj = new Rwr();
