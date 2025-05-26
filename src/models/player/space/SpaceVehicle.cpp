@@ -1,6 +1,6 @@
 
 #include "mixr/models/player/space/SpaceVehicle.hpp"
-#include "mixr/models/dynamics/IDynamicsSpace.hpp"
+#include "mixr/models/dynamics/ISpaceDynamics.hpp"
 
 #include "mixr/base/units/lengths.hpp"
 
@@ -67,7 +67,7 @@ double SpaceVehicle::getGrossWeight() const
 bool SpaceVehicle::setControlStickYawInput(const double yaw)
 {
    bool ok{};
-   const auto model = dynamic_cast<IDynamicsSpace*>(getDynamicsModel());
+   const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setControlStickYawInput(yaw);
    }
@@ -81,7 +81,7 @@ bool SpaceVehicle::setControlStickYawInput(const double yaw)
 bool SpaceVehicle::setTranslateXInput(const double transx)
 {
    bool ok{};
-   const auto model = dynamic_cast<IDynamicsSpace*>(getDynamicsModel());
+   const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateXInput(transx);
    }
@@ -95,7 +95,7 @@ bool SpaceVehicle::setTranslateXInput(const double transx)
 bool SpaceVehicle::setTranslateYInput(const double transy)
 {
    bool ok{};
-   const auto model = dynamic_cast<IDynamicsSpace*>(getDynamicsModel());
+   const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateYInput(transy);
    }
@@ -109,7 +109,7 @@ bool SpaceVehicle::setTranslateYInput(const double transy)
 bool SpaceVehicle::setTranslateZInput(const double transz)
 {
    bool ok{};
-   const auto model = dynamic_cast<IDynamicsSpace*>(getDynamicsModel());
+   const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateZInput(transz);
    }

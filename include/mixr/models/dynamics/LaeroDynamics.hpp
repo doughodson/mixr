@@ -1,8 +1,8 @@
 
-#ifndef __mixr_models_DynamicsLaero_HPP__
-#define __mixr_models_DynamicsLaero_HPP__
+#ifndef __mixr_models_LaeroDynamics_HPP__
+#define __mixr_models_LaeroDynamics_HPP__
 
-#include "mixr/models/dynamics/IDynamicsAero.hpp"
+#include "mixr/models/dynamics/IAeroDynamics.hpp"
 
 #include "mixr/base/util/constants.hpp"
 
@@ -10,17 +10,17 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: DynamicsLaero
+// Class: LaeroDynamics
 // Description:
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
 //    written by Larry Buckner
 //------------------------------------------------------------------------------
-class DynamicsLaero final: public IDynamicsAero
+class LaeroDynamics final: public IAeroDynamics
 {
-   DECLARE_SUBCLASS(DynamicsLaero, IDynamicsAero )
+   DECLARE_SUBCLASS(LaeroDynamics, IAeroDynamics )
 
 public:
-   DynamicsLaero();
+   LaeroDynamics();
 
    void dynamics(const double dt) final;  // One pass model update; called from Player::dynamics()
    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) final;

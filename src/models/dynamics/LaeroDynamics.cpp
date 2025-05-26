@@ -1,5 +1,5 @@
 
-#include "mixr/models/dynamics/DynamicsLaero.hpp"
+#include "mixr/models/dynamics/LaeroDynamics.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
 
@@ -17,9 +17,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(DynamicsLaero, "DynamicsLaero")
-EMPTY_SLOTTABLE(DynamicsLaero)
-EMPTY_DELETEDATA(DynamicsLaero)
+IMPLEMENT_SUBCLASS(LaeroDynamics, "LaeroDynamics")
+EMPTY_SLOTTABLE(LaeroDynamics)
+EMPTY_DELETEDATA(LaeroDynamics)
 
 //----------------------------------------------------------
 // conversion constants
@@ -27,12 +27,12 @@ EMPTY_DELETEDATA(DynamicsLaero)
 constexpr double HALF_PI{base::PI / 2.0};
 constexpr double EPSILON{1.0E-10};
 
-DynamicsLaero::DynamicsLaero()
+LaeroDynamics::LaeroDynamics()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void DynamicsLaero::copyData(const DynamicsLaero& org, const bool)
+void LaeroDynamics::copyData(const LaeroDynamics& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -86,13 +86,13 @@ void DynamicsLaero::copyData(const DynamicsLaero& org, const bool)
    wDot1    = org.wDot1;
 }
 
-void DynamicsLaero::dynamics(const double dt)
+void LaeroDynamics::dynamics(const double dt)
 {
     update4DofModel(dt);
     dT = dt;
 }
 
-void DynamicsLaero::reset()
+void LaeroDynamics::reset()
 {
    BaseClass::reset();
 
@@ -106,7 +106,7 @@ void DynamicsLaero::reset()
 //----------------------------------------------------------
 // update equations of motion
 //----------------------------------------------------------
-void DynamicsLaero::update4DofModel(const double dt)
+void LaeroDynamics::update4DofModel(const double dt)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -228,7 +228,7 @@ void DynamicsLaero::update4DofModel(const double dt)
 // flight interface
 //
 
-bool DynamicsLaero::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
+bool LaeroDynamics::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -272,7 +272,7 @@ bool DynamicsLaero::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    return ok;
 }
 
-bool DynamicsLaero::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
+bool LaeroDynamics::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -316,7 +316,7 @@ bool DynamicsLaero::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    return ok;
 }
 
-bool DynamicsLaero::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
+bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -361,7 +361,7 @@ bool DynamicsLaero::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 }
 
 ////==============================================================================
-//bool LaeroModel::flyVel(const double velCmdKts, const double velDotCmdNps)
+//bool LaeroDynamics::flyVel(const double velCmdKts, const double velDotCmdNps)
 //{
 //   //-------------------------------------------------------
 //   // get data pointers
@@ -411,7 +411,7 @@ bool DynamicsLaero::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //}
 
 //==============================================================================
-//bool LaeroModel::fly2LL(const double latDeg, const double lonDeg)
+//bool LaeroDynamics::fly2LL(const double latDeg, const double lonDeg)
 //{
 //   //-------------------------------------------------------
 //   // get data pointers
@@ -441,7 +441,7 @@ bool DynamicsLaero::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 
 
 // Dynamics model interface
-bool DynamicsLaero::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
+bool LaeroDynamics::setCommandedHeadingD(const double h, const double hDps, const double maxBank)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -499,7 +499,7 @@ bool DynamicsLaero::setCommandedHeadingD(const double h, const double hDps, cons
 }
 
 // Dynamics model interface - all input values in meters
-bool DynamicsLaero::setCommandedAltitude(const double a, const double aMps, const double maxPitch)
+bool LaeroDynamics::setCommandedAltitude(const double a, const double aMps, const double maxPitch)
 {
    //-------------------------------------------------------
    // get data pointers
@@ -546,7 +546,7 @@ bool DynamicsLaero::setCommandedAltitude(const double a, const double aMps, cons
 }
 
 // setCommandedVelocityKts() - also can limit velocity rate of acceleration
-bool DynamicsLaero::setCommandedVelocityKts(const double v, const double vNps)
+bool LaeroDynamics::setCommandedVelocityKts(const double v, const double vNps)
 {
    //-------------------------------------------------------
    // get data pointers

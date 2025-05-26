@@ -10,8 +10,8 @@
 #include "mixr/models/action/ActionWeaponRelease.hpp"
 
 // dynamics models
-#include "mixr/models/dynamics/DynamicsLaero.hpp"
-#include "mixr/models/dynamics/DynamicsRac.hpp"
+#include "mixr/models/dynamics/LaeroDynamics.hpp"
+#include "mixr/models/dynamics/RacDynamics.hpp"
 
 // environment models
 #include "mixr/models/environment/IrAtmosphere.hpp"

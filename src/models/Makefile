@@ -10,10 +10,10 @@ OBJS =  \
 	action/ActionImagingSar.o \
 	action/ActionWeaponRelease.o \
 	dynamics/IDynamics.o \
-	dynamics/IDynamicsAero.o \
-	dynamics/IDynamicsSpace.o \
-	dynamics/DynamicsLaero.o  \
-	dynamics/DynamicsRac.o \
+	dynamics/IAeroDynamics.o \
+	dynamics/ISpaceDynamics.o \
+	dynamics/LaeroDynamics.o  \
+	dynamics/RacDynamics.o \
 	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \

@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class Identifier; }
 namespace models {
-class IDynamicsAero;
+class IAeroDynamics;
 
 //------------------------------------------------------------------------------
 // Class: AirVehicle
@@ -140,8 +140,8 @@ public:
     void reset() override;
 
 protected:
-   IDynamicsAero* getDynamics();
-   const IDynamicsAero* getDynamics() const;
+   IAeroDynamics* getDynamics();
+   const IAeroDynamics* getDynamics() const;
 
 private:
    double initGearPos {1.0};       // initial gear position
