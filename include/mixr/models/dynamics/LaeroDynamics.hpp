@@ -13,7 +13,7 @@ namespace models {
 // Class: LaeroDynamics
 // Description:
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
-//    written by Larry Buckner
+//    written by Larry Buckner (i.e., Larry's aerodynamics model)
 //------------------------------------------------------------------------------
 class LaeroDynamics final: public IAeroDynamics
 {
