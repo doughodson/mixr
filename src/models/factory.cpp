@@ -127,11 +127,11 @@ base::IObject* factory(const std::string& name)
    base::IObject* obj {};
 
    // dynamics
-   if ( name == DynamicsLaero::getFactoryName() ) {       // Laero
-      obj = new DynamicsLaero();
+   if ( name == LaeroDynamics::getFactoryName() ) {       // Laero
+      obj = new LaeroDynamics();
    }
-   else if ( name == DynamicsRac::getFactoryName() ) {    // RAC
-      obj = new DynamicsRac();
+   else if ( name == RacDynamics::getFactoryName() ) {    // RAC
+      obj = new RacDynamics();
    }
 
    // environment
