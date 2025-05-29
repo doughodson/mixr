@@ -174,6 +174,7 @@ OBJS =  \
 	Identifier.o \
 	Latitude.o \
 	IList.o \
+	List.o \
 	Locus.o \
 	Longitude.o \
 	Matrix.o \
