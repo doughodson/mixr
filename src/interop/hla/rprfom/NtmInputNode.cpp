@@ -4,7 +4,7 @@
 #include "mixr/interop/hla/rprfom/Ntm.hpp"
 #include "mixr/interop/hla/rprfom/Nib.hpp"
 
-#include "mixr/base/IList.hpp"
+#include "mixr/base/List.hpp"
 
 namespace mixr {
 namespace rprfom {
@@ -21,7 +21,7 @@ NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm
       ourNtm = ntm;
       ourNtm->ref();
    }
-   subnodeList = new base::IList();
+   subnodeList = new base::List();
 }
 
 void NtmInputNode::copyData(const NtmInputNode& org, const bool)

@@ -1,7 +1,7 @@
 
 #include "NtmInputNode.hpp"
 
-#include "mixr/base/IList.hpp"
+#include "mixr/base/List.hpp"
 #include "mixr/interop/dis/Nib.hpp"
 #include "mixr/interop/dis/Ntm.hpp"
 
@@ -20,7 +20,7 @@ NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm
       ourNtm = ntm;
       ourNtm->ref();
    }
-   subnodeList = new base::IList();
+   subnodeList = new base::List();
 }
 
 void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)

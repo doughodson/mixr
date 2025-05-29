@@ -9,6 +9,7 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 
+#include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
@@ -273,7 +274,7 @@ bool CadrgMap::setMaxTableSize(const int x)
     int size = maxTableSize * 2;
     // Reset our list stack
     if (stack != nullptr) stack->unref();
-    stack = new base::IList();
+    stack = new base::List();
     for (int i = 0; i < size; i++) {
         const auto t = new CadrgFrame();
         stack->addHead(t);

@@ -8,7 +8,7 @@
 #include "mixr/models/action/IAction.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/IList.hpp"
+#include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -536,7 +536,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // now we should have the reference pair at the 'pos' position
                 if (item != nullptr) {
-                    const auto newItem = new base::IList::Item;
+                    const auto newItem = new base::List::Item;
                     newItem->value = p;
                     p->ref();
                     // insert 'newItem' just before 'item'

@@ -4,7 +4,7 @@
 #include "mixr/interop/INtm.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/base/IList.hpp"
+#include "mixr/base/List.hpp"
 
 namespace mixr {
 namespace interop {
@@ -30,8 +30,8 @@ NtmOutputNodeStd::NtmOutputNodeStd(const models::IPlayer* const p, const char* c
       tp = p;
 }
 
-   ntmList = new base::IList();
-   subnodeList = new base::IList();
+   ntmList = new base::List();
+   subnodeList = new base::List();
 }
 
 void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
@@ -261,7 +261,7 @@ bool NtmOutputNodeStd::addNtmSorted(INtm* const newNtm)
       newNtm->ref();
 
       // Create a new List::Item to contain this Ntm
-      const auto newItem = new base::IList::Item();
+      const auto newItem = new base::List::Item();
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm

@@ -4,7 +4,7 @@
 #include "mixr/graphics/Texture.hpp"
 #include "mixr/map/rpf/CadrgMap.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/IList.hpp"
+#include "mixr/base/List.hpp"
 
 namespace mixr {
 namespace rpf {
@@ -64,7 +64,7 @@ void TexturePager::setSize(int tableSize)
     if (stack != nullptr) {
         stack->clear();
     }
-    else stack = new base::IList();
+    else stack = new base::List();
 
     for (int i = 0; i < size; i++) {
         const auto t = new graphics::Texture();

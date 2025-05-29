@@ -2,6 +2,7 @@
 #include "mixr/base/ubf/Arbiter.hpp"
 #include "mixr/base/ubf/IAction.hpp"
 
+#include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
@@ -23,7 +24,7 @@ END_SLOT_MAP()
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
-   behaviors = new base::IList();
+   behaviors = new base::List();
 }
 
 void Arbiter::deleteData()
@@ -38,7 +39,7 @@ void Arbiter::deleteData()
 IAction* Arbiter::genAction(const IState* const state, const double dt)
 {
    // create list for action set
-   const auto actionSet{new base::IList()};
+   const auto actionSet{new base::List()};
 
    // fill out list of recommended actions by behaviors
    base::IList::Item* item{behaviors->getFirstItem()};
