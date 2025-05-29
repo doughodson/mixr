@@ -20,17 +20,6 @@ namespace base {
 // Factory name: IList
 // Slots: none
 //------------------------------------------------------------------------------
-// Notes: Example of looping through the list:
-//
-//      List* list = <some list>
-//      List::Item* item = list->getFirstItem();
-//      while (item != nullptr) {
-//          IObject* obj = item->getValue();
-//          <... code to use the object ...>
-//          item = item->getNext();
-//      }
-//
-//------------------------------------------------------------------------------
 class IList : public IObject
 {
    DECLARE_SUBCLASS(IList, IObject)

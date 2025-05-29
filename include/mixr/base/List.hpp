@@ -13,6 +13,16 @@ namespace base {
 //
 // Factory name: List
 //------------------------------------------------------------------------------
+// Notes: Example of looping through the list:
+//
+//      List* list = <some list>
+//      List::Item* item = list->getFirstItem();
+//      while (item != nullptr) {
+//          IObject* obj = item->getValue();
+//          <... code to use the object ...>
+//          item = item->getNext();
+//      }
+//------------------------------------------------------------------------------
 class List final: public IList
 {
    DECLARE_SUBCLASS(List, IList)
