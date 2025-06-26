@@ -270,8 +270,8 @@ class IObject : public IReferenced
 
    // slot table
    protected: static const SlotTable slottable;    // class slot table
-   //private: static const char* slotnames[];        // slot names in this object's slot table
-   //private: static const int nslots;               // number of slots in this object's slot table
+   private: static const char* slotnames[];        // slot names in this object's slot table
+   private: static const int nslots;               // number of slots in this object's slot table
 
    // slot table functions
    public: static const SlotTable& getSlotTable();
