@@ -21,8 +21,8 @@ MetaObject IObject::metaObject(typeid(IObject).name(), "IObject", &IObject::slot
 //    from Object (e.g., the classes for colors, numbers and units) that expect their
 //    slots to be the first slots -- starting at slot number 1.
 // ---
-const char* IObject::slotnames[] = { "" };
-const int IObject::nslots{};
+//const char* IObject::slotnames[] = { "" };
+//const int IObject::nslots{};
 const SlotTable IObject::slottable(nullptr, 0);
 
 //------------------------------------------------------------------------------
