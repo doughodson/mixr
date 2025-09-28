@@ -83,7 +83,7 @@ bool IThread::createThread()
       );
 
    if ( hnd != 0 && parent->isMessageEnabled(IObject::MSG_INFO) ) {
-      std::cout << "AbstractThread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
+      std::cout << "IThread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
    }
 
    theThread = hnd;

@@ -112,7 +112,7 @@ bool IThread::createThread()
    pthread_create(thread, &attr, staticThreadFunc, this);
 
    //if ( stat != 0 && parent->isMessageEnabled(Object::MSG_INFO) ) {
-      std::cout << "AbstractThread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
+      std::cout << "IThread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
    //}
 
    theThread = thread;
