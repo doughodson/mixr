@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/ubf/IAction.hpp"
 #include "mixr/base/ubf/IBehavior.hpp"
@@ -112,10 +112,10 @@ void MultiActorAgent::setState(base::ubf::IState* const x)
    p->unref();
 }
 
-simulation::Station* MultiActorAgent::getStation()
+simulation::IStation* MultiActorAgent::getStation()
 {
    if ( myStation == nullptr ) {
-      const auto s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
+      const auto s = dynamic_cast<simulation::IStation*>(findContainerByType(typeid(simulation::IStation)));
       if (s != nullptr) {
          myStation = s;
       }
@@ -126,7 +126,7 @@ simulation::Station* MultiActorAgent::getStation()
 WorldModel* MultiActorAgent::getWorldModel()
 {
    WorldModel* sim{};
-   simulation::Station* s{getStation()};
+   simulation::IStation* s{getStation()};
    if (s != nullptr) {
       sim = dynamic_cast<WorldModel*>(s->getSimulation());
    }

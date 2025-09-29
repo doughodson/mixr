@@ -2,7 +2,7 @@
 #include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/simulation/ISimulation.hpp"
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/IList.hpp"
 #include <iostream>
@@ -41,7 +41,7 @@ void IDataRecorder::processRecords()
 }
 
 // Our parent Station
-Station* IDataRecorder::getStation()
+IStation* IDataRecorder::getStation()
 {
    if (sta == nullptr) {
       getStationImp();
@@ -50,7 +50,7 @@ Station* IDataRecorder::getStation()
 }
 
 // Our parent Station (const version)
-const Station* IDataRecorder::getStation() const
+const IStation* IDataRecorder::getStation() const
 {
    if (sta == nullptr) {
       (const_cast<IDataRecorder*>(this))->getStationImp();
@@ -59,10 +59,10 @@ const Station* IDataRecorder::getStation() const
 }
 
 // Find our parent Station
-Station* IDataRecorder::getStationImp()
+IStation* IDataRecorder::getStationImp()
 {
    if (sta == nullptr) {
-      sta = static_cast<Station*>(findContainerByType(typeid(Station)));
+      sta = static_cast<IStation*>(findContainerByType(typeid(IStation)));
       if (sta == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Datarecorder::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
       }
@@ -91,7 +91,7 @@ const ISimulation* IDataRecorder::getSimulation() const
 ISimulation* IDataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
-      Station* p = getStation();
+      IStation* p = getStation();
       if (p != nullptr) sim = p->getSimulation();
    }
    return sim;

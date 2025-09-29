@@ -13,7 +13,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"

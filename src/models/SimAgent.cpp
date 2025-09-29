@@ -4,7 +4,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/WorldModel.hpp"
 
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
@@ -42,10 +42,10 @@ void SimAgent::deleteData()
    }
 }
 
-simulation::Station* SimAgent::getStation()
+simulation::IStation* SimAgent::getStation()
 {
    if ( myStation==nullptr ) {
-      const auto s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
+      const auto s = dynamic_cast<simulation::IStation*>(findContainerByType(typeid(simulation::IStation)));
       if (s != nullptr) {
          myStation = s;
       }
@@ -56,7 +56,7 @@ simulation::Station* SimAgent::getStation()
 WorldModel* SimAgent::getWorldModel()
 {
    WorldModel* sim{};
-   simulation::Station* s{getStation()};
+   simulation::IStation* s{getStation()};
    if (s != nullptr) {
       sim = dynamic_cast<WorldModel*>(s->getSimulation());
    }

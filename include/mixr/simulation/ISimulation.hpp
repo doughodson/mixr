@@ -13,7 +13,7 @@ namespace simulation {
 class IDataRecorder;
 class SimulationBgSyncThread;
 class SimulationTcSyncThread;
-class Station;
+class IStation;
 class Statistic;
 class IPlayer;
 
@@ -203,8 +203,8 @@ public:
 
     IDataRecorder* getDataRecorder();              // Returns the data recorder
 
-    Station* getStation();                         // Returns our Station
-    const Station* getStation() const;             // Returns our Station (const version)
+    IStation* getStation();                        // Returns our Station
+    const IStation* getStation() const;            // Returns our Station (const version)
 
     IPlayer* findPlayer(const short id, const int netID = 0);                       // Find a player by player (and network) ID
     const IPlayer* findPlayer(const short id, const int netID = 0) const;           // Find a player by player (and network) ID (const version)
@@ -260,7 +260,7 @@ protected:
     bool shutdownNotification() override;
 
 private:
-   Station* getStationImp();
+   IStation* getStationImp();
 
    bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
    IPlayer* findPlayerPrivate(const short id, const int netID) const;
@@ -295,7 +295,7 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   Station* station{};                    // The Station that owns us (not ref()'d)
+   IStation* station{};                   // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const int MAX_TC_THREADS{32};

@@ -8,7 +8,7 @@
 namespace mixr {
 namespace simulation {
 class ISimulation;
-class Station;
+class IStation;
 
 //------------------------------------------------------------------------------
 // Class: IDataRecorder
@@ -28,8 +28,8 @@ class IDataRecorder : public IRecorder
 public:
    IDataRecorder();
 
-   Station* getStation();                     // Our parent station
-   const Station* getStation() const;         // Our parent station (const version)
+   IStation* getStation();                    // Our parent station
+   const IStation* getStation() const;        // Our parent station (const version)
 
    ISimulation* getSimulation();               // The executable simulation
    const ISimulation* getSimulation() const;   // The executable simulation (const version)
@@ -56,10 +56,10 @@ protected:
    virtual bool processUnhandledId(const unsigned int id) =0;
 
 private:
-   Station* getStationImp();
+   IStation* getStationImp();
    ISimulation* getSimulationImp();
 
-   Station* sta{};         // The station that owns us (not ref()'d)
+   IStation* sta{};         // The station that owns us (not ref()'d)
    ISimulation* sim{};      // The simulation system (not ref()'d)
 };
 

@@ -8,7 +8,7 @@
 
 #include "mixr/simulation/IDataRecorder.hpp"
 #include "mixr/simulation/INib.hpp"
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/PairStream.hpp"
@@ -272,8 +272,8 @@ void ISimulation::reset()
    if (reqTcThreads > 1 && numTcThreads == 0 && !tcThreadsFailed) {
 
       // Use the T/C priority from our container Station.
-      double priority{Station::DEFAULT_TC_THREAD_PRI};
-      const Station* sta{static_cast<const Station*>(findContainerByType( typeid(Station) ))};
+      double priority{IStation::DEFAULT_TC_THREAD_PRI};
+      const IStation* sta{static_cast<const IStation*>(findContainerByType( typeid(IStation) ))};
       if (sta != nullptr) {
          priority = sta->getTimeCriticalPriority();
       }
@@ -305,8 +305,8 @@ void ISimulation::reset()
    if (reqBgThreads > 1 && numBgThreads == 0 && !bgThreadsFailed) {
 
       // Use the background priority from our container Station.
-      double priority{Station::DEFAULT_BG_THREAD_PRI};
-      const Station* sta{static_cast<const Station*>(findContainerByType( typeid(Station) ))};
+      double priority{IStation::DEFAULT_BG_THREAD_PRI};
+      const IStation* sta{static_cast<const IStation*>(findContainerByType( typeid(IStation) ))};
       if (sta != nullptr) {
          priority = sta->getBackgroundPriority();
       }
@@ -865,13 +865,13 @@ unsigned short ISimulation::getNewReleasedWeaponID()
 IDataRecorder* ISimulation::getDataRecorder()
 {
    IDataRecorder* p{};
-   Station* sta{getStation()};
+   IStation* sta{getStation()};
    if (sta != nullptr) p = sta->getDataRecorder();
    return p;
 }
 
 // Our Station
-Station* ISimulation::getStation()
+IStation* ISimulation::getStation()
 {
    if (station == nullptr) {
       getStationImp();
@@ -880,7 +880,7 @@ Station* ISimulation::getStation()
 }
 
 // Our Station (const version)
-const Station* ISimulation::getStation() const
+const IStation* ISimulation::getStation() const
 {
    if (station == nullptr) {
       (const_cast<ISimulation*>(this))->getStationImp();
@@ -888,10 +888,10 @@ const Station* ISimulation::getStation() const
    return station;
 }
 
-Station* ISimulation::getStationImp()
+IStation* ISimulation::getStationImp()
 {
    if (station == nullptr) {
-      station = static_cast<Station*>(findContainerByType(typeid(Station)));
+      station = static_cast<IStation*>(findContainerByType(typeid(IStation)));
       if (station == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "ISimulation::getStationImp(): ERROR, unable to locate the Station class!" << std::endl;
       }

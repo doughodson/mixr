@@ -11,7 +11,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/simulation/ISimulation.hpp"
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -360,7 +360,7 @@ bool INetIO::networkInitialization()
     netInitFail = false;
 
     // 1) Find our Station
-    station = static_cast<simulation::Station*>( findContainerByType(typeid(simulation::Station)) );
+    station = static_cast<simulation::IStation*>( findContainerByType(typeid(simulation::IStation)) );
     if (station != nullptr) {
         // 2) Find the Simulation
         simulation = station->getSimulation();
@@ -639,7 +639,7 @@ models::IPlayer* INetIO::createProxyPlayer(INib* const nib)
    bool inRange{true};
    double maxRng2{getMaxEntityRangeSquared(nib)};
    if (nib != nullptr && maxRng2 > 0) {
-      const simulation::Station* sta{getStation()};
+      const simulation::IStation* sta{getStation()};
       const auto own = dynamic_cast<const models::IPlayer*>(sta->getOwnship());
       if (own != nullptr) {
          base::Vec3d delta{nib->getDrPosition() - own->getGeocPosition()};

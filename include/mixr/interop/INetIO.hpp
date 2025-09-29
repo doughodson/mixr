@@ -10,7 +10,7 @@
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class ITime; }
 namespace models { class IPlayer; }
-namespace simulation { class ISimulation; class Station; }
+namespace simulation { class ISimulation; class IStation; }
 namespace interop {
 class INib;
 class INtm;
@@ -216,8 +216,8 @@ public:
    virtual bool networkInitialization();
 
    // Other components
-   simulation::Station* getStation()                      { return station; }
-   const simulation::Station* getStation() const          { return station; }
+   simulation::IStation* getStation()                     { return station; }
+   const simulation::IStation* getStation() const         { return station; }
 
    simulation::ISimulation* getSimulation()               { return simulation; }
    const simulation::ISimulation* getSimulation() const   { return simulation; }
@@ -380,7 +380,7 @@ private:
    std::string federationName;                          // Federation name
    std::string federateName;                            // Federate name
 
-   base::safe_ptr<simulation::Station> station;         // Our station class
+   base::safe_ptr<simulation::IStation> station;        // Our station class
    base::safe_ptr<simulation::ISimulation> simulation;  // Our simulation class
    TSource timeline {UTC};                              // Source of our timeline
    unsigned short iffEventID{};                         // IFF event ID (as needed)

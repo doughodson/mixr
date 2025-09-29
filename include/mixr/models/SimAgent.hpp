@@ -5,7 +5,7 @@
 #include "mixr/base/ubf/Agent.hpp"
 
 namespace mixr {
-namespace simulation { class Station; }
+namespace simulation { class IStation; }
 namespace models {
 class WorldModel;
 
@@ -35,7 +35,7 @@ protected:
 
    void initActor() override;
 
-   simulation::Station* getStation();
+   simulation::IStation* getStation();
    WorldModel* getWorldModel();
 
    // sets which component ("actor") the agent is for
@@ -45,7 +45,7 @@ protected:
 private:
    const base::String* actorPlayerName {};
    const base::String* actorComponentName {};
-   simulation::Station* myStation {};
+   simulation::IStation* myStation {};
 
 private:
    // slot table helper methods

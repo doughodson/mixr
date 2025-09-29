@@ -1,7 +1,7 @@
 
 #include "StationNetPeriodicThread.hpp"
 
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 namespace mixr {
 namespace simulation {
@@ -12,7 +12,7 @@ StationNetPeriodicThread::StationNetPeriodicThread(base::IComponent* const paren
 
 unsigned long StationNetPeriodicThread::userFunc(const double dt)
 {
-   Station* station{static_cast<Station*>(getParent())};
+   IStation* station{static_cast<IStation*>(getParent())};
    station->processNetworkInputTasks(dt);
    station->processNetworkOutputTasks(dt);
    return 0;

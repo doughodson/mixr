@@ -13,7 +13,7 @@ namespace base {
 class Identifier;
 namespace ubf { class IBehavior; class IState; }
 }
-namespace simulation { class Station; }
+namespace simulation { class IStation; }
 namespace models {
 class WorldModel;
 
@@ -52,7 +52,7 @@ protected:
    void setActor(base::IComponent* c);
    base::IComponent* getActor()                        { return actor;}
 
-   simulation::Station* getStation();
+   simulation::IStation* getStation();
    WorldModel* getWorldModel();
 
    struct AgentItem
@@ -69,7 +69,7 @@ protected:
 private:
    base::IComponent* actor{};
    base::ubf::IState* state{};
-   simulation::Station* myStation{};
+   simulation::IStation* myStation{};
 
    // agent/behavior list
    unsigned int nAgents{};          // Number of input behavior/agent pairs

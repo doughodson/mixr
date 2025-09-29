@@ -16,7 +16,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/simulation/ISimulation.hpp"
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/string_utils.hpp"

@@ -1,7 +1,7 @@
 
 #include "StationBgPeriodicThread.hpp"
 
-#include "mixr/simulation/Station.hpp"
+#include "mixr/simulation/IStation.hpp"
 
 namespace mixr {
 namespace simulation {
@@ -12,7 +12,7 @@ StationBgPeriodicThread::StationBgPeriodicThread(base::IComponent* const parent,
 
 unsigned long StationBgPeriodicThread::userFunc(const double dt)
 {
-   Station* station{static_cast<Station*>(getParent())};
+   IStation* station{static_cast<IStation*>(getParent())};
    station->processBackgroundTasks(dt);
    return 0;
 }
