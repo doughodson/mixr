@@ -18,19 +18,19 @@ OBJS =  \
 	concepts/linkage/IIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
-    linearsystem/IDiffEquation.o \
-    linearsystem/FirstOrderTf.o \
-    linearsystem/LagFilter.o \
-    linearsystem/Limit.o \
-    linearsystem/Limit01.o \
-    linearsystem/Limit11.o \
-    linearsystem/LimitFunc.o \
-    linearsystem/LowpassFilter.o \
-    linearsystem/SaH.o \
-    linearsystem/IScalerFunc.o \
-    linearsystem/SecondOrderTf.o \
-    linearsystem/Sz1.o \
-    linearsystem/Sz2.o \
+	linearsystem/IDiffEquation.o \
+	linearsystem/FirstOrderTf.o \
+	linearsystem/LagFilter.o \
+	linearsystem/Limit.o \
+	linearsystem/Limit01.o \
+	linearsystem/Limit11.o
+	linearsystem/LimitFunc.o \
+	linearsystem/LowpassFilter.o \
+	linearsystem/SaH.o \
+	linearsystem/IScalerFunc.o \
+	linearsystem/SecondOrderTf.o \
+	linearsystem/Sz1.o \
+	linearsystem/Sz2.o \
 	network/INetHandler.o \
 	network/IPosixHandler.o \
 	network/TcpClient.o \
@@ -71,25 +71,6 @@ OBJS =  \
 	relations/Table4.o \
 	relations/Table5.o \
 	relations/TableStorage.o \
-	threads/platform/IThread_linux.o \
-	threads/platform/IPeriodicThread_linux.o \
-	threads/platform/ISyncThread_linux.o \
-	threads/IThread.o \
-	threads/IOneShotThread.o \
-	threads/IPeriodicThread.o \
-	threads/ISyncThread.o \
-	timers/ITimer.o \
-	timers/UpTimer.o \
-	timers/DownTimer.o \
-	transformations/ITransform.o \
-	transformations/Translation.o \
-	transformations/Rotation.o \
-	transformations/Scale.o \
-	ubf/IAction.o \
-	ubf/IBehavior.o \
-	ubf/IState.o \
-	ubf/Agent.o \
-	ubf/Arbiter.o \
 	qty/angle/IAngle.o \
 	qty/angle/Degrees.o \
 	qty/angle/Radians.o \
@@ -156,6 +137,25 @@ OBJS =  \
 	qty/volume/Liters.o \
 	qty/volume/IVolume.o \
 	qty/IQuantity.o \
+	threads/platform/IThread_linux.o \
+	threads/platform/IPeriodicThread_linux.o \
+	threads/platform/ISyncThread_linux.o \
+	threads/IThread.o \
+	threads/IOneShotThread.o \
+	threads/IPeriodicThread.o \
+	threads/ISyncThread.o \
+	timers/ITimer.o \
+	timers/UpTimer.o \
+	timers/DownTimer.o \
+	transformations/ITransform.o \
+	transformations/Translation.o \
+	transformations/Rotation.o \
+	transformations/Scale.o \
+	ubf/IAction.o \
+	ubf/IBehavior.o \
+	ubf/IState.o \
+	ubf/Agent.o \
+	ubf/Arbiter.o \
 	util/platform/system_linux.o \
 	util/endian_utils.o \
 	util/filesystem_utils.o \
@@ -207,11 +207,6 @@ clean:
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
 	-rm -f relations/*.o
-	-rm -f threads/platform/*.o
-	-rm -f threads/*.o
-	-rm -f timers/*.o
-	-rm -f transformations/*.o
-	-rm -f ubf/*.o
 	-rm -f qty/area/*.o
 	-rm -f qty/angle/*.o
 	-rm -f qty/length/*.o
@@ -224,6 +219,11 @@ clean:
 	-rm -f qty/time/*.o
 	-rm -f qty/volume/*.o
 	-rm -f qty/*.o
+	-rm -f threads/platform/*.o
+	-rm -f threads/*.o
+	-rm -f timers/*.o
+	-rm -f transformations/*.o
+	-rm -f ubf/*.o
 	-rm -f util/platform/*.o
 	-rm -f util/*.o
 	-rm -f *.o
