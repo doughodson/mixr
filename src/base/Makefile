@@ -23,7 +23,7 @@ OBJS =  \
 	linearsystem/LagFilter.o \
 	linearsystem/Limit.o \
 	linearsystem/Limit01.o \
-	linearsystem/Limit11.o
+	linearsystem/Limit11.o \
 	linearsystem/LimitFunc.o \
 	linearsystem/LowpassFilter.o \
 	linearsystem/SaH.o \
