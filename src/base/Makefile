@@ -56,21 +56,6 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
-	relations/IFStorage.o \
-	relations/Func1.o \
-	relations/Func2.o \
-	relations/Func3.o \
-	relations/Func4.o \
-	relations/Func5.o \
-	relations/IFunction.o \
-	relations/Polynomial.o \
-	relations/ITable.o \
-	relations/Table1.o \
-	relations/Table2.o \
-	relations/Table3.o \
-	relations/Table4.o \
-	relations/Table5.o \
-	relations/TableStorage.o \
 	qty/angle/IAngle.o \
 	qty/angle/Degrees.o \
 	qty/angle/Radians.o \
@@ -137,6 +122,21 @@ OBJS =  \
 	qty/volume/Liters.o \
 	qty/volume/IVolume.o \
 	qty/IQuantity.o \
+	relations/IFStorage.o \
+	relations/Func1.o \
+	relations/Func2.o \
+	relations/Func3.o \
+	relations/Func4.o \
+	relations/Func5.o \
+	relations/IFunction.o \
+	relations/Polynomial.o \
+	relations/ITable.o \
+	relations/Table1.o \
+	relations/Table2.o \
+	relations/Table3.o \
+	relations/Table4.o \
+	relations/Table5.o \
+	relations/TableStorage.o \
 	threads/platform/IThread_linux.o \
 	threads/platform/IPeriodicThread_linux.o \
 	threads/platform/ISyncThread_linux.o \
@@ -206,7 +206,6 @@ clean:
 	-rm -f numeric/operators/*.o
 	-rm -f numeric/*.o
 	-rm -f osg/*.o
-	-rm -f relations/*.o
 	-rm -f qty/area/*.o
 	-rm -f qty/angle/*.o
 	-rm -f qty/length/*.o
@@ -219,6 +218,7 @@ clean:
 	-rm -f qty/time/*.o
 	-rm -f qty/volume/*.o
 	-rm -f qty/*.o
+	-rm -f relations/*.o
 	-rm -f threads/platform/*.o
 	-rm -f threads/*.o
 	-rm -f timers/*.o
