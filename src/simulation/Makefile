@@ -11,6 +11,7 @@ OBJS =  \
 	IPlayer.o \
 	IRecorder.o \
 	ISimulation.o \
+	IStation.o \
 	Simulation.o \
 	SimulationBgSyncThread.o \
 	SimulationTcSyncThread.o \
