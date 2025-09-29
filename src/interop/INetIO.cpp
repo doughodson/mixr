@@ -23,9 +23,9 @@
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Decibel.hpp"
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include <cstring>
 #include <cmath>

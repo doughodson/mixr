@@ -84,7 +84,7 @@ public:
    // Sets the Effective Radiated Power (ERP) (watts)
    void setPower(const double f)                              { power = f; }
 
-   // (one way) Range loss (no units)
+   // (one way) Range loss (no qty)
    double getRangeLoss() const                                { return lossRng; }
 
    // Antenna Polarization (see the Antenna class)
@@ -93,10 +93,10 @@ public:
    // Sets the antenna Polarization (see the Antenna class)
    void setPolarization(const Antenna::Polarization p)        { polar = p; }
 
-   // Effective antenna gain (no units)
+   // Effective antenna gain (no qty)
    double getGain() const                                     { return gain; }
 
-   // Sets the effective antenna gain (no units)
+   // Sets the effective antenna gain (no qty)
    void setGain(const double g)                               { gain = g; }
 
    // Doppler shift (hz)
@@ -106,16 +106,16 @@ public:
       else return 0.0;
    }
 
-   // Atmospheric attenuation loss (no units)
+   // Atmospheric attenuation loss (no qty)
    double getAtmosphericAttenuationLoss() const               { return lossAtmos; }
 
-   // Sets the atmospheric attenuation loss (no units)
+   // Sets the atmospheric attenuation loss (no qty)
    void setAtmosphericAttenuationLoss(const double loss)      { lossAtmos = loss; }
 
-   // Returns the transmit loss (no units)
+   // Returns the transmit loss (no qty)
    double getTransmitLoss() const                             { return lossXmit; }
 
-   // Sets the transmit loss (no units)
+   // Sets the transmit loss (no qty)
    void setTransmitLoss(const double v)                       { lossXmit = v; }
 
    // Target's Radar Cross Section (RCS) as a function of this emission data (m^2)
@@ -149,12 +149,12 @@ private:
    double pw{};             // Pulse Width                      (Sec)
    double bw{};             // Bandwidth                        (Hz)
    double prf{};            // Pulse Repetition Frequency       (Hz)
-   unsigned int pulses{1};  // Number of Pulses this packet     (no units)
+   unsigned int pulses{1};  // Number of Pulses this packet     (no qty)
    double power{};          // Effective Radiated Power (erp)   (Watts)
-   double gain{};           // Effective antenna gain           (no units)
+   double gain{};           // Effective antenna gain           (no qty)
    double lossRng{1.0};     // Loss due to range                (m^-2)
-   double lossAtmos{1.0};   // Atmospheric Attenuation Loss     (no units)
-   double lossXmit{1.0};    // Transmit loss (default: 1.0)     (no units)
+   double lossAtmos{1.0};   // Atmospheric Attenuation Loss     (no qty)
+   double lossXmit{1.0};    // Transmit loss (default: 1.0)     (no qty)
    double rcs{};            // Radar Cross Section (RCS)        (m^2)
    Antenna::Polarization polar{Antenna::Polarization::NONE};  // Antenna polarization   (enum)
    IRfSystem* transmitter{};         // The system that transmitted the emission

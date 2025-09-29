@@ -18,9 +18,9 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
-#include "mixr/base/units/powers.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
+#include "mixr/base/qty/powers.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
 
@@ -34,7 +34,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Antenna, "Antenna")
 BEGIN_SLOTTABLE(Antenna)
     "polarization",         //  1: Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
     "threshold",            //  2: Antenna threshold                (base::Power)
-    "gain",                 //  3: Gain                             (no units)
+    "gain",                 //  3: Gain                             (no qty)
     "gainPattern",          //  4: Gain pattern (base::Func1 or base::Func2) (db)
     "gainPatternDeg",       //  5: Gain pattern in degrees flag (true: degrees, false(default): radians)
     "recycle",              //  6: Recycle emissions flag (default: true)

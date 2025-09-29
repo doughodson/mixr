@@ -13,8 +13,8 @@ namespace instruments {
 // Description: Generic Landing Gear readout
 //
 // Public member functions:
-//      setGearDownValue() (units)
-//      setGearUpValue()   (units)
+//      setGearDownValue() (qty)
+//      setGearUpValue()   (qty)
 //------------------------------------------------------------------------------
 class LandingGear : public Instrument
 {

@@ -18,7 +18,7 @@ gauge:
         ( Table1
             // our input value ranges from 1 to 100
             x: [ 0 100 ]
-            // the amount that we translate to and draw back from can be from 0 to 10 units.  (Remember that our ortho is 10.5 to -10.5, take this into consideration when setting this up)
+            // the amount that we translate to and draw back from can be from 0 to 10 qty.  (Remember that our ortho is 10.5 to -10.5, take this into consideration when setting this up)
             data: [ 0 10 ]
         )
     

@@ -13,9 +13,9 @@ IMPLEMENT_SUBCLASS(Tape, "Tape")
 EMPTY_DELETEDATA(Tape)
 
 BEGIN_SLOTTABLE(Tape)
-    "range",            // 1) Total range (in units) of the scale
+    "range",            // 1) Total range (in qty) of the scale
     "height",           // 2) Height of the total amount of clipped area you have
-    "increment",        // 3) How much spaced (units) between each number?
+    "increment",        // 3) How much spaced (qty) between each number?
     "vertical",         // 4) do we show negative numbers?
     "maximum",          // 5) Maximum value before we don't display anymore
     "minimum",          // 6) minimum value before we don't display anymore
@@ -141,7 +141,7 @@ bool Tape::setSlotMinNum(const base::INumber* const x)
 }
 
 //------------------------------------------------------------------------------
-// setSlotConvert() - convert to degrees instead of units?  (for circular tapes)
+// setSlotConvert() - convert to degrees instead of qty?  (for circular tapes)
 //------------------------------------------------------------------------------
 bool Tape::setSlotConvert(const base::Boolean* const x)
 {
@@ -224,9 +224,9 @@ void Tape::updateData(const double dt)
     send("number%dhunds", SET_VISIBILITY, numberValsHundsVis.data(), numberValsHundsVisSD.data(), MAX_NUMBERS);
     send("number%dthous", SET_VISIBILITY, numberValsThousVis.data(), numberValsThousVisSD.data(), MAX_NUMBERS);
 
-    double unitsOfHeightPerRange = height/range;
+    double qtyOfHeightPerRange = height/range;
     double newVal = (nearest * increment) - x;
-    newVal *= unitsOfHeightPerRange;
+    newVal *= qtyOfHeightPerRange;
         //std::cout << "NEW VALUE = " << newVal << std::endl;
 
 

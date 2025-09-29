@@ -74,7 +74,7 @@ protected:
 private:
    const base::Table4* airframeSignatureTable {};
             // mapping of
-            // signature  x is the velocity (in mach #) and y is altitude (in sim prevailing units --
+            // signature  x is the velocity (in mach #) and y is altitude (in sim prevailing qty --
             // meters, I believe), z is azimuth in radians, za is
             // elevation in radians. Data is the heat signature in watts per steradian.
 

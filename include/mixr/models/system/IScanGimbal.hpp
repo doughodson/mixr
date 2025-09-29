@@ -3,7 +3,7 @@
 #define __mixr_models_common_IScanGimbal_HPP__
 
 #include "mixr/models/system/IGimbal.hpp"
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class INumber; class IAngle; }

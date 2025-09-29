@@ -6,7 +6,7 @@
 // The MapPage event handler does different things depending on the event message sent to it.  See MapPage.hpp for an explanation of what each event does.
 mappage:
 ( MapPage
-    // This slot sets the outer circular radius of our map, in units.  It uses this to calculate nautical miles per inches and for other calculations
+    // This slot sets the outer circular radius of our map, in qty.  It uses this to calculate nautical miles per inches and for other calculations
     outerRadius: 10.5
     // Some maps are based on a centered/decentered mode, in which in one mode the aircraft is the center, and in the other mode the aircraft is displaced
     // towards the bottom of the screen, for a forward looking view.  This slot tells us what our new radius should be if we go to decentered mode.

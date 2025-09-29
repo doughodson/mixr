@@ -5,7 +5,7 @@
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/transformations/Rotation.hpp"
-#include "mixr/base/units/angles.hpp"
+#include "mixr/base/qty/angles.hpp"
 
 namespace mixr {
 namespace base {

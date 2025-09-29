@@ -18,9 +18,9 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include "mixr/base/util/str_utils.hpp"
 
@@ -57,7 +57,7 @@ static const double EE_FREQ_THRSH         {1.0};           //  Hz
 static const double EE_FRNG_THRSH         {1.0};           //  Hz
 static const double EE_PRF_THRSH          {1.0};           //  Hz
 static const double EE_PW_THRSH           {1.0e-6};        //  seconds
-//static const unsigned int EE_HIGH_DENSITY_THRSH {10};               //  no units
+//static const unsigned int EE_HIGH_DENSITY_THRSH {10};               //  no qty
 
 BEGIN_SLOTTABLE(NetIO)
    "netInput",             //  1) Network input handler

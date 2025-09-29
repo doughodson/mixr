@@ -14,7 +14,7 @@
 
 #include "mixr/base/util/nav_utils.hpp"
 
-#include "mixr/base/units/angles.hpp"
+#include "mixr/base/qty/angles.hpp"
 
 #include <cmath>
 

@@ -167,8 +167,8 @@ public:
    //
    static bool getElevationColor(
       const double elevation,           // Elevation
-      const double minz,                // Min elevation (units: same as elevation)
-      const double maxz,                // Max elevtion  (units: same as elevation)
+      const double minz,                // Min elevation (qty: same as elevation)
+      const double maxz,                // Max elevtion  (qty: same as elevation)
       const base::Hsva** colorTable,    // Color table
       const unsigned int numColors,     // Number of colors
       base::Vec3d& rgb);                // Color

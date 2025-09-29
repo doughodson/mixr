@@ -19,7 +19,7 @@ namespace models {
 IMPLEMENT_PARTIAL_SUBCLASS(IRadar, "IRadar")
 
 BEGIN_SLOTTABLE(IRadar)
-   "igain",    //  1: RF: Integrator gain (dB or no units; def: 1.0)
+   "igain",    //  1: RF: Integrator gain (dB or no qty; def: 1.0)
 END_SLOTTABLE(IRadar)
 
 BEGIN_SLOT_MAP(IRadar)
@@ -529,7 +529,7 @@ unsigned int IRadar::computeRangeIndex(const double rng)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// igain: Integrator gain (dB or no units; def: 1.0)
+// igain: Integrator gain (dB or no qty; def: 1.0)
 bool IRadar::setSlotIGain(base::INumber* const v)
 {
    bool ok{};

@@ -28,7 +28,7 @@ class IRfSystem;
 //
 //      threshold       <base::IPower>          ! Antenna threshold  (default: 0.0)
 //
-//      gain            <base::INumber>         ! Gain (default: 1.0)              (no units)
+//      gain            <base::INumber>         ! Gain (default: 1.0)              (no qty)
 //
 //      gainPattern     <base::Function>        ! Gain pattern (base::Func1 or base::Func2) (db)
 //                                              ! (default: 0)
@@ -142,7 +142,7 @@ private:
 
    // antenna parameters
    Polarization polar{Polarization::NONE};      // polarization  (enum)
-   double gain{1.0};                            // gain          (no units)
+   double gain{1.0};                            // gain          (no qty)
    base::IFunction* gainPattern{};              // gain pattern  (Function)
 
    double threshold{};                          // antenna threshold; don't send emission if

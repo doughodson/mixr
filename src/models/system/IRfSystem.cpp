@@ -12,8 +12,8 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/powers.hpp"
-#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/qty/powers.hpp"
+#include "mixr/base/qty/frequencies.hpp"
 
 namespace mixr {
 namespace models {
@@ -26,11 +26,11 @@ BEGIN_SLOTTABLE(IRfSystem)
    "bandwidth",            //  3: Bandwidth     (Hz; def: 1)     (base::Frequency)
    "powerPeak",            //  4: Peak Power (Watts; def: 0)
    "threshold",            //  5: RF: Receiver threshold above noise (dB, def: 0.0)
-   "noiseFigure",          //  6: RF: Noise Figure (> 1)            (no units; def: 1.0)
+   "noiseFigure",          //  6: RF: Noise Figure (> 1)            (no qty; def: 1.0)
    "systemTemperature",    //  7: RF: System Temperature            (Kelvin; def: 290.0)
-   "lossXmit",             //  8: RF: Transmit loss                 (dB or no units; def: 1.0)
-   "lossRecv",             //  9: RF: Receive loss                  (dB or no units; def: 1.0)
-   "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no units; def: 1.0)
+   "lossXmit",             //  8: RF: Transmit loss                 (dB or no qty; def: 1.0)
+   "lossRecv",             //  9: RF: Receive loss                  (dB or no qty; def: 1.0)
+   "lossSignalProcess",    // 10: RF: Signal Processing loss        (dB or no qty; def: 1.0)
    "disableEmissions",     // 11: Disable sending emission packets flag (default: false)
    "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (base::Frequency)
 END_SLOTTABLE(IRfSystem)
@@ -349,25 +349,25 @@ double IRfSystem::getRfThreshold() const
    return rfThreshold;
 }
 
-// Returns the transmit loss (no units)
+// Returns the transmit loss (no qty)
 double IRfSystem::getRfTransmitLoss() const
 {
    return rfLossXmit;
 }
 
-// Returns the receive loss   (no units)
+// Returns the receive loss   (no qty)
 double IRfSystem::getRfReceiveLoss() const
 {
    return rfLossRecv;
 }
 
-// Returns the signal Processing loss (no units)
+// Returns the signal Processing loss (no qty)
 double IRfSystem::getRfSignalProcessLoss() const
 {
    return rfLossSignalProcess;
 }
 
-// Returns the receiver noise figure (no units)
+// Returns the receiver noise figure (no qty)
 double IRfSystem::getRfNoiseFigure() const
 {
    return rfNoiseFigure;
@@ -672,7 +672,7 @@ bool IRfSystem::setSlotRfThreshold(base::Decibel* const v)
     return ok;
 }
 
-// setSlotRfNoiseFigure() -- set the noise figure (no units)
+// setSlotRfNoiseFigure() -- set the noise figure (no qty)
 bool IRfSystem::setSlotRfNoiseFigure(base::INumber* const v)
 {
     bool ok{};

@@ -2,7 +2,7 @@
 #include "mixr/base/linearsystem/LagFilter.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 
 namespace mixr {
 namespace base {

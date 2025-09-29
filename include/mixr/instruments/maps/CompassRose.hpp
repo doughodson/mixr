@@ -3,7 +3,7 @@
 #define __mixr_instruments_CompassRose_HPP__
 
 #include "mixr/graphics/Graphic.hpp"
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class INumber; }

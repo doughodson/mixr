@@ -5,8 +5,8 @@
 #include "mixr/base/IList.hpp"
 #include "mixr/base/PairStream.hpp"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include <cmath>
 

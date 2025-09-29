@@ -41,17 +41,17 @@ class RfEmission;
 //
 //    threshold          <base::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
 //
-//    noiseFigure        <base::INumber>       ! Noise Figure (> 1)             (no units; def: 1.0)
+//    noiseFigure        <base::INumber>       ! Noise Figure (> 1)             (no qty; def: 1.0)
 //
 //    systemTemperature  <base::INumber>       ! System Temperature             (Kelvin; def: 290.0)
 //
-//    lossXmit           <base::INumber>       ! Transmit loss                  (no units; def: 1.0)
+//    lossXmit           <base::INumber>       ! Transmit loss                  (no qty; def: 1.0)
 //                       <base::Decibel>       ! Transmit loss                  (dB)
 //
-//    lossRecv           <base::INumber>       ! Receive loss                   (no units; def: 1.0)
+//    lossRecv           <base::INumber>       ! Receive loss                   (no qty; def: 1.0)
 //                       <base::Decibel>       ! Receive loss                   (dB)
 //
-//    lossSignalProcess  <base::INumber>       ! Signal Processing loss         (no units; def: 1.0)
+//    lossSignalProcess  <base::INumber>       ! Signal Processing loss         (no qty; def: 1.0)
 //                       <base::Decibel>       ! Signal Processing loss         (dB)
 //
 //    disableEmissions   <base:Boolean>        ! Disable sending emission packets flag (default: false)
@@ -79,10 +79,10 @@ public:
    virtual double getRfSysTemp() const;                  // Returns system temperature (Kelvin)
    virtual double getRfRecvNoise() const;                // Returns the receiver noise (watts)
    virtual double getRfThreshold() const;                // Returns the receiver threshold (over S/N) (dB)
-   virtual double getRfTransmitLoss() const;             // Returns the transmit loss (no units)
-   virtual double getRfReceiveLoss() const;              // Returns the receive loss (no units)
-   virtual double getRfSignalProcessLoss() const;        // Returns the signal Processing loss (no units)
-   virtual double getRfNoiseFigure() const;              // Returns the receiver noise figure (no units)
+   virtual double getRfTransmitLoss() const;             // Returns the transmit loss (no qty)
+   virtual double getRfReceiveLoss() const;              // Returns the receive loss (no qty)
+   virtual double getRfSignalProcessLoss() const;        // Returns the signal Processing loss (no qty)
+   virtual double getRfNoiseFigure() const;              // Returns the receiver noise figure (no qty)
 
    virtual Antenna* getAntenna();
    virtual const Antenna* getAntenna() const;            // Pointer to the antenna model, or zero (0) if none
@@ -100,10 +100,10 @@ public:
    virtual bool setPeakPower(const double watts);        // Sets the transmitter's peak power (watts)
    virtual bool setRfSysTemp(const double);              // Sets the system temperature (Kelvin)
    virtual bool setRfThreshold(const double);            // Sets the receiver threshold (over S/N) (dB)
-   virtual bool setRfNoiseFigure(const double);          // Sets the receiver noise figure (>= 1)  (no units)
-   virtual bool setRfTransmitLoss(const double);         // Sets the transmit loss (default: 1.0) (no units)
-   virtual bool setRfReceiveLoss(const double);          // Sets the receive loss (default: 1.0) (no units)
-   virtual bool setRfSignalProcessLoss(const double);    // Sets the signal Processing loss (default: 1.0) (no units)
+   virtual bool setRfNoiseFigure(const double);          // Sets the receiver noise figure (>= 1)  (no qty)
+   virtual bool setRfTransmitLoss(const double);         // Sets the transmit loss (default: 1.0) (no qty)
+   virtual bool setRfReceiveLoss(const double);          // Sets the receive loss (default: 1.0) (no qty)
+   virtual bool setRfSignalProcessLoss(const double);    // Sets the signal Processing loss (default: 1.0) (no qty)
    virtual bool setReceiverNoise(const double);          // Sets the receiver noise (Watts)
 
    virtual bool setReceiverEnabledFlag(const bool);      // Enables/disables the R/F system's receiver
@@ -156,13 +156,13 @@ private:
    double frequency{};              // Frequency            (Hz)
    double bandwidth{};              // Receiver bandwidth    (Hz)
    double bandwidthNoise{};         // [B] Receiver bandwidth noise (Hz)
-   double rfNoiseFigure{1.0};       // [F] Receiver noise figure (> 1)          (no units)
+   double rfNoiseFigure{1.0};       // [F] Receiver noise figure (> 1)          (no qty)
    double rfSysTemp{290.0};         // [T] System Temperature                   (Kelvin)
    double rfRecvNoise{};            // [N] Noise (N = F * k * T * B)            (Watts)
    double rfThreshold{};            // Receiver threshold (over S/N)            (dB)
-   double rfLossXmit{1.0};          // Transmit loss (default: 1.0)             (no units)
-   double rfLossRecv{1.0};          // Receive loss (default: 1.0)              (no units)
-   double rfLossSignalProcess{1.0}; // Signal Processing loss (default: 1.0)    (no units)
+   double rfLossXmit{1.0};          // Transmit loss (default: 1.0)             (no qty)
+   double rfLossRecv{1.0};          // Receive loss (default: 1.0)              (no qty)
+   double rfLossSignalProcess{1.0}; // Signal Processing loss (default: 1.0)    (no qty)
 
 private:
    // slot table helper methods

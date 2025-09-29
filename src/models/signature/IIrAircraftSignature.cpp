@@ -13,7 +13,7 @@
 #include "mixr/base/relations/Table5.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/areas.hpp"
+#include "mixr/base/qty/areas.hpp"
 
 namespace mixr {
 namespace models {
@@ -24,8 +24,8 @@ BEGIN_SLOTTABLE(IIrAircraftSignature)
    "airframeSignatureTable",  // mapping of
             // signature to  pla, where pla is in % from 0 - 100
             // x of this table is the pla
-            //  y is the velocity (in sim prevailing units --
-            // knots, I believe) and z is altitude (in sim prevailing units --
+            //  y is the velocity (in sim prevailing qty --
+            // knots, I believe) and z is altitude (in sim prevailing qty --
             // meters, I believe). Data is the heat signature in watts per steradian.
    "airframeWavebandFactorTable",
             // airframe wavebands

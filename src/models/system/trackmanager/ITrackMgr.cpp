@@ -12,7 +12,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 
 namespace mixr {
 namespace models {

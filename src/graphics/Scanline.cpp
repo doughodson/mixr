@@ -4,7 +4,7 @@
 #include "mixr/graphics/Clip3D.hpp"
 #include "mixr/graphics/Polygon.hpp"
 
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 namespace mixr {
 namespace graphics {

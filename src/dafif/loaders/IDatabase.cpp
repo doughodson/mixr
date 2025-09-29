@@ -5,8 +5,8 @@
 
 #include "mixr/base/FileReader.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
+#include "mixr/base/qty/lengths.hpp"
 
 #include <cstring>
 #include <cmath>

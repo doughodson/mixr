@@ -11,7 +11,7 @@
 #include "mixr/base/relations/Table3.hpp"
 #include "mixr/base/relations/Table4.hpp"
 
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/lengths.hpp"
 
 #include <cmath>
 
@@ -240,7 +240,7 @@ double IrAtmosphere1::getTransmissivity(
 //------------------------------------------------------------------------------------------------------
 // getSolarRadiation() -- Return the amount of solar radiation in the region of the spectrum defined by the
 //        upper and lower wavelengths as a function of the target altitude. The output is in
-//        the units watts/steradian sq-m.
+//        the qty watts/steradian sq-m.
 //------------------------------------------------------------------------------------------------------
 
 double IrAtmosphere1::getSolarRadiation(

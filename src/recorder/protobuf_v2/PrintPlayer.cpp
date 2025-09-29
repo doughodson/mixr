@@ -3,7 +3,7 @@
 #include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 #include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
 
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 #include "mixr/base/String.hpp"
 
 #include <iomanip>

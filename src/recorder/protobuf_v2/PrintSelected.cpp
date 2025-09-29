@@ -8,7 +8,7 @@
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

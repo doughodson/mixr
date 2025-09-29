@@ -6,7 +6,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

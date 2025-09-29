@@ -90,72 +90,72 @@ OBJS =  \
 	ubf/IState.o \
 	ubf/Agent.o \
 	ubf/Arbiter.o \
-	units/angle/IAngle.o \
-	units/angle/Degrees.o \
-	units/angle/Radians.o \
-	units/angle/Semicircles.o \
-	units/area/IArea.o \
-	units/area/DecibelSquareMeters.o \
-	units/area/SquareCentiMeters.o \
-	units/area/SquareFeet.o \
-	units/area/SquareInches.o \
-	units/area/SquareKiloMeters.o \
-	units/area/SquareMeters.o \
-	units/area/SquareMiles.o \
-	units/area/SquareMilliMeters.o \
-	units/area/SquareYards.o \
-	units/energy/BTUs.o \
-	units/energy/Calories.o \
-	units/energy/IEnergy.o \
-	units/energy/FootPounds.o \
-	units/energy/Joules.o \
-	units/energy/KiloWattHours.o \
-	units/force/IForce.o \
-	units/force/KiloNewtons.o \
-	units/force/Newtons.o \
-	units/force/Poundals.o \
-	units/force/PoundForces.o \
-	units/frequency/IFrequency.o \
-	units/frequency/GigaHertz.o \
-	units/frequency/Hertz.o \
-	units/frequency/KiloHertz.o \
-	units/frequency/MegaHertz.o \
-	units/frequency/TeraHertz.o \
-	units/length/CentiMeters.o \
-	units/length/Feet.o \
-	units/length/Inches.o \
-	units/length/KiloMeters.o \
-	units/length/ILength.o \
-	units/length/Meters.o \
-	units/length/MicroMeters.o \
-	units/length/Microns.o \
-	units/length/NauticalMiles.o \
-	units/length/StatuteMiles.o \
-	units/mass/Grams.o \
-	units/mass/KiloGrams.o \
-	units/mass/IMass.o \
-	units/mass/Slugs.o \
-	units/power/DecibelMilliWatts.o \
-	units/power/DecibelWatts.o \
-	units/power/Horsepower.o \
-	units/power/KiloWatts.o \
-	units/power/MilliWatts.o \
-	units/power/IPower.o \
-	units/power/Watts.o \
-	units/time/Days.o \
-	units/time/Hours.o \
-	units/time/MicroSeconds.o \
-	units/time/MilliSeconds.o \
-	units/time/Minutes.o \
-	units/time/NanoSeconds.o \
-	units/time/Seconds.o \
-	units/time/ITime.o \
-	units/volume/CubicFeet.o \
-	units/volume/CubicInches.o \
-	units/volume/CubicMeters.o \
-	units/volume/Liters.o \
-	units/volume/IVolume.o \
-	units/IQuantity.o \
+	qty/angle/IAngle.o \
+	qty/angle/Degrees.o \
+	qty/angle/Radians.o \
+	qty/angle/Semicircles.o \
+	qty/area/IArea.o \
+	qty/area/DecibelSquareMeters.o \
+	qty/area/SquareCentiMeters.o \
+	qty/area/SquareFeet.o \
+	qty/area/SquareInches.o \
+	qty/area/SquareKiloMeters.o \
+	qty/area/SquareMeters.o \
+	qty/area/SquareMiles.o \
+	qty/area/SquareMilliMeters.o \
+	qty/area/SquareYards.o \
+	qty/energy/BTUs.o \
+	qty/energy/Calories.o \
+	qty/energy/IEnergy.o \
+	qty/energy/FootPounds.o \
+	qty/energy/Joules.o \
+	qty/energy/KiloWattHours.o \
+	qty/force/IForce.o \
+	qty/force/KiloNewtons.o \
+	qty/force/Newtons.o \
+	qty/force/Poundals.o \
+	qty/force/PoundForces.o \
+	qty/frequency/IFrequency.o \
+	qty/frequency/GigaHertz.o \
+	qty/frequency/Hertz.o \
+	qty/frequency/KiloHertz.o \
+	qty/frequency/MegaHertz.o \
+	qty/frequency/TeraHertz.o \
+	qty/length/CentiMeters.o \
+	qty/length/Feet.o \
+	qty/length/Inches.o \
+	qty/length/KiloMeters.o \
+	qty/length/ILength.o \
+	qty/length/Meters.o \
+	qty/length/MicroMeters.o \
+	qty/length/Microns.o \
+	qty/length/NauticalMiles.o \
+	qty/length/StatuteMiles.o \
+	qty/mass/Grams.o \
+	qty/mass/KiloGrams.o \
+	qty/mass/IMass.o \
+	qty/mass/Slugs.o \
+	qty/power/DecibelMilliWatts.o \
+	qty/power/DecibelWatts.o \
+	qty/power/Horsepower.o \
+	qty/power/KiloWatts.o \
+	qty/power/MilliWatts.o \
+	qty/power/IPower.o \
+	qty/power/Watts.o \
+	qty/time/Days.o \
+	qty/time/Hours.o \
+	qty/time/MicroSeconds.o \
+	qty/time/MilliSeconds.o \
+	qty/time/Minutes.o \
+	qty/time/NanoSeconds.o \
+	qty/time/Seconds.o \
+	qty/time/ITime.o \
+	qty/volume/CubicFeet.o \
+	qty/volume/CubicInches.o \
+	qty/volume/CubicMeters.o \
+	qty/volume/Liters.o \
+	qty/volume/IVolume.o \
+	qty/IQuantity.o \
 	util/platform/system_linux.o \
 	util/endian_utils.o \
 	util/filesystem_utils.o \
@@ -212,18 +212,18 @@ clean:
 	-rm -f timers/*.o
 	-rm -f transformations/*.o
 	-rm -f ubf/*.o
-	-rm -f units/area/*.o
-	-rm -f units/angle/*.o
-	-rm -f units/length/*.o
-	-rm -f units/energy/*.o
-	-rm -f units/force/*.o
-	-rm -f units/frequency/*.o
-	-rm -f units/mass/*.o
-	-rm -f units/power/*.o
-	-rm -f units/rate/*.o
-	-rm -f units/time/*.o
-	-rm -f units/volume/*.o
-	-rm -f units/*.o
+	-rm -f qty/area/*.o
+	-rm -f qty/angle/*.o
+	-rm -f qty/length/*.o
+	-rm -f qty/energy/*.o
+	-rm -f qty/force/*.o
+	-rm -f qty/frequency/*.o
+	-rm -f qty/mass/*.o
+	-rm -f qty/power/*.o
+	-rm -f qty/rate/*.o
+	-rm -f qty/time/*.o
+	-rm -f qty/volume/*.o
+	-rm -f qty/*.o
 	-rm -f util/platform/*.o
 	-rm -f util/*.o
 	-rm -f *.o

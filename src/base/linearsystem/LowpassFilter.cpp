@@ -2,7 +2,7 @@
 #include "mixr/base/linearsystem/LowpassFilter.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/qty/frequencies.hpp"
 #include "mixr/base/util/constants.hpp"
 
 namespace mixr {

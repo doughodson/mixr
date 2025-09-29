@@ -1,8 +1,8 @@
 
 #include "mixr/terrain/DataFile.hpp"
 
-#include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/length_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
+#include "mixr/base/qty/util/length_utils.hpp"
 
 namespace mixr {
 namespace terrain {

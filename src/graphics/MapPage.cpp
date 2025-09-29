@@ -13,10 +13,10 @@ IMPLEMENT_SUBCLASS(MapPage, "MapPage")
 EMPTY_DELETEDATA(MapPage)
 
 BEGIN_SLOTTABLE(MapPage)
-    "outerRadius",              // 1) radius (centered) of our outer circle (units)
-    "outerRadiusDecentered",    // 2) radius (de-centered) of our outer arc (units)
+    "outerRadius",              // 1) radius (centered) of our outer circle (qty)
+    "outerRadiusDecentered",    // 2) radius (de-centered) of our outer arc (qty)
     "range",                    // 3) our range (NM) of our outer circle or arc
-    "displacement",             // 4) how far to translate when we are decentered (units)
+    "displacement",             // 4) how far to translate when we are decentered (qty)
     "centered",                 // 5) are we centered, or de-centered (default: centered)
     "refLat",                   // 6) reference latitude (degs)
     "refLon",                   // 7) reference longitude (degs)
@@ -125,13 +125,13 @@ void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
       xpos -= startX;
       ypos = startY - ypos;
 
-      // we have to find our units per pixel
-      const double unitsPerPixE {(tr * 2) / vpW};
-      const double unitsPerPixN {(tt * 2) / vpH};
+      // we have to find our qty per pixel
+      const double qtyPerPixE {(tr * 2) / vpW};
+      const double qtyPerPixN {(tt * 2) / vpH};
 
       // now from that we can determine our position in inches
-      xpos *= unitsPerPixE;
-      ypos *= unitsPerPixN;
+      xpos *= qtyPerPixE;
+      ypos *= qtyPerPixN;
 
       if (!isCentered) ypos -= displacement;
 

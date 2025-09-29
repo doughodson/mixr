@@ -2,7 +2,7 @@
 #include "mixr/base/linearsystem/SaH.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/qty/frequencies.hpp"
 
 namespace mixr {
 namespace base {

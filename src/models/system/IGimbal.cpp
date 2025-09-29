@@ -10,8 +10,8 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 

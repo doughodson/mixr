@@ -12,7 +12,7 @@
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 #include <ctime>
 #include <iostream>

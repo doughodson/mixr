@@ -4,7 +4,7 @@
 
 #include "mixr/graphics/MfdPage.hpp"
 
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 #include <cmath>
 
@@ -43,7 +43,7 @@ namespace graphics {
 //       is X out the nose, Y right and Z down.
 //
 //    7) For "screen" coordinates, X is right and Y is up, and are in screen
-//       'units', which can be inches, centimeters, etc, as defined by the
+//       'qty', which can be inches, centimeters, etc, as defined by the
 //       display's ortho.
 //
 //       The screen coordinates are still relative to the reference point and
@@ -56,8 +56,8 @@ namespace graphics {
 // Factory name: MapPage
 // Slots:
 //
-//   outerRadius           <INumber> ! Radius (centered) of our outer circle (units) (default: 1.0)
-//   outerRadiusDecentered <INumber> ! Radius (de-centered) of our outer arc (units)
+//   outerRadius           <INumber> ! Radius (centered) of our outer circle (qty) (default: 1.0)
+//   outerRadiusDecentered <INumber> ! Radius (de-centered) of our outer arc (qty)
 //
 //   range        <INumber>   ! our range, in nautical miles, of our map (default: 1.0)
 //   displacement <INumber>   ! how far to translate when we are decentered (default: 0.0)
@@ -76,8 +76,8 @@ namespace graphics {
 //      UPDATE_VALUE3 = reference lat (degrees)
 //      UPDATE_VALUE4 = reference lon (degrees)
 //      UPDATE_VALUE5 = centered
-//      UPDATE_VALUE6 = outer radius (units)
-//      UPDATE_VALUE7 = outer radius decentered (units)
+//      UPDATE_VALUE6 = outer radius (qty)
+//      UPDATE_VALUE7 = outer radius decentered (qty)
 //      UPDATE_VALUE8 = displacement
 //
 // -------------------------------------------------------------------------------
@@ -96,12 +96,12 @@ public:
    double getCosRefLat() const;        // reference latitude cosine
    double getHeadingDeg() const;       // true heading (degrees)
    double getHeadingRad() const;       // true heading (radians)
-   double getOuterRadius() const;      // outer radius (units, centered)
+   double getOuterRadius() const;      // outer radius (qty, centered)
    double getCurrentRadius() const;    // return our current radius (dependent on centered/decentered)
-   double getOuterRadiusDC() const;    // outer radius (units, decentered)
+   double getOuterRadiusDC() const;    // outer radius (qty, decentered)
    double getRange() const;            // range (NM)
-   double getScale() const;            // scale factor: screen units per NM
-   double getDisplacement() const;     // de-centered displacement (units)
+   double getScale() const;            // scale factor: screen qty per NM
+   double getDisplacement() const;     // de-centered displacement (qty)
    bool   getCentered() const;         // centered flag
    bool   getNorthUp() const;          // north up flag
 
@@ -112,10 +112,10 @@ public:
    virtual bool setReferenceLonRad(const double newLon); // reference longitude (rads)
    virtual bool setHeadingDeg(const double newHeading);  // true heading (degrees)
    virtual bool setHeadingRad(const double newHeading);  // true heading (radians)
-   virtual bool setOuterRadius(const double newRadius);  // the outer radius (centered mode) (units)
-   virtual bool setOuterRadiusDC(const double newRadiusDC); // the outer radius (de-centered mode) (units)
+   virtual bool setOuterRadius(const double newRadius);  // the outer radius (centered mode) (qty)
+   virtual bool setOuterRadiusDC(const double newRadiusDC); // the outer radius (de-centered mode) (qty)
    virtual bool setRange(const double newRange);         // the range to the outer radius (NM)
-   virtual bool setDisplacement(const double newD);      // the de-centered displacement (units)
+   virtual bool setDisplacement(const double newD);      // the de-centered displacement (qty)
    virtual bool setCentered(const bool newC);            // the 'centered' flag
    virtual bool toggleCentered();
    virtual bool setNorthUp(const bool x);
@@ -126,7 +126,7 @@ public:
    // converts screen to lat/lon coordinates
    virtual bool screen2LatLon(const double screenX, const double screenY, double* const lat, double* const lon) const;
 
-   // converts aircraft (ie, player) coordinates (NM) to screen coordinates (units)
+   // converts aircraft (ie, player) coordinates (NM) to screen coordinates (qty)
    // (screen coordinates do not include the map displacement)
    virtual bool aircraft2Screen(const double acX, const double acY, double* const screenX, double* const screenY) const;
 
@@ -165,15 +165,15 @@ private:
    double headingCos {1.0};          // cosine of heading
    double headingSin {};             // sine of heading
 
-   double nm2Screen {1.0};           // nautical miles to screen units
+   double nm2Screen {1.0};           // nautical miles to screen qty
    double range {1.0};               // range scale of the system (NM)
    bool northUp {true};              // flag to determine north up
 
    // (we keep these separate because we need both of them)
-   double outerRadius {1.0};         // radius of the outer circle's ring (screen units)
-   double outerRadiusDC {1.0};       // radius if we are de-centered (screen units)
+   double outerRadius {1.0};         // radius of the outer circle's ring (screen qty)
+   double outerRadiusDC {1.0};       // radius if we are de-centered (screen qty)
 
-   double displacement {};           // how far to translate up or down when centered/decentered (display units)
+   double displacement {};           // how far to translate up or down when centered/decentered (display qty)
    bool   isCentered {true};         // flag for centering our map page
 
 private:

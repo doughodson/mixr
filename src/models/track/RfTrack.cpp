@@ -5,8 +5,8 @@
 #include "mixr/models/RfEmission.hpp"
 #include "mixr/models/ISensorMsg.hpp"
 
-#include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/length_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
+#include "mixr/base/qty/util/length_utils.hpp"
 
 #include <cmath>
 

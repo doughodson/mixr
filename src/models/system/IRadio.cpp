@@ -8,7 +8,7 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 
-#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/qty/frequencies.hpp"
 
 #include <cmath>
 

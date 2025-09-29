@@ -21,7 +21,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/lengths.hpp"
 
 #include <cmath>
 #include <string>
@@ -252,7 +252,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
       // If the target is larger than the field of view than it is all of background
       // power in the field of view. Use this as the default value.
 
-     // noiseBlockedByTarget is irradiance, in units of watts/m^2
+     // noiseBlockedByTarget is irradiance, in qty of watts/m^2
 
       double noiseBlockedByTarget{totalBackground * ifov};
 

@@ -5,7 +5,7 @@
 
 #include "mixr/base/String.hpp"
 
-#include "mixr/base/units/util/time_utils.hpp"
+#include "mixr/base/qty/util/time_utils.hpp"
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/osg/Quat"
@@ -238,7 +238,7 @@ bool LaeroDynamics::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    if (ok) {
 
       //-------------------------------------------------------
-      // convert argument units (deg -> rad)
+      // convert argument qty (deg -> rad)
       //-------------------------------------------------------
       double phiCmdRad{phiCmdDeg * base::angle::D2RCC};
       double phiDotCmdRps{phiDotCmdDps * base::angle::D2RCC};
@@ -282,7 +282,7 @@ bool LaeroDynamics::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    if (ok) {
 
       //-------------------------------------------------------
-      // convert argument units (deg -> rad)
+      // convert argument qty (deg -> rad)
       //-------------------------------------------------------
       double thtCmdRad{thtCmdDeg * base::angle::D2RCC};
       double thtDotCmdRps{thtDotCmdDps * base::angle::D2RCC};
@@ -326,7 +326,7 @@ bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    if (ok) {
 
       //-------------------------------------------------------
-      // convert argument units (deg -> rad)
+      // convert argument qty (deg -> rad)
       //-------------------------------------------------------
       double psiCmdRad{psiCmdDeg * base::angle::D2RCC};
       double psiDotCmdRps{psiDotCmdDps * base::angle::D2RCC};
@@ -376,7 +376,7 @@ bool LaeroDynamics::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      const double KTS2MPS = base::Distance::NM2M / base::Time::H2S;
 //
 //      //-------------------------------------------------------
-//      // convert argument units (deg -> rad)
+//      // convert argument qty (deg -> rad)
 //      //-------------------------------------------------------
 //      double velCmdMps     = velCmdKts * KTS2MPS;
 //      double velDotCmdMps2 = velDotCmdNps * KTS2MPS;
@@ -561,7 +561,7 @@ bool LaeroDynamics::setCommandedVelocityKts(const double v, const double vNps)
       const double KTS2MPS{base::length::NM2M / base::time::H2S};
 
       //-------------------------------------------------------
-      // convert argument units (deg -> rad)
+      // convert argument qty (deg -> rad)
       //-------------------------------------------------------
       double velCmdMps{v * KTS2MPS};
       double velDotCmdMps2{vNps * KTS2MPS};

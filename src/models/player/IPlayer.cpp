@@ -45,8 +45,8 @@
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/osg/Quat"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -105,9 +105,9 @@ BEGIN_SLOTTABLE(IPlayer)
    "dataLogTime",       // 29) Data logging time -- time between player data samples
 
    // Player's test angular velocities
-   "testRollRate",      // 30) Test roll rate (units per second)
-   "testPitchRate",     // 31) Test pitch rate (units per second)
-   "testYawRate",       // 32) Test heading rate (units per second)
+   "testRollRate",      // 30) Test roll rate (qty per second)
+   "testPitchRate",     // 31) Test pitch rate (qty per second)
+   "testYawRate",       // 32) Test heading rate (qty per second)
    "testBodyAxis",      // 33) Test rates are in body coordinates else Euler rates (default: false)
 
    "useCoordSys"        // 34) Coord system to use for position updating { WORLD, GEOD, LOCAL }

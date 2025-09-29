@@ -16,9 +16,9 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -826,7 +826,7 @@ bool Autopilot::processModeFollowTheLead()
 //
 //      double airSpeedFps   = speed * base::Distance::NM2FT / base::Time::H2S;  // airspeed  [feet/sec]
 //      double turnRateRps   = SRT * base::Angle::D2RCC;                          // standard rate turn  [radians/sec]
-//      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
+//      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no qty]
 //      double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
 //      //double bankAngleDeg  = std::atan(tanBankAngle) * base::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
 //      double orbitOffsetFt = 2.0 * radiusFT;

@@ -7,9 +7,9 @@
 
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/frequencies.hpp"
-#include "mixr/base/units/powers.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/frequencies.hpp"
+#include "mixr/base/qty/powers.hpp"
 
 namespace mixr {
 namespace models {

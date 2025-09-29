@@ -10,7 +10,7 @@ IMPLEMENT_SUBCLASS(StrokeFont, "StrokeFont")
 EMPTY_SLOTTABLE(StrokeFont)
 EMPTY_DELETEDATA(StrokeFont)
 
-// SGI font scaled so six stroke font points (units used below) is 1 screen unit
+// SGI font scaled so six stroke font points (qty used below) is 1 screen unit
 static const double XSCALE {1.0/6.0};
 static const double YSCALE {1.0/6.0};
 

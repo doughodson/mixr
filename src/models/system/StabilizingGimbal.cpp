@@ -14,8 +14,8 @@
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/osg/Vec3d"
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/powers.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/powers.hpp"
 
 namespace mixr {
 namespace models {

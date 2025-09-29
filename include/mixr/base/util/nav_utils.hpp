@@ -7,8 +7,8 @@
 #include "mixr/base/osg/Vec4d"
 #include "mixr/base/osg/Matrixd"
 
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/lengths.hpp"
 #include "mixr/base/util/math_utils.hpp"
 
 namespace mixr {

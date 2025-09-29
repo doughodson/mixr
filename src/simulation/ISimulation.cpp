@@ -16,7 +16,7 @@
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/times.hpp"
+#include "mixr/base/qty/times.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
 #include <cstring>

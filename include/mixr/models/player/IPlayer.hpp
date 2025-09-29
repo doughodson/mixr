@@ -11,8 +11,8 @@
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/osg/Quat"
 
-#include "mixr/base/units/util/angle_utils.hpp"
-#include "mixr/base/units/util/length_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
+#include "mixr/base/qty/util/length_utils.hpp"
 
 #include <array>
 #include <string>
@@ -145,9 +145,9 @@ class IRfSignature;
 //    !     If non-zero the Euler angles are updated using the body angular rates.
 //    !     For use only without a dynamics model.
 //    ! ---
-//    testRollRate       <base::IAngle>      ! Test roll rate (body) (units per second) (default: 0)
-//    testPitchRate      <base::IAngle>      ! Test pitch rate (body) (units per second) (default: 0)
-//    testYawRate        <base::IAngle>      ! Test heading rate (body) (units per second) (default: 0)
+//    testRollRate       <base::IAngle>      ! Test roll rate (body) (qty per second) (default: 0)
+//    testPitchRate      <base::IAngle>      ! Test pitch rate (body) (qty per second) (default: 0)
+//    testYawRate        <base::IAngle>      ! Test heading rate (body) (qty per second) (default: 0)
 //    testBodyAxis       <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
 //
 //

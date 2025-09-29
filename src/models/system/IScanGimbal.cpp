@@ -9,7 +9,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/angles.hpp"
+#include "mixr/base/qty/angles.hpp"
 
 #include <cmath>
 

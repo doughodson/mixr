@@ -79,16 +79,16 @@
 #include "mixr/base/ubf/Agent.hpp"
 #include "mixr/base/ubf/Arbiter.hpp"
 
-// units
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/areas.hpp"
-#include "mixr/base/units/energies.hpp"
-#include "mixr/base/units/forces.hpp"
-#include "mixr/base/units/frequencies.hpp"
-#include "mixr/base/units/lengths.hpp"
-#include "mixr/base/units/masses.hpp"
-#include "mixr/base/units/powers.hpp"
-#include "mixr/base/units/times.hpp"
+// qty
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/areas.hpp"
+#include "mixr/base/qty/energies.hpp"
+#include "mixr/base/qty/forces.hpp"
+#include "mixr/base/qty/frequencies.hpp"
+#include "mixr/base/qty/lengths.hpp"
+#include "mixr/base/qty/masses.hpp"
+#include "mixr/base/qty/powers.hpp"
+#include "mixr/base/qty/times.hpp"
 
 #include <string>
 
@@ -234,7 +234,7 @@ IObject* factory(const std::string& name)
         obj = new DownTimer();
     }
 
-    // units: angles
+    // qty: angles
     else if ( name == Degrees::getFactoryName() ) {
         obj = new Degrees();
     }
@@ -245,7 +245,7 @@ IObject* factory(const std::string& name)
         obj = new Semicircles();
     }
 
-    // units: areas
+    // qty: areas
     else if ( name == SquareMeters::getFactoryName() ) {
         obj = new SquareMeters();
     }
@@ -274,7 +274,7 @@ IObject* factory(const std::string& name)
         obj = new DecibelSquareMeters();
     }
 
-    // units: length
+    // qty: length
     else if ( name == Meters::getFactoryName() ) {
         obj = new Meters();
     }
@@ -303,7 +303,7 @@ IObject* factory(const std::string& name)
         obj = new StatuteMiles();
     }
 
-    // units: energies
+    // qty: energies
     else if ( name == KiloWattHours::getFactoryName() ) {
         obj = new KiloWattHours();
     }
@@ -320,7 +320,7 @@ IObject* factory(const std::string& name)
         obj = new Joules();
     }
 
-    // units: forces
+    // qty: forces
     else if ( name == Newtons::getFactoryName() ) {
         obj = new Newtons();
     }
@@ -334,7 +334,7 @@ IObject* factory(const std::string& name)
         obj = new PoundForces();
     }
 
-    // units: frequencies
+    // qty: frequencies
     else if ( name == Hertz::getFactoryName() ) {
         obj = new Hertz();
     }
@@ -351,7 +351,7 @@ IObject* factory(const std::string& name)
         obj = new TeraHertz();
     }
 
-    // units: masses
+    // qty: masses
     else if ( name == Grams::getFactoryName() ) {
         obj = new Grams();
     }
@@ -362,7 +362,7 @@ IObject* factory(const std::string& name)
         obj = new Slugs();
     }
 
-    // units: powers
+    // qty: powers
     else if ( name == KiloWatts::getFactoryName() ) {
         obj = new KiloWatts();
     }
@@ -382,7 +382,7 @@ IObject* factory(const std::string& name)
         obj = new DecibelMilliWatts();
     }
 
-    // units: time
+    // qty: time
     else if ( name == Seconds::getFactoryName() ) {
         obj = new Seconds();
     }

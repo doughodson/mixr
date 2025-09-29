@@ -2,7 +2,7 @@
 #include "mixr/instruments/adi/Adi.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/angles.hpp"
+#include "mixr/base/qty/angles.hpp"
 
 #include "mixr/base/util/math_utils.hpp"
 

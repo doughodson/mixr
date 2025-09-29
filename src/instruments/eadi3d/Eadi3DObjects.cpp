@@ -3,7 +3,7 @@
 #include "mixr/instruments/eadi3d/Eadi3DObjects.hpp"
 
 #include "mixr/base/util/platform_api.hpp"
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 #include <GL/gl.h>
 #include <cmath>

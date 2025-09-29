@@ -2,7 +2,7 @@
 #include "mixr/graphics/Rotators.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/angles.hpp"
+#include "mixr/base/qty/angles.hpp"
 
 namespace mixr {
 namespace graphics {

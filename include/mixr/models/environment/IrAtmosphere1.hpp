@@ -51,7 +51,7 @@ class IrQueryMsg;
 //                              const double targetAltitude)      // Altitude of the target (meters)
 //        Return the amount of solar radiation in the region of the spectrum defined by the
 //        upper and lower wavelengths as a function of the target altitude. The output is in
-//        the units watts/steradian sq-m.
+//        the qty watts/steradian sq-m.
 //
 //    double getSolarRadiation(const double wavebandCenter,       // The waveband center (microns)
 //                             const double targetAltitude)       // The altitude of the target (meters)

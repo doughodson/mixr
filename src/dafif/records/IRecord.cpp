@@ -462,7 +462,7 @@ float IRecord::dsMagHeading(const char* const p)
 {
    double mh = 0.0;
    if (p != nullptr) {
-      mh = dsAtofn(p,3);    // units
+      mh = dsAtofn(p,3);    // qty
       char ct = *(p+3);     // tenths
       if (ct != '/') mh += static_cast<float>(ct - '0')/10.0f;
    }

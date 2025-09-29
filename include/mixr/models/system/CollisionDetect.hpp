@@ -4,7 +4,7 @@
 
 #include "mixr/models/system/ISystem.hpp"
 #include "mixr/config.hpp"
-#include "mixr/base/units/util/length_utils.hpp"
+#include "mixr/base/qty/util/length_utils.hpp"
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class Integer; class ILength; class PairStream; }

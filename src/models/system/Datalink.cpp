@@ -13,7 +13,7 @@
 #include "mixr/base/PairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/units/lengths.hpp"
+#include "mixr/base/qty/lengths.hpp"
 #include "mixr/base/util/system_utils.hpp"
 
 namespace mixr {

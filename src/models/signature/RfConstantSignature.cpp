@@ -4,7 +4,7 @@
 #include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/units/areas.hpp"
+#include "mixr/base/qty/areas.hpp"
 
 namespace mixr {
 namespace models {

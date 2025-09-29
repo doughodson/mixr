@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/dials/DialPointer.hpp"
 
-#include "mixr/base/units/util/angle_utils.hpp"
+#include "mixr/base/qty/util/angle_utils.hpp"
 
 namespace mixr {
 namespace instruments {

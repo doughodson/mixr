@@ -7,8 +7,8 @@
 #include "mixr/base/concepts/linkage/IIoDevice.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/units/angles.hpp"
-#include "mixr/base/units/frequencies.hpp"
+#include "mixr/base/qty/angles.hpp"
+#include "mixr/base/qty/frequencies.hpp"
 
 #include <cmath>
 #include <string>

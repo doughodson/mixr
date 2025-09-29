@@ -10,7 +10,7 @@ EMPTY_SLOTTABLE(Eadi3DFont)
 EMPTY_COPYDATA(Eadi3DFont)
 EMPTY_DELETEDATA(Eadi3DFont)
 
-// font scaled so six stroke font points (units used below) is 1 screen unit
+// font scaled so six stroke font points (qty used below) is 1 screen unit
 #define XSCALE (1.0/6.0)
 #define YSCALE (1.0/6.0)
 

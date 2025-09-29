@@ -19,7 +19,7 @@ namespace models {
 //
 // Factory name: IRadar
 // Slots:
-//    igain    <base::INumber>    ! Integrator gain (no units; default: 1.0f)
+//    igain    <base::INumber>    ! Integrator gain (no qty; default: 1.0f)
 //             <base::Decibel>    ! Integrator gain (dB)
 //
 //------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ private:
    double currentJamSignal {};
    int    numberOfJammedEmissions {};
 
-   double rfIGain {1.0};              // Integrator gain (default: 1.0) (no units)
+   double rfIGain {1.0};              // Integrator gain (default: 1.0) (no qty)
 
 private:
    // slot table helper methods

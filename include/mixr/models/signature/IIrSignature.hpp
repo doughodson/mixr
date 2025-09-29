@@ -19,10 +19,10 @@ class IIrShapeSignature;
 // Slots:
 //    binSizes            <Table1>             ! The size of the wavelength bins used in the tables
 //    irShapeSignature    <IIrShapeSignature>  ! Shape of radiation source
-//    baseHeatSignature   <INumber>            ! Base heat signature - units: watts per steradian
+//    baseHeatSignature   <INumber>            ! Base heat signature - qty: watts per steradian
 //    emissivity          <INumber>            ! Emissivity - unitless, values range from
 //                                             !     0.0 (total reflection) to 1.0 (total absorption)
-//    effectiveArea       <base::IArea>        ! Effective area - units: meters squared (m^2)
+//    effectiveArea       <base::IArea>        ! Effective area - qty: meters squared (m^2)
 //
 // Notes:
 //    1) Simple IR signature class, specifies player-specific properties related to IR modeling.
