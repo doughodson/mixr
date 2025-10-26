@@ -2,7 +2,7 @@
 #include "mixr/base/ubf/IState.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/IComponent.hpp"
 
 namespace mixr {
@@ -18,7 +18,7 @@ EMPTY_COPYDATA(IState)
 void IState::updateGlobalState()
 {
    // Update all my children
-   base::PairStream* subcomponents{getComponents()};
+   base::IPairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one
@@ -47,7 +47,7 @@ void IState::updateGlobalState()
 void IState::updateState(const base::IComponent* const actor)
 {
    // Update all my children
-   base::PairStream* subcomponents{getComponents()};
+   base::IPairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       if (isComponentSelected()) {
          // When we've selected only one

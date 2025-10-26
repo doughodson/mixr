@@ -5,7 +5,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/util/string_utils.hpp"
 
@@ -22,7 +22,7 @@ END_SLOTTABLE(IStores)
 
 BEGIN_SLOT_MAP(IStores)
    ON_SLOT( 1, setSlotNumStations, base::Integer)
-   ON_SLOT( 2, setSlotStores,      base::PairStream)
+   ON_SLOT( 2, setSlotStores,      base::IPairStream)
    ON_SLOT( 3, setSlotSelected,    base::Integer)
 END_SLOT_MAP()
 
@@ -59,7 +59,7 @@ void IStores::reset()
    BaseClass::reset();
 
    // Reset all of the stores
-   base::PairStream* stores{getStores()};
+   base::IPairStream* stores{getStores()};
    if (stores != nullptr) {
       resetStores(stores);
       stores->unref();
@@ -86,7 +86,7 @@ void IStores::updateTC(const double dt)
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
    {
-      base::PairStream* list{getStores()};
+      base::IPairStream* list{getStores()};
       if (list != nullptr) {
          base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
@@ -111,7 +111,7 @@ void IStores::updateData(const double dt)
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
    {
-      base::PairStream* list{getStores()};
+      base::IPairStream* list{getStores()};
       if (list != nullptr) {
          base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
@@ -139,13 +139,13 @@ unsigned int IStores::getNumberOfStations() const
 }
 
 // Returns the list of our external stores
-base::PairStream* IStores::getStores()
+base::IPairStream* IStores::getStores()
 {
    return storesList.getRefPtr();
 }
 
 // Returns the list of our external stores (const version)
-const base::PairStream* IStores::getStores() const
+const base::IPairStream* IStores::getStores() const
 {
    return storesList.getRefPtr();
 }
@@ -354,7 +354,7 @@ void IStores::updateBlockedFlags()
 bool IStores::jettisonAll()
 {
    // Notify the external stores that we're shutting down
-   base::PairStream* list{getStores()};
+   base::IPairStream* list{getStores()};
    if (list != nullptr) {
       base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
@@ -429,7 +429,7 @@ bool IStores::assignExtStoreToStation(const unsigned int s, IExternalStore* cons
 //------------------------------------------------------------------------------
 // resetStores() -- Reset all stores
 //------------------------------------------------------------------------------
-void IStores::resetStores(base::PairStream* const list)
+void IStores::resetStores(base::IPairStream* const list)
 {
    // Reset the external stores
    if (list != nullptr) {
@@ -453,7 +453,7 @@ bool IStores::onJettisonEvent(IWeapon* const wpn)
    bool ok{};
    if (wpn != nullptr) {
 
-      base::PairStream* list{getStores()};
+      base::IPairStream* list{getStores()};
       if (list != nullptr) {
 
          // First, make sure it's one of ours!
@@ -483,7 +483,7 @@ bool IStores::onJettisonEvent(IExternalStore* const sys)
    bool ok{};
    if (sys != nullptr) {
 
-      base::PairStream* list{getStores()};
+      base::IPairStream* list{getStores()};
       if (list != nullptr) {
 
          // First, make sure it's one of ours!
@@ -524,7 +524,7 @@ bool IStores::setSlotNumStations(base::Integer* const msg)
 }
 
 // Set the stores
-bool IStores::setSlotStores(const base::PairStream* const msg)
+bool IStores::setSlotStores(const base::IPairStream* const msg)
 {
    // ---
    // Quick out if the number of stations hasn't been set.
@@ -560,7 +560,7 @@ bool IStores::setSlotStores(const base::PairStream* const msg)
    //      that it has a valid station number.
    //   -- Clone the store and if it's a weapon then assign it to the station.
    // ---
-   const auto newStores = new base::PairStream();
+   const auto newStores = new base::IPairStream();
 
    const base::IList::Item* item{msg->getFirstItem()};
    while (item != nullptr) {

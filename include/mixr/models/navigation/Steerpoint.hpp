@@ -6,7 +6,7 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class IAngle; class Identifier; class Integer; class ILength; class Latitude;
+namespace base { class IAngle; class Identifier; class Integer; class ILength; class IPairStream; class Latitude;
                  class IList; class Longitude; class Identifier; class INumber; class String; class ITime; }
 namespace terrain { class ITerrain; }
 namespace models {
@@ -165,7 +165,7 @@ public:
 
 protected:
     virtual void processComponents(                 // Process our subcomponent list (which should be other steerpoints)
-         base::PairStream* const list,              // Source list of components
+         base::IPairStream* const list,             // Source list of components
          const std::type_info& filter,              // Type filter
          base::Pair* const add = nullptr,           // Optional pair to add
          base::IComponent* const remove = nullptr   // Optional subcomponent to remove

@@ -32,7 +32,7 @@
 #include "mixr/base/Latitude.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Longitude.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/IComponent.hpp"
@@ -2387,7 +2387,7 @@ bool IPlayer::killedNotification(IPlayer* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents{getComponents()};
+         base::IPairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -2433,7 +2433,7 @@ bool IPlayer::collisionNotification(IPlayer* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents{getComponents()};
+         base::IPairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -2472,7 +2472,7 @@ bool IPlayer::crashNotification()
       // Let our sensors know we were just killed
       // Let all of our subcomponents know that we were just killed
       {
-         base::PairStream* subcomponents{getComponents()};
+         base::IPairStream* subcomponents{getComponents()};
          if (subcomponents != nullptr) {
             for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
                base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -3177,7 +3177,7 @@ void IPlayer::updateSystemPointers()
 // type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void IPlayer::processComponents(
-   base::PairStream* const list,
+   base::IPairStream* const list,
    const std::type_info& filter,
    base::Pair* const add,
    base::IComponent* const remove

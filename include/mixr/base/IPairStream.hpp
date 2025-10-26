@@ -1,6 +1,6 @@
 
-#ifndef __mixr_base_PairStream_HPP__
-#define __mixr_base_PairStream_HPP__
+#ifndef __mixr_base_IPairStream_HPP__
+#define __mixr_base_IPairStream_HPP__
 
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
@@ -12,28 +12,28 @@ namespace base {
 class Identifier;
 
 //------------------------------------------------------------------------------
-// Class: PairStream
+// Class: IPairStream
 // Description: A PairStream is a list of Pair objects. Pair objects consist of
 //              an object and the name of the object.
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: PairStream
+// Factory name: IPairStream
 // Slots: none
 // Notes: EDL syntax (a list of Pairs)
 //      ident: <object>
 //      ...
 //      ident: <object>
 //------------------------------------------------------------------------------
-class PairStream : public IList
+class IPairStream : public IList
 {
-    DECLARE_SUBCLASS(PairStream, IList)
+    DECLARE_SUBCLASS(IPairStream, IList)
 
 public:
-   PairStream();
+   IPairStream();
 
-   bool operator==(const PairStream& stream) const;
-   bool operator!=(const PairStream& stream) const;
+   bool operator==(const IPairStream& stream) const;
+   bool operator!=(const IPairStream& stream) const;
 
    // finds the first pair by object type
    Pair* findByType(const std::type_info& type);

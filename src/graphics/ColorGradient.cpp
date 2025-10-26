@@ -1,6 +1,6 @@
 
 #include "mixr/graphics/ColorGradient.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -13,7 +13,7 @@ BEGIN_SLOTTABLE(ColorGradient)
 END_SLOTTABLE(ColorGradient)
 
 BEGIN_SLOT_MAP(ColorGradient)
-    ON_SLOT(1, setSlotColors, base::PairStream)
+    ON_SLOT(1, setSlotColors, base::IPairStream)
 END_SLOT_MAP()
 
 ColorGradient::ColorGradient()
@@ -55,7 +55,7 @@ base::IColor* ColorGradient::getColorByIdx(const int idx)
 }
 
 // set our slot colors via a pairstream
-bool ColorGradient::setSlotColors(base::PairStream* const x)
+bool ColorGradient::setSlotColors(base::IPairStream* const x)
 {
     if (myColors != nullptr) {
         myColors->unref();

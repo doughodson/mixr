@@ -12,7 +12,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 #include "mixr/base/util/str_utils.hpp"
@@ -530,7 +530,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
             // find all missiles missiles
             const models::IStoresMgr* sm{gv->getStoresManagement()};
             if (sm != nullptr) {
-               const base::PairStream* stores{sm->getStores()};
+               const base::IPairStream* stores{sm->getStores()};
                if (stores != nullptr) {
                   const base::IList::Item* item{stores->getFirstItem()};
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {

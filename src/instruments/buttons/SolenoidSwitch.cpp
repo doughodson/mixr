@@ -7,7 +7,7 @@
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/timers/UpTimer.hpp"
 
 namespace mixr {
@@ -22,7 +22,7 @@ END_SLOTTABLE(SolenoidSwitch)
 
 BEGIN_SLOT_MAP(SolenoidSwitch)
     ON_SLOT(1, setSlotHoldTimer, base::INumber)
-    ON_SLOT(2, setSlotEventMap,  base::PairStream)
+    ON_SLOT(2, setSlotEventMap,  base::IPairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(SolenoidSwitch)
@@ -85,7 +85,7 @@ bool SolenoidSwitch::setSlotHoldTimer(const base::INumber* const x)
 // will map that event to this one and will send that to the display to be
 // processed.
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
+bool SolenoidSwitch::setSlotEventMap(const base::IPairStream* const x)
 {
     if (x != nullptr) {
         if (x->entries() != 3) std::cout << "SolenoidSwitch::setSlotEventMap() - Need 3 eventIds for the button, will not send eventIds for the ones without it" << std::endl;

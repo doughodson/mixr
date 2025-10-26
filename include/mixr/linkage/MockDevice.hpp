@@ -7,7 +7,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class IIoData; }
+namespace base { class IPairStream; class IIoData; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ namespace linkage {
 // Factory name: MockIoDevice
 //
 // Slots:
-//    generators <PairStream>   : A list of generators
+//    generators <IPairStream>   : A list of generators
 //------------------------------------------------------------------------------
 class MockDevice final: public base::IIoDevice
 {
@@ -56,11 +56,11 @@ private:
    // mock device looks like a null device, it has no output
    void processOutputsImpl(const double dt, const base::IIoData* const outData) final       { }
 
-   base::safe_ptr<base::PairStream> generators;   // list of adapters used to generate values
+   base::safe_ptr<base::IPairStream> generators;   // list of adapters used to generate values
 
 private:
    // slot table helper methods
-   bool setSlotGenerators(base::PairStream* const);
+   bool setSlotGenerators(base::IPairStream* const);
 };
 
 }

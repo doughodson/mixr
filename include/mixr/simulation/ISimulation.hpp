@@ -27,7 +27,7 @@ class IPlayer;
 // Factory name: ISimulation
 //
 // Slots --
-//    players        <base::PairStream>       ! Local player list (base::PairStream of IPlayer) (default: nullptr)
+//    players        <base::IPairStream>      ! Local player list (base::IPairStream of IPlayer) (default: nullptr)
 //
 //    simulationTime <base::Time>             ! Initial simulated time since midnight (UTC) (second),
 //                                            ! or -1 to use current time of day (default: -1)
@@ -178,8 +178,8 @@ public:
 public:
     ISimulation();
 
-    base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
-    const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
+    base::IPairStream* getPlayers();               // Returns the player list; pre-ref()'d
+    const base::IPairStream* getPlayers() const;   // Returns the player list; pre-ref()'d (const version)
 
     unsigned int cycle() const;                    // Cycle counter; each cycle represents 16 frames.
     unsigned int frame() const;                    // Frame counter [0 .. 15]; each frame represents a call to our updateTC()
@@ -228,14 +228,14 @@ public:
 
 public:
     void updateTcPlayerList(
-       base::PairStream* const playerList,
+       base::IPairStream* const playerList,
        const double dt,
        const unsigned int idx,
        const unsigned int n
     );
 
     void updateBgPlayerList(
-       base::PairStream* const playerList,
+       base::IPairStream* const playerList,
        const double dt,
        const unsigned int idx,
        const unsigned int n
@@ -262,12 +262,12 @@ protected:
 private:
    IStation* getStationImp();
 
-   bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
+   bool insertPlayerSort(base::Pair* const newPlayer, base::IPairStream* const newList);
    IPlayer* findPlayerPrivate(const short id, const int netID) const;
    IPlayer* findPlayerByNamePrivate(const char* const playerName) const;
 
-   base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
-   base::safe_ptr<base::PairStream> origPlayers; // Original player list
+   base::safe_ptr<base::IPairStream> players;     // Main player list (sorted by network and player IDs)
+   base::safe_ptr<base::IPairStream> origPlayers; // Original player list
 
    unsigned int cycleCnt{};      // Real-Time Cycle Counter (Cycles consist of Frames)
    unsigned int frameCnt{};      // Real-Time Frame Counter (Frames consist of Phases)
@@ -317,7 +317,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotPlayers(base::PairStream* const);
+   bool setSlotPlayers(base::IPairStream* const);
 
    bool setSlotSimulationTime(const base::ITime* const);
    bool setSlotDay(const base::Integer* const);

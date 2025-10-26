@@ -10,7 +10,7 @@
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/qty/lengths.hpp"
@@ -333,7 +333,7 @@ bool Datalink::sendMessage(base::IObject* const msg)
          WorldModel* sim{getWorldModel()};
          if (sim != nullptr) {
 
-            base::PairStream* players{sim->getPlayers()};
+            base::IPairStream* players{sim->getPlayers()};
             if (players != nullptr) {
 
             base::IList::Item* playerItem{players->getFirstItem()};
@@ -470,7 +470,7 @@ void Datalink::clearQueues()
 bool Datalink::onDatalinkMessageEvent(base::IObject* const msg)
 {
    // Just pass it down to all of our subcomponents
-   base::PairStream* subcomponents{getComponents()};
+   base::IPairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};

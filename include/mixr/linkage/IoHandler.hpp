@@ -7,7 +7,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class IFrequency; class INumber; class IIoData; }
+namespace base { class IPairStream; class IFrequency; class INumber; class IIoData; }
 namespace linkage {
 class IoPeriodicThread;
 
@@ -47,7 +47,7 @@ class IoPeriodicThread;
 //    ioData      <IoData>       ! Combined input/output data (default: none)
 //    inputData   <IoData>       ! Individual input data (default: none)
 //    outputData  <IoData>       ! Individual output data (default: none)
-//    devices     <PairStream>   ! List of I/O devices (AbstractIoDevice objects) (default: none)
+//    devices     <IPairStream>  ! List of I/O devices (AbstractIoDevice objects) (default: none)
 //    rate        <Frequency>    ! Optional thread's update rate (default: 50hz)
 //    priority    <Number>       ! Optional thread's priority: lowest(0.0) to highest(1.0)  (default: 0.5 )
 //
@@ -91,7 +91,7 @@ private:
    // data i/o
    base::safe_ptr<base::IIoData> inData;                // "input" data received from the hardware
    base::safe_ptr<base::IIoData> outData;               // "output" data sent to the hardware
-   base::safe_ptr<base::PairStream> devices;            // Device list
+   base::safe_ptr<base::IPairStream> devices;           // Device list
 
    double rate {50};                                    // Thread Rate (hz)
    double pri {0.5};                                    // Priority of the thread (0->lowest, 1->highest)
@@ -102,7 +102,7 @@ private:
    bool setSlotIoData(base::IIoData* const);
    bool setSlotInputData(base::IIoData* const);
    bool setSlotOutputData(base::IIoData* const);
-   bool setSlotDevices(base::PairStream* const);
+   bool setSlotDevices(base::IPairStream* const);
    bool setSlotRate(const base::IFrequency* const);
    bool setSlotPriority(const base::INumber* const);
 };

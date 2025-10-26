@@ -6,7 +6,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -111,7 +111,7 @@ BEGIN_SLOT_MAP(IGimbal)
 
     ON_SLOT(28, setSlotTerrainOcculting,           base::Boolean)    // Enable terrain occulting (default: false)
     ON_SLOT(29, setSlotCheckHorizon,               base::Boolean)    // Enable horizon masking check (default: all types)
-    ON_SLOT(30, setSlotPlayerTypes,                base::PairStream) // Player of interest types (default: 0 )
+    ON_SLOT(30, setSlotPlayerTypes,                base::IPairStream)// Player of interest types (default: 0 )
                                                                      //   Valid identifiers: { air, ground, weapon, ship, building, lifeform }
     ON_SLOT(31, setSlotMaxPlayers,                 base::Integer)    // Max number of players of interest (default: 0)
     ON_SLOT(32, setSlotMaxRange2PlayersOfInterest, base::ILength)    // Max range to players of interest or zero for all (default: 0)
@@ -235,7 +235,7 @@ bool IGimbal::onRfEmissionEvent(RfEmission* const em)
       if (sc != nullptr && sc->getPowerSwitch() != ISystem::PWR_OFF) sc->onRfEmissionEvent(em);
    } else {
       // Pass it down to all of our subcomponents
-      base::PairStream* subcomponents = getComponents();
+      base::IPairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
          for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
@@ -1093,7 +1093,7 @@ bool IGimbal::setSlotCheckHorizon(const base::Boolean* const msg)
 }
 
 // Player of interest types (default: 0 )
-bool IGimbal::setSlotPlayerTypes(const base::PairStream* const x)
+bool IGimbal::setSlotPlayerTypes(const base::IPairStream* const x)
 {
    bool ok{};
    if (x != nullptr) {
@@ -1287,7 +1287,7 @@ void IGimbal::limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3
 //------------------------------------------------------------------------------
 // Process the Players-Of-Interest (POI) list
 //------------------------------------------------------------------------------
-unsigned int IGimbal::processPlayersOfInterest(base::PairStream* const poi)
+unsigned int IGimbal::processPlayersOfInterest(base::IPairStream* const poi)
 {
    const auto tdb0 = new Tdb(maxPlayers, this);
 

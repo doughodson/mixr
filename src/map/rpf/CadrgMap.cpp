@@ -11,7 +11,7 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include <cstring>
@@ -28,7 +28,7 @@ BEGIN_SLOTTABLE(CadrgMap)
 END_SLOTTABLE(CadrgMap)
 
 BEGIN_SLOT_MAP(CadrgMap)
-    ON_SLOT(1, setSlotPathnames,    base::PairStream)
+    ON_SLOT(1, setSlotPathnames,    base::IPairStream)
     ON_SLOT(2, setSlotMaxTableSize, base::Integer)
     ON_SLOT(3, setSlotMapLevel,     base::String)
 END_SLOT_MAP()
@@ -99,7 +99,7 @@ int CadrgMap::getNumberOfCadrgFiles() {
 //------------------------------------------------------------------------------
 // setSlotPathnames() - Pathnames to the CADRG A.toc files.
 //------------------------------------------------------------------------------
-bool CadrgMap::setSlotPathnames(const base::PairStream* const x)
+bool CadrgMap::setSlotPathnames(const base::IPairStream* const x)
 {
     bool ok = false;
     int count = 0;

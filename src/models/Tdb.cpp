@@ -3,7 +3,7 @@
 
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -173,7 +173,7 @@ bool Tdb::resizeArrays(const unsigned int newSize)
 // max angles, etc.
 // (Background task)
 //------------------------------------------------------------------------------
-unsigned int Tdb::processPlayers(base::PairStream* const players)
+unsigned int Tdb::processPlayers(base::IPairStream* const players)
 {
    // ---
    // Early out checks (no ownship, no players of interest, no target data arrays)

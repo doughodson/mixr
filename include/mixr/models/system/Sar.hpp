@@ -6,7 +6,7 @@
 #include "mixr/base/osg/Vec3d"
 
 namespace mixr {
-namespace base { class Integer; class Pair; class PairStream; }
+namespace base { class Integer; class Pair; class IPairStream; }
 namespace models {
 class Image;
 
@@ -30,7 +30,7 @@ public:
    virtual bool isSystemReady() const;
 
    // Returns a list of all images (prereferenced)
-   virtual base::PairStream* getImages();
+   virtual base::IPairStream* getImages();
 
    // Returns the most recent image (prereferenced)
    virtual const Image* getImage() const;
@@ -82,7 +82,7 @@ protected:
    double timer {};                 // SAR timer
 
 private:
-   base::PairStream* imgList {};    // List of SAR images
+   base::IPairStream* imgList {};   // List of SAR images
 
    int          nextId {1};         // Next image ID
    double       stareLatitude {};   // Degrees

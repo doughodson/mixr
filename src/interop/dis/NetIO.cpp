@@ -16,7 +16,7 @@
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/qty/angles.hpp"
 #include "mixr/base/qty/lengths.hpp"
@@ -80,21 +80,21 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(3, setSlotVersion,             base::Integer)
 
    ON_SLOT(4, setSlotMaxTimeDR,           base::ITime)
-   ON_SLOT(4, setSlotMaxTimeDR,           base::PairStream)
+   ON_SLOT(4, setSlotMaxTimeDR,           base::IPairStream)
 
    ON_SLOT(5, setSlotMaxPositionErr,      base::ILength)
-   ON_SLOT(5, setSlotMaxPositionErr,      base::PairStream)
+   ON_SLOT(5, setSlotMaxPositionErr,      base::IPairStream)
 
    ON_SLOT(6, setSlotMaxOrientationErr,   base::IAngle)
-   ON_SLOT(6, setSlotMaxOrientationErr,   base::PairStream)
+   ON_SLOT(6, setSlotMaxOrientationErr,   base::IPairStream)
 
    ON_SLOT(7, setSlotMaxAge,              base::ITime)
-   ON_SLOT(7, setSlotMaxAge,              base::PairStream)
+   ON_SLOT(7, setSlotMaxAge,              base::IPairStream)
 
    ON_SLOT(8, setSlotMaxEntityRange,      base::ILength)
-   ON_SLOT(8, setSlotMaxEntityRange,      base::PairStream)
+   ON_SLOT(8, setSlotMaxEntityRange,      base::IPairStream)
 
-   ON_SLOT(9, setSlotEmissionPduHandlers, base::PairStream)
+   ON_SLOT(9, setSlotEmissionPduHandlers, base::IPairStream)
 
    ON_SLOT(10, setSlotSiteID,             base::Integer)
    ON_SLOT(11, setSlotApplicationID,      base::Integer)
@@ -402,7 +402,7 @@ void NetIO::processInputList()
    }
 
 //   std::cout << "n = " << getInputListSize();      // #DPG#
-//   base::PairStream* p = getSimulation()->getPlayers();
+//   base::IPairStream* p = getSimulation()->getPlayers();
 //   if (p != nullptr) {
 //      std::cout << ";  np = " << p->entries();
 //      p->unref();
@@ -1179,7 +1179,7 @@ bool NetIO::setSlotVersion(const base::Integer* const num)
 }
 
 // Sets the maximum range for pairs of entities by kind/domain
-bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
+bool NetIO::setSlotMaxEntityRange(const base::IPairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -1220,7 +1220,7 @@ bool NetIO::setSlotMaxEntityRange(const base::ILength* const msg)
 }
 
 // Sets max DR times for pairs of entities by kind/domain
-bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
+bool NetIO::setSlotMaxTimeDR(const base::IPairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -1263,7 +1263,7 @@ bool NetIO::setSlotMaxTimeDR(const base::ITime* const msg)
 
 
 // Sets max position errors for pairs of entities by kind/domain
-bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
+bool NetIO::setSlotMaxPositionErr(const base::IPairStream* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -1304,7 +1304,7 @@ bool NetIO::setSlotMaxPositionErr(const base::ILength* const msg)
 }
 
 // Sets max orientation errors for pairs of entities by kind/domain
-bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
+bool NetIO::setSlotMaxOrientationErr(const base::IPairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -1346,7 +1346,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::IAngle* const msg)
 
 
 // Sets max ages (without update) of for pairs of networked entities by kind/domain
-bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
+bool NetIO::setSlotMaxAge(const base::IPairStream* const msg)
 {
    bool ok {};
    if (msg != nullptr) {
@@ -1387,7 +1387,7 @@ bool NetIO::setSlotMaxAge(const base::ITime* const msg)
 }
 
 // Sets the list of Electromagnetic Emission PDU handlers
-bool NetIO::setSlotEmissionPduHandlers(base::PairStream* const msg)
+bool NetIO::setSlotEmissionPduHandlers(base::IPairStream* const msg)
 {
     bool ok {};
     if (msg != nullptr) {

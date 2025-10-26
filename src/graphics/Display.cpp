@@ -17,7 +17,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include <string>
 #include <cstdio>
@@ -69,7 +69,7 @@ END_SLOTTABLE(Display)
 
 BEGIN_SLOT_MAP(Display)
    ON_SLOT( 1, setSlotName,                  base::String)
-   ON_SLOT( 2, setSlotColorTable,            base::PairStream)
+   ON_SLOT( 2, setSlotColorTable,            base::IPairStream)
    ON_SLOT( 3, setSlotNormalFont,            IFont)
    ON_SLOT( 3, setSlotNormalFont,            base::Identifier)
    ON_SLOT( 4, setSlotLeftOrthoBound,        base::INumber)
@@ -82,10 +82,10 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT(11, setSlotViewportYOrigin,       base::Integer)
    ON_SLOT(12, setSlotViewportWidth,         base::Integer)
    ON_SLOT(13, setSlotViewportHeight,        base::Integer)
-   ON_SLOT(14, setSlotSubdisplayStream,      base::PairStream)
+   ON_SLOT(14, setSlotSubdisplayStream,      base::IPairStream)
    ON_SLOT(14, setSlotSubdisplaySingle,      Display)
    ON_SLOT(15, setSlotStdLineWidth,          base::INumber)
-   ON_SLOT(16, setSlotTexturesStream,        base::PairStream)
+   ON_SLOT(16, setSlotTexturesStream,        base::IPairStream)
    ON_SLOT(16, setSlotTexturesSingle,        Texture)
    ON_SLOT(17, setSlotClearColor,            base::IColor)
    ON_SLOT(18, setSlotLeftBracketCharacter,  base::Integer)
@@ -93,10 +93,10 @@ BEGIN_SLOT_MAP(Display)
    ON_SLOT(19, setSlotRightBracketCharacter, base::Integer)
    ON_SLOT(19, setSlotRightBracketCharacter, base::String)
    ON_SLOT(20, setSlotReverseVideoBrackets,  base::Boolean)
-   ON_SLOT(21, setFontList,                  base::PairStream)
+   ON_SLOT(21, setFontList,                  base::IPairStream)
    ON_SLOT(22, setSlotClearDepth,            base::INumber)
    ON_SLOT(23, setSlotDisplayOrientation,    base::Identifier)
-   ON_SLOT(24, setSlotMaterials,             base::PairStream)
+   ON_SLOT(24, setSlotMaterials,             base::IPairStream)
    ON_SLOT(24, setSlotMaterials,             Material)
    ON_SLOT(25, setSlotAntialias,             base::Boolean)
 END_SLOT_MAP()
@@ -115,7 +115,7 @@ void Display::initData()
    clearColor.set(0.0f,0.0f,0.0f,0.0f);
 
    {
-      base::PairStream* p{defaultColors()};
+      base::IPairStream* p{defaultColors()};
       setColorTable(p);
       p->unref();
 
@@ -831,7 +831,7 @@ void Display::setHighlightColor(const base::IColor* const nc)
 //------------------------------------------------------------------------------
 // setColorTable() -- set the color table
 //------------------------------------------------------------------------------
-bool Display::setColorTable(base::PairStream* const sctobj)
+bool Display::setColorTable(base::IPairStream* const sctobj)
 {
    bool ok{true};
    if (colorTable != nullptr) colorTable->unref();
@@ -851,7 +851,7 @@ bool Display::setColorTable(base::PairStream* const sctobj)
 //------------------------------------------------------------------------------
 
 // setFontList() -- set the font list
-bool Display::setFontList(base::PairStream* const obj)
+bool Display::setFontList(base::IPairStream* const obj)
 {
    bool ok{true};
    if (fontList != nullptr) fontList->unref();
@@ -1327,10 +1327,10 @@ void Display::addColor(base::Pair* pp)
 //-----------------------------------------------------------------------------
 // defaultColors() -- loads a pre-refed() Pairstream with default colors.
 //-----------------------------------------------------------------------------
-base::PairStream* Display::defaultColors()
+base::IPairStream* Display::defaultColors()
 {
    // allocate our new colortable
-   const auto defColorTable{new base::PairStream()};
+   const auto defColorTable{new base::IPairStream()};
 
    // black
    {
@@ -1417,7 +1417,7 @@ bool Display::setSlotName(const base::String* const x)
    return setName(x);
 }
 
-bool Display::setSlotColorTable(base::PairStream* const x)
+bool Display::setSlotColorTable(base::IPairStream* const x)
 {
     return setColorTable(x);
 }
@@ -1444,7 +1444,7 @@ bool Display::setSlotLeftOrthoBound(const base::INumber* const x)
 //------------------------------------------------------------------------------
 //  setSlotMaterials() -- set our list of materials
 //------------------------------------------------------------------------------
-bool Display::setSlotMaterials(base::PairStream* const x)
+bool Display::setSlotMaterials(base::IPairStream* const x)
 {
    if (materials != nullptr) materials->unref();
    materials = x;
@@ -1458,7 +1458,7 @@ bool Display::setSlotMaterials(base::PairStream* const x)
 bool Display::setSlotMaterials(Material* const x)
 {
    if (materials != nullptr) materials->unref();
-   materials = new base::PairStream();
+   materials = new base::IPairStream();
    materials->put(new base::Pair("1", x));
    return processMaterials();
 }
@@ -1556,7 +1556,7 @@ bool Display::setSlotViewportHeight(const base::Integer* const x)
 //------------------------------------------------------------------------------
 //  setSlotSubdisplayStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Display::setSlotSubdisplayStream (base::PairStream* const x)
+bool Display::setSlotSubdisplayStream (base::IPairStream* const x)
 {
    // When a PairStream (i.e., more than one, a list) of displays
    if (subdisplays != nullptr) subdisplays->unref();
@@ -1571,7 +1571,7 @@ bool Display::setSlotSubdisplayStream (base::PairStream* const x)
 bool Display::setSlotSubdisplaySingle(Display* const x)
 {
    if (subdisplays != nullptr) subdisplays->unref();
-   subdisplays = new base::PairStream();
+   subdisplays = new base::IPairStream();
    subdisplays->put(new base::Pair("1", x));
    return processSubdisplays();
 }
@@ -1579,7 +1579,7 @@ bool Display::setSlotSubdisplaySingle(Display* const x)
 //------------------------------------------------------------------------------
 //  setSlotTexturesStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Display::setSlotTexturesStream (base::PairStream* const obj)
+bool Display::setSlotTexturesStream (base::IPairStream* const obj)
 {
    // When a PairStream (i.e., more than one, a list) of displays
    if (textures != nullptr) textures->unref();
@@ -1594,7 +1594,7 @@ bool Display::setSlotTexturesStream (base::PairStream* const obj)
 bool Display::setSlotTexturesSingle(Texture* const x)
 {
    if (textures != nullptr) textures->unref();
-   textures = new base::PairStream();
+   textures = new base::IPairStream();
    textures->put(new base::Pair("1", x));
    return processTextures();
 }

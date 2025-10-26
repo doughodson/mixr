@@ -82,7 +82,7 @@
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/IList.hpp"
 #include "EdlScanner.hpp"
 
@@ -119,7 +119,7 @@ inline void yyerror(const char* s)
 // parse() -- returns an object with factory 'name' with its slots set to
 //            values in 'arg_list'
 //------------------------------------------------------------------------------
-static mixr::base::IObject* parse(const std::string& name, mixr::base::PairStream* arg_list)
+static mixr::base::IObject* parse(const std::string& name, mixr::base::IPairStream* arg_list)
 {
     mixr::base::IObject* obj{};
 
@@ -1186,7 +1186,7 @@ yyreduce:
 
   case 4: /* arglist: %empty  */
 #line 145 "edl_parser.y"
-                                    { (yyval.svalp) = new mixr::base::PairStream(); }
+                                    { (yyval.svalp) = new mixr::base::IPairStream(); }
 #line 1191 "EdlParser.cpp"
     break;
 

@@ -8,7 +8,7 @@
 #include "mixr/base/IList.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include <iostream>
 
@@ -23,7 +23,7 @@ BEGIN_SLOTTABLE(IoDevice)
 END_SLOTTABLE(IoDevice)
 
 BEGIN_SLOT_MAP(IoDevice)
-   ON_SLOT(1, setSlotAdapters,    base::PairStream)
+   ON_SLOT(1, setSlotAdapters,    base::IPairStream)
 END_SLOT_MAP()
 
 IoDevice::IoDevice()
@@ -42,7 +42,7 @@ void IoDevice::copyData(const IoDevice& org, const bool)
    // copy the list of adapters
    // ---
    if (org.adapters != nullptr) {
-      const auto copy = static_cast<base::PairStream*>(org.adapters->clone());
+      const auto copy = static_cast<base::IPairStream*>(org.adapters->clone());
       setSlotAdapters(copy);
       copy->unref();
    }
@@ -88,7 +88,7 @@ void IoDevice::processOutputAdapters(const base::IIoData* const outData)
 }
 
 // read list of adapters
-bool IoDevice::setSlotAdapters(base::PairStream* const list)
+bool IoDevice::setSlotAdapters(base::IPairStream* const list)
 {
    bool ok{true};
 

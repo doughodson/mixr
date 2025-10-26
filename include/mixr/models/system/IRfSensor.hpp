@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base { class IAngle; class Boolean; class IFrequency; class Identifier; class Integer;
-                 class IList; class INumber; class String; class ITime; }
+                 class IList; class IPairStream; class INumber; class String; class ITime; }
 namespace models {
 class Antenna;
 class Player;
@@ -24,7 +24,7 @@ class ITrackMgr;
 // Slots:
 //    trackManagerName     <Identifier>  ! Name of the requested Track Manager (default: "")
 //
-//    modes                <PairStream>  ! List of submodes (default: 0)
+//    modes                <IPairStream> ! List of submodes (default: 0)
 //                         <IRfSensor>   ! Single (only) submode
 //
 //    ranges               <IList>       ! List of sensor ranges (nm) [vector] (default: 0)
@@ -82,7 +82,7 @@ public:
     virtual bool isScanOn() const;                           // Is the Sensor scanning
     virtual int getScanBar() const;                          // Returns the current bar number for a raster scan
 
-    virtual const base::PairStream* getModes() const;        // Returns the list of sensor submodes
+    virtual const base::IPairStream* getModes() const;       // Returns the list of sensor submodes
     virtual bool setMasterMode(IRfSensor* const);            // Set our master mode (container)
 
     virtual const std::string& getTrackManagerName() const;  // Returns the requested track manager's name
@@ -106,7 +106,7 @@ public:
     void reset() override;
 
 protected:
-    virtual base::PairStream* getModes();                              // Returns the list of submodes
+    virtual base::IPairStream* getModes();                             // Returns the list of submodes
 
     // event handlers
     virtual bool onStartScanEvent(const base::Integer* const bar);     // Start of scan (TGT_DESIGNATE) event handler
@@ -119,7 +119,7 @@ protected:
 private:
     bool processModes();
 
-    base::PairStream* modes{};          // Our Submodes
+    base::IPairStream* modes{};         // Our Submodes
     double*        ranges{};            // List of ranges (nm)
     int            nRanges{};           // Number of ranges
     double         rng{50.0};           // Current range (nm)
@@ -144,9 +144,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotTrackManagerName(base::Identifier* const);     // Sets our track manager by name
-   bool setSlotModeStream(base::PairStream* const);           // Sets a list of R/F sensor submodes
+   bool setSlotModeStream(base::IPairStream* const);          // Sets a list of R/F sensor submodes
    bool setSlotModeSingle(IRfSensor* const);                  // Sets a single (only) R/F sensor submode
-   bool setSlotRanges(base::IList* const);                     // Sets out list of valid ranges (nm)
+   bool setSlotRanges(base::IList* const);                    // Sets out list of valid ranges (nm)
    bool setSlotInitRangeIdx(base::Integer* const);            // Sets out initial range index [ 1 .. nRanges ]
    bool setSlotPrf(const base::IFrequency* const);            // Sets PRF as a base::Frequency
    bool setSlotPrf(const base::INumber* const);               // Sets PRF in hertz

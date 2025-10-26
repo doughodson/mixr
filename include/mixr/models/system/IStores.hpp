@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Integer; class PairStream; }
+namespace base { class Integer; class IPairStream; }
 namespace models {
 class IWeapon;
 
@@ -21,7 +21,7 @@ class IWeapon;
 //    numStations <Integer>            ! Number of stations (less than or equal MAX_STATIONS)
 //                                     ! (default: 0)
 //
-//    stores      <base::PairStream>   ! Our weapons and other external stores (default 0)
+//    stores      <base::IPairStream>  ! Our weapons and other external stores (default 0)
 //                                     ! -- make sure to set the number of stations first,
 //
 //    selected    <Integer>            ! Selected weapon station number (default: 0)
@@ -118,8 +118,8 @@ public:
 
    unsigned int getNumberOfStations() const;    // Number of stations on the launcher
 
-   base::PairStream* getStores();              // List of external stores (Pre-ref()'d)
-   const base::PairStream* getStores() const;  // List of external stores (Pre-ref()'d) (const version)
+   base::IPairStream* getStores();              // List of external stores (Pre-ref()'d)
+   const base::IPairStream* getStores() const;  // List of external stores (Pre-ref()'d) (const version)
 
    unsigned int getNumberOfWeapons() const;     // Number of weapons on the launcher
    virtual unsigned int available() const;      // Number of weapons available for release
@@ -190,7 +190,7 @@ protected:
    virtual bool assignExtStoreToStation(const unsigned int station, IExternalStore* const esPtr);
 
    // Sends a Reset Event to all players
-   void resetStores(base::PairStream* const list);
+   void resetStores(base::IPairStream* const list);
 
    void process(const double dt) override;
 
@@ -198,7 +198,7 @@ private:
    void initData();
 
    // Full external stores list; set by setSlotStores()
-   base::safe_ptr<base::PairStream> storesList;
+   base::safe_ptr<base::IPairStream> storesList;
 
    // Station tables
    std::array<base::safe_ptr<IWeapon>, MAX_STATIONS> weaponTbl;  // Weapons by station
@@ -219,7 +219,7 @@ private:
    }
 
 protected:
-   virtual bool setSlotStores(const base::PairStream* const);   // (clones the 'msg' list)
+   virtual bool setSlotStores(const base::IPairStream* const);   // (clones the 'msg' list)
 
 private:
    // slot table helper methods

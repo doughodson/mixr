@@ -31,7 +31,7 @@
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include <cstring>

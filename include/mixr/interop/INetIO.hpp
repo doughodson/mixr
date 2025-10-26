@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class ITime; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class IPairStream; class ITime; }
 namespace models { class IPlayer; }
 namespace simulation { class ISimulation; class IStation; }
 namespace interop {
@@ -36,10 +36,10 @@ class INtmOutputNode;
 //    enableRelay          <base::Boolean>     ! Relay enable: send other network players to this network (default: true)
 //    timeline             <base::Identifier>  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
-//    inputEntityTypes     <base::PairSteam>   ! Incoming entity type mappers (default: 0)
+//    inputEntityTypes     <base::IPairSteam>  ! Incoming entity type mappers (default: 0)
 //                                             !   (Ntm objects that map incoming entity types to mixr player types)
 //
-//    outputEntityTypes    <base::PairSteam>   ! Outgoing entity type mappers (default: 0)
+//    outputEntityTypes    <base::IPairSteam>  ! Outgoing entity type mappers (default: 0)
 //                                             !   (Ntm objects that map mixr player types to outgoing entity types)
 //
 //    maxTimeDR            <base::ITime>       ! Max DR time (default: 5 seconds)
@@ -442,19 +442,19 @@ private:
    // slot table helper methods
    virtual bool setSlotFederateName(const base::Identifier* const);    // Sets our federate name
    virtual bool setSlotFederationName(const base::Identifier* const);  // Sets our federation name
-   virtual bool setSlotMaxTimeDR(const base::ITime* const);             // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const base::ILength* const);      // Sets the max positional error(s)
-   virtual bool setSlotMaxOrientationErr(const base::IAngle* const);    // Sets the max orientation error(s)
-   virtual bool setSlotMaxEntityRange(const base::ILength* const);      // Sets the max entity range(s)
-   virtual bool setSlotMaxAge(const base::ITime* const);                // Sets the max age(s)
+   virtual bool setSlotMaxTimeDR(const base::ITime* const);            // Sets the mac DR time(s)
+   virtual bool setSlotMaxPositionErr(const base::ILength* const);     // Sets the max positional error(s)
+   virtual bool setSlotMaxOrientationErr(const base::IAngle* const);   // Sets the max orientation error(s)
+   virtual bool setSlotMaxEntityRange(const base::ILength* const);     // Sets the max entity range(s)
+   virtual bool setSlotMaxAge(const base::ITime* const);               // Sets the max age(s)
 
    bool setSlotNetworkID(const base::Integer* const);                  // Sets the network ID
    bool setSlotEnableInput(const base::Boolean* const);                // Sets input enabled flag
    bool setSlotEnableOutput(const base::Boolean* const);               // Sets output enabled flag
    bool setSlotEnableRelay(const base::Boolean* const);                // Sets relay enabled flag
    bool setSlotTimeline(const base::Identifier* const);                // Sets the source of the time ( UTC or EXEC )
-   bool setSlotInputEntityTypes(base::PairStream* const);              // Sets the table of input entity to player mapper objects
-   bool setSlotOutputEntityTypes(base::PairStream* const);             // Sets the table of output entity to player mapper objects
+   bool setSlotInputEntityTypes(base::IPairStream* const);             // Sets the table of input entity to player mapper objects
+   bool setSlotOutputEntityTypes(base::IPairStream* const);            // Sets the table of output entity to player mapper objects
 };
 
 }

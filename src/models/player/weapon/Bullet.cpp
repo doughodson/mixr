@@ -3,7 +3,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include <cmath>
 
@@ -218,7 +218,7 @@ bool Bullet::checkForTargetHit()
         double maxRange{1.0};                  // close range of detonation
         WorldModel* sim{getWorldModel()};
         if (sim != nullptr) {
-            base::PairStream* players{sim->getPlayers()};
+            base::IPairStream* players{sim->getPlayers()};
             if (players != nullptr) {
                 base::IList::Item* item{players->getFirstItem()};
                 while (item != nullptr) {

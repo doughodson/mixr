@@ -10,7 +10,7 @@
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
 
@@ -99,9 +99,9 @@ bool Sar::isSystemReady() const
 }
 
 // Return a list of all images
-base::PairStream* Sar::getImages()
+base::IPairStream* Sar::getImages()
 {
-    base::PairStream* p{imgList};
+    base::IPairStream* p{imgList};
     if (p != nullptr) p->ref();
     return p;
 }
@@ -282,7 +282,7 @@ bool Sar::addImage(base::Pair* const newImage)
     bool ok{};
     if (newImage != nullptr) {
         if (imgList == nullptr) {
-            imgList = new base::PairStream();
+            imgList = new base::IPairStream();
         }
         imgList->put(newImage);
     }

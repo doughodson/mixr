@@ -5,7 +5,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 #include "mixr/base/qty/angles.hpp"
 #include "mixr/base/qty/lengths.hpp"
@@ -68,7 +68,7 @@ void SamVehicle::updateData(const double dt)
    if (sm != nullptr) {
 
       // We have a stores manager -- but do we have any available SAMs?
-      const base::PairStream* stores{sm->getStores()};
+      const base::IPairStream* stores{sm->getStores()};
       if (stores != nullptr) {
          const base::IList::Item* item{stores->getFirstItem()};
          while (item != nullptr) {

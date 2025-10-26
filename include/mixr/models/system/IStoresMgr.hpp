@@ -5,7 +5,7 @@
 #include "mixr/models/system/IStores.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class PairStream; }
+namespace base { class Boolean; class IPairStream; }
 namespace models {
 class Bomb;
 class Chaff;
@@ -61,14 +61,14 @@ public:
 public:
    IStoresMgr();
 
-   base::PairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
-   const base::PairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)
+   base::IPairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
+   const base::IPairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)
 
-   base::PairStream* getExternalStores();             // List of all external equipment (Pre-ref()'d)
-   const base::PairStream* getExternalStores() const; // List of all external equipment (Pre-ref()'d) (const version)
+   base::IPairStream* getExternalStores();             // List of all external equipment (Pre-ref()'d)
+   const base::IPairStream* getExternalStores() const; // List of all external equipment (Pre-ref()'d) (const version)
 
-   base::PairStream* getExtFuelTanks();               // List of all external fuel tanks (Pre-ref()'d)
-   const base::PairStream* getExtFuelTanks() const;   // List of all external fuel tanks (Pre-ref()'d) (const version)
+   base::IPairStream* getExtFuelTanks();               // List of all external fuel tanks (Pre-ref()'d)
+   const base::IPairStream* getExtFuelTanks() const;   // List of all external fuel tanks (Pre-ref()'d) (const version)
 
    Gun* getGun();                                      // The primary gun
    const Gun* getGun() const;                          // The primary gun (const version)
@@ -126,12 +126,12 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   void searchAndAdd(base::PairStream* const, const std::type_info&, base::PairStream*);
+   void searchAndAdd(base::IPairStream* const, const std::type_info&, base::IPairStream*);
 
-   base::safe_ptr<base::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
-   base::safe_ptr<base::PairStream> externalList; // External equipment list; set by setSlotStores()
-   base::safe_ptr<base::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
-   base::safe_ptr<Gun> gunPtr;                    // Gun model; set by setSlotStores()
+   base::safe_ptr<base::IPairStream> weaponsList;  // Weapon list; set by setSlotStores()
+   base::safe_ptr<base::IPairStream> externalList; // External equipment list; set by setSlotStores()
+   base::safe_ptr<base::IPairStream> fuelList;     // External fuel tank list; set by setSlotStores()
+   base::safe_ptr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
 
    bool gunFlg {};                   // Gun has been selected
    unsigned int mode {NAV};          // Weapon delivery mode
@@ -139,7 +139,7 @@ private:
 
 protected:
    // slot table helper methods
-   bool setSlotStores(const base::PairStream* const) override;
+   bool setSlotStores(const base::IPairStream* const) override;
 };
 
 }

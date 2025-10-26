@@ -5,7 +5,7 @@
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
 
@@ -24,9 +24,9 @@ END_SLOTTABLE(Page)
 
 BEGIN_SLOT_MAP(Page)
     ON_SLOT(1, setSlotPage,                 base::Identifier)
-    ON_SLOT(2, setSlotSubpageStream,        base::PairStream)
+    ON_SLOT(2, setSlotSubpageStream,        base::IPairStream)
     ON_SLOT(2, setSlotSubpageSingle,        Page)
-    ON_SLOT(3, setSlotPagingEvent,          base::PairStream)
+    ON_SLOT(3, setSlotPagingEvent,          base::IPairStream)
     ON_SLOT(4, setSlotDrawSubpageFirst,     base::Boolean)
     ON_SLOT(5, setSlotFocusSlavedToSubpage, base::Boolean)
 END_SLOT_MAP()
@@ -492,7 +492,7 @@ bool Page::setSlotPage(const base::Identifier* const x)
 //------------------------------------------------------------------------------
 //  setSlotSubpageStream() -- it takes a pair stream
 //------------------------------------------------------------------------------
-bool Page::setSlotSubpageStream (base::PairStream* const x)
+bool Page::setSlotSubpageStream (base::IPairStream* const x)
 {
    // When a PairStream (i.e., more than one, a list) of pages
    if (subpages != nullptr) subpages->unref();
@@ -507,7 +507,7 @@ bool Page::setSlotSubpageStream (base::PairStream* const x)
 bool Page::setSlotSubpageSingle(Page* const x)
 {
    if (subpages != nullptr) subpages->unref();
-   subpages = new base::PairStream();
+   subpages = new base::IPairStream();
    subpages->put( new base::Pair("1", x) );
    return processSubpages();
 }
@@ -515,7 +515,7 @@ bool Page::setSlotSubpageSingle(Page* const x)
 //------------------------------------------------------------------------------
 // setSlotPagingEvent() -- sets the page change event
 //------------------------------------------------------------------------------
-bool Page::setSlotPagingEvent(base::PairStream* const x)
+bool Page::setSlotPagingEvent(base::IPairStream* const x)
 {
    if (pageChgEvents != nullptr) {
       pageChgEvents->unref();

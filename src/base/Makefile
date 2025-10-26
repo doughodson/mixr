@@ -182,7 +182,7 @@ OBJS =  \
 	MonitorMetrics.o \
 	IObject.o \
 	Pair.o \
-	PairStream.o \
+	IPairStream.o \
 	SlotTable.o \
 	Stack.o \
 	Statistic.o \

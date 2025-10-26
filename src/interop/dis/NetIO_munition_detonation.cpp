@@ -14,7 +14,7 @@
 #include "mixr/base/util/nav_utils.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace dis {
@@ -63,7 +63,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       if (fNib != nullptr) {
          fPlayer = fNib->getPlayer();
       } else {
-         base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
+         base::safe_ptr<base::IPairStream> players( getSimulation()->getPlayers() );
          fPlayer = dynamic_cast<models::IPlayer*>(getSimulation()->findPlayer(fPlayerId));   // added DDH
       }
    }

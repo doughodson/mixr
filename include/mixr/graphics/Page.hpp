@@ -9,7 +9,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Boolean; class Pair; class PairStream; class String; }
+namespace base { class Boolean; class Pair; class IPairStream; class String; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -22,9 +22,9 @@ namespace graphics {
 // Factory name: Page
 // Slots:
 //  page                 <Identifier>   ! initial subpage (default: 0)
-//  pages                <PairStream>   ! subpages (default: 0)
+//  pages                <IPairStream>  ! subpages (default: 0)
 //  pages                <Page>
-//  pagingEvent          <PairStream>
+//  pagingEvent          <IPairStream>
 //  subpagesFirst        <Boolean>      ! draw subpages first (default: draw our page graphics first)
 //  focusSlavedToSubpage <Boolean>      ! slave the focus to the subpage (default: true)
 //------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ protected:
    const Page* getCaller()                   { return caller; }
 
    // returns our subpages
-   base::PairStream* subPages()              { return subpages; }
+   base::IPairStream* subPages()             { return subpages; }
 
    // manage our (sub)page stack
    bool clearSubpageStack();
@@ -103,8 +103,8 @@ private:
    std::string cPageName;               // current subpage name
    Page* nPage{};                       // new subpage (requesting a page change)
 
-   base::PairStream* subpages {};       // subpages
-   base::PairStream* pageChgEvents {};  // page change events
+   base::IPairStream* subpages {};      // subpages
+   base::IPairStream* pageChgEvents {}; // page change events
 
    bool postDraw1 {};                   // post draw component (child) graphic
    bool focusSlavedToSubpage {true};    // input event focus should follow subpage changes
@@ -121,9 +121,9 @@ private:
 private:
    // slot table helper methods
    bool setSlotPage(const base::Identifier* const);
-   bool setSlotSubpageStream(base::PairStream* const);
+   bool setSlotSubpageStream(base::IPairStream* const);
    bool setSlotSubpageSingle(Page* const);
-   bool setSlotPagingEvent(base::PairStream* const);
+   bool setSlotPagingEvent(base::IPairStream* const);
    bool setSlotDrawSubpageFirst(const base::Boolean* const);
    bool setSlotFocusSlavedToSubpage(const base::Boolean* const);
 };

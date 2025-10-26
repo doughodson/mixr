@@ -1,6 +1,6 @@
 #include "mixr/instruments/gauges/AoaIndexer.hpp"
 
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/qty/angles.hpp"
 #include <GL/glu.h>
@@ -65,7 +65,7 @@ void AoAIndexer::deleteData()
 void AoAIndexer::drawFunc()
 {
     // if we have components, we are going to check for a ROTARY
-    base::PairStream* subcomponents = getComponents();
+    base::IPairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;

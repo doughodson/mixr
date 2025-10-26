@@ -6,7 +6,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/IComponent.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace models {
@@ -135,7 +135,7 @@ void ISystem::updateTC(const double dt0)
 bool ISystem::killedNotification(IPlayer* const p)
 {
    // Just let all of our subcomponents know that we were just killed
-   base::PairStream* subcomponents{getComponents()};
+   base::IPairStream* subcomponents{getComponents()};
    if(subcomponents != nullptr) {
       for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};

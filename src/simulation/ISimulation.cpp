@@ -11,7 +11,7 @@
 #include "mixr/simulation/IStation.hpp"
 
 #include "mixr/base/List.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -43,7 +43,7 @@ BEGIN_SLOTTABLE(ISimulation)
    END_SLOTTABLE(ISimulation)
 
 BEGIN_SLOT_MAP(ISimulation)
-    ON_SLOT( 1, setSlotPlayers,         base::PairStream)
+    ON_SLOT( 1, setSlotPlayers,         base::IPairStream)
 
     ON_SLOT( 2, setSlotSimulationTime,  base::ITime)
     ON_SLOT( 3, setSlotDay,             base::Integer)
@@ -212,7 +212,7 @@ void ISimulation::reset()
    // Something old and something new ...
    // ... We're going to create a new player list.
    // ---
-   base::safe_ptr<base::PairStream> newList( new base::PairStream() );
+   base::safe_ptr<base::IPairStream> newList( new base::IPairStream() );
    newList->unref();  // 'newList' has it, so unref() from the 'new'
 
    // ---
@@ -220,7 +220,7 @@ void ISimulation::reset()
    // ---
    {
       if (origPlayers != nullptr) {
-         base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
+         base::safe_ptr<base::IPairStream> origPlayerList = origPlayers;
          base::IList::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -242,7 +242,7 @@ void ISimulation::reset()
    // ---
    {
       if (players != nullptr) {
-         base::safe_ptr<base::PairStream> origPlayerList = players;
+         base::safe_ptr<base::IPairStream> origPlayerList = players;
          base::IList::Item* item{origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
@@ -396,7 +396,7 @@ void ISimulation::reset()
    // Now reset the new player list
    // ---
    if (players != nullptr) {
-      base::safe_ptr<base::PairStream> pl = players;
+      base::safe_ptr<base::IPairStream> pl = players;
       base::IList::Item* item{pl->getFirstItem()};
       while (item != nullptr) {
          base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
@@ -424,7 +424,7 @@ bool ISimulation::shutdownNotification()
    // ---
    // Tell everyone on our player list
    // ---
-   base::PairStream* plist{getPlayers()};
+   base::IPairStream* plist{getPlayers()};
    if (plist != nullptr) {
 
       // Send shutdown to all players
@@ -600,7 +600,7 @@ void ISimulation::updateTC(const double dt)
    // ---
    {
       // This locks the current player list for this time-critical frame
-      base::safe_ptr<base::PairStream> currentPlayerList = players;
+      base::safe_ptr<base::IPairStream> currentPlayerList = players;
 
       for (unsigned int f = 0; f < 4; f++) {
 
@@ -650,7 +650,7 @@ void ISimulation::updateTC(const double dt)
 // with the idx'th player
 //------------------------------------------------------------------------------
 void ISimulation::updateTcPlayerList(
-   base::PairStream* const playerList,
+   base::IPairStream* const playerList,
    const double dt,
    const unsigned int idx,
    const unsigned int n)
@@ -689,7 +689,7 @@ void ISimulation::updateData(const double dt)
 
     // Update all players
     if (players != nullptr) {
-         base::safe_ptr<base::PairStream> currentPlayerList = players;
+         base::safe_ptr<base::IPairStream> currentPlayerList = players;
 
          if (reqBgThreads == 1) {
             // Our single thread
@@ -723,7 +723,7 @@ void ISimulation::updateData(const double dt)
 // with the idx'th player
 //------------------------------------------------------------------------------
 void ISimulation::updateBgPlayerList(
-         base::PairStream* const playerList,
+         base::IPairStream* const playerList,
          const double dt,
          const unsigned int idx,
          const unsigned int n)
@@ -780,13 +780,13 @@ void ISimulation::printTimingStats()
 //------------------------------------------------------------------------------
 
 // Returns the player list
-base::PairStream* ISimulation::getPlayers()
+base::IPairStream* ISimulation::getPlayers()
 {
    return players.getRefPtr();
 }
 
 // Returns the player list (const version)
-const base::PairStream* ISimulation::getPlayers() const
+const base::IPairStream* ISimulation::getPlayers() const
 {
    return players.getRefPtr();
 }
@@ -903,7 +903,7 @@ IStation* ISimulation::getStationImp()
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
 //------------------------------------------------------------------------------
-bool ISimulation::setSlotPlayers(base::PairStream* const pl)
+bool ISimulation::setSlotPlayers(base::IPairStream* const pl)
 {
    // Early out if we're just zeroing the player lists
    if (pl == nullptr) {
@@ -996,11 +996,11 @@ bool ISimulation::setSlotPlayers(base::PairStream* const pl)
       origPlayers = pl;
 
       // Create the new active player list
-      base::PairStream* newList{new base::PairStream()};
+      base::IPairStream* newList{new base::IPairStream()};
 
       // Copy original players to the new list
       if (origPlayers != nullptr) {
-         base::safe_ptr<base::PairStream> origPlayerList = origPlayers;
+         base::safe_ptr<base::IPairStream> origPlayerList = origPlayers;
          base::IList::Item* item {origPlayerList->getFirstItem()};
          while (item != nullptr) {
             base::Pair* pair {static_cast<base::Pair*>(item->getValue())};
@@ -1034,7 +1034,7 @@ void ISimulation::updatePlayerList()
 
     // Second, check for delete requests
     if (!yes) {
-        base::safe_ptr<base::PairStream> pl = players;
+        base::safe_ptr<base::IPairStream> pl = players;
         base::IList::Item* item{pl->getFirstItem()};
         while (!yes && item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -1051,13 +1051,13 @@ void ISimulation::updatePlayerList()
         // ---
         // Something old and something new ...
         // ---
-        base::safe_ptr<base::PairStream> newList( new base::PairStream() );
+        base::safe_ptr<base::IPairStream> newList( new base::IPairStream() );
         newList->unref();  // 'newList' has it, so unref() from the 'new'
 
         // ---
         // Copy players to the new list; except 'deleteRequest' mode players
         // ---
-        base::safe_ptr<base::PairStream> oldList = players;
+        base::safe_ptr<base::IPairStream> oldList = players;
         base::IList::Item* item{oldList->getFirstItem()};
         while (item != nullptr) {
             base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -1143,7 +1143,7 @@ bool ISimulation::addNewPlayer(const char* const playerName, IPlayer* const play
 //------------------------------------------------------------------------------
 // insertPlayerSort() -- Insert the new player into the new list in sorted order
 //------------------------------------------------------------------------------
-bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
+bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::IPairStream* const newList)
 {
     newList->ref();
 

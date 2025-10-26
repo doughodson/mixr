@@ -18,7 +18,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include <cstring>
 
 namespace mixr {
@@ -76,7 +76,7 @@ void IStoresMgr::process(const double dt)
 bool IStoresMgr::shutdownNotification()
 {
    // Notify the external stores that we're shutting down
-   base::PairStream* list{getStores()};
+   base::IPairStream* list{getStores()};
    if (list != nullptr) {
       base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
@@ -124,37 +124,37 @@ unsigned int IStoresMgr::getWeaponDeliveryMode() const
 }
 
 // Pre-ref()'d list of our weapons
-base::PairStream* IStoresMgr::getWeapons()
+base::IPairStream* IStoresMgr::getWeapons()
 {
    return weaponsList.getRefPtr();
 }
 
 // Pre-ref()'d list of our weapons (const version)
-const base::PairStream* IStoresMgr::getWeapons() const
+const base::IPairStream* IStoresMgr::getWeapons() const
 {
    return weaponsList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external equipment
-base::PairStream* IStoresMgr::getExternalStores()
+base::IPairStream* IStoresMgr::getExternalStores()
 {
    return externalList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external equipment (const version)
-const base::PairStream* IStoresMgr::getExternalStores() const
+const base::IPairStream* IStoresMgr::getExternalStores() const
 {
    return externalList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external fuel tanks
-base::PairStream* IStoresMgr::getExtFuelTanks()
+base::IPairStream* IStoresMgr::getExtFuelTanks()
 {
    return fuelList.getRefPtr();
 }
 
 // Pre-ref()'d list of our external fuel tanks (const version)
-const base::PairStream* IStoresMgr::getExtFuelTanks() const
+const base::IPairStream* IStoresMgr::getExtFuelTanks() const
 {
    return fuelList.getRefPtr();
 }
@@ -296,7 +296,7 @@ bool IStoresMgr::onTriggerSwEvent(const base::Boolean* const)
 bool IStoresMgr::onWpnReload()
 {
    // Reset the weapons only
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
       resetStores(list);
       list->unref();
@@ -309,7 +309,7 @@ bool IStoresMgr::onWpnReload()
 // Search all of the objects in the main list for objects of 'type' and add
 // them to the sublist.  Also check all Stores type objects for any 'type' objects.
 //------------------------------------------------------------------------------
-void IStoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_info& type, base::PairStream* sublist)
+void IStoresMgr::searchAndAdd(base::IPairStream* const mainList, const std::type_info& type, base::IPairStream* sublist)
 {
    if (mainList != nullptr && sublist != nullptr) {
 
@@ -326,9 +326,9 @@ void IStoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_
          // If this is a Stores object then check its stores for 'type' objects as well
          const auto sp = dynamic_cast<const IStores*>(p);
          if ( sp != nullptr ) {
-            const base::PairStream* pstores{sp->getStores()};
+            const base::IPairStream* pstores{sp->getStores()};
             if (pstores != nullptr) {
-               searchAndAdd(const_cast<base::PairStream*>(pstores), type, sublist);
+               searchAndAdd(const_cast<base::IPairStream*>(pstores), type, sublist);
                pstores->unref();
             }
          }
@@ -341,7 +341,7 @@ void IStoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
+bool IStoresMgr::setSlotStores(const base::IPairStream* const msg)
 {
    // First let our base class do everything that it needs to.
    BaseClass::setSlotStores(msg);
@@ -356,12 +356,12 @@ bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
 
    // ---
    // Use the stores list that the Stores class just processed.
-   base::PairStream* stores{getStores()};
+   base::IPairStream* stores{getStores()};
    if (stores != nullptr){
 
       // Create the new weapons list that contains all weapons
       {
-         const auto newWeapons = new base::PairStream();
+         const auto newWeapons = new base::IPairStream();
          searchAndAdd(stores, typeid(IWeapon), newWeapons);
          if (newWeapons->entries() > 0) weaponsList = newWeapons;
          newWeapons->unref();
@@ -370,7 +370,7 @@ bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
       // Create the new external stores list that contains all
       // non-weapon, external stores (e.g., fuel tanks, pods, guns)
       {
-         const auto newExternal = new base::PairStream();
+         const auto newExternal = new base::IPairStream();
          searchAndAdd(stores, typeid(IExternalStore), newExternal);
          if (newExternal->entries() > 0) externalList = newExternal;
          newExternal->unref();
@@ -378,7 +378,7 @@ bool IStoresMgr::setSlotStores(const base::PairStream* const msg)
 
       // Create the new fuel tank list that contains all fuel tanks
       {
-         const auto newFuel = new base::PairStream();
+         const auto newFuel = new base::IPairStream();
          searchAndAdd(stores, typeid(FuelTank), newFuel);
          if (newFuel->entries() > 0) fuelList = newFuel;
          newFuel->unref();

@@ -6,7 +6,7 @@
 #include "mixr/base/IList.hpp"
 
 namespace mixr {
-namespace base { class IList; }
+namespace base { class IList; class IPairStream; }
 namespace recorder {
 namespace protobuf_v2 {
 class DataRecordHandle;
@@ -58,7 +58,7 @@ protected:
    bool isDataTypeEnabled(const DataRecordHandle* const handle) const;
 
    void processComponents(
-      base::PairStream* const list,             // Source list of components
+      base::IPairStream* const list,             // Source list of components
       const std::type_info& filter,             // Type filter
       base::Pair* const add = nullptr,          // Optional pair to add
       base::IComponent* const remove = nullptr  // Optional subcomponent to remove

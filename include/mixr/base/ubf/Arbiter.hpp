@@ -7,6 +7,7 @@
 namespace mixr {
 namespace base {
 class IList;
+class IPairStream;
 
 namespace ubf {
 class IState;
@@ -50,7 +51,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotBehaviors(base::PairStream* const);
+   bool setSlotBehaviors(base::IPairStream* const);
 };
 
 inline base::IList* Arbiter::getBehaviors()                 { return behaviors; }

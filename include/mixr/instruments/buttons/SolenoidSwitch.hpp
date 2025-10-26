@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class INumber; class UpTimer; }
+namespace base { class Boolean; class INumber; class IPairStream; class UpTimer; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ private:
 private:
     // slot table helper methods
     bool setSlotHoldTimer(const base::INumber* const);
-    bool setSlotEventMap(const base::PairStream* const);
+    bool setSlotEventMap(const base::IPairStream* const);
 };
 
 }

@@ -3,7 +3,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace base {
@@ -15,7 +15,7 @@ BEGIN_SLOTTABLE(IStateMachine)
 END_SLOTTABLE(IStateMachine)
 
 BEGIN_SLOT_MAP(IStateMachine)
-    ON_SLOT(1, setSlotStateMachines, PairStream)
+    ON_SLOT(1, setSlotStateMachines, IPairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(IStateMachine)
@@ -442,7 +442,7 @@ bool IStateMachine::setStMach(const char* const name, const StateTableCode code)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
+bool IStateMachine::setSlotStateMachines(const IPairStream* const msg)
 {
    // First remove the old list; and make sure we tell the old stMachList
    // that we're no longer their container.
@@ -459,7 +459,7 @@ bool IStateMachine::setSlotStateMachines(const PairStream* const msg)
 
    // Build a new list containing only StateMachine class (or derived) objects
    if (msg != nullptr) {
-      const auto newList = new PairStream();
+      const auto newList = new IPairStream();
 
       // For each object in the list; if it's a StateMachine (or derived from) then
       // clone the object and add it to the new list.

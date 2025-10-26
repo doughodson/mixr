@@ -10,7 +10,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/INumber.hpp"
@@ -37,7 +37,7 @@ END_SLOTTABLE(INavigation)
 BEGIN_SLOT_MAP(INavigation)
     ON_SLOT(1, setSlotRoute,    Route)
     ON_SLOT(2, setSlotUtc,      base::ITime)
-    ON_SLOT(3, setSlotFeba,     base::PairStream)
+    ON_SLOT(3, setSlotFeba,     base::IPairStream)
     ON_SLOT(4, setSlotBullseye, Bullseye)
 END_SLOT_MAP()
 
@@ -805,7 +805,7 @@ bool INavigation::setSlotUtc(const base::ITime* const x)
 }
 
 // set the Forward Edge of the Battle Area (FEBA)
-bool INavigation::setSlotFeba(const base::PairStream* const msg)
+bool INavigation::setSlotFeba(const base::IPairStream* const msg)
 {
     bool ok{true};
 

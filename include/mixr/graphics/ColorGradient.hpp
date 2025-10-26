@@ -6,7 +6,7 @@
 
 namespace mixr {
 
-namespace base { class PairStream; }
+namespace base { class IPairStream; }
 
 namespace graphics {
 
@@ -27,11 +27,11 @@ public:
 
 private:
     static const int MAX_VALUES = 50;
-    base::PairStream* myColors {};
+    base::IPairStream* myColors {};
 
 private:
     // slot table helper methods
-    bool setSlotColors(base::PairStream* const);
+    bool setSlotColors(base::IPairStream* const);
 };
 
 }

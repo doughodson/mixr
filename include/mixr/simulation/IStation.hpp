@@ -8,7 +8,7 @@
 
 namespace mixr {
 namespace base { class IIoHandler; class Boolean; class Identifier; class Integer;
-                 class INumber; class PairStream; class String; class ITime; }
+                 class INumber; class IPairStream; class String; class ITime; }
 namespace simulation {
 class IDataRecorder;
 class ISimulation;
@@ -30,9 +30,9 @@ class StationNetPeriodicThread;
 // Slots --
 //    simulation         <ISimulation>              ! Executable simulation model (default: nullptr)
 //
-//    networks           <base::PairStream>         ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
+//    networks           <base::IPairStream>        ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    igHosts            <base::PairStream>         ! List of Image Generator (IG) host interfaces
+//    igHosts            <base::IPairStream>        ! List of Image Generator (IG) host interfaces
 //
 //    ioHandler          <base::AbstractIoHandler>  ! Input/Output (IO) data handler
 //
@@ -159,8 +159,8 @@ public:
    ISimulation* getSimulation();                                    // Simulation executive
    const ISimulation* getSimulation() const;                        // Simulation executive (const version)
 
-   base::PairStream* getPlayers();                                  // Player list; pre-ref()'d
-   const base::PairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
+   base::IPairStream* getPlayers();                                  // Player list; pre-ref()'d
+   const base::IPairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
 
    IPlayer* getOwnship();                                           // The ownship (primary) player
    const IPlayer* getOwnship() const;                               // The ownship (primary) player (const version)
@@ -169,11 +169,11 @@ public:
    virtual bool setOwnshipPlayer(IPlayer* const newOS);             // Sets the ownship player
    virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
-   base::PairStream* getIgHostList();                               // Image generator host interfaces
-   const base::PairStream* getIgHostList() const;                   // Image generator host interfaces (const version)
+   base::IPairStream* getIgHostList();                               // Image generator host interfaces
+   const base::IPairStream* getIgHostList() const;                   // Image generator host interfaces (const version)
 
-   base::PairStream* getNetworks();                                 // Interoperability network handlers
-   const base::PairStream* getNetworks() const;                     // Interoperability network handlers (const version)
+   base::IPairStream* getNetworks();                                 // Interoperability network handlers
+   const base::IPairStream* getNetworks() const;                     // Interoperability network handlers (const version)
 
    base::IIoHandler* getIoHandler();                                // I/O handler
    const base::IIoHandler* getIoHandler() const;                    // I/O handler (const version)
@@ -251,8 +251,8 @@ private:
    void setBgThread(StationBgPeriodicThread*);
 
    ISimulation* sim{};                                       // Executable simulation model
-   base::safe_ptr<base::PairStream> networks;                // List of networks
-   base::safe_ptr<base::PairStream> igHosts;                 // List of Image generator (IG) host interfaces
+   base::safe_ptr<base::IPairStream> networks;               // List of networks
+   base::safe_ptr<base::IPairStream> igHosts;                // List of Image generator (IG) host interfaces
    base::safe_ptr<base::IIoHandler> ioHandler;               // Input/Output (IO) data handler
    IPlayer* ownship{};                                       // Ownship (primary) player
    std::string ownshipName;                                  // Name of our ownship player
@@ -282,9 +282,9 @@ private:
    // slot table helper methods
    bool setSlotSimulation(ISimulation* const);
 
-   bool setSlotNetworks(base::PairStream* const);
+   bool setSlotNetworks(base::IPairStream* const);
 
-   bool setSlotIgHosts(base::PairStream* const);
+   bool setSlotIgHosts(base::IPairStream* const);
 
    bool setSlotIoHandler(base::IIoHandler* const);
 

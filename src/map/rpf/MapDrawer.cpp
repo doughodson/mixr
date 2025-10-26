@@ -3,7 +3,7 @@
 #include "mixr/map/rpf/CadrgMap.hpp"
 #include "mixr/map/rpf/TexturePager.hpp"
 #include "mixr/map/rpf/CadrgTocEntry.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/graphics/Display.hpp"
 #include "mixr/graphics/Texture.hpp"

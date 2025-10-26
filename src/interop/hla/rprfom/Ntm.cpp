@@ -3,7 +3,7 @@
 #include "mixr/interop/hla/rprfom/Nib.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace rprfom {

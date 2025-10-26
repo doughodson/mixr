@@ -41,7 +41,7 @@ namespace models {
 //    scanRadius           <INumber>      ! Radius of the circle we are using for conical scans (radians or base::Angle} (spiral scan too)
 //                                        ! (default: 2.0 * base::Angle::D2RCC, 2 degree radius)
 //
-//    pseudoRandomPattern  <PairStream>   ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
+//    pseudoRandomPattern  <IPairStream>  ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
 //
 //    maxRevolutions       <INumber>      ! Spiral Scan - Maximum number of revolutions (default: 1.0)
 //
@@ -266,7 +266,7 @@ private:
    bool setSlotRevPerSec(const base::INumber* const);
    bool setSlotScanRadius(const base::INumber* const);
    bool setSlotScanRadius(const base::IAngle* const);
-   bool setSlotPRVertices(const base::PairStream* const);
+   bool setSlotPRVertices(const base::IPairStream* const);
    bool setSlotMaxRevs(const base::INumber* const);
 };
 

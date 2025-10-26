@@ -29,7 +29,7 @@ class Bullseye;
 //
 //    utc      <base::Time>         ! initial UTC time (default: 0)
 //
-//    feba     <base::PairStream>   ! Forward edge battle area (FEBA):
+//    feba     <base::IPairStream>  ! Forward edge battle area (FEBA):
 //                                  !   1) List of distance vectors [ North East ]
 //                                  !   from the gaming area reference point.
 //                                  !   2) Default unit is Nautical Miles
@@ -243,7 +243,7 @@ private:
    // slot table helper methods
    bool setSlotRoute(const Route* const);        // and the initial route used by reset()
    bool setSlotUtc(const base::ITime* const);
-   bool setSlotFeba(const base::PairStream* const);
+   bool setSlotFeba(const base::IPairStream* const);
    bool setSlotBullseye(Bullseye* const);
 };
 

@@ -7,7 +7,7 @@
 #include "mixr/base/qty/util/length_utils.hpp"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class ILength; class PairStream; }
+namespace base { class IAngle; class Boolean; class Integer; class ILength; class IPairStream; }
 namespace models {
 class IPlayer;
 
@@ -34,7 +34,7 @@ class IPlayer;
 // Slots:
 //    collisionRange      <Length>         ! Collision range (default: 4 Meters)
 //    maxPlayers          <Integer>        ! Max number of players of interest (default: 20)
-//    playerTypes         <PairStream>     ! List of player of interest types (default: all types )
+//    playerTypes         <IPairStream>    ! List of player of interest types (default: all types )
 //                                         !   Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //    maxRange2Players    <Length>         ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
 //    maxAngle2Players    <Angle>          ! Max angle off the 'nose' of our ownship to players of interest, or zero for all (default: 0)
@@ -125,7 +125,7 @@ private:
    // slot table helper methods
    bool setSlotCollisionRange(const base::ILength* const);
    bool setSlotMaxPlayers(const base::Integer* const);
-   bool setSlotPlayerTypes(const base::PairStream* const);
+   bool setSlotPlayerTypes(const base::IPairStream* const);
    bool setSlotMaxRange2Players(const base::ILength* const);
    bool setSlotMaxAngle2Players(const base::IAngle* const);
    bool setSlotUseWorldCoordinates(const base::Boolean* const);

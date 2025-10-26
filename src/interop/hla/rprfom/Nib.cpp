@@ -12,7 +12,7 @@
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {

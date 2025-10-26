@@ -11,7 +11,7 @@
 
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/osg/Matrixd"
 
 #include <cmath>
@@ -209,7 +209,7 @@ void LifeForm::look(const double up, const double sdws)
             const double la{lookAngle * static_cast<double>(base::angle::D2RCC)};
             WorldModel* sim{getWorldModel()};
             if (sim != nullptr) {
-                base::PairStream* players{sim->getPlayers()};
+                base::IPairStream* players{sim->getPlayers()};
                 if (players != nullptr) {
                     base::IList::Item* item{players->getFirstItem()};
                     while (item != nullptr && !tgtAquired) {

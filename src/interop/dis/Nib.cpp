@@ -9,7 +9,7 @@
 #include "mixr/models/WorldModel.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace dis {
@@ -363,7 +363,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
             models::IRfSensor* js = (models::IRfSensor*) pair->object();
 
             bool singleBeam = true;
-            base::PairStream* subcomponents = js->getComponents();
+            base::IPairStream* subcomponents = js->getComponents();
             if (subcomponents != nullptr) {
 
                // Check for multi-beam jammer (each beam is a subcomponent Jammer)

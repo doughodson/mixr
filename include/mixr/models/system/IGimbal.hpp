@@ -8,7 +8,7 @@
 #include "mixr/base/osg/Matrixd"
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class IList; class PairStream; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class IList; class IPairStream; }
 namespace models {
 class RfEmission;
 class SensorMsg;
@@ -92,7 +92,7 @@ class Tdb;
 //    terrainOcculting     <Boolean>      ! Enable terrain occulting of the players of interest (default: false)
 //    checkHorizon         <Boolean>      ! Enable horizon masking check (default: true)
 //
-//    playerOfInterestTypes        <PairStream> ! List of player of interest types (default: all types )
+//    playerOfInterestTypes        <IPairStream>! List of player of interest types (default: all types )
 //                                              ! Valid identifiers: { air, ground, weapon, ship, building, lifeform, space }
 //
 //    maxPlayersOfInterest         <Number>     ! Max number of players of interest (default: 200)
@@ -232,7 +232,7 @@ public:  // Public section
    virtual bool setOwnHeadingOnly(const bool);                              // Use only the ownship player's heading to when transforming between body and local NED
 
    // Process the Players-Of-Interest (POI) list
-   virtual unsigned int processPlayersOfInterest(base::PairStream* const poi);
+   virtual unsigned int processPlayersOfInterest(base::IPairStream* const poi);
 
    // Sets the servo mode: { FREEZE_SERVO, RATE_SERVO, POSITION_SERVO }
    // Returns false if the mode could not be changed
@@ -367,7 +367,7 @@ private:
    bool setSlotTerrainOcculting(const base::Boolean* const);
    bool setSlotCheckHorizon(const base::Boolean* const);
 
-   bool setSlotPlayerTypes(const base::PairStream* const);
+   bool setSlotPlayerTypes(const base::IPairStream* const);
    bool setSlotMaxPlayers(const base::Integer* const);
 
    bool setSlotMaxRange2PlayersOfInterest(const base::ILength* const);

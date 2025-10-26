@@ -10,7 +10,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
@@ -961,7 +961,7 @@ const IPlayer* Autopilot::getLeadPlayer()
       // find the player in the simulation
       const WorldModel* const sim{getWorldModel()};
       if (sim != nullptr) {
-         const base::PairStream* players{sim->getPlayers()};
+         const base::IPairStream* players{sim->getPlayers()};
          if (players != nullptr) {
             const base::Pair* pair{players->findByName(leadName.c_str())};
             if (pair != nullptr) {
@@ -1204,7 +1204,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const x)
    const WorldModel* const sim{getWorldModel()};
    bool found{};
    if (sim != nullptr) {
-      const base::PairStream* players{sim->getPlayers()};
+      const base::IPairStream* players{sim->getPlayers()};
       if (players != nullptr) {
          const base::Pair* pair{players->findByName((*x).c_str())};
          if (pair != nullptr) {
@@ -1228,7 +1228,7 @@ bool Autopilot::setLeadPlayerName(const char* x)
    const WorldModel* const sim{getWorldModel()};
    bool found{};
    if (sim != nullptr) {
-      const base::PairStream* players{sim->getPlayers()};
+      const base::IPairStream* players{sim->getPlayers()};
       if (players != nullptr) {
          const base::Pair* pair{players->findByName(x)};
          if (pair != nullptr) {

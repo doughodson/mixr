@@ -5,7 +5,7 @@
 #include "mixr/models/system/IRfSystem.hpp"
 
 namespace mixr {
-namespace base { class Integer; class INumber; class PairStream; }
+namespace base { class Integer; class INumber; class IPairStream; }
 namespace models {
 class Datalink;
 class RfEmission;
@@ -47,7 +47,7 @@ class RfEmission;
 // Slots:
 //    numChannels    <base::Integer>     ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
 //
-//    channels       <base::PairStream>  ! Our channels (list of base::Frequency objects) --
+//    channels       <base::IPairStream> ! Our channels (list of base::Frequency objects) --
 //                                       ! -- make sure to set the number of channels first. (default: 0)
 //
 //    channel        <base::Integer>     ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
@@ -136,7 +136,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotNumChannels(base::Integer* const);
-   bool setSlotChannels(const base::PairStream* const);
+   bool setSlotChannels(const base::IPairStream* const);
    bool setSlotChannel(base::Integer* const);
    bool setSlotMaxDetectRange(base::INumber* const);
    bool setSlotRadioId(base::Integer* const);

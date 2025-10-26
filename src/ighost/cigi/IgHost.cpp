@@ -13,7 +13,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/osg/Vec3d"
@@ -40,7 +40,7 @@ BEGIN_SLOT_MAP(IgHost)
    ON_SLOT(1, setSlotMaxRange,      base::INumber)
    ON_SLOT(2, setSlotMaxModels,     base::Integer)
    ON_SLOT(3, setSlotMaxElevations, base::Integer)
-   ON_SLOT(4, setSlotTypeMap,       base::PairStream)
+   ON_SLOT(4, setSlotTypeMap,       base::IPairStream)
 END_SLOT_MAP()
 
 IgHost::IgHost()
@@ -408,7 +408,7 @@ void IgHost::setOwnship(simulation::IPlayer* const p)
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void IgHost::setPlayerList(base::PairStream* const newPlayerList)
+void IgHost::setPlayerList(base::IPairStream* const newPlayerList)
 {
     // nothing's changed, just return
     if (playerList == newPlayerList) return;
@@ -712,7 +712,7 @@ bool IgHost::setSlotMaxElevations(const base::Integer* const x)
 }
 
 // Sets the list of IG model type IDs (TypeMapper objects)
-bool IgHost::setSlotTypeMap(const base::PairStream* const x)
+bool IgHost::setSlotTypeMap(const base::IPairStream* const x)
 {
     bool ok{};
     if (x != nullptr) {

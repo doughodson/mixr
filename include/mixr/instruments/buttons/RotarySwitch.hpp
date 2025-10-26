@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Integer; class PairStream; }
+namespace base { class Integer; class IPairStream; }
 namespace instruments {
 
 //------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ private:
    SendData angleSD;       // angle to send to our rotator
 
 private:
-   bool setSlotAngles(const base::PairStream* const);
+   bool setSlotAngles(const base::IPairStream* const);
    bool setSlotStartPosition(const base::Integer* const);
 };
 

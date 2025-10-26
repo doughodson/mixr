@@ -4,7 +4,7 @@
 #include "mixr/graphics/Readouts.hpp"
 #include "mixr/graphics/Polygon.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Float.hpp"
@@ -27,7 +27,7 @@ BEGIN_SLOTTABLE(SymbolLoader)
 END_SLOTTABLE(SymbolLoader)
 
 BEGIN_SLOT_MAP(SymbolLoader)
-   ON_SLOT(1, setSlotTemplates,       base::PairStream)
+   ON_SLOT(1, setSlotTemplates,       base::IPairStream)
    ON_SLOT(2, setSlotShowInRangeOnly, base::Boolean)
    ON_SLOT(3, setSlotInterconnect,    base::Boolean)
 END_SLOT_MAP()
@@ -46,7 +46,7 @@ void SymbolLoader::copyData(const SymbolLoader& org, const bool)
    clearLoader();
 
    {
-      base::PairStream* copy{};
+      base::IPairStream* copy{};
       if (org.templates != nullptr) {
          copy = org.templates->clone();
       }
@@ -215,7 +215,7 @@ int SymbolLoader::addSymbol(const int nType, const char* const id, int specName)
 
                   // Add the symbol's graphical component to our component list.
                   {
-                     base::PairStream* comp{getComponents()};
+                     base::IPairStream* comp{getComponents()};
                      base::IComponent::processComponents(comp, typeid(graphics::Graphic), newPair);
                      if (comp != nullptr) comp->unref();
                   }
@@ -274,7 +274,7 @@ bool SymbolLoader::setSymbolType(const int idx, const int nType)
 
                   // Add the new and remove the old components from our subcomponent list
                   {
-                     base::PairStream* comp = getComponents();
+                     base::IPairStream* comp = getComponents();
                      base::IComponent::processComponents(comp, typeid(graphics::Graphic), newPair, oldG);
                      if (comp != nullptr) comp->unref();
                   }
@@ -317,7 +317,7 @@ bool SymbolLoader::removeSymbol(const int idx)
             base::Pair* pair{symbols[i]->getSymbolPair()};
             const auto g = static_cast<graphics::Graphic*>(pair->object());
 
-            base::PairStream* x = getComponents();
+            base::IPairStream* x = getComponents();
             base::IComponent::processComponents(x, typeid(graphics::Graphic), nullptr, g);
             x->unref();
          }
@@ -980,7 +980,7 @@ int SymbolLoader::getSymbols(base::safe_ptr<SlSymbol>* const newSyms, const int 
 //------------------------------------------------------------------------------
 
 // simply loads our template pairstream
-bool SymbolLoader::setSlotTemplates(base::PairStream* msg)
+bool SymbolLoader::setSlotTemplates(base::IPairStream* msg)
 {
    bool ok{};
    if (msg != nullptr) {

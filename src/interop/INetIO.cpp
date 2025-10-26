@@ -19,7 +19,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/numeric/Decibel.hpp"
@@ -78,8 +78,8 @@ BEGIN_SLOT_MAP(INetIO)
    ON_SLOT(6,  setSlotEnableRelay,        base::Boolean)
    ON_SLOT(7,  setSlotTimeline,           base::Identifier)
 
-   ON_SLOT(8,  setSlotInputEntityTypes,   base::PairStream)
-   ON_SLOT(9,  setSlotOutputEntityTypes,  base::PairStream)
+   ON_SLOT(8,  setSlotInputEntityTypes,   base::IPairStream)
+   ON_SLOT(9,  setSlotOutputEntityTypes,  base::IPairStream)
 
    ON_SLOT(10, setSlotMaxTimeDR,          base::ITime)
    ON_SLOT(11, setSlotMaxPositionErr,     base::ILength)
@@ -460,7 +460,7 @@ void INetIO::updateOutputList()
       if ( isOutputEnabled() ) {
 
          // Get the player list pointer (pre-ref()'d)
-         base::PairStream* players{getSimulation()->getPlayers()};
+         base::IPairStream* players{getSimulation()->getPlayers()};
 
          // For all players
          bool finished{};
@@ -1109,7 +1109,7 @@ bool INetIO::setSlotTimeline(const base::Identifier* const p)
 }
 
 // Sets the table of input entity to player mapper objects
-bool INetIO::setSlotInputEntityTypes(base::PairStream* const msg)
+bool INetIO::setSlotInputEntityTypes(base::IPairStream* const msg)
 {
     bool ok{};
     if (msg != nullptr) {
@@ -1134,7 +1134,7 @@ bool INetIO::setSlotInputEntityTypes(base::PairStream* const msg)
 }
 
 // Sets the table of output entity to player mapper objects
-bool INetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
+bool INetIO::setSlotOutputEntityTypes(base::IPairStream* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

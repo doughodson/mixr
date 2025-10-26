@@ -8,7 +8,7 @@
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/qty/frequencies.hpp"
 
 namespace mixr {
@@ -29,7 +29,7 @@ BEGIN_SLOT_MAP(IoHandler)
    ON_SLOT(1, setSlotIoData,     base::IIoData)
    ON_SLOT(2, setSlotInputData,  base::IIoData)
    ON_SLOT(3, setSlotOutputData, base::IIoData)
-   ON_SLOT(4, setSlotDevices,    base::PairStream)
+   ON_SLOT(4, setSlotDevices,    base::IPairStream)
    ON_SLOT(5, setSlotRate,       base::IFrequency)
    ON_SLOT(6, setSlotPriority,   base::INumber)
 END_SLOT_MAP()
@@ -73,7 +73,7 @@ void IoHandler::copyData(const IoHandler& org, const bool)
    // copy the list of I/O devices
    // ---
    if (org.devices != nullptr) {
-      const auto copy = static_cast<base::PairStream*>(org.devices->clone());
+      const auto copy = static_cast<base::IPairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
    }
@@ -197,7 +197,7 @@ bool IoHandler::setSlotOutputData(base::IIoData* const msg)
    return true;
 }
 
-bool IoHandler::setSlotDevices(base::PairStream* const list)
+bool IoHandler::setSlotDevices(base::IPairStream* const list)
 {
    bool ok{true};
 

@@ -6,7 +6,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/colors/Rgb.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/INumber.hpp"
@@ -52,11 +52,11 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 1, setSlotColor,              base::Identifier)
     ON_SLOT( 2, setSlotLineWidth,          base::INumber)
     ON_SLOT( 3, setSlotFlashRate,          base::INumber)
-    ON_SLOT( 4, setSlotTransformList,      base::PairStream)
+    ON_SLOT( 4, setSlotTransformList,      base::IPairStream)
     ON_SLOT( 4, setSlotSingleTransform,    base::ITransform)
-    ON_SLOT( 5, setSlotVertices,           base::PairStream)
-    ON_SLOT( 6, setSlotNormals,            base::PairStream)
-    ON_SLOT( 7, setSlotTexCoord,           base::PairStream)
+    ON_SLOT( 5, setSlotVertices,           base::IPairStream)
+    ON_SLOT( 6, setSlotNormals,            base::IPairStream)
+    ON_SLOT( 7, setSlotTexCoord,           base::IPairStream)
     ON_SLOT( 8, setSlotNoDisplayList,      base::Boolean)
     ON_SLOT( 9, setSlotSubcomponentsFirst, base::Boolean)
     ON_SLOT(10, setSlotSelectName,         base::INumber)
@@ -72,7 +72,7 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT(20, setSlotMask,               base::Boolean)
     ON_SLOT(21, setMaterial,               base::Identifier)
     ON_SLOT(21, setMaterial,               graphics::Material)
-    ON_SLOT(22, setSlotTranslateLight,     base::PairStream)
+    ON_SLOT(22, setSlotTranslateLight,     base::IPairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Graphic)
@@ -231,7 +231,7 @@ void Graphic::deleteData()
 base::Pair* Graphic::findBySelectName(const GLuint name)
 {
     base::Pair* q = nullptr;
-    base::PairStream* subcomponents = getComponents();
+    base::IPairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
         const base::IList::Item* item = subcomponents->getFirstItem();
         while (item != nullptr && q == nullptr) {
@@ -485,7 +485,7 @@ void Graphic::draw()
     }
 
     // Draw my children
-    base::PairStream* subcomponents{getComponents()};
+    base::IPairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
         IComponent* s{getSelectedComponent()};
         if (s != nullptr) {
@@ -1007,7 +1007,7 @@ bool Graphic::setStipplePattern(const GLushort x)
 // type Graphic (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Graphic::processComponents(
-      base::PairStream* const list,
+      base::IPairStream* const list,
       const std::type_info&,
       base::Pair* const add,
       base::IComponent* const remove
@@ -1021,7 +1021,7 @@ void Graphic::processComponents(
 //------------------------------------------------------------------------------
 
 // setSlotTransformList() -- set the list of transformations
-bool Graphic::setSlotTransformList(base::PairStream* list)
+bool Graphic::setSlotTransformList(base::IPairStream* list)
 {
     bool ok = true;
     if (transforms != nullptr) transforms->unref();
@@ -1050,7 +1050,7 @@ bool Graphic::setSlotTransformList(base::PairStream* list)
 // setSlotSingleTransform() -- makes a list out of a single base::Transform
 bool Graphic::setSlotSingleTransform(base::ITransform* const sobj)
 {
-    const auto list = new base::PairStream();
+    const auto list = new base::IPairStream();
     const auto pair = new base::Pair("1", sobj);
     list->put(pair);
     bool ok = setSlotTransformList(list);
@@ -1060,7 +1060,7 @@ bool Graphic::setSlotSingleTransform(base::ITransform* const sobj)
 }
 
 // setSlotTranslateLight() -- tell us where to translate our light
-bool Graphic::setSlotTranslateLight(base::PairStream* const x)
+bool Graphic::setSlotTranslateLight(base::IPairStream* const x)
 {
     double temp[4] { 0.0, 0.0, 1.0, 0.0 };
     base::IList::Item* item{x->getFirstItem()};
@@ -1192,7 +1192,7 @@ bool Graphic::setSlotMask(const base::Boolean* const x)
 //     vertices: { [ 1 2 3 ]  [ 4 5 6 ] [ 7 8 9 ] }
 // ---
 //------------------------------------------------------------------------------
-bool Graphic::setSlotVertices(const base::PairStream* const x)
+bool Graphic::setSlotVertices(const base::IPairStream* const x)
 {
     bool ok{true};
 
@@ -1239,7 +1239,7 @@ bool Graphic::setSlotVertices(const base::PairStream* const x)
 // example --
 //     normals: { [ 1 2 3 ]  [ 4 5 6 ] [ 7 8 9 ] }
 //------------------------------------------------------------------------------
-bool Graphic::setSlotNormals(const base::PairStream* const x)
+bool Graphic::setSlotNormals(const base::IPairStream* const x)
 {
     bool ok{true};
 
@@ -1287,7 +1287,7 @@ bool Graphic::setSlotNormals(const base::PairStream* const x)
 //     texCoord: { [ 1 2 ]  [ 4 5 ] [ 7 8 ] }
 //
 //------------------------------------------------------------------------------
-bool Graphic::setSlotTexCoord(const base::PairStream* const x)
+bool Graphic::setSlotTexCoord(const base::IPairStream* const x)
 {
     bool ok{true};
 

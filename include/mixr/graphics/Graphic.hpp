@@ -12,7 +12,7 @@
 #include <GL/gl.h>
 
 namespace mixr {
-namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class ITransform; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class ITransform; class IPairStream; }
 namespace graphics {
 class Display;
 class Material;
@@ -44,11 +44,11 @@ class Material;
 //    color              <Identifier>   ! Color by name (default: 0)
 //    linewidth          <INumber>      ! Linewidth (default: 0.0f)
 //    flashRate          <INumber>      ! Flash rate (default: 0.0f)
-//    transform          <PairStream>   ! List of coordinate transformations (default: 0)
-//    transform          <ITransform>    ! Single coordinate transformation (default: 0)
-//    vertices           <PairStream>   ! List of 3D Coordinates (World coord) (default: 0)
-//    normals            <PairStream>   ! List of 3D Vectors of normals at each vertex
-//    texCoord           <PairStream>   ! List of 2D Texture Coordinates (default: 0)
+//    transform          <IPairStream>  ! List of coordinate transformations (default: 0)
+//    transform          <ITransform>   ! Single coordinate transformation (default: 0)
+//    vertices           <IPairStream>  ! List of 3D Coordinates (World coord) (default: 0)
+//    normals            <IPairStream>  ! List of 3D Vectors of normals at each vertex
+//    texCoord           <IPairStream>  ! List of 2D Texture Coordinates (default: 0)
 //    noDisplayList      <INumber>      ! Flag: True to disable display list
 //                                      !     (default: false)
 //    subcomponentsFirst <Boolean>      ! Flag: Draw component graphics first
@@ -397,7 +397,7 @@ protected:
    virtual bool onSetVisibilityEvent(const base::Boolean* const);
 
    void processComponents(                          // Process our subcomponent list (which should be other Graphics)
-        base::PairStream* const list,               // Source list of components
+        base::IPairStream* const list,               // Source list of components
         const std::type_info& filter,               // Type filter
         base::Pair* const add = nullptr,            // Optional pair to add
         base::IComponent* const remove = nullptr    // Optional subcomponent to remove
@@ -408,7 +408,7 @@ private:
    void setupMatrix();
    void setupMaterial();
 
-   base::PairStream* transforms {};  // transformations
+   base::IPairStream* transforms {}; // transformations
    base::Matrixd m;                  // transformation matrix
    base::Matrixd m1;                 // saved 'm'
    bool haveMatrix {};               // Have a transformation matrix flag
@@ -466,13 +466,13 @@ private:
    bool setSlotFlashRate(const base::INumber* const);
    bool setSlotLineWidth(const base::INumber* const);
    bool setSlotSelectName(const base::INumber* const);
-   bool setSlotTransformList(base::PairStream*);      // Set the transformation list
+   bool setSlotTransformList(base::IPairStream*);      // Set the transformation list
    bool setSlotSingleTransform(base::ITransform* const);
    bool setSlotNoDisplayList(const base::Boolean* const);
    bool setSlotSubcomponentsFirst(const base::Boolean* const);
-   bool setSlotVertices(const base::PairStream* const);
-   bool setSlotNormals(const base::PairStream* const);
-   bool setSlotTexCoord(const base::PairStream* const);
+   bool setSlotVertices(const base::IPairStream* const);
+   bool setSlotNormals(const base::IPairStream* const);
+   bool setSlotTexCoord(const base::IPairStream* const);
    bool setSlotMask(const base::Boolean* const);
    bool setSlotTextureName(base::Identifier*);
    bool setSlotScissorX(const base::INumber* const);
@@ -483,7 +483,7 @@ private:
    bool setSlotStippleFactor(const base::Integer* const);
    bool setSlotStipplePattern(const base::Integer* const);
    bool setSlotVisibility(const base::Boolean* const);
-   bool setSlotTranslateLight(base::PairStream* const);
+   bool setSlotTranslateLight(base::IPairStream* const);
 };
 
 inline GLuint Graphic::getNewSelectName()

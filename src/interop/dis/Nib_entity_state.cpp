@@ -23,7 +23,7 @@
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include <cstdio>
 #include <cmath>
@@ -300,7 +300,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   models::IWeapon* wpn {};
 
                   // find the weapon at station 'sta'
-                  base::PairStream* stores {sms->getStores()};
+                  base::IPairStream* stores {sms->getStores()};
                   if (stores != nullptr) {
                      base::IList::Item* item {stores->getFirstItem()};
                      while (item != nullptr && wpn == nullptr) {

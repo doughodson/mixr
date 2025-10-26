@@ -5,7 +5,7 @@
 #include "mixr/simulation/IIgHost.hpp"
 
 namespace mixr {
-namespace base { class INetHandler; }
+namespace base { class IPairStream; class INetHandler; }
 namespace models { class IPlayer; }
 namespace ighost {
 namespace pov {
@@ -22,7 +22,7 @@ public:
 
    // sets our ownship and player list pointers, used by Station class
    void setOwnship(simulation::IPlayer* const) final;
-   void setPlayerList(base::PairStream* const newPlayerList) final;
+   void setPlayerList(base::IPairStream* const newPlayerList) final;
 
    void reset() final;
 
@@ -45,7 +45,7 @@ private:
 
    // simulation inputs
    models::IPlayer* ownship{};              // current ownship
-   base::PairStream* playerList{};         // current player list
+   base::IPairStream* playerList{};         // current player list
 
 private:
    // slot table helper methods

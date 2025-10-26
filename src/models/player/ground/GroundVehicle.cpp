@@ -3,7 +3,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/qty/angles.hpp"
 #include "mixr/base/qty/times.hpp"

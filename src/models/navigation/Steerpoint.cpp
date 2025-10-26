@@ -10,7 +10,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/Latitude.hpp"
@@ -710,7 +710,7 @@ bool Steerpoint::compute(const INavigation* const nav, const Steerpoint* const f
             // ---
             // Update our component steerpoint list (from NAV data, or 'direct-to' only)
             // ---
-            base::PairStream* steerpoints{getComponents()};
+            base::IPairStream* steerpoints{getComponents()};
             if (steerpoints != nullptr) {
                 base::IList::Item* item{steerpoints->getFirstItem()};
                 while (item != nullptr) {
@@ -740,7 +740,7 @@ bool Steerpoint::compute(const INavigation* const nav, const Steerpoint* const f
 // type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Steerpoint::processComponents(
-      base::PairStream* const list,
+      base::IPairStream* const list,
       const std::type_info&,
       base::Pair* const add,
       base::IComponent* const remove

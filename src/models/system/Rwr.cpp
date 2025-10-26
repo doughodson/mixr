@@ -6,7 +6,7 @@
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/RfEmission.hpp"
 
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
 #include "mixr/base/util/math_utils.hpp"

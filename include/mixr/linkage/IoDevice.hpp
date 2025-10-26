@@ -7,7 +7,7 @@
 #include "mixr/base/safe_ptr.hpp"
 
 namespace mixr {
-namespace base { class PairStream; class AbstractIoData; }
+namespace base { class IPairStream; class AbstractIoData; }
 namespace linkage {
 
 //------------------------------------------------------------------------------
@@ -45,11 +45,11 @@ private:
    virtual void readInputs() = 0;
    virtual void writeOutputs() = 0;
 
-   base::safe_ptr<base::PairStream> adapters;     // list of adapters
+   base::safe_ptr<base::IPairStream> adapters;     // list of adapters
 
 private:
    // slot table helper methods
-   bool setSlotAdapters(base::PairStream* const);
+   bool setSlotAdapters(base::IPairStream* const);
 };
 
 }

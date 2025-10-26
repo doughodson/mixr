@@ -7,7 +7,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class IAngle; class Integer; class ILength; class INetHandler; class Identifier; }
+namespace base { class IAngle; class Integer; class ILength; class IPairStream; class INetHandler; class Identifier; }
 namespace models { class Iff; class IRfSensor; class IPlayer; }
 namespace interop { class INib; }
 namespace dis {
@@ -62,21 +62,21 @@ struct ActionResponsePDU_R;
 //    exerciseID     <base::Integer>         ! Exercise Identification (default: 1)
 //
 //    maxTimeDR   <base::ITime>              ! Max DR time (default: 5 seconds)
-//                <base::PairStream>         ! List of max DR times by kinds and domains (see note #4)
+//                <base::IPairStream>        ! List of max DR times by kinds and domains (see note #4)
 //
 //    maxPositionError <base::ILength>       ! Max DR position error (default: 3 meters)
-//                     <base::PairStream>    ! List of max DR position errors by kinds and domains (see note #4)
+//                     <base::IPairStream>   ! List of max DR position errors by kinds and domains (see note #4)
 //
 //    maxOrientationError <base::IAngle>     ! Max DR angular error (default: 3 degrees)
-//                        <base::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
+//                        <base::IPairStream>! List of max DR angular errors by kinds and domains (see note #4)
 //
 //    maxAge         <base::ITime>           ! Max age (without update) (default: 12.5 seconds)
-//                   <base::PairStream>      ! List of max ages (without update) by kinds and domains (see note #4)
+//                   <base::IPairStream>     ! List of max ages (without update) by kinds and domains (see note #4)
 //
 //    maxEntityRange <base::ILength>         ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
-//                   <base::PairStream>      ! List of max entity ranges by kinds and domains (see note #4)
+//                   <base::IPairStream>     ! List of max entity ranges by kinds and domains (see note #4)
 //
-//    EmissionPduHandlers <base::PairStream> ! List of Electromagnetic-Emission PDU handlers
+//    EmissionPduHandlers <base::IPairStream>! List of Electromagnetic-Emission PDU handlers
 //
 //
 // Notes:
@@ -373,12 +373,12 @@ private:
    bool setSlotNetInput(base::INetHandler* const);                    // Network input handler
    bool setSlotNetOutput(base::INetHandler* const);                   // Network output handler
    bool setSlotVersion(const base::Integer* const);                   // DIS version
-   bool setSlotMaxTimeDR(const base::PairStream* const);              // Sets the max DR time(s) for selected entity types
-   bool setSlotMaxPositionErr(const base::PairStream* const);         // Sets the max positional error(s) for selected entity types
-   bool setSlotMaxOrientationErr(const base::PairStream* const);      // Sets the max orientation error(s) for selected entity types
-   bool setSlotMaxAge(const base::PairStream* const);                 // Sets the max age(s) for selected entity types
-   bool setSlotMaxEntityRange(const base::PairStream* const);         // Sets the max entity range(s) for selected entity types
-   bool setSlotEmissionPduHandlers(base::PairStream* const);          // Sets the list of Electromagnetic Emission PDU handlers
+   bool setSlotMaxTimeDR(const base::IPairStream* const);             // Sets the max DR time(s) for selected entity types
+   bool setSlotMaxPositionErr(const base::IPairStream* const);        // Sets the max positional error(s) for selected entity types
+   bool setSlotMaxOrientationErr(const base::IPairStream* const);     // Sets the max orientation error(s) for selected entity types
+   bool setSlotMaxAge(const base::IPairStream* const);                // Sets the max age(s) for selected entity types
+   bool setSlotMaxEntityRange(const base::IPairStream* const);        // Sets the max entity range(s) for selected entity types
+   bool setSlotEmissionPduHandlers(base::IPairStream* const);         // Sets the list of Electromagnetic Emission PDU handlers
    bool setSlotSiteID(const base::Integer* const);                    // Sets Site ID
    bool setSlotApplicationID(const base::Integer* const);             // Sets Application ID
    bool setSlotExerciseID(const base::Integer* const);                // Sets Exercise ID

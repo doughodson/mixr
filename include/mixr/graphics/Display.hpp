@@ -7,7 +7,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class PairStream; class String; }
+namespace base { class Boolean; class IColor; class Identifier; class Integer; class INumber; class IPairStream; class String; }
 namespace graphics {
 class IFont;
 class Image;
@@ -41,7 +41,7 @@ class Material;
 // Factory name: Display
 // Slots:
 //  name             <String>       ! Display name (default: " ")
-//  colorTable       <PairStream>   ! Color table (default: 0)
+//  colorTable       <IPairStream>  ! Color table (default: 0)
 //  normalFont       <AbstractFont> ! Normal font; Font (default: 0)
 //  normalFont       <Identifier>   ! Normal font; base::Identifier (default: 0)
 //  left             <INumber>      ! Left ortho bound (default: -0.5)
@@ -54,10 +54,10 @@ class Material;
 //  vpY              <Integer>      ! Viewport y origin (default: -1)
 //  vpWidth          <Integer>      ! Viewport width (default: 300)
 //  vpHeight         <Integer>      ! Viewport height (default: 300)
-//  displays         <PairStream>   ! Sub-displays, stream (default: 0)
+//  displays         <IPairStream>  ! Sub-displays, stream (default: 0)
 //  displays         <Display>      ! Sub-displays, single (default: 0)
 //  stdLineWidth     <INumber>      ! Standard Line width (default: 1)
-//  textures         <PairStream>   ! Texture, stream (default: 0)
+//  textures         <IPairStream>  ! Texture, stream (default: 0)
 //  textures         <Texture>      ! Texture, single (default: 0)
 //  clearColor       <Color>        ! Clear (Background) color (default: 0.0f,0.0f,0.0f,0.0f)
 //  leftBracketChar  <Integer>      ! Left bracket character (default: '[')
@@ -67,7 +67,7 @@ class Material;
 //  reverseVideoBrackets  <INumber> ! Reverse video brackets flag:
 //                                  ! If true, brackets are drawn with reversed video font,
 //                                  ! otherwise follow the field's drawing mode.  (default: false)
-//  fonts             <PairStream>  ! List of fonts (default: none)
+//  fonts             <IPairStream> ! List of fonts (default: none)
 //  clearDepth        <INumber>     ! clear depth; range: [ 0, 1 ] or negative for no depth buffer (default: -1.0)
 //  orientation       <String>      ! display orientation { normal, cw90, ccw90, inverted } (default: normal)
 //  materials         <Material>    ! List of material objects (default: 0)
@@ -119,7 +119,7 @@ public:
    void setClearDepth(const GLclampd depth);       //  Sets the value that the depth buffer is cleared to (see notes)
 
    virtual void loadTextures();                    // Load the texture table
-   const base::PairStream* getTextures() const;    // Returns a ptr to the list of textures
+   const base::IPairStream* getTextures() const;   // Returns a ptr to the list of textures
 
    // ---
    // Global (display) graphic parameters
@@ -138,11 +138,11 @@ public:
    base::IColor* getColor(const char* const name);    // Returns a color by name from the color table
    base::IColor* getColor(const int idx);             // Returns a color by index from the color table
 
-   bool setColorTable(base::PairStream* const list);  // Sets the color table to this list of colors
+   bool setColorTable(base::IPairStream* const list); // Sets the color table to this list of colors
    void addColor(base::IColor*);                      // Adds a color to the color table
    void addColor(base::Pair*);                        // Adds a color to the color table
 
-   base::PairStream* defaultColors();                 // Generates a list of default colors; returns a pre-ref'ed() ptr
+   base::IPairStream* defaultColors();                // Generates a list of default colors; returns a pre-ref'ed() ptr
                                                       //  -- black, red, green, yellow, blue, magenta, cyan, and white.
 
    // Returns the Material object by material table name
@@ -319,8 +319,8 @@ protected:
    // Configures the display's GL modes
    virtual void configure();
 
-   base::PairStream* getTextures();
-   base::PairStream* subDisplays();
+   base::IPairStream* getTextures();
+   base::IPairStream* subDisplays();
    void setSubdisplayFlag(const bool);
 
 private:
@@ -331,12 +331,12 @@ private:
     bool processMaterials();
 
     std::string name;                               // Display name
-    base::PairStream* subdisplays {};               // Sub-displays
+    base::IPairStream* subdisplays {};              // Sub-displays
 
     Graphic* focusPtr {};                           // Input focus
-    base::PairStream* materials {};                 // list of material objects
+    base::IPairStream* materials {};                // list of material objects
 
-    base::PairStream* textures {};                  // List of textures
+    base::IPairStream* textures {};                 // List of textures
 
     GLsizei  vpX {-1}, vpY {-1};                    // viewport size
     GLsizei  vpWidth {300}, vpHeight {300};
@@ -355,14 +355,14 @@ private:
     Orientation orientation {Orientation::NORMAL};  // Display orientation
 
     GLclampd clearDepth {-1.0};           // Display clear depth
-    base::PairStream* colorTable {};      // Color table
+    base::IPairStream* colorTable {};     // Color table
     base::Vec4d color;                    // Current Color
     base::Vec4d clearColor;               // Clear (background) color
     base::Identifier* colorName {};       // Current color name
     const base::IColor* normColor {};     // Color of a normal text field
     const base::IColor* hiColor {};       // Color of a high lighted text field.
 
-    base::PairStream* fontList {};        // List of fonts
+    base::IPairStream* fontList {};       // List of fonts
     IFont* currentFont {};                // Current font
     IFont* normalFont {};                 // Normal font
     base::Identifier* normalFontName {};  // Normal font name
@@ -380,7 +380,7 @@ private:
     bool setSlotName(const base::String* const);
     bool setSlotNormalFont(IFont* const);
     bool setSlotNormalFont(const base::Identifier* const);
-    bool setSlotColorTable(base::PairStream* const list);
+    bool setSlotColorTable(base::IPairStream* const list);
     bool setSlotLeftOrthoBound(const base::INumber* const);
     bool setSlotRightOrthoBound(const base::INumber* const);
     bool setSlotBottomOrthoBound(const base::INumber* const);
@@ -391,10 +391,10 @@ private:
     bool setSlotViewportYOrigin(const base::Integer* const);
     bool setSlotViewportWidth(const base::Integer* const);
     bool setSlotViewportHeight(const base::Integer* const);
-    bool setSlotSubdisplayStream(base::PairStream* const);
+    bool setSlotSubdisplayStream(base::IPairStream* const);
     bool setSlotSubdisplaySingle(Display* const);
     bool setSlotStdLineWidth(const base::INumber* const);
-    bool setSlotTexturesStream(base::PairStream* const);
+    bool setSlotTexturesStream(base::IPairStream* const);
     bool setSlotTexturesSingle(Texture* const);
     bool setSlotClearColor(const base::IColor* const);
     bool setSlotLeftBracketCharacter(const base::Integer* const);
@@ -402,10 +402,10 @@ private:
     bool setSlotRightBracketCharacter(const base::Integer* const);
     bool setSlotRightBracketCharacter(const base::String* const);
     bool setSlotReverseVideoBrackets(const base::Boolean* const);
-    bool setFontList(base::PairStream* const);
+    bool setFontList(base::IPairStream* const);
     bool setSlotClearDepth(const base::INumber* const);
     bool setSlotDisplayOrientation(const base::Identifier* const);
-    bool setSlotMaterials(base::PairStream* const);
+    bool setSlotMaterials(base::IPairStream* const);
     bool setSlotMaterials(Material* const);
     bool setSlotAntialias(const base::Boolean* const);
 };
@@ -441,10 +441,10 @@ inline bool Display::setRightBracketCharacter(const char c)      { rightBracketC
 inline bool Display::getReverseVideoBrackets() const             { return rvBrackets; }
 inline bool Display::setReverseVideoBrackets(const bool f)       { rvBrackets = f; return true; }
 
-inline base::PairStream* Display::getTextures()                  { return textures; }
-inline const base::PairStream* Display::getTextures() const      { return textures; }
+inline base::IPairStream* Display::getTextures()                 { return textures; }
+inline const base::IPairStream* Display::getTextures() const     { return textures; }
 
-inline base::PairStream* Display::subDisplays()                  { return subdisplays; }
+inline base::IPairStream* Display::subDisplays()                 { return subdisplays; }
 inline void Display::setSubdisplayFlag(const bool flg)           { subdisplayFlg = flg; }
 inline bool Display::isOkToSwap() const                          { return okToSwap; }
 inline void Display::setOkToSwap(const bool x)                   { okToSwap = x; }

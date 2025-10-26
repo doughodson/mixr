@@ -28,7 +28,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/SlotTable.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
@@ -754,7 +754,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
       // find all attached missiles
       const models::IStoresMgr* sm{p->getStoresManagement()};
       if (sm != nullptr) {
-         const base::PairStream* stores{sm->getStores()};
+         const base::IPairStream* stores{sm->getStores()};
          if (stores != nullptr) {
             const base::IList::Item* item{stores->getFirstItem()};
             while (item != nullptr && apartNumMissiles == 0) {

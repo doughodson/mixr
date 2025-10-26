@@ -7,7 +7,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class PairStream; }
+namespace base { class IPairStream; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -18,8 +18,8 @@ namespace graphics {
 //
 // Factory name: ColorRotary
 // Slots:
-//      breakcolors: <PairStream>     // sets colors
-//      breakpoints: <PairStream>     // sets our breakpoints
+//      breakcolors: <IPairStream>     // sets colors
+//      breakpoints: <IPairStream>     // sets our breakpoints
 //
 // Example:
 //  ( Graphic
@@ -58,14 +58,14 @@ public:
 
 private:
     static const unsigned int MAX_VALUES = 50;
-    base::PairStream* myColors {};               // our colors (rgba value)
+    base::IPairStream* myColors {};              // our colors (rgba value)
     std::array<double, MAX_VALUES> myValues {};  // our values
     unsigned int numVals {};                     // number of values
 
 private:
     // slot table helper methods
-    bool setSlotColors(base::PairStream* const);
-    bool setSlotValues(const base::PairStream* const);
+    bool setSlotColors(base::IPairStream* const);
+    bool setSlotValues(const base::IPairStream* const);
 };
 
 }

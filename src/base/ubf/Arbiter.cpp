@@ -4,7 +4,7 @@
 
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace base {
@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(Arbiter)
 END_SLOTTABLE(Arbiter)
 
 BEGIN_SLOT_MAP(Arbiter)
-   ON_SLOT(1, setSlotBehaviors, base::PairStream)
+   ON_SLOT(1, setSlotBehaviors, base::IPairStream)
 END_SLOT_MAP()
 
 Arbiter::Arbiter()
@@ -122,7 +122,7 @@ void Arbiter::addBehavior(IBehavior* const x)
 // Slot functions
 //------------------------------------------------------------------------------
 
-bool Arbiter::setSlotBehaviors(base::PairStream* const x)
+bool Arbiter::setSlotBehaviors(base::IPairStream* const x)
 {
    bool ok{true};
 

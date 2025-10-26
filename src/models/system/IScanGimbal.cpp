@@ -4,7 +4,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -44,7 +44,7 @@ BEGIN_SLOT_MAP(IScanGimbal)
     ON_SLOT( 8, setSlotRevPerSec,         base::INumber)
     ON_SLOT( 9, setSlotScanRadius,        base::INumber)
     ON_SLOT( 9, setSlotScanRadius,        base::IAngle)
-    ON_SLOT(10, setSlotPRVertices,        base::PairStream)
+    ON_SLOT(10, setSlotPRVertices,        base::IPairStream)
     ON_SLOT(11, setSlotMaxRevs,           base::INumber)
 END_SLOT_MAP()
 
@@ -963,7 +963,7 @@ bool IScanGimbal::setSlotScanRadius(const base::IAngle* const x)
 // setSlotPRVertices() -- gets a pairstream and puts the vertices into an array
 // example --
 //     vertices: { [ 1 2 ]  [ 3 4 ] [ 5 6 ] }
-bool IScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
+bool IScanGimbal::setSlotPRVertices(const base::IPairStream* const prObj)
 {
    bool ok{true};
 

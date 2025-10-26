@@ -4,7 +4,7 @@
 #include "mixr/simulation/ISimulation.hpp"
 
 #include "mixr/base/IComponent.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace simulation {
@@ -14,7 +14,7 @@ SimulationTcSyncThread::SimulationTcSyncThread(base::IComponent* const parent): 
 }
 
 void SimulationTcSyncThread::start0(
-         base::PairStream* const pl1,
+         base::IPairStream* const pl1,
          const double dt1,
          const unsigned int idx1,
          const unsigned int n1

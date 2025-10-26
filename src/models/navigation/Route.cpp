@@ -10,7 +10,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/List.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -86,7 +86,7 @@ void Route::reset()
    // reset the initial 'to' steerpoint
    // ---
    directTo(static_cast<unsigned int>(0));
-   base::PairStream* steerpoints{getComponents()};
+   base::IPairStream* steerpoints{getComponents()};
    if (steerpoints != nullptr) {
 
       // First try to find by name
@@ -138,7 +138,7 @@ void Route::updateData(const double dt)
 void Route::computeSteerpointData(const double, const INavigation* const nav)
 {
    if (nav != nullptr) {
-      base::PairStream* steerpoints{getComponents()};
+      base::IPairStream* steerpoints{getComponents()};
       if (steerpoints != nullptr) {
 
          // Until we pass the 'to' steerpoint, the 'from' pointer will be
@@ -234,7 +234,7 @@ bool Route::setAutoSeqDistance(const double nm)
 bool Route::incStpt()
 {
     bool ok{};
-    const base::PairStream* steerpoints{getComponents()};
+    const base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr) {
         std::size_t n{steerpoints->entries()};
         unsigned int idx{stptIdx + 1};
@@ -249,7 +249,7 @@ bool Route::incStpt()
 bool Route::decStpt()
 {
     bool ok{};
-    const base::PairStream* steerpoints{getComponents()};
+    const base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr) {
         std::size_t n{steerpoints->entries()};
         unsigned int idx{stptIdx - 1};
@@ -290,7 +290,7 @@ const char* Route::getSteerpointName() const
 bool Route::directTo(const Steerpoint* const stpt)
 {
     bool ok{};
-    base::PairStream* steerpoints{getComponents()};
+    base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr && stpt != nullptr) {
         // When we have steerpoints (components) and a steerpoint to switch to ...
         base::Pair* sp{findSteerpoint(stpt)};
@@ -316,7 +316,7 @@ bool Route::directTo(const Steerpoint* const stpt)
 bool Route::directTo(const char* const name)
 {
     bool ok{};
-    base::PairStream* steerpoints{getComponents()};
+    base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr && name != nullptr) {
         // When we have steerpoints (components) and a name of a steerpoint
         base::Pair* sp{findSteerpoint(name)};
@@ -366,7 +366,7 @@ bool Route::directTo(const unsigned int idx)
 const base::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
 {
     const base::Pair* sp{};
-    const base::PairStream* steerpoints{getComponents()};
+    const base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr && stpt != nullptr) {
         const base::IList::Item* item{steerpoints->getFirstItem()};
         while (item != nullptr && sp == nullptr) {
@@ -388,7 +388,7 @@ const base::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
 const base::Pair* Route::findSteerpointImp(const char* const name) const
 {
     const base::Pair* sp{};
-    const base::PairStream* steerpoints{getComponents()};
+    const base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr && name != nullptr) {
         sp = steerpoints->findByName(name);
     }
@@ -404,7 +404,7 @@ const base::Pair* Route::findSteerpointImp(const char* const name) const
 const base::Pair* Route::findSteerpointImp(const unsigned int idx) const
 {
     const base::Pair* sp{};
-    const base::PairStream* steerpoints{getComponents()};
+    const base::IPairStream* steerpoints{getComponents()};
     if (steerpoints != nullptr) {
         sp = steerpoints->getPosition(idx);
         steerpoints->unref();
@@ -419,7 +419,7 @@ const base::Pair* Route::findSteerpointImp(const unsigned int idx) const
 unsigned int Route::getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i{};
-    base::PairStream* steerpoints{getComponents()};
+    base::IPairStream* steerpoints{getComponents()};
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
 
         // Find our 'to' steerpoint
@@ -458,7 +458,7 @@ unsigned int Route::getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, c
 unsigned int Route::getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i{};
-    base::PairStream* steerpoints{getComponents()};
+    base::IPairStream* steerpoints{getComponents()};
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
         base::IList::Item* item{steerpoints->getFirstItem()};
         while (item != nullptr && i < max) {
@@ -502,13 +502,13 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
         newStpt->container(this);
 
         // Get our steerpoints
-        base::PairStream* steerpoints{getComponents()};
+        base::IPairStream* steerpoints{getComponents()};
 
         // now we have to add it to our component list
         if (steerpoints != nullptr && num != 0) {
 
             // Copy the current steerpoint list
-            auto tempList = new base::PairStream();
+            auto tempList = new base::IPairStream();
             {
                base::IList::Item* item{steerpoints->getFirstItem()};
                while (item != nullptr) {
@@ -590,7 +590,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 //------------------------------------------------------------------------------
 // Replace the complete steerpoint list with a new one
 //------------------------------------------------------------------------------
-bool Route::replaceAllSteerpoints(base::PairStream* const newSteerpointList, unsigned int newStptIdx)
+bool Route::replaceAllSteerpoints(base::IPairStream* const newSteerpointList, unsigned int newStptIdx)
 {
    bool ok{};
 
@@ -617,7 +617,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
    const Steerpoint* p{getSteerpoint()};
 
    // remove the steerpoint
-   base::PairStream* steerpoints{getComponents()};
+   base::IPairStream* steerpoints{getComponents()};
    base::IComponent::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
    if (steerpoints != nullptr) {
       steerpoints->unref();
@@ -660,7 +660,7 @@ bool Route::deleteAllSteerpoints()
 //    type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Route::processComponents(
-      base::PairStream* const list,
+      base::IPairStream* const list,
       const std::type_info&,
       base::Pair* const add,
       base::IComponent* const remove

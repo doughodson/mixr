@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base { class Boolean; class Identifier; class Integer; class ILength; class NauticalMiles;
-                 class INumber; class Pair; class PairStream; }
+                 class INumber; class Pair; class IPairStream; }
 namespace models {
 class INavigation;
 class Steerpoint;
@@ -100,7 +100,7 @@ public:
    virtual bool deleteSteerpoint(Steerpoint* const sp);
 
    // Replace all of our steerpoints and sets our 'to' steerpoint to 'newStptIdx'
-   virtual bool replaceAllSteerpoints(base::PairStream* const newSteerpointList, unsigned int newStptIdx = 1);
+   virtual bool replaceAllSteerpoints(base::IPairStream* const newSteerpointList, unsigned int newStptIdx = 1);
 
    // clears out all of our steerpoints
    virtual bool deleteAllSteerpoints();
@@ -120,7 +120,7 @@ protected:
     virtual void autoSequencer(const double dt, const  INavigation* const nav);
 
     void processComponents(
-         base::PairStream* const list,              // Source list of components
+         base::IPairStream* const list,              // Source list of components
          const std::type_info& filter,              // Type filter
          base::Pair* const add = nullptr,           // Optional pair to add
          base::IComponent* const remove = nullptr   // Optional subcomponent to remove

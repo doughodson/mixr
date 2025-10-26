@@ -5,7 +5,7 @@
 #include "mixr/base/IComponent.hpp"
 
 namespace mixr {
-namespace base { class PairStream; }
+namespace base { class IPairStream; }
 namespace simulation {
 class IPlayer;
 
@@ -30,7 +30,7 @@ public:
 
    // sets our ownship and player list pointers, used by Station class
    virtual void setOwnship(IPlayer* const) =0;
-   virtual void setPlayerList(base::PairStream* const) =0; // Sets the player list that we're to use to generate player/models
+   virtual void setPlayerList(base::IPairStream* const) =0; // Sets the player list that we're to use to generate player/models
 
    void updateTC(const double dt = 0.0) final {
       BaseClass::updateTC(dt);

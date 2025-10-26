@@ -10,7 +10,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/timers/ITimer.hpp"
 #include "mixr/base/concepts/linkage/IIoHandler.hpp"
@@ -58,9 +58,9 @@ END_SLOTTABLE(IStation)
 BEGIN_SLOT_MAP(IStation)
    ON_SLOT( 1, setSlotSimulation,            ISimulation)
 
-   ON_SLOT( 2, setSlotNetworks,              base::PairStream)
+   ON_SLOT( 2, setSlotNetworks,              base::IPairStream)
 
-   ON_SLOT( 3, setSlotIgHosts,               base::PairStream)
+   ON_SLOT( 3, setSlotIgHosts,               base::IPairStream)
 
    ON_SLOT( 4, setSlotIoHandler,             base::IIoHandler)
 
@@ -110,20 +110,20 @@ void IStation::copyData(const IStation& org, const bool)
 
    // Copy the image generator host handlers
    if (org.igHosts != nullptr) {
-      base::PairStream* copy = org.igHosts->clone();
+      base::IPairStream* copy = org.igHosts->clone();
       setSlotIgHosts( copy );
       copy->unref();
    } else {
-      setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
+      setSlotIgHosts(static_cast<base::IPairStream*>(nullptr));
    }
 
    // Copy the networks
    if (org.networks != nullptr) {
-      base::PairStream* copy = org.networks->clone();
+      base::IPairStream* copy = org.networks->clone();
       setSlotNetworks( copy );
       copy->unref();
    } else {
-      setSlotNetworks(static_cast<base::PairStream*>(nullptr));
+      setSlotNetworks(static_cast<base::IPairStream*>(nullptr));
    }
 
    // Copy the I/O handlers
@@ -280,7 +280,7 @@ void IStation::updateTC(const double dt)
 
    // Our major subsystems
    if (sim != nullptr && igHosts != nullptr) {
-      base::PairStream* playerList{sim->getPlayers()};
+      base::IPairStream* playerList{sim->getPlayers()};
       base::IList::Item* item{igHosts->getFirstItem()};
       while (item != nullptr) {
 
@@ -393,7 +393,7 @@ bool IStation::shutdownNotification()
          item = item->getNext();
       }
    }
-   setSlotIgHosts(static_cast<base::PairStream*>(nullptr));
+   setSlotIgHosts(static_cast<base::IPairStream*>(nullptr));
 
    // Zero (unref) our thread objects (of any).  The thread's functions have ref()'d
    // these objects, so they won't be deleted until the threads terminate, which they
@@ -546,7 +546,7 @@ void IStation::processBackgroundTasks(const double dt)
 //------------------------------------------------------------------------------
 void IStation::processNetworkInputTasks(const double dt)
 {
-   base::safe_ptr<base::PairStream> networks( getNetworks() );
+   base::safe_ptr<base::IPairStream> networks( getNetworks() );
    if (networks != nullptr) {
       base::IList::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
@@ -565,7 +565,7 @@ void IStation::processNetworkInputTasks(const double dt)
 //------------------------------------------------------------------------------
 void IStation::processNetworkOutputTasks(const double dt)
 {
-   base::safe_ptr<base::PairStream> networks( getNetworks() );
+   base::safe_ptr<base::IPairStream> networks( getNetworks() );
    if (networks != nullptr) {
       base::IList::Item* item{networks->getFirstItem()};
       while (item != nullptr) {
@@ -614,37 +614,37 @@ const std::string& IStation::getOwnshipName() const
 }
 
 // Get the player list; pre-ref()'d by the Simulation class
-base::PairStream* IStation::getPlayers()
+base::IPairStream* IStation::getPlayers()
 {
     return ((getSimulation() != nullptr) ? getSimulation()->getPlayers() : nullptr);
 }
 
 // Get the player list (const version); pre-ref()'d by the Simulation class
-const base::PairStream* IStation::getPlayers() const
+const base::IPairStream* IStation::getPlayers() const
 {
     return ((getSimulation() != nullptr) ? getSimulation()->getPlayers() : nullptr);
 }
 
 // Returns the list of image generator host interfaces
-base::PairStream* IStation::getIgHostList()
+base::IPairStream* IStation::getIgHostList()
 {
    return igHosts;
 }
 
 // Returns the list of image generator host interfaces (const version)
-const base::PairStream* IStation::getIgHostList() const
+const base::IPairStream* IStation::getIgHostList() const
 {
    return igHosts;
 }
 
 // List of interoperability network handlers (e.g., DIS, HLA, TENA)
-base::PairStream* IStation::getNetworks()
+base::IPairStream* IStation::getNetworks()
 {
    return networks;
 }
 
 // List of interoperability network handlers (e.g., DIS, HLA, TENA) (const version)
-const base::PairStream* IStation::getNetworks() const
+const base::IPairStream* IStation::getNetworks() const
 {
    return networks;
 }
@@ -808,7 +808,7 @@ void IStation::setBgThread(StationBgPeriodicThread* h)
 bool IStation::setOwnshipByName(const char* const newOS)
 {
    bool set{};
-   base::PairStream* pl{};
+   base::IPairStream* pl{};
    if (sim != nullptr) pl = sim->getPlayers();
 
    // Look for this ownship in our list of players
@@ -857,7 +857,7 @@ bool IStation::setOwnshipPlayer(IPlayer* const x)
 
     // Look for this ownship in our list of players
     bool set{};
-    base::PairStream* pl{sim->getPlayers()};
+    base::IPairStream* pl{sim->getPlayers()};
     if (pl != nullptr) {
         base::IList::Item* item{pl->getFirstItem()};
         while (item != nullptr && !set) {
@@ -918,9 +918,9 @@ bool IStation::setSlotSimulation(ISimulation* const p)
     return true;
 }
 
-bool IStation::setSlotIgHosts(base::PairStream* const list)
+bool IStation::setSlotIgHosts(base::IPairStream* const list)
 {
-   base::PairStream* newList{};
+   base::IPairStream* newList{};
 
    // Make sure the new list only has image generator host type objects
    if (list != nullptr) {
@@ -929,7 +929,7 @@ bool IStation::setSlotIgHosts(base::PairStream* const list)
          const auto p = dynamic_cast<IIgHost*>(pair->object());
          if (p != nullptr) {
             if (newList == nullptr) {
-               newList = new base::PairStream();
+               newList = new base::IPairStream();
             }
             newList->put(pair);  // Add this IG to our new image generator host list
             p->container(this);
@@ -943,7 +943,7 @@ bool IStation::setSlotIgHosts(base::PairStream* const list)
    // Remove the old image generator host interfaces
    if (igHosts != nullptr) {
 
-      base::safe_ptr<base::PairStream> oldList( igHosts );
+      base::safe_ptr<base::IPairStream> oldList( igHosts );
       igHosts = nullptr;
 
       // we are no longer the container for these old image generator host interfaces
@@ -982,7 +982,7 @@ bool IStation::setSlotOwnshipName(const base::Identifier* const newName)
 //------------------------------------------------------------------------------
 // setSlotNetworks() -- Set our list of networks
 //------------------------------------------------------------------------------
-bool IStation::setSlotNetworks(base::PairStream* const a)
+bool IStation::setSlotNetworks(base::IPairStream* const a)
 {
     bool ok{true};
 

@@ -5,7 +5,7 @@
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/graphics/ColorRotary.hpp"
 #include "mixr/base/relations/Table1.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 
 namespace mixr {
@@ -142,7 +142,7 @@ void Instrument::updateData(const double dt)
    // only tell the rest of our instruments our value if we want them to know it
    if (allowPassing) {
       // sort out the instruments from our components
-      base::PairStream* ps = getComponents();
+      base::IPairStream* ps = getComponents();
       if (ps != nullptr) {
          base::IList::Item* item = ps->getFirstItem();
          while(item != nullptr) {

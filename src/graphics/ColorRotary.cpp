@@ -4,7 +4,7 @@
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/osg/Vec4d"
 
 namespace mixr {
@@ -18,8 +18,8 @@ BEGIN_SLOTTABLE(ColorRotary)
 END_SLOTTABLE(ColorRotary)
 
 BEGIN_SLOT_MAP(ColorRotary)
-    ON_SLOT(1, setSlotColors, base::PairStream)
-    ON_SLOT(2, setSlotValues, base::PairStream)
+    ON_SLOT(1, setSlotColors, base::IPairStream)
+    ON_SLOT(2, setSlotValues, base::IPairStream)
 END_SLOT_MAP()
 
 ColorRotary::ColorRotary()
@@ -95,7 +95,7 @@ bool ColorRotary::determineColor(const double value)
 //------------------------------------------------------------------------------
 
 // set our slot colors via a PairStream
-bool ColorRotary::setSlotColors(base::PairStream* const x)
+bool ColorRotary::setSlotColors(base::IPairStream* const x)
 {
     myColors = x;
     myColors->ref();
@@ -103,10 +103,10 @@ bool ColorRotary::setSlotColors(base::PairStream* const x)
 }
 
 // set our slot values via a pairstream
-bool ColorRotary::setSlotValues(const base::PairStream* const x)
+bool ColorRotary::setSlotValues(const base::IPairStream* const x)
 {
     numVals = 0;
-    base::PairStream* a = x->clone();
+    base::IPairStream* a = x->clone();
     base::IList::Item* item = a->getFirstItem();
     while (item != nullptr) {
         const auto pair = static_cast<base::Pair*>(item->getValue());

@@ -10,7 +10,7 @@
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/qty/util/angle_utils.hpp"
 
@@ -71,7 +71,7 @@ void FlightGearHost::reset()
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void FlightGearHost::setPlayerList(base::PairStream* const newPlayerList)
+void FlightGearHost::setPlayerList(base::IPairStream* const newPlayerList)
 {
     // Nothing's changed, just return
     if (playerList == newPlayerList) return;

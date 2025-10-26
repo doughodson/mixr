@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class Identifier; class Integer; class ILength; class INumber; class PairStream; }
+namespace base { class Identifier; class Integer; class ILength; class INumber; class IPairStream; }
 namespace simulation { class IPlayer; }
 namespace models { class IPlayer; }
 namespace ighost {
@@ -29,7 +29,7 @@ class Player2CigiMap;
 //
 //    maxElevations  <Integer>      ! Max number of player terrain elevation requests (default: 0)
 //
-//    typeMap        <PairStream>   ! IG's system model type IDs (list of TypeMapper objects) (default: 0)
+//    typeMap        <IPairStream>  ! IG's system model type IDs (list of TypeMapper objects) (default: 0)
 //
 //------------------------------------------------------------------------------
 class IgHost : public simulation::IIgHost
@@ -41,7 +41,7 @@ public:
 
    // sets our ownship and player list pointers, used by Station class
    void setOwnship(simulation::IPlayer* const) final;
-   void setPlayerList(base::PairStream* const) final;      // Sets the player list that we're to use to generate player/models
+   void setPlayerList(base::IPairStream* const) final;      // Sets the player list that we're to use to generate player/models
 
    void reset() override;
 
@@ -121,7 +121,7 @@ private:
 
    // Simulation inputs
    models::IPlayer* ownship{};                          // Current ownship
-   base::PairStream* playerList{};                      // Current player list
+   base::IPairStream* playerList{};                     // Current player list
    bool rstReq{};                                       // Reset request flag
 
    // Model table
@@ -154,7 +154,7 @@ private:
    bool setSlotMaxRange(const base::INumber* const);        // Sets the max range (meters)
    bool setSlotMaxModels(const base::Integer* const);      // Sets the max number of active, in-range player/models
    bool setSlotMaxElevations(const base::Integer* const);  // Sets the max number of player terrain elevation requests
-   bool setSlotTypeMap(const base::PairStream* const);     // Sets the list of IG model type IDs (TypeMapper objects)
+   bool setSlotTypeMap(const base::IPairStream* const);     // Sets the list of IG model type IDs (TypeMapper objects)
 };
 
 }

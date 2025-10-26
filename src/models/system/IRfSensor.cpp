@@ -8,7 +8,7 @@
 #include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
 
@@ -44,7 +44,7 @@ END_SLOTTABLE(IRfSensor)
 
 BEGIN_SLOT_MAP(IRfSensor)
     ON_SLOT(1, setSlotTrackManagerName, base::Identifier)
-    ON_SLOT(2, setSlotModeStream,       base::PairStream)
+    ON_SLOT(2, setSlotModeStream,       base::IPairStream)
     ON_SLOT(2, setSlotModeSingle,       IRfSensor)
     ON_SLOT(3, setSlotRanges,           base::IList)
     ON_SLOT(4, setSlotInitRangeIdx,     base::Integer)
@@ -285,13 +285,13 @@ const ITrackMgr* IRfSensor::getTrackManager() const
 }
 
 // Returns the list of sensor submodes
-const base::PairStream* IRfSensor::getModes() const
+const base::IPairStream* IRfSensor::getModes() const
 {
    return modes;
 }
 
 // Returns the list of submodes
-base::PairStream* IRfSensor::getModes()
+base::IPairStream* IRfSensor::getModes()
 {
    return modes;
 }
@@ -379,10 +379,10 @@ bool IRfSensor::setRange(const double v)
 //------------------------------------------------------------------------------
 //  setSlotModeStream() -- takes a PairStream in and inits the mode list
 //------------------------------------------------------------------------------
-bool IRfSensor::setSlotModeStream (base::PairStream* const obj)
+bool IRfSensor::setSlotModeStream (base::IPairStream* const obj)
 {
     if (obj != nullptr) {
-        // When a PairStream (i.e., more than one, a list) of pages
+        // When a IPairStream (i.e., more than one, a list) of pages
         if (modes != nullptr) modes->unref();
         modes = obj;
         modes->ref();
@@ -398,7 +398,7 @@ bool IRfSensor::setSlotModeSingle(IRfSensor* const obj)
 {
     if (modes != nullptr) modes->unref();
 
-    modes = new base::PairStream();
+    modes = new base::IPairStream();
 
     const auto p = new base::Pair("1",obj);
     modes->put( p );

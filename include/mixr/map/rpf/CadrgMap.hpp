@@ -6,7 +6,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Integer; class String; class IList; }
+namespace base { class Integer; class String; class IList; class IPairStream; }
 namespace graphics { class Texture; }
 namespace rpf {
 class CadrgFile;
@@ -52,7 +52,7 @@ class MapDrawer;
 //       int CadrgMap::getNumberOfCadrgFiles()
 //
 // setSlotPathnames() - Pathnames to the CADRG A.toc files.
-//       bool CadrgMap::setSlotPathnames(const base::PairStream* const x)
+//       bool CadrgMap::setSlotPathnames(const base::IPairStream* const x)
 //
 // setSlotMaxTableSize() - Sets our max table size and array up
 //       bool CadrgMap::setSlotMaxTableSize(const base::Number* const x)
@@ -191,7 +191,7 @@ private:
 
     int numFiles {};                            // Number of CADRG files we are holding
     CadrgFile* curCadrgFile {};                 // The current CADRG file we are using
-    base::PairStream* pathNames {};             // Holds our path names for the directories of our files
+    base::IPairStream* pathNames {};             // Holds our path names for the directories of our files
     int maxTableSize {};                        // Our max table size
     base::IList* stack {};                      // Stack of unused frames
     ColorArray outTile;                         // Holds the tile color information
@@ -200,7 +200,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotPathnames(const base::PairStream* const);
+   bool setSlotPathnames(const base::IPairStream* const);
    bool setSlotMaxTableSize(const base::Integer* const);
    bool setSlotMapLevel(base::String*);
 };

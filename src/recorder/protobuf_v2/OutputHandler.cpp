@@ -4,7 +4,7 @@
 #include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace recorder {
@@ -42,7 +42,7 @@ void OutputHandler::deleteData()
 bool OutputHandler::shutdownNotification()
 {
    // Pass the shutdown notification to our subcomponent recorders
-   base::PairStream* subcomponents{getComponents()};
+   base::IPairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
          base::Pair* pair{static_cast<base::Pair*>(item->getValue())};
@@ -71,7 +71,7 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 
       // Next, pass the data record to our subcomponent OutputHandlers
       // for further processing
-      base::PairStream* subcomponents{getComponents()};
+      base::IPairStream* subcomponents{getComponents()};
       if (subcomponents != nullptr) {
          for (base::IList::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
 
@@ -148,7 +148,7 @@ bool OutputHandler::isDataTypeEnabled(const DataRecordHandle* const handle) cons
 //  make sure our subcomponents are all of type OutputHandler (or derived)
 //------------------------------------------------------------------------------
 void OutputHandler::processComponents(
-      base::PairStream* const list,
+      base::IPairStream* const list,
       const std::type_info&,
       base::Pair* const add,
       base::IComponent* const remove

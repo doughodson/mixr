@@ -6,7 +6,7 @@
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/qty/angles.hpp"
 #include "mixr/base/qty/lengths.hpp"
 #include "mixr/base/util/str_utils.hpp"
@@ -32,7 +32,7 @@ END_SLOTTABLE(CollisionDetect)
 BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 1,  setSlotCollisionRange,      base::ILength)
     ON_SLOT( 2,  setSlotMaxPlayers,          base::Integer)
-    ON_SLOT( 3,  setSlotPlayerTypes,         base::PairStream)
+    ON_SLOT( 3,  setSlotPlayerTypes,         base::IPairStream)
     ON_SLOT( 4,  setSlotMaxRange2Players,    base::ILength)
     ON_SLOT( 5,  setSlotMaxAngle2Players,    base::IAngle)
     ON_SLOT( 6,  setSlotLocalOnly,           base::Boolean)
@@ -190,7 +190,7 @@ void CollisionDetect::updateData(const double dt)
    // ---
    // Scan the player list ---
    // ---
-   base::PairStream* plist{sim->getPlayers()};
+   base::IPairStream* plist{sim->getPlayers()};
    if (plist != nullptr) {
 
       base::IList::Item* item{plist->getFirstItem()};
@@ -549,7 +549,7 @@ bool CollisionDetect::setSlotMaxPlayers(const base::Integer* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
+bool CollisionDetect::setSlotPlayerTypes(const base::IPairStream* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

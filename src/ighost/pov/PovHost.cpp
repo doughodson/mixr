@@ -10,7 +10,7 @@
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/osg/Vec3d"
 #include "mixr/base/qty/util/length_utils.hpp"
 
@@ -68,7 +68,7 @@ void PovHost::reset()
 //------------------------------------------------------------------------------
 // setPlayerList() -- Sets our player list pointer
 //------------------------------------------------------------------------------
-void PovHost::setPlayerList(base::PairStream* const newPlayerList)
+void PovHost::setPlayerList(base::IPairStream* const newPlayerList)
 {
     // Nothing's changed, just return
     if (playerList == newPlayerList) return;

@@ -4,7 +4,7 @@
 #include "mixr/models/system/Datalink.hpp"
 #include "mixr/models/RfEmission.hpp"
 
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 
@@ -27,7 +27,7 @@ END_SLOTTABLE(IRadio)
 
 BEGIN_SLOT_MAP(IRadio)
     ON_SLOT(1, setSlotNumChannels,    base::Integer)
-    ON_SLOT(2, setSlotChannels,       base::PairStream)
+    ON_SLOT(2, setSlotChannels,       base::IPairStream)
     ON_SLOT(3, setSlotChannel,        base::Integer)
     ON_SLOT(4, setSlotMaxDetectRange, base::INumber)
     ON_SLOT(5, setSlotRadioId,        base::Integer)
@@ -283,7 +283,7 @@ bool IRadio::setSlotNumChannels(base::Integer* const msg)
    return ok;
 }
 
-bool IRadio::setSlotChannels(const base::PairStream* const msg)
+bool IRadio::setSlotChannels(const base::IPairStream* const msg)
 {
    // ---
    // Quick out if the number of channels hasn't been set.

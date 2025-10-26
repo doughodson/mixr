@@ -76,7 +76,7 @@ union YYSTYPE
    char*                      cvalp;
    mixr::base::IObject*       ovalp;
    mixr::base::Pair*          pvalp;
-   mixr::base::PairStream*    svalp;
+   mixr::base::IPairStream*   svalp;
    mixr::base::IList*         lvalp;
    mixr::base::INumber*       nvalp;
 

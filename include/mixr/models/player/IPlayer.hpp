@@ -18,7 +18,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Integer; class Latitude; class ILength; class IList; class Longitude;
+namespace base { class IAngle; class Boolean; class Integer; class Latitude; class ILength; class IList; class IPairStream; class Longitude;
                  class ITime; class Vec2d; class Vec3d;}
 namespace simulation { class INib; }
 namespace models {
@@ -924,7 +924,7 @@ protected:
    virtual bool setStoresMgr(base::Pair* const);        // Sets our stores management model
 
    void processComponents(                      // Process our subcomponent list (which should be other steer points)
-      base::PairStream* const list,             // Source list of components
+      base::IPairStream* const list,            // Source list of components
       const std::type_info& filter,             // Type filter
       base::Pair* const add = nullptr,          // Optional pair to add
       base::IComponent* const remove = nullptr  // Optional subcomponent to remove

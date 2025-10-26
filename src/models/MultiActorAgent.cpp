@@ -11,7 +11,7 @@
 #include "mixr/base/ubf/IState.hpp"
 
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 namespace mixr {
@@ -27,7 +27,7 @@ END_SLOTTABLE(MultiActorAgent)
 
 BEGIN_SLOT_MAP(MultiActorAgent)
    ON_SLOT(1, setSlotState,     base::ubf::IState)
-   ON_SLOT(2, setSlotAgentList, base::PairStream)
+   ON_SLOT(2, setSlotAgentList, base::IPairStream)
 END_SLOT_MAP()
 
 MultiActorAgent::MultiActorAgent()
@@ -177,7 +177,7 @@ bool MultiActorAgent::setSlotState(base::ubf::IState* const state)
 }
 
 // Sets the actor/behavior list
-bool MultiActorAgent::setSlotAgentList(base::PairStream* const msg)
+bool MultiActorAgent::setSlotAgentList(base::IPairStream* const msg)
 {
     bool ok{};
     if (msg != nullptr) {

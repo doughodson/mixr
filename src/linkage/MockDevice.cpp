@@ -5,7 +5,7 @@
 
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace linkage {
@@ -18,7 +18,7 @@ BEGIN_SLOTTABLE(MockDevice)
 END_SLOTTABLE(MockDevice)
 
 BEGIN_SLOT_MAP(MockDevice)
-   ON_SLOT(1, setSlotGenerators,  base::PairStream)
+   ON_SLOT(1, setSlotGenerators,  base::IPairStream)
 END_SLOT_MAP()
 
 MockDevice::MockDevice()
@@ -34,7 +34,7 @@ void MockDevice::copyData(const MockDevice& org, const bool)
    // copy the list of generators
    // ---
    if (org.generators != nullptr) {
-      const auto copy = static_cast<base::PairStream*>(org.generators->clone());
+      const auto copy = static_cast<base::IPairStream*>(org.generators->clone());
       setSlotGenerators(copy);
       copy->unref();
    }
@@ -57,7 +57,7 @@ void MockDevice::processInputsImpl(const double dt, base::IIoData* const inData)
 }
 
 // read in list of generators
-bool MockDevice::setSlotGenerators(base::PairStream* const list)
+bool MockDevice::setSlotGenerators(base::IPairStream* const list)
 {
    bool ok{true};
 

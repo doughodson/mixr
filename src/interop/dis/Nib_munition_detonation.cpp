@@ -16,7 +16,7 @@
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace dis {

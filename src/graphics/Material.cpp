@@ -2,7 +2,7 @@
 #include "mixr/graphics/Material.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace graphics {
@@ -19,13 +19,13 @@ BEGIN_SLOTTABLE(Material)
 END_SLOTTABLE(Material)
 
 BEGIN_SLOT_MAP(Material)
-    ON_SLOT( 1, setSlotAmbientColor,  base::PairStream )
+    ON_SLOT( 1, setSlotAmbientColor,  base::IPairStream )
     ON_SLOT( 1, setSlotAmbientColor,  base::INumber)
-    ON_SLOT( 2, setSlotDiffuseColor,  base::PairStream )
+    ON_SLOT( 2, setSlotDiffuseColor,  base::IPairStream )
     ON_SLOT( 2, setSlotDiffuseColor,  base::INumber)
-    ON_SLOT( 3, setSlotEmissiveColor, base::PairStream )
+    ON_SLOT( 3, setSlotEmissiveColor, base::IPairStream )
     ON_SLOT( 3, setSlotEmissiveColor, base::INumber)
-    ON_SLOT( 4, setSlotSpecularColor, base::PairStream )
+    ON_SLOT( 4, setSlotSpecularColor, base::IPairStream )
     ON_SLOT( 4, setSlotSpecularColor, base::INumber)
     ON_SLOT( 5, setSlotShininess,     base::INumber)
 END_SLOT_MAP()
@@ -53,7 +53,7 @@ void Material::copyData(const Material& org, const bool)
 // setSlotAmbientColor() - give us a list of numbers (0 - 1) for the ambient
 // values (red, green, blue, and alpha) of our material.
 //------------------------------------------------------------------------------
-bool Material::setSlotAmbientColor(const base::PairStream* const x)
+bool Material::setSlotAmbientColor(const base::IPairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
@@ -94,7 +94,7 @@ bool Material::setSlotAmbientColor(const base::INumber* const x)
 // setSlotDiffuseColor() - give us a list of numbers (0 - 1) for the diffuse
 // values (red, green, blue, and alpha) of our material.
 //------------------------------------------------------------------------------
-bool Material::setSlotDiffuseColor(const base::PairStream* const x)
+bool Material::setSlotDiffuseColor(const base::IPairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
@@ -134,7 +134,7 @@ bool Material::setSlotDiffuseColor(const base::INumber* const x)
 // setSlotEmissiveColor() - give us a list of numbers (0 - 1) for the emissive
 // values (red, green, blue, and alpha) of our material.
 //------------------------------------------------------------------------------
-bool Material::setSlotEmissiveColor(const base::PairStream* const x)
+bool Material::setSlotEmissiveColor(const base::IPairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color
@@ -174,7 +174,7 @@ bool Material::setSlotEmissiveColor(const base::INumber* const x)
 // setSlotSpecularColor() - give us a list of numbers (0 - 1) for the specular
 // values (red, green, blue, and alpha) of our material.
 //------------------------------------------------------------------------------
-bool Material::setSlotSpecularColor(const base::PairStream* const x)
+bool Material::setSlotSpecularColor(const base::IPairStream* const x)
 {
     if (x != nullptr) {
         // go through and get our data from the pairstream, and set our ambient color

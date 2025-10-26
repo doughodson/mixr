@@ -6,7 +6,7 @@
 
 namespace mixr {
 namespace base {
-class PairStream;
+class IPairStream;
 class Vec3d;
 }
 namespace models {
@@ -72,7 +72,7 @@ public:
    //
    // Notes:
    //------------------------------------------------------------------------------
-   virtual unsigned int processPlayers(base::PairStream* const players);
+   virtual unsigned int processPlayers(base::IPairStream* const players);
 
    // ---
    // Data from processPlayers()

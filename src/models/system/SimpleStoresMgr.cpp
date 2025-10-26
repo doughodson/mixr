@@ -18,7 +18,7 @@
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include <cstring>
 
 namespace mixr {
@@ -78,7 +78,7 @@ void SimpleStoresMgr::updateData(const double dt)
 
          // Number of this type weapon
          int count{};
-         base::PairStream* list{getStores()};
+         base::IPairStream* list{getStores()};
          if (list != nullptr) {
             const base::IList::Item* item{list->getFirstItem()};
             while (item != nullptr) {
@@ -169,7 +169,7 @@ Missile* SimpleStoresMgr::getNextMissileImp()
 {
    Missile* msl{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) missile
@@ -207,7 +207,7 @@ Sam* SimpleStoresMgr::getNextSamImp()
 {
    Sam* msl{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) SAM
@@ -246,7 +246,7 @@ Bomb* SimpleStoresMgr::getNextBombImp()
 {
    Bomb* bomb{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) bomb
@@ -285,7 +285,7 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
 {
    Chaff* chaff{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) chaff bundle
@@ -324,7 +324,7 @@ Flare* SimpleStoresMgr::getNextFlareImp()
 {
    Flare* flare{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) flare
@@ -363,7 +363,7 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
 {
    Decoy* decoy{};
 
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
 
       // find the first free (inactive) decoy
@@ -391,7 +391,7 @@ Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileTy
    Missile* msl{};
    if (missileType != nullptr) {
 
-      base::PairStream* list{getWeapons()};
+      base::IPairStream* list{getWeapons()};
       if (list != nullptr) {
 
          // Find the first free (inactive) missile of type weaponType
@@ -422,7 +422,7 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
    Bomb* bomb{};
    if (bombType != nullptr)  {
 
-      base::PairStream* list{getWeapons()};
+      base::IPairStream* list{getWeapons()};
       if (list != nullptr)  {
 
          // Find the first free (inactive) bomb
@@ -451,7 +451,7 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
 IWeapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
 {
    IWeapon* wpn{};
-   base::PairStream* list{getWeapons()};
+   base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
       // Find the first free (inactive) bomb
       base::IList::Item* item{list->getFirstItem()};

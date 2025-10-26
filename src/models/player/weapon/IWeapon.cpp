@@ -12,7 +12,7 @@
 #include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/IList.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/osg/Matrixd"
@@ -399,7 +399,7 @@ void IWeapon::checkDetonationEffect()
          if (trk != nullptr) tgt = trk->getTarget();
       }
 
-      base::PairStream* plist{s->getPlayers()};
+      base::IPairStream* plist{s->getPlayers()};
       if (plist != nullptr) {
          base::IList::Item* item{plist->getFirstItem()};
 

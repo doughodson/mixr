@@ -1,7 +1,7 @@
 
 #include "mixr/instruments/dials/GMeterDial.hpp"
 
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace instruments {
@@ -47,7 +47,7 @@ void GMeterDial::reset()
 //------------------------------------------------------------------------------
 void GMeterDial::drawFunc()
 {
-   base::PairStream* subcomponents = getComponents();
+   base::IPairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;
@@ -112,7 +112,7 @@ void GMeterDial::updateData(const double dt)
     // update our values here
 
     {
-       base::PairStream* subcomponents = getComponents();
+       base::IPairStream* subcomponents = getComponents();
        if (subcomponents == nullptr) return;
        subcomponents->unref();
        subcomponents = nullptr;

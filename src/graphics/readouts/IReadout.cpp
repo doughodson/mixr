@@ -8,7 +8,7 @@
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/PairStream.hpp"
+#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/colors/Rgb.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -512,7 +512,7 @@ bool IReadout::setSlotHighlight(const base::Boolean* const x)
             clearDisplayMode(highlight);
         }
 
-        base::PairStream* subcomponents {getComponents()};
+        base::IPairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
             const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -540,7 +540,7 @@ bool IReadout::setSlotUnderline(const base::Boolean* const x)
         }
 
         // Set our children's mode
-        base::PairStream* subcomponents {getComponents()};
+        base::IPairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
             const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -569,7 +569,7 @@ bool IReadout::setSlotReversed(const base::Boolean* const x)
         }
 
         // Set our children's mode
-        base::PairStream* subcomponents {getComponents()};
+        base::IPairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
             const base::IList::Item* item {subcomponents->getFirstItem()};
             while (item != nullptr) {
@@ -650,7 +650,7 @@ bool IReadout::setSlotJustification(const base::Identifier* const x)
         }
 
         // Set our children's justification
-        base::PairStream* subcomponents {getComponents()};
+        base::IPairStream* subcomponents {getComponents()};
         if (subcomponents != nullptr) {
             const base::IList::Item* item{subcomponents->getFirstItem()};
             while (item != nullptr) {
