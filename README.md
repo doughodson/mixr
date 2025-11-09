@@ -2,36 +2,13 @@
 Mixed Reality Simulation Platform (MIXR)
 ========================================
 
-The most current version of the mixed reality simulation platform can be found at [www.mixr-platform.org][mixr].
+If you have stumbled across this repo, I strongly recommend you vists the source repo at
+https://github.com/doughodson/mixr. I am a Modeling and Simulation Engineer by trade, a 
+Computer Engineer by degree, and a Sodtware Engineer by force (I am forced to make software 
+do what I want). Having said that, this repo falls under the same open source license 
+as the source repo.
 
-Directories
------------
-
-* build: using premake for creating Visual Studio/C++ projects and solutions (see premake project for more information)
-
-* deps: contains all the source code for dependencies that MIXR relies upon to build its libraries
-
-* doc: changeLogs, uml diagrams and doxygen configuration files
-
-* include: standard include path for all headers (.hpp)
-
-* lib: contains libraries after compilation
-
-* src: source code (.cpp) files
-
-To Build
----------
-
-#### Windows
-1. Load the visual studio solution file found in the build tree.
-2. Select build options, and compile.
-3. This will generate linkable libraries in the lib directory.
-
-#### Linux
-1. Edit setting in "setenv" file.
-2. Load setting via "source setenv".
-3. Review the makedefs file to ensure paths and prerequisites are met.
-4. Enter src directory and run "make"
+The current objective of this fork, is to get everything building on a Windows with VS 2022, including 3rd party dependencies.
 
 [mixr]: http://www.mixr-platform.org
 
