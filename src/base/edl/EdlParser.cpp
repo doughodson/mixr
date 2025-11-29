@@ -1506,8 +1506,8 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Returns an Object* that was constructed from parsing an EDL file.
-// factory is the name of the Object creation function
+// Returns an IObject* that was constructed from parsing an EDL file.
+// factory is the name of the IObject creation function
 //------------------------------------------------------------------------------
 IObject* edl_parser(const std::string& filename, factory_func f, int* num_errors)
 {

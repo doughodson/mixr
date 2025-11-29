@@ -9,6 +9,6 @@ flex -f -oEdlScanner.cpp edl_scanner.l  // creates EdlScanner.cpp (EdlScanner.hp
 # search for "FlexLexer.h" in EdlScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "mixr/base/util/FlexLexer.h"
+#   #include "FlexLexer.h"
 
 

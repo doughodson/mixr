@@ -4,7 +4,7 @@
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer edlFlexLexer
-#include "mixr/base/util/FlexLexer.h"
+#include "FlexLexer.h"
 #undef yyFlexLexer
 #endif
 

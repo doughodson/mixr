@@ -78,7 +78,7 @@ static mixr::base::IObject* parse(const std::string& name, mixr::base::IPairStre
 
         // set slots in our new object
         if (obj != nullptr && arg_list != nullptr) {
-            mixr::base::List::Item* item{arg_list->getFirstItem()};
+            mixr::base::IList::Item* item{arg_list->getFirstItem()};
             while (item != nullptr) {
                 mixr::base::Pair* p{static_cast<mixr::base::Pair*>(item->getValue())};
                 bool ok{obj->setSlotByName(p->slot().c_str(), p->object())};
@@ -188,7 +188,7 @@ prim    : STRING_LITERAL            { $$ = new mixr::base::String($1); delete[] 
         | number                    { $$ = $1; }
         ;
 
-numlist : number                    { $$ = new mixr::base::List(); $$->put($1); $1->unref(); }
+numlist : number                    { $$ = new mixr::base::IList(); $$->put($1); $1->unref(); }
         | numlist number            { $$ = $1; $$->put($2); $2->unref(); }
         ;
 

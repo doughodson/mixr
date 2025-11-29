@@ -5,7 +5,7 @@
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
 #define yyFlexLexer rfFlexLexer
-#include "mixr/base/util/FlexLexer.h"
+#include "FlexLexer.h"
 #endif
 
 #include "mixr/graphics/readouts/TimeReadout.hpp"

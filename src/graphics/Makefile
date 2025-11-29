@@ -1,18 +1,4 @@
 
-#----------------------------------------------------------------------------------------
-# To build scanner:
-#
-# cd readouts
-# dos2unix reformat_scanner.l
-# flex -f -oReformatScanner.cpp reformat_scanner.l   // creates ReformatScanner.cpp
-#   (ReformatScanner.hpp already exists)
-#
-# search for "FlexLexer.h" in ReformatScanner.cpp - replace:
-#   #include <FlexLexer.h>
-# with
-#   #include "mixr/base/util/FlexLexer.h"
-#----------------------------------------------------------------------------------------
-
 include ../makedefs
 
 LIB = $(MIXR_LIB_DIR)/libmixr_graphics.a
