@@ -14,6 +14,8 @@
 #include "mixr/base/util/system_utils.hpp"
 #include "mixr/base/util/platform_api.hpp"
 
+#include <cstddef>
+
 namespace mixr {
 namespace base {
 
@@ -307,9 +309,9 @@ const IPairStream* IComponent::getComponents() const
 //------------------------------------------------------------------------------
 // getNumberOfComponents() -- returns the number of components
 //------------------------------------------------------------------------------
-unsigned int IComponent::getNumberOfComponents() const
+std::size_t IComponent::getNumberOfComponents() const
 {
-   unsigned int n{};
+   std::size_t n{};
    const IPairStream* subcomponents{components.getRefPtr()};
    if (subcomponents != nullptr) {
       n = subcomponents->entries();

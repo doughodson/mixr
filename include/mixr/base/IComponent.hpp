@@ -5,6 +5,7 @@
 #include "mixr/base/IObject.hpp"
 #include "mixr/base/safe_ptr.hpp"
 
+#include <cstddef>
 #include <string>
 
 namespace mixr {
@@ -130,7 +131,7 @@ public:
    IComponent* container(IComponent* const p)                                { return (containerPtr = p); }
 
    // returns the number of child components
-   unsigned int getNumberOfComponents() const;
+   std::size_t getNumberOfComponents() const;
 
    // returns a ref()'d pointer to our list of components
    IPairStream* getComponents();
