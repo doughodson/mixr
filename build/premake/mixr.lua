@@ -44,7 +44,7 @@ workspace "mixr"
 
    -- C++ code in all projects
    language "C++"
-   cppdialect "C++14"
+   cppdialect "C++17"
 
    -- target suffix (all configurations/all projects)
    targetprefix "mixr_"
