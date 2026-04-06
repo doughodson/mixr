@@ -2,8 +2,7 @@
 #ifndef __mixr_recorder_PrintSelected_HPP__
 #define __mixr_recorder_PrintSelected_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
-#include "mixr/recorder/protobuf_v2/PrintHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IPrintHandler.hpp"
 
 #include <string>
 #include <sstream>
@@ -39,9 +38,9 @@ class TrackData; class EmissionData;
 //   condition       <base::String>   ! EQ, LT, or GT (ignored for bool and strings)
 //   timeOnly        <base::Boolean>  ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
-class PrintSelected : public PrintHandler
+class PrintSelected final: public IPrintHandler
 {
-    DECLARE_SUBCLASS(PrintSelected, PrintHandler)
+    DECLARE_SUBCLASS(PrintSelected, IPrintHandler)
 
 public:
    PrintSelected();

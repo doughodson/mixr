@@ -2,8 +2,8 @@
 #ifndef __mixr_recorder_DataRecorder_Inline__
 #define __mixr_recorder_DataRecorder_Inline__
 
-inline OutputHandler* DataRecorder::getOutputHandler()                { return outputHandler; }
-inline const OutputHandler* DataRecorder::getOutputHandler() const    { return outputHandler; }
+inline IOutputHandler* DataRecorder::getOutputHandler()                { return outputHandler; }
+inline const IOutputHandler* DataRecorder::getOutputHandler() const    { return outputHandler; }
 
 //------------------------------------------------------------------------------
 // DataRecorder Macros

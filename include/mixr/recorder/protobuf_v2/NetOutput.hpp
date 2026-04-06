@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_NetOutput_HPP__
 #define __mixr_recorder_NetOutput_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IOutputHandler.hpp"
 
 namespace mixr {
 namespace base { class Boolean; class INetHandler; }
@@ -18,9 +18,9 @@ namespace protobuf_v2 {
 //      netHandler  <INetHandler>  ! Network output handler
 //      noWait      <Boolean>      ! No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
-class NetOutput : public OutputHandler
+class NetOutput final: public IOutputHandler
 {
-    DECLARE_SUBCLASS(NetOutput, OutputHandler)
+    DECLARE_SUBCLASS(NetOutput, IOutputHandler)
 
 public:
    NetOutput();

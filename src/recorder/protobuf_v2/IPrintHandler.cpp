@@ -1,5 +1,5 @@
 
-#include "mixr/recorder/protobuf_v2/PrintHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IPrintHandler.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/str_utils.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -10,24 +10,24 @@ namespace mixr {
 namespace recorder {
 namespace protobuf_v2 {
 
-IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")
+IMPLEMENT_SUBCLASS(IPrintHandler,"IPrintHandler")
 
-BEGIN_SLOTTABLE(PrintHandler)
+BEGIN_SLOTTABLE(IPrintHandler)
    "filename",     // 1) Data file name (required)
    "pathname",     // 2) Path to the data file directory (optional)
-END_SLOTTABLE(PrintHandler)
+END_SLOTTABLE(IPrintHandler)
 
-BEGIN_SLOT_MAP(PrintHandler)
+BEGIN_SLOT_MAP(IPrintHandler)
    ON_SLOT( 1, setSlotFilename, base::String)
    ON_SLOT( 2, setSlotPathName, base::String)
 END_SLOT_MAP()
 
-PrintHandler::PrintHandler()
+IPrintHandler::IPrintHandler()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-void PrintHandler::copyData(const PrintHandler& org, const bool)
+void IPrintHandler::copyData(const IPrintHandler& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -47,7 +47,7 @@ void PrintHandler::copyData(const PrintHandler& org, const bool)
    setFullFilename(nullptr);
 }
 
-void PrintHandler::deleteData()
+void IPrintHandler::deleteData()
 {
    if (sout != nullptr) {
       if (isOpen()) sout->close();
@@ -65,25 +65,25 @@ void PrintHandler::deleteData()
 //------------------------------------------------------------------------------
 
 // Is the data file open?
-bool PrintHandler::isOpen() const
+bool IPrintHandler::isOpen() const
 {
    return fileOpened && sout != nullptr && sout->is_open();
 }
 
 // Did we have an open or write error?
-bool PrintHandler::isFailed() const
+bool IPrintHandler::isFailed() const
 {
    return fileFailed || (sout != nullptr && sout->fail());
 }
 
 // File name with path and possible version number
-const char* PrintHandler::getFullFilename() const
+const char* IPrintHandler::getFullFilename() const
 {
    return fullFilename;
 }
 
 // File name as entered
-const char* PrintHandler::getFilename() const
+const char* IPrintHandler::getFilename() const
 {
    const char* p{};
    if (filename != nullptr) p = filename->c_str();
@@ -91,7 +91,7 @@ const char* PrintHandler::getFilename() const
 }
 
 // Path to file
-const char* PrintHandler::getPathname() const
+const char* IPrintHandler::getPathname() const
 {
    const char* p{};
    if (pathname != nullptr) p = pathname->c_str();
@@ -99,7 +99,7 @@ const char* PrintHandler::getPathname() const
 }
 
 // Is the data file empty?
-bool PrintHandler::isFileEmpty() const
+bool IPrintHandler::isFileEmpty() const
 {
    return fileEmpty;
 }
@@ -107,7 +107,7 @@ bool PrintHandler::isFileEmpty() const
 //------------------------------------------------------------------------------
 // Open the data file
 //------------------------------------------------------------------------------
-bool PrintHandler::openFile()
+bool IPrintHandler::openFile()
 {
    // When we're already open, just return
    if (isOpen()) return true;
@@ -220,7 +220,7 @@ bool PrintHandler::openFile()
 //------------------------------------------------------------------------------
 // Close the data file
 //------------------------------------------------------------------------------
-void PrintHandler::closeFile()
+void IPrintHandler::closeFile()
 {
    if (isOpen()) {
 
@@ -237,7 +237,7 @@ void PrintHandler::closeFile()
 // Set functions
 //------------------------------------------------------------------------------
 
-void PrintHandler::setFullFilename(const char* const name)
+void IPrintHandler::setFullFilename(const char* const name)
 {
    if (fullFilename != nullptr) {
       delete[] fullFilename;
@@ -250,7 +250,7 @@ void PrintHandler::setFullFilename(const char* const name)
    }
 }
 
-bool PrintHandler::setFilename(const base::String* const msg)
+bool IPrintHandler::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
    if (msg != nullptr) filename = new base::String(*msg);
@@ -258,7 +258,7 @@ bool PrintHandler::setFilename(const base::String* const msg)
     return true;
 }
 
-bool PrintHandler::setPathName(const base::String* const msg)
+bool IPrintHandler::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
    if (msg != nullptr) pathname = new base::String(*msg);
@@ -270,7 +270,7 @@ bool PrintHandler::setPathName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // print to output stream
 //------------------------------------------------------------------------------
-void PrintHandler::printToOutput(const char* const msg)
+void IPrintHandler::printToOutput(const char* const msg)
 {
    // First pass?  Do we need to open a file?
    if (firstPassFlg) {
@@ -295,7 +295,7 @@ void PrintHandler::printToOutput(const char* const msg)
 //------------------------------------------------------------------------------
 // Print the data from a DataRecord
 //------------------------------------------------------------------------------
-void PrintHandler::processRecordImp(const DataRecordHandle* const handle)
+void IPrintHandler::processRecordImp(const DataRecordHandle* const handle)
 {
    // baseclass
 }

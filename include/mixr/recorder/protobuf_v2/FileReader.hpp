@@ -24,7 +24,7 @@ namespace protobuf_v2 {
 //    in bytes.  The 4 bytes are stored as an ascii string with leading spaces
 //    (e.g., " 123")
 //------------------------------------------------------------------------------
-class FileReader : public IInputHandler
+class FileReader final: public IInputHandler
 {
     DECLARE_SUBCLASS(FileReader, IInputHandler)
 

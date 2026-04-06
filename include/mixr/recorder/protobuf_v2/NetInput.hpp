@@ -18,7 +18,7 @@ namespace protobuf_v2 {
 //      netHandler  <INetHandler>   Network input handler
 //      noWait      <Boolean>       No wait (unblocked) I/O flag (default: false -- blocked I/O)
 //------------------------------------------------------------------------------
-class NetInput : public IInputHandler
+class NetInput final: public IInputHandler
 {
     DECLARE_SUBCLASS(NetInput, IInputHandler)
 

@@ -2,7 +2,7 @@
 #ifndef __mixr_recorder_FileWriter_HPP__
 #define __mixr_recorder_FileWriter_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IOutputHandler.hpp"
 
 namespace mixr {
 namespace base { class String; }
@@ -35,9 +35,9 @@ namespace protobuf_v2 {
 //    Calling openFile() or sending any additional data messages will open
 //    a new file with a new version number.
 //------------------------------------------------------------------------------
-class FileWriter : public OutputHandler
+class FileWriter final: public IOutputHandler
 {
-    DECLARE_SUBCLASS(FileWriter, OutputHandler)
+    DECLARE_SUBCLASS(FileWriter, IOutputHandler)
 
 public:
    FileWriter();

@@ -2,8 +2,7 @@
 #ifndef __mixr_recorder_PrintPlayer_HPP__
 #define __mixr_recorder_PrintPlayer_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
-#include "mixr/recorder/protobuf_v2/PrintHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IPrintHandler.hpp"
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -28,9 +27,9 @@ class TrackData; class EmissionData;
 // Slots:
 //   playerName  <base::String>  ! Player name
 //------------------------------------------------------------------------------
-class PrintPlayer : public PrintHandler
+class PrintPlayer final: public IPrintHandler
 {
-    DECLARE_SUBCLASS(PrintPlayer, PrintHandler)
+    DECLARE_SUBCLASS(PrintPlayer, IPrintHandler)
 
 public:
 

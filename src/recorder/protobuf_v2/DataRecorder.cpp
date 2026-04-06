@@ -1,7 +1,7 @@
 
 #include "mixr/recorder/protobuf_v2/DataRecorder.hpp"
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IOutputHandler.hpp"
 #include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
 #include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
@@ -30,7 +30,7 @@ namespace protobuf_v2 {
 IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")
 
 BEGIN_SLOTTABLE(DataRecorder)
-   "outputHandler",     // 1) Output handler
+   "outputHandler",     // 1) IOutput handler
    "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
    "application",       // 3) Application name (e.g., "mainSimExec")
    "caseNum",           // 4) Case id number (i.e., conditions)
@@ -43,7 +43,7 @@ BEGIN_SLOTTABLE(DataRecorder)
 END_SLOTTABLE(DataRecorder)
 
 BEGIN_SLOT_MAP(DataRecorder)
-   ON_SLOT( 1, setOutputHandler,   OutputHandler)
+   ON_SLOT( 1, setOutputHandler,   IOutputHandler)
    ON_SLOT( 2, setSlotEventName,   base::Identifier)
    ON_SLOT( 3, setSlotApplication, base::Identifier)
    ON_SLOT( 4, setSlotCaseNum,     base::Integer)
@@ -86,7 +86,7 @@ void DataRecorder::copyData(const DataRecorder& org, const bool)
    BaseClass::copyData(org);
 
    {  // clone the original's output handler
-      OutputHandler* copy = nullptr;
+      IOutputHandler* copy = nullptr;
       if (org.outputHandler != nullptr) copy = org.outputHandler->clone();
       setOutputHandler(copy);
       if (copy != nullptr) copy->unref();
@@ -1072,7 +1072,7 @@ void DataRecorder::setFirstPass(const bool f)
    firstPass = f;
 }
 
-bool DataRecorder::setOutputHandler(OutputHandler* const msg)
+bool DataRecorder::setOutputHandler(IOutputHandler* const msg)
 {
    if (outputHandler != nullptr) outputHandler->unref();
    outputHandler = msg;

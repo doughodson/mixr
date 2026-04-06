@@ -2,8 +2,7 @@
 #ifndef __mixr_recorder_TabPrinter_HPP__
 #define __mixr_recorder_TabPrinter_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
-#include "mixr/recorder/protobuf_v2/PrintHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IPrintHandler.hpp"
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -30,9 +29,9 @@ class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
 //    msgHdrOptn   <String>  ! Msg Header options { no_hdr, all_msgs, new_msg, on_change }
 //    divider      <String>  ! Field divider (default: tab)
 //------------------------------------------------------------------------------
-class TabPrinter : public PrintHandler
+class TabPrinter final: public IPrintHandler
 {
-   DECLARE_SUBCLASS(TabPrinter, PrintHandler)
+   DECLARE_SUBCLASS(TabPrinter, IPrintHandler)
 
 public:
    enum class MsgHdrOptions { NO_HDR, ALL_MSGS, NEW_MSG, ON_CHANGE };

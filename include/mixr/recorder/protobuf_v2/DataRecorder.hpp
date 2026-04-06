@@ -13,7 +13,7 @@ namespace protobuf_v2 {
 namespace proto { class DataRecord; class PlayerId; class PlayerState;
                   class TrackData; class EmissionData; }
 class DataRecordHandle;
-class OutputHandler;
+class IOutputHandler;
 
 //------------------------------------------------------------------------------
 // Class: DataRecorder
@@ -21,7 +21,7 @@ class OutputHandler;
 //
 // Factory name: DataRecorder
 // Slots:
-//    outputHandler     <OutputHandler>      ! Output handler (default: none)
+//    outputHandler     <IOutputHandler>     ! Output handler (default: none)
 //
 // Notes:
 //    1) negative time values are used when time is unknown.
@@ -74,13 +74,13 @@ public:
 
 protected:
    // Get functions
-   OutputHandler* getOutputHandler();
-   const OutputHandler* getOutputHandler() const;
+   IOutputHandler* getOutputHandler();
+   const IOutputHandler* getOutputHandler() const;
 
    bool isFirstPass() const               { return firstPass; }
 
    // Set functions
-   bool setOutputHandler(OutputHandler* const);
+   bool setOutputHandler(IOutputHandler* const);
 
    // data filler functions
    virtual void genPlayerId(proto::PlayerId* const id, const models::IPlayer* const player );
@@ -126,7 +126,7 @@ protected:
 private:
    void initData();
 
-   OutputHandler* outputHandler {};          // Our output handler
+   IOutputHandler* outputHandler {};          // Our output handler
    bool firstPass {true};
 
    std::string eventName;
@@ -141,7 +141,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotOutputHandler(OutputHandler* const x)         { return setOutputHandler(x); }
+   bool setSlotOutputHandler(IOutputHandler* const x)         { return setOutputHandler(x); }
    bool setSlotEventName(base::Identifier* const);
    bool setSlotApplication(base::Identifier* const);
    bool setSlotCaseNum(base::Integer* const);
