@@ -7,14 +7,14 @@ OBJS =  \
 	proto/DataRecord.pb.o \
 	DataRecorder.o \
 	DataRecordHandle.o \
-	factory.o \
+    factory.o \
 	FileReader.o \
 	FileWriter.o \
 	IInputHandler.o \
+	IOutputHandler.o \
+	IPrintHandler.o \
 	NetInput.o \
 	NetOutput.o \
-	OutputHandler.o \
-	PrintHandler.o \
 	PrintPlayer.o \
 	PrintSelected.o \
 	TabPrinter.o

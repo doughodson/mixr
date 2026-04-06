@@ -1,8 +1,8 @@
 
-#ifndef __mixr_recorder_PrintHandler_HPP__
-#define __mixr_recorder_PrintHandler_HPP__
+#ifndef __mixr_recorder_IPrintHandler_HPP__
+#define __mixr_recorder_IPrintHandler_HPP__
 
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
+#include "mixr/recorder/protobuf_v2/IOutputHandler.hpp"
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -12,8 +12,8 @@ namespace recorder {
 namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
-// Class: PrintHandler
-// Description: Common print handler used by TabPrinter, etc.
+// Class: IPrintHandler
+// Description: Interface to print handler used by TabPrinter, etc.
 //
 // Notes:
 //    1) Default is to print to the standard output
@@ -22,17 +22,17 @@ namespace protobuf_v2 {
 //       b) if the file already exists, a new file is still created
 //          with a version number appended to the file name.
 //
-// Factory name: PrintHandler
+// Factory name: IPrintHandler
 // Slots:
 //    filename    <String>    ! Data file name (default: use std out)
 //    pathname    <String>    ! Path to the data file directory (optional)
 //------------------------------------------------------------------------------
-class PrintHandler : public OutputHandler
+class IPrintHandler : public IOutputHandler
 {
-    DECLARE_SUBCLASS(PrintHandler, OutputHandler)
+    DECLARE_SUBCLASS(IPrintHandler, IOutputHandler)
 
 public:
-   PrintHandler();
+   IPrintHandler();
 
    // Print to the output stream
    void printToOutput(const char* const msg);

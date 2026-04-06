@@ -6,7 +6,6 @@
 #include "mixr/recorder/protobuf_v2/DataRecorder.hpp"
 #include "mixr/recorder/protobuf_v2/FileWriter.hpp"
 #include "mixr/recorder/protobuf_v2/FileReader.hpp"
-#include "mixr/recorder/protobuf_v2/OutputHandler.hpp"
 #include "mixr/recorder/protobuf_v2/NetInput.hpp"
 #include "mixr/recorder/protobuf_v2/NetOutput.hpp"
 #include "mixr/recorder/protobuf_v2/TabPrinter.hpp"
@@ -34,9 +33,6 @@ base::IObject* factory(const std::string& name)
     }
     else if ( name == NetOutput::getFactoryName() ) {
         obj = new NetOutput();
-    }
-    else if ( name == OutputHandler::getFactoryName() ) {
-        obj = new OutputHandler();
     }
     else if ( name == TabPrinter::getFactoryName() ) {
         obj = new TabPrinter();

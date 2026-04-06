@@ -1,6 +1,6 @@
 
-#ifndef __mixr_recorder_OutputHandler_HPP__
-#define __mixr_recorder_OutputHandler_HPP__
+#ifndef __mixr_recorder_IOutputHandler_HPP__
+#define __mixr_recorder_IOutputHandler_HPP__
 
 #include "mixr/simulation/IRecorder.hpp"
 #include "mixr/base/IList.hpp"
@@ -12,8 +12,8 @@ namespace protobuf_v2 {
 class DataRecordHandle;
 
 //------------------------------------------------------------------------------
-// Class: OutputHandler
-// Description: Generic output handler for Protocol Buffer data records
+// Class: IOutputHandler
+// Description: Interface for Protocol Buffer data records
 //
 // Notes:
 //    1) Derived class must implement processRecordImp() to process the
@@ -28,18 +28,18 @@ class DataRecordHandle;
 //    of subcomponent OutputHandlers.  The prcessRecord() function for each
 //    subcomponent OutputHandler is called from our processRecord() function.
 //
-// Factory name: OutputHandler
+// Factory name: IOutputHandler
 //
 // Overriding the Component class slot:
 //    components     ! Must contain only 'OutputHandler' type objects
 //
 //------------------------------------------------------------------------------
-class OutputHandler : public simulation::IRecorder
+class IOutputHandler : public simulation::IRecorder
 {
-   DECLARE_SUBCLASS(OutputHandler, simulation::IRecorder)
+   DECLARE_SUBCLASS(IOutputHandler, simulation::IRecorder)
 
 public:
-   OutputHandler();
+   IOutputHandler();
 
    // Process the data record
    void processRecord(const DataRecordHandle* const);
