@@ -10,7 +10,7 @@
 
 #include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/effect/Decoy.hpp"
-#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/IEffect.hpp"
 #include "mixr/models/player/effect/Flare.hpp"
 #include "mixr/models/player/ground/IGroundVehicle.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
@@ -429,7 +429,7 @@ int CigiHost::updateModels()
                } else if (player->isMajorType(models::IPlayer::BUILDING)) {
                   setBuildingData(model, entity, static_cast<const models::Building*>(player));
                } else if (player->isMajorType(models::IPlayer::WEAPON)) {
-                  const auto effect = dynamic_cast<const models::Effect*>(model->getPlayer());
+                  const auto effect = dynamic_cast<const models::IEffect*>(model->getPlayer());
                   const auto msl = dynamic_cast<const models::IMissile*>(model->getPlayer());
                   const auto wpn = dynamic_cast<const models::IWeapon*>(model->getPlayer());
                   if (effect != nullptr)     // Effects before general weapons (because effects are also weapons)
@@ -820,7 +820,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
 //------------------------------------------------------------------------------
 // setEffectsData() -- Sets a 'model_t' structure to a effects' state
 //------------------------------------------------------------------------------
-bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models::Effect* const p)
+bool CigiHost::setEffectData(CigiModel* const m, const int entity, const models::IEffect* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {

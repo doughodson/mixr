@@ -30,8 +30,8 @@ OBJS =  \
 	player/air/UnmannedAirVehicle.o \
 	player/effect/Chaff.o \
 	player/effect/Decoy.o \
-	player/effect/Effect.o \
 	player/effect/Flare.o \
+	player/effect/IEffect.o \
 	player/ground/ArmoredVehicle.o \
 	player/ground/Artillery.o \
 	player/ground/IGroundStation.o \

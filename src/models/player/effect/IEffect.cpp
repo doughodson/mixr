@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/IEffect.hpp"
 
 #include "mixr/base/IList.hpp"
 #include "mixr/base/Identifier.hpp"
@@ -11,23 +11,23 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Effect, "Effect")
-EMPTY_DELETEDATA(Effect)
+IMPLEMENT_SUBCLASS(IEffect, "IEffect")
+EMPTY_DELETEDATA(IEffect)
 
-BEGIN_SLOTTABLE(Effect)
+BEGIN_SLOTTABLE(IEffect)
     "dragIndex",        // 1: drag index used by default dynamics
-END_SLOTTABLE(Effect)
+END_SLOTTABLE(IEffect)
 
-BEGIN_SLOT_MAP(Effect)
+BEGIN_SLOT_MAP(IEffect)
     ON_SLOT(1, setSlotDragIndex, base::INumber)
 END_SLOT_MAP()
 
 // Weapon data for general bomb
-int Effect::getCategory() const                { return GRAVITY; }
-const char* Effect::getDescription() const     { return "Generic Effect"; }
-const char* Effect::getNickname() const        { return "Effects"; }
+int IEffect::getCategory() const                { return GRAVITY; }
+const char* IEffect::getDescription() const     { return "Generic Effect"; }
+const char* IEffect::getNickname() const        { return "Effects"; }
 
-Effect::Effect()
+IEffect::IEffect()
 {
     STANDARD_CONSTRUCTOR()
 
@@ -44,7 +44,7 @@ Effect::Effect()
     setEOBT(0.0f);
 }
 
-void Effect::copyData(const Effect& org, const bool)
+void IEffect::copyData(const IEffect& org, const bool)
 {
     BaseClass::copyData(org);
     dragIndex = org.dragIndex;
@@ -53,7 +53,7 @@ void Effect::copyData(const Effect& org, const bool)
 //------------------------------------------------------------------------------
 // crashNotification() -- We just hit the ground (need to check fusing and all that jazz)
 //------------------------------------------------------------------------------
-bool Effect::crashNotification()
+bool IEffect::crashNotification()
 {
     const bool ok{killedNotification()};
     setDetonationResults(Detonation::NONE);
@@ -64,7 +64,7 @@ bool Effect::crashNotification()
 //------------------------------------------------------------------------------
 // collisionNotification() -- We just impacted with another player (need to check fusing and all that jazz)
 //------------------------------------------------------------------------------
-bool Effect::collisionNotification(IPlayer* const p)
+bool IEffect::collisionNotification(IPlayer* const p)
 {
     const bool ok{killedNotification(p)};
     setMode(Mode::DETONATED);
@@ -75,7 +75,7 @@ bool Effect::collisionNotification(IPlayer* const p)
 //------------------------------------------------------------------------------
 // updateTOF -- default time of flight
 //------------------------------------------------------------------------------
-void Effect::updateTOF(const double dt)
+void IEffect::updateTOF(const double dt)
 {
    // As long as we're active ...
    if (isMode(Mode::ACTIVE)) {
@@ -95,7 +95,7 @@ void Effect::updateTOF(const double dt)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Effect::weaponDynamics(const double dt)
+void IEffect::weaponDynamics(const double dt)
 {
    // Useful constant
    static const double g{base::ETHG * base::length::FT2M};      // Acceleration of Gravity (m/s/s)
@@ -146,7 +146,7 @@ void Effect::weaponDynamics(const double dt)
 //------------------------------------------------------------------------------
 
 // dragIndex: drag index used by default dynamics
-bool Effect::setSlotDragIndex(base::INumber* const p)
+bool IEffect::setSlotDragIndex(base::INumber* const p)
 {
     setDragIndex( p->asDouble() );
     return true;

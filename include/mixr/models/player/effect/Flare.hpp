@@ -2,19 +2,19 @@
 #ifndef __mixr_models_common_Flare_HPP__
 #define __mixr_models_common_Flare_HPP__
 
-#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/IEffect.hpp"
 
 namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Flare
-// Description: Generic flare class
+// Description: Concrete flare class
 // Factory name: Flare
 //------------------------------------------------------------------------------
-class Flare : public Effect
+class Flare final: public IEffect
 {
-    DECLARE_SUBCLASS(Flare, Effect)
+    DECLARE_SUBCLASS(Flare, IEffect)
 
 public:
     Flare();

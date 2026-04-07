@@ -2,19 +2,19 @@
 #ifndef __mixr_models_common_Chaff_HPP__
 #define __mixr_models_common_Chaff_HPP__
 
-#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/IEffect.hpp"
 
 namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Chaff
-// Description: Generic chaff class
+// Description: Concrete chaff class
 // Factory name: Chaff
 //------------------------------------------------------------------------------
-class Chaff : public Effect
+class Chaff final: public IEffect
 {
-    DECLARE_SUBCLASS(Chaff, Effect)
+    DECLARE_SUBCLASS(Chaff, IEffect)
 
 public:
     Chaff();

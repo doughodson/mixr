@@ -30,7 +30,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 namespace mixr {
 namespace base { class Boolean; class Integer; }
 namespace models {
-class IAirVehicle; class Building; class Effect; class IGroundVehicle; class LifeForm;
+class IAirVehicle; class Building; class IEffect; class IGroundVehicle; class LifeForm;
 class IMissile; class IPlayer; class Ship; class ISpaceVehicle; class IWeapon;
 }
 namespace ighost {
@@ -190,7 +190,7 @@ private:
 
    bool setAirVehicleData(CigiModel* const, const int entity, const models::IAirVehicle* const);
    bool setBuildingData(CigiModel* const, const int entity, const models::Building* const);
-   bool setEffectData(CigiModel* const, const int entity, const models::Effect* const);
+   bool setEffectData(CigiModel* const, const int entity, const models::IEffect* const);
    bool setGndVehicleData(CigiModel* const, const int entity, const models::IGroundVehicle* const);
    bool setLifeFormData(CigiModel* const, const int entity, const models::LifeForm* const);
    bool setMissileData(CigiModel* const, const int entity, const models::IMissile* const);

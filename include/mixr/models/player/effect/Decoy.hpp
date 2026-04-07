@@ -2,19 +2,19 @@
 #ifndef __mixr_models_common_Decoy_HPP__
 #define __mixr_models_common_Decoy_HPP__
 
-#include "mixr/models/player/effect/Effect.hpp"
+#include "mixr/models/player/effect/IEffect.hpp"
 
 namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Decoy
-// Description: Generic decoy class
+// Description: Concrete decoy class
 // Factory name: Decoy
 //------------------------------------------------------------------------------
-class Decoy : public Effect
+class Decoy final: public IEffect
 {
-    DECLARE_SUBCLASS(Decoy, Effect)
+    DECLARE_SUBCLASS(Decoy, IEffect)
 
 public:
     Decoy();
