@@ -11,7 +11,7 @@ namespace models {
 // Class: Tws
 // Description: Concrete Simple, Track-While-Scan Mode Radar
 //------------------------------------------------------------------------------
-class Tws : public IRadar
+class Tws final: public IRadar
 {
     DECLARE_SUBCLASS(Tws, IRadar)
 

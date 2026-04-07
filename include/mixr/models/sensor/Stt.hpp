@@ -11,7 +11,7 @@ namespace models {
 // Class: Stt
 // Description: Concrete Simple, Single-Target-Track Mode Radar
 //------------------------------------------------------------------------------
-class Stt : public IRadar
+class Stt final: public IRadar
 {
     DECLARE_SUBCLASS(Stt, IRadar)
 
