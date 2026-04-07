@@ -5,7 +5,7 @@
 #include "mixr/ighost/pov/swap_endian.hpp"
 #include "mixr/ighost/pov/Pov.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/network/INetHandler.hpp"
@@ -160,7 +160,7 @@ bool PovHost::initNetwork()
 void PovHost::sendData()
 {
    // Ownship type air vehicle?
-   const auto av = dynamic_cast<const models::AirVehicle*>(ownship);
+   const auto av = dynamic_cast<const models::IAirVehicle*>(ownship);
    if (av != nullptr) {
 
       Pov pov;

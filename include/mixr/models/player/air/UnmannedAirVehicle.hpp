@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_UnmannedAirVehicle_HPP__
 #define __mixr_models_common_UnmannedAirVehicle_HPP__
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 
 namespace mixr {
 namespace models {
@@ -11,9 +11,9 @@ namespace models {
 // Class: UnmannedAirVehicle
 // Factory name: UnmannedAirVehicle
 //------------------------------------------------------------------------------
-class UnmannedAirVehicle : public AirVehicle
+class UnmannedAirVehicle final: public IAirVehicle
 {
-    DECLARE_SUBCLASS(UnmannedAirVehicle, AirVehicle)
+    DECLARE_SUBCLASS(UnmannedAirVehicle, IAirVehicle)
 
 public:
     UnmannedAirVehicle();

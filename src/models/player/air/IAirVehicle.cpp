@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 
 #include "mixr/models/dynamics/IAeroDynamics.hpp"
 #include "mixr/base/IList.hpp"
@@ -8,18 +8,18 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(AirVehicle, "AirVehicle")
-EMPTY_DELETEDATA(AirVehicle)
+IMPLEMENT_SUBCLASS(IAirVehicle, "IAirVehicle")
+EMPTY_DELETEDATA(IAirVehicle)
 
-BEGIN_SLOTTABLE(AirVehicle)
+BEGIN_SLOTTABLE(IAirVehicle)
     "initGearPos",      // 1: initial gear position (default: up)
-END_SLOTTABLE(AirVehicle)
+END_SLOTTABLE(IAirVehicle)
 
-BEGIN_SLOT_MAP(AirVehicle)
+BEGIN_SLOT_MAP(IAirVehicle)
     ON_SLOT(1, setSlotInitGearPos, base::Identifier)
 END_SLOT_MAP()
 
-AirVehicle::AirVehicle()
+IAirVehicle::IAirVehicle()
 {
     STANDARD_CONSTRUCTOR()
 
@@ -28,7 +28,7 @@ AirVehicle::AirVehicle()
     setType("GenericAirVehicle");
 }
 
-void AirVehicle::copyData(const AirVehicle& org, const bool)
+void IAirVehicle::copyData(const IAirVehicle& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -41,7 +41,7 @@ void AirVehicle::copyData(const AirVehicle& org, const bool)
 //-----------------------------------------------------------------------------
 // getMajorType() -- Returns the player's major type
 //-----------------------------------------------------------------------------
-unsigned int AirVehicle::getMajorType() const
+unsigned int IAirVehicle::getMajorType() const
 {
     return AIR_VEHICLE;
 }
@@ -49,7 +49,7 @@ unsigned int AirVehicle::getMajorType() const
 //------------------------------------------------------------------------------
 // reset() -- Reset handler
 //------------------------------------------------------------------------------
-void AirVehicle::reset()
+void IAirVehicle::reset()
 {
    // reset our base class
    BaseClass::reset();
@@ -65,27 +65,27 @@ void AirVehicle::reset()
 //------------------------------------------------------------------------------
 // Data access functions that need conversion
 //------------------------------------------------------------------------------
-double AirVehicle::getAngleOfAttackD() const
+double IAirVehicle::getAngleOfAttackD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getAngleOfAttack() );
 }
 
-double AirVehicle::getFlightPathD() const
+double IAirVehicle::getFlightPathD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getFlightPath() );
 }
 
-double AirVehicle::getSideSlipD() const
+double IAirVehicle::getSideSlipD() const
 {
    return ( static_cast<double>(base::angle::R2DCC) * getSideSlip() );
 }
 
-IAeroDynamics* AirVehicle::getDynamics()
+IAeroDynamics* IAirVehicle::getDynamics()
 {
    return dynamic_cast<IAeroDynamics*>( getDynamicsModel() );
 }
 
-const IAeroDynamics* AirVehicle::getDynamics() const
+const IAeroDynamics* IAirVehicle::getDynamics() const
 {
    return dynamic_cast<const IAeroDynamics*>( getDynamicsModel() );
 }
@@ -95,7 +95,7 @@ const IAeroDynamics* AirVehicle::getDynamics() const
 //-----------------------------------------------------------------------------
 
 // Set initial gear position by name: up, down
-bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
+bool IAirVehicle::setSlotInitGearPos(const base::Identifier* const x)
 {
    bool ok {};
    if (x != nullptr) {
@@ -122,7 +122,7 @@ bool AirVehicle::setSlotInitGearPos(const base::Identifier* const x)
 //------------------------------------------------------------------------------
 // Get Vehicle data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
-double AirVehicle::getGload() const
+double IAirVehicle::getGload() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -132,7 +132,7 @@ double AirVehicle::getGload() const
    return value;
 }
 
-double AirVehicle::getMach() const
+double IAirVehicle::getMach() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -141,7 +141,7 @@ double AirVehicle::getMach() const
    return value;
 }
 
-double AirVehicle::getAngleOfAttack() const
+double IAirVehicle::getAngleOfAttack() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -151,7 +151,7 @@ double AirVehicle::getAngleOfAttack() const
    return value;
 }
 
-double AirVehicle::getSideSlip() const
+double IAirVehicle::getSideSlip() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -161,7 +161,7 @@ double AirVehicle::getSideSlip() const
    return value;
 }
 
-double AirVehicle::getFlightPath() const
+double IAirVehicle::getFlightPath() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -171,7 +171,7 @@ double AirVehicle::getFlightPath() const
    return value;
 }
 
-double AirVehicle::getFuelWt() const
+double IAirVehicle::getFuelWt() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -181,7 +181,7 @@ double AirVehicle::getFuelWt() const
    return value;
 }
 
-double AirVehicle::getFuelWtMax() const
+double IAirVehicle::getFuelWtMax() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -191,7 +191,7 @@ double AirVehicle::getFuelWtMax() const
    return value;
 }
 
-double AirVehicle::getGrossWeight() const
+double IAirVehicle::getGrossWeight() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -201,7 +201,7 @@ double AirVehicle::getGrossWeight() const
    return value;
 }
 
-double AirVehicle::getCalibratedAirspeed() const
+double IAirVehicle::getCalibratedAirspeed() const
 {
    double value {getTotalVelocityKts()};      // Default: use total velocity
    const IAeroDynamics* aero {getDynamics()};
@@ -211,7 +211,7 @@ double AirVehicle::getCalibratedAirspeed() const
    return value;
 }
 
-double AirVehicle::getAmbientPressureRatio() const
+double IAirVehicle::getAmbientPressureRatio() const
 {
    double value {1.0};         // Default: 1.0
    const IAeroDynamics* aero {getDynamics()};
@@ -225,7 +225,7 @@ double AirVehicle::getAmbientPressureRatio() const
 // setTrimSwitchRollInput(RollTrim) --  Sets the trim switch positions:
 //      RollTrim:  -1.0 -> Left;      0.0 -> Hold;  1.0 -> Right
 //------------------------------------------------------------------------------
-void AirVehicle::setTrimSwitchRollInput(const double value)
+void IAirVehicle::setTrimSwitchRollInput(const double value)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -237,7 +237,7 @@ void AirVehicle::setTrimSwitchRollInput(const double value)
 // setTrimSwitchPitchInput(PitchTrim) --  Sets the trim switch positions:
 //      PitchTrim: -1.0 -> NoseDown;  0.0 -> Hold;  1.0 -> NoseUp
 //------------------------------------------------------------------------------
-void AirVehicle::setTrimSwitchPitchInput(const double value)
+void IAirVehicle::setTrimSwitchPitchInput(const double value)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -249,7 +249,7 @@ void AirVehicle::setTrimSwitchPitchInput(const double value)
 // setRudderPedalInput(pedal) -- Pedal inputs: normalized
 //          pedal:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void AirVehicle::setRudderPedalInput(const double value)
+void IAirVehicle::setRudderPedalInput(const double value)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -262,7 +262,7 @@ void AirVehicle::setRudderPedalInput(const double value)
 //               No brake force  -> 0.0
 //               Max brake force -> 1.0
 //------------------------------------------------------------------------------
-void AirVehicle::setBrakes(const double left, const double right)
+void IAirVehicle::setBrakes(const double left, const double right)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -274,7 +274,7 @@ void AirVehicle::setBrakes(const double left, const double right)
 // setFlaps() --
 //      Commanded flap position from retracted (0.0) to fully extended (1.0)
 //------------------------------------------------------------------------------
-void AirVehicle::setFlaps(const double value)
+void IAirVehicle::setFlaps(const double value)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -286,7 +286,7 @@ void AirVehicle::setFlaps(const double value)
 // getLandingGearPosition() --   Returns the landing gear position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double AirVehicle::getLandingGearPosition() const
+double IAirVehicle::getLandingGearPosition() const
 {
    double value {gearPos};
    const IAeroDynamics* aero {getDynamics()};
@@ -300,7 +300,7 @@ double AirVehicle::getLandingGearPosition() const
 // getWeaponBayDoorPosition() --   Returns the weapon bay door position (percent)
 //      0-> closed;  100.0 -> Fully Open
 //------------------------------------------------------------------------------
-double AirVehicle::getWeaponBayDoorPosition() const
+double IAirVehicle::getWeaponBayDoorPosition() const
 {
    double value {wpnBayDoorPos};
    const IAeroDynamics* aero {getDynamics()};
@@ -313,7 +313,7 @@ double AirVehicle::getWeaponBayDoorPosition() const
 //------------------------------------------------------------------------------
 // isWeightOnWheels() --   Returns true if there is weight on the wheels.
 //------------------------------------------------------------------------------
-bool AirVehicle::isWeightOnWheels() const
+bool IAirVehicle::isWeightOnWheels() const
 {
    bool flg {};
    const IAeroDynamics* aero {getDynamics()};
@@ -327,7 +327,7 @@ bool AirVehicle::isWeightOnWheels() const
 // setGearHandleSwitch() -- Set Gear handle switch position
 //                          0 -> handle up;  1 -> handle down
 //------------------------------------------------------------------------------
-void AirVehicle::setGearHandleSwitch(const double value)
+void IAirVehicle::setGearHandleSwitch(const double value)
 {
    if (value > 0) gearPos = 100.0;
    else gearPos = 0;
@@ -342,7 +342,7 @@ void AirVehicle::setGearHandleSwitch(const double value)
 // getSpeedBrakesSwitch() --   Returns the speed brake position (percent)
 //      0-> Fully Retracted;  100.0 -> Fully Extended
 //------------------------------------------------------------------------------
-double AirVehicle::getSpeedBrakePosition() const
+double IAirVehicle::getSpeedBrakePosition() const
 {
    double value {};
    const IAeroDynamics* aero {getDynamics()};
@@ -355,7 +355,7 @@ double AirVehicle::getSpeedBrakePosition() const
 //------------------------------------------------------------------------------
 // getWingSweepAngle() --   Returns the wing sweep position angle (radians)
 //------------------------------------------------------------------------------
-double AirVehicle::getWingSweepAngle() const
+double IAirVehicle::getWingSweepAngle() const
 {
    double value {wingSweep};
    const IAeroDynamics* aero {getDynamics()};
@@ -369,7 +369,7 @@ double AirVehicle::getWingSweepAngle() const
 // setSpeedBrakesSwitch() --   Sets the speed brake switch position:
 //      -1.0 -> Retract;  0.0 -> Hold;  1.0 -> Extend
 //------------------------------------------------------------------------------
-void AirVehicle::setSpeedBrakesSwitch(const double value)
+void IAirVehicle::setSpeedBrakesSwitch(const double value)
 {
    IAeroDynamics* aero {getDynamics()};
    if (aero != nullptr) {
@@ -381,7 +381,7 @@ void AirVehicle::setSpeedBrakesSwitch(const double value)
 // setWeaponBayDoorSwitch() --   Sets the weapon bay door switch position:
 //        0.0 -> closed; 1.0 -> open
 //------------------------------------------------------------------------------
-void AirVehicle::setWeaponBayDoorSwitch(const double value)
+void IAirVehicle::setWeaponBayDoorSwitch(const double value)
 {
    if (value > 0) wpnBayDoorPos = 100.0;
    else wpnBayDoorPos = 0;
@@ -395,7 +395,7 @@ void AirVehicle::setWeaponBayDoorSwitch(const double value)
 //------------------------------------------------------------------------------
 // Sets the commanded wing sweep angle (radians)
 //------------------------------------------------------------------------------
-void AirVehicle::setCmdWingSweepAngle(const double value)
+void IAirVehicle::setCmdWingSweepAngle(const double value)
 {
    wingSweep = value;
 
@@ -408,7 +408,7 @@ void AirVehicle::setCmdWingSweepAngle(const double value)
 //------------------------------------------------------------------------------
 // Get engine data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
-int AirVehicle::getNumberOfEngines() const
+int IAirVehicle::getNumberOfEngines() const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -418,7 +418,7 @@ int AirVehicle::getNumberOfEngines() const
    return n;
 }
 
-int AirVehicle::getEngThrust(double* const data, const int max) const
+int IAirVehicle::getEngThrust(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -428,7 +428,7 @@ int AirVehicle::getEngThrust(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngThrustIdle(double* const data, const int max) const
+int IAirVehicle::getEngThrustIdle(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -438,7 +438,7 @@ int AirVehicle::getEngThrustIdle(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngThrustMil(double* const data, const int max) const
+int IAirVehicle::getEngThrustMil(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -448,7 +448,7 @@ int AirVehicle::getEngThrustMil(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngThrustAb(double* const data, const int max) const
+int IAirVehicle::getEngThrustAb(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -458,7 +458,7 @@ int AirVehicle::getEngThrustAb(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngRPM(double* const data, const int max) const
+int IAirVehicle::getEngRPM(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -468,7 +468,7 @@ int AirVehicle::getEngRPM(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngN1(double* const data, const int max) const
+int IAirVehicle::getEngN1(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -478,7 +478,7 @@ int AirVehicle::getEngN1(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngPLA(double* const data, const int max) const
+int IAirVehicle::getEngPLA(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -488,7 +488,7 @@ int AirVehicle::getEngPLA(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngFuelFlow(double* const data, const int max) const
+int IAirVehicle::getEngFuelFlow(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -498,7 +498,7 @@ int AirVehicle::getEngFuelFlow(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngOilPressure(double* const data, const int max) const
+int IAirVehicle::getEngOilPressure(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -508,7 +508,7 @@ int AirVehicle::getEngOilPressure(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngInletTemp(double* const data, const int max) const
+int IAirVehicle::getEngInletTemp(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -518,7 +518,7 @@ int AirVehicle::getEngInletTemp(double* const data, const int max) const
    return n;
 }
 
-int AirVehicle::getEngNozzle(double* const data, const int max) const
+int IAirVehicle::getEngNozzle(double* const data, const int max) const
 {
    int n {};
    const IAeroDynamics* aero {getDynamics()};
@@ -531,13 +531,13 @@ int AirVehicle::getEngNozzle(double* const data, const int max) const
 //------------------------------------------------------------------------------
 // Radar altimeter
 //------------------------------------------------------------------------------
-bool AirVehicle::isRadarAltValid() const
+bool IAirVehicle::isRadarAltValid() const
 {
     double ra {getRadarAltitude()};
     return (ra >= 0 && ra <= 5000);
 }
 
-double AirVehicle::getRadarAltitude() const
+double IAirVehicle::getRadarAltitude() const
 {
     return static_cast<double>(getAltitudeAglFt());
 }

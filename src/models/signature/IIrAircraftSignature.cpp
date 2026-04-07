@@ -4,7 +4,7 @@
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/signature/IIrShapeSignature.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 
 #include "mixr/models/WorldModel.hpp"
 
@@ -352,7 +352,7 @@ double IIrAircraftSignature::getHotPartsWavebandFactor(double midpoint, double w
 double IIrAircraftSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
     double irPower{};
-    const auto targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const IPlayer*>(msg->getTarget()));
+    const auto targetAircraft = dynamic_cast<const IAirVehicle*>(static_cast<const IPlayer*>(msg->getTarget()));
     if(targetAircraft != nullptr) {
         // this will need checks to ensure targetAircraft is , in fact,
         // an airvehicle and not something else.
@@ -408,8 +408,8 @@ double IIrAircraftSignature::getPlumeRadiation(const IrQueryMsg* const msg)
     const IPlayer* targetAircraft{msg->getTarget()};
     if (targetAircraft != nullptr) {
         double currentPla{1.0};
-        if (targetAircraft->isClassType(typeid(AirVehicle))) {
-            currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
+        if (targetAircraft->isClassType(typeid(IAirVehicle))) {
+            currentPla = getPLA(static_cast<const IAirVehicle*>(targetAircraft));
         }
         const double targetAlt{targetAircraft->getAltitudeM()};
         const double targetVel{targetAircraft->getMach()};
@@ -479,7 +479,7 @@ void IIrAircraftSignature::getPlumeSignatures(const IrQueryMsg* const msg, const
 //    Mil Power, and 2.0 represents after burner
 //------------------------------------------------------------------------------
 
-double IIrAircraftSignature::getPLA(const AirVehicle* const airModel) {
+double IIrAircraftSignature::getPLA(const IAirVehicle* const airModel) {
     // use only for air vehicles.
     double currentPla{};
     double idleValue{};
@@ -515,8 +515,8 @@ double IIrAircraftSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 
     const IPlayer* targetAircraft{msg->getTarget()};
     if (targetAircraft != nullptr) {
-        if (targetAircraft->isClassType(typeid(AirVehicle))) {
-            currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
+        if (targetAircraft->isClassType(typeid(IAirVehicle))) {
+            currentPla = getPLA(static_cast<const IAirVehicle*>(targetAircraft));
             targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
             targetVel = targetAircraft->getMach();
         }

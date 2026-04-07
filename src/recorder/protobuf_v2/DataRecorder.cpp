@@ -5,7 +5,7 @@
 #include "mixr/recorder/protobuf_v2/DataRecordHandle.hpp"
 #include "mixr/recorder/protobuf_v2/proto/DataRecord.pb.h"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/system/Antenna.hpp"
@@ -328,7 +328,7 @@ bool DataRecorder::recordPlayerData(const base::IObject* objs[4], const double v
    genPlayerId( playerDataMsg->mutable_id(), player );
    genPlayerState( playerDataMsg->mutable_state(), player );
 
-   const auto av = dynamic_cast<const models::AirVehicle*>( player );
+   const auto av = dynamic_cast<const models::IAirVehicle*>( player );
    if (av != nullptr) {
       playerDataMsg->set_alpha( av->getAngleOfAttackD() );
       playerDataMsg->set_beta( av->getSideSlipD() );

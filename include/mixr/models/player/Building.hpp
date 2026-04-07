@@ -9,10 +9,12 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Building
-// Description: Generic building
+//
+// Description: Concrete building
+//
 // Factory name: Building
 //------------------------------------------------------------------------------
-class Building : public IPlayer
+class Building final: public IPlayer
 {
     DECLARE_SUBCLASS(Building, IPlayer)
 

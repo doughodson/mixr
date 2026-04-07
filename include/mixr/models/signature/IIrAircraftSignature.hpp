@@ -8,7 +8,7 @@ namespace mixr {
 namespace base { class Number; class List; class Table1; class Table2;
                  class Table3; class Table4; class Table5; }
 namespace models {
-class AirVehicle;
+class IAirVehicle;
 class IrQueryMsg;
 class IrShape;
 
@@ -69,7 +69,7 @@ protected:
                                       const double lowerBound,
                                       const double upperBound);
 
-   virtual double getPLA(const AirVehicle* const airModel);
+   virtual double getPLA(const IAirVehicle* const airModel);
 
 private:
    const base::Table4* airframeSignatureTable {};

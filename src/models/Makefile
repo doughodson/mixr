@@ -25,7 +25,7 @@ OBJS =  \
 	navigation/Route.o \
 	navigation/Steerpoint.o \
 	player/air/Aircraft.o \
-	player/air/AirVehicle.o \
+	player/air/IAirVehicle.o \
 	player/air/Helicopter.o \
 	player/air/UnmannedAirVehicle.o \
 	player/effect/Chaff.o \
@@ -51,6 +51,7 @@ OBJS =  \
 	player/weapon/Agm.o \
 	player/weapon/Bomb.o \
 	player/weapon/Bullet.o \
+	player/weapon/Missile.o \
 	player/weapon/Sam.o \
 	player/Building.o \
 	player/LifeForm.o \

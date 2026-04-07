@@ -9,10 +9,12 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class LifeForm
-// Description: Generic life form
+//
+// Description: Concrete life form
+//
 // Factory name: LifeForm
 //------------------------------------------------------------------------------
-class LifeForm : public IPlayer
+class LifeForm final: public IPlayer
 {
     DECLARE_SUBCLASS(LifeForm, IPlayer)
 

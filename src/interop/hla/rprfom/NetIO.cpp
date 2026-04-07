@@ -9,7 +9,7 @@
 #include "mixr/interop/hla/rprfom/RprFom.hpp"
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 #include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
@@ -80,7 +80,7 @@ interop::INib* NetIO::createNewOutputNib(models::IPlayer* const player)
     // ---
     unsigned int idx {};
     BaseEntity* baseEntity {};
-    if (player->isClassType(typeid(models::AirVehicle))) {
+    if (player->isClassType(typeid(models::IAirVehicle))) {
         if (isObjectClassRegistrationEnabled( AIRCRAFT_CLASS )) {
             baseEntity = new Aircraft();
             idx = AIRCRAFT_CLASS;

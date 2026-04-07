@@ -9,10 +9,12 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Ship
-// Description: Generic ship model
+//
+// Description: Concrete ship model
+//
 // Factory name: Ship
 //------------------------------------------------------------------------------
-class Ship : public IPlayer
+class Ship final: public IPlayer
 {
     DECLARE_SUBCLASS(Ship, IPlayer)
 

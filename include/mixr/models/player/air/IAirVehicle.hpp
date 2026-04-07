@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_AirVehicle_HPP__
-#define __mixr_models_AirVehicle_HPP__
+#ifndef __mixr_models_IAirVehicle_HPP__
+#define __mixr_models_IAirVehicle_HPP__
 
 #include "mixr/models/player/IPlayer.hpp"
 
@@ -10,14 +10,12 @@ namespace models {
 class IAeroDynamics;
 
 //------------------------------------------------------------------------------
-// Class: AirVehicle
-//
-// Factory name: AirVehicle
+// Class: IAirVehicle
 //
 // Slots:
 //  initGearPos <Identifier>    ! Initial gear position {up or down} (default: down)
 //
-// Description: Generic Air Vehicles
+// Description: Interface for different kinds of air vehicles
 //
 //      setControlStick(double roll, double pitch)
 //          Control inputs: normalized
@@ -59,12 +57,12 @@ class IAeroDynamics;
 //          Sets the commanded wing sweep angle (radians; zero for none)
 //
 //------------------------------------------------------------------------------
-class AirVehicle : public IPlayer
+class IAirVehicle : public IPlayer
 {
-    DECLARE_SUBCLASS(AirVehicle, IPlayer)
+    DECLARE_SUBCLASS(IAirVehicle, IPlayer)
 
 public:
-    AirVehicle();
+    IAirVehicle();
 
     // Vehicle data
     double getMach() const override;                    // mach number

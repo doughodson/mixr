@@ -8,7 +8,7 @@
 
 #include "mixr/ighost/cigi/Player2CigiMap.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/effect/Decoy.hpp"
 #include "mixr/models/player/effect/Effect.hpp"
 #include "mixr/models/player/effect/Flare.hpp"
@@ -417,7 +417,7 @@ int CigiHost::updateModels()
 
                // Set the model data and ...
                if (player->isMajorType(models::IPlayer::AIR_VEHICLE)) {
-                  setAirVehicleData(model, entity, static_cast<const models::AirVehicle*>(player));
+                  setAirVehicleData(model, entity, static_cast<const models::IAirVehicle*>(player));
                } else if (player->isMajorType(models::IPlayer::GROUND_VEHICLE)) {
                   setGndVehicleData(model, entity, static_cast<const models::GroundVehicle*>(player));
                } else if (player->isMajorType(models::IPlayer::SHIP)) {
@@ -476,7 +476,7 @@ bool CigiHost::setCommonModelData(CigiEntityCtrlV3* const ec, const int entity, 
 }
 
 // sets a CigiEntityCtrlV3 structure to an air vheicle's state
-bool CigiHost::setAirVehicleData(CigiModel* const m, const int entity, const models::AirVehicle* const p)
+bool CigiHost::setAirVehicleData(CigiModel* const m, const int entity, const models::IAirVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {

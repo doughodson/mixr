@@ -12,7 +12,8 @@ class ITrack;
 
 //------------------------------------------------------------------------------
 // Class: IMissile
-// Description: Interface class for missiles; with a simple, default missile model
+//
+// Description: Interface class for a missile; with simple guidance and dynamics
 //
 // Slots:
 //   minSpeed     <INumber>  ! Minimum Velocity (m/s)  (default: 0.0)

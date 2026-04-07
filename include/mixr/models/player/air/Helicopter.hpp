@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Helicopter_HPP__
 #define __mixr_models_common_Helicopter_HPP__
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 
 namespace mixr {
 namespace models {
@@ -11,9 +11,9 @@ namespace models {
 // Class: Helicopter
 // Factory name: Helicopter
 //------------------------------------------------------------------------------
-class Helicopter : public AirVehicle
+class Helicopter final: public IAirVehicle
 {
-    DECLARE_SUBCLASS(Helicopter, AirVehicle)
+    DECLARE_SUBCLASS(Helicopter, IAirVehicle)
 
 public:
     Helicopter();

@@ -7,7 +7,6 @@
 
 #include "mixr/interop/dis/Ntm.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/Pair.hpp"

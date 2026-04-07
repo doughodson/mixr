@@ -27,7 +27,6 @@
 
 // player models
 #include "mixr/models/player/air/Aircraft.hpp"
-#include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/air/Helicopter.hpp"
 #include "mixr/models/player/air/UnmannedAirVehicle.hpp"
 #include "mixr/models/player/effect/Chaff.hpp"
@@ -50,6 +49,7 @@
 #include "mixr/models/player/weapon/Agm.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
 #include "mixr/models/player/weapon/Bullet.hpp"
+#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 #include "mixr/models/player/Building.hpp"
 #include "mixr/models/player/LifeForm.hpp"
@@ -101,6 +101,7 @@
 #include "mixr/models/signature/IrSphereSignature.hpp"
 #include "mixr/models/signature/IrSignature.hpp"
 #include "mixr/models/signature/IrBoxSignature.hpp"
+
 // signatures (RF)
 #include "mixr/models/signature/RfAzElSignature.hpp"
 #include "mixr/models/signature/RfConstantSignature.hpp"
@@ -164,9 +165,6 @@ base::IObject* factory(const std::string& name)
 //   else if ( name == Player::getFactoryName() ) {
 //      obj = new Player();
 //   }
-   else if ( name == AirVehicle::getFactoryName() ) {
-      obj = new AirVehicle();
-   }
    else if ( name == Building::getFactoryName() ) {
       obj = new Building();
    }
@@ -294,6 +292,9 @@ base::IObject* factory(const std::string& name)
    }
    else if ( name == Agm::getFactoryName() ) {
       obj = new Agm();
+   }
+   else if ( name == Missile::getFactoryName() ) {
+      obj = new Missile();
    }
    else if ( name == Sam::getFactoryName() ) {
       obj = new Sam();

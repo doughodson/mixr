@@ -3,7 +3,7 @@
 #include "mixr/interop/INib.hpp"
 #include "mixr/interop/INtm.hpp"
 
-#include "mixr/models/player/air/AirVehicle.hpp"
+#include "mixr/models/player/air/IAirVehicle.hpp"
 #include "mixr/models/player/ground/Artillery.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
 #include "mixr/models/player/weapon/IMissile.hpp"
@@ -462,7 +462,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    if ( player != nullptr && player->isMajorType(models::IPlayer::AIR_VEHICLE) ) {
 
-      const models::AirVehicle* av{static_cast<const models::AirVehicle*>(player)};
+      const models::IAirVehicle* av{static_cast<const models::IAirVehicle*>(player)};
 
       // (4-a) Check wing sweep angle.  We only send out wing sweep as
       // an part if the position is greater than zero or if we've previously been
