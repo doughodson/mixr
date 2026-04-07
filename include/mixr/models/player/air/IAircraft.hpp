@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Aircraft_HPP__
-#define __mixr_models_common_Aircraft_HPP__
+#ifndef __mixr_models_common_IAircraft_HPP__
+#define __mixr_models_common_IAircraft_HPP__
 
 #include "mixr/models/player/air/IAirVehicle.hpp"
 
@@ -8,15 +8,15 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: Aircraft
-// Factory name: Aircraft
+// Class: IAircraft
+// Description: Interface for all aircraft
 //------------------------------------------------------------------------------
-class Aircraft final: public IAirVehicle
+class IAircraft : public IAirVehicle
 {
-    DECLARE_SUBCLASS(Aircraft, IAirVehicle)
+    DECLARE_SUBCLASS(IAircraft, IAirVehicle)
 
 public:
-    Aircraft();
+    IAircraft();
 };
 
 }
