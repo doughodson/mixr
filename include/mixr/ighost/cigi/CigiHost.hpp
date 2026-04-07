@@ -31,7 +31,7 @@ namespace mixr {
 namespace base { class Boolean; class Integer; }
 namespace models {
 class IAirVehicle; class Building; class Effect; class IGroundVehicle; class LifeForm;
-class IMissile; class IPlayer; class Ship; class SpaceVehicle; class IWeapon;
+class IMissile; class IPlayer; class Ship; class ISpaceVehicle; class IWeapon;
 }
 namespace ighost {
 namespace cigi {
@@ -195,7 +195,7 @@ private:
    bool setLifeFormData(CigiModel* const, const int entity, const models::LifeForm* const);
    bool setMissileData(CigiModel* const, const int entity, const models::IMissile* const);
    bool setShipData(CigiModel* const, const int entity, const models::Ship* const);
-   bool setSpaceVehicleData(CigiModel* const, const int entity, const models::SpaceVehicle* const);
+   bool setSpaceVehicleData(CigiModel* const, const int entity, const models::ISpaceVehicle* const);
    bool setWeaponData(CigiModel* const, const int entity, const models::IWeapon* const);
 
    // creates a one shot task thread to process IG packets

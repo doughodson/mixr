@@ -21,7 +21,7 @@
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/Ship.hpp"
-#include "mixr/models/player/space/SpaceVehicle.hpp"
+#include "mixr/models/player/space/ISpaceVehicle.hpp"
 #include "mixr/models/system/IStoresMgr.hpp"
 
 #include "mixr/base/Identifier.hpp"
@@ -423,7 +423,7 @@ int CigiHost::updateModels()
                } else if (player->isMajorType(models::IPlayer::SHIP)) {
                   setShipData(model, entity, static_cast<const models::Ship*>(player));
                } else if (player->isMajorType(models::IPlayer::SPACE_VEHICLE)) {
-                  setSpaceVehicleData(model, entity, static_cast<const models::SpaceVehicle*>(player));
+                  setSpaceVehicleData(model, entity, static_cast<const models::ISpaceVehicle*>(player));
                } else if (player->isMajorType(models::IPlayer::LIFE_FORM)) {
                   setLifeFormData(model, entity, static_cast<const models::LifeForm*>(player));
                } else if (player->isMajorType(models::IPlayer::BUILDING)) {
@@ -1170,7 +1170,7 @@ bool CigiHost::setShipData(CigiModel* const m, const int entity, const models::S
 // setSpaceVehicleData()
 //  -- Sets a CigiEntityCtrlV3 structure to a space vheicle's state
 //------------------------------------------------------------------------------
-bool CigiHost::setSpaceVehicleData(CigiModel* const m, const int entity, const models::SpaceVehicle* const p)
+bool CigiHost::setSpaceVehicleData(CigiModel* const m, const int entity, const models::ISpaceVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {

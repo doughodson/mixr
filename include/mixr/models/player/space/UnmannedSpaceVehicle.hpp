@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_UnmannedSpaceVehicle_HPP__
 #define __mixr_models_common_UnmannedSpaceVehicle_HPP__
 
-#include "mixr/models/player/space/SpaceVehicle.hpp"
+#include "mixr/models/player/space/ISpaceVehicle.hpp"
 
 namespace mixr {
 namespace models {
@@ -11,9 +11,9 @@ namespace models {
 // Class: UnmannedSpaceVehicle
 // Factory name: UnmannedSpaceVehicle
 //------------------------------------------------------------------------------
-class UnmannedSpaceVehicle : public SpaceVehicle
+class UnmannedSpaceVehicle : public ISpaceVehicle
 {
-   DECLARE_SUBCLASS(UnmannedSpaceVehicle, SpaceVehicle)
+   DECLARE_SUBCLASS(UnmannedSpaceVehicle, ISpaceVehicle)
 
 public:
    UnmannedSpaceVehicle();

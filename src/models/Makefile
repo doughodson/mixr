@@ -42,8 +42,8 @@ OBJS =  \
 	player/ground/Tank.o \
 	player/ground/WheeledVehicle.o \
 	player/space/BoosterSpaceVehicle.o \
+	player/space/ISpaceVehicle.o \
 	player/space/MannedSpaceVehicle.o \
-	player/space/SpaceVehicle.o \
 	player/space/UnmannedSpaceVehicle.o \
 	player/weapon/Aam.o \
 	player/weapon/IMissile.o \

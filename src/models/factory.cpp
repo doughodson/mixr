@@ -41,7 +41,6 @@
 #include "mixr/models/player/ground/WheeledVehicle.hpp"
 #include "mixr/models/player/space/BoosterSpaceVehicle.hpp"
 #include "mixr/models/player/space/MannedSpaceVehicle.hpp"
-#include "mixr/models/player/space/SpaceVehicle.hpp"
 #include "mixr/models/player/space/UnmannedSpaceVehicle.hpp"
 #include "mixr/models/player/weapon/Aam.hpp"
 #include "mixr/models/player/weapon/Agm.hpp"
@@ -171,9 +170,6 @@ base::IObject* factory(const std::string& name)
    }
    else if ( name == Ship::getFactoryName() ) {
       obj = new Ship();
-   }
-   else if ( name == SpaceVehicle::getFactoryName() ) {
-      obj = new SpaceVehicle();
    }
 
    // Air Vehicles

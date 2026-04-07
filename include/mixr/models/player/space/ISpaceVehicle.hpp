@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_SpaceVehicle_HPP__
-#define __mixr_models_common_SpaceVehicle_HPP__
+#ifndef __mixr_models_common_ISpaceVehicle_HPP__
+#define __mixr_models_common_ISpaceVehicle_HPP__
 
 #include "mixr/models/player/IPlayer.hpp"
 
@@ -8,16 +8,15 @@ namespace mixr {
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class: SpaceVehicle
-// Description: Generic Space Vehicles
-// Factory name: SpaceVehicle
+// Class: ISpaceVehicle
+// Description: Interface for space vehicles
 //------------------------------------------------------------------------------
-class SpaceVehicle : public IPlayer
+class ISpaceVehicle : public IPlayer
 {
-   DECLARE_SUBCLASS(SpaceVehicle, IPlayer)
+   DECLARE_SUBCLASS(ISpaceVehicle, IPlayer)
 
 public:
-   SpaceVehicle();
+   ISpaceVehicle();
 
    // Vehicle data
    virtual double getFuelWt() const;     // wt: lbs

@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/space/SpaceVehicle.hpp"
+#include "mixr/models/player/space/ISpaceVehicle.hpp"
 #include "mixr/models/dynamics/ISpaceDynamics.hpp"
 
 #include "mixr/base/qty/lengths.hpp"
@@ -7,12 +7,12 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(SpaceVehicle, "SpaceVehicle")
-EMPTY_SLOTTABLE(SpaceVehicle)
-EMPTY_COPYDATA(SpaceVehicle)
-EMPTY_DELETEDATA(SpaceVehicle)
+IMPLEMENT_SUBCLASS(ISpaceVehicle, "ISpaceVehicle")
+EMPTY_SLOTTABLE(ISpaceVehicle)
+EMPTY_COPYDATA(ISpaceVehicle)
+EMPTY_DELETEDATA(ISpaceVehicle)
 
-SpaceVehicle::SpaceVehicle()
+ISpaceVehicle::ISpaceVehicle()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -24,7 +24,7 @@ SpaceVehicle::SpaceVehicle()
 //-----------------------------------------------------------------------------
 // getMajorType() -- Returns the player's major type
 //-----------------------------------------------------------------------------
-unsigned int SpaceVehicle::getMajorType() const
+unsigned int ISpaceVehicle::getMajorType() const
 {
    return SPACE_VEHICLE;
 }
@@ -33,7 +33,7 @@ unsigned int SpaceVehicle::getMajorType() const
 // Get Vehicle data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
 
-double SpaceVehicle::getFuelWt() const
+double ISpaceVehicle::getFuelWt() const
 {
    double value{};
    if (getDynamicsModel() != nullptr) {
@@ -42,7 +42,7 @@ double SpaceVehicle::getFuelWt() const
    return value;
 }
 
-double SpaceVehicle::getFuelWtMax() const
+double ISpaceVehicle::getFuelWtMax() const
 {
    double value{};
    if (getDynamicsModel() != nullptr) {
@@ -51,7 +51,7 @@ double SpaceVehicle::getFuelWtMax() const
    return value;
 }
 
-double SpaceVehicle::getGrossWeight() const
+double ISpaceVehicle::getGrossWeight() const
 {
    double value{};
    if (getDynamicsModel() != nullptr) {
@@ -64,7 +64,7 @@ double SpaceVehicle::getGrossWeight() const
 // setControlStickYawInput(yaw) -- Yaw inputs: normalized
 //          yaw:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setControlStickYawInput(const double yaw)
+bool ISpaceVehicle::setControlStickYawInput(const double yaw)
 {
    bool ok{};
    const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
@@ -78,7 +78,7 @@ bool SpaceVehicle::setControlStickYawInput(const double yaw)
 // setTranslateXInput(transx) -- Translate X inputs: normalized
 //          transx:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateXInput(const double transx)
+bool ISpaceVehicle::setTranslateXInput(const double transx)
 {
    bool ok{};
    const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
@@ -92,7 +92,7 @@ bool SpaceVehicle::setTranslateXInput(const double transx)
 // setTranslateYInput(transy) -- Translate Y inputs: normalized
 //          transy:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateYInput(const double transy)
+bool ISpaceVehicle::setTranslateYInput(const double transy)
 {
    bool ok{};
    const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
@@ -106,7 +106,7 @@ bool SpaceVehicle::setTranslateYInput(const double transy)
 // setTranslateZInput(transz) -- Translate Z inputs: normalized
 //          transz:  -1.0 -> maz left;  0.0 -> center;  1.0 -> maz right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateZInput(const double transz)
+bool ISpaceVehicle::setTranslateZInput(const double transz)
 {
    bool ok{};
    const auto model = dynamic_cast<ISpaceDynamics*>(getDynamicsModel());
@@ -119,7 +119,7 @@ bool SpaceVehicle::setTranslateZInput(const double transz)
 //------------------------------------------------------------------------------
 // Get engine data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
-int SpaceVehicle::getNumberOfEngines() const
+int ISpaceVehicle::getNumberOfEngines() const
 {
    int n{};
    if (getDynamicsModel() != nullptr) {
@@ -128,7 +128,7 @@ int SpaceVehicle::getNumberOfEngines() const
    return n;
 }
 
-int SpaceVehicle::getEngThrust(double* const data, const int max) const
+int ISpaceVehicle::getEngThrust(double* const data, const int max) const
 {
    int n{};
    if (getDynamicsModel() != nullptr) {
