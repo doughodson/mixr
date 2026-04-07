@@ -2,7 +2,7 @@
 #ifndef __mixr_models_common_Aam_HPP__
 #define __mixr_models_common_Aam_HPP__
 
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 
 namespace mixr {
 namespace models {
@@ -16,9 +16,9 @@ namespace models {
 //
 // Factory name: AamMissile
 //------------------------------------------------------------------------------
-class Aam : public Missile
+class Aam : public IMissile
 {
-    DECLARE_SUBCLASS(Aam, Missile)
+    DECLARE_SUBCLASS(Aam, IMissile)
 
 public:
     Aam();

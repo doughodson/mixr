@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 
 #include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/WorldModel.hpp"
@@ -16,9 +16,9 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Missile, "Missile")
+IMPLEMENT_SUBCLASS(IMissile, "IMissile")
 
-BEGIN_SLOTTABLE(Missile)
+BEGIN_SLOTTABLE(IMissile)
 "minSpeed",         //  1: Minimum Velocity           (m/s)
 "maxSpeed",         //  2: Maximum Velocity           (m/s)
 "speedMaxG",        //  3: Velocity we reach max G
@@ -27,9 +27,9 @@ BEGIN_SLOTTABLE(Missile)
 "cmdPitch",         //  6: Command Pitch              (rad)
 "cmdHeading",       //  7: Command Heading            (rad)
 "cmdSpeed",         //  8: Command speed              (m/s)
-END_SLOTTABLE(Missile)
+END_SLOTTABLE(IMissile)
 
-BEGIN_SLOT_MAP(Missile)
+BEGIN_SLOT_MAP(IMissile)
    ON_SLOT(1, setSlotVpMin, base::INumber)
    ON_SLOT(2, setSlotVpMax, base::INumber)
    ON_SLOT(3, setSlotVpMaxG, base::INumber)
@@ -40,14 +40,14 @@ BEGIN_SLOT_MAP(Missile)
    ON_SLOT(8, setSlotCmdVelocity, base::INumber)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Missile)
+BEGIN_EVENT_HANDLER(IMissile)
 END_EVENT_HANDLER()
 
-int Missile::getCategory() const               { return (MISSILE | GUIDED); }
-const char* Missile::getDescription() const    { return "AAM"; }
-const char* Missile::getNickname() const       { return "AAM"; }
+int IMissile::getCategory() const               { return (MISSILE | GUIDED); }
+const char* IMissile::getDescription() const    { return "AAM"; }
+const char* IMissile::getNickname() const       { return "AAM"; }
 
-Missile::Missile()
+IMissile::IMissile()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -69,7 +69,7 @@ Missile::Missile()
    setMaxAccel(50.0);
 }
 
-void Missile::copyData(const Missile& org, const bool)
+void IMissile::copyData(const IMissile& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -87,14 +87,14 @@ void Missile::copyData(const Missile& org, const bool)
    cmdVelocity = org.cmdVelocity;
 }
 
-void Missile::deleteData()
+void IMissile::deleteData()
 {
 }
 
 //------------------------------------------------------------------------------
 // reset() -- Reset vehicle dynamics
 //------------------------------------------------------------------------------
-void Missile::reset()
+void IMissile::reset()
 {
    BaseClass::reset();
 }
@@ -102,7 +102,7 @@ void Missile::reset()
 //------------------------------------------------------------------------------
 // atReleaseInit() -- Init weapon data at release
 //------------------------------------------------------------------------------
-void Missile::atReleaseInit()
+void IMissile::atReleaseInit()
 {
    // First the base class will setup the initial conditions
    BaseClass::atReleaseInit();
@@ -138,7 +138,7 @@ void Missile::atReleaseInit()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Missile::calculateVectors(const IPlayer* const tgt, const ITrack* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
+bool IMissile::calculateVectors(const IPlayer* const tgt, const ITrack* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (trk != nullptr) {
       //los = trk->getPosition();
@@ -166,7 +166,7 @@ bool Missile::calculateVectors(const IPlayer* const tgt, const ITrack* const trk
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Missile::setSlotVpMin(const base::INumber* const msg)
+bool IMissile::setSlotVpMin(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -176,7 +176,7 @@ bool Missile::setSlotVpMin(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMax(const base::INumber* const msg)
+bool IMissile::setSlotVpMax(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -186,7 +186,7 @@ bool Missile::setSlotVpMax(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMaxG(const base::INumber* const msg)
+bool IMissile::setSlotVpMaxG(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -196,7 +196,7 @@ bool Missile::setSlotVpMaxG(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxG(const base::INumber* const msg)
+bool IMissile::setSlotMaxG(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -206,7 +206,7 @@ bool Missile::setSlotMaxG(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxAccel(const base::INumber* const msg)
+bool IMissile::setSlotMaxAccel(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -216,7 +216,7 @@ bool Missile::setSlotMaxAccel(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdPitch(const base::INumber* const msg)
+bool IMissile::setSlotCmdPitch(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -226,7 +226,7 @@ bool Missile::setSlotCmdPitch(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdHeading(const base::INumber* const msg)
+bool IMissile::setSlotCmdHeading(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -236,7 +236,7 @@ bool Missile::setSlotCmdHeading(const base::INumber* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdVelocity(const base::INumber* const msg)
+bool IMissile::setSlotCmdVelocity(const base::INumber* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -248,7 +248,7 @@ bool Missile::setSlotCmdVelocity(const base::INumber* const msg)
 
 
 // setTargetPlayer() -- sets a pointer to the target player
-bool Missile::setTargetPlayer(IPlayer* const tgt, const bool pt)
+bool IMissile::setTargetPlayer(IPlayer* const tgt, const bool pt)
 {
    // if our tgt has changed, reset ground truth vals for weaponGuidance's fuzing logic
    if (tgt != nullptr && tgt != getTargetPlayer()) {
@@ -259,7 +259,7 @@ bool Missile::setTargetPlayer(IPlayer* const tgt, const bool pt)
 }
 
 // setTargetTrack() -- sets a pointer to the target track
-bool Missile::setTargetTrack(ITrack* const trk, const bool pt)
+bool IMissile::setTargetTrack(ITrack* const trk, const bool pt)
 {
    // if our track has changed, reset ground truth vals for weaponGuidance's fuzing logic
    if (trk != nullptr && trk != getTargetTrack()) {
@@ -272,7 +272,7 @@ bool Missile::setTargetTrack(ITrack* const trk, const bool pt)
 //------------------------------------------------------------------------------
 // weaponGuidance() -- default guidance; using Robot Aircraft (RAC) guidance
 //------------------------------------------------------------------------------
-void Missile::weaponGuidance(const double dt)
+void IMissile::weaponGuidance(const double dt)
 {
    // ---
    // Control velocity:  During burn time, accel to max velocity,
@@ -466,7 +466,7 @@ void Missile::weaponGuidance(const double dt)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default missile dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Missile::weaponDynamics(const double dt)
+void IMissile::weaponDynamics(const double dt)
 {
    static const double g = base::ETHG;              // Acceleration of Gravity
 
@@ -546,35 +546,35 @@ void Missile::weaponDynamics(const double dt)
 }
 
 // setVpMin() -- set min Vp
-bool Missile::setVpMin(const double v)
+bool IMissile::setVpMin(const double v)
 {
    vpMin =  v;
    return true;
 }
 
 // setVpMax() -- set max Vp
-bool Missile::setVpMax(const double v)
+bool IMissile::setVpMax(const double v)
 {
    vpMax =  v;
    return true;
 }
 
 // setVpMaxG() -- Set Vp with max G's
-bool Missile::setVpMaxG(const double v)
+bool IMissile::setVpMaxG(const double v)
 {
    vpMaxG =  v;
    return true;
 }
 
 // setMaxG() -- Set max G's (g)
-bool Missile::setMaxG(const double v)
+bool IMissile::setMaxG(const double v)
 {
    maxG = v;
    return true;
 }
 
 // setMaxAccel() -- Max acceleration (m/s/s)
-bool Missile::setMaxAccel(const double v)
+bool IMissile::setMaxAccel(const double v)
 {
    maxAccel =  v;
    return true;

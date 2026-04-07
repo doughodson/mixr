@@ -11,7 +11,7 @@
 
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/ground/GroundVehicle.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/player/Ship.hpp"
@@ -85,7 +85,7 @@ interop::INib* NetIO::createNewOutputNib(models::IPlayer* const player)
             baseEntity = new Aircraft();
             idx = AIRCRAFT_CLASS;
         }
-    } else if (player->isClassType(typeid(models::Missile))) {
+    } else if (player->isClassType(typeid(models::IMissile))) {
         if (isObjectClassRegistrationEnabled( MUNITION_CLASS )) {
             baseEntity = new Munition();
             idx = MUNITION_CLASS;

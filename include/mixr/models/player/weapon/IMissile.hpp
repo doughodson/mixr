@@ -1,6 +1,6 @@
 
-#ifndef __mixr_models_common_Missile_HPP__
-#define __mixr_models_common_Missile_HPP__
+#ifndef __mixr_models_common_IMissile_HPP__
+#define __mixr_models_common_IMissile_HPP__
 
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
@@ -11,10 +11,9 @@ class IPlayer;
 class ITrack;
 
 //------------------------------------------------------------------------------
-// Class: Missile
-// Description: Base class for missiles; with a simple, default missile model
+// Class: IMissile
+// Description: Interface class for missiles; with a simple, default missile model
 //
-// Factory name: Missile
 // Slots:
 //   minSpeed     <INumber>  ! Minimum Velocity (m/s)  (default: 0.0)
 //   maxSpeed     <INumber>  ! Maximum Velocity (m/s)  (default: 800.0)
@@ -26,12 +25,12 @@ class ITrack;
 //   cmdSpeed     <INumber>  ! Command speed (m/s) (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class Missile : public IWeapon
+class IMissile : public IWeapon
 {
-    DECLARE_SUBCLASS(Missile, IWeapon)
+    DECLARE_SUBCLASS(IMissile, IWeapon)
 
 public:
-    Missile();
+    IMissile();
 
     // get functions
     double getVpMin() const         { return vpMin; }

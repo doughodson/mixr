@@ -2,7 +2,6 @@
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/models/WorldModel.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/dynamics/IDynamics.hpp"
 #include "mixr/models/navigation/INavigation.hpp"

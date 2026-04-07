@@ -6,7 +6,7 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/ground/Artillery.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/SynchronizedState.hpp"
 
@@ -536,7 +536,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
                      const auto pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
-                        const auto msl = dynamic_cast<const models::Missile*>( pair->object() );
+                        const auto msl = dynamic_cast<const models::IMissile*>( pair->object() );
                         if (msl != nullptr) {
                            // Save the pointer to the missile, set the missile's change count to 1,
                            // and up the missile count

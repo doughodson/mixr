@@ -11,7 +11,7 @@
 #include "mixr/models/player/air/AirVehicle.hpp"
 #include "mixr/models/player/ground/GroundVehicle.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/system/IStoresMgr.hpp"
 
@@ -812,7 +812,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       unsigned int n {getAPartNumberAttachedNumMissiles()};
       for (unsigned int i = 0; i < n; i++) {
 
-         const models::Missile* msl {getAPartAttachedMissile(i+1)};
+         const models::IMissile* msl {getAPartAttachedMissile(i+1)};
 
          // Find the missile's entity type
          if (apartMslTypes[i] == nullptr) {

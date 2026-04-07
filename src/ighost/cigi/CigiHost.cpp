@@ -16,7 +16,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/Building.hpp"
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/IPlayer.hpp"
@@ -430,7 +430,7 @@ int CigiHost::updateModels()
                   setBuildingData(model, entity, static_cast<const models::Building*>(player));
                } else if (player->isMajorType(models::IPlayer::WEAPON)) {
                   const auto effect = dynamic_cast<const models::Effect*>(model->getPlayer());
-                  const auto msl = dynamic_cast<const models::Missile*>(model->getPlayer());
+                  const auto msl = dynamic_cast<const models::IMissile*>(model->getPlayer());
                   const auto wpn = dynamic_cast<const models::IWeapon*>(model->getPlayer());
                   if (effect != nullptr)     // Effects before general weapons (because effects are also weapons)
                      setEffectData(model, entity, effect);
@@ -760,7 +760,7 @@ bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const mod
             while (item != nullptr && apartNumMissiles == 0) {
                const auto pair = static_cast<const base::Pair*>(item->getValue());
                if (pair != nullptr) {
-                  const auto msl = dynamic_cast<const models::Missile*>( pair->object() );
+                  const auto msl = dynamic_cast<const models::IMissile*>( pair->object() );
                   if (msl != nullptr) apartNumMissiles++;
                }
                item = item->getNext();
@@ -988,7 +988,7 @@ bool CigiHost::setLifeFormData(CigiModel* const m, const int entity, const model
 //------------------------------------------------------------------------------
 // setMissileData() -- Sets a 'model_t' structure to a missile's state
 //------------------------------------------------------------------------------
-bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models::Missile* const p)
+bool CigiHost::setMissileData(CigiModel* const m, const int entity, const models::IMissile* const p)
 {
    // Make sure we have an entity control block, ...
    if (m->parentEC[iw] == nullptr) {

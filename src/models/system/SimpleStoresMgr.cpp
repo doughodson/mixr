@@ -5,7 +5,7 @@
 #include "mixr/models/player/effect/Decoy.hpp"
 #include "mixr/models/player/effect/Flare.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 
 #include "mixr/models/system/IExternalStore.hpp"
@@ -155,19 +155,19 @@ bool SimpleStoresMgr::isWeaponReleased() const
 // ---
 // Default function to get the next free missile in our stores (Pre-ref()'d)
 // ---
-Missile* SimpleStoresMgr::getNextMissile()
+IMissile* SimpleStoresMgr::getNextMissile()
 {
    return getNextMissileImp();
 }
 
-const Missile* SimpleStoresMgr::getNextMissile() const
+const IMissile* SimpleStoresMgr::getNextMissile() const
 {
    return (const_cast<SimpleStoresMgr*>(this))->getNextMissileImp();
 }
 
-Missile* SimpleStoresMgr::getNextMissileImp()
+IMissile* SimpleStoresMgr::getNextMissileImp()
 {
-   Missile* msl{};
+   IMissile* msl{};
 
    base::IPairStream* list{getWeapons()};
    if (list != nullptr) {
@@ -176,10 +176,10 @@ Missile* SimpleStoresMgr::getNextMissileImp()
       base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr && msl == nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
-         const auto p = dynamic_cast<Missile*>(pair->object());
+         const auto p = dynamic_cast<IMissile*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
-               msl = static_cast<Missile*>(p->getPointer());
+               msl = static_cast<IMissile*>(p->getPointer());
             }
          }
          item = item->getNext();
@@ -386,9 +386,9 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
 }
 
 // Get the next free missile of type 'missileType'
-Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileType)
+IMissile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileType)
 {
-   Missile* msl{};
+   IMissile* msl{};
    if (missileType != nullptr) {
 
       base::IPairStream* list{getWeapons()};
@@ -398,7 +398,7 @@ Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileTy
          base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr && msl == nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
-            const auto p = dynamic_cast<Missile*>(pair->object());
+            const auto p = dynamic_cast<IMissile*>(pair->object());
             if (p != nullptr && p->isInactive()) {
                // Ok, we have a missile, but is it the type we want?
                if (*p->getType_old() == *missileType) {
@@ -506,12 +506,12 @@ ITrack* SimpleStoresMgr::getNextTarget()
 //------------------------------------------------------------------------------
 // Release one Missile
 //------------------------------------------------------------------------------
-Missile* SimpleStoresMgr::releaseOneMissile()
+IMissile* SimpleStoresMgr::releaseOneMissile()
 {
-   Missile* flyout{};
-   Missile* wpn{getNextMissile()};
+   IMissile* flyout{};
+   IMissile* wpn{getNextMissile()};
    if (wpn != nullptr) {
-      flyout = static_cast<Missile*>( releaseWeapon(wpn) );
+      flyout = static_cast<IMissile*>( releaseWeapon(wpn) );
    }
    return flyout;
 }

@@ -12,7 +12,7 @@ class Chaff;
 class Decoy;
 class Flare;
 class Gun;
-class Missile;
+class IMissile;
 class Sam;
 class IWeapon;
 
@@ -91,8 +91,8 @@ public:
 
    // The following are simple weapon access functions; all return pref-ref()'d
    // pointers to a weapon or zero if no weapon is available.
-   virtual Missile* getNextMissile();                 // Simple get next missile function (Pre-ref()'d)
-   virtual const Missile* getNextMissile() const;     // Simple get next missile function (Pre-ref()'d) (const version)
+   virtual IMissile* getNextMissile();                // Simple get next missile function (Pre-ref()'d)
+   virtual const IMissile* getNextMissile() const;    // Simple get next missile function (Pre-ref()'d) (const version)
    virtual Sam* getNextSam();                         // Simple get next SAM function  (Pre-ref()'d)
    virtual const Sam* getNextSam() const;             // Simple get next SAM function  (Pre-ref()'d) (const version)
    virtual Bomb* getNextBomb();                       // Simple get next bomb function  (Pre-ref()'d)
@@ -106,7 +106,7 @@ public:
 
    // The following are simple release functions; all return pref-ref()'d
    // pointers to the flyout weapon or zero if no weapon was released.
-   virtual Missile* releaseOneMissile();              // Simple missile release function (Pre-ref()'d)
+   virtual IMissile* releaseOneMissile();             // Simple missile release function (Pre-ref()'d)
    virtual Sam* releaseOneSam();                      // Simple surface to air (SAM) missile release function (Pre-ref()'d)
    virtual Bomb* releaseOneBomb();                    // Simple bomb release function (Pre-ref()'d)
    virtual Chaff* releaseOneChaff();                  // Simple chaff bundle release function (Pre-ref()'d)

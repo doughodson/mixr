@@ -2,7 +2,7 @@
 #include "mixr/models/player/LifeForm.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/system/Gun.hpp"
@@ -98,12 +98,12 @@ void LifeForm::fire()
         if (getWorldModel() != nullptr) {
             if (weaponSel == LF_MISSILE) {
                 mgr->setGunSelected(false);
-                Missile* missile{mgr->getNextMissile()};
+                IMissile* missile{mgr->getNextMissile()};
                 if (missile != nullptr) {
                     missile->setInitPitch(pitchObj);
                     missile->setInitHeading(hdgObj);
                     missile->reset();
-                    Missile* msl{mgr->releaseOneMissile()};
+                    IMissile* msl{mgr->releaseOneMissile()};
                     if (msl != nullptr) {
                         if (tgtAquired && tgtPlayer != nullptr) msl->setTargetPlayer(tgtPlayer, true);
                     }

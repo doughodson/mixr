@@ -11,7 +11,7 @@
 
 namespace mixr {
 namespace base { class Identifier; }
-namespace models { class Missile; }
+namespace models { class IMissile; }
 namespace interop {
 
 //------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ public:
 
    // Articulated Part: Returns a pointer to the n'th attached missiles
    //                   [n: 1 .. number-of-missiles]
-   const models::Missile* getAPartAttachedMissile(const unsigned int n) const {
+   const models::IMissile* getAPartAttachedMissile(const unsigned int n) const {
       return (n >= 1 && n <= apartNumMissiles ? apartMsl[n-1] : 0);
    }
 
@@ -334,7 +334,7 @@ private:
    double apartBayDoor {};                // Articulated Part: bay door position (% [0% closed; 100% open] )
    double apartLnchrElev {};              // Articulated Part: Launcher elevation angle (radians)
 
-   std::array<const models::Missile*, MAX_AMSL> apartMsl{};  // Articulated Part: Attached missiles
+   std::array<const models::IMissile*, MAX_AMSL> apartMsl{}; // Articulated Part: Attached missiles
    std::array<unsigned int, MAX_AMSL> apartMslCnt{};         // Articulated Part: Attached missile change counts
    std::array<bool, MAX_AMSL> apartMslAttached{};            // Articulated Part: Missile attached (not launched) flag
    unsigned int apartNumMissiles{};                          // Articulated Part: Number of attached missiles

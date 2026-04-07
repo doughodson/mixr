@@ -26,7 +26,7 @@ namespace models {
 //    dragIndex      <INumber>     ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Bomb : public IWeapon
+class Bomb final: public IWeapon
 {
    DECLARE_SUBCLASS(Bomb, IWeapon)
 

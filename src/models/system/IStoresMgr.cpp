@@ -5,7 +5,7 @@
 #include "mixr/models/player/effect/Decoy.hpp"
 #include "mixr/models/player/effect/Flare.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 
 #include "mixr/models/system/IExternalStore.hpp"
@@ -253,8 +253,8 @@ bool IStoresMgr::setGunSelected(const bool flg)
 // Empty "simple" get and release functions (derived classes can define these as needed)
 //------------------------------------------------------------------------------
 
-Missile* IStoresMgr::getNextMissile()               { return nullptr; }
-const Missile* IStoresMgr::getNextMissile() const   { return nullptr; }
+IMissile* IStoresMgr::getNextMissile()              { return nullptr; }
+const IMissile* IStoresMgr::getNextMissile() const  { return nullptr; }
 Sam* IStoresMgr::getNextSam()                       { return nullptr; }
 const Sam* IStoresMgr::getNextSam() const           { return nullptr; }
 Bomb* IStoresMgr::getNextBomb()                     { return nullptr; }
@@ -266,7 +266,7 @@ const Flare* IStoresMgr::getNextFlare() const       { return nullptr; }
 Decoy* IStoresMgr::getNextDecoy()                   { return nullptr; }
 const Decoy* IStoresMgr::getNextDecoy() const       { return nullptr; }
 
-Missile* IStoresMgr::releaseOneMissile()   { return nullptr; }
+IMissile* IStoresMgr::releaseOneMissile()  { return nullptr; }
 Sam* IStoresMgr::releaseOneSam()           { return nullptr; }
 Bomb* IStoresMgr::releaseOneBomb()         { return nullptr; }
 Chaff* IStoresMgr::releaseOneChaff()       { return nullptr; }

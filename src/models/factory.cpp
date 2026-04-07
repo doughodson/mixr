@@ -50,7 +50,6 @@
 #include "mixr/models/player/weapon/Agm.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
 #include "mixr/models/player/weapon/Bullet.hpp"
-#include "mixr/models/player/weapon/Missile.hpp"
 #include "mixr/models/player/weapon/Sam.hpp"
 #include "mixr/models/player/Building.hpp"
 #include "mixr/models/player/LifeForm.hpp"
@@ -289,9 +288,6 @@ base::IObject* factory(const std::string& name)
    // Bombs and Missiles
    else if ( name == Bomb::getFactoryName() ) {
       obj = new Bomb();
-   }
-   else if ( name == Missile::getFactoryName() ) {
-      obj = new Missile();
    }
    else if ( name == Aam::getFactoryName() ) {
       obj = new Aam();

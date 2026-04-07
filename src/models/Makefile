@@ -46,11 +46,11 @@ OBJS =  \
 	player/space/SpaceVehicle.o \
 	player/space/UnmannedSpaceVehicle.o \
 	player/weapon/Aam.o \
+	player/weapon/IMissile.o \
 	player/weapon/IWeapon.o \
 	player/weapon/Agm.o \
 	player/weapon/Bomb.o \
 	player/weapon/Bullet.o \
-	player/weapon/Missile.o \
 	player/weapon/Sam.o \
 	player/Building.o \
 	player/LifeForm.o \

@@ -9,7 +9,7 @@ namespace base { class Boolean; class String; }
 namespace models {
 class IWeapon;
 class Bomb;
-class Missile;
+class IMissile;
 class ITrack;
 class Chaff;
 class Flare;
@@ -40,7 +40,7 @@ public:
    int getNumCurrentWeapons() const;                     // Number of weapons with current weapon ID (e.g. # MK84 bombs on the platform)
 
    // Get the first missile of type weaponType from our weapons list (Pre-ref()'d)
-   virtual Missile* getSpecificMissile(const base::String* const missileType);
+   virtual IMissile* getSpecificMissile(const base::String* const missileType);
 
    // Get the first bomb of type weaponType from our weapons list (Pre-ref()'d)
    virtual Bomb* getSpecificBomb(const base::String* const bombType);
@@ -59,8 +59,8 @@ public:
    IWeapon* getCurrentWeapon() override;
    const IWeapon* getCurrentWeapon() const override;
    bool isWeaponReleased() const override;
-   Missile* getNextMissile() override;
-   const Missile* getNextMissile() const override;
+   IMissile* getNextMissile() override;
+   const IMissile* getNextMissile() const override;
    Sam* getNextSam() override;
    const Sam* getNextSam() const override;
    Bomb* getNextBomb() override;
@@ -71,7 +71,7 @@ public:
    const Flare* getNextFlare() const override;
    Decoy* getNextDecoy() override;
    const Decoy* getNextDecoy() const override;
-   Missile* releaseOneMissile() override;
+   IMissile* releaseOneMissile() override;
    Sam* releaseOneSam() override;
    Bomb* releaseOneBomb() override;
    Chaff* releaseOneChaff() override;
@@ -84,7 +84,7 @@ protected:
    void process(const double dt) override;
 
 private:
-   Missile* getNextMissileImp();        // First available missile from our weapons list (Pre-ref()'d) (const version)
+   IMissile* getNextMissileImp();       // First available missile from our weapons list (Pre-ref()'d) (const version)
    Sam* getNextSamImp();                // First available SAM from our weapons list (Pre-ref()'d) (const version)
    Bomb* getNextBombImp();              // First available bomb from our weapons list (Pre-ref()'d) (const version)
    Chaff* getNextChaffImp();            // First available chaff bundle from our weapons list (Pre-ref()'d) (const version)

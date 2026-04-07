@@ -31,7 +31,7 @@ namespace mixr {
 namespace base { class Boolean; class Integer; }
 namespace models {
 class AirVehicle; class Building; class Effect; class GroundVehicle; class LifeForm;
-class Missile; class IPlayer; class Ship; class SpaceVehicle; class IWeapon;
+class IMissile; class IPlayer; class Ship; class SpaceVehicle; class IWeapon;
 }
 namespace ighost {
 namespace cigi {
@@ -193,7 +193,7 @@ private:
    bool setEffectData(CigiModel* const, const int entity, const models::Effect* const);
    bool setGndVehicleData(CigiModel* const, const int entity, const models::GroundVehicle* const);
    bool setLifeFormData(CigiModel* const, const int entity, const models::LifeForm* const);
-   bool setMissileData(CigiModel* const, const int entity, const models::Missile* const);
+   bool setMissileData(CigiModel* const, const int entity, const models::IMissile* const);
    bool setShipData(CigiModel* const, const int entity, const models::Ship* const);
    bool setSpaceVehicleData(CigiModel* const, const int entity, const models::SpaceVehicle* const);
    bool setWeaponData(CigiModel* const, const int entity, const models::IWeapon* const);

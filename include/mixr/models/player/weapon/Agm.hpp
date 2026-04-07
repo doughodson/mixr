@@ -2,7 +2,7 @@
 #ifndef __mixr_models_Agm_HPP__
 #define __mixr_models_Agm_HPP__
 
-#include "mixr/models/player/weapon/Missile.hpp"
+#include "mixr/models/player/weapon/IMissile.hpp"
 
 namespace mixr {
 namespace models {
@@ -16,9 +16,9 @@ namespace models {
 //
 // Factory name: AgmMissile
 //------------------------------------------------------------------------------
-class Agm : public Missile
+class Agm : public IMissile
 {
-    DECLARE_SUBCLASS(Agm, Missile)
+    DECLARE_SUBCLASS(Agm, IMissile)
 
 public:
     Agm();

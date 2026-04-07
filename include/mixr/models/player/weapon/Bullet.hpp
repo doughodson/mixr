@@ -18,7 +18,7 @@ namespace models {
 //
 // Factory name: Bullet
 //------------------------------------------------------------------------------
-class Bullet : public IWeapon
+class Bullet final: public IWeapon
 {
     DECLARE_SUBCLASS(Bullet, IWeapon)
 
