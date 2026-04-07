@@ -9,7 +9,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 
 #include "mixr/models/player/air/IAirVehicle.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
@@ -221,7 +221,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
    models::IPlayer* p {getPlayer()};
    if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
       const auto av = dynamic_cast<models::IAirVehicle*>(p);
-      const auto gv = dynamic_cast<models::GroundVehicle*>(p);
+      const auto gv = dynamic_cast<models::IGroundVehicle*>(p);
 
       // ---
       // Loop for all articulation parameters ...

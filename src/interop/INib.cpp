@@ -516,7 +516,7 @@ bool INib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    if ( player != nullptr && player->isMajorType(models::IPlayer::GROUND_VEHICLE) ) {
 
-      const models::GroundVehicle* gv{static_cast<const models::GroundVehicle*>(player)};
+      const models::IGroundVehicle* gv{static_cast<const models::IGroundVehicle*>(player)};
 
       // (5-a) Send launcher elevation angle and for an attached missile
       //       (on SamVehicles and Artillery only)

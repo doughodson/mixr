@@ -8,7 +8,7 @@
 #include "mixr/simulation/INib.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"
@@ -87,7 +87,7 @@ void CigiModel::setPlayer(models::IPlayer* const p)
 // initialize the model
 void CigiModel::initialize(models::IPlayer* const p, const Player2CigiMap** const igModelTable, const int numModels)
 {
-   isGroundPlayer = p->isClassType(typeid(models::GroundVehicle));
+   isGroundPlayer = p->isClassType(typeid(models::IGroundVehicle));
 
    setPlayer(p);
    state = CigiModel::State::ACTIVE;

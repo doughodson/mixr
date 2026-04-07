@@ -10,7 +10,7 @@
 #include "mixr/interop/hla/Ambassador.hpp"
 
 #include "mixr/models/player/air/IAirVehicle.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 #include "mixr/models/player/weapon/IMissile.hpp"
 #include "mixr/models/player/LifeForm.hpp"
 #include "mixr/models/player/IPlayer.hpp"
@@ -95,7 +95,7 @@ interop::INib* NetIO::createNewOutputNib(models::IPlayer* const player)
             baseEntity = new Human();
             idx = HUMAN_CLASS;
         }
-    } else if (player->isClassType(typeid(models::GroundVehicle))) {
+    } else if (player->isClassType(typeid(models::IGroundVehicle))) {
         if (isObjectClassRegistrationEnabled( GROUND_VEHICLE_CLASS )) {
             baseEntity = new GroundVehicle();
             idx = GROUND_VEHICLE_CLASS;

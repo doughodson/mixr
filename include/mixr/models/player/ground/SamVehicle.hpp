@@ -2,7 +2,7 @@
 #ifndef __mixr_models_SamVehicle_HPP__
 #define __mixr_models_SamVehicle_HPP__
 
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 
 namespace mixr {
 namespace base { class ILength; }
@@ -10,9 +10,11 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: SamVehicle
-// Description: Sam vehicle (TEL, TELAR, etc)
+//
+// Description: Concrete sam vehicle (TEL, TELAR, etc)
 //
 // Factory name: SamVehicle
+//
 // Slots:
 //    minLaunchRange    <base::Length>     ! Min launch range (base::Length)
 //                                         ! (default: DEFAULT_MIN_LAUNCH_RANGE)
@@ -20,9 +22,9 @@ namespace models {
 //                                         ! (default: DEFAULT_MAX_LAUNCH_RANGE)
 //
 //------------------------------------------------------------------------------
-class SamVehicle : public GroundVehicle
+class SamVehicle : public IGroundVehicle
 {
-   DECLARE_SUBCLASS(SamVehicle, GroundVehicle)
+   DECLARE_SUBCLASS(SamVehicle, IGroundVehicle)
 
 public:
    SamVehicle();

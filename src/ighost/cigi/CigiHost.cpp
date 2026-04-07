@@ -12,7 +12,7 @@
 #include "mixr/models/player/effect/Decoy.hpp"
 #include "mixr/models/player/effect/Effect.hpp"
 #include "mixr/models/player/effect/Flare.hpp"
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
 #include "mixr/models/player/weapon/Bomb.hpp"
@@ -419,7 +419,7 @@ int CigiHost::updateModels()
                if (player->isMajorType(models::IPlayer::AIR_VEHICLE)) {
                   setAirVehicleData(model, entity, static_cast<const models::IAirVehicle*>(player));
                } else if (player->isMajorType(models::IPlayer::GROUND_VEHICLE)) {
-                  setGndVehicleData(model, entity, static_cast<const models::GroundVehicle*>(player));
+                  setGndVehicleData(model, entity, static_cast<const models::IGroundVehicle*>(player));
                } else if (player->isMajorType(models::IPlayer::SHIP)) {
                   setShipData(model, entity, static_cast<const models::Ship*>(player));
                } else if (player->isMajorType(models::IPlayer::SPACE_VEHICLE)) {
@@ -635,7 +635,7 @@ bool CigiHost::setBuildingData(CigiModel* const m, const int entity, const model
 }
 
 // sets a 'model_t' structure to a ground vheicle's state
-bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const models::GroundVehicle* const p)
+bool CigiHost::setGndVehicleData(CigiModel* const m, const int entity, const models::IGroundVehicle* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {

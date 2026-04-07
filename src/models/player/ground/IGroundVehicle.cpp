@@ -1,5 +1,5 @@
 
-#include "mixr/models/player/ground/GroundVehicle.hpp"
+#include "mixr/models/player/ground/IGroundVehicle.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
@@ -13,28 +13,28 @@
 namespace mixr {
 namespace models {
 
-IMPLEMENT_SUBCLASS(GroundVehicle, "GroundVehicle")
-EMPTY_DELETEDATA(GroundVehicle)
+IMPLEMENT_SUBCLASS(IGroundVehicle, "IGroundVehicle")
+EMPTY_DELETEDATA(IGroundVehicle)
 
 static const double DEFAULT_LAUNCHER_UP_ANGLE   {static_cast<double>(base::PI/2.0)};  // Default max launcher angle (rad)
 static const double DEFAULT_LAUNCHER_DOWN_ANGLE {0.0};                                // Default min launcher angle (rad)
 static const double DEFAULT_LAUNCHER_MOVE_TIME  {10.0};                               // Default max launcher movement time (sec)
 
-BEGIN_SLOTTABLE(GroundVehicle)
+BEGIN_SLOTTABLE(IGroundVehicle)
     "commandedPosition",      // 1: Launcher's init commanded position [ "up" "down" ] (base::Identifier)
     "launcherDownAngle",      // 2: Min (down) Launcher angle (base::Angle)
     "launcherUpAngle",        // 3: Max (up) Launcher angle (base::Angle)
     "launcherMoveTime",       // 4: Max time to move between 'down' and 'up' positions (base::Time)
-END_SLOTTABLE(GroundVehicle)
+END_SLOTTABLE(IGroundVehicle)
 
-BEGIN_SLOT_MAP(GroundVehicle)
+BEGIN_SLOT_MAP(IGroundVehicle)
     ON_SLOT(1, setSlotCommandedPosition, base::Identifier)
     ON_SLOT(2, setSlotLauncherDownAngle, base::IAngle)
     ON_SLOT(3, setSlotLauncherUpAngle,   base::IAngle)
     ON_SLOT(4, setSlotLauncherMoveTime,  base::ITime)
 END_SLOT_MAP()
 
-GroundVehicle::GroundVehicle()
+IGroundVehicle::IGroundVehicle()
 {
    STANDARD_CONSTRUCTOR()
    static base::String generic("GenericGroundVehicle");
@@ -48,7 +48,7 @@ GroundVehicle::GroundVehicle()
    setTerrainOffset(1.5);      // default offset from terrain to CG
 }
 
-void GroundVehicle::copyData(const GroundVehicle& org, const bool)
+void IGroundVehicle::copyData(const IGroundVehicle& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -64,7 +64,7 @@ void GroundVehicle::copyData(const GroundVehicle& org, const bool)
 //-----------------------------------------------------------------------------
 // getMajorType() -- Returns the player's major type
 //-----------------------------------------------------------------------------
-unsigned int GroundVehicle::getMajorType() const
+unsigned int IGroundVehicle::getMajorType() const
 {
     return GROUND_VEHICLE;
 }
@@ -72,7 +72,7 @@ unsigned int GroundVehicle::getMajorType() const
 //------------------------------------------------------------------------------
 // Reset()
 //------------------------------------------------------------------------------
-void GroundVehicle::reset()
+void IGroundVehicle::reset()
 {
    BaseClass::reset();
 
@@ -96,7 +96,7 @@ void GroundVehicle::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- update vehicle dynamics
 //------------------------------------------------------------------------------
-void GroundVehicle::dynamics(const double dt)
+void IGroundVehicle::dynamics(const double dt)
 {
    BaseClass::dynamics(dt);
    launcherDynamics(dt);
@@ -105,7 +105,7 @@ void GroundVehicle::dynamics(const double dt)
 //------------------------------------------------------------------------------
 // Launcher dynamics -- moves launcher to its commanded position
 //------------------------------------------------------------------------------
-void GroundVehicle::launcherDynamics(const double dt)
+void IGroundVehicle::launcherDynamics(const double dt)
 {
    if (lnchrMoveTime > 0 && cmdLnchrPos != NONE) {
 
@@ -134,35 +134,35 @@ void GroundVehicle::launcherDynamics(const double dt)
 //------------------------------------------------------------------------------
 // Access functions
 //------------------------------------------------------------------------------
-double GroundVehicle::getGrossWeight() const
+double IGroundVehicle::getGrossWeight() const
 {
     return 0.0;
 }
 
-double GroundVehicle::getFuelWt() const
+double IGroundVehicle::getFuelWt() const
 {
     return 0.0;
 }
 
-double GroundVehicle::getFuelWtMax() const
+double IGroundVehicle::getFuelWtMax() const
 {
     return 0.0;
 }
 
 // Launcher position (rad)
-double GroundVehicle::getLauncherPosition() const
+double IGroundVehicle::getLauncherPosition() const
 {
    return lnchrAngle;
 }
 
 // Launcher rate (rad/sec)
-double GroundVehicle::getLauncherRate() const
+double IGroundVehicle::getLauncherRate() const
 {
    return lnchrRate;
 }
 
 // Returns the launcher's command position
-GroundVehicle::LauncherCommand GroundVehicle::getLauncherCommand() const
+IGroundVehicle::LauncherCommand IGroundVehicle::getLauncherCommand() const
 {
    return cmdLnchrPos;
 }
@@ -172,14 +172,14 @@ GroundVehicle::LauncherCommand GroundVehicle::getLauncherCommand() const
 // Set functions
 //------------------------------------------------------------------------------
 
-bool GroundVehicle::commandLauncher(const LauncherCommand cmd)
+bool IGroundVehicle::commandLauncher(const LauncherCommand cmd)
 {
    cmdLnchrPos = cmd;
    return true;
 }
 
 // Sets the launcher elevation angle (rad), and removes the old position command
-bool GroundVehicle::setLauncherPosition(const double rad)
+bool IGroundVehicle::setLauncherPosition(const double rad)
 {
    lnchrAngle = rad;
    lnchrRate = 0.0;
@@ -192,7 +192,7 @@ bool GroundVehicle::setLauncherPosition(const double rad)
 //------------------------------------------------------------------------------
 
 // commandedPosition: Launcher's init commanded position [ "up" "down" ] (base::Identifier)
-bool GroundVehicle::setSlotCommandedPosition(const base::Identifier* const msg)
+bool IGroundVehicle::setSlotCommandedPosition(const base::Identifier* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -210,7 +210,7 @@ bool GroundVehicle::setSlotCommandedPosition(const base::Identifier* const msg)
 }
 
 // launcherDownAngle: Min (down) Launcher angle (base::Angle)
-bool GroundVehicle::setSlotLauncherDownAngle(const base::IAngle* const msg)
+bool IGroundVehicle::setSlotLauncherDownAngle(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -221,7 +221,7 @@ bool GroundVehicle::setSlotLauncherDownAngle(const base::IAngle* const msg)
 }
 
 // launcherUpAngle: Max (up) Launcher angle (base::Angle)
-bool GroundVehicle::setSlotLauncherUpAngle(const base::IAngle* const msg)
+bool IGroundVehicle::setSlotLauncherUpAngle(const base::IAngle* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -232,7 +232,7 @@ bool GroundVehicle::setSlotLauncherUpAngle(const base::IAngle* const msg)
 }
 
 // launcherMoveTime: Max time to move between 'down' and 'up' positions (base::Time)
-bool GroundVehicle::setSlotLauncherMoveTime(const base::ITime* const x)
+bool IGroundVehicle::setSlotLauncherMoveTime(const base::ITime* const x)
 {
    bool ok{};
    if (x != nullptr) {

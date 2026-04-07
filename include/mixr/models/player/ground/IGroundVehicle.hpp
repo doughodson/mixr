@@ -1,6 +1,5 @@
-
-#ifndef __mixr_models_common_GroundVehicle_HPP__
-#define __mixr_models_common_GroundVehicle_HPP__
+#ifndef __mixr_models_common_IGroundVehicle_HPP__
+#define __mixr_models_common_IGroundVehicle_HPP__
 
 #include "mixr/models/player/IPlayer.hpp"
 
@@ -9,9 +8,10 @@ namespace base { class IAngle; class Identifier; class ITime; }
 namespace models {
 
 //------------------------------------------------------------------------------
-// Class GroundVehicle
+// Class: IGroundVehicle
 //
-// Factory name: GroundVehicle
+// Description: Interface for all ground vehicles
+//
 // Slots:
 //    commandedPosition <Identifier>     ! Launcher's init commanded position [UP, DOWN, NONE] (default: NONE)
 //    launcherDownAngle <Angle>          ! Min (down) Launcher angle (default: 0.0)
@@ -24,15 +24,15 @@ namespace models {
 //   (2) This launcher is a temp solution -- this will be removed.
 //
 //------------------------------------------------------------------------------
-class GroundVehicle : public IPlayer
+class IGroundVehicle : public IPlayer
 {
-   DECLARE_SUBCLASS(GroundVehicle, IPlayer)
+   DECLARE_SUBCLASS(IGroundVehicle, IPlayer)
 
 public:
    enum LauncherCommand { NONE, DOWN, UP };
 
 public:
-   GroundVehicle();
+   IGroundVehicle();
 
    double getGrossWeight() const override;             // wt: lbs
 
