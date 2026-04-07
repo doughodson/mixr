@@ -1,6 +1,5 @@
 
 #include "mixr/base/linearsystem/FirstOrderTf.hpp"
-#include <iostream>
 
 namespace mixr {
 namespace base {
@@ -13,6 +12,12 @@ FirstOrderTf::FirstOrderTf()
 {
    STANDARD_CONSTRUCTOR()
 }
+
+void FirstOrderTf::copyData(const FirstOrderTf& org, const bool)
+{
+    BaseClass::copyData(org);
+}
+
 
 }
 }
