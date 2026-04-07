@@ -21,15 +21,16 @@ OBJS =  \
 	linearsystem/FirstOrderTf.o \
 	linearsystem/IDiffEquation.o \
 	linearsystem/IFirstOrderTf.o \
+	linearsystem/ILimitFunc.o \
+	linearsystem/IScalerFunc.o \
+	linearsystem/ISecondOrderTf.o \
 	linearsystem/LagFilter.o \
 	linearsystem/Limit.o \
 	linearsystem/Limit01.o \
 	linearsystem/Limit11.o \
-	linearsystem/ILimitFunc.o \
 	linearsystem/LowpassFilter.o \
 	linearsystem/SaH.o \
-	linearsystem/IScalerFunc.o \
-	linearsystem/ISecondOrderTf.o \
+	linearsystem/SecondOrderTf.o \
 	linearsystem/Sz1.o \
 	linearsystem/Sz2.o \
 	network/INetHandler.o \
