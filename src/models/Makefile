@@ -124,6 +124,7 @@ OBJS =  \
 	Image.o \
 	IrQueryMsg.o \
 	ISensorMsg.o \
+	IWorldModel.o \
 	Message.o \
 	MultiActorAgent.o \
 	RfEmission.o \

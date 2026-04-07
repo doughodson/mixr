@@ -113,7 +113,6 @@
 // misc
 #include "mixr/models/SimAgent.hpp"
 #include "mixr/models/MultiActorAgent.hpp"
-
 #include "mixr/models/TargetData.hpp"
 
 #include <string>
