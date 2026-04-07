@@ -43,7 +43,7 @@ namespace models {
 //
 //    velocity         <INumber>        ! Impact velocity (ft/sec) (default: 0)
 //------------------------------------------------------------------------------
-class TargetData : public base::IObject
+class TargetData final: public base::IObject
 {
    DECLARE_SUBCLASS(TargetData, base::IObject)
 

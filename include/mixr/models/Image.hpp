@@ -12,7 +12,7 @@ namespace models {
 // Factory name: SarImage
 // Description: SAR image structure
 //------------------------------------------------------------------------------
-class Image : public base::IObject
+class Image final: public base::IObject
 {
     DECLARE_SUBCLASS(Image, base::IObject)
 

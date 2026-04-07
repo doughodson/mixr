@@ -23,7 +23,7 @@ class IPlayer;
 // Factory name: RfTrack
 // Description: Generic R/F Target Track (onboard sensors)
 //------------------------------------------------------------------------------
-class RfTrack : public ITrack
+class RfTrack final: public ITrack
 {
    DECLARE_SUBCLASS(RfTrack, ITrack)
 

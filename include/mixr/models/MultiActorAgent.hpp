@@ -20,7 +20,7 @@ class WorldModel;
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
 //
-// Description: Generic agent class to control a list of actors, each specified with their own behavior
+// Description: Concrete agent class to control a list of actors, each specified with their own behavior
 //    the only reason to use this class is if there is state shared between multiple actors
 //    (if there is not shared state, just use a list of standard Agent instances)
 //
@@ -32,7 +32,7 @@ class WorldModel;
 //    state       <State>           ! state
 //    agentList   <IPairStream>     ! behavior pairstream
 //------------------------------------------------------------------------------
-class MultiActorAgent : public base::IComponent
+class MultiActorAgent final: public base::IComponent
 {
    DECLARE_SUBCLASS(MultiActorAgent, base::IComponent)
 

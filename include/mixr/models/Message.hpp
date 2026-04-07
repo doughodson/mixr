@@ -10,9 +10,9 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: Message
-// Description: Base message class
+// Description: Concrete message class
 //----------------------------------------------------------------------------------
-class Message : public base::IObject
+class Message final: public base::IObject
 {
    DECLARE_SUBCLASS(Message, base::IObject)
 

@@ -80,7 +80,7 @@ class IAtmosphere;
 //    this object, environments and other components.
 //
 //------------------------------------------------------------------------------
-class WorldModel : public simulation::ISimulation
+class WorldModel final: public simulation::ISimulation
 {
     DECLARE_SUBCLASS(WorldModel, simulation::ISimulation)
 

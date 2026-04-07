@@ -12,7 +12,7 @@ namespace models {
 //
 // Description: General designator (e.g., laser)
 //------------------------------------------------------------------------------
-class Designator : public base::IObject
+class Designator final: public base::IObject
 {
     DECLARE_SUBCLASS(Designator, base::IObject)
 

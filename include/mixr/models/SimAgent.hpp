@@ -25,7 +25,7 @@ class WorldModel;
 //    actorPlayerName      <String>    ! The agent's actor - playerName
 //    actorComponentName   <String>    ! The agent's actor - componentName
 //------------------------------------------------------------------------------
-class SimAgent : public base::ubf::Agent
+class SimAgent final: public base::ubf::Agent
 {
    DECLARE_SUBCLASS(SimAgent, base::ubf::Agent)
 public:
