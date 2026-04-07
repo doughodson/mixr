@@ -18,17 +18,18 @@ OBJS =  \
 	concepts/linkage/IIoHandler.o \
 	edl/EdlParser.o \
 	edl/EdlScanner.o \
-	linearsystem/IDiffEquation.o \
 	linearsystem/FirstOrderTf.o \
+	linearsystem/IDiffEquation.o \
+	linearsystem/IFirstOrderTf.o \
 	linearsystem/LagFilter.o \
 	linearsystem/Limit.o \
 	linearsystem/Limit01.o \
 	linearsystem/Limit11.o \
-	linearsystem/LimitFunc.o \
+	linearsystem/ILimitFunc.o \
 	linearsystem/LowpassFilter.o \
 	linearsystem/SaH.o \
 	linearsystem/IScalerFunc.o \
-	linearsystem/SecondOrderTf.o \
+	linearsystem/ISecondOrderTf.o \
 	linearsystem/Sz1.o \
 	linearsystem/Sz2.o \
 	network/INetHandler.o \

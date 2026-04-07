@@ -23,7 +23,7 @@ class Integer;
 //    rate  <Integer>    Sample rate Hz
 //
 //------------------------------------------------------------------------------
-class SaH : public IScalerFunc
+class SaH final: public IScalerFunc
 {
     DECLARE_SUBCLASS(SaH, IScalerFunc)
 

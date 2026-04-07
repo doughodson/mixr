@@ -27,7 +27,6 @@
 #include "mixr/base/linearsystem/Limit.hpp"
 #include "mixr/base/linearsystem/Limit01.hpp"
 #include "mixr/base/linearsystem/Limit11.hpp"
-#include "mixr/base/linearsystem/LimitFunc.hpp"
 #include "mixr/base/linearsystem/LowpassFilter.hpp"
 #include "mixr/base/linearsystem/SaH.hpp"
 #include "mixr/base/linearsystem/SecondOrderTf.hpp"
@@ -171,9 +170,6 @@ IObject* factory(const std::string& name)
     }
     else if ( name == Limit11::getFactoryName() ) {
         obj = new Limit11();
-    }
-    else if ( name == LimitFunc::getFactoryName() ) {
-        obj = new LimitFunc();
     }
     else if ( name == LowpassFilter::getFactoryName() ) {
         obj = new LowpassFilter();

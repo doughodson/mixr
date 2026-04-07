@@ -28,7 +28,7 @@ LowpassFilter::LowpassFilter()
 }
 
 LowpassFilter::LowpassFilter(const unsigned int rate, const double w)
-                        : FirstOrderTf(rate, 0.0f, w, 1.0f, w)
+                        : IFirstOrderTf(rate, 0.0f, w, 1.0f, w)
 {
    STANDARD_CONSTRUCTOR()
    wc = w;

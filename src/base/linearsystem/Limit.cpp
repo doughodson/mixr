@@ -25,7 +25,7 @@ Limit::Limit()
    STANDARD_CONSTRUCTOR()
 }
 
-Limit::Limit(const double ll, const double uu) : LimitFunc(ll,uu)
+Limit::Limit(const double ll, const double uu) : ILimitFunc(ll,uu)
 {
    STANDARD_CONSTRUCTOR()
 }

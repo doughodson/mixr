@@ -1,22 +1,22 @@
 
-#include "mixr/base/linearsystem/LimitFunc.hpp"
+#include "mixr/base/linearsystem/ILimitFunc.hpp"
 #include <iostream>
 
 namespace mixr {
 namespace base {
 
-IMPLEMENT_SUBCLASS(LimitFunc, "LimitFunc")
-EMPTY_SLOTTABLE(LimitFunc)
-EMPTY_DELETEDATA(LimitFunc)
+IMPLEMENT_SUBCLASS(ILimitFunc, "ILimitFunc")
+EMPTY_SLOTTABLE(ILimitFunc)
+EMPTY_DELETEDATA(ILimitFunc)
 
-LimitFunc::LimitFunc()
+ILimitFunc::ILimitFunc()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-LimitFunc::LimitFunc(const double ll, const double uu) : IScalerFunc()
+ILimitFunc::ILimitFunc(const double ll, const double uu) : IScalerFunc()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -28,13 +28,13 @@ LimitFunc::LimitFunc(const double ll, const double uu) : IScalerFunc()
    initialize();
 }
 
-void LimitFunc::initData()
+void ILimitFunc::initData()
 {
    allocateMemory(ORDER);
    clearMemory();
 }
 
-void LimitFunc::copyData(const LimitFunc& org, const bool cc)
+void ILimitFunc::copyData(const ILimitFunc& org, const bool cc)
 {
    if (cc) {
       // allocate memory before calling BaseClass::copyData()
@@ -52,7 +52,7 @@ void LimitFunc::copyData(const LimitFunc& org, const bool cc)
 //------------------------------------------------------------------------------
 // isValid() -- is this a valid List
 //------------------------------------------------------------------------------
-bool LimitFunc::isValid() const
+bool ILimitFunc::isValid() const
 {
    // Valid if we have a master rate and a sample rate
    bool valid {(n == ORDER && lower <= upper)};
@@ -63,7 +63,7 @@ bool LimitFunc::isValid() const
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-double LimitFunc::g(const double xn)
+double ILimitFunc::g(const double xn)
 {
    if (isValid()) {
 
@@ -88,7 +88,7 @@ double LimitFunc::g(const double xn)
 //------------------------------------------------------------------------------
 // initialize the system
 //------------------------------------------------------------------------------
-void LimitFunc::initialize()
+void ILimitFunc::initialize()
 {
    BaseClass::initialize();
 
@@ -103,14 +103,14 @@ void LimitFunc::initialize()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LimitFunc::setLowerLimit(const double v)
+bool ILimitFunc::setLowerLimit(const double v)
 {
    lower = v;
    initialize();
    return true;
 }
 
-bool LimitFunc::setUpperLimit(const double v)
+bool ILimitFunc::setUpperLimit(const double v)
 {
    upper = v;
    initialize();

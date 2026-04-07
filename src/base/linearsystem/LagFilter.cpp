@@ -25,7 +25,7 @@ LagFilter::LagFilter()
 }
 
 LagFilter::LagFilter(const unsigned int rate, const double t)
-                        : FirstOrderTf(rate, 0.0f, 1.0f, t, 1.0f)
+                        : IFirstOrderTf(rate, 0.0f, 1.0f, t, 1.0f)
 {
    STANDARD_CONSTRUCTOR()
 

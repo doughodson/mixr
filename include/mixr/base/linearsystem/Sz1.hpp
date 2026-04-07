@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_Sz1_HPP__
 #define __mixr_linearsystem_Sz1_HPP__
 
-#include "mixr/base/linearsystem/FirstOrderTf.hpp"
+#include "mixr/base/linearsystem/IFirstOrderTf.hpp"
 
 namespace mixr {
 namespace base {
@@ -10,7 +10,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class: Sz1
 //
-// Description: Models a first order continuous transfer function (see FirstOrderTf)
+// Description: Models a first order continuous transfer function (see IFirstOrderTf)
 //
 // Transfer function:
 //       N1*s + N2
@@ -32,9 +32,9 @@ namespace base {
 //    d1    <Number>     Coefficient D2 (default: 0)
 //
 //------------------------------------------------------------------------------
-class Sz1 : public FirstOrderTf
+class Sz1 final: public IFirstOrderTf
 {
-    DECLARE_SUBCLASS(Sz1, FirstOrderTf)
+    DECLARE_SUBCLASS(Sz1, IFirstOrderTf)
 
 public:
    Sz1();

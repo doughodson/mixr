@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_LowpassFilter_HPP__
 #define __mixr_linearsystem_LowpassFilter_HPP__
 
-#include "mixr/base/linearsystem/FirstOrderTf.hpp"
+#include "mixr/base/linearsystem/IFirstOrderTf.hpp"
 
 namespace mixr {
 namespace base {
@@ -26,9 +26,9 @@ class INumber;
 //    wc    <Number>     Cutoff frequency (radian/sec)
 //
 //------------------------------------------------------------------------------
-class LowpassFilter : public FirstOrderTf
+class LowpassFilter : public IFirstOrderTf
 {
-   DECLARE_SUBCLASS(LowpassFilter, FirstOrderTf)
+   DECLARE_SUBCLASS(LowpassFilter, IFirstOrderTf)
 
 public:
    LowpassFilter();

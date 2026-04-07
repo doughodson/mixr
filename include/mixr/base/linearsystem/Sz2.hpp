@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_Sz2_HPP__
 #define __mixr_linearsystem_Sz2_HPP__
 
-#include "mixr/base/linearsystem/SecondOrderTf.hpp"
+#include "mixr/base/linearsystem/ISecondOrderTf.hpp"
 
 namespace mixr {
 namespace base {
@@ -40,9 +40,9 @@ namespace base {
 //    d3    <Number>     Coefficient D3 (default: 0)
 //
 //------------------------------------------------------------------------------
-class Sz2 : public SecondOrderTf
+class Sz2 final: public ISecondOrderTf
 {
-    DECLARE_SUBCLASS(Sz2, SecondOrderTf)
+    DECLARE_SUBCLASS(Sz2, ISecondOrderTf)
 
 public:
    Sz2();

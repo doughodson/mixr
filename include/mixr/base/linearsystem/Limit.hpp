@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_Limit_HPP__
 #define __mixr_linearsystem_Limit_HPP__
 
-#include "mixr/base/linearsystem/LimitFunc.hpp"
+#include "mixr/base/linearsystem/ILimitFunc.hpp"
 
 namespace mixr {
 namespace base {
@@ -19,9 +19,9 @@ class INumber;
 //    upper  <Number>   Upper boundary (default:  1) (must be greater than the lower)
 //
 //------------------------------------------------------------------------------
-class Limit : public LimitFunc
+class Limit final: public ILimitFunc
 {
-   DECLARE_SUBCLASS(Limit, LimitFunc)
+   DECLARE_SUBCLASS(Limit, ILimitFunc)
 
 public:
    Limit();

@@ -2,7 +2,7 @@
 #ifndef __mixr_linearsystem_LagFilter_HPP__
 #define __mixr_linearsystem_LagFilter_HPP__
 
-#include "mixr/base/linearsystem/FirstOrderTf.hpp"
+#include "mixr/base/linearsystem/IFirstOrderTf.hpp"
 
 namespace mixr {
 namespace base {
@@ -29,9 +29,9 @@ class ITime;
 //
 //
 //------------------------------------------------------------------------------
-class LagFilter : public FirstOrderTf
+class LagFilter final: public IFirstOrderTf
 {
-   DECLARE_SUBCLASS(LagFilter, FirstOrderTf)
+   DECLARE_SUBCLASS(LagFilter, IFirstOrderTf)
 
 public:
    LagFilter();

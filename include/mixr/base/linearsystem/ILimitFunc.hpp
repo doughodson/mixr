@@ -1,6 +1,6 @@
 
-#ifndef __mixr_linearsystem_LimitFunc_HPP__
-#define __mixr_linearsystem_LimitFunc_HPP__
+#ifndef __mixr_linearsystem_ILimitFunc_HPP__
+#define __mixr_linearsystem_ILimitFunc_HPP__
 
 #include "mixr/base/linearsystem/IScalerFunc.hpp"
 
@@ -8,17 +8,17 @@ namespace mixr {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class: LimitFunc
+// Class: ILimitFunc
 //
-// Description: Generic limits function: limits X to the upper and lower boundaries.
+// Description: Interface to limit X to the upper and lower boundaries.
 //------------------------------------------------------------------------------
-class LimitFunc : public IScalerFunc
+class ILimitFunc : public IScalerFunc
 {
-   DECLARE_SUBCLASS(LimitFunc, IScalerFunc)
+   DECLARE_SUBCLASS(ILimitFunc, IScalerFunc)
 
 public:
-   LimitFunc();
-   LimitFunc(const double lower, const double upper);
+   ILimitFunc();
+   ILimitFunc(const double lower, const double upper);
 
    double getLowerLimit() const  { return lower; }
    double getUpperLimit() const  { return upper; }
