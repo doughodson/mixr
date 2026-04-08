@@ -6,7 +6,7 @@
 
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/IRadar.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Pair.hpp"
 #include "mixr/base/IPairStream.hpp"

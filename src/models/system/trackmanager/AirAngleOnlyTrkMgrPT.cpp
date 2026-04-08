@@ -6,7 +6,7 @@
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/track/IrTrack.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 

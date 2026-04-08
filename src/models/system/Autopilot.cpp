@@ -5,7 +5,7 @@
 #include "mixr/models/navigation/INavigation.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
@@ -959,7 +959,7 @@ const IPlayer* Autopilot::getLeadPlayer()
    if (lead == nullptr && leadName == "") {
       // we have no lead player, but we have a lead name, let's try to get this player
       // find the player in the simulation
-      const WorldModel* const sim{getWorldModel()};
+      const IWorldModel* const sim{getWorldModel()};
       if (sim != nullptr) {
          const base::IPairStream* players{sim->getPlayers()};
          if (players != nullptr) {
@@ -1201,7 +1201,7 @@ bool Autopilot::setLeadPlayer(const IPlayer* const p)
 bool Autopilot::setLeadPlayerName(const base::Identifier* const x)
 {
    // find the player in the simulation
-   const WorldModel* const sim{getWorldModel()};
+   const IWorldModel* const sim{getWorldModel()};
    bool found{};
    if (sim != nullptr) {
       const base::IPairStream* players{sim->getPlayers()};
@@ -1225,7 +1225,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const x)
 bool Autopilot::setLeadPlayerName(const char* x)
 {
    // find the player in the simulation
-   const WorldModel* const sim{getWorldModel()};
+   const IWorldModel* const sim{getWorldModel()};
    bool found{};
    if (sim != nullptr) {
       const base::IPairStream* players{sim->getPlayers()};

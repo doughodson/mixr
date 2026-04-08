@@ -5,7 +5,7 @@
 
 #include "mixr/interop/hla/Ambassador.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 #include "mixr/models/player/IPlayer.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"
@@ -411,7 +411,7 @@ void Nib::updateBasicEntity(
 
       // Our simulation
 //      simulation::ISimulation* ourSim = netIO->getSimulation();
-      const auto ourSim = dynamic_cast<models::WorldModel*>(netIO->getSimulation());   // DDH
+      const auto ourSim = dynamic_cast<models::IWorldModel*>(netIO->getSimulation());   // DDH
 
       // Get the player data
       playerState2Nib();

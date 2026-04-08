@@ -12,7 +12,7 @@
 #include "mixr/models/system/Jammer.hpp"
 #include "mixr/models/system/SensorMgr.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/network/INetHandler.hpp"
 #include "mixr/base/numeric/Boolean.hpp"

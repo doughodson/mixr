@@ -5,7 +5,7 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/RfEmission.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IPairStream.hpp"
@@ -191,7 +191,7 @@ void IRfSystem::processPlayersOfInterest()
 
       // Pass our players of interest to the antenna for processing
       base::IPairStream* poi{};
-      WorldModel* sim{getWorldModel()};
+      IWorldModel* sim{getWorldModel()};
       if ( sim != nullptr && !areEmissionsDisabled() ) {
          poi = sim->getPlayers();
       }

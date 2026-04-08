@@ -6,7 +6,7 @@
 #include "mixr/models/system/IScanGimbal.hpp"
 #include "mixr/models/Image.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/Pair.hpp"
@@ -195,7 +195,7 @@ void Sar::process(const double dt)
       Antenna* ant{getAntenna()};
       if (ant != nullptr) {
 
-         const WorldModel* s{getWorldModel()};
+         const IWorldModel* s{getWorldModel()};
          const double refLat{s->getRefLatitude()};
          const double refLon{s->getRefLongitude()};
 

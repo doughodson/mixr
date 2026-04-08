@@ -1,6 +1,6 @@
 
 #include "mixr/models/player/weapon/Bullet.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IList.hpp"
 #include "mixr/base/IPairStream.hpp"
@@ -216,7 +216,7 @@ bool Bullet::checkForTargetHit()
         //double diffAz{}0;
         //double diffEl{};
         double maxRange{1.0};                  // close range of detonation
-        WorldModel* sim{getWorldModel()};
+        IWorldModel* sim{getWorldModel()};
         if (sim != nullptr) {
             base::IPairStream* players{sim->getPlayers()};
             if (players != nullptr) {

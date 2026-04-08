@@ -8,7 +8,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/Latitude.hpp"

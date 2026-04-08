@@ -22,7 +22,7 @@ namespace base { class IAngle; class Boolean; class Integer; class Latitude; cla
                  class ITime; class Vec2d; class Vec3d;}
 namespace simulation { class INib; }
 namespace models {
-class WorldModel;
+class IWorldModel;
 
 // Major component types
 class Datalink;
@@ -181,7 +181,7 @@ class IRfSignature;
 //
 //    c) World model's gaming area coordinates (NED); the XY plane is tangent to
 //       and centered at the simulation's geodetic gaming area reference point;
-//       the Z or down axes is perpendicular to the tangent plane (see WorldModel.hpp).
+//       the Z or down axes is perpendicular to the tangent plane (see IWorldModel.hpp).
 //       Use models::getWorldMat() to transform vectors between ECEF and
 //       this tangent plane.
 //
@@ -592,8 +592,8 @@ public:
    // Systems
    // ---
 
-   WorldModel* getWorldModel();
-   const WorldModel* getWorldModel() const;
+   IWorldModel* getWorldModel();
+   const IWorldModel* getWorldModel() const;
 
    IDynamics* getDynamicsModel();                                     // Player dynamics
    const IDynamics* getDynamicsModel() const;                         // Player dynamics (const version)
@@ -932,7 +932,7 @@ protected:
 
 private:
    void initData();
-   WorldModel* getSimulationImp();
+   IWorldModel* getSimulationImp();
 
    // ---
    // Player identity
@@ -1047,7 +1047,7 @@ private:
    // ---
    // System pointers
    // ---
-   WorldModel* sim{};             // World model we operate within (not ref()'d)
+   IWorldModel* sim{};            // World model we operate within (not ref()'d)
 
    base::Pair* dynamicsModel{};   // Dynamics Model (ref()'d)
    base::Pair* datalink{};        // Datalink model (ref()'d)

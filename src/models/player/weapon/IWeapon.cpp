@@ -7,7 +7,7 @@
 #include "mixr/models/system/Gun.hpp"
 #include "mixr/models/system/IStores.hpp"
 #include "mixr/models/track/ITrack.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 
@@ -212,7 +212,7 @@ void IWeapon::reset()
 
    // Test player?
    if (tstTgtNam != nullptr) {
-      WorldModel* s = getWorldModel();
+      IWorldModel* s = getWorldModel();
       if (s != nullptr) {
          const auto t = dynamic_cast<IPlayer*>(s->findPlayerByName( (*tstTgtNam).c_str() ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
@@ -387,7 +387,7 @@ bool IWeapon::onJettisonEvent()
 //------------------------------------------------------------------------------
 void IWeapon::checkDetonationEffect()
 {
-   WorldModel* s{getWorldModel()};
+   IWorldModel* s{getWorldModel()};
    if (s != nullptr) {
       // Only local players within 10X max burst range
       double maxRng{10.0 * getMaxBurstRng()};
@@ -506,7 +506,7 @@ IWeapon* IWeapon::prerelease()
 
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
-   WorldModel* sim{static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) )};
+   IWorldModel* sim{static_cast<IWorldModel*>( findContainerByType(typeid(IWorldModel)) )};
    IPlayer* lplayer{getLaunchVehicle()};
    if (!isReleased() && !isJettisoned() && flyout == nullptr && lplayer != nullptr && sim != nullptr) {
 
@@ -574,7 +574,7 @@ IWeapon* IWeapon::release()
 
          // and we have a launching player and a simulation ...
          IPlayer* lplayer{getLaunchVehicle()};
-         const auto sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
+         const auto sim = static_cast<IWorldModel*>( findContainerByType(typeid(IWorldModel)) );
          if ( lplayer != nullptr && sim != nullptr) {
 
             // then release the weapon!

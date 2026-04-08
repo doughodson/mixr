@@ -15,7 +15,7 @@ namespace ubf { class IBehavior; class IState; }
 }
 namespace simulation { class IStation; }
 namespace models {
-class WorldModel;
+class IWorldModel;
 
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
@@ -53,7 +53,7 @@ protected:
    base::IComponent* getActor()                        { return actor;}
 
    simulation::IStation* getStation();
-   WorldModel* getWorldModel();
+   IWorldModel* getWorldModel();
 
    struct AgentItem
    {

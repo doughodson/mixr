@@ -2,7 +2,7 @@
 #include "mixr/models/SimAgent.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IStation.hpp"
 
@@ -53,12 +53,12 @@ simulation::IStation* SimAgent::getStation()
    return myStation;
 }
 
-WorldModel* SimAgent::getWorldModel()
+IWorldModel* SimAgent::getWorldModel()
 {
-   WorldModel* sim{};
+   IWorldModel* sim{};
    simulation::IStation* s{getStation()};
    if (s != nullptr) {
-      sim = dynamic_cast<WorldModel*>(s->getSimulation());
+      sim = dynamic_cast<IWorldModel*>(s->getSimulation());
    }
    return sim;
 }
@@ -71,7 +71,7 @@ void SimAgent::initActor()
          // not correctly specified as a SimAgent, try baseClass ?
          BaseClass::initActor();
       } else {
-         WorldModel* sim{getWorldModel()};
+         IWorldModel* sim{getWorldModel()};
          if ( sim != nullptr ) {
             base::IComponent* player{sim->findPlayerByName(actorPlayerName->c_str())};
             if (actorComponentName == nullptr) {

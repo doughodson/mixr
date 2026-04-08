@@ -10,10 +10,11 @@ namespace models {
 //------------------------------------------------------------------------------
 // Class: WorldModel
 //
-// Description: Concrete model of the spatial world in terms of earth model, coordinates,
+// Description: Concrete that defines a model of the spatial world in terms of earth model, coordinates,
 //              lat/long, etc.
+//
 //------------------------------------------------------------------------------
-class WorldModel final: public IWorldModel
+class WorldModel : public IWorldModel
 {
     DECLARE_SUBCLASS(WorldModel, IWorldModel)
 

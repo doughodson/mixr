@@ -7,7 +7,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/system/Gun.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/numeric/Float.hpp"
 #include "mixr/base/IList.hpp"
@@ -207,7 +207,7 @@ void LifeForm::look(const double up, const double sdws)
             const double maxEl{(0.7 * static_cast<double>(base::angle::D2RCC))};
             //double maxRange = 1500.0f; // long range right now
             const double la{lookAngle * static_cast<double>(base::angle::D2RCC)};
-            WorldModel* sim{getWorldModel()};
+            IWorldModel* sim{getWorldModel()};
             if (sim != nullptr) {
                 base::IPairStream* players{sim->getPlayers()};
                 if (players != nullptr) {

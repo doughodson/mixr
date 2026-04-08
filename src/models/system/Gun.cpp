@@ -2,7 +2,7 @@
 #include "mixr/models/system/Gun.hpp"
 
 #include "mixr/models/player/weapon/Bullet.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IList.hpp"
 
@@ -301,7 +301,7 @@ void Gun::burstFrame()
       // When we have a bullet model ... we're going to create a bullet (weapon)
       // player to flyout the rounds.
       Bullet* wpn{getBulletType()};
-      const auto sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
+      const auto sim = static_cast<IWorldModel*>( findContainerByType(typeid(IWorldModel)) );
       if (wpn != nullptr && ownship != nullptr && sim != nullptr) {
 
          // Compute the bullet burst's initial position and velocity

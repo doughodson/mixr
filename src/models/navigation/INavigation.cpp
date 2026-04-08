@@ -5,7 +5,7 @@
 #include "mixr/models/navigation/Bullseye.hpp"
 #include "mixr/models/navigation/Route.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/IList.hpp"
@@ -166,7 +166,7 @@ void INavigation::reset()
    if (bull != nullptr) bull->event(RESET_EVENT);
 
    // Set the reference center of our gaming area
-   const WorldModel* sim{getWorldModel()};
+   const IWorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
       refLat = sim->getRefLatitude();
       refLon = sim->getRefLongitude();

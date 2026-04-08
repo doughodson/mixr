@@ -2,7 +2,7 @@
 #include "mixr/models/MultiActorAgent.hpp"
 
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IStation.hpp"
 
@@ -44,7 +44,7 @@ void MultiActorAgent::deleteData()
 
 void MultiActorAgent::reset()
 {
-   WorldModel* sim{getWorldModel()};
+   IWorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
@@ -123,12 +123,12 @@ simulation::IStation* MultiActorAgent::getStation()
    return myStation;
 }
 
-WorldModel* MultiActorAgent::getWorldModel()
+IWorldModel* MultiActorAgent::getWorldModel()
 {
-   WorldModel* sim{};
+   IWorldModel* sim{};
    simulation::IStation* s{getStation()};
    if (s != nullptr) {
-      sim = dynamic_cast<WorldModel*>(s->getSimulation());
+      sim = dynamic_cast<IWorldModel*>(s->getSimulation());
    }
    return sim;
 }

@@ -9,7 +9,7 @@
 #include "mixr/interop/dis/pdu.hpp"
 #include "mixr/interop/dis/utils.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/IList.hpp"

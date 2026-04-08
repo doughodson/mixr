@@ -11,7 +11,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 #include "mixr/models/system/IGimbal.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 #include "mixr/terrain/ITerrain.hpp"
 
 #include <cmath>
@@ -185,7 +185,7 @@ unsigned int Tdb::processPlayers(base::IPairStream* const players)
    // ---
    const terrain::ITerrain* terrain{};
    if (gimbal->isTerrainOccultingEnabled()) {
-      const WorldModel* const sim{ownship->getWorldModel()};
+      const IWorldModel* const sim{ownship->getWorldModel()};
       terrain = sim->getTerrain();
    }
 

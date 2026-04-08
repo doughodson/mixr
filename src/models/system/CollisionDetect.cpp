@@ -1,7 +1,7 @@
 
 #include "mixr/models/system/CollisionDetect.hpp"
 #include "mixr/models/player/IPlayer.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -155,7 +155,7 @@ void CollisionDetect::updateData(const double dt)
    BaseClass::updateData(dt);
 
    const IPlayer* const ownship{getOwnship()};
-   WorldModel* const sim{getWorldModel()};
+   IWorldModel* const sim{getWorldModel()};
 
    // early out checks ...
    if (ownship == nullptr || sim == nullptr || maxPlayers == 0) return;

@@ -10,7 +10,7 @@
 #include "mixr/interop/dis/utils.hpp"
 
 #include "mixr/models/system/IStoresMgr.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IStation.hpp"
 

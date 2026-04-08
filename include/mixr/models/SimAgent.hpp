@@ -7,12 +7,12 @@
 namespace mixr {
 namespace simulation { class IStation; }
 namespace models {
-class WorldModel;
+class IWorldModel;
 
 //------------------------------------------------------------------------------
 // Class: SimAgent
 //
-// Description: Generic agent class to control a component in the simulation - the agent's "actor"
+// Description: Concrete agent class to control a component in the simulation - the agent's "actor"
 //    newUbf version allows component behaviors to return null actions.
 //    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
 //    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
@@ -36,7 +36,7 @@ protected:
    void initActor() override;
 
    simulation::IStation* getStation();
-   WorldModel* getWorldModel();
+   IWorldModel* getWorldModel();
 
    // sets which component ("actor") the agent is for
    void setActorPlayerByName(const char*);

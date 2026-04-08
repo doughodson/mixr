@@ -5,7 +5,6 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/track/ITrack.hpp"
-#include "mixr/models/WorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 

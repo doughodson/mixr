@@ -11,7 +11,7 @@ namespace models {
 
 //------------------------------------------------------------------------------
 // Class: TargetData
-// Description: General purpose target profile data that can be associated
+// Description: Concrete target profile data that can be associated
 //              with a target steerpoint or a weapon.
 //
 // Factory name: TargetData

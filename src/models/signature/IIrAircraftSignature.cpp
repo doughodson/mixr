@@ -6,7 +6,7 @@
 #include "mixr/models/IrQueryMsg.hpp"
 #include "mixr/models/player/air/IAirVehicle.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/relations/Table2.hpp"
 #include "mixr/base/relations/Table4.hpp"
@@ -564,7 +564,7 @@ double* IIrAircraftSignature::getHeatSignature(IrQueryMsg* msg)
     IPlayer* target{msg->getTarget()};
     if (target != nullptr) {
         IrAtmosphere* atmos{};
-        WorldModel* sim{target->getWorldModel()};
+        IWorldModel* sim{target->getWorldModel()};
         if (sim != nullptr) {
             atmos = dynamic_cast<IrAtmosphere*>( sim->getAtmosphere() );
         }

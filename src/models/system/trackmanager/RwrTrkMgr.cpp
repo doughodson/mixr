@@ -14,7 +14,7 @@
 #include "mixr/base/qty/times.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 namespace mixr {
 namespace models {

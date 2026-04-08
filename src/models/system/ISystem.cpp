@@ -3,7 +3,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/IPairStream.hpp"
@@ -100,7 +100,7 @@ void ISystem::updateTC(const double dt0)
    // ---
    // Four phases per frame
    // ---
-   WorldModel* sim{ownship->getWorldModel()};
+   IWorldModel* sim{ownship->getWorldModel()};
    if (sim == nullptr) return;
 
    switch (sim->phase()) {
@@ -153,17 +153,17 @@ bool ISystem::killedNotification(IPlayer* const p)
 //-----------------------------------------------------------------------------
 
 // Returns a pointer to the world model
-WorldModel* ISystem::getWorldModel()
+IWorldModel* ISystem::getWorldModel()
 {
-   WorldModel* p{};
+   IWorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }
 
 // Returns a pointer to the world model (const version)
-const WorldModel* ISystem::getWorldModel() const
+const IWorldModel* ISystem::getWorldModel() const
 {
-   const WorldModel* p{};
+   const IWorldModel* p{};
    if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }

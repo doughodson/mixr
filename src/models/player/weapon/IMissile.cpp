@@ -2,7 +2,7 @@
 #include "mixr/models/player/weapon/IMissile.hpp"
 
 #include "mixr/models/track/ITrack.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/simulation/IDataRecorder.hpp"
 

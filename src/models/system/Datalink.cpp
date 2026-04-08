@@ -6,7 +6,7 @@
 #include "mixr/models/system/trackmanager/ITrackMgr.hpp"
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Message.hpp"
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/Pair.hpp"
@@ -330,7 +330,7 @@ bool Datalink::sendMessage(base::IObject* const msg)
       // No comm radio -- then we'll send this out to the other players ourself.
       // ---
       else if (getOwnship() != nullptr) {
-         WorldModel* sim{getWorldModel()};
+         IWorldModel* sim{getWorldModel()};
          if (sim != nullptr) {
 
             base::IPairStream* players{sim->getPlayers()};

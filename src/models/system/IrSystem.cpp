@@ -6,7 +6,7 @@
 #include "mixr/models/system/OnboardComputer.hpp"
 #include "mixr/models/Tdb.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
@@ -131,7 +131,7 @@ void IrSystem::processPlayersOfInterest()
    // ---
    if (getSeeker() != nullptr) {
       base::IPairStream* poi{};
-      WorldModel* sim{getWorldModel()};
+      IWorldModel* sim{getWorldModel()};
       if ( sim != nullptr && !areQueriesDisabled() )
          poi = getWorldModel()->getPlayers();
 

@@ -6,12 +6,12 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(WorldModel, "WorldModel")
 EMPTY_SLOTTABLE(WorldModel)
-EMPTY_DELETEDATA(WorldModel)
 EMPTY_COPYDATA(WorldModel)
+EMPTY_DELETEDATA(WorldModel)
 
 WorldModel::WorldModel()
 {
-    STANDARD_CONSTRUCTOR()
+   STANDARD_CONSTRUCTOR()
 }
 
 }

@@ -1,7 +1,7 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 #include "mixr/models/player/weapon/IWeapon.hpp"
 #include "mixr/models/dynamics/IDynamics.hpp"
 #include "mixr/models/navigation/INavigation.hpp"
@@ -778,7 +778,7 @@ double IPlayer::getEarthRadius() const
 {
    double erad{base::nav::ERAD60 * base::length::NM2M};  // (default)
 
-   const WorldModel* sim{getWorldModel()};
+   const IWorldModel* sim{getWorldModel()};
    if (sim != nullptr) {
       const base::EarthModel* pModel{sim->getEarthModel()};
       if (pModel == nullptr) pModel = &base::EarthModel::wgs84;
@@ -799,7 +799,7 @@ double IPlayer::getEarthRadius() const
 // World model access functions
 //------------------------------------------------------------------------------
 
-WorldModel* IPlayer::getWorldModel()
+IWorldModel* IPlayer::getWorldModel()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -807,7 +807,7 @@ WorldModel* IPlayer::getWorldModel()
    return sim;
 }
 
-const WorldModel* IPlayer::getWorldModel() const
+const IWorldModel* IPlayer::getWorldModel() const
 {
    if (sim == nullptr) {
       (const_cast<IPlayer*>(this))->getSimulationImp();
@@ -816,10 +816,10 @@ const WorldModel* IPlayer::getWorldModel() const
 }
 
 // Find our world model
-WorldModel* IPlayer::getSimulationImp()
+IWorldModel* IPlayer::getSimulationImp()
 {
    if (sim == nullptr) {
-      sim = static_cast<WorldModel*>(findContainerByType(typeid(WorldModel)));
+      sim = static_cast<IWorldModel*>(findContainerByType(typeid(IWorldModel)));
       if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Player::getSimulationImp(): ERROR, unable to locate the Simulation class!" << std::endl;
       }
@@ -1831,7 +1831,7 @@ bool IPlayer::setPosition(const double n, const double e, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool IPlayer::setPosition(const double n, const double e, const double d, const bool slaved)
 {
-   WorldModel* s{getWorldModel()};
+   IWorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
    const base::EarthModel* em{s->getEarthModel()};
 
@@ -1892,7 +1892,7 @@ bool IPlayer::setPositionLL(const double lat, const double lon, const bool slave
 // Sets present position using lat/long position; (degs) and altitude (m)
 bool IPlayer::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
 {
-   WorldModel* s{getWorldModel()};
+   IWorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
    const base::EarthModel* em{s->getEarthModel()};
 
@@ -1938,7 +1938,7 @@ bool IPlayer::setPositionLLA(const double lat, const double lon, const double al
 // Geocentric position vector (meters)
 bool IPlayer::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 {
-   WorldModel* s{getWorldModel()};
+   IWorldModel* s{getWorldModel()};
    const double maxRefRange{s->getMaxRefRange()};
    const base::EarthModel* em{s->getEarthModel()};
 
@@ -3212,7 +3212,7 @@ void IPlayer::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the IG system.
-   const WorldModel* s{getWorldModel()};
+   const IWorldModel* s{getWorldModel()};
    if (s != nullptr && !isTerrainElevationRequired()) {
       const terrain::ITerrain* terrain{s->getTerrain()};
       if (terrain != nullptr) {

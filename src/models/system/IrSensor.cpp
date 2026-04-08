@@ -17,7 +17,7 @@
 #include "mixr/models/environment/IrAtmosphere.hpp"
 #include "mixr/models/IrQueryMsg.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -222,7 +222,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
    }
 
    if (ownship != nullptr) {
-      WorldModel* sim{ownship->getWorldModel()};
+      IWorldModel* sim{ownship->getWorldModel()};
       if (sim)
          atmos = dynamic_cast<IrAtmosphere*>(sim->getAtmosphere());
    }

@@ -7,7 +7,7 @@
 #include "mixr/models/system/IStoresMgr.hpp"
 #include "mixr/models/navigation/Steerpoint.hpp"
 
-#include "mixr/models/WorldModel.hpp"
+#include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/IComponent.hpp"
 #include "mixr/base/Latitude.hpp"
@@ -67,7 +67,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
          if (sms != nullptr) {
 
             // Get the simulation ref point
-            WorldModel* sim{own->getWorldModel()};
+            IWorldModel* sim{own->getWorldModel()};
             const double refLat{sim->getRefLatitude()};
             const double refLon{sim->getRefLongitude()};
 

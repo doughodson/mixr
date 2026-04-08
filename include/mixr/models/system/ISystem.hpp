@@ -7,7 +7,7 @@
 namespace mixr {
 namespace base { class String; }
 namespace models {
-class WorldModel;
+class IWorldModel;
 class IPlayer;
 
 //------------------------------------------------------------------------------
@@ -85,8 +85,8 @@ public:
    bool isFrozen() const override;
 
 protected:
-   virtual WorldModel* getWorldModel();
-   virtual const WorldModel* getWorldModel() const;
+   virtual IWorldModel* getWorldModel();
+   virtual const IWorldModel* getWorldModel() const;
 
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
