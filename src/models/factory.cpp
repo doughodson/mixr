@@ -33,6 +33,7 @@
 #include "mixr/models/player/effect/Flare.hpp"
 #include "mixr/models/player/ground/ArmoredVehicle.hpp"
 #include "mixr/models/player/ground/Artillery.hpp"
+#include "mixr/models/player/ground/GroundStation.hpp"
 #include "mixr/models/player/ground/GroundStationRadar.hpp"
 #include "mixr/models/player/ground/GroundStationUav.hpp"
 #include "mixr/models/player/ground/SamVehicle.hpp"
@@ -193,6 +194,9 @@ base::IObject* factory(const std::string& name)
    }
    else if ( name == SamVehicle::getFactoryName() ) {
       obj = new SamVehicle();
+   }
+   else if ( name == GroundStation::getFactoryName() ) {
+      obj = new GroundStation();
    }
    else if ( name == GroundStationRadar::getFactoryName() ) {
       obj = new GroundStationRadar();

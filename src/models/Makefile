@@ -35,6 +35,7 @@ OBJS =  \
 	player/ground/ArmoredVehicle.o \
 	player/ground/Artillery.o \
 	player/ground/IGroundStation.o \
+	player/ground/GroundStation.o \
 	player/ground/GroundStationRadar.o \
 	player/ground/GroundStationUav.o \
 	player/ground/IGroundVehicle.o \
