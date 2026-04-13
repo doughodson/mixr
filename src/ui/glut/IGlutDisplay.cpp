@@ -1,5 +1,5 @@
 
-#include "mixr/ui/glut/GlutDisplay.hpp"
+#include "mixr/ui/glut/IGlutDisplay.hpp"
 
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Integer.hpp"
@@ -22,16 +22,16 @@
 namespace mixr {
 namespace glut {
 
-IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
+IMPLEMENT_SUBCLASS(IGlutDisplay,"IGlutDisplay")
 
-int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS] {};                 // List of window IDs
-GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS] {};   // Display List
-int GlutDisplay::numGlutDisplays {};                                   // Number of  registered GlutDisplays
+int IGlutDisplay::idList[IGlutDisplay::MAX_DISPLAYS] {};                  // List of window IDs
+IGlutDisplay* IGlutDisplay::displayList[IGlutDisplay::MAX_DISPLAYS] {};   // Display List
+int IGlutDisplay::numGlutDisplays {};                                     // Number of  registered GlutDisplays
 
-const float GlutDisplay::CLICK_TIME{0.5f};                             // our double click timeout
-const int DEFAULT_IDLE_SLEEP{40};                                      // default idle CB sleep time
+const float IGlutDisplay::CLICK_TIME{0.5f};                               // our double click timeout
+const int DEFAULT_IDLE_SLEEP{40};                                         // default idle CB sleep time
 
-BEGIN_SLOTTABLE(GlutDisplay)
+BEGIN_SLOTTABLE(IGlutDisplay)
    "fullScreen",           // 1) Full screen flag     -- Main windows only --
    "idleSleepTime",        // 2) Idle sleep time (MS; default: 40ms) -- Main windows only --
    "resizeSubwindows",     // 3) resize our subwindows on a reshape
@@ -39,9 +39,9 @@ BEGIN_SLOTTABLE(GlutDisplay)
    "pickHeight",           // 5) Height of the pick area (default: 10)
    "accumBuff",            // 6) Enable the accumulation buffer (default: false)
    "stencilBuff",          // 7) Enable the stencil buffer (default: false)
-END_SLOTTABLE(GlutDisplay)
+END_SLOTTABLE(IGlutDisplay)
 
-BEGIN_SLOT_MAP(GlutDisplay)
+BEGIN_SLOT_MAP(IGlutDisplay)
    ON_SLOT(1,setSlotFullScreen,    base::Boolean)
    ON_SLOT(2,setSlotIdleSleepTime, base::Integer)
    ON_SLOT(3,setSlotResizeWindows, base::Boolean)
@@ -51,24 +51,24 @@ BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(7,setSlotStencilBuff,   base::Boolean)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(GlutDisplay)
+BEGIN_EVENT_HANDLER(IGlutDisplay)
    ON_EVENT(ESC_KEY,onEscKey)
 END_EVENT_HANDLER()
 
-GlutDisplay::GlutDisplay()
+IGlutDisplay::IGlutDisplay()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void GlutDisplay::initData()
+void IGlutDisplay::initData()
 {
    idleSleepTimeMS = DEFAULT_IDLE_SLEEP;
    swPosition.set(0.0, 0.0);
    swSize.set(50.0, 50.0);
 }
 
-void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
+void IGlutDisplay::copyData(const IGlutDisplay& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -91,7 +91,7 @@ void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
    picked = nullptr;
 }
 
-void GlutDisplay::deleteData()
+void IGlutDisplay::deleteData()
 {
    if (picked != nullptr) picked->unref();
    picked = nullptr;
@@ -100,7 +100,7 @@ void GlutDisplay::deleteData()
 //-----------------------------------------------------------------------------
 // Reset the display
 //-----------------------------------------------------------------------------
-void GlutDisplay::reset()
+void IGlutDisplay::reset()
 {
    BaseClass::reset();
 }
@@ -108,7 +108,7 @@ void GlutDisplay::reset()
 //-----------------------------------------------------------------------------
 // onEscKey() - from event handler
 //-----------------------------------------------------------------------------
-bool GlutDisplay::onEscKey()
+bool IGlutDisplay::onEscKey()
 {
    if (isMainDisplay()) {
       shutdownNotification();
@@ -128,7 +128,7 @@ bool GlutDisplay::onEscKey()
 //-----------------------------------------------------------------------------
 // setIdleSleepTime() - Sets the idle callback's sleep time
 //-----------------------------------------------------------------------------
-bool GlutDisplay::setIdleSleepTime(const int ms)
+bool IGlutDisplay::setIdleSleepTime(const int ms)
 {
    idleSleepTimeMS = ms;
    return true;
@@ -137,7 +137,7 @@ bool GlutDisplay::setIdleSleepTime(const int ms)
 //-----------------------------------------------------------------------------
 // createWindow() -- create the main window
 //-----------------------------------------------------------------------------
-int GlutDisplay::createWindow()
+int IGlutDisplay::createWindow()
 {
    winId = -1;
 
@@ -184,7 +184,7 @@ int GlutDisplay::createWindow()
          while (item != nullptr) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<IGlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -201,7 +201,7 @@ int GlutDisplay::createWindow()
 //-----------------------------------------------------------------------------
 // createSubWindow() -- create the screen for a subwindow
 //-----------------------------------------------------------------------------
-int GlutDisplay::createSubWindow(const int mainId)
+int IGlutDisplay::createSubWindow(const int mainId)
 {
    GLint  vpX(0), vpY(0);                   // our initial viewport position
    GLsizei vpWidth(0), vpHeight(0);    // our initial viewport size
@@ -226,7 +226,7 @@ int GlutDisplay::createSubWindow(const int mainId)
       }
 
       // compute our sub-display to main display ratios
-      const GlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
+      const IGlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
       if (pMainWin != nullptr) {
          GLint mainWinX = 0, mainWinY = 0;
          GLsizei mainWinWidth = 0, mainWinHeight = 0;
@@ -261,7 +261,7 @@ int GlutDisplay::createSubWindow(const int mainId)
          while (item != nullptr) {
             const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<IGlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -274,7 +274,7 @@ int GlutDisplay::createSubWindow(const int mainId)
 //------------------------------------------------------------------------------
 // swapBuffers() --
 //------------------------------------------------------------------------------
-void GlutDisplay::swapBuffers()
+void IGlutDisplay::swapBuffers()
 {
    glutSwapBuffers();
 }
@@ -282,7 +282,7 @@ void GlutDisplay::swapBuffers()
 //------------------------------------------------------------------------------
 // select() -- select this display
 //------------------------------------------------------------------------------
-void GlutDisplay::select()
+void IGlutDisplay::select()
 {
    glutSetWindow(winId);
    BaseClass::select();
@@ -291,7 +291,7 @@ void GlutDisplay::select()
 //-----------------------------------------------------------------------------
 // hide our glut window (set ourself to the current window first)
 //-----------------------------------------------------------------------------
-void GlutDisplay::hide()
+void IGlutDisplay::hide()
 {
    glutSetWindow(winId);
    glutHideWindow();
@@ -300,7 +300,7 @@ void GlutDisplay::hide()
 //-----------------------------------------------------------------------------
 // show our glut window (set us first)
 //-----------------------------------------------------------------------------
-void GlutDisplay::show()
+void IGlutDisplay::show()
 {
    glutSetWindow(winId);
    glutShowWindow();
@@ -309,7 +309,7 @@ void GlutDisplay::show()
 //-----------------------------------------------------------------------------
 // Set resize windows flag
 //-----------------------------------------------------------------------------
-bool GlutDisplay::setResizeWindows(const bool flg)
+bool IGlutDisplay::setResizeWindows(const bool flg)
 {
    okToResize = flg;
    return true;
@@ -318,7 +318,7 @@ bool GlutDisplay::setResizeWindows(const bool flg)
 //-----------------------------------------------------------------------------
 // reshape it function, for reshaping our subdisplays
 //-----------------------------------------------------------------------------
-void GlutDisplay::reshapeIt(int w, int h)
+void IGlutDisplay::reshapeIt(int w, int h)
 {
    //std::cout << "reshapeIt() winID = " << winId;
    //std::cout << "; size(" << w << ", " << h << ")";
@@ -334,7 +334,7 @@ void GlutDisplay::reshapeIt(int w, int h)
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               const auto gd = dynamic_cast<GlutDisplay*>(pair->object());
+               const auto gd = dynamic_cast<IGlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
             }
             item = item->getNext();
@@ -349,7 +349,7 @@ void GlutDisplay::reshapeIt(int w, int h)
 //-----------------------------------------------------------------------------
 // Reshape subwindow using the subwindows position and size (see note #4)
 //-----------------------------------------------------------------------------
-bool GlutDisplay::reshapeSubWindow(const base::Vec2d& position, const base::Vec2d& size)
+bool IGlutDisplay::reshapeSubWindow(const base::Vec2d& position, const base::Vec2d& size)
 {
    //std::cout << "reshapeSubWindow(p,s) winID = " << winId << std::endl;
    bool ok = false;
@@ -367,10 +367,10 @@ bool GlutDisplay::reshapeSubWindow(const base::Vec2d& position, const base::Vec2
 //-----------------------------------------------------------------------------
 // reshape a sub-window
 //-----------------------------------------------------------------------------
-void GlutDisplay::reshapeSubWindow()
+void IGlutDisplay::reshapeSubWindow()
 {
    if (mainWinId >= 0) {
-      const GlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
+      const IGlutDisplay* pMainWin = findRegisteredGlutDisplay(mainWinId);
       if (pMainWin != nullptr) {
          GLint mainWinX = 0, mainWinY = 0;
          GLsizei mainWinWidth = 0, mainWinHeight = 0;
@@ -412,7 +412,7 @@ void GlutDisplay::reshapeSubWindow()
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-graphics::Graphic* GlutDisplay::pick(const int item)
+graphics::Graphic* IGlutDisplay::pick(const int item)
 {
    GLint viewport[4];
    glGetIntegerv(GL_VIEWPORT,viewport);
@@ -471,7 +471,7 @@ graphics::Graphic* GlutDisplay::pick(const int item)
 //-----------------------------------------------------------------------------
 // clearSelectBuffer() -- clears our pick select buffer
 //-----------------------------------------------------------------------------
-void GlutDisplay::clearSelectBuffer(GLuint sbuff[], const int size)
+void IGlutDisplay::clearSelectBuffer(GLuint sbuff[], const int size)
 {
    for (int j = 0; j < size; j++) sbuff[j] = 0;
 }
@@ -486,7 +486,7 @@ void GlutDisplay::clearSelectBuffer(GLuint sbuff[], const int size)
 // 4) Returns zero(0) when there are no entries in the select buffer or if the
 //    Graphic for the select ID is not found.
 //-----------------------------------------------------------------------------
-graphics::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
+graphics::Graphic* IGlutDisplay::findSelected(const GLint hits, const GLuint sbuff[], const int item)
 {
    Graphic* sel = nullptr;
    GLuint id = 0;
@@ -568,7 +568,7 @@ graphics::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuf
 }
 
 // printSelectBuffer() -- print the selection buffer
-void GlutDisplay::printSelectBuffer(const GLint hits, const GLuint sbuff[])
+void IGlutDisplay::printSelectBuffer(const GLint hits, const GLuint sbuff[])
 {
    int idx = 0;
    int hitCnt = 0;
@@ -591,7 +591,7 @@ void GlutDisplay::printSelectBuffer(const GLint hits, const GLuint sbuff[])
 //-----------------------------------------------------------------------------
 // specialEvent()
 //-----------------------------------------------------------------------------
-void GlutDisplay::specialEvent(const int key)
+void IGlutDisplay::specialEvent(const int key)
 {
    if (key == GLUT_KEY_LEFT)           keyboardEvent(BACK_SPACE);
    else if (key == GLUT_KEY_RIGHT)     keyboardEvent(FORWARD_SPACE);
@@ -622,7 +622,7 @@ void GlutDisplay::specialEvent(const int key)
 //-----------------------------------------------------------------------------
 // Mouse motion (with either key pressed) event handler
 //-----------------------------------------------------------------------------
-void GlutDisplay::mouseMotionEvent(const int x, const int y)
+void IGlutDisplay::mouseMotionEvent(const int x, const int y)
 {
    if (isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseEvent(): " << std::endl;
@@ -654,7 +654,7 @@ void GlutDisplay::mouseMotionEvent(const int x, const int y)
 //-----------------------------------------------------------------------------
 // passive mouse motion (no mouse key pressed) event handler
 //-----------------------------------------------------------------------------
-void GlutDisplay::passiveMotionEvent(const int x, const int y)
+void IGlutDisplay::passiveMotionEvent(const int x, const int y)
 {
    if (isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseEvent(): " << std::endl;
@@ -669,7 +669,7 @@ void GlutDisplay::passiveMotionEvent(const int x, const int y)
 //-----------------------------------------------------------------------------
 // passive button event handler
 //-----------------------------------------------------------------------------
-void GlutDisplay::mouseEvent(const int button, const int state, const int x, const int y)
+void IGlutDisplay::mouseEvent(const int button, const int state, const int x, const int y)
 {
    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
       Graphic* selected = pick();
@@ -694,7 +694,7 @@ void GlutDisplay::mouseEvent(const int button, const int state, const int x, con
 // registerGlutDisplay() --
 //   register (add to list) this GlutDisplay & GLUT window ID
 //-----------------------------------------------------------------------------
-bool GlutDisplay::registerGlutDisplay(const int id, GlutDisplay* const display)
+bool IGlutDisplay::registerGlutDisplay(const int id, IGlutDisplay* const display)
 {
    bool ok = false;
    if (numGlutDisplays < MAX_DISPLAYS) {
@@ -710,7 +710,7 @@ bool GlutDisplay::registerGlutDisplay(const int id, GlutDisplay* const display)
 // unregisterGlutDisplay() --
 //   unregister (remove from list) this GLUT window ID
 //-----------------------------------------------------------------------------
-bool GlutDisplay::unregisterGlutDisplay(const int id)
+bool IGlutDisplay::unregisterGlutDisplay(const int id)
 {
    bool ok = false;
    for (int i = 0; !ok && i < numGlutDisplays; i++) {
@@ -725,9 +725,9 @@ bool GlutDisplay::unregisterGlutDisplay(const int id)
 //-----------------------------------------------------------------------------
 // findRegisteredGlutDisplay() -- Find the GlutDisplay for this GLUT window ID
 //-----------------------------------------------------------------------------
-GlutDisplay* GlutDisplay::findRegisteredGlutDisplay(const int id)
+IGlutDisplay* IGlutDisplay::findRegisteredGlutDisplay(const int id)
 {
-   GlutDisplay* found = nullptr;
+   IGlutDisplay* found{nullptr};
    for (int i = 0; found == nullptr && i < numGlutDisplays; i++) {
       if (id == idList[i]) {
          found = displayList[i];
@@ -739,7 +739,7 @@ GlutDisplay* GlutDisplay::findRegisteredGlutDisplay(const int id)
 //-----------------------------------------------------------------------------
 // findRegisteredWinId() -- Find the GLUT window ID for this GlutDisplay
 //-----------------------------------------------------------------------------
-int GlutDisplay::findRegisteredWinId(const GlutDisplay* dp)
+int IGlutDisplay::findRegisteredWinId(const IGlutDisplay* dp)
 {
    int found = 0;
    for (int i = 0; found == 0 && i < numGlutDisplays; i++) {
@@ -753,7 +753,7 @@ int GlutDisplay::findRegisteredWinId(const GlutDisplay* dp)
 //-----------------------------------------------------------------------------
 // GLUT idle time; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::idleCB()
+void IGlutDisplay::idleCB()
 {
    const int id{glutGetWindow()};
    const double time{base::getComputerTime()};
@@ -787,10 +787,10 @@ void GlutDisplay::idleCB()
 //-----------------------------------------------------------------------------
 // GLUT draw; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::drawFuncCB()
+void IGlutDisplay::drawFuncCB()
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::drawFuncCB(): id = " << id << ", p = " << p << std::endl;
@@ -803,13 +803,13 @@ void GlutDisplay::drawFuncCB()
 //-----------------------------------------------------------------------------
 // GLUT reshape; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::reshapeItCB(int w, int h)
+void IGlutDisplay::reshapeItCB(int w, int h)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
-      std::cout << "GlutDisplay::reshapeItCB(): id = " << id << ", p = " << p << std::endl;
+      std::cout << "IGlutDisplay::reshapeItCB(): id = " << id << ", p = " << p << std::endl;
    }
 
    if (p != nullptr) p->reshapeIt(w,h);
@@ -819,10 +819,10 @@ void GlutDisplay::reshapeItCB(int w, int h)
 //-----------------------------------------------------------------------------
 // GLUT keyboard event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::keyboardFuncCB(unsigned char key, int, int)
+void IGlutDisplay::keyboardFuncCB(unsigned char key, int, int)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::keyboardFuncCB(): id = " << id << ", p = " << p << std::endl;
@@ -835,10 +835,10 @@ void GlutDisplay::keyboardFuncCB(unsigned char key, int, int)
 //-----------------------------------------------------------------------------
 // GLUT special key event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::specialFuncCB(int key, int, int)
+void IGlutDisplay::specialFuncCB(int key, int, int)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::specialFuncCB(): id = " << id << ", p = " << p << std::endl;
@@ -851,10 +851,10 @@ void GlutDisplay::specialFuncCB(int key, int, int)
 //-----------------------------------------------------------------------------
 // GLUT mouse button event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::mouseFuncCB(int button, int state, int x, int y)
+void IGlutDisplay::mouseFuncCB(int button, int state, int x, int y)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseFuncCBStatic(): id = " << id << ", p = " << p << std::endl;
@@ -867,10 +867,10 @@ void GlutDisplay::mouseFuncCB(int button, int state, int x, int y)
 //-----------------------------------------------------------------------------
 // GLUT passive mouse motion event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::passiveMotionFuncCB(int x, int y)
+void IGlutDisplay::passiveMotionFuncCB(int x, int y)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::specialFuncCB(): id = " << id << ", p = " << p << std::endl;
@@ -883,10 +883,10 @@ void GlutDisplay::passiveMotionFuncCB(int x, int y)
 //-----------------------------------------------------------------------------
 // GLUT mouse motion event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::motionFuncCB(int x, int y)
+void IGlutDisplay::motionFuncCB(int x, int y)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseFuncCBStatic(): id = " << id << ", p = " << p << std::endl;
@@ -899,10 +899,10 @@ void GlutDisplay::motionFuncCB(int x, int y)
 //-----------------------------------------------------------------------------
 // GLUT mouse enter/left window event; static callback function
 //-----------------------------------------------------------------------------
-void GlutDisplay::entryFuncCB(int state)
+void IGlutDisplay::entryFuncCB(int state)
 {
    const int id{glutGetWindow()};
-   GlutDisplay* p{findRegisteredGlutDisplay(id)};
+   IGlutDisplay* p{findRegisteredGlutDisplay(id)};
 
    if (p != nullptr && p->isMessageEnabled(MSG_DEBUG)) {
       std::cout << "GlutDisplay::mouseFuncCBStatic(): id = " << id << ", p = " << p << std::endl;
@@ -917,7 +917,7 @@ void GlutDisplay::entryFuncCB(int state)
    }
 }
 
-bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
+bool IGlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -927,7 +927,7 @@ bool GlutDisplay::setSlotFullScreen(const base::Boolean* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotIdleSleepTime(const base::Integer* const msg)
+bool IGlutDisplay::setSlotIdleSleepTime(const base::Integer* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -939,7 +939,7 @@ bool GlutDisplay::setSlotIdleSleepTime(const base::Integer* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
+bool IGlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -949,7 +949,7 @@ bool GlutDisplay::setSlotResizeWindows(const base::Boolean* const msg)
 }
 
 // pickWidth -- Width of the pick area
-bool GlutDisplay::setSlotPickWidth(const base::INumber* const msg)
+bool IGlutDisplay::setSlotPickWidth(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -965,7 +965,7 @@ bool GlutDisplay::setSlotPickWidth(const base::INumber* const msg)
 }
 
 // pickHeight -- Height of the pick area
-bool GlutDisplay::setSlotPickHeight(const base::INumber* const msg)
+bool IGlutDisplay::setSlotPickHeight(const base::INumber* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -980,7 +980,7 @@ bool GlutDisplay::setSlotPickHeight(const base::INumber* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotAccumBuff(const base::Boolean* const msg)
+bool IGlutDisplay::setSlotAccumBuff(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {
@@ -990,7 +990,7 @@ bool GlutDisplay::setSlotAccumBuff(const base::Boolean* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotStencilBuff(const base::Boolean* const msg)
+bool IGlutDisplay::setSlotStencilBuff(const base::Boolean* const msg)
 {
    bool ok{};
    if (msg != nullptr) {

@@ -1,6 +1,6 @@
 
-#ifndef __mixr_ui_glut_GlutDisplay_HPP__
-#define __mixr_ui_glut_GlutDisplay_HPP__
+#ifndef __mixr_ui_glut_IGlutDisplay_HPP__
+#define __mixr_ui_glut_IGlutDisplay_HPP__
 
 #include "mixr/graphics/Display.hpp"
 
@@ -9,9 +9,9 @@ namespace base { class Boolean; class Integer; class INumber; }
 namespace glut {
 
 //------------------------------------------------------------------------------
-// Class:  GlutDisplay
+// Class: IGlutDisplay
 //
-// Description: Manages the Display as a GLUT Window
+// Description: Interface that manages the Display as a GLUT Window
 //
 // Notes:
 //    1) All subdisplays (see our base class 'displays' slot) must also be
@@ -32,7 +32,6 @@ namespace glut {
 //    used whenever the main window is reshaped with subwindow reshaping (resizeSubwindows)
 //    enabled.  They can be changed and the subwindow reshaped using reshapeSubWindow().
 //
-// Factory name: GlutDisplay
 // Slots:
 //    fullScreen        <Boolean>   ! Flag to set full screen mode  -- Main windows only -- (default: false)
 //    idleSleepTime     <Integer>   ! Idle callback sleep time (MS) -- Main windows only -- (default: 40)
@@ -46,12 +45,12 @@ namespace glut {
 //    ESC_KEY     -- calls onEscKey() event handler; see note #2.
 //
 //------------------------------------------------------------------------------
-class GlutDisplay : public graphics::Display
+class IGlutDisplay : public graphics::Display
 {
-   DECLARE_SUBCLASS(GlutDisplay, graphics::Display)
+   DECLARE_SUBCLASS(IGlutDisplay, graphics::Display)
 
 public:
-   GlutDisplay();
+   IGlutDisplay();
 
    // Creates the window and returns the window ID (or -1 if failed)
    // Will also create any subdisplays (subwindows), as well
@@ -121,10 +120,10 @@ protected:
    // Handle mouse motion events with either mouse key pressed
    virtual void mouseMotionEvent(const int x, const int y);
 
-   static bool registerGlutDisplay(const int id, GlutDisplay* const display);
+   static bool registerGlutDisplay(const int id, IGlutDisplay* const display);
    static bool unregisterGlutDisplay(const int id);
-   static GlutDisplay* findRegisteredGlutDisplay(const int id);
-   static int findRegisteredWinId(const GlutDisplay* dp);
+   static IGlutDisplay* findRegisteredGlutDisplay(const int id);
+   static int findRegisteredWinId(const IGlutDisplay* dp);
 
    // pick/select stuff
    virtual Graphic* pick(const int item = -1);
@@ -168,7 +167,7 @@ private:
 
    // Registered GlutDisplay list
    static int idList[MAX_DISPLAYS];                    // List of window IDs
-   static GlutDisplay* displayList[MAX_DISPLAYS];      // Display List
+   static IGlutDisplay* displayList[MAX_DISPLAYS];      // Display List
    static int numGlutDisplays;                         // Number of GlutDisplays
    Graphic* picked {};                                 // our "picked graphic"
 
@@ -183,16 +182,16 @@ private:
    bool setSlotStencilBuff(const base::Boolean* const);
 };
 
-inline int GlutDisplay::getWindowId() const                               { return winId;           }
-inline bool GlutDisplay::isWindowId(const int id) const                   { return id == winId;     }
-inline bool GlutDisplay::isFullScreen() const                             { return fullScreenFlg;   }
-inline GLdouble GlutDisplay::getPickWidth() const                         { return pickWidth;       }
-inline GLdouble GlutDisplay::getPickHeight() const                        { return pickHeight;      }
-inline bool GlutDisplay::isAccumBuff() const                              { return accumBuff;       }
-inline bool GlutDisplay::isStencilBuff() const                            { return stencilBuff;     }
-inline int GlutDisplay::getIdleSleepTime() const                          { return idleSleepTimeMS; }
-inline const base::Vec2d& GlutDisplay::getSubwindowPosition() const       { return swPosition;      }
-inline const base::Vec2d& GlutDisplay::getSubwindowSize() const           { return swSize;          }
+inline int IGlutDisplay::getWindowId() const                               { return winId;           }
+inline bool IGlutDisplay::isWindowId(const int id) const                   { return id == winId;     }
+inline bool IGlutDisplay::isFullScreen() const                             { return fullScreenFlg;   }
+inline GLdouble IGlutDisplay::getPickWidth() const                         { return pickWidth;       }
+inline GLdouble IGlutDisplay::getPickHeight() const                        { return pickHeight;      }
+inline bool IGlutDisplay::isAccumBuff() const                              { return accumBuff;       }
+inline bool IGlutDisplay::isStencilBuff() const                            { return stencilBuff;     }
+inline int IGlutDisplay::getIdleSleepTime() const                          { return idleSleepTimeMS; }
+inline const base::Vec2d& IGlutDisplay::getSubwindowPosition() const       { return swPosition;      }
+inline const base::Vec2d& IGlutDisplay::getSubwindowSize() const           { return swSize;          }
 
 }
 }

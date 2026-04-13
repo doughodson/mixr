@@ -3,7 +3,7 @@
 
 #include "mixr/base/IObject.hpp"
 
-#include "mixr/ui/glut/GlutDisplay.hpp"
+#include "mixr/ui/glut/IGlutDisplay.hpp"
 #include "mixr/ui/glut/Shapes3D.hpp"
 
 #include <string>
@@ -16,11 +16,11 @@ base::IObject* factory(const std::string& name)
     base::IObject* obj {};
 
     // General graphics support
-    if ( name == GlutDisplay::getFactoryName() ) {
-      obj = new GlutDisplay();
-    }
+//    if ( name == GlutDisplay::getFactoryName() ) {
+//      obj = new GlutDisplay();
+//    }
     // glut shapes support
-    else if ( name == Sphere::getFactoryName() ) {
+    if ( name == Sphere::getFactoryName() ) {
       obj = new Sphere();
     }
     else if ( name == Cylinder::getFactoryName() ) {
