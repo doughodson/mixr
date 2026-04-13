@@ -26,6 +26,7 @@
 #include "mixr/models/navigation/Steerpoint.hpp"
 
 // player models
+#include "mixr/models/player/air/Aircraft.hpp"
 #include "mixr/models/player/air/Helicopter.hpp"
 #include "mixr/models/player/air/UnmannedAirVehicle.hpp"
 #include "mixr/models/player/effect/Chaff.hpp"
@@ -172,6 +173,9 @@ base::IObject* factory(const std::string& name)
    }
 
    // Air Vehicles
+   else if ( name == Aircraft::getFactoryName() ) {
+      obj = new Aircraft();
+   }
    else if ( name == Helicopter::getFactoryName() ) {
       obj = new Helicopter();
    }

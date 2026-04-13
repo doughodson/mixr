@@ -24,6 +24,7 @@ OBJS =  \
 	navigation/Navigation.o \
 	navigation/Route.o \
 	navigation/Steerpoint.o \
+	player/air/Aircraft.o \
 	player/air/IAircraft.o \
 	player/air/IAirVehicle.o \
 	player/air/Helicopter.o \
