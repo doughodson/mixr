@@ -11,7 +11,7 @@
 namespace mixr {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(FtglPolygonFont, "FTGLPolygonFonts")
+IMPLEMENT_SUBCLASS(FtglPolygonFont, "FTGLPolygonFont")
 EMPTY_DELETEDATA(FtglPolygonFont)
 EMPTY_SLOTTABLE(FtglPolygonFont)
 
