@@ -6,6 +6,7 @@ LIB = $(MIXR_LIB_DIR)/libmixr_ui_glut.a
 OBJS =  \
 	factory.o \
 	IGlutDisplay.o \
+	GlutDisplay.o \
 	Shapes3D.o
 
 .PHONY: all clean
