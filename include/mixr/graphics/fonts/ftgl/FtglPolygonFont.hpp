@@ -13,7 +13,7 @@ namespace graphics {
 //------------------------------------------------------------------------------
 // EDL Interface:
 //
-// Factory name: FTGLPolygonFonts
+// Factory name: FTGLPolygonFont
 // Slots: none
 //------------------------------------------------------------------------------
 class FtglPolygonFont final: public IFtglFont
