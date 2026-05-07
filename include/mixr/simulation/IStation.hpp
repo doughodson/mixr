@@ -21,12 +21,11 @@ class StationNetPeriodicThread;
 //------------------------------------------------------------------------------
 // Class: IStation
 //
-// Description:  Application's top level container class with support for the
+// Description:  Interface to application's top level container class with support for the
 //               simulation model, controls & displays, network interfaces
 //               and image generator systems.  Also, contains default
 //               support for the time-critical and network threads.
 //
-// Factory name: IStation
 // Slots --
 //    simulation         <ISimulation>              ! Executable simulation model (default: nullptr)
 //
@@ -34,7 +33,7 @@ class StationNetPeriodicThread;
 //
 //    igHosts            <base::IPairStream>        ! List of Image Generator (IG) host interfaces
 //
-//    ioHandler          <base::AbstractIoHandler>  ! Input/Output (IO) data handler
+//    ioHandler          <base::IIoHandler>         ! Input/Output (IO) data handler
 //
 //    ownship            <base::String>             ! Player name of our ownship (primary) player (default: nullptr)
 //
@@ -59,7 +58,7 @@ class StationNetPeriodicThread;
 //
 //    enableUpdateTimers <base::Boolean>            ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
 //
-//    dataRecorder       <AbstractDataRecorder>     ! Our Data Recorder
+//    dataRecorder       <IDataRecorder>            ! Our Data Recorder
 //
 //
 // Ownship player:
@@ -159,8 +158,8 @@ public:
    ISimulation* getSimulation();                                    // Simulation executive
    const ISimulation* getSimulation() const;                        // Simulation executive (const version)
 
-   base::IPairStream* getPlayers();                                  // Player list; pre-ref()'d
-   const base::IPairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
+   base::IPairStream* getPlayers();                                 // Player list; pre-ref()'d
+   const base::IPairStream* getPlayers() const;                     // Player list; pre-ref()'d (const version)
 
    IPlayer* getOwnship();                                           // The ownship (primary) player
    const IPlayer* getOwnship() const;                               // The ownship (primary) player (const version)
@@ -169,11 +168,11 @@ public:
    virtual bool setOwnshipPlayer(IPlayer* const newOS);             // Sets the ownship player
    virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
-   base::IPairStream* getIgHostList();                               // Image generator host interfaces
-   const base::IPairStream* getIgHostList() const;                   // Image generator host interfaces (const version)
+   base::IPairStream* getIgHostList();                              // Image generator host interfaces
+   const base::IPairStream* getIgHostList() const;                  // Image generator host interfaces (const version)
 
-   base::IPairStream* getNetworks();                                 // Interoperability network handlers
-   const base::IPairStream* getNetworks() const;                     // Interoperability network handlers (const version)
+   base::IPairStream* getNetworks();                                // Interoperability network handlers
+   const base::IPairStream* getNetworks() const;                    // Interoperability network handlers (const version)
 
    base::IIoHandler* getIoHandler();                                // I/O handler
    const base::IIoHandler* getIoHandler() const;                    // I/O handler (const version)
