@@ -16,9 +16,6 @@ class Identifier;
 // Description: A PairStream is a list of Pair objects. Pair objects consist of
 //              an object and the name of the object.
 //------------------------------------------------------------------------------
-// EDL Interface:
-//
-// Factory name: IPairStream
 // Slots: none
 // Notes: EDL syntax (a list of Pairs)
 //      ident: <object>

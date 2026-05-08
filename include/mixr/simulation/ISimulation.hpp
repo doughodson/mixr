@@ -213,7 +213,7 @@ public:
     const IPlayer* findPlayerByName(const char* const playerName) const;            // Find a player by name (const version)
 
     virtual bool addNewPlayer(const char* const playerName, IPlayer* const player); // Add a new player
-    virtual bool addNewPlayer(base::Pair* const player);                                   // Add a new player (pair: name, player)
+    virtual bool addNewPlayer(base::Pair* const player);                            // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 

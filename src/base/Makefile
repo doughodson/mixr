@@ -185,6 +185,7 @@ OBJS =  \
 	IObject.o \
 	Pair.o \
 	IPairStream.o \
+	PairStream.o \
 	SlotTable.o \
 	Stack.o \
 	Statistic.o \

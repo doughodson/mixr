@@ -5,7 +5,7 @@
 #include "mixr/base/String.hpp"
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
+#include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/util/string_utils.hpp"
 
@@ -560,7 +560,7 @@ bool IStores::setSlotStores(const base::IPairStream* const msg)
    //      that it has a valid station number.
    //   -- Clone the store and if it's a weapon then assign it to the station.
    // ---
-   const auto newStores = new base::IPairStream();
+   const auto newStores = new base::PairStream();
 
    const base::IList::Item* item{msg->getFirstItem()};
    while (item != nullptr) {
