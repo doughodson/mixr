@@ -11,10 +11,11 @@ namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: FileWriter
-// Description: Serialize and write the data from a protocol buffer DataRecord
+// Description: Concrete class to serialize and write the data from a protocol buffer DataRecord
 //              message to a file.
 //
 // Factory name: FileWriter
+//
 // Slots:
 //     filename       <String>     ! Data file name
 //     pathname       <String>     ! Path to the data file's directory (optional)

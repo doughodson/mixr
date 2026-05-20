@@ -11,9 +11,10 @@ namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: FileReader
-// Description: Read and parse data records from a file
+// Description: Concrete class to read and parse data records from a file
 //
 // Factory name: FileReader
+//
 // Slots:
 //     filename       <String>     ! Data file name (required)
 //     pathname       <String>     ! Path to the data file's directory (optional)
