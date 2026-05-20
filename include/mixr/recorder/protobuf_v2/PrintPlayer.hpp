@@ -21,9 +21,10 @@ class TrackData; class EmissionData;
 
 //------------------------------------------------------------------------------
 // Class: PrintPlayer
-// Description: Print player data
+// Description: Concrete class to print player data
 //
 // Factory name: PrintPlayer
+//
 // Slots:
 //   playerName  <base::String>  ! Player name
 //------------------------------------------------------------------------------

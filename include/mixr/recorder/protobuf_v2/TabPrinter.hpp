@@ -22,9 +22,10 @@ class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
 
 //------------------------------------------------------------------------------
 // Class: TabPrinter
-// Description: Print the data from a protocol buffer DataRecord
+// Description: Concrete class to print the data from a protocol buffer DataRecord
 //
 // Factory name: TabPrinter
+//
 // Slots:
 //    msgHdrOptn   <String>  ! Msg Header options { no_hdr, all_msgs, new_msg, on_change }
 //    divider      <String>  ! Field divider (default: tab)

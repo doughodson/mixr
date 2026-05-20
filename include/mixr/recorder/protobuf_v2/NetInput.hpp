@@ -11,7 +11,7 @@ namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: NetInput
-// Description: Read and parse data records from a network stream
+// Description: Concrete class to read and parse data records from a network stream
 //
 // Factory name: NetInput
 // Slots:

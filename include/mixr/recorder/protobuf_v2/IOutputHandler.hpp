@@ -28,8 +28,6 @@ class DataRecordHandle;
 //    of subcomponent OutputHandlers.  The prcessRecord() function for each
 //    subcomponent OutputHandler is called from our processRecord() function.
 //
-// Factory name: IOutputHandler
-//
 // Overriding the Component class slot:
 //    components     ! Must contain only 'OutputHandler' type objects
 //

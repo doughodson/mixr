@@ -11,7 +11,7 @@ namespace protobuf_v2 {
 
 //------------------------------------------------------------------------------
 // Class: NetOutput
-// Description: Serialize and write a DataRecord to a network
+// Description: Concrete class to serialize and write a DataRecord to a network
 //
 // Factory name: NetOutput
 // Slots:

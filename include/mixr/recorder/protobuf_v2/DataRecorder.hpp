@@ -21,7 +21,7 @@ class IOutputHandler;
 //
 // Factory name: DataRecorder
 // Slots:
-//    outputHandler     <IOutputHandler>     ! Output handler (default: none)
+//    outputHandler     <OutputHandler>     ! Output handler (default: none)
 //
 // Notes:
 //    1) negative time values are used when time is unknown.

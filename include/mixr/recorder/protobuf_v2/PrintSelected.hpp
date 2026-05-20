@@ -26,9 +26,10 @@ class TrackData; class EmissionData;
 
 //------------------------------------------------------------------------------
 // Class: PrintSelected
-// Description: Print selected data record message data
+// Description: Concrete class to print selected data record message data
 //
 // Factory name: PrintSelected
+//
 // Slots:
 //   messageToken    <base::Integer>  ! Message ID (token)
 //   fieldName       <base::String>   ! Full field name (e.g., mixr.Recorder.Pb.PlayerId.name)
