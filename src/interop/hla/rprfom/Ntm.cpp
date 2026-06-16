@@ -1,9 +1,8 @@
 
+#include "mixr/base/IList.hpp"
+
 #include "mixr/interop/hla/rprfom/Ntm.hpp"
 #include "mixr/interop/hla/rprfom/Nib.hpp"
-
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace rprfom {

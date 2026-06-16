@@ -3,7 +3,6 @@
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/osg/Matrixd"
-#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/transformations/Rotation.hpp"
 #include "mixr/base/qty/angles.hpp"
 

@@ -8,8 +8,6 @@
 
 #include "mixr/base/numeric/INumber.hpp"
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 
 #include <cmath>
 

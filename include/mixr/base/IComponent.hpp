@@ -15,7 +15,7 @@ class Identifier;
 class Integer;
 class INumber;
 class Pair;
-class IPairStream;
+class PairStream;
 class Statistic;
 class String;
 
@@ -134,8 +134,8 @@ public:
    std::size_t getNumberOfComponents() const;
 
    // returns a ref()'d pointer to our list of components
-   IPairStream* getComponents();
-   const IPairStream* getComponents() const;
+   PairStream* getComponents();
+   const PairStream* getComponents() const;
 
    virtual bool addComponent(Pair* const);
 
@@ -356,14 +356,14 @@ protected:
    //   -- swap our 'components' list with this new list
    //   -- handle component selection
    virtual void processComponents(
-         IPairStream* const list,            // source list of components
+         PairStream* const list,             // source list of components
          const std::type_info& filter,       // type filter
          Pair* const add = nullptr,          // optional pair to add
          IComponent* const remove = nullptr  // optional component to remove
       );
 
 private:
-   safe_ptr<IPairStream> components;   // Child components
+   safe_ptr<PairStream> components;    // Child components
    IComponent* containerPtr{};         // We are a component of this container
 
    IComponent* selected{};             // Selected child (process only this one)
@@ -376,7 +376,7 @@ private:
 
 private:
    // slot table helper methods
-   bool setSlotComponent(IPairStream* const multiple);       // sets the components list
+   bool setSlotComponent(PairStream* const multiple);        // sets the components list
    bool setSlotComponent(IComponent* const single);          // sets a single component
    bool setSlotSelect(const String* const name)              { return select(name); }
    bool setSlotSelect(const Integer* const num)              { return select(num);  }

@@ -10,7 +10,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/IPairStream.hpp"
+#include "mixr/base/PairStream.hpp"
 
 #include <string>
 
@@ -130,7 +130,7 @@ void IrSystem::processPlayersOfInterest()
    // Do we have a seeker?
    // ---
    if (getSeeker() != nullptr) {
-      base::IPairStream* poi{};
+      base::PairStream* poi{};
       IWorldModel* sim{getWorldModel()};
       if ( sim != nullptr && !areQueriesDisabled() )
          poi = getWorldModel()->getPlayers();

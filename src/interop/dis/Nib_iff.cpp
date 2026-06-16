@@ -10,8 +10,6 @@
 #include "mixr/models/system/Iff.hpp"
 
 #include "mixr/base/network/INetHandler.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 
 namespace mixr {
 namespace dis {

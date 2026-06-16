@@ -1,8 +1,6 @@
 
 #include "mixr/graphics/MapPage.hpp"
 #include "mixr/graphics/Display.hpp"
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/Pair.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/INumber.hpp"
 

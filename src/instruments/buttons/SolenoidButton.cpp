@@ -5,8 +5,6 @@
 
 #include "mixr/graphics/Display.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/timers/ITimer.hpp"
 
 namespace mixr {

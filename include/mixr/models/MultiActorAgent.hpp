@@ -30,7 +30,7 @@ class IWorldModel;
 // Factory name: MultiActorAgent
 // Slots:
 //    state       <State>           ! state
-//    agentList   <IPairStream>     ! behavior pairstream
+//    agentList   <PairStream>     ! behavior pairstream
 //------------------------------------------------------------------------------
 class MultiActorAgent final: public base::IComponent
 {
@@ -78,7 +78,7 @@ private:
 private:
    // slot table helper methods
    bool setSlotState(base::ubf::IState* const);
-   bool setSlotAgentList(base::IPairStream* const);
+   bool setSlotAgentList(base::PairStream* const);
 };
 
 inline void MultiActorAgent::setActor(base::IComponent* c) { actor=c; }

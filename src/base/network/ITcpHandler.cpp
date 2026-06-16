@@ -28,12 +28,6 @@
 #endif
 
 #include "mixr/base/network/ITcpHandler.hpp"
-
-#include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/String.hpp"
-
 #include <cstdio>
 
 namespace mixr {

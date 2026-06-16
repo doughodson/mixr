@@ -6,7 +6,7 @@
 #include "mixr/base/qty/util/angle_utils.hpp"
 
 namespace mixr {
-namespace base { class Boolean; class Identifier; class Integer; class INumber; class IAngle; }
+namespace base { class Boolean; class Identifier; class Integer; class INumber; class IAngle; class PairStream; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ namespace models {
 //    scanRadius           <INumber>      ! Radius of the circle we are using for conical scans (radians or base::Angle} (spiral scan too)
 //                                        ! (default: 2.0 * base::Angle::D2RCC, 2 degree radius)
 //
-//    pseudoRandomPattern  <IPairStream>  ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
+//    pseudoRandomPattern  <PairStream>   ! Pseudo Random pattern vertices (2D - az and el) (default: 0, 0)
 //
 //    maxRevolutions       <INumber>      ! Spiral Scan - Maximum number of revolutions (default: 1.0)
 //
@@ -125,7 +125,7 @@ namespace models {
 //       slots - scan height will be calculated for you.  if you mix
 //       the two, you're likely to get unexpected results.
 //
-//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------+
 class IScanGimbal : public IGimbal
 {
     DECLARE_SUBCLASS(IScanGimbal, IGimbal)
@@ -266,7 +266,7 @@ private:
    bool setSlotRevPerSec(const base::INumber* const);
    bool setSlotScanRadius(const base::INumber* const);
    bool setSlotScanRadius(const base::IAngle* const);
-   bool setSlotPRVertices(const base::IPairStream* const);
+   bool setSlotPRVertices(const base::PairStream* const);
    bool setSlotMaxRevs(const base::INumber* const);
 };
 

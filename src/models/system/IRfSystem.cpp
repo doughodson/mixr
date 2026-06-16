@@ -8,7 +8,7 @@
 #include "mixr/models/IWorldModel.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/IPairStream.hpp"
+#include "mixr/base/PairStream.hpp"
 #include "mixr/base/numeric/Boolean.hpp"
 #include "mixr/base/numeric/Decibel.hpp"
 #include "mixr/base/numeric/INumber.hpp"
@@ -190,7 +190,7 @@ void IRfSystem::processPlayersOfInterest()
    if (getAntenna() != nullptr) {
 
       // Pass our players of interest to the antenna for processing
-      base::IPairStream* poi{};
+      base::PairStream* poi{};
       IWorldModel* sim{getWorldModel()};
       if ( sim != nullptr && !areEmissionsDisabled() ) {
          poi = sim->getPlayers();

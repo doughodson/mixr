@@ -6,9 +6,6 @@
 #include "mixr/models/track/ITrack.hpp"
 #include "mixr/models/system/trackmanager/AirTrkMgr.hpp"
 
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/Pair.hpp"
-
 namespace mixr {
 namespace models {
 

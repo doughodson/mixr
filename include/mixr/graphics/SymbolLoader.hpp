@@ -7,7 +7,7 @@
 #include <array>
 
 namespace mixr {
-namespace base { class Boolean; class Degrees; class IPairStream; }
+namespace base { class Boolean; class Degrees; class PairStream; }
 namespace graphics {
 class SlSymbol;
 
@@ -70,7 +70,7 @@ class SlSymbol;
 //
 // Factory name: SymbolLoader
 // Slots:
-//     templates         <IPairStream>  ! List of templates to use for symbols
+//     templates         <PairStream>   ! List of templates to use for symbols
 //     showOnlyInRange   <Boolean>      ! only show symbols within range (default: true)
 //     interconnect      <Boolean>      ! interconnect the symbols (default: false)
 //
@@ -180,14 +180,14 @@ protected:
 private:
    void initData();
 
-   base::IPairStream* templates{};               // holds our pairstream of templates
+   base::PairStream* templates{};                // holds our pairstream of templates
    std::array<SlSymbol*, MAX_SYMBOLS> symbols{}; // holds our array of symbols
    bool showInRangeOnly{true};                   // only show the symbols within our range, else draw all the symbols if false
    bool interconnect{};                          // Connect our symbols with a line?
 
 private:
    // slot table helper methods
-   bool setSlotTemplates(base::IPairStream*);
+   bool setSlotTemplates(base::PairStream*);
    bool setSlotShowInRangeOnly(const base::Boolean* const);
    bool setSlotInterconnect(const base::Boolean* const);
 };

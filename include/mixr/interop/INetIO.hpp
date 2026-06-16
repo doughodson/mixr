@@ -8,7 +8,7 @@
 #include <string>
 
 namespace mixr {
-namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class IPairStream; class ITime; }
+namespace base { class IAngle; class Boolean; class Identifier; class Integer; class ILength; class PairStream; class ITime; }
 namespace models { class IPlayer; }
 namespace simulation { class ISimulation; class IStation; }
 namespace interop {
@@ -453,8 +453,8 @@ private:
    bool setSlotEnableOutput(const base::Boolean* const);               // Sets output enabled flag
    bool setSlotEnableRelay(const base::Boolean* const);                // Sets relay enabled flag
    bool setSlotTimeline(const base::Identifier* const);                // Sets the source of the time ( UTC or EXEC )
-   bool setSlotInputEntityTypes(base::IPairStream* const);             // Sets the table of input entity to player mapper objects
-   bool setSlotOutputEntityTypes(base::IPairStream* const);            // Sets the table of output entity to player mapper objects
+   bool setSlotInputEntityTypes(base::PairStream* const);              // Sets the table of input entity to player mapper objects
+   bool setSlotOutputEntityTypes(base::PairStream* const);             // Sets the table of output entity to player mapper objects
 };
 
 }

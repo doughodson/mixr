@@ -9,7 +9,7 @@
 #include <GL/glu.h>
 
 namespace mixr {
-namespace base { class IPairStream; }
+namespace base { class PairStream; }
 
 namespace graphics {
 
@@ -26,16 +26,16 @@ namespace graphics {
 //
 // Factory name: Material
 // Slots
-//    ambientColor   <IPairstream> ! List of numbers for the ambient values
+//    ambientColor   <Pairstream>  ! List of numbers for the ambient values
 //    ambientColor   <INumber>     ! Ambient color - light coming from material scattered in all directions equally
 //                                 (default: (0,0,0,1))
-//    diffuseColor   <IPairstream> ! List of numbers for the diffuse values
+//    diffuseColor   <Pairstream>  ! List of numbers for the diffuse values
 //    diffuseColor   <INumber>     ! Diffuse color - light coming from the material after light hits it (main color)
 //                                 (default: (1,1,1,1))
-//    emissiveColor  <IPairstream> ! List of numbers for the emissive values
+//    emissiveColor  <Pairstream>  ! List of numbers for the emissive values
 //    emissiveColor  <INumber>     ! Emissive color - light emanating from the material
 //                                 (default: (0,0,0,1))
-//    specularColor  <IPairstream> ! List of numbers for the specular values
+//    specularColor  <Pairstream>  ! List of numbers for the specular values
 //    specularColor  <INumber>     ! Specular color - mirror reflecting color of the material (shiny highlights)
 //                                 (default: (0,0,0,1))
 //    shininess      <INumber>     ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
@@ -74,13 +74,13 @@ private:
 
 private:
     // slot table helper methods
-    bool setSlotAmbientColor(const base::IPairStream* const);
+    bool setSlotAmbientColor(const base::PairStream* const);
     bool setSlotAmbientColor(const base::INumber* const);
-    bool setSlotDiffuseColor(const base::IPairStream* const);
+    bool setSlotDiffuseColor(const base::PairStream* const);
     bool setSlotDiffuseColor(const base::INumber* const);
-    bool setSlotEmissiveColor(const base::IPairStream* const);
+    bool setSlotEmissiveColor(const base::PairStream* const);
     bool setSlotEmissiveColor(const base::INumber* const);
-    bool setSlotSpecularColor(const base::IPairStream* const);
+    bool setSlotSpecularColor(const base::PairStream* const);
     bool setSlotSpecularColor(const base::INumber* const);
     bool setSlotShininess(const base::INumber*const);
 };

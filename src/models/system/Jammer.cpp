@@ -5,8 +5,6 @@
 #include "mixr/models/system/Antenna.hpp"
 #include "mixr/models/RfEmission.hpp"
 
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/Pair.hpp"
 #include "mixr/base/qty/angles.hpp"
 #include "mixr/base/qty/frequencies.hpp"
 #include "mixr/base/qty/powers.hpp"

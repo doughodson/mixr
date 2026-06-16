@@ -17,6 +17,7 @@
     #define  bzero(a,b)   ZeroMemory(a,b)
     typedef int socklen_t;
 #else
+    #include <strings.h>
     #include <arpa/inet.h>
     #include <sys/fcntl.h>
     #include <sys/ioctl.h>
@@ -28,12 +29,6 @@
 #endif
 
 #include "mixr/base/network/TcpServerSingle.hpp"
-
-#include "mixr/base/numeric/INumber.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/String.hpp"
-
 #include <cstdio>
 
 namespace mixr {

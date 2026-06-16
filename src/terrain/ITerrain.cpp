@@ -5,8 +5,6 @@
 #include "mixr/base/colors/Hsva.hpp"
 #include "mixr/base/colors/Rgba.hpp"
 
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/Pair.hpp"
 #include "mixr/base/String.hpp"
 
 #include "mixr/base/util/nav_utils.hpp"

@@ -8,8 +8,6 @@
 
 #include "mixr/models/player/IPlayer.hpp"
 
-#include "mixr/base/IPairStream.hpp"
-#include "mixr/base/Pair.hpp"
 #include "mixr/base/IList.hpp"
 #include "mixr/base/numeric/Integer.hpp"
 #include "mixr/base/numeric/Decibel.hpp"

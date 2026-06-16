@@ -11,8 +11,6 @@
 #include "mixr/simulation/IDataRecorder.hpp"
 
 #include "mixr/base/IList.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 
 #include "mixr/base/qty/times.hpp"
 #include "mixr/base/qty/angles.hpp"

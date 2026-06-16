@@ -7,7 +7,6 @@
 
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/IList.hpp"
-#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 
 // JSBSim model headers

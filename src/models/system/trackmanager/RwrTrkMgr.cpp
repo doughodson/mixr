@@ -8,8 +8,7 @@
 #include "mixr/models/player/weapon/IWeapon.hpp"
 
 #include "mixr/base/IList.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
+
 #include "mixr/base/qty/lengths.hpp"
 #include "mixr/base/qty/times.hpp"
 

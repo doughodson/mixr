@@ -9,7 +9,7 @@
 
 namespace mixr {
 namespace base {
-class IPairStream;
+class PairStream;
 
 //------------------------------------------------------------------------------
 // Class: IStateMachine
@@ -346,11 +346,11 @@ private:
    unsigned short sp{STACK_SIZE};                           // Stack pointer
 
    // List of state machines
-   safe_ptr<IPairStream> stMachList;
+   safe_ptr<PairStream> stMachList;
 
 private:
    // slot table helper methods
-   bool setSlotStateMachines(const IPairStream* const);
+   bool setSlotStateMachines(const PairStream* const);
 };
 
 }

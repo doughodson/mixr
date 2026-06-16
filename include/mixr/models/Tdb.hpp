@@ -5,10 +5,7 @@
 #include "mixr/base/IObject.hpp"
 
 namespace mixr {
-namespace base {
-class IPairStream;
-class Vec3d;
-}
+namespace base { class PairStream; class Vec3d; }
 namespace models {
 class IGimbal;
 class IPlayer;
@@ -72,7 +69,7 @@ public:
    //
    // Notes:
    //------------------------------------------------------------------------------
-   virtual unsigned int processPlayers(base::IPairStream* const players);
+   virtual unsigned int processPlayers(base::PairStream* const players);
 
    // ---
    // Data from processPlayers()

@@ -22,7 +22,7 @@ END_SLOTTABLE(IStores)
 
 BEGIN_SLOT_MAP(IStores)
    ON_SLOT( 1, setSlotNumStations, base::Integer)
-   ON_SLOT( 2, setSlotStores,      base::IPairStream)
+   ON_SLOT( 2, setSlotStores,      base::PairStream)
    ON_SLOT( 3, setSlotSelected,    base::Integer)
 END_SLOT_MAP()
 
@@ -59,7 +59,7 @@ void IStores::reset()
    BaseClass::reset();
 
    // Reset all of the stores
-   base::IPairStream* stores{getStores()};
+   base::PairStream* stores{getStores()};
    if (stores != nullptr) {
       resetStores(stores);
       stores->unref();
@@ -86,7 +86,7 @@ void IStores::updateTC(const double dt)
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
    {
-      base::IPairStream* list{getStores()};
+      base::PairStream* list{getStores()};
       if (list != nullptr) {
          base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
@@ -111,7 +111,7 @@ void IStores::updateData(const double dt)
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
    {
-      base::IPairStream* list{getStores()};
+      base::PairStream* list{getStores()};
       if (list != nullptr) {
          base::IList::Item* item{list->getFirstItem()};
          while (item != nullptr) {
@@ -139,13 +139,13 @@ unsigned int IStores::getNumberOfStations() const
 }
 
 // Returns the list of our external stores
-base::IPairStream* IStores::getStores()
+base::PairStream* IStores::getStores()
 {
    return storesList.getRefPtr();
 }
 
 // Returns the list of our external stores (const version)
-const base::IPairStream* IStores::getStores() const
+const base::PairStream* IStores::getStores() const
 {
    return storesList.getRefPtr();
 }
@@ -354,7 +354,7 @@ void IStores::updateBlockedFlags()
 bool IStores::jettisonAll()
 {
    // Notify the external stores that we're shutting down
-   base::IPairStream* list{getStores()};
+   base::PairStream* list{getStores()};
    if (list != nullptr) {
       base::IList::Item* item{list->getFirstItem()};
       while (item != nullptr) {
@@ -429,7 +429,7 @@ bool IStores::assignExtStoreToStation(const unsigned int s, IExternalStore* cons
 //------------------------------------------------------------------------------
 // resetStores() -- Reset all stores
 //------------------------------------------------------------------------------
-void IStores::resetStores(base::IPairStream* const list)
+void IStores::resetStores(base::PairStream* const list)
 {
    // Reset the external stores
    if (list != nullptr) {
@@ -453,7 +453,7 @@ bool IStores::onJettisonEvent(IWeapon* const wpn)
    bool ok{};
    if (wpn != nullptr) {
 
-      base::IPairStream* list{getStores()};
+      base::PairStream* list{getStores()};
       if (list != nullptr) {
 
          // First, make sure it's one of ours!
@@ -483,7 +483,7 @@ bool IStores::onJettisonEvent(IExternalStore* const sys)
    bool ok{};
    if (sys != nullptr) {
 
-      base::IPairStream* list{getStores()};
+      base::PairStream* list{getStores()};
       if (list != nullptr) {
 
          // First, make sure it's one of ours!
@@ -524,7 +524,7 @@ bool IStores::setSlotNumStations(base::Integer* const msg)
 }
 
 // Set the stores
-bool IStores::setSlotStores(const base::IPairStream* const msg)
+bool IStores::setSlotStores(const base::PairStream* const msg)
 {
    // ---
    // Quick out if the number of stations hasn't been set.

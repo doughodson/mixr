@@ -6,9 +6,7 @@
 #include "mixr/models/RfEmission.hpp"
 
 #include "mixr/base/numeric/Integer.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
-
+#include "mixr/base/IList.hpp"
 #include <cmath>
 
 namespace mixr {

@@ -5,7 +5,7 @@
 #include "mixr/base/threads/ISyncThread.hpp"
 
 namespace mixr {
-namespace base { class IComponent; class IPairStream; }
+namespace base { class IComponent; class PairStream; }
 namespace simulation {
 
 //------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ public:
 
    // Parent thread signals start to this child thread with these parameters.
    void start0(
-      base::IPairStream* const pl0,
+      base::PairStream* const pl0,
       const double dt0,
       const unsigned int idx0,
       const unsigned int n0
@@ -30,7 +30,7 @@ private:
    unsigned long userFunc() final;
 
 private:
-   base::IPairStream* pl0{};
+   base::PairStream* pl0{};
    double dt0{};
    unsigned int idx0{};
    unsigned int n0{};

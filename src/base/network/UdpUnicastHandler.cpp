@@ -29,8 +29,6 @@
 #include "mixr/base/network/UdpUnicastHandler.hpp"
 
 #include "mixr/base/Identifier.hpp"
-#include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
 #include "mixr/base/String.hpp"
 #include <cstdio>
 #include <cstring>

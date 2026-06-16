@@ -8,7 +8,7 @@
 
 #include "mixr/base/Identifier.hpp"
 #include "mixr/base/Pair.hpp"
-#include "mixr/base/IPairStream.hpp"
+#include "mixr/base/PairStream.hpp"
 #include "mixr/base/Statistic.hpp"
 #include "mixr/base/String.hpp"
 #include "mixr/base/util/system_utils.hpp"
@@ -32,7 +32,7 @@ BEGIN_SLOTTABLE(IComponent)
 END_SLOTTABLE(IComponent)
 
 BEGIN_SLOT_MAP(IComponent)
-    ON_SLOT( 1, setSlotComponent,         IPairStream)
+    ON_SLOT( 1, setSlotComponent,         PairStream)
     ON_SLOT( 1, setSlotComponent,         IComponent)
     ON_SLOT( 2, setSlotSelect,            String)
     ON_SLOT( 2, setSlotSelect,            Integer)
@@ -79,9 +79,9 @@ void IComponent::copyData(const IComponent& org, const bool)
    selected = nullptr;
 
    // Copy child components
-   const IPairStream* oc{org.components.getRefPtr()};
+   const PairStream* oc{org.components.getRefPtr()};
    if (oc != nullptr) {
-      const auto tmp = static_cast<IPairStream*>(oc->clone());
+      const auto tmp = static_cast<PairStream*>(oc->clone());
       oc->unref();
       processComponents(tmp, typeid(IComponent));
       tmp->unref();
@@ -161,7 +161,7 @@ void IComponent::freeze(const bool fflag)
 //------------------------------------------------------------------------------
 void IComponent::reset()
 {
-   IPairStream* subcomponents{getComponents()};
+   PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -246,7 +246,7 @@ void IComponent::printTimingStats()
 void IComponent::updateTC(const double dt)
 {
     // Update all my children
-    IPairStream* subcomponents{getComponents()};
+    PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -272,7 +272,7 @@ void IComponent::updateTC(const double dt)
 void IComponent::updateData(const double dt)
 {
     // Update all my children
-    IPairStream* subcomponents{getComponents()};
+    PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
         if (selection != nullptr) {
             // When we've selected only one
@@ -296,12 +296,12 @@ void IComponent::updateData(const double dt)
 // getComponents() -- returns a ref()'d pointer to our list of components;
 //                    need to unref() when completed.
 //------------------------------------------------------------------------------
-IPairStream* IComponent::getComponents()
+PairStream* IComponent::getComponents()
 {
    return components.getRefPtr();
 }
 
-const IPairStream* IComponent::getComponents() const
+const PairStream* IComponent::getComponents() const
 {
    return components.getRefPtr();
 }
@@ -312,7 +312,7 @@ const IPairStream* IComponent::getComponents() const
 std::size_t IComponent::getNumberOfComponents() const
 {
    std::size_t n{};
-   const IPairStream* subcomponents{components.getRefPtr()};
+   const PairStream* subcomponents{components.getRefPtr()};
    if (subcomponents != nullptr) {
       n = subcomponents->entries();
       subcomponents->unref();
@@ -336,7 +336,7 @@ bool IComponent::onEventReset()
 bool IComponent::shutdownNotification()
 {
    // Tell all of our components
-   IPairStream* subcomponents{getComponents()};
+   PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       IList::Item* item{subcomponents->getFirstItem()};
       while (item != nullptr) {
@@ -397,7 +397,7 @@ const IComponent* IComponent::findContainerByType(const std::type_info& type) co
 const Pair* IComponent::findByName(const std::string& slotname) const
 {
     const Pair* q{};
-    const IPairStream* subcomponents{getComponents()};
+    const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
 
         const char* name{slotname.c_str()};
@@ -464,7 +464,7 @@ const Pair* IComponent::findByIndex(const int slotindex) const
 {
    const Pair* p{};
 
-   const IPairStream* subcomponents{getComponents()};
+   const PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       p = subcomponents->getPosition(slotindex);
       subcomponents->unref();
@@ -478,7 +478,7 @@ Pair* IComponent::findByIndex(const int slotindex)
 {
    Pair* p{};
 
-   IPairStream* subcomponents{getComponents()};
+   PairStream* subcomponents{getComponents()};
    if (subcomponents != nullptr) {
       p = subcomponents->getPosition(slotindex);
       subcomponents->unref();
@@ -495,7 +495,7 @@ Pair* IComponent::findByIndex(const int slotindex)
 const Pair* IComponent::findByType(const std::type_info& type) const
 {
     const Pair* q{};
-    const IPairStream* subcomponents{getComponents()};
+    const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
         q = subcomponents->findByType(type);
         const IList::Item* item{subcomponents->getFirstItem()};
@@ -529,7 +529,7 @@ Pair* IComponent::findByType(const std::type_info& type)
 const std::string IComponent::findNameOfComponent(const IComponent* const p) const
 {
     std::string name;
-    const IPairStream* subcomponents{getComponents()};
+    const PairStream* subcomponents{getComponents()};
     if (subcomponents != nullptr) {
 
         // First check our component list ..
@@ -566,7 +566,7 @@ const std::string IComponent::findNameOfComponent(const IComponent* const p) con
 //------------------------------------------------------------------------------
 bool IComponent::addComponent(Pair* const p)
 {
-   IPairStream* subcomponents{getComponents()};
+   PairStream* subcomponents{getComponents()};
    processComponents(subcomponents, typeid(IComponent), p);
    if (subcomponents != nullptr) subcomponents->unref();
    return true;
@@ -583,13 +583,13 @@ bool IComponent::addComponent(Pair* const p)
 //   -- Handle selections.
 //------------------------------------------------------------------------------
 void IComponent::processComponents(
-      IPairStream* const list,
+      PairStream* const list,
       const std::type_info& filter,
       Pair* const add,
       IComponent* const remove
    )
 {
-   IPairStream* oldList {components.getRefPtr()};
+   PairStream* oldList {components.getRefPtr()};
 
    // ---
    // Our dynamic_cast (see below) already filters on the Component class
@@ -602,7 +602,7 @@ void IComponent::processComponents(
    // ---
    // Create a new list, copy (filter) the component pairs and set their container pointers
    // ---
-   const auto newList = new IPairStream();
+   const auto newList = new PairStream();
    if (list != nullptr) {
 
       // Add the (filtered) components to the new list and set their container
@@ -781,7 +781,7 @@ bool IComponent::setSlotFreeze(const Boolean* const num)
 }
 
 // setSlotComponent() -- Sets a pairstream
-bool IComponent::setSlotComponent(IPairStream* const multiple)
+bool IComponent::setSlotComponent(PairStream* const multiple)
 {
    // Process the new components list and swap
    processComponents(multiple, typeid(IComponent));
@@ -792,7 +792,7 @@ bool IComponent::setSlotComponent(IPairStream* const multiple)
 bool IComponent::setSlotComponent(IComponent* const single)
 {
    // When a only one component ... make it a PairStream
-   const auto pairStream = new IPairStream();
+   const auto pairStream = new PairStream();
    const auto pair = new Pair("1", single);
    pairStream->put( pair );
    pair->unref();

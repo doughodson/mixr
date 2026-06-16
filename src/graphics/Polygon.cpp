@@ -1,7 +1,6 @@
 
 #include "mixr/graphics/Polygon.hpp"
 #include "mixr/graphics/ColorGradient.hpp"
-#include "mixr/base/IPairStream.hpp"
 #include <GL/glu.h>
 
 namespace mixr {
