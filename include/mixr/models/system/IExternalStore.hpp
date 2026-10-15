@@ -50,7 +50,7 @@ public:
    void reset() override;
 
 protected:
-   bool setJettisonable(const bool);    // Sets the jettison enable flag
+   bool setJettisonable(const bool);          // Sets the jettison enable flag
 
 private:
    base::safe_ptr<const base::String> type;   // Type string for external store

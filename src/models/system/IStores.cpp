@@ -16,8 +16,8 @@ IMPLEMENT_SUBCLASS(IStores, "IStores")
 
 BEGIN_SLOTTABLE(IStores)
    "numStations",  //  1: Number of stations (less than or equal MAX_STATIONS)
-   "stores",      //  2: Our weapons and other external stores
-   "selected"     //  3: Selected weapon station number
+   "stores",       //  2: Our weapons and other external stores
+   "selected"      //  3: Selected weapon station number
 END_SLOTTABLE(IStores)
 
 BEGIN_SLOT_MAP(IStores)
